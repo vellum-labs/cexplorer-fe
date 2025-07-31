@@ -158,6 +158,7 @@ export const useFilterTable = ({
       navigate({
         search: {
           ...search,
+          page: search?.page ? 1 : undefined,
           [key]: value,
         } as any,
       });
