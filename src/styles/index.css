@@ -1,0 +1,257 @@
+@import "admin.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root[data-theme="dark"] {
+    --text: #fff;
+    --background: #1f242a;
+    --cardBg: #232930;
+    --darker: #20252b;
+    --primary: #79defd;
+    --darkBlue: #1ba3e0;
+    --secondaryText: #b0dff4;
+    --secondaryBg: #b0def412;
+    --border: #424951;
+    --borderDarker: #4d555e;
+    --borderFaded: #374048;
+    --grayTextPrimary: #e9ecef;
+    --grayTextSecondary: #b0b7c3;
+    --scrollbar: #ffffff87;
+    --shimmer: #ffffff0d;
+    --completed: #079455;
+    --inProgress: #fdb022;
+    --notStarted: #f04438;
+    --all: #667085;
+    --bannerGradient: #1f242a;
+    --purpleText: #9f70f7;
+    --redText: #f04438;
+    --yellowText: #f8b942;
+    --greenText: #18c852;
+    --hoverHighlight: #2a2f36;
+    --highlightBorder: #fac415b2;
+    --tableHover: #242a31;
+  }
+
+  :root[data-theme="light"] {
+    --text: #101828;
+    --background: #fdfdfd;
+    --cardBg: #ffffff;
+    --darker: #f8f9fc;
+    --primary: #0094d4;
+    --darkBlue: #0094d4;
+    --secondaryText: #0094d4;
+    --secondaryBg: #effaff;
+    --borderFaded: #e2e1e1;
+    --border: #d0d5dd;
+    --borderDarker: #c0c5cc;
+    --grayTextPrimary: #3e4959;
+    --grayTextSecondary: #546175;
+    --scrollbar: #13294a91;
+    --shimmer: #2828280d;
+    --completed: #abefc6;
+    --inProgress: #fedf89;
+    --notStarted: #fecdca;
+    --all: #e4e7ec;
+    --bannerGradient: #f0f0f6;
+    --purpleText: #7d41ed;
+    --redText: #f04438;
+    --yellowText: #fdb022;
+    --greenText: #0cae34;
+    --hoverHighlight: #fef7c3;
+    --highlightBorder: #fac515;
+    --tableHover: #edf0f5;
+  }
+
+  @layer loader {
+    .loader {
+      border-radius: 50%;
+      animation: spin 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  body,
+  html {
+    background: var(--background);
+    color: var(--text);
+    font-family: Inter;
+  }
+
+  pre {
+    background: transparent !important;
+  }
+
+  a {
+    &:hover {
+      color: var(--secondaryText);
+    }
+  }
+
+  h1 {
+    @media screen and (min-width: 768px) {
+      font-size: 34px;
+    }
+    font-size: 26px;
+    font-weight: 600;
+  }
+
+  h2 {
+    @media screen and (min-width: 768px) {
+      font-size: 24px;
+    }
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  h3 {
+    @media screen and (min-width: 768px) {
+      font-size: 18px;
+    }
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .thin-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar) transparent;
+
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+      border-radius: 10px;
+      margin-block: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--scrollbar);
+      opacity: 0.5;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--scrollbar);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes shimmer {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+
+  .shimmer {
+    animation:
+      fadeIn 500ms ease-out forwards,
+      shimmer 2s linear infinite;
+    animation-delay: 0s, 500ms;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      var(--shimmer) 25%,
+      transparent 50%
+    );
+    background-size: 200% 100%;
+  }
+
+  .shimmer-no-fade {
+    animation: shimmer 3s linear infinite;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      var(--shimmer) 25%,
+      transparent 50%
+    );
+    background-size: 200% 100%;
+  }
+
+  .gold-shimmer {
+    animation: shimmer 6s linear infinite;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      #f8e65fcd 20%,
+      transparent 5%
+    );
+    background-size: 200% 100%;
+  }
+}
+
+.react-flow__handle {
+  opacity: 0;
+}
+
+[data-sonner-toast][data-styled="true"] [data-button] {
+  background: transparent !important;
+}
+
+.react-syntax-highlighter-line-number {
+  padding-right: 10px !important;
+  min-width: 20px !important;
+}
+
+.sso-button {
+  background-color: white;
+  width: 100%;
+  margin-bottom: 10px;
+  border: 1px solid var(--grey10);
+  border-radius: 10px;
+}
+
+.AccordionTrigger[data-state="open"] > .AccordionChevron {
+  transform: rotate(180deg);
+}
+
+.react-flow__attribution {
+  display: none !important;
+}
+
+::-webkit-calendar-picker-indicator {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23bbbbbb" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+}
+
+.react-grid-placeholder {
+  border-radius: 8px;
+  background-color: var(--primary) !important;
+}
+
+.react-grid-item.cssTransforms {
+  transition-property: none !important;
+}
+
+.customize-grid .react-grid-item.cssTransforms {
+  transition-property: transform !important;
+}

@@ -1,0 +1,380 @@
+import type { FC } from "react";
+import { useState } from "react";
+import type { GovernanceVote } from "@/types/governanceTypes";
+
+import {
+  ActionTypes as ActionTypesComponent,
+  type ActionTypes,
+} from "@/components/global/ActionTypes";
+import Copy from "@/components/global/Copy";
+import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
+import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { Image } from "@/components/global/Image";
+import { Link } from "@tanstack/react-router";
+import PulseDot from "@/components/global/PulseDot";
+import { Landmark, Route, User } from "lucide-react";
+import { getGovActionStatus } from "@/utils/gov/getGovActionStatus";
+import { useFetchMiscBasic } from "@/services/misc";
+import { useMiscConst } from "@/hooks/useMiscConst";
+import { formatString } from "@/utils/format/format";
+import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { VoteBadge } from "@/components/global/badges/VoteBadge";
+import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
+import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
+
+interface VoteDetailCardProps {
+  vote: GovernanceVote;
+  index?: number;
+  total?: number;
+  isLoading: boolean;
+}
+
+export const VoteDetailCard: FC<VoteDetailCardProps> = ({
+  vote,
+  isLoading,
+}) => {
+  const { data: basicData } = useFetchMiscBasic(true);
+  const miscConst = useMiscConst(basicData?.data.version.const);
+  const [clickedUrl, setClickedUrl] = useState<string | null>(null);
+
+  const currentEpoch = miscConst?.no;
+
+  const detailItems = [
+    {
+      key: "action_type",
+      title: "Action type",
+      value: vote?.proposal?.type ? (
+        <ActionTypesComponent title={vote?.proposal?.type as ActionTypes} />
+      ) : (
+        "-"
+      ),
+    },
+    {
+      key: "gov_title",
+      title: "Governance action Title",
+      value: vote?.proposal?.anchor?.offchain?.name ? (
+        <Link
+          to={"/gov/action/$id"}
+          params={{
+            id: vote?.proposal?.ident?.id ?? "",
+          }}
+          className='text-sm text-primary'
+        >
+          {vote?.proposal?.anchor?.offchain?.name}
+        </Link>
+      ) : (
+        "⚠️ Invalid metadata"
+      ),
+    },
+    {
+      key: "gov_id",
+      title: "Governance action ID",
+      value: (
+        <div className='flex items-center gap-2 break-all'>
+          <span className='text-sm' title={vote?.proposal?.ident?.bech}>
+            {formatString(vote?.proposal?.ident?.bech, "long")}
+          </span>
+          <Copy copyText={vote?.proposal?.ident?.bech} />
+        </div>
+      ),
+    },
+    {
+      key: "status",
+      title: "Status",
+      value: (() => {
+        const status = getGovActionStatus(
+          {
+            dropped_epoch: vote?.proposal?.dropped_epoch ?? null,
+            enacted_epoch: vote?.proposal?.enacted_epoch ?? null,
+            expired_epoch: vote?.proposal?.expired_epoch ?? null,
+            ratified_epoch: vote?.proposal?.ratified_epoch ?? null,
+          },
+          currentEpoch,
+        );
+
+        const statusColor =
+          status === "Active"
+            ? "#17B26A"
+            : status === "Enacted"
+              ? "#00A9E3"
+              : status === "Expired"
+                ? "#F79009"
+                : "#079455";
+
+        return (
+          <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-lg border border-border px-[10px]'>
+            <PulseDot color={statusColor} animate={status === "Active"} />
+            <span className='text-xs font-medium'>{status}</span>
+          </div>
+        );
+      })(),
+    },
+
+    {
+      key: "enacted_epoch",
+      title: "Enacted epoch",
+      value: vote?.proposal?.enacted_epoch ? (
+        <span className='text-sm'>
+          Epoch{" "}
+          <Link
+            to='/epoch/$no'
+            params={{ no: vote?.proposal?.enacted_epoch?.toString() }}
+            className='text-primary'
+          >
+            {vote?.proposal?.enacted_epoch}
+          </Link>
+        </span>
+      ) : (
+        "-"
+      ),
+    },
+    {
+      key: "ratified_epoch",
+      title: "Ratified epoch",
+      value: vote?.proposal?.ratified_epoch ? (
+        <span className='text-sm'>
+          Epoch{" "}
+          <Link
+            to='/epoch/$no'
+            params={{ no: vote?.proposal?.ratified_epoch?.toString() }}
+            className='text-primary'
+          >
+            {vote?.proposal?.ratified_epoch}
+          </Link>
+        </span>
+      ) : (
+        "-"
+      ),
+    },
+    {
+      key: "expired_epoch",
+      title: "Expired epoch",
+      value: vote?.proposal?.expired_epoch ? (
+        <span className='text-sm'>
+          Epoch{" "}
+          <Link
+            to='/epoch/$no'
+            params={{ no: vote?.proposal?.expired_epoch?.toString() }}
+            className='text-primary'
+          >
+            {vote?.proposal?.expired_epoch}
+          </Link>
+        </span>
+      ) : (
+        "-"
+      ),
+    },
+    {
+      key: "voting_start",
+      title: "Voting start",
+      value: (
+        <div className='flex flex-wrap items-center gap-x-2'>
+          <TimeDateIndicator time={vote?.proposal?.tx?.time} />
+        </div>
+      ),
+    },
+    {
+      key: "voting_end",
+      title: "Voting end",
+      value: vote?.proposal?.expiration ? (
+        <span className='text-sm'>
+          Epoch{" "}
+          <Link
+            to='/epoch/$no'
+            params={{ no: vote?.proposal?.expiration?.toString() }}
+            className='text-primary'
+          >
+            {vote?.proposal?.expiration}
+          </Link>
+        </span>
+      ) : (
+        "-"
+      ),
+      divider: true,
+    },
+    {
+      key: "role",
+      title: "Role",
+      value: (() => {
+        const role = vote?.voter_role;
+
+        return (
+          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-lg border border-border px-[6px]'>
+            {role === "DRep" && <User size={12} className='text-primary' />}
+            {role === "CC" && <Landmark size={12} className='text-primary' />}
+            {role === "SPO" && <Route size={12} className='text-primary' />}
+            <span className='text-xs font-medium'>{role}</span>
+          </div>
+        );
+      })(),
+    },
+    {
+      key: "voter_name",
+      title: "Voter name",
+      value: (
+        <div className='flex items-center gap-2'>
+          {vote?.info?.meta?.image_url && (
+            <Image
+              src={vote?.info?.meta?.image_url}
+              type='user'
+              height={20}
+              width={20}
+              className='rounded-full'
+            />
+          )}
+          {vote?.voter_role && vote?.info?.id ? (
+            <Link
+              to={
+                vote.voter_role === "SPO"
+                  ? "/pool/$id"
+                  : vote.voter_role === "DRep"
+                    ? "/drep/$hash"
+                    : vote.voter_role === "CC"
+                      ? "/gov/cc/$coldKey"
+                      : ""
+              }
+              params={{
+                id: vote.info.id,
+                hash: vote.info.id,
+                coldKey: vote.info.id,
+              }}
+              className='text-sm text-primary hover:underline'
+            >
+              {vote?.info?.meta?.given_name || "-"}
+            </Link>
+          ) : (
+            <span className='text-sm text-primary'>
+              {vote?.info?.meta?.given_name || "-"}
+            </span>
+          )}
+        </div>
+      ),
+    },
+    {
+      key: "voter_id",
+      title: "Voter ID",
+      value: (
+        <div className='flex items-center gap-2 break-all'>
+          <span className='text-sm' title={vote?.info?.id}>
+            {formatString(vote?.info?.id, "long")}
+          </span>
+          <Copy copyText={vote?.info?.id} />
+        </div>
+      ),
+    },
+    {
+      key: "power",
+      title: "Vote power",
+      value: (
+        <AdaWithTooltip
+          data={vote?.info?.power?.stake}
+          triggerClassName='text-text'
+        />
+      ),
+    },
+    {
+      key: "cast_vote",
+      title: <p>Cast vote</p>,
+      value: (() => {
+        if (!vote?.vote) {
+          return "-";
+        }
+        return (
+          <div className='flex items-center gap-2'>
+            <VoteBadge vote={vote.vote} />
+          </div>
+        );
+      })(),
+    },
+    {
+      key: "timestamp",
+      title: "Timestamp",
+      value: <TimeDateIndicator time={vote?.tx?.time} />,
+    },
+    {
+      key: "vote_tx",
+      title: "Vote tx",
+      value: (
+        <div className='flex items-center gap-2 break-all'>
+          <Link
+            to='/tx/$hash'
+            params={{ hash: vote?.tx?.hash }}
+            className='text-sm text-primary'
+            title={vote?.tx?.hash}
+          >
+            {formatString(vote?.tx?.hash, "long")}
+          </Link>
+          <Copy copyText={vote?.tx?.hash} />
+        </div>
+      ),
+    },
+    ...(vote?.anchor?.url ? [
+      {
+        key: "anchor_url",
+        title: "Anchor URL",
+        value: (() => {
+          const transformedUrl = transformAnchorUrl(vote.anchor.url);
+          if (!transformedUrl) return "-";
+          
+          return (
+            <a
+              href={transformedUrl}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='text-sm text-primary break-all'
+              onClick={e => {
+                e.preventDefault();
+                setClickedUrl(transformedUrl);
+              }}
+            >
+{transformedUrl}
+            </a>
+          );
+        })(),
+      },
+    ] : []),
+    {
+      key: "metadata",
+      title: "Metadata",
+      value: vote?.anchor?.offchain?.comment ? (
+        <div className='bg-muted rounded border border-border p-3 text-sm leading-relaxed'>
+          <pre className='max-w-full overflow-x-auto whitespace-pre-wrap break-all'>
+            {vote?.anchor?.offchain?.comment}
+          </pre>
+        </div>
+      ) : (
+        "-"
+      ),
+    },
+  ];
+
+  return (
+    <>
+      <div className='w-full rounded-xl border border-border px-5 py-4'>
+        <h2 className='text-base font-semibold'>Overview</h2>
+        <div className='flex flex-col gap-4 pt-4'>
+          {detailItems.map(({ key, title, value, divider }) => (
+            <div key={key} className='flex flex-col'>
+              <div className='flex flex-wrap items-start gap-x-4 gap-y-1'>
+                <p className='min-w-[160px] max-w-full break-words text-sm text-grayTextSecondary'>
+                  {title}
+                </p>
+                <div className='min-w-0 flex-1 break-words'>
+                  {isLoading ? (
+                    <LoadingSkeleton width='100%' height='20px' />
+                  ) : (
+                    value
+                  )}
+                </div>
+              </div>
+              {divider && <div className='my-2 border-t border-border'></div>}
+            </div>
+          ))}
+        </div>
+      </div>
+      {clickedUrl && (
+        <SafetyLinkModal url={clickedUrl} onClose={() => setClickedUrl(null)} />
+      )}
+    </>
+  );
+};

@@ -1,0 +1,124 @@
+import type { useFetchGovernanceActionDetail } from "@/services/governance";
+import type { FC } from "react";
+
+import { AddressInspectorRow } from "@/components/address/AddressInspectorRow";
+import { ActionTypes } from "@/components/global/ActionTypes";
+import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
+
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+import { useState } from "react";
+import { markdownComponents } from "@/constants/markdows";
+
+interface GovernanceDetailMetadataTabProps {
+  query: ReturnType<typeof useFetchGovernanceActionDetail>;
+}
+
+export const GovernanceDetailMetadataTab: FC<
+  GovernanceDetailMetadataTabProps
+> = ({ query }) => {
+  const anchor = query?.data?.data?.anchor;
+
+  const [clickedUrl, setClickedUrl] = useState<string | null>(null);
+
+  const rows = [
+    {
+      title: "Action type",
+      value: query?.data?.data?.type ? (
+        <ActionTypes title={query?.data?.data?.type as ActionTypes} />
+      ) : (
+        "-"
+      ),
+      darker: false,
+    },
+    {
+      title: "Title",
+      value: (
+        <div className='p-2 font-normal text-grayTextPrimary'>
+          {anchor?.offchain?.name ? (
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={markdownComponents(setClickedUrl)}
+            >
+              {anchor?.offchain?.name}
+            </ReactMarkdown>
+          ) : (
+            "⚠️ Invalid metadata"
+          )}
+        </div>
+      ),
+      darker: true,
+    },
+    {
+      title: "Abstracts",
+      value: (
+        <div className='p-2 font-normal text-grayTextPrimary'>
+          {anchor?.offchain?.abstract ? (
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={markdownComponents(setClickedUrl)}
+            >
+              {anchor?.offchain?.abstract}
+            </ReactMarkdown>
+          ) : (
+            "-"
+          )}
+        </div>
+      ),
+      titleStart: true,
+      darker: false,
+    },
+    {
+      title: "Rationale",
+      value: (
+        <div className='p-2 font-normal text-grayTextPrimary'>
+          {anchor?.offchain?.rationale ? (
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={markdownComponents(setClickedUrl)}
+            >
+              {anchor?.offchain?.rationale}
+            </ReactMarkdown>
+          ) : (
+            "-"
+          )}
+        </div>
+      ),
+      titleStart: true,
+      darker: true,
+    },
+  ];
+
+  return (
+    <>
+      <div
+        className='thin-scrollbar relative w-full overflow-auto overflow-x-auto rounded-lg border border-border'
+        style={{
+          transform: "rotateX(180deg)",
+        }}
+      >
+        <div
+          className='w-full min-w-[1300px]'
+          style={{
+            transform: "rotateX(180deg)",
+          }}
+        >
+          {rows.map(item => (
+            <AddressInspectorRow
+              key={item.title}
+              title={item.title}
+              darker={item.darker}
+              value={item.value}
+              titleStart={item.titleStart}
+              isLoading={false}
+            />
+          ))}
+        </div>
+      </div>
+      {clickedUrl && (
+        <SafetyLinkModal url={clickedUrl} onClose={() => setClickedUrl(null)} />
+      )}
+    </>
+  );
+};

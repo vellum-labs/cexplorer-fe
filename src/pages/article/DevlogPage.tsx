@@ -1,0 +1,84 @@
+import type { FC } from "react";
+import { Helmet } from "react-helmet";
+import parse from "html-react-parser";
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+import { useFetchArticleDetail } from "@/services/article";
+import { webUrl } from "@/constants/confVariables";
+import { useNotFound } from "@/stores/useNotFound";
+import { useEffect } from "react";
+
+export const DevlogPage: FC = () => {
+  const query = useFetchArticleDetail("en", "page", "devlog");
+  const data = query.data;
+  const name = data?.name;
+  const description = data?.description;
+  const keywords = data?.keywords;
+
+  const { setNotFound } = useNotFound();
+
+  const devlog = (
+    query.data?.data.some(item => Array.isArray(item))
+      ? query.data?.data[0]
+      : query.data?.data
+  ) as any;
+
+  useEffect(() => {
+    if (!devlog || devlog.length === 0) {
+      setNotFound(true);
+    }
+  }, [devlog, setNotFound]);
+
+  return (
+    <>
+      <Helmet>
+        <meta charSet='utf-8' />
+        {description && <meta name='description' content={description} />}
+        {keywords && <meta name='keywords' content={keywords} />}
+        {name && <title>{name}</title>}
+        {name && <meta property='og:title' content={name} />}
+        {description && (
+          <meta property='og:description' content={description} />
+        )}
+        <meta property='og:type' content='website' />
+        <meta property='og:url' content={webUrl + location.pathname} />
+      </Helmet>
+      <div className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
+        <div className='flex w-full max-w-desktop flex-col items-center'>
+          <h1>What’s new?</h1>
+          <p className='mt-3 font-light text-grayTextPrimary'>
+            Find concise summaries of all Cexplorer.io updates
+          </p>
+          <Accordion
+            type='single'
+            collapsible
+            className='mt-4 w-full max-w-[600px]'
+          >
+            {devlog?.map(item => (
+              <AccordionItem
+                key={item.title}
+                value={item.title}
+                className='border-b border-border'
+              >
+                <AccordionTrigger className='AccordionTrigger w-full py-5 text-left'>
+                  <span className='text-base font-medium'>{item.title}</span>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className='flex flex-col pb-3 text-grayTextPrimary'>
+                    {parse(JSON.stringify(item.msg))}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </div>
+    </>
+  );
+};

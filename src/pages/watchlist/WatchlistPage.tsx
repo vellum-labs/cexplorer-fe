@@ -1,0 +1,174 @@
+import { AddressesTab } from "@/components/address/tabs/AddressesTab";
+import { DrepListTab } from "@/components/drep/tabs/DrepListTab";
+import Tabs from "@/components/global/Tabs";
+import { useAuthToken } from "@/hooks/useAuthToken";
+import { useWatchlistStore } from "@/stores/watchlistStore";
+import { useMemo, useState } from "react";
+import { AssetListPage } from "../assets/AssetListPage";
+import PoolListTab from "@/components/pool/tabs/PoolListTab";
+import { PageBase } from "@/components/global/pages/PageBase";
+import { Badge } from "@/components/global/badges/Badge";
+import { EmptyState } from "@/components/global/EmptyState";
+import Button from "@/components/global/Button";
+import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
+import { Star, Wallet } from "lucide-react";
+import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { useFetchWatchlist } from "@/services/user";
+
+export const WatchlistPage = () => {
+  const token = useAuthToken();
+  const query = useFetchWatchlist(token);
+  const { watchlist: data } = useWatchlistStore();
+  const [showConnectModal, setShowConnectModal] = useState(false);
+  const count = useMemo(() => {
+    if (!data) {
+      return { addresses: 0, assets: 0, pools: 0, dreps: 0 };
+    }
+    
+    return data.reduce(
+      (acc, item) => {
+        switch (item.type) {
+          case "address":
+            acc.addresses++;
+            break;
+          case "asset":
+            acc.assets++;
+            break;
+          case "pool":
+            acc.pools++;
+            break;
+          case "drep":
+            acc.dreps++;
+            break;
+        }
+        return acc;
+      },
+      { addresses: 0, assets: 0, pools: 0, dreps: 0 }
+    );
+  }, [data]);
+
+  const tabItems = useMemo(() => [
+    {
+      key: "wallets",
+      label: (
+        <div className='flex items-center gap-1'>
+          Wallets <Badge color='gray'>{count.addresses}</Badge>
+        </div>
+      ),
+      content: (
+        <div className='mt-6'>
+          <AddressesTab watchlist_only='1' />
+        </div>
+      ),
+      visible: count.addresses > 0,
+    },
+    {
+      key: "assets",
+      label: (
+        <div className='flex items-center gap-1'>
+          Assets <Badge color='gray'>{count.assets}</Badge>
+        </div>
+      ),
+      content: (
+        <div className='mt-6'>
+          <AssetListPage watchlist showHeader={false} />
+        </div>
+      ),
+      visible: count.assets > 0,
+    },
+    {
+      key: "pools",
+      label: (
+        <div className='flex items-center gap-1'>
+          Pools <Badge color='gray'>{count.pools}</Badge>
+        </div>
+      ),
+      content: (
+        <div className='mt-6'>
+          <PoolListTab watchlist />
+        </div>
+      ),
+      visible: count.pools > 0,
+    },
+    {
+      key: "dreps",
+      label: (
+        <div className='flex items-center gap-1'>
+          Dreps <Badge color='gray'>{count.dreps}</Badge>
+        </div>
+      ),
+      content: (
+        <div className='mt-6'>
+          <DrepListTab watchlist />
+        </div>
+      ),
+      visible: count.dreps > 0,
+    },
+  ], [count]);
+
+  const totalWatchlistItems = count.addresses + count.assets + count.pools + count.dreps;
+  const isLoading = token && query.isLoading;
+  const hasError = token && query.isError;
+
+  return (
+    <>
+      {showConnectModal && (
+        <ConnectWalletModal onClose={() => setShowConnectModal(false)} />
+      )}
+      <PageBase
+        metadataTitle='watchlist'
+        title='Watchlist'
+        breadcrumbItems={[{ label: "Watchlist" }]}
+      >
+        {token ? (
+          <div className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+            {isLoading ? (
+              <div className='flex flex-col gap-4'>
+                <LoadingSkeleton height='40px' width='100%' />
+                <LoadingSkeleton height='200px' width='100%' />
+              </div>
+            ) : hasError ? (
+              <EmptyState
+                icon={<Star size={24} />}
+                primaryText="Failed to load your watchlist."
+                secondaryText="There was an error loading your watchlist. Please try refreshing the page."
+                button={
+                  <Button
+                    label="Retry"
+                    variant="primary"
+                    size="md"
+                    onClick={() => query.refetch()}
+                  />
+                }
+              />
+            ) : totalWatchlistItems > 0 ? (
+              <Tabs items={tabItems} withPadding={false} withMargin={false} />
+            ) : (
+              <EmptyState
+                icon={<Star size={24} />}
+                primaryText="You don't have anything in your watchlist yet."
+                secondaryText="Star your favorite stake pools, DReps, wallets, or assets to keep track of them here."
+              />
+            )}
+          </div>
+        ) : (
+          <div className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+            <EmptyState
+              icon={<Wallet size={24} />}
+              primaryText="Wallet not connected."
+              secondaryText="Connect your wallet to start building your watchlist of favorite stake pools, DReps, wallets, and assets."
+              button={
+                <Button
+                  label="Connect wallet"
+                  variant="primary"
+                  size="md"
+                  onClick={() => setShowConnectModal(true)}
+                />
+              }
+            />
+          </div>
+        )}
+      </PageBase>
+    </>
+  );
+};

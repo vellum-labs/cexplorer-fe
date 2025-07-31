@@ -1,0 +1,454 @@
+import Button from "@/components/global/Button";
+import Copy from "@/components/global/Copy";
+import TextInput from "@/components/global/inputs/TextInput";
+import Modal from "@/components/global/Modal";
+import { Checkbox } from "@/components/ui/checkbox";
+import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
+import DelegationModal from "@/components/wallet/DelegationModal";
+import { colors } from "@/constants/colors";
+import {
+  donationAddress,
+  supportedPools,
+  webUrl,
+} from "@/constants/confVariables";
+import CexLogo from "@/resources/images/cexLogo.svg";
+import Patreon from "@/resources/images/patreon.svg";
+import Paypal from "@/resources/images/paypal.svg";
+import { useWalletStore } from "@/stores/walletStore";
+import { Link } from "@tanstack/react-router";
+import {
+  ArrowRight,
+  Bug,
+  Code,
+  Coffee,
+  CornerRightDown,
+  GitCommitHorizontal,
+  Users,
+  Wallet,
+  Wrench,
+  Zap,
+} from "lucide-react";
+import { useRef, useState } from "react";
+import { Helmet } from "react-helmet";
+import { toast } from "sonner";
+import metadata from "../../../conf/metadata/en-metadata.json";
+
+interface InfoCardProps {
+  icon: React.ReactNode;
+  heading: string;
+  description: string;
+}
+
+interface DonateCardProps {
+  amount: number | undefined;
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  isActive?: boolean;
+  onClick?: () => void;
+}
+
+interface CustomDonateCardProps {
+  amount: string;
+  setAmount: (amount: string) => void;
+  isActive?: boolean;
+  onClick?: () => void;
+}
+
+export const DonatePage = () => {
+  const donateRef = useRef<HTMLDivElement>(null);
+  const stakeRef = useRef<HTMLDivElement>(null);
+  const [customAmount, setCustomAmount] = useState<string>("");
+  const [activeDonation, setActiveDonation] = useState<number | undefined>(
+    undefined,
+  );
+  const [showWalletModal, setShowWalletModal] = useState(false);
+  const [openDelegationModal, setOpenDelegationModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [hash, setHash] = useState<string | undefined>("");
+  const { walletApi, job } = useWalletStore();
+  const randomPool =
+    supportedPools[Math.floor(Math.random() * supportedPools.length)];
+
+  const scrollToDonate = () => {
+    donateRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const scrollToStake = () => {
+    stakeRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleDonation = async () => {
+    if (!walletApi) {
+      setShowWalletModal(true);
+      return;
+    }
+
+    const amountToSend = BigInt(
+      activeDonation
+        ? activeDonation * 1000000
+        : Number(customAmount) * 1000000,
+    );
+
+    try {
+      const tx = await job?.lucid
+        .newTx()
+        .payToAddress(donationAddress, {
+          lovelace: amountToSend,
+        })
+        .complete();
+
+      const signedTx = await tx?.sign().complete();
+      const txHash = await signedTx?.submit();
+      setHash(txHash);
+      setShowSuccessModal(true);
+    } catch (error: any) {
+      if (String(error).includes("read-only")) return;
+
+      const errMessage =
+        error.message !== undefined
+          ? error.message
+          : "User refused to sign the transaction.";
+      toast.error("Transaction failed: " + errMessage);
+    }
+  };
+
+  const handleDelegation = () => {
+    if (!walletApi) {
+      setShowWalletModal(true);
+      return;
+    }
+    setOpenDelegationModal(true);
+  };
+
+  return (
+    <>
+      <Helmet>
+        <meta charSet='utf-8' />
+        {<title>{metadata.donatePage.title}</title>}
+        <meta name='description' content={metadata.donatePage.description} />
+        <meta name='keywords' content={metadata.donatePage.keywords} />
+        <meta property='og:title' content={metadata.donatePage.title} />
+        <meta
+          property='og:description'
+          content={metadata.donatePage.description}
+        />
+        <meta property='og:type' content='website' />
+        <meta property='og:url' content={webUrl + location.pathname} />
+      </Helmet>
+      {showWalletModal && (
+        <ConnectWalletModal onClose={() => setShowWalletModal(false)} />
+      )}
+      {openDelegationModal && (
+        <DelegationModal onClose={() => setOpenDelegationModal(false)} />
+      )}
+      {showSuccessModal && (
+        <Modal
+          minWidth='400px'
+          maxWidth='95%'
+          onClose={() => setShowSuccessModal(false)}
+        >
+          <div className='mt-4 flex h-full w-full flex-col items-center overflow-hidden p-3'>
+            <h3>
+              Transaction successful, thank you so much for supporting
+              Cexplorer.io ❤️
+            </h3>
+            <p className='mt-8'>
+              Transaction Hash:{" "}
+              <Link
+                to='/tx/$hash'
+                params={{ hash: hash ?? "" }}
+                className='break-all text-primary'
+              >
+                {hash}
+              </Link>
+            </p>
+          </div>
+        </Modal>
+      )}
+      <div className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
+        <p className='mt-8 text-sm font-semibold text-primary'>Donation</p>
+        <h1 className='mb-4'>Fuel the Future of Cexplorer</h1>
+        <p className='font-light text-grayTextPrimary'>
+          Your support helps us operate, maintain and improve everything on
+          Cexplorer.io
+        </p>
+        <div className='flex w-full max-w-desktop flex-col'>
+          <section className='mt-12 flex flex-wrap gap-8'>
+            <InfoCard
+              icon={<Zap color={colors.darkBlue} />}
+              heading='Here for Cardano since ITN'
+              description='We’ve been the oldest and most featured Cardano explorer since the Incentivized Testnet, providing essential tools for navigating the blockchain.'
+            />
+            <InfoCard
+              icon={<Users color={colors.darkBlue} />}
+              heading='From community for community'
+              description='Created by Cardano enthusiasts, our independent tool supports all users with staking, decision-making, and education. We aim to maximize your profit and protect you from bad practices.'
+            />
+            <InfoCard
+              icon={<Wrench color={colors.darkBlue} />}
+              heading='Utilized by Cardano builders'
+              description='Many builders rely on our tools to develop on Cardano. Supporting us helps maintain and enhance these resources, benefiting the entire development community.'
+            />
+          </section>
+          <section className='mt-12 flex flex-wrap justify-center gap-8 border-b border-border pb-10'>
+            <Button
+              size='lg'
+              label='Stake with Cexplorer'
+              variant='tertiary'
+              leftIcon={<CornerRightDown />}
+              onClick={scrollToStake}
+              className='min-w-[250px]'
+            />
+            <Button
+              size='lg'
+              label='Send a donation'
+              variant='primary'
+              leftIcon={<Wallet />}
+              onClick={scrollToDonate}
+              className='min-w-[250px]'
+            />
+          </section>
+          <section ref={donateRef} className='border-b border-border py-16'>
+            <h2>Donate</h2>
+            <div className='flex flex-wrap justify-between gap-4'>
+              <div className='flex flex-col'>
+                <p className='mt-4 font-light text-grayTextPrimary'>
+                  Thank you for supporting the development of independent
+                  Cardano explorer! ❤️
+                </p>
+                <p className='mb-2 mt-4 text-sm font-medium'>
+                  Send your donation here
+                </p>
+                <div className='relative flex w-full max-w-[390px] items-center'>
+                  <input
+                    readOnly
+                    value={donationAddress}
+                    className='w-full max-w-[390px] rounded-lg border border-border bg-background p-3 text-sm text-text'
+                  />
+                  <Copy
+                    copyText={donationAddress}
+                    className='absolute right-3 bg-background outline outline-4 outline-background'
+                  />
+                </div>
+              </div>
+              <div className='flex flex-col gap-4'>
+                <p className='text-sm font-medium'>Other donation methods</p>
+                <div className='flex flex-wrap gap-4'>
+                  <a
+                    href='https://www.paypal.com/donate?business=billing@vellumlabs.cz&item_name=Cexplorer.io+-+maintenance,+development,+servers&currency_code=USD'
+                    target='_blank'
+                    className='flex items-center gap-1 font-medium text-grayTextPrimary'
+                  >
+                    <img src={Paypal} />
+                    PayPal
+                  </a>
+                  <a
+                    href='https://www.patreon.com/ADApools'
+                    target='_blank'
+                    className='flex items-center gap-1 font-medium text-grayTextPrimary'
+                  >
+                    <img src={Patreon} />
+                    Patreon
+                  </a>
+                </div>
+              </div>
+            </div>
+            <p className='mb-2 mt-10 text-sm font-medium'>
+              Or use our dApp connector
+            </p>
+            <div className='flex flex-wrap gap-4'>
+              <DonateCard
+                icon={<Coffee color={colors.darkBlue} />}
+                amount={10}
+                title='Coffee For Devs'
+                description='Fueling the minds behind the code.'
+                onClick={() => setActiveDonation(10)}
+                isActive={activeDonation === 10}
+              />
+              <DonateCard
+                icon={<GitCommitHorizontal color={colors.darkBlue} />}
+                amount={50}
+                title='Code Commit'
+                description='Helping push new features and fixes.'
+                onClick={() => setActiveDonation(50)}
+                isActive={activeDonation === 50}
+              />
+              <DonateCard
+                icon={<Bug color={colors.darkBlue} />}
+                amount={100}
+                title='Bug Squasher'
+                description='Cleaning up code and fixing bugs.'
+                onClick={() => setActiveDonation(100)}
+                isActive={activeDonation === 100}
+              />
+              <DonateCard
+                icon={<Code color={colors.darkBlue} />}
+                amount={500}
+                title='API-ncredible Support'
+                description='Tools for powerful integrations.'
+                onClick={() => setActiveDonation(500)}
+                isActive={activeDonation === 500}
+              />
+              <CustomDonateCard
+                amount={customAmount}
+                setAmount={setCustomAmount}
+                isActive={activeDonation === 0}
+                onClick={() => setActiveDonation(0)}
+              />
+            </div>
+            <div className='flex w-full justify-center'>
+              <Button
+                size='lg'
+                label='Donate'
+                variant='primary'
+                leftIcon={<Wallet />}
+                className='mt-8'
+                onClick={handleDonation}
+                disabled={!activeDonation && customAmount === ""}
+              />
+            </div>
+          </section>
+          <section
+            ref={stakeRef}
+            className='mt-16 flex w-full flex-wrap justify-between rounded-xl bg-cardBg px-8 py-10'
+          >
+            <div className='flex basis-[550px] gap-8'>
+              <img className='hidden shrink md:block' src={CexLogo} />
+              <div className='flex flex-col gap-3'>
+                <h2>Stake with Cexplorer.io</h2>
+                <p className='max-w-[350px] font-light text-grayTextPrimary'>
+                  Support Cexplorer and earn staking rewards by delegating your
+                  ADA to our pool.
+                </p>
+                <p className='max-w-[350px] font-light text-grayTextPrimary'>
+                  Enjoy top-tier infrastructure and a win-win for both you and
+                  us!
+                </p>
+                <Link
+                  to='/pool/$id'
+                  params={{ id: randomPool }}
+                  className='my-4 flex items-center text-sm font-medium text-grayTextPrimary'
+                >
+                  Our stake pool performance <ArrowRight />
+                </Link>
+              </div>
+            </div>
+            <div className='flex flex-col'>
+              <p className='text-xs'>Delegate via dApp</p>
+              <Button
+                size='lg'
+                label='Delegate to [POOLS]'
+                variant='primary'
+                leftIcon={<Wallet />}
+                onClick={handleDelegation}
+              />
+              <p className='mt-8 text-xs'> Pool ID for delegation via wallet</p>
+              <div className='relative flex w-full max-w-[430px] items-center'>
+                <input
+                  readOnly
+                  value={randomPool}
+                  className='w-full max-w-[430px] rounded-lg border border-border bg-background p-3 text-sm text-text'
+                />
+                <Copy
+                  copyText={randomPool}
+                  className='absolute right-3 bg-background outline outline-4 outline-background'
+                />
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </>
+  );
+};
+
+const InfoCard = ({ icon, heading, description }: InfoCardProps) => {
+  return (
+    <section className='flex grow basis-[350px] flex-col'>
+      <div className='flex items-center gap-3'>
+        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-blue-100/90 p-1 outline outline-[6px] outline-blue-100/50'>
+          {icon}
+        </div>
+        <h3>{heading}</h3>{" "}
+      </div>
+      <p className='pl-12 text-sm text-grayTextPrimary'>{description}</p>
+    </section>
+  );
+};
+
+const CustomDonateCard = ({
+  amount,
+  setAmount,
+  isActive,
+  onClick,
+}: CustomDonateCardProps) => {
+  const handleAmountChange = (value: string) => {
+    if (value === "") setAmount(value);
+    if (!/^\d+$/.test(value)) return;
+    setAmount(value);
+  };
+
+  return (
+    <div
+      onClick={onClick}
+      className={`relative flex grow basis-[250px] cursor-pointer flex-col items-start gap-2 rounded-xl border p-3 ${isActive ? "outline outline-2 outline-primary" : "border-border"}`}
+    >
+      <Checkbox className='absolute right-3 top-3' checked={isActive} />
+      <div className='flex w-full justify-between'>
+        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-blue-100/90 p-1 outline outline-[6px] outline-blue-100/50'>
+          <Zap color={colors.darkBlue} />
+        </div>
+      </div>
+      <TextInput
+        inputClassName='h-10 my-2 w-full'
+        wrapperClassName='w-full max-w-[300px]'
+        value={amount}
+        onchange={value => handleAmountChange(value)}
+        placeholder='Choose the amount'
+      />
+      <p className='font-medium'>dApp Your Way</p>
+      <p className='mt-3 text-left text-sm text-grayTextPrimary'>
+        Empowering developers with the freedom to innovate.
+      </p>
+    </div>
+  );
+};
+
+const DonateCard = ({
+  amount,
+  title,
+  description,
+  icon,
+  onClick,
+  isActive,
+}: DonateCardProps) => {
+  return (
+    <div
+      onClick={onClick}
+      className={`relative flex grow basis-[250px] cursor-pointer flex-col items-start gap-2 rounded-xl border p-3 ${isActive ? "outline outline-2 outline-primary" : "border-border"}`}
+    >
+      <Checkbox className='absolute right-3 top-3' checked={isActive} />
+      <div className='flex w-full justify-between'>
+        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-blue-100/90 p-1 outline outline-[6px] outline-blue-100/50'>
+          {icon}
+        </div>
+      </div>
+      {amount ? (
+        <h2 className='my-3 text-primary'>{amount} ADA</h2>
+      ) : (
+        <TextInput
+          inputClassName='h-10 my-2 w-full'
+          wrapperClassName='w-full max-w-[300px]'
+          value=''
+          onchange={() => {}}
+          placeholder='Choose the amount'
+        />
+      )}
+      <p className='font-medium'>{title}</p>
+      <p className='mt-3 text-left text-sm text-grayTextPrimary'>
+        {description}
+      </p>
+    </div>
+  );
+};

@@ -1,0 +1,83 @@
+import type { EpochListData } from "@/types/epochTypes";
+import type { FC } from "react";
+
+import { useEffect, useState } from "react";
+
+import { formatDate } from "@/utils/format/format";
+import { formatRemainingTime } from "@/utils/format/formatRemainingTime";
+import PulseDot from "../global/PulseDot";
+
+interface EpochInfoProps {
+  number: number;
+  data: EpochListData[];
+}
+
+export const EpochInfo: FC<EpochInfoProps> = ({ number, data }) => {
+  const startDate = new Date(data[0]?.start_time).getTime();
+  const endTime = startDate + 432000000;
+
+  const durationInSeconds = (endTime - startDate) / 1000;
+  const [timeLeft, setTimeLeft] = useState(
+    Math.round((endTime - Date.now()) / 1000),
+  );
+
+  useEffect(() => {
+    if (timeLeft > 0) {
+      const timerId = setInterval(() => {
+        setTimeLeft(prevTime => prevTime - 1);
+      }, 1000);
+      return () => clearInterval(timerId);
+    }
+  }, [timeLeft]);
+
+  const elapsedPercentage =
+    ((durationInSeconds - timeLeft) / durationInSeconds) * 100;
+
+  return (
+    <div className='min-h-1/2 flex w-full flex-col gap-4 rounded-lg border border-border px-6 py-3'>
+      <div className='relative flex h-[24px] w-[115px] items-center justify-end rounded-lg border border-border px-[10px]'>
+        <div className='absolute left-2'>
+          <PulseDot />
+        </div>
+        <span className='text-xs font-medium'>Current Epoch</span>
+      </div>
+      <span className='text-4xl font-semibold'>{number}</span>
+      <div className='flex flex-col'>
+        <div className='flex items-center gap-3'>
+          <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#FEC84B]'>
+            <span
+              className='absolute left-0 block h-2 rounded-bl-[4px] rounded-tl-[4px] bg-[#47CD89]'
+              style={{
+                width: `${elapsedPercentage ? (elapsedPercentage > 100 ? 100 : elapsedPercentage) : 0}%`,
+              }}
+            ></span>
+          </div>
+          <span className='text-grayTextPrimary text-sm font-medium'>
+            {!isNaN(elapsedPercentage)
+              ? elapsedPercentage > 100
+                ? 100
+                : elapsedPercentage.toFixed(2)
+              : "?"}
+            %
+          </span>
+        </div>
+        <div className='flex items-center justify-between'>
+          <span className='text-grayTextPrimary text-xs'>
+            {formatDate(
+              data[0]?.start_time ? new Date(data[0]?.start_time) : undefined,
+            )}
+          </span>
+          <span className='text-grayTextPrimary text-xs'>
+            {formatRemainingTime(timeLeft)}
+          </span>
+        </div>
+        <div className='flex items-center justify-between text-[#98A2B3]'>
+          <span className='text-xs'>Start</span>
+          <span className='text-xs'>
+            {formatRemainingTime(timeLeft) ? "Left" : "Arrived"}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};

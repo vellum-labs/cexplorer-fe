@@ -1,0 +1,217 @@
+import { AddressDetailOverview } from "@/components/address/AddressDetailOverview";
+import { AddressesTab } from "@/components/address/tabs/AddressesTab";
+import { AssetsTab } from "@/components/address/tabs/AssetsTab";
+import { RewardsTab } from "@/components/address/tabs/RewardsTab";
+import { UTXOTab } from "@/components/address/tabs/UTXOTab";
+import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
+import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import Tabs from "@/components/global/Tabs";
+import { QRCodeSVG } from "qrcode.react";
+import { type FC } from "react";
+import { TxListPage } from "../tx/TxListPage";
+
+import { Address } from "@/utils/address/getStakeAddress";
+
+import { formatString } from "@/utils/format/format";
+import { getRouteApi, useSearch } from "@tanstack/react-router";
+
+import AdaHandleBadge from "@/components/global/badges/AdaHandleBadge";
+import { WatchlistSection } from "@/components/global/watchlist/WatchlistSection";
+import { Tooltip } from "@/components/ui/tooltip";
+import { UserBadge } from "@/components/user/UserBadge";
+import { useFetchAddressDetail } from "@/services/address";
+import { useNotFound } from "@/stores/useNotFound";
+import { isValidAddress } from "@/utils/address/isValidAddress";
+import { QrCode } from "lucide-react";
+import { DeFiOrderList } from "@/components/defi/DeFiOrderList";
+import { PageBase } from "@/components/global/pages/PageBase";
+
+export const AddressDetailPage: FC = () => {
+  const route = getRouteApi("/address/$address");
+  const { address } = route.useParams();
+
+  const { page } = useSearch({
+    from: "/address/$address",
+  });
+
+  const { setNotFound } = useNotFound();
+  const addressQuery = useFetchAddressDetail(address);
+
+  if (!isValidAddress(address)) {
+    setNotFound(true);
+    return undefined;
+  }
+
+  let paymentAddress: string;
+  let rewardsAddress: string | undefined;
+  let stakeKey: string | undefined;
+
+  try {
+    const addrObj = Address.from(address!);
+    if ((addrObj as any).isByron) {
+      paymentAddress = addrObj.payment;
+      rewardsAddress = undefined;
+      stakeKey = undefined;
+    } else {
+      paymentAddress = addrObj.payment;
+      rewardsAddress = addrObj.rewardAddress;
+      stakeKey = addrObj.stake;
+    }
+  } catch {
+    setNotFound(true);
+    return undefined;
+  }
+
+  const user = addressQuery.data?.data[0].user;
+  const addressData = addressQuery.data?.data[0];
+  const assets = addressData?.asset ?? [];
+
+  const tabs = [
+    {
+      key: "assets",
+      label: "Assets",
+      content: (
+        <AssetsTab
+          assets={assets}
+          addressQuery={addressQuery}
+          stakeKey={stakeKey}
+        />
+      ),
+      visible: true,
+    },
+    {
+      key: "transactions",
+      label: "Transactions",
+      content: <TxListPage key='address' address={address} />,
+      visible: true,
+    },
+    {
+      key: "utxos",
+      label: "UTXOs",
+      content: <UTXOTab address={address} />,
+      visible: true,
+    },
+    {
+      key: "defi",
+      label: "Trading",
+      content: () => (
+        <DeFiOrderList
+          storeKey='address_detail_defi_order'
+          address={address}
+          tabName='defi'
+          pulseDot={false}
+          page={page}
+          titleClassname='text-base'
+        />
+      ),
+      visible: true,
+    },
+  ];
+
+  if (stakeKey) {
+    tabs.push({
+      key: "addresses",
+      label: "Addresses",
+      content: <AddressesTab paymentAddress={paymentAddress} />,
+      visible: true,
+    });
+  }
+
+  if (
+    addressData?.stake?.reward?.total ||
+    addressData?.stake?.reward.withdrawn
+  ) {
+    tabs.push({
+      key: "rewards",
+      label: "Rewards",
+      content: (
+        <RewardsTab stakeAddress={rewardsAddress ?? ""} parentPage='addr' />
+      ),
+      visible: true,
+    });
+  }
+
+  const stakeAddr = Address.from(address).rewardAddress;
+
+  return (
+    <PageBase
+      metadataTitle='addressDetail'
+      metadataReplace={{ before: "%address%", after: address }}
+      breadcrumbItems={[
+        stakeKey
+          ? {
+              label: "Stake",
+              link: `/stake/${stakeAddr}` as any,
+            }
+          : {
+              label: "Address",
+            },
+        {
+          label: formatString(address, "long"),
+          ident: address,
+        },
+      ]}
+      title={<div className='flex items-center gap-1'>Address detail</div>}
+      subTitle={
+        <HeaderBannerSubtitle
+          title='Address'
+          hashString={formatString(address ?? "", "long")}
+          hash={address}
+        />
+      }
+      badge={
+        addressData?.adahandle && (
+          <AdaHandleBadge hex={addressData?.adahandle?.hex} link />
+        )
+      }
+      qrCode={
+        <Tooltip content={<QRCodeSVG value={address} size={120} />}>
+          <QrCode size={15} className='-translate-y-0.5' />
+        </Tooltip>
+      }
+    >
+      <section className='flex w-full flex-col items-center'>
+        <div className='flex w-full max-w-desktop items-center justify-between px-mobile md:px-desktop'>
+          <UserBadge
+            address={address}
+            isLoading={addressQuery.isLoading}
+            user={user}
+          />
+          <WatchlistSection
+            ident={address}
+            isLoading={addressQuery.isLoading}
+          />
+        </div>
+        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pb-5 pt-3 md:px-desktop xl:flex-nowrap xl:justify-start'>
+          <div className='flex w-full shrink grow flex-wrap items-stretch gap-5'>
+            {addressQuery.isLoading || addressQuery.isError ? (
+              <>
+                <LoadingSkeleton
+                  height='227px'
+                  rounded='xl'
+                  className='grow basis-[300px] px-8 py-4'
+                />
+                <LoadingSkeleton
+                  height='227px'
+                  rounded='xl'
+                  className='grow basis-[300px] px-8 py-4'
+                />
+                <LoadingSkeleton
+                  height='227px'
+                  rounded='xl'
+                  className='grow basis-[300px] px-8 py-4'
+                />
+              </>
+            ) : (
+              <AddressDetailOverview
+                data={addressQuery.data?.data ?? []}
+                address={address}
+              />
+            )}
+          </div>
+        </div>
+      </section>
+      <Tabs items={tabs} wrapperClassname='mt-0' />
+    </PageBase>
+  );
+};

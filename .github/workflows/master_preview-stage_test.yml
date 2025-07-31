@@ -1,0 +1,45 @@
+name: "🥈 Deploy preview-stage to test-server"
+on:
+  workflow_dispatch:
+
+jobs:
+  DeployToServer:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: wireguard
+      cancel-in-progress: false
+    steps:
+      - name: Set up WireGuard
+        env:
+          WG_CONFIG: ${{secrets.WG_CONFIG}}
+
+        run: |
+          sudo apt install -y wireguard
+          echo "$WG_CONFIG" | sudo tee /etc/wireguard/wg0.conf
+          sudo wg-quick up wg0
+
+      - uses: actions/checkout@v3
+      - uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: |
+            ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Set Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 21.x
+          cache-dependency-path: package.json
+
+      - name: Install dependencies and build
+        env:
+          VITE_APP_VERSION: ${{ github.run_number }}
+          VITE_APP_CONFIG: preview-stage
+        run: |
+          yarn install
+          yarn build
+
+      - name: Copy files & deploy
+        env:
+          SERVER: 10.0.0.2
+        run: |
+          rsync -ave "ssh -o StrictHostKeyChecking=no" --omit-dir-times --delete ./dist/ job@$SERVER:/var/www/cexplorer_preview_stage/

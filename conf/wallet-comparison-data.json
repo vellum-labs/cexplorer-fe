@@ -1,0 +1,102 @@
+[
+  {
+    "internalName": "vespr",
+    "supportedPlatforms": {
+      "web": true,
+      "iOS": true,
+      "android": true
+    },
+    "opensource": false,
+    "smartContractInteraction": true,
+    "stakingSupport": true,
+    "multiPoolDelegation": false,
+    "nftMarketplaceIntegration": {
+      "enabled": false,
+      "partner": ""
+    },
+    "swapsInWallet": {
+      "enabled": true,
+      "partner": "DexHunter"
+    },
+    "fiatOnramp": {
+      "enabled": true,
+      "partner": "Topper by Uphold"
+    },
+    "dAppBrowser": true,
+    "governanceRegistration": true,
+    "governanceRegistrationInfo": "full support via gov.tools",
+    "cardanoGovernanceFeatures": true,
+    "otherFeatures": {
+      "feature1": "Multi-language support",
+      "feature2": "Boost - using DexHunter submit nodes",
+      "feature3": "Biometric authentication and tx signing",
+      "feature4": "Discreet Mode",
+      "feature5": "Proof of Onboarding - QR code token claim",
+      "feature6": "Light/Dark Mode",
+      "feature7": "Unlimited wallets"
+    },
+    "hardwareWalletCompatibility": {
+      "ledger": true,
+      "trezor": false,
+      "keystone": true
+    },
+    "multipleAccounts": false,
+    "customNode": false,
+    "crossChainCompatibility": {
+      "enabled": false,
+      "supportedChains": []
+    },
+    "addressBook": false,
+    "testnetSupport": true
+  },
+  {
+    "internalName": "lace",
+    "supportedPlatforms": {
+      "web": true,
+      "iOS": true,
+      "android": true
+    },
+    "opensource": true,
+    "smartContractInteraction": true,
+    "stakingSupport": true,
+    "multiPoolDelegation": true,
+    "cardanoGovernanceFeatures": false,
+    "nftMarketplaceIntegration": {
+      "enabled": true,
+      "partner": ""
+    },
+    "swapsInWallet": {
+      "enabled": true,
+      "partner": ""
+    },
+    "fiatOnramp": {
+      "enabled": true,
+      "partner": ""
+    },
+    "dAppBrowser": true,
+    "governanceSupport": true,
+    "governanceInfo": "",
+    "otherFeatures": {
+      "feature1": "",
+      "feature2": "",
+      "feature3": "",
+      "feature4": "",
+      "feature5": "",
+      "feature6": "",
+      "feature7": ""
+    },
+    "hardwareWalletCompatibility": {
+      "ledger": true,
+      "trezor": false,
+      "keystone": true
+    },
+    "multipleAccounts": false,
+    "customNode": false,
+    "crossChainCompatibility": {
+      "enabled": false,
+      "supportedChains": []
+    },
+    "addressBook": false,
+    "testnetSupport": true
+  }
+]

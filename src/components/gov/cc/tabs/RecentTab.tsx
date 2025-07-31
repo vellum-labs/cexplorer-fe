@@ -1,0 +1,356 @@
+import type { FC } from "react";
+import { useState } from "react";
+import { useSearch } from "@tanstack/react-router";
+
+import GlobalTable from "@/components/table/GlobalTable";
+import ExportButton from "@/components/table/ExportButton";
+import TableSearchInput from "@/components/global/inputs/SearchInput";
+import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { useRecentVotesTableStore } from "@/stores/tables/recentVotesTableStore";
+import { useFetchCCVotes } from "@/services/governance";
+import { formatString, formatNumber } from "@/utils/format/format";
+import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
+import { Image } from "@/components/global/Image";
+import { Link } from "@tanstack/react-router";
+import { FileText, X } from "lucide-react";
+import { ActionTypes } from "@/components/global/ActionTypes";
+import { useFilterTable } from "@/hooks/tables/useFilterTable";
+import { isHex } from "@/utils/isHex";
+import Copy from "@/components/global/Copy";
+import { alphabetWithNumbers } from "@/constants/alphabet";
+import { GovActionCell } from "../../GovActionCell";
+import { VoteBadge } from "@/components/global/badges/VoteBadge";
+import { useSearchTable } from "@/hooks/tables/useSearchTable";
+
+export const RecentTab: FC = () => {
+  const { page = 1 } = useSearch({ from: "/gov/cc/" });
+
+  const {
+    columnsVisibility,
+    columnsOrder,
+    rows,
+    setRows,
+    setColumsOrder,
+    setColumnVisibility,
+  } = useRecentVotesTableStore()();
+
+  const {
+    filterVisibility,
+    filter,
+    hasFilter,
+    anchorRefs,
+    filterDraft,
+    changeDraftFilter,
+    changeFilterByKey,
+    toggleFilter,
+  } = useFilterTable({
+    storeKey: "recent_votes",
+    filterKeys: ["vote"],
+  });
+
+  const [searchPrefix, setSearchPrefix] = useState("");
+
+  const [
+    { debouncedTableSearch: debouncedSearch, tableSearch },
+    setTableSearch,
+  ] = useSearchTable({
+    debounceFilter: tableSearch =>
+      tableSearch.toLowerCase().slice(tableSearch.indexOf(":") + 1),
+    showAfter: !!searchPrefix,
+    withoutURL: true,
+  });
+
+  const offset = (page ?? 1) * rows - rows;
+  const query = useFetchCCVotes(
+    rows,
+    offset,
+    filter?.vote ? filter.vote : undefined,
+    searchPrefix === "committee_voter" ? debouncedSearch : undefined,
+    searchPrefix === "tx" ? debouncedSearch : undefined,
+  );
+
+  const totalItems = query.data?.pages[0].data.count;
+  const items = query.data?.pages.flatMap(page => page.data.data);
+
+  const columns = [
+    {
+      key: "index",
+      title: "#",
+      standByRanking: true,
+      widthPx: 40,
+      visible: columnsVisibility.index,
+      render: () => undefined,
+    },
+    {
+      key: "proposal",
+      title: "Governance Action",
+      widthPx: 150,
+      visible: columnsVisibility.proposal,
+      render: item => {
+        const type = item.proposal?.type;
+        return type ? (
+          <ActionTypes title={type} />
+        ) : (
+          <span className='text-grayTextSecondary'>N/A</span>
+        );
+      },
+    },
+    {
+      key: "governance_action_name",
+      title: "Name",
+      widthPx: 220,
+      visible: columnsVisibility.governance_action_name ?? true,
+      render: item => {
+        const id = item?.proposal?.ident?.id;
+        const name =
+          item?.proposal?.anchor?.offchain?.name ?? "⚠️ Invalid metadata";
+
+        if (!id) return "-";
+
+        return <GovActionCell id={id} name={name} />;
+      },
+    },
+    {
+      key: "cc_member",
+      title: "CC Member",
+      widthPx: 220,
+      visible: columnsVisibility.cc_member,
+      render: item => {
+        const meta = item.info?.meta;
+        const id = item.info?.id ?? "N/A";
+        const name = meta?.name ?? "Unknown";
+        const img = meta?.img;
+
+        const fallbackletters = [...name]
+          .filter(char => alphabetWithNumbers.includes(char.toLowerCase()))
+          .join("");
+
+        return (
+          <div className='flex items-center gap-3'>
+            <div className='min-w-[32px]'>
+              <Image
+                src={img}
+                alt='member'
+                className='rounded-full'
+                width={32}
+                height={32}
+                fallbackletters={fallbackletters}
+              />
+            </div>
+            <div className='flex flex-col'>
+              <span className='text-textPrimary font-medium'>{name}</span>
+              <div className='flex gap-2'>
+                {/* <Link
+                  to='/gov/cc/$coldKey'
+                  params={{ coldKey: id }}
+                  className='text-primary'
+                >
+                </Link> */}
+                {formatString(id, "long")}
+                <Copy copyText={id} />
+              </div>
+            </div>
+          </div>
+        );
+      },
+    },
+    {
+      key: "vote",
+      title: <p ref={anchorRefs?.vote}>Vote</p>,
+      widthPx: 100,
+      visible: columnsVisibility.vote,
+      render: item => {
+        const vote = item.vote;
+        return (
+          <div className='flex items-center gap-2'>
+            {item?.tx?.hash && (
+              <Link
+                to='/gov/vote/$hash'
+                params={{ hash: item.tx.hash }}
+                className='text-muted-foreground text-primary'
+                title='Open vote detail'
+              >
+                <FileText size={16} />
+              </Link>
+            )}
+            <VoteBadge vote={vote} />
+          </div>
+        );
+      },
+      filter: {
+        anchorRef: anchorRefs?.vote,
+        width: "170px",
+        activeFunnel: !!filter.vote,
+        filterOpen: filterVisibility.vote,
+        filterButtonDisabled: filter.vote === filterDraft["vote"],
+        onShow: e => toggleFilter(e, "vote"),
+        onFilter: () => changeFilterByKey("vote", filterDraft["vote"]),
+        onReset: () => changeFilterByKey("vote"),
+        filterContent: (
+          <div className='flex flex-col gap-2 px-4 py-2'>
+            {["Yes", "No", "Abstain"].map(val => (
+              <label className='flex items-center gap-2' key={val}>
+                <input
+                  type='radio'
+                  name='vote_filter'
+                  value={val}
+                  className='accent-primary'
+                  checked={filterDraft["vote"] === val}
+                  onChange={e =>
+                    changeDraftFilter("vote", e.currentTarget.value)
+                  }
+                />
+                <span className='text-sm'>{val}</span>
+              </label>
+            ))}
+          </div>
+        ),
+      },
+    },
+    {
+      key: "tx",
+      title: "Tx Hash",
+      widthPx: 200,
+      visible: columnsVisibility.tx,
+      render: item => {
+        const hash = item.tx?.hash ?? "N/A";
+        return hash !== "N/A" ? (
+          <div className='flex gap-2'>
+            <Link to='/tx/$hash' params={{ hash }} className='text-primary'>
+              {formatString(hash, "long")}
+            </Link>
+            <Copy copyText={hash} />
+          </div>
+        ) : (
+          <span className='text-grayTextSecondary'>N/A</span>
+        );
+      },
+    },
+    {
+      key: "time",
+      title: "Time",
+      widthPx: 180,
+      visible: columnsVisibility.time,
+      render: item => <TimeDateIndicator time={item.tx?.time} />,
+    },
+  ];
+
+  return (
+    <section className='flex w-full max-w-desktop flex-col pb-5'>
+      <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
+        <div className='flex w-full items-center justify-between gap-2'>
+          {query.isLoading ? (
+            <LoadingSkeleton height='27px' width='220px' />
+          ) : (
+            <h3 className='basis-[230px]'>
+              Total of {formatNumber(totalItems)} votes
+            </h3>
+          )}
+          <div className='flex items-center gap-2 md:hidden'>
+            <ExportButton columns={columns} items={items} />
+            <TableSettingsDropdown
+              rows={rows}
+              setRows={setRows}
+              columnsOptions={columns.map(col => ({
+                label: col.title,
+                isVisible: columnsVisibility[col.key],
+                onClick: () =>
+                  setColumnVisibility(
+                    col.key as keyof typeof columnsVisibility,
+                    !columnsVisibility[
+                      col.key as keyof typeof columnsVisibility
+                    ],
+                  ),
+              }))}
+            />
+          </div>
+        </div>
+
+        <div className='flex gap-2'>
+          <TableSearchInput
+            placeholder='Search your results...'
+            value={tableSearch}
+            onchange={setTableSearch}
+            wrapperClassName='md:w-[320px] w-full'
+            showSearchIcon
+            prefixes={[
+              {
+                key: "committee_voter",
+                name: "CC Member",
+                show: tableSearch.length < 1 || isHex(tableSearch),
+              },
+              {
+                key: "tx_hash",
+                name: "Tx Hash",
+                show: tableSearch.length < 1 || isHex(tableSearch),
+              },
+            ]}
+            searchPrefix={searchPrefix}
+            setSearchPrefix={setSearchPrefix}
+          />
+          <div className='hidden items-center gap-2 md:flex'>
+            <ExportButton columns={columns} items={items} />
+            <TableSettingsDropdown
+              rows={rows}
+              setRows={setRows}
+              columnsOptions={columns.map(col => ({
+                label: col.title,
+                isVisible: columnsVisibility[col.key],
+                onClick: () =>
+                  setColumnVisibility(
+                    col.key as keyof typeof columnsVisibility,
+                    !columnsVisibility[
+                      col.key as keyof typeof columnsVisibility
+                    ],
+                  ),
+              }))}
+            />
+          </div>
+        </div>
+      </div>
+      {hasFilter && (
+        <div className='mb-3 flex flex-wrap items-center gap-1 md:flex-nowrap'>
+          {Object.entries(filter).map(
+            ([key, value]) =>
+              value && (
+                <div
+                  key={key}
+                  className='flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-2 py-0.5 text-xs text-grayTextPrimary'
+                >
+                  <span>
+                    {key.charAt(0).toUpperCase() +
+                      key.slice(1).replace(/_/g, " ")}
+                    :
+                  </span>
+                  <span className='capitalize'>{value.toLowerCase()}</span>
+                  <X
+                    size={13}
+                    className='cursor-pointer'
+                    onClick={() => changeFilterByKey(key)}
+                  />
+                </div>
+              ),
+          )}
+        </div>
+      )}
+
+      <GlobalTable
+        type='infinite'
+        scrollable
+        currentPage={page ?? 1}
+        totalItems={totalItems}
+        itemsPerPage={rows}
+        items={items}
+        query={query}
+        rowHeight={65}
+        columns={columns.sort(
+          (a, b) =>
+            columnsOrder.indexOf(a.key as keyof typeof columnsVisibility) -
+            columnsOrder.indexOf(b.key as keyof typeof columnsVisibility),
+        )}
+        onOrderChange={setColumsOrder}
+      />
+    </section>
+  );
+};

@@ -1,0 +1,1334 @@
+{
+  "info": {
+    "_postman_id": "59ef4a5b-ce73-4fa6-a809-cde86657dab3",
+    "name": "cexplorer2024",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24772159"
+  },
+  "item": [
+    {
+      "name": "block",
+      "item": [
+        {
+          "name": "tip",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/block/tip",
+              "host": ["{{url}}"],
+              "path": ["block", "tip"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "list",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/block/list?limit=10&offset=20&order=block_no",
+              "host": ["{{url}}"],
+              "path": ["block", "list"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "offset",
+                  "value": "20"
+                },
+                {
+                  "key": "pool_id",
+                  "value": "pool13la5erny3srx9u4fz9tujtl2490350f89r4w4qjhk0vdjmuv78v",
+                  "disabled": true
+                },
+                {
+                  "key": "epoch_no",
+                  "value": "129",
+                  "disabled": true
+                },
+                {
+                  "key": "hash",
+                  "value": "3f94a38afb9b9674a36f7717aba1cd3e14b720914f782070539e47179f8aecfd",
+                  "disabled": true
+                },
+                {
+                  "key": "slot_no",
+                  "value": "308539",
+                  "disabled": true
+                },
+                {
+                  "key": "block_no",
+                  "value": "1013597",
+                  "disabled": true
+                },
+                {
+                  "key": "order",
+                  "value": "block_no",
+                  "description": "block_no | slot_no | epoch"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "detail",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [""],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/block/detail?hash=3f94a38afb9b9674a36f7717aba1cd3e14b720914f782070539e47179f8aecfd",
+              "host": ["{{url}}"],
+              "path": ["block", "detail"],
+              "query": [
+                {
+                  "key": "block_no",
+                  "value": "2011150",
+                  "disabled": true
+                },
+                {
+                  "key": "slot_no",
+                  "value": "54131397",
+                  "disabled": true
+                },
+                {
+                  "key": "hash",
+                  "value": "3f94a38afb9b9674a36f7717aba1cd3e14b720914f782070539e47179f8aecfd"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "epoch",
+      "item": [
+        {
+          "name": "param",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/epoch/param?no=138",
+              "host": ["{{url}}"],
+              "path": ["epoch", "param"],
+              "query": [
+                {
+                  "key": "no",
+                  "value": "138"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/epoch/stats?no=137",
+              "host": ["{{url}}"],
+              "path": ["epoch", "stats"],
+              "query": [
+                {
+                  "key": "no",
+                  "value": "137"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "list",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/epoch/list",
+              "host": ["{{url}}"],
+              "path": ["epoch", "list"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "pool",
+      "item": [
+        {
+          "name": "detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/pool/detail?pool_id=pool1tlpsswg9ev0frsrcgukpz5nsw5gcetldunwg6clrvxyz5sn2xaz",
+              "host": ["{{url}}"],
+              "path": ["pool", "detail"],
+              "query": [
+                {
+                  "key": "pool_id",
+                  "value": "pool174mw7e20768e8vj4fn8y6p536n8rkzswsapwtwn354dckpjqzr8",
+                  "disabled": true
+                },
+                {
+                  "key": "hash_raw",
+                  "value": "f576ef654ff68f93b2554cce4d0691d4ce3b0a0e8742e5ba71a55b8b",
+                  "disabled": true
+                },
+                {
+                  "key": "pool_id",
+                  "value": "pool1tlpsswg9ev0frsrcgukpz5nsw5gcetldunwg6clrvxyz5sn2xaz"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delegator",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/pool/delegator?type=gone&pool_id=pool174mw7e20768e8vj4fn8y6p536n8rkzswsapwtwn354dckpjqzr8&offset=0&limit=10&order=slot_update&sort=desc",
+              "host": ["{{url}}"],
+              "path": ["pool", "delegator"],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "gone",
+                  "description": "live | gone "
+                },
+                {
+                  "key": "pool_id",
+                  "value": "pool174mw7e20768e8vj4fn8y6p536n8rkzswsapwtwn354dckpjqzr8"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "order",
+                  "value": "slot_update",
+                  "description": "slot_update | live_stake"
+                },
+                {
+                  "key": "sort",
+                  "value": "desc",
+                  "description": "desc | asc"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delegator_stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/pool/delegator_stats?pool_id=pool174mw7e20768e8vj4fn8y6p536n8rkzswsapwtwn354dckpjqzr8",
+              "host": ["{{url}}"],
+              "path": ["pool", "delegator_stats"],
+              "query": [
+                {
+                  "key": "pool_id",
+                  "value": "pool174mw7e20768e8vj4fn8y6p536n8rkzswsapwtwn354dckpjqzr8"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/pool/updates?pool_id=pool1upqfyzqpk6wkpsvw90qqrpr9tjyemh484wk4em69anwpu586ehq&active_epoch_no=72",
+              "host": ["{{url}}"],
+              "path": ["pool", "updates"],
+              "query": [
+                {
+                  "key": "pool_id",
+                  "value": "pool1upqfyzqpk6wkpsvw90qqrpr9tjyemh484wk4em69anwpu586ehq"
+                },
+                {
+                  "key": "hash_raw",
+                  "value": "f576ef654ff68f93b2554cce4d0691d4ce3b0a0e8742e5ba71a55b8b",
+                  "disabled": true
+                },
+                {
+                  "key": "active_epoch_no",
+                  "value": "72"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "reward",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/pool/reward?pool_id=pool1hghdaa7chn4hykkf9h0g0yqpz6j93gexvllz0w6p93y72saukmp",
+              "host": ["{{url}}"],
+              "path": ["pool", "reward"],
+              "query": [
+                {
+                  "key": "pool_id",
+                  "value": "pool1hghdaa7chn4hykkf9h0g0yqpz6j93gexvllz0w6p93y72saukmp"
+                },
+                {
+                  "key": "",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "list",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/pool/list?limit=10&name=pool13m26ky08vz205232k20u8ft5nrg8u68klhn0xfsk9m4gsqsc44v&order=roa_recent&sort=desc",
+              "host": ["{{url}}"],
+              "path": ["pool", "list"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "offset",
+                  "value": "0",
+                  "disabled": true
+                },
+                {
+                  "key": "name",
+                  "value": "pool13m26ky08vz205232k20u8ft5nrg8u68klhn0xfsk9m4gsqsc44v"
+                },
+                {
+                  "key": "ticker",
+                  "value": "QCPOL",
+                  "disabled": true
+                },
+                {
+                  "key": "pool_id",
+                  "value": "pool140qtx3sfkm0sxlld059xt6vejwcawul6x70la9clml3kxruz6qp",
+                  "disabled": true
+                },
+                {
+                  "key": "order",
+                  "value": "roa_recent",
+                  "description": "ranking | live_stake | active_stake | delegators | pledge | blocks_epoch | blocks_total | pledged | roa_lifetime | roa_recent"
+                },
+                {
+                  "key": "sort",
+                  "value": "desc",
+                  "description": "asc | desc "
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "tx",
+      "item": [
+        {
+          "name": "list",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/tx/list?limit=10&policy=0003753aefa61a12865c09b95ba972c37c8f6a4680bee558d3202183",
+              "host": ["{{url}}"],
+              "path": ["tx", "list"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "offset",
+                  "value": "0",
+                  "disabled": true
+                },
+                {
+                  "key": "stake",
+                  "value": "stake_test1uz9y2ufhqp3actnp7zr0uvc4l6fz2ptlnhhf3q5eceq48pc4a3tnp",
+                  "disabled": true
+                },
+                {
+                  "key": "address",
+                  "value": "addr_test1qzhyg76qykce6w9kg00jt3cecfku9dm63eqenwlr6d0u8mgxy8jmk9rapjmuk2e7cfmshs27r4sx7tk0q3afktjf7j2q2q9n8u",
+                  "disabled": true
+                },
+                {
+                  "key": "hash",
+                  "value": "cc2d2d839c53ba417d6b7b7b7cb3c279f8e6b478ff9151d823b8a47ba822394f",
+                  "disabled": true
+                },
+                {
+                  "key": "asset",
+                  "value": "asset19hl4dse3qkfzpu4d6naw4mrvdnf9kzmj0gj8v0",
+                  "disabled": true
+                },
+                {
+                  "key": "policy",
+                  "value": "0003753aefa61a12865c09b95ba972c37c8f6a4680bee558d3202183"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/tx/detail?hash=65b6cb6c5e2438f7e56a09c529d94210d9e30619dab34deb8caa7f8cec822314",
+              "host": ["{{url}}"],
+              "path": ["tx", "detail"],
+              "query": [
+                {
+                  "key": "hash",
+                  "value": "8f1f35356a263c76d1c4b61ca996bed4bdb39c273f6561244837bf873df8f4bd",
+                  "disabled": true
+                },
+                {
+                  "key": "hash",
+                  "value": "cc2d2d839c53ba417d6b7b7b7cb3c279f8e6b478ff9151d823b8a47ba822394f",
+                  "disabled": true
+                },
+                {
+                  "key": "hash",
+                  "value": "a3260fb107a12f2ef1a2990dfb9c58cd67e2e9303ac2402d2eb6381a24b4ecee",
+                  "description": "assets",
+                  "disabled": true
+                },
+                {
+                  "key": "hash",
+                  "value": "65b6cb6c5e2438f7e56a09c529d94210d9e30619dab34deb8caa7f8cec822314"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "account",
+      "item": [
+        {
+          "name": "detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/account/detail?view=stake_test1ur9gwqky69yemg3qf2526qp20rltl9ez84cqlgl002t3qsgx7w3p2",
+              "host": ["{{url}}"],
+              "path": ["account", "detail"],
+              "query": [
+                {
+                  "key": "hash_raw",
+                  "value": "e015f48fbce00544fa86004f0fc41dbc03df7e394ea93163914efd4df9",
+                  "disabled": true
+                },
+                {
+                  "key": "view",
+                  "value": "stake_test1ur0q34dcq4yhcu9pceat2rnxvp8p77c2lwqq420uzyuvnhqluanln",
+                  "description": "without script",
+                  "disabled": true
+                },
+                {
+                  "key": "view",
+                  "value": "stake_test17rxltgg84shacn9jgeyy5lg733hvtgfc9m3rxck8kmsqyyqrpsh2p",
+                  "description": "with script",
+                  "disabled": true
+                },
+                {
+                  "key": "view",
+                  "value": "stake_test1uq2lfrauuqz5f75xqp8sl3qahspa7l3ef65nzcu3fm75m7glkzhp3",
+                  "description": "multi-delegation",
+                  "disabled": true
+                },
+                {
+                  "key": "view",
+                  "value": "stake_test1ur9gwqky69yemg3qf2526qp20rltl9ez84cqlgl002t3qsgx7w3p2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delegation",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/account/delegation?view=stake_test1ur9gwqky69yemg3qf2526qp20rltl9ez84cqlgl002t3qsgx7w3p2",
+              "host": ["{{url}}"],
+              "path": ["account", "delegation"],
+              "query": [
+                {
+                  "key": "hash_raw",
+                  "value": "e015f48fbce00544fa86004f0fc41dbc03df7e394ea93163914efd4df9",
+                  "disabled": true
+                },
+                {
+                  "key": "view",
+                  "value": "stake_test1ur0q34dcq4yhcu9pceat2rnxvp8p77c2lwqq420uzyuvnhqluanln",
+                  "description": "without script",
+                  "disabled": true
+                },
+                {
+                  "key": "view",
+                  "value": "stake_test17rxltgg84shacn9jgeyy5lg733hvtgfc9m3rxck8kmsqyyqrpsh2p",
+                  "description": "with script",
+                  "disabled": true
+                },
+                {
+                  "key": "view",
+                  "value": "stake_test1ur9gwqky69yemg3qf2526qp20rltl9ez84cqlgl002t3qsgx7w3p2",
+                  "description": "multi-delegation"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "asset",
+      "item": [
+        {
+          "name": "detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/asset/detail?fingerprint=asset1hcjdt27k5wm5qm4dvv4x3t0z8v9c4ycrduf6wa&assetname=0dafac5b0f0a3341585de75624b7b14cd45c2619466fb6aae22884e1424843",
+              "host": ["{{url}}"],
+              "path": ["asset", "detail"],
+              "query": [
+                {
+                  "key": "fingerprint",
+                  "value": "asset1hcjdt27k5wm5qm4dvv4x3t0z8v9c4ycrduf6wa"
+                },
+                {
+                  "key": "fingerprint",
+                  "value": "asset1svs4snxmahxl6k76h25z4z9c3jgfdk8z02rjpd",
+                  "disabled": true
+                },
+                {
+                  "key": "assetname",
+                  "value": "07cceab5ea30fd508ab7cb79fb14a6640ae183aa0bc110f73b4c51e44c554359",
+                  "disabled": true
+                },
+                {
+                  "key": "assetname",
+                  "value": "f6f49b186751e61f1fb8c64e7504e771f968cea9f4d11f5222b169e374484f534b59",
+                  "disabled": true
+                },
+                {
+                  "key": "assetname",
+                  "value": "0dafac5b0f0a3341585de75624b7b14cd45c2619466fb6aae22884e1424843"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "address",
+      "item": [
+        {
+          "name": "parse",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/address/extract?view=Ae2tdPwUPEZKXn3Qr2jButWgRJRB4S8TrnQvsy6uFnDCbGwc9XgtUSvbxKG",
+              "host": ["{{url}}"],
+              "path": ["address", "extract"],
+              "query": [
+                {
+                  "key": "view",
+                  "value": "addr_test1vp4ej83werd3kwh6gslrl07a0uukfn0608vlma8suqtup0ct0csvy",
+                  "disabled": true
+                },
+                {
+                  "key": "view",
+                  "value": "addr_test1qzhyg76qykce6w9kg00jt3cecfku9dm63eqenwlr6d0u8mgxy8jmk9rapjmuk2e7cfmshs27r4sx7tk0q3afktjf7j2q2q9n8u",
+                  "description": "without script",
+                  "disabled": true
+                },
+                {
+                  "key": "raw",
+                  "value": "ae447b4025b19d38b643df25c719c26dc2b77a8e4199bbe3d35fc3ed0621e5bb147d0cb7cb2b3ec2770bc15e1d606f2ecf047a9b2e49f494",
+                  "disabled": true
+                },
+                {
+                  "key": "view",
+                  "value": "Ae2tdPwUPEZKXn3Qr2jButWgRJRB4S8TrnQvsy6uFnDCbGwc9XgtUSvbxKG"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "misc",
+      "item": [
+        {
+          "name": "basic",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/misc/basic",
+              "host": ["{{url}}"],
+              "path": ["misc", "basic"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "market",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/misc/market?epoch_no=150",
+              "host": ["{{url}}"],
+              "path": ["misc", "market"],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2024-06-24",
+                  "disabled": true
+                },
+                {
+                  "key": "epoch_no",
+                  "value": "150"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "rate",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/misc/rate",
+              "host": ["{{url}}"],
+              "path": ["misc", "rate"],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2024-06-24",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "const",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/misc/const",
+              "host": ["{{url}}"],
+              "path": ["misc", "const"],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2024-06-24",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "analytics",
+      "item": [
+        {
+          "name": "hardforks",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/analytics/hardforks",
+              "host": ["{{url}}"],
+              "path": ["analytics", "hardforks"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "login",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/user/login?address=addr_test1qp4x34qzws6nwxxqnjcc367wu44aklt8y7pu8ee9w28qu65j2pql50fvq9my0j02gmrtcn49500j4jsmgj7ger3mtw2qkzw6as&signature=BCAA&uq=muj-id\"'&secure=1&expiration=2025-07-13 07:06:42.456406",
+              "host": ["{{url}}"],
+              "path": ["user", "login"],
+              "query": [
+                {
+                  "key": "address",
+                  "value": "addr_test1qp4x34qzws6nwxxqnjcc367wu44aklt8y7pu8ee9w28qu65j2pql50fvq9my0j02gmrtcn49500j4jsmgj7ger3mtw2qkzw6as"
+                },
+                {
+                  "key": "signature",
+                  "value": "BCAA"
+                },
+                {
+                  "key": "address",
+                  "value": "addr1v8lfx9dg68mr3fyrd60v89k58c0kh2ywgknltf0r0fmswxsxep4ls",
+                  "disabled": true
+                },
+                {
+                  "key": "uq",
+                  "value": "muj-id\"'"
+                },
+                {
+                  "key": "secure",
+                  "value": "1"
+                },
+                {
+                  "key": "expiration",
+                  "value": "2025-07-13 07:06:42.456406"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "watchlist",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "usertoken",
+                "value": "{{usertoken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/user/watchlist",
+              "host": ["{{url}}"],
+              "path": ["user", "watchlist"],
+              "query": [
+                {
+                  "key": "add",
+                  "value": "pool1xm90p8nl7kaqvsskrvtyq60z70rx4afdfj4xex89u9gns62t0er",
+                  "description": "pool",
+                  "disabled": true
+                },
+                {
+                  "key": "add",
+                  "value": "asset1mvqjrt76g9yxsle3z92ums7snlpg02p274gek4",
+                  "description": "asset",
+                  "disabled": true
+                },
+                {
+                  "key": "add",
+                  "value": "addr_test1qp6l5h9nudq9m9csr9csx6chds5f2a00sqkh4tlqalae5czslz3zsmfukzsttuep6gmdspa2ugc0mvhuy8mk0w695avszdjfxc",
+                  "description": "address",
+                  "disabled": true
+                },
+                {
+                  "key": "remove",
+                  "value": "asset18ky0qcwxn563d7u7f3l8fyjaw883z5qpgla47y",
+                  "disabled": true
+                },
+                {
+                  "key": "add",
+                  "value": "asset18ky0qcwxn563d7u7f3l8fyjaw883z5qpgla47y",
+                  "disabled": true
+                },
+                {
+                  "key": "label",
+                  "value": "testlab",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "info",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "debug",
+                "value": "1",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "content-type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "usertoken",
+                "value": "{{usertoken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/user/info",
+              "host": ["{{url}}"],
+              "path": ["user", "info"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "auth",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{api-key}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "url",
+      "value": "https://api-preprod-stage.cexplorer.io/v1",
+      "type": "string"
+    },
+    {
+      "key": "url",
+      "value": "http://cex2024.local/v1",
+      "type": "string",
+      "disabled": true
+    },
+    {
+      "key": "network",
+      "value": "preprod",
+      "type": "string"
+    },
+    {
+      "key": "api-key",
+      "value": "x",
+      "type": "string"
+    },
+    {
+      "key": "usertoken",
+      "value": "auth token",
+      "type": "string"
+    }
+  ]
+}

@@ -1,0 +1,177 @@
+{
+  "proto": "https",
+  "domain": "preprod-stage.cexplorer.io",
+  "public": false,
+  "nft": "75dcafb17dc8c6e77636f022b932618b5ed2a6cda9a1fe4ddd414737",
+  "network": "preprod",
+  "api": [
+    {
+      "endpoint": "https://api-preprod-stage.cexplorer.io/v1",
+      "authType": "none"
+    }
+  ],
+  "supportedWallets": [
+    {
+      "yoroi": [
+        {
+          "pos": 1,
+          "features": ["web3", "sign"],
+          "name": "Yoroi",
+          "url": "https://yoroi-wallet.com/",
+          "visible": true,
+          "recommended": true
+        }
+      ],
+      "trezor": [
+        {
+          "pos": 2,
+          "features": [],
+          "name": "Trezor",
+          "url": "https://trezor.io/",
+          "visible": true,
+          "recommended": false
+        }
+      ],
+      "flint": [
+        {
+          "pos": 3,
+          "features": ["web3", "sign"],
+          "name": "Flint",
+          "url": "https://flint-wallet.com/",
+          "visible": false,
+          "recommended": false
+        }
+      ],
+      "nufi": [
+        {
+          "pos": 4,
+          "features": ["web3", "sign"],
+          "name": "NuFi",
+          "url": null,
+          "visible": true,
+          "recommended": false
+        }
+      ],
+      "adalite": [
+        {
+          "pos": 5,
+          "features": [],
+          "name": "Adalite",
+          "url": null,
+          "visible": true,
+          "recommended": false
+        }
+      ],
+      "lace": [
+        {
+          "pos": 6,
+          "features": ["web3", "sign"],
+          "name": "Lace",
+          "url": null,
+          "visible": true,
+          "recommended": false
+        }
+      ],
+      "nufiSnap": [
+        {
+          "pos": 7,
+          "features": ["web3", "sign"],
+          "name": "metamask",
+          "url": null,
+          "visible": true,
+          "recommended": false
+        }
+      ],
+      "nufiSSO": [
+        {
+          "pos": 8,
+          "features": ["web3", "sign"],
+          "name": "nufisso",
+          "url": null,
+          "visible": true,
+          "recommended": false
+        }
+      ],
+      "eternl": [
+        {
+          "pos": 9,
+          "features": ["web3", "sign"],
+          "name": "eternl",
+          "url": null,
+          "visible": true,
+          "recommended": false
+        }
+      ]
+    }
+  ],
+  "market": [
+    {
+      "token": [
+        {
+          "active": false
+        }
+      ],
+      "nft": [
+        {
+          "active": false
+        }
+      ]
+    }
+  ],
+  "lng": ["en", "cs"],
+  "currency": ["usd", "eur"],
+  "ipfs":"https://ipfs.blockfrost.dev/ipfs/",
+  "donationAddress": "addr1q884cpmm2et7jhdc28ty70gxwwhdszu2c402986nr2jl2zg7cczh3v50t8keh8767eg5hesgkzm7569qtuaky8nh2n7qh4k6y8",
+  "supportedPools": [
+    "pool1e0arfuamnymdkmjztvkryasxv9d8u8key27ajgc4mquz2nr8mk9",
+    "pool107k26e3wrqxwghju2py40ngngx2qcu48ppeg7lk0cm35jl2aenx",
+    "pool13la5erny3srx9u4fz9tujtl2490350f89r4w4qjhk0vdjmuv78v"
+  ],
+  "featured": [
+    {
+      "modules": ["pool", "asset", "policy", "drep", "collection"]
+    }
+  ],
+  "integration": [
+    {
+      "dexhunter": [{
+        "active":true,
+        "stable":false,
+        "api":"api-us.dexhunterv3.app",
+        "key":"cexplorer61646472317138383463706d6d326574376a686463323874793730677877776864737a7532633430323938366e72326a6c327a673763637a683376353074386b656838373637656735686573676b7a6d37353639717475616b79386e68326e377168346b367938da39a3ee5e6b4b0d3255bfef95601890afd80709",
+        "name":"cexplorer"        
+      }],
+      "adahandle": [
+        {
+          "active": true,
+          "policy": "f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a"
+        }
+      ]
+    }
+  ],
+  "enabledFeatures": [
+    {
+      "user": ["web3_login", "web3_signActions", "web3_cexGov", "pseudoLogin"]
+    }
+  ],
+  "services": [{
+    "googleTag":"G-5H13N9YB6Z"
+  }],
+  "genesisParams": [
+    {
+      "byron": [
+        {
+          "slotDuration": 21600
+        }
+      ],
+      "shelley": [
+        {
+          "activeSlotsCoeff": 0.05,
+          "shelleyStartEpoch": 4,
+          "epochLength": 432000,
+          "maxLovelaceSupply": 45000000000000000
+        }
+      ]
+    }
+  ]
+}

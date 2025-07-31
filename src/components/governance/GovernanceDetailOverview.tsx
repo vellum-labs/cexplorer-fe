@@ -1,0 +1,804 @@
+import type { useFetchGovernanceActionDetail } from "@/services/governance";
+import type { FC } from "react";
+
+import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
+import { OverviewCard } from "../global/cards/OverviewCard";
+import { CircleHelp } from "lucide-react";
+import Copy from "../global/Copy";
+import PulseDot from "../global/PulseDot";
+import { AdaWithTooltip } from "../global/AdaWithTooltip";
+
+import { Image } from "../global/Image";
+import { formatString } from "@/utils/format/format";
+import { Link } from "@tanstack/react-router";
+import { getGovActionStatus } from "@/utils/gov/getGovActionStatus";
+import { useFetchMiscBasic } from "@/services/misc";
+import { useMiscConst } from "@/hooks/useMiscConst";
+import { TimeDateIndicator } from "../global/TimeDateIndicator";
+import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
+import { ActionTypes } from "../global/ActionTypes";
+import { determineApproval } from "@/utils/determineApproval";
+import { GovernanceCard } from "./GovernanceCard";
+import { SafetyLinkModal } from "../global/modals/SafetyLinkModal";
+import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
+
+import { useState } from "react";
+import { Tooltip } from "../ui/tooltip";
+import { VoteBadge } from "../global/badges/VoteBadge";
+import type { Vote } from "@/constants/votes";
+
+interface GovernanceDetailOverviewProps {
+  query: ReturnType<typeof useFetchGovernanceActionDetail>;
+}
+
+export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
+  query,
+}) => {
+  const committeeMembers = query?.data?.data?.committee?.member;
+  const votingProcedure = query?.data?.data?.voting_procedure;
+
+  const [clickedUrl, setClickedUrl] = useState<string | null>(null);
+
+  const shouldDRepVote = (type: string): boolean => {
+    const supported = [
+      "NoConfidence",
+      "NewCommittee",
+      "NewConstitution",
+      "HardForkInitiation",
+      "ParameterChange",
+      "TreasuryWithdrawals",
+      "InfoAction",
+    ];
+    return supported.includes(type);
+  };
+
+  const shouldSPOVote = (type: string): boolean => {
+    const supported = [
+      "NoConfidence",
+      "NewCommittee",
+      "HardForkInitiation",
+      "InfoAction",
+    ];
+    return supported.includes(type);
+  };
+
+  const votingDreps = (votingProcedure ?? []).filter(
+    item => item?.voter_role === "DRep",
+  );
+
+  const votingSPOs = (votingProcedure ?? []).filter(
+    item => item?.voter_role === "SPO",
+  );
+
+  const votingSposTotalStake = votingSPOs.reduce(
+    (a, b) => a + b?.stat?.stake,
+    0,
+  );
+
+  const votingSposAbstainStake = votingSPOs
+    .filter(item => item?.vote === "Abstain")
+    .reduce((a, b) => a + b?.stat?.stake, 0);
+
+  const votingSposVotedStake = votingSPOs
+    .filter(item => item?.vote !== "Abstain")
+    .reduce((a, b) => a + b?.stat?.stake, 0);
+
+  const calculateStake = (votingGroup, voteType: any = null) => {
+    return votingGroup
+      .filter(item => (voteType ? item?.vote === voteType : true))
+      .reduce((a, b) => a + (b?.stat?.stake || 0), 0);
+  };
+
+  const drepsYes = calculateStake(votingDreps, "Yes");
+  const drepsNo = calculateStake(votingDreps, "No");
+  const drepsNoConfidence =
+    query.data?.data?.total?.drep?.drep_always_no_confidence.stake ?? 0;
+
+  const drepsYesCount = (votingProcedure ?? []).find(
+    v => v.vote === "Yes" && v.voter_role === "DRep",
+  )?.count;
+  const drepsNoCount = (votingProcedure ?? []).find(
+    v => v.vote === "No" && v.voter_role === "DRep",
+  )?.count;
+  const drepsAbstainManual =
+    (votingProcedure ?? []).find(
+      v => v.vote === "Abstain" && v.voter_role === "DRep",
+    )?.stat.stake ?? 0;
+  const drepsAbstainCount =
+    (votingProcedure ?? []).find(
+      v => v.vote === "Abstain" && v.voter_role === "DRep",
+    )?.count ?? 0;
+  const drepsAbstainAuto =
+    query.data?.data?.total?.drep?.drep_always_abstain.stake ?? 0;
+  const drepsNoConfidenceDelegators =
+    query.data?.data?.total?.drep?.drep_always_no_confidence.represented_by ??
+    0;
+
+  const drepTotalStake =
+    (query.data?.data?.total?.drep?.stake ?? 0) +
+    (query.data?.data?.total?.drep?.drep_always_abstain.stake ?? 0);
+  const drepAbstainStake = drepsAbstainManual + drepsAbstainAuto;
+  const drepVotingStake = query.data?.data?.total?.drep?.stake ?? 0;
+
+  const drepsNotVotedStake =
+    drepTotalStake -
+    (drepsYes + drepsNo + drepsNoConfidence + drepAbstainStake);
+
+  const drepsWhoVotedCount = votingDreps.length;
+
+  const totalDrepCount = query.data?.data?.total?.drep?.count ?? 0;
+
+  const drepsNotVotedCount = totalDrepCount - drepsWhoVotedCount;
+
+  const sposYes = calculateStake(votingSPOs, "Yes");
+  const sposNo = calculateStake(votingSPOs, "No");
+  const sposNoConfidence = calculateStake(votingSPOs, "No confidence");
+  const sposNotVoted = calculateStake(votingSPOs, "Not voted");
+
+  const sposYesCount =
+    (votingProcedure ?? []).find(
+      v => v.vote === "Yes" && v.voter_role === "SPO",
+    )?.count ?? 0;
+
+  const sposNoCount =
+    (votingProcedure ?? []).find(v => v.vote === "No" && v.voter_role === "SPO")
+      ?.count ?? 0;
+
+  const sposAbstainCount =
+    (votingProcedure ?? []).find(
+      v => v.vote === "Abstain" && v.voter_role === "SPO",
+    )?.count ?? 0;
+
+  const sposAbstainManual =
+    (votingProcedure ?? []).find(
+      v => v.vote === "Abstain" && v.voter_role === "SPO",
+    )?.stat.stake ?? 0;
+
+  const sposNotVotedCount =
+    (query.data?.data?.total?.spo?.count ?? 0) - votingSPOs.length;
+
+  const generatePieChartData = (yes, no, noConfidence, notVoted) => [
+    {
+      value: yes,
+      name: "Yes",
+      itemStyle: { color: "#1296DB" },
+    },
+    {
+      value: no,
+      name: "No",
+      itemStyle: { color: "#D66A10" },
+    },
+    {
+      value: noConfidence,
+      name: "No confidence",
+      itemStyle: { color: "#E89128" },
+    },
+    {
+      value: notVoted,
+      name: "Not voted",
+      itemStyle: { color: "#F7B96E" },
+    },
+  ];
+
+  const drepsPieChartData = [
+    { value: drepsYes, name: "Yes", itemStyle: { color: "#1296DB" } },
+    { value: drepsNo, name: "No", itemStyle: { color: "#D66A10" } },
+    {
+      value: drepsNoConfidence,
+      name: "No confidence",
+      itemStyle: { color: "#E89128" },
+    },
+    {
+      value: drepsNotVotedStake,
+      name: "Not voted",
+      itemStyle: { color: "#F7B96E" },
+    },
+  ];
+
+  const sposPieChartData = generatePieChartData(
+    sposYes,
+    sposNo,
+    sposNoConfidence,
+    sposNotVoted,
+  );
+
+  const { data: basicData } = useFetchMiscBasic(true);
+  const miscConst = useMiscConst(basicData?.data.version.const);
+
+  const { endTime } = calculateEpochTimeByNumber(
+    query?.data?.data?.expired_epoch ?? 0,
+    miscConst?.epoch.no ?? 0,
+    miscConst?.epoch.start_time ?? "",
+  );
+
+  const { sPOsApproved, dRepsApproved, constitutionalCommitteeApproved } =
+    determineApproval(
+      query?.data?.data?.epoch_param?.[0] ?? {},
+      query?.data?.data?.committee?.member ?? [],
+      query?.data?.data?.committee ?? {},
+      query?.data?.data?.type ?? "",
+      drepsYes / (drepsYes + drepsNo + drepsNoConfidence + drepsNotVotedStake),
+      sposYes / (sposYes + sposNo + sposNoConfidence + sposNotVoted),
+    );
+
+  const ccQuorum = query?.data?.data?.committee?.quorum;
+  const ccThreshold =
+    ccQuorum && ccQuorum.denuminator > 0
+      ? Math.ceil((ccQuorum.numerator / ccQuorum.denuminator) * 100).toFixed(2)
+      : "67.00";
+
+  const action = [
+    {
+      label: "Title",
+      value: query?.data?.data?.anchor?.offchain?.name ?? "⚠️ Invalid metadata",
+    },
+    {
+      label: "Action type",
+      value: query?.data?.data?.type ? (
+        <ActionTypes title={query?.data?.data?.type as ActionTypes} />
+      ) : (
+        "-"
+      ),
+    },
+    {
+      label: "Action ID",
+      value: (
+        <div className='flex items-center gap-1'>
+          <span>
+            {formatString(query?.data?.data?.ident?.bech ?? "", "longer")}
+          </span>
+          <Copy copyText={query?.data?.data?.ident?.bech} />
+        </div>
+      ),
+    },
+    {
+      label: "Action start date",
+      value: <TimeDateIndicator time={query?.data?.data?.tx?.time} />,
+    },
+    {
+      label: "Action end date",
+      value: query?.data?.data?.expired_epoch ? (
+        <TimeDateIndicator time={endTime.toString()} />
+      ) : (
+        "-"
+      ),
+    },
+  ];
+
+  const blockchain_records = [
+    {
+      label: "Submit transaction",
+      value: (
+        <Link
+          to='/tx/$hash'
+          params={{
+            hash: query?.data?.data?.tx?.hash ?? "",
+          }}
+        >
+          <span className='text-primary'>
+            {formatString(query?.data?.data?.tx?.hash ?? "", "longer")}
+          </span>
+        </Link>
+      ),
+    },
+    {
+      label: "Stake address",
+      value: (
+        <Link
+          to='/stake/$stakeAddr'
+          params={{
+            stakeAddr: query?.data?.data?.return_address?.view ?? "",
+          }}
+        >
+          <span className='text-primary'>
+            {formatString(
+              query?.data?.data?.return_address?.view ?? "",
+              "longer",
+            )}
+          </span>
+        </Link>
+      ),
+    },
+    {
+      label: "Deposit",
+      value: <AdaWithTooltip data={query?.data?.data?.deposit ?? 0} />,
+    },
+    {
+      label: "Anchor",
+      value: (
+        <div className='flex flex-col gap-1'>
+          <span>
+            {formatString(query?.data?.data?.anchor?.data_hash ?? "", "longer")}
+          </span>
+          <a
+            target='_blank'
+            href={transformAnchorUrl(query?.data?.data?.anchor?.url) ?? ""}
+            className='text-primary'
+            onClick={e => {
+              e.preventDefault();
+              const transformedUrl = transformAnchorUrl(
+                query?.data?.data?.anchor?.url,
+              );
+              setClickedUrl(transformedUrl);
+            }}
+          >
+            {formatString(
+              transformAnchorUrl(query?.data?.data?.anchor?.url),
+              "longer",
+            )}
+          </a>
+        </div>
+      ),
+    },
+  ];
+
+  const howMuchVoted = (
+    ((committeeMembers?.filter(item => item?.vote === "Yes").length ?? 0) *
+      100) /
+    (committeeMembers ?? []).length
+  ).toFixed(2);
+
+  const votedPercent = {
+    notVoted: Math.round(
+      ((committeeMembers ?? [])?.filter(
+        item => item?.vote === null || item?.vote === "Abstain",
+      ).length *
+        100) /
+        (committeeMembers ?? []).length,
+    ),
+    yes: Math.round(
+      ((committeeMembers ?? [])?.filter(
+        item => item?.vote !== null && item?.vote === "Yes",
+      ).length *
+        100) /
+        (committeeMembers ?? []).length,
+    ),
+    no: Math.round(
+      ((committeeMembers ?? [])?.filter(
+        item => item?.vote !== null && item?.vote === "No",
+      ).length *
+        100) /
+        (committeeMembers ?? []).length,
+    ),
+  };
+
+  const const_committee = [
+    ...(committeeMembers ?? []).map(item => ({
+      label: item?.registry?.name ? (
+        <div className='flex items-center gap-3 py-1.5 text-xs'>
+          {item?.registry?.img && (
+            <Image
+              src={item?.registry?.img}
+              className='h-[18px] w-[18px] rounded-lg object-cover'
+              alt={item?.registry?.name}
+              height={200}
+            />
+          )}
+          <span>{item?.registry?.name}</span>
+        </div>
+      ) : (
+        <div className='flex items-center gap-3 py-1.5 text-xs'>
+          <div className='invisible h-[18px] w-[18px]'></div>
+          <span>{formatString(item?.ident?.raw, "long")}</span>
+        </div>
+      ),
+      value: (() => {
+        return (
+          <div className='flex w-full items-center justify-end'>
+            <VoteBadge vote={item?.vote as Vote} />
+          </div>
+        );
+      })(),
+    })),
+  ];
+
+  const dreps = [
+    {
+      label: "Total stake",
+      value: (
+        <div className='flex items-center gap-2'>
+          <AdaWithTooltip data={drepTotalStake} />
+          <span className='text-xs text-grayTextSecondary'>(100%)</span>
+        </div>
+      ),
+    },
+    {
+      label: "Abstain stake",
+      value: (
+        <div className='flex items-center gap-2'>
+          <Tooltip
+            content={
+              <div className='flex flex-col'>
+                <span>
+                  From votes:{" "}
+                  <AdaWithTooltip data={drepsAbstainManual} tooltip={false} />
+                </span>
+                <span>
+                  From DReps:{" "}
+                  <AdaWithTooltip data={drepsAbstainAuto} tooltip={false} />
+                </span>
+              </div>
+            }
+          >
+            <AdaWithTooltip data={drepAbstainStake} tooltip={false} />
+          </Tooltip>
+          <span className='text-xs text-grayTextSecondary'>
+            ({((drepAbstainStake * 100) / drepTotalStake).toFixed(2)}%)
+          </span>
+        </div>
+      ),
+    },
+    {
+      label: "Voting stake",
+      value: (
+        <div className='flex items-center gap-2'>
+          <AdaWithTooltip data={drepVotingStake} />
+          <span className='text-xs text-grayTextSecondary'>
+            ({((drepVotingStake * 100) / drepTotalStake).toFixed(2)}%)
+          </span>
+        </div>
+      ),
+    },
+  ];
+
+  const spos = [
+    {
+      label: "Total stake",
+      value: (
+        <div className='flex items-center gap-2'>
+          <AdaWithTooltip data={votingSposTotalStake} />
+          <span className='text-xs text-grayTextSecondary'>(100%)</span>
+        </div>
+      ),
+    },
+    {
+      label: "Abstain stake",
+      value: (
+        <div className='flex items-center gap-2'>
+          <AdaWithTooltip data={votingSposAbstainStake} />
+          <span className='text-xs text-grayTextSecondary'>
+            (
+            {(votingSposAbstainStake * 100) / votingSposTotalStake < 100
+              ? ((votingSposAbstainStake * 100) / votingSposTotalStake).toFixed(
+                  2,
+                )
+              : "100"}
+            %)
+          </span>
+        </div>
+      ),
+    },
+    {
+      label: "Voting stake",
+      value: (
+        <div className='flex items-center gap-2'>
+          <AdaWithTooltip data={votingSposVotedStake} />
+          <span className='text-xs text-grayTextSecondary'>
+            (
+            {(votingSposVotedStake * 100) / votingSposTotalStake < 100
+              ? ((votingSposVotedStake * 100) / votingSposTotalStake).toFixed(2)
+              : "100"}
+            %)
+          </span>
+        </div>
+      ),
+    },
+  ];
+
+  return (
+    <>
+      <section className='flex w-full flex-col items-center gap-2'>
+        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pt-3 md:px-desktop xl:flex-nowrap xl:justify-start'>
+          <div className='flex grow basis-[980px] flex-wrap items-stretch gap-5'>
+            {query.isLoading ? (
+              <>
+                <LoadingSkeleton
+                  height='227px'
+                  rounded='xl'
+                  className='grow basis-[300px] px-8 py-4'
+                />
+                <LoadingSkeleton
+                  height='227px'
+                  rounded='xl'
+                  className='grow basis-[300px] px-8 py-4'
+                />
+              </>
+            ) : (
+              !query.isError && (
+                <>
+                  <div className='flex-grow basis-[410px] md:flex-shrink-0'>
+                    <OverviewCard
+                      title='Governance action'
+                      subTitle={(() => {
+                        const status = getGovActionStatus(
+                          query?.data?.data ?? {
+                            dropped_epoch: null,
+                            enacted_epoch: null,
+                            expired_epoch: null,
+                            ratified_epoch: null,
+                          },
+                          miscConst?.no,
+                        );
+
+                        if (!status) {
+                          return "-";
+                        }
+
+                        const statusColor =
+                          status === "Active"
+                            ? "#17B26A"
+                            : status === "Enacted"
+                              ? "#00A9E3"
+                              : status === "Expired"
+                                ? "#F79009"
+                                : "#079455";
+
+                        return (
+                          <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-lg border border-border px-[10px]'>
+                            <PulseDot
+                              color={statusColor}
+                              animate={status === "Active"}
+                            />
+                            <span className='text-xs font-medium'>
+                              {status}
+                            </span>
+                          </div>
+                        );
+                      })()}
+                      overviewList={action}
+                      className='h-full'
+                    />
+                  </div>
+
+                  <div className='flex-grow basis-[410px] md:flex-shrink-0'>
+                    <OverviewCard
+                      title='Blockchain records'
+                      overviewList={blockchain_records}
+                      className='h-full'
+                    />
+                  </div>
+                </>
+              )
+            )}
+          </div>
+        </div>
+        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pt-3 md:px-desktop xl:flex-nowrap xl:justify-start'>
+          <div className='flex grow basis-[980px] flex-wrap items-stretch gap-5'>
+            {query.isLoading ? (
+              <>
+                <LoadingSkeleton
+                  height='227px'
+                  rounded='xl'
+                  className='grow basis-[300px] px-8 py-4'
+                />
+                <LoadingSkeleton
+                  height='227px'
+                  rounded='xl'
+                  className='grow basis-[300px] px-8 py-4'
+                />
+                <LoadingSkeleton
+                  height='227px'
+                  rounded='xl'
+                  className='grow basis-[300px] px-8 py-4'
+                />
+              </>
+            ) : (
+              !query.isError && (
+                <>
+                  <div className='flex-grow basis-[410px] md:flex-shrink-0'>
+                    <OverviewCard
+                      title='Constitutional committee'
+                      subTitle={
+                        constitutionalCommitteeApproved ? (
+                          <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-2xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
+                            <PulseDot color='#17B26A' animate />
+                            <span className='text-xs font-medium text-[#17B26A]'>
+                              Approved
+                            </span>
+                          </div>
+                        ) : (
+                          <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-2xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
+                            <PulseDot color='#F79009' animate />
+                            <span className='text-xs font-medium text-[#B54708]'>
+                              Not approved
+                            </span>
+                          </div>
+                        )
+                      }
+                      labelClassname='w-full'
+                      tBodyClassname={`${(committeeMembers ?? []).length > 7 ? "max-h-[300px] thin-scrollbar px-1 overflow-auto" : ""}`}
+                      leading
+                      hFit
+                      endContent={
+                        <div
+                          className={`flex w-full flex-col justify-end py-2 ${(committeeMembers ?? []).length < 7 ? "h-full" : ""} ${(committeeMembers ?? []).length === 7 ? "pb-0" : "pb-4"}`}
+                        >
+                          <div className='mt-2 flex w-full items-center justify-between border-t border-border pt-2'>
+                            <div className='flex items-center gap-[2px]'>
+                              <CircleHelp
+                                size={11}
+                                className='text-grayTextPrimary'
+                              />
+                              <span className='text-xs font-medium text-grayTextPrimary'>
+                                Threshold:
+                              </span>
+                            </div>
+                            <span className='text-xs font-medium text-grayTextPrimary'>
+                              {ccThreshold}%
+                            </span>
+                          </div>
+                          <div className='flex w-full items-center gap-3 pt-2'>
+                            <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#FEC84B]'>
+                              <span
+                                className='absolute top-0 block h-2 bg-[#00A9E3]'
+                                style={{
+                                  width: `${votedPercent?.yes}%`,
+                                }}
+                              ></span>
+                              <span
+                                className='absolute top-0 block h-2 bg-grayTextSecondary'
+                                style={{
+                                  width: `${votedPercent?.notVoted}%`,
+                                  left: `calc(${votedPercent?.yes}% + 0px)`,
+                                }}
+                              ></span>
+                              <span
+                                className='absolute top-0 block h-2 bg-[#DC6803]'
+                                style={{
+                                  width: `${votedPercent?.no}%`,
+                                  left: `calc(${votedPercent?.yes}% + ${votedPercent?.notVoted}% + 0px)`,
+                                }}
+                              ></span>
+                            </div>
+                            <div className='flex gap-2 text-xs font-medium text-grayTextPrimary'>
+                              <span className=''>{howMuchVoted}%</span>
+                            </div>
+                          </div>
+                        </div>
+                      }
+                      overviewList={const_committee}
+                      className='h-full'
+                    />
+                  </div>
+
+                  {shouldDRepVote(query.data?.data?.type ?? "") ? (
+                    <div className='flex-grow basis-[410px] md:flex-shrink-0'>
+                      <OverviewCard
+                        title={
+                          <div className='flex items-center gap-2'>
+                            <span>DReps</span>
+                            <span className='text-sm font-normal text-grayTextPrimary'>
+                              {query.data?.data?.total.drep.count}
+                            </span>
+                          </div>
+                        }
+                        subTitle={
+                          dRepsApproved ? (
+                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-2xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
+                              <PulseDot color='#17B26A' animate />
+                              <span className='text-xs font-medium text-[#17B26A]'>
+                                Approved
+                              </span>
+                            </div>
+                          ) : (
+                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-2xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
+                              <PulseDot color='#F79009' animate />
+                              <span className='text-xs font-medium text-[#B54708]'>
+                                Not approved
+                              </span>
+                            </div>
+                          )
+                        }
+                        endContent={
+                          <GovernanceCard
+                            yes={drepsYes}
+                            no={drepsNo}
+                            noConfidence={drepsNoConfidence}
+                            notVoted={drepsNotVotedStake}
+                            pieChartData={drepsPieChartData}
+                            breakdown={{
+                              yes: { voters: drepsYesCount ?? 0 },
+                              no: { voters: drepsNoCount ?? 0 },
+                              notVoted: { voters: drepsNotVotedCount },
+                              abstain: {
+                                voters: drepsAbstainCount,
+                                autoStake: drepsAbstainAuto,
+                                manualStake: drepsAbstainManual,
+                              },
+                              noConfidence: {
+                                delegators: drepsNoConfidenceDelegators,
+                              },
+                            }}
+                          />
+                        }
+                        hFit
+                        overviewList={dreps}
+                        className='h-full'
+                      />
+                    </div>
+                  ) : (
+                    <div className='flex-grow basis-[410px] md:flex-shrink-0'>
+                      <OverviewCard
+                        title='DReps'
+                        subTitle='DReps are not voting on this governance action'
+                        className='flex h-full items-center justify-center text-sm text-grayTextSecondary'
+                      />
+                    </div>
+                  )}
+
+                  {shouldSPOVote(query.data?.data?.type ?? "") ? (
+                    <div className='flex-grow basis-[410px] md:flex-shrink-0'>
+                      <OverviewCard
+                        title={
+                          <div className='flex items-center gap-2'>
+                            <span>SPOs</span>
+                            <span className='text-sm font-normal text-grayTextPrimary'>
+                              {query.data?.data?.total.spo.count}
+                            </span>
+                          </div>
+                        }
+                        subTitle={
+                          sPOsApproved ? (
+                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-2xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
+                              <PulseDot color='#17B26A' animate />
+                              <span className='text-xs font-medium text-[#17B26A]'>
+                                Approved
+                              </span>
+                            </div>
+                          ) : (
+                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-2xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
+                              <PulseDot color='#F79009' animate />
+                              <span className='text-xs font-medium text-[#B54708]'>
+                                Not approved
+                              </span>
+                            </div>
+                          )
+                        }
+                        overviewList={spos}
+                        className='h-full'
+                        endContent={
+                          <GovernanceCard
+                            yes={sposYes}
+                            no={sposNo}
+                            noConfidence={sposNoConfidence}
+                            notVoted={sposNotVoted}
+                            pieChartData={sposPieChartData}
+                            breakdown={{
+                              yes: { voters: sposYesCount },
+                              no: { voters: sposNoCount },
+                              notVoted: { voters: sposNotVotedCount },
+                              abstain: {
+                                voters: sposAbstainCount,
+                                autoStake: 0,
+                                manualStake: sposAbstainManual,
+                              },
+                              noConfidence: {
+                                delegators: 0,
+                              },
+                            }}
+                          />
+                        }
+                        hFit
+                      />
+                    </div>
+                  ) : (
+                    <div className='flex-grow basis-[410px] md:flex-shrink-0'>
+                      <OverviewCard
+                        title='SPOs'
+                        subTitle='SPOs are not voting on this governance action'
+                        className='flex h-full items-center justify-center text-sm text-grayTextSecondary'
+                      />
+                    </div>
+                  )}
+                </>
+              )
+            )}
+          </div>
+        </div>
+      </section>
+      {clickedUrl && (
+        <SafetyLinkModal url={clickedUrl} onClose={() => setClickedUrl(null)} />
+      )}
+    </>
+  );
+};

@@ -1,0 +1,190 @@
+import type { MiscSearch } from "@/types/miscTypes";
+import type { FC } from "react";
+
+import Modal from "../Modal";
+import TextInput from "../inputs/TextInput";
+import Button from "../Button";
+
+import { useState } from "react";
+import { useLocaleStore } from "@/stores/localeStore";
+import useDebounce from "@/hooks/useDebounce";
+import { useFetchMiscSearch } from "@/services/misc";
+import { useThemeStore } from "@/stores/themeStore";
+import { Link } from "@tanstack/react-router";
+import { formatString } from "@/utils/format/format";
+import Copy from "../Copy";
+import { ActionTypes } from "../ActionTypes";
+
+interface DisplayVoteModalProps {
+  onClose: () => void;
+  onDisplay?: (value: string) => void;
+}
+
+export const DisplayVoteModal: FC<DisplayVoteModalProps> = ({
+  onClose,
+  onDisplay,
+}) => {
+  const { locale } = useLocaleStore();
+  const { theme } = useThemeStore();
+
+  const [focused, setFocused] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>("");
+
+  const debouncedSearch = useDebounce(search.toLowerCase());
+
+  const {
+    data: queryData,
+    isLoading,
+    isFetching,
+  } = useFetchMiscSearch(
+    debouncedSearch ? debouncedSearch : undefined,
+    "gov_action_proposal",
+    locale,
+  );
+
+  const data = queryData?.data as MiscSearch;
+
+  const hasData =
+    search &&
+    data &&
+    Array.isArray(data) &&
+    data.length &&
+    !isLoading &&
+    !isFetching;
+
+  const noResult =
+    !isLoading &&
+    !isFetching &&
+    search &&
+    Array.isArray(data) &&
+    (data as any).length === 0;
+
+  return (
+    <Modal minWidth='95%' maxWidth='600px' maxHeight='95%' onClose={onClose}>
+      <TextInput
+        value={search}
+        onchange={value => setSearch(value)}
+        placeholder='Search governance action ID...'
+        showSearchIcon={!focused}
+        inputClassName={`w-full bg-background`}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        autoCapitalize='off'
+      />
+      <div
+        className={`flex h-[220px] w-full items-center justify-center py-2 ${!data ? "items-center justify-center" : ""}`}
+      >
+        {!search && (
+          <span className='px-3 py-3 text-center text-sm'>
+            Looks like you're missing a Gov Action ID. Enter one to find
+            results!
+          </span>
+        )}
+        {search && !data && (
+          <div className='flex h-[150px] w-full items-center justify-center'>
+            <div
+              className={`loader h-[40px] w-[40px] border-[4px] ${theme === "light" ? "border-[#F2F4F7] border-t-darkBlue" : "border-[#475467] border-t-[#5EDFFA]"} border-t-[4px]`}
+            ></div>
+          </div>
+        )}
+        {noResult && (
+          <span className='px-3 py-3 text-center text-sm'>
+            No results. Check your input and try again.
+          </span>
+        )}
+        {!!hasData && (
+          <div className='flex h-full w-full flex-col'>
+            <div className='flex h-full w-full justify-between gap-3 border-b border-border p-3 text-sm text-text'>
+              <div>Type</div>
+              {data[0]?.extra?.type ? (
+                <ActionTypes title={data[0]?.extra?.type as any} />
+              ) : (
+                "-"
+              )}
+            </div>
+            <div className='flex h-full w-full justify-between gap-3 border-b border-border p-3 text-sm text-text'>
+              <div>Title</div>
+              {data[0]?.title ? (
+                <div className='flex items-center gap-4'>
+                  <Link
+                    to='/gov/action/$id'
+                    params={{
+                      id: (data as MiscSearch)[0]?.url
+                        .replace("/gov/action/", "")
+                        .replace("#", "%23"),
+                    }}
+                    className='text-primary'
+                  >
+                    <span className='inline-block max-w-[500px]'>
+                      {data[0]?.title.split(" ")[0].length < 40
+                        ? data[0]?.title
+                        : formatString(data[0]?.title, "long")}
+                    </span>
+                  </Link>
+                  <Copy copyText={data[0]?.title} />
+                </div>
+              ) : (
+                "-"
+              )}
+            </div>
+            <div className='flex h-full w-full justify-between gap-3 border-b border-border p-3 text-sm text-text'>
+              <div>ID</div>
+              {(data[0]?.extra as any)?.id ? (
+                <div className='flex items-center gap-2'>
+                  <Link
+                    to='/gov/action/$id'
+                    params={{
+                      id: (data[0] as MiscSearch)?.url
+                        .replace("/gov/action/", "")
+                        .replace("#", "%23"),
+                    }}
+                    className='text-primary'
+                  >
+                    <span>
+                      {formatString((data[0]?.extra as any)?.id, "longer")}
+                    </span>
+                  </Link>
+                  <Copy copyText={(data[0]?.extra as any)?.id} />
+                </div>
+              ) : (
+                "-"
+              )}
+            </div>
+            <div className='flex h-full w-full justify-between gap-3 border-b border-border p-3 text-sm text-text'>
+              <span>Ident</span>
+              {data[0]?.ident ? (
+                <div className='flex items-center gap-2'>
+                  <span>{formatString(data[0]?.ident, "longer")}</span>
+                  <Copy
+                    copyText={data[0]?.ident}
+                    className='translate-y-[2px]'
+                  />
+                </div>
+              ) : (
+                "-"
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+      <div className='flex w-full items-center justify-end gap-2'>
+        <Button variant='tertiary' size='md' label='Cancel' onClick={onClose} />
+        <Button
+          variant='primary'
+          size='md'
+          label='Add governance action'
+          disabled={!hasData}
+          onClick={() => {
+            if (onDisplay) {
+              onDisplay((data as any)[0]?.extra?.id);
+            }
+
+            if (onClose) {
+              onClose();
+            }
+          }}
+        />
+      </div>
+    </Modal>
+  );
+};

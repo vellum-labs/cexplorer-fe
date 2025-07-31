@@ -1,0 +1,89 @@
+import { supportedPools } from "@/constants/confVariables";
+import { useCheckUserDelegation } from "@/services/account";
+import { useFetchPoolDetail } from "@/services/pools";
+import { useFetchUserInfo } from "@/services/user";
+import { useWalletStore } from "@/stores/walletStore";
+import { handleDelegation } from "@/utils/wallet/handleDelegation";
+import Button from "../global/Button";
+import Modal from "../global/Modal";
+import SpinningLoader from "../global/SpinningLoader";
+
+interface Props {
+  onClose: () => void;
+}
+
+const DelegationModal = ({ onClose }: Props) => {
+  const { job } = useWalletStore();
+  const randomPool =
+    supportedPools[Math.floor(Math.random() * supportedPools.length)];
+
+  const poolQuery = useFetchPoolDetail(randomPool, undefined);
+  const poolData = poolQuery.data?.data;
+  const poolName = poolData?.pool_name;
+  const userQuery = useFetchUserInfo();
+  const view =
+    userQuery.data?.data?.account && userQuery.data?.data?.account.length > 0
+      ? userQuery.data?.data?.account[0].view
+      : undefined;
+  const delegationQuery = useCheckUserDelegation(view);
+  const delegationData = delegationQuery.data?.data;
+  const livePool = userQuery.data?.data?.account[0].live_pool;
+
+  if (poolQuery.isLoading || delegationQuery.isLoading) {
+    return (
+      <Modal
+        minHeight='400px'
+        minWidth='400px'
+        maxWidth='95%'
+        onClose={onClose}
+      >
+        <div className='flex h-full w-full items-center justify-center'>
+          <SpinningLoader />
+        </div>
+      </Modal>
+    );
+  }
+
+  return (
+    <Modal minHeight='400px' minWidth='400px' maxWidth='95%' onClose={onClose}>
+      {!Array.isArray(delegationData) ? (
+        <div className='flex h-full w-full flex-col items-center justify-around'>
+          {poolName?.ticker && poolName.name ? (
+            <h2 className='mt-2'>
+              [{poolName?.ticker}] {poolName?.name}
+            </h2>
+          ) : (
+            <h3 className='mt-2 break-all text-center'>{randomPool}</h3>
+          )}
+          <p className='text-center text-sm'>{poolName?.description}</p>
+
+          <Button
+            className='mt-10'
+            label='Delegate'
+            size='lg'
+            variant='primary'
+            onClick={() => handleDelegation(randomPool, job)}
+          />
+        </div> ? (
+          livePool === poolData?.pool_id
+        ) : (
+          <div className='flex h-full w-full items-center justify-center text-center'>
+            You are already delegating to this pool.
+          </div>
+        )
+      ) : livePool ? (
+        <div className='flex h-full w-full items-center justify-center text-center'>
+          You are already delegating to a pool. Please undelegate first to
+          proceed.
+        </div>
+      ) : (
+        <div className='flex h-full w-full items-center justify-center text-center'>
+          We're sorry, but you can't delegate to any pools since your address is
+          not registered.
+        </div>
+      )}
+    </Modal>
+  );
+};
+
+export default DelegationModal;
