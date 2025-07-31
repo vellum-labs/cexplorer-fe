@@ -60,6 +60,12 @@ export const useFilterTable = ({
     return filterKeys.some(key => (search as any)?.[key]);
   }, [search, filterKeys, disableSearchSync]);
 
+  const hasPageParam = useMemo(() => {
+    if (disableSearchSync) return false;
+
+    return !!search?.page && search.page !== 1;
+  }, [search]);
+
   const anchorRefs = useMemo(() => {
     return Object.fromEntries(
       filterKeys.map(key => [key, createRef<HTMLDivElement>()]),
@@ -174,6 +180,19 @@ export const useFilterTable = ({
       [key]: typeof value === "function" ? value(prev[key]) : value,
     }));
   };
+
+  useEffect(() => {
+    if (hasPageParam && hasSearchParams) {
+      setTimeout(() =>
+        navigate({
+          search: {
+            ...search,
+            page: 1,
+          } as any,
+        }),
+      );
+    }
+  }, [hasPageParam, hasSearchParams]);
 
   useEffect(() => {
     const filterStorage = localStorage.getItem(STORAGE_KEY);
