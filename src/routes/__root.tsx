@@ -74,13 +74,14 @@ const RootComponent = () => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  useEffect(() => {
-    abortControllers.abortAll();
+  // ! NEED FIX
+  // useEffect(() => {
+  //   abortControllers.abortAll();
 
-    const controller = abortControllers.create("GLOBAL");
+  //   const controller = abortControllers.create("GLOBAL");
 
-    setGlobalAbortSignal(controller.signal);
-  }, [locationState.pathname, locationState.searchStr]);
+  //   setGlobalAbortSignal(controller.signal);
+  // }, [locationState.pathname, locationState.searchStr]);
 
   return (
     <>
