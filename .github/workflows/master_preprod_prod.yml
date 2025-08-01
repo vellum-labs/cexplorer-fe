@@ -40,6 +40,6 @@ jobs:
 
       - name: Copy files & deploy
         env:
-          SERVER: 10.0.0.2
+          SERVER: 10.0.0.1
         run: |
           rsync -ave "ssh -o StrictHostKeyChecking=no" --omit-dir-times --delete ./dist/ job@$SERVER:/var/www/cexplorer_preprod/
