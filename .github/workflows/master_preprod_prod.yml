@@ -42,4 +42,4 @@ jobs:
         env:
           SERVER: 10.0.0.1
         run: |
-          rsync -ave "ssh -o StrictHostKeyChecking=no" --omit-dir-times --delete ./dist/ job@$SERVER:/var/www/cexplorer_preprod/
+          rsync -azv -e "ssh -o StrictHostKeyChecking=no" --omit-dir-times --no-perms --no-owner --no-group --delete ./dist/ job@$SERVER:/var/www/cexplorer_preprod/
