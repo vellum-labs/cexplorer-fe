@@ -13,6 +13,7 @@ import { PageBase } from "@/components/global/pages/PageBase";
 export const GovernanceVoteDetailPage: FC = () => {
   const route = getRouteApi("/gov/vote/$hash");
   const { hash } = route.useParams();
+  const { tab } = route.useSearch() as { tab?: string };
 
   const { data: voteData, isLoading } = useFetchVoteDetail(hash);
   const votes = voteData?.data?.data ?? [];
@@ -32,6 +33,13 @@ export const GovernanceVoteDetailPage: FC = () => {
       visible: true,
     }));
   }, [votes, isLoading]);
+
+  const activeTabValue = useMemo(() => {
+    if (!tab || !votes.length) return undefined;
+    
+    const matchingVoteIndex = votes.findIndex(vote => vote?.proposal?.ident?.id === tab);
+    return matchingVoteIndex !== -1 ? `vote_${matchingVoteIndex + 1}` : undefined;
+  }, [tab, votes]);
 
   return (
     <PageBase
@@ -79,7 +87,7 @@ export const GovernanceVoteDetailPage: FC = () => {
             </div>
           </div>
         ) : tabs.length > 0 ? (
-          <Tabs items={tabs} />
+          <Tabs items={tabs} activeTabValue={activeTabValue} />
         ) : (
           <p className='text-muted text-center'>
             No votes found for this transaction.

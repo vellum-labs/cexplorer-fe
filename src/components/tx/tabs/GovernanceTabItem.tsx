@@ -1,16 +1,15 @@
 import { ActionTypes } from "@/components/global/ActionTypes";
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
 import { VoterRoleBadge } from "@/components/global/badges/VoterRoleBadge";
-import { VoteBadge } from "@/components/global/badges/VoteBadge";
 import { Vote } from "@/constants/votes";
 import { GovActionCell } from "@/components/gov/GovActionCell";
+import { VoteCell } from "@/components/governance/vote/VoteCell";
 import { GovVoterCell } from "@/components/gov/GovVoterCell";
 import GlobalTable from "@/components/table/GlobalTable";
 import { useFetchTxDetail } from "@/services/tx";
 import type { TableColumns } from "@/types/tableTypes";
 import type { TxDetailData } from "@/types/txTypes";
-import { getRouteApi, Link } from "@tanstack/react-router";
-import { FileText } from "lucide-react";
+import { getRouteApi } from "@tanstack/react-router";
 
 export const GovernanceTabItem = () => {
   const route = getRouteApi("/tx/$hash");
@@ -71,20 +70,11 @@ export const GovernanceTabItem = () => {
         }
 
         return (
-          <div className='flex items-center gap-2'>
-            {hash && (
-              <Link
-                to='/gov/vote/$hash'
-                params={{ hash }}
-                className='text-muted-foreground text-primary'
-                title='Open vote detail'
-              >
-                <FileText size={16} />
-              </Link>
-            )}
-
-            <VoteBadge vote={item.vote as Vote} />
-          </div>
+          <VoteCell
+            vote={item.vote as Vote}
+            txHash={hash}
+            proposalId={item?.proposal?.ident?.id}
+          />
         );
       },
       title: <p>Vote</p>,

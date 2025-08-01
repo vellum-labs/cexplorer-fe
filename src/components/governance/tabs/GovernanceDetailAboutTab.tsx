@@ -15,11 +15,11 @@ import { governanceActionDetailAboutTableOptions } from "@/constants/tables/gove
 import DateCell from "@/components/table/DateCell";
 import { formatNumber } from "@/utils/format/format";
 import { Link, useSearch } from "@tanstack/react-router";
-import { ExternalLink, FileText, Landmark, Route, User, X } from "lucide-react";
+import { ExternalLink, Landmark, Route, User, X } from "lucide-react";
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
 import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 import { GovVoterCell } from "@/components/gov/GovVoterCell";
-import { VoteBadge } from "@/components/global/badges/VoteBadge";
+import { VoteCell } from "@/components/governance/vote/VoteCell";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 
 interface GovernanceDetailAboutTabProps {
@@ -192,20 +192,11 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
         }
 
         return (
-          <div className='flex items-center gap-2'>
-            {item?.tx?.hash && (
-              <Link
-                to='/gov/vote/$hash'
-                params={{ hash: item.tx.hash }}
-                className='text-muted-foreground text-primary'
-                title='Open vote detail'
-              >
-                <FileText size={16} />
-              </Link>
-            )}
-
-            <VoteBadge vote={item?.vote} />
-          </div>
+          <VoteCell
+            vote={item?.vote}
+            txHash={item?.tx?.hash}
+            proposalId={item?.proposal?.ident?.id}
+          />
         );
       },
       title: <p ref={anchorRefs?.vote}>Vote</p>,
