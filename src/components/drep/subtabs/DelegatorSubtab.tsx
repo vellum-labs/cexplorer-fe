@@ -158,43 +158,6 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
       widthPx: 30,
     },
     {
-      key: "loyalty",
-      render: item => {
-        if (!item?.slot_update) {
-          return "-";
-        }
-
-        return (
-          <p className='text-right'>
-            {calculateLoyaltyDays(
-              item.slot_update,
-              miscConst?.epoch_stat?.pots?.slot_no ?? 0,
-            )}
-            d
-          </p>
-        );
-      },
-      title: <p className='w-full text-right'>Loyalty</p>,
-      visible: columnsVisibility.loyalty,
-      widthPx: 50,
-    },
-    {
-      key: "tx",
-      render: item => {
-        if (!item?.live_drep?.tx?.tx_hash) {
-          return "-";
-        }
-
-        return <HashCell hash={item?.live_drep?.tx?.tx_hash} />;
-      },
-      title: <p>Tx</p>,
-      visible: columnsVisibility.tx,
-      widthPx: 60,
-    },
-  ];
-
-  if (type === "migrations") {
-    columns.splice(4, 1, {
       key: "drep_delegation",
       render: item => {
         const previousDrep = item?.previous_drep;
@@ -241,8 +204,42 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
       title: <p>DRep Delegation</p>,
       visible: columnsVisibility.drep_delegation,
       widthPx: 120,
-    });
-  }
+    },
+    {
+      key: "loyalty",
+      render: item => {
+        if (!item?.slot_update) {
+          return "-";
+        }
+
+        return (
+          <p className='text-right'>
+            {calculateLoyaltyDays(
+              item.slot_update,
+              miscConst?.epoch_stat?.pots?.slot_no ?? 0,
+            )}
+            d
+          </p>
+        );
+      },
+      title: <p className='w-full text-right'>Loyalty</p>,
+      visible: columnsVisibility.loyalty,
+      widthPx: 50,
+    },
+    {
+      key: "tx",
+      render: item => {
+        if (!item?.live_drep?.tx?.tx_hash) {
+          return "-";
+        }
+
+        return <HashCell hash={item?.live_drep?.tx?.tx_hash} />;
+      },
+      title: <p>Tx</p>,
+      visible: columnsVisibility.tx,
+      widthPx: 60,
+    },
+  ];
 
   useEffect(() => {
     if (totalDelegators && totalDelegators !== totalItems) {
