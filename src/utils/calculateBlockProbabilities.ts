@@ -21,16 +21,10 @@ const binomialCoefficientLog = (
   return logCoefficient;
 };
 
-export const calculateBlockProbabilities = (
-  estimatedBlocks: number,
-): {
-  blockProbabilities: {
-    blockCount: number;
-    probabilityPercentage: number;
-    cappedCumulative: number;
-  }[];
-  cumulativeProbabilities: { blockCount: number; cappedCumulative: number }[];
-} => {
+const processResults = (
+  probabilityData: { blockCount: number; logProbability: number }[],
+  totalProbabilityLog: number,
+) => {
   const blockProbabilities: {
     blockCount: number;
     probabilityPercentage: number;
@@ -40,21 +34,14 @@ export const calculateBlockProbabilities = (
     blockCount: number;
     cappedCumulative: number;
   }[] = [];
-  const totalBlocks = estimatedBlocks * 2;
-  let totalProbabilityLog = -Infinity;
-  const probabilityData: { blockCount: number; logProbability: number }[] = [];
-
-  for (let blockCount = 0; blockCount <= totalBlocks; blockCount++) {
-    const logBinomCoeff = binomialCoefficientLog(totalBlocks, blockCount);
-    probabilityData.push({ blockCount, logProbability: logBinomCoeff });
-    totalProbabilityLog = logAddExp(totalProbabilityLog, logBinomCoeff);
-  }
 
   if (totalProbabilityLog === -Infinity)
     return { blockProbabilities, cumulativeProbabilities };
 
   let cumulativeProbability = 0;
   const threshold = 0.0002;
+
+  probabilityData.sort((a, b) => a.blockCount - b.blockCount);
 
   for (const { blockCount, logProbability } of probabilityData) {
     const probabilityPercentage =
@@ -75,4 +62,61 @@ export const calculateBlockProbabilities = (
   }
 
   return { blockProbabilities, cumulativeProbabilities };
+};
+
+export const calculateBlockProbabilities = (
+  estimatedBlocks: number,
+): {
+  blockProbabilities: {
+    blockCount: number;
+    probabilityPercentage: number;
+    cappedCumulative: number;
+  }[];
+  cumulativeProbabilities: { blockCount: number; cappedCumulative: number }[];
+} => {
+  const totalBlocks = estimatedBlocks * 2;
+  let totalProbabilityLog = -Infinity;
+  const probabilityData: { blockCount: number; logProbability: number }[] = [];
+
+  for (let blockCount = 0; blockCount <= totalBlocks; blockCount++) {
+    const logBinomCoeff = binomialCoefficientLog(totalBlocks, blockCount);
+    probabilityData.push({ blockCount, logProbability: logBinomCoeff });
+    totalProbabilityLog = logAddExp(totalProbabilityLog, logBinomCoeff);
+  }
+
+  if (estimatedBlocks >= 2) {
+    return processResults(probabilityData, totalProbabilityLog);
+  }
+
+  const exactValue = Number(estimatedBlocks.toFixed(2));
+  if (
+    Number.isInteger(exactValue) &&
+    probabilityData.some(p => p.blockCount === exactValue)
+  ) {
+    return processResults(probabilityData, totalProbabilityLog);
+  }
+
+  const poissonProb = Math.exp(
+    -estimatedBlocks +
+      exactValue * Math.log(estimatedBlocks) -
+      logFactorial(exactValue),
+  );
+  const logPoissonProb = Math.log(poissonProb);
+
+  probabilityData.push({
+    blockCount: exactValue,
+    logProbability: logPoissonProb,
+  });
+  totalProbabilityLog = logAddExp(totalProbabilityLog, logPoissonProb);
+
+  return processResults(probabilityData, totalProbabilityLog);
+};
+
+const logFactorial = (n: number): number => {
+  if (n <= 1) return 0;
+  let result = 0;
+  for (let i = 2; i <= n; i++) {
+    result += Math.log(i);
+  }
+  return result;
 };
