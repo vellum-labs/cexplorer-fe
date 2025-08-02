@@ -3,12 +3,14 @@ import { useMemo } from "react";
 import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
 import { getRouteApi } from "@tanstack/react-router";
 import { formatString } from "@/utils/format/format";
+import { Vote } from "lucide-react";
 
 import { useFetchVoteDetail } from "@/services/governance";
 import Tabs from "@/components/global/Tabs";
 import { VoteDetailCard } from "@/components/governance/vote/VoteDetailCard";
 import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { EmptyState } from "@/components/global/EmptyState";
 
 export const GovernanceVoteDetailPage: FC = () => {
   const route = getRouteApi("/gov/vote/$hash");
@@ -20,7 +22,7 @@ export const GovernanceVoteDetailPage: FC = () => {
 
   const tabs = useMemo(() => {
     return votes.map((vote, index) => ({
-      key: `vote_${index + 1}`,
+      key: vote?.proposal?.ident?.id,
       label: `Vote ${index + 1}`,
       content: (
         <VoteDetailCard
@@ -34,12 +36,6 @@ export const GovernanceVoteDetailPage: FC = () => {
     }));
   }, [votes, isLoading]);
 
-  const activeTabValue = useMemo(() => {
-    if (!tab || !votes.length) return undefined;
-    
-    const matchingVoteIndex = votes.findIndex(vote => vote?.proposal?.ident?.id === tab);
-    return matchingVoteIndex !== -1 ? `vote_${matchingVoteIndex + 1}` : undefined;
-  }, [tab, votes]);
 
   return (
     <PageBase
@@ -87,11 +83,13 @@ export const GovernanceVoteDetailPage: FC = () => {
             </div>
           </div>
         ) : tabs.length > 0 ? (
-          <Tabs items={tabs} activeTabValue={activeTabValue} />
+          <Tabs items={tabs} activeTabValue={tab} />
         ) : (
-          <p className='text-muted text-center'>
-            No votes found for this transaction.
-          </p>
+          <EmptyState
+            icon={<Vote size={24} />}
+            primaryText="No votes found"
+            secondaryText="This transaction doesn't contain any governance votes."
+          />
         )}
       </div>
     </PageBase>
