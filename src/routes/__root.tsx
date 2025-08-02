@@ -3,7 +3,7 @@ import {
   createRootRoute,
   Outlet,
   useLocation,
-  useRouterState,
+  // useRouterState,
 } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
@@ -20,14 +20,14 @@ import { ErrorBoundary } from "@/pages/error/ErrorBoundary";
 import { useThemeStore } from "@/stores/themeStore";
 import { useGenerateSW } from "@/hooks/useGenerateSW";
 import { useState } from "react";
-import { setGlobalAbortSignal } from "@/lib/handleFetch";
-import { abortControllers } from "@/lib/handleAbortController";
+// import { setGlobalAbortSignal } from "@/lib/handleFetch";
+// import { abortControllers } from "@/lib/handleAbortController";
 
 const RootComponent = () => {
   const { notFound, setNotFound } = useNotFound();
   const location = useLocation();
 
-  const { location: locationState } = useRouterState();
+  // const { location: locationState } = useRouterState();
 
   const { theme } = useThemeStore();
   const { isUpdating, isActivating, updateReady, progress, isFirstInstall } =
