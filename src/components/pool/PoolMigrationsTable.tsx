@@ -11,6 +11,8 @@ import Copy from "../global/Copy";
 import { SortArrow } from "../global/SortArrow";
 import DateCell from "../table/DateCell";
 import GlobalTable from "../table/GlobalTable";
+import PoolCell from "../table/PoolCell";
+import { ArrowRight } from "lucide-react";
 
 import { formatString } from "@/utils/format/format";
 import { getColumnsSortOrder } from "@/utils/getColumnsSortOrder";
@@ -236,6 +238,50 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
       title: <p className='w-full text-right'>Registered</p>,
       visible: columnsVisibility.registered,
       widthPx: 80,
+    },
+    {
+      key: "pool_delegation",
+      render: item => {
+        const previousPool = item?.previous_pool;
+        const livePool = item?.live_pool;
+
+        return (
+          <div className='flex w-full items-center justify-between gap-2'>
+            <div className='flex min-w-[40%] items-center gap-2'>
+              {previousPool?.id ? (
+                <PoolCell
+                  poolInfo={{
+                    id: previousPool.id,
+                    meta: previousPool.meta,
+                  }}
+                  fontSize="12px"
+                />
+              ) : (
+                "-"
+              )}
+            </div>
+
+            <ArrowRight size={15} />
+
+            <div className='flex min-w-[40%] items-center gap-2'>
+              {livePool?.id ? (
+                <PoolCell
+                  poolInfo={{
+                    id: livePool.id,
+                    meta: livePool.meta,
+                  }}
+                  fontSize="12px"
+                />
+              ) : (
+                "-"
+              )}
+            </div>
+          </div>
+        );
+      },
+      title: <p>Pool Delegation</p>,
+      visible: columnsVisibility.pool_delegation,
+      widthPx: 120,
     },
   ];
 
