@@ -148,7 +148,7 @@ const PoolDelegatorsTable = ({
       },
       title: "Address",
       visible: columnsVisibility.address,
-      widthPx: 120,
+      widthPx: 90,
     },
     {
       key: "amount",
@@ -177,7 +177,7 @@ const PoolDelegatorsTable = ({
         </div>
       ),
       visible: columnsVisibility.amount,
-      widthPx: 80,
+      widthPx: 40,
     },
     {
       key: "loyalty",
@@ -242,7 +242,7 @@ const PoolDelegatorsTable = ({
         const livePool = item?.live_pool;
 
         return (
-          <div className='flex w-full items-center justify-between gap-2'>
+          <div className='flex w-full items-center justify-between gap-5 pl-10 xl:pl-0'>
             <div className='flex min-w-[40%] items-center gap-2'>
               {previousPool?.id ? (
                 <PoolCell
@@ -257,7 +257,7 @@ const PoolDelegatorsTable = ({
               )}
             </div>
 
-            <ArrowRight size={15} />
+            <ArrowRight size={15} className='w-[40px]' />
 
             <div className='flex min-w-[40%] items-center gap-2'>
               {livePool?.id ? (
@@ -277,7 +277,7 @@ const PoolDelegatorsTable = ({
       },
       title: <p>Pool Delegation</p>,
       visible: columnsVisibility.pool_delegation,
-      widthPx: 120,
+      widthPx: 180,
     },
   ];
 

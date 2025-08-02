@@ -138,7 +138,7 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
       },
       title: <p>Stake</p>,
       visible: columnsVisibility.stake,
-      widthPx: 40,
+      widthPx: 70,
     },
     {
       key: "amount",
@@ -148,7 +148,7 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
         }
 
         return (
-          <p className='text-right'>
+          <p className='w-full text-right'>
             <AdaWithTooltip data={item.live_stake} />
           </p>
         );
@@ -164,7 +164,7 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
         const liveDrep = item?.live_drep;
 
         return (
-          <div className='flex w-full items-center justify-between gap-2'>
+          <div className='flex w-full min-w-[120px] items-center justify-between gap-2'>
             <div className='flex min-w-[40%] items-center gap-2'>
               {previousDrep?.id ? (
                 <DrepNameCell
@@ -203,7 +203,7 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
       },
       title: <p>DRep Delegation</p>,
       visible: columnsVisibility.drep_delegation,
-      widthPx: 120,
+      widthPx: 140,
     },
     {
       key: "loyalty",
@@ -224,7 +224,7 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
       },
       title: <p className='w-full text-right'>Loyalty</p>,
       visible: columnsVisibility.loyalty,
-      widthPx: 50,
+      widthPx: 20,
     },
     {
       key: "tx",
@@ -256,7 +256,7 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
       scrollable
       query={delegatorQuery}
       items={items}
-      minContentWidth={1000}
+      minContentWidth={1300}
       columns={columns.sort((a, b) => {
         return (
           columnsOrder.indexOf(a.key as keyof DrepDelegatorTableColumns) -

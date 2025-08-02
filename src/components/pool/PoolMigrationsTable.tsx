@@ -111,7 +111,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
       },
       title: <p>Date</p>,
       visible: columnsVisibility.date,
-      widthPx: 80,
+      widthPx: 20,
     },
     {
       key: "active_in",
@@ -122,7 +122,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
       ),
       title: <p className='w-full text-right'>Active epoch</p>,
       visible: columnsVisibility.active_in,
-      widthPx: 50,
+      widthPx: 45,
     },
     {
       key: "address",
@@ -151,7 +151,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
       },
       title: "Address",
       visible: columnsVisibility.address,
-      widthPx: 80,
+      widthPx: 100,
     },
     {
       key: "amount",
@@ -181,7 +181,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
         </div>
       ),
       visible: columnsVisibility.amount,
-      widthPx: 80,
+      widthPx: 40,
     },
     {
       key: "loyalty",
@@ -216,7 +216,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
         </div>
       ),
       visible: columnsVisibility.loyalty,
-      widthPx: 80,
+      widthPx: 20,
     },
     {
       key: "registered",
@@ -237,7 +237,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
       },
       title: <p className='w-full text-right'>Registered</p>,
       visible: columnsVisibility.registered,
-      widthPx: 80,
+      widthPx: 40,
     },
     {
       key: "pool_delegation",
@@ -246,7 +246,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
         const livePool = item?.live_pool;
 
         return (
-          <div className='flex w-full items-center justify-between gap-2'>
+          <div className='flex w-full items-center justify-between gap-5'>
             <div className='flex min-w-[40%] items-center gap-2'>
               {previousPool?.id ? (
                 <PoolCell
@@ -254,14 +254,14 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
                     id: previousPool.id,
                     meta: previousPool.meta,
                   }}
-                  fontSize="12px"
+                  fontSize='12px'
                 />
               ) : (
                 "-"
               )}
             </div>
 
-            <ArrowRight size={15} />
+            <ArrowRight size={15} className='w-[40px]' />
 
             <div className='flex min-w-[40%] items-center gap-2'>
               {livePool?.id ? (
@@ -270,7 +270,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
                     id: livePool.id,
                     meta: livePool.meta,
                   }}
-                  fontSize="12px"
+                  fontSize='12px'
                 />
               ) : (
                 "-"
@@ -281,7 +281,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
       },
       title: <p>Pool Delegation</p>,
       visible: columnsVisibility.pool_delegation,
-      widthPx: 120,
+      widthPx: 190,
     },
   ];
 
