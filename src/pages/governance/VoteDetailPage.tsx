@@ -15,7 +15,6 @@ import { EmptyState } from "@/components/global/EmptyState";
 export const GovernanceVoteDetailPage: FC = () => {
   const route = getRouteApi("/gov/vote/$hash");
   const { hash } = route.useParams();
-  const { tab } = route.useSearch() as { tab?: string };
 
   const { data: voteData, isLoading } = useFetchVoteDetail(hash);
   const votes = voteData?.data?.data ?? [];
@@ -83,7 +82,7 @@ export const GovernanceVoteDetailPage: FC = () => {
             </div>
           </div>
         ) : tabs.length > 0 ? (
-          <Tabs items={tabs} activeTabValue={tab} />
+          <Tabs items={tabs} />
         ) : (
           <EmptyState
             icon={<Vote size={24} />}
