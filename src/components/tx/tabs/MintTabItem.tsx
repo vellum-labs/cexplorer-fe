@@ -1,6 +1,6 @@
 import AssetCell from "@/components/asset/AssetCell";
 import { useFetchTxDetail } from "@/services/tx";
-import { formatDate, formatString } from "@/utils/format/format";
+import { formatDate, formatNumber, formatString } from "@/utils/format/format";
 import { Link, getRouteApi } from "@tanstack/react-router";
 import Copy from "../../global/Copy";
 import DateCell from "../../table/DateCell";
@@ -77,6 +77,21 @@ const MintTabItem = () => {
       title: "Tx Hash",
       visible: true,
       widthPx: 80,
+    },
+    {
+      key: "quantity",
+      render: item => {
+        if (!item?.quantity) {
+          return <p className='w-full text-right'>-</p>;
+        }
+
+        return (
+          <p className='w-full text-right'>{formatNumber(item.quantity)}</p>
+        );
+      },
+      title: <p className='w-full text-right'>Quantity</p>,
+      visible: true,
+      widthPx: 40,
     },
   ];
 
