@@ -51,6 +51,11 @@ const AssetCell = memo((props: Props) => {
 
   const withCopy = "withCopy" in props ? props.withCopy : false;
 
+  const nameByRegistry =
+    asset?.registry?.name && asset?.registry?.ticker
+      ? `[${asset?.registry?.ticker}] ${asset?.registry?.name}`
+      : undefined;
+
   return (
     <div className='relative flex w-full items-center gap-2'>
       {!hideImage && (
@@ -88,23 +93,29 @@ const AssetCell = memo((props: Props) => {
             <span
               className={`${withCopy ? "" : "w-full"} block overflow-hidden text-ellipsis whitespace-nowrap`}
             >
-              {formattedHex
-                ? formattedHex
-                : encodeAssetName(isAdaHandle ? adaHandleName : assetName)}
+              {nameByRegistry
+                ? nameByRegistry
+                : formattedHex
+                  ? formattedHex
+                  : renderAssetName({
+                      name: isAdaHandle ? adaHandleName : assetName,
+                    })}
             </span>
             {withCopy && (
               <Copy
                 copyText={
-                  formattedHex
-                    ? formattedHex
-                    : renderAssetName({ name: assetName })
+                  nameByRegistry
+                    ? nameByRegistry
+                    : formattedHex
+                      ? formattedHex
+                      : renderAssetName({ name: assetName })
                 }
                 className='ml-2'
               />
             )}
           </Link>
           <span className='flex items-center gap-1'>
-            {renderAssetName({ name: assetName }) ? (
+            {nameByRegistry || renderAssetName({ name: assetName }) ? (
               <p className='text-xs text-grayTextPrimary'>
                 {formatString(fingerprint, "long")}
               </p>

@@ -1,12 +1,12 @@
 import type { ResponseCore } from "./commonTypes";
 
 export interface AssetRegistry {
-  ticker: string;
-  name: string;
-  decimals: number;
-  has_logo: boolean;
-  description: string;
-  url: string;
+  ticker?: string;
+  name?: string;
+  decimals?: number;
+  has_logo?: boolean;
+  description?: string;
+  url?: string;
 }
 
 export type AssetListType =
@@ -89,7 +89,7 @@ interface AssetStat {
 
 export interface AssetCore {
   name: string;
-  registry: AssetRegistry;
+  registry?: AssetRegistry;
 }
 
 export type TxAsset = { quantity: number } & AssetCore;

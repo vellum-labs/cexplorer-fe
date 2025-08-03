@@ -10,7 +10,6 @@ const MintTabItem = () => {
   const route = getRouteApi("/tx/$hash");
   const { hash } = route.useParams();
   const query = useFetchTxDetail(hash);
-  // const mints = query.data?.data?.mints[0].p;
 
   const columns = [
     {
