@@ -97,71 +97,89 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
       label: "DRep delegation",
       value: (
         <div className='flex flex-col'>
-          <AttributeDropdown
-            items={[
-              {
-                label: "Status",
-                value: data?.vote?.drep?.is_active ? (
-                  <span className='text-greenText'>Active</span>
-                ) : (
-                  <span className='text-redText'>Inactive</span>
-                ),
-              },
-              {
-                label: "Amount",
-                value: data?.vote?.drep?.amount
-                  ? formatNumber(data?.vote?.drep?.amount)
-                  : "-",
-              },
-              {
-                label: "Since",
-                value: (
-                  <DateCell
-                    time={data?.vote?.drep?.since}
-                    className='text-xs'
-                  />
-                ),
-              },
-              {
-                label: "ID",
-                value: (
-                  <div className='flex items-center gap-2'>
-                    <span className={"text-xs"}>
-                      {formatString(data?.vote?.drep?.hash?.view ?? "", "long")}
-                    </span>
-                    <Copy copyText={data?.vote?.drep?.hash?.view} size={10} />
-                  </div>
-                ),
-                visible: !!data?.vote?.drep?.data?.given_name,
-              },
-            ]}
-          >
-            <div
-              className={`flex w-fit cursor-pointer items-center gap-1 rounded-md border ${theme === "light" ? "border-[#E4E7EC]" : "border-gray-600"} p-1`}
+          {data?.vote?.vote?.live_drep === "drep_always_abstain" ? (
+            data?.vote?.drep?.data?.given_name ? (
+              <Link
+                to='/drep/$hash'
+                params={{ hash: data?.vote?.drep?.hash?.view }}
+                className={"w-fit text-primary"}
+              >
+                {data?.vote?.drep?.data?.given_name}
+                <span className='text-sm text-primary'>Always abstain</span>
+              </Link>
+            ) : (
+              <span className='text-sm'>Always abstain</span>
+            )
+          ) : (
+            <AttributeDropdown
+              items={[
+                {
+                  label: "Status",
+                  value: data?.vote?.drep?.is_active ? (
+                    <span className='text-greenText'>Active</span>
+                  ) : (
+                    <span className='text-redText'>Inactive</span>
+                  ),
+                },
+                {
+                  label: "Amount",
+                  value: data?.vote?.drep?.amount
+                    ? formatNumber(data?.vote?.drep?.amount)
+                    : "-",
+                },
+                {
+                  label: "Since",
+                  value: (
+                    <DateCell
+                      time={data?.vote?.drep?.since}
+                      className='text-xs'
+                    />
+                  ),
+                },
+                {
+                  label: "ID",
+                  value: (
+                    <div className='flex items-center gap-2'>
+                      <span className={"text-xs"}>
+                        {formatString(
+                          data?.vote?.drep?.hash?.view ?? "",
+                          "long",
+                        )}
+                      </span>
+                      <Copy copyText={data?.vote?.drep?.hash?.view} size={10} />
+                    </div>
+                  ),
+                  visible: !!data?.vote?.drep?.data?.given_name,
+                },
+              ]}
             >
-              {data?.vote?.drep?.data?.given_name ? (
-                <Link
-                  to='/drep/$hash'
-                  params={{ hash: data?.vote?.drep?.hash?.view }}
-                  className={"w-fit text-primary"}
-                >
-                  {data?.vote?.drep?.data?.given_name}
-                </Link>
-              ) : (
-                <div className='flex items-center gap-2'>
+              <div
+                className={`flex w-fit cursor-pointer items-center gap-1 rounded-md border ${theme === "light" ? "border-[#E4E7EC]" : "border-gray-600"} p-1`}
+              >
+                {data?.vote?.drep?.data?.given_name ? (
                   <Link
                     to='/drep/$hash'
-                    params={{ hash: data?.vote?.drep?.hash?.view ?? "" }}
-                    className={"text-sm text-primary"}
+                    params={{ hash: data?.vote?.drep?.hash?.view }}
+                    className={"w-fit text-primary"}
                   >
-                    {formatString(data?.vote?.drep?.hash?.view ?? "", "long")}
+                    {data?.vote?.drep?.data?.given_name}
                   </Link>
-                  <Copy copyText={data?.vote?.drep?.hash?.view} size={13} />
-                </div>
-              )}
-              <ChevronRight size={15} />
-            </div>
-          </AttributeDropdown>
+                ) : (
+                  <div className='flex items-center gap-2'>
+                    <Link
+                      to='/drep/$hash'
+                      params={{ hash: data?.vote?.drep?.hash?.view ?? "" }}
+                      className={"text-sm text-primary"}
+                    >
+                      {formatString(data?.vote?.drep?.hash?.view ?? "", "long")}
+                    </Link>
+                    <Copy copyText={data?.vote?.drep?.hash?.view} size={13} />
+                  </div>
+                )}
+                <ChevronRight size={15} />
+              </div>
+            </AttributeDropdown>
+          )}
         </div>
       ),
       visible: !!data?.vote,
