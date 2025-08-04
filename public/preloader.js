@@ -3,7 +3,7 @@ preloader.setAttribute("id", "preloader");
 
 const shadow = preloader.attachShadow({ mode: "open" });
 const themeStorage = localStorage.getItem("theme_store");
-let theme = "light";
+let theme = "dark";
 
 if (themeStorage) {
   theme = JSON.parse(themeStorage).state.theme;
