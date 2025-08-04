@@ -44,7 +44,7 @@ import { usePoolDetail } from "../details/usePoolDetail";
 import { useFetchAssetDetail } from "@/services/assets";
 import { useAssetDetail } from "../details/useAssetDetail";
 import { useFetchDrepDetail } from "@/services/drep";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDrepDetail } from "../details/useDrepDetail";
 
 import { activeSlotsCoeff, epochLength } from "@/constants/confVariables";
@@ -109,7 +109,22 @@ const DrepListWidget = (
   page?: number,
   tableSearch?: string,
 ): useGetTableWidget<DrepListTableColumns> => {
-  const [sortByOrder, setSortByOrder] = useState<Order | undefined>(undefined);
+  const getInitialSortOrder = (): Order | undefined => {
+    try {
+      const storageSortList = localStorage.getItem(HOMEPAGE_SORT_KEY);
+      if (!storageSortList) {
+        return undefined;
+      }
+      const parsedStorageSortList = JSON.parse(storageSortList);
+      return parsedStorageSortList["drep"] || undefined;
+    } catch {
+      return undefined;
+    }
+  };
+
+  const [sortByOrder, setSortByOrder] = useState<Order | undefined>(
+    getInitialSortOrder,
+  );
 
   const updateLocalStorage = (value: Order | undefined) => {
     const storageSortList = localStorage.getItem(HOMEPAGE_SORT_KEY);
@@ -152,20 +167,6 @@ const DrepListWidget = (
       return newState;
     });
   };
-
-  useEffect(() => {
-    const storageSortList = localStorage.getItem(HOMEPAGE_SORT_KEY);
-
-    if (!storageSortList) {
-      return;
-    }
-
-    const parsedStorageSortList = JSON.parse(storageSortList);
-
-    if (parsedStorageSortList["drep"]) {
-      setSortByOrder(parsedStorageSortList["drep"]);
-    }
-  }, []);
 
   const {
     columns,
@@ -611,7 +612,22 @@ const PoolListWidget = (
   page?: number,
   tableSearch?: string,
 ): useGetTableWidget<PoolsListColumns> => {
-  const [sortByOrder, setSortByOrder] = useState<Order | undefined>(undefined);
+  const getInitialSortOrder = (): Order | undefined => {
+    try {
+      const storageSortList = localStorage.getItem(HOMEPAGE_SORT_KEY);
+      if (!storageSortList) {
+        return undefined;
+      }
+      const parsedStorageSortList = JSON.parse(storageSortList);
+      return parsedStorageSortList["pool"] || undefined;
+    } catch {
+      return undefined;
+    }
+  };
+
+  const [sortByOrder, setSortByOrder] = useState<Order | undefined>(
+    getInitialSortOrder,
+  );
 
   const updateLocalStorage = (value: Order | undefined) => {
     const storageSortList = localStorage.getItem(HOMEPAGE_SORT_KEY);
@@ -654,20 +670,6 @@ const PoolListWidget = (
       return newState;
     });
   };
-
-  useEffect(() => {
-    const storageSortList = localStorage.getItem(HOMEPAGE_SORT_KEY);
-
-    if (!storageSortList) {
-      return;
-    }
-
-    const parsedStorageSortList = JSON.parse(storageSortList);
-
-    if (parsedStorageSortList["pool"]) {
-      setSortByOrder(parsedStorageSortList["pool"]);
-    }
-  }, []);
 
   const {
     columns,
