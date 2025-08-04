@@ -34,7 +34,7 @@ const ExpectedBlocksGraph = memo(function ExpectedBlocksGraph({
         formatter: function (params) {
           const value = params[0].value;
           const blocks = params[0].axisValue;
-          return `Probability ${value}% ${blocks} Blocks`;
+          return `Probability ${value}% for ${blocks} Blocks`;
         },
       },
       grid: {
@@ -45,13 +45,19 @@ const ExpectedBlocksGraph = memo(function ExpectedBlocksGraph({
       },
       xAxis: {
         type: "category",
-        data: blockCounts,
+        data: blockCounts.map(count =>
+          Number.isInteger(count) ? count : count.toFixed(2),
+        ),
         inverse: false,
         name: "Expected Blocks",
         nameLocation: "middle",
         nameGap: 28,
         axisLabel: {
           color: textColor,
+          formatter: (value: string) => {
+            const num = parseFloat(value);
+            return Number.isInteger(num) ? num : num.toFixed(2);
+          },
         },
         axisLine: {
           lineStyle: {
