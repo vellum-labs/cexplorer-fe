@@ -1,7 +1,7 @@
 import { ActionTypes } from "@/components/global/ActionTypes";
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
 import { VoterRoleBadge } from "@/components/global/badges/VoterRoleBadge";
-import { Vote } from "@/constants/votes";
+import type { Vote } from "@/constants/votes";
 import { GovActionCell } from "@/components/gov/GovActionCell";
 import { VoteCell } from "@/components/governance/vote/VoteCell";
 import { GovVoterCell } from "@/components/gov/GovVoterCell";
