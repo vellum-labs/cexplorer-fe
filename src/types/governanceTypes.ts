@@ -161,7 +161,7 @@ export interface GovernanceVoteDetailData {
 }
 
 export interface GovernanceVote {
-  voter_role: "DRep" | "SPO" | "CC";
+  voter_role: "DRep" | "SPO" | "ConstitutionalCommittee";
   vote: "Yes" | "No" | "Abstain";
   proposal: GovernanceProposal;
   info: GovernanceVoterInfo;

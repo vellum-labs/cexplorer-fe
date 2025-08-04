@@ -197,13 +197,17 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       title: "Role",
       value: (() => {
         const role = vote?.voter_role;
+        const displayRole =
+          role === "ConstitutionalCommittee"
+            ? "Constitutional Committee"
+            : role;
 
         return (
           <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-lg border border-border px-[6px]'>
             {role === "DRep" && <User size={12} className='text-primary' />}
-            {role === "CC" && <Landmark size={12} className='text-primary' />}
+            {role === "ConstitutionalCommittee" && <Landmark size={12} className='text-primary' />}
             {role === "SPO" && <Route size={12} className='text-primary' />}
-            <span className='text-xs font-medium'>{role}</span>
+            <span className='text-xs font-medium'>{displayRole}</span>
           </div>
         );
       })(),
