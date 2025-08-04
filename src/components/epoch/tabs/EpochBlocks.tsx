@@ -38,15 +38,15 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
   const { page } = useSearch({ from: "/epoch/$no" });
   const { infiniteScrolling } = useInfiniteScrollingStore();
 
-  const [searchPrefix, setSearchPrefix] = useState<string>("");
-
-  const [{ debouncedTableSearch, tableSearch }, setTableSearch] =
-    useSearchTable({
-      debounceFilter: tableSearch =>
-        tableSearch.toLowerCase().slice(tableSearch.indexOf(":") + 1),
-      showAfter: !!searchPrefix,
-      withoutURL: true,
-    });
+  const [
+    { debouncedTableSearch, tableSearch, searchPrefix },
+    setTableSearch,
+    setSearchPrefix,
+  ] = useSearchTable({
+    debounceFilter: tableSearch =>
+      tableSearch.toLowerCase().slice(tableSearch.indexOf(":") + 1),
+    validPrefixes: ["slot_no", "block_no"],
+  });
 
   const blockListQuery = useFetchBlocksList(
     rows,

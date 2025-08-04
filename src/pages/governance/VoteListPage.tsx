@@ -1,4 +1,4 @@
-import { useState, type FC } from "react";
+import { type FC } from "react";
 import { Link, useSearch } from "@tanstack/react-router";
 import { ExternalLink, FileText, Landmark, Route, User, X } from "lucide-react";
 import ExportButton from "@/components/table/ExportButton";
@@ -50,16 +50,14 @@ export const VoteListPage: FC = () => {
     filterKeys: ["voter_role", "vote"],
   });
 
-  const [searchPrefix, setSearchPrefix] = useState("");
-
   const [
-    { debouncedTableSearch: debouncedSearch, tableSearch },
+    { debouncedTableSearch: debouncedSearch, tableSearch, searchPrefix },
     setTableSearch,
+    setSearchPrefix,
   ] = useSearchTable({
     debounceFilter: tableSearch =>
       tableSearch.toLowerCase().slice(tableSearch.indexOf(":") + 1),
-    showAfter: !!searchPrefix,
-    withoutURL: true,
+    validPrefixes: ["tx", "gov_action_proposal", "voter_id"],
   });
 
   type VoterRole = "ConstitutionalCommittee" | "DRep" | "SPO";

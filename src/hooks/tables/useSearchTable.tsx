@@ -8,15 +8,17 @@ type UseTableSearch = [
   {
     tableSearch: string;
     debouncedTableSearch: string;
+    searchPrefix: string;
   },
   setTableSearch: Dispatch<SetStateAction<string>>,
+  setSearchPrefix: Dispatch<SetStateAction<string>>,
 ];
 
 interface UseSearchTableArgs {
   withoutURL?: boolean;
-  showAfter?: boolean;
   defaultSearchValue?: string;
   debounceFilter?: (tableSearch: string) => string;
+  validPrefixes?: string[];
 }
 
 interface UseSearch extends ReturnType<typeof useSearch> {
@@ -25,14 +27,35 @@ interface UseSearch extends ReturnType<typeof useSearch> {
 
 export const useSearchTable = ({
   withoutURL = false,
-  showAfter = true,
   debounceFilter,
+  validPrefixes = [],
 }: UseSearchTableArgs = {}): UseTableSearch => {
   const { search, ...rest } = useSearch({ strict: false }) as UseSearch;
   const navigate = useNavigate();
 
+  const parseSearchFromURL = (urlSearch: string) => {
+    if (!urlSearch || !urlSearch.includes(":")) {
+      return { prefix: "", searchString: urlSearch };
+    }
+
+    const [prefix, ...searchParts] = urlSearch.split(":");
+    const searchString = searchParts.join(":");
+
+    if (validPrefixes.length > 0 && !validPrefixes.includes(prefix)) {
+      return { prefix: "", searchString: urlSearch };
+    }
+
+    return { prefix, searchString };
+  };
+
+  const initialParsed = parseSearchFromURL(search ?? "");
+
+  const [searchPrefix, setSearchPrefix] = useState<string>(
+    withoutURL ? "" : initialParsed.prefix,
+  );
+
   const [tableSearch, setTableSearch] = useState<string>(
-    withoutURL ? "" : (search ?? ""),
+    withoutURL ? "" : initialParsed.searchString,
   );
 
   const debouncedTableSearch = useDebounce(
@@ -44,31 +67,44 @@ export const useSearchTable = ({
       return;
     }
 
-    if (!debouncedTableSearch) {
-      navigate({
-        search: {
-          ...rest,
-          search: undefined,
-        } as any,
-      });
-      return;
-    }
+    const formatSearchForURL = () => {
+      if (!debouncedTableSearch) {
+        return undefined;
+      }
 
-    if (showAfter) {
+      if (
+        searchPrefix &&
+        validPrefixes.length > 0 &&
+        validPrefixes.includes(searchPrefix)
+      ) {
+        return `${searchPrefix}:${debouncedTableSearch}`;
+      }
+
+      return debouncedTableSearch;
+    };
+
+    const urlSearch = formatSearchForURL();
+
+    const shouldUpdate =
+      validPrefixes.length === 0 || !tableSearch || !!searchPrefix;
+
+    if (shouldUpdate) {
       navigate({
         search: {
           ...rest,
-          search: debouncedTableSearch,
+          search: urlSearch,
         } as any,
       });
     }
-  }, [search, debouncedTableSearch, withoutURL, showAfter]);
+  }, [search, debouncedTableSearch, searchPrefix, withoutURL, validPrefixes]);
 
   return [
     {
       tableSearch,
       debouncedTableSearch,
+      searchPrefix,
     },
     setTableSearch,
+    setSearchPrefix,
   ];
 };
