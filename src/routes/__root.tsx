@@ -3,9 +3,9 @@ import {
   createRootRoute,
   Outlet,
   useLocation,
-  // useRouterState,
+  useRouterState,
 } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
 import Button from "../components/global/Button";
 import Footer from "../components/layouts/Footer";
@@ -20,20 +20,25 @@ import { ErrorBoundary } from "@/pages/error/ErrorBoundary";
 import { useThemeStore } from "@/stores/themeStore";
 import { useGenerateSW } from "@/hooks/useGenerateSW";
 import { useState } from "react";
-// import { setGlobalAbortSignal } from "@/lib/handleFetch";
-// import { abortControllers } from "@/lib/handleAbortController";
+import { setGlobalAbortSignal } from "@/lib/handleFetch";
+import { abortControllers } from "@/lib/handleAbortController";
 
 const RootComponent = () => {
   const { notFound, setNotFound } = useNotFound();
   const location = useLocation();
 
-  // const { location: locationState } = useRouterState();
+  const { location: locationState } = useRouterState();
 
   const { theme } = useThemeStore();
   const { isUpdating, isActivating, updateReady, progress, isFirstInstall } =
     useGenerateSW();
 
   const [resetKey, setResetKey] = useState<number>(0);
+
+  const prevLocationRef = useRef<{
+    pathname: string;
+    searchStr: string;
+  } | null>(null);
 
   useEffect(() => {
     setResetKey(k => k + 1);
@@ -74,14 +79,33 @@ const RootComponent = () => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  // ! NEED FIX
-  // useEffect(() => {
-  //   abortControllers.abortAll();
+  useEffect(() => {
+    const currentSearchParams = new URLSearchParams(locationState.searchStr);
+    const prevSearchParams = new URLSearchParams(
+      prevLocationRef.current?.searchStr || "",
+    );
 
-  //   const controller = abortControllers.create("GLOBAL");
+    const currentTab = currentSearchParams.get("tab");
+    const currentSubTab = currentSearchParams.get("subTab");
+    const prevTab = prevSearchParams.get("tab");
+    const prevSubTab = prevSearchParams.get("subTab");
 
-  //   setGlobalAbortSignal(controller.signal);
-  // }, [locationState.pathname, locationState.searchStr]);
+    const shouldAbort =
+      locationState.pathname !== prevLocationRef.current?.pathname ||
+      currentTab !== prevTab ||
+      currentSubTab !== prevSubTab;
+
+    if (shouldAbort) {
+      abortControllers.abortAll();
+      const controller = abortControllers.create("GLOBAL");
+      setGlobalAbortSignal(controller.signal);
+    }
+
+    prevLocationRef.current = {
+      pathname: locationState.pathname,
+      searchStr: locationState.searchStr,
+    };
+  }, [locationState.pathname, locationState.searchStr]);
 
   return (
     <>
