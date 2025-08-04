@@ -8,6 +8,7 @@ import LightLogo from "/resources/preloader_logo_light.svg";
 import DarkLogoOffline from "/resources/logo_darkmode_offline.svg";
 import LightLogoOffline from "/resources/logo_lightmode_offline.svg";
 import { Badge } from "./badges/Badge";
+import { EnvironmentBadge } from "./badges/EnvironmentBadge";
 
 const MainLogo = ({
   size = 150,
@@ -63,6 +64,7 @@ const MainLogo = ({
         >
           beta
         </Badge>
+        <EnvironmentBadge />
       </div>
     </Link>
   );
