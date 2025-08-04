@@ -21,6 +21,7 @@ import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 import { VoteBadge } from "@/components/global/badges/VoteBadge";
 import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
 import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 
 interface VoteDetailCardProps {
   vote: GovernanceVote;
@@ -38,6 +39,8 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
   const currentEpoch = miscConst?.no;
+
+  const voterDisplayName = vote?.info?.meta?.name || vote?.info?.meta?.given_name || "";
 
   const detailItems = [
     {
@@ -212,14 +215,14 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
         );
       })(),
     },
-    {
+    ...(voterDisplayName ? [{
       key: "voter_name",
       title: "Voter name",
       value: (
         <div className='flex items-center gap-2'>
-          {vote?.info?.meta?.image_url && (
+          {vote?.info?.id && (
             <Image
-              src={vote?.info?.meta?.image_url}
+              src={generateImageUrl(vote.info.id, "ico")}
               type='user'
               height={20}
               width={20}
@@ -233,7 +236,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
                   ? "/pool/$id"
                   : vote.voter_role === "DRep"
                     ? "/drep/$hash"
-                    : vote.voter_role === "CC"
+                    : vote.voter_role === "ConstitutionalCommittee"
                       ? "/gov/cc/$coldKey"
                       : ""
               }
@@ -244,24 +247,47 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
               }}
               className='text-sm text-primary hover:underline'
             >
-              {vote?.info?.meta?.given_name || "-"}
+              {voterDisplayName}
             </Link>
           ) : (
             <span className='text-sm text-primary'>
-              {vote?.info?.meta?.given_name || "-"}
+              {voterDisplayName}
             </span>
           )}
         </div>
       ),
-    },
+    }] : []),
     {
       key: "voter_id",
       title: "Voter ID",
       value: (
         <div className='flex items-center gap-2 break-all'>
-          <span className='text-sm' title={vote?.info?.id}>
-            {formatString(vote?.info?.id, "long")}
-          </span>
+          {!voterDisplayName && vote?.voter_role && vote?.info?.id ? (
+            <Link
+              to={
+                vote.voter_role === "SPO"
+                  ? "/pool/$id"
+                  : vote.voter_role === "DRep"
+                    ? "/drep/$hash"
+                    : vote.voter_role === "ConstitutionalCommittee"
+                      ? "/gov/cc/$coldKey"
+                      : ""
+              }
+              params={{
+                id: vote.info.id,
+                hash: vote.info.id,
+                coldKey: vote.info.id,
+              }}
+              className='text-sm text-primary hover:underline'
+              title={vote?.info?.id}
+            >
+              {formatString(vote?.info?.id, "long")}
+            </Link>
+          ) : (
+            <span className='text-sm' title={vote?.info?.id}>
+              {formatString(vote?.info?.id, "long")}
+            </span>
+          )}
           <Copy copyText={vote?.info?.id} />
         </div>
       ),
