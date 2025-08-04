@@ -22,6 +22,10 @@ export const poolDelegatorsTableOptions: PoolDelegatorsOptions = [
     name: "Address",
   },
   {
+    key: "pool_delegation",
+    name: "Pool Delegation",
+  },
+  {
     key: "amount",
     name: "Amount",
   },
