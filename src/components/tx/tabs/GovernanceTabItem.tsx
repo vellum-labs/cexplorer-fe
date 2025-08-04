@@ -25,14 +25,14 @@ export const GovernanceTabItem = () => {
       render: item => <VoterRoleBadge role={item.voter_role} />,
       title: "Voter role",
       visible: true,
-      widthPx: 50,
+      widthPx: 120,
     },
     {
       key: "voter",
       render: item => <GovVoterCell role={item.voter_role} info={item.info} />,
       title: "Voter",
       visible: true,
-      widthPx: 160,
+      widthPx: 200,
     },
     {
       key: "type",
@@ -45,7 +45,7 @@ export const GovernanceTabItem = () => {
       },
       title: <p>Type</p>,
       visible: true,
-      widthPx: 60,
+      widthPx: 150,
     },
     {
       key: "governance_action_name",
@@ -60,7 +60,7 @@ export const GovernanceTabItem = () => {
       },
       title: <p>Governance action</p>,
       visible: true,
-      widthPx: 200,
+      widthPx: 300,
     },
     {
       key: "vote",
@@ -79,7 +79,7 @@ export const GovernanceTabItem = () => {
       },
       title: <p>Vote</p>,
       visible: true,
-      widthPx: 60,
+      widthPx: 100,
     },
     {
       key: "voting_power",
@@ -94,7 +94,7 @@ export const GovernanceTabItem = () => {
       ),
       title: <p className='w-full text-right'>Voting Power</p>,
       visible: true,
-      widthPx: 40,
+      widthPx: 130,
     },
   ];
 
@@ -108,7 +108,7 @@ export const GovernanceTabItem = () => {
         scrollable
         totalItems={governance?.length}
         itemsPerPage={20}
-        minContentWidth={1000}
+        minContentWidth={1150}
         disableDrag
       />
     </div>

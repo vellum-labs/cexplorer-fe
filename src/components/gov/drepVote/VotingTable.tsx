@@ -15,6 +15,7 @@ import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 import { Tooltip } from "@/components/ui/tooltip";
 import { useVotingTableStore } from "@/stores/tables/votingTableTableStore";
 import { CircleHelp } from "lucide-react";
+import { ActivityBadge } from "@/components/global/badges/ActivityBadge";
 
 interface VotingTableProps {}
 
@@ -88,17 +89,6 @@ export const VotingTable: FC<VotingTableProps> = () => {
         if (!actions || !Array.isArray(actions))
           return <p className='text-right'>-</p>;
 
-        if (!item?.stat?.total?.votes || !item?.stat?.total?.opportunity) {
-          return <p className='text-right'>-</p>;
-        }
-
-        const totalVotes = item?.stat?.total?.votes.reduce(
-          (sum, v) => sum + v.count,
-          0,
-        );
-        const globalPercent =
-          (totalVotes / item?.stat?.total?.opportunity) * 100;
-
         const total = actions.length;
         let voted = 0;
 
@@ -111,19 +101,11 @@ export const VotingTable: FC<VotingTableProps> = () => {
         const percent = (voted / total) * 100;
 
         return (
-          <div className='flex flex-col items-center justify-start'>
-            <div className='flex w-full items-center gap-1'>
-              <span className='text-sm'>{globalPercent.toFixed(2)}%</span>
-              <Tooltip content={<span>Global activity</span>}>
-                <CircleHelp size={11} />
-              </Tooltip>
-            </div>
-            <div className='flex w-full items-center gap-1'>
-              <span className='text-sm'>{percent.toFixed(2)}%</span>
-              <Tooltip content={<span>Current activity</span>}>
-                <CircleHelp size={11} />
-              </Tooltip>
-            </div>
+          <div className='flex w-full items-center gap-1'>
+            <ActivityBadge percentage={percent} />
+            <Tooltip content={<span>Voting activity across treasury withdrawal proposals</span>}>
+              <CircleHelp size={11} />
+            </Tooltip>
           </div>
         );
       },

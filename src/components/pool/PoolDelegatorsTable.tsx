@@ -19,6 +19,8 @@ import Copy from "../global/Copy";
 import { SortArrow } from "../global/SortArrow";
 import DateCell from "../table/DateCell";
 import GlobalTable from "../table/GlobalTable";
+import PoolCell from "../table/PoolCell";
+import { ArrowRight } from "lucide-react";
 
 import Crab from "@/resources/images/icons/crab.svg";
 import Dino from "@/resources/images/icons/dino.svg";
@@ -100,7 +102,7 @@ const PoolDelegatorsTable = ({
       },
       title: <p>Date</p>,
       visible: columnsVisibility.date,
-      widthPx: 80,
+      widthPx: 20,
     },
     {
       key: "active_in",
@@ -146,7 +148,7 @@ const PoolDelegatorsTable = ({
       },
       title: "Address",
       visible: columnsVisibility.address,
-      widthPx: 80,
+      widthPx: 90,
     },
     {
       key: "amount",
@@ -175,12 +177,12 @@ const PoolDelegatorsTable = ({
         </div>
       ),
       visible: columnsVisibility.amount,
-      widthPx: 80,
+      widthPx: 40,
     },
     {
       key: "loyalty",
       render: item => (
-        <p className='text-right'>
+        <p className='w-full text-right'>
           {calculateLoyaltyDays(
             item.slot_update,
             miscConst?.epoch_stat?.pots?.slot_no ?? 0,
@@ -189,7 +191,7 @@ const PoolDelegatorsTable = ({
         </p>
       ),
       title: (
-        <div className='flex justify-end'>
+        <div className='flex w-full justify-end'>
           <div
             className='flex w-fit cursor-pointer items-center gap-1 text-right'
             onClick={() => {
@@ -210,7 +212,7 @@ const PoolDelegatorsTable = ({
         </div>
       ),
       visible: columnsVisibility.loyalty,
-      widthPx: 80,
+      widthPx: 20,
     },
     {
       key: "registered",
@@ -231,7 +233,51 @@ const PoolDelegatorsTable = ({
       },
       title: <p className='w-full text-right'>Registered</p>,
       visible: columnsVisibility.registered,
-      widthPx: 80,
+      widthPx: 40,
+    },
+    {
+      key: "pool_delegation",
+      render: item => {
+        const previousPool = item?.previous_pool;
+        const livePool = item?.live_pool;
+
+        return (
+          <div className='flex w-full items-center justify-between gap-5 pl-10 xl:pl-0'>
+            <div className='flex min-w-[40%] items-center gap-2'>
+              {previousPool?.id ? (
+                <PoolCell
+                  poolInfo={{
+                    id: previousPool.id,
+                    meta: previousPool.meta,
+                  }}
+                  fontSize='12px'
+                />
+              ) : (
+                "-"
+              )}
+            </div>
+
+            <ArrowRight size={15} className='w-[40px]' />
+
+            <div className='flex min-w-[40%] items-center gap-2'>
+              {livePool?.id ? (
+                <PoolCell
+                  poolInfo={{
+                    id: livePool.id,
+                    meta: livePool.meta,
+                  }}
+                  fontSize='12px'
+                />
+              ) : (
+                "-"
+              )}
+            </div>
+          </div>
+        );
+      },
+      title: <p>Pool Delegation</p>,
+      visible: columnsVisibility.pool_delegation,
+      widthPx: 180,
     },
   ];
 

@@ -79,12 +79,12 @@ const Tabs = ({
 
     return {
       ...baseSearch,
-      [keyToUse]: items[index].key,
+      [keyToUse]: items[index]?.key,
     };
   };
 
   const handleTabChange = (index: number) => {
-    if (onClick) {
+    if (onClick && items[index]?.key) {
       onClick(items[index].key);
     }
 

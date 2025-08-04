@@ -3,18 +3,11 @@ import { encodeAssetName } from "./encodeAssetName";
 import { getAssetFingerprint } from "./getAssetFingerprint";
 
 interface AssetProps {
-  asset: TxAsset;
-  name?: never;
+  name?: string;
+  asset?: TxAsset;
 }
 
-interface NameProps {
-  asset?: never;
-  name: string;
-}
-
-type Props = AssetProps | NameProps;
-
-export const renderAssetName = ({ asset, name }: Props) => {
+export const renderAssetName = ({ asset, name }: AssetProps) => {
   const assetName = asset?.name || name || "";
 
   if (asset?.registry?.name && asset?.registry?.ticker) {

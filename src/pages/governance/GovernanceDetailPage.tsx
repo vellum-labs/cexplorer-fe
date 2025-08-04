@@ -19,6 +19,7 @@ export const GovernanceDetailPage: FC = () => {
   });
 
   const detailQuery = useFetchGovernanceActionDetail(id);
+  const data = detailQuery?.data?.data;
 
   const tabs = [
     {
@@ -74,11 +75,20 @@ export const GovernanceDetailPage: FC = () => {
         <div className='flex items-center gap-1'>Governance action detail</div>
       }
       subTitle={
-        <HeaderBannerSubtitle
-          title='Governance Action ID'
-          hashString={formatString(id ?? "", "long")}
-          hash={id}
-        />
+        <div className='flex flex-col'>
+          <HeaderBannerSubtitle
+            title='Governance Action ID'
+            hashString={formatString(data?.ident?.bech ?? "", "long")}
+            hash={data?.ident?.bech}
+            className='!mb-0'
+          />
+          <HeaderBannerSubtitle
+            hashString={formatString(data?.ident?.id ?? "", "long")}
+            hash={data?.ident?.id}
+            title='Legacy Governance Action ID'
+            className='!mt-0'
+          />
+        </div>
       }
     >
       <GovernanceDetailOverview query={detailQuery} />

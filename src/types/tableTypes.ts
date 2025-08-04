@@ -140,6 +140,7 @@ export type PoolDelegatorsColumns = {
   amount: boolean;
   loyalty: boolean;
   registered: boolean;
+  pool_delegation: boolean;
 };
 
 export type PoolStructureColumns = {

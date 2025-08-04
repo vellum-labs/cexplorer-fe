@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies and build
         env:
           VITE_APP_VERSION: ${{ github.run_number }}
-          VITE_APP_CONFIG: preprod
+          VITE_APP_CONFIG: preprod-prod
         run: |
           yarn install
           yarn build

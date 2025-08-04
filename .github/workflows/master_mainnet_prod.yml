@@ -1,4 +1,4 @@
-name: "🥇 Deploy mainnet-stage to test-server 💯"
+name: "Deploy mainnet > prod-server"
 
 on:
   workflow_dispatch:
@@ -10,7 +10,7 @@ jobs:
       - name: Check if user is allowed to run this workflow
         run: |
           echo "Triggered by: ${{ github.actor }}"
-          if [ "${{ github.actor }}" != "josef0xb" && "${{ github.actor }}" != "dshamsani" ]; then
+          if [ "${{ github.actor }}" != "josef0xb" ]; then
             echo "❌ You are not allowed to run this workflow."
             exit 1
           fi
@@ -46,13 +46,13 @@ jobs:
       - name: Install dependencies and build
         env:
           VITE_APP_VERSION: ${{ github.run_number }}
-          VITE_APP_CONFIG: mainnet-stage
+          VITE_APP_CONFIG: mainnet-prod
         run: |
           yarn install
           yarn build
 
       - name: Copy files & deploy
         env:
-          SERVER: 10.0.0.2
+          SERVER: 10.0.0.1
         run: |
-          rsync -ave "ssh -o StrictHostKeyChecking=no" --omit-dir-times --delete ./dist/ job@$SERVER:/var/www/cexplorer_mainnet_stage/
+          rsync -azv -e "ssh -o StrictHostKeyChecking=no" --omit-dir-times --no-perms --no-owner --no-group --delete ./dist/ job@$SERVER:/var/www/cexplorer_prod/

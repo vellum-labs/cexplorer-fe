@@ -58,12 +58,15 @@ export const useAssetDetail = ({
     {
       label: "Name",
       value: (
-        <div className='w-[150px] sm:w-full'>
+        <div className='max-w-[150px] sm:w-full'>
           <AssetCell
-            name={`${detailData?.policy}${detailData?.name}`}
+            asset={{
+              name: `${detailData?.policy}${detailData?.name}`,
+              quantity: detailData?.stat?.asset?.quantity ?? 0,
+              registry: detailData?.registry,
+            }}
             isNft={type === "nft"}
             hideImage
-            withCopy
             formattedHex={formattedHex}
           />
         </div>

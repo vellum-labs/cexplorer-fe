@@ -304,7 +304,7 @@ const NodeContent = ({
   data: TxInfo;
   type: "input" | "output";
 }) => (
-  <div className='flex h-full w-full flex-col justify-start'>
+  <div className='pointer-events-auto flex h-full w-full flex-col justify-start'>
     <div className='mb-1 mr-1 max-w-fit rounded-md border border-border bg-background px-2 py-1 text-xs font-medium'>
       <AdaWithTooltip data={data.value} />
     </div>

@@ -151,13 +151,21 @@ export const AssetDetailPage: FC = () => {
       )
     : undefined;
 
+  const nameByRegistry =
+    assetDetailQuery?.data?.data?.registry?.name &&
+    assetDetailQuery?.data?.data?.registry?.ticker
+      ? `[${assetDetailQuery?.data?.data?.registry?.ticker}] ${assetDetailQuery?.data?.data?.registry?.name}`
+      : undefined;
+
   return (
     <PageBase
       title={
         <div className='flex items-center gap-1'>
-          {formattedHex
-            ? encodeAssetName(formattedHex)
-            : formatString(fingerprint, "longer")}
+          {nameByRegistry
+            ? nameByRegistry
+            : formattedHex
+              ? encodeAssetName(formattedHex)
+              : formatString(fingerprint, "longer")}
         </div>
       }
       breadcrumbItems={[
@@ -183,10 +191,16 @@ export const AssetDetailPage: FC = () => {
         </div>
       }
       metadataOverride={{
-        title: metadata.assetDetail.title.replace("%encodedname%", title),
-        keyword: metadata.assetDetail.keywords.replace("%encodedname%", title),
+        title: metadata.assetDetail.title.replace(
+          "%encodedname%",
+          nameByRegistry || title,
+        ),
+        keyword: metadata.assetDetail.keywords.replace(
+          "%encodedname%",
+          nameByRegistry || title,
+        ),
         description: metadata.assetDetail.description
-          .replace("%encodedname%", title)
+          .replace("%encodedname%", nameByRegistry || title)
           .replace("%asset%", title)
           .replace(
             "%registry%",
