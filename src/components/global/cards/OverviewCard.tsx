@@ -1,4 +1,6 @@
 import type { FC, ReactNode } from "react";
+import { CircleHelp } from "lucide-react";
+import { Tooltip } from "../../ui/tooltip";
 
 type OverviewListItem =
   | {
@@ -22,6 +24,10 @@ interface BlockDetailOverviewProps {
   className?: string;
   leading?: boolean;
   hFit?: boolean;
+  showTitleDivider?: boolean;
+  showContentDivider?: boolean;
+  threshold?: number;
+  isDrep?: boolean;
 }
 
 export const OverviewCard: FC<BlockDetailOverviewProps> = ({
@@ -35,6 +41,10 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
   tBodyClassname,
   hFit = false,
   leading = false,
+  showTitleDivider = false,
+  showContentDivider = false,
+  threshold,
+  isDrep = false,
 }) => {
   return (
     <div
@@ -48,8 +58,9 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
         <h2 className='text-base'>{title}</h2>
         <span>{subTitle}</span>
       </div>
+      {showTitleDivider && <div className='w-full border-t border-border mt-3 mb-2'></div>}
       <div
-        className={`flex h-full items-stretch gap-2 pb-4 pt-2 ${startContent ? "flex-wrap justify-center sm:flex-nowrap" : ""}`}
+        className={`flex h-full items-stretch gap-2 pb-4 ${showTitleDivider ? "pt-0" : "pt-2"} ${startContent ? "flex-wrap justify-center sm:flex-nowrap" : ""}`}
       >
         {startContent}
         <div className={`flex w-full flex-col`}>
@@ -85,6 +96,32 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
               </tbody>
             </table>
           </div>
+          {showContentDivider && endContent && <div className='w-full border-t border-border mt-2'></div>}
+          {threshold && (
+            <div className='flex w-full items-center justify-between pt-2'>
+              <Tooltip
+                content={
+                  <div className='flex flex-col'>
+                    <span>Approval threshold of this</span>
+                    <span>governance action type for {isDrep ? 'DReps' : 'SPOs'}</span>
+                  </div>
+                }
+              >
+                <div className='flex items-center gap-[2px]'>
+                  <CircleHelp
+                    size={11}
+                    className='text-grayTextPrimary'
+                  />
+                  <span className='text-xs font-medium text-grayTextPrimary'>
+                    Threshold:
+                  </span>
+                </div>
+              </Tooltip>
+              <span className='text-xs font-medium text-grayTextPrimary'>
+                {(threshold * 100).toFixed(2)}%
+              </span>
+            </div>
+          )}
           {endContent}
         </div>
       </div>
