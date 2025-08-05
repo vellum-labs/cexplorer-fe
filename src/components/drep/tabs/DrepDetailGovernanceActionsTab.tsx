@@ -8,19 +8,18 @@ import type { FC } from "react";
 import { ActionTypes } from "@/components/global/ActionTypes";
 import DateCell from "@/components/table/DateCell";
 import GlobalTable from "@/components/table/GlobalTable";
-import { FileText } from "lucide-react";
 
 import { useFetchDrepVote } from "@/services/drep";
 import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
 import { useGovernanceActionsTableStore } from "@/stores/tables/governanceActionsTableStore";
-import { getRouteApi, Link, useSearch } from "@tanstack/react-router";
+import { getRouteApi, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
 import { GovActionCell } from "@/components/gov/GovActionCell";
 import { HashCell } from "@/components/tx/HashCell";
-import { VoteBadge } from "@/components/global/badges/VoteBadge";
 import { Vote } from "@/constants/votes";
+import { VoteCell } from "@/components/governance/vote/VoteCell";
 
 export const DrepDetailGovernanceActionsTab: FC = () => {
   const { infiniteScrolling } = useInfiniteScrollingStore();
@@ -98,19 +97,11 @@ export const DrepDetailGovernanceActionsTab: FC = () => {
           return "-";
         }
         return (
-          <div className='flex items-center gap-2'>
-            {item?.tx?.hash && (
-              <Link
-                to='/gov/vote/$hash'
-                params={{ hash: item.tx.hash }}
-                className='text-muted-foreground text-primary'
-                title='Open vote detail'
-              >
-                <FileText size={16} />
-              </Link>
-            )}
-            <VoteBadge vote={item.vote as Vote} />
-          </div>
+          <VoteCell
+            vote={item.vote as Vote}
+            txHash={item?.tx?.hash}
+            proposalId={item?.proposal?.ident?.id}
+          />
         );
       },
       visible: columnsVisibility.vote,

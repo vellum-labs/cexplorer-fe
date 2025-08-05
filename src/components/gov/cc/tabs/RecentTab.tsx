@@ -12,14 +12,14 @@ import { formatString, formatNumber } from "@/utils/format/format";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 import { Image } from "@/components/global/Image";
 import { Link } from "@tanstack/react-router";
-import { FileText, X } from "lucide-react";
+import { X } from "lucide-react";
 import { ActionTypes } from "@/components/global/ActionTypes";
 import { useFilterTable } from "@/hooks/tables/useFilterTable";
 import { isHex } from "@/utils/isHex";
 import Copy from "@/components/global/Copy";
 import { alphabetWithNumbers } from "@/constants/alphabet";
 import { GovActionCell } from "../../GovActionCell";
-import { VoteBadge } from "@/components/global/badges/VoteBadge";
+import { VoteCell } from "@/components/governance/vote/VoteCell";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 
 export const RecentTab: FC = () => {
@@ -160,19 +160,11 @@ export const RecentTab: FC = () => {
       render: item => {
         const vote = item.vote;
         return (
-          <div className='flex items-center gap-2'>
-            {item?.tx?.hash && (
-              <Link
-                to='/gov/vote/$hash'
-                params={{ hash: item.tx.hash }}
-                className='text-muted-foreground text-primary'
-                title='Open vote detail'
-              >
-                <FileText size={16} />
-              </Link>
-            )}
-            <VoteBadge vote={vote} />
-          </div>
+          <VoteCell
+            vote={vote}
+            txHash={item?.tx?.hash}
+            proposalId={item?.proposal?.ident?.id}
+          />
         );
       },
       filter: {

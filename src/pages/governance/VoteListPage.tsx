@@ -1,6 +1,6 @@
 import { type FC } from "react";
 import { Link, useSearch } from "@tanstack/react-router";
-import { ExternalLink, FileText, Landmark, Route, User, X } from "lucide-react";
+import { ExternalLink, Landmark, Route, User, X } from "lucide-react";
 import ExportButton from "@/components/table/ExportButton";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import GlobalTable from "@/components/table/GlobalTable";
@@ -18,9 +18,9 @@ import { isHex } from "@/utils/isHex";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { GovVoterCell } from "@/components/gov/GovVoterCell";
 import { GovActionCell } from "@/components/gov/GovActionCell";
-import { VoteBadge } from "@/components/global/badges/VoteBadge";
 import type { Vote } from "@/constants/votes";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
+import { VoteCell } from "@/components/governance/vote/VoteCell";
 
 export const VoteListPage: FC = () => {
   const { page } = useSearch({
@@ -237,20 +237,11 @@ export const VoteListPage: FC = () => {
         }
 
         return (
-          <div className='flex items-center gap-2'>
-            {item.tx?.hash && (
-              <Link
-                to='/gov/vote/$hash'
-                params={{ hash: item.tx.hash }}
-                className='text-muted-foreground text-primary'
-                title='Open vote detail'
-              >
-                <FileText size={16} />
-              </Link>
-            )}
-
-            <VoteBadge vote={item.vote as Vote} />
-          </div>
+          <VoteCell
+            vote={item.vote as Vote}
+            txHash={item.tx?.hash}
+            proposalId={item?.proposal?.ident?.id}
+          />
         );
       },
       title: <p ref={anchorRefs?.vote}>Vote</p>,
