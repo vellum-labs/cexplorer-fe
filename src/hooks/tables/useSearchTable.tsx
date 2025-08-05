@@ -26,7 +26,7 @@ interface UseSearch extends ReturnType<typeof useSearch> {
 }
 
 export const useSearchTable = ({
-  withoutURL = false,
+  withoutURL = true,
   debounceFilter,
   validPrefixes = [],
 }: UseSearchTableArgs = {}): UseTableSearch => {
