@@ -45,15 +45,15 @@ export const useBlockList = ({
   const { columnsVisibility, setColumnVisibility, rows } =
     useBlockListTableStore(storeKey)();
 
-  const [searchPrefix, setSearchPrefix] = useState("");
-
-  const [{ debouncedTableSearch, tableSearch }, setTableSearch] =
-    useSearchTable({
-      debounceFilter: tableSearch =>
-        tableSearch.toLowerCase().slice(tableSearch.indexOf(":") + 1),
-      showAfter: !!searchPrefix,
-      withoutURL: true,
-    });
+  const [
+    { debouncedTableSearch, tableSearch, searchPrefix },
+    setTableSearch,
+    setSearchPrefix,
+  ] = useSearchTable({
+    debounceFilter: tableSearch =>
+      tableSearch.toLowerCase().slice(tableSearch.indexOf(":") + 1),
+    validPrefixes: ["pool_id", "epoch_no", "hash", "slot_no", "block_no"],
+  });
 
   const [totalItems, setTotalItems] = useState(0);
 

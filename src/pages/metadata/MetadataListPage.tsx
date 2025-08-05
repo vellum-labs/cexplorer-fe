@@ -47,15 +47,15 @@ export const MetadataListPage: FC = () => {
     setRows,
   } = useMetadataTxListTableStore();
 
-  const [searchPrefix, setSearchPrefix] = useState("");
-
-  const [{ debouncedTableSearch, tableSearch }, setTableSearch] =
-    useSearchTable({
-      debounceFilter: tableSearch =>
-        tableSearch.toLowerCase().slice(tableSearch.indexOf(":") + 1),
-      showAfter: !!searchPrefix,
-      withoutURL: true,
-    });
+  const [
+    { debouncedTableSearch, tableSearch, searchPrefix },
+    setTableSearch,
+    setSearchPrefix,
+  ] = useSearchTable({
+    debounceFilter: tableSearch =>
+      tableSearch.toLowerCase().slice(tableSearch.indexOf(":") + 1),
+    validPrefixes: ["hash", "key"],
+  });
 
   const [totalItems, setTotalItems] = useState(0);
 

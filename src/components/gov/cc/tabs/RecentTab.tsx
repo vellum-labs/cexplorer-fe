@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import { useState } from "react";
 import { useSearch } from "@tanstack/react-router";
 
 import GlobalTable from "@/components/table/GlobalTable";
@@ -49,16 +48,14 @@ export const RecentTab: FC = () => {
     filterKeys: ["vote"],
   });
 
-  const [searchPrefix, setSearchPrefix] = useState("");
-
   const [
-    { debouncedTableSearch: debouncedSearch, tableSearch },
+    { debouncedTableSearch: debouncedSearch, tableSearch, searchPrefix },
     setTableSearch,
+    setSearchPrefix,
   ] = useSearchTable({
     debounceFilter: tableSearch =>
       tableSearch.toLowerCase().slice(tableSearch.indexOf(":") + 1),
-    showAfter: !!searchPrefix,
-    withoutURL: true,
+    validPrefixes: ["committee_voter", "tx_hash"],
   });
 
   const offset = (page ?? 1) * rows - rows;
