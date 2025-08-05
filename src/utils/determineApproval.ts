@@ -9,6 +9,9 @@ export const determineApproval = (
   dRepsApproved: boolean;
   sPOsApproved: boolean;
   constitutionalCommitteeApproved: boolean;
+  drepThreshold: number;
+  spoThreshold: number;
+  ccThreshold: number;
 } => {
   const drepThreshold = (() => {
     switch (type) {
@@ -67,5 +70,8 @@ export const determineApproval = (
     dRepsApproved,
     sPOsApproved,
     constitutionalCommitteeApproved,
+    drepThreshold,
+    spoThreshold,
+    ccThreshold,
   };
 };

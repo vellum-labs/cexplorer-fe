@@ -70,18 +70,13 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
     item => item?.voter_role === "SPO",
   );
 
-  const votingSposTotalStake = votingSPOs.reduce(
-    (a, b) => a + b?.stat?.stake,
-    0,
-  );
+  const spoTotalStake = query.data?.data?.total?.spo?.stake ?? 0;
 
-  const votingSposAbstainStake = votingSPOs
+  const spoAbstainStake = votingSPOs
     .filter(item => item?.vote === "Abstain")
     .reduce((a, b) => a + b?.stat?.stake, 0);
 
-  const votingSposVotedStake = votingSPOs
-    .filter(item => item?.vote !== "Abstain")
-    .reduce((a, b) => a + b?.stat?.stake, 0);
+  const spoVotingStake = spoTotalStake - spoAbstainStake;
 
   const calculateStake = (votingGroup, voteType: any = null) => {
     return votingGroup
@@ -116,9 +111,10 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
 
   const drepTotalStake =
     (query.data?.data?.total?.drep?.stake ?? 0) +
-    (query.data?.data?.total?.drep?.drep_always_abstain.stake ?? 0);
+    (query.data?.data?.total?.drep?.drep_always_abstain.stake ?? 0) +
+    (query.data?.data?.total?.drep?.drep_always_no_confidence.stake ?? 0);
   const drepAbstainStake = drepsAbstainManual + drepsAbstainAuto;
-  const drepVotingStake = query.data?.data?.total?.drep?.stake ?? 0;
+  const drepVotingStake = drepTotalStake - drepAbstainStake;
 
   const drepsNotVotedStake =
     drepTotalStake -
@@ -132,8 +128,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
 
   const sposYes = calculateStake(votingSPOs, "Yes");
   const sposNo = calculateStake(votingSPOs, "No");
-  const sposNoConfidence = calculateStake(votingSPOs, "No confidence");
-  const sposNotVoted = calculateStake(votingSPOs, "Not voted");
+  const sposNotVoted = spoTotalStake - (sposYes + sposNo + spoAbstainStake);
 
   const sposYesCount =
     (votingProcedure ?? []).find(
@@ -198,7 +193,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
   const sposPieChartData = generatePieChartData(
     sposYes,
     sposNo,
-    sposNoConfidence,
+    0,
     sposNotVoted,
   );
 
@@ -211,14 +206,14 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
     miscConst?.epoch.start_time ?? "",
   );
 
-  const { sPOsApproved, dRepsApproved, constitutionalCommitteeApproved } =
+  const { sPOsApproved, dRepsApproved, constitutionalCommitteeApproved, drepThreshold, spoThreshold } =
     determineApproval(
       query?.data?.data?.epoch_param?.[0] ?? {},
       query?.data?.data?.committee?.member ?? [],
       query?.data?.data?.committee ?? {},
       query?.data?.data?.type ?? "",
       drepsYes / (drepsYes + drepsNo + drepsNoConfidence + drepsNotVotedStake),
-      sposYes / (sposYes + sposNo + sposNoConfidence + sposNotVoted),
+      sposYes / (sposYes + sposNo + sposNotVoted),
     );
 
   const ccQuorum = query?.data?.data?.committee?.quorum;
@@ -365,7 +360,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
   const const_committee = [
     ...(committeeMembers ?? []).map(item => ({
       label: item?.registry?.name ? (
-        <div className='flex items-center gap-3 py-1.5 text-xs'>
+        <div className='flex items-center gap-3 py-1.5 text-sm'>
           {item?.registry?.img && (
             <Image
               src={item?.registry?.img}
@@ -377,7 +372,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
           <span>{item?.registry?.name}</span>
         </div>
       ) : (
-        <div className='flex items-center gap-3 py-1.5 text-xs'>
+        <div className='flex items-center gap-3 py-1.5 text-sm'>
           <div className='invisible h-[18px] w-[18px]'></div>
           <span>{formatString(item?.ident?.raw, "long")}</span>
         </div>
@@ -394,18 +389,32 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
 
   const dreps = [
     {
-      label: "Total stake",
+      label: (
+        <div className='flex items-center gap-1'>
+          <span>Total stake</span>
+          <Tooltip content="All ADA delegated to DReps">
+            <CircleHelp size={11} className='text-grayTextPrimary' />
+          </Tooltip>
+        </div>
+      ),
       value: (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center justify-end gap-2'>
           <AdaWithTooltip data={drepTotalStake} />
           <span className='text-xs text-grayTextSecondary'>(100%)</span>
         </div>
       ),
     },
     {
-      label: "Abstain stake",
+      label: (
+        <div className='flex items-center gap-1'>
+          <span>Abstain stake</span>
+          <Tooltip content="ADA that abstains from voting">
+            <CircleHelp size={11} className='text-grayTextPrimary' />
+          </Tooltip>
+        </div>
+      ),
       value: (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center justify-end gap-2'>
           <Tooltip
             content={
               <div className='flex flex-col'>
@@ -429,9 +438,16 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       ),
     },
     {
-      label: "Voting stake",
+      label: (
+        <div className='flex items-center gap-1'>
+          <span>Voting stake</span>
+          <Tooltip content="ADA participating in voting">
+            <CircleHelp size={11} className='text-grayTextPrimary' />
+          </Tooltip>
+        </div>
+      ),
       value: (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center justify-end gap-2'>
           <AdaWithTooltip data={drepVotingStake} />
           <span className='text-xs text-grayTextSecondary'>
             ({((drepVotingStake * 100) / drepTotalStake).toFixed(2)}%)
@@ -443,23 +459,37 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
 
   const spos = [
     {
-      label: "Total stake",
+      label: (
+        <div className='flex items-center gap-1'>
+          <span>Total stake</span>
+          <Tooltip content="All ADA delegated to SPOs">
+            <CircleHelp size={11} className='text-grayTextPrimary' />
+          </Tooltip>
+        </div>
+      ),
       value: (
-        <div className='flex items-center gap-2'>
-          <AdaWithTooltip data={votingSposTotalStake} />
+        <div className='flex items-center justify-end gap-2'>
+          <AdaWithTooltip data={spoTotalStake} />
           <span className='text-xs text-grayTextSecondary'>(100%)</span>
         </div>
       ),
     },
     {
-      label: "Abstain stake",
+      label: (
+        <div className='flex items-center gap-1'>
+          <span>Abstain stake</span>
+          <Tooltip content="ADA that abstains from voting">
+            <CircleHelp size={11} className='text-grayTextPrimary' />
+          </Tooltip>
+        </div>
+      ),
       value: (
-        <div className='flex items-center gap-2'>
-          <AdaWithTooltip data={votingSposAbstainStake} />
+        <div className='flex items-center justify-end gap-2'>
+          <AdaWithTooltip data={spoAbstainStake} />
           <span className='text-xs text-grayTextSecondary'>
             (
-            {(votingSposAbstainStake * 100) / votingSposTotalStake < 100
-              ? ((votingSposAbstainStake * 100) / votingSposTotalStake).toFixed(
+            {(spoAbstainStake * 100) / spoTotalStake < 100
+              ? ((spoAbstainStake * 100) / spoTotalStake).toFixed(
                   2,
                 )
               : "100"}
@@ -469,14 +499,21 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       ),
     },
     {
-      label: "Voting stake",
+      label: (
+        <div className='flex items-center gap-1'>
+          <span>Voting stake</span>
+          <Tooltip content="ADA participating in voting">
+            <CircleHelp size={11} className='text-grayTextPrimary' />
+          </Tooltip>
+        </div>
+      ),
       value: (
-        <div className='flex items-center gap-2'>
-          <AdaWithTooltip data={votingSposVotedStake} />
+        <div className='flex items-center justify-end gap-2'>
+          <AdaWithTooltip data={spoVotingStake} />
           <span className='text-xs text-grayTextSecondary'>
             (
-            {(votingSposVotedStake * 100) / votingSposTotalStake < 100
-              ? ((votingSposVotedStake * 100) / votingSposTotalStake).toFixed(2)
+            {(spoVotingStake * 100) / spoTotalStake < 100
+              ? ((spoVotingStake * 100) / spoTotalStake).toFixed(2)
               : "100"}
             %)
           </span>
@@ -605,6 +642,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                           </div>
                         )
                       }
+                      showTitleDivider
                       labelClassname='w-full'
                       tBodyClassname={`${(committeeMembers ?? []).length > 7 ? "max-h-[300px] thin-scrollbar px-1 overflow-auto" : ""}`}
                       leading
@@ -689,6 +727,10 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                             </div>
                           )
                         }
+                        showTitleDivider
+                        showContentDivider
+                        threshold={shouldDRepVote(query.data?.data?.type ?? "") ? drepThreshold : undefined}
+                        isDrep={true}
                         endContent={
                           <GovernanceCard
                             yes={drepsYes}
@@ -696,6 +738,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                             noConfidence={drepsNoConfidence}
                             notVoted={drepsNotVotedStake}
                             pieChartData={drepsPieChartData}
+                            isDrep={true}
                             breakdown={{
                               yes: { voters: drepsYesCount ?? 0 },
                               no: { voters: drepsNoCount ?? 0 },
@@ -719,9 +762,21 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                   ) : (
                     <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                       <OverviewCard
-                        title='DReps'
-                        subTitle='DReps are not voting on this governance action'
-                        className='flex h-full items-center justify-center text-sm text-grayTextSecondary'
+                        title={
+                          <div className='flex items-center gap-2'>
+                            <span>DReps</span>
+                            <span className='text-sm font-normal text-grayTextPrimary'>
+                              {query.data?.data?.total.drep.count}
+                            </span>
+                          </div>
+                        }
+                        showTitleDivider
+                        className='h-full'
+                        endContent={
+                          <div className='flex h-full items-center justify-center text-sm text-grayTextSecondary'>
+                            DReps are not voting on this governance action
+                          </div>
+                        }
                       />
                     </div>
                   )}
@@ -754,15 +809,20 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                             </div>
                           )
                         }
+                        showTitleDivider
+                        showContentDivider
+                        threshold={shouldSPOVote(query.data?.data?.type ?? "") ? spoThreshold : undefined}
+                        isDrep={false}
                         overviewList={spos}
                         className='h-full'
                         endContent={
                           <GovernanceCard
                             yes={sposYes}
                             no={sposNo}
-                            noConfidence={sposNoConfidence}
+                            noConfidence={0}
                             notVoted={sposNotVoted}
                             pieChartData={sposPieChartData}
+                            isDrep={false}
                             breakdown={{
                               yes: { voters: sposYesCount },
                               no: { voters: sposNoCount },
@@ -784,9 +844,21 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                   ) : (
                     <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                       <OverviewCard
-                        title='SPOs'
-                        subTitle='SPOs are not voting on this governance action'
-                        className='flex h-full items-center justify-center text-sm text-grayTextSecondary'
+                        title={
+                          <div className='flex items-center gap-2'>
+                            <span>SPOs</span>
+                            <span className='text-sm font-normal text-grayTextPrimary'>
+                              {query.data?.data?.total.spo.count}
+                            </span>
+                          </div>
+                        }
+                        showTitleDivider
+                        className='h-full'
+                        endContent={
+                          <div className='flex h-full items-center justify-center text-sm text-grayTextSecondary'>
+                            SPOs are not voting on this governance action
+                          </div>
+                        }
                       />
                     </div>
                   )}

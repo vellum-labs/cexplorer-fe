@@ -13,6 +13,7 @@ interface GovernanceCardProps {
   noConfidence: number;
   notVoted: number;
   pieChartData: any;
+  isDrep?: boolean;
   breakdown: {
     yes: { voters: number };
     no: { voters: number };
@@ -34,6 +35,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
   noConfidence,
   notVoted,
   pieChartData,
+  isDrep = false,
   breakdown,
 }) => {
   const { theme } = useThemeStore();
@@ -99,21 +101,23 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
                 />
               </div>
             </div>
-            <div className='flex items-center justify-between'>
-              <span className='text-sm font-medium text-grayTextPrimary'>
-                No confidence
-              </span>
-              <div className='flex items-center justify-end text-nowrap'>
-                <AdaWithTooltip
-                  data={noConfidence}
-                  triggerClassName='text-sm font-medium text-grayTextPrimary'
-                />
-                <VotingBreakdownTooltip
-                  type='No confidence'
-                  delegators={breakdown.noConfidence.delegators}
-                />
+            {isDrep && (
+              <div className='flex items-center justify-between'>
+                <span className='text-sm font-medium text-grayTextPrimary'>
+                  No confidence
+                </span>
+                <div className='flex items-center justify-end text-nowrap'>
+                  <AdaWithTooltip
+                    data={noConfidence}
+                    triggerClassName='text-sm font-medium text-grayTextPrimary'
+                  />
+                  <VotingBreakdownTooltip
+                    type='No confidence'
+                    delegators={breakdown.noConfidence.delegators}
+                  />
+                </div>
               </div>
-            </div>
+            )}
             <div className='flex items-center justify-between'>
               <span className='text-sm font-medium text-grayTextPrimary'>
                 Not voted
