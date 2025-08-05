@@ -210,7 +210,8 @@ export interface GovernanceVoterInfo {
   id: string;
   meta: {
     image_url: string | null;
-    given_name: string;
+    given_name?: string;
+    name?: string;
     objectives: string;
     motivations: string;
     qualifications: string;
