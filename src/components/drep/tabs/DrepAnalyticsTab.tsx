@@ -35,7 +35,7 @@ export const DrepAnalyticsTab: FC<DrepAnalyticsTabProps> = ({ query }) => {
   const items = [
     {
       key: "power",
-      label: "Stake",
+      label: "Voting Power",
       visible: true,
     },
     {
