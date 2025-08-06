@@ -4,7 +4,6 @@ import type { FC } from "react";
 import ReactEcharts from "echarts-for-react";
 import GraphWatermark from "../global/graphs/GraphWatermark";
 
-import { useThemeStore } from "@/stores/themeStore";
 import { useWindowDimensions } from "@/utils/useWindowsDemensions";
 import { useEffect, useRef, useState } from "react";
 
@@ -21,9 +20,8 @@ interface DrepSizeGraphProps {
 export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
   const [size, setSize] = useState<boolean>(false);
   const { width } = useWindowDimensions();
-  const { theme } = useThemeStore();
   const navigate = useNavigate();
-  const { data } = useFetchDrepList(20, 0, "desc", type);
+  const { data } = useFetchDrepList(40, 0, "desc", type);
   const items = data?.pages[0].data.data;
   const chartRef = useRef(null);
   const { textColor, bgColor } = useGraphColors();
@@ -36,45 +34,92 @@ export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
     setSize(width < 600);
   }, [width]);
 
-  const colors: string[] = ["#FEF08A", "#BBF7D0"];
+  const colors: string[] = [
+    "#FEF08A",
+    "#86EFAC",
+    "#DBEAFE",
+    "#F3E8FF",
+    "#FED7D7",
+    "#FFF2CC",
+    "#E0F2FE",
+    "#A7F3D0",
+    "#F1C0E8",
+    "#C7D2FE",
+    "#FDE68A",
+    "#D1FAE5",
+    "#FEE2E2",
+    "#E0E7FF",
+    "#FECACA",
+    "#BAE6FD"
+  ];
 
-  const labelColors: string[] = ["#854D0E", "#166534"];
+  const labelColors: string[] = [
+    "#854D0E",
+    "#166534",
+    "#1E40AF",
+    "#7C3AED",
+    "#DC2626",
+    "#EA580C",
+    "#0891B2",
+    "#059669",
+    "#BE185D",
+    "#4338CA",
+    "#D97706",
+    "#047857",
+    "#BE123C",
+    "#5B21B6",
+    "#B91C1C",
+    "#0369A1"
+  ];
+  const values = (items ?? []).map((item) => {
+    if (type === "power") {
+      return item.amount || 0;
+    } else if (type === "delegator") {
+      return item.distr?.count || 0;
+    } else if (type === "own") {
+      return item.owner?.balance || 0;
+    } else {
+      return (item.amount && item.distr?.count) ? item.amount / item.distr.count : 0;
+    }
+  });
+
+  const maxValue = Math.max(...values);
+  const minValue = Math.min(...values.filter(v => v > 0));
+  
+  const minBubbleSize = 50;
+  const maxBubbleSize = 240;
 
   const chartData = (items ?? []).map((item, index) => {
-    const label = formatString(item.hash?.view, "long");
-    const labelLength = (label ?? "").length;
-    const baseSize =
-      type === "power"
-        ? Math.log(item.amount) * 5
-        : type === "delegator"
-          ? Math.log(item.distr?.count) * 5
-          : type === "own"
-            ? Math.log(item.owner?.balance) * 5
-            : Math.log(item.amount / item.distr?.count) * 5;
-    const adjustedSize = Math.max(baseSize, labelLength * 6);
+    const drepName = item.data?.given_name;
+    const fullName = drepName || formatString(item.hash?.view || null, "long");
+    const label = fullName && fullName.length > 12 ? fullName.substring(0, 12) + "..." : fullName;
+    const value = values[index];
+    
+    let adjustedSize = minBubbleSize;
+    if (value > 0 && maxValue > minValue) {
+      const ratio = (value - minValue) / (maxValue - minValue);
+      adjustedSize = minBubbleSize + (ratio * (maxBubbleSize - minBubbleSize));
+    }
 
-    const color =
-      theme === "light"
-        ? colors[index % colors.length] + "80"
-        : colors[index % colors.length];
+    const baseColor = colors[index % colors.length];
     const labelColor = labelColors[index % labelColors.length];
 
     return {
       name: label,
-      value:
-        type === "power"
-          ? item.amount
-          : type === "delegator"
-            ? item.distr.count
-            : type === "own"
-              ? item.owner.balance
-              : item.amount / item.distr.count,
-      symbolSize: size ? adjustedSize / 1.5 : adjustedSize,
+      value: value,
+      symbolSize: size ? adjustedSize * 0.7 : adjustedSize,
       itemStyle: {
-        color: color,
+        color: baseColor + "E6",
+        borderColor: baseColor + "FF",
+        borderWidth: 2,
+        shadowBlur: 8,
+        shadowColor: baseColor + "30",
+        shadowOffsetX: 2,
+        shadowOffsetY: 2,
       },
       label: {
         color: labelColor,
+        fontWeight: "bold",
       },
     };
   });
@@ -88,7 +133,11 @@ export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
         color: textColor,
       },
       formatter: params => {
-        return `${params.data.name} <br/> ${type !== "delegator" ? `Value: ${lovelaceToAda(params.data.value)}` : `Count: ${params.data.value}`}`;
+        const itemIndex = params.dataIndex;
+        const item = items?.[itemIndex];
+        const drepName = item?.data?.given_name;
+        const fullDisplayName = drepName || formatString(item?.hash?.view || null, "long");
+        return `<b>${fullDisplayName}</b> <br/> ${type === "power" ? `Voting Power: ${lovelaceToAda(params.data.value)}` : type === "delegator" ? `Delegators: ${params.data.value}` : type === "own" ? `Owner Stake: ${lovelaceToAda(params.data.value)}` : type === "average_stake" ? `Average Stake: ${lovelaceToAda(params.data.value)}` : `Value: ${lovelaceToAda(params.data.value)}`}`;
       },
     },
     series: [
@@ -104,9 +153,11 @@ export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
           fontWeight: "bold",
         },
         force: {
-          repulsion: size ? 100 : 300,
-          gravity: 0.1,
+          repulsion: size ? 150 : 400,
+          gravity: 0.2,
+          layoutAnimation: true,
         },
+        roam: true,
         emphasis: {
           disabled: true,
         },
@@ -118,7 +169,7 @@ export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
     <div className='relative w-full'>
       <GraphWatermark />
       <ReactEcharts
-        opts={{ height: 700 }}
+        opts={{ height: size ? 600 : 900 }}
         onChartReady={onChartReadyCallback}
         onEvents={{
           click: params => {
@@ -134,7 +185,7 @@ export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
         option={option}
         notMerge={true}
         lazyUpdate={true}
-        className='h-full min-h-[700px] w-full'
+        className={`h-full w-full ${size ? 'min-h-[600px]' : 'min-h-[900px]'}`}
       />
     </div>
   );
