@@ -110,7 +110,7 @@
   ],
   "lng": ["en"],
   "currency": ["usd", "eur"],
-  "donationAddress": "addr1q884cpmm2et7jhdc28ty70gxwwhdszu2c402986nr2jl2zg7cczh3v50t8keh8767eg5hesgkzm7569qtuaky8nh2n7qh4k6y8",
+  "donationAddress": "addr1q9sz5kw40pmnkcmmfvssm5fy2vzkk7l0wu5szv25nnffkqnkc35qyrgnqu8tl96u5eejytgvtsqatr2ms6hrxhdzq4pslvp2rm",
   "ipfs":"https://ipfs.blockfrost.dev/ipfs/",
   "supportedPools": [
     "pool1cduc7ut6grhqyavrmm3gzcdf4qfdsjk7vdwcxy9c0r5fyaxh2sq"
