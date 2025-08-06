@@ -26,7 +26,7 @@ interface UseSearch extends ReturnType<typeof useSearch> {
 }
 
 export const useSearchTable = ({
-  withoutURL = true,
+  withoutURL = false,
   debounceFilter,
   validPrefixes = [],
 }: UseSearchTableArgs = {}): UseTableSearch => {
@@ -86,7 +86,7 @@ export const useSearchTable = ({
     const urlSearch = formatSearchForURL();
 
     const shouldUpdate =
-      validPrefixes.length === 0 || !tableSearch || !!searchPrefix;
+      validPrefixes.length === 0 || !debouncedTableSearch || !!searchPrefix;
 
     if (shouldUpdate) {
       navigate({
