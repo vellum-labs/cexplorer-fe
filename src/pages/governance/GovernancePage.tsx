@@ -102,12 +102,20 @@ export const GovernancePage: FC = () => {
   ];
 
   useEffect(() => {
-    navigate({
-      search: {
-        page: 1,
-        state: selectedItem,
-      } as any,
-    });
+    if (state !== selectedItem && selectedItem !== "All") {
+      navigate({
+        search: {
+          page: 1,
+          state: selectedItem,
+        } as any,
+      });
+    } else if (selectedItem === "All" && state) {
+      navigate({
+        search: {
+          page: 1,
+        } as any,
+      });
+    }
   }, [selectedItem]);
 
   const columns: TableColumns<GovernanceActionList> = [
