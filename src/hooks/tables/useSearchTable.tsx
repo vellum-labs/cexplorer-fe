@@ -89,12 +89,18 @@ export const useSearchTable = ({
       validPrefixes.length === 0 || !debouncedTableSearch || !!searchPrefix;
 
     if (shouldUpdate) {
-      navigate({
-        search: {
-          ...rest,
-          search: urlSearch,
-        } as any,
-      });
+      const currentSearch = search ?? "";
+      const newSearch = urlSearch ?? "";
+      
+      if (currentSearch !== newSearch) {
+        navigate({
+          search: {
+            ...rest,
+            search: urlSearch,
+            page: newSearch && !currentSearch ? rest.page : undefined,
+          } as any,
+        });
+      }
     }
   }, [search, debouncedTableSearch, searchPrefix, withoutURL, validPrefixes]);
 
