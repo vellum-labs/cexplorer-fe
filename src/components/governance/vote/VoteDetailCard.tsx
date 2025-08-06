@@ -222,7 +222,13 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
         <div className='flex items-center gap-2'>
           {vote?.info?.id && (
             <Image
-              src={generateImageUrl(vote.info.id, "ico")}
+              src={generateImageUrl(
+                vote.info.id, 
+                "ico", 
+                vote?.voter_role === "DRep" ? "drep" : 
+                vote?.voter_role === "ConstitutionalCommittee" ? "cc" : 
+                undefined
+              )}
               type='user'
               height={20}
               width={20}

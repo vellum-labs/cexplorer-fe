@@ -26,7 +26,11 @@ export const GovVoterCell: FC<GovVoterCellProps> = ({ role, info }) => {
 
   const displayName = meta?.given_name || meta?.name || "";
 
-  const imageUrl = generateImageUrl(voterId, "ico", role === "DRep" ? "drep" : undefined);
+  const imageUrl = generateImageUrl(
+    voterId, 
+    "ico", 
+    role === "DRep" ? "drep" : role === "ConstitutionalCommittee" ? "cc" : undefined
+  );
 
 
   const toPath =

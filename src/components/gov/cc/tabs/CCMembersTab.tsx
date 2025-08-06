@@ -4,6 +4,7 @@ import type { TableColumns } from "@/types/tableTypes";
 import { Image } from "@/components/global/Image";
 import type { FC } from "react";
 import { formatString } from "@/utils/format/format";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 import { Link } from "@tanstack/react-router";
 import Copy from "@/components/global/Copy";
@@ -34,7 +35,6 @@ export const CCMembersTab: FC = () => {
       widthPx: 200,
       visible: true,
       render: item => {
-        const img = item.registry?.img;
         const name = item.registry?.name ?? "Unknown";
         const coldKey = item.key?.cold ?? "N/A";
 
@@ -46,7 +46,7 @@ export const CCMembersTab: FC = () => {
           <div className='flex items-center gap-3'>
             <div className='min-w-[32px]'>
               <Image
-                src={img}
+                src={generateImageUrl(coldKey, "ico", "cc")}
                 alt='member'
                 className='rounded-full'
                 width={32}
