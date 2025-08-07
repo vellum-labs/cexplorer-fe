@@ -169,18 +169,19 @@ export const useEpochList = ({
     {
       key: "epoch",
       render: item => {
+        const epochNo = item.params?.[0]?.epoch_no ?? item.no;
         return (
           <div className='relative'>
             <div className='absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2'>
-              {+epoch_number - 1 === item.params?.epoch_no && <PulseDot />}
+              {+epoch_number - 1 === epochNo && <PulseDot />}
             </div>
             <p className='cursor-pointer pl-3 text-sm text-primary'>
               <Link
                 to='/epoch/$no'
-                params={{ no: String(item.params?.epoch_no ?? 0) }}
+                params={{ no: String(epochNo) }}
                 className='text-primary'
               >
-                {item.params?.epoch_no}
+                {epochNo}
               </Link>
             </p>
           </div>
@@ -193,8 +194,8 @@ export const useEpochList = ({
     {
       key: "block",
       render: item => (
-        <p title={item?.blk_count} className='text-right'>
-          {formatNumber(item?.blk_count)}
+        <p title={item?.stats?.epoch?.block_count ?? item?.blk_count} className='text-right'>
+          {formatNumber(item?.stats?.epoch?.block_count ?? item?.blk_count)}
         </p>
       ),
       title: <p className='w-full text-right'>Blocks</p>,
@@ -258,14 +259,16 @@ export const useEpochList = ({
     {
       key: "rewards",
       render: item => {
-        const isPending = item.params.epoch_no >= epoch_number - 2;
+        const epochNo = item.params?.[0]?.epoch_no ?? item.no;
+        const isPending = epochNo >= epoch_number - 2;
 
+        const leaderReward = item.stats?.rewards?.leader ?? 0;
         const [ada, usd] = lovelaceToAdaWithRates(
-          item.stats?.rewards?.leader ?? 0,
+          leaderReward,
           curr,
         );
 
-        if (isPending) {
+        if (isPending || leaderReward === null) {
           return (
             <div className='flex justify-end'>
               <Badge color='yellow' className='ml-auto'>
@@ -277,7 +280,7 @@ export const useEpochList = ({
 
         return (
           <div title={ada} className='text-right'>
-            <AdaWithTooltip data={item.stats?.rewards?.leader ?? 0} />
+            <AdaWithTooltip data={leaderReward} />
             <div className='flex w-full justify-end'>
               <Badge color='blue' className='text-nowrap'>
                 {currencySigns[currency]} {formatNumberWithSuffix(usd)}
@@ -292,14 +295,17 @@ export const useEpochList = ({
     },
     {
       key: "stake",
-      render: item => (
-        <p
-          title={lovelaceToAda(item.stats?.stake?.epoch ?? 0)}
-          className='text-nowrap text-right'
-        >
-          <AdaWithTooltip data={item.stats?.stake?.epoch ?? 0} />
-        </p>
-      ),
+      render: item => {
+        const stakeEpoch = item.stats?.stake?.epoch ?? 0;
+        return (
+          <p
+            title={lovelaceToAda(stakeEpoch)}
+            className='text-nowrap text-right'
+          >
+            <AdaWithTooltip data={stakeEpoch} />
+          </p>
+        );
+      },
       title: <p className='w-full text-right'>Stake</p>,
       visible: columnsVisibility.stake,
       widthPx: 50,
@@ -308,8 +314,8 @@ export const useEpochList = ({
       key: "usage",
       render: item => {
         const blockSize = item?.stats?.epoch?.block_size ?? 0;
-        const blockCount = item.blk_count ?? 0;
-        const maxBlockSize = item.params?.max_block_size;
+        const blockCount = item?.stats?.epoch?.block_count ?? item.blk_count ?? 0;
+        const maxBlockSize = item.params?.[0]?.max_block_size ?? 0;
         const blockUsage = isNaN(
           (blockSize / (blockCount * maxBlockSize)) * 100,
         )
@@ -373,8 +379,8 @@ export const useEpochList = ({
       },
       jsonFormat: item => {
         const blockSize = item?.stats?.epoch?.block_size ?? 0;
-        const blockCount = item.blk_count ?? 0;
-        const maxBlockSize = item.params?.max_block_size;
+        const blockCount = item?.stats?.epoch?.block_count ?? item.blk_count ?? 0;
+        const maxBlockSize = item.params?.[0]?.max_block_size ?? 0;
         const blockUsage = isNaN(
           (blockSize / (blockCount * maxBlockSize)) * 100,
         )
