@@ -11,7 +11,7 @@ import { AdaWithTooltip } from "../global/AdaWithTooltip";
 import { Image } from "../global/Image";
 import { formatString } from "@/utils/format/format";
 import { Link } from "@tanstack/react-router";
-import { getGovActionStatus } from "@/utils/gov/getGovActionStatus";
+import { GovernanceStatusBadge } from "@/components/global/badges/GovernanceStatusBadge";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";
@@ -546,42 +546,17 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                   <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                     <OverviewCard
                       title='Governance action'
-                      subTitle={(() => {
-                        const status = getGovActionStatus(
-                          query?.data?.data ?? {
+                      subTitle={
+                        <GovernanceStatusBadge
+                          item={query?.data?.data ?? {
                             dropped_epoch: null,
                             enacted_epoch: null,
                             expired_epoch: null,
                             ratified_epoch: null,
-                          },
-                          miscConst?.no,
-                        );
-
-                        if (!status) {
-                          return "-";
-                        }
-
-                        const statusColor =
-                          status === "Active"
-                            ? "#17B26A"
-                            : status === "Enacted"
-                              ? "#00A9E3"
-                              : status === "Expired"
-                                ? "#F79009"
-                                : "#079455";
-
-                        return (
-                          <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-lg border border-border px-[10px]'>
-                            <PulseDot
-                              color={statusColor}
-                              animate={status === "Active"}
-                            />
-                            <span className='text-xs font-medium'>
-                              {status}
-                            </span>
-                          </div>
-                        );
-                      })()}
+                          }}
+                          currentEpoch={miscConst?.no ?? 0}
+                        />
+                      }
                       overviewList={action}
                       className='h-full'
                     />

@@ -15,7 +15,6 @@ import TableSearchInput from "@/components/global/inputs/SearchInput";
 import GlobalTable from "@/components/table/GlobalTable";
 import DateCell from "@/components/table/DateCell";
 import Copy from "@/components/global/Copy";
-import PulseDot from "@/components/global/PulseDot";
 import SortBy from "@/components/ui/sortBy";
 
 import { Asterisk, ExternalLink, Landmark, Route, User } from "lucide-react";
@@ -31,7 +30,7 @@ import { governanceListTableOptions } from "@/constants/tables/governanceActions
 import { formatString } from "@/utils/format/format";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { getEpochByTime } from "@/utils/getEpochByTime";
-import { getGovActionStatus } from "@/utils/gov/getGovActionStatus";
+import { GovernanceStatusBadge } from "@/components/global/badges/GovernanceStatusBadge";
 import { ActionTypes } from "@/components/global/ActionTypes";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
@@ -288,29 +287,12 @@ export const GovernancePage: FC = () => {
     },
     {
       key: "status",
-      render: item => {
-        const status = getGovActionStatus(item, miscConst?.no);
-
-        if (!status) {
-          return "-";
-        }
-
-        const statusColor =
-          status === "Active"
-            ? "#17B26A"
-            : status === "Enacted"
-              ? "#00A9E3"
-              : status === "Expired"
-                ? "#F79009"
-                : "#079455";
-
-        return (
-          <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-lg border border-border px-[10px]'>
-            <PulseDot color={statusColor} animate={status === "Active"} />
-            <span className='text-xs font-medium'>{status}</span>
-          </div>
-        );
-      },
+      render: item => (
+        <GovernanceStatusBadge
+          item={item}
+          currentEpoch={miscConst?.no ?? 0}
+        />
+      ),
       title: "Status",
       visible: columnsVisibility.status,
       widthPx: 40,
