@@ -1,43 +1,39 @@
-type GovActionStatus = "Active" | "Ratified" | "Enacted" | "Expired";
+import type { GovernanceActionDetail } from "@/types/governanceTypes";
+
+export type GovActionStatus = "Active" | "Ratified" | "Enacted" | "Expired";
+
+export type GovernanceEpochs = Pick<
+  GovernanceActionDetail,
+  'dropped_epoch' | 'enacted_epoch' | 'expired_epoch' | 'ratified_epoch'
+>;
 
 export const getGovActionStatus = (
-  item: {
-    dropped_epoch: number | null;
-    enacted_epoch: number | null;
-    expired_epoch: number | null;
-    ratified_epoch: number | null;
-  },
-  epochNo: number = 1,
-): GovActionStatus | undefined => {
+  item: GovernanceEpochs,
+  currentEpoch: number,
+): GovActionStatus => {
   const { dropped_epoch, enacted_epoch, expired_epoch, ratified_epoch } = item;
 
-  if (enacted_epoch != null && enacted_epoch <= epochNo) {
+  // Enacted: action has been enacted and current epoch >= enacted epoch
+  if (enacted_epoch != null && enacted_epoch <= currentEpoch) {
     return "Enacted";
   }
 
+  // Expired: action expired naturally OR was dropped
   if (
-    (expired_epoch != null && expired_epoch <= epochNo) ||
-    (dropped_epoch != null && dropped_epoch <= epochNo)
+    (expired_epoch != null && expired_epoch <= currentEpoch) ||
+    (dropped_epoch != null && dropped_epoch <= currentEpoch)
   ) {
     return "Expired";
   }
 
+  // Ratified: action is ratified but not yet enacted (enacted_epoch is null or future)
   if (
     ratified_epoch != null &&
-    enacted_epoch != null &&
-    enacted_epoch > epochNo
+    (enacted_epoch == null || enacted_epoch > currentEpoch)
   ) {
     return "Ratified";
   }
 
-  if (
-    ratified_epoch == null &&
-    enacted_epoch == null &&
-    (expired_epoch == null || expired_epoch >= epochNo) &&
-    (dropped_epoch == null || dropped_epoch >= epochNo)
-  ) {
-    return "Active";
-  }
-
-  return undefined;
+  // Active: default state - not ratified, not enacted, not expired/dropped
+  return "Active";
 };

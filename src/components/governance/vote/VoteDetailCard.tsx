@@ -11,9 +11,8 @@ import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
 import { Image } from "@/components/global/Image";
 import { Link } from "@tanstack/react-router";
-import PulseDot from "@/components/global/PulseDot";
 import { Landmark, Route, User } from "lucide-react";
-import { getGovActionStatus } from "@/utils/gov/getGovActionStatus";
+import { GovernanceStatusBadge } from "@/components/global/badges/GovernanceStatusBadge";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { formatString } from "@/utils/format/format";
@@ -84,39 +83,24 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
     {
       key: "status",
       title: "Status",
-      value: (() => {
-        const status = getGovActionStatus(
-          {
+      value: (
+        <GovernanceStatusBadge
+          item={{
             dropped_epoch: vote?.proposal?.dropped_epoch ?? null,
             enacted_epoch: vote?.proposal?.enacted_epoch ?? null,
             expired_epoch: vote?.proposal?.expired_epoch ?? null,
             ratified_epoch: vote?.proposal?.ratified_epoch ?? null,
-          },
-          currentEpoch,
-        );
-
-        const statusColor =
-          status === "Active"
-            ? "#17B26A"
-            : status === "Enacted"
-              ? "#00A9E3"
-              : status === "Expired"
-                ? "#F79009"
-                : "#079455";
-
-        return (
-          <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-lg border border-border px-[10px]'>
-            <PulseDot color={statusColor} animate={status === "Active"} />
-            <span className='text-xs font-medium'>{status}</span>
-          </div>
-        );
-      })(),
+          }}
+          currentEpoch={currentEpoch ?? 0}
+        />
+      ),
     },
 
-    {
+    // Only show enacted epoch if it exists
+    ...(vote?.proposal?.enacted_epoch ? [{
       key: "enacted_epoch",
       title: "Enacted epoch",
-      value: vote?.proposal?.enacted_epoch ? (
+      value: (
         <span className='text-sm'>
           Epoch{" "}
           <Link
@@ -127,14 +111,13 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
             {vote?.proposal?.enacted_epoch}
           </Link>
         </span>
-      ) : (
-        "-"
       ),
-    },
-    {
+    }] : []),
+    // Only show ratified epoch if it exists
+    ...(vote?.proposal?.ratified_epoch ? [{
       key: "ratified_epoch",
       title: "Ratified epoch",
-      value: vote?.proposal?.ratified_epoch ? (
+      value: (
         <span className='text-sm'>
           Epoch{" "}
           <Link
@@ -145,14 +128,13 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
             {vote?.proposal?.ratified_epoch}
           </Link>
         </span>
-      ) : (
-        "-"
       ),
-    },
-    {
+    }] : []),
+    // Only show expired epoch if it exists
+    ...(vote?.proposal?.expired_epoch ? [{
       key: "expired_epoch",
       title: "Expired epoch",
-      value: vote?.proposal?.expired_epoch ? (
+      value: (
         <span className='text-sm'>
           Epoch{" "}
           <Link
@@ -163,10 +145,8 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
             {vote?.proposal?.expired_epoch}
           </Link>
         </span>
-      ) : (
-        "-"
       ),
-    },
+    }] : []),
     {
       key: "voting_start",
       title: "Voting start",
@@ -178,7 +158,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
     },
     {
       key: "voting_end",
-      title: "Voting end",
+      title: "Voting deadline",
       value: vote?.proposal?.expiration ? (
         <span className='text-sm'>
           Epoch{" "}
