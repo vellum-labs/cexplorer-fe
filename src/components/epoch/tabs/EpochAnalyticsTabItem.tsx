@@ -61,7 +61,7 @@ export const EpochAnalyticsTabItem: FC = () => {
           return (
             item?.stats?.epoch?.block_size > 0 &&
             item?.blk_count > 0 &&
-            item?.params?.max_block_size > 0
+            item?.params?.[0]?.max_block_size > 0
           );
         })
         .map(item => item.no),
@@ -70,12 +70,12 @@ export const EpochAnalyticsTabItem: FC = () => {
           item =>
             item?.stats?.epoch?.block_size > 0 &&
             item?.blk_count > 0 &&
-            item?.params?.max_block_size > 0,
+            item?.params?.[0]?.max_block_size > 0,
         )
         .map(item => {
           const blockSize = item.stats.epoch?.block_size;
           const blockCount = item.blk_count;
-          const maxBlockSize = item.params.max_block_size;
+          const maxBlockSize = item.params?.[0]?.max_block_size ?? 0;
 
           const blockUsage = isNaN(
             (blockSize / (blockCount * maxBlockSize)) * 100,

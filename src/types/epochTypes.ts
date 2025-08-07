@@ -48,14 +48,31 @@ interface PotStats {
   treasury: number;
 }
 
-interface EpochStats {
-  fees: number;
-  out_sum: number;
-  end_time: string;
-  tx_count: number;
+interface EpochBlockStats {
   block_size: number;
-  start_time: string;
   block_count: number;
+}
+
+interface EpochStakeStats {
+  epoch: number;
+  active: number;
+  accounts: number;
+}
+
+interface EpochRewardStats {
+  leader: number | null;
+  member: number | null;
+}
+
+interface EpochPoolStat {
+  pct_member: number | null;
+}
+
+interface EpochStatsNew {
+  epoch: EpochBlockStats;
+  stake: EpochStakeStats;
+  rewards: EpochRewardStats;
+  pool_stat: EpochPoolStat;
 }
 
 interface ProtoStats {
@@ -120,7 +137,7 @@ interface EpochDaily {
 export interface EpochStatsSummary {
   pots: PotStats;
   daily: EpochDaily[];
-  epoch: EpochStats;
+  epoch: EpochStat;
   proto: ProtoStats;
   stake: StakeStats;
   rewards: RewardStats;
@@ -137,9 +154,8 @@ export interface EpochListData {
   tx_count: number;
   out_sum: number;
   fees: number;
-  params: EpochParam;
-  params_active: EpochParam;
-  stats: EpochStatsSummary;
+  params: EpochParam[];
+  stats: EpochStatsNew;
 }
 
 interface EpochCore {
