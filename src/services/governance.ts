@@ -63,6 +63,7 @@ export const fetchGovernenceVote = async (
   sort?: "asc" | "desc",
   vote?: string,
   vote_not = true,
+  search?: string,
 ) => {
   const url = voter_role && vote_not ? "/gov/vote_not" : "/gov/vote";
   const options = {
@@ -74,6 +75,7 @@ export const fetchGovernenceVote = async (
       order: voter_role ? (order ?? "stake") : undefined,
       sort: voter_role ? (sort ?? "desc") : undefined,
       vote,
+      search,
     },
   };
   return handleFetch<any>(url, undefined, options);
@@ -88,9 +90,20 @@ export const useFetchGovernanceVote = (
   sort?: "asc" | "desc",
   vote?: string,
   vote_not = true,
+  search?: string,
 ) =>
   useInfiniteQuery({
-    queryKey: ["gov-vote", limit, page, id, voter_role, order, sort, vote],
+    queryKey: [
+      "gov-vote",
+      limit,
+      page,
+      id,
+      voter_role,
+      order,
+      sort,
+      vote,
+      search,
+    ],
     queryFn: ({ pageParam = page }) =>
       fetchGovernenceVote(
         limit,
@@ -101,6 +114,7 @@ export const useFetchGovernanceVote = (
         sort,
         vote,
         vote_not,
+        search,
       ),
     initialPageParam: page,
     getNextPageParam: lastPage => {

@@ -57,6 +57,8 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
     tabName: "voted",
     onlyURL: ["voter_role", "vote"],
   });
+  const [{ tableSearch, debouncedTableSearch }, setTableSearch] =
+    useSearchTable();
 
   const govQuery = useFetchGovernanceVote(
     rows,
@@ -67,9 +69,8 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
     undefined,
     filter?.vote ? filter.vote : undefined,
     false,
+    debouncedTableSearch ? debouncedTableSearch : undefined,
   );
-
-  const [{ tableSearch }, setTableSearch] = useSearchTable();
 
   const columns = [
     {
