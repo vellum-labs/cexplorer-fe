@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { useState } from "react";
 import type { GovernanceVote } from "@/types/governanceTypes";
+import { GovernanceRole } from "@/types/governanceTypes";
 
 import {
   ActionTypes as ActionTypesComponent,
@@ -201,15 +202,15 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       value: (() => {
         const role = vote?.voter_role;
         const displayRole =
-          role === "ConstitutionalCommittee"
+          role === GovernanceRole.ConstitutionalCommittee
             ? "Constitutional Committee"
             : role;
 
         return (
           <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-lg border border-border px-[6px]'>
-            {role === "DRep" && <User size={12} className='text-primary' />}
-            {role === "ConstitutionalCommittee" && <Landmark size={12} className='text-primary' />}
-            {role === "SPO" && <Route size={12} className='text-primary' />}
+            {role === GovernanceRole.DRep && <User size={12} className='text-primary' />}
+            {role === GovernanceRole.ConstitutionalCommittee && <Landmark size={12} className='text-primary' />}
+            {role === GovernanceRole.SPO && <Route size={12} className='text-primary' />}
             <span className='text-xs font-medium'>{displayRole}</span>
           </div>
         );
@@ -225,8 +226,8 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
               src={generateImageUrl(
                 vote.info.id, 
                 "ico", 
-                vote?.voter_role === "DRep" ? "drep" : 
-                vote?.voter_role === "ConstitutionalCommittee" ? "cc" : 
+                vote?.voter_role === GovernanceRole.DRep ? "drep" : 
+                vote?.voter_role === GovernanceRole.ConstitutionalCommittee ? "cc" : 
                 undefined
               )}
               type='user'
@@ -238,11 +239,11 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
           {vote?.voter_role && vote?.info?.id ? (
             <Link
               to={
-                vote.voter_role === "SPO"
+                vote.voter_role === GovernanceRole.SPO
                   ? "/pool/$id"
-                  : vote.voter_role === "DRep"
+                  : vote.voter_role === GovernanceRole.DRep
                     ? "/drep/$hash"
-                    : vote.voter_role === "ConstitutionalCommittee"
+                    : vote.voter_role === GovernanceRole.ConstitutionalCommittee
                       ? "/gov/cc/$coldKey"
                       : ""
               }
@@ -271,11 +272,11 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
           {!voterDisplayName && vote?.voter_role && vote?.info?.id ? (
             <Link
               to={
-                vote.voter_role === "SPO"
+                vote.voter_role === GovernanceRole.SPO
                   ? "/pool/$id"
-                  : vote.voter_role === "DRep"
+                  : vote.voter_role === GovernanceRole.DRep
                     ? "/drep/$hash"
-                    : vote.voter_role === "ConstitutionalCommittee"
+                    : vote.voter_role === GovernanceRole.ConstitutionalCommittee
                       ? "/gov/cc/$coldKey"
                       : ""
               }

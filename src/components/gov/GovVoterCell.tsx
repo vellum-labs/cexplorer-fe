@@ -4,9 +4,10 @@ import Copy from "../global/Copy";
 import { Image } from "../global/Image";
 import { formatString } from "@/utils/format/format";
 import { generateImageUrl } from "@/utils/generateImageUrl";
+import { GovernanceRole } from "@/types/governanceTypes";
 
 interface GovVoterCellProps {
-  role?: "DRep" | "SPO" | "ConstitutionalCommittee" | string;
+  role?: GovernanceRole | string;
   info?: {
     id?: string;
     meta?: {
@@ -29,16 +30,16 @@ export const GovVoterCell: FC<GovVoterCellProps> = ({ role, info }) => {
   const imageUrl = generateImageUrl(
     voterId, 
     "ico", 
-    role === "DRep" ? "drep" : role === "ConstitutionalCommittee" ? "cc" : undefined
+    role === GovernanceRole.DRep ? "drep" : role === GovernanceRole.ConstitutionalCommittee ? "cc" : undefined
   );
 
 
   const toPath =
-    role === "SPO"
+    role === GovernanceRole.SPO
       ? `/pool/${voterId}`
-      : role === "DRep"
+      : role === GovernanceRole.DRep
         ? `/drep/${voterId}`
-        : role === "ConstitutionalCommittee"
+        : role === GovernanceRole.ConstitutionalCommittee
           ? `/gov/cc/${voterId}`
           : undefined;
 
