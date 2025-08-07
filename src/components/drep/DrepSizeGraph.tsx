@@ -50,7 +50,7 @@ export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
     "#FEE2E2",
     "#E0E7FF",
     "#FECACA",
-    "#BAE6FD"
+    "#BAE6FD",
   ];
 
   const labelColors: string[] = [
@@ -69,9 +69,9 @@ export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
     "#BE123C",
     "#5B21B6",
     "#B91C1C",
-    "#0369A1"
+    "#0369A1",
   ];
-  const values = (items ?? []).map((item) => {
+  const values = (items ?? []).map(item => {
     if (type === "power") {
       return item.amount || 0;
     } else if (type === "delegator") {
@@ -79,32 +79,38 @@ export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
     } else if (type === "own") {
       return item.owner?.balance || 0;
     } else {
-      return (item.amount && item.distr?.count) ? item.amount / item.distr.count : 0;
+      return item.amount && item.distr?.count
+        ? item.amount / item.distr.count
+        : 0;
     }
   });
 
   const maxValue = Math.max(...values);
   const minValue = Math.min(...values.filter(v => v > 0));
-  
+
   const minBubbleSize = 50;
   const maxBubbleSize = 240;
 
   const chartData = (items ?? []).map((item, index) => {
     const drepName = item.data?.given_name;
     const fullName = drepName || formatString(item.hash?.view || null, "long");
-    const label = fullName && fullName.length > 12 ? fullName.substring(0, 12) + "..." : fullName;
+    const label =
+      fullName && fullName.length > 12
+        ? fullName.substring(0, 12) + "..."
+        : fullName;
     const value = values[index];
-    
+
     let adjustedSize = minBubbleSize;
     if (value > 0 && maxValue > minValue) {
       const ratio = (value - minValue) / (maxValue - minValue);
-      adjustedSize = minBubbleSize + (ratio * (maxBubbleSize - minBubbleSize));
+      adjustedSize = minBubbleSize + ratio * (maxBubbleSize - minBubbleSize);
     }
 
     const baseColor = colors[index % colors.length];
     const labelColor = labelColors[index % labelColors.length];
 
     return {
+      id: index,
       name: label,
       value: value,
       symbolSize: size ? adjustedSize * 0.7 : adjustedSize,
@@ -136,7 +142,8 @@ export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
         const itemIndex = params.dataIndex;
         const item = items?.[itemIndex];
         const drepName = item?.data?.given_name;
-        const fullDisplayName = drepName || formatString(item?.hash?.view || null, "long");
+        const fullDisplayName =
+          drepName || formatString(item?.hash?.view || null, "long");
         return `<b>${fullDisplayName}</b> <br/> ${type === "power" ? `Voting Power: ${lovelaceToAda(params.data.value)}` : type === "delegator" ? `Delegators: ${params.data.value}` : type === "own" ? `Owner Stake: ${lovelaceToAda(params.data.value)}` : type === "average_stake" ? `Average Stake: ${lovelaceToAda(params.data.value)}` : `Value: ${lovelaceToAda(params.data.value)}`}`;
       },
     },
@@ -185,7 +192,7 @@ export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
         option={option}
         notMerge={true}
         lazyUpdate={true}
-        className={`h-full w-full ${size ? 'min-h-[600px]' : 'min-h-[900px]'}`}
+        className={`h-full w-full ${size ? "min-h-[600px]" : "min-h-[900px]"}`}
       />
     </div>
   );
