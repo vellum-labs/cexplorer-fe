@@ -34,6 +34,10 @@ export const governanceListTableOptions: GovernanceActionListTableOptions[] = [
     name: "Status",
   },
   {
+    key: "progress",
+    name: "Progress",
+  },
+  {
     key: "tx",
     name: "Tx",
   },

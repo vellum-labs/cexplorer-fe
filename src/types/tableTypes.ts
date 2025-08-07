@@ -621,6 +621,7 @@ export interface GovernanceListTableColumns {
   duration: boolean;
   end: boolean;
   status: boolean;
+  progress: boolean;
   tx: boolean;
 }
 

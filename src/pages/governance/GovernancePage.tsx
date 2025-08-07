@@ -35,6 +35,7 @@ import { getGovActionStatus } from "@/utils/gov/getGovActionStatus";
 import { ActionTypes } from "@/components/global/ActionTypes";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
+import { GovernanceVotingProgress } from "@/components/governance/GovernanceVotingProgress";
 
 export const GovernancePage: FC = () => {
   const { page, state } = useSearch({
@@ -314,6 +315,15 @@ export const GovernancePage: FC = () => {
       title: "Status",
       visible: columnsVisibility.status,
       widthPx: 40,
+    },
+    {
+      key: "progress",
+      render: item => {
+        return <GovernanceVotingProgress governanceAction={item as any} />;
+      },
+      title: "Progress",
+      visible: columnsVisibility.progress,
+      widthPx: 75,
     },
     {
       key: "tx",
