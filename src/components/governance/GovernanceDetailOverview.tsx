@@ -200,8 +200,8 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
   const { data: basicData } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(basicData?.data.version.const);
 
-  const { endTime } = calculateEpochTimeByNumber(
-    query?.data?.data?.expired_epoch ?? 0,
+  const { startTime } = calculateEpochTimeByNumber(
+    query?.data?.data?.expiration ?? 0,
     miscConst?.epoch.no ?? 0,
     miscConst?.epoch.start_time ?? "",
   );
@@ -251,9 +251,9 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       value: <TimeDateIndicator time={query?.data?.data?.tx?.time} />,
     },
     {
-      label: "Action end date",
-      value: query?.data?.data?.expired_epoch ? (
-        <TimeDateIndicator time={endTime.toString()} />
+      label: "Voting deadline",
+      value: query?.data?.data?.expiration ? (
+        <TimeDateIndicator time={startTime.toString()} />
       ) : (
         "-"
       ),
