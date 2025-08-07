@@ -10,111 +10,67 @@ interface GovernanceVotingProgressProps {
 export const GovernanceVotingProgress: FC<GovernanceVotingProgressProps> = ({
   governanceAction,
 }) => {
+  const roundPercentage = (percent: number): number => Math.round(percent * 100) / 100;
 
-  // Helper function to calculate stake from voting procedure
-  const calculateStake = (votingProcedure: NonNullable<GovernanceActionList['voting_procedure']>, voterRole: string, voteType?: string) => {
-    return votingProcedure
-      .filter(item => item?.voter_role === voterRole && (voteType ? item?.vote === voteType : true))
-      .reduce((sum, item) => sum + (item?.stat?.stake || 0), 0);
+  const getVoteData = (votingProcedure: NonNullable<GovernanceActionList['voting_procedure']>, role: string) => {
+    const votes = votingProcedure.filter(item => item?.voter_role === role);
+    return votes.reduce((acc, item) => {
+      const vote = item?.vote;
+      if (vote === "Yes") acc.yes = (item?.stat?.stake || item?.count || 0);
+      else if (vote === "Abstain") acc.abstain = (item?.stat?.stake || item?.count || 0);
+      return acc;
+    }, { yes: 0, abstain: 0 });
   };
 
-  // Function to calculate all voting progress states at once
-  const calculateAllVotingProgress = (
+  const calculateVotingProgress = (
     votingProcedure: NonNullable<GovernanceActionList['voting_procedure']>,
     actionType: string,
     governanceAction: GovernanceActionList
-  ): Array<{ type: string; yesPercent: number }> => {
-    const results: Array<{ type: string; yesPercent: number }> = [];
+  ) => {
+    const voters = [
+      {
+        condition: shouldCCVote(actionType) && governanceAction?.committee?.member,
+        type: "CC",
+        role: voterRoles.constitutionalCommittee,
+        totalBase: governanceAction?.committee?.member?.length || 0,
+        isCountBased: true
+      },
+      {
+        condition: shouldDRepVote(actionType) && governanceAction?.total?.drep,
+        type: "DRep", 
+        role: voterRoles.drep,
+        totalBase: (governanceAction?.total?.drep?.stake || 0) + 
+                   (governanceAction?.total?.drep?.drep_always_abstain?.stake || 0) + 
+                   (governanceAction?.total?.drep?.drep_always_no_confidence?.stake || 0),
+        extraAbstain: governanceAction?.total?.drep?.drep_always_abstain?.stake || 0,
+        isCountBased: false
+      },
+      {
+        condition: shouldSPOVote(actionType) && governanceAction?.total?.spo,
+        type: "SPO",
+        role: voterRoles.spo, 
+        totalBase: governanceAction?.total?.spo?.stake || 0,
+        isCountBased: false
+      }
+    ];
 
-    // Constitutional Committee Progress
-    if (shouldCCVote(actionType) && governanceAction?.committee?.member) {
-      let yesCount = 0, abstainCount = 0;
-
-      votingProcedure.forEach(item => {
-        if (item?.voter_role === voterRoles.constitutionalCommittee) {
-          if (item.vote === "Yes") yesCount = item.count || 0;
-          else if (item.vote === "Abstain") abstainCount = item.count || 0;
-        }
+    return voters
+      .filter(voter => voter.condition)
+      .map(voter => {
+        const { yes, abstain } = getVoteData(votingProcedure, voter.role);
+        const totalAbstain = abstain + (voter.extraAbstain || 0);
+        const votingBase = voter.totalBase - totalAbstain;
+        
+        const yesPercent = votingBase > 0 ? roundPercentage((yes / votingBase) * 100) : 0;
+        
+        return { type: voter.type, yesPercent };
       });
-
-      const votingBase = governanceAction.committee.member.length - abstainCount;
-      
-      if (votingBase > 0) {
-        const ccProgress = (yesCount / votingBase) * 100;
-        results.push({
-          type: "CC",
-          yesPercent: roundPercentage(ccProgress),
-        });
-      } else if (abstainCount === governanceAction.committee.member.length) {
-        results.push({
-          type: "CC", 
-          yesPercent: 0,
-        });
-      }
-    }
-
-    // DReps Progress
-    if (shouldDRepVote(actionType) && governanceAction?.total?.drep) {
-      const drepData = governanceAction.total.drep;
-      const yesStake = calculateStake(votingProcedure, voterRoles.drep, "Yes");
-      
-      const totalStake = 
-        (drepData.stake || 0) +
-        (drepData.drep_always_abstain?.stake || 0) +
-        (drepData.drep_always_no_confidence?.stake || 0);
-
-      const abstainStake = 
-        calculateStake(votingProcedure, voterRoles.drep, "Abstain") + 
-        (drepData.drep_always_abstain?.stake || 0);
-      
-      const votingStake = totalStake - abstainStake;
-      if (votingStake > 0) {
-        const drepProgress = (yesStake / votingStake) * 100;
-        results.push({
-          type: "DRep",
-          yesPercent: roundPercentage(drepProgress),
-        });
-      } else {
-        results.push({
-          type: "DRep",
-          yesPercent: 0,
-        });
-      }
-    }
-
-    // SPOs Progress
-    if (shouldSPOVote(actionType) && governanceAction?.total?.spo) {
-      const spoData = governanceAction.total.spo;
-      const yesStake = calculateStake(votingProcedure, voterRoles.spo, "Yes");
-      const abstainStake = calculateStake(votingProcedure, voterRoles.spo, "Abstain");
-      
-      const votingStake = (spoData.stake || 0) - abstainStake;
-      if (votingStake > 0) {
-        const spoProgress = (yesStake / votingStake) * 100;
-        results.push({
-          type: "SPO",
-          yesPercent: roundPercentage(spoProgress),
-        });
-      } else {
-        results.push({
-          type: "SPO",
-          yesPercent: 0,
-        });
-      }
-    }
-
-    return results;
-  };
-
-  // Helper function to round percentage
-  const roundPercentage = (percent: number): number => {
-    return Math.round(percent * 100) / 100;
   };
 
   const votingProcedure = governanceAction?.voting_procedure || [];
   const actionType = governanceAction?.type || "";
 
-  const progressBars = calculateAllVotingProgress(votingProcedure, actionType, governanceAction);
+  const progressBars = calculateVotingProgress(votingProcedure, actionType, governanceAction);
 
   if (progressBars.length === 0) {
     return (
