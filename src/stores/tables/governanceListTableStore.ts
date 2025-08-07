@@ -25,6 +25,7 @@ export const useGovernanceListTableStore = handlePersistStore<
       duration: true,
       end: true,
       status: true,
+      progress: true,
       tx: true,
     },
 
@@ -37,6 +38,7 @@ export const useGovernanceListTableStore = handlePersistStore<
       "duration",
       "end",
       "status",
+      "progress",
       "tx",
     ],
   },

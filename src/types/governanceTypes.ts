@@ -46,7 +46,34 @@ export interface GovernanceActionList {
   enacted_epoch: null;
   dropped_epoch: null;
   expired_epoch: null;
-  voting_procedure: null;
+  voting_procedure: GovernanceActionVotingProcedure[] | null;
+  total?: {
+    drep?: {
+      count: number;
+      represented_by: number;
+      stake: number;
+      drep_always_no_confidence?: {
+        represented_by: number;
+        stake: number;
+      };
+      drep_always_abstain?: {
+        represented_by: number;
+        stake: number;
+      };
+    };
+    spo?: {
+      count: number;
+      represented_by: number;
+      stake: number;
+    };
+  };
+  committee?: {
+    quorum?: {
+      numerator: number;
+      denuminator: number;
+    };
+    member: GovernanceActionCommitteeMember[];
+  };
 }
 
 interface GovernanceActionVotingProcedure {
@@ -59,7 +86,7 @@ interface GovernanceActionVotingProcedure {
   };
 }
 
-interface GovernanceActionCommitteeMember {
+export interface GovernanceActionCommitteeMember {
   ident: {
     raw: string;
     has_script: boolean;
