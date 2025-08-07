@@ -1,5 +1,11 @@
 import type { ResponseCore } from "./commonTypes";
 
+export enum GovernanceRole {
+  DRep = "DRep",
+  SPO = "SPO", 
+  ConstitutionalCommittee = "ConstitutionalCommittee"
+}
+
 interface GovernanceActionIdent {
   id: string;
   bech: string;
@@ -188,7 +194,7 @@ export interface GovernanceVoteDetailData {
 }
 
 export interface GovernanceVote {
-  voter_role: "DRep" | "SPO" | "ConstitutionalCommittee";
+  voter_role: GovernanceRole;
   vote: "Yes" | "No" | "Abstain";
   proposal: GovernanceProposal;
   info: GovernanceVoterInfo;

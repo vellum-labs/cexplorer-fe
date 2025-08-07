@@ -10,6 +10,7 @@ import { AdaWithTooltip } from "../global/AdaWithTooltip";
 
 import { Image } from "../global/Image";
 import { formatString } from "@/utils/format/format";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { Link } from "@tanstack/react-router";
 import { GovernanceStatusBadge } from "@/components/global/badges/GovernanceStatusBadge";
 import { useFetchMiscBasic } from "@/services/misc";
@@ -358,33 +359,37 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
   };
 
   const const_committee = [
-    ...(committeeMembers ?? []).map(item => ({
-      label: item?.registry?.name ? (
-        <div className='flex items-center gap-3 py-1.5 text-sm'>
-          {item?.registry?.img && (
+    ...(committeeMembers ?? []).map(item => {
+      const name = item?.registry?.name ?? "Unknown";
+      const ccId = item?.ident?.raw ?? "";
+      
+      const fallbackletters = [...name]
+        .filter(char => /[a-zA-Z0-9]/.test(char))
+        .join("");
+
+      return {
+        label: (
+          <div className='flex items-center gap-3 py-1.5 text-sm'>
             <Image
-              src={item?.registry?.img}
+              src={generateImageUrl(ccId, "ico", "cc")}
               className='h-[18px] w-[18px] rounded-lg object-cover'
-              alt={item?.registry?.name}
-              height={200}
+              alt={name}
+              height={18}
+              width={18}
+              fallbackletters={fallbackletters}
             />
-          )}
-          <span>{item?.registry?.name}</span>
-        </div>
-      ) : (
-        <div className='flex items-center gap-3 py-1.5 text-sm'>
-          <div className='invisible h-[18px] w-[18px]'></div>
-          <span>{formatString(item?.ident?.raw, "long")}</span>
-        </div>
-      ),
-      value: (() => {
-        return (
-          <div className='flex w-full items-center justify-end'>
-            <VoteBadge vote={item?.vote as Vote} />
+            <span>{name !== "Unknown" ? name : formatString(ccId, "long")}</span>
           </div>
-        );
-      })(),
-    })),
+        ),
+        value: (() => {
+          return (
+            <div className='flex w-full items-center justify-end'>
+              <VoteBadge vote={item?.vote as Vote} />
+            </div>
+          );
+        })(),
+      };
+    }),
   ];
 
   const dreps = [
