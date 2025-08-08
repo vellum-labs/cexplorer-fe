@@ -27,8 +27,9 @@ interface AddressDetailOverviewProps {
 
 export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
   data,
+  stakeAddress,
 }) => {
-  const address = data?.view ?? "";
+  const address = data?.view || stakeAddress;
   const addrObj = Address.from(address);
   const rawAddress = Address.toHexString(addrObj.raw);
   const tokenMarket = configJSON.market[0].token[0].active;
