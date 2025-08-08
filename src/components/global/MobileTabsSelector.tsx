@@ -56,7 +56,7 @@ export const MobileTabsSelector = ({
   }, [width, mobileItems, items.length]);
   return (
     <div
-      className={`${withMargin ? "mb-5" : ""} flex items-center ${secondary ? "h-[32px]" : "h-[40px]"} w-fit rounded-lg border border-border bg-darker`}
+      className={`${withMargin ? "mb-5" : ""} flex items-center ${secondary ? "h-[32px]" : "h-[40px]"} w-fit rounded-lg border border-borderFaded bg-darker gap-0.5`}
     >
       {items?.slice(0, visibleItems).map((item, index) => (
         <button
@@ -64,7 +64,7 @@ export const MobileTabsSelector = ({
           aria-selected={activeTab === index}
           aria-controls={`panel-${index}`}
           id={`tab-${index}`}
-          className={`flex items-center px-2.5 py-2 ${secondary ? "h-[32px] text-grayTextPrimary" : "h-[40px]"} text-[13px] font-semibold duration-150 hover:text-secondaryText min-[1050px]:text-[15px] ${activeTab === index && `relative rounded-lg bg-background ${secondary ? "text-text" : "text-primary"} after:absolute after:left-0 after:top-0 after:h-[calc(100%+1px)] after:w-full after:translate-y-[-0.5px] after:rounded-lg after:border after:border-border after:first:border-l-0 after:last:border-r-0`} first:rounded-l-lg last:rounded-r-lg`}
+          className={`flex items-center px-3 py-2 border rounded-lg ${secondary ? "h-[32px]" : "h-[40px]"} text-[13px] font-semibold min-[1050px]:text-[15px] ${activeTab === index ? `bg-background z-20 border-border ${secondary ? "text-text hover:text-text" : "text-primary hover:text-primary"}` : "border-transparent text-grayTextPrimary duration-150 hover:text-text"} ${index === 0 ? "-ml-px" : ""} ${index === visibleItems - 1 ? "-mr-px" : ""}`}
           key={index}
           onClick={() => handleTabChange(index)}
         >
