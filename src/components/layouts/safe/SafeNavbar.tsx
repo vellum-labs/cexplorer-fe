@@ -14,11 +14,7 @@ import { ScreenDropdown } from "../../global/dropdowns/ScreenDropdown";
 import SettingsDropdown from "../../global/dropdowns/SettingsDropdown";
 import MobileMenu from "../../navbar/MobileMenu/MobileMenu";
 import WalletButton from "../../wallet/WalletButton";
-import { LayoutNotification } from "@/utils/LayoutNotification";
-import { useThemeStore } from "@/stores/themeStore";
-
 export const SafeNavbar: FC = () => {
-  const { theme } = useThemeStore();
 
   return (
     <header>
@@ -123,18 +119,6 @@ export const SafeNavbar: FC = () => {
         </div>
         <MobileMenu />
       </nav>
-      <LayoutNotification
-        storeKey='bug-bounty-2025'
-        message='Cexplorer Bug Bounty is Live! Find bugs, earn $ADA. More details '
-        link={{
-          text: "here",
-          href: "/bounty",
-        }}
-        backgroundColor={theme === "light" ? "#0094d4" : "#79defd"}
-        textColor={theme === "light" ? "#ffffff" : "#101828"}
-        startTime={new Date("2025-06-23T00:00:00Z")}
-        endTime={new Date("2026-01-01T00:00:00Z")}
-      />
     </header>
   );
 };
