@@ -170,22 +170,23 @@ const Tabs = ({
             ""
           )}
           <div
-            className={`hidden ${tabParam ? "h-[35px]" : "h-[44px]"} w-fit items-center gap-3 text-nowrap rounded-lg border border-border bg-darker font-medium shadow lg:flex`}
+            className={`hidden ${tabParam ? "h-[35px]" : "h-[44px]"} w-fit items-center gap-0.5 text-nowrap rounded-lg border border-borderFaded bg-darker font-medium shadow lg:flex`}
           >
-            {items.map((item, index, arr) => (
+            {items.map((item, index) => (
               // @ts-expect-error link
               <Link
                 key={index}
-                className={`flex items-center px-2 py-2.5 ${
+                className={`flex items-center px-3 py-2 border rounded-lg ${
                   tabParam
-                    ? "h-[35px] text-[14px] font-semibold text-grayTextPrimary"
-                    : "h-[44px] text-[15px] font-semibold"
+                    ? "h-[35px] text-sm font-semibold"
+                    : "h-[44px] text-base font-semibold"
                 } ${
-                  activeTab === index &&
-                  `relative rounded-lg bg-background ${
-                    tabParam ? "text-text" : "text-primary"
-                  } after:absolute after:left-0 after:top-0 after:h-[calc(100%+1px)] after:w-full after:translate-y-[-0.5px] after:rounded-lg after:border after:border-borderDarker after:first:border-l-0 after:last:border-r-0`
-                } ${index === 0 ? "pl-3" : ""} ${index === arr.length - 1 ? "pr-3" : ""} first:rounded-l-lg last:rounded-r-lg`}
+                  activeTab === index
+                    ? `bg-background z-20 border-border ${
+                        tabParam ? "text-text" : "text-primary"
+                      }`
+                    : "border-transparent text-grayTextPrimary duration-150 hover:text-text"
+                } ${index === 0 ? "-ml-px" : ""} ${index === items.length - 1 ? "-mr-px" : ""}`}
                 onClick={() => handleTabChange(index)}
                 role='tab'
                 aria-selected={activeTab === index}
@@ -193,13 +194,7 @@ const Tabs = ({
                 id={`tab-${index}`}
                 search={navigationOptions(index) as any}
               >
-                <span
-                  className={`${
-                    activeTab === index
-                      ? ""
-                      : "duration-150 hover:text-secondaryText"
-                  }`}
-                >
+                <span>
                   {item.label}
                 </span>
               </Link>
