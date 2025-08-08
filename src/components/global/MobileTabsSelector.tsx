@@ -64,7 +64,7 @@ export const MobileTabsSelector = ({
           aria-selected={activeTab === index}
           aria-controls={`panel-${index}`}
           id={`tab-${index}`}
-          className={`flex items-center px-3 py-2 border rounded-lg ${secondary ? "h-[32px]" : "h-[40px]"} text-[13px] font-semibold min-[1050px]:text-[15px] ${activeTab === index ? `bg-background z-20 border-border ${secondary ? "text-text" : "text-primary"}` : "border-transparent text-grayTextPrimary duration-150 hover:text-text"} ${index === 0 ? "-ml-px" : ""} ${index === visibleItems - 1 ? "-mr-px" : ""}`}
+          className={`flex items-center px-3 py-2 border rounded-lg ${secondary ? "h-[32px]" : "h-[40px]"} text-[13px] font-semibold min-[1050px]:text-[15px] ${activeTab === index ? `bg-background z-20 border-border ${secondary ? "text-text hover:text-text" : "text-primary hover:text-primary"}` : "border-transparent text-grayTextPrimary duration-150 hover:text-text"} ${index === 0 ? "-ml-px" : ""} ${index === visibleItems - 1 ? "-mr-px" : ""}`}
           key={index}
           onClick={() => handleTabChange(index)}
         >

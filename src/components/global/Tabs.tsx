@@ -183,7 +183,7 @@ const Tabs = ({
                 } ${
                   activeTab === index
                     ? `bg-background z-20 border-border ${
-                        tabParam ? "text-text" : "text-primary"
+                        tabParam ? "text-text hover:text-text" : "text-primary hover:text-primary"
                       }`
                     : "border-transparent text-grayTextPrimary duration-150 hover:text-text"
                 } ${index === 0 ? "-ml-px" : ""} ${index === items.length - 1 ? "-mr-px" : ""}`}
