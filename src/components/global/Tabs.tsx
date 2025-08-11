@@ -172,7 +172,7 @@ const Tabs = ({
             ""
           )}
           {allowScroll ? (
-            <div className="hidden lg:block w-full overflow-x-auto overflow-y-hidden">
+            <div className="thin-scrollbar hidden lg:block w-full overflow-x-auto overflow-y-hidden">
               <div
                 className={`flex ${tabParam ? "h-[35px]" : "h-[44px]"} w-fit items-center gap-0.5 text-nowrap rounded-lg border border-borderFaded bg-darker font-medium shadow`}
               >
