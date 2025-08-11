@@ -328,34 +328,27 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
     },
   ];
 
-  const howMuchVoted = (
-    ((committeeMembers?.filter(item => item?.vote === "Yes").length ?? 0) *
-      100) /
-    (committeeMembers ?? []).length
-  ).toFixed(2);
+  const yesCount = (committeeMembers ?? [])?.filter(
+    item => item?.vote === "Yes",
+  ).length;
+  const noCount = (committeeMembers ?? [])?.filter(
+    item => item?.vote === "No",
+  ).length;
+  const notVotedCount = (committeeMembers ?? [])?.filter(
+    item => item?.vote === null,
+  ).length;
+  
+  const votingMembers = yesCount + noCount + notVotedCount;
+  
+  const howMuchVoted = votingMembers > 0 ? ((yesCount * 100) / votingMembers).toFixed(2) : "0.00";
+  
+  const yesPercent = votingMembers > 0 ? Math.round((yesCount * 100) / votingMembers) : 0;
+  const noPercent = votingMembers > 0 ? Math.round((noCount * 100) / votingMembers) : 0;
 
   const votedPercent = {
-    notVoted: Math.round(
-      ((committeeMembers ?? [])?.filter(
-        item => item?.vote === null || item?.vote === "Abstain",
-      ).length *
-        100) /
-        (committeeMembers ?? []).length,
-    ),
-    yes: Math.round(
-      ((committeeMembers ?? [])?.filter(
-        item => item?.vote !== null && item?.vote === "Yes",
-      ).length *
-        100) /
-        (committeeMembers ?? []).length,
-    ),
-    no: Math.round(
-      ((committeeMembers ?? [])?.filter(
-        item => item?.vote !== null && item?.vote === "No",
-      ).length *
-        100) /
-        (committeeMembers ?? []).length,
-    ),
+    yes: yesPercent,
+    no: noPercent,
+    notVoted: 100 - yesPercent - noPercent,
   };
 
   const const_committee = [
