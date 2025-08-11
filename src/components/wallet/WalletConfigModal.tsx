@@ -21,7 +21,7 @@ const WalletConfigModal = () => {
   const { isOpen, setIsOpen } = useWalletConfigModalState();
   const { uq } = useUqStore();
   const secureRef = useRef<0 | 1>(0);
-  const expirationRef = useRef<"d" | "w" | "m" | "y">("m");
+  const expirationRef = useRef<"d" | "w" | "m" | "y">("y");
   const { address, job } = useWalletStore();
   const { tokens, setTokens } = useAuthTokensStore();
   const { disconnect } = useConnectWallet();
