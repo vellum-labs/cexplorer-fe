@@ -26,7 +26,9 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
   const updateQuery = useFetchPoolUpdate(id);
   const aboutQuery = useFetchPoolAbout(id);
 
-  const updateItems = updateQuery.data?.data.data;
+  const updateItem = (updateQuery.data?.data.data || []).sort(
+    (a, b) => new Date(b.time).getTime() - new Date(a.time).getTime(),
+  )[0];
 
   const relayItems = aboutQuery.data?.data?.relay;
 
@@ -402,7 +404,7 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
             pagination={false}
             scrollable
             query={updateQuery}
-            items={updateItems ? [updateItems[updateItems.length - 1]] : []}
+            items={[updateItem]}
             columns={ownerColumns}
           />
         </div>
@@ -413,7 +415,7 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
             pagination={false}
             scrollable
             query={updateQuery}
-            items={updateItems ? [updateItems[updateItems.length - 1]] : []}
+            items={[updateItem]}
             columns={rewardsColumns}
           />
         </div>
@@ -436,7 +438,7 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
             pagination={false}
             minContentWidth={1100}
             query={updateQuery}
-            items={updateItems}
+            items={[updateItem]}
             columns={certificatesColumns}
           />
         </div>
