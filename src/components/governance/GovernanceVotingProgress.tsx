@@ -17,9 +17,10 @@ export const GovernanceVotingProgress: FC<GovernanceVotingProgressProps> = ({
     return votes.reduce((acc, item) => {
       const vote = item?.vote;
       if (vote === "Yes") acc.yes = (item?.stat?.stake || item?.count || 0);
+      else if (vote === "No") acc.no = (item?.stat?.stake || item?.count || 0);
       else if (vote === "Abstain") acc.abstain = (item?.stat?.stake || item?.count || 0);
       return acc;
-    }, { yes: 0, abstain: 0 });
+    }, { yes: 0, no: 0, abstain: 0 });
   };
 
   const calculateVotingProgress = (
@@ -57,13 +58,15 @@ export const GovernanceVotingProgress: FC<GovernanceVotingProgressProps> = ({
     return voters
       .filter(voter => voter.condition)
       .map(voter => {
-        const { yes, abstain } = getVoteData(votingProcedure, voter.role);
+        const { yes, no, abstain } = getVoteData(votingProcedure, voter.role);
         const totalAbstain = abstain + (voter.extraAbstain || 0);
         const votingBase = voter.totalBase - totalAbstain;
         
         const yesPercent = votingBase > 0 ? roundPercentage((yes / votingBase) * 100) : 0;
+        const noPercent = votingBase > 0 ? roundPercentage((no / votingBase) * 100) : 0;
+        const notVotedPercent = Math.max(0, roundPercentage(100 - yesPercent - noPercent));
         
-        return { type: voter.type, yesPercent };
+        return { type: voter.type, yesPercent, noPercent, notVotedPercent };
       });
   };
 
@@ -88,12 +91,19 @@ export const GovernanceVotingProgress: FC<GovernanceVotingProgressProps> = ({
             {bar.type}
           </span>
           <div 
-            className="relative h-1.5 w-16 overflow-hidden rounded-[3px] bg-[#D66A10]"
+            className="relative h-1.5 w-16 overflow-hidden rounded-[3px] bg-border"
           >
             <div
               className="absolute top-0 left-0 h-1.5 bg-[#1296DB]"
               style={{
                 width: `${Math.min(Math.max(bar.yesPercent, 0), 100)}%`,
+              }}
+            />
+            <div
+              className="absolute top-0 h-1.5 bg-[#D66A10]"
+              style={{
+                width: `${Math.min(Math.max(bar.noPercent, 0), 100)}%`,
+                left: `${Math.min(Math.max(bar.yesPercent, 0), 100)}%`,
               }}
             />
           </div>
