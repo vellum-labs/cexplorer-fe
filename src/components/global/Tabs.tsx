@@ -172,22 +172,24 @@ const Tabs = ({
             ""
           )}
           {allowScroll ? (
-            <div className="thin-scrollbar hidden lg:block w-full overflow-x-auto overflow-y-hidden">
+            <div className='thin-scrollbar hidden w-full overflow-x-auto overflow-y-hidden lg:block'>
               <div
-                className={`flex ${tabParam ? "h-[35px]" : "h-[44px]"} w-fit items-center gap-0.5 text-nowrap rounded-lg border border-borderFaded bg-darker font-medium shadow`}
+                className={`flex ${tabParam ? "h-[35px]" : "h-[44px]"} mx-1 w-fit items-center gap-0.5 text-nowrap rounded-lg border border-borderFaded bg-darker font-medium shadow`}
               >
                 {items.map((item, index) => (
                   // @ts-expect-error link
                   <Link
                     key={index}
-                    className={`flex items-center px-3 py-2 border rounded-lg ${
+                    className={`flex items-center rounded-lg border px-3 py-2 ${
                       tabParam
                         ? "h-[35px] text-sm font-semibold"
                         : "h-[44px] text-base font-semibold"
                     } ${
                       activeTab === index
-                        ? `bg-background z-20 border-border ${
-                            tabParam ? "text-text hover:text-text" : "text-primary hover:text-primary"
+                        ? `z-20 border-border bg-background ${
+                            tabParam
+                              ? "text-text hover:text-text"
+                              : "text-primary hover:text-primary"
                           }`
                         : "border-transparent text-grayTextPrimary duration-150 hover:text-text"
                     } ${index === 0 ? "-ml-px" : ""} ${index === items.length - 1 ? "-mr-px" : ""}`}
@@ -198,9 +200,7 @@ const Tabs = ({
                     id={`tab-${index}`}
                     search={navigationOptions(index) as any}
                   >
-                    <span>
-                      {item.label}
-                    </span>
+                    <span>{item.label}</span>
                   </Link>
                 ))}
               </div>
@@ -209,33 +209,33 @@ const Tabs = ({
             <div
               className={`hidden ${tabParam ? "h-[35px]" : "h-[44px]"} w-fit items-center gap-0.5 text-nowrap rounded-lg border border-borderFaded bg-darker font-medium shadow lg:flex`}
             >
-            {items.map((item, index) => (
-              // @ts-expect-error link
-              <Link
-                key={index}
-                className={`flex items-center px-3 py-2 border rounded-lg ${
-                  tabParam
-                    ? "h-[35px] text-sm font-semibold"
-                    : "h-[44px] text-base font-semibold"
-                } ${
-                  activeTab === index
-                    ? `bg-background z-20 border-border ${
-                        tabParam ? "text-text hover:text-text" : "text-primary hover:text-primary"
-                      }`
-                    : "border-transparent text-grayTextPrimary duration-150 hover:text-text"
-                } ${index === 0 ? "-ml-px" : ""} ${index === items.length - 1 ? "-mr-px" : ""}`}
-                onClick={() => handleTabChange(index)}
-                role='tab'
-                aria-selected={activeTab === index}
-                aria-controls={`panel-${index}`}
-                id={`tab-${index}`}
-                search={navigationOptions(index) as any}
-              >
-                <span>
-                  {item.label}
-                </span>
-              </Link>
-            ))}
+              {items.map((item, index) => (
+                // @ts-expect-error link
+                <Link
+                  key={index}
+                  className={`flex items-center rounded-lg border px-3 py-2 ${
+                    tabParam
+                      ? "h-[35px] text-sm font-semibold"
+                      : "h-[44px] text-base font-semibold"
+                  } ${
+                    activeTab === index
+                      ? `z-20 border-border bg-background ${
+                          tabParam
+                            ? "text-text hover:text-text"
+                            : "text-primary hover:text-primary"
+                        }`
+                      : "border-transparent text-grayTextPrimary duration-150 hover:text-text"
+                  } ${index === 0 ? "-ml-px" : ""} ${index === items.length - 1 ? "-mr-px" : ""}`}
+                  onClick={() => handleTabChange(index)}
+                  role='tab'
+                  aria-selected={activeTab === index}
+                  aria-controls={`panel-${index}`}
+                  id={`tab-${index}`}
+                  search={navigationOptions(index) as any}
+                >
+                  <span>{item.label}</span>
+                </Link>
+              ))}
             </div>
           )}
           {items[activeTab]?.extraTitle && !toRight
