@@ -17,6 +17,7 @@ interface Props {
   forceDropdownVerticalPosition?: "up" | "down";
   mobileItemsCount?: number;
   wrapperClassname?: string;
+  allowScroll?: boolean;
   apiLoading?: boolean;
 }
 
@@ -32,6 +33,7 @@ const Tabs = ({
   onClick,
   mobileItemsCount,
   wrapperClassname,
+  allowScroll = false,
 }: Props) => {
   const [tabTitle, setTabTitle] = useState("");
   const items = useMemo(
@@ -169,9 +171,44 @@ const Tabs = ({
           ) : (
             ""
           )}
-          <div
-            className={`hidden ${tabParam ? "h-[35px]" : "h-[44px]"} w-fit items-center gap-0.5 text-nowrap rounded-lg border border-borderFaded bg-darker font-medium shadow lg:flex`}
-          >
+          {allowScroll ? (
+            <div className="hidden lg:block w-full overflow-x-auto overflow-y-hidden">
+              <div
+                className={`flex ${tabParam ? "h-[35px]" : "h-[44px]"} w-fit items-center gap-0.5 text-nowrap rounded-lg border border-borderFaded bg-darker font-medium shadow`}
+              >
+                {items.map((item, index) => (
+                  // @ts-expect-error link
+                  <Link
+                    key={index}
+                    className={`flex items-center px-3 py-2 border rounded-lg ${
+                      tabParam
+                        ? "h-[35px] text-sm font-semibold"
+                        : "h-[44px] text-base font-semibold"
+                    } ${
+                      activeTab === index
+                        ? `bg-background z-20 border-border ${
+                            tabParam ? "text-text hover:text-text" : "text-primary hover:text-primary"
+                          }`
+                        : "border-transparent text-grayTextPrimary duration-150 hover:text-text"
+                    } ${index === 0 ? "-ml-px" : ""} ${index === items.length - 1 ? "-mr-px" : ""}`}
+                    onClick={() => handleTabChange(index)}
+                    role='tab'
+                    aria-selected={activeTab === index}
+                    aria-controls={`panel-${index}`}
+                    id={`tab-${index}`}
+                    search={navigationOptions(index) as any}
+                  >
+                    <span>
+                      {item.label}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div
+              className={`hidden ${tabParam ? "h-[35px]" : "h-[44px]"} w-fit items-center gap-0.5 text-nowrap rounded-lg border border-borderFaded bg-darker font-medium shadow lg:flex`}
+            >
             {items.map((item, index) => (
               // @ts-expect-error link
               <Link
@@ -199,7 +236,8 @@ const Tabs = ({
                 </span>
               </Link>
             ))}
-          </div>
+            </div>
+          )}
           {items[activeTab]?.extraTitle && !toRight
             ? items[activeTab]?.extraTitle
             : ""}
