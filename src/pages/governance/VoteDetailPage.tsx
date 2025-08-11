@@ -82,7 +82,7 @@ export const GovernanceVoteDetailPage: FC = () => {
             </div>
           </div>
         ) : tabs.length > 0 ? (
-          <Tabs items={tabs} />
+          <Tabs items={tabs} allowScroll />
         ) : (
           <EmptyState
             icon={<Vote size={24} />}
