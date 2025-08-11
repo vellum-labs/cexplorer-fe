@@ -22,7 +22,7 @@ export const AddCustomLabel = ({ address }: { address: string }) => {
       (proNfts > 0 && labels.length > proNfts * 100));
   const tooltipText =
     proNfts === 0
-      ? "You can only add 5 labels with the free version of Cexplorer"
+      ? "You can only add 10 labels with the free version of Cexplorer"
       : "You can only add 100 labels per NFT with the PRO version of Cexplorer";
 
   useEffect(() => {

@@ -4,7 +4,13 @@ import { useCustomLabelModalState } from "@/stores/states/customLabelModalState"
 import { formatString } from "@/utils/format/format";
 import type { FileRoutesByPath } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
-import { ChevronLeft, ChevronRight, ChevronsUp, Edit, Wallet } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsUp,
+  Edit,
+  Wallet,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import Button from "../global/Button";
 import { EmptyState } from "../global/EmptyState";
@@ -41,12 +47,12 @@ export const CustomLabels = () => {
   const currentLabels = labels.slice(startIndex, startIndex + labelsPerPage);
 
   const isAddingDisabled =
-    (proNfts === 0 && labels.length >= 5) ||
+    (proNfts === 0 && labels.length >= 10) ||
     (proNfts > 0 && labels.length > proNfts * 100);
 
   const tooltipText =
     proNfts === 0
-      ? "You can only add 5 labels with the free version of Cexplorer"
+      ? "You can only add 10 labels with the free version of Cexplorer"
       : "You can only add 100 labels per NFT with the PRO version of Cexplorer";
 
   useEffect(() => {
@@ -74,13 +80,13 @@ export const CustomLabels = () => {
         <div className='flex w-full max-w-desktop flex-col'>
           <EmptyState
             icon={<Wallet size={24} />}
-            primaryText="Wallet not connected."
-            secondaryText="Connect your wallet to create and manage custom labels for addresses."
+            primaryText='Wallet not connected.'
+            secondaryText='Connect your wallet to create and manage custom labels for addresses.'
             button={
               <Button
-                label="Connect wallet"
-                variant="primary"
-                size="md"
+                label='Connect wallet'
+                variant='primary'
+                size='md'
                 onClick={() => setShowConnectModal(true)}
               />
             }
@@ -145,7 +151,7 @@ export const CustomLabels = () => {
                 <TableHead>Address</TableHead>
                 <TableHead>Label</TableHead>
                 <TableHead className='text-right text-xs leading-[13px]'>
-                  {labels.length}/{proNfts === 0 ? 5 : proNfts * 100} labels
+                  {labels.length}/{proNfts === 0 ? 10 : proNfts * 100} labels
                   created
                 </TableHead>
               </tr>
@@ -162,7 +168,7 @@ export const CustomLabels = () => {
                     <Link
                       to={
                         address.includes("stake")
-                          ? "/stake/$address"
+                          ? "/stake/$stakeAddr"
                           : "/address/$address"
                       }
                       params={{ address: address }}
