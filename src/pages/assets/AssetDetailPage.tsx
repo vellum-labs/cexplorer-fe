@@ -104,6 +104,7 @@ export const AssetDetailPage: FC = () => {
             policy={assetDetailQuery.data?.data?.policy ?? ""}
             supply={assetSupply}
             price={assetDetailQuery?.data?.data?.dex?.price}
+            decimals={assetDetailQuery?.data?.data?.registry?.decimals}
           />
         ) : (
           <AssetNftOwnersTab
