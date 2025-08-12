@@ -53,6 +53,45 @@ export const AssetExchangesCandlestickGraph: FC<
       format(new Date(item.unix * 1000), "dd.MM.yyyy HH:mm"),
     ) ?? [];
 
+  const formatAxisTimestamp = (timestamp: string, period: string) => {
+    const date = new Date(
+      timestamp.split(" ")[0].split(".").reverse().join("-") +
+        "T" +
+        timestamp.split(" ")[1],
+    );
+
+    switch (period) {
+      case "1min":
+      case "5min":
+      case "15min":
+      case "30min":
+        return format(date, "HH:mm");
+      case "1hour":
+      case "4hour":
+        return format(date, "dd.MM HH:mm");
+      case "1day":
+        return format(date, "dd.MM");
+      default:
+        return format(date, "dd.MM");
+    }
+  };
+
+  const axisTimestamps = candlestickTimestamps.map(ts =>
+    formatAxisTimestamp(ts, period || "4hour"),
+  );
+
+  const getAxisLabelInterval = (dataLength: number, period: string) => {
+    if (dataLength <= 10) return 0;
+    if (dataLength <= 24) return 1;
+    if (dataLength <= 48) return 3;
+    if (period === "1min" || period === "5min")
+      return Math.floor(dataLength / 6);
+    if (period === "15min" || period === "30min")
+      return Math.floor(dataLength / 8);
+    if (period === "1hour") return Math.floor(dataLength / 6);
+    return Math.floor(dataLength / 10);
+  };
+
   const selectItems = [
     { key: "1min", value: "1 min" },
     { key: "5min", value: "5 min" },
@@ -102,14 +141,14 @@ export const AssetExchangesCandlestickGraph: FC<
       {
         left: 60,
         right: 20,
-        bottom: 40,
+        bottom: 60,
         height: "20%",
       },
     ],
     xAxis: [
       {
         type: "category",
-        data: candlestickTimestamps,
+        data: axisTimestamps,
         boundaryGap: true,
         axisLabel: { show: false },
         axisPointer: {
@@ -120,11 +159,22 @@ export const AssetExchangesCandlestickGraph: FC<
       },
       {
         type: "category",
-        data: candlestickTimestamps,
+        data: axisTimestamps,
         gridIndex: 1,
         splitLine: { show: false },
-        axisLabel: { show: false },
-        axisTick: { show: false },
+        axisLabel: {
+          show: true,
+          color: textColor,
+          rotate: period === "1min" || period === "5min" ? 45 : 0,
+          interval: getAxisLabelInterval(
+            axisTimestamps.length,
+            period || "4hour",
+          ),
+          fontSize: 11,
+          margin: 15,
+        },
+        axisTick: { show: true, lineStyle: { color: textColor } },
+        axisLine: { lineStyle: { color: textColor } },
         axisPointer: { show: false },
       },
     ],
