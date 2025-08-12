@@ -207,15 +207,20 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
     miscConst?.epoch.start_time ?? "",
   );
 
-  const { sPOsApproved, dRepsApproved, constitutionalCommitteeApproved, drepThreshold, spoThreshold } =
-    determineApproval(
-      query?.data?.data?.epoch_param?.[0] ?? {},
-      query?.data?.data?.committee?.member ?? [],
-      query?.data?.data?.committee ?? {},
-      query?.data?.data?.type ?? "",
-      drepsYes / (drepsYes + drepsNo + drepsNoConfidence + drepsNotVotedStake),
-      sposYes / (sposYes + sposNo + sposNotVoted),
-    );
+  const {
+    sPOsApproved,
+    dRepsApproved,
+    constitutionalCommitteeApproved,
+    drepThreshold,
+    spoThreshold,
+  } = determineApproval(
+    query?.data?.data?.epoch_param?.[0] ?? {},
+    query?.data?.data?.committee?.member ?? [],
+    query?.data?.data?.committee ?? {},
+    query?.data?.data?.type ?? "",
+    drepsYes / (drepsYes + drepsNo + drepsNoConfidence + drepsNotVotedStake),
+    sposYes / (sposYes + sposNo + sposNotVoted),
+  );
 
   const ccQuorum = query?.data?.data?.committee?.quorum;
   const ccThreshold =
@@ -254,7 +259,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
     {
       label: "Voting deadline",
       value: query?.data?.data?.expiration ? (
-        <TimeDateIndicator time={startTime.toString()} />
+        <TimeDateIndicator time={startTime ? startTime.toISOString() : ""} />
       ) : (
         "-"
       ),
@@ -337,13 +342,16 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
   const notVotedCount = (committeeMembers ?? [])?.filter(
     item => item?.vote === null,
   ).length;
-  
+
   const votingMembers = yesCount + noCount + notVotedCount;
-  
-  const howMuchVoted = votingMembers > 0 ? ((yesCount * 100) / votingMembers).toFixed(2) : "0.00";
-  
-  const yesPercent = votingMembers > 0 ? Math.round((yesCount * 100) / votingMembers) : 0;
-  const noPercent = votingMembers > 0 ? Math.round((noCount * 100) / votingMembers) : 0;
+
+  const howMuchVoted =
+    votingMembers > 0 ? ((yesCount * 100) / votingMembers).toFixed(2) : "0.00";
+
+  const yesPercent =
+    votingMembers > 0 ? Math.round((yesCount * 100) / votingMembers) : 0;
+  const noPercent =
+    votingMembers > 0 ? Math.round((noCount * 100) / votingMembers) : 0;
 
   const votedPercent = {
     yes: yesPercent,
@@ -355,7 +363,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
     ...(committeeMembers ?? []).map(item => {
       const name = item?.registry?.name ?? "Unknown";
       const ccId = item?.ident?.raw ?? "";
-      
+
       const fallbackletters = [...name]
         .filter(char => /[a-zA-Z0-9]/.test(char))
         .join("");
@@ -371,7 +379,9 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
               width={18}
               fallbackletters={fallbackletters}
             />
-            <span>{name !== "Unknown" ? name : formatString(ccId, "long")}</span>
+            <span>
+              {name !== "Unknown" ? name : formatString(ccId, "long")}
+            </span>
           </div>
         ),
         value: (() => {
@@ -390,7 +400,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       label: (
         <div className='flex items-center gap-1'>
           <span>Total stake</span>
-          <Tooltip content="All ADA delegated to DReps">
+          <Tooltip content='All ADA delegated to DReps'>
             <CircleHelp size={11} className='text-grayTextPrimary' />
           </Tooltip>
         </div>
@@ -406,7 +416,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       label: (
         <div className='flex items-center gap-1'>
           <span>Abstain stake</span>
-          <Tooltip content="ADA that abstains from voting">
+          <Tooltip content='ADA that abstains from voting'>
             <CircleHelp size={11} className='text-grayTextPrimary' />
           </Tooltip>
         </div>
@@ -439,7 +449,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       label: (
         <div className='flex items-center gap-1'>
           <span>Voting stake</span>
-          <Tooltip content="ADA participating in voting">
+          <Tooltip content='ADA participating in voting'>
             <CircleHelp size={11} className='text-grayTextPrimary' />
           </Tooltip>
         </div>
@@ -460,7 +470,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       label: (
         <div className='flex items-center gap-1'>
           <span>Total stake</span>
-          <Tooltip content="All ADA delegated to SPOs">
+          <Tooltip content='All ADA delegated to SPOs'>
             <CircleHelp size={11} className='text-grayTextPrimary' />
           </Tooltip>
         </div>
@@ -476,7 +486,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       label: (
         <div className='flex items-center gap-1'>
           <span>Abstain stake</span>
-          <Tooltip content="ADA that abstains from voting">
+          <Tooltip content='ADA that abstains from voting'>
             <CircleHelp size={11} className='text-grayTextPrimary' />
           </Tooltip>
         </div>
@@ -487,9 +497,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
           <span className='text-xs text-grayTextSecondary'>
             (
             {(spoAbstainStake * 100) / spoTotalStake < 100
-              ? ((spoAbstainStake * 100) / spoTotalStake).toFixed(
-                  2,
-                )
+              ? ((spoAbstainStake * 100) / spoTotalStake).toFixed(2)
               : "100"}
             %)
           </span>
@@ -500,7 +508,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       label: (
         <div className='flex items-center gap-1'>
           <span>Voting stake</span>
-          <Tooltip content="ADA participating in voting">
+          <Tooltip content='ADA participating in voting'>
             <CircleHelp size={11} className='text-grayTextPrimary' />
           </Tooltip>
         </div>
@@ -546,12 +554,14 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                       title='Governance action'
                       subTitle={
                         <GovernanceStatusBadge
-                          item={query?.data?.data ?? {
-                            dropped_epoch: null,
-                            enacted_epoch: null,
-                            expired_epoch: null,
-                            ratified_epoch: null,
-                          }}
+                          item={
+                            query?.data?.data ?? {
+                              dropped_epoch: null,
+                              enacted_epoch: null,
+                              expired_epoch: null,
+                              ratified_epoch: null,
+                            }
+                          }
                           currentEpoch={miscConst?.no ?? 0}
                         />
                       }
@@ -702,7 +712,11 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         }
                         showTitleDivider
                         showContentDivider
-                        threshold={shouldDRepVote(query.data?.data?.type ?? "") ? drepThreshold : undefined}
+                        threshold={
+                          shouldDRepVote(query.data?.data?.type ?? "")
+                            ? drepThreshold
+                            : undefined
+                        }
                         isDrep={true}
                         endContent={
                           <GovernanceCard
@@ -784,7 +798,11 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         }
                         showTitleDivider
                         showContentDivider
-                        threshold={shouldSPOVote(query.data?.data?.type ?? "") ? spoThreshold : undefined}
+                        threshold={
+                          shouldSPOVote(query.data?.data?.type ?? "")
+                            ? spoThreshold
+                            : undefined
+                        }
                         isDrep={false}
                         overviewList={spos}
                         className='h-full'
