@@ -259,7 +259,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
     {
       label: "Voting deadline",
       value: query?.data?.data?.expiration ? (
-        <TimeDateIndicator time={startTime ? startTime.toISOString() : ""} />
+        <TimeDateIndicator time={startTime.toString() ?? ""} />
       ) : (
         "-"
       ),
