@@ -92,7 +92,11 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
       : undefined,
     {
       label: "Rewards available",
-      value: <AdaWithTooltip data={data?.reward?.total ?? 0} />,
+      value: (
+        <AdaWithTooltip
+          data={(data?.reward?.total ?? 0) - (data?.reward?.withdrawn ?? 0)}
+        />
+      ),
     },
     {
       label: "DRep delegation",
