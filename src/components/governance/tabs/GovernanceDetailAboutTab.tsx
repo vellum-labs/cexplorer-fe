@@ -80,7 +80,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
           return "-";
         }
 
-        return <DateCell time={item.tx.time} />;
+        return <DateCell time={item.tx.time} withoutConvert />;
       },
       title: "Date",
       visible: columnsVisibility.date,
