@@ -99,18 +99,15 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
       value: (
         <div className='flex flex-col'>
           {data?.vote?.vote?.live_drep === "drep_always_abstain" ? (
-            data?.vote?.drep?.data?.given_name ? (
-              <Link
-                to='/drep/$hash'
-                params={{ hash: data?.vote?.drep?.hash?.view }}
-                className={"w-fit text-primary"}
-              >
-                {data?.vote?.drep?.data?.given_name}
-                <span className='text-sm text-primary'>Always abstain</span>
-              </Link>
-            ) : (
-              <span className='text-sm'>Always abstain</span>
-            )
+            <Link
+              to='/drep/$hash'
+              params={{ hash: "drep_always_abstain" }}
+              className={"w-fit text-primary"}
+            >
+              {data?.vote?.drep?.data?.given_name &&
+                data?.vote?.drep?.data?.given_name}
+              <span className='text-sm text-primary'>Always abstain</span>
+            </Link>
           ) : (
             <AttributeDropdown
               items={[
