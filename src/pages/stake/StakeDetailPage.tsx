@@ -36,9 +36,9 @@ export const StakeDetailPage: FC = () => {
   const assets = stakeQuery.data?.asset || [];
   const user = stakeQuery.data?.user;
   const hideDelegTab =
-    !data?.stake.active.deleg.id &&
-    !data?.stake.live.deleg.id &&
-    !data?.reward.withdrawn;
+    !data?.stake?.active?.deleg?.id &&
+    !data?.stake?.live?.deleg?.id &&
+    !data?.reward?.withdrawn;
 
   const { page } = useSearch({
     from: "/stake/$stakeAddr",

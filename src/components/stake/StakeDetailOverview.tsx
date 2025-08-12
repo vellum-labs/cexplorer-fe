@@ -27,8 +27,9 @@ interface AddressDetailOverviewProps {
 
 export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
   data,
+  stakeAddress,
 }) => {
-  const address = data?.view ?? "";
+  const address = data?.view || stakeAddress;
   const addrObj = Address.from(address);
   const rawAddress = Address.toHexString(addrObj.raw);
   const tokenMarket = configJSON.market[0].token[0].active;
@@ -48,7 +49,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
     tokenMarket ? { label: "Assets balance", value: "TBD" } : undefined,
     {
       label: "ADA balance",
-      value: <AdaWithTooltip data={data?.stake?.active.amount ?? 0} />,
+      value: <AdaWithTooltip data={data?.stake?.active?.amount ?? 0} />,
     },
     { label: "Private name", value: <AddCustomLabel address={address} /> },
   ];
@@ -58,11 +59,11 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
       label: "Status",
       value: (
         <>
-          {data?.stake.info.active ? (
+          {data?.stake?.info?.active ? (
             <Badge className='' color='green'>
               Active
             </Badge>
-          ) : data?.stake.info.active === null ? (
+          ) : data?.stake?.info?.active === null ? (
             <Badge className='' color='red'>
               Inactive
             </Badge>
@@ -74,15 +75,15 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
         </>
       ),
     },
-    data?.stake.info.active
+    data?.stake?.info?.active
       ? {
           label: "Stake pool",
           value: (
             <div className='w-full max-w-[220px] sm:max-w-[250px]'>
               <PoolCell
                 poolInfo={
-                  (data?.stake.active.deleg ??
-                    data?.stake.live.deleg) as PoolInfo
+                  (data?.stake?.active?.deleg ??
+                    data?.stake?.live?.deleg) as PoolInfo
                 }
               />
             </div>
