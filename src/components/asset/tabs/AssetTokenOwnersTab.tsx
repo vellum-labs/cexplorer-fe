@@ -16,6 +16,7 @@ interface AssetTokenOwnersTabProps {
   policy: string;
   supply?: number;
   price?: number;
+  decimals?: number;
 }
 
 export const AssetTokenOwnersTab: FC<AssetTokenOwnersTabProps> = ({
@@ -23,6 +24,7 @@ export const AssetTokenOwnersTab: FC<AssetTokenOwnersTabProps> = ({
   policy,
   supply,
   price,
+  decimals = 1,
 }) => {
   const [totalItems, setTotalItems] = useState<number>(0);
   const { page } = useSearch({ from: "/asset/$fingerprint" });
@@ -77,7 +79,9 @@ export const AssetTokenOwnersTab: FC<AssetTokenOwnersTabProps> = ({
       key: "quantity",
       render: item => (
         <p className='text-right'>
-          {item?.quantity ? formatNumber(item.quantity) : "-"}
+          {item?.quantity
+            ? formatNumber((item.quantity / Math.pow(10, decimals)).toFixed(2))
+            : "-"}
         </p>
       ),
       title: <p className='w-full text-right'>Quantity</p>,
