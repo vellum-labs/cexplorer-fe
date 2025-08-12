@@ -19,17 +19,16 @@ export const AddressInspectorRow: FC<AddressInspectorRowProps> = ({
 }) => {
   return (
     <div
-      className={`flex w-full ${titleStart ? "items-start" : "items-center"} ${darker ? "bg-darker" : ""}`}
+      className={`flex w-full ${titleStart ? "items-start" : "items-center"} ${darker ? "bg-darker" : ""} flex-col sm:flex-row`}
     >
       <div
-        className={`flex min-w-[200px] max-w-[200px] flex-grow items-center ${darker ? "bg-darker" : ""}`}
+        className={`flex w-full items-center sm:w-[200px] sm:max-w-[200px] sm:flex-grow ${darker ? "bg-darker" : ""}`}
         style={{
           minHeight: "64px",
-          height: "64px",
         }}
       >
         <div
-          className={`flex h-full w-full ${titleStart ? "items-start py-3" : "items-center"} gap-1 px-6`}
+          className={`flex h-full w-full ${titleStart ? "items-start py-3" : "items-center"} gap-1 px-3 sm:px-6`}
         >
           <span className='text-sm font-medium text-grayTextPrimary'>
             {" "}
@@ -38,12 +37,14 @@ export const AddressInspectorRow: FC<AddressInspectorRowProps> = ({
         </div>
       </div>
       <div
-        className={`flex min-w-[140px] flex-1 items-center text-sm font-medium ${darker ? "bg-darker" : ""}`}
+        className={`flex w-full items-center text-sm font-medium sm:min-w-[140px] sm:flex-1 ${darker ? "bg-darker" : ""} overflow-hidden`}
         style={{
           minHeight: "64px",
         }}
       >
-        {isLoading ? <LoadingSkeleton height='20px' width='95%' /> : value}
+        <div className='w-full overflow-hidden'>
+          {isLoading ? <LoadingSkeleton height='20px' width='95%' /> : value}
+        </div>
       </div>
     </div>
   );
