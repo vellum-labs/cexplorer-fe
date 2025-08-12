@@ -173,7 +173,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
                 : "-"}
             </span>
             <DateCell
-              time={startTime.toISOString()}
+              time={startTime ? startTime.toISOString() : ""}
               withoutConvert
               className='text-xs text-grayTextPrimary'
             />
@@ -243,7 +243,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
                 : "-"}
             </span>
             <DateCell
-              time={endTime.toISOString()}
+              time={endTime ? endTime.toISOString() : ""}
               withoutConvert
               className='text-xs text-grayTextPrimary'
             />
