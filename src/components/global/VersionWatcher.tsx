@@ -17,6 +17,7 @@ export const VersionWatcher: FC = () => {
     "auth_tokens_store",
     "wallet-store",
     "watchlist_store",
+    "navbar-line-1",
   ];
 
   useEffect(() => {
