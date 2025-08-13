@@ -289,10 +289,7 @@ export const GovernancePage: FC = () => {
     {
       key: "status",
       render: item => (
-        <GovernanceStatusBadge
-          item={item}
-          currentEpoch={miscConst?.no ?? 0}
-        />
+        <GovernanceStatusBadge item={item} currentEpoch={miscConst?.no ?? 0} />
       ),
       title: "Status",
       visible: columnsVisibility.status,
@@ -336,7 +333,7 @@ export const GovernancePage: FC = () => {
     {
       key: "active_gov_actions",
       icon: <Asterisk className='text-primary' />,
-      label: "Active governance actions",
+      label: "Governance actions",
       content: (
         <p className='text-2xl font-semibold'>
           {drepStat?.gov_action[0]?.total
@@ -346,18 +343,22 @@ export const GovernancePage: FC = () => {
       ),
       footer: (
         <div className='flex flex-wrap'>
-          {!!drepStat?.gov_action[0]?.active && (
-            <div className='flex w-fit items-center gap-1 pr-[26px]'>
-              <span className='text-sm text-grayTextPrimary'>Active</span>
-              <span className='text-sm text-[#17B26A]'>
-                {drepStat?.gov_action[0]?.active}
-              </span>
-            </div>
-          )}
+          <div className='flex w-fit items-center gap-1 pr-[26px]'>
+            <span className='text-sm text-grayTextPrimary'>Active</span>
+            <span className='text-sm text-[#10B981]'>
+              {drepStat?.gov_action[0]?.active || 0}
+            </span>
+          </div>
+          <div className='flex w-fit items-center gap-1 pr-[26px]'>
+            <span className='text-sm text-grayTextPrimary'>Ratified</span>
+            <span className='text-sm text-[#00A9E3]'>
+              {drepStat?.gov_action[0]?.ratified || 0}
+            </span>
+          </div>
           {!!drepStat?.gov_action[0]?.enacted && (
             <div className='flex w-fit items-center gap-1 pr-[26px]'>
               <span className='text-sm text-grayTextPrimary'>Enacted</span>
-              <span className='text-sm text-[#00A9E3]'>
+              <span className='text-sm text-[#876ee1]'>
                 {drepStat?.gov_action[0]?.enacted}
               </span>
             </div>
@@ -367,14 +368,6 @@ export const GovernancePage: FC = () => {
               <span className='text-sm text-grayTextPrimary'>Expired</span>
               <span className='text-sm text-[#F79009]'>
                 {drepStat?.gov_action[0]?.expires}
-              </span>
-            </div>
-          )}
-          {!!drepStat?.gov_action[0]?.ratified && (
-            <div className='flex w-fit items-center gap-1 pr-[26px]'>
-              <span className='text-sm text-grayTextPrimary'>Ratified</span>
-              <span className='text-sm text-[#079455]'>
-                {drepStat?.gov_action[0]?.ratified}
               </span>
             </div>
           )}

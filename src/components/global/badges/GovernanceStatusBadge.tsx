@@ -1,9 +1,9 @@
 import type { FC } from "react";
 import PulseDot from "../PulseDot";
-import { 
-  getGovActionStatus, 
+import {
+  getGovActionStatus,
   type GovActionStatus,
-  type GovernanceEpochs 
+  type GovernanceEpochs,
 } from "@/utils/gov/getGovActionStatus";
 
 interface GovernanceStatusBadgeProps {
@@ -14,15 +14,15 @@ interface GovernanceStatusBadgeProps {
 const getStatusColor = (status: GovActionStatus): string => {
   switch (status) {
     case "Active":
-      return "#17B26A"; // Green - In progress/voting
+      return "#10B981"; // Emerald Teal - In progress/voting
     case "Ratified":
       return "#00A9E3"; // Blue - Approved, waiting for enactment
     case "Enacted":
-      return "#079455"; // Dark Green - Successfully completed
+      return "#886fe2"; // Bright Indigo - Successfully completed
     case "Expired":
       return "#F79009"; // Orange - Failed/expired
     default:
-      return "#17B26A"; // Default to Active color
+      return "#10B981"; // Default to Active color
   }
 };
 
