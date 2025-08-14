@@ -66,20 +66,47 @@ export const useEpochBlockchain = ({
   const stakes = filteredData.map(d => d.stats?.stake?.active || 0);
   const transactions = filteredData.map(d => d?.tx_count || 0);
   const rewards = filteredData.map(d => {
-    const leader = d?.stats?.rewards?.leader ? d?.stats?.rewards?.leader : 0;
-    const member = d?.stats?.rewards?.member ? d?.stats?.rewards?.member : 0;
+    const leader = d?.stats?.rewards?.leader;
+    const member = d?.stats?.rewards?.member;
+
+    if (leader === null || member === null) {
+      return null;
+    }
 
     return (leader + member).toFixed(2);
   });
-  const apy = filteredData.map(d =>
-    (d?.stats?.pool_stat?.pct_member ?? 0).toFixed(2),
-  );
+  const apy = filteredData.map((d, index) => {
+    const pctMember = d?.stats?.pool_stat?.pct_member;
+    
+    if (pctMember === null || (index < 2 && pctMember === 0)) {
+      return null;
+    }
+    
+    return (pctMember ?? 0).toFixed(2);
+  });
   const adaPrice = filteredData.map(
     d => findNearestRate(d?.start_time || "", rates)?.adausd?.toFixed(2) ?? 0,
   );
-  const yearlyPerAda = filteredData.map((d, index) =>
-    (d?.params?.monetary_expand_rate * 1000 * +adaPrice[index] || 0).toFixed(2),
-  );
+  const yearlyPerAda = filteredData.map((d, index) => {
+    const leader = d?.stats?.rewards?.leader;
+    const member = d?.stats?.rewards?.member;
+    const activeStake = d?.stats?.stake?.active;
+    const price = +adaPrice[index];
+
+    if (leader === null || member === null || !activeStake || !price) {
+      return null;
+    }
+
+    const totalRewards = leader + member;
+    const totalRewardsAda = totalRewards / 1000000;
+    const activeStakeAda = activeStake / 1000000;
+    const rewardsPerAda = totalRewardsAda / activeStakeAda;
+    const yearlyRewardsPerAda = rewardsPerAda * 73;
+    const yearlyPer1000Ada = yearlyRewardsPerAda * 1000;
+    const usdValue = yearlyPer1000Ada * price;
+
+    return usdValue.toFixed(2);
+  });
 
   useEffect(() => {
     if (window && "localStorage" in window) {
@@ -153,7 +180,9 @@ export const useEpochBlockchain = ({
           const seriesName = param.seriesName;
           let value = param.data;
 
-          if (
+          if (value === null) {
+            value = "TBD";
+          } else if (
             seriesName === "Outputs (₳)" ||
             seriesName === "Stake (₳)" ||
             seriesName === "Staking Rewards (₳)"
@@ -431,6 +460,7 @@ export const useEpochBlockchain = ({
         name: "Staking Rewards (₳)",
         showSymbol: false,
         yAxisIndex: 4,
+        connectNulls: false,
         itemStyle: {
           color: "#f542d4",
         },
@@ -442,11 +472,12 @@ export const useEpochBlockchain = ({
         name: "APY (%)",
         yAxisIndex: 5,
         showSymbol: false,
+        connectNulls: false,
         areaStyle: {
           opacity: 0.12,
         },
         itemStyle: {
-          color: "#ffc115",
+          color: "#6366F1",
         },
         z: 6,
       },
@@ -460,7 +491,7 @@ export const useEpochBlockchain = ({
           opacity: 0.12,
         },
         itemStyle: {
-          color: "#da16e8",
+          color: "#20B2AA",
         },
         z: 7,
       },
@@ -470,6 +501,7 @@ export const useEpochBlockchain = ({
         name: "Yearly per 1000 ADA ($)",
         showSymbol: false,
         yAxisIndex: 7,
+        connectNulls: false,
         areaStyle: {
           opacity: 0.12,
         },
