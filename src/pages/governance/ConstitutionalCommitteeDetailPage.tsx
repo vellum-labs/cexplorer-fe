@@ -56,7 +56,13 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
     <PageBase
       metadataTitle='committee'
       title='Constitutional Committee'
-      breadcrumbItems={[{ label: "Constitutional Committee" }]}
+      breadcrumbItems={[
+        {
+          label: <span className='inline pt-1'>Governance</span>,
+          link: "/gov",
+        },
+        { label: "Constitutional committee" },
+      ]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
         {isLoading ? (
@@ -121,11 +127,13 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
                   className='break-all text-sm text-primary'
                   onClick={e => {
                     e.preventDefault();
-                    const transformedUrl = transformAnchorUrl(constitution.anchor.url);
+                    const transformedUrl = transformAnchorUrl(
+                      constitution.anchor.url,
+                    );
                     setClickedUrl(transformedUrl);
                   }}
                 >
-Fulltext of the Cardano Constitution
+                  Fulltext of the Cardano Constitution
                 </a>
               )}
             </div>

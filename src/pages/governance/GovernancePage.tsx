@@ -289,10 +289,7 @@ export const GovernancePage: FC = () => {
     {
       key: "status",
       render: item => (
-        <GovernanceStatusBadge
-          item={item}
-          currentEpoch={miscConst?.no ?? 0}
-        />
+        <GovernanceStatusBadge item={item} currentEpoch={miscConst?.no ?? 0} />
       ),
       title: "Status",
       visible: columnsVisibility.status,
@@ -431,8 +428,14 @@ export const GovernancePage: FC = () => {
   return (
     <PageBase
       metadataTitle='governance'
-      title='Governance actions'
-      breadcrumbItems={[{ label: "Governance actions" }]}
+      title='Governance Actions'
+      breadcrumbItems={[
+        {
+          label: <span className='inline pt-1'>Governance</span>,
+          link: "/gov",
+        },
+        { label: "Governance actions" },
+      ]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
         <div className='flex h-full w-full flex-wrap items-stretch gap-4 lg:flex-nowrap'>

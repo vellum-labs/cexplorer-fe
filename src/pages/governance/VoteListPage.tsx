@@ -363,7 +363,7 @@ export const VoteListPage: FC = () => {
       breadcrumbItems={[
         {
           label: <span className='inline pt-1'>Governance</span>,
-          link: "/",
+          link: "/gov",
         },
         {
           label: <span className=''>Votes</span>,
