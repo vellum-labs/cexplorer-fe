@@ -37,13 +37,13 @@ export const AnalyticsPage = () => {
       title='Analytics'
       breadcrumbItems={[{ label: "Analytics" }]}
     >
-      <section className='mt-4 flex w-full max-w-desktop flex-wrap gap-5 px-mobile pb-5 md:px-desktop'>
+      <section className='mt-4 grid w-full max-w-desktop grid-cols-1 gap-5 px-mobile pb-5 md:grid-cols-2 md:px-desktop'>
         {Object.keys(options)
           .filter(key => options[key].options.length)
           .map(key => (
             <div
               key={key}
-              className='flex grow basis-[450px] flex-col gap-2 rounded-xl border border-border p-3 font-medium'
+              className='flex flex-col gap-2 rounded-xl border border-border p-3 font-medium'
             >
               {<img src={images[key]} alt='Pools' />}
               {options[key].labelHref ? (
