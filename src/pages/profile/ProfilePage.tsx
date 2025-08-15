@@ -30,6 +30,7 @@ export const ProfilePage = () => {
         <HeaderBanner
           title='Settings'
           breadcrumbItems={[{ label: "Settings" }]}
+          subTitle
         />
         <Tabs
           wrapperClassname='mt-0'
