@@ -18,6 +18,19 @@ interface Props {
 const WalletButton = ({ variant = "short" }: Props) => {
   const [showWalletModal, setShowWalletModal] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+
+  let timeout: NodeJS.Timeout;
+
+  const handleOpen = () => {
+    clearTimeout(timeout);
+    setShowDropdown(true);
+  };
+
+  const handleClose = () => {
+    timeout = setTimeout(() => {
+      setShowDropdown(false);
+    }, 250);
+  };
   const { address, walletType, walletApi, setWalletState } = useWalletStore();
   const { disconnect } = useConnectWallet();
   const [balance, setBalance] = useState(0);
@@ -94,8 +107,8 @@ const WalletButton = ({ variant = "short" }: Props) => {
       ) : (
         <div
           className='relative'
-          onMouseEnter={() => setShowDropdown(true)}
-          onMouseLeave={() => setShowDropdown(false)}
+          onMouseEnter={handleOpen}
+          onMouseLeave={handleClose}
         >
           <button
             className='box-border flex min-w-fit max-w-fit items-center justify-between rounded-[8px] border-2 border-secondaryText bg-secondaryBg px-4 py-2 text-sm font-medium text-secondaryText duration-150 hover:scale-[101%] active:scale-[98%] disabled:cursor-not-allowed disabled:opacity-50'

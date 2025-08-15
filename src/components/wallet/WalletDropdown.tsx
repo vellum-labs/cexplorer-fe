@@ -51,6 +51,7 @@ const WalletDropdown = ({
       : undefined;
 
   const livePool = userData?.account?.[0]?.live_pool;
+  const drep = userData?.account?.[0]?.drep;
   const hasAdmin =
     userData?.power?.includes("pageAdmin") ||
     userData?.power?.includes("articleAdmin");
@@ -80,7 +81,11 @@ const WalletDropdown = ({
   if (!isOpen) return null;
 
   return (
-    <div className='absolute bottom-[calc(100%+3px)] right-0 z-30 w-[280px] rounded-lg border border-border bg-cardBg p-0 text-sm font-medium shadow md:bottom-auto md:top-[calc(100%+3px)] md:w-[320px]'>
+    <div
+      className='absolute bottom-[calc(100%+3px)] right-0 z-30 w-[280px] rounded-lg border border-border bg-cardBg p-0 text-sm font-medium shadow md:bottom-auto md:top-[calc(100%+3px)] md:w-[320px]'
+      onMouseEnter={() => {}}
+      onMouseLeave={() => {}}
+    >
       <div className='border-b border-border p-4'>
         <div className='flex items-start justify-between'>
           <div className='flex items-center gap-2'>
@@ -157,25 +162,73 @@ const WalletDropdown = ({
 
           <div className='flex items-center justify-between'>
             <span className='text-xs font-medium text-text'>Pool</span>
-            <div className='flex items-center gap-2'>
-              {livePool ? (
-                <>
+            <div className='flex items-center gap-1'>
+              {livePool && livePool.id ? (
+                <Link
+                  to='/pool/$id'
+                  params={{ id: livePool.id }}
+                  className='flex cursor-pointer items-center gap-1 hover:text-primary'
+                  onClick={onClose}
+                >
                   <img
                     src={generateImageUrl(livePool.id, "sm", "pool")}
                     alt='Pool icon'
                     className='h-4 w-4 rounded-full'
                   />
-                  <span className='cursor-pointer text-sm font-medium text-text'>
+                  <span className='text-sm font-medium text-primary'>
                     {livePool.meta?.ticker ||
                       formatString(livePool.id, "short")}
                   </span>
-                </>
+                </Link>
               ) : (
                 <Link
                   to='/pool'
                   className='cursor-pointer text-sm font-medium text-secondaryText hover:text-primary'
                 >
                   Browse pools
+                </Link>
+              )}
+            </div>
+          </div>
+
+          <div className='flex items-center justify-between'>
+            <span className='text-xs font-medium text-text'>DRep</span>
+            <div className='flex items-center gap-1'>
+              {drep && drep.id ? (
+                <>
+                  {drep.id === "drep_always_abstain" ? (
+                    <span className='text-sm font-medium text-text'>
+                      Always Abstain
+                    </span>
+                  ) : drep.id === "drep_always_no_confidence" ? (
+                    <span className='text-sm font-medium text-text'>
+                      No Confidence
+                    </span>
+                  ) : (
+                    <Link
+                      to='/drep/$hash'
+                      params={{ hash: drep.id }}
+                      className='flex cursor-pointer items-center gap-1 hover:text-primary'
+                      onClick={onClose}
+                    >
+                      <img
+                        src={generateImageUrl(drep.id, "sm", "drep")}
+                        alt='DRep icon'
+                        className='h-4 w-4 rounded-full'
+                      />
+                      <span className='max-w-[120px] truncate text-sm font-medium text-primary'>
+                        {drep.meta?.given_name ||
+                          formatString(drep.id, "short")}
+                      </span>
+                    </Link>
+                  )}
+                </>
+              ) : (
+                <Link
+                  to='/drep'
+                  className='cursor-pointer text-sm font-medium text-secondaryText hover:text-primary'
+                >
+                  Browse DReps
                 </Link>
               )}
             </div>
