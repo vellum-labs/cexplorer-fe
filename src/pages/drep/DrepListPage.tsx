@@ -192,8 +192,14 @@ export const DrepListPage = () => {
 
   return (
     <PageBase
-      title='Delegated representatives'
-      breadcrumbItems={[{ label: "Delegated representatives" }]}
+      title='Delegated Representatives'
+      breadcrumbItems={[
+        {
+          label: <span className='inline pt-1'>Governance</span>,
+          link: "/gov",
+        },
+        { label: "Delegated representatives" },
+      ]}
       metadataTitle='drepList'
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>

@@ -134,7 +134,17 @@ export const DrepDeregistrationsPage = () => {
     <PageBase
       metadataTitle='drepDeregistrations'
       title='DRep deregistrations'
-      breadcrumbItems={[{ label: "DRep deregistrations" }]}
+      breadcrumbItems={[
+        {
+          label: <span className='inline pt-1'>Governance</span>,
+          link: "/gov",
+        },
+        {
+          label: <span className='inline pt-1'>Delegated representatives</span>,
+          link: "/drep",
+        },
+        { label: "Deregistrations" },
+      ]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
         <div className='mb-4 flex w-full items-center justify-between gap-2'>

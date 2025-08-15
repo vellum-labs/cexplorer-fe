@@ -35,7 +35,6 @@ export const GovernanceVoteDetailPage: FC = () => {
     }));
   }, [votes, isLoading]);
 
-
   return (
     <PageBase
       metadataTitle='govVoteDetail'
@@ -44,7 +43,14 @@ export const GovernanceVoteDetailPage: FC = () => {
         after: hash,
       }}
       breadcrumbItems={[
-        { label: <span className='inline pt-1'>Governance</span> },
+        {
+          label: <span className='inline pt-1'>Governance</span>,
+          link: "/gov",
+        },
+        {
+          label: <span className='inline pt-1'>Votes</span>,
+          link: "/gov/vote",
+        },
         {
           label: <span>{formatString(hash ?? "", "long")}</span>,
           ident: hash,
@@ -86,7 +92,7 @@ export const GovernanceVoteDetailPage: FC = () => {
         ) : (
           <EmptyState
             icon={<Vote size={24} />}
-            primaryText="No votes found"
+            primaryText='No votes found'
             secondaryText="This transaction doesn't contain any governance votes."
           />
         )}

@@ -58,9 +58,9 @@ export const PowerThresholdsPage: FC = () => {
           breadcrumbItems={[
             {
               label: <span className='inline pt-1'>Governance</span>,
-              link: "/",
+              link: "/gov",
             },
-            { label: "Power Thresholds" },
+            { label: "Power thresholds" },
           ]}
         />
 

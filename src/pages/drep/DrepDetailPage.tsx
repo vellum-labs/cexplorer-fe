@@ -94,7 +94,11 @@ export const DrepDetailPage: FC = () => {
       }}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1'>Drep</span>,
+          label: <span className='inline pt-1'>Governance</span>,
+          link: "/gov",
+        },
+        {
+          label: <span className='inline pt-1'>Delegated representatives</span>,
           link: "/drep",
         },
         {

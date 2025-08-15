@@ -33,8 +33,14 @@ export const WithdrawalLeaderboard: FC = () => {
   return (
     <PageBase
       metadataTitle='treasuryWithdrawalLeaderboard'
-      title='Withdrawal leaderboard'
-      breadcrumbItems={[{ label: "Withdrawal leaderboard" }]}
+      title='Withdrawal Leaderboard'
+      breadcrumbItems={[
+        {
+          label: <span className='inline pt-1'>Governance</span>,
+          link: "/gov",
+        },
+        { label: "Withdrawal leaderboard" },
+      ]}
       adsCarousel={false}
     >
       <section
