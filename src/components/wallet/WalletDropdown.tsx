@@ -80,7 +80,7 @@ const WalletDropdown = ({
   if (!isOpen) return null;
 
   return (
-    <div className='absolute bottom-[calc(100%+3px)] right-0 z-20 w-[280px] rounded-lg border border-border bg-cardBg p-0 text-sm font-medium shadow md:bottom-auto md:top-[calc(100%+3px)] md:w-[320px]'>
+    <div className='absolute bottom-[calc(100%+3px)] right-0 z-30 w-[280px] rounded-lg border border-border bg-cardBg p-0 text-sm font-medium shadow md:bottom-auto md:top-[calc(100%+3px)] md:w-[320px]'>
       <div className='border-b border-border p-4'>
         <div className='flex items-start justify-between'>
           <div className='flex items-center gap-2'>
