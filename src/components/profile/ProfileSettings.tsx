@@ -35,8 +35,7 @@ interface UserInfo {
 export const ProfileSettings: FC = () => {
   const token = useAuthToken();
   const [showConnectModal, setShowConnectModal] = useState(false);
-  
-  // Only make API calls when token exists
+
   const { data, refetch } = useFetchUserInfo();
   const location = useLocation();
 
@@ -47,15 +46,15 @@ export const ProfileSettings: FC = () => {
     picture: profileData?.data?.picture ?? "",
     public: profileData?.is_public ? Boolean(profileData?.is_public) : false,
     social: {
+      xcom: profileData?.data?.social?.xcom ?? "",
       web: profileData?.data?.social?.web ?? "",
+      telegram: profileData?.data?.social?.telegram ?? "",
       discord: profileData?.data?.social?.discord ?? "",
       patreon: profileData?.data?.social?.patreon ?? "",
       facebook: profileData?.data?.social?.facebook ?? "",
-      github: profileData?.data?.social?.github ?? "",
       instagram: profileData?.data?.social?.instagram ?? "",
+      github: profileData?.data?.social?.github ?? "",
       linkedin: profileData?.data?.social?.linkedin ?? "",
-      telegram: profileData?.data?.social?.telegram ?? "",
-      xcom: profileData?.data?.social?.xcom ?? "",
     },
   });
   const [errors, setErrors] = useState<{ [key: string]: string | undefined }>(
@@ -112,7 +111,7 @@ export const ProfileSettings: FC = () => {
       "LinkedIn username must be 3-100 characters and can contain letters, numbers, and hyphens.",
   };
 
-  const socialsData = Object.entries(userInfo.social);
+  const socialsData = Object.entries(userInfo?.social || {});
 
   const handleChange = (field: string, value: any) => {
     setUserInfo(prevData => ({
@@ -127,7 +126,7 @@ export const ProfileSettings: FC = () => {
     setUserInfo(prevData => ({
       ...prevData,
       social: {
-        ...prevData.social,
+        ...(prevData.social || {}),
         [key]: trimmedValue,
       },
     }));
@@ -178,7 +177,7 @@ export const ProfileSettings: FC = () => {
 
     const userInfoToSave = { ...userInfo };
 
-    const webValue = userInfo.social.web;
+    const webValue = userInfo.social?.web;
     if (webValue) {
       let formattedWebValue = webValue.trim();
       if (!/^https?:\/\//i.test(formattedWebValue)) {
@@ -225,6 +224,17 @@ export const ProfileSettings: FC = () => {
         public: profileData?.is_public
           ? Boolean(profileData?.is_public)
           : false,
+        social: profileData?.data?.social || {
+          xcom: "",
+          web: "",
+          telegram: "",
+          discord: "",
+          patreon: "",
+          facebook: "",
+          instagram: "",
+          github: "",
+          linkedin: "",
+        },
       });
 
       setErrors({});
@@ -237,20 +247,18 @@ export const ProfileSettings: FC = () => {
       picture: "",
       public: false,
       social: {
-        discord: "",
-        facebook: "",
-        github: "",
-        instagram: "",
-        linkedin: "",
-        patreon: "",
-        telegram: "",
-        web: "",
         xcom: "",
+        web: "",
+        telegram: "",
+        discord: "",
+        patreon: "",
+        facebook: "",
+        instagram: "",
+        github: "",
+        linkedin: "",
       },
     });
   };
-
-  // Remove the 404 redirect - we'll show empty state instead
 
   useEffect(() => {
     handleCancel();
@@ -262,7 +270,6 @@ export const ProfileSettings: FC = () => {
     }
   }, [location.href, token]);
 
-  // Show empty state when wallet is not connected
   if (!token) {
     return (
       <>
@@ -272,13 +279,13 @@ export const ProfileSettings: FC = () => {
         <div className='flex w-full max-w-desktop flex-col'>
           <EmptyState
             icon={<Wallet size={24} />}
-            primaryText="Wallet not connected."
-            secondaryText="Connect your wallet to access and manage your profile settings."
+            primaryText='Wallet not connected.'
+            secondaryText='Connect your wallet to access and manage your profile settings.'
             button={
               <Button
-                label="Connect wallet"
-                variant="primary"
-                size="md"
+                label='Connect wallet'
+                variant='primary'
+                size='md'
                 onClick={() => setShowConnectModal(true)}
               />
             }
