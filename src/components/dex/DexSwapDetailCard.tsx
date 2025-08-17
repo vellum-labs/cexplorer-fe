@@ -142,6 +142,8 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
   const dexKey = swapDetail?.dex?.toUpperCase() ?? "";
   const dex = dexConfig[dexKey];
 
+  console.log(swapDetail);
+
   const detailItems = [
     {
       key: "address",
@@ -322,7 +324,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
             ) : (
               <Ellipsis size={15} className='text-yellowText' />
             )}
-            {Array.isArray(swapDetail?.status)
+            {swapDetail?.status
               ? (swapDetail?.status[0] ?? "").toUpperCase() +
                 swapDetail?.status.slice(1).toLowerCase()
               : ""}
