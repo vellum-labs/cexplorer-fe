@@ -173,7 +173,11 @@ export const PotsPage = () => {
         <meta property='og:url' content={webUrl + location.pathname} />
       </Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center'>
-        <HeaderBanner title='Pots' breadcrumbItems={[{ label: "Pots" }]} />
+        <HeaderBanner
+          title='Pots'
+          breadcrumbItems={[{ label: "Pots" }]}
+          subTitle
+        />
         <AdsCarousel />
         <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
           <div className='mb-2 ml-auto flex items-center'>
