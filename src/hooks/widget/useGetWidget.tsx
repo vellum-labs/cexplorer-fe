@@ -194,7 +194,6 @@ const DrepListWidget = (
     "status",
     "drep_name",
     "voting_power",
-    "owner_stake",
     "voting_activity",
     "delegators",
   ];
