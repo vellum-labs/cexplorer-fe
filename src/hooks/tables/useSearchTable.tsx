@@ -91,13 +91,13 @@ export const useSearchTable = ({
     if (shouldUpdate) {
       const currentSearch = search ?? "";
       const newSearch = urlSearch ?? "";
-      
+
       if (currentSearch !== newSearch) {
         navigate({
           search: {
             ...rest,
             search: urlSearch,
-            page: newSearch && !currentSearch ? rest.page : undefined,
+            page: 1,
           } as any,
         });
       }
