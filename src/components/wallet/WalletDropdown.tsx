@@ -30,7 +30,8 @@ interface WalletDropdownProps {
   address: string;
   walletType: string;
   balance: number;
-  userQuery: any;
+  isLoading: boolean;
+  userData: any;
 }
 
 const WalletDropdown = ({
@@ -40,27 +41,21 @@ const WalletDropdown = ({
   address,
   walletType,
   balance,
-  userQuery,
+  isLoading,
+  userData,
 }: WalletDropdownProps) => {
   const { disconnect } = useConnectWallet();
-  const userData = userQuery.data?.data;
-  const nftCount = userData?.membership?.nfts || 0;
 
-  const adaHandle =
-    userData?.account && userData?.account.length > 0
-      ? userData?.account[0].adahandle
-      : undefined;
-
-  const livePool = userData?.account?.[0]?.live_pool;
-  const drep = userData?.account?.[0]?.drep;
-  const hasAdmin =
-    userData?.power?.includes("pageAdmin") ||
-    userData?.power?.includes("articleAdmin");
-  const hasMembership = (userData?.membership?.nfts || 0) > 0;
-
-  if (userQuery.isLoading) {
-    return null;
-  }
+  const {
+    profilePicture,
+    profileName,
+    adaHandle,
+    livePool,
+    drep,
+    nftCount,
+    hasAdmin,
+    hasMembership,
+  } = userData;
 
   const handleDisconnect = () => {
     if (walletType === "nufiSSO" || walletType === "nufiSnap") {
@@ -79,13 +74,12 @@ const WalletDropdown = ({
     onClose();
   };
 
-  if (!isOpen) return null;
-
   return (
     <div
       className='absolute bottom-[calc(100%+3px)] right-0 z-30 w-[280px] rounded-lg border border-border bg-cardBg p-0 text-sm font-medium shadow md:bottom-auto md:top-[calc(100%+3px)] md:w-[320px]'
-      onMouseEnter={() => {}}
-      onMouseLeave={() => {}}
+      style={{
+        visibility: isLoading || !isOpen ? "hidden" : "visible",
+      }}
     >
       <div className='border-b border-border p-4'>
         <div className='flex items-start justify-between'>
@@ -93,10 +87,7 @@ const WalletDropdown = ({
             <div className='relative'>
               <img
                 className='h-10 w-10 rounded-full'
-                src={
-                  userData?.profile?.data?.picture ||
-                  "https://ix.cexplorer.io/default.png"
-                }
+                src={profilePicture || "https://ix.cexplorer.io/default.png"}
                 alt='User avatar'
               />
               <img
@@ -107,7 +98,7 @@ const WalletDropdown = ({
             </div>
             <div className='flex max-w-[120px] flex-col'>
               <span className='truncate text-sm font-medium leading-5 text-text'>
-                {userData?.profile?.data?.name || "Anonymous User"}
+                {profileName || "Anonymous User"}
               </span>
               <div className='flex items-center gap-2'>
                 <Link

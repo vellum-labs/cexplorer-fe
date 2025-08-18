@@ -5,7 +5,7 @@ import { useWalletStore } from "@/stores/walletStore";
 import { formatString } from "@/utils/format/format";
 import { getWalletBalance } from "@/utils/wallet/getWalletBalance";
 import { Wallet } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Button from "../global/Button";
 import ConnectWalletModal from "./ConnectWalletModal";
 import DelegationModal from "./DelegationModal";
@@ -35,10 +35,32 @@ const WalletButton = ({ variant = "short" }: Props) => {
   const { disconnect } = useConnectWallet();
   const [balance, setBalance] = useState(0);
   const userQuery = useFetchUserInfo();
+
+  const stableUserData = useMemo(() => {
+    const data = userQuery.data?.data as any;
+    return {
+      profilePicture: data?.profile?.data?.picture,
+      profileName: data?.profile?.data?.name,
+      adaHandle: data?.account?.[0]?.adahandle,
+      livePool: data?.account?.[0]?.live_pool,
+      drep: data?.account?.[0]?.drep,
+      nftCount: data?.membership?.nfts || 0,
+      hasAdmin:
+        data?.power?.includes("pageAdmin") ||
+        data?.power?.includes("articleAdmin"),
+      hasMembership: (data?.membership?.nfts || 0) > 0,
+    };
+  }, [userQuery.data?.data]);
+
+  const isLoading = userQuery.isLoading;
+
   const [openDelegationModal, setOpenDelegationModal] = useState(false);
 
+  const handleCloseDropdown = useCallback(() => setShowDropdown(false), []);
+  const handleSwitchWallet = useCallback(() => setShowWalletModal(true), []);
+
   const walletChannelRef = useRef<BroadcastChannel>();
-  
+
   if (!walletChannelRef.current) {
     walletChannelRef.current = new BroadcastChannel("wallet_channel");
   }
@@ -63,7 +85,9 @@ const WalletButton = ({ variant = "short" }: Props) => {
     const controller = new AbortController();
     const signal = controller.signal;
 
-    walletChannelRef.current?.addEventListener("message", handleMessage, { signal });
+    walletChannelRef.current?.addEventListener("message", handleMessage, {
+      signal,
+    });
 
     return () => {
       controller.abort();
@@ -135,17 +159,16 @@ const WalletButton = ({ variant = "short" }: Props) => {
             </span>
           </button>
 
-          {showDropdown && (
-            <WalletDropdown
-              isOpen={showDropdown}
-              onClose={() => setShowDropdown(false)}
-              onSwitchWallet={() => setShowWalletModal(true)}
-              address={address!}
-              walletType={walletType!}
-              balance={balance}
-              userQuery={userQuery}
-            />
-          )}
+          <WalletDropdown
+            isOpen={showDropdown}
+            onClose={handleCloseDropdown}
+            onSwitchWallet={handleSwitchWallet}
+            address={address!}
+            walletType={walletType!}
+            balance={balance}
+            userData={stableUserData}
+            isLoading={isLoading}
+          />
         </div>
       )}
     </>
