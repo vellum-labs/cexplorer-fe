@@ -14,6 +14,7 @@ import {
   User,
   Wallet,
 } from "lucide-react";
+import { memo } from "react";
 import { Badge } from "../global/badges/Badge";
 import Dollar from "../../resources/images/dollar.svg";
 import Copy from "../global/Copy";
@@ -390,4 +391,4 @@ const WalletDropdown = ({
   );
 };
 
-export default WalletDropdown;
+export default memo(WalletDropdown);

@@ -5,7 +5,7 @@ import { useWalletStore } from "@/stores/walletStore";
 import { formatString } from "@/utils/format/format";
 import { getWalletBalance } from "@/utils/wallet/getWalletBalance";
 import { Wallet } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../global/Button";
 import ConnectWalletModal from "./ConnectWalletModal";
 import DelegationModal from "./DelegationModal";
@@ -19,15 +19,15 @@ const WalletButton = ({ variant = "short" }: Props) => {
   const [showWalletModal, setShowWalletModal] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
 
-  let timeout: NodeJS.Timeout;
+  const timeoutRef = useRef<NodeJS.Timeout>();
 
   const handleOpen = () => {
-    clearTimeout(timeout);
+    clearTimeout(timeoutRef.current);
     setShowDropdown(true);
   };
 
   const handleClose = () => {
-    timeout = setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       setShowDropdown(false);
     }, 250);
   };
@@ -37,7 +37,11 @@ const WalletButton = ({ variant = "short" }: Props) => {
   const userQuery = useFetchUserInfo();
   const [openDelegationModal, setOpenDelegationModal] = useState(false);
 
-  const walletChannel = new BroadcastChannel("wallet_channel");
+  const walletChannelRef = useRef<BroadcastChannel>();
+  
+  if (!walletChannelRef.current) {
+    walletChannelRef.current = new BroadcastChannel("wallet_channel");
+  }
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -59,7 +63,7 @@ const WalletButton = ({ variant = "short" }: Props) => {
     const controller = new AbortController();
     const signal = controller.signal;
 
-    walletChannel.addEventListener("message", handleMessage, { signal });
+    walletChannelRef.current?.addEventListener("message", handleMessage, { signal });
 
     return () => {
       controller.abort();
@@ -68,7 +72,7 @@ const WalletButton = ({ variant = "short" }: Props) => {
 
   useEffect(() => {
     if (address && walletType) {
-      walletChannel.postMessage({
+      walletChannelRef.current?.postMessage({
         type: "WALLET_CONNECTED",
         payload: { address, walletType },
       });
