@@ -22,6 +22,7 @@ import { useGenerateSW } from "@/hooks/useGenerateSW";
 import { useState } from "react";
 import { setGlobalAbortSignal } from "@/lib/handleFetch";
 import { abortControllers } from "@/lib/handleAbortController";
+import { NotFoundPage } from "@/pages/NotFoundPage";
 
 const RootComponent = () => {
   const { notFound, setNotFound } = useNotFound();
@@ -152,16 +153,5 @@ export const Route = createRootRoute({
       </>
     );
   },
-  notFoundComponent: () => (
-    <div className='flex min-h-minHeight w-full flex-col items-center justify-center gap-4 text-xl'>
-      <p>This page doesn't exist...</p>
-      <Button
-        label='Go back'
-        variant='primary'
-        size='md'
-        href='/'
-        className='hover:text-white'
-      />
-    </div>
-  ),
+  notFoundComponent: NotFoundPage,
 });
