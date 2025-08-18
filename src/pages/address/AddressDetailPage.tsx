@@ -46,20 +46,15 @@ export const AddressDetailPage: FC = () => {
   let rewardsAddress: string | undefined;
   let stakeKey: string | undefined;
 
-  try {
-    const addrObj = Address.from(address!);
-    if ((addrObj as any).isByron) {
-      paymentAddress = addrObj.payment;
-      rewardsAddress = undefined;
-      stakeKey = undefined;
-    } else {
-      paymentAddress = addrObj.payment;
-      rewardsAddress = addrObj.rewardAddress;
-      stakeKey = addrObj.stake;
-    }
-  } catch {
-    setNotFound(true);
-    return undefined;
+  const addrObj = Address.from(address!);
+  if ((addrObj as any).isByron) {
+    paymentAddress = addrObj.payment;
+    rewardsAddress = undefined;
+    stakeKey = undefined;
+  } else {
+    paymentAddress = addrObj.payment;
+    rewardsAddress = addrObj.rewardAddress;
+    stakeKey = addrObj.stake;
   }
 
   const user = addressQuery.data?.data[0].user;
