@@ -142,8 +142,6 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
   const dexKey = swapDetail?.dex?.toUpperCase() ?? "";
   const dex = dexConfig[dexKey];
 
-  console.log(swapDetail);
-
   const detailItems = [
     {
       key: "address",
@@ -401,8 +399,6 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
       ),
     },
   ];
-
-  console.log(swapDetail);
 
   return (
     <div
