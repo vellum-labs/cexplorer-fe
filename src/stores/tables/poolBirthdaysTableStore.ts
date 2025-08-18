@@ -22,10 +22,11 @@ export const usePoolBirthdaysTableStore = handlePersistStore<
       date: true,
       pool: true,
       registered: true,
+      delegators: true,
     },
     isResponsive: true,
     rows: 20,
-    columnsOrder: ["date", "pool", "birthday", "registered", "active_stake"],
+    columnsOrder: ["date", "pool", "birthday", "registered", "delegators", "active_stake"],
   },
   set => ({
     setColumnVisibility: (columnKey, isVisible) =>

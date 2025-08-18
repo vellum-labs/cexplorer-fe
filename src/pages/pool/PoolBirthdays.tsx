@@ -1,11 +1,10 @@
-import Copy from "@/components/global/Copy";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
+import PoolCell from "@/components/table/PoolCell";
 import type { PoolBirthday } from "@/types/poolTypes";
 import type { PoolBirthdaysColumns, TableColumns } from "@/types/tableTypes";
-import { Link } from "@tanstack/react-router";
 import type { FC } from "react";
 
 import { poolBirthdaysTableOptions } from "@/constants/tables/poolBirthdaysTableOptions";
@@ -16,7 +15,7 @@ import { useEffect, useState } from "react";
 
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
 import DateCell from "@/components/table/DateCell";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber } from "@/utils/format/format";
 import { formatOrdinalSuffix } from "@/utils/format/formatOrdinalSuffix";
 import { format, parse, parseISO } from "date-fns";
 import { PageBase } from "@/components/global/pages/PageBase";
@@ -71,38 +70,17 @@ export const PoolBirthdays: FC = () => {
         }
 
         return (
-          <div className='flex flex-col'>
-            <Link to='/pool/$id' params={{ id: item?.pool?.id }}>
-              <span
-                title={item?.pool?.id}
-                className='cursor-pointer text-sm text-primary'
-              >
-                {item.pool?.meta?.ticker && `[${item.pool?.meta?.ticker}] `}
-                {item.pool?.meta?.name && item.pool?.meta?.name}
-              </span>
-            </Link>
-            <div className='item-center flex gap-2'>
-              <Link to='/pool/$id' params={{ id: item?.pool?.id }}>
-                <span
-                  className={`${item?.pool?.meta?.ticker ? "text-xs" : "text-sm"} text-primary`}
-                >
-                  {formatString(item?.pool?.id, "long")}
-                </span>
-              </Link>
-              {item?.pool?.id && (
-                <Copy
-                  copyText={item?.pool?.id}
-                  size={10}
-                  className='stroke-grayText translate-y-[6px]'
-                />
-              )}
-            </div>
-          </div>
+          <PoolCell
+            poolInfo={{
+              id: item.pool.id,
+              meta: item.pool.meta,
+            }}
+          />
         );
       },
       title: "Pool",
       visible: columnsVisibility.pool,
-      widthPx: 100,
+      widthPx: 150,
     },
     {
       key: "birthday",
@@ -139,26 +117,7 @@ export const PoolBirthdays: FC = () => {
       render: item => {
         if (!item?.registered) return "-";
 
-        const anniversaryDate = new Date(item.registered).getTime();
-        const now = new Date().getTime();
-        const timeDifference = now - anniversaryDate;
-
-        const { year } = formatOrdinalSuffix(
-          Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 365)),
-        );
-
-        const anniversaryYear = +item.registered.substring(0, 4);
-
-        let registeredString = item.registered;
-
-        if (year > 1) {
-          registeredString =
-            String(anniversaryYear - (year - 1)) +
-            "-" +
-            registeredString.substring(item.registered.indexOf("-") + 1);
-        }
-
-        const [registeredDate, registeredTime] = registeredString.split("T");
+        const [registeredDate, registeredTime] = item.registered.split("T");
 
         const parsedDate = parseISO(registeredDate);
         const formattedDate = format(parsedDate, "do 'of' MMMM yyyy");
@@ -174,28 +133,9 @@ export const PoolBirthdays: FC = () => {
         );
       },
       jsonFormat: item => {
-        if (!item?.anniversary) return "-";
+        if (!item?.registered) return "-";
 
-        const anniversaryDate = new Date(item.anniversary).getTime();
-        const now = new Date().getTime();
-        const timeDifference = now - anniversaryDate;
-
-        const { year } = formatOrdinalSuffix(
-          Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 365)),
-        );
-
-        const anniversaryYear = +item.anniversary.substring(0, 4);
-
-        let registeredString = item.anniversary;
-
-        if (year > 1) {
-          registeredString =
-            String(anniversaryYear - (year - 1)) +
-            "-" +
-            registeredString.substring(item.anniversary.indexOf("-") + 1);
-        }
-
-        const [registeredDate, registeredTime] = registeredString.split("T");
+        const [registeredDate, registeredTime] = item.registered.split("T");
 
         const parsedDate = parseISO(registeredDate);
         const formattedDate = format(parsedDate, "do 'of' MMMM yyyy");
@@ -208,6 +148,19 @@ export const PoolBirthdays: FC = () => {
       title: <p className='w-full text-right'>Registered</p>,
       visible: columnsVisibility.registered,
       widthPx: 60,
+    },
+    {
+      key: "delegators",
+      render: item => {
+        if (!item?.delegators) {
+          return <p className='text-right'>-</p>;
+        }
+
+        return <p className='text-right'>{formatNumber(item.delegators)}</p>;
+      },
+      title: <p className='w-full text-right'>Delegators</p>,
+      visible: columnsVisibility.delegators,
+      widthPx: 50,
     },
     {
       key: "active_stake",
