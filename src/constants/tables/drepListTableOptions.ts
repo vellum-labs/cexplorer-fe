@@ -20,7 +20,11 @@ export const drepListTableOptions: DrepListOptions[] = [
   },
   {
     key: "voting_activity",
-    name: "Voting Activity",
+    name: "Lifetime Activity",
+  },
+  {
+    key: "recent_activity",
+    name: "Recent Activity",
   },
   {
     key: "owner_stake",
