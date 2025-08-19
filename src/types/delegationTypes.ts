@@ -73,3 +73,35 @@ export type DelegationToRetiredResponse = ResponseCore<{
   count: number;
   data: DelegationToRetiredData[];
 }>;
+
+export interface DrepInfo {
+  id: string;
+  meta: {
+    given_name?: string;
+    image_url?: string | null;
+    url?: string;
+    objectives?: string;
+    motivations?: string;
+    qualifications?: string;
+    payment_address?: string;
+  } | null;
+}
+
+export interface DrepDelegationData {
+  view: string;
+  drep: {
+    live: DrepInfo;
+    previous: DrepInfo;
+  };
+  active_stake: number;
+  live_stake: number;
+  tx: {
+    hash: string;
+    slot_no: number;
+  };
+}
+
+export type DrepDelegationResponse = ResponseCore<{
+  count: number;
+  data: DrepDelegationData[];
+}>;

@@ -1,6 +1,7 @@
 import { Asterisk, Users, UserX, Zap } from "lucide-react";
 
 import { DrepAnalyticsTab } from "@/components/drep/tabs/DrepAnalyticsTab";
+import { DrepDelegationsTab } from "@/components/drep/tabs/DrepDelegationsTab";
 import { DrepListTab } from "@/components/drep/tabs/DrepListTab";
 import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 import Tabs from "@/components/global/Tabs";
@@ -37,6 +38,12 @@ export const DrepListPage = () => {
       key: "list",
       label: "List",
       content: <DrepListTab />,
+      visible: true,
+    },
+    {
+      key: "delegations",
+      label: "Delegations",
+      content: <DrepDelegationsTab />,
       visible: true,
     },
     {

@@ -23,10 +23,10 @@ export const generateImageUrl = (
   type?: "nft" | "pool" | "drep" | "token" | "cc",
 ): string => {
   if (!ident) {
-    return "-";
+    return "-"; 
   }
 
-  if (ident.startsWith("drep1")) {
+  if (ident.startsWith("drep")) {
     return `${cexAssetUrl}${ident}`;
   }
   
