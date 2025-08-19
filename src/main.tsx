@@ -26,6 +26,19 @@ declare module "@tanstack/react-router" {
   }
 }
 
+(function ensureDollarEncoded() {
+  if (typeof window === "undefined") return;
+  const { pathname, search, hash } = window.location;
+
+  const segs = pathname.split("/");
+  if (segs[1]?.startsWith("$")) {
+    segs[1] = segs[1].replace(/^\$/, "%24");
+    const fixed = segs.join("/") + search + hash;
+
+    window.history.replaceState(window.history.state, "", fixed);
+  }
+})();
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
