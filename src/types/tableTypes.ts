@@ -329,6 +329,7 @@ export interface PoolBirthdaysColumns {
   pool: boolean;
   birthday: boolean;
   registered: boolean;
+  delegators: boolean;
   active_stake: boolean;
 }
 

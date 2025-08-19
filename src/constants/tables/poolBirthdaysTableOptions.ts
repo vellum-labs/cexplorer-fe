@@ -23,6 +23,10 @@ export const poolBirthdaysTableOptions: PoolBirthdaysOptions[] = [
     name: "Registered",
   },
   {
+    key: "delegators",
+    name: "Delegators",
+  },
+  {
     key: "active_stake",
     name: "Active stake",
   },
