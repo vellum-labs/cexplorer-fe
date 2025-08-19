@@ -254,6 +254,7 @@ export interface DrepDetail {
   action: DrepAction[];
   stat: DrepStat;
   since: string;
+  votestat?: DrepVoteStat; 
 }
 
 interface DrepInfo {
