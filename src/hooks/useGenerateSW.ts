@@ -19,7 +19,7 @@ export const useGenerateSW = (): GenerateSW => {
       setIsFirstInstall(true);
     }
 
-    if ("serviceWorker" in navigator) {
+    if ("serviceWorker" in navigator && !(window as any).__DISABLE_SW__) {
       const swUrl = `/sw.js`;
 
       navigator.serviceWorker

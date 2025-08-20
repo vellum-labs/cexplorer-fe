@@ -1,28 +1,34 @@
-(() => {
+(async () => {
   const FORCE_CLEAR_DATE = new Date("2025-08-20T00:00:00Z").getTime();
   const lastClearTimestamp = localStorage.getItem("last-clear-timestamp");
 
-  if (!lastClearTimestamp || parseInt(lastClearTimestamp) < FORCE_CLEAR_DATE) {
-    console.log("Performing forced clear - outdated or missing timestamp");
+  window.__DISABLE_SW__ =
+    !lastClearTimestamp || parseInt(lastClearTimestamp, 10) < FORCE_CLEAR_DATE;
 
-    if ("caches" in window) {
-      caches.keys().then(cacheNames => {
-        cacheNames.forEach(cacheName => {
-          caches.delete(cacheName);
-          console.log(`Deleted cache: ${cacheName}`);
-        });
-      });
+  if (window.__DISABLE_SW__) {
+    try {
+      if ("serviceWorker" in navigator) {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        for (const reg of regs) {
+          console.log("Unregistering:", reg.scope);
+          const ok = await reg.unregister();
+          console.log("Unregister result:", ok);
+        }
+      }
+
+      if ("caches" in window) {
+        const names = await caches.keys();
+        await Promise.all(names.map(n => caches.delete(n)));
+        console.log("All caches deleted:", names);
+      }
+
+      localStorage.setItem("last-clear-timestamp", String(FORCE_CLEAR_DATE));
+      window.__DISABLE_SW__ = false;
+
+      console.log("Forced clear: done. Reloading…");
+      location.reload();
+    } catch (e) {
+      console.error("Forced clear failed:", e);
     }
-
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.getRegistrations().then(registrations => {
-        registrations.forEach(registration => {
-          registration.unregister();
-          console.log("Unregistered service worker");
-        });
-      });
-    }
-
-    localStorage.setItem("last-clear-timestamp", FORCE_CLEAR_DATE.toString());
   }
 })();
