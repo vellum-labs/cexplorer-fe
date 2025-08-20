@@ -31,10 +31,7 @@ export const useGenerateSW = (): GenerateSW => {
           scope: "/",
         })
         .then(registration => {
-          registration.onupdatefound = () => {
-            if (!registration.installing) {
-              return;
-            }
+          const handleUpdate = () => {
             setUpdating(true);
             setUpdateReady(false);
             setProgress(0);
@@ -49,26 +46,65 @@ export const useGenerateSW = (): GenerateSW => {
               });
             }, 200);
 
-            registration.installing.addEventListener("statechange", e => {
-              const sw = e.currentTarget as ServiceWorker;
+            const installingWorker = registration.installing || registration.waiting;
+            
+            if (installingWorker) {
+              installingWorker.addEventListener("statechange", e => {
+                const sw = e.currentTarget as ServiceWorker;
 
-              switch (sw.state) {
-                case "activating":
+                switch (sw.state) {
+                  case "activating":
+                    clearInterval(fakeProgressInterval);
+                    setUpdating(false);
+                    setActivating(true);
+                    break;
+                  case "activated":
+                    setUpdateReady(true);
+                    setActivating(false);
+                    break;
+                  default:
+                    console.warn(
+                      "An error occurred while the SW was updating. Please let us know about it on our Discord channel.",
+                    );
+                }
+              });
+            }
+          };
+
+          registration.onupdatefound = () => {
+            if (!registration.installing) {
+              return;
+            }
+            handleUpdate();
+          };
+
+          if (registration.installing || registration.waiting) {
+            handleUpdate();
+          }
+
+          if (registration.active && !registration.installing && !registration.waiting && isFirstInstall) {
+            setUpdating(true);
+            setUpdateReady(false);
+            setProgress(0);
+
+            const fakeProgressInterval = setInterval(() => {
+              setProgress(prev => {
+                if (prev >= 100) {
                   clearInterval(fakeProgressInterval);
                   setUpdating(false);
                   setActivating(true);
-                  break;
-                case "activated":
-                  setUpdateReady(true);
-                  setActivating(false);
-                  break;
-                default:
-                  console.warn(
-                    "An error occurred while the SW was updating. Please let us know about it on our Discord channel.",
-                  );
-              }
-            });
-          };
+                  
+                  setTimeout(() => {
+                    setUpdateReady(true);
+                    setActivating(false);
+                  }, 10000);
+                  
+                  return 100;
+                }
+                return prev + 1;
+              });
+            }, 200);
+          }
         })
         .catch(error => {
           console.error("Service Worker error ", error);
