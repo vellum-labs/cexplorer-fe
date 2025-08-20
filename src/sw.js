@@ -1,5 +1,9 @@
 import { clientsClaim, cacheNames } from "workbox-core";
-import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
+import {
+  precacheAndRoute,
+  createHandlerBoundToURL,
+  getCacheKeyForURL,
+} from "workbox-precaching";
 import { registerRoute, NavigationRoute } from "workbox-routing";
 import {
   NetworkFirst,
@@ -19,58 +23,59 @@ const PRECACHE_FILES = PRECACHE_MANIFEST.filter(entry => entry.url !== "sw.js");
 
 precacheAndRoute(PRECACHE_FILES);
 
-let messagePort;
+let messagePort = null;
+let latestProgress = 0;
 
 self.addEventListener("message", event => {
-  if (event.data && event.data.type === "INIT_PORT") {
+  if (event.data?.type === "INIT_PORT" && event.ports?.[0]) {
     messagePort = event.ports[0];
+    messagePort.postMessage({
+      type: "PRECACHE_PROGRESS",
+      progress: latestProgress,
+    });
   }
 });
 
+const bc = new BroadcastChannel("sw_precache_progress");
+const sendProgress = p => {
+  latestProgress = p;
+  if (messagePort)
+    messagePort.postMessage({ type: "PRECACHE_PROGRESS", progress: p });
+  bc.postMessage({ type: "PRECACHE_PROGRESS", progress: p });
+};
+
 self.addEventListener("install", event => {
-  const totalFiles = PRECACHE_FILES.length;
-  let processedFiles = 0;
+  const total = PRECACHE_FILES.length;
+  if (!total) return;
 
   event.waitUntil(
     (async () => {
       try {
-        if (!("caches" in self)) {
-          console.warn("Cache API is not available in this environment.");
-          return;
-        }
-
         const cache = await caches.open(PRECACHE_CACHE_NAME);
 
-        await Promise.all(
-          PRECACHE_FILES.map(async file => {
-            try {
-              const response = await fetch(file.url);
+        const tick = async () => {
+          let ok = 0;
+          await Promise.all(
+            PRECACHE_FILES.map(async file => {
+              const key = getCacheKeyForURL(file.url);
+              const res = await cache.match(key);
+              if (res) ok++;
+            }),
+          );
+          const progress = Math.round((ok / total) * 100);
+          sendProgress(progress);
+          return ok >= total;
+        };
 
-              if (!response.ok) {
-                throw new Error(`Can't load ${file.url}`);
-              }
+        await tick();
 
-              await cache.put(file.url, response.clone());
-            } catch (error) {
-              console.error(`Caching error ${file.url}:`, error);
-            } finally {
-              processedFiles++;
-              const progress = Math.round((processedFiles / totalFiles) * 100);
-
-              if (messagePort) {
-                messagePort.postMessage({
-                  type: "PRECACHE_PROGRESS",
-                  progress,
-                });
-              }
-            }
-          }),
-        );
-
-        await self.skipWaiting();
-      } catch (err) {
-        console.warn("Cache initialization failed:", err);
-      }
+        for (let i = 0; i < 600; i++) {
+          const done = await tick();
+          if (done) break;
+          await new Promise(r => setTimeout(r, 200));
+        }
+        // eslint-disable-next-line no-empty
+      } catch {}
     })(),
   );
 });
