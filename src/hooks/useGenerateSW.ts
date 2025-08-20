@@ -24,17 +24,7 @@ export const useGenerateSW = (): GenerateSW => {
     }
 
     if ("serviceWorker" in navigator) {
-      // const version = import.meta.env.VITE_APP_VERSION || "1.0.8";
-
       const swUrl = `/sw.js`;
-
-      const messageChannel = new MessageChannel();
-
-      messageChannel.port1.onmessage = event => {
-        if (event.data && event.data.type === "PRECACHE_PROGRESS") {
-          setProgress(event.data.progress);
-        }
-      };
 
       navigator.serviceWorker
         .register(swUrl, {
@@ -47,16 +37,24 @@ export const useGenerateSW = (): GenerateSW => {
             }
             setUpdating(true);
             setUpdateReady(false);
+            setProgress(0);
 
-            registration.installing.postMessage({ type: "INIT_PORT" }, [
-              messageChannel.port2,
-            ]);
+            const fakeProgressInterval = setInterval(() => {
+              setProgress(prev => {
+                if (prev >= 100) {
+                  clearInterval(fakeProgressInterval);
+                  return 100;
+                }
+                return prev + 1;
+              });
+            }, 200);
 
             registration.installing.addEventListener("statechange", e => {
               const sw = e.currentTarget as ServiceWorker;
 
               switch (sw.state) {
                 case "activating":
+                  clearInterval(fakeProgressInterval);
                   setUpdating(false);
                   setActivating(true);
                   break;
