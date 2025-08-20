@@ -300,7 +300,15 @@ export interface CommitteeMember {
   key: CommitteeKey;
   ident: CommitteeIdent;
   registry: CommitteeRegistry | null;
-  expiration_epoch: number;
+  registration: {
+    hash: string;
+    time: string;
+    index: number;
+    invalid_hereafter: null | number;
+    treasury_donation: number;
+  } | null;
+  de_registration: null;
+  expiration_epoch: number | null;
 }
 
 export interface CommitteeInfo {
@@ -349,13 +357,6 @@ export interface CommitteeIdent {
 export interface CommitteeRegistry {
   img: string;
   name: string;
-}
-
-export interface CommitteeMember {
-  key: CommitteeKey;
-  ident: CommitteeIdent;
-  registry: CommitteeRegistry | null;
-  expiration_epoch: number;
 }
 
 export interface CommitteeInfo {

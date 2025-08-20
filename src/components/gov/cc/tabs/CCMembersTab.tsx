@@ -1,6 +1,7 @@
 import GlobalTable from "@/components/table/GlobalTable";
 import { useFetchCommitteeDetail } from "@/services/governance";
 import type { TableColumns } from "@/types/tableTypes";
+import type { CommitteeMember } from "@/types/governanceTypes";
 import { Image } from "@/components/global/Image";
 import type { FC } from "react";
 import { formatString } from "@/utils/format/format";
@@ -21,7 +22,7 @@ export const CCMembersTab: FC = () => {
     ...m,
     _rowIndex: index,
   }));
-  const columns: TableColumns<any> = [
+  const columns: TableColumns<CommitteeMember & { _rowIndex: number }> = [
     {
       key: "index",
       title: "#",
@@ -56,10 +57,7 @@ export const CCMembersTab: FC = () => {
             />
             <div className='flex w-[calc(100%-40px)] flex-col text-sm'>
               {name && name !== "Unknown" && toPath && (
-                <Link
-                  to={toPath}
-                  className='w-fit text-primary'
-                >
+                <Link to={toPath} className='w-fit text-primary'>
                   {name.length > 50 ? `${name.slice(0, 50)}...` : name}
                 </Link>
               )}
@@ -79,7 +77,10 @@ export const CCMembersTab: FC = () => {
                 ) : (
                   <span>{formatString(identRaw, "long")}</span>
                 )}
-                <Copy copyText={identRaw} size={name && name !== "Unknown" ? 10 : 13} />
+                <Copy
+                  copyText={identRaw}
+                  size={name && name !== "Unknown" ? 10 : 13}
+                />
               </div>
             </div>
           </div>
@@ -130,7 +131,7 @@ export const CCMembersTab: FC = () => {
           <Link
             to='/epoch/$no'
             params={{
-              no: epoch,
+              no: String(epoch),
             }}
             className='text-primary'
           >
