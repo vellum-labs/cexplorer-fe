@@ -36,43 +36,51 @@ export const CCMembersTab: FC = () => {
       visible: true,
       render: item => {
         const name = item.registry?.name ?? "Unknown";
-        const coldKey = item.key?.cold ?? "N/A";
+        const identRaw = item.ident?.raw ?? "N/A";
 
         const fallbackletters = [...name]
           .filter(char => alphabetWithNumbers.includes(char.toLowerCase()))
           .join("");
 
-        return (
-          <div className='flex items-center gap-3'>
-            <div className='min-w-[32px]'>
-              <Image
-                src={generateImageUrl(coldKey, "ico", "cc")}
-                alt='member'
-                className='rounded-full'
-                width={32}
-                height={32}
-                fallbackletters={fallbackletters}
-              />
-            </div>
-            <div className='flex flex-col'>
-              <span className='text-textPrimary font-medium'>{name}</span>
+        const toPath = identRaw !== "N/A" ? `/gov/cc/${identRaw}` : undefined;
 
-              {coldKey !== "N/A" ? (
-                <div className='flex gap-2'>
-                  <Link
-                    to='/gov/cc/:coldKey'
-                    params={{ coldKey }}
-                    className='text-primary'
-                  >
-                    {formatString(coldKey, "long")}
-                  </Link>
-                  <Copy copyText={coldKey} />
-                </div>
-              ) : (
-                <span className='break-all text-xs text-grayTextSecondary'>
-                  N/A
-                </span>
+        return (
+          <div className='relative flex max-h-[75px] w-full items-center gap-2'>
+            <Image
+              src={generateImageUrl(identRaw, "ico", "cc")}
+              type='user'
+              className='h-8 w-8 rounded-full'
+              height={32}
+              width={32}
+              fallbackletters={fallbackletters}
+            />
+            <div className='flex w-[calc(100%-40px)] flex-col text-sm'>
+              {name && name !== "Unknown" && toPath && (
+                <Link
+                  to={toPath}
+                  className='w-fit text-primary'
+                >
+                  {name.length > 50 ? `${name.slice(0, 50)}...` : name}
+                </Link>
               )}
+              <div className='flex items-center gap-1'>
+                {toPath ? (
+                  <Link
+                    to={toPath}
+                    className={
+                      name && name !== "Unknown"
+                        ? "text-xs hover:text-grayTextPrimary"
+                        : "text-sm text-primary"
+                    }
+                    disabled={!!(name && name !== "Unknown")}
+                  >
+                    {formatString(identRaw, "long")}
+                  </Link>
+                ) : (
+                  <span>{formatString(identRaw, "long")}</span>
+                )}
+                <Copy copyText={identRaw} size={name && name !== "Unknown" ? 10 : 13} />
+              </div>
             </div>
           </div>
         );
