@@ -94,7 +94,12 @@ registerRoute(
 );
 
 registerRoute(
-  /\.(?:js|css)$/,
+  ({ request }) => {
+    if (request.url.includes("force-clear")) {
+      return false;
+    }
+    return /\.(?:js|css)$/.test(request.url);
+  },
   new StaleWhileRevalidate({
     cacheName: "static-resources",
   }),
