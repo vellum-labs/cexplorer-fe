@@ -65,6 +65,14 @@ export type LiveDelegationsColumns = {
   tx: boolean;
 };
 
+export type DrepDelegationsColumns = {
+  date: boolean;
+  address: boolean;
+  amount: boolean;
+  delegation: boolean;
+  tx: boolean;
+};
+
 export type RetiredDelegationsColumns = {
   index: boolean;
   pool: boolean;
