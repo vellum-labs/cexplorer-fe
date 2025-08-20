@@ -24,8 +24,8 @@ export default defineConfig({
       strategies: "injectManifest",
       srcDir: "src",
       filename: "sw.js",
-      injectRegister: null,
-      registerType: undefined,
+      injectRegister: false,
+      registerType: "prompt",
       manifest: {
         name: "Cexplorer.io",
         short_name: "Cexplorer",

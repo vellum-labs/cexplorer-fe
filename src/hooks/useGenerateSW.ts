@@ -24,53 +24,87 @@ export const useGenerateSW = (): GenerateSW => {
     }
 
     if ("serviceWorker" in navigator) {
-      // const version = import.meta.env.VITE_APP_VERSION || "1.0.8";
-
       const swUrl = `/sw.js`;
-
-      const messageChannel = new MessageChannel();
-
-      messageChannel.port1.onmessage = event => {
-        if (event.data && event.data.type === "PRECACHE_PROGRESS") {
-          setProgress(event.data.progress);
-        }
-      };
 
       navigator.serviceWorker
         .register(swUrl, {
           scope: "/",
         })
         .then(registration => {
+          const handleUpdate = () => {
+            setUpdating(true);
+            setUpdateReady(false);
+            setProgress(0);
+
+            const fakeProgressInterval = setInterval(() => {
+              setProgress(prev => {
+                if (prev >= 100) {
+                  clearInterval(fakeProgressInterval);
+                  return 100;
+                }
+                return prev + 1;
+              });
+            }, 200);
+
+            const installingWorker = registration.installing || registration.waiting;
+            
+            if (installingWorker) {
+              installingWorker.addEventListener("statechange", e => {
+                const sw = e.currentTarget as ServiceWorker;
+
+                switch (sw.state) {
+                  case "activating":
+                    clearInterval(fakeProgressInterval);
+                    setUpdating(false);
+                    setActivating(true);
+                    break;
+                  case "activated":
+                    setUpdateReady(true);
+                    setActivating(false);
+                    break;
+                  default:
+                    console.warn(
+                      "An error occurred while the SW was updating. Please let us know about it on our Discord channel.",
+                    );
+                }
+              });
+            }
+          };
+
           registration.onupdatefound = () => {
             if (!registration.installing) {
               return;
             }
+            handleUpdate();
+          };
+
+          if (registration.installing || registration.waiting) {
+            handleUpdate();
+          }
+
+          if (registration.active && !registration.installing && !registration.waiting && isFirstInstall) {
             setUpdating(true);
             setUpdateReady(false);
+            setProgress(0);
 
-            registration.installing.postMessage({ type: "INIT_PORT" }, [
-              messageChannel.port2,
-            ]);
-
-            registration.installing.addEventListener("statechange", e => {
-              const sw = e.currentTarget as ServiceWorker;
-
-              switch (sw.state) {
-                case "activating":
+            const fakeProgressInterval = setInterval(() => {
+              setProgress(prev => {
+                if (prev >= 100) {
+                  clearInterval(fakeProgressInterval);
                   setUpdating(false);
                   setActivating(true);
-                  break;
-                case "activated":
-                  setUpdateReady(true);
-                  setActivating(false);
-                  break;
-                default:
-                  console.warn(
-                    "An error occurred while the SW was updating. Please let us know about it on our Discord channel.",
-                  );
-              }
-            });
-          };
+                  
+                  setTimeout(() => {
+                    setUpdateReady(true);
+                    setActivating(false);
+                  }, 10000);
+                  
+                  return 100;
+                }
+                return prev + 1;
+              });
+            }, 200);
+          }
         })
         .catch(error => {
           console.error("Service Worker error ", error);

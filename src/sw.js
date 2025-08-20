@@ -1,9 +1,5 @@
 import { clientsClaim, cacheNames } from "workbox-core";
-import {
-  precacheAndRoute,
-  createHandlerBoundToURL,
-  getCacheKeyForURL,
-} from "workbox-precaching";
+import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
 import { registerRoute, NavigationRoute } from "workbox-routing";
 import {
   NetworkFirst,
@@ -22,63 +18,6 @@ const PRECACHE_MANIFEST = self.__WB_MANIFEST || [];
 const PRECACHE_FILES = PRECACHE_MANIFEST.filter(entry => entry.url !== "sw.js");
 
 precacheAndRoute(PRECACHE_FILES);
-
-let messagePort = null;
-let latestProgress = 0;
-
-self.addEventListener("message", event => {
-  if (event.data?.type === "INIT_PORT" && event.ports?.[0]) {
-    messagePort = event.ports[0];
-    messagePort.postMessage({
-      type: "PRECACHE_PROGRESS",
-      progress: latestProgress,
-    });
-  }
-});
-
-const bc = new BroadcastChannel("sw_precache_progress");
-const sendProgress = p => {
-  latestProgress = p;
-  if (messagePort)
-    messagePort.postMessage({ type: "PRECACHE_PROGRESS", progress: p });
-  bc.postMessage({ type: "PRECACHE_PROGRESS", progress: p });
-};
-
-self.addEventListener("install", event => {
-  const total = PRECACHE_FILES.length;
-  if (!total) return;
-
-  event.waitUntil(
-    (async () => {
-      try {
-        const cache = await caches.open(PRECACHE_CACHE_NAME);
-
-        const tick = async () => {
-          let ok = 0;
-          await Promise.all(
-            PRECACHE_FILES.map(async file => {
-              const key = getCacheKeyForURL(file.url);
-              const res = await cache.match(key);
-              if (res) ok++;
-            }),
-          );
-          const progress = Math.round((ok / total) * 100);
-          sendProgress(progress);
-          return ok >= total;
-        };
-
-        await tick();
-
-        for (let i = 0; i < 600; i++) {
-          const done = await tick();
-          if (done) break;
-          await new Promise(r => setTimeout(r, 200));
-        }
-        // eslint-disable-next-line no-empty
-      } catch {}
-    })(),
-  );
-});
 
 self.addEventListener("activate", event => {
   const currentCaches = [
