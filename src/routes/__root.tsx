@@ -31,8 +31,7 @@ const RootComponent = () => {
   const { location: locationState } = useRouterState();
 
   const { theme } = useThemeStore();
-  const { isUpdating, isActivating, updateReady, progress, isFirstInstall } =
-    useGenerateSW();
+  const { isUpdating, updateReady, isFirstInstall } = useGenerateSW();
 
   const [resetKey, setResetKey] = useState<number>(0);
 
@@ -131,13 +130,7 @@ const RootComponent = () => {
         )}
       </ErrorBoundary>
       <Footer />
-      {(isUpdating || isActivating) && (
-        <SwUpdateModal
-          isActivating={isActivating}
-          progress={progress}
-          firstInstall={isFirstInstall}
-        />
-      )}
+      {isUpdating && <SwUpdateModal firstInstall={isFirstInstall} />}
       {updateReady && <SwReadyModal firstInstall={isFirstInstall} />}
       <VersionWatcher />
       {/* <TanStackRouterDevtools /> */}

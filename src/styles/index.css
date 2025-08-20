@@ -255,3 +255,12 @@
 .customize-grid .react-grid-item.cssTransforms {
   transition-property: transform !important;
 }
+
+@keyframes loading-dots {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
