@@ -18,7 +18,7 @@ import { useAccountTopAddressesTableStore } from "@/stores/tables/accountAnalyti
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
-import { DrepHashCell } from "@/components/drep/DrepHashCell";
+import { DrepNameCell } from "@/components/drep/DrepNameCell";
 import { accountAnalyticsTopAddressesTableOptions } from "@/constants/tables/accountAnalyticsTopAddressesTab";
 import { formatNumber, formatString } from "@/utils/format/format";
 import { X } from "lucide-react";
@@ -195,11 +195,22 @@ export const AccounntTopAddressesTab: FC = () => {
     {
       key: "drep_delegation",
       render: item => {
-        if (!item.deleg?.id && !item.deleg?.meta) {
+        if (!item.drep?.id) {
           return <p>-</p>;
         }
 
-        return <DrepHashCell view={item.drep?.id || ""} />;
+        return (
+          <DrepNameCell
+            item={{
+              data: item.drep?.meta
+                ? {
+                    given_name: item.drep.meta.given_name,
+                  }
+                : undefined,
+              hash: { view: item.drep?.id },
+            }}
+          />
+        );
       },
       title: (
         <div

@@ -162,7 +162,15 @@ interface PoolDelegator {
 
 interface DrepDelegator {
   id: string;
-  meta: PoolMeta;
+  meta: {
+    url: string;
+    image_url: string | null;
+    given_name: string;
+    objectives: string;
+    motivations: string;
+    qualifications: string;
+    payment_address: string | null;
+  } | null;
   delegation: {
     tx: {
       slot: number;

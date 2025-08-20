@@ -24,6 +24,14 @@ export const Route = createFileRoute("/analytics/account")({
           .union([z.literal(2), z.literal(1)])
           .optional()
           .catch(1),
+        drep_only: z
+          .union([z.literal(2), z.literal(1)])
+          .optional()
+          .catch(1),
+        pool_only: z
+          .union([z.literal(2), z.literal(1)])
+          .optional()
+          .catch(1),
       })
       .parse(input),
 });
