@@ -15,7 +15,9 @@ clientsClaim();
 const PRECACHE_CACHE_NAME = cacheNames.precache;
 
 const PRECACHE_MANIFEST = self.__WB_MANIFEST || [];
-const PRECACHE_FILES = PRECACHE_MANIFEST.filter(entry => entry.url !== "sw.js");
+const PRECACHE_FILES = PRECACHE_MANIFEST.filter(entry => 
+  entry.url !== "sw.js" && !entry.url.includes("force-clear")
+);
 
 precacheAndRoute(PRECACHE_FILES);
 
