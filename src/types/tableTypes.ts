@@ -596,6 +596,7 @@ export interface DrepListTableColumns {
   drep_name: boolean;
   voting_power: boolean;
   voting_activity: boolean;
+  recent_activity: boolean;
   registered: boolean;
   metadata: boolean;
   owner_stake: boolean;

@@ -128,6 +128,28 @@ interface DrepListStat {
   recently: string;
 }
 
+interface VoteStats {
+  total: {
+    gov_votes: number;
+    gov_actions: number;
+  };
+  recent: {
+    gov_votes: number;
+    gov_actions: number;
+  };
+}
+
+interface VoteStatRate {
+  total: number;
+  recent: number;
+}
+
+interface DrepVoteStat {
+  recent_vote: string;
+  stat: VoteStats;
+  rate: VoteStatRate;
+}
+
 export interface DrepListData {
   is_active: number;
   amount: number;
@@ -148,6 +170,7 @@ export interface DrepListData {
     stake: number;
   };
   image_url?: string;
+  votestat?: DrepVoteStat;
 }
 
 interface DrepList {
@@ -231,6 +254,7 @@ export interface DrepDetail {
   action: DrepAction[];
   stat: DrepStat;
   since: string;
+  votestat?: DrepVoteStat; 
 }
 
 interface DrepInfo {

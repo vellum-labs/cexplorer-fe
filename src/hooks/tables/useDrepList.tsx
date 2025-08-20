@@ -164,7 +164,7 @@ export const useDrepList = ({
       },
       title: <p>Status</p>,
       visible: columnsVisibility.status,
-      widthPx: 55,
+      widthPx: 40,
     },
     {
       key: "drep_name",
@@ -233,20 +233,58 @@ export const useDrepList = ({
     {
       key: "voting_activity",
       render: item => {
-        if (!item?.stat?.total?.votes || !item?.stat?.total?.opportunity) {
+        if (!item?.votestat?.rate?.total && item?.votestat?.rate?.total !== 0) {
           return <p className='text-right'>-</p>;
         }
 
-        const totalVotes = item?.stat?.total?.votes.reduce(
-          (sum, v) => sum + v.count,
-          0,
-        );
-        const percent = (totalVotes / item?.stat?.total?.opportunity) * 100;
+        const percent = item.votestat.rate.total * 100;
 
         return <p className='text-right'>{percent.toFixed(2)}%</p>;
       },
-      title: <p className='w-full text-right'>Voting activity</p>,
+      title: (
+        <div className='w-full text-right'>
+          <Tooltip
+            content={
+              <div className='w-[180px]'>
+                Voting activity over DRep's lifetime
+              </div>
+            }
+          >
+            <p className='cursor-help'>Lifetime Activity</p>
+          </Tooltip>
+        </div>
+      ),
       visible: columnsVisibility.voting_activity,
+      widthPx: 50,
+    },
+    {
+      key: "recent_activity",
+      render: item => {
+        if (
+          !item?.votestat?.rate?.recent &&
+          item?.votestat?.rate?.recent !== 0
+        ) {
+          return <p className='text-right'>-</p>;
+        }
+
+        const percent = item.votestat.rate.recent * 100;
+
+        return <p className='text-right'>{percent.toFixed(2)}%</p>;
+      },
+      title: (
+        <div className='w-full text-right'>
+          <Tooltip
+            content={
+              <div className='w-[180px]'>
+                DRep's voting activity over the past 6 months
+              </div>
+            }
+          >
+            <p className='cursor-help'>Recent Activity</p>
+          </Tooltip>
+        </div>
+      ),
+      visible: columnsVisibility.recent_activity,
       widthPx: 50,
     },
     {
@@ -416,7 +454,7 @@ export const useDrepList = ({
         </div>
       ),
       visible: columnsVisibility.delegators,
-      widthPx: 60,
+      widthPx: 45,
     },
     {
       key: "metadata",

@@ -17,6 +17,8 @@ import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 import { slotToDate } from "@/utils/slotToDate";
 import { format } from "date-fns";
+import { Tooltip } from "@/components/ui/tooltip";
+import { CircleHelp } from "lucide-react";
 
 interface UseDrepDetailArgs {
   query: ReturnType<typeof useFetchDrepDetail>;
@@ -180,9 +182,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
               "-"
             ) : (
               <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-lg border border-border px-[10px]'>
-                <PulseDot
-                  color={!data.is_active ? "bg-redText" : undefined}
-                />
+                <PulseDot color={!data.is_active ? "bg-redText" : undefined} />
                 <span className='text-xs font-medium'>
                   {data.is_active ? "Active" : "Inactive"}
                 </span>
@@ -293,7 +293,6 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
             const percent =
               opportunity > 0 ? (votedTotal / opportunity) * 100 : 0;
 
-            // Pro spodní tři řádky používáme total jen součet votes
             const calc = (type: "Yes" | "Abstain" | "No") =>
               votedTotal > 0
                 ? ((votes.find(v => v.vote === type)?.count ?? 0) /
@@ -301,22 +300,73 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                   100
                 : 0;
 
+            const recentPercent = data?.votestat?.rate?.recent
+              ? data.votestat.rate.recent * 100
+              : 0;
+
+            const lifetimePercent = data?.votestat?.rate?.total
+              ? data.votestat.rate.total * 100
+              : percent;
+
             return (
               <div className='flex h-full w-full flex-col gap-6'>
-                <div className='flex flex-col items-center gap-2'>
+                {data?.votestat?.recent_vote && (
                   <div className='flex w-full items-center justify-between'>
-                    <span className='text-sm text-grayTextPrimary'>
-                      Voted: {percent.toFixed(2)}%
+                    <span className='text-sm text-grayTextSecondary'>
+                      Last vote
                     </span>
-                    <span className='text-sm text-grayTextPrimary'>
-                      Not voted: {(100 - percent).toFixed(2)}%
-                    </span>
+                    <TimeDateIndicator time={data.votestat.recent_vote} />
                   </div>
-                  <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#E4E7EC]'>
-                    <span
-                      className='absolute left-0 block h-2 rounded-bl-[4px] rounded-tl-[4px] bg-[#47CD89]'
-                      style={{ width: `${percent}%` }}
-                    />
+                )}
+                <div className='flex flex-col gap-4'>
+                  <div className='flex flex-col items-center gap-2'>
+                    <div className='flex w-full items-center justify-between'>
+                      <div className='flex items-center gap-1'>
+                        <span className='text-sm text-grayTextSecondary'>
+                          Recent Activity
+                        </span>
+                        <Tooltip content="DRep's voting activity over the past 6 months">
+                          <CircleHelp
+                            size={12}
+                            className='text-grayTextPrimary'
+                          />
+                        </Tooltip>
+                      </div>
+                      <span className='text-sm text-grayTextPrimary'>
+                        Voted: {recentPercent.toFixed(2)}%
+                      </span>
+                    </div>
+                    <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#E4E7EC]'>
+                      <span
+                        className='absolute left-0 block h-2 rounded-bl-[4px] rounded-tl-[4px] bg-[#47CD89]'
+                        style={{ width: `${recentPercent}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className='flex flex-col items-center gap-2'>
+                    <div className='flex w-full items-center justify-between'>
+                      <div className='flex items-center gap-1'>
+                        <span className='text-sm text-grayTextSecondary'>
+                          Lifetime Activity
+                        </span>
+                        <Tooltip content="Voting activity over DRep's lifetime">
+                          <CircleHelp
+                            size={12}
+                            className='text-grayTextPrimary'
+                          />
+                        </Tooltip>
+                      </div>
+                      <span className='text-sm text-grayTextPrimary'>
+                        Voted: {lifetimePercent.toFixed(2)}%
+                      </span>
+                    </div>
+                    <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#E4E7EC]'>
+                      <span
+                        className='absolute left-0 block h-2 rounded-bl-[4px] rounded-tl-[4px] bg-[#47CD89]'
+                        style={{ width: `${lifetimePercent}%` }}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div className='flex flex-col gap-2'>
