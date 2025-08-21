@@ -4,8 +4,10 @@ import { AddressTypeInitialsBadge } from "@/components/global/badges/AddressType
 import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 import GlobalTable from "@/components/table/GlobalTable";
 import PoolCell from "@/components/table/PoolCell";
+import { DrepNameCell } from "@/components/drep/DrepNameCell";
 import { useFetchTxDetail } from "@/services/tx";
 import { getRouteApi } from "@tanstack/react-router";
+import { Route, User } from "lucide-react";
 
 const DelegationsTabItem = () => {
   const route = getRouteApi("/tx/$hash");
@@ -28,18 +30,40 @@ const DelegationsTabItem = () => {
     },
     {
       key: "type",
-      render: item => (
-        <div className='w-fit rounded border border-yellow-800 bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-800'>
-          {item.type}
-        </div>
-      ),
+      render: item => {
+        const isDrepDelegation = item.type === "vote";
+        const displayRole = isDrepDelegation ? "DRep" : "SPO";
+
+        return (
+          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-lg border border-border px-[6px]'>
+            {isDrepDelegation ? (
+              <User size={12} className='text-primary' />
+            ) : (
+              <Route size={12} className='text-primary' />
+            )}
+            <span className='text-xs font-medium'>{displayRole}</span>
+          </div>
+        );
+      },
       title: "Delegation Type",
       visible: true,
       widthPx: 80,
     },
     {
       key: "delegation",
-      render: item => <PoolCell poolInfo={item.detail} />,
+      render: item => {
+        if (item.type === "vote") {
+          const drepItem = {
+            data: item.detail.meta,
+            hash: {
+              view: item.detail.id,
+            },
+          };
+          return <DrepNameCell item={drepItem} />;
+        } else {
+          return <PoolCell poolInfo={item.detail} />;
+        }
+      },
       title: "Delegation",
       visible: true,
       widthPx: 80,
