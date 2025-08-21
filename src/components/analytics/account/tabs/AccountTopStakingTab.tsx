@@ -18,7 +18,7 @@ import { useAccountAnalyticsTableStore } from "@/stores/tables/accountAnalyticsT
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
-import { DrepHashCell } from "@/components/drep/DrepHashCell";
+import { DrepNameCell } from "@/components/drep/DrepNameCell";
 import PoolCell from "@/components/table/PoolCell";
 import { accountAnalyticsTopStakingTableOptions } from "@/constants/tables/accountAnalyticsTopStakingTableOptions";
 import { formatNumber, formatString } from "@/utils/format/format";
@@ -212,7 +212,18 @@ export const AccountTopStakingTab: FC = () => {
           return <p>-</p>;
         }
 
-        return <DrepHashCell view={item.drep?.id || ""} />;
+        return (
+          <DrepNameCell
+            item={{
+              data: item.drep?.meta
+                ? {
+                    given_name: item.drep.meta.given_name,
+                  }
+                : undefined,
+              hash: { view: item.drep?.id },
+            }}
+          />
+        );
       },
       title: (
         <div className='flex items-center gap-2' ref={anchorRefs?.drep_only}>
