@@ -10,7 +10,6 @@ import { Helmet } from "react-helmet";
 import Button from "../components/global/Button";
 import Footer from "../components/layouts/Footer";
 
-import { SwUpdateModal } from "@/components/global/modals/SwUpdateModal";
 import { SwReadyModal } from "@/components/global/modals/SwReadyModal";
 
 import { VersionWatcher } from "@/components/global/VersionWatcher";
@@ -31,7 +30,7 @@ const RootComponent = () => {
   const { location: locationState } = useRouterState();
 
   const { theme } = useThemeStore();
-  const { isUpdating, updateReady, isFirstInstall } = useGenerateSW();
+  const { updateReady, isFirstInstall } = useGenerateSW();
 
   const [resetKey, setResetKey] = useState<number>(0);
 
@@ -130,7 +129,6 @@ const RootComponent = () => {
         )}
       </ErrorBoundary>
       <Footer />
-      {isUpdating && <SwUpdateModal firstInstall={isFirstInstall} />}
       {updateReady && <SwReadyModal firstInstall={isFirstInstall} />}
       <VersionWatcher />
       {/* <TanStackRouterDevtools /> */}

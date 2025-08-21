@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 
 interface GenerateSW {
-  isUpdating: boolean;
   updateReady: boolean;
   isFirstInstall: boolean;
 }
 
 export const useGenerateSW = (): GenerateSW => {
-  const [isUpdating, setUpdating] = useState<boolean>(false);
   const [updateReady, setUpdateReady] = useState<boolean>(false);
   const [isFirstInstall, setIsFirstInstall] = useState(false);
 
@@ -28,7 +26,6 @@ export const useGenerateSW = (): GenerateSW => {
         })
         .then(registration => {
           const handleUpdate = () => {
-            setUpdating(true);
             setUpdateReady(false);
 
             const installingWorker =
@@ -41,7 +38,6 @@ export const useGenerateSW = (): GenerateSW => {
                 switch (sw.state) {
                   case "activated":
                     setUpdateReady(true);
-                    setUpdating(false);
                     break;
                   default:
                     console.warn(
@@ -69,11 +65,9 @@ export const useGenerateSW = (): GenerateSW => {
             !registration.waiting &&
             isFirstInstall
           ) {
-            setUpdating(true);
             setUpdateReady(false);
 
             setTimeout(() => {
-              setUpdating(false);
               setUpdateReady(true);
             }, 3000);
           }
@@ -120,7 +114,6 @@ export const useGenerateSW = (): GenerateSW => {
   }, []);
 
   return {
-    isUpdating,
     updateReady,
     isFirstInstall,
   };
