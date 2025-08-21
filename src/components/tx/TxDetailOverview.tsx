@@ -204,10 +204,12 @@ const TxDetailOverview = ({ query }: Props) => {
         </div>
       ),
     },
-    {
-      label: "Treasury donation",
-      value: <AdaWithTooltip data={data?.treasury_donation ?? 0} />,
-    },
+    data?.treasury_donation && data.treasury_donation > 0
+      ? {
+          label: "Treasury donation",
+          value: <AdaWithTooltip data={data.treasury_donation} />,
+        }
+      : undefined,
     addonComponents.length
       ? {
           label: "Key message",
@@ -272,6 +274,7 @@ const TxDetailOverview = ({ query }: Props) => {
           <OverviewCard
             overviewList={overviewListItems}
             className='max-h-[450px] pt-0'
+            labelClassname='w-2/5'
           />
           <section className='flex w-full flex-col gap-5 lg:h-[400px] lg:w-[400px] lg:justify-between'>
             <MintedByCard poolInfo={data?.pool} />
