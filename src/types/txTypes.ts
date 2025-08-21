@@ -4,6 +4,7 @@ import type { ResponseCore } from "./commonTypes";
 import type { DrepProposal, DrepVoteItem } from "./drepTypes";
 import type { EpochParam } from "./epochTypes";
 import type { PoolInfo } from "./poolTypes";
+import type { DrepInfo } from "./delegationTypes"; 
 
 export type TxTabItemKeys =
   | "overview"
@@ -113,7 +114,7 @@ export interface PlutusContract {
 interface Delegation {
   type: string;
   view: string;
-  detail: PoolInfo;
+  detail: PoolInfo | DrepInfo;
   stake: {
     live: number;
     active: number;
