@@ -110,7 +110,10 @@ export const useGenerateSW = (): GenerateSW => {
 
     const intervalId = setInterval(checkAndRefresh, 5 * 60 * 1000);
 
-    return () => clearInterval(intervalId);
+    return () => {
+      clearInterval(intervalId);
+      updateChannel.close();
+    };
   }, []);
 
   return {
