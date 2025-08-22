@@ -10,15 +10,12 @@ import { DelegatedAdaOverTimeGraph } from "@/components/governance/powerTreshold
 import { PowerThresholdsDRepDelegationDonutGraph } from "@/components/governance/powerTresholds/PowerThresholdsDRepDelegationDonutGraph";
 import { DelegatedAdaToDRepsOverTimeGraph } from "@/components/governance/powerTresholds/DelegatedAdaToDRepsOverTimeGraph";
 import { GovernanceThresholdsSection } from "@/components/governance/powerTresholds/GovernanceThresholdsSection";
-import { Switch } from "@/components/global/Switch";
 import { PowerThresholdsSPOAttackGraph } from "@/components/governance/powerTresholds/PowerThresholdsSPOAttackGraph";
 import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 import { useGovernanceThresholds } from "@/hooks/useGovernanceThresholds";
 
 export const PowerThresholdsPage: FC = () => {
   const {
-    includeInactive,
-    setIncludeInactive,
     miscConst,
     query,
     poolList,
@@ -169,15 +166,8 @@ export const PowerThresholdsPage: FC = () => {
                   <h2 className='text-xl font-bold'>Governance Thresholds</h2>
                   <p className='text-sm text-grayTextPrimary'>
                     Number of minimum votes needed for approving governance
-                    actions by type.
+                    actions by type (includes all DReps).
                   </p>
-                </div>
-                <div className='flex items-center gap-2'>
-                  <Switch
-                    active={includeInactive}
-                    onChange={setIncludeInactive}
-                  />
-                  <label className='text-sm'>Include Inactive DReps</label>
                 </div>
               </div>
 
