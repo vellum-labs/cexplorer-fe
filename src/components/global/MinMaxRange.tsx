@@ -43,9 +43,9 @@ export const MinMaxRange: FC<MinMaxRangeProps> = ({
       return "#0094D4";
     }
 
-    if (percentage <= 10) {
+    if (percentage <= 5) {
       return "#F04438";
-    } else if (percentage <= 30) {
+    } else if (percentage <= 25) {
       return "#FDB022";
     } else {
       return "#17B26A";
