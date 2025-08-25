@@ -6,6 +6,7 @@ import type {
 import type { FC } from "react";
 
 import Copy from "@/components/global/Copy";
+import { MinMaxRange } from "@/components/global/MinMaxRange";
 import DateCell from "@/components/table/DateCell";
 import GlobalTable from "@/components/table/GlobalTable";
 
@@ -212,14 +213,21 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
           return "-";
         }
 
+        const loyaltyDays = calculateLoyaltyDays(
+          item.slot_update,
+          miscConst?.epoch_stat?.pots?.slot_no ?? 0,
+        );
+
         return (
-          <p className='text-right'>
-            {calculateLoyaltyDays(
-              item.slot_update,
-              miscConst?.epoch_stat?.pots?.slot_no ?? 0,
-            )}
-            d
-          </p>
+          <div className='flex justify-end'>
+            <MinMaxRange
+              min={0}
+              max={365}
+              current={`${loyaltyDays}d`}
+              size='sm'
+              labelPosition='above'
+            />
+          </div>
         );
       },
       title: <p className='w-full text-right'>Loyalty</p>,
