@@ -35,8 +35,6 @@ export const TotalThresholdChart: FC<TotalThresholdChartProps> = ({
   chartProps,
 }) => {
   const {
-    poolsCount,
-    drepsCount,
     ccData,
     isSecuryTitle,
     visibility,

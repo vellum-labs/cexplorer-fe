@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import type { ThresholdPoolList } from "@/types/governanceTypes";
 import { TotalThresholdChart } from "./TotalThresholdChart";
 import { CCThresholdChart } from "./CCThresholdChart";
 import { DRepThresholdChart } from "./DRepThresholdChart";
@@ -28,6 +29,8 @@ interface GovernanceThresholdsSectionProps {
       drep: null | string;
       spo: null | string;
     };
+    poolList: ThresholdPoolList;
+    totalSpoStake: number;
   };
 }
 
@@ -36,8 +39,6 @@ export const GovernanceThresholdsSection: FC<
 > = ({ thresholdProps }) => {
   const {
     epochParam,
-    poolsCount,
-    drepsCount,
     ccData,
     isSecuryTitle,
     visibility,
