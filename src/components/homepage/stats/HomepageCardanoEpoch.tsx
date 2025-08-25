@@ -39,13 +39,16 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
   );
 
   useEffect(() => {
-    if (timeLeft > 0) {
-      const timerId = setInterval(() => {
-        setTimeLeft(prevTime => prevTime - 1);
-      }, 1000);
-      return () => clearInterval(timerId);
-    }
-  }, [timeLeft]);
+    const timerId = setInterval(() => {
+      setTimeLeft(prevTime => {
+        if (prevTime <= 1) {
+          return 0;
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
+    return () => clearInterval(timerId);
+  }, []);
 
   useEffect(() => {
     setTimeLeft(Math.round((endTime - Date.now()) / 1000));

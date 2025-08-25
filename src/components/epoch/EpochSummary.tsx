@@ -35,13 +35,16 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
   }, [endTime]);
 
   useEffect(() => {
-    if (timeLeft > 0) {
-      const timerId = setInterval(() => {
-        setTimeLeft(prevTime => prevTime - 1);
-      }, 1000);
-      return () => clearInterval(timerId);
-    }
-  }, [timeLeft]);
+    const timerId = setInterval(() => {
+      setTimeLeft(prevTime => {
+        if (prevTime <= 1) {
+          return 0;
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
+    return () => clearInterval(timerId);
+  }, []);
 
   const elapsedPercentage =
     ((durationInSeconds - timeLeft) / durationInSeconds) * 100;
