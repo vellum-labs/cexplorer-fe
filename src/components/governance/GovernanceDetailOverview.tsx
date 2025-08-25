@@ -19,6 +19,11 @@ import { TimeDateIndicator } from "../global/TimeDateIndicator";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { ActionTypes } from "../global/ActionTypes";
 import { determineApproval } from "@/utils/determineApproval";
+import {
+  shouldDRepVote,
+  shouldSPOVote,
+  shouldCCVote,
+} from "@/utils/governanceVoting";
 import { GovernanceCard } from "./GovernanceCard";
 import { SafetyLinkModal } from "../global/modals/SafetyLinkModal";
 import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
@@ -39,29 +44,6 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
   const votingProcedure = query?.data?.data?.voting_procedure;
 
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
-
-  const shouldDRepVote = (type: string): boolean => {
-    const supported = [
-      "NoConfidence",
-      "NewCommittee",
-      "NewConstitution",
-      "HardForkInitiation",
-      "ParameterChange",
-      "TreasuryWithdrawals",
-      "InfoAction",
-    ];
-    return supported.includes(type);
-  };
-
-  const shouldSPOVote = (type: string): boolean => {
-    const supported = [
-      "NoConfidence",
-      "NewCommittee",
-      "HardForkInitiation",
-      "InfoAction",
-    ];
-    return supported.includes(type);
-  };
 
   const votingDreps = (votingProcedure ?? []).filter(
     item => item?.voter_role === "DRep",
@@ -605,82 +587,84 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
             ) : (
               !query.isError && (
                 <>
-                  <div className='flex-grow basis-[410px] md:flex-shrink-0'>
-                    <OverviewCard
-                      title='Constitutional committee'
-                      subTitle={
-                        constitutionalCommitteeApproved ? (
-                          <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-2xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
-                            <PulseDot color='#17B26A' animate />
-                            <span className='text-xs font-medium text-[#17B26A]'>
-                              Approved
-                            </span>
-                          </div>
-                        ) : (
-                          <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-2xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
-                            <PulseDot color='#F79009' animate />
-                            <span className='text-xs font-medium text-[#B54708]'>
-                              Not approved
-                            </span>
-                          </div>
-                        )
-                      }
-                      showTitleDivider
-                      labelClassname='w-full'
-                      tBodyClassname={`${(committeeMembers ?? []).length > 7 ? "max-h-[300px] thin-scrollbar px-1 overflow-auto" : ""}`}
-                      leading
-                      hFit
-                      endContent={
-                        <div
-                          className={`flex w-full flex-col justify-end py-2 ${(committeeMembers ?? []).length < 7 ? "h-full" : ""} ${(committeeMembers ?? []).length === 7 ? "pb-0" : "pb-4"}`}
-                        >
-                          <div className='mt-2 flex w-full items-center justify-between border-t border-border pt-2'>
-                            <div className='flex items-center gap-[2px]'>
-                              <CircleHelp
-                                size={11}
-                                className='text-grayTextPrimary'
-                              />
-                              <span className='text-xs font-medium text-grayTextPrimary'>
-                                Threshold:
+                  {true || shouldCCVote(query.data?.data?.type ?? "") ? (
+                    <div className='flex-grow basis-[410px] md:flex-shrink-0'>
+                      <OverviewCard
+                        title='Constitutional committee'
+                        subTitle={
+                          constitutionalCommitteeApproved ? (
+                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-2xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
+                              <PulseDot color='#17B26A' animate />
+                              <span className='text-xs font-medium text-[#17B26A]'>
+                                Approved
                               </span>
                             </div>
-                            <span className='text-xs font-medium text-grayTextPrimary'>
-                              {ccThreshold}%
-                            </span>
-                          </div>
-                          <div className='flex w-full items-center gap-3 pt-2'>
-                            <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#FEC84B]'>
-                              <span
-                                className='absolute top-0 block h-2 bg-[#00A9E3]'
-                                style={{
-                                  width: `${votedPercent?.yes}%`,
-                                }}
-                              ></span>
-                              <span
-                                className='absolute top-0 block h-2 bg-grayTextSecondary'
-                                style={{
-                                  width: `${votedPercent?.notVoted}%`,
-                                  left: `calc(${votedPercent?.yes}% + 0px)`,
-                                }}
-                              ></span>
-                              <span
-                                className='absolute top-0 block h-2 bg-[#DC6803]'
-                                style={{
-                                  width: `${votedPercent?.no}%`,
-                                  left: `calc(${votedPercent?.yes}% + ${votedPercent?.notVoted}% + 0px)`,
-                                }}
-                              ></span>
+                          ) : (
+                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-2xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
+                              <PulseDot color='#F79009' animate />
+                              <span className='text-xs font-medium text-[#B54708]'>
+                                Not approved
+                              </span>
                             </div>
-                            <div className='flex gap-2 text-xs font-medium text-grayTextPrimary'>
-                              <span className=''>{howMuchVoted}%</span>
+                          )
+                        }
+                        showTitleDivider
+                        labelClassname='w-full'
+                        tBodyClassname={`${(committeeMembers ?? []).length > 7 ? "max-h-[300px] thin-scrollbar px-1 overflow-auto" : ""}`}
+                        leading
+                        hFit
+                        endContent={
+                          <div
+                            className={`flex w-full flex-col justify-end py-2 ${(committeeMembers ?? []).length < 7 ? "h-full" : ""} ${(committeeMembers ?? []).length === 7 ? "pb-0" : "pb-4"}`}
+                          >
+                            <div className='mt-2 flex w-full items-center justify-between border-t border-border pt-2'>
+                              <div className='flex items-center gap-[2px]'>
+                                <CircleHelp
+                                  size={11}
+                                  className='text-grayTextPrimary'
+                                />
+                                <span className='text-xs font-medium text-grayTextPrimary'>
+                                  Threshold:
+                                </span>
+                              </div>
+                              <span className='text-xs font-medium text-grayTextPrimary'>
+                                {ccThreshold}%
+                              </span>
+                            </div>
+                            <div className='flex w-full items-center gap-3 pt-2'>
+                              <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#FEC84B]'>
+                                <span
+                                  className='absolute top-0 block h-2 bg-[#00A9E3]'
+                                  style={{
+                                    width: `${votedPercent?.yes}%`,
+                                  }}
+                                ></span>
+                                <span
+                                  className='absolute top-0 block h-2 bg-grayTextSecondary'
+                                  style={{
+                                    width: `${votedPercent?.notVoted}%`,
+                                    left: `calc(${votedPercent?.yes}% + 0px)`,
+                                  }}
+                                ></span>
+                                <span
+                                  className='absolute top-0 block h-2 bg-[#DC6803]'
+                                  style={{
+                                    width: `${votedPercent?.no}%`,
+                                    left: `calc(${votedPercent?.yes}% + ${votedPercent?.notVoted}% + 0px)`,
+                                  }}
+                                ></span>
+                              </div>
+                              <div className='flex gap-2 text-xs font-medium text-grayTextPrimary'>
+                                <span className=''>{howMuchVoted}%</span>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      }
-                      overviewList={const_committee}
-                      className='h-full'
-                    />
-                  </div>
+                        }
+                        overviewList={const_committee}
+                        className='h-full'
+                      />
+                    </div>
+                  ) : null}
 
                   {shouldDRepVote(query.data?.data?.type ?? "") ? (
                     <div className='flex-grow basis-[410px] md:flex-shrink-0'>
@@ -768,7 +752,10 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                     </div>
                   )}
 
-                  {shouldSPOVote(query.data?.data?.type ?? "") ? (
+                  {shouldSPOVote(
+                    query.data?.data?.type ?? "",
+                    votingProcedure,
+                  ) ? (
                     <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                       <OverviewCard
                         title={
@@ -799,7 +786,10 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         showTitleDivider
                         showContentDivider
                         threshold={
-                          shouldSPOVote(query.data?.data?.type ?? "")
+                          shouldSPOVote(
+                            query.data?.data?.type ?? "",
+                            votingProcedure,
+                          )
                             ? spoThreshold
                             : undefined
                         }
