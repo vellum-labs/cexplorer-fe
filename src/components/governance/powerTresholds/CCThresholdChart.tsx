@@ -6,7 +6,6 @@ import { Tooltip } from "@/components/ui/tooltip";
 
 interface CCThresholdChartProps {
   chartProps: {
-    epochParam?: any;
     ccData: {
       count: number;
       quorum_numerator: number;
@@ -22,14 +21,46 @@ export const CCThresholdChart: FC<CCThresholdChartProps> = ({ chartProps }) => {
 
   const { textColor, bgColor } = useGraphColors();
 
-  const ccMembers = ccData.count;
-  const ccThreshold = visibility
-    ? Math.ceil(
-        ccMembers * (ccData.quorum_numerator / ccData.quorum_denominator),
-      )
-    : 0;
+  const ccMembers = Math.max(0, ccData.count || 0);
+  const ccThreshold =
+    visibility && ccData.quorum_denominator > 0
+      ? Math.ceil(
+          ccMembers * (ccData.quorum_numerator / ccData.quorum_denominator),
+        )
+      : 0;
 
   const notVoting = visibility ? ccMembers - ccThreshold : 0;
+
+  const chartData = visibility
+    ? [
+        ...Array.from({ length: ccThreshold }, (_, index) => ({
+          value: 1,
+          name: `CC Member #${index + 1}`,
+          itemStyle: {
+            color: "#f43f5e",
+            borderColor: "#ffffff",
+            borderWidth: 2,
+          },
+          isVotingYes: true,
+        })),
+        ...Array.from({ length: notVoting }, (_, index) => ({
+          value: 1,
+          name: `CC Member #${ccThreshold + index + 1}`,
+          itemStyle: {
+            color: "#22c55e",
+            borderColor: "#ffffff",
+            borderWidth: 2,
+          },
+          isVotingNo: true,
+        })),
+      ]
+    : [
+        {
+          value: 1,
+          name: "N/A",
+          itemStyle: { color: "#E4E7EC" },
+        },
+      ];
 
   const option = {
     tooltip: {
@@ -39,9 +70,21 @@ export const CCThresholdChart: FC<CCThresholdChartProps> = ({ chartProps }) => {
       textStyle: {
         color: textColor,
       },
-      formatter: visibility
-        ? "{b}<br/>CC Members: {c}"
-        : "CC Members do not vote on this action",
+      formatter: (params: any) => {
+        if (!visibility) {
+          return "CC Members do not vote on this action";
+        }
+
+        if (params.data.isVotingYes) {
+          return `${params.data.name}<br/>Vote: Yes<br/>Needed for threshold`;
+        }
+
+        if (params.data.isVotingNo) {
+          return `${params.data.name}<br/>Vote: No<br/>Not needed for threshold`;
+        }
+
+        return `${params.data.name}<br/>CC Members: ${params.data.value}`;
+      },
     },
     series: [
       {
@@ -60,26 +103,7 @@ export const CCThresholdChart: FC<CCThresholdChartProps> = ({ chartProps }) => {
           fontWeight: 600,
           color: textColor,
         },
-        data: visibility
-          ? [
-              {
-                value: ccThreshold,
-                name: "Voting",
-                itemStyle: { color: "#f43f5e" },
-              },
-              {
-                value: notVoting,
-                name: "Not voting",
-                itemStyle: { color: "#22c55e" },
-              },
-            ]
-          : [
-              {
-                value: 1,
-                name: "N/A",
-                itemStyle: { color: "#E4E7EC" },
-              },
-            ],
+        data: chartData,
       },
     ],
   };
@@ -111,7 +135,9 @@ export const CCThresholdChart: FC<CCThresholdChartProps> = ({ chartProps }) => {
         Threshold:{" "}
         {visibility
           ? `${Math.round(
-              (ccData.quorum_numerator / ccData.quorum_denominator) * 100,
+              ccData.quorum_denominator > 0
+                ? (ccData.quorum_numerator / ccData.quorum_denominator) * 100
+                : 0,
             )}%`
           : "Not applicable"}
       </p>

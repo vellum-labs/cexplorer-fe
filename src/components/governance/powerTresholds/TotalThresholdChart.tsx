@@ -6,7 +6,6 @@ import { CircleHelp } from "lucide-react";
 
 interface TotalThresholdChartProps {
   chartProps: {
-    epochParam: any;
     poolsCount: number;
     drepsCount: number;
     ccData: {
@@ -14,10 +13,6 @@ interface TotalThresholdChartProps {
       quorum_numerator: number;
       quorum_denominator: number;
     };
-    includeInactive: boolean;
-    activeVotingStake: number;
-    activeVotingStakeInactive: number;
-    filteredDReps: any[];
     isSecuryTitle: boolean;
     visibility: {
       total: boolean;
@@ -30,6 +25,9 @@ interface TotalThresholdChartProps {
       drep: null | string;
       spo: null | string;
     };
+    ccCount?: number;
+    drepCount?: number;
+    spoCount?: number;
   };
 }
 
@@ -37,56 +35,46 @@ export const TotalThresholdChart: FC<TotalThresholdChartProps> = ({
   chartProps,
 }) => {
   const {
-    epochParam,
-    poolsCount,
-    drepsCount,
     ccData,
     isSecuryTitle,
     visibility,
-    includeInactive,
-    activeVotingStake,
-    activeVotingStakeInactive,
-    filteredDReps,
     params,
+    ccCount,
+    drepCount,
+    spoCount,
   } = chartProps;
 
   const { textColor, bgColor } = useGraphColors();
 
-  const securyTitle = isSecuryTitle
-    ? Math.ceil(poolsCount * epochParam[params.spo ?? ""])
-    : "";
+  const cc =
+    ccCount ??
+    (visibility.cc && ccData.quorum_denominator > 0
+      ? Math.ceil(
+          (ccData.count || 0) *
+            (ccData.quorum_numerator / ccData.quorum_denominator),
+        )
+      : 0);
 
-  const cc = visibility.cc
-    ? Math.ceil(
-        ccData.count * (ccData.quorum_numerator / ccData.quorum_denominator),
-      )
-    : 0;
+  const drep = drepCount ?? 0;
+  const spo = spoCount ?? 0;
 
-  const threshold = epochParam[params.drep ?? ""];
-  const yesThresholdAmount = visibility
-    ? Math.ceil(
-        (includeInactive ? activeVotingStakeInactive : activeVotingStake) *
-          threshold,
-      )
-    : 0;
+  const isParameterGraph =
+    visibility.cc && visibility.drep && params.spo !== null;
 
-  let accumulated = 0;
-  let count = 0;
-  const requiredDReps: typeof filteredDReps = [];
+  const totalNeeded =
+    (visibility.cc ? cc : 0) +
+    (visibility.drep ? drep : 0) +
+    (visibility.spo ? spo : 0);
 
-  for (const drep of filteredDReps) {
-    if (accumulated >= yesThresholdAmount) break;
-    accumulated += Number(drep.amount ?? 0);
-    count++;
-    requiredDReps.push(drep);
+  let nonSecurity, security;
+
+  if (isParameterGraph) {
+    nonSecurity = cc + drep;
+    security = cc + drep + spo;
+  } else {
+    nonSecurity = totalNeeded;
+    security = 0;
   }
-
-  const drep = visibility.drep ? Math.ceil(count) : 0;
-  const spo = visibility.spo
-    ? Math.ceil(poolsCount * (params.spo ? epochParam[params.spo] : ""))
-    : 0;
-
-  const total = cc + drep + spo;
 
   const option = {
     tooltip: {
@@ -96,7 +84,18 @@ export const TotalThresholdChart: FC<TotalThresholdChartProps> = ({
       textStyle: {
         color: textColor,
       },
-      formatter: "Entity #{b}<br/>Votes: {c}",
+      formatter: (params: any) => {
+        if (params.name.includes("CC Members")) {
+          return "Minimum CC members needed to pass<br/>Count: " + cc;
+        }
+        if (params.name.includes("DReps")) {
+          return "Minimum DReps needed to pass<br/>Count: " + drep;
+        }
+        if (params.name.includes("SPOs")) {
+          return "Minimum SPOs needed to pass<br/>Count: " + spo;
+        }
+        return "Other";
+      },
     },
     series: [
       {
@@ -106,9 +105,9 @@ export const TotalThresholdChart: FC<TotalThresholdChartProps> = ({
           show: true,
           position: "center",
           formatter: () =>
-            isSecuryTitle
-              ? `{main|${total}}\n{gap|}\n{highlight|${securyTitle ?? ""}}`
-              : `{main|${total}}`,
+            security > 0
+              ? `{main|${nonSecurity}}\n{gap|}\n{highlight|${security}}`
+              : `{main|${nonSecurity}}`,
           rich: {
             main: {
               fontSize: 22,
@@ -126,25 +125,63 @@ export const TotalThresholdChart: FC<TotalThresholdChartProps> = ({
           },
         },
         data: [
+          ...(visibility.cc
+            ? [
+                {
+                  value:
+                    visibility.cc && totalNeeded > 0
+                      ? 50 * (cc / totalNeeded)
+                      : 0,
+                  name: `CC Members (${cc})`,
+                  itemStyle: {
+                    color: "#f43f5e",
+                    borderColor: "#ffffff",
+                    borderWidth: 2,
+                  },
+                },
+              ]
+            : []),
+          ...(visibility.drep
+            ? [
+                {
+                  value:
+                    visibility.drep && totalNeeded > 0
+                      ? 50 * (drep / totalNeeded)
+                      : 0,
+                  name: `DReps (${drep})`,
+                  itemStyle: {
+                    color: "#f43f5e",
+                    borderColor: "#ffffff",
+                    borderWidth: 2,
+                  },
+                },
+              ]
+            : []),
+          ...(visibility.spo
+            ? [
+                {
+                  value:
+                    visibility.spo && totalNeeded > 0
+                      ? 50 * (spo / totalNeeded)
+                      : 0,
+                  name: `SPOs (${spo})`,
+                  itemStyle: {
+                    color:
+                      isParameterGraph && isSecuryTitle ? "#F79009" : "#f43f5e",
+                    borderColor: "#ffffff",
+                    borderWidth: 2,
+                  },
+                },
+              ]
+            : []),
           {
-            value: isSecuryTitle ? total - Number(securyTitle) : total,
-            name: "Needed",
-            itemStyle: { color: "#f43f5e" },
-          },
-          {
-            value:
-              (visibility.spo ? poolsCount : 0) +
-              (visibility.drep ? drepsCount : 0) +
-              (visibility.cc ? ccData.count : 0) -
-              total -
-              (isSecuryTitle ? Number(securyTitle) : 0),
-            name: "Not voting",
-            itemStyle: { color: "#22c55e" },
-          },
-          {
-            value: isSecuryTitle ? Number(securyTitle) : 0,
-            name: "Secury group",
-            itemStyle: { color: "#F79009" },
+            value: 50,
+            name: "Can't pass",
+            itemStyle: {
+              color: "#22c55e",
+              borderColor: "#ffffff",
+              borderWidth: 2,
+            },
           },
         ],
       },
@@ -158,8 +195,9 @@ export const TotalThresholdChart: FC<TotalThresholdChartProps> = ({
         <Tooltip
           content={
             <p className='max-w-[200px]'>
-              Minimum number of entities (CC, DReps, SPOs) needed to pass this
-              governance action.
+              {isParameterGraph
+                ? "Theoretical minimum number of entities (CC, DReps, SPOs) needed to pass this governance action. If the parameter is a security parameter, SPO votes (orange) are also included."
+                : "Theoretical minimum number of entities (CC, DReps, SPOs) needed to pass this governance action."}
             </p>
           }
         >
