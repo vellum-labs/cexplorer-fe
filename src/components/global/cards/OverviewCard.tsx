@@ -27,7 +27,7 @@ interface BlockDetailOverviewProps {
   showTitleDivider?: boolean;
   showContentDivider?: boolean;
   threshold?: number;
-  isDrep?: boolean;
+  voterType?: "drep" | "spo";
 }
 
 export const OverviewCard: FC<BlockDetailOverviewProps> = ({
@@ -44,7 +44,7 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
   showTitleDivider = false,
   showContentDivider = false,
   threshold,
-  isDrep = false,
+  voterType = "drep",
 }) => {
   return (
     <div
@@ -58,7 +58,9 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
         <h2 className='text-base'>{title}</h2>
         <span>{subTitle}</span>
       </div>
-      {showTitleDivider && <div className='w-full border-t border-border mt-3 mb-2'></div>}
+      {showTitleDivider && (
+        <div className='mb-2 mt-3 w-full border-t border-border'></div>
+      )}
       <div
         className={`flex h-full items-stretch gap-2 pb-4 ${showTitleDivider ? "pt-0" : "pt-2"} ${startContent ? "flex-wrap justify-center sm:flex-nowrap" : ""}`}
       >
@@ -96,22 +98,24 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
               </tbody>
             </table>
           </div>
-          {showContentDivider && endContent && <div className='w-full border-t border-border mt-2'></div>}
+          {showContentDivider && endContent && (
+            <div className='mt-2 w-full border-t border-border'></div>
+          )}
           {threshold && (
             <div className='flex w-full items-center justify-between pt-2'>
               <Tooltip
                 content={
                   <div className='flex flex-col'>
                     <span>Approval threshold of this</span>
-                    <span>governance action type for {isDrep ? 'DReps' : 'SPOs'}</span>
+                    <span>
+                      governance action type for{" "}
+                      {voterType === "drep" ? "DReps" : "SPOs"}
+                    </span>
                   </div>
                 }
               >
                 <div className='flex items-center gap-[2px]'>
-                  <CircleHelp
-                    size={11}
-                    className='text-grayTextPrimary'
-                  />
+                  <CircleHelp size={11} className='text-grayTextPrimary' />
                   <span className='text-xs font-medium text-grayTextPrimary'>
                     Threshold:
                   </span>

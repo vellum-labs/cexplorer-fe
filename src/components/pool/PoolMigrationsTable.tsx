@@ -8,6 +8,7 @@ import type { PoolDelegatorsColumns } from "@/types/tableTypes";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 
 import Copy from "../global/Copy";
+import { MinMaxRange } from "../global/MinMaxRange";
 import { SortArrow } from "../global/SortArrow";
 import DateCell from "../table/DateCell";
 import GlobalTable from "../table/GlobalTable";
@@ -185,15 +186,24 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
     },
     {
       key: "loyalty",
-      render: item => (
-        <p className='text-right'>
-          {calculateLoyaltyDays(
-            item.slot_update,
-            miscConst?.epoch_stat?.pots?.slot_no ?? 0,
-          )}
-          d
-        </p>
-      ),
+      render: item => {
+        const loyaltyDays = calculateLoyaltyDays(
+          item.slot_update,
+          miscConst?.epoch_stat?.pots?.slot_no ?? 0,
+        );
+
+        return (
+          <div className='flex justify-end'>
+            <MinMaxRange
+              min={0}
+              max={365}
+              current={`${loyaltyDays}d`}
+              size='sm'
+              labelPosition='above'
+            />
+          </div>
+        );
+      },
       title: (
         <div className='flex w-full justify-end'>
           <div
@@ -216,7 +226,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
         </div>
       ),
       visible: columnsVisibility.loyalty,
-      widthPx: 20,
+      widthPx: 30,
     },
     {
       key: "registered",

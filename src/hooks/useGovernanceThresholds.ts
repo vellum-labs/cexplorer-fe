@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useFetchThreshold } from "@/services/governance";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
@@ -9,60 +8,46 @@ export const useGovernanceThresholds = () => {
   const miscConst = useMiscConst(basicData?.data.version.const);
   const query = useFetchThreshold();
 
-  const [includeInactive, setIncludeInactive] = useState(false);
 
   const drepList = query.data?.data?.drep_list?.data ?? [];
 
-  const filteredDReps = includeInactive
-    ? drepList
-    : drepList.filter(d => d.is_active);
+  const filteredDReps = drepList;
 
-  const totalDelegatedToDReps = query?.data?.data.epoch_stats.daily.reduce(
-    (sum, day) => sum + Number(day?.stat?.drep_distr?.sum ?? 0),
-    0,
-  );
+  const latestStat = query?.data?.data.gov_stat.stat?.[0];
+  
+  const totalDelegatedToAlwaysNoConfidence = latestStat?.drep_always_no_confidence?.power ?? 0;
+  const humanDRepStake = latestStat?.other?.power ?? 0;
 
-  const totalDelegatedToAlwaysAbstain =
-    query?.data?.data.gov_stat.stake.drep_always_abstain;
+  const activeVotingStake = humanDRepStake + totalDelegatedToAlwaysNoConfidence;
 
-  const totalDelegatedToInactiveDreps =
-    query?.data?.data.gov_stat.stake.drep_inactive.power;
 
-  const activeVotingStake =
-    (totalDelegatedToDReps ?? 0) -
-    (totalDelegatedToAlwaysAbstain ?? 0) -
-    (totalDelegatedToInactiveDreps ?? 0);
-
-  const activeVotingStakeInactive =
-    (totalDelegatedToDReps ?? 0) - (totalDelegatedToAlwaysAbstain ?? 0);
-
+  const govCommittee = query?.data?.data?.gov_committee_detail;
   const ccData = {
-    count: query?.data?.data?.gov_committee_detail?.member?.length,
-    quorum_numerator:
-      query?.data?.data?.gov_committee_detail.committee.quorum_numerator,
-    quorum_denominator:
-      query?.data?.data?.gov_committee_detail.committee.quorum_denominator,
+    count: govCommittee?.member?.length ?? 0,
+    quorum_numerator: govCommittee?.committee?.quorum_numerator ?? 0,
+    quorum_denominator: govCommittee?.committee?.quorum_denominator ?? 1,
   };
 
   const poolsCount = query?.data?.data?.pool_list.count ?? 0;
   const drepsCount = query?.data?.data?.drep_list.count ?? 0;
   const poolList = query?.data?.data?.pool_list ?? ({} as ThresholdPoolList);
+  const totalSpoStake = query?.data?.data?.epoch_stats?.stake?.epoch ?? 0;
 
-  const generateProps = (params, visibility, isSecuryTitle = false) => ({
+  const generateProps = (params: any, visibility: any, isSecuryTitle = false) => ({
     params,
     filteredDReps,
-    activeVotingStakeInactive,
     activeVotingStake,
     visibility,
     isSecuryTitle,
     epochParam: miscConst?.epoch_param,
     poolsCount,
     drepsCount,
-    includeInactive,
+    poolList,
+    totalSpoStake,
     ccData: {
-      count: Number(ccData.count),
-      quorum_numerator: Number(ccData.quorum_numerator),
-      quorum_denominator: Number(ccData.quorum_denominator),
+      count: Number(ccData.count) || 0,
+      quorum_numerator: Number(ccData.quorum_numerator) || 0,
+      quorum_denominator: Number(ccData.quorum_denominator) || 1,
     },
   });
 
@@ -161,8 +146,6 @@ export const useGovernanceThresholds = () => {
   );
 
   return {
-    includeInactive,
-    setIncludeInactive,
     miscConst,
     query,
     poolList,

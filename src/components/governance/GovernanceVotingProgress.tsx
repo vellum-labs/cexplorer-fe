@@ -60,6 +60,8 @@ export const GovernanceVotingProgress: FC<GovernanceVotingProgressProps> = ({
             0),
         extraAbstain:
           governanceAction?.total?.drep?.drep_always_abstain?.stake || 0,
+        extraNoConfidence:
+          governanceAction?.total?.drep?.drep_always_no_confidence?.stake || 0,
         isCountBased: false,
       },
       {
@@ -69,6 +71,10 @@ export const GovernanceVotingProgress: FC<GovernanceVotingProgressProps> = ({
         type: "SPO",
         role: voterRoles.spo,
         totalBase: governanceAction?.total?.spo?.stake || 0,
+        extraAbstain:
+          governanceAction?.total?.spo?.drep_always_abstain?.stake || 0,
+        extraNoConfidence:
+          governanceAction?.total?.spo?.drep_always_no_confidence?.stake || 0,
         isCountBased: false,
       },
     ];
@@ -78,12 +84,13 @@ export const GovernanceVotingProgress: FC<GovernanceVotingProgressProps> = ({
       .map(voter => {
         const { yes, no, abstain } = getVoteData(votingProcedure, voter.role);
         const totalAbstain = abstain + (voter.extraAbstain || 0);
+        const totalNo = no + (voter.extraNoConfidence || 0);
         const votingBase = voter.totalBase - totalAbstain;
 
         const yesPercent =
           votingBase > 0 ? roundPercentage((yes / votingBase) * 100) : 0;
         const noPercent =
-          votingBase > 0 ? roundPercentage((no / votingBase) * 100) : 0;
+          votingBase > 0 ? roundPercentage((totalNo / votingBase) * 100) : 0;
         const notVotedPercent = Math.max(
           0,
           roundPercentage(100 - yesPercent - noPercent),

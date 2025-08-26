@@ -55,10 +55,16 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
 
   const spoTotalStake = query.data?.data?.total?.spo?.stake ?? 0;
 
-  const spoAbstainStake = votingSPOs
+  const spoAlwaysAbstain =
+    query.data?.data?.total?.spo?.drep_always_abstain?.stake ?? 0;
+  const spoAlwaysNoConfidence =
+    query.data?.data?.total?.spo?.drep_always_no_confidence?.stake ?? 0;
+
+  const spoAbstainManual = votingSPOs
     .filter(item => item?.vote === "Abstain")
     .reduce((a, b) => a + b?.stat?.stake, 0);
 
+  const spoAbstainStake = spoAbstainManual + spoAlwaysAbstain;
   const spoVotingStake = spoTotalStake - spoAbstainStake;
 
   const calculateStake = (votingGroup, voteType: any = null) => {
@@ -70,7 +76,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
   const drepsYes = calculateStake(votingDreps, "Yes");
   const drepsNo = calculateStake(votingDreps, "No");
   const drepsNoConfidence =
-    query.data?.data?.total?.drep?.drep_always_no_confidence.stake ?? 0;
+    query.data?.data?.total?.drep?.drep_always_no_confidence?.stake ?? 0;
 
   const drepsYesCount = (votingProcedure ?? []).find(
     v => v.vote === "Yes" && v.voter_role === "DRep",
@@ -87,15 +93,15 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       v => v.vote === "Abstain" && v.voter_role === "DRep",
     )?.count ?? 0;
   const drepsAbstainAuto =
-    query.data?.data?.total?.drep?.drep_always_abstain.stake ?? 0;
+    query.data?.data?.total?.drep?.drep_always_abstain?.stake ?? 0;
   const drepsNoConfidenceDelegators =
-    query.data?.data?.total?.drep?.drep_always_no_confidence.represented_by ??
+    query.data?.data?.total?.drep?.drep_always_no_confidence?.represented_by ??
     0;
 
   const drepTotalStake =
     (query.data?.data?.total?.drep?.stake ?? 0) +
-    (query.data?.data?.total?.drep?.drep_always_abstain.stake ?? 0) +
-    (query.data?.data?.total?.drep?.drep_always_no_confidence.stake ?? 0);
+    (query.data?.data?.total?.drep?.drep_always_abstain?.stake ?? 0) +
+    (query.data?.data?.total?.drep?.drep_always_no_confidence?.stake ?? 0);
   const drepAbstainStake = drepsAbstainManual + drepsAbstainAuto;
   const drepVotingStake = drepTotalStake - drepAbstainStake;
 
@@ -110,7 +116,8 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
   const drepsNotVotedCount = totalDrepCount - drepsWhoVotedCount;
 
   const sposYes = calculateStake(votingSPOs, "Yes");
-  const sposNo = calculateStake(votingSPOs, "No");
+  const sposNoManual = calculateStake(votingSPOs, "No");
+  const sposNo = sposNoManual + spoAlwaysNoConfidence;
   const sposNotVoted = spoTotalStake - (sposYes + sposNo + spoAbstainStake);
 
   const sposYesCount =
@@ -127,7 +134,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       v => v.vote === "Abstain" && v.voter_role === "SPO",
     )?.count ?? 0;
 
-  const sposAbstainManual =
+  const sposAbstainManualFromVoting =
     (votingProcedure ?? []).find(
       v => v.vote === "Abstain" && v.voter_role === "SPO",
     )?.stat.stake ?? 0;
@@ -175,8 +182,8 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
 
   const sposPieChartData = generatePieChartData(
     sposYes,
-    sposNo,
-    0,
+    sposNoManual,
+    spoAlwaysNoConfidence,
     sposNotVoted,
   );
 
@@ -409,11 +416,11 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
             content={
               <div className='flex flex-col'>
                 <span>
-                  From votes:{" "}
+                  DRep votes:{" "}
                   <AdaWithTooltip data={drepsAbstainManual} tooltip={false} />
                 </span>
                 <span>
-                  From DReps:{" "}
+                  Always abstain:{" "}
                   <AdaWithTooltip data={drepsAbstainAuto} tooltip={false} />
                 </span>
               </div>
@@ -475,7 +482,22 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       ),
       value: (
         <div className='flex items-center justify-end gap-2'>
-          <AdaWithTooltip data={spoAbstainStake} />
+          <Tooltip
+            content={
+              <div className='flex flex-col'>
+                <span>
+                  SPO votes:{" "}
+                  <AdaWithTooltip data={spoAbstainManual} tooltip={false} />
+                </span>
+                <span>
+                  Always abstain:{" "}
+                  <AdaWithTooltip data={spoAlwaysAbstain} tooltip={false} />
+                </span>
+              </div>
+            }
+          >
+            <AdaWithTooltip data={spoAbstainStake} tooltip={false} />
+          </Tooltip>
           <span className='text-xs text-grayTextSecondary'>
             (
             {(spoAbstainStake * 100) / spoTotalStake < 100
@@ -701,7 +723,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                             ? drepThreshold
                             : undefined
                         }
-                        isDrep={true}
+                        voterType='drep'
                         endContent={
                           <GovernanceCard
                             yes={drepsYes}
@@ -709,7 +731,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                             noConfidence={drepsNoConfidence}
                             notVoted={drepsNotVotedStake}
                             pieChartData={drepsPieChartData}
-                            isDrep={true}
+                            voterType='drep'
                             breakdown={{
                               yes: { voters: drepsYesCount ?? 0 },
                               no: { voters: drepsNoCount ?? 0 },
@@ -793,28 +815,31 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                             ? spoThreshold
                             : undefined
                         }
-                        isDrep={false}
+                        voterType='spo'
                         overviewList={spos}
                         className='h-full'
                         endContent={
                           <GovernanceCard
                             yes={sposYes}
                             no={sposNo}
-                            noConfidence={0}
+                            noConfidence={spoAlwaysNoConfidence}
                             notVoted={sposNotVoted}
                             pieChartData={sposPieChartData}
-                            isDrep={false}
+                            voterType='spo'
                             breakdown={{
                               yes: { voters: sposYesCount },
                               no: { voters: sposNoCount },
                               notVoted: { voters: sposNotVotedCount },
                               abstain: {
                                 voters: sposAbstainCount,
-                                autoStake: 0,
-                                manualStake: sposAbstainManual,
+                                autoStake: spoAlwaysAbstain,
+                                manualStake: sposAbstainManualFromVoting,
                               },
                               noConfidence: {
-                                delegators: 0,
+                                delegators:
+                                  query.data?.data?.total?.spo
+                                    ?.drep_always_no_confidence
+                                    ?.represented_by ?? 0,
                               },
                             }}
                           />

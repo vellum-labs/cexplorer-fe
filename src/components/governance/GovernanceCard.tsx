@@ -13,7 +13,7 @@ interface GovernanceCardProps {
   noConfidence: number;
   notVoted: number;
   pieChartData: any;
-  isDrep?: boolean;
+  voterType?: "drep" | "spo";
   breakdown: {
     yes: { voters: number };
     no: { voters: number };
@@ -35,15 +35,15 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
   noConfidence,
   notVoted,
   pieChartData,
-  isDrep = false,
   breakdown,
+  voterType = "drep",
 }) => {
   const { theme } = useThemeStore();
 
-  const voted = (yes / (yes + no + noConfidence + notVoted)) * 100;
+  const totalVotes = yes + no + noConfidence + notVoted;
+  const voted = totalVotes > 0 ? (yes / totalVotes) * 100 : 0;
   const notVotedPercent =
-    ((no + noConfidence + notVoted) / (yes + no + noConfidence + notVoted)) *
-    100;
+    totalVotes > 0 ? ((no + noConfidence + notVoted) / totalVotes) * 100 : 0;
 
   return (
     <div className='flex h-full w-full items-center'>
@@ -69,6 +69,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
               <VotingBreakdownTooltip
                 type='Yes'
                 voters={breakdown.yes.voters}
+                voterType={voterType}
               />
             </div>
           </div>
@@ -98,26 +99,26 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
                 <VotingBreakdownTooltip
                   type='No'
                   voters={breakdown.no.voters}
+                  voterType={voterType}
                 />
               </div>
             </div>
-            {isDrep && (
-              <div className='flex items-center justify-between'>
-                <span className='text-sm font-medium text-grayTextPrimary'>
-                  No confidence
-                </span>
-                <div className='flex items-center justify-end text-nowrap'>
-                  <AdaWithTooltip
-                    data={noConfidence}
-                    triggerClassName='text-sm font-medium text-grayTextPrimary'
-                  />
-                  <VotingBreakdownTooltip
-                    type='No confidence'
-                    delegators={breakdown.noConfidence.delegators}
-                  />
-                </div>
+            <div className='flex items-center justify-between'>
+              <span className='text-sm font-medium text-grayTextPrimary'>
+                No confidence
+              </span>
+              <div className='flex items-center justify-end text-nowrap'>
+                <AdaWithTooltip
+                  data={noConfidence}
+                  triggerClassName='text-sm font-medium text-grayTextPrimary'
+                />
+                <VotingBreakdownTooltip
+                  type='No confidence'
+                  delegators={breakdown.noConfidence.delegators}
+                  voterType={voterType}
+                />
               </div>
-            )}
+            </div>
             <div className='flex items-center justify-between'>
               <span className='text-sm font-medium text-grayTextPrimary'>
                 Not voted
@@ -130,6 +131,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
                 <VotingBreakdownTooltip
                   type='Not voted'
                   voters={breakdown.notVoted.voters}
+                  voterType={voterType}
                 />
               </div>
             </div>

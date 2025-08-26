@@ -3,15 +3,14 @@ import ReactECharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { Tooltip } from "@/components/ui/tooltip";
 import { CircleHelp } from "lucide-react";
+import { formatNumberWithSuffix } from "@/utils/format/format";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 
 interface DRepThresholdChartProps {
   chartProps: {
     epochParam: any;
-    drepsCount: number;
-    includeInactive: boolean;
     visibility: boolean;
     activeVotingStake: number;
-    activeVotingStakeInactive: number;
     filteredDReps: any[];
     params: null | string;
   };
@@ -20,38 +19,68 @@ interface DRepThresholdChartProps {
 export const DRepThresholdChart: FC<DRepThresholdChartProps> = ({
   chartProps,
 }) => {
-  const {
-    epochParam,
-    drepsCount,
-    includeInactive,
-    visibility,
-    activeVotingStake,
-    filteredDReps,
-    activeVotingStakeInactive,
-    params,
-  } = chartProps;
+  const { epochParam, visibility, activeVotingStake, filteredDReps, params } =
+    chartProps;
 
   const { textColor, bgColor } = useGraphColors();
 
   const threshold = params ? epochParam[params] : 0;
 
-  const yesThresholdAmount = visibility
-    ? Math.ceil(
-        (includeInactive ? activeVotingStakeInactive : activeVotingStake) *
-          threshold,
-      )
-    : 0;
+  const votingStake = activeVotingStake;
+  const requiredStake =
+    visibility && votingStake > 0 ? votingStake * threshold : 0;
 
   let accumulated = 0;
   let count = 0;
   const requiredDReps: typeof filteredDReps = [];
 
-  for (const drep of filteredDReps) {
-    if (accumulated >= yesThresholdAmount) break;
+  const sortedDReps = [...filteredDReps].sort(
+    (a, b) => Number(b.amount ?? 0) - Number(a.amount ?? 0),
+  );
+
+  for (const drep of sortedDReps) {
+    if (accumulated >= requiredStake) break;
     accumulated += Number(drep.amount ?? 0);
     count++;
     requiredDReps.push(drep);
   }
+
+  const chartData = visibility
+    ? [
+        ...requiredDReps.map((drep, index) => ({
+          value: Number(drep.amount ?? 0),
+          name:
+            drep.data?.given_name ||
+            (typeof drep.hash?.view === "string"
+              ? drep.hash.view.slice(0, 12) + "..."
+              : null) ||
+            `DRep ${index + 1}`,
+          itemStyle: {
+            color: "#f43f5e",
+            borderColor: "#ffffff",
+            borderWidth: 2,
+          },
+          drepData: drep,
+          isRequired: true,
+        })),
+        {
+          value: votingStake - accumulated,
+          name: "Other DReps",
+          itemStyle: {
+            color: "#22c55e",
+            borderColor: "#ffffff",
+            borderWidth: 2,
+          },
+          isOther: true,
+        },
+      ]
+    : [
+        {
+          value: 1,
+          name: "Not applicable",
+          itemStyle: { color: "#E4E7EC" },
+        },
+      ];
 
   const option = {
     tooltip: {
@@ -66,9 +95,36 @@ export const DRepThresholdChart: FC<DRepThresholdChartProps> = ({
           return "DReps do not vote on this action";
         }
 
-        const isVoting = params.data.name === "Voting";
-        const value = isVoting ? count : drepsCount - count;
-        return `${params.data.name}<br/>DReps: ${value}`;
+        if (params.data.isOther) {
+          const stakeInAda = formatNumberWithSuffix(params.data.value / 1e6);
+          return `Other DReps<br/>Stake: ${stakeInAda} ADA<br/>Not needed for threshold`;
+        }
+
+        if (params.data.drepData) {
+          const drep = params.data.drepData;
+          const stakeInAda = formatNumberWithSuffix(
+            Number(drep.amount ?? 0) / 1e6,
+          );
+          const imageUrl = generateImageUrl(
+            drep.hash?.view ?? "",
+            "sm",
+            "drep",
+          );
+
+          return `
+            <div>
+              <div style="display: flex; align-items: center; gap: 6px; font-weight: 600; margin-bottom: 4px;">
+                <img src="${imageUrl}" alt="DRep" style="width: 16px; height: 16px; border-radius: 50%; object-fit: cover;" onerror="this.style.display='none'"/>
+                ${params.data.name}
+              </div>
+              <div>Voting Power: ${stakeInAda} ADA</div>
+              <div>Delegators: ${drep.distr?.count ?? "N/A"}</div>
+            </div>
+          `;
+        }
+
+        const stakeInAda = formatNumberWithSuffix(params.data.value / 1e6);
+        return `${params.data.name}<br/>Stake: ${stakeInAda} ADA`;
       },
     },
     series: [
@@ -83,38 +139,12 @@ export const DRepThresholdChart: FC<DRepThresholdChartProps> = ({
         label: {
           show: true,
           position: "center",
-          formatter: visibility
-            ? filteredDReps.length >= 100 && accumulated < yesThresholdAmount
-              ? "100+"
-              : `${count}`
-            : "N/A",
+          formatter: visibility ? `${count}` : "N/A",
           fontSize: 22,
           fontWeight: 600,
           color: textColor,
         },
-        data: visibility
-          ? [
-              {
-                value: accumulated,
-                name: "Voting",
-                itemStyle: { color: "#f43f5e" },
-              },
-              {
-                value:
-                  (includeInactive
-                    ? activeVotingStakeInactive
-                    : activeVotingStake) - accumulated,
-                name: "Not voting",
-                itemStyle: { color: "#22c55e" },
-              },
-            ]
-          : [
-              {
-                value: 1,
-                name: "Not applicable",
-                itemStyle: { color: "#E4E7EC" },
-              },
-            ],
+        data: chartData,
       },
     ],
   };
@@ -126,8 +156,8 @@ export const DRepThresholdChart: FC<DRepThresholdChartProps> = ({
         <Tooltip
           content={
             <p className='max-w-[200px]'>
-              Minimum number of DReps with enough voting power to pass this
-              proposal.
+              Theoretical minimum number of DReps with enough voting power to
+              pass this proposal
             </p>
           }
         >
@@ -144,8 +174,11 @@ export const DRepThresholdChart: FC<DRepThresholdChartProps> = ({
         />
       </div>
       <p className='text-sm text-text'>
-        Threshold: {visibility ? `${threshold * 100}%` : "Not applicable"} (
-        {includeInactive ? "Including Inactive" : "Only Active"})
+        Threshold:{" "}
+        {visibility
+          ? `${((threshold || 0) * 100).toFixed(0)}%`
+          : "Not applicable"}{" "}
+        (All DReps)
       </p>
     </div>
   );
