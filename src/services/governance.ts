@@ -66,16 +66,18 @@ export const fetchGovernenceVote = async (
   search?: string,
 ) => {
   const url = voter_role && vote_not ? "/gov/vote_not" : "/gov/vote";
+  const isNotVotedEndpoint = url === "/gov/vote_not";
+  
   const options = {
     params: {
       limit,
       offset,
       gov_action_proposal: id,
       voter_role,
-      order: voter_role ? (order ?? "stake") : undefined,
-      sort: voter_role ? (sort ?? "desc") : undefined,
+      order: isNotVotedEndpoint ? (order ?? "stake") : order,
+      sort: isNotVotedEndpoint ? (sort ?? "desc") : sort,
       vote,
-      search,
+      search, 
     },
   };
   return handleFetch<any>(url, undefined, options);
@@ -102,6 +104,7 @@ export const useFetchGovernanceVote = (
       order,
       sort,
       vote,
+      vote_not,
       search,
     ],
     queryFn: ({ pageParam = page }) =>
