@@ -8,6 +8,7 @@ interface VotingBreakdownTooltipProps {
   autoStake?: number;
   manualStake?: number;
   type?: "Abstain" | "No confidence" | "Yes" | "No" | "Not voted";
+  voterType?: "drep" | "spo";
 }
 
 export const VotingBreakdownTooltip: FC<VotingBreakdownTooltipProps> = ({
@@ -16,6 +17,7 @@ export const VotingBreakdownTooltip: FC<VotingBreakdownTooltipProps> = ({
   autoStake,
   manualStake,
   type,
+  voterType = "drep",
 }) => {
   return (
     <Tooltip
@@ -28,8 +30,10 @@ export const VotingBreakdownTooltip: FC<VotingBreakdownTooltipProps> = ({
           )}
           {delegators !== undefined && (
             <span>
-              Represented by <b>{delegators}</b> delegator
-              {delegators !== 1 && "s"}
+              Represented by <b>{delegators}</b>{" "}
+              {voterType === "spo"
+                ? `stake pool${delegators !== 1 ? "s" : ""}`
+                : `delegator${delegators !== 1 ? "s" : ""}`}
             </span>
           )}
           {type === "Abstain" &&

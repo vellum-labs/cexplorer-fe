@@ -71,6 +71,14 @@ export interface GovernanceActionList {
       count: number;
       represented_by: number;
       stake: number;
+      drep_always_abstain?: {
+        represented_by: number;
+        stake: number;
+      };
+      drep_always_no_confidence?: {
+        represented_by: number;
+        stake: number;
+      };
     };
   };
   committee?: {
@@ -166,6 +174,14 @@ export interface GovernanceActionDetail {
       count: number;
       represented_by: number;
       stake: number;
+      drep_always_abstain: {
+        represented_by: number;
+        stake: number;
+      };
+      drep_always_no_confidence: {
+        represented_by: number;
+        stake: number;
+      };
     };
   };
   committee: {
@@ -782,4 +798,4 @@ export interface ConstitutionDataItem {
   anchor: ConstitutionAnchor;
   script_hash: string;
   gov_action_proposal: any | null;
-}
+} 
