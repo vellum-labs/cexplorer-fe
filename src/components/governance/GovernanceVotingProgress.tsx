@@ -65,7 +65,9 @@ export const GovernanceVotingProgress: FC<GovernanceVotingProgressProps> = ({
         isCountBased: false,
       },
       {
-        condition: shouldSPOVote(actionType) && governanceAction?.total?.spo,
+        condition:
+          shouldSPOVote(actionType, votingProcedure) &&
+          governanceAction?.total?.spo,
         type: "SPO",
         role: voterRoles.spo,
         totalBase: governanceAction?.total?.spo?.stake || 0,

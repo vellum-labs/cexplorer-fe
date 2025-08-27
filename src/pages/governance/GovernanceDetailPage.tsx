@@ -31,7 +31,9 @@ export const GovernanceDetailPage: FC = () => {
     {
       key: "not_voted",
       label: "Not voted",
-      content: <GovernanceDetailNotVotedTab id={id} key={2} />,
+      content: (
+        <GovernanceDetailNotVotedTab id={id} governanceAction={data} key={2} />
+      ),
       visible: true,
     },
     {

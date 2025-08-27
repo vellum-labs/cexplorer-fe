@@ -1,16 +1,22 @@
 import type { FC } from "react";
+import type { GovernanceActionDetail } from "@/types/governanceTypes";
 
 import Tabs from "@/components/global/Tabs";
 import { GovernanceDetailDrepsSubtab } from "../subtabs/GovernanceDetailDrepsSubtab";
 import { GovernanceDetailSposSubtab } from "../subtabs/GovernanceDetailSposSubtab";
+import { shouldSPOVote } from "@/utils/governanceVoting";
 
 interface GovernanceDetailNotVotedTabProps {
   id: string;
+  governanceAction?: GovernanceActionDetail;
 }
 
 export const GovernanceDetailNotVotedTab: FC<
   GovernanceDetailNotVotedTabProps
-> = ({ id }) => {
+> = ({ id, governanceAction }) => {
+  const governanceActionType = governanceAction?.type ?? "";
+  const votingProcedure = governanceAction?.voting_procedure;
+
   const tabs = [
     {
       key: "dreps",
@@ -22,7 +28,7 @@ export const GovernanceDetailNotVotedTab: FC<
       key: "spos",
       label: "SPOs",
       content: <GovernanceDetailSposSubtab id={id} />,
-      visible: true,
+      visible: shouldSPOVote(governanceActionType, votingProcedure),
     },
   ];
 
