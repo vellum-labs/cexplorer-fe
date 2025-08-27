@@ -86,12 +86,26 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
         : Math.ceil(defaultPagination ? totalItems / 10 : totalItems / 20)
       : 0;
 
+  const memoizedOverrideWidth = useMemo(
+    () => overrideWidth,
+    [Object.keys(overrideWidth).join(), Object.values(overrideWidth).join()],
+  );
+  const memoizedColumnsVisibility = useMemo(
+    () => columnsVisibility,
+    [
+      Object.keys(columnsVisibility || {}).join(),
+      Object.values(columnsVisibility || {}).join(),
+    ],
+  );
+
   const initialColumns = useMemo(() => {
     return rawColumns.map(col => ({
       ...col,
-      widthPx: overrideWidth[col.key] ? overrideWidth[col.key] : 20,
+      widthPx: memoizedOverrideWidth[col.key]
+        ? memoizedOverrideWidth[col.key]
+        : 20,
     }));
-  }, [rawColumns, overrideWidth]);
+  }, [rawColumns?.length, memoizedOverrideWidth]);
 
   const [columns, setColumns] = useState(initialColumns);
 
@@ -114,7 +128,9 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
         .filter(item => item.visible)
         .map(item => ({
           ...item,
-          widthPx: overrideWidth[item.key] ? overrideWidth[item.key] : 20,
+          widthPx: memoizedOverrideWidth[item.key]
+            ? memoizedOverrideWidth[item.key]
+            : 20,
         }));
       const updatedColumns = newArr.filter(callbackFilter);
       if (sortFunc) {
@@ -125,7 +141,7 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
         setColumns(updatedColumns);
       }
     },
-    [initialColumns, overrideWidth, columns],
+    [initialColumns, memoizedOverrideWidth, columns],
   );
 
   const handleRemoveFilters = () => {
@@ -183,13 +199,18 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
         .filter(item => item.visible)
         .map(item => ({
           ...item,
-          widthPx: overrideWidth[item.key] ?? 20,
+          widthPx: memoizedOverrideWidth[item.key] ?? 20,
         }));
 
       setColumns(nextColumns);
       setTableOptions(tableListOptions);
     }
-  }, [width, columnsVisibility, initialColumns, overrideWidth]);
+  }, [
+    width,
+    memoizedColumnsVisibility,
+    initialColumns?.length,
+    memoizedOverrideWidth,
+  ]);
 
   useEffect(() => {
     const timer = setTimeout(() => setInitLoading(false), 1000);
