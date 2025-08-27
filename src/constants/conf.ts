@@ -3,6 +3,7 @@ import cfg_preprod_prod from "../../conf/preprod-prod.json";
 import cfg_mainnet_stage from "../../conf/mainnet-stage.json";
 import cfg_mainnet_prod from "../../conf/mainnet-prod.json";
 import cfg_preview_stage from "../../conf/preview-stage.json";
+import cfg_preview_prod from "../../conf/preview-prod.json";
 
 export const configJSON = (() => {
   const config = import.meta.env.VITE_APP_CONFIG ?? "preprod-stage";
@@ -18,6 +19,8 @@ export const configJSON = (() => {
       return cfg_mainnet_prod;
     case "preview-stage":
       return cfg_preview_stage;
+     case "preview-prod":
+      return cfg_preview_prod; 
     default:
       return cfg_preprod_stage;
   }
