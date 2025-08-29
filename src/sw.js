@@ -12,6 +12,14 @@ import { CacheableResponsePlugin } from "workbox-cacheable-response";
 self.skipWaiting();
 clientsClaim();
 
+if (!("caches" in self)) {
+  self.addEventListener("fetch", event => {
+    if (event.request.mode === "navigate") {
+      event.respondWith(fetch(event.request.url));
+    }
+  });
+} else {
+
 const PRECACHE_CACHE_NAME = cacheNames.precache;
 
 const PRECACHE_MANIFEST = self.__WB_MANIFEST || [];
@@ -156,3 +164,5 @@ const navigationRoute = new NavigationRoute(handler, {
   denylist: [/^\/api\//],
 });
 registerRoute(navigationRoute);
+
+}
