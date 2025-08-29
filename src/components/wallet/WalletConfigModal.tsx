@@ -105,7 +105,7 @@ const WalletConfigModal = () => {
           watchlist, custom names, and personal data secure.
         </p>
         <p className='text-muted-foreground text-sm'>
-          Removing the token will disable automatic login.
+          If you cancel or remove the authorization token, we cannot connect your wallet.
         </p>
       </div>
 
