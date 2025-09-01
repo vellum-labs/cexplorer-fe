@@ -20,8 +20,15 @@ export const GovernanceVoteDetailPage: FC = () => {
   const votes = voteData?.data?.data ?? [];
 
   const tabs = useMemo(() => {
-    return votes.map((vote, index) => ({
-      key: vote?.proposal?.ident?.id,
+    const govActionIds = votes.map((vote: any) => vote?.proposal?.ident?.id);
+    const hasDuplicates = govActionIds.some(
+      (id: string, index: number) => govActionIds.indexOf(id) !== index,
+    );
+
+    return votes.map((vote: any, index: number) => ({
+      key: hasDuplicates
+        ? `${vote?.proposal?.ident?.id}-${index}`
+        : vote?.proposal?.ident?.id,
       label: `Vote ${index + 1}`,
       content: (
         <VoteDetailCard
@@ -87,8 +94,10 @@ export const GovernanceVoteDetailPage: FC = () => {
               />
             </div>
           </div>
-        ) : tabs.length > 0 ? (
+        ) : tabs.length > 1 ? (
           <Tabs items={tabs} allowScroll />
+        ) : tabs.length === 1 ? (
+          tabs[0].content
         ) : (
           <EmptyState
             icon={<Vote size={24} />}
