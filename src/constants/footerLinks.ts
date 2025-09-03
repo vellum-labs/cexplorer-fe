@@ -84,14 +84,19 @@ export const footerLinks: { [T in Header]: FooterLinks } = {
       target: "_self",
     },
     {
-      label: "Delegate to",
+      label: "Delegate to [POOLS]",
       href: "/donate",
       target: "_self",
     },
     {
       label: "Patreon",
-      href: "/",
-      target: "_self",
+      href: "https://www.patreon.ciom/ADApools",
+      target: "_blank",
+    },
+    {
+      label: "Buy me a coffee", 
+      href: "https://buymeacoffee.com/vellumlabs",
+      target: "_blank",
     },
     {
       label: "Report a bug",

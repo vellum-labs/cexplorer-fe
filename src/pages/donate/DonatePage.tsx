@@ -14,6 +14,7 @@ import {
 import CexLogo from "@/resources/images/cexLogo.svg";
 import Patreon from "@/resources/images/patreon.svg";
 import Paypal from "@/resources/images/paypal.svg";
+import BuyMeACoffee from "@/resources/images/buymeacoffee.svg";
 import { useWalletStore } from "@/stores/walletStore";
 import { Link } from "@tanstack/react-router";
 import {
@@ -250,6 +251,16 @@ export const DonatePage = () => {
                   >
                     <img src={Patreon} />
                     Patreon
+                  </a>
+                  <a
+                    href='https://buymeacoffee.com/vellumlabs'
+                    target='_blank'
+                    className='flex items-center gap-1 font-medium text-grayTextPrimary'
+                  >
+                    <div className='flex h-6 w-6 items-center justify-center rounded-full bg-gray-300 dark:bg-gray-600'>
+                      <img src={BuyMeACoffee} className='h-4 w-4' />
+                    </div>
+                    Buy Me a Coffee
                   </a>
                 </div>
               </div>
