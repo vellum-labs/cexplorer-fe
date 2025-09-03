@@ -90,7 +90,7 @@ export const footerLinks: { [T in Header]: FooterLinks } = {
     },
     {
       label: "Patreon",
-      href: "https://www.patreon.ciom/ADApools",
+      href: "https://www.patreon.com/ADApools",
       target: "_blank",
     },
     {
