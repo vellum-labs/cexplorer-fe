@@ -167,16 +167,16 @@ const EpochCard = ({ epoch }: { epoch: EpochListData }) => {
         )}
         <h3 className=''>Epoch {epoch.no}</h3>
       </div>
-      <span className='flex justify-between text-sm text-grayTextSecondary'>
-        Start{" "}
-        <span className='text-grayTextPrimary'>
-          {formatDate(new Date(epoch.start_time))}
+      <span className='flex justify-between text-xs text-grayTextSecondary'>
+        <p className='w-10'>Start</p>
+        <span className='ml-2 text-grayTextPrimary'>
+          {formatDate(epoch.start_time)}
         </span>
       </span>
-      <span className='flex justify-between text-sm text-grayTextSecondary'>
-        End{" "}
-        <span className='text-grayTextPrimary'>
-          {formatDate(new Date(epoch.end_time))}
+      <span className='flex justify-between text-xs text-grayTextSecondary'>
+        <p className='w-10'>End</p>
+        <span className='ml-2 text-grayTextPrimary'>
+          {formatDate(epoch.end_time)}
         </span>
       </span>
       <div className='mt-2 flex justify-end border-t border-border pt-2'>

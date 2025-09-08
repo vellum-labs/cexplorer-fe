@@ -52,7 +52,7 @@ export const EpochInfo: FC<EpochInfoProps> = ({ number, data }) => {
               }}
             ></span>
           </div>
-          <span className='text-grayTextPrimary text-sm font-medium'>
+          <span className='text-sm font-medium text-grayTextPrimary'>
             {!isNaN(elapsedPercentage)
               ? elapsedPercentage > 100
                 ? 100
@@ -62,12 +62,10 @@ export const EpochInfo: FC<EpochInfoProps> = ({ number, data }) => {
           </span>
         </div>
         <div className='flex items-center justify-between'>
-          <span className='text-grayTextPrimary text-xs'>
-            {formatDate(
-              data[0]?.start_time ? new Date(data[0]?.start_time) : undefined,
-            )}
+          <span className='text-xs text-grayTextPrimary'>
+            {formatDate(data[0]?.start_time ? data[0]?.start_time : undefined)}
           </span>
-          <span className='text-grayTextPrimary text-xs'>
+          <span className='text-xs text-grayTextPrimary'>
             {formatRemainingTime(timeLeft)}
           </span>
         </div>

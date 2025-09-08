@@ -115,7 +115,7 @@ export const ArticleListPage = () => {
                 <span className='text-grayTextPrimary'>Published</span>
                 <span>
                   {firstArticle?.pub_date
-                    ? formatDate(new Date(firstArticle?.pub_date))
+                    ? formatDate(firstArticle?.pub_date)
                     : "-"}
                 </span>
               </div>

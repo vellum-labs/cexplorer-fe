@@ -128,23 +128,27 @@ export const formatSecondsToTime = (seconds: number): string => {
   return timeString.trim();
 };
 
+const toUtcDate = (input: string | Date | number): Date => {
+  if (input instanceof Date) return input;
+  if (typeof input === "string") {
+    const hasTZ = /[zZ]|[+-]\d{2}:\d{2}$/.test(input);
+    return new Date(hasTZ ? input : input + "Z");
+  }
+  return new Date(input);
+};
+
 export const formatDate = (
-  date: Date | undefined,
+  input?: string | Date | number,
   hideTime?: boolean,
 ): string => {
-  if (!date) {
-    return "";
-  }
-
+  if (!input) return "";
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const zonedDate = toZonedTime(date, timeZone);
-  const formattedDate = hideTime
-    ? format(zonedDate, "MMM dd yyyy", {
-        timeZone,
-      })
-    : format(zonedDate, "MMM dd yyyy, HH:mm 'CET'", {
-        timeZone,
-      });
+  const utcDate = toUtcDate(input);
+  const zoned = toZonedTime(utcDate, timeZone);
 
-  return formattedDate;
+  return format(
+    zoned,
+    hideTime ? "MMM dd yyyy" : "MMM dd yyyy, HH:mm zzz, 'UTC'XXX",
+    { timeZone },
+  );
 };

@@ -82,11 +82,7 @@ const TxDetailOverview = ({ query }: Props) => {
             <DateCell className='' time={data?.block?.time} />
           </span>
           <span className='flex items-center gap-1 pr-1 text-grayTextPrimary'>
-            (
-            {formatDate(
-              data?.block?.time ? new Date(data?.block?.time) : undefined,
-            )}
-            ){" "}
+            ({formatDate(data?.block?.time ? data?.block?.time : undefined)}){" "}
             <Clock size={14} className='h-full shrink-0 text-grayTextPrimary' />
           </span>
         </div>
