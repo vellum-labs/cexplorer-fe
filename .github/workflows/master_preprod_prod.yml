@@ -1,4 +1,4 @@
-name: "Deploy preprod > prod-server"
+name: "preprod@prod"
 on:
   workflow_dispatch:
 
