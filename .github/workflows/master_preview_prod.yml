@@ -1,4 +1,4 @@
-name: "Deploy preview > prod-server"
+name: "preview@prod"
 on:
   workflow_dispatch:
 jobs:
