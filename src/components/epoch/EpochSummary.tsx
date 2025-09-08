@@ -24,7 +24,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
   const usedTPS = stats?.epoch?.tx_count / epochDurationSeconds;
   const capTps = stats?.proto?.max;
 
-  const endTime = startDate + 432000000;
+  const endTime = new Date(startDate + 432000000).getTime();
   const durationInSeconds = (endTime - startDate) / 1000;
 
   const [timeLeft, setTimeLeft] = useState(
