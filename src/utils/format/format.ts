@@ -128,7 +128,7 @@ export const formatSecondsToTime = (seconds: number): string => {
   return timeString.trim();
 };
 
-const toUtcDate = (input: string | Date | number): Date => {
+export const toUtcDate = (input: string | Date | number): Date => {
   if (input instanceof Date) return input;
   if (typeof input === "string") {
     const hasTZ = /[zZ]|[+-]\d{2}:\d{2}$/.test(input);
