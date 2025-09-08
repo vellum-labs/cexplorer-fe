@@ -11,7 +11,15 @@ import { formatDate, formatNumber } from "@/utils/format/format";
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 import type { FileRoutesByPath } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
-import { Eye, EyeOff, Plus, RotateCcw, Search, Wand, Wallet } from "lucide-react";
+import {
+  Eye,
+  EyeOff,
+  Plus,
+  RotateCcw,
+  Search,
+  Wand,
+  Wallet,
+} from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Badge } from "../global/badges/Badge";
@@ -62,13 +70,13 @@ export const ApiProfile = () => {
         <div className='flex w-full max-w-desktop flex-col'>
           <EmptyState
             icon={<Wallet size={24} />}
-            primaryText="Wallet not connected."
-            secondaryText="Connect your wallet to access API dashboard and manage your API keys."
+            primaryText='Wallet not connected.'
+            secondaryText='Connect your wallet to access API dashboard and manage your API keys.'
             button={
               <Button
-                label="Connect wallet"
-                variant="primary"
-                size="md"
+                label='Connect wallet'
+                variant='primary'
+                size='md'
                 onClick={() => setShowConnectModal(true)}
               />
             }
@@ -264,7 +272,7 @@ export const ApiProfile = () => {
                         </button>
                       </div>
                       <div className='flex items-center gap-2'>
-                        <Copy copyText={apiKey.key} showText />
+                        <Copy copyText={apiKey.key} />
                         <Button
                           label='Regenerate key'
                           size='md'
@@ -330,7 +338,7 @@ const ActivityGraph = ({ data }: { data: UserApiObject["stat"] }) => {
     },
     xAxis: {
       type: "category",
-      data: data?.map(({ date }) => formatDate(new Date(date), true)),
+      data: data?.map(({ date }) => formatDate(date, true)),
       name: "Date",
       nameLocation: "middle",
       nameGap: 28,

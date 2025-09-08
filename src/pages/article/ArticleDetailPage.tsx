@@ -132,9 +132,7 @@ export const ArticleDetailPage = () => {
               </div>
               <div className='flex flex-col text-sm'>
                 <span className='text-grayTextPrimary'>Published</span>
-                <span>
-                  {data?.pub_date ? formatDate(new Date(data?.pub_date)) : "-"}
-                </span>
+                <span>{data?.pub_date ? formatDate(data?.pub_date) : "-"}</span>
               </div>
             </div>
             <div className='flex w-full justify-end md:w-[60%]'>

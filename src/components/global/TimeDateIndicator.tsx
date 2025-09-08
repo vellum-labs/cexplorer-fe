@@ -18,7 +18,7 @@ export const TimeDateIndicator: FC<TimeDateIndicatorProps> = ({ time }) => {
       </span>
       <div className='flex items-center'>
         <span className='text-nowrap pr-1 text-xs leading-none text-grayTextPrimary'>
-          ({formatDate(time ? new Date(time) : undefined)})
+          ({formatDate(time ? time : undefined)})
         </span>
         <Clock size={12} className='h-full text-grayTextPrimary' />
       </div>

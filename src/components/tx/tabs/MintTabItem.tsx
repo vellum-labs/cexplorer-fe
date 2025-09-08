@@ -18,7 +18,7 @@ const MintTabItem = () => {
         <p
           title={formatDate(
             query.data?.data.block.time
-              ? new Date(query.data?.data.block.time)
+              ? query.data?.data.block.time
               : undefined,
           )}
           className=''

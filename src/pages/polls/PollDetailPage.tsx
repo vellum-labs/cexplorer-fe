@@ -204,8 +204,8 @@ export const PollDetailPage = () => {
               </div>
               {pollDetail?.date_start && pollDetail?.date_end && (
                 <div className='flex w-full justify-between text-[10px] text-grayTextPrimary'>
-                  <span>{formatDate(new Date(pollDetail?.date_start))}</span>
-                  <span>{formatDate(new Date(pollDetail?.date_end))}</span>
+                  <span>{formatDate(pollDetail?.date_start)}</span>
+                  <span>{formatDate(pollDetail?.date_end)}</span>
                 </div>
               )}
             </section>

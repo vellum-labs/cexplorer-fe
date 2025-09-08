@@ -217,9 +217,7 @@ const HardforkPage: FC = () => {
     {
       key: "last_updated",
       render: item => (
-        <span>
-          {item?.updatedOn ? formatDate(new Date(item?.updatedOn)) : ""}
-        </span>
+        <span>{item?.updatedOn ? formatDate(item?.updatedOn) : ""}</span>
       ),
       title: "Last Updated",
       visible: true,
@@ -530,9 +528,7 @@ const HardforkPage: FC = () => {
             <p>Release date:</p>
             <span className='text-nowrap leading-none text-grayTextPrimary'>
               {formatDate(
-                data?.info?.releaseDate
-                  ? new Date(data?.info?.releaseDate)
-                  : undefined,
+                data?.info?.releaseDate ? data?.info?.releaseDate : undefined,
               )}
             </span>
           </div>

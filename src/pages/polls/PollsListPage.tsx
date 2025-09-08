@@ -120,7 +120,7 @@ export const PollsListPage = () => {
         <div className='flex flex-col'>
           <DateCell time={poll.date_start} />
           <span className='text-xs text-grayTextSecondary'>
-            {formatDate(new Date(poll.date_start))}
+            {formatDate(poll.date_start)}
           </span>
         </div>
       ),
@@ -134,7 +134,7 @@ export const PollsListPage = () => {
         <div className='flex flex-col'>
           <DateCell time={poll.date_end} />
           <span className='text-xs text-grayTextSecondary'>
-            {formatDate(new Date(poll.date_end))}
+            {formatDate(poll.date_end)}
           </span>
         </div>
       ),

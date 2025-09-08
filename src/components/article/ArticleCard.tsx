@@ -31,7 +31,7 @@ export const ArticleCard = ({ article, className }: Props) => {
       <div className='flex w-full flex-wrap items-center justify-between gap-1'>
         <span className='flex basis-[170px] items-center gap-1 text-sm text-text'>
           <Clock size={14} color={colors.text} />
-          {formatDate(new Date(article.pub_date), true)}
+          {formatDate(article.pub_date, true)}
         </span>
         {renderArticleAuthor(article.user_owner)}
       </div>
