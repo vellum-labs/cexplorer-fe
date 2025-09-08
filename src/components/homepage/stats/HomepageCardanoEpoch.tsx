@@ -24,9 +24,7 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
   const load7d = basicData?.data?.loads?.["7d"] ?? 0;
   const load1h = basicData?.data?.loads?.["1h"] ?? 0;
 
-  const blockUsage = isNaN(constDataLoad)
-    ? 0
-    : constDataLoad * 100;
+  const blockUsage = isNaN(constDataLoad) ? 0 : constDataLoad * 100;
 
   const startDate = new Date(
     miscConst?.epoch?.start_time ? miscConst?.epoch?.start_time : 0,
@@ -54,6 +52,8 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
   const elapsedPercentage =
     ((durationInSeconds - timeLeft) / durationInSeconds) * 100;
 
+  console.log("miscConst?.epoch?.start_time", miscConst?.epoch?.start_time);
+
   return (
     <div className='mx-3 min-h-[110px]'>
       <div className='flex items-center gap-2 pb-1'>
@@ -79,11 +79,7 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
           <div className='flex items-center justify-between'>
             <span className='text-grayText text-xs'>
               {miscConst?.epoch?.start_time
-                ? formatDate(
-                    miscConst?.epoch?.start_time
-                      ? new Date(miscConst?.epoch?.start_time)
-                      : undefined,
-                  )
+                ? formatDate(miscConst?.epoch?.start_time)
                 : ""}
             </span>
             {timeLeft > 0 && (
@@ -125,7 +121,9 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
             <div className='space-y-1'>
               <div className='flex justify-between gap-4'>
                 <span>1h usage:</span>
-                <span className='font-semibold'>{(load1h * 100).toFixed(2)}%</span>
+                <span className='font-semibold'>
+                  {(load1h * 100).toFixed(2)}%
+                </span>
               </div>
               <div className='flex justify-between gap-4'>
                 <span>24h usage:</span>
@@ -133,12 +131,14 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
               </div>
               <div className='flex justify-between gap-4'>
                 <span>7d usage:</span>
-                <span className='font-semibold'>{(load7d * 100).toFixed(2)}%</span>
+                <span className='font-semibold'>
+                  {(load7d * 100).toFixed(2)}%
+                </span>
               </div>
             </div>
           }
         >
-          <div className='flex items-center gap-1 cursor-help'>
+          <div className='flex cursor-help items-center gap-1'>
             <span className='text-grayText text-sm font-semibold'>
               {blockUsage.toFixed(2)}%
             </span>
