@@ -1,4 +1,5 @@
 import { epochLength } from "@/constants/confVariables";
+import { toUtcDate } from "./format/format";
 
 export const calculateEpochTimeByNumber = (
   epoch: number,
@@ -7,14 +8,16 @@ export const calculateEpochTimeByNumber = (
 ) => {
   if (epoch === currentEpochNumber) {
     return {
-      startTime: new Date(startTime),
-      endTime: new Date(new Date(startTime).getTime() + epochLength * 1000),
+      startTime: new Date(toUtcDate(startTime)),
+      endTime: new Date(
+        new Date(toUtcDate(startTime)).getTime() + epochLength * 1000,
+      ),
     };
   }
 
-  const currentEpochStartTime = new Date(startTime);
+  const currentEpochStartTime = new Date(toUtcDate(startTime));
   const currentEpochEndTime = new Date(
-    new Date(startTime).getTime() + epochLength * 1000,
+    new Date(toUtcDate(startTime)).getTime() + epochLength * 1000,
   );
 
   const epochDurationMs =

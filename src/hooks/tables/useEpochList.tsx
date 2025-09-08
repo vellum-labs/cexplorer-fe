@@ -9,7 +9,11 @@ import ReactEcharts from "echarts-for-react";
 
 import { currencySigns } from "@/constants/currencies";
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
-import { formatNumber, formatNumberWithSuffix } from "@/utils/format/format";
+import {
+  formatNumber,
+  formatNumberWithSuffix,
+  toUtcDate,
+} from "@/utils/format/format";
 import { lovelaceToAda } from "@/utils/lovelaceToAda";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { Link } from "@tanstack/react-router";
@@ -55,14 +59,18 @@ export const useEpochList = ({
 
   const filteredData = data.filter(item => item?.start_time);
 
-  const endTime = new Date(filteredData[0]?.start_time).getTime() + 432000000;
+  const endTime =
+    new Date(toUtcDate(filteredData[0]?.start_time)).getTime() + 432000000;
 
   const durationInSeconds =
-    (endTime - new Date(filteredData[0]?.start_time).getTime()) / 1000;
-  const [timeLeft, setTimeLeft] = useState((endTime - Date.now()) / 1000);
+    (endTime - new Date(toUtcDate(filteredData[0]?.start_time)).getTime()) /
+    1000;
+  const [timeLeft, setTimeLeft] = useState(
+    (endTime - new Date().getTime()) / 1000,
+  );
 
   useEffect(() => {
-    setTimeLeft((endTime - Date.now()) / 1000);
+    setTimeLeft((endTime - new Date().getTime()) / 1000);
   }, [endTime]);
 
   useEffect(() => {
@@ -194,7 +202,10 @@ export const useEpochList = ({
     {
       key: "block",
       render: item => (
-        <p title={item?.stats?.epoch?.block_count ?? item?.blk_count} className='text-right'>
+        <p
+          title={item?.stats?.epoch?.block_count ?? item?.blk_count}
+          className='text-right'
+        >
           {formatNumber(item?.stats?.epoch?.block_count ?? item?.blk_count)}
         </p>
       ),
@@ -263,10 +274,7 @@ export const useEpochList = ({
         const isPending = epochNo >= epoch_number - 2;
 
         const leaderReward = item.stats?.rewards?.leader ?? 0;
-        const [ada, usd] = lovelaceToAdaWithRates(
-          leaderReward,
-          curr,
-        );
+        const [ada, usd] = lovelaceToAdaWithRates(leaderReward, curr);
 
         if (isPending || leaderReward === null) {
           return (
@@ -314,7 +322,8 @@ export const useEpochList = ({
       key: "usage",
       render: item => {
         const blockSize = item?.stats?.epoch?.block_size ?? 0;
-        const blockCount = item?.stats?.epoch?.block_count ?? item.blk_count ?? 0;
+        const blockCount =
+          item?.stats?.epoch?.block_count ?? item.blk_count ?? 0;
         const maxBlockSize = item.params?.[0]?.max_block_size ?? 0;
         const blockUsage = isNaN(
           (blockSize / (blockCount * maxBlockSize)) * 100,
@@ -379,7 +388,8 @@ export const useEpochList = ({
       },
       jsonFormat: item => {
         const blockSize = item?.stats?.epoch?.block_size ?? 0;
-        const blockCount = item?.stats?.epoch?.block_count ?? item.blk_count ?? 0;
+        const blockCount =
+          item?.stats?.epoch?.block_count ?? item.blk_count ?? 0;
         const maxBlockSize = item.params?.[0]?.max_block_size ?? 0;
         const blockUsage = isNaN(
           (blockSize / (blockCount * maxBlockSize)) * 100,

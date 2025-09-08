@@ -1,4 +1,3 @@
-import type { EpochStatsSummary } from "@/types/epochTypes";
 import type { FC } from "react";
 
 import { OverviewCard } from "../global/cards/OverviewCard";
@@ -7,11 +6,11 @@ import { TimeDateIndicator } from "../global/TimeDateIndicator";
 
 import { useEffect, useState } from "react";
 
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber, toUtcDate } from "@/utils/format/format";
 import { AdaWithTooltip } from "../global/AdaWithTooltip";
 
 interface EpochSummaryProps {
-  stats: EpochStatsSummary;
+  stats: any;
   currentEpoch: number;
 }
 
@@ -19,19 +18,21 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
   stats,
   currentEpoch,
 }) => {
-  const startDate = new Date(stats.epoch?.start_time).getTime();
-  const endDate = new Date(stats.epoch?.end_time).getTime();
+  const startDate = new Date(toUtcDate(stats.epoch?.start_time)).getTime();
+  const endDate = new Date(toUtcDate(stats.epoch?.end_time)).getTime();
   const epochDurationSeconds = (endDate - startDate) / 1000;
   const usedTPS = stats?.epoch?.tx_count / epochDurationSeconds;
   const capTps = stats?.proto?.max;
 
-  const endTime = startDate + 432000000;
+  const endTime = new Date(startDate + 432000000).getTime();
   const durationInSeconds = (endTime - startDate) / 1000;
 
-  const [timeLeft, setTimeLeft] = useState((endTime - Date.now()) / 1000);
+  const [timeLeft, setTimeLeft] = useState(
+    (endTime - new Date().getTime()) / 1000,
+  );
 
   useEffect(() => {
-    setTimeLeft((endTime - Date.now()) / 1000);
+    setTimeLeft((endTime - new Date().getTime()) / 1000);
   }, [endTime]);
 
   useEffect(() => {

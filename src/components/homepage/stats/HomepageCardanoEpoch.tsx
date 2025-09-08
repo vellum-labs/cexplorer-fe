@@ -1,7 +1,7 @@
 import type { MiscConstResponseData } from "@/types/miscTypes";
 import type { FC } from "react";
 
-import { formatDate, formatNumber } from "@/utils/format/format";
+import { formatDate, formatNumber, toUtcDate } from "@/utils/format/format";
 import { formatRemainingTime } from "@/utils/format/formatRemainingTime";
 import { useFetchMiscBasic } from "@/services/misc";
 import { Tooltip } from "@/components/ui/tooltip";
@@ -27,13 +27,13 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
   const blockUsage = isNaN(constDataLoad) ? 0 : constDataLoad * 100;
 
   const startDate = new Date(
-    miscConst?.epoch?.start_time ? miscConst?.epoch?.start_time : 0,
+    miscConst?.epoch?.start_time ? toUtcDate(miscConst?.epoch?.start_time) : 0,
   ).getTime();
-  const endTime = startDate + 432000000;
+  const endTime = new Date(startDate + 432000000).getTime();
 
   const durationInSeconds = (endTime - startDate) / 1000;
   const [timeLeft, setTimeLeft] = useState(
-    Math.round((endTime - Date.now()) / 1000),
+    Math.round((endTime - new Date().getTime()) / 1000),
   );
 
   useEffect(() => {
@@ -46,13 +46,11 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
   }, [timeLeft]);
 
   useEffect(() => {
-    setTimeLeft(Math.round((endTime - Date.now()) / 1000));
+    setTimeLeft(Math.round((endTime - new Date().getTime()) / 1000));
   }, [endTime]);
 
   const elapsedPercentage =
     ((durationInSeconds - timeLeft) / durationInSeconds) * 100;
-
-  console.log("miscConst?.epoch?.start_time", miscConst?.epoch?.start_time);
 
   return (
     <div className='mx-3 min-h-[110px]'>

@@ -3,7 +3,7 @@ import type { FC } from "react";
 
 import { useEffect, useState } from "react";
 
-import { formatDate } from "@/utils/format/format";
+import { formatDate, toUtcDate } from "@/utils/format/format";
 import { formatRemainingTime } from "@/utils/format/formatRemainingTime";
 import PulseDot from "../global/PulseDot";
 
@@ -13,12 +13,12 @@ interface EpochInfoProps {
 }
 
 export const EpochInfo: FC<EpochInfoProps> = ({ number, data }) => {
-  const startDate = new Date(data[0]?.start_time).getTime();
-  const endTime = startDate + 432000000;
+  const startDate = new Date(toUtcDate(data[0]?.start_time)).getTime();
+  const endTime = new Date(startDate + 432000000).getTime();
 
   const durationInSeconds = (endTime - startDate) / 1000;
   const [timeLeft, setTimeLeft] = useState(
-    Math.round((endTime - Date.now()) / 1000),
+    Math.round((endTime - new Date().getTime()) / 1000),
   );
 
   useEffect(() => {
