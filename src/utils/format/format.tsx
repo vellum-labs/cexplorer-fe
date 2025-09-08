@@ -150,7 +150,7 @@ export const formatDate = (
   const offset = format(zoned, "XXX", { timeZone });
 
   return (
-    <Tooltip content={<span>Your local timezone UTC {offset}</span>}>
+    <Tooltip content={<span>Local timezone UTC {offset}</span>}>
       {format(zoned, hideTime ? "MMM dd yyyy" : "MMM dd yyyy, HH:mm zzz", {
         timeZone,
       })}
