@@ -85,18 +85,20 @@ export const useTxList = ({
       : isHex(debouncedTableSearch)
         ? debouncedTableSearch
         : undefined,
-    stake
+    isHex(debouncedTableSearch)
       ? undefined
-      : address
-        ? debouncedTableSearch
-          ? undefined
-          : address
-        : undefined,
-    stake ? stake : undefined,
-    asset ? asset : undefined,
-    script ? script : undefined,
+      : stake
+        ? undefined
+        : address
+          ? debouncedTableSearch
+            ? undefined
+            : address
+          : undefined,
+    isHex(debouncedTableSearch) ? undefined : stake ? stake : undefined,
+    isHex(debouncedTableSearch) ? undefined : asset ? asset : undefined,
+    isHex(debouncedTableSearch) ? undefined : script ? script : undefined,
     isDonationPage ? 1 : undefined,
-    policyId ? policyId : undefined,
+    isHex(debouncedTableSearch) ? undefined : policyId ? policyId : undefined,
   );
 
   const totalTxs = txListQuery.data?.pages[0].data.count;
