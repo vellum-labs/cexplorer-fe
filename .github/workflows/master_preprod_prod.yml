@@ -36,16 +36,23 @@ jobs:
           sudo wg-quick up wg0
 
       - uses: actions/checkout@v5
-      - uses: webfactory/ssh-agent@v0.8.0
+      
+      - name: Set up SSH agent
+        uses: webfactory/ssh-agent@v0.8.0
         with:
-          ssh-private-key: |
-            ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add server to known_hosts
+        run: |
+          set -e
+          mkdir -p ~/.ssh
+          ssh-keyscan -H 10.0.0.1 >> ~/.ssh/known_hosts
+        # Alternatively, store known_hosts as a secret and use it
 
       - name: Set Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: 21.x
-          check-latest: true
+          node-version: 21.7.3
           cache: 'yarn'
           cache-dependency-path: 'yarn.lock'
 
