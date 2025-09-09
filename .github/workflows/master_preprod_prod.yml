@@ -46,7 +46,7 @@ jobs:
         run: |
           set -e
           mkdir -p ~/.ssh
-          ssh-keyscan -H 10.0.0.1 >> ~/.ssh/known_hosts
+          ssh-keyscan -H -t ecdsa,ed25519,rsa 10.0.0.1 >> ~/.ssh/known_hosts
         # Alternatively, store known_hosts as a secret and use it
 
       - name: Set Node.js
@@ -64,9 +64,11 @@ jobs:
           set -e
           yarn install
           yarn build
-
       - name: Copy files & deploy
         env:
           SERVER: 10.0.0.1
         run: |
-          rsync -azv -e "ssh -o StrictHostKeyChecking=no" --omit-dir-times --no-perms --no-owner --no-group --delete ./dist/ job@$SERVER:/var/www/cexplorer_preprod/
+          set -e
+          rsync -azv -e "ssh -o UserKnownHostsFile=~/.ssh/known_hosts -o HostKeyAlgorithms=ecdsa-sha2-nistp256,ssh-ed25519,rsa-sha2-512" \
+            --omit-dir-times --no-perms --no-owner --no-group --delete \
+            ./dist/ job@$SERVER:/var/www/cexplorer_preprod/
