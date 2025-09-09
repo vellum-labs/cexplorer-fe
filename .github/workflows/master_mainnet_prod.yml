@@ -53,14 +53,23 @@ jobs:
           node-version: 21.7.3
           cache: 'yarn'
           cache-dependency-path: 'yarn.lock'
-
+      
       - name: Install dependencies and build
         env:
           VITE_APP_VERSION: ${{ github.run_number }}
           VITE_APP_CONFIG: mainnet-prod
         run: |
-          yarn install
-          yarn build
+          echo "🧶 Installing dependencies..."
+          time yarn install --frozen-lockfile
+      
+          echo "🔨 Starting build..."
+          time yarn build
+      
+          echo "✅ Build complete"
+
+
+
+          
       - name: Copy files & deploy
         env:
           SERVER: 10.0.0.1
