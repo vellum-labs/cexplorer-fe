@@ -53,35 +53,81 @@ export default defineConfig({
         maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
       },
     }),
+    {
+      name: "force-exit",
+      closeBundle() {
+        setTimeout(() => process.exit(0), 1000);
+      },
+    },
   ],
   build: {
     target: "es2020",
     rollupOptions: {
-      external: ["node-fetch"],
+      external: [
+        "node",
+        "node-fetch",
+        "fs",
+        "path",
+        "util",
+        "crypto",
+        "process",
+      ],
       output: {
         manualChunks: {
           vendor: [
-            'react', 'react-dom', '@tanstack/react-query', '@tanstack/react-router',
-            'zustand', 'immer', 'query-string', 'date-fns', 'date-fns-tz'
+            "react",
+            "react-dom",
+            "@tanstack/react-query",
+            "@tanstack/react-router",
+            "zustand",
+            "immer",
+            "query-string",
+            "date-fns",
+            "date-fns-tz",
           ],
           ui: [
-            '@radix-ui/react-accordion', '@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu',
-            '@radix-ui/react-checkbox', '@radix-ui/react-label', '@radix-ui/react-navigation-menu',
-            '@radix-ui/react-popover', '@radix-ui/react-radio-group', '@radix-ui/react-select',
-            '@radix-ui/react-slot', '@radix-ui/react-icons', 'lucide-react', 'class-variance-authority',
-            'clsx', 'tailwind-merge', 'cmdk'
+            "@radix-ui/react-accordion",
+            "@radix-ui/react-dialog",
+            "@radix-ui/react-dropdown-menu",
+            "@radix-ui/react-checkbox",
+            "@radix-ui/react-label",
+            "@radix-ui/react-navigation-menu",
+            "@radix-ui/react-popover",
+            "@radix-ui/react-radio-group",
+            "@radix-ui/react-select",
+            "@radix-ui/react-slot",
+            "@radix-ui/react-icons",
+            "lucide-react",
+            "class-variance-authority",
+            "clsx",
+            "tailwind-merge",
+            "cmdk",
           ],
           cardano: [
-            'lucid-cardano', '@emurgo/cip14-js', 'bech32', 'blake2b', 'blakejs',
-            'bs58', 'buffer', '@nufi/dapp-client-cardano', '@nufi/dapp-client-core'
+            "lucid-cardano",
+            "@emurgo/cip14-js",
+            "bech32",
+            "blake2b",
+            "blakejs",
+            "bs58",
+            "buffer",
+            "@nufi/dapp-client-cardano",
+            "@nufi/dapp-client-core",
           ],
-          charts: ['echarts', 'echarts-for-react', 'echarts-stat'],
+          charts: ["echarts", "echarts-for-react", "echarts-stat"],
           utils: [
-            'html-react-parser', 'react-markdown', 'remark-gfm', 'react-syntax-highlighter',
-            'html-to-image', 'qrcode.react', 'react-helmet', 'helmet', 'flatted'
-          ]
-        }
-      }
+            "html-react-parser",
+            "react-markdown",
+            "remark-gfm",
+            "react-syntax-highlighter",
+            "html-to-image",
+            "qrcode.react",
+            "react-helmet",
+            "helmet",
+            "flatted",
+          ],
+        },
+      },
     },
   },
   optimizeDeps: {
