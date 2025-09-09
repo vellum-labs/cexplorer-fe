@@ -1,7 +1,10 @@
 name: "preprod@prod"
+
 on:
   workflow_dispatch:
-
+permissions:
+  contents: read # Minimal permissions for checkout
+  
 jobs:
   CheckUser:
     runs-on: ubuntu-latest
@@ -15,37 +18,43 @@ jobs:
           fi
 
   DeployToServer:
+    needs: CheckUser
     runs-on: ubuntu-latest
     concurrency:
-      group: wireguard
-      cancel-in-progress: false
+      group: ${{ github.workflow }}-${{ github.event_name }}
+      cancel-in-progress: true
     steps:
       - name: Set up WireGuard
         env:
           WG_CONFIG: ${{secrets.WG_CONFIG}}
 
         run: |
+          set -e
+          sudo apt update
           sudo apt install -y wireguard
           echo "$WG_CONFIG" | sudo tee /etc/wireguard/wg0.conf
           sudo wg-quick up wg0
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
       - uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: |
             ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Set Node.js 18.x
-        uses: actions/setup-node@v3
+      - name: Set Node.js
+        uses: actions/setup-node@v5
         with:
           node-version: 21.x
-          cache-dependency-path: package.json
+          check-latest: true
+          cache: 'yarn'
+          cache-dependency-path: 'yarn.lock'
 
       - name: Install dependencies and build
         env:
           VITE_APP_VERSION: ${{ github.run_number }}
           VITE_APP_CONFIG: preprod-prod
         run: |
+          set -e
           yarn install
           yarn build
 
