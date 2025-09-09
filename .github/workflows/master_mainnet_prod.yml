@@ -50,7 +50,7 @@ jobs:
       - name: Set Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: 21.7.3
+          node-version: 22.19.0
           cache: 'yarn'
           cache-dependency-path: 'yarn.lock'
       
@@ -60,7 +60,7 @@ jobs:
           VITE_APP_CONFIG: mainnet-prod
         run: |
           echo "🧶 Installing dependencies..."
-          time yarn install --frozen-lockfile
+          time yarn install
       
           echo "🔨 Starting build..."
           time yarn build
