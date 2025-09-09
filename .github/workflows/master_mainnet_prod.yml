@@ -57,7 +57,7 @@ jobs:
       - name: Install dependencies and build
         env:
           VITE_APP_VERSION: ${{ github.run_number }}
-          VITE_APP_CONFIG: mainet-prod
+          VITE_APP_CONFIG: mainnet-prod
         run: |
           yarn install
           yarn build
