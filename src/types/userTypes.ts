@@ -264,4 +264,14 @@ export interface AdminGroupDetailResponse {
   };
 }
 
+export interface UserLabels {
+  labels: {
+    ident?: string;
+    address?: string;
+    label?: string;
+  }[];
+}
+
+export type GetUserLabelsResponse = ResponseCore<UserLabels>;
+
 export type GroupType = "pool" | "ident" | "asset" | "drep" | "collection";
