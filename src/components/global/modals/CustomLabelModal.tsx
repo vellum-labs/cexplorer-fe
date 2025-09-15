@@ -5,14 +5,20 @@ import { useEffect, useState } from "react";
 import Button from "../Button";
 import TextInput from "../inputs/TextInput";
 import Modal from "../Modal";
+import { useAuthToken } from "@/hooks/useAuthToken";
+import { useFetchUserInfo, updateUserLabels } from "@/services/user";
+import type { AddressLabel } from "@/types/commonTypes";
 
 export const CustomLabelModal = () => {
   const [address, setAddress] = useState("");
   const [name, setName] = useState("");
-  const { labels, setLabels } = useAddressLabelStore();
+  const { labels, setLabels, updateHistoryLabels } = useAddressLabelStore();
   const [isAddressValid, setIsAddressValid] = useState(true);
   const { addressToEdit, setAddressToEdit, isOpen, setIsOpen } =
     useCustomLabelModalState();
+  const token = useAuthToken();
+  const { data: userData } = useFetchUserInfo();
+  const userAddress = userData?.data.address;
   const labelChannel = new BroadcastChannel("label_channel");
 
   const onClose = () => {
@@ -24,7 +30,21 @@ export const CustomLabelModal = () => {
     return labels.find(label => label.ident === address)?.label;
   };
 
-  const handleSave = () => {
+  const syncWithApi = async (updatedLabels: AddressLabel[]) => {
+    if (token && userAddress) {
+      try {
+        const formattedLabels = updatedLabels.map(l => ({
+          ident: l.ident,
+          label: l.label
+        }));
+        await updateUserLabels(token, formattedLabels);
+      } catch (error) {
+        console.error("Failed to sync with API:", error);
+      }
+    }
+  };
+
+  const handleSave = async () => {
     try {
       Address.from(address);
     } catch (e) {
@@ -32,41 +52,41 @@ export const CustomLabelModal = () => {
       return;
     }
 
+    let updatedLabels: AddressLabel[];
+
     if (labels.find(label => label.ident === address)) {
-      setLabels([
+      updatedLabels = [
         ...labels.filter(label => label.ident !== address),
         { ident: address, label: name },
-      ]);
-
-      labelChannel.postMessage({
-        type: "label",
-        labels: [
-          ...labels.filter(label => label.ident !== address),
-          { ident: address, label: name },
-        ],
-      });
-
-      onClose();
-      return;
+      ];
+    } else {
+      updatedLabels = [...labels, { ident: address, label: name }];
     }
 
-    setLabels([...labels, { ident: address, label: name }]);
+    setLabels(updatedLabels);
+    updateHistoryLabels(token ? userAddress || null : null, updatedLabels);
 
     labelChannel.postMessage({
       type: "label",
-      labels: [...labels, { ident: address, label: name }],
+      labels: updatedLabels,
     });
+
+    await syncWithApi(updatedLabels);
     onClose();
   };
 
-  const handleDelete = () => {
-    setLabels(labels.filter(label => label.ident !== address));
+  const handleDelete = async () => {
+    const updatedLabels = labels.filter(label => label.ident !== address);
+
+    setLabels(updatedLabels);
+    updateHistoryLabels(token ? userAddress || null : null, updatedLabels);
 
     labelChannel.postMessage({
       type: "label",
-      labels: labels.filter(label => label.ident !== address),
+      labels: updatedLabels,
     });
 
+    await syncWithApi(updatedLabels);
     onClose();
   };
 
