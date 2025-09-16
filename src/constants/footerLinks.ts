@@ -21,7 +21,7 @@ export const footerLinks: { [T in Header]: FooterLinks } = {
     },
     {
       label: "Documentation",
-      href: "/",
+      href: "https://github.com/vellum-labs/cexplorer-fe",
       target: "_blank",
     },
     {
@@ -52,18 +52,8 @@ export const footerLinks: { [T in Header]: FooterLinks } = {
       target: "_self",
     },
     {
-      label: "Contributors",
-      href: "/contributors",
-      target: "_self",
-    },
-    {
       label: "Developers",
       href: "/developers",
-      target: "_self",
-    },
-    {
-      label: "Devlog",
-      href: "/devlog",
       target: "_self",
     },
     {
@@ -100,13 +90,13 @@ export const footerLinks: { [T in Header]: FooterLinks } = {
     },
     {
       label: "Report a bug",
-      href: "/",
-      target: "_self",
+      href: "https://github.com/vellum-labs/cexplorer-fe/issues",
+      target: "_blank",
     },
     {
       label: "Suggest a feature",
-      href: "/",
-      target: "_self",
+      href: "https://github.com/vellum-labs/cexplorer-fe/issues",
+      target: "_blank",
     },
     {
       label: "Bug bounty",
