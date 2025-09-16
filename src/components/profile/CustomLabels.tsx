@@ -1,4 +1,4 @@
-import { useFetchUserInfo } from "@/services/user";
+import { useFetchUserInfo, useUserLabels, updateUserLabels } from "@/services/user";
 import { useAddressLabelStore } from "@/stores/addressLabelStore";
 import { useCustomLabelModalState } from "@/stores/states/customLabelModalState";
 import { formatString } from "@/utils/format/format";
@@ -25,17 +25,20 @@ import {
   TableRow,
 } from "../ui/table";
 import { Tooltip } from "../ui/tooltip";
+import type { AddressLabel } from "@/types/commonTypes";
 
 export const CustomLabels = () => {
   const token = useAuthToken();
   const { data } = useFetchUserInfo();
   const proNfts = data?.data.membership.nfts || 0;
-  const { labels, setLabels } = useAddressLabelStore();
+  const userAddress = data?.data.address;
+  const { labels, setLabels, updateHistoryLabels, getLabelsForWallet, mergeApiLabels } = useAddressLabelStore();
   const { setIsOpen, setAddressToEdit } = useCustomLabelModalState();
   const [currentPage, setCurrentPage] = useState(1);
   const [showConnectModal, setShowConnectModal] = useState(false);
   const labelsPerPage = 10;
   const totalPages = Math.ceil(labels.length / labelsPerPage);
+  const { data: apiLabelsData } = useUserLabels(token || "");
 
   const handleFirstPage = () => setCurrentPage(1);
   const handleLastPage = () => setCurrentPage(totalPages);
@@ -54,6 +57,46 @@ export const CustomLabels = () => {
     proNfts === 0
       ? "You can only add 10 labels with the free version of Cexplorer"
       : "You can only add 100 labels per NFT with the PRO version of Cexplorer";
+
+  const syncWithApi = async (labelsToSync: AddressLabel[]) => {
+    if (token && userAddress) {
+      try {
+        const formattedLabels = labelsToSync.map(l => ({
+          ident: l.ident,
+          label: l.label
+        }));
+        await updateUserLabels(token, formattedLabels);
+      } catch (error) {
+        console.error("Failed to sync with API:", error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (token && apiLabelsData?.data?.labels) {
+      const apiLabels: AddressLabel[] = apiLabelsData.data.labels.map(l => ({
+        ident: l.ident || l.address || "",
+        label: l.label || ""
+      })).filter(l => l.ident && l.label);
+
+      mergeApiLabels(apiLabels, userAddress || null);
+      const mergedLabels = getLabelsForWallet(userAddress || null);
+      setLabels(mergedLabels);
+    } else if (token && userAddress) {
+      const walletLabels = getLabelsForWallet(userAddress);
+      setLabels(walletLabels);
+    } else if (!token) {
+      const emptyLabels = getLabelsForWallet(null);
+      setLabels(emptyLabels);
+    }
+  }, [token, userAddress, apiLabelsData, mergeApiLabels, getLabelsForWallet, setLabels]);
+
+  useEffect(() => {
+    updateHistoryLabels(token ? userAddress || null : null, labels);
+    if (token) {
+      syncWithApi(labels);
+    }
+  }, [labels, token, userAddress, updateHistoryLabels]);
 
   useEffect(() => {
     const labelChannel = new BroadcastChannel("label_channel");

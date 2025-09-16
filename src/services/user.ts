@@ -13,11 +13,13 @@ import type {
   AdminPageDetailResponse,
   AdminPageListResponse,
   CexplorerNftsResponse,
+  GetUserLabelsResponse,
   GroupType,
   PollListResponse,
   SetCexplorerNftsResponse,
   UserApiResponse,
   UserInfoResponse,
+  UserLabels,
   UserLoginResponse,
   WatchlistResponse,
 } from "@/types/userTypes";
@@ -531,4 +533,43 @@ export const removeFromGroup = async ({
   };
 
   return handleFetch(url, undefined, options);
+};
+
+export const getUserLabels = (token: string) => {
+  const url = "/user/labels";
+
+  const options = {
+    headers: {
+      usertoken: token ?? "",
+    },
+  };
+
+  return handleFetch<GetUserLabelsResponse>(url, undefined, options);
+};
+
+export const useUserLabels = (token: string) =>
+  useQuery({
+    queryKey: ["user-labels", token],
+    queryFn: () => getUserLabels(token),
+    staleTime: 120000,
+    enabled: !!token,
+  });
+
+export const updateUserLabels = (
+  token: string,
+  body?: UserLabels["labels"],
+) => {
+  const apiUrl = "/user/labels";
+
+  const options = {
+    method: "POST",
+    headers: {
+      usertoken: token,
+      accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: body ? JSON.stringify(body) : undefined,
+  };
+
+  return handleFetch(apiUrl, undefined, options);
 };
