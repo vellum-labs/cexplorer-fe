@@ -223,7 +223,7 @@ export const ApiProfile = () => {
                           to='/api'
                           className='mt-1 flex items-center gap-1 font-medium text-primary'
                         >
-                          Upgrage plan <Wand size={17} />
+                          Upgrade plan <Wand size={17} />
                         </Link>
                       )}
                     </div>
