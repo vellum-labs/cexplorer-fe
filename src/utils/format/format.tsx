@@ -1,5 +1,6 @@
 import { Tooltip } from "@/components/ui/tooltip";
-import { format, toZonedTime } from "date-fns-tz";
+import { TZDate } from "@date-fns/tz";
+import { format } from "date-fns";
 
 export const formatString = (
   text: string | null,
@@ -145,15 +146,13 @@ export const formatDate = (
   if (!input) return "";
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const utcDate = toUtcDate(input);
-  const zoned = toZonedTime(utcDate, timeZone);
+  const zoned = new TZDate(utcDate, timeZone);
 
-  const offset = format(zoned, "XXX", { timeZone });
+  const offset = format(zoned, "XXX");
 
   return (
     <Tooltip content={<span>Local timezone UTC {offset}</span>}>
-      {format(zoned, hideTime ? "MMM dd yyyy" : "MMM dd yyyy, HH:mm zzz", {
-        timeZone,
-      })}
+      {format(zoned, hideTime ? "MMM dd yyyy" : "MMM dd yyyy, HH:mm zzz")}
     </Tooltip>
   );
 };
