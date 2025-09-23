@@ -5,8 +5,9 @@ import { ShareButton } from "../ShareButton";
 import LoadingSkeleton from "../skeletons/LoadingSkeleton";
 import { WatchlistStar } from "./WatchlistStar";
 import type { useFetchPoolDetail } from "@/services/pools";
-import { useState } from "react";
-import DelegationModal from "@/components/wallet/DelegationModal";
+import { useWalletStore } from "@/stores/walletStore";
+import { handleDelegation } from "@/utils/wallet/handleDelegation";
+import { useFetchUserInfo } from "@/services/user";
 
 export const WatchlistSection = ({
   ident,
@@ -21,7 +22,16 @@ export const WatchlistSection = ({
   ticker?: string;
   poolDetailQuery?: ReturnType<typeof useFetchPoolDetail>;
 }) => {
-  const [delegationModal, setDelegationModal] = useState<boolean>(false);
+  const { job } = useWalletStore();
+
+  const userQuery = useFetchUserInfo();
+
+  const livePool =
+    userQuery.data?.data?.account && userQuery.data?.data?.account.length > 0
+      ? userQuery.data?.data?.account[0].live_pool?.id
+      : undefined;
+
+  const delegatedToThisPool = livePool === ident;
 
   if (isLoading)
     return (
@@ -67,16 +77,19 @@ export const WatchlistSection = ({
       <Button label='Promote' variant='tertiary' size='md' href='/pro' />
       {poolDetailQuery && (
         <Button
-          label={!ticker ? "Delegate" : `Delegate to [${ticker}]`}
+          label={
+            delegatedToThisPool
+              ? "Delegated 🥳"
+              : job
+                ? !ticker
+                  ? "Delegate"
+                  : `Delegate to [${ticker}]`
+                : "Connect wallet to Delegate"
+          }
+          disabled={!job || delegatedToThisPool}
           variant='primary'
           size='md'
-          onClick={() => setDelegationModal(true)}
-        />
-      )}
-      {poolDetailQuery && delegationModal && (
-        <DelegationModal
-          onClose={() => setDelegationModal(false)}
-          poolQuery={poolDetailQuery}
+          onClick={() => handleDelegation(ident ?? "", job)}
         />
       )}
     </div>

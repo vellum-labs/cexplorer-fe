@@ -26,7 +26,7 @@ const DelegationModal = ({ onClose, poolQuery }: Props) => {
       : undefined;
   const delegationQuery = useCheckUserDelegation(view);
   const delegationData = delegationQuery.data?.data;
-  console.log("🚀 ~ DelegationModal ~ duserQuery:", userQuery.data);
+
   const livePool =
     userQuery.data?.data?.account && userQuery.data?.data?.account.length > 0
       ? userQuery.data?.data?.account[0].live_pool

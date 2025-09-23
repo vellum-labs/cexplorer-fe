@@ -45,7 +45,26 @@ export const useConnectWallet = () => {
     const provider = new JamOnBreadProvider(
       `https://api.jamonbread.io/api/lucid`,
     );
-    const lucid = await Lucid.new(provider, "Preprod");
+
+    const config = (() => {
+      const configRaw = import.meta.env.VITE_APP_CONFIG ?? "preprod-stage";
+
+      switch (configRaw) {
+        case "preprod-stage":
+        case "preprod":
+          return "Preprod";
+        case "preview-stage":
+        case "preview":
+          return "Preview";
+        case "mainnet-stage":
+        case "mainnet":
+          return "Mainnet";
+        default:
+          return "Preprod";
+      }
+    })();
+
+    const lucid = await Lucid.new(provider, config);
     lucid.selectWallet(walletApi as WalletApi);
     const address = await lucid.wallet.address();
     const stakeKey = lucid.utils.stakeCredentialOf(address).hash;
