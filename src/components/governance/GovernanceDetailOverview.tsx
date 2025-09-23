@@ -609,7 +609,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
             ) : (
               !query.isError && (
                 <>
-                  {true || shouldCCVote(query.data?.data?.type ?? "") ? (
+                  {shouldCCVote(query.data?.data?.type ?? "") ? (
                     <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                       <OverviewCard
                         title='Constitutional committee'

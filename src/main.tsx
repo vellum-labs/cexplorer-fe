@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
@@ -8,8 +8,26 @@ import { Toaster } from "sonner";
 import App from "./App.tsx";
 import { routeTree } from "./routeTree.gen.ts";
 import "./styles/index.css";
+import { showSomethingWentWrongToast } from "./utils/error/somethingWentWrongToast.tsx";
 
-export const router = createRouter({ routeTree });
+const ToastOnlyError = ({ error }: any) => {
+  useEffect(() => {
+    const status =
+      error?.status ?? error?.response?.status ?? error?.cause?.status;
+
+    const apiUrl =
+      (error as any)?.config?.url ?? (error as any)?.request?.url ?? null;
+
+    showSomethingWentWrongToast({ error, status, apiUrl });
+  }, [error]);
+
+  return null;
+};
+
+export const router = createRouter({
+  routeTree,
+  defaultErrorComponent: ToastOnlyError,
+});
 
 const queryClient = new QueryClient({
   defaultOptions: {
