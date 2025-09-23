@@ -83,7 +83,6 @@ export default defineConfig({
             "immer",
             "query-string",
             "date-fns",
-            "date-fns-tz",
           ],
           ui: [
             "@radix-ui/react-accordion",
