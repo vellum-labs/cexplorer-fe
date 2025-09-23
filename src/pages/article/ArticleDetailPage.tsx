@@ -8,7 +8,6 @@ import {
   BreadcrumbItem,
   BreadcrumbList,
 } from "@/components/ui/breadcrumb";
-import DelegationModal from "@/components/wallet/DelegationModal";
 import { webUrl } from "@/constants/confVariables";
 import { useFetchArticleDetail, useFetchArticleList } from "@/services/article";
 import type { ArticleListData } from "@/types/articleTypes";
@@ -24,6 +23,7 @@ import metadata from "../../../conf/metadata/en-metadata.json";
 import DiscordLogo from "../../resources/images/icons/discord.svg";
 import TelegramLogo from "../../resources/images/icons/telegram.svg";
 import TwitterLogo from "../../resources/images/icons/twitter.svg";
+import { RandomDelegationModal } from "@/components/wallet/RandomDelegationModal";
 
 export const ArticleDetailPage = () => {
   const route = getRouteApi("/article/$url");
@@ -92,7 +92,9 @@ export const ArticleDetailPage = () => {
       </Helmet>
       <main className='mx-auto flex min-h-minHeight w-full max-w-desktop flex-col items-center'>
         {openDelegationModal && (
-          <DelegationModal onClose={() => setOpenDelegationModal(false)} />
+          <RandomDelegationModal
+            onClose={() => setOpenDelegationModal(false)}
+          />
         )}
         <section className='flex h-auto w-full justify-center bg-gradient-to-b from-bannerGradient to-darker p-5'>
           <div className='flex w-full max-w-desktop flex-col-reverse justify-center gap-3 md:flex-row'>

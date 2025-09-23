@@ -4,7 +4,6 @@ import TextInput from "@/components/global/inputs/TextInput";
 import Modal from "@/components/global/Modal";
 import { Checkbox } from "@/components/ui/checkbox";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
-import DelegationModal from "@/components/wallet/DelegationModal";
 import { colors } from "@/constants/colors";
 import {
   donationAddress,
@@ -33,6 +32,7 @@ import { useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import { toast } from "sonner";
 import metadata from "../../../conf/metadata/en-metadata.json";
+import { RandomDelegationModal } from "@/components/wallet/RandomDelegationModal";
 
 interface InfoCardProps {
   icon: React.ReactNode;
@@ -141,7 +141,7 @@ export const DonatePage = () => {
         <ConnectWalletModal onClose={() => setShowWalletModal(false)} />
       )}
       {openDelegationModal && (
-        <DelegationModal onClose={() => setOpenDelegationModal(false)} />
+        <RandomDelegationModal onClose={() => setOpenDelegationModal(false)} />
       )}
       {showSuccessModal && (
         <Modal

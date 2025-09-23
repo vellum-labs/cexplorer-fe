@@ -4,16 +4,25 @@ import Button from "../Button";
 import { ShareButton } from "../ShareButton";
 import LoadingSkeleton from "../skeletons/LoadingSkeleton";
 import { WatchlistStar } from "./WatchlistStar";
+import type { useFetchPoolDetail } from "@/services/pools";
+import { useState } from "react";
+import DelegationModal from "@/components/wallet/DelegationModal";
 
 export const WatchlistSection = ({
   ident,
   isLoading,
   collection,
+  ticker,
+  poolDetailQuery,
 }: {
   ident: string | undefined;
   isLoading: boolean;
   collection?: string | null;
+  ticker?: string;
+  poolDetailQuery?: ReturnType<typeof useFetchPoolDetail>;
 }) => {
+  const [delegationModal, setDelegationModal] = useState<boolean>(false);
+
   if (isLoading)
     return (
       <section className='ml-auto flex w-full max-w-desktop items-center justify-end gap-2'>
@@ -39,6 +48,7 @@ export const WatchlistSection = ({
         />
       </section>
     );
+
   return (
     <div className='ml-auto flex w-full items-center justify-end gap-2'>
       {collection && (
@@ -55,6 +65,20 @@ export const WatchlistSection = ({
       <ShareButton />
       <WatchlistStar ident={ident} />
       <Button label='Promote' variant='tertiary' size='md' href='/pro' />
+      {poolDetailQuery && (
+        <Button
+          label={!ticker ? "Delegate" : `Delegate to [${ticker}]`}
+          variant='primary'
+          size='md'
+          onClick={() => setDelegationModal(true)}
+        />
+      )}
+      {poolDetailQuery && delegationModal && (
+        <DelegationModal
+          onClose={() => setDelegationModal(false)}
+          poolQuery={poolDetailQuery}
+        />
+      )}
     </div>
   );
 };
