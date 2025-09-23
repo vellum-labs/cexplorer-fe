@@ -7,7 +7,6 @@ import { WatchlistStar } from "./WatchlistStar";
 import type { useFetchPoolDetail } from "@/services/pools";
 import { useWalletStore } from "@/stores/walletStore";
 import { handleDelegation } from "@/utils/wallet/handleDelegation";
-import { useFetchUserInfo } from "@/services/user";
 
 export const WatchlistSection = ({
   ident,
@@ -23,15 +22,6 @@ export const WatchlistSection = ({
   poolDetailQuery?: ReturnType<typeof useFetchPoolDetail>;
 }) => {
   const { job } = useWalletStore();
-
-  const userQuery = useFetchUserInfo();
-
-  const livePool =
-    userQuery.data?.data?.account && userQuery.data?.data?.account.length > 0
-      ? userQuery.data?.data?.account[0].live_pool?.id
-      : undefined;
-
-  const delegatedToThisPool = livePool === ident;
 
   if (isLoading)
     return (
@@ -78,15 +68,13 @@ export const WatchlistSection = ({
       {poolDetailQuery && (
         <Button
           label={
-            delegatedToThisPool
-              ? "Delegated 🥳"
-              : job
-                ? !ticker
-                  ? "Delegate"
-                  : `Delegate to [${ticker}]`
-                : "Connect wallet to Delegate"
+            job
+              ? !ticker
+                ? "Delegate"
+                : `Delegate to [${ticker}]`
+              : "Connect wallet to Delegate"
           }
-          disabled={!job || delegatedToThisPool}
+          disabled={!job}
           variant='primary'
           size='md'
           onClick={() => handleDelegation(ident ?? "", job)}
