@@ -1,6 +1,5 @@
-import { supportedPools } from "@/constants/confVariables";
 import { useCheckUserDelegation } from "@/services/account";
-import { useFetchPoolDetail } from "@/services/pools";
+import type { useFetchPoolDetail } from "@/services/pools";
 import { useFetchUserInfo } from "@/services/user";
 import { useWalletStore } from "@/stores/walletStore";
 import { handleDelegation } from "@/utils/wallet/handleDelegation";
@@ -10,14 +9,14 @@ import SpinningLoader from "../global/SpinningLoader";
 
 interface Props {
   onClose: () => void;
+  poolQuery: ReturnType<typeof useFetchPoolDetail>;
 }
 
-const DelegationModal = ({ onClose }: Props) => {
+const DelegationModal = ({ onClose, poolQuery }: Props) => {
   const { job } = useWalletStore();
-  const randomPool =
-    supportedPools[Math.floor(Math.random() * supportedPools.length)];
 
-  const poolQuery = useFetchPoolDetail(randomPool, undefined);
+  const poolId = poolQuery?.data?.data?.pool_id ?? "";
+
   const poolData = poolQuery.data?.data;
   const poolName = poolData?.pool_name;
   const userQuery = useFetchUserInfo();
@@ -27,7 +26,11 @@ const DelegationModal = ({ onClose }: Props) => {
       : undefined;
   const delegationQuery = useCheckUserDelegation(view);
   const delegationData = delegationQuery.data?.data;
-  const livePool = userQuery.data?.data?.account[0].live_pool;
+
+  const livePool =
+    userQuery.data?.data?.account && userQuery.data?.data?.account.length > 0
+      ? userQuery.data?.data?.account[0].live_pool
+      : undefined;
 
   if (poolQuery.isLoading || delegationQuery.isLoading) {
     return (
@@ -53,7 +56,7 @@ const DelegationModal = ({ onClose }: Props) => {
               [{poolName?.ticker}] {poolName?.name}
             </h2>
           ) : (
-            <h3 className='mt-2 break-all text-center'>{randomPool}</h3>
+            <h3 className='mt-2 break-all text-center'>{poolId}</h3>
           )}
           <p className='text-center text-sm'>{poolName?.description}</p>
 
@@ -62,7 +65,7 @@ const DelegationModal = ({ onClose }: Props) => {
             label='Delegate'
             size='lg'
             variant='primary'
-            onClick={() => handleDelegation(randomPool, job)}
+            onClick={() => handleDelegation(poolId, job)}
           />
         </div> ? (
           livePool === poolData?.pool_id

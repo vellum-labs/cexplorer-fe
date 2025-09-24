@@ -8,8 +8,8 @@ import { Wallet } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Button from "../global/Button";
 import ConnectWalletModal from "./ConnectWalletModal";
-import DelegationModal from "./DelegationModal";
 import WalletDropdown from "./WalletDropdown";
+import { RandomDelegationModal } from "./RandomDelegationModal";
 
 interface Props {
   variant?: "short" | "long";
@@ -119,7 +119,7 @@ const WalletButton = ({ variant = "short" }: Props) => {
   return (
     <>
       {openDelegationModal && (
-        <DelegationModal onClose={() => setOpenDelegationModal(false)} />
+        <RandomDelegationModal onClose={() => setOpenDelegationModal(false)} />
       )}
       {showWalletModal && (
         <ConnectWalletModal onClose={() => setShowWalletModal(false)} />

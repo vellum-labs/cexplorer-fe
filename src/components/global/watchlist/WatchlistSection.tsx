@@ -4,16 +4,25 @@ import Button from "../Button";
 import { ShareButton } from "../ShareButton";
 import LoadingSkeleton from "../skeletons/LoadingSkeleton";
 import { WatchlistStar } from "./WatchlistStar";
+import type { useFetchPoolDetail } from "@/services/pools";
+import { useWalletStore } from "@/stores/walletStore";
+import { handleDelegation } from "@/utils/wallet/handleDelegation";
 
 export const WatchlistSection = ({
   ident,
   isLoading,
   collection,
+  ticker,
+  poolDetailQuery,
 }: {
   ident: string | undefined;
   isLoading: boolean;
   collection?: string | null;
+  ticker?: string;
+  poolDetailQuery?: ReturnType<typeof useFetchPoolDetail>;
 }) => {
+  const { job } = useWalletStore();
+
   if (isLoading)
     return (
       <section className='ml-auto flex w-full max-w-desktop items-center justify-end gap-2'>
@@ -39,6 +48,7 @@ export const WatchlistSection = ({
         />
       </section>
     );
+
   return (
     <div className='ml-auto flex w-full items-center justify-end gap-2'>
       {collection && (
@@ -55,6 +65,21 @@ export const WatchlistSection = ({
       <ShareButton />
       <WatchlistStar ident={ident} />
       <Button label='Promote' variant='tertiary' size='md' href='/pro' />
+      {poolDetailQuery && (
+        <Button
+          label={
+            job
+              ? !ticker
+                ? "Delegate"
+                : `Delegate to [${ticker}]`
+              : "Connect wallet to Delegate"
+          }
+          disabled={!job}
+          variant='primary'
+          size='md'
+          onClick={() => handleDelegation(ident ?? "", job)}
+        />
+      )}
     </div>
   );
 };
