@@ -243,15 +243,20 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
     },
     {
       label: "Action start date",
-      value: <TimeDateIndicator time={query?.data?.data?.tx?.time} />,
-    },
-    {
-      label: "Voting deadline",
-      value: query?.data?.data?.expiration ? (
-        <TimeDateIndicator time={String(startTime) ?? ""} />
+      value: query?.data?.data?.tx?.time ? (
+        <TimeDateIndicator time={query?.data?.data?.tx?.time} />
       ) : (
         "-"
       ),
+    },
+    {
+      label: "Voting deadline",
+      value:
+        query?.data?.data?.expiration && startTime ? (
+          <TimeDateIndicator time={startTime.toISOString()} />
+        ) : (
+          "-"
+        ),
     },
   ];
 
@@ -609,7 +614,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
             ) : (
               !query.isError && (
                 <>
-                  {true || shouldCCVote(query.data?.data?.type ?? "") ? (
+                  {shouldCCVote(query.data?.data?.type ?? "") ? (
                     <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                       <OverviewCard
                         title='Constitutional committee'
