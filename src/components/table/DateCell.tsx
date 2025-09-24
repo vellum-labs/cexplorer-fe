@@ -1,5 +1,5 @@
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
-import { formatTimeAgo, formatTimeIn } from "@/utils/format/format";
+import { formatDate, formatTimeAgo, formatTimeIn } from "@/utils/format/format";
 import { useEffect, useState } from "react";
 
 const DateCell = ({
@@ -25,9 +25,10 @@ const DateCell = ({
 
   const localTime = time
     ? withoutConvert
-      ? time
+      ? (formatDate(time, false, true) as string)
       : convertUtcToLocal(time)
     : "";
+
   const date = new Date(localTime);
 
   return (

@@ -142,11 +142,16 @@ export const toUtcDate = (input: string | Date | number): Date => {
 export const formatDate = (
   input?: string | Date | number,
   hideTime?: boolean,
+  returnString: boolean = false,
 ) => {
   if (!input) return "";
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const utcDate = toUtcDate(input);
   const zoned = new TZDate(utcDate, timeZone);
+
+  if (returnString) {
+    return zoned.toISOString();
+  }
 
   const offset = format(zoned, "XXX");
 
