@@ -4,7 +4,6 @@ import { callDelegationToast } from "../error/callDelegationToast";
 export const handleDelegation = async (
   poolId: string,
   lucid: LucidEvolution | null,
-  isStakeRegistered: boolean = false,
 ) => {
   if (!lucid) return;
 
@@ -29,9 +28,13 @@ export const handleDelegation = async (
   }
 
   try {
+    const delegation = await lucid.wallet().getDelegation();
+
+    const stakeKeyRegistered = !!delegation;
+
     const tx = lucid.newTx();
 
-    if (!isStakeRegistered) {
+    if (!stakeKeyRegistered) {
       tx.register.Stake(rewardAddress);
     }
 
