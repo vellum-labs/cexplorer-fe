@@ -66,12 +66,12 @@ export const useConnectWallet = () => {
 
       switch (config) {
         case "Mainnet":
-          return "https://api.koios.rest/api/v1";
+          return "/api/koios-mainnet";
         case "Preview":
-          return "https://preview.koios.rest/api/v1";
+          return "/api/koios-preview";
         case "Preprod":
         default:
-          return "https://preprod.koios.rest/api/v1";
+          return "/api/koios";
       }
     })();
 

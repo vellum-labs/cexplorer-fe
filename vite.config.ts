@@ -194,4 +194,26 @@ export default defineConfig({
       },
     },
   },
+  preview: {
+    proxy: {
+      "/api/koios": {
+        target: "https://preprod.koios.rest",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/koios/, "/api/v1"),
+        secure: true,
+      },
+      "/api/koios-mainnet": {
+        target: "https://api.koios.rest",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/koios-mainnet/, "/api/v1"),
+        secure: true,
+      },
+      "/api/koios-preview": {
+        target: "https://preview.koios.rest",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/koios-preview/, "/api/v1"),
+        secure: true,
+      },
+    },
+  },
 });
