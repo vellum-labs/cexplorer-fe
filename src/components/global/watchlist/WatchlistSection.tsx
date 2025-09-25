@@ -7,6 +7,8 @@ import { WatchlistStar } from "./WatchlistStar";
 import type { useFetchPoolDetail } from "@/services/pools";
 import { useWalletStore } from "@/stores/walletStore";
 import { handleDelegation } from "@/utils/wallet/handleDelegation";
+import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
+import { useState } from "react";
 
 export const WatchlistSection = ({
   ident,
@@ -21,7 +23,8 @@ export const WatchlistSection = ({
   ticker?: string;
   poolDetailQuery?: ReturnType<typeof useFetchPoolDetail>;
 }) => {
-  const { job } = useWalletStore();
+  const { lucid, address, walletType } = useWalletStore();
+  const [showWalletModal, setShowWalletModal] = useState<boolean>(false);
 
   if (isLoading)
     return (
@@ -67,18 +70,18 @@ export const WatchlistSection = ({
       <Button label='Promote' variant='tertiary' size='md' href='/pro' />
       {poolDetailQuery && (
         <Button
-          label={
-            job
-              ? !ticker
-                ? "Delegate"
-                : `Delegate to [${ticker}]`
-              : "Connect wallet to Delegate"
-          }
-          disabled={!job}
+          label={!ticker ? "Delegate" : `Delegate to [${ticker}]`}
           variant='primary'
           size='md'
-          onClick={() => handleDelegation(ident ?? "", job)}
+          onClick={() =>
+            !address && !walletType
+              ? setShowWalletModal(true)
+              : handleDelegation(ident ?? "", lucid)
+          }
         />
+      )}
+      {showWalletModal && (
+        <ConnectWalletModal onClose={() => setShowWalletModal(false)} />
       )}
     </div>
   );

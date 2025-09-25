@@ -1,39 +1,60 @@
-import type { JobCardano } from "@jamonbread/sdk";
+import type { LucidEvolution } from "@lucid-evolution/lucid";
 import { callDelegationToast } from "../error/callDelegationToast";
+import { sendDelegationInfo } from "@/services/tool";
 
 export const handleDelegation = async (
   poolId: string,
-  job: JobCardano | null,
+  lucid: LucidEvolution | null,
 ) => {
-  if (!job || !job.lucid) return;
+  if (!lucid) return;
 
-  const rewardAddress = await job.lucid.wallet.rewardAddress();
-  if (!rewardAddress) return;
+  if (!poolId) {
+    callDelegationToast({ errorMessage: "Missing poolId." });
+    return;
+  }
+
+  const rewardAddress = await lucid.wallet().rewardAddress();
+  if (!rewardAddress) {
+    callDelegationToast({ errorMessage: "No reward address from wallet." });
+    return;
+  }
+
+  const utxos = await lucid.wallet().getUtxos();
+  if (!utxos.length) {
+    callDelegationToast({
+      errorMessage:
+        "Wallet has no UTxOs. Fund the wallet (deposit + fees required).",
+    });
+    return;
+  }
 
   try {
-    const delegation = await job.lucid.provider.getDelegation(rewardAddress);
+    const delegation = await lucid.wallet().getDelegation();
 
-    let txBuilder = job.lucid.newTx();
+    const stakeKeyRegistered = !delegation || delegation?.poolId === null;
 
-    if (!delegation) {
-      txBuilder = txBuilder.registerStake(rewardAddress);
+    const tx = lucid.newTx();
+
+    if (stakeKeyRegistered) {
+      tx.register.Stake(rewardAddress);
     }
 
-    const txComplete = await txBuilder
-      .delegateTo(rewardAddress, poolId)
-      .complete();
-    const signedTx = await txComplete.sign().complete();
-    const txHash = await signedTx.submit();
+    tx.delegate.ToPool(rewardAddress, poolId);
 
-    callDelegationToast({
-      success: true,
-    });
+    const complete = await tx.complete();
+    const signed = await complete.sign.withWallet();
+    const signedTx = await signed.complete();
+    const hash = await signedTx.submit();
 
-    await job.lucid.awaitTx(txHash);
+    sendDelegationInfo(hash, poolId);
+
+    callDelegationToast({ success: true });
+    await lucid.awaitTx(hash);
+    return hash;
   } catch (e: any) {
     console.error("Delegation error:", e);
     callDelegationToast({
-      errorMessage: String(e).replace("Error:", ""),
+      errorMessage: JSON.stringify(e).replace("Error:", ""),
     });
   }
 };

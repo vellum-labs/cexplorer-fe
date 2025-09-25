@@ -5,9 +5,8 @@ import { useWalletConfigModalState } from "@/stores/states/walletConfigModalStat
 import { useWalletStore } from "@/stores/walletStore";
 import { useWatchlistStore } from "@/stores/watchlistStore";
 import type { WalletState, WalletType } from "@/types/walletTypes";
-import { JamOnBreadProvider, JobCardano } from "@jamonbread/sdk";
-import type { WalletApi } from "lucid-cardano";
-import { Lucid } from "lucid-cardano";
+import type { WalletApi } from "@lucid-evolution/lucid";
+import { Lucid, Koios } from "@lucid-evolution/lucid";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { useAuthToken } from "./useAuthToken";
@@ -18,7 +17,7 @@ const defaultState: WalletState = {
   walletType: undefined,
   walletApi: undefined,
   disabledExt: false,
-  job: null,
+  lucid: null,
 };
 
 export const useConnectWallet = () => {
@@ -36,15 +35,11 @@ export const useConnectWallet = () => {
   }, [watchlistData]);
 
   const _connect = async (walletType: WalletType) => {
-    const apiUrl = "https://api.jamonbread.io/api/".replace(/^\/+|\/+$/g, "");
     const wallet =
       typeof window !== "undefined"
         ? window?.cardano && window.cardano?.[walletType]
         : undefined;
     const walletApi = await wallet?.enable();
-    const provider = new JamOnBreadProvider(
-      `https://api.jamonbread.io/api/lucid`,
-    );
 
     const config = (() => {
       const configRaw = import.meta.env.VITE_APP_CONFIG ?? "preprod-stage";
@@ -64,11 +59,28 @@ export const useConnectWallet = () => {
       }
     })();
 
-    const lucid = await Lucid.new(provider, config);
-    lucid.selectWallet(walletApi as WalletApi);
-    const address = await lucid.wallet.address();
-    const stakeKey = lucid.utils.stakeCredentialOf(address).hash;
-    const job = new JobCardano(lucid, apiUrl);
+    const koiosEndpoint = (() => {
+      if (import.meta.env.DEV) {
+        return "/api/koios";
+      }
+
+      switch (config) {
+        case "Mainnet":
+          return "/api/koios-mainnet";
+        case "Preview":
+          return "/api/koios-preview";
+        case "Preprod":
+        default:
+          return "/api/koios";
+      }
+    })();
+
+    const lucid = await Lucid(new Koios(koiosEndpoint), config);
+    lucid.selectWallet.fromAPI(walletApi as WalletApi);
+
+    const address = await lucid.wallet().address();
+    const rewardAddress = await lucid.wallet().rewardAddress();
+    const stakeKey = rewardAddress ? rewardAddress.slice(-56) : "";
 
     if (address.startsWith("addr_test1") && network !== "preprod") {
       toast("Please use a mainnet wallet to connect to the mainnet Cexplorer", {
@@ -96,7 +108,7 @@ export const useConnectWallet = () => {
       address,
       stakeKey,
       disabledExt: false,
-      job,
+      lucid,
       walletApi,
     });
 
