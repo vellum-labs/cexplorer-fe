@@ -13,10 +13,13 @@ export const handleDelegation = async (
   try {
     const delegation = await job.lucid.provider.getDelegation(rewardAddress);
 
-    let txBuilder = job.lucid.newTx();
+    const txBuilder = job.lucid.newTx();
 
-    if (!delegation || !delegation?.poolId) {
-      txBuilder = txBuilder.registerStake(rewardAddress);
+    const needsRegistration =
+      !delegation || (delegation.poolId === null && delegation.rewards === 0n);
+
+    if (needsRegistration) {
+      txBuilder.registerStake(rewardAddress);
     }
 
     const txComplete = await txBuilder
