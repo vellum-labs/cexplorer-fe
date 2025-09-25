@@ -67,7 +67,7 @@ export const DonatePage = () => {
   const [openDelegationModal, setOpenDelegationModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [hash, setHash] = useState<string | undefined>("");
-  const { walletApi, job } = useWalletStore();
+  const { walletApi, lucid } = useWalletStore();
   const randomPool =
     supportedPools[Math.floor(Math.random() * supportedPools.length)];
 
@@ -91,16 +91,21 @@ export const DonatePage = () => {
         : Number(customAmount) * 1000000,
     );
 
+    if (!lucid) {
+      return;
+    }
+
     try {
-      const tx = await job?.lucid
+      const tx = await lucid
         .newTx()
-        .payToAddress(donationAddress, {
+        .pay.ToAddress(donationAddress, {
           lovelace: amountToSend,
         })
         .complete();
 
-      const signedTx = await tx?.sign().complete();
-      const txHash = await signedTx?.submit();
+      const signed = await tx.sign.withWallet();
+      const signedTx = await signed.complete();
+      const txHash = await signedTx.submit();
       setHash(txHash);
       setShowSuccessModal(true);
     } catch (error: any) {

@@ -18,7 +18,7 @@
   "dependencies": {
     "@date-fns/tz": "^1.4.1",
     "@emurgo/cip14-js": "^3.0.1",
-    "@jamonbread/sdk": "^1.2.3",
+    "@lucid-evolution/lucid": "^0.4.29",
     "@nufi/dapp-client-cardano": "^0.3.5",
     "@nufi/dapp-client-core": "^0.3.5",
     "@nufi/sso-button-react": "^0.0.3",
@@ -60,7 +60,6 @@
     "immer": "^10.1.1",
     "init": "^0.1.2",
     "install": "^0.13.0",
-    "lucid-cardano": "^0.10.7",
     "lucide-react": "^0.487.0",
     "postcss": "^8.4.38",
     "qrcode.react": "^4.1.0",

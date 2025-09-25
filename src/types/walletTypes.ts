@@ -1,5 +1,4 @@
-import type { JobCardano } from "@jamonbread/sdk";
-import type { WalletApi } from "lucid-cardano";
+import type { WalletApi, LucidEvolution } from "@lucid-evolution/lucid";
 import type { ResponseCore } from "./commonTypes";
 
 export interface WalletState {
@@ -8,7 +7,7 @@ export interface WalletState {
   walletType: WalletType | undefined;
   walletApi: WalletApi | undefined;
   disabledExt?: boolean;
-  job: JobCardano | null;
+  lucid: LucidEvolution | null;
 }
 
 export type WalletInfo = {

@@ -16,7 +16,7 @@ const defaultState: WalletState = {
   walletType: undefined,
   walletApi: undefined,
   disabledExt: false,
-  job: null,
+  lucid: null,
 };
 
 export const useWalletStore = create<

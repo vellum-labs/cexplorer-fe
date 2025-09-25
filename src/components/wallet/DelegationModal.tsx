@@ -13,7 +13,7 @@ interface Props {
 }
 
 const DelegationModal = ({ onClose, poolQuery }: Props) => {
-  const { job } = useWalletStore();
+  const { lucid } = useWalletStore();
 
   const poolId = poolQuery?.data?.data?.pool_id ?? "";
 
@@ -65,7 +65,7 @@ const DelegationModal = ({ onClose, poolQuery }: Props) => {
             label='Delegate'
             size='lg'
             variant='primary'
-            onClick={() => handleDelegation(poolId, job)}
+            onClick={() => handleDelegation(poolId, lucid)}
           />
         </div> ? (
           livePool === poolData?.pool_id

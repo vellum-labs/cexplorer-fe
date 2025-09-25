@@ -22,7 +22,7 @@ const WalletConfigModal = () => {
   const { uq } = useUqStore();
   const secureRef = useRef<0 | 1>(0);
   const expirationRef = useRef<"d" | "w" | "m" | "y">("y");
-  const { address, job } = useWalletStore();
+  const { address, lucid } = useWalletStore();
   const { tokens, setTokens } = useAuthTokensStore();
   const { disconnect } = useConnectWallet();
 
@@ -63,12 +63,17 @@ const WalletConfigModal = () => {
   };
 
   const handleConfirmation = async () => {
-    const params = await job?.sign(`cexplorer_${dateNumber}_${address}`);
+    if (!lucid || !address) return;
+
+    const payload = `cexplorer_${dateNumber}_${address}`;
+
+    const message = await lucid.wallet().signMessage(address, payload);
+
     const loginData = await loginUser({
       address,
       uq,
-      signature: params?.signature || "",
-      key: params?.key || "",
+      signature: message.signature,
+      key: message.key,
       version: 1,
       secure: secureRef.current,
       expiration: translateExpiration(expirationRef.current),
@@ -105,23 +110,23 @@ const WalletConfigModal = () => {
           watchlist, custom names, and personal data secure.
         </p>
         <p className='text-muted-foreground text-sm'>
-          If you cancel or remove the authorization token, we cannot connect your wallet.
+          If you cancel or remove the authorization token, we cannot connect
+          your wallet.
         </p>
       </div>
 
       <div className='flex items-center gap-2'>
-        <span className='text-sm'>
-          Security level:
-        </span>
+        <span className='text-sm'>Security level:</span>
         <Tooltip
           forceDirection='left'
           content={
             <p className='w-[150px]'>
-              Strong security restricts token usage to your current IP address only.
+              Strong security restricts token usage to your current IP address
+              only.
             </p>
           }
         >
-          <QuestionMarkCircledIcon className='h-3 w-3 text-muted-foreground' />
+          <QuestionMarkCircledIcon className='text-muted-foreground h-3 w-3' />
         </Tooltip>
       </div>
       <RadioGroup
@@ -141,9 +146,7 @@ const WalletConfigModal = () => {
         </div>
       </RadioGroup>
 
-      <div className='mt-5 text-sm'>
-        Token duration:
-      </div>
+      <div className='mt-5 text-sm'>Token duration:</div>
       <RadioGroup
         onValueChange={value => {
           expirationRef.current = value as "d" | "w" | "m" | "y";

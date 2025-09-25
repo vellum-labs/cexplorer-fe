@@ -1,26 +1,25 @@
-import type { JobCardano } from "@jamonbread/sdk";
+import type { LucidEvolution } from "@lucid-evolution/lucid";
 import { callDelegationToast } from "../error/callDelegationToast";
 
 export const handleDelegation = async (
   poolId: string,
-  job: JobCardano | null,
+  lucid: LucidEvolution | null,
   isStakeRegistered: boolean = false,
 ) => {
-  if (!job?.lucid) return;
-  const lucid = job.lucid;
+  if (!lucid) return;
 
   if (!poolId) {
     callDelegationToast({ errorMessage: "Missing poolId." });
     return;
   }
 
-  const rewardAddress = await lucid.wallet.rewardAddress();
+  const rewardAddress = await lucid.wallet().rewardAddress();
   if (!rewardAddress) {
     callDelegationToast({ errorMessage: "No reward address from wallet." });
     return;
   }
 
-  const utxos = await lucid.wallet.getUtxos();
+  const utxos = await lucid.wallet().getUtxos();
   if (!utxos.length) {
     callDelegationToast({
       errorMessage:
@@ -33,14 +32,15 @@ export const handleDelegation = async (
     const tx = lucid.newTx();
 
     if (!isStakeRegistered) {
-      tx.registerStake(rewardAddress);
+      tx.register.Stake(rewardAddress);
     }
 
-    tx.delegateTo(rewardAddress, poolId);
+    tx.delegate.ToPool(rewardAddress, poolId);
 
     const complete = await tx.complete();
-    const signed = await complete.sign().complete();
-    const hash = await signed.submit();
+    const signed = await complete.sign.withWallet();
+    const signedTx = await signed.complete();
+    const hash = await signedTx.submit();
 
     callDelegationToast({ success: true });
     await lucid.awaitTx(hash);

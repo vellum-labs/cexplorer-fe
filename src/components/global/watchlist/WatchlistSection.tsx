@@ -23,7 +23,7 @@ export const WatchlistSection = ({
   ticker?: string;
   poolDetailQuery?: ReturnType<typeof useFetchPoolDetail>;
 }) => {
-  const { job, address, walletType } = useWalletStore();
+  const { lucid, address, walletType } = useWalletStore();
   const [showWalletModal, setShowWalletModal] = useState<boolean>(false);
 
   if (isLoading)
@@ -76,7 +76,7 @@ export const WatchlistSection = ({
           onClick={() =>
             !address && !walletType
               ? setShowWalletModal(true)
-              : handleDelegation(ident ?? "", job)
+              : handleDelegation(ident ?? "", lucid)
           }
         />
       )}
