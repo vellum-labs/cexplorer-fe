@@ -1,4 +1,4 @@
-import { Constr } from "lucid-cardano";
+import { Constr } from "@lucid-evolution/lucid";
 
 export const convertConstrToObject = constr => {
   return {

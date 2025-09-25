@@ -103,7 +103,7 @@ export default defineConfig({
             "cmdk",
           ],
           cardano: [
-            "lucid-cardano",
+            "@lucid-evolution/lucid",
             "@emurgo/cip14-js",
             "bech32",
             "blake2b",
@@ -133,7 +133,7 @@ export default defineConfig({
     esbuildOptions: {
       target: "es2020",
     },
-    exclude: ["lucid-cardano"],
+    exclude: ["@lucid-evolution/lucid"],
   },
   resolve: {
     alias: {

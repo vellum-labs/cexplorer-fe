@@ -14,7 +14,7 @@ import { formatString } from "@/utils/format/format";
 import { convertConstrToObject } from "@/utils/convertConstrToObject";
 import { blake2bHex } from "blakejs";
 import { Buffer } from "buffer";
-import { Data } from "lucid-cardano";
+import { Data } from "@lucid-evolution/lucid";
 
 import { PageBase } from "@/components/global/pages/PageBase";
 

@@ -3,7 +3,6 @@ import { useConnectWallet } from "@/hooks/useConnectWallet";
 import { useFetchUserInfo } from "@/services/user";
 import { useWalletStore } from "@/stores/walletStore";
 import { formatString } from "@/utils/format/format";
-import { getWalletBalance } from "@/utils/wallet/getWalletBalance";
 import { Wallet } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Button from "../global/Button";
@@ -31,7 +30,7 @@ const WalletButton = ({ variant = "short" }: Props) => {
       setShowDropdown(false);
     }, 250);
   };
-  const { address, walletType, walletApi, setWalletState } = useWalletStore();
+  const { address, walletType, lucid, setWalletState } = useWalletStore();
   const { disconnect } = useConnectWallet();
   const [balance, setBalance] = useState(0);
   const userQuery = useFetchUserInfo();
@@ -105,16 +104,25 @@ const WalletButton = ({ variant = "short" }: Props) => {
 
   useEffect(() => {
     const getBalance = async () => {
-      const balance = await getWalletBalance(walletApi!);
-      if (balance !== undefined) {
-        setBalance(Number(balance.coin().to_str()));
+      if (!lucid || !address) return;
+
+      try {
+        const utxos = await lucid.wallet().getUtxos();
+        const totalLovelace = utxos.reduce(
+          (sum, utxo) => sum + utxo.assets.lovelace,
+          0n,
+        );
+        setBalance(Number(totalLovelace));
+      } catch (error) {
+        console.error("Error fetching balance:", error);
+        setBalance(0);
       }
     };
 
-    if (address !== undefined && walletApi !== undefined) {
+    if (address && lucid) {
       getBalance();
     }
-  }, [address, walletApi]);
+  }, [address, lucid]);
 
   return (
     <>
