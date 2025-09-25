@@ -37,7 +37,7 @@ export const handleDelegation = async (
   } catch (e: any) {
     console.error("Delegation error:", e);
     callDelegationToast({
-      errorMessage: String(e).replace("Error:", ""),
+      errorMessage: JSON.stringify(e).replace("Error:", ""),
     });
   }
 };
