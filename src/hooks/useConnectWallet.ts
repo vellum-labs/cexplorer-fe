@@ -60,6 +60,10 @@ export const useConnectWallet = () => {
     })();
 
     const koiosEndpoint = (() => {
+      if (import.meta.env.DEV) {
+        return "/api/koios";
+      }
+
       switch (config) {
         case "Mainnet":
           return "https://api.koios.rest/api/v1";

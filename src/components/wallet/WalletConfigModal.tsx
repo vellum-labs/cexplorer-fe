@@ -66,8 +66,9 @@ const WalletConfigModal = () => {
     if (!lucid || !address) return;
 
     const payload = `cexplorer_${dateNumber}_${address}`;
+    const hexPayload = Buffer.from(payload, 'utf8').toString('hex');
 
-    const message = await lucid.wallet().signMessage(address, payload);
+    const message = await lucid.wallet().signMessage(address, hexPayload);
 
     const loginData = await loginUser({
       address,

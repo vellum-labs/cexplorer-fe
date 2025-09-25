@@ -6,6 +6,7 @@ import { defineConfig } from "vite";
 import topLevelAwait from "vite-plugin-top-level-await";
 import wasm from "vite-plugin-wasm";
 import { VitePWA } from "vite-plugin-pwa";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -20,6 +21,26 @@ export default defineConfig({
     react(),
     topLevelAwait(),
     wasm(),
+    nodePolyfills({
+      globals: {
+        Buffer: true,
+        global: true,
+        process: true,
+      },
+      exclude: [
+        "http",
+        "https",
+        "net",
+        "os",
+        "path",
+        "stream",
+        "util",
+        "assert",
+        "crypto",
+        "fs",
+      ],
+      protocolImports: true,
+    }),
     VitePWA({
       strategies: "injectManifest",
       srcDir: "src",
@@ -62,7 +83,12 @@ export default defineConfig({
   ],
   build: {
     target: "es2020",
+    sourcemap: false,
     rollupOptions: {
+      onwarn(warning, warn) {
+        if (warning.code === "SOURCEMAP_ERROR") return;
+        warn(warning);
+      },
       external: [
         "node",
         "node-fetch",
@@ -133,14 +159,39 @@ export default defineConfig({
     esbuildOptions: {
       target: "es2020",
     },
-    exclude: ["@lucid-evolution/lucid"],
+    include: [
+      "lodash",
+      "serialize-error",
+      "ts-custom-error",
+      "libsodium-wrappers-sumo",
+      "pbkdf2",
+      "blake2b",
+      "fraction.js",
+      "ip-address",
+      "@harmoniclabs/uplc",
+      "@harmoniclabs/cbor",
+      "@harmoniclabs/bytestring",
+      "@harmoniclabs/pair",
+      "@harmoniclabs/plutus-data",
+      "bip39"
+    ],
+    exclude: ["@lucid-evolution/lucid", "@cardano-sdk/*"],
   },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
+      lodash: "lodash",
     },
   },
   server: {
     port: 3001,
+    proxy: {
+      "/api/koios": {
+        target: "https://preprod.koios.rest",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/koios/, "/api/v1"),
+        secure: true,
+      },
+    },
   },
 });
