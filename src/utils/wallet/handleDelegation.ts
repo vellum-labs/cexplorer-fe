@@ -1,5 +1,6 @@
 import type { LucidEvolution } from "@lucid-evolution/lucid";
 import { callDelegationToast } from "../error/callDelegationToast";
+import { sendDelegationInfo } from "@/services/tool";
 
 export const handleDelegation = async (
   poolId: string,
@@ -30,11 +31,11 @@ export const handleDelegation = async (
   try {
     const delegation = await lucid.wallet().getDelegation();
 
-    const stakeKeyRegistered = !!delegation;
+    const stakeKeyRegistered = !delegation || delegation?.poolId === null;
 
     const tx = lucid.newTx();
 
-    if (!stakeKeyRegistered) {
+    if (stakeKeyRegistered) {
       tx.register.Stake(rewardAddress);
     }
 
@@ -44,6 +45,8 @@ export const handleDelegation = async (
     const signed = await complete.sign.withWallet();
     const signedTx = await signed.complete();
     const hash = await signedTx.submit();
+
+    sendDelegationInfo(hash, poolId);
 
     callDelegationToast({ success: true });
     await lucid.awaitTx(hash);
