@@ -45,6 +45,7 @@ export const handleFetch = async <T>(
   url: string,
   prevOffset?: number,
   options?: FetchOptions,
+  hideToast: boolean = false,
 ): Promise<T & { prevOffset: number | undefined }> => {
   const fullUrl = getUrl(url, options?.params);
   const timeout = options?.timeout ?? 20000;
@@ -73,7 +74,7 @@ export const handleFetch = async <T>(
         responseHeaders[key] = value;
       });
 
-      if (response.status !== 200) {
+      if (response.status !== 200 && !hideToast) {
         callNetworkErrorToast({
           status: response.status,
           apiUrl: response.url,

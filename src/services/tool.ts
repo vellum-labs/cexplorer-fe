@@ -10,5 +10,5 @@ export const sendDelegationInfo = (hash: string, poolId: string) => {
     },
   };
 
-  return handleFetch(url, undefined, options);
+  return handleFetch(url, undefined, options, true);
 };
