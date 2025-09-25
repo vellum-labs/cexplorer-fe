@@ -32,11 +32,11 @@ export const useWalletStore = create<
     {
       name: "wallet-store",
       serialize: data =>
-        stringify(data, (key, value) =>
+        stringify(data, (_, value) =>
           typeof value === "bigint" ? value.toString() : value,
         ),
       deserialize: data =>
-        parse(data, (key, value) =>
+        parse(data, (_, value) =>
           typeof value === "string" && /^\d+n$/.test(value)
             ? BigInt(value.slice(0, -1))
             : value,

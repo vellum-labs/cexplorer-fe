@@ -15,13 +15,14 @@ export const handleDelegation = async (
 
     let txBuilder = job.lucid.newTx();
 
-    if (!delegation) {
+    if (!delegation || !delegation?.poolId) {
       txBuilder = txBuilder.registerStake(rewardAddress);
     }
 
     const txComplete = await txBuilder
       .delegateTo(rewardAddress, poolId)
       .complete();
+
     const signedTx = await txComplete.sign().complete();
     const txHash = await signedTx.submit();
 

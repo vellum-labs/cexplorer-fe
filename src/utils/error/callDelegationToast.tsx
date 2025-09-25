@@ -39,12 +39,26 @@ export const callDelegationToast = ({
         </p>
       )}
 
-      <p className='mt-2'>Page: {window.location.href}</p>
+      {!success && <p className='mt-2'>Page: {window.location.href}</p>}
 
-      {!success && (
+      {!success ? (
         <p className='mt-2'>
           Please check your wallet connection and try again. If the problem
           persists, you can report this in our{" "}
+          <a
+            href='https://discord.gg/YuSFx7GS7y'
+            target='_blank'
+            className='text-primary'
+          >
+            Discord group
+          </a>
+          .
+        </p>
+      ) : (
+        <p className='mt-2'>
+          Please wait a few minutes for the changes to appear in your account.
+          If they don’t show up, please check your wallet connection and try
+          again. If the problem persists, you can report this in our{" "}
           <a
             href='https://discord.gg/YuSFx7GS7y'
             target='_blank'
