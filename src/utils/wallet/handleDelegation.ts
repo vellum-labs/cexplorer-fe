@@ -4,36 +4,47 @@ import { callDelegationToast } from "../error/callDelegationToast";
 export const handleDelegation = async (
   poolId: string,
   job: JobCardano | null,
+  isStakeRegistered: boolean = false,
 ) => {
-  if (!job || !job.lucid) return;
+  if (!job?.lucid) return;
+  const lucid = job.lucid;
 
-  const rewardAddress = await job.lucid.wallet.rewardAddress();
-  if (!rewardAddress) return;
+  if (!poolId) {
+    callDelegationToast({ errorMessage: "Missing poolId." });
+    return;
+  }
+
+  const rewardAddress = await lucid.wallet.rewardAddress();
+  if (!rewardAddress) {
+    callDelegationToast({ errorMessage: "No reward address from wallet." });
+    return;
+  }
+
+  const utxos = await lucid.wallet.getUtxos();
+  if (!utxos.length) {
+    callDelegationToast({
+      errorMessage:
+        "Wallet has no UTxOs. Fund the wallet (deposit + fees required).",
+    });
+    return;
+  }
 
   try {
-    const delegation = await job.lucid.provider.getDelegation(rewardAddress);
+    const tx = lucid.newTx();
 
-    const txBuilder = job.lucid.newTx();
-
-    const needsRegistration =
-      !delegation || (delegation.poolId === null && delegation.rewards === 0n);
-
-    if (needsRegistration) {
-      txBuilder.registerStake(rewardAddress);
+    if (!isStakeRegistered) {
+      tx.registerStake(rewardAddress);
     }
 
-    const txComplete = await txBuilder
-      .delegateTo(rewardAddress, poolId)
-      .complete();
+    tx.delegateTo(rewardAddress, poolId);
 
-    const signedTx = await txComplete.sign().complete();
-    const txHash = await signedTx.submit();
+    const complete = await tx.complete();
+    const signed = await complete.sign().complete();
+    const hash = await signed.submit();
 
-    callDelegationToast({
-      success: true,
-    });
-
-    await job.lucid.awaitTx(txHash);
+    callDelegationToast({ success: true });
+    await lucid.awaitTx(hash);
+    return hash;
   } catch (e: any) {
     console.error("Delegation error:", e);
     callDelegationToast({
