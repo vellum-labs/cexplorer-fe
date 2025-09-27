@@ -62,6 +62,14 @@ export default defineConfig({
         maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
       },
     }),
+    {
+      name: "force-exit",
+      writeBundle() {
+        setTimeout(() => {
+          process.exit(0);
+        }, 2000);
+      },
+    },
   ],
   build: {
     target: "ESNext",
