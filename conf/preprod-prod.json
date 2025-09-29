@@ -127,6 +127,7 @@
     "pool107k26e3wrqxwghju2py40ngngx2qcu48ppeg7lk0cm35jl2aenx",
     "pool13la5erny3srx9u4fz9tujtl2490350f89r4w4qjhk0vdjmuv78v"
   ],
+    "supportedDrep":"drep1yfdlaustgvf3ch9gwzzxk4s77neettw3yqv7n3ay0a6k63qw9dmhd",
   "featured": [
     {
       "modules": ["pool", "asset", "policy", "drep", "collection"]
