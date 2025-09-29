@@ -60,10 +60,6 @@ export const useConnectWallet = () => {
     })();
 
     const blockfrostEndpoint = (() => {
-      if (import.meta.env.DEV) {
-        return "https://cardano-preprod.blockfrost.io/api/v0";
-      }
-
       switch (config) {
         case "Mainnet":
           return "https://cardano-mainnet.blockfrost.io/api/v0";
