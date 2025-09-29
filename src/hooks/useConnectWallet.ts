@@ -6,7 +6,7 @@ import { useWalletStore } from "@/stores/walletStore";
 import { useWatchlistStore } from "@/stores/watchlistStore";
 import type { WalletState, WalletType } from "@/types/walletTypes";
 import type { WalletApi } from "@lucid-evolution/lucid";
-import { Lucid, Koios } from "@lucid-evolution/lucid";
+import { Lucid, Blockfrost } from "@lucid-evolution/lucid";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { useAuthToken } from "./useAuthToken";
@@ -59,23 +59,24 @@ export const useConnectWallet = () => {
       }
     })();
 
-    const koiosEndpoint = (() => {
-      if (import.meta.env.DEV) {
-        return "/api/koios";
-      }
-
+    const blockfrostEndpoint = (() => {
       switch (config) {
         case "Mainnet":
-          return "/api/koios-mainnet";
+          return "https://cardano-mainnet.blockfrost.io/api/v0";
         case "Preview":
-          return "/api/koios-preview";
+          return "https://cardano-preview.blockfrost.io/api/v0";
         case "Preprod":
         default:
-          return "/api/koios";
+          return "https://cardano-preprod.blockfrost.io/api/v0";
       }
     })();
 
-    const lucid = await Lucid(new Koios(koiosEndpoint), config);
+    const apiKey = import.meta.env.VITE_APP_BLOCKFROST_KEY;
+
+    const lucid = await Lucid(
+      new Blockfrost(blockfrostEndpoint, apiKey),
+      config,
+    );
     lucid.selectWallet.fromAPI(walletApi as WalletApi);
 
     const address = await lucid.wallet().address();
