@@ -46,13 +46,13 @@ export const useConnectWallet = () => {
 
       switch (configRaw) {
         case "preprod-stage":
-        case "preprod":
+        case "preprod-prod":
           return "Preprod";
         case "preview-stage":
-        case "preview":
+        case "preview-prod":
           return "Preview";
         case "mainnet-stage":
-        case "mainnet":
+        case "mainnet-prod":
           return "Mainnet";
         default:
           return "Preprod";
