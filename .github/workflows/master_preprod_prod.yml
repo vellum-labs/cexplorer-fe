@@ -60,6 +60,7 @@ jobs:
         env:
           VITE_APP_VERSION: ${{ github.run_number }}
           VITE_APP_CONFIG: preprod-prod
+          VITE_APP_BLOCKFROST_KEY: ${{ secrets.BLOCKFROST_API_PREPROD }}
         run: |
           set -e
           yarn install
