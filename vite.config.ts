@@ -14,6 +14,14 @@ const __dirname = dirname(__filename);
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    nodePolyfills({
+      globals: {
+        Buffer: true,
+        global: true,
+        process: true,
+      },
+      protocolImports: true,
+    }),
     TanStackRouterVite({
       target: "react",
       autoCodeSplitting: false,
@@ -21,26 +29,6 @@ export default defineConfig({
     react(),
     topLevelAwait(),
     wasm(),
-    nodePolyfills({
-      globals: {
-        Buffer: true,
-        global: true,
-        process: true,
-      },
-      exclude: [
-        "http",
-        "https",
-        "net",
-        "os",
-        "path",
-        "stream",
-        "util",
-        "assert",
-        "crypto",
-        "fs",
-      ],
-      protocolImports: true,
-    }),
     VitePWA({
       strategies: "injectManifest",
       srcDir: "src",
@@ -76,28 +64,17 @@ export default defineConfig({
     }),
     {
       name: "force-exit",
-      closeBundle() {
-        setTimeout(() => process.exit(0), 1000);
+      writeBundle() {
+        setTimeout(() => {
+          process.exit(0);
+        }, 2000);
       },
     },
   ],
   build: {
-    target: "es2020",
+    target: "ESNext",
     sourcemap: false,
     rollupOptions: {
-      onwarn(warning, warn) {
-        if (warning.code === "SOURCEMAP_ERROR") return;
-        warn(warning);
-      },
-      external: [
-        "node",
-        "node-fetch",
-        "fs",
-        "path",
-        "util",
-        "crypto",
-        "process",
-      ],
       output: {
         manualChunks: {
           vendor: [
@@ -109,6 +86,7 @@ export default defineConfig({
             "immer",
             "query-string",
             "date-fns",
+            "@date-fns/tz",
           ],
           ui: [
             "@radix-ui/react-accordion",
@@ -129,8 +107,8 @@ export default defineConfig({
             "cmdk",
           ],
           cardano: [
-            "@lucid-evolution/lucid",
             "@emurgo/cip14-js",
+            "@lucid-evolution/lucid",
             "bech32",
             "blake2b",
             "blakejs",
@@ -138,6 +116,7 @@ export default defineConfig({
             "buffer",
             "@nufi/dapp-client-cardano",
             "@nufi/dapp-client-core",
+            "@nufi/sso-button-react",
           ],
           charts: ["echarts", "echarts-for-react", "echarts-stat"],
           utils: [
@@ -156,31 +135,17 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    esbuildOptions: {
-      target: "es2020",
-    },
-    include: [
-      "lodash",
-      "serialize-error",
-      "ts-custom-error",
-      "libsodium-wrappers-sumo",
-      "pbkdf2",
-      "blake2b",
-      "fraction.js",
-      "ip-address",
-      "@harmoniclabs/uplc",
-      "@harmoniclabs/cbor",
-      "@harmoniclabs/bytestring",
-      "@harmoniclabs/pair",
-      "@harmoniclabs/plutus-data",
-      "bip39"
+    include: ["@lucid-evolution/lucid"],
+    exclude: [
+      "@anastasia-labs/cardano-multiplatform-lib-browser",
+      "@anastasia-labs/cardano-multiplatform-lib-nodejs",
     ],
-    exclude: ["@lucid-evolution/lucid", "@cardano-sdk/*"],
   },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
-      lodash: "lodash",
+      "@anastasia-labs/cardano-multiplatform-lib-nodejs":
+        "@anastasia-labs/cardano-multiplatform-lib-browser",
     },
   },
   server: {
@@ -189,7 +154,7 @@ export default defineConfig({
       "/api/koios": {
         target: "https://preprod.koios.rest",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/koios/, "/api/v1"),
+        rewrite: path => path.replace(/^\/api\/koios/, "/api/v1"),
         secure: true,
       },
     },
@@ -199,19 +164,19 @@ export default defineConfig({
       "/api/koios": {
         target: "https://preprod.koios.rest",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/koios/, "/api/v1"),
+        rewrite: path => path.replace(/^\/api\/koios/, "/api/v1"),
         secure: true,
       },
       "/api/koios-mainnet": {
         target: "https://api.koios.rest",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/koios-mainnet/, "/api/v1"),
+        rewrite: path => path.replace(/^\/api\/koios-mainnet/, "/api/v1"),
         secure: true,
       },
       "/api/koios-preview": {
-        target: "https://preview.koios.rest",
+        target: "https://api.koios.rest",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/koios-preview/, "/api/v1"),
+        rewrite: path => path.replace(/^\/api\/koios-preview/, "/api/v1"),
         secure: true,
       },
     },
