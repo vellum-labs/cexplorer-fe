@@ -5,7 +5,7 @@ import TableSearchInput from "@/components/global/inputs/SearchInput";
 import type { FC } from "react";
 
 import useDebounce from "@/hooks/useDebounce";
-import { useFetchAddressInspector } from "@/services/address";
+import { useLucidAddressInspector } from "@/hooks/useLucidAddressInspector";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
 
@@ -23,7 +23,7 @@ export const AddressInspector: FC = () => {
 
   const debouncedAddressSearch = useDebounce(search);
 
-  const { data, isFetching, isLoading } = useFetchAddressInspector(
+  const { data, isFetching, isLoading } = useLucidAddressInspector(
     debouncedAddressSearch ? debouncedAddressSearch : undefined,
   );
 
@@ -137,14 +137,14 @@ export const AddressInspector: FC = () => {
       title: "Staking credential",
       darker: false,
       value: (() => {
-        if (!addr.stake) {
+        if (!data?.stake) {
           return "Not found";
         }
 
         return (
           <div className='flex items-center gap-2'>
-            <span>{addr.stake}</span>
-            <Copy copyText={addr.stake} className='translate-y-[2px]' />
+            <span>{data?.stake}</span>
+            <Copy copyText={data?.stake} className='translate-y-[2px]' />
           </div>
         );
       })(),
