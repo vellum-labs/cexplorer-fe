@@ -66,37 +66,39 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
       >
         {startContent}
         <div className={`flex w-full flex-col`}>
-          <div className={` ${tBodyClassname ? tBodyClassname : ""}`}>
-            <table className={`table w-full ${hFit ? "h-fit" : "h-full"}`}>
-              <tbody className={`table h-full w-full`}>
-                {overviewList &&
-                  overviewList
-                    .filter(item => item !== null && item !== undefined)
-                    .map(
-                      (item, i) =>
-                        (typeof item.visible === "undefined" ||
-                          item.visible) && (
-                          <tr
-                            key={`${item?.label}_${item?.value}_${i}`}
-                            className='table-row w-full'
-                          >
-                            {item?.label && (
-                              <td
-                                className={`table-cell w-1/2 pr-2 text-left text-sm text-grayTextSecondary ${labelClassname ? labelClassname : ""} ${leading ? "leading-[0px]" : "py-2"}`}
-                              >
-                                {item?.label}
-                              </td>
-                            )}
-                            <td
-                              className={`overflow-wrap break-word table-cell text-sm text-grayTextPrimary ${leading ? "leading-[0px]" : "py-2"}`}
+          <div className={`${tBodyClassname ? tBodyClassname : ""}`}>
+            <div
+              className={`grid w-full ${hFit ? "h-fit" : "h-full"}`}
+              style={{
+                gridTemplateColumns: "max-content 1fr",
+                columnGap: "48px",
+              }}
+            >
+              {overviewList &&
+                overviewList
+                  .filter(item => item !== null && item !== undefined)
+                  .map(
+                    (item, i) =>
+                      (typeof item.visible === "undefined" || item.visible) && (
+                        <>
+                          {item?.label && (
+                            <div
+                              key={`${item?.label}_${i}_label`}
+                              className={`text-left text-sm text-grayTextSecondary ${labelClassname ? labelClassname : ""} ${leading ? "leading-[0px]" : "py-1"}`}
                             >
-                              {item?.value}
-                            </td>
-                          </tr>
-                        ),
-                    )}
-              </tbody>
-            </table>
+                              {item?.label}
+                            </div>
+                          )}
+                          <div
+                            key={`${item?.label}_${i}_value`}
+                            className={`overflow-wrap break-word text-sm font-medium text-text ${leading ? "leading-[0px]" : "py-1"}`}
+                          >
+                            {item?.value}
+                          </div>
+                        </>
+                      ),
+                  )}
+            </div>
           </div>
           {showContentDivider && endContent && (
             <div className='mt-2 w-full border-t border-border'></div>

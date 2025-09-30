@@ -61,10 +61,6 @@ const TxDetailOverview = ({ query }: Props) => {
 
   const overviewListItems: OverviewList = [
     {
-      label: <p className='text-base font-bold'>Transaction Overview</p>,
-      value: <></>,
-    },
-    {
       label: "Hash",
       value: (
         <div className='flex items-center gap-1'>
@@ -269,9 +265,9 @@ const TxDetailOverview = ({ query }: Props) => {
       ) : (
         <>
           <OverviewCard
+            title='Transaction Overview'
             overviewList={overviewListItems}
-            className='max-h-[450px] pt-0'
-            labelClassname='w-2/5'
+            className='max-h-[450px] pt-4'
           />
           <section className='flex w-full flex-col gap-5 lg:h-[400px] lg:w-[400px] lg:justify-between'>
             <MintedByCard
