@@ -12,8 +12,6 @@ interface LucidAddressInspector {
 
 interface UseLucidAddressInspectorResult {
   data: LucidAddressInspector | null;
-  isFetching: false;
-  isLoading: false;
 }
 
 export const useLucidAddressInspector = (
@@ -75,7 +73,5 @@ export const useLucidAddressInspector = (
 
   return {
     data,
-    isFetching: false,
-    isLoading: false,
   };
 };

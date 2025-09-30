@@ -23,7 +23,7 @@ export const AddressInspector: FC = () => {
 
   const debouncedAddressSearch = useDebounce(search);
 
-  const { data, isFetching, isLoading } = useLucidAddressInspector(
+  const { data } = useLucidAddressInspector(
     debouncedAddressSearch ? debouncedAddressSearch : undefined,
   );
 
@@ -151,7 +151,7 @@ export const AddressInspector: FC = () => {
     },
   ];
 
-  const isDataLoading = isFetching || isLoading || !data;
+  const isDataLoading = !data;
 
   return (
     <>
