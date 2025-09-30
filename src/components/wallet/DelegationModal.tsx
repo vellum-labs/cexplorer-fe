@@ -69,7 +69,7 @@ const DelegationModal = ({ onClose, poolQuery }: Props) => {
             label='Delegate'
             size='lg'
             variant='primary'
-            onClick={() => handleDelegation(poolId, lucid)}
+            onClick={() => handleDelegation(poolId, lucid, true)}
           />
         </div>
       )}

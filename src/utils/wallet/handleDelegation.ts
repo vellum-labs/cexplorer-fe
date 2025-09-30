@@ -5,6 +5,7 @@ import { sendDelegationInfo } from "@/services/tool";
 export const handleDelegation = async (
   poolId: string,
   lucid: LucidEvolution | null,
+  donation: boolean = false,
 ) => {
   if (!lucid) return;
 
@@ -46,7 +47,7 @@ export const handleDelegation = async (
     const signedTx = await signed.complete();
     const hash = await signedTx.submit();
 
-    sendDelegationInfo(hash, poolId);
+    sendDelegationInfo(hash, donation ? "donation_page" : poolId);
 
     callDelegationToast({ success: true });
     await lucid.awaitTx(hash);
