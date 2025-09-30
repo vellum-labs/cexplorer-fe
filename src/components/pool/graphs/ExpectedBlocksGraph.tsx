@@ -56,7 +56,7 @@ const ExpectedBlocksGraph = memo(function ExpectedBlocksGraph({
           color: textColor,
           formatter: (value: string) => {
             const num = parseFloat(value);
-            return Number.isInteger(num) ? num : num.toFixed(2);
+            return Number.isInteger(num) ? num : Math.ceil(num);
           },
         },
         axisLine: {
