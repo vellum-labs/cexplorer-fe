@@ -139,10 +139,16 @@ export const useBlockList = ({
     },
     {
       key: "minted_by",
-      render: item => (
-        <PoolCell key={String(item.slot_no)} poolInfo={item.pool} />
-      ),
+      render: item => {
+        if (item.epoch_no === null) {
+          return <span>Genesis block</span>;
+        }
+        return <PoolCell key={String(item.slot_no)} poolInfo={item.pool} />;
+      },
       jsonFormat: item => {
+        if (item.epoch_no === null) {
+          return "Genesis block";
+        }
         if (!item.pool?.id) {
           return "-";
         }

@@ -35,6 +35,7 @@ interface Props {
 
 const TxDetailOverview = ({ query }: Props) => {
   const data = query.data?.data;
+
   const { data: miscBasic } = useFetchMiscBasic();
   const [addonComponents, setAddonComponents] = useState<any[]>([]);
   const confirmations = getConfirmations(
@@ -273,7 +274,10 @@ const TxDetailOverview = ({ query }: Props) => {
             labelClassname='w-2/5'
           />
           <section className='flex w-full flex-col gap-5 lg:h-[400px] lg:w-[400px] lg:justify-between'>
-            <MintedByCard poolInfo={data?.pool} />
+            <MintedByCard
+              poolInfo={data?.pool}
+              isGenesisBlock={data?.block?.epoch_no === null}
+            />
             <SizeCard
               size={data?.size}
               maxSize={data?.epoch_param?.max_block_size}

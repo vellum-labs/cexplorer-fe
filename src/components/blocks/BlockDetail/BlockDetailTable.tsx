@@ -17,6 +17,8 @@ import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
 import ExportButton from "@/components/table/ExportButton";
 import { blocksDetailTableOptions } from "@/constants/tables/blocksDetailTableOptions";
 import type { UseQueryResult } from "@tanstack/react-query";
+import { Pagination } from "@/components/global/Pagination";
+import { useState, useMemo } from "react";
 
 interface BlockDetailTableProps {
   txs: BlockDetailResponseDataTxsItem[] | undefined;
@@ -35,6 +37,21 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
     rows,
     setRows,
   } = useBlockDetailTableStore();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 100;
+
+  const paginatedTxs = useMemo(() => {
+    if (!txs) return undefined;
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return txs.slice(startIndex, endIndex);
+  }, [txs, currentPage, itemsPerPage]);
+
+  const totalPages = useMemo(() => {
+    if (!txs) return 0;
+    return Math.ceil(txs.length / itemsPerPage);
+  }, [txs, itemsPerPage]);
 
   const columns = [
     {
@@ -83,9 +100,18 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
     },
     {
       key: "block",
-      render: item => (
-        <p className='text-right'>{formatNumber(item.block.no)}</p>
-      ),
+      render: item => {
+        if (typeof item?.block?.no !== 'number' && !item?.block?.no) {
+          return <p className='text-right'>-</p>;
+        }
+        return <p className='text-right'>{formatNumber(item.block.no ?? 0)}</p>;
+      },
+      jsonFormat: item => {
+        if (typeof item.block.no === "undefined" || item.block.no === null) {
+          return "-";
+        }
+        return item.block.no;
+      },
       title: <p className='w-full text-right'>Block</p>,
       visible: columnsVisibility.block,
       widthPx: 50,
@@ -145,8 +171,8 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
       </div>
       <GlobalTable
         type='default'
-        totalItems={txs?.length}
-        items={txs}
+        totalItems={paginatedTxs?.length}
+        items={paginatedTxs}
         scrollable
         query={blockDetail}
         columns={columns.sort(
@@ -156,6 +182,13 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
         )}
         onOrderChange={setColumsOrder}
       />
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
+        />
+      )}
     </>
   );
 };
