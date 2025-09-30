@@ -1,7 +1,11 @@
 import { handleFetch } from "@/lib/handleFetch";
 
-export const sendDelegationInfo = (hash: string, poolId: string) => {
-  const url = `/tool/tx_sent?id=${hash}&type=delegation&campaign=${poolId}`;
+export const sendDelegationInfo = (
+  hash: string,
+  poolId: string,
+  type: "delegation" | "donate" = "delegation",
+) => {
+  const url = `/tool/tx_sent?id=${hash}&type=${type}&campaign=${poolId}`;
 
   const options = {
     headers: {
