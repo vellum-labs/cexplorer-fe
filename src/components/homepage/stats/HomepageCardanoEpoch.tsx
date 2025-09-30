@@ -8,6 +8,7 @@ import { Tooltip } from "@/components/ui/tooltip";
 import { Info } from "lucide-react";
 
 import { useState, useEffect } from "react";
+import { configJSON } from "@/constants/conf";
 
 interface HomepageCardanoEpochProps {
   miscConst: MiscConstResponseData | undefined;
@@ -29,7 +30,10 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
   const startDate = new Date(
     miscConst?.epoch?.start_time ? toUtcDate(miscConst?.epoch?.start_time) : 0,
   ).getTime();
-  const endTime = new Date(startDate + 432000000).getTime();
+
+  const { epochLength } = configJSON.genesisParams[0].shelley[0];
+
+  const endTime = new Date(startDate + epochLength * 1000).getTime();
 
   const durationInSeconds = (endTime - startDate) / 1000;
   const [timeLeft, setTimeLeft] = useState(

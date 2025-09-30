@@ -19,9 +19,13 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { formatNumber } from "@/utils/format/format";
 import { lovelaceToAda } from "@/utils/lovelaceToAda";
 
+import { configJSON } from "@/constants/conf";
+
 export const NetworkTransactionTab: FC = () => {
   const epochQuery = useFetchEpochAnalytics();
   const rateQuery = useFetchAnalyticsRate();
+
+  const { epochLength } = configJSON.genesisParams[0].shelley[0];
 
   const epochs = (epochQuery.data?.data ?? []).filter(item => item?.stat);
   const { data: basicData } = useFetchMiscBasic(true);
@@ -37,7 +41,7 @@ export const NetworkTransactionTab: FC = () => {
     .reduce((a, b) => a + b, 0);
 
   const prevEpochTPS = epochs[0]?.stat?.count_tx
-    ? (epochs[0].stat?.count_tx / 432000).toFixed(2)
+    ? (epochs[0].stat?.count_tx / epochLength).toFixed(2)
     : "-";
 
   const averageTxFee = epochs[0]?.stat?.avg_tx_fee

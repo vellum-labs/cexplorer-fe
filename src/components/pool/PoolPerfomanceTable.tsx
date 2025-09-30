@@ -22,6 +22,7 @@ import { AdaWithTooltip } from "../global/AdaWithTooltip";
 import { useElapsedEpochNumber } from "@/hooks/useElapsedEpochNumber";
 import { Badge } from "../global/badges/Badge";
 import { Tooltip } from "../ui/tooltip";
+import { configJSON } from "@/constants/conf";
 
 interface PoolPerfomanceTableProps {
   poolId: string;
@@ -99,7 +100,9 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
     miscConst?.epoch.start_time ?? "",
   );
 
-  const endTime = new Date(firstEpochStartTime).getTime() + 432000000;
+  const { epochLength } = configJSON.genesisParams[0].shelley[0];
+
+  const endTime = new Date(firstEpochStartTime).getTime() + epochLength * 1000;
 
   const durationInSeconds =
     (endTime - new Date(firstEpochStartTime).getTime()) / 1000;
