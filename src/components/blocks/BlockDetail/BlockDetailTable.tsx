@@ -19,6 +19,7 @@ import { blocksDetailTableOptions } from "@/constants/tables/blocksDetailTableOp
 import type { UseQueryResult } from "@tanstack/react-query";
 import { Pagination } from "@/components/global/Pagination";
 import { useState, useMemo } from "react";
+import Copy from "@/components/global/Copy";
 
 interface BlockDetailTableProps {
   txs: BlockDetailResponseDataTxsItem[] | undefined;
@@ -75,17 +76,20 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
     {
       key: "hash",
       render: item => (
-        <p className='cursor-pointer text-primary'>
-          <Link
-            to='/tx/$hash'
-            params={{
-              hash: item.hash,
-            }}
-            className='text-primary'
-          >
-            {formatString(item.hash, "long")}
-          </Link>
-        </p>
+        <div className='flex items-center gap-2'>
+          <p className='cursor-pointer text-primary'>
+            <Link
+              to='/tx/$hash'
+              params={{
+                hash: item.hash,
+              }}
+              className='text-primary'
+            >
+              {formatString(item.hash, "long")}
+            </Link>
+          </p>
+          <Copy copyText={item.hash} />
+        </div>
       ),
       jsonFormat: item => {
         if (!item.hash) {
@@ -101,7 +105,7 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
     {
       key: "block",
       render: item => {
-        if (typeof item?.block?.no !== 'number' && !item?.block?.no) {
+        if (typeof item?.block?.no !== "number" && !item?.block?.no) {
           return <p className='text-right'>-</p>;
         }
         return <p className='text-right'>{formatNumber(item.block.no ?? 0)}</p>;
