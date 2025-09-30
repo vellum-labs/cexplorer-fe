@@ -1,7 +1,6 @@
 import type {
   AddressDetailResponse,
   AddressDetailUTXOResponse,
-  AddressInspectorResponse,
   AddressListResponse,
 } from "@/types/addressTypes";
 
@@ -117,21 +116,4 @@ export const useFetchAddressUTXO = (address?: string) =>
 
       return data;
     },
-  });
-
-export const fetchAddressInspector = async ({ view }: AddressDetailParams) => {
-  const url = `/address/extract?view=${view}`;
-
-  return handleFetch<AddressInspectorResponse>(url);
-};
-
-export const useFetchAddressInspector = (address?: string) =>
-  useQuery({
-    queryKey: ["address-inspector", { address }],
-    queryFn: async () => {
-      const { data } = await fetchAddressInspector({ view: address });
-
-      return data;
-    },
-    enabled: !!address,
   });
