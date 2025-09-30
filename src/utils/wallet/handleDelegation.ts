@@ -54,8 +54,49 @@ export const handleDelegation = async (
     return hash;
   } catch (e: any) {
     console.error("Delegation error:", e);
+
+    const errorString = JSON.stringify(e);
+    const errorMessage = e?.message || "";
+    const errorInfo = e?.cause?.failure?.cause?.info || "";
+
+    if (
+      errorString.includes("user declined signing") ||
+      errorString.includes("TxSignError") ||
+      errorString.includes("DataSignError") ||
+      errorInfo.includes("user declined signing") ||
+      errorMessage.includes("user declined") ||
+      errorMessage.includes("cancelled") ||
+      errorMessage.includes("rejected")
+    ) {
+      callDelegationToast({
+        errorMessage: "Transaction cancelled by user",
+      });
+      return;
+    }
+
+    if (
+      errorString.includes("ledger") ||
+      errorString.includes("hardware") ||
+      errorMessage.includes("device not found") ||
+      errorMessage.includes("connection")
+    ) {
+      callDelegationToast({
+        errorMessage:
+          "Hardware wallet connection issue. Please check your device connection.",
+      });
+      return;
+    }
+
+    let friendlyMessage = "Delegation failed. Please try again.";
+
+    if (errorMessage) {
+      friendlyMessage = errorMessage;
+    } else if (errorInfo) {
+      friendlyMessage = errorInfo;
+    }
+
     callDelegationToast({
-      errorMessage: JSON.stringify(e).replace("Error:", ""),
+      errorMessage: friendlyMessage,
     });
   }
 };
