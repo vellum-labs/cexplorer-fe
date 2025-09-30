@@ -17,7 +17,7 @@ interface BlockDetailMintedProps {
   protoMajor?: number;
   protoMinor?: number;
   poolInfo: PoolInfo;
-  hash?: string;
+  isGenesisBlock: boolean;
 }
 
 export const MintedByCard: FC<BlockDetailMintedProps> = ({
@@ -26,7 +26,7 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
   protoMajor,
   protoMinor,
   poolInfo,
-  hash,
+  isGenesisBlock = false,
 }) => {
   return (
     <div className='flex max-h-[110px] min-h-[110px] w-full flex-col gap-1 rounded-xl border border-border bg-cardBg px-4 py-3 shadow'>
@@ -39,7 +39,7 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
       <div className='flex w-full items-center gap-3'>
         {icon && <img src={icon} alt='Cexplorer' width={28} height={28} />}
         {/* <PoolCell fontSize='18px' poolInfo={poolInfo} /> */}
-        {hash === "5f20df933584822601f9e3f8c024eb5eb252fe8cefb24d1317dc3d432e940ebb" ? (
+        {isGenesisBlock ? (
           <p className='block max-h-10 min-h-5 w-full overflow-hidden text-ellipsis whitespace-nowrap break-all text-base font-bold'>
             Genesis block
           </p>
