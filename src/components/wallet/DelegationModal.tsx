@@ -49,7 +49,11 @@ const DelegationModal = ({ onClose, poolQuery }: Props) => {
 
   return (
     <Modal minHeight='400px' minWidth='400px' maxWidth='95%' onClose={onClose}>
-      {!Array.isArray(delegationData) ? (
+      {livePool === poolData?.pool_id ? (
+        <div className='flex h-full w-full items-center justify-center text-center'>
+          You are already delegating to this pool.
+        </div>
+      ) : (
         <div className='flex h-full w-full flex-col items-center justify-around'>
           {poolName?.ticker && poolName.name ? (
             <h2 className='mt-2'>
@@ -65,24 +69,8 @@ const DelegationModal = ({ onClose, poolQuery }: Props) => {
             label='Delegate'
             size='lg'
             variant='primary'
-            onClick={() => handleDelegation(poolId, lucid)}
+            onClick={() => handleDelegation(poolId, lucid, true)}
           />
-        </div> ? (
-          livePool === poolData?.pool_id
-        ) : (
-          <div className='flex h-full w-full items-center justify-center text-center'>
-            You are already delegating to this pool.
-          </div>
-        )
-      ) : livePool ? (
-        <div className='flex h-full w-full items-center justify-center text-center'>
-          You are already delegating to a pool. Please undelegate first to
-          proceed.
-        </div>
-      ) : (
-        <div className='flex h-full w-full items-center justify-center text-center'>
-          We're sorry, but you can't delegate to any pools since your address is
-          not registered.
         </div>
       )}
     </Modal>

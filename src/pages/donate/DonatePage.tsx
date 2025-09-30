@@ -33,6 +33,7 @@ import { Helmet } from "react-helmet";
 import { toast } from "sonner";
 import metadata from "../../../conf/metadata/en-metadata.json";
 import { RandomDelegationModal } from "@/components/wallet/RandomDelegationModal";
+import { sendDelegationInfo } from "@/services/tool";
 
 interface InfoCardProps {
   icon: React.ReactNode;
@@ -80,7 +81,7 @@ export const DonatePage = () => {
   };
 
   const handleDonation = async () => {
-    if (!walletApi) {
+    if (!walletApi || !lucid) {
       setShowWalletModal(true);
       return;
     }
@@ -90,10 +91,6 @@ export const DonatePage = () => {
         ? activeDonation * 1000000
         : Number(customAmount) * 1000000,
     );
-
-    if (!lucid) {
-      return;
-    }
 
     try {
       const tx = await lucid
@@ -106,6 +103,7 @@ export const DonatePage = () => {
       const signed = await tx.sign.withWallet();
       const signedTx = await signed.complete();
       const txHash = await signedTx.submit();
+      sendDelegationInfo(txHash, "donation_page", "donate");
       setHash(txHash);
       setShowSuccessModal(true);
     } catch (error: any) {
