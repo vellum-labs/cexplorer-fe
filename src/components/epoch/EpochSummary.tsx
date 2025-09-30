@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 
 import { formatNumber, toUtcDate } from "@/utils/format/format";
 import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { configJSON } from "@/constants/conf";
 
 interface EpochSummaryProps {
   stats: any;
@@ -24,7 +25,9 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
   const usedTPS = stats?.epoch?.tx_count / epochDurationSeconds;
   const capTps = stats?.proto?.max;
 
-  const endTime = new Date(startDate + 432000000).getTime();
+  const { epochLength } = configJSON.genesisParams[0].shelley[0];
+
+  const endTime = new Date(startDate + epochLength * 1000).getTime();
   const durationInSeconds = (endTime - startDate) / 1000;
 
   const [timeLeft, setTimeLeft] = useState(

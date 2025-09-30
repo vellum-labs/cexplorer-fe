@@ -27,6 +27,7 @@ import { useGetMarketCurrency } from "../useGetMarketCurrency";
 import { Badge } from "@/components/global/badges/Badge";
 import { useGraphColors } from "../useGraphColors";
 import { useSearchTable } from "./useSearchTable";
+import { configJSON } from "@/constants/conf";
 
 interface UseEpochList {
   columns: any[];
@@ -59,8 +60,11 @@ export const useEpochList = ({
 
   const filteredData = data.filter(item => item?.start_time);
 
+  const { epochLength } = configJSON.genesisParams[0].shelley[0];
+
   const endTime =
-    new Date(toUtcDate(filteredData[0]?.start_time)).getTime() + 432000000;
+    new Date(toUtcDate(filteredData[0]?.start_time)).getTime() +
+    epochLength * 1000;
 
   const durationInSeconds =
     (endTime - new Date(toUtcDate(filteredData[0]?.start_time)).getTime()) /

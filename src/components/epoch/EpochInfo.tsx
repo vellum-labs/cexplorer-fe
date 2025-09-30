@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { formatDate, toUtcDate } from "@/utils/format/format";
 import { formatRemainingTime } from "@/utils/format/formatRemainingTime";
 import PulseDot from "../global/PulseDot";
+import { configJSON } from "@/constants/conf";
 
 interface EpochInfoProps {
   number: number;
@@ -14,7 +15,10 @@ interface EpochInfoProps {
 
 export const EpochInfo: FC<EpochInfoProps> = ({ number, data }) => {
   const startDate = new Date(toUtcDate(data[0]?.start_time)).getTime();
-  const endTime = new Date(startDate + 432000000).getTime();
+
+  const { epochLength } = configJSON.genesisParams[0].shelley[0];
+
+  const endTime = new Date(startDate + epochLength * 1000).getTime();
 
   const durationInSeconds = (endTime - startDate) / 1000;
   const [timeLeft, setTimeLeft] = useState(
