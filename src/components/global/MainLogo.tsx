@@ -23,20 +23,28 @@ const MainLogo = ({
   const [isOnline, setIsOnline] = useState<boolean>(true);
 
   useEffect(() => {
-    const updateOnlineStatus = () => {
-      setIsOnline(navigator.onLine);
+    const checkConnection = async () => {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+        await fetch(window.location.origin + "/favicon.ico", {
+          method: "HEAD",
+          cache: "no-cache",
+          signal: controller.signal,
+        });
+
+        clearTimeout(timeoutId);
+        setIsOnline(true);
+      } catch {
+        setIsOnline(false);
+      }
     };
 
-    const controller = new AbortController();
-    const signal = controller.signal;
-
-    window.addEventListener("online", updateOnlineStatus, { signal });
-    window.addEventListener("offline", updateOnlineStatus, { signal });
-
-    updateOnlineStatus();
+    const intervalId = setInterval(checkConnection, 30000);
 
     return () => {
-      controller.abort();
+      clearInterval(intervalId);
     };
   }, []);
 
