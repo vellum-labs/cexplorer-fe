@@ -54,6 +54,8 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
     { label: "Private name", value: <AddCustomLabel address={address} /> },
   ];
 
+  console.log(data);
+
   const stakeKey = [
     {
       label: "Status",
@@ -111,6 +113,16 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
               {data?.vote?.drep?.data?.given_name &&
                 data?.vote?.drep?.data?.given_name}
               <span className='text-sm text-primary'>Always abstain</span>
+            </Link>
+          ) : data?.vote?.vote?.live_drep === "drep_always_no_confidence" ? (
+            <Link
+              to='/drep/$hash'
+              params={{ hash: "drep_always_no_confidence" }}
+              className={"w-fit text-primary"}
+            >
+              {data?.vote?.drep?.data?.given_name &&
+                data?.vote?.drep?.data?.given_name}
+              <span className='text-sm text-primary'>Always no confidence</span>
             </Link>
           ) : (
             <AttributeDropdown

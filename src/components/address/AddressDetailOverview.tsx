@@ -151,6 +151,16 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
                 data[0]?.vote?.drep?.data?.given_name}
               <span className='text-sm text-primary'>Always abstain</span>
             </Link>
+          ) : data[0]?.vote?.vote?.live_drep === "drep_always_no_confidence" ? (
+            <Link
+              to='/drep/$hash'
+              params={{ hash: "drep_always_no_confidence" }}
+              className={"w-fit text-primary"}
+            >
+              {data[0]?.vote?.drep?.data?.given_name &&
+                data[0]?.vote?.drep?.data?.given_name}
+              <span className='text-sm text-primary'>Always no confidence</span>
+            </Link>
           ) : (
             <AttributeDropdown
               items={[
