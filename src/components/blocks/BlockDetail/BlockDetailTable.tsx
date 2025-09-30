@@ -84,7 +84,6 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
     {
       key: "block",
       render: item => {
-        console.log("item:", item);
         return <p className='text-right'>{formatNumber(item.block.no ?? 0)}</p>;
       },
       jsonFormat: item => {
