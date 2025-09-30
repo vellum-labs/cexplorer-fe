@@ -83,9 +83,16 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
     },
     {
       key: "block",
-      render: item => (
-        <p className='text-right'>{formatNumber(item.block.no)}</p>
-      ),
+      render: item => {
+        console.log("item:", item);
+        return <p className='text-right'>{formatNumber(item.block.no ?? 0)}</p>;
+      },
+      jsonFormat: item => {
+        if (typeof item.block.no === "undefined" || item.block.no === null) {
+          return "-";
+        }
+        return item.block.no;
+      },
       title: <p className='w-full text-right'>Block</p>,
       visible: columnsVisibility.block,
       widthPx: 50,
