@@ -7,7 +7,7 @@ import LogoMark from "@/resources/images/cexLogo.svg";
 import DarkIcon from "@/resources/images/navbar_logo_dark.svg";
 import LightIcon from "@/resources/images/navbar_logo_light.svg";
 import { webUrl } from "@/constants/confVariables";
-import { useNotFound } from "@/stores/useNotFound";
+import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 
 export const BrandAssetsPage = () => {
   const query = useFetchArticleDetail("en", "page", "brand-assets");
@@ -15,14 +15,6 @@ export const BrandAssetsPage = () => {
   const name = data?.name;
   const description = data?.description;
   const keywords = data?.keywords;
-
-  const { setNotFound } = useNotFound();
-
-  useEffect(() => {
-    if (!query.data || !query.data.data || query.data.data.length === 0) {
-      setNotFound(true);
-    }
-  }, [query.data, setNotFound]);
 
   useEffect(() => {
     const logomark = document.getElementById("logomark") as HTMLImageElement;
@@ -97,7 +89,35 @@ export const BrandAssetsPage = () => {
         <meta property='og:url' content={webUrl + location.pathname} />
       </Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
-        {parse(data?.data.map(item => item).join("") || "")}
+        {query.isLoading ? (
+          <div className='flex flex-col gap-10'>
+            <div className='flex flex-col items-center gap-4'>
+              <LoadingSkeleton width='150px' height='30px' />
+              <LoadingSkeleton width='406px' height='21px' />
+            </div>
+            <div className='flex flex-col items-center gap-8'>
+              <LoadingSkeleton width='800px' height='511px' rounded='lg' />
+              <div className='flex flex-col items-center gap-10'>
+                <LoadingSkeleton width='150px' height='30px' />
+                <div className='flex items-center gap-10'>
+                  <LoadingSkeleton width='360px' height='200px' rounded='xl' />
+                  <LoadingSkeleton width='360px' height='200px' rounded='xl' />
+                  <LoadingSkeleton width='360px' height='200px' rounded='xl' />
+                </div>
+              </div>
+              <div className='flex flex-col items-center gap-10'>
+                <LoadingSkeleton width='150px' height='30px' />
+                <div className='flex items-center gap-10'>
+                  <LoadingSkeleton width='360px' height='200px' rounded='xl' />
+                  <LoadingSkeleton width='360px' height='200px' rounded='xl' />
+                  <LoadingSkeleton width='360px' height='200px' rounded='xl' />
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          parse(data?.data.map(item => item).join("") || "")
+        )}
       </main>
     </>
   );

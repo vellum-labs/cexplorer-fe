@@ -1,9 +1,8 @@
+import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 import { webUrl } from "@/constants/confVariables";
 import { useFetchArticleDetail } from "@/services/article";
-import { useNotFound } from "@/stores/useNotFound";
 import parse from "html-react-parser";
 import { Helmet } from "react-helmet";
-import { useEffect } from "react";
 
 export const AboutUsPage = () => {
   const query = useFetchArticleDetail("en", "page", "about-us");
@@ -11,14 +10,6 @@ export const AboutUsPage = () => {
   const name = data?.name;
   const description = data?.description;
   const keywords = data?.keywords;
-
-  const { setNotFound } = useNotFound();
-
-  useEffect(() => {
-    if (!data?.data || data.data.length === 0) {
-      setNotFound(true);
-    }
-  }, [data, setNotFound]);
 
   return (
     <>
@@ -35,7 +26,30 @@ export const AboutUsPage = () => {
         <meta property='og:url' content={webUrl + location.pathname} />
       </Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
-        {parse(data?.data?.map(item => item).join("") || "")}
+        {query.isLoading ? (
+          <div className='flex flex-col gap-10'>
+            <div className='flex flex-col items-center gap-4'>
+              <LoadingSkeleton width='150px' height='30px' />
+              <LoadingSkeleton width='800px' height='63px' />
+            </div>
+            <div className='flex flex-col gap-8'>
+              <div className='flex flex-col items-center gap-4'>
+                <LoadingSkeleton width='150px' height='30px' />
+                <LoadingSkeleton width='450px' height='21px' />
+              </div>
+              <div className='grid grid-cols-3 grid-rows-2 gap-10'>
+                <LoadingSkeleton width='360px' height='235px' rounded='lg' />
+                <LoadingSkeleton width='360px' height='235px' rounded='lg' />
+                <LoadingSkeleton width='360px' height='235px' rounded='lg' />
+                <LoadingSkeleton width='360px' height='235px' rounded='lg' />
+                <LoadingSkeleton width='360px' height='235px' rounded='lg' />
+                <LoadingSkeleton width='360px' height='235px' rounded='lg' />
+              </div>
+            </div>
+          </div>
+        ) : (
+          parse(data?.data?.map(item => item).join("") || "")
+        )}
       </main>
     </>
   );

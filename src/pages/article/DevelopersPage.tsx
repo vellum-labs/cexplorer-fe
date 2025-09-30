@@ -4,7 +4,6 @@ import { Helmet } from "react-helmet";
 
 import { useEffect } from "react";
 import { webUrl } from "@/constants/confVariables";
-import { useNotFound } from "@/stores/useNotFound";
 import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 
 export const DevelopersPage = () => {
@@ -13,17 +12,6 @@ export const DevelopersPage = () => {
   const name = data?.name;
   const description = data?.description;
   const keywords = data?.keywords;
-
-  const { setNotFound } = useNotFound();
-
-  useEffect(() => {
-    if (
-      !query.isLoading &&
-      (!query.data || !query.data.data || query.data.data.length === 0)
-    ) {
-      setNotFound(true);
-    }
-  }, [query.data, query.isLoading, setNotFound]);
 
   useEffect(() => {
     const buttons = document.querySelectorAll(".tabs--btn");
