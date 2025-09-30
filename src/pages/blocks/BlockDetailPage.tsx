@@ -343,6 +343,7 @@ const BlockDetailPage: FC = () => {
                   vrfKey={data?.vrf_key ?? ""}
                   protoMajor={data?.proto_major}
                   protoMinor={data?.proto_minor}
+                  hash={data?.hash}
                 />
                 <SizeCard
                   size={data.size}
