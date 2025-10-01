@@ -16,6 +16,7 @@ import { formatString } from "@/utils/format/format";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { getRouteApi } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { VoteListPage } from "../governance/VoteListPage";
 
 const PoolDetailPage = () => {
   const route = getRouteApi("/pool/$id");
@@ -82,6 +83,12 @@ const PoolDetailPage = () => {
       key: "awards",
       label: "Awards",
       content: <AwardsTabItem id={id} />,
+      visible: true,
+    },
+    {
+      key: "gov",
+      label: "Governance",
+      content: <VoteListPage poolId={id} />,
       visible: true,
     },
   ];

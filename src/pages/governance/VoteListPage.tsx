@@ -22,9 +22,13 @@ import type { Vote } from "@/constants/votes";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { VoteCell } from "@/components/governance/vote/VoteCell";
 
-export const VoteListPage: FC = () => {
+interface VoteListPageProps {
+  poolId?: string;
+}
+
+export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
   const { page } = useSearch({
-    from: "/gov/vote/",
+    from: poolId ? "/pool/$id" : "/gov/vote/",
   });
 
   const {
@@ -83,9 +87,11 @@ export const VoteListPage: FC = () => {
     searchPrefix === "voter_id" && debouncedSearch.startsWith("drep1")
       ? debouncedSearch
       : undefined,
-    searchPrefix === "voter_id" && debouncedSearch.startsWith("pool1")
-      ? debouncedSearch
-      : undefined,
+    poolId
+      ? poolId
+      : searchPrefix === "voter_id" && debouncedSearch.startsWith("pool1")
+        ? debouncedSearch
+        : undefined,
     searchPrefix === "voter_id" &&
       (debouncedSearch.startsWith("addr") || isHex(debouncedSearch))
       ? debouncedSearch
@@ -360,6 +366,7 @@ export const VoteListPage: FC = () => {
   return (
     <PageBase
       metadataTitle='voteListPage'
+      showHeader={!poolId}
       breadcrumbItems={[
         {
           label: <span className='inline pt-1'>Governance</span>,
@@ -371,7 +378,7 @@ export const VoteListPage: FC = () => {
       ]}
       title={<div className='flex items-center gap-1'>All Votes</div>}
     >
-      <div className='w-full max-w-desktop px-4 py-6'>
+      <div className={`w-full max-w-desktop ${!poolId ? "px-4 py-6" : ""}`}>
         <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
           <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
             {votesQuery.isLoading || votesQuery.isFetching ? (
