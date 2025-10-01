@@ -73,3 +73,14 @@ jobs:
           rsync -azv -e "ssh -o UserKnownHostsFile=~/.ssh/known_hosts -o HostKeyAlgorithms=ecdsa-sha2-nistp256,ssh-ed25519,rsa-sha2-512" \
             --omit-dir-times --no-perms --no-owner --no-group --delete \
             ./dist/ job@$SERVER:/var/www/cexplorer_preprod/
+      - name: Notify Discord
+        if: success()
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          VERSION="${{ github.run_number }}"
+          WORKFLOW_NAME="${{ github.workflow }}"
+          curl -H "Content-Type: application/json" \
+            -X POST \
+            -d "{\"content\": \"🚀 **${WORKFLOW_NAME}** deployed new version #**${VERSION}**!\"}" \
+            $DISCORD_WEBHOOK_URL
