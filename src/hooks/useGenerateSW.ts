@@ -58,19 +58,6 @@ export const useGenerateSW = (): GenerateSW => {
           if (registration.installing || registration.waiting) {
             handleUpdate();
           }
-
-          if (
-            registration.active &&
-            !registration.installing &&
-            !registration.waiting &&
-            isFirstInstall
-          ) {
-            setUpdateReady(false);
-
-            setTimeout(() => {
-              setUpdateReady(true);
-            }, 3000);
-          }
         })
         .catch(error => {
           console.error("Service Worker error ", error);
