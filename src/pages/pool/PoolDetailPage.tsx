@@ -94,7 +94,7 @@ const PoolDetailPage = () => {
         after: data?.pool_name?.name ?? "",
       }}
       title={
-        <span className='mt-1 flex w-full min-w-0 items-center gap-2'>
+        <span className='mt-1 flex w-full items-center gap-2'>
           {data?.pool_name.ticker && (
             <Image
               src={generateImageUrl(data?.pool_id || "", "ico", "pool")}
@@ -104,7 +104,7 @@ const PoolDetailPage = () => {
               className='flex-shrink-0 rounded-full'
             />
           )}
-          <span className='min-w-0 flex-1 break-all'>
+          <span className='flex-1 break-all'>
             {data?.pool_name.ticker
               ? `[${data?.pool_name.ticker}] ${data.pool_name.name}`
               : "Pool detail"}

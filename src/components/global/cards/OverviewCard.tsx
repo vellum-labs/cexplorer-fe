@@ -73,7 +73,7 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
               className={`grid w-full ${hFit ? "h-fit" : "h-full"}`}
               style={{
                 gridTemplateColumns: "max-content 1fr",
-                columnGap: columnGap,
+                columnGap,
                 rowGap: "8px",
               }}
             >
