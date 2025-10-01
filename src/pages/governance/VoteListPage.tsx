@@ -367,6 +367,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
     <PageBase
       metadataTitle='voteListPage'
       showHeader={!poolId}
+      adsCarousel={!poolId}
       breadcrumbItems={[
         {
           label: <span className='inline pt-1'>Governance</span>,
