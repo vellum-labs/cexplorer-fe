@@ -8,23 +8,16 @@ import {
 } from "@/components/ui/breadcrumb";
 import { fetchAdminPage, useFetchAdminPage } from "@/services/user";
 import { useAuthTokensStore } from "@/stores/authTokensStore";
-import { useThemeStore } from "@/stores/themeStore";
 import { useWalletStore } from "@/stores/walletStore";
 import type { ArticleUrl } from "@/types/articleTypes";
 import type { AdminPageDetailResponse } from "@/types/userTypes";
 import { getRouteApi, Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import {
-  nord,
-  qtcreatorLight,
-} from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { toast } from "sonner";
 import { Helmet } from "react-helmet";
 
 export const AdminPageDetail = () => {
   const route = getRouteApi("/admin/pages/$url");
-  const { theme } = useThemeStore();
   const { url }: { url: ArticleUrl } = route.useParams();
   const { tokens } = useAuthTokensStore();
   const { address } = useWalletStore();
@@ -162,20 +155,12 @@ export const AdminPageDetail = () => {
             className='relative rounded-lg border border-border bg-darker'
           >
             <textarea
-              className='absolute inset-0 w-full resize-none overflow-hidden bg-transparent p-2 font-mono text-transparent caret-text outline-none'
+              className='min-h-[800px] w-full resize-none bg-transparent p-2 font-mono text-text caret-text outline-none'
               ref={textareaRef}
               value={code}
               onChange={e => setCode(e.target.value)}
               spellCheck={false}
             />
-            <SyntaxHighlighter
-              language={data?.render === "html" ? "html" : "json"}
-              style={theme === "dark" ? nord : qtcreatorLight}
-              className='min-h-minHeight overflow-auto'
-              wrapLongLines
-            >
-              {code}
-            </SyntaxHighlighter>
           </div>
           <Button
             label='Save'
