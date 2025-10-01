@@ -16,6 +16,12 @@ import { ProtocolDot } from "@/components/global/ProtocolDot";
 import { HashCell } from "@/components/tx/HashCell";
 import { formatNumber, formatString } from "@/utils/format/format";
 import { useSearchTable } from "./useSearchTable";
+import type { FilterState } from "./useFilterTable";
+import { useFilterTable } from "./useFilterTable";
+import TextInput from "@/components/global/inputs/TextInput";
+import type { FilterKey } from "./useDrepList";
+import { useFetchMiscBasic } from "@/services/misc";
+import { useMiscConst } from "../useMiscConst";
 
 interface UseBlockList {
   totalItems: number;
@@ -25,9 +31,12 @@ interface UseBlockList {
   tableSearch: string;
   searchPrefix: string;
   columnsVisibility: BlockListColumns;
+  hasFilter?: boolean;
+  filter: FilterState;
   setSearchPrefix: Dispatch<SetStateAction<string>>;
   setTableSearch: Dispatch<SetStateAction<string>>;
   setColumnVisibility: (storeKey: string, isVisible: boolean) => void;
+  changeFilterByKey: (key: FilterKey, value?: string) => void;
 }
 
 export const useBlockList = ({
@@ -55,7 +64,40 @@ export const useBlockList = ({
     validPrefixes: ["pool_id", "epoch_no", "hash", "slot_no", "block_no"],
   });
 
+  const {
+    filterVisibility,
+    filter,
+    hasFilter,
+    anchorRefs,
+    filterDraft,
+    changeDraftFilter,
+    changeFilterByKey,
+    toggleFilter,
+  } = useFilterTable({
+    storeKey: "block_list",
+    filterKeys: ["epoch_no", "pool_id", "proto"],
+  });
+
   const [totalItems, setTotalItems] = useState(0);
+
+  const { data: basicData } = useFetchMiscBasic(true);
+  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConstDaily = miscConst?.epoch_stat?.daily;
+
+  const protocolVersions = Array.isArray(miscConstDaily)
+    ? Array.from(
+        new Set(
+          miscConstDaily
+            .map(item =>
+              Array.isArray(item?.stat?.block_version)
+                ? item.stat.block_version
+                : [],
+            )
+            .flat()
+            .map(item => String(item.version)),
+        ),
+      )
+    : [];
 
   const blockListQuery = useFetchBlocksList(
     overrideRows ?? rows,
@@ -65,10 +107,16 @@ export const useBlockList = ({
         ? (page ?? 1) * overrideRows - overrideRows
         : (page ?? 1) * rows - rows,
     !debouncedTableSearch.includes(":"),
-    searchPrefix === "pool_id" && debouncedTableSearch.includes("pool1")
-      ? debouncedTableSearch
-      : undefined,
-    searchPrefix === "epoch_no" ? parseInt(debouncedTableSearch) : undefined,
+    filter.pool_id
+      ? filter.pool_id
+      : searchPrefix === "pool_id" && debouncedTableSearch.includes("pool1")
+        ? debouncedTableSearch
+        : undefined,
+    filter.epoch_no
+      ? +filter.epoch_no
+      : searchPrefix === "epoch_no"
+        ? parseInt(debouncedTableSearch)
+        : undefined,
     searchPrefix === "hash" ? debouncedTableSearch : undefined,
     searchPrefix === "slot_no" ? parseInt(debouncedTableSearch) : undefined,
     overrideTableSearch
@@ -76,10 +124,13 @@ export const useBlockList = ({
       : searchPrefix === "block_no"
         ? parseInt(debouncedTableSearch)
         : undefined,
+    filter.proto ? filter.proto : undefined,
   );
 
   const totalBlocks = blockListQuery.data?.pages[0].data.count;
   const items = blockListQuery.data?.pages.flatMap(page => page.data.data);
+
+  console.log("proto", filterDraft["proto"]);
 
   const columns: TableColumns<BlocksListResponse["data"]["data"][number]> = [
     {
@@ -110,7 +161,36 @@ export const useBlockList = ({
     {
       key: "epoch_no",
       render: item => <p className='text-right'>{item.epoch_no}</p>,
-      title: <p className='w-full text-right'>Epoch</p>,
+      title: (
+        <p ref={anchorRefs?.epoch_no} className='w-full text-right'>
+          Epoch
+        </p>
+      ),
+      filter: {
+        anchorRef: anchorRefs?.epoch_no,
+        width: "170px",
+        activeFunnel: !!filter.epoch_no,
+        filterOpen: filterVisibility.epoch_no,
+        filterButtonDisabled:
+          !filterDraft.epoch_no ||
+          /^\D+$/.test(filterDraft.epoch_no) ||
+          (filter.epoch_no
+            ? +filter.epoch_no === +filterDraft.epoch_no
+            : false),
+        onShow: e => toggleFilter(e, "epoch_no"),
+        onFilter: () => changeFilterByKey("epoch_no", +filterDraft.epoch_no),
+        onReset: () => changeFilterByKey("epoch_no"),
+        filterContent: (
+          <div className='flex h-[60px] w-full items-center justify-center px-2'>
+            <TextInput
+              onchange={value => changeDraftFilter("epoch_no", value)}
+              placeholder='Filter by epoch...'
+              value={filterDraft["epoch_no"] ?? ""}
+              wrapperClassName='w-full'
+            />
+          </div>
+        ),
+      },
       visible: columnsVisibility.epoch_no,
       widthPx: 50,
     },
@@ -159,7 +239,29 @@ export const useBlockList = ({
 
         return ticker && name ? `[${ticker}] ${name}` : id;
       },
-      title: "Minted by",
+      title: <p ref={anchorRefs?.pool_id}>Minted by</p>,
+      filter: {
+        anchorRef: anchorRefs?.pool_id,
+        activeFunnel: !!filter.pool_id,
+        filterOpen: filterVisibility.pool_id,
+        filterButtonDisabled:
+          !filterDraft.pool_id ||
+          !filterDraft.pool_id.includes("pool") ||
+          (filter.pool_id ? filter.pool_id === filterDraft.pool_id : false),
+        onShow: e => toggleFilter(e, "pool_id"),
+        onFilter: () => changeFilterByKey("pool_id", filterDraft.pool_id),
+        onReset: () => changeFilterByKey("pool_id"),
+        filterContent: (
+          <div className='flex h-[60px] w-full items-center justify-center px-2'>
+            <TextInput
+              onchange={value => changeDraftFilter("pool_id", value)}
+              placeholder='Filter by pool id...'
+              value={filterDraft["pool_id"] ?? ""}
+              wrapperClassName='w-full'
+            />
+          </div>
+        ),
+      },
       visible: columnsVisibility.minted_by,
       widthPx: 160,
     },
@@ -216,7 +318,57 @@ export const useBlockList = ({
           <p className='text-right'>{`${item.proto_major}.${item.proto_minor}`}</p>
         </div>
       ),
-      title: <p className='w-full text-right'>Protocol</p>,
+      title: (
+        <p ref={anchorRefs.proto} className='w-full text-right'>
+          Protocol
+        </p>
+      ),
+      filter: {
+        anchorRef: anchorRefs?.proto,
+        width: "200px",
+        activeFunnel: !!filter.proto,
+        filterOpen: filterVisibility.proto,
+        filterButtonDisabled:
+          !filterDraft.proto ||
+          !/^\d+(\.\d+)?$/.test(filterDraft["proto"]) ||
+          (filter.proto ? filter.proto === filterDraft.proto : false),
+        onShow: e => toggleFilter(e, "proto"),
+        onFilter: () => changeFilterByKey("proto", filterDraft.proto),
+        onReset: () => changeFilterByKey("proto"),
+        filterContent: (
+          <div className='flex flex-col gap-2 px-4 py-2'>
+            {(protocolVersions || []).map(version => (
+              <label key={`${version}`} className='flex items-center gap-2'>
+                <input
+                  type='radio'
+                  name='proto'
+                  value={version}
+                  disabled={
+                    !!filterDraft["proto"] &&
+                    !protocolVersions.includes(String(filterDraft["proto"]))
+                  }
+                  className='accent-primary'
+                  checked={String(filterDraft["proto"]) === version}
+                  onChange={e =>
+                    changeDraftFilter("proto", e.currentTarget.value)
+                  }
+                />
+                <span className='text-sm'>{version}</span>
+              </label>
+            ))}
+            <TextInput
+              onchange={value => changeDraftFilter("proto", value)}
+              placeholder='Custom protocol...'
+              value={
+                !protocolVersions.includes(String(filterDraft["proto"]))
+                  ? filterDraft["proto"]
+                  : ""
+              }
+              wrapperClassName='w-full'
+            />
+          </div>
+        ),
+      },
       visible: columnsVisibility.protocol,
       widthPx: 70,
     },
@@ -274,8 +426,11 @@ export const useBlockList = ({
     searchPrefix,
     blockListQuery,
     columnsVisibility,
+    hasFilter,
+    filter,
     setSearchPrefix,
     setTableSearch,
     setColumnVisibility,
+    changeFilterByKey,
   };
 };

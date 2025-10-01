@@ -6,12 +6,14 @@ import GlobalTable from "@/components/table/GlobalTable";
 import { blocksListTableOptions } from "@/constants/tables/blocksListTableOptions";
 import { useBlockListTableStore } from "@/stores/tables/blockListTableStore";
 import type { BlockListColumns } from "@/types/tableTypes";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber, formatString } from "@/utils/format/format";
 import { isHex } from "@/utils/isHex";
 import { isTextNumeric } from "@/utils/isTextNumeric";
 import { useSearch } from "@tanstack/react-router";
 import { useBlockList } from "@/hooks/tables/useBlockList";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { X } from "lucide-react";
+import type { FilterKey } from "@/hooks/tables/useDrepList";
 
 const BlocksListPage = () => {
   const { page } = useSearch({ from: "/block/" });
@@ -32,6 +34,9 @@ const BlocksListPage = () => {
     searchPrefix,
     tableSearch,
     blockListQuery,
+    hasFilter,
+    filter,
+    changeFilterByKey,
     setSearchPrefix,
     setTableSearch,
   } = useBlockList({
@@ -145,6 +150,38 @@ const BlocksListPage = () => {
             </div>
           </div>
         </div>
+        {hasFilter && (
+          <div className='flex flex-wrap items-center gap-1 md:flex-nowrap'>
+            {Object.entries(filter).map(
+              ([key, value]) =>
+                value && (
+                  <div
+                    key={key}
+                    className='mb-2 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-2 py-0.5 text-xs text-grayTextPrimary'
+                  >
+                    <span>{key[0].toUpperCase() + key.slice(1)}:</span>
+                    {key === "epoch_no" && (
+                      <span>
+                        {String(value)[0].toUpperCase() +
+                          String(value).slice(1).toLowerCase()}
+                      </span>
+                    )}
+                    {key === "pool_id" && (
+                      <span>{formatString(String(value), "long")}</span>
+                    )}
+                    {key === "proto" && <span>{String(value)}</span>}
+                    <X
+                      size={13}
+                      className='cursor-pointer'
+                      onClick={() => {
+                        changeFilterByKey(key as FilterKey);
+                      }}
+                    />
+                  </div>
+                ),
+            )}
+          </div>
+        )}
         <GlobalTable
           type='infinite'
           currentPage={page ?? 1}
