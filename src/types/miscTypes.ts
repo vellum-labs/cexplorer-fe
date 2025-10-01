@@ -171,7 +171,6 @@ interface MiscConstResponseDataLoad {
   "24h"?: number;
 }
 
-
 interface MiscConstResponseDataEpochStat {
   epoch_no: number;
   spendable_epoch: number;
@@ -182,6 +181,7 @@ interface MiscConstResponseDataEpochStat {
   pool_stat: MiscConstResponseDataEpochStatPoolStat;
   proto: MiscConstResponseDataEpochStatProto;
   daily: {
+    date: string;
     stat: {
       block_version: {
         version: number;

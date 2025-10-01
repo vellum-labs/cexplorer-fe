@@ -15,6 +15,8 @@ type BlockListProps = {
   hash?: string;
   slot_no?: number;
   block_no?: number;
+  proto?: string;
+  order?: "epoch_no" | "block_no" | "slot_no" | "size" | "tx_count" | undefined;
 };
 
 export const fetchBlocksList = async ({
@@ -25,10 +27,22 @@ export const fetchBlocksList = async ({
   hash,
   slot_no,
   block_no,
+  proto,
+  order,
 }: BlockListProps) => {
   const url = "/block/list";
   const options = {
-    params: { limit, offset, pool_id, epoch_no, hash, slot_no, block_no },
+    params: {
+      limit,
+      offset,
+      pool_id,
+      epoch_no,
+      hash,
+      slot_no,
+      block_no,
+      proto,
+      order,
+    },
   };
 
   return handleFetch<BlocksListResponse>(url, offset, options);
@@ -43,6 +57,8 @@ export const useFetchBlocksList = (
   hash?: string,
   slot_no?: number,
   block_no?: number,
+  proto?: string,
+  order?: "epoch_no" | "block_no" | "slot_no" | "size" | "tx_count" | undefined,
 ) =>
   useInfiniteQuery({
     queryKey: [
@@ -54,6 +70,8 @@ export const useFetchBlocksList = (
       hash,
       slot_no,
       block_no,
+      proto,
+      order,
     ],
     queryFn: ({ pageParam = page }) =>
       fetchBlocksList({
@@ -64,6 +82,8 @@ export const useFetchBlocksList = (
         hash,
         slot_no,
         block_no,
+        proto,
+        order,
       }),
     initialPageParam: page,
     getNextPageParam: lastPage => {
