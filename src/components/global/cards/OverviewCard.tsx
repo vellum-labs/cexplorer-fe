@@ -28,6 +28,7 @@ interface BlockDetailOverviewProps {
   showContentDivider?: boolean;
   threshold?: number;
   voterType?: "drep" | "spo";
+  columnGap?: string;
 }
 
 export const OverviewCard: FC<BlockDetailOverviewProps> = ({
@@ -45,6 +46,7 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
   showContentDivider = false,
   threshold,
   voterType = "drep",
+  columnGap = "48px",
 }) => {
   return (
     <div
@@ -71,7 +73,7 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
               className={`grid w-full ${hFit ? "h-fit" : "h-full"}`}
               style={{
                 gridTemplateColumns: "max-content 1fr",
-                columnGap: "48px",
+                columnGap: columnGap,
                 rowGap: "8px",
               }}
             >
