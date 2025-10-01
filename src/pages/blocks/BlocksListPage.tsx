@@ -17,7 +17,7 @@ import type { FilterKey } from "@/hooks/tables/useDrepList";
 import SortBy from "@/components/ui/sortBy";
 
 const BlocksListPage = () => {
-  const { page, order } = useSearch({ from: "/block/" });
+  const { page, order, ...rest } = useSearch({ from: "/block/" });
 
   const {
     columnsVisibility,
@@ -46,6 +46,7 @@ const BlocksListPage = () => {
   } = useBlockList({
     page,
     order,
+    restSearch: rest,
   });
 
   return (

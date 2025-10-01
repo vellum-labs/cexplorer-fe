@@ -49,6 +49,7 @@ interface BlockListArgs {
   overrideRows?: number;
   overrideTableSearch?: string;
   order: "epoch_no" | "block_no" | "slot_no" | "size" | "tx_count" | undefined;
+  restSearch: any;
 }
 
 export const useBlockList = ({
@@ -57,6 +58,7 @@ export const useBlockList = ({
   overrideRows,
   overrideTableSearch,
   order,
+  restSearch,
 }: BlockListArgs): UseBlockList => {
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { columnsVisibility, setColumnVisibility, rows } =
@@ -474,6 +476,7 @@ export const useBlockList = ({
       case "Height":
         navigate({
           search: {
+            ...restSearch,
             order: "block_no",
           } as any,
         });
@@ -481,6 +484,7 @@ export const useBlockList = ({
       case "Epoch":
         navigate({
           search: {
+            ...restSearch,
             order: "epoch_no",
           } as any,
         });
@@ -488,6 +492,7 @@ export const useBlockList = ({
       case "Size":
         navigate({
           search: {
+            ...restSearch,
             order: "size",
           } as any,
         });
@@ -495,6 +500,7 @@ export const useBlockList = ({
       case "Epoch slot":
         navigate({
           search: {
+            ...restSearch,
             order: "slot_no",
           } as any,
         });
@@ -502,6 +508,7 @@ export const useBlockList = ({
       case "Tx count":
         navigate({
           search: {
+            ...restSearch,
             order: "tx_count",
           } as any,
         });
