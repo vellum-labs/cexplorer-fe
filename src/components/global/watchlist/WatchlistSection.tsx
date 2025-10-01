@@ -16,12 +16,16 @@ export const WatchlistSection = ({
   collection,
   ticker,
   poolDetailQuery,
+  enableWatchlistModal = false,
+  stakeKey,
 }: {
   ident: string | undefined;
   isLoading: boolean;
   collection?: string | null;
   ticker?: string;
   poolDetailQuery?: ReturnType<typeof useFetchPoolDetail>;
+  enableWatchlistModal?: boolean;
+  stakeKey?: string;
 }) => {
   const { lucid, address, walletType } = useWalletStore();
   const [showWalletModal, setShowWalletModal] = useState<boolean>(false);
@@ -66,7 +70,7 @@ export const WatchlistSection = ({
         />
       )}
       <ShareButton />
-      <WatchlistStar ident={ident} />
+      <WatchlistStar ident={ident} showOptionsModal={enableWatchlistModal} stakeKey={stakeKey} />
       <Button label='Promote' variant='tertiary' size='md' href='/pro' />
       {poolDetailQuery && (
         <Button
