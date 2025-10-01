@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 
 import { useEffect } from "react";
 import { webUrl } from "@/constants/confVariables";
-import { useNotFound } from "@/stores/useNotFound";
+import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 
 export const DevelopersPage = () => {
   const query = useFetchArticleDetail("en", "page", "developers");
@@ -12,14 +12,6 @@ export const DevelopersPage = () => {
   const name = data?.name;
   const description = data?.description;
   const keywords = data?.keywords;
-
-  const { setNotFound } = useNotFound();
-
-  useEffect(() => {
-    if (!query.data || !query.data.data || query.data.data.length === 0) {
-      setNotFound(true);
-    }
-  }, [query.data, setNotFound]);
 
   useEffect(() => {
     const buttons = document.querySelectorAll(".tabs--btn");
@@ -77,7 +69,19 @@ export const DevelopersPage = () => {
         <meta property='og:url' content={webUrl + location.pathname} />
       </Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
-        {parse(data?.data.map(item => item).join("") || "")}
+        {query.isLoading ? (
+          <div className='flex flex-col gap-10'>
+            <div className='flex flex-col items-center gap-4'>
+              <LoadingSkeleton width='150px' height='30px' />
+              <LoadingSkeleton width='300px' height='20px' />
+            </div>
+            <LoadingSkeleton width='800px' height='206px' rounded='lg' />
+            <LoadingSkeleton width='800px' height='206px' rounded='lg' />
+            <LoadingSkeleton width='800px' height='792px' rounded='lg' />
+          </div>
+        ) : (
+          parse(data?.data.map(item => item).join("") || "")
+        )}
       </main>
     </>
   );

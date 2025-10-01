@@ -1,9 +1,8 @@
+import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 import { webUrl } from "@/constants/confVariables";
 import { useFetchArticleDetail } from "@/services/article";
 import parse from "html-react-parser";
 import { Helmet } from "react-helmet";
-import { useNotFound } from "@/stores/useNotFound";
-import { useEffect } from "react";
 
 export const PrivacyPage = () => {
   const query = useFetchArticleDetail("en", "page", "privacy");
@@ -11,14 +10,6 @@ export const PrivacyPage = () => {
   const name = data?.name;
   const description = data?.description;
   const keywords = data?.keywords;
-
-  const { setNotFound } = useNotFound();
-
-  useEffect(() => {
-    if (!data?.data || data.data.length === 0) {
-      setNotFound(true);
-    }
-  }, [data, setNotFound]);
 
   return (
     <>
@@ -35,7 +26,17 @@ export const PrivacyPage = () => {
         <meta property='og:url' content={webUrl + location.pathname} />
       </Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
-        {parse(data?.data.map(item => item).join("") || "")}
+        {query.isLoading ? (
+          <div className='mt-10 flex flex-col gap-10'>
+            <div className='flex flex-col items-center gap-8'>
+              <LoadingSkeleton width='150px' height='30px' />
+              <LoadingSkeleton width='160px' height='30px' />
+            </div>
+            <LoadingSkeleton width='650px' height='800px' rounded='lg' />
+          </div>
+        ) : (
+          parse(data?.data.map(item => item).join("") || "")
+        )}
       </main>
     </>
   );

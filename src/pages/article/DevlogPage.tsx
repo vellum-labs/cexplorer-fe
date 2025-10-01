@@ -11,8 +11,7 @@ import {
 
 import { useFetchArticleDetail } from "@/services/article";
 import { webUrl } from "@/constants/confVariables";
-import { useNotFound } from "@/stores/useNotFound";
-import { useEffect } from "react";
+import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 
 export const DevlogPage: FC = () => {
   const query = useFetchArticleDetail("en", "page", "devlog");
@@ -21,19 +20,11 @@ export const DevlogPage: FC = () => {
   const description = data?.description;
   const keywords = data?.keywords;
 
-  const { setNotFound } = useNotFound();
-
   const devlog = (
     query.data?.data.some(item => Array.isArray(item))
       ? query.data?.data[0]
       : query.data?.data
   ) as any;
-
-  useEffect(() => {
-    if (!devlog || devlog.length === 0) {
-      setNotFound(true);
-    }
-  }, [devlog, setNotFound]);
 
   return (
     <>
@@ -60,22 +51,26 @@ export const DevlogPage: FC = () => {
             collapsible
             className='mt-4 w-full max-w-[600px]'
           >
-            {devlog?.map(item => (
-              <AccordionItem
-                key={item.title}
-                value={item.title}
-                className='border-b border-border'
-              >
-                <AccordionTrigger className='AccordionTrigger w-full py-5 text-left'>
-                  <span className='text-base font-medium'>{item.title}</span>
-                </AccordionTrigger>
-                <AccordionContent>
-                  <div className='flex flex-col pb-3 text-grayTextPrimary'>
-                    {parse(JSON.stringify(item.msg))}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
+            {query.isLoading ? (
+              <LoadingSkeleton width='600px' height='520px' rounded='lg' />
+            ) : (
+              devlog?.map(item => (
+                <AccordionItem
+                  key={item.title}
+                  value={item.title}
+                  className='border-b border-border'
+                >
+                  <AccordionTrigger className='AccordionTrigger w-full py-5 text-left'>
+                    <span className='text-base font-medium'>{item.title}</span>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className='flex flex-col pb-3 text-grayTextPrimary'>
+                      {parse(JSON.stringify(item.msg))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              ))
+            )}
           </Accordion>
         </div>
       </div>
