@@ -29,6 +29,7 @@ export const NetworkHealthGraph: FC<NetworkHealthGraphProps> = ({
 
   const { genesisParams } = configJSON;
 
+  const epochDays = genesisParams[0].shelley[0].epochLength / 86400;
   const expectedBlocks =
     genesisParams[0].shelley[0].activeSlotsCoeff *
     genesisParams[0].shelley[0].epochLength;
@@ -45,7 +46,11 @@ export const NetworkHealthGraph: FC<NetworkHealthGraphProps> = ({
 
   const epochs = (data ?? []).map(item => item?.no);
   const realChainDensity = (data ?? []).map(
-    item => (((item?.stat?.count_block ?? 0) as number) / expectedBlocks) * 100,
+    item =>
+      (((item?.stat?.count_block ?? 0) as number) /
+        expectedBlocks /
+        epochDays) *
+      100,
   );
   const optimalChainDensity = (data ?? []).map(() => {
     return genesisParams[0].shelley[0].activeSlotsCoeff * 100;
