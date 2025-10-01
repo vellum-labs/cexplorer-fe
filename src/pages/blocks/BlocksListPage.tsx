@@ -57,7 +57,9 @@ const BlocksListPage = () => {
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
         {!totalItems ? (
-          <LoadingSkeleton height='27px' width={"220px"} />
+          <p className='pb-3'>
+            <LoadingSkeleton height='27px' width={"220px"} />
+          </p>
         ) : (
           <h3 className='pb-3'>
             Total of {formatNumber(totalItems ?? 0)} blocks
