@@ -22,6 +22,7 @@ import TextInput from "@/components/global/inputs/TextInput";
 import type { FilterKey } from "./useDrepList";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "../useMiscConst";
+import { useNavigate } from "@tanstack/react-router";
 
 interface UseBlockList {
   totalItems: number;
@@ -33,10 +34,21 @@ interface UseBlockList {
   columnsVisibility: BlockListColumns;
   hasFilter?: boolean;
   filter: FilterState;
+  selectItems: { key: string; value: string }[];
+  selectedItem: string | undefined;
   setSearchPrefix: Dispatch<SetStateAction<string>>;
   setTableSearch: Dispatch<SetStateAction<string>>;
   setColumnVisibility: (storeKey: string, isVisible: boolean) => void;
+  setSelectedItem: Dispatch<SetStateAction<string | undefined>>;
   changeFilterByKey: (key: FilterKey, value?: string) => void;
+}
+
+interface BlockListArgs {
+  page?: number;
+  storeKey?: string;
+  overrideRows?: number;
+  overrideTableSearch?: string;
+  order: "epoch_no" | "block_no" | "slot_no" | "size" | "tx_count" | undefined;
 }
 
 export const useBlockList = ({
@@ -44,15 +56,13 @@ export const useBlockList = ({
   storeKey,
   overrideRows,
   overrideTableSearch,
-}: {
-  page?: number;
-  storeKey?: string;
-  overrideRows?: number;
-  overrideTableSearch?: string;
-}): UseBlockList => {
+  order,
+}: BlockListArgs): UseBlockList => {
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { columnsVisibility, setColumnVisibility, rows } =
     useBlockListTableStore(storeKey)();
+
+  const navigate = useNavigate();
 
   const [
     { debouncedTableSearch, tableSearch, searchPrefix },
@@ -83,6 +93,50 @@ export const useBlockList = ({
   const { data: basicData } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(basicData?.data.version.const);
   const miscConstDaily = miscConst?.epoch_stat?.daily;
+
+  const getSelectedItem = (newOrder?: typeof order) => {
+    switch (newOrder) {
+      case "block_no":
+        return "Height";
+      case "epoch_no":
+        return "Epoch";
+      case "size":
+        return "Size";
+      case "slot_no":
+        return "Epoch slot";
+      case "tx_count":
+        return "Tx count";
+      default:
+        return "";
+    }
+  };
+
+  const [selectedItem, setSelectedItem] = useState<string | undefined>(
+    order ? getSelectedItem(order) : undefined,
+  );
+
+  const selectItems = [
+    {
+      key: "Height",
+      value: "Height",
+    },
+    {
+      key: "Epoch",
+      value: "Epoch",
+    },
+    {
+      key: "Size",
+      value: "Size",
+    },
+    {
+      key: "Epoch slot",
+      value: "Epoch slot",
+    },
+    {
+      key: "Tx count",
+      value: "Tx count",
+    },
+  ];
 
   const protocolVersions = Array.isArray(miscConstDaily)
     ? Array.from(
@@ -125,12 +179,11 @@ export const useBlockList = ({
         ? parseInt(debouncedTableSearch)
         : undefined,
     filter.proto ? filter.proto : undefined,
+    order,
   );
 
   const totalBlocks = blockListQuery.data?.pages[0].data.count;
   const items = blockListQuery.data?.pages.flatMap(page => page.data.data);
-
-  console.log("proto", filterDraft["proto"]);
 
   const columns: TableColumns<BlocksListResponse["data"]["data"][number]> = [
     {
@@ -192,7 +245,7 @@ export const useBlockList = ({
         ),
       },
       visible: columnsVisibility.epoch_no,
-      widthPx: 50,
+      widthPx: 70,
     },
     {
       key: "slot_no",
@@ -383,7 +436,7 @@ export const useBlockList = ({
     },
     {
       key: "size",
-      title: "Size",
+      title: <p>Size</p>,
       render: item => (
         <div className='text-right'>
           {
@@ -413,6 +466,52 @@ export const useBlockList = ({
   ];
 
   useEffect(() => {
+    if (!selectedItem) {
+      return;
+    }
+
+    switch (selectedItem) {
+      case "Height":
+        navigate({
+          search: {
+            order: "block_no",
+          } as any,
+        });
+        return;
+      case "Epoch":
+        navigate({
+          search: {
+            order: "epoch_no",
+          } as any,
+        });
+        return;
+      case "Size":
+        navigate({
+          search: {
+            order: "size",
+          } as any,
+        });
+        return;
+      case "Epoch slot":
+        navigate({
+          search: {
+            order: "slot_no",
+          } as any,
+        });
+        return;
+      case "Tx count":
+        navigate({
+          search: {
+            order: "tx_count",
+          } as any,
+        });
+        return;
+      default:
+        return;
+    }
+  }, [selectedItem]);
+
+  useEffect(() => {
     if (totalBlocks && totalBlocks !== totalItems) {
       setTotalItems(totalBlocks);
     }
@@ -428,6 +527,9 @@ export const useBlockList = ({
     columnsVisibility,
     hasFilter,
     filter,
+    selectedItem,
+    selectItems,
+    setSelectedItem,
     setSearchPrefix,
     setTableSearch,
     setColumnVisibility,

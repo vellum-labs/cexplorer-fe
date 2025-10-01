@@ -14,9 +14,10 @@ import { useBlockList } from "@/hooks/tables/useBlockList";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { X } from "lucide-react";
 import type { FilterKey } from "@/hooks/tables/useDrepList";
+import SortBy from "@/components/ui/sortBy";
 
 const BlocksListPage = () => {
-  const { page } = useSearch({ from: "/block/" });
+  const { page, order } = useSearch({ from: "/block/" });
 
   const {
     columnsVisibility,
@@ -36,11 +37,15 @@ const BlocksListPage = () => {
     blockListQuery,
     hasFilter,
     filter,
+    selectItems,
+    selectedItem,
+    setSelectedItem,
     changeFilterByKey,
     setSearchPrefix,
     setTableSearch,
   } = useBlockList({
     page,
+    order,
   });
 
   return (
@@ -50,15 +55,22 @@ const BlocksListPage = () => {
       breadcrumbItems={[{ label: "Blocks" }]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+        {!totalItems ? (
+          <LoadingSkeleton height='27px' width={"220px"} />
+        ) : (
+          <h3 className='pb-3'>
+            Total of {formatNumber(totalItems ?? 0)} blocks
+          </h3>
+        )}
         <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-          <div className='flex w-full items-center justify-between gap-2'>
-            {!totalItems ? (
-              <LoadingSkeleton height='27px' width={"220px"} />
-            ) : (
-              <h3 className='basis-[230px]'>
-                Total of {formatNumber(totalItems ?? 0)} blocks
-              </h3>
-            )}
+          <div className='flex w-full justify-between'>
+            <div className='flex items-center gap-2 pr-3'>
+              <SortBy
+                selectItems={selectItems}
+                setSelectedItem={setSelectedItem}
+                selectedItem={selectedItem}
+              />
+            </div>
             <div className='flex items-center gap-2 md:hidden'>
               <ExportButton columns={columns} items={items} />
               <TableSettingsDropdown

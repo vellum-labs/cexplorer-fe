@@ -12,16 +12,23 @@ interface SortArrowProps {
 
 export const SortArrow: FC<SortArrowProps> = ({ direction }) => {
   return direction === undefined ? (
-    <ArrowUpDown size={14} className='translate-y-[1px] stroke-grayText' />
+    <p className='min-h-3 min-w-3'>
+      {" "}
+      <ArrowUpDown size={15} className='stroke-grayText translate-y-[1px]' />
+    </p>
   ) : direction === "asc" ? (
-    <ArrowUpNarrowWide
-      size={14}
-      className='translate-y-[1px] stroke-grayText'
-    />
+    <p className='min-h-3 min-w-3'>
+      <ArrowUpNarrowWide
+        size={15}
+        className='stroke-grayText translate-y-[1px]'
+      />
+    </p>
   ) : (
-    <ArrowDownWideNarrow
-      size={14}
-      className='translate-y-[1px] stroke-grayText'
-    />
+    <p className='min-h-3 min-w-3'>
+      <ArrowDownWideNarrow
+        size={15}
+        className='stroke-grayText translate-y-[1px]'
+      />
+    </p>
   );
 };

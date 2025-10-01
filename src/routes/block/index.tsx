@@ -14,6 +14,11 @@ export const Route = createFileRoute("/block/")({
           .optional()
           .catch(1),
         limit: z.number().optional().catch(20),
+        sort: z.enum(["asc", "desc"]).optional().catch("desc"),
+        order: z
+          .enum(["block_no", "slot_no", "epoch_no", "size", "tx_count"])
+          .optional()
+          .catch("block_no"),
       })
       .parse(input),
 });
