@@ -72,6 +72,7 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
               style={{
                 gridTemplateColumns: "max-content 1fr",
                 columnGap: "48px",
+                rowGap: "8px",
               }}
             >
               {overviewList &&
@@ -84,14 +85,14 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
                           {item?.label && (
                             <div
                               key={`${item?.label}_${i}_label`}
-                              className={`text-left text-sm text-grayTextSecondary ${labelClassname ? labelClassname : ""} ${leading ? "leading-[0px]" : "py-1"}`}
+                              className={`flex items-center text-left text-sm text-grayTextSecondary ${labelClassname ? labelClassname : ""} ${leading ? "leading-[0px]" : "py-1"}`}
                             >
                               {item?.label}
                             </div>
                           )}
                           <div
                             key={`${item?.label}_${i}_value`}
-                            className={`overflow-wrap break-word text-sm font-medium text-text ${leading ? "leading-[0px]" : "py-1"}`}
+                            className={`overflow-hidden break-words text-sm text-grayTextPrimary ${leading ? "leading-[0px]" : "py-1"}`}
                           >
                             {item?.value}
                           </div>
