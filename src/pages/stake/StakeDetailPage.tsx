@@ -24,6 +24,7 @@ import { QrCode } from "lucide-react";
 import { TxListPage } from "../tx/TxListPage";
 import { DeFiOrderList } from "@/components/defi/DeFiOrderList";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { WatchlistSection } from "@/components/global/watchlist/WatchlistSection";
 
 export const StakeDetailPage: FC = () => {
   const route = getRouteApi("/stake/$stakeAddr");
@@ -138,6 +139,7 @@ export const StakeDetailPage: FC = () => {
           isLoading={stakeQuery.isLoading}
           user={user}
         />
+        <WatchlistSection ident={address} isLoading={stakeQuery.isLoading} />
       </div>
       <section className='flex w-full justify-center'>
         <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile md:px-desktop xl:flex-nowrap xl:justify-start'>
