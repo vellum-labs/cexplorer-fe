@@ -1,5 +1,6 @@
 import { AddressesTab } from "@/components/address/tabs/AddressesTab";
 import { DrepListTab } from "@/components/drep/tabs/DrepListTab";
+import { StakeListTab } from "@/components/stake/tabs/StakeListTab";
 import Tabs from "@/components/global/Tabs";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { useWatchlistStore } from "@/stores/watchlistStore";
@@ -13,19 +14,22 @@ import Button from "@/components/global/Button";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import { Star, Wallet } from "lucide-react";
 import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
-import { useFetchWatchlist } from "@/services/user";
+import { useFetchWatchlist, useFetchAccountList } from "@/services/user";
 
 export const WatchlistPage = () => {
   const token = useAuthToken();
   const query = useFetchWatchlist(token);
+  const accountListQuery = useFetchAccountList(token);
   const { watchlist: data } = useWatchlistStore();
   const [showConnectModal, setShowConnectModal] = useState(false);
   const count = useMemo(() => {
+    const stakeCount = accountListQuery.data?.data?.data?.length ?? 0;
+
     if (!data) {
-      return { addresses: 0, assets: 0, pools: 0, dreps: 0 };
+      return { addresses: 0, assets: 0, pools: 0, dreps: 0, stakes: stakeCount };
     }
-    
-    return data.reduce(
+
+    const watchlistCount = data.reduce(
       (acc, item) => {
         switch (item.type) {
           case "address":
@@ -45,9 +49,25 @@ export const WatchlistPage = () => {
       },
       { addresses: 0, assets: 0, pools: 0, dreps: 0 }
     );
-  }, [data]);
+
+    return { ...watchlistCount, stakes: stakeCount };
+  }, [data, accountListQuery.data]);
 
   const tabItems = useMemo(() => [
+    {
+      key: "stakes",
+      label: (
+        <div className='flex items-center gap-1'>
+          Stakes <Badge color='gray'>{count.stakes}</Badge>
+        </div>
+      ),
+      content: (
+        <div className='mt-6'>
+          <StakeListTab />
+        </div>
+      ),
+      visible: count.stakes > 0,
+    },
     {
       key: "wallets",
       label: (
@@ -106,7 +126,7 @@ export const WatchlistPage = () => {
     },
   ], [count]);
 
-  const totalWatchlistItems = count.addresses + count.assets + count.pools + count.dreps;
+  const totalWatchlistItems = count.addresses + count.assets + count.pools + count.dreps + count.stakes;
   const isLoading = token && query.isLoading;
   const hasError = token && query.isError;
 
