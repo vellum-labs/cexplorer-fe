@@ -2,9 +2,8 @@ import type { FC } from "react";
 import type { DeFiOrder } from "@/types/tokenTypes";
 import type { AggregatedSwapData } from "@/utils/dex/aggregateSwapData";
 
-import { ArrowRight, Check, Ellipsis, X } from "lucide-react";
-import SundaeSwapIcon from "@/resources/images/icons/sundaeswap.png";
-import MinSwapIcon from "@/resources/images/icons/minswap.png";
+import { ArrowRight, ArrowLeftRight, Check, Ellipsis, X } from "lucide-react";
+import { dexConfig } from "@/constants/dexConfig";
 
 import { Image } from "../global/Image";
 import { Link } from "@tanstack/react-router";
@@ -12,60 +11,40 @@ import Copy from "../global/Copy";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { formatString } from "@/utils/format/format";
 import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
+import { generateImageUrl } from "@/utils/generateImageUrl";
+import { encodeAssetName } from "@/utils/asset/encodeAssetName";
+import { alphabetWithNumbers } from "@/constants/alphabet";
+import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 
 interface SwapDetailTableProps {
   aggregatedData: AggregatedSwapData;
 }
 
+const getAssetImage = (tokenName: string, isNft = false) => {
+  const fingerprint = getAssetFingerprint(tokenName);
+  const encodedNameArr = encodeAssetName(tokenName).split("");
+
+  return (
+    <Image
+      type='asset'
+      height={16}
+      width={16}
+      className='aspect-square shrink-0 rounded-full'
+      src={generateImageUrl(
+        isNft ? fingerprint : tokenName,
+        "ico",
+        isNft ? "nft" : "token",
+      )}
+      fallbackletters={[...encodedNameArr]
+        .filter(char => alphabetWithNumbers.includes(char.toLowerCase()))
+        .join("")}
+    />
+  );
+};
+
 export const SwapDetailTable: FC<SwapDetailTableProps> = ({
   aggregatedData,
 }) => {
-  const dexConfig: Record<
-    string,
-    {
-      label: string;
-      icon: string;
-      textColor: string;
-      bgColor: string;
-      borderColor: string;
-    }
-  > = {
-    SUNDAESWAP: {
-      label: "SundaeSwap",
-      icon: SundaeSwapIcon,
-      textColor: "#E04F16",
-      bgColor: "#FFF4ED",
-      borderColor: "#FFD6AE",
-    },
-    SUNDAESWAPV3: {
-      label: "SundaeSwapV3",
-      icon: SundaeSwapIcon,
-      textColor: "#E04F16",
-      bgColor: "#FFF4ED",
-      borderColor: "#FFD6AE",
-    },
-    MINSWAP: {
-      label: "Minswap",
-      icon: MinSwapIcon,
-      textColor: "#001947",
-      bgColor: "#DFE8FF",
-      borderColor: "#83A2DC",
-    },
-    MINSWAPV2: {
-      label: "MinswapV2",
-      icon: MinSwapIcon,
-      textColor: "#001947",
-      bgColor: "#DFE8FF",
-      borderColor: "#83A2DC",
-    },
-    WINGRIDERS: {
-      label: "WingRiders",
-      icon: "/icons/wingriders.png",
-      textColor: "#7C3AED",
-      bgColor: "#F3E8FF",
-      borderColor: "#C4B5FD",
-    },
-  };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
@@ -118,28 +97,37 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
       <div className='min-w-fit'>
         {/* Summary Row */}
         <div className='bg-grayBgTertiary border-b border-border px-4 py-3'>
-          <div className='text-sm'>
+          <div className='flex items-center gap-1 text-sm'>
             <span className='font-medium text-grayTextSecondary'>
               Token swap order:{" "}
             </span>
-            <span className='font-medium'>
-              {summaryAmountIn.toFixed(0)}{" "}
-              {formatTokenName(aggregatedData.pair.tokenIn)}
-            </span>
+            <div className='flex items-center gap-1'>
+              {getAssetImage(aggregatedData.pair.tokenIn)}
+              <span className='font-medium'>
+                {summaryAmountIn.toFixed(0)}{" "}
+                {formatTokenName(aggregatedData.pair.tokenIn)}
+              </span>
+            </div>
             <span className='mx-2 text-grayTextSecondary'>to</span>
-            <span className='font-medium'>
-              {aggregatedData.totalActualOut ? "" : "~"}
-              {summaryAmountOut.toFixed(0)}{" "}
-              {formatTokenName(aggregatedData.pair.tokenOut)}
-            </span>
+            <div className='flex items-center gap-1'>
+              {getAssetImage(aggregatedData.pair.tokenOut)}
+              <span className='font-medium'>
+                {aggregatedData.totalActualOut ? "" : "~"}
+                {summaryAmountOut.toFixed(0)}{" "}
+                {formatTokenName(aggregatedData.pair.tokenOut)}
+              </span>
+            </div>
             <span className='ml-2 text-grayTextSecondary'>via</span>
-            <span className='ml-1 font-medium capitalize'>
-              {aggregatedData.type === "AGGREGATOR_SWAP"
-                ? "Aggregator"
-                : aggregatedData.type === "DEXHUNTER_SWAP"
-                  ? "Dexhunter aggregator"
-                  : "Direct swap"}
-            </span>
+            <div className='ml-1 flex w-fit items-center gap-1 rounded-md border border-border px-2 text-sm'>
+              <ArrowLeftRight size={15} className='text-primary' />
+              <span className=''>
+                {aggregatedData.type === "AGGREGATOR_SWAP"
+                  ? "Aggregator swap"
+                  : aggregatedData.type === "DEXHUNTER_SWAP"
+                    ? "Dexhunter aggregator"
+                    : "Direct swap"}
+              </span>
+            </div>
           </div>
           <div
             className='mt-3 grid gap-4 text-sm font-medium text-grayTextSecondary'
@@ -170,19 +158,25 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                     style={{ gridTemplateColumns: "40% 20% 20% 20%" }}
                   >
                     <div className='flex items-center gap-2'>
-                      <span>
-                        {order.amount_in.toFixed(0)}{" "}
-                        {formatTokenName(order.token_in.name)}
-                      </span>
+                      <div className='flex items-center gap-1'>
+                        {getAssetImage(order.token_in.name)}
+                        <span>
+                          {order.amount_in.toFixed(0)}{" "}
+                          {formatTokenName(order.token_in.name)}
+                        </span>
+                      </div>
                       <ArrowRight size={14} />
-                      <span>
-                        {!order.actual_out_amount ? "~" : ""}
-                        {actualOut.toFixed(0)}{" "}
-                        {formatTokenName(order.token_out.name)}
-                      </span>
-                      <span className='text-xs text-grayTextSecondary'>on</span>
+                      <div className='flex items-center gap-1'>
+                        {getAssetImage(order.token_out.name)}
+                        <span>
+                          {!order.actual_out_amount ? "~" : ""}
+                          {actualOut.toFixed(0)}{" "}
+                          {formatTokenName(order.token_out.name)}
+                        </span>
+                      </div>
+                      <span className='text-sm text-grayTextSecondary'>on</span>
                       <div
-                        className='flex items-center gap-1 whitespace-nowrap rounded-xl border px-1 text-xs sm:px-1.5'
+                        className='flex items-center gap-1 whitespace-nowrap rounded-xl border px-1 text-sm sm:px-1.5'
                         style={{
                           backgroundColor: dex?.bgColor ?? "transparent",
                           borderColor: dex?.borderColor ?? "var(--border)",
@@ -196,7 +190,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                           />
                         )}
                         <span
-                          className='truncate text-xs sm:text-xs'
+                          className='truncate text-sm sm:text-sm'
                           style={{ color: dex?.textColor ?? "var(--text)" }}
                         >
                           <span className='hidden sm:inline'>
@@ -229,7 +223,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                           <Link
                             to='/tx/$hash'
                             params={{ hash: order.update_tx_hash }}
-                            className='text-xs text-primary'
+                            className='text-sm text-primary'
                           >
                             {formatString(order.update_tx_hash, "short")}
                           </Link>

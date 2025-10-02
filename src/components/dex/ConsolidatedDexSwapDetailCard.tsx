@@ -16,8 +16,7 @@ import {
   ChevronUp,
 } from "lucide-react";
 import DexhunterIcon from "@/resources/images/icons/dexhunter.svg";
-import SundaeSwapIcon from "@/resources/images/icons/sundaeswap.png";
-import MinSwapIcon from "@/resources/images/icons/minswap.png";
+import { dexConfig } from "@/constants/dexConfig";
 
 import { Image } from "../global/Image";
 import { Link } from "@tanstack/react-router";
@@ -37,12 +36,37 @@ import { getConfirmations } from "@/utils/getConfirmations";
 import { renderWithException } from "@/utils/renderWithException";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
+import { generateImageUrl } from "@/utils/generateImageUrl";
+import { encodeAssetName } from "@/utils/asset/encodeAssetName";
+import { alphabetWithNumbers } from "@/constants/alphabet";
 
 interface ConsolidatedDexSwapDetailCardProps {
   miscBasic: ReturnType<typeof useFetchMiscBasic>["data"];
   aggregatedData: AggregatedSwapData | undefined;
   isLoading: boolean;
 }
+
+const getAssetImage = (tokenName: string, isNft = false) => {
+  const fingerprint = getAssetFingerprint(tokenName);
+  const encodedNameArr = encodeAssetName(tokenName).split("");
+
+  return (
+    <Image
+      type='asset'
+      height={20}
+      width={20}
+      className='aspect-square shrink-0 rounded-full'
+      src={generateImageUrl(
+        isNft ? fingerprint : tokenName,
+        "ico",
+        isNft ? "nft" : "token",
+      )}
+      fallbackletters={[...encodedNameArr]
+        .filter(char => alphabetWithNumbers.includes(char.toLowerCase()))
+        .join("")}
+    />
+  );
+};
 
 export const ConsolidatedDexSwapDetailCard: FC<
   ConsolidatedDexSwapDetailCardProps
@@ -90,52 +114,6 @@ export const ConsolidatedDexSwapDetailCard: FC<
     aggregatedData?.orders[0]?.block?.no,
   );
 
-  const dexConfig: Record<
-    string,
-    {
-      label: string;
-      icon: string;
-      textColor: string;
-      bgColor: string;
-      borderColor: string;
-    }
-  > = {
-    SUNDAESWAP: {
-      label: "SundaeSwap",
-      icon: SundaeSwapIcon,
-      textColor: "#E04F16",
-      bgColor: "#FFF4ED",
-      borderColor: "#FFD6AE",
-    },
-    SUNDAESWAPV3: {
-      label: "SundaeSwapV3",
-      icon: SundaeSwapIcon,
-      textColor: "#E04F16",
-      bgColor: "#FFF4ED",
-      borderColor: "#FFD6AE",
-    },
-    MINSWAP: {
-      label: "Minswap",
-      icon: MinSwapIcon,
-      textColor: "#001947",
-      bgColor: "#DFE8FF",
-      borderColor: "#83A2DC",
-    },
-    MINSWAPV2: {
-      label: "MinswapV2",
-      icon: MinSwapIcon,
-      textColor: "#001947",
-      bgColor: "#DFE8FF",
-      borderColor: "#83A2DC",
-    },
-    WINGRIDERS: {
-      label: "WingRiders",
-      icon: "/icons/wingriders.png", // Add this icon
-      textColor: "#7C3AED",
-      bgColor: "#F3E8FF",
-      borderColor: "#C4B5FD",
-    },
-  };
 
   const detailItems = [
     {
@@ -234,55 +212,61 @@ export const ConsolidatedDexSwapDetailCard: FC<
           </div>
         ) : (
           <div className='flex items-center gap-3'>
-            <Link
-              to='/asset/$fingerprint'
-              params={{
-                fingerprint: tokenInFingerPrint,
-              }}
-            >
-              <p className='min-w-[50px] text-primary'>
-                {(() => {
-                  const tokenName = aggregatedData?.pair.tokenIn ?? "";
-                  const renderedName = renderAssetName({ name: tokenName });
+            <div className='flex items-center gap-2'>
+              {getAssetImage(aggregatedData?.pair.tokenIn ?? "")}
+              <Link
+                to='/asset/$fingerprint'
+                params={{
+                  fingerprint: tokenInFingerPrint,
+                }}
+              >
+                <p className='min-w-[50px] text-primary'>
+                  {(() => {
+                    const tokenName = aggregatedData?.pair.tokenIn ?? "";
+                    const renderedName = renderAssetName({ name: tokenName });
 
-                  if (
-                    tokenName === "lovelaces" ||
-                    tokenName === "lovelace" ||
-                    tokenName?.toLowerCase().includes("lovelace") ||
-                    renderedName?.toLowerCase().includes("lovelace")
-                  ) {
-                    return "ADA";
-                  }
+                    if (
+                      tokenName === "lovelaces" ||
+                      tokenName === "lovelace" ||
+                      tokenName?.toLowerCase().includes("lovelace") ||
+                      renderedName?.toLowerCase().includes("lovelace")
+                    ) {
+                      return "ADA";
+                    }
 
-                  return renderedName;
-                })()}
-              </p>
-            </Link>
+                    return renderedName;
+                  })()}
+                </p>
+              </Link>
+            </div>
             <ArrowRight size={15} className='block min-w-[20px]' />
-            <Link
-              to='/asset/$fingerprint'
-              params={{
-                fingerprint: tokenOutFingerPrint,
-              }}
-            >
-              <p className='w-fit text-primary'>
-                {(() => {
-                  const tokenName = aggregatedData?.pair.tokenOut ?? "";
-                  const renderedName = renderAssetName({ name: tokenName });
+            <div className='flex items-center gap-2'>
+              {getAssetImage(aggregatedData?.pair.tokenOut ?? "")}
+              <Link
+                to='/asset/$fingerprint'
+                params={{
+                  fingerprint: tokenOutFingerPrint,
+                }}
+              >
+                <p className='w-fit text-primary'>
+                  {(() => {
+                    const tokenName = aggregatedData?.pair.tokenOut ?? "";
+                    const renderedName = renderAssetName({ name: tokenName });
 
-                  if (
-                    tokenName === "lovelaces" ||
-                    tokenName === "lovelace" ||
-                    tokenName?.toLowerCase().includes("lovelace") ||
-                    renderedName?.toLowerCase().includes("lovelace")
-                  ) {
-                    return "ADA";
-                  }
+                    if (
+                      tokenName === "lovelaces" ||
+                      tokenName === "lovelace" ||
+                      tokenName?.toLowerCase().includes("lovelace") ||
+                      renderedName?.toLowerCase().includes("lovelace")
+                    ) {
+                      return "ADA";
+                    }
 
-                  return renderedName;
-                })()}
-              </p>
-            </Link>
+                    return renderedName;
+                  })()}
+                </p>
+              </Link>
+            </div>
           </div>
         ),
       ),
