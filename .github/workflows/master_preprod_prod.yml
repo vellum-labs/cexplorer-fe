@@ -3,7 +3,7 @@ name: "preprod@prod"
 on:
   workflow_dispatch:
 permissions:
-  contents: read # Minimal permissions for checkout
+  contents: write # Minimal permissions for checkout
   
 jobs:
   CheckUser:
@@ -74,14 +74,22 @@ jobs:
             --omit-dir-times --no-perms --no-owner --no-group --delete \
             ./dist/ job@$SERVER:/var/www/cexplorer_preprod/
 
-      - name: Get previous commit SHA
-        id: previous
+      - name: Tag this commit
+        if: success()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          WORKFLOW_NAME: ${{ github.workflow }}
         run: |
-          PREVIOUS_SHA=$(git rev-list --max-parents=0 HEAD)
-          if git tag | grep -q preprod-prod; then
-            PREVIOUS_SHA=$(git rev-list -n 2 refs/tags/preprod-prod | tail -n 1)
-          fi
-          echo "previous_sha=$PREVIOUS_SHA" >> "$GITHUB_OUTPUT"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+          TAG_NAME="preprod@prod-v${{ github.run_number }}"
+          git tag -f "$TAG_NAME"
+
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO}.git
+          git push -f origin "$TAG_NAME"
+
 
       - name: Get PRs between builds
         id: pr_list
