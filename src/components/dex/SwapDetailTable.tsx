@@ -9,9 +9,9 @@ import MinSwapIcon from "@/resources/images/icons/minswap.png";
 import { Image } from "../global/Image";
 import { Link } from "@tanstack/react-router";
 import Copy from "../global/Copy";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { formatString } from "@/utils/format/format";
+import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
 
 interface SwapDetailTableProps {
   aggregatedData: AggregatedSwapData;
@@ -141,7 +141,10 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                   : "Direct swap"}
             </span>
           </div>
-          <div className='mt-3 grid gap-4 text-sm font-medium text-grayTextSecondary' style={{gridTemplateColumns: '40% 20% 20% 20%'}}>
+          <div
+            className='mt-3 grid gap-4 text-sm font-medium text-grayTextSecondary'
+            style={{ gridTemplateColumns: "40% 20% 20% 20%" }}
+          >
             <div>Route</div>
             <div>Price</div>
             <div>Status</div>
@@ -161,7 +164,11 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                   order.actual_out_amount || order.expected_out_amount;
 
                 return (
-                  <div key={index} className='grid gap-4 text-sm' style={{gridTemplateColumns: '40% 20% 20% 20%'}}>
+                  <div
+                    key={index}
+                    className='grid gap-4 text-sm'
+                    style={{ gridTemplateColumns: "40% 20% 20% 20%" }}
+                  >
                     <div className='flex items-center gap-2'>
                       <span>
                         {order.amount_in.toFixed(0)}{" "}
@@ -203,9 +210,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                         </span>
                       </div>
                     </div>
-                    <div>
-                      <AdaWithTooltip data={price} />
-                    </div>
+                    <div>{formatSmallValueWithSub(price / 1e12, "₳")}</div>
                     <div className='flex items-center gap-1'>
                       {getStatusIcon(order.status)}
                       <span className='capitalize'>
