@@ -54,8 +54,6 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
     { label: "Private name", value: <AddCustomLabel address={address} /> },
   ];
 
-  console.log(data);
-
   const stakeKey = [
     {
       label: "Status",

@@ -175,6 +175,8 @@ export const AddressDetailPage: FC = () => {
           <WatchlistSection
             ident={address}
             isLoading={addressQuery.isLoading}
+            enableWatchlistModal={!!stakeKey}
+            stakeKey={rewardsAddress}
           />
         </div>
         <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pb-5 pt-3 md:px-desktop xl:flex-nowrap xl:justify-start'>

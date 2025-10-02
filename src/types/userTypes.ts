@@ -211,6 +211,100 @@ export type WatchlistResponse = ResponseCore<{
   }[];
 }>;
 
+export interface StakeDelegation {
+  id: string | null;
+  meta: string | null;
+  delegation: string | null;
+}
+
+export interface StakeStatus {
+  amount: number | null;
+  accounts: number;
+  deleg: StakeDelegation;
+}
+
+export interface StakeReward {
+  total: number;
+  withdrawn: number | null;
+}
+
+export interface StakeInfo {
+  slot_update: number | null;
+  slot_first_registered: number | null;
+  slot_deregistered: number | null;
+  active: boolean | null;
+}
+
+export interface Stake {
+  active: StakeStatus;
+  live: StakeStatus;
+  reward: StakeReward;
+  info: StakeInfo;
+}
+
+export interface AssetMarket {
+  quantity: number;
+  price: number | null;
+  liquidity: number | null;
+}
+
+export interface Asset {
+  name: string;
+  quantity: number;
+  market: AssetMarket;
+  registry: string | null;
+}
+
+export interface UserInfo {
+  profile: string | null;
+  address: string | null;
+  membership: string | null;
+}
+
+export interface StakeKeyData {
+  view: string;
+  user: UserInfo;
+  hash_raw: string;
+  script_hash: string | null;
+  adahandle: string | null;
+  stake: Stake;
+  vote: unknown | null;
+  asset: Asset[];
+}
+
+export type AccountListResponse = ResponseCore<{
+  data: StakeKeyData[];
+}>;
+
+export interface PolicyData {
+  id: string;
+  policy: {
+    quantity: number;
+    mintc: number;
+    last_mint: string;
+    first_mint: string;
+    onchain: any | null;
+  };
+  collection: {
+    name: string;
+    url: string;
+    stats: {
+      floor: number;
+      owners: number;
+      volume: number;
+      royalties: {
+        rate: number;
+        address: string;
+      };
+    };
+  };
+}
+
+export type PolicyListResponse = ResponseCore<{
+  data: PolicyData[];
+  count: number;
+}>;
+
 export interface Poll {
   name: string;
   url: string;

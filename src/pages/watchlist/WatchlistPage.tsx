@@ -1,5 +1,7 @@
 import { AddressesTab } from "@/components/address/tabs/AddressesTab";
 import { DrepListTab } from "@/components/drep/tabs/DrepListTab";
+import { StakeListTab } from "@/components/stake/tabs/StakeListTab";
+import { PolicyListTab } from "@/components/policy/tabs/PolicyListTab";
 import Tabs from "@/components/global/Tabs";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { useWatchlistStore } from "@/stores/watchlistStore";
@@ -13,19 +15,30 @@ import Button from "@/components/global/Button";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import { Star, Wallet } from "lucide-react";
 import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
-import { useFetchWatchlist } from "@/services/user";
+import { useFetchWatchlist, useFetchAccountList, useFetchPolicyList } from "@/services/user";
 
 export const WatchlistPage = () => {
   const token = useAuthToken();
   const query = useFetchWatchlist(token);
+  const accountListQuery = useFetchAccountList(token);
+  const policyListQuery = useFetchPolicyList(token);
   const { watchlist: data } = useWatchlistStore();
   const [showConnectModal, setShowConnectModal] = useState(false);
   const count = useMemo(() => {
+    const stakeCount = accountListQuery.data?.data?.data?.length ?? 0;
+
     if (!data) {
-      return { addresses: 0, assets: 0, pools: 0, dreps: 0 };
+      return {
+        addresses: 0,
+        assets: 0,
+        pools: 0,
+        dreps: 0,
+        stakes: stakeCount,
+        policies: 0,
+      };
     }
-    
-    return data.reduce(
+
+    const watchlistCount = data.reduce(
       (acc, item) => {
         switch (item.type) {
           case "address":
@@ -40,75 +53,124 @@ export const WatchlistPage = () => {
           case "drep":
             acc.dreps++;
             break;
+          case "policy":
+            acc.policies++;
+            break;
         }
         return acc;
       },
-      { addresses: 0, assets: 0, pools: 0, dreps: 0 }
+      { addresses: 0, assets: 0, pools: 0, dreps: 0, policies: 0 },
     );
-  }, [data]);
 
-  const tabItems = useMemo(() => [
-    {
-      key: "wallets",
-      label: (
-        <div className='flex items-center gap-1'>
-          Wallets <Badge color='gray'>{count.addresses}</Badge>
-        </div>
-      ),
-      content: (
-        <div className='mt-6'>
-          <AddressesTab watchlist_only='1' />
-        </div>
-      ),
-      visible: count.addresses > 0,
-    },
-    {
-      key: "assets",
-      label: (
-        <div className='flex items-center gap-1'>
-          Assets <Badge color='gray'>{count.assets}</Badge>
-        </div>
-      ),
-      content: (
-        <div className='mt-6'>
-          <AssetListPage watchlist showHeader={false} />
-        </div>
-      ),
-      visible: count.assets > 0,
-    },
-    {
-      key: "pools",
-      label: (
-        <div className='flex items-center gap-1'>
-          Pools <Badge color='gray'>{count.pools}</Badge>
-        </div>
-      ),
-      content: (
-        <div className='mt-6'>
-          <PoolListTab watchlist />
-        </div>
-      ),
-      visible: count.pools > 0,
-    },
-    {
-      key: "dreps",
-      label: (
-        <div className='flex items-center gap-1'>
-          Dreps <Badge color='gray'>{count.dreps}</Badge>
-        </div>
-      ),
-      content: (
-        <div className='mt-6'>
-          <DrepListTab watchlist />
-        </div>
-      ),
-      visible: count.dreps > 0,
-    },
-  ], [count]);
+    return { ...watchlistCount, stakes: stakeCount };
+  }, [data, accountListQuery.data]);
 
-  const totalWatchlistItems = count.addresses + count.assets + count.pools + count.dreps;
-  const isLoading = token && query.isLoading;
-  const hasError = token && query.isError;
+  const tabItems = useMemo(
+    () => [
+      {
+        key: "stakes",
+        label: (
+          <div className='flex items-center gap-1'>
+            Stakes <Badge color='gray'>{count.stakes}</Badge>
+          </div>
+        ),
+        content: (
+          <div className='mt-6'>
+            <StakeListTab />
+          </div>
+        ),
+        visible: count.stakes > 0,
+      },
+      {
+        key: "wallets",
+        label: (
+          <div className='flex items-center gap-1'>
+            Wallets <Badge color='gray'>{count.addresses}</Badge>
+          </div>
+        ),
+        content: (
+          <div className='mt-6'>
+            <AddressesTab watchlist_only='1' />
+          </div>
+        ),
+        visible: count.addresses > 0,
+      },
+      {
+        key: "assets",
+        label: (
+          <div className='flex items-center gap-1'>
+            Assets <Badge color='gray'>{count.assets}</Badge>
+          </div>
+        ),
+        content: (
+          <div className='mt-6'>
+            <AssetListPage watchlist showHeader={false} />
+          </div>
+        ),
+        visible: count.assets > 0,
+      },
+      {
+        key: "pools",
+        label: (
+          <div className='flex items-center gap-1'>
+            Pools <Badge color='gray'>{count.pools}</Badge>
+          </div>
+        ),
+        content: (
+          <div className='mt-6'>
+            <PoolListTab watchlist />
+          </div>
+        ),
+        visible: count.pools > 0,
+      },
+      {
+        key: "dreps",
+        label: (
+          <div className='flex items-center gap-1'>
+            Dreps <Badge color='gray'>{count.dreps}</Badge>
+          </div>
+        ),
+        content: (
+          <div className='mt-6'>
+            <DrepListTab watchlist />
+          </div>
+        ),
+        visible: count.dreps > 0,
+      },
+      {
+        key: "policies",
+        label: (
+          <div className='flex items-center gap-1'>
+            Policies <Badge color='gray'>{count.policies}</Badge>
+          </div>
+        ),
+        content: (
+          <div className='mt-6'>
+            {policyListQuery?.isLoading ? (
+              <div className='flex flex-col gap-4'>
+                <LoadingSkeleton height='40px' width='100%' />
+                <LoadingSkeleton height='200px' width='100%' />
+              </div>
+            ) : (
+              <PolicyListTab />
+            )}
+          </div>
+        ),
+        visible: count.policies > 0,
+      },
+    ],
+    [count, policyListQuery?.isLoading],
+  );
+
+  const totalWatchlistItems =
+    count.addresses +
+    count.assets +
+    count.pools +
+    count.dreps +
+    count.stakes +
+    count.policies;
+  const isLoading = token && (query.isLoading || accountListQuery.isLoading);
+  const hasError = token && (query.isError || accountListQuery.isError);
 
   return (
     <>
@@ -130,13 +192,13 @@ export const WatchlistPage = () => {
             ) : hasError ? (
               <EmptyState
                 icon={<Star size={24} />}
-                primaryText="Failed to load your watchlist."
-                secondaryText="There was an error loading your watchlist. Please try refreshing the page."
+                primaryText='Failed to load your watchlist.'
+                secondaryText='There was an error loading your watchlist. Please try refreshing the page.'
                 button={
                   <Button
-                    label="Retry"
-                    variant="primary"
-                    size="md"
+                    label='Retry'
+                    variant='primary'
+                    size='md'
                     onClick={() => query.refetch()}
                   />
                 }
@@ -147,7 +209,7 @@ export const WatchlistPage = () => {
               <EmptyState
                 icon={<Star size={24} />}
                 primaryText="You don't have anything in your watchlist yet."
-                secondaryText="Star your favorite stake pools, DReps, wallets, or assets to keep track of them here."
+                secondaryText='Star your favorite stake pools, DReps, wallets, or assets to keep track of them here.'
               />
             )}
           </div>
@@ -155,13 +217,13 @@ export const WatchlistPage = () => {
           <div className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
             <EmptyState
               icon={<Wallet size={24} />}
-              primaryText="Wallet not connected."
-              secondaryText="Connect your wallet to start building your watchlist of favorite stake pools, DReps, wallets, and assets."
+              primaryText='Wallet not connected.'
+              secondaryText='Connect your wallet to start building your watchlist of favorite stake pools, DReps, wallets, and assets.'
               button={
                 <Button
-                  label="Connect wallet"
-                  variant="primary"
-                  size="md"
+                  label='Connect wallet'
+                  variant='primary'
+                  size='md'
                   onClick={() => setShowConnectModal(true)}
                 />
               }
