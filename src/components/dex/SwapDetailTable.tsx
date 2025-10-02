@@ -199,7 +199,6 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                           className='truncate text-xs sm:text-xs'
                           style={{ color: dex?.textColor ?? "var(--text)" }}
                         >
-                          {/* Use shorter names on mobile */}
                           <span className='hidden sm:inline'>
                             {dex?.label ?? order.dex}
                           </span>
@@ -210,7 +209,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                         </span>
                       </div>
                     </div>
-                    <div>{formatSmallValueWithSub(price / 1e12, "₳")}</div>
+                    <div>{formatSmallValueWithSub(price / 1e12, "₳ ")}</div>
                     <div className='flex items-center'>
                       <p className='flex w-fit items-center gap-1 rounded-md border border-border px-2 text-sm'>
                         {getStatusIcon(order.status)}

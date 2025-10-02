@@ -59,37 +59,41 @@ export function aggregateSwapData(
     0,
   );
 
+  // ADA Price calculation: (sum of ADA from all trades / sum of tokens from all trades)
   let adaPrice = 0;
-  const adaOrders = orders.filter(
-    order =>
+  let totalAdaAmount = 0;
+  let totalTokenAmount = 0;
+
+  orders.forEach(order => {
+    const isConfirmed = order.status === "COMPLETE";
+
+    // Check if this is ADA → TOKEN or TOKEN → ADA
+    const isAdaInput =
       order.token_in.name === "lovelaces" ||
       order.token_in.name === "lovelace" ||
-      order.token_out.name === "lovelaces" ||
-      order.token_out.name === "lovelace",
-  );
+      order.token_in.name === "000000000000000000000000000000000000000000000000000000006c6f76656c616365";
 
-  if (adaOrders.length > 0) {
-    let totalAdaAmount = 0;
-    let totalTokenAmount = 0;
+    if (isAdaInput) {
+      // ADA → TOKEN: amount_in is ADA, output is tokens
+      const tokenOutAmount = isConfirmed
+        ? (order.actual_out_amount || order.expected_out_amount)
+        : order.expected_out_amount;
 
-    adaOrders.forEach(order => {
-      const isBuying =
-        order.token_in.name === "lovelaces" ||
-        order.token_in.name === "lovelace";
-      const adaAmount = isBuying
-        ? order.amount_in
-        : order.actual_out_amount || order.expected_out_amount;
-      const tokenAmount = isBuying
-        ? order.actual_out_amount || order.expected_out_amount
-        : order.amount_in;
+      totalAdaAmount += order.amount_in;
+      totalTokenAmount += tokenOutAmount;
+    } else {
+      // TOKEN → ADA: amount_in is tokens, output is ADA
+      const adaOutAmount = isConfirmed
+        ? (order.actual_out_amount || order.expected_out_amount)
+        : order.expected_out_amount;
 
-      totalAdaAmount += adaAmount;
-      totalTokenAmount += tokenAmount;
-    });
-
-    if (totalTokenAmount > 0) {
-      adaPrice = (totalAdaAmount / totalTokenAmount) * 1e6;
+      totalAdaAmount += adaOutAmount;
+      totalTokenAmount += order.amount_in;
     }
+  });
+
+  if (totalTokenAmount > 0) {
+    adaPrice = (totalAdaAmount / totalTokenAmount) * 1e6;
   }
 
   const statuses = orders.map(order => order.status);

@@ -32,12 +32,11 @@ import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 
 import { addressIcons } from "@/constants/address";
 import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
-import { currencySigns } from "@/constants/currencies";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { getConfirmations } from "@/utils/getConfirmations";
 import { renderWithException } from "@/utils/renderWithException";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
-import { formatNumberWithSuffix } from "@/utils/format/format";
+import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
 
 interface ConsolidatedDexSwapDetailCardProps {
   miscBasic: ReturnType<typeof useFetchMiscBasic>["data"];
@@ -80,10 +79,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
     aggregatedData?.pair.tokenOut ?? "",
   );
 
-  const [ada, usd] = lovelaceToAdaWithRates(
-    aggregatedData?.adaPrice ?? 0,
-    curr,
-  );
+  const [, usd] = lovelaceToAdaWithRates(aggregatedData?.adaPrice ?? 0, curr);
 
   const isSuccess = aggregatedData?.status === "COMPLETE";
   const isCanceled = aggregatedData?.status === "CANCELLED";
@@ -314,13 +310,16 @@ export const ConsolidatedDexSwapDetailCard: FC<
       ),
       value:
         currency === "ada" ? (
-          <p title={ada} className='w-fit text-right'>
-            <AdaWithTooltip data={aggregatedData?.adaPrice ?? 0} />
-          </p>
+          <div className='text-sm text-grayTextPrimary'>
+            {formatSmallValueWithSub(
+              (aggregatedData?.adaPrice ?? 0) / 1e6,
+              "₳ ",
+            )}
+          </div>
         ) : (
-          <p title={ada} className='w-fit text-right'>
-            {currencySigns["usd"]} {formatNumberWithSuffix(usd)}
-          </p>
+          <div className='text-sm text-grayTextPrimary'>
+            {formatSmallValueWithSub(usd, "$ ")}
+          </div>
         ),
     },
     {
