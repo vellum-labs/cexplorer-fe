@@ -1,9 +1,12 @@
 import type { FC } from "react";
+import { useMemo } from "react";
 import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
-import { DexSwapDetailCard } from "@/components/dex/DexSwapDetailCard";
+import { ConsolidatedDexSwapDetailCard } from "@/components/dex/ConsolidatedDexSwapDetailCard";
+import { SwapDetailTable } from "@/components/dex/SwapDetailTable";
 
 import { useFetchMiscBasic } from "@/services/misc";
 import { useFetchDeFiOrderList } from "@/services/token";
+import { aggregateSwapData } from "@/utils/dex/aggregateSwapData";
 
 import { getRouteApi } from "@tanstack/react-router";
 import { formatString } from "@/utils/format/format";
@@ -27,6 +30,12 @@ export const DexSwapDetailPage: FC = () => {
   const { data: miscBasic } = useFetchMiscBasic();
 
   const swapDetail = swapData?.pages.flatMap(page => page.data?.data);
+
+  // Aggregate swap data from multiple orders
+  const aggregatedData = useMemo(() => {
+    if (!swapDetail || swapDetail.length === 0) return undefined;
+    return aggregateSwapData(swapDetail) || undefined;
+  }, [swapDetail]);
 
   return (
     <PageBase
@@ -69,20 +78,16 @@ export const DexSwapDetailPage: FC = () => {
       adsCarousel={false}
     >
       <div className='flex w-full max-w-desktop flex-col gap-5 p-mobile lg:p-desktop'>
-        {isLoading ? (
-          <DexSwapDetailCard
-            miscBasic={undefined}
-            swapDetail={undefined}
-            isLoading={true}
-          />
-        ) : (
-          swapDetail?.map(item => (
-            <DexSwapDetailCard
-              miscBasic={miscBasic}
-              swapDetail={item}
-              isLoading={false}
-            />
-          ))
+        {/* Consolidated Overview Card */}
+        <ConsolidatedDexSwapDetailCard
+          miscBasic={miscBasic}
+          aggregatedData={aggregatedData}
+          isLoading={isLoading}
+        />
+
+        {/* Swap Detail Table - only show if we have data and it's not loading */}
+        {!isLoading && aggregatedData && (
+          <SwapDetailTable aggregatedData={aggregatedData} />
         )}
       </div>
     </PageBase>
