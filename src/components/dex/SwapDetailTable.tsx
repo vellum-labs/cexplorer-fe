@@ -211,11 +211,18 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                       </div>
                     </div>
                     <div>{formatSmallValueWithSub(price / 1e12, "₳")}</div>
-                    <div className='flex items-center gap-1'>
-                      {getStatusIcon(order.status)}
-                      <span className='capitalize'>
-                        {order.status.toLowerCase()}
-                      </span>
+                    <div className='flex items-center'>
+                      <p className='flex w-fit items-center gap-1 rounded-md border border-border px-2 text-sm'>
+                        {getStatusIcon(order.status)}
+                        <span className='capitalize'>
+                          {order.status === "PARTIALLY_COMPLETE"
+                            ? "Partially completed"
+                            : order.status
+                              ? order.status[0].toUpperCase() +
+                                order.status.slice(1).toLowerCase()
+                              : ""}
+                        </span>
+                      </p>
                     </div>
                     <div>
                       {order.update_tx_hash ? (
