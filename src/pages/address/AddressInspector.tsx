@@ -33,6 +33,58 @@ export const AddressInspector: FC = () => {
     addr = Address.from(data?.address as string);
   }
 
+  const getAddressTypeInfo = () => {
+    if (!data?.header || data.header === -1) {
+      return { type: "Unknown", network: "Unknown" };
+    }
+
+    const headerByte = data.header;
+    const addressType = (headerByte >> 4) & 0x0f;
+    const networkId = headerByte & 0x0f;
+
+    let typeDescription = "";
+    switch (addressType) {
+      case 0:
+        typeDescription = "Payment address (key)";
+        break;
+      case 1:
+        typeDescription = "Payment address (script)";
+        break;
+      case 2:
+        typeDescription = "Payment address with stake key";
+        break;
+      case 3:
+        typeDescription = "Payment address with stake script";
+        break;
+      case 4:
+        typeDescription = "Payment address with stake pointer";
+        break;
+      case 5:
+        typeDescription = "Payment address with stake script pointer";
+        break;
+      case 6:
+        typeDescription = "Enterprise address (key)";
+        break;
+      case 7:
+        typeDescription = "Enterprise address (script)";
+        break;
+      case 14:
+        typeDescription = "Stake address (key)";
+        break;
+      case 15:
+        typeDescription = "Stake address (script)";
+        break;
+      default:
+        typeDescription = `Unknown type (${addressType})`;
+    }
+
+    const network = networkId === 1 ? "Mainnet" : "Testnet";
+
+    return { type: typeDescription, network };
+  };
+
+  const addressTypeInfo = getAddressTypeInfo();
+
   const rows = [
     {
       title: "Address",
@@ -62,9 +114,40 @@ export const AddressInspector: FC = () => {
       })(),
     },
     {
-      title: "Stake key",
+      title: "Address details",
       darker: true,
       value: (() => {
+        if (!data?.header || data.header === -1) {
+          return "Not found";
+        }
+
+        return (
+          <div className='flex flex-col gap-1'>
+            <span className='font-medium'>{addressTypeInfo.type}</span>
+            <span className='text-sm text-grayTextPrimary'>
+              {addressTypeInfo.network}
+            </span>
+          </div>
+        );
+      })(),
+    },
+    {
+      title: "Stake key",
+      darker: false,
+      value: (() => {
+        const isStakeAddress =
+          data?.address?.startsWith("stake") ||
+          data?.address?.startsWith("stake_test");
+
+        if (isStakeAddress && data?.address) {
+          return (
+            <div className='flex items-center gap-2'>
+              <span>{data.address}</span>
+              <Copy copyText={data.address} className='translate-y-[2px]' />
+            </div>
+          );
+        }
+
         if (!addr?.rewardAddress) {
           return "Not found";
         }
@@ -81,6 +164,16 @@ export const AddressInspector: FC = () => {
       })(),
     },
     {
+      title: "Network",
+      darker: true,
+      value: (() => {
+        if (typeof data?.magic === "undefined" || data.magic === -1) {
+          return "Not found";
+        }
+        return data.magic === 1 ? "Mainnet" : "Testnet";
+      })(),
+    },
+    {
       title: "Magic",
       darker: false,
       value:
@@ -92,27 +185,46 @@ export const AddressInspector: FC = () => {
       title: "Header",
       darker: true,
       value:
-        typeof data?.header === "undefined" || data.magic === -1
+        typeof data?.header === "undefined" || data?.header === -1
           ? "Not found"
-          : data.header,
+          : `0x${data.header.toString(16).padStart(2, "0")}`,
     },
     {
       title: "Raw address",
       darker: false,
       value: (() => {
-        if (!addr.raw) {
+        if (!data?.address) {
           return "Not found";
+        }
+
+        const addressInput = debouncedAddressSearch;
+        const isHexInput =
+          /^[0-9a-fA-F]+$/.test(addressInput) &&
+          addressInput.length % 2 === 0 &&
+          addressInput.length >= 58;
+
+        let rawHex: string;
+        if (isHexInput) {
+          rawHex = addressInput;
+        } else {
+          try {
+            const decodedBytes = Address.bech32DecodeToBytes(data.address);
+            rawHex = Address.toHexString(decodedBytes);
+          } catch {
+            if (addr.raw && addr.raw.length > 0) {
+              rawHex = Address.toHexString(addr.raw);
+            } else {
+              return "Not found";
+            }
+          }
         }
 
         return (
           <div className='flex items-center gap-2 py-3'>
             <span className='max-w-[1000px] text-wrap break-words'>
-              {Address.toHexString(addr.raw)}
+              {rawHex}
             </span>
-            <Copy
-              copyText={Address.toHexString(addr.raw)}
-              className='translate-y-[2px]'
-            />
+            <Copy copyText={rawHex} className='translate-y-[2px]' />
           </div>
         );
       })(),

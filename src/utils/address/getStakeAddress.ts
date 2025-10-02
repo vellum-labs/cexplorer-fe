@@ -20,10 +20,21 @@ export class Address {
       const bechBytes = Address.bech32DecodeToBytes(address);
       this.isByron = false;
       this.raw = bechBytes;
-      this.header = this.raw[0] >> 4;
-      this.network = this.raw[0] & 0x0f;
-      this.payment = Address.toHexString(this.raw.slice(1, 29));
-      this.stake = Address.toHexString(this.raw.slice(29));
+
+      const headerByte = this.raw[0];
+      this.header = headerByte >> 4;
+      this.network = headerByte & 0x0f;
+
+      const isStakeAddress = this.header === 14 || this.header === 15;
+
+      if (isStakeAddress) {
+        this.payment = Address.toHexString(this.raw.slice(1, 29));
+        this.stake = "";
+      } else {
+        this.payment = Address.toHexString(this.raw.slice(1, 29));
+        this.stake =
+          this.raw.length > 29 ? Address.toHexString(this.raw.slice(29)) : "";
+      }
     } catch (e) {
       this.isByron = true;
 
@@ -46,10 +57,23 @@ export class Address {
     if (this.isByron) {
       return "";
     }
+
+    const isStakeAddress = this.header === 14 || this.header === 15;
+    if (isStakeAddress) {
+      return "";
+    }
+
+    if (!this.stake) {
+      return "";
+    }
+
     const prefix = this.network === 1 ? "stake" : "stake_test";
 
-    const headerHex = (14 + ((this.header & 2) >> 1)).toString(16);
-    const dataHex = headerHex + this.network.toString(16) + this.stake;
+    const stakeHeaderType = 14;
+    const headerByte = (stakeHeaderType << 4) | this.network;
+    const headerHex = headerByte.toString(16).padStart(2, "0");
+    const dataHex = headerHex + this.stake;
+
     return Address.encodeBech32(dataHex, prefix);
   }
 
