@@ -72,11 +72,16 @@ export const WatchlistStar = ({
       return;
     } else {
       setIsLiked(!isLiked);
-      const data = await fetchWatchlist({
-        token,
-        add: ident,
-      });
-      setWatchlist(data?.data?.data);
+      try {
+        const data = await fetchWatchlist({
+          token,
+          add: ident,
+        });
+        setWatchlist(data?.data?.data);
+      } catch (error) {
+        console.error("Error adding to watchlist:", error);
+        setIsLiked(isLiked);
+      }
     }
   };
 
@@ -86,12 +91,17 @@ export const WatchlistStar = ({
     setIsLiked(false);
     setShowRemoveModal(false);
 
-    const data = await fetchWatchlist({
-      token,
-      remove: ident,
-    });
+    try {
+      const data = await fetchWatchlist({
+        token,
+        remove: ident,
+      });
 
-    setWatchlist(data?.data?.data);
+      setWatchlist(data?.data?.data);
+    } catch (error) {
+      console.error("Error removing from watchlist:", error);
+      setIsLiked(true);
+    }
   };
 
   const handleAddStakeKey = async () => {
@@ -99,13 +109,18 @@ export const WatchlistStar = ({
 
     setShowOptionsModal(false);
 
-    const data = await fetchWatchlist({
-      token,
-      add: stakeKey,
-    });
+    try {
+      const data = await fetchWatchlist({
+        token,
+        add: stakeKey,
+      });
 
-    setWatchlist(data?.data?.data);
-    setIsStakeKeyInWatchlist(true);
+      setWatchlist(data?.data?.data);
+      setIsStakeKeyInWatchlist(true);
+    } catch (error) {
+      console.error("Error adding stake key to watchlist:", error);
+      setShowOptionsModal(true);
+    }
   };
 
   const handleAddAddress = async () => {
@@ -113,12 +128,17 @@ export const WatchlistStar = ({
 
     setShowOptionsModal(false);
 
-    const data = await fetchWatchlist({
-      token,
-      add: ident,
-    });
+    try {
+      const data = await fetchWatchlist({
+        token,
+        add: ident,
+      });
 
-    setWatchlist(data?.data?.data);
+      setWatchlist(data?.data?.data);
+    } catch (error) {
+      console.error("Error adding address to watchlist:", error);
+      setShowOptionsModal(true);
+    }
   };
 
   const handleRemoveStakeKey = async () => {
@@ -126,13 +146,18 @@ export const WatchlistStar = ({
 
     setShowOptionsModal(false);
 
-    const data = await fetchWatchlist({
-      token,
-      remove: stakeKey,
-    });
+    try {
+      const data = await fetchWatchlist({
+        token,
+        remove: stakeKey,
+      });
 
-    setWatchlist(data?.data?.data);
-    setIsStakeKeyInWatchlist(false);
+      setWatchlist(data?.data?.data);
+      setIsStakeKeyInWatchlist(false);
+    } catch (error) {
+      console.error("Error removing stake key from watchlist:", error);
+      setShowOptionsModal(true);
+    }
   };
 
   return (
@@ -175,41 +200,20 @@ export const WatchlistStar = ({
                 : "Choose what to add to your watchlist:"}
             </p>
             <div className='flex w-full flex-col items-center gap-3'>
-              {isStakeKeyInWatchlist ? (
-                <>
-                  <Button
-                    onClick={handleAddAddress}
-                    variant='primary'
-                    label='Add Address'
-                    size='lg'
-                    className='w-full'
-                  />
-                  <Button
-                    onClick={handleRemoveStakeKey}
-                    variant='secondary'
-                    label='Remove Stake Key'
-                    size='md'
-                    className='w-full'
-                  />
-                </>
-              ) : (
-                <>
-                  <Button
-                    onClick={handleAddStakeKey}
-                    variant='primary'
-                    label='Add Stake Key'
-                    size='lg'
-                    className='w-full'
-                  />
-                  <Button
-                    onClick={handleAddAddress}
-                    variant='secondary'
-                    label='Add Address'
-                    size='md'
-                    className='w-full'
-                  />
-                </>
-              )}
+              <Button
+                onClick={isStakeKeyInWatchlist ? handleAddAddress : handleAddStakeKey}
+                variant='primary'
+                label={isStakeKeyInWatchlist ? 'Add Address' : 'Add Stake Key'}
+                size='lg'
+                className='w-full'
+              />
+              <Button
+                onClick={isStakeKeyInWatchlist ? handleRemoveStakeKey : handleAddAddress}
+                variant='secondary'
+                label={isStakeKeyInWatchlist ? 'Remove Stake Key' : 'Add Address'}
+                size='md'
+                className='w-full'
+              />
             </div>
           </div>
         </Modal>

@@ -30,46 +30,61 @@ export const StakeListTab: FC = () => {
   const columns: TableColumns<StakeKeyData> = [
     {
       key: "view",
-      render: item => (
-        <div className='flex items-center gap-2'>
-          <div className='flex flex-col'>
-            <Link
-              to='/stake/$stakeAddr'
-              params={{ stakeAddr: item.view }}
-              className='font-medium text-primary hover:underline'
-            >
-              {formatString(item.view, "long")}
-            </Link>
-            {item.adahandle && (
-              <AdaHandleBadge hex={item.adahandle} link className='mt-1' />
-            )}
+      render: item => {
+        if (!item?.view) {
+          return <span className='text-grayTextPrimary'>-</span>;
+        }
+
+        return (
+          <div className='flex items-center gap-2'>
+            <div className='flex flex-col'>
+              <Link
+                to='/stake/$stakeAddr'
+                params={{ stakeAddr: item.view }}
+                className='font-medium text-primary hover:underline'
+              >
+                {formatString(item.view, "long")}
+              </Link>
+              {item.adahandle && (
+                <AdaHandleBadge hex={item.adahandle} link className='mt-1' />
+              )}
+            </div>
+            <Copy copyText={item.view} />
           </div>
-          <Copy copyText={item.view} />
-        </div>
-      ),
+        );
+      },
       title: "Stake Address",
       visible: true,
       widthPx: 200,
     },
     {
       key: "live_stake",
-      render: item => <AdaWithTooltip data={item.stake?.live?.amount ?? 0} />,
+      render: item => {
+        if (!item) return <span className='text-grayTextPrimary'>-</span>;
+        return <AdaWithTooltip data={item.stake?.live?.amount ?? 0} />;
+      },
       title: "Live Stake",
       visible: true,
       widthPx: 120,
     },
     {
       key: "active_stake",
-      render: item => <AdaWithTooltip data={item.stake?.active?.amount ?? 0} />,
+      render: item => {
+        if (!item) return <span className='text-grayTextPrimary'>-</span>;
+        return <AdaWithTooltip data={item.stake?.active?.amount ?? 0} />;
+      },
       title: "Active Stake",
       visible: true,
       widthPx: 120,
     },
     {
       key: "accounts",
-      render: item => (
-        <span className='font-medium'>{item.stake?.active?.accounts ?? 0}</span>
-      ),
+      render: item => {
+        if (!item) return <span className='text-grayTextPrimary'>-</span>;
+        return (
+          <span className='font-medium'>{item.stake?.active?.accounts ?? 0}</span>
+        );
+      },
       title: "Accounts",
       visible: true,
       widthPx: 80,
@@ -77,12 +92,13 @@ export const StakeListTab: FC = () => {
     {
       key: "assets",
       render: item => {
+        if (!item) return <span className='text-grayTextPrimary'>-</span>;
+
         const assets = item.asset ?? [];
         if (assets.length === 0) {
           return <span className='text-grayTextPrimary'>No assets</span>;
         }
 
-        // Transform Asset[] to AddressAsset[] format
         const transformedAssets = assets.map(asset => ({
           ...asset,
           registry: asset.registry ? { name: asset.registry } : undefined,
@@ -91,7 +107,6 @@ export const StakeListTab: FC = () => {
         try {
           return <TokenSelectCombobox items={transformedAssets as any} />;
         } catch (error) {
-          // Fallback to simple count if TokenSelectCombobox fails
           return (
             <span className='text-sm font-medium'>
               {assets.length} asset{assets.length !== 1 ? "s" : ""}
