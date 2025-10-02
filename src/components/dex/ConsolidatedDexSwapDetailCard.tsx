@@ -25,6 +25,7 @@ import Copy from "../global/Copy";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";
 import { AdaWithTooltip } from "../global/AdaWithTooltip";
 import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
+import { SwapDetailTable } from "./SwapDetailTable";
 
 import { useDeFiOrderListTableStore } from "@/stores/tables/deFiOrderListTableStore";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
@@ -507,6 +508,13 @@ export const ConsolidatedDexSwapDetailCard: FC<
             ))}
           </div>
         ) : null,
+    },
+    {
+      key: "swapDetail",
+      title: "Swap detail",
+      value: aggregatedData ? (
+        <SwapDetailTable aggregatedData={aggregatedData} />
+      ) : null,
     },
   ];
 
