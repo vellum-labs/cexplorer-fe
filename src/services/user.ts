@@ -6,6 +6,7 @@ import type { ArticleUrl } from "@/types/articleTypes";
 import type { ResponseCore } from "@/types/commonTypes";
 import type {
   AccountListResponse,
+  PolicyListResponse,
   AdminArticleCreationResponse,
   AdminArticleDetailResponse,
   AdminArticleListResponse,
@@ -366,6 +367,28 @@ export const useFetchAccountList = (token: string) => {
   return useQuery({
     queryKey: ["account-list", token],
     queryFn: () => fetchAccountList({ token }),
+    staleTime: 120000,
+    enabled: !!token,
+  });
+};
+
+export const fetchPolicyList = async ({ token }: { token: string }) => {
+  const url = "/policy/list";
+
+  const options = {
+    params: { watchlist_only: 1 },
+    headers: {
+      usertoken: token,
+    },
+  };
+
+  return handleFetch<PolicyListResponse>(url, undefined, options);
+};
+
+export const useFetchPolicyList = (token: string) => {
+  return useQuery({
+    queryKey: ["policy-list", token],
+    queryFn: () => fetchPolicyList({ token }),
     staleTime: 120000,
     enabled: !!token,
   });

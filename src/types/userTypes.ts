@@ -276,6 +276,35 @@ export type AccountListResponse = ResponseCore<{
   data: StakeKeyData[];
 }>;
 
+export interface PolicyData {
+  id: string;
+  policy: {
+    quantity: number;
+    mintc: number;
+    last_mint: string;
+    first_mint: string;
+    onchain: any | null;
+  };
+  collection: {
+    name: string;
+    url: string;
+    stats: {
+      floor: number;
+      owners: number;
+      volume: number;
+      royalties: {
+        rate: number;
+        address: string;
+      };
+    };
+  };
+}
+
+export type PolicyListResponse = ResponseCore<{
+  data: PolicyData[];
+  count: number;
+}>;
+
 export interface Poll {
   name: string;
   url: string;

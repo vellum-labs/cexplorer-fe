@@ -10,7 +10,6 @@ import { formatString } from "@/utils/format/format";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { useFetchAccountList } from "@/services/user";
 import type { StakeKeyData } from "@/types/userTypes";
-import { WatchlistStar } from "@/components/global/watchlist/WatchlistStar";
 import Copy from "@/components/global/Copy";
 import { Link } from "@tanstack/react-router";
 
@@ -104,13 +103,6 @@ export const StakeListTab: FC = () => {
       visible: true,
       widthPx: 110,
     },
-    {
-      key: "actions",
-      render: item => <WatchlistStar ident={item.view} />,
-      title: "Actions",
-      visible: true,
-      widthPx: 80,
-    },
   ];
 
   if (accountListQuery?.isLoading) {
@@ -138,7 +130,7 @@ export const StakeListTab: FC = () => {
         totalItems={data.length}
         rowHeight={65}
         scrollable
-        minContentWidth={800}
+        minContentWidth={650}
         items={data}
         columns={columns}
       />
