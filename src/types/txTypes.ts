@@ -4,7 +4,7 @@ import type { ResponseCore } from "./commonTypes";
 import type { DrepProposal, DrepVoteItem } from "./drepTypes";
 import type { EpochParam } from "./epochTypes";
 import type { PoolInfo } from "./poolTypes";
-import type { DrepInfo } from "./delegationTypes"; 
+import type { DrepInfo } from "./delegationTypes";
 
 export type TxTabItemKeys =
   | "overview"
@@ -101,8 +101,8 @@ export interface Label {
 
 export interface PlutusContract {
   size: number;
-  input: TxInput;
-  output: Datum;
+  input: TxInput[];
+  output: Datum[];
   address: string;
   bytecode: string;
   script_hash: string;
