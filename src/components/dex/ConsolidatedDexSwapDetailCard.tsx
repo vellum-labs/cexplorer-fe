@@ -248,7 +248,6 @@ export const ConsolidatedDexSwapDetailCard: FC<
                   const tokenName = aggregatedData?.pair.tokenIn ?? "";
                   const renderedName = renderAssetName({ name: tokenName });
 
-                  // Check if it's ADA/lovelace in any form
                   if (
                     tokenName === "lovelaces" ||
                     tokenName === "lovelace" ||
@@ -274,7 +273,6 @@ export const ConsolidatedDexSwapDetailCard: FC<
                   const tokenName = aggregatedData?.pair.tokenOut ?? "";
                   const renderedName = renderAssetName({ name: tokenName });
 
-                  // Check if it's ADA/lovelace in any form
                   if (
                     tokenName === "lovelaces" ||
                     tokenName === "lovelace" ||
@@ -313,15 +311,16 @@ export const ConsolidatedDexSwapDetailCard: FC<
           <span>price</span>
         </div>
       ),
-      value: currency === "ada" ? (
-        <p title={ada} className='w-fit text-right'>
-          <AdaWithTooltip data={aggregatedData?.adaPrice ?? 0} />
-        </p>
-      ) : (
-        <p title={ada} className='w-fit text-right'>
-          {currencySigns["usd"]} {formatNumberWithSuffix(usd)}
-        </p>
-      ),
+      value:
+        currency === "ada" ? (
+          <p title={ada} className='w-fit text-right'>
+            <AdaWithTooltip data={aggregatedData?.adaPrice ?? 0} />
+          </p>
+        ) : (
+          <p title={ada} className='w-fit text-right'>
+            {currencySigns["usd"]} {formatNumberWithSuffix(usd)}
+          </p>
+        ),
     },
     {
       key: "estimatedOutput",
