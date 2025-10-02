@@ -45,30 +45,23 @@ export const AssetDetailOverview: FC<AssetDetailOverviewProps> = ({
               ) : null
             }
             startContent={
-              <div className='flex h-full w-full flex-col gap-4 pt-3'>
-                <Image
-                  src={generateImageUrl(
-                    type === "nft"
-                      ? detailData?.fingerprint || ""
-                      : (detailData?.policy || "") + detailData?.name,
-                    "md",
-                    type === "nft" ? "nft" : "token",
-                  )}
-                  className='aspect-square rounded-lg'
-                  fallbackletters={[...encodedNameArr]
-                    .filter(char =>
-                      alphabetWithNumbers.includes(char.toLowerCase()),
-                    )
-                    .join("")}
-                  height={160}
-                  width={160}
-                />
-                {/* <div className='flex w-[180px] justify-center gap-8'>
-                  <img src={X} alt='X' height={24} width={24} />
-                  <img src={Discord} alt='X' height={24} width={24} />
-                  <img src={Attach} alt='X' height={24} width={24} />
-                </div> */}
-              </div>
+              <Image
+                src={generateImageUrl(
+                  type === "nft"
+                    ? detailData?.fingerprint || ""
+                    : (detailData?.policy || "") + detailData?.name,
+                  "md",
+                  type === "nft" ? "nft" : "token",
+                )}
+                className='aspect-square rounded-lg'
+                fallbackletters={[...encodedNameArr]
+                  .filter(char =>
+                    alphabetWithNumbers.includes(char.toLowerCase()),
+                  )
+                  .join("")}
+                height={48}
+                width={48}
+              />
             }
             labelClassname='min-w-[135px] text-nowrap'
             className='md:h-full'
