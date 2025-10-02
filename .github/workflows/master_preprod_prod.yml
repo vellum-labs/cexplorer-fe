@@ -73,6 +73,28 @@ jobs:
           rsync -azv -e "ssh -o UserKnownHostsFile=~/.ssh/known_hosts -o HostKeyAlgorithms=ecdsa-sha2-nistp256,ssh-ed25519,rsa-sha2-512" \
             --omit-dir-times --no-perms --no-owner --no-group --delete \
             ./dist/ job@$SERVER:/var/www/cexplorer_preprod/
+
+      - name: Get previous commit SHA
+        id: previous
+        run: |
+          PREVIOUS_SHA=$(git rev-list --max-parents=0 HEAD)
+          if git tag | grep -q preprod-prod; then
+            PREVIOUS_SHA=$(git rev-list -n 2 refs/tags/preprod-prod | tail -n 1)
+          fi
+          echo "previous_sha=$PREVIOUS_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Get PRs between builds
+        id: pr_list
+        run: |
+          CURRENT_SHA=$(git rev-parse HEAD)
+          PREVIOUS_SHA="${{ steps.previous.outputs.previous_sha }}"
+          echo "Comparing commits between $PREVIOUS_SHA and $CURRENT_SHA"
+
+          PR_LIST=$(git log --merges --pretty=format:"- %s (%h)" "$PREVIOUS_SHA..$CURRENT_SHA" | grep -E "Merge pull request" || echo "No PRs found")
+          echo "pr_list<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$PR_LIST" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
       - name: Notify Discord
         if: success()
         env:
@@ -80,7 +102,22 @@ jobs:
         run: |
           VERSION="${{ github.run_number }}"
           WORKFLOW_NAME="${{ github.workflow }}"
+          PR_LIST="${{ steps.pr_list.outputs.pr_list }}"
+
+          # Escape JSON newlines
+          PR_LIST_ESCAPED=$(echo "$PR_LIST" | sed ':a;N;$!ba;s/\n/\\n/g')
+
+          MESSAGE="🚀 **${WORKFLOW_NAME}** deployed new version #**${VERSION}**!\n\n**Included PRs:**\n$PR_LIST_ESCAPED"
+
           curl -H "Content-Type: application/json" \
             -X POST \
-            -d "{\"content\": \"🚀 **${WORKFLOW_NAME}** deployed new version #**${VERSION}**!\"}" \
+            -d "{\"content\": \"$MESSAGE\"}" \
             $DISCORD_WEBHOOK_URL
+
+      - name: Tag this commit
+        if: success()
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git tag -f preprod-prod
+          git push -f origin preprod-prod
