@@ -64,7 +64,7 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
         <div className='mb-2 mt-3 w-full border-t border-border'></div>
       )}
       <div
-        className={`flex h-full items-stretch gap-2 pb-4 ${showTitleDivider ? "pt-0" : "pt-2"} ${startContent ? "flex-wrap justify-center sm:flex-nowrap" : ""}`}
+        className={`flex h-full ${startContent ? "items-start" : "items-stretch"} gap-2 pb-4 ${showTitleDivider ? "pt-0" : "pt-2"} ${startContent ? "flex-wrap justify-center sm:flex-nowrap" : ""}`}
       >
         {startContent}
         <div className={`flex w-full flex-col`}>
@@ -95,6 +95,7 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
                           <div
                             key={`${item?.label}_${i}_value`}
                             className={`overflow-hidden break-words text-sm text-grayTextPrimary ${leading ? "leading-[0px]" : "py-1"}`}
+                            style={!item?.label ? { gridColumn: "span 2" } : undefined}
                           >
                             {item?.value}
                           </div>
