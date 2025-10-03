@@ -59,7 +59,6 @@ export function aggregateSwapData(
     0,
   );
 
-  // ADA Price calculation: (sum of ADA from all trades / sum of tokens from all trades)
   let adaPrice = 0;
   let totalAdaAmount = 0;
   let totalTokenAmount = 0;
@@ -67,24 +66,22 @@ export function aggregateSwapData(
   orders.forEach(order => {
     const isConfirmed = order.status === "COMPLETE";
 
-    // Check if this is ADA → TOKEN or TOKEN → ADA
     const isAdaInput =
       order.token_in.name === "lovelaces" ||
       order.token_in.name === "lovelace" ||
-      order.token_in.name === "000000000000000000000000000000000000000000000000000000006c6f76656c616365";
+      order.token_in.name ===
+        "000000000000000000000000000000000000000000000000000000006c6f76656c616365";
 
     if (isAdaInput) {
-      // ADA → TOKEN: amount_in is ADA, output is tokens
       const tokenOutAmount = isConfirmed
-        ? (order.actual_out_amount || order.expected_out_amount)
+        ? order.actual_out_amount || order.expected_out_amount
         : order.expected_out_amount;
 
       totalAdaAmount += order.amount_in;
       totalTokenAmount += tokenOutAmount;
     } else {
-      // TOKEN → ADA: amount_in is tokens, output is ADA
       const adaOutAmount = isConfirmed
-        ? (order.actual_out_amount || order.expected_out_amount)
+        ? order.actual_out_amount || order.expected_out_amount
         : order.expected_out_amount;
 
       totalAdaAmount += adaOutAmount;

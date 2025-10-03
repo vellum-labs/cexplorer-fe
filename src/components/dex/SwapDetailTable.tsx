@@ -148,14 +148,6 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
               const dexKey = order.dex.toUpperCase();
               const dex = dexConfig[dexKey];
               const price = calculatePrice(order);
-              console.log("Order:", {
-                token_in: order.token_in.name,
-                token_out: order.token_out.name,
-                amount_in: order.amount_in,
-                actual_out: order.actual_out_amount,
-                expected_out: order.expected_out_amount,
-                calculated_price: price,
-              });
               const actualOut =
                 order.actual_out_amount || order.expected_out_amount;
 
