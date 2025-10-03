@@ -15,6 +15,7 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";
 import { alphabetWithNumbers } from "@/constants/alphabet";
 import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
+import { ADATokenName } from "@/constants/currencies";
 
 interface SwapDetailTableProps {
   aggregatedData: AggregatedSwapData;
@@ -60,8 +61,8 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
     return (
       tokenName === "lovelaces" ||
       tokenName === "lovelace" ||
-      tokenName?.toLowerCase().includes("lovelace") ||
-      tokenName?.toLowerCase().endsWith("6c6f76656c616365")
+      tokenName === ADATokenName ||
+      tokenName?.toLowerCase().includes("lovelace")
     );
   };
 

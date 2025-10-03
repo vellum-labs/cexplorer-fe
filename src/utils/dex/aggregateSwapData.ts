@@ -1,4 +1,5 @@
 import type { DeFiOrder } from "@/types/tokenTypes";
+import { ADATokenName } from "@/constants/currencies";
 
 export interface AggregatedSwapData {
   address: string;
@@ -69,8 +70,7 @@ export function aggregateSwapData(
     const isAdaInput =
       order.token_in.name === "lovelaces" ||
       order.token_in.name === "lovelace" ||
-      order.token_in.name ===
-        "000000000000000000000000000000000000000000000000000000006c6f76656c616365";
+      order.token_in.name === ADATokenName;
 
     if (isAdaInput) {
       const tokenOutAmount = isConfirmed
