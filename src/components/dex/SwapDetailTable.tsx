@@ -45,7 +45,6 @@ const getAssetImage = (tokenName: string, isNft = false) => {
 export const SwapDetailTable: FC<SwapDetailTableProps> = ({
   aggregatedData,
 }) => {
-
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "COMPLETE":
@@ -57,15 +56,19 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
     }
   };
 
-  const formatTokenName = (tokenName: string) => {
-    const renderedName = renderAssetName({ name: tokenName });
-
-    if (
+  const isAda = (tokenName: string) => {
+    return (
       tokenName === "lovelaces" ||
       tokenName === "lovelace" ||
       tokenName?.toLowerCase().includes("lovelace") ||
-      renderedName?.toLowerCase().includes("lovelace")
-    ) {
+      tokenName?.toLowerCase().endsWith("6c6f76656c616365")
+    );
+  };
+
+  const formatTokenName = (tokenName: string) => {
+    const renderedName = renderAssetName({ name: tokenName });
+
+    if (isAda(tokenName) || renderedName?.toLowerCase().includes("lovelace")) {
       return "ADA";
     }
 
@@ -73,19 +76,17 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
   };
 
   const calculatePrice = (order: DeFiOrder) => {
-    const isBuying =
-      order.token_in.name === "lovelaces" || order.token_in.name === "lovelace";
-    const adaAmount = isBuying
-      ? order.amount_in
-      : order.actual_out_amount || order.expected_out_amount;
-    const tokenAmount = isBuying
-      ? order.actual_out_amount || order.expected_out_amount
-      : order.amount_in;
+    const isBuying = isAda(order.token_in.name);
 
-    if (tokenAmount > 0) {
-      return (adaAmount / tokenAmount) * 1e6;
+    if (isBuying) {
+      const adaAmount = order.amount_in;
+      const tokenAmount = order.actual_out_amount || order.expected_out_amount;
+      return tokenAmount > 0 ? adaAmount / tokenAmount : 0;
+    } else {
+      const adaAmount = order.actual_out_amount || order.expected_out_amount;
+      const tokenAmount = order.amount_in;
+      return tokenAmount > 0 ? adaAmount / tokenAmount : 0;
     }
-    return 0;
   };
 
   const summaryAmountIn = aggregatedData.totalAmountIn;
@@ -141,104 +142,110 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
         </div>
 
         {/* Individual Orders */}
-        {aggregatedData.orders.length > 1 && (
-          <div className='px-4 py-3'>
-            <div className='space-y-3'>
-              {aggregatedData.orders.map((order, index) => {
-                const dexKey = order.dex.toUpperCase();
-                const dex = dexConfig[dexKey];
-                const price = calculatePrice(order);
-                const actualOut =
-                  order.actual_out_amount || order.expected_out_amount;
+        <div className='px-4 py-3'>
+          <div className='space-y-3'>
+            {aggregatedData.orders.map((order, index) => {
+              const dexKey = order.dex.toUpperCase();
+              const dex = dexConfig[dexKey];
+              const price = calculatePrice(order);
+              console.log("Order:", {
+                token_in: order.token_in.name,
+                token_out: order.token_out.name,
+                amount_in: order.amount_in,
+                actual_out: order.actual_out_amount,
+                expected_out: order.expected_out_amount,
+                calculated_price: price,
+              });
+              const actualOut =
+                order.actual_out_amount || order.expected_out_amount;
 
-                return (
-                  <div
-                    key={index}
-                    className='grid gap-4 text-sm'
-                    style={{ gridTemplateColumns: "40% 20% 20% 20%" }}
-                  >
-                    <div className='flex items-center gap-2'>
-                      <div className='flex items-center gap-1'>
-                        {getAssetImage(order.token_in.name)}
-                        <span>
-                          {order.amount_in.toFixed(0)}{" "}
-                          {formatTokenName(order.token_in.name)}
-                        </span>
-                      </div>
-                      <ArrowRight size={14} />
-                      <div className='flex items-center gap-1'>
-                        {getAssetImage(order.token_out.name)}
-                        <span>
-                          {!order.actual_out_amount ? "~" : ""}
-                          {actualOut.toFixed(0)}{" "}
-                          {formatTokenName(order.token_out.name)}
-                        </span>
-                      </div>
-                      <span className='text-sm text-grayTextSecondary'>on</span>
-                      <div
-                        className='flex items-center gap-1 whitespace-nowrap rounded-xl border px-1 text-sm sm:px-1.5'
-                        style={{
-                          backgroundColor: dex?.bgColor ?? "transparent",
-                          borderColor: dex?.borderColor ?? "var(--border)",
-                        }}
-                      >
-                        {!!dex?.icon && (
-                          <Image
-                            src={dex.icon}
-                            className='h-3 w-3 flex-shrink-0 rounded-full'
-                            alt={dex?.label}
-                          />
-                        )}
-                        <span
-                          className='truncate text-sm sm:text-sm'
-                          style={{ color: dex?.textColor ?? "var(--text)" }}
-                        >
-                          <span className='hidden sm:inline'>
-                            {dex?.label ?? order.dex}
-                          </span>
-                          <span className='sm:hidden'>
-                            {dex?.label?.replace("V2", "").replace("V3", "") ??
-                              order.dex.replace("V2", "").replace("V3", "")}
-                          </span>
-                        </span>
-                      </div>
+              return (
+                <div
+                  key={index}
+                  className='grid gap-4 text-sm'
+                  style={{ gridTemplateColumns: "40% 20% 20% 20%" }}
+                >
+                  <div className='flex items-center gap-2'>
+                    <div className='flex items-center gap-1'>
+                      {getAssetImage(order.token_in.name)}
+                      <span>
+                        {order.amount_in.toFixed(0)}{" "}
+                        {formatTokenName(order.token_in.name)}
+                      </span>
                     </div>
-                    <div>{formatSmallValueWithSub(price / 1e12, "₳ ")}</div>
-                    <div className='flex items-center'>
-                      <p className='flex w-fit items-center gap-1 rounded-md border border-border px-2 text-sm'>
-                        {getStatusIcon(order.status)}
-                        <span className='capitalize'>
-                          {order.status === "PARTIALLY_COMPLETE"
-                            ? "Partially completed"
-                            : order.status
-                              ? order.status[0].toUpperCase() +
-                                order.status.slice(1).toLowerCase()
-                              : ""}
-                        </span>
-                      </p>
+                    <ArrowRight size={14} />
+                    <div className='flex items-center gap-1'>
+                      {getAssetImage(order.token_out.name)}
+                      <span>
+                        {!order.actual_out_amount ? "~" : ""}
+                        {actualOut.toFixed(0)}{" "}
+                        {formatTokenName(order.token_out.name)}
+                      </span>
                     </div>
-                    <div>
-                      {order.update_tx_hash ? (
-                        <div className='flex items-center gap-1'>
-                          <Link
-                            to='/tx/$hash'
-                            params={{ hash: order.update_tx_hash }}
-                            className='text-sm text-primary'
-                          >
-                            {formatString(order.update_tx_hash, "short")}
-                          </Link>
-                          <Copy copyText={order.update_tx_hash} />
-                        </div>
-                      ) : (
-                        "-"
+                    <span className='text-sm text-grayTextSecondary'>on</span>
+                    <div
+                      className='flex items-center gap-1 whitespace-nowrap rounded-xl border px-1 text-sm sm:px-1.5'
+                      style={{
+                        backgroundColor: dex?.bgColor ?? "transparent",
+                        borderColor: dex?.borderColor ?? "var(--border)",
+                      }}
+                    >
+                      {!!dex?.icon && (
+                        <Image
+                          src={dex.icon}
+                          className='h-3 w-3 flex-shrink-0 rounded-full'
+                          alt={dex?.label}
+                        />
                       )}
+                      <span
+                        className='truncate text-sm sm:text-sm'
+                        style={{ color: dex?.textColor ?? "var(--text)" }}
+                      >
+                        <span className='hidden sm:inline'>
+                          {dex?.label ?? order.dex}
+                        </span>
+                        <span className='sm:hidden'>
+                          {dex?.label?.replace("V2", "").replace("V3", "") ??
+                            order.dex.replace("V2", "").replace("V3", "")}
+                        </span>
+                      </span>
                     </div>
                   </div>
-                );
-              })}
-            </div>
+                  <div>{formatSmallValueWithSub(price, "₳ ")}</div>
+                  <div className='flex items-center'>
+                    <p className='flex w-fit items-center gap-1 rounded-md border border-border px-2 text-sm'>
+                      {getStatusIcon(order.status)}
+                      <span className='capitalize'>
+                        {order.status === "PARTIALLY_COMPLETE"
+                          ? "Partially completed"
+                          : order.status
+                            ? order.status[0].toUpperCase() +
+                              order.status.slice(1).toLowerCase()
+                            : ""}
+                      </span>
+                    </p>
+                  </div>
+                  <div>
+                    {order.update_tx_hash ? (
+                      <div className='flex items-center gap-1'>
+                        <Link
+                          to='/tx/$hash'
+                          params={{ hash: order.update_tx_hash }}
+                          className='text-sm text-primary'
+                        >
+                          {formatString(order.update_tx_hash, "short")}
+                        </Link>
+                        <Copy copyText={order.update_tx_hash} />
+                      </div>
+                    ) : (
+                      "-"
+                    )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
