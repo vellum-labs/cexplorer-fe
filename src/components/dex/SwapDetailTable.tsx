@@ -2,7 +2,7 @@ import type { FC } from "react";
 import type { DeFiOrder } from "@/types/tokenTypes";
 import type { AggregatedSwapData } from "@/utils/dex/aggregateSwapData";
 
-import { ArrowRight, Check, Ellipsis, X } from "lucide-react";
+import { ArrowRight, Check, Ellipsis, X, Route } from "lucide-react";
 import { dexConfig } from "@/constants/dexConfig";
 
 import { Image } from "../global/Image";
@@ -169,7 +169,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
             className='mt-3 grid gap-4 text-sm font-medium text-grayTextSecondary'
             style={{ gridTemplateColumns: "40% 20% 20% 20%" }}
           >
-            <div>Route</div>
+            <div className='flex items-center gap-1'>Route</div>
             <div>Price</div>
             <div>Status</div>
             <div>Completion tx</div>
@@ -193,6 +193,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                   style={{ gridTemplateColumns: "40% 20% 20% 20%" }}
                 >
                   <div className='flex items-center gap-2'>
+                    <Route size={16} className='text-grayTextSecondary' />
                     <div className='flex items-center gap-1'>
                       {getAssetImage(order.token_in.name)}
                       <Tooltip content={order.amount_in.toLocaleString()}>

@@ -302,10 +302,23 @@ export const ConsolidatedDexSwapDetailCard: FC<
           aggregatedData?.pair.tokenIn === "lovelace" ? (
           <AdaWithTooltip data={(aggregatedData?.totalAmountIn ?? 0) * 1e6} />
         ) : (
-          <span className='text-sm text-grayTextPrimary'>
-            {formatNumberWithSuffix(aggregatedData?.totalAmountIn ?? 0)}{" "}
-            <AssetTicker tokenName={aggregatedData?.pair.tokenIn ?? ""} />
-          </span>
+          <Tooltip
+            content={
+              <div className='flex items-center gap-1'>
+                <span>
+                  {(aggregatedData?.totalAmountIn ?? 0).toLocaleString()}
+                </span>
+                <Copy
+                  copyText={(aggregatedData?.totalAmountIn ?? 0).toLocaleString()}
+                />
+              </div>
+            }
+          >
+            <span className='text-sm text-grayTextPrimary'>
+              {formatNumberWithSuffix(aggregatedData?.totalAmountIn ?? 0)}{" "}
+              <AssetTicker tokenName={aggregatedData?.pair.tokenIn ?? ""} />
+            </span>
+          </Tooltip>
         ),
       ),
     },
