@@ -360,6 +360,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
                 "₳ ",
                 0.01,
                 6,
+                4,
               )}
             </div>
           </Tooltip>

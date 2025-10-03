@@ -261,7 +261,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                       </div>
                     }
                   >
-                    <div>{formatSmallValueWithSub(price, "₳ ", 0.01, 6)}</div>
+                    <div>{formatSmallValueWithSub(price, "₳ ", 0.01, 6, 4)}</div>
                   </Tooltip>
                   <div className='flex items-center'>
                     <p className='flex w-fit items-center gap-1 rounded-md border border-border px-2 text-sm'>
