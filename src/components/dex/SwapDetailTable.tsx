@@ -18,6 +18,7 @@ import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import { ADATokenName } from "@/constants/currencies";
 import AdaIcon from "@/resources/images/icons/ada.webp";
 import { Tooltip } from "../ui/tooltip";
+import { AssetTicker } from "./AssetTicker";
 
 interface SwapDetailTableProps {
   aggregatedData: AggregatedSwapData;
@@ -128,7 +129,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
               {getAssetImage(aggregatedData.pair.tokenIn)}
               <span className='font-medium'>
                 {summaryAmountIn.toFixed(0)}{" "}
-                {formatTokenName(aggregatedData.pair.tokenIn)}
+                {formatTokenName(aggregatedData.pair.tokenIn) === "ADA" ? "ADA" : <AssetTicker tokenName={aggregatedData.pair.tokenIn} />}
               </span>
             </div>
             <span className='mx-2 text-grayTextSecondary'>to</span>
@@ -137,7 +138,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
               <span className='font-medium'>
                 {aggregatedData.totalActualOut ? "" : "~"}
                 {summaryAmountOut.toFixed(0)}{" "}
-                {formatTokenName(aggregatedData.pair.tokenOut)}
+                {formatTokenName(aggregatedData.pair.tokenOut) === "ADA" ? "ADA" : <AssetTicker tokenName={aggregatedData.pair.tokenOut} />}
               </span>
             </div>
             <span className='ml-2 text-grayTextSecondary'>via</span>
@@ -184,7 +185,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                       {getAssetImage(order.token_in.name)}
                       <span>
                         {order.amount_in.toFixed(0)}{" "}
-                        {formatTokenName(order.token_in.name)}
+                        {formatTokenName(order.token_in.name) === "ADA" ? "ADA" : <AssetTicker tokenName={order.token_in.name} />}
                       </span>
                     </div>
                     <ArrowRight size={14} />
@@ -193,7 +194,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                       <span>
                         {!order.actual_out_amount ? "~" : ""}
                         {actualOut.toFixed(0)}{" "}
-                        {formatTokenName(order.token_out.name)}
+                        {formatTokenName(order.token_out.name) === "ADA" ? "ADA" : <AssetTicker tokenName={order.token_out.name} />}
                       </span>
                     </div>
                     <span className='text-sm text-grayTextSecondary'>on</span>

@@ -26,6 +26,7 @@ import { AdaWithTooltip } from "../global/AdaWithTooltip";
 import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
 import { SwapDetailTable } from "./SwapDetailTable";
 import { Tooltip } from "../ui/tooltip";
+import { AssetTicker } from "./AssetTicker";
 
 import { useDeFiOrderListTableStore } from "@/stores/tables/deFiOrderListTableStore";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
@@ -255,7 +256,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
                       return "ADA";
                     }
 
-                    return renderedName;
+                    return <AssetTicker tokenName={tokenName} />;
                   })()}
                 </p>
               </Link>
@@ -283,7 +284,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
                       return "ADA";
                     }
 
-                    return renderedName;
+                    return <AssetTicker tokenName={tokenName} />;
                   })()}
                 </p>
               </Link>
@@ -304,7 +305,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
         ) : (
           <span className='text-sm text-grayTextPrimary'>
             {formatNumberWithSuffix(aggregatedData?.totalAmountIn ?? 0)}{" "}
-            {renderAssetName({ name: aggregatedData?.pair.tokenIn ?? "" })}
+            <AssetTicker tokenName={aggregatedData?.pair.tokenIn ?? ""} />
           </span>
         ),
       ),
