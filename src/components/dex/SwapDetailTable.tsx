@@ -19,6 +19,7 @@ import { ADATokenName } from "@/constants/currencies";
 import AdaIcon from "@/resources/images/icons/ada.webp";
 import { Tooltip } from "../ui/tooltip";
 import { AssetTicker } from "./AssetTicker";
+import { formatNumberWithSuffix } from "@/utils/format/format";
 
 interface SwapDetailTableProps {
   aggregatedData: AggregatedSwapData;
@@ -127,19 +128,23 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
             </span>
             <div className='flex items-center gap-1'>
               {getAssetImage(aggregatedData.pair.tokenIn)}
-              <span className='font-medium'>
-                {summaryAmountIn.toFixed(0)}{" "}
-                {formatTokenName(aggregatedData.pair.tokenIn) === "ADA" ? "ADA" : <AssetTicker tokenName={aggregatedData.pair.tokenIn} />}
-              </span>
+              <Tooltip content={summaryAmountIn.toLocaleString()}>
+                <span className='font-medium'>
+                  {formatNumberWithSuffix(summaryAmountIn)}{" "}
+                  {formatTokenName(aggregatedData.pair.tokenIn) === "ADA" ? "ADA" : <AssetTicker tokenName={aggregatedData.pair.tokenIn} />}
+                </span>
+              </Tooltip>
             </div>
             <span className='mx-2 text-grayTextSecondary'>to</span>
             <div className='flex items-center gap-1'>
               {getAssetImage(aggregatedData.pair.tokenOut)}
-              <span className='font-medium'>
-                {aggregatedData.totalActualOut ? "" : "~"}
-                {summaryAmountOut.toFixed(0)}{" "}
-                {formatTokenName(aggregatedData.pair.tokenOut) === "ADA" ? "ADA" : <AssetTicker tokenName={aggregatedData.pair.tokenOut} />}
-              </span>
+              <Tooltip content={summaryAmountOut.toLocaleString()}>
+                <span className='font-medium'>
+                  {aggregatedData.totalActualOut ? "" : "~"}
+                  {formatNumberWithSuffix(summaryAmountOut)}{" "}
+                  {formatTokenName(aggregatedData.pair.tokenOut) === "ADA" ? "ADA" : <AssetTicker tokenName={aggregatedData.pair.tokenOut} />}
+                </span>
+              </Tooltip>
             </div>
             <span className='ml-2 text-grayTextSecondary'>via</span>
             <div className='ml-1 flex w-fit items-center gap-1 rounded-md border border-border px-2 text-sm'>
@@ -183,19 +188,23 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                   <div className='flex items-center gap-2'>
                     <div className='flex items-center gap-1'>
                       {getAssetImage(order.token_in.name)}
-                      <span>
-                        {order.amount_in.toFixed(0)}{" "}
-                        {formatTokenName(order.token_in.name) === "ADA" ? "ADA" : <AssetTicker tokenName={order.token_in.name} />}
-                      </span>
+                      <Tooltip content={order.amount_in.toLocaleString()}>
+                        <span>
+                          {formatNumberWithSuffix(order.amount_in)}{" "}
+                          {formatTokenName(order.token_in.name) === "ADA" ? "ADA" : <AssetTicker tokenName={order.token_in.name} />}
+                        </span>
+                      </Tooltip>
                     </div>
                     <ArrowRight size={14} />
                     <div className='flex items-center gap-1'>
                       {getAssetImage(order.token_out.name)}
-                      <span>
-                        {!order.actual_out_amount ? "~" : ""}
-                        {actualOut.toFixed(0)}{" "}
-                        {formatTokenName(order.token_out.name) === "ADA" ? "ADA" : <AssetTicker tokenName={order.token_out.name} />}
-                      </span>
+                      <Tooltip content={actualOut.toLocaleString()}>
+                        <span>
+                          {!order.actual_out_amount ? "~" : ""}
+                          {formatNumberWithSuffix(actualOut)}{" "}
+                          {formatTokenName(order.token_out.name) === "ADA" ? "ADA" : <AssetTicker tokenName={order.token_out.name} />}
+                        </span>
+                      </Tooltip>
                     </div>
                     <span className='text-sm text-grayTextSecondary'>on</span>
                     <div
