@@ -232,61 +232,69 @@ export const ConsolidatedDexSwapDetailCard: FC<
             Multiple pairs detected - see individual trades below
           </div>
         ) : (
-          <div className='flex items-center gap-3'>
+          <div className='flex items-center gap-2'>
             <div className='flex items-center gap-2'>
               {getAssetImage(aggregatedData?.pair.tokenIn ?? "")}
-              <Link
-                to='/asset/$fingerprint'
-                params={{
-                  fingerprint: tokenInFingerPrint,
-                }}
-              >
-                <p className='min-w-[50px] text-primary'>
-                  {(() => {
-                    const tokenName = aggregatedData?.pair.tokenIn ?? "";
-                    const renderedName = renderAssetName({ name: tokenName });
+              {(() => {
+                const tokenName = aggregatedData?.pair.tokenIn ?? "";
+                const renderedName = renderAssetName({ name: tokenName });
+                const isAda =
+                  tokenName === "lovelaces" ||
+                  tokenName === "lovelace" ||
+                  tokenName?.toLowerCase().includes("lovelace") ||
+                  renderedName?.toLowerCase().includes("lovelace");
 
-                    if (
-                      tokenName === "lovelaces" ||
-                      tokenName === "lovelace" ||
-                      tokenName?.toLowerCase().includes("lovelace") ||
-                      renderedName?.toLowerCase().includes("lovelace")
-                    ) {
-                      return "ADA";
-                    }
+                if (isAda) {
+                  return (
+                    <p className='text-sm font-semibold text-primary'>ADA</p>
+                  );
+                }
 
-                    return <AssetTicker tokenName={tokenName} />;
-                  })()}
-                </p>
-              </Link>
+                return (
+                  <Link
+                    to='/asset/$fingerprint'
+                    params={{
+                      fingerprint: tokenInFingerPrint,
+                    }}
+                  >
+                    <p className='font-semibold text-primary'>
+                      <AssetTicker tokenName={tokenName} />
+                    </p>
+                  </Link>
+                );
+              })()}
             </div>
-            <ArrowRight size={15} className='block min-w-[20px]' />
+            <ArrowRight size={15} className='block' />
             <div className='flex items-center gap-2'>
               {getAssetImage(aggregatedData?.pair.tokenOut ?? "")}
-              <Link
-                to='/asset/$fingerprint'
-                params={{
-                  fingerprint: tokenOutFingerPrint,
-                }}
-              >
-                <p className='w-fit text-primary'>
-                  {(() => {
-                    const tokenName = aggregatedData?.pair.tokenOut ?? "";
-                    const renderedName = renderAssetName({ name: tokenName });
+              {(() => {
+                const tokenName = aggregatedData?.pair.tokenOut ?? "";
+                const renderedName = renderAssetName({ name: tokenName });
+                const isAda =
+                  tokenName === "lovelaces" ||
+                  tokenName === "lovelace" ||
+                  tokenName?.toLowerCase().includes("lovelace") ||
+                  renderedName?.toLowerCase().includes("lovelace");
 
-                    if (
-                      tokenName === "lovelaces" ||
-                      tokenName === "lovelace" ||
-                      tokenName?.toLowerCase().includes("lovelace") ||
-                      renderedName?.toLowerCase().includes("lovelace")
-                    ) {
-                      return "ADA";
-                    }
+                if (isAda) {
+                  return (
+                    <p className='text-sm font-semibold text-primary'>ADA</p>
+                  );
+                }
 
-                    return <AssetTicker tokenName={tokenName} />;
-                  })()}
-                </p>
-              </Link>
+                return (
+                  <Link
+                    to='/asset/$fingerprint'
+                    params={{
+                      fingerprint: tokenOutFingerPrint,
+                    }}
+                  >
+                    <p className='font-semibold text-primary'>
+                      <AssetTicker tokenName={tokenName} />
+                    </p>
+                  </Link>
+                );
+              })()}
             </div>
           </div>
         ),
@@ -309,7 +317,9 @@ export const ConsolidatedDexSwapDetailCard: FC<
                   {(aggregatedData?.totalAmountIn ?? 0).toLocaleString()}
                 </span>
                 <Copy
-                  copyText={(aggregatedData?.totalAmountIn ?? 0).toLocaleString()}
+                  copyText={(
+                    aggregatedData?.totalAmountIn ?? 0
+                  ).toLocaleString()}
                 />
               </div>
             }
@@ -399,14 +409,18 @@ export const ConsolidatedDexSwapDetailCard: FC<
             content={
               <div className='flex items-center gap-1'>
                 <span>
-                  {((aggregatedData?.totalActualOut ||
-                    aggregatedData?.totalExpectedOut) ??
-                    0).toLocaleString()}
+                  {(
+                    (aggregatedData?.totalActualOut ||
+                      aggregatedData?.totalExpectedOut) ??
+                    0
+                  ).toLocaleString()}
                 </span>
                 <Copy
-                  copyText={((aggregatedData?.totalActualOut ||
-                    aggregatedData?.totalExpectedOut) ??
-                    0).toLocaleString()}
+                  copyText={(
+                    (aggregatedData?.totalActualOut ||
+                      aggregatedData?.totalExpectedOut) ??
+                    0
+                  ).toLocaleString()}
                 />
               </div>
             }
@@ -415,7 +429,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
               {formatNumberWithSuffix(
                 (aggregatedData?.totalActualOut ||
                   aggregatedData?.totalExpectedOut) ??
-                  0
+                  0,
               )}{" "}
               <AssetTicker tokenName={aggregatedData?.pair.tokenOut ?? ""} />
             </span>
