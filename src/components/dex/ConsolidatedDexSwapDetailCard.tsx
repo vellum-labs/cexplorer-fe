@@ -25,6 +25,7 @@ import { TimeDateIndicator } from "../global/TimeDateIndicator";
 import { AdaWithTooltip } from "../global/AdaWithTooltip";
 import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
 import { SwapDetailTable } from "./SwapDetailTable";
+import { Tooltip } from "../ui/tooltip";
 
 import { useDeFiOrderListTableStore } from "@/stores/tables/deFiOrderListTableStore";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
@@ -323,16 +324,36 @@ export const ConsolidatedDexSwapDetailCard: FC<
       ),
       value:
         currency === "ada" ? (
-          <div className='text-sm text-grayTextPrimary'>
-            {formatSmallValueWithSub(
-              (aggregatedData?.adaPrice ?? 0) / 1e6,
-              "₳ ",
-            )}
-          </div>
+          <Tooltip
+            content={
+              <div className='flex items-center gap-1'>
+                <span>₳ {((aggregatedData?.adaPrice ?? 0) / 1e6).toFixed(20).replace(/\.?0+$/, '')}</span>
+                <Copy copyText={((aggregatedData?.adaPrice ?? 0) / 1e6).toFixed(20).replace(/\.?0+$/, '')} />
+              </div>
+            }
+          >
+            <div className='text-sm text-grayTextPrimary'>
+              {formatSmallValueWithSub(
+                (aggregatedData?.adaPrice ?? 0) / 1e6,
+                "₳ ",
+                0.01,
+                6,
+              )}
+            </div>
+          </Tooltip>
         ) : (
-          <div className='text-sm text-grayTextPrimary'>
-            {formatSmallValueWithSub(usd, "$ ")}
-          </div>
+          <Tooltip
+            content={
+              <div className='flex items-center gap-1'>
+                <span>$ {usd.toFixed(20).replace(/\.?0+$/, '')}</span>
+                <Copy copyText={usd.toFixed(20).replace(/\.?0+$/, '')} />
+              </div>
+            }
+          >
+            <div className='text-sm text-grayTextPrimary'>
+              {formatSmallValueWithSub(usd, "$ ", 0.01, 6)}
+            </div>
+          </Tooltip>
         ),
     },
     {

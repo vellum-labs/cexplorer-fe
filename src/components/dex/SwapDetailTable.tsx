@@ -17,6 +17,7 @@ import { alphabetWithNumbers } from "@/constants/alphabet";
 import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import { ADATokenName } from "@/constants/currencies";
 import AdaIcon from "@/resources/images/icons/ada.webp";
+import { Tooltip } from "../ui/tooltip";
 
 interface SwapDetailTableProps {
   aggregatedData: AggregatedSwapData;
@@ -34,7 +35,7 @@ const getAssetImage = (tokenName: string, isNft = false) => {
     return (
       <img
         src={AdaIcon}
-        alt="ADA"
+        alt='ADA'
         className='aspect-square shrink-0 rounded-full'
         height={16}
         width={16}
@@ -224,7 +225,16 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                       </span>
                     </div>
                   </div>
-                  <div>{formatSmallValueWithSub(price, "₳ ")}</div>
+                  <Tooltip
+                    content={
+                      <div className='flex items-center gap-1'>
+                        <span>₳ {price.toFixed(20).replace(/\.?0+$/, "")}</span>
+                        <Copy copyText={price.toFixed(20).replace(/\.?0+$/, "")} />
+                      </div>
+                    }
+                  >
+                    <div>{formatSmallValueWithSub(price, "₳ ", 0.01, 6)}</div>
+                  </Tooltip>
                   <div className='flex items-center'>
                     <p className='flex w-fit items-center gap-1 rounded-md border border-border px-2 text-sm'>
                       {getStatusIcon(order.status)}
