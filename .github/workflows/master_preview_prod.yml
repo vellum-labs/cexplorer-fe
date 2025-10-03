@@ -3,7 +3,7 @@ name: "preview@prod"
 on:
   workflow_dispatch:
 permissions:
-  contents: read # Minimal permissions for checkout
+  contents: write # Minimal permissions for checkout
   
 jobs:
   CheckUser:
