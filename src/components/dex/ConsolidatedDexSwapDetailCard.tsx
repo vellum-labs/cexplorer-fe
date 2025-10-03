@@ -41,6 +41,7 @@ import { encodeAssetName } from "@/utils/asset/encodeAssetName";
 import { alphabetWithNumbers } from "@/constants/alphabet";
 import { ADATokenName } from "@/constants/currencies";
 import { formatNumberWithSuffix } from "@/utils/format/format";
+import AdaIcon from "@/resources/images/icons/ada.webp";
 
 interface ConsolidatedDexSwapDetailCardProps {
   miscBasic: ReturnType<typeof useFetchMiscBasic>["data"];
@@ -49,6 +50,24 @@ interface ConsolidatedDexSwapDetailCardProps {
 }
 
 const getAssetImage = (tokenName: string, isNft = false) => {
+  const isAdaToken =
+    tokenName === "lovelaces" ||
+    tokenName === "lovelace" ||
+    tokenName === ADATokenName ||
+    tokenName?.toLowerCase().includes("lovelace");
+
+  if (isAdaToken) {
+    return (
+      <img
+        src={AdaIcon}
+        alt='ADA'
+        className='aspect-square shrink-0 rounded-full'
+        height={20}
+        width={20}
+      />
+    );
+  }
+
   const fingerprint = getAssetFingerprint(tokenName);
   const encodedNameArr = encodeAssetName(tokenName).split("");
 
@@ -115,7 +134,6 @@ export const ConsolidatedDexSwapDetailCard: FC<
     miscBasic?.data.block.block_no,
     aggregatedData?.orders[0]?.block?.no,
   );
-
 
   const detailItems = [
     {
@@ -279,8 +297,8 @@ export const ConsolidatedDexSwapDetailCard: FC<
       value: renderWithException(
         aggregatedData?.totalAmountIn,
         aggregatedData?.pair.tokenIn === ADATokenName ||
-        aggregatedData?.pair.tokenIn === "lovelaces" ||
-        aggregatedData?.pair.tokenIn === "lovelace" ? (
+          aggregatedData?.pair.tokenIn === "lovelaces" ||
+          aggregatedData?.pair.tokenIn === "lovelace" ? (
           <AdaWithTooltip data={(aggregatedData?.totalAmountIn ?? 0) * 1e6} />
         ) : (
           <span className='text-sm text-grayTextPrimary'>

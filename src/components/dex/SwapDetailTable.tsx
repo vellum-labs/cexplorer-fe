@@ -16,12 +16,32 @@ import { encodeAssetName } from "@/utils/asset/encodeAssetName";
 import { alphabetWithNumbers } from "@/constants/alphabet";
 import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import { ADATokenName } from "@/constants/currencies";
+import AdaIcon from "@/resources/images/icons/ada.webp";
 
 interface SwapDetailTableProps {
   aggregatedData: AggregatedSwapData;
 }
 
 const getAssetImage = (tokenName: string, isNft = false) => {
+  // Check if it's ADA
+  const isAdaToken =
+    tokenName === "lovelaces" ||
+    tokenName === "lovelace" ||
+    tokenName === ADATokenName ||
+    tokenName?.toLowerCase().includes("lovelace");
+
+  if (isAdaToken) {
+    return (
+      <img
+        src={AdaIcon}
+        alt="ADA"
+        className='aspect-square shrink-0 rounded-full'
+        height={16}
+        width={16}
+      />
+    );
+  }
+
   const fingerprint = getAssetFingerprint(tokenName);
   const encodedNameArr = encodeAssetName(tokenName).split("");
 
