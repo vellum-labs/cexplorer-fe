@@ -543,7 +543,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
               opacity: showFeeDetails ? 1 : 0,
             }}
           >
-            <div className='mt-2 space-y-1 text-xs text-grayTextSecondary'>
+            <div className='mt-2 w-fit space-y-1 rounded-xl border border-border p-2 text-xs text-grayTextSecondary'>
               {aggregatedData.orders.map((order, index) => (
                 <div key={index} className='flex items-center gap-2'>
                   <span>
@@ -586,7 +586,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
               opacity: showDepositDetails ? 1 : 0,
             }}
           >
-            <div className='mt-2 space-y-1 text-xs text-grayTextSecondary'>
+            <div className='mt-2 w-fit space-y-1 rounded-xl border border-border p-2 text-xs text-grayTextSecondary'>
               {aggregatedData.orders.map((order, index) => (
                 <div key={index} className='flex items-center gap-2'>
                   <span>
