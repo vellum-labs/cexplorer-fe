@@ -366,19 +366,17 @@ export const ConsolidatedDexSwapDetailCard: FC<
         ),
     },
     {
-      key: "estimatedOutput",
-      title: "Estimated Output",
+      key: "output",
+      title: "Output",
       value: renderWithException(
-        aggregatedData?.totalExpectedOut,
-        <AdaWithTooltip data={(aggregatedData?.totalExpectedOut ?? 0) * 1e6} />,
-      ),
-    },
-    {
-      key: "actualOutput",
-      title: "Actual Output",
-      value: renderWithException(
-        typeof aggregatedData?.totalActualOut === "number",
-        <AdaWithTooltip data={(aggregatedData?.totalActualOut ?? 0) * 1e6} />,
+        aggregatedData?.totalExpectedOut || aggregatedData?.totalActualOut,
+        <AdaWithTooltip
+          data={
+            ((aggregatedData?.totalActualOut ||
+              aggregatedData?.totalExpectedOut) ??
+              0) * 1e6
+          }
+        />,
       ),
     },
     {
@@ -469,33 +467,34 @@ export const ConsolidatedDexSwapDetailCard: FC<
     },
     {
       key: "batcherFees",
-      title: "Batcher Fees",
+      title: "Batcher fees",
       value: renderWithException(
         typeof aggregatedData?.totalBatcherFees === "number",
-        <div className='flex items-center gap-2'>
+        aggregatedData && aggregatedData.orders.length > 1 ? (
+          <button
+            onClick={() => setShowFeeDetails(!showFeeDetails)}
+            className='flex items-center gap-2 rounded-xl border border-border px-2 py-1 text-sm hover:bg-gray-50'
+          >
+            <AdaWithTooltip
+              data={(aggregatedData?.totalBatcherFees ?? 0) * 1e6}
+            />
+            {showFeeDetails ? (
+              <ChevronUp size={16} className='text-grayTextSecondary' />
+            ) : (
+              <ChevronDown size={16} className='text-grayTextSecondary' />
+            )}
+          </button>
+        ) : (
           <AdaWithTooltip
             data={(aggregatedData?.totalBatcherFees ?? 0) * 1e6}
           />
-          {aggregatedData && aggregatedData.orders.length > 1 && (
-            <button
-              onClick={() => setShowFeeDetails(!showFeeDetails)}
-              className='flex items-center gap-1 text-xs text-grayTextSecondary hover:text-primary'
-            >
-              Details
-              {showFeeDetails ? (
-                <ChevronUp size={12} />
-              ) : (
-                <ChevronDown size={12} />
-              )}
-            </button>
-          )}
-        </div>,
+        ),
       ),
       details:
         showFeeDetails && aggregatedData && aggregatedData.orders.length > 1 ? (
           <div className='mt-2 space-y-1 text-xs text-grayTextSecondary'>
             {aggregatedData.orders.map((order, index) => (
-              <div key={index} className='flex justify-between'>
+              <div key={index} className='flex items-center gap-2'>
                 <span>
                   {dexConfig[order.dex.toUpperCase()]?.label || order.dex}:
                 </span>
@@ -510,22 +509,21 @@ export const ConsolidatedDexSwapDetailCard: FC<
       title: "Deposits",
       value: renderWithException(
         typeof aggregatedData?.totalDeposits === "number",
-        <div className='flex items-center gap-2'>
+        aggregatedData && aggregatedData.orders.length > 1 ? (
+          <button
+            onClick={() => setShowDepositDetails(!showDepositDetails)}
+            className='flex items-center gap-2 rounded-xl border border-border px-2 py-1 text-sm hover:bg-gray-50'
+          >
+            <AdaWithTooltip data={(aggregatedData?.totalDeposits ?? 0) * 1e6} />
+            {showDepositDetails ? (
+              <ChevronUp size={16} className='text-grayTextSecondary' />
+            ) : (
+              <ChevronDown size={16} className='text-grayTextSecondary' />
+            )}
+          </button>
+        ) : (
           <AdaWithTooltip data={(aggregatedData?.totalDeposits ?? 0) * 1e6} />
-          {aggregatedData && aggregatedData.orders.length > 1 && (
-            <button
-              onClick={() => setShowDepositDetails(!showDepositDetails)}
-              className='flex items-center gap-1 text-xs text-grayTextSecondary hover:text-primary'
-            >
-              Details
-              {showDepositDetails ? (
-                <ChevronUp size={12} />
-              ) : (
-                <ChevronDown size={12} />
-              )}
-            </button>
-          )}
-        </div>,
+        ),
       ),
       details:
         showDepositDetails &&
@@ -533,7 +531,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
         aggregatedData.orders.length > 1 ? (
           <div className='mt-2 space-y-1 text-xs text-grayTextSecondary'>
             {aggregatedData.orders.map((order, index) => (
-              <div key={index} className='flex justify-between'>
+              <div key={index} className='flex items-center gap-2'>
                 <span>
                   {dexConfig[order.dex.toUpperCase()]?.label || order.dex}:
                 </span>
