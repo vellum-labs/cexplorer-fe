@@ -2,7 +2,7 @@ import type { FC } from "react";
 import type { DeFiOrder } from "@/types/tokenTypes";
 import type { AggregatedSwapData } from "@/utils/dex/aggregateSwapData";
 
-import { ArrowRight, ArrowLeftRight, Check, Ellipsis, X } from "lucide-react";
+import { ArrowRight, Check, Ellipsis, X } from "lucide-react";
 import { dexConfig } from "@/constants/dexConfig";
 
 import { Image } from "../global/Image";
@@ -20,6 +20,7 @@ import AdaIcon from "@/resources/images/icons/ada.webp";
 import { Tooltip } from "../ui/tooltip";
 import { AssetTicker } from "./AssetTicker";
 import { formatNumberWithSuffix } from "@/utils/format/format";
+import { SwapTypeBadge } from "./SwapTypeBadge";
 
 interface SwapDetailTableProps {
   aggregatedData: AggregatedSwapData;
@@ -131,7 +132,11 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
               <Tooltip content={summaryAmountIn.toLocaleString()}>
                 <span className='font-medium'>
                   {formatNumberWithSuffix(summaryAmountIn)}{" "}
-                  {formatTokenName(aggregatedData.pair.tokenIn) === "ADA" ? "ADA" : <AssetTicker tokenName={aggregatedData.pair.tokenIn} />}
+                  {formatTokenName(aggregatedData.pair.tokenIn) === "ADA" ? (
+                    "ADA"
+                  ) : (
+                    <AssetTicker tokenName={aggregatedData.pair.tokenIn} />
+                  )}
                 </span>
               </Tooltip>
             </div>
@@ -142,20 +147,22 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                 <span className='font-medium'>
                   {aggregatedData.totalActualOut ? "" : "~"}
                   {formatNumberWithSuffix(summaryAmountOut)}{" "}
-                  {formatTokenName(aggregatedData.pair.tokenOut) === "ADA" ? "ADA" : <AssetTicker tokenName={aggregatedData.pair.tokenOut} />}
+                  {formatTokenName(aggregatedData.pair.tokenOut) === "ADA" ? (
+                    "ADA"
+                  ) : (
+                    <AssetTicker tokenName={aggregatedData.pair.tokenOut} />
+                  )}
                 </span>
               </Tooltip>
             </div>
             <span className='ml-2 text-grayTextSecondary'>via</span>
-            <div className='ml-1 flex w-fit items-center gap-1 rounded-md border border-border px-2 text-sm'>
-              <ArrowLeftRight size={15} className='text-primary' />
-              <span className=''>
-                {aggregatedData.type === "AGGREGATOR_SWAP"
-                  ? "Aggregator swap"
-                  : aggregatedData.type === "DEXHUNTER_SWAP"
-                    ? "Dexhunter aggregator"
-                    : "Direct swap"}
-              </span>
+            <div className='ml-1'>
+              <SwapTypeBadge
+                uniqueDexesCount={aggregatedData.dexes.length}
+                hasDexhunter={aggregatedData.orders.some(
+                  order => order.is_dexhunter,
+                )}
+              />
             </div>
           </div>
           <div
@@ -191,7 +198,11 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                       <Tooltip content={order.amount_in.toLocaleString()}>
                         <span>
                           {formatNumberWithSuffix(order.amount_in)}{" "}
-                          {formatTokenName(order.token_in.name) === "ADA" ? "ADA" : <AssetTicker tokenName={order.token_in.name} />}
+                          {formatTokenName(order.token_in.name) === "ADA" ? (
+                            "ADA"
+                          ) : (
+                            <AssetTicker tokenName={order.token_in.name} />
+                          )}
                         </span>
                       </Tooltip>
                     </div>
@@ -202,7 +213,11 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                         <span>
                           {!order.actual_out_amount ? "~" : ""}
                           {formatNumberWithSuffix(actualOut)}{" "}
-                          {formatTokenName(order.token_out.name) === "ADA" ? "ADA" : <AssetTicker tokenName={order.token_out.name} />}
+                          {formatTokenName(order.token_out.name) === "ADA" ? (
+                            "ADA"
+                          ) : (
+                            <AssetTicker tokenName={order.token_out.name} />
+                          )}
                         </span>
                       </Tooltip>
                     </div>
@@ -239,7 +254,9 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                     content={
                       <div className='flex items-center gap-1'>
                         <span>₳ {price.toFixed(20).replace(/\.?0+$/, "")}</span>
-                        <Copy copyText={price.toFixed(20).replace(/\.?0+$/, "")} />
+                        <Copy
+                          copyText={price.toFixed(20).replace(/\.?0+$/, "")}
+                        />
                       </div>
                     }
                   >

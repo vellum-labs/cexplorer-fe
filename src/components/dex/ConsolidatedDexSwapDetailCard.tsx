@@ -4,7 +4,6 @@ import type { useFetchMiscBasic } from "@/services/misc";
 import type { AggregatedSwapData } from "@/utils/dex/aggregateSwapData";
 
 import {
-  ArrowLeftRight,
   ArrowRight,
   Check,
   CircleAlert,
@@ -15,7 +14,6 @@ import {
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
-import DexhunterIcon from "@/resources/images/icons/dexhunter.svg";
 import { dexConfig } from "@/constants/dexConfig";
 
 import { Image } from "../global/Image";
@@ -27,6 +25,7 @@ import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
 import { SwapDetailTable } from "./SwapDetailTable";
 import { Tooltip } from "../ui/tooltip";
 import { AssetTicker } from "./AssetTicker";
+import { SwapTypeBadge } from "./SwapTypeBadge";
 
 import { useDeFiOrderListTableStore } from "@/stores/tables/deFiOrderListTableStore";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
@@ -328,8 +327,17 @@ export const ConsolidatedDexSwapDetailCard: FC<
           <Tooltip
             content={
               <div className='flex items-center gap-1'>
-                <span>₳ {((aggregatedData?.adaPrice ?? 0) / 1e6).toFixed(20).replace(/\.?0+$/, '')}</span>
-                <Copy copyText={((aggregatedData?.adaPrice ?? 0) / 1e6).toFixed(20).replace(/\.?0+$/, '')} />
+                <span>
+                  ₳{" "}
+                  {((aggregatedData?.adaPrice ?? 0) / 1e6)
+                    .toFixed(20)
+                    .replace(/\.?0+$/, "")}
+                </span>
+                <Copy
+                  copyText={((aggregatedData?.adaPrice ?? 0) / 1e6)
+                    .toFixed(20)
+                    .replace(/\.?0+$/, "")}
+                />
               </div>
             }
           >
@@ -346,8 +354,8 @@ export const ConsolidatedDexSwapDetailCard: FC<
           <Tooltip
             content={
               <div className='flex items-center gap-1'>
-                <span>$ {usd.toFixed(20).replace(/\.?0+$/, '')}</span>
-                <Copy copyText={usd.toFixed(20).replace(/\.?0+$/, '')} />
+                <span>$ {usd.toFixed(20).replace(/\.?0+$/, "")}</span>
+                <Copy copyText={usd.toFixed(20).replace(/\.?0+$/, "")} />
               </div>
             }
           >
@@ -413,20 +421,12 @@ export const ConsolidatedDexSwapDetailCard: FC<
       title: "Type",
       value: renderWithException(
         aggregatedData?.type,
-        <div className='flex items-center'>
-          <p className='flex w-fit items-center gap-1 rounded-md border border-border px-2 text-sm'>
-            {aggregatedData?.type === "DEXHUNTER_SWAP" ? (
-              <Image src={DexhunterIcon} className='h-4 w-4 rounded-full' />
-            ) : (
-              <ArrowLeftRight size={15} className='text-primary' />
-            )}
-            {aggregatedData?.type === "AGGREGATOR_SWAP"
-              ? "Aggregator swap"
-              : aggregatedData?.type === "DEXHUNTER_SWAP"
-                ? "Dexhunter swap"
-                : "Direct swap"}
-          </p>
-        </div>,
+        <SwapTypeBadge
+          uniqueDexesCount={aggregatedData?.dexes.length ?? 0}
+          hasDexhunter={
+            aggregatedData?.orders.some(order => order.is_dexhunter) ?? false
+          }
+        />,
       ),
     },
     {
