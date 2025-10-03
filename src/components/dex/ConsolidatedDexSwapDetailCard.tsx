@@ -39,6 +39,8 @@ import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";
 import { alphabetWithNumbers } from "@/constants/alphabet";
+import { ADATokenName } from "@/constants/currencies";
+import { formatNumberWithSuffix } from "@/utils/format/format";
 
 interface ConsolidatedDexSwapDetailCardProps {
   miscBasic: ReturnType<typeof useFetchMiscBasic>["data"];
@@ -276,7 +278,16 @@ export const ConsolidatedDexSwapDetailCard: FC<
       title: "Input",
       value: renderWithException(
         aggregatedData?.totalAmountIn,
-        <AdaWithTooltip data={(aggregatedData?.totalAmountIn ?? 0) * 1e6} />,
+        aggregatedData?.pair.tokenIn === ADATokenName ||
+        aggregatedData?.pair.tokenIn === "lovelaces" ||
+        aggregatedData?.pair.tokenIn === "lovelace" ? (
+          <AdaWithTooltip data={(aggregatedData?.totalAmountIn ?? 0) * 1e6} />
+        ) : (
+          <span className='text-sm text-grayTextPrimary'>
+            {formatNumberWithSuffix(aggregatedData?.totalAmountIn ?? 0)}{" "}
+            {renderAssetName({ name: aggregatedData?.pair.tokenIn ?? "" })}
+          </span>
+        ),
       ),
     },
     {
