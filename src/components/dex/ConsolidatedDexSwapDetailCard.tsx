@@ -384,13 +384,43 @@ export const ConsolidatedDexSwapDetailCard: FC<
       title: "Output",
       value: renderWithException(
         aggregatedData?.totalExpectedOut || aggregatedData?.totalActualOut,
-        <AdaWithTooltip
-          data={
-            ((aggregatedData?.totalActualOut ||
-              aggregatedData?.totalExpectedOut) ??
-              0) * 1e6
-          }
-        />,
+        aggregatedData?.pair.tokenOut === ADATokenName ||
+          aggregatedData?.pair.tokenOut === "lovelaces" ||
+          aggregatedData?.pair.tokenOut === "lovelace" ? (
+          <AdaWithTooltip
+            data={
+              ((aggregatedData?.totalActualOut ||
+                aggregatedData?.totalExpectedOut) ??
+                0) * 1e6
+            }
+          />
+        ) : (
+          <Tooltip
+            content={
+              <div className='flex items-center gap-1'>
+                <span>
+                  {((aggregatedData?.totalActualOut ||
+                    aggregatedData?.totalExpectedOut) ??
+                    0).toLocaleString()}
+                </span>
+                <Copy
+                  copyText={((aggregatedData?.totalActualOut ||
+                    aggregatedData?.totalExpectedOut) ??
+                    0).toLocaleString()}
+                />
+              </div>
+            }
+          >
+            <span className='text-sm text-grayTextPrimary'>
+              {formatNumberWithSuffix(
+                (aggregatedData?.totalActualOut ||
+                  aggregatedData?.totalExpectedOut) ??
+                  0
+              )}{" "}
+              <AssetTicker tokenName={aggregatedData?.pair.tokenOut ?? ""} />
+            </span>
+          </Tooltip>
+        ),
       ),
     },
     {
