@@ -491,16 +491,24 @@ export const ConsolidatedDexSwapDetailCard: FC<
         ),
       ),
       details:
-        showFeeDetails && aggregatedData && aggregatedData.orders.length > 1 ? (
-          <div className='mt-2 space-y-1 text-xs text-grayTextSecondary'>
-            {aggregatedData.orders.map((order, index) => (
-              <div key={index} className='flex items-center gap-2'>
-                <span>
-                  {dexConfig[order.dex.toUpperCase()]?.label || order.dex}:
-                </span>
-                <AdaWithTooltip data={(order.batcher_fee ?? 0) * 1e6} />
-              </div>
-            ))}
+        aggregatedData && aggregatedData.orders.length > 1 ? (
+          <div
+            className='overflow-hidden transition-all duration-700 ease-in-out'
+            style={{
+              maxHeight: showFeeDetails ? "500px" : "0",
+              opacity: showFeeDetails ? 1 : 0,
+            }}
+          >
+            <div className='mt-2 space-y-1 text-xs text-grayTextSecondary'>
+              {aggregatedData.orders.map((order, index) => (
+                <div key={index} className='flex items-center gap-2'>
+                  <span>
+                    {dexConfig[order.dex.toUpperCase()]?.label || order.dex}:
+                  </span>
+                  <AdaWithTooltip data={(order.batcher_fee ?? 0) * 1e6} />
+                </div>
+              ))}
+            </div>
           </div>
         ) : null,
     },
@@ -526,18 +534,24 @@ export const ConsolidatedDexSwapDetailCard: FC<
         ),
       ),
       details:
-        showDepositDetails &&
-        aggregatedData &&
-        aggregatedData.orders.length > 1 ? (
-          <div className='mt-2 space-y-1 text-xs text-grayTextSecondary'>
-            {aggregatedData.orders.map((order, index) => (
-              <div key={index} className='flex items-center gap-2'>
-                <span>
-                  {dexConfig[order.dex.toUpperCase()]?.label || order.dex}:
-                </span>
-                <AdaWithTooltip data={(order.deposit ?? 0) * 1e6} />
-              </div>
-            ))}
+        aggregatedData && aggregatedData.orders.length > 1 ? (
+          <div
+            className='overflow-hidden transition-all duration-700 ease-in-out'
+            style={{
+              maxHeight: showDepositDetails ? "500px" : "0",
+              opacity: showDepositDetails ? 1 : 0,
+            }}
+          >
+            <div className='mt-2 space-y-1 text-xs text-grayTextSecondary'>
+              {aggregatedData.orders.map((order, index) => (
+                <div key={index} className='flex items-center gap-2'>
+                  <span>
+                    {dexConfig[order.dex.toUpperCase()]?.label || order.dex}:
+                  </span>
+                  <AdaWithTooltip data={(order.deposit ?? 0) * 1e6} />
+                </div>
+              ))}
+            </div>
           </div>
         ) : null,
     },
