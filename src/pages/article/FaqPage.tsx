@@ -54,11 +54,11 @@ export const FaqPage = () => {
                   value={item.title}
                   className='border-b border-border'
                 >
-                  <AccordionTrigger className='AccordionTrigger w-full py-5 text-left'>
+                  <AccordionTrigger className='AccordionTrigger w-full py-3 text-left'>
                     <span className='text-base font-medium'>{item.title}</span>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <div className='flex flex-col pb-3 text-grayTextPrimary'>
+                    <div className='flex flex-col pb-1.5 text-grayTextPrimary'>
                       {parse(JSON.stringify(item.msg))}
                     </div>
                   </AccordionContent>

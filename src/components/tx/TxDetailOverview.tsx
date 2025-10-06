@@ -78,7 +78,7 @@ const TxDetailOverview = ({ query }: Props) => {
           <span className='font-medium leading-none'>
             <DateCell className='' time={data?.block?.time} />
           </span>
-          <span className='flex items-center gap-1 pr-1 text-grayTextPrimary'>
+          <span className='flex items-center gap-1 pr-1/2 text-grayTextPrimary'>
             ({formatDate(data?.block?.time ? data?.block?.time : undefined)}){" "}
             <Clock size={14} className='h-full shrink-0 text-grayTextPrimary' />
           </span>
@@ -127,7 +127,7 @@ const TxDetailOverview = ({ query }: Props) => {
               <span className='font-medium text-grayTextPrimary'>
                 {data?.invalid_before ? formatNumber(data?.block.slot_no) : "-"}
               </span>
-              <span className='pr-1 text-grayTextPrimary'>
+              <span className='pr-1/2 text-grayTextPrimary'>
                 (epoch slot{" "}
                 {getEpochSlot(data.block.slot_no, data.epoch_param.epoch_no)})
               </span>
@@ -267,7 +267,7 @@ const TxDetailOverview = ({ query }: Props) => {
           <OverviewCard
             title='Transaction Overview'
             overviewList={overviewListItems}
-            className='max-h-[450px] pt-4'
+            className='max-h-[450px] pt-2'
             columnGap='clamp(48px, 8vw, 150px)'
           />
           <section className='flex w-full flex-col gap-5 lg:h-[400px] lg:w-[400px] lg:justify-between'>

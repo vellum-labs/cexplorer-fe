@@ -551,7 +551,7 @@ export const useDrepList = ({
         onFilter: () => changeFilterByKey("spo", filterDraft.spo),
         onReset: () => changeFilterByKey("spo"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-4 py-2'>
+          <div className='flex flex-col gap-2 px-2 py-1'>
             <label className='flex items-center gap-2'>
               <input
                 type='radio'

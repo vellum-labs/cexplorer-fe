@@ -155,7 +155,7 @@ export const AdminPageDetail = () => {
             className='relative rounded-lg border border-border bg-darker'
           >
             <textarea
-              className='min-h-[800px] w-full resize-none bg-transparent p-2 font-mono text-text caret-text outline-none'
+              className='min-h-[800px] w-full resize-none bg-transparent p-1 font-mono text-text caret-text outline-none'
               ref={textareaRef}
               value={code}
               onChange={e => setCode(e.target.value)}

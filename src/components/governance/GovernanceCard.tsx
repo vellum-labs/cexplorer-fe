@@ -48,7 +48,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
   return (
     <div className='flex h-full w-full items-center'>
       <div className='flex w-full flex-col gap-3'>
-        <div className='flex flex-col gap-1 py-2'>
+        <div className='flex flex-col gap-1 py-1'>
           <div className='flex items-center gap-[6px]'>
             <CheckSquare size={18} className='font-bold text-[#0094D4]' />
             <span className='text-sm font-bold text-[#0094D4]'>
@@ -56,7 +56,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
             </span>
           </div>
           <div
-            className={`flex items-center justify-between rounded-[4px] border border-[#0094D4] p-2 ${theme === "dark" ? "bg-[#1C384B]" : "bg-[#EFFAFF]"}`}
+            className={`flex items-center justify-between rounded-[4px] border border-[#0094D4] p-1 ${theme === "dark" ? "bg-[#1C384B]" : "bg-[#EFFAFF]"}`}
           >
             <span className='text-sm font-medium text-grayTextPrimary'>
               Yes
@@ -74,7 +74,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
             </div>
           </div>
         </div>
-        <div className='flex flex-col gap-1 py-2'>
+        <div className='flex flex-col gap-1 py-1'>
           <div className='flex items-center gap-[6px]'>
             <XSquare size={18} className='font-bold text-[#DC6803]' />
             <span className='text-sm font-bold text-[#DC6803]'>
@@ -85,7 +85,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
             </span>
           </div>
           <div
-            className={`rounded-[4px] border border-[#DC6803] p-2 ${theme === "dark" ? "bg-[#392E33]" : "bg-[#FFFAEB]"}`}
+            className={`rounded-[4px] border border-[#DC6803] p-1 ${theme === "dark" ? "bg-[#392E33]" : "bg-[#FFFAEB]"}`}
           >
             <div className='flex items-center justify-between'>
               <span className='text-sm font-medium text-grayTextPrimary'>
@@ -138,7 +138,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
           </div>
         </div>
       </div>
-      <div className='flex w-full justify-center pt-12'>
+      <div className='flex w-full justify-center pt-6'>
         <GovernanceDetailOverviewInfoGraph data={pieChartData} />
       </div>
     </div>

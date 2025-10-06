@@ -28,7 +28,7 @@ export const TokenDashboardExchangeTab: FC = () => {
       }}
       sortBy='days'
     >
-      <div className='flex w-full flex-col pt-2 xl:flex-row'>
+      <div className='flex w-full flex-col pt-1 xl:flex-row'>
         <TokenDashboardDexTradesGraph data={data} />
         <TokenDashboardRevenueGraph data={data} />
       </div>

@@ -48,7 +48,7 @@ const MobileMenuAccordionItem = ({
             return item[1].href ? (
               <Link
                 key={item[0] + i}
-                className='ml-[31px] border-b border-border py-3 last:border-none last:pb-0 hover:text-primary'
+                className='ml-[31px] border-b border-border py-1.5 last:border-none last:pb-0 hover:text-primary'
                 to={item[1].href}
                 onClick={() => setIsOpen(false)}
               >
@@ -57,7 +57,7 @@ const MobileMenuAccordionItem = ({
             ) : (
               <button
                 key={item[0] + i}
-                className='ml-[31px] border-b border-border py-3 last:border-none last:pb-0 hover:text-primary'
+                className='ml-[31px] border-b border-border py-1.5 last:border-none last:pb-0 hover:text-primary'
                 onClick={() => {
                   item[1].onClick();
                 }}

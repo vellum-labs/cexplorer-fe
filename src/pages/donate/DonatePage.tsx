@@ -152,7 +152,7 @@ export const DonatePage = () => {
           maxWidth='95%'
           onClose={() => setShowSuccessModal(false)}
         >
-          <div className='mt-4 flex h-full w-full flex-col items-center overflow-hidden p-3'>
+          <div className='mt-4 flex h-full w-full flex-col items-center overflow-hidden p-1.5'>
             <h3>
               Transaction successful, thank you so much for supporting
               Cexplorer.io ❤️
@@ -195,7 +195,7 @@ export const DonatePage = () => {
               description='Many builders rely on our tools to develop on Cardano. Supporting us helps maintain and enhance these resources, benefiting the entire development community.'
             />
           </section>
-          <section className='mt-12 flex flex-wrap justify-center gap-8 border-b border-border pb-10'>
+          <section className='mt-12 flex flex-wrap justify-center gap-8 border-b border-border pb-5'>
             <Button
               size='lg'
               label='Stake with Cexplorer'
@@ -213,7 +213,7 @@ export const DonatePage = () => {
               className='min-w-[250px]'
             />
           </section>
-          <section ref={donateRef} className='border-b border-border py-16'>
+          <section ref={donateRef} className='border-b border-border py-8'>
             <h2>Donate</h2>
             <div className='flex flex-wrap justify-between gap-4'>
               <div className='flex flex-col'>
@@ -228,7 +228,7 @@ export const DonatePage = () => {
                   <input
                     readOnly
                     value={donationAddress}
-                    className='w-full max-w-[390px] rounded-lg border border-border bg-background p-3 text-sm text-text'
+                    className='w-full max-w-[390px] rounded-lg border border-border bg-background p-1.5 text-sm text-text'
                   />
                   <Copy
                     copyText={donationAddress}
@@ -325,7 +325,7 @@ export const DonatePage = () => {
           </section>
           <section
             ref={stakeRef}
-            className='mt-16 flex w-full flex-wrap justify-between rounded-xl bg-cardBg px-8 py-10'
+            className='mt-16 flex w-full flex-wrap justify-between rounded-xl bg-cardBg px-4 py-5'
           >
             <div className='flex basis-[550px] gap-8'>
               <img className='hidden shrink md:block' src={CexLogo} />
@@ -362,7 +362,7 @@ export const DonatePage = () => {
                 <input
                   readOnly
                   value={randomPool}
-                  className='w-full max-w-[430px] rounded-lg border border-border bg-background p-3 text-sm text-text'
+                  className='w-full max-w-[430px] rounded-lg border border-border bg-background p-1.5 text-sm text-text'
                 />
                 <Copy
                   copyText={randomPool}
@@ -381,12 +381,12 @@ const InfoCard = ({ icon, heading, description }: InfoCardProps) => {
   return (
     <section className='flex grow basis-[350px] flex-col'>
       <div className='flex items-center gap-3'>
-        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-blue-100/90 p-1 outline outline-[6px] outline-blue-100/50'>
+        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-blue-100/90 p-1/2 outline outline-[6px] outline-blue-100/50'>
           {icon}
         </div>
         <h3>{heading}</h3>{" "}
       </div>
-      <p className='pl-12 text-sm text-grayTextPrimary'>{description}</p>
+      <p className='pl-6 text-sm text-grayTextPrimary'>{description}</p>
     </section>
   );
 };
@@ -406,11 +406,11 @@ const CustomDonateCard = ({
   return (
     <div
       onClick={onClick}
-      className={`relative flex grow basis-[250px] cursor-pointer flex-col items-start gap-2 rounded-xl border p-3 ${isActive ? "outline outline-2 outline-primary" : "border-border"}`}
+      className={`relative flex grow basis-[250px] cursor-pointer flex-col items-start gap-2 rounded-xl border p-1.5 ${isActive ? "outline outline-2 outline-primary" : "border-border"}`}
     >
       <Checkbox className='absolute right-3 top-3' checked={isActive} />
       <div className='flex w-full justify-between'>
-        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-blue-100/90 p-1 outline outline-[6px] outline-blue-100/50'>
+        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-blue-100/90 p-1/2 outline outline-[6px] outline-blue-100/50'>
           <Zap color={colors.darkBlue} />
         </div>
       </div>
@@ -440,11 +440,11 @@ const DonateCard = ({
   return (
     <div
       onClick={onClick}
-      className={`relative flex grow basis-[250px] cursor-pointer flex-col items-start gap-2 rounded-xl border p-3 ${isActive ? "outline outline-2 outline-primary" : "border-border"}`}
+      className={`relative flex grow basis-[250px] cursor-pointer flex-col items-start gap-2 rounded-xl border p-1.5 ${isActive ? "outline outline-2 outline-primary" : "border-border"}`}
     >
       <Checkbox className='absolute right-3 top-3' checked={isActive} />
       <div className='flex w-full justify-between'>
-        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-blue-100/90 p-1 outline outline-[6px] outline-blue-100/50'>
+        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-blue-100/90 p-1/2 outline outline-[6px] outline-blue-100/50'>
           {icon}
         </div>
       </div>

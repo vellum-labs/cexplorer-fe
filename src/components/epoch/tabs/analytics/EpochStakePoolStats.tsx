@@ -234,7 +234,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
   ];
 
   return (
-    <div className='flex h-[520px] w-1/2 flex-grow basis-[600px] flex-col gap-4 rounded-lg border border-border p-5 md:flex-shrink-0'>
+    <div className='flex h-[520px] w-1/2 flex-grow basis-[600px] flex-col gap-4 rounded-lg border border-border p-3 md:flex-shrink-0'>
       <h3>Stake Pool Stats</h3>
 
       <div className='flex w-full flex-col'>
@@ -250,7 +250,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
                   width: 230,
                   maxWidth: 230,
                 }}
-                className={`flex h-[55px] items-center py-3 text-left first:pl-4 last:pr-4 [&>a]:text-primary`}
+                className={`flex h-[55px] items-center py-1.5 text-left first:pl-4 last:pr-4 [&>a]:text-primary`}
               >
                 {isError || isLoading || !stats ? (
                   <LoadingSkeleton height='20px' />

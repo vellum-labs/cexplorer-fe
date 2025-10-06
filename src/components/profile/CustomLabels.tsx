@@ -143,7 +143,7 @@ export const CustomLabels = () => {
     <>
       <div className='flex w-full max-w-desktop flex-col'>
         <h2>Custom labels</h2>
-        <p className='border-b border-border pb-4 text-grayTextPrimary'>
+        <p className='border-b border-border pb-2 text-grayTextPrimary'>
           Easily rename any address with custom text for better tracking and
           organization.
         </p>
@@ -206,7 +206,7 @@ export const CustomLabels = () => {
                   className={`${index % 2 !== 0 ? "bg-darker" : ""} group duration-150`}
                 >
                   <TableCell
-                    className={`${index === currentLabels.length - 1 ? "rounded-bl-xl" : ""} table-cell w-[35%] min-w-[230px] py-2 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover`}
+                    className={`${index === currentLabels.length - 1 ? "rounded-bl-xl" : ""} table-cell w-[35%] min-w-[230px] py-1 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover`}
                   >
                     <Link
                       to={
@@ -221,7 +221,7 @@ export const CustomLabels = () => {
                     </Link>
                   </TableCell>
                   <TableCell
-                    className={`table-cell py-2 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover`}
+                    className={`table-cell py-1 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover`}
                   >
                     {label}
                   </TableCell>
@@ -244,14 +244,14 @@ export const CustomLabels = () => {
         </section>
         <div className='ml-auto mt-4 flex h-7 items-center gap-2 text-xs [&>button]:h-full'>
           <button
-            className='rounded-lg border border-border px-1.5 py-1 disabled:cursor-not-allowed disabled:opacity-60'
+            className='rounded-lg border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'
             onClick={handleFirstPage}
             disabled={currentPage === 1}
           >
             First
           </button>
           <button
-            className='rounded-lg border border-border px-1.5 py-1 disabled:cursor-not-allowed disabled:opacity-60'
+            className='rounded-lg border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'
             onClick={handlePrevPage}
             disabled={currentPage === 1}
           >
@@ -261,14 +261,14 @@ export const CustomLabels = () => {
             Page {currentPage} of {totalPages}
           </span>
           <button
-            className='rounded-lg border border-border px-1.5 py-1 disabled:cursor-not-allowed disabled:opacity-60'
+            className='rounded-lg border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
           >
             <ChevronRight size={15} />
           </button>
           <button
-            className='rounded-lg border border-border px-1.5 py-1 disabled:cursor-not-allowed disabled:opacity-60'
+            className='rounded-lg border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'
             onClick={handleLastPage}
             disabled={currentPage === totalPages}
           >

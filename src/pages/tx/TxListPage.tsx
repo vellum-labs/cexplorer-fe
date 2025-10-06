@@ -83,7 +83,7 @@ export const TxListPage: FC<TxListPageProps> = ({
       breadcrumbItems={[{ label: "Transactions" }]}
     >
       <section
-        className={`flex w-full max-w-desktop flex-col ${specifiedParams ? "" : "px-mobile pb-5 md:px-desktop"}`}
+        className={`flex w-full max-w-desktop flex-col ${specifiedParams ? "" : "px-mobile pb-3 md:px-desktop"}`}
       >
         <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
           <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>

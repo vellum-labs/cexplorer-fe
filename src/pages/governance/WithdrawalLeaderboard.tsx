@@ -36,7 +36,7 @@ export const WithdrawalLeaderboard: FC = () => {
       title='Withdrawal Leaderboard'
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1'>Governance</span>,
+          label: <span className='inline pt-1/2'>Governance</span>,
           link: "/gov",
         },
         { label: "Withdrawal leaderboard" },
@@ -44,7 +44,7 @@ export const WithdrawalLeaderboard: FC = () => {
       adsCarousel={false}
     >
       <section
-        className={`flex w-full max-w-desktop flex-col px-mobile pb-4 md:px-desktop`}
+        className={`flex w-full max-w-desktop flex-col px-mobile pb-2 md:px-desktop`}
       >
         <div className='mb-4 flex w-full flex-wrap items-center justify-between gap-2 min-[790px]:flex-nowrap'>
           <div className='flex items-center gap-2'>

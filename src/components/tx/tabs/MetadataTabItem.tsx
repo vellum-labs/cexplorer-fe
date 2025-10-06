@@ -32,10 +32,10 @@ const MetadataTabItem = () => {
       {metadataArr.map((item, index) => (
         <section
           key={index}
-          className='flex flex-col rounded-xl border border-b border-border bg-darker px-4 py-3 shadow'
+          className='flex flex-col rounded-xl border border-b border-border bg-darker px-2 py-1.5 shadow'
         >
           <div className='mb-2 flex items-center gap-1'>
-            <div className='w-fit rounded-md border border-border bg-background px-2 py-1 text-xs font-medium'>
+            <div className='w-fit rounded-md border border-border bg-background px-1 py-1/2 text-xs font-medium'>
               {Object.values(item)[0].key}
             </div>
             <ConstLabelBadge

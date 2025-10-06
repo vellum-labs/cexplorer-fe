@@ -25,7 +25,7 @@ export const HomepageOverview: FC = () => {
       label: <span className='text-sm font-semibold'>Cardano price</span>,
       content: <HomepageCardanoPrice miscConst={miscConst} />,
       footer: (
-        <div className='flex h-[40px] items-center justify-end border-t border-border px-5'>
+        <div className='flex h-[40px] items-center justify-end border-t border-border px-3'>
           <Link to='/ada-price'>
             <div className='flex items-center gap-1'>
               <span className='text-sm font-semibold text-primary'>
@@ -47,7 +47,7 @@ export const HomepageOverview: FC = () => {
       ),
       content: <HomepageCardanoEpoch miscConst={miscConst} />,
       footer: (
-        <div className='flex h-[40px] items-center justify-end border-t border-border px-5'>
+        <div className='flex h-[40px] items-center justify-end border-t border-border px-3'>
           <Link to='/epoch'>
             <div className='flex items-center gap-1'>
               <span className='text-sm font-semibold text-primary'>
@@ -65,7 +65,7 @@ export const HomepageOverview: FC = () => {
       label: <span className='text-sm font-semibold'>Live stake</span>,
       content: <HomepageCardanoLiveStake miscConst={miscConst} />,
       footer: (
-        <div className='flex h-[40px] items-center justify-end border-t border-border px-5'>
+        <div className='flex h-[40px] items-center justify-end border-t border-border px-3'>
           <Link to='/analytics/pool'>
             <div className='flex items-center gap-1'>
               <span className='text-sm font-semibold text-primary'>
@@ -85,7 +85,7 @@ export const HomepageOverview: FC = () => {
     //   ),
     //   content: <HomepageCardanoNativeAssets />,
     //   footer: (
-    //     <div className='flex h-[40px] items-center justify-end border-t border-border px-5'>
+    //     <div className='flex h-[40px] items-center justify-end border-t border-border px-3'>
     //       <Link to='/asset'>
     //         <div className='flex items-center gap-1'>
     //           <span className='text-sm font-semibold text-primary'>Assets</span>
@@ -107,9 +107,9 @@ export const HomepageOverview: FC = () => {
           value={content}
           description={footer}
           fullContentHeight
-          titleClassname='px-3 '
+          titleClassname='px-1.5 '
           className={
-            "min-h-[225px] flex-grow basis-[330px] justify-between !px-0 pb-0 pt-3"
+            "min-h-[225px] flex-grow basis-[330px] justify-between !px-0 pb-0 pt-1.5"
           }
         />
       ))}

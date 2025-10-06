@@ -117,7 +117,7 @@ const ConnectWalletModal: React.FC<Props> = ({ onClose }) => {
         maxHeight='95%'
         onClose={onClose}
       >
-        <div className='flex justify-center p-5 pt-7'>
+        <div className='flex justify-center p-3 pt-4'>
           <SpinningLoader />
         </div>
       </Modal>

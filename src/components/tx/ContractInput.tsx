@@ -45,17 +45,17 @@ export const ContractInput: FC<ContractInputProps> = ({
           />
         )}
         {contract.label && <LabelBadge variant='lg' label={contract?.label} />}
-        <div className='w-fit rounded-lg border border-border bg-background px-2 py-1 text-xs font-medium'>
+        <div className='w-fit rounded-lg border border-border bg-background px-1 py-1/2 text-xs font-medium'>
           Input #{inputIndex + 1}
         </div>
         <PurposeBadge purpose={input.redeemer.purpose} />
-        <span className='flex h-[25px] items-center rounded-full border border-border bg-blue-200/15 px-2 text-xs font-medium'>
+        <span className='flex h-[25px] items-center rounded-full border border-border bg-blue-200/15 px-1 text-xs font-medium'>
           {contract.type.slice(0, 1).toUpperCase() + contract.type.slice(1)}
         </span>
-        <span className='flex h-[25px] items-center rounded-full border border-border bg-secondaryBg px-2 text-xs font-medium'>
+        <span className='flex h-[25px] items-center rounded-full border border-border bg-secondaryBg px-1 text-xs font-medium'>
           Size {(contract.size / 1024).toFixed(2)}kB
         </span>
-        <span className='flex h-[25px] items-center rounded-full border border-border bg-secondaryBg px-2 text-xs font-medium'>
+        <span className='flex h-[25px] items-center rounded-full border border-border bg-secondaryBg px-1 text-xs font-medium'>
           Fee <AdaWithTooltip data={input.redeemer.fee} />
         </span>
       </div>

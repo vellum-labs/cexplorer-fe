@@ -29,11 +29,11 @@ const Button = ({
   onClick,
 }: Props) => {
   const sizeClasses = {
-    xs: "py-1 px-1 text-[12px]",
-    sm: "py-2 px-3 text-[13px]",
-    md: "py-2 px-4 text-sm",
-    lg: "py-2 px-4 text-md",
-    xl: "py-3 px-5 text-lg",
+    xs: "py-1/2 px-1/2 text-[12px]",
+    sm: "py-1 px-1.5 text-[13px]",
+    md: "py-1 px-2 text-sm",
+    lg: "py-1 px-2 text-md",
+    xl: "py-1.5 px-3 text-lg",
   };
 
   const variantClasses = {

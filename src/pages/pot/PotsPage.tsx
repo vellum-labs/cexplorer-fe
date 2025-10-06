@@ -179,7 +179,7 @@ export const PotsPage = () => {
           subTitle
         />
         <AdsCarousel />
-        <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+        <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
           <div className='mb-2 ml-auto flex items-center'>
             <span className='mr-2 text-sm text-grayTextPrimary'>
               Graph epochs:{" "}

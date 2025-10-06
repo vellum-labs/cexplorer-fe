@@ -22,7 +22,7 @@ export const HomepageModal: FC = () => {
       onClose={() => setAddWidget(false)}
       hideClose
     >
-      <div className='flex h-[30px] w-full items-center justify-between pb-6'>
+      <div className='flex h-[30px] w-full items-center justify-between pb-3'>
         <h2>Add homepage widgets</h2>
         <X
           size={20}
@@ -30,12 +30,12 @@ export const HomepageModal: FC = () => {
           onClick={() => setAddWidget(false)}
         />
       </div>
-      <div className='flex py-5'>
+      <div className='flex py-3'>
         <div className='w-[150px]'>
           {widgetCategories.map((item, i) => (
             <div
               key={item.title}
-              className={`flex h-[36px] cursor-pointer select-none items-center px-4 ${activeCategory === i ? "border-l-2 border-primary text-primary" : "border-l-2 border-transparent text-grayTextPrimary"}`}
+              className={`flex h-[36px] cursor-pointer select-none items-center px-2 ${activeCategory === i ? "border-l-2 border-primary text-primary" : "border-l-2 border-transparent text-grayTextPrimary"}`}
               onClick={() => {
                 setActiveWidget(undefined);
                 setActiveCategory(i);
@@ -47,7 +47,7 @@ export const HomepageModal: FC = () => {
             </div>
           ))}
         </div>
-        <div className='thin-scrollbar flex h-[312px] w-full flex-wrap gap-3 overflow-y-auto overscroll-none border-l border-border px-3'>
+        <div className='thin-scrollbar flex h-[312px] w-full flex-wrap gap-3 overflow-y-auto overscroll-none border-l border-border px-1.5'>
           {widgetCategories[activeCategory].widgets.map((widget, index) => (
             <HomepageModalWidget
               key={index}

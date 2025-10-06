@@ -97,7 +97,7 @@ export const ScriptListTVLTab: FC = () => {
         </>
       ) : (
         <>
-          <div className='flex min-w-[350px] flex-grow flex-col gap-3 rounded-lg border border-border p-3 lg:max-w-[350px] lg:flex-grow-0'>
+          <div className='flex min-w-[350px] flex-grow flex-col gap-3 rounded-lg border border-border p-1.5 lg:max-w-[350px] lg:flex-grow-0'>
             <div className='flex h-fit w-full items-center gap-4'>
               <div className='flex aspect-square h-[32px] w-[32px] items-center justify-center rounded-md border border-border'>
                 <CircleDollarSign className='text-primary' size={15} />

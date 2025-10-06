@@ -29,9 +29,9 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
   isGenesisBlock = false,
 }) => {
   return (
-    <div className='flex max-h-[110px] min-h-[110px] w-full flex-col gap-1 rounded-xl border border-border bg-cardBg px-4 py-3 shadow'>
+    <div className='flex max-h-[110px] min-h-[110px] w-full flex-col gap-1 rounded-xl border border-border bg-cardBg px-2 py-1.5 shadow'>
       <div className='flex w-full items-center gap-2'>
-        <div className='rounded-lg border border-border p-1'>
+        <div className='rounded-lg border border-border p-1/2'>
           <GitCompareArrows size={20} className='text-primary' />
         </div>
         <span className='text-sm text-grayTextPrimary'>Minted by</span>
@@ -79,7 +79,7 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
           <Tooltip
             content={
               <div className='inline-block w-[200px] max-w-xs md:w-full xl:flex xl:max-w-full xl:items-center xl:gap-2'>
-                <span className='break-words pr-2 xl:break-normal xl:pr-0'>
+                <span className='break-words pr-1 xl:break-normal xl:pr-0'>
                   {vrfKey}
                 </span>
                 <Copy copyText={vrfKey} className='inline' />

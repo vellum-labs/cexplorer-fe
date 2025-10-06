@@ -73,7 +73,7 @@ export const GlobalSearchCell: FC<GlobalSearchCellProps> = ({
   return (
     <Link to={to[category]} params={params[category]}>
       <div
-        className='flex w-full cursor-pointer items-stretch justify-between border-b border-border pb-1 pt-3 transition-all duration-100 last:border-b-0 hover:bg-cardBg'
+        className='flex w-full cursor-pointer items-stretch justify-between border-b border-border pb-1/2 pt-1.5 transition-all duration-100 last:border-b-0 hover:bg-cardBg'
         onClick={() => {
           handleInput("blur");
           handleSearchChange("");

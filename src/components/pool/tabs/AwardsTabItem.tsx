@@ -192,7 +192,7 @@ export const AwardsTabItem: FC<AwardsTabItemProps> = ({ id }) => {
         : awards?.map((item, i) => (
             <div
               key={`${item.time}_${i}`}
-              className='flex flex-col gap-1 rounded-lg border border-border bg-cardBg px-3 py-2'
+              className='flex flex-col gap-1 rounded-lg border border-border bg-cardBg px-1.5 py-1'
             >
               <img
                 src={imageMap[`${item.category}_${item.type}`]}

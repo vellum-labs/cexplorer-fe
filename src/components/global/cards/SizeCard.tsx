@@ -19,9 +19,9 @@ export const SizeCard: FC<BlockDetailSizeProps> = ({
 
   return (
     <div className='max-h-[110px] min-h-[110px] rounded-xl border border-border bg-cardBg shadow'>
-      <div className='flex max-h-[110px] min-h-[110px] flex-col gap-2 rounded-xl px-4 py-3'>
+      <div className='flex max-h-[110px] min-h-[110px] flex-col gap-2 rounded-xl px-2 py-1.5'>
         <div className='flex w-full items-center gap-2'>
-          <div className='rounded-lg border border-border p-1'>{icon}</div>
+          <div className='rounded-lg border border-border p-1/2'>{icon}</div>
           <span className='text-sm text-grayTextPrimary'>{title}</span>
         </div>
         {!isNaN(Number(sizeInKB)) ? (

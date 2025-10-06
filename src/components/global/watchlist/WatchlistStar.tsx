@@ -244,7 +244,7 @@ export const WatchlistStar = ({
           size='xs'
           variant='tertiary'
           onClick={handleClick}
-          className='h-8 px-2'
+          className='h-8 px-1'
         />
       )}
     </>

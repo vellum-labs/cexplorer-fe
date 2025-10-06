@@ -57,7 +57,7 @@ export const SwReadyModal: FC<SwReadyModalProps> = ({
 
   return (
     open && (
-      <div className='fixed bottom-[10px] right-1 z-50 flex w-full max-w-[340px] flex-col gap-3 rounded-xl border border-border bg-background p-6 md:right-[10px]'>
+      <div className='fixed bottom-[10px] right-1 z-50 flex w-full max-w-[340px] flex-col gap-3 rounded-xl border border-border bg-background p-3 md:right-[10px]'>
         <div className='flex items-center justify-between'>
           <h3 className='text-sm font-semibold'>
             Cexplorer {firstInstall ? "install" : "update"} completed 💪

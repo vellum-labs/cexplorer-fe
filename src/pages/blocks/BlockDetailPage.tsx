@@ -166,7 +166,7 @@ const BlockDetailPage: FC = () => {
           <span className='font-medium text-text'>
             {formatNumber(data?.slot_no ?? 0)}
           </span>
-          <span className='pr-1 text-grayTextPrimary'>
+          <span className='pr-1/2 text-grayTextPrimary'>
             (epoch slot {formatNumber(data?.epoch_slot_no ?? 0)})
           </span>
         </div>
@@ -266,7 +266,7 @@ const BlockDetailPage: FC = () => {
       breadcrumbItems={[
         {
           label: (
-            <span className='inline pt-1'>
+            <span className='inline pt-1/2'>
               Epoch{" "}
               {data?.epoch_param?.epoch_no &&
                 `(${data?.epoch_param?.epoch_no})`}
@@ -302,12 +302,12 @@ const BlockDetailPage: FC = () => {
                 <LoadingSkeleton
                   height='227px'
                   rounded='xl'
-                  className='grow basis-[460px] px-8 py-4'
+                  className='grow basis-[460px] px-4 py-2'
                 />
                 <LoadingSkeleton
                   height='227px'
                   rounded='xl'
-                  className='grow basis-[430px] px-8 py-4'
+                  className='grow basis-[430px] px-4 py-2'
                 />
               </div>
               <div className='flex min-h-full w-[400px] flex-grow flex-col gap-5 xl:justify-between xl:gap-0'>
@@ -357,7 +357,7 @@ const BlockDetailPage: FC = () => {
         </div>
       </section>
       <section className='flex w-full justify-center'>
-        <div className='flex w-full max-w-desktop flex-col flex-wrap justify-center gap-5 px-mobile pb-5 md:px-desktop xl:flex-nowrap xl:justify-start'>
+        <div className='flex w-full max-w-desktop flex-col flex-wrap justify-center gap-5 px-mobile pb-3 md:px-desktop xl:flex-nowrap xl:justify-start'>
           <BlockDetailTable txs={data?.txs} blockDetail={blockDetail} />
         </div>
       </section>

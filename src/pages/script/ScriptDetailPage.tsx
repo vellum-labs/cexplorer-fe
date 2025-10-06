@@ -52,7 +52,7 @@ export const ScriptDetailPage = () => {
       title='Script detail'
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1'>Script List</span>,
+          label: <span className='inline pt-1/2'>Script List</span>,
           link: "/script",
         },
         {

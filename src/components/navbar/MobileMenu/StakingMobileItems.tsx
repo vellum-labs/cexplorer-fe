@@ -26,7 +26,7 @@ export const StakingMobileItems = ({ onBack, setOpen }: Props) => {
               key={JSON.stringify(item.label)}
               to={item.href}
               onClick={() => setOpen(false)}
-              className='ml-[31px] border-b border-border py-3 text-[14px] last:border-none last:pb-0 hover:text-primary'
+              className='ml-[31px] border-b border-border py-1.5 text-[14px] last:border-none last:pb-0 hover:text-primary'
             >
               {item.label}
             </Link>

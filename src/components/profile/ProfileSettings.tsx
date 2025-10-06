@@ -298,7 +298,7 @@ export const ProfileSettings: FC = () => {
   return (
     <div className='flex w-full max-w-desktop flex-col'>
       <h2>Profile settings</h2>
-      <p className='border-b border-border pb-4 text-grayTextPrimary'>
+      <p className='border-b border-border pb-2 text-grayTextPrimary'>
         Update your profile picture photo and details here.
       </p>
       <ProfileForm

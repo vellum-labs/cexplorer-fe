@@ -363,7 +363,7 @@ const GlobalTable = <T extends Record<string, any>>({
                               height: `${rowHeight}px`,
                               maxHeight: `${rowHeight}px`,
                             }}
-                            className={`${index % 2 !== 0 ? "bg-darker" : ""} ${indexToRound === index ? "first:rounded-bl-xl last:rounded-br-xl" : ""} table-cell py-2 text-left first:pl-4 last:pr-4 [&>a]:text-primary ${className}`}
+                            className={`${index % 2 !== 0 ? "bg-darker" : ""} ${indexToRound === index ? "first:rounded-bl-xl last:rounded-br-xl" : ""} table-cell py-1 text-left first:pl-4 last:pr-4 [&>a]:text-primary ${className}`}
                           >
                             <LoadingSkeleton height='20px' />
                           </TableCell>
@@ -406,7 +406,7 @@ const GlobalTable = <T extends Record<string, any>>({
                                 height: `${rowHeight}px`,
                                 maxHeight: `${rowHeight}px`,
                               }}
-                              className={`${indexToRound === index ? "first:rounded-bl-xl last:rounded-br-xl" : ""} table-cell py-2 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover ${className}`}
+                              className={`${indexToRound === index ? "first:rounded-bl-xl last:rounded-br-xl" : ""} table-cell py-1 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover ${className}`}
                             >
                               {!standByRanking
                                 ? item && render(item)
@@ -451,7 +451,7 @@ const GlobalTable = <T extends Record<string, any>>({
                               height: `${rowHeight}px`,
                               maxHeight: `${rowHeight}px`,
                             }}
-                            className={`${indexToRound === index ? "first:rounded-bl-xl last:rounded-br-xl" : ""} table-cell py-2 text-left first:pl-4 last:pr-4`}
+                            className={`${indexToRound === index ? "first:rounded-bl-xl last:rounded-br-xl" : ""} table-cell py-1 text-left first:pl-4 last:pr-4`}
                           >
                             <LoadingSkeleton height='20px' />
                           </TableCell>

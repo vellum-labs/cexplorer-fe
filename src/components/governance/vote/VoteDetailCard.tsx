@@ -354,7 +354,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       key: "metadata",
       title: "Metadata",
       value: vote?.anchor?.offchain?.comment ? (
-        <div className='bg-muted rounded border border-border p-3 text-sm leading-relaxed'>
+        <div className='bg-muted rounded border border-border p-1.5 text-sm leading-relaxed'>
           <pre className='max-w-full overflow-x-auto whitespace-pre-wrap break-all'>
             {vote?.anchor?.offchain?.comment}
           </pre>
@@ -367,9 +367,9 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
 
   return (
     <>
-      <div className='w-full rounded-xl border border-border px-5 py-4'>
+      <div className='w-full rounded-xl border border-border px-3 py-2'>
         <h2 className='text-base font-semibold'>Overview</h2>
-        <div className='flex flex-col gap-4 pt-4'>
+        <div className='flex flex-col gap-4 pt-2'>
           {detailItems.map(({ key, title, value, divider }) => (
             <div key={key} className='flex flex-col'>
               <div className='flex flex-wrap items-start gap-x-4 gap-y-1'>

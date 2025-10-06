@@ -209,7 +209,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                 >
                   <ChevronUp size={15} className='h-full' />
                 </div>
-                <div className='flex w-full flex-col px-1 pb-[20px] pt-[10px]'>
+                <div className='flex w-full flex-col px-1/2 pb-[20px] pt-[10px]'>
                   {Object.entries(currencies)
                     .filter(([, value]) =>
                       (value as any).value

@@ -169,7 +169,7 @@ const HardforkPage: FC = () => {
           {item.status === "ready" && (
             <span
               className={cn(
-                "rounded-2xl border px-2 py-1 text-xs",
+                "rounded-2xl border px-1 py-1/2 text-xs",
                 theme === "light" && "text-[#067647]",
               )}
               style={{
@@ -183,7 +183,7 @@ const HardforkPage: FC = () => {
           {item.status === "notStarted" && (
             <span
               className={cn(
-                "rounded-2xl border px-2 py-1 text-xs",
+                "rounded-2xl border px-1 py-1/2 text-xs",
                 theme === "light" && "text-[#B42318]",
               )}
               style={{
@@ -197,7 +197,7 @@ const HardforkPage: FC = () => {
           {item.status === "inProgress" && (
             <span
               className={cn(
-                "rounded-2xl border px-2 py-1 text-xs",
+                "rounded-2xl border px-1 py-1/2 text-xs",
                 theme === "light" && "text-[#B54708]",
               )}
               style={{

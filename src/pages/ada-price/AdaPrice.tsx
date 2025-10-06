@@ -20,9 +20,9 @@ export const AdaPrice: FC = () => {
       breadcrumbItems={[{ label: "Ada price" }]}
       title={<div className='flex items-center gap-1'>ADA Price</div>}
     >
-      <div className='flex w-full flex-col pt-8'>
+      <div className='flex w-full flex-col pt-4'>
         {graphRates.length ? (
-          <section className='flex w-full flex-col items-center pb-5'>
+          <section className='flex w-full flex-col items-center pb-3'>
             <div className='flex w-full max-w-desktop items-center justify-between px-mobile md:px-desktop'>
               <div className='flex w-full flex-col gap-6 rounded-lg lg:flex-row'>
                 <AdaPriceTable />

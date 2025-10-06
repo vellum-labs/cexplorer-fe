@@ -37,7 +37,7 @@ export const HomepageGridItem: FC<HomepageGridItemProps> = ({
 
   return (
     <div className='relative h-full w-full'>
-      <div className='relative flex h-[50px] items-center justify-between border-b border-border px-3'>
+      <div className='relative flex h-[50px] items-center justify-between border-b border-border px-1.5'>
         {customize && (
           <X
             className='absolute right-1 top-1 cursor-pointer text-grayTextPrimary'

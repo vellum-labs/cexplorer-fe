@@ -38,7 +38,7 @@ export const ConfigAdminPage: FC = () => {
       </Breadcrumb>
       <div className='flex flex-col gap-2'>
         <p>Config options:</p>
-        <ul className='list-inside list-disc pl-2'>
+        <ul className='list-inside list-disc pl-1'>
           <li>
             <Link to='/admin/config/sw' className='text-primary'>
               Sw text

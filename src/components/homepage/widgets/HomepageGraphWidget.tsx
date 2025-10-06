@@ -82,7 +82,7 @@ export const HomepageGraphWidget: FC<HomepageGraphWidgetProps> = memo(
       </AnalyticsGraph>
     ) : (
       <div
-        className='relative w-full p-3'
+        className='relative w-full p-1.5'
         style={{
           maxHeight: "350px",
         }}

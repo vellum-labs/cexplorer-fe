@@ -73,7 +73,7 @@ const TableSettingsDropdown = ({
                 }}
               >
                 {visibleRows && (
-                  <div className='flex h-14 w-full items-center justify-between border-b border-border px-3'>
+                  <div className='flex h-14 w-full items-center justify-between border-b border-border px-1.5'>
                     <span>Rows:</span>
                     <SelectTrigger className='w-[60px]'>
                       <SelectValue
@@ -91,7 +91,7 @@ const TableSettingsDropdown = ({
                     .filter(item => item % 10 === 0)
                     .map(i => (
                       <SelectItem
-                        className='flex w-full cursor-pointer justify-between px-2'
+                        className='flex w-full cursor-pointer justify-between px-1'
                         key={i}
                         value={String(i)}
                       >

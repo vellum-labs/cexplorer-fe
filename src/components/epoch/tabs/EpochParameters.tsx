@@ -522,7 +522,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
     <>
       <div className='flex w-full items-center justify-between gap-2'>
         <h3 className='basis-[220px]'>Epoch Parameters</h3>
-        <div className='flex h-[40px] w-fit shrink-0 items-center justify-center gap-1 rounded-md border border-border px-3'>
+        <div className='flex h-[40px] w-fit shrink-0 items-center justify-center gap-1 rounded-md border border-border px-1.5'>
           <Download size={20} color={colors.text} />
           <span className='text-sm font-medium'>Export</span>
         </div>
@@ -562,7 +562,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
                       width: tableHeader[index].width,
                       maxWidth: tableHeader[index].width,
                     }}
-                    className={`table-cell h-[55px] py-3 text-left first:pl-4 last:pr-4 [&>a]:text-primary`}
+                    className={`table-cell h-[55px] py-1.5 text-left first:pl-4 last:pr-4 [&>a]:text-primary`}
                   >
                     {isError || isLoading || !param ? (
                       <LoadingSkeleton height='20px' />

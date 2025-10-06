@@ -225,7 +225,7 @@ export const ScriptListRanklistTab: FC = () => {
 
   return (
     <>
-      <div className='py-2'>
+      <div className='py-1'>
         {scriptListQuery.isLoading || scriptListQuery.isFetching ? (
           <LoadingSkeleton height='27px' width={"220px"} />
         ) : totalItems > 0 ? (

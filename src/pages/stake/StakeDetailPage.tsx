@@ -149,12 +149,12 @@ export const StakeDetailPage: FC = () => {
                 <LoadingSkeleton
                   height='330px'
                   rounded='xl'
-                  className='grow basis-[410px] px-8 py-4'
+                  className='grow basis-[410px] px-4 py-2'
                 />
                 <LoadingSkeleton
                   height='330px'
                   rounded='xl'
-                  className='grow basis-[410px] px-8 py-4'
+                  className='grow basis-[410px] px-4 py-2'
                 />
               </>
             ) : (

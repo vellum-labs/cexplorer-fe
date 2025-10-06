@@ -61,7 +61,7 @@ export const BotsPage = () => {
       </Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center px-mobile md:px-desktop'>
         <div className='flex w-full max-w-desktop flex-col items-center'>
-          <h1 className='py-8'>Cexplorer.io Bots</h1>
+          <h1 className='py-4'>Cexplorer.io Bots</h1>
           <div className='flex w-full flex-col items-center gap-8 px-mobile md:px-desktop'>
             {bots.map(item => (
               <div
@@ -123,7 +123,7 @@ export const BotsPage = () => {
                 )}
               </div>
             ))}
-            <div className='flex max-w-[800px] flex-col gap-8 text-wrap pb-10'>
+            <div className='flex max-w-[800px] flex-col gap-8 text-wrap pb-5'>
               <div className='w-full text-center'>
                 <h1>Bots and Automation</h1>
               </div>

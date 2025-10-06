@@ -52,11 +52,11 @@ export const SettingsMobileItems: FC<SettingsMobileItemsProps> = ({
         <ChevronLeft size={20} className='font-normal' />
         <span>Settings</span>
       </button>
-      <div className='h-full w-full py-2'>
+      <div className='h-full w-full py-1'>
         {(settingsMobileItems || []).map(({ component, onClick }, i) => (
           <Fragment key={i}>
             <div
-              className='mt-3 flex h-[50px] w-full items-center justify-between gap-5 border-b border-border pb-3 font-medium'
+              className='mt-3 flex h-[50px] w-full items-center justify-between gap-5 border-b border-border pb-1.5 font-medium'
               onClick={onClick}
             >
               {component}

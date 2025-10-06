@@ -24,7 +24,7 @@ export const TotalSumWithRates: FC<
       <span className='text-nowrap font-medium leading-none text-text'>
         <AdaWithTooltip data={ada} />
       </span>
-      <span className='h-[20px] translate-y-[2px] pr-1 leading-none text-grayTextPrimary'>
+      <span className='h-[20px] translate-y-[2px] pr-1/2 leading-none text-grayTextPrimary'>
         (
         <Tooltip
           content={

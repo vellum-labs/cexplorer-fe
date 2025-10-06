@@ -97,7 +97,7 @@ export const PoolBirthdays: FC = () => {
         return (
           <div className='flex justify-end'>
             <div
-              className='flex w-fit items-center justify-center gap-[0.5px] rounded-md border border-border px-2 py-[2px]'
+              className='flex w-fit items-center justify-center gap-[0.5px] rounded-md border border-border px-1 py-[2px]'
               style={{
                 boxShadow: "0px 1px 2px 0px #1018280D",
               }}
@@ -193,7 +193,7 @@ export const PoolBirthdays: FC = () => {
       title='Pool Birthdays'
       breadcrumbItems={[{ label: "Pool Birthdays" }]}
     >
-      <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+      <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
           <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
             {poolsBirthdayQuery.isLoading || poolsBirthdayQuery.isFetching ? (

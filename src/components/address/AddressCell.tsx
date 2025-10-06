@@ -89,7 +89,7 @@ const AddressCell = ({
         <Link
           to={isStake ? "/stake/$stakeAddr" : "/address/$address"}
           params={{ address: address, stakeAddr: address }}
-          className={`${label ? "px-[2px] italic" : ""} ${isHighlighted ? "rounded-md bg-hoverHighlight outline outline-1 outline-highlightBorder" : ""} block overflow-hidden overflow-ellipsis whitespace-nowrap ${enableHover ? "px-1" : "px-0"} text-sm text-primary ${className}`}
+          className={`${label ? "px-[2px] italic" : ""} ${isHighlighted ? "rounded-md bg-hoverHighlight outline outline-1 outline-highlightBorder" : ""} block overflow-hidden overflow-ellipsis whitespace-nowrap ${enableHover ? "px-1/2" : "px-0"} text-sm text-primary ${className}`}
           title={label ? address : ""}
         >
           {label ? label : formatString(address, "longer")}

@@ -392,7 +392,7 @@ export const ProfilePro = () => {
             });
           }}
         >
-          <p className='mb-5 pr-7'>Please fill in the fields:</p>
+          <p className='mb-5 pr-4'>Please fill in the fields:</p>
           <RadioGroup
             onValueChange={value => {
               setModalData({

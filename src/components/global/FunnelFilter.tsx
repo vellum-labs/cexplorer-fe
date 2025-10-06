@@ -65,17 +65,17 @@ export const FunnelFilter = ({
       <div className='min-h-[50px] w-full border-b border-border'>
         {children}
       </div>
-      <div className='flex h-[40px] w-full items-center justify-between px-6 py-3'>
+      <div className='flex h-[40px] w-full items-center justify-between px-3 py-1.5'>
         <Button
           size='xs'
-          className='cursor-pointer px-2'
+          className='cursor-pointer px-1'
           variant='tertiary'
           label='Reset'
           onClick={onReset}
         />
         <Button
           size='xs'
-          className='cursor-pointer px-2'
+          className='cursor-pointer px-1'
           variant='primary'
           label='Filter'
           disabled={disabled}

@@ -134,7 +134,7 @@ const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {
               typeof value !== "undefined" && (
                 <div
                   key={key}
-                  className='mb-2 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-2 py-0.5 text-xs text-grayTextPrimary'
+                  className='mb-2 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
                 >
                   <span>
                     {key === "gov_action" ? "Selected votes:" : "Is Drep"}:

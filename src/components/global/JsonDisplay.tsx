@@ -225,7 +225,7 @@ export const JsonDisplay: FC<JSONDisplayProps> = ({
               />
               <input
                 type='text'
-                className={`${inputOpen ? "w-[200px] pl-6" : "w-0"} transition-width overflow-hidden rounded-lg text-black duration-300 ease-in-out`}
+                className={`${inputOpen ? "w-[200px] pl-3" : "w-0"} transition-width overflow-hidden rounded-lg text-black duration-300 ease-in-out`}
                 value={inputSearch}
                 onChange={e => setInputSearch(e.currentTarget.value)}
               />

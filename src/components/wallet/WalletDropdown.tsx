@@ -81,7 +81,7 @@ const WalletDropdown = ({
         visibility: isLoading || !isOpen ? "hidden" : "visible",
       }}
     >
-      <div className='border-b border-border p-4'>
+      <div className='border-b border-border p-2'>
         <div className='flex items-start justify-between'>
           <div className='flex items-center gap-2'>
             <div className='relative'>
@@ -114,7 +114,7 @@ const WalletDropdown = ({
           </div>
           <div className='flex flex-col items-end gap-1'>
             {hasMembership ? (
-              <span className='flex w-fit items-center gap-1 rounded-full bg-gradient-to-r from-darkBlue to-purple-700 px-2 py-0.5 text-right text-xs font-medium text-white'>
+              <span className='flex w-fit items-center gap-1 rounded-full bg-gradient-to-r from-darkBlue to-purple-700 px-1 py-1/4 text-right text-xs font-medium text-white'>
                 PRO
               </span>
             ) : (
@@ -129,8 +129,8 @@ const WalletDropdown = ({
         </div>
       </div>
 
-      <div className='border-b border-border p-3'>
-        <div className='space-y-2 rounded-lg border border-border bg-gradient-to-r from-cardBg to-background px-2.5 py-3'>
+      <div className='border-b border-border p-1.5'>
+        <div className='space-y-2 rounded-lg border border-border bg-gradient-to-r from-cardBg to-background px-1.5 py-1.5'>
           {adaHandle && (
             <div className='flex items-center justify-between'>
               <span className='text-xs font-medium text-text'>ADA Handle</span>
@@ -228,7 +228,7 @@ const WalletDropdown = ({
         </div>
       </div>
 
-      <div className='border-b border-border p-2'>
+      <div className='border-b border-border p-1'>
         <Link
           to='/watchlist'
           className='relative rounded-lg text-sm hover:bg-darker hover:text-primary'
@@ -296,7 +296,7 @@ const WalletDropdown = ({
         )}
       </div>
 
-      <div className='border-b border-border p-2'>
+      <div className='border-b border-border p-1'>
         <button
           className='relative w-full rounded-lg text-sm hover:bg-darker hover:text-primary'
           style={{
@@ -328,7 +328,7 @@ const WalletDropdown = ({
         </button>
       </div>
 
-      <div className='p-4'>
+      <div className='p-2'>
         <div className='flex justify-start gap-3'>
           <a
             href='https://x.com/cexplorer_io'

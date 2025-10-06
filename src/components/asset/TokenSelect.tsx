@@ -119,7 +119,7 @@ export const TokenSelectCombobox = React.memo(
                 value={search}
                 onchange={value => setSearch(value)}
                 placeholder='Search token...'
-                wrapperClassName='px-2 py-2'
+                wrapperClassName='px-1 py-1'
               />
               <CommandList className='overflow-hidden'>
                 <CommandEmpty>No token found.</CommandEmpty>

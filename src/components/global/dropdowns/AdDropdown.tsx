@@ -16,13 +16,13 @@ const AdDropdown = ({ label, options, icon }: Props) => {
         id={label}
         width='200px'
         label={
-          <div className='group flex h-[40px] w-full shrink grow items-center justify-between gap-2 rounded-md border-border bg-background px-3 py-3'>
+          <div className='group flex h-[40px] w-full shrink grow items-center justify-between gap-2 rounded-md border-border bg-background px-1.5 py-1.5'>
             <Icon name={icon} size={18} />
             <span>{label}</span>
           </div>
         }
         options={options}
-        triggerClassName='pr-3 bg-background rounded-md'
+        triggerClassName='pr-1.5 bg-background rounded-md'
       />
     </div>
   );

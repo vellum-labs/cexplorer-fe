@@ -3,7 +3,7 @@ import type { FC } from "react";
 export const HomepageCardanoNativeAssets: FC = () => {
   return (
     <div className='mx-3 min-h-[110px] flex-grow'>
-      <div className='flex items-center gap-2 pb-4'>
+      <div className='flex items-center gap-2 pb-2'>
         <span className='text-3xl font-semibold'>TBD</span>
       </div>
       <div className='flex flex-grow items-center pb-[11px]'>

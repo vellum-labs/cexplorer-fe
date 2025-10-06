@@ -12,7 +12,7 @@ export const callDelegationToast = ({
   success = false,
 }: CallDelegationToastProps) => {
   return toast(
-    <div className='relative p-3'>
+    <div className='relative p-1.5'>
       <div className='absolute right-2 top-2 flex items-center gap-2'>
         <button onClick={() => toast.dismiss()} aria-label='Dismiss'>
           <X size={15} className='stroke-text' />

@@ -99,7 +99,7 @@ export const CustomLabelModal = () => {
 
   return (
     <Modal minHeight='260px' minWidth='400px' maxWidth='95%' onClose={onClose}>
-      <p className='mb-5 pr-7 font-medium'>
+      <p className='mb-5 pr-4 font-medium'>
         {isEdit() ? "Edit label:" : "Create new label:"}
       </p>
       <TextInput

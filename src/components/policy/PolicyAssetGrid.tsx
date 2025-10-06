@@ -80,7 +80,7 @@ export const PolicyAssetGrid: FC<PolicyAssetGridProps> = ({
                       .slice(0, 3)
                       .join("")}
                   />
-                  <p className='self-start px-2 py-4 text-lg font-bold text-primary'>
+                  <p className='self-start px-1 py-2 text-lg font-bold text-primary'>
                     {renderAssetName({ name: item.name })}
                   </p>
                 </Link>

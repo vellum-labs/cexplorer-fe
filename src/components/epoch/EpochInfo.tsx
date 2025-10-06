@@ -38,7 +38,7 @@ export const EpochInfo: FC<EpochInfoProps> = ({ number, data }) => {
     ((durationInSeconds - timeLeft) / durationInSeconds) * 100;
 
   return (
-    <div className='min-h-1/2 flex w-full flex-col gap-4 rounded-lg border border-border px-6 py-3'>
+    <div className='min-h-1/2 flex w-full flex-col gap-4 rounded-lg border border-border px-3 py-1.5'>
       <div className='relative flex h-[24px] w-[115px] items-center justify-end rounded-lg border border-border px-[10px]'>
         <div className='absolute left-2'>
           <PulseDot />

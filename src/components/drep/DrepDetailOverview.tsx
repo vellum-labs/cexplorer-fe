@@ -15,24 +15,24 @@ export const DrepDetailOverview: FC<DrepDetailOverviewProps> = ({ query }) => {
 
   return (
     <section className='flex w-full flex-col items-center'>
-      <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pt-3 md:px-desktop xl:flex-nowrap xl:justify-start'>
+      <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pt-1.5 md:px-desktop xl:flex-nowrap xl:justify-start'>
         <div className='flex grow basis-[980px] flex-wrap items-stretch gap-5'>
           {query.isLoading ? (
             <>
               <LoadingSkeleton
                 height='227px'
                 rounded='xl'
-                className='grow basis-[300px] px-8 py-4'
+                className='grow basis-[300px] px-4 py-2'
               />
               <LoadingSkeleton
                 height='227px'
                 rounded='xl'
-                className='grow basis-[300px] px-8 py-4'
+                className='grow basis-[300px] px-4 py-2'
               />
               <LoadingSkeleton
                 height='227px'
                 rounded='xl'
-                className='grow basis-[300px] px-8 py-4'
+                className='grow basis-[300px] px-4 py-2'
               />
             </>
           ) : (

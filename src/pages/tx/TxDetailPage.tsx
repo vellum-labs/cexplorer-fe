@@ -234,7 +234,7 @@ const TxDetailPage = () => {
       breadcrumbItems={[
         {
           label: (
-            <span className='inline pt-1'>
+            <span className='inline pt-1/2'>
               Epoch{" "}
               {data?.epoch_param?.epoch_no &&
                 `(${data?.epoch_param?.epoch_no})`}
@@ -251,7 +251,7 @@ const TxDetailPage = () => {
         },
         {
           label: (
-            <span className='inline pt-1'>
+            <span className='inline pt-1/2'>
               Block {data?.block?.no && `(${formatNumber(data?.block?.no)})`}
             </span>
           ),
@@ -278,7 +278,7 @@ const TxDetailPage = () => {
       }
       adsCarousel={false}
     >
-      <div className='flex h-full w-full max-w-desktop flex-col gap-5 px-mobile py-2 lg:flex-row lg:px-desktop'>
+      <div className='flex h-full w-full max-w-desktop flex-col gap-5 px-mobile py-1 lg:flex-row lg:px-desktop'>
         {uniqueContracts &&
           uniqueContracts.map((contract, index) => (
             <Fragment key={index}>

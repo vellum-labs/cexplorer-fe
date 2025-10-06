@@ -196,7 +196,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
           changeFilterByKey("voter_role", filterDraft["voter_role"]),
         onReset: () => changeFilterByKey("voter_role"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-4 py-2'>
+          <div className='flex flex-col gap-2 px-2 py-1'>
             {["ConstitutionalCommittee", "SPO", "DRep"].map(val => (
               <label className='flex items-center gap-2' key={val}>
                 <input
@@ -263,7 +263,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
         onFilter: () => changeFilterByKey("vote", filterDraft["vote"]),
         onReset: () => changeFilterByKey("vote"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-4 py-2'>
+          <div className='flex flex-col gap-2 px-2 py-1'>
             {["Yes", "No", "Abstain"].map(val => (
               <label className='flex items-center gap-2' key={val}>
                 <input
@@ -370,7 +370,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
       adsCarousel={!poolId}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1'>Governance</span>,
+          label: <span className='inline pt-1/2'>Governance</span>,
           link: "/gov",
         },
         {
@@ -379,7 +379,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
       ]}
       title={<div className='flex items-center gap-1'>All Votes</div>}
     >
-      <div className={`w-full max-w-desktop ${!poolId ? "px-4 py-6" : ""}`}>
+      <div className={`w-full max-w-desktop ${!poolId ? "px-2 py-3" : ""}`}>
         <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
           <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
             {votesQuery.isLoading || votesQuery.isFetching ? (
@@ -474,7 +474,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
                 value && (
                   <div
                     key={key}
-                    className='mb-2 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-2 py-0.5 text-xs text-grayTextPrimary'
+                    className='mb-2 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
                   >
                     <span>
                       {key[0].toUpperCase() + key.split("_").join(" ").slice(1)}

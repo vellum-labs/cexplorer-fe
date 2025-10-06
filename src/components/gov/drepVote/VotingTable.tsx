@@ -132,7 +132,7 @@ export const VotingTable: FC<VotingTableProps> = () => {
                 <div
                   role='columnheader'
                   key={key}
-                  className='relative box-border flex h-[60px] items-center border-b border-border bg-darker py-2 font-semibold text-text first:rounded-tl-xl first:pl-4 last:pr-4'
+                  className='relative box-border flex h-[60px] items-center border-b border-border bg-darker py-1 font-semibold text-text first:rounded-tl-xl first:pl-4 last:pr-4'
                   style={{
                     maxWidth: `${widthPx || 200}px`,
                     width: `${widthPx}px`,
@@ -156,7 +156,7 @@ export const VotingTable: FC<VotingTableProps> = () => {
                         <Fragment key={`th${i}`}>
                           <div
                             role='cell'
-                            className='flex items-center px-2 py-2 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover'
+                            className='flex items-center px-1 py-1 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover'
                             style={{
                               maxWidth: `${widthPx || 100}px`,
                               width: `${widthPx || 100}px`,
@@ -177,7 +177,7 @@ export const VotingTable: FC<VotingTableProps> = () => {
                         <Fragment key={`td${colIdx}`}>
                           <div
                             role='cell'
-                            className='flex items-center py-4 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover'
+                            className='flex items-center py-2 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover'
                             style={{
                               maxWidth: `${widthPx || 100}px`,
                               width: `${widthPx || 100}px`,
@@ -207,7 +207,7 @@ export const VotingTable: FC<VotingTableProps> = () => {
                     <div
                       role='columnheader'
                       key={`${action.id}_${i}`}
-                      className='relative box-border flex h-[60px] min-w-[200px] flex-1 shrink-0 cursor-pointer snap-start items-center justify-center border-b border-border bg-darker px-2 text-sm text-primary first:pl-4 last:pr-4'
+                      className='relative box-border flex h-[60px] min-w-[200px] flex-1 shrink-0 cursor-pointer snap-start items-center justify-center border-b border-border bg-darker px-1 text-sm text-primary first:pl-4 last:pr-4'
                     >
                       <Tooltip
                         content={<p className='w-[140px]'>{action.name}</p>}
@@ -242,7 +242,7 @@ export const VotingTable: FC<VotingTableProps> = () => {
                         <Fragment key={`${voteRow.id ?? rowIdx}_${colIdx}`}>
                           <div
                             role='cell'
-                            className='flex w-full min-w-[200px] flex-1 snap-start items-center justify-center py-2 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover'
+                            className='flex w-full min-w-[200px] flex-1 snap-start items-center justify-center py-1 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover'
                           >
                             {voteRow[action.name] ? (
                               <VoteBadge vote={voteRow[action.name] as Vote} />

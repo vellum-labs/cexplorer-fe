@@ -50,7 +50,7 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
 }) => {
   return (
     <div
-      className={`min-h-[227px] w-full flex-1 grow basis-[450px] rounded-xl border border-border bg-cardBg px-4 py-4 shadow lg:basis-[400px] ${className}`}
+      className={`min-h-[227px] w-full flex-1 grow basis-[450px] rounded-xl border border-border bg-cardBg px-2 py-2 shadow lg:basis-[400px] ${className}`}
     >
       <div
         className={`flex w-full justify-between ${
@@ -64,7 +64,7 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
         <div className='mb-2 mt-3 w-full border-t border-border'></div>
       )}
       <div
-        className={`flex h-full ${startContent ? "items-start" : "items-stretch"} gap-2 pb-4 ${showTitleDivider ? "pt-0" : "pt-2"} ${startContent ? "flex-wrap justify-center sm:flex-nowrap" : ""}`}
+        className={`flex h-full ${startContent ? "items-start" : "items-stretch"} gap-2 pb-2 ${showTitleDivider ? "pt-0" : "pt-1"} ${startContent ? "flex-wrap justify-center sm:flex-nowrap" : ""}`}
       >
         {startContent}
         <div className={`flex w-full flex-col`}>
@@ -87,14 +87,14 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
                           {item?.label && (
                             <div
                               key={`${item?.label}_${i}_label`}
-                              className={`flex items-center text-left text-sm text-grayTextSecondary ${labelClassname ? labelClassname : ""} ${leading ? "leading-[0px]" : "py-1"}`}
+                              className={`flex items-center text-left text-sm text-grayTextSecondary ${labelClassname ? labelClassname : ""} ${leading ? "leading-[0px]" : "py-1/2"}`}
                             >
                               {item?.label}
                             </div>
                           )}
                           <div
                             key={`${item?.label}_${i}_value`}
-                            className={`overflow-hidden break-words text-sm text-grayTextPrimary ${leading ? "leading-[0px]" : "py-1"}`}
+                            className={`overflow-hidden break-words text-sm text-grayTextPrimary ${leading ? "leading-[0px]" : "py-1/2"}`}
                             style={!item?.label ? { gridColumn: "span 2" } : undefined}
                           >
                             {item?.value}
@@ -108,7 +108,7 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
             <div className='mt-2 w-full border-t border-border'></div>
           )}
           {threshold && (
-            <div className='flex w-full items-center justify-between pt-2'>
+            <div className='flex w-full items-center justify-between pt-1'>
               <Tooltip
                 content={
                   <div className='flex flex-col'>

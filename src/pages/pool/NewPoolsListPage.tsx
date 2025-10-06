@@ -210,7 +210,7 @@ export const NewPoolsListPage: FC = () => {
       title='New Pools'
       breadcrumbItems={[{ label: "New Pools" }]}
     >
-      <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+      <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
           <h3>Welcome, new pool operators!</h3>
 

@@ -75,7 +75,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
             value={search}
             onChange={(e) => handleSearchChange(e.currentTarget.value)}
             placeholder='Search by Address / Tx hash / Block hash / $Handle / Pool name...'
-            className="flex-1 h-full pl-2 pr-12 bg-transparent outline-none text-sm"
+            className="flex-1 h-full pl-1 pr-6 bg-transparent outline-none text-sm"
             onFocus={() => handleInput("focus")}
             autoCapitalize='off'
           />
@@ -120,11 +120,11 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
             {categories && (
               <>
                 {categories.all === 0 ? (
-                  <div className='px-3 py-3 text-center text-sm'>Not Found</div>
+                  <div className='px-1.5 py-1.5 text-center text-sm'>Not Found</div>
                 ) : (
                   <>
                     <div
-                      className={`flex h-[35px] items-center gap-3 overflow-hidden ${categoriesOverflow ? "px-5" : "w-full px-3"}`}
+                      className={`flex h-[35px] items-center gap-3 overflow-hidden ${categoriesOverflow ? "px-3" : "w-full px-1.5"}`}
                       ref={categoriesRef}
                     >
                       {categories &&
@@ -151,7 +151,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
                           </div>
                         ))}
                     </div>
-                    <div className='thin-scrollbar flex max-h-[300px] w-full flex-col overflow-auto overscroll-none px-3 pb-3'>
+                    <div className='thin-scrollbar flex max-h-[300px] w-full flex-col overflow-auto overscroll-none px-1.5 pb-1.5'>
                       {activeTab === "all"
                         ? Object.entries(groupedData).map(
                             ([category, data]) => {
@@ -177,7 +177,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
                                     .map((item, index, arr) => (
                                       <div
                                         key={index}
-                                        className={`${index === arr.length - 1 ? "pb-2" : ""}`}
+                                        className={`${index === arr.length - 1 ? "pb-1" : ""}`}
                                       >
                                         <GlobalSearchCell
                                           formatTitle={

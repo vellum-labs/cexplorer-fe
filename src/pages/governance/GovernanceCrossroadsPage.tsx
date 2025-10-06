@@ -72,18 +72,18 @@ export const GovernanceCrossroadsPage = () => {
       title='Governance'
       breadcrumbItems={[{ label: "Governance" }]}
     >
-      <section className='mt-4 w-full max-w-desktop px-mobile pb-5 md:px-desktop'>
+      <section className='mt-4 w-full max-w-desktop px-mobile pb-3 md:px-desktop'>
         <div className='grid grid-cols-1 gap-5 md:grid-cols-2'>
           {governanceSections.map((section, index) => (
             <div
               key={index}
-              className='flex flex-col rounded-xl border border-border px-6 py-4 font-medium'
+              className='flex flex-col rounded-xl border border-border px-3 py-2 font-medium'
             >
-              <div className='w-fit rounded-lg border border-border p-1'>
+              <div className='w-fit rounded-lg border border-border p-1/2'>
                 {section.icon}
               </div>
 
-              <h2 className='mt-4 border-b border-border pb-2 text-lg text-text'>
+              <h2 className='mt-4 border-b border-border pb-1 text-lg text-text'>
                 {section.label}
               </h2>
 

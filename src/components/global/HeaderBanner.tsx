@@ -69,7 +69,7 @@ export const HeaderBanner = ({
   return (
     <header className='mb-5 flex min-h-[110px] w-full justify-center bg-gradient-to-b from-bannerGradient to-darker'>
       <div className='flex w-full max-w-desktop flex-wrap justify-between gap-5 p-mobile md:px-desktop md:py-mobile'>
-        <div className='flex flex-col py-1'>
+        <div className='flex flex-col py-1/2'>
           {breadcrumbItems && (
             <Breadcrumb className='w-full'>
               <BreadcrumbList className='flex items-center'>
@@ -103,8 +103,8 @@ export const HeaderBanner = ({
               </BreadcrumbList>
             </Breadcrumb>
           )}
-          <div className='flex items-center gap-2 pt-1 font-poppins'>
-            <h1 className={cn(!subTitle && !isHomepage && "pb-8")}>{title}</h1>
+          <div className='flex items-center gap-2 pt-1/2 font-poppins'>
+            <h1 className={cn(!subTitle && !isHomepage && "pb-4")}>{title}</h1>
             {badge && badge}
           </div>
           <div className='flex items-center gap-2'>

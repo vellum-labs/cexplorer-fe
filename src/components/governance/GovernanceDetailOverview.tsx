@@ -364,7 +364,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
 
       return {
         label: (
-          <div className='flex items-center gap-3 py-1.5 text-sm'>
+          <div className='flex items-center gap-3 py-1 text-sm'>
             <Image
               src={generateImageUrl(ccId, "ico", "cc")}
               className='h-[18px] w-[18px] rounded-lg object-cover'
@@ -540,19 +540,19 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
   return (
     <>
       <section className='flex w-full flex-col items-center gap-2'>
-        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pt-3 md:px-desktop xl:flex-nowrap xl:justify-start'>
+        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pt-1.5 md:px-desktop xl:flex-nowrap xl:justify-start'>
           <div className='flex grow basis-[980px] flex-wrap items-stretch gap-5'>
             {query.isLoading ? (
               <>
                 <LoadingSkeleton
                   height='227px'
                   rounded='xl'
-                  className='grow basis-[300px] px-8 py-4'
+                  className='grow basis-[300px] px-4 py-2'
                 />
                 <LoadingSkeleton
                   height='227px'
                   rounded='xl'
-                  className='grow basis-[300px] px-8 py-4'
+                  className='grow basis-[300px] px-4 py-2'
                 />
               </>
             ) : (
@@ -591,24 +591,24 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
             )}
           </div>
         </div>
-        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pt-3 md:px-desktop xl:flex-nowrap xl:justify-start'>
+        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pt-1.5 md:px-desktop xl:flex-nowrap xl:justify-start'>
           <div className='flex grow basis-[980px] flex-wrap items-stretch gap-5'>
             {query.isLoading ? (
               <>
                 <LoadingSkeleton
                   height='227px'
                   rounded='xl'
-                  className='grow basis-[300px] px-8 py-4'
+                  className='grow basis-[300px] px-4 py-2'
                 />
                 <LoadingSkeleton
                   height='227px'
                   rounded='xl'
-                  className='grow basis-[300px] px-8 py-4'
+                  className='grow basis-[300px] px-4 py-2'
                 />
                 <LoadingSkeleton
                   height='227px'
                   rounded='xl'
-                  className='grow basis-[300px] px-8 py-4'
+                  className='grow basis-[300px] px-4 py-2'
                 />
               </>
             ) : (
@@ -637,14 +637,14 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         }
                         showTitleDivider
                         labelClassname='w-full'
-                        tBodyClassname={`${(committeeMembers ?? []).length > 7 ? "max-h-[300px] thin-scrollbar px-1 overflow-auto" : ""}`}
+                        tBodyClassname={`${(committeeMembers ?? []).length > 7 ? "max-h-[300px] thin-scrollbar px-1/2 overflow-auto" : ""}`}
                         leading
                         hFit
                         endContent={
                           <div
-                            className={`flex w-full flex-col justify-end py-2 ${(committeeMembers ?? []).length < 7 ? "h-full" : ""} ${(committeeMembers ?? []).length === 7 ? "pb-0" : "pb-4"}`}
+                            className={`flex w-full flex-col justify-end py-1 ${(committeeMembers ?? []).length < 7 ? "h-full" : ""} ${(committeeMembers ?? []).length === 7 ? "pb-0" : "pb-2"}`}
                           >
-                            <div className='mt-2 flex w-full items-center justify-between border-t border-border pt-2'>
+                            <div className='mt-2 flex w-full items-center justify-between border-t border-border pt-1'>
                               <div className='flex items-center gap-[2px]'>
                                 <CircleHelp
                                   size={11}
@@ -658,7 +658,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                                 {ccThreshold}%
                               </span>
                             </div>
-                            <div className='flex w-full items-center gap-3 pt-2'>
+                            <div className='flex w-full items-center gap-3 pt-1'>
                               <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#FEC84B]'>
                                 <span
                                   className='absolute top-0 block h-2 bg-[#00A9E3]'

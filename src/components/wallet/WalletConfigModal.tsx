@@ -105,7 +105,7 @@ const WalletConfigModal = () => {
     >
       <h2 className='mb-5 text-lg font-medium'>Authorization Token</h2>
 
-      <div className='mb-4 rounded-lg border border-border bg-cardBg p-3'>
+      <div className='mb-4 rounded-lg border border-border bg-cardBg p-1.5'>
         <p className='text-muted-foreground mb-3 text-sm'>
           We use a signature token to protect your privacy and keep your
           watchlist, custom names, and personal data secure.
@@ -174,7 +174,7 @@ const WalletConfigModal = () => {
       </RadioGroup>
       <div className='flex justify-end'>
         <Button
-          className='mt-10 px-8'
+          className='mt-10 px-4'
           label='Confirm'
           size='md'
           onClick={handleConfirmation}

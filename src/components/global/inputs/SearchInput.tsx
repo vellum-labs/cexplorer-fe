@@ -103,7 +103,7 @@ const TableSearchInput = ({
       {searchPrefix && (
         <span
           ref={prefixRef}
-          className={`absolute bg-darker p-1 text-sm font-medium ${stretchPrefix ? "flex h-full items-center pl-2" : "left-3"} ${prefixClassname ? prefixClassname : ""}`}
+          className={`absolute bg-darker p-1/2 text-sm font-medium ${stretchPrefix ? "flex h-full items-center pl-2" : "left-3"} ${prefixClassname ? prefixClassname : ""}`}
         >
           {searchPrefix}
           {stretchPrefix ? "" : ":"}
@@ -122,7 +122,7 @@ const TableSearchInput = ({
               }
             : {}
         }
-        className={`relative h-10 pr-8 ${hasPrefix && ""} ${inputClassName}`}
+        className={`relative h-10 pr-4 ${hasPrefix && ""} ${inputClassName}`}
         onFocus={() => {
           !searchPrefix && setShowPrefixes(true);
         }}
@@ -169,7 +169,7 @@ const TableSearchInput = ({
             .map((prefix, index) => (
               <button
                 key={index}
-                className='flex w-full items-center overflow-hidden text-ellipsis border-b border-border px-3 py-2 text-sm last:rounded-bl-md last:rounded-br-md last:border-b-0 hover:bg-darker'
+                className='flex w-full items-center overflow-hidden text-ellipsis border-b border-border px-1.5 py-1 text-sm last:rounded-bl-md last:rounded-br-md last:border-b-0 hover:bg-darker'
                 onClick={() => {
                   onchange(`${prefix.name}:${value}`);
                   inputRef.current?.focus();

@@ -50,7 +50,7 @@ export const ShareButton = () => {
       label={<Share size={17} className='' />}
       disableHover
       options={options as any}
-      triggerClassName='border border-border rounded-lg h-8 px-2'
+      triggerClassName='border border-border rounded-lg h-8 px-1'
       wrapperClassname='z-0'
       width='200px'
     />

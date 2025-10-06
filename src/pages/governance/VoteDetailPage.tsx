@@ -52,11 +52,11 @@ export const GovernanceVoteDetailPage: FC = () => {
       }}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1'>Governance</span>,
+          label: <span className='inline pt-1/2'>Governance</span>,
           link: "/gov",
         },
         {
-          label: <span className='inline pt-1'>Votes</span>,
+          label: <span className='inline pt-1/2'>Votes</span>,
           link: "/gov/vote",
         },
         {
@@ -72,7 +72,7 @@ export const GovernanceVoteDetailPage: FC = () => {
         />
       }
     >
-      <div className='w-full max-w-desktop py-4'>
+      <div className='w-full max-w-desktop py-2'>
         {isLoading ? (
           <div className='w-full'>
             <div className='flex gap-2'>

@@ -184,7 +184,7 @@ export const RetiredDelegationsPage = () => {
       title='Delegations to Retired Pools'
       breadcrumbItems={[{ label: "Delegations to Retired Pools" }]}
     >
-      <div className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+      <div className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         {stats ? (
           <div className='mb-4 flex flex-wrap items-center gap-4'>
             <OverviewStatCard

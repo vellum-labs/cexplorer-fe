@@ -28,7 +28,7 @@ export const AddressInspectorRow: FC<AddressInspectorRowProps> = ({
         }}
       >
         <div
-          className={`flex h-full w-full ${titleStart ? "items-start py-3" : "items-center"} gap-1 px-3 sm:px-6`}
+          className={`flex h-full w-full ${titleStart ? "items-start py-1.5" : "items-center"} gap-1 px-1.5 sm:px-6`}
         >
           <span className='text-sm font-medium text-grayTextPrimary'>
             {" "}

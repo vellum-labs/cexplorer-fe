@@ -17,7 +17,7 @@ export const HomepageCardanoLiveStake: FC<HomepageCardanoLiveStakeProps> = ({
 
   return (
     <div className='mx-3 min-h-[110px] flex-grow'>
-      <div className='flex w-full flex-col gap-2 pb-4'>
+      <div className='flex w-full flex-col gap-2 pb-2'>
         <span className='text-3xl font-semibold'>
           <AdaWithTooltip data={liveStake ?? 0} />
         </span>

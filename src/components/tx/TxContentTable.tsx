@@ -35,7 +35,7 @@ const TxContentTable = ({ title, data, sort, isOutput }: Props) => {
 
   return (
     <section className='m-0 flex h-full w-full flex-col rounded-xl border border-border shadow'>
-      <div className='flex w-full justify-between rounded-tl-xl rounded-tr-xl border-b border-border bg-darker px-4 py-2 text-sm font-medium text-grayTextPrimary'>
+      <div className='flex w-full justify-between rounded-tl-xl rounded-tr-xl border-b border-border bg-darker px-2 py-1 text-sm font-medium text-grayTextPrimary'>
         <span>{title}</span>
         <span className='text-right text-sm font-normal text-grayTextPrimary'>
           Total: <AdaWithTooltip data={totalAda ?? 0} />
@@ -45,7 +45,7 @@ const TxContentTable = ({ title, data, sort, isOutput }: Props) => {
       {content?.map((utxo, index) => (
         <div
           key={index}
-          className='flex min-h-[70px] justify-between border-b border-border px-4 py-3 last:rounded-bl-xl last:rounded-br-xl last:border-b-0 odd:bg-darker'
+          className='flex min-h-[70px] justify-between border-b border-border px-2 py-1.5 last:rounded-bl-xl last:rounded-br-xl last:border-b-0 odd:bg-darker'
         >
           <div className='flex flex-col justify-between'>
             <AddressWithTxBadges utxo={utxo} isOutput={isOutput} />

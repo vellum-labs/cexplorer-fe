@@ -120,7 +120,7 @@ const PoolDetailPage = () => {
       }
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1'>Pools</span>,
+          label: <span className='inline pt-1/2'>Pools</span>,
           link: "/pool",
         },
         {

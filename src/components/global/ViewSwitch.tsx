@@ -45,7 +45,7 @@ export const ViewSwitch = () => {
               key={key}
               className={` ${
                 selectedItem === key && "text-primary"
-              } duration-300" flex h-full w-9 shrink-0 items-center justify-center px-1 transition-all`}
+              } duration-300" flex h-full w-9 shrink-0 items-center justify-center px-1/2 transition-all`}
               onClick={() => handleChange(key as "grid" | "list")}
             >
               {icon}

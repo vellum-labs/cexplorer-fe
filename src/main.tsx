@@ -7,7 +7,8 @@ import "react-resizable/css/styles.css";
 import { Toaster } from "sonner";
 import App from "./App.tsx";
 import { routeTree } from "./routeTree.gen.ts";
-import "./styles/index.css";
+// import "./styles/index.css";
+import "../../cexplorer-sdk/src/styles/style.css";
 
 export const router = createRouter({ routeTree });
 

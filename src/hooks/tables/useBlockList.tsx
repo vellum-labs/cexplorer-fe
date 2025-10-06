@@ -236,7 +236,7 @@ export const useBlockList = ({
         onFilter: () => changeFilterByKey("epoch_no", +filterDraft.epoch_no),
         onReset: () => changeFilterByKey("epoch_no"),
         filterContent: (
-          <div className='flex h-[60px] w-full items-center justify-center px-2'>
+          <div className='flex h-[60px] w-full items-center justify-center px-1'>
             <TextInput
               onchange={value => changeDraftFilter("epoch_no", value)}
               placeholder='Filter by epoch...'
@@ -307,7 +307,7 @@ export const useBlockList = ({
         onFilter: () => changeFilterByKey("pool_id", filterDraft.pool_id),
         onReset: () => changeFilterByKey("pool_id"),
         filterContent: (
-          <div className='flex h-[60px] w-full items-center justify-center px-2'>
+          <div className='flex h-[60px] w-full items-center justify-center px-1'>
             <TextInput
               onchange={value => changeDraftFilter("pool_id", value)}
               placeholder='Filter by pool id...'
@@ -391,7 +391,7 @@ export const useBlockList = ({
         onFilter: () => changeFilterByKey("proto", filterDraft.proto),
         onReset: () => changeFilterByKey("proto"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-4 py-2'>
+          <div className='flex flex-col gap-2 px-2 py-1'>
             {(protocolVersions || []).map(version => (
               <label key={`${version}`} className='flex items-center gap-2'>
                 <input

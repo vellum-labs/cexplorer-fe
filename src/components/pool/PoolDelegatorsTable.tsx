@@ -252,7 +252,7 @@ const PoolDelegatorsTable = ({
         const livePool = item?.live_pool;
 
         return (
-          <div className='flex w-full items-center justify-between gap-5 pl-10 xl:pl-0'>
+          <div className='flex w-full items-center justify-between gap-5 pl-5 xl:pl-0'>
             <div className='flex min-w-[40%] items-center gap-2'>
               {previousPool?.id ? (
                 <PoolCell

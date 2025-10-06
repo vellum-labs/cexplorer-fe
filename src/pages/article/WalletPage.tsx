@@ -134,14 +134,14 @@ export const WalletPage: FC = () => {
     {
       key: "basic_features",
       title: (
-        <div className='flex h-full w-full items-end px-6 pb-4'>
+        <div className='flex h-full w-full items-end px-3 pb-2'>
           <span className='text-center text-sm font-semibold text-primary'>
             Basic features
           </span>
         </div>
       ),
       cells: walletsData.map(({ internalName }) => (
-        <div className='flex h-full w-full items-end justify-center pb-4'>
+        <div className='flex h-full w-full items-end justify-center pb-2'>
           <span className='text-center text-sm font-semibold'>
             {internalName &&
               internalName[0].toUpperCase() +
@@ -154,7 +154,7 @@ export const WalletPage: FC = () => {
     {
       key: "supported_platforms",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-6'>
+        <div className='flex h-full w-full items-center gap-1 px-3'>
           <span className='text-sm font-medium'>Supported platforms</span>
           <CircleHelp
             size={13}
@@ -163,7 +163,7 @@ export const WalletPage: FC = () => {
         </div>
       ),
       cells: walletsData.map(({ supportedPlatforms }) => (
-        <div className='flex h-full w-full flex-wrap items-center justify-center gap-3 p-4'>
+        <div className='flex h-full w-full flex-wrap items-center justify-center gap-3 p-2'>
           {supportedPlatforms?.web && (
             <img src={theme === "light" ? PC : PCDark} alt='Web' />
           )}
@@ -186,7 +186,7 @@ export const WalletPage: FC = () => {
     {
       key: "opensource",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-6'>
+        <div className='flex h-full w-full items-center gap-1 px-3'>
           <span className='text-sm font-medium'>Opensource</span>
           <CircleHelp
             size={13}
@@ -208,7 +208,7 @@ export const WalletPage: FC = () => {
     {
       key: "smart_contracts_interaction",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-6'>
+        <div className='flex h-full w-full items-center gap-1 px-3'>
           <span className='text-sm font-medium'>
             Smart contracts interaction
           </span>
@@ -232,7 +232,7 @@ export const WalletPage: FC = () => {
     {
       key: "testnet_support",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-6'>
+        <div className='flex h-full w-full items-center gap-1 px-3'>
           <span className='text-sm font-medium'>Testnet support</span>
           <CircleHelp
             size={13}
@@ -254,7 +254,7 @@ export const WalletPage: FC = () => {
     {
       key: "hardware_wallet_compatibility",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-6'>
+        <div className='flex h-full w-full items-center gap-1 px-3'>
           <span className='text-nowrap text-sm font-medium'>
             Hardware wallet compatibility
           </span>
@@ -291,13 +291,13 @@ export const WalletPage: FC = () => {
       )),
       darker: true,
       dynamicHeight: true,
-      className: "py-4 !min-h-[64px]",
+      className: "py-2 !min-h-[64px]",
       wrapperClassname: "items-normal",
     },
     {
       key: "cross_chain_compatibility",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-6'>
+        <div className='flex h-full w-full items-center gap-1 px-3'>
           <span className='text-nowrap text-sm font-medium'>
             Cross-chain compatibility
           </span>
@@ -337,14 +337,14 @@ export const WalletPage: FC = () => {
           </div>
         );
       }),
-      className: "py-4 !min-h-[64px] border-b border-border",
+      className: "py-2 !min-h-[64px] border-b border-border",
       dynamicHeight: true,
       wrapperClassname: "items-normal",
     },
     {
       key: "staking_and_governance",
       title: (
-        <div className='flex h-full w-full items-end px-6 pb-4'>
+        <div className='flex h-full w-full items-end px-3 pb-2'>
           <span className='text-center text-sm font-semibold text-primary'>
             Staking and governance
           </span>
@@ -355,7 +355,7 @@ export const WalletPage: FC = () => {
     {
       key: "staking_support",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-6'>
+        <div className='flex h-full w-full items-center gap-1 px-3'>
           <span className='text-sm font-medium'>Staking support</span>
           <CircleHelp
             size={13}
@@ -377,7 +377,7 @@ export const WalletPage: FC = () => {
     {
       key: "cardano_governance_features",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-6'>
+        <div className='flex h-full w-full items-center gap-1 px-3'>
           <span className='text-sm font-medium'>
             Cardano governance features
           </span>
@@ -401,7 +401,7 @@ export const WalletPage: FC = () => {
     {
       key: "project_catalyst_registration",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-6'>
+        <div className='flex h-full w-full items-center gap-1 px-3'>
           <span className='text-sm font-medium'>
             Project Catalyst registration
           </span>
@@ -425,7 +425,7 @@ export const WalletPage: FC = () => {
     {
       key: "multipool_delegation",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-6'>
+        <div className='flex h-full w-full items-center gap-1 px-3'>
           <span className='text-sm font-medium'>Multipool delegation</span>
           <CircleHelp
             size={13}
@@ -448,7 +448,7 @@ export const WalletPage: FC = () => {
     {
       key: "features",
       title: (
-        <div className='flex h-full w-full items-end px-6 pb-4'>
+        <div className='flex h-full w-full items-end px-3 pb-2'>
           <span className='text-center text-sm font-semibold text-primary'>
             Features
           </span>
@@ -459,7 +459,7 @@ export const WalletPage: FC = () => {
     {
       key: "dapp_browser",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-6'>
+        <div className='flex h-full w-full items-center gap-1 px-3'>
           <span className='text-sm font-medium'>dApp browser</span>
           <CircleHelp
             size={13}
@@ -481,7 +481,7 @@ export const WalletPage: FC = () => {
     {
       key: "multiple_accounts",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-6'>
+        <div className='flex h-full w-full items-center gap-1 px-3'>
           <span className='text-sm font-medium'>Multiple accounts</span>
           <CircleHelp
             size={13}
@@ -503,7 +503,7 @@ export const WalletPage: FC = () => {
     {
       key: "custom_node",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-6'>
+        <div className='flex h-full w-full items-center gap-1 px-3'>
           <span className='text-sm font-medium'>Custom node</span>
           <CircleHelp
             size={13}
@@ -525,7 +525,7 @@ export const WalletPage: FC = () => {
     {
       key: "address_book",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-6'>
+        <div className='flex h-full w-full items-center gap-1 px-3'>
           <span className='text-sm font-medium'>Address book</span>
           <CircleHelp
             size={13}
@@ -547,7 +547,7 @@ export const WalletPage: FC = () => {
     {
       key: "other",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-6'>
+        <div className='flex h-full w-full items-center gap-1 px-3'>
           <span className='text-sm font-medium'>Other</span>
           <CircleHelp
             size={13}
@@ -559,7 +559,7 @@ export const WalletPage: FC = () => {
         const values = Object?.values(otherFeatures || {}).filter(e => e);
 
         return values.length ? (
-          <div className='flex flex-col flex-wrap gap-[2px] py-1 text-center'>
+          <div className='flex flex-col flex-wrap gap-[2px] py-1/2 text-center'>
             {values.map(item => (
               <div className='text-wrap text-[10px]'>{item}</div>
             ))}
@@ -572,13 +572,13 @@ export const WalletPage: FC = () => {
       }),
       darker: true,
       dynamicHeight: true,
-      className: "p-1 !min-h-[64px] border-b border-border",
+      className: "p-1/2 !min-h-[64px] border-b border-border",
       wrapperClassname: "items-normal",
     },
     {
       key: "integrations",
       title: (
-        <div className='flex h-full w-full items-end px-6 pb-4'>
+        <div className='flex h-full w-full items-end px-3 pb-2'>
           <span className='text-center text-sm font-semibold text-primary'>
             Integrations
           </span>
@@ -589,7 +589,7 @@ export const WalletPage: FC = () => {
     {
       key: "nft_marketplace",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-6'>
+        <div className='flex h-full w-full items-center gap-1 px-3'>
           <span className='text-sm font-medium'>NFT marketplace</span>
           <CircleHelp
             size={13}
@@ -619,13 +619,13 @@ export const WalletPage: FC = () => {
       )),
       darker: true,
       dynamicHeight: true,
-      className: "p-1 !min-h-[64px]",
+      className: "p-1/2 !min-h-[64px]",
       wrapperClassname: "items-normal",
     },
     {
       key: "swaps_in_wallets",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-6'>
+        <div className='flex h-full w-full items-center gap-1 px-3'>
           <span className='text-sm font-medium'>Swaps in wallets</span>
           <CircleHelp
             size={13}
@@ -655,13 +655,13 @@ export const WalletPage: FC = () => {
       )),
       darker: false,
       dynamicHeight: true,
-      className: "p-1 !min-h-[64px]",
+      className: "p-1/2 !min-h-[64px]",
       wrapperClassname: "items-normal",
     },
     {
       key: "fiat_onramp",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-6'>
+        <div className='flex h-full w-full items-center gap-1 px-3'>
           <span className='text-sm font-medium'>Fiat onramp</span>
           <CircleHelp
             size={13}
@@ -691,7 +691,7 @@ export const WalletPage: FC = () => {
       )),
       darker: true,
       dynamicHeight: true,
-      className: "p-1 !min-h-[64px]",
+      className: "p-1/2 !min-h-[64px]",
       wrapperClassname: "items-normal",
     },
   ];

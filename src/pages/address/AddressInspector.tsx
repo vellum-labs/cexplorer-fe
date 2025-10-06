@@ -220,7 +220,7 @@ export const AddressInspector: FC = () => {
         }
 
         return (
-          <div className='flex items-center gap-2 py-3'>
+          <div className='flex items-center gap-2 py-1.5'>
             <span className='max-w-[1000px] text-wrap break-words'>
               {rawHex}
             </span>

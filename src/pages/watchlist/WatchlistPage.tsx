@@ -183,7 +183,7 @@ export const WatchlistPage = () => {
         breadcrumbItems={[{ label: "Watchlist" }]}
       >
         {token ? (
-          <div className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+          <div className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
             {isLoading ? (
               <div className='flex flex-col gap-4'>
                 <LoadingSkeleton height='40px' width='100%' />
@@ -214,7 +214,7 @@ export const WatchlistPage = () => {
             )}
           </div>
         ) : (
-          <div className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+          <div className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
             <EmptyState
               icon={<Wallet size={24} />}
               primaryText='Wallet not connected.'

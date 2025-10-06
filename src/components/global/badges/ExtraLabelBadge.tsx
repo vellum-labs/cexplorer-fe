@@ -15,7 +15,7 @@ export const ExtraLabelBadge = ({ extra, name }: Props) => {
           href={extra.link}
           target='_blank'
           rel='noopener noreferrer'
-          className='rounded-full px-2 py-1'
+          className='rounded-full px-1 py-1/2'
           style={{
             backgroundColor: extra.bg || "transparent",
             color: extra.color || "text-text",
@@ -26,7 +26,7 @@ export const ExtraLabelBadge = ({ extra, name }: Props) => {
         </a>
       ) : (
         <div
-          className='rounded-full px-2 py-0.5'
+          className='rounded-full px-1 py-1/4'
           style={{
             backgroundColor: extra.bg || "transparent",
             color: extra.color || "text-text",

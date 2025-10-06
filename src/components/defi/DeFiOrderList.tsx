@@ -218,7 +218,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         },
         onReset: () => changeFilterByKey("type"),
         filterContent: (
-          <div className='flex w-full flex-col justify-center gap-2 p-2'>
+          <div className='flex w-full flex-col justify-center gap-2 p-1'>
             <div className='flex items-center gap-3'>
               <label className='flex items-center gap-2'>
                 <input
@@ -485,7 +485,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
             >
               <FileText size={15} className='cursor-pointer text-primary' />
             </Link>
-            <p className='flex items-center gap-1 rounded-md border border-border px-2 text-sm'>
+            <p className='flex items-center gap-1 rounded-md border border-border px-1 text-sm'>
               {isSuccess ? (
                 <Check className='text-greenText' size={15} />
               ) : isCanceled ? (
@@ -512,7 +512,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         onFilter: () => changeFilterByKey("status", filterDraft["status"]),
         onReset: () => changeFilterByKey("status"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-4 py-2'>
+          <div className='flex flex-col gap-2 px-2 py-1'>
             <label className='flex items-center gap-2'>
               <input
                 type='radio'
@@ -609,7 +609,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                 changeFilterByKey("maker", filterDraft["makerSearch"]),
               onReset: () => changeFilterByKey("maker"),
               filterContent: (
-                <div className='flex h-[60px] w-full items-center justify-center px-2'>
+                <div className='flex h-[60px] w-full items-center justify-center px-1'>
                   <TextInput
                     onchange={value => changeDraftFilter("makerSearch", value)}
                     placeholder='Filter by address or stake...'
@@ -650,7 +650,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         onFilter: () => changeFilterByKey("dex", filterDraft["dex"]),
         onReset: () => changeFilterByKey("dex"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-4 py-2'>
+          <div className='flex flex-col gap-2 px-2 py-1'>
             <label className='flex items-center gap-2'>
               <input
                 type='radio'
@@ -683,7 +683,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
 
   return (
     <div className='flex w-full flex-col gap-2 rounded-lg sm:gap-0'>
-      <div className='flex flex-wrap items-center justify-between gap-y-1 pb-4'>
+      <div className='flex flex-wrap items-center justify-between gap-y-1 pb-2'>
         <div className='flex items-center gap-2'>
           {pulseDot && <PulseDot />}
           <h2 className={titleClassname ? titleClassname : ""}>
@@ -713,7 +713,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
               value && (
                 <div
                   key={key}
-                  className='mb-2 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-2 py-0.5 text-xs text-grayTextPrimary'
+                  className='mb-2 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
                 >
                   <span>{key[0].toUpperCase() + key.slice(1)}:</span>
                   {key === "maker" && (

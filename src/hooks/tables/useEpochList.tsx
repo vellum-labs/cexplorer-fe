@@ -187,7 +187,7 @@ export const useEpochList = ({
             <div className='absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2'>
               {+epoch_number - 1 === epochNo && <PulseDot />}
             </div>
-            <p className='cursor-pointer pl-3 text-sm text-primary'>
+            <p className='cursor-pointer pl-1.5 text-sm text-primary'>
               <Link
                 to='/epoch/$no'
                 params={{ no: String(epochNo) }}

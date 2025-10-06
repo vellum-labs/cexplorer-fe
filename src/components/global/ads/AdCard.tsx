@@ -46,9 +46,9 @@ const AdCard = ({ data, className }: Props) => {
     <a
       href={data?.link}
       target='_blank'
-      className={`z-2 relative flex h-[110px] w-full flex-col gap-1 rounded-xl border border-border bg-cardBg px-4 py-3 hover:text-text ${className ? className : "shadow"}`}
+      className={`z-2 relative flex h-[110px] w-full flex-col gap-1 rounded-xl border border-border bg-cardBg px-2 py-1.5 hover:text-text ${className ? className : "shadow"}`}
     >
-      <p className='w-fit rounded-xl border border-border px-2 text-xs font-medium'>
+      <p className='w-fit rounded-xl border border-border px-1 text-xs font-medium'>
         {data?.type.slice(0, 1).toUpperCase() + data?.type.slice(1)}
       </p>
       <div className='flex items-center gap-2'>

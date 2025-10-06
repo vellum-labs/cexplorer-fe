@@ -137,36 +137,36 @@ export const DrepAnalyticsTab: FC<DrepAnalyticsTabProps> = ({ query }) => {
 
   return (
     <section className='flex flex-col gap-2'>
-      <div className='relative w-full rounded-lg border border-border p-5'>
+      <div className='relative w-full rounded-lg border border-border p-3'>
         <h2 className='mb-2'>Pool Graph</h2>
         <DrepPoolGraph epochs={epochs || []} query={query} />
       </div>
       <AverageDrepGraph />
-      <div className='relative w-full rounded-lg border border-border p-5'>
-        <h1 className='mb-2 pl-5'>Stake Composition by Role</h1>
+      <div className='relative w-full rounded-lg border border-border p-3'>
+        <h1 className='mb-2 pl-3'>Stake Composition by Role</h1>
         <div className='flex flex-col gap-4'>
           <DrepNotSpoGraph />
           <StakeIsSpoDrepGraph />
         </div>
       </div>
-      <div className='relative w-full rounded-lg border border-border p-5'>
-        <h1 className='mb-2 pl-5'>Delegation Changes</h1>
+      <div className='relative w-full rounded-lg border border-border p-3'>
+        <h1 className='mb-2 pl-3'>Delegation Changes</h1>
         <div className='flex flex-col gap-4'>
           <DelegationChangesGraph />
         </div>
       </div>
 
       <div className='flex flex-wrap gap-2 lg:flex-nowrap'>
-        <div className='relative w-full rounded-lg border border-border p-5'>
+        <div className='relative w-full rounded-lg border border-border p-3'>
           <h2 className='mb-2'>ADA in Governance</h2>
           <DrepAnalytcsPieGraph option={governanceOption} />
         </div>
-        <div className='relative w-full rounded-lg border border-border p-5'>
+        <div className='relative w-full rounded-lg border border-border p-3'>
           <h2 className='mb-2'>Active Voting Stake</h2>
           <DrepAnalytcsPieGraph option={activeVotingOption} />
         </div>
       </div>
-      <div className='relative w-full rounded-lg border border-border p-5'>
+      <div className='relative w-full rounded-lg border border-border p-3'>
         <div className='flex flex-wrap items-center justify-between gap-2 lg:flex-nowrap'>
           <h2 className='mb-2t text-nowrap'>Drep Size</h2>
           <Tabs

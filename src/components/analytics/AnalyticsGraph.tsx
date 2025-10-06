@@ -144,15 +144,15 @@ export const AnalyticsGraph: FC<Props> = ({
         />
       )}
       <div
-        className={`w-full rounded-lg border border-border bg-cardBg p-5 ${className ? className : ""}`}
+        className={`w-full rounded-lg border border-border bg-cardBg p-3 ${className ? className : ""}`}
         ref={ref}
       >
         <div
-          className={`flex flex-col ${!title && !description ? "justify-end" : "justify-between"} pb-3 md:flex-row md:pb-0`}
+          className={`flex flex-col ${!title && !description ? "justify-end" : "justify-between"} pb-1.5 md:flex-row md:pb-0`}
         >
           {(title || description) && (
             <div
-              className={`flex flex-col justify-between gap-1 pb-3 ${!description || !title ? "justify-center" : ""}`}
+              className={`flex flex-col justify-between gap-1 pb-1.5 ${!description || !title ? "justify-center" : ""}`}
             >
               {title && <h2>{title}</h2>}
               {description && (

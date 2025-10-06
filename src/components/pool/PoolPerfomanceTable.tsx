@@ -137,7 +137,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
             <div className='absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2'>
               {miscConst?.epoch.no === item.epoch && <PulseDot />}
             </div>
-            <p className='cursor-pointer pl-3 text-sm text-primary'>
+            <p className='cursor-pointer pl-1.5 text-sm text-primary'>
               <Link
                 to='/epoch/$no'
                 params={{ no: String(item.epoch ?? 0) }}

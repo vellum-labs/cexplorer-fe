@@ -58,13 +58,13 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
       title='Constitutional Committee'
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1'>Governance</span>,
+          label: <span className='inline pt-1/2'>Governance</span>,
           link: "/gov",
         },
         { label: "Constitutional committee" },
       ]}
     >
-      <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+      <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         {isLoading ? (
           <div className='flex w-full flex-wrap gap-4'>
             <LoadingSkeleton width='426px' height='140px' rounded='xl' />
@@ -73,7 +73,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
           </div>
         ) : (
           <div className='flex h-full w-full flex-wrap items-stretch gap-4 lg:flex-nowrap'>
-            <div className='bg-bgColor flex w-[426px] flex-grow-0 flex-col gap-4 rounded-xl border border-border p-5 shadow-sm'>
+            <div className='bg-bgColor flex w-[426px] flex-grow-0 flex-col gap-4 rounded-xl border border-border p-3 shadow-sm'>
               <h3 className='text-textPrimary text-lg font-semibold'>About</h3>
 
               <div className='flex items-center justify-start text-sm'>
@@ -103,7 +103,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
               </div>
             </div>
 
-            <div className='bg-bgColor flex w-[426px] flex-grow-0 flex-col gap-3 rounded-xl border border-border p-5 shadow-sm'>
+            <div className='bg-bgColor flex w-[426px] flex-grow-0 flex-col gap-3 rounded-xl border border-border p-3 shadow-sm'>
               <div className='flex items-center gap-1'>
                 <div className='flex h-8 w-8 items-center justify-center'>
                   <FileText size={18} className='text-primary' />
@@ -138,7 +138,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
               )}
             </div>
 
-            <div className='bg-bgColor w-[426px] flex-grow-0 overflow-hidden rounded-xl border border-border p-4 shadow-sm'>
+            <div className='bg-bgColor w-[426px] flex-grow-0 overflow-hidden rounded-xl border border-border p-2 shadow-sm'>
               <AdsCarousel
                 singleItem
                 adCardClassname='!border-none !py-0'
@@ -149,7 +149,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
           </div>
         )}
       </section>
-      <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+      <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <Tabs withPadding={false} items={tabs} />
       </section>
       {clickedUrl && (

@@ -138,7 +138,7 @@ const EpochListPage: FC = () => {
       title='Epochs'
       breadcrumbItems={[{ label: "Epochs" }]}
     >
-      <section className='flex min-h-[410px] w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+      <section className='flex min-h-[410px] w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='flex h-full w-full flex-wrap items-center gap-6'>
           <div className='flex h-full w-full flex-grow flex-col gap-6 xl:w-[400px] xl:flex-grow-0'>
             {isLoading || isError ? (
@@ -158,7 +158,7 @@ const EpochListPage: FC = () => {
           <div
             className={cn(
               `flex h-[392px] w-full flex-grow items-center rounded-lg ${!isLoading && "border border-border"} md:w-[833px]`,
-              !isLoading && !isError && "p-2",
+              !isLoading && !isError && "p-1",
             )}
           >
             {isLoading || isError ? (

@@ -118,7 +118,7 @@ export const GovernanceVotingProgress: FC<GovernanceVotingProgressProps> = ({
   }
 
   return (
-    <div className='flex flex-col gap-0 py-1'>
+    <div className='flex flex-col gap-0 py-1/2'>
       {progressBars.map((bar, index) => (
         <div key={index} className='flex items-center gap-2'>
           <span className='min-w-[32px] text-xs text-grayTextPrimary'>

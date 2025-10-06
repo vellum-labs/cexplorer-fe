@@ -18,7 +18,7 @@ const Footer = () => {
     <footer className='flex w-full flex-col items-center border-t border-borderFaded'>
       <div className='flex w-full justify-center'>
         <div className='flex w-full max-w-desktop flex-col p-mobile md:px-desktop md:py-mobile'>
-          <section className='flex w-full flex-col gap-4 py-8 md:flex-row md:justify-between'>
+          <section className='flex w-full flex-col gap-4 py-4 md:flex-row md:justify-between'>
             <div className='flex w-[250px] shrink-0 flex-col gap-6'>
               <MainLogo className='-translate-x-[5px]' />
               <p className='w-full text-sm text-grayTextPrimary'>
@@ -47,7 +47,7 @@ const Footer = () => {
         </div>
       </div>
       <section className='flex w-full flex-col items-center bg-darker'>
-        <div className='flex h-auto w-full max-w-desktop items-center justify-between gap-5 p-mobile py-4 md:h-[60px] md:px-desktop md:py-mobile'>
+        <div className='flex h-auto w-full max-w-desktop items-center justify-between gap-5 p-mobile py-2 md:h-[60px] md:px-desktop md:py-mobile'>
           <span className='text-xs text-grayTextPrimary md:text-sm'>
             Copyright © 2019-{new Date().getFullYear()} Cexplorer. All rights
             reserved.
@@ -61,7 +61,7 @@ const Footer = () => {
             ❤️
           </span>
         </div>
-        <div className='flex h-auto w-full max-w-desktop items-center gap-4 p-mobile py-4 md:px-desktop md:py-mobile'>
+        <div className='flex h-auto w-full max-w-desktop items-center gap-4 p-mobile py-2 md:px-desktop md:py-mobile'>
           <span className='text-xs text-grayTextPrimary md:text-sm'>
             Partners:{" "}
           </span>
@@ -73,7 +73,7 @@ const Footer = () => {
             >
               <img
                 src={YoroiPartner}
-                className='rounded-md bg-[#1B67CC] p-1.5'
+                className='rounded-md bg-[#1B67CC] p-1'
               />
             </a>
             <a href='https://nu.fi/' target='_blank' rel='noopener nofollow'>

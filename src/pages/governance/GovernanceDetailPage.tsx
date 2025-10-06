@@ -65,11 +65,11 @@ export const GovernanceDetailPage: FC = () => {
       }}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1'>Governance</span>,
+          label: <span className='inline pt-1/2'>Governance</span>,
           link: "/gov",
         },
         {
-          label: <span className='inline pt-1'>Governance actions</span>,
+          label: <span className='inline pt-1/2'>Governance actions</span>,
           link: "/gov/action",
         },
         {

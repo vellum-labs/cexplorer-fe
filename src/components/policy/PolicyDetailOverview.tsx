@@ -279,7 +279,7 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
           collection={query?.data?.data?.collection?.url}
         />
       </div>
-      <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pt-3 md:px-desktop xl:flex-nowrap xl:justify-start'>
+      <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pt-1.5 md:px-desktop xl:flex-nowrap xl:justify-start'>
         <div className='flex grow basis-[980px] flex-wrap items-stretch gap-5'>
           {query.isLoading ? (
             <>
@@ -311,7 +311,7 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
                     startContent={
                       // TODO: Make this visible
                       false && (
-                        <div className='flex h-full w-full flex-col gap-4 pt-3 lg:w-fit'>
+                        <div className='flex h-full w-full flex-col gap-4 pt-1.5 lg:w-fit'>
                           <Image
                             className='aspect-square rounded-full'
                             height={160}

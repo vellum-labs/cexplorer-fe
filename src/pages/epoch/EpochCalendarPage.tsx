@@ -125,13 +125,13 @@ export const EpochCalendarPage = () => {
         />
       </div>
       {isLoading ? (
-        <section className='grid w-full max-w-desktop grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4 px-mobile pb-5 md:px-desktop'>
+        <section className='grid w-full max-w-desktop grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4 px-mobile pb-3 md:px-desktop'>
           {Array.from({ length: 100 }).map(() => (
             <LoadingSkeleton width='100%' height='167px' rounded='xl' />
           ))}
         </section>
       ) : (
-        <section className='grid w-full max-w-desktop grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4 px-mobile pb-5 md:px-desktop'>
+        <section className='grid w-full max-w-desktop grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4 px-mobile pb-3 md:px-desktop'>
           {items?.map(epoch => <EpochCard key={epoch.no} epoch={epoch} />)}
         </section>
       )}
@@ -150,16 +150,16 @@ const EpochCard = ({ epoch }: { epoch: EpochListData }) => {
         : colors.border;
 
   return (
-    <div className='flex flex-col gap-2 rounded-xl border border-border p-4'>
+    <div className='flex flex-col gap-2 rounded-xl border border-border p-2'>
       <div className='mb-2 flex items-center gap-3'>
         {epoch.no > currentEpoch ? (
-          <div className='rounded-full bg-grayTextSecondary p-1'>
+          <div className='rounded-full bg-grayTextSecondary p-1/2'>
             <Calendar size={15} color='white' className='' />
           </div>
         ) : (
           <CheckCircle
             color='white'
-            className='rounded-full p-1'
+            className='rounded-full p-1/2'
             style={{
               backgroundColor: bgColor,
             }}
@@ -179,7 +179,7 @@ const EpochCard = ({ epoch }: { epoch: EpochListData }) => {
           {formatDate(epoch.end_time)}
         </span>
       </span>
-      <div className='mt-2 flex justify-end border-t border-border pt-2'>
+      <div className='mt-2 flex justify-end border-t border-border pt-1'>
         {currentEpoch >= epoch.no ? (
           <Link
             className='text-right text-sm font-medium text-primary'

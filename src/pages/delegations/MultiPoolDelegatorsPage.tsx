@@ -96,7 +96,7 @@ export const MultiPoolDelegatorsPage = () => {
       title='Multi-pool Delegators'
       breadcrumbItems={[{ label: "Multi-pool Delegators" }]}
     >
-      <section className='w-full max-w-desktop px-mobile pb-5 md:px-desktop'>
+      <section className='w-full max-w-desktop px-mobile pb-3 md:px-desktop'>
         <div className='mb-4 flex flex-wrap items-center justify-between gap-4 md:flex-nowrap md:items-center'>
           {!total ? (
             <LoadingSkeleton height='27px' width={"290px"} />

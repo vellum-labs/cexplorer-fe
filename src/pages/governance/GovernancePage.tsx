@@ -427,13 +427,13 @@ export const GovernancePage: FC = () => {
       title='Governance Actions'
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1'>Governance</span>,
+          label: <span className='inline pt-1/2'>Governance</span>,
           link: "/gov",
         },
         { label: "Governance actions" },
       ]}
     >
-      <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+      <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='flex h-full w-full flex-wrap items-stretch gap-4 lg:flex-nowrap'>
           {drepStatQuery.isLoading || drepStatQuery.isFetching ? (
             <>

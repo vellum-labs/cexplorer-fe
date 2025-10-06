@@ -38,7 +38,7 @@ export const DexSwapDetailPage: FC = () => {
       breadcrumbItems={[
         {
           label: (
-            <span className='inline pt-1'>
+            <span className='inline pt-1/2'>
               Stake detail{" "}
               {Array.isArray(swapDetail) && swapDetail[0]?.user?.account
                 ? `(${formatString(swapDetail[0]?.user?.account, "long")})`

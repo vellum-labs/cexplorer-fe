@@ -23,14 +23,14 @@ export const OverviewStatCard = ({
 }: OverviewStatCardProps) => {
   return (
     <div
-      className={`flex min-h-[100px] shrink grow basis-[280px] flex-col gap-3 rounded-xl border border-border bg-cardBg px-4 py-3 shadow ${className}`}
+      className={`flex min-h-[100px] shrink grow basis-[280px] flex-col gap-3 rounded-xl border border-border bg-cardBg px-2 py-1.5 shadow ${className}`}
     >
       <div className='flex items-center justify-between'>
         <div
           className={`flex items-center justify-start gap-2 ${titleClassname ? titleClassname : ""}`}
         >
           {icon && (
-            <div className='rounded-lg border border-border p-1'>{icon}</div>
+            <div className='rounded-lg border border-border p-1/2'>{icon}</div>
           )}
           <p className='text-sm text-grayTextPrimary'>{title}</p>
         </div>

@@ -213,7 +213,7 @@ export const PoolIssuesMissedBlocks: FC = () => {
                 .title
             }
             options={tabOptions}
-            triggerClassName='text-primary font-medium px-3 py-2'
+            triggerClassName='text-primary font-medium px-1.5 py-1'
             closeOnSelect
           />
         </div>

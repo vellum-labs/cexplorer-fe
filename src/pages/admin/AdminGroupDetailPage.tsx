@@ -157,7 +157,7 @@ export const AdminGroupDetailPage = () => {
           <p className='mb-2 mt-8'>Update this group:</p>
           <textarea
             placeholder='Description'
-            className='h-32 w-full rounded-xl border border-border bg-background p-2 text-sm text-text'
+            className='h-32 w-full rounded-xl border border-border bg-background p-1 text-sm text-text'
             value={updateModalData.description}
             onChange={e => setUpdateModalData({ description: e.target.value })}
           />

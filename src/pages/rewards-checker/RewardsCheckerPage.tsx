@@ -53,7 +53,7 @@ export const RewardsCheckerPage = () => {
       breadcrumbItems={[{ label: "Rewards checker" }]}
     >
       <section className='flex w-full flex-col items-center'>
-        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pb-5 pt-3 md:px-desktop xl:flex-nowrap xl:justify-start'></div>
+        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pb-3 pt-1.5 md:px-desktop xl:flex-nowrap xl:justify-start'></div>
       </section>
       <div className='w-full max-w-desktop px-mobile md:px-desktop'>
         <div className='mb-4 flex flex-col gap-2'>

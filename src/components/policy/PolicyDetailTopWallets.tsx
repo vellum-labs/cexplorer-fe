@@ -109,7 +109,7 @@ export const PolicyDetailTopWallets: FC<PolicyDetailTopWalletsProps> = ({
   return (
     <>
       <div className='mb-4 flex w-full flex-row items-center justify-between gap-2'>
-        <div className='py-2'>
+        <div className='py-1'>
           {ownerQuery.isLoading || ownerQuery.isFetching ? (
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : totalItems > 0 ? (

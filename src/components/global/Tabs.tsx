@@ -180,7 +180,7 @@ const Tabs = ({
                   // @ts-expect-error link
                   <Link
                     key={index}
-                    className={`flex items-center rounded-lg border px-3 py-2 ${
+                    className={`flex items-center rounded-lg border px-1.5 py-1 ${
                       tabParam
                         ? "h-[35px] text-sm font-semibold"
                         : "h-[44px] text-base font-semibold"
@@ -213,7 +213,7 @@ const Tabs = ({
                 // @ts-expect-error link
                 <Link
                   key={index}
-                  className={`flex items-center rounded-lg border px-3 py-2 ${
+                  className={`flex items-center rounded-lg border px-1.5 py-1 ${
                     tabParam
                       ? "h-[35px] text-sm font-semibold"
                       : "h-[44px] text-base font-semibold"

@@ -45,7 +45,7 @@ export const AssetMetaDataTab: FC<AssetMetaDataTabProps> = ({
                 width='200px'
                 label={`Tx: ${formatString((items || [])[currentIndex]?.tx?.hash, "long")}`}
                 options={tabOptions}
-                triggerClassName='text-primary font-medium px-3 py-2'
+                triggerClassName='text-primary font-medium px-1.5 py-1'
                 closeOnSelect
               />
             </div>

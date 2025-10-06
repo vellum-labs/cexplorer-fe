@@ -139,7 +139,7 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
       title: "Minted by",
       visible: columnsVisibility.minted_by,
       widthPx: 160,
-      className: "pl-4",
+      className: "pl-2",
     },
     {
       key: "size",

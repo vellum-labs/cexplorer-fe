@@ -184,7 +184,7 @@ export const PollsListPage = () => {
         title='Cexplorer governance actions'
         breadcrumbItems={[{ label: "Voting" }]}
       >
-        <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+        <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
           <Tabs
             withPadding={false}
             items={tabs}
@@ -299,11 +299,11 @@ const FaqModal = ({ onClose }: { onClose: () => void }) => {
             value={item.question}
             className='border-b border-border text-sm'
           >
-            <AccordionTrigger className='AccordionTrigger w-full py-5 text-left'>
+            <AccordionTrigger className='AccordionTrigger w-full py-3 text-left'>
               <span className='text-base font-medium'>{item.question}</span>
             </AccordionTrigger>
             <AccordionContent>
-              <div className='flex flex-col pb-3 text-left text-grayTextPrimary'>
+              <div className='flex flex-col pb-1.5 text-left text-grayTextPrimary'>
                 {item.answer}
               </div>
             </AccordionContent>

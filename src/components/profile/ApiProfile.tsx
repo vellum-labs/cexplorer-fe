@@ -112,7 +112,7 @@ export const ApiProfile = () => {
           />
         </div>
       </section>
-      <section className='mt-4 flex flex-wrap items-center gap-3 border-b border-border pb-4 text-sm md:gap-5'>
+      <section className='mt-4 flex flex-wrap items-center gap-3 border-b border-border pb-2 text-sm md:gap-5'>
         <span className='mr-2'>Your account</span>
         <span className='flex items-center gap-1 text-grayTextPrimary'>
           {/* Your plan: <Badge color='gray'>{!nfts ? "Basic" : "PRO"}</Badge> */}
@@ -139,7 +139,7 @@ export const ApiProfile = () => {
             <div className='flex flex-col items-center gap-2'>
               <Search
                 size={40}
-                className='rounded-md border border-border p-2'
+                className='rounded-md border border-border p-1'
               />
               <h2>You don't have any projects yet.</h2>
               <p className='max-w-[350px] text-center text-sm text-grayTextPrimary'>
@@ -152,7 +152,7 @@ export const ApiProfile = () => {
               {userData?.map((apiKey, index) => (
                 <div className='flex w-full flex-col gap-5 text-sm'>
                   {userData.length > 1 && <h1>#{index + 1}</h1>}
-                  <div className='flex w-full flex-col gap-8 border-b border-border pb-4 md:flex-row'>
+                  <div className='flex w-full flex-col gap-8 border-b border-border pb-2 md:flex-row'>
                     <div className='flex flex-col gap-2 md:w-[300px]'>
                       <span className='font-medium'>Plan</span>
                       <p className='text-sm font-light text-grayTextPrimary'>
@@ -210,7 +210,7 @@ export const ApiProfile = () => {
                       </span>
                     </div>
                   </div>
-                  <div className='flex w-full flex-col gap-8 border-b border-border pb-4 md:flex-row'>
+                  <div className='flex w-full flex-col gap-8 border-b border-border pb-2 md:flex-row'>
                     <div className='flex flex-col gap-2 md:w-[300px]'>
                       <span className='font-medium'>Limits</span>
                       <p className='text-sm font-light text-grayTextPrimary'>
@@ -248,7 +248,7 @@ export const ApiProfile = () => {
                       </div>
                     </div>
                   </div>
-                  <div className='flex w-full flex-col gap-8 border-b border-border pb-4 text-sm md:flex-row'>
+                  <div className='flex w-full flex-col gap-8 border-b border-border pb-2 text-sm md:flex-row'>
                     <div className='flex flex-col gap-2 md:w-[300px]'>
                       <span className='font-medium'>API keys</span>
                       <p className='text-sm font-light text-grayTextPrimary'>
@@ -261,12 +261,12 @@ export const ApiProfile = () => {
                         <input
                           type={showKey ? "text" : "password"}
                           value={apiKey.key}
-                          className='h-[42px] w-full rounded-md border border-border bg-transparent p-2 text-text'
+                          className='h-[42px] w-full rounded-md border border-border bg-transparent p-1 text-text'
                           readOnly
                         />
                         <button
                           onClick={() => setShowKey(!showKey)}
-                          className='rounded-xl border border-border p-2'
+                          className='rounded-xl border border-border p-1'
                         >
                           {showKey ? <EyeOff /> : <Eye />}
                         </button>
@@ -283,7 +283,7 @@ export const ApiProfile = () => {
                       </div>
                     </div>
                   </div>
-                  <div className='flex w-full flex-col gap-8 pb-4 text-sm lg:flex-row'>
+                  <div className='flex w-full flex-col gap-8 pb-2 text-sm lg:flex-row'>
                     <div className='flex flex-col gap-2 lg:w-[300px]'>
                       <span className='font-medium'>API usage</span>
                       <p className='text-sm font-light text-grayTextPrimary'>

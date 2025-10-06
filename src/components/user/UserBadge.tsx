@@ -65,7 +65,7 @@ export const UserBadge = ({ isLoading, user, address }: Props) => {
             >
               <Badge
                 color='gray'
-                className='gap-2 py-1'
+                className='gap-2 py-1/2'
                 style={{
                   fontSize: "13px",
                 }}

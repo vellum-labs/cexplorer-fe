@@ -314,7 +314,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
       value: renderWithException(
         swapDetail?.status,
         <div className='flex items-center'>
-          <p className='flex w-fit items-center gap-1 rounded-md border border-border px-2 text-sm'>
+          <p className='flex w-fit items-center gap-1 rounded-md border border-border px-1 text-sm'>
             {isSuccess ? (
               <Check className='text-greenText' size={15} />
             ) : isCanceled ? (
@@ -345,7 +345,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
       value: renderWithException(
         typeof swapDetail?.is_dexhunter === "boolean",
         <div className='flex items-center'>
-          <p className='flex w-fit items-center gap-1 rounded-md border border-border px-2 text-sm'>
+          <p className='flex w-fit items-center gap-1 rounded-md border border-border px-1 text-sm'>
             {isSuccess ? (
               <Image src={DexhunterIcon} className='h-4 w-4 rounded-full' />
             ) : (
@@ -363,7 +363,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
         swapDetail?.dex,
         <div className='flex items-center'>
           <p
-            className={`flex w-fit items-center gap-1 rounded-xl border px-1.5 text-sm`}
+            className={`flex w-fit items-center gap-1 rounded-xl border px-1 text-sm`}
             style={{
               backgroundColor: dex?.bgColor ?? "transparent",
               borderColor: dex?.borderColor ?? "var(--border)",
@@ -402,7 +402,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
 
   return (
     <div
-      className='thin-scrollbar w-full overflow-x-auto rounded-xl border border-border px-5 py-4'
+      className='thin-scrollbar w-full overflow-x-auto rounded-xl border border-border px-3 py-2'
       style={{
         transform: "rotateX(180deg)",
       }}
@@ -415,7 +415,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
       >
         <>
           <h2 className='text-base'>Overview</h2>
-          <div className='flex flex-col gap-4 pt-4'>
+          <div className='flex flex-col gap-4 pt-2'>
             {detailItems.map(({ key, title, value, divider }) => (
               <div key={key}>
                 <div className='flex w-full items-start'>

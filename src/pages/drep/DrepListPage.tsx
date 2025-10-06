@@ -108,7 +108,7 @@ export const DrepListPage = () => {
       footer: (
         <div className='flex flex-wrap'>
           {drepStat?.stake?.drep_always_abstain && (
-            <div className='flex w-fit items-center gap-1 pr-8'>
+            <div className='flex w-fit items-center gap-1 pr-4'>
               <span className='text-sm text-grayTextPrimary'>Abstain</span>
               <span className='text-sm text-grayTextPrimary'>
                 <AdaWithTooltip data={drepStat?.stake?.drep_always_abstain} />
@@ -116,7 +116,7 @@ export const DrepListPage = () => {
             </div>
           )}
           {drepStat?.stake?.drep_always_no_confidence && (
-            <div className='flex w-fit items-center gap-1 pr-8'>
+            <div className='flex w-fit items-center gap-1 pr-4'>
               <span className='text-sm text-grayTextPrimary'>
                 No confidence
               </span>
@@ -144,7 +144,7 @@ export const DrepListPage = () => {
       footer: (
         <div className='flex flex-wrap'>
           {drepAnalytics?.delegator?.drep_always_abstain?.count && (
-            <div className='flex w-fit items-center gap-1 pr-8'>
+            <div className='flex w-fit items-center gap-1 pr-4'>
               <span className='text-sm text-grayTextPrimary'>Abstain</span>
               <span className='text-sm text-grayTextPrimary'>
                 {formatNumber(
@@ -154,7 +154,7 @@ export const DrepListPage = () => {
             </div>
           )}
           {drepAnalytics?.delegator?.drep_always_no_confidence?.count && (
-            <div className='flex w-fit items-center gap-1 pr-8'>
+            <div className='flex w-fit items-center gap-1 pr-4'>
               <span className='text-sm text-grayTextPrimary'>
                 No confidence
               </span>
@@ -202,14 +202,14 @@ export const DrepListPage = () => {
       title='Delegated Representatives'
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1'>Governance</span>,
+          label: <span className='inline pt-1/2'>Governance</span>,
           link: "/gov",
         },
         { label: "Delegated representatives" },
       ]}
       metadataTitle='drepList'
     >
-      <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+      <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='flex h-full w-full flex-wrap gap-4 md:flex-nowrap'>
           {drepAnalyticsQuery.isLoading ||
           drepStatQuery.isLoading ||

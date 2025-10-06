@@ -51,7 +51,7 @@ const PaginationLink = ({
       buttonVariants({
         variant: isActive ? "outline" : "ghost",
       }),
-      "min-w-fit bg-transparent px-4",
+      "min-w-fit bg-transparent px-2",
       className,
     )}
     {...props}

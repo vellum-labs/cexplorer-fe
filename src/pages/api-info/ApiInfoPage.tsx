@@ -159,7 +159,7 @@ export const ApiInfoPage = () => {
 
   return (
     <main className='flex min-h-minHeight w-full flex-col items-center'>
-      <div className='mt-12 flex w-full max-w-desktop flex-col items-center gap-8 px-mobile pb-5 text-center md:px-desktop'>
+      <div className='mt-12 flex w-full max-w-desktop flex-col items-center gap-8 px-mobile pb-3 text-center md:px-desktop'>
         <span className='text-sm font-medium text-primary'>
           Elevate your projects with
         </span>
@@ -188,7 +188,7 @@ export const ApiInfoPage = () => {
             />
           ))}
         </section>
-        <section className='mt-8 flex w-full max-w-[500px] flex-col items-center justify-between gap-5 rounded-xl border border-border p-4 md:flex-row md:text-left'>
+        <section className='mt-8 flex w-full max-w-[500px] flex-col items-center justify-between gap-5 rounded-xl border border-border p-2 md:flex-row md:text-left'>
           <div className='flex flex-col gap-4'>
             <h3>API documentation</h3>{" "}
             <p className='text-grayTextPrimary'>
@@ -220,18 +220,18 @@ export const ApiInfoPage = () => {
               value={item.question}
               className='border-b border-border'
             >
-              <AccordionTrigger className='AccordionTrigger w-full py-5 text-left'>
+              <AccordionTrigger className='AccordionTrigger w-full py-3 text-left'>
                 <span className='text-base font-medium'>{item.question}</span>
               </AccordionTrigger>
               <AccordionContent>
-                <div className='flex flex-col pb-3 text-left text-grayTextPrimary'>
+                <div className='flex flex-col pb-1.5 text-left text-grayTextPrimary'>
                   {item.answer}
                 </div>
               </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
-        <section className='flex w-full flex-col items-center gap-6 rounded-xl bg-darker p-4'>
+        <section className='flex w-full flex-col items-center gap-6 rounded-xl bg-darker p-2'>
           <img
             src={CexLogo}
             alt='Cexplorer logo'
@@ -274,8 +274,8 @@ const PriceCard = ({
   icon,
 }: PriceCardProps) => {
   return (
-    <div className='relative mt-2 flex min-h-[420px] basis-[350px] flex-col items-center rounded-xl bg-darker p-4 shadow-md'>
-      <div className='absolute -top-5 rounded-md border border-border bg-background p-2'>
+    <div className='relative mt-2 flex min-h-[420px] basis-[350px] flex-col items-center rounded-xl bg-darker p-2 shadow-md'>
+      <div className='absolute -top-5 rounded-md border border-border bg-background p-1'>
         {icon}
       </div>
       <span className='mt-6 font-medium'>{tier}</span>

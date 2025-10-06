@@ -218,7 +218,7 @@ const OverviewTabItem = () => {
         className='mb-4 ml-auto w-fit sm:mt-[-62px]'
       />
       {query.isLoading ? (
-        <div className='relative flex h-[300px] w-full items-center justify-center rounded-xl border border-border p-5 md:h-[600px]'>
+        <div className='relative flex h-[300px] w-full items-center justify-center rounded-xl border border-border p-3 md:h-[600px]'>
           <GraphWatermark className='opacity-10' />
           <div
             className={`flex h-20 w-20 shrink-0 grow-0 animate-spin rounded-full border-[8px] border-solid border-current border-e-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]`}
@@ -254,7 +254,7 @@ const OverviewTabItem = () => {
               <ViewportSetter nodes={nodes} />
               <button
                 onClick={() => setDisabledControls(!disabledControls)}
-                className={`absolute bottom-3 left-1/2 z-50 flex origin-center duration-150 ${disabledControls && interacted ? "border-text" : ""} -translate-x-1/2 items-center gap-1 rounded-full border border-border bg-background px-3 py-1 text-sm font-medium shadow`}
+                className={`absolute bottom-3 left-1/2 z-50 flex origin-center duration-150 ${disabledControls && interacted ? "border-text" : ""} -translate-x-1/2 items-center gap-1 rounded-full border border-border bg-background px-1.5 py-1/2 text-sm font-medium shadow`}
               >
                 {disabledControls ? (
                   <LucideLockOpen size={15} />
@@ -305,7 +305,7 @@ const NodeContent = ({
   type: "input" | "output";
 }) => (
   <div className='pointer-events-auto flex h-full w-full flex-col justify-start'>
-    <div className='mb-1 mr-1 max-w-fit rounded-md border border-border bg-background px-2 py-1 text-xs font-medium'>
+    <div className='mb-1 mr-1 max-w-fit rounded-md border border-border bg-background px-1 py-1/2 text-xs font-medium'>
       <AdaWithTooltip data={data.value} />
     </div>
     <AddressWithTxBadges utxo={data} isOutput={type === "output"} />

@@ -204,7 +204,7 @@ export const PoolAwardsPage: FC = () => {
       title='Pool Awards'
       breadcrumbItems={[{ label: "Pool Awards" }]}
     >
-      <section className='flex w-full max-w-desktop flex-col gap-3 px-mobile pb-5 md:px-desktop'>
+      <section className='flex w-full max-w-desktop flex-col gap-3 px-mobile pb-3 md:px-desktop'>
         <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
           {isLoading || poolAwardsQuery.isFetching ? (
             <LoadingSkeleton height='27px' width={"220px"} />
@@ -229,7 +229,7 @@ export const PoolAwardsPage: FC = () => {
             : awards?.map((item, i) => (
                 <div
                   key={`${item.time}_${i}`}
-                  className='flex flex-col gap-1 rounded-lg border border-border bg-cardBg px-3 py-2'
+                  className='flex flex-col gap-1 rounded-lg border border-border bg-cardBg px-1.5 py-1'
                 >
                   <img
                     src={imageMap[`${item.category}_${item.type}`]}

@@ -146,7 +146,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
           changeFilterByKey("voter_role", filterDraft["voter_role"]),
         onReset: () => changeFilterByKey("voter_role"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-4 py-2'>
+          <div className='flex flex-col gap-2 px-2 py-1'>
             {["ConstitutionalCommittee", "SPO", "DRep"].map(val => (
               <label className='flex items-center gap-2' key={val}>
                 <input
@@ -213,7 +213,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
         onFilter: () => changeFilterByKey("vote", filterDraft["vote"]),
         onReset: () => changeFilterByKey("vote"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-4 py-2'>
+          <div className='flex flex-col gap-2 px-2 py-1'>
             {["Yes", "No", "Abstain"].map(val => (
               <label className='flex items-center gap-2' key={val}>
                 <input
@@ -391,7 +391,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
               value && (
                 <div
                   key={key}
-                  className='mb-2 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-2 py-0.5 text-xs text-grayTextPrimary'
+                  className='mb-2 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
                 >
                   <span>
                     {key[0].toUpperCase() + key.split("_").join(" ").slice(1)}:

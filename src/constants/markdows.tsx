@@ -65,10 +65,10 @@ export const markdownComponents = (
     </div>
   ),
   td: ({ children }) => (
-    <td className='break-words border border-border px-4 py-2'>{children}</td>
+    <td className='break-words border border-border px-2 py-1'>{children}</td>
   ),
   th: ({ children }) => (
-    <th className='border border-border bg-cardBg px-4 py-2 font-semibold'>
+    <th className='border border-border bg-cardBg px-2 py-1 font-semibold'>
       {children}
     </th>
   ),

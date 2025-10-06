@@ -144,7 +144,7 @@ export const ScreenDropdown: React.FC<DropdownProps> = ({
       {isOpen && (
         <div
           ref={contentRef}
-          className={`absolute left-1/2 top-[75px] z-20 flex w-full max-w-[1410px] -translate-x-1/2 rounded-b-xl bg-cardBg p-4 text-sm shadow-lg border border-border border-t-primary`}
+          className={`absolute left-1/2 top-[75px] z-20 flex w-full max-w-[1410px] -translate-x-1/2 rounded-b-xl bg-cardBg p-2 text-sm shadow-lg border border-border border-t-primary`}
         >
           {card}
           <section className='flex w-[max(800px,95%)] justify-around gap-2'>
@@ -155,7 +155,7 @@ export const ScreenDropdown: React.FC<DropdownProps> = ({
                 role='menuitem'
                 aria-label='Menu item'
               >
-                <div className='min-h-[1.5rem] flex items-start pb-2'>
+                <div className='min-h-[1.5rem] flex items-start pb-1'>
                   {options[key].labelHref ? (
                     <Link
                       to={options[key].labelHref}

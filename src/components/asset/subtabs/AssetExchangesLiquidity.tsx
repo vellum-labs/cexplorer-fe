@@ -116,7 +116,7 @@ export const AssetExchangesLiquidity: FC<AssetExchangesLiquidityProps> = ({
   };
 
   return (
-    <div className='flex h-full w-full items-start rounded-lg border border-border p-3'>
+    <div className='flex h-full w-full items-start rounded-lg border border-border p-1.5'>
       <div className='h-full min-w-[500px]'>
         <div className='relative h-[300px] w-full'>
           <GraphWatermark />

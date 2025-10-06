@@ -58,7 +58,7 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
 
   return (
     <div className='mx-3 min-h-[110px]'>
-      <div className='flex items-center gap-2 pb-1'>
+      <div className='flex items-center gap-2 pb-1/2'>
         <div className='flex w-full flex-col'>
           <div className='flex items-center gap-3'>
             <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#FEC84B]'>

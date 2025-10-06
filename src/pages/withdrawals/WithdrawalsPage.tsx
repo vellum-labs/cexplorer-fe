@@ -166,7 +166,7 @@ export const WithdrawalsPage = () => {
       title='Withdrawals'
       breadcrumbItems={[{ label: "Withdrawals" }]}
     >
-      <div className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+      <div className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='mb-4 ml-auto flex w-fit justify-end gap-2'>
           <ExportButton columns={withdrawalColumns} items={items} />
           <TableSettingsDropdown

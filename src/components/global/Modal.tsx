@@ -80,7 +80,7 @@ const Modal = ({
           maxWidth: maxWidth || "400px",
           maxHeight: maxHeight,
         }}
-        className={`thin-scrollbar fixed left-1/2 top-1/2 z-[52] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl bg-background p-3 md:p-5 ${className ? className : ""}`}
+        className={`thin-scrollbar fixed left-1/2 top-1/2 z-[52] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-xl bg-background p-1.5 md:p-5 ${className ? className : ""}`}
         onClick={e => e.stopPropagation()}
       >
         {!hideClose && (

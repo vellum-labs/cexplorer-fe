@@ -34,11 +34,11 @@ export const GlobalSearchRecent: FC = () => {
               Recently searched
             </span>
           </div>
-          <div className='flex w-full flex-col pb-2'>
+          <div className='flex w-full flex-col pb-1'>
             {recentSearch.map((value, index) => (
               <div
                 key={value}
-                className='flex cursor-pointer items-center justify-between gap-1 py-1 hover:bg-cardBg'
+                className='flex cursor-pointer items-center justify-between gap-1 py-1/2 hover:bg-cardBg'
                 onClick={() => handleSearchChange(value)}
               >
                 <div className='flex items-center gap-1'>
@@ -60,7 +60,7 @@ export const GlobalSearchRecent: FC = () => {
           </div>
         </>
       ) : (
-        <div className='text-grayTextPrimary py-3 text-sm font-medium'>
+        <div className='text-grayTextPrimary py-1.5 text-sm font-medium'>
           <span>You don't have recent searches</span>
         </div>
       )}

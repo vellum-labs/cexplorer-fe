@@ -6,14 +6,14 @@ import type { FC } from "react";
 const PoolAnalyticsTab: FC = () => {
   return (
     <section className='flex flex-col gap-2'>
-      <div className='relative w-full rounded-lg border border-border p-5'>
-        <h1 className='mb-2 pl-5'>New Stakers</h1>
+      <div className='relative w-full rounded-lg border border-border p-3'>
+        <h1 className='mb-2 pl-3'>New Stakers</h1>
         <div className='flex flex-col gap-4'>
           <StakeFirstRegisteredGraph />
         </div>
       </div>
-      <div className='relative w-full rounded-lg border border-border p-5'>
-        <h1 className='mb-2 pl-5'>Stake Composition</h1>
+      <div className='relative w-full rounded-lg border border-border p-3'>
+        <h1 className='mb-2 pl-3'>Stake Composition</h1>
         <div className='flex flex-col gap-4'>
           <StakeToSposNotDrepsGraph />
           <StakeIsSpoDrepGraph />

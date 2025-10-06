@@ -147,7 +147,7 @@ const WalletButton = ({ variant = "short" }: Props) => {
           onMouseLeave={handleClose}
         >
           <button
-            className='box-border flex min-w-fit max-w-fit items-center justify-between rounded-[8px] border-2 border-secondaryText bg-secondaryBg px-4 py-2 text-sm font-medium text-secondaryText duration-150 hover:scale-[101%] active:scale-[98%] disabled:cursor-not-allowed disabled:opacity-50'
+            className='box-border flex min-w-fit max-w-fit items-center justify-between rounded-[8px] border-2 border-secondaryText bg-secondaryBg px-2 py-1 text-sm font-medium text-secondaryText duration-150 hover:scale-[101%] active:scale-[98%] disabled:cursor-not-allowed disabled:opacity-50'
             onClick={() => setShowDropdown(!showDropdown)}
           >
             <span className='mr-2'>
