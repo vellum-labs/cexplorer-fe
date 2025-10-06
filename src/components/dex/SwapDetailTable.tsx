@@ -135,7 +135,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
           </div>
           <div
             className='mt-3 grid gap-4 text-sm font-medium text-grayTextSecondary'
-            style={{ gridTemplateColumns: "40% 20% 20% 20%" }}
+            style={{ gridTemplateColumns: "55% 15% 15% 15%" }}
           >
             <div className='flex items-center gap-1'>Route</div>
             <div>Price</div>
@@ -160,7 +160,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                     <div
                       key={index}
                       className='grid gap-4 text-sm'
-                      style={{ gridTemplateColumns: "40% 20% 20% 20%" }}
+                      style={{ gridTemplateColumns: "55% 15% 15% 15%" }}
                     >
                       <div className='flex items-center gap-2'>
                         <Route size={16} className='text-grayTextSecondary' />
