@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import { useState } from "react";
 import type { useFetchMiscBasic } from "@/services/misc";
 import type { AggregatedSwapData } from "@/utils/dex/aggregateSwapData";
 
@@ -11,8 +10,6 @@ import {
   CircleX,
   Ellipsis,
   X,
-  ChevronDown,
-  ChevronUp,
 } from "lucide-react";
 import { dexConfig } from "@/constants/dexConfig";
 
@@ -26,6 +23,7 @@ import { SwapDetailTable } from "./SwapDetailTable";
 import { Tooltip } from "../ui/tooltip";
 import { AssetTicker } from "./AssetTicker";
 import { SwapTypeBadge } from "./SwapTypeBadge";
+import Dropdown from "../global/dropdowns/Dropdown";
 
 import { useDeFiOrderListTableStore } from "@/stores/tables/deFiOrderListTableStore";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
@@ -94,8 +92,6 @@ export const ConsolidatedDexSwapDetailCard: FC<
   ConsolidatedDexSwapDetailCardProps
 > = ({ miscBasic, aggregatedData, isLoading }) => {
   const { currency, setCurrency } = useDeFiOrderListTableStore()();
-  const [showFeeDetails, setShowFeeDetails] = useState(false);
-  const [showDepositDetails, setShowDepositDetails] = useState(false);
 
   const curr = useGetMarketCurrency(undefined, currency as any);
 
@@ -245,9 +241,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
                   renderedName?.toLowerCase().includes("lovelace");
 
                 if (isAda) {
-                  return (
-                    <p className='text-sm font-semibold text-primary'>ADA</p>
-                  );
+                  return <p className='text-sm font-semibold text-text'>ADA</p>;
                 }
 
                 return (
@@ -277,9 +271,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
                   renderedName?.toLowerCase().includes("lovelace");
 
                 if (isAda) {
-                  return (
-                    <p className='text-sm font-semibold text-primary'>ADA</p>
-                  );
+                  return <p className='text-sm font-semibold text-text'>ADA</p>;
                 }
 
                 return (
@@ -529,46 +521,37 @@ export const ConsolidatedDexSwapDetailCard: FC<
       value: renderWithException(
         typeof aggregatedData?.totalBatcherFees === "number",
         aggregatedData && aggregatedData.orders.length > 1 ? (
-          <button
-            onClick={() => setShowFeeDetails(!showFeeDetails)}
-            className='flex items-center gap-2 rounded-xl border border-border px-2 py-1 text-sm hover:bg-gray-50'
-          >
-            <AdaWithTooltip
-              data={(aggregatedData?.totalBatcherFees ?? 0) * 1e6}
-            />
-            {showFeeDetails ? (
-              <ChevronUp size={16} className='text-grayTextSecondary' />
-            ) : (
-              <ChevronDown size={16} className='text-grayTextSecondary' />
-            )}
-          </button>
+          <Dropdown
+            id='batcher-fees-dropdown'
+            label={
+              <AdaWithTooltip
+                data={(aggregatedData?.totalBatcherFees ?? 0) * 1e6}
+              />
+            }
+            options={aggregatedData.orders.map(order => ({
+              label: (
+                <div className='pointer-events-none flex items-center gap-2'>
+                  <span>
+                    {dexConfig[order.dex.toUpperCase()]?.label || order.dex}:
+                  </span>
+                  <AdaWithTooltip data={(order.batcher_fee ?? 0) * 1e6} />
+                </div>
+              ),
+              onClick: () => {},
+            }))}
+            width='fit-content'
+            triggerClassName='rounded-xl border border-border px-2 py-1 text-sm hover:bg-gray-50'
+            poppoverClassname='w-fit !left-0 !right-auto [&_div[role=menuitem]]:hover:!bg-transparent [&_div[role=menuitem]]:hover:!text-inherit [&_div[role=menuitem]]:cursor-default'
+            withBorder={true}
+            disableHover={true}
+            forceVerticalPosition='down'
+          />
         ) : (
           <AdaWithTooltip
             data={(aggregatedData?.totalBatcherFees ?? 0) * 1e6}
           />
         ),
       ),
-      details:
-        aggregatedData && aggregatedData.orders.length > 1 ? (
-          <div
-            className='overflow-hidden transition-all duration-700 ease-in-out'
-            style={{
-              maxHeight: showFeeDetails ? "500px" : "0",
-              opacity: showFeeDetails ? 1 : 0,
-            }}
-          >
-            <div className='mt-2 w-fit space-y-1 rounded-xl border border-border p-2 text-xs text-grayTextSecondary'>
-              {aggregatedData.orders.map((order, index) => (
-                <div key={index} className='flex items-center gap-2'>
-                  <span>
-                    {dexConfig[order.dex.toUpperCase()]?.label || order.dex}:
-                  </span>
-                  <AdaWithTooltip data={(order.batcher_fee ?? 0) * 1e6} />
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : null,
     },
     {
       key: "deposits",
@@ -576,42 +559,35 @@ export const ConsolidatedDexSwapDetailCard: FC<
       value: renderWithException(
         typeof aggregatedData?.totalDeposits === "number",
         aggregatedData && aggregatedData.orders.length > 1 ? (
-          <button
-            onClick={() => setShowDepositDetails(!showDepositDetails)}
-            className='flex items-center gap-2 rounded-xl border border-border px-2 py-1 text-sm hover:bg-gray-50'
-          >
-            <AdaWithTooltip data={(aggregatedData?.totalDeposits ?? 0) * 1e6} />
-            {showDepositDetails ? (
-              <ChevronUp size={16} className='text-grayTextSecondary' />
-            ) : (
-              <ChevronDown size={16} className='text-grayTextSecondary' />
-            )}
-          </button>
-        ) : (
-          <AdaWithTooltip data={(aggregatedData?.totalDeposits ?? 0) * 1e6} />
-        ),
-      ),
-      details:
-        aggregatedData && aggregatedData.orders.length > 1 ? (
-          <div
-            className='overflow-hidden transition-all duration-700 ease-in-out'
-            style={{
-              maxHeight: showDepositDetails ? "500px" : "0",
-              opacity: showDepositDetails ? 1 : 0,
-            }}
-          >
-            <div className='mt-2 w-fit space-y-1 rounded-xl border border-border p-2 text-xs text-grayTextSecondary'>
-              {aggregatedData.orders.map((order, index) => (
-                <div key={index} className='flex items-center gap-2'>
+          <Dropdown
+            id='deposits-dropdown'
+            label={
+              <AdaWithTooltip
+                data={(aggregatedData?.totalDeposits ?? 0) * 1e6}
+              />
+            }
+            options={aggregatedData.orders.map(order => ({
+              label: (
+                <div className='pointer-events-none flex items-center gap-2'>
                   <span>
                     {dexConfig[order.dex.toUpperCase()]?.label || order.dex}:
                   </span>
                   <AdaWithTooltip data={(order.deposit ?? 0) * 1e6} />
                 </div>
-              ))}
-            </div>
-          </div>
-        ) : null,
+              ),
+              onClick: () => {},
+            }))}
+            width='fit-content'
+            triggerClassName='rounded-xl border border-border px-2 py-1 text-sm hover:bg-gray-50'
+            poppoverClassname='w-fit !left-0 !right-auto [&_div[role=menuitem]]:hover:!bg-transparent [&_div[role=menuitem]]:hover:!text-inherit [&_div[role=menuitem]]:cursor-default'
+            withBorder={true}
+            disableHover={true}
+            forceVerticalPosition='down'
+          />
+        ) : (
+          <AdaWithTooltip data={(aggregatedData?.totalDeposits ?? 0) * 1e6} />
+        ),
+      ),
     },
     {
       key: "swapDetail",
@@ -638,7 +614,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
         <>
           <h2 className='text-base'>Overview</h2>
           <div className='flex flex-col gap-4 pt-4'>
-            {detailItems.map(({ key, title, value, divider, details }) => (
+            {detailItems.map(({ key, title, value, divider }) => (
               <div key={key}>
                 <div className='flex w-full items-start'>
                   <p className='min-w-[200px] text-sm text-grayTextSecondary'>
@@ -648,10 +624,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
                     {isLoading ? (
                       <LoadingSkeleton width='100%' height='20px' />
                     ) : (
-                      <>
-                        {value}
-                        {details}
-                      </>
+                      value
                     )}
                   </div>
                 </div>
