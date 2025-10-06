@@ -40,7 +40,8 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
 
   const currentEpoch = miscConst?.no;
 
-  const voterDisplayName = vote?.info?.meta?.name || vote?.info?.meta?.given_name || "";
+  const voterDisplayName =
+    vote?.info?.meta?.name || vote?.info?.meta?.given_name || "";
 
   const detailItems = [
     {
@@ -97,57 +98,66 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       ),
     },
 
-    // Only show enacted epoch if it exists
-    ...(vote?.proposal?.enacted_epoch ? [{
-      key: "enacted_epoch",
-      title: "Enacted epoch",
-      value: (
-        <span className='text-sm'>
-          Epoch{" "}
-          <Link
-            to='/epoch/$no'
-            params={{ no: vote?.proposal?.enacted_epoch?.toString() }}
-            className='text-primary'
-          >
-            {vote?.proposal?.enacted_epoch}
-          </Link>
-        </span>
-      ),
-    }] : []),
-    // Only show ratified epoch if it exists
-    ...(vote?.proposal?.ratified_epoch ? [{
-      key: "ratified_epoch",
-      title: "Ratified epoch",
-      value: (
-        <span className='text-sm'>
-          Epoch{" "}
-          <Link
-            to='/epoch/$no'
-            params={{ no: vote?.proposal?.ratified_epoch?.toString() }}
-            className='text-primary'
-          >
-            {vote?.proposal?.ratified_epoch}
-          </Link>
-        </span>
-      ),
-    }] : []),
-    // Only show expired epoch if it exists
-    ...(vote?.proposal?.expired_epoch ? [{
-      key: "expired_epoch",
-      title: "Expired epoch",
-      value: (
-        <span className='text-sm'>
-          Epoch{" "}
-          <Link
-            to='/epoch/$no'
-            params={{ no: vote?.proposal?.expired_epoch?.toString() }}
-            className='text-primary'
-          >
-            {vote?.proposal?.expired_epoch}
-          </Link>
-        </span>
-      ),
-    }] : []),
+    ...(vote?.proposal?.enacted_epoch
+      ? [
+          {
+            key: "enacted_epoch",
+            title: "Enacted epoch",
+            value: (
+              <span className='text-sm'>
+                Epoch{" "}
+                <Link
+                  to='/epoch/$no'
+                  params={{ no: vote?.proposal?.enacted_epoch?.toString() }}
+                  className='text-primary'
+                >
+                  {vote?.proposal?.enacted_epoch}
+                </Link>
+              </span>
+            ),
+          },
+        ]
+      : []),
+    ...(vote?.proposal?.ratified_epoch
+      ? [
+          {
+            key: "ratified_epoch",
+            title: "Ratified epoch",
+            value: (
+              <span className='text-sm'>
+                Epoch{" "}
+                <Link
+                  to='/epoch/$no'
+                  params={{ no: vote?.proposal?.ratified_epoch?.toString() }}
+                  className='text-primary'
+                >
+                  {vote?.proposal?.ratified_epoch}
+                </Link>
+              </span>
+            ),
+          },
+        ]
+      : []),
+    ...(vote?.proposal?.expired_epoch
+      ? [
+          {
+            key: "expired_epoch",
+            title: "Expired epoch",
+            value: (
+              <span className='text-sm'>
+                Epoch{" "}
+                <Link
+                  to='/epoch/$no'
+                  params={{ no: vote?.proposal?.expired_epoch?.toString() }}
+                  className='text-primary'
+                >
+                  {vote?.proposal?.expired_epoch}
+                </Link>
+              </span>
+            ),
+          },
+        ]
+      : []),
     {
       key: "voting_start",
       title: "Voting start",
@@ -188,62 +198,76 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
 
         return (
           <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-lg border border-border px-[6px]'>
-            {role === GovernanceRole.DRep && <User size={12} className='text-primary' />}
-            {role === GovernanceRole.ConstitutionalCommittee && <Landmark size={12} className='text-primary' />}
-            {role === GovernanceRole.SPO && <Route size={12} className='text-primary' />}
+            {role === GovernanceRole.DRep && (
+              <User size={12} className='text-primary' />
+            )}
+            {role === GovernanceRole.ConstitutionalCommittee && (
+              <Landmark size={12} className='text-primary' />
+            )}
+            {role === GovernanceRole.SPO && (
+              <Route size={12} className='text-primary' />
+            )}
             <span className='text-xs font-medium'>{displayRole}</span>
           </div>
         );
       })(),
     },
-    ...(voterDisplayName ? [{
-      key: "voter_name",
-      title: "Voter name",
-      value: (
-        <div className='flex items-center gap-2'>
-          {vote?.info?.id && (
-            <Image
-              src={generateImageUrl(
-                vote.info.id, 
-                "ico", 
-                vote?.voter_role === GovernanceRole.DRep ? "drep" : 
-                vote?.voter_role === GovernanceRole.ConstitutionalCommittee ? "cc" : 
-                undefined
-              )}
-              type='user'
-              height={20}
-              width={20}
-              className='rounded-full'
-            />
-          )}
-          {vote?.voter_role && vote?.info?.id ? (
-            <Link
-              to={
-                vote.voter_role === GovernanceRole.SPO
-                  ? "/pool/$id"
-                  : vote.voter_role === GovernanceRole.DRep
-                    ? "/drep/$hash"
-                    : vote.voter_role === GovernanceRole.ConstitutionalCommittee
-                      ? "/gov/cc/$coldKey"
-                      : ""
-              }
-              params={{
-                id: vote.info.id,
-                hash: vote.info.id,
-                coldKey: vote.info.id,
-              }}
-              className='text-sm text-primary hover:underline'
-            >
-              {voterDisplayName}
-            </Link>
-          ) : (
-            <span className='text-sm text-primary'>
-              {voterDisplayName}
-            </span>
-          )}
-        </div>
-      ),
-    }] : []),
+    ...(voterDisplayName
+      ? [
+          {
+            key: "voter_name",
+            title: "Voter name",
+            value: (
+              <div className='flex items-center gap-2'>
+                {vote?.info?.id && (
+                  <Image
+                    src={generateImageUrl(
+                      vote.info.id,
+                      "ico",
+                      vote?.voter_role === GovernanceRole.DRep
+                        ? "drep"
+                        : vote?.voter_role ===
+                            GovernanceRole.ConstitutionalCommittee
+                          ? "cc"
+                          : undefined,
+                    )}
+                    type='user'
+                    height={20}
+                    width={20}
+                    className='rounded-full'
+                  />
+                )}
+                {vote?.voter_role && vote?.info?.id ? (
+                  <Link
+                    to={
+                      vote.voter_role === GovernanceRole.SPO
+                        ? "/pool/$id"
+                        : vote.voter_role === GovernanceRole.DRep
+                          ? "/drep/$hash"
+                          : vote.voter_role ===
+                              GovernanceRole.ConstitutionalCommittee
+                            ? "/gov/cc/$coldKey"
+                            : ""
+                    }
+                    params={{
+                      id: vote.info.id,
+                      hash: vote.info.id,
+                      coldKey: vote.info.id,
+                    }}
+                    className='text-sm text-primary hover:underline'
+                  >
+                    {voterDisplayName}
+                  </Link>
+                ) : (
+                  <span className='text-sm text-primary'>
+                    {voterDisplayName}
+                  </span>
+                )}
+              </div>
+            ),
+          },
+        ]
+      : []),
     {
       key: "voter_id",
       title: "Voter ID",
@@ -325,31 +349,33 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
         </div>
       ),
     },
-    ...(vote?.anchor?.url ? [
-      {
-        key: "anchor_url",
-        title: "Anchor URL",
-        value: (() => {
-          const transformedUrl = transformAnchorUrl(vote.anchor.url);
-          if (!transformedUrl) return "-";
-          
-          return (
-            <a
-              href={transformedUrl}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='text-sm text-primary break-all'
-              onClick={e => {
-                e.preventDefault();
-                setClickedUrl(transformedUrl);
-              }}
-            >
-{transformedUrl}
-            </a>
-          );
-        })(),
-      },
-    ] : []),
+    ...(vote?.anchor?.url
+      ? [
+          {
+            key: "anchor_url",
+            title: "Anchor URL",
+            value: (() => {
+              const transformedUrl = transformAnchorUrl(vote.anchor.url);
+              if (!transformedUrl) return "-";
+
+              return (
+                <a
+                  href={transformedUrl}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='break-all text-sm text-primary'
+                  onClick={e => {
+                    e.preventDefault();
+                    setClickedUrl(transformedUrl);
+                  }}
+                >
+                  {transformedUrl}
+                </a>
+              );
+            })(),
+          },
+        ]
+      : []),
     {
       key: "metadata",
       title: "Metadata",
@@ -362,6 +388,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       ) : (
         "-"
       ),
+      fullWidth: true,
     },
   ];
 
@@ -370,13 +397,19 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       <div className='w-full rounded-xl border border-border px-5 py-4'>
         <h2 className='text-base font-semibold'>Overview</h2>
         <div className='flex flex-col gap-4 pt-4'>
-          {detailItems.map(({ key, title, value, divider }) => (
+          {detailItems.map(({ key, title, value, divider, fullWidth }) => (
             <div key={key} className='flex flex-col'>
-              <div className='flex flex-wrap items-start gap-x-4 gap-y-1'>
+              <div
+                className={
+                  fullWidth
+                    ? 'flex flex-col gap-2'
+                    : 'flex flex-wrap items-start gap-x-4 gap-y-1'
+                }
+              >
                 <p className='min-w-[160px] max-w-full break-words text-sm text-grayTextSecondary'>
                   {title}
                 </p>
-                <div className='min-w-0 flex-1 break-words'>
+                <div className={fullWidth ? 'w-full' : 'min-w-0 flex-1 break-words'}>
                   {isLoading ? (
                     <LoadingSkeleton width='100%' height='20px' />
                   ) : (
