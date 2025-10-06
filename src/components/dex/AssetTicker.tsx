@@ -19,12 +19,9 @@ export const AssetTicker: FC<AssetTickerProps> = ({
   const ticker = registry?.ticker;
   const name = registry?.name;
 
-  if (ticker) {
-    if (showFullName && name) {
-      return <span>{name}</span>;
-    }
-    return <span>{ticker.toUpperCase()}</span>;
-  }
+  if (!ticker) return <span>{renderAssetName({ name: tokenName })}</span>;
 
-  return <span>{renderAssetName({ name: tokenName })}</span>;
+  if (showFullName && name) return <span>{name}</span>;
+
+  return <span>{ticker.toUpperCase()}</span>;
 };

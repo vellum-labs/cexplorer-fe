@@ -23,7 +23,8 @@ import { SwapDetailTable } from "./SwapDetailTable";
 import { Tooltip } from "../ui/tooltip";
 import { AssetTicker } from "./AssetTicker";
 import { SwapTypeBadge } from "./SwapTypeBadge";
-import Dropdown from "../global/dropdowns/Dropdown";
+import { AssetDisplay } from "./AssetDisplay";
+import { FeeDropdown } from "./FeeDropdown";
 
 import { useDeFiOrderListTableStore } from "@/stores/tables/deFiOrderListTableStore";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
@@ -33,7 +34,6 @@ import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { getConfirmations } from "@/utils/getConfirmations";
 import { renderWithException } from "@/utils/renderWithException";
-import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
 import { ADATokenName } from "@/constants/currencies";
 import { formatNumberWithSuffix } from "@/utils/format/format";
@@ -45,12 +45,34 @@ interface ConsolidatedDexSwapDetailCardProps {
   isLoading: boolean;
 }
 
+const getStatusIcon = (status: string | undefined) => {
+  switch (status) {
+    case "COMPLETE":
+      return <Check className='text-greenText' size={15} />;
+    case "CANCELLED":
+      return <X size={15} className='text-redText' />;
+    case "PARTIALLY_COMPLETE":
+      return <CircleAlert size={15} className='text-yellowText' />;
+    default:
+      return <Ellipsis size={15} className='text-yellowText' />;
+  }
+};
+
+const getStatusText = (status: string | undefined) => {
+  if (!status) return "";
+  if (status === "PARTIALLY_COMPLETE") return "Partially completed";
+  return status[0].toUpperCase() + status.slice(1).toLowerCase();
+};
+
 export const ConsolidatedDexSwapDetailCard: FC<
   ConsolidatedDexSwapDetailCardProps
 > = ({ miscBasic, aggregatedData, isLoading }) => {
   const { currency, setCurrency } = useDeFiOrderListTableStore()();
 
-  const curr = useGetMarketCurrency(undefined, currency as any);
+  const curr = useGetMarketCurrency(
+    undefined,
+    currency === "ada" ? undefined : (currency as "usd" | "eur"),
+  );
 
   const balanceAda =
     (aggregatedData?.orders[0]?.user?.balance ?? 0) / 1_000_000;
@@ -80,10 +102,6 @@ export const ConsolidatedDexSwapDetailCard: FC<
 
   const [, usd] = lovelaceToAdaWithRates(aggregatedData?.adaPrice ?? 0, curr);
 
-  const isSuccess = aggregatedData?.status === "COMPLETE";
-  const isCanceled = aggregatedData?.status === "CANCELLED";
-  const isPartial = aggregatedData?.status === "PARTIALLY_COMPLETE";
-
   const confirmations = getConfirmations(
     miscBasic?.data.block.block_no,
     aggregatedData?.orders[0]?.block?.no,
@@ -105,7 +123,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
               params={{
                 address: aggregatedData?.address ?? "",
               }}
-              className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-sm text-primary`}
+              className='block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-sm text-primary'
             >
               {aggregatedData?.address}
             </Link>
@@ -135,9 +153,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
             }}
             className='text-primary'
           >
-            <span
-              className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-sm`}
-            >
+            <span className='block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-sm'>
               {aggregatedData?.txHash}
             </span>
           </Link>
@@ -188,62 +204,18 @@ export const ConsolidatedDexSwapDetailCard: FC<
           <div className='flex items-center gap-2'>
             <div className='flex items-center gap-2'>
               {getAssetImage(aggregatedData?.pair.tokenIn ?? "")}
-              {(() => {
-                const tokenName = aggregatedData?.pair.tokenIn ?? "";
-                const renderedName = renderAssetName({ name: tokenName });
-                const isAda =
-                  tokenName === "lovelaces" ||
-                  tokenName === "lovelace" ||
-                  tokenName?.toLowerCase().includes("lovelace") ||
-                  renderedName?.toLowerCase().includes("lovelace");
-
-                if (isAda) {
-                  return <p className='text-sm font-semibold text-text'>ADA</p>;
-                }
-
-                return (
-                  <Link
-                    to='/asset/$fingerprint'
-                    params={{
-                      fingerprint: tokenInFingerPrint,
-                    }}
-                  >
-                    <p className='font-semibold text-primary'>
-                      <AssetTicker tokenName={tokenName} />
-                    </p>
-                  </Link>
-                );
-              })()}
+              <AssetDisplay
+                tokenName={aggregatedData?.pair.tokenIn ?? ""}
+                fingerprint={tokenInFingerPrint}
+              />
             </div>
             <ArrowRight size={15} className='block' />
             <div className='flex items-center gap-2'>
               {getAssetImage(aggregatedData?.pair.tokenOut ?? "")}
-              {(() => {
-                const tokenName = aggregatedData?.pair.tokenOut ?? "";
-                const renderedName = renderAssetName({ name: tokenName });
-                const isAda =
-                  tokenName === "lovelaces" ||
-                  tokenName === "lovelace" ||
-                  tokenName?.toLowerCase().includes("lovelace") ||
-                  renderedName?.toLowerCase().includes("lovelace");
-
-                if (isAda) {
-                  return <p className='text-sm font-semibold text-text'>ADA</p>;
-                }
-
-                return (
-                  <Link
-                    to='/asset/$fingerprint'
-                    params={{
-                      fingerprint: tokenOutFingerPrint,
-                    }}
-                  >
-                    <p className='font-semibold text-primary'>
-                      <AssetTicker tokenName={tokenName} />
-                    </p>
-                  </Link>
-                );
-              })()}
+              <AssetDisplay
+                tokenName={aggregatedData?.pair.tokenOut ?? ""}
+                fingerprint={tokenOutFingerPrint}
+              />
             </div>
           </div>
         ),
@@ -333,7 +305,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
             }
           >
             <div className='text-sm text-grayTextPrimary'>
-              {formatSmallValueWithSub(usd, "$ ", 0.01, 6)}
+              {formatSmallValueWithSub(usd, "$ ", 0.01, 6, 4)}
             </div>
           </Tooltip>
         ),
@@ -393,21 +365,8 @@ export const ConsolidatedDexSwapDetailCard: FC<
         aggregatedData?.status,
         <div className='flex items-center'>
           <p className='flex w-fit items-center gap-1 rounded-md border border-border px-2 text-sm'>
-            {isSuccess ? (
-              <Check className='text-greenText' size={15} />
-            ) : isCanceled ? (
-              <X size={15} className='text-redText' />
-            ) : isPartial ? (
-              <CircleAlert size={15} className='text-yellowText' />
-            ) : (
-              <Ellipsis size={15} className='text-yellowText' />
-            )}
-            {aggregatedData?.status === "PARTIALLY_COMPLETE"
-              ? "Partially completed"
-              : aggregatedData?.status
-                ? (aggregatedData?.status[0] ?? "").toUpperCase() +
-                  aggregatedData?.status.slice(1).toLowerCase()
-                : ""}
+            {getStatusIcon(aggregatedData?.status)}
+            {getStatusText(aggregatedData?.status)}
           </p>
         </div>,
       ),
@@ -447,11 +406,16 @@ export const ConsolidatedDexSwapDetailCard: FC<
             return (
               <p
                 key={dexName}
-                className={`flex w-fit items-center gap-1 rounded-xl border px-1.5 text-sm`}
-                style={{
-                  backgroundColor: dex?.bgColor ?? "transparent",
-                  borderColor: dex?.borderColor ?? "var(--border)",
-                }}
+                className='flex w-fit items-center gap-1 rounded-xl border border-border bg-transparent px-1.5 text-sm text-text'
+                style={
+                  dex
+                    ? {
+                        backgroundColor: dex.bgColor,
+                        borderColor: dex.borderColor,
+                        color: dex.textColor,
+                      }
+                    : undefined
+                }
               >
                 {!!dex?.icon && (
                   <Image
@@ -460,7 +424,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
                     alt={dex?.label}
                   />
                 )}
-                <span style={{ color: dex?.textColor ?? "var(--text)" }}>
+                <span>
                   {dex?.label ??
                     (dexKey
                       ? dexKey[0].toUpperCase() + dexKey.slice(1).toLowerCase()
@@ -475,75 +439,25 @@ export const ConsolidatedDexSwapDetailCard: FC<
     {
       key: "batcherFees",
       title: "Batcher fees",
-      value: renderWithException(
-        typeof aggregatedData?.totalBatcherFees === "number",
-        aggregatedData && aggregatedData.orders.length > 1 ? (
-          <Dropdown
-            id='batcher-fees-dropdown'
-            label={
-              <AdaWithTooltip
-                data={(aggregatedData?.totalBatcherFees ?? 0) * 1e6}
-              />
-            }
-            options={aggregatedData.orders.map(order => ({
-              label: (
-                <div className='pointer-events-none flex items-center gap-2'>
-                  <span>
-                    {dexConfig[order.dex.toUpperCase()]?.label || order.dex}:
-                  </span>
-                  <AdaWithTooltip data={(order.batcher_fee ?? 0) * 1e6} />
-                </div>
-              ),
-              onClick: () => {},
-            }))}
-            width='fit-content'
-            triggerClassName='rounded-xl border border-border px-2 py-1 text-sm hover:bg-gray-50'
-            poppoverClassname='w-fit !left-0 !right-auto [&_div[role=menuitem]]:hover:!bg-transparent [&_div[role=menuitem]]:hover:!text-inherit [&_div[role=menuitem]]:cursor-default'
-            withBorder={true}
-            disableHover={true}
-            forceVerticalPosition='down'
-          />
-        ) : (
-          <AdaWithTooltip
-            data={(aggregatedData?.totalBatcherFees ?? 0) * 1e6}
-          />
-        ),
+      value: (
+        <FeeDropdown
+          total={aggregatedData?.totalBatcherFees}
+          orders={aggregatedData?.orders}
+          getFeeAmount={order => order.batcher_fee}
+          dropdownId='batcher-fees-dropdown'
+        />
       ),
     },
     {
       key: "deposits",
       title: "Deposits",
-      value: renderWithException(
-        typeof aggregatedData?.totalDeposits === "number",
-        aggregatedData && aggregatedData.orders.length > 1 ? (
-          <Dropdown
-            id='deposits-dropdown'
-            label={
-              <AdaWithTooltip
-                data={(aggregatedData?.totalDeposits ?? 0) * 1e6}
-              />
-            }
-            options={aggregatedData.orders.map(order => ({
-              label: (
-                <div className='pointer-events-none flex items-center gap-2'>
-                  <span>
-                    {dexConfig[order.dex.toUpperCase()]?.label || order.dex}:
-                  </span>
-                  <AdaWithTooltip data={(order.deposit ?? 0) * 1e6} />
-                </div>
-              ),
-              onClick: () => {},
-            }))}
-            width='fit-content'
-            triggerClassName='rounded-xl border border-border px-2 py-1 text-sm hover:bg-gray-50'
-            poppoverClassname='w-fit !left-0 !right-auto [&_div[role=menuitem]]:hover:!bg-transparent [&_div[role=menuitem]]:hover:!text-inherit [&_div[role=menuitem]]:cursor-default'
-            withBorder={true}
-            disableHover={true}
-            forceVerticalPosition='down'
-          />
-        ) : (
-          <AdaWithTooltip data={(aggregatedData?.totalDeposits ?? 0) * 1e6} />
-        ),
+      value: (
+        <FeeDropdown
+          total={aggregatedData?.totalDeposits}
+          orders={aggregatedData?.orders}
+          getFeeAmount={order => order.deposit}
+          dropdownId='deposits-dropdown'
+        />
       ),
     },
     {
