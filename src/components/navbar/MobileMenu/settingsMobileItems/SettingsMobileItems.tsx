@@ -49,7 +49,7 @@ export const SettingsMobileItems: FC<SettingsMobileItemsProps> = ({
         onClick={onBack}
         className='flex h-[34px] -translate-x-1 items-center gap-1 font-medium'
       >
-        <ChevronLeft size={20} className='font-normal' />
+        <ChevronLeft size={20} className='font-regular' />
         <span>Settings</span>
       </button>
       <div className='h-full w-full py-1'>

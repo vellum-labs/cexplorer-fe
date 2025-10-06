@@ -22,7 +22,7 @@ const HardforkPageTotalCountItem: FC<HardforkPageTotalCountItemProps> = ({
   return (
     <div
       className={cn(
-        "flex cursor-pointer items-center gap-1 rounded-s px-1.5 py-1 font-normal transition duration-300",
+        "flex cursor-pointer items-center gap-1 rounded-s px-1.5 py-1 font-regular transition duration-300",
         active && "bg-cardBg",
         wrapperClassname,
       )}

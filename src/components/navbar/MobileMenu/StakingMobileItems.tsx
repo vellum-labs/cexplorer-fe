@@ -15,7 +15,7 @@ export const StakingMobileItems = ({ onBack, setOpen }: Props) => {
         onClick={onBack}
         className='mb-1 flex h-[34px] -translate-x-1 items-center gap-1 font-medium'
       >
-        <ChevronLeft size={20} className='font-normal' />
+        <ChevronLeft size={20} className='font-regular' />
         <span>Staking certificates</span>
       </button>
       <div className='flex flex-col'>

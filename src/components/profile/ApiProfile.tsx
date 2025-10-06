@@ -155,19 +155,19 @@ export const ApiProfile = () => {
                   <div className='flex w-full flex-col gap-4 border-b border-border pb-2 md:flex-row'>
                     <div className='flex flex-col gap-1 md:w-[300px]'>
                       <span className='font-medium'>Plan</span>
-                      <p className='text-sm font-light text-grayTextPrimary'>
+                      <p className='text-sm font-regular text-grayTextPrimary'>
                         Details about your API plan
                       </p>
                     </div>
                     <div className='flex w-full flex-col gap-1.5'>
                       <span className='flex'>
-                        <span className='min-w-[150px] font-light text-grayTextPrimary'>
+                        <span className='min-w-[150px] font-regular text-grayTextPrimary'>
                           Project name
                         </span>{" "}
                         <span>{apiKey.name}</span>
                       </span>
                       <span className='flex'>
-                        <span className='min-w-[150px] font-light text-grayTextPrimary'>
+                        <span className='min-w-[150px] font-regular text-grayTextPrimary'>
                           My API plan
                         </span>{" "}
                         <span>
@@ -178,7 +178,7 @@ export const ApiProfile = () => {
                         </span>
                       </span>
                       <span className='flex'>
-                        <span className='min-w-[150px] font-light text-grayTextPrimary'>
+                        <span className='min-w-[150px] font-regular text-grayTextPrimary'>
                           Limits
                         </span>{" "}
                         <span className='flex items-center gap-1/2'>
@@ -201,7 +201,7 @@ export const ApiProfile = () => {
                         </span>
                       </span>
                       <span className='flex'>
-                        <span className='min-w-[150px] font-light text-grayTextPrimary'>
+                        <span className='min-w-[150px] font-regular text-grayTextPrimary'>
                           License
                         </span>{" "}
                         <span>
@@ -213,7 +213,7 @@ export const ApiProfile = () => {
                   <div className='flex w-full flex-col gap-4 border-b border-border pb-2 md:flex-row'>
                     <div className='flex flex-col gap-1 md:w-[300px]'>
                       <span className='font-medium'>Limits</span>
-                      <p className='text-sm font-light text-grayTextPrimary'>
+                      <p className='text-sm font-regular text-grayTextPrimary'>
                         API limits based on your plan. You can increase the
                         limits by upgrading your / by holding more Cexplorer PRO
                         NFTs.
@@ -242,7 +242,7 @@ export const ApiProfile = () => {
                         <span className='font-medium'>
                           Max requests per minute
                         </span>
-                        <span className='font-light text-grayTextPrimary'>
+                        <span className='font-regular text-grayTextPrimary'>
                           {userTierPlan?.rq_min}
                         </span>
                       </div>
@@ -251,7 +251,7 @@ export const ApiProfile = () => {
                   <div className='flex w-full flex-col gap-4 border-b border-border pb-2 text-sm md:flex-row'>
                     <div className='flex flex-col gap-1 md:w-[300px]'>
                       <span className='font-medium'>API keys</span>
-                      <p className='text-sm font-light text-grayTextPrimary'>
+                      <p className='text-sm font-regular text-grayTextPrimary'>
                         Your project’s API key. You can regenerate the key at
                         any time (disables the original key).
                       </p>
@@ -286,7 +286,7 @@ export const ApiProfile = () => {
                   <div className='flex w-full flex-col gap-4 pb-2 text-sm lg:flex-row'>
                     <div className='flex flex-col gap-1 lg:w-[300px]'>
                       <span className='font-medium'>API usage</span>
-                      <p className='text-sm font-light text-grayTextPrimary'>
+                      <p className='text-sm font-regular text-grayTextPrimary'>
                         Overview of the requests amount in time.
                       </p>
                     </div>

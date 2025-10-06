@@ -66,7 +66,7 @@ export const SafeNavbar: FC = () => {
                   }
                   className='bg-darker'
                 >
-                  <p className='font-normal'>
+                  <p className='font-regular'>
                     Access Our API for Comprehensive Blockchain Data and Build
                     Your Next-Level dApp!
                   </p>
@@ -96,7 +96,7 @@ export const SafeNavbar: FC = () => {
                   }
                   className='bg-darker'
                 >
-                  <p className='font-normal'>
+                  <p className='font-regular'>
                     Access Our API for Comprehensive Blockchain Data and Build
                     Your Next-Level dApp!
                   </p>

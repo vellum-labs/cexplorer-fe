@@ -115,7 +115,7 @@ export const PollDetailPage = () => {
         <div className='flex w-full max-w-desktop flex-col gap-3 px-mobile pb-3 md:flex-row md:px-desktop'>
           <section className='order-2 flex flex-col gap-1 rounded-l border border-border p-2 md:order-none'>
             <h2 className='mb-1'>{pollDetail?.name}</h2>
-            <span className='text-sm font-light text-grayTextSecondary'>
+            <span className='text-sm font-regular text-grayTextSecondary'>
               Description
             </span>
             <div>{parse(pollDetail?.description ?? "")}</div>
@@ -137,7 +137,7 @@ export const PollDetailPage = () => {
                 </p>
               </div>
             </div>
-            <span className='mb-1/2 mt-3 text-sm font-light text-grayTextSecondary'>
+            <span className='mb-1/2 mt-3 text-sm font-regular text-grayTextSecondary'>
               Voting
             </span>
             <RadioGroup

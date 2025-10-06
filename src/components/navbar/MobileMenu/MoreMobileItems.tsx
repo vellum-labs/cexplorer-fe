@@ -39,7 +39,7 @@ export const MoreMobileItems = ({ onBack, setOpen, power }: Props) => {
         onClick={onBack}
         className='mb-1 flex h-[34px] -translate-x-1 items-center gap-1 font-medium'
       >
-        <ChevronLeft size={20} className='font-normal' />
+        <ChevronLeft size={20} className='font-regular' />
         <span>Analytics</span>
       </button>
       {power === 0 && (
@@ -52,7 +52,7 @@ export const MoreMobileItems = ({ onBack, setOpen, power }: Props) => {
           }
           className='max-h-[200px] bg-darker'
         >
-          <p className='text-xs font-normal'>
+          <p className='text-xs font-regular'>
             Access Our API for Comprehensive Blockchain Data and Build Your
             Next-Level dApp!
           </p>

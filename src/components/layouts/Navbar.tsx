@@ -86,7 +86,7 @@ const Navbar = () => {
                   }
                   className='bg-darker'
                 >
-                  <p className='font-normal'>
+                  <p className='font-regular'>
                     Access Our API for Comprehensive Blockchain Data and Build
                     Your Next-Level dApp!
                   </p>
@@ -115,7 +115,7 @@ const Navbar = () => {
                   }
                   className='bg-darker'
                 >
-                  <p className='font-normal'>
+                  <p className='font-regular'>
                     Access Our API for Comprehensive Blockchain Data and Build
                     Your Next-Level dApp!
                   </p>

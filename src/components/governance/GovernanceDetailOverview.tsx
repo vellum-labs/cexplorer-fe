@@ -699,7 +699,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         title={
                           <div className='flex items-center gap-1'>
                             <span>DReps</span>
-                            <span className='text-sm font-normal text-grayTextPrimary'>
+                            <span className='text-sm font-regular text-grayTextPrimary'>
                               {query.data?.data?.total.drep.count}
                             </span>
                           </div>
@@ -763,7 +763,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         title={
                           <div className='flex items-center gap-1'>
                             <span>DReps</span>
-                            <span className='text-sm font-normal text-grayTextPrimary'>
+                            <span className='text-sm font-regular text-grayTextPrimary'>
                               {query.data?.data?.total.drep.count}
                             </span>
                           </div>
@@ -788,7 +788,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         title={
                           <div className='flex items-center gap-1'>
                             <span>SPOs</span>
-                            <span className='text-sm font-normal text-grayTextPrimary'>
+                            <span className='text-sm font-regular text-grayTextPrimary'>
                               {query.data?.data?.total.spo.count}
                             </span>
                           </div>
@@ -858,7 +858,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         title={
                           <div className='flex items-center gap-1'>
                             <span>SPOs</span>
-                            <span className='text-sm font-normal text-grayTextPrimary'>
+                            <span className='text-sm font-regular text-grayTextPrimary'>
                               {query.data?.data?.total.spo.count}
                             </span>
                           </div>

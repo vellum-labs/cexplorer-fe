@@ -30,7 +30,7 @@ export const ScriptDetailOverview = ({ query }: Props) => {
               label: "dApp",
               value: (
                 <LabelBadge
-                  className='text-[14px] font-normal'
+                  className='text-[14px] font-regular'
                   variant='textOnly'
                   label={data.label}
                   extra={data.label.extra}

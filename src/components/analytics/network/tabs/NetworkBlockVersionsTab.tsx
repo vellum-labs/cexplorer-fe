@@ -55,7 +55,7 @@ export const NetworkBlockVersionsTab: FC = () => {
               <p className='text-2xl font-semibold'>
                 {latestBlockVersion.toFixed(1)}
               </p>
-              <p className='text-xs font-normal leading-4 text-grayTextPrimary'>
+              <p className='text-xs font-regular leading-4 text-grayTextPrimary'>
                 This page provides insights into Cardano's hard fork events by
                 analyzing the last block minted by each active staking pool with
                 a minimum of one block produced per epoch.

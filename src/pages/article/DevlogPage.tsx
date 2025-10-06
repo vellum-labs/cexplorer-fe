@@ -43,7 +43,7 @@ export const DevlogPage: FC = () => {
       <div className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col items-center'>
           <h1>What’s new?</h1>
-          <p className='mt-1.5 font-light text-grayTextPrimary'>
+          <p className='mt-1.5 font-regular text-grayTextPrimary'>
             Find concise summaries of all Cexplorer.io updates
           </p>
           <Accordion

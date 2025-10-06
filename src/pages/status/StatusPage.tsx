@@ -114,7 +114,7 @@ export const StatusPage: FC = () => {
       <div className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col items-center'>
           <h1>Status</h1>
-          <p className='mt-1.5 font-light text-grayTextPrimary'>
+          <p className='mt-1.5 font-regular text-grayTextPrimary'>
             Check and share your current status for quick troubleshooting.
           </p>
           <div className='mt-5 flex w-full max-w-[800px] flex-col gap-3 rounded-m border border-border p-3'>

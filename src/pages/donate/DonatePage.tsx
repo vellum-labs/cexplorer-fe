@@ -173,7 +173,7 @@ export const DonatePage = () => {
       <div className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
         <p className='mt-4 text-sm font-semibold text-primary'>Donation</p>
         <h1 className='mb-2'>Fuel the Future of Cexplorer</h1>
-        <p className='font-light text-grayTextPrimary'>
+        <p className='font-regular text-grayTextPrimary'>
           Your support helps us operate, maintain and improve everything on
           Cexplorer.io
         </p>
@@ -217,7 +217,7 @@ export const DonatePage = () => {
             <h2>Donate</h2>
             <div className='flex flex-wrap justify-between gap-2'>
               <div className='flex flex-col'>
-                <p className='mt-2 font-light text-grayTextPrimary'>
+                <p className='mt-2 font-regular text-grayTextPrimary'>
                   Thank you for supporting the development of independent
                   Cardano explorer! ❤️
                 </p>
@@ -331,11 +331,11 @@ export const DonatePage = () => {
               <img className='hidden shrink md:block' src={CexLogo} />
               <div className='flex flex-col gap-1.5'>
                 <h2>Stake with Cexplorer.io</h2>
-                <p className='max-w-[350px] font-light text-grayTextPrimary'>
+                <p className='max-w-[350px] font-regular text-grayTextPrimary'>
                   Support Cexplorer and earn staking rewards by delegating your
                   ADA to our pool.
                 </p>
-                <p className='max-w-[350px] font-light text-grayTextPrimary'>
+                <p className='max-w-[350px] font-regular text-grayTextPrimary'>
                   Enjoy top-tier infrastructure and a win-win for both you and
                   us!
                 </p>

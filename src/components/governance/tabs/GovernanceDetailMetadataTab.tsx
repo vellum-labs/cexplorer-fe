@@ -37,7 +37,7 @@ export const GovernanceDetailMetadataTab: FC<
     {
       title: "Title",
       value: (
-        <div className='overflow-wrap-anywhere max-w-full break-words p-1 font-normal text-grayTextPrimary'>
+        <div className='overflow-wrap-anywhere max-w-full break-words p-1 font-regular text-grayTextPrimary'>
           {anchor?.offchain?.name ? (
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
@@ -55,7 +55,7 @@ export const GovernanceDetailMetadataTab: FC<
     {
       title: "Abstracts",
       value: (
-        <div className='overflow-wrap-anywhere max-w-full break-words p-1 font-normal text-grayTextPrimary'>
+        <div className='overflow-wrap-anywhere max-w-full break-words p-1 font-regular text-grayTextPrimary'>
           {anchor?.offchain?.abstract ? (
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
@@ -74,7 +74,7 @@ export const GovernanceDetailMetadataTab: FC<
     {
       title: "Rationale",
       value: (
-        <div className='overflow-wrap-anywhere max-w-full break-words p-1 font-normal text-grayTextPrimary'>
+        <div className='overflow-wrap-anywhere max-w-full break-words p-1 font-regular text-grayTextPrimary'>
           {anchor?.offchain?.rationale ? (
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
