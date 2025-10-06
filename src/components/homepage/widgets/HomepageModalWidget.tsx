@@ -141,7 +141,7 @@ export const HomepageModalWidget: FC<HomepageModalWidgetProps> = ({
             transform: "rotateY(180deg)",
           }}
         >
-          <div className='flex flex-col items-start gap-3 p-1.5'>
+          <div className='flex flex-col items-start gap-1.5 p-1.5'>
             <h3 className='text-lg font-bold'>Detail information</h3>
             <div
               className='w-fit'

@@ -28,7 +28,7 @@ export const SettingsMobileItemCurrency: FC = () => {
         <SelectTrigger className='w-[90px]'>
           <SelectValue
             placeholder={
-              <div className='flex w-full items-center justify-between gap-1 uppercase'>
+              <div className='flex w-full items-center justify-between gap-1/2 uppercase'>
                 <span>{currencies[currency].value}</span>
               </div>
             }
@@ -37,7 +37,7 @@ export const SettingsMobileItemCurrency: FC = () => {
         <SelectContent align='end'>
           {Object.entries(currencies).map(([key, value]) => (
             <SelectItem key={key} value={key}>
-              <div className='flex w-full items-center justify-between gap-1 uppercase'>
+              <div className='flex w-full items-center justify-between gap-1/2 uppercase'>
                 <span>{value.value}</span>
                 {/* <img width={15} height={15} alt='flag' src={value.image} /> */}
               </div>

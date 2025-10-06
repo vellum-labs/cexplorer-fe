@@ -20,7 +20,7 @@ export const ScriptsTabItem = () => {
 
   if (query.isLoading) {
     return (
-      <div className='flex flex-col gap-3'>
+      <div className='flex flex-col gap-1.5'>
         <LoadingSkeleton height='28px' width='120px' rounded='full' />
         <LoadingSkeleton rounded='xl' height='380px' />
       </div>
@@ -28,8 +28,8 @@ export const ScriptsTabItem = () => {
   }
 
   return (
-    <div className='flex flex-col gap-3'>
-      <div className='flex w-fit gap-2 rounded-full border border-border bg-darker px-1.5 py-1/2 text-xs font-medium shadow'>
+    <div className='flex flex-col gap-1.5'>
+      <div className='flex w-fit gap-1 rounded-full border border-border bg-darker px-1.5 py-1/2 text-xs font-medium shadow'>
         Total Script Size {totalSize}kB
       </div>
       {query.data?.data.all_outputs
@@ -39,7 +39,7 @@ export const ScriptsTabItem = () => {
             key={index}
             className='flex flex-col rounded-xl border border-b border-border bg-darker px-2 py-1.5 shadow'
           >
-            <div className='flex flex-wrap items-center gap-2'>
+            <div className='flex flex-wrap items-center gap-1'>
               <div className='w-fit rounded-md border border-border bg-background px-1 py-1/2 text-xs font-medium'>
                 Script #{index + 1}
               </div>
@@ -56,7 +56,7 @@ export const ScriptsTabItem = () => {
               )}
             </div>
 
-            <div className='mt-2 flex flex-col gap-2 text-sm'>
+            <div className='mt-2 flex flex-col gap-1 text-sm'>
               <span className=''>
                 Script Hash:{" "}
                 <ScriptCell hash={output.reference_script?.hash || ""} />
@@ -72,7 +72,7 @@ export const ScriptsTabItem = () => {
               {output?.datum_hash && (
                 <span className='mt-1'>
                   Redeemer Data Hash:{" "}
-                  <span className='flex items-center gap-2'>
+                  <span className='flex items-center gap-1'>
                     <Link
                       to='/datum'
                       search={{

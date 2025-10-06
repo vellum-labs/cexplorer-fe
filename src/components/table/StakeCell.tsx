@@ -13,7 +13,7 @@ export const StakeCell = ({ stake, maxStake }: StakeCellProps) => {
   const percent = ((stake / maxStake) * 100).toFixed(1);
 
   return (
-    <div className='flex flex-col gap-1'>
+    <div className='flex flex-col gap-1/2'>
       <span className='text-[12px] font-semibold text-grayTextPrimary'>
         {formatNumber(ada)}
       </span>

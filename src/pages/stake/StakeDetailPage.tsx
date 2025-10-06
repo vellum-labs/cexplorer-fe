@@ -142,8 +142,8 @@ export const StakeDetailPage: FC = () => {
         <WatchlistSection ident={address} isLoading={stakeQuery.isLoading} />
       </div>
       <section className='flex w-full justify-center'>
-        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile md:px-desktop xl:flex-nowrap xl:justify-start'>
-          <div className='flex grow basis-[980px] flex-wrap items-stretch gap-5'>
+        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 px-mobile md:px-desktop xl:flex-nowrap xl:justify-start'>
+          <div className='flex grow basis-[980px] flex-wrap items-stretch gap-3'>
             {stakeQuery.isLoading || stakeQuery.isError ? (
               <>
                 <LoadingSkeleton

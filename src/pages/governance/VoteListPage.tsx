@@ -175,7 +175,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
               : "SPO";
 
         return (
-          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-lg border border-border px-[6px]'>
+          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1/2 rounded-lg border border-border px-[6px]'>
             {role === "DRep" && <User className='text-primary' size={12} />}
             {role === "CC" && <Landmark className='text-primary' size={12} />}
             {role === "SPO" && <Route className='text-primary' size={12} />}
@@ -196,9 +196,9 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
           changeFilterByKey("voter_role", filterDraft["voter_role"]),
         onReset: () => changeFilterByKey("voter_role"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-2 py-1'>
+          <div className='flex flex-col gap-1 px-2 py-1'>
             {["ConstitutionalCommittee", "SPO", "DRep"].map(val => (
-              <label className='flex items-center gap-2' key={val}>
+              <label className='flex items-center gap-1' key={val}>
                 <input
                   type='radio'
                   name='status'
@@ -263,9 +263,9 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
         onFilter: () => changeFilterByKey("vote", filterDraft["vote"]),
         onReset: () => changeFilterByKey("vote"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-2 py-1'>
+          <div className='flex flex-col gap-1 px-2 py-1'>
             {["Yes", "No", "Abstain"].map(val => (
-              <label className='flex items-center gap-2' key={val}>
+              <label className='flex items-center gap-1' key={val}>
                 <input
                   type='radio'
                   name='status'
@@ -377,11 +377,11 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
           label: <span className=''>Votes</span>,
         },
       ]}
-      title={<div className='flex items-center gap-1'>All Votes</div>}
+      title={<div className='flex items-center gap-1/2'>All Votes</div>}
     >
       <div className={`w-full max-w-desktop ${!poolId ? "px-2 py-3" : ""}`}>
-        <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-          <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
+        <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+          <div className='flex w-full flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
             {votesQuery.isLoading || votesQuery.isFetching ? (
               <LoadingSkeleton height='27px' width={"220px"} />
             ) : totalItems !== undefined ? (
@@ -394,7 +394,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
             )}
 
             <div className='flex w-full justify-end md:hidden'>
-              <div className='flex items-center gap-2 md:hidden'>
+              <div className='flex items-center gap-1 md:hidden'>
                 <ExportButton columns={columns} items={items} />
                 <TableSettingsDropdown
                   rows={rows}
@@ -415,7 +415,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
             </div>
           </div>
 
-          <div className='flex gap-2'>
+          <div className='flex gap-1'>
             <TableSearchInput
               placeholder='Search your results...'
               value={tableSearch}
@@ -447,7 +447,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
               setSearchPrefix={setSearchPrefix}
               showPrefixPopup={true}
             />
-            <div className='hidden items-center gap-2 md:flex'>
+            <div className='hidden items-center gap-1 md:flex'>
               <ExportButton columns={columns} items={items} />
               <TableSettingsDropdown
                 rows={rows}
@@ -468,13 +468,13 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
           </div>
         </div>
         {hasFilter && (
-          <div className='flex flex-wrap items-center gap-1 md:flex-nowrap'>
+          <div className='flex flex-wrap items-center gap-1/2 md:flex-nowrap'>
             {Object.entries(filter).map(
               ([key, value]) =>
                 value && (
                   <div
                     key={key}
-                    className='mb-1 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
+                    className='mb-1 flex w-fit items-center gap-1/2 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
                   >
                     <span>
                       {key[0].toUpperCase() + key.split("_").join(" ").slice(1)}

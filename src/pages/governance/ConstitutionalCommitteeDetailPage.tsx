@@ -66,14 +66,14 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         {isLoading ? (
-          <div className='flex w-full flex-wrap gap-4'>
+          <div className='flex w-full flex-wrap gap-2'>
             <LoadingSkeleton width='426px' height='140px' rounded='xl' />
             <LoadingSkeleton width='426px' height='140px' rounded='xl' />
             <LoadingSkeleton width='426px' height='140px' rounded='xl' />
           </div>
         ) : (
-          <div className='flex h-full w-full flex-wrap items-stretch gap-4 lg:flex-nowrap'>
-            <div className='bg-bgColor flex w-[426px] flex-grow-0 flex-col gap-4 rounded-xl border border-border p-3 shadow-sm'>
+          <div className='flex h-full w-full flex-wrap items-stretch gap-2 lg:flex-nowrap'>
+            <div className='bg-bgColor flex w-[426px] flex-grow-0 flex-col gap-2 rounded-xl border border-border p-3 shadow-sm'>
               <h3 className='text-textPrimary text-lg font-semibold'>About</h3>
 
               <div className='flex items-center justify-start text-sm'>
@@ -103,8 +103,8 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
               </div>
             </div>
 
-            <div className='bg-bgColor flex w-[426px] flex-grow-0 flex-col gap-3 rounded-xl border border-border p-3 shadow-sm'>
-              <div className='flex items-center gap-1'>
+            <div className='bg-bgColor flex w-[426px] flex-grow-0 flex-col gap-1.5 rounded-xl border border-border p-3 shadow-sm'>
+              <div className='flex items-center gap-1/2'>
                 <div className='flex h-8 w-8 items-center justify-center'>
                   <FileText size={18} className='text-primary' />
                 </div>

@@ -16,7 +16,7 @@ export const HeaderBannerSubtitle: FC<BlockDetailSubTitleProps> = ({
   className,
 }) => {
   return (
-    <div className={`mb-3 mt-1 flex items-center gap-3 ${className}`}>
+    <div className={`mb-3 mt-1 flex items-center gap-1.5 ${className}`}>
       <span className='text-grayTextPrimary'>
         {title ?? "Hash"}: {hashString}
       </span>

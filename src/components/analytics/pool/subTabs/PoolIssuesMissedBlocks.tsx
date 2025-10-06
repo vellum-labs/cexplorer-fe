@@ -192,8 +192,8 @@ export const PoolIssuesMissedBlocks: FC = () => {
         value
         className='mb-1.5 h-[100px] max-h-[100px] !flex-row items-center !gap-1'
       />
-      <div className='mb-1.5 flex w-full flex-col justify-between gap-3 min-[580px]:flex-row lg:items-center lg:gap-0'>
-        <div className='hidden gap-2 lg:flex'>
+      <div className='mb-1.5 flex w-full flex-col justify-between gap-1.5 min-[580px]:flex-row lg:items-center lg:gap-0'>
+        <div className='hidden gap-1 lg:flex'>
           {epochButtons.map(({ key, title }) => (
             <Button
               key={key}
@@ -217,14 +217,14 @@ export const PoolIssuesMissedBlocks: FC = () => {
             closeOnSelect
           />
         </div>
-        <div className='flex flex-wrap items-center gap-4'>
-          <div className='flex gap-1 text-xs'>
+        <div className='flex flex-wrap items-center gap-2'>
+          <div className='flex gap-1/2 text-xs'>
             <span className='text-grayTextPrimary'>Monitored epochs</span>
             <span>
               {miscConst?.epoch?.no ? miscConst?.epoch?.no - epochCount : 0}
             </span>
           </div>
-          <div className='flex gap-1 text-xs'>
+          <div className='flex gap-1/2 text-xs'>
             <span className='text-grayTextPrimary'>
               Minimum estimated blocks
             </span>
@@ -234,7 +234,7 @@ export const PoolIssuesMissedBlocks: FC = () => {
               ).toFixed(2)}
             </span>
           </div>
-          <div className='flex gap-1 text-xs'>
+          <div className='flex gap-1/2 text-xs'>
             <span className='text-grayTextPrimary'>Allowed deviation</span>
             <span>
               {mintedBlocks && estimatedBlocks
@@ -249,8 +249,8 @@ export const PoolIssuesMissedBlocks: FC = () => {
         </div>
       </div>
 
-      <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-        <div className='flex w-full items-center justify-between gap-2'>
+      <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+        <div className='flex w-full items-center justify-between gap-1'>
           {query.isLoading ? (
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : query.isError ? (

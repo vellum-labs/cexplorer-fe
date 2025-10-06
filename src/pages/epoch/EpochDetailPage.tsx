@@ -125,7 +125,7 @@ const EpochDetailPage: FC = () => {
             <p className='mt-1 text-sm'>
               The current epoch is <strong>{currentEpoch}</strong>.
             </p>
-            <div className='mt-1.5 flex items-center gap-3'>
+            <div className='mt-1.5 flex items-center gap-1.5'>
               <Button
                 size='md'
                 className='cursor-pointer px-1'
@@ -153,8 +153,8 @@ const EpochDetailPage: FC = () => {
       ) : (
         <>
           <section className='flex w-full justify-center'>
-            <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile md:px-desktop xl:flex-nowrap xl:justify-start'>
-              <div className='flex grow basis-[980px] flex-wrap items-stretch gap-5'>
+            <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 px-mobile md:px-desktop xl:flex-nowrap xl:justify-start'>
+              <div className='flex grow basis-[980px] flex-wrap items-stretch gap-3'>
                 {isLoading ? (
                   <>
                     <LoadingSkeleton

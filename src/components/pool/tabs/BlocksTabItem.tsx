@@ -35,7 +35,7 @@ const BlocksTabItem: FC<BlocksTabItemProps> = ({
         blockCounts={blockCounts}
         probabilities={probabilities}
       />
-      <div className='flex flex-col items-end gap-4'>
+      <div className='flex flex-col items-end gap-2'>
         <PoolBlocksTable poolId={id} />
       </div>
     </div>

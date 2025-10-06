@@ -228,7 +228,7 @@ export const usePoolList = ({
         <div>
           {enableSort && !(selectedItem === "Top Margins with Delegators") ? (
             <div
-              className='flex w-fit cursor-pointer items-center gap-1'
+              className='flex w-fit cursor-pointer items-center gap-1/2'
               onClick={() => {
                 if (!setList) {
                   navigate({
@@ -286,11 +286,11 @@ export const usePoolList = ({
         const fixedPoolCapUsed = poolCapUsed ? poolCapUsed.toFixed(2) : 0;
 
         return (
-          <div className='flex flex-col gap-3'>
+          <div className='flex flex-col gap-1.5'>
             <span className='text-right text-grayTextPrimary'>
               <AdaWithTooltip data={item.active_stake} />
             </span>
-            <div className='flex items-center justify-end gap-2'>
+            <div className='flex items-center justify-end gap-1'>
               <div
                 className={`relative h-3 max-w-20 overflow-hidden rounded-[4px] ${
                   theme === "dark" ? "bg-[#505359]" : "bg-[#E4E7EC]"
@@ -318,7 +318,7 @@ export const usePoolList = ({
         enableSort && !(selectedItem === "Top Margins with Delegators") ? (
           <div className='flex w-full justify-end'>
             <div
-              className='flex w-fit cursor-pointer items-center gap-1'
+              className='flex w-fit cursor-pointer items-center gap-1/2'
               onClick={() => {
                 if (!setList) {
                   navigate({
@@ -383,7 +383,7 @@ export const usePoolList = ({
 
         return (
           <div className='w-full justify-end'>
-            <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-1/2'>
               <RoaDiffArrow color={lifetimeRoa} />
               <p className='text-left text-grayTextPrimary'>
                 {item?.stats?.lifetime?.roa
@@ -417,7 +417,7 @@ export const usePoolList = ({
                 />
               )}
             </div>
-            <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-1/2'>
               <RoaDiffArrow color={recentRoa} />
               <p className='text-left text-grayTextPrimary'>
                 {item?.stats?.recent?.roa
@@ -433,7 +433,7 @@ export const usePoolList = ({
         <div className='flex'>
           {enableSort && !(selectedItem === "Top Margins with Delegators") ? (
             <div
-              className='flex w-fit cursor-pointer items-center gap-1'
+              className='flex w-fit cursor-pointer items-center gap-1/2'
               onClick={() => {
                 if (!setList) {
                   navigate({
@@ -523,8 +523,8 @@ export const usePoolList = ({
         onFilter: () => changeFilterByKey("is_drep", filterDraft["is_drep"]),
         onReset: () => changeFilterByKey("is_drep"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-2 py-1'>
-            <label className='flex items-center gap-2'>
+          <div className='flex flex-col gap-1 px-2 py-1'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='drep'
@@ -537,7 +537,7 @@ export const usePoolList = ({
               />
               <span className='text-sm'>Yes</span>
             </label>
-            <label className='flex items-center gap-2'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='drep'
@@ -601,7 +601,7 @@ export const usePoolList = ({
 
         return (
           <div className='text-right text-grayTextPrimary'>
-            <div className='flex items-center justify-end gap-2'>
+            <div className='flex items-center justify-end gap-1'>
               <span>{`${formatNumber(totalPoolBlocks.totalMintedBlocks)} / ${formatNumber(totalEstimatedBlocksFixed)}`}</span>
               <PoolListEchart
                 ref={tableRef}
@@ -642,7 +642,7 @@ export const usePoolList = ({
         <div className='flex w-full justify-end'>
           {enableSort && !(selectedItem === "Top Margins with Delegators") ? (
             <div
-              className='flex w-full cursor-pointer items-center justify-end gap-1'
+              className='flex w-full cursor-pointer items-center justify-end gap-1/2'
               onClick={() => {
                 if (!setList) {
                   navigate({
@@ -681,7 +681,7 @@ export const usePoolList = ({
         const pledged = item?.pledged ?? 0;
 
         return (
-          <div className='flex items-center justify-end gap-1'>
+          <div className='flex items-center justify-end gap-1/2'>
             {pledged >= pledge ? (
               <Check size={11} className='translate-y-[1px] stroke-[#17B26A]' />
             ) : (
@@ -689,7 +689,7 @@ export const usePoolList = ({
             )}
             <Tooltip
               content={
-                <div className='flex w-[140px] items-center gap-1'>
+                <div className='flex w-[140px] items-center gap-1/2'>
                   <span>Active pledge stake: {lovelaceToAda(pledged)}</span>
                 </div>
               }
@@ -720,7 +720,7 @@ export const usePoolList = ({
               setList("pledge");
             }}
           >
-            <div className='flex w-fit cursor-pointer items-center gap-1'>
+            <div className='flex w-fit cursor-pointer items-center gap-1/2'>
               <span>Pledge</span>
               <SortArrow direction={order === "pledge" ? sort : undefined} />
             </div>
@@ -741,7 +741,7 @@ export const usePoolList = ({
           pledge > 0 ? Math.round(item.live_stake / pledge) : 0;
 
         return (
-          <div className='flex items-center justify-end gap-1'>
+          <div className='flex items-center justify-end gap-1/2'>
             <Filter
               size={11}
               color={getPledgeColor(pledge_leverage)}
@@ -757,7 +757,7 @@ export const usePoolList = ({
         enableSort && !(selectedItem === "Top Margins with Delegators") ? (
           <div className='flex w-full justify-end'>
             <div
-              className='flex w-fit cursor-pointer items-center justify-end gap-1'
+              className='flex w-fit cursor-pointer items-center justify-end gap-1/2'
               onClick={() => {
                 if (!setList) {
                   navigate({
@@ -815,7 +815,7 @@ export const usePoolList = ({
               setList("delegators");
             }}
           >
-            <div className='flex w-fit cursor-pointer items-center gap-1'>
+            <div className='flex w-fit cursor-pointer items-center gap-1/2'>
               <span>Delegators</span>
               <SortArrow
                 direction={order === "delegators" ? sort : undefined}
@@ -864,7 +864,7 @@ export const usePoolList = ({
               setList("average_stake");
             }}
           >
-            <div className='flex w-fit cursor-pointer items-center gap-1'>
+            <div className='flex w-fit cursor-pointer items-center gap-1/2'>
               <span className='text-nowrap'>Average stake</span>
               <SortArrow
                 direction={order === "average_stake" ? sort : undefined}
@@ -889,7 +889,7 @@ export const usePoolList = ({
         );
       },
       title: (
-        <div className='flex w-full items-center justify-end gap-1 text-nowrap'>
+        <div className='flex w-full items-center justify-end gap-1/2 text-nowrap'>
           <p className='text-right'>Selected vote</p>
           <X
             size={15}
@@ -947,7 +947,7 @@ export const usePoolList = ({
         <div className='flex w-full justify-end'>
           {enableSort && !(selectedItem === "Top Margins with Delegators") ? (
             <div
-              className='flex w-fit cursor-pointer items-center gap-1'
+              className='flex w-fit cursor-pointer items-center gap-1/2'
               onClick={() => {
                 if (!setList) {
                   navigate({

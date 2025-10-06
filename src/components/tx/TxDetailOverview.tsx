@@ -63,7 +63,7 @@ const TxDetailOverview = ({ query }: Props) => {
     {
       label: "Hash",
       value: (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <span title={data?.hash} className='text-sm'>
             {formatString(data?.hash || "", "long")}
           </span>
@@ -74,11 +74,11 @@ const TxDetailOverview = ({ query }: Props) => {
     {
       label: "Date",
       value: (
-        <div className='flex flex-wrap items-center gap-1 text-sm'>
+        <div className='flex flex-wrap items-center gap-1/2 text-sm'>
           <span className='font-medium leading-none'>
             <DateCell className='' time={data?.block?.time} />
           </span>
-          <span className='flex items-center gap-1 pr-1/2 text-grayTextPrimary'>
+          <span className='flex items-center gap-1/2 pr-1/2 text-grayTextPrimary'>
             ({formatDate(data?.block?.time ? data?.block?.time : undefined)}){" "}
             <Clock size={14} className='h-full shrink-0 text-grayTextPrimary' />
           </span>
@@ -123,7 +123,7 @@ const TxDetailOverview = ({ query }: Props) => {
       ? {
           label: "Slot",
           value: (
-            <div className='flex flex-wrap items-center gap-1 text-sm leading-none'>
+            <div className='flex flex-wrap items-center gap-1/2 text-sm leading-none'>
               <span className='font-medium text-grayTextPrimary'>
                 {data?.invalid_before ? formatNumber(data?.block.slot_no) : "-"}
               </span>
@@ -139,7 +139,7 @@ const TxDetailOverview = ({ query }: Props) => {
       ? {
           label: "TTL",
           value: (
-            <div className='flex items-center gap-1 text-sm'>
+            <div className='flex items-center gap-1/2 text-sm'>
               <Lock
                 size={16}
                 strokeWidth={2.5}
@@ -162,7 +162,7 @@ const TxDetailOverview = ({ query }: Props) => {
       ? {
           label: "Deposit",
           value: (
-            <div className='flex items-center gap-1 text-sm'>
+            <div className='flex items-center gap-1/2 text-sm'>
               <span className='font-medium'>
                 <AdaWithTooltip data={data.deposit} />
               </span>
@@ -233,7 +233,7 @@ const TxDetailOverview = ({ query }: Props) => {
   }, [data?.metadata]);
 
   return (
-    <div className='flex h-full w-full max-w-desktop flex-col gap-5 px-mobile lg:flex-row lg:px-desktop'>
+    <div className='flex h-full w-full max-w-desktop flex-col gap-3 px-mobile lg:flex-row lg:px-desktop'>
       {!data ? (
         <>
           <LoadingSkeleton
@@ -241,7 +241,7 @@ const TxDetailOverview = ({ query }: Props) => {
             rounded='xl'
             className='grow basis-[450px]'
           />
-          <section className='flex w-full flex-col gap-5 lg:h-[400px] lg:w-[400px] lg:justify-between'>
+          <section className='flex w-full flex-col gap-3 lg:h-[400px] lg:w-[400px] lg:justify-between'>
             <LoadingSkeleton
               className='basis-[400px] lg:basis-[400px]'
               height='110px'
@@ -270,7 +270,7 @@ const TxDetailOverview = ({ query }: Props) => {
             className='max-h-[450px] pt-2'
             columnGap='clamp(48px, 8vw, 150px)'
           />
-          <section className='flex w-full flex-col gap-5 lg:h-[400px] lg:w-[400px] lg:justify-between'>
+          <section className='flex w-full flex-col gap-3 lg:h-[400px] lg:w-[400px] lg:justify-between'>
             <MintedByCard
               poolInfo={data?.pool}
               isGenesisBlock={data?.block?.epoch_no === null}

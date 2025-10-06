@@ -27,12 +27,12 @@ export const AssetDetailOverview: FC<AssetDetailOverviewProps> = ({
     useAssetDetail({ data, type, formattedHex });
 
   return (
-    <section className='flex w-full flex-col gap-3'>
+    <section className='flex w-full flex-col gap-1.5'>
       <WatchlistSection
         ident={detailData?.fingerprint}
         isLoading={!!isLoading}
       />
-      <div className='flex flex-wrap gap-5'>
+      <div className='flex flex-wrap gap-3'>
         <div className='flex-grow basis-[390px] md:flex-shrink-0'>
           <OverviewCard
             title='Overview'

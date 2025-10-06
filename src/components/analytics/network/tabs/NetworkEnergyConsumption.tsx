@@ -70,7 +70,7 @@ export const NetworkEnergyConsumption: FC = () => {
   ];
 
   return (
-    <section className='flex w-full max-w-desktop flex-col gap-3 lg:flex-row'>
+    <section className='flex w-full max-w-desktop flex-col gap-1.5 lg:flex-row'>
       <AnalyticsGraph
         title='Cardano PoS vs. Bitcoin PoW'
         description="Overview: This comparison examines the energy efficiency advantages of Cardano's proof-of-stake consensus over Bitcoin's proof-of-work model."

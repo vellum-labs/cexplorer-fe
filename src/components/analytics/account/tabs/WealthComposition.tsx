@@ -55,7 +55,7 @@ export const WealthComposition = () => {
         key: "wallet_size",
         render: item => {
           return (
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-1'>
               <img src={getAnimalImageByName(Object.keys(item)[0])} />
               <p>
                 {Object.keys(item)[0].slice(0, 1).toUpperCase() +

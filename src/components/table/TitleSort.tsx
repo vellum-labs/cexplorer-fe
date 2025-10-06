@@ -28,7 +28,7 @@ export const TitleSort: FC<TitleSortProps> = ({
   return (
     <div className='flex w-full justify-end'>
       <div
-        className='flex w-fit cursor-pointer items-center gap-1 text-right'
+        className='flex w-fit cursor-pointer items-center gap-1/2 text-right'
         onClick={() => {
           navigate({
             search: {

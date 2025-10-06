@@ -101,7 +101,7 @@ const PoolDetailPage = () => {
         after: data?.pool_name?.name ?? "",
       }}
       title={
-        <span className='mt-1/2 flex w-full items-center gap-2'>
+        <span className='mt-1/2 flex w-full items-center gap-1'>
           {data?.pool_name.ticker && (
             <Image
               src={generateImageUrl(data?.pool_id || "", "ico", "pool")}

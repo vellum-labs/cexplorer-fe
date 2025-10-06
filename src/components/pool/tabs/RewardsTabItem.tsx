@@ -37,7 +37,7 @@ const RewardsTabItem: FC<RewardsTabItemProps> = ({ query }) => {
         membetPct={membetPct}
         operatorPct={operatorPct}
       />
-      <div className='flex flex-col items-end gap-4'>
+      <div className='flex flex-col items-end gap-2'>
         <PoolRewardsTable
           poolId={id}
           miscConst={miscConst}

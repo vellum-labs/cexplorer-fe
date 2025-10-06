@@ -64,7 +64,7 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
         <div className='mb-1 mt-1.5 w-full border-t border-border'></div>
       )}
       <div
-        className={`flex h-full ${startContent ? "items-start" : "items-stretch"} gap-2 pb-2 ${showTitleDivider ? "pt-0" : "pt-1"} ${startContent ? "flex-wrap justify-center sm:flex-nowrap" : ""}`}
+        className={`flex h-full ${startContent ? "items-start" : "items-stretch"} gap-1 pb-2 ${showTitleDivider ? "pt-0" : "pt-1"} ${startContent ? "flex-wrap justify-center sm:flex-nowrap" : ""}`}
       >
         {startContent}
         <div className={`flex w-full flex-col`}>

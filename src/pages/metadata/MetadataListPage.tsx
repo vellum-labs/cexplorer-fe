@@ -107,7 +107,7 @@ export const MetadataListPage: FC = () => {
         const label = findLabel("metadatum", item?.key, miscConst);
 
         return (
-          <div className='flex items-center gap-1'>
+          <div className='flex items-center gap-1/2'>
             <p title={String(item?.key)}>
               {item?.key ? formatNumber(item.key) : "-"}
             </p>
@@ -128,7 +128,7 @@ export const MetadataListPage: FC = () => {
     {
       key: "hash",
       render: item => (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           <Link
             to='/tx/$hash'
             params={{
@@ -209,8 +209,8 @@ export const MetadataListPage: FC = () => {
       breadcrumbItems={[{ label: "Metadata Transactions List" }]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
-        <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-          <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
+        <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+          <div className='flex w-full flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
             {metadataQuery.isLoading || metadataQuery.isFetching ? (
               <LoadingSkeleton height='27px' width={"220px"} />
             ) : totalItems > 0 ? (
@@ -221,7 +221,7 @@ export const MetadataListPage: FC = () => {
               ""
             )}
             <div className='flex w-full justify-end md:hidden'>
-              <div className='flex items-center gap-2 md:hidden'>
+              <div className='flex items-center gap-1 md:hidden'>
                 <ExportButton columns={columns} items={items} />
                 <TableSettingsDropdown
                   rows={rows}
@@ -242,7 +242,7 @@ export const MetadataListPage: FC = () => {
             </div>
           </div>
 
-          <div className='flex gap-2'>
+          <div className='flex gap-1'>
             <TableSearchInput
               placeholder='Search your results...'
               value={tableSearch}
@@ -264,7 +264,7 @@ export const MetadataListPage: FC = () => {
               searchPrefix={searchPrefix}
               setSearchPrefix={setSearchPrefix}
             />
-            <div className='hidden items-center gap-2 md:flex'>
+            <div className='hidden items-center gap-1 md:flex'>
               <ExportButton columns={columns} items={items} />
               <TableSettingsDropdown
                 rows={rows}

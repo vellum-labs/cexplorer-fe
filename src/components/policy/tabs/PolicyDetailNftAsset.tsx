@@ -151,7 +151,7 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
           <div className='hidden min-[500px]:block'>
             <ViewSwitch />
           </div>
-          <div className='flex w-full gap-2 min-[500px]:w-fit'>
+          <div className='flex w-full gap-1 min-[500px]:w-fit'>
             <TableSearchInput
               placeholder='Search by asset...'
               value={tableSearch}

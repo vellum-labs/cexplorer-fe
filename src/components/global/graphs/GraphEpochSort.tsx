@@ -53,7 +53,7 @@ export const GraphEpochSort = ({
       value: nftCount ? (
         "All time"
       ) : (
-        <span className='flex items-center gap-1'>
+        <span className='flex items-center gap-1/2'>
           All time (PRO feature) <Lock size={13} />
         </span>
       ),

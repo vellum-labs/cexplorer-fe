@@ -27,8 +27,8 @@ export const TermsPage = () => {
       </Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
         {query.isLoading ? (
-          <div className='mt-5 flex flex-col gap-10'>
-            <div className='flex flex-col items-center gap-8'>
+          <div className='mt-5 flex flex-col gap-5'>
+            <div className='flex flex-col items-center gap-4'>
               <LoadingSkeleton width='150px' height='30px' />
               <LoadingSkeleton width='160px' height='30px' />
             </div>

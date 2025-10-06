@@ -366,7 +366,7 @@ export const useBlockList = ({
     {
       key: "protocol",
       render: item => (
-        <div className='flex items-center justify-end gap-2'>
+        <div className='flex items-center justify-end gap-1'>
           <ProtocolDot
             protNo={Number(`${item.proto_major}.${item.proto_minor}`)}
           />
@@ -391,9 +391,9 @@ export const useBlockList = ({
         onFilter: () => changeFilterByKey("proto", filterDraft.proto),
         onReset: () => changeFilterByKey("proto"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-2 py-1'>
+          <div className='flex flex-col gap-1 px-2 py-1'>
             {(protocolVersions || []).map(version => (
-              <label key={`${version}`} className='flex items-center gap-2'>
+              <label key={`${version}`} className='flex items-center gap-1'>
                 <input
                   type='radio'
                   name='proto'

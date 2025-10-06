@@ -49,15 +49,15 @@ export const RewardsCheckerPage = () => {
   return (
     <PageBase
       metadataTitle='rewardsChecker'
-      title={<div className='flex items-center gap-1'>Rewards checker</div>}
+      title={<div className='flex items-center gap-1/2'>Rewards checker</div>}
       breadcrumbItems={[{ label: "Rewards checker" }]}
     >
       <section className='flex w-full flex-col items-center'>
-        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pb-3 pt-1.5 md:px-desktop xl:flex-nowrap xl:justify-start'></div>
+        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 px-mobile pb-3 pt-1.5 md:px-desktop xl:flex-nowrap xl:justify-start'></div>
       </section>
       <div className='w-full max-w-desktop px-mobile md:px-desktop'>
-        <div className='mb-2 flex flex-col gap-2'>
-          <div className='flex w-full items-center gap-1'>
+        <div className='mb-2 flex flex-col gap-1'>
+          <div className='flex w-full items-center gap-1/2'>
             <TextInput
               value={search}
               onchange={value => setSearch(value)}
@@ -76,7 +76,7 @@ export const RewardsCheckerPage = () => {
             <Link
               to='/stake/$stakeAddr'
               params={{ stakeAddr: submittedSearch }}
-              className='flex items-center gap-1 text-sm font-medium text-primary'
+              className='flex items-center gap-1/2 text-sm font-medium text-primary'
             >
               Address detail <ArrowRight color={colors.primary} size={15} />
             </Link>

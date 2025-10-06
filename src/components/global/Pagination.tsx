@@ -68,7 +68,7 @@ export const Pagination = ({
   };
 
   return (
-    <div className='flex w-full flex-col items-center gap-5'>
+    <div className='flex w-full flex-col items-center gap-3'>
       <PaginationComponent className='mt-2'>
         <PaginationContent>
           <PaginationItem>
@@ -182,7 +182,7 @@ const PageJump = ({
   };
 
   return (
-    <div className='flex items-center gap-2 text-sm'>
+    <div className='flex items-center gap-1 text-sm'>
       {/* <span>Jump to:</span>{" "} */}
       <input
         className='h-8 w-16 rounded-lg border border-border bg-background p-1/2 text-center text-text'

@@ -52,8 +52,8 @@ const DefaultErrorPage = ({ error }: { error: Error | null }) => {
   return (
     <>
       <SafeNavbar />
-      <section className='flex min-h-minHeight w-full flex-col items-center gap-12 px-2 py-5'>
-        <div className='flex w-full flex-col items-center gap-6'>
+      <section className='flex min-h-minHeight w-full flex-col items-center gap-6 px-2 py-5'>
+        <div className='flex w-full flex-col items-center gap-3'>
           <div className='flex h-[56px] w-[56px] items-center justify-center rounded-xl border border-border'>
             <CircleAlert size={26} />
           </div>
@@ -65,7 +65,7 @@ const DefaultErrorPage = ({ error }: { error: Error | null }) => {
             the problem.
           </p>
         </div>
-        <div className='flex w-full max-w-[880px] flex-col gap-4 rounded-2xl border border-border p-3'>
+        <div className='flex w-full max-w-[880px] flex-col gap-2 rounded-2xl border border-border p-3'>
           <h3>Error mesage</h3>
           <div className='border border-border'></div>
           <div
@@ -73,8 +73,8 @@ const DefaultErrorPage = ({ error }: { error: Error | null }) => {
           >
             {error?.message}
           </div>
-          <div className='flex items-center gap-4 rounded-lg border border-cardBg bg-darker px-3 py-2'>
-            <div className='flex min-h-[32px] min-w-[32px] items-center justify-center gap-4 rounded-[6px] border border-border bg-cardBg'>
+          <div className='flex items-center gap-2 rounded-lg border border-cardBg bg-darker px-3 py-2'>
+            <div className='flex min-h-[32px] min-w-[32px] items-center justify-center gap-2 rounded-[6px] border border-border bg-cardBg'>
               <CircleAlert size={14} className='text-primary' />
             </div>
             <span className='text-sm text-grayTextPrimary'>
@@ -105,7 +105,7 @@ const DefaultErrorPage = ({ error }: { error: Error | null }) => {
             />
           </div>
         </div>
-        <div className='flex w-full max-w-[880px] items-center justify-between gap-3 md:justify-center'>
+        <div className='flex w-full max-w-[880px] items-center justify-between gap-1.5 md:justify-center'>
           <Button
             size='md'
             label='Go back'

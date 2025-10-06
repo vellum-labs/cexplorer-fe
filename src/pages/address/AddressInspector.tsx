@@ -95,7 +95,7 @@ export const AddressInspector: FC = () => {
         }
 
         return (
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <span>{data?.address}</span>
             <Copy copyText={data?.address} className='translate-y-[2px]' />
           </div>
@@ -122,7 +122,7 @@ export const AddressInspector: FC = () => {
         }
 
         return (
-          <div className='flex flex-col gap-1'>
+          <div className='flex flex-col gap-1/2'>
             <span className='font-medium'>{addressTypeInfo.type}</span>
             <span className='text-sm text-grayTextPrimary'>
               {addressTypeInfo.network}
@@ -141,7 +141,7 @@ export const AddressInspector: FC = () => {
 
         if (isStakeAddress && data?.address) {
           return (
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-1'>
               <span>{data.address}</span>
               <Copy copyText={data.address} className='translate-y-[2px]' />
             </div>
@@ -153,7 +153,7 @@ export const AddressInspector: FC = () => {
         }
 
         return (
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <span>{addr?.rewardAddress}</span>
             <Copy
               copyText={addr?.rewardAddress}
@@ -220,7 +220,7 @@ export const AddressInspector: FC = () => {
         }
 
         return (
-          <div className='flex items-center gap-2 py-1.5'>
+          <div className='flex items-center gap-1 py-1.5'>
             <span className='max-w-[1000px] text-wrap break-words'>
               {rawHex}
             </span>
@@ -238,7 +238,7 @@ export const AddressInspector: FC = () => {
         }
 
         return (
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <span>{data?.payment}</span>
             <Copy copyText={data?.payment} className='translate-y-[2px]' />
           </div>
@@ -254,7 +254,7 @@ export const AddressInspector: FC = () => {
         }
 
         return (
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <span>{data?.stake}</span>
             <Copy copyText={data?.stake} className='translate-y-[2px]' />
           </div>
@@ -273,7 +273,7 @@ export const AddressInspector: FC = () => {
         breadcrumbItems={[{ label: "Address inspector" }]}
       >
         <section className='flex w-full justify-center'>
-          <div className='flex w-full max-w-desktop flex-col items-end gap-4 p-mobile md:p-desktop'>
+          <div className='flex w-full max-w-desktop flex-col items-end gap-2 p-mobile md:p-desktop'>
             <div className='flex w-full'>
               <TableSearchInput
                 value={search}
@@ -293,7 +293,7 @@ export const AddressInspector: FC = () => {
                     params={{
                       stakeAddr: data?.address as string,
                     }}
-                    className='flex items-center gap-1'
+                    className='flex items-center gap-1/2'
                   >
                     <span className='text-sm font-semibold text-primary'>
                       Stake detail
@@ -308,7 +308,7 @@ export const AddressInspector: FC = () => {
                     params={{
                       address: data?.address as string,
                     }}
-                    className='flex items-center gap-1'
+                    className='flex items-center gap-1/2'
                   >
                     <span className='text-sm font-semibold text-primary'>
                       Address detail

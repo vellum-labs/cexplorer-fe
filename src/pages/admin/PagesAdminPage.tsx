@@ -55,7 +55,7 @@ export const PagesAdminPage = () => {
   }, [tokens, address]);
 
   return (
-    <div className='flex min-h-minHeight flex-col items-center gap-2 p-mobile md:p-desktop'>
+    <div className='flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
       <Helmet>
         <meta charSet='utf-8' />
         <title>Admin Pages | Cexplorer.io</title>

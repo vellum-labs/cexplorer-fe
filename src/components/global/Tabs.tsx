@@ -160,7 +160,7 @@ const Tabs = ({
         </div>
         <div
           role='tablist'
-          className={`${withMargin ? "mb-3" : ""} flex w-full items-center gap-2 ${
+          className={`${withMargin ? "mb-3" : ""} flex w-full items-center gap-1 ${
             toRight ? "justify-end" : ""
           }`}
         >
@@ -174,7 +174,7 @@ const Tabs = ({
           {allowScroll ? (
             <div className='thin-scrollbar hidden w-full overflow-x-auto overflow-y-hidden lg:block'>
               <div
-                className={`flex ${tabParam ? "h-[35px]" : "h-[44px]"} mx-1/2 w-fit items-center gap-0.5 text-nowrap rounded-lg border border-borderFaded bg-darker font-medium shadow`}
+                className={`flex ${tabParam ? "h-[35px]" : "h-[44px]"} mx-1/2 w-fit items-center gap-1/4 text-nowrap rounded-lg border border-borderFaded bg-darker font-medium shadow`}
               >
                 {items.map((item, index) => (
                   // @ts-expect-error link
@@ -207,7 +207,7 @@ const Tabs = ({
             </div>
           ) : (
             <div
-              className={`hidden ${tabParam ? "h-[35px]" : "h-[44px]"} w-fit items-center gap-0.5 text-nowrap rounded-lg border border-borderFaded bg-darker font-medium shadow lg:flex`}
+              className={`hidden ${tabParam ? "h-[35px]" : "h-[44px]"} w-fit items-center gap-1/4 text-nowrap rounded-lg border border-borderFaded bg-darker font-medium shadow lg:flex`}
             >
               {items.map((item, index) => (
                 // @ts-expect-error link

@@ -15,7 +15,7 @@ export const InfoCard = ({
 }: InfoCardProps) => {
   return (
     <section
-      className={`flex h-[230px] grow flex-col gap-4 rounded-xl border border-border bg-cardBg px-3 py-2 ${className}`}
+      className={`flex h-[230px] grow flex-col gap-2 rounded-xl border border-border bg-cardBg px-3 py-2 ${className}`}
     >
       <div className='flex items-center gap-2'>
         <div className='rounded-lg border border-border p-1/2'>{icon}</div>

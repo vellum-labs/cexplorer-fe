@@ -19,7 +19,7 @@ const DelegationsTabItem = () => {
     {
       key: "address",
       render: item => (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <AddressTypeInitialsBadge address={item.view} />
           <AddressCell address={item.view} />
         </div>
@@ -35,7 +35,7 @@ const DelegationsTabItem = () => {
         const displayRole = isDrepDelegation ? "DRep" : "SPO";
 
         return (
-          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-lg border border-border px-[6px]'>
+          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1/2 rounded-lg border border-border px-[6px]'>
             {isDrepDelegation ? (
               <User size={12} className='text-primary' />
             ) : (

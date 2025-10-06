@@ -51,7 +51,7 @@ export const HomepageGridItem: FC<HomepageGridItemProps> = ({
         {<span className='text-lg font-semibold'>{title}</span>}
         {type === WidgetTypes.TABLE && (
           <Link to={link}>
-            <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-1/2'>
               <span className='text-sm font-semibold text-primary'>
                 {linkTitle}
               </span>

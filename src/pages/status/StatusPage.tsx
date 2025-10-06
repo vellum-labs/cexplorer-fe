@@ -117,12 +117,12 @@ export const StatusPage: FC = () => {
           <p className='mt-1.5 font-light text-grayTextPrimary'>
             Check and share your current status for quick troubleshooting.
           </p>
-          <div className='mt-5 flex w-full max-w-[800px] flex-col gap-6 rounded-lg border border-border p-3'>
+          <div className='mt-5 flex w-full max-w-[800px] flex-col gap-3 rounded-lg border border-border p-3'>
             <h3>Your status</h3>
-            <div className='flex w-full flex-col gap-4'>
+            <div className='flex w-full flex-col gap-2'>
               {statuses.map(
                 ({ badgeColor, badgeTitle, title, withoutPulse }) => (
-                  <div className='flex flex-col justify-between gap-1 min-[450px]:flex-row min-[450px]:items-center min-[450px]:gap-0'>
+                  <div className='flex flex-col justify-between gap-1/2 min-[450px]:flex-row min-[450px]:items-center min-[450px]:gap-0'>
                     <span className='text-sm font-medium text-grayTextPrimary'>
                       {title}
                     </span>
@@ -138,7 +138,7 @@ export const StatusPage: FC = () => {
               )}
             </div>
             <div className='border-t border-border pt-2'>
-              <div className='flex min-h-[80px] w-full items-center gap-4 rounded-lg bg-darker px-3 py-2'>
+              <div className='flex min-h-[80px] w-full items-center gap-2 rounded-lg bg-darker px-3 py-2'>
                 <div className='flex aspect-square w-[44px] items-center justify-center rounded-md bg-cardBg'>
                   <CircleAlert size={15} className='text-primary' />
                 </div>

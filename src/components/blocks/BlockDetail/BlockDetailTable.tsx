@@ -76,7 +76,7 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
     {
       key: "hash",
       render: item => (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           <p className='cursor-pointer text-primary'>
             <Link
               to='/tx/$hash'
@@ -157,7 +157,7 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
     <>
       <div className='flex w-full items-center justify-between'>
         <h1 className='text-lg font-semibold'>Transactions</h1>
-        <div className='flex gap-2'>
+        <div className='flex gap-1'>
           <ExportButton columns={columns} items={txs} />
           <TableSettingsDropdown
             rows={rows}

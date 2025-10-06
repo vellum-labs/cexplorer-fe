@@ -146,7 +146,7 @@ export const AddressDetailPage: FC = () => {
           ident: address,
         },
       ]}
-      title={<div className='flex items-center gap-1'>Address detail</div>}
+      title={<div className='flex items-center gap-1/2'>Address detail</div>}
       subTitle={
         <HeaderBannerSubtitle
           title='Address'
@@ -179,8 +179,8 @@ export const AddressDetailPage: FC = () => {
             stakeKey={rewardsAddress}
           />
         </div>
-        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pb-3 pt-1.5 md:px-desktop xl:flex-nowrap xl:justify-start'>
-          <div className='flex w-full shrink grow flex-wrap items-stretch gap-5'>
+        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 px-mobile pb-3 pt-1.5 md:px-desktop xl:flex-nowrap xl:justify-start'>
+          <div className='flex w-full shrink grow flex-wrap items-stretch gap-3'>
             {addressQuery.isLoading || addressQuery.isError ? (
               <>
                 <LoadingSkeleton

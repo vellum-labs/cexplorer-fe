@@ -148,11 +148,11 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
       title: "Address",
       value: renderWithException(
         swapDetail?.user?.address,
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           {swapDetail?.user?.balance && (
             <Image src={Icon} className='h-4 w-4 rounded-full' />
           )}
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <Link
               to={"/address/$address"}
               params={{
@@ -180,7 +180,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
       title: "Transaction",
       value: renderWithException(
         swapDetail?.tx_hash,
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           <Link
             to='/tx/$hash'
             params={{
@@ -233,7 +233,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
       title: "Pair",
       value: renderWithException(
         swapDetail?.token_in && swapDetail?.token_out,
-        <div className='flex items-center gap-3'>
+        <div className='flex items-center gap-1.5'>
           <Link
             to='/asset/$fingerprint'
             params={{
@@ -314,7 +314,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
       value: renderWithException(
         swapDetail?.status,
         <div className='flex items-center'>
-          <p className='flex w-fit items-center gap-1 rounded-md border border-border px-1 text-sm'>
+          <p className='flex w-fit items-center gap-1/2 rounded-md border border-border px-1 text-sm'>
             {isSuccess ? (
               <Check className='text-greenText' size={15} />
             ) : isCanceled ? (
@@ -345,7 +345,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
       value: renderWithException(
         typeof swapDetail?.is_dexhunter === "boolean",
         <div className='flex items-center'>
-          <p className='flex w-fit items-center gap-1 rounded-md border border-border px-1 text-sm'>
+          <p className='flex w-fit items-center gap-1/2 rounded-md border border-border px-1 text-sm'>
             {isSuccess ? (
               <Image src={DexhunterIcon} className='h-4 w-4 rounded-full' />
             ) : (
@@ -363,7 +363,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
         swapDetail?.dex,
         <div className='flex items-center'>
           <p
-            className={`flex w-fit items-center gap-1 rounded-xl border px-1 text-sm`}
+            className={`flex w-fit items-center gap-1/2 rounded-xl border px-1 text-sm`}
             style={{
               backgroundColor: dex?.bgColor ?? "transparent",
               borderColor: dex?.borderColor ?? "var(--border)",
@@ -415,7 +415,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
       >
         <>
           <h2 className='text-base'>Overview</h2>
-          <div className='flex flex-col gap-4 pt-2'>
+          <div className='flex flex-col gap-2 pt-2'>
             {detailItems.map(({ key, title, value, divider }) => (
               <div key={key}>
                 <div className='flex w-full items-start'>

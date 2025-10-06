@@ -17,11 +17,11 @@ export const HomepageCardanoLiveStake: FC<HomepageCardanoLiveStakeProps> = ({
 
   return (
     <div className='mx-1.5 min-h-[110px] flex-grow'>
-      <div className='flex w-full flex-col gap-2 pb-2'>
+      <div className='flex w-full flex-col gap-1 pb-2'>
         <span className='text-3xl font-semibold'>
           <AdaWithTooltip data={liveStake ?? 0} />
         </span>
-        <div className='flex items-center gap-3'>
+        <div className='flex items-center gap-1.5'>
           <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#FEC84B]'>
             <span
               className='absolute left-0 block h-2 rounded-bl-[4px] rounded-tl-[4px] bg-[#47CD89]'
@@ -36,7 +36,7 @@ export const HomepageCardanoLiveStake: FC<HomepageCardanoLiveStakeProps> = ({
         </div>
       </div>
       <div className='flex flex-grow items-center pb-[11px]'>
-        <div className='flex min-w-[160px] items-center gap-1'>
+        <div className='flex min-w-[160px] items-center gap-1/2'>
           <span className='text-grayText inline-block text-sm font-medium'>
             Circulating supply
           </span>
@@ -48,7 +48,7 @@ export const HomepageCardanoLiveStake: FC<HomepageCardanoLiveStakeProps> = ({
         )}
       </div>
       <div className='flex flex-grow items-center pb-[11px]'>
-        <div className='flex min-w-[160px] items-center gap-1'>
+        <div className='flex min-w-[160px] items-center gap-1/2'>
           <span className='text-grayText inline-block text-sm font-medium'>
             Active stake
           </span>

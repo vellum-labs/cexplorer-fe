@@ -211,7 +211,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       <button
         ref={triggerRef}
         onClick={toggleDropdown}
-        className={`flex items-center justify-between gap-1 bg-transparent ${triggerClassName}`}
+        className={`flex items-center justify-between gap-1/2 bg-transparent ${triggerClassName}`}
         aria-haspopup='menu'
         aria-expanded={isOpen}
       >

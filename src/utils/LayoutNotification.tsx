@@ -53,7 +53,7 @@ export const LayoutNotification = ({
         color: textColor,
       }}
     >
-      <div className='relative flex w-full max-w-desktop items-center justify-center gap-3 px-desktop md:p-mobile'>
+      <div className='relative flex w-full max-w-desktop items-center justify-center gap-1.5 px-desktop md:p-mobile'>
         <span className='ml-3 mr-3 text-center text-sm'>
           {message}
           {link && (

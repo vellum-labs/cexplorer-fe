@@ -92,12 +92,12 @@ const BlockDetailPage: FC = () => {
     {
       label: "Height",
       value: (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           <span className='text-sm font-medium text-text'>
             {formatNumber(data?.block_no ?? 0)}
           </span>
           <div>
-            <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-1/2'>
               <Tooltip
                 content={
                   <p className='text-nowrap'>
@@ -162,7 +162,7 @@ const BlockDetailPage: FC = () => {
     {
       label: "Slot",
       value: (
-        <div className='flex flex-wrap items-center gap-1 text-sm leading-none'>
+        <div className='flex flex-wrap items-center gap-1/2 text-sm leading-none'>
           <span className='font-medium text-text'>
             {formatNumber(data?.slot_no ?? 0)}
           </span>
@@ -232,7 +232,7 @@ const BlockDetailPage: FC = () => {
     },
     {
       label: (
-        <div className='flex items-center gap-1 text-sm'>
+        <div className='flex items-center gap-1/2 text-sm'>
           <span className='text-grayTextPrimary'>Total Rewards</span>
           <CircleHelp size={12} className='text-[#98A2B3]' />
         </div>
@@ -295,10 +295,10 @@ const BlockDetailPage: FC = () => {
       }
     >
       <section className='flex w-full justify-center'>
-        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 p-mobile md:p-desktop xl:flex-nowrap xl:justify-start'>
+        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 p-mobile md:p-desktop xl:flex-nowrap xl:justify-start'>
           {!data ? (
             <>
-              <div className='flex grow basis-[980px] flex-wrap gap-5'>
+              <div className='flex grow basis-[980px] flex-wrap gap-3'>
                 <LoadingSkeleton
                   height='227px'
                   rounded='xl'
@@ -310,7 +310,7 @@ const BlockDetailPage: FC = () => {
                   className='grow basis-[430px] px-4 py-2'
                 />
               </div>
-              <div className='flex min-h-full w-[400px] flex-grow flex-col gap-5 xl:justify-between xl:gap-0'>
+              <div className='flex min-h-full w-[400px] flex-grow flex-col gap-3 xl:justify-between xl:gap-0'>
                 <LoadingSkeleton
                   className='basis-[400px] lg:basis-[416px]'
                   maxHeight='110px'
@@ -325,7 +325,7 @@ const BlockDetailPage: FC = () => {
             </>
           ) : (
             <>
-              <div className='flex grow basis-[980px] flex-wrap gap-5'>
+              <div className='flex grow basis-[980px] flex-wrap gap-3'>
                 <OverviewCard
                   title='Block Overview'
                   overviewList={overviewListItems}
@@ -337,7 +337,7 @@ const BlockDetailPage: FC = () => {
                   className='h-auto'
                 />
               </div>
-              <div className='flex w-[400px] flex-grow flex-col gap-5 xl:justify-between xl:gap-0'>
+              <div className='flex w-[400px] flex-grow flex-col gap-3 xl:justify-between xl:gap-0'>
                 <MintedByCard
                   poolInfo={data?.pool}
                   vrfKey={data?.vrf_key ?? ""}
@@ -357,7 +357,7 @@ const BlockDetailPage: FC = () => {
         </div>
       </section>
       <section className='flex w-full justify-center'>
-        <div className='flex w-full max-w-desktop flex-col flex-wrap justify-center gap-5 px-mobile pb-3 md:px-desktop xl:flex-nowrap xl:justify-start'>
+        <div className='flex w-full max-w-desktop flex-col flex-wrap justify-center gap-3 px-mobile pb-3 md:px-desktop xl:flex-nowrap xl:justify-start'>
           <BlockDetailTable txs={data?.txs} blockDetail={blockDetail} />
         </div>
       </section>

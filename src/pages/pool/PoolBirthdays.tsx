@@ -194,8 +194,8 @@ export const PoolBirthdays: FC = () => {
       breadcrumbItems={[{ label: "Pool Birthdays" }]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
-        <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-          <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
+        <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+          <div className='flex w-full flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
             {poolsBirthdayQuery.isLoading || poolsBirthdayQuery.isFetching ? (
               <LoadingSkeleton height='27px' width={"220px"} />
             ) : totalItems > 0 ? (
@@ -206,7 +206,7 @@ export const PoolBirthdays: FC = () => {
               ""
             )}
             <div className='flex w-full justify-end md:hidden'>
-              <div className='flex items-center gap-2 md:hidden'>
+              <div className='flex items-center gap-1 md:hidden'>
                 <ExportButton columns={columns} items={items} />
                 <TableSettingsDropdown
                   rows={rows}
@@ -226,7 +226,7 @@ export const PoolBirthdays: FC = () => {
               </div>
             </div>
           </div>
-          <div className='hidden items-center gap-2 md:flex'>
+          <div className='hidden items-center gap-1 md:flex'>
             <ExportButton columns={columns} items={items} />
             <TableSettingsDropdown
               rows={rows}

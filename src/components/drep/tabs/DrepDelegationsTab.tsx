@@ -111,7 +111,7 @@ export const DrepDelegationsTab = () => {
     {
       key: "amount",
       render: item => (
-        <div className='flex flex-col items-end gap-1'>
+        <div className='flex flex-col items-end gap-1/2'>
           <AdaWithTooltip data={item?.live_stake ?? 0} />
         </div>
       ),
@@ -126,7 +126,7 @@ export const DrepDelegationsTab = () => {
     {
       key: "delegation",
       render: item => (
-        <div className='grid w-full grid-cols-7 items-center gap-1'>
+        <div className='grid w-full grid-cols-7 items-center gap-1/2'>
           {item.drep?.previous?.id && (
             <>
               <div className='col-span-3'>
@@ -191,8 +191,8 @@ export const DrepDelegationsTab = () => {
 
   return (
     <>
-      <div className='mb-1 flex w-full flex-col justify-between gap-2 min-[870px]:flex-row min-[870px]:items-center'>
-        <div className='flex flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
+      <div className='mb-1 flex w-full flex-col justify-between gap-1 min-[870px]:flex-row min-[870px]:items-center'>
+        <div className='flex flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
           {delegationQuery.isLoading || delegationQuery.isFetching ? (
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : totalItems !== undefined ? (
@@ -203,7 +203,7 @@ export const DrepDelegationsTab = () => {
             ""
           )}
           <div className='flex w-full justify-end min-[870px]:hidden'>
-            <div className='flex items-center gap-2 min-[870px]:hidden'>
+            <div className='flex items-center gap-1 min-[870px]:hidden'>
               <ExportButton
                 columns={delegationColumns}
                 items={items}
@@ -228,8 +228,8 @@ export const DrepDelegationsTab = () => {
           </div>
         </div>
 
-        <div className='flex gap-2'>
-          <div className='hidden items-center gap-2 min-[870px]:flex'>
+        <div className='flex gap-1'>
+          <div className='hidden items-center gap-1 min-[870px]:flex'>
             <ExportButton
               columns={delegationColumns}
               items={items}

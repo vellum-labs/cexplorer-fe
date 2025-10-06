@@ -89,7 +89,7 @@ export const ScriptListTVLTab: FC = () => {
   }, [graphData]);
 
   return (
-    <div className='flex flex-wrap gap-3 lg:flex-nowrap'>
+    <div className='flex flex-wrap gap-1.5 lg:flex-nowrap'>
       {isLoading ? (
         <>
           <LoadingSkeleton width='350px' height='400px' rounded='lg' />
@@ -97,8 +97,8 @@ export const ScriptListTVLTab: FC = () => {
         </>
       ) : (
         <>
-          <div className='flex min-w-[350px] flex-grow flex-col gap-3 rounded-lg border border-border p-1.5 lg:max-w-[350px] lg:flex-grow-0'>
-            <div className='flex h-fit w-full items-center gap-4'>
+          <div className='flex min-w-[350px] flex-grow flex-col gap-1.5 rounded-lg border border-border p-1.5 lg:max-w-[350px] lg:flex-grow-0'>
+            <div className='flex h-fit w-full items-center gap-2'>
               <div className='flex aspect-square h-[32px] w-[32px] items-center justify-center rounded-md border border-border'>
                 <CircleDollarSign className='text-primary' size={15} />
               </div>
@@ -107,7 +107,7 @@ export const ScriptListTVLTab: FC = () => {
                 value locked)
               </span>
             </div>
-            <div className='flex w-full items-center gap-4'>
+            <div className='flex w-full items-center gap-2'>
               <span className='text-2xl font-semibold'>
                 $ {lovelaceToAda(totalValueUSD).substring(1)}
               </span>
@@ -123,7 +123,7 @@ export const ScriptListTVLTab: FC = () => {
             <div className='flex h-full items-end justify-end'>
               <a
                 href='https://defillama.com/chain/Cardano'
-                className='flex cursor-pointer items-center gap-1'
+                className='flex cursor-pointer items-center gap-1/2'
                 target='_blank'
                 rel='noopener noreferrer'
               >

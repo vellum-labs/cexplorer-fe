@@ -12,7 +12,7 @@ export const VoteBadge = ({ vote }: VoteBadgeProps) => {
   // Handle "Not voted" case or invalid vote values  
   if (!vote || vote === null || !VOTE_OPTIONS.includes(vote as any)) {
     return (
-      <div className={`flex w-fit items-center gap-1 rounded-xl border px-[8px] py-[2px] h-[24px] ${theme === "dark" ? "border-[#475467] bg-[#1D2939]" : "border-[#E4E7EC] bg-[#F9FAFB]"}`}>
+      <div className={`flex w-fit items-center gap-1/2 rounded-xl border px-[8px] py-[2px] h-[24px] ${theme === "dark" ? "border-[#475467] bg-[#1D2939]" : "border-[#E4E7EC] bg-[#F9FAFB]"}`}>
         <span className={`text-xs font-medium whitespace-nowrap ${theme === "dark" ? "text-white" : "text-[#344054]"}`}>
           Not voted
         </span>

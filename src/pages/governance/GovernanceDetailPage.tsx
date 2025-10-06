@@ -78,7 +78,7 @@ export const GovernanceDetailPage: FC = () => {
         },
       ]}
       title={
-        <div className='flex items-center gap-1'>Governance action detail</div>
+        <div className='flex items-center gap-1/2'>Governance action detail</div>
       }
       subTitle={
         <div className='flex flex-col'>

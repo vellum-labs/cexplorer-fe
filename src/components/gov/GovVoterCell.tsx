@@ -44,7 +44,7 @@ export const GovVoterCell: FC<GovVoterCellProps> = ({ role, info }) => {
           : undefined;
 
   return (
-    <div className='relative flex max-h-[75px] w-full items-center gap-2'>
+    <div className='relative flex max-h-[75px] w-full items-center gap-1'>
       <Image
         src={imageUrl}
         type='user'
@@ -60,7 +60,7 @@ export const GovVoterCell: FC<GovVoterCellProps> = ({ role, info }) => {
               : displayName}
           </Link>
         )}
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           {toPath ? (
             <Link
               to={toPath}

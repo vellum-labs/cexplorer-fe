@@ -154,7 +154,7 @@ export const WalletPage: FC = () => {
     {
       key: "supported_platforms",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-3'>
+        <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-sm font-medium'>Supported platforms</span>
           <CircleHelp
             size={13}
@@ -163,7 +163,7 @@ export const WalletPage: FC = () => {
         </div>
       ),
       cells: walletsData.map(({ supportedPlatforms }) => (
-        <div className='flex h-full w-full flex-wrap items-center justify-center gap-3 p-2'>
+        <div className='flex h-full w-full flex-wrap items-center justify-center gap-1.5 p-2'>
           {supportedPlatforms?.web && (
             <img src={theme === "light" ? PC : PCDark} alt='Web' />
           )}
@@ -186,7 +186,7 @@ export const WalletPage: FC = () => {
     {
       key: "opensource",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-3'>
+        <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-sm font-medium'>Opensource</span>
           <CircleHelp
             size={13}
@@ -195,7 +195,7 @@ export const WalletPage: FC = () => {
         </div>
       ),
       cells: walletsData.map(({ opensource }) => (
-        <div className='flex h-full w-full items-center justify-center gap-3'>
+        <div className='flex h-full w-full items-center justify-center gap-1.5'>
           {opensource ? (
             <CircleCheck className='text-[#079455]' />
           ) : (
@@ -208,7 +208,7 @@ export const WalletPage: FC = () => {
     {
       key: "smart_contracts_interaction",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-3'>
+        <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-sm font-medium'>
             Smart contracts interaction
           </span>
@@ -219,7 +219,7 @@ export const WalletPage: FC = () => {
         </div>
       ),
       cells: walletsData.map(({ smartContractInteraction }) => (
-        <div className='flex h-full w-full items-center justify-center gap-3'>
+        <div className='flex h-full w-full items-center justify-center gap-1.5'>
           {smartContractInteraction ? (
             <CircleCheck className='text-[#079455]' />
           ) : (
@@ -232,7 +232,7 @@ export const WalletPage: FC = () => {
     {
       key: "testnet_support",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-3'>
+        <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-sm font-medium'>Testnet support</span>
           <CircleHelp
             size={13}
@@ -241,7 +241,7 @@ export const WalletPage: FC = () => {
         </div>
       ),
       cells: walletsData.map(({ testnetSupport }) => (
-        <div className='flex h-full w-full items-center justify-center gap-3'>
+        <div className='flex h-full w-full items-center justify-center gap-1.5'>
           {testnetSupport ? (
             <CircleCheck className='text-[#079455]' />
           ) : (
@@ -254,7 +254,7 @@ export const WalletPage: FC = () => {
     {
       key: "hardware_wallet_compatibility",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-3'>
+        <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-nowrap text-sm font-medium'>
             Hardware wallet compatibility
           </span>
@@ -265,7 +265,7 @@ export const WalletPage: FC = () => {
         </div>
       ),
       cells: walletsData.map(({ hardwareWalletCompatibility }) => (
-        <div className='flex h-full w-full flex-wrap items-center justify-center gap-3'>
+        <div className='flex h-full w-full flex-wrap items-center justify-center gap-1.5'>
           {hardwareWalletCompatibility?.ledger && (
             <img
               src={theme === "light" ? Ledger : LedgerDark}
@@ -297,7 +297,7 @@ export const WalletPage: FC = () => {
     {
       key: "cross_chain_compatibility",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-3'>
+        <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-nowrap text-sm font-medium'>
             Cross-chain compatibility
           </span>
@@ -309,9 +309,9 @@ export const WalletPage: FC = () => {
       ),
       cells: walletsData.map(({ crossChainCompatibility }) => {
         return (
-          <div className='flex h-full w-full items-center justify-center gap-3'>
+          <div className='flex h-full w-full items-center justify-center gap-1.5'>
             {crossChainCompatibility?.enabled ? (
-              <div className='flex h-full w-full flex-wrap items-center justify-center gap-3'>
+              <div className='flex h-full w-full flex-wrap items-center justify-center gap-1.5'>
                 {crossChainCompatibility?.supportedChains.map(item => (
                   <>
                     {item === "Apex Fusion" && (
@@ -355,7 +355,7 @@ export const WalletPage: FC = () => {
     {
       key: "staking_support",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-3'>
+        <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-sm font-medium'>Staking support</span>
           <CircleHelp
             size={13}
@@ -364,7 +364,7 @@ export const WalletPage: FC = () => {
         </div>
       ),
       cells: walletsData.map(({ stakingSupport }) => (
-        <div className='flex h-full w-full items-center justify-center gap-3'>
+        <div className='flex h-full w-full items-center justify-center gap-1.5'>
           {stakingSupport ? (
             <CircleCheck className='text-[#079455]' />
           ) : (
@@ -377,7 +377,7 @@ export const WalletPage: FC = () => {
     {
       key: "cardano_governance_features",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-3'>
+        <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-sm font-medium'>
             Cardano governance features
           </span>
@@ -388,7 +388,7 @@ export const WalletPage: FC = () => {
         </div>
       ),
       cells: walletsData.map(({ governanceSupport }) => (
-        <div className='flex h-full w-full items-center justify-center gap-3'>
+        <div className='flex h-full w-full items-center justify-center gap-1.5'>
           {governanceSupport ? (
             <CircleCheck className='text-[#079455]' />
           ) : (
@@ -401,7 +401,7 @@ export const WalletPage: FC = () => {
     {
       key: "project_catalyst_registration",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-3'>
+        <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-sm font-medium'>
             Project Catalyst registration
           </span>
@@ -412,7 +412,7 @@ export const WalletPage: FC = () => {
         </div>
       ),
       cells: walletsData.map(({ governanceSupport }) => (
-        <div className='flex h-full w-full items-center justify-center gap-3'>
+        <div className='flex h-full w-full items-center justify-center gap-1.5'>
           {governanceSupport ? (
             <CircleCheck className='text-[#079455]' />
           ) : (
@@ -425,7 +425,7 @@ export const WalletPage: FC = () => {
     {
       key: "multipool_delegation",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-3'>
+        <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-sm font-medium'>Multipool delegation</span>
           <CircleHelp
             size={13}
@@ -434,7 +434,7 @@ export const WalletPage: FC = () => {
         </div>
       ),
       cells: walletsData.map(({ multiPoolDelegation }) => (
-        <div className='flex h-full w-full items-center justify-center gap-3'>
+        <div className='flex h-full w-full items-center justify-center gap-1.5'>
           {multiPoolDelegation ? (
             <CircleCheck className='text-[#079455]' />
           ) : (
@@ -459,7 +459,7 @@ export const WalletPage: FC = () => {
     {
       key: "dapp_browser",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-3'>
+        <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-sm font-medium'>dApp browser</span>
           <CircleHelp
             size={13}
@@ -468,7 +468,7 @@ export const WalletPage: FC = () => {
         </div>
       ),
       cells: walletsData.map(({ dAppBrowser }) => (
-        <div className='flex h-full w-full items-center justify-center gap-3'>
+        <div className='flex h-full w-full items-center justify-center gap-1.5'>
           {dAppBrowser ? (
             <CircleCheck className='text-[#079455]' />
           ) : (
@@ -481,7 +481,7 @@ export const WalletPage: FC = () => {
     {
       key: "multiple_accounts",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-3'>
+        <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-sm font-medium'>Multiple accounts</span>
           <CircleHelp
             size={13}
@@ -490,7 +490,7 @@ export const WalletPage: FC = () => {
         </div>
       ),
       cells: walletsData.map(({ multipleAccounts }) => (
-        <div className='flex h-full w-full items-center justify-center gap-3'>
+        <div className='flex h-full w-full items-center justify-center gap-1.5'>
           {multipleAccounts ? (
             <CircleCheck className='text-[#079455]' />
           ) : (
@@ -503,7 +503,7 @@ export const WalletPage: FC = () => {
     {
       key: "custom_node",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-3'>
+        <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-sm font-medium'>Custom node</span>
           <CircleHelp
             size={13}
@@ -512,7 +512,7 @@ export const WalletPage: FC = () => {
         </div>
       ),
       cells: walletsData.map(({ customNode }) => (
-        <div className='flex h-full w-full items-center justify-center gap-3'>
+        <div className='flex h-full w-full items-center justify-center gap-1.5'>
           {customNode ? (
             <CircleCheck className='text-[#079455]' />
           ) : (
@@ -525,7 +525,7 @@ export const WalletPage: FC = () => {
     {
       key: "address_book",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-3'>
+        <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-sm font-medium'>Address book</span>
           <CircleHelp
             size={13}
@@ -534,7 +534,7 @@ export const WalletPage: FC = () => {
         </div>
       ),
       cells: walletsData.map(({ addressBook }) => (
-        <div className='flex h-full w-full items-center justify-center gap-3'>
+        <div className='flex h-full w-full items-center justify-center gap-1.5'>
           {addressBook ? (
             <CircleCheck className='text-[#079455]' />
           ) : (
@@ -547,7 +547,7 @@ export const WalletPage: FC = () => {
     {
       key: "other",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-3'>
+        <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-sm font-medium'>Other</span>
           <CircleHelp
             size={13}
@@ -589,7 +589,7 @@ export const WalletPage: FC = () => {
     {
       key: "nft_marketplace",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-3'>
+        <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-sm font-medium'>NFT marketplace</span>
           <CircleHelp
             size={13}
@@ -599,7 +599,7 @@ export const WalletPage: FC = () => {
       ),
       cells: walletsData.map(({ nftMarketplaceIntegration }) => (
         <div
-          className={`flex h-full w-full ${nftMarketplaceIntegration?.partner ? "" : "items-center"} justify-center gap-3 py-2`}
+          className={`flex h-full w-full ${nftMarketplaceIntegration?.partner ? "" : "items-center"} justify-center gap-1.5 py-2`}
         >
           {nftMarketplaceIntegration?.enabled ? (
             nftMarketplaceIntegration?.partner ? (
@@ -625,7 +625,7 @@ export const WalletPage: FC = () => {
     {
       key: "swaps_in_wallets",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-3'>
+        <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-sm font-medium'>Swaps in wallets</span>
           <CircleHelp
             size={13}
@@ -635,7 +635,7 @@ export const WalletPage: FC = () => {
       ),
       cells: walletsData.map(({ swapsInWallet }) => (
         <div
-          className={`flex h-full w-full ${swapsInWallet?.partner ? "" : "items-center"} justify-center gap-3 py-2`}
+          className={`flex h-full w-full ${swapsInWallet?.partner ? "" : "items-center"} justify-center gap-1.5 py-2`}
         >
           {swapsInWallet?.enabled ? (
             swapsInWallet?.partner ? (
@@ -661,7 +661,7 @@ export const WalletPage: FC = () => {
     {
       key: "fiat_onramp",
       title: (
-        <div className='flex h-full w-full items-center gap-1 px-3'>
+        <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-sm font-medium'>Fiat onramp</span>
           <CircleHelp
             size={13}
@@ -671,7 +671,7 @@ export const WalletPage: FC = () => {
       ),
       cells: walletsData.map(({ fiatOnramp }) => (
         <div
-          className={`flex h-full w-full ${fiatOnramp?.partner ? "" : "items-center"} justify-center gap-3 py-2`}
+          className={`flex h-full w-full ${fiatOnramp?.partner ? "" : "items-center"} justify-center gap-1.5 py-2`}
         >
           {fiatOnramp?.enabled ? (
             fiatOnramp?.partner ? (
@@ -721,9 +721,9 @@ export const WalletPage: FC = () => {
         />
         <AdsCarousel />
         <section className='flex w-full justify-center'>
-          <div className='flex w-full max-w-desktop flex-col items-end gap-5 p-mobile md:p-desktop'>
+          <div className='flex w-full max-w-desktop flex-col items-end gap-3 p-mobile md:p-desktop'>
             <div className='flex w-fit'>
-              <div className='flex flex-col items-start gap-1'>
+              <div className='flex flex-col items-start gap-1/2'>
                 <span className='w-fit text-xs font-medium'>
                   Compare wallets
                 </span>

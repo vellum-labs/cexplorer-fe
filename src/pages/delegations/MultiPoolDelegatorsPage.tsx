@@ -97,7 +97,7 @@ export const MultiPoolDelegatorsPage = () => {
       breadcrumbItems={[{ label: "Multi-pool Delegators" }]}
     >
       <section className='w-full max-w-desktop px-mobile pb-3 md:px-desktop'>
-        <div className='mb-2 flex flex-wrap items-center justify-between gap-4 md:flex-nowrap md:items-center'>
+        <div className='mb-2 flex flex-wrap items-center justify-between gap-2 md:flex-nowrap md:items-center'>
           {!total ? (
             <LoadingSkeleton height='27px' width={"290px"} />
           ) : (
@@ -105,7 +105,7 @@ export const MultiPoolDelegatorsPage = () => {
               Total of {formatNumber(total)} multi-pool delegators.
             </h3>
           )}
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <ExportButton columns={columns} items={items} />
             <TableSettingsDropdown
               rows={rows}

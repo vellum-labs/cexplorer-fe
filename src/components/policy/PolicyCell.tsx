@@ -25,7 +25,7 @@ export const PolicyCell = ({
     <div
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className='flex items-center gap-2'
+      className='flex items-center gap-1'
     >
       <Link
         to='/policy/$policyId'

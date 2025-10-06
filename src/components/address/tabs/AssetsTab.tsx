@@ -149,9 +149,9 @@ export const AssetsTab: FC<AssetsTabProps> = ({
   }, [asset]);
 
   return (
-    <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 xl:flex-nowrap xl:justify-start'>
-      <div className='flex w-full flex-col gap-3'>
-        <div className='flex flex-col gap-4'>
+    <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 xl:flex-nowrap xl:justify-start'>
+      <div className='flex w-full flex-col gap-1.5'>
+        <div className='flex flex-col gap-2'>
           <div className='flex w-full'>
             <Tabs
               withPadding={false}
@@ -173,10 +173,10 @@ export const AssetsTab: FC<AssetsTabProps> = ({
               />
             )}
           </div>
-          <div className='flex w-full flex-wrap justify-between gap-3 md:flex-nowrap'>
-            <div className='flex flex-col gap-2'>
+          <div className='flex w-full flex-wrap justify-between gap-1.5 md:flex-nowrap'>
+            <div className='flex flex-col gap-1'>
               {activeAsset !== "nfts" && (
-                <div className='flex gap-2'>
+                <div className='flex gap-1'>
                   <Switch
                     onClick={() => setLowBalances(lowBalances)}
                     active={!lowBalances}
@@ -191,7 +191,7 @@ export const AssetsTab: FC<AssetsTabProps> = ({
                 {activeAsset === "nfts" ? "NFTs" : "tokens"}
               </span>
             </div>
-            <div className='flex flex-grow items-center gap-2 sm:flex-grow-0'>
+            <div className='flex flex-grow items-center gap-1 sm:flex-grow-0'>
               <TableSearchInput
                 placeholder='Search your results...'
                 value={tableSearch}

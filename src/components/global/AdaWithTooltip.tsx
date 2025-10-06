@@ -19,7 +19,7 @@ export const AdaWithTooltip: FC<AdaWithTooltipProps> = ({
   return tooltip ? (
     <Tooltip
       content={
-        <p className='flex items-center gap-1 text-text'>
+        <p className='flex items-center gap-1/2 text-text'>
           <span className='text-sm'>{formatNumber(data ?? 0)}</span>
           <Copy copyText={String(data)} />
         </p>

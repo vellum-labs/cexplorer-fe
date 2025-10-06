@@ -208,7 +208,7 @@ export const ScriptDetailStatsTab = ({
 
   return (
     <div>
-      <div className='flex flex-wrap gap-4'>
+      <div className='flex flex-wrap gap-2'>
         <OverviewStatCard
           title='Volume'
           value={

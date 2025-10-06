@@ -32,7 +32,7 @@ const PoolCell = ({
 
   return (
     <div
-      className={`relative flex max-h-[75px] w-full items-center gap-2 ${className}`}
+      className={`relative flex max-h-[75px] w-full items-center gap-1 ${className}`}
     >
       {ticker && (
         <Image
@@ -60,7 +60,7 @@ const PoolCell = ({
             {name && name}
           </span>
         </Link>
-        <div className='flex w-fit items-center gap-1'>
+        <div className='flex w-fit items-center gap-1/2'>
           <Link
             to='/pool/$id'
             params={{ id: poolInfo.id }}

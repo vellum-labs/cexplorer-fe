@@ -21,20 +21,20 @@ const MetadataTabItem = () => {
 
   if (query.isLoading) {
     return (
-      <div className='flex flex-col gap-3'>
+      <div className='flex flex-col gap-1.5'>
         <LoadingSkeleton rounded='xl' height='130px' />
       </div>
     );
   }
 
   return (
-    <div className='flex flex-col gap-3'>
+    <div className='flex flex-col gap-1.5'>
       {metadataArr.map((item, index) => (
         <section
           key={index}
           className='flex flex-col rounded-xl border border-b border-border bg-darker px-2 py-1.5 shadow'
         >
-          <div className='mb-1 flex items-center gap-1'>
+          <div className='mb-1 flex items-center gap-1/2'>
             <div className='w-fit rounded-md border border-border bg-background px-1 py-1/2 text-xs font-medium'>
               {Object.values(item)[0].key}
             </div>

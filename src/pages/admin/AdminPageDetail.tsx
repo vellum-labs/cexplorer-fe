@@ -98,7 +98,7 @@ export const AdminPageDetail = () => {
   }, [data, isHTML]);
 
   return (
-    <main className='relative flex min-h-minHeight max-w-desktop flex-col gap-2 p-mobile md:p-desktop'>
+    <main className='relative flex min-h-minHeight max-w-desktop flex-col gap-1 p-mobile md:p-desktop'>
       <Helmet>
         <meta charSet='utf-8' />
         <title>Admin page detail | Cexplorer.io</title>

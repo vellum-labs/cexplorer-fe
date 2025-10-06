@@ -47,8 +47,8 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
 
   return (
     <div className='flex h-full w-full items-center'>
-      <div className='flex w-full flex-col gap-3'>
-        <div className='flex flex-col gap-1 py-1'>
+      <div className='flex w-full flex-col gap-1.5'>
+        <div className='flex flex-col gap-1/2 py-1'>
           <div className='flex items-center gap-[6px]'>
             <CheckSquare size={18} className='font-bold text-[#0094D4]' />
             <span className='text-sm font-bold text-[#0094D4]'>
@@ -74,7 +74,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
             </div>
           </div>
         </div>
-        <div className='flex flex-col gap-1 py-1'>
+        <div className='flex flex-col gap-1/2 py-1'>
           <div className='flex items-center gap-[6px]'>
             <XSquare size={18} className='font-bold text-[#DC6803]' />
             <span className='text-sm font-bold text-[#DC6803]'>

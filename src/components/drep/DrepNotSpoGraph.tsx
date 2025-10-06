@@ -163,7 +163,7 @@ export const DrepNotSpoGraph: FC = () => {
       actions={
         <div
           ref={groupRef}
-          className='flex items-center gap-2 rounded-md border border-border px-1.5 py-1'
+          className='flex items-center gap-1 rounded-md border border-border px-1.5 py-1'
         >
           <Switch active={showFiltered} onChange={handleSwitchChange} />
           <label

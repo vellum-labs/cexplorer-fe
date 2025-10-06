@@ -83,7 +83,7 @@ const WalletDropdown = ({
     >
       <div className='border-b border-border p-2'>
         <div className='flex items-start justify-between'>
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <div className='relative'>
               <img
                 className='h-10 w-10 rounded-full'
@@ -100,7 +100,7 @@ const WalletDropdown = ({
               <span className='truncate text-sm font-medium leading-5 text-text'>
                 {profileName || "Anonymous User"}
               </span>
-              <div className='flex items-center gap-2'>
+              <div className='flex items-center gap-1'>
                 <Link
                   to='/address/$address'
                   params={{ address }}
@@ -112,9 +112,9 @@ const WalletDropdown = ({
               </div>
             </div>
           </div>
-          <div className='flex flex-col items-end gap-1'>
+          <div className='flex flex-col items-end gap-1/2'>
             {hasMembership ? (
-              <span className='flex w-fit items-center gap-1 rounded-full bg-gradient-to-r from-darkBlue to-purple-700 px-1 py-1/4 text-right text-xs font-medium text-white'>
+              <span className='flex w-fit items-center gap-1/2 rounded-full bg-gradient-to-r from-darkBlue to-purple-700 px-1 py-1/4 text-right text-xs font-medium text-white'>
                 PRO
               </span>
             ) : (
@@ -154,12 +154,12 @@ const WalletDropdown = ({
 
           <div className='flex items-center justify-between'>
             <span className='text-xs font-medium text-text'>Pool</span>
-            <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-1/2'>
               {livePool && livePool.id ? (
                 <Link
                   to='/pool/$id'
                   params={{ id: livePool.id }}
-                  className='flex cursor-pointer items-center gap-1 hover:text-primary'
+                  className='flex cursor-pointer items-center gap-1/2 hover:text-primary'
                   onClick={onClose}
                 >
                   <img
@@ -185,7 +185,7 @@ const WalletDropdown = ({
 
           <div className='flex items-center justify-between'>
             <span className='text-xs font-medium text-text'>DRep</span>
-            <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-1/2'>
               {drep && drep.id ? (
                 <>
                   {drep.id === "drep_always_abstain" ? (
@@ -200,7 +200,7 @@ const WalletDropdown = ({
                     <Link
                       to='/drep/$hash'
                       params={{ hash: drep.id }}
-                      className='flex cursor-pointer items-center gap-1 hover:text-primary'
+                      className='flex cursor-pointer items-center gap-1/2 hover:text-primary'
                       onClick={onClose}
                     >
                       <img
@@ -238,7 +238,7 @@ const WalletDropdown = ({
           }}
           onClick={onClose}
         >
-          <div className='flex items-center gap-3'>
+          <div className='flex items-center gap-1.5'>
             <Star size={16} className='text-gray-500' />
             Watchlist
           </div>
@@ -254,8 +254,8 @@ const WalletDropdown = ({
           }}
           onClick={onClose}
         >
-          <div className='flex items-center justify-between gap-3'>
-            <div className='flex items-center gap-3'>
+          <div className='flex items-center justify-between gap-1.5'>
+            <div className='flex items-center gap-1.5'>
               <GalleryHorizontalEnd size={16} className='text-gray-500' />
               Cexplorer NFTs
             </div>
@@ -272,7 +272,7 @@ const WalletDropdown = ({
           }}
           onClick={onClose}
         >
-          <div className='flex items-center gap-3'>
+          <div className='flex items-center gap-1.5'>
             <User size={16} className='text-gray-500' />
             Profile
           </div>
@@ -288,7 +288,7 @@ const WalletDropdown = ({
             }}
             onClick={onClose}
           >
-            <div className='flex items-center gap-3'>
+            <div className='flex items-center gap-1.5'>
               <Shield size={16} className='text-gray-500' />
               Admin
             </div>
@@ -306,7 +306,7 @@ const WalletDropdown = ({
           }}
           onClick={handleSwitchWallet}
         >
-          <div className='flex items-center gap-3'>
+          <div className='flex items-center gap-1.5'>
             <Wallet size={16} className='text-gray-500' />
             Switch wallet
           </div>
@@ -321,7 +321,7 @@ const WalletDropdown = ({
           }}
           onClick={handleDisconnect}
         >
-          <div className='flex items-center gap-3'>
+          <div className='flex items-center gap-1.5'>
             <Unlink size={16} className='text-red-500' />
             Disconnect wallet
           </div>
@@ -329,7 +329,7 @@ const WalletDropdown = ({
       </div>
 
       <div className='p-2'>
-        <div className='flex justify-start gap-3'>
+        <div className='flex justify-start gap-1.5'>
           <a
             href='https://x.com/cexplorer_io'
             target='_blank'

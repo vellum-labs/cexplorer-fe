@@ -309,7 +309,7 @@ const GlobalTable = <T extends Record<string, any>>({
                       }}
                       className={`relative box-border border-b border-border bg-darker font-semibold ${isEmpty && !isLoading ? "first:rounded-l-xl last:rounded-r-xl" : "first:rounded-tl-xl last:rounded-tr-xl"} ${isMobileDevice() || !onOrderChange ? "cursor-pointer" : "cursor-move"} last:pr-4 ${firstClickedColumnIndex !== null && firstClickedColumnIndex !== index && `border border-dashed border-yellow-400 bg-yellow-200/20`} table-cell first:pl-4 ${firstClickedColumnIndex !== null && "text-text [&>p]:text-text"} ${firstClickedColumnIndex === index || (isDragging && draggedIndex === index && "border border-dashed border-text text-grayTextPrimary [&>p]:text-grayTextPrimary")} ${overIndex === index && "bg-border"}`}
                     >
-                      <div className='flex items-center gap-1'>
+                      <div className='flex items-center gap-1/2'>
                         {title}
                         {filter && (
                           <Funnel

@@ -70,8 +70,8 @@ export const DevelopersPage = () => {
       </Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
         {query.isLoading ? (
-          <div className='flex flex-col gap-10'>
-            <div className='flex flex-col items-center gap-4'>
+          <div className='flex flex-col gap-5'>
+            <div className='flex flex-col items-center gap-2'>
               <LoadingSkeleton width='150px' height='30px' />
               <LoadingSkeleton width='300px' height='20px' />
             </div>

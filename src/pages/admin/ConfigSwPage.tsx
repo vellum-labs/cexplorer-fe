@@ -57,7 +57,7 @@ export const ConfigSwPage: FC = () => {
   };
 
   return (
-    <main className='relative flex min-h-minHeight max-w-desktop flex-col gap-2 p-mobile md:p-desktop'>
+    <main className='relative flex min-h-minHeight max-w-desktop flex-col gap-1 p-mobile md:p-desktop'>
       <Helmet>
         <meta charSet='utf-8' />
         <title>Admin sw | Cexplorer.io</title>
@@ -103,7 +103,7 @@ export const ConfigSwPage: FC = () => {
           {JSON.stringify(JSON.parse(content), undefined, 2)}
         </SyntaxHighlighter>
       </div>
-      <div className='flex items-center justify-end gap-2'>
+      <div className='flex items-center justify-end gap-1'>
         <Button
           label='Test'
           size='lg'

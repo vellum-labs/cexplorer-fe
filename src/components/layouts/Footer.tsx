@@ -18,14 +18,14 @@ const Footer = () => {
     <footer className='flex w-full flex-col items-center border-t border-borderFaded'>
       <div className='flex w-full justify-center'>
         <div className='flex w-full max-w-desktop flex-col p-mobile md:px-desktop md:py-mobile'>
-          <section className='flex w-full flex-col gap-4 py-4 md:flex-row md:justify-between'>
-            <div className='flex w-[250px] shrink-0 flex-col gap-6'>
+          <section className='flex w-full flex-col gap-2 py-4 md:flex-row md:justify-between'>
+            <div className='flex w-[250px] shrink-0 flex-col gap-3'>
               <MainLogo className='-translate-x-[5px]' />
               <p className='w-full text-sm text-grayTextPrimary'>
                 The oldest and most feature-rich Cardano explorer, serving you
                 since the Incentivized Testnet.
               </p>
-              <div className='flex gap-5'>
+              <div className='flex gap-3'>
                 <a href='https://x.com/cexplorer_io' target='_blank'>
                   <img src={TwitterLogo} alt='Twitter' width={30} />
                 </a>
@@ -47,7 +47,7 @@ const Footer = () => {
         </div>
       </div>
       <section className='flex w-full flex-col items-center bg-darker'>
-        <div className='flex h-auto w-full max-w-desktop items-center justify-between gap-5 p-mobile py-2 md:h-[60px] md:px-desktop md:py-mobile'>
+        <div className='flex h-auto w-full max-w-desktop items-center justify-between gap-3 p-mobile py-2 md:h-[60px] md:px-desktop md:py-mobile'>
           <span className='text-xs text-grayTextPrimary md:text-sm'>
             Copyright © 2019-{new Date().getFullYear()} Cexplorer. All rights
             reserved.
@@ -61,11 +61,11 @@ const Footer = () => {
             ❤️
           </span>
         </div>
-        <div className='flex h-auto w-full max-w-desktop items-center gap-4 p-mobile py-2 md:px-desktop md:py-mobile'>
+        <div className='flex h-auto w-full max-w-desktop items-center gap-2 p-mobile py-2 md:px-desktop md:py-mobile'>
           <span className='text-xs text-grayTextPrimary md:text-sm'>
             Partners:{" "}
           </span>
-          <div className='flex w-full flex-wrap items-center justify-around gap-2'>
+          <div className='flex w-full flex-wrap items-center justify-around gap-1'>
             <a
               href='https://yoroi-wallet.com/'
               target='_blank'

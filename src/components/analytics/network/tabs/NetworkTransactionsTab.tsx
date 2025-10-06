@@ -131,7 +131,7 @@ export const NetworkTransactionTab: FC = () => {
   ];
 
   return (
-    <section className='flex w-full max-w-desktop flex-col gap-3'>
+    <section className='flex w-full max-w-desktop flex-col gap-1.5'>
       <AnalyticsStatList
         isLoading={epochQuery.isLoading}
         statCards={statCards}
@@ -141,7 +141,7 @@ export const NetworkTransactionTab: FC = () => {
         title='Transactions per second (TPS)'
         description='Visual expression of all transactions on the Cardano network in time.'
       >
-        <div className='flex h-full w-full flex-wrap gap-3 xl:flex-nowrap'>
+        <div className='flex h-full w-full flex-wrap gap-1.5 xl:flex-nowrap'>
           <NetworkTransactionsTable query={epochQuery} items={items} />
           <NetworkTxInTimeGraph items={items} />
         </div>

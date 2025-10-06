@@ -90,7 +90,7 @@ const DelegatorsTabItem = () => {
       key: "newcomers",
       label: "Newcomers",
       content: (
-        <div className='flex w-full flex-col items-center gap-4'>
+        <div className='flex w-full flex-col items-center gap-2'>
           <PoolDelegatorsTable
             totalItems={delegatorTableTotalItems}
             delegatorsQuery={delegatorsQuery}
@@ -111,7 +111,7 @@ const DelegatorsTabItem = () => {
           ) : (
             <></>
           )}
-          <div className='flex items-center justify-between gap-2'>
+          <div className='flex items-center justify-between gap-1'>
             <TableSettingsDropdown
               rows={delegatorRows}
               setRows={setDelegatorRows}
@@ -136,7 +136,7 @@ const DelegatorsTabItem = () => {
       key: "migrations",
       label: "Migrations",
       content: (
-        <div className='flex w-full flex-col items-center gap-4'>
+        <div className='flex w-full flex-col items-center gap-2'>
           <PoolMigrationsTable
             totalItems={migrationsTotalItems}
             miscConst={miscConst}
@@ -157,7 +157,7 @@ const DelegatorsTabItem = () => {
           ) : (
             <></>
           )}
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <TableSettingsDropdown
               rows={migrationsRows}
               setRows={setMigrationsRows}
@@ -182,13 +182,13 @@ const DelegatorsTabItem = () => {
       key: "structure",
       label: "Structure",
       content: (
-        <div className='flex w-full flex-col items-end gap-4'>
+        <div className='flex w-full flex-col items-end gap-2'>
           <PoolStructureTable poolId={id} />
         </div>
       ),
       extraTitle: (
         <div className='flex w-full justify-end'>
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}

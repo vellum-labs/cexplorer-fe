@@ -401,7 +401,7 @@ export const ProfilePro = () => {
               });
             }}
             defaultValue='m'
-            className='mb-4 mt-2 flex gap-4'
+            className='mb-4 mt-2 flex gap-2'
           >
             <div className='flex items-center space-x-2'>
               <RadioGroupItem value='drep' id='drep' />
@@ -444,7 +444,7 @@ export const ProfilePro = () => {
         </Modal>
       )}
       <div className='flex min-h-minHeight w-full flex-col'>
-        <div className='flex w-full flex-wrap justify-between gap-2'>
+        <div className='flex w-full flex-wrap justify-between gap-1'>
           <div className='flex flex-col'>
             <h2>Promotion on Cexplorer</h2>
             <p className='text-grayTextPrimary'>
@@ -455,7 +455,7 @@ export const ProfilePro = () => {
               The displaying frequency is increased with each NFT delegated.
             </p>
           </div>
-          <div className='flex h-[40px] gap-2'>
+          <div className='flex h-[40px] gap-1'>
             <Button
               label='Get Cexplorer PRO NFT'
               size='md'
@@ -473,9 +473,9 @@ export const ProfilePro = () => {
                 className='mr-auto mt-2'
               />
             ) : (
-              <section className='mt-2 flex flex-wrap items-center gap-3 text-sm md:gap-5'>
+              <section className='mt-2 flex flex-wrap items-center gap-1.5 text-sm md:gap-5'>
                 <span className='mr-1'>Your account</span>
-                <span className='flex items-center gap-1 text-grayTextPrimary'>
+                <span className='flex items-center gap-1/2 text-grayTextPrimary'>
                   Your plan:{" "}
                   {!totalCount ? (
                     <Badge color={!totalCount ? "gray" : "purple"}>Basic</Badge>
@@ -487,11 +487,11 @@ export const ProfilePro = () => {
                   to={
                     "/profile?tab=pro" as FileRoutesByPath[keyof FileRoutesByPath]["path"]
                   }
-                  className='gold-shimmer flex items-center gap-1 bg-purpleText bg-clip-text font-medium text-transparent underline hover:text-transparent'
+                  className='gold-shimmer flex items-center gap-1/2 bg-purpleText bg-clip-text font-medium text-transparent underline hover:text-transparent'
                 >
                   NFTs held: <span className=''>{totalCount}</span>
                 </Link>
-                <span className='flex items-center gap-1 text-grayTextPrimary'>
+                <span className='flex items-center gap-1/2 text-grayTextPrimary'>
                   API key limit: <span className='text-text'>1</span>
                 </span>
               </section>

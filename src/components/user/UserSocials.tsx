@@ -13,7 +13,7 @@ export const UserSocials = ({ author, className }: Props) => {
   if (!author || !author?.profile?.social) return null;
 
   return (
-    <div className={`flex w-full items-center gap-1.5 ${className}`}>
+    <div className={`flex w-full items-center gap-1 ${className}`}>
       {!isEmptySocial(author?.profile?.social?.discord) && (
         <a
           href={author?.profile?.social.discord}

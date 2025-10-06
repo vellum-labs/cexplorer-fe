@@ -46,8 +46,8 @@ export const WithdrawalLeaderboard: FC = () => {
       <section
         className={`flex w-full max-w-desktop flex-col px-mobile pb-2 md:px-desktop`}
       >
-        <div className='mb-2 flex w-full flex-wrap items-center justify-between gap-2 min-[790px]:flex-nowrap'>
-          <div className='flex items-center gap-2'>
+        <div className='mb-2 flex w-full flex-wrap items-center justify-between gap-1 min-[790px]:flex-nowrap'>
+          <div className='flex items-center gap-1'>
             <SortBy
               selectItems={selectItems}
               setSelectedItem={setSelectedItem}
@@ -55,7 +55,7 @@ export const WithdrawalLeaderboard: FC = () => {
               disabled
             />
           </div>
-          <div className='flex items-center gap-2 min-[790px]:flex-grow-0'>
+          <div className='flex items-center gap-1 min-[790px]:flex-grow-0'>
             <Button
               size='md'
               rightIcon={<FileText size={15} />}

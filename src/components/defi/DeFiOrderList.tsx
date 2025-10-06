@@ -155,7 +155,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
     {
       key: "tx",
       render: item => (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           <Link
             to='/dex/swap/$hash'
             params={{
@@ -218,9 +218,9 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         },
         onReset: () => changeFilterByKey("type"),
         filterContent: (
-          <div className='flex w-full flex-col justify-center gap-2 p-1'>
-            <div className='flex items-center gap-3'>
-              <label className='flex items-center gap-2'>
+          <div className='flex w-full flex-col justify-center gap-1 p-1'>
+            <div className='flex items-center gap-1.5'>
+              <label className='flex items-center gap-1'>
                 <input
                   type='radio'
                   name='status'
@@ -236,7 +236,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                 />
                 <span className='text-sm'>Buy</span>
               </label>
-              <label className='flex items-center gap-2'>
+              <label className='flex items-center gap-1'>
                 <input
                   type='radio'
                   name='status'
@@ -388,7 +388,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         );
 
         return (
-          <div className='flex flex-col gap-2'>
+          <div className='flex flex-col gap-1'>
             {currency === "ada" ? (
               <p title={ada} className='text-right'>
                 <AdaWithTooltip data={item?.amount_in * 1e6} />
@@ -475,7 +475,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         const isCanceled = item.status === "CANCELLED";
 
         return (
-          <div className='flex items-center gap-1'>
+          <div className='flex items-center gap-1/2'>
             <Link
               to='/dex/swap/$hash'
               params={{
@@ -485,7 +485,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
             >
               <FileText size={15} className='cursor-pointer text-primary' />
             </Link>
-            <p className='flex items-center gap-1 rounded-md border border-border px-1 text-sm'>
+            <p className='flex items-center gap-1/2 rounded-md border border-border px-1 text-sm'>
               {isSuccess ? (
                 <Check className='text-greenText' size={15} />
               ) : isCanceled ? (
@@ -512,8 +512,8 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         onFilter: () => changeFilterByKey("status", filterDraft["status"]),
         onReset: () => changeFilterByKey("status"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-2 py-1'>
-            <label className='flex items-center gap-2'>
+          <div className='flex flex-col gap-1 px-2 py-1'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='status'
@@ -526,7 +526,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
               />
               <span className='text-sm'>Complete</span>
             </label>
-            <label className='flex items-center gap-2'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='status'
@@ -571,11 +571,11 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         const Icon = addressIcons[level];
 
         return (
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             {item?.user?.balance && (
               <Image src={Icon} className='h-4 w-4 rounded-full' />
             )}
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-1'>
               <Link
                 to={"/address/$address"}
                 params={{
@@ -650,8 +650,8 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         onFilter: () => changeFilterByKey("dex", filterDraft["dex"]),
         onReset: () => changeFilterByKey("dex"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-2 py-1'>
-            <label className='flex items-center gap-2'>
+          <div className='flex flex-col gap-1 px-2 py-1'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='dex'
@@ -662,7 +662,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
               />
               <span className='text-sm'>SundaeSwap</span>
             </label>
-            <label className='flex items-center gap-2'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='dex'
@@ -682,15 +682,15 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
   ];
 
   return (
-    <div className='flex w-full flex-col gap-2 rounded-lg sm:gap-0'>
-      <div className='flex flex-wrap items-center justify-between gap-y-1 pb-2'>
-        <div className='flex items-center gap-2'>
+    <div className='flex w-full flex-col gap-1 rounded-lg sm:gap-0'>
+      <div className='flex flex-wrap items-center justify-between gap-y-1/2 pb-2'>
+        <div className='flex items-center gap-1'>
           {pulseDot && <PulseDot />}
           <h2 className={titleClassname ? titleClassname : ""}>
             Global trading activity
           </h2>
         </div>
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           <ExportButton columns={columns} items={items} />
           <TableSettingsDropdown
             rows={rows}
@@ -707,13 +707,13 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         </div>
       </div>
       {hasFilter && (
-        <div className='flex flex-wrap items-center gap-1 md:flex-nowrap'>
+        <div className='flex flex-wrap items-center gap-1/2 md:flex-nowrap'>
           {Object.entries(filter).map(
             ([key, value]) =>
               value && (
                 <div
                   key={key}
-                  className='mb-1 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
+                  className='mb-1 flex w-fit items-center gap-1/2 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
                 >
                   <span>{key[0].toUpperCase() + key.slice(1)}:</span>
                   {key === "maker" && (

@@ -24,7 +24,7 @@ const PoolSaturation = ({ live_stake, className }: Props) => {
   const fixedPoolCapUsed = poolCapUsed ? poolCapUsed.toFixed(2) : 0;
 
   return (
-    <div className={`flex w-full items-center gap-1 ${className}`}>
+    <div className={`flex w-full items-center gap-1/2 ${className}`}>
       <div
         className={`relative h-3 max-w-20 overflow-hidden rounded-[4px] ${
           theme === "dark" ? "bg-[#505359]" : "bg-[#E4E7EC]"

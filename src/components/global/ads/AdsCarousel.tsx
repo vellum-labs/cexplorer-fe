@@ -42,7 +42,7 @@ const AdsCarousel = ({
 
   return (
     <aside
-      className={`flex w-full max-w-desktop flex-wrap justify-between gap-4 ${!singleItem ? "p-mobile md:p-desktop" : ""} ${className}`}
+      className={`flex w-full max-w-desktop flex-wrap justify-between gap-2 ${!singleItem ? "p-mobile md:p-desktop" : ""} ${className}`}
     >
       <Carousel
         plugins={[

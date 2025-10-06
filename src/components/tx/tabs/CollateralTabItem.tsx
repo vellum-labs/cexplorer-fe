@@ -25,7 +25,7 @@ const CollateralTabItem = () => {
     {
       key: "address",
       render: item => (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <AddressTypeInitialsBadge address={item.payment_addr_bech32} />
           <AddressCell address={item.payment_addr_bech32} />
         </div>
@@ -55,7 +55,7 @@ const CollateralTabItem = () => {
     {
       key: "asset",
       render: item => (
-        <span className='flex justify-end gap-1 text-right'>
+        <span className='flex justify-end gap-1/2 text-right'>
           {item.asset?.map(asset => (
             <AssetLink
               type={"input"}

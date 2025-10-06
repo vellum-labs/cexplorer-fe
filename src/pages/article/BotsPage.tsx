@@ -62,14 +62,14 @@ export const BotsPage = () => {
       <main className='flex min-h-minHeight w-full flex-col items-center px-mobile md:px-desktop'>
         <div className='flex w-full max-w-desktop flex-col items-center'>
           <h1 className='py-4'>Cexplorer.io Bots</h1>
-          <div className='flex w-full flex-col items-center gap-8 px-mobile md:px-desktop'>
+          <div className='flex w-full flex-col items-center gap-4 px-mobile md:px-desktop'>
             {bots.map(item => (
               <div
                 key={item.key}
-                className='flex w-full max-w-[800px] flex-col justify-between gap-2 rounded-lg border border-border px-mobile py-mobile sm:flex-row sm:items-center sm:gap-0 md:px-desktop'
+                className='flex w-full max-w-[800px] flex-col justify-between gap-1 rounded-lg border border-border px-mobile py-mobile sm:flex-row sm:items-center sm:gap-0 md:px-desktop'
               >
-                <div className='flex max-w-[410px] flex-col gap-3'>
-                  <div className='flex w-full flex-wrap gap-2'>
+                <div className='flex max-w-[410px] flex-col gap-1.5'>
+                  <div className='flex w-full flex-wrap gap-1'>
                     {item.tags.map(tag => (
                       <div
                         key={tag}
@@ -90,8 +90,8 @@ export const BotsPage = () => {
                     ))}
                   </div>
                   <div className='flex flex-grow items-center justify-between'>
-                    <div className='flex flex-col justify-between gap-1 self-start text-wrap'>
-                      <div className='flex items-center gap-2'>
+                    <div className='flex flex-col justify-between gap-1/2 self-start text-wrap'>
+                      <div className='flex items-center gap-1'>
                         <img
                           src={item.icon}
                           alt='BotIcon'
@@ -123,7 +123,7 @@ export const BotsPage = () => {
                 )}
               </div>
             ))}
-            <div className='flex max-w-[800px] flex-col gap-8 text-wrap pb-5'>
+            <div className='flex max-w-[800px] flex-col gap-4 text-wrap pb-5'>
               <div className='w-full text-center'>
                 <h1>Bots and Automation</h1>
               </div>

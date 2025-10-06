@@ -76,8 +76,8 @@ const faq = [
     question:
       "8. Are there any additional perks for owning a Cexplorer PRO NFT?",
     answer: (
-      <div className='flex flex-col gap-2'>
-        <span className='flex gap-1'>
+      <div className='flex flex-col gap-1'>
+        <span className='flex gap-1/2'>
           Yes! Alongside the Basic API tier benefits,{" "}
           <Link className='text-primary underline' to='/pro'>
             Cexplorer PRO NFT
@@ -159,7 +159,7 @@ export const ApiInfoPage = () => {
 
   return (
     <main className='flex min-h-minHeight w-full flex-col items-center'>
-      <div className='mt-6 flex w-full max-w-desktop flex-col items-center gap-8 px-mobile pb-3 text-center md:px-desktop'>
+      <div className='mt-6 flex w-full max-w-desktop flex-col items-center gap-4 px-mobile pb-3 text-center md:px-desktop'>
         <span className='text-sm font-medium text-primary'>
           Elevate your projects with
         </span>
@@ -170,11 +170,11 @@ export const ApiInfoPage = () => {
           Effortless access to blockchain data. Choose the perfect plan for your
           needs.
         </p>
-        <div className='flex w-full items-center justify-center gap-2'>
+        <div className='flex w-full items-center justify-center gap-1'>
           <Button label='Docs' variant='tertiary' size='md' />
           <Button label='API plans' variant='primary' size='md' />
         </div>
-        <section className='mt-4 flex w-full flex-wrap items-center justify-center gap-5'>
+        <section className='mt-4 flex w-full flex-wrap items-center justify-center gap-3'>
           {Object.entries(priceTiers).map(([key, value]) => (
             <PriceCard
               key={key}
@@ -188,8 +188,8 @@ export const ApiInfoPage = () => {
             />
           ))}
         </section>
-        <section className='mt-4 flex w-full max-w-[500px] flex-col items-center justify-between gap-5 rounded-xl border border-border p-2 md:flex-row md:text-left'>
-          <div className='flex flex-col gap-4'>
+        <section className='mt-4 flex w-full max-w-[500px] flex-col items-center justify-between gap-3 rounded-xl border border-border p-2 md:flex-row md:text-left'>
+          <div className='flex flex-col gap-2'>
             <h3>API documentation</h3>{" "}
             <p className='text-grayTextPrimary'>
               Explore the API docs to get started with your project!{" "}
@@ -231,7 +231,7 @@ export const ApiInfoPage = () => {
             </AccordionItem>
           ))}
         </Accordion>
-        <section className='flex w-full flex-col items-center gap-6 rounded-xl bg-darker p-2'>
+        <section className='flex w-full flex-col items-center gap-3 rounded-xl bg-darker p-2'>
           <img
             src={CexLogo}
             alt='Cexplorer logo'
@@ -281,9 +281,9 @@ const PriceCard = ({
       <span className='mt-3 font-medium'>{tier}</span>
       <h1 className='md:text-[40px]'>{title}</h1>
       <span className='text-sm text-grayTextPrimary'>{subtitle}</span>
-      <ul className='mt-2 flex flex-col gap-2 text-left text-sm'>
+      <ul className='mt-2 flex flex-col gap-1 text-left text-sm'>
         {features.map((feature, index) => (
-          <li key={index} className='flex items-center gap-2'>
+          <li key={index} className='flex items-center gap-1'>
             <CheckCircle
               color={colors.primary}
               size={15}

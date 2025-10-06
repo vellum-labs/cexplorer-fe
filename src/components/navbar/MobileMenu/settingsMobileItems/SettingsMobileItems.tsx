@@ -47,7 +47,7 @@ export const SettingsMobileItems: FC<SettingsMobileItemsProps> = ({
     <>
       <button
         onClick={onBack}
-        className='flex h-[34px] -translate-x-1 items-center gap-2 font-medium'
+        className='flex h-[34px] -translate-x-1 items-center gap-1 font-medium'
       >
         <ChevronLeft size={20} className='font-normal' />
         <span>Settings</span>
@@ -56,7 +56,7 @@ export const SettingsMobileItems: FC<SettingsMobileItemsProps> = ({
         {(settingsMobileItems || []).map(({ component, onClick }, i) => (
           <Fragment key={i}>
             <div
-              className='mt-1.5 flex h-[50px] w-full items-center justify-between gap-5 border-b border-border pb-1.5 font-medium'
+              className='mt-1.5 flex h-[50px] w-full items-center justify-between gap-3 border-b border-border pb-1.5 font-medium'
               onClick={onClick}
             >
               {component}

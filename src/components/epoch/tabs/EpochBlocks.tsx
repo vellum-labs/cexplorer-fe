@@ -180,8 +180,8 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
 
   return (
     <>
-      <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-        <div className='flex w-full items-center justify-between gap-2'>
+      <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+        <div className='flex w-full items-center justify-between gap-1'>
           {!totalItems ? (
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
@@ -189,7 +189,7 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
               Total of {formatNumber(totalItems)} blocks
             </h3>
           )}
-          <div className='flex items-center gap-2 md:hidden'>
+          <div className='flex items-center gap-1 md:hidden'>
             <ExportButton columns={columns} items={items} />
             <TableSettingsDropdown
               rows={rows}
@@ -206,7 +206,7 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
           </div>
         </div>
 
-        <div className='flex gap-2'>
+        <div className='flex gap-1'>
           <TableSearchInput
             placeholder='Search your results...'
             value={tableSearch}
@@ -228,7 +228,7 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
             searchPrefix={searchPrefix}
             setSearchPrefix={setSearchPrefix}
           />
-          <div className='hidden items-center gap-2 md:flex'>
+          <div className='hidden items-center gap-1 md:flex'>
             <ExportButton columns={columns} items={items} />
             <TableSettingsDropdown
               rows={rows}

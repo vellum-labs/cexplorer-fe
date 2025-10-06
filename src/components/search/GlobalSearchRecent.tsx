@@ -25,7 +25,7 @@ export const GlobalSearchRecent: FC = () => {
 
   return (
     <div
-      className={`flex w-full flex-col items-center gap-1 overflow-hidden px-3`}
+      className={`flex w-full flex-col items-center gap-1/2 overflow-hidden px-3`}
     >
       {recentSearch.length ? (
         <>
@@ -38,10 +38,10 @@ export const GlobalSearchRecent: FC = () => {
             {recentSearch.map((value, index) => (
               <div
                 key={value}
-                className='flex cursor-pointer items-center justify-between gap-1 py-1/2 hover:bg-cardBg'
+                className='flex cursor-pointer items-center justify-between gap-1/2 py-1/2 hover:bg-cardBg'
                 onClick={() => handleSearchChange(value)}
               >
-                <div className='flex items-center gap-1'>
+                <div className='flex items-center gap-1/2'>
                   <History size={15} className='text-grayTextPrimary' />
                   <span className='text-grayTextPrimary text-sm font-semibold'>
                     {value.length > 35 ? formatString(value, "long") : value}

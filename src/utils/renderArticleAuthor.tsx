@@ -10,7 +10,7 @@ export const renderArticleAuthor = (author: User | undefined) => {
   let authorName;
   if (!author)
     authorName = (
-      <span className='flex items-center gap-1'>
+      <span className='flex items-center gap-1/2'>
         Hidden
         <Tooltip
           content={
@@ -50,7 +50,7 @@ export const renderArticleAuthor = (author: User | undefined) => {
     );
   }
   return (
-    <span className='flex items-center gap-1 text-sm text-text'>
+    <span className='flex items-center gap-1/2 text-sm text-text'>
       By: {authorName}
     </span>
   );

@@ -116,7 +116,7 @@ const WalletConfigModal = () => {
         </p>
       </div>
 
-      <div className='flex items-center gap-2'>
+      <div className='flex items-center gap-1'>
         <span className='text-sm'>Security level:</span>
         <Tooltip
           forceDirection='left'
@@ -135,7 +135,7 @@ const WalletConfigModal = () => {
           secureRef.current = parseInt(value) as 0 | 1;
         }}
         defaultValue='0'
-        className='mt-1.5 flex gap-6'
+        className='mt-1.5 flex gap-3'
       >
         <div className='flex items-center space-x-2'>
           <RadioGroupItem value='0' id='0' />
@@ -153,7 +153,7 @@ const WalletConfigModal = () => {
           expirationRef.current = value as "d" | "w" | "m" | "y";
         }}
         defaultValue='y'
-        className='mt-1.5 flex gap-4'
+        className='mt-1.5 flex gap-2'
       >
         <div className='flex items-center space-x-2'>
           <RadioGroupItem value='d' id='d' />

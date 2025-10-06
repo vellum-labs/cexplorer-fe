@@ -43,7 +43,7 @@ export const PollDetailPage = () => {
   const renderStatusBadge = (status: "available" | "closed" | undefined) => {
     if (status === "available") {
       return (
-        <Badge color='gray' className='gap-2'>
+        <Badge color='gray' className='gap-1'>
           <PulseDot />
           Live
         </Badge>
@@ -112,14 +112,14 @@ export const PollDetailPage = () => {
           { label: pollDetail?.name },
         ]}
       >
-        <div className='flex w-full max-w-desktop flex-col gap-5 px-mobile pb-3 md:flex-row md:px-desktop'>
-          <section className='order-2 flex flex-col gap-2 rounded-xl border border-border p-2 md:order-none'>
+        <div className='flex w-full max-w-desktop flex-col gap-3 px-mobile pb-3 md:flex-row md:px-desktop'>
+          <section className='order-2 flex flex-col gap-1 rounded-xl border border-border p-2 md:order-none'>
             <h2 className='mb-1'>{pollDetail?.name}</h2>
             <span className='text-sm font-light text-grayTextSecondary'>
               Description
             </span>
             <div>{parse(pollDetail?.description ?? "")}</div>
-            <div className='mt-3 flex gap-2 bg-darker p-2 text-sm text-grayTextPrimary'>
+            <div className='mt-3 flex gap-1 bg-darker p-2 text-sm text-grayTextPrimary'>
               <div className='flex h-7 w-7 items-center justify-center rounded-md border border-border bg-background p-1/2'>
                 <Info size={20} color={colors.darkBlue} />
               </div>
@@ -145,7 +145,7 @@ export const PollDetailPage = () => {
                 optionRef.current = value;
               }}
               defaultValue='0'
-              className='mb-3 flex flex-col gap-4'
+              className='mb-3 flex flex-col gap-2'
             >
               {pollDetail?.options.map((option, i) => (
                 <div
@@ -187,8 +187,8 @@ export const PollDetailPage = () => {
               />
             )}
           </section>
-          <div className='flex min-w-[350px] flex-col gap-5'>
-            <section className='order-1 flex w-full flex-col gap-1 rounded-xl border border-border p-2 text-xs md:order-none'>
+          <div className='flex min-w-[350px] flex-col gap-3'>
+            <section className='order-1 flex w-full flex-col gap-1/2 rounded-xl border border-border p-2 text-xs md:order-none'>
               <div className='mb-2 flex w-full items-center justify-between'>
                 <h3>Status</h3> {renderStatusBadge(pollDetail?.state)}
               </div>
@@ -250,7 +250,7 @@ const CustomLegend = ({
   );
 
   return (
-    <div className='mt-3 flex flex-col gap-2 text-sm text-grayTextSecondary'>
+    <div className='mt-3 flex flex-col gap-1 text-sm text-grayTextSecondary'>
       <div className='flex justify-between'>
         Total voters{" "}
         <span className='text-grayTextPrimary'>{totalVoteCount}</span>
@@ -264,7 +264,7 @@ const CustomLegend = ({
         return (
           <div
             key={key}
-            className='flex items-center gap-2 text-sm text-grayTextSecondary'
+            className='flex items-center gap-1 text-sm text-grayTextSecondary'
           >
             <div
               className={`h-3 w-3 rounded-full`}

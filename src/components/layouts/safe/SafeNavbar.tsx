@@ -20,10 +20,10 @@ export const SafeNavbar: FC = () => {
     <header>
       <nav className='flex h-[75px] w-full items-center justify-center border-b border-borderFaded bg-cardBg py-2 pr-2 lg:pr-0'>
         <div className='flex w-full max-w-desktop justify-between p-mobile md:px-desktop md:py-mobile'>
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <MainLogo className='-translate-x-[6px]' />
           </div>
-          <div className='hidden items-center gap-5 xl:flex xl:h-[75px]'>
+          <div className='hidden items-center gap-3 xl:flex xl:h-[75px]'>
             <Dropdown
               id='blockchain'
               label='Blockchain'
@@ -112,7 +112,7 @@ export const SafeNavbar: FC = () => {
               }
             />
           </div>
-          <div className='hidden items-center gap-5 md:flex'>
+          <div className='hidden items-center gap-3 md:flex'>
             {enabledWalletConnector && <WalletButton />}
             <SettingsDropdown />
           </div>

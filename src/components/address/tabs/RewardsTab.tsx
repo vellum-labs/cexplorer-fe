@@ -131,10 +131,10 @@ export const RewardsTab: FC<RewardsTabProps> = ({
   }, [totalCount, totalItems]);
 
   return (
-    <div className='flex flex-col gap-3'>
+    <div className='flex flex-col gap-1.5'>
       {stake.length > 0 && <RewardsGraph data={data} />}
       <div
-        className={`flex w-full items-center ${rewardsQuery.isError || !(data ?? []).length ? "justify-end" : "justify-between"} gap-2 md:flex-nowrap`}
+        className={`flex w-full items-center ${rewardsQuery.isError || !(data ?? []).length ? "justify-end" : "justify-between"} gap-1 md:flex-nowrap`}
       >
         {rewardsQuery.isError ? (
           <></>
@@ -147,8 +147,8 @@ export const RewardsTab: FC<RewardsTabProps> = ({
             Total of {totalItems} rewards
           </h3>
         )}
-        <div className='flex items-center gap-2'>
-          <div className='flex h-[40px] w-fit shrink-0 items-center justify-center gap-1 rounded-md border border-border px-1.5'>
+        <div className='flex items-center gap-1'>
+          <div className='flex h-[40px] w-fit shrink-0 items-center justify-center gap-1/2 rounded-md border border-border px-1.5'>
             <Download size={20} color={colors.text} />
             <span className='text-sm font-medium'>Export</span>
           </div>

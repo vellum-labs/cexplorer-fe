@@ -96,7 +96,7 @@ export const ScriptListRanklistTab: FC = () => {
                 {item?.label?.label}
               </Link>
             )}
-            <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-1/2'>
               <Link
                 to='/script/$hash'
                 params={{ hash: item?.hash }}
@@ -236,15 +236,15 @@ export const ScriptListRanklistTab: FC = () => {
           ""
         )}
       </div>
-      <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-        <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
+      <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+        <div className='flex w-full flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
           <SortBy
             selectItems={selectItems}
             selectedItem={selectedItem}
             setSelectedItem={setSelectedItem}
           />
           <div className='flex justify-end md:hidden'>
-            <div className='flex items-center gap-2 md:hidden'>
+            <div className='flex items-center gap-1 md:hidden'>
               <ExportButton
                 columns={columns}
                 items={items}
@@ -269,7 +269,7 @@ export const ScriptListRanklistTab: FC = () => {
           </div>
         </div>
 
-        <div className='flex gap-2'>
+        <div className='flex gap-1'>
           <TableSearchInput
             placeholder='Search by script hash...'
             value={tableSearch}
@@ -278,7 +278,7 @@ export const ScriptListRanklistTab: FC = () => {
             showSearchIcon
             showPrefixPopup={false}
           />
-          <div className='hidden items-center gap-2 md:flex'>
+          <div className='hidden items-center gap-1 md:flex'>
             <ExportButton
               columns={columns}
               items={items}

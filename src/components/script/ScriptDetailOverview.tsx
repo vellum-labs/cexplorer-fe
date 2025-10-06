@@ -102,7 +102,7 @@ export const ScriptDetailOverview = ({ query }: Props) => {
               itemSize={280}
               className='w-[300px]'
             >
-              <div className='flex w-fit items-center gap-2'>
+              <div className='flex w-fit items-center gap-1'>
                 <Button
                   label='Show'
                   variant='tertiary'
@@ -118,7 +118,7 @@ export const ScriptDetailOverview = ({ query }: Props) => {
     : null;
 
   return (
-    <div className='flex w-full max-w-desktop flex-col gap-5 p-mobile pb-0 lg:flex-row lg:p-desktop lg:pb-0'>
+    <div className='flex w-full max-w-desktop flex-col gap-3 p-mobile pb-0 lg:flex-row lg:p-desktop lg:pb-0'>
       {query.isLoading || !overviewList ? (
         <>
           <LoadingSkeleton
@@ -127,7 +127,7 @@ export const ScriptDetailOverview = ({ query }: Props) => {
             rounded='xl'
             className='grow basis-[500px]'
           />
-          <section className='flex w-full flex-col gap-5 lg:w-[400px] lg:justify-between'>
+          <section className='flex w-full flex-col gap-3 lg:w-[400px] lg:justify-between'>
             <LoadingSkeleton height='110px' rounded='xl' className='' />
             <LoadingSkeleton height='110px' rounded='xl' className='' />
             <LoadingSkeleton height='110px' rounded='xl' className='' />
@@ -140,7 +140,7 @@ export const ScriptDetailOverview = ({ query }: Props) => {
             title='Script Overview'
             overviewList={overviewList}
           />
-          <section className='flex w-full flex-col gap-5 lg:w-[400px]'>
+          <section className='flex w-full flex-col gap-3 lg:w-[400px]'>
             <OverviewStatCard
               icon={<LineChart color={colors.primary} />}
               title='Volume total'

@@ -108,7 +108,7 @@ export const StakeDeregistrationsPage = () => {
     {
       key: "epoch_block",
       render: item => (
-        <div className='flex items-center justify-end gap-1'>
+        <div className='flex items-center justify-end gap-1/2'>
           <EpochCell no={item.block.epoch_no} /> /{" "}
           <BlockCell hash={item.block.hash} no={item.block.no} />
         </div>
@@ -139,7 +139,7 @@ export const StakeDeregistrationsPage = () => {
       breadcrumbItems={[{ label: "Stake deregistrations" }]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
-        <div className='mb-2 flex w-full items-center justify-between gap-2'>
+        <div className='mb-2 flex w-full items-center justify-between gap-1'>
           {!totalItems ? (
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
@@ -147,7 +147,7 @@ export const StakeDeregistrationsPage = () => {
               Total of {formatNumber(totalItems ?? 0)} deregistrations
             </h3>
           )}
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <ExportButton columns={columns} items={items} />
             <TableSettingsDropdown
               rows={rows}

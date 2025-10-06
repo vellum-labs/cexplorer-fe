@@ -56,7 +56,7 @@ export const ConstitutionalCommitteeNameCell: FC<
       ) * 10
   }deg)`;
   return (
-    <div className='relative flex max-h-[75px] w-full items-center gap-2'>
+    <div className='relative flex max-h-[75px] w-full items-center gap-1'>
       {item?.data?.image_url ? (
         <Image
           src={item?.data?.image_url}
@@ -85,7 +85,7 @@ export const ConstitutionalCommitteeNameCell: FC<
             {item?.data?.given_name}
           </Link>
         )}
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <Link
             to='/gov/cc/$coldKey'
             params={{ coldKey: item?.hash?.view }}

@@ -154,7 +154,7 @@ export const useDrepList = ({
         }
 
         return (
-          <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-lg border border-border px-[10px]'>
+          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-lg border border-border px-[10px]'>
             <PulseDot color={!item.is_active ? "bg-redText" : undefined} />
             <span className='text-xs font-medium'>
               {item.is_active ? "Active" : "Inactive"}
@@ -206,7 +206,7 @@ export const useDrepList = ({
       title: (
         <div className='flex w-full justify-end'>
           <div
-            className='flex w-fit cursor-pointer items-center gap-1 text-right'
+            className='flex w-fit cursor-pointer items-center gap-1/2 text-right'
             onClick={() => {
               if (!setList) {
                 navigate({
@@ -302,7 +302,7 @@ export const useDrepList = ({
       title: (
         <div className='flex w-full justify-end'>
           <div
-            className='flex w-fit cursor-pointer items-center gap-1 text-right'
+            className='flex w-fit cursor-pointer items-center gap-1/2 text-right'
             onClick={() => {
               if (!setList) {
                 navigate({
@@ -344,7 +344,7 @@ export const useDrepList = ({
       title: (
         <div className='flex w-full justify-end'>
           <div
-            className='flex w-fit cursor-pointer items-center gap-1 text-right'
+            className='flex w-fit cursor-pointer items-center gap-1/2 text-right'
             onClick={() => {
               if (!setList) {
                 navigate({
@@ -391,7 +391,7 @@ export const useDrepList = ({
       title: (
         <div className='flex'>
           <div
-            className='flex w-fit cursor-pointer items-center gap-1 text-right'
+            className='flex w-fit cursor-pointer items-center gap-1/2 text-right'
             onClick={() => {
               if (!setList) {
                 navigate({
@@ -430,7 +430,7 @@ export const useDrepList = ({
       title: (
         <div className='flex w-full justify-end'>
           <div
-            className='flex w-fit cursor-pointer items-center gap-1 text-right'
+            className='flex w-fit cursor-pointer items-center gap-1/2 text-right'
             onClick={() => {
               if (!setList) {
                 navigate({
@@ -486,7 +486,7 @@ export const useDrepList = ({
         );
       },
       title: (
-        <div className='flex w-full items-center justify-end gap-1'>
+        <div className='flex w-full items-center justify-end gap-1/2'>
           <p className='text-right'>Selected vote</p>
           <X
             size={15}
@@ -512,7 +512,7 @@ export const useDrepList = ({
                   {item.pool.map(({ ident }: { ident: string }) => (
                     <div
                       key={ident}
-                      className='flex items-center justify-end gap-1 text-right'
+                      className='flex items-center justify-end gap-1/2 text-right'
                     >
                       <Link to='/pool/$id' params={{ id: ident }}>
                         <p className='min-w-36 text-primary'>
@@ -551,8 +551,8 @@ export const useDrepList = ({
         onFilter: () => changeFilterByKey("spo", filterDraft.spo),
         onReset: () => changeFilterByKey("spo"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-2 py-1'>
-            <label className='flex items-center gap-2'>
+          <div className='flex flex-col gap-1 px-2 py-1'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='spo'
@@ -563,7 +563,7 @@ export const useDrepList = ({
               />
               <span className='text-sm'>Yes</span>
             </label>
-            <label className='flex items-center gap-2'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='not_spo'
@@ -622,7 +622,7 @@ export const useDrepList = ({
       title: (
         <div className='flex w-full'>
           <div
-            className='flex w-fit cursor-pointer items-center gap-1'
+            className='flex w-fit cursor-pointer items-center gap-1/2'
             onClick={() => {
               if (!setList) {
                 navigate({

@@ -75,7 +75,7 @@ export const NewPoolsListPage: FC = () => {
               {item.pool_name?.name && item.pool_name.name}
             </span>
           </Link>
-          <div className='item-center flex gap-2'>
+          <div className='item-center flex gap-1'>
             <Link to='/pool/$id' params={{ id: item.pool_id }}>
               <span
                 className={`${item.pool_name?.ticker ? "text-xs" : "text-sm"} text-primary`}
@@ -167,7 +167,7 @@ export const NewPoolsListPage: FC = () => {
         const pledged = item?.pledged ?? 0;
 
         return (
-          <div className='flex items-center justify-end gap-1'>
+          <div className='flex items-center justify-end gap-1/2'>
             {pledged >= pledge ? (
               <Check size={11} className='translate-y-[1px] stroke-[#17B26A]' />
             ) : (
@@ -211,10 +211,10 @@ export const NewPoolsListPage: FC = () => {
       breadcrumbItems={[{ label: "New Pools" }]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
-        <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
+        <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
           <h3>Welcome, new pool operators!</h3>
 
-          <div className='mb-2 ml-auto flex w-fit justify-end gap-2'>
+          <div className='mb-2 ml-auto flex w-fit justify-end gap-1'>
             <ExportButton columns={columns} items={items} />
             <TableSettingsDropdown
               rows={rows}

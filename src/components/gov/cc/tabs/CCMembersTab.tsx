@@ -46,7 +46,7 @@ export const CCMembersTab: FC = () => {
         const toPath = identRaw !== "N/A" ? `/gov/cc/${identRaw}` : undefined;
 
         return (
-          <div className='relative flex max-h-[75px] w-full items-center gap-2'>
+          <div className='relative flex max-h-[75px] w-full items-center gap-1'>
             <Image
               src={generateImageUrl(identRaw, "ico", "cc")}
               type='user'
@@ -61,7 +61,7 @@ export const CCMembersTab: FC = () => {
                   {name.length > 50 ? `${name.slice(0, 50)}...` : name}
                 </Link>
               )}
-              <div className='flex items-center gap-1'>
+              <div className='flex items-center gap-1/2'>
                 {toPath ? (
                   <Link
                     to={toPath}
@@ -99,7 +99,7 @@ export const CCMembersTab: FC = () => {
         return (
           <div className='flex flex-col text-sm'>
             {hash !== "N/A" ? (
-              <div className='flex gap-2'>
+              <div className='flex gap-1'>
                 <Link
                   to='/tx/$hash'
                   params={{

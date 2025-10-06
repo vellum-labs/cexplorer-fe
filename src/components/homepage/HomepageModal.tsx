@@ -47,7 +47,7 @@ export const HomepageModal: FC = () => {
             </div>
           ))}
         </div>
-        <div className='thin-scrollbar flex h-[312px] w-full flex-wrap gap-3 overflow-y-auto overscroll-none border-l border-border px-1.5'>
+        <div className='thin-scrollbar flex h-[312px] w-full flex-wrap gap-1.5 overflow-y-auto overscroll-none border-l border-border px-1.5'>
           {widgetCategories[activeCategory].widgets.map((widget, index) => (
             <HomepageModalWidget
               key={index}
@@ -61,7 +61,7 @@ export const HomepageModal: FC = () => {
           ))}
         </div>
       </div>
-      <div className='flex w-full items-center justify-end gap-2'>
+      <div className='flex w-full items-center justify-end gap-1'>
         <Button
           size='md'
           variant='tertiary'

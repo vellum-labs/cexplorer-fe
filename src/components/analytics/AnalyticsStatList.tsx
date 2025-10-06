@@ -19,7 +19,7 @@ export const AnalyticsStatList: FC<AnalyticsStatListProps> = ({
   statCards,
 }) => {
   return (
-    <div className='flex h-full w-full flex-wrap gap-4'>
+    <div className='flex h-full w-full flex-wrap gap-2'>
       {statCards.map(({ icon, key, label, content, footer }) =>
         isLoading ? (
           <LoadingSkeleton

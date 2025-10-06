@@ -151,7 +151,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
                 {
                   label: "ID",
                   value: (
-                    <div className='flex items-center gap-2'>
+                    <div className='flex items-center gap-1'>
                       <span className={"text-xs"}>
                         {formatString(
                           data?.vote?.drep?.hash?.view ?? "",
@@ -166,7 +166,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
               ]}
             >
               <div
-                className={`flex w-fit cursor-pointer items-center gap-1 rounded-md border ${theme === "light" ? "border-[#E4E7EC]" : "border-gray-600"} p-1`}
+                className={`flex w-fit cursor-pointer items-center gap-1/2 rounded-md border ${theme === "light" ? "border-[#E4E7EC]" : "border-gray-600"} p-1`}
               >
                 {data?.vote?.drep?.data?.given_name ? (
                   <Link
@@ -177,7 +177,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
                     {data?.vote?.drep?.data?.given_name}
                   </Link>
                 ) : (
-                  <div className='flex items-center gap-2'>
+                  <div className='flex items-center gap-1'>
                     <Link
                       to='/drep/$hash'
                       params={{ hash: data?.vote?.drep?.hash?.view ?? "" }}

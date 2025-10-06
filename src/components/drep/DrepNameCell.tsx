@@ -37,7 +37,7 @@ export const DrepNameCell: FC<DrepNameCellProps> = ({ item }) => {
     .slice(0, 3);
 
   return (
-    <div className='relative flex max-h-[75px] w-full items-center gap-2'>
+    <div className='relative flex max-h-[75px] w-full items-center gap-1'>
       <Image
         src={generateImageUrl(item?.hash?.view ?? "", "ico", "drep")}
         type='user'
@@ -59,7 +59,7 @@ export const DrepNameCell: FC<DrepNameCellProps> = ({ item }) => {
               : item?.data?.given_name}
           </Link>
         )}
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <Link
             to='/drep/$hash'
             params={{ hash: item?.hash?.view ?? "" }}

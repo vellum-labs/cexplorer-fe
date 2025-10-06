@@ -9,7 +9,7 @@ const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
   <nav
     role='navigation'
     aria-label='pagination'
-    className={cn("flex w-full justify-center gap-3", className)}
+    className={cn("flex w-full justify-center gap-1.5", className)}
     {...props}
   />
 );
@@ -21,7 +21,7 @@ const PaginationContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ul
     ref={ref}
-    className={cn("flex flex-row items-center gap-3", className)}
+    className={cn("flex flex-row items-center gap-1.5", className)}
     {...props}
   />
 ));
@@ -66,7 +66,7 @@ const PaginationPrevious = ({
   <PaginationLink
     aria-label='Go to previous page'
     size='default'
-    className={cn("gap-1", className)}
+    className={cn("gap-1/2", className)}
     {...props}
   >
     <ChevronLeft className='h-4 w-4' />
@@ -81,7 +81,7 @@ const PaginationNext = ({
   <PaginationLink
     aria-label='Go to next page'
     size='default'
-    className={cn("gap-1", className)}
+    className={cn("gap-1/2", className)}
     {...props}
   >
     <ChevronRight className='h-4 w-4 grow-0' />

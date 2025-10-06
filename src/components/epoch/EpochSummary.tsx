@@ -59,7 +59,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
       label: "End",
       value:
         stats.epoch_no === currentEpoch ? (
-          <div className='flex items-center gap-3'>
+          <div className='flex items-center gap-1.5'>
             <div className='relative min-h-2 w-1/2 overflow-hidden rounded-[4px] bg-[#FEC84B]'>
               <span
                 className='absolute left-0 block h-2 rounded-bl-[4px] rounded-tl-[4px] bg-[#47CD89]'

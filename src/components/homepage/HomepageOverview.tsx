@@ -27,7 +27,7 @@ export const HomepageOverview: FC = () => {
       footer: (
         <div className='flex h-[40px] items-center justify-end border-t border-border px-3'>
           <Link to='/ada-price'>
-            <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-1/2'>
               <span className='text-sm font-semibold text-primary'>
                 Price graph
               </span>
@@ -49,7 +49,7 @@ export const HomepageOverview: FC = () => {
       footer: (
         <div className='flex h-[40px] items-center justify-end border-t border-border px-3'>
           <Link to='/epoch'>
-            <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-1/2'>
               <span className='text-sm font-semibold text-primary'>
                 Epoch list
               </span>
@@ -67,7 +67,7 @@ export const HomepageOverview: FC = () => {
       footer: (
         <div className='flex h-[40px] items-center justify-end border-t border-border px-3'>
           <Link to='/analytics/pool'>
-            <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-1/2'>
               <span className='text-sm font-semibold text-primary'>
                 Staking analytics
               </span>
@@ -87,7 +87,7 @@ export const HomepageOverview: FC = () => {
     //   footer: (
     //     <div className='flex h-[40px] items-center justify-end border-t border-border px-3'>
     //       <Link to='/asset'>
-    //         <div className='flex items-center gap-1'>
+    //         <div className='flex items-center gap-1/2'>
     //           <span className='text-sm font-semibold text-primary'>Assets</span>
     //           <ArrowRight size={15} className='text-primary' />
     //         </div>
@@ -98,7 +98,7 @@ export const HomepageOverview: FC = () => {
   ];
 
   return (
-    <div className='flex flex-wrap items-stretch gap-4 xl:flex-nowrap'>
+    <div className='flex flex-wrap items-stretch gap-2 xl:flex-nowrap'>
       {statCards.map(({ icon, key, label, content, footer }) => (
         <OverviewStatCard
           key={key}

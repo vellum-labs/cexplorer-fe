@@ -15,7 +15,7 @@ export const ProfileForm: FC<ProfileFormProps> = ({
 }) => {
   return (
     <div
-      className={`flex flex-wrap items-start gap-x-10 gap-y-3 ${showBorder ? "border-b border-border" : ""} py-6`}
+      className={`flex flex-wrap items-start gap-x-5 gap-y-1.5 ${showBorder ? "border-b border-border" : ""} py-6`}
     >
       <div className='w-fit'>
         <h3>{title}</h3>

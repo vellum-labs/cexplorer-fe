@@ -178,7 +178,7 @@ export const DonatePage = () => {
           Cexplorer.io
         </p>
         <div className='flex w-full max-w-desktop flex-col'>
-          <section className='mt-6 flex flex-wrap gap-8'>
+          <section className='mt-6 flex flex-wrap gap-4'>
             <InfoCard
               icon={<Zap color={colors.darkBlue} />}
               heading='Here for Cardano since ITN'
@@ -195,7 +195,7 @@ export const DonatePage = () => {
               description='Many builders rely on our tools to develop on Cardano. Supporting us helps maintain and enhance these resources, benefiting the entire development community.'
             />
           </section>
-          <section className='mt-6 flex flex-wrap justify-center gap-8 border-b border-border pb-5'>
+          <section className='mt-6 flex flex-wrap justify-center gap-4 border-b border-border pb-5'>
             <Button
               size='lg'
               label='Stake with Cexplorer'
@@ -215,7 +215,7 @@ export const DonatePage = () => {
           </section>
           <section ref={donateRef} className='border-b border-border py-8'>
             <h2>Donate</h2>
-            <div className='flex flex-wrap justify-between gap-4'>
+            <div className='flex flex-wrap justify-between gap-2'>
               <div className='flex flex-col'>
                 <p className='mt-2 font-light text-grayTextPrimary'>
                   Thank you for supporting the development of independent
@@ -236,13 +236,13 @@ export const DonatePage = () => {
                   />
                 </div>
               </div>
-              <div className='flex flex-col gap-4'>
+              <div className='flex flex-col gap-2'>
                 <p className='text-sm font-medium'>Other donation methods</p>
-                <div className='flex flex-wrap gap-4'>
+                <div className='flex flex-wrap gap-2'>
                   <a
                     href='https://www.paypal.com/donate?business=billing@vellumlabs.cz&item_name=Cexplorer.io+-+maintenance,+development,+servers&currency_code=USD'
                     target='_blank'
-                    className='flex items-center gap-1 font-medium text-grayTextPrimary'
+                    className='flex items-center gap-1/2 font-medium text-grayTextPrimary'
                   >
                     <img src={Paypal} />
                     PayPal
@@ -250,7 +250,7 @@ export const DonatePage = () => {
                   <a
                     href='https://www.patreon.com/ADApools'
                     target='_blank'
-                    className='flex items-center gap-1 font-medium text-grayTextPrimary'
+                    className='flex items-center gap-1/2 font-medium text-grayTextPrimary'
                   >
                     <img src={Patreon} />
                     Patreon
@@ -258,7 +258,7 @@ export const DonatePage = () => {
                   <a
                     href='https://buymeacoffee.com/vellumlabs'
                     target='_blank'
-                    className='flex items-center gap-1 font-medium text-grayTextPrimary'
+                    className='flex items-center gap-1/2 font-medium text-grayTextPrimary'
                   >
                     <div className='flex h-6 w-6 items-center justify-center rounded-full bg-gray-300 dark:bg-gray-600'>
                       <img src={BuyMeACoffee} className='h-4 w-4' />
@@ -271,7 +271,7 @@ export const DonatePage = () => {
             <p className='mb-1 mt-5 text-sm font-medium'>
               Or use our dApp connector
             </p>
-            <div className='flex flex-wrap gap-4'>
+            <div className='flex flex-wrap gap-2'>
               <DonateCard
                 icon={<Coffee color={colors.darkBlue} />}
                 amount={10}
@@ -327,9 +327,9 @@ export const DonatePage = () => {
             ref={stakeRef}
             className='mt-8 flex w-full flex-wrap justify-between rounded-xl bg-cardBg px-4 py-5'
           >
-            <div className='flex basis-[550px] gap-8'>
+            <div className='flex basis-[550px] gap-4'>
               <img className='hidden shrink md:block' src={CexLogo} />
-              <div className='flex flex-col gap-3'>
+              <div className='flex flex-col gap-1.5'>
                 <h2>Stake with Cexplorer.io</h2>
                 <p className='max-w-[350px] font-light text-grayTextPrimary'>
                   Support Cexplorer and earn staking rewards by delegating your
@@ -380,7 +380,7 @@ export const DonatePage = () => {
 const InfoCard = ({ icon, heading, description }: InfoCardProps) => {
   return (
     <section className='flex grow basis-[350px] flex-col'>
-      <div className='flex items-center gap-3'>
+      <div className='flex items-center gap-1.5'>
         <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-blue-100/90 p-1/2 outline outline-[6px] outline-blue-100/50'>
           {icon}
         </div>
@@ -406,7 +406,7 @@ const CustomDonateCard = ({
   return (
     <div
       onClick={onClick}
-      className={`relative flex grow basis-[250px] cursor-pointer flex-col items-start gap-2 rounded-xl border p-1.5 ${isActive ? "outline outline-2 outline-primary" : "border-border"}`}
+      className={`relative flex grow basis-[250px] cursor-pointer flex-col items-start gap-1 rounded-xl border p-1.5 ${isActive ? "outline outline-2 outline-primary" : "border-border"}`}
     >
       <Checkbox className='absolute right-3 top-3' checked={isActive} />
       <div className='flex w-full justify-between'>
@@ -440,7 +440,7 @@ const DonateCard = ({
   return (
     <div
       onClick={onClick}
-      className={`relative flex grow basis-[250px] cursor-pointer flex-col items-start gap-2 rounded-xl border p-1.5 ${isActive ? "outline outline-2 outline-primary" : "border-border"}`}
+      className={`relative flex grow basis-[250px] cursor-pointer flex-col items-start gap-1 rounded-xl border p-1.5 ${isActive ? "outline outline-2 outline-primary" : "border-border"}`}
     >
       <Checkbox className='absolute right-3 top-3' checked={isActive} />
       <div className='flex w-full justify-between'>

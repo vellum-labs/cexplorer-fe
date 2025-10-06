@@ -55,7 +55,7 @@ export const AssetNftOwnersTab: FC<AssetNftOwnersTabProps> = ({
       key: "owner",
       render: item =>
         item?.owner?.address ? (
-          <div className='flex items-center gap-1'>
+          <div className='flex items-center gap-1/2'>
             <AddressTypeInitialsBadge address={item?.owner.address} />
             <AddressCell address={item?.owner?.address} />
           </div>

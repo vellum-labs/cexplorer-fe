@@ -126,7 +126,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
       label: (
         <div
           onMouseDown={e => e.stopPropagation()}
-          className='flex items-center justify-between gap-5'
+          className='flex items-center justify-between gap-3'
         >
           <span>Language</span>
           <Select
@@ -138,7 +138,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
             <SelectTrigger className='w-[90px]'>
               <SelectValue
                 placeholder={
-                  <div className='flex w-full items-center justify-between gap-1 uppercase'>
+                  <div className='flex w-full items-center justify-between gap-1/2 uppercase'>
                     <span>{locales[locale].value}</span>
                     <img
                       width={15}
@@ -153,7 +153,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
             <SelectContent align='end'>
               {Object.entries(locales).map(([key, value]) => (
                 <SelectItem key={key} value={key}>
-                  <div className='flex w-full items-center justify-between gap-1 uppercase'>
+                  <div className='flex w-full items-center justify-between gap-1/2 uppercase'>
                     <span>{value.value}</span>
                     <img width={15} height={15} alt='flag' src={value.image} />
                   </div>
@@ -169,7 +169,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
       label: (
         <div
           onMouseDown={e => e.stopPropagation()}
-          className='flex items-center justify-between gap-5'
+          className='flex items-center justify-between gap-3'
         >
           <span>Currency</span>
           <Popover open={openCurrency} onOpenChange={setOpenCurrency}>
@@ -266,7 +266,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
       disableHover
       hideChevron
       label={
-        <p className='flex gap-2'>
+        <p className='flex gap-1'>
           <Settings />
         </p>
       }

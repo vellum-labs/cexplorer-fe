@@ -67,7 +67,7 @@ export const DrepListPage = () => {
       footer: (
         <div className='flex flex-wrap'>
           {drepStat?.drep?.count?.active && (
-            <div className='flex w-fit items-center gap-1 pr-[26px]'>
+            <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
               <span className='text-sm text-grayTextPrimary'>Active</span>
               <span className='text-sm text-[#16B364]'>
                 {drepStat?.drep?.count?.active}
@@ -75,7 +75,7 @@ export const DrepListPage = () => {
             </div>
           )}
           {drepStat?.drep?.count?.inactive && (
-            <div className='flex w-fit items-center gap-1 pr-[26px]'>
+            <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
               <span className='text-sm text-grayTextPrimary'>Inactive</span>
               <span className='text-sm text-[#EAAA08]'>
                 {drepStat?.drep?.count?.inactive}
@@ -83,7 +83,7 @@ export const DrepListPage = () => {
             </div>
           )}
           {drepStat?.drep?.count?.retired && (
-            <div className='flex w-fit items-center gap-1 pr-[26px]'>
+            <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
               <span className='text-sm text-grayTextPrimary'>Retired</span>
               <span className='text-sm text-[#F04438]'>
                 {drepStat?.drep?.count?.retired}
@@ -108,7 +108,7 @@ export const DrepListPage = () => {
       footer: (
         <div className='flex flex-wrap'>
           {drepStat?.stake?.drep_always_abstain && (
-            <div className='flex w-fit items-center gap-1 pr-4'>
+            <div className='flex w-fit items-center gap-1/2 pr-4'>
               <span className='text-sm text-grayTextPrimary'>Abstain</span>
               <span className='text-sm text-grayTextPrimary'>
                 <AdaWithTooltip data={drepStat?.stake?.drep_always_abstain} />
@@ -116,7 +116,7 @@ export const DrepListPage = () => {
             </div>
           )}
           {drepStat?.stake?.drep_always_no_confidence && (
-            <div className='flex w-fit items-center gap-1 pr-4'>
+            <div className='flex w-fit items-center gap-1/2 pr-4'>
               <span className='text-sm text-grayTextPrimary'>
                 No confidence
               </span>
@@ -144,7 +144,7 @@ export const DrepListPage = () => {
       footer: (
         <div className='flex flex-wrap'>
           {drepAnalytics?.delegator?.drep_always_abstain?.count && (
-            <div className='flex w-fit items-center gap-1 pr-4'>
+            <div className='flex w-fit items-center gap-1/2 pr-4'>
               <span className='text-sm text-grayTextPrimary'>Abstain</span>
               <span className='text-sm text-grayTextPrimary'>
                 {formatNumber(
@@ -154,7 +154,7 @@ export const DrepListPage = () => {
             </div>
           )}
           {drepAnalytics?.delegator?.drep_always_no_confidence?.count && (
-            <div className='flex w-fit items-center gap-1 pr-4'>
+            <div className='flex w-fit items-center gap-1/2 pr-4'>
               <span className='text-sm text-grayTextPrimary'>
                 No confidence
               </span>
@@ -179,14 +179,14 @@ export const DrepListPage = () => {
         <p className='!text-2xl font-semibold !text-text'>-</p>
       ),
       footer: (
-        <div className='flex flex-wrap gap-4'>
-          <div className='flex items-center gap-1'>
+        <div className='flex flex-wrap gap-2'>
+          <div className='flex items-center gap-1/2'>
             <span className='text-sm text-grayTextPrimary'>Delegations</span>
             <span className='text-sm font-medium text-grayTextPrimary'>
               {stakeDrepRetired?.delegator?.count ?? "-"}
             </span>
           </div>
-          <div className='flex items-center gap-1'>
+          <div className='flex items-center gap-1/2'>
             <span className='text-sm text-grayTextPrimary'>Retired DReps</span>
             <span className='text-sm font-medium text-grayTextPrimary'>
               {stakeDrepRetired?.drep?.count ?? "-"}
@@ -210,7 +210,7 @@ export const DrepListPage = () => {
       metadataTitle='drepList'
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
-        <div className='flex h-full w-full flex-wrap gap-4 md:flex-nowrap'>
+        <div className='flex h-full w-full flex-wrap gap-2 md:flex-nowrap'>
           {drepAnalyticsQuery.isLoading ||
           drepStatQuery.isLoading ||
           drepAnalyticsQuery.isFetching ||

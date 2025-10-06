@@ -112,7 +112,7 @@ export const TokenDashboardTokenTab: FC = () => {
 
         return (
           <>
-            <div className='relative flex w-full items-center gap-2'>
+            <div className='relative flex w-full items-center gap-1'>
               <Link
                 to='/asset/$fingerprint'
                 params={{ fingerprint: fingerprint }}
@@ -155,7 +155,7 @@ export const TokenDashboardTokenTab: FC = () => {
                       className='ml-1'
                     />
                   </Link>
-                  <span className='flex items-center gap-1'>
+                  <span className='flex items-center gap-1/2'>
                     {renderAssetName({ name: assetName }) ? (
                       <p className='text-xs text-grayTextPrimary'>
                         {formatString(fingerprint, "long")}
@@ -294,8 +294,8 @@ export const TokenDashboardTokenTab: FC = () => {
 
   return (
     <>
-      <div className='mb-1 flex w-full flex-col justify-between gap-2 min-[870px]:flex-row min-[870px]:items-center'>
-        <div className='flex flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
+      <div className='mb-1 flex w-full flex-col justify-between gap-1 min-[870px]:flex-row min-[870px]:items-center'>
+        <div className='flex flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
           <SortBy
             selectItems={selectItems}
             selectedItem={selectedItem}
@@ -304,7 +304,7 @@ export const TokenDashboardTokenTab: FC = () => {
           />
 
           <div className='flex w-fit justify-end min-[870px]:hidden'>
-            <div className='flex items-center gap-2 min-[870px]:hidden'>
+            <div className='flex items-center gap-1 min-[870px]:hidden'>
               <ExportButton columns={columns} items={items} />
               <TableSettingsDropdown
                 rows={rows}
@@ -325,7 +325,7 @@ export const TokenDashboardTokenTab: FC = () => {
           </div>
         </div>
 
-        <div className='flex gap-2'>
+        <div className='flex gap-1'>
           <TableSearchInput
             placeholder='Search by asset name...'
             value={tableSearch}
@@ -334,7 +334,7 @@ export const TokenDashboardTokenTab: FC = () => {
             showSearchIcon
             showPrefixPopup={false}
           />
-          <div className='hidden items-center gap-2 min-[870px]:flex'>
+          <div className='hidden items-center gap-1 min-[870px]:flex'>
             <ExportButton columns={columns} items={items} />
             <TableSettingsDropdown
               rows={rows}

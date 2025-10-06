@@ -119,7 +119,7 @@ export const CustomLabelModal = () => {
         value={name}
         wrapperClassName='mb-3'
       />
-      <div className='mt-auto flex justify-between gap-2'>
+      <div className='mt-auto flex justify-between gap-1'>
         <Button
           onClick={onClose}
           variant='secondary'

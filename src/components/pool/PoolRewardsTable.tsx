@@ -75,7 +75,7 @@ const PoolRewardsTable = ({
     {
       key: "epoch",
       render: item => (
-        <div className='flex items-center justify-end gap-3 text-right'>
+        <div className='flex items-center justify-end gap-1.5 text-right'>
           {miscConst?.no === item.no ? (
             <PulseDot />
           ) : (
@@ -97,12 +97,12 @@ const PoolRewardsTable = ({
           ) : currentEpoch && currentEpoch - 1 === item.no ? (
             <PendingTag text='The data will be available next epoch.' />
           ) : (
-            <div className='flex flex-col items-end gap-1'>
-              <p className='flex items-center gap-1'>
+            <div className='flex flex-col items-end gap-1/2'>
+              <p className='flex items-center gap-1/2'>
                 <AdaWithTooltip data={item.reward?.leader_lovelace ?? 0} />
                 <Network size={16} />
               </p>
-              <p className='flex items-center gap-1'>
+              <p className='flex items-center gap-1/2'>
                 <AdaWithTooltip data={item.reward?.member_lovelace ?? 0} />
                 <Users size={16} />
               </p>
@@ -130,7 +130,7 @@ const PoolRewardsTable = ({
       render: item => {
         if (miscConst?.no === item.no) {
           return (
-            <div className='flex w-full flex-col items-end gap-1'>
+            <div className='flex w-full flex-col items-end gap-1/2'>
               <p className='text-greyText'>
                 <AdaWithTooltip data={currentActiveStake ?? 0} />
               </p>
@@ -139,7 +139,7 @@ const PoolRewardsTable = ({
         }
 
         return (
-          <div className='flex w-full flex-col items-end gap-1'>
+          <div className='flex w-full flex-col items-end gap-1/2'>
             <p className='text-grayTextPrimary'>
               <AdaWithTooltip data={item.active_stake ?? 0} />
             </p>
@@ -155,7 +155,7 @@ const PoolRewardsTable = ({
       render: item => {
         if (miscConst?.no === item.no) {
           return (
-            <div className='flex flex-col items-end gap-1'>
+            <div className='flex flex-col items-end gap-1/2'>
               <p className='text-right'>
                 <AdaWithTooltip data={currentEpochStake ?? 0} />
               </p>
@@ -164,7 +164,7 @@ const PoolRewardsTable = ({
         }
 
         return (
-          <div className='flex flex-col items-end gap-1'>
+          <div className='flex flex-col items-end gap-1/2'>
             <p className='text-right text-grayTextPrimary'>
               <AdaWithTooltip data={item?.epoch_stake ?? 0} />
             </p>
@@ -211,7 +211,7 @@ const PoolRewardsTable = ({
       render: item => (
         <div className='text-right'>
           {currentEpoch === item.no ? (
-            <div className='flex items-center justify-end gap-1'>
+            <div className='flex items-center justify-end gap-1/2'>
               <Tooltip
                 content={
                   <p className='w-36 text-center'>This is prorated luck.</p>
@@ -266,7 +266,7 @@ const PoolRewardsTable = ({
 
   return (
     <>
-      <div className='flex items-center gap-2'>
+      <div className='flex items-center gap-1'>
         <ExportButton columns={columns} items={items} />
         <TableSettingsDropdown
           rows={rows}

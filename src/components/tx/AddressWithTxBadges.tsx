@@ -14,7 +14,7 @@ interface Props {
 
 export const AddressWithTxBadges = ({ utxo, isOutput }: Props) => {
   return (
-    <div className='mb-1 flex items-center gap-2'>
+    <div className='mb-1 flex items-center gap-1'>
       <ConstLabelBadge type='sc' name={utxo.reference_script?.hash} />
       <AddressCell enableHover address={utxo.payment_addr_bech32} />
       <Tooltip

@@ -95,7 +95,7 @@ export const AdminGroupsPage = () => {
           />
         </Modal>
       )}
-      <main className='flex min-h-minHeight flex-col items-center gap-2 p-mobile md:p-desktop'>
+      <main className='flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col items-center justify-center'>
           <Breadcrumb className='mb-2 w-full'>
             <BreadcrumbList className='flex items-center'>

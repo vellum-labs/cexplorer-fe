@@ -207,7 +207,7 @@ export const JsonDisplay: FC<JSONDisplayProps> = ({
     >
       {!isError && !Array.isArray(data?.data) && (
         <div
-          className='absolute top-2 flex items-center gap-1'
+          className='absolute top-2 flex items-center gap-1/2'
           onClick={e => {
             e.stopPropagation();
           }}

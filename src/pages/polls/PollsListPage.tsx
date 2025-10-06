@@ -34,7 +34,7 @@ const cropString = (str: string) => {
 const renderStatusBadge = (status: "available" | "closed") => {
   if (status === "available") {
     return (
-      <Badge color='gray' className='gap-2'>
+      <Badge color='gray' className='gap-1'>
         <PulseDot />
         Live
       </Badge>
@@ -191,11 +191,11 @@ export const PollsListPage = () => {
             onClick={activeTab => setActiveTab(activeTab)}
             mobileItemsCount={3}
           />
-          <div className='-mt-8 mb-2 ml-auto flex items-center gap-4'>
+          <div className='-mt-8 mb-2 ml-auto flex items-center gap-2'>
             {nfts === 0 && (
               <Link
                 to='/pro'
-                className='gold-shimmer flex min-w-fit items-center gap-1 bg-purpleText bg-clip-text text-sm font-medium text-transparent underline hover:text-transparent'
+                className='gold-shimmer flex min-w-fit items-center gap-1/2 bg-purpleText bg-clip-text text-sm font-medium text-transparent underline hover:text-transparent'
               >
                 Get Cexplorer PRO{" "}
                 <Sparkles color={colors.purpleText} size={15} />
@@ -203,7 +203,7 @@ export const PollsListPage = () => {
             )}
             <button
               onClick={() => setOpenFaq(true)}
-              className='flex min-w-fit items-center gap-1 text-sm text-grayTextPrimary underline underline-offset-2'
+              className='flex min-w-fit items-center gap-1/2 text-sm text-grayTextPrimary underline underline-offset-2'
             >
               How does it work? <Info size={15} />
             </button>

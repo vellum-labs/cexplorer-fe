@@ -27,7 +27,7 @@ export const WatchlistFilter = ({ watchlistOnly, setWatchlistOnly }: Props) => {
         <ConnectWalletModal onClose={() => setShowWalletModal(false)} />
       )}
       <div
-        className='flex h-10 min-w-fit items-center gap-1 rounded-lg border border-border px-1 font-medium'
+        className='flex h-10 min-w-fit items-center gap-1/2 rounded-lg border border-border px-1 font-medium'
         onClick={e => handleClick(e)}
       >
         <Switch

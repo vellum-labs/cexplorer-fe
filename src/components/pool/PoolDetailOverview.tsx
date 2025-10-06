@@ -15,14 +15,14 @@ const PoolDetailOverview = ({ query, estimatedBlocks }: Props) => {
     usePoolDetail({ estimatedBlocks, query });
 
   return (
-    <div className='flex w-full max-w-desktop flex-col gap-3 px-mobile lg:px-desktop'>
+    <div className='flex w-full max-w-desktop flex-col gap-1.5 px-mobile lg:px-desktop'>
       <WatchlistSection
         ident={data?.pool_id}
         ticker={data?.pool_name?.ticker}
         isLoading={query.isLoading}
         poolDetailQuery={query}
       />
-      <div className='flex w-full flex-wrap gap-5'>
+      <div className='flex w-full flex-wrap gap-3'>
         {query.isLoading ? (
           <>
             <LoadingSkeleton

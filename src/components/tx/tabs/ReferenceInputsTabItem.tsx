@@ -25,7 +25,7 @@ const ReferenceInputsTabItem = () => {
     {
       key: "address",
       render: item => (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <AddressTypeInitialsBadge address={item.payment_addr_bech32} />
           <AddressCell address={item.payment_addr_bech32} />
         </div>

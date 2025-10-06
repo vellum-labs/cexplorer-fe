@@ -77,7 +77,7 @@ export const GroupsListPage = () => {
         <meta name='description' content={metadata.groupsList.description} />
         <meta name='keywords' content={metadata.groupsList.keywords} />
       </Helmet>
-      <main className='flex min-h-minHeight flex-col items-center gap-2 p-mobile md:p-desktop'>
+      <main className='flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col items-center justify-center px-mobile md:px-desktop'>
           <Breadcrumb className='mb-2 w-full'>
             <BreadcrumbList className='flex items-center'>

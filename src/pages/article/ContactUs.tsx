@@ -50,7 +50,7 @@ export const ContactUsPage = () => {
       </Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
         <section className='wrapper border-b border-border pb-8'>
-          <div className='flex flex-col items-center gap-2'>
+          <div className='flex flex-col items-center gap-1'>
             <h2 className='text-base text-primary'>Contact us</h2>
             <h1 className='text-3xl'>Get in touch</h1>
           </div>
@@ -85,7 +85,7 @@ export const ContactUsPage = () => {
           </div>
           <div className='contributors__item'>
             <div className='contributors__item--title'>
-              <span className='flex items-center gap-2'>
+              <span className='flex items-center gap-1'>
                 <Twitter size={24} />
                 <h3>X (former Twitter)</h3>
               </span>
@@ -121,7 +121,7 @@ export const ContactUsPage = () => {
           </div>
           <div className='contributors__item'>
             <div className='contributors__item--title'>
-              <span className='flex items-center gap-2'>
+              <span className='flex items-center gap-1'>
                 <svg
                   width='24'
                   height='24'
@@ -173,7 +173,7 @@ export const ContactUsPage = () => {
           </div>
           <div className='contributors__item'>
             <div className='contributors__item--title'>
-              <span className='flex items-center gap-2'>
+              <span className='flex items-center gap-1'>
                 <svg
                   width='24'
                   height='24'
@@ -229,7 +229,7 @@ export const ContactUsPage = () => {
           </div>
           <div className='contributors__item'>
             <div className='contributors__item--title'>
-              <span className='flex items-center gap-2'>
+              <span className='flex items-center gap-1'>
                 <Mail size={24} />
                 <h3>E-mail</h3>
               </span>
@@ -251,7 +251,7 @@ export const ContactUsPage = () => {
             </div>
           </div>
         </section>
-        <section className='flex max-w-[800px] flex-wrap gap-4 pt-8'>
+        <section className='flex max-w-[800px] flex-wrap gap-2 pt-8'>
           <InfoCard
             icon={<Zap size={18} color={colors.darkBlue} />}
             heading='Request a feature'
@@ -291,7 +291,7 @@ export const ContactUsPage = () => {
 const InfoCard = ({ icon, heading, description, button }: InfoCardProps) => {
   return (
     <section className='flex grow basis-[350px] flex-col rounded-xl border border-border p-2'>
-      <div className='flex items-center gap-3'>
+      <div className='flex items-center gap-1.5'>
         <div className='relative z-20 flex h-8 w-8 items-center justify-center rounded-full bg-blue-100/90 p-1/2 outline outline-[6px] outline-blue-100/50'>
           {icon}
         </div>

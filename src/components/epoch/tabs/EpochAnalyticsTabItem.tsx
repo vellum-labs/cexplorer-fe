@@ -160,8 +160,8 @@ export const EpochAnalyticsTabItem: FC = () => {
   }, [theme]);
 
   return (
-    <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-      <div className='flex w-full flex-col items-center justify-between gap-2 rounded-lg border border-border p-mobile md:p-desktop'>
+    <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+      <div className='flex w-full flex-col items-center justify-between gap-1 rounded-lg border border-border p-mobile md:p-desktop'>
         {analyticsData.map(
           ({
             data,

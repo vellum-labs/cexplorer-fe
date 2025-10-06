@@ -75,7 +75,7 @@ export const ArticleListPage = () => {
           breadcrumbItems={[{ label: "Articles" }]}
         />
         <div className='m-2 flex h-auto w-full max-w-desktop justify-center rounded-lg p-mobile hover:text-text md:m-5 md:p-desktop'>
-          <div className='flex w-full max-w-desktop flex-col-reverse justify-center gap-3 rounded-lg border border-border bg-gradient-to-b from-bannerGradient to-darker p-3 md:flex-row'>
+          <div className='flex w-full max-w-desktop flex-col-reverse justify-center gap-1.5 rounded-lg border border-border bg-gradient-to-b from-bannerGradient to-darker p-3 md:flex-row'>
             <div className='flex w-full justify-end md:w-[60%]'>
               <Link
                 to='/article/$url'
@@ -91,7 +91,7 @@ export const ArticleListPage = () => {
                 />
               </Link>
             </div>
-            <div className='flex w-full flex-col justify-between gap-3 md:w-[40%]'>
+            <div className='flex w-full flex-col justify-between gap-1.5 md:w-[40%]'>
               {items && items.length > 0 && (
                 <div className='mb-auto'>
                   <Link
@@ -123,8 +123,8 @@ export const ArticleListPage = () => {
           </div>
         </div>
         <AdsCarousel />
-        <div className='flex w-full max-w-desktop flex-col gap-3 p-mobile md:p-desktop'>
-          <div className='ml-auto flex items-center gap-2'>
+        <div className='flex w-full max-w-desktop flex-col gap-1.5 p-mobile md:p-desktop'>
+          <div className='ml-auto flex items-center gap-1'>
             <span className='text-sm'>Category:</span>
             <SortBy
               selectItems={[{ key: "all", value: "all" }, ...categoriesOptions]}
@@ -138,7 +138,7 @@ export const ArticleListPage = () => {
             />
           </div>
           {query.isLoading ? (
-            <section className='grid w-full grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-3'>
+            <section className='grid w-full grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-1.5'>
               {Array.from({ length: 20 }).map((_, index) => (
                 <LoadingSkeleton height='430px' key={index} rounded='lg' />
               ))}
@@ -146,7 +146,7 @@ export const ArticleListPage = () => {
           ) : !query.isLoading && items.length === 0 ? (
             <NoResultsFound />
           ) : (
-            <section className='grid w-full grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-3'>
+            <section className='grid w-full grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-1.5'>
               {items.slice(1).map(item => (
                 <ArticleCard key={item.name + item.pub_date} article={item} />
               ))}

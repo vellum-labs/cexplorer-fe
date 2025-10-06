@@ -16,8 +16,8 @@ export const TokenDashboardOverview: FC<TokenDashboardOverviewProps> = () => {
   const uniqueTrades = [];
 
   return (
-    <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pt-1.5 md:px-desktop xl:flex-nowrap xl:justify-start'>
-      <div className='flex grow basis-[980px] flex-wrap items-stretch gap-5'>
+    <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 px-mobile pt-1.5 md:px-desktop xl:flex-nowrap xl:justify-start'>
+      <div className='flex grow basis-[980px] flex-wrap items-stretch gap-3'>
         {isLoading ? (
           <>
             <LoadingSkeleton

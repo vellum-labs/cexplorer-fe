@@ -109,7 +109,7 @@ export const DrepDetailPage: FC = () => {
         },
       ]}
       title={
-        <div className='mt-1/2 flex items-center gap-2'>
+        <div className='mt-1/2 flex items-center gap-1'>
           <Image
             src={generateImageUrl(
               drepDetailQuery.data?.hash?.view ?? "",

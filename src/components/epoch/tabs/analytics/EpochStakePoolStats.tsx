@@ -140,7 +140,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
       columns: [
         {
           title: (
-            <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-1/2'>
               <span className='text-sm font-medium text-grayTextPrimary'>
                 Delegator Count Weighted
               </span>
@@ -172,7 +172,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
       columns: [
         {
           title: (
-            <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-1/2'>
               <span className='text-sm font-medium text-grayTextPrimary'>
                 Delegator Average
               </span>
@@ -204,7 +204,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
       columns: [
         {
           title: (
-            <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-1/2'>
               <span className='text-sm font-medium text-grayTextPrimary'>
                 Delegator Average Weighted
               </span>
@@ -234,7 +234,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
   ];
 
   return (
-    <div className='flex h-[520px] w-1/2 flex-grow basis-[600px] flex-col gap-4 rounded-lg border border-border p-3 md:flex-shrink-0'>
+    <div className='flex h-[520px] w-1/2 flex-grow basis-[600px] flex-col gap-2 rounded-lg border border-border p-3 md:flex-shrink-0'>
       <h3>Stake Pool Stats</h3>
 
       <div className='flex w-full flex-col'>

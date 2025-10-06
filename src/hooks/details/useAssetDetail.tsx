@@ -75,7 +75,7 @@ export const useAssetDetail = ({
     {
       label: "Encoded Name",
       value: detailData?.name ? (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           {detailData?.name?.length <= 8
             ? detailData?.name
             : formatString(String(detailData?.name), "long")}
@@ -88,7 +88,7 @@ export const useAssetDetail = ({
     {
       label: "Asset name",
       value: detailData?.policy ? (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           {formatString((detailData?.policy || "") + detailData?.name, "long")}
           <Copy copyText={(detailData?.policy || "") + detailData?.name} />
         </div>
@@ -146,7 +146,7 @@ export const useAssetDetail = ({
     {
       label: "Asset ID",
       value: detailData?.fingerprint ? (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <span title={detailData?.fingerprint} className='text-sm'>
             {formatString(detailData?.fingerprint || "", "long")}
           </span>
@@ -159,7 +159,7 @@ export const useAssetDetail = ({
     {
       label: "Policy ID",
       value: detailData?.policy ? (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <Link
             to='/policy/$policyId'
             params={{ policyId: detailData?.policy ?? "" }}

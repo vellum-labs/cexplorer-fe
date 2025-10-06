@@ -152,7 +152,7 @@ export const AnalyticsGraph: FC<Props> = ({
         >
           {(title || description) && (
             <div
-              className={`flex flex-col justify-between gap-1 pb-1.5 ${!description || !title ? "justify-center" : ""}`}
+              className={`flex flex-col justify-between gap-1/2 pb-1.5 ${!description || !title ? "justify-center" : ""}`}
             >
               {title && <h2>{title}</h2>}
               {description && (
@@ -164,11 +164,11 @@ export const AnalyticsGraph: FC<Props> = ({
           )}
 
           <div
-            className='flex flex-wrap items-center gap-2'
+            className='flex flex-wrap items-center gap-1'
             id='graph-functionality'
           >
             {actions && (
-              <div className='flex items-center gap-2'>{actions}</div>
+              <div className='flex items-center gap-1'>{actions}</div>
             )}
             {graphSortData && (
               <GraphEpochSort
@@ -182,7 +182,7 @@ export const AnalyticsGraph: FC<Props> = ({
             )}
             {exportButton && (
               <div
-                className='flex h-[36px] w-[36px] shrink-0 cursor-pointer items-center justify-center gap-1 rounded-md border border-border'
+                className='flex h-[36px] w-[36px] shrink-0 cursor-pointer items-center justify-center gap-1/2 rounded-md border border-border'
                 onClick={showModals}
               >
                 <Download size={15} color={colors.text} className='text-base' />

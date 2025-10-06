@@ -73,7 +73,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       key: "gov_id",
       title: "Governance action ID",
       value: (
-        <div className='flex items-center gap-2 break-all'>
+        <div className='flex items-center gap-1 break-all'>
           <span className='text-sm' title={vote?.proposal?.ident?.bech}>
             {formatString(vote?.proposal?.ident?.bech, "long")}
           </span>
@@ -152,7 +152,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       key: "voting_start",
       title: "Voting start",
       value: (
-        <div className='flex flex-wrap items-center gap-x-2'>
+        <div className='flex flex-wrap items-center gap-x-1'>
           <TimeDateIndicator time={vote?.proposal?.tx?.time} />
         </div>
       ),
@@ -187,7 +187,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
             : role;
 
         return (
-          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-lg border border-border px-[6px]'>
+          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1/2 rounded-lg border border-border px-[6px]'>
             {role === GovernanceRole.DRep && <User size={12} className='text-primary' />}
             {role === GovernanceRole.ConstitutionalCommittee && <Landmark size={12} className='text-primary' />}
             {role === GovernanceRole.SPO && <Route size={12} className='text-primary' />}
@@ -200,7 +200,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       key: "voter_name",
       title: "Voter name",
       value: (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           {vote?.info?.id && (
             <Image
               src={generateImageUrl(
@@ -248,7 +248,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       key: "voter_id",
       title: "Voter ID",
       value: (
-        <div className='flex items-center gap-2 break-all'>
+        <div className='flex items-center gap-1 break-all'>
           {!voterDisplayName && vote?.voter_role && vote?.info?.id ? (
             <Link
               to={
@@ -297,7 +297,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
           return "-";
         }
         return (
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <VoteBadge vote={vote.vote} />
           </div>
         );
@@ -312,7 +312,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       key: "vote_tx",
       title: "Vote tx",
       value: (
-        <div className='flex items-center gap-2 break-all'>
+        <div className='flex items-center gap-1 break-all'>
           <Link
             to='/tx/$hash'
             params={{ hash: vote?.tx?.hash }}
@@ -369,10 +369,10 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
     <>
       <div className='w-full rounded-xl border border-border px-3 py-2'>
         <h2 className='text-base font-semibold'>Overview</h2>
-        <div className='flex flex-col gap-4 pt-2'>
+        <div className='flex flex-col gap-2 pt-2'>
           {detailItems.map(({ key, title, value, divider }) => (
             <div key={key} className='flex flex-col'>
-              <div className='flex flex-wrap items-start gap-x-4 gap-y-1'>
+              <div className='flex flex-wrap items-start gap-x-2 gap-y-1/2'>
                 <p className='min-w-[160px] max-w-full break-words text-sm text-grayTextSecondary'>
                   {title}
                 </p>

@@ -8,7 +8,7 @@ export const ShareButton = () => {
   const options = [
     {
       label: (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           <Copy size={15} />
           Copy URL
         </div>
@@ -25,7 +25,7 @@ export const ShareButton = () => {
     },
     {
       label: (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           <Twitter size={15} />
           Share on X
         </div>
@@ -34,7 +34,7 @@ export const ShareButton = () => {
     },
     {
       label: (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           <Facebook size={15} />
           Share on Facebook
         </div>

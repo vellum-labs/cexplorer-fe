@@ -199,7 +199,7 @@ export const WatchlistStar = ({
                 ? "Choose an action for your watchlist:"
                 : "Choose what to add to your watchlist:"}
             </p>
-            <div className='flex w-full flex-col items-center gap-3'>
+            <div className='flex w-full flex-col items-center gap-1.5'>
               <Button
                 onClick={isStakeKeyInWatchlist ? handleAddAddress : handleAddStakeKey}
                 variant='primary'

@@ -17,8 +17,8 @@ export const EpochDetailAnalytics: FC<EpochDetailAnalyticsProps> = ({
   isLoading,
 }) => {
   return (
-    <section className='flex w-full flex-col justify-between gap-2 overflow-x-hidden'>
-      <div className='flex w-full flex-wrap gap-2'>
+    <section className='flex w-full flex-col justify-between gap-1 overflow-x-hidden'>
+      <div className='flex w-full flex-wrap gap-1'>
         <EpochStakePoolStats
           isError={isError}
           isLoading={isLoading}

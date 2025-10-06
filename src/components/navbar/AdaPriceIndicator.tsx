@@ -10,7 +10,7 @@ export const AdaPriceIndicator = () => {
   if (price.percentChange === undefined) {
     return (
       <>
-        <div className='flex items-center gap-1 text-xs font-medium'>
+        <div className='flex items-center gap-1/2 text-xs font-medium'>
           <Cardano size={18} color={colors.text} />
           <span className='text-grayTextPrimary'>ADA:</span>
           <span
@@ -26,7 +26,7 @@ export const AdaPriceIndicator = () => {
   return (
     <Tooltip content={<div className='w-[100px]'>24h difference</div>}>
       <Link to='/ada-price'>
-        <div className='flex items-center gap-1 text-xs font-medium'>
+        <div className='flex items-center gap-1/2 text-xs font-medium'>
           <Cardano size={18} color={colors.text} />
           <span className='text-grayTextPrimary'>ADA: {price.today}</span>
           <span
@@ -36,7 +36,7 @@ export const AdaPriceIndicator = () => {
             {price.percentChange?.toFixed(1)}%
           </span>
         </div>
-        <div className='-mt-1 ml-[21px] flex items-center gap-1 text-[10px] text-grayTextSecondary'>
+        <div className='-mt-1 ml-[21px] flex items-center gap-1/2 text-[10px] text-grayTextSecondary'>
           ({Math.round(price.adaToSats)} sats)
         </div>
       </Link>

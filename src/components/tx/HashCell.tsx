@@ -33,7 +33,7 @@ export const HashCell = ({
     <div
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className='flex items-center gap-2'
+      className='flex items-center gap-1'
     >
       <Link
         to={href || "/tx/$hash"}

@@ -78,7 +78,7 @@ const TableSettingsDropdown = ({
                     <SelectTrigger className='w-[60px]'>
                       <SelectValue
                         placeholder={
-                          <div className='flex w-full items-center justify-between gap-1 uppercase'>
+                          <div className='flex w-full items-center justify-between gap-1/2 uppercase'>
                             <span>{rows}</span>
                           </div>
                         }

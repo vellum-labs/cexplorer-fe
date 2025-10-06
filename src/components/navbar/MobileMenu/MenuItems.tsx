@@ -87,7 +87,7 @@ export const MenuItems: FC<MenuItemsProps> = ({ setOpen, setActiveMenu }) => {
         ))}
       </Accordion>
       <button
-        className={`mt-3 flex h-[40px] w-full items-center gap-3 py-1 hover:underline`}
+        className={`mt-3 flex h-[40px] w-full items-center gap-1.5 py-1 hover:underline`}
         onClick={() => setActiveMenu("analytics")}
       >
         <LineChart height={20} width={20} />
@@ -100,7 +100,7 @@ export const MenuItems: FC<MenuItemsProps> = ({ setOpen, setActiveMenu }) => {
         />
       </button>
       <button
-        className={`mt-3 flex h-[40px] w-full items-center gap-3 py-1 hover:underline`}
+        className={`mt-3 flex h-[40px] w-full items-center gap-1.5 py-1 hover:underline`}
         onClick={() => setActiveMenu("more")}
       >
         <DotsVerticalIcon height={20} width={20} />

@@ -101,7 +101,7 @@ export const VotingTable: FC<VotingTableProps> = () => {
         const percent = (voted / total) * 100;
 
         return (
-          <div className='flex w-full items-center gap-1'>
+          <div className='flex w-full items-center gap-1/2'>
             <ActivityBadge percentage={percent} />
             <Tooltip content={<span>Voting activity across treasury withdrawal proposals</span>}>
               <CircleHelp size={11} />

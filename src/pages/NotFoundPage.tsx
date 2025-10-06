@@ -101,7 +101,7 @@ export const NotFoundPage: FC = () => {
     (!data || !Array.isArray(data?.data) || !data.data[0]?.url) ? (
       <NotFoundInit />
     ) : (
-      <div className='flex min-h-minHeight w-full flex-col items-center justify-center gap-3 text-xl'>
+      <div className='flex min-h-minHeight w-full flex-col items-center justify-center gap-1.5 text-xl'>
         <div className='flex h-fit w-full items-center justify-center'>
           <div
             className={`loader h-[60px] w-[60px] border-[6px] ${theme === "light" ? "border-[#F2F4F7] border-t-darkBlue" : "border-[#475467] border-t-[#5EDFFA]"} border-t-[6px]`}
@@ -116,7 +116,7 @@ export const NotFoundPage: FC = () => {
 };
 
 const NotFoundInit = () => (
-  <div className='flex min-h-minHeight w-full flex-col items-center justify-center gap-4 text-xl'>
+  <div className='flex min-h-minHeight w-full flex-col items-center justify-center gap-2 text-xl'>
     <p>This page doesn't exist...</p>
     <Button
       label='Go back'

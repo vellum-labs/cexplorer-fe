@@ -57,7 +57,7 @@ const AssetCell = memo((props: Props) => {
       : undefined;
 
   return (
-    <div className='relative flex w-full items-center gap-2'>
+    <div className='relative flex w-full items-center gap-1'>
       {!hideImage && (
         <Link to='/asset/$fingerprint' params={{ fingerprint: fingerprint }}>
           <Image
@@ -114,7 +114,7 @@ const AssetCell = memo((props: Props) => {
               />
             )}
           </Link>
-          <span className='flex items-center gap-1'>
+          <span className='flex items-center gap-1/2'>
             {nameByRegistry || renderAssetName({ name: assetName }) ? (
               <p className='text-xs text-grayTextPrimary'>
                 {formatString(fingerprint, "long")}

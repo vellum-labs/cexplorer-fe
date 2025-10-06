@@ -61,7 +61,7 @@ export const PowerThresholdsPage: FC = () => {
           ]}
         />
 
-        <section className='flex min-h-minHeight w-full max-w-desktop flex-col gap-2 p-desktop'>
+        <section className='flex min-h-minHeight w-full max-w-desktop flex-col gap-1 p-desktop'>
           <>
             <>
               <div className='rounded-xl'>
@@ -89,11 +89,11 @@ export const PowerThresholdsPage: FC = () => {
                     className='border-none px-0'
                   >
                     {query.isLoading ? (
-                      <div className='flex flex-col gap-3 md:flex-row'>
+                      <div className='flex flex-col gap-1.5 md:flex-row'>
                         <LoadingSkeleton height='490px' />
                       </div>
                     ) : (
-                      <div className='flex flex-col gap-3 md:flex-row'>
+                      <div className='flex flex-col gap-1.5 md:flex-row'>
                         <div className='flex flex-col justify-center border-none md:w-1/4'>
                           <PowerThresholdsSPODelegationDonutGraph
                             milestone={
@@ -126,11 +126,11 @@ export const PowerThresholdsPage: FC = () => {
                     className='border-none px-0'
                   >
                     {query.isLoading ? (
-                      <div className='flex flex-col gap-3 md:flex-row'>
+                      <div className='flex flex-col gap-1.5 md:flex-row'>
                         <LoadingSkeleton height='490px' />
                       </div>
                     ) : (
-                      <div className='flex flex-col gap-3 md:flex-row'>
+                      <div className='flex flex-col gap-1.5 md:flex-row'>
                         <div className='flex flex-col justify-center border-none md:w-1/4'>
                           <PowerThresholdsDRepDelegationDonutGraph
                             milestone={

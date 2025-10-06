@@ -99,8 +99,8 @@ export const EpochCalendarPage = () => {
       breadcrumbItems={[{ label: "Epoch calendar" }]}
       metadataTitle='epochCalendar'
     >
-      <div className='flex w-full max-w-desktop flex-wrap items-center justify-between gap-4 px-mobile md:px-desktop'>
-        <div className='flex items-center gap-2 text-sm text-grayTextPrimary'>
+      <div className='flex w-full max-w-desktop flex-wrap items-center justify-between gap-2 px-mobile md:px-desktop'>
+        <div className='flex items-center gap-1 text-sm text-grayTextPrimary'>
           Show upcoming:{" "}
           <SortBy
             selectItems={upcomingEpochsItems}
@@ -125,13 +125,13 @@ export const EpochCalendarPage = () => {
         />
       </div>
       {isLoading ? (
-        <section className='grid w-full max-w-desktop grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4 px-mobile pb-3 md:px-desktop'>
+        <section className='grid w-full max-w-desktop grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-2 px-mobile pb-3 md:px-desktop'>
           {Array.from({ length: 100 }).map(() => (
             <LoadingSkeleton width='100%' height='167px' rounded='xl' />
           ))}
         </section>
       ) : (
-        <section className='grid w-full max-w-desktop grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-4 px-mobile pb-3 md:px-desktop'>
+        <section className='grid w-full max-w-desktop grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-2 px-mobile pb-3 md:px-desktop'>
           {items?.map(epoch => <EpochCard key={epoch.no} epoch={epoch} />)}
         </section>
       )}
@@ -150,8 +150,8 @@ const EpochCard = ({ epoch }: { epoch: EpochListData }) => {
         : colors.border;
 
   return (
-    <div className='flex flex-col gap-2 rounded-xl border border-border p-2'>
-      <div className='mb-1 flex items-center gap-3'>
+    <div className='flex flex-col gap-1 rounded-xl border border-border p-2'>
+      <div className='mb-1 flex items-center gap-1.5'>
         {epoch.no > currentEpoch ? (
           <div className='rounded-full bg-grayTextSecondary p-1/2'>
             <Calendar size={15} color='white' className='' />

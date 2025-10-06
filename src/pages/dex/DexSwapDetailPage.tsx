@@ -68,7 +68,7 @@ export const DexSwapDetailPage: FC = () => {
       }
       adsCarousel={false}
     >
-      <div className='flex w-full max-w-desktop flex-col gap-5 p-mobile lg:p-desktop'>
+      <div className='flex w-full max-w-desktop flex-col gap-3 p-mobile lg:p-desktop'>
         {isLoading ? (
           <DexSwapDetailCard
             miscBasic={undefined}

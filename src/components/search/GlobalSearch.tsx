@@ -107,7 +107,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
           )}
 
           <div
-            className={`absolute z-[25] flex w-full ${isHomepage ? 'max-w-[750px]' : ''} select-none flex-col gap-3 rounded-b-lg border-x border-b border-border bg-background`}
+            className={`absolute z-[25] flex w-full ${isHomepage ? 'max-w-[750px]' : ''} select-none flex-col gap-1.5 rounded-b-lg border-x border-b border-border bg-background`}
           >
             {!categories && search.length !== 0 && (
               <div className='flex h-[150px] w-full items-center justify-center'>
@@ -124,7 +124,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
                 ) : (
                   <>
                     <div
-                      className={`flex h-[35px] items-center gap-3 overflow-hidden ${categoriesOverflow ? "px-3" : "w-full px-1.5"}`}
+                      className={`flex h-[35px] items-center gap-1.5 overflow-hidden ${categoriesOverflow ? "px-3" : "w-full px-1.5"}`}
                       ref={categoriesRef}
                     >
                       {categories &&

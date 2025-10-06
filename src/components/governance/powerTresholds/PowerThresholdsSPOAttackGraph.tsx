@@ -85,7 +85,7 @@ export const PowerThresholdsSPOAttackGraph: FC<
   };
 
   return (
-    <div className='relative flex w-full max-w-full items-center gap-2'>
+    <div className='relative flex w-full max-w-full items-center gap-1'>
       <div className='relative top-[-8px] mt-1.5 flex flex-col items-center'>
         <h4 className='text-xl font-semibold'>{spoCount}</h4>
         <span className='text-xs text-grayTextPrimary'>SPOs</span>

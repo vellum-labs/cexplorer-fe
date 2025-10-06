@@ -73,7 +73,7 @@ export const AddressesTab: FC<AddressesTabProps> = ({
     {
       key: "addresses",
       render: item => (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <AddressTypeInitialsBadge address={item?.address} />
           <AddressCell address={item?.address} stakeKey={stakeKey} />
         </div>
@@ -113,7 +113,7 @@ export const AddressesTab: FC<AddressesTabProps> = ({
   ];
 
   return (
-    <div className='flex flex-col items-end gap-4'>
+    <div className='flex flex-col items-end gap-2'>
       <SortBy
         selectItems={selectItems}
         selectedItem={selectedItem}

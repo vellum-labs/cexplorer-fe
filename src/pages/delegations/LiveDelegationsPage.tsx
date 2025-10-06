@@ -118,7 +118,7 @@ export const LiveDelegationsPage = () => {
     {
       key: "amount",
       render: item => (
-        <div className='flex flex-col items-end gap-1'>
+        <div className='flex flex-col items-end gap-1/2'>
           <AdaWithTooltip data={item?.live_stake ?? 0} />
         </div>
       ),
@@ -133,7 +133,7 @@ export const LiveDelegationsPage = () => {
     {
       key: "delegation",
       render: item => (
-        <div className='grid w-full grid-cols-7 items-center gap-1'>
+        <div className='grid w-full grid-cols-7 items-center gap-1/2'>
           {item.pool?.previous.id && (
             <>
               <PoolCell className='col-span-3' poolInfo={item.pool.previous} />
@@ -185,7 +185,7 @@ export const LiveDelegationsPage = () => {
       breadcrumbItems={[{ label: "Live Delegations" }]}
     >
       <div className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
-        <div className='mb-2 ml-auto flex w-fit justify-end gap-2'>
+        <div className='mb-2 ml-auto flex w-fit justify-end gap-1'>
           <ExportButton
             columns={delegationColumns}
             items={items}

@@ -29,14 +29,14 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
   isGenesisBlock = false,
 }) => {
   return (
-    <div className='flex max-h-[110px] min-h-[110px] w-full flex-col gap-1 rounded-xl border border-border bg-cardBg px-2 py-1.5 shadow'>
-      <div className='flex w-full items-center gap-2'>
+    <div className='flex max-h-[110px] min-h-[110px] w-full flex-col gap-1/2 rounded-xl border border-border bg-cardBg px-2 py-1.5 shadow'>
+      <div className='flex w-full items-center gap-1'>
         <div className='rounded-lg border border-border p-1/2'>
           <GitCompareArrows size={20} className='text-primary' />
         </div>
         <span className='text-sm text-grayTextPrimary'>Minted by</span>
       </div>
-      <div className='flex w-full items-center gap-3'>
+      <div className='flex w-full items-center gap-1.5'>
         {icon && <img src={icon} alt='Cexplorer' width={28} height={28} />}
         {/* <PoolCell fontSize='18px' poolInfo={poolInfo} /> */}
         {isGenesisBlock ? (
@@ -47,7 +47,7 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
           <Link
             to='/pool/$id'
             params={{ id: poolInfo.id }}
-            className='flex w-full items-center gap-2'
+            className='flex w-full items-center gap-1'
           >
             <Image
               src={generateImageUrl(poolInfo.id, "ico", "pool")}
@@ -67,9 +67,9 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
         )}
       </div>
       {vrfKey && (
-        <div className='flex w-full items-center gap-2'>
+        <div className='flex w-full items-center gap-1'>
           {protoMajor && (
-            <span className='flex items-center gap-2 text-sm text-grayTextPrimary'>
+            <span className='flex items-center gap-1 text-sm text-grayTextPrimary'>
               Protocol version
               <ProtocolDot protNo={Number(`${protoMajor}.${protoMinor}`)} />
               {protoMajor}

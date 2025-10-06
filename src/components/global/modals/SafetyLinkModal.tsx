@@ -8,7 +8,7 @@ export const SafetyLinkModal = ({ url, onClose }) => {
         You are switching to an external, unmoderated url:{" "}
       </p>
       <p className='break-all overflow-wrap-anywhere max-w-full text-sm mt-1 mb-2 max-h-32 overflow-y-auto'>{url}</p>
-      <div className='flex justify-between gap-2'>
+      <div className='flex justify-between gap-1'>
         <Button onClick={onClose} variant='red' size='md' label='Go back' />
         <a
           onClick={onClose}

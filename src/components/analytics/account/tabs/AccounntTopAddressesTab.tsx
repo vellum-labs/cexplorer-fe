@@ -132,7 +132,7 @@ export const AccounntTopAddressesTab: FC = () => {
       },
       title: (
         <p
-          className='flex items-center gap-2'
+          className='flex items-center gap-1'
           ref={anchorRefs?.addresses_pool_only}
         >
           Pool delegation
@@ -153,8 +153,8 @@ export const AccounntTopAddressesTab: FC = () => {
           ),
         onReset: () => changeFilterByKey("addresses_pool_only"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-2 py-1'>
-            <label className='flex items-center gap-2'>
+          <div className='flex flex-col gap-1 px-2 py-1'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='status'
@@ -170,7 +170,7 @@ export const AccounntTopAddressesTab: FC = () => {
               />
               <span className='text-sm'>Delegated to a stake pool</span>
             </label>
-            <label className='flex items-center gap-2'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='status'
@@ -214,7 +214,7 @@ export const AccounntTopAddressesTab: FC = () => {
       },
       title: (
         <div
-          className='flex items-center gap-2'
+          className='flex items-center gap-1'
           ref={anchorRefs?.addresses_drep_only}
         >
           DRep delegation
@@ -235,8 +235,8 @@ export const AccounntTopAddressesTab: FC = () => {
           ),
         onReset: () => changeFilterByKey("addresses_drep_only"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-2 py-1'>
-            <label className='flex items-center gap-2'>
+          <div className='flex flex-col gap-1 px-2 py-1'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='status'
@@ -252,7 +252,7 @@ export const AccounntTopAddressesTab: FC = () => {
               />
               <span className='text-sm'>Delegated to a DRep</span>
             </label>
-            <label className='flex items-center gap-2'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='status'
@@ -322,7 +322,7 @@ export const AccounntTopAddressesTab: FC = () => {
             ""
           )}
         </div>
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           <ExportButton
             columns={columns}
             items={items}
@@ -345,13 +345,13 @@ export const AccounntTopAddressesTab: FC = () => {
         </div>
       </div>
       {hasFilter && (
-        <div className='flex flex-wrap items-center gap-1 md:flex-nowrap'>
+        <div className='flex flex-wrap items-center gap-1/2 md:flex-nowrap'>
           {Object.entries(filter).map(
             ([key, value]) =>
               value && (
                 <div
                   key={key}
-                  className='mb-1 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
+                  className='mb-1 flex w-fit items-center gap-1/2 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
                 >
                   {key === "addresses_pool_only" && (
                     <span>Pool delegation:</span>

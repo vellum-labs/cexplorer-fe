@@ -152,7 +152,7 @@ const PoolBlocksTable = ({ poolId }: Props) => {
     {
       key: "protocol",
       render: item => (
-        <div className='flex items-center justify-end gap-2'>
+        <div className='flex items-center justify-end gap-1'>
           <ProtocolDot
             protNo={Number(`${item.proto_major}.${item.proto_minor}`)}
           />
@@ -180,7 +180,7 @@ const PoolBlocksTable = ({ poolId }: Props) => {
 
   return (
     <>
-      <div className='flex items-center gap-2'>
+      <div className='flex items-center gap-1'>
         <ExportButton columns={columns} items={items} />
         <TableSettingsDropdown
           rows={rows}

@@ -254,7 +254,7 @@ const OverviewTabItem = () => {
               <ViewportSetter nodes={nodes} />
               <button
                 onClick={() => setDisabledControls(!disabledControls)}
-                className={`absolute bottom-3 left-1/2 z-50 flex origin-center duration-150 ${disabledControls && interacted ? "border-text" : ""} -translate-x-1/2 items-center gap-1 rounded-full border border-border bg-background px-1.5 py-1/2 text-sm font-medium shadow`}
+                className={`absolute bottom-3 left-1/2 z-50 flex origin-center duration-150 ${disabledControls && interacted ? "border-text" : ""} -translate-x-1/2 items-center gap-1/2 rounded-full border border-border bg-background px-1.5 py-1/2 text-sm font-medium shadow`}
               >
                 {disabledControls ? (
                   <LucideLockOpen size={15} />
@@ -310,7 +310,7 @@ const NodeContent = ({
     </div>
     <AddressWithTxBadges utxo={data} isOutput={type === "output"} />
     {data.asset && (
-      <div className='mt-1 grid w-full max-w-[690px] grid-cols-[repeat(auto-fit,_minmax(130px,_1fr))] gap-2'>
+      <div className='mt-1 grid w-full max-w-[690px] grid-cols-[repeat(auto-fit,_minmax(130px,_1fr))] gap-1'>
         <>
           {!Array.isArray(data.asset) && (
             <TxAssetLink

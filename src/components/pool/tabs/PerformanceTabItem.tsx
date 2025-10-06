@@ -25,7 +25,7 @@ const PerformanceTabItem = memo(function PerfomanceTabItem() {
           roa={roa}
         />
       </div>
-      <div className='flex flex-col items-end gap-4'>
+      <div className='flex flex-col items-end gap-2'>
         <PoolPerfomanceTable poolId={id} />
       </div>
     </div>

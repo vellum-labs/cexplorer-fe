@@ -80,7 +80,7 @@ export const DelegatorStructureSubtab: FC<DelegatorStructureSubtabProps> = ({
       key: "wallet_size",
       render: item => {
         return (
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <div className='w-[30px]'>
               <img src={item.icon} />
             </div>
@@ -276,7 +276,7 @@ export const DelegatorStructureSubtab: FC<DelegatorStructureSubtabProps> = ({
   ];
 
   return (
-    <div className='flex w-full flex-wrap gap-3 xl:flex-nowrap'>
+    <div className='flex w-full flex-wrap gap-1.5 xl:flex-nowrap'>
       <GlobalTable
         type='default'
         totalItems={items.length}

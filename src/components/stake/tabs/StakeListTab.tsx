@@ -36,7 +36,7 @@ export const StakeListTab: FC = () => {
         }
 
         return (
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <div className='flex flex-col'>
               <Link
                 to='/stake/$stakeAddr'
@@ -137,7 +137,7 @@ export const StakeListTab: FC = () => {
   }
 
   return (
-    <div className='flex flex-col items-end gap-4'>
+    <div className='flex flex-col items-end gap-2'>
       <GlobalTable
         type='default'
         query={accountListQuery}

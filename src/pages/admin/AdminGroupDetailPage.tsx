@@ -220,7 +220,7 @@ export const AdminGroupDetailPage = () => {
               });
             }}
             defaultValue='m'
-            className='mb-4 mt-2 flex gap-4'
+            className='mb-4 mt-2 flex gap-2'
           >
             <div className='flex items-center space-x-2'>
               <RadioGroupItem value='drep' id='drep' />
@@ -257,7 +257,7 @@ export const AdminGroupDetailPage = () => {
           />
         </Modal>
       )}
-      <main className='flex min-h-minHeight flex-col items-center gap-2 p-mobile md:p-desktop'>
+      <main className='flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col justify-center'>
           <Breadcrumb className='mb-2 w-full'>
             <BreadcrumbList className='flex items-center'>
@@ -288,7 +288,7 @@ export const AdminGroupDetailPage = () => {
             </BreadcrumbList>
           </Breadcrumb>
           <h2 className='text-left'>{data?.name}</h2>
-          <p className='mb-2 flex items-center gap-2'>
+          <p className='mb-2 flex items-center gap-1'>
             {data?.description}
             <button
               className=''

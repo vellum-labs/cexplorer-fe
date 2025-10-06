@@ -10,7 +10,7 @@ interface SettingsMobileProps {
 const SettingsMobile: FC<SettingsMobileProps> = ({ onClick, className }) => {
   return (
     <button
-      className={`flex w-full items-center gap-3 ${className}`}
+      className={`flex w-full items-center gap-1.5 ${className}`}
       onClick={onClick}
     >
       <Settings size={20} />

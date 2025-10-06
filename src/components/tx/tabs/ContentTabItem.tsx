@@ -30,7 +30,7 @@ const ContentTabItem = () => {
         selectedItem={sort}
         className='mb-2 ml-auto w-fit sm:mt-[-62px]'
       />
-      <div className='flex w-full flex-col gap-2 md:flex-row'>
+      <div className='flex w-full flex-col gap-1 md:flex-row'>
         <TxContentTable
           title='Inputs'
           data={data}

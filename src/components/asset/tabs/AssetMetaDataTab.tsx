@@ -33,7 +33,7 @@ export const AssetMetaDataTab: FC<AssetMetaDataTabProps> = ({
   }));
 
   return (
-    <div className='flex flex-grow flex-col gap-3 md:flex-shrink-0'>
+    <div className='flex flex-grow flex-col gap-1.5 md:flex-shrink-0'>
       {isLoading || isFetching ? (
         <LoadingSkeleton height='500px' width='100%' rounded='lg' />
       ) : (

@@ -47,7 +47,7 @@ export const LabelBadge = ({ variant, label, className, extra }: Props) => {
   return (
     <Tooltip
       content={
-        <div className='flex min-w-[160px] flex-col gap-1 text-sm'>
+        <div className='flex min-w-[160px] flex-col gap-1/2 text-sm'>
           <p className='mb-1/2'>{label.label}</p>
           <p>
             Category:{" "}

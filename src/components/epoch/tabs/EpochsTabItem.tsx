@@ -37,8 +37,8 @@ export const EpochsTabItem: FC<EpochsTabItemProps> = ({
 
   return (
     <>
-      <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-        <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
+      <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+        <div className='flex w-full flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
           {epochListQuery.isLoading || epochListQuery.isFetching ? (
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : epoch_number > 0 ? (
@@ -49,7 +49,7 @@ export const EpochsTabItem: FC<EpochsTabItemProps> = ({
             ""
           )}
           <div className='flex w-full justify-end md:hidden'>
-            <div className='flex items-center gap-2 md:hidden'>
+            <div className='flex items-center gap-1 md:hidden'>
               <ExportButton
                 columns={columns}
                 items={filteredData.filter(item => {
@@ -79,7 +79,7 @@ export const EpochsTabItem: FC<EpochsTabItemProps> = ({
           </div>
         </div>
 
-        <div className='flex gap-2'>
+        <div className='flex gap-1'>
           <TableSearchInput
             placeholder='Search  your results...'
             value={tableSearch}
@@ -88,7 +88,7 @@ export const EpochsTabItem: FC<EpochsTabItemProps> = ({
             showSearchIcon
             showPrefixPopup={false}
           />
-          <div className='hidden items-center gap-2 md:flex'>
+          <div className='hidden items-center gap-1 md:flex'>
             <ExportButton
               columns={columns}
               items={filteredData.filter(item => {

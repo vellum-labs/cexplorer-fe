@@ -94,7 +94,7 @@ export const DisplayVoteModal: FC<DisplayVoteModalProps> = ({
         )}
         {!!hasData && (
           <div className='flex h-full w-full flex-col'>
-            <div className='flex h-full w-full justify-between gap-3 border-b border-border p-1.5 text-sm text-text'>
+            <div className='flex h-full w-full justify-between gap-1.5 border-b border-border p-1.5 text-sm text-text'>
               <div>Type</div>
               {data[0]?.extra?.type ? (
                 <ActionTypes title={data[0]?.extra?.type as any} />
@@ -102,10 +102,10 @@ export const DisplayVoteModal: FC<DisplayVoteModalProps> = ({
                 "-"
               )}
             </div>
-            <div className='flex h-full w-full justify-between gap-3 border-b border-border p-1.5 text-sm text-text'>
+            <div className='flex h-full w-full justify-between gap-1.5 border-b border-border p-1.5 text-sm text-text'>
               <div>Title</div>
               {data[0]?.title ? (
-                <div className='flex items-center gap-4'>
+                <div className='flex items-center gap-2'>
                   <Link
                     to='/gov/action/$id'
                     params={{
@@ -127,10 +127,10 @@ export const DisplayVoteModal: FC<DisplayVoteModalProps> = ({
                 "-"
               )}
             </div>
-            <div className='flex h-full w-full justify-between gap-3 border-b border-border p-1.5 text-sm text-text'>
+            <div className='flex h-full w-full justify-between gap-1.5 border-b border-border p-1.5 text-sm text-text'>
               <div>ID</div>
               {(data[0]?.extra as any)?.id ? (
-                <div className='flex items-center gap-2'>
+                <div className='flex items-center gap-1'>
                   <Link
                     to='/gov/action/$id'
                     params={{
@@ -150,10 +150,10 @@ export const DisplayVoteModal: FC<DisplayVoteModalProps> = ({
                 "-"
               )}
             </div>
-            <div className='flex h-full w-full justify-between gap-3 border-b border-border p-1.5 text-sm text-text'>
+            <div className='flex h-full w-full justify-between gap-1.5 border-b border-border p-1.5 text-sm text-text'>
               <span>Ident</span>
               {data[0]?.ident ? (
-                <div className='flex items-center gap-2'>
+                <div className='flex items-center gap-1'>
                   <span>{formatString(data[0]?.ident, "longer")}</span>
                   <Copy
                     copyText={data[0]?.ident}
@@ -167,7 +167,7 @@ export const DisplayVoteModal: FC<DisplayVoteModalProps> = ({
           </div>
         )}
       </div>
-      <div className='flex w-full items-center justify-end gap-2'>
+      <div className='flex w-full items-center justify-end gap-1'>
         <Button variant='tertiary' size='md' label='Cancel' onClick={onClose} />
         <Button
           variant='primary'

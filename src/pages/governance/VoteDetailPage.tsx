@@ -75,7 +75,7 @@ export const GovernanceVoteDetailPage: FC = () => {
       <div className='w-full max-w-desktop py-2'>
         {isLoading ? (
           <div className='w-full'>
-            <div className='flex gap-2'>
+            <div className='flex gap-1'>
               {[1, 2, 3].map(i => (
                 <LoadingSkeleton
                   key={i}

@@ -336,7 +336,7 @@ export const ProfileSettings: FC = () => {
         title='Social profiles'
         description='Social profiles will be visible on you address detail only when profile is public.'
         sideContent={
-          <div className='flex w-full flex-col gap-3 self-center min-[680px]:w-[300px]'>
+          <div className='flex w-full flex-col gap-1.5 self-center min-[680px]:w-[300px]'>
             {socialsData.map(([key, value]) => (
               <div
                 key={key}
@@ -366,7 +366,7 @@ export const ProfileSettings: FC = () => {
         }
         showBorder={false}
       />
-      <div className='flex w-full justify-end gap-2'>
+      <div className='flex w-full justify-end gap-1'>
         <Button
           label='Cancel'
           size='lg'

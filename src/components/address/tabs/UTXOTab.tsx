@@ -86,8 +86,8 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
         <p>
           {item?.value !== undefined ? (
             <>
-              <div className='flex flex-col gap-1'>
-                <div className='flex items-center gap-3'>
+              <div className='flex flex-col gap-1/2'>
+                <div className='flex items-center gap-1.5'>
                   <AdaWithTooltip data={item.value} />
                   <Copy copyText={item.value} />
                   {!!item?.asset_list?.length && <span>+</span>}
@@ -96,11 +96,11 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
                   <div className='flex flex-col'>
                     {item.asset_list.map((item, i) => (
                       <div key={i} className='flex w-full items-center'>
-                        <div className='flex min-w-[200px] items-center gap-3'>
+                        <div className='flex min-w-[200px] items-center gap-1.5'>
                           <Copy copyText={item.quantity} />
                           <span>{item.quantity}</span>
                         </div>
-                        <div className='flex items-center justify-start gap-3 overflow-hidden'>
+                        <div className='flex items-center justify-start gap-1.5 overflow-hidden'>
                           <Copy copyText={item.name} />
                           <Link
                             to='/asset/$fingerprint'
@@ -117,7 +117,7 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
                   </div>
                 )}
                 {item?.datum_hash ? (
-                  <div className='flex items-center gap-1'>
+                  <div className='flex items-center gap-1/2'>
                     <span>+</span>
                     <Link
                       to='/datum'
@@ -131,7 +131,7 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
                     <Copy copyText={item.datum_hash} />
                   </div>
                 ) : (
-                  <div className='flex items-center gap-1'>
+                  <div className='flex items-center gap-1/2'>
                     <span>+</span>
                     <span>NoDatum</span>
                   </div>
@@ -184,8 +184,8 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
 
   return (
     <section className='flex w-full max-w-desktop flex-col'>
-      <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-        <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
+      <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+        <div className='flex w-full flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
           {isLoading ? (
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
@@ -194,7 +194,7 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
             </h3>
           )}
           <div className='flex justify-end max-[435px]:w-full md:hidden'>
-            <div className='flex items-center gap-2 md:hidden'>
+            <div className='flex items-center gap-1 md:hidden'>
               <ExportButton columns={columns} items={items} />
               <TableSettingsDropdown
                 rows={rows}
@@ -215,7 +215,7 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
           </div>
         </div>
 
-        <div className='flex gap-2'>
+        <div className='flex gap-1'>
           <TableSearchInput
             placeholder='Search by tx hash...'
             value={tableSearch}
@@ -224,7 +224,7 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
             showSearchIcon
             showPrefixPopup={false}
           />
-          <div className='hidden items-center gap-2 md:flex'>
+          <div className='hidden items-center gap-1 md:flex'>
             <ExportButton columns={columns} items={items} />
             <TableSettingsDropdown
               rows={rows}

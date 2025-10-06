@@ -18,7 +18,7 @@ export const ContractsTabItem = () => {
 
   if (query.isLoading) {
     return (
-      <div className='flex flex-col gap-3'>
+      <div className='flex flex-col gap-1.5'>
         <LoadingSkeleton height='28px' width='120px' rounded='full' />
         <LoadingSkeleton rounded='xl' height='380px' />
       </div>
@@ -26,8 +26,8 @@ export const ContractsTabItem = () => {
   }
 
   return (
-    <div className='flex flex-col gap-3'>
-      <div className='flex w-fit gap-2 rounded-full border border-border bg-darker px-1.5 py-1/2 text-xs font-medium shadow'>
+    <div className='flex flex-col gap-1.5'>
+      <div className='flex w-fit gap-1 rounded-full border border-border bg-darker px-1.5 py-1/2 text-xs font-medium shadow'>
         Total Script Size {totalSize}kB
       </div>
       {query.data?.data.plutus_contracts?.map((contract, index) => (

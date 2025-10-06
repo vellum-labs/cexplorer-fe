@@ -55,7 +55,7 @@ const TxContentTable = ({ title, data, sort, isOutput }: Props) => {
                 asset={utxo.asset}
               />
             )}
-            <div className='flex w-full flex-wrap gap-1'>
+            <div className='flex w-full flex-wrap gap-1/2'>
               {utxo?.asset &&
                 utxo.asset.length > 0 &&
                 utxo?.asset?.map((asset, index) => (

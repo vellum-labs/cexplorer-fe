@@ -114,7 +114,7 @@ export const ArticlesAdminPage = () => {
           />
         </Modal>
       )}
-      <div className='flex min-h-minHeight flex-col items-center gap-2 p-mobile md:p-desktop'>
+      <div className='flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
         <Helmet>
           <meta charSet='utf-8' />
           <title>Admin articles | Cexplorer.io</title>

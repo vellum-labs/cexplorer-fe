@@ -18,7 +18,7 @@ const WithdrawalsTabItem = () => {
     {
       key: "address",
       render: item => (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <AddressTypeInitialsBadge address={item.stake_addr} />
           <AddressCell address={item.stake_addr} />
         </div>

@@ -119,7 +119,7 @@ export const MinMaxRange: FC<MinMaxRangeProps> = ({
 
   if (labelPosition === "right") {
     return (
-      <div className={`flex items-center gap-1 ${className}`}>
+      <div className={`flex items-center gap-1/2 ${className}`}>
         {progressBarElement}
         {currentValueElement}
       </div>
@@ -128,7 +128,7 @@ export const MinMaxRange: FC<MinMaxRangeProps> = ({
 
   // Default: label above
   return (
-    <div className={`flex flex-col gap-1 ${className}`}>
+    <div className={`flex flex-col gap-1/2 ${className}`}>
       <p className='text-right'>{currentValueElement}</p>
       {progressBarElement}
     </div>

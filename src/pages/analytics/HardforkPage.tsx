@@ -140,7 +140,7 @@ const HardforkPage: FC = () => {
     {
       key: "exchanges",
       render: item => (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           <img
             src={item.logo}
             alt='Logo'
@@ -522,9 +522,9 @@ const HardforkPage: FC = () => {
       breadcrumbItems={[{ label: "Hardfork" }]}
       adsCarousel={false}
       subTitle={
-        <div className='flex w-full flex-col gap-1 text-grayTextPrimary'>
+        <div className='flex w-full flex-col gap-1/2 text-grayTextPrimary'>
           <p>{data?.info?.description}</p>
-          <div className='flex w-full items-center gap-1 text-sm'>
+          <div className='flex w-full items-center gap-1/2 text-sm'>
             <p>Release date:</p>
             <span className='text-nowrap leading-none text-grayTextPrimary'>
               {formatDate(
@@ -536,8 +536,8 @@ const HardforkPage: FC = () => {
       }
     >
       <section className='flex min-h-[450px] w-full justify-center'>
-        <div className='flex w-full max-w-desktop flex-wrap justify-between gap-5 p-mobile md:px-desktop md:py-mobile'>
-          <div className='flex w-full grow basis-[420px] flex-wrap gap-6 lg:flex-nowrap'>
+        <div className='flex w-full max-w-desktop flex-wrap justify-between gap-3 p-mobile md:px-desktop md:py-mobile'>
+          <div className='flex w-full grow basis-[420px] flex-wrap gap-3 lg:flex-nowrap'>
             <div className='w-full rounded-lg border border-border'>
               {data?.detail?.exchanges ? (
                 <Tabs items={exhcangeTabItems} tabParam='exchange' toRight />
@@ -557,8 +557,8 @@ const HardforkPage: FC = () => {
         </div>
       </section>
       <section className='flex w-full max-w-desktop flex-col p-mobile md:p-desktop'>
-        <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-          <div className='flex flex-wrap gap-1 md:flex-nowrap'>
+        <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+          <div className='flex flex-wrap gap-1/2 md:flex-nowrap'>
             <HardforkPageTotalCountItem
               title='All'
               count={

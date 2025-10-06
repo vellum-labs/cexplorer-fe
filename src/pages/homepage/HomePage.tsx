@@ -52,8 +52,8 @@ export const Homepage: FC = () => {
         <section
           className={`flex w-full ${customize ? "select-none" : ""} flex-col items-center`}
         >
-          <div className='my-3 flex w-full max-w-desktop flex-col items-center gap-3 px-mobile md:px-desktop'>
-            <div className='flex w-full justify-end gap-4'>
+          <div className='my-3 flex w-full max-w-desktop flex-col items-center gap-1.5 px-mobile md:px-desktop'>
+            <div className='flex w-full justify-end gap-2'>
               <Button
                 size='md'
                 variant='tertiary'
@@ -63,7 +63,7 @@ export const Homepage: FC = () => {
               />
             </div>
             {customize && <HomepageCustomize />}
-            <div className='flex w-full flex-col gap-5'>
+            <div className='flex w-full flex-col gap-3'>
               <div className='w-full'>
                 <HomepageOverview />
               </div>
