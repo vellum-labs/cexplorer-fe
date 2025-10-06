@@ -74,7 +74,7 @@ export const MultiPoolDelegatorsPage = () => {
         <div className='flex justify-end'>
           <Badge
             color='blue'
-            className='min-w-[50px] justify-center text-center text-xs'
+            className='min-w-[50px] justify-center text-center text-text-xs'
           >
             {row.stake.count}
           </Badge>

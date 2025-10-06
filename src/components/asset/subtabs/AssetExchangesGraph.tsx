@@ -244,7 +244,7 @@ export const AssetExchangesCandlestickGraph: FC<
         {isLoading ? (
           <Loading className='min-h-[300px]' />
         ) : candlestickData.length === 0 ? (
-          <div className='flex h-full w-full items-center justify-center text-sm text-text'>
+          <div className='flex h-full w-full items-center justify-center text-text-sm text-text'>
             <span>No data available for selected period</span>
           </div>
         ) : (

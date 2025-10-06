@@ -30,7 +30,7 @@ export const ScriptCell = ({
       <Link
         to='/script/$hash'
         params={{ hash: hash }}
-        className={` ${isHighlighted ? "rounded-s bg-hoverHighlight outline outline-1 outline-highlightBorder" : ""} block overflow-hidden overflow-ellipsis whitespace-nowrap ${enableHover ? "px-1/2" : "px-0"} text-sm text-primary`}
+        className={` ${isHighlighted ? "rounded-s bg-hoverHighlight outline outline-1 outline-highlightBorder" : ""} block overflow-hidden overflow-ellipsis whitespace-nowrap ${enableHover ? "px-1/2" : "px-0"} text-text-sm text-primary`}
       >
         {formatString(hash, "long")}
       </Link>

@@ -33,7 +33,7 @@ const Row = React.memo(({ index, style, data }: any) => {
           imageSize={30}
           isNft={item.quantity === 1}
         />
-        <span className='text-xs'>{formatNumber(item.quantity)}</span>
+        <span className='text-text-xs'>{formatNumber(item.quantity)}</span>
       </CommandItem>
     </div>
   );
@@ -109,7 +109,7 @@ export const TokenSelectCombobox = React.memo(
               className='flex w-[200px] items-center justify-between'
             >
               Browse tokens
-              <span className='text-xs'>({items.length})</span>
+              <span className='text-text-xs'>({items.length})</span>
               <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
             </Button>
           </PopoverTrigger>

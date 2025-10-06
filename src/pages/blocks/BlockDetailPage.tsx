@@ -93,7 +93,7 @@ const BlockDetailPage: FC = () => {
       label: "Height",
       value: (
         <div className='flex items-center gap-1'>
-          <span className='text-sm font-medium text-text'>
+          <span className='text-text-sm font-medium text-text'>
             {formatNumber(data?.block_no ?? 0)}
           </span>
           <div>
@@ -152,7 +152,7 @@ const BlockDetailPage: FC = () => {
     {
       label: "Epoch",
       value: (
-        <span className='cursor-pointer text-sm font-medium text-primary'>
+        <span className='cursor-pointer text-text-sm font-medium text-primary'>
           <Link to='/epoch/$no' params={{ no: String(data?.epoch_no ?? 0) }}>
             {data?.epoch_no}
           </Link>
@@ -162,7 +162,7 @@ const BlockDetailPage: FC = () => {
     {
       label: "Slot",
       value: (
-        <div className='flex flex-wrap items-center gap-1/2 text-sm leading-none'>
+        <div className='flex flex-wrap items-center gap-1/2 text-text-sm leading-none'>
           <span className='font-medium text-text'>
             {formatNumber(data?.slot_no ?? 0)}
           </span>
@@ -175,7 +175,7 @@ const BlockDetailPage: FC = () => {
     {
       label: <span className='inline-block break-words'>Confirmations</span>,
       value: (
-        <div className='flex items-center gap-[2.5px] text-sm'>
+        <div className='flex items-center gap-[2.5px] text-text-sm'>
           {confirmations[1] < 3 && (
             <CircleX size={15} className='translate-y-[1px] text-red-500' />
           )}
@@ -205,7 +205,7 @@ const BlockDetailPage: FC = () => {
     {
       label: <span className='text-nowrap'>Total Transactions</span>,
       value: (
-        <span className='text-sm font-medium text-text'>
+        <span className='text-text-sm font-medium text-text'>
           {data?.tx_count ? data.tx_count : 0}
         </span>
       ),
@@ -232,7 +232,7 @@ const BlockDetailPage: FC = () => {
     },
     {
       label: (
-        <div className='flex items-center gap-1/2 text-sm'>
+        <div className='flex items-center gap-1/2 text-text-sm'>
           <span className='text-grayTextPrimary'>Total Rewards</span>
           <CircleHelp size={12} className='text-[#98A2B3]' />
         </div>

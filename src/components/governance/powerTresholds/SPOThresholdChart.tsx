@@ -192,7 +192,7 @@ export const SPOThresholdChart: FC<SPOThresholdChartProps> = ({
           style={{ height: "100%", width: "100%" }}
         />
       </div>
-      <p className='text-sm text-text'>
+      <p className='text-text-sm text-text'>
         Threshold:{" "}
         {visibility
           ? `${((threshold || 0) * 100).toFixed(0)}%`

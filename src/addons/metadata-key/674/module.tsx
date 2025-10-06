@@ -18,7 +18,7 @@ export function render({ type, data }: ModuleInput): ModuleOutput {
       component: (
         <div className='rounded-l border border-border bg-darker p-2'>
           <h3 className='mb-1 font-semibold text-text'>CIP-20 Messages</h3>
-          <ul className='list-disc pl-3 text-sm text-grayTextPrimary'>
+          <ul className='list-disc pl-3 text-text-sm text-grayTextPrimary'>
             {messages.map((msg, i) => (
               <li key={i}>{msg}</li>
             ))}

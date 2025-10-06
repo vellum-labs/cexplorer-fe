@@ -203,7 +203,7 @@ export const JsonDisplay: FC<JSONDisplayProps> = ({
 
   return (
     <div
-      className={`relative h-full w-full overflow-hidden rounded-m border border-border !bg-cardBg text-base text-xs shadow`}
+      className={`relative h-full w-full overflow-hidden rounded-m border border-border !bg-cardBg text-text-md text-text-xs shadow`}
     >
       {!isError && !Array.isArray(data?.data) && (
         <div

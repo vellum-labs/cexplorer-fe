@@ -74,9 +74,9 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
         ) : (
           <div className='flex h-full w-full flex-wrap items-stretch gap-2 lg:flex-nowrap'>
             <div className='bg-bgColor flex w-[426px] flex-grow-0 flex-col gap-2 rounded-l border border-border p-3 shadow-sm'>
-              <h3 className='text-textPrimary text-lg font-semibold'>About</h3>
+              <h3 className='text-textPrimary text-text-lg font-semibold'>About</h3>
 
-              <div className='flex items-center justify-start text-sm'>
+              <div className='flex items-center justify-start text-text-sm'>
                 <span className='min-w-[150px] text-grayTextSecondary'>
                   Members
                 </span>
@@ -86,7 +86,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
                 </span>
               </div>
 
-              <div className='flex items-center justify-start text-sm'>
+              <div className='flex items-center justify-start text-text-sm'>
                 <span className='min-w-[150px] text-grayTextSecondary'>
                   Voting threshold
                 </span>
@@ -108,13 +108,13 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
                 <div className='flex h-8 w-8 items-center justify-center'>
                   <FileText size={18} className='text-primary' />
                 </div>
-                <h3 className='text-textPrimary text-lg font-semibold'>
+                <h3 className='text-textPrimary text-text-lg font-semibold'>
                   Constitution
                 </h3>
               </div>
 
               {constitution?.anchor?.data_hash && (
-                <div className='text-textPrimary break-words text-sm font-semibold'>
+                <div className='text-textPrimary break-words text-text-sm font-semibold'>
                   {constitution.anchor.data_hash}
                 </div>
               )}
@@ -124,7 +124,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
                   href={transformAnchorUrl(constitution.anchor.url)}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='break-all text-sm text-primary'
+                  className='break-all text-text-sm text-primary'
                   onClick={e => {
                     e.preventDefault();
                     const transformedUrl = transformAnchorUrl(

@@ -65,8 +65,8 @@ export const DrepNameCell: FC<DrepNameCellProps> = ({ item }) => {
             params={{ hash: item?.hash?.view ?? "" }}
             className={
               item?.data?.given_name
-                ? "text-xs hover:text-grayTextPrimary"
-                : "text-sm text-primary"
+                ? "text-text-xs hover:text-grayTextPrimary"
+                : "text-text-sm text-primary"
             }
             disabled={!!item?.data?.given_name}
           >

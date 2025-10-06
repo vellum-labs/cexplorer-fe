@@ -181,12 +181,12 @@ export const AssetsTab: FC<AssetsTabProps> = ({
                     onClick={() => setLowBalances(lowBalances)}
                     active={!lowBalances}
                   />
-                  <span className='text-sm font-medium text-grayTextPrimary'>
+                  <span className='text-text-sm font-medium text-grayTextPrimary'>
                     Hide Low Balances
                   </span>
                 </div>
               )}
-              <span className='text-xs text-grayTextPrimary'>
+              <span className='text-text-xs text-grayTextPrimary'>
                 Displaying {filteredAssets.length}{" "}
                 {activeAsset === "nfts" ? "NFTs" : "tokens"}
               </span>

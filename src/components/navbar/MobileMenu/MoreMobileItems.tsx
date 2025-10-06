@@ -46,13 +46,13 @@ export const MoreMobileItems = ({ onBack, setOpen, power }: Props) => {
         <InfoCard
           icon={<ChevronsUp color={colors.purpleText} />}
           title={
-            <span className='text-lg font-semibold'>
+            <span className='text-text-lg font-semibold'>
               Get Cexplorer.io <span className='text-purpleText'>PRO</span>
             </span>
           }
           className='max-h-[200px] bg-darker'
         >
-          <p className='text-xs font-regular'>
+          <p className='text-text-xs font-regular'>
             Access Our API for Comprehensive Blockchain Data and Build Your
             Next-Level dApp!
           </p>

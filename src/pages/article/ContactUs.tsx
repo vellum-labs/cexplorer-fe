@@ -51,8 +51,8 @@ export const ContactUsPage = () => {
       <main className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
         <section className='wrapper border-b border-border pb-8'>
           <div className='flex flex-col items-center gap-1'>
-            <h2 className='text-base text-primary'>Contact us</h2>
-            <h1 className='text-3xl'>Get in touch</h1>
+            <h2 className='text-text-md text-primary'>Contact us</h2>
+            <h1 className='text-display-sm'>Get in touch</h1>
           </div>
           <div className='contributors__item'>
             <div className='contributors__item--title'>
@@ -297,7 +297,7 @@ const InfoCard = ({ icon, heading, description, button }: InfoCardProps) => {
         </div>
         <h3>{heading}</h3>{" "}
       </div>
-      <p className='pl-[45px] text-sm text-grayTextPrimary'>{description}</p>
+      <p className='pl-[45px] text-text-sm text-grayTextPrimary'>{description}</p>
       {button}
     </section>
   );

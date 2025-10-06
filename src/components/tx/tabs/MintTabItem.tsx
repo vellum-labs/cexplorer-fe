@@ -95,7 +95,7 @@ const MintTabItem = () => {
   ];
 
   if (!query.data?.data.mints && !query.isLoading) {
-    return <div className='text-center text-sm'>No mints found</div>;
+    return <div className='text-center text-text-sm'>No mints found</div>;
   }
 
   return (

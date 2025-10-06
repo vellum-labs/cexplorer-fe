@@ -108,7 +108,7 @@ export const StakeListTab: FC = () => {
           return <TokenSelectCombobox items={transformedAssets as any} />;
         } catch (error) {
           return (
-            <span className='text-sm font-medium'>
+            <span className='text-text-sm font-medium'>
               {assets.length} asset{assets.length !== 1 ? "s" : ""}
             </span>
           );

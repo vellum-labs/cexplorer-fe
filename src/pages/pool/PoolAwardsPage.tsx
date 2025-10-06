@@ -246,11 +246,11 @@ export const PoolAwardsPage: FC = () => {
                   </h3>
                   <div className='mb-1/2 flex items-center justify-center gap-1'>
                     <Calendar size={12} className='text-grayTextPrimary' />
-                    <span className='text-sm text-grayTextPrimary'>
+                    <span className='text-text-sm text-grayTextPrimary'>
                       {format(new Date(item.time), "dd.MM.yyyy")}
                     </span>
                   </div>
-                  <div className='flex justify-between text-sm text-grayTextPrimary [&>div]:w-1/3'>
+                  <div className='flex justify-between text-text-sm text-grayTextPrimary [&>div]:w-1/3'>
                     {renderDetails(item)}
                   </div>
                 </div>

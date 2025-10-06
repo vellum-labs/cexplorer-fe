@@ -171,7 +171,7 @@ export const DonatePage = () => {
         </Modal>
       )}
       <div className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
-        <p className='mt-4 text-sm font-semibold text-primary'>Donation</p>
+        <p className='mt-4 text-text-sm font-semibold text-primary'>Donation</p>
         <h1 className='mb-2'>Fuel the Future of Cexplorer</h1>
         <p className='font-regular text-grayTextPrimary'>
           Your support helps us operate, maintain and improve everything on
@@ -221,14 +221,14 @@ export const DonatePage = () => {
                   Thank you for supporting the development of independent
                   Cardano explorer! ❤️
                 </p>
-                <p className='mb-1 mt-2 text-sm font-medium'>
+                <p className='mb-1 mt-2 text-text-sm font-medium'>
                   Send your donation here
                 </p>
                 <div className='relative flex w-full max-w-[390px] items-center'>
                   <input
                     readOnly
                     value={donationAddress}
-                    className='w-full max-w-[390px] rounded-m border border-border bg-background p-1.5 text-sm text-text'
+                    className='w-full max-w-[390px] rounded-m border border-border bg-background p-1.5 text-text-sm text-text'
                   />
                   <Copy
                     copyText={donationAddress}
@@ -237,7 +237,7 @@ export const DonatePage = () => {
                 </div>
               </div>
               <div className='flex flex-col gap-2'>
-                <p className='text-sm font-medium'>Other donation methods</p>
+                <p className='text-text-sm font-medium'>Other donation methods</p>
                 <div className='flex flex-wrap gap-2'>
                   <a
                     href='https://www.paypal.com/donate?business=billing@vellumlabs.cz&item_name=Cexplorer.io+-+maintenance,+development,+servers&currency_code=USD'
@@ -268,7 +268,7 @@ export const DonatePage = () => {
                 </div>
               </div>
             </div>
-            <p className='mb-1 mt-5 text-sm font-medium'>
+            <p className='mb-1 mt-5 text-text-sm font-medium'>
               Or use our dApp connector
             </p>
             <div className='flex flex-wrap gap-2'>
@@ -342,14 +342,14 @@ export const DonatePage = () => {
                 <Link
                   to='/pool/$id'
                   params={{ id: randomPool }}
-                  className='my-2 flex items-center text-sm font-medium text-grayTextPrimary'
+                  className='my-2 flex items-center text-text-sm font-medium text-grayTextPrimary'
                 >
                   Our stake pool performance <ArrowRight />
                 </Link>
               </div>
             </div>
             <div className='flex flex-col'>
-              <p className='text-xs'>Delegate via dApp</p>
+              <p className='text-text-xs'>Delegate via dApp</p>
               <Button
                 size='lg'
                 label='Delegate to [POOLS]'
@@ -357,12 +357,12 @@ export const DonatePage = () => {
                 leftIcon={<Wallet />}
                 onClick={handleDelegation}
               />
-              <p className='mt-4 text-xs'> Pool ID for delegation via wallet</p>
+              <p className='mt-4 text-text-xs'> Pool ID for delegation via wallet</p>
               <div className='relative flex w-full max-w-[430px] items-center'>
                 <input
                   readOnly
                   value={randomPool}
-                  className='w-full max-w-[430px] rounded-m border border-border bg-background p-1.5 text-sm text-text'
+                  className='w-full max-w-[430px] rounded-m border border-border bg-background p-1.5 text-text-sm text-text'
                 />
                 <Copy
                   copyText={randomPool}
@@ -386,7 +386,7 @@ const InfoCard = ({ icon, heading, description }: InfoCardProps) => {
         </div>
         <h3>{heading}</h3>{" "}
       </div>
-      <p className='pl-6 text-sm text-grayTextPrimary'>{description}</p>
+      <p className='pl-6 text-text-sm text-grayTextPrimary'>{description}</p>
     </section>
   );
 };
@@ -422,7 +422,7 @@ const CustomDonateCard = ({
         placeholder='Choose the amount'
       />
       <p className='font-medium'>dApp Your Way</p>
-      <p className='mt-1.5 text-left text-sm text-grayTextPrimary'>
+      <p className='mt-1.5 text-left text-text-sm text-grayTextPrimary'>
         Empowering developers with the freedom to innovate.
       </p>
     </div>
@@ -460,7 +460,7 @@ const DonateCard = ({
         />
       )}
       <p className='font-medium'>{title}</p>
-      <p className='mt-1.5 text-left text-sm text-grayTextPrimary'>
+      <p className='mt-1.5 text-left text-text-sm text-grayTextPrimary'>
         {description}
       </p>
     </div>

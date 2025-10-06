@@ -225,7 +225,7 @@ export const GroupDetailPage = () => {
       key: "fees",
       render: item => {
         return (
-          <div className='flex flex-col text-right text-xs text-grayTextPrimary'>
+          <div className='flex flex-col text-right text-text-xs text-grayTextPrimary'>
             <span>
               {item?.info[0].pool_update?.active?.margin
                 ? (item.info[0].pool_update?.active?.margin * 100).toFixed(2)
@@ -294,7 +294,7 @@ export const GroupDetailPage = () => {
                 className='justify-end'
               />
             </div>
-            <div className='text-xs text-grayTextSecondary'>
+            <div className='text-text-xs text-grayTextSecondary'>
               ({formattedTotalBlocks})
             </div>
           </div>
@@ -349,7 +349,7 @@ export const GroupDetailPage = () => {
                 color={getPledgeColor(pledgeLeverage)}
                 className={cn("translate-y-[2px]")}
               />
-              <span className='text-xs text-grayTextPrimary'>
+              <span className='text-text-xs text-grayTextPrimary'>
                 x{pledgeLeverage}
               </span>
             </div>
@@ -388,7 +388,7 @@ export const GroupDetailPage = () => {
         return (
           <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
             <PulseDot color={!isActive ? "bg-yellowText" : undefined} />
-            <span className='text-xs font-medium'>
+            <span className='text-text-xs font-medium'>
               {isActive ? "Active" : "Inactive"}
             </span>
           </div>

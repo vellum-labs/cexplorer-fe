@@ -69,7 +69,7 @@ const ImageWrapper: React.FC<
             if (!fallbackUrl && props.fallbackletters) {
               setFallbackElement(
                 <div
-                  className={`flex ${props.className?.includes("rounded-max") ? "rounded-max" : "rounded-m"} shrink-0 items-center justify-center bg-primary ${props.height && Number(props.height) > 100 ? "text-5xl" : "text-[18px]"} font-bold uppercase text-background`}
+                  className={`flex ${props.className?.includes("rounded-max") ? "rounded-max" : "rounded-m"} shrink-0 items-center justify-center bg-primary ${props.height && Number(props.height) > 100 ? "text-display-lg" : "text-[18px]"} font-bold uppercase text-background`}
                   style={{
                     height: props.height + "px",
                     width: props.fullWidth ? "100%" : props.width + "px",

@@ -76,7 +76,7 @@ const AddressCell = ({
         {parseShelleyAddress(address)?.paymentPart === "ScriptHash" && (
           <Tooltip
             content={
-              <div className='flex w-[166px] flex-col items-center text-sm'>
+              <div className='flex w-[166px] flex-col items-center text-text-sm'>
                 <p className='font-medium'>Smart Contract Address</p>
               </div>
             }
@@ -89,7 +89,7 @@ const AddressCell = ({
         <Link
           to={isStake ? "/stake/$stakeAddr" : "/address/$address"}
           params={{ address: address, stakeAddr: address }}
-          className={`${label ? "px-[2px] italic" : ""} ${isHighlighted ? "rounded-s bg-hoverHighlight outline outline-1 outline-highlightBorder" : ""} block overflow-hidden overflow-ellipsis whitespace-nowrap ${enableHover ? "px-1/2" : "px-0"} text-sm text-primary ${className}`}
+          className={`${label ? "px-[2px] italic" : ""} ${isHighlighted ? "rounded-s bg-hoverHighlight outline outline-1 outline-highlightBorder" : ""} block overflow-hidden overflow-ellipsis whitespace-nowrap ${enableHover ? "px-1/2" : "px-0"} text-text-sm text-primary ${className}`}
           title={label ? address : ""}
         >
           {label ? label : formatString(address, "longer")}
@@ -98,9 +98,9 @@ const AddressCell = ({
         {isValidAddress(address) && Address.from(address).stake && (
           <Tooltip
             content={
-              <div className='flex w-[200px] flex-col items-center text-sm'>
+              <div className='flex w-[200px] flex-col items-center text-text-sm'>
                 <p className='font-medium'>Stake key</p>
-                <div className='mt-1/2 flex items-end justify-end break-all text-center text-sm'>
+                <div className='mt-1/2 flex items-end justify-end break-all text-center text-text-sm'>
                   <Link
                     to='/stake/$stakeAddr'
                     params={{ stakeAddr: Address.from(address).rewardAddress }}

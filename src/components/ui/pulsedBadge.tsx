@@ -19,7 +19,7 @@ export const PulsedBadge: FC<PulsedBadgeProps> = ({
           <PulseDot overrideColor={badgeColor} />
         </div>
       )}
-      <span className='text-xs font-medium'>{title}</span>
+      <span className='text-text-xs font-medium'>{title}</span>
     </div>
   );
 };

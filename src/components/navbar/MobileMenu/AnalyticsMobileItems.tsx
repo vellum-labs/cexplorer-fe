@@ -53,14 +53,14 @@ export const AnalyticsMobileItems = ({ onBack, setOpen, power }: Props) => {
         <InfoCard
           icon={<Cardano size={24} color={colors.primary} />}
           title={
-            <span className='text-lg font-semibold'>
+            <span className='text-text-lg font-semibold'>
               Powered by{" "}
               <span className='text-primary'>Cardano Blockchain</span>
             </span>
           }
           className='max-h-[200px] bg-darker'
         >
-          <p className='text-xs font-regular'>
+          <p className='text-text-xs font-regular'>
             Access Our API for Comprehensive Blockchain Data and Build Your
             Next-Level dApp!
           </p>

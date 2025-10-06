@@ -61,7 +61,7 @@ export const DevlogPage: FC = () => {
                   className='border-b border-border'
                 >
                   <AccordionTrigger className='AccordionTrigger w-full py-3 text-left'>
-                    <span className='text-base font-medium'>{item.title}</span>
+                    <span className='text-text-md font-medium'>{item.title}</span>
                   </AccordionTrigger>
                   <AccordionContent>
                     <div className='flex flex-col pb-1.5 text-grayTextPrimary'>

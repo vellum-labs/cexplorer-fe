@@ -61,7 +61,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
           params={{
             id: vote?.proposal?.ident?.id ?? "",
           }}
-          className='text-sm text-primary'
+          className='text-text-sm text-primary'
         >
           {vote?.proposal?.anchor?.offchain?.name}
         </Link>
@@ -74,7 +74,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       title: "Governance action ID",
       value: (
         <div className='flex items-center gap-1 break-all'>
-          <span className='text-sm' title={vote?.proposal?.ident?.bech}>
+          <span className='text-text-sm' title={vote?.proposal?.ident?.bech}>
             {formatString(vote?.proposal?.ident?.bech, "long")}
           </span>
           <Copy copyText={vote?.proposal?.ident?.bech} />
@@ -102,7 +102,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       key: "enacted_epoch",
       title: "Enacted epoch",
       value: (
-        <span className='text-sm'>
+        <span className='text-text-sm'>
           Epoch{" "}
           <Link
             to='/epoch/$no'
@@ -119,7 +119,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       key: "ratified_epoch",
       title: "Ratified epoch",
       value: (
-        <span className='text-sm'>
+        <span className='text-text-sm'>
           Epoch{" "}
           <Link
             to='/epoch/$no'
@@ -136,7 +136,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       key: "expired_epoch",
       title: "Expired epoch",
       value: (
-        <span className='text-sm'>
+        <span className='text-text-sm'>
           Epoch{" "}
           <Link
             to='/epoch/$no'
@@ -161,7 +161,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       key: "voting_end",
       title: "Voting deadline",
       value: vote?.proposal?.expiration ? (
-        <span className='text-sm'>
+        <span className='text-text-sm'>
           Epoch{" "}
           <Link
             to='/epoch/$no'
@@ -191,7 +191,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
             {role === GovernanceRole.DRep && <User size={12} className='text-primary' />}
             {role === GovernanceRole.ConstitutionalCommittee && <Landmark size={12} className='text-primary' />}
             {role === GovernanceRole.SPO && <Route size={12} className='text-primary' />}
-            <span className='text-xs font-medium'>{displayRole}</span>
+            <span className='text-text-xs font-medium'>{displayRole}</span>
           </div>
         );
       })(),
@@ -232,12 +232,12 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
                 hash: vote.info.id,
                 coldKey: vote.info.id,
               }}
-              className='text-sm text-primary hover:underline'
+              className='text-text-sm text-primary hover:underline'
             >
               {voterDisplayName}
             </Link>
           ) : (
-            <span className='text-sm text-primary'>
+            <span className='text-text-sm text-primary'>
               {voterDisplayName}
             </span>
           )}
@@ -265,13 +265,13 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
                 hash: vote.info.id,
                 coldKey: vote.info.id,
               }}
-              className='text-sm text-primary hover:underline'
+              className='text-text-sm text-primary hover:underline'
               title={vote?.info?.id}
             >
               {formatString(vote?.info?.id, "long")}
             </Link>
           ) : (
-            <span className='text-sm' title={vote?.info?.id}>
+            <span className='text-text-sm' title={vote?.info?.id}>
               {formatString(vote?.info?.id, "long")}
             </span>
           )}
@@ -316,7 +316,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
           <Link
             to='/tx/$hash'
             params={{ hash: vote?.tx?.hash }}
-            className='text-sm text-primary'
+            className='text-text-sm text-primary'
             title={vote?.tx?.hash}
           >
             {formatString(vote?.tx?.hash, "long")}
@@ -338,7 +338,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
               href={transformedUrl}
               target='_blank'
               rel='noopener noreferrer'
-              className='text-sm text-primary break-all'
+              className='text-text-sm text-primary break-all'
               onClick={e => {
                 e.preventDefault();
                 setClickedUrl(transformedUrl);
@@ -354,7 +354,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       key: "metadata",
       title: "Metadata",
       value: vote?.anchor?.offchain?.comment ? (
-        <div className='bg-muted rounded border border-border p-1.5 text-sm leading-relaxed'>
+        <div className='bg-muted rounded border border-border p-1.5 text-text-sm leading-relaxed'>
           <pre className='max-w-full overflow-x-auto whitespace-pre-wrap break-all'>
             {vote?.anchor?.offchain?.comment}
           </pre>
@@ -368,12 +368,12 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
   return (
     <>
       <div className='w-full rounded-l border border-border px-3 py-2'>
-        <h2 className='text-base font-semibold'>Overview</h2>
+        <h2 className='text-text-md font-semibold'>Overview</h2>
         <div className='flex flex-col gap-2 pt-2'>
           {detailItems.map(({ key, title, value, divider }) => (
             <div key={key} className='flex flex-col'>
               <div className='flex flex-wrap items-start gap-x-2 gap-y-1/2'>
-                <p className='min-w-[160px] max-w-full break-words text-sm text-grayTextSecondary'>
+                <p className='min-w-[160px] max-w-full break-words text-text-sm text-grayTextSecondary'>
                   {title}
                 </p>
                 <div className='min-w-0 flex-1 break-words'>

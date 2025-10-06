@@ -40,7 +40,7 @@ const SortBy: FC<SortByProps> = ({
       className={`flex items-center gap-1 ${className} ${disabled ? "pointer-events-none cursor-not-allowed opacity-50" : ""}`}
     >
       {label && (
-        <span className='min-w-fit text-sm text-grayTextPrimary'>
+        <span className='min-w-fit text-text-sm text-grayTextPrimary'>
           {labelName || "Sort By:"}
         </span>
       )}

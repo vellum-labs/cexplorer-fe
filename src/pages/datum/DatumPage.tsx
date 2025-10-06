@@ -173,7 +173,7 @@ export const DatumPage: FC = () => {
             <div className='flex h-[360px] w-1/2 flex-grow flex-col gap-1'>
               <h3>Input</h3>
               <textarea
-                className='h-full w-full resize-none rounded-m border border-border bg-cardBg p-[10px] text-base text-xs shadow-md outline-none'
+                className='h-full w-full resize-none rounded-m border border-border bg-cardBg p-[10px] text-text-md text-text-xs shadow-md outline-none'
                 spellCheck={false}
                 onChange={e => changeInputDatum(e.currentTarget.value)}
                 defaultValue={datum ? datum : inputDatum}

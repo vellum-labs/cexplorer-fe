@@ -16,7 +16,7 @@ const MetadataTabItem = () => {
     metadataArr.push({ [obj]: metadata[obj] });
   }
   if (!metadata && !query.isLoading) {
-    return <p className='w-full text-center text-sm'>No metadata found</p>;
+    return <p className='w-full text-center text-text-sm'>No metadata found</p>;
   }
 
   if (query.isLoading) {
@@ -35,7 +35,7 @@ const MetadataTabItem = () => {
           className='flex flex-col rounded-l border border-b border-border bg-darker px-2 py-1.5 shadow-md'
         >
           <div className='mb-1 flex items-center gap-1/2'>
-            <div className='w-fit rounded-s border border-border bg-background px-1 py-1/2 text-xs font-medium'>
+            <div className='w-fit rounded-s border border-border bg-background px-1 py-1/2 text-text-xs font-medium'>
               {Object.values(item)[0].key}
             </div>
             <ConstLabelBadge

@@ -96,7 +96,7 @@ export const AddressDetailPage: FC = () => {
           tabName='defi'
           pulseDot={false}
           page={page}
-          titleClassname='text-base'
+          titleClassname='text-text-md'
         />
       ),
       visible: true,

@@ -179,7 +179,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
             {role === "DRep" && <User className='text-primary' size={12} />}
             {role === "CC" && <Landmark className='text-primary' size={12} />}
             {role === "SPO" && <Route className='text-primary' size={12} />}
-            <span className='text-xs font-medium'>{role}</span>
+            <span className='text-text-xs font-medium'>{role}</span>
           </div>
         );
       },
@@ -209,7 +209,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
                     changeDraftFilter("voter_role", e.currentTarget.value)
                   }
                 />
-                <span className='text-sm'>{val}</span>
+                <span className='text-text-sm'>{val}</span>
               </label>
             ))}
           </div>
@@ -276,7 +276,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
                     changeDraftFilter("vote", e.currentTarget.value)
                   }
                 />
-                <span className='text-sm'>{val}</span>
+                <span className='text-text-sm'>{val}</span>
               </label>
             ))}
           </div>
@@ -474,7 +474,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
                 value && (
                   <div
                     key={key}
-                    className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
+                    className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
                   >
                     <span>
                       {key[0].toUpperCase() + key.split("_").join(" ").slice(1)}

@@ -7,7 +7,7 @@ export const SafetyLinkModal = ({ url, onClose }) => {
       <p className='mt-2 font-medium'>
         You are switching to an external, unmoderated url:{" "}
       </p>
-      <p className='break-all overflow-wrap-anywhere max-w-full text-sm mt-1 mb-2 max-h-32 overflow-y-auto'>{url}</p>
+      <p className='break-all overflow-wrap-anywhere max-w-full text-text-sm mt-1 mb-2 max-h-32 overflow-y-auto'>{url}</p>
       <div className='flex justify-between gap-1'>
         <Button onClick={onClose} variant='red' size='md' label='Go back' />
         <a
@@ -15,7 +15,7 @@ export const SafetyLinkModal = ({ url, onClose }) => {
           href={url}
           target='_blank'
           rel='noreferrer noopener nofollow'
-          className='box-border flex min-w-fit max-w-fit items-center justify-center rounded-[8px] border-2 border-darkBlue bg-darkBlue px-2 py-1 text-sm font-medium text-white duration-150 hover:scale-[101%] hover:text-white active:scale-[98%] disabled:cursor-not-allowed disabled:opacity-50'
+          className='box-border flex min-w-fit max-w-fit items-center justify-center rounded-[8px] border-2 border-darkBlue bg-darkBlue px-2 py-1 text-text-sm font-medium text-white duration-150 hover:scale-[101%] hover:text-white active:scale-[98%] disabled:cursor-not-allowed disabled:opacity-50'
         >
           Visit
         </a>

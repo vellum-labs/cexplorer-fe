@@ -31,9 +31,9 @@ const Button = ({
   const sizeClasses = {
     xs: "py-1/2 px-1/2 text-[12px]",
     sm: "py-1 px-1.5 text-[13px]",
-    md: "py-1 px-2 text-sm",
+    md: "py-1 px-2 text-text-sm",
     lg: "py-1 px-2 text-md",
-    xl: "py-1.5 px-3 text-lg",
+    xl: "py-1.5 px-3 text-text-lg",
   };
 
   const variantClasses = {

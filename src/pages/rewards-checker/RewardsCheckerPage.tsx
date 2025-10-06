@@ -76,7 +76,7 @@ export const RewardsCheckerPage = () => {
             <Link
               to='/stake/$stakeAddr'
               params={{ stakeAddr: submittedSearch }}
-              className='flex items-center gap-1/2 text-sm font-medium text-primary'
+              className='flex items-center gap-1/2 text-text-sm font-medium text-primary'
             >
               Address detail <ArrowRight color={colors.primary} size={15} />
             </Link>

@@ -108,7 +108,7 @@ export const useEpochList = ({
             <span> {format(dateFromDataTime, "dd.MM.yyyy")}</span>
             <DateCell
               time={item?.start_time}
-              className='text-xs text-grayTextPrimary'
+              className='text-text-xs text-grayTextPrimary'
             />
           </div>
         );
@@ -138,7 +138,7 @@ export const useEpochList = ({
                   }}
                 ></span>
               </div>
-              <span className='text-sm font-medium text-grayTextPrimary'>
+              <span className='text-text-sm font-medium text-grayTextPrimary'>
                 {!isNaN(elapsedPercentage)
                   ? elapsedPercentage > 100
                     ? 100
@@ -158,7 +158,7 @@ export const useEpochList = ({
             <span> {format(dateFromDataTime, "dd.MM.yyyy")}</span>
             <DateCell
               time={item?.end_time}
-              className='text-xs text-grayTextPrimary'
+              className='text-text-xs text-grayTextPrimary'
             />
           </div>
         );
@@ -187,7 +187,7 @@ export const useEpochList = ({
             <div className='absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2'>
               {+epoch_number - 1 === epochNo && <PulseDot />}
             </div>
-            <p className='cursor-pointer pl-1.5 text-sm text-primary'>
+            <p className='cursor-pointer pl-1.5 text-text-sm text-primary'>
               <Link
                 to='/epoch/$no'
                 params={{ no: String(epochNo) }}

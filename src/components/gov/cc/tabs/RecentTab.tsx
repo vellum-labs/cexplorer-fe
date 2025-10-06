@@ -190,7 +190,7 @@ export const RecentTab: FC = () => {
                     changeDraftFilter("vote", e.currentTarget.value)
                   }
                 />
-                <span className='text-sm'>{val}</span>
+                <span className='text-text-sm'>{val}</span>
               </label>
             ))}
           </div>
@@ -305,7 +305,7 @@ export const RecentTab: FC = () => {
               value && (
                 <div
                   key={key}
-                  className='flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
+                  className='flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
                 >
                   <span>
                     {key.charAt(0).toUpperCase() +

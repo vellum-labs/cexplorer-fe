@@ -354,7 +354,7 @@ export const ProfileSettings: FC = () => {
                   prefixClassname='w-[80px]'
                 />
                 <p
-                  className={`overflow-hidden text-sm text-red-500 opacity-0 ${
+                  className={`overflow-hidden text-text-sm text-red-500 opacity-0 ${
                     errors[key] ? "opacity-100" : "opacity-0"
                   }`}
                 >

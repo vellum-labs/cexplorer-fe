@@ -218,13 +218,13 @@ export const PoolIssuesMissedBlocks: FC = () => {
           />
         </div>
         <div className='flex flex-wrap items-center gap-2'>
-          <div className='flex gap-1/2 text-xs'>
+          <div className='flex gap-1/2 text-text-xs'>
             <span className='text-grayTextPrimary'>Monitored epochs</span>
             <span>
               {miscConst?.epoch?.no ? miscConst?.epoch?.no - epochCount : 0}
             </span>
           </div>
-          <div className='flex gap-1/2 text-xs'>
+          <div className='flex gap-1/2 text-text-xs'>
             <span className='text-grayTextPrimary'>
               Minimum estimated blocks
             </span>
@@ -234,7 +234,7 @@ export const PoolIssuesMissedBlocks: FC = () => {
               ).toFixed(2)}
             </span>
           </div>
-          <div className='flex gap-1/2 text-xs'>
+          <div className='flex gap-1/2 text-text-xs'>
             <span className='text-grayTextPrimary'>Allowed deviation</span>
             <span>
               {mintedBlocks && estimatedBlocks

@@ -524,7 +524,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         <h3 className='basis-[220px]'>Epoch Parameters</h3>
         <div className='flex h-[40px] w-fit shrink-0 items-center justify-center gap-1/2 rounded-s border border-border px-1.5'>
           <Download size={20} color={colors.text} />
-          <span className='text-sm font-medium'>Export</span>
+          <span className='text-text-sm font-medium'>Export</span>
         </div>
       </div>
       <div

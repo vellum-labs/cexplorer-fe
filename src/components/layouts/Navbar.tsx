@@ -79,7 +79,7 @@ const Navbar = () => {
                 <InfoCard
                   icon={<Cardano size={24} color={colors.primary} />}
                   title={
-                    <span className='text-lg font-semibold'>
+                    <span className='text-text-lg font-semibold'>
                       Powered by{" "}
                       <span className='text-primary'>Cardano Blockchain</span>
                     </span>
@@ -108,7 +108,7 @@ const Navbar = () => {
                 <InfoCard
                   icon={<ChevronsUp color={colors.purpleText} />}
                   title={
-                    <span className='text-lg font-semibold'>
+                    <span className='text-text-lg font-semibold'>
                       Get Cexplorer.io{" "}
                       <span className='text-purpleText'>PRO</span>
                     </span>

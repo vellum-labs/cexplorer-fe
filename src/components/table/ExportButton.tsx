@@ -69,7 +69,7 @@ const ExportButton: FC<ExportButtonProps> = ({
         onClick={showModals}
       >
         <Download size={20} color={colors.text} />
-        <span className='text-sm font-medium'>Export</span>
+        <span className='text-text-sm font-medium'>Export</span>
       </div>
     </>
   );

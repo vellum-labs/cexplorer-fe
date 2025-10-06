@@ -22,7 +22,7 @@ export const SizeCard: FC<BlockDetailSizeProps> = ({
       <div className='flex max-h-[110px] min-h-[110px] flex-col gap-1 rounded-l px-2 py-1.5'>
         <div className='flex w-full items-center gap-1'>
           <div className='rounded-m border border-border p-1/2'>{icon}</div>
-          <span className='text-sm text-grayTextPrimary'>{title}</span>
+          <span className='text-text-sm text-grayTextPrimary'>{title}</span>
         </div>
         {!isNaN(Number(sizeInKB)) ? (
           <span className='font-semibold text-text'>{sizeInKB}kB</span>
@@ -36,7 +36,7 @@ export const SizeCard: FC<BlockDetailSizeProps> = ({
               style={{ width: `${percent ?? 0}%` }}
             ></span>
           </div>
-          <span className='text-sm font-medium text-grayTextPrimary'>
+          <span className='text-text-sm font-medium text-grayTextPrimary'>
             {!isNaN(Number(percent)) ? percent : "?"}%
           </span>
         </div>

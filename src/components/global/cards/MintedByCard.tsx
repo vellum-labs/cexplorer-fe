@@ -34,13 +34,13 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
         <div className='rounded-m border border-border p-1/2'>
           <GitCompareArrows size={20} className='text-primary' />
         </div>
-        <span className='text-sm text-grayTextPrimary'>Minted by</span>
+        <span className='text-text-sm text-grayTextPrimary'>Minted by</span>
       </div>
       <div className='flex w-full items-center gap-1.5'>
         {icon && <img src={icon} alt='Cexplorer' width={28} height={28} />}
         {/* <PoolCell fontSize='18px' poolInfo={poolInfo} /> */}
         {isGenesisBlock ? (
-          <p className='block max-h-10 min-h-5 w-full overflow-hidden text-ellipsis whitespace-nowrap break-all text-base font-bold'>
+          <p className='block max-h-10 min-h-5 w-full overflow-hidden text-ellipsis whitespace-nowrap break-all text-text-md font-bold'>
             Genesis block
           </p>
         ) : (
@@ -57,7 +57,7 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
               className='rounded-max'
             />
             <p
-              className={`block max-h-10 min-h-5 w-full overflow-hidden text-ellipsis whitespace-nowrap break-all text-base font-bold hover:text-text`}
+              className={`block max-h-10 min-h-5 w-full overflow-hidden text-ellipsis whitespace-nowrap break-all text-text-md font-bold hover:text-text`}
             >
               {poolInfo.meta?.name
                 ? `[${poolInfo.meta.ticker}] ${poolInfo.meta?.name}`
@@ -69,7 +69,7 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
       {vrfKey && (
         <div className='flex w-full items-center gap-1'>
           {protoMajor && (
-            <span className='flex items-center gap-1 text-sm text-grayTextPrimary'>
+            <span className='flex items-center gap-1 text-text-sm text-grayTextPrimary'>
               Protocol version
               <ProtocolDot protNo={Number(`${protoMajor}.${protoMinor}`)} />
               {protoMajor}

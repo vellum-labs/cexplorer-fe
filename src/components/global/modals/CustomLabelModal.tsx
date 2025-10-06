@@ -110,7 +110,7 @@ export const CustomLabelModal = () => {
         disabled={!!addressToEdit}
         inputClassName={isAddressValid ? "" : "border-redText"}
       />
-      <p className='mb-1.5 h-3 text-xs text-redText'>
+      <p className='mb-1.5 h-3 text-text-xs text-redText'>
         {isAddressValid ? "" : "Please enter a valid address"}
       </p>
       <TextInput

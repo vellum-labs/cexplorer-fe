@@ -112,7 +112,7 @@ export const ApiProfile = () => {
           />
         </div>
       </section>
-      <section className='mt-2 flex flex-wrap items-center gap-1.5 border-b border-border pb-2 text-sm md:gap-5'>
+      <section className='mt-2 flex flex-wrap items-center gap-1.5 border-b border-border pb-2 text-text-sm md:gap-5'>
         <span className='mr-1'>Your account</span>
         <span className='flex items-center gap-1/2 text-grayTextPrimary'>
           {/* Your plan: <Badge color='gray'>{!nfts ? "Basic" : "PRO"}</Badge> */}
@@ -142,7 +142,7 @@ export const ApiProfile = () => {
                 className='rounded-s border border-border p-1'
               />
               <h2>You don't have any projects yet.</h2>
-              <p className='max-w-[350px] text-center text-sm text-grayTextPrimary'>
+              <p className='max-w-[350px] text-center text-text-sm text-grayTextPrimary'>
                 Start a new project to generate a new API keys, monitor your
                 usage, and track your data.
               </p>
@@ -150,12 +150,12 @@ export const ApiProfile = () => {
           ) : (
             <>
               {userData?.map((apiKey, index) => (
-                <div className='flex w-full flex-col gap-3 text-sm'>
+                <div className='flex w-full flex-col gap-3 text-text-sm'>
                   {userData.length > 1 && <h1>#{index + 1}</h1>}
                   <div className='flex w-full flex-col gap-4 border-b border-border pb-2 md:flex-row'>
                     <div className='flex flex-col gap-1 md:w-[300px]'>
                       <span className='font-medium'>Plan</span>
-                      <p className='text-sm font-regular text-grayTextPrimary'>
+                      <p className='text-text-sm font-regular text-grayTextPrimary'>
                         Details about your API plan
                       </p>
                     </div>
@@ -213,7 +213,7 @@ export const ApiProfile = () => {
                   <div className='flex w-full flex-col gap-4 border-b border-border pb-2 md:flex-row'>
                     <div className='flex flex-col gap-1 md:w-[300px]'>
                       <span className='font-medium'>Limits</span>
-                      <p className='text-sm font-regular text-grayTextPrimary'>
+                      <p className='text-text-sm font-regular text-grayTextPrimary'>
                         API limits based on your plan. You can increase the
                         limits by upgrading your / by holding more Cexplorer PRO
                         NFTs.
@@ -248,10 +248,10 @@ export const ApiProfile = () => {
                       </div>
                     </div>
                   </div>
-                  <div className='flex w-full flex-col gap-4 border-b border-border pb-2 text-sm md:flex-row'>
+                  <div className='flex w-full flex-col gap-4 border-b border-border pb-2 text-text-sm md:flex-row'>
                     <div className='flex flex-col gap-1 md:w-[300px]'>
                       <span className='font-medium'>API keys</span>
-                      <p className='text-sm font-regular text-grayTextPrimary'>
+                      <p className='text-text-sm font-regular text-grayTextPrimary'>
                         Your project’s API key. You can regenerate the key at
                         any time (disables the original key).
                       </p>
@@ -283,10 +283,10 @@ export const ApiProfile = () => {
                       </div>
                     </div>
                   </div>
-                  <div className='flex w-full flex-col gap-4 pb-2 text-sm lg:flex-row'>
+                  <div className='flex w-full flex-col gap-4 pb-2 text-text-sm lg:flex-row'>
                     <div className='flex flex-col gap-1 lg:w-[300px]'>
                       <span className='font-medium'>API usage</span>
-                      <p className='text-sm font-regular text-grayTextPrimary'>
+                      <p className='text-text-sm font-regular text-grayTextPrimary'>
                         Overview of the requests amount in time.
                       </p>
                     </div>
@@ -439,7 +439,7 @@ const ActivityGraph = ({ data }: { data: UserApiObject["stat"] }) => {
 const ProgressBar = ({ title, value, max }) => {
   const percentage = (value / max) * 100;
   return (
-    <div className='w-full text-sm'>
+    <div className='w-full text-text-sm'>
       <span className='font-medium'>{title}</span>
       <div className='relative my-1/2 h-2 w-full overflow-hidden rounded-[4px] bg-border'>
         <span
@@ -447,7 +447,7 @@ const ProgressBar = ({ title, value, max }) => {
           style={{ width: `${percentage}%` }}
         ></span>
       </div>
-      <div className='flex w-full items-center justify-between text-xs text-grayTextPrimary'>
+      <div className='flex w-full items-center justify-between text-text-xs text-grayTextPrimary'>
         <span>
           {value} / {formatNumber(max)}
         </span>

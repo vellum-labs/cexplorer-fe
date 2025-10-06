@@ -17,11 +17,11 @@ export const HomepageCustomize: FC = () => {
           onClick={() => setAddWidget(true)}
         >
           <Plus size={16} className='text-primary' />
-          <span className='text-sm font-semibold text-primary'>Add widget</span>
+          <span className='text-text-sm font-semibold text-primary'>Add widget</span>
         </div>
         <div className='flex cursor-pointer items-center gap-1/2'>
           <Wand size={16} className='text-primary' />
-          <span className='text-sm font-semibold text-primary'>
+          <span className='text-text-sm font-semibold text-primary'>
             Automatically align
           </span>
         </div>
@@ -30,7 +30,7 @@ export const HomepageCustomize: FC = () => {
           onClick={handleReset}
         >
           <RefreshCcw size={16} className='text-primary' />
-          <span className='text-sm font-semibold text-primary'>
+          <span className='text-text-sm font-semibold text-primary'>
             Reset to default
           </span>
         </div>

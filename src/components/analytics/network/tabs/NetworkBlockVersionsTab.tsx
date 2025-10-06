@@ -52,10 +52,10 @@ export const NetworkBlockVersionsTab: FC = () => {
           title='Latest node version'
           value={
             <div className='flex flex-col gap-1'>
-              <p className='text-2xl font-semibold'>
+              <p className='text-display-xs font-semibold'>
                 {latestBlockVersion.toFixed(1)}
               </p>
-              <p className='text-xs font-regular leading-4 text-grayTextPrimary'>
+              <p className='text-text-xs font-regular leading-4 text-grayTextPrimary'>
                 This page provides insights into Cardano's hard fork events by
                 analyzing the last block minted by each active staking pool with
                 a minimum of one block produced per epoch.
@@ -65,7 +65,7 @@ export const NetworkBlockVersionsTab: FC = () => {
           description={
             <div className='flex gap-1'>
               <div className='flex h-[40px] w-fit flex-grow cursor-pointer items-center justify-center gap-1/2 rounded-s border border-border px-1.5'>
-                <span className='text-xs font-medium text-text sm:text-sm'>
+                <span className='text-text-xs font-medium text-text sm:text-sm'>
                   Hardfork status
                 </span>
               </div>

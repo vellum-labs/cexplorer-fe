@@ -37,7 +37,7 @@ export const ViewSwitch = () => {
   };
 
   return (
-    <div className='flex h-[40px] cursor-pointer items-center justify-center rounded-s border border-border text-sm'>
+    <div className='flex h-[40px] cursor-pointer items-center justify-center rounded-s border border-border text-text-sm'>
       {viewItems.map(
         ({ icon, key, visible }) =>
           visible && (

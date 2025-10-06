@@ -12,12 +12,12 @@ interface TimeDateIndicatorProps {
 
 export const TimeDateIndicator: FC<TimeDateIndicatorProps> = ({ time }) => {
   return (
-    <div className='flex flex-wrap items-center gap-1/2 text-sm'>
+    <div className='flex flex-wrap items-center gap-1/2 text-text-sm'>
       <span className='font-medium leading-none text-text'>
         <DateCell time={time} withoutConvert />
       </span>
       <div className='flex items-center'>
-        <span className='text-nowrap pr-1/2 text-xs leading-none text-grayTextPrimary'>
+        <span className='text-nowrap pr-1/2 text-text-xs leading-none text-grayTextPrimary'>
           ({formatDate(time ? time : undefined)})
         </span>
         <Clock size={12} className='h-full text-grayTextPrimary' />

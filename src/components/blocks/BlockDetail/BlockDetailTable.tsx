@@ -156,7 +156,7 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
   return (
     <>
       <div className='flex w-full items-center justify-between'>
-        <h1 className='text-lg font-semibold'>Transactions</h1>
+        <h1 className='text-text-lg font-semibold'>Transactions</h1>
         <div className='flex gap-1'>
           <ExportButton columns={columns} items={txs} />
           <TableSettingsDropdown

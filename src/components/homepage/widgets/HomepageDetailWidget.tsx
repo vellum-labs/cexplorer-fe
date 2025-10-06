@@ -93,7 +93,7 @@ export const HomepageDetailWidget: FC<HomepageDetailWidgetProps> = ({
       <div className='flex w-full items-center justify-between gap-1.5 p-1'>
         {title && title}
         <div className='flex flex-wrap items-center gap-x-1'>
-          <span className='text-xs text-grayTextPrimary'>Detail block: </span>
+          <span className='text-text-xs text-grayTextPrimary'>Detail block: </span>
           <SortBy
             selectItems={selectItems as any}
             selectedItem={selectedItem}

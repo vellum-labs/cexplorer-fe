@@ -149,7 +149,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
             >
               {data[0]?.vote?.drep?.data?.given_name &&
                 data[0]?.vote?.drep?.data?.given_name}
-              <span className='text-sm text-primary'>Always abstain</span>
+              <span className='text-text-sm text-primary'>Always abstain</span>
             </Link>
           ) : data[0]?.vote?.vote?.live_drep === "drep_always_no_confidence" ? (
             <Link
@@ -159,7 +159,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
             >
               {data[0]?.vote?.drep?.data?.given_name &&
                 data[0]?.vote?.drep?.data?.given_name}
-              <span className='text-sm text-primary'>Always no confidence</span>
+              <span className='text-text-sm text-primary'>Always no confidence</span>
             </Link>
           ) : (
             <AttributeDropdown
@@ -183,7 +183,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
                   value: (
                     <DateCell
                       time={data[0]?.vote?.drep?.since}
-                      className='text-xs'
+                      className='text-text-xs'
                     />
                   ),
                 },
@@ -191,7 +191,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
                   label: "ID",
                   value: (
                     <div className='flex items-center gap-1'>
-                      <span className={"text-xs"}>
+                      <span className={"text-text-xs"}>
                         {formatString(data[0]?.vote?.drep?.hash?.view, "long")}
                       </span>
                       <Copy
@@ -220,7 +220,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
                     <Link
                       to='/drep/$hash'
                       params={{ hash: data[0]?.vote?.drep?.hash?.view }}
-                      className={"text-sm text-primary"}
+                      className={"text-text-sm text-primary"}
                     >
                       {formatString(data[0]?.vote?.drep?.hash?.view, "long")}
                     </Link>

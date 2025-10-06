@@ -277,7 +277,7 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
           />
           <input
             type='text'
-            className={`${inputOpen ? "min-h-[25.6px] w-[200px] border border-border pl-3" : "w-0"} transition-width overflow-hidden rounded-m text-xs text-black duration-300 ease-in-out focus-within:outline-none hover:outline-none`}
+            className={`${inputOpen ? "min-h-[25.6px] w-[200px] border border-border pl-3" : "w-0"} transition-width overflow-hidden rounded-m text-text-xs text-black duration-300 ease-in-out focus-within:outline-none hover:outline-none`}
             placeholder={placeholder}
             value={tableSearch}
             onChange={e => setTableSearch(e.currentTarget.value)}

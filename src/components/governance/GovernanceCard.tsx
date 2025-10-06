@@ -51,20 +51,20 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
         <div className='flex flex-col gap-1/2 py-1'>
           <div className='flex items-center gap-[6px]'>
             <CheckSquare size={18} className='font-bold text-[#0094D4]' />
-            <span className='text-sm font-bold text-[#0094D4]'>
+            <span className='text-text-sm font-bold text-[#0094D4]'>
               {Number.isNaN(voted) ? "0.00" : voted.toFixed(2)}%
             </span>
           </div>
           <div
             className={`flex items-center justify-between rounded-[4px] border border-[#0094D4] p-1 ${theme === "dark" ? "bg-[#1C384B]" : "bg-[#EFFAFF]"}`}
           >
-            <span className='text-sm font-medium text-grayTextPrimary'>
+            <span className='text-text-sm font-medium text-grayTextPrimary'>
               Yes
             </span>
             <div className='flex items-center justify-end'>
               <AdaWithTooltip
                 data={yes}
-                triggerClassName='text-sm font-medium text-grayTextPrimary'
+                triggerClassName='text-text-sm font-medium text-grayTextPrimary'
               />
               <VotingBreakdownTooltip
                 type='Yes'
@@ -77,7 +77,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
         <div className='flex flex-col gap-1/2 py-1'>
           <div className='flex items-center gap-[6px]'>
             <XSquare size={18} className='font-bold text-[#DC6803]' />
-            <span className='text-sm font-bold text-[#DC6803]'>
+            <span className='text-text-sm font-bold text-[#DC6803]'>
               {Number.isNaN(notVotedPercent)
                 ? "0.00"
                 : notVotedPercent.toFixed(2)}
@@ -88,13 +88,13 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
             className={`rounded-[4px] border border-[#DC6803] p-1 ${theme === "dark" ? "bg-[#392E33]" : "bg-[#FFFAEB]"}`}
           >
             <div className='flex items-center justify-between'>
-              <span className='text-sm font-medium text-grayTextPrimary'>
+              <span className='text-text-sm font-medium text-grayTextPrimary'>
                 No
               </span>
               <div className='flex items-center justify-end'>
                 <AdaWithTooltip
                   data={no}
-                  triggerClassName='text-sm font-medium text-grayTextPrimary'
+                  triggerClassName='text-text-sm font-medium text-grayTextPrimary'
                 />
                 <VotingBreakdownTooltip
                   type='No'
@@ -104,13 +104,13 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
               </div>
             </div>
             <div className='flex items-center justify-between'>
-              <span className='text-sm font-medium text-grayTextPrimary'>
+              <span className='text-text-sm font-medium text-grayTextPrimary'>
                 No confidence
               </span>
               <div className='flex items-center justify-end text-nowrap'>
                 <AdaWithTooltip
                   data={noConfidence}
-                  triggerClassName='text-sm font-medium text-grayTextPrimary'
+                  triggerClassName='text-text-sm font-medium text-grayTextPrimary'
                 />
                 <VotingBreakdownTooltip
                   type='No confidence'
@@ -120,13 +120,13 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
               </div>
             </div>
             <div className='flex items-center justify-between'>
-              <span className='text-sm font-medium text-grayTextPrimary'>
+              <span className='text-text-sm font-medium text-grayTextPrimary'>
                 Not voted
               </span>
               <div className='flex items-center justify-end'>
                 <AdaWithTooltip
                   data={notVoted}
-                  triggerClassName='text-sm font-medium text-grayTextPrimary'
+                  triggerClassName='text-text-sm font-medium text-grayTextPrimary'
                 />
                 <VotingBreakdownTooltip
                   type='Not voted'

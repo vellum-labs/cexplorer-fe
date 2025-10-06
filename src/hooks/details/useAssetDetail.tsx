@@ -133,8 +133,8 @@ export const useAssetDetail = ({
               className={`h-[48px] w-[57px] border border-border ${i === 0 ? "rounded-s-m" : ""} ${i === arr.length - 1 ? "rounded-e-m" : ""} flex flex-col justify-center`}
               key={item + "_" + i}
             >
-              <p className='text-center text-xs text-grayTextPrimary'>{item}</p>
-              <p className='text-center text-sm font-semibold'>TBD</p>
+              <p className='text-center text-text-xs text-grayTextPrimary'>{item}</p>
+              <p className='text-center text-text-sm font-semibold'>TBD</p>
             </div>
           ))}
         </div>
@@ -147,7 +147,7 @@ export const useAssetDetail = ({
       label: "Asset ID",
       value: detailData?.fingerprint ? (
         <div className='flex items-center gap-1/2'>
-          <span title={detailData?.fingerprint} className='text-sm'>
+          <span title={detailData?.fingerprint} className='text-text-sm'>
             {formatString(detailData?.fingerprint || "", "long")}
           </span>
           <Copy copyText={detailData?.fingerprint || ""} />
@@ -163,7 +163,7 @@ export const useAssetDetail = ({
           <Link
             to='/policy/$policyId'
             params={{ policyId: detailData?.policy ?? "" }}
-            className='text-sm text-primary'
+            className='text-text-sm text-primary'
           >
             {formatString(detailData?.policy || "", "long")}
           </Link>

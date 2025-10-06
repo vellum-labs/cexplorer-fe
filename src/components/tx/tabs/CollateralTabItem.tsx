@@ -72,7 +72,7 @@ const CollateralTabItem = () => {
   ];
 
   if (!uniqueInputs && !query.isLoading) {
-    return <p className='w-full text-center text-sm'>No collateral found</p>;
+    return <p className='w-full text-center text-text-sm'>No collateral found</p>;
   }
 
   if (query.isLoading) {

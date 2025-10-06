@@ -160,7 +160,7 @@ export const ApiInfoPage = () => {
   return (
     <main className='flex min-h-minHeight w-full flex-col items-center'>
       <div className='mt-6 flex w-full max-w-desktop flex-col items-center gap-4 px-mobile pb-3 text-center md:px-desktop'>
-        <span className='text-sm font-medium text-primary'>
+        <span className='text-text-sm font-medium text-primary'>
           Elevate your projects with
         </span>
         <h1 className='-my-4 md:text-[40px] md:leading-[45px]'>
@@ -221,7 +221,7 @@ export const ApiInfoPage = () => {
               className='border-b border-border'
             >
               <AccordionTrigger className='AccordionTrigger w-full py-3 text-left'>
-                <span className='text-base font-medium'>{item.question}</span>
+                <span className='text-text-md font-medium'>{item.question}</span>
               </AccordionTrigger>
               <AccordionContent>
                 <div className='flex flex-col pb-1.5 text-left text-grayTextPrimary'>
@@ -280,8 +280,8 @@ const PriceCard = ({
       </div>
       <span className='mt-3 font-medium'>{tier}</span>
       <h1 className='md:text-[40px]'>{title}</h1>
-      <span className='text-sm text-grayTextPrimary'>{subtitle}</span>
-      <ul className='mt-2 flex flex-col gap-1 text-left text-sm'>
+      <span className='text-text-sm text-grayTextPrimary'>{subtitle}</span>
+      <ul className='mt-2 flex flex-col gap-1 text-left text-text-sm'>
         {features.map((feature, index) => (
           <li key={index} className='flex items-center gap-1'>
             <CheckCircle

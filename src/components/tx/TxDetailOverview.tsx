@@ -64,7 +64,7 @@ const TxDetailOverview = ({ query }: Props) => {
       label: "Hash",
       value: (
         <div className='flex items-center gap-1/2'>
-          <span title={data?.hash} className='text-sm'>
+          <span title={data?.hash} className='text-text-sm'>
             {formatString(data?.hash || "", "long")}
           </span>
           <Copy copyText={data?.hash || ""} />
@@ -74,7 +74,7 @@ const TxDetailOverview = ({ query }: Props) => {
     {
       label: "Date",
       value: (
-        <div className='flex flex-wrap items-center gap-1/2 text-sm'>
+        <div className='flex flex-wrap items-center gap-1/2 text-text-sm'>
           <span className='font-medium leading-none'>
             <DateCell className='' time={data?.block?.time} />
           </span>
@@ -91,7 +91,7 @@ const TxDetailOverview = ({ query }: Props) => {
         <Link
           to='/block/$hash'
           params={{ hash: String(data?.block?.hash) || "" }}
-          className='text-sm font-medium text-primary'
+          className='text-text-sm font-medium text-primary'
         >
           {formatNumber(data?.block?.no ?? 0)}
         </Link>
@@ -108,7 +108,7 @@ const TxDetailOverview = ({ query }: Props) => {
     {
       label: "Epoch",
       value: (
-        <span className='cursor-pointer text-sm font-medium text-primary'>
+        <span className='cursor-pointer text-text-sm font-medium text-primary'>
           <Link
             to='/epoch/$no'
             params={{ no: String(data?.epoch_param?.epoch_no ?? 0) }}
@@ -123,7 +123,7 @@ const TxDetailOverview = ({ query }: Props) => {
       ? {
           label: "Slot",
           value: (
-            <div className='flex flex-wrap items-center gap-1/2 text-sm leading-none'>
+            <div className='flex flex-wrap items-center gap-1/2 text-text-sm leading-none'>
               <span className='font-medium text-grayTextPrimary'>
                 {data?.invalid_before ? formatNumber(data?.block.slot_no) : "-"}
               </span>
@@ -139,7 +139,7 @@ const TxDetailOverview = ({ query }: Props) => {
       ? {
           label: "TTL",
           value: (
-            <div className='flex items-center gap-1/2 text-sm'>
+            <div className='flex items-center gap-1/2 text-text-sm'>
               <Lock
                 size={16}
                 strokeWidth={2.5}
@@ -162,7 +162,7 @@ const TxDetailOverview = ({ query }: Props) => {
       ? {
           label: "Deposit",
           value: (
-            <div className='flex items-center gap-1/2 text-sm'>
+            <div className='flex items-center gap-1/2 text-text-sm'>
               <span className='font-medium'>
                 <AdaWithTooltip data={data.deposit} />
               </span>
@@ -173,7 +173,7 @@ const TxDetailOverview = ({ query }: Props) => {
     {
       label: "Confirmations",
       value: (
-        <div className='flex items-center gap-[2.5px] text-sm'>
+        <div className='flex items-center gap-[2.5px] text-text-sm'>
           {confirmations[1] < 3 && (
             <CircleX size={15} className='translate-y-[1px] text-red-500' />
           )}

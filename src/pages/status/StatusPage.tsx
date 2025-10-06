@@ -123,7 +123,7 @@ export const StatusPage: FC = () => {
               {statuses.map(
                 ({ badgeColor, badgeTitle, title, withoutPulse }) => (
                   <div className='flex flex-col justify-between gap-1/2 min-[450px]:flex-row min-[450px]:items-center min-[450px]:gap-0'>
-                    <span className='text-sm font-medium text-grayTextPrimary'>
+                    <span className='text-text-sm font-medium text-grayTextPrimary'>
                       {title}
                     </span>
                     <div className='min-w-[170px]'>
@@ -142,7 +142,7 @@ export const StatusPage: FC = () => {
                 <div className='flex aspect-square w-[44px] items-center justify-center rounded-s bg-cardBg'>
                   <CircleAlert size={15} className='text-primary' />
                 </div>
-                <span className='text-sm text-grayTextPrimary'>
+                <span className='text-text-sm text-grayTextPrimary'>
                   If something isn’t working as expected, please copy your
                   current status details and reach out to us on{" "}
                   <a

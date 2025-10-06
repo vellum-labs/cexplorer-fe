@@ -85,7 +85,7 @@ export const BotsPage = () => {
                             <PulseDot color='bg-yellowText' />
                           </div>
                         )}
-                        <span className='text-xs font-medium'>{tag}</span>
+                        <span className='text-text-xs font-medium'>{tag}</span>
                       </div>
                     ))}
                   </div>
@@ -127,14 +127,14 @@ export const BotsPage = () => {
               <div className='w-full text-center'>
                 <h1>Bots and Automation</h1>
               </div>
-              <p className='text-start text-lg text-grayTextPrimary'>
+              <p className='text-start text-text-lg text-grayTextPrimary'>
                 At Cexplorer, we prioritize fair and responsible use of our
                 platform. As such, the use of automated bots or scripts to
                 crawl, scrape, or interact with our website and API is strictly
                 prohibited. Our API is intended for genuine user interaction,
                 and any automated access, including bot usage, is not allowed.
               </p>
-              <p className='text-start text-lg text-grayTextPrimary'>
+              <p className='text-start text-text-lg text-grayTextPrimary'>
                 For any questions or concerns regarding our policy, feel free to
                 contact us directly.
               </p>

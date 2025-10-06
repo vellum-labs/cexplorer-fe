@@ -122,7 +122,7 @@ export const HeaderBanner = ({
                     dangerouslySetInnerHTML={{
                       __html: headingAd?.data.text || "",
                     }}
-                    className='text-sm text-grayTextPrimary [&>a]:text-primary'
+                    className='text-text-sm text-grayTextPrimary [&>a]:text-primary'
                   ></p>
                   <Link
                     to='/ads'

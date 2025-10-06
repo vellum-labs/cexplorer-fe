@@ -21,7 +21,7 @@ const Footer = () => {
           <section className='flex w-full flex-col gap-2 py-4 md:flex-row md:justify-between'>
             <div className='flex w-[250px] shrink-0 flex-col gap-3'>
               <MainLogo className='-translate-x-[5px]' />
-              <p className='w-full text-sm text-grayTextPrimary'>
+              <p className='w-full text-text-sm text-grayTextPrimary'>
                 The oldest and most feature-rich Cardano explorer, serving you
                 since the Incentivized Testnet.
               </p>
@@ -48,11 +48,11 @@ const Footer = () => {
       </div>
       <section className='flex w-full flex-col items-center bg-darker'>
         <div className='flex h-auto w-full max-w-desktop items-center justify-between gap-3 p-mobile py-2 md:h-[60px] md:px-desktop md:py-mobile'>
-          <span className='text-xs text-grayTextPrimary md:text-sm'>
+          <span className='text-text-xs text-grayTextPrimary md:text-sm'>
             Copyright © 2019-{new Date().getFullYear()} Cexplorer. All rights
             reserved.
           </span>
-          <span className='flex items-center text-xs text-grayTextPrimary md:text-sm'>
+          <span className='flex items-center text-text-xs text-grayTextPrimary md:text-sm'>
             Donations:{" "}
             <Link to='/donate' className='ml-1/2 text-primary underline'>
               {formatString(donationAddress, "short")}
@@ -62,7 +62,7 @@ const Footer = () => {
           </span>
         </div>
         <div className='flex h-auto w-full max-w-desktop items-center gap-2 p-mobile py-2 md:px-desktop md:py-mobile'>
-          <span className='text-xs text-grayTextPrimary md:text-sm'>
+          <span className='text-text-xs text-grayTextPrimary md:text-sm'>
             Partners:{" "}
           </span>
           <div className='flex w-full flex-wrap items-center justify-around gap-1'>

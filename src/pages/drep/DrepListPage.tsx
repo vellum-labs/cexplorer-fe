@@ -60,7 +60,7 @@ export const DrepListPage = () => {
       icon: <Asterisk className='text-primary' />,
       label: "Registered DReps",
       content: (
-        <p className='text-2xl font-semibold'>
+        <p className='text-display-xs font-semibold'>
           {drepStat?.drep?.count?.total ? drepStat?.drep?.count?.total : "-"}
         </p>
       ),
@@ -68,24 +68,24 @@ export const DrepListPage = () => {
         <div className='flex flex-wrap'>
           {drepStat?.drep?.count?.active && (
             <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
-              <span className='text-sm text-grayTextPrimary'>Active</span>
-              <span className='text-sm text-[#16B364]'>
+              <span className='text-text-sm text-grayTextPrimary'>Active</span>
+              <span className='text-text-sm text-[#16B364]'>
                 {drepStat?.drep?.count?.active}
               </span>
             </div>
           )}
           {drepStat?.drep?.count?.inactive && (
             <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
-              <span className='text-sm text-grayTextPrimary'>Inactive</span>
-              <span className='text-sm text-[#EAAA08]'>
+              <span className='text-text-sm text-grayTextPrimary'>Inactive</span>
+              <span className='text-text-sm text-[#EAAA08]'>
                 {drepStat?.drep?.count?.inactive}
               </span>
             </div>
           )}
           {drepStat?.drep?.count?.retired && (
             <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
-              <span className='text-sm text-grayTextPrimary'>Retired</span>
-              <span className='text-sm text-[#F04438]'>
+              <span className='text-text-sm text-grayTextPrimary'>Retired</span>
+              <span className='text-text-sm text-[#F04438]'>
                 {drepStat?.drep?.count?.retired}
               </span>
             </div>
@@ -109,18 +109,18 @@ export const DrepListPage = () => {
         <div className='flex flex-wrap'>
           {drepStat?.stake?.drep_always_abstain && (
             <div className='flex w-fit items-center gap-1/2 pr-4'>
-              <span className='text-sm text-grayTextPrimary'>Abstain</span>
-              <span className='text-sm text-grayTextPrimary'>
+              <span className='text-text-sm text-grayTextPrimary'>Abstain</span>
+              <span className='text-text-sm text-grayTextPrimary'>
                 <AdaWithTooltip data={drepStat?.stake?.drep_always_abstain} />
               </span>
             </div>
           )}
           {drepStat?.stake?.drep_always_no_confidence && (
             <div className='flex w-fit items-center gap-1/2 pr-4'>
-              <span className='text-sm text-grayTextPrimary'>
+              <span className='text-text-sm text-grayTextPrimary'>
                 No confidence
               </span>
-              <span className='text-sm text-grayTextPrimary'>
+              <span className='text-text-sm text-grayTextPrimary'>
                 <AdaWithTooltip
                   data={drepStat?.stake?.drep_always_no_confidence}
                 />
@@ -135,7 +135,7 @@ export const DrepListPage = () => {
       icon: <Users className='text-primary' />,
       label: "Delegators",
       content: (
-        <p className='text-2xl font-semibold'>
+        <p className='text-display-xs font-semibold'>
           {drepAnalytics?.delegator?.total?.count
             ? formatNumber(drepAnalytics?.delegator?.total?.count)
             : "-"}
@@ -145,8 +145,8 @@ export const DrepListPage = () => {
         <div className='flex flex-wrap'>
           {drepAnalytics?.delegator?.drep_always_abstain?.count && (
             <div className='flex w-fit items-center gap-1/2 pr-4'>
-              <span className='text-sm text-grayTextPrimary'>Abstain</span>
-              <span className='text-sm text-grayTextPrimary'>
+              <span className='text-text-sm text-grayTextPrimary'>Abstain</span>
+              <span className='text-text-sm text-grayTextPrimary'>
                 {formatNumber(
                   drepAnalytics?.delegator?.drep_always_abstain?.count,
                 )}
@@ -155,10 +155,10 @@ export const DrepListPage = () => {
           )}
           {drepAnalytics?.delegator?.drep_always_no_confidence?.count && (
             <div className='flex w-fit items-center gap-1/2 pr-4'>
-              <span className='text-sm text-grayTextPrimary'>
+              <span className='text-text-sm text-grayTextPrimary'>
                 No confidence
               </span>
-              <span className='text-sm text-grayTextPrimary'>
+              <span className='text-text-sm text-grayTextPrimary'>
                 {drepAnalytics?.delegator?.drep_always_no_confidence?.count}
               </span>
             </div>
@@ -181,14 +181,14 @@ export const DrepListPage = () => {
       footer: (
         <div className='flex flex-wrap gap-2'>
           <div className='flex items-center gap-1/2'>
-            <span className='text-sm text-grayTextPrimary'>Delegations</span>
-            <span className='text-sm font-medium text-grayTextPrimary'>
+            <span className='text-text-sm text-grayTextPrimary'>Delegations</span>
+            <span className='text-text-sm font-medium text-grayTextPrimary'>
               {stakeDrepRetired?.delegator?.count ?? "-"}
             </span>
           </div>
           <div className='flex items-center gap-1/2'>
-            <span className='text-sm text-grayTextPrimary'>Retired DReps</span>
-            <span className='text-sm font-medium text-grayTextPrimary'>
+            <span className='text-text-sm text-grayTextPrimary'>Retired DReps</span>
+            <span className='text-text-sm font-medium text-grayTextPrimary'>
               {stakeDrepRetired?.drep?.count ?? "-"}
             </span>
           </div>

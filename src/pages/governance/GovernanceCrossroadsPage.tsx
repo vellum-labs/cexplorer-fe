@@ -83,11 +83,11 @@ export const GovernanceCrossroadsPage = () => {
                 {section.icon}
               </div>
 
-              <h2 className='mt-2 border-b border-border pb-1 text-lg text-text'>
+              <h2 className='mt-2 border-b border-border pb-1 text-text-lg text-text'>
                 {section.label}
               </h2>
 
-              <p className='mt-2 text-sm text-grayTextPrimary'>
+              <p className='mt-2 text-text-sm text-grayTextPrimary'>
                 {section.description}
               </p>
 

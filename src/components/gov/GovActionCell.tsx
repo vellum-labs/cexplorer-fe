@@ -28,8 +28,8 @@ export const GovActionCell: FC<GovActionCellProps> = ({ id, name }) => {
           {...to}
           className={`${
             name
-              ? "pointer-events-none text-xs text-inherit"
-              : "text-sm text-primary"
+              ? "pointer-events-none text-text-xs text-inherit"
+              : "text-text-sm text-primary"
           }`}
         >
           {formatString(id, "long")}

@@ -69,7 +69,7 @@ export const NewPoolsListPage: FC = () => {
           <Link to='/pool/$id' params={{ id: item.pool_id }}>
             <span
               title={item.pool_id}
-              className='cursor-pointer text-sm text-primary'
+              className='cursor-pointer text-text-sm text-primary'
             >
               {item.pool_name?.ticker && `[${item.pool_name.ticker}] `}
               {item.pool_name?.name && item.pool_name.name}
@@ -78,7 +78,7 @@ export const NewPoolsListPage: FC = () => {
           <div className='item-center flex gap-1'>
             <Link to='/pool/$id' params={{ id: item.pool_id }}>
               <span
-                className={`${item.pool_name?.ticker ? "text-xs" : "text-sm"} text-primary`}
+                className={`${item.pool_name?.ticker ? "text-text-xs" : "text-text-sm"} text-primary`}
               >
                 {formatString(item.pool_id, "long")}
               </span>

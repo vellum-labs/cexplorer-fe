@@ -86,7 +86,7 @@ export const PollsListPage = () => {
           <Link
             to='/polls/$poll'
             params={{ poll: poll.url }}
-            className='mb-1/2 text-base font-medium text-primary'
+            className='mb-1/2 text-text-md font-medium text-primary'
           >
             {poll.name}
           </Link>
@@ -119,7 +119,7 @@ export const PollsListPage = () => {
       render: poll => (
         <div className='flex flex-col'>
           <DateCell time={poll.date_start} />
-          <span className='text-xs text-grayTextSecondary'>
+          <span className='text-text-xs text-grayTextSecondary'>
             {formatDate(poll.date_start)}
           </span>
         </div>
@@ -133,7 +133,7 @@ export const PollsListPage = () => {
       render: poll => (
         <div className='flex flex-col'>
           <DateCell time={poll.date_end} />
-          <span className='text-xs text-grayTextSecondary'>
+          <span className='text-text-xs text-grayTextSecondary'>
             {formatDate(poll.date_end)}
           </span>
         </div>
@@ -195,7 +195,7 @@ export const PollsListPage = () => {
             {nfts === 0 && (
               <Link
                 to='/pro'
-                className='gold-shimmer flex min-w-fit items-center gap-1/2 bg-purpleText bg-clip-text text-sm font-medium text-transparent underline hover:text-transparent'
+                className='gold-shimmer flex min-w-fit items-center gap-1/2 bg-purpleText bg-clip-text text-text-sm font-medium text-transparent underline hover:text-transparent'
               >
                 Get Cexplorer PRO{" "}
                 <Sparkles color={colors.purpleText} size={15} />
@@ -203,7 +203,7 @@ export const PollsListPage = () => {
             )}
             <button
               onClick={() => setOpenFaq(true)}
-              className='flex min-w-fit items-center gap-1/2 text-sm text-grayTextPrimary underline underline-offset-2'
+              className='flex min-w-fit items-center gap-1/2 text-text-sm text-grayTextPrimary underline underline-offset-2'
             >
               How does it work? <Info size={15} />
             </button>
@@ -297,10 +297,10 @@ const FaqModal = ({ onClose }: { onClose: () => void }) => {
           <AccordionItem
             key={item.question}
             value={item.question}
-            className='border-b border-border text-sm'
+            className='border-b border-border text-text-sm'
           >
             <AccordionTrigger className='AccordionTrigger w-full py-3 text-left'>
-              <span className='text-base font-medium'>{item.question}</span>
+              <span className='text-text-md font-medium'>{item.question}</span>
             </AccordionTrigger>
             <AccordionContent>
               <div className='flex flex-col pb-1.5 text-left text-grayTextPrimary'>

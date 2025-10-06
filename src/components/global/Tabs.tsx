@@ -183,7 +183,7 @@ const Tabs = ({
                     className={`flex items-center rounded-m border px-1.5 py-1 ${
                       tabParam
                         ? "h-[35px] text-sm font-semibold"
-                        : "h-[44px] text-base font-semibold"
+                        : "h-[44px] text-text-md font-semibold"
                     } ${
                       activeTab === index
                         ? `z-20 border-border bg-background ${
@@ -216,7 +216,7 @@ const Tabs = ({
                   className={`flex items-center rounded-m border px-1.5 py-1 ${
                     tabParam
                       ? "h-[35px] text-sm font-semibold"
-                      : "h-[44px] text-base font-semibold"
+                      : "h-[44px] text-text-md font-semibold"
                   } ${
                     activeTab === index
                       ? `z-20 border-border bg-background ${

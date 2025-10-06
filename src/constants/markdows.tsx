@@ -42,12 +42,12 @@ export const markdownComponents = (
   ),
   ul: ({ children }) => <ul className='mb-2'>{children}</ul>,
   ol: ({ children }) => <ol className='mb-2'>{children}</ol>,
-  h1: ({ children }) => <h1 className='mb-2 text-xl font-bold'>{children}</h1>,
+  h1: ({ children }) => <h1 className='mb-2 text-text-xl font-bold'>{children}</h1>,
   h2: ({ children }) => (
-    <h2 className='mb-1.5 text-lg font-semibold'>{children}</h2>
+    <h2 className='mb-1.5 text-text-lg font-semibold'>{children}</h2>
   ),
   h3: ({ children }) => (
-    <h3 className='mb-1 text-base font-semibold'>{children}</h3>
+    <h3 className='mb-1 text-text-md font-semibold'>{children}</h3>
   ),
   img: ({ src, alt }) => (
     <img

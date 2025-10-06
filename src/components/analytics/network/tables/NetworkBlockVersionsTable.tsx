@@ -21,7 +21,7 @@ export const NetworkBlockVersionsTable: FC<NetworkBlockVersionsTableProps> = ({
       version: (
         <div className='flex items-center gap-1'>
           <span>{sortedVersions.length ? sortedVersions[0][0] : "-"}</span>
-          <p className='rounded-s bg-[#079455] px-[6px] py-[2px] text-xs font-medium text-white'>
+          <p className='rounded-s bg-[#079455] px-[6px] py-[2px] text-text-xs font-medium text-white'>
             Latest
           </p>
         </div>

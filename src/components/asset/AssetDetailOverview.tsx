@@ -39,7 +39,7 @@ export const AssetDetailOverview: FC<AssetDetailOverviewProps> = ({
             overviewList={overview}
             endContent={
               detailData?.stat.asset.quantity === 0 ? (
-                <span className='text-lg font-medium text-redText'>
+                <span className='text-text-lg font-medium text-redText'>
                   This asset has been burned
                 </span>
               ) : null

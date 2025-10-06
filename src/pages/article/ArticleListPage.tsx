@@ -96,7 +96,7 @@ export const ArticleListPage = () => {
                 <div className='mb-auto'>
                   <Link
                     to='/article/$url'
-                    className='text-2xl font-medium text-primary'
+                    className='text-display-xs font-medium text-primary'
                     params={{
                       url: firstArticle?.url ?? "",
                     }}
@@ -108,10 +108,10 @@ export const ArticleListPage = () => {
                   </p>
                 </div>
               )}
-              <div className='flex flex-col text-sm'>
+              <div className='flex flex-col text-text-sm'>
                 {renderArticleAuthor(firstArticle?.user_owner)}
               </div>
-              <div className='flex flex-col text-sm'>
+              <div className='flex flex-col text-text-sm'>
                 <span className='text-grayTextPrimary'>Published</span>
                 <span>
                   {firstArticle?.pub_date
@@ -125,7 +125,7 @@ export const ArticleListPage = () => {
         <AdsCarousel />
         <div className='flex w-full max-w-desktop flex-col gap-1.5 p-mobile md:p-desktop'>
           <div className='ml-auto flex items-center gap-1'>
-            <span className='text-sm'>Category:</span>
+            <span className='text-text-sm'>Category:</span>
             <SortBy
               selectItems={[{ key: "all", value: "all" }, ...categoriesOptions]}
               selectedItem={category}

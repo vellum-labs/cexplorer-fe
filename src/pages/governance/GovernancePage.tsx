@@ -137,13 +137,13 @@ export const GovernancePage: FC = () => {
             <DateCell time={item?.tx?.time} />
             {epoch && (
               <div className='flex items-center gap-1/2'>
-                <span className='text-xs text-grayTextPrimary'>Epoch - </span>
+                <span className='text-text-xs text-grayTextPrimary'>Epoch - </span>
                 <Link
                   to='/epoch/$no'
                   params={{
                     no: String(epoch),
                   }}
-                  className='text-xs text-primary'
+                  className='text-text-xs text-primary'
                 >
                   {epoch}
                 </Link>
@@ -202,7 +202,7 @@ export const GovernancePage: FC = () => {
                 params={{
                   id: item?.ident?.id,
                 }}
-                className={"text-xs"}
+                className={"text-text-xs"}
                 disabled={true}
               >
                 {formatString(item?.ident?.id, "long")}
@@ -260,13 +260,13 @@ export const GovernancePage: FC = () => {
             <DateCell time={String(endTime)} />
             {item?.expired_epoch && (
               <div className='flex items-center gap-1/2'>
-                <span className='text-xs text-grayTextPrimary'>Epoch - </span>
+                <span className='text-text-xs text-grayTextPrimary'>Epoch - </span>
                 <Link
                   to='/epoch/$no'
                   params={{
                     no: item?.expired_epoch,
                   }}
-                  className='text-xs text-primary'
+                  className='text-text-xs text-primary'
                 >
                   {item.expired_epoch}
                 </Link>
@@ -335,7 +335,7 @@ export const GovernancePage: FC = () => {
       icon: <Asterisk className='text-primary' />,
       label: "Governance actions",
       content: (
-        <p className='text-2xl font-semibold'>
+        <p className='text-display-xs font-semibold'>
           {drepStat?.gov_action[0]?.total
             ? drepStat?.gov_action[0]?.total
             : "-"}
@@ -344,29 +344,29 @@ export const GovernancePage: FC = () => {
       footer: (
         <div className='flex flex-wrap'>
           <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
-            <span className='text-sm text-grayTextPrimary'>Active</span>
-            <span className='text-sm text-[#10B981]'>
+            <span className='text-text-sm text-grayTextPrimary'>Active</span>
+            <span className='text-text-sm text-[#10B981]'>
               {drepStat?.gov_action[0]?.active || 0}
             </span>
           </div>
           <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
-            <span className='text-sm text-grayTextPrimary'>Ratified</span>
-            <span className='text-sm text-[#00A9E3]'>
+            <span className='text-text-sm text-grayTextPrimary'>Ratified</span>
+            <span className='text-text-sm text-[#00A9E3]'>
               {drepStat?.gov_action[0]?.ratified || 0}
             </span>
           </div>
           {!!drepStat?.gov_action[0]?.enacted && (
             <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
-              <span className='text-sm text-grayTextPrimary'>Enacted</span>
-              <span className='text-sm text-[#876ee1]'>
+              <span className='text-text-sm text-grayTextPrimary'>Enacted</span>
+              <span className='text-text-sm text-[#876ee1]'>
                 {drepStat?.gov_action[0]?.enacted}
               </span>
             </div>
           )}
           {!!drepStat?.gov_action[0]?.expires && (
             <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
-              <span className='text-sm text-grayTextPrimary'>Expired</span>
-              <span className='text-sm text-[#F79009]'>
+              <span className='text-text-sm text-grayTextPrimary'>Expired</span>
+              <span className='text-text-sm text-[#F79009]'>
                 {drepStat?.gov_action[0]?.expires}
               </span>
             </div>

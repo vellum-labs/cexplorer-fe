@@ -35,9 +35,9 @@ const TxContentTable = ({ title, data, sort, isOutput }: Props) => {
 
   return (
     <section className='m-0 flex h-full w-full flex-col rounded-l border border-border shadow-md'>
-      <div className='flex w-full justify-between rounded-tl-l rounded-tr-l border-b border-border bg-darker px-2 py-1 text-sm font-medium text-grayTextPrimary'>
+      <div className='flex w-full justify-between rounded-tl-l rounded-tr-l border-b border-border bg-darker px-2 py-1 text-text-sm font-medium text-grayTextPrimary'>
         <span>{title}</span>
-        <span className='text-right text-sm font-regular text-grayTextPrimary'>
+        <span className='text-right text-text-sm font-regular text-grayTextPrimary'>
           Total: <AdaWithTooltip data={totalAda ?? 0} />
         </span>
       </div>
@@ -67,7 +67,7 @@ const TxContentTable = ({ title, data, sort, isOutput }: Props) => {
                 ))}
             </div>
           </div>
-          <span className='inline-block w-fit text-nowrap text-sm'>
+          <span className='inline-block w-fit text-nowrap text-text-sm'>
             <AdaWithTooltip data={utxo.value} />
           </span>
         </div>

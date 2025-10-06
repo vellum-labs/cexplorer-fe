@@ -103,21 +103,21 @@ const WalletConfigModal = () => {
       onClose={closeAndDisconnect}
       className='border border-border'
     >
-      <h2 className='mb-3 text-lg font-medium'>Authorization Token</h2>
+      <h2 className='mb-3 text-text-lg font-medium'>Authorization Token</h2>
 
       <div className='mb-2 rounded-m border border-border bg-cardBg p-1.5'>
-        <p className='text-muted-foreground mb-1.5 text-sm'>
+        <p className='text-muted-foreground mb-1.5 text-text-sm'>
           We use a signature token to protect your privacy and keep your
           watchlist, custom names, and personal data secure.
         </p>
-        <p className='text-muted-foreground text-sm'>
+        <p className='text-muted-foreground text-text-sm'>
           If you cancel or remove the authorization token, we cannot connect
           your wallet.
         </p>
       </div>
 
       <div className='flex items-center gap-1'>
-        <span className='text-sm'>Security level:</span>
+        <span className='text-text-sm'>Security level:</span>
         <Tooltip
           forceDirection='left'
           content={
@@ -147,7 +147,7 @@ const WalletConfigModal = () => {
         </div>
       </RadioGroup>
 
-      <div className='mt-3 text-sm'>Token duration:</div>
+      <div className='mt-3 text-text-sm'>Token duration:</div>
       <RadioGroup
         onValueChange={value => {
           expirationRef.current = value as "d" | "w" | "m" | "y";

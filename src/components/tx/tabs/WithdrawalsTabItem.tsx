@@ -41,7 +41,7 @@ const WithdrawalsTabItem = () => {
   ];
 
   if (!withdrawals && !query.isLoading) {
-    return <p className='w-full text-center text-sm'>No withdrawals</p>;
+    return <p className='w-full text-center text-text-sm'>No withdrawals</p>;
   }
 
   if (query.isLoading) {

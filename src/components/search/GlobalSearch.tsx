@@ -75,7 +75,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
             value={search}
             onChange={(e) => handleSearchChange(e.currentTarget.value)}
             placeholder='Search by Address / Tx hash / Block hash / $Handle / Pool name...'
-            className="flex-1 h-full pl-1 pr-6 bg-transparent outline-none text-sm"
+            className="flex-1 h-full pl-1 pr-6 bg-transparent outline-none text-text-sm"
             onFocus={() => handleInput("focus")}
             autoCapitalize='off'
           />
@@ -120,7 +120,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
             {categories && (
               <>
                 {categories.all === 0 ? (
-                  <div className='px-1.5 py-1.5 text-center text-sm'>Not Found</div>
+                  <div className='px-1.5 py-1.5 text-center text-text-sm'>Not Found</div>
                 ) : (
                   <>
                     <div
@@ -158,7 +158,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
                               return (
                                 <div className='flex flex-col'>
                                   {category && (
-                                    <span className='border-b border-border text-xs text-grayTextPrimary'>
+                                    <span className='border-b border-border text-text-xs text-grayTextPrimary'>
                                       {category.includes("_")
                                         ? category
                                             .split("_")[0][0]

@@ -206,11 +206,11 @@ export const AwardsTabItem: FC<AwardsTabItemProps> = ({ id }) => {
               </h3>
               <div className='mb-1/2 flex items-center justify-center gap-1'>
                 <Calendar size={12} className='text-grayTextPrimary' />
-                <span className='text-grayTextPrimary text-sm'>
+                <span className='text-grayTextPrimary text-text-sm'>
                   {format(new Date(item.time), "dd.MM.yyyy")}
                 </span>
               </div>
-              <div className='text-grayTextPrimary flex justify-between text-sm [&>div]:w-1/3'>
+              <div className='text-grayTextPrimary flex justify-between text-text-sm [&>div]:w-1/3'>
                 {renderDetails(item)}
               </div>
             </div>

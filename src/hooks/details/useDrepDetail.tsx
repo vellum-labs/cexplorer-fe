@@ -150,7 +150,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
           value: (
             <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
               <PulseDot color={"#00A9E3"} />
-              <span className='text-xs font-medium'>System Default</span>
+              <span className='text-text-xs font-medium'>System Default</span>
             </div>
           ),
         },
@@ -183,7 +183,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
             ) : (
               <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
                 <PulseDot color={!data.is_active ? "bg-redText" : undefined} />
-                <span className='text-xs font-medium'>
+                <span className='text-text-xs font-medium'>
                   {data.is_active ? "Active" : "Inactive"}
                 </span>
               </div>
@@ -312,7 +312,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
               <div className='flex h-full w-full flex-col gap-3'>
                 {data?.votestat?.recent_vote && (
                   <div className='flex w-full items-center justify-between'>
-                    <span className='text-sm text-grayTextSecondary'>
+                    <span className='text-text-sm text-grayTextSecondary'>
                       Last vote
                     </span>
                     <TimeDateIndicator time={data.votestat.recent_vote} />
@@ -322,7 +322,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                   <div className='flex flex-col items-center gap-1'>
                     <div className='flex w-full items-center justify-between'>
                       <div className='flex items-center gap-1/2'>
-                        <span className='text-sm text-grayTextSecondary'>
+                        <span className='text-text-sm text-grayTextSecondary'>
                           Recent Activity
                         </span>
                         <Tooltip content="DRep's voting activity over the past 6 months">
@@ -332,7 +332,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                           />
                         </Tooltip>
                       </div>
-                      <span className='text-sm text-grayTextPrimary'>
+                      <span className='text-text-sm text-grayTextPrimary'>
                         Voted: {recentPercent.toFixed(2)}%
                       </span>
                     </div>
@@ -347,7 +347,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                   <div className='flex flex-col items-center gap-1'>
                     <div className='flex w-full items-center justify-between'>
                       <div className='flex items-center gap-1/2'>
-                        <span className='text-sm text-grayTextSecondary'>
+                        <span className='text-text-sm text-grayTextSecondary'>
                           Lifetime Activity
                         </span>
                         <Tooltip content="Voting activity over DRep's lifetime">
@@ -357,7 +357,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                           />
                         </Tooltip>
                       </div>
-                      <span className='text-sm text-grayTextPrimary'>
+                      <span className='text-text-sm text-grayTextPrimary'>
                         Voted: {lifetimePercent.toFixed(2)}%
                       </span>
                     </div>
@@ -387,7 +387,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                         className='flex items-center justify-between gap-1'
                         key={vote}
                       >
-                        <span className='min-w-24 text-sm text-grayTextPrimary'>
+                        <span className='min-w-24 text-text-sm text-grayTextPrimary'>
                           {vote} ({voteCount})
                         </span>
                         <div className='relative h-2 w-2/3 overflow-hidden rounded-[4px] bg-[#E4E7EC]'>
@@ -399,7 +399,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                             }}
                           />
                         </div>
-                        <span className='flex min-w-[55px] items-end text-sm text-grayTextPrimary'>
+                        <span className='flex min-w-[55px] items-end text-text-sm text-grayTextPrimary'>
                           {votePercent}%
                         </span>
                       </div>

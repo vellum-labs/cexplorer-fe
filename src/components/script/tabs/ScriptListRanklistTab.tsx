@@ -102,8 +102,8 @@ export const ScriptListRanklistTab: FC = () => {
                 params={{ hash: item?.hash }}
                 className={
                   item?.label?.label
-                    ? "text-xs hover:text-grayTextPrimary"
-                    : "text-sm text-primary"
+                    ? "text-text-xs hover:text-grayTextPrimary"
+                    : "text-text-sm text-primary"
                 }
                 disabled={!!item?.label?.label}
               >

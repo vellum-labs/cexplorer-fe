@@ -41,7 +41,7 @@ const DelegationsTabItem = () => {
             ) : (
               <Route size={12} className='text-primary' />
             )}
-            <span className='text-xs font-medium'>{displayRole}</span>
+            <span className='text-text-xs font-medium'>{displayRole}</span>
           </div>
         );
       },
@@ -93,7 +93,7 @@ const DelegationsTabItem = () => {
   ];
 
   if (!delegations && !query.isLoading) {
-    return <p className='w-full text-center text-sm'>No withdrawals</p>;
+    return <p className='w-full text-center text-text-sm'>No withdrawals</p>;
   }
 
   if (query.isLoading) {

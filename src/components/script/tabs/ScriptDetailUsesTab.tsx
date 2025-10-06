@@ -103,7 +103,7 @@ export const ScriptDetailUsesTab = () => {
                 item.epoch_param.max_tx_ex_mem / item.unit_mem,
               ),
             }}
-            className='text-right text-xs font-medium'
+            className='text-right text-text-xs font-medium'
           >
             {(item.epoch_param.max_tx_ex_mem / item.unit_mem).toFixed(2)}%
           </p>
@@ -135,7 +135,7 @@ export const ScriptDetailUsesTab = () => {
                 item.epoch_param.max_tx_ex_steps / item.unit_steps,
               ),
             }}
-            className='text-right text-xs font-medium'
+            className='text-right text-text-xs font-medium'
           >
             {(item.epoch_param.max_tx_ex_steps / item.unit_steps).toFixed(2)}%
           </p>

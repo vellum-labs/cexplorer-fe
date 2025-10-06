@@ -57,7 +57,7 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
           overviewList?.length ? "" : "items-center"
         }`}
       >
-        <h2 className='text-base'>{title}</h2>
+        <h2 className='text-text-md'>{title}</h2>
         <span>{subTitle}</span>
       </div>
       {showTitleDivider && (
@@ -87,14 +87,14 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
                           {item?.label && (
                             <div
                               key={`${item?.label}_${i}_label`}
-                              className={`flex items-center text-left text-sm text-grayTextSecondary ${labelClassname ? labelClassname : ""} ${leading ? "leading-[0px]" : "py-1/2"}`}
+                              className={`flex items-center text-left text-text-sm text-grayTextSecondary ${labelClassname ? labelClassname : ""} ${leading ? "leading-[0px]" : "py-1/2"}`}
                             >
                               {item?.label}
                             </div>
                           )}
                           <div
                             key={`${item?.label}_${i}_value`}
-                            className={`overflow-hidden break-words text-sm text-grayTextPrimary ${leading ? "leading-[0px]" : "py-1/2"}`}
+                            className={`overflow-hidden break-words text-text-sm text-grayTextPrimary ${leading ? "leading-[0px]" : "py-1/2"}`}
                             style={!item?.label ? { gridColumn: "span 2" } : undefined}
                           >
                             {item?.value}
@@ -122,12 +122,12 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
               >
                 <div className='flex items-center gap-[2px]'>
                   <CircleHelp size={11} className='text-grayTextPrimary' />
-                  <span className='text-xs font-medium text-grayTextPrimary'>
+                  <span className='text-text-xs font-medium text-grayTextPrimary'>
                     Threshold:
                   </span>
                 </div>
               </Tooltip>
-              <span className='text-xs font-medium text-grayTextPrimary'>
+              <span className='text-text-xs font-medium text-grayTextPrimary'>
                 {(threshold * 100).toFixed(2)}%
               </span>
             </div>

@@ -158,7 +158,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
               params={{
                 address: swapDetail?.user?.address ?? "",
               }}
-              className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-sm text-primary`}
+              className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-text-sm text-primary`}
             >
               {swapDetail?.user?.address}
             </Link>
@@ -203,7 +203,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
       title: "Confirmation",
       value: renderWithException(
         swapDetail?.block?.no,
-        <div className='flex items-center gap-[2.5px] text-sm'>
+        <div className='flex items-center gap-[2.5px] text-text-sm'>
           {confirmations[1] < 3 && (
             <CircleX size={15} className='translate-y-[1px] text-red-500' />
           )}
@@ -314,7 +314,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
       value: renderWithException(
         swapDetail?.status,
         <div className='flex items-center'>
-          <p className='flex w-fit items-center gap-1/2 rounded-s border border-border px-1 text-sm'>
+          <p className='flex w-fit items-center gap-1/2 rounded-s border border-border px-1 text-text-sm'>
             {isSuccess ? (
               <Check className='text-greenText' size={15} />
             ) : isCanceled ? (
@@ -345,7 +345,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
       value: renderWithException(
         typeof swapDetail?.is_dexhunter === "boolean",
         <div className='flex items-center'>
-          <p className='flex w-fit items-center gap-1/2 rounded-s border border-border px-1 text-sm'>
+          <p className='flex w-fit items-center gap-1/2 rounded-s border border-border px-1 text-text-sm'>
             {isSuccess ? (
               <Image src={DexhunterIcon} className='h-4 w-4 rounded-max' />
             ) : (
@@ -414,12 +414,12 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
         }}
       >
         <>
-          <h2 className='text-base'>Overview</h2>
+          <h2 className='text-text-md'>Overview</h2>
           <div className='flex flex-col gap-2 pt-2'>
             {detailItems.map(({ key, title, value, divider }) => (
               <div key={key}>
                 <div className='flex w-full items-start'>
-                  <p className='min-w-[200px] text-sm text-grayTextSecondary'>
+                  <p className='min-w-[200px] text-text-sm text-grayTextSecondary'>
                     {title}
                   </p>
                   <div className='w-full'>

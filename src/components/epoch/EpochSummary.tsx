@@ -68,7 +68,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
                 }}
               ></span>
             </div>
-            <span className='text-sm font-medium text-grayTextPrimary'>
+            <span className='text-text-sm font-medium text-grayTextPrimary'>
               {!isNaN(elapsedPercentage)
                 ? elapsedPercentage > 100
                   ? 100
@@ -84,7 +84,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
     {
       label: "Blocks",
       value: (
-        <p className='text-sm font-medium'>
+        <p className='text-text-sm font-medium'>
           {formatNumber(stats?.epoch?.block_count)}
         </p>
       ),
@@ -92,7 +92,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
     {
       label: "Transactions",
       value: (
-        <p className='text-sm font-medium'>
+        <p className='text-text-sm font-medium'>
           {formatNumber(stats?.epoch?.tx_count)}
         </p>
       ),
@@ -100,7 +100,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
     {
       label: "Fees Generated",
       value: (
-        <p className='text-sm font-medium'>
+        <p className='text-text-sm font-medium'>
           <AdaWithTooltip data={stats?.epoch?.fees} />
         </p>
       ),
@@ -108,7 +108,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
     {
       label: "TPS:",
       value: (
-        <p className='text-sm font-medium'>
+        <p className='text-text-sm font-medium'>
           {usedTPS?.toFixed(2)} (used) / {capTps?.toFixed(2)} (cap)
         </p>
       ),
@@ -125,7 +125,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
               <div className='absolute left-2'>
                 <PulseDot />
               </div>
-              <span className='text-xs font-medium'>Current Epoch</span>
+              <span className='text-text-xs font-medium'>Current Epoch</span>
             </div>
           )
         }

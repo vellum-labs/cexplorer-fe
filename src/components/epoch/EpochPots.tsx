@@ -21,7 +21,7 @@ export const EpochPots: FC<EpochPotsProps> = ({ stats }) => {
     {
       label: "Treasury",
       value: (
-        <p className='text-sm font-medium'>
+        <p className='text-text-sm font-medium'>
           <AdaWithTooltip data={treasury ?? 0} />
         </p>
       ),
@@ -29,7 +29,7 @@ export const EpochPots: FC<EpochPotsProps> = ({ stats }) => {
     {
       label: "Reserves",
       value: (
-        <p className='text-sm font-medium'>
+        <p className='text-text-sm font-medium'>
           <AdaWithTooltip data={reserves ?? 0} />
         </p>
       ),
@@ -37,7 +37,7 @@ export const EpochPots: FC<EpochPotsProps> = ({ stats }) => {
     {
       label: "Rewards",
       value: (
-        <p className='text-sm font-medium'>
+        <p className='text-text-sm font-medium'>
           <AdaWithTooltip data={rewards} />
         </p>
       ),
@@ -45,7 +45,7 @@ export const EpochPots: FC<EpochPotsProps> = ({ stats }) => {
     {
       label: "Deposits",
       value: (
-        <p className='text-sm font-medium'>
+        <p className='text-text-sm font-medium'>
           <AdaWithTooltip data={depositsStake} />
         </p>
       ),
@@ -53,7 +53,7 @@ export const EpochPots: FC<EpochPotsProps> = ({ stats }) => {
     {
       label: "Fees",
       value: (
-        <p className='text-sm font-medium'>
+        <p className='text-text-sm font-medium'>
           <AdaWithTooltip data={fees} />
         </p>
       ),
@@ -64,7 +64,7 @@ export const EpochPots: FC<EpochPotsProps> = ({ stats }) => {
         const earnedTreasuryPercentage = (epoch?.fees / treasury) * 100;
 
         return (
-          <p className='text-sm font-medium'>
+          <p className='text-text-sm font-medium'>
             {earnedTreasuryPercentage.toFixed(6)}%
           </p>
         );

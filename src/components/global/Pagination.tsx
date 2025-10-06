@@ -182,7 +182,7 @@ const PageJump = ({
   };
 
   return (
-    <div className='flex items-center gap-1 text-sm'>
+    <div className='flex items-center gap-1 text-text-sm'>
       {/* <span>Jump to:</span>{" "} */}
       <input
         className='h-8 w-16 rounded-m border border-border bg-background p-1/2 text-center text-text'

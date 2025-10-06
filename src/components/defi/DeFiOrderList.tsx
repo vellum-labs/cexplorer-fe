@@ -161,7 +161,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
             params={{
               hash: item?.tx_hash,
             }}
-            className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-sm text-primary`}
+            className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-text-sm text-primary`}
           >
             {formatString(item?.tx_hash, "short")}
           </Link>
@@ -183,7 +183,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
 
         return (
           <div
-            className={`flex w-[50px] items-center justify-center rounded-s px-[6px] py-[2px] text-sm font-medium text-white ${isBuying ? "bg-greenText" : "bg-redText"}`}
+            className={`flex w-[50px] items-center justify-center rounded-s px-[6px] py-[2px] text-text-sm font-medium text-white ${isBuying ? "bg-greenText" : "bg-redText"}`}
           >
             {isBuying ? "Buy" : "Sell"}
           </div>
@@ -234,7 +234,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                     }))
                   }
                 />
-                <span className='text-sm'>Buy</span>
+                <span className='text-text-sm'>Buy</span>
               </label>
               <label className='flex items-center gap-1'>
                 <input
@@ -250,7 +250,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                     }))
                   }
                 />
-                <span className='text-sm'>Sell</span>
+                <span className='text-text-sm'>Sell</span>
               </label>
             </div>
             <TextInput
@@ -485,7 +485,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
             >
               <FileText size={15} className='cursor-pointer text-primary' />
             </Link>
-            <p className='flex items-center gap-1/2 rounded-s border border-border px-1 text-sm'>
+            <p className='flex items-center gap-1/2 rounded-s border border-border px-1 text-text-sm'>
               {isSuccess ? (
                 <Check className='text-greenText' size={15} />
               ) : isCanceled ? (
@@ -524,7 +524,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                   changeDraftFilter("status", e.currentTarget.value)
                 }
               />
-              <span className='text-sm'>Complete</span>
+              <span className='text-text-sm'>Complete</span>
             </label>
             <label className='flex items-center gap-1'>
               <input
@@ -537,7 +537,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                   changeDraftFilter("status", e.currentTarget.value)
                 }
               />
-              <span className='text-sm'>Cancelled</span>
+              <span className='text-text-sm'>Cancelled</span>
             </label>
           </div>
         ),
@@ -581,7 +581,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                 params={{
                   address: item?.user?.address,
                 }}
-                className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-sm text-primary`}
+                className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-text-sm text-primary`}
               >
                 {formatString(item?.user?.address, "short")}
               </Link>
@@ -660,7 +660,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                 checked={filterDraft["dex"] === "SUNDAESWAP"}
                 onChange={e => changeDraftFilter("dex", e.currentTarget.value)}
               />
-              <span className='text-sm'>SundaeSwap</span>
+              <span className='text-text-sm'>SundaeSwap</span>
             </label>
             <label className='flex items-center gap-1'>
               <input
@@ -671,7 +671,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                 checked={filterDraft["dex"] === "MINSWAP"}
                 onChange={e => changeDraftFilter("dex", e.currentTarget.value)}
               />
-              <span className='text-sm'>Minswap</span>
+              <span className='text-text-sm'>Minswap</span>
             </label>
           </div>
         ),
@@ -713,7 +713,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
               value && (
                 <div
                   key={key}
-                  className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
+                  className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
                 >
                   <span>{key[0].toUpperCase() + key.slice(1)}:</span>
                   {key === "maker" && (

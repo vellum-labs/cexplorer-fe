@@ -75,7 +75,7 @@ export const DisplayVoteModal: FC<DisplayVoteModalProps> = ({
         className={`flex h-[220px] w-full items-center justify-center py-1 ${!data ? "items-center justify-center" : ""}`}
       >
         {!search && (
-          <span className='px-1.5 py-1.5 text-center text-sm'>
+          <span className='px-1.5 py-1.5 text-center text-text-sm'>
             Looks like you're missing a Gov Action ID. Enter one to find
             results!
           </span>
@@ -88,13 +88,13 @@ export const DisplayVoteModal: FC<DisplayVoteModalProps> = ({
           </div>
         )}
         {noResult && (
-          <span className='px-1.5 py-1.5 text-center text-sm'>
+          <span className='px-1.5 py-1.5 text-center text-text-sm'>
             No results. Check your input and try again.
           </span>
         )}
         {!!hasData && (
           <div className='flex h-full w-full flex-col'>
-            <div className='flex h-full w-full justify-between gap-1.5 border-b border-border p-1.5 text-sm text-text'>
+            <div className='flex h-full w-full justify-between gap-1.5 border-b border-border p-1.5 text-text-sm text-text'>
               <div>Type</div>
               {data[0]?.extra?.type ? (
                 <ActionTypes title={data[0]?.extra?.type as any} />
@@ -102,7 +102,7 @@ export const DisplayVoteModal: FC<DisplayVoteModalProps> = ({
                 "-"
               )}
             </div>
-            <div className='flex h-full w-full justify-between gap-1.5 border-b border-border p-1.5 text-sm text-text'>
+            <div className='flex h-full w-full justify-between gap-1.5 border-b border-border p-1.5 text-text-sm text-text'>
               <div>Title</div>
               {data[0]?.title ? (
                 <div className='flex items-center gap-2'>
@@ -127,7 +127,7 @@ export const DisplayVoteModal: FC<DisplayVoteModalProps> = ({
                 "-"
               )}
             </div>
-            <div className='flex h-full w-full justify-between gap-1.5 border-b border-border p-1.5 text-sm text-text'>
+            <div className='flex h-full w-full justify-between gap-1.5 border-b border-border p-1.5 text-text-sm text-text'>
               <div>ID</div>
               {(data[0]?.extra as any)?.id ? (
                 <div className='flex items-center gap-1'>
@@ -150,7 +150,7 @@ export const DisplayVoteModal: FC<DisplayVoteModalProps> = ({
                 "-"
               )}
             </div>
-            <div className='flex h-full w-full justify-between gap-1.5 border-b border-border p-1.5 text-sm text-text'>
+            <div className='flex h-full w-full justify-between gap-1.5 border-b border-border p-1.5 text-text-sm text-text'>
               <span>Ident</span>
               {data[0]?.ident ? (
                 <div className='flex items-center gap-1'>

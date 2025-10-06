@@ -19,7 +19,7 @@ export const ProfileForm: FC<ProfileFormProps> = ({
     >
       <div className='w-fit'>
         <h3>{title}</h3>
-        <p className='text-grayTextPrimary max-w-[300px] text-sm'>
+        <p className='text-grayTextPrimary max-w-[300px] text-text-sm'>
           {description}
         </p>
       </div>

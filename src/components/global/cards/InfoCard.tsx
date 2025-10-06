@@ -19,7 +19,7 @@ export const InfoCard = ({
     >
       <div className='flex items-center gap-2'>
         <div className='rounded-m border border-border p-1/2'>{icon}</div>
-        <p className='text-sm'>{title}</p>
+        <p className='text-text-sm'>{title}</p>
       </div>
       {children}
     </section>

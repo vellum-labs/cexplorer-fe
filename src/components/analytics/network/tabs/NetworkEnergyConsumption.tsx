@@ -97,7 +97,7 @@ export const NetworkEnergyConsumption: FC = () => {
                     height: "64px",
                   }}
                 >
-                  <p className='flex h-full items-center pl-3 text-sm'>
+                  <p className='flex h-full items-center pl-3 text-text-sm'>
                     {title}
                   </p>
                 </div>
@@ -110,7 +110,7 @@ export const NetworkEnergyConsumption: FC = () => {
                   }}
                 >
                   <p
-                    className={`flex h-full w-full items-center justify-end pr-3 text-sm ${i === compareColumns.length - 1 && "font-bold"}`}
+                    className={`flex h-full w-full items-center justify-end pr-3 text-text-sm ${i === compareColumns.length - 1 && "font-bold"}`}
                   >
                     {value}
                   </p>

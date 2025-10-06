@@ -180,7 +180,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                 aria-expanded={openCurrency}
                 className='flex w-[95px] items-center justify-between'
               >
-                <span className='text-xs'>
+                <span className='text-text-xs'>
                   {currencies[currency].value.toUpperCase()}
                 </span>
                 <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
@@ -221,7 +221,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                       return (
                         <div
                           key={key}
-                          className={`flex w-full cursor-pointer select-none items-center justify-between rounded-xs px-2 py-1.5 text-sm hover:bg-cardBg ${key === currency ? "bg-cardBg" : ""}`}
+                          className={`flex w-full cursor-pointer select-none items-center justify-between rounded-xs px-2 py-1.5 text-text-sm hover:bg-cardBg ${key === currency ? "bg-cardBg" : ""}`}
                           onClick={() => {
                             if (value) {
                               handleCurrency((value as any).value);

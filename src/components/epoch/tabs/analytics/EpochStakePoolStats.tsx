@@ -31,12 +31,12 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
       columns: [
         {
           title: (
-            <p className='text-sm font-medium text-grayTextPrimary'>Pools</p>
+            <p className='text-text-sm font-medium text-grayTextPrimary'>Pools</p>
           ),
         },
         {
           title: (
-            <p className='text-sm'>
+            <p className='text-text-sm'>
               {stats?.pool_stat?.pools > 0 &&
                 formatNumber(stats?.pool_stat?.pools)}
             </p>
@@ -49,14 +49,14 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
       columns: [
         {
           title: (
-            <p className='text-sm font-medium text-grayTextPrimary'>
+            <p className='text-text-sm font-medium text-grayTextPrimary'>
               APY % Leader
             </p>
           ),
         },
         {
           title: (
-            <p className='text-sm'>
+            <p className='text-text-sm'>
               {stats?.epoch_no > (miscConst?.epoch.no ?? 0) - 2 ? (
                 <Badge color='yellow'>Pending</Badge>
               ) : (
@@ -72,14 +72,14 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
       columns: [
         {
           title: (
-            <p className='text-sm font-medium text-grayTextPrimary'>
+            <p className='text-text-sm font-medium text-grayTextPrimary'>
               APY % Member
             </p>
           ),
         },
         {
           title: (
-            <p className='text-sm'>
+            <p className='text-text-sm'>
               {stats?.epoch_no > (miscConst?.epoch.no ?? 0) - 2 ? (
                 <Badge color='yellow'>Pending</Badge>
               ) : (
@@ -95,14 +95,14 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
       columns: [
         {
           title: (
-            <p className='text-sm font-medium text-grayTextPrimary'>
+            <p className='text-text-sm font-medium text-grayTextPrimary'>
               Average Stake
             </p>
           ),
         },
         {
           title: (
-            <p className='text-sm'>
+            <p className='text-text-sm'>
               {(stats?.pool_stat?.epoch_stake ?? 0 > 0) ? (
                 <AdaWithTooltip
                   data={stats?.pool_stat?.epoch_stake as number}
@@ -120,14 +120,14 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
       columns: [
         {
           title: (
-            <p className='text-sm font-medium text-grayTextPrimary'>
+            <p className='text-text-sm font-medium text-grayTextPrimary'>
               Delegator Count
             </p>
           ),
         },
         {
           title: (
-            <p className='text-sm'>
+            <p className='text-text-sm'>
               {(stats?.pool_stat?.delegator_count ?? 0) > 0 &&
                 formatNumber(stats?.pool_stat?.delegator_count ?? 0)}
             </p>
@@ -141,7 +141,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
         {
           title: (
             <div className='flex items-center gap-1/2'>
-              <span className='text-sm font-medium text-grayTextPrimary'>
+              <span className='text-text-sm font-medium text-grayTextPrimary'>
                 Delegator Count Weighted
               </span>
               <Tooltip
@@ -160,7 +160,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
         },
         {
           title: (
-            <p className='text-sm'>
+            <p className='text-text-sm'>
               {stats?.pool_stat?.delegator_count_sw?.toFixed(2)}
             </p>
           ),
@@ -173,7 +173,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
         {
           title: (
             <div className='flex items-center gap-1/2'>
-              <span className='text-sm font-medium text-grayTextPrimary'>
+              <span className='text-text-sm font-medium text-grayTextPrimary'>
                 Delegator Average
               </span>
               <Tooltip
@@ -192,7 +192,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
         },
         {
           title: (
-            <p className='text-sm'>
+            <p className='text-text-sm'>
               {stats?.pool_stat?.delegator_avg?.toFixed(2)}
             </p>
           ),
@@ -205,7 +205,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
         {
           title: (
             <div className='flex items-center gap-1/2'>
-              <span className='text-sm font-medium text-grayTextPrimary'>
+              <span className='text-text-sm font-medium text-grayTextPrimary'>
                 Delegator Average Weighted
               </span>
               <Tooltip
@@ -224,7 +224,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
         },
         {
           title: (
-            <p className='text-sm'>
+            <p className='text-text-sm'>
               {stats?.pool_stat?.delegator_avg_sw?.toFixed(2)}
             </p>
           ),

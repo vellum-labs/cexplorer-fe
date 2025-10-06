@@ -135,14 +135,14 @@ export const WalletPage: FC = () => {
       key: "basic_features",
       title: (
         <div className='flex h-full w-full items-end px-3 pb-2'>
-          <span className='text-center text-sm font-semibold text-primary'>
+          <span className='text-center text-text-sm font-semibold text-primary'>
             Basic features
           </span>
         </div>
       ),
       cells: walletsData.map(({ internalName }) => (
         <div className='flex h-full w-full items-end justify-center pb-2'>
-          <span className='text-center text-sm font-semibold'>
+          <span className='text-center text-text-sm font-semibold'>
             {internalName &&
               internalName[0].toUpperCase() +
                 internalName.substring(1).toLowerCase()}
@@ -155,7 +155,7 @@ export const WalletPage: FC = () => {
       key: "supported_platforms",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-sm font-medium'>Supported platforms</span>
+          <span className='text-text-sm font-medium'>Supported platforms</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -187,7 +187,7 @@ export const WalletPage: FC = () => {
       key: "opensource",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-sm font-medium'>Opensource</span>
+          <span className='text-text-sm font-medium'>Opensource</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -209,7 +209,7 @@ export const WalletPage: FC = () => {
       key: "smart_contracts_interaction",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-sm font-medium'>
+          <span className='text-text-sm font-medium'>
             Smart contracts interaction
           </span>
           <CircleHelp
@@ -233,7 +233,7 @@ export const WalletPage: FC = () => {
       key: "testnet_support",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-sm font-medium'>Testnet support</span>
+          <span className='text-text-sm font-medium'>Testnet support</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -255,7 +255,7 @@ export const WalletPage: FC = () => {
       key: "hardware_wallet_compatibility",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-nowrap text-sm font-medium'>
+          <span className='text-nowrap text-text-sm font-medium'>
             Hardware wallet compatibility
           </span>
           <CircleHelp
@@ -298,7 +298,7 @@ export const WalletPage: FC = () => {
       key: "cross_chain_compatibility",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-nowrap text-sm font-medium'>
+          <span className='text-nowrap text-text-sm font-medium'>
             Cross-chain compatibility
           </span>
           <CircleHelp
@@ -345,7 +345,7 @@ export const WalletPage: FC = () => {
       key: "staking_and_governance",
       title: (
         <div className='flex h-full w-full items-end px-3 pb-2'>
-          <span className='text-center text-sm font-semibold text-primary'>
+          <span className='text-center text-text-sm font-semibold text-primary'>
             Staking and governance
           </span>
         </div>
@@ -356,7 +356,7 @@ export const WalletPage: FC = () => {
       key: "staking_support",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-sm font-medium'>Staking support</span>
+          <span className='text-text-sm font-medium'>Staking support</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -378,7 +378,7 @@ export const WalletPage: FC = () => {
       key: "cardano_governance_features",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-sm font-medium'>
+          <span className='text-text-sm font-medium'>
             Cardano governance features
           </span>
           <CircleHelp
@@ -402,7 +402,7 @@ export const WalletPage: FC = () => {
       key: "project_catalyst_registration",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-sm font-medium'>
+          <span className='text-text-sm font-medium'>
             Project Catalyst registration
           </span>
           <CircleHelp
@@ -426,7 +426,7 @@ export const WalletPage: FC = () => {
       key: "multipool_delegation",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-sm font-medium'>Multipool delegation</span>
+          <span className='text-text-sm font-medium'>Multipool delegation</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -449,7 +449,7 @@ export const WalletPage: FC = () => {
       key: "features",
       title: (
         <div className='flex h-full w-full items-end px-3 pb-2'>
-          <span className='text-center text-sm font-semibold text-primary'>
+          <span className='text-center text-text-sm font-semibold text-primary'>
             Features
           </span>
         </div>
@@ -460,7 +460,7 @@ export const WalletPage: FC = () => {
       key: "dapp_browser",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-sm font-medium'>dApp browser</span>
+          <span className='text-text-sm font-medium'>dApp browser</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -482,7 +482,7 @@ export const WalletPage: FC = () => {
       key: "multiple_accounts",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-sm font-medium'>Multiple accounts</span>
+          <span className='text-text-sm font-medium'>Multiple accounts</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -504,7 +504,7 @@ export const WalletPage: FC = () => {
       key: "custom_node",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-sm font-medium'>Custom node</span>
+          <span className='text-text-sm font-medium'>Custom node</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -526,7 +526,7 @@ export const WalletPage: FC = () => {
       key: "address_book",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-sm font-medium'>Address book</span>
+          <span className='text-text-sm font-medium'>Address book</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -548,7 +548,7 @@ export const WalletPage: FC = () => {
       key: "other",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-sm font-medium'>Other</span>
+          <span className='text-text-sm font-medium'>Other</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -579,7 +579,7 @@ export const WalletPage: FC = () => {
       key: "integrations",
       title: (
         <div className='flex h-full w-full items-end px-3 pb-2'>
-          <span className='text-center text-sm font-semibold text-primary'>
+          <span className='text-center text-text-sm font-semibold text-primary'>
             Integrations
           </span>
         </div>
@@ -590,7 +590,7 @@ export const WalletPage: FC = () => {
       key: "nft_marketplace",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-sm font-medium'>NFT marketplace</span>
+          <span className='text-text-sm font-medium'>NFT marketplace</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -626,7 +626,7 @@ export const WalletPage: FC = () => {
       key: "swaps_in_wallets",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-sm font-medium'>Swaps in wallets</span>
+          <span className='text-text-sm font-medium'>Swaps in wallets</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -662,7 +662,7 @@ export const WalletPage: FC = () => {
       key: "fiat_onramp",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-sm font-medium'>Fiat onramp</span>
+          <span className='text-text-sm font-medium'>Fiat onramp</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -724,7 +724,7 @@ export const WalletPage: FC = () => {
           <div className='flex w-full max-w-desktop flex-col items-end gap-3 p-mobile md:p-desktop'>
             <div className='flex w-fit'>
               <div className='flex flex-col items-start gap-1/2'>
-                <span className='w-fit text-xs font-medium'>
+                <span className='w-fit text-text-xs font-medium'>
                   Compare wallets
                 </span>
                 <TableSettingsDropdown

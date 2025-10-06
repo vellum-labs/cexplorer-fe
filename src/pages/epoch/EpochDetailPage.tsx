@@ -117,12 +117,12 @@ const EpochDetailPage: FC = () => {
       {futureStartTime && futureEndTime ? (
         <div className='flex min-h-[70vh] w-full items-center justify-center'>
           <div className='flex w-full max-w-desktop flex-col items-center justify-center rounded-m p-2 text-center'>
-            <p className='text-sm'>
+            <p className='text-text-sm'>
               Epoch <strong>{requestedEpoch}</strong> hasn’t started yet. It
               will start on <strong>{futureStartTime}</strong> and end on{" "}
               <strong>{futureEndTime}</strong>.
             </p>
-            <p className='mt-1 text-sm'>
+            <p className='mt-1 text-text-sm'>
               The current epoch is <strong>{currentEpoch}</strong>.
             </p>
             <div className='mt-1.5 flex items-center gap-1.5'>

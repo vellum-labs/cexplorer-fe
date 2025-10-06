@@ -148,7 +148,7 @@ export const CustomLabels = () => {
           organization.
         </p>
 
-        <div className='mb-1 mt-3 flex w-full items-center justify-between gap-1 text-sm'>
+        <div className='mb-1 mt-3 flex w-full items-center justify-between gap-1 text-text-sm'>
           <span className='flex items-center gap-1/2'>
             <ChevronsUp size={25} /> Unlock up to 5000 labels with{" "}
             <Link
@@ -193,7 +193,7 @@ export const CustomLabels = () => {
               <tr className={labels.length ? "border-border" : "border-none"}>
                 <TableHead>Address</TableHead>
                 <TableHead>Label</TableHead>
-                <TableHead className='text-right text-xs leading-[13px]'>
+                <TableHead className='text-right text-text-xs leading-[13px]'>
                   {labels.length}/{proNfts === 0 ? 10 : proNfts * 100} labels
                   created
                 </TableHead>
@@ -215,7 +215,7 @@ export const CustomLabels = () => {
                           : "/address/$address"
                       }
                       params={{ address: address }}
-                      className={`block w-fit overflow-hidden overflow-ellipsis whitespace-nowrap text-sm text-primary`}
+                      className={`block w-fit overflow-hidden overflow-ellipsis whitespace-nowrap text-text-sm text-primary`}
                     >
                       {formatString(address, "longer")}
                     </Link>
@@ -242,7 +242,7 @@ export const CustomLabels = () => {
             </TableBody>
           </Table>
         </section>
-        <div className='ml-auto mt-4 flex h-7 items-center gap-2 text-xs [&>button]:h-full'>
+        <div className='ml-auto mt-4 flex h-7 items-center gap-2 text-text-xs [&>button]:h-full'>
           <button
             className='rounded-m border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'
             onClick={handleFirstPage}

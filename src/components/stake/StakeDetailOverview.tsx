@@ -110,7 +110,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
             >
               {data?.vote?.drep?.data?.given_name &&
                 data?.vote?.drep?.data?.given_name}
-              <span className='text-sm text-primary'>Always abstain</span>
+              <span className='text-text-sm text-primary'>Always abstain</span>
             </Link>
           ) : data?.vote?.vote?.live_drep === "drep_always_no_confidence" ? (
             <Link
@@ -120,7 +120,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
             >
               {data?.vote?.drep?.data?.given_name &&
                 data?.vote?.drep?.data?.given_name}
-              <span className='text-sm text-primary'>Always no confidence</span>
+              <span className='text-text-sm text-primary'>Always no confidence</span>
             </Link>
           ) : (
             <AttributeDropdown
@@ -144,7 +144,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
                   value: (
                     <DateCell
                       time={data?.vote?.drep?.since}
-                      className='text-xs'
+                      className='text-text-xs'
                     />
                   ),
                 },
@@ -152,7 +152,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
                   label: "ID",
                   value: (
                     <div className='flex items-center gap-1'>
-                      <span className={"text-xs"}>
+                      <span className={"text-text-xs"}>
                         {formatString(
                           data?.vote?.drep?.hash?.view ?? "",
                           "long",
@@ -181,7 +181,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
                     <Link
                       to='/drep/$hash'
                       params={{ hash: data?.vote?.drep?.hash?.view ?? "" }}
-                      className={"text-sm text-primary"}
+                      className={"text-text-sm text-primary"}
                     >
                       {formatString(data?.vote?.drep?.hash?.view ?? "", "long")}
                     </Link>

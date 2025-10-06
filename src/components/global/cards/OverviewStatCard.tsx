@@ -32,16 +32,16 @@ export const OverviewStatCard = ({
           {icon && (
             <div className='rounded-m border border-border p-1/2'>{icon}</div>
           )}
-          <p className='text-sm text-grayTextPrimary'>{title}</p>
+          <p className='text-text-sm text-grayTextPrimary'>{title}</p>
         </div>
-        {subTitle && <p className='text-xs text-grayTextPrimary'>{subTitle}</p>}
+        {subTitle && <p className='text-text-xs text-grayTextPrimary'>{subTitle}</p>}
       </div>
       <div
         className={`text-lg font-semibold ${fullContentHeight ? "h-full" : ""}`}
       >
         {value}
       </div>
-      {description && <p className='text-grayText text-sm'>{description}</p>}
+      {description && <p className='text-grayText text-text-sm'>{description}</p>}
     </div>
   );
 };

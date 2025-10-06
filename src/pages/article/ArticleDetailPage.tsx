@@ -129,10 +129,10 @@ export const ArticleDetailPage = () => {
                   </p>
                 </div>
               )}
-              <div className='flex flex-col text-sm'>
+              <div className='flex flex-col text-text-sm'>
                 {renderArticleAuthor(data?.user_owner)}
               </div>
-              <div className='flex flex-col text-sm'>
+              <div className='flex flex-col text-text-sm'>
                 <span className='text-grayTextPrimary'>Published</span>
                 <span>{data?.pub_date ? formatDate(data?.pub_date) : "-"}</span>
               </div>
@@ -148,20 +148,20 @@ export const ArticleDetailPage = () => {
         </section>
         <section className='flex w-full max-w-desktop flex-col gap-1.5 p-mobile md:p-desktop lg:flex-row'>
           <div className='flex w-full flex-wrap items-center justify-between gap-2 lg:hidden'>
-            <div className='order-2 flex gap-1/2 text-sm leading-tight text-grayTextPrimary'>
+            <div className='order-2 flex gap-1/2 text-text-sm leading-tight text-grayTextPrimary'>
               <span className='font-medium'>Keywords:</span>
               <span className=''>{data?.keywords}</span>
             </div>
             <SocialsAndCopy className='order-1 ml-auto block min-w-fit lg:hidden' />
           </div>
-          <article className='my-3 w-full text-left text-base lg:my-0 lg:w-[calc(100%-300px)] [&>*]:text-base [&>p]:my-4'>
+          <article className='my-3 w-full text-left text-text-md lg:my-0 lg:w-[calc(100%-300px)] [&>*]:text-base [&>p]:my-4'>
             {parse(data?.data[0] || "")}
           </article>
           <div className='hidden w-[300px] flex-col gap-1.5 lg:flex'>
             <SocialsAndCopy stretchCopy />
             <div className='flex w-full flex-col gap-2 rounded-m border border-border bg-cardBg p-2'>
               <h3>Support author</h3>
-              <p className='text-sm text-grayTextPrimary'>
+              <p className='text-text-sm text-grayTextPrimary'>
                 You can support the article author by delegating to their stake
                 pool.
               </p>
@@ -175,7 +175,7 @@ export const ArticleDetailPage = () => {
             <NewsletterForm />
             <div className='flex w-full flex-col gap-2 rounded-m border border-border bg-cardBg p-2'>
               <h3>Keywords</h3>
-              <p className='text-sm text-grayTextPrimary'>{data?.keywords}</p>
+              <p className='text-text-sm text-grayTextPrimary'>{data?.keywords}</p>
             </div>
             {otherArticles.map(article => (
               <ArticleCard
@@ -197,7 +197,7 @@ export const ArticleDetailPage = () => {
                 size={40}
               />
               <h3>Support author</h3>
-              <p className='text-sm text-grayTextPrimary'>
+              <p className='text-text-sm text-grayTextPrimary'>
                 You can support the article author by delegating to their stake
                 pool.
               </p>
@@ -272,7 +272,7 @@ const NewsletterForm = () => {
         size={40}
       />
       <h3>Weekly newsletter</h3>
-      <p className='text-sm text-grayTextPrimary'>
+      <p className='text-text-sm text-grayTextPrimary'>
         No spam. Just the latest releases and tips, interesting articles, and
         exclusive interviews in your inbox every week.
       </p>

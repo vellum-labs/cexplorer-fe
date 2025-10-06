@@ -353,7 +353,7 @@ export const ProfilePro = () => {
     <>
       {showRemoveModal && (
         <Modal onClose={() => setShowRemoveModal(false)}>
-          <p className='mt-4 text-sm'>
+          <p className='mt-4 text-text-sm'>
             Do you wish to remove this item from your watchlist?
           </p>
           <div className='mt-3 flex w-full justify-between'>
@@ -429,7 +429,7 @@ export const ProfilePro = () => {
             value={modalData.ident}
             onchange={value => setModalData({ ...modalData, ident: value })}
           />
-          <p className='mt-1/2 h-4 text-xs font-medium text-red-500'>
+          <p className='mt-1/2 h-4 text-text-xs font-medium text-red-500'>
             {modalData.error && modalData.error}
           </p>
           <div className='mt-2 flex w-full items-center justify-center'>
@@ -473,7 +473,7 @@ export const ProfilePro = () => {
                 className='mr-auto mt-2'
               />
             ) : (
-              <section className='mt-2 flex flex-wrap items-center gap-1.5 text-sm md:gap-5'>
+              <section className='mt-2 flex flex-wrap items-center gap-1.5 text-text-sm md:gap-5'>
                 <span className='mr-1'>Your account</span>
                 <span className='flex items-center gap-1/2 text-grayTextPrimary'>
                   Your plan:{" "}

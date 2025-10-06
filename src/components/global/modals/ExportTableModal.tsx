@@ -57,7 +57,7 @@ export const ExportTableModal: FC<ExportTableModalProps> = ({
     <Modal minWidth='95%' maxWidth='400px' maxHeight='95%' onClose={onClose}>
       <div className='flex flex-col gap-3'>
         <div className='flex h-full w-full flex-col gap-3'>
-          <span className='text-lg font-semibold'>Export table</span>
+          <span className='text-text-lg font-semibold'>Export table</span>
         </div>
         <div className='flex flex-col gap-2'>
           <div className='flex items-start gap-1/2'>
@@ -69,8 +69,8 @@ export const ExportTableModal: FC<ExportTableModalProps> = ({
               onChange={() => setSelectedItem("csv")}
             />
             <div className='flex h-full flex-col'>
-              <span className='text-sm font-medium'>CSV</span>
-              <span className='text-grayTextPrimary text-sm'>
+              <span className='text-text-sm font-medium'>CSV</span>
+              <span className='text-grayTextPrimary text-text-sm'>
                 Great for easy viewing in spreadsheet tools.
               </span>
             </div>
@@ -84,8 +84,8 @@ export const ExportTableModal: FC<ExportTableModalProps> = ({
               onChange={() => setSelectedItem("json")}
             />
             <div className='flex h-full flex-col'>
-              <span className='text-sm font-medium'>JSON</span>
-              <span className='text-grayTextPrimary text-sm'>
+              <span className='text-text-sm font-medium'>JSON</span>
+              <span className='text-grayTextPrimary text-text-sm'>
                 Best for structured data and app integration.
               </span>
             </div>
@@ -96,7 +96,7 @@ export const ExportTableModal: FC<ExportTableModalProps> = ({
             className='flex h-[40px] w-full max-w-[170px] flex-1 cursor-pointer items-center justify-center rounded-s border border-border'
             onClick={onClose}
           >
-            <span className='text-base font-semibold'>Cancel</span>
+            <span className='text-text-md font-semibold'>Cancel</span>
           </button>
           <button
             className={`flex h-[40px] w-full max-w-[170px] flex-1 items-center justify-center gap-1/2 rounded-s border border-border transition-all duration-100 ${selectedItem ? "cursor-pointer" : "text-grayTextPrimary"}`}
@@ -104,7 +104,7 @@ export const ExportTableModal: FC<ExportTableModalProps> = ({
             onClick={exportData}
           >
             <Download size={20} className='text-inherit' />
-            <span className='text-sm font-medium'>Export</span>
+            <span className='text-text-sm font-medium'>Export</span>
           </button>
         </div>
       </div>

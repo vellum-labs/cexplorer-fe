@@ -28,10 +28,10 @@ const HardforkPageTotalCountItem: FC<HardforkPageTotalCountItemProps> = ({
       )}
       onClick={onClick}
     >
-      <span className='text-grayTextPrimary text-nowrap text-sm'>{title}</span>
+      <span className='text-grayTextPrimary text-nowrap text-text-sm'>{title}</span>
       <span
         className={cn(
-          "rounded-xl border px-[10px] py-[2px] text-sm font-bold",
+          "rounded-xl border px-[10px] py-[2px] text-text-sm font-bold",
           className,
         )}
       >

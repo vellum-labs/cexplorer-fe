@@ -156,7 +156,7 @@ export const AnalyticsGraph: FC<Props> = ({
             >
               {title && <h2>{title}</h2>}
               {description && (
-                <span className='text-xs text-grayTextPrimary'>
+                <span className='text-text-xs text-grayTextPrimary'>
                   {description}
                 </span>
               )}
@@ -185,7 +185,7 @@ export const AnalyticsGraph: FC<Props> = ({
                 className='flex h-[36px] w-[36px] shrink-0 cursor-pointer items-center justify-center gap-1/2 rounded-s border border-border'
                 onClick={showModals}
               >
-                <Download size={15} color={colors.text} className='text-base' />
+                <Download size={15} color={colors.text} className='text-text-md' />
               </div>
             )}
           </div>

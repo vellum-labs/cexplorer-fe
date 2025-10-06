@@ -102,20 +102,20 @@ export const ScriptListTVLTab: FC = () => {
               <div className='flex aspect-square h-[32px] w-[32px] items-center justify-center rounded-s border border-border'>
                 <CircleDollarSign className='text-primary' size={15} />
               </div>
-              <span className='text-sm text-grayTextPrimary'>
-                <span className='text-base font-semibold'>TVL</span> (total
+              <span className='text-text-sm text-grayTextPrimary'>
+                <span className='text-text-md font-semibold'>TVL</span> (total
                 value locked)
               </span>
             </div>
             <div className='flex w-full items-center gap-2'>
-              <span className='text-2xl font-semibold'>
+              <span className='text-display-xs font-semibold'>
                 $ {lovelaceToAda(totalValueUSD).substring(1)}
               </span>
-              <span className='text-sm font-medium text-grayTextPrimary'>
+              <span className='text-text-sm font-medium text-grayTextPrimary'>
                 <AdaWithTooltip data={totalValueADA} />
               </span>
             </div>
-            <p className='text-xs text-grayTextPrimary'>
+            <p className='text-text-xs text-grayTextPrimary'>
               In the context of decentralized finance (DeFi), it represents the
               total amount of cryptocurrency assets that are currently staked or
               deposited in a particular protocol or smart contract.
@@ -127,7 +127,7 @@ export const ScriptListTVLTab: FC = () => {
                 target='_blank'
                 rel='noopener noreferrer'
               >
-                <span className='text-xs font-semibold text-primary'>
+                <span className='text-text-xs font-semibold text-primary'>
                   Detailed Cardano TVL on DefiLama
                 </span>
                 <ArrowRight size={13} className='font-semibold text-primary' />

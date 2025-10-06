@@ -408,7 +408,7 @@ export const useBlockList = ({
                     changeDraftFilter("proto", e.currentTarget.value)
                   }
                 />
-                <span className='text-sm'>{version}</span>
+                <span className='text-text-sm'>{version}</span>
               </label>
             ))}
             <TextInput

@@ -29,20 +29,20 @@ export const ArticleCard = ({ article, className }: Props) => {
         />
       </Link>
       <div className='flex w-full flex-wrap items-center justify-between gap-1/2'>
-        <span className='flex basis-[170px] items-center gap-1/2 text-sm text-text'>
+        <span className='flex basis-[170px] items-center gap-1/2 text-text-sm text-text'>
           <Clock size={14} color={colors.text} />
           {formatDate(article.pub_date, true)}
         </span>
         {renderArticleAuthor(article.user_owner)}
       </div>
       <Link
-        className='w-fit text-lg font-medium leading-[24px]'
+        className='w-fit text-text-lg font-medium leading-[24px]'
         to='/article/$url'
         params={{ url: article.url }}
       >
         {parse(article.name)}
       </Link>
-      <p className='text-sm text-grayTextPrimary'>
+      <p className='text-text-sm text-grayTextPrimary'>
         {parse(article.description)}
       </p>
       <div className='mt-auto flex items-center gap-1/2'>

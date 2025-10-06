@@ -32,14 +32,14 @@ const MobileMenuAccordionItem = ({
         {}
         {href ? (
           <Link
-            className='text-base underline'
+            className='text-text-md underline'
             to={href}
             onClick={() => setIsOpen(false)}
           >
             {label}
           </Link>
         ) : (
-          <span className='text-base'>{label}</span>
+          <span className='text-text-md'>{label}</span>
         )}
       </AccordionTrigger>
       <AccordionContent>

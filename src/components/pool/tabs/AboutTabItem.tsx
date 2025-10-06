@@ -110,7 +110,7 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
                   style={{ width: `${Math.min(relativePledge, 100)}%` }}
                 />
               </div>
-              <span className='self-end text-sm text-grayTextPrimary'>
+              <span className='self-end text-text-sm text-grayTextPrimary'>
                 {displayValue}%
               </span>
             </div>
@@ -149,7 +149,7 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
                   strokeLinecap='round'
                 />
               </svg>
-              <span className='update absolute inset-0 left-1 top-2 flex items-center justify-center text-xs text-grayTextPrimary'>
+              <span className='update absolute inset-0 left-1 top-2 flex items-center justify-center text-text-xs text-grayTextPrimary'>
                 {!isNaN(pledgeStakedRatio)
                   ? `${pledgeStakedRatio.toFixed(2)}%`
                   : "?"}
@@ -394,7 +394,7 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
         {description && (
           <>
             <h3>About Pool</h3>
-            <p className='text-sm text-grayTextPrimary'>{description}</p>
+            <p className='text-text-sm text-grayTextPrimary'>{description}</p>
           </>
         )}
         <div className='flex flex-col gap-2'>

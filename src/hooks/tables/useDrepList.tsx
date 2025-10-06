@@ -156,7 +156,7 @@ export const useDrepList = ({
         return (
           <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
             <PulseDot color={!item.is_active ? "bg-redText" : undefined} />
-            <span className='text-xs font-medium'>
+            <span className='text-text-xs font-medium'>
               {item.is_active ? "Active" : "Inactive"}
             </span>
           </div>
@@ -561,7 +561,7 @@ export const useDrepList = ({
                 checked={filterDraft.spo === "YES"}
                 onChange={e => changeDraftFilter("spo", e.currentTarget.value)}
               />
-              <span className='text-sm'>Yes</span>
+              <span className='text-text-sm'>Yes</span>
             </label>
             <label className='flex items-center gap-1'>
               <input
@@ -572,7 +572,7 @@ export const useDrepList = ({
                 checked={filterDraft.spo === "NO"}
                 onChange={e => changeDraftFilter("spo", e.currentTarget.value)}
               />
-              <span className='text-sm'>No</span>
+              <span className='text-text-sm'>No</span>
             </label>
           </div>
         ),

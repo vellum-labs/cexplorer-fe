@@ -184,7 +184,7 @@ export const AccountTopStakingTab: FC = () => {
                   changeDraftFilter("pool_only", +e.currentTarget.value)
                 }
               />
-              <span className='text-sm'>Delegated to a stake pool</span>
+              <span className='text-text-sm'>Delegated to a stake pool</span>
             </label>
             <label className='flex items-center gap-1'>
               <input
@@ -197,7 +197,7 @@ export const AccountTopStakingTab: FC = () => {
                   changeDraftFilter("pool_only", +e.currentTarget.value)
                 }
               />
-              <span className='text-sm'>Not delegated to a stake pool</span>
+              <span className='text-text-sm'>Not delegated to a stake pool</span>
             </label>
           </div>
         ),
@@ -254,7 +254,7 @@ export const AccountTopStakingTab: FC = () => {
                   changeDraftFilter("drep_only", +e.currentTarget.value)
                 }
               />
-              <span className='text-sm'>Delegated to a DRep</span>
+              <span className='text-text-sm'>Delegated to a DRep</span>
             </label>
             <label className='flex items-center gap-1'>
               <input
@@ -267,7 +267,7 @@ export const AccountTopStakingTab: FC = () => {
                   changeDraftFilter("drep_only", +e.currentTarget.value)
                 }
               />
-              <span className='text-sm'>Not delegated to a DRep</span>
+              <span className='text-text-sm'>Not delegated to a DRep</span>
             </label>
           </div>
         ),
@@ -324,7 +324,7 @@ export const AccountTopStakingTab: FC = () => {
               value && (
                 <div
                   key={key}
-                  className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
+                  className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
                 >
                   {key === "pool_only" && <span>Pool delegation:</span>}
                   <span>

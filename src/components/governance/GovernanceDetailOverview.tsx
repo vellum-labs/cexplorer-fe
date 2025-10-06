@@ -364,7 +364,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
 
       return {
         label: (
-          <div className='flex items-center gap-1.5 py-1 text-sm'>
+          <div className='flex items-center gap-1.5 py-1 text-text-sm'>
             <Image
               src={generateImageUrl(ccId, "ico", "cc")}
               className='h-[18px] w-[18px] rounded-m object-cover'
@@ -402,7 +402,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       value: (
         <div className='flex items-center justify-end gap-1'>
           <AdaWithTooltip data={drepTotalStake} />
-          <span className='text-xs text-grayTextSecondary'>(100%)</span>
+          <span className='text-text-xs text-grayTextSecondary'>(100%)</span>
         </div>
       ),
     },
@@ -433,7 +433,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
           >
             <AdaWithTooltip data={drepAbstainStake} tooltip={false} />
           </Tooltip>
-          <span className='text-xs text-grayTextSecondary'>
+          <span className='text-text-xs text-grayTextSecondary'>
             ({((drepAbstainStake * 100) / drepTotalStake).toFixed(2)}%)
           </span>
         </div>
@@ -451,7 +451,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       value: (
         <div className='flex items-center justify-end gap-1'>
           <AdaWithTooltip data={drepVotingStake} />
-          <span className='text-xs text-grayTextSecondary'>
+          <span className='text-text-xs text-grayTextSecondary'>
             ({((drepVotingStake * 100) / drepTotalStake).toFixed(2)}%)
           </span>
         </div>
@@ -472,7 +472,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       value: (
         <div className='flex items-center justify-end gap-1'>
           <AdaWithTooltip data={spoTotalStake} />
-          <span className='text-xs text-grayTextSecondary'>(100%)</span>
+          <span className='text-text-xs text-grayTextSecondary'>(100%)</span>
         </div>
       ),
     },
@@ -503,7 +503,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
           >
             <AdaWithTooltip data={spoAbstainStake} tooltip={false} />
           </Tooltip>
-          <span className='text-xs text-grayTextSecondary'>
+          <span className='text-text-xs text-grayTextSecondary'>
             (
             {(spoAbstainStake * 100) / spoTotalStake < 100
               ? ((spoAbstainStake * 100) / spoTotalStake).toFixed(2)
@@ -525,7 +525,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       value: (
         <div className='flex items-center justify-end gap-1'>
           <AdaWithTooltip data={spoVotingStake} />
-          <span className='text-xs text-grayTextSecondary'>
+          <span className='text-text-xs text-grayTextSecondary'>
             (
             {(spoVotingStake * 100) / spoTotalStake < 100
               ? ((spoVotingStake * 100) / spoTotalStake).toFixed(2)
@@ -622,14 +622,14 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                           constitutionalCommitteeApproved ? (
                             <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
                               <PulseDot color='#17B26A' animate />
-                              <span className='text-xs font-medium text-[#17B26A]'>
+                              <span className='text-text-xs font-medium text-[#17B26A]'>
                                 Approved
                               </span>
                             </div>
                           ) : (
                             <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
                               <PulseDot color='#F79009' animate />
-                              <span className='text-xs font-medium text-[#B54708]'>
+                              <span className='text-text-xs font-medium text-[#B54708]'>
                                 Not approved
                               </span>
                             </div>
@@ -650,11 +650,11 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                                   size={11}
                                   className='text-grayTextPrimary'
                                 />
-                                <span className='text-xs font-medium text-grayTextPrimary'>
+                                <span className='text-text-xs font-medium text-grayTextPrimary'>
                                   Threshold:
                                 </span>
                               </div>
-                              <span className='text-xs font-medium text-grayTextPrimary'>
+                              <span className='text-text-xs font-medium text-grayTextPrimary'>
                                 {ccThreshold}%
                               </span>
                             </div>
@@ -681,7 +681,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                                   }}
                                 ></span>
                               </div>
-                              <div className='flex gap-1 text-xs font-medium text-grayTextPrimary'>
+                              <div className='flex gap-1 text-text-xs font-medium text-grayTextPrimary'>
                                 <span className=''>{howMuchVoted}%</span>
                               </div>
                             </div>
@@ -699,7 +699,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         title={
                           <div className='flex items-center gap-1'>
                             <span>DReps</span>
-                            <span className='text-sm font-regular text-grayTextPrimary'>
+                            <span className='text-text-sm font-regular text-grayTextPrimary'>
                               {query.data?.data?.total.drep.count}
                             </span>
                           </div>
@@ -708,14 +708,14 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                           dRepsApproved ? (
                             <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
                               <PulseDot color='#17B26A' animate />
-                              <span className='text-xs font-medium text-[#17B26A]'>
+                              <span className='text-text-xs font-medium text-[#17B26A]'>
                                 Approved
                               </span>
                             </div>
                           ) : (
                             <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
                               <PulseDot color='#F79009' animate />
-                              <span className='text-xs font-medium text-[#B54708]'>
+                              <span className='text-text-xs font-medium text-[#B54708]'>
                                 Not approved
                               </span>
                             </div>
@@ -763,7 +763,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         title={
                           <div className='flex items-center gap-1'>
                             <span>DReps</span>
-                            <span className='text-sm font-regular text-grayTextPrimary'>
+                            <span className='text-text-sm font-regular text-grayTextPrimary'>
                               {query.data?.data?.total.drep.count}
                             </span>
                           </div>
@@ -771,7 +771,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         showTitleDivider
                         className='h-full'
                         endContent={
-                          <div className='flex h-full items-center justify-center text-sm text-grayTextSecondary'>
+                          <div className='flex h-full items-center justify-center text-text-sm text-grayTextSecondary'>
                             DReps are not voting on this governance action
                           </div>
                         }
@@ -788,7 +788,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         title={
                           <div className='flex items-center gap-1'>
                             <span>SPOs</span>
-                            <span className='text-sm font-regular text-grayTextPrimary'>
+                            <span className='text-text-sm font-regular text-grayTextPrimary'>
                               {query.data?.data?.total.spo.count}
                             </span>
                           </div>
@@ -797,14 +797,14 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                           sPOsApproved ? (
                             <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
                               <PulseDot color='#17B26A' animate />
-                              <span className='text-xs font-medium text-[#17B26A]'>
+                              <span className='text-text-xs font-medium text-[#17B26A]'>
                                 Approved
                               </span>
                             </div>
                           ) : (
                             <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
                               <PulseDot color='#F79009' animate />
-                              <span className='text-xs font-medium text-[#B54708]'>
+                              <span className='text-text-xs font-medium text-[#B54708]'>
                                 Not approved
                               </span>
                             </div>
@@ -858,7 +858,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         title={
                           <div className='flex items-center gap-1'>
                             <span>SPOs</span>
-                            <span className='text-sm font-regular text-grayTextPrimary'>
+                            <span className='text-text-sm font-regular text-grayTextPrimary'>
                               {query.data?.data?.total.spo.count}
                             </span>
                           </div>
@@ -866,7 +866,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         showTitleDivider
                         className='h-full'
                         endContent={
-                          <div className='flex h-full items-center justify-center text-sm text-grayTextSecondary'>
+                          <div className='flex h-full items-center justify-center text-text-sm text-grayTextSecondary'>
                             SPOs are not voting on this governance action
                           </div>
                         }

@@ -169,7 +169,7 @@ const HardforkPage: FC = () => {
           {item.status === "ready" && (
             <span
               className={cn(
-                "rounded-xl border px-1 py-1/2 text-xs",
+                "rounded-xl border px-1 py-1/2 text-text-xs",
                 theme === "light" && "text-[#067647]",
               )}
               style={{
@@ -183,7 +183,7 @@ const HardforkPage: FC = () => {
           {item.status === "notStarted" && (
             <span
               className={cn(
-                "rounded-xl border px-1 py-1/2 text-xs",
+                "rounded-xl border px-1 py-1/2 text-text-xs",
                 theme === "light" && "text-[#B42318]",
               )}
               style={{
@@ -197,7 +197,7 @@ const HardforkPage: FC = () => {
           {item.status === "inProgress" && (
             <span
               className={cn(
-                "rounded-xl border px-1 py-1/2 text-xs",
+                "rounded-xl border px-1 py-1/2 text-text-xs",
                 theme === "light" && "text-[#B54708]",
               )}
               style={{
@@ -524,7 +524,7 @@ const HardforkPage: FC = () => {
       subTitle={
         <div className='flex w-full flex-col gap-1/2 text-grayTextPrimary'>
           <p>{data?.info?.description}</p>
-          <div className='flex w-full items-center gap-1/2 text-sm'>
+          <div className='flex w-full items-center gap-1/2 text-text-sm'>
             <p>Release date:</p>
             <span className='text-nowrap leading-none text-grayTextPrimary'>
               {formatDate(

@@ -33,12 +33,12 @@ export const DrepDetailAboutTab: FC<DrepDetailAboutTabProps> = ({ data }) => {
               <Link
                 to='/address/$address'
                 params={{ address: value }}
-                className='w-full break-all text-sm text-primary'
+                className='w-full break-all text-text-sm text-primary'
               >
                 {value}
               </Link>
             ) : (
-              <div className='w-full break-words text-sm'>
+              <div className='w-full break-words text-text-sm'>
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={markdownComponents(setClickedUrl)}

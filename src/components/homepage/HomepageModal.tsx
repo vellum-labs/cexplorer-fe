@@ -41,7 +41,7 @@ export const HomepageModal: FC = () => {
                 setActiveCategory(i);
               }}
             >
-              <span className='text-sm font-semibold text-inherit'>
+              <span className='text-text-sm font-semibold text-inherit'>
                 {item.title}
               </span>
             </div>

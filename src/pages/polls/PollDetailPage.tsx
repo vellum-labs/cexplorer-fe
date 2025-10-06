@@ -115,11 +115,11 @@ export const PollDetailPage = () => {
         <div className='flex w-full max-w-desktop flex-col gap-3 px-mobile pb-3 md:flex-row md:px-desktop'>
           <section className='order-2 flex flex-col gap-1 rounded-l border border-border p-2 md:order-none'>
             <h2 className='mb-1'>{pollDetail?.name}</h2>
-            <span className='text-sm font-regular text-grayTextSecondary'>
+            <span className='text-text-sm font-regular text-grayTextSecondary'>
               Description
             </span>
             <div>{parse(pollDetail?.description ?? "")}</div>
-            <div className='mt-3 flex gap-1 bg-darker p-2 text-sm text-grayTextPrimary'>
+            <div className='mt-3 flex gap-1 bg-darker p-2 text-text-sm text-grayTextPrimary'>
               <div className='flex h-7 w-7 items-center justify-center rounded-s border border-border bg-background p-1/2'>
                 <Info size={20} color={colors.darkBlue} />
               </div>
@@ -137,7 +137,7 @@ export const PollDetailPage = () => {
                 </p>
               </div>
             </div>
-            <span className='mb-1/2 mt-3 text-sm font-regular text-grayTextSecondary'>
+            <span className='mb-1/2 mt-3 text-text-sm font-regular text-grayTextSecondary'>
               Voting
             </span>
             <RadioGroup
@@ -170,7 +170,7 @@ export const PollDetailPage = () => {
               ))}
             </RadioGroup>
             {pollDetail?.vote ? (
-              <p className='text-base'>
+              <p className='text-text-md'>
                 <span className='text-greenText'>✓ Voted:</span>{" "}
                 {pollDetail.vote.option}
               </p>
@@ -188,13 +188,13 @@ export const PollDetailPage = () => {
             )}
           </section>
           <div className='flex min-w-[350px] flex-col gap-3'>
-            <section className='order-1 flex w-full flex-col gap-1/2 rounded-l border border-border p-2 text-xs md:order-none'>
+            <section className='order-1 flex w-full flex-col gap-1/2 rounded-l border border-border p-2 text-text-xs md:order-none'>
               <div className='mb-2 flex w-full items-center justify-between'>
                 <h3>Status</h3> {renderStatusBadge(pollDetail?.state)}
               </div>
-              <div className='flex justify-between text-xs'>
+              <div className='flex justify-between text-text-xs'>
                 <span className='text-grayTextPrimary'>Ends in</span>
-                <DateCell className='text-xs' time={pollDetail?.date_end} />
+                <DateCell className='text-text-xs' time={pollDetail?.date_end} />
               </div>
               <div className='h-2.5 w-full rounded-max bg-border'>
                 <div
@@ -250,7 +250,7 @@ const CustomLegend = ({
   );
 
   return (
-    <div className='mt-3 flex flex-col gap-1 text-sm text-grayTextSecondary'>
+    <div className='mt-3 flex flex-col gap-1 text-text-sm text-grayTextSecondary'>
       <div className='flex justify-between'>
         Total voters{" "}
         <span className='text-grayTextPrimary'>{totalVoteCount}</span>
@@ -264,7 +264,7 @@ const CustomLegend = ({
         return (
           <div
             key={key}
-            className='flex items-center gap-1 text-sm text-grayTextSecondary'
+            className='flex items-center gap-1 text-text-sm text-grayTextSecondary'
           >
             <div
               className={`h-3 w-3 rounded-full`}
@@ -275,7 +275,7 @@ const CustomLegend = ({
             <span className='w-[100px]'>{parse(key)}</span>{" "}
             <span className='text-grayTextPrimary'>{value.power} votes</span>
             <span>({percentage}%)</span>
-            <span className='text-xs'>{value.count} voters</span>
+            <span className='text-text-xs'>{value.count} voters</span>
           </div>
         );
       })}

@@ -229,7 +229,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       {isOpen && (
         <div
           ref={contentRef}
-          className={`absolute bg-cardBg animate-in ${horizontalPosition === "left" ? "right-0" : "left-0"} ${verticalPosition === "down" ? "top-[calc(100%+3px)]" : "bottom-[calc(100%+3px)]"} z-20 rounded-m bg-background p-1 text-sm shadow-md ${withBorder ? 'border border-border' : ''} ${poppoverClassname || ''}`}
+          className={`absolute bg-cardBg animate-in ${horizontalPosition === "left" ? "right-0" : "left-0"} ${verticalPosition === "down" ? "top-[calc(100%+3px)]" : "bottom-[calc(100%+3px)]"} z-20 rounded-m bg-background p-1 text-text-sm shadow-md ${withBorder ? 'border border-border' : ''} ${poppoverClassname || ''}`}
           style={{
             width: `${width}`,
           }}

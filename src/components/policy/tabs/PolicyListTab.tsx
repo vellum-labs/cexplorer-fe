@@ -34,7 +34,7 @@ export const PolicyListTab: FC = () => {
             <span className='font-medium text-primary'>
               {item.collection.name}
             </span>
-            <span className='text-xs text-grayTextPrimary'>
+            <span className='text-text-xs text-grayTextPrimary'>
               {formatString(item.id, "long")}
             </span>
           </div>

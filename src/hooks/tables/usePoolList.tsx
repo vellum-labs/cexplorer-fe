@@ -535,7 +535,7 @@ export const usePoolList = ({
                   changeDraftFilter("is_drep", +e.currentTarget.value)
                 }
               />
-              <span className='text-sm'>Yes</span>
+              <span className='text-text-sm'>Yes</span>
             </label>
             <label className='flex items-center gap-1'>
               <input
@@ -548,7 +548,7 @@ export const usePoolList = ({
                   changeDraftFilter("is_drep", +e.currentTarget.value)
                 }
               />
-              <span className='text-sm'>No</span>
+              <span className='text-text-sm'>No</span>
             </label>
           </div>
         ),
@@ -561,7 +561,7 @@ export const usePoolList = ({
     {
       key: "fees",
       render: item => (
-        <div className='flex flex-col text-right text-xs text-grayTextPrimary'>
+        <div className='flex flex-col text-right text-text-xs text-grayTextPrimary'>
           <span>
             {item?.pool_update?.active?.margin
               ? (item.pool_update.active.margin * 100).toFixed(2)
@@ -569,7 +569,7 @@ export const usePoolList = ({
             %
           </span>
           <AdaWithTooltip
-            triggerClassName='text-xs'
+            triggerClassName='text-text-xs'
             data={item?.pool_update?.active?.fixed_cost ?? 0}
           />
         </div>
@@ -632,7 +632,7 @@ export const usePoolList = ({
                 className='justify-end'
               />
             </div>
-            <div className='text-xs text-grayTextSecondary'>
+            <div className='text-text-xs text-grayTextSecondary'>
               ({formattedTotalBlocks})
             </div>
           </div>

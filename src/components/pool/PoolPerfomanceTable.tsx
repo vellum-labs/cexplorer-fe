@@ -137,7 +137,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
             <div className='absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2'>
               {miscConst?.epoch.no === item.epoch && <PulseDot />}
             </div>
-            <p className='cursor-pointer pl-1.5 text-sm text-primary'>
+            <p className='cursor-pointer pl-1.5 text-text-sm text-primary'>
               <Link
                 to='/epoch/$no'
                 params={{ no: String(item.epoch ?? 0) }}
@@ -178,7 +178,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
             <DateCell
               time={startTime ? startTime.toISOString() : ""}
               withoutConvert
-              className='text-xs text-grayTextPrimary'
+              className='text-text-xs text-grayTextPrimary'
             />
           </div>
         );
@@ -224,7 +224,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
                   }}
                 ></span>
               </div>
-              <span className='text-sm font-medium text-grayTextPrimary'>
+              <span className='text-text-sm font-medium text-grayTextPrimary'>
                 {!isNaN(elapsedPercentage)
                   ? elapsedPercentage > 100
                     ? 100
@@ -248,7 +248,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
             <DateCell
               time={endTime ? endTime.toISOString() : ""}
               withoutConvert
-              className='text-xs text-grayTextPrimary'
+              className='text-text-xs text-grayTextPrimary'
             />
           </div>
         );

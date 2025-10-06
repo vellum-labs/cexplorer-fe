@@ -22,13 +22,13 @@ export const HomepageOverview: FC = () => {
     {
       key: "cardano_price",
       icon: <Cardano color={colors.primary} size={25} />,
-      label: <span className='text-sm font-semibold'>Cardano price</span>,
+      label: <span className='text-text-sm font-semibold'>Cardano price</span>,
       content: <HomepageCardanoPrice miscConst={miscConst} />,
       footer: (
         <div className='flex h-[40px] items-center justify-end border-t border-border px-3'>
           <Link to='/ada-price'>
             <div className='flex items-center gap-1/2'>
-              <span className='text-sm font-semibold text-primary'>
+              <span className='text-text-sm font-semibold text-primary'>
                 Price graph
               </span>
               <ArrowRight size={15} className='text-primary' />
@@ -41,7 +41,7 @@ export const HomepageOverview: FC = () => {
       key: "epoch",
       icon: <Box className='text-primary' />,
       label: (
-        <span className='text-sm font-semibold'>
+        <span className='text-text-sm font-semibold'>
           Epoch <span className='text-primary'>{miscConst?.no}</span>
         </span>
       ),
@@ -50,7 +50,7 @@ export const HomepageOverview: FC = () => {
         <div className='flex h-[40px] items-center justify-end border-t border-border px-3'>
           <Link to='/epoch'>
             <div className='flex items-center gap-1/2'>
-              <span className='text-sm font-semibold text-primary'>
+              <span className='text-text-sm font-semibold text-primary'>
                 Epoch list
               </span>
               <ArrowRight size={15} className='text-primary' />
@@ -62,13 +62,13 @@ export const HomepageOverview: FC = () => {
     {
       key: "live_stake",
       icon: <Coins className='text-primary' />,
-      label: <span className='text-sm font-semibold'>Live stake</span>,
+      label: <span className='text-text-sm font-semibold'>Live stake</span>,
       content: <HomepageCardanoLiveStake miscConst={miscConst} />,
       footer: (
         <div className='flex h-[40px] items-center justify-end border-t border-border px-3'>
           <Link to='/analytics/pool'>
             <div className='flex items-center gap-1/2'>
-              <span className='text-sm font-semibold text-primary'>
+              <span className='text-text-sm font-semibold text-primary'>
                 Staking analytics
               </span>
               <ArrowRight size={15} className='text-primary' />
@@ -81,14 +81,14 @@ export const HomepageOverview: FC = () => {
     //   key: "cardano_native_assets",
     //   icon: <Box className='text-primary' />,
     //   label: (
-    //     <span className='text-sm font-semibold'>Cardano native assets</span>
+    //     <span className='text-text-sm font-semibold'>Cardano native assets</span>
     //   ),
     //   content: <HomepageCardanoNativeAssets />,
     //   footer: (
     //     <div className='flex h-[40px] items-center justify-end border-t border-border px-3'>
     //       <Link to='/asset'>
     //         <div className='flex items-center gap-1/2'>
-    //           <span className='text-sm font-semibold text-primary'>Assets</span>
+    //           <span className='text-text-sm font-semibold text-primary'>Assets</span>
     //           <ArrowRight size={15} className='text-primary' />
     //         </div>
     //       </Link>

@@ -49,12 +49,12 @@ const WalletOption: React.FC<Props> = ({
           height={30}
         />
       </div>
-      <span className='flex items-center text-lg font-medium'>
+      <span className='flex items-center text-text-lg font-medium'>
         {walletInfos[name]?.name.slice(0, 1).toUpperCase() +
           walletInfos[name]?.name.slice(1)}
       </span>
       {walletType === name && (
-        <span className='flex items-center text-sm font-bold text-green-500'>
+        <span className='flex items-center text-text-sm font-bold text-green-500'>
           Connected
         </span>
       )}

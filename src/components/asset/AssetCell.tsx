@@ -77,7 +77,7 @@ const AssetCell = memo((props: Props) => {
         </Link>
       )}
       <div
-        className={`block w-full ${isAdaHandle ? "" : "overflow-hidden"} text-sm text-primary`}
+        className={`block w-full ${isAdaHandle ? "" : "overflow-hidden"} text-text-sm text-primary`}
       >
         <span className='flex w-full flex-col items-start'>
           <Link
@@ -85,7 +85,7 @@ const AssetCell = memo((props: Props) => {
             params={{ fingerprint: fingerprint }}
             title={fingerprint}
             key={fingerprint}
-            className={`flex w-full items-center text-sm text-primary`}
+            className={`flex w-full items-center text-text-sm text-primary`}
           >
             {isAdaHandle && (
               <AdaHandleBadge variant='icon' className='h-2 w-2' />
@@ -116,7 +116,7 @@ const AssetCell = memo((props: Props) => {
           </Link>
           <span className='flex items-center gap-1/2'>
             {nameByRegistry || renderAssetName({ name: assetName }) ? (
-              <p className='text-xs text-grayTextPrimary'>
+              <p className='text-text-xs text-grayTextPrimary'>
                 {formatString(fingerprint, "long")}
               </p>
             ) : (
@@ -125,7 +125,7 @@ const AssetCell = memo((props: Props) => {
                 params={{ fingerprint: fingerprint }}
                 title={fingerprint}
                 key={fingerprint}
-                className='text-sm text-primary'
+                className='text-text-sm text-primary'
               >
                 {formatString(fingerprint, "long")}
               </Link>

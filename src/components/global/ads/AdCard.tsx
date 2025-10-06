@@ -48,19 +48,19 @@ const AdCard = ({ data, className }: Props) => {
       target='_blank'
       className={`z-2 relative flex h-[110px] w-full flex-col gap-1/2 rounded-l border border-border bg-cardBg px-2 py-1.5 hover:text-text ${className ? className : "shadow-md"}`}
     >
-      <p className='w-fit rounded-l border border-border px-1 text-xs font-medium'>
+      <p className='w-fit rounded-l border border-border px-1 text-text-xs font-medium'>
         {data?.type.slice(0, 1).toUpperCase() + data?.type.slice(1)}
       </p>
       <div className='flex items-center gap-1'>
         {img}
         <p
-          className={`block max-h-10 min-h-5 w-full overflow-hidden text-ellipsis whitespace-nowrap break-all ${data.text ? "text-sm" : "text-base"} font-bold hover:text-text`}
+          className={`block max-h-10 min-h-5 w-full overflow-hidden text-ellipsis whitespace-nowrap break-all ${data.text ? "text-sm" : "text-text-md"} font-bold hover:text-text`}
         >
           {data?.title}
         </p>
       </div>
 
-      <p className='block w-full overflow-hidden text-ellipsis text-xs leading-tight text-grayTextPrimary'>
+      <p className='block w-full overflow-hidden text-ellipsis text-text-xs leading-tight text-grayTextPrimary'>
         {parse(data?.text)}
       </p>
     </a>

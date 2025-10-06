@@ -142,7 +142,7 @@ export const HomepageModalWidget: FC<HomepageModalWidgetProps> = ({
           }}
         >
           <div className='flex flex-col items-start gap-1.5 p-1.5'>
-            <h3 className='text-lg font-bold'>Detail information</h3>
+            <h3 className='text-text-lg font-bold'>Detail information</h3>
             <div
               className='w-fit'
               onClick={e => {

@@ -79,11 +79,11 @@ export const GlobalSearchCell: FC<GlobalSearchCellProps> = ({
           handleSearchChange("");
         }}
       >
-        <div className='flex w-fit max-w-[390px] flex-col break-words text-sm text-primary'>
+        <div className='flex w-fit max-w-[390px] flex-col break-words text-text-sm text-primary'>
           <span className='font-semibold'>
             {formatTitle ? formatString(title, "long") : title}
           </span>
-          <span className='text-xs text-grayTextPrimary'>
+          <span className='text-text-xs text-grayTextPrimary'>
             {["page", "article"].includes(category)
               ? rest?.url
               : formatString(ident, "long")}
@@ -94,15 +94,15 @@ export const GlobalSearchCell: FC<GlobalSearchCellProps> = ({
             {typeof rest.extra.value === "string" ? (
               <DateCell
                 time={rest.extra.value as string}
-                className='text-xs'
+                className='text-text-xs'
                 tabularNums={false}
               />
             ) : (
-              <span className='text-sm text-text'>
+              <span className='text-text-sm text-text'>
                 <AdaWithTooltip data={rest.extra.value} />
               </span>
             )}
-            <span className='text-sm text-grayTextPrimary'>
+            <span className='text-text-sm text-grayTextPrimary'>
               {rest.extra.type[0].toUpperCase() + rest.extra.type.slice(1)}
             </span>
           </div>

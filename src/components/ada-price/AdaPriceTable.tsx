@@ -38,10 +38,10 @@ export const AdaPriceTable: FC = () => {
             <Cardano size={20} color={colors.text} />
           </div>
           <h3>Cardano</h3>
-          <span className='text-sm text-grayTextPrimary'>ADA Price</span>
+          <span className='text-text-sm text-grayTextPrimary'>ADA Price</span>
         </div>
         <div className='flex items-center gap-1'>
-          <span className='text-2xl font-semibold'>{price.today}</span>
+          <span className='text-display-xs font-semibold'>{price.today}</span>
           <span
             className={`ml-0.5 flex items-center rounded-max border px-1/2 py-1/4 text-[11px] font-medium ${price.percentChange < 1 && price.percentChange > -1 ? "border-yellow-500/40 bg-yellow-500/5 text-yellowText" : price.percentChange > 0 ? "border-green-500/40 bg-green-500/5 text-greenText" : "border-red-500/40 bg-red-500/5 text-redText"}`}
           >
@@ -50,12 +50,12 @@ export const AdaPriceTable: FC = () => {
           </span>
         </div>
         <div className='flex items-center gap-1/2'>
-          <span className='text-xs font-medium text-grayTextPrimary'>
+          <span className='text-text-xs font-medium text-grayTextPrimary'>
             {Math.round(price.adaToSats)}
           </span>
           <div className='flex items-center gap-1/2'>
             <img src={Bitcoin} alt='btc' className='h-[14px] w-[14px]' />
-            <span className='text-xs font-medium text-grayTextPrimary'>
+            <span className='text-text-xs font-medium text-grayTextPrimary'>
               sats
             </span>
           </div>
@@ -64,7 +64,7 @@ export const AdaPriceTable: FC = () => {
 
       <div className='flex h-[50px] flex-grow items-center border-b border-border px-3'>
         <div className='flex min-w-[160px] items-center gap-1/2'>
-          <span className='inline-block text-sm font-medium text-grayTextPrimary'>
+          <span className='inline-block text-text-sm font-medium text-grayTextPrimary'>
             Market cap
           </span>
           <Tooltip content='ADA price × circulating supply'>
@@ -74,7 +74,7 @@ export const AdaPriceTable: FC = () => {
             />
           </Tooltip>
         </div>
-        <span className='text-sm font-semibold text-grayTextPrimary'>
+        <span className='text-text-sm font-semibold text-grayTextPrimary'>
           {currencySigns[currency]}
           {miscConst?.circulating_supply
             ? formatNumber(
@@ -88,7 +88,7 @@ export const AdaPriceTable: FC = () => {
 
       <div className='flex h-[50px] flex-grow items-center border-b border-border bg-darker px-3'>
         <div className='flex min-w-[160px] items-center gap-1/2'>
-          <span className='inline-block text-sm font-medium text-grayTextPrimary'>
+          <span className='inline-block text-text-sm font-medium text-grayTextPrimary'>
             FDV
           </span>
           <Tooltip
@@ -100,7 +100,7 @@ export const AdaPriceTable: FC = () => {
             />
           </Tooltip>
         </div>
-        <span className='text-sm font-semibold text-grayTextPrimary'>
+        <span className='text-text-sm font-semibold text-grayTextPrimary'>
           {currencySigns[currency]}
           {miscConst?.circulating_supply
             ? formatNumber(Math.round(45000000 * price.todayValue))
@@ -110,7 +110,7 @@ export const AdaPriceTable: FC = () => {
 
       <div className='flex h-[50px] flex-grow items-center border-b border-border px-3'>
         <div className='flex min-w-[160px] items-center gap-1/2'>
-          <span className='inline-block text-sm font-medium text-grayTextPrimary'>
+          <span className='inline-block text-text-sm font-medium text-grayTextPrimary'>
             Circulating supply
           </span>
           <Tooltip content='ADA currently in circulation (not locked or unminted)'>
@@ -120,7 +120,7 @@ export const AdaPriceTable: FC = () => {
             />
           </Tooltip>
         </div>
-        <span className='text-sm font-semibold text-grayTextPrimary'>
+        <span className='text-text-sm font-semibold text-grayTextPrimary'>
           {miscConst?.circulating_supply
             ? `${formatNumber(Math.round(miscConst?.circulating_supply / 1e6))} (${(((miscConst?.circulating_supply / 1e6) * 100) / Number(totalSupply / 1e6)).toFixed(2)}%)`
             : "-"}
@@ -129,7 +129,7 @@ export const AdaPriceTable: FC = () => {
 
       <div className='flex h-[50px] flex-grow items-center border-b border-border bg-darker px-3'>
         <div className='flex min-w-[160px] items-center gap-1/2'>
-          <span className='inline-block text-sm font-medium text-grayTextPrimary'>
+          <span className='inline-block text-text-sm font-medium text-grayTextPrimary'>
             Total supply
           </span>
           <Tooltip
@@ -141,14 +141,14 @@ export const AdaPriceTable: FC = () => {
             />
           </Tooltip>
         </div>
-        <span className='text-sm font-semibold text-grayTextPrimary'>
+        <span className='text-text-sm font-semibold text-grayTextPrimary'>
           {formatNumber(Math.round(totalSupply / 1e6))}
         </span>
       </div>
 
       <div className='flex h-[50px] flex-grow items-center border-b px-3 lg:border-none'>
         <div className='flex min-w-[160px] items-center gap-1/2'>
-          <span className='inline-block text-sm font-medium text-grayTextPrimary'>
+          <span className='inline-block text-text-sm font-medium text-grayTextPrimary'>
             ADA staked
           </span>
           <Tooltip content='ADA delegated to stake pools (out of circulating supply)'>
@@ -158,7 +158,7 @@ export const AdaPriceTable: FC = () => {
             />
           </Tooltip>
         </div>
-        <span className='text-sm font-semibold text-grayTextPrimary'>
+        <span className='text-text-sm font-semibold text-grayTextPrimary'>
           {miscConst?.live_stake && miscConst?.circulating_supply
             ? `${formatNumber(Math.round(miscConst.live_stake / 1e6))} (${(((miscConst.live_stake / 1e6) * 100) / (miscConst.circulating_supply / 1e6)).toFixed(2)}%)`
             : "-"}

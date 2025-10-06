@@ -57,10 +57,10 @@ const DefaultErrorPage = ({ error }: { error: Error | null }) => {
           <div className='flex h-[56px] w-[56px] items-center justify-center rounded-l border border-border'>
             <CircleAlert size={26} />
           </div>
-          <h1 className='text-center text-4xl md:text-start'>
+          <h1 className='text-center text-display-md md:text-start'>
             Something went wrong...
           </h1>
-          <p className='text-center text-2xl text-grayTextPrimary md:text-start'>
+          <p className='text-center text-display-xs text-grayTextPrimary md:text-start'>
             Well, this is awkward. The page didn’t load, help us by reporting
             the problem.
           </p>
@@ -69,7 +69,7 @@ const DefaultErrorPage = ({ error }: { error: Error | null }) => {
           <h3>Error mesage</h3>
           <div className='border border-border'></div>
           <div
-            className={`rounded-lg border p-2 text-sm font-medium ${theme === "light" ? "border-[#FDA29B] bg-[#FFFBFA]" : "border-[#F97066] bg-[#FEE4E2] text-black"}`}
+            className={`rounded-lg border p-2 text-text-sm font-medium ${theme === "light" ? "border-[#FDA29B] bg-[#FFFBFA]" : "border-[#F97066] bg-[#FEE4E2] text-black"}`}
           >
             {error?.message}
           </div>
@@ -77,7 +77,7 @@ const DefaultErrorPage = ({ error }: { error: Error | null }) => {
             <div className='flex min-h-[32px] min-w-[32px] items-center justify-center gap-2 rounded-[6px] border border-border bg-cardBg'>
               <CircleAlert size={14} className='text-primary' />
             </div>
-            <span className='text-sm text-grayTextPrimary'>
+            <span className='text-text-sm text-grayTextPrimary'>
               If something isn’t working as expected, please copy your current
               status details and reach out to us on{" "}
               <a

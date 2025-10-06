@@ -46,22 +46,22 @@ export const AdminPage = () => {
         ) : (
           <div className='mt-4 flex w-full justify-center gap-2 text-primary'>
             {adminRight && (
-              <Link className='text-lg' to='/admin/pages'>
+              <Link className='text-text-lg' to='/admin/pages'>
                 Pages
               </Link>
             )}
             {articleAdmin && (
-              <Link className='text-lg' to='/admin/articles'>
+              <Link className='text-text-lg' to='/admin/articles'>
                 Articles
               </Link>
             )}
             {configAdmin && (
-              <Link className='text-lg' to='/admin/config'>
+              <Link className='text-text-lg' to='/admin/config'>
                 Config
               </Link>
             )}
             {configAdmin && (
-              <Link className='text-lg' to='/admin/groups'>
+              <Link className='text-text-lg' to='/admin/groups'>
                 Groups
               </Link>
             )}

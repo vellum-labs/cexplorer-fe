@@ -254,7 +254,7 @@ const OverviewTabItem = () => {
               <ViewportSetter nodes={nodes} />
               <button
                 onClick={() => setDisabledControls(!disabledControls)}
-                className={`absolute bottom-3 left-1/2 z-50 flex origin-center duration-150 ${disabledControls && interacted ? "border-text" : ""} -translate-x-1/2 items-center gap-1/2 rounded-max border border-border bg-background px-1.5 py-1/2 text-sm font-medium shadow`}
+                className={`absolute bottom-3 left-1/2 z-50 flex origin-center duration-150 ${disabledControls && interacted ? "border-text" : ""} -translate-x-1/2 items-center gap-1/2 rounded-max border border-border bg-background px-1.5 py-1/2 text-text-sm font-medium shadow`}
               >
                 {disabledControls ? (
                   <LucideLockOpen size={15} />
@@ -305,7 +305,7 @@ const NodeContent = ({
   type: "input" | "output";
 }) => (
   <div className='pointer-events-auto flex h-full w-full flex-col justify-start'>
-    <div className='mb-1/2 mr-1/2 max-w-fit rounded-s border border-border bg-background px-1 py-1/2 text-xs font-medium'>
+    <div className='mb-1/2 mr-1/2 max-w-fit rounded-s border border-border bg-background px-1 py-1/2 text-text-xs font-medium'>
       <AdaWithTooltip data={data.value} />
     </div>
     <AddressWithTxBadges utxo={data} isOutput={type === "output"} />

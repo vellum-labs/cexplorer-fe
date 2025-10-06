@@ -207,7 +207,7 @@ export const VotingTable: FC<VotingTableProps> = () => {
                     <div
                       role='columnheader'
                       key={`${action.id}_${i}`}
-                      className='relative box-border flex h-[60px] min-w-[200px] flex-1 shrink-0 cursor-pointer snap-start items-center justify-center border-b border-border bg-darker px-1 text-sm text-primary first:pl-4 last:pr-4'
+                      className='relative box-border flex h-[60px] min-w-[200px] flex-1 shrink-0 cursor-pointer snap-start items-center justify-center border-b border-border bg-darker px-1 text-text-sm text-primary first:pl-4 last:pr-4'
                     >
                       <Tooltip
                         content={<p className='w-[140px]'>{action.name}</p>}

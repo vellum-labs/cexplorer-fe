@@ -49,12 +49,12 @@ export const AnalyticsPage = () => {
               {options[key].labelHref ? (
                 <Link
                   to={options[key].labelHref}
-                  className='border-b border-border pb-1 text-lg text-primary underline'
+                  className='border-b border-border pb-1 text-text-lg text-primary underline'
                 >
                   {options[key].label}
                 </Link>
               ) : (
-                <p className='border-b border-border pb-1 text-lg text-text'>
+                <p className='border-b border-border pb-1 text-text-lg text-text'>
                   {options[key].label}
                 </p>
               )}
@@ -62,7 +62,7 @@ export const AnalyticsPage = () => {
                 {options[key].options.map(option => (
                   <Link
                     to={generateUrlWithParams(option.href, option.params)}
-                    className='text-sm text-primary underline'
+                    className='text-text-sm text-primary underline'
                   >
                     {option.label}
                   </Link>

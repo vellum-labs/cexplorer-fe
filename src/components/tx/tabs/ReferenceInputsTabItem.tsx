@@ -17,7 +17,7 @@ const ReferenceInputsTabItem = () => {
 
   if (!inputs && !query.isLoading) {
     return (
-      <p className='w-full text-center text-sm'>No reference inputs found</p>
+      <p className='w-full text-center text-text-sm'>No reference inputs found</p>
     );
   }
 

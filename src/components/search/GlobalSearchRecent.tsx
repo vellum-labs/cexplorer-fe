@@ -30,7 +30,7 @@ export const GlobalSearchRecent: FC = () => {
       {recentSearch.length ? (
         <>
           <div className='w-full border-b py-[1px]'>
-            <span className='text-grayTextPrimary text-xs font-medium'>
+            <span className='text-grayTextPrimary text-text-xs font-medium'>
               Recently searched
             </span>
           </div>
@@ -43,7 +43,7 @@ export const GlobalSearchRecent: FC = () => {
               >
                 <div className='flex items-center gap-1/2'>
                   <History size={15} className='text-grayTextPrimary' />
-                  <span className='text-grayTextPrimary text-sm font-semibold'>
+                  <span className='text-grayTextPrimary text-text-sm font-semibold'>
                     {value.length > 35 ? formatString(value, "long") : value}
                   </span>
                 </div>
@@ -60,7 +60,7 @@ export const GlobalSearchRecent: FC = () => {
           </div>
         </>
       ) : (
-        <div className='text-grayTextPrimary py-1.5 text-sm font-medium'>
+        <div className='text-grayTextPrimary py-1.5 text-text-sm font-medium'>
           <span>You don't have recent searches</span>
         </div>
       )}

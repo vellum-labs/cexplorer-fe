@@ -62,7 +62,7 @@ const TableSettingsDropdown = ({
           </NavigationMenuTrigger>
           <NavigationMenuContent
             onPointerLeave={e => e.preventDefault()}
-            className='z-20 grid w-[150px] rounded-s border-[1px] border-border bg-background text-sm font-medium'
+            className='z-20 grid w-[150px] rounded-s border-[1px] border-border bg-background text-text-sm font-medium'
             style={customStyles}
           >
             <div>

@@ -25,10 +25,10 @@ export const EmptyState: FC<EmptyStateProps> = ({
       </div>
 
       {/* Primary text with 4px bottom margin */}
-      <h3 className="mb-1/2 text-lg font-semibold text-text">{primaryText}</h3>
+      <h3 className="mb-1/2 text-text-lg font-semibold text-text">{primaryText}</h3>
 
       {/* Secondary text */}
-      <p className="mb-3 max-w-md text-sm text-grayTextPrimary">
+      <p className="mb-3 max-w-md text-text-sm text-grayTextPrimary">
         {secondaryText}
       </p>
 

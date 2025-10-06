@@ -62,7 +62,7 @@ const DelegationModal = ({ onClose, poolQuery }: Props) => {
           ) : (
             <h3 className='mt-1 break-all text-center'>{poolId}</h3>
           )}
-          <p className='text-center text-sm'>{poolName?.description}</p>
+          <p className='text-center text-text-sm'>{poolName?.description}</p>
 
           <Button
             className='mt-5'

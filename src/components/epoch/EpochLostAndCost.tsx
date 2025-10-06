@@ -34,7 +34,7 @@ export const EpochLostAndCost: FC<EpochLostAndCostProps> = ({
   const overviewList = [
     {
       label: "Size of all blocks in epoch",
-      value: <p className='text-sm font-medium'>{sizeOfAllBlocksMB} MB</p>,
+      value: <p className='text-text-sm font-medium'>{sizeOfAllBlocksMB} MB</p>,
     },
     {
       label: "Price per MB",
@@ -42,16 +42,16 @@ export const EpochLostAndCost: FC<EpochLostAndCostProps> = ({
     },
     {
       label: "Average TX size",
-      value: <p className='text-sm font-medium'>{formatBytes(avgTXSize)}</p>,
+      value: <p className='text-text-sm font-medium'>{formatBytes(avgTXSize)}</p>,
     },
     {
       label: "Average Block Size",
-      value: <p className='text-sm font-medium'>{formatBytes(avgBlockSize)}</p>,
+      value: <p className='text-text-sm font-medium'>{formatBytes(avgBlockSize)}</p>,
     },
     {
       label: "Max Block Size",
       value: (
-        <p className='text-sm font-medium'>
+        <p className='text-text-sm font-medium'>
           {formatBytes(params.max_block_size)}
         </p>
       ),
@@ -68,7 +68,7 @@ export const EpochLostAndCost: FC<EpochLostAndCostProps> = ({
               }}
             ></span>
           </div>
-          <span className='text-sm font-medium text-grayTextPrimary'>
+          <span className='text-text-sm font-medium text-grayTextPrimary'>
             {!isNaN(loadPercentage)
               ? loadPercentage > 100
                 ? 100

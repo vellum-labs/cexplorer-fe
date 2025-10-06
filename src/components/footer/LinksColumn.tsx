@@ -15,7 +15,7 @@ const LinksColumn = ({ header, links }: Props) => {
           to={link.href}
           key={index}
           target={link.target}
-          className='text-sm font-medium'
+          className='text-text-sm font-medium'
         >
           {link.label}
         </Link>

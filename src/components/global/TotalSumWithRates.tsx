@@ -20,7 +20,7 @@ export const TotalSumWithRates: FC<
   if (sum.includes(NaN)) return null;
 
   return (
-    <div className='flex flex-wrap items-center gap-1/2 text-sm'>
+    <div className='flex flex-wrap items-center gap-1/2 text-text-sm'>
       <span className='text-nowrap font-medium leading-none text-text'>
         <AdaWithTooltip data={ada} />
       </span>

@@ -52,7 +52,7 @@ export const GovVoterCell: FC<GovVoterCellProps> = ({ role, info }) => {
         height={32}
         width={32}
       />
-      <div className='flex w-[calc(100%-40px)] flex-col text-sm'>
+      <div className='flex w-[calc(100%-40px)] flex-col text-text-sm'>
         {displayName && toPath && (
           <Link to={toPath} className='w-fit text-primary'>
             {displayName.length > 50
@@ -66,8 +66,8 @@ export const GovVoterCell: FC<GovVoterCellProps> = ({ role, info }) => {
               to={toPath}
               className={
                 displayName
-                  ? "text-xs hover:text-grayTextPrimary"
-                  : "text-sm text-primary"
+                  ? "text-text-xs hover:text-grayTextPrimary"
+                  : "text-text-sm text-primary"
               }
               disabled={!!displayName}
             >

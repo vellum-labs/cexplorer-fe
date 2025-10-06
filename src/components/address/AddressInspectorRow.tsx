@@ -30,14 +30,14 @@ export const AddressInspectorRow: FC<AddressInspectorRowProps> = ({
         <div
           className={`flex h-full w-full ${titleStart ? "items-start py-1.5" : "items-center"} gap-1/2 px-1.5 sm:px-6`}
         >
-          <span className='text-sm font-medium text-grayTextPrimary'>
+          <span className='text-text-sm font-medium text-grayTextPrimary'>
             {" "}
             {title}
           </span>
         </div>
       </div>
       <div
-        className={`flex w-full items-center text-sm font-medium sm:min-w-[140px] sm:flex-1 ${darker ? "bg-darker" : ""} overflow-hidden`}
+        className={`flex w-full items-center text-text-sm font-medium sm:min-w-[140px] sm:flex-1 ${darker ? "bg-darker" : ""} overflow-hidden`}
         style={{
           minHeight: "64px",
         }}

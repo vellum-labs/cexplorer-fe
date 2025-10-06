@@ -55,7 +55,7 @@ export const CCMembersTab: FC = () => {
               width={32}
               fallbackletters={fallbackletters}
             />
-            <div className='flex w-[calc(100%-40px)] flex-col text-sm'>
+            <div className='flex w-[calc(100%-40px)] flex-col text-text-sm'>
               {name && name !== "Unknown" && toPath && (
                 <Link to={toPath} className='w-fit text-primary'>
                   {name.length > 50 ? `${name.slice(0, 50)}...` : name}
@@ -67,8 +67,8 @@ export const CCMembersTab: FC = () => {
                     to={toPath}
                     className={
                       name && name !== "Unknown"
-                        ? "text-xs hover:text-grayTextPrimary"
-                        : "text-sm text-primary"
+                        ? "text-text-xs hover:text-grayTextPrimary"
+                        : "text-text-sm text-primary"
                     }
                     disabled={!!(name && name !== "Unknown")}
                   >
@@ -97,7 +97,7 @@ export const CCMembersTab: FC = () => {
         const time = item.registration?.time;
 
         return (
-          <div className='flex flex-col text-sm'>
+          <div className='flex flex-col text-text-sm'>
             {hash !== "N/A" ? (
               <div className='flex gap-1'>
                 <Link

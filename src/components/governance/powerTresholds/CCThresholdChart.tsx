@@ -131,7 +131,7 @@ export const CCThresholdChart: FC<CCThresholdChartProps> = ({ chartProps }) => {
           style={{ height: "100%", width: "100%" }}
         />
       </div>
-      <p className='text-sm text-text'>
+      <p className='text-text-sm text-text'>
         Threshold:{" "}
         {visibility
           ? `${Math.round(

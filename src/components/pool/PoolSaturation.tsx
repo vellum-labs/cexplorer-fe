@@ -41,7 +41,7 @@ const PoolSaturation = ({ live_stake, className }: Props) => {
           }}
         ></span>
       </div>
-      <span className='w-11 text-right text-xs font-medium'>
+      <span className='w-11 text-right text-text-xs font-medium'>
         {String(fixedPoolCapUsed).length < 10 && fixedPoolCapUsed}%
       </span>
     </div>

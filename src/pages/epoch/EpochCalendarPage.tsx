@@ -100,7 +100,7 @@ export const EpochCalendarPage = () => {
       metadataTitle='epochCalendar'
     >
       <div className='flex w-full max-w-desktop flex-wrap items-center justify-between gap-2 px-mobile md:px-desktop'>
-        <div className='flex items-center gap-1 text-sm text-grayTextPrimary'>
+        <div className='flex items-center gap-1 text-text-sm text-grayTextPrimary'>
           Show upcoming:{" "}
           <SortBy
             selectItems={upcomingEpochsItems}
@@ -167,13 +167,13 @@ const EpochCard = ({ epoch }: { epoch: EpochListData }) => {
         )}
         <h3 className=''>Epoch {epoch.no}</h3>
       </div>
-      <span className='flex justify-between text-xs text-grayTextSecondary'>
+      <span className='flex justify-between text-text-xs text-grayTextSecondary'>
         <p className='w-10'>Start</p>
         <span className='ml-1 text-grayTextPrimary'>
           {formatDate(epoch.start_time)}
         </span>
       </span>
-      <span className='flex justify-between text-xs text-grayTextSecondary'>
+      <span className='flex justify-between text-text-xs text-grayTextSecondary'>
         <p className='w-10'>End</p>
         <span className='ml-1 text-grayTextPrimary'>
           {formatDate(epoch.end_time)}
@@ -182,14 +182,14 @@ const EpochCard = ({ epoch }: { epoch: EpochListData }) => {
       <div className='mt-1 flex justify-end border-t border-border pt-1'>
         {currentEpoch >= epoch.no ? (
           <Link
-            className='text-right text-sm font-medium text-primary'
+            className='text-right text-text-sm font-medium text-primary'
             to='/epoch/$no'
             params={{ no: String(epoch.no) }}
           >
             Epoch detail
           </Link>
         ) : (
-          <span className='text-sm font-medium text-grayTextPrimary'>
+          <span className='text-text-sm font-medium text-grayTextPrimary'>
             Upcoming
           </span>
         )}

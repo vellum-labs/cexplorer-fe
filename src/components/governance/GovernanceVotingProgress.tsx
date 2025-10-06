@@ -111,7 +111,7 @@ export const GovernanceVotingProgress: FC<GovernanceVotingProgressProps> = ({
 
   if (progressBars.length === 0) {
     return (
-      <div className='flex h-full items-center justify-center text-xs text-grayTextSecondary'>
+      <div className='flex h-full items-center justify-center text-text-xs text-grayTextSecondary'>
         No voting data
       </div>
     );
@@ -121,7 +121,7 @@ export const GovernanceVotingProgress: FC<GovernanceVotingProgressProps> = ({
     <div className='flex flex-col gap-0 py-1/2'>
       {progressBars.map((bar, index) => (
         <div key={index} className='flex items-center gap-1'>
-          <span className='min-w-[32px] text-xs text-grayTextPrimary'>
+          <span className='min-w-[32px] text-text-xs text-grayTextPrimary'>
             {bar.type}
           </span>
           <div className='relative h-1.5 w-16 overflow-hidden rounded-[3px] bg-border'>
@@ -139,7 +139,7 @@ export const GovernanceVotingProgress: FC<GovernanceVotingProgressProps> = ({
               }}
             />
           </div>
-          <span className='min-w-[35px] text-right text-xs text-grayTextPrimary'>
+          <span className='min-w-[35px] text-right text-text-xs text-grayTextPrimary'>
             {bar.yesPercent.toFixed(1)}%
           </span>
         </div>

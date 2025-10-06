@@ -59,22 +59,22 @@ export const MinMaxRange: FC<MinMaxRangeProps> = ({
       case "xs":
         return {
           bar: "h-1 w-8",
-          text: "text-xs",
+          text: "text-text-xs",
         };
       case "sm":
         return {
           bar: "h-2 w-12",
-          text: "text-sm",
+          text: "text-text-sm",
         };
       case "md":
         return {
           bar: "h-2 w-16",
-          text: "text-sm",
+          text: "text-text-sm",
         };
       default:
         return {
           bar: "h-2 w-12",
-          text: "text-sm",
+          text: "text-text-sm",
         };
     }
   };

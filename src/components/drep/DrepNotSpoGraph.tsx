@@ -168,7 +168,7 @@ export const DrepNotSpoGraph: FC = () => {
           <Switch active={showFiltered} onChange={handleSwitchChange} />
           <label
             htmlFor='filter-toggle'
-            className='text-muted-foreground text-sm'
+            className='text-muted-foreground text-text-sm'
           >
             Show Filtered
           </label>

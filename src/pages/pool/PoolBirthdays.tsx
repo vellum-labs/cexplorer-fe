@@ -102,7 +102,7 @@ export const PoolBirthdays: FC = () => {
                 boxShadow: "0px 1px 2px 0px #1018280D",
               }}
             >
-              <span className='text-sm font-medium'>{birthday?.year}</span>
+              <span className='text-text-sm font-medium'>{birthday?.year}</span>
               <sup className='pt-[4px] font-medium'>{birthday?.suffix}</sup>
             </div>
           </div>
@@ -127,8 +127,8 @@ export const PoolBirthdays: FC = () => {
 
         return (
           <div className='flex flex-col items-end'>
-            <span className='text-sm'>{formattedDate}</span>
-            <span className='text-sm'>{formattedTime}</span>
+            <span className='text-text-sm'>{formattedDate}</span>
+            <span className='text-text-sm'>{formattedTime}</span>
           </div>
         );
       },

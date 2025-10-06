@@ -30,7 +30,7 @@ export const UserBadge = ({ isLoading, user, address }: Props) => {
                       <Edit size={15} />
                     </Link>
                   )}
-                  <span className='text-grayTextPrimary text-xs'>
+                  <span className='text-grayTextPrimary text-text-xs'>
                     User profile ({user?.profile ? "Public" : "Hidden"})
                   </span>
                   <div className='flex gap-1'>

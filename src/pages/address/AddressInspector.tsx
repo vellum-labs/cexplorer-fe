@@ -124,7 +124,7 @@ export const AddressInspector: FC = () => {
         return (
           <div className='flex flex-col gap-1/2'>
             <span className='font-medium'>{addressTypeInfo.type}</span>
-            <span className='text-sm text-grayTextPrimary'>
+            <span className='text-text-sm text-grayTextPrimary'>
               {addressTypeInfo.network}
             </span>
           </div>
@@ -295,7 +295,7 @@ export const AddressInspector: FC = () => {
                     }}
                     className='flex items-center gap-1/2'
                   >
-                    <span className='text-sm font-semibold text-primary'>
+                    <span className='text-text-sm font-semibold text-primary'>
                       Stake detail
                     </span>
                     <ArrowRight className='text-primary' size={15} />
@@ -310,7 +310,7 @@ export const AddressInspector: FC = () => {
                     }}
                     className='flex items-center gap-1/2'
                   >
-                    <span className='text-sm font-semibold text-primary'>
+                    <span className='text-text-sm font-semibold text-primary'>
                       Address detail
                     </span>
                     <ArrowRight className='text-primary' size={15} />
