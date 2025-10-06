@@ -175,7 +175,7 @@ export const CustomLabels = () => {
           </Tooltip>
         </div>
         <section
-          className={`thin-scrollbar relative w-full max-w-desktop overflow-x-auto rounded-xl border border-border xl:overflow-visible [&>div]:w-full`}
+          className={`thin-scrollbar relative w-full max-w-desktop overflow-x-auto rounded-l border border-border xl:overflow-visible [&>div]:w-full`}
           style={{
             transform: "rotateX(180deg)",
           }}
@@ -206,7 +206,7 @@ export const CustomLabels = () => {
                   className={`${index % 2 !== 0 ? "bg-darker" : ""} group duration-150`}
                 >
                   <TableCell
-                    className={`${index === currentLabels.length - 1 ? "rounded-bl-xl" : ""} table-cell w-[35%] min-w-[230px] py-1 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover`}
+                    className={`${index === currentLabels.length - 1 ? "rounded-bl-l" : ""} table-cell w-[35%] min-w-[230px] py-1 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover`}
                   >
                     <Link
                       to={
@@ -226,7 +226,7 @@ export const CustomLabels = () => {
                     {label}
                   </TableCell>
                   <TableCell
-                    className={`${index === currentLabels.length - 1 ? "rounded-br-xl" : ""} flex items-center justify-end gap-1 duration-200 group-hover:bg-tableHover`}
+                    className={`${index === currentLabels.length - 1 ? "rounded-br-l" : ""} flex items-center justify-end gap-1 duration-200 group-hover:bg-tableHover`}
                   >
                     <button
                       onClick={() => {
@@ -244,14 +244,14 @@ export const CustomLabels = () => {
         </section>
         <div className='ml-auto mt-4 flex h-7 items-center gap-2 text-xs [&>button]:h-full'>
           <button
-            className='rounded-lg border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'
+            className='rounded-m border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'
             onClick={handleFirstPage}
             disabled={currentPage === 1}
           >
             First
           </button>
           <button
-            className='rounded-lg border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'
+            className='rounded-m border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'
             onClick={handlePrevPage}
             disabled={currentPage === 1}
           >
@@ -261,14 +261,14 @@ export const CustomLabels = () => {
             Page {currentPage} of {totalPages}
           </span>
           <button
-            className='rounded-lg border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'
+            className='rounded-m border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
           >
             <ChevronRight size={15} />
           </button>
           <button
-            className='rounded-lg border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'
+            className='rounded-m border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'
             onClick={handleLastPage}
             disabled={currentPage === totalPages}
           >

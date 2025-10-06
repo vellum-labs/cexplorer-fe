@@ -367,7 +367,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
           <div className='flex items-center gap-1.5 py-1 text-sm'>
             <Image
               src={generateImageUrl(ccId, "ico", "cc")}
-              className='h-[18px] w-[18px] rounded-lg object-cover'
+              className='h-[18px] w-[18px] rounded-m object-cover'
               alt={name}
               height={18}
               width={18}
@@ -620,14 +620,14 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         title='Constitutional committee'
                         subTitle={
                           constitutionalCommitteeApproved ? (
-                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-2xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
+                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
                               <PulseDot color='#17B26A' animate />
                               <span className='text-xs font-medium text-[#17B26A]'>
                                 Approved
                               </span>
                             </div>
                           ) : (
-                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-2xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
+                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
                               <PulseDot color='#F79009' animate />
                               <span className='text-xs font-medium text-[#B54708]'>
                                 Not approved
@@ -706,14 +706,14 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         }
                         subTitle={
                           dRepsApproved ? (
-                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-2xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
+                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
                               <PulseDot color='#17B26A' animate />
                               <span className='text-xs font-medium text-[#17B26A]'>
                                 Approved
                               </span>
                             </div>
                           ) : (
-                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-2xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
+                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
                               <PulseDot color='#F79009' animate />
                               <span className='text-xs font-medium text-[#B54708]'>
                                 Not approved
@@ -795,14 +795,14 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         }
                         subTitle={
                           sPOsApproved ? (
-                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-2xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
+                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
                               <PulseDot color='#17B26A' animate />
                               <span className='text-xs font-medium text-[#17B26A]'>
                                 Approved
                               </span>
                             </div>
                           ) : (
-                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-2xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
+                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
                               <PulseDot color='#F79009' animate />
                               <span className='text-xs font-medium text-[#B54708]'>
                                 Not approved

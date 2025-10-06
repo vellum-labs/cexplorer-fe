@@ -50,7 +50,7 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
 }) => {
   return (
     <div
-      className={`min-h-[227px] w-full flex-1 grow basis-[450px] rounded-xl border border-border bg-cardBg px-2 py-2 shadow lg:basis-[400px] ${className}`}
+      className={`min-h-[227px] w-full flex-1 grow basis-[450px] rounded-l border border-border bg-cardBg px-2 py-2 shadow lg:basis-[400px] ${className}`}
     >
       <div
         className={`flex w-full justify-between ${

@@ -324,7 +324,7 @@ export const AccountTopStakingTab: FC = () => {
               value && (
                 <div
                   key={key}
-                  className='mb-1 flex w-fit items-center gap-1/2 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
+                  className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
                 >
                   {key === "pool_only" && <span>Pool delegation:</span>}
                   <span>

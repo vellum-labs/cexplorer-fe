@@ -205,7 +205,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
               ]}
             >
               <div
-                className={`flex w-fit cursor-pointer items-center gap-1/2 rounded-md border ${theme === "light" ? "border-[#E4E7EC]" : "border-gray-600"} p-1`}
+                className={`flex w-fit cursor-pointer items-center gap-1/2 rounded-s border ${theme === "light" ? "border-[#E4E7EC]" : "border-gray-600"} p-1`}
               >
                 {data[0]?.vote?.drep?.data?.given_name ? (
                   <Link

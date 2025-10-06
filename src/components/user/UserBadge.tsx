@@ -38,7 +38,7 @@ export const UserBadge = ({ isLoading, user, address }: Props) => {
                       src={user?.profile?.picture}
                       height={50}
                       width={50}
-                      className='h-[50px] w-[50px] rounded-full'
+                      className='h-[50px] w-[50px] rounded-max'
                     />
                     <div className='flex flex-col gap-1 text-[16px] font-medium'>
                       <span className='flex items-center gap-1'>
@@ -75,7 +75,7 @@ export const UserBadge = ({ isLoading, user, address }: Props) => {
                     src={user?.profile?.picture}
                     height={20}
                     width={20}
-                    className='h-5 w-5 rounded-full'
+                    className='h-5 w-5 rounded-max'
                   />
                 </span>
                 {user?.profile?.name}

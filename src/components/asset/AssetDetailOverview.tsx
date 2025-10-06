@@ -53,7 +53,7 @@ export const AssetDetailOverview: FC<AssetDetailOverviewProps> = ({
                   "md",
                   type === "nft" ? "nft" : "token",
                 )}
-                className='aspect-square rounded-lg'
+                className='aspect-square rounded-m'
                 fallbackletters={[...encodedNameArr]
                   .filter(char =>
                     alphabetWithNumbers.includes(char.toLowerCase()),

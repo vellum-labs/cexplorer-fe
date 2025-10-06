@@ -97,7 +97,7 @@ export const PoolBirthdays: FC = () => {
         return (
           <div className='flex justify-end'>
             <div
-              className='flex w-fit items-center justify-center gap-[0.5px] rounded-md border border-border px-1 py-[2px]'
+              className='flex w-fit items-center justify-center gap-[0.5px] rounded-s border border-border px-1 py-[2px]'
               style={{
                 boxShadow: "0px 1px 2px 0px #1018280D",
               }}

@@ -53,7 +53,7 @@ export const FunnelFilter = ({
 
   return createPortal(
     <div
-      className='absolute z-50 rounded-lg border border-border bg-background'
+      className='absolute z-50 rounded-m border border-border bg-background'
       style={{
         bottom: window.innerHeight - position.top,
         left: position.left,

@@ -116,7 +116,7 @@ const EpochDetailPage: FC = () => {
     >
       {futureStartTime && futureEndTime ? (
         <div className='flex min-h-[70vh] w-full items-center justify-center'>
-          <div className='flex w-full max-w-desktop flex-col items-center justify-center rounded-lg p-2 text-center'>
+          <div className='flex w-full max-w-desktop flex-col items-center justify-center rounded-m p-2 text-center'>
             <p className='text-sm'>
               Epoch <strong>{requestedEpoch}</strong> hasn’t started yet. It
               will start on <strong>{futureStartTime}</strong> and end on{" "}

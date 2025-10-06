@@ -187,7 +187,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
             : role;
 
         return (
-          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1/2 rounded-lg border border-border px-[6px]'>
+          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1/2 rounded-m border border-border px-[6px]'>
             {role === GovernanceRole.DRep && <User size={12} className='text-primary' />}
             {role === GovernanceRole.ConstitutionalCommittee && <Landmark size={12} className='text-primary' />}
             {role === GovernanceRole.SPO && <Route size={12} className='text-primary' />}
@@ -213,7 +213,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
               type='user'
               height={20}
               width={20}
-              className='rounded-full'
+              className='rounded-max'
             />
           )}
           {vote?.voter_role && vote?.info?.id ? (
@@ -367,7 +367,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
 
   return (
     <>
-      <div className='w-full rounded-xl border border-border px-3 py-2'>
+      <div className='w-full rounded-l border border-border px-3 py-2'>
         <h2 className='text-base font-semibold'>Overview</h2>
         <div className='flex flex-col gap-2 pt-2'>
           {detailItems.map(({ key, title, value, divider }) => (

@@ -64,7 +64,7 @@ export const NetworkBlockVersionsTab: FC = () => {
           }
           description={
             <div className='flex gap-1'>
-              <div className='flex h-[40px] w-fit flex-grow cursor-pointer items-center justify-center gap-1/2 rounded-md border border-border px-1.5'>
+              <div className='flex h-[40px] w-fit flex-grow cursor-pointer items-center justify-center gap-1/2 rounded-s border border-border px-1.5'>
                 <span className='text-xs font-medium text-text sm:text-sm'>
                   Hardfork status
                 </span>

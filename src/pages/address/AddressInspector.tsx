@@ -319,7 +319,7 @@ export const AddressInspector: FC = () => {
               ))}
             {!!debouncedAddressSearch.trim() && (
               <div
-                className='thin-scrollbar relative w-full overflow-auto overflow-x-auto rounded-lg border border-border'
+                className='thin-scrollbar relative w-full overflow-auto overflow-x-auto rounded-m border border-border'
                 style={{
                   transform: "rotateX(180deg)",
                 }}

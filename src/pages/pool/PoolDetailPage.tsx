@@ -108,7 +108,7 @@ const PoolDetailPage = () => {
               type='pool'
               height={35}
               width={35}
-              className='flex-shrink-0 rounded-full'
+              className='flex-shrink-0 rounded-max'
             />
           )}
           <span className='flex-1 break-all'>

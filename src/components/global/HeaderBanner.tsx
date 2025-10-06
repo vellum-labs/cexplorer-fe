@@ -126,7 +126,7 @@ export const HeaderBanner = ({
                   ></p>
                   <Link
                     to='/ads'
-                    className='ml-1/2 flex -translate-y-1 items-center justify-center rounded-full border border-border bg-background px-[6px] text-[10px] font-medium'
+                    className='ml-1/2 flex -translate-y-1 items-center justify-center rounded-max border border-border bg-background px-[6px] text-[10px] font-medium'
                   >
                     Ad
                   </Link>

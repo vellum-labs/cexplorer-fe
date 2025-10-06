@@ -48,7 +48,7 @@ export const GovVoterCell: FC<GovVoterCellProps> = ({ role, info }) => {
       <Image
         src={imageUrl}
         type='user'
-        className='h-8 w-8 rounded-full'
+        className='h-8 w-8 rounded-max'
         height={32}
         width={32}
       />

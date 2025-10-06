@@ -76,7 +76,7 @@ const WalletDropdown = ({
 
   return (
     <div
-      className='absolute bottom-[calc(100%+3px)] right-0 z-30 w-[280px] rounded-lg border border-border bg-cardBg p-0 text-sm font-medium shadow md:bottom-auto md:top-[calc(100%+3px)] md:w-[320px]'
+      className='absolute bottom-[calc(100%+3px)] right-0 z-30 w-[280px] rounded-m border border-border bg-cardBg p-0 text-sm font-medium shadow md:bottom-auto md:top-[calc(100%+3px)] md:w-[320px]'
       style={{
         visibility: isLoading || !isOpen ? "hidden" : "visible",
       }}
@@ -86,12 +86,12 @@ const WalletDropdown = ({
           <div className='flex items-center gap-1'>
             <div className='relative'>
               <img
-                className='h-10 w-10 rounded-full'
+                className='h-10 w-10 rounded-max'
                 src={profilePicture || "https://ix.cexplorer.io/default.png"}
                 alt='User avatar'
               />
               <img
-                className='absolute -bottom-1 -right-1 h-5 w-5 rounded-full border border-white bg-white'
+                className='absolute -bottom-1 -right-1 h-5 w-5 rounded-max border border-white bg-white'
                 src={walletInfos[walletType]?.icon || ""}
                 alt='Wallet icon'
               />
@@ -114,7 +114,7 @@ const WalletDropdown = ({
           </div>
           <div className='flex flex-col items-end gap-1/2'>
             {hasMembership ? (
-              <span className='flex w-fit items-center gap-1/2 rounded-full bg-gradient-to-r from-darkBlue to-purple-700 px-1 py-1/4 text-right text-xs font-medium text-white'>
+              <span className='flex w-fit items-center gap-1/2 rounded-max bg-gradient-to-r from-darkBlue to-purple-700 px-1 py-1/4 text-right text-xs font-medium text-white'>
                 PRO
               </span>
             ) : (
@@ -130,7 +130,7 @@ const WalletDropdown = ({
       </div>
 
       <div className='border-b border-border p-1.5'>
-        <div className='space-y-2 rounded-lg border border-border bg-gradient-to-r from-cardBg to-background px-1.5 py-1.5'>
+        <div className='space-y-2 rounded-m border border-border bg-gradient-to-r from-cardBg to-background px-1.5 py-1.5'>
           {adaHandle && (
             <div className='flex items-center justify-between'>
               <span className='text-xs font-medium text-text'>ADA Handle</span>
@@ -165,7 +165,7 @@ const WalletDropdown = ({
                   <img
                     src={generateImageUrl(livePool.id, "sm", "pool")}
                     alt='Pool icon'
-                    className='h-4 w-4 rounded-full'
+                    className='h-4 w-4 rounded-max'
                   />
                   <span className='text-sm font-medium text-primary'>
                     {livePool.meta?.ticker ||
@@ -206,7 +206,7 @@ const WalletDropdown = ({
                       <img
                         src={generateImageUrl(drep.id, "sm", "drep")}
                         alt='DRep icon'
-                        className='h-4 w-4 rounded-full'
+                        className='h-4 w-4 rounded-max'
                       />
                       <span className='max-w-[120px] truncate text-sm font-medium text-primary'>
                         {drep.meta?.given_name ||
@@ -231,7 +231,7 @@ const WalletDropdown = ({
       <div className='border-b border-border p-1'>
         <Link
           to='/watchlist'
-          className='relative rounded-lg text-sm hover:bg-darker hover:text-primary'
+          className='relative rounded-m text-sm hover:bg-darker hover:text-primary'
           style={{
             display: "block",
             padding: "10px",
@@ -247,7 +247,7 @@ const WalletDropdown = ({
         <Link
           to='/profile'
           search={{ tab: "pro" }}
-          className='relative rounded-lg text-sm hover:bg-darker hover:text-primary'
+          className='relative rounded-m text-sm hover:bg-darker hover:text-primary'
           style={{
             display: "block",
             padding: "10px",
@@ -265,7 +265,7 @@ const WalletDropdown = ({
 
         <Link
           to='/profile'
-          className='relative rounded-lg text-sm hover:bg-darker hover:text-primary'
+          className='relative rounded-m text-sm hover:bg-darker hover:text-primary'
           style={{
             display: "block",
             padding: "10px",
@@ -281,7 +281,7 @@ const WalletDropdown = ({
         {hasAdmin && (
           <Link
             to='/admin'
-            className='relative rounded-lg text-sm hover:bg-darker hover:text-primary'
+            className='relative rounded-m text-sm hover:bg-darker hover:text-primary'
             style={{
               display: "block",
               padding: "10px",
@@ -298,7 +298,7 @@ const WalletDropdown = ({
 
       <div className='border-b border-border p-1'>
         <button
-          className='relative w-full rounded-lg text-sm hover:bg-darker hover:text-primary'
+          className='relative w-full rounded-m text-sm hover:bg-darker hover:text-primary'
           style={{
             display: "block",
             padding: "10px",
@@ -313,7 +313,7 @@ const WalletDropdown = ({
         </button>
 
         <button
-          className='relative w-full rounded-lg text-sm text-red-500 hover:bg-darker'
+          className='relative w-full rounded-m text-sm text-red-500 hover:bg-darker'
           style={{
             display: "block",
             padding: "10px",

@@ -144,7 +144,7 @@ const HardforkPage: FC = () => {
           <img
             src={item.logo}
             alt='Logo'
-            className='rounded-full'
+            className='rounded-max'
             width={24}
             height={24}
           />
@@ -169,7 +169,7 @@ const HardforkPage: FC = () => {
           {item.status === "ready" && (
             <span
               className={cn(
-                "rounded-2xl border px-1 py-1/2 text-xs",
+                "rounded-xl border px-1 py-1/2 text-xs",
                 theme === "light" && "text-[#067647]",
               )}
               style={{
@@ -183,7 +183,7 @@ const HardforkPage: FC = () => {
           {item.status === "notStarted" && (
             <span
               className={cn(
-                "rounded-2xl border px-1 py-1/2 text-xs",
+                "rounded-xl border px-1 py-1/2 text-xs",
                 theme === "light" && "text-[#B42318]",
               )}
               style={{
@@ -197,7 +197,7 @@ const HardforkPage: FC = () => {
           {item.status === "inProgress" && (
             <span
               className={cn(
-                "rounded-2xl border px-1 py-1/2 text-xs",
+                "rounded-xl border px-1 py-1/2 text-xs",
                 theme === "light" && "text-[#B54708]",
               )}
               style={{
@@ -538,7 +538,7 @@ const HardforkPage: FC = () => {
       <section className='flex min-h-[450px] w-full justify-center'>
         <div className='flex w-full max-w-desktop flex-wrap justify-between gap-3 p-mobile md:px-desktop md:py-mobile'>
           <div className='flex w-full grow basis-[420px] flex-wrap gap-3 lg:flex-nowrap'>
-            <div className='w-full rounded-lg border border-border'>
+            <div className='w-full rounded-m border border-border'>
               {data?.detail?.exchanges ? (
                 <Tabs items={exhcangeTabItems} tabParam='exchange' toRight />
               ) : (
@@ -550,7 +550,7 @@ const HardforkPage: FC = () => {
                 </div>
               )}
             </div>
-            <div className='w-full rounded-lg border border-border'>
+            <div className='w-full rounded-m border border-border'>
               <Tabs items={blockTabItems} tabParam='block' toRight />
             </div>
           </div>

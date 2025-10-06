@@ -40,7 +40,7 @@ export const PowerThresholdsDRepDelegationDonutGraph: FC<
 
   if (isUnavailable) {
     return (
-      <div className='bg-muted/30 flex h-[300px] w-full items-center justify-center rounded-lg'>
+      <div className='bg-muted/30 flex h-[300px] w-full items-center justify-center rounded-m'>
         <span className='text-xl font-semibold text-grayTextPrimary'>N/A</span>
       </div>
     );

@@ -86,7 +86,7 @@ export const ConfigSwPage: FC = () => {
       </Breadcrumb>
       <div
         role='button'
-        className='relative rounded-lg border border-border bg-darker'
+        className='relative rounded-m border border-border bg-darker'
       >
         <textarea
           className='absolute inset-0 w-full resize-none overflow-hidden bg-transparent p-1 font-mono text-transparent caret-text outline-none'

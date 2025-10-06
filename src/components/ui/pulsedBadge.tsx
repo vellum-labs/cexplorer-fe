@@ -13,7 +13,7 @@ export const PulsedBadge: FC<PulsedBadgeProps> = ({
   withoutPulse = false,
 }) => {
   return (
-    <div className='relative flex h-[24px] w-fit items-center gap-[5px] rounded-lg border border-border px-1'>
+    <div className='relative flex h-[24px] w-fit items-center gap-[5px] rounded-m border border-border px-1'>
       {!withoutPulse && (
         <div className='flex items-center justify-center'>
           <PulseDot overrideColor={badgeColor} />

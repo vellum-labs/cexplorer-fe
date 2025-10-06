@@ -44,7 +44,7 @@ export const FeatureModal: FC<FeatureModalProps> = ({
         <p className='max-w-[320px] text-sm'>{subTitle}</p>
         <div className='flex items-center justify-between gap-1.5'>
           <button
-            className='flex h-[40px] w-full max-w-[170px] flex-1 cursor-pointer items-center justify-center rounded-md border border-border'
+            className='flex h-[40px] w-full max-w-[170px] flex-1 cursor-pointer items-center justify-center rounded-s border border-border'
             onClick={handleCancel}
           >
             {isWalletConnected ? (
@@ -57,7 +57,7 @@ export const FeatureModal: FC<FeatureModalProps> = ({
             )}
           </button>
           <button
-            className='flex h-[40px] w-full max-w-[170px] flex-1 cursor-pointer items-center justify-center gap-1 rounded-md'
+            className='flex h-[40px] w-full max-w-[170px] flex-1 cursor-pointer items-center justify-center gap-1 rounded-s'
             style={{
               background: "linear-gradient(270deg, #6A11CB 0%, #2575FC 100%)",
             }}

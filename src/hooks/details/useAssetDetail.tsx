@@ -130,7 +130,7 @@ export const useAssetDetail = ({
         <div className='flex w-full'>
           {["1d", "7d", "1M", "3M"].map((item, i, arr) => (
             <div
-              className={`h-[48px] w-[57px] border border-border ${i === 0 ? "rounded-s-lg" : ""} ${i === arr.length - 1 ? "rounded-e-lg" : ""} flex flex-col justify-center`}
+              className={`h-[48px] w-[57px] border border-border ${i === 0 ? "rounded-s-m" : ""} ${i === arr.length - 1 ? "rounded-e-m" : ""} flex flex-col justify-center`}
               key={item + "_" + i}
             >
               <p className='text-center text-xs text-grayTextPrimary'>{item}</p>

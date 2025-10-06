@@ -64,7 +64,7 @@ export const PowerThresholdsPage: FC = () => {
         <section className='flex min-h-minHeight w-full max-w-desktop flex-col gap-1 p-desktop'>
           <>
             <>
-              <div className='rounded-xl'>
+              <div className='rounded-l'>
                 <AnalyticsGraph
                   title='Delegation Distribution'
                   description='Amount of ADA delegated to stake pools and dReps.'
@@ -160,7 +160,7 @@ export const PowerThresholdsPage: FC = () => {
               </div>
             </>
 
-            <div className='rounded-xl border border-border'>
+            <div className='rounded-l border border-border'>
               <div className='flex items-center justify-between p-3'>
                 <div>
                   <h2 className='text-xl font-bold'>Governance Thresholds</h2>

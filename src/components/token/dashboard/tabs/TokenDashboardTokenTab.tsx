@@ -121,7 +121,7 @@ export const TokenDashboardTokenTab: FC = () => {
                   type='asset'
                   height={40}
                   width={40}
-                  className='aspect-square shrink-0 rounded-full'
+                  className='aspect-square shrink-0 rounded-max'
                   src={generateImageUrl(assetName, "ico", "token")}
                   fallbackletters={[...encodedNameArr]
                     .filter(char =>

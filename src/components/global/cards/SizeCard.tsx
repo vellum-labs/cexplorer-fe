@@ -18,10 +18,10 @@ export const SizeCard: FC<BlockDetailSizeProps> = ({
     size && maxSize ? ((size / maxSize) * 100).toFixed(2) : undefined;
 
   return (
-    <div className='max-h-[110px] min-h-[110px] rounded-xl border border-border bg-cardBg shadow'>
-      <div className='flex max-h-[110px] min-h-[110px] flex-col gap-1 rounded-xl px-2 py-1.5'>
+    <div className='max-h-[110px] min-h-[110px] rounded-l border border-border bg-cardBg shadow'>
+      <div className='flex max-h-[110px] min-h-[110px] flex-col gap-1 rounded-l px-2 py-1.5'>
         <div className='flex w-full items-center gap-1'>
-          <div className='rounded-lg border border-border p-1/2'>{icon}</div>
+          <div className='rounded-m border border-border p-1/2'>{icon}</div>
           <span className='text-sm text-grayTextPrimary'>{title}</span>
         </div>
         {!isNaN(Number(sizeInKB)) ? (

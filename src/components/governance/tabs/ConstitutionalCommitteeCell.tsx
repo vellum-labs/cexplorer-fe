@@ -61,14 +61,14 @@ export const ConstitutionalCommitteeNameCell: FC<
         <Image
           src={item?.data?.image_url}
           type='user'
-          className='h-8 w-8 rounded-full'
+          className='h-8 w-8 rounded-max'
           height={32}
           width={32}
           fallbackletters={fallbackletters}
         />
       ) : (
         <div
-          className='flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-[18px] font-bold uppercase text-background'
+          className='flex h-8 w-8 shrink-0 items-center justify-center rounded-max bg-primary text-[18px] font-bold uppercase text-background'
           style={{ filter: fallbackColor }}
         >
           {renderFallbackLetter()}

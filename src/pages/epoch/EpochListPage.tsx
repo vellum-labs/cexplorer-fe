@@ -157,7 +157,7 @@ const EpochListPage: FC = () => {
           </div>
           <div
             className={cn(
-              `flex h-[392px] w-full flex-grow items-center rounded-lg ${!isLoading && "border border-border"} md:w-[833px]`,
+              `flex h-[392px] w-full flex-grow items-center rounded-m ${!isLoading && "border border-border"} md:w-[833px]`,
               !isLoading && !isError && "p-1",
             )}
           >

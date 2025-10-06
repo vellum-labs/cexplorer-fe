@@ -113,14 +113,14 @@ export const PollDetailPage = () => {
         ]}
       >
         <div className='flex w-full max-w-desktop flex-col gap-3 px-mobile pb-3 md:flex-row md:px-desktop'>
-          <section className='order-2 flex flex-col gap-1 rounded-xl border border-border p-2 md:order-none'>
+          <section className='order-2 flex flex-col gap-1 rounded-l border border-border p-2 md:order-none'>
             <h2 className='mb-1'>{pollDetail?.name}</h2>
             <span className='text-sm font-light text-grayTextSecondary'>
               Description
             </span>
             <div>{parse(pollDetail?.description ?? "")}</div>
             <div className='mt-3 flex gap-1 bg-darker p-2 text-sm text-grayTextPrimary'>
-              <div className='flex h-7 w-7 items-center justify-center rounded-md border border-border bg-background p-1/2'>
+              <div className='flex h-7 w-7 items-center justify-center rounded-s border border-border bg-background p-1/2'>
                 <Info size={20} color={colors.darkBlue} />
               </div>
               <div>
@@ -188,7 +188,7 @@ export const PollDetailPage = () => {
             )}
           </section>
           <div className='flex min-w-[350px] flex-col gap-3'>
-            <section className='order-1 flex w-full flex-col gap-1/2 rounded-xl border border-border p-2 text-xs md:order-none'>
+            <section className='order-1 flex w-full flex-col gap-1/2 rounded-l border border-border p-2 text-xs md:order-none'>
               <div className='mb-2 flex w-full items-center justify-between'>
                 <h3>Status</h3> {renderStatusBadge(pollDetail?.state)}
               </div>
@@ -196,9 +196,9 @@ export const PollDetailPage = () => {
                 <span className='text-grayTextPrimary'>Ends in</span>
                 <DateCell className='text-xs' time={pollDetail?.date_end} />
               </div>
-              <div className='h-2.5 w-full rounded-full bg-border'>
+              <div className='h-2.5 w-full rounded-max bg-border'>
                 <div
-                  className='h-2.5 rounded-full bg-darkBlue'
+                  className='h-2.5 rounded-max bg-darkBlue'
                   style={{ width: `${progress}%` }}
                 ></div>
               </div>
@@ -209,7 +209,7 @@ export const PollDetailPage = () => {
                 </div>
               )}
             </section>
-            <section className='order-3 w-full rounded-xl border border-border p-2 md:order-none'>
+            <section className='order-3 w-full rounded-l border border-border p-2 md:order-none'>
               <h3>Votes submitted</h3>
               <ResultsChart
                 data={pollDetail?.result}

@@ -31,10 +31,10 @@ export const AdaPriceTable: FC = () => {
   const totalSupply = genesisParams[0].shelley[0].maxLovelaceSupply;
 
   return (
-    <div className='flex w-full flex-col rounded-lg border border-border bg-cardBg pb-2 pt-2 lg:min-w-[390px] lg:max-w-[400px] lg:pb-0'>
+    <div className='flex w-full flex-col rounded-m border border-border bg-cardBg pb-2 pt-2 lg:min-w-[390px] lg:max-w-[400px] lg:pb-0'>
       <div className='flex h-[110px] w-full flex-col gap-1/2 border-b border-border px-3 pb-2'>
         <div className='flex items-center gap-1'>
-          <div className='flex h-[36px] w-[36px] shrink-0 items-center justify-center gap-1/2 rounded-md border border-border'>
+          <div className='flex h-[36px] w-[36px] shrink-0 items-center justify-center gap-1/2 rounded-s border border-border'>
             <Cardano size={20} color={colors.text} />
           </div>
           <h3>Cardano</h3>
@@ -43,7 +43,7 @@ export const AdaPriceTable: FC = () => {
         <div className='flex items-center gap-1'>
           <span className='text-2xl font-semibold'>{price.today}</span>
           <span
-            className={`ml-0.5 flex items-center rounded-full border px-1/2 py-1/4 text-[11px] font-medium ${price.percentChange < 1 && price.percentChange > -1 ? "border-yellow-500/40 bg-yellow-500/5 text-yellowText" : price.percentChange > 0 ? "border-green-500/40 bg-green-500/5 text-greenText" : "border-red-500/40 bg-red-500/5 text-redText"}`}
+            className={`ml-0.5 flex items-center rounded-max border px-1/2 py-1/4 text-[11px] font-medium ${price.percentChange < 1 && price.percentChange > -1 ? "border-yellow-500/40 bg-yellow-500/5 text-yellowText" : price.percentChange > 0 ? "border-green-500/40 bg-green-500/5 text-greenText" : "border-red-500/40 bg-red-500/5 text-redText"}`}
           >
             {price.percentChange > 0 && "+"}
             {price.percentChange?.toFixed(1)}%

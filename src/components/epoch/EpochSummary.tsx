@@ -121,7 +121,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
         title='Summary'
         subTitle={
           stats.epoch_no === currentEpoch && (
-            <div className='relative flex h-[24px] w-[115px] items-center justify-end rounded-lg border border-border px-[10px]'>
+            <div className='relative flex h-[24px] w-[115px] items-center justify-end rounded-m border border-border px-[10px]'>
               <div className='absolute left-2'>
                 <PulseDot />
               </div>

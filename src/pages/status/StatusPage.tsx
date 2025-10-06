@@ -117,7 +117,7 @@ export const StatusPage: FC = () => {
           <p className='mt-1.5 font-light text-grayTextPrimary'>
             Check and share your current status for quick troubleshooting.
           </p>
-          <div className='mt-5 flex w-full max-w-[800px] flex-col gap-3 rounded-lg border border-border p-3'>
+          <div className='mt-5 flex w-full max-w-[800px] flex-col gap-3 rounded-m border border-border p-3'>
             <h3>Your status</h3>
             <div className='flex w-full flex-col gap-2'>
               {statuses.map(
@@ -138,8 +138,8 @@ export const StatusPage: FC = () => {
               )}
             </div>
             <div className='border-t border-border pt-2'>
-              <div className='flex min-h-[80px] w-full items-center gap-2 rounded-lg bg-darker px-3 py-2'>
-                <div className='flex aspect-square w-[44px] items-center justify-center rounded-md bg-cardBg'>
+              <div className='flex min-h-[80px] w-full items-center gap-2 rounded-m bg-darker px-3 py-2'>
+                <div className='flex aspect-square w-[44px] items-center justify-center rounded-s bg-cardBg'>
                   <CircleAlert size={15} className='text-primary' />
                 </div>
                 <span className='text-sm text-grayTextPrimary'>

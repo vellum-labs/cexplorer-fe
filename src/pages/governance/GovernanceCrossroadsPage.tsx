@@ -77,9 +77,9 @@ export const GovernanceCrossroadsPage = () => {
           {governanceSections.map((section, index) => (
             <div
               key={index}
-              className='flex flex-col rounded-xl border border-border px-3 py-2 font-medium'
+              className='flex flex-col rounded-l border border-border px-3 py-2 font-medium'
             >
-              <div className='w-fit rounded-lg border border-border p-1/2'>
+              <div className='w-fit rounded-m border border-border p-1/2'>
                 {section.icon}
               </div>
 

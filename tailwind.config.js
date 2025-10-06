@@ -23,10 +23,6 @@ module.exports = {
         inter: ["Inter", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
       },
-      spacing: {
-        desktop: "1440px",
-        minHeight: "calc(100vh - 386px)",
-      },
       colors: {
         text: "var(--text)",
         background: "var(--background)",

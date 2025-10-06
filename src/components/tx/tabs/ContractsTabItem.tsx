@@ -27,15 +27,15 @@ export const ContractsTabItem = () => {
 
   return (
     <div className='flex flex-col gap-1.5'>
-      <div className='flex w-fit gap-1 rounded-full border border-border bg-darker px-1.5 py-1/2 text-xs font-medium shadow'>
+      <div className='flex w-fit gap-1 rounded-max border border-border bg-darker px-1.5 py-1/2 text-xs font-medium shadow'>
         Total Script Size {totalSize}kB
       </div>
       {query.data?.data.plutus_contracts?.map((contract, index) => (
         <section
           key={`${index}`}
-          className='flex flex-col rounded-xl border border-b border-border bg-darker px-2 py-1.5 shadow'
+          className='flex flex-col rounded-l border border-b border-border bg-darker px-2 py-1.5 shadow'
         >
-          <div className='w-fit rounded-lg border border-border bg-background px-1 py-1/2 text-xs font-medium'>
+          <div className='w-fit rounded-m border border-border bg-background px-1 py-1/2 text-xs font-medium'>
             Script #{index + 1}
           </div>
           {(contract.input || []).map((input, inputIndex) => (

@@ -150,7 +150,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
         swapDetail?.user?.address,
         <div className='flex items-center gap-1'>
           {swapDetail?.user?.balance && (
-            <Image src={Icon} className='h-4 w-4 rounded-full' />
+            <Image src={Icon} className='h-4 w-4 rounded-max' />
           )}
           <div className='flex items-center gap-1'>
             <Link
@@ -314,7 +314,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
       value: renderWithException(
         swapDetail?.status,
         <div className='flex items-center'>
-          <p className='flex w-fit items-center gap-1/2 rounded-md border border-border px-1 text-sm'>
+          <p className='flex w-fit items-center gap-1/2 rounded-s border border-border px-1 text-sm'>
             {isSuccess ? (
               <Check className='text-greenText' size={15} />
             ) : isCanceled ? (
@@ -345,9 +345,9 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
       value: renderWithException(
         typeof swapDetail?.is_dexhunter === "boolean",
         <div className='flex items-center'>
-          <p className='flex w-fit items-center gap-1/2 rounded-md border border-border px-1 text-sm'>
+          <p className='flex w-fit items-center gap-1/2 rounded-s border border-border px-1 text-sm'>
             {isSuccess ? (
-              <Image src={DexhunterIcon} className='h-4 w-4 rounded-full' />
+              <Image src={DexhunterIcon} className='h-4 w-4 rounded-max' />
             ) : (
               <ArrowLeftRight size={15} className='text-primary' />
             )}
@@ -363,14 +363,14 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
         swapDetail?.dex,
         <div className='flex items-center'>
           <p
-            className={`flex w-fit items-center gap-1/2 rounded-xl border px-1 text-sm`}
+            className={`flex w-fit items-center gap-1/2 rounded-l border px-1 text-sm`}
             style={{
               backgroundColor: dex?.bgColor ?? "transparent",
               borderColor: dex?.borderColor ?? "var(--border)",
             }}
           >
             {!!dex?.icon && (
-              <Image src={dex.icon} className='rounded-full' alt={dex?.label} />
+              <Image src={dex.icon} className='rounded-max' alt={dex?.label} />
             )}
             <span style={{ color: dex?.textColor ?? "var(--text)" }}>
               {dex?.label ??
@@ -402,7 +402,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
 
   return (
     <div
-      className='thin-scrollbar w-full overflow-x-auto rounded-xl border border-border px-3 py-2'
+      className='thin-scrollbar w-full overflow-x-auto rounded-l border border-border px-3 py-2'
       style={{
         transform: "rotateX(180deg)",
       }}

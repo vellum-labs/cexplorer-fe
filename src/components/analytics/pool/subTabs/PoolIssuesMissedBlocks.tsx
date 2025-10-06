@@ -204,7 +204,7 @@ export const PoolIssuesMissedBlocks: FC = () => {
             />
           ))}
         </div>
-        <div className='block w-fit rounded-md border border-border lg:hidden'>
+        <div className='block w-fit rounded-s border border-border lg:hidden'>
           <Dropdown
             id={active}
             width='150px'

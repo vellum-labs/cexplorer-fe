@@ -262,7 +262,7 @@ const GlobalTable = <T extends Record<string, any>>({
   return (
     <>
       <div
-        className={`thin-scrollbar relative w-full max-w-desktop rounded-xl border border-border ${scrollable && `overflow-x-auto xl:overflow-visible [&>div]:w-full`}`}
+        className={`thin-scrollbar relative w-full max-w-desktop rounded-l border border-border ${scrollable && `overflow-x-auto xl:overflow-visible [&>div]:w-full`}`}
         style={{
           transform: "rotateX(180deg)",
         }}

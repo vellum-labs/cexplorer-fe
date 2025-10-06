@@ -34,7 +34,7 @@ export const GovernanceStatusBadge: FC<GovernanceStatusBadgeProps> = ({
   const statusColor = getStatusColor(status);
 
   return (
-    <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-lg border border-border px-[10px]'>
+    <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
       <PulseDot color={statusColor} animate={status === "Active"} />
       <span className='text-xs font-medium'>{status}</span>
     </div>

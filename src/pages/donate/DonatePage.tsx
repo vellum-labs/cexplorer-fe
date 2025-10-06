@@ -228,7 +228,7 @@ export const DonatePage = () => {
                   <input
                     readOnly
                     value={donationAddress}
-                    className='w-full max-w-[390px] rounded-lg border border-border bg-background p-1.5 text-sm text-text'
+                    className='w-full max-w-[390px] rounded-m border border-border bg-background p-1.5 text-sm text-text'
                   />
                   <Copy
                     copyText={donationAddress}
@@ -260,7 +260,7 @@ export const DonatePage = () => {
                     target='_blank'
                     className='flex items-center gap-1/2 font-medium text-grayTextPrimary'
                   >
-                    <div className='flex h-6 w-6 items-center justify-center rounded-full bg-gray-300 dark:bg-gray-600'>
+                    <div className='flex h-6 w-6 items-center justify-center rounded-max bg-gray-300 dark:bg-gray-600'>
                       <img src={BuyMeACoffee} className='h-4 w-4' />
                     </div>
                     Buy Me a Coffee
@@ -325,7 +325,7 @@ export const DonatePage = () => {
           </section>
           <section
             ref={stakeRef}
-            className='mt-8 flex w-full flex-wrap justify-between rounded-xl bg-cardBg px-4 py-5'
+            className='mt-8 flex w-full flex-wrap justify-between rounded-l bg-cardBg px-4 py-5'
           >
             <div className='flex basis-[550px] gap-4'>
               <img className='hidden shrink md:block' src={CexLogo} />
@@ -362,7 +362,7 @@ export const DonatePage = () => {
                 <input
                   readOnly
                   value={randomPool}
-                  className='w-full max-w-[430px] rounded-lg border border-border bg-background p-1.5 text-sm text-text'
+                  className='w-full max-w-[430px] rounded-m border border-border bg-background p-1.5 text-sm text-text'
                 />
                 <Copy
                   copyText={randomPool}
@@ -381,7 +381,7 @@ const InfoCard = ({ icon, heading, description }: InfoCardProps) => {
   return (
     <section className='flex grow basis-[350px] flex-col'>
       <div className='flex items-center gap-1.5'>
-        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-blue-100/90 p-1/2 outline outline-[6px] outline-blue-100/50'>
+        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-max bg-blue-100/90 p-1/2 outline outline-[6px] outline-blue-100/50'>
           {icon}
         </div>
         <h3>{heading}</h3>{" "}
@@ -406,11 +406,11 @@ const CustomDonateCard = ({
   return (
     <div
       onClick={onClick}
-      className={`relative flex grow basis-[250px] cursor-pointer flex-col items-start gap-1 rounded-xl border p-1.5 ${isActive ? "outline outline-2 outline-primary" : "border-border"}`}
+      className={`relative flex grow basis-[250px] cursor-pointer flex-col items-start gap-1 rounded-l border p-1.5 ${isActive ? "outline outline-2 outline-primary" : "border-border"}`}
     >
       <Checkbox className='absolute right-3 top-3' checked={isActive} />
       <div className='flex w-full justify-between'>
-        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-blue-100/90 p-1/2 outline outline-[6px] outline-blue-100/50'>
+        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-max bg-blue-100/90 p-1/2 outline outline-[6px] outline-blue-100/50'>
           <Zap color={colors.darkBlue} />
         </div>
       </div>
@@ -440,11 +440,11 @@ const DonateCard = ({
   return (
     <div
       onClick={onClick}
-      className={`relative flex grow basis-[250px] cursor-pointer flex-col items-start gap-1 rounded-xl border p-1.5 ${isActive ? "outline outline-2 outline-primary" : "border-border"}`}
+      className={`relative flex grow basis-[250px] cursor-pointer flex-col items-start gap-1 rounded-l border p-1.5 ${isActive ? "outline outline-2 outline-primary" : "border-border"}`}
     >
       <Checkbox className='absolute right-3 top-3' checked={isActive} />
       <div className='flex w-full justify-between'>
-        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-blue-100/90 p-1/2 outline outline-[6px] outline-blue-100/50'>
+        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-max bg-blue-100/90 p-1/2 outline outline-[6px] outline-blue-100/50'>
           {icon}
         </div>
       </div>

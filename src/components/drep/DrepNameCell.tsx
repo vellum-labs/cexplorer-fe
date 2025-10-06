@@ -41,7 +41,7 @@ export const DrepNameCell: FC<DrepNameCellProps> = ({ item }) => {
       <Image
         src={generateImageUrl(item?.hash?.view ?? "", "ico", "drep")}
         type='user'
-        className='h-8 w-8 rounded-full'
+        className='h-8 w-8 rounded-max'
         height={32}
         width={32}
         fallbackletters={fallbackletters}

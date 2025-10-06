@@ -188,7 +188,7 @@ export const ApiInfoPage = () => {
             />
           ))}
         </section>
-        <section className='mt-4 flex w-full max-w-[500px] flex-col items-center justify-between gap-3 rounded-xl border border-border p-2 md:flex-row md:text-left'>
+        <section className='mt-4 flex w-full max-w-[500px] flex-col items-center justify-between gap-3 rounded-l border border-border p-2 md:flex-row md:text-left'>
           <div className='flex flex-col gap-2'>
             <h3>API documentation</h3>{" "}
             <p className='text-grayTextPrimary'>
@@ -231,7 +231,7 @@ export const ApiInfoPage = () => {
             </AccordionItem>
           ))}
         </Accordion>
-        <section className='flex w-full flex-col items-center gap-3 rounded-xl bg-darker p-2'>
+        <section className='flex w-full flex-col items-center gap-3 rounded-l bg-darker p-2'>
           <img
             src={CexLogo}
             alt='Cexplorer logo'
@@ -274,8 +274,8 @@ const PriceCard = ({
   icon,
 }: PriceCardProps) => {
   return (
-    <div className='relative mt-1 flex min-h-[420px] basis-[350px] flex-col items-center rounded-xl bg-darker p-2 shadow-md'>
-      <div className='absolute -top-5 rounded-md border border-border bg-background p-1'>
+    <div className='relative mt-1 flex min-h-[420px] basis-[350px] flex-col items-center rounded-l bg-darker p-2 shadow-md'>
+      <div className='absolute -top-5 rounded-s border border-border bg-background p-1'>
         {icon}
       </div>
       <span className='mt-3 font-medium'>{tier}</span>

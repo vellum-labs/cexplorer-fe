@@ -185,7 +185,7 @@ const PageJump = ({
     <div className='flex items-center gap-1 text-sm'>
       {/* <span>Jump to:</span>{" "} */}
       <input
-        className='h-8 w-16 rounded-lg border border-border bg-background p-1/2 text-center text-text'
+        className='h-8 w-16 rounded-m border border-border bg-background p-1/2 text-center text-text'
         value={pageJumpValue}
         onChange={e => handlePageJump(e.target.value)}
         onBlur={e => handleChange(e.target.value)}

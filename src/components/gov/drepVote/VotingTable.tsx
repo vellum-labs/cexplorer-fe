@@ -121,7 +121,7 @@ export const VotingTable: FC<VotingTableProps> = () => {
 
   return (
     <>
-      <div className='relative w-full max-w-desktop overflow-x-auto rounded-xl border border-border md:overflow-hidden'>
+      <div className='relative w-full max-w-desktop overflow-x-auto rounded-l border border-border md:overflow-hidden'>
         <div className='inline-flex items-end md:flex'>
           <div
             role='rowgroup'

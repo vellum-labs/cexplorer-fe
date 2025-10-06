@@ -229,7 +229,7 @@ export const AssetExchangesCandlestickGraph: FC<
   };
 
   return (
-    <div className={`w-full rounded-lg border border-border bg-cardBg p-5`}>
+    <div className={`w-full rounded-m border border-border bg-cardBg p-5`}>
       <div className={`flex flex-col justify-end pb-1.5 md:flex-row md:pb-0`}>
         <SortBy
           label={false}

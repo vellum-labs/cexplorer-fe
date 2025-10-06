@@ -154,7 +154,7 @@ export const useDrepList = ({
         }
 
         return (
-          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-lg border border-border px-[10px]'>
+          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
             <PulseDot color={!item.is_active ? "bg-redText" : undefined} />
             <span className='text-xs font-medium'>
               {item.is_active ? "Active" : "Inactive"}

@@ -161,7 +161,7 @@ export const EpochAnalyticsTabItem: FC = () => {
 
   return (
     <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
-      <div className='flex w-full flex-col items-center justify-between gap-1 rounded-lg border border-border p-mobile md:p-desktop'>
+      <div className='flex w-full flex-col items-center justify-between gap-1 rounded-m border border-border p-mobile md:p-desktop'>
         {analyticsData.map(
           ({
             data,

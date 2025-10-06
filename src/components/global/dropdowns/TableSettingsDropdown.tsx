@@ -55,14 +55,14 @@ const TableSettingsDropdown = ({
             {customContent ? (
               customContent
             ) : (
-              <div className='flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-md border border-border'>
+              <div className='flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-s border border-border'>
                 <Settings size={22} />
               </div>
             )}
           </NavigationMenuTrigger>
           <NavigationMenuContent
             onPointerLeave={e => e.preventDefault()}
-            className='z-20 grid w-[150px] rounded-md border-[1px] border-border bg-background text-sm font-medium'
+            className='z-20 grid w-[150px] rounded-s border-[1px] border-border bg-background text-sm font-medium'
             style={customStyles}
           >
             <div>

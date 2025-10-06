@@ -56,7 +56,7 @@ export const MobileTabsSelector = ({
   }, [width, mobileItems, items.length]);
   return (
     <div
-      className={`${withMargin ? "mb-3" : ""} flex items-center ${secondary ? "h-[32px]" : "h-[40px]"} w-fit rounded-lg border border-borderFaded bg-darker gap-0.5`}
+      className={`${withMargin ? "mb-3" : ""} flex items-center ${secondary ? "h-[32px]" : "h-[40px]"} w-fit rounded-m border border-borderFaded bg-darker gap-0.5`}
     >
       {items?.slice(0, visibleItems).map((item, index) => (
         <button
@@ -64,7 +64,7 @@ export const MobileTabsSelector = ({
           aria-selected={activeTab === index}
           aria-controls={`panel-${index}`}
           id={`tab-${index}`}
-          className={`flex items-center px-1.5 py-1 border rounded-lg ${secondary ? "h-[32px]" : "h-[40px]"} text-[13px] font-semibold min-[1050px]:text-[15px] ${activeTab === index ? `bg-background z-20 border-border ${secondary ? "text-text hover:text-text" : "text-primary hover:text-primary"}` : "border-transparent text-grayTextPrimary duration-150 hover:text-text"} ${index === 0 ? "-ml-px" : ""} ${index === visibleItems - 1 ? "-mr-px" : ""}`}
+          className={`flex items-center px-1.5 py-1 border rounded-m ${secondary ? "h-[32px]" : "h-[40px]"} text-[13px] font-semibold min-[1050px]:text-[15px] ${activeTab === index ? `bg-background z-20 border-border ${secondary ? "text-text hover:text-text" : "text-primary hover:text-primary"}` : "border-transparent text-grayTextPrimary duration-150 hover:text-text"} ${index === 0 ? "-ml-px" : ""} ${index === visibleItems - 1 ? "-mr-px" : ""}`}
           key={index}
           onClick={() => handleTabChange(index)}
         >
@@ -83,7 +83,7 @@ export const MobileTabsSelector = ({
           }
           hideChevron
           options={tabOptions.slice(visibleItems)}
-          triggerClassName={`text-primary font-medium  rounded-r-lg px-1.5 py-1 ${activeTab >= visibleItems ? "bg-background" : "bg-darker"}`}
+          triggerClassName={`text-primary font-medium  rounded-r-m px-1.5 py-1 ${activeTab >= visibleItems ? "bg-background" : "bg-darker"}`}
           forceVerticalPosition={forceDropdownVerticalPosition}
           closeOnSelect
         />

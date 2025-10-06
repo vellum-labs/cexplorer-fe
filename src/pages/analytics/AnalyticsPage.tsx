@@ -43,7 +43,7 @@ export const AnalyticsPage = () => {
           .map(key => (
             <div
               key={key}
-              className='flex flex-col gap-1 rounded-xl border border-border p-1.5 font-medium'
+              className='flex flex-col gap-1 rounded-l border border-border p-1.5 font-medium'
             >
               {<img src={images[key]} alt='Pools' />}
               {options[key].labelHref ? (

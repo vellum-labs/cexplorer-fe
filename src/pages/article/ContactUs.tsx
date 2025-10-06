@@ -290,9 +290,9 @@ export const ContactUsPage = () => {
 
 const InfoCard = ({ icon, heading, description, button }: InfoCardProps) => {
   return (
-    <section className='flex grow basis-[350px] flex-col rounded-xl border border-border p-2'>
+    <section className='flex grow basis-[350px] flex-col rounded-l border border-border p-2'>
       <div className='flex items-center gap-1.5'>
-        <div className='relative z-20 flex h-8 w-8 items-center justify-center rounded-full bg-blue-100/90 p-1/2 outline outline-[6px] outline-blue-100/50'>
+        <div className='relative z-20 flex h-8 w-8 items-center justify-center rounded-max bg-blue-100/90 p-1/2 outline outline-[6px] outline-blue-100/50'>
           {icon}
         </div>
         <h3>{heading}</h3>{" "}

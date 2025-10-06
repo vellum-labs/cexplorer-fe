@@ -200,7 +200,7 @@ export const EpochBars: FC<EpochBars> = ({ stats, isError, isLoading }) => {
         return (
           <div
             style={{ flexBasis: width }}
-            className='flex w-full flex-grow flex-col gap-1 rounded-xl border border-border p-3'
+            className='flex w-full flex-grow flex-col gap-1 rounded-l border border-border p-3'
             key={key}
           >
             <div className='flex flex-col'>
@@ -224,7 +224,7 @@ export const EpochBars: FC<EpochBars> = ({ stats, isError, isLoading }) => {
           </div>
         );
       })}
-      <div className='flex h-[520px] w-full max-w-[650px] flex-grow flex-col gap-1 rounded-xl border border-border p-3'>
+      <div className='flex h-[520px] w-full max-w-[650px] flex-grow flex-col gap-1 rounded-l border border-border p-3'>
         <div className='flex flex-col'>
           <h3>Rewards Structure</h3>
           <span className='text-base font-semibold text-grayTextPrimary'>

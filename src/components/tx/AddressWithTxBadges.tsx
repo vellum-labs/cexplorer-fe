@@ -34,7 +34,7 @@ export const AddressWithTxBadges = ({ utxo, isOutput }: Props) => {
           </div>
         }
       >
-        <div className='flex h-4 w-4 items-center justify-center rounded-full border-[1.5px] border-primary p-[2px]'>
+        <div className='flex h-4 w-4 items-center justify-center rounded-max border-[1.5px] border-primary p-[2px]'>
           <ArrowLeftRight size={12} color={colors.primary} strokeWidth={3} />
         </div>
       </Tooltip>

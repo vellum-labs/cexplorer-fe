@@ -144,7 +144,7 @@ export const AnalyticsGraph: FC<Props> = ({
         />
       )}
       <div
-        className={`w-full rounded-lg border border-border bg-cardBg p-3 ${className ? className : ""}`}
+        className={`w-full rounded-m border border-border bg-cardBg p-3 ${className ? className : ""}`}
         ref={ref}
       >
         <div
@@ -182,7 +182,7 @@ export const AnalyticsGraph: FC<Props> = ({
             )}
             {exportButton && (
               <div
-                className='flex h-[36px] w-[36px] shrink-0 cursor-pointer items-center justify-center gap-1/2 rounded-md border border-border'
+                className='flex h-[36px] w-[36px] shrink-0 cursor-pointer items-center justify-center gap-1/2 rounded-s border border-border'
                 onClick={showModals}
               >
                 <Download size={15} color={colors.text} className='text-base' />

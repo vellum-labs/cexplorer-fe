@@ -69,7 +69,7 @@ export const LayoutNotification = ({
         </span>
         <button
           onClick={handleClose}
-          className='absolute right-4 rounded-full p-1/2 hover:bg-white/20'
+          className='absolute right-4 rounded-max p-1/2 hover:bg-white/20'
           aria-label='Close'
         >
           <X size={16} />

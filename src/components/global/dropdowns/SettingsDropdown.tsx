@@ -221,7 +221,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                       return (
                         <div
                           key={key}
-                          className={`flex w-full cursor-pointer select-none items-center justify-between rounded-sm px-2 py-1.5 text-sm hover:bg-cardBg ${key === currency ? "bg-cardBg" : ""}`}
+                          className={`flex w-full cursor-pointer select-none items-center justify-between rounded-xs px-2 py-1.5 text-sm hover:bg-cardBg ${key === currency ? "bg-cardBg" : ""}`}
                           onClick={() => {
                             if (value) {
                               handleCurrency((value as any).value);
@@ -235,7 +235,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                     })}
                 </div>
                 <div
-                  className='ove fixed bottom-[-2px] left-0 z-50 flex h-6 w-full items-center justify-center rounded-b-lg border-x border-b border-border bg-background'
+                  className='ove fixed bottom-[-2px] left-0 z-50 flex h-6 w-full items-center justify-center rounded-b-m border-x border-b border-border bg-background'
                   onMouseEnter={() => startScrolling("down")}
                   onMouseLeave={stopScrolling}
                 >

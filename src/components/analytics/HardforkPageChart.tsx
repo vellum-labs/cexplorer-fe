@@ -10,7 +10,7 @@ interface HardforkPageChartProps {
 
 const HardforkPageChart: FC<HardforkPageChartProps> = ({ option, title }) => {
   return (
-    <div className='flex w-full flex-col items-center rounded-xl border border-border px-3 py-2'>
+    <div className='flex w-full flex-col items-center rounded-l border border-border px-3 py-2'>
       <p className='w-full text-base font-semibold text-text'>{title}</p>
       <ReactECharts
         option={option}

@@ -140,7 +140,7 @@ export const ArticleDetailPage = () => {
             <div className='flex w-full justify-end md:w-[60%]'>
               <Image
                 src={data?.image || ""}
-                className='h-[300px] w-full rounded-lg object-cover md:h-[380px]'
+                className='h-[300px] w-full rounded-m object-cover md:h-[380px]'
                 height={380}
               />
             </div>
@@ -159,7 +159,7 @@ export const ArticleDetailPage = () => {
           </article>
           <div className='hidden w-[300px] flex-col gap-1.5 lg:flex'>
             <SocialsAndCopy stretchCopy />
-            <div className='flex w-full flex-col gap-2 rounded-lg border border-border bg-cardBg p-2'>
+            <div className='flex w-full flex-col gap-2 rounded-m border border-border bg-cardBg p-2'>
               <h3>Support author</h3>
               <p className='text-sm text-grayTextPrimary'>
                 You can support the article author by delegating to their stake
@@ -173,7 +173,7 @@ export const ArticleDetailPage = () => {
               />
             </div>
             <NewsletterForm />
-            <div className='flex w-full flex-col gap-2 rounded-lg border border-border bg-cardBg p-2'>
+            <div className='flex w-full flex-col gap-2 rounded-m border border-border bg-cardBg p-2'>
               <h3>Keywords</h3>
               <p className='text-sm text-grayTextPrimary'>{data?.keywords}</p>
             </div>
@@ -191,9 +191,9 @@ export const ArticleDetailPage = () => {
               card={ArticleCardWrapper}
               className='h-full basis-[300px] md:max-w-[300px]'
             />
-            <div className='flex w-full min-w-[230px] shrink grow basis-[280px] flex-col gap-2 rounded-lg border border-border bg-cardBg p-2'>
+            <div className='flex w-full min-w-[230px] shrink grow basis-[280px] flex-col gap-2 rounded-m border border-border bg-cardBg p-2'>
               <Gift
-                className='rounded-lg border border-border bg-background p-1'
+                className='rounded-m border border-border bg-background p-1'
                 size={40}
               />
               <h3>Support author</h3>
@@ -266,9 +266,9 @@ const SocialsAndCopy = ({
 const NewsletterForm = () => {
   const [email, setEmail] = useState("");
   return (
-    <div className='flex w-full min-w-[230px] shrink grow basis-[280px] flex-col gap-2 rounded-lg border border-border bg-cardBg p-2'>
+    <div className='flex w-full min-w-[230px] shrink grow basis-[280px] flex-col gap-2 rounded-m border border-border bg-cardBg p-2'>
       <Send
-        className='rounded-lg border border-border bg-background p-1'
+        className='rounded-m border border-border bg-background p-1'
         size={40}
       />
       <h3>Weekly newsletter</h3>

@@ -66,14 +66,14 @@ export const BotsPage = () => {
             {bots.map(item => (
               <div
                 key={item.key}
-                className='flex w-full max-w-[800px] flex-col justify-between gap-1 rounded-lg border border-border px-mobile py-mobile sm:flex-row sm:items-center sm:gap-0 md:px-desktop'
+                className='flex w-full max-w-[800px] flex-col justify-between gap-1 rounded-m border border-border px-mobile py-mobile sm:flex-row sm:items-center sm:gap-0 md:px-desktop'
               >
                 <div className='flex max-w-[410px] flex-col gap-1.5'>
                   <div className='flex w-full flex-wrap gap-1'>
                     {item.tags.map(tag => (
                       <div
                         key={tag}
-                        className='flex items-center gap-[6px] rounded-md border border-border px-[6px] py-[2px]'
+                        className='flex items-center gap-[6px] rounded-s border border-border px-[6px] py-[2px]'
                       >
                         {tag === "Live" && (
                           <div className='relative'>

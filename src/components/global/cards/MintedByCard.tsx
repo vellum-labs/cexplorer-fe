@@ -29,9 +29,9 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
   isGenesisBlock = false,
 }) => {
   return (
-    <div className='flex max-h-[110px] min-h-[110px] w-full flex-col gap-1/2 rounded-xl border border-border bg-cardBg px-2 py-1.5 shadow'>
+    <div className='flex max-h-[110px] min-h-[110px] w-full flex-col gap-1/2 rounded-l border border-border bg-cardBg px-2 py-1.5 shadow'>
       <div className='flex w-full items-center gap-1'>
-        <div className='rounded-lg border border-border p-1/2'>
+        <div className='rounded-m border border-border p-1/2'>
           <GitCompareArrows size={20} className='text-primary' />
         </div>
         <span className='text-sm text-grayTextPrimary'>Minted by</span>
@@ -54,7 +54,7 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
               type='pool'
               height={25}
               width={25}
-              className='rounded-full'
+              className='rounded-max'
             />
             <p
               className={`block max-h-10 min-h-5 w-full overflow-hidden text-ellipsis whitespace-nowrap break-all text-base font-bold hover:text-text`}

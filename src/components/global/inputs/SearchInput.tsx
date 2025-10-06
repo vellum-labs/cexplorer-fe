@@ -162,7 +162,7 @@ const TableSearchInput = ({
             width: dropdownWidth + "px",
             top: dropdownHeight + 1 + "px",
           }}
-          className={`absolute right-0 z-30 min-h-[36px] rounded-md border border-border bg-background`}
+          className={`absolute right-0 z-30 min-h-[36px] rounded-s border border-border bg-background`}
         >
           {prefixes
             ?.filter(prefix => prefix.show)

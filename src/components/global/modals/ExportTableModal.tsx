@@ -93,13 +93,13 @@ export const ExportTableModal: FC<ExportTableModalProps> = ({
         </div>
         <div className='flex items-center justify-between gap-1.5'>
           <button
-            className='flex h-[40px] w-full max-w-[170px] flex-1 cursor-pointer items-center justify-center rounded-md border border-border'
+            className='flex h-[40px] w-full max-w-[170px] flex-1 cursor-pointer items-center justify-center rounded-s border border-border'
             onClick={onClose}
           >
             <span className='text-base font-semibold'>Cancel</span>
           </button>
           <button
-            className={`flex h-[40px] w-full max-w-[170px] flex-1 items-center justify-center gap-1/2 rounded-md border border-border transition-all duration-100 ${selectedItem ? "cursor-pointer" : "text-grayTextPrimary"}`}
+            className={`flex h-[40px] w-full max-w-[170px] flex-1 items-center justify-center gap-1/2 rounded-s border border-border transition-all duration-100 ${selectedItem ? "cursor-pointer" : "text-grayTextPrimary"}`}
             disabled={!selectedItem}
             onClick={exportData}
           >

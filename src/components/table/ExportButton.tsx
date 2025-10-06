@@ -65,7 +65,7 @@ const ExportButton: FC<ExportButtonProps> = ({
         />
       )}
       <div
-        className='flex h-[40px] w-fit shrink-0 cursor-pointer items-center justify-center gap-1/2 rounded-md border border-border bg-cardBg px-1.5'
+        className='flex h-[40px] w-fit shrink-0 cursor-pointer items-center justify-center gap-1/2 rounded-s border border-border bg-cardBg px-1.5'
         onClick={showModals}
       >
         <Download size={20} color={colors.text} />

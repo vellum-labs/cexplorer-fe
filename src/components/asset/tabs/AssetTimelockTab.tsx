@@ -120,9 +120,9 @@ export const AssetTimelockTab: FC<{ json: PolicyJson | undefined }> = ({
       const formattedDate = format(targetDate, "MMM dd yyyy, HH:mm:ss");
 
       return (
-        <section className='flex flex-col gap-2 rounded-xl bg-darker p-2 text-sm'>
+        <section className='flex flex-col gap-2 rounded-l bg-darker p-2 text-sm'>
           <div className='flex gap-1'>
-            <span className='flex h-fit w-fit items-center gap-1/2 rounded-md border border-border bg-background px-1 py-1/4 text-xs font-medium'>
+            <span className='flex h-fit w-fit items-center gap-1/2 rounded-s border border-border bg-background px-1 py-1/4 text-xs font-medium'>
               {indentLevel <= 1
                 ? `Rule #${ruleNumber}`
                 : `Sub-rule #${ruleNumber}`}
@@ -171,17 +171,17 @@ export const AssetTimelockTab: FC<{ json: PolicyJson | undefined }> = ({
   return (
     <>
       <h3 className='mb-1'>Minting policy</h3>
-      <section className='mb-2 flex gap-2 rounded-xl bg-darker p-2 text-sm'>
+      <section className='mb-2 flex gap-2 rounded-l bg-darker p-2 text-sm'>
         {isLocked ? (
           <LockIcon
             size={40}
-            className='rounded-md border border-border bg-background p-1'
+            className='rounded-s border border-border bg-background p-1'
             color={colors.primary}
           />
         ) : (
           <LockOpen
             size={40}
-            className='rounded-md border border-border bg-background p-1'
+            className='rounded-s border border-border bg-background p-1'
             color={colors.primary}
           />
         )}
@@ -208,7 +208,7 @@ export const AssetTimelockTab: FC<{ json: PolicyJson | undefined }> = ({
 
 export const OpenPolicy = () => {
   return (
-    <div className='flex h-fit w-fit items-center gap-1/2 rounded-md border border-border bg-background px-1 py-1/4 text-xs font-medium'>
+    <div className='flex h-fit w-fit items-center gap-1/2 rounded-s border border-border bg-background px-1 py-1/4 text-xs font-medium'>
       Policy is open
     </div>
   );
@@ -216,7 +216,7 @@ export const OpenPolicy = () => {
 
 export const LockedPolicy = () => {
   return (
-    <div className='flex h-fit w-fit items-center gap-1/2 rounded-md border border-border bg-background px-1 py-1/4 text-xs font-medium'>
+    <div className='flex h-fit w-fit items-center gap-1/2 rounded-s border border-border bg-background px-1 py-1/4 text-xs font-medium'>
       Policy is locked
     </div>
   );

@@ -34,7 +34,7 @@ const PoolSaturation = ({ live_stake, className }: Props) => {
         }}
       >
         <span
-          className='absolute left-0 block h-3 rounded-bl-full rounded-tl-full'
+          className='absolute left-0 block h-3 rounded-bl-max rounded-tl-max'
           style={{
             width: `${poolCapUsed ?? 0}%`,
             backgroundColor: getGradientColor(poolCapUsed ?? 0),

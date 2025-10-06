@@ -313,7 +313,7 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
                       false && (
                         <div className='flex h-full w-full flex-col gap-2 pt-1.5 lg:w-fit'>
                           <Image
-                            className='aspect-square rounded-full'
+                            className='aspect-square rounded-max'
                             height={160}
                             width={160}
                           />

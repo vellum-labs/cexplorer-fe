@@ -94,7 +94,7 @@ export const GovernanceDetailMetadataTab: FC<
 
   return (
     <>
-      <div className='w-full rounded-lg border border-border'>
+      <div className='w-full rounded-m border border-border'>
         {rows.map(item => (
           <AddressInspectorRow
             key={item.title}

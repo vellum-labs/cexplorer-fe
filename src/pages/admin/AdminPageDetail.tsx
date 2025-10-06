@@ -152,7 +152,7 @@ export const AdminPageDetail = () => {
             role='button'
             onKeyDown={() => textareaRef.current?.focus()}
             onClick={() => textareaRef.current?.focus()}
-            className='relative rounded-lg border border-border bg-darker'
+            className='relative rounded-m border border-border bg-darker'
           >
             <textarea
               className='min-h-[800px] w-full resize-none bg-transparent p-1 font-mono text-text caret-text outline-none'

@@ -24,7 +24,7 @@ const WalletOption: React.FC<Props> = ({
 
   return (
     <button
-      className={`relative mb-[15px] flex h-20 w-full items-center justify-between rounded-xl border border-border py-[20px] pl-[65px] pr-[15px] hover:bg-darker ${
+      className={`relative mb-[15px] flex h-20 w-full items-center justify-between rounded-l border border-border py-[20px] pl-[65px] pr-[15px] hover:bg-darker ${
         supported && walletType !== name
           ? "cursor-pointer border border-border hover:text-primary"
           : "cursor-not-allowed"

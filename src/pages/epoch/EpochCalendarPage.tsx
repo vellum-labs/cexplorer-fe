@@ -150,16 +150,16 @@ const EpochCard = ({ epoch }: { epoch: EpochListData }) => {
         : colors.border;
 
   return (
-    <div className='flex flex-col gap-1 rounded-xl border border-border p-2'>
+    <div className='flex flex-col gap-1 rounded-l border border-border p-2'>
       <div className='mb-1 flex items-center gap-1.5'>
         {epoch.no > currentEpoch ? (
-          <div className='rounded-full bg-grayTextSecondary p-1/2'>
+          <div className='rounded-max bg-grayTextSecondary p-1/2'>
             <Calendar size={15} color='white' className='' />
           </div>
         ) : (
           <CheckCircle
             color='white'
-            className='rounded-full p-1/2'
+            className='rounded-max p-1/2'
             style={{
               backgroundColor: bgColor,
             }}

@@ -105,10 +105,10 @@ export const HomepageModalWidget: FC<HomepageModalWidgetProps> = ({
     return (
       <div
         key={title}
-        className={`h-[150px] w-[300px] cursor-pointer rounded-lg ${active ? "border border-primary" : ""}`}
+        className={`h-[150px] w-[300px] cursor-pointer rounded-m ${active ? "border border-primary" : ""}`}
         onClick={onClick}
       >
-        <img src={img} alt={title} className='rounded-lg' />
+        <img src={img} alt={title} className='rounded-m' />
       </div>
     );
   }
@@ -126,16 +126,16 @@ export const HomepageModalWidget: FC<HomepageModalWidgetProps> = ({
         }}
       >
         <div
-          className='backface-hidden absolute h-full w-full rounded-lg'
+          className='backface-hidden absolute h-full w-full rounded-m'
           style={{
             backfaceVisibility: "hidden",
           }}
         >
-          <img src={img} alt={title} className='h-full w-full rounded-lg' />
+          <img src={img} alt={title} className='h-full w-full rounded-m' />
         </div>
 
         <div
-          className='backface-hidden absolute flex h-full w-full rounded-lg bg-border text-center'
+          className='backface-hidden absolute flex h-full w-full rounded-m bg-border text-center'
           style={{
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)",

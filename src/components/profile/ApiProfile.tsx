@@ -139,7 +139,7 @@ export const ApiProfile = () => {
             <div className='flex flex-col items-center gap-1'>
               <Search
                 size={40}
-                className='rounded-md border border-border p-1'
+                className='rounded-s border border-border p-1'
               />
               <h2>You don't have any projects yet.</h2>
               <p className='max-w-[350px] text-center text-sm text-grayTextPrimary'>
@@ -261,12 +261,12 @@ export const ApiProfile = () => {
                         <input
                           type={showKey ? "text" : "password"}
                           value={apiKey.key}
-                          className='h-[42px] w-full rounded-md border border-border bg-transparent p-1 text-text'
+                          className='h-[42px] w-full rounded-s border border-border bg-transparent p-1 text-text'
                           readOnly
                         />
                         <button
                           onClick={() => setShowKey(!showKey)}
-                          className='rounded-xl border border-border p-1'
+                          className='rounded-l border border-border p-1'
                         >
                           {showKey ? <EyeOff /> : <Eye />}
                         </button>

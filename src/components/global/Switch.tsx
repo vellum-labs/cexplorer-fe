@@ -42,12 +42,12 @@ export const Switch: FC<SwitchProps> = ({
         className='sr-only'
       />
       <div
-        className={`h-[20px] w-[35px] rounded-full shadow-inner transition-colors duration-300 ease-in-out ${
+        className={`h-[20px] w-[35px] rounded-max shadow-inner transition-colors duration-300 ease-in-out ${
           isOn ? "bg-darkBlue" : "bg-border"
         }`}
       >
         <div
-          className={`absolute left-[2px] aspect-square w-[16px] translate-y-[2px] transform rounded-full bg-white shadow transition-transform duration-300 ease-in-out ${
+          className={`absolute left-[2px] aspect-square w-[16px] translate-y-[2px] transform rounded-max bg-white shadow transition-transform duration-300 ease-in-out ${
             isOn ? "translate-x-[15px]" : ""
           }`}
         ></div>

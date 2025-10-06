@@ -6,7 +6,7 @@ interface EpochStatsProps {
 
 export const EpochStats: FC<EpochStatsProps> = ({ epochStats }) => {
   return (
-    <div className='min-h-1/2 flex w-full flex-col gap-2 rounded-lg border border-border px-3 py-1.5'>
+    <div className='min-h-1/2 flex w-full flex-col gap-2 rounded-m border border-border px-3 py-1.5'>
       <span className='text-base font-semibold'>Epoch Stats</span>
       <ul className='flex flex-col gap-1'>
         {epochStats.map(({ title, value }) => (

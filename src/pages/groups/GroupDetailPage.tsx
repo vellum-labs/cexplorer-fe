@@ -386,7 +386,7 @@ export const GroupDetailPage = () => {
         const isActive = item.info[0].is_active;
 
         return (
-          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-lg border border-border px-[10px]'>
+          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
             <PulseDot color={!isActive ? "bg-yellowText" : undefined} />
             <span className='text-xs font-medium'>
               {isActive ? "Active" : "Inactive"}

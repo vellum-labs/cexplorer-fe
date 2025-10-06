@@ -105,7 +105,7 @@ const WalletConfigModal = () => {
     >
       <h2 className='mb-3 text-lg font-medium'>Authorization Token</h2>
 
-      <div className='mb-2 rounded-lg border border-border bg-cardBg p-1.5'>
+      <div className='mb-2 rounded-m border border-border bg-cardBg p-1.5'>
         <p className='text-muted-foreground mb-1.5 text-sm'>
           We use a signature token to protect your privacy and keep your
           watchlist, custom names, and personal data secure.

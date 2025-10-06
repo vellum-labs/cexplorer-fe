@@ -119,7 +119,7 @@ export const DrepDetailPage: FC = () => {
             type='user'
             height={35}
             width={35}
-            className='rounded-full'
+            className='rounded-max'
           />
           {title}
         </div>

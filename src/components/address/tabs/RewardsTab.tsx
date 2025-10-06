@@ -148,7 +148,7 @@ export const RewardsTab: FC<RewardsTabProps> = ({
           </h3>
         )}
         <div className='flex items-center gap-1'>
-          <div className='flex h-[40px] w-fit shrink-0 items-center justify-center gap-1/2 rounded-md border border-border px-1.5'>
+          <div className='flex h-[40px] w-fit shrink-0 items-center justify-center gap-1/2 rounded-s border border-border px-1.5'>
             <Download size={20} color={colors.text} />
             <span className='text-sm font-medium'>Export</span>
           </div>

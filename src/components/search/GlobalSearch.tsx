@@ -69,7 +69,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
   return (
     <search className='relative w-full' ref={searchRef}>
       {isHomepage ? (
-        <div className={`relative max-w-[750px] w-full h-12 border border-border bg-background ${focused ? "rounded-t-xl rounded-b-none" : "rounded-xl"} flex items-center`}>
+        <div className={`relative max-w-[750px] w-full h-12 border border-border bg-background ${focused ? "rounded-t-l rounded-b-none" : "rounded-l"} flex items-center`}>
           <GlobalSearchDropdown isHomepage />
           <input
             value={search}
@@ -79,7 +79,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
             onFocus={() => handleInput("focus")}
             autoCapitalize='off'
           />
-          <button className="absolute right-2 bg-primary rounded-lg flex items-center justify-center w-9 h-9 hover:bg-primary/90 transition-colors">
+          <button className="absolute right-2 bg-primary rounded-m flex items-center justify-center w-9 h-9 hover:bg-primary/90 transition-colors">
             <Search size={16} className="text-background" strokeWidth={2.5} />
           </button>
         </div>
@@ -107,7 +107,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
           )}
 
           <div
-            className={`absolute z-[25] flex w-full ${isHomepage ? 'max-w-[750px]' : ''} select-none flex-col gap-1.5 rounded-b-lg border-x border-b border-border bg-background`}
+            className={`absolute z-[25] flex w-full ${isHomepage ? 'max-w-[750px]' : ''} select-none flex-col gap-1.5 rounded-b-m border-x border-b border-border bg-background`}
           >
             {!categories && search.length !== 0 && (
               <div className='flex h-[150px] w-full items-center justify-center'>

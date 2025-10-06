@@ -74,8 +74,8 @@ export const ArticleListPage = () => {
           title='Learn About Cardano'
           breadcrumbItems={[{ label: "Articles" }]}
         />
-        <div className='m-2 flex h-auto w-full max-w-desktop justify-center rounded-lg p-mobile hover:text-text md:m-5 md:p-desktop'>
-          <div className='flex w-full max-w-desktop flex-col-reverse justify-center gap-1.5 rounded-lg border border-border bg-gradient-to-b from-bannerGradient to-darker p-3 md:flex-row'>
+        <div className='m-2 flex h-auto w-full max-w-desktop justify-center rounded-m p-mobile hover:text-text md:m-5 md:p-desktop'>
+          <div className='flex w-full max-w-desktop flex-col-reverse justify-center gap-1.5 rounded-m border border-border bg-gradient-to-b from-bannerGradient to-darker p-3 md:flex-row'>
             <div className='flex w-full justify-end md:w-[60%]'>
               <Link
                 to='/article/$url'
@@ -86,7 +86,7 @@ export const ArticleListPage = () => {
               >
                 <Image
                   src={firstArticle?.image || ""}
-                  className='h-[300px] w-full rounded-lg object-cover md:h-[380px]'
+                  className='h-[300px] w-full rounded-m object-cover md:h-[380px]'
                   height={380}
                 />
               </Link>

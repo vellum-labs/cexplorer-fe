@@ -148,7 +148,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
         {
           label: "Status",
           value: (
-            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-lg border border-border px-[10px]'>
+            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
               <PulseDot color={"#00A9E3"} />
               <span className='text-xs font-medium'>System Default</span>
             </div>
@@ -181,7 +181,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
             typeof data?.is_active === "undefined" ? (
               "-"
             ) : (
-              <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-lg border border-border px-[10px]'>
+              <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
                 <PulseDot color={!data.is_active ? "bg-redText" : undefined} />
                 <span className='text-xs font-medium'>
                   {data.is_active ? "Active" : "Inactive"}

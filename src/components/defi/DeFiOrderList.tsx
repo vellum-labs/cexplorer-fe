@@ -183,7 +183,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
 
         return (
           <div
-            className={`flex w-[50px] items-center justify-center rounded-md px-[6px] py-[2px] text-sm font-medium text-white ${isBuying ? "bg-greenText" : "bg-redText"}`}
+            className={`flex w-[50px] items-center justify-center rounded-s px-[6px] py-[2px] text-sm font-medium text-white ${isBuying ? "bg-greenText" : "bg-redText"}`}
           >
             {isBuying ? "Buy" : "Sell"}
           </div>
@@ -485,7 +485,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
             >
               <FileText size={15} className='cursor-pointer text-primary' />
             </Link>
-            <p className='flex items-center gap-1/2 rounded-md border border-border px-1 text-sm'>
+            <p className='flex items-center gap-1/2 rounded-s border border-border px-1 text-sm'>
               {isSuccess ? (
                 <Check className='text-greenText' size={15} />
               ) : isCanceled ? (
@@ -573,7 +573,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         return (
           <div className='flex items-center gap-1'>
             {item?.user?.balance && (
-              <Image src={Icon} className='h-4 w-4 rounded-full' />
+              <Image src={Icon} className='h-4 w-4 rounded-max' />
             )}
             <div className='flex items-center gap-1'>
               <Link
@@ -633,7 +633,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
             href='https://app.dexhunter.io/'
             className='flex w-full items-center justify-end'
           >
-            <Image src={DexhunterIcon} className='h-6 w-6 rounded-full' />
+            <Image src={DexhunterIcon} className='h-6 w-6 rounded-max' />
           </a>
         );
       },
@@ -682,7 +682,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
   ];
 
   return (
-    <div className='flex w-full flex-col gap-1 rounded-lg sm:gap-0'>
+    <div className='flex w-full flex-col gap-1 rounded-m sm:gap-0'>
       <div className='flex flex-wrap items-center justify-between gap-y-1/2 pb-2'>
         <div className='flex items-center gap-1'>
           {pulseDot && <PulseDot />}
@@ -713,7 +713,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
               value && (
                 <div
                   key={key}
-                  className='mb-1 flex w-fit items-center gap-1/2 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
+                  className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
                 >
                   <span>{key[0].toUpperCase() + key.slice(1)}:</span>
                   {key === "maker" && (

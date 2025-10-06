@@ -81,7 +81,7 @@ export const GovernanceVoteDetailPage: FC = () => {
                   key={i}
                   width='80px'
                   height='32px'
-                  className='rounded-md'
+                  className='rounded-s'
                 />
               ))}
             </div>

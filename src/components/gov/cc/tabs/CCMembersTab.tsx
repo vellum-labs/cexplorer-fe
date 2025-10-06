@@ -50,7 +50,7 @@ export const CCMembersTab: FC = () => {
             <Image
               src={generateImageUrl(identRaw, "ico", "cc")}
               type='user'
-              className='h-8 w-8 rounded-full'
+              className='h-8 w-8 rounded-max'
               height={32}
               width={32}
               fallbackletters={fallbackletters}

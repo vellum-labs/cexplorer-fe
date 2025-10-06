@@ -73,7 +73,7 @@ const Footer = () => {
             >
               <img
                 src={YoroiPartner}
-                className='rounded-md bg-[#1B67CC] p-1'
+                className='rounded-s bg-[#1B67CC] p-1'
               />
             </a>
             <a href='https://nu.fi/' target='_blank' rel='noopener nofollow'>

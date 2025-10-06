@@ -53,7 +53,7 @@ export const markdownComponents = (
     <img
       src={src}
       alt={alt}
-      className='my-2 block h-auto max-w-full rounded-lg'
+      className='my-2 block h-auto max-w-full rounded-m'
       style={{ objectFit: "contain" }}
     />
   ),

@@ -10,7 +10,7 @@ export const HomepageCustomize: FC = () => {
     useHomepageStore();
 
   return (
-    <div className='flex w-full flex-wrap items-center justify-between gap-1.5 rounded-lg border border-border px-2 py-1.5 md:flex-nowrap md:gap-0'>
+    <div className='flex w-full flex-wrap items-center justify-between gap-1.5 rounded-m border border-border px-2 py-1.5 md:flex-nowrap md:gap-0'>
       <div className='flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-1.5 md:w-auto md:justify-start'>
         <div
           className='flex cursor-pointer items-center gap-1/2'

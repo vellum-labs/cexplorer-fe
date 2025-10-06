@@ -184,7 +184,7 @@ export const AwardsTabItem: FC<AwardsTabItemProps> = ({ id }) => {
         ? Array.from({ length: 8 }, () => "skeleton").map((_, i) => (
             <div
               key={i}
-              className='flex w-[240px] flex-col gap-1/2 rounded-lg border border-border'
+              className='flex w-[240px] flex-col gap-1/2 rounded-m border border-border'
             >
               <LoadingSkeleton width='100%' height='280px' />
             </div>
@@ -192,7 +192,7 @@ export const AwardsTabItem: FC<AwardsTabItemProps> = ({ id }) => {
         : awards?.map((item, i) => (
             <div
               key={`${item.time}_${i}`}
-              className='flex flex-col gap-1/2 rounded-lg border border-border bg-cardBg px-1.5 py-1'
+              className='flex flex-col gap-1/2 rounded-m border border-border bg-cardBg px-1.5 py-1'
             >
               <img
                 src={imageMap[`${item.category}_${item.type}`]}

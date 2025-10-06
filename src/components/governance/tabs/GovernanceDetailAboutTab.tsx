@@ -125,7 +125,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
               : "SPO";
 
         return (
-          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1/2 rounded-lg border border-border px-[6px]'>
+          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1/2 rounded-m border border-border px-[6px]'>
             {role === "DRep" && <User className='text-primary' size={12} />}
             {role === "CC" && <Landmark className='text-primary' size={12} />}
             {role === "SPO" && <Route className='text-primary' size={12} />}
@@ -391,7 +391,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
               value && (
                 <div
                   key={key}
-                  className='mb-1 flex w-fit items-center gap-1/2 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
+                  className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
                 >
                   <span>
                     {key[0].toUpperCase() + key.split("_").join(" ").slice(1)}:

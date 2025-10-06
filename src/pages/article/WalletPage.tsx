@@ -759,7 +759,7 @@ export const WalletPage: FC = () => {
               <LoadingSkeleton rounded='lg' width='1300px' height='1400px' />
             ) : (
               <div
-                className='thin-scrollbar relative w-full overflow-auto overflow-x-auto rounded-lg border border-border bg-cardBg'
+                className='thin-scrollbar relative w-full overflow-auto overflow-x-auto rounded-m border border-border bg-cardBg'
                 style={{
                   transform: "rotateX(180deg)",
                 }}

@@ -522,13 +522,13 @@ export const EpochParameters: FC<EpochParametersProps> = ({
     <>
       <div className='flex w-full items-center justify-between gap-1'>
         <h3 className='basis-[220px]'>Epoch Parameters</h3>
-        <div className='flex h-[40px] w-fit shrink-0 items-center justify-center gap-1/2 rounded-md border border-border px-1.5'>
+        <div className='flex h-[40px] w-fit shrink-0 items-center justify-center gap-1/2 rounded-s border border-border px-1.5'>
           <Download size={20} color={colors.text} />
           <span className='text-sm font-medium'>Export</span>
         </div>
       </div>
       <div
-        className='thin-scrollbar relative mt-3 w-full max-w-desktop -scale-100 overflow-x-auto rounded-xl border border-border [&>div]:w-full'
+        className='thin-scrollbar relative mt-3 w-full max-w-desktop -scale-100 overflow-x-auto rounded-l border border-border [&>div]:w-full'
         ref={wrapperRef}
       >
         <Table className='thin-scrollbar -scale-100' minwidth={1300}>

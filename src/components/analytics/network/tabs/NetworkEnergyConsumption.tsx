@@ -77,7 +77,7 @@ export const NetworkEnergyConsumption: FC = () => {
         className='lg:max-w-[500px]'
       >
         <div
-          className='thin-scrollbar relative w-full overflow-auto overflow-x-auto rounded-lg border border-border text-grayTextPrimary'
+          className='thin-scrollbar relative w-full overflow-auto overflow-x-auto rounded-m border border-border text-grayTextPrimary'
           style={{
             transform: "rotateX(180deg)",
           }}

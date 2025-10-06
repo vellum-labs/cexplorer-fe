@@ -17,7 +17,7 @@ export const EmptyState: FC<EmptyStateProps> = ({
 }) => {
   return (
     <div
-      className={`flex w-full flex-col items-center justify-center rounded-xl border border-border bg-cardBg px-3 py-3 text-center ${className}`}
+      className={`flex w-full flex-col items-center justify-center rounded-l border border-border bg-cardBg px-3 py-3 text-center ${className}`}
     >
       {/* Icon with 24px bottom margin */}
       <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-background p-2 text-primary">

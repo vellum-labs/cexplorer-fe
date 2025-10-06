@@ -97,9 +97,9 @@ export const ScriptListTVLTab: FC = () => {
         </>
       ) : (
         <>
-          <div className='flex min-w-[350px] flex-grow flex-col gap-1.5 rounded-lg border border-border p-1.5 lg:max-w-[350px] lg:flex-grow-0'>
+          <div className='flex min-w-[350px] flex-grow flex-col gap-1.5 rounded-m border border-border p-1.5 lg:max-w-[350px] lg:flex-grow-0'>
             <div className='flex h-fit w-full items-center gap-2'>
-              <div className='flex aspect-square h-[32px] w-[32px] items-center justify-center rounded-md border border-border'>
+              <div className='flex aspect-square h-[32px] w-[32px] items-center justify-center rounded-s border border-border'>
                 <CircleDollarSign className='text-primary' size={15} />
               </div>
               <span className='text-sm text-grayTextPrimary'>
@@ -134,7 +134,7 @@ export const ScriptListTVLTab: FC = () => {
               </a>
             </div>
           </div>
-          <div className='relative w-full rounded-lg border border-border'>
+          <div className='relative w-full rounded-m border border-border'>
             <GraphWatermark />
             <ReactEcharts
               opts={{ height: 400 }}

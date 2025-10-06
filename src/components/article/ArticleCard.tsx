@@ -18,12 +18,12 @@ export const ArticleCard = ({ article, className }: Props) => {
   return (
     <article
       key={article.url}
-      className={`flex w-full max-w-desktop flex-col gap-1 rounded-lg border border-border bg-cardBg p-1.5 text-primary shadow-sm ${className}`}
+      className={`flex w-full max-w-desktop flex-col gap-1 rounded-m border border-border bg-cardBg p-1.5 text-primary shadow-sm ${className}`}
     >
       <Link to='/article/$url' params={{ url: article.url }} className='w-full'>
         <Image
           src={article.image}
-          className='h-[200px] w-full rounded-lg object-cover'
+          className='h-[200px] w-full rounded-m object-cover'
           alt={article.name}
           height={200}
         />

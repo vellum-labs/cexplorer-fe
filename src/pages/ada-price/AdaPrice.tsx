@@ -24,7 +24,7 @@ export const AdaPrice: FC = () => {
         {graphRates.length ? (
           <section className='flex w-full flex-col items-center pb-3'>
             <div className='flex w-full max-w-desktop items-center justify-between px-mobile md:px-desktop'>
-              <div className='flex w-full flex-col gap-3 rounded-lg lg:flex-row'>
+              <div className='flex w-full flex-col gap-3 rounded-m lg:flex-row'>
                 <AdaPriceTable />
                 <AdaPriceGraph graphRates={graphRates} />
               </div>
