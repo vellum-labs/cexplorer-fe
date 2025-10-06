@@ -83,8 +83,8 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
     aggregatedData.totalActualOut || aggregatedData.totalExpectedOut;
 
   return (
-    <div className='w-full overflow-x-auto rounded-xl border border-border'>
-      <div className='min-w-fit'>
+    <div className='w-full overflow-x-auto rounded-xl border border-border xl:overflow-x-visible'>
+      <div className='min-w-fit xl:min-w-full'>
         <div className='bg-grayBgTertiary border-b border-border px-4 py-3'>
           <div className='flex items-center gap-1 text-sm'>
             <span className='font-medium text-grayTextSecondary'>

@@ -471,13 +471,13 @@ export const ConsolidatedDexSwapDetailCard: FC<
 
   return (
     <div
-      className='thin-scrollbar w-full overflow-x-auto rounded-xl border border-border px-5 py-4'
+      className='thin-scrollbar w-full overflow-x-auto rounded-xl border border-border px-5 py-4 xl:overflow-x-visible'
       style={{
         transform: "rotateX(180deg)",
       }}
     >
       <div
-        className='min-w-[1100px] xl:min-w-[auto]'
+        className='min-w-[1100px] xl:min-w-full'
         style={{
           transform: "rotateX(180deg)",
         }}
