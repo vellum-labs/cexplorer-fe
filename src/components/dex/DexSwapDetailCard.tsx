@@ -150,7 +150,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
         swapDetail?.user?.address,
         <div className='flex items-center gap-1'>
           {swapDetail?.user?.balance && (
-            <Image src={Icon} className='h-4 w-4 rounded-max' />
+            <Image src={Icon} className='rounded-max h-4 w-4' />
           )}
           <div className='flex items-center gap-1'>
             <Link
@@ -158,7 +158,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
               params={{
                 address: swapDetail?.user?.address ?? "",
               }}
-              className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-text-sm text-primary`}
+              className={`text-text-sm block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-primary`}
             >
               {swapDetail?.user?.address}
             </Link>
@@ -189,7 +189,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
             className='text-primary'
           >
             <span
-              className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-sm`}
+              className={`px-0text-text-sm block overflow-hidden overflow-ellipsis whitespace-nowrap`}
             >
               {swapDetail?.tx_hash}
             </span>
@@ -203,7 +203,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
       title: "Confirmation",
       value: renderWithException(
         swapDetail?.block?.no,
-        <div className='flex items-center gap-[2.5px] text-text-sm'>
+        <div className='text-text-sm flex items-center gap-[2.5px]'>
           {confirmations[1] < 3 && (
             <CircleX size={15} className='translate-y-[1px] text-red-500' />
           )}
@@ -314,7 +314,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
       value: renderWithException(
         swapDetail?.status,
         <div className='flex items-center'>
-          <p className='flex w-fit items-center gap-1/2 rounded-s border border-border px-1 text-text-sm'>
+          <p className='gap-1/2 text-text-sm flex w-fit items-center rounded-s border border-border px-1'>
             {isSuccess ? (
               <Check className='text-greenText' size={15} />
             ) : isCanceled ? (
@@ -345,9 +345,9 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
       value: renderWithException(
         typeof swapDetail?.is_dexhunter === "boolean",
         <div className='flex items-center'>
-          <p className='flex w-fit items-center gap-1/2 rounded-s border border-border px-1 text-text-sm'>
+          <p className='gap-1/2 text-text-sm flex w-fit items-center rounded-s border border-border px-1'>
             {isSuccess ? (
-              <Image src={DexhunterIcon} className='h-4 w-4 rounded-max' />
+              <Image src={DexhunterIcon} className='rounded-max h-4 w-4' />
             ) : (
               <ArrowLeftRight size={15} className='text-primary' />
             )}
@@ -363,7 +363,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
         swapDetail?.dex,
         <div className='flex items-center'>
           <p
-            className={`flex w-fit items-center gap-1/2 rounded-l border px-1 text-sm`}
+            className={`gap-1/2 px-1text-text-sm flex w-fit items-center rounded-l border`}
             style={{
               backgroundColor: dex?.bgColor ?? "transparent",
               borderColor: dex?.borderColor ?? "var(--border)",
@@ -419,7 +419,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
             {detailItems.map(({ key, title, value, divider }) => (
               <div key={key}>
                 <div className='flex w-full items-start'>
-                  <p className='min-w-[200px] text-text-sm text-grayTextSecondary'>
+                  <p className='text-text-sm min-w-[200px] text-grayTextSecondary'>
                     {title}
                   </p>
                   <div className='w-full'>

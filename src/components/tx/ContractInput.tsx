@@ -45,23 +45,23 @@ export const ContractInput: FC<ContractInputProps> = ({
           />
         )}
         {contract.label && <LabelBadge variant='lg' label={contract?.label} />}
-        <div className='w-fit rounded-m border border-border bg-background px-1 py-1/2 text-text-xs font-medium'>
+        <div className='rounded-m py-1/2 text-text-xs w-fit border border-border bg-background px-1 font-medium'>
           Input #{inputIndex + 1}
         </div>
         <PurposeBadge purpose={input.redeemer.purpose} />
-        <span className='flex h-[25px] items-center rounded-max border border-border bg-blue-200/15 px-1 text-text-xs font-medium'>
+        <span className='rounded-max text-text-xs flex h-[25px] items-center border border-border bg-blue-200/15 px-1 font-medium'>
           {contract.type.slice(0, 1).toUpperCase() + contract.type.slice(1)}
         </span>
-        <span className='flex h-[25px] items-center rounded-max border border-border bg-secondaryBg px-1 text-text-xs font-medium'>
+        <span className='rounded-max text-text-xs flex h-[25px] items-center border border-border bg-secondaryBg px-1 font-medium'>
           Size {(contract.size / 1024).toFixed(2)}kB
         </span>
-        <span className='flex h-[25px] items-center rounded-max border border-border bg-secondaryBg px-1 text-text-xs font-medium'>
+        <span className='rounded-max text-text-xs flex h-[25px] items-center border border-border bg-secondaryBg px-1 font-medium'>
           Fee <AdaWithTooltip data={input.redeemer.fee} />
         </span>
       </div>
 
       <div
-        className={`mt-4 flex-col gap-1 text-sm ${open ? "flex" : "hidden"}`}
+        className={`gap-1text-text-sm mt-4 flex-col ${open ? "flex" : "hidden"}`}
       >
         <span>Mem: {formatNumber(input?.redeemer?.unit.mem)}</span>
         <span>Steps: {formatNumber(input?.redeemer?.unit.steps)}</span>
@@ -87,7 +87,7 @@ export const ContractInput: FC<ContractInputProps> = ({
           search
         />
         <span>
-          <span className='mt-1 flex items-center gap-1/2'>
+          <span className='gap-1/2 mt-1 flex items-center'>
             Script hash:{" "}
             <ConstLabelBadge type='sc' name={contract?.script_hash} />
           </span>

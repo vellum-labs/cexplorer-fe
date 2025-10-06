@@ -41,13 +41,13 @@ export const DrepNameCell: FC<DrepNameCellProps> = ({ item }) => {
       <Image
         src={generateImageUrl(item?.hash?.view ?? "", "ico", "drep")}
         type='user'
-        className='h-8 w-8 rounded-max'
+        className='rounded-max h-8 w-8'
         height={32}
         width={32}
         fallbackletters={fallbackletters}
       />
 
-      <div className={`flex w-[calc(100%-40px)] flex-col text-sm`}>
+      <div className={`flex-coltext-text-sm flex w-[calc(100%-40px)]`}>
         {item?.data?.given_name && (
           <Link
             to='/drep/$hash'
@@ -59,7 +59,7 @@ export const DrepNameCell: FC<DrepNameCellProps> = ({ item }) => {
               : item?.data?.given_name}
           </Link>
         )}
-        <div className='flex items-center gap-1/2'>
+        <div className='gap-1/2 flex items-center'>
           <Link
             to='/drep/$hash'
             params={{ hash: item?.hash?.view ?? "" }}

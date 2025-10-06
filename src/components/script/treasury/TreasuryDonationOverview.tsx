@@ -73,7 +73,7 @@ export const TreasuryDonationOverview = ({ query }: Props) => {
                       : currentEpochChangePercentage > 0
                         ? "text-greenText"
                         : "text-redText"
-                  }} flex items-center gap-1/2 text-sm`}
+                  }} gap-1/2text-text-sm flex items-center`}
                 >
                   <TrendingArrow percentage={currentEpochChangePercentage} />
                   {currentEpochChangePercentage}%
@@ -97,7 +97,7 @@ export const TreasuryDonationOverview = ({ query }: Props) => {
                       : previousEpochChangePercentage > 0
                         ? "text-greenText"
                         : "text-redText"
-                  }} flex items-center gap-1/2 text-sm`}
+                  }} gap-1/2text-text-sm flex items-center`}
                 >
                   <TrendingArrow percentage={previousEpochChangePercentage} />
                   {previousEpochChangePercentage}%
