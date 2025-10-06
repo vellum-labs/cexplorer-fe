@@ -83,7 +83,7 @@ export const PolicyStatGraph: FC<PolicyStatGraphProps> = memo(
           color: textColor,
         },
         backgroundColor: bgColor,
-        axisPointer: { type: "shadow" },
+        axisPointer: { type: "shadow-md" },
         formatter: params => {
           const epoch = +params?.[0]?.name;
 

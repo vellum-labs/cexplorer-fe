@@ -229,7 +229,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       {isOpen && (
         <div
           ref={contentRef}
-          className={`absolute bg-cardBg animate-in ${horizontalPosition === "left" ? "right-0" : "left-0"} ${verticalPosition === "down" ? "top-[calc(100%+3px)]" : "bottom-[calc(100%+3px)]"} z-20 rounded-m bg-background p-1 text-sm shadow ${withBorder ? 'border border-border' : ''} ${poppoverClassname || ''}`}
+          className={`absolute bg-cardBg animate-in ${horizontalPosition === "left" ? "right-0" : "left-0"} ${verticalPosition === "down" ? "top-[calc(100%+3px)]" : "bottom-[calc(100%+3px)]"} z-20 rounded-m bg-background p-1 text-sm shadow-md ${withBorder ? 'border border-border' : ''} ${poppoverClassname || ''}`}
           style={{
             width: `${width}`,
           }}
@@ -289,7 +289,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                         {option.nestedOptions && <ChevronRight size={15} />}
                         {activeSubmenu === option.label && (
                           <div
-                            className={`absolute left-[110%] top-0 z-50 rounded-l bg-cardBg p-1 shadow border border-border`}
+                            className={`absolute left-[110%] top-0 z-50 rounded-l bg-cardBg p-1 shadow-md border border-border`}
                             style={{
                               width: width,
                             }}

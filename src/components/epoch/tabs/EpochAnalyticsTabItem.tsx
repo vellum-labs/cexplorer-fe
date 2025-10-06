@@ -216,7 +216,7 @@ export const EpochAnalyticsTabItem: FC = () => {
                 trigger: "axis",
                 confine: true,
                 axisPointer: {
-                  type: "shadow",
+                  type: "shadow-md",
                 },
                 backgroundColor: bgColor,
                 textStyle: {

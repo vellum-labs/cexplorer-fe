@@ -76,7 +76,7 @@ const WalletDropdown = ({
 
   return (
     <div
-      className='absolute bottom-[calc(100%+3px)] right-0 z-30 w-[280px] rounded-m border border-border bg-cardBg p-0 text-sm font-medium shadow md:bottom-auto md:top-[calc(100%+3px)] md:w-[320px]'
+      className='absolute bottom-[calc(100%+3px)] right-0 z-30 w-[280px] rounded-m border border-border bg-cardBg p-0 text-sm font-medium shadow-md md:bottom-auto md:top-[calc(100%+3px)] md:w-[320px]'
       style={{
         visibility: isLoading || !isOpen ? "hidden" : "visible",
       }}

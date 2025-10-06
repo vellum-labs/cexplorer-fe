@@ -34,7 +34,7 @@ const TxContentTable = ({ title, data, sort, isOutput }: Props) => {
   if (deposit) totalAda -= deposit;
 
   return (
-    <section className='m-0 flex h-full w-full flex-col rounded-l border border-border shadow'>
+    <section className='m-0 flex h-full w-full flex-col rounded-l border border-border shadow-md'>
       <div className='flex w-full justify-between rounded-tl-l rounded-tr-l border-b border-border bg-darker px-2 py-1 text-sm font-medium text-grayTextPrimary'>
         <span>{title}</span>
         <span className='text-right text-sm font-regular text-grayTextPrimary'>

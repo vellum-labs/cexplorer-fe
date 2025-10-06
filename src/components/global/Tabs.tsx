@@ -207,7 +207,7 @@ const Tabs = ({
             </div>
           ) : (
             <div
-              className={`hidden ${tabParam ? "h-[35px]" : "h-[44px]"} w-fit items-center gap-1/4 text-nowrap rounded-m border border-borderFaded bg-darker font-medium shadow lg:flex`}
+              className={`hidden ${tabParam ? "h-[35px]" : "h-[44px]"} w-fit items-center gap-1/4 text-nowrap rounded-m border border-borderFaded bg-darker font-medium shadow-md lg:flex`}
             >
               {items.map((item, index) => (
                 // @ts-expect-error link
