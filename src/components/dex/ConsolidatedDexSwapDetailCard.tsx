@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import type { useFetchMiscBasic } from "@/services/misc";
-import type { AggregatedSwapData } from "@/utils/dex/aggregateSwapData";
+import type { AggregatedSwapData } from "@/types/tokenTypes";
 
 import {
   ArrowRight,

@@ -1,42 +1,10 @@
-import type { DeFiOrder } from "@/types/tokenTypes";
+import type { AggregatedSwapData, DeFiOrder } from "@/types/tokenTypes";
 import { ADATokenName } from "@/constants/currencies";
-
-export interface AggregatedSwapData {
-  address: string;
-  timestamp: string;
-  txHash: string;
-  confirmations: [string, number];
-
-  pair: {
-    tokenIn: string;
-    tokenOut: string;
-    isMultiplePairs: boolean;
-  };
-
-  totalAmountIn: number;
-  totalExpectedOut: number;
-  totalActualOut: number;
-
-  adaPrice: number;
-
-  status: "COMPLETE" | "PENDING" | "PARTIALLY_COMPLETE" | "CANCELLED";
-
-  lastUpdate: string;
-
-  type: "AGGREGATOR_SWAP" | "DEXHUNTER_SWAP" | "DIRECT_SWAP";
-
-  dexes: string[];
-
-  totalBatcherFees: number;
-  totalDeposits: number;
-
-  orders: DeFiOrder[];
-}
 
 export function aggregateSwapData(
   orders: DeFiOrder[],
 ): AggregatedSwapData | null {
-  if (!orders || orders.length === 0) {
+  if (!Array.isArray(orders) || orders.length === 0) {
     return null;
   }
 
@@ -97,16 +65,20 @@ export function aggregateSwapData(
   const completedCount = statuses.filter(s => s === "COMPLETE").length;
   const cancelledCount = statuses.filter(s => s === "CANCELLED").length;
 
-  let status: AggregatedSwapData["status"];
-  if (completedCount === orders.length) {
-    status = "COMPLETE";
-  } else if (cancelledCount === orders.length) {
-    status = "CANCELLED";
-  } else if (completedCount > 0) {
-    status = "PARTIALLY_COMPLETE";
-  } else {
-    status = "PENDING";
-  }
+  const getStatus = (): AggregatedSwapData["status"] => {
+    switch (true) {
+      case completedCount === orders.length:
+        return "COMPLETE";
+      case cancelledCount === orders.length:
+        return "CANCELLED";
+      case completedCount > 0:
+        return "PARTIALLY_COMPLETE";
+      default:
+        return "PENDING";
+    }
+  };
+
+  const status = getStatus();
 
   const lastUpdate = orders.reduce((latest, order) => {
     return new Date(order.last_update) > new Date(latest)
@@ -117,14 +89,18 @@ export function aggregateSwapData(
   const uniqueDexes = new Set(orders.map(order => order.dex));
   const hasDexhunter = orders.some(order => order.is_dexhunter);
 
-  let type: AggregatedSwapData["type"];
-  if (hasDexhunter) {
-    type = "DEXHUNTER_SWAP";
-  } else if (uniqueDexes.size > 1) {
-    type = "AGGREGATOR_SWAP";
-  } else {
-    type = "DIRECT_SWAP";
-  }
+  const getType = (): AggregatedSwapData["type"] => {
+    switch (true) {
+      case hasDexhunter:
+        return "DEXHUNTER_SWAP";
+      case uniqueDexes.size > 1:
+        return "AGGREGATOR_SWAP";
+      default:
+        return "DIRECT_SWAP";
+    }
+  };
+
+  const type = getType();
 
   const dexes = Array.from(uniqueDexes);
 

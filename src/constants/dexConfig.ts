@@ -1,17 +1,11 @@
+import type { DexConfig } from "@/types/tokenTypes";
+
 import SundaeSwapIcon from "@/resources/images/icons/sundaeswap.png";
 import MinSwapIcon from "@/resources/images/icons/minswap.png";
 import WingRidersIcon from "@/resources/images/icons/wingrider.png";
 import MuesliSwapIcon from "@/resources/images/icons/muesliswap.png";
 import VyFinanceIcon from "@/resources/images/icons/vyfinance.png";
 import DexHunterIcon from "@/resources/images/icons/dexhunter.svg";
-
-export interface DexConfig {
-  label: string;
-  icon: string;
-  textColor: string;
-  bgColor: string;
-  borderColor: string;
-}
 
 export const dexConfig: Record<string, DexConfig> = {
   SUNDAESWAP: {

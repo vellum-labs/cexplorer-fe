@@ -1,6 +1,5 @@
 import type { FC } from "react";
-import type { DeFiOrder } from "@/types/tokenTypes";
-import type { AggregatedSwapData } from "@/utils/dex/aggregateSwapData";
+import type { AggregatedSwapData, DeFiOrder } from "@/types/tokenTypes";
 
 import { ArrowRight, Check, Ellipsis, X, Route } from "lucide-react";
 import { dexConfig } from "@/constants/dexConfig";
