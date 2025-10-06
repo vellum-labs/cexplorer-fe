@@ -5,67 +5,22 @@ import type { AggregatedSwapData } from "@/utils/dex/aggregateSwapData";
 import { ArrowRight, Check, Ellipsis, X, Route } from "lucide-react";
 import { dexConfig } from "@/constants/dexConfig";
 
-import { Image } from "../global/Image";
 import { Link } from "@tanstack/react-router";
 import Copy from "../global/Copy";
+import { Image } from "../global/Image";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { formatString } from "@/utils/format/format";
 import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
-import { generateImageUrl } from "@/utils/generateImageUrl";
-import { encodeAssetName } from "@/utils/asset/encodeAssetName";
-import { alphabetWithNumbers } from "@/constants/alphabet";
-import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import { ADATokenName } from "@/constants/currencies";
-import AdaIcon from "@/resources/images/icons/ada.webp";
 import { Tooltip } from "../ui/tooltip";
 import { AssetTicker } from "./AssetTicker";
 import { formatNumberWithSuffix } from "@/utils/format/format";
 import { SwapTypeBadge } from "./SwapTypeBadge";
+import { getAssetImage } from "@/utils/asset/getAssetImage";
 
 interface SwapDetailTableProps {
   aggregatedData: AggregatedSwapData;
 }
-
-const getAssetImage = (tokenName: string, isNft = false) => {
-  // Check if it's ADA
-  const isAdaToken =
-    tokenName === "lovelaces" ||
-    tokenName === "lovelace" ||
-    tokenName === ADATokenName ||
-    tokenName?.toLowerCase().includes("lovelace");
-
-  if (isAdaToken) {
-    return (
-      <img
-        src={AdaIcon}
-        alt='ADA'
-        className='aspect-square shrink-0 rounded-full'
-        height={16}
-        width={16}
-      />
-    );
-  }
-
-  const fingerprint = getAssetFingerprint(tokenName);
-  const encodedNameArr = encodeAssetName(tokenName).split("");
-
-  return (
-    <Image
-      type='asset'
-      height={16}
-      width={16}
-      className='aspect-square shrink-0 rounded-full'
-      src={generateImageUrl(
-        isNft ? fingerprint : tokenName,
-        "ico",
-        isNft ? "nft" : "token",
-      )}
-      fallbackletters={[...encodedNameArr]
-        .filter(char => alphabetWithNumbers.includes(char.toLowerCase()))
-        .join("")}
-    />
-  );
-};
 
 export const SwapDetailTable: FC<SwapDetailTableProps> = ({
   aggregatedData,
@@ -128,7 +83,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
               Token swap order:{" "}
             </span>
             <div className='flex items-center gap-1'>
-              {getAssetImage(aggregatedData.pair.tokenIn)}
+              {getAssetImage(aggregatedData.pair.tokenIn, false, 16)}
               <Tooltip content={summaryAmountIn.toLocaleString()}>
                 <span className='font-medium'>
                   {formatNumberWithSuffix(summaryAmountIn)}{" "}
@@ -142,7 +97,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
             </div>
             <span className='mx-2 text-grayTextSecondary'>to</span>
             <div className='flex items-center gap-1'>
-              {getAssetImage(aggregatedData.pair.tokenOut)}
+              {getAssetImage(aggregatedData.pair.tokenOut, false, 16)}
               <Tooltip content={summaryAmountOut.toLocaleString()}>
                 <span className='font-medium'>
                   {aggregatedData.totalActualOut ? "" : "~"}
@@ -195,7 +150,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                   <div className='flex items-center gap-2'>
                     <Route size={16} className='text-grayTextSecondary' />
                     <div className='flex items-center gap-1'>
-                      {getAssetImage(order.token_in.name)}
+                      {getAssetImage(order.token_in.name, false, 16)}
                       <Tooltip content={order.amount_in.toLocaleString()}>
                         <span>
                           {formatNumberWithSuffix(order.amount_in)}{" "}
@@ -209,7 +164,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                     </div>
                     <ArrowRight size={14} />
                     <div className='flex items-center gap-1'>
-                      {getAssetImage(order.token_out.name)}
+                      {getAssetImage(order.token_out.name, false, 16)}
                       <Tooltip content={actualOut.toLocaleString()}>
                         <span>
                           {!order.actual_out_amount ? "~" : ""}

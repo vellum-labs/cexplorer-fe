@@ -35,58 +35,15 @@ import { getConfirmations } from "@/utils/getConfirmations";
 import { renderWithException } from "@/utils/renderWithException";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
-import { generateImageUrl } from "@/utils/generateImageUrl";
-import { encodeAssetName } from "@/utils/asset/encodeAssetName";
-import { alphabetWithNumbers } from "@/constants/alphabet";
 import { ADATokenName } from "@/constants/currencies";
 import { formatNumberWithSuffix } from "@/utils/format/format";
-import AdaIcon from "@/resources/images/icons/ada.webp";
+import { getAssetImage } from "@/utils/asset/getAssetImage";
 
 interface ConsolidatedDexSwapDetailCardProps {
   miscBasic: ReturnType<typeof useFetchMiscBasic>["data"];
   aggregatedData: AggregatedSwapData | undefined;
   isLoading: boolean;
 }
-
-const getAssetImage = (tokenName: string, isNft = false) => {
-  const isAdaToken =
-    tokenName === "lovelaces" ||
-    tokenName === "lovelace" ||
-    tokenName === ADATokenName ||
-    tokenName?.toLowerCase().includes("lovelace");
-
-  if (isAdaToken) {
-    return (
-      <img
-        src={AdaIcon}
-        alt='ADA'
-        className='aspect-square shrink-0 rounded-full'
-        height={20}
-        width={20}
-      />
-    );
-  }
-
-  const fingerprint = getAssetFingerprint(tokenName);
-  const encodedNameArr = encodeAssetName(tokenName).split("");
-
-  return (
-    <Image
-      type='asset'
-      height={20}
-      width={20}
-      className='aspect-square shrink-0 rounded-full'
-      src={generateImageUrl(
-        isNft ? fingerprint : tokenName,
-        "ico",
-        isNft ? "nft" : "token",
-      )}
-      fallbackletters={[...encodedNameArr]
-        .filter(char => alphabetWithNumbers.includes(char.toLowerCase()))
-        .join("")}
-    />
-  );
-};
 
 export const ConsolidatedDexSwapDetailCard: FC<
   ConsolidatedDexSwapDetailCardProps
