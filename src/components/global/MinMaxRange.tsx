@@ -110,7 +110,7 @@ export const MinMaxRange: FC<MinMaxRangeProps> = ({
       </div>
 
       {showLabels && (
-        <span className={`${sizeClasses.text} ml-1 text-grayTextSecondary`}>
+        <span className={`${sizeClasses.text} ml-1/2 text-grayTextSecondary`}>
           {max}
         </span>
       )}

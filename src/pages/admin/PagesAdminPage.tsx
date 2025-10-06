@@ -61,7 +61,7 @@ export const PagesAdminPage = () => {
         <title>Admin Pages | Cexplorer.io</title>
       </Helmet>
       <div className='flex w-full max-w-desktop flex-col items-center justify-center'>
-        <Breadcrumb className='mb-4 w-full'>
+        <Breadcrumb className='mb-2 w-full'>
           <BreadcrumbList className='flex items-center'>
             <BreadcrumbItem>
               <Link className='underline underline-offset-2' to='/'>
@@ -78,11 +78,11 @@ export const PagesAdminPage = () => {
           </BreadcrumbList>
         </Breadcrumb>
         {query.isLoading ? (
-          <div className='mt-8 flex w-full justify-center'>
+          <div className='mt-4 flex w-full justify-center'>
             <SpinningLoader />
           </div>
         ) : !data && !query.isLoading ? (
-          <p className='mt-8 flex w-full justify-center'>
+          <p className='mt-4 flex w-full justify-center'>
             You don't have admin permission.
           </p>
         ) : (

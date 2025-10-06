@@ -100,7 +100,7 @@ const AddressCell = ({
             content={
               <div className='flex w-[200px] flex-col items-center text-sm'>
                 <p className='font-medium'>Stake key</p>
-                <div className='mt-1 flex items-end justify-end break-all text-center text-sm'>
+                <div className='mt-1/2 flex items-end justify-end break-all text-center text-sm'>
                   <Link
                     to='/stake/$stakeAddr'
                     params={{ stakeAddr: Address.from(address).rewardAddress }}

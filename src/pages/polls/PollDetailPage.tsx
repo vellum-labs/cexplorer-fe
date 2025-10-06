@@ -114,12 +114,12 @@ export const PollDetailPage = () => {
       >
         <div className='flex w-full max-w-desktop flex-col gap-5 px-mobile pb-3 md:flex-row md:px-desktop'>
           <section className='order-2 flex flex-col gap-2 rounded-xl border border-border p-2 md:order-none'>
-            <h2 className='mb-2'>{pollDetail?.name}</h2>
+            <h2 className='mb-1'>{pollDetail?.name}</h2>
             <span className='text-sm font-light text-grayTextSecondary'>
               Description
             </span>
             <div>{parse(pollDetail?.description ?? "")}</div>
-            <div className='mt-6 flex gap-2 bg-darker p-2 text-sm text-grayTextPrimary'>
+            <div className='mt-3 flex gap-2 bg-darker p-2 text-sm text-grayTextPrimary'>
               <div className='flex h-7 w-7 items-center justify-center rounded-md border border-border bg-background p-1/2'>
                 <Info size={20} color={colors.darkBlue} />
               </div>
@@ -130,14 +130,14 @@ export const PollDetailPage = () => {
                     {nfts} votes ({nfts} NFTs)
                   </span>
                 </span>
-                <p className='mt-2'>
+                <p className='mt-1'>
                   All wallets can vote, and voting power is determined by a
                   snapshot taken when voting ends—any NFTs acquired before then
                   will count.
                 </p>
               </div>
             </div>
-            <span className='mb-1 mt-6 text-sm font-light text-grayTextSecondary'>
+            <span className='mb-1/2 mt-3 text-sm font-light text-grayTextSecondary'>
               Voting
             </span>
             <RadioGroup
@@ -145,7 +145,7 @@ export const PollDetailPage = () => {
                 optionRef.current = value;
               }}
               defaultValue='0'
-              className='mb-6 flex flex-col gap-4'
+              className='mb-3 flex flex-col gap-4'
             >
               {pollDetail?.options.map((option, i) => (
                 <div
@@ -161,7 +161,7 @@ export const PollDetailPage = () => {
                     id={option}
                   />
                   <Label htmlFor={option}>
-                    <span className='mr-1 text-grayTextSecondary'>
+                    <span className='mr-1/2 text-grayTextSecondary'>
                       Option {i + 1}:
                     </span>{" "}
                     {parse(option)}
@@ -189,7 +189,7 @@ export const PollDetailPage = () => {
           </section>
           <div className='flex min-w-[350px] flex-col gap-5'>
             <section className='order-1 flex w-full flex-col gap-1 rounded-xl border border-border p-2 text-xs md:order-none'>
-              <div className='mb-4 flex w-full items-center justify-between'>
+              <div className='mb-2 flex w-full items-center justify-between'>
                 <h3>Status</h3> {renderStatusBadge(pollDetail?.state)}
               </div>
               <div className='flex justify-between text-xs'>
@@ -250,7 +250,7 @@ const CustomLegend = ({
   );
 
   return (
-    <div className='mt-6 flex flex-col gap-2 text-sm text-grayTextSecondary'>
+    <div className='mt-3 flex flex-col gap-2 text-sm text-grayTextSecondary'>
       <div className='flex justify-between'>
         Total voters{" "}
         <span className='text-grayTextPrimary'>{totalVoteCount}</span>

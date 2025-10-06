@@ -236,7 +236,7 @@ export const ScriptListRanklistTab: FC = () => {
           ""
         )}
       </div>
-      <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
+      <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
         <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
           <SortBy
             selectItems={selectItems}

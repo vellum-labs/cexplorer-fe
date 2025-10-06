@@ -528,7 +528,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         </div>
       </div>
       <div
-        className='thin-scrollbar relative mt-5 w-full max-w-desktop -scale-100 overflow-x-auto rounded-xl border border-border [&>div]:w-full'
+        className='thin-scrollbar relative mt-3 w-full max-w-desktop -scale-100 overflow-x-auto rounded-xl border border-border [&>div]:w-full'
         ref={wrapperRef}
       >
         <Table className='thin-scrollbar -scale-100' minwidth={1300}>

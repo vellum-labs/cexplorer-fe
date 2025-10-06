@@ -46,7 +46,7 @@ export const StakeListTab: FC = () => {
                 {formatString(item.view, "long")}
               </Link>
               {item.adahandle && (
-                <AdaHandleBadge hex={item.adahandle} link className='mt-1' />
+                <AdaHandleBadge hex={item.adahandle} link className='mt-1/2' />
               )}
             </div>
             <Copy copyText={item.view} />

@@ -129,11 +129,11 @@ export const AdminArticleDetail = () => {
         </BreadcrumbList>
       </Breadcrumb>
       {query.isLoading ? (
-        <div className='mt-8 flex w-full justify-center'>
+        <div className='mt-4 flex w-full justify-center'>
           <SpinningLoader />
         </div>
       ) : !data && !query.isLoading ? (
-        <p className='mt-8 flex w-full justify-center'>
+        <p className='mt-4 flex w-full justify-center'>
           You don't have admin permission.
         </p>
       ) : (
@@ -174,12 +174,12 @@ export const AdminArticleDetail = () => {
             value={image}
           />
           <p>Publish date:</p>
-          <div className='mb-8 flex flex-col items-start gap-1'>
+          <div className='mb-4 flex flex-col items-start gap-1'>
             <input
               type='datetime-local'
               value={pubDate || new Date().toISOString()}
               onChange={e => setPubDate(e.target.value)}
-              className='mb-8 bg-background text-text'
+              className='mb-4 bg-background text-text'
             />
           </div>
           <p>Content:</p>

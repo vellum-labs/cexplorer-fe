@@ -61,7 +61,7 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
         <span>{subTitle}</span>
       </div>
       {showTitleDivider && (
-        <div className='mb-2 mt-3 w-full border-t border-border'></div>
+        <div className='mb-1 mt-1.5 w-full border-t border-border'></div>
       )}
       <div
         className={`flex h-full ${startContent ? "items-start" : "items-stretch"} gap-2 pb-2 ${showTitleDivider ? "pt-0" : "pt-1"} ${startContent ? "flex-wrap justify-center sm:flex-nowrap" : ""}`}
@@ -105,7 +105,7 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
             </div>
           </div>
           {showContentDivider && endContent && (
-            <div className='mt-2 w-full border-t border-border'></div>
+            <div className='mt-1 w-full border-t border-border'></div>
           )}
           {threshold && (
             <div className='flex w-full items-center justify-between pt-1'>

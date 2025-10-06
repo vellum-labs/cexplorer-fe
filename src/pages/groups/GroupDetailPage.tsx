@@ -586,7 +586,7 @@ export const GroupDetailPage = () => {
       </Helmet>
       <main className='flex min-h-minHeight flex-col items-center gap-2 p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col justify-center'>
-          <Breadcrumb className='mb-4 w-full'>
+          <Breadcrumb className='mb-2 w-full'>
             <BreadcrumbList className='flex items-center'>
               <BreadcrumbItem>
                 <Link className='underline underline-offset-2' to='/'>
@@ -603,8 +603,8 @@ export const GroupDetailPage = () => {
             </BreadcrumbList>
           </Breadcrumb>
           <h1 className='text-left'>{name}</h1>
-          <p className='mt-2'>{description}</p>
-          <div className='my-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
+          <p className='mt-1'>{description}</p>
+          <div className='my-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
             <div className='flex w-full flex-wrap items-center justify-end gap-2 md:flex-nowrap'>
               {isAnyDrepItem && (
                 <Tabs

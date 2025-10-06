@@ -35,7 +35,7 @@ export const AdaPrice: FC = () => {
             width='1310px'
             height='400px'
             rounded='lg'
-            className='mb-4'
+            className='mb-2'
           />
         )}
       </div>

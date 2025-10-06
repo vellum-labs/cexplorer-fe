@@ -204,7 +204,7 @@ export const AwardsTabItem: FC<AwardsTabItemProps> = ({ id }) => {
                 {String(item.type).replace("_", " ").slice(0, 1).toUpperCase() +
                   String(item.type).replace("_", " ").slice(1)}
               </h3>
-              <div className='mb-1 flex items-center justify-center gap-2'>
+              <div className='mb-1/2 flex items-center justify-center gap-2'>
                 <Calendar size={12} className='text-grayTextPrimary' />
                 <span className='text-grayTextPrimary text-sm'>
                   {format(new Date(item.time), "dd.MM.yyyy")}

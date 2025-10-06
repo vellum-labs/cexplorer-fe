@@ -179,7 +179,7 @@ export const WealthComposition = () => {
 
   return (
     <section>
-      <h3 className='mb-4'>Wealth Composition by ADA balance</h3>
+      <h3 className='mb-2'>Wealth Composition by ADA balance</h3>
       <Tabs tabParam='view' withPadding={false} items={tabs} />
     </section>
   );

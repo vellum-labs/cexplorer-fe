@@ -38,7 +38,7 @@ const Footer = () => {
                 <img src={GithubLogo} alt='Github' width={30} />
               </div>
             </div>
-            <div className='mt-5 flex w-full justify-start gap-[10%] md:mt-0 md:justify-end'>
+            <div className='mt-3 flex w-full justify-start gap-[10%] md:mt-0 md:justify-end'>
               <LinksColumn header='Company' links={footerLinks.company} />
               <LinksColumn header='Information' links={footerLinks.resources} />
               <LinksColumn header='Support us' links={footerLinks.supportUs} />
@@ -54,10 +54,10 @@ const Footer = () => {
           </span>
           <span className='flex items-center text-xs text-grayTextPrimary md:text-sm'>
             Donations:{" "}
-            <Link to='/donate' className='ml-1 text-primary underline'>
+            <Link to='/donate' className='ml-1/2 text-primary underline'>
               {formatString(donationAddress, "short")}
             </Link>{" "}
-            <Copy copyText={donationAddress} className='mx-1' />
+            <Copy copyText={donationAddress} className='mx-1/2' />
             ❤️
           </span>
         </div>

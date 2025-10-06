@@ -14,14 +14,14 @@ interface Props {
 
 export const AddressWithTxBadges = ({ utxo, isOutput }: Props) => {
   return (
-    <div className='mb-2 flex items-center gap-2'>
+    <div className='mb-1 flex items-center gap-2'>
       <ConstLabelBadge type='sc' name={utxo.reference_script?.hash} />
       <AddressCell enableHover address={utxo.payment_addr_bech32} />
       <Tooltip
         content={
           <div className='flex w-[200px] flex-col items-center text-sm'>
             <p className='font-medium'>UTXO</p>
-            <div className='mt-1 flex items-end justify-end break-all text-center text-sm'>
+            <div className='mt-1/2 flex items-end justify-end break-all text-center text-sm'>
               <Link
                 to='/tx/$hash'
                 params={{ hash: utxo.tx_hash }}
@@ -43,7 +43,7 @@ export const AddressWithTxBadges = ({ utxo, isOutput }: Props) => {
           content={
             <div className='flex w-[200px] flex-col items-center'>
               <p className='w-full text-center font-medium'>Inline datum</p>
-              <div className='mt-1 flex items-end justify-end break-all text-center text-sm'>
+              <div className='mt-1/2 flex items-end justify-end break-all text-center text-sm'>
                 <Link
                   to='/datum'
                   search={{ hash: utxo.datum_hash }}
@@ -64,7 +64,7 @@ export const AddressWithTxBadges = ({ utxo, isOutput }: Props) => {
           content={
             <div className='flex w-[200px] flex-col items-center'>
               <p className='w-full text-center font-medium'>Script Hash</p>
-              <div className='mt-1 flex items-end justify-end break-all text-center text-sm'>
+              <div className='mt-1/2 flex items-end justify-end break-all text-center text-sm'>
                 <Link
                   to='/script/$hash'
                   params={{ hash: utxo.reference_script.hash }}
@@ -85,7 +85,7 @@ export const AddressWithTxBadges = ({ utxo, isOutput }: Props) => {
           content={
             <div className='flex w-[200px] flex-col items-center'>
               <p className='w-full text-center font-medium'>Consumed by transaction</p>
-              <div className='mt-1 flex items-end justify-end break-all text-center text-sm'>
+              <div className='mt-1/2 flex items-end justify-end break-all text-center text-sm'>
                 <Link
                   to='/tx/$hash'
                   params={{ hash: utxo.consumed_utxo }}

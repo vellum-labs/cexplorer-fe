@@ -190,9 +190,9 @@ export const PoolIssuesMissedBlocks: FC = () => {
         description="This estimate is based on pool performance data. Pools don't always achieve their expected block allocation per epoch. Smaller pools may vary between 50% and 200% of expected performance. The feature is being optimized to account for these fluctuations."
         icon={<CircleAlert className='text-primary' />}
         value
-        className='mb-3 h-[100px] max-h-[100px] !flex-row items-center !gap-1'
+        className='mb-1.5 h-[100px] max-h-[100px] !flex-row items-center !gap-1'
       />
-      <div className='mb-3 flex w-full flex-col justify-between gap-3 min-[580px]:flex-row lg:items-center lg:gap-0'>
+      <div className='mb-1.5 flex w-full flex-col justify-between gap-3 min-[580px]:flex-row lg:items-center lg:gap-0'>
         <div className='hidden gap-2 lg:flex'>
           {epochButtons.map(({ key, title }) => (
             <Button
@@ -249,7 +249,7 @@ export const PoolIssuesMissedBlocks: FC = () => {
         </div>
       </div>
 
-      <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
+      <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
         <div className='flex w-full items-center justify-between gap-2'>
           {query.isLoading ? (
             <LoadingSkeleton height='27px' width={"220px"} />

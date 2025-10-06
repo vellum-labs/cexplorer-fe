@@ -151,7 +151,7 @@ export const ContractTransactionsPage = () => {
       breadcrumbItems={[{ label: "Contract interactions" }]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
-        <div className='mb-4 flex w-full items-center justify-between gap-2'>
+        <div className='mb-2 flex w-full items-center justify-between gap-2'>
           {!totalItems ? (
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (

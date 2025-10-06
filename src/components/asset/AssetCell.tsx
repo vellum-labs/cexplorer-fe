@@ -110,7 +110,7 @@ const AssetCell = memo((props: Props) => {
                       ? formattedHex
                       : renderAssetName({ name: assetName })
                 }
-                className='ml-2'
+                className='ml-1'
               />
             )}
           </Link>

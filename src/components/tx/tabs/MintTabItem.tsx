@@ -43,7 +43,7 @@ const MintTabItem = () => {
         return (
           <div className='flex items-center'>
             <Link
-              className='mr-2 block overflow-hidden text-ellipsis text-primary'
+              className='mr-1 block overflow-hidden text-ellipsis text-primary'
               to='/policy/$policyId'
               params={{
                 policyId: item.name.slice(0, 56),
@@ -66,7 +66,7 @@ const MintTabItem = () => {
           <Link
             to='/tx/$hash'
             params={{ hash: query.data?.data.hash || "" }}
-            className='mr-2 block overflow-hidden text-ellipsis text-primary'
+            className='mr-1 block overflow-hidden text-ellipsis text-primary'
           >
             {formatString(query.data?.data.hash ?? "", "long")}
           </Link>

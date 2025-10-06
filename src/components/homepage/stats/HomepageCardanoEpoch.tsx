@@ -57,7 +57,7 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
     ((durationInSeconds - timeLeft) / durationInSeconds) * 100;
 
   return (
-    <div className='mx-3 min-h-[110px]'>
+    <div className='mx-1.5 min-h-[110px]'>
       <div className='flex items-center gap-2 pb-1/2'>
         <div className='flex w-full flex-col'>
           <div className='flex items-center gap-3'>

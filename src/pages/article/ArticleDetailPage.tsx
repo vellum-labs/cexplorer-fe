@@ -99,7 +99,7 @@ export const ArticleDetailPage = () => {
         <section className='flex h-auto w-full justify-center bg-gradient-to-b from-bannerGradient to-darker p-3'>
           <div className='flex w-full max-w-desktop flex-col-reverse justify-center gap-3 md:flex-row'>
             <div className='flex w-full flex-col justify-between gap-3 md:w-[40%]'>
-              <Breadcrumb className='mb-4 w-full'>
+              <Breadcrumb className='mb-2 w-full'>
                 <BreadcrumbList className='flex items-center'>
                   <BreadcrumbItem>
                     <Link className='underline underline-offset-2' to='/'>
@@ -154,7 +154,7 @@ export const ArticleDetailPage = () => {
             </div>
             <SocialsAndCopy className='order-1 ml-auto block min-w-fit lg:hidden' />
           </div>
-          <article className='my-6 w-full text-left text-base lg:my-0 lg:w-[calc(100%-300px)] [&>*]:text-base [&>p]:my-4'>
+          <article className='my-3 w-full text-left text-base lg:my-0 lg:w-[calc(100%-300px)] [&>*]:text-base [&>p]:my-4'>
             {parse(data?.data[0] || "")}
           </article>
           <div className='hidden w-[300px] flex-col gap-3 lg:flex'>

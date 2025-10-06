@@ -22,8 +22,8 @@ export const callNetworkErrorToast = ({ status, apiUrl, body }: Props) => {
         copyText={`Status: ${status} at URL: ${apiUrl} on page ${window.location.href}. Response: ${JSON.stringify(body)}`}
       />
       Status {status} at api URL {apiUrl}
-      <p className='mt-2'>Happened on page {window.location.href}</p>
-      <p className='mt-2'>
+      <p className='mt-1'>Happened on page {window.location.href}</p>
+      <p className='mt-1'>
         You can report this in our{" "}
         <a
           href='https://discord.gg/YuSFx7GS7y'

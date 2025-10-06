@@ -234,7 +234,7 @@ export const ScriptDetailStatsTab = ({
           description='Average interactions per user'
         />
       </div>
-      <div className='relative mt-8 w-full'>
+      <div className='relative mt-4 w-full'>
         <GraphWatermark />
         <ReactEcharts
           opts={{ height: 400 }}

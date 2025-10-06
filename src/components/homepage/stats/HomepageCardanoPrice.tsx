@@ -20,7 +20,7 @@ export const HomepageCardanoPrice: FC<HomepageCardanoPriceProps> = ({
   const { currency } = useCurrencyStore();
 
   return (
-    <div className='mx-3 min-h-[110px] flex-grow'>
+    <div className='mx-1.5 min-h-[110px] flex-grow'>
       <div className='flex items-center gap-2 pb-2'>
         <span className='text-3xl font-semibold'>{price.today}</span>
         <span

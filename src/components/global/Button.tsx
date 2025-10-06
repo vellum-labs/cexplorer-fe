@@ -58,11 +58,11 @@ const Button = ({
         className={`${commonClasses} ${disabled && "cursor-not-allowed opacity-50"} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
         disabled={disabled}
       >
-        <span className={`${leftIcon && label && "-ml-1 mr-2"}`}>
+        <span className={`${leftIcon && label && "-ml-1 mr-1"}`}>
           {leftIcon}
         </span>
         {label && <span>{label}</span>}
-        <span className={`${rightIcon && "ml-2"}`}>{rightIcon}</span>
+        <span className={`${rightIcon && "ml-1"}`}>{rightIcon}</span>
       </Link>
     );
 
@@ -72,10 +72,10 @@ const Button = ({
       className={`${commonClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       disabled={disabled}
     >
-      <span className={`${leftIcon && label && "-ml-1 mr-2"}`}>{leftIcon}</span>
+      <span className={`${leftIcon && label && "-ml-1 mr-1"}`}>{leftIcon}</span>
       {label && <span>{label}</span>}
       {rightIcon && (
-        <span className={`${rightIcon && "ml-2"}`}>{rightIcon}</span>
+        <span className={`${rightIcon && "ml-1"}`}>{rightIcon}</span>
       )}
     </button>
   );

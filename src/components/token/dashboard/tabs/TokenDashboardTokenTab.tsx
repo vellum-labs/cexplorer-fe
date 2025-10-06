@@ -152,7 +152,7 @@ export const TokenDashboardTokenTab: FC = () => {
 
                     <Copy
                       copyText={renderAssetName({ name: assetName })}
-                      className='ml-2'
+                      className='ml-1'
                     />
                   </Link>
                   <span className='flex items-center gap-1'>
@@ -294,7 +294,7 @@ export const TokenDashboardTokenTab: FC = () => {
 
   return (
     <>
-      <div className='mb-2 flex w-full flex-col justify-between gap-2 min-[870px]:flex-row min-[870px]:items-center'>
+      <div className='mb-1 flex w-full flex-col justify-between gap-2 min-[870px]:flex-row min-[870px]:items-center'>
         <div className='flex flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
           <SortBy
             selectItems={selectItems}

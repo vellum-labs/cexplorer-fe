@@ -167,7 +167,7 @@ export const DatumPage: FC = () => {
       }
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile py-1 md:px-desktop'>
-        <div className='mb-4 flex w-full flex-col justify-between gap-2'>
+        <div className='mb-2 flex w-full flex-col justify-between gap-2'>
           <h2>Datum convertor</h2>
           <div className='flex w-full flex-wrap gap-4 lg:flex-nowrap'>
             <div className='flex h-[360px] w-1/2 flex-grow flex-col gap-2'>

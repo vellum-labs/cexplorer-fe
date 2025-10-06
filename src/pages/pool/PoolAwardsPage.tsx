@@ -244,7 +244,7 @@ export const PoolAwardsPage: FC = () => {
                       .toUpperCase() +
                       String(item.type).replace("_", " ").slice(1)}
                   </h3>
-                  <div className='mb-1 flex items-center justify-center gap-2'>
+                  <div className='mb-1/2 flex items-center justify-center gap-2'>
                     <Calendar size={12} className='text-grayTextPrimary' />
                     <span className='text-sm text-grayTextPrimary'>
                       {format(new Date(item.time), "dd.MM.yyyy")}
@@ -257,7 +257,7 @@ export const PoolAwardsPage: FC = () => {
               ))}
         </div>
       </section>
-      <Pagination className='my-4'>
+      <Pagination className='my-2'>
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious

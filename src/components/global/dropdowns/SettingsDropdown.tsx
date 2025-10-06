@@ -183,7 +183,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                 <span className='text-xs'>
                   {currencies[currency].value.toUpperCase()}
                 </span>
-                <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+                <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
               </Button>
             </PopoverTrigger>
             <PopoverContent className='w-[95px] border-b-0 p-0'>
@@ -192,7 +192,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                   value={currencySearch}
                   onchange={value => setCurrencySearch(value)}
                   placeholder='Search'
-                  wrapperClassName=' mb-2'
+                  wrapperClassName=' mb-1'
                   outline={false}
                   className='rounded-none'
                   inputClassName='border-none outline-none'

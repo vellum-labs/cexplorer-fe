@@ -104,7 +104,7 @@ export const PowerThresholdsSPODelegationDonutGraph: FC<
           style={{ height: "100%", width: "100%" }}
         />
       </div>
-      <div className='mt-28 text-center text-sm text-grayTextPrimary'>
+      <div className='mt-13 text-center text-sm text-grayTextPrimary'>
         <p>
           Stake Pool Count:{" "}
           {currentPoolEpoch?.stat?.pool_distr?.count_pool_uniq ?? "–"}

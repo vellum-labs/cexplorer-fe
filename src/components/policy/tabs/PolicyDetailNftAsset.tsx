@@ -147,7 +147,7 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
   return (
     <>
       <div>
-        <div className='mb-4 flex justify-between'>
+        <div className='mb-2 flex justify-between'>
           <div className='hidden min-[500px]:block'>
             <ViewSwitch />
           </div>
@@ -185,7 +185,7 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
             }
           </div>
         </div>
-        <div className='mb-4 block min-[500px]:hidden'>
+        <div className='mb-2 block min-[500px]:hidden'>
           <ViewSwitch />
         </div>
       </div>

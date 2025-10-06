@@ -150,7 +150,7 @@ const WalletButton = ({ variant = "short" }: Props) => {
             className='box-border flex min-w-fit max-w-fit items-center justify-between rounded-[8px] border-2 border-secondaryText bg-secondaryBg px-2 py-1 text-sm font-medium text-secondaryText duration-150 hover:scale-[101%] active:scale-[98%] disabled:cursor-not-allowed disabled:opacity-50'
             onClick={() => setShowDropdown(!showDropdown)}
           >
-            <span className='mr-2'>
+            <span className='mr-1'>
               <img
                 className='h-[20px] min-h-[20px] w-[20px] min-w-[20px] shrink-0'
                 src={walletInfos[walletType!].icon}

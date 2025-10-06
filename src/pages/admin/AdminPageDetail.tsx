@@ -126,11 +126,11 @@ export const AdminPageDetail = () => {
         </BreadcrumbList>
       </Breadcrumb>
       {query.isLoading ? (
-        <div className='mt-8 flex w-full justify-center'>
+        <div className='mt-4 flex w-full justify-center'>
           <SpinningLoader />
         </div>
       ) : !data && !query.isLoading ? (
-        <p className='mt-8 flex w-full justify-center'>
+        <p className='mt-4 flex w-full justify-center'>
           You don't have admin permission.
         </p>
       ) : (

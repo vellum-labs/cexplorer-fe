@@ -79,7 +79,7 @@ export const GroupsListPage = () => {
       </Helmet>
       <main className='flex min-h-minHeight flex-col items-center gap-2 p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col items-center justify-center px-mobile md:px-desktop'>
-          <Breadcrumb className='mb-4 w-full'>
+          <Breadcrumb className='mb-2 w-full'>
             <BreadcrumbList className='flex items-center'>
               <BreadcrumbItem>
                 <Link className='underline underline-offset-2' to='/'>
@@ -94,7 +94,7 @@ export const GroupsListPage = () => {
               placeholder='Search your results...'
               value={tableSearch}
               onchange={setTableSearch}
-              wrapperClassName='mb-4 ml-auto md:w-[320px] w-full '
+              wrapperClassName='mb-2 ml-auto md:w-[320px] w-full '
               showSearchIcon
               showPrefixPopup={false}
             />

@@ -323,7 +323,7 @@ const StakeDelegationsTab = ({ address, miscConst }: Props) => {
       {delegationStateQuery.data?.count &&
         delegationStateQuery.data?.count > 1 && (
           <div>
-            <h3 className='mb-4 flex items-center gap-2'>Multi delegations</h3>
+            <h3 className='mb-2 flex items-center gap-2'>Multi delegations</h3>
             <GlobalTable
               type='default'
               itemsPerPage={10}
@@ -343,7 +343,7 @@ const StakeDelegationsTab = ({ address, miscConst }: Props) => {
         )}
       <div className='flex flex-col'>
         <div className='flex items-center justify-between gap-2'>
-          <h3 className='my-4'>Delegation history</h3>
+          <h3 className='my-2'>Delegation history</h3>
           <div className='flex items-center gap-2'>
             <ExportButton columns={delegationColumns} items={items} />
             <TableSettingsDropdown

@@ -170,8 +170,8 @@ export const AssetTimelockTab: FC<{ json: PolicyJson | undefined }> = ({
 
   return (
     <>
-      <h3 className='mb-2'>Minting policy</h3>
-      <section className='mb-4 flex gap-4 rounded-xl bg-darker p-2 text-sm'>
+      <h3 className='mb-1'>Minting policy</h3>
+      <section className='mb-2 flex gap-4 rounded-xl bg-darker p-2 text-sm'>
         {isLocked ? (
           <LockIcon
             size={40}

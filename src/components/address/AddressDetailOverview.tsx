@@ -351,7 +351,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
         endContent={
           data[0].asset &&
           data[0].asset.length > 0 && (
-            <TokenSelectCombobox className='mb-2' items={data[0].asset} />
+            <TokenSelectCombobox className='mb-1' items={data[0].asset} />
           )
         }
         className=''

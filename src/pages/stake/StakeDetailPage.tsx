@@ -133,7 +133,7 @@ export const StakeDetailPage: FC = () => {
         </Tooltip>
       }
     >
-      <div className='mb-3 flex w-full max-w-desktop items-center justify-between px-mobile md:px-desktop'>
+      <div className='mb-1.5 flex w-full max-w-desktop items-center justify-between px-mobile md:px-desktop'>
         <UserBadge
           address={address}
           isLoading={stakeQuery.isLoading}

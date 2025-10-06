@@ -112,8 +112,8 @@ export const ApiProfile = () => {
           />
         </div>
       </section>
-      <section className='mt-4 flex flex-wrap items-center gap-3 border-b border-border pb-2 text-sm md:gap-5'>
-        <span className='mr-2'>Your account</span>
+      <section className='mt-2 flex flex-wrap items-center gap-3 border-b border-border pb-2 text-sm md:gap-5'>
+        <span className='mr-1'>Your account</span>
         <span className='flex items-center gap-1 text-grayTextPrimary'>
           {/* Your plan: <Badge color='gray'>{!nfts ? "Basic" : "PRO"}</Badge> */}
         </span>
@@ -130,11 +130,11 @@ export const ApiProfile = () => {
         </span>
       </section>
       {userQuery.isLoading ? (
-        <div className='mt-24 flex w-full justify-center'>
+        <div className='mt-12 flex w-full justify-center'>
           <SpinningLoader />
         </div>
       ) : (
-        <section className='mt-4 flex w-full justify-center'>
+        <section className='mt-2 flex w-full justify-center'>
           {userData?.length === 0 ? (
             <div className='flex flex-col items-center gap-2'>
               <Search
@@ -221,7 +221,7 @@ export const ApiProfile = () => {
                       {apiKey.type === "starter" && (
                         <Link
                           to='/api'
-                          className='mt-1 flex items-center gap-1 font-medium text-primary'
+                          className='mt-1/2 flex items-center gap-1 font-medium text-primary'
                         >
                           Upgrade plan <Wand size={17} />
                         </Link>
@@ -441,7 +441,7 @@ const ProgressBar = ({ title, value, max }) => {
   return (
     <div className='w-full text-sm'>
       <span className='font-medium'>{title}</span>
-      <div className='relative my-1 h-2 w-full overflow-hidden rounded-[4px] bg-border'>
+      <div className='relative my-1/2 h-2 w-full overflow-hidden rounded-[4px] bg-border'>
         <span
           className='absolute bottom-0 left-0 block h-2 rounded-bl-[4px] rounded-tl-[4px] bg-primary'
           style={{ width: `${percentage}%` }}

@@ -135,7 +135,7 @@ const Tabs = ({
     !apiLoading && (
       <section
         aria-label='Tab Navigation'
-        className={`${withMargin ? "my-5" : ""} ${
+        className={`${withMargin ? "my-3" : ""} ${
           toRight ? "items-end" : ""
         } flex w-full max-w-desktop flex-col ${
           withPadding ? "px-mobile md:px-desktop" : ""
@@ -160,7 +160,7 @@ const Tabs = ({
         </div>
         <div
           role='tablist'
-          className={`${withMargin ? "mb-5" : ""} flex w-full items-center gap-2 ${
+          className={`${withMargin ? "mb-3" : ""} flex w-full items-center gap-2 ${
             toRight ? "justify-end" : ""
           }`}
         >
@@ -174,7 +174,7 @@ const Tabs = ({
           {allowScroll ? (
             <div className='thin-scrollbar hidden w-full overflow-x-auto overflow-y-hidden lg:block'>
               <div
-                className={`flex ${tabParam ? "h-[35px]" : "h-[44px]"} mx-1 w-fit items-center gap-0.5 text-nowrap rounded-lg border border-borderFaded bg-darker font-medium shadow`}
+                className={`flex ${tabParam ? "h-[35px]" : "h-[44px]"} mx-1/2 w-fit items-center gap-0.5 text-nowrap rounded-lg border border-borderFaded bg-darker font-medium shadow`}
               >
                 {items.map((item, index) => (
                   // @ts-expect-error link

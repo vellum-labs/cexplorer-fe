@@ -56,7 +56,7 @@ export function ArticleCombobox({
                   .join(", ")
               : "Select categories"}
           </span>
-          <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+          <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
         </Button>
       </PopoverTrigger>
       <PopoverContent className='w-[200px] p-0'>
@@ -88,7 +88,7 @@ export function ArticleCombobox({
                 >
                   <Check
                     className={cn(
-                      "mr-2 h-4 w-4",
+                      "mr-1 h-4 w-4",
                       categories.length > 0 &&
                         categories?.find(c => c === category.value)
                         ? "opacity-100"

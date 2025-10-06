@@ -18,7 +18,7 @@ export const GlobalSearchDropdown: FC<GlobalSearchDropdownProps> = ({
     <div
       className={
         isHomepage
-          ? "ml-2 flex-shrink-0"
+          ? "ml-1 flex-shrink-0"
           : "absolute flex h-full w-[100px] cursor-pointer items-center justify-center border-r border-border px-1/2"
       }
     >

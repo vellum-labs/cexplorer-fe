@@ -387,7 +387,7 @@ export const PoolUpdatesPage: FC = () => {
       breadcrumbItems={[{ label: "Pool Updates" }]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
-        <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
+        <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
           <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
             {poolsListQuery.isLoading || poolsListQuery.isFetching ? (
               <LoadingSkeleton height='27px' width={"220px"} />

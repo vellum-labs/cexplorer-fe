@@ -51,7 +51,7 @@ export const VotingBreakdownTooltip: FC<VotingBreakdownTooltipProps> = ({
         </div>
       }
     >
-      <Info size={14} className='ml-1 cursor-pointer text-grayTextSecondary' />
+      <Info size={14} className='ml-1/2 cursor-pointer text-grayTextSecondary' />
     </Tooltip>
   );
 };

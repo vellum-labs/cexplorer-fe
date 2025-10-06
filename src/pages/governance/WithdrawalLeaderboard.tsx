@@ -46,7 +46,7 @@ export const WithdrawalLeaderboard: FC = () => {
       <section
         className={`flex w-full max-w-desktop flex-col px-mobile pb-2 md:px-desktop`}
       >
-        <div className='mb-4 flex w-full flex-wrap items-center justify-between gap-2 min-[790px]:flex-nowrap'>
+        <div className='mb-2 flex w-full flex-wrap items-center justify-between gap-2 min-[790px]:flex-nowrap'>
           <div className='flex items-center gap-2'>
             <SortBy
               selectItems={selectItems}

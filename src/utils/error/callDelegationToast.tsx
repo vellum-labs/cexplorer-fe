@@ -34,15 +34,15 @@ export const callDelegationToast = ({
       </p>
 
       {!success && errorMessage && (
-        <p className='mt-2'>
+        <p className='mt-1'>
           <strong>Error:</strong> {errorMessage}
         </p>
       )}
 
-      {!success && <p className='mt-2'>Page: {window.location.href}</p>}
+      {!success && <p className='mt-1'>Page: {window.location.href}</p>}
 
       {!success ? (
-        <p className='mt-2'>
+        <p className='mt-1'>
           Please check your wallet connection and try again. If the problem
           persists, you can report this in our{" "}
           <a
@@ -55,7 +55,7 @@ export const callDelegationToast = ({
           .
         </p>
       ) : (
-        <p className='mt-2'>
+        <p className='mt-1'>
           Please wait a few minutes for the changes to appear in your account.
           If they don’t show up, please check your wallet connection and try
           again. If the problem persists, you can report this in our{" "}

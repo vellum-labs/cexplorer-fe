@@ -482,7 +482,7 @@ export const GovernancePage: FC = () => {
             )
           )}
         </div>
-        <div className='my-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
+        <div className='my-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
           <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap md:hidden'>
             <div className='flex w-full justify-between gap-1 md:hidden'>
               <SortBy

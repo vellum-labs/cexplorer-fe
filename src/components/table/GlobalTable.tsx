@@ -487,7 +487,7 @@ const GlobalTable = <T extends Record<string, any>>({
         )}
       {(type === "default" && defaultQueryPagination && !!items?.length) ||
         (type === "infinite" && !!items?.length && (
-          <span className='mt-2 flex w-full justify-center text-sm text-grayTextPrimary'>
+          <span className='mt-1 flex w-full justify-center text-sm text-grayTextPrimary'>
             {totalItems > 0 && items?.length
               ? `Displaying ${items.length > totalItems ? totalItems : items.length} out of ${totalItems} items`
               : "No items for displaying"}

@@ -186,7 +186,7 @@ export const RetiredDelegationsPage = () => {
     >
       <div className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         {stats ? (
-          <div className='mb-4 flex flex-wrap items-center gap-4'>
+          <div className='mb-2 flex flex-wrap items-center gap-4'>
             <OverviewStatCard
               title='ADA delegated to retired pools'
               icon={<HandCoins color={colors.primary} />}
@@ -209,7 +209,7 @@ export const RetiredDelegationsPage = () => {
             />
           </div>
         ) : (
-          <div className='mb-4 flex flex-wrap items-center gap-4'>
+          <div className='mb-2 flex flex-wrap items-center gap-4'>
             <LoadingSkeleton
               height='100px'
               className='h-full grow basis-[280px]'
@@ -227,7 +227,7 @@ export const RetiredDelegationsPage = () => {
             />
           </div>
         )}
-        <div className='mb-4 flex h-fit w-full justify-between gap-2'>
+        <div className='mb-2 flex h-fit w-full justify-between gap-2'>
           <div className='flex w-full flex-wrap items-center justify-between gap-4'>
             <div>
               <Tabs

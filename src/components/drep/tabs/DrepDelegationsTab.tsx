@@ -191,7 +191,7 @@ export const DrepDelegationsTab = () => {
 
   return (
     <>
-      <div className='mb-2 flex w-full flex-col justify-between gap-2 min-[870px]:flex-row min-[870px]:items-center'>
+      <div className='mb-1 flex w-full flex-col justify-between gap-2 min-[870px]:flex-row min-[870px]:items-center'>
         <div className='flex flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
           {delegationQuery.isLoading || delegationQuery.isFetching ? (
             <LoadingSkeleton height='27px' width={"220px"} />

@@ -152,12 +152,12 @@ export const DonatePage = () => {
           maxWidth='95%'
           onClose={() => setShowSuccessModal(false)}
         >
-          <div className='mt-4 flex h-full w-full flex-col items-center overflow-hidden p-1.5'>
+          <div className='mt-2 flex h-full w-full flex-col items-center overflow-hidden p-1.5'>
             <h3>
               Transaction successful, thank you so much for supporting
               Cexplorer.io ❤️
             </h3>
-            <p className='mt-8'>
+            <p className='mt-4'>
               Transaction Hash:{" "}
               <Link
                 to='/tx/$hash'
@@ -171,14 +171,14 @@ export const DonatePage = () => {
         </Modal>
       )}
       <div className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
-        <p className='mt-8 text-sm font-semibold text-primary'>Donation</p>
-        <h1 className='mb-4'>Fuel the Future of Cexplorer</h1>
+        <p className='mt-4 text-sm font-semibold text-primary'>Donation</p>
+        <h1 className='mb-2'>Fuel the Future of Cexplorer</h1>
         <p className='font-light text-grayTextPrimary'>
           Your support helps us operate, maintain and improve everything on
           Cexplorer.io
         </p>
         <div className='flex w-full max-w-desktop flex-col'>
-          <section className='mt-12 flex flex-wrap gap-8'>
+          <section className='mt-6 flex flex-wrap gap-8'>
             <InfoCard
               icon={<Zap color={colors.darkBlue} />}
               heading='Here for Cardano since ITN'
@@ -195,7 +195,7 @@ export const DonatePage = () => {
               description='Many builders rely on our tools to develop on Cardano. Supporting us helps maintain and enhance these resources, benefiting the entire development community.'
             />
           </section>
-          <section className='mt-12 flex flex-wrap justify-center gap-8 border-b border-border pb-5'>
+          <section className='mt-6 flex flex-wrap justify-center gap-8 border-b border-border pb-5'>
             <Button
               size='lg'
               label='Stake with Cexplorer'
@@ -217,11 +217,11 @@ export const DonatePage = () => {
             <h2>Donate</h2>
             <div className='flex flex-wrap justify-between gap-4'>
               <div className='flex flex-col'>
-                <p className='mt-4 font-light text-grayTextPrimary'>
+                <p className='mt-2 font-light text-grayTextPrimary'>
                   Thank you for supporting the development of independent
                   Cardano explorer! ❤️
                 </p>
-                <p className='mb-2 mt-4 text-sm font-medium'>
+                <p className='mb-1 mt-2 text-sm font-medium'>
                   Send your donation here
                 </p>
                 <div className='relative flex w-full max-w-[390px] items-center'>
@@ -268,7 +268,7 @@ export const DonatePage = () => {
                 </div>
               </div>
             </div>
-            <p className='mb-2 mt-10 text-sm font-medium'>
+            <p className='mb-1 mt-5 text-sm font-medium'>
               Or use our dApp connector
             </p>
             <div className='flex flex-wrap gap-4'>
@@ -317,7 +317,7 @@ export const DonatePage = () => {
                 label='Donate'
                 variant='primary'
                 leftIcon={<Wallet />}
-                className='mt-8'
+                className='mt-4'
                 onClick={handleDonation}
                 disabled={!activeDonation && customAmount === ""}
               />
@@ -325,7 +325,7 @@ export const DonatePage = () => {
           </section>
           <section
             ref={stakeRef}
-            className='mt-16 flex w-full flex-wrap justify-between rounded-xl bg-cardBg px-4 py-5'
+            className='mt-8 flex w-full flex-wrap justify-between rounded-xl bg-cardBg px-4 py-5'
           >
             <div className='flex basis-[550px] gap-8'>
               <img className='hidden shrink md:block' src={CexLogo} />
@@ -342,7 +342,7 @@ export const DonatePage = () => {
                 <Link
                   to='/pool/$id'
                   params={{ id: randomPool }}
-                  className='my-4 flex items-center text-sm font-medium text-grayTextPrimary'
+                  className='my-2 flex items-center text-sm font-medium text-grayTextPrimary'
                 >
                   Our stake pool performance <ArrowRight />
                 </Link>
@@ -357,7 +357,7 @@ export const DonatePage = () => {
                 leftIcon={<Wallet />}
                 onClick={handleDelegation}
               />
-              <p className='mt-8 text-xs'> Pool ID for delegation via wallet</p>
+              <p className='mt-4 text-xs'> Pool ID for delegation via wallet</p>
               <div className='relative flex w-full max-w-[430px] items-center'>
                 <input
                   readOnly
@@ -415,14 +415,14 @@ const CustomDonateCard = ({
         </div>
       </div>
       <TextInput
-        inputClassName='h-10 my-2 w-full'
+        inputClassName='h-10 my-1 w-full'
         wrapperClassName='w-full max-w-[300px]'
         value={amount}
         onchange={value => handleAmountChange(value)}
         placeholder='Choose the amount'
       />
       <p className='font-medium'>dApp Your Way</p>
-      <p className='mt-3 text-left text-sm text-grayTextPrimary'>
+      <p className='mt-1.5 text-left text-sm text-grayTextPrimary'>
         Empowering developers with the freedom to innovate.
       </p>
     </div>
@@ -449,10 +449,10 @@ const DonateCard = ({
         </div>
       </div>
       {amount ? (
-        <h2 className='my-3 text-primary'>{amount} ADA</h2>
+        <h2 className='my-1.5 text-primary'>{amount} ADA</h2>
       ) : (
         <TextInput
-          inputClassName='h-10 my-2 w-full'
+          inputClassName='h-10 my-1 w-full'
           wrapperClassName='w-full max-w-[300px]'
           value=''
           onchange={() => {}}
@@ -460,7 +460,7 @@ const DonateCard = ({
         />
       )}
       <p className='font-medium'>{title}</p>
-      <p className='mt-3 text-left text-sm text-grayTextPrimary'>
+      <p className='mt-1.5 text-left text-sm text-grayTextPrimary'>
         {description}
       </p>
     </div>

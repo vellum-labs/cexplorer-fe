@@ -32,7 +32,7 @@ function Calendar({
         table: "w-full border-collapse space-y-1",
         head_row: "flex",
         head_cell: " rounded-md w-8 font-normal text-[0.8rem] text-text",
-        row: "flex w-full mt-2",
+        row: "flex w-full mt-1",
         cell: cn(
           "relative p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-darker [&:has([aria-selected].day-outside)]:bg-darker [&:has([aria-selected].day-range-end)]:rounded-r-md ",
           props.mode === "range"

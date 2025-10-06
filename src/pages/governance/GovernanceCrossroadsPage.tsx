@@ -72,7 +72,7 @@ export const GovernanceCrossroadsPage = () => {
       title='Governance'
       breadcrumbItems={[{ label: "Governance" }]}
     >
-      <section className='mt-4 w-full max-w-desktop px-mobile pb-3 md:px-desktop'>
+      <section className='mt-2 w-full max-w-desktop px-mobile pb-3 md:px-desktop'>
         <div className='grid grid-cols-1 gap-5 md:grid-cols-2'>
           {governanceSections.map((section, index) => (
             <div
@@ -83,16 +83,16 @@ export const GovernanceCrossroadsPage = () => {
                 {section.icon}
               </div>
 
-              <h2 className='mt-4 border-b border-border pb-1 text-lg text-text'>
+              <h2 className='mt-2 border-b border-border pb-1 text-lg text-text'>
                 {section.label}
               </h2>
 
-              <p className='mt-4 text-sm text-grayTextPrimary'>
+              <p className='mt-2 text-sm text-grayTextPrimary'>
                 {section.description}
               </p>
 
               {section.sections ? (
-                <div className='mt-12 flex flex-wrap gap-4'>
+                <div className='mt-6 flex flex-wrap gap-4'>
                   {section.sections.map((subsection, subIndex) => (
                     <Button
                       key={subIndex}
@@ -109,7 +109,7 @@ export const GovernanceCrossroadsPage = () => {
                   ))}
                 </div>
               ) : (
-                <div className='mt-12 flex gap-4'>
+                <div className='mt-6 flex gap-4'>
                   <Button
                     href={section.href! as any}
                     variant='primary'

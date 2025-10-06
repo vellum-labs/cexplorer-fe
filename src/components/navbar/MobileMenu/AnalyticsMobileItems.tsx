@@ -44,7 +44,7 @@ export const AnalyticsMobileItems = ({ onBack, setOpen, power }: Props) => {
     <>
       <button
         onClick={onBack}
-        className='mb-2 flex h-[34px] -translate-x-1 items-center gap-2 font-medium'
+        className='mb-1 flex h-[34px] -translate-x-1 items-center gap-2 font-medium'
       >
         <ChevronLeft size={20} className='font-normal' />
         <span>Analytics</span>

@@ -54,7 +54,7 @@ export const LayoutNotification = ({
       }}
     >
       <div className='relative flex w-full max-w-desktop items-center justify-center gap-3 px-desktop md:p-mobile'>
-        <span className='ml-5 mr-5 text-center text-sm'>
+        <span className='ml-3 mr-3 text-center text-sm'>
           {message}
           {link && (
             <Link

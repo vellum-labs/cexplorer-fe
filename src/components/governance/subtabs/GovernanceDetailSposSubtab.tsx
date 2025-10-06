@@ -154,7 +154,7 @@ export const GovernanceDetailSposSubtab: FC<
 
   return (
     <>
-      <div className='mb-4 mt-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
+      <div className='mb-2 mt-1 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
         <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
           {govQuery.isLoading || govQuery.isFetching ? (
             <LoadingSkeleton height='27px' width={"220px"} />

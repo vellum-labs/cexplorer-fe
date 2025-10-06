@@ -380,7 +380,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
       title={<div className='flex items-center gap-1'>All Votes</div>}
     >
       <div className={`w-full max-w-desktop ${!poolId ? "px-2 py-3" : ""}`}>
-        <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
+        <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
           <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
             {votesQuery.isLoading || votesQuery.isFetching ? (
               <LoadingSkeleton height='27px' width={"220px"} />
@@ -474,7 +474,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
                 value && (
                   <div
                     key={key}
-                    className='mb-2 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
+                    className='mb-1 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
                   >
                     <span>
                       {key[0].toUpperCase() + key.split("_").join(" ").slice(1)}

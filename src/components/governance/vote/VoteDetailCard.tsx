@@ -384,7 +384,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
                   )}
                 </div>
               </div>
-              {divider && <div className='my-2 border-t border-border'></div>}
+              {divider && <div className='my-1 border-t border-border'></div>}
             </div>
           ))}
         </div>

@@ -103,10 +103,10 @@ const WalletConfigModal = () => {
       onClose={closeAndDisconnect}
       className='border border-border'
     >
-      <h2 className='mb-5 text-lg font-medium'>Authorization Token</h2>
+      <h2 className='mb-3 text-lg font-medium'>Authorization Token</h2>
 
-      <div className='mb-4 rounded-lg border border-border bg-cardBg p-1.5'>
-        <p className='text-muted-foreground mb-3 text-sm'>
+      <div className='mb-2 rounded-lg border border-border bg-cardBg p-1.5'>
+        <p className='text-muted-foreground mb-1.5 text-sm'>
           We use a signature token to protect your privacy and keep your
           watchlist, custom names, and personal data secure.
         </p>
@@ -135,7 +135,7 @@ const WalletConfigModal = () => {
           secureRef.current = parseInt(value) as 0 | 1;
         }}
         defaultValue='0'
-        className='mt-3 flex gap-6'
+        className='mt-1.5 flex gap-6'
       >
         <div className='flex items-center space-x-2'>
           <RadioGroupItem value='0' id='0' />
@@ -147,13 +147,13 @@ const WalletConfigModal = () => {
         </div>
       </RadioGroup>
 
-      <div className='mt-5 text-sm'>Token duration:</div>
+      <div className='mt-3 text-sm'>Token duration:</div>
       <RadioGroup
         onValueChange={value => {
           expirationRef.current = value as "d" | "w" | "m" | "y";
         }}
         defaultValue='y'
-        className='mt-3 flex gap-4'
+        className='mt-1.5 flex gap-4'
       >
         <div className='flex items-center space-x-2'>
           <RadioGroupItem value='d' id='d' />
@@ -174,7 +174,7 @@ const WalletConfigModal = () => {
       </RadioGroup>
       <div className='flex justify-end'>
         <Button
-          className='mt-10 px-4'
+          className='mt-5 px-4'
           label='Confirm'
           size='md'
           onClick={handleConfirmation}

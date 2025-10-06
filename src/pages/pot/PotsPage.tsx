@@ -180,8 +180,8 @@ export const PotsPage = () => {
         />
         <AdsCarousel />
         <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
-          <div className='mb-2 ml-auto flex items-center'>
-            <span className='mr-2 text-sm text-grayTextPrimary'>
+          <div className='mb-1 ml-auto flex items-center'>
+            <span className='mr-1 text-sm text-grayTextPrimary'>
               Graph epochs:{" "}
             </span>
             <SortBy
@@ -192,7 +192,7 @@ export const PotsPage = () => {
             />
           </div>
           <AdaPotsChart data={items} />
-          <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
+          <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
             <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
               {query.isLoading || query.isFetching ? (
                 <LoadingSkeleton height='27px' width={"220px"} />

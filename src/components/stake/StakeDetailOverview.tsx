@@ -230,7 +230,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
           endContent={
             data?.asset &&
             data.asset.length > 0 && (
-              <TokenSelectCombobox className='mb-2 mt-4' items={data.asset} />
+              <TokenSelectCombobox className='mb-1 mt-2' items={data.asset} />
             )
           }
         />

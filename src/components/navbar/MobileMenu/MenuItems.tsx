@@ -113,7 +113,7 @@ export const MenuItems: FC<MenuItemsProps> = ({ setOpen, setActiveMenu }) => {
         />
       </button>
       <SettingsMobile
-        className='mb-5 mt-8'
+        className='mb-3 mt-4'
         onClick={() => setActiveMenu("settings")}
       />
       <div className='flex w-full flex-col md:hidden'>

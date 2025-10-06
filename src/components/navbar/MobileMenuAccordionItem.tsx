@@ -26,7 +26,7 @@ const MobileMenuAccordionItem = ({
   href,
 }: Props) => {
   return (
-    <AccordionItem value={label} className='mt-3'>
+    <AccordionItem value={label} className='mt-1.5'>
       <AccordionTrigger>
         <Icon name={icon} size={20} />
         {}

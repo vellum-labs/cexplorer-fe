@@ -215,7 +215,7 @@ const OverviewTabItem = () => {
         selectItems={selectItems}
         setSelectedItem={setSort as any}
         selectedItem={sort}
-        className='mb-4 ml-auto w-fit sm:mt-[-62px]'
+        className='mb-2 ml-auto w-fit sm:mt-[-62px]'
       />
       {query.isLoading ? (
         <div className='relative flex h-[300px] w-full items-center justify-center rounded-xl border border-border p-3 md:h-[600px]'>
@@ -305,12 +305,12 @@ const NodeContent = ({
   type: "input" | "output";
 }) => (
   <div className='pointer-events-auto flex h-full w-full flex-col justify-start'>
-    <div className='mb-1 mr-1 max-w-fit rounded-md border border-border bg-background px-1 py-1/2 text-xs font-medium'>
+    <div className='mb-1/2 mr-1/2 max-w-fit rounded-md border border-border bg-background px-1 py-1/2 text-xs font-medium'>
       <AdaWithTooltip data={data.value} />
     </div>
     <AddressWithTxBadges utxo={data} isOutput={type === "output"} />
     {data.asset && (
-      <div className='mt-2 grid w-full max-w-[690px] grid-cols-[repeat(auto-fit,_minmax(130px,_1fr))] gap-2'>
+      <div className='mt-1 grid w-full max-w-[690px] grid-cols-[repeat(auto-fit,_minmax(130px,_1fr))] gap-2'>
         <>
           {!Array.isArray(data.asset) && (
             <TxAssetLink

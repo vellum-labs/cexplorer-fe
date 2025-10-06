@@ -644,7 +644,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                           <div
                             className={`flex w-full flex-col justify-end py-1 ${(committeeMembers ?? []).length < 7 ? "h-full" : ""} ${(committeeMembers ?? []).length === 7 ? "pb-0" : "pb-2"}`}
                           >
-                            <div className='mt-2 flex w-full items-center justify-between border-t border-border pt-1'>
+                            <div className='mt-1 flex w-full items-center justify-between border-t border-border pt-1'>
                               <div className='flex items-center gap-[2px]'>
                                 <CircleHelp
                                   size={11}

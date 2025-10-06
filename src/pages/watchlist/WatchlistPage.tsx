@@ -75,7 +75,7 @@ export const WatchlistPage = () => {
           </div>
         ),
         content: (
-          <div className='mt-6'>
+          <div className='mt-3'>
             <StakeListTab />
           </div>
         ),
@@ -89,7 +89,7 @@ export const WatchlistPage = () => {
           </div>
         ),
         content: (
-          <div className='mt-6'>
+          <div className='mt-3'>
             <AddressesTab watchlist_only='1' />
           </div>
         ),
@@ -103,7 +103,7 @@ export const WatchlistPage = () => {
           </div>
         ),
         content: (
-          <div className='mt-6'>
+          <div className='mt-3'>
             <AssetListPage watchlist showHeader={false} />
           </div>
         ),
@@ -117,7 +117,7 @@ export const WatchlistPage = () => {
           </div>
         ),
         content: (
-          <div className='mt-6'>
+          <div className='mt-3'>
             <PoolListTab watchlist />
           </div>
         ),
@@ -131,7 +131,7 @@ export const WatchlistPage = () => {
           </div>
         ),
         content: (
-          <div className='mt-6'>
+          <div className='mt-3'>
             <DrepListTab watchlist />
           </div>
         ),
@@ -145,7 +145,7 @@ export const WatchlistPage = () => {
           </div>
         ),
         content: (
-          <div className='mt-6'>
+          <div className='mt-3'>
             {policyListQuery?.isLoading ? (
               <div className='flex flex-col gap-4'>
                 <LoadingSkeleton height='40px' width='100%' />

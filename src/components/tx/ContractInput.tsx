@@ -30,7 +30,7 @@ export const ContractInput: FC<ContractInputProps> = ({
 
   return (
     <Fragment>
-      <div className='mt-3 flex flex-wrap items-center gap-2'>
+      <div className='mt-1.5 flex flex-wrap items-center gap-2'>
         {open ? (
           <ChevronDown
             onClick={() => setOpen(false)}
@@ -65,7 +65,7 @@ export const ContractInput: FC<ContractInputProps> = ({
       >
         <span>Mem: {formatNumber(input?.redeemer?.unit.mem)}</span>
         <span>Steps: {formatNumber(input?.redeemer?.unit.steps)}</span>
-        <span className='mt-2'>
+        <span className='mt-1'>
           Redeemer Data Hash:{" "}
           <span className='flex items-center gap-2'>
             <Link
@@ -87,7 +87,7 @@ export const ContractInput: FC<ContractInputProps> = ({
           search
         />
         <span>
-          <span className='mt-2 flex items-center gap-1'>
+          <span className='mt-1 flex items-center gap-1'>
             Script hash:{" "}
             <ConstLabelBadge type='sc' name={contract?.script_hash} />
           </span>
@@ -102,10 +102,10 @@ export const ContractInput: FC<ContractInputProps> = ({
             <Copy copyText={contract?.script_hash} />
           </span>
         </span>
-        <span className='mt-2'>Bytes:</span>
+        <span className='mt-1'>Bytes:</span>
         <TextDisplay text={contract?.bytecode} />
         {(contract.output || []).map(output => (
-          <span className='mt-2'>
+          <span className='mt-1'>
             Datum hash:{" "}
             <span className='flex items-center gap-2'>
               <Link
@@ -113,7 +113,7 @@ export const ContractInput: FC<ContractInputProps> = ({
                 search={{
                   hash: output.hash,
                 }}
-                className='mb-2 block overflow-hidden text-ellipsis text-primary'
+                className='mb-1 block overflow-hidden text-ellipsis text-primary'
               >
                 {output?.hash}
               </Link>

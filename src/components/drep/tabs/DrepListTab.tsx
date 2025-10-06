@@ -65,7 +65,7 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
         <meta name='description' content={metadata.drepList.description} />
         <meta name='keywords' content={metadata.drepList.keywords} />
       </Helmet>
-      <div className='mb-2 flex w-full flex-col justify-between gap-2 min-[870px]:flex-row min-[870px]:items-center'>
+      <div className='mb-1 flex w-full flex-col justify-between gap-2 min-[870px]:flex-row min-[870px]:items-center'>
         <div className='flex flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
           {!watchlist && (
             <>
@@ -155,7 +155,7 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
               value && (
                 <div
                   key={key}
-                  className='mb-2 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
+                  className='mb-1 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
                 >
                   <span>
                     {key === "gov_action"

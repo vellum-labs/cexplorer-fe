@@ -129,7 +129,7 @@ export const AssetListPage: FC<AssetListPageProps> = ({
       <section
         className={`flex w-full max-w-desktop flex-col ${!policyId && !watchlist ? "px-mobile pb-3 md:px-desktop" : ""}`}
       >
-        <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
+        <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
           <div className='flex w-full items-center justify-between gap-2'>
             {type === "all" && (
               <Tabs

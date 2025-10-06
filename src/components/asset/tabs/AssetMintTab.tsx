@@ -120,7 +120,7 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
 
   return (
     <>
-      <div className='mb-4 ml-auto flex w-fit gap-2'>
+      <div className='mb-2 ml-auto flex w-fit gap-2'>
         <ExportButton columns={columns} items={items} />
         <TableSettingsDropdown
           rows={rows}

@@ -353,20 +353,20 @@ export const ProfilePro = () => {
     <>
       {showRemoveModal && (
         <Modal onClose={() => setShowRemoveModal(false)}>
-          <p className='mt-8 text-sm'>
+          <p className='mt-4 text-sm'>
             Do you wish to remove this item from your watchlist?
           </p>
-          <div className='mt-6 flex w-full justify-between'>
+          <div className='mt-3 flex w-full justify-between'>
             <Button
               onClick={() => setShowRemoveModal(false)}
-              className='mr-2'
+              className='mr-1'
               variant='secondary'
               label='Cancel'
               size='md'
             />
             <Button
               onClick={handleUnlike}
-              className='mr-2'
+              className='mr-1'
               variant='primary'
               label='Remove'
               size='md'
@@ -392,7 +392,7 @@ export const ProfilePro = () => {
             });
           }}
         >
-          <p className='mb-5 pr-4'>Please fill in the fields:</p>
+          <p className='mb-3 pr-4'>Please fill in the fields:</p>
           <RadioGroup
             onValueChange={value => {
               setModalData({
@@ -401,7 +401,7 @@ export const ProfilePro = () => {
               });
             }}
             defaultValue='m'
-            className='mb-8 mt-4 flex gap-4'
+            className='mb-4 mt-2 flex gap-4'
           >
             <div className='flex items-center space-x-2'>
               <RadioGroupItem value='drep' id='drep' />
@@ -429,10 +429,10 @@ export const ProfilePro = () => {
             value={modalData.ident}
             onchange={value => setModalData({ ...modalData, ident: value })}
           />
-          <p className='mt-1 h-4 text-xs font-medium text-red-500'>
+          <p className='mt-1/2 h-4 text-xs font-medium text-red-500'>
             {modalData.error && modalData.error}
           </p>
-          <div className='mt-4 flex w-full items-center justify-center'>
+          <div className='mt-2 flex w-full items-center justify-center'>
             <Button
               label='Modify'
               variant='primary'
@@ -451,7 +451,7 @@ export const ProfilePro = () => {
               Feature Stake Pools, DReps, policy IDs and assets across
               Cexplorer.
             </p>
-            <p className='mb-2 mt-1 text-grayTextPrimary'>
+            <p className='mb-1 mt-1/2 text-grayTextPrimary'>
               The displaying frequency is increased with each NFT delegated.
             </p>
           </div>
@@ -470,11 +470,11 @@ export const ProfilePro = () => {
               <LoadingSkeleton
                 width='100px'
                 height='24px'
-                className='mr-auto mt-4'
+                className='mr-auto mt-2'
               />
             ) : (
-              <section className='mt-4 flex flex-wrap items-center gap-3 text-sm md:gap-5'>
-                <span className='mr-2'>Your account</span>
+              <section className='mt-2 flex flex-wrap items-center gap-3 text-sm md:gap-5'>
+                <span className='mr-1'>Your account</span>
                 <span className='flex items-center gap-1 text-grayTextPrimary'>
                   Your plan:{" "}
                   {!totalCount ? (
@@ -498,7 +498,7 @@ export const ProfilePro = () => {
             )}
             <TableSearchInput
               placeholder='Search NFT'
-              wrapperClassName='w-full mb-2 mt-2 max-w-desktop'
+              wrapperClassName='w-full mb-1 mt-1 max-w-desktop'
               showPrefixPopup={false}
               value={nftSearch}
               onchange={setNftSearch}
@@ -521,7 +521,7 @@ export const ProfilePro = () => {
             />
           </>
         ) : (
-          <div className='mt-4'>
+          <div className='mt-2'>
             <EmptyState
               icon={<Zap size={24} />}
               primaryText="You don't own any Cexplorer PRO NFTs yet."

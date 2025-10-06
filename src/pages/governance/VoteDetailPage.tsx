@@ -86,7 +86,7 @@ export const GovernanceVoteDetailPage: FC = () => {
               ))}
             </div>
 
-            <div className='mt-4'>
+            <div className='mt-2'>
               <VoteDetailCard
                 vote={undefined as any}
                 index={0}

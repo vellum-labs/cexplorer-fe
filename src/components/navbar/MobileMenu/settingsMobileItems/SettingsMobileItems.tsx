@@ -56,7 +56,7 @@ export const SettingsMobileItems: FC<SettingsMobileItemsProps> = ({
         {(settingsMobileItems || []).map(({ component, onClick }, i) => (
           <Fragment key={i}>
             <div
-              className='mt-3 flex h-[50px] w-full items-center justify-between gap-5 border-b border-border pb-1.5 font-medium'
+              className='mt-1.5 flex h-[50px] w-full items-center justify-between gap-5 border-b border-border pb-1.5 font-medium'
               onClick={onClick}
             >
               {component}

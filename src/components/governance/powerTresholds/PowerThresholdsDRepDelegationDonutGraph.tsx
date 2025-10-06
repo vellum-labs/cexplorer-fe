@@ -103,7 +103,7 @@ export const PowerThresholdsDRepDelegationDonutGraph: FC<
           style={{ height: "100%", width: "100%" }}
         />
       </div>
-      <div className='mt-28 text-center text-sm text-grayTextPrimary'>
+      <div className='mt-13 text-center text-sm text-grayTextPrimary'>
         <p>
           DRep Count: {currentDRepEpoch?.stat?.drep_distr?.count_uniq ?? "–"}
         </p>

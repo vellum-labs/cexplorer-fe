@@ -309,8 +309,8 @@ export const AccounntTopAddressesTab: FC = () => {
   }, [totalAddresses, totalItems]);
 
   return (
-    <div className='mb-4'>
-      <div className='mb-4 flex w-full items-center justify-between'>
+    <div className='mb-2'>
+      <div className='mb-2 flex w-full items-center justify-between'>
         <div>
           {addressesQuery.isLoading || addressesQuery.isFetching ? (
             <LoadingSkeleton height='27px' width={"220px"} />
@@ -351,7 +351,7 @@ export const AccounntTopAddressesTab: FC = () => {
               value && (
                 <div
                   key={key}
-                  className='mb-2 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
+                  className='mb-1 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
                 >
                   {key === "addresses_pool_only" && (
                     <span>Pool delegation:</span>

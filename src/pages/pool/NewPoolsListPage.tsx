@@ -211,10 +211,10 @@ export const NewPoolsListPage: FC = () => {
       breadcrumbItems={[{ label: "New Pools" }]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
-        <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
+        <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
           <h3>Welcome, new pool operators!</h3>
 
-          <div className='mb-4 ml-auto flex w-fit justify-end gap-2'>
+          <div className='mb-2 ml-auto flex w-fit justify-end gap-2'>
             <ExportButton columns={columns} items={items} />
             <TableSettingsDropdown
               rows={rows}

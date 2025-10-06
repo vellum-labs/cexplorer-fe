@@ -36,15 +36,15 @@ export const AdminPage = () => {
           </BreadcrumbList>
         </Breadcrumb>
         {userQuery.isLoading ? (
-          <div className='mt-8 flex w-full justify-center'>
+          <div className='mt-4 flex w-full justify-center'>
             <SpinningLoader />
           </div>
         ) : !hasAdminRights && !userQuery.isLoading ? (
-          <p className='mt-8 flex w-full justify-center'>
+          <p className='mt-4 flex w-full justify-center'>
             You don't have admin permission.
           </p>
         ) : (
-          <div className='mt-8 flex w-full justify-center gap-4 text-primary'>
+          <div className='mt-4 flex w-full justify-center gap-4 text-primary'>
             {adminRight && (
               <Link className='text-lg' to='/admin/pages'>
                 Pages

@@ -148,7 +148,7 @@ export const CustomLabels = () => {
           organization.
         </p>
 
-        <div className='mb-2 mt-6 flex w-full items-center justify-between gap-2 text-sm'>
+        <div className='mb-1 mt-3 flex w-full items-center justify-between gap-2 text-sm'>
           <span className='flex items-center gap-1'>
             <ChevronsUp size={25} /> Unlock up to 5000 labels with{" "}
             <Link

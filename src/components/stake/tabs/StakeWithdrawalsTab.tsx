@@ -209,7 +209,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
 
   return (
     <section className={`flex w-full max-w-desktop flex-col`}>
-      <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
+      <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
         <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
           {totalItems === undefined ? (
             <LoadingSkeleton height='27px' width={"220px"} />

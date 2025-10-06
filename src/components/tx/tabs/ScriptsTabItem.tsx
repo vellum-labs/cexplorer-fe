@@ -56,7 +56,7 @@ export const ScriptsTabItem = () => {
               )}
             </div>
 
-            <div className='mt-4 flex flex-col gap-2 text-sm'>
+            <div className='mt-2 flex flex-col gap-2 text-sm'>
               <span className=''>
                 Script Hash:{" "}
                 <ScriptCell hash={output.reference_script?.hash || ""} />
@@ -70,7 +70,7 @@ export const ScriptsTabItem = () => {
                 />
               )}
               {output?.datum_hash && (
-                <span className='mt-2'>
+                <span className='mt-1'>
                   Redeemer Data Hash:{" "}
                   <span className='flex items-center gap-2'>
                     <Link
@@ -88,7 +88,7 @@ export const ScriptsTabItem = () => {
               )}
               {output.reference_script?.bytes && (
                 <>
-                  <p className='mt-2'>Bytes:</p>
+                  <p className='mt-1'>Bytes:</p>
                   <TextDisplay text={output.reference_script?.bytes} />
                 </>
               )}

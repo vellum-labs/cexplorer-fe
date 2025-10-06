@@ -154,7 +154,7 @@ export const AdminGroupDetailPage = () => {
           maxHeight='95%'
           onClose={() => setShowUpdateModal(false)}
         >
-          <p className='mb-2 mt-8'>Update this group:</p>
+          <p className='mb-1 mt-4'>Update this group:</p>
           <textarea
             placeholder='Description'
             className='h-32 w-full rounded-xl border border-border bg-background p-1 text-sm text-text'
@@ -166,14 +166,14 @@ export const AdminGroupDetailPage = () => {
               label='Cancel'
               variant='tertiary'
               size='md'
-              className='mt-6'
+              className='mt-3'
               onClick={() => setDeleteModalData({ type: "pool", ident: "" })}
             />
             <Button
               label='Update'
               variant='primary'
               size='md'
-              className='ml-auto mt-6'
+              className='ml-auto mt-3'
               onClick={handleUpdate}
             />
           </div>
@@ -186,20 +186,20 @@ export const AdminGroupDetailPage = () => {
           maxHeight='95%'
           onClose={() => setDeleteModalData({ type: "pool", ident: "" })}
         >
-          <p className='mt-8'>Are you sure you want to delete this item?</p>
+          <p className='mt-4'>Are you sure you want to delete this item?</p>
           <div className='flex justify-between'>
             <Button
               label='Cancel'
               variant='tertiary'
               size='md'
-              className='mt-6'
+              className='mt-3'
               onClick={() => setDeleteModalData({ type: "pool", ident: "" })}
             />
             <Button
               label='Delete'
               variant='red'
               size='md'
-              className='ml-auto mt-6'
+              className='ml-auto mt-3'
               onClick={handleDelete}
             />
           </div>
@@ -220,7 +220,7 @@ export const AdminGroupDetailPage = () => {
               });
             }}
             defaultValue='m'
-            className='mb-8 mt-4 flex gap-4'
+            className='mb-4 mt-2 flex gap-4'
           >
             <div className='flex items-center space-x-2'>
               <RadioGroupItem value='drep' id='drep' />
@@ -252,14 +252,14 @@ export const AdminGroupDetailPage = () => {
             label='Add'
             variant='primary'
             size='md'
-            className='ml-auto mt-6'
+            className='ml-auto mt-3'
             onClick={handleAdd}
           />
         </Modal>
       )}
       <main className='flex min-h-minHeight flex-col items-center gap-2 p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col justify-center'>
-          <Breadcrumb className='mb-4 w-full'>
+          <Breadcrumb className='mb-2 w-full'>
             <BreadcrumbList className='flex items-center'>
               <BreadcrumbItem>
                 <Link className='underline underline-offset-2' to='/'>
@@ -288,7 +288,7 @@ export const AdminGroupDetailPage = () => {
             </BreadcrumbList>
           </Breadcrumb>
           <h2 className='text-left'>{data?.name}</h2>
-          <p className='mb-4 flex items-center gap-2'>
+          <p className='mb-2 flex items-center gap-2'>
             {data?.description}
             <button
               className=''
@@ -301,11 +301,11 @@ export const AdminGroupDetailPage = () => {
             </button>
           </p>
           {query.isLoading ? (
-            <div className='mt-8 flex w-full justify-center'>
+            <div className='mt-4 flex w-full justify-center'>
               <SpinningLoader />
             </div>
           ) : !items && !query.isLoading ? (
-            <p className='mt-8 flex w-full justify-center'>
+            <p className='mt-4 flex w-full justify-center'>
               You don't have admin permission.
             </p>
           ) : (
@@ -324,7 +324,7 @@ export const AdminGroupDetailPage = () => {
                 label='Add'
                 variant='primary'
                 size='md'
-                className='ml-auto mt-4'
+                className='ml-auto mt-2'
                 onClick={() => setShowAddModal(true)}
               />
             </>

@@ -79,7 +79,7 @@ export const AdminGroupsPage = () => {
           maxHeight='95%'
           onClose={() => setShowModal(false)}
         >
-          <div className='mt-8'>
+          <div className='mt-4'>
             <TextInput
               placeholder='Group name'
               value={name}
@@ -90,14 +90,14 @@ export const AdminGroupsPage = () => {
             label='Create'
             variant='primary'
             size='md'
-            className='ml-auto mt-6'
+            className='ml-auto mt-3'
             onClick={handleCreate}
           />
         </Modal>
       )}
       <main className='flex min-h-minHeight flex-col items-center gap-2 p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col items-center justify-center'>
-          <Breadcrumb className='mb-4 w-full'>
+          <Breadcrumb className='mb-2 w-full'>
             <BreadcrumbList className='flex items-center'>
               <BreadcrumbItem>
                 <Link className='underline underline-offset-2' to='/'>
@@ -117,11 +117,11 @@ export const AdminGroupsPage = () => {
             </BreadcrumbList>
           </Breadcrumb>
           {query.isLoading ? (
-            <div className='mt-8 flex w-full justify-center'>
+            <div className='mt-4 flex w-full justify-center'>
               <SpinningLoader />
             </div>
           ) : !data && !query.isLoading ? (
-            <p className='mt-8 flex w-full justify-center'>
+            <p className='mt-4 flex w-full justify-center'>
               You don't have admin permission.
             </p>
           ) : (
@@ -138,7 +138,7 @@ export const AdminGroupsPage = () => {
                 label='Create'
                 variant='primary'
                 size='md'
-                className='mt-8'
+                className='mt-4'
                 onClick={() => setShowModal(true)}
               />
             </>

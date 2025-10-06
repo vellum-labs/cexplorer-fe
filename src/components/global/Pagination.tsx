@@ -69,7 +69,7 @@ export const Pagination = ({
 
   return (
     <div className='flex w-full flex-col items-center gap-5'>
-      <PaginationComponent className='mt-4'>
+      <PaginationComponent className='mt-2'>
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious

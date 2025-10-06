@@ -227,7 +227,7 @@ export const RecentTab: FC = () => {
 
   return (
     <section className='flex w-full max-w-desktop flex-col pb-3'>
-      <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
+      <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
         <div className='flex w-full items-center justify-between gap-2'>
           {query.isLoading ? (
             <LoadingSkeleton height='27px' width='220px' />
@@ -299,7 +299,7 @@ export const RecentTab: FC = () => {
         </div>
       </div>
       {hasFilter && (
-        <div className='mb-3 flex flex-wrap items-center gap-1 md:flex-nowrap'>
+        <div className='mb-1.5 flex flex-wrap items-center gap-1 md:flex-nowrap'>
           {Object.entries(filter).map(
             ([key, value]) =>
               value && (

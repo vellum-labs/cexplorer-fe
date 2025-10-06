@@ -37,7 +37,7 @@ export const EpochsTabItem: FC<EpochsTabItemProps> = ({
 
   return (
     <>
-      <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
+      <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
         <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
           {epochListQuery.isLoading || epochListQuery.isFetching ? (
             <LoadingSkeleton height='27px' width={"220px"} />

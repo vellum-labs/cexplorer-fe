@@ -67,7 +67,7 @@ export const HeaderBanner = ({
     : {};
 
   return (
-    <header className='mb-5 flex min-h-[110px] w-full justify-center bg-gradient-to-b from-bannerGradient to-darker'>
+    <header className='mb-3 flex min-h-[110px] w-full justify-center bg-gradient-to-b from-bannerGradient to-darker'>
       <div className='flex w-full max-w-desktop flex-wrap justify-between gap-5 p-mobile md:px-desktop md:py-mobile'>
         <div className='flex flex-col py-1/2'>
           {breadcrumbItems && (
@@ -126,7 +126,7 @@ export const HeaderBanner = ({
                   ></p>
                   <Link
                     to='/ads'
-                    className='ml-1 flex -translate-y-1 items-center justify-center rounded-full border border-border bg-background px-[6px] text-[10px] font-medium'
+                    className='ml-1/2 flex -translate-y-1 items-center justify-center rounded-full border border-border bg-background px-[6px] text-[10px] font-medium'
                   >
                     Ad
                   </Link>
@@ -135,7 +135,7 @@ export const HeaderBanner = ({
             </>
           )}
         </div>
-        <div className={isHomepage ? 'flex w-full justify-center mt-3 mb-6' : 'flex w-full shrink basis-[500px] flex-col justify-center gap-3'}>
+        <div className={isHomepage ? 'flex w-full justify-center mt-1.5 mb-3' : 'flex w-full shrink basis-[500px] flex-col justify-center gap-3'}>
           <GlobalSearchProvider>
             <GlobalSearch isHomepage={isHomepage} />
           </GlobalSearchProvider>

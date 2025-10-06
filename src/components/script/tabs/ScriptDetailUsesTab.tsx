@@ -190,7 +190,7 @@ export const ScriptDetailUsesTab = () => {
             </h3>
           )}
         </div>
-        <div className='mb-4 ml-auto flex w-fit items-center justify-end gap-2'>
+        <div className='mb-2 ml-auto flex w-fit items-center justify-end gap-2'>
           <ExportButton columns={columns} items={items} />
           <TableSettingsDropdown
             rows={rows}

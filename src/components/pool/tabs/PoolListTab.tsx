@@ -62,7 +62,7 @@ const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {
 
   return (
     <section className={`flex w-full max-w-desktop flex-col gap-2`}>
-      <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
+      <div className='mb-1 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
         <div className='flex w-full flex-col gap-2'>
           {!watchlist && (
             <div>
@@ -134,7 +134,7 @@ const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {
               typeof value !== "undefined" && (
                 <div
                   key={key}
-                  className='mb-2 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
+                  className='mb-1 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-1 py-1/4 text-xs text-grayTextPrimary'
                 >
                   <span>
                     {key === "gov_action" ? "Selected votes:" : "Is Drep"}:

@@ -191,7 +191,7 @@ export const TotalThresholdChart: FC<TotalThresholdChartProps> = ({
   return (
     <div className='flex flex-col items-center justify-center'>
       <div className='flex items-center gap-2'>
-        <p className='mb-2 font-medium'>Total</p>
+        <p className='mb-1 font-medium'>Total</p>
         <Tooltip
           content={
             <p className='max-w-[200px]'>

@@ -56,7 +56,7 @@ export const MobileTabsSelector = ({
   }, [width, mobileItems, items.length]);
   return (
     <div
-      className={`${withMargin ? "mb-5" : ""} flex items-center ${secondary ? "h-[32px]" : "h-[40px]"} w-fit rounded-lg border border-borderFaded bg-darker gap-0.5`}
+      className={`${withMargin ? "mb-3" : ""} flex items-center ${secondary ? "h-[32px]" : "h-[40px]"} w-fit rounded-lg border border-borderFaded bg-darker gap-0.5`}
     >
       {items?.slice(0, visibleItems).map((item, index) => (
         <button

@@ -129,7 +129,7 @@ const ConnectWalletModal: React.FC<Props> = ({ onClose }) => {
       <div className='flex w-full flex-col flex-wrap items-center justify-center p-0 md:flex-row [&>div]:md:flex [&>div]:md:flex-1 [&>div]:md:flex-col [&>div]:md:self-center'>
         <div className='w-full'>
           <h2>CONNECT WALLET </h2>
-          <div className='mb-4 mt-4 flex h-full w-full flex-col items-center justify-around'>
+          <div className='mb-2 mt-2 flex h-full w-full flex-col items-center justify-around'>
             {isSafari && !isMobile && !isTablet && (
               <p className='font-normal text-red-500'>
                 We&apos;re sorry, but there are no supported wallets for Safari.

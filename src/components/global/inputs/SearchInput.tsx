@@ -176,7 +176,7 @@ const TableSearchInput = ({
                 }}
               >
                 <span className='text-sm font-medium'>{prefix.name}:</span>
-                <span className='ml-1'>
+                <span className='ml-1/2'>
                   {value.length > 19 ? formatString(value, "long") : value}
                 </span>
               </button>

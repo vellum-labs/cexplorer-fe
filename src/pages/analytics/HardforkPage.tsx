@@ -542,8 +542,8 @@ const HardforkPage: FC = () => {
               {data?.detail?.exchanges ? (
                 <Tabs items={exhcangeTabItems} tabParam='exchange' toRight />
               ) : (
-                <div className='my-5 flex w-full max-w-desktop flex-col px-mobile md:px-desktop'>
-                  <p className='mb-5 h-[37.6px] w-full'>Exchange readiness</p>
+                <div className='my-3 flex w-full max-w-desktop flex-col px-mobile md:px-desktop'>
+                  <p className='mb-3 h-[37.6px] w-full'>Exchange readiness</p>
                   <div className='h-full w-full'>
                     <ReactEcharts option={status} />
                   </div>
@@ -557,7 +557,7 @@ const HardforkPage: FC = () => {
         </div>
       </section>
       <section className='flex w-full max-w-desktop flex-col p-mobile md:p-desktop'>
-        <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
+        <div className='mb-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
           <div className='flex flex-wrap gap-1 md:flex-nowrap'>
             <HardforkPageTotalCountItem
               title='All'

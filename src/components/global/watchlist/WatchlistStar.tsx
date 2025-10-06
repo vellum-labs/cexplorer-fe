@@ -167,20 +167,20 @@ export const WatchlistStar = ({
       )}
       {showRemoveModal && (
         <Modal onClose={() => setShowRemoveModal(false)}>
-          <p className='mt-8 text-sm'>
+          <p className='mt-4 text-sm'>
             Do you wish to remove this item from your watchlist?
           </p>
-          <div className='mt-6 flex w-full justify-between'>
+          <div className='mt-3 flex w-full justify-between'>
             <Button
               onClick={() => setShowRemoveModal(false)}
-              className='mr-2'
+              className='mr-1'
               variant='secondary'
               label='Cancel'
               size='md'
             />
             <Button
               onClick={handleUnlike}
-              className='mr-2'
+              className='mr-1'
               variant='primary'
               label='Remove'
               size='md'
@@ -191,10 +191,10 @@ export const WatchlistStar = ({
       {showOptionsModal && (
         <Modal onClose={() => setShowOptionsModal(false)}>
           <div className='text-center'>
-            <h3 className='mb-4 text-lg font-semibold'>
+            <h3 className='mb-2 text-lg font-semibold'>
               {isStakeKeyInWatchlist ? "Manage Watchlist" : "Add to Watchlist"}
             </h3>
-            <p className='mb-6 text-sm text-grayTextPrimary'>
+            <p className='mb-3 text-sm text-grayTextPrimary'>
               {isStakeKeyInWatchlist
                 ? "Choose an action for your watchlist:"
                 : "Choose what to add to your watchlist:"}

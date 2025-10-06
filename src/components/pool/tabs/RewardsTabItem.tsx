@@ -29,7 +29,7 @@ const RewardsTabItem: FC<RewardsTabItemProps> = ({ query }) => {
 
   return (
     <div>
-      <h2 className='mb-2'>Rewards</h2>
+      <h2 className='mb-1'>Rewards</h2>
       <PoolRewardsGraph
         epochs={epochs}
         leaderLovelace={leaderLovelace}

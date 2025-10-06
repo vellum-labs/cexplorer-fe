@@ -122,10 +122,10 @@ const EpochDetailPage: FC = () => {
               will start on <strong>{futureStartTime}</strong> and end on{" "}
               <strong>{futureEndTime}</strong>.
             </p>
-            <p className='mt-2 text-sm'>
+            <p className='mt-1 text-sm'>
               The current epoch is <strong>{currentEpoch}</strong>.
             </p>
-            <div className='mt-3 flex items-center gap-3'>
+            <div className='mt-1.5 flex items-center gap-3'>
               <Button
                 size='md'
                 className='cursor-pointer px-1'

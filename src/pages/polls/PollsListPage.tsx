@@ -86,7 +86,7 @@ export const PollsListPage = () => {
           <Link
             to='/polls/$poll'
             params={{ poll: poll.url }}
-            className='mb-1 text-base font-medium text-primary'
+            className='mb-1/2 text-base font-medium text-primary'
           >
             {poll.name}
           </Link>
@@ -191,7 +191,7 @@ export const PollsListPage = () => {
             onClick={activeTab => setActiveTab(activeTab)}
             mobileItemsCount={3}
           />
-          <div className='-mt-8 mb-4 ml-auto flex items-center gap-4'>
+          <div className='-mt-8 mb-2 ml-auto flex items-center gap-4'>
             {nfts === 0 && (
               <Link
                 to='/pro'
@@ -287,11 +287,11 @@ const faq = [
 const FaqModal = ({ onClose }: { onClose: () => void }) => {
   return (
     <Modal minWidth='95%' maxWidth='600px' maxHeight='95%' onClose={onClose}>
-      <h3 className='mt-4'>Voting FAQ</h3>
+      <h3 className='mt-2'>Voting FAQ</h3>
       <Accordion
         type='single'
         collapsible
-        className='mt-4 w-full max-w-[600px]'
+        className='mt-2 w-full max-w-[600px]'
       >
         {faq?.map(item => (
           <AccordionItem

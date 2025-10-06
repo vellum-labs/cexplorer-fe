@@ -431,7 +431,7 @@ export const DexSwapDetailCard: FC<DexSwapDetailCardProps> = ({
                   </div>
                 </div>
                 {divider && (
-                  <div className='my-2 w-full self-center border border-border' />
+                  <div className='my-1 w-full self-center border border-border' />
                 )}
               </div>
             ))}

@@ -14,7 +14,7 @@ const PerformanceTabItem = memo(function PerfomanceTabItem() {
   return (
     <div>
       <div className='relative w-full'>
-        <h2 className='mb-2'>Performance</h2>
+        <h2 className='mb-1'>Performance</h2>
         <PoolPerformanceGraph
           activeStake={activeStake}
           blocks={blocks}
