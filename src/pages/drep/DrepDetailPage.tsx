@@ -136,6 +136,7 @@ export const DrepDetailPage: FC = () => {
         <WatchlistSection
           ident={drepHash ?? ""}
           isLoading={drepDetailQuery.isLoading}
+          drepDetailQuery={drepDetailQuery}
         />
       </div>
       <DrepDetailOverview query={drepDetailQuery} />
