@@ -9,6 +9,7 @@ import { formatNumber, formatString } from "@/utils/format/format";
 import { AddCustomLabel } from "../address/AddCustomLabel";
 import { TokenSelectCombobox } from "../asset/TokenSelect";
 import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { TotalSumWithRates } from "../global/TotalSumWithRates";
 import AdaHandleBadge from "../global/badges/AdaHandleBadge";
 import { Badge } from "../global/badges/Badge";
 import Copy from "../global/Copy";
@@ -19,6 +20,8 @@ import { ChevronRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useThemeStore } from "@/stores/themeStore";
 import { configJSON } from "@/constants/conf";
+import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
+import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 
 interface AddressDetailOverviewProps {
   data: StakeDetailData | undefined;
@@ -35,6 +38,19 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
   const tokenMarket = configJSON.market[0].token[0].active;
   const { theme } = useThemeStore();
 
+  const curr = useGetMarketCurrency();
+
+  let totalBalanceSum: [string, number, number, number] = ["", 0, 0, 0];
+  let adaBalanceSum: [string, number, number, number] = ["", 0, 0, 0];
+
+  if (data?.stake?.live.amount && Object.values(curr).length) {
+    totalBalanceSum = lovelaceToAdaWithRates(data.stake.live.amount, curr);
+  }
+
+  if (data?.stake?.active?.amount && Object.values(curr).length) {
+    adaBalanceSum = lovelaceToAdaWithRates(data.stake.active.amount, curr);
+  }
+
   const overviewList = [
     data?.adahandle
       ? {
@@ -44,12 +60,12 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
       : undefined,
     {
       label: "Total balance",
-      value: <AdaWithTooltip data={data?.stake?.live.amount ?? 0} />,
+      value: <TotalSumWithRates sum={totalBalanceSum} ada={data?.stake?.live.amount ?? 0} />,
     },
     tokenMarket ? { label: "Assets balance", value: "TBD" } : undefined,
     {
       label: "ADA balance",
-      value: <AdaWithTooltip data={data?.stake?.active?.amount ?? 0} />,
+      value: <TotalSumWithRates sum={adaBalanceSum} ada={data?.stake?.active?.amount ?? 0} />,
     },
     { label: "Private name", value: <AddCustomLabel address={address} /> },
   ];
