@@ -8,6 +8,29 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
+const extractTextFromReactNode = (node: ReactNode): string => {
+  if (typeof node === "string") return node;
+  if (typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(extractTextFromReactNode).join("");
+  if (node && typeof node === "object" && "props" in node) {
+    return extractTextFromReactNode(node.props.children);
+  }
+  return "";
+};
+
+const truncateTitle = (title: string, maxLength: number = 20): string => {
+  if (title.length <= maxLength) return title;
+  const prefixLength = 10;
+  const suffixLength = 10;
+  return `${title.slice(0, prefixLength)}…${title.slice(-suffixLength)}`;
+};
+
+const getTruncatedTitle = (title: ReactNode): ReactNode => {
+  const textContent = extractTextFromReactNode(title);
+  if (textContent.length <= 20) return title;
+  return truncateTitle(textContent);
+};
+
 import type { FileRoutesByPath } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 
@@ -104,7 +127,9 @@ export const HeaderBanner = ({
             </Breadcrumb>
           )}
           <div className='flex items-center gap-2 pt-1 font-poppins'>
-            <h1 className={cn(!subTitle && !isHomepage && "pb-8")}>{title}</h1>
+            <h1 className={cn(!subTitle && !isHomepage && "pb-8")}>
+              {getTruncatedTitle(title)}
+            </h1>
             {badge && badge}
           </div>
           <div className='flex items-center gap-2'>
@@ -135,7 +160,13 @@ export const HeaderBanner = ({
             </>
           )}
         </div>
-        <div className={isHomepage ? 'flex w-full justify-center mt-3 mb-6' : 'flex w-full shrink basis-[500px] flex-col justify-center gap-3'}>
+        <div
+          className={
+            isHomepage
+              ? "mb-6 mt-3 flex w-full justify-center"
+              : "flex w-full shrink basis-[500px] flex-col justify-center gap-3"
+          }
+        >
           <GlobalSearchProvider>
             <GlobalSearch isHomepage={isHomepage} />
           </GlobalSearchProvider>
