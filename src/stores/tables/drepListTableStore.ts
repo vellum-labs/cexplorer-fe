@@ -18,6 +18,7 @@ export const useDrepListTableStore = (storeKey?: string) =>
     storeKey ?? "drep_list_table_store",
     {
       columnsVisibility: {
+        ranking: true,
         drep_name: true,
         metadata: false,
         registered: true,
@@ -35,6 +36,7 @@ export const useDrepListTableStore = (storeKey?: string) =>
       isResponsive: true,
       rows: 20,
       columnsOrder: [
+        "ranking",
         "status",
         "drep_name",
         "voting_power",
