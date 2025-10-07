@@ -432,26 +432,27 @@ export const GovernancePage: FC = () => {
         },
         { label: "Governance actions" },
       ]}
+      adsCarousel={false}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
         <div className='flex h-full w-full flex-wrap items-stretch gap-4 lg:flex-nowrap'>
           {drepStatQuery.isLoading || drepStatQuery.isFetching ? (
             <>
               <LoadingSkeleton
-                width='426px'
-                height='140px'
+                width='456px'
+                height='136px'
                 rounded='xl'
                 className='flex-grow lg:flex-grow-0'
               />
               <LoadingSkeleton
-                width='426px'
-                height='140px'
+                width='456px'
+                height='136px'
                 rounded='xl'
                 className='flex-grow lg:flex-grow-0'
               />
               <LoadingSkeleton
-                width='426px'
-                height='140px'
+                width='456px'
+                height='136px'
                 rounded='xl'
                 className='flex-grow lg:flex-grow-0'
               />
