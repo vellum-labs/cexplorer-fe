@@ -81,14 +81,28 @@ export const HeaderBanner = ({
 }: HeaderBannerProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [containerWidth, setContainerWidth] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
   const { isTruncated, displayTitle, fullText } = getTruncatedTitle(title);
 
   useEffect(() => {
-    if (titleRef.current && isTruncated && !containerWidth) {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (titleRef.current && isTruncated && !containerWidth && !isMobile) {
       setContainerWidth(titleRef.current.offsetWidth);
     }
-  }, [isTruncated, containerWidth]);
+  }, [isTruncated, containerWidth, isMobile]);
   const miscBasicQuery = useFetchMiscBasic();
   const headingAd = miscBasicQuery.data?.data.ads.find(
     ad => ad.type === "heading_featured",
@@ -150,19 +164,19 @@ export const HeaderBanner = ({
               ref={titleRef}
               className={cn(
                 !subTitle && !isHomepage && "pb-8",
-                isTruncated && containerWidth && "overflow-hidden",
+                isTruncated && !isMobile && containerWidth && "overflow-hidden",
               )}
               style={
-                isTruncated && containerWidth
+                isTruncated && !isMobile && containerWidth
                   ? { width: `${containerWidth}px`, display: "inline-block" }
-                  : isTruncated
+                  : isTruncated && !isMobile
                     ? { display: "inline-block" }
                     : {}
               }
-              onMouseEnter={() => isTruncated && setIsHovered(true)}
-              onMouseLeave={() => isTruncated && setIsHovered(false)}
+              onMouseEnter={() => isTruncated && !isMobile && setIsHovered(true)}
+              onMouseLeave={() => isTruncated && !isMobile && setIsHovered(false)}
             >
-              {isTruncated && isHovered ? (
+              {isTruncated && !isMobile && isHovered ? (
                 <span
                   className='inline-block whitespace-nowrap'
                   style={{
@@ -171,14 +185,12 @@ export const HeaderBanner = ({
                 >
                   {fullText}
                 </span>
-              ) : (
-                <span
-                  className={
-                    isTruncated ? "inline-block whitespace-nowrap" : ""
-                  }
-                >
+              ) : isTruncated && !isMobile ? (
+                <span className="inline-block whitespace-nowrap">
                   {displayTitle}
                 </span>
+              ) : (
+                title
               )}
             </h1>
             {badge && badge}
