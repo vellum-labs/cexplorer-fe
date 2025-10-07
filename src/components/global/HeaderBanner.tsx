@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import {
   Breadcrumb,
@@ -20,15 +21,23 @@ const extractTextFromReactNode = (node: ReactNode): string => {
 
 const truncateTitle = (title: string, maxLength: number = 20): string => {
   if (title.length <= maxLength) return title;
-  const prefixLength = 10;
-  const suffixLength = 10;
+  const prefixLength = 20;
+  const suffixLength = 20;
   return `${title.slice(0, prefixLength)}…${title.slice(-suffixLength)}`;
 };
 
-const getTruncatedTitle = (title: ReactNode): ReactNode => {
+const getTruncatedTitle = (
+  title: ReactNode,
+): { isTruncated: boolean; displayTitle: ReactNode; fullText: string } => {
   const textContent = extractTextFromReactNode(title);
-  if (textContent.length <= 20) return title;
-  return truncateTitle(textContent);
+  if (textContent.length <= 40) {
+    return { isTruncated: false, displayTitle: title, fullText: textContent };
+  }
+  return {
+    isTruncated: true,
+    displayTitle: truncateTitle(textContent),
+    fullText: textContent,
+  };
 };
 
 import type { FileRoutesByPath } from "@tanstack/react-router";
@@ -70,6 +79,16 @@ export const HeaderBanner = ({
   qrCode,
   isHomepage,
 }: HeaderBannerProps) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [containerWidth, setContainerWidth] = useState<number | null>(null);
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
+  const { isTruncated, displayTitle, fullText } = getTruncatedTitle(title);
+
+  useEffect(() => {
+    if (titleRef.current && isTruncated && !containerWidth) {
+      setContainerWidth(titleRef.current.offsetWidth);
+    }
+  }, [isTruncated, containerWidth]);
   const miscBasicQuery = useFetchMiscBasic();
   const headingAd = miscBasicQuery.data?.data.ads.find(
     ad => ad.type === "heading_featured",
@@ -127,11 +146,53 @@ export const HeaderBanner = ({
             </Breadcrumb>
           )}
           <div className='flex items-center gap-2 pt-1 font-poppins'>
-            <h1 className={cn(!subTitle && !isHomepage && "pb-8")}>
-              {getTruncatedTitle(title)}
+            <h1
+              ref={titleRef}
+              className={cn(
+                !subTitle && !isHomepage && "pb-8",
+                isTruncated && containerWidth && "overflow-hidden",
+              )}
+              style={
+                isTruncated && containerWidth
+                  ? { width: `${containerWidth}px`, display: "inline-block" }
+                  : isTruncated
+                    ? { display: "inline-block" }
+                    : {}
+              }
+              onMouseEnter={() => isTruncated && setIsHovered(true)}
+              onMouseLeave={() => isTruncated && setIsHovered(false)}
+            >
+              {isTruncated && isHovered ? (
+                <span
+                  className='inline-block whitespace-nowrap'
+                  style={{
+                    animation: "marquee 10s linear infinite",
+                  }}
+                >
+                  {fullText}
+                </span>
+              ) : (
+                <span
+                  className={
+                    isTruncated ? "inline-block whitespace-nowrap" : ""
+                  }
+                >
+                  {displayTitle}
+                </span>
+              )}
             </h1>
             {badge && badge}
           </div>
+          <style>{`
+            @keyframes marquee {
+              0% {
+                transform: translateX(0%);
+              }
+              100% {
+                transform: translateX(-100%);
+              }
+            }
+          `}</style>
           <div className='flex items-center gap-2'>
             {subTitle && subTitle}
             {qrCode && qrCode}
