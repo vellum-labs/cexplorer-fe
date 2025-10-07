@@ -3,7 +3,6 @@ import type { useFetchMiscBasic } from "@/services/misc";
 import type { AggregatedSwapData } from "@/types/tokenTypes";
 
 import {
-  ArrowRight,
   Check,
   CircleAlert,
   CircleCheck,
@@ -23,21 +22,19 @@ import { SwapDetailTable } from "./SwapDetailTable";
 import { Tooltip } from "../ui/tooltip";
 import { AssetTicker } from "./AssetTicker";
 import { SwapTypeBadge } from "./SwapTypeBadge";
-import { AssetDisplay } from "./AssetDisplay";
 import { FeeDropdown } from "./FeeDropdown";
+import { TokenPair } from "./TokenPair";
 
 import { useDeFiOrderListTableStore } from "@/stores/tables/deFiOrderListTableStore";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 
 import { addressIcons } from "@/constants/address";
-import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { getConfirmations } from "@/utils/getConfirmations";
 import { renderWithException } from "@/utils/renderWithException";
 import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
 import { ADATokenName } from "@/constants/currencies";
 import { formatNumberWithSuffix } from "@/utils/format/format";
-import { getAssetImage } from "@/utils/asset/getAssetImage";
 
 interface ConsolidatedDexSwapDetailCardProps {
   miscBasic: ReturnType<typeof useFetchMiscBasic>["data"];
@@ -92,13 +89,6 @@ export const ConsolidatedDexSwapDetailCard: FC<
 
   const level = getLevel(balanceAda);
   const Icon = addressIcons[level];
-
-  const tokenInFingerPrint = getAssetFingerprint(
-    aggregatedData?.pair.tokenIn ?? "",
-  );
-  const tokenOutFingerPrint = getAssetFingerprint(
-    aggregatedData?.pair.tokenOut ?? "",
-  );
 
   const [, usd] = lovelaceToAdaWithRates(aggregatedData?.adaPrice ?? 0, curr);
 
@@ -201,23 +191,12 @@ export const ConsolidatedDexSwapDetailCard: FC<
             Multiple pairs detected - see individual trades below
           </div>
         ) : (
-          <div className='flex items-center gap-2'>
-            <div className='flex items-center gap-2'>
-              {getAssetImage(aggregatedData?.pair.tokenIn ?? "")}
-              <AssetDisplay
-                tokenName={aggregatedData?.pair.tokenIn ?? ""}
-                fingerprint={tokenInFingerPrint}
-              />
-            </div>
-            <ArrowRight size={15} className='block' />
-            <div className='flex items-center gap-2'>
-              {getAssetImage(aggregatedData?.pair.tokenOut ?? "")}
-              <AssetDisplay
-                tokenName={aggregatedData?.pair.tokenOut ?? ""}
-                fingerprint={tokenOutFingerPrint}
-              />
-            </div>
-          </div>
+          <TokenPair
+            tokenIn={aggregatedData?.pair.tokenIn ?? ""}
+            tokenOut={aggregatedData?.pair.tokenOut ?? ""}
+            variant='full'
+            clickable={false}
+          />
         ),
       ),
     },

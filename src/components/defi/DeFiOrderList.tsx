@@ -2,7 +2,7 @@ import type { FC } from "react";
 import type { DeFiOrderListColumns, TableColumns } from "@/types/tableTypes";
 import type { DeFiOrder } from "@/types/tokenTypes";
 
-import { ArrowRight, Check, Ellipsis, FileText, X } from "lucide-react";
+import { Check, Ellipsis, FileText, X } from "lucide-react";
 
 import PulseDot from "../global/PulseDot";
 import ExportButton from "../table/ExportButton";
@@ -18,11 +18,7 @@ import { Tooltip } from "../ui/tooltip";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";
 
 import { defiOrderListTableOptions } from "@/constants/tables/defiOrderListTableOptions";
-import {
-  formatNumber,
-  formatNumberWithSuffix,
-  formatString,
-} from "@/utils/format/format";
+import { formatNumberWithSuffix, formatString } from "@/utils/format/format";
 import { ADATokenName, currencySigns } from "@/constants/currencies";
 
 import DexhunterIcon from "@/resources/images/icons/dexhunter.svg";
@@ -34,11 +30,12 @@ import { useFetchMiscSearch } from "@/services/misc";
 import { useLocaleStore } from "@/stores/localeStore";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 
-import { renderAssetName } from "@/utils/asset/renderAssetName";
-import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import { addressIcons } from "@/constants/address";
 import { calculateAdaPriceWithHistory } from "@/utils/calculateAdaPriceWithHistory";
 import useDebounce from "@/hooks/useDebounce";
+import { TokenPair } from "../dex/TokenPair";
+import { AssetTicker } from "../dex/AssetTicker";
+import { renderAssetName } from "@/utils/asset/renderAssetName";
 
 interface DeFiOrderListProps {
   page?: number;
@@ -284,47 +281,13 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           return "-";
         }
 
-        const tokenInFingerPrint = getAssetFingerprint(item?.token_in?.name);
-        const tokenOutFingerPrint = getAssetFingerprint(item?.token_out?.name);
-
-        const tokenInAssetName = renderAssetName({
-          name: item?.token_in?.name,
-        });
-        const tokenOutAssetName = renderAssetName({
-          name: item?.token_out?.name,
-        });
-
-        const tokenInHasRegistry = item?.token_in?.registry;
-        const tokenOutHasRegistry = item?.token_out?.registry;
-
         return (
-          <div className='flex items-center justify-between'>
-            <Link
-              to='/asset/$fingerprint'
-              params={{
-                fingerprint: tokenInFingerPrint,
-              }}
-            >
-              <p
-                className={`min-w-[50px] ${!tokenInHasRegistry ? "italic" : ""} text-primary`}
-              >
-                {tokenInAssetName === "lovelace" ? "ADA" : tokenInAssetName}
-              </p>
-            </Link>
-            <ArrowRight size={15} className='block min-w-[20px]' />
-            <Link
-              to='/asset/$fingerprint'
-              params={{
-                fingerprint: tokenOutFingerPrint,
-              }}
-            >
-              <p
-                className={`w-fit ${!tokenOutHasRegistry ? "italic" : ""} text-primary`}
-              >
-                {tokenOutAssetName === "lovelace" ? "ADA" : tokenOutAssetName}
-              </p>
-            </Link>
-          </div>
+          <TokenPair
+            tokenIn={item.token_in.name}
+            tokenOut={item.token_out.name}
+            variant='simple'
+            clickable={false}
+          />
         );
       },
       title: "Pair",
@@ -339,11 +302,28 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         }
 
         const isBuying = item?.token_in?.name === ADATokenName;
+        const amount = isBuying ? item?.actual_out_amount : item?.amount_in;
+        const tokenName = isBuying ? item?.token_out?.name : item?.token_in?.name;
+        const displayName = tokenName === ADATokenName ? "ADA" : renderAssetName({ name: tokenName });
 
         return (
-          <p className='text-right'>
-            {formatNumber(isBuying ? item?.actual_out_amount : item?.amount_in)}
-          </p>
+          <div className='flex justify-end'>
+            <Tooltip
+              content={
+                <div className='flex items-center gap-1'>
+                  <span>
+                    {amount.toLocaleString()}{" "}
+                    <AssetTicker tokenName={tokenName} />
+                  </span>
+                  <Copy
+                    copyText={`${amount.toLocaleString()} ${displayName}`}
+                  />
+                </div>
+              }
+            >
+              <p className='text-right'>{formatNumberWithSuffix(amount)}</p>
+            </Tooltip>
+          </div>
         );
       },
       title: <p className='w-full text-nowrap text-right'>Token amount</p>,
