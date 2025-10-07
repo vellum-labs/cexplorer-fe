@@ -61,7 +61,6 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
     <>
       <Helmet>
         <meta charSet='utf-8' />
-        {<title>{metadata.drepList.title}</title>}
         <meta name='description' content={metadata.drepList.description} />
         <meta name='keywords' content={metadata.drepList.keywords} />
       </Helmet>
