@@ -1,5 +1,45 @@
 import type { ResponseCore } from "./commonTypes";
 
+export interface DexConfig {
+  label: string;
+  icon: string;
+  textColor: string;
+  bgColor: string;
+  borderColor: string;
+}
+
+export interface AggregatedSwapData {
+  address: string;
+  timestamp: string;
+  txHash: string;
+  confirmations: [string, number];
+
+  pair: {
+    tokenIn: string;
+    tokenOut: string;
+    isMultiplePairs: boolean;
+  };
+
+  totalAmountIn: number;
+  totalExpectedOut: number;
+  totalActualOut: number;
+
+  adaPrice: number;
+
+  status: "COMPLETE" | "PENDING" | "PARTIALLY_COMPLETE" | "CANCELLED";
+
+  lastUpdate: string;
+
+  type: "AGGREGATOR_SWAP" | "DEXHUNTER_SWAP" | "DIRECT_SWAP";
+
+  dexes: string[];
+
+  totalBatcherFees: number;
+  totalDeposits: number;
+
+  orders: DeFiOrder[];
+}
+
 interface DeFiTokenList {
   assetname: string;
   registry: any | null;
