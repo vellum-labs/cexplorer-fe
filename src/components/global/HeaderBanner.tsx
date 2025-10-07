@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { useState, useRef, useEffect } from "react";
 
 import {
   Breadcrumb,
@@ -9,36 +8,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-const extractTextFromReactNode = (node: ReactNode): string => {
-  if (typeof node === "string") return node;
-  if (typeof node === "number") return String(node);
-  if (Array.isArray(node)) return node.map(extractTextFromReactNode).join("");
-  if (node && typeof node === "object" && "props" in node) {
-    return extractTextFromReactNode(node.props.children);
-  }
-  return "";
-};
-
-const truncateTitle = (title: string, maxLength: number = 20): string => {
-  if (title.length <= maxLength) return title;
-  const prefixLength = 20;
-  const suffixLength = 20;
-  return `${title.slice(0, prefixLength)}…${title.slice(-suffixLength)}`;
-};
-
-const getTruncatedTitle = (
-  title: ReactNode,
-): { isTruncated: boolean; displayTitle: ReactNode; fullText: string } => {
-  const textContent = extractTextFromReactNode(title);
-  if (textContent.length <= 40) {
-    return { isTruncated: false, displayTitle: title, fullText: textContent };
-  }
-  return {
-    isTruncated: true,
-    displayTitle: truncateTitle(textContent),
-    fullText: textContent,
-  };
-};
+import { TruncatedText } from "./TruncatedText";
 
 import type { FileRoutesByPath } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
@@ -79,30 +49,6 @@ export const HeaderBanner = ({
   qrCode,
   isHomepage,
 }: HeaderBannerProps) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [containerWidth, setContainerWidth] = useState<number | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const titleRef = useRef<HTMLHeadingElement | null>(null);
-  const { isTruncated, displayTitle, fullText } = getTruncatedTitle(title);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-
-    return () => {
-      window.removeEventListener('resize', checkMobile);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (titleRef.current && isTruncated && !containerWidth && !isMobile) {
-      setContainerWidth(titleRef.current.offsetWidth);
-    }
-  }, [isTruncated, containerWidth, isMobile]);
   const miscBasicQuery = useFetchMiscBasic();
   const headingAd = miscBasicQuery.data?.data.ads.find(
     ad => ad.type === "heading_featured",
@@ -160,51 +106,11 @@ export const HeaderBanner = ({
             </Breadcrumb>
           )}
           <div className='flex items-center gap-2 pt-1 font-poppins'>
-            <h1
-              ref={titleRef}
-              className={cn(
-                !subTitle && !isHomepage && "pb-8",
-                isTruncated && !isMobile && containerWidth && "overflow-hidden",
-              )}
-              style={
-                isTruncated && !isMobile && containerWidth
-                  ? { width: `${containerWidth}px`, display: "inline-block" }
-                  : isTruncated && !isMobile
-                    ? { display: "inline-block" }
-                    : {}
-              }
-              onMouseEnter={() => isTruncated && !isMobile && setIsHovered(true)}
-              onMouseLeave={() => isTruncated && !isMobile && setIsHovered(false)}
-            >
-              {isTruncated && !isMobile && isHovered ? (
-                <span
-                  className='inline-block whitespace-nowrap'
-                  style={{
-                    animation: "marquee 10s linear infinite",
-                  }}
-                >
-                  {fullText}
-                </span>
-              ) : isTruncated && !isMobile ? (
-                <span className="inline-block whitespace-nowrap">
-                  {displayTitle}
-                </span>
-              ) : (
-                title
-              )}
+            <h1 className={cn(!subTitle && !isHomepage && "pb-8")}>
+              <TruncatedText>{title}</TruncatedText>
             </h1>
             {badge && badge}
           </div>
-          <style>{`
-            @keyframes marquee {
-              0% {
-                transform: translateX(0%);
-              }
-              100% {
-                transform: translateX(-100%);
-              }
-            }
-          `}</style>
           <div className='flex items-center gap-2'>
             {subTitle && subTitle}
             {qrCode && qrCode}
