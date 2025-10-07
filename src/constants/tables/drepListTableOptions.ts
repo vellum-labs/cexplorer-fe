@@ -7,6 +7,10 @@ interface DrepListOptions {
 
 export const drepListTableOptions: DrepListOptions[] = [
   {
+    key: "ranking",
+    name: "#",
+  },
+  {
     key: "status",
     name: "Status",
   },
