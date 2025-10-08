@@ -147,6 +147,38 @@ export const useDrepList = ({
 
   const columns: TableColumns<DrepListData> = [
     {
+      key: "ranking",
+      standByRanking: true,
+      render: () => null,
+      rankingStart: sort,
+      title: (
+        <div>
+          <div
+            className='flex w-fit cursor-pointer items-center gap-1'
+            onClick={() => {
+              if (!setList) {
+                navigate({
+                  search: {
+                    sort: getColumnsSortOrder(sort),
+                    order: order,
+                  } as any,
+                });
+
+                return;
+              }
+
+              setList(order);
+            }}
+          >
+            <span>#</span>
+            <SortArrow direction={sort} />
+          </div>
+        </div>
+      ),
+      visible: columnsVisibility.ranking,
+      widthPx: 20,
+    },
+    {
       key: "status",
       render: item => {
         if (typeof item?.is_active === "undefined") {

@@ -7,6 +7,7 @@ interface TableColumn<T> {
   title: ReactNode;
   visible: boolean;
   standByRanking?: boolean;
+  rankingStart?: "asc" | "desc" | undefined;
   jsonFormat?: (value: T, index?: number) => string | number;
   jsonTitleFormat?: string | number;
   widthPx: number;
@@ -600,6 +601,7 @@ export interface DeFiTokenTableColumns {
 }
 
 export interface DrepListTableColumns {
+  ranking: boolean;
   status: boolean;
   drep_name: boolean;
   voting_power: boolean;
