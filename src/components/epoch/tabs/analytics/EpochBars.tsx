@@ -192,7 +192,7 @@ export const EpochBars: FC<EpochBars> = ({ stats, isError, isLoading }) => {
               return `<div>${title} (${date}): ${formattedValue}</div>`;
             },
             axisPointer: {
-              type: "shadow-md",
+              type: "shadow",
             },
           },
         };
