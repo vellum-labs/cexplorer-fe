@@ -31,12 +31,18 @@ export const AdaPrice: FC = () => {
             </div>
           </section>
         ) : (
-          <LoadingSkeleton
-            width='1310px'
-            height='400px'
-            rounded='lg'
-            className='mb-4'
-          />
+          <section className='flex w-full flex-col items-center pb-5'>
+            <div className='flex w-full max-w-desktop items-center justify-between px-mobile md:px-desktop'>
+              <div className='flex w-full flex-col items-center justify-between gap-6 rounded-lg lg:flex-row lg:items-start'>
+                <LoadingSkeleton
+                  width='1400px'
+                  height='400px'
+                  rounded='lg'
+                  className='mb-4'
+                />
+              </div>
+            </div>
+          </section>
         )}
       </div>
     </PageBase>
