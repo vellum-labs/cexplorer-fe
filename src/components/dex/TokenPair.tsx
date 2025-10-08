@@ -1,3 +1,4 @@
+import type { FC } from "react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { AssetDisplay } from "./AssetDisplay";
@@ -11,12 +12,12 @@ interface TokenPairProps {
   clickable?: boolean;
 }
 
-export const TokenPair = ({
+export const TokenPair: FC<TokenPairProps> = ({
   tokenIn,
   tokenOut,
   variant = "full",
   clickable = true,
-}: TokenPairProps) => {
+}) => {
   const tokenInFingerprint = getAssetFingerprint(tokenIn);
   const tokenOutFingerprint = getAssetFingerprint(tokenOut);
 
