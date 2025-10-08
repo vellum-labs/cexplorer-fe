@@ -100,7 +100,7 @@ export const EpochCalendarPage = () => {
       metadataTitle='epochCalendar'
     >
       <div className='flex w-full max-w-desktop flex-wrap items-center justify-between gap-2 px-mobile md:px-desktop'>
-        <div className='flex items-center gap-1 text-text-sm text-grayTextPrimary'>
+        <div className='text-text-sm flex items-center gap-1 text-grayTextPrimary'>
           Show upcoming:{" "}
           <SortBy
             selectItems={upcomingEpochsItems}
@@ -125,14 +125,16 @@ export const EpochCalendarPage = () => {
         />
       </div>
       {isLoading ? (
-        <section className='grid w-full max-w-desktop grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-2 px-mobile pb-3 md:px-desktop'>
+        <section className='grid w-full max-w-desktop grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-2 px-mobile pb-3 pt-2 md:px-desktop'>
           {Array.from({ length: 100 }).map(() => (
             <LoadingSkeleton width='100%' height='167px' rounded='xl' />
           ))}
         </section>
       ) : (
-        <section className='grid w-full max-w-desktop grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-2 px-mobile pb-3 md:px-desktop'>
-          {items?.map(epoch => <EpochCard key={epoch.no} epoch={epoch} />)}
+        <section className='grid w-full max-w-desktop grid-cols-[repeat(auto-fill,_minmax(250px,_1fr))] gap-2 px-mobile pb-3 pt-2 md:px-desktop'>
+          {items?.map(epoch => (
+            <EpochCard key={epoch.no} epoch={epoch} />
+          ))}
         </section>
       )}
     </PageBase>
@@ -153,7 +155,7 @@ const EpochCard = ({ epoch }: { epoch: EpochListData }) => {
     <div className='flex flex-col gap-1 rounded-l border border-border p-2'>
       <div className='mb-1 flex items-center gap-1.5'>
         {epoch.no > currentEpoch ? (
-          <div className='rounded-max bg-grayTextSecondary p-1/2'>
+          <div className='rounded-max p-1/2 bg-grayTextSecondary'>
             <Calendar size={15} color='white' className='' />
           </div>
         ) : (
@@ -167,13 +169,13 @@ const EpochCard = ({ epoch }: { epoch: EpochListData }) => {
         )}
         <h3 className=''>Epoch {epoch.no}</h3>
       </div>
-      <span className='flex justify-between text-text-xs text-grayTextSecondary'>
+      <span className='text-text-xs flex justify-between text-grayTextSecondary'>
         <p className='w-10'>Start</p>
         <span className='ml-1 text-grayTextPrimary'>
           {formatDate(epoch.start_time)}
         </span>
       </span>
-      <span className='flex justify-between text-text-xs text-grayTextSecondary'>
+      <span className='text-text-xs flex justify-between text-grayTextSecondary'>
         <p className='w-10'>End</p>
         <span className='ml-1 text-grayTextPrimary'>
           {formatDate(epoch.end_time)}
@@ -182,7 +184,7 @@ const EpochCard = ({ epoch }: { epoch: EpochListData }) => {
       <div className='mt-1 flex justify-end border-t border-border pt-1'>
         {currentEpoch >= epoch.no ? (
           <Link
-            className='text-right text-text-sm font-medium text-primary'
+            className='text-text-sm text-right font-medium text-primary'
             to='/epoch/$no'
             params={{ no: String(epoch.no) }}
           >
