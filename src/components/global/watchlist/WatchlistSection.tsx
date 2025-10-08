@@ -8,7 +8,6 @@ import type { useFetchPoolDetail } from "@/services/pools";
 import type { useFetchDrepDetail } from "@/services/drep";
 import { useWalletStore } from "@/stores/walletStore";
 import { handleDelegation } from "@/utils/wallet/handleDelegation";
-import { handleDrepDelegation } from "@/utils/wallet/handleDrepDelegation";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import { useState } from "react";
 
@@ -45,9 +44,9 @@ export const WatchlistSection = ({
     }
 
     if (isPool) {
-      handleDelegation(ident ?? "", lucid);
+      handleDelegation({ type: "pool", poolId: ident ?? "" }, lucid);
     } else if (isDrep) {
-      handleDrepDelegation(ident ?? "", lucid);
+      handleDelegation({ type: "drep", drepId: ident ?? "" }, lucid);
     }
   };
 
