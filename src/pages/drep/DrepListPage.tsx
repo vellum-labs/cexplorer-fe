@@ -76,7 +76,9 @@ export const DrepListPage = () => {
           )}
           {drepStat?.drep?.count?.inactive && (
             <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
-              <span className='text-text-sm text-grayTextPrimary'>Inactive</span>
+              <span className='text-text-sm text-grayTextPrimary'>
+                Inactive
+              </span>
               <span className='text-text-sm text-[#EAAA08]'>
                 {drepStat?.drep?.count?.inactive}
               </span>
@@ -181,13 +183,17 @@ export const DrepListPage = () => {
       footer: (
         <div className='flex flex-wrap gap-2'>
           <div className='flex items-center gap-1/2'>
-            <span className='text-text-sm text-grayTextPrimary'>Delegations</span>
+            <span className='text-text-sm text-grayTextPrimary'>
+              Delegations
+            </span>
             <span className='text-text-sm font-medium text-grayTextPrimary'>
               {stakeDrepRetired?.delegator?.count ?? "-"}
             </span>
           </div>
           <div className='flex items-center gap-1/2'>
-            <span className='text-text-sm text-grayTextPrimary'>Retired DReps</span>
+            <span className='text-text-sm text-grayTextPrimary'>
+              Retired DReps
+            </span>
             <span className='text-text-sm font-medium text-grayTextPrimary'>
               {stakeDrepRetired?.drep?.count ?? "-"}
             </span>
@@ -208,6 +214,7 @@ export const DrepListPage = () => {
         { label: "Delegated representatives" },
       ]}
       metadataTitle='drepList'
+      adsCarousel={false}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='flex h-full w-full flex-wrap gap-2 md:flex-nowrap'>
@@ -217,20 +224,20 @@ export const DrepListPage = () => {
           drepStatQuery.isFetching ? (
             <>
               <LoadingSkeleton
-                width='426px'
-                height='140px'
+                width='456px'
+                height='136px'
                 rounded='xl'
                 className='flex-grow lg:flex-grow-0'
               />
               <LoadingSkeleton
-                width='426px'
-                height='140px'
+                width='456px'
+                height='136px'
                 rounded='xl'
                 className='flex-grow lg:flex-grow-0'
               />
               <LoadingSkeleton
-                width='426px'
-                height='140px'
+                width='456px'
+                height='136px'
                 rounded='xl'
                 className='flex-grow lg:flex-grow-0'
               />
