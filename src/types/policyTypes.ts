@@ -70,5 +70,5 @@ interface PolicyOwners {
 }
 
 export type PolicyDetailResponse = ResponseCore<PolicyDetail>;
-export type PolicyStatsResponse = ResponseCore<PolicyStat[]>;
+export type PolicyStatsResponse = ResponseCore<{ data: PolicyStat[] }>;
 export type PolicyOwnerResponse = ResponseCore<PolicyOwners>;
