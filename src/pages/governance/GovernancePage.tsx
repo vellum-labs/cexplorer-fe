@@ -133,10 +133,10 @@ export const GovernancePage: FC = () => {
         );
 
         return (
-          <div className='flex flex-col gap-1/2'>
+          <div className='gap-1/2 flex flex-col'>
             <DateCell time={item?.tx?.time} />
             {epoch && (
-              <div className='flex items-center gap-1/2'>
+              <div className='gap-1/2 flex items-center'>
                 <span className='text-text-xs text-grayTextPrimary'>
                   Epoch -{" "}
                 </span>
@@ -258,10 +258,10 @@ export const GovernancePage: FC = () => {
         );
 
         return (
-          <div className='flex flex-col gap-1/2'>
+          <div className='gap-1/2 flex flex-col'>
             <DateCell time={String(endTime)} />
             {item?.expired_epoch && (
-              <div className='flex items-center gap-1/2'>
+              <div className='gap-1/2 flex items-center'>
                 <span className='text-text-xs text-grayTextPrimary'>
                   Epoch -{" "}
                 </span>
@@ -297,7 +297,7 @@ export const GovernancePage: FC = () => {
       ),
       title: "Status",
       visible: columnsVisibility.status,
-      widthPx: 40,
+      widthPx: 55,
     },
     {
       key: "progress",
@@ -347,20 +347,20 @@ export const GovernancePage: FC = () => {
       ),
       footer: (
         <div className='flex flex-wrap'>
-          <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
+          <div className='gap-1/2 flex w-fit items-center pr-[26px]'>
             <span className='text-text-sm text-grayTextPrimary'>Active</span>
             <span className='text-text-sm text-[#10B981]'>
               {drepStat?.gov_action[0]?.active || 0}
             </span>
           </div>
-          <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
+          <div className='gap-1/2 flex w-fit items-center pr-[26px]'>
             <span className='text-text-sm text-grayTextPrimary'>Ratified</span>
             <span className='text-text-sm text-[#00A9E3]'>
               {drepStat?.gov_action[0]?.ratified || 0}
             </span>
           </div>
           {!!drepStat?.gov_action[0]?.enacted && (
-            <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
+            <div className='gap-1/2 flex w-fit items-center pr-[26px]'>
               <span className='text-text-sm text-grayTextPrimary'>Enacted</span>
               <span className='text-text-sm text-[#876ee1]'>
                 {drepStat?.gov_action[0]?.enacted}
@@ -368,7 +368,7 @@ export const GovernancePage: FC = () => {
             </div>
           )}
           {!!drepStat?.gov_action[0]?.expires && (
-            <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
+            <div className='gap-1/2 flex w-fit items-center pr-[26px]'>
               <span className='text-text-sm text-grayTextPrimary'>Expired</span>
               <span className='text-text-sm text-[#F79009]'>
                 {drepStat?.gov_action[0]?.expires}
@@ -431,7 +431,7 @@ export const GovernancePage: FC = () => {
       title='Governance Actions'
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>Governance</span>,
+          label: <span className='pt-1/2 inline'>Governance</span>,
           link: "/gov",
         },
         { label: "Governance actions" },
@@ -489,7 +489,7 @@ export const GovernancePage: FC = () => {
         </div>
         <div className='my-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
           <div className='flex w-full flex-wrap items-center justify-between gap-1 sm:flex-nowrap md:hidden'>
-            <div className='flex w-full justify-between gap-1/2 md:hidden'>
+            <div className='gap-1/2 flex w-full justify-between md:hidden'>
               <SortBy
                 selectItems={selectItems}
                 selectedItem={selectedItem}
