@@ -19,9 +19,10 @@ import { TimeDateIndicator } from "../global/TimeDateIndicator";
 
 import { defiOrderListTableOptions } from "@/constants/tables/defiOrderListTableOptions";
 import { formatNumberWithSuffix, formatString } from "@/utils/format/format";
+import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
 import { ADATokenName, currencySigns } from "@/constants/currencies";
 
-import DexhunterIcon from "@/resources/images/icons/dexhunter.svg";
+import { dexConfig } from "@/constants/dexConfig";
 
 import { useDeFiOrderListTableStore } from "@/stores/tables/deFiOrderListTableStore";
 import { useFetchDeFiOrderList } from "@/services/token";
@@ -303,8 +304,13 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
 
         const isBuying = item?.token_in?.name === ADATokenName;
         const amount = isBuying ? item?.actual_out_amount : item?.amount_in;
-        const tokenName = isBuying ? item?.token_out?.name : item?.token_in?.name;
-        const displayName = tokenName === ADATokenName ? "ADA" : renderAssetName({ name: tokenName });
+        const tokenName = isBuying
+          ? item?.token_out?.name
+          : item?.token_in?.name;
+        const displayName =
+          tokenName === ADATokenName
+            ? "ADA"
+            : renderAssetName({ name: tokenName });
 
         return (
           <div className='flex justify-end'>
@@ -355,23 +361,17 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
             outputAmount = 0;
         }
 
-        const price = isAdaIn
-          ? item.amount_in / (outputAmount || 1)
-          : (outputAmount || 0) / item.amount_in;
-
-        const [ada, usd] = calculateAdaPriceWithHistory(price * 1e6, curr);
+        const adaAmount = isAdaIn ? item.amount_in : outputAmount;
+        const [ada, usd] = calculateAdaPriceWithHistory(adaAmount * 1e6, curr);
 
         const maxAda = 30000 * 1e6;
-        const percentage = Math.min(
-          ((item?.amount_in * 1e6) / maxAda) * 100,
-          100,
-        );
+        const percentage = Math.min(((adaAmount * 1e6) / maxAda) * 100, 100);
 
         return (
           <div className='flex flex-col gap-2'>
             {currency === "ada" ? (
               <p title={ada} className='text-right'>
-                <AdaWithTooltip data={item?.amount_in * 1e6} />
+                <AdaWithTooltip data={adaAmount * 1e6} />
               </p>
             ) : (
               <p title={ada} className='text-right'>
@@ -412,19 +412,68 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
     {
       key: "ada_price",
       render: item => {
-        const adaPrice =
-          item?.actual_out_amount ?? item?.expected_out_amount ?? 0;
+        if (!item?.token_in?.name || !item?.token_out?.name) {
+          return <p className='text-right'>-</p>;
+        }
 
-        const [ada, usd] = calculateAdaPriceWithHistory(adaPrice * 1e6, curr);
+        const isAdaIn = item?.token_in?.name === ADATokenName;
+
+        const status = item?.status?.toLowerCase();
+        let outputAmount = 0;
+
+        switch (status) {
+          case "pending":
+          case "mempool":
+            outputAmount = item?.expected_out_amount ?? 0;
+            break;
+          case "success":
+          case "complete":
+            outputAmount = item?.actual_out_amount ?? 0;
+            break;
+          default:
+            outputAmount = 0;
+        }
+
+        const pricePerToken = isAdaIn
+          ? item.amount_in / (outputAmount || 1)
+          : (outputAmount || 0) / (item.amount_in || 1);
+
+        const [, usd] = calculateAdaPriceWithHistory(pricePerToken * 1e6, curr);
 
         return currency === "ada" ? (
-          <p title={ada} className='text-right'>
-            <AdaWithTooltip data={adaPrice * 1e6} />
-          </p>
+          <div className='flex justify-end'>
+            <Tooltip
+              content={
+                <div className='flex items-center gap-1'>
+                  <span>
+                    ₳ {pricePerToken.toFixed(20).replace(/\.?0+$/, "")}
+                  </span>
+                  <Copy
+                    copyText={pricePerToken.toFixed(20).replace(/\.?0+$/, "")}
+                  />
+                </div>
+              }
+            >
+              <div className='text-sm text-grayTextPrimary'>
+                {formatSmallValueWithSub(pricePerToken, "₳ ", 0.01, 6, 4)}
+              </div>
+            </Tooltip>
+          </div>
         ) : (
-          <p title={ada} className='text-right'>
-            {currencySigns["usd"]} {formatNumberWithSuffix(usd)}
-          </p>
+          <div className='flex justify-end'>
+            <Tooltip
+              content={
+                <div className='flex items-center gap-1'>
+                  <span>$ {usd.toFixed(20).replace(/\.?0+$/, "")}</span>
+                  <Copy copyText={usd.toFixed(20).replace(/\.?0+$/, "")} />
+                </div>
+              }
+            >
+              <div className='text-sm text-grayTextPrimary'>
+                {formatSmallValueWithSub(usd, "$ ", 0.01, 6, 4)}
+              </div>
+            </Tooltip>
+          </div>
         );
       },
       title: (
@@ -605,16 +654,57 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
     },
     {
       key: "platform",
-      render: () => {
+      render: item => {
+        if (!item?.dex) {
+          return <p className='text-right'>-</p>;
+        }
+
+        const dexKey = item.dex.toUpperCase();
+        const dex = dexConfig[dexKey];
+
+        if (!dex?.icon) {
+          return <p className='text-right'>-</p>;
+        }
+
+        const dexhunterDex = dexConfig["DEXHUNTER"];
+
         return (
-          <a
-            target='_blank'
-            rel='nofollow'
-            href='https://app.dexhunter.io/'
-            className='flex w-full items-center justify-end'
-          >
-            <Image src={DexhunterIcon} className='h-6 w-6 rounded-full' />
-          </a>
+          <div className='flex items-center justify-end'>
+            <div className='relative'>
+              <Tooltip content={dex.label}>
+                <div
+                  className='flex h-6 w-6 items-center justify-center rounded-full border'
+                  style={{
+                    backgroundColor: dex.bgColor,
+                    borderColor: dex.borderColor,
+                  }}
+                >
+                  <Image
+                    src={dex.icon}
+                    className='h-4 w-4 rounded-full'
+                    alt={dex.label}
+                  />
+                </div>
+              </Tooltip>
+              {item.is_dexhunter && (
+                <Tooltip content={dexhunterDex.label}>
+                  <div
+                    className='absolute -bottom-1 -right-0.5 flex h-3 w-3 items-center justify-center rounded-full border'
+                    style={{
+                      backgroundColor: dexhunterDex.bgColor,
+                      borderColor: dexhunterDex.borderColor,
+                    }}
+                  >
+                    <Image
+                      src={dexhunterDex.icon}
+                      className='h-2 w-2 rounded-full'
+                      alt={dexhunterDex.label}
+                    />
+                  </div>
+                </Tooltip>
+              )}
+            </div>
+          </div>
         );
       },
       title: <p ref={anchorRefs?.dex}>Platform</p>,
@@ -631,28 +721,23 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         onReset: () => changeFilterByKey("dex"),
         filterContent: (
           <div className='flex flex-col gap-2 px-4 py-2'>
-            <label className='flex items-center gap-2'>
-              <input
-                type='radio'
-                name='dex'
-                value='SUNDAESWAP'
-                className='accent-primary'
-                checked={filterDraft["dex"] === "SUNDAESWAP"}
-                onChange={e => changeDraftFilter("dex", e.currentTarget.value)}
-              />
-              <span className='text-sm'>SundaeSwap</span>
-            </label>
-            <label className='flex items-center gap-2'>
-              <input
-                type='radio'
-                name='dex'
-                value='MINSWAP'
-                className='accent-primary'
-                checked={filterDraft["dex"] === "MINSWAP"}
-                onChange={e => changeDraftFilter("dex", e.currentTarget.value)}
-              />
-              <span className='text-sm'>Minswap</span>
-            </label>
+            {Object.entries(dexConfig)
+              .filter(([key]) => key !== "DEXHUNTER")
+              .map(([key, value]) => (
+                <label key={key} className='flex items-center gap-2'>
+                  <input
+                    type='radio'
+                    name='dex'
+                    value={key}
+                    className='accent-primary'
+                    checked={filterDraft["dex"] === key}
+                    onChange={e =>
+                      changeDraftFilter("dex", e.currentTarget.value)
+                    }
+                  />
+                  <span className='text-sm'>{value.label}</span>
+                </label>
+              ))}
           </div>
         ),
       },
