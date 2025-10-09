@@ -2,7 +2,7 @@ import type { FC } from "react";
 import type { DeFiOrderListColumns, TableColumns } from "@/types/tableTypes";
 import type { DeFiOrder } from "@/types/tokenTypes";
 
-import { ArrowRight, Check, Ellipsis, FileText, X } from "lucide-react";
+import { Check, Ellipsis, FileText, X } from "lucide-react";
 
 import PulseDot from "../global/PulseDot";
 import ExportButton from "../table/ExportButton";
@@ -18,11 +18,7 @@ import { Tooltip } from "../ui/tooltip";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";
 
 import { defiOrderListTableOptions } from "@/constants/tables/defiOrderListTableOptions";
-import {
-  formatNumber,
-  formatNumberWithSuffix,
-  formatString,
-} from "@/utils/format/format";
+import { formatNumberWithSuffix, formatString } from "@/utils/format/format";
 import { ADATokenName, currencySigns } from "@/constants/currencies";
 
 import DexhunterIcon from "@/resources/images/icons/dexhunter.svg";
@@ -34,11 +30,12 @@ import { useFetchMiscSearch } from "@/services/misc";
 import { useLocaleStore } from "@/stores/localeStore";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 
-import { renderAssetName } from "@/utils/asset/renderAssetName";
-import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import { addressIcons } from "@/constants/address";
 import { calculateAdaPriceWithHistory } from "@/utils/calculateAdaPriceWithHistory";
 import useDebounce from "@/hooks/useDebounce";
+import { TokenPair } from "../dex/TokenPair";
+import { AssetTicker } from "../dex/AssetTicker";
+import { renderAssetName } from "@/utils/asset/renderAssetName";
 
 interface DeFiOrderListProps {
   page?: number;
@@ -161,7 +158,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
             params={{
               hash: item?.tx_hash,
             }}
-            className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-text-sm text-primary`}
+            className={`text-text-sm block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-primary`}
           >
             {formatString(item?.tx_hash, "short")}
           </Link>
@@ -183,7 +180,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
 
         return (
           <div
-            className={`flex w-[50px] items-center justify-center rounded-s px-[6px] py-[2px] text-text-sm font-medium text-white ${isBuying ? "bg-greenText" : "bg-redText"}`}
+            className={`text-text-sm flex w-[50px] items-center justify-center rounded-s px-[6px] py-[2px] font-medium text-white ${isBuying ? "bg-greenText" : "bg-redText"}`}
           >
             {isBuying ? "Buy" : "Sell"}
           </div>
@@ -284,47 +281,13 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           return "-";
         }
 
-        const tokenInFingerPrint = getAssetFingerprint(item?.token_in?.name);
-        const tokenOutFingerPrint = getAssetFingerprint(item?.token_out?.name);
-
-        const tokenInAssetName = renderAssetName({
-          name: item?.token_in?.name,
-        });
-        const tokenOutAssetName = renderAssetName({
-          name: item?.token_out?.name,
-        });
-
-        const tokenInHasRegistry = item?.token_in?.registry;
-        const tokenOutHasRegistry = item?.token_out?.registry;
-
         return (
-          <div className='flex items-center justify-between'>
-            <Link
-              to='/asset/$fingerprint'
-              params={{
-                fingerprint: tokenInFingerPrint,
-              }}
-            >
-              <p
-                className={`min-w-[50px] ${!tokenInHasRegistry ? "italic" : ""} text-primary`}
-              >
-                {tokenInAssetName === "lovelace" ? "ADA" : tokenInAssetName}
-              </p>
-            </Link>
-            <ArrowRight size={15} className='block min-w-[20px]' />
-            <Link
-              to='/asset/$fingerprint'
-              params={{
-                fingerprint: tokenOutFingerPrint,
-              }}
-            >
-              <p
-                className={`w-fit ${!tokenOutHasRegistry ? "italic" : ""} text-primary`}
-              >
-                {tokenOutAssetName === "lovelace" ? "ADA" : tokenOutAssetName}
-              </p>
-            </Link>
-          </div>
+          <TokenPair
+            tokenIn={item.token_in.name}
+            tokenOut={item.token_out.name}
+            variant='simple'
+            clickable={false}
+          />
         );
       },
       title: "Pair",
@@ -339,11 +302,33 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         }
 
         const isBuying = item?.token_in?.name === ADATokenName;
+        const amount = isBuying ? item?.actual_out_amount : item?.amount_in;
+        const tokenName = isBuying
+          ? item?.token_out?.name
+          : item?.token_in?.name;
+        const displayName =
+          tokenName === ADATokenName
+            ? "ADA"
+            : renderAssetName({ name: tokenName });
 
         return (
-          <p className='text-right'>
-            {formatNumber(isBuying ? item?.actual_out_amount : item?.amount_in)}
-          </p>
+          <div className='flex justify-end'>
+            <Tooltip
+              content={
+                <div className='flex items-center gap-1'>
+                  <span>
+                    {amount.toLocaleString()}{" "}
+                    <AssetTicker tokenName={tokenName} />
+                  </span>
+                  <Copy
+                    copyText={`${amount.toLocaleString()} ${displayName}`}
+                  />
+                </div>
+              }
+            >
+              <p className='text-right'>{formatNumberWithSuffix(amount)}</p>
+            </Tooltip>
+          </div>
         );
       },
       title: <p className='w-full text-nowrap text-right'>Token amount</p>,
@@ -475,7 +460,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         const isCanceled = item.status === "CANCELLED";
 
         return (
-          <div className='flex items-center gap-1/2'>
+          <div className='gap-1/2 flex items-center'>
             <Link
               to='/dex/swap/$hash'
               params={{
@@ -485,7 +470,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
             >
               <FileText size={15} className='cursor-pointer text-primary' />
             </Link>
-            <p className='flex items-center gap-1/2 rounded-s border border-border px-1 text-text-sm'>
+            <p className='gap-1/2 text-text-sm flex items-center rounded-s border border-border px-1'>
               {isSuccess ? (
                 <Check className='text-greenText' size={15} />
               ) : isCanceled ? (
@@ -573,7 +558,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         return (
           <div className='flex items-center gap-1'>
             {item?.user?.balance && (
-              <Image src={Icon} className='h-4 w-4 rounded-max' />
+              <Image src={Icon} className='rounded-max h-4 w-4' />
             )}
             <div className='flex items-center gap-1'>
               <Link
@@ -581,7 +566,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                 params={{
                   address: item?.user?.address,
                 }}
-                className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-text-sm text-primary`}
+                className={`text-text-sm block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-primary`}
               >
                 {formatString(item?.user?.address, "short")}
               </Link>
@@ -633,7 +618,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
             href='https://app.dexhunter.io/'
             className='flex w-full items-center justify-end'
           >
-            <Image src={DexhunterIcon} className='h-6 w-6 rounded-max' />
+            <Image src={DexhunterIcon} className='rounded-max h-6 w-6' />
           </a>
         );
       },
@@ -682,8 +667,8 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
   ];
 
   return (
-    <div className='flex w-full flex-col gap-1 rounded-m sm:gap-0'>
-      <div className='flex flex-wrap items-center justify-between gap-y-1/2 pb-2'>
+    <div className='rounded-m flex w-full flex-col gap-1 sm:gap-0'>
+      <div className='gap-y-1/2 flex flex-wrap items-center justify-between pb-2'>
         <div className='flex items-center gap-1'>
           {pulseDot && <PulseDot />}
           <h2 className={titleClassname ? titleClassname : ""}>
@@ -707,13 +692,13 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         </div>
       </div>
       {hasFilter && (
-        <div className='flex flex-wrap items-center gap-1/2 md:flex-nowrap'>
+        <div className='gap-1/2 flex flex-wrap items-center md:flex-nowrap'>
           {Object.entries(filter).map(
             ([key, value]) =>
               value && (
                 <div
                   key={key}
-                  className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
+                  className='gap-1/2 rounded-m py-1/4 text-text-xs mb-1 flex w-fit items-center border border-border bg-darker px-1 text-grayTextPrimary'
                 >
                   <span>{key[0].toUpperCase() + key.slice(1)}:</span>
                   {key === "maker" && (

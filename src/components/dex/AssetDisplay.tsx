@@ -6,11 +6,13 @@ import { AssetTicker } from "./AssetTicker";
 interface AssetDisplayProps {
   tokenName: string;
   fingerprint: string;
+  fontWeight?: "normal" | "semibold";
 }
 
 export const AssetDisplay: FC<AssetDisplayProps> = ({
   tokenName,
   fingerprint,
+  fontWeight = "semibold",
 }) => {
   const renderedName = renderAssetName({ name: tokenName });
   const isAda =
@@ -19,8 +21,10 @@ export const AssetDisplay: FC<AssetDisplayProps> = ({
     tokenName?.toLowerCase().includes("lovelace") ||
     renderedName?.toLowerCase().includes("lovelace");
 
+  const fontClass = fontWeight === "semibold" ? "font-semibold" : "font-normal";
+
   if (isAda) {
-    return <p className='text-text-sm font-semibold text-text'>ADA</p>;
+    return <p className={`text-sm ${fontClass} text-text`}>ADA</p>;
   }
 
   return (
@@ -30,7 +34,7 @@ export const AssetDisplay: FC<AssetDisplayProps> = ({
         fingerprint,
       }}
     >
-      <p className='font-semibold text-primary'>
+      <p className={`${fontClass} text-primary`}>
         <AssetTicker tokenName={tokenName} />
       </p>
     </Link>
