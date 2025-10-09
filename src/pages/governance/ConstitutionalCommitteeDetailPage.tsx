@@ -117,7 +117,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
               </div>
 
               {constitution?.anchor?.data_hash && (
-                <div className='text-textPrimary break-words text-text-sm font-semibold'>
+                <div className='break-all text-text-sm font-semibold text-textPrimary'>
                   {constitution.anchor.data_hash}
                 </div>
               )}
