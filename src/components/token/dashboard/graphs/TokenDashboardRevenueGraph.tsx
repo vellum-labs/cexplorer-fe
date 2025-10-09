@@ -82,7 +82,7 @@ export const TokenDashboardRevenueGraph: FC<
     tooltip: {
       trigger: "axis",
       confine: true,
-      axisPointer: { type: "shadow-md" },
+      axisPointer: { type: "shadow" },
     },
     legend: {
       top: 10,
