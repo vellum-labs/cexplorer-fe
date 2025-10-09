@@ -174,16 +174,16 @@ const Tabs = ({
           {allowScroll ? (
             <div className='thin-scrollbar hidden w-full overflow-x-auto overflow-y-hidden lg:block'>
               <div
-                className={`flex ${tabParam ? "h-[35px]" : "h-[44px]"} mx-1/2 gap-1/4 rounded-m w-fit items-center text-nowrap border border-borderFaded bg-darker font-medium shadow`}
+                className={`flex ${tabParam ? "h-[35px]" : "h-[44px]"} shadow mx-1/2 w-fit items-center gap-1/4 text-nowrap rounded-m border border-borderFaded bg-darker font-medium`}
               >
                 {items.map((item, index) => (
                   // @ts-expect-error link
                   <Link
                     key={index}
-                    className={`rounded-m flex items-center border px-1.5 py-1 ${
+                    className={`flex items-center rounded-m border px-1.5 py-1 ${
                       tabParam
                         ? "h-[35px]text-text-sm font-semibold"
-                        : "text-text-md h-[44px] font-semibold"
+                        : "h-[44px] text-text-md font-semibold"
                     } ${
                       activeTab === index
                         ? `z-20 border-border bg-background ${
@@ -207,16 +207,16 @@ const Tabs = ({
             </div>
           ) : (
             <div
-              className={`hidden ${tabParam ? "h-[35px]" : "h-[44px]"} gap-1/4 rounded-m w-fit items-center text-nowrap border border-borderFaded bg-darker font-medium shadow-md lg:flex`}
+              className={`hidden ${tabParam ? "h-[35px]" : "h-[44px]"} w-fit items-center gap-1/4 text-nowrap rounded-m border border-borderFaded bg-darker font-medium shadow-md lg:flex`}
             >
               {items.map((item, index) => (
                 // @ts-expect-error link
                 <Link
                   key={index}
-                  className={`rounded-m flex items-center border px-1.5 py-1 ${
+                  className={`flex items-center rounded-m border px-1.5 py-1 ${
                     tabParam
-                      ? "h-[35px]text-text-sm font-semibold"
-                      : "text-text-md h-[44px] font-semibold"
+                      ? "h-[35px] text-text-sm font-semibold"
+                      : "h-[44px] text-text-md font-semibold"
                   } ${
                     activeTab === index
                       ? `z-20 border-border bg-background ${

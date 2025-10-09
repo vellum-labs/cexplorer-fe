@@ -42,11 +42,15 @@ export const EpochLostAndCost: FC<EpochLostAndCostProps> = ({
     },
     {
       label: "Average TX size",
-      value: <p className='text-text-sm font-medium'>{formatBytes(avgTXSize)}</p>,
+      value: (
+        <p className='text-text-sm font-medium'>{formatBytes(avgTXSize)}</p>
+      ),
     },
     {
       label: "Average Block Size",
-      value: <p className='text-text-sm font-medium'>{formatBytes(avgBlockSize)}</p>,
+      value: (
+        <p className='text-text-sm font-medium'>{formatBytes(avgBlockSize)}</p>
+      ),
     },
     {
       label: "Max Block Size",
@@ -82,12 +86,10 @@ export const EpochLostAndCost: FC<EpochLostAndCostProps> = ({
   ];
 
   return (
-    <div className='flex h-fit flex-grow basis-[410px] items-stretch md:flex-shrink-0'>
-      <OverviewCard
-        title='Load and Cost'
-        overviewList={overviewList}
-        labelClassname='md:text-nowrap h-full'
-      />
-    </div>
+    <OverviewCard
+      title='Load and Cost'
+      overviewList={overviewList}
+      labelClassname='md:text-nowrap h-full'
+    />
   );
 };

@@ -104,7 +104,7 @@ const TableSettingsDropdown = ({
             {columnsOptions.map((option, index) => (
               <React.Fragment key={index}>
                 <div
-                  className={`flex h-full cursor-pointer justify-between border-b-[1px] border-border p-3 first:rounded-tl-md first:rounded-tr-md last:rounded-bl-md last:rounded-br-md last:border-b-0 hover:bg-darker`}
+                  className={`first:rounded-tl-md first:rounded-tr-md last:rounded-bl-md last:rounded-br-md flex h-full cursor-pointer justify-between border-b-[1px] border-border p-1.5 last:border-b-0 hover:bg-darker`}
                   onClick={option.onClick}
                 >
                   <span>{option.label}</span>

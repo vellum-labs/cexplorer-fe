@@ -22,7 +22,7 @@ const PoolDetailOverview = ({ query, estimatedBlocks }: Props) => {
         isLoading={query.isLoading}
         poolDetailQuery={query}
       />
-      <div className='flex w-full flex-wrap gap-3'>
+      <div className='flex w-full flex-wrap items-stretch gap-3'>
         {query.isLoading ? (
           <>
             <LoadingSkeleton
@@ -43,21 +43,12 @@ const PoolDetailOverview = ({ query, estimatedBlocks }: Props) => {
           </>
         ) : (
           <>
+            <OverviewCard title='About' overviewList={aboutList} />
             <OverviewCard
-              className='h-auto min-h-[290px]'
-              title='About'
-              overviewList={aboutList}
-            />
-            <OverviewCard
-              className='h-auto min-h-[290px]'
               title='Stake and Pledge'
               overviewList={stakeAndPledgeList}
             />
-            <OverviewCard
-              className='h-auto min-h-[290px]'
-              title='Performance'
-              overviewList={performanceList}
-            />
+            <OverviewCard title='Performance' overviewList={performanceList} />
           </>
         )}
       </div>

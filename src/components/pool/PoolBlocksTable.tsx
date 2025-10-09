@@ -116,7 +116,7 @@ const PoolBlocksTable = ({ poolId }: Props) => {
 
         return item.hash;
       },
-      title: <p className='flex justify-end'>Hash</p>,
+      title: <p className='flex w-full justify-end'>Hash</p>,
       visible: columnsVisibility.hash,
       widthPx: 90,
     },
@@ -166,7 +166,7 @@ const PoolBlocksTable = ({ poolId }: Props) => {
 
         return `${item.protocol.major}.${item.protocol.minor}`;
       },
-      title: <span className='flex justify-end'>Protocol</span>,
+      title: <span className='flex w-full justify-end'>Protocol</span>,
       visible: columnsVisibility.protocol,
       widthPx: 50,
     },

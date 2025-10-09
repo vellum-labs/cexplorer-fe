@@ -116,21 +116,19 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
   ];
 
   return (
-    <div className='h-full flex-grow basis-[450px] md:flex-shrink-0'>
-      <OverviewCard
-        title='Summary'
-        subTitle={
-          stats.epoch_no === currentEpoch && (
-            <div className='relative flex h-[24px] w-[115px] items-center justify-end rounded-m border border-border px-[10px]'>
-              <div className='absolute left-2'>
-                <PulseDot />
-              </div>
-              <span className='text-text-xs font-medium'>Current Epoch</span>
+    <OverviewCard
+      title='Summary'
+      subTitle={
+        stats.epoch_no === currentEpoch && (
+          <div className='relative flex h-[24px] w-[115px] items-center justify-end rounded-m border border-border px-[10px]'>
+            <div className='absolute left-2'>
+              <PulseDot />
             </div>
-          )
-        }
-        overviewList={overviewList}
-      />
-    </div>
+            <span className='text-text-xs font-medium'>Current Epoch</span>
+          </div>
+        )
+      }
+      overviewList={overviewList}
+    />
   );
 };

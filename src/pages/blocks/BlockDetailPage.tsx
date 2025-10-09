@@ -5,7 +5,6 @@ import {
   ChevronRight,
   CircleAlert,
   CircleCheck,
-  CircleHelp,
   CircleX,
   HardDrive,
 } from "lucide-react";
@@ -177,7 +176,7 @@ const BlockDetailPage: FC = () => {
       value: (
         <div className='flex items-center gap-[2.5px] text-text-sm'>
           {confirmations[1] < 3 && (
-            <CircleX size={15} className='translate-y-[1px] text-red-500' />
+            <CircleX size={15} className='text-red-500 translate-y-[1px]' />
           )}
           {confirmations[1] > 2 && confirmations[1] < 9 && (
             <CircleAlert
@@ -231,12 +230,7 @@ const BlockDetailPage: FC = () => {
       ),
     },
     {
-      label: (
-        <div className='flex items-center gap-1/2 text-text-sm'>
-          <span className='text-grayTextPrimary'>Total Rewards</span>
-          <CircleHelp size={12} className='text-[#98A2B3]' />
-        </div>
-      ),
+      label: "Total Rewards",
       value: <TotalSumWithRates sum={rewards} ada={data?.rewards ?? 0} />,
     },
   ];

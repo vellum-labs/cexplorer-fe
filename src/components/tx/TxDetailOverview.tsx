@@ -175,7 +175,7 @@ const TxDetailOverview = ({ query }: Props) => {
       value: (
         <div className='flex items-center gap-[2.5px] text-text-sm'>
           {confirmations[1] < 3 && (
-            <CircleX size={15} className='translate-y-[1px] text-red-500' />
+            <CircleX size={15} className='text-red-500 translate-y-[1px]' />
           )}
           {confirmations[1] > 2 && confirmations[1] < 9 && (
             <CircleAlert
@@ -270,7 +270,7 @@ const TxDetailOverview = ({ query }: Props) => {
             className='max-h-[450px] pt-2'
             columnGap='clamp(48px, 8vw, 150px)'
           />
-          <section className='flex w-full flex-col gap-3 lg:h-[400px] lg:w-[400px] lg:justify-between'>
+          <section className='flex w-full flex-col gap-5 lg:h-[400px] lg:w-[400px]'>
             <MintedByCard
               poolInfo={data?.pool}
               isGenesisBlock={data?.block?.epoch_no === null}

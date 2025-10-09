@@ -16,7 +16,7 @@ interface Props {
 const PoolCell = ({
   poolInfo,
   className,
-  fontSize = "13px",
+  fontSize = "text-sm",
   cropPoolHash = true,
 }: Props) => {
   const id = poolInfo?.id;
@@ -64,7 +64,7 @@ const PoolCell = ({
           <Link
             to='/pool/$id'
             params={{ id: poolInfo.id }}
-            className={`block w-full overflow-hidden text-ellipsis whitespace-nowrap ${ticker ? "text-xs" : "text-[13px]"} text-primary`}
+            className={`block w-full overflow-hidden text-ellipsis whitespace-nowrap ${ticker ? "text-text-xs" : "text-[13px]"} text-primary`}
           >
             {cropPoolHash ? formatString(poolInfo.id, "long") : poolInfo.id}
           </Link>

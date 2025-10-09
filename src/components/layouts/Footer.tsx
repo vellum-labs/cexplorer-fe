@@ -48,11 +48,11 @@ const Footer = () => {
       </div>
       <section className='flex w-full flex-col items-center bg-darker'>
         <div className='flex h-auto w-full max-w-desktop items-center justify-between gap-3 p-mobile py-2 md:h-[60px] md:px-desktop md:py-mobile'>
-          <span className='text-text-xs text-grayTextPrimary md:text-sm'>
+          <span className='md:text-sm text-text-sm text-grayTextPrimary'>
             Copyright © 2019-{new Date().getFullYear()} Cexplorer. All rights
             reserved.
           </span>
-          <span className='flex items-center text-text-xs text-grayTextPrimary md:text-sm'>
+          <span className='md:text-sm flex items-center text-text-sm text-grayTextPrimary'>
             Donations:{" "}
             <Link to='/donate' className='ml-1/2 text-primary underline'>
               {formatString(donationAddress, "short")}
@@ -62,7 +62,7 @@ const Footer = () => {
           </span>
         </div>
         <div className='flex h-auto w-full max-w-desktop items-center gap-2 p-mobile py-2 md:px-desktop md:py-mobile'>
-          <span className='text-text-xs text-grayTextPrimary md:text-sm'>
+          <span className='md:text-sm text-text-xs text-grayTextPrimary'>
             Partners:{" "}
           </span>
           <div className='flex w-full flex-wrap items-center justify-around gap-1'>
@@ -71,10 +71,7 @@ const Footer = () => {
               target='_blank'
               rel='noopener nofollow'
             >
-              <img
-                src={YoroiPartner}
-                className='rounded-s bg-[#1B67CC] p-1'
-              />
+              <img src={YoroiPartner} className='rounded-s bg-[#1B67CC] p-1' />
             </a>
             <a href='https://nu.fi/' target='_blank' rel='noopener nofollow'>
               <NufiPartner />

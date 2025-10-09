@@ -28,7 +28,7 @@ const Navbar = () => {
               <AdaPriceIndicator />
             </div>
           </div>
-          <div className='hidden items-center gap-3 xl:flex xl:h-[75px]'>
+          <div className='hidden items-center gap-2 xl:flex xl:h-[75px]'>
             <Dropdown
               id='blockchain'
               label='Blockchain'
