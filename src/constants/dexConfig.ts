@@ -36,13 +36,6 @@ export const dexConfig: Record<string, DexConfig> = {
     bgColor: "#DFE8FF",
     borderColor: "#83A2DC",
   },
-  WINGRIDERS: {
-    label: "WingRiders",
-    icon: WingRidersIcon,
-    textColor: "#7C3AED",
-    bgColor: "#F3E8FF",
-    borderColor: "#C4B5FD",
-  },
   WINGRIDER: {
     label: "WingRiders",
     icon: WingRidersIcon,
