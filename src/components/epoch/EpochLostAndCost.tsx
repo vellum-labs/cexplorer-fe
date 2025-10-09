@@ -34,7 +34,7 @@ export const EpochLostAndCost: FC<EpochLostAndCostProps> = ({
   const overviewList = [
     {
       label: "Size of all blocks in epoch",
-      value: <p className='text-sm font-medium'>{sizeOfAllBlocksMB} MB</p>,
+      value: <p className='text-text-sm font-medium'>{sizeOfAllBlocksMB} MB</p>,
     },
     {
       label: "Price per MB",
@@ -42,16 +42,20 @@ export const EpochLostAndCost: FC<EpochLostAndCostProps> = ({
     },
     {
       label: "Average TX size",
-      value: <p className='text-sm font-medium'>{formatBytes(avgTXSize)}</p>,
+      value: (
+        <p className='text-text-sm font-medium'>{formatBytes(avgTXSize)}</p>
+      ),
     },
     {
       label: "Average Block Size",
-      value: <p className='text-sm font-medium'>{formatBytes(avgBlockSize)}</p>,
+      value: (
+        <p className='text-text-sm font-medium'>{formatBytes(avgBlockSize)}</p>
+      ),
     },
     {
       label: "Max Block Size",
       value: (
-        <p className='text-sm font-medium'>
+        <p className='text-text-sm font-medium'>
           {formatBytes(params.max_block_size)}
         </p>
       ),
@@ -59,7 +63,7 @@ export const EpochLostAndCost: FC<EpochLostAndCostProps> = ({
     {
       label: "",
       value: (
-        <div className='flex items-center gap-3'>
+        <div className='flex items-center gap-1.5'>
           <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#FEC84B]'>
             <span
               className='absolute left-0 block h-2 rounded-bl-[4px] rounded-tl-[4px] bg-[#47CD89]'
@@ -68,7 +72,7 @@ export const EpochLostAndCost: FC<EpochLostAndCostProps> = ({
               }}
             ></span>
           </div>
-          <span className='text-sm font-medium text-grayTextPrimary'>
+          <span className='text-text-sm font-medium text-grayTextPrimary'>
             {!isNaN(loadPercentage)
               ? loadPercentage > 100
                 ? 100
@@ -82,12 +86,10 @@ export const EpochLostAndCost: FC<EpochLostAndCostProps> = ({
   ];
 
   return (
-    <div className='flex h-fit flex-grow basis-[410px] items-stretch md:flex-shrink-0'>
-      <OverviewCard
-        title='Load and Cost'
-        overviewList={overviewList}
-        labelClassname='md:text-nowrap h-full'
-      />
-    </div>
+    <OverviewCard
+      title='Load and Cost'
+      overviewList={overviewList}
+      labelClassname='md:text-nowrap h-full'
+    />
   );
 };

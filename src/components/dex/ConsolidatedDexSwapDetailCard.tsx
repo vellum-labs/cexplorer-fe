@@ -113,17 +113,17 @@ export const ConsolidatedDexSwapDetailCard: FC<
       title: "Address",
       value: renderWithException(
         aggregatedData?.address,
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           {aggregatedData?.orders[0]?.user?.balance && (
-            <Image src={Icon} className='h-4 w-4 rounded-full' />
+            <Image src={Icon} className='h-4 w-4 rounded-max' />
           )}
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <Link
               to={"/address/$address"}
               params={{
                 address: aggregatedData?.address ?? "",
               }}
-              className='block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-sm text-primary'
+              className='block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-text-sm text-primary'
             >
               {aggregatedData?.address}
             </Link>
@@ -145,7 +145,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
       title: "Transaction",
       value: renderWithException(
         aggregatedData?.txHash,
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           <Link
             to='/tx/$hash'
             params={{
@@ -153,7 +153,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
             }}
             className='text-primary'
           >
-            <span className='block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-sm'>
+            <span className='block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-text-sm'>
               {aggregatedData?.txHash}
             </span>
           </Link>
@@ -166,9 +166,9 @@ export const ConsolidatedDexSwapDetailCard: FC<
       title: "Confirmation",
       value: renderWithException(
         aggregatedData?.orders[0]?.block?.no,
-        <div className='flex items-center gap-[2.5px] text-sm'>
+        <div className='flex items-center gap-[2.5px] text-text-sm'>
           {confirmations[1] < 3 && (
-            <CircleX size={15} className='translate-y-[1px] text-red-500' />
+            <CircleX size={15} className='text-red-500 translate-y-[1px]' />
           )}
           {confirmations[1] > 2 && confirmations[1] < 9 && (
             <CircleAlert
@@ -197,12 +197,12 @@ export const ConsolidatedDexSwapDetailCard: FC<
       value: renderWithException(
         aggregatedData?.pair && !aggregatedData.pair.isMultiplePairs,
         aggregatedData?.pair.isMultiplePairs ? (
-          <div className='text-sm text-yellow-600'>
+          <div className='text-text-sm text-yellow-600'>
             Multiple pairs detected - see individual trades below
           </div>
         ) : (
-          <div className='flex items-center gap-2'>
-            <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-1'>
               {getAssetImage(aggregatedData?.pair.tokenIn ?? "")}
               <AssetDisplay
                 tokenName={aggregatedData?.pair.tokenIn ?? ""}
@@ -210,7 +210,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
               />
             </div>
             <ArrowRight size={15} className='block' />
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-1'>
               {getAssetImage(aggregatedData?.pair.tokenOut ?? "")}
               <AssetDisplay
                 tokenName={aggregatedData?.pair.tokenOut ?? ""}
@@ -233,7 +233,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
         ) : (
           <Tooltip
             content={
-              <div className='flex items-center gap-1'>
+              <div className='flex items-center gap-1/2'>
                 <span>
                   {(aggregatedData?.totalAmountIn ?? 0).toLocaleString()}
                 </span>
@@ -245,7 +245,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
               </div>
             }
           >
-            <span className='text-sm text-grayTextPrimary'>
+            <span className='text-text-sm text-grayTextPrimary'>
               {formatNumberWithSuffix(aggregatedData?.totalAmountIn ?? 0)}{" "}
               <AssetTicker tokenName={aggregatedData?.pair.tokenIn ?? ""} />
             </span>
@@ -270,7 +270,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
         currency === "ada" ? (
           <Tooltip
             content={
-              <div className='flex items-center gap-1'>
+              <div className='flex items-center gap-1/2'>
                 <span>
                   ₳{" "}
                   {((aggregatedData?.adaPrice ?? 0) / 1e6)
@@ -285,7 +285,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
               </div>
             }
           >
-            <div className='text-sm text-grayTextPrimary'>
+            <div className='text-text-sm text-grayTextPrimary'>
               {formatSmallValueWithSub(
                 (aggregatedData?.adaPrice ?? 0) / 1e6,
                 "₳ ",
@@ -298,13 +298,13 @@ export const ConsolidatedDexSwapDetailCard: FC<
         ) : (
           <Tooltip
             content={
-              <div className='flex items-center gap-1'>
+              <div className='flex items-center gap-1/2'>
                 <span>$ {usd.toFixed(20).replace(/\.?0+$/, "")}</span>
                 <Copy copyText={usd.toFixed(20).replace(/\.?0+$/, "")} />
               </div>
             }
           >
-            <div className='text-sm text-grayTextPrimary'>
+            <div className='text-text-sm text-grayTextPrimary'>
               {formatSmallValueWithSub(usd, "$ ", 0.01, 6, 4)}
             </div>
           </Tooltip>
@@ -328,7 +328,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
         ) : (
           <Tooltip
             content={
-              <div className='flex items-center gap-1'>
+              <div className='flex items-center gap-1/2'>
                 <span>
                   {(
                     (aggregatedData?.totalActualOut ||
@@ -346,7 +346,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
               </div>
             }
           >
-            <span className='text-sm text-grayTextPrimary'>
+            <span className='text-text-sm text-grayTextPrimary'>
               {formatNumberWithSuffix(
                 (aggregatedData?.totalActualOut ||
                   aggregatedData?.totalExpectedOut) ??
@@ -364,7 +364,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
       value: renderWithException(
         aggregatedData?.status,
         <div className='flex items-center'>
-          <p className='flex w-fit items-center gap-1 rounded-md border border-border px-2 text-sm'>
+          <p className='flex w-fit items-center gap-1 rounded-m border border-border px-1 text-text-sm'>
             {getStatusIcon(aggregatedData?.status)}
             {getStatusText(aggregatedData?.status)}
           </p>
@@ -398,7 +398,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
       title: "Dexes",
       value: renderWithException(
         aggregatedData?.dexes && aggregatedData.dexes.length > 0,
-        <div className='flex flex-wrap items-center gap-2'>
+        <div className='flex flex-wrap items-center gap-1'>
           {aggregatedData?.dexes.map(dexName => {
             const dexKey = dexName.toUpperCase();
             const dex = dexConfig[dexKey];
@@ -406,7 +406,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
             return (
               <p
                 key={dexName}
-                className='flex w-fit items-center gap-1 rounded-xl border border-border bg-transparent px-1.5 text-sm text-text'
+                className='flex w-fit items-center gap-1/2 rounded-xl border border-border bg-transparent px-1 text-text-sm text-text'
                 style={
                   dex
                     ? {
@@ -420,7 +420,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
                 {!!dex?.icon && (
                   <Image
                     src={dex.icon}
-                    className='h-4 w-4 rounded-full'
+                    className='h-4 w-4 rounded-max'
                     alt={dex?.label}
                   />
                 )}
@@ -471,7 +471,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
 
   return (
     <div
-      className='thin-scrollbar w-full overflow-x-auto rounded-xl border border-border px-5 py-4 xl:overflow-x-visible'
+      className='thin-scrollbar w-full overflow-x-auto rounded-xl border border-border px-3 py-2 xl:overflow-x-visible'
       style={{
         transform: "rotateX(180deg)",
       }}
@@ -484,11 +484,11 @@ export const ConsolidatedDexSwapDetailCard: FC<
       >
         <>
           <h2 className='text-base'>Overview</h2>
-          <div className='flex flex-col gap-4 pt-4'>
+          <div className='flex flex-col gap-2 pt-2'>
             {detailItems.map(({ key, title, value, divider }) => (
               <div key={key}>
                 <div className='flex w-full items-start'>
-                  <p className='min-w-[200px] text-sm text-grayTextSecondary'>
+                  <p className='min-w-[200px] text-text-sm text-grayTextSecondary'>
                     {title}
                   </p>
                   <div className='w-full'>
@@ -500,7 +500,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
                   </div>
                 </div>
                 {divider && (
-                  <div className='my-2 w-full self-center border border-border' />
+                  <div className='my-1 w-full self-center border border-border' />
                 )}
               </div>
             ))}

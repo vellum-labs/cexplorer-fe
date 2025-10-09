@@ -156,7 +156,7 @@ export const AccountTopStakingTab: FC = () => {
         );
       },
       title: (
-        <div className='flex items-center gap-2' ref={anchorRefs?.pool_only}>
+        <div className='flex items-center gap-1' ref={anchorRefs?.pool_only}>
           Pool delegation
         </div>
       ),
@@ -172,8 +172,8 @@ export const AccountTopStakingTab: FC = () => {
           changeFilterByKey("pool_only", +filterDraft["pool_only"]),
         onReset: () => changeFilterByKey("pool_only"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-4 py-2'>
-            <label className='flex items-center gap-2'>
+          <div className='flex flex-col gap-1 px-2 py-1'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='status'
@@ -184,9 +184,9 @@ export const AccountTopStakingTab: FC = () => {
                   changeDraftFilter("pool_only", +e.currentTarget.value)
                 }
               />
-              <span className='text-sm'>Delegated to a stake pool</span>
+              <span className='text-text-sm'>Delegated to a stake pool</span>
             </label>
-            <label className='flex items-center gap-2'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='status'
@@ -197,7 +197,7 @@ export const AccountTopStakingTab: FC = () => {
                   changeDraftFilter("pool_only", +e.currentTarget.value)
                 }
               />
-              <span className='text-sm'>Not delegated to a stake pool</span>
+              <span className='text-text-sm'>Not delegated to a stake pool</span>
             </label>
           </div>
         ),
@@ -226,7 +226,7 @@ export const AccountTopStakingTab: FC = () => {
         );
       },
       title: (
-        <div className='flex items-center gap-2' ref={anchorRefs?.drep_only}>
+        <div className='flex items-center gap-1' ref={anchorRefs?.drep_only}>
           DRep delegation
         </div>
       ),
@@ -242,8 +242,8 @@ export const AccountTopStakingTab: FC = () => {
           changeFilterByKey("drep_only", +filterDraft["drep_only"]),
         onReset: () => changeFilterByKey("drep_only"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-4 py-2'>
-            <label className='flex items-center gap-2'>
+          <div className='flex flex-col gap-1 px-2 py-1'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='status'
@@ -254,9 +254,9 @@ export const AccountTopStakingTab: FC = () => {
                   changeDraftFilter("drep_only", +e.currentTarget.value)
                 }
               />
-              <span className='text-sm'>Delegated to a DRep</span>
+              <span className='text-text-sm'>Delegated to a DRep</span>
             </label>
-            <label className='flex items-center gap-2'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='status'
@@ -267,7 +267,7 @@ export const AccountTopStakingTab: FC = () => {
                   changeDraftFilter("drep_only", +e.currentTarget.value)
                 }
               />
-              <span className='text-sm'>Not delegated to a DRep</span>
+              <span className='text-text-sm'>Not delegated to a DRep</span>
             </label>
           </div>
         ),
@@ -284,8 +284,8 @@ export const AccountTopStakingTab: FC = () => {
   }, [totalAccounts, totalItems]);
 
   return (
-    <div className='mb-4'>
-      <div className='mb-4 flex w-full items-center justify-between'>
+    <div className='mb-2'>
+      <div className='mb-2 flex w-full items-center justify-between'>
         <div>
           {accountsQuery.isLoading || accountsQuery.isFetching ? (
             <LoadingSkeleton height='27px' width={"220px"} />
@@ -297,7 +297,7 @@ export const AccountTopStakingTab: FC = () => {
             ""
           )}
         </div>
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           <ExportButton
             columns={columns}
             items={items}
@@ -318,13 +318,13 @@ export const AccountTopStakingTab: FC = () => {
         </div>
       </div>
       {hasFilter && (
-        <div className='flex flex-wrap items-center gap-1 md:flex-nowrap'>
+        <div className='flex flex-wrap items-center gap-1/2 md:flex-nowrap'>
           {Object.entries(filter).map(
             ([key, value]) =>
               value && (
                 <div
                   key={key}
-                  className='mb-2 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-2 py-0.5 text-xs text-grayTextPrimary'
+                  className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
                 >
                   {key === "pool_only" && <span>Pool delegation:</span>}
                   <span>

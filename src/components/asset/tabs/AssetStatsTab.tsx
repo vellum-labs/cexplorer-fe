@@ -204,7 +204,7 @@ export const AssetStatsTab = ({ fingerprint }: Props) => {
         option={option}
         notMerge
         lazyUpdate
-        className='mb-12 h-full min-h-[350px] w-full'
+        className='mb-6 h-full min-h-[350px] w-full'
       />
     </div>
   );

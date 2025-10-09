@@ -22,12 +22,12 @@ const AssetLink = ({ asset, type, className }: Props) => {
       params={{ fingerprint: fingerprint }}
       title={fingerprint}
       key={fingerprint}
-      className={`flex w-fit max-w-full rounded-md border border-border bg-background px-1.5 py-[1px] text-xs font-medium text-primary ${className}`}
+      className={`flex w-fit max-w-full rounded-s border border-border bg-background px-1 py-[1px] text-text-xs font-medium text-primary ${className}`}
     >
       <span className='block overflow-hidden text-ellipsis whitespace-nowrap'>
         {renderAssetName(asset)}
       </span>
-      <span className='ml-auto min-w-fit pl-2'>
+      <span className='ml-auto min-w-fit pl-1'>
         {`${type === "input" ? "-" : ""}${formatNumberWithSuffix(asset.quantity / divideNumber, true)}`}
       </span>
     </Link>

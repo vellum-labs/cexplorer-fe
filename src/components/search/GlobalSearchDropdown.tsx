@@ -18,13 +18,13 @@ export const GlobalSearchDropdown: FC<GlobalSearchDropdownProps> = ({
     <div
       className={
         isHomepage
-          ? "ml-2 flex-shrink-0"
-          : "absolute flex h-full w-[100px] cursor-pointer items-center justify-center border-r border-border px-1"
+          ? "ml-1 flex-shrink-0"
+          : "absolute flex h-full w-[100px] cursor-pointer items-center justify-center border-r border-border px-1/2"
       }
     >
       <Dropdown
         label={
-          <div className='flex items-center gap-1'>
+          <div className='flex items-center gap-1/2'>
             <span>
               {searchCategory.includes("_")
                 ? searchCategory.split("_")[0][0].toUpperCase() +
@@ -40,7 +40,7 @@ export const GlobalSearchDropdown: FC<GlobalSearchDropdownProps> = ({
         poppoverClassname={`z-[26] ${isHomepage ? "left-0" : "left-[0.5px] top-[37.5px] rounded-t-none border-t-0 max-w-[100px]"}`}
         withBorder
         {...(isHomepage && { forceVerticalPosition: "up" })}
-        triggerClassName={`text-sm ${isHomepage ? "text-grayTextSecondary bg-cardBg border border-border h-8 px-2 rounded-lg hover:bg-grayHover transition-colors flex items-center gap-1 whitespace-nowrap" : "text-grayTextPrimary w-[100px] h-[35px] px-2.5"}`}
+        triggerClassName={`text-sm ${isHomepage ? "text-grayTextSecondary bg-cardBg border border-border h-8 px-1 rounded-m hover:bg-grayHover transition-colors flex items-center gap-1/2 whitespace-nowrap" : "text-grayTextPrimary w-[100px] h-[35px] px-1.5"}`}
         options={[
           {
             label: "All",

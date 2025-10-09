@@ -140,11 +140,11 @@ const HardforkPage: FC = () => {
     {
       key: "exchanges",
       render: item => (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           <img
             src={item.logo}
             alt='Logo'
-            className='rounded-full'
+            className='rounded-max'
             width={24}
             height={24}
           />
@@ -169,7 +169,7 @@ const HardforkPage: FC = () => {
           {item.status === "ready" && (
             <span
               className={cn(
-                "rounded-2xl border px-2 py-1 text-xs",
+                "rounded-xl border px-1 py-1/2 text-text-xs",
                 theme === "light" && "text-[#067647]",
               )}
               style={{
@@ -183,7 +183,7 @@ const HardforkPage: FC = () => {
           {item.status === "notStarted" && (
             <span
               className={cn(
-                "rounded-2xl border px-2 py-1 text-xs",
+                "rounded-xl border px-1 py-1/2 text-text-xs",
                 theme === "light" && "text-[#B42318]",
               )}
               style={{
@@ -197,7 +197,7 @@ const HardforkPage: FC = () => {
           {item.status === "inProgress" && (
             <span
               className={cn(
-                "rounded-2xl border px-2 py-1 text-xs",
+                "rounded-xl border px-1 py-1/2 text-text-xs",
                 theme === "light" && "text-[#B54708]",
               )}
               style={{
@@ -522,9 +522,9 @@ const HardforkPage: FC = () => {
       breadcrumbItems={[{ label: "Hardfork" }]}
       adsCarousel={false}
       subTitle={
-        <div className='flex w-full flex-col gap-1 text-grayTextPrimary'>
+        <div className='flex w-full flex-col gap-1/2 text-grayTextPrimary'>
           <p>{data?.info?.description}</p>
-          <div className='flex w-full items-center gap-1 text-sm'>
+          <div className='flex w-full items-center gap-1/2 text-text-sm'>
             <p>Release date:</p>
             <span className='text-nowrap leading-none text-grayTextPrimary'>
               {formatDate(
@@ -536,29 +536,29 @@ const HardforkPage: FC = () => {
       }
     >
       <section className='flex min-h-[450px] w-full justify-center'>
-        <div className='flex w-full max-w-desktop flex-wrap justify-between gap-5 p-mobile md:px-desktop md:py-mobile'>
-          <div className='flex w-full grow basis-[420px] flex-wrap gap-6 lg:flex-nowrap'>
-            <div className='w-full rounded-lg border border-border'>
+        <div className='flex w-full max-w-desktop flex-wrap justify-between gap-3 p-mobile md:px-desktop md:py-mobile'>
+          <div className='flex w-full grow basis-[420px] flex-wrap gap-3 lg:flex-nowrap'>
+            <div className='w-full rounded-m border border-border'>
               {data?.detail?.exchanges ? (
                 <Tabs items={exhcangeTabItems} tabParam='exchange' toRight />
               ) : (
-                <div className='my-5 flex w-full max-w-desktop flex-col px-mobile md:px-desktop'>
-                  <p className='mb-5 h-[37.6px] w-full'>Exchange readiness</p>
+                <div className='my-3 flex w-full max-w-desktop flex-col px-mobile md:px-desktop'>
+                  <p className='mb-3 h-[37.6px] w-full'>Exchange readiness</p>
                   <div className='h-full w-full'>
                     <ReactEcharts option={status} />
                   </div>
                 </div>
               )}
             </div>
-            <div className='w-full rounded-lg border border-border'>
+            <div className='w-full rounded-m border border-border'>
               <Tabs items={blockTabItems} tabParam='block' toRight />
             </div>
           </div>
         </div>
       </section>
       <section className='flex w-full max-w-desktop flex-col p-mobile md:p-desktop'>
-        <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-          <div className='flex flex-wrap gap-1 md:flex-nowrap'>
+        <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+          <div className='flex flex-wrap gap-1/2 md:flex-nowrap'>
             <HardforkPageTotalCountItem
               title='All'
               count={

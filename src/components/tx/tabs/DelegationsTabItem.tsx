@@ -19,7 +19,7 @@ const DelegationsTabItem = () => {
     {
       key: "address",
       render: item => (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <AddressTypeInitialsBadge address={item.view} />
           <AddressCell address={item.view} />
         </div>
@@ -35,13 +35,13 @@ const DelegationsTabItem = () => {
         const displayRole = isDrepDelegation ? "DRep" : "SPO";
 
         return (
-          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-lg border border-border px-[6px]'>
+          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1/2 rounded-m border border-border px-[6px]'>
             {isDrepDelegation ? (
               <User size={12} className='text-primary' />
             ) : (
               <Route size={12} className='text-primary' />
             )}
-            <span className='text-xs font-medium'>{displayRole}</span>
+            <span className='text-text-xs font-medium'>{displayRole}</span>
           </div>
         );
       },
@@ -93,7 +93,7 @@ const DelegationsTabItem = () => {
   ];
 
   if (!delegations && !query.isLoading) {
-    return <p className='w-full text-center text-sm'>No withdrawals</p>;
+    return <p className='w-full text-center text-text-sm'>No withdrawals</p>;
   }
 
   if (query.isLoading) {

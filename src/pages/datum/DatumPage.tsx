@@ -166,20 +166,20 @@ export const DatumPage: FC = () => {
         ) : undefined
       }
     >
-      <section className='flex w-full max-w-desktop flex-col px-mobile py-2 md:px-desktop'>
-        <div className='mb-4 flex w-full flex-col justify-between gap-2'>
+      <section className='flex w-full max-w-desktop flex-col px-mobile py-1 md:px-desktop'>
+        <div className='mb-2 flex w-full flex-col justify-between gap-1'>
           <h2>Datum convertor</h2>
-          <div className='flex w-full flex-wrap gap-4 lg:flex-nowrap'>
-            <div className='flex h-[360px] w-1/2 flex-grow flex-col gap-2'>
+          <div className='flex w-full flex-wrap gap-2 lg:flex-nowrap'>
+            <div className='flex h-[360px] w-1/2 flex-grow flex-col gap-1'>
               <h3>Input</h3>
               <textarea
-                className='h-full w-full resize-none rounded-lg border border-border bg-cardBg p-[10px] text-base text-xs shadow outline-none'
+                className='h-full w-full resize-none rounded-m border border-border bg-cardBg p-[10px] text-text-md text-text-xs shadow-md outline-none'
                 spellCheck={false}
                 onChange={e => changeInputDatum(e.currentTarget.value)}
                 defaultValue={datum ? datum : inputDatum}
               ></textarea>
             </div>
-            <div className='flex h-[360px] w-1/2 flex-grow flex-col gap-2'>
+            <div className='flex h-[360px] w-1/2 flex-grow flex-col gap-1'>
               <h3>Output</h3>
               <JsonDisplay
                 data={isError || Array.isArray(data?.data) ? lucidData : data}
@@ -193,8 +193,8 @@ export const DatumPage: FC = () => {
             !isFetching &&
             !isError &&
             !Array.isArray(data?.data) && (
-              <div className='flex w-full flex-wrap gap-4 lg:flex-nowrap'>
-                <div className='flex w-[360px] flex-grow flex-col gap-2'>
+              <div className='flex w-full flex-wrap gap-2 lg:flex-nowrap'>
+                <div className='flex w-[360px] flex-grow flex-col gap-1'>
                   <h3>Transaction with this datum</h3>
                   <GlobalTable
                     type='default'
@@ -205,7 +205,7 @@ export const DatumPage: FC = () => {
                     query={datumQuery}
                   />
                 </div>
-                <div className='flex w-[360px] flex-grow flex-col gap-2'>
+                <div className='flex w-[360px] flex-grow flex-col gap-1'>
                   <h3>Other datums from the same transactions</h3>
                   <GlobalTable
                     type='default'

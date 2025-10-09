@@ -203,11 +203,11 @@ export const JsonDisplay: FC<JSONDisplayProps> = ({
 
   return (
     <div
-      className={`relative h-full w-full overflow-hidden rounded-lg border border-border !bg-cardBg text-base text-xs shadow`}
+      className={`relative h-full w-full overflow-hidden rounded-m border border-border !bg-cardBg text-text-md text-text-xs shadow`}
     >
       {!isError && !Array.isArray(data?.data) && (
         <div
-          className='absolute top-2 flex items-center gap-1'
+          className='absolute top-2 flex items-center gap-1/2'
           onClick={e => {
             e.stopPropagation();
           }}
@@ -225,7 +225,7 @@ export const JsonDisplay: FC<JSONDisplayProps> = ({
               />
               <input
                 type='text'
-                className={`${inputOpen ? "w-[200px] pl-6" : "w-0"} transition-width overflow-hidden rounded-lg text-black duration-300 ease-in-out`}
+                className={`${inputOpen ? "w-[200px] pl-3" : "w-0"} transition-width overflow-hidden rounded-m text-black duration-300 ease-in-out`}
                 value={inputSearch}
                 onChange={e => setInputSearch(e.currentTarget.value)}
               />

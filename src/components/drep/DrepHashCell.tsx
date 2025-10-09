@@ -28,12 +28,12 @@ export const DrepHashCell = ({
     <div
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className='flex items-center gap-2'
+      className='flex items-center gap-1'
     >
       <Link
         to='/drep/$hash'
         params={{ hash: view }}
-        className={` ${isHighlighted ? "rounded-md bg-hoverHighlight outline outline-1 outline-highlightBorder" : ""} block overflow-hidden overflow-ellipsis whitespace-nowrap ${enableHover ? "px-1" : "px-0"} text-sm text-primary`}
+        className={` ${isHighlighted ? "rounded-s bg-hoverHighlight outline outline-1 outline-highlightBorder" : ""} block overflow-hidden overflow-ellipsis whitespace-nowrap ${enableHover ? "px-1/2" : "px-0"} text-text-sm text-primary`}
       >
         {formatString(view, "long")}
       </Link>

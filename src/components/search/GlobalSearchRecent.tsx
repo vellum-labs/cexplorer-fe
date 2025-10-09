@@ -25,25 +25,25 @@ export const GlobalSearchRecent: FC = () => {
 
   return (
     <div
-      className={`flex w-full flex-col items-center gap-1 overflow-hidden px-3`}
+      className={`flex w-full flex-col items-center gap-1/2 overflow-hidden px-3`}
     >
       {recentSearch.length ? (
         <>
           <div className='w-full border-b py-[1px]'>
-            <span className='text-grayTextPrimary text-xs font-medium'>
+            <span className='text-grayTextPrimary text-text-xs font-medium'>
               Recently searched
             </span>
           </div>
-          <div className='flex w-full flex-col pb-2'>
+          <div className='flex w-full flex-col pb-1'>
             {recentSearch.map((value, index) => (
               <div
                 key={value}
-                className='flex cursor-pointer items-center justify-between gap-1 py-1 hover:bg-cardBg'
+                className='flex cursor-pointer items-center justify-between gap-1/2 py-1/2 hover:bg-cardBg'
                 onClick={() => handleSearchChange(value)}
               >
-                <div className='flex items-center gap-1'>
+                <div className='flex items-center gap-1/2'>
                   <History size={15} className='text-grayTextPrimary' />
-                  <span className='text-grayTextPrimary text-sm font-semibold'>
+                  <span className='text-grayTextPrimary text-text-sm font-semibold'>
                     {value.length > 35 ? formatString(value, "long") : value}
                   </span>
                 </div>
@@ -60,7 +60,7 @@ export const GlobalSearchRecent: FC = () => {
           </div>
         </>
       ) : (
-        <div className='text-grayTextPrimary py-3 text-sm font-medium'>
+        <div className='text-grayTextPrimary py-1.5 text-text-sm font-medium'>
           <span>You don't have recent searches</span>
         </div>
       )}

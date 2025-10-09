@@ -38,16 +38,16 @@ export const EpochInfo: FC<EpochInfoProps> = ({ number, data }) => {
     ((durationInSeconds - timeLeft) / durationInSeconds) * 100;
 
   return (
-    <div className='min-h-1/2 flex w-full flex-col gap-4 rounded-lg border border-border px-6 py-3'>
-      <div className='relative flex h-[24px] w-[115px] items-center justify-end rounded-lg border border-border px-[10px]'>
+    <div className='min-h-1/2 flex w-full flex-col gap-2 rounded-m border border-border px-3 py-1.5'>
+      <div className='relative flex h-[24px] w-[115px] items-center justify-end rounded-m border border-border px-[10px]'>
         <div className='absolute left-2'>
           <PulseDot />
         </div>
-        <span className='text-xs font-medium'>Current Epoch</span>
+        <span className='text-text-xs font-medium'>Current Epoch</span>
       </div>
-      <span className='text-4xl font-semibold'>{number}</span>
+      <span className='text-display-md font-semibold'>{number}</span>
       <div className='flex flex-col'>
-        <div className='flex items-center gap-3'>
+        <div className='flex items-center gap-1.5'>
           <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#FEC84B]'>
             <span
               className='absolute left-0 block h-2 rounded-bl-[4px] rounded-tl-[4px] bg-[#47CD89]'
@@ -56,7 +56,7 @@ export const EpochInfo: FC<EpochInfoProps> = ({ number, data }) => {
               }}
             ></span>
           </div>
-          <span className='text-sm font-medium text-grayTextPrimary'>
+          <span className='text-text-sm font-medium text-grayTextPrimary'>
             {!isNaN(elapsedPercentage)
               ? elapsedPercentage > 100
                 ? 100
@@ -66,16 +66,16 @@ export const EpochInfo: FC<EpochInfoProps> = ({ number, data }) => {
           </span>
         </div>
         <div className='flex items-center justify-between'>
-          <span className='text-xs text-grayTextPrimary'>
+          <span className='text-text-xs text-grayTextPrimary'>
             {formatDate(data[0]?.start_time ? data[0]?.start_time : undefined)}
           </span>
-          <span className='text-xs text-grayTextPrimary'>
+          <span className='text-text-xs text-grayTextPrimary'>
             {formatRemainingTime(timeLeft)}
           </span>
         </div>
         <div className='flex items-center justify-between text-[#98A2B3]'>
-          <span className='text-xs'>Start</span>
-          <span className='text-xs'>
+          <span className='text-text-xs'>Start</span>
+          <span className='text-text-xs'>
             {formatRemainingTime(timeLeft) ? "Left" : "Arrived"}
           </span>
         </div>

@@ -27,17 +27,17 @@ export const AboutUsPage = () => {
       </Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
         {query.isLoading ? (
-          <div className='flex flex-col gap-10'>
-            <div className='flex flex-col items-center gap-4'>
+          <div className='flex flex-col gap-5'>
+            <div className='flex flex-col items-center gap-2'>
               <LoadingSkeleton width='150px' height='30px' />
               <LoadingSkeleton width='800px' height='63px' />
             </div>
-            <div className='flex flex-col gap-8'>
-              <div className='flex flex-col items-center gap-4'>
+            <div className='flex flex-col gap-4'>
+              <div className='flex flex-col items-center gap-2'>
                 <LoadingSkeleton width='150px' height='30px' />
                 <LoadingSkeleton width='450px' height='21px' />
               </div>
-              <div className='grid grid-cols-3 grid-rows-2 gap-10'>
+              <div className='grid grid-cols-3 grid-rows-2 gap-5'>
                 <LoadingSkeleton width='360px' height='235px' rounded='lg' />
                 <LoadingSkeleton width='360px' height='235px' rounded='lg' />
                 <LoadingSkeleton width='360px' height='235px' rounded='lg' />

@@ -20,7 +20,7 @@ export const AssetDisplay: FC<AssetDisplayProps> = ({
     renderedName?.toLowerCase().includes("lovelace");
 
   if (isAda) {
-    return <p className='text-sm font-semibold text-text'>ADA</p>;
+    return <p className='text-text-sm font-semibold text-text'>ADA</p>;
   }
 
   return (

@@ -44,15 +44,15 @@ export const GovVoterCell: FC<GovVoterCellProps> = ({ role, info }) => {
           : undefined;
 
   return (
-    <div className='relative flex max-h-[75px] w-full items-center gap-2'>
+    <div className='relative flex max-h-[75px] w-full items-center gap-1'>
       <Image
         src={imageUrl}
         type='user'
-        className='h-8 w-8 rounded-full'
+        className='h-8 w-8 rounded-max'
         height={32}
         width={32}
       />
-      <div className='flex w-[calc(100%-40px)] flex-col text-sm'>
+      <div className='flex w-[calc(100%-40px)] flex-col text-text-sm'>
         {displayName && toPath && (
           <Link to={toPath} className='w-fit text-primary'>
             {displayName.length > 50
@@ -60,14 +60,14 @@ export const GovVoterCell: FC<GovVoterCellProps> = ({ role, info }) => {
               : displayName}
           </Link>
         )}
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           {toPath ? (
             <Link
               to={toPath}
               className={
                 displayName
-                  ? "text-xs hover:text-grayTextPrimary"
-                  : "text-sm text-primary"
+                  ? "text-text-xs hover:text-grayTextPrimary"
+                  : "text-text-sm text-primary"
               }
               disabled={!!displayName}
             >

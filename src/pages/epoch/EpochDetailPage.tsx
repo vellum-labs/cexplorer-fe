@@ -116,26 +116,26 @@ const EpochDetailPage: FC = () => {
     >
       {futureStartTime && futureEndTime ? (
         <div className='flex min-h-[70vh] w-full items-center justify-center'>
-          <div className='flex w-full max-w-desktop flex-col items-center justify-center rounded-lg p-4 text-center'>
-            <p className='text-sm'>
+          <div className='flex w-full max-w-desktop flex-col items-center justify-center rounded-m p-2 text-center'>
+            <p className='text-text-sm'>
               Epoch <strong>{requestedEpoch}</strong> hasn’t started yet. It
               will start on <strong>{futureStartTime}</strong> and end on{" "}
               <strong>{futureEndTime}</strong>.
             </p>
-            <p className='mt-2 text-sm'>
+            <p className='mt-1 text-text-sm'>
               The current epoch is <strong>{currentEpoch}</strong>.
             </p>
-            <div className='mt-3 flex items-center gap-3'>
+            <div className='mt-1.5 flex items-center gap-1.5'>
               <Button
                 size='md'
-                className='cursor-pointer px-2'
+                className='cursor-pointer px-1'
                 variant='primary'
                 label='Go Back'
                 onClick={() => window.history.back()}
               />
               <Button
                 size='md'
-                className='cursor-pointer px-2'
+                className='cursor-pointer px-1'
                 variant='tertiary'
                 label='Current Epoch'
                 onClick={() =>
@@ -153,24 +153,24 @@ const EpochDetailPage: FC = () => {
       ) : (
         <>
           <section className='flex w-full justify-center'>
-            <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile md:px-desktop xl:flex-nowrap xl:justify-start'>
-              <div className='flex grow basis-[980px] flex-wrap items-stretch gap-5'>
+            <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 px-mobile md:px-desktop xl:flex-nowrap xl:justify-start'>
+              <div className='flex grow basis-[980px] flex-wrap items-stretch gap-3'>
                 {isLoading ? (
                   <>
                     <LoadingSkeleton
                       height='227px'
                       rounded='xl'
-                      className='grow basis-[300px] px-8 py-4'
+                      className='grow basis-[300px] px-4 py-2'
                     />
                     <LoadingSkeleton
                       height='227px'
                       rounded='xl'
-                      className='grow basis-[300px] px-8 py-4'
+                      className='grow basis-[300px] px-4 py-2'
                     />
                     <LoadingSkeleton
                       height='227px'
                       rounded='xl'
-                      className='grow basis-[300px] px-8 py-4'
+                      className='grow basis-[300px] px-4 py-2'
                     />
                   </>
                 ) : (

@@ -133,7 +133,7 @@ export const StakeDetailPage: FC = () => {
         </Tooltip>
       }
     >
-      <div className='mb-3 flex w-full max-w-desktop items-center justify-between px-mobile md:px-desktop'>
+      <div className='mb-1.5 flex w-full max-w-desktop items-center justify-between px-mobile md:px-desktop'>
         <UserBadge
           address={address}
           isLoading={stakeQuery.isLoading}
@@ -142,19 +142,19 @@ export const StakeDetailPage: FC = () => {
         <WatchlistSection ident={address} isLoading={stakeQuery.isLoading} />
       </div>
       <section className='flex w-full justify-center'>
-        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile md:px-desktop xl:flex-nowrap xl:justify-start'>
-          <div className='flex grow basis-[980px] flex-wrap items-stretch gap-5'>
+        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 px-mobile md:px-desktop xl:flex-nowrap xl:justify-start'>
+          <div className='flex grow basis-[980px] flex-wrap items-stretch gap-3'>
             {stakeQuery.isLoading || stakeQuery.isError ? (
               <>
                 <LoadingSkeleton
                   height='330px'
                   rounded='xl'
-                  className='grow basis-[410px] px-8 py-4'
+                  className='grow basis-[410px] px-4 py-2'
                 />
                 <LoadingSkeleton
                   height='330px'
                   rounded='xl'
-                  className='grow basis-[410px] px-8 py-4'
+                  className='grow basis-[410px] px-4 py-2'
                 />
               </>
             ) : (

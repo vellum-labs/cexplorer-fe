@@ -26,7 +26,7 @@ export const GovernanceDetailMetadataTab: FC<
     {
       title: "Action type",
       value: query?.data?.data?.type ? (
-        <div className='px-3'>
+        <div className='px-1.5'>
           <ActionTypes title={query?.data?.data?.type as ActionTypes} />
         </div>
       ) : (
@@ -37,7 +37,7 @@ export const GovernanceDetailMetadataTab: FC<
     {
       title: "Title",
       value: (
-        <div className='overflow-wrap-anywhere max-w-full break-words p-2 font-normal text-grayTextPrimary'>
+        <div className='overflow-wrap-anywhere max-w-full break-words p-1 font-regular text-grayTextPrimary'>
           {anchor?.offchain?.name ? (
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
@@ -55,7 +55,7 @@ export const GovernanceDetailMetadataTab: FC<
     {
       title: "Abstracts",
       value: (
-        <div className='overflow-wrap-anywhere max-w-full break-words p-2 font-normal text-grayTextPrimary'>
+        <div className='overflow-wrap-anywhere max-w-full break-words p-1 font-regular text-grayTextPrimary'>
           {anchor?.offchain?.abstract ? (
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
@@ -74,7 +74,7 @@ export const GovernanceDetailMetadataTab: FC<
     {
       title: "Rationale",
       value: (
-        <div className='overflow-wrap-anywhere max-w-full break-words p-2 font-normal text-grayTextPrimary'>
+        <div className='overflow-wrap-anywhere max-w-full break-words p-1 font-regular text-grayTextPrimary'>
           {anchor?.offchain?.rationale ? (
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
@@ -94,7 +94,7 @@ export const GovernanceDetailMetadataTab: FC<
 
   return (
     <>
-      <div className='w-full rounded-lg border border-border'>
+      <div className='w-full rounded-m border border-border'>
         {rows.map(item => (
           <AddressInspectorRow
             key={item.title}

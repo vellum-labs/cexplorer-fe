@@ -10,7 +10,7 @@ import { Helmet } from "react-helmet";
 
 export const ConfigAdminPage: FC = () => {
   return (
-    <div className='flex min-h-minHeight flex-col gap-5 p-mobile md:p-desktop'>
+    <div className='flex min-h-minHeight flex-col gap-3 p-mobile md:p-desktop'>
       <Helmet>
         <meta charSet='utf-8' />
         <title>Admin config | Cexplorer.io</title>
@@ -36,9 +36,9 @@ export const ConfigAdminPage: FC = () => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <div className='flex flex-col gap-2'>
+      <div className='flex flex-col gap-1'>
         <p>Config options:</p>
-        <ul className='list-inside list-disc pl-2'>
+        <ul className='list-inside list-disc pl-1'>
           <li>
             <Link to='/admin/config/sw' className='text-primary'>
               Sw text

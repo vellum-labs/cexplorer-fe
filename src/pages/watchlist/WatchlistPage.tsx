@@ -70,12 +70,12 @@ export const WatchlistPage = () => {
       {
         key: "stakes",
         label: (
-          <div className='flex items-center gap-1'>
+          <div className='flex items-center gap-1/2'>
             Stakes <Badge color='gray'>{count.stakes}</Badge>
           </div>
         ),
         content: (
-          <div className='mt-6'>
+          <div className='mt-3'>
             <StakeListTab />
           </div>
         ),
@@ -84,12 +84,12 @@ export const WatchlistPage = () => {
       {
         key: "wallets",
         label: (
-          <div className='flex items-center gap-1'>
+          <div className='flex items-center gap-1/2'>
             Wallets <Badge color='gray'>{count.addresses}</Badge>
           </div>
         ),
         content: (
-          <div className='mt-6'>
+          <div className='mt-3'>
             <AddressesTab watchlist_only='1' />
           </div>
         ),
@@ -98,12 +98,12 @@ export const WatchlistPage = () => {
       {
         key: "assets",
         label: (
-          <div className='flex items-center gap-1'>
+          <div className='flex items-center gap-1/2'>
             Assets <Badge color='gray'>{count.assets}</Badge>
           </div>
         ),
         content: (
-          <div className='mt-6'>
+          <div className='mt-3'>
             <AssetListPage watchlist showHeader={false} />
           </div>
         ),
@@ -112,12 +112,12 @@ export const WatchlistPage = () => {
       {
         key: "pools",
         label: (
-          <div className='flex items-center gap-1'>
+          <div className='flex items-center gap-1/2'>
             Pools <Badge color='gray'>{count.pools}</Badge>
           </div>
         ),
         content: (
-          <div className='mt-6'>
+          <div className='mt-3'>
             <PoolListTab watchlist />
           </div>
         ),
@@ -126,12 +126,12 @@ export const WatchlistPage = () => {
       {
         key: "dreps",
         label: (
-          <div className='flex items-center gap-1'>
+          <div className='flex items-center gap-1/2'>
             Dreps <Badge color='gray'>{count.dreps}</Badge>
           </div>
         ),
         content: (
-          <div className='mt-6'>
+          <div className='mt-3'>
             <DrepListTab watchlist />
           </div>
         ),
@@ -140,14 +140,14 @@ export const WatchlistPage = () => {
       {
         key: "policies",
         label: (
-          <div className='flex items-center gap-1'>
+          <div className='flex items-center gap-1/2'>
             Policies <Badge color='gray'>{count.policies}</Badge>
           </div>
         ),
         content: (
-          <div className='mt-6'>
+          <div className='mt-3'>
             {policyListQuery?.isLoading ? (
-              <div className='flex flex-col gap-4'>
+              <div className='flex flex-col gap-2'>
                 <LoadingSkeleton height='40px' width='100%' />
                 <LoadingSkeleton height='200px' width='100%' />
               </div>
@@ -183,9 +183,9 @@ export const WatchlistPage = () => {
         breadcrumbItems={[{ label: "Watchlist" }]}
       >
         {token ? (
-          <div className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+          <div className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
             {isLoading ? (
-              <div className='flex flex-col gap-4'>
+              <div className='flex flex-col gap-2'>
                 <LoadingSkeleton height='40px' width='100%' />
                 <LoadingSkeleton height='200px' width='100%' />
               </div>
@@ -214,7 +214,7 @@ export const WatchlistPage = () => {
             )}
           </div>
         ) : (
-          <div className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+          <div className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
             <EmptyState
               icon={<Wallet size={24} />}
               primaryText='Wallet not connected.'

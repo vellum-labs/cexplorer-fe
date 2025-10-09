@@ -91,7 +91,7 @@ export const PolicyDetailPage: FC = () => {
         after: collectionName ? collectionName : policyId,
       }}
       title={
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           {collectionName ? collectionName : "Policy ID detail"}
         </div>
       }

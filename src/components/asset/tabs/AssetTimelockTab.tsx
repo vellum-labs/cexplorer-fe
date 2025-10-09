@@ -120,9 +120,9 @@ export const AssetTimelockTab: FC<{ json: PolicyJson | undefined }> = ({
       const formattedDate = format(targetDate, "MMM dd yyyy, HH:mm:ss");
 
       return (
-        <section className='flex flex-col gap-4 rounded-xl bg-darker p-4 text-sm'>
-          <div className='flex gap-2'>
-            <span className='flex h-fit w-fit items-center gap-1 rounded-md border border-border bg-background px-2 py-0.5 text-xs font-medium'>
+        <section className='flex flex-col gap-2 rounded-l bg-darker p-2 text-text-sm'>
+          <div className='flex gap-1'>
+            <span className='flex h-fit w-fit items-center gap-1/2 rounded-s border border-border bg-background px-1 py-1/4 text-text-xs font-medium'>
               {indentLevel <= 1
                 ? `Rule #${ruleNumber}`
                 : `Sub-rule #${ruleNumber}`}
@@ -170,22 +170,22 @@ export const AssetTimelockTab: FC<{ json: PolicyJson | undefined }> = ({
 
   return (
     <>
-      <h3 className='mb-2'>Minting policy</h3>
-      <section className='mb-4 flex gap-4 rounded-xl bg-darker p-4 text-sm'>
+      <h3 className='mb-1'>Minting policy</h3>
+      <section className='mb-2 flex gap-2 rounded-l bg-darker p-2 text-text-sm'>
         {isLocked ? (
           <LockIcon
             size={40}
-            className='rounded-md border border-border bg-background p-2'
+            className='rounded-s border border-border bg-background p-1'
             color={colors.primary}
           />
         ) : (
           <LockOpen
             size={40}
-            className='rounded-md border border-border bg-background p-2'
+            className='rounded-s border border-border bg-background p-1'
             color={colors.primary}
           />
         )}
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col gap-1'>
           {isLocked ? <LockedPolicy /> : <OpenPolicy />}
           <div>
             {conditions.split("\n").map((line, index) => (
@@ -201,14 +201,14 @@ export const AssetTimelockTab: FC<{ json: PolicyJson | undefined }> = ({
           </div>
         </div>
       </section>
-      <div className='flex flex-col gap-4'>{renderScript(json)}</div>
+      <div className='flex flex-col gap-2'>{renderScript(json)}</div>
     </>
   );
 };
 
 export const OpenPolicy = () => {
   return (
-    <div className='flex h-fit w-fit items-center gap-1 rounded-md border border-border bg-background px-2 py-0.5 text-xs font-medium'>
+    <div className='flex h-fit w-fit items-center gap-1/2 rounded-s border border-border bg-background px-1 py-1/4 text-text-xs font-medium'>
       Policy is open
     </div>
   );
@@ -216,7 +216,7 @@ export const OpenPolicy = () => {
 
 export const LockedPolicy = () => {
   return (
-    <div className='flex h-fit w-fit items-center gap-1 rounded-md border border-border bg-background px-2 py-0.5 text-xs font-medium'>
+    <div className='flex h-fit w-fit items-center gap-1/2 rounded-s border border-border bg-background px-1 py-1/4 text-text-xs font-medium'>
       Policy is locked
     </div>
   );

@@ -3,7 +3,7 @@ import { TZDate } from "@date-fns/tz";
 import { format } from "date-fns";
 
 export const formatString = (
-  text: string | null,
+  text: string | null | undefined,
   type: "short" | "long" | "shorter" | "longer",
   startIndex?: number,
 ) => {

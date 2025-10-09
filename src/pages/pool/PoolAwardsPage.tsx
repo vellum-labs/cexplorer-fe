@@ -204,8 +204,8 @@ export const PoolAwardsPage: FC = () => {
       title='Pool Awards'
       breadcrumbItems={[{ label: "Pool Awards" }]}
     >
-      <section className='flex w-full max-w-desktop flex-col gap-3 px-mobile pb-5 md:px-desktop'>
-        <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
+      <section className='flex w-full max-w-desktop flex-col gap-1.5 px-mobile pb-3 md:px-desktop'>
+        <div className='flex w-full flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
           {isLoading || poolAwardsQuery.isFetching ? (
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (totalPools ?? 0) > 0 ? (
@@ -216,12 +216,12 @@ export const PoolAwardsPage: FC = () => {
             ""
           )}
         </div>
-        <div className='grid grid-cols-[repeat(auto-fill,_minmax(240px,_1fr))] gap-3'>
+        <div className='grid grid-cols-[repeat(auto-fill,_minmax(240px,_1fr))] gap-1.5'>
           {isLoading || isError
             ? Array.from({ length: 8 }, () => "skeleton").map((_, i) => (
                 <div
                   key={i}
-                  className='flex w-[240px] flex-col gap-1 rounded-lg border border-border'
+                  className='flex w-[240px] flex-col gap-1/2 rounded-m border border-border'
                 >
                   <LoadingSkeleton width='100%' height='280px' />
                 </div>
@@ -229,7 +229,7 @@ export const PoolAwardsPage: FC = () => {
             : awards?.map((item, i) => (
                 <div
                   key={`${item.time}_${i}`}
-                  className='flex flex-col gap-1 rounded-lg border border-border bg-cardBg px-3 py-2'
+                  className='flex flex-col gap-1/2 rounded-m border border-border bg-cardBg px-1.5 py-1'
                 >
                   <img
                     src={imageMap[`${item.category}_${item.type}`]}
@@ -244,20 +244,20 @@ export const PoolAwardsPage: FC = () => {
                       .toUpperCase() +
                       String(item.type).replace("_", " ").slice(1)}
                   </h3>
-                  <div className='mb-1 flex items-center justify-center gap-2'>
+                  <div className='mb-1/2 flex items-center justify-center gap-1'>
                     <Calendar size={12} className='text-grayTextPrimary' />
-                    <span className='text-sm text-grayTextPrimary'>
+                    <span className='text-text-sm text-grayTextPrimary'>
                       {format(new Date(item.time), "dd.MM.yyyy")}
                     </span>
                   </div>
-                  <div className='flex justify-between text-sm text-grayTextPrimary [&>div]:w-1/3'>
+                  <div className='flex justify-between text-text-sm text-grayTextPrimary [&>div]:w-1/3'>
                     {renderDetails(item)}
                   </div>
                 </div>
               ))}
         </div>
       </section>
-      <Pagination className='my-4'>
+      <Pagination className='my-2'>
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious

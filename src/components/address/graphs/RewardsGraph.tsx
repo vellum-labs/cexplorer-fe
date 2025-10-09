@@ -270,7 +270,7 @@ export const RewardsGraph = ({ data }: RewardsGraphProps) => {
 
   return (
     <div className='flex flex-col'>
-      <h2 className='mb-2'>Rewards</h2>
+      <h2 className='mb-1'>Rewards</h2>
       <ReactEcharts
         onEvents={{
           legendselectchanged: params => {

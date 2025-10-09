@@ -25,20 +25,22 @@ export const DrepDetailAboutTab: FC<DrepDetailAboutTabProps> = ({ data }) => {
         return (
           <div
             key={key + "-" + index}
-            className={`flex ${index % 2 !== 0 ? "bg-darker" : ""} flex-col gap-6 border-x border-t border-border px-6 py-[26px] text-left first:rounded-t-lg last:rounded-b-lg last:border-b md:flex-row`}
+            className={`flex ${index % 2 !== 0 ? "bg-darker" : ""} flex-col gap-3 border-x border-t border-border px-3 py-[26px] text-left first:rounded-t-lg last:rounded-b-lg last:border-b md:flex-row`}
           >
-            <span className='min-w-[150px] text-sm font-semibold'>{title}</span>
+            <span className='min-w-[150px]text-text-sm font-semibold'>
+              {title}
+            </span>
 
             {isAddress ? (
               <Link
                 to='/address/$address'
                 params={{ address: value }}
-                className='w-full break-all text-sm text-primary'
+                className='text-text-sm w-full break-all text-primary'
               >
                 {value}
               </Link>
             ) : (
-              <div className='w-full break-words text-sm'>
+              <div className='text-text-sm w-full break-words'>
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={markdownComponents(setClickedUrl)}

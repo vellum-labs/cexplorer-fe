@@ -59,7 +59,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
       label: "End",
       value:
         stats.epoch_no === currentEpoch ? (
-          <div className='flex items-center gap-3'>
+          <div className='flex items-center gap-1.5'>
             <div className='relative min-h-2 w-1/2 overflow-hidden rounded-[4px] bg-[#FEC84B]'>
               <span
                 className='absolute left-0 block h-2 rounded-bl-[4px] rounded-tl-[4px] bg-[#47CD89]'
@@ -68,7 +68,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
                 }}
               ></span>
             </div>
-            <span className='text-sm font-medium text-grayTextPrimary'>
+            <span className='text-text-sm font-medium text-grayTextPrimary'>
               {!isNaN(elapsedPercentage)
                 ? elapsedPercentage > 100
                   ? 100
@@ -84,7 +84,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
     {
       label: "Blocks",
       value: (
-        <p className='text-sm font-medium'>
+        <p className='text-text-sm font-medium'>
           {formatNumber(stats?.epoch?.block_count)}
         </p>
       ),
@@ -92,7 +92,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
     {
       label: "Transactions",
       value: (
-        <p className='text-sm font-medium'>
+        <p className='text-text-sm font-medium'>
           {formatNumber(stats?.epoch?.tx_count)}
         </p>
       ),
@@ -100,7 +100,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
     {
       label: "Fees Generated",
       value: (
-        <p className='text-sm font-medium'>
+        <p className='text-text-sm font-medium'>
           <AdaWithTooltip data={stats?.epoch?.fees} />
         </p>
       ),
@@ -108,7 +108,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
     {
       label: "TPS:",
       value: (
-        <p className='text-sm font-medium'>
+        <p className='text-text-sm font-medium'>
           {usedTPS?.toFixed(2)} (used) / {capTps?.toFixed(2)} (cap)
         </p>
       ),
@@ -116,21 +116,19 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
   ];
 
   return (
-    <div className='h-fit flex-grow basis-[450px] md:flex-shrink-0'>
-      <OverviewCard
-        title='Summary'
-        subTitle={
-          stats.epoch_no === currentEpoch && (
-            <div className='relative flex h-[24px] w-[115px] items-center justify-end rounded-lg border border-border px-[10px]'>
-              <div className='absolute left-2'>
-                <PulseDot />
-              </div>
-              <span className='text-xs font-medium'>Current Epoch</span>
+    <OverviewCard
+      title='Summary'
+      subTitle={
+        stats.epoch_no === currentEpoch && (
+          <div className='relative flex h-[24px] w-[115px] items-center justify-end rounded-m border border-border px-[10px]'>
+            <div className='absolute left-2'>
+              <PulseDot />
             </div>
-          )
-        }
-        overviewList={overviewList}
-      />
-    </div>
+            <span className='text-text-xs font-medium'>Current Epoch</span>
+          </div>
+        )
+      }
+      overviewList={overviewList}
+    />
   );
 };

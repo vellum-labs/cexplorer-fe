@@ -191,7 +191,7 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
         <Tooltip
           hide={!timelock}
           content={
-            <div className='flex flex-col gap-3'>
+            <div className='flex flex-col gap-1.5'>
               {isLocked ? <LockedPolicy /> : <OpenPolicy />}
               {parse(evaluateScript(json, 0)[1])}
             </div>
@@ -239,7 +239,7 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
       value: stats ? (
         <div className='flex flex-col'>
           <Badge color='blue'>Recently</Badge>
-          <div className='flex flex-wrap items-center gap-1'>
+          <div className='flex flex-wrap items-center gap-1/2'>
             {stats?.total_address && (
               <span className='text-[10px]'>
                 Active addresess: {stats?.total_address}
@@ -279,8 +279,8 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
           collection={query?.data?.data?.collection?.url}
         />
       </div>
-      <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pt-3 md:px-desktop xl:flex-nowrap xl:justify-start'>
-        <div className='flex grow basis-[980px] flex-wrap items-stretch gap-5'>
+      <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 px-mobile pt-1.5 md:px-desktop xl:flex-nowrap xl:justify-start'>
+        <div className='flex grow basis-[980px] flex-wrap items-stretch gap-3'>
           {query.isLoading ? (
             <>
               <LoadingSkeleton
@@ -311,13 +311,13 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
                     startContent={
                       // TODO: Make this visible
                       false && (
-                        <div className='flex h-full w-full flex-col gap-4 pt-3 lg:w-fit'>
+                        <div className='flex h-full w-full flex-col gap-2 pt-1.5 lg:w-fit'>
                           <Image
-                            className='aspect-square rounded-full'
+                            className='aspect-square rounded-max'
                             height={160}
                             width={160}
                           />
-                          <div className='flex w-[180px] justify-center gap-8'>
+                          <div className='flex w-[180px] justify-center gap-4'>
                             <img src={X} alt='X' height={24} width={24} />
                             <img src={Discord} alt='X' height={24} width={24} />
                             <img src={Attach} alt='X' height={24} width={24} />

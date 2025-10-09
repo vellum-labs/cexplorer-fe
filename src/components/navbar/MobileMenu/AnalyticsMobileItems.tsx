@@ -44,23 +44,23 @@ export const AnalyticsMobileItems = ({ onBack, setOpen, power }: Props) => {
     <>
       <button
         onClick={onBack}
-        className='mb-2 flex h-[34px] -translate-x-1 items-center gap-2 font-medium'
+        className='mb-1 flex h-[34px] -translate-x-1 items-center gap-1 font-medium'
       >
-        <ChevronLeft size={20} className='font-normal' />
+        <ChevronLeft size={20} className='font-regular' />
         <span>Analytics</span>
       </button>
       {power === 0 && (
         <InfoCard
           icon={<Cardano size={24} color={colors.primary} />}
           title={
-            <span className='text-lg font-semibold'>
+            <span className='text-text-lg font-semibold'>
               Powered by{" "}
               <span className='text-primary'>Cardano Blockchain</span>
             </span>
           }
           className='max-h-[200px] bg-darker'
         >
-          <p className='text-xs font-normal'>
+          <p className='text-text-xs font-regular'>
             Access Our API for Comprehensive Blockchain Data and Build Your
             Next-Level dApp!
           </p>

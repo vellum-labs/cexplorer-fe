@@ -41,8 +41,8 @@ export const PowerThresholdsSPODelegationDonutGraph: FC<
 
   if (isUnavailable) {
     return (
-      <div className='bg-muted/30 flex h-[300px] w-full items-center justify-center rounded-lg'>
-        <span className='text-xl font-semibold text-grayTextPrimary'>N/A</span>
+      <div className='bg-muted/30 flex h-[300px] w-full items-center justify-center rounded-m'>
+        <span className='text-text-xl font-semibold text-grayTextPrimary'>N/A</span>
       </div>
     );
   }
@@ -104,7 +104,7 @@ export const PowerThresholdsSPODelegationDonutGraph: FC<
           style={{ height: "100%", width: "100%" }}
         />
       </div>
-      <div className='mt-28 text-center text-sm text-grayTextPrimary'>
+      <div className='mt-13 text-center text-text-sm text-grayTextPrimary'>
         <p>
           Stake Pool Count:{" "}
           {currentPoolEpoch?.stat?.pool_distr?.count_pool_uniq ?? "–"}

@@ -18,7 +18,7 @@ export const getAssetImage = (tokenName: string, isNft = false, size = 20) => {
       <img
         src={AdaIcon}
         alt='ADA'
-        className='aspect-square shrink-0 rounded-full'
+        className='aspect-square shrink-0 rounded-max'
         height={size}
         width={size}
       />
@@ -33,7 +33,7 @@ export const getAssetImage = (tokenName: string, isNft = false, size = 20) => {
       type='asset'
       height={size}
       width={size}
-      className='aspect-square shrink-0 rounded-full'
+      className='aspect-square shrink-0 rounded-max'
       src={generateImageUrl(
         isNft ? fingerprint : tokenName,
         "ico",

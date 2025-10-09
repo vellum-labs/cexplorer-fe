@@ -29,12 +29,12 @@ export const PolicyListTab: FC = () => {
     {
       key: "collection",
       render: item => (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           <div className='flex flex-col'>
             <span className='font-medium text-primary'>
               {item.collection.name}
             </span>
-            <span className='text-xs text-grayTextPrimary'>
+            <span className='text-text-xs text-grayTextPrimary'>
               {formatString(item.id, "long")}
             </span>
           </div>
@@ -113,7 +113,7 @@ export const PolicyListTab: FC = () => {
   }
 
   return (
-    <div className='flex flex-col items-end gap-4'>
+    <div className='flex flex-col items-end gap-2'>
       <GlobalTable
         type='default'
         query={policyListQuery}

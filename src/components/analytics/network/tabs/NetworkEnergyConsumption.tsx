@@ -70,14 +70,14 @@ export const NetworkEnergyConsumption: FC = () => {
   ];
 
   return (
-    <section className='flex w-full max-w-desktop flex-col gap-3 lg:flex-row'>
+    <section className='flex w-full max-w-desktop flex-col gap-1.5 lg:flex-row'>
       <AnalyticsGraph
         title='Cardano PoS vs. Bitcoin PoW'
         description="Overview: This comparison examines the energy efficiency advantages of Cardano's proof-of-stake consensus over Bitcoin's proof-of-work model."
         className='lg:max-w-[500px]'
       >
         <div
-          className='thin-scrollbar relative w-full overflow-auto overflow-x-auto rounded-lg border border-border text-grayTextPrimary'
+          className='thin-scrollbar relative w-full overflow-auto overflow-x-auto rounded-m border border-border text-grayTextPrimary'
           style={{
             transform: "rotateX(180deg)",
           }}
@@ -97,7 +97,7 @@ export const NetworkEnergyConsumption: FC = () => {
                     height: "64px",
                   }}
                 >
-                  <p className='flex h-full items-center pl-6 text-sm'>
+                  <p className='flex h-full items-center pl-3 text-text-sm'>
                     {title}
                   </p>
                 </div>
@@ -110,7 +110,7 @@ export const NetworkEnergyConsumption: FC = () => {
                   }}
                 >
                   <p
-                    className={`flex h-full w-full items-center justify-end pr-6 text-sm ${i === compareColumns.length - 1 && "font-bold"}`}
+                    className={`flex h-full w-full items-center justify-end pr-3 text-text-sm ${i === compareColumns.length - 1 && "font-bold"}`}
                   >
                     {value}
                   </p>

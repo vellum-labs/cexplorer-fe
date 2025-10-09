@@ -54,17 +54,17 @@ export const PowerThresholdsPage: FC = () => {
           title='Power Thresholds'
           breadcrumbItems={[
             {
-              label: <span className='inline pt-1'>Governance</span>,
+              label: <span className='inline pt-1/2'>Governance</span>,
               link: "/gov",
             },
             { label: "Power thresholds" },
           ]}
         />
 
-        <section className='flex min-h-minHeight w-full max-w-desktop flex-col gap-2 p-desktop'>
+        <section className='flex min-h-minHeight w-full max-w-desktop flex-col gap-1 p-desktop'>
           <>
             <>
-              <div className='rounded-xl'>
+              <div className='rounded-l'>
                 <AnalyticsGraph
                   title='Delegation Distribution'
                   description='Amount of ADA delegated to stake pools and dReps.'
@@ -89,11 +89,11 @@ export const PowerThresholdsPage: FC = () => {
                     className='border-none px-0'
                   >
                     {query.isLoading ? (
-                      <div className='flex flex-col gap-3 md:flex-row'>
+                      <div className='flex flex-col gap-1.5 md:flex-row'>
                         <LoadingSkeleton height='490px' />
                       </div>
                     ) : (
-                      <div className='flex flex-col gap-3 md:flex-row'>
+                      <div className='flex flex-col gap-1.5 md:flex-row'>
                         <div className='flex flex-col justify-center border-none md:w-1/4'>
                           <PowerThresholdsSPODelegationDonutGraph
                             milestone={
@@ -126,11 +126,11 @@ export const PowerThresholdsPage: FC = () => {
                     className='border-none px-0'
                   >
                     {query.isLoading ? (
-                      <div className='flex flex-col gap-3 md:flex-row'>
+                      <div className='flex flex-col gap-1.5 md:flex-row'>
                         <LoadingSkeleton height='490px' />
                       </div>
                     ) : (
-                      <div className='flex flex-col gap-3 md:flex-row'>
+                      <div className='flex flex-col gap-1.5 md:flex-row'>
                         <div className='flex flex-col justify-center border-none md:w-1/4'>
                           <PowerThresholdsDRepDelegationDonutGraph
                             milestone={
@@ -160,11 +160,11 @@ export const PowerThresholdsPage: FC = () => {
               </div>
             </>
 
-            <div className='rounded-xl border border-border'>
-              <div className='flex items-center justify-between p-5'>
+            <div className='rounded-l border border-border'>
+              <div className='flex items-center justify-between p-3'>
                 <div>
-                  <h2 className='text-xl font-bold'>Governance Thresholds</h2>
-                  <p className='text-sm text-grayTextPrimary'>
+                  <h2 className='text-text-xl font-bold'>Governance Thresholds</h2>
+                  <p className='text-text-sm text-grayTextPrimary'>
                     Number of minimum votes needed for approving governance
                     actions by type (includes all DReps).
                   </p>
@@ -175,7 +175,7 @@ export const PowerThresholdsPage: FC = () => {
                 <>
                   {Array.from({ length: 10 }).map((_, index) => (
                     <div key={index}>
-                      <div className='mb-4 mt-6 p-5 text-base font-semibold'>
+                      <div className='mb-2 mt-3 p-3 text-text-md font-semibold'>
                         <LoadingSkeleton height='24px' width='50%' />
                       </div>
                       <LoadingSkeleton height='341px' />
@@ -184,14 +184,14 @@ export const PowerThresholdsPage: FC = () => {
                 </>
               ) : (
                 <>
-                  <h3 className='mb-4 mt-6 p-5 text-base font-semibold'>
+                  <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
                     Minimum Votes Needed to Pass a Vote of No Confidence
                   </h3>
                   <GovernanceThresholdsSection
                     thresholdProps={voteOfMotionNoConfidenceProps}
                   />
 
-                  <h3 className='mb-4 mt-6 p-5 text-base font-semibold'>
+                  <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
                     Minimum Votes Needed to Elect a New Constitutional Committee
                     (Normal State)
                   </h3>
@@ -199,7 +199,7 @@ export const PowerThresholdsPage: FC = () => {
                     thresholdProps={voteOfCommitteeNormalProps}
                   />
 
-                  <h3 className='mb-4 mt-6 p-5 text-base font-semibold'>
+                  <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
                     Minimum Votes Needed to Elect a New Constitutional Committee
                     (No Confidence State)
                   </h3>
@@ -207,21 +207,21 @@ export const PowerThresholdsPage: FC = () => {
                     thresholdProps={voteOfCommitteeNoConfidenceProps}
                   />
 
-                  <h3 className='mb-4 mt-6 p-5 text-base font-semibold'>
+                  <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
                     Minimum Votes Needed to Update the Cardano Constitution
                   </h3>
                   <GovernanceThresholdsSection
                     thresholdProps={voteOfUpdateToConstitutionProps}
                   />
 
-                  <h3 className='mb-4 mt-6 p-5 text-base font-semibold'>
+                  <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
                     Minimum Votes Needed to Initiate a Hard Fork
                   </h3>
                   <GovernanceThresholdsSection
                     thresholdProps={voteOfHardForkInitiationProps}
                   />
 
-                  <h3 className='mb-4 mt-6 p-5 text-base font-semibold'>
+                  <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
                     Minimum Votes Needed to Withdraw Funds from the Cardano
                     Treasury
                   </h3>
@@ -229,28 +229,28 @@ export const PowerThresholdsPage: FC = () => {
                     thresholdProps={voteOfTreasuryWithdrawalProps}
                   />
 
-                  <h3 className='mb-4 mt-6 p-5 text-base font-semibold'>
+                  <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
                     Minimum Votes Needed to Change Economic Parameters
                   </h3>
                   <GovernanceThresholdsSection
                     thresholdProps={voteOfPPEconomicGroupProps}
                   />
 
-                  <h3 className='mb-4 mt-6 p-5 text-base font-semibold'>
+                  <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
                     Minimum Votes Needed to Change Network Technical Parameters
                   </h3>
                   <GovernanceThresholdsSection
                     thresholdProps={voteOfPPTechnicalGroupProps}
                   />
 
-                  <h3 className='mb-4 mt-6 p-5 text-base font-semibold'>
+                  <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
                     Minimum Votes Needed to Change Network Parameters
                   </h3>
                   <GovernanceThresholdsSection
                     thresholdProps={voteOfPPNetworkGroupProps}
                   />
 
-                  <h3 className='mb-4 mt-6 p-5 text-base font-semibold'>
+                  <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
                     Minimum Votes Needed to Change Governance Parameter
                   </h3>
                   <GovernanceThresholdsSection

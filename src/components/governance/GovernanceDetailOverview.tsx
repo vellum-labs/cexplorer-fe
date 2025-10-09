@@ -43,7 +43,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
   const committeeMembers = query?.data?.data?.committee?.member;
   const votingProcedure = query?.data?.data?.voting_procedure;
 
-  const [clickedUrl, setClickedUrl] = useState<string | null>(null);
+  const [clickedUrl, setClickedUrl] = useState<string | undefined>(undefined);
 
   const votingDreps = (votingProcedure ?? []).filter(
     item => item?.voter_role === "DRep",
@@ -233,7 +233,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
     {
       label: "Action ID",
       value: (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <span>
             {formatString(query?.data?.data?.ident?.bech ?? "", "longer")}
           </span>
@@ -301,7 +301,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
     {
       label: "Anchor",
       value: (
-        <div className='flex flex-col gap-1'>
+        <div className='flex flex-col gap-1/2'>
           <span>
             {formatString(query?.data?.data?.anchor?.data_hash ?? "", "longer")}
           </span>
@@ -364,10 +364,10 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
 
       return {
         label: (
-          <div className='flex items-center gap-3 py-1.5 text-sm'>
+          <div className='flex items-center gap-1.5 py-0.5 text-text-sm'>
             <Image
               src={generateImageUrl(ccId, "ico", "cc")}
-              className='h-[18px] w-[18px] rounded-lg object-cover'
+              className='h-[18px] w-[18px] rounded-m object-cover'
               alt={name}
               height={18}
               width={18}
@@ -392,7 +392,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
   const dreps = [
     {
       label: (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <span>Total stake</span>
           <Tooltip content='All ADA delegated to DReps'>
             <CircleHelp size={11} className='text-grayTextPrimary' />
@@ -400,15 +400,15 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
         </div>
       ),
       value: (
-        <div className='flex items-center justify-end gap-2'>
+        <div className='flex items-center justify-end gap-1'>
           <AdaWithTooltip data={drepTotalStake} />
-          <span className='text-xs text-grayTextSecondary'>(100%)</span>
+          <span className='text-text-xs text-grayTextSecondary'>(100%)</span>
         </div>
       ),
     },
     {
       label: (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <span>Abstain stake</span>
           <Tooltip content='ADA that abstains from voting'>
             <CircleHelp size={11} className='text-grayTextPrimary' />
@@ -416,7 +416,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
         </div>
       ),
       value: (
-        <div className='flex items-center justify-end gap-2'>
+        <div className='flex items-center justify-end gap-1'>
           <Tooltip
             content={
               <div className='flex flex-col'>
@@ -433,7 +433,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
           >
             <AdaWithTooltip data={drepAbstainStake} tooltip={false} />
           </Tooltip>
-          <span className='text-xs text-grayTextSecondary'>
+          <span className='text-text-xs text-grayTextSecondary'>
             ({((drepAbstainStake * 100) / drepTotalStake).toFixed(2)}%)
           </span>
         </div>
@@ -441,7 +441,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
     },
     {
       label: (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <span>Voting stake</span>
           <Tooltip content='ADA participating in voting'>
             <CircleHelp size={11} className='text-grayTextPrimary' />
@@ -449,9 +449,9 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
         </div>
       ),
       value: (
-        <div className='flex items-center justify-end gap-2'>
+        <div className='flex items-center justify-end gap-1'>
           <AdaWithTooltip data={drepVotingStake} />
-          <span className='text-xs text-grayTextSecondary'>
+          <span className='text-text-xs text-grayTextSecondary'>
             ({((drepVotingStake * 100) / drepTotalStake).toFixed(2)}%)
           </span>
         </div>
@@ -462,7 +462,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
   const spos = [
     {
       label: (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <span>Total stake</span>
           <Tooltip content='All ADA delegated to SPOs'>
             <CircleHelp size={11} className='text-grayTextPrimary' />
@@ -470,15 +470,15 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
         </div>
       ),
       value: (
-        <div className='flex items-center justify-end gap-2'>
+        <div className='flex items-center justify-end gap-1'>
           <AdaWithTooltip data={spoTotalStake} />
-          <span className='text-xs text-grayTextSecondary'>(100%)</span>
+          <span className='text-text-xs text-grayTextSecondary'>(100%)</span>
         </div>
       ),
     },
     {
       label: (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <span>Abstain stake</span>
           <Tooltip content='ADA that abstains from voting'>
             <CircleHelp size={11} className='text-grayTextPrimary' />
@@ -486,7 +486,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
         </div>
       ),
       value: (
-        <div className='flex items-center justify-end gap-2'>
+        <div className='flex items-center justify-end gap-1'>
           <Tooltip
             content={
               <div className='flex flex-col'>
@@ -503,7 +503,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
           >
             <AdaWithTooltip data={spoAbstainStake} tooltip={false} />
           </Tooltip>
-          <span className='text-xs text-grayTextSecondary'>
+          <span className='text-text-xs text-grayTextSecondary'>
             (
             {(spoAbstainStake * 100) / spoTotalStake < 100
               ? ((spoAbstainStake * 100) / spoTotalStake).toFixed(2)
@@ -515,7 +515,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
     },
     {
       label: (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <span>Voting stake</span>
           <Tooltip content='ADA participating in voting'>
             <CircleHelp size={11} className='text-grayTextPrimary' />
@@ -523,9 +523,9 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
         </div>
       ),
       value: (
-        <div className='flex items-center justify-end gap-2'>
+        <div className='flex items-center justify-end gap-1'>
           <AdaWithTooltip data={spoVotingStake} />
-          <span className='text-xs text-grayTextSecondary'>
+          <span className='text-text-xs text-grayTextSecondary'>
             (
             {(spoVotingStake * 100) / spoTotalStake < 100
               ? ((spoVotingStake * 100) / spoTotalStake).toFixed(2)
@@ -539,20 +539,20 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
 
   return (
     <>
-      <section className='flex w-full flex-col items-center gap-2'>
-        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pt-3 md:px-desktop xl:flex-nowrap xl:justify-start'>
-          <div className='flex grow basis-[980px] flex-wrap items-stretch gap-5'>
+      <section className='flex w-full flex-col items-center gap-1'>
+        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 px-mobile pt-1.5 md:px-desktop xl:flex-nowrap xl:justify-start'>
+          <div className='flex grow basis-[980px] flex-wrap items-stretch gap-3'>
             {query.isLoading ? (
               <>
                 <LoadingSkeleton
                   height='227px'
                   rounded='xl'
-                  className='grow basis-[300px] px-8 py-4'
+                  className='grow basis-[300px] px-4 py-2'
                 />
                 <LoadingSkeleton
                   height='227px'
                   rounded='xl'
-                  className='grow basis-[300px] px-8 py-4'
+                  className='grow basis-[300px] px-4 py-2'
                 />
               </>
             ) : (
@@ -591,24 +591,24 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
             )}
           </div>
         </div>
-        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile pt-3 md:px-desktop xl:flex-nowrap xl:justify-start'>
-          <div className='flex grow basis-[980px] flex-wrap items-stretch gap-5'>
+        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 px-mobile pt-1.5 md:px-desktop xl:flex-nowrap xl:justify-start'>
+          <div className='flex grow basis-[980px] flex-wrap items-stretch gap-3'>
             {query.isLoading ? (
               <>
                 <LoadingSkeleton
                   height='227px'
                   rounded='xl'
-                  className='grow basis-[300px] px-8 py-4'
+                  className='grow basis-[300px] px-4 py-2'
                 />
                 <LoadingSkeleton
                   height='227px'
                   rounded='xl'
-                  className='grow basis-[300px] px-8 py-4'
+                  className='grow basis-[300px] px-4 py-2'
                 />
                 <LoadingSkeleton
                   height='227px'
                   rounded='xl'
-                  className='grow basis-[300px] px-8 py-4'
+                  className='grow basis-[300px] px-4 py-2'
                 />
               </>
             ) : (
@@ -620,16 +620,16 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         title='Constitutional committee'
                         subTitle={
                           constitutionalCommitteeApproved ? (
-                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-2xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
+                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
                               <PulseDot color='#17B26A' animate />
-                              <span className='text-xs font-medium text-[#17B26A]'>
+                              <span className='text-text-xs font-medium text-[#17B26A]'>
                                 Approved
                               </span>
                             </div>
                           ) : (
-                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-2xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
+                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
                               <PulseDot color='#F79009' animate />
-                              <span className='text-xs font-medium text-[#B54708]'>
+                              <span className='text-text-xs font-medium text-[#B54708]'>
                                 Not approved
                               </span>
                             </div>
@@ -637,28 +637,28 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         }
                         showTitleDivider
                         labelClassname='w-full'
-                        tBodyClassname={`${(committeeMembers ?? []).length > 7 ? "max-h-[300px] thin-scrollbar px-1 overflow-auto" : ""}`}
+                        tBodyClassname={`${(committeeMembers ?? []).length > 7 ? "max-h-[300px] thin-scrollbar px-1/2 overflow-auto" : ""}`}
                         leading
                         hFit
                         endContent={
                           <div
-                            className={`flex w-full flex-col justify-end py-2 ${(committeeMembers ?? []).length < 7 ? "h-full" : ""} ${(committeeMembers ?? []).length === 7 ? "pb-0" : "pb-4"}`}
+                            className={`flex w-full flex-col justify-end py-1 ${(committeeMembers ?? []).length < 7 ? "h-full" : ""} ${(committeeMembers ?? []).length === 7 ? "pb-0" : "pb-2"}`}
                           >
-                            <div className='mt-2 flex w-full items-center justify-between border-t border-border pt-2'>
+                            <div className='mt-1 flex w-full items-center justify-between border-t border-border pt-1'>
                               <div className='flex items-center gap-[2px]'>
                                 <CircleHelp
                                   size={11}
                                   className='text-grayTextPrimary'
                                 />
-                                <span className='text-xs font-medium text-grayTextPrimary'>
+                                <span className='text-text-xs font-medium text-grayTextPrimary'>
                                   Threshold:
                                 </span>
                               </div>
-                              <span className='text-xs font-medium text-grayTextPrimary'>
+                              <span className='text-text-xs font-medium text-grayTextPrimary'>
                                 {ccThreshold}%
                               </span>
                             </div>
-                            <div className='flex w-full items-center gap-3 pt-2'>
+                            <div className='flex w-full items-center gap-1.5 pt-1'>
                               <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#FEC84B]'>
                                 <span
                                   className='absolute top-0 block h-2 bg-[#00A9E3]'
@@ -681,7 +681,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                                   }}
                                 ></span>
                               </div>
-                              <div className='flex gap-2 text-xs font-medium text-grayTextPrimary'>
+                              <div className='flex gap-1 text-text-xs font-medium text-grayTextPrimary'>
                                 <span className=''>{howMuchVoted}%</span>
                               </div>
                             </div>
@@ -697,25 +697,25 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                     <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                       <OverviewCard
                         title={
-                          <div className='flex items-center gap-2'>
+                          <div className='flex items-center gap-1'>
                             <span>DReps</span>
-                            <span className='text-sm font-normal text-grayTextPrimary'>
+                            <span className='text-text-sm font-regular text-grayTextPrimary'>
                               {query.data?.data?.total.drep.count}
                             </span>
                           </div>
                         }
                         subTitle={
                           dRepsApproved ? (
-                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-2xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
+                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
                               <PulseDot color='#17B26A' animate />
-                              <span className='text-xs font-medium text-[#17B26A]'>
+                              <span className='text-text-xs font-medium text-[#17B26A]'>
                                 Approved
                               </span>
                             </div>
                           ) : (
-                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-2xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
+                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
                               <PulseDot color='#F79009' animate />
-                              <span className='text-xs font-medium text-[#B54708]'>
+                              <span className='text-text-xs font-medium text-[#B54708]'>
                                 Not approved
                               </span>
                             </div>
@@ -761,9 +761,9 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                     <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                       <OverviewCard
                         title={
-                          <div className='flex items-center gap-2'>
+                          <div className='flex items-center gap-1'>
                             <span>DReps</span>
-                            <span className='text-sm font-normal text-grayTextPrimary'>
+                            <span className='text-text-sm font-regular text-grayTextPrimary'>
                               {query.data?.data?.total.drep.count}
                             </span>
                           </div>
@@ -771,7 +771,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         showTitleDivider
                         className='h-full'
                         endContent={
-                          <div className='flex h-full items-center justify-center text-sm text-grayTextSecondary'>
+                          <div className='flex h-full items-center justify-center text-text-sm text-grayTextSecondary'>
                             DReps are not voting on this governance action
                           </div>
                         }
@@ -786,25 +786,25 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                     <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                       <OverviewCard
                         title={
-                          <div className='flex items-center gap-2'>
+                          <div className='flex items-center gap-1'>
                             <span>SPOs</span>
-                            <span className='text-sm font-normal text-grayTextPrimary'>
+                            <span className='text-text-sm font-regular text-grayTextPrimary'>
                               {query.data?.data?.total.spo.count}
                             </span>
                           </div>
                         }
                         subTitle={
                           sPOsApproved ? (
-                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-2xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
+                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
                               <PulseDot color='#17B26A' animate />
-                              <span className='text-xs font-medium text-[#17B26A]'>
+                              <span className='text-text-xs font-medium text-[#17B26A]'>
                                 Approved
                               </span>
                             </div>
                           ) : (
-                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-2xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
+                            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
                               <PulseDot color='#F79009' animate />
-                              <span className='text-xs font-medium text-[#B54708]'>
+                              <span className='text-text-xs font-medium text-[#B54708]'>
                                 Not approved
                               </span>
                             </div>
@@ -856,9 +856,9 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                     <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                       <OverviewCard
                         title={
-                          <div className='flex items-center gap-2'>
+                          <div className='flex items-center gap-1'>
                             <span>SPOs</span>
-                            <span className='text-sm font-normal text-grayTextPrimary'>
+                            <span className='text-text-sm font-regular text-grayTextPrimary'>
                               {query.data?.data?.total.spo.count}
                             </span>
                           </div>
@@ -866,7 +866,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         showTitleDivider
                         className='h-full'
                         endContent={
-                          <div className='flex h-full items-center justify-center text-sm text-grayTextSecondary'>
+                          <div className='flex h-full items-center justify-center text-text-sm text-grayTextSecondary'>
                             SPOs are not voting on this governance action
                           </div>
                         }
@@ -880,7 +880,10 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
         </div>
       </section>
       {clickedUrl && (
-        <SafetyLinkModal url={clickedUrl} onClose={() => setClickedUrl(null)} />
+        <SafetyLinkModal
+          url={clickedUrl}
+          onClose={() => setClickedUrl(undefined)}
+        />
       )}
     </>
   );

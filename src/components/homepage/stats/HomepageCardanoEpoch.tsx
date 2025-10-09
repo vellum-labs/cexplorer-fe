@@ -57,10 +57,10 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
     ((durationInSeconds - timeLeft) / durationInSeconds) * 100;
 
   return (
-    <div className='mx-3 min-h-[110px]'>
-      <div className='flex items-center gap-2 pb-1'>
+    <div className='mx-1.5 min-h-[110px]'>
+      <div className='flex items-center gap-1 pb-1/2'>
         <div className='flex w-full flex-col'>
-          <div className='flex items-center gap-3'>
+          <div className='flex items-center gap-1.5'>
             <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#FEC84B]'>
               <span
                 className='absolute left-0 block h-2 rounded-bl-[4px] rounded-tl-[4px] bg-[#47CD89]'
@@ -69,7 +69,7 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
                 }}
               ></span>
             </div>
-            <span className='text-grayText text-sm font-medium'>
+            <span className='text-grayText text-text-sm font-medium'>
               {!isNaN(elapsedPercentage)
                 ? elapsedPercentage > 100
                   ? 100
@@ -79,13 +79,13 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
             </span>
           </div>
           <div className='flex items-center justify-between'>
-            <span className='text-grayText text-xs'>
+            <span className='text-grayText text-text-xs'>
               {miscConst?.epoch?.start_time
                 ? formatDate(miscConst?.epoch?.start_time)
                 : ""}
             </span>
             {timeLeft > 0 && (
-              <span className='text-grayText text-xs'>
+              <span className='text-grayText text-text-xs'>
                 {formatRemainingTime(timeLeft)}
               </span>
             )}
@@ -93,45 +93,45 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
         </div>
       </div>
       <div className='flex flex-grow items-center pb-[11px]'>
-        <div className='flex min-w-[160px] items-center gap-1'>
-          <span className='text-grayText inline-block text-sm font-medium'>
+        <div className='flex min-w-[160px] items-center gap-1/2'>
+          <span className='text-grayText inline-block text-text-sm font-medium'>
             Slots
           </span>
         </div>
-        <span className='text-grayText text-sm font-semibold'>
+        <span className='text-grayText text-text-sm font-semibold'>
           {formatNumber(slot)}
         </span>
       </div>
       <div className='flex flex-grow items-center pb-[11px]'>
-        <div className='flex min-w-[160px] items-center gap-1'>
-          <span className='text-grayText inline-block text-sm font-medium'>
+        <div className='flex min-w-[160px] items-center gap-1/2'>
+          <span className='text-grayText inline-block text-text-sm font-medium'>
             Pools
           </span>
         </div>
-        <span className='text-grayText text-sm font-semibold'>
+        <span className='text-grayText text-text-sm font-semibold'>
           {formatNumber(pools)}
         </span>
       </div>
       <div className='flex flex-grow items-center pb-[11px]'>
-        <div className='flex min-w-[160px] items-center gap-1'>
-          <span className='text-grayText inline-block text-sm font-medium'>
+        <div className='flex min-w-[160px] items-center gap-1/2'>
+          <span className='text-grayText inline-block text-text-sm font-medium'>
             Daily usage
           </span>
         </div>
         <Tooltip
           content={
             <div className='space-y-1'>
-              <div className='flex justify-between gap-4'>
+              <div className='flex justify-between gap-2'>
                 <span>1h usage:</span>
                 <span className='font-semibold'>
                   {(load1h * 100).toFixed(2)}%
                 </span>
               </div>
-              <div className='flex justify-between gap-4'>
+              <div className='flex justify-between gap-2'>
                 <span>24h usage:</span>
                 <span className='font-semibold'>{blockUsage.toFixed(2)}%</span>
               </div>
-              <div className='flex justify-between gap-4'>
+              <div className='flex justify-between gap-2'>
                 <span>7d usage:</span>
                 <span className='font-semibold'>
                   {(load7d * 100).toFixed(2)}%
@@ -140,8 +140,8 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
             </div>
           }
         >
-          <div className='flex cursor-help items-center gap-1'>
-            <span className='text-grayText text-sm font-semibold'>
+          <div className='flex cursor-help items-center gap-1/2'>
+            <span className='text-grayText text-text-sm font-semibold'>
               {blockUsage.toFixed(2)}%
             </span>
             <Info size={14} className='text-grayText opacity-50' />

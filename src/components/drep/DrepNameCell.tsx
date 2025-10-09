@@ -37,17 +37,17 @@ export const DrepNameCell: FC<DrepNameCellProps> = ({ item }) => {
     .slice(0, 3);
 
   return (
-    <div className='relative flex max-h-[75px] w-full items-center gap-2'>
+    <div className='relative flex max-h-[75px] w-full items-center gap-1'>
       <Image
         src={generateImageUrl(item?.hash?.view ?? "", "ico", "drep")}
         type='user'
-        className='h-8 w-8 rounded-full'
+        className='h-8 w-8 rounded-max'
         height={32}
         width={32}
         fallbackletters={fallbackletters}
       />
 
-      <div className={`flex w-[calc(100%-40px)] flex-col text-sm`}>
+      <div className={`flex w-[calc(100%-40px)] flex-col text-text-sm`}>
         {item?.data?.given_name && (
           <Link
             to='/drep/$hash'
@@ -59,14 +59,14 @@ export const DrepNameCell: FC<DrepNameCellProps> = ({ item }) => {
               : item?.data?.given_name}
           </Link>
         )}
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <Link
             to='/drep/$hash'
             params={{ hash: item?.hash?.view ?? "" }}
             className={
               item?.data?.given_name
-                ? "text-xs hover:text-grayTextPrimary"
-                : "text-sm text-primary"
+                ? "text-text-xs hover:text-grayTextPrimary"
+                : "text-text-sm text-primary"
             }
             disabled={!!item?.data?.given_name}
           >

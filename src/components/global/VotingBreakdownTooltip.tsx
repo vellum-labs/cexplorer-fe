@@ -22,7 +22,7 @@ export const VotingBreakdownTooltip: FC<VotingBreakdownTooltipProps> = ({
   return (
     <Tooltip
       content={
-        <div className='flex flex-col gap-1 text-sm text-text'>
+        <div className='flex flex-col gap-1/2 text-text-sm text-text'>
           {voters !== undefined && (
             <span>
               <b>{voters}</b> {voters === 1 ? "voter" : "voters"}
@@ -51,7 +51,7 @@ export const VotingBreakdownTooltip: FC<VotingBreakdownTooltipProps> = ({
         </div>
       }
     >
-      <Info size={14} className='ml-1 cursor-pointer text-grayTextSecondary' />
+      <Info size={14} className='ml-1/2 cursor-pointer text-grayTextSecondary' />
     </Tooltip>
   );
 };

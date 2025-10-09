@@ -138,9 +138,9 @@ const EpochListPage: FC = () => {
       title='Epochs'
       breadcrumbItems={[{ label: "Epochs" }]}
     >
-      <section className='flex min-h-[410px] w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
-        <div className='flex h-full w-full flex-wrap items-center gap-6'>
-          <div className='flex h-full w-full flex-grow flex-col gap-6 xl:w-[400px] xl:flex-grow-0'>
+      <section className='flex min-h-[410px] w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
+        <div className='flex h-full w-full flex-wrap items-center gap-3'>
+          <div className='flex h-full w-full flex-grow flex-col gap-3 xl:w-[400px] xl:flex-grow-0'>
             {isLoading || isError ? (
               <LoadingSkeleton height='177px' rounded='lg' />
             ) : (
@@ -157,8 +157,8 @@ const EpochListPage: FC = () => {
           </div>
           <div
             className={cn(
-              `flex h-[392px] w-full flex-grow items-center rounded-lg ${!isLoading && "border border-border"} md:w-[833px]`,
-              !isLoading && !isError && "p-2",
+              `flex h-[392px] w-full flex-grow items-center rounded-m ${!isLoading && "border border-border"} md:w-[833px]`,
+              !isLoading && !isError && "p-1",
             )}
           >
             {isLoading || isError ? (

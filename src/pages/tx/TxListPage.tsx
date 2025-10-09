@@ -83,10 +83,10 @@ export const TxListPage: FC<TxListPageProps> = ({
       breadcrumbItems={[{ label: "Transactions" }]}
     >
       <section
-        className={`flex w-full max-w-desktop flex-col ${specifiedParams ? "" : "px-mobile pb-5 md:px-desktop"}`}
+        className={`flex w-full max-w-desktop flex-col ${specifiedParams ? "" : "px-mobile pb-3 md:px-desktop"}`}
       >
-        <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-          <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
+        <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+          <div className='flex w-full flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
             {totalItems === 0 &&
             (txListQuery.isLoading || txListQuery.isFetching) ? (
               <LoadingSkeleton height='27px' width={"220px"} />
@@ -98,7 +98,7 @@ export const TxListPage: FC<TxListPageProps> = ({
               ""
             )}
             <div className='flex justify-end max-[435px]:w-full md:hidden'>
-              <div className='flex items-center gap-2 md:hidden'>
+              <div className='flex items-center gap-1 md:hidden'>
                 <ExportButton columns={columns} items={items} />
                 <TableSettingsDropdown
                   rows={rows}
@@ -119,7 +119,7 @@ export const TxListPage: FC<TxListPageProps> = ({
             </div>
           </div>
 
-          <div className='flex gap-2'>
+          <div className='flex gap-1'>
             <TableSearchInput
               placeholder='Search by tx hash...'
               value={tableSearch}
@@ -128,7 +128,7 @@ export const TxListPage: FC<TxListPageProps> = ({
               showSearchIcon
               showPrefixPopup={false}
             />
-            <div className='hidden items-center gap-2 md:flex'>
+            <div className='hidden items-center gap-1 md:flex'>
               <ExportButton columns={columns} items={items} />
               <TableSettingsDropdown
                 rows={rows}

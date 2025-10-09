@@ -37,13 +37,13 @@ export const FaqPage = () => {
       <div className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col items-center'>
           <h1>Frequently asked questions</h1>
-          <p className='mt-3 font-light text-grayTextPrimary'>
+          <p className='mt-1.5 font-regular text-grayTextPrimary'>
             Everything you need to know about the product and billing.
           </p>
           <Accordion
             type='single'
             collapsible
-            className='mt-4 w-full max-w-[600px]'
+            className='mt-2 w-full max-w-[600px]'
           >
             {query.isLoading ? (
               <LoadingSkeleton width='600px' height='520px' rounded='lg' />
@@ -54,11 +54,11 @@ export const FaqPage = () => {
                   value={item.title}
                   className='border-b border-border'
                 >
-                  <AccordionTrigger className='AccordionTrigger w-full py-5 text-left'>
-                    <span className='text-base font-medium'>{item.title}</span>
+                  <AccordionTrigger className='AccordionTrigger w-full py-3 text-left'>
+                    <span className='text-text-md font-medium'>{item.title}</span>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <div className='flex flex-col pb-3 text-grayTextPrimary'>
+                    <div className='flex flex-col pb-1.5 text-grayTextPrimary'>
                       {parse(JSON.stringify(item.msg))}
                     </div>
                   </AccordionContent>

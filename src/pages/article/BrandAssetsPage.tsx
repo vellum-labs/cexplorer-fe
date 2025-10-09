@@ -90,24 +90,24 @@ export const BrandAssetsPage = () => {
       </Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
         {query.isLoading ? (
-          <div className='flex flex-col gap-10'>
-            <div className='flex flex-col items-center gap-4'>
+          <div className='flex flex-col gap-5'>
+            <div className='flex flex-col items-center gap-2'>
               <LoadingSkeleton width='150px' height='30px' />
               <LoadingSkeleton width='406px' height='21px' />
             </div>
-            <div className='flex flex-col items-center gap-8'>
+            <div className='flex flex-col items-center gap-4'>
               <LoadingSkeleton width='800px' height='511px' rounded='lg' />
-              <div className='flex flex-col items-center gap-10'>
+              <div className='flex flex-col items-center gap-5'>
                 <LoadingSkeleton width='150px' height='30px' />
-                <div className='flex items-center gap-10'>
+                <div className='flex items-center gap-5'>
                   <LoadingSkeleton width='360px' height='200px' rounded='xl' />
                   <LoadingSkeleton width='360px' height='200px' rounded='xl' />
                   <LoadingSkeleton width='360px' height='200px' rounded='xl' />
                 </div>
               </div>
-              <div className='flex flex-col items-center gap-10'>
+              <div className='flex flex-col items-center gap-5'>
                 <LoadingSkeleton width='150px' height='30px' />
-                <div className='flex items-center gap-10'>
+                <div className='flex items-center gap-5'>
                   <LoadingSkeleton width='360px' height='200px' rounded='xl' />
                   <LoadingSkeleton width='360px' height='200px' rounded='xl' />
                   <LoadingSkeleton width='360px' height='200px' rounded='xl' />

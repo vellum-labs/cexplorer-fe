@@ -64,8 +64,8 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
         <meta name='description' content={metadata.drepList.description} />
         <meta name='keywords' content={metadata.drepList.keywords} />
       </Helmet>
-      <div className='mb-2 flex w-full flex-col justify-between gap-2 min-[870px]:flex-row min-[870px]:items-center'>
-        <div className='flex flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
+      <div className='mb-1 flex w-full flex-col justify-between gap-1 min-[870px]:flex-row min-[870px]:items-center'>
+        <div className='flex flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
           {!watchlist && (
             <>
               {drepListQuery.isLoading || drepListQuery.isFetching ? (
@@ -80,7 +80,7 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
             </>
           )}
           <div className='flex w-full justify-end min-[870px]:hidden'>
-            <div className='flex items-center gap-2 min-[870px]:hidden'>
+            <div className='flex items-center gap-1 min-[870px]:hidden'>
               <ExportButton columns={columns} items={items} />
               <Button
                 size='md'
@@ -108,7 +108,7 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
           </div>
         </div>
 
-        <div className='flex gap-2'>
+        <div className='flex gap-1'>
           {!watchlist && (
             <WatchlistFilter
               watchlistOnly={watchlistOnly}
@@ -123,7 +123,7 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
             showSearchIcon
             showPrefixPopup={false}
           />
-          <div className='hidden items-center gap-2 min-[870px]:flex'>
+          <div className='hidden items-center gap-1 min-[870px]:flex'>
             <ExportButton columns={columns} items={items} />
             <Button
               size='md'
@@ -148,13 +148,13 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
         </div>
       </div>
       {hasFilter && (
-        <div className='flex flex-wrap items-center gap-1 md:flex-nowrap'>
+        <div className='flex flex-wrap items-center gap-1/2 md:flex-nowrap'>
           {Object.entries(filter).map(
             ([key, value]) =>
               value && (
                 <div
                   key={key}
-                  className='mb-2 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-2 py-0.5 text-xs text-grayTextPrimary'
+                  className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
                 >
                   <span>
                     {key === "gov_action"

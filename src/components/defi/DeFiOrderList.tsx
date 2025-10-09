@@ -155,13 +155,13 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
     {
       key: "tx",
       render: item => (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           <Link
             to='/dex/swap/$hash'
             params={{
               hash: item?.tx_hash,
             }}
-            className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-sm text-primary`}
+            className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-text-sm text-primary`}
           >
             {formatString(item?.tx_hash, "short")}
           </Link>
@@ -183,7 +183,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
 
         return (
           <div
-            className={`flex w-[50px] items-center justify-center rounded-md px-[6px] py-[2px] text-sm font-medium text-white ${isBuying ? "bg-greenText" : "bg-redText"}`}
+            className={`flex w-[50px] items-center justify-center rounded-s px-[6px] py-[2px] text-text-sm font-medium text-white ${isBuying ? "bg-greenText" : "bg-redText"}`}
           >
             {isBuying ? "Buy" : "Sell"}
           </div>
@@ -218,9 +218,9 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         },
         onReset: () => changeFilterByKey("type"),
         filterContent: (
-          <div className='flex w-full flex-col justify-center gap-2 p-2'>
-            <div className='flex items-center gap-3'>
-              <label className='flex items-center gap-2'>
+          <div className='flex w-full flex-col justify-center gap-1 p-1'>
+            <div className='flex items-center gap-1.5'>
+              <label className='flex items-center gap-1'>
                 <input
                   type='radio'
                   name='status'
@@ -234,9 +234,9 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                     }))
                   }
                 />
-                <span className='text-sm'>Buy</span>
+                <span className='text-text-sm'>Buy</span>
               </label>
-              <label className='flex items-center gap-2'>
+              <label className='flex items-center gap-1'>
                 <input
                   type='radio'
                   name='status'
@@ -250,7 +250,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                     }))
                   }
                 />
-                <span className='text-sm'>Sell</span>
+                <span className='text-text-sm'>Sell</span>
               </label>
             </div>
             <TextInput
@@ -388,7 +388,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         );
 
         return (
-          <div className='flex flex-col gap-2'>
+          <div className='flex flex-col gap-1'>
             {currency === "ada" ? (
               <p title={ada} className='text-right'>
                 <AdaWithTooltip data={item?.amount_in * 1e6} />
@@ -475,7 +475,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         const isCanceled = item.status === "CANCELLED";
 
         return (
-          <div className='flex items-center gap-1'>
+          <div className='flex items-center gap-1/2'>
             <Link
               to='/dex/swap/$hash'
               params={{
@@ -485,7 +485,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
             >
               <FileText size={15} className='cursor-pointer text-primary' />
             </Link>
-            <p className='flex items-center gap-1 rounded-md border border-border px-2 text-sm'>
+            <p className='flex items-center gap-1/2 rounded-s border border-border px-1 text-text-sm'>
               {isSuccess ? (
                 <Check className='text-greenText' size={15} />
               ) : isCanceled ? (
@@ -512,8 +512,8 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         onFilter: () => changeFilterByKey("status", filterDraft["status"]),
         onReset: () => changeFilterByKey("status"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-4 py-2'>
-            <label className='flex items-center gap-2'>
+          <div className='flex flex-col gap-1 px-2 py-1'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='status'
@@ -524,9 +524,9 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                   changeDraftFilter("status", e.currentTarget.value)
                 }
               />
-              <span className='text-sm'>Complete</span>
+              <span className='text-text-sm'>Complete</span>
             </label>
-            <label className='flex items-center gap-2'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='status'
@@ -537,7 +537,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                   changeDraftFilter("status", e.currentTarget.value)
                 }
               />
-              <span className='text-sm'>Cancelled</span>
+              <span className='text-text-sm'>Cancelled</span>
             </label>
           </div>
         ),
@@ -571,17 +571,17 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         const Icon = addressIcons[level];
 
         return (
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             {item?.user?.balance && (
-              <Image src={Icon} className='h-4 w-4 rounded-full' />
+              <Image src={Icon} className='h-4 w-4 rounded-max' />
             )}
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-1'>
               <Link
                 to={"/address/$address"}
                 params={{
                   address: item?.user?.address,
                 }}
-                className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-sm text-primary`}
+                className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-text-sm text-primary`}
               >
                 {formatString(item?.user?.address, "short")}
               </Link>
@@ -609,7 +609,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                 changeFilterByKey("maker", filterDraft["makerSearch"]),
               onReset: () => changeFilterByKey("maker"),
               filterContent: (
-                <div className='flex h-[60px] w-full items-center justify-center px-2'>
+                <div className='flex h-[60px] w-full items-center justify-center px-1'>
                   <TextInput
                     onchange={value => changeDraftFilter("makerSearch", value)}
                     placeholder='Filter by address or stake...'
@@ -633,7 +633,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
             href='https://app.dexhunter.io/'
             className='flex w-full items-center justify-end'
           >
-            <Image src={DexhunterIcon} className='h-6 w-6 rounded-full' />
+            <Image src={DexhunterIcon} className='h-6 w-6 rounded-max' />
           </a>
         );
       },
@@ -650,8 +650,8 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         onFilter: () => changeFilterByKey("dex", filterDraft["dex"]),
         onReset: () => changeFilterByKey("dex"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-4 py-2'>
-            <label className='flex items-center gap-2'>
+          <div className='flex flex-col gap-1 px-2 py-1'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='dex'
@@ -660,9 +660,9 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                 checked={filterDraft["dex"] === "SUNDAESWAP"}
                 onChange={e => changeDraftFilter("dex", e.currentTarget.value)}
               />
-              <span className='text-sm'>SundaeSwap</span>
+              <span className='text-text-sm'>SundaeSwap</span>
             </label>
-            <label className='flex items-center gap-2'>
+            <label className='flex items-center gap-1'>
               <input
                 type='radio'
                 name='dex'
@@ -671,7 +671,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                 checked={filterDraft["dex"] === "MINSWAP"}
                 onChange={e => changeDraftFilter("dex", e.currentTarget.value)}
               />
-              <span className='text-sm'>Minswap</span>
+              <span className='text-text-sm'>Minswap</span>
             </label>
           </div>
         ),
@@ -682,15 +682,15 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
   ];
 
   return (
-    <div className='flex w-full flex-col gap-2 rounded-lg sm:gap-0'>
-      <div className='flex flex-wrap items-center justify-between gap-y-1 pb-4'>
-        <div className='flex items-center gap-2'>
+    <div className='flex w-full flex-col gap-1 rounded-m sm:gap-0'>
+      <div className='flex flex-wrap items-center justify-between gap-y-1/2 pb-2'>
+        <div className='flex items-center gap-1'>
           {pulseDot && <PulseDot />}
           <h2 className={titleClassname ? titleClassname : ""}>
             Global trading activity
           </h2>
         </div>
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           <ExportButton columns={columns} items={items} />
           <TableSettingsDropdown
             rows={rows}
@@ -707,13 +707,13 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         </div>
       </div>
       {hasFilter && (
-        <div className='flex flex-wrap items-center gap-1 md:flex-nowrap'>
+        <div className='flex flex-wrap items-center gap-1/2 md:flex-nowrap'>
           {Object.entries(filter).map(
             ([key, value]) =>
               value && (
                 <div
                   key={key}
-                  className='mb-2 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-2 py-0.5 text-xs text-grayTextPrimary'
+                  className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
                 >
                   <span>{key[0].toUpperCase() + key.slice(1)}:</span>
                   {key === "maker" && (

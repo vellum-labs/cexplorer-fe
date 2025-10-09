@@ -211,11 +211,11 @@ const Dropdown: React.FC<DropdownProps> = ({
       <button
         ref={triggerRef}
         onClick={toggleDropdown}
-        className={`flex items-center justify-between gap-1 bg-transparent ${triggerClassName}`}
+        className={`gap-1/2 flex items-center justify-between bg-transparent ${triggerClassName}`}
         aria-haspopup='menu'
         aria-expanded={isOpen}
       >
-        <span className={`text-sm`}>{label}</span>
+        <span className={`text-text-sm`}>{label}</span>
         {!hideChevron && (
           <span>
             <ChevronDown
@@ -229,7 +229,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       {isOpen && (
         <div
           ref={contentRef}
-          className={`absolute bg-cardBg animate-in ${horizontalPosition === "left" ? "right-0" : "left-0"} ${verticalPosition === "down" ? "top-[calc(100%+3px)]" : "bottom-[calc(100%+3px)]"} z-20 rounded-lg bg-background p-2 text-sm shadow ${withBorder ? 'border border-border' : ''} ${poppoverClassname || ''}`}
+          className={`absolute bg-cardBg animate-in ${horizontalPosition === "left" ? "right-0" : "left-0"} ${verticalPosition === "down" ? "top-[calc(100%+3px)]" : "bottom-[calc(100%+3px)]"} rounded-m text-text-sm z-20 bg-background p-1 shadow-md ${withBorder ? "border border-border" : ""} ${poppoverClassname || ""}`}
           style={{
             width: `${width}`,
           }}
@@ -257,7 +257,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                   <Link
                     to={option.href}
                     search={option?.params ?? undefined}
-                    className={`relative rounded-lg hover:bg-darker hover:text-primary ${option.divider ? "after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:bg-border" : ""}`}
+                    className={`rounded-m relative hover:bg-darker hover:text-primary ${option.divider ? "after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:bg-border" : ""}`}
                     style={{
                       display: "block",
                       padding: "10px",
@@ -270,7 +270,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                   </Link>
                 ) : (
                   <div
-                    className={`relative flex w-full justify-between rounded-lg p-2.5 ${option.divider ? "after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:bg-border" : ""} hover:bg-darker hover:text-primary`}
+                    className={`rounded-m relative flex w-full justify-between p-1.5 ${option.divider ? "after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:bg-border" : ""} hover:bg-darker hover:text-primary`}
                     onClick={option?.onClick}
                     style={{
                       //   padding: "10px",
@@ -289,7 +289,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                         {option.nestedOptions && <ChevronRight size={15} />}
                         {activeSubmenu === option.label && (
                           <div
-                            className={`absolute left-[110%] top-0 z-50 rounded-xl bg-cardBg p-2 shadow border border-border`}
+                            className={`absolute left-[110%] top-0 z-50 rounded-l border border-border bg-cardBg p-1 shadow-md`}
                             style={{
                               width: width,
                             }}
@@ -298,7 +298,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                               <Link
                                 to={nestedOption?.href as any}
                                 key={index}
-                                className={`relative flex w-full justify-between rounded-lg text-text hover:bg-darker hover:text-primary ${option.divider ? "after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:bg-border" : ""}`}
+                                className={`rounded-m relative flex w-full justify-between text-text hover:bg-darker hover:text-primary ${option.divider ? "after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:bg-border" : ""}`}
                                 style={{
                                   padding: "10px",
                                   cursor: "pointer",

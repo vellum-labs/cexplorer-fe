@@ -160,8 +160,8 @@ export const EpochAnalyticsTabItem: FC = () => {
   }, [theme]);
 
   return (
-    <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-      <div className='flex w-full flex-col items-center justify-between gap-2 rounded-lg border border-border p-mobile md:p-desktop'>
+    <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+      <div className='rounded-m flex w-full flex-col items-center justify-between gap-1 border border-border p-mobile md:p-desktop'>
         {analyticsData.map(
           ({
             data,
@@ -260,8 +260,8 @@ export const EpochAnalyticsTabItem: FC = () => {
                 className='flex h-full w-full flex-col items-center'
               >
                 <div className='flex flex-col self-start'>
-                  <span className='text-lg font-semibold'>{title}</span>
-                  <span className='text-base font-semibold text-grayTextPrimary'>
+                  <span className='text-text-lg font-semibold'>{title}</span>
+                  <span className='text-text-md font-semibold text-grayTextPrimary'>
                     By epoch
                   </span>
                 </div>
@@ -272,7 +272,7 @@ export const EpochAnalyticsTabItem: FC = () => {
                     </div>
                   ) : (
                     <>
-                      <span className='absolute left-0 top-1/2 -translate-y-1/2 rotate-[270deg] text-xs font-bold text-[#6e7076] md:left-[4%] xl:left-[7%]'>
+                      <span className='text-text-xs absolute left-0 top-1/2 -translate-y-1/2 rotate-[270deg] font-bold text-[#6e7076] md:left-[4%] xl:left-[7%]'>
                         Values
                       </span>
                       <GraphWatermark />

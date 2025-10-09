@@ -73,17 +73,17 @@ export const GlobalSearchCell: FC<GlobalSearchCellProps> = ({
   return (
     <Link to={to[category]} params={params[category]}>
       <div
-        className='flex w-full cursor-pointer items-stretch justify-between border-b border-border pb-1 pt-3 transition-all duration-100 last:border-b-0 hover:bg-cardBg'
+        className='flex w-full cursor-pointer items-stretch justify-between border-b border-border pb-1/2 pt-1.5 transition-all duration-100 last:border-b-0 hover:bg-cardBg'
         onClick={() => {
           handleInput("blur");
           handleSearchChange("");
         }}
       >
-        <div className='flex w-fit max-w-[390px] flex-col break-words text-sm text-primary'>
+        <div className='flex w-fit max-w-[390px] flex-col break-words text-text-sm text-primary'>
           <span className='font-semibold'>
             {formatTitle ? formatString(title, "long") : title}
           </span>
-          <span className='text-xs text-grayTextPrimary'>
+          <span className='text-text-xs text-grayTextPrimary'>
             {["page", "article"].includes(category)
               ? rest?.url
               : formatString(ident, "long")}
@@ -94,15 +94,15 @@ export const GlobalSearchCell: FC<GlobalSearchCellProps> = ({
             {typeof rest.extra.value === "string" ? (
               <DateCell
                 time={rest.extra.value as string}
-                className='text-xs'
+                className='text-text-xs'
                 tabularNums={false}
               />
             ) : (
-              <span className='text-sm text-text'>
+              <span className='text-text-sm text-text'>
                 <AdaWithTooltip data={rest.extra.value} />
               </span>
             )}
-            <span className='text-sm text-grayTextPrimary'>
+            <span className='text-text-sm text-grayTextPrimary'>
               {rest.extra.type[0].toUpperCase() + rest.extra.type.slice(1)}
             </span>
           </div>

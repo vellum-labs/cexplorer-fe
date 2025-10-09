@@ -18,7 +18,7 @@ const WithdrawalsTabItem = () => {
     {
       key: "address",
       render: item => (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <AddressTypeInitialsBadge address={item.stake_addr} />
           <AddressCell address={item.stake_addr} />
         </div>
@@ -41,7 +41,7 @@ const WithdrawalsTabItem = () => {
   ];
 
   if (!withdrawals && !query.isLoading) {
-    return <p className='w-full text-center text-sm'>No withdrawals</p>;
+    return <p className='w-full text-center text-text-sm'>No withdrawals</p>;
   }
 
   if (query.isLoading) {

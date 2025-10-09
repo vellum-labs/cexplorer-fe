@@ -72,7 +72,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
       key: "hash",
       render: item => (
         <p
-          className='flex items-center gap-2 text-primary'
+          className='flex items-center gap-1 text-primary'
           title={item.tx.hash}
         >
           <Link
@@ -164,11 +164,11 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
           (item?.tx.size * 100) / (miscConst?.epoch_param?.max_tx_size ?? 0);
 
         return (
-          <div className='flex flex-col gap-3'>
+          <div className='flex flex-col gap-1.5'>
             <span className='text-right'>
               {((item?.tx.size ?? 0) / 1024).toFixed(2)}kB
             </span>
-            <div className='flex items-center justify-end gap-2'>
+            <div className='flex items-center justify-end gap-1'>
               <div className='relative h-3 w-2/3 overflow-hidden rounded-[4px] bg-[#FEC84B]'>
                 <span className='absolute -top-1 left-[45%] z-10 w-12 -translate-x-1/2 text-right text-[9px] font-semibold text-black'>
                   {(elapsedPercentage ?? 0).toFixed(2)}%
@@ -209,8 +209,8 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
 
   return (
     <section className={`flex w-full max-w-desktop flex-col`}>
-      <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-        <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
+      <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+        <div className='flex w-full flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
           {totalItems === undefined ? (
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
@@ -219,7 +219,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
             </h3>
           )}
           <div className='flex justify-end max-[435px]:w-full md:hidden'>
-            <div className='flex items-center gap-2 md:hidden'>
+            <div className='flex items-center gap-1 md:hidden'>
               <ExportButton columns={columns} items={items} />
               <TableSettingsDropdown
                 rows={rows}
@@ -240,7 +240,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
           </div>
         </div>
 
-        <div className='flex gap-2'>
+        <div className='flex gap-1'>
           <TableSearchInput
             placeholder='Search by tx hash...'
             value={tableSearch}
@@ -249,7 +249,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
             showSearchIcon
             showPrefixPopup={false}
           />
-          <div className='hidden items-center gap-2 md:flex'>
+          <div className='hidden items-center gap-1 md:flex'>
             <ExportButton columns={columns} items={items} />
             <TableSettingsDropdown
               rows={rows}

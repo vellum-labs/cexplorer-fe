@@ -108,7 +108,7 @@ const PoolDelegatorsTable = ({
     {
       key: "active_in",
       render: item => (
-        <div className='flex flex-col items-end gap-1'>
+        <div className='flex flex-col items-end gap-1/2'>
           {item?.live_pool?.delegation?.tx?.active_epoch_no ?? "-"}
         </div>
       ),
@@ -130,7 +130,7 @@ const PoolDelegatorsTable = ({
         const isStake = item.view.includes("stake");
 
         return (
-          <div className='flex items-center gap-1'>
+          <div className='flex items-center gap-1/2'>
             {icon && <img src={icon} alt='Icon' />}
             <Link
               className='text-primary'
@@ -154,14 +154,14 @@ const PoolDelegatorsTable = ({
     {
       key: "amount",
       render: item => (
-        <div className='flex flex-col items-end gap-1'>
+        <div className='flex flex-col items-end gap-1/2'>
           <AdaWithTooltip data={item?.live_stake ?? 0} />
         </div>
       ),
       title: (
         <div className='flex w-full justify-end'>
           <div
-            className='flex w-fit cursor-pointer items-center gap-1 text-right'
+            className='flex w-fit cursor-pointer items-center gap-1/2 text-right'
             onClick={() => {
               navigate({
                 search: {
@@ -203,7 +203,7 @@ const PoolDelegatorsTable = ({
       title: (
         <div className='flex w-full justify-end'>
           <div
-            className='flex w-fit cursor-pointer items-center gap-1 text-right'
+            className='flex w-fit cursor-pointer items-center gap-1/2 text-right'
             onClick={() => {
               navigate({
                 search: {
@@ -252,8 +252,8 @@ const PoolDelegatorsTable = ({
         const livePool = item?.live_pool;
 
         return (
-          <div className='flex w-full items-center justify-between gap-5 pl-10 xl:pl-0'>
-            <div className='flex min-w-[40%] items-center gap-2'>
+          <div className='flex w-full items-center justify-between gap-3 pl-5 xl:pl-0'>
+            <div className='flex min-w-[40%] items-center gap-1'>
               {previousPool?.id ? (
                 <PoolCell
                   poolInfo={{
@@ -269,7 +269,7 @@ const PoolDelegatorsTable = ({
 
             <ArrowRight size={15} className='w-[40px]' />
 
-            <div className='flex min-w-[40%] items-center gap-2'>
+            <div className='flex min-w-[40%] items-center gap-1'>
               {livePool?.id ? (
                 <PoolCell
                   poolInfo={{

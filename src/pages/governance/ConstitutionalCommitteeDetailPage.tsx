@@ -17,7 +17,7 @@ import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
 import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
 
 export const ConstituionalCommitteeDetailPage: FC = () => {
-  const [clickedUrl, setClickedUrl] = useState<string | null>(null);
+  const [clickedUrl, setClickedUrl] = useState<string | undefined>(undefined);
   const committeeListQuery = useFetchCommitteeList();
   const committeeDetailQuery = useFetchCommitteeDetail();
   const constitutionListQuery = useFetchConstitutionList();
@@ -58,26 +58,28 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
       title='Constitutional Committee'
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1'>Governance</span>,
+          label: <span className='inline pt-1/2'>Governance</span>,
           link: "/gov",
         },
         { label: "Constitutional committee" },
       ]}
       adsCarousel={false}
     >
-      <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+      <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         {isLoading ? (
-          <div className='flex w-full flex-wrap gap-4'>
+          <div className='flex w-full flex-wrap gap-2'>
             <LoadingSkeleton width='456px' height='158px' rounded='xl' />
             <LoadingSkeleton width='456px' height='158px' rounded='xl' />
             <LoadingSkeleton width='456px' height='158px' rounded='xl' />
           </div>
         ) : (
-          <div className='flex h-full w-full flex-wrap items-stretch gap-4 lg:flex-nowrap'>
-            <div className='bg-bgColor flex w-[456px] flex-grow-0 flex-col gap-4 rounded-xl border border-border p-5 shadow-sm'>
-              <h3 className='text-textPrimary text-lg font-semibold'>About</h3>
+          <div className='flex h-full w-full flex-wrap items-stretch gap-2 lg:flex-nowrap'>
+            <div className='bg-bgColor flex w-[456px] flex-grow-0 flex-col gap-2 rounded-l border border-border p-3 shadow-sm'>
+              <h3 className='text-textPrimary text-text-lg font-semibold'>
+                About
+              </h3>
 
-              <div className='flex items-center justify-start text-sm'>
+              <div className='flex items-center justify-start text-text-sm'>
                 <span className='min-w-[150px] text-grayTextSecondary'>
                   Members
                 </span>
@@ -87,7 +89,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
                 </span>
               </div>
 
-              <div className='flex items-center justify-start text-sm'>
+              <div className='flex items-center justify-start text-text-sm'>
                 <span className='min-w-[150px] text-grayTextSecondary'>
                   Voting threshold
                 </span>
@@ -104,18 +106,18 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
               </div>
             </div>
 
-            <div className='bg-bgColor flex w-[456px] flex-grow-0 flex-col gap-3 rounded-xl border border-border p-5 shadow-sm'>
-              <div className='flex items-center gap-1'>
+            <div className='bg-bgColor flex w-[456px] flex-grow-0 flex-col gap-1.5 rounded-l border border-border p-3 shadow-sm'>
+              <div className='flex items-center gap-1/2'>
                 <div className='flex h-8 w-8 items-center justify-center'>
                   <FileText size={18} className='text-primary' />
                 </div>
-                <h3 className='text-textPrimary text-lg font-semibold'>
+                <h3 className='text-textPrimary text-text-lg font-semibold'>
                   Constitution
                 </h3>
               </div>
 
               {constitution?.anchor?.data_hash && (
-                <div className='text-textPrimary break-words text-sm font-semibold'>
+                <div className='break-all text-text-sm font-semibold text-textPrimary'>
                   {constitution.anchor.data_hash}
                 </div>
               )}
@@ -125,7 +127,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
                   href={transformAnchorUrl(constitution.anchor.url)}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='break-all text-sm text-primary'
+                  className='break-all text-text-sm text-primary'
                   onClick={e => {
                     e.preventDefault();
                     const transformedUrl = transformAnchorUrl(
@@ -139,7 +141,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
               )}
             </div>
 
-            <div className='bg-bgColor w-[456px] flex-grow-0 overflow-hidden rounded-xl border border-border p-4 shadow-sm'>
+            <div className='bg-bgColor w-[456px] flex-grow-0 overflow-hidden rounded-l border border-border p-2 shadow-sm'>
               <AdsCarousel
                 singleItem
                 adCardClassname='!border-none !py-0'
@@ -150,11 +152,14 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
           </div>
         )}
       </section>
-      <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+      <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <Tabs withPadding={false} items={tabs} />
       </section>
       {clickedUrl && (
-        <SafetyLinkModal url={clickedUrl} onClose={() => setClickedUrl(null)} />
+        <SafetyLinkModal
+          url={clickedUrl}
+          onClose={() => setClickedUrl(undefined)}
+        />
       )}
     </PageBase>
   );

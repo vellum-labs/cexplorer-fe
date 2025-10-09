@@ -14,7 +14,7 @@ const PerformanceTabItem = memo(function PerfomanceTabItem() {
   return (
     <div>
       <div className='relative w-full'>
-        <h2 className='mb-2'>Performance</h2>
+        <h2 className='mb-1'>Performance</h2>
         <PoolPerformanceGraph
           activeStake={activeStake}
           blocks={blocks}
@@ -25,7 +25,7 @@ const PerformanceTabItem = memo(function PerfomanceTabItem() {
           roa={roa}
         />
       </div>
-      <div className='flex flex-col items-end gap-4'>
+      <div className='flex flex-col items-end gap-2'>
         <PoolPerfomanceTable poolId={id} />
       </div>
     </div>

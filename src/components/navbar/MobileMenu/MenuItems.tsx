@@ -87,7 +87,7 @@ export const MenuItems: FC<MenuItemsProps> = ({ setOpen, setActiveMenu }) => {
         ))}
       </Accordion>
       <button
-        className={`mt-3 flex h-[40px] w-full items-center gap-3 py-2 hover:underline`}
+        className={`mt-3 flex h-[40px] w-full items-center gap-1.5 py-1 hover:underline`}
         onClick={() => setActiveMenu("analytics")}
       >
         <LineChart height={20} width={20} />
@@ -100,7 +100,7 @@ export const MenuItems: FC<MenuItemsProps> = ({ setOpen, setActiveMenu }) => {
         />
       </button>
       <button
-        className={`mt-3 flex h-[40px] w-full items-center gap-3 py-2 hover:underline`}
+        className={`mt-3 flex h-[40px] w-full items-center gap-1.5 py-1 hover:underline`}
         onClick={() => setActiveMenu("more")}
       >
         <DotsVerticalIcon height={20} width={20} />
@@ -113,7 +113,7 @@ export const MenuItems: FC<MenuItemsProps> = ({ setOpen, setActiveMenu }) => {
         />
       </button>
       <SettingsMobile
-        className='mb-5 mt-8'
+        className='mb-3 mt-4'
         onClick={() => setActiveMenu("settings")}
       />
       <div className='flex w-full flex-col md:hidden'>
@@ -121,7 +121,7 @@ export const MenuItems: FC<MenuItemsProps> = ({ setOpen, setActiveMenu }) => {
           <WalletButton variant='long' onClick={() => setOpen(false)} />
         )}
       </div>
-      <div className='w-full pt-3' onClick={() => setOpen(false)}>
+      <div className='w-full pt-1.5' onClick={() => setOpen(false)}>
         <AdaPriceIndicator />
       </div>
     </>

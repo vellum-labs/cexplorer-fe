@@ -262,7 +262,7 @@ const GlobalTable = <T extends Record<string, any>>({
   return (
     <>
       <div
-        className={`thin-scrollbar relative w-full max-w-desktop rounded-xl border border-border ${scrollable && `overflow-x-auto xl:overflow-visible [&>div]:w-full`}`}
+        className={`thin-scrollbar relative w-full max-w-desktop rounded-l border border-border ${scrollable && `overflow-x-auto xl:overflow-visible [&>div]:w-full`}`}
         style={{
           transform: "rotateX(180deg)",
         }}
@@ -309,7 +309,7 @@ const GlobalTable = <T extends Record<string, any>>({
                       }}
                       className={`relative box-border border-b border-border bg-darker font-semibold ${isEmpty && !isLoading ? "first:rounded-l-xl last:rounded-r-xl" : "first:rounded-tl-xl last:rounded-tr-xl"} ${isMobileDevice() || !onOrderChange ? "cursor-pointer" : "cursor-move"} last:pr-4 ${firstClickedColumnIndex !== null && firstClickedColumnIndex !== index && `border border-dashed border-yellow-400 bg-yellow-200/20`} table-cell first:pl-4 ${firstClickedColumnIndex !== null && "text-text [&>p]:text-text"} ${firstClickedColumnIndex === index || (isDragging && draggedIndex === index && "border border-dashed border-text text-grayTextPrimary [&>p]:text-grayTextPrimary")} ${overIndex === index && "bg-border"}`}
                     >
-                      <div className='flex items-center gap-1'>
+                      <div className='flex items-center gap-1/2'>
                         {title}
                         {filter && (
                           <Funnel
@@ -363,7 +363,7 @@ const GlobalTable = <T extends Record<string, any>>({
                               height: `${rowHeight}px`,
                               maxHeight: `${rowHeight}px`,
                             }}
-                            className={`${index % 2 !== 0 ? "bg-darker" : ""} ${indexToRound === index ? "first:rounded-bl-xl last:rounded-br-xl" : ""} table-cell py-2 text-left first:pl-4 last:pr-4 [&>a]:text-primary ${className}`}
+                            className={`${index % 2 !== 0 ? "bg-darker" : ""} ${indexToRound === index ? "first:rounded-bl-xl last:rounded-br-xl" : ""} table-cell py-1 text-left first:pl-4 last:pr-4 [&>a]:text-primary ${className}`}
                           >
                             <LoadingSkeleton height='20px' />
                           </TableCell>
@@ -406,7 +406,7 @@ const GlobalTable = <T extends Record<string, any>>({
                                 height: `${rowHeight}px`,
                                 maxHeight: `${rowHeight}px`,
                               }}
-                              className={`${indexToRound === index ? "first:rounded-bl-xl last:rounded-br-xl" : ""} table-cell py-2 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover ${className}`}
+                              className={`${indexToRound === index ? "first:rounded-bl-xl last:rounded-br-xl" : ""} table-cell py-1 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover ${className}`}
                             >
                               {!standByRanking
                                 ? item && render(item)
@@ -451,7 +451,7 @@ const GlobalTable = <T extends Record<string, any>>({
                               height: `${rowHeight}px`,
                               maxHeight: `${rowHeight}px`,
                             }}
-                            className={`${indexToRound === index ? "first:rounded-bl-xl last:rounded-br-xl" : ""} table-cell py-2 text-left first:pl-4 last:pr-4`}
+                            className={`${indexToRound === index ? "first:rounded-bl-xl last:rounded-br-xl" : ""} table-cell py-1 text-left first:pl-4 last:pr-4`}
                           >
                             <LoadingSkeleton height='20px' />
                           </TableCell>
@@ -487,7 +487,7 @@ const GlobalTable = <T extends Record<string, any>>({
         )}
       {(type === "default" && defaultQueryPagination && !!items?.length) ||
         (type === "infinite" && !!items?.length && (
-          <span className='mt-2 flex w-full justify-center text-sm text-grayTextPrimary'>
+          <span className='mt-1 flex w-full justify-center text-text-sm text-grayTextPrimary'>
             {totalItems > 0 && items?.length
               ? `Displaying ${items.length > totalItems ? totalItems : items.length} out of ${totalItems} items`
               : "No items for displaying"}

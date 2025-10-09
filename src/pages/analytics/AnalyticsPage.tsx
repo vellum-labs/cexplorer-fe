@@ -37,32 +37,32 @@ export const AnalyticsPage = () => {
       title='Analytics'
       breadcrumbItems={[{ label: "Analytics" }]}
     >
-      <section className='mt-4 grid w-full max-w-desktop grid-cols-1 gap-5 px-mobile pb-5 md:grid-cols-2 md:px-desktop'>
+      <section className='mt-2 grid w-full max-w-desktop grid-cols-1 gap-3 px-mobile pb-3 md:grid-cols-2 md:px-desktop'>
         {Object.keys(options)
           .filter(key => options[key].options.length)
           .map(key => (
             <div
               key={key}
-              className='flex flex-col gap-2 rounded-xl border border-border p-3 font-medium'
+              className='flex flex-col gap-1 rounded-l border border-border p-1.5 font-medium'
             >
               {<img src={images[key]} alt='Pools' />}
               {options[key].labelHref ? (
                 <Link
                   to={options[key].labelHref}
-                  className='border-b border-border pb-2 text-lg text-primary underline'
+                  className='border-b border-border pb-1 text-text-lg text-primary underline'
                 >
                   {options[key].label}
                 </Link>
               ) : (
-                <p className='border-b border-border pb-2 text-lg text-text'>
+                <p className='border-b border-border pb-1 text-text-lg text-text'>
                   {options[key].label}
                 </p>
               )}
-              <div className='mt-2 grid grid-flow-col grid-cols-2 grid-rows-4 gap-2'>
+              <div className='mt-1 grid grid-flow-col grid-cols-2 grid-rows-4 gap-1'>
                 {options[key].options.map(option => (
                   <Link
                     to={generateUrlWithParams(option.href, option.params)}
-                    className='text-sm text-primary underline'
+                    className='text-text-sm text-primary underline'
                   >
                     {option.label}
                   </Link>

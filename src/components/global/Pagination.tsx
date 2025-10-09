@@ -68,8 +68,8 @@ export const Pagination = ({
   };
 
   return (
-    <div className='flex w-full flex-col items-center gap-5'>
-      <PaginationComponent className='mt-4'>
+    <div className='flex w-full flex-col items-center gap-3'>
+      <PaginationComponent className='mt-2'>
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious
@@ -182,10 +182,10 @@ const PageJump = ({
   };
 
   return (
-    <div className='flex items-center gap-2 text-sm'>
+    <div className='flex items-center gap-1 text-text-sm'>
       {/* <span>Jump to:</span>{" "} */}
       <input
-        className='h-8 w-16 rounded-lg border border-border bg-background p-1 text-center text-text'
+        className='h-8 w-16 rounded-m border border-border bg-background p-1/2 text-center text-text'
         value={pageJumpValue}
         onChange={e => handlePageJump(e.target.value)}
         onBlur={e => handleChange(e.target.value)}

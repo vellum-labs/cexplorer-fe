@@ -98,7 +98,7 @@ export const AdminPageDetail = () => {
   }, [data, isHTML]);
 
   return (
-    <main className='relative flex min-h-minHeight max-w-desktop flex-col gap-2 p-mobile md:p-desktop'>
+    <main className='relative flex min-h-minHeight max-w-desktop flex-col gap-1 p-mobile md:p-desktop'>
       <Helmet>
         <meta charSet='utf-8' />
         <title>Admin page detail | Cexplorer.io</title>
@@ -126,11 +126,11 @@ export const AdminPageDetail = () => {
         </BreadcrumbList>
       </Breadcrumb>
       {query.isLoading ? (
-        <div className='mt-8 flex w-full justify-center'>
+        <div className='mt-4 flex w-full justify-center'>
           <SpinningLoader />
         </div>
       ) : !data && !query.isLoading ? (
-        <p className='mt-8 flex w-full justify-center'>
+        <p className='mt-4 flex w-full justify-center'>
           You don't have admin permission.
         </p>
       ) : (
@@ -152,10 +152,10 @@ export const AdminPageDetail = () => {
             role='button'
             onKeyDown={() => textareaRef.current?.focus()}
             onClick={() => textareaRef.current?.focus()}
-            className='relative rounded-lg border border-border bg-darker'
+            className='relative rounded-m border border-border bg-darker'
           >
             <textarea
-              className='min-h-[800px] w-full resize-none bg-transparent p-2 font-mono text-text caret-text outline-none'
+              className='min-h-[800px] w-full resize-none bg-transparent p-1 font-mono text-text caret-text outline-none'
               ref={textareaRef}
               value={code}
               onChange={e => setCode(e.target.value)}

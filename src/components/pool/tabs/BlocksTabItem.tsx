@@ -24,7 +24,7 @@ const BlocksTabItem: FC<BlocksTabItemProps> = ({
 
   return (
     <div>
-      <h2 className='mb-2'>Blocks</h2>
+      <h2 className='mb-1'>Blocks</h2>
       <MintedBlocksGraph
         mintedBlocks={mintedBlocks}
         dates={dates}
@@ -35,7 +35,7 @@ const BlocksTabItem: FC<BlocksTabItemProps> = ({
         blockCounts={blockCounts}
         probabilities={probabilities}
       />
-      <div className='flex flex-col items-end gap-4'>
+      <div className='flex flex-col items-end gap-2'>
         <PoolBlocksTable poolId={id} />
       </div>
     </div>

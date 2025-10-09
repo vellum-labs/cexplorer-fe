@@ -63,8 +63,8 @@ const TxDetailOverview = ({ query }: Props) => {
     {
       label: "Hash",
       value: (
-        <div className='flex items-center gap-1'>
-          <span title={data?.hash} className='text-sm'>
+        <div className='flex items-center gap-1/2'>
+          <span title={data?.hash} className='text-text-sm'>
             {formatString(data?.hash || "", "long")}
           </span>
           <Copy copyText={data?.hash || ""} />
@@ -74,11 +74,11 @@ const TxDetailOverview = ({ query }: Props) => {
     {
       label: "Date",
       value: (
-        <div className='flex flex-wrap items-center gap-1 text-sm'>
+        <div className='flex flex-wrap items-center gap-1/2 text-text-sm'>
           <span className='font-medium leading-none'>
             <DateCell className='' time={data?.block?.time} />
           </span>
-          <span className='flex items-center gap-1 pr-1 text-grayTextPrimary'>
+          <span className='flex items-center gap-1/2 pr-1/2 text-grayTextPrimary'>
             ({formatDate(data?.block?.time ? data?.block?.time : undefined)}){" "}
             <Clock size={14} className='h-full shrink-0 text-grayTextPrimary' />
           </span>
@@ -91,7 +91,7 @@ const TxDetailOverview = ({ query }: Props) => {
         <Link
           to='/block/$hash'
           params={{ hash: String(data?.block?.hash) || "" }}
-          className='text-sm font-medium text-primary'
+          className='text-text-sm font-medium text-primary'
         >
           {formatNumber(data?.block?.no ?? 0)}
         </Link>
@@ -108,7 +108,7 @@ const TxDetailOverview = ({ query }: Props) => {
     {
       label: "Epoch",
       value: (
-        <span className='cursor-pointer text-sm font-medium text-primary'>
+        <span className='cursor-pointer text-text-sm font-medium text-primary'>
           <Link
             to='/epoch/$no'
             params={{ no: String(data?.epoch_param?.epoch_no ?? 0) }}
@@ -123,11 +123,11 @@ const TxDetailOverview = ({ query }: Props) => {
       ? {
           label: "Slot",
           value: (
-            <div className='flex flex-wrap items-center gap-1 text-sm leading-none'>
+            <div className='flex flex-wrap items-center gap-1/2 text-text-sm leading-none'>
               <span className='font-medium text-grayTextPrimary'>
                 {data?.invalid_before ? formatNumber(data?.block.slot_no) : "-"}
               </span>
-              <span className='pr-1 text-grayTextPrimary'>
+              <span className='pr-1/2 text-grayTextPrimary'>
                 (epoch slot{" "}
                 {getEpochSlot(data.block.slot_no, data.epoch_param.epoch_no)})
               </span>
@@ -139,7 +139,7 @@ const TxDetailOverview = ({ query }: Props) => {
       ? {
           label: "TTL",
           value: (
-            <div className='flex items-center gap-1 text-sm'>
+            <div className='flex items-center gap-1/2 text-text-sm'>
               <Lock
                 size={16}
                 strokeWidth={2.5}
@@ -162,7 +162,7 @@ const TxDetailOverview = ({ query }: Props) => {
       ? {
           label: "Deposit",
           value: (
-            <div className='flex items-center gap-1 text-sm'>
+            <div className='flex items-center gap-1/2 text-text-sm'>
               <span className='font-medium'>
                 <AdaWithTooltip data={data.deposit} />
               </span>
@@ -173,9 +173,9 @@ const TxDetailOverview = ({ query }: Props) => {
     {
       label: "Confirmations",
       value: (
-        <div className='flex items-center gap-[2.5px] text-sm'>
+        <div className='flex items-center gap-[2.5px] text-text-sm'>
           {confirmations[1] < 3 && (
-            <CircleX size={15} className='translate-y-[1px] text-red-500' />
+            <CircleX size={15} className='text-red-500 translate-y-[1px]' />
           )}
           {confirmations[1] > 2 && confirmations[1] < 9 && (
             <CircleAlert
@@ -233,7 +233,7 @@ const TxDetailOverview = ({ query }: Props) => {
   }, [data?.metadata]);
 
   return (
-    <div className='flex h-full w-full max-w-desktop flex-col gap-5 px-mobile lg:flex-row lg:px-desktop'>
+    <div className='flex h-full w-full max-w-desktop flex-col gap-3 px-mobile lg:flex-row lg:px-desktop'>
       {!data ? (
         <>
           <LoadingSkeleton
@@ -241,7 +241,7 @@ const TxDetailOverview = ({ query }: Props) => {
             rounded='xl'
             className='grow basis-[450px]'
           />
-          <section className='flex w-full flex-col gap-5 lg:h-[400px] lg:w-[400px] lg:justify-between'>
+          <section className='flex w-full flex-col gap-3 lg:h-[400px] lg:w-[400px] lg:justify-between'>
             <LoadingSkeleton
               className='basis-[400px] lg:basis-[400px]'
               height='110px'
@@ -267,10 +267,10 @@ const TxDetailOverview = ({ query }: Props) => {
           <OverviewCard
             title='Transaction Overview'
             overviewList={overviewListItems}
-            className='max-h-[450px] pt-4'
+            className='max-h-[450px] pt-2'
             columnGap='clamp(48px, 8vw, 150px)'
           />
-          <section className='flex w-full flex-col gap-5 lg:h-[400px] lg:w-[400px] lg:justify-between'>
+          <section className='flex w-full flex-col gap-5 lg:h-[400px] lg:w-[400px]'>
             <MintedByCard
               poolInfo={data?.pool}
               isGenesisBlock={data?.block?.epoch_no === null}

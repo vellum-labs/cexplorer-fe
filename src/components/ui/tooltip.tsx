@@ -153,7 +153,7 @@ export const Tooltip: FC<TooltipProps> = ({
             zIndex: 9999,
           }}
           className={cn(
-            "rounded-xl border border-border bg-background px-4 py-2 text-sm shadow transition-opacity duration-150 empty:hidden",
+            "rounded-l border border-border bg-background px-2 py-1 text-text-sm shadow-md transition-opacity duration-150 empty:hidden",
             visible ? "opacity-100" : "opacity-0",
           )}
           onMouseEnter={showTooltip}

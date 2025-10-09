@@ -34,10 +34,10 @@ const TxContentTable = ({ title, data, sort, isOutput }: Props) => {
   if (deposit) totalAda -= deposit;
 
   return (
-    <section className='m-0 flex h-full w-full flex-col rounded-xl border border-border shadow'>
-      <div className='flex w-full justify-between rounded-tl-xl rounded-tr-xl border-b border-border bg-darker px-4 py-2 text-sm font-medium text-grayTextPrimary'>
+    <section className='m-0 flex h-full w-full flex-col rounded-l border border-border shadow-md'>
+      <div className='flex w-full justify-between rounded-tl-l rounded-tr-l border-b border-border bg-darker px-2 py-1 text-text-sm font-medium text-grayTextPrimary'>
         <span>{title}</span>
-        <span className='text-right text-sm font-normal text-grayTextPrimary'>
+        <span className='text-right text-text-sm font-regular text-grayTextPrimary'>
           Total: <AdaWithTooltip data={totalAda ?? 0} />
         </span>
       </div>
@@ -45,7 +45,7 @@ const TxContentTable = ({ title, data, sort, isOutput }: Props) => {
       {content?.map((utxo, index) => (
         <div
           key={index}
-          className='flex min-h-[70px] justify-between border-b border-border px-4 py-3 last:rounded-bl-xl last:rounded-br-xl last:border-b-0 odd:bg-darker'
+          className='flex min-h-[70px] justify-between border-b border-border px-2 py-1.5 last:rounded-bl-xl last:rounded-br-xl last:border-b-0 odd:bg-darker'
         >
           <div className='flex flex-col justify-between'>
             <AddressWithTxBadges utxo={utxo} isOutput={isOutput} />
@@ -55,7 +55,7 @@ const TxContentTable = ({ title, data, sort, isOutput }: Props) => {
                 asset={utxo.asset}
               />
             )}
-            <div className='flex w-full flex-wrap gap-1'>
+            <div className='flex w-full flex-wrap gap-1/2'>
               {utxo?.asset &&
                 utxo.asset.length > 0 &&
                 utxo?.asset?.map((asset, index) => (
@@ -67,7 +67,7 @@ const TxContentTable = ({ title, data, sort, isOutput }: Props) => {
                 ))}
             </div>
           </div>
-          <span className='inline-block w-fit text-nowrap text-sm'>
+          <span className='inline-block w-fit text-nowrap text-text-sm'>
             <AdaWithTooltip data={utxo.value} />
           </span>
         </div>

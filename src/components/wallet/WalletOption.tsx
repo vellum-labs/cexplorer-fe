@@ -24,7 +24,7 @@ const WalletOption: React.FC<Props> = ({
 
   return (
     <button
-      className={`relative mb-[15px] flex h-20 w-full items-center justify-between rounded-xl border border-border py-[20px] pl-[65px] pr-[15px] hover:bg-darker ${
+      className={`relative mb-[15px] flex h-20 w-full items-center justify-between rounded-l border border-border py-[20px] pl-[65px] pr-[15px] hover:bg-darker ${
         supported && walletType !== name
           ? "cursor-pointer border border-border hover:text-primary"
           : "cursor-not-allowed"
@@ -49,12 +49,12 @@ const WalletOption: React.FC<Props> = ({
           height={30}
         />
       </div>
-      <span className='flex items-center text-lg font-medium'>
+      <span className='flex items-center text-text-lg font-medium'>
         {walletInfos[name]?.name.slice(0, 1).toUpperCase() +
           walletInfos[name]?.name.slice(1)}
       </span>
       {walletType === name && (
-        <span className='flex items-center text-sm font-bold text-green-500'>
+        <span className='flex items-center text-text-sm font-bold text-green-500'>
           Connected
         </span>
       )}

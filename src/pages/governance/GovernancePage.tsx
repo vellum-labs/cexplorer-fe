@@ -133,17 +133,19 @@ export const GovernancePage: FC = () => {
         );
 
         return (
-          <div className='flex flex-col gap-1'>
+          <div className='gap-1/2 flex flex-col'>
             <DateCell time={item?.tx?.time} />
             {epoch && (
-              <div className='flex items-center gap-1'>
-                <span className='text-xs text-grayTextPrimary'>Epoch - </span>
+              <div className='gap-1/2 flex items-center'>
+                <span className='text-text-xs text-grayTextPrimary'>
+                  Epoch -{" "}
+                </span>
                 <Link
                   to='/epoch/$no'
                   params={{
                     no: String(epoch),
                   }}
-                  className='text-xs text-primary'
+                  className='text-text-xs text-primary'
                 >
                   {epoch}
                 </Link>
@@ -196,13 +198,13 @@ export const GovernancePage: FC = () => {
                 {item?.anchor?.offchain?.name ?? "⚠️ Invalid metadata"}
               </Link>
             }
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-1'>
               <Link
                 to='/gov/action/$id'
                 params={{
                   id: item?.ident?.id,
                 }}
-                className={"text-xs"}
+                className={"text-text-xs"}
                 disabled={true}
               >
                 {formatString(item?.ident?.id, "long")}
@@ -256,17 +258,19 @@ export const GovernancePage: FC = () => {
         );
 
         return (
-          <div className='flex flex-col gap-1'>
+          <div className='gap-1/2 flex flex-col'>
             <DateCell time={String(endTime)} />
             {item?.expired_epoch && (
-              <div className='flex items-center gap-1'>
-                <span className='text-xs text-grayTextPrimary'>Epoch - </span>
+              <div className='gap-1/2 flex items-center'>
+                <span className='text-text-xs text-grayTextPrimary'>
+                  Epoch -{" "}
+                </span>
                 <Link
                   to='/epoch/$no'
                   params={{
                     no: item?.expired_epoch,
                   }}
-                  className='text-xs text-primary'
+                  className='text-text-xs text-primary'
                 >
                   {item.expired_epoch}
                 </Link>
@@ -293,7 +297,7 @@ export const GovernancePage: FC = () => {
       ),
       title: "Status",
       visible: columnsVisibility.status,
-      widthPx: 40,
+      widthPx: 55,
     },
     {
       key: "progress",
@@ -335,7 +339,7 @@ export const GovernancePage: FC = () => {
       icon: <Asterisk className='text-primary' />,
       label: "Governance actions",
       content: (
-        <p className='text-2xl font-semibold'>
+        <p className='text-display-xs font-semibold'>
           {drepStat?.gov_action[0]?.total
             ? drepStat?.gov_action[0]?.total
             : "-"}
@@ -343,30 +347,30 @@ export const GovernancePage: FC = () => {
       ),
       footer: (
         <div className='flex flex-wrap'>
-          <div className='flex w-fit items-center gap-1 pr-[26px]'>
-            <span className='text-sm text-grayTextPrimary'>Active</span>
-            <span className='text-sm text-[#10B981]'>
+          <div className='gap-1/2 flex w-fit items-center pr-[26px]'>
+            <span className='text-text-sm text-grayTextPrimary'>Active</span>
+            <span className='text-text-sm text-[#10B981]'>
               {drepStat?.gov_action[0]?.active || 0}
             </span>
           </div>
-          <div className='flex w-fit items-center gap-1 pr-[26px]'>
-            <span className='text-sm text-grayTextPrimary'>Ratified</span>
-            <span className='text-sm text-[#00A9E3]'>
+          <div className='gap-1/2 flex w-fit items-center pr-[26px]'>
+            <span className='text-text-sm text-grayTextPrimary'>Ratified</span>
+            <span className='text-text-sm text-[#00A9E3]'>
               {drepStat?.gov_action[0]?.ratified || 0}
             </span>
           </div>
           {!!drepStat?.gov_action[0]?.enacted && (
-            <div className='flex w-fit items-center gap-1 pr-[26px]'>
-              <span className='text-sm text-grayTextPrimary'>Enacted</span>
-              <span className='text-sm text-[#876ee1]'>
+            <div className='gap-1/2 flex w-fit items-center pr-[26px]'>
+              <span className='text-text-sm text-grayTextPrimary'>Enacted</span>
+              <span className='text-text-sm text-[#876ee1]'>
                 {drepStat?.gov_action[0]?.enacted}
               </span>
             </div>
           )}
           {!!drepStat?.gov_action[0]?.expires && (
-            <div className='flex w-fit items-center gap-1 pr-[26px]'>
-              <span className='text-sm text-grayTextPrimary'>Expired</span>
-              <span className='text-sm text-[#F79009]'>
+            <div className='gap-1/2 flex w-fit items-center pr-[26px]'>
+              <span className='text-text-sm text-grayTextPrimary'>Expired</span>
+              <span className='text-text-sm text-[#F79009]'>
                 {drepStat?.gov_action[0]?.expires}
               </span>
             </div>
@@ -379,21 +383,21 @@ export const GovernancePage: FC = () => {
       icon: <Asterisk className='text-primary' />,
       label: "Governance parties",
       content: (
-        <div className='flex items-center justify-between gap-2'>
+        <div className='flex items-center justify-between gap-1'>
           <Link to='/drep'>
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-1'>
               <User className='text-primary' />
               <span className='text-primary'>DReps</span>
             </div>
           </Link>
           <Link to='/pool'>
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-1'>
               <Route className='text-primary' />
               <span className='text-primary'>SPOs</span>
             </div>
           </Link>
           <Link to='/gov/cc'>
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-1'>
               <Landmark className='text-primary' />
               <span className='text-primary'>CC</span>
             </div>
@@ -427,15 +431,15 @@ export const GovernancePage: FC = () => {
       title='Governance Actions'
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1'>Governance</span>,
+          label: <span className='pt-1/2 inline'>Governance</span>,
           link: "/gov",
         },
         { label: "Governance actions" },
       ]}
       adsCarousel={false}
     >
-      <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
-        <div className='flex h-full w-full flex-wrap items-stretch gap-4 lg:flex-nowrap'>
+      <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
+        <div className='flex h-full w-full flex-wrap items-stretch gap-2 lg:flex-nowrap'>
           {drepStatQuery.isLoading || drepStatQuery.isFetching ? (
             <>
               <LoadingSkeleton
@@ -483,16 +487,16 @@ export const GovernancePage: FC = () => {
             )
           )}
         </div>
-        <div className='my-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-          <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap md:hidden'>
-            <div className='flex w-full justify-between gap-1 md:hidden'>
+        <div className='my-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+          <div className='flex w-full flex-wrap items-center justify-between gap-1 sm:flex-nowrap md:hidden'>
+            <div className='gap-1/2 flex w-full justify-between md:hidden'>
               <SortBy
                 selectItems={selectItems}
                 selectedItem={selectedItem}
                 setSelectedItem={setSelectedItem as any}
                 labelName='Status: '
               />
-              <div className='flex items-center gap-2 md:hidden'>
+              <div className='flex items-center gap-1 md:hidden'>
                 <ExportButton columns={columns} items={items} />
                 <TableSettingsDropdown
                   rows={rows}
@@ -520,7 +524,7 @@ export const GovernancePage: FC = () => {
             className='hidden w-fit md:flex'
             labelName='Status: '
           />
-          <div className='flex gap-2'>
+          <div className='flex gap-1'>
             <TableSearchInput
               placeholder='Search  your results...'
               value={tableSearch}
@@ -529,7 +533,7 @@ export const GovernancePage: FC = () => {
               showSearchIcon
               showPrefixPopup={false}
             />
-            <div className='hidden items-center gap-2 md:flex'>
+            <div className='hidden items-center gap-1 md:flex'>
               <ExportButton columns={columns} items={items} />
               <TableSettingsDropdown
                 rows={rows}

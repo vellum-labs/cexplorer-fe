@@ -33,12 +33,12 @@ export const ExportGraphModal: FC<ExportGraphModalProps> = ({
 
   return (
     <Modal minWidth='95%' maxWidth='400px' maxHeight='95%' onClose={onClose}>
-      <div className='flex flex-col gap-6'>
-        <div className='flex h-full w-full flex-col gap-6'>
-          <span className='text-lg font-semibold'>Export graph</span>
+      <div className='flex flex-col gap-3'>
+        <div className='flex h-full w-full flex-col gap-3'>
+          <span className='text-text-lg font-semibold'>Export graph</span>
         </div>
-        <div className='flex flex-col gap-4'>
-          <div className='flex items-start gap-1'>
+        <div className='flex flex-col gap-2'>
+          <div className='flex items-start gap-1/2'>
             <input
               type='radio'
               id='csv'
@@ -47,13 +47,13 @@ export const ExportGraphModal: FC<ExportGraphModalProps> = ({
               onChange={() => setSelectedItem("csv")}
             />
             <div className='flex h-full flex-col'>
-              <span className='text-sm font-medium'>CSV</span>
-              <span className='text-grayTextPrimary text-sm'>
+              <span className='text-text-sm font-medium'>CSV</span>
+              <span className='text-grayTextPrimary text-text-sm'>
                 Great for easy viewing in spreadsheet tools.
               </span>
             </div>
           </div>
-          <div className='flex items-start gap-1'>
+          <div className='flex items-start gap-1/2'>
             <input
               type='radio'
               id='json'
@@ -62,27 +62,27 @@ export const ExportGraphModal: FC<ExportGraphModalProps> = ({
               onChange={() => setSelectedItem("png")}
             />
             <div className='flex h-full flex-col'>
-              <span className='text-sm font-medium'>PNG</span>
-              <span className='text-grayTextPrimary text-sm'>
+              <span className='text-text-sm font-medium'>PNG</span>
+              <span className='text-grayTextPrimary text-text-sm'>
                 Ideal for sharing high-quality images with lossless compression.
               </span>
             </div>
           </div>
         </div>
-        <div className='flex items-center justify-between gap-3'>
+        <div className='flex items-center justify-between gap-1.5'>
           <button
-            className='flex h-[40px] w-full max-w-[170px] flex-1 cursor-pointer items-center justify-center rounded-md border border-border'
+            className='flex h-[40px] w-full max-w-[170px] flex-1 cursor-pointer items-center justify-center rounded-s border border-border'
             onClick={onClose}
           >
-            <span className='text-base font-semibold'>Cancel</span>
+            <span className='text-text-md font-semibold'>Cancel</span>
           </button>
           <button
-            className={`flex h-[40px] w-full max-w-[170px] flex-1 items-center justify-center gap-1 rounded-md border border-border transition-all duration-100 ${selectedItem ? "cursor-pointer" : "text-grayTextPrimary"}`}
+            className={`flex h-[40px] w-full max-w-[170px] flex-1 items-center justify-center gap-1/2 rounded-s border border-border transition-all duration-100 ${selectedItem ? "cursor-pointer" : "text-grayTextPrimary"}`}
             disabled={!selectedItem}
             onClick={exportData}
           >
             <Download size={20} className='text-inherit' />
-            <span className='text-sm font-medium'>Export</span>
+            <span className='text-text-sm font-medium'>Export</span>
           </button>
         </div>
       </div>

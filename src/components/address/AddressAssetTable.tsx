@@ -130,7 +130,7 @@ export const AddressAssetTable: FC<AddressAssetTableProps> = ({
         }
 
         return (
-          <p className={`w-full text-right text-sm text-grayTextPrimary`}>
+          <p className={`text-text-sm w-full text-right text-grayTextPrimary`}>
             {lovelaceToAda(item.market?.price)}
           </p>
         );

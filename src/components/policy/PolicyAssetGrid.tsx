@@ -33,13 +33,13 @@ export const PolicyAssetGrid: FC<PolicyAssetGridProps> = ({
 
   return (
     <>
-      <div className='grid grid-cols-[repeat(auto-fill,_minmax(240px,_1fr))] gap-3'>
+      <div className='grid grid-cols-[repeat(auto-fill,_minmax(240px,_1fr))] gap-1.5'>
         {query.isLoading
           ? Array.from({ length: itemsPerPage }, () => "skeleton").map(
               (_, i) => (
                 <div
                   key={i}
-                  className='flex w-[240px] flex-col gap-1 rounded-lg border border-border'
+                  className='flex w-[240px] flex-col gap-1/2 rounded-m border border-border'
                 >
                   <LoadingSkeleton width='100%' height='280px' />
                 </div>
@@ -62,7 +62,7 @@ export const PolicyAssetGrid: FC<PolicyAssetGridProps> = ({
                   to='/asset/$fingerprint'
                   params={{ fingerprint }}
                   key={`${item.stat.asset.last_mint}_${i}`}
-                  className='flex flex-col items-center gap-1 overflow-hidden break-words rounded-lg border border-border bg-cardBg'
+                  className='flex flex-col items-center gap-1/2 overflow-hidden break-words rounded-m border border-border bg-cardBg'
                 >
                   <Image
                     fullWidth
@@ -80,7 +80,7 @@ export const PolicyAssetGrid: FC<PolicyAssetGridProps> = ({
                       .slice(0, 3)
                       .join("")}
                   />
-                  <p className='self-start px-2 py-4 text-lg font-bold text-primary'>
+                  <p className='self-start px-1 py-2 text-text-lg font-bold text-primary'>
                     {renderAssetName({ name: item.name })}
                   </p>
                 </Link>

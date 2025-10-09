@@ -97,12 +97,12 @@ export const PoolBirthdays: FC = () => {
         return (
           <div className='flex justify-end'>
             <div
-              className='flex w-fit items-center justify-center gap-[0.5px] rounded-md border border-border px-2 py-[2px]'
+              className='flex w-fit items-center justify-center gap-[0.5px] rounded-s border border-border px-1 py-[2px]'
               style={{
                 boxShadow: "0px 1px 2px 0px #1018280D",
               }}
             >
-              <span className='text-sm font-medium'>{birthday?.year}</span>
+              <span className='text-text-sm font-medium'>{birthday?.year}</span>
               <sup className='pt-[4px] font-medium'>{birthday?.suffix}</sup>
             </div>
           </div>
@@ -127,8 +127,8 @@ export const PoolBirthdays: FC = () => {
 
         return (
           <div className='flex flex-col items-end'>
-            <span className='text-sm'>{formattedDate}</span>
-            <span className='text-sm'>{formattedTime}</span>
+            <span className='text-text-sm'>{formattedDate}</span>
+            <span className='text-text-sm'>{formattedTime}</span>
           </div>
         );
       },
@@ -193,9 +193,9 @@ export const PoolBirthdays: FC = () => {
       title='Pool Birthdays'
       breadcrumbItems={[{ label: "Pool Birthdays" }]}
     >
-      <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
-        <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-          <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
+      <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
+        <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+          <div className='flex w-full flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
             {poolsBirthdayQuery.isLoading || poolsBirthdayQuery.isFetching ? (
               <LoadingSkeleton height='27px' width={"220px"} />
             ) : totalItems > 0 ? (
@@ -206,7 +206,7 @@ export const PoolBirthdays: FC = () => {
               ""
             )}
             <div className='flex w-full justify-end md:hidden'>
-              <div className='flex items-center gap-2 md:hidden'>
+              <div className='flex items-center gap-1 md:hidden'>
                 <ExportButton columns={columns} items={items} />
                 <TableSettingsDropdown
                   rows={rows}
@@ -226,7 +226,7 @@ export const PoolBirthdays: FC = () => {
               </div>
             </div>
           </div>
-          <div className='hidden items-center gap-2 md:flex'>
+          <div className='hidden items-center gap-1 md:flex'>
             <ExportButton columns={columns} items={items} />
             <TableSettingsDropdown
               rows={rows}

@@ -18,12 +18,12 @@ export const SafeNavbar: FC = () => {
 
   return (
     <header>
-      <nav className='flex h-[75px] w-full items-center justify-center border-b border-borderFaded bg-cardBg py-md pr-md lg:pr-0'>
+      <nav className='flex h-[75px] w-full items-center justify-center border-b border-borderFaded bg-cardBg py-2 pr-2 lg:pr-0'>
         <div className='flex w-full max-w-desktop justify-between p-mobile md:px-desktop md:py-mobile'>
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <MainLogo className='-translate-x-[6px]' />
           </div>
-          <div className='hidden items-center gap-5 xl:flex xl:h-[75px]'>
+          <div className='hidden items-center gap-3 xl:flex xl:h-[75px]'>
             <Dropdown
               id='blockchain'
               label='Blockchain'
@@ -59,14 +59,14 @@ export const SafeNavbar: FC = () => {
                 <InfoCard
                   icon={<Cardano size={24} color={colors.primary} />}
                   title={
-                    <span className='text-lg font-semibold'>
+                    <span className='text-text-lg font-semibold'>
                       Powered by{" "}
                       <span className='text-primary'>Cardano Blockchain</span>
                     </span>
                   }
                   className='bg-darker'
                 >
-                  <p className='font-normal'>
+                  <p className='font-regular'>
                     Access Our API for Comprehensive Blockchain Data and Build
                     Your Next-Level dApp!
                   </p>
@@ -89,14 +89,14 @@ export const SafeNavbar: FC = () => {
                 <InfoCard
                   icon={<ChevronsUp color={colors.purpleText} />}
                   title={
-                    <span className='text-lg font-semibold'>
+                    <span className='text-text-lg font-semibold'>
                       Get Cexplorer.io{" "}
                       <span className='text-purpleText'>PRO</span>
                     </span>
                   }
                   className='bg-darker'
                 >
-                  <p className='font-normal'>
+                  <p className='font-regular'>
                     Access Our API for Comprehensive Blockchain Data and Build
                     Your Next-Level dApp!
                   </p>
@@ -112,7 +112,7 @@ export const SafeNavbar: FC = () => {
               }
             />
           </div>
-          <div className='hidden items-center gap-5 md:flex'>
+          <div className='hidden items-center gap-3 md:flex'>
             {enabledWalletConnector && <WalletButton />}
             <SettingsDropdown />
           </div>

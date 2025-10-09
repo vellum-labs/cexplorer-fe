@@ -62,7 +62,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
           params={{
             id: vote?.proposal?.ident?.id ?? "",
           }}
-          className='text-sm text-primary'
+          className='text-text-sm text-primary'
         >
           {vote?.proposal?.anchor?.offchain?.name}
         </Link>
@@ -74,8 +74,8 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       key: "gov_id",
       title: "Governance action ID",
       value: (
-        <div className='flex items-center gap-2 break-all'>
-          <span className='text-sm' title={vote?.proposal?.ident?.bech}>
+        <div className='flex items-center gap-1 break-all'>
+          <span className='text-text-sm' title={vote?.proposal?.ident?.bech}>
             {formatString(vote?.proposal?.ident?.bech, "long")}
           </span>
           <Copy copyText={vote?.proposal?.ident?.bech} />
@@ -104,7 +104,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
             key: "enacted_epoch",
             title: "Enacted epoch",
             value: (
-              <span className='text-sm'>
+              <span className='text-text-sm'>
                 Epoch{" "}
                 <Link
                   to='/epoch/$no'
@@ -124,7 +124,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
             key: "ratified_epoch",
             title: "Ratified epoch",
             value: (
-              <span className='text-sm'>
+              <span className='text-text-sm'>
                 Epoch{" "}
                 <Link
                   to='/epoch/$no'
@@ -144,7 +144,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
             key: "expired_epoch",
             title: "Expired epoch",
             value: (
-              <span className='text-sm'>
+              <span className='text-text-sm'>
                 Epoch{" "}
                 <Link
                   to='/epoch/$no'
@@ -162,7 +162,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       key: "voting_start",
       title: "Voting start",
       value: (
-        <div className='flex flex-wrap items-center gap-x-2'>
+        <div className='flex flex-wrap items-center gap-x-1'>
           <TimeDateIndicator time={vote?.proposal?.tx?.time} />
         </div>
       ),
@@ -171,7 +171,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       key: "voting_end",
       title: "Voting deadline",
       value: vote?.proposal?.expiration ? (
-        <span className='text-sm'>
+        <span className='text-text-sm'>
           Epoch{" "}
           <Link
             to='/epoch/$no'
@@ -197,7 +197,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
             : role;
 
         return (
-          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-lg border border-border px-[6px]'>
+          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-l border border-border px-[6px]'>
             {role === GovernanceRole.DRep && (
               <User size={12} className='text-primary' />
             )}
@@ -207,7 +207,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
             {role === GovernanceRole.SPO && (
               <Route size={12} className='text-primary' />
             )}
-            <span className='text-xs font-medium'>{displayRole}</span>
+            <span className='text-text-xs font-medium'>{displayRole}</span>
           </div>
         );
       })(),
@@ -218,7 +218,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
             key: "voter_name",
             title: "Voter name",
             value: (
-              <div className='flex items-center gap-2'>
+              <div className='flex items-center gap-1'>
                 {vote?.info?.id && (
                   <Image
                     src={generateImageUrl(
@@ -234,7 +234,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
                     type='user'
                     height={20}
                     width={20}
-                    className='rounded-full'
+                    className='rounded-max'
                   />
                 )}
                 {vote?.voter_role && vote?.info?.id ? (
@@ -244,22 +244,18 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
                         ? "/pool/$id"
                         : vote.voter_role === GovernanceRole.DRep
                           ? "/drep/$hash"
-                          : vote.voter_role ===
-                              GovernanceRole.ConstitutionalCommittee
-                            ? "/gov/cc/$coldKey"
-                            : ""
+                          : "/"
                     }
                     params={{
                       id: vote.info.id,
                       hash: vote.info.id,
-                      coldKey: vote.info.id,
                     }}
-                    className='text-sm text-primary hover:underline'
+                    className='text-text-sm text-primary hover:underline'
                   >
                     {voterDisplayName}
                   </Link>
                 ) : (
-                  <span className='text-sm text-primary'>
+                  <span className='text-text-sm text-primary'>
                     {voterDisplayName}
                   </span>
                 )}
@@ -272,7 +268,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       key: "voter_id",
       title: "Voter ID",
       value: (
-        <div className='flex items-center gap-2 break-all'>
+        <div className='flex items-center gap-1 break-all'>
           {!voterDisplayName && vote?.voter_role && vote?.info?.id ? (
             <Link
               to={
@@ -280,22 +276,19 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
                   ? "/pool/$id"
                   : vote.voter_role === GovernanceRole.DRep
                     ? "/drep/$hash"
-                    : vote.voter_role === GovernanceRole.ConstitutionalCommittee
-                      ? "/gov/cc/$coldKey"
-                      : ""
+                    : "/"
               }
               params={{
                 id: vote.info.id,
                 hash: vote.info.id,
-                coldKey: vote.info.id,
               }}
-              className='text-sm text-primary hover:underline'
+              className='text-text-sm text-primary hover:underline'
               title={vote?.info?.id}
             >
               {formatString(vote?.info?.id, "long")}
             </Link>
           ) : (
-            <span className='text-sm' title={vote?.info?.id}>
+            <span className='text-text-sm' title={vote?.info?.id}>
               {formatString(vote?.info?.id, "long")}
             </span>
           )}
@@ -321,7 +314,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
           return "-";
         }
         return (
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <VoteBadge vote={vote.vote} />
           </div>
         );
@@ -336,11 +329,11 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       key: "vote_tx",
       title: "Vote tx",
       value: (
-        <div className='flex items-center gap-2 break-all'>
+        <div className='flex items-center gap-1 break-all'>
           <Link
             to='/tx/$hash'
             params={{ hash: vote?.tx?.hash }}
-            className='text-sm text-primary'
+            className='text-text-sm text-primary'
             title={vote?.tx?.hash}
           >
             {formatString(vote?.tx?.hash, "long")}
@@ -363,7 +356,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
                   href={transformedUrl}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='break-all text-sm text-primary'
+                  className='break-all text-text-sm text-primary'
                   onClick={e => {
                     e.preventDefault();
                     setClickedUrl(transformedUrl);
@@ -380,7 +373,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       key: "metadata",
       title: "Metadata",
       value: vote?.anchor?.offchain?.comment ? (
-        <div className='bg-muted rounded border border-border p-3 text-sm leading-relaxed'>
+        <div className='bg-muted rounded-s border border-border p-1.5 text-text-sm leading-relaxed'>
           <pre className='max-w-full overflow-x-auto whitespace-pre-wrap break-all'>
             {vote?.anchor?.offchain?.comment}
           </pre>
@@ -394,22 +387,26 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
 
   return (
     <>
-      <div className='w-full rounded-xl border border-border px-5 py-4'>
+      <div className='w-full rounded-xl border border-border px-3 py-2'>
         <h2 className='text-base font-semibold'>Overview</h2>
-        <div className='flex flex-col gap-4 pt-4'>
+        <div className='flex flex-col gap-2 pt-2'>
           {detailItems.map(({ key, title, value, divider, fullWidth }) => (
             <div key={key} className='flex flex-col'>
               <div
                 className={
                   fullWidth
-                    ? 'flex flex-col gap-2'
-                    : 'flex flex-wrap items-start gap-x-4 gap-y-1'
+                    ? "flex flex-col gap-1"
+                    : "flex flex-wrap items-start gap-x-2 gap-y-1/2"
                 }
               >
-                <p className='min-w-[160px] max-w-full break-words text-sm text-grayTextSecondary'>
+                <p className='min-w-[160px] max-w-full break-words text-text-sm text-grayTextSecondary'>
                   {title}
                 </p>
-                <div className={fullWidth ? 'w-full' : 'min-w-0 flex-1 break-words'}>
+                <div
+                  className={
+                    fullWidth ? "w-full" : "min-w-0 flex-1 break-words"
+                  }
+                >
                   {isLoading ? (
                     <LoadingSkeleton width='100%' height='20px' />
                   ) : (
@@ -417,7 +414,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
                   )}
                 </div>
               </div>
-              {divider && <div className='my-2 border-t border-border'></div>}
+              {divider && <div className='my-1 border-t border-border'></div>}
             </div>
           ))}
         </div>

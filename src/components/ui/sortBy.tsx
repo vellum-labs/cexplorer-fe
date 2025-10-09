@@ -37,10 +37,10 @@ const SortBy: FC<SortByProps> = ({
 }) => {
   return (
     <div
-      className={`flex items-center gap-2 ${className} ${disabled ? "pointer-events-none cursor-not-allowed opacity-50" : ""}`}
+      className={`flex items-center gap-1 ${className} ${disabled ? "pointer-events-none cursor-not-allowed opacity-50" : ""}`}
     >
       {label && (
-        <span className='min-w-fit text-sm text-grayTextPrimary'>
+        <span className='min-w-fit text-text-sm text-grayTextPrimary'>
           {labelName || "Sort By:"}
         </span>
       )}
@@ -57,7 +57,7 @@ const SortBy: FC<SortByProps> = ({
         >
           <SelectValue
             placeholder={
-              <div className='flex w-full items-center justify-between gap-1 uppercase'>
+              <div className='flex w-full items-center justify-between gap-1/2 uppercase'>
                 <span className='capitalize'>{selectItems[0]?.value}</span>
               </div>
             }
@@ -68,7 +68,7 @@ const SortBy: FC<SortByProps> = ({
             .filter(item => item !== undefined)
             .map(({ key, value, disabled }) => (
               <SelectItem key={key} value={key} disabled={disabled}>
-                <div className='flex w-full items-center justify-between gap-1 uppercase'>
+                <div className='flex w-full items-center justify-between gap-1/2 uppercase'>
                   <span className='text-[11px] font-semibold capitalize'>
                     {value}
                   </span>

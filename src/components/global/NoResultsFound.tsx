@@ -3,8 +3,8 @@ import { Search } from "lucide-react";
 
 export const NoResultsFound = () => {
   return (
-    <div className='my-8 flex w-full flex-col items-center gap-2 text-center font-medium'>
-      <div className='rounded-md border border-border p-1'>
+    <div className='my-4 flex w-full flex-col items-center gap-1 text-center font-medium'>
+      <div className='rounded-s border border-border p-1/2'>
         <Search color={colors.grayTextPrimary} size={17} />
       </div>
       No results found

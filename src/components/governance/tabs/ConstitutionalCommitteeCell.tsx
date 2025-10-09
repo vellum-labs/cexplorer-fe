@@ -56,19 +56,19 @@ export const ConstitutionalCommitteeNameCell: FC<
       ) * 10
   }deg)`;
   return (
-    <div className='relative flex max-h-[75px] w-full items-center gap-2'>
+    <div className='relative flex max-h-[75px] w-full items-center gap-1'>
       {item?.data?.image_url ? (
         <Image
           src={item?.data?.image_url}
           type='user'
-          className='h-8 w-8 rounded-full'
+          className='h-8 w-8 rounded-max'
           height={32}
           width={32}
           fallbackletters={fallbackletters}
         />
       ) : (
         <div
-          className='flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-[18px] font-bold uppercase text-background'
+          className='flex h-8 w-8 shrink-0 items-center justify-center rounded-max bg-primary text-[18px] font-bold uppercase text-background'
           style={{ filter: fallbackColor }}
         >
           {renderFallbackLetter()}
@@ -85,14 +85,14 @@ export const ConstitutionalCommitteeNameCell: FC<
             {item?.data?.given_name}
           </Link>
         )}
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <Link
             to='/gov/cc/$coldKey'
             params={{ coldKey: item?.hash?.view }}
             className={
               item?.data?.given_name
-                ? "text-xs hover:text-grayTextPrimary"
-                : "text-sm text-primary"
+                ? "text-text-xs hover:text-grayTextPrimary"
+                : "text-text-sm text-primary"
             }
             disabled={!!item?.data?.given_name}
           >

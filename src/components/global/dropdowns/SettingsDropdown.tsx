@@ -126,7 +126,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
       label: (
         <div
           onMouseDown={e => e.stopPropagation()}
-          className='flex items-center justify-between gap-5'
+          className='flex items-center justify-between gap-3'
         >
           <span>Language</span>
           <Select
@@ -138,7 +138,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
             <SelectTrigger className='w-[90px]'>
               <SelectValue
                 placeholder={
-                  <div className='flex w-full items-center justify-between gap-1 uppercase'>
+                  <div className='flex w-full items-center justify-between gap-1/2 uppercase'>
                     <span>{locales[locale].value}</span>
                     <img
                       width={15}
@@ -153,7 +153,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
             <SelectContent align='end'>
               {Object.entries(locales).map(([key, value]) => (
                 <SelectItem key={key} value={key}>
-                  <div className='flex w-full items-center justify-between gap-1 uppercase'>
+                  <div className='flex w-full items-center justify-between gap-1/2 uppercase'>
                     <span>{value.value}</span>
                     <img width={15} height={15} alt='flag' src={value.image} />
                   </div>
@@ -169,7 +169,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
       label: (
         <div
           onMouseDown={e => e.stopPropagation()}
-          className='flex items-center justify-between gap-5'
+          className='flex items-center justify-between gap-3'
         >
           <span>Currency</span>
           <Popover open={openCurrency} onOpenChange={setOpenCurrency}>
@@ -180,10 +180,10 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                 aria-expanded={openCurrency}
                 className='flex w-[95px] items-center justify-between'
               >
-                <span className='text-xs'>
+                <span className='text-text-xs'>
                   {currencies[currency].value.toUpperCase()}
                 </span>
-                <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+                <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
               </Button>
             </PopoverTrigger>
             <PopoverContent className='w-[95px] border-b-0 p-0'>
@@ -192,7 +192,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                   value={currencySearch}
                   onchange={value => setCurrencySearch(value)}
                   placeholder='Search'
-                  wrapperClassName=' mb-2'
+                  wrapperClassName=' mb-1'
                   outline={false}
                   className='rounded-none'
                   inputClassName='border-none outline-none'
@@ -209,7 +209,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                 >
                   <ChevronUp size={15} className='h-full' />
                 </div>
-                <div className='flex w-full flex-col px-1 pb-[20px] pt-[10px]'>
+                <div className='flex w-full flex-col px-1/2 pb-[20px] pt-[10px]'>
                   {Object.entries(currencies)
                     .filter(([, value]) =>
                       (value as any).value
@@ -221,7 +221,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                       return (
                         <div
                           key={key}
-                          className={`flex w-full cursor-pointer select-none items-center justify-between rounded-sm px-2 py-1.5 text-sm hover:bg-cardBg ${key === currency ? "bg-cardBg" : ""}`}
+                          className={`flex w-full cursor-pointer select-none items-center justify-between rounded-xs px-2 py-1.5 text-text-sm hover:bg-cardBg ${key === currency ? "bg-cardBg" : ""}`}
                           onClick={() => {
                             if (value) {
                               handleCurrency((value as any).value);
@@ -235,7 +235,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                     })}
                 </div>
                 <div
-                  className='ove fixed bottom-[-2px] left-0 z-50 flex h-6 w-full items-center justify-center rounded-b-lg border-x border-b border-border bg-background'
+                  className='ove fixed bottom-[-2px] left-0 z-50 flex h-6 w-full items-center justify-center rounded-b-m border-x border-b border-border bg-background'
                   onMouseEnter={() => startScrolling("down")}
                   onMouseLeave={stopScrolling}
                 >
@@ -266,7 +266,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
       disableHover
       hideChevron
       label={
-        <p className='flex gap-2'>
+        <p className='flex gap-1'>
           <Settings />
         </p>
       }

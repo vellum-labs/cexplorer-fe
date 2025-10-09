@@ -36,7 +36,7 @@ export const StakeListTab: FC = () => {
         }
 
         return (
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <div className='flex flex-col'>
               <Link
                 to='/stake/$stakeAddr'
@@ -46,7 +46,7 @@ export const StakeListTab: FC = () => {
                 {formatString(item.view, "long")}
               </Link>
               {item.adahandle && (
-                <AdaHandleBadge hex={item.adahandle} link className='mt-1' />
+                <AdaHandleBadge hex={item.adahandle} link className='mt-1/2' />
               )}
             </div>
             <Copy copyText={item.view} />
@@ -108,7 +108,7 @@ export const StakeListTab: FC = () => {
           return <TokenSelectCombobox items={transformedAssets as any} />;
         } catch (error) {
           return (
-            <span className='text-sm font-medium'>
+            <span className='text-text-sm font-medium'>
               {assets.length} asset{assets.length !== 1 ? "s" : ""}
             </span>
           );
@@ -137,7 +137,7 @@ export const StakeListTab: FC = () => {
   }
 
   return (
-    <div className='flex flex-col items-end gap-4'>
+    <div className='flex flex-col items-end gap-2'>
       <GlobalTable
         type='default'
         query={accountListQuery}

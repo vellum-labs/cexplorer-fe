@@ -29,7 +29,7 @@ const RewardsTabItem: FC<RewardsTabItemProps> = ({ query }) => {
 
   return (
     <div>
-      <h2 className='mb-2'>Rewards</h2>
+      <h2 className='mb-1'>Rewards</h2>
       <PoolRewardsGraph
         epochs={epochs}
         leaderLovelace={leaderLovelace}
@@ -37,7 +37,7 @@ const RewardsTabItem: FC<RewardsTabItemProps> = ({ query }) => {
         membetPct={membetPct}
         operatorPct={operatorPct}
       />
-      <div className='flex flex-col items-end gap-4'>
+      <div className='flex flex-col items-end gap-2'>
         <PoolRewardsTable
           poolId={id}
           miscConst={miscConst}

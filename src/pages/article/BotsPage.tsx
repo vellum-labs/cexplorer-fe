@@ -61,19 +61,19 @@ export const BotsPage = () => {
       </Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center px-mobile md:px-desktop'>
         <div className='flex w-full max-w-desktop flex-col items-center'>
-          <h1 className='py-8'>Cexplorer.io Bots</h1>
-          <div className='flex w-full flex-col items-center gap-8 px-mobile md:px-desktop'>
+          <h1 className='py-4'>Cexplorer.io Bots</h1>
+          <div className='flex w-full flex-col items-center gap-4 px-mobile md:px-desktop'>
             {bots.map(item => (
               <div
                 key={item.key}
-                className='flex w-full max-w-[800px] flex-col justify-between gap-2 rounded-lg border border-border px-mobile py-mobile sm:flex-row sm:items-center sm:gap-0 md:px-desktop'
+                className='flex w-full max-w-[800px] flex-col justify-between gap-1 rounded-m border border-border px-mobile py-mobile sm:flex-row sm:items-center sm:gap-0 md:px-desktop'
               >
-                <div className='flex max-w-[410px] flex-col gap-3'>
-                  <div className='flex w-full flex-wrap gap-2'>
+                <div className='flex max-w-[410px] flex-col gap-1.5'>
+                  <div className='flex w-full flex-wrap gap-1'>
                     {item.tags.map(tag => (
                       <div
                         key={tag}
-                        className='flex items-center gap-[6px] rounded-md border border-border px-[6px] py-[2px]'
+                        className='flex items-center gap-[6px] rounded-s border border-border px-[6px] py-[2px]'
                       >
                         {tag === "Live" && (
                           <div className='relative'>
@@ -85,13 +85,13 @@ export const BotsPage = () => {
                             <PulseDot color='bg-yellowText' />
                           </div>
                         )}
-                        <span className='text-xs font-medium'>{tag}</span>
+                        <span className='text-text-xs font-medium'>{tag}</span>
                       </div>
                     ))}
                   </div>
                   <div className='flex flex-grow items-center justify-between'>
-                    <div className='flex flex-col justify-between gap-1 self-start text-wrap'>
-                      <div className='flex items-center gap-2'>
+                    <div className='flex flex-col justify-between gap-1/2 self-start text-wrap'>
+                      <div className='flex items-center gap-1'>
                         <img
                           src={item.icon}
                           alt='BotIcon'
@@ -123,18 +123,18 @@ export const BotsPage = () => {
                 )}
               </div>
             ))}
-            <div className='flex max-w-[800px] flex-col gap-8 text-wrap pb-10'>
+            <div className='flex max-w-[800px] flex-col gap-4 text-wrap pb-5'>
               <div className='w-full text-center'>
                 <h1>Bots and Automation</h1>
               </div>
-              <p className='text-start text-lg text-grayTextPrimary'>
+              <p className='text-start text-text-lg text-grayTextPrimary'>
                 At Cexplorer, we prioritize fair and responsible use of our
                 platform. As such, the use of automated bots or scripts to
                 crawl, scrape, or interact with our website and API is strictly
                 prohibited. Our API is intended for genuine user interaction,
                 and any automated access, including bot usage, is not allowed.
               </p>
-              <p className='text-start text-lg text-grayTextPrimary'>
+              <p className='text-start text-text-lg text-grayTextPrimary'>
                 For any questions or concerns regarding our policy, feel free to
                 contact us directly.
               </p>

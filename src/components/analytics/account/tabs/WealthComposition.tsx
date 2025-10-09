@@ -55,7 +55,7 @@ export const WealthComposition = () => {
         key: "wallet_size",
         render: item => {
           return (
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-1'>
               <img src={getAnimalImageByName(Object.keys(item)[0])} />
               <p>
                 {Object.keys(item)[0].slice(0, 1).toUpperCase() +
@@ -179,7 +179,7 @@ export const WealthComposition = () => {
 
   return (
     <section>
-      <h3 className='mb-4'>Wealth Composition by ADA balance</h3>
+      <h3 className='mb-2'>Wealth Composition by ADA balance</h3>
       <Tabs tabParam='view' withPadding={false} items={tabs} />
     </section>
   );

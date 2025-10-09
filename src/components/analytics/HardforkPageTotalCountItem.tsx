@@ -22,16 +22,16 @@ const HardforkPageTotalCountItem: FC<HardforkPageTotalCountItemProps> = ({
   return (
     <div
       className={cn(
-        "flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 font-normal transition duration-300",
+        "flex cursor-pointer items-center gap-1 rounded-s px-1.5 py-1 font-regular transition duration-300",
         active && "bg-cardBg",
         wrapperClassname,
       )}
       onClick={onClick}
     >
-      <span className='text-grayTextPrimary text-nowrap text-sm'>{title}</span>
+      <span className='text-grayTextPrimary text-nowrap text-text-sm'>{title}</span>
       <span
         className={cn(
-          "rounded-2xl border px-[10px] py-[2px] text-sm font-bold",
+          "rounded-xl border px-[10px] py-[2px] text-text-sm font-bold",
           className,
         )}
       >

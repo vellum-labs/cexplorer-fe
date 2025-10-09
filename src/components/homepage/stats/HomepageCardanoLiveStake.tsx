@@ -16,12 +16,12 @@ export const HomepageCardanoLiveStake: FC<HomepageCardanoLiveStakeProps> = ({
   const activeStake = miscConst?.epoch_stat?.stake?.active;
 
   return (
-    <div className='mx-3 min-h-[110px] flex-grow'>
-      <div className='flex w-full flex-col gap-2 pb-4'>
-        <span className='text-3xl font-semibold'>
+    <div className='mx-1.5 min-h-[110px] flex-grow'>
+      <div className='flex w-full flex-col gap-1 pb-2'>
+        <span className='text-display-sm font-semibold'>
           <AdaWithTooltip data={liveStake ?? 0} />
         </span>
-        <div className='flex items-center gap-3'>
+        <div className='flex items-center gap-1.5'>
           <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#FEC84B]'>
             <span
               className='absolute left-0 block h-2 rounded-bl-[4px] rounded-tl-[4px] bg-[#47CD89]'
@@ -30,30 +30,30 @@ export const HomepageCardanoLiveStake: FC<HomepageCardanoLiveStakeProps> = ({
               }}
             ></span>
           </div>
-          <span className='text-grayText text-sm font-medium'>
+          <span className='text-grayText text-text-sm font-medium'>
             {progress.toFixed(2)}%
           </span>
         </div>
       </div>
       <div className='flex flex-grow items-center pb-[11px]'>
-        <div className='flex min-w-[160px] items-center gap-1'>
-          <span className='text-grayText inline-block text-sm font-medium'>
+        <div className='flex min-w-[160px] items-center gap-1/2'>
+          <span className='text-grayText inline-block text-text-sm font-medium'>
             Circulating supply
           </span>
         </div>
         {supply && (
-          <span className='text-grayText text-sm font-semibold'>
+          <span className='text-grayText text-text-sm font-semibold'>
             <AdaWithTooltip data={supply} />
           </span>
         )}
       </div>
       <div className='flex flex-grow items-center pb-[11px]'>
-        <div className='flex min-w-[160px] items-center gap-1'>
-          <span className='text-grayText inline-block text-sm font-medium'>
+        <div className='flex min-w-[160px] items-center gap-1/2'>
+          <span className='text-grayText inline-block text-text-sm font-medium'>
             Active stake
           </span>
         </div>
-        <span className='text-grayText text-sm font-semibold'>
+        <span className='text-grayText text-text-sm font-semibold'>
           <AdaWithTooltip data={activeStake ?? 0} />
         </span>
       </div>

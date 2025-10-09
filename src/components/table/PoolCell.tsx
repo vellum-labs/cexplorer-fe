@@ -16,7 +16,7 @@ interface Props {
 const PoolCell = ({
   poolInfo,
   className,
-  fontSize = "13px",
+  fontSize = "text-sm",
   cropPoolHash = true,
 }: Props) => {
   const id = poolInfo?.id;
@@ -32,14 +32,14 @@ const PoolCell = ({
 
   return (
     <div
-      className={`relative flex max-h-[75px] w-full items-center gap-2 ${className}`}
+      className={`relative flex max-h-[75px] w-full items-center gap-1 ${className}`}
     >
       {ticker && (
         <Image
           key={poolInfo.id}
           src={generateImageUrl(id, "ico", "pool")}
           type='pool'
-          className='h-8 w-8 rounded-full'
+          className='h-8 w-8 rounded-max'
           height={32}
           width={32}
         />
@@ -60,11 +60,11 @@ const PoolCell = ({
             {name && name}
           </span>
         </Link>
-        <div className='flex w-fit items-center gap-1'>
+        <div className='flex w-fit items-center gap-1/2'>
           <Link
             to='/pool/$id'
             params={{ id: poolInfo.id }}
-            className={`block w-full overflow-hidden text-ellipsis whitespace-nowrap ${ticker ? "text-xs" : "text-[13px]"} text-primary`}
+            className={`block w-full overflow-hidden text-ellipsis whitespace-nowrap ${ticker ? "text-text-xs" : "text-[13px]"} text-primary`}
           >
             {cropPoolHash ? formatString(poolInfo.id, "long") : poolInfo.id}
           </Link>

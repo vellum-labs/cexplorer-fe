@@ -29,11 +29,11 @@ const Button = ({
   onClick,
 }: Props) => {
   const sizeClasses = {
-    xs: "py-1 px-1 text-[12px]",
-    sm: "py-2 px-3 text-[13px]",
-    md: "py-2 px-4 text-sm",
-    lg: "py-2 px-4 text-md",
-    xl: "py-3 px-5 text-lg",
+    xs: "py-1/2 px-1/2 text-[12px]",
+    sm: "py-1 px-1.5 text-[13px]",
+    md: "py-1 px-2 text-text-sm",
+    lg: "py-1 px-2text-text-md",
+    xl: "py-1.5 px-3 text-text-lg",
   };
 
   const variantClasses = {
@@ -58,11 +58,11 @@ const Button = ({
         className={`${commonClasses} ${disabled && "cursor-not-allowed opacity-50"} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
         disabled={disabled}
       >
-        <span className={`${leftIcon && label && "-ml-1 mr-2"}`}>
+        <span className={`${leftIcon && label && "-ml-1 mr-1"}`}>
           {leftIcon}
         </span>
         {label && <span>{label}</span>}
-        <span className={`${rightIcon && "ml-2"}`}>{rightIcon}</span>
+        <span className={`${rightIcon && "ml-1"}`}>{rightIcon}</span>
       </Link>
     );
 
@@ -72,10 +72,10 @@ const Button = ({
       className={`${commonClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       disabled={disabled}
     >
-      <span className={`${leftIcon && label && "-ml-1 mr-2"}`}>{leftIcon}</span>
+      <span className={`${leftIcon && label && "-ml-1 mr-1"}`}>{leftIcon}</span>
       {label && <span>{label}</span>}
       {rightIcon && (
-        <span className={`${rightIcon && "ml-2"}`}>{rightIcon}</span>
+        <span className={`${rightIcon && "ml-1"}`}>{rightIcon}</span>
       )}
     </button>
   );

@@ -75,7 +75,7 @@ export const useAssetDetail = ({
     {
       label: "Encoded Name",
       value: detailData?.name ? (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           {detailData?.name?.length <= 8
             ? detailData?.name
             : formatString(String(detailData?.name), "long")}
@@ -88,7 +88,7 @@ export const useAssetDetail = ({
     {
       label: "Asset name",
       value: detailData?.policy ? (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           {formatString((detailData?.policy || "") + detailData?.name, "long")}
           <Copy copyText={(detailData?.policy || "") + detailData?.name} />
         </div>
@@ -130,11 +130,11 @@ export const useAssetDetail = ({
         <div className='flex w-full'>
           {["1d", "7d", "1M", "3M"].map((item, i, arr) => (
             <div
-              className={`h-[48px] w-[57px] border border-border ${i === 0 ? "rounded-s-lg" : ""} ${i === arr.length - 1 ? "rounded-e-lg" : ""} flex flex-col justify-center`}
+              className={`h-[48px] w-[57px] border border-border ${i === 0 ? "rounded-s-m" : ""} ${i === arr.length - 1 ? "rounded-e-m" : ""} flex flex-col justify-center`}
               key={item + "_" + i}
             >
-              <p className='text-center text-xs text-grayTextPrimary'>{item}</p>
-              <p className='text-center text-sm font-semibold'>TBD</p>
+              <p className='text-center text-text-xs text-grayTextPrimary'>{item}</p>
+              <p className='text-center text-text-sm font-semibold'>TBD</p>
             </div>
           ))}
         </div>
@@ -146,8 +146,8 @@ export const useAssetDetail = ({
     {
       label: "Asset ID",
       value: detailData?.fingerprint ? (
-        <div className='flex items-center gap-1'>
-          <span title={detailData?.fingerprint} className='text-sm'>
+        <div className='flex items-center gap-1/2'>
+          <span title={detailData?.fingerprint} className='text-text-sm'>
             {formatString(detailData?.fingerprint || "", "long")}
           </span>
           <Copy copyText={detailData?.fingerprint || ""} />
@@ -159,11 +159,11 @@ export const useAssetDetail = ({
     {
       label: "Policy ID",
       value: detailData?.policy ? (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <Link
             to='/policy/$policyId'
             params={{ policyId: detailData?.policy ?? "" }}
-            className='text-sm text-primary'
+            className='text-text-sm text-primary'
           >
             {formatString(detailData?.policy || "", "long")}
           </Link>

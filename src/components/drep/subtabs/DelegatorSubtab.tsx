@@ -123,7 +123,7 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
         }
 
         return (
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <Link
               to='/stake/$stakeAddr'
               params={{
@@ -165,8 +165,8 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
         const liveDrep = item?.live_drep;
 
         return (
-          <div className='flex w-full min-w-[120px] items-center justify-between gap-2'>
-            <div className='flex min-w-[40%] items-center gap-2'>
+          <div className='flex w-full min-w-[120px] items-center justify-between gap-1'>
+            <div className='flex min-w-[40%] items-center gap-1'>
               {previousDrep?.id ? (
                 <DrepNameCell
                   item={{
@@ -184,7 +184,7 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
 
             <ArrowRight size={15} />
 
-            <div className='flex min-w-[40%] items-center gap-2'>
+            <div className='flex min-w-[40%] items-center gap-1'>
               {liveDrep?.id ? (
                 <DrepNameCell
                   item={{

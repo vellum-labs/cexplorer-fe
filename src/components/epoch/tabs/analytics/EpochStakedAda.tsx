@@ -60,10 +60,10 @@ export const EpochStakedAda: FC<EpochStakedAdaProps> = ({
   };
 
   return (
-    <div className='flex h-[520px] w-1/2 flex-grow basis-[600px] flex-col gap-4 rounded-xl border border-border p-5 md:flex-shrink-0'>
+    <div className='flex h-[520px] w-1/2 flex-grow basis-[600px] flex-col gap-2 rounded-l border border-border p-3 md:flex-shrink-0'>
       <div className='flex flex-col'>
         <h3>Staked ADA</h3>
-        <span className='text-base font-semibold text-grayTextPrimary'>
+        <span className='text-text-md font-semibold text-grayTextPrimary'>
           Staked / Unstaked supply
         </span>
       </div>

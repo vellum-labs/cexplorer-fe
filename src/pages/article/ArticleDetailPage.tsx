@@ -96,10 +96,10 @@ export const ArticleDetailPage = () => {
             onClose={() => setOpenDelegationModal(false)}
           />
         )}
-        <section className='flex h-auto w-full justify-center bg-gradient-to-b from-bannerGradient to-darker p-5'>
-          <div className='flex w-full max-w-desktop flex-col-reverse justify-center gap-3 md:flex-row'>
-            <div className='flex w-full flex-col justify-between gap-3 md:w-[40%]'>
-              <Breadcrumb className='mb-4 w-full'>
+        <section className='flex h-auto w-full justify-center bg-gradient-to-b from-bannerGradient to-darker p-3'>
+          <div className='flex w-full max-w-desktop flex-col-reverse justify-center gap-1.5 md:flex-row'>
+            <div className='flex w-full flex-col justify-between gap-1.5 md:w-[40%]'>
+              <Breadcrumb className='mb-2 w-full'>
                 <BreadcrumbList className='flex items-center'>
                   <BreadcrumbItem>
                     <Link className='underline underline-offset-2' to='/'>
@@ -129,10 +129,10 @@ export const ArticleDetailPage = () => {
                   </p>
                 </div>
               )}
-              <div className='flex flex-col text-sm'>
+              <div className='flex flex-col text-text-sm'>
                 {renderArticleAuthor(data?.user_owner)}
               </div>
-              <div className='flex flex-col text-sm'>
+              <div className='flex flex-col text-text-sm'>
                 <span className='text-grayTextPrimary'>Published</span>
                 <span>{data?.pub_date ? formatDate(data?.pub_date) : "-"}</span>
               </div>
@@ -140,28 +140,28 @@ export const ArticleDetailPage = () => {
             <div className='flex w-full justify-end md:w-[60%]'>
               <Image
                 src={data?.image || ""}
-                className='h-[300px] w-full rounded-lg object-cover md:h-[380px]'
+                className='h-[300px] w-full rounded-m object-cover md:h-[380px]'
                 height={380}
               />
             </div>
           </div>
         </section>
-        <section className='flex w-full max-w-desktop flex-col gap-3 p-mobile md:p-desktop lg:flex-row'>
-          <div className='flex w-full flex-wrap items-center justify-between gap-4 lg:hidden'>
-            <div className='order-2 flex gap-1 text-sm leading-tight text-grayTextPrimary'>
+        <section className='flex w-full max-w-desktop flex-col gap-1.5 p-mobile md:p-desktop lg:flex-row'>
+          <div className='flex w-full flex-wrap items-center justify-between gap-2 lg:hidden'>
+            <div className='order-2 flex gap-1/2 text-text-sm leading-tight text-grayTextPrimary'>
               <span className='font-medium'>Keywords:</span>
               <span className=''>{data?.keywords}</span>
             </div>
             <SocialsAndCopy className='order-1 ml-auto block min-w-fit lg:hidden' />
           </div>
-          <article className='my-6 w-full text-left text-base lg:my-0 lg:w-[calc(100%-300px)] [&>*]:text-base [&>p]:my-4'>
+          <article className='my-3 w-full text-left text-text-md lg:my-0 lg:w-[calc(100%-300px)] [&>*]:text-base [&>p]:my-4'>
             {parse(data?.data[0] || "")}
           </article>
-          <div className='hidden w-[300px] flex-col gap-3 lg:flex'>
+          <div className='hidden w-[300px] flex-col gap-1.5 lg:flex'>
             <SocialsAndCopy stretchCopy />
-            <div className='flex w-full flex-col gap-4 rounded-lg border border-border bg-cardBg p-4'>
+            <div className='flex w-full flex-col gap-2 rounded-m border border-border bg-cardBg p-2'>
               <h3>Support author</h3>
-              <p className='text-sm text-grayTextPrimary'>
+              <p className='text-text-sm text-grayTextPrimary'>
                 You can support the article author by delegating to their stake
                 pool.
               </p>
@@ -173,9 +173,9 @@ export const ArticleDetailPage = () => {
               />
             </div>
             <NewsletterForm />
-            <div className='flex w-full flex-col gap-4 rounded-lg border border-border bg-cardBg p-4'>
+            <div className='flex w-full flex-col gap-2 rounded-m border border-border bg-cardBg p-2'>
               <h3>Keywords</h3>
-              <p className='text-sm text-grayTextPrimary'>{data?.keywords}</p>
+              <p className='text-text-sm text-grayTextPrimary'>{data?.keywords}</p>
             </div>
             {otherArticles.map(article => (
               <ArticleCard
@@ -184,20 +184,20 @@ export const ArticleDetailPage = () => {
               />
             ))}
           </div>
-          <div className='flex flex-wrap gap-3 lg:hidden'>
+          <div className='flex flex-wrap gap-1.5 lg:hidden'>
             <SingleItemCarousel
               items={otherArticles}
               isLoading={listQuery.isLoading}
               card={ArticleCardWrapper}
               className='h-full basis-[300px] md:max-w-[300px]'
             />
-            <div className='flex w-full min-w-[230px] shrink grow basis-[280px] flex-col gap-4 rounded-lg border border-border bg-cardBg p-4'>
+            <div className='flex w-full min-w-[230px] shrink grow basis-[280px] flex-col gap-2 rounded-m border border-border bg-cardBg p-2'>
               <Gift
-                className='rounded-lg border border-border bg-background p-2'
+                className='rounded-m border border-border bg-background p-1'
                 size={40}
               />
               <h3>Support author</h3>
-              <p className='text-sm text-grayTextPrimary'>
+              <p className='text-text-sm text-grayTextPrimary'>
                 You can support the article author by delegating to their stake
                 pool.
               </p>
@@ -235,7 +235,7 @@ const SocialsAndCopy = ({
   };
 
   return (
-    <div className={`flex h-9 gap-1 ${className}`}>
+    <div className={`flex h-9 gap-1/2 ${className}`}>
       <Button
         leftIcon={copied ? <Check size={15} /> : <Copy size={15} />}
         label='Copy link'
@@ -266,13 +266,13 @@ const SocialsAndCopy = ({
 const NewsletterForm = () => {
   const [email, setEmail] = useState("");
   return (
-    <div className='flex w-full min-w-[230px] shrink grow basis-[280px] flex-col gap-4 rounded-lg border border-border bg-cardBg p-4'>
+    <div className='flex w-full min-w-[230px] shrink grow basis-[280px] flex-col gap-2 rounded-m border border-border bg-cardBg p-2'>
       <Send
-        className='rounded-lg border border-border bg-background p-2'
+        className='rounded-m border border-border bg-background p-1'
         size={40}
       />
       <h3>Weekly newsletter</h3>
-      <p className='text-sm text-grayTextPrimary'>
+      <p className='text-text-sm text-grayTextPrimary'>
         No spam. Just the latest releases and tips, interesting articles, and
         exclusive interviews in your inbox every week.
       </p>

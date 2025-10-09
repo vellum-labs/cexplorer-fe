@@ -179,12 +179,12 @@ export const AwardsTabItem: FC<AwardsTabItemProps> = ({ id }) => {
   };
 
   return (
-    <div className='grid grid-cols-[repeat(auto-fill,_minmax(240px,_1fr))] gap-3'>
+    <div className='grid grid-cols-[repeat(auto-fill,_minmax(240px,_1fr))] gap-1.5'>
       {isLoading || isError
         ? Array.from({ length: 8 }, () => "skeleton").map((_, i) => (
             <div
               key={i}
-              className='flex w-[240px] flex-col gap-1 rounded-lg border border-border'
+              className='flex w-[240px] flex-col gap-1/2 rounded-m border border-border'
             >
               <LoadingSkeleton width='100%' height='280px' />
             </div>
@@ -192,7 +192,7 @@ export const AwardsTabItem: FC<AwardsTabItemProps> = ({ id }) => {
         : awards?.map((item, i) => (
             <div
               key={`${item.time}_${i}`}
-              className='flex flex-col gap-1 rounded-lg border border-border bg-cardBg px-3 py-2'
+              className='flex flex-col gap-1/2 rounded-m border border-border bg-cardBg px-1.5 py-1'
             >
               <img
                 src={imageMap[`${item.category}_${item.type}`]}
@@ -204,13 +204,13 @@ export const AwardsTabItem: FC<AwardsTabItemProps> = ({ id }) => {
                 {String(item.type).replace("_", " ").slice(0, 1).toUpperCase() +
                   String(item.type).replace("_", " ").slice(1)}
               </h3>
-              <div className='mb-1 flex items-center justify-center gap-2'>
+              <div className='mb-1/2 flex items-center justify-center gap-1'>
                 <Calendar size={12} className='text-grayTextPrimary' />
-                <span className='text-grayTextPrimary text-sm'>
+                <span className='text-grayTextPrimary text-text-sm'>
                   {format(new Date(item.time), "dd.MM.yyyy")}
                 </span>
               </div>
-              <div className='text-grayTextPrimary flex justify-between text-sm [&>div]:w-1/3'>
+              <div className='text-grayTextPrimary flex justify-between text-text-sm [&>div]:w-1/3'>
                 {renderDetails(item)}
               </div>
             </div>

@@ -76,8 +76,8 @@ const faq = [
     question:
       "8. Are there any additional perks for owning a Cexplorer PRO NFT?",
     answer: (
-      <div className='flex flex-col gap-2'>
-        <span className='flex gap-1'>
+      <div className='flex flex-col gap-1'>
+        <span className='flex gap-1/2'>
           Yes! Alongside the Basic API tier benefits,{" "}
           <Link className='text-primary underline' to='/pro'>
             Cexplorer PRO NFT
@@ -159,8 +159,8 @@ export const ApiInfoPage = () => {
 
   return (
     <main className='flex min-h-minHeight w-full flex-col items-center'>
-      <div className='mt-12 flex w-full max-w-desktop flex-col items-center gap-8 px-mobile pb-5 text-center md:px-desktop'>
-        <span className='text-sm font-medium text-primary'>
+      <div className='mt-6 flex w-full max-w-desktop flex-col items-center gap-4 px-mobile pb-3 text-center md:px-desktop'>
+        <span className='text-text-sm font-medium text-primary'>
           Elevate your projects with
         </span>
         <h1 className='-my-4 md:text-[40px] md:leading-[45px]'>
@@ -170,11 +170,11 @@ export const ApiInfoPage = () => {
           Effortless access to blockchain data. Choose the perfect plan for your
           needs.
         </p>
-        <div className='flex w-full items-center justify-center gap-2'>
+        <div className='flex w-full items-center justify-center gap-1'>
           <Button label='Docs' variant='tertiary' size='md' />
           <Button label='API plans' variant='primary' size='md' />
         </div>
-        <section className='mt-8 flex w-full flex-wrap items-center justify-center gap-5'>
+        <section className='mt-4 flex w-full flex-wrap items-center justify-center gap-3'>
           {Object.entries(priceTiers).map(([key, value]) => (
             <PriceCard
               key={key}
@@ -188,8 +188,8 @@ export const ApiInfoPage = () => {
             />
           ))}
         </section>
-        <section className='mt-8 flex w-full max-w-[500px] flex-col items-center justify-between gap-5 rounded-xl border border-border p-4 md:flex-row md:text-left'>
-          <div className='flex flex-col gap-4'>
+        <section className='mt-4 flex w-full max-w-[500px] flex-col items-center justify-between gap-3 rounded-l border border-border p-2 md:flex-row md:text-left'>
+          <div className='flex flex-col gap-2'>
             <h3>API documentation</h3>{" "}
             <p className='text-grayTextPrimary'>
               Explore the API docs to get started with your project!{" "}
@@ -203,7 +203,7 @@ export const ApiInfoPage = () => {
             className='h-[40px]'
           />
         </section>
-        <h2 className='-mb-4 mt-8 md:text-[30px]'>
+        <h2 className='-mb-4 mt-4 md:text-[30px]'>
           Frequently asked questions
         </h2>
         <p className='text-grayTextPrimary'>
@@ -212,7 +212,7 @@ export const ApiInfoPage = () => {
         <Accordion
           type='single'
           collapsible
-          className='mt-4 w-full max-w-[600px]'
+          className='mt-2 w-full max-w-[600px]'
         >
           {faq?.map(item => (
             <AccordionItem
@@ -220,22 +220,22 @@ export const ApiInfoPage = () => {
               value={item.question}
               className='border-b border-border'
             >
-              <AccordionTrigger className='AccordionTrigger w-full py-5 text-left'>
-                <span className='text-base font-medium'>{item.question}</span>
+              <AccordionTrigger className='AccordionTrigger w-full py-3 text-left'>
+                <span className='text-text-md font-medium'>{item.question}</span>
               </AccordionTrigger>
               <AccordionContent>
-                <div className='flex flex-col pb-3 text-left text-grayTextPrimary'>
+                <div className='flex flex-col pb-1.5 text-left text-grayTextPrimary'>
                   {item.answer}
                 </div>
               </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
-        <section className='flex w-full flex-col items-center gap-6 rounded-xl bg-darker p-4'>
+        <section className='flex w-full flex-col items-center gap-3 rounded-l bg-darker p-2'>
           <img
             src={CexLogo}
             alt='Cexplorer logo'
-            className='mx-auto mt-8 h-12 w-12'
+            className='mx-auto mt-4 h-12 w-12'
           />
           <h3>Still have questions?</h3>
           <p className='text-grayTextPrimary'>
@@ -274,16 +274,16 @@ const PriceCard = ({
   icon,
 }: PriceCardProps) => {
   return (
-    <div className='relative mt-2 flex min-h-[420px] basis-[350px] flex-col items-center rounded-xl bg-darker p-4 shadow-md'>
-      <div className='absolute -top-5 rounded-md border border-border bg-background p-2'>
+    <div className='relative mt-1 flex min-h-[420px] basis-[350px] flex-col items-center rounded-l bg-darker p-2 shadow-md'>
+      <div className='absolute -top-5 rounded-s border border-border bg-background p-1'>
         {icon}
       </div>
-      <span className='mt-6 font-medium'>{tier}</span>
+      <span className='mt-3 font-medium'>{tier}</span>
       <h1 className='md:text-[40px]'>{title}</h1>
-      <span className='text-sm text-grayTextPrimary'>{subtitle}</span>
-      <ul className='mt-4 flex flex-col gap-2 text-left text-sm'>
+      <span className='text-text-sm text-grayTextPrimary'>{subtitle}</span>
+      <ul className='mt-2 flex flex-col gap-1 text-left text-text-sm'>
         {features.map((feature, index) => (
-          <li key={index} className='flex items-center gap-2'>
+          <li key={index} className='flex items-center gap-1'>
             <CheckCircle
               color={colors.primary}
               size={15}

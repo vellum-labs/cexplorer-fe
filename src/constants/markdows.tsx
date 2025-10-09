@@ -35,40 +35,40 @@ export const markdownComponents = (
     <pre className='whitespace-pre-wrap break-words'>{children}</pre>
   ),
   p: ({ children }) => (
-    <p className='overflow-wrap-anywhere mb-2 break-words'>{children}</p>
+    <p className='overflow-wrap-anywhere mb-1 break-words'>{children}</p>
   ),
   li: ({ children }) => (
     <li className='overflow-wrap-anywhere break-words'>{children}</li>
   ),
-  ul: ({ children }) => <ul className='mb-4'>{children}</ul>,
-  ol: ({ children }) => <ol className='mb-4'>{children}</ol>,
-  h1: ({ children }) => <h1 className='mb-4 text-xl font-bold'>{children}</h1>,
+  ul: ({ children }) => <ul className='mb-2'>{children}</ul>,
+  ol: ({ children }) => <ol className='mb-2'>{children}</ol>,
+  h1: ({ children }) => <h1 className='mb-2 text-text-xl font-bold'>{children}</h1>,
   h2: ({ children }) => (
-    <h2 className='mb-3 text-lg font-semibold'>{children}</h2>
+    <h2 className='mb-1.5 text-text-lg font-semibold'>{children}</h2>
   ),
   h3: ({ children }) => (
-    <h3 className='mb-2 text-base font-semibold'>{children}</h3>
+    <h3 className='mb-1 text-text-md font-semibold'>{children}</h3>
   ),
   img: ({ src, alt }) => (
     <img
       src={src}
       alt={alt}
-      className='my-4 block h-auto max-w-full rounded-lg'
+      className='my-2 block h-auto max-w-full rounded-m'
       style={{ objectFit: "contain" }}
     />
   ),
   table: ({ children }) => (
-    <div className='my-4 overflow-x-auto'>
+    <div className='my-2 overflow-x-auto'>
       <table className='min-w-full border-collapse border border-border'>
         {children}
       </table>
     </div>
   ),
   td: ({ children }) => (
-    <td className='break-words border border-border px-4 py-2'>{children}</td>
+    <td className='break-words border border-border px-2 py-1'>{children}</td>
   ),
   th: ({ children }) => (
-    <th className='border border-border bg-cardBg px-4 py-2 font-semibold'>
+    <th className='border border-border bg-cardBg px-2 py-1 font-semibold'>
       {children}
     </th>
   ),

@@ -88,14 +88,14 @@ export const ApiProfile = () => {
 
   return (
     <div className='flex max-w-desktop flex-col'>
-      <section className='flex flex-col gap-4 md:flex-row md:items-center md:justify-between'>
+      <section className='flex flex-col gap-2 md:flex-row md:items-center md:justify-between'>
         <div className='flex flex-col'>
           <h2>API dashboard</h2>
           <p className='text-grayTextPrimary'>
             Manage and monitor you Cexplorer API keys usage.
           </p>
         </div>
-        <div className='flex gap-2 md:justify-end'>
+        <div className='flex gap-1 md:justify-end'>
           <Button
             label='Documentation'
             variant='tertiary'
@@ -112,37 +112,37 @@ export const ApiProfile = () => {
           />
         </div>
       </section>
-      <section className='mt-4 flex flex-wrap items-center gap-3 border-b border-border pb-4 text-sm md:gap-5'>
-        <span className='mr-2'>Your account</span>
-        <span className='flex items-center gap-1 text-grayTextPrimary'>
+      <section className='mt-2 flex flex-wrap items-center gap-1.5 border-b border-border pb-2 text-text-sm md:gap-5'>
+        <span className='mr-1'>Your account</span>
+        <span className='flex items-center gap-1/2 text-grayTextPrimary'>
           {/* Your plan: <Badge color='gray'>{!nfts ? "Basic" : "PRO"}</Badge> */}
         </span>
         <Link
           to={
             "/profile?tab=pro" as FileRoutesByPath[keyof FileRoutesByPath]["path"]
           }
-          className='gold-shimmer flex items-center gap-1 bg-purpleText bg-clip-text font-medium text-transparent underline hover:text-transparent'
+          className='gold-shimmer flex items-center gap-1/2 bg-purpleText bg-clip-text font-medium text-transparent underline hover:text-transparent'
         >
           NFTs held: <span className=''>{nfts}</span>
         </Link>
-        <span className='flex items-center gap-1 text-grayTextPrimary'>
+        <span className='flex items-center gap-1/2 text-grayTextPrimary'>
           API key limit: <span className='text-text'>1</span>
         </span>
       </section>
       {userQuery.isLoading ? (
-        <div className='mt-24 flex w-full justify-center'>
+        <div className='mt-12 flex w-full justify-center'>
           <SpinningLoader />
         </div>
       ) : (
-        <section className='mt-4 flex w-full justify-center'>
+        <section className='mt-2 flex w-full justify-center'>
           {userData?.length === 0 ? (
-            <div className='flex flex-col items-center gap-2'>
+            <div className='flex flex-col items-center gap-1'>
               <Search
                 size={40}
-                className='rounded-md border border-border p-2'
+                className='rounded-s border border-border p-1'
               />
               <h2>You don't have any projects yet.</h2>
-              <p className='max-w-[350px] text-center text-sm text-grayTextPrimary'>
+              <p className='max-w-[350px] text-center text-text-sm text-grayTextPrimary'>
                 Start a new project to generate a new API keys, monitor your
                 usage, and track your data.
               </p>
@@ -150,24 +150,24 @@ export const ApiProfile = () => {
           ) : (
             <>
               {userData?.map((apiKey, index) => (
-                <div className='flex w-full flex-col gap-5 text-sm'>
+                <div className='flex w-full flex-col gap-3 text-text-sm'>
                   {userData.length > 1 && <h1>#{index + 1}</h1>}
-                  <div className='flex w-full flex-col gap-8 border-b border-border pb-4 md:flex-row'>
-                    <div className='flex flex-col gap-2 md:w-[300px]'>
+                  <div className='flex w-full flex-col gap-4 border-b border-border pb-2 md:flex-row'>
+                    <div className='flex flex-col gap-1 md:w-[300px]'>
                       <span className='font-medium'>Plan</span>
-                      <p className='text-sm font-light text-grayTextPrimary'>
+                      <p className='text-text-sm font-regular text-grayTextPrimary'>
                         Details about your API plan
                       </p>
                     </div>
-                    <div className='flex w-full flex-col gap-3'>
+                    <div className='flex w-full flex-col gap-1.5'>
                       <span className='flex'>
-                        <span className='min-w-[150px] font-light text-grayTextPrimary'>
+                        <span className='min-w-[150px] font-regular text-grayTextPrimary'>
                           Project name
                         </span>{" "}
                         <span>{apiKey.name}</span>
                       </span>
                       <span className='flex'>
-                        <span className='min-w-[150px] font-light text-grayTextPrimary'>
+                        <span className='min-w-[150px] font-regular text-grayTextPrimary'>
                           My API plan
                         </span>{" "}
                         <span>
@@ -178,14 +178,14 @@ export const ApiProfile = () => {
                         </span>
                       </span>
                       <span className='flex'>
-                        <span className='min-w-[150px] font-light text-grayTextPrimary'>
+                        <span className='min-w-[150px] font-regular text-grayTextPrimary'>
                           Limits
                         </span>{" "}
-                        <span className='flex items-center gap-1'>
+                        <span className='flex items-center gap-1/2'>
                           {apiKey.numerator}x boosted{" "}
                           <Tooltip
                             content={
-                              <div className='flex w-[220px] flex-col gap-2'>
+                              <div className='flex w-[220px] flex-col gap-1'>
                                 <p>
                                   This address holds {nfts} Cexplorer PRO NFTs.
                                 </p>
@@ -201,7 +201,7 @@ export const ApiProfile = () => {
                         </span>
                       </span>
                       <span className='flex'>
-                        <span className='min-w-[150px] font-light text-grayTextPrimary'>
+                        <span className='min-w-[150px] font-regular text-grayTextPrimary'>
                           License
                         </span>{" "}
                         <span>
@@ -210,10 +210,10 @@ export const ApiProfile = () => {
                       </span>
                     </div>
                   </div>
-                  <div className='flex w-full flex-col gap-8 border-b border-border pb-4 md:flex-row'>
-                    <div className='flex flex-col gap-2 md:w-[300px]'>
+                  <div className='flex w-full flex-col gap-4 border-b border-border pb-2 md:flex-row'>
+                    <div className='flex flex-col gap-1 md:w-[300px]'>
                       <span className='font-medium'>Limits</span>
-                      <p className='text-sm font-light text-grayTextPrimary'>
+                      <p className='text-text-sm font-regular text-grayTextPrimary'>
                         API limits based on your plan. You can increase the
                         limits by upgrading your / by holding more Cexplorer PRO
                         NFTs.
@@ -221,13 +221,13 @@ export const ApiProfile = () => {
                       {apiKey.type === "starter" && (
                         <Link
                           to='/api'
-                          className='mt-1 flex items-center gap-1 font-medium text-primary'
+                          className='mt-1/2 flex items-center gap-1/2 font-medium text-primary'
                         >
                           Upgrade plan <Wand size={17} />
                         </Link>
                       )}
                     </div>
-                    <div className='flex w-full flex-col gap-2'>
+                    <div className='flex w-full flex-col gap-1'>
                       <ProgressBar
                         value={apiKey.rqs_day}
                         max={(userTierPlan?.rq_day ?? 0) * apiKey.numerator}
@@ -242,36 +242,36 @@ export const ApiProfile = () => {
                         <span className='font-medium'>
                           Max requests per minute
                         </span>
-                        <span className='font-light text-grayTextPrimary'>
+                        <span className='font-regular text-grayTextPrimary'>
                           {userTierPlan?.rq_min}
                         </span>
                       </div>
                     </div>
                   </div>
-                  <div className='flex w-full flex-col gap-8 border-b border-border pb-4 text-sm md:flex-row'>
-                    <div className='flex flex-col gap-2 md:w-[300px]'>
+                  <div className='flex w-full flex-col gap-4 border-b border-border pb-2 text-text-sm md:flex-row'>
+                    <div className='flex flex-col gap-1 md:w-[300px]'>
                       <span className='font-medium'>API keys</span>
-                      <p className='text-sm font-light text-grayTextPrimary'>
+                      <p className='text-text-sm font-regular text-grayTextPrimary'>
                         Your project’s API key. You can regenerate the key at
                         any time (disables the original key).
                       </p>
                     </div>
-                    <div className='flex w-full flex-col gap-2'>
-                      <div className='flex items-center gap-2'>
+                    <div className='flex w-full flex-col gap-1'>
+                      <div className='flex items-center gap-1'>
                         <input
                           type={showKey ? "text" : "password"}
                           value={apiKey.key}
-                          className='h-[42px] w-full rounded-md border border-border bg-transparent p-2 text-text'
+                          className='h-[42px] w-full rounded-s border border-border bg-transparent p-1 text-text'
                           readOnly
                         />
                         <button
                           onClick={() => setShowKey(!showKey)}
-                          className='rounded-xl border border-border p-2'
+                          className='rounded-l border border-border p-1'
                         >
                           {showKey ? <EyeOff /> : <Eye />}
                         </button>
                       </div>
-                      <div className='flex items-center gap-2'>
+                      <div className='flex items-center gap-1'>
                         <Copy copyText={apiKey.key} />
                         <Button
                           label='Regenerate key'
@@ -283,14 +283,14 @@ export const ApiProfile = () => {
                       </div>
                     </div>
                   </div>
-                  <div className='flex w-full flex-col gap-8 pb-4 text-sm lg:flex-row'>
-                    <div className='flex flex-col gap-2 lg:w-[300px]'>
+                  <div className='flex w-full flex-col gap-4 pb-2 text-text-sm lg:flex-row'>
+                    <div className='flex flex-col gap-1 lg:w-[300px]'>
                       <span className='font-medium'>API usage</span>
-                      <p className='text-sm font-light text-grayTextPrimary'>
+                      <p className='text-text-sm font-regular text-grayTextPrimary'>
                         Overview of the requests amount in time.
                       </p>
                     </div>
-                    <div className='flex w-full flex-col justify-center gap-2 lg:w-[calc(100%-300px)]'>
+                    <div className='flex w-full flex-col justify-center gap-1 lg:w-[calc(100%-300px)]'>
                       <ActivityGraph data={apiKey.stat} />
                     </div>
                   </div>
@@ -439,15 +439,15 @@ const ActivityGraph = ({ data }: { data: UserApiObject["stat"] }) => {
 const ProgressBar = ({ title, value, max }) => {
   const percentage = (value / max) * 100;
   return (
-    <div className='w-full text-sm'>
+    <div className='w-full text-text-sm'>
       <span className='font-medium'>{title}</span>
-      <div className='relative my-1 h-2 w-full overflow-hidden rounded-[4px] bg-border'>
+      <div className='relative my-1/2 h-2 w-full overflow-hidden rounded-[4px] bg-border'>
         <span
           className='absolute bottom-0 left-0 block h-2 rounded-bl-[4px] rounded-tl-[4px] bg-primary'
           style={{ width: `${percentage}%` }}
         ></span>
       </div>
-      <div className='flex w-full items-center justify-between text-xs text-grayTextPrimary'>
+      <div className='flex w-full items-center justify-between text-text-xs text-grayTextPrimary'>
         <span>
           {value} / {formatNumber(max)}
         </span>

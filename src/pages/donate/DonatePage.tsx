@@ -152,12 +152,12 @@ export const DonatePage = () => {
           maxWidth='95%'
           onClose={() => setShowSuccessModal(false)}
         >
-          <div className='mt-4 flex h-full w-full flex-col items-center overflow-hidden p-3'>
+          <div className='mt-2 flex h-full w-full flex-col items-center overflow-hidden p-1.5'>
             <h3>
               Transaction successful, thank you so much for supporting
               Cexplorer.io ❤️
             </h3>
-            <p className='mt-8'>
+            <p className='mt-4'>
               Transaction Hash:{" "}
               <Link
                 to='/tx/$hash'
@@ -171,14 +171,14 @@ export const DonatePage = () => {
         </Modal>
       )}
       <div className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
-        <p className='mt-8 text-sm font-semibold text-primary'>Donation</p>
-        <h1 className='mb-4'>Fuel the Future of Cexplorer</h1>
-        <p className='font-light text-grayTextPrimary'>
+        <p className='mt-4 text-text-sm font-semibold text-primary'>Donation</p>
+        <h1 className='mb-2'>Fuel the Future of Cexplorer</h1>
+        <p className='font-regular text-grayTextPrimary'>
           Your support helps us operate, maintain and improve everything on
           Cexplorer.io
         </p>
         <div className='flex w-full max-w-desktop flex-col'>
-          <section className='mt-12 flex flex-wrap gap-8'>
+          <section className='mt-6 flex flex-wrap gap-4'>
             <InfoCard
               icon={<Zap color={colors.darkBlue} />}
               heading='Here for Cardano since ITN'
@@ -195,7 +195,7 @@ export const DonatePage = () => {
               description='Many builders rely on our tools to develop on Cardano. Supporting us helps maintain and enhance these resources, benefiting the entire development community.'
             />
           </section>
-          <section className='mt-12 flex flex-wrap justify-center gap-8 border-b border-border pb-10'>
+          <section className='mt-6 flex flex-wrap justify-center gap-4 border-b border-border pb-5'>
             <Button
               size='lg'
               label='Stake with Cexplorer'
@@ -213,22 +213,22 @@ export const DonatePage = () => {
               className='min-w-[250px]'
             />
           </section>
-          <section ref={donateRef} className='border-b border-border py-16'>
+          <section ref={donateRef} className='border-b border-border py-8'>
             <h2>Donate</h2>
-            <div className='flex flex-wrap justify-between gap-4'>
+            <div className='flex flex-wrap justify-between gap-2'>
               <div className='flex flex-col'>
-                <p className='mt-4 font-light text-grayTextPrimary'>
+                <p className='mt-2 font-regular text-grayTextPrimary'>
                   Thank you for supporting the development of independent
                   Cardano explorer! ❤️
                 </p>
-                <p className='mb-2 mt-4 text-sm font-medium'>
+                <p className='mb-1 mt-2 text-text-sm font-medium'>
                   Send your donation here
                 </p>
                 <div className='relative flex w-full max-w-[390px] items-center'>
                   <input
                     readOnly
                     value={donationAddress}
-                    className='w-full max-w-[390px] rounded-lg border border-border bg-background p-3 text-sm text-text'
+                    className='w-full max-w-[390px] rounded-m border border-border bg-background p-1.5 text-text-sm text-text'
                   />
                   <Copy
                     copyText={donationAddress}
@@ -236,13 +236,13 @@ export const DonatePage = () => {
                   />
                 </div>
               </div>
-              <div className='flex flex-col gap-4'>
-                <p className='text-sm font-medium'>Other donation methods</p>
-                <div className='flex flex-wrap gap-4'>
+              <div className='flex flex-col gap-2'>
+                <p className='text-text-sm font-medium'>Other donation methods</p>
+                <div className='flex flex-wrap gap-2'>
                   <a
                     href='https://www.paypal.com/donate?business=billing@vellumlabs.cz&item_name=Cexplorer.io+-+maintenance,+development,+servers&currency_code=USD'
                     target='_blank'
-                    className='flex items-center gap-1 font-medium text-grayTextPrimary'
+                    className='flex items-center gap-1/2 font-medium text-grayTextPrimary'
                   >
                     <img src={Paypal} />
                     PayPal
@@ -250,7 +250,7 @@ export const DonatePage = () => {
                   <a
                     href='https://www.patreon.com/ADApools'
                     target='_blank'
-                    className='flex items-center gap-1 font-medium text-grayTextPrimary'
+                    className='flex items-center gap-1/2 font-medium text-grayTextPrimary'
                   >
                     <img src={Patreon} />
                     Patreon
@@ -258,9 +258,9 @@ export const DonatePage = () => {
                   <a
                     href='https://buymeacoffee.com/vellumlabs'
                     target='_blank'
-                    className='flex items-center gap-1 font-medium text-grayTextPrimary'
+                    className='flex items-center gap-1/2 font-medium text-grayTextPrimary'
                   >
-                    <div className='flex h-6 w-6 items-center justify-center rounded-full bg-gray-300 dark:bg-gray-600'>
+                    <div className='flex h-6 w-6 items-center justify-center rounded-max bg-gray-300 dark:bg-gray-600'>
                       <img src={BuyMeACoffee} className='h-4 w-4' />
                     </div>
                     Buy Me a Coffee
@@ -268,10 +268,10 @@ export const DonatePage = () => {
                 </div>
               </div>
             </div>
-            <p className='mb-2 mt-10 text-sm font-medium'>
+            <p className='mb-1 mt-5 text-text-sm font-medium'>
               Or use our dApp connector
             </p>
-            <div className='flex flex-wrap gap-4'>
+            <div className='flex flex-wrap gap-2'>
               <DonateCard
                 icon={<Coffee color={colors.darkBlue} />}
                 amount={10}
@@ -317,7 +317,7 @@ export const DonatePage = () => {
                 label='Donate'
                 variant='primary'
                 leftIcon={<Wallet />}
-                className='mt-8'
+                className='mt-4'
                 onClick={handleDonation}
                 disabled={!activeDonation && customAmount === ""}
               />
@@ -325,31 +325,31 @@ export const DonatePage = () => {
           </section>
           <section
             ref={stakeRef}
-            className='mt-16 flex w-full flex-wrap justify-between rounded-xl bg-cardBg px-8 py-10'
+            className='mt-8 flex w-full flex-wrap justify-between rounded-l bg-cardBg px-4 py-5'
           >
-            <div className='flex basis-[550px] gap-8'>
+            <div className='flex basis-[550px] gap-4'>
               <img className='hidden shrink md:block' src={CexLogo} />
-              <div className='flex flex-col gap-3'>
+              <div className='flex flex-col gap-1.5'>
                 <h2>Stake with Cexplorer.io</h2>
-                <p className='max-w-[350px] font-light text-grayTextPrimary'>
+                <p className='max-w-[350px] font-regular text-grayTextPrimary'>
                   Support Cexplorer and earn staking rewards by delegating your
                   ADA to our pool.
                 </p>
-                <p className='max-w-[350px] font-light text-grayTextPrimary'>
+                <p className='max-w-[350px] font-regular text-grayTextPrimary'>
                   Enjoy top-tier infrastructure and a win-win for both you and
                   us!
                 </p>
                 <Link
                   to='/pool/$id'
                   params={{ id: randomPool }}
-                  className='my-4 flex items-center text-sm font-medium text-grayTextPrimary'
+                  className='my-2 flex items-center text-text-sm font-medium text-grayTextPrimary'
                 >
                   Our stake pool performance <ArrowRight />
                 </Link>
               </div>
             </div>
             <div className='flex flex-col'>
-              <p className='text-xs'>Delegate via dApp</p>
+              <p className='text-text-xs'>Delegate via dApp</p>
               <Button
                 size='lg'
                 label='Delegate to [POOLS]'
@@ -357,12 +357,12 @@ export const DonatePage = () => {
                 leftIcon={<Wallet />}
                 onClick={handleDelegation}
               />
-              <p className='mt-8 text-xs'> Pool ID for delegation via wallet</p>
+              <p className='mt-4 text-text-xs'> Pool ID for delegation via wallet</p>
               <div className='relative flex w-full max-w-[430px] items-center'>
                 <input
                   readOnly
                   value={randomPool}
-                  className='w-full max-w-[430px] rounded-lg border border-border bg-background p-3 text-sm text-text'
+                  className='w-full max-w-[430px] rounded-m border border-border bg-background p-1.5 text-text-sm text-text'
                 />
                 <Copy
                   copyText={randomPool}
@@ -380,13 +380,13 @@ export const DonatePage = () => {
 const InfoCard = ({ icon, heading, description }: InfoCardProps) => {
   return (
     <section className='flex grow basis-[350px] flex-col'>
-      <div className='flex items-center gap-3'>
-        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-blue-100/90 p-1 outline outline-[6px] outline-blue-100/50'>
+      <div className='flex items-center gap-1.5'>
+        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-max bg-blue-100/90 p-1/2 outline outline-[6px] outline-blue-100/50'>
           {icon}
         </div>
         <h3>{heading}</h3>{" "}
       </div>
-      <p className='pl-12 text-sm text-grayTextPrimary'>{description}</p>
+      <p className='pl-6 text-text-sm text-grayTextPrimary'>{description}</p>
     </section>
   );
 };
@@ -406,23 +406,23 @@ const CustomDonateCard = ({
   return (
     <div
       onClick={onClick}
-      className={`relative flex grow basis-[250px] cursor-pointer flex-col items-start gap-2 rounded-xl border p-3 ${isActive ? "outline outline-2 outline-primary" : "border-border"}`}
+      className={`relative flex grow basis-[250px] cursor-pointer flex-col items-start gap-1 rounded-l border p-1.5 ${isActive ? "outline outline-2 outline-primary" : "border-border"}`}
     >
       <Checkbox className='absolute right-3 top-3' checked={isActive} />
       <div className='flex w-full justify-between'>
-        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-blue-100/90 p-1 outline outline-[6px] outline-blue-100/50'>
+        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-max bg-blue-100/90 p-1/2 outline outline-[6px] outline-blue-100/50'>
           <Zap color={colors.darkBlue} />
         </div>
       </div>
       <TextInput
-        inputClassName='h-10 my-2 w-full'
+        inputClassName='h-10 my-1 w-full'
         wrapperClassName='w-full max-w-[300px]'
         value={amount}
         onchange={value => handleAmountChange(value)}
         placeholder='Choose the amount'
       />
       <p className='font-medium'>dApp Your Way</p>
-      <p className='mt-3 text-left text-sm text-grayTextPrimary'>
+      <p className='mt-1.5 text-left text-text-sm text-grayTextPrimary'>
         Empowering developers with the freedom to innovate.
       </p>
     </div>
@@ -440,19 +440,19 @@ const DonateCard = ({
   return (
     <div
       onClick={onClick}
-      className={`relative flex grow basis-[250px] cursor-pointer flex-col items-start gap-2 rounded-xl border p-3 ${isActive ? "outline outline-2 outline-primary" : "border-border"}`}
+      className={`relative flex grow basis-[250px] cursor-pointer flex-col items-start gap-1 rounded-l border p-1.5 ${isActive ? "outline outline-2 outline-primary" : "border-border"}`}
     >
       <Checkbox className='absolute right-3 top-3' checked={isActive} />
       <div className='flex w-full justify-between'>
-        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-blue-100/90 p-1 outline outline-[6px] outline-blue-100/50'>
+        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-max bg-blue-100/90 p-1/2 outline outline-[6px] outline-blue-100/50'>
           {icon}
         </div>
       </div>
       {amount ? (
-        <h2 className='my-3 text-primary'>{amount} ADA</h2>
+        <h2 className='my-1.5 text-primary'>{amount} ADA</h2>
       ) : (
         <TextInput
-          inputClassName='h-10 my-2 w-full'
+          inputClassName='h-10 my-1 w-full'
           wrapperClassName='w-full max-w-[300px]'
           value=''
           onchange={() => {}}
@@ -460,7 +460,7 @@ const DonateCard = ({
         />
       )}
       <p className='font-medium'>{title}</p>
-      <p className='mt-3 text-left text-sm text-grayTextPrimary'>
+      <p className='mt-1.5 text-left text-text-sm text-grayTextPrimary'>
         {description}
       </p>
     </div>

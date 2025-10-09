@@ -81,7 +81,7 @@ export const PoolStructureTable: FC<PoolStructureTableProps> = ({ poolId }) => {
               </div>
             }
           >
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-1'>
               <div className='w-[30px]'>
                 <img src={item.icon} />
               </div>
@@ -156,7 +156,7 @@ export const PoolStructureTable: FC<PoolStructureTableProps> = ({ poolId }) => {
         };
 
         return (
-          <div className='flex w-full items-center justify-end gap-1'>
+          <div className='flex w-full items-center justify-end gap-1/2'>
             <span>{usage.toFixed(2)}%</span>
             <ReactEcharts option={option} className='max-h-[50px] w-[50px]' />
           </div>
@@ -232,7 +232,7 @@ export const PoolStructureTable: FC<PoolStructureTableProps> = ({ poolId }) => {
         };
 
         return (
-          <div className='flex w-full items-center justify-end gap-1'>
+          <div className='flex w-full items-center justify-end gap-1/2'>
             <span>{usage.toFixed(2)}%</span>
             <ReactEcharts option={option} className='max-h-[50px] w-[50px]' />
           </div>

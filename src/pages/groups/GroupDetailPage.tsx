@@ -133,11 +133,11 @@ export const GroupDetailPage = () => {
         const fixedPoolCapUsed = poolCapUsed ? poolCapUsed.toFixed(2) : 0;
 
         return (
-          <div className='flex flex-col gap-3'>
+          <div className='flex flex-col gap-1.5'>
             <span className='text-right text-grayTextPrimary'>
               <AdaWithTooltip data={item.info[0].active_stake ?? 0} />
             </span>
-            <div className='flex items-center justify-end gap-2'>
+            <div className='flex items-center justify-end gap-1'>
               <div
                 className='relative h-3 max-w-20 overflow-hidden rounded-[4px] bg-[#FEC84B]'
                 style={{
@@ -180,7 +180,7 @@ export const GroupDetailPage = () => {
 
         return (
           <div>
-            <div className='flex items-center justify-end gap-1'>
+            <div className='flex items-center justify-end gap-1/2'>
               <RoaDiffArrow color={lifetimeRoa} />
               <p className='text-left text-grayTextPrimary'>
                 {item.info[0].stats?.lifetime?.roa
@@ -189,7 +189,7 @@ export const GroupDetailPage = () => {
                 %
               </p>
             </div>
-            <div className='flex items-center justify-end gap-1'>
+            <div className='flex items-center justify-end gap-1/2'>
               <RoaDiffArrow color={recentRoa} />
               <p className='text-left text-grayTextPrimary'>
                 {item.info[0].stats?.recent?.roa
@@ -225,7 +225,7 @@ export const GroupDetailPage = () => {
       key: "fees",
       render: item => {
         return (
-          <div className='flex flex-col text-right text-xs text-grayTextPrimary'>
+          <div className='flex flex-col text-right text-text-xs text-grayTextPrimary'>
             <span>
               {item?.info[0].pool_update?.active?.margin
                 ? (item.info[0].pool_update?.active?.margin * 100).toFixed(2)
@@ -263,7 +263,7 @@ export const GroupDetailPage = () => {
 
         return (
           <div className='text-right text-grayTextPrimary'>
-            <div className='flex items-center justify-end gap-2'>
+            <div className='flex items-center justify-end gap-1'>
               <span>{`${formatNumber(totalPoolBlocks.totalMintedBlocks)} / ${formatNumber(totalEstimatedBlocksFixed)}`}</span>
               <PoolListEchart
                 ref={tableRef}
@@ -294,7 +294,7 @@ export const GroupDetailPage = () => {
                 className='justify-end'
               />
             </div>
-            <div className='text-xs text-grayTextSecondary'>
+            <div className='text-text-xs text-grayTextSecondary'>
               ({formattedTotalBlocks})
             </div>
           </div>
@@ -320,7 +320,7 @@ export const GroupDetailPage = () => {
 
         return (
           <div className='flex flex-col items-end'>
-            <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-1/2'>
               {pledged >= pledge ? (
                 <Check
                   size={11}
@@ -331,7 +331,7 @@ export const GroupDetailPage = () => {
               )}
               <Tooltip
                 content={
-                  <div className='flex w-[140px] items-center gap-1'>
+                  <div className='flex w-[140px] items-center gap-1/2'>
                     <span>Active pledge stake: {lovelaceToAda(pledged)}</span>
                   </div>
                 }
@@ -343,13 +343,13 @@ export const GroupDetailPage = () => {
                 </span>
               </Tooltip>
             </div>
-            <div className='flex items-center justify-end gap-1'>
+            <div className='flex items-center justify-end gap-1/2'>
               <Filter
                 size={11}
                 color={getPledgeColor(pledgeLeverage)}
                 className={cn("translate-y-[2px]")}
               />
-              <span className='text-xs text-grayTextPrimary'>
+              <span className='text-text-xs text-grayTextPrimary'>
                 x{pledgeLeverage}
               </span>
             </div>
@@ -386,9 +386,9 @@ export const GroupDetailPage = () => {
         const isActive = item.info[0].is_active;
 
         return (
-          <div className='relative flex h-[24px] w-fit items-center justify-end gap-2 rounded-lg border border-border px-[10px]'>
+          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
             <PulseDot color={!isActive ? "bg-yellowText" : undefined} />
-            <span className='text-xs font-medium'>
+            <span className='text-text-xs font-medium'>
               {isActive ? "Active" : "Inactive"}
             </span>
           </div>
@@ -584,9 +584,9 @@ export const GroupDetailPage = () => {
           content={metadata.groupDetail.keywords.replace("%group%", name ?? "")}
         />
       </Helmet>
-      <main className='flex min-h-minHeight flex-col items-center gap-2 p-mobile md:p-desktop'>
+      <main className='flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col justify-center'>
-          <Breadcrumb className='mb-4 w-full'>
+          <Breadcrumb className='mb-2 w-full'>
             <BreadcrumbList className='flex items-center'>
               <BreadcrumbItem>
                 <Link className='underline underline-offset-2' to='/'>
@@ -603,9 +603,9 @@ export const GroupDetailPage = () => {
             </BreadcrumbList>
           </Breadcrumb>
           <h1 className='text-left'>{name}</h1>
-          <p className='mt-2'>{description}</p>
-          <div className='my-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-            <div className='flex w-full flex-wrap items-center justify-end gap-2 md:flex-nowrap'>
+          <p className='mt-1'>{description}</p>
+          <div className='my-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+            <div className='flex w-full flex-wrap items-center justify-end gap-1 md:flex-nowrap'>
               {isAnyDrepItem && (
                 <Tabs
                   withPadding={false}
@@ -614,7 +614,7 @@ export const GroupDetailPage = () => {
                   onClick={activeTab => setFilter(activeTab as "pool" | "drep")}
                 />
               )}
-              <div className='flex flex-grow items-center gap-2 md:flex-grow-0'>
+              <div className='flex flex-grow items-center gap-1 md:flex-grow-0'>
                 <TableSearchInput
                   placeholder='Search your results...'
                   value={tableSearch}

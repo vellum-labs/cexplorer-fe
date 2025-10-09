@@ -13,9 +13,9 @@ export const GovernanceMobileItems = ({ onBack, setOpen }: Props) => {
     <>
       <button
         onClick={onBack}
-        className='mb-2 flex h-[34px] -translate-x-1 items-center gap-2 font-medium'
+        className='mb-1 flex h-[34px] -translate-x-1 items-center gap-1 font-medium'
       >
-        <ChevronLeft size={20} className='font-normal' />
+        <ChevronLeft size={20} className='font-regular' />
         <span>Governance certificates</span>
       </button>
       <div className='flex flex-col'>
@@ -26,7 +26,7 @@ export const GovernanceMobileItems = ({ onBack, setOpen }: Props) => {
               key={JSON.stringify(item.label)}
               to={item.href}
               onClick={() => setOpen(false)}
-              className='ml-[31px] border-b border-border py-3 text-[14px] last:border-none last:pb-0 hover:text-primary'
+              className='ml-[31px] border-b border-border py-1.5 text-[14px] last:border-none last:pb-0 hover:text-primary'
             >
               {item.label}
             </Link>

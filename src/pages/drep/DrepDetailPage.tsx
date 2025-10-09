@@ -94,11 +94,11 @@ export const DrepDetailPage: FC = () => {
       }}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1'>Governance</span>,
+          label: <span className='inline pt-1/2'>Governance</span>,
           link: "/gov",
         },
         {
-          label: <span className='inline pt-1'>Delegated representatives</span>,
+          label: <span className='inline pt-1/2'>Delegated representatives</span>,
           link: "/drep",
         },
         {
@@ -109,7 +109,7 @@ export const DrepDetailPage: FC = () => {
         },
       ]}
       title={
-        <div className='mt-1 flex items-center gap-2'>
+        <div className='mt-1/2 flex items-center gap-1'>
           <Image
             src={generateImageUrl(
               drepDetailQuery.data?.hash?.view ?? "",
@@ -119,7 +119,7 @@ export const DrepDetailPage: FC = () => {
             type='user'
             height={35}
             width={35}
-            className='rounded-full'
+            className='rounded-max'
           />
           {title}
         </div>

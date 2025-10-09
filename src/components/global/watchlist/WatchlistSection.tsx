@@ -32,7 +32,7 @@ export const WatchlistSection = ({
 
   if (isLoading)
     return (
-      <section className='ml-auto flex w-full max-w-desktop items-center justify-end gap-2'>
+      <section className='ml-auto flex w-full max-w-desktop items-center justify-end gap-1'>
         {collection && (
           <LoadingSkeleton
             height='32px'
@@ -57,7 +57,7 @@ export const WatchlistSection = ({
     );
 
   return (
-    <div className='ml-auto flex w-full items-center justify-end gap-2'>
+    <div className='ml-auto flex w-full items-center justify-end gap-1'>
       {collection && (
         <Button
           href={`${jamUrl}collections/${collection}` as any}

@@ -103,14 +103,14 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
 
         return relativePledge && !isNaN(Number(relativePledge)) ? (
           <div className='flex items-center justify-end'>
-            <div className='flex w-2/3 items-center gap-3'>
+            <div className='flex w-2/3 items-center gap-1.5'>
               <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#FEC84B]'>
                 <span
                   className='absolute left-0 block h-2 rounded-bl-[4px] rounded-tl-[4px] bg-[#47CD89]'
                   style={{ width: `${Math.min(relativePledge, 100)}%` }}
                 />
               </div>
-              <span className='self-end text-sm text-grayTextPrimary'>
+              <span className='self-end text-text-sm text-grayTextPrimary'>
                 {displayValue}%
               </span>
             </div>
@@ -149,7 +149,7 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
                   strokeLinecap='round'
                 />
               </svg>
-              <span className='update absolute inset-0 left-1 top-2 flex items-center justify-center text-xs text-grayTextPrimary'>
+              <span className='update absolute inset-0 left-1 top-2 flex items-center justify-center text-text-xs text-grayTextPrimary'>
                 {!isNaN(pledgeStakedRatio)
                   ? `${pledgeStakedRatio.toFixed(2)}%`
                   : "?"}
@@ -253,7 +253,7 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
         const time = item.time.split(" ")[0];
 
         return (
-          <div className='updateItems-center flex items-center gap-1'>
+          <div className='updateItems-center flex items-center gap-1/2'>
             <Clock size={10} color='grayText' />
             {format(time, "dd.MM.yy")}
           </div>
@@ -362,13 +362,13 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
             <Tooltip content={item?.meta?.url}>
               <div
                 onClick={() => setActiveUrl(item?.meta?.url)}
-                className='flex w-fit cursor-pointer items-center justify-end gap-1'
+                className='flex w-fit cursor-pointer items-center justify-end gap-1/2'
               >
                 <Download className='text-primary' size={11} />
                 <span className='text-primary'>Download</span>
               </div>
             </Tooltip>
-            <div className='flex items-center justify-end gap-1'>
+            <div className='flex items-center justify-end gap-1/2'>
               <span>{formatString(item?.meta?.hash, "long")}</span>
               <Copy
                 copyText={item?.meta?.hash}
@@ -390,14 +390,14 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
       {activeUrl && (
         <SafetyLinkModal url={activeUrl} onClose={() => setActiveUrl("")} />
       )}
-      <div className='flex flex-col gap-4'>
+      <div className='flex flex-col gap-2'>
         {description && (
           <>
             <h3>About Pool</h3>
-            <p className='text-sm text-grayTextPrimary'>{description}</p>
+            <p className='text-text-sm text-grayTextPrimary'>{description}</p>
           </>
         )}
-        <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-2'>
           <h3>Owners (Pledge)</h3>
           <GlobalTable
             type='default'
@@ -408,7 +408,7 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
             columns={ownerColumns}
           />
         </div>
-        <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-2'>
           <h3>Rewards</h3>
           <GlobalTable
             type='default'
@@ -419,7 +419,7 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
             columns={rewardsColumns}
           />
         </div>
-        <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-2'>
           <h3>Relays</h3>
           <GlobalTable
             type='default'
@@ -430,7 +430,7 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
             columns={relayColumns}
           />
         </div>
-        <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-2'>
           <h3>Pool Certificates</h3>
           <GlobalTable
             type='default'

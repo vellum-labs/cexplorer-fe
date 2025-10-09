@@ -268,7 +268,7 @@ export const TreasuryDonationEpochsTab = ({ query }: Props) => {
 
   return (
     <>
-      <div className='relative mt-8 w-full'>
+      <div className='relative mt-4 w-full'>
         <GraphWatermark />
         <ReactEcharts
           opts={{ height: 350 }}
@@ -286,7 +286,7 @@ export const TreasuryDonationEpochsTab = ({ query }: Props) => {
           option={option}
           notMerge={true}
           lazyUpdate={true}
-          className='mb-12 h-full min-h-[350px] w-full'
+          className='mb-6 h-full min-h-[350px] w-full'
         />
       </div>
       <GlobalTable

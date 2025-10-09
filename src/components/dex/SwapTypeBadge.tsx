@@ -17,19 +17,19 @@ export const SwapTypeBadge: FC<SwapTypeBadgeProps> = ({
   return (
     <div className='flex items-center gap-2'>
       {hasDexhunter && (
-        <div className='flex w-fit items-center gap-1 rounded-md border border-border px-2 text-sm'>
+        <div className='flex w-fit items-center gap-1 rounded-m border border-border px-1 text-text-sm'>
           <img src={DexhunterIcon} alt='Dexhunter' height={15} width={15} />
           <span>Dexhunter</span>
         </div>
       )}
       {isDirectSwap && (
-        <div className='flex w-fit items-center gap-1 rounded-md border border-border px-2 text-sm'>
+        <div className='flex w-fit items-center gap-1 rounded-m border border-border px-1 text-text-sm'>
           <ArrowLeftRight size={15} className='text-primary' />
           <span>Direct swap</span>
         </div>
       )}
       {isAggregatorSwap && (
-        <div className='flex w-fit items-center gap-1 rounded-md border border-border px-2 text-sm'>
+        <div className='flex w-fit items-center gap-1 rounded-m border border-border px-1 text-text-sm'>
           <ArrowLeftRight size={15} className='text-primary' />
           <span>Aggregator swap</span>
         </div>

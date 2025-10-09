@@ -23,25 +23,29 @@ export const OverviewStatCard = ({
 }: OverviewStatCardProps) => {
   return (
     <div
-      className={`flex min-h-[100px] shrink grow basis-[280px] flex-col gap-3 rounded-xl border border-border bg-cardBg px-4 py-3 shadow ${className}`}
+      className={`flex h-full min-h-[100px] shrink grow basis-[280px] flex-col gap-1.5 rounded-l border border-border bg-cardBg px-2 py-1.5 shadow-md ${className}`}
     >
       <div className='flex items-center justify-between'>
         <div
-          className={`flex items-center justify-start gap-2 ${titleClassname ? titleClassname : ""}`}
+          className={`flex items-center justify-start gap-1 ${titleClassname ? titleClassname : ""}`}
         >
           {icon && (
-            <div className='rounded-lg border border-border p-1'>{icon}</div>
+            <div className='rounded-m border border-border p-1/2'>{icon}</div>
           )}
-          <p className='text-sm text-grayTextPrimary'>{title}</p>
+          <p className='text-text-sm text-grayTextPrimary'>{title}</p>
         </div>
-        {subTitle && <p className='text-xs text-grayTextPrimary'>{subTitle}</p>}
+        {subTitle && (
+          <p className='text-text-xs text-grayTextPrimary'>{subTitle}</p>
+        )}
       </div>
       <div
         className={`text-lg font-semibold ${fullContentHeight ? "h-full" : ""}`}
       >
         {value}
       </div>
-      {description && <p className='text-grayText text-sm'>{description}</p>}
+      {description && (
+        <p className='text-grayText text-text-sm'>{description}</p>
+      )}
     </div>
   );
 };

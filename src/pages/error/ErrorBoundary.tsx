@@ -52,32 +52,32 @@ const DefaultErrorPage = ({ error }: { error: Error | null }) => {
   return (
     <>
       <SafeNavbar />
-      <section className='flex min-h-minHeight w-full flex-col items-center gap-12 px-4 py-9'>
-        <div className='flex w-full flex-col items-center gap-6'>
-          <div className='flex h-[56px] w-[56px] items-center justify-center rounded-xl border border-border'>
+      <section className='flex min-h-minHeight w-full flex-col items-center gap-6 px-2 py-5'>
+        <div className='flex w-full flex-col items-center gap-3'>
+          <div className='flex h-[56px] w-[56px] items-center justify-center rounded-l border border-border'>
             <CircleAlert size={26} />
           </div>
-          <h1 className='text-center text-4xl md:text-start'>
+          <h1 className='text-center text-display-md md:text-start'>
             Something went wrong...
           </h1>
-          <p className='text-center text-2xl text-grayTextPrimary md:text-start'>
+          <p className='text-center text-display-xs text-grayTextPrimary md:text-start'>
             Well, this is awkward. The page didn’t load, help us by reporting
             the problem.
           </p>
         </div>
-        <div className='flex w-full max-w-[880px] flex-col gap-4 rounded-2xl border border-border p-6'>
+        <div className='flex w-full max-w-[880px] flex-col gap-2 rounded-xl border border-border p-3'>
           <h3>Error mesage</h3>
           <div className='border border-border'></div>
           <div
-            className={`rounded-lg border p-4 text-sm font-medium ${theme === "light" ? "border-[#FDA29B] bg-[#FFFBFA]" : "border-[#F97066] bg-[#FEE4E2] text-black"}`}
+            className={`rounded-lg border p-2 text-text-sm font-medium ${theme === "light" ? "border-[#FDA29B] bg-[#FFFBFA]" : "border-[#F97066] bg-[#FEE4E2] text-black"}`}
           >
             {error?.message}
           </div>
-          <div className='flex items-center gap-4 rounded-lg border border-cardBg bg-darker px-6 py-4'>
-            <div className='flex min-h-[32px] min-w-[32px] items-center justify-center gap-4 rounded-[6px] border border-border bg-cardBg'>
+          <div className='flex items-center gap-2 rounded-m border border-cardBg bg-darker px-3 py-2'>
+            <div className='flex min-h-[32px] min-w-[32px] items-center justify-center gap-2 rounded-[6px] border border-border bg-cardBg'>
               <CircleAlert size={14} className='text-primary' />
             </div>
-            <span className='text-sm text-grayTextPrimary'>
+            <span className='text-text-sm text-grayTextPrimary'>
               If something isn’t working as expected, please copy your current
               status details and reach out to us on{" "}
               <a
@@ -105,7 +105,7 @@ const DefaultErrorPage = ({ error }: { error: Error | null }) => {
             />
           </div>
         </div>
-        <div className='flex w-full max-w-[880px] items-center justify-between gap-3 md:justify-center'>
+        <div className='flex w-full max-w-[880px] items-center justify-between gap-1.5 md:justify-center'>
           <Button
             size='md'
             label='Go back'

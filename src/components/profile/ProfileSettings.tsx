@@ -298,7 +298,7 @@ export const ProfileSettings: FC = () => {
   return (
     <div className='flex w-full max-w-desktop flex-col'>
       <h2>Profile settings</h2>
-      <p className='border-b border-border pb-4 text-grayTextPrimary'>
+      <p className='border-b border-border pb-2 text-grayTextPrimary'>
         Update your profile picture photo and details here.
       </p>
       <ProfileForm
@@ -336,7 +336,7 @@ export const ProfileSettings: FC = () => {
         title='Social profiles'
         description='Social profiles will be visible on you address detail only when profile is public.'
         sideContent={
-          <div className='flex w-full flex-col gap-3 self-center min-[680px]:w-[300px]'>
+          <div className='flex w-full flex-col gap-1.5 self-center min-[680px]:w-[300px]'>
             {socialsData.map(([key, value]) => (
               <div
                 key={key}
@@ -354,7 +354,7 @@ export const ProfileSettings: FC = () => {
                   prefixClassname='w-[80px]'
                 />
                 <p
-                  className={`overflow-hidden text-sm text-red-500 opacity-0 ${
+                  className={`overflow-hidden text-text-sm text-red-500 opacity-0 ${
                     errors[key] ? "opacity-100" : "opacity-0"
                   }`}
                 >
@@ -366,7 +366,7 @@ export const ProfileSettings: FC = () => {
         }
         showBorder={false}
       />
-      <div className='flex w-full justify-end gap-2'>
+      <div className='flex w-full justify-end gap-1'>
         <Button
           label='Cancel'
           size='lg'

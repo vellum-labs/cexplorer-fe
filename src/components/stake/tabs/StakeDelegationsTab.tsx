@@ -72,7 +72,7 @@ const StakeDelegationsTab = ({ address, miscConst }: Props) => {
     {
       key: "active_in",
       render: item => (
-        <div className='flex flex-col items-end gap-1'>
+        <div className='flex flex-col items-end gap-1/2'>
           {item?.delegation.active.active_epoch_no ?? "-"}
         </div>
       ),
@@ -83,7 +83,7 @@ const StakeDelegationsTab = ({ address, miscConst }: Props) => {
     {
       key: "address",
       render: item => (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           {item.delegation?.live?.pool?.id ? (
             <PoolCell poolInfo={item.delegation.live.pool} />
           ) : (
@@ -98,7 +98,7 @@ const StakeDelegationsTab = ({ address, miscConst }: Props) => {
     {
       key: "amount",
       render: item => (
-        <div className='flex flex-col items-end gap-1'>
+        <div className='flex flex-col items-end gap-1/2'>
           <AdaWithTooltip data={item?.stake?.active[0]?.amount ?? 0} />
         </div>
       ),
@@ -123,7 +123,7 @@ const StakeDelegationsTab = ({ address, miscConst }: Props) => {
       ),
       title: (
         <div className='flex w-full justify-end'>
-          <div className='flex w-fit cursor-pointer items-center gap-1 text-right'>
+          <div className='flex w-fit cursor-pointer items-center gap-1/2 text-right'>
             <span>Loyalty</span>
           </div>
         </div>
@@ -201,7 +201,7 @@ const StakeDelegationsTab = ({ address, miscConst }: Props) => {
     {
       key: "active_in",
       render: item => (
-        <div className='flex flex-col items-end gap-1'>
+        <div className='flex flex-col items-end gap-1/2'>
           {item?.active_epoch_no}
         </div>
       ),
@@ -212,7 +212,7 @@ const StakeDelegationsTab = ({ address, miscConst }: Props) => {
     {
       key: "address",
       render: item => (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <PoolCell poolInfo={item.pool.live} />
         </div>
       ),
@@ -234,7 +234,7 @@ const StakeDelegationsTab = ({ address, miscConst }: Props) => {
     {
       key: "amount",
       render: item => (
-        <div className='flex flex-col items-end gap-1'>
+        <div className='flex flex-col items-end gap-1/2'>
           <AdaWithTooltip data={item?.active_stake ?? 0} />
         </div>
       ),
@@ -258,7 +258,7 @@ const StakeDelegationsTab = ({ address, miscConst }: Props) => {
       },
       title: (
         <div className='flex w-full justify-end'>
-          <div className='flex w-fit cursor-pointer items-center gap-1 text-right'>
+          <div className='flex w-fit cursor-pointer items-center gap-1/2 text-right'>
             <span>Loyalty</span>
           </div>
         </div>
@@ -319,11 +319,11 @@ const StakeDelegationsTab = ({ address, miscConst }: Props) => {
   }, [totalCount, totalItems]);
 
   return (
-    <section className='flex flex-col-reverse gap-8'>
+    <section className='flex flex-col-reverse gap-4'>
       {delegationStateQuery.data?.count &&
         delegationStateQuery.data?.count > 1 && (
           <div>
-            <h3 className='mb-4 flex items-center gap-2'>Multi delegations</h3>
+            <h3 className='mb-2 flex items-center gap-1'>Multi delegations</h3>
             <GlobalTable
               type='default'
               itemsPerPage={10}
@@ -342,9 +342,9 @@ const StakeDelegationsTab = ({ address, miscConst }: Props) => {
           </div>
         )}
       <div className='flex flex-col'>
-        <div className='flex items-center justify-between gap-2'>
-          <h3 className='my-4'>Delegation history</h3>
-          <div className='flex items-center gap-2'>
+        <div className='flex items-center justify-between gap-1'>
+          <h3 className='my-2'>Delegation history</h3>
+          <div className='flex items-center gap-1'>
             <ExportButton columns={delegationColumns} items={items} />
             <TableSettingsDropdown
               rows={rows}

@@ -48,7 +48,7 @@ export const NetworkBlocksTab: FC = () => {
   ];
 
   return (
-    <section className='flex w-full max-w-desktop flex-col gap-3'>
+    <section className='flex w-full max-w-desktop flex-col gap-1.5'>
       <AnalyticsStatList
         isLoading={epochQuery.isLoading}
         statCards={statCards}

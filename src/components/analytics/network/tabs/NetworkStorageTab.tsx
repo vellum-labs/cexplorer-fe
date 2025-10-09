@@ -48,7 +48,7 @@ export const NetworkStorageTab: FC = () => {
           ((currStorIncrease - prevStorIncrease) / prevStorIncrease) * 100;
 
         return (
-          <span className='flex gap-1'>
+          <span className='flex gap-1/2'>
             <span
               className={`flex items-center gap-1 ${Math.sign(percentageChange) > 0 ? "text-[#079455]" : "text-[#FDB022]"}`}
             >
@@ -74,7 +74,7 @@ export const NetworkStorageTab: FC = () => {
   ];
 
   return (
-    <section className='flex w-full max-w-desktop flex-col gap-3'>
+    <section className='flex w-full max-w-desktop flex-col gap-1.5'>
       <AnalyticsStatList
         isLoading={epochQuery.isLoading}
         statCards={statCards}

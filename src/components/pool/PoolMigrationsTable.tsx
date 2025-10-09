@@ -117,7 +117,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
     {
       key: "active_in",
       render: item => (
-        <div className='flex flex-col items-end gap-1'>
+        <div className='flex flex-col items-end gap-1/2'>
           {item?.active_pool?.delegation?.tx?.active_epoch_no ?? ""}
         </div>
       ),
@@ -137,7 +137,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
           : undefined;
 
         return (
-          <div className='flex items-center gap-1'>
+          <div className='flex items-center gap-1/2'>
             {icon && <img src={icon} alt='Icon' />}
             <Link
               className='text-primary'
@@ -158,14 +158,14 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
       key: "amount",
       rankingStart: order === "live_stake" ? sort : undefined,
       render: item => (
-        <div className='flex flex-col items-end gap-1'>
+        <div className='flex flex-col items-end gap-1/2'>
           <AdaWithTooltip data={item?.live_stake ?? 0} />
         </div>
       ),
       title: (
         <div className='flex w-full justify-end'>
           <div
-            className='flex w-fit cursor-pointer items-center gap-1 text-right'
+            className='flex w-fit cursor-pointer items-center gap-1/2 text-right'
             onClick={() => {
               navigate({
                 search: {
@@ -207,7 +207,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
       title: (
         <div className='flex w-full justify-end'>
           <div
-            className='flex w-fit cursor-pointer items-center gap-1 text-right'
+            className='flex w-fit cursor-pointer items-center gap-1/2 text-right'
             onClick={() => {
               navigate({
                 search: {
@@ -256,8 +256,8 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
         const livePool = item?.live_pool;
 
         return (
-          <div className='flex w-full items-center justify-between gap-5'>
-            <div className='flex min-w-[40%] items-center gap-2'>
+          <div className='flex w-full items-center justify-between gap-3'>
+            <div className='flex min-w-[40%] items-center gap-1'>
               {previousPool?.id ? (
                 <PoolCell
                   poolInfo={{
@@ -273,7 +273,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
 
             <ArrowRight size={15} className='w-[40px]' />
 
-            <div className='flex min-w-[40%] items-center gap-2'>
+            <div className='flex min-w-[40%] items-center gap-1'>
               {livePool?.id ? (
                 <PoolCell
                   poolInfo={{

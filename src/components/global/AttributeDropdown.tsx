@@ -26,7 +26,7 @@ const Row = memo(({ index, style, data }: any) => {
         className='cursor-default bg-transparent hover:bg-transparent'
         disableHover
       >
-        <div className='flex w-full items-center justify-between gap-3 text-xs text-text'>
+        <div className='flex w-full items-center justify-between gap-1.5 text-text-xs text-text'>
           <div>{label}</div>
           <div>{value}</div>
         </div>

@@ -116,7 +116,7 @@ const PoolBlocksTable = ({ poolId }: Props) => {
 
         return item.hash;
       },
-      title: <p className='flex justify-end'>Hash</p>,
+      title: <p className='flex w-full justify-end'>Hash</p>,
       visible: columnsVisibility.hash,
       widthPx: 90,
     },
@@ -152,7 +152,7 @@ const PoolBlocksTable = ({ poolId }: Props) => {
     {
       key: "protocol",
       render: item => (
-        <div className='flex items-center justify-end gap-2'>
+        <div className='flex items-center justify-end gap-1'>
           <ProtocolDot
             protNo={Number(`${item.proto_major}.${item.proto_minor}`)}
           />
@@ -166,7 +166,7 @@ const PoolBlocksTable = ({ poolId }: Props) => {
 
         return `${item.protocol.major}.${item.protocol.minor}`;
       },
-      title: <span className='flex justify-end'>Protocol</span>,
+      title: <span className='flex w-full justify-end'>Protocol</span>,
       visible: columnsVisibility.protocol,
       widthPx: 50,
     },
@@ -180,7 +180,7 @@ const PoolBlocksTable = ({ poolId }: Props) => {
 
   return (
     <>
-      <div className='flex items-center gap-2'>
+      <div className='flex items-center gap-1'>
         <ExportButton columns={columns} items={items} />
         <TableSettingsDropdown
           rows={rows}

@@ -57,7 +57,7 @@ export const Badge = ({
   return (
     <span
       style={style}
-      className={`flex w-fit items-center gap-1 ${rounded ? "rounded-full" : "rounded"} border ${small ? "min-w-[18px] shrink-0 justify-center px-0.5 text-[10px]" : "px-2.5 py-0.5 text-xs"} text-right font-medium ${colorStyles} ${className}`}
+      className={`flex w-fit items-center gap-1/2 ${rounded ? "rounded-max" : "rounded"} border ${small ? "min-w-[18px] shrink-0 justify-center px-1/4 text-[10px]" : "px-1.5 py-1/4 text-text-xs"} text-right font-medium ${colorStyles} ${className}`}
     >
       {children}
     </span>

@@ -20,7 +20,7 @@ export const VoteCell: FC<VoteCellProps> = ({
   }
 
   return (
-    <div className='flex items-center gap-2'>
+    <div className='flex items-center gap-1'>
       {txHash && (
         <Link
           to='/gov/vote/$hash'

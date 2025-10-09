@@ -124,12 +124,12 @@ export const RecentTab: FC = () => {
           .join("");
 
         return (
-          <div className='flex items-center gap-3'>
+          <div className='flex items-center gap-1.5'>
             <div className='min-w-[32px]'>
               <Image
                 src={img}
                 alt='member'
-                className='rounded-full'
+                className='rounded-max'
                 width={32}
                 height={32}
                 fallbackletters={fallbackletters}
@@ -137,7 +137,7 @@ export const RecentTab: FC = () => {
             </div>
             <div className='flex flex-col'>
               <span className='text-textPrimary font-medium'>{name}</span>
-              <div className='flex gap-2'>
+              <div className='flex gap-1'>
                 {/* <Link
                   to='/gov/cc/$coldKey'
                   params={{ coldKey: id }}
@@ -177,9 +177,9 @@ export const RecentTab: FC = () => {
         onFilter: () => changeFilterByKey("vote", filterDraft["vote"]),
         onReset: () => changeFilterByKey("vote"),
         filterContent: (
-          <div className='flex flex-col gap-2 px-4 py-2'>
+          <div className='flex flex-col gap-1 px-2 py-1'>
             {["Yes", "No", "Abstain"].map(val => (
-              <label className='flex items-center gap-2' key={val}>
+              <label className='flex items-center gap-1' key={val}>
                 <input
                   type='radio'
                   name='vote_filter'
@@ -190,7 +190,7 @@ export const RecentTab: FC = () => {
                     changeDraftFilter("vote", e.currentTarget.value)
                   }
                 />
-                <span className='text-sm'>{val}</span>
+                <span className='text-text-sm'>{val}</span>
               </label>
             ))}
           </div>
@@ -205,7 +205,7 @@ export const RecentTab: FC = () => {
       render: item => {
         const hash = item.tx?.hash ?? "N/A";
         return hash !== "N/A" ? (
-          <div className='flex gap-2'>
+          <div className='flex gap-1'>
             <Link to='/tx/$hash' params={{ hash }} className='text-primary'>
               {formatString(hash, "long")}
             </Link>
@@ -226,9 +226,9 @@ export const RecentTab: FC = () => {
   ];
 
   return (
-    <section className='flex w-full max-w-desktop flex-col pb-5'>
-      <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-        <div className='flex w-full items-center justify-between gap-2'>
+    <section className='flex w-full max-w-desktop flex-col pb-3'>
+      <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+        <div className='flex w-full items-center justify-between gap-1'>
           {query.isLoading ? (
             <LoadingSkeleton height='27px' width='220px' />
           ) : (
@@ -236,7 +236,7 @@ export const RecentTab: FC = () => {
               Total of {formatNumber(totalItems)} votes
             </h3>
           )}
-          <div className='flex items-center gap-2 md:hidden'>
+          <div className='flex items-center gap-1 md:hidden'>
             <ExportButton columns={columns} items={items} />
             <TableSettingsDropdown
               rows={rows}
@@ -256,7 +256,7 @@ export const RecentTab: FC = () => {
           </div>
         </div>
 
-        <div className='flex gap-2'>
+        <div className='flex gap-1'>
           <TableSearchInput
             placeholder='Search your results...'
             value={tableSearch}
@@ -278,7 +278,7 @@ export const RecentTab: FC = () => {
             searchPrefix={searchPrefix}
             setSearchPrefix={setSearchPrefix}
           />
-          <div className='hidden items-center gap-2 md:flex'>
+          <div className='hidden items-center gap-1 md:flex'>
             <ExportButton columns={columns} items={items} />
             <TableSettingsDropdown
               rows={rows}
@@ -299,13 +299,13 @@ export const RecentTab: FC = () => {
         </div>
       </div>
       {hasFilter && (
-        <div className='mb-3 flex flex-wrap items-center gap-1 md:flex-nowrap'>
+        <div className='mb-1.5 flex flex-wrap items-center gap-1/2 md:flex-nowrap'>
           {Object.entries(filter).map(
             ([key, value]) =>
               value && (
                 <div
                   key={key}
-                  className='flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-2 py-0.5 text-xs text-grayTextPrimary'
+                  className='flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
                 >
                   <span>
                     {key.charAt(0).toUpperCase() +

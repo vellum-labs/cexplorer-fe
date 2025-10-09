@@ -144,19 +144,19 @@ export const AnalyticsGraph: FC<Props> = ({
         />
       )}
       <div
-        className={`w-full rounded-lg border border-border bg-cardBg p-5 ${className ? className : ""}`}
+        className={`w-full rounded-m border border-border bg-cardBg p-3 ${className ? className : ""}`}
         ref={ref}
       >
         <div
-          className={`flex flex-col ${!title && !description ? "justify-end" : "justify-between"} pb-3 md:flex-row md:pb-0`}
+          className={`flex flex-col ${!title && !description ? "justify-end" : "justify-between"} pb-1.5 md:flex-row md:pb-0`}
         >
           {(title || description) && (
             <div
-              className={`flex flex-col justify-between gap-1 pb-3 ${!description || !title ? "justify-center" : ""}`}
+              className={`flex flex-col justify-between gap-1/2 pb-1.5 ${!description || !title ? "justify-center" : ""}`}
             >
               {title && <h2>{title}</h2>}
               {description && (
-                <span className='text-xs text-grayTextPrimary'>
+                <span className='text-text-xs text-grayTextPrimary'>
                   {description}
                 </span>
               )}
@@ -164,11 +164,11 @@ export const AnalyticsGraph: FC<Props> = ({
           )}
 
           <div
-            className='flex flex-wrap items-center gap-2'
+            className='flex flex-wrap items-center gap-1'
             id='graph-functionality'
           >
             {actions && (
-              <div className='flex items-center gap-2'>{actions}</div>
+              <div className='flex items-center gap-1'>{actions}</div>
             )}
             {graphSortData && (
               <GraphEpochSort
@@ -182,10 +182,10 @@ export const AnalyticsGraph: FC<Props> = ({
             )}
             {exportButton && (
               <div
-                className='flex h-[36px] w-[36px] shrink-0 cursor-pointer items-center justify-center gap-1 rounded-md border border-border'
+                className='flex h-[36px] w-[36px] shrink-0 cursor-pointer items-center justify-center gap-1/2 rounded-s border border-border'
                 onClick={showModals}
               >
-                <Download size={15} color={colors.text} className='text-base' />
+                <Download size={15} color={colors.text} className='text-text-md' />
               </div>
             )}
           </div>

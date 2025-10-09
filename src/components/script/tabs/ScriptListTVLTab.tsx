@@ -89,7 +89,7 @@ export const ScriptListTVLTab: FC = () => {
   }, [graphData]);
 
   return (
-    <div className='flex flex-wrap gap-3 lg:flex-nowrap'>
+    <div className='flex flex-wrap gap-1.5 lg:flex-nowrap'>
       {isLoading ? (
         <>
           <LoadingSkeleton width='350px' height='400px' rounded='lg' />
@@ -97,25 +97,25 @@ export const ScriptListTVLTab: FC = () => {
         </>
       ) : (
         <>
-          <div className='flex min-w-[350px] flex-grow flex-col gap-3 rounded-lg border border-border p-3 lg:max-w-[350px] lg:flex-grow-0'>
-            <div className='flex h-fit w-full items-center gap-4'>
-              <div className='flex aspect-square h-[32px] w-[32px] items-center justify-center rounded-md border border-border'>
+          <div className='flex min-w-[350px] flex-grow flex-col gap-1.5 rounded-m border border-border p-1.5 lg:max-w-[350px] lg:flex-grow-0'>
+            <div className='flex h-fit w-full items-center gap-2'>
+              <div className='flex aspect-square h-[32px] w-[32px] items-center justify-center rounded-s border border-border'>
                 <CircleDollarSign className='text-primary' size={15} />
               </div>
-              <span className='text-sm text-grayTextPrimary'>
-                <span className='text-base font-semibold'>TVL</span> (total
+              <span className='text-text-sm text-grayTextPrimary'>
+                <span className='text-text-md font-semibold'>TVL</span> (total
                 value locked)
               </span>
             </div>
-            <div className='flex w-full items-center gap-4'>
-              <span className='text-2xl font-semibold'>
+            <div className='flex w-full items-center gap-2'>
+              <span className='text-display-xs font-semibold'>
                 $ {lovelaceToAda(totalValueUSD).substring(1)}
               </span>
-              <span className='text-sm font-medium text-grayTextPrimary'>
+              <span className='text-text-sm font-medium text-grayTextPrimary'>
                 <AdaWithTooltip data={totalValueADA} />
               </span>
             </div>
-            <p className='text-xs text-grayTextPrimary'>
+            <p className='text-text-xs text-grayTextPrimary'>
               In the context of decentralized finance (DeFi), it represents the
               total amount of cryptocurrency assets that are currently staked or
               deposited in a particular protocol or smart contract.
@@ -123,18 +123,18 @@ export const ScriptListTVLTab: FC = () => {
             <div className='flex h-full items-end justify-end'>
               <a
                 href='https://defillama.com/chain/Cardano'
-                className='flex cursor-pointer items-center gap-1'
+                className='flex cursor-pointer items-center gap-1/2'
                 target='_blank'
                 rel='noopener noreferrer'
               >
-                <span className='text-xs font-semibold text-primary'>
+                <span className='text-text-xs font-semibold text-primary'>
                   Detailed Cardano TVL on DefiLama
                 </span>
                 <ArrowRight size={13} className='font-semibold text-primary' />
               </a>
             </div>
           </div>
-          <div className='relative w-full rounded-lg border border-border'>
+          <div className='relative w-full rounded-m border border-border'>
             <GraphWatermark />
             <ReactEcharts
               opts={{ height: 400 }}

@@ -85,8 +85,8 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
   return (
     <div className='w-full overflow-x-auto rounded-xl border border-border xl:overflow-x-visible'>
       <div className='min-w-fit xl:min-w-full'>
-        <div className='bg-grayBgTertiary border-b border-border px-4 py-3'>
-          <div className='flex items-center gap-1 text-sm'>
+        <div className='bg-grayBgTertiary border-b border-border px-2 py-1.5'>
+          <div className='flex items-center gap-1 text-text-sm'>
             <span className='font-medium text-grayTextSecondary'>
               Token swap order:{" "}
             </span>
@@ -105,7 +105,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                 </span>
               </Tooltip>
             </div>
-            <span className='mx-2 text-grayTextSecondary'>to</span>
+            <span className='mx-1 text-grayTextSecondary'>to</span>
             <div className='flex items-center gap-1'>
               {getAssetImage(aggregatedData?.pair?.tokenOut, false, 16)}
               <Tooltip content={safeToLocaleString(summaryAmountOut)}>
@@ -122,8 +122,8 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                 </span>
               </Tooltip>
             </div>
-            <span className='ml-2 text-grayTextSecondary'>via</span>
-            <div className='ml-1'>
+            <span className='ml-1 text-grayTextSecondary'>via</span>
+            <div className='ml-1/2'>
               <SwapTypeBadge
                 uniqueDexesCount={aggregatedData?.dexes?.length ?? 0}
                 hasDexhunter={
@@ -134,7 +134,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
             </div>
           </div>
           <div
-            className='mt-3 grid gap-4 text-sm font-medium text-grayTextSecondary'
+            className='text-sm mt-1.5 grid gap-2 font-medium text-grayTextSecondary'
             style={{ gridTemplateColumns: "55% 15% 15% 15%" }}
           >
             <div className='flex items-center gap-1'>Route</div>
@@ -144,8 +144,8 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
           </div>
         </div>
 
-        <div className='px-4 py-3'>
-          <div className='space-y-3'>
+        <div className='px-2 py-1.5'>
+          <div className='space-y-1.5'>
             {Array.isArray(aggregatedData.orders) &&
               aggregatedData.orders
                 .filter(order => order != null)
@@ -159,12 +159,12 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                   return (
                     <div
                       key={index}
-                      className='grid gap-4 text-sm'
+                      className='grid gap-2 text-text-sm'
                       style={{ gridTemplateColumns: "55% 15% 15% 15%" }}
                     >
-                      <div className='flex items-center gap-2'>
+                      <div className='flex items-center gap-1'>
                         <Route size={16} className='text-grayTextSecondary' />
-                        <div className='flex items-center gap-1'>
+                        <div className='flex items-center gap-1/2'>
                           {getAssetImage(order.token_in.name, false, 16)}
                           <Tooltip
                             content={safeToLocaleString(order.amount_in)}
@@ -181,7 +181,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                           </Tooltip>
                         </div>
                         <ArrowRight size={14} />
-                        <div className='flex items-center gap-1'>
+                        <div className='flex items-center gap-1/2'>
                           {getAssetImage(order.token_out.name, false, 16)}
                           <Tooltip content={safeToLocaleString(actualOut)}>
                             <span>
@@ -196,11 +196,11 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                             </span>
                           </Tooltip>
                         </div>
-                        <span className='text-sm text-grayTextSecondary'>
+                        <span className='text-text-sm text-grayTextSecondary'>
                           on
                         </span>
                         <div
-                          className='flex items-center gap-1 whitespace-nowrap rounded-xl border border-border bg-transparent px-1 text-sm text-text sm:px-1.5'
+                          className='flex items-center gap-1/2 whitespace-nowrap rounded-xl border border-border bg-transparent px-1/2 text-text-sm text-text sm:px-1'
                           style={
                             dex
                               ? {
@@ -214,11 +214,11 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                           {!!dex?.icon && (
                             <Image
                               src={dex.icon}
-                              className='h-3 w-3 flex-shrink-0 rounded-full'
+                              className='h-3 w-3 flex-shrink-0 rounded-max'
                               alt={dex?.label}
                             />
                           )}
-                          <span className='truncate text-sm sm:text-sm'>
+                          <span className='text-sm truncate'>
                             <span className='hidden sm:inline'>
                               {dex?.label ?? order.dex}
                             </span>
@@ -233,7 +233,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                       </div>
                       <Tooltip
                         content={
-                          <div className='flex items-center gap-1'>
+                          <div className='flex items-center gap-1/2'>
                             <span>₳ {safeToFixed(price, 20)}</span>
                             <Copy copyText={safeToFixed(price, 20)} />
                           </div>
@@ -244,7 +244,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                         </div>
                       </Tooltip>
                       <div className='flex items-center'>
-                        <p className='flex w-fit items-center gap-1 rounded-md border border-border px-2 text-sm'>
+                        <p className='flex w-fit items-center gap-1/2 rounded-m border border-border px-1 text-text-sm'>
                           {getStatusIcon(order.status)}
                           <span className='capitalize'>
                             {order.status === "PARTIALLY_COMPLETE"
@@ -256,11 +256,11 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                       </div>
                       <div>
                         {order?.update_tx_hash ? (
-                          <div className='flex items-center gap-1'>
+                          <div className='flex items-center gap-1/2'>
                             <Link
                               to='/tx/$hash'
                               params={{ hash: order.update_tx_hash }}
-                              className='text-sm text-primary'
+                              className='text-text-sm text-primary'
                             >
                               {formatString(order.update_tx_hash, "short")}
                             </Link>

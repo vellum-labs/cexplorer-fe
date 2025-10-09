@@ -171,7 +171,7 @@ export const AdaPriceGraph: FC<AdaPriceGraphProps> = ({ graphRates }) => {
   };
 
   return (
-    <div className='relative w-full max-w-[900px] rounded-lg border border-border bg-cardBg lg:py-3'>
+    <div className='relative w-full max-w-[900px] rounded-m border border-border bg-cardBg lg:py-3'>
       <GraphWatermark />
       <ReactEcharts
         opts={{ height: 350 }}

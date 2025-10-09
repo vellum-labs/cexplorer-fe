@@ -108,8 +108,8 @@ export const PolicyDetailTopWallets: FC<PolicyDetailTopWalletsProps> = ({
 
   return (
     <>
-      <div className='mb-4 flex w-full flex-row items-center justify-between gap-2'>
-        <div className='py-2'>
+      <div className='mb-2 flex w-full flex-row items-center justify-between gap-1'>
+        <div className='py-1'>
           {ownerQuery.isLoading || ownerQuery.isFetching ? (
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : totalItems > 0 ? (
@@ -120,8 +120,8 @@ export const PolicyDetailTopWallets: FC<PolicyDetailTopWalletsProps> = ({
             ""
           )}
         </div>
-        <div className='flex gap-2'>
-          <div className='flex items-center gap-2'>
+        <div className='flex gap-1'>
+          <div className='flex items-center gap-1'>
             <ExportButton
               columns={columns}
               items={items}

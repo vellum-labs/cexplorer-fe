@@ -149,7 +149,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
             >
               {data[0]?.vote?.drep?.data?.given_name &&
                 data[0]?.vote?.drep?.data?.given_name}
-              <span className='text-sm text-primary'>Always abstain</span>
+              <span className='text-text-sm text-primary'>Always abstain</span>
             </Link>
           ) : data[0]?.vote?.vote?.live_drep === "drep_always_no_confidence" ? (
             <Link
@@ -159,7 +159,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
             >
               {data[0]?.vote?.drep?.data?.given_name &&
                 data[0]?.vote?.drep?.data?.given_name}
-              <span className='text-sm text-primary'>Always no confidence</span>
+              <span className='text-text-sm text-primary'>Always no confidence</span>
             </Link>
           ) : (
             <AttributeDropdown
@@ -183,15 +183,15 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
                   value: (
                     <DateCell
                       time={data[0]?.vote?.drep?.since}
-                      className='text-xs'
+                      className='text-text-xs'
                     />
                   ),
                 },
                 {
                   label: "ID",
                   value: (
-                    <div className='flex items-center gap-2'>
-                      <span className={"text-xs"}>
+                    <div className='flex items-center gap-1'>
+                      <span className={"text-text-xs"}>
                         {formatString(data[0]?.vote?.drep?.hash?.view, "long")}
                       </span>
                       <Copy
@@ -205,7 +205,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
               ]}
             >
               <div
-                className={`flex w-fit cursor-pointer items-center gap-1 rounded-md border ${theme === "light" ? "border-[#E4E7EC]" : "border-gray-600"} p-1`}
+                className={`flex w-fit cursor-pointer items-center gap-1/2 rounded-s border ${theme === "light" ? "border-[#E4E7EC]" : "border-gray-600"} p-1`}
               >
                 {data[0]?.vote?.drep?.data?.given_name ? (
                   <Link
@@ -216,11 +216,11 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
                     {data[0]?.vote?.drep?.data?.given_name}
                   </Link>
                 ) : (
-                  <div className='flex items-center gap-2'>
+                  <div className='flex items-center gap-1'>
                     <Link
                       to='/drep/$hash'
                       params={{ hash: data[0]?.vote?.drep?.hash?.view }}
-                      className={"text-sm text-primary"}
+                      className={"text-text-sm text-primary"}
                     >
                       {formatString(data[0]?.vote?.drep?.hash?.view, "long")}
                     </Link>
@@ -351,7 +351,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
         endContent={
           data[0].asset &&
           data[0].asset.length > 0 && (
-            <TokenSelectCombobox className='mb-2' items={data[0].asset} />
+            <TokenSelectCombobox className='mb-1' items={data[0].asset} />
           )
         }
         className=''

@@ -1,5 +1,4 @@
-import type { FC } from "react";
-import { useMemo } from "react";
+import { useMemo, type FC } from "react";
 import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
 import { ConsolidatedDexSwapDetailCard } from "@/components/dex/ConsolidatedDexSwapDetailCard";
 
@@ -45,7 +44,7 @@ export const DexSwapDetailPage: FC = () => {
       breadcrumbItems={[
         {
           label: (
-            <span className='inline pt-1'>
+            <span className='inline pt-1/2'>
               Stake detail{" "}
               {Array.isArray(swapDetail) && swapDetail[0]?.user?.account
                 ? `(${formatString(swapDetail[0]?.user?.account, "long")})`
@@ -75,7 +74,7 @@ export const DexSwapDetailPage: FC = () => {
       }
       adsCarousel={false}
     >
-      <div className='flex w-full max-w-desktop flex-col gap-5 p-mobile lg:p-desktop'>
+      <div className='flex w-full max-w-desktop flex-col gap-3 p-mobile lg:p-desktop'>
         <ConsolidatedDexSwapDetailCard
           miscBasic={miscBasic}
           aggregatedData={aggregatedData}

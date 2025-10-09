@@ -106,7 +106,7 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
         <Link
           to='/tx/$hash'
           params={{ hash: item?.tx?.hash }}
-          className='flex items-center gap-2 text-primary'
+          className='flex items-center gap-1 text-primary'
         >
           <span>{formatString(item?.tx?.hash, "long")}</span>
           <Copy copyText={item?.tx?.hash} className='translate-y-[2px]' />
@@ -120,7 +120,7 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
 
   return (
     <>
-      <div className='mb-4 ml-auto flex w-fit gap-2'>
+      <div className='mb-2 ml-auto flex w-fit gap-1'>
         <ExportButton columns={columns} items={items} />
         <TableSettingsDropdown
           rows={rows}

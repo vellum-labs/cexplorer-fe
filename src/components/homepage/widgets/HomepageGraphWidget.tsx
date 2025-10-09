@@ -44,7 +44,7 @@ export const HomepageGraphWidget: FC<HomepageGraphWidgetProps> = memo(
 
     return wrapper ? (
       <AnalyticsGraph
-        className='flex max-h-[360px] w-full flex-col gap-3 border-none !p-4'
+        className='flex max-h-[360px] w-full flex-col gap-1.5 border-none !p-4'
         exportButton
         graphSortData={{
           query: query as any,
@@ -82,7 +82,7 @@ export const HomepageGraphWidget: FC<HomepageGraphWidgetProps> = memo(
       </AnalyticsGraph>
     ) : (
       <div
-        className='relative w-full p-3'
+        className='relative w-full p-1.5'
         style={{
           maxHeight: "350px",
         }}

@@ -16,26 +16,26 @@ const MetadataTabItem = () => {
     metadataArr.push({ [obj]: metadata[obj] });
   }
   if (!metadata && !query.isLoading) {
-    return <p className='w-full text-center text-sm'>No metadata found</p>;
+    return <p className='w-full text-center text-text-sm'>No metadata found</p>;
   }
 
   if (query.isLoading) {
     return (
-      <div className='flex flex-col gap-3'>
+      <div className='flex flex-col gap-1.5'>
         <LoadingSkeleton rounded='xl' height='130px' />
       </div>
     );
   }
 
   return (
-    <div className='flex flex-col gap-3'>
+    <div className='flex flex-col gap-1.5'>
       {metadataArr.map((item, index) => (
         <section
           key={index}
-          className='flex flex-col rounded-xl border border-b border-border bg-darker px-4 py-3 shadow'
+          className='flex flex-col rounded-l border border-b border-border bg-darker px-2 py-1.5 shadow-md'
         >
-          <div className='mb-2 flex items-center gap-1'>
-            <div className='w-fit rounded-md border border-border bg-background px-2 py-1 text-xs font-medium'>
+          <div className='mb-1 flex items-center gap-1/2'>
+            <div className='w-fit rounded-s border border-border bg-background px-1 py-1/2 text-text-xs font-medium'>
               {Object.values(item)[0].key}
             </div>
             <ConstLabelBadge

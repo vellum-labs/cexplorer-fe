@@ -179,9 +179,9 @@ export const PotsPage = () => {
           subTitle
         />
         <AdsCarousel />
-        <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
-          <div className='mb-2 ml-auto flex items-center'>
-            <span className='mr-2 text-sm text-grayTextPrimary'>
+        <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
+          <div className='mb-1 ml-auto flex items-center'>
+            <span className='mr-1 text-text-sm text-grayTextPrimary'>
               Graph epochs:{" "}
             </span>
             <SortBy
@@ -192,8 +192,8 @@ export const PotsPage = () => {
             />
           </div>
           <AdaPotsChart data={items} />
-          <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-            <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
+          <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+            <div className='flex w-full flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
               {query.isLoading || query.isFetching ? (
                 <LoadingSkeleton height='27px' width={"220px"} />
               ) : count > 0 ? (
@@ -204,7 +204,7 @@ export const PotsPage = () => {
                 ""
               )}
               <div className='flex w-full justify-end md:hidden'>
-                <div className='flex items-center gap-2 md:hidden'>
+                <div className='flex items-center gap-1 md:hidden'>
                   <ExportButton columns={columns} />
                   <TableSettingsDropdown
                     rows={rows}
@@ -225,7 +225,7 @@ export const PotsPage = () => {
               </div>
             </div>
 
-            <div className='flex gap-2'>
+            <div className='flex gap-1'>
               <TableSearchInput
                 placeholder='Search  your results...'
                 value={tableSearch}
@@ -234,7 +234,7 @@ export const PotsPage = () => {
                 showSearchIcon
                 showPrefixPopup={false}
               />
-              <div className='hidden items-center gap-2 md:flex'>
+              <div className='hidden items-center gap-1 md:flex'>
                 <ExportButton columns={columns} />
                 <TableSettingsDropdown
                   rows={rows}

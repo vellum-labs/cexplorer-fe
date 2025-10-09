@@ -80,7 +80,7 @@ export const usePoolDetail = ({
     {
       label: "Pool ID",
       value: (
-        <span className='flex items-center gap-2'>
+        <span className='flex items-center gap-1'>
           {formatString(data?.pool_id || "", "long")}
           <Copy copyText={data?.pool_id} />
         </span>
@@ -156,7 +156,7 @@ export const usePoolDetail = ({
     {
       label: "Recent ROA",
       value: data?.stats?.recent?.roa ? (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <span>{data?.stats?.recent?.roa.toFixed(2) + "%"}</span>
           <RoaDiffArrow color={recentRoaDiff} size={22} />
         </div>
@@ -167,7 +167,7 @@ export const usePoolDetail = ({
     {
       label: "Lifetime ROA",
       value: data?.stats.lifetime.roa ? (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <span>{data?.stats.lifetime.roa.toFixed(2) + "%"}</span>
           <RoaDiffArrow color={lifetimeRoaDiff} size={22} />
         </div>

@@ -74,7 +74,7 @@ export const MultiPoolDelegatorsPage = () => {
         <div className='flex justify-end'>
           <Badge
             color='blue'
-            className='min-w-[50px] justify-center text-center text-xs'
+            className='min-w-[50px] justify-center text-center text-text-xs'
           >
             {row.stake.count}
           </Badge>
@@ -96,8 +96,8 @@ export const MultiPoolDelegatorsPage = () => {
       title='Multi-pool Delegators'
       breadcrumbItems={[{ label: "Multi-pool Delegators" }]}
     >
-      <section className='w-full max-w-desktop px-mobile pb-5 md:px-desktop'>
-        <div className='mb-4 flex flex-wrap items-center justify-between gap-4 md:flex-nowrap md:items-center'>
+      <section className='w-full max-w-desktop px-mobile pb-3 md:px-desktop'>
+        <div className='mb-2 flex flex-wrap items-center justify-between gap-2 md:flex-nowrap md:items-center'>
           {!total ? (
             <LoadingSkeleton height='27px' width={"290px"} />
           ) : (
@@ -105,7 +105,7 @@ export const MultiPoolDelegatorsPage = () => {
               Total of {formatNumber(total)} multi-pool delegators.
             </h3>
           )}
-          <div className='flex items-center gap-2'>
+          <div className='flex items-center gap-1'>
             <ExportButton columns={columns} items={items} />
             <TableSettingsDropdown
               rows={rows}

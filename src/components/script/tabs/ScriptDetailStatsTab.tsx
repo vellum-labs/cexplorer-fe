@@ -208,7 +208,7 @@ export const ScriptDetailStatsTab = ({
 
   return (
     <div>
-      <div className='flex flex-wrap gap-4'>
+      <div className='flex flex-wrap gap-2'>
         <OverviewStatCard
           title='Volume'
           value={
@@ -234,7 +234,7 @@ export const ScriptDetailStatsTab = ({
           description='Average interactions per user'
         />
       </div>
-      <div className='relative mt-8 w-full'>
+      <div className='relative mt-4 w-full'>
         <GraphWatermark />
         <ReactEcharts
           opts={{ height: 400 }}

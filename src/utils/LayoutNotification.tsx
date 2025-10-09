@@ -47,14 +47,14 @@ export const LayoutNotification = ({
 
   return (
     <div
-      className='flex items-center justify-center py-3 md:py-0'
+      className='flex items-center justify-center py-1.5 md:py-0'
       style={{
         backgroundColor: backgroundColor,
         color: textColor,
       }}
     >
-      <div className='relative flex w-full max-w-desktop items-center justify-center gap-3 px-desktop md:p-mobile'>
-        <span className='ml-5 mr-5 text-center text-sm'>
+      <div className='relative flex w-full max-w-desktop items-center justify-center gap-1.5 px-desktop md:p-mobile'>
+        <span className='ml-3 mr-3 text-center text-text-sm'>
           {message}
           {link && (
             <Link
@@ -69,7 +69,7 @@ export const LayoutNotification = ({
         </span>
         <button
           onClick={handleClose}
-          className='absolute right-4 rounded-full p-1 hover:bg-white/20'
+          className='absolute right-4 rounded-max p-1/2 hover:bg-white/20'
           aria-label='Close'
         >
           <X size={16} />

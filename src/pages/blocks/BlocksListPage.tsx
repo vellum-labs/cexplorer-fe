@@ -55,26 +55,26 @@ const BlocksListPage = () => {
       title='Blocks'
       breadcrumbItems={[{ label: "Blocks" }]}
     >
-      <section className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
+      <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         {!totalItems ? (
-          <p className='pb-3'>
+          <p className='pb-1.5'>
             <LoadingSkeleton height='27px' width={"220px"} />
           </p>
         ) : (
-          <h3 className='pb-3'>
+          <h3 className='pb-1.5'>
             Total of {formatNumber(totalItems ?? 0)} blocks
           </h3>
         )}
-        <div className='mb-4 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
+        <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
           <div className='flex w-full justify-between'>
-            <div className='flex items-center gap-2 pr-3'>
+            <div className='flex items-center gap-1 pr-1.5'>
               <SortBy
                 selectItems={selectItems}
                 setSelectedItem={setSelectedItem}
                 selectedItem={selectedItem}
               />
             </div>
-            <div className='flex items-center gap-2 md:hidden'>
+            <div className='flex items-center gap-1 md:hidden'>
               <ExportButton columns={columns} items={items} />
               <TableSettingsDropdown
                 rows={rows}
@@ -94,7 +94,7 @@ const BlocksListPage = () => {
             </div>
           </div>
 
-          <div className='flex gap-2'>
+          <div className='flex gap-1'>
             <TableSearchInput
               placeholder='Search your results...'
               value={tableSearch}
@@ -145,7 +145,7 @@ const BlocksListPage = () => {
               setSearchPrefix={setSearchPrefix}
               inputClassName=''
             />
-            <div className='hidden items-center gap-2 md:flex'>
+            <div className='hidden items-center gap-1 md:flex'>
               <ExportButton columns={columns} items={items} />
               <TableSettingsDropdown
                 rows={rows}
@@ -166,13 +166,13 @@ const BlocksListPage = () => {
           </div>
         </div>
         {hasFilter && (
-          <div className='flex flex-wrap items-center gap-1 md:flex-nowrap'>
+          <div className='flex flex-wrap items-center gap-1/2 md:flex-nowrap'>
             {Object.entries(filter).map(
               ([key, value]) =>
                 value && (
                   <div
                     key={key}
-                    className='mb-2 flex w-fit items-center gap-1 rounded-lg border border-border bg-darker px-2 py-0.5 text-xs text-grayTextPrimary'
+                    className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
                   >
                     <span>{key[0].toUpperCase() + key.slice(1)}:</span>
                     {key === "epoch_no" && (

@@ -30,7 +30,7 @@ export const AddCustomLabel = ({ address }: { address: string }) => {
       content={<div className='w-[150px]'>{tooltipText}</div>}
       hide={!isAddingDisabled}
     >
-      <div className='flex items-center gap-2'>
+      <div className='flex items-center gap-1'>
         {label ? (
           <Badge className='italic' color='gray'>
             {label}

@@ -143,13 +143,13 @@ export const CustomLabels = () => {
     <>
       <div className='flex w-full max-w-desktop flex-col'>
         <h2>Custom labels</h2>
-        <p className='border-b border-border pb-4 text-grayTextPrimary'>
+        <p className='border-b border-border pb-2 text-grayTextPrimary'>
           Easily rename any address with custom text for better tracking and
           organization.
         </p>
 
-        <div className='mb-2 mt-6 flex w-full items-center justify-between gap-2 text-sm'>
-          <span className='flex items-center gap-1'>
+        <div className='mb-1 mt-3 flex w-full items-center justify-between gap-1 text-text-sm'>
+          <span className='flex items-center gap-1/2'>
             <ChevronsUp size={25} /> Unlock up to 5000 labels with{" "}
             <Link
               to={
@@ -175,7 +175,7 @@ export const CustomLabels = () => {
           </Tooltip>
         </div>
         <section
-          className={`thin-scrollbar relative w-full max-w-desktop overflow-x-auto rounded-xl border border-border xl:overflow-visible [&>div]:w-full`}
+          className={`thin-scrollbar relative w-full max-w-desktop overflow-x-auto rounded-l border border-border xl:overflow-visible [&>div]:w-full`}
           style={{
             transform: "rotateX(180deg)",
           }}
@@ -193,7 +193,7 @@ export const CustomLabels = () => {
               <tr className={labels.length ? "border-border" : "border-none"}>
                 <TableHead>Address</TableHead>
                 <TableHead>Label</TableHead>
-                <TableHead className='text-right text-xs leading-[13px]'>
+                <TableHead className='text-right text-text-xs leading-[13px]'>
                   {labels.length}/{proNfts === 0 ? 10 : proNfts * 100} labels
                   created
                 </TableHead>
@@ -206,7 +206,7 @@ export const CustomLabels = () => {
                   className={`${index % 2 !== 0 ? "bg-darker" : ""} group duration-150`}
                 >
                   <TableCell
-                    className={`${index === currentLabels.length - 1 ? "rounded-bl-xl" : ""} table-cell w-[35%] min-w-[230px] py-2 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover`}
+                    className={`${index === currentLabels.length - 1 ? "rounded-bl-l" : ""} table-cell w-[35%] min-w-[230px] py-1 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover`}
                   >
                     <Link
                       to={
@@ -215,18 +215,18 @@ export const CustomLabels = () => {
                           : "/address/$address"
                       }
                       params={{ address: address }}
-                      className={`block w-fit overflow-hidden overflow-ellipsis whitespace-nowrap text-sm text-primary`}
+                      className={`block w-fit overflow-hidden overflow-ellipsis whitespace-nowrap text-text-sm text-primary`}
                     >
                       {formatString(address, "longer")}
                     </Link>
                   </TableCell>
                   <TableCell
-                    className={`table-cell py-2 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover`}
+                    className={`table-cell py-1 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover`}
                   >
                     {label}
                   </TableCell>
                   <TableCell
-                    className={`${index === currentLabels.length - 1 ? "rounded-br-xl" : ""} flex items-center justify-end gap-2 duration-200 group-hover:bg-tableHover`}
+                    className={`${index === currentLabels.length - 1 ? "rounded-br-l" : ""} flex items-center justify-end gap-1 duration-200 group-hover:bg-tableHover`}
                   >
                     <button
                       onClick={() => {
@@ -242,16 +242,16 @@ export const CustomLabels = () => {
             </TableBody>
           </Table>
         </section>
-        <div className='ml-auto mt-4 flex h-7 items-center gap-2 text-xs [&>button]:h-full'>
+        <div className='ml-auto mt-4 flex h-7 items-center gap-2 text-text-xs [&>button]:h-full'>
           <button
-            className='rounded-lg border border-border px-1.5 py-1 disabled:cursor-not-allowed disabled:opacity-60'
+            className='rounded-m border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'
             onClick={handleFirstPage}
             disabled={currentPage === 1}
           >
             First
           </button>
           <button
-            className='rounded-lg border border-border px-1.5 py-1 disabled:cursor-not-allowed disabled:opacity-60'
+            className='rounded-m border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'
             onClick={handlePrevPage}
             disabled={currentPage === 1}
           >
@@ -261,14 +261,14 @@ export const CustomLabels = () => {
             Page {currentPage} of {totalPages}
           </span>
           <button
-            className='rounded-lg border border-border px-1.5 py-1 disabled:cursor-not-allowed disabled:opacity-60'
+            className='rounded-m border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
           >
             <ChevronRight size={15} />
           </button>
           <button
-            className='rounded-lg border border-border px-1.5 py-1 disabled:cursor-not-allowed disabled:opacity-60'
+            className='rounded-m border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'
             onClick={handleLastPage}
             disabled={currentPage === totalPages}
           >

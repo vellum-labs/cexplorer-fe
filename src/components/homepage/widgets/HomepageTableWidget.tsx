@@ -277,7 +277,7 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
           />
           <input
             type='text'
-            className={`${inputOpen ? "min-h-[25.6px] w-[200px] border border-border pl-6" : "w-0"} transition-width overflow-hidden rounded-lg text-xs text-black duration-300 ease-in-out focus-within:outline-none hover:outline-none`}
+            className={`${inputOpen ? "min-h-[25.6px] w-[200px] border border-border pl-3" : "w-0"} transition-width overflow-hidden rounded-m text-text-xs text-black duration-300 ease-in-out focus-within:outline-none hover:outline-none`}
             placeholder={placeholder}
             value={tableSearch}
             onChange={e => setTableSearch(e.currentTarget.value)}
@@ -352,7 +352,7 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
                               height: rowHeight ? `${rowHeight}px` : `49px`,
                               maxHeight: rowHeight ? `${rowHeight}px` : `49px`,
                             }}
-                            className={`${index % 2 !== 0 ? "bg-darker" : ""} table-cell py-2 text-left first:pl-4 last:pr-4 [&>a]:text-primary ${className}`}
+                            className={`${index % 2 !== 0 ? "bg-darker" : ""} table-cell py-1 text-left first:pl-4 last:pr-4 [&>a]:text-primary ${className}`}
                           >
                             <LoadingSkeleton height='20px' />
                           </MemoCell>
@@ -394,7 +394,7 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
                                   ? `${rowHeight}px`
                                   : `49px`,
                               }}
-                              className={`table-cell py-2 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover ${className}`}
+                              className={`table-cell py-1 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover ${className}`}
                             >
                               {!standByRanking
                                 ? item && render(item)
@@ -435,7 +435,7 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
                               height: rowHeight ? `${rowHeight}px` : `49px`,
                               maxHeight: rowHeight ? `${rowHeight}px` : `49px`,
                             }}
-                            className={`table-cell py-2 text-left first:pl-4 last:pr-4`}
+                            className={`table-cell py-1 text-left first:pl-4 last:pr-4`}
                           >
                             <LoadingSkeleton height='20px' />
                           </MemoCell>

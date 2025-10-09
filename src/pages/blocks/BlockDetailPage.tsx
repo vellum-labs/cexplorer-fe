@@ -5,7 +5,6 @@ import {
   ChevronRight,
   CircleAlert,
   CircleCheck,
-  CircleHelp,
   CircleX,
   HardDrive,
 } from "lucide-react";
@@ -92,12 +91,12 @@ const BlockDetailPage: FC = () => {
     {
       label: "Height",
       value: (
-        <div className='flex items-center gap-2'>
-          <span className='text-sm font-medium text-text'>
+        <div className='flex items-center gap-1'>
+          <span className='text-text-sm font-medium text-text'>
             {formatNumber(data?.block_no ?? 0)}
           </span>
           <div>
-            <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-1/2'>
               <Tooltip
                 content={
                   <p className='text-nowrap'>
@@ -152,7 +151,7 @@ const BlockDetailPage: FC = () => {
     {
       label: "Epoch",
       value: (
-        <span className='cursor-pointer text-sm font-medium text-primary'>
+        <span className='cursor-pointer text-text-sm font-medium text-primary'>
           <Link to='/epoch/$no' params={{ no: String(data?.epoch_no ?? 0) }}>
             {data?.epoch_no}
           </Link>
@@ -162,11 +161,11 @@ const BlockDetailPage: FC = () => {
     {
       label: "Slot",
       value: (
-        <div className='flex flex-wrap items-center gap-1 text-sm leading-none'>
+        <div className='flex flex-wrap items-center gap-1/2 text-text-sm leading-none'>
           <span className='font-medium text-text'>
             {formatNumber(data?.slot_no ?? 0)}
           </span>
-          <span className='pr-1 text-grayTextPrimary'>
+          <span className='pr-1/2 text-grayTextPrimary'>
             (epoch slot {formatNumber(data?.epoch_slot_no ?? 0)})
           </span>
         </div>
@@ -175,9 +174,9 @@ const BlockDetailPage: FC = () => {
     {
       label: <span className='inline-block break-words'>Confirmations</span>,
       value: (
-        <div className='flex items-center gap-[2.5px] text-sm'>
+        <div className='flex items-center gap-[2.5px] text-text-sm'>
           {confirmations[1] < 3 && (
-            <CircleX size={15} className='translate-y-[1px] text-red-500' />
+            <CircleX size={15} className='text-red-500 translate-y-[1px]' />
           )}
           {confirmations[1] > 2 && confirmations[1] < 9 && (
             <CircleAlert
@@ -205,7 +204,7 @@ const BlockDetailPage: FC = () => {
     {
       label: <span className='text-nowrap'>Total Transactions</span>,
       value: (
-        <span className='text-sm font-medium text-text'>
+        <span className='text-text-sm font-medium text-text'>
           {data?.tx_count ? data.tx_count : 0}
         </span>
       ),
@@ -231,12 +230,7 @@ const BlockDetailPage: FC = () => {
       ),
     },
     {
-      label: (
-        <div className='flex items-center gap-1 text-sm'>
-          <span className='text-grayTextPrimary'>Total Rewards</span>
-          <CircleHelp size={12} className='text-[#98A2B3]' />
-        </div>
-      ),
+      label: "Total Rewards",
       value: <TotalSumWithRates sum={rewards} ada={data?.rewards ?? 0} />,
     },
   ];
@@ -266,7 +260,7 @@ const BlockDetailPage: FC = () => {
       breadcrumbItems={[
         {
           label: (
-            <span className='inline pt-1'>
+            <span className='inline pt-1/2'>
               Epoch{" "}
               {data?.epoch_param?.epoch_no &&
                 `(${data?.epoch_param?.epoch_no})`}
@@ -295,22 +289,22 @@ const BlockDetailPage: FC = () => {
       }
     >
       <section className='flex w-full justify-center'>
-        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 p-mobile md:p-desktop xl:flex-nowrap xl:justify-start'>
+        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 p-mobile md:p-desktop xl:flex-nowrap xl:justify-start'>
           {!data ? (
             <>
-              <div className='flex grow basis-[980px] flex-wrap gap-5'>
+              <div className='flex grow basis-[980px] flex-wrap gap-3'>
                 <LoadingSkeleton
                   height='227px'
                   rounded='xl'
-                  className='grow basis-[460px] px-8 py-4'
+                  className='grow basis-[460px] px-4 py-2'
                 />
                 <LoadingSkeleton
                   height='227px'
                   rounded='xl'
-                  className='grow basis-[430px] px-8 py-4'
+                  className='grow basis-[430px] px-4 py-2'
                 />
               </div>
-              <div className='flex min-h-full w-[400px] flex-grow flex-col gap-5 xl:justify-between xl:gap-0'>
+              <div className='flex min-h-full w-[400px] flex-grow flex-col gap-3 xl:justify-between xl:gap-0'>
                 <LoadingSkeleton
                   className='basis-[400px] lg:basis-[416px]'
                   maxHeight='110px'
@@ -325,7 +319,7 @@ const BlockDetailPage: FC = () => {
             </>
           ) : (
             <>
-              <div className='flex grow basis-[980px] flex-wrap gap-5'>
+              <div className='flex grow basis-[980px] flex-wrap gap-3'>
                 <OverviewCard
                   title='Block Overview'
                   overviewList={overviewListItems}
@@ -337,7 +331,7 @@ const BlockDetailPage: FC = () => {
                   className='h-auto'
                 />
               </div>
-              <div className='flex w-[400px] flex-grow flex-col gap-5 xl:justify-between xl:gap-0'>
+              <div className='flex w-[400px] flex-grow flex-col gap-3 xl:justify-between xl:gap-0'>
                 <MintedByCard
                   poolInfo={data?.pool}
                   vrfKey={data?.vrf_key ?? ""}
@@ -357,7 +351,7 @@ const BlockDetailPage: FC = () => {
         </div>
       </section>
       <section className='flex w-full justify-center'>
-        <div className='flex w-full max-w-desktop flex-col flex-wrap justify-center gap-5 px-mobile pb-5 md:px-desktop xl:flex-nowrap xl:justify-start'>
+        <div className='flex w-full max-w-desktop flex-col flex-wrap justify-center gap-3 px-mobile pb-3 md:px-desktop xl:flex-nowrap xl:justify-start'>
           <BlockDetailTable txs={data?.txs} blockDetail={blockDetail} />
         </div>
       </section>

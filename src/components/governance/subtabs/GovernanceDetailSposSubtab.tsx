@@ -91,7 +91,7 @@ export const GovernanceDetailSposSubtab: FC<
       },
       title: (
         <div
-          className='flex w-full cursor-pointer items-center justify-end gap-1'
+          className='flex w-full cursor-pointer items-center justify-end gap-1/2'
           onClick={() => {
             navigate({
               search: {
@@ -123,7 +123,7 @@ export const GovernanceDetailSposSubtab: FC<
       },
       title: (
         <div
-          className='flex w-full cursor-pointer items-center justify-end gap-1'
+          className='flex w-full cursor-pointer items-center justify-end gap-1/2'
           onClick={() => {
             navigate({
               search: {
@@ -154,8 +154,8 @@ export const GovernanceDetailSposSubtab: FC<
 
   return (
     <>
-      <div className='mb-4 mt-2 flex w-full flex-col justify-between gap-2 md:flex-row md:items-center'>
-        <div className='flex w-full flex-wrap items-center justify-between gap-2 sm:flex-nowrap'>
+      <div className='mb-2 mt-1 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+        <div className='flex w-full flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
           {govQuery.isLoading || govQuery.isFetching ? (
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : totalItems !== undefined ? (
@@ -167,7 +167,7 @@ export const GovernanceDetailSposSubtab: FC<
           )}
 
           <div className='flex w-full justify-end md:hidden'>
-            <div className='flex items-center gap-2 md:hidden'>
+            <div className='flex items-center gap-1 md:hidden'>
               <ExportButton columns={columns} items={items} />
               <TableSettingsDropdown
                 rows={rows}
@@ -190,8 +190,8 @@ export const GovernanceDetailSposSubtab: FC<
           </div>
         </div>
 
-        <div className='flex gap-2'>
-          <div className='hidden items-center gap-2 md:flex'>
+        <div className='flex gap-1'>
+          <div className='hidden items-center gap-1 md:flex'>
             <ExportButton columns={columns} items={items} />
             <TableSettingsDropdown
               rows={rows}

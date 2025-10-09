@@ -26,20 +26,20 @@ const MobileMenuAccordionItem = ({
   href,
 }: Props) => {
   return (
-    <AccordionItem value={label} className='mt-3'>
+    <AccordionItem value={label} className='mt-1.5'>
       <AccordionTrigger>
         <Icon name={icon} size={20} />
         {}
         {href ? (
           <Link
-            className='text-base underline'
+            className='text-text-md underline'
             to={href}
             onClick={() => setIsOpen(false)}
           >
             {label}
           </Link>
         ) : (
-          <span className='text-base'>{label}</span>
+          <span className='text-text-md'>{label}</span>
         )}
       </AccordionTrigger>
       <AccordionContent>
@@ -48,7 +48,7 @@ const MobileMenuAccordionItem = ({
             return item[1].href ? (
               <Link
                 key={item[0] + i}
-                className='ml-[31px] border-b border-border py-3 last:border-none last:pb-0 hover:text-primary'
+                className='ml-[31px] border-b border-border py-1.5 last:border-none last:pb-0 hover:text-primary'
                 to={item[1].href}
                 onClick={() => setIsOpen(false)}
               >
@@ -57,7 +57,7 @@ const MobileMenuAccordionItem = ({
             ) : (
               <button
                 key={item[0] + i}
-                className='ml-[31px] border-b border-border py-3 last:border-none last:pb-0 hover:text-primary'
+                className='ml-[31px] border-b border-border py-1.5 last:border-none last:pb-0 hover:text-primary'
                 onClick={() => {
                   item[1].onClick();
                 }}

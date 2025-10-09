@@ -24,24 +24,24 @@ export const UserBadge = ({ isLoading, user, address }: Props) => {
           {user?.profile && (
             <Tooltip
               content={
-                <div className='relative flex w-[270px] flex-col gap-2'>
+                <div className='relative flex w-[270px] flex-col gap-1'>
                   {address === myAddress && (
                     <Link to='/profile' className='absolute right-0 top-0.5'>
                       <Edit size={15} />
                     </Link>
                   )}
-                  <span className='text-grayTextPrimary text-xs'>
+                  <span className='text-grayTextPrimary text-text-xs'>
                     User profile ({user?.profile ? "Public" : "Hidden"})
                   </span>
-                  <div className='flex gap-2'>
+                  <div className='flex gap-1'>
                     <img
                       src={user?.profile?.picture}
                       height={50}
                       width={50}
-                      className='h-[50px] w-[50px] rounded-full'
+                      className='h-[50px] w-[50px] rounded-max'
                     />
-                    <div className='flex flex-col gap-2 text-[16px] font-medium'>
-                      <span className='flex items-center gap-2'>
+                    <div className='flex flex-col gap-1 text-[16px] font-medium'>
+                      <span className='flex items-center gap-1'>
                         {user?.profile?.name}{" "}
                         {user?.membership && user.membership.nfts > 0 && (
                           <Badge
@@ -65,7 +65,7 @@ export const UserBadge = ({ isLoading, user, address }: Props) => {
             >
               <Badge
                 color='gray'
-                className='gap-2 py-1'
+                className='gap-1 py-1/2'
                 style={{
                   fontSize: "13px",
                 }}
@@ -75,7 +75,7 @@ export const UserBadge = ({ isLoading, user, address }: Props) => {
                     src={user?.profile?.picture}
                     height={20}
                     width={20}
-                    className='h-5 w-5 rounded-full'
+                    className='h-5 w-5 rounded-max'
                   />
                 </span>
                 {user?.profile?.name}

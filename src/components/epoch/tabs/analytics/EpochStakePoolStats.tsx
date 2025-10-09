@@ -31,12 +31,12 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
       columns: [
         {
           title: (
-            <p className='text-sm font-medium text-grayTextPrimary'>Pools</p>
+            <p className='text-text-sm font-medium text-grayTextPrimary'>Pools</p>
           ),
         },
         {
           title: (
-            <p className='text-sm'>
+            <p className='text-text-sm'>
               {stats?.pool_stat?.pools > 0 &&
                 formatNumber(stats?.pool_stat?.pools)}
             </p>
@@ -49,14 +49,14 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
       columns: [
         {
           title: (
-            <p className='text-sm font-medium text-grayTextPrimary'>
+            <p className='text-text-sm font-medium text-grayTextPrimary'>
               APY % Leader
             </p>
           ),
         },
         {
           title: (
-            <p className='text-sm'>
+            <p className='text-text-sm'>
               {stats?.epoch_no > (miscConst?.epoch.no ?? 0) - 2 ? (
                 <Badge color='yellow'>Pending</Badge>
               ) : (
@@ -72,14 +72,14 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
       columns: [
         {
           title: (
-            <p className='text-sm font-medium text-grayTextPrimary'>
+            <p className='text-text-sm font-medium text-grayTextPrimary'>
               APY % Member
             </p>
           ),
         },
         {
           title: (
-            <p className='text-sm'>
+            <p className='text-text-sm'>
               {stats?.epoch_no > (miscConst?.epoch.no ?? 0) - 2 ? (
                 <Badge color='yellow'>Pending</Badge>
               ) : (
@@ -95,14 +95,14 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
       columns: [
         {
           title: (
-            <p className='text-sm font-medium text-grayTextPrimary'>
+            <p className='text-text-sm font-medium text-grayTextPrimary'>
               Average Stake
             </p>
           ),
         },
         {
           title: (
-            <p className='text-sm'>
+            <p className='text-text-sm'>
               {(stats?.pool_stat?.epoch_stake ?? 0 > 0) ? (
                 <AdaWithTooltip
                   data={stats?.pool_stat?.epoch_stake as number}
@@ -120,14 +120,14 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
       columns: [
         {
           title: (
-            <p className='text-sm font-medium text-grayTextPrimary'>
+            <p className='text-text-sm font-medium text-grayTextPrimary'>
               Delegator Count
             </p>
           ),
         },
         {
           title: (
-            <p className='text-sm'>
+            <p className='text-text-sm'>
               {(stats?.pool_stat?.delegator_count ?? 0) > 0 &&
                 formatNumber(stats?.pool_stat?.delegator_count ?? 0)}
             </p>
@@ -140,8 +140,8 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
       columns: [
         {
           title: (
-            <div className='flex items-center gap-1'>
-              <span className='text-sm font-medium text-grayTextPrimary'>
+            <div className='flex items-center gap-1/2'>
+              <span className='text-text-sm font-medium text-grayTextPrimary'>
                 Delegator Count Weighted
               </span>
               <Tooltip
@@ -160,7 +160,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
         },
         {
           title: (
-            <p className='text-sm'>
+            <p className='text-text-sm'>
               {stats?.pool_stat?.delegator_count_sw?.toFixed(2)}
             </p>
           ),
@@ -172,8 +172,8 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
       columns: [
         {
           title: (
-            <div className='flex items-center gap-1'>
-              <span className='text-sm font-medium text-grayTextPrimary'>
+            <div className='flex items-center gap-1/2'>
+              <span className='text-text-sm font-medium text-grayTextPrimary'>
                 Delegator Average
               </span>
               <Tooltip
@@ -192,7 +192,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
         },
         {
           title: (
-            <p className='text-sm'>
+            <p className='text-text-sm'>
               {stats?.pool_stat?.delegator_avg?.toFixed(2)}
             </p>
           ),
@@ -204,8 +204,8 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
       columns: [
         {
           title: (
-            <div className='flex items-center gap-1'>
-              <span className='text-sm font-medium text-grayTextPrimary'>
+            <div className='flex items-center gap-1/2'>
+              <span className='text-text-sm font-medium text-grayTextPrimary'>
                 Delegator Average Weighted
               </span>
               <Tooltip
@@ -224,7 +224,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
         },
         {
           title: (
-            <p className='text-sm'>
+            <p className='text-text-sm'>
               {stats?.pool_stat?.delegator_avg_sw?.toFixed(2)}
             </p>
           ),
@@ -234,13 +234,13 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
   ];
 
   return (
-    <div className='flex h-[520px] w-1/2 flex-grow basis-[600px] flex-col gap-4 rounded-lg border border-border p-5 md:flex-shrink-0'>
+    <div className='flex h-[520px] w-1/2 flex-grow basis-[600px] flex-col gap-2 rounded-m border border-border p-3 md:flex-shrink-0'>
       <h3>Stake Pool Stats</h3>
 
       <div className='flex w-full flex-col'>
         {statsRows.map(({ key, columns }, index) => (
           <div
-            className={`${index % 2 === 0 ? "rounded-s-lg bg-darker" : ""} ${index === 0 ? "rounded-t-lg" : ""} flex min-h-[55px] flex-grow`}
+            className={`${index % 2 === 0 ? "rounded-s-m bg-darker" : ""} ${index === 0 ? "rounded-t-m" : ""} flex min-h-[55px] flex-grow`}
             key={key}
           >
             {columns.map(({ title }, index) => (
@@ -250,7 +250,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
                   width: 230,
                   maxWidth: 230,
                 }}
-                className={`flex h-[55px] items-center py-3 text-left first:pl-4 last:pr-4 [&>a]:text-primary`}
+                className={`flex h-[55px] items-center py-1.5 text-left first:pl-4 last:pr-4 [&>a]:text-primary`}
               >
                 {isError || isLoading || !stats ? (
                   <LoadingSkeleton height='20px' />

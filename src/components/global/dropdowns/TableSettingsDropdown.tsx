@@ -55,14 +55,14 @@ const TableSettingsDropdown = ({
             {customContent ? (
               customContent
             ) : (
-              <div className='flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-md border border-border'>
+              <div className='flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-s border border-border'>
                 <Settings size={22} />
               </div>
             )}
           </NavigationMenuTrigger>
           <NavigationMenuContent
             onPointerLeave={e => e.preventDefault()}
-            className='z-20 grid w-[150px] rounded-md border-[1px] border-border bg-background text-sm font-medium'
+            className='z-20 grid w-[150px] rounded-s border-[1px] border-border bg-background text-text-sm font-medium'
             style={customStyles}
           >
             <div>
@@ -73,12 +73,12 @@ const TableSettingsDropdown = ({
                 }}
               >
                 {visibleRows && (
-                  <div className='flex h-14 w-full items-center justify-between border-b border-border px-3'>
+                  <div className='flex h-14 w-full items-center justify-between border-b border-border px-1.5'>
                     <span>Rows:</span>
                     <SelectTrigger className='w-[60px]'>
                       <SelectValue
                         placeholder={
-                          <div className='flex w-full items-center justify-between gap-1 uppercase'>
+                          <div className='flex w-full items-center justify-between gap-1/2 uppercase'>
                             <span>{rows}</span>
                           </div>
                         }
@@ -91,7 +91,7 @@ const TableSettingsDropdown = ({
                     .filter(item => item % 10 === 0)
                     .map(i => (
                       <SelectItem
-                        className='flex w-full cursor-pointer justify-between px-2'
+                        className='flex w-full cursor-pointer justify-between px-1'
                         key={i}
                         value={String(i)}
                       >
@@ -104,7 +104,7 @@ const TableSettingsDropdown = ({
             {columnsOptions.map((option, index) => (
               <React.Fragment key={index}>
                 <div
-                  className={`flex h-full cursor-pointer justify-between border-b-[1px] border-border p-3 first:rounded-tl-md first:rounded-tr-md last:rounded-bl-md last:rounded-br-md last:border-b-0 hover:bg-darker`}
+                  className={`first:rounded-tl-md first:rounded-tr-md last:rounded-bl-md last:rounded-br-md flex h-full cursor-pointer justify-between border-b-[1px] border-border p-1.5 last:border-b-0 hover:bg-darker`}
                   onClick={option.onClick}
                 >
                   <span>{option.label}</span>

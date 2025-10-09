@@ -17,7 +17,7 @@ const ReferenceInputsTabItem = () => {
 
   if (!inputs && !query.isLoading) {
     return (
-      <p className='w-full text-center text-sm'>No reference inputs found</p>
+      <p className='w-full text-center text-text-sm'>No reference inputs found</p>
     );
   }
 
@@ -25,7 +25,7 @@ const ReferenceInputsTabItem = () => {
     {
       key: "address",
       render: item => (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <AddressTypeInitialsBadge address={item.payment_addr_bech32} />
           <AddressCell address={item.payment_addr_bech32} />
         </div>

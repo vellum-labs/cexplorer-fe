@@ -57,7 +57,7 @@ export const ConfigSwPage: FC = () => {
   };
 
   return (
-    <main className='relative flex min-h-minHeight max-w-desktop flex-col gap-2 p-mobile md:p-desktop'>
+    <main className='relative flex min-h-minHeight max-w-desktop flex-col gap-1 p-mobile md:p-desktop'>
       <Helmet>
         <meta charSet='utf-8' />
         <title>Admin sw | Cexplorer.io</title>
@@ -86,10 +86,10 @@ export const ConfigSwPage: FC = () => {
       </Breadcrumb>
       <div
         role='button'
-        className='relative rounded-lg border border-border bg-darker'
+        className='relative rounded-m border border-border bg-darker'
       >
         <textarea
-          className='absolute inset-0 w-full resize-none overflow-hidden bg-transparent p-2 font-mono text-transparent caret-text outline-none'
+          className='absolute inset-0 w-full resize-none overflow-hidden bg-transparent p-1 font-mono text-transparent caret-text outline-none'
           value={JSON.stringify(JSON.parse(content), undefined, 2)}
           onChange={e => setContent(e.target.value)}
           spellCheck={false}
@@ -103,7 +103,7 @@ export const ConfigSwPage: FC = () => {
           {JSON.stringify(JSON.parse(content), undefined, 2)}
         </SyntaxHighlighter>
       </div>
-      <div className='flex items-center justify-end gap-2'>
+      <div className='flex items-center justify-end gap-1'>
         <Button
           label='Test'
           size='lg'

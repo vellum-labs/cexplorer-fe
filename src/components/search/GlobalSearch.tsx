@@ -53,7 +53,6 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
     }
   }, [groupedData, search]);
 
-
   const formatTitleCategories = [
     "pool",
     "page",
@@ -65,22 +64,23 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
     "gov_action_proposal",
   ];
 
-
   return (
     <search className='relative w-full' ref={searchRef}>
       {isHomepage ? (
-        <div className={`relative max-w-[750px] w-full h-12 border border-border bg-background ${focused ? "rounded-t-xl rounded-b-none" : "rounded-xl"} flex items-center`}>
+        <div
+          className={`relative h-12 w-full max-w-[750px] border border-border bg-background ${focused ? "rounded-t-l rounded-b-none" : "rounded-l"} flex items-center`}
+        >
           <GlobalSearchDropdown isHomepage />
           <input
             value={search}
-            onChange={(e) => handleSearchChange(e.currentTarget.value)}
+            onChange={e => handleSearchChange(e.currentTarget.value)}
             placeholder='Search by Address / Tx hash / Block hash / $Handle / Pool name...'
-            className="flex-1 h-full pl-2 pr-12 bg-transparent outline-none text-sm"
+            className='text-text-sm h-full flex-1 bg-transparent pl-1 pr-6 outline-none'
             onFocus={() => handleInput("focus")}
             autoCapitalize='off'
           />
-          <button className="absolute right-2 bg-primary rounded-lg flex items-center justify-center w-9 h-9 hover:bg-primary/90 transition-colors">
-            <Search size={16} className="text-background" strokeWidth={2.5} />
+          <button className='rounded-m hover:bg-primary/90 absolute right-2 flex h-9 w-9 items-center justify-center bg-primary transition-colors'>
+            <Search size={16} className='text-background' strokeWidth={2.5} />
           </button>
         </div>
       ) : (
@@ -107,7 +107,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
           )}
 
           <div
-            className={`absolute z-[25] flex w-full ${isHomepage ? 'max-w-[750px]' : ''} select-none flex-col gap-3 rounded-b-lg border-x border-b border-border bg-background`}
+            className={`absolute z-[25] flex w-full ${isHomepage ? "max-w-[750px]" : ""} rounded-b-m select-none flex-col gap-1.5 border-x border-b border-border bg-background`}
           >
             {!categories && search.length !== 0 && (
               <div className='flex h-[150px] w-full items-center justify-center'>
@@ -120,11 +120,13 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
             {categories && (
               <>
                 {categories.all === 0 ? (
-                  <div className='px-3 py-3 text-center text-sm'>Not Found</div>
+                  <div className='text-text-sm px-1.5 py-1.5 text-center'>
+                    Not Found
+                  </div>
                 ) : (
                   <>
                     <div
-                      className={`flex h-[35px] items-center gap-3 overflow-hidden ${categoriesOverflow ? "px-5" : "w-full px-3"}`}
+                      className={`flex h-[35px] items-center gap-1.5 overflow-hidden ${categoriesOverflow ? "px-3" : "w-full px-1.5"}`}
                       ref={categoriesRef}
                     >
                       {categories &&
@@ -135,7 +137,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
                             onClick={() => handleCategoryChange(category)}
                           >
                             <span
-                              className={`cursor-pointer text-xs font-semibold ${
+                              className={`cursor-pointertext-text-xs font-semibold ${
                                 activeTab === category
                                   ? "after:absolute after:bottom-0 after:left-0 after:h-[1.5px] after:w-full after:bg-primary"
                                   : ""
@@ -151,14 +153,14 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
                           </div>
                         ))}
                     </div>
-                    <div className='thin-scrollbar flex max-h-[300px] w-full flex-col overflow-auto overscroll-none px-3 pb-3'>
+                    <div className='thin-scrollbar flex max-h-[300px] w-full flex-col overflow-auto overscroll-none px-1.5 pb-1.5'>
                       {activeTab === "all"
                         ? Object.entries(groupedData).map(
                             ([category, data]) => {
                               return (
                                 <div className='flex flex-col'>
                                   {category && (
-                                    <span className='border-b border-border text-xs text-grayTextPrimary'>
+                                    <span className='text-text-xs border-b border-border text-grayTextPrimary'>
                                       {category.includes("_")
                                         ? category
                                             .split("_")[0][0]
@@ -177,7 +179,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
                                     .map((item, index, arr) => (
                                       <div
                                         key={index}
-                                        className={`${index === arr.length - 1 ? "pb-2" : ""}`}
+                                        className={`${index === arr.length - 1 ? "pb-1" : ""}`}
                                       >
                                         <GlobalSearchCell
                                           formatTitle={

@@ -99,8 +99,8 @@ export const GovernanceThresholdsSection: FC<
   }
 
   return (
-    <section className='w-full rounded-xl p-4'>
-      <div className='grid grid-cols-1 gap-4 md:grid-cols-4'>
+    <section className='w-full rounded-l p-2'>
+      <div className='grid grid-cols-1 gap-2 md:grid-cols-4'>
         <TotalThresholdChart
           chartProps={{
             ...thresholdProps,

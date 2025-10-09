@@ -38,7 +38,7 @@ export const TreasuryDonationOverview = ({ query }: Props) => {
   );
 
   return (
-    <div className='flex w-full max-w-desktop flex-col gap-5 p-mobile pb-0 lg:flex-row lg:p-desktop lg:pb-0'>
+    <div className='flex w-full max-w-desktop flex-col gap-3 p-mobile pb-0 lg:flex-row lg:p-desktop lg:pb-0'>
       {query.isLoading ? (
         <>
           <LoadingSkeleton
@@ -62,7 +62,7 @@ export const TreasuryDonationOverview = ({ query }: Props) => {
             icon={<HandCoins color={colors.primary} />}
             title='Current Epoch'
             value={
-              <div className='flex items-center gap-4'>
+              <div className='flex items-center gap-2'>
                 <span>
                   <AdaWithTooltip data={currentEpochDonations ?? 0} />
                 </span>
@@ -73,7 +73,7 @@ export const TreasuryDonationOverview = ({ query }: Props) => {
                       : currentEpochChangePercentage > 0
                         ? "text-greenText"
                         : "text-redText"
-                  }} flex items-center gap-1 text-sm`}
+                  }} gap-1/2text-text-sm flex items-center`}
                 >
                   <TrendingArrow percentage={currentEpochChangePercentage} />
                   {currentEpochChangePercentage}%
@@ -86,7 +86,7 @@ export const TreasuryDonationOverview = ({ query }: Props) => {
             title='Previous Epoch'
             icon={<HandCoins color={colors.primary} />}
             value={
-              <div className='flex items-center gap-4'>
+              <div className='flex items-center gap-2'>
                 <span>
                   <AdaWithTooltip data={previousEpochDonations ?? 0} />
                 </span>
@@ -97,7 +97,7 @@ export const TreasuryDonationOverview = ({ query }: Props) => {
                       : previousEpochChangePercentage > 0
                         ? "text-greenText"
                         : "text-redText"
-                  }} flex items-center gap-1 text-sm`}
+                  }} gap-1/2text-text-sm flex items-center`}
                 >
                   <TrendingArrow percentage={previousEpochChangePercentage} />
                   {previousEpochChangePercentage}%

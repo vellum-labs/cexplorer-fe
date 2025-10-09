@@ -99,27 +99,27 @@ export const CustomLabelModal = () => {
 
   return (
     <Modal minHeight='260px' minWidth='400px' maxWidth='95%' onClose={onClose}>
-      <p className='mb-5 pr-7 font-medium'>
+      <p className='mb-3 pr-4 font-medium'>
         {isEdit() ? "Edit label:" : "Create new label:"}
       </p>
       <TextInput
         placeholder='Address'
         onchange={value => setAddress(value)}
         value={address}
-        wrapperClassName='mb-1'
+        wrapperClassName='mb-1/2'
         disabled={!!addressToEdit}
         inputClassName={isAddressValid ? "" : "border-redText"}
       />
-      <p className='mb-3 h-3 text-xs text-redText'>
+      <p className='mb-1.5 h-3 text-text-xs text-redText'>
         {isAddressValid ? "" : "Please enter a valid address"}
       </p>
       <TextInput
         placeholder='Label name'
         onchange={value => setName(value)}
         value={name}
-        wrapperClassName='mb-6'
+        wrapperClassName='mb-3'
       />
-      <div className='mt-auto flex justify-between gap-2'>
+      <div className='mt-auto flex justify-between gap-1'>
         <Button
           onClick={onClose}
           variant='secondary'

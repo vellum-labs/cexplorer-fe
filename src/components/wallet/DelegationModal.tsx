@@ -56,16 +56,16 @@ const DelegationModal = ({ onClose, poolQuery }: Props) => {
       ) : (
         <div className='flex h-full w-full flex-col items-center justify-around'>
           {poolName?.ticker && poolName.name ? (
-            <h2 className='mt-2'>
+            <h2 className='mt-1'>
               [{poolName?.ticker}] {poolName?.name}
             </h2>
           ) : (
-            <h3 className='mt-2 break-all text-center'>{poolId}</h3>
+            <h3 className='mt-1 break-all text-center'>{poolId}</h3>
           )}
-          <p className='text-center text-sm'>{poolName?.description}</p>
+          <p className='text-center text-text-sm'>{poolName?.description}</p>
 
           <Button
-            className='mt-10'
+            className='mt-5'
             label='Delegate'
             size='lg'
             variant='primary'

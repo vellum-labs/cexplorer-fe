@@ -147,11 +147,11 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
   return (
     <>
       <div>
-        <div className='mb-4 flex justify-between'>
+        <div className='mb-2 flex justify-between'>
           <div className='hidden min-[500px]:block'>
             <ViewSwitch />
           </div>
-          <div className='flex w-full gap-2 min-[500px]:w-fit'>
+          <div className='flex w-full gap-1 min-[500px]:w-fit'>
             <TableSearchInput
               placeholder='Search by asset...'
               value={tableSearch}
@@ -185,7 +185,7 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
             }
           </div>
         </div>
-        <div className='mb-4 block min-[500px]:hidden'>
+        <div className='mb-2 block min-[500px]:hidden'>
           <ViewSwitch />
         </div>
       </div>

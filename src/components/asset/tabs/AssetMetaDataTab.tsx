@@ -33,7 +33,7 @@ export const AssetMetaDataTab: FC<AssetMetaDataTabProps> = ({
   }));
 
   return (
-    <div className='flex flex-grow flex-col gap-3 md:flex-shrink-0'>
+    <div className='flex flex-grow flex-col gap-1.5 md:flex-shrink-0'>
       {isLoading || isFetching ? (
         <LoadingSkeleton height='500px' width='100%' rounded='lg' />
       ) : (
@@ -45,7 +45,7 @@ export const AssetMetaDataTab: FC<AssetMetaDataTabProps> = ({
                 width='200px'
                 label={`Tx: ${formatString((items || [])[currentIndex]?.tx?.hash, "long")}`}
                 options={tabOptions}
-                triggerClassName='text-primary font-medium px-3 py-2'
+                triggerClassName='text-primary font-medium px-1.5 py-1'
                 closeOnSelect
               />
             </div>

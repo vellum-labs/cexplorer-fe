@@ -161,7 +161,7 @@ export const AssetDetailPage: FC = () => {
   return (
     <PageBase
       title={
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           {nameByRegistry
             ? nameByRegistry
             : formattedHex
@@ -184,7 +184,7 @@ export const AssetDetailPage: FC = () => {
         />
       }
       badge={
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           {assetDetailQuery.data?.data?.policy === adaHandlePolicy && (
             <AdaHandleBadge variant='long' />
           )}
@@ -210,24 +210,24 @@ export const AssetDetailPage: FC = () => {
       }}
     >
       <section className='flex w-full justify-center'>
-        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-5 px-mobile md:px-desktop xl:flex-nowrap xl:justify-start'>
-          <div className='flex grow basis-[980px] flex-wrap items-stretch gap-5'>
+        <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 px-mobile md:px-desktop xl:flex-nowrap xl:justify-start'>
+          <div className='flex grow basis-[980px] flex-wrap items-stretch gap-3'>
             {assetDetailQuery.isLoading ? (
               <>
                 <LoadingSkeleton
                   height='328px'
                   rounded='xl'
-                  className='grow basis-[410px] px-8 py-4'
+                  className='grow basis-[410px] px-4 py-2'
                 />
                 <LoadingSkeleton
                   height='328px'
                   rounded='xl'
-                  className='grow basis-[410px] px-8 py-4'
+                  className='grow basis-[410px] px-4 py-2'
                 />
                 <LoadingSkeleton
                   height='328px'
                   rounded='xl'
-                  className='grow basis-[410px] px-8 py-4'
+                  className='grow basis-[410px] px-4 py-2'
                 />
               </>
             ) : (

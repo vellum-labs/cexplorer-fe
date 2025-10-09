@@ -59,22 +59,22 @@ export const MinMaxRange: FC<MinMaxRangeProps> = ({
       case "xs":
         return {
           bar: "h-1 w-8",
-          text: "text-xs",
+          text: "text-text-xs",
         };
       case "sm":
         return {
           bar: "h-2 w-12",
-          text: "text-sm",
+          text: "text-text-sm",
         };
       case "md":
         return {
           bar: "h-2 w-16",
-          text: "text-sm",
+          text: "text-text-sm",
         };
       default:
         return {
           bar: "h-2 w-12",
-          text: "text-sm",
+          text: "text-text-sm",
         };
     }
   };
@@ -110,7 +110,7 @@ export const MinMaxRange: FC<MinMaxRangeProps> = ({
       </div>
 
       {showLabels && (
-        <span className={`${sizeClasses.text} ml-1 text-grayTextSecondary`}>
+        <span className={`${sizeClasses.text} ml-1/2 text-grayTextSecondary`}>
           {max}
         </span>
       )}
@@ -119,7 +119,7 @@ export const MinMaxRange: FC<MinMaxRangeProps> = ({
 
   if (labelPosition === "right") {
     return (
-      <div className={`flex items-center gap-1 ${className}`}>
+      <div className={`flex items-center gap-1/2 ${className}`}>
         {progressBarElement}
         {currentValueElement}
       </div>
@@ -128,7 +128,7 @@ export const MinMaxRange: FC<MinMaxRangeProps> = ({
 
   // Default: label above
   return (
-    <div className={`flex flex-col gap-1 ${className}`}>
+    <div className={`flex flex-col gap-1/2 ${className}`}>
       <p className='text-right'>{currentValueElement}</p>
       {progressBarElement}
     </div>

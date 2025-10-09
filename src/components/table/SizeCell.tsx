@@ -11,7 +11,7 @@ export const SizeCell = ({ maxSize, size }: Props) => {
 
   return (
     <div className='flex flex-col'>
-      <div className='flex items-center justify-between gap-1'>
+      <div className='flex items-center justify-between gap-1/2'>
         <span className='text-grayTextPrimary text-[12px] font-semibold'>
           {sizeInKb}kB{" "}
         </span>

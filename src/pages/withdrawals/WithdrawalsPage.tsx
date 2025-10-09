@@ -87,7 +87,7 @@ export const WithdrawalsPage = () => {
     {
       key: "amount_controlled",
       render: item => (
-        <div className='flex flex-col items-end gap-1'>
+        <div className='flex flex-col items-end gap-1/2'>
           <AdaWithTooltip data={item?.account.live_stake ?? 0} />
         </div>
       ),
@@ -102,7 +102,7 @@ export const WithdrawalsPage = () => {
     {
       key: "amount_withdrawn",
       render: item => (
-        <div className='flex flex-col items-end gap-1'>
+        <div className='flex flex-col items-end gap-1/2'>
           <AdaWithTooltip data={item?.amount ?? 0} />
         </div>
       ),
@@ -117,7 +117,7 @@ export const WithdrawalsPage = () => {
     {
       key: "delegated_to",
       render: item => (
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1/2'>
           <PoolCell poolInfo={item.pool.live} />
         </div>
       ),
@@ -166,8 +166,8 @@ export const WithdrawalsPage = () => {
       title='Withdrawals'
       breadcrumbItems={[{ label: "Withdrawals" }]}
     >
-      <div className='flex w-full max-w-desktop flex-col px-mobile pb-5 md:px-desktop'>
-        <div className='mb-4 ml-auto flex w-fit justify-end gap-2'>
+      <div className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
+        <div className='mb-2 ml-auto flex w-fit justify-end gap-1'>
           <ExportButton columns={withdrawalColumns} items={items} />
           <TableSettingsDropdown
             rows={rows}

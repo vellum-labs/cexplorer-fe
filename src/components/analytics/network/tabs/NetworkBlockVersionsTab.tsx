@@ -45,17 +45,17 @@ export const NetworkBlockVersionsTab: FC = () => {
 
   const blocksQuery = useFetchBlocksList(100, 0, true);
   return (
-    <section className='flex w-full max-w-desktop flex-col gap-3'>
-      <div className='flex w-full flex-col items-start gap-4 lg:flex-row lg:items-stretch'>
+    <section className='flex w-full max-w-desktop flex-col gap-1.5'>
+      <div className='flex w-full flex-col items-start gap-2 lg:flex-row lg:items-stretch'>
         <OverviewStatCard
           icon={<Router className='text-primary' />}
           title='Latest node version'
           value={
-            <div className='flex flex-col gap-2'>
-              <p className='text-2xl font-semibold'>
+            <div className='flex flex-col gap-1'>
+              <p className='text-display-xs font-semibold'>
                 {latestBlockVersion.toFixed(1)}
               </p>
-              <p className='text-xs font-normal leading-4 text-grayTextPrimary'>
+              <p className='text-text-xs font-regular leading-4 text-grayTextPrimary'>
                 This page provides insights into Cardano's hard fork events by
                 analyzing the last block minted by each active staking pool with
                 a minimum of one block produced per epoch.
@@ -63,9 +63,9 @@ export const NetworkBlockVersionsTab: FC = () => {
             </div>
           }
           description={
-            <div className='flex gap-2'>
-              <div className='flex h-[40px] w-fit flex-grow cursor-pointer items-center justify-center gap-1 rounded-md border border-border px-3'>
-                <span className='text-xs font-medium text-text sm:text-sm'>
+            <div className='flex gap-1'>
+              <div className='flex h-[40px] w-fit flex-grow cursor-pointer items-center justify-center gap-1/2 rounded-s border border-border px-1.5'>
+                <span className='text-text-xs font-medium text-text sm:text-sm'>
                   Hardfork status
                 </span>
               </div>
@@ -83,7 +83,7 @@ export const NetworkBlockVersionsTab: FC = () => {
           sortedVersions={sortedVersions}
         />
       </div>
-      <div className='flex flex-wrap items-stretch gap-3 lg:flex-nowrap'>
+      <div className='flex flex-wrap items-stretch gap-1.5 lg:flex-nowrap'>
         <AnalyticsGraph
           className='flex-grow'
           description='Block Versions in last 100 Blocks'

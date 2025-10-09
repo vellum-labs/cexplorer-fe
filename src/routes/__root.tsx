@@ -114,7 +114,7 @@ const RootComponent = () => {
       <ErrorBoundary key={resetKey}>
         <Navbar />
         {notFound ? (
-          <div className='flex min-h-minHeight w-full flex-col items-center justify-center gap-4 text-xl'>
+          <div className='flex min-h-minHeight w-full flex-col items-center justify-center gap-2 text-text-xl'>
             <p>This page doesn't exist...</p>
             <Button
               label='Go back'

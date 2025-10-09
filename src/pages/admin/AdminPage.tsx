@@ -19,7 +19,7 @@ export const AdminPage = () => {
   const hasAdminRights = adminRight || articleAdmin || configAdmin;
 
   return (
-    <main className='relative flex min-h-minHeight flex-col items-center gap-2 p-mobile md:p-desktop'>
+    <main className='relative flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
       <Helmet>
         <meta charSet='utf-8' />
         <title>Admin | Cexplorer.io</title>
@@ -36,32 +36,32 @@ export const AdminPage = () => {
           </BreadcrumbList>
         </Breadcrumb>
         {userQuery.isLoading ? (
-          <div className='mt-8 flex w-full justify-center'>
+          <div className='mt-4 flex w-full justify-center'>
             <SpinningLoader />
           </div>
         ) : !hasAdminRights && !userQuery.isLoading ? (
-          <p className='mt-8 flex w-full justify-center'>
+          <p className='mt-4 flex w-full justify-center'>
             You don't have admin permission.
           </p>
         ) : (
-          <div className='mt-8 flex w-full justify-center gap-4 text-primary'>
+          <div className='mt-4 flex w-full justify-center gap-2 text-primary'>
             {adminRight && (
-              <Link className='text-lg' to='/admin/pages'>
+              <Link className='text-text-lg' to='/admin/pages'>
                 Pages
               </Link>
             )}
             {articleAdmin && (
-              <Link className='text-lg' to='/admin/articles'>
+              <Link className='text-text-lg' to='/admin/articles'>
                 Articles
               </Link>
             )}
             {configAdmin && (
-              <Link className='text-lg' to='/admin/config'>
+              <Link className='text-text-lg' to='/admin/config'>
                 Config
               </Link>
             )}
             {configAdmin && (
-              <Link className='text-lg' to='/admin/groups'>
+              <Link className='text-text-lg' to='/admin/groups'>
                 Groups
               </Link>
             )}

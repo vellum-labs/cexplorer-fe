@@ -57,20 +57,20 @@ export const SwReadyModal: FC<SwReadyModalProps> = ({
 
   return (
     open && (
-      <div className='fixed bottom-[10px] right-1 z-50 flex w-full max-w-[340px] flex-col gap-3 rounded-xl border border-border bg-background p-6 md:right-[10px]'>
+      <div className='fixed bottom-[10px] right-1 z-50 flex w-full max-w-[340px] flex-col gap-1.5 rounded-l border border-border bg-background p-3 md:right-[10px]'>
         <div className='flex items-center justify-between'>
-          <h3 className='text-sm font-semibold'>
+          <h3 className='text-text-sm font-semibold'>
             Cexplorer {firstInstall ? "install" : "update"} completed 💪
           </h3>
           <X size={18} onClick={handleClose} className='cursor-pointer' />
         </div>
         {!firstInstall && (
-          <div className='text-grayTextPrimary flex flex-col text-sm'>
+          <div className='text-grayTextPrimary flex flex-col text-text-sm'>
             {parse(message || "")}
           </div>
         )}
-        <div className='flex flex-col gap-1'>
-          <span className='text-grayTextPrimary text-sm font-medium'>
+        <div className='flex flex-col gap-1/2'>
+          <span className='text-grayTextPrimary text-text-sm font-medium'>
             {firstInstall
               ? "Refresh the page to enjoy cexplorer!"
               : "Refresh the page to enjoy the new update."}
@@ -82,7 +82,7 @@ export const SwReadyModal: FC<SwReadyModalProps> = ({
               className='max-w-full'
               onClick={handleRefresh}
               label={
-                <div className='flex w-full items-center gap-1'>
+                <div className='flex w-full items-center gap-1/2'>
                   <span>Refresh page</span>
                   <RefreshCcw className='text-inherit' size={15} />
                 </div>

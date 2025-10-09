@@ -98,7 +98,7 @@ export const AdminArticleDetail = () => {
   }, [data]);
 
   return (
-    <main className='relative flex min-h-minHeight max-w-desktop flex-col gap-2 p-mobile md:p-desktop'>
+    <main className='relative flex min-h-minHeight max-w-desktop flex-col gap-1 p-mobile md:p-desktop'>
       <Helmet>
         <meta charSet='utf-8' />
         <title>Admin article detail | Cexplorer.io</title>
@@ -129,11 +129,11 @@ export const AdminArticleDetail = () => {
         </BreadcrumbList>
       </Breadcrumb>
       {query.isLoading ? (
-        <div className='mt-8 flex w-full justify-center'>
+        <div className='mt-4 flex w-full justify-center'>
           <SpinningLoader />
         </div>
       ) : !data && !query.isLoading ? (
-        <p className='mt-8 flex w-full justify-center'>
+        <p className='mt-4 flex w-full justify-center'>
           You don't have admin permission.
         </p>
       ) : (
@@ -174,12 +174,12 @@ export const AdminArticleDetail = () => {
             value={image}
           />
           <p>Publish date:</p>
-          <div className='mb-8 flex flex-col items-start gap-1'>
+          <div className='mb-4 flex flex-col items-start gap-1/2'>
             <input
               type='datetime-local'
               value={pubDate || new Date().toISOString()}
               onChange={e => setPubDate(e.target.value)}
-              className='mb-8 bg-background text-text'
+              className='mb-4 bg-background text-text'
             />
           </div>
           <p>Content:</p>
@@ -187,10 +187,10 @@ export const AdminArticleDetail = () => {
             role='button'
             onKeyDown={() => textareaRef.current?.focus()}
             onClick={() => textareaRef.current?.focus()}
-            className='relative rounded-lg border border-border bg-darker'
+            className='relative rounded-m border border-border bg-darker'
           >
             <textarea
-              className='absolute inset-0 w-full resize-none overflow-hidden bg-transparent p-2 font-mono text-transparent caret-text outline-none'
+              className='absolute inset-0 w-full resize-none overflow-hidden bg-transparent p-1 font-mono text-transparent caret-text outline-none'
               ref={textareaRef}
               value={content}
               onChange={e => setContent(e.target.value)}

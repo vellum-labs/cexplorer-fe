@@ -101,14 +101,14 @@ const PoolDetailPage = () => {
         after: data?.pool_name?.name ?? "",
       }}
       title={
-        <span className='mt-1 flex w-full items-center gap-2'>
+        <span className='mt-1/2 flex w-full items-center gap-1'>
           {data?.pool_name.ticker && (
             <Image
               src={generateImageUrl(data?.pool_id || "", "ico", "pool")}
               type='pool'
               height={35}
               width={35}
-              className='flex-shrink-0 rounded-full'
+              className='flex-shrink-0 rounded-max'
             />
           )}
           <span className='flex-1 break-all'>
@@ -120,7 +120,7 @@ const PoolDetailPage = () => {
       }
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1'>Pools</span>,
+          label: <span className='inline pt-1/2'>Pools</span>,
           link: "/pool",
         },
         {

@@ -135,7 +135,7 @@ const Tabs = ({
     !apiLoading && (
       <section
         aria-label='Tab Navigation'
-        className={`${withMargin ? "my-5" : ""} ${
+        className={`${withMargin ? "my-3" : ""} ${
           toRight ? "items-end" : ""
         } flex w-full max-w-desktop flex-col ${
           withPadding ? "px-mobile md:px-desktop" : ""
@@ -160,7 +160,7 @@ const Tabs = ({
         </div>
         <div
           role='tablist'
-          className={`${withMargin ? "mb-5" : ""} flex w-full items-center gap-2 ${
+          className={`${withMargin ? "mb-3" : ""} flex w-full items-center gap-1 ${
             toRight ? "justify-end" : ""
           }`}
         >
@@ -174,16 +174,16 @@ const Tabs = ({
           {allowScroll ? (
             <div className='thin-scrollbar hidden w-full overflow-x-auto overflow-y-hidden lg:block'>
               <div
-                className={`flex ${tabParam ? "h-[35px]" : "h-[44px]"} mx-1 w-fit items-center gap-0.5 text-nowrap rounded-lg border border-borderFaded bg-darker font-medium shadow`}
+                className={`flex ${tabParam ? "h-[35px]" : "h-[44px]"} shadow mx-1/2 w-fit items-center gap-1/4 text-nowrap rounded-m border border-borderFaded bg-darker font-medium`}
               >
                 {items.map((item, index) => (
                   // @ts-expect-error link
                   <Link
                     key={index}
-                    className={`flex items-center rounded-lg border px-3 py-2 ${
+                    className={`flex items-center rounded-m border px-1.5 py-1 ${
                       tabParam
-                        ? "h-[35px] text-sm font-semibold"
-                        : "h-[44px] text-base font-semibold"
+                        ? "h-[35px]text-text-sm font-semibold"
+                        : "h-[44px] text-text-md font-semibold"
                     } ${
                       activeTab === index
                         ? `z-20 border-border bg-background ${
@@ -207,16 +207,16 @@ const Tabs = ({
             </div>
           ) : (
             <div
-              className={`hidden ${tabParam ? "h-[35px]" : "h-[44px]"} w-fit items-center gap-0.5 text-nowrap rounded-lg border border-borderFaded bg-darker font-medium shadow lg:flex`}
+              className={`hidden ${tabParam ? "h-[35px]" : "h-[44px]"} w-fit items-center gap-1/4 text-nowrap rounded-m border border-borderFaded bg-darker font-medium shadow-md lg:flex`}
             >
               {items.map((item, index) => (
                 // @ts-expect-error link
                 <Link
                   key={index}
-                  className={`flex items-center rounded-lg border px-3 py-2 ${
+                  className={`flex items-center rounded-m border px-1.5 py-1 ${
                     tabParam
-                      ? "h-[35px] text-sm font-semibold"
-                      : "h-[44px] text-base font-semibold"
+                      ? "h-[35px] text-text-sm font-semibold"
+                      : "h-[44px] text-text-md font-semibold"
                   } ${
                     activeTab === index
                       ? `z-20 border-border bg-background ${

@@ -52,11 +52,11 @@ export const GovernanceVoteDetailPage: FC = () => {
       }}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1'>Governance</span>,
+          label: <span className='inline pt-1/2'>Governance</span>,
           link: "/gov",
         },
         {
-          label: <span className='inline pt-1'>Votes</span>,
+          label: <span className='inline pt-1/2'>Votes</span>,
           link: "/gov/vote",
         },
         {
@@ -72,21 +72,21 @@ export const GovernanceVoteDetailPage: FC = () => {
         />
       }
     >
-      <div className='w-full max-w-desktop py-4'>
+      <div className='w-full max-w-desktop py-2'>
         {isLoading ? (
           <div className='w-full'>
-            <div className='flex gap-2'>
+            <div className='flex gap-1'>
               {[1, 2, 3].map(i => (
                 <LoadingSkeleton
                   key={i}
                   width='80px'
                   height='32px'
-                  className='rounded-md'
+                  className='rounded-s'
                 />
               ))}
             </div>
 
-            <div className='mt-4'>
+            <div className='mt-2'>
               <VoteDetailCard
                 vote={undefined as any}
                 index={0}
