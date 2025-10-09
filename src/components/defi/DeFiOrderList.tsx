@@ -671,37 +671,39 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         return (
           <div className='flex items-center justify-end'>
             <div className='relative'>
-              <Tooltip content={dex.label}>
-                <div
-                  className='flex h-6 w-6 items-center justify-center rounded-full border'
-                  style={{
-                    backgroundColor: dex.bgColor,
-                    borderColor: dex.borderColor,
-                  }}
-                >
+              <div
+                className='flex aspect-square h-6 w-6 items-center justify-center overflow-hidden rounded-full border'
+                style={{
+                  backgroundColor: dex.bgColor,
+                  borderColor: dex.borderColor,
+                  borderRadius: "50%",
+                }}
+              >
+                <Tooltip content={dex.label}>
                   <Image
                     src={dex.icon}
                     className='h-4 w-4 rounded-full'
                     alt={dex.label}
                   />
-                </div>
-              </Tooltip>
+                </Tooltip>
+              </div>
               {item.is_dexhunter && (
-                <Tooltip content={dexhunterDex.label}>
-                  <div
-                    className='absolute -bottom-1 -right-0.5 flex h-3 w-3 items-center justify-center rounded-full border'
-                    style={{
-                      backgroundColor: dexhunterDex.bgColor,
-                      borderColor: dexhunterDex.borderColor,
-                    }}
-                  >
+                <div
+                  className='absolute -bottom-0.5 -right-0.5 flex aspect-square h-3 w-3 items-center justify-center overflow-hidden rounded-full border'
+                  style={{
+                    backgroundColor: dexhunterDex.bgColor,
+                    borderColor: dexhunterDex.borderColor,
+                    borderRadius: "50%",
+                  }}
+                >
+                  <Tooltip content={dexhunterDex.label}>
                     <Image
                       src={dexhunterDex.icon}
                       className='h-2 w-2 rounded-full'
                       alt={dexhunterDex.label}
                     />
-                  </div>
-                </Tooltip>
+                  </Tooltip>
+                </div>
               )}
             </div>
           </div>
