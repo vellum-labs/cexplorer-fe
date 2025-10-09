@@ -2,9 +2,9 @@ import type { FC } from "react";
 
 import { Tooltip } from "@/components/ui/tooltip";
 
-import { currencySigns } from "@/constants/currencies";
 import { useCurrencyStore } from "@/stores/currencyStore";
 import { formatBitcoinWithSub } from "@/utils/format/formatSmallValue";
+import { formatCurrency } from "@/utils/format/formatCurrency";
 import { AdaWithTooltip } from "./AdaWithTooltip";
 
 interface BlockDetailTransactionsOverviewTotalProps {
@@ -26,17 +26,9 @@ export const TotalSumWithRates: FC<
       </span>
       <span className='h-[20px] translate-y-[2px] pr-1/2 leading-none text-grayTextPrimary'>
         (
-        <Tooltip
-          content={
-            <>
-              {currencySigns[currency]}
-              {sum[1]}
-            </>
-          }
-        >
+        <Tooltip content={formatCurrency(sum[1], currency, { useFormatNumber: true })}>
           <span>
-            {currencySigns[currency]}
-            {(+sum[1]).toFixed(2)}
+            {formatCurrency((+sum[1]).toFixed(2), currency, { useFormatNumber: false })}
           </span>
         </Tooltip>{" "}
         |{" "}

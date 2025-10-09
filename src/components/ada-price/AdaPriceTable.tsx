@@ -9,8 +9,8 @@ import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useCurrencyStore } from "@/stores/currencyStore";
 
-import { currencySigns } from "@/constants/currencies";
 import { formatNumber } from "@/utils/format/format";
+import { formatCurrency } from "@/utils/format/formatCurrency";
 
 import Bitcoin from "@/resources/images/wallet/bitcoin.svg";
 import { Tooltip } from "@/components/ui/tooltip";
@@ -42,7 +42,9 @@ export const AdaPriceTable: FC = () => {
           <span className='text-text-sm text-grayTextPrimary'>ADA Price</span>
         </div>
         <div className='flex items-center gap-1'>
-          <span className='text-display-xs font-semibold'>{price.today}</span>
+          <span className='text-display-xs font-semibold'>
+            {formatCurrency(Number(price.todayValue.toFixed(2)), currency, { useFormatNumber: false })}
+          </span>
           <span
             className={`rounded-max px-1/2 py-1/4 ml-0.5 flex items-center border text-[11px] font-medium ${price.percentChange < 1 && price.percentChange > -1 ? "border-yellow-500/40 bg-yellow-500/5 text-yellowText" : price.percentChange > 0 ? "border-green-500/40 bg-green-500/5 text-greenText" : "border-red-500/40 bg-red-500/5 text-redText"}`}
           >
@@ -76,12 +78,12 @@ export const AdaPriceTable: FC = () => {
           </Tooltip>
         </div>
         <span className='text-text-sm font-semibold text-grayTextPrimary'>
-          {currencySigns[currency]}
           {miscConst?.circulating_supply
-            ? formatNumber(
+            ? formatCurrency(
                 Math.round(
                   (miscConst.circulating_supply / 1e6) * price.todayValue,
                 ),
+                currency,
               )
             : "-"}
         </span>
@@ -102,9 +104,11 @@ export const AdaPriceTable: FC = () => {
           </Tooltip>
         </div>
         <span className='text-text-sm font-semibold text-grayTextPrimary'>
-          {currencySigns[currency]}
           {miscConst?.circulating_supply
-            ? formatNumber(Math.round((totalSupply / 1e6) * price.todayValue))
+            ? formatCurrency(
+                Math.round((totalSupply / 1e6) * price.todayValue),
+                currency,
+              )
             : "-"}
         </span>
       </div>
