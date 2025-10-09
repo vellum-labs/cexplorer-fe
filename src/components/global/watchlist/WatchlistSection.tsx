@@ -43,11 +43,12 @@ export const WatchlistSection = ({
       return;
     }
 
-    if (isPool) {
-      handleDelegation({ type: "pool", poolId: ident ?? "" }, lucid);
-    } else if (isDrep) {
-      handleDelegation({ type: "drep", drepId: ident ?? "" }, lucid);
-    }
+    handleDelegation(
+      isPool
+        ? { type: "pool", poolId: ident ?? "" }
+        : { type: "drep", drepId: ident ?? "" },
+      lucid,
+    );
   };
 
   const getDelegateLabel = () => {
@@ -55,14 +56,13 @@ export const WatchlistSection = ({
       return !ticker ? "Delegate" : `Delegate to [${ticker}]`;
     }
 
-    if (isDrep) {
-      if (!drepName) return "Delegate to this DRep";
-      return drepName.length > 20
-        ? "Delegate to this DRep"
-        : `Delegate to ${drepName}`;
+    if (!isDrep) return "";
+
+    if (!drepName || drepName.length > 20) {
+      return "Delegate to this DRep";
     }
 
-    return "";
+    return `Delegate to ${drepName}`;
   };
 
   if (isLoading)
