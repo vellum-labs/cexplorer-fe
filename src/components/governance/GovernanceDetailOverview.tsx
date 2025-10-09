@@ -43,7 +43,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
   const committeeMembers = query?.data?.data?.committee?.member;
   const votingProcedure = query?.data?.data?.voting_procedure;
 
-  const [clickedUrl, setClickedUrl] = useState<string | null>(null);
+  const [clickedUrl, setClickedUrl] = useState<string | undefined>(undefined);
 
   const votingDreps = (votingProcedure ?? []).filter(
     item => item?.voter_role === "DRep",
@@ -364,7 +364,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
 
       return {
         label: (
-          <div className='flex items-center gap-1.5 py-1 text-text-sm'>
+          <div className='flex items-center gap-1.5 py-0.5 text-text-sm'>
             <Image
               src={generateImageUrl(ccId, "ico", "cc")}
               className='h-[18px] w-[18px] rounded-m object-cover'
@@ -880,7 +880,10 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
         </div>
       </section>
       {clickedUrl && (
-        <SafetyLinkModal url={clickedUrl} onClose={() => setClickedUrl(null)} />
+        <SafetyLinkModal
+          url={clickedUrl}
+          onClose={() => setClickedUrl(undefined)}
+        />
       )}
     </>
   );
