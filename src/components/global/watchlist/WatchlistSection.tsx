@@ -5,6 +5,7 @@ import { ShareButton } from "../ShareButton";
 import LoadingSkeleton from "../skeletons/LoadingSkeleton";
 import { WatchlistStar } from "./WatchlistStar";
 import type { useFetchPoolDetail } from "@/services/pools";
+import type { useFetchDrepDetail } from "@/services/drep";
 import { useWalletStore } from "@/stores/walletStore";
 import { handleDelegation } from "@/utils/wallet/handleDelegation";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
@@ -16,6 +17,7 @@ export const WatchlistSection = ({
   collection,
   ticker,
   poolDetailQuery,
+  drepDetailQuery,
   enableWatchlistModal = false,
   stakeKey,
 }: {
@@ -24,11 +26,44 @@ export const WatchlistSection = ({
   collection?: string | null;
   ticker?: string;
   poolDetailQuery?: ReturnType<typeof useFetchPoolDetail>;
+  drepDetailQuery?: ReturnType<typeof useFetchDrepDetail>;
   enableWatchlistModal?: boolean;
   stakeKey?: string;
 }) => {
   const { lucid, address, walletType } = useWalletStore();
   const [showWalletModal, setShowWalletModal] = useState<boolean>(false);
+
+  const drepName = drepDetailQuery?.data?.data?.given_name;
+  const isPool = !!poolDetailQuery;
+  const isDrep = !!drepDetailQuery;
+
+  const handleDelegateClick = () => {
+    if (!address && !walletType) {
+      setShowWalletModal(true);
+      return;
+    }
+
+    if (isPool) {
+      handleDelegation({ type: "pool", poolId: ident ?? "" }, lucid);
+    } else if (isDrep) {
+      handleDelegation({ type: "drep", drepId: ident ?? "" }, lucid);
+    }
+  };
+
+  const getDelegateLabel = () => {
+    if (isPool) {
+      return !ticker ? "Delegate" : `Delegate to [${ticker}]`;
+    }
+
+    if (isDrep) {
+      if (!drepName) return "Delegate to this DRep";
+      return drepName.length > 20
+        ? "Delegate to this DRep"
+        : `Delegate to ${drepName}`;
+    }
+
+    return "";
+  };
 
   if (isLoading)
     return (
@@ -70,18 +105,18 @@ export const WatchlistSection = ({
         />
       )}
       <ShareButton />
-      <WatchlistStar ident={ident} showOptionsModal={enableWatchlistModal} stakeKey={stakeKey} />
+      <WatchlistStar
+        ident={ident}
+        showOptionsModal={enableWatchlistModal}
+        stakeKey={stakeKey}
+      />
       <Button label='Promote' variant='tertiary' size='md' href='/pro' />
-      {poolDetailQuery && (
+      {(isPool || isDrep) && (
         <Button
-          label={!ticker ? "Delegate" : `Delegate to [${ticker}]`}
+          label={getDelegateLabel()}
           variant='primary'
           size='md'
-          onClick={() =>
-            !address && !walletType
-              ? setShowWalletModal(true)
-              : handleDelegation(ident ?? "", lucid)
-          }
+          onClick={handleDelegateClick}
         />
       )}
       {showWalletModal && (

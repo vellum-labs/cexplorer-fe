@@ -25,7 +25,6 @@ const DelegationModal = ({ onClose, poolQuery }: Props) => {
       ? userQuery.data?.data?.account[0].view
       : undefined;
   const delegationQuery = useCheckUserDelegation(view);
-  const delegationData = delegationQuery.data?.data;
 
   const livePool =
     userQuery.data?.data?.account && userQuery.data?.data?.account.length > 0
@@ -62,14 +61,16 @@ const DelegationModal = ({ onClose, poolQuery }: Props) => {
           ) : (
             <h3 className='mt-1 break-all text-center'>{poolId}</h3>
           )}
-          <p className='text-center text-text-sm'>{poolName?.description}</p>
+          <p className='text-text-sm text-center'>{poolName?.description}</p>
 
           <Button
             className='mt-5'
             label='Delegate'
             size='lg'
             variant='primary'
-            onClick={() => handleDelegation(poolId, lucid, true)}
+            onClick={() =>
+              handleDelegation({ type: "pool", poolId, donation: true }, lucid)
+            }
           />
         </div>
       )}

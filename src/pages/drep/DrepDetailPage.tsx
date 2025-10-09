@@ -94,11 +94,13 @@ export const DrepDetailPage: FC = () => {
       }}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>Governance</span>,
+          label: <span className='pt-1/2 inline'>Governance</span>,
           link: "/gov",
         },
         {
-          label: <span className='inline pt-1/2'>Delegated representatives</span>,
+          label: (
+            <span className='pt-1/2 inline'>Delegated representatives</span>
+          ),
           link: "/drep",
         },
         {
@@ -136,6 +138,7 @@ export const DrepDetailPage: FC = () => {
         <WatchlistSection
           ident={drepHash ?? ""}
           isLoading={drepDetailQuery.isLoading}
+          drepDetailQuery={drepDetailQuery}
         />
       </div>
       <DrepDetailOverview query={drepDetailQuery} />
