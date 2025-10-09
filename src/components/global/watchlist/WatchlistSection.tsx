@@ -44,9 +44,7 @@ export const WatchlistSection = ({
     }
 
     handleDelegation(
-      isPool
-        ? { type: "pool", poolId: ident ?? "" }
-        : { type: "drep", drepId: ident ?? "" },
+      { type: isPool ? "pool" : "drep", ident: ident ?? "" },
       lucid,
     );
   };

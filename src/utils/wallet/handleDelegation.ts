@@ -3,18 +3,11 @@ import { drepIDToCredential } from "@lucid-evolution/utils";
 import { callDelegationToast } from "../error/callDelegationToast";
 import { sendDelegationInfo } from "@/services/tool";
 
-interface PoolDelegationParams {
-  type: "pool";
-  poolId: string;
+interface DelegationParams {
+  type: "pool" | "drep";
+  ident: string;
   donation?: boolean;
 }
-
-interface DRepDelegationParams {
-  type: "drep";
-  drepId: string;
-}
-
-type DelegationParams = PoolDelegationParams | DRepDelegationParams;
 
 export const handleDelegation = async (
   params: DelegationParams,
@@ -22,7 +15,7 @@ export const handleDelegation = async (
 ) => {
   if (!lucid) return;
 
-  const delegationId = params.type === "pool" ? params.poolId : params.drepId;
+  const delegationId = params.ident;
   const idLabel = params.type === "pool" ? "poolId" : "DRep ID";
 
   if (!delegationId) {
@@ -57,14 +50,14 @@ export const handleDelegation = async (
     }
 
     if (params.type === "pool") {
-      tx.delegate.ToPool(rewardAddress, params.poolId);
+      tx.delegate.ToPool(rewardAddress, delegationId);
     } else {
       const drep =
-        params.drepId === "drep_always_abstain"
+        delegationId === "drep_always_abstain"
           ? { __typename: "AlwaysAbstain" as const }
-          : params.drepId === "drep_always_no_confidence"
+          : delegationId === "drep_always_no_confidence"
             ? { __typename: "AlwaysNoConfidence" as const }
-            : drepIDToCredential(params.drepId);
+            : drepIDToCredential(delegationId);
 
       tx.delegate.VoteToDRep(rewardAddress, drep);
     }
@@ -78,8 +71,8 @@ export const handleDelegation = async (
       params.type === "pool"
         ? params.donation
           ? "donation_page"
-          : params.poolId
-        : `drep_${params.drepId}`;
+          : delegationId
+        : `drep_${delegationId}`;
 
     sendDelegationInfo(hash, trackingId);
 
