@@ -1,3 +1,11 @@
+:root {
+  --hoverHighlight: rgba(250, 197, 21, 0.3) !important;
+}
+
+:root[data-theme="light"] {
+  --hoverHighlight: rgba(250, 197, 21, 0.3) !important;
+}
+
 .wrapper {
   display: flex;
   width: 100%;
