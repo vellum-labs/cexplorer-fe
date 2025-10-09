@@ -116,7 +116,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
   ];
 
   return (
-    <div className='h-fit flex-grow basis-[450px] md:flex-shrink-0'>
+    <div className='h-full flex-grow basis-[450px] md:flex-shrink-0'>
       <OverviewCard
         title='Summary'
         subTitle={

@@ -248,7 +248,7 @@ export const DrepListPage = () => {
               className='w-full'
               opts={{ loop: true, align: "start" }}
             >
-              <CarouselContent className='overflow-visible'>
+              <CarouselContent className='flex items-stretch overflow-visible'>
                 {statCards.map(({ key, icon, label, content, footer }) => (
                   <CarouselItem
                     key={key}

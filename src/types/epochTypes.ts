@@ -128,6 +128,7 @@ interface EpochStat {
   count_tx_metadata_with_721: number;
   count_tx_out_stake_not_yesterday: number;
   count_tx_out_address_not_yesterday: number;
+  start_time?: string;
 }
 
 interface EpochDaily {

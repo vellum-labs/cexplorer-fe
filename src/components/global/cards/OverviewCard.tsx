@@ -50,7 +50,7 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
 }) => {
   return (
     <div
-      className={`min-h-[227px] w-full flex-1 grow basis-[450px] rounded-l border border-border bg-cardBg px-2 py-2 shadow-md lg:basis-[400px] ${className}`}
+      className={`h-full min-h-[227px] w-full flex-1 grow basis-[450px] rounded-l border border-border bg-cardBg px-2 py-2 shadow-md lg:basis-[400px] ${className}`}
     >
       <div
         className={`flex w-full justify-between ${
@@ -95,7 +95,11 @@ export const OverviewCard: FC<BlockDetailOverviewProps> = ({
                           <div
                             key={`${item?.label}_${i}_value`}
                             className={`overflow-hidden break-words text-text-sm text-grayTextPrimary ${leading ? "leading-[0px]" : "py-1/2"}`}
-                            style={!item?.label ? { gridColumn: "span 2" } : undefined}
+                            style={
+                              !item?.label
+                                ? { gridColumn: "span 2" }
+                                : undefined
+                            }
                           >
                             {item?.value}
                           </div>
