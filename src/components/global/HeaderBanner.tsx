@@ -8,6 +8,8 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
+import { TruncatedText } from "../../utils/TruncatedText";
+
 import type { FileRoutesByPath } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 
@@ -69,7 +71,7 @@ export const HeaderBanner = ({
   return (
     <header className='mb-3 flex min-h-[110px] w-full justify-center bg-gradient-to-b from-bannerGradient to-darker'>
       <div className='flex w-full max-w-desktop flex-wrap justify-between gap-3 p-mobile md:px-desktop md:py-mobile'>
-        <div className='flex flex-col py-1/2'>
+        <div className='py-1/2 flex flex-col'>
           {breadcrumbItems && (
             <Breadcrumb className='w-full'>
               <BreadcrumbList className='flex items-center'>
@@ -103,8 +105,10 @@ export const HeaderBanner = ({
               </BreadcrumbList>
             </Breadcrumb>
           )}
-          <div className='flex items-center gap-1 pt-1/2 font-poppins'>
-            <h1 className={cn(!subTitle && !isHomepage && "pb-4")}>{title}</h1>
+          <div className='pt-1/2 flex items-center gap-1 font-poppins'>
+            <h1 className={cn(!subTitle && !isHomepage && "pb-8")}>
+              <TruncatedText>{title}</TruncatedText>
+            </h1>
             {badge && badge}
           </div>
           <div className='flex items-center gap-1'>
@@ -126,7 +130,7 @@ export const HeaderBanner = ({
                   ></p>
                   <Link
                     to='/ads'
-                    className='ml-1/2 flex -translate-y-1 items-center justify-center rounded-max border border-border bg-background px-[6px] text-[10px] font-medium'
+                    className='ml-1/2 rounded-max flex -translate-y-1 items-center justify-center border border-border bg-background px-[6px] text-[10px] font-medium'
                   >
                     Ad
                   </Link>
@@ -135,7 +139,13 @@ export const HeaderBanner = ({
             </>
           )}
         </div>
-        <div className={isHomepage ? 'flex w-full justify-center mt-1.5 mb-3' : 'flex w-full shrink basis-[500px] flex-col justify-center gap-1.5'}>
+        <div
+          className={
+            isHomepage
+              ? "mb-3 mt-1.5 flex w-full justify-center"
+              : "flex w-full shrink basis-[500px] flex-col justify-center gap-1.5"
+          }
+        >
           <GlobalSearchProvider>
             <GlobalSearch isHomepage={isHomepage} />
           </GlobalSearchProvider>
