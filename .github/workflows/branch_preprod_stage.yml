@@ -58,7 +58,7 @@ jobs:
       - name: Set Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: 22.12.0
+          node-version: 22.19.0
           cache: 'yarn'
           cache-dependency-path: 'yarn.lock'
 
@@ -67,6 +67,7 @@ jobs:
           VITE_APP_VERSION: ${{ github.run_number }}
           VITE_APP_CONFIG: preprod-stage
           VITE_APP_BLOCKFROST_KEY: ${{ secrets.BLOCKFROST_API_PREPROD }}
+          NODE_OPTIONS: "--max-old-space-size=8192"
         run: |
           set -e
           yarn install
