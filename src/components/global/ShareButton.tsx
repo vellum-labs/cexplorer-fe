@@ -1,10 +1,14 @@
 import { Facebook } from "@/resources/images/icons/Facebook";
 import { Twitter } from "@/resources/images/icons/Twitter";
-import { Copy, Share, X } from "lucide-react";
+import { Copy, Share2, X } from "lucide-react";
 import { toast } from "sonner";
 import Dropdown from "./dropdowns/Dropdown";
 
-export const ShareButton = () => {
+interface ShareButtonProps {
+  isHeader?: boolean;
+}
+
+export const ShareButton = ({ isHeader = false }: ShareButtonProps) => {
   const options = [
     {
       label: (
@@ -47,10 +51,15 @@ export const ShareButton = () => {
       id='share'
       hideChevron
       closeOnSelect
-      label={<Share size={17} className='' />}
+      label={<Share2 size={isHeader ? 15 : 17} className='' />}
       disableHover
       options={options as any}
-      triggerClassName='!justify-center h-10 w-10 rounded-s border border-border bg-transparent hover:bg-darker'
+      triggerClassName={
+        isHeader
+          ? "!justify-center h-6 w-6 rounded-s border border-border bg-transparent hover:bg-darker"
+          : "!justify-center h-10 w-10 rounded-s border border-border bg-transparent hover:bg-darker"
+      }
+      forceHorizontalPosition={isHeader ? "left" : undefined}
       wrapperClassname='z-0'
       width='200px'
     />

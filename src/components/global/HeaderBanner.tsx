@@ -110,10 +110,10 @@ export const HeaderBanner = ({
             <h1 className={cn(!subTitle && !isHomepage && "pb-8")}>
               <TruncatedText>{title}</TruncatedText>
             </h1>
-            {badge && badge}
+            {badge && <div className='translate-y-[7px]'>{badge}</div>}
             {!isHomepage && (
-              <div className='translate-y-[2px]'>
-                <ShareButton />
+              <div className='translate-y-[7px]'>
+                <ShareButton isHeader />
               </div>
             )}
           </div>
