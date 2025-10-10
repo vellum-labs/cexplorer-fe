@@ -237,7 +237,9 @@ export const DonatePage = () => {
                 </div>
               </div>
               <div className='flex flex-col gap-2'>
-                <p className='text-text-sm font-medium'>Other donation methods</p>
+                <p className='text-text-sm font-medium'>
+                  Other donation methods
+                </p>
                 <div className='flex flex-wrap gap-2'>
                   <a
                     href='https://www.paypal.com/donate?business=billing@vellumlabs.cz&item_name=Cexplorer.io+-+maintenance,+development,+servers&currency_code=USD'
@@ -357,7 +359,10 @@ export const DonatePage = () => {
                 leftIcon={<Wallet />}
                 onClick={handleDelegation}
               />
-              <p className='mt-4 text-text-xs'> Pool ID for delegation via wallet</p>
+              <p className='mt-4 text-text-xs'>
+                {" "}
+                Pool ID for delegation via wallet
+              </p>
               <div className='relative flex w-full max-w-[430px] items-center'>
                 <input
                   readOnly
@@ -381,7 +386,13 @@ const InfoCard = ({ icon, heading, description }: InfoCardProps) => {
   return (
     <section className='flex grow basis-[350px] flex-col'>
       <div className='flex items-center gap-1.5'>
-        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-max bg-blue-100/90 p-1/2 outline outline-[6px] outline-blue-100/50'>
+        <div
+          className='bg-blue-100/90 outline-blue-100/50 relative z-20 flex h-9 w-9 items-center justify-center rounded-max p-1/2 outline outline-[6px]'
+          style={{
+            backgroundColor: "rgba(219, 234, 254, 0.9)",
+            outlineColor: "rgba(191, 219, 254, 0.5)",
+          }}
+        >
           {icon}
         </div>
         <h3>{heading}</h3>{" "}
@@ -410,7 +421,13 @@ const CustomDonateCard = ({
     >
       <Checkbox className='absolute right-3 top-3' checked={isActive} />
       <div className='flex w-full justify-between'>
-        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-max bg-blue-100/90 p-1/2 outline outline-[6px] outline-blue-100/50'>
+        <div
+          className='relative z-20 flex h-9 w-9 items-center justify-center rounded-max p-1/2 outline outline-[6px]'
+          style={{
+            backgroundColor: "rgba(219, 234, 254, 0.9)",
+            outlineColor: "rgba(191, 219, 254, 0.5)",
+          }}
+        >
           <Zap color={colors.darkBlue} />
         </div>
       </div>
@@ -444,7 +461,13 @@ const DonateCard = ({
     >
       <Checkbox className='absolute right-3 top-3' checked={isActive} />
       <div className='flex w-full justify-between'>
-        <div className='relative z-20 flex h-9 w-9 items-center justify-center rounded-max bg-blue-100/90 p-1/2 outline outline-[6px] outline-blue-100/50'>
+        <div
+          className='relative z-20 flex h-9 w-9 items-center justify-center rounded-max p-1/2 outline outline-[6px]'
+          style={{
+            backgroundColor: "rgba(219, 234, 254, 0.9)",
+            outlineColor: "rgba(191, 219, 254, 0.5)",
+          }}
+        >
           {icon}
         </div>
       </div>
