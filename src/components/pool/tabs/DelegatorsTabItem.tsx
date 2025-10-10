@@ -4,6 +4,9 @@ import Tabs from "@/components/global/Tabs";
 import PoolDelegatorsTable from "../PoolDelegatorsTable";
 import { PoolMigrationsTable } from "../PoolMigrationsTable";
 import { PoolStructureTable } from "../PoolStructureTable";
+import Plankton from "@/resources/images/icons/plankton.svg";
+import Dino from "@/resources/images/icons/dino.svg";
+import { ArrowRight } from "lucide-react";
 
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
@@ -27,6 +30,7 @@ const DelegatorsTabItem = () => {
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const [delegatorTableTotalItems, setTotalDelegatorItems] = useState(0);
   const [migrationsTotalItems, setMigrationsTotalItems] = useState(0);
+  const [sortByAnimalSize, setSortByAnimalSize] = useState(false);
   const { page, sort, order } = useSearch({ from: "/pool/$id" });
 
   const {
@@ -183,12 +187,31 @@ const DelegatorsTabItem = () => {
       label: "Structure",
       content: (
         <div className='flex w-full flex-col items-end gap-2'>
-          <PoolStructureTable poolId={id} />
+          <PoolStructureTable poolId={id} sortByAnimalSize={sortByAnimalSize} />
         </div>
       ),
       extraTitle: (
         <div className='flex w-full justify-end'>
           <div className='flex items-center gap-1'>
+            <button
+              onClick={() => setSortByAnimalSize(!sortByAnimalSize)}
+              className={`flex h-10 items-center gap-1 rounded-s border border-border px-2 transition-colors ${sortByAnimalSize ? "bg-primary/10" : "bg-transparent hover:bg-darker"}`}
+              title='Sort by animal size'
+            >
+              {sortByAnimalSize ? (
+                <>
+                  <img src={Plankton} className='h-5 w-5' alt='Plankton' />
+                  <ArrowRight size={16} />
+                  <img src={Dino} className='h-5 w-5' alt='Leviathan' />
+                </>
+              ) : (
+                <>
+                  <img src={Dino} className='h-5 w-5' alt='Leviathan' />
+                  <ArrowRight size={16} />
+                  <img src={Plankton} className='h-5 w-5' alt='Plankton' />
+                </>
+              )}
+            </button>
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}

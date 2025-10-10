@@ -15,18 +15,18 @@ export const poolStructureTableOptions: PoolStructureOptions[] = [
   },
   {
     key: "amount",
-    name: "Amount",
+    name: "Count",
   },
   {
     key: "amount_pie",
-    name: "Amount (%)",
+    name: "Count %",
   },
   {
     key: "holdings",
-    name: "Holdings",
+    name: "Stake",
   },
   {
     key: "holdings_pie",
-    name: "Holdings (%)",
+    name: "Stake %",
   },
 ];

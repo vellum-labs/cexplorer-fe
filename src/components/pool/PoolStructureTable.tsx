@@ -1,5 +1,6 @@
 import type { PoolStructureColumns } from "@/types/tableTypes";
 import type { FC } from "react";
+import { useMemo } from "react";
 
 import Crab from "@/resources/images/icons/crab.svg";
 import Dino from "@/resources/images/icons/dino.svg";
@@ -25,6 +26,7 @@ import { Tooltip } from "../ui/tooltip";
 
 interface PoolStructureTableProps {
   poolId: string;
+  sortByAnimalSize?: boolean;
 }
 
 interface Items {
@@ -36,7 +38,10 @@ interface Items {
   };
 }
 
-export const PoolStructureTable: FC<PoolStructureTableProps> = ({ poolId }) => {
+export const PoolStructureTable: FC<PoolStructureTableProps> = ({
+  poolId,
+  sortByAnimalSize = false,
+}) => {
   const statsQuery = useFetchPoolDelegatorStats(poolId);
   const { columnsOrder, columnsVisibility, setColumsOrder, rows } =
     usePoolDelegatorsStructureStore();
@@ -54,8 +59,23 @@ export const PoolStructureTable: FC<PoolStructureTableProps> = ({ poolId }) => {
     tuna: Tuna,
   };
 
-  const items = (() => {
+  const animalOrder = [
+    "plankton",
+    "shrimp",
+    "crab",
+    "fish",
+    "dolphin",
+    "shark",
+    "whale",
+    "tuna",
+    "humpback",
+    "leviathan",
+  ];
+
+  const items = useMemo(() => {
     const data = statsQuery.data?.data.data[0];
+    if (!data) return [];
+
     const res: Items[] = [];
 
     for (const key in data) {
@@ -66,8 +86,16 @@ export const PoolStructureTable: FC<PoolStructureTableProps> = ({ poolId }) => {
       });
     }
 
-    return res;
-  })();
+    const sorted = res.sort((a, b) => {
+      return animalOrder.indexOf(a.title) - animalOrder.indexOf(b.title);
+    });
+
+    if (sortByAnimalSize) {
+      return sorted.reverse();
+    }
+
+    return sorted;
+  }, [statsQuery.data, sortByAnimalSize]);
 
   const columns = [
     {
@@ -99,7 +127,7 @@ export const PoolStructureTable: FC<PoolStructureTableProps> = ({ poolId }) => {
       render: item => {
         return <p className='text-right'>{item.data.count}</p>;
       },
-      title: <p className='w-full text-right'>Amount</p>,
+      title: <p className='w-full text-right'>Count</p>,
       visible: columnsVisibility.amount,
       widthPx: 100,
     },
@@ -117,8 +145,13 @@ export const PoolStructureTable: FC<PoolStructureTableProps> = ({ poolId }) => {
             trigger: "item",
             confine: true,
             formatter: param => {
-              const color = param.color;
-              return `<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background-color:${color};margin-right:5px;"></span>${param.data.name}: ${param.data.value}%`;
+              if (param.data.name === "Usage") {
+                const animalName =
+                  item.title[0].toUpperCase() + item.title.slice(1);
+                return `${animalName} count: ${usage.toFixed(2)}%`;
+              } else {
+                return `Others count: ${(100 - usage).toFixed(2)}%`;
+              }
             },
           },
           series: [
@@ -156,13 +189,13 @@ export const PoolStructureTable: FC<PoolStructureTableProps> = ({ poolId }) => {
         };
 
         return (
-          <div className='flex w-full items-center justify-end gap-1/2'>
+          <div className='gap-1/2 flex w-full items-center justify-end'>
             <span>{usage.toFixed(2)}%</span>
             <ReactEcharts option={option} className='max-h-[50px] w-[50px]' />
           </div>
         );
       },
-      title: <p className='w-full text-right'>Amount (%)</p>,
+      title: <p className='w-full text-right'>Count %</p>,
       visible: columnsVisibility.amount_pie,
       widthPx: 100,
     },
@@ -175,7 +208,7 @@ export const PoolStructureTable: FC<PoolStructureTableProps> = ({ poolId }) => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>Holdings</p>,
+      title: <p className='w-full text-right'>Stake</p>,
       visible: columnsVisibility.holdings,
       widthPx: 100,
     },
@@ -193,8 +226,13 @@ export const PoolStructureTable: FC<PoolStructureTableProps> = ({ poolId }) => {
             trigger: "item",
             confine: true,
             formatter: param => {
-              const color = param.color;
-              return `<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background-color:${color};margin-right:5px;"></span>${param.data.name}: ${param.data.value}%`;
+              if (param.data.name === "Usage") {
+                const animalName =
+                  item.title[0].toUpperCase() + item.title.slice(1);
+                return `${animalName} stake: ${usage.toFixed(2)}%`;
+              } else {
+                return `Others stake: ${(100 - usage).toFixed(2)}%`;
+              }
             },
           },
           series: [
@@ -232,13 +270,13 @@ export const PoolStructureTable: FC<PoolStructureTableProps> = ({ poolId }) => {
         };
 
         return (
-          <div className='flex w-full items-center justify-end gap-1/2'>
+          <div className='gap-1/2 flex w-full items-center justify-end'>
             <span>{usage.toFixed(2)}%</span>
             <ReactEcharts option={option} className='max-h-[50px] w-[50px]' />
           </div>
         );
       },
-      title: <p className='w-full text-right'>Holdings (%)</p>,
+      title: <p className='w-full text-right'>Stake %</p>,
       visible: columnsVisibility.holdings_pie,
       widthPx: 100,
     },
