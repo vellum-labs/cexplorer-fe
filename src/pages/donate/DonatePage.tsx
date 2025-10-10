@@ -202,7 +202,7 @@ export const DonatePage = () => {
               variant='tertiary'
               leftIcon={<CornerRightDown />}
               onClick={scrollToStake}
-              className='min-w-[250px]'
+              className='max-w-[300px]'
             />
             <Button
               size='lg'
@@ -210,7 +210,7 @@ export const DonatePage = () => {
               variant='primary'
               leftIcon={<Wallet />}
               onClick={scrollToDonate}
-              className='min-w-[250px]'
+              className='max-w-[300px]'
             />
           </section>
           <section ref={donateRef} className='border-b border-border py-8'>
