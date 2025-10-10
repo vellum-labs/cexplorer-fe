@@ -60,12 +60,22 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
       : undefined,
     {
       label: "Total balance",
-      value: <TotalSumWithRates sum={totalBalanceSum} ada={data?.stake?.live.amount ?? 0} />,
+      value: (
+        <TotalSumWithRates
+          sum={totalBalanceSum}
+          ada={data?.stake?.live.amount ?? 0}
+        />
+      ),
     },
     tokenMarket ? { label: "Assets balance", value: "TBD" } : undefined,
     {
       label: "ADA balance",
-      value: <TotalSumWithRates sum={adaBalanceSum} ada={data?.stake?.active?.amount ?? 0} />,
+      value: (
+        <TotalSumWithRates
+          sum={adaBalanceSum}
+          ada={data?.stake?.active?.amount ?? 0}
+        />
+      ),
     },
     { label: "Private name", value: <AddCustomLabel address={address} /> },
   ];
@@ -136,7 +146,9 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
             >
               {data?.vote?.drep?.data?.given_name &&
                 data?.vote?.drep?.data?.given_name}
-              <span className='text-text-sm text-primary'>Always no confidence</span>
+              <span className='text-text-sm text-primary'>
+                Always no confidence
+              </span>
             </Link>
           ) : (
             <AttributeDropdown
@@ -182,7 +194,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
               ]}
             >
               <div
-                className={`flex w-fit cursor-pointer items-center gap-1/2 rounded-s border ${theme === "light" ? "border-[#E4E7EC]" : "border-gray-600"} p-1`}
+                className={`flex w-fit cursor-pointer items-center gap-1/2 rounded-s border ${theme === "light" ? "border-[#E4E7EC]" : "border-gray-600"} p-1/2`}
               >
                 {data?.vote?.drep?.data?.given_name ? (
                   <Link
@@ -238,33 +250,22 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
 
   return (
     <>
-      <div className='flex-grow basis-[410px] md:flex-shrink-0'>
-        <OverviewCard
-          title='Overview'
-          overviewList={overviewList}
-          className='min-h-[320px]'
-          endContent={
-            data?.asset &&
-            data.asset.length > 0 && (
-              <TokenSelectCombobox className='mb-1 mt-2' items={data.asset} />
-            )
-          }
-        />
-      </div>
-      <div className='flex-grow basis-[410px] md:flex-shrink-0'>
-        <OverviewCard
-          title='Staking'
-          overviewList={stakeKey}
-          className='min-h-[320px]'
-        />
-      </div>
-      {/* <div className='flex-grow basis-[410px] md:flex-shrink-0'>
-        <OverviewCard
-          title='Detail'
-          overviewList={detail}
-          className='min-h-[200px]'
-        />
-      </div> */}
+      <OverviewCard
+        title='Overview'
+        overviewList={overviewList}
+        className='min-h-[320px]'
+        endContent={
+          data?.asset &&
+          data.asset.length > 0 && (
+            <TokenSelectCombobox className='mb-1 mt-2' items={data.asset} />
+          )
+        }
+      />
+      <OverviewCard
+        title='Staking'
+        overviewList={stakeKey}
+        className='min-h-[320px]'
+      />
     </>
   );
 };

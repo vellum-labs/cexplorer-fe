@@ -65,7 +65,7 @@ const Modal = ({
     <>
       <div
         onClick={onClose}
-        className='fixed inset-0 z-[51] h-full w-full bg-black/30 backdrop-blur-[1px]'
+        className='bg-black/30 fixed inset-0 z-[51] h-full w-full backdrop-blur-[1px]'
         aria-hidden='true'
       />
       <div
@@ -80,7 +80,7 @@ const Modal = ({
           maxWidth: maxWidth || "400px",
           maxHeight: maxHeight,
         }}
-        className={`thin-scrollbar fixed left-1/2 top-1/2 z-[52] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-l bg-background p-1.5 md:p-5 ${className ? className : ""}`}
+        className={`thin-scrollbar fixed left-1/2 top-1/2 z-[52] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-l bg-background p-1 md:p-5 ${className ? className : ""}`}
         onClick={e => e.stopPropagation()}
       >
         {!hideClose && (
