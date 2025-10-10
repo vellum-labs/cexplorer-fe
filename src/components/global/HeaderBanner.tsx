@@ -69,9 +69,9 @@ export const HeaderBanner = ({
     : {};
 
   return (
-    <header className='mb-3 flex min-h-[110px] w-full justify-center bg-gradient-to-b from-bannerGradient to-darker'>
+    <header className='mb-1.5 flex min-h-[110px] w-full justify-center bg-gradient-to-b from-bannerGradient to-darker'>
       <div className='flex w-full max-w-desktop flex-wrap justify-between gap-3 p-mobile md:px-desktop md:py-mobile'>
-        <div className='py-1/2 flex flex-col'>
+        <div className='flex flex-col py-1/2'>
           {breadcrumbItems && (
             <Breadcrumb className='w-full'>
               <BreadcrumbList className='flex items-center'>
@@ -105,7 +105,7 @@ export const HeaderBanner = ({
               </BreadcrumbList>
             </Breadcrumb>
           )}
-          <div className='pt-1/2 flex items-center gap-1 font-poppins'>
+          <div className='flex items-center gap-1 pt-1/2 font-poppins'>
             <h1 className={cn(!subTitle && !isHomepage && "pb-8")}>
               <TruncatedText>{title}</TruncatedText>
             </h1>
@@ -130,7 +130,7 @@ export const HeaderBanner = ({
                   ></p>
                   <Link
                     to='/ads'
-                    className='ml-1/2 rounded-max flex -translate-y-1 items-center justify-center border border-border bg-background px-[6px] text-[10px] font-medium'
+                    className='ml-1/2 flex -translate-y-1 items-center justify-center rounded-max border border-border bg-background px-[6px] text-[10px] font-medium'
                   >
                     Ad
                   </Link>

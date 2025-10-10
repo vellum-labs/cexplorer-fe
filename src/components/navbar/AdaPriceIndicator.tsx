@@ -14,7 +14,7 @@ export const AdaPriceIndicator = () => {
           <Cardano size={18} color={colors.text} />
           <span className='text-grayTextPrimary'>ADA:</span>
           <span
-            className={`ml-0.5 flex items-center rounded-max border border-red-500/40 bg-red-500/5 px-1/2 py-1/4 text-[11px] font-medium text-redText`}
+            className={`border-red-500/40 bg-red-500/5 ml-0.5 flex items-center rounded-max border px-1/2 py-1/4 text-[11px] font-medium text-redText`}
           >
             N/A
           </span>
@@ -36,7 +36,7 @@ export const AdaPriceIndicator = () => {
             {price.percentChange?.toFixed(1)}%
           </span>
         </div>
-        <div className='-mt-1 ml-[21px] flex items-center gap-1/2 text-[10px] text-grayTextSecondary'>
+        <div className='-mt-0.5 ml-[21px] flex items-center gap-1/2 text-[10px] text-grayTextSecondary'>
           ({Math.round(price.adaToSats)} sats)
         </div>
       </Link>
