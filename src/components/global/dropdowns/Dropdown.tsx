@@ -15,6 +15,7 @@ interface DropdownProps {
   disableHover?: boolean;
   closeOnSelect?: boolean;
   forceVerticalPosition?: "down" | "up";
+  forceHorizontalPosition?: "left" | "right";
   poppoverClassname?: string;
   wrapperClassname?: string;
   withBorder?: boolean;
@@ -30,6 +31,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   disableHover = false,
   closeOnSelect = false,
   forceVerticalPosition,
+  forceHorizontalPosition,
   poppoverClassname,
   wrapperClassname,
   withBorder = false,
@@ -62,7 +64,9 @@ const Dropdown: React.FC<DropdownProps> = ({
     const bottomOverflow =
       viewportHeight < triggerRect.bottom + dropdownRect.height;
 
-    if (leftOverflow) {
+    if (forceHorizontalPosition) {
+      setHorizontalPosition(forceHorizontalPosition);
+    } else if (leftOverflow) {
       setHorizontalPosition("right");
     } else {
       setHorizontalPosition("left");

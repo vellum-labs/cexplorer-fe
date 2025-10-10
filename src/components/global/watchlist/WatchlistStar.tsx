@@ -167,7 +167,7 @@ export const WatchlistStar = ({
       )}
       {showRemoveModal && (
         <Modal onClose={() => setShowRemoveModal(false)}>
-          <p className='mt-4 text-text-sm'>
+          <p className='text-text-sm mt-4'>
             Do you wish to remove this item from your watchlist?
           </p>
           <div className='mt-3 flex w-full justify-between'>
@@ -191,26 +191,34 @@ export const WatchlistStar = ({
       {showOptionsModal && (
         <Modal onClose={() => setShowOptionsModal(false)}>
           <div className='text-center'>
-            <h3 className='mb-2 text-text-lg font-semibold'>
+            <h3 className='text-text-lg mb-2 font-semibold'>
               {isStakeKeyInWatchlist ? "Manage Watchlist" : "Add to Watchlist"}
             </h3>
-            <p className='mb-3 text-text-sm text-grayTextPrimary'>
+            <p className='text-text-sm mb-3 text-grayTextPrimary'>
               {isStakeKeyInWatchlist
                 ? "Choose an action for your watchlist:"
                 : "Choose what to add to your watchlist:"}
             </p>
             <div className='flex w-full flex-col items-center gap-1.5'>
               <Button
-                onClick={isStakeKeyInWatchlist ? handleAddAddress : handleAddStakeKey}
+                onClick={
+                  isStakeKeyInWatchlist ? handleAddAddress : handleAddStakeKey
+                }
                 variant='primary'
-                label={isStakeKeyInWatchlist ? 'Add Address' : 'Add Stake Key'}
+                label={isStakeKeyInWatchlist ? "Add Address" : "Add Stake Key"}
                 size='lg'
                 className='w-full'
               />
               <Button
-                onClick={isStakeKeyInWatchlist ? handleRemoveStakeKey : handleAddAddress}
+                onClick={
+                  isStakeKeyInWatchlist
+                    ? handleRemoveStakeKey
+                    : handleAddAddress
+                }
                 variant='secondary'
-                label={isStakeKeyInWatchlist ? 'Remove Stake Key' : 'Add Address'}
+                label={
+                  isStakeKeyInWatchlist ? "Remove Stake Key" : "Add Address"
+                }
                 size='md'
                 className='w-full'
               />
@@ -230,22 +238,18 @@ export const WatchlistStar = ({
           />
         </button>
       ) : (
-        <Button
-          leftIcon={
-            <Star
-              strokeWidth={2}
-              stroke={colors.primary}
-              fill={isLiked ? colors.primary : "none"}
-              size={17}
-              onClick={handleClick}
-              className='cursor-pointer'
-            />
-          }
-          size='xs'
-          variant='tertiary'
+        <button
           onClick={handleClick}
-          className='h-8 px-1'
-        />
+          className='flex h-10 w-10 items-center justify-center rounded-s border border-border bg-transparent hover:bg-darker'
+        >
+          <Star
+            strokeWidth={2}
+            stroke={colors.primary}
+            fill={isLiked ? colors.primary : "none"}
+            size={17}
+            className='cursor-pointer'
+          />
+        </button>
       )}
     </>
   );
