@@ -18,11 +18,19 @@ export const useDrepDelegatorsStructureStore = handlePersistStore<
     columnsVisibility: {
       wallet_size: true,
       amount: true,
+      amount_pie: true,
       holdings: true,
+      holdings_pie: true,
     },
     isResponsive: true,
     rows: 20,
-    columnsOrder: ["wallet_size", "amount", "holdings"],
+    columnsOrder: [
+      "wallet_size",
+      "amount",
+      "amount_pie",
+      "holdings",
+      "holdings_pie",
+    ],
   },
   set => ({
     setColumnVisibility: (columnKey, isVisible) =>

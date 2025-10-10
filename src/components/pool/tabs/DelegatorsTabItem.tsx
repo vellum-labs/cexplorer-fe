@@ -4,9 +4,6 @@ import Tabs from "@/components/global/Tabs";
 import PoolDelegatorsTable from "../PoolDelegatorsTable";
 import { PoolMigrationsTable } from "../PoolMigrationsTable";
 import { PoolStructureTable } from "../PoolStructureTable";
-import Plankton from "@/resources/images/icons/plankton.svg";
-import Dino from "@/resources/images/icons/dino.svg";
-import { ArrowRight } from "lucide-react";
 
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
@@ -17,7 +14,6 @@ import { getRouteApi, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import { poolDelegatorsTableOptions } from "@/constants/tables/poolDelegatorsTableOptions";
-import { poolStructureTableOptions } from "@/constants/tables/poolStructureTableOptions";
 import { usePoolDelegatorsStructureStore } from "@/stores/tables/poolDelegatorsStructureStore";
 import { usePoolMigrationsTableStore } from "@/stores/tables/poolMigrationsTableStore";
 import { formatNumber } from "@/utils/format/format";
@@ -186,45 +182,16 @@ const DelegatorsTabItem = () => {
       key: "structure",
       label: "Structure",
       content: (
-        <div className='flex w-full flex-col items-end gap-2'>
-          <PoolStructureTable poolId={id} sortByAnimalSize={sortByAnimalSize} />
-        </div>
-      ),
-      extraTitle: (
-        <div className='flex w-full justify-end'>
-          <div className='flex items-center gap-1'>
-            <button
-              onClick={() => setSortByAnimalSize(!sortByAnimalSize)}
-              className={`flex h-10 items-center gap-1 rounded-s border border-border px-2 transition-colors ${sortByAnimalSize ? "bg-primary/10" : "bg-transparent hover:bg-darker"}`}
-              title='Sort by animal size'
-            >
-              {sortByAnimalSize ? (
-                <>
-                  <img src={Plankton} className='h-5 w-5' alt='Plankton' />
-                  <ArrowRight size={16} />
-                  <img src={Dino} className='h-5 w-5' alt='Leviathan' />
-                </>
-              ) : (
-                <>
-                  <img src={Dino} className='h-5 w-5' alt='Leviathan' />
-                  <ArrowRight size={16} />
-                  <img src={Plankton} className='h-5 w-5' alt='Plankton' />
-                </>
-              )}
-            </button>
-            <TableSettingsDropdown
-              rows={rows}
-              setRows={setRows}
-              columnsOptions={poolStructureTableOptions.map(item => {
-                return {
-                  label: item.name,
-                  isVisible: columnsVisibility[item.key],
-                  onClick: () =>
-                    setColumnVisibility(item.key, !columnsVisibility[item.key]),
-                };
-              })}
-            />
-          </div>
+        <div className='flex w-full flex-col gap-4'>
+          <PoolStructureTable
+            poolId={id}
+            sortByAnimalSize={sortByAnimalSize}
+            setSortByAnimalSize={setSortByAnimalSize}
+            rows={rows}
+            setRows={setRows}
+            columnsVisibility={columnsVisibility}
+            setColumnVisibility={setColumnVisibility}
+          />
         </div>
       ),
       visible: true,
