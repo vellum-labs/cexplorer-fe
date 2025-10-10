@@ -333,6 +333,7 @@ export const RecentTab: FC = () => {
         items={items}
         query={query}
         rowHeight={65}
+        minContentWidth={1300}
         columns={columns.sort(
           (a, b) =>
             columnsOrder.indexOf(a.key as keyof typeof columnsVisibility) -

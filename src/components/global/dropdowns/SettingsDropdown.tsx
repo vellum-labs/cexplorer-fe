@@ -126,7 +126,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
       label: (
         <div
           onMouseDown={e => e.stopPropagation()}
-          className='flex items-center justify-between gap-3'
+          className='flex items-center justify-between gap-1.5'
         >
           <span>Language</span>
           <Select
@@ -169,7 +169,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
       label: (
         <div
           onMouseDown={e => e.stopPropagation()}
-          className='flex items-center justify-between gap-3'
+          className='flex items-center justify-between gap-1.5'
         >
           <span>Currency</span>
           <Popover open={openCurrency} onOpenChange={setOpenCurrency}>
@@ -193,14 +193,13 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                   onchange={value => setCurrencySearch(value)}
                   placeholder='Search'
                   wrapperClassName=' mb-1'
-                  outline={false}
                   className='rounded-none'
                   inputClassName='border-none outline-none'
                 />
               </Command>
               <div
                 ref={contentRef}
-                className='relative z-[9999] max-h-96 min-w-[90px] overflow-auto overscroll-contain bg-background text-text'
+                className='relative z-[9999] min-w-[90px] overflow-auto overscroll-contain bg-background text-text'
               >
                 <div
                   className='fixed left-0 top-[40px] z-50 flex h-5 w-full items-center justify-center border-x border-t border-border bg-background'
@@ -272,7 +271,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
       }
       options={settingsOptions}
       width='200px'
-      poppoverClassname={withBorder ? 'border border-border' : undefined}
+      poppoverClassname={withBorder ? "border border-border" : undefined}
     />
   );
 };
