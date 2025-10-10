@@ -109,7 +109,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
       },
       title: "Date",
       visible: columnsVisibility.date,
-      widthPx: 90,
+      widthPx: 60,
     },
     {
       key: "gov_action",
@@ -129,7 +129,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
       },
       title: "Name",
       visible: columnsVisibility.gov_action,
-      widthPx: 220,
+      widthPx: 140,
     },
     {
       key: "voter",
@@ -158,7 +158,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
       },
       title: "Voter",
       visible: columnsVisibility.voter,
-      widthPx: 130,
+      widthPx: 220,
     },
     {
       key: "voter_role",
@@ -216,7 +216,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
         ),
       },
       visible: columnsVisibility.voter_role,
-      widthPx: 90,
+      widthPx: 60,
     },
     {
       key: "voting_power",
@@ -233,7 +233,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
       },
       title: <p className='w-full text-right'>Voting power</p>,
       visible: columnsVisibility.voting_power,
-      widthPx: 90,
+      widthPx: 60,
     },
     {
       key: "vote",
@@ -283,7 +283,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
         ),
       },
       visible: columnsVisibility.vote,
-      widthPx: 90,
+      widthPx: 45,
     },
     {
       key: "epoch",
@@ -308,7 +308,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
       },
       title: <p className='w-full text-right'>Epoch</p>,
       visible: columnsVisibility.epoch,
-      widthPx: 90,
+      widthPx: 60,
     },
     {
       key: "block",
@@ -333,7 +333,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
       },
       title: <p className='w-full text-right'>Block</p>,
       visible: columnsVisibility.block,
-      widthPx: 90,
+      widthPx: 60,
     },
     {
       key: "tx",
@@ -356,7 +356,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
       },
       title: <p className='w-full text-right'>Tx</p>,
       visible: columnsVisibility.tx,
-      widthPx: 90,
+      widthPx: 60,
     },
   ];
 
