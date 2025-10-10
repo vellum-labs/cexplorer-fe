@@ -22,6 +22,7 @@ import type { MiscBasicResponse } from "@/types/miscTypes";
 import { GlobalSearch } from "../search/GlobalSearch";
 import AdDropdown from "./dropdowns/AdDropdown";
 import LoadingSkeleton from "./skeletons/LoadingSkeleton";
+import { ShareButton } from "./ShareButton";
 
 export interface HeaderBannerBreadCrumbItem {
   label: ReactNode;
@@ -105,11 +106,16 @@ export const HeaderBanner = ({
               </BreadcrumbList>
             </Breadcrumb>
           )}
-          <div className='pt-1/2 flex items-center gap-1 font-poppins'>
+          <div className='pt-1/2 flex items-start gap-1 font-poppins'>
             <h1 className={cn(!subTitle && !isHomepage && "pb-8")}>
               <TruncatedText>{title}</TruncatedText>
             </h1>
             {badge && badge}
+            {!isHomepage && (
+              <div className='translate-y-[2px]'>
+                <ShareButton />
+              </div>
+            )}
           </div>
           <div className='flex items-center gap-1'>
             {subTitle && subTitle}
