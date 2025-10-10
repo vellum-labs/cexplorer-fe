@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import ReactEcharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
+import { getAnimalColorByName } from "@/utils/address/getAnimalColorByName";
 
 interface Items {
   title: string;
@@ -20,135 +21,21 @@ export const DelegatorStructureCharts: FC<DelegatorStructureChartsProps> = ({
 }) => {
   const { textColor } = useGraphColors();
 
-  const countChartData = [
-    {
-      value: items.find(item => item.title === "plankton")?.data?.count || 0,
-      name: "Plankton",
-      itemStyle: { color: "#c4f69c" },
-    },
-    {
-      value: items.find(item => item.title === "shrimp")?.data?.count || 0,
-      name: "Shrimp",
-      itemStyle: { color: "#f69972" },
-    },
-    {
-      value: items.find(item => item.title === "crab")?.data?.count || 0,
-      name: "Crab",
-      itemStyle: { color: "#47CD89" },
-    },
-    {
-      value: items.find(item => item.title === "fish")?.data?.count || 0,
-      name: "Fish",
-      itemStyle: { color: "#92c7e4" },
-    },
-    {
-      value: items.find(item => item.title === "dolphin")?.data?.count || 0,
-      name: "Dolphin",
-      itemStyle: { color: "#d2d8dc" },
-    },
-    {
-      value: items.find(item => item.title === "shark")?.data?.count || 0,
-      name: "Shark",
-      itemStyle: { color: "#3a8dde" },
-    },
-    {
-      value: items.find(item => item.title === "whale")?.data?.count || 0,
-      name: "Whale",
-      itemStyle: { color: "#22366c" },
-    },
-    {
-      value: items.find(item => item.title === "tuna")?.data?.count || 0,
-      name: "Tuna",
-      itemStyle: { color: "#3a8dde" },
-    },
-    {
-      value: items.find(item => item.title === "humpback")?.data?.count || 0,
-      name: "Humpback",
-      itemStyle: { color: "#527381" },
-    },
-    {
-      value: items.find(item => item.title === "leviathan")?.data?.count || 0,
-      name: "Leviathan",
-      itemStyle: { color: "#81ba71" },
-    },
-  ];
+  const countChartData = items
+    .filter(item => item.data.count > 0)
+    .map(item => ({
+      value: item.data.count,
+      name: item.title.charAt(0).toUpperCase() + item.title.slice(1),
+      itemStyle: { color: getAnimalColorByName(item.title) },
+    }));
 
-  const stakeChartData = [
-    {
-      value: Math.round(
-        (items.find(item => item.title === "plankton")?.data?.sum || 0) /
-          1000000,
-      ),
-      name: "Plankton",
-      itemStyle: { color: "#c4f69c" },
-    },
-    {
-      value: Math.round(
-        (items.find(item => item.title === "shrimp")?.data?.sum || 0) / 1000000,
-      ),
-      name: "Shrimp",
-      itemStyle: { color: "#f69972" },
-    },
-    {
-      value: Math.round(
-        (items.find(item => item.title === "crab")?.data?.sum || 0) / 1000000,
-      ),
-      name: "Crab",
-      itemStyle: { color: "#47CD89" },
-    },
-    {
-      value: Math.round(
-        (items.find(item => item.title === "fish")?.data?.sum || 0) / 1000000,
-      ),
-      name: "Fish",
-      itemStyle: { color: "#92c7e4" },
-    },
-    {
-      value: Math.round(
-        (items.find(item => item.title === "dolphin")?.data?.sum || 0) /
-          1000000,
-      ),
-      name: "Dolphin",
-      itemStyle: { color: "#d2d8dc" },
-    },
-    {
-      value: Math.round(
-        (items.find(item => item.title === "shark")?.data?.sum || 0) / 1000000,
-      ),
-      name: "Shark",
-      itemStyle: { color: "#3a8dde" },
-    },
-    {
-      value: Math.round(
-        (items.find(item => item.title === "whale")?.data?.sum || 0) / 1000000,
-      ),
-      name: "Whale",
-      itemStyle: { color: "#22366c" },
-    },
-    {
-      value: Math.round(
-        (items.find(item => item.title === "tuna")?.data?.sum || 0) / 1000000,
-      ),
-      name: "Tuna",
-      itemStyle: { color: "#3a8dde" },
-    },
-    {
-      value: Math.round(
-        (items.find(item => item.title === "humpback")?.data?.sum || 0) /
-          1000000,
-      ),
-      name: "Humpback",
-      itemStyle: { color: "#527381" },
-    },
-    {
-      value: Math.round(
-        (items.find(item => item.title === "leviathan")?.data?.sum || 0) /
-          1000000,
-      ),
-      name: "Leviathan",
-      itemStyle: { color: "#81ba71" },
-    },
-  ];
+  const stakeChartData = items
+    .filter(item => item.data.sum > 0)
+    .map(item => ({
+      value: Math.round(item.data.sum / 1e6),
+      name: item.title.charAt(0).toUpperCase() + item.title.slice(1),
+      itemStyle: { color: getAnimalColorByName(item.title) },
+    }));
 
   const countChartOption = {
     tooltip: {
