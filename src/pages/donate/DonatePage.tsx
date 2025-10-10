@@ -387,7 +387,7 @@ const InfoCard = ({ icon, heading, description }: InfoCardProps) => {
     <section className='flex grow basis-[350px] flex-col'>
       <div className='flex items-center gap-1.5'>
         <div
-          className='bg-blue-100/90 outline-blue-100/50 relative z-20 flex h-9 w-9 items-center justify-center rounded-max p-1/2 outline outline-[6px]'
+          className='relative z-20 flex h-9 w-9 items-center justify-center rounded-max p-1/2 outline outline-[6px]'
           style={{
             backgroundColor: "rgba(219, 234, 254, 0.9)",
             outlineColor: "rgba(191, 219, 254, 0.5)",
