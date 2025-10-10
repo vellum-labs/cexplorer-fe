@@ -20,7 +20,6 @@ export const DelegatorStructureCharts: FC<DelegatorStructureChartsProps> = ({
 }) => {
   const { textColor } = useGraphColors();
 
-  // Chart data for count
   const countChartData = [
     {
       value: items.find(item => item.title === "plankton")?.data?.count || 0,
@@ -74,55 +73,78 @@ export const DelegatorStructureCharts: FC<DelegatorStructureChartsProps> = ({
     },
   ];
 
-  // Chart data for stake (convert lovelace to ADA and round to 0 digits)
   const stakeChartData = [
     {
-      value: Math.round((items.find(item => item.title === "plankton")?.data?.sum || 0) / 1000000),
+      value: Math.round(
+        (items.find(item => item.title === "plankton")?.data?.sum || 0) /
+          1000000,
+      ),
       name: "Plankton",
       itemStyle: { color: "#c4f69c" },
     },
     {
-      value: Math.round((items.find(item => item.title === "shrimp")?.data?.sum || 0) / 1000000),
+      value: Math.round(
+        (items.find(item => item.title === "shrimp")?.data?.sum || 0) / 1000000,
+      ),
       name: "Shrimp",
       itemStyle: { color: "#f69972" },
     },
     {
-      value: Math.round((items.find(item => item.title === "crab")?.data?.sum || 0) / 1000000),
+      value: Math.round(
+        (items.find(item => item.title === "crab")?.data?.sum || 0) / 1000000,
+      ),
       name: "Crab",
       itemStyle: { color: "#47CD89" },
     },
     {
-      value: Math.round((items.find(item => item.title === "fish")?.data?.sum || 0) / 1000000),
+      value: Math.round(
+        (items.find(item => item.title === "fish")?.data?.sum || 0) / 1000000,
+      ),
       name: "Fish",
       itemStyle: { color: "#92c7e4" },
     },
     {
-      value: Math.round((items.find(item => item.title === "dolphin")?.data?.sum || 0) / 1000000),
+      value: Math.round(
+        (items.find(item => item.title === "dolphin")?.data?.sum || 0) /
+          1000000,
+      ),
       name: "Dolphin",
       itemStyle: { color: "#d2d8dc" },
     },
     {
-      value: Math.round((items.find(item => item.title === "shark")?.data?.sum || 0) / 1000000),
+      value: Math.round(
+        (items.find(item => item.title === "shark")?.data?.sum || 0) / 1000000,
+      ),
       name: "Shark",
       itemStyle: { color: "#3a8dde" },
     },
     {
-      value: Math.round((items.find(item => item.title === "whale")?.data?.sum || 0) / 1000000),
+      value: Math.round(
+        (items.find(item => item.title === "whale")?.data?.sum || 0) / 1000000,
+      ),
       name: "Whale",
       itemStyle: { color: "#22366c" },
     },
     {
-      value: Math.round((items.find(item => item.title === "tuna")?.data?.sum || 0) / 1000000),
+      value: Math.round(
+        (items.find(item => item.title === "tuna")?.data?.sum || 0) / 1000000,
+      ),
       name: "Tuna",
       itemStyle: { color: "#3a8dde" },
     },
     {
-      value: Math.round((items.find(item => item.title === "humpback")?.data?.sum || 0) / 1000000),
+      value: Math.round(
+        (items.find(item => item.title === "humpback")?.data?.sum || 0) /
+          1000000,
+      ),
       name: "Humpback",
       itemStyle: { color: "#527381" },
     },
     {
-      value: Math.round((items.find(item => item.title === "leviathan")?.data?.sum || 0) / 1000000),
+      value: Math.round(
+        (items.find(item => item.title === "leviathan")?.data?.sum || 0) /
+          1000000,
+      ),
       name: "Leviathan",
       itemStyle: { color: "#81ba71" },
     },
@@ -167,6 +189,10 @@ export const DelegatorStructureCharts: FC<DelegatorStructureChartsProps> = ({
     tooltip: {
       trigger: "item",
       confine: true,
+      formatter: (params: any) => {
+        const value = params.value.toLocaleString();
+        return `${params.marker} ${params.name} ${value} ₳`;
+      },
     },
     series: [
       {
