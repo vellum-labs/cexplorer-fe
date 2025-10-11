@@ -32,7 +32,7 @@ export const NotFoundPage: FC = () => {
 
       if (
         pathSegments.length < 2 ||
-        !routesList.includes(`/${pathSegments[0]}/`)
+        !routesList.some(item => item.startsWith(`/${pathSegments[0]}/`))
       ) {
         return;
       }

@@ -1,4 +1,8 @@
 export const encodeAssetName = (hex: string | number): string => {
+  if (!hex) {
+    return "";
+  }
+
   let str = "";
   const strHex =
     hex.toString().length > 56 ? hex.toString().slice(56) : hex.toString();

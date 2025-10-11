@@ -3,7 +3,6 @@ import type { useFetchMiscBasic } from "@/services/misc";
 import type { AggregatedSwapData } from "@/types/tokenTypes";
 
 import {
-  ArrowRight,
   Check,
   CircleAlert,
   CircleCheck,
@@ -23,21 +22,19 @@ import { SwapDetailTable } from "./SwapDetailTable";
 import { Tooltip } from "../ui/tooltip";
 import { AssetTicker } from "./AssetTicker";
 import { SwapTypeBadge } from "./SwapTypeBadge";
-import { AssetDisplay } from "./AssetDisplay";
 import { FeeDropdown } from "./FeeDropdown";
+import { TokenPair } from "./TokenPair";
 
 import { useDeFiOrderListTableStore } from "@/stores/tables/deFiOrderListTableStore";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 
 import { addressIcons } from "@/constants/address";
-import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { getConfirmations } from "@/utils/getConfirmations";
 import { renderWithException } from "@/utils/renderWithException";
 import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
 import { ADATokenName } from "@/constants/currencies";
 import { formatNumberWithSuffix } from "@/utils/format/format";
-import { getAssetImage } from "@/utils/asset/getAssetImage";
 
 interface ConsolidatedDexSwapDetailCardProps {
   miscBasic: ReturnType<typeof useFetchMiscBasic>["data"];
@@ -93,13 +90,6 @@ export const ConsolidatedDexSwapDetailCard: FC<
   const level = getLevel(balanceAda);
   const Icon = addressIcons[level];
 
-  const tokenInFingerPrint = getAssetFingerprint(
-    aggregatedData?.pair.tokenIn ?? "",
-  );
-  const tokenOutFingerPrint = getAssetFingerprint(
-    aggregatedData?.pair.tokenOut ?? "",
-  );
-
   const [, usd] = lovelaceToAdaWithRates(aggregatedData?.adaPrice ?? 0, curr);
 
   const confirmations = getConfirmations(
@@ -115,7 +105,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
         aggregatedData?.address,
         <div className='flex items-center gap-1'>
           {aggregatedData?.orders[0]?.user?.balance && (
-            <Image src={Icon} className='h-4 w-4 rounded-max' />
+            <Image src={Icon} className='rounded-max h-4 w-4' />
           )}
           <div className='flex items-center gap-1'>
             <Link
@@ -123,7 +113,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
               params={{
                 address: aggregatedData?.address ?? "",
               }}
-              className='block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-text-sm text-primary'
+              className='text-text-sm block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-primary'
             >
               {aggregatedData?.address}
             </Link>
@@ -153,7 +143,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
             }}
             className='text-primary'
           >
-            <span className='block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-text-sm'>
+            <span className='text-text-sm block overflow-hidden overflow-ellipsis whitespace-nowrap px-0'>
               {aggregatedData?.txHash}
             </span>
           </Link>
@@ -166,9 +156,9 @@ export const ConsolidatedDexSwapDetailCard: FC<
       title: "Confirmation",
       value: renderWithException(
         aggregatedData?.orders[0]?.block?.no,
-        <div className='flex items-center gap-[2.5px] text-text-sm'>
+        <div className='text-text-sm flex items-center gap-[2.5px]'>
           {confirmations[1] < 3 && (
-            <CircleX size={15} className='text-red-500 translate-y-[1px]' />
+            <CircleX size={15} className='translate-y-[1px] text-red-500' />
           )}
           {confirmations[1] > 2 && confirmations[1] < 9 && (
             <CircleAlert
@@ -201,23 +191,12 @@ export const ConsolidatedDexSwapDetailCard: FC<
             Multiple pairs detected - see individual trades below
           </div>
         ) : (
-          <div className='flex items-center gap-1'>
-            <div className='flex items-center gap-1'>
-              {getAssetImage(aggregatedData?.pair.tokenIn ?? "")}
-              <AssetDisplay
-                tokenName={aggregatedData?.pair.tokenIn ?? ""}
-                fingerprint={tokenInFingerPrint}
-              />
-            </div>
-            <ArrowRight size={15} className='block' />
-            <div className='flex items-center gap-1'>
-              {getAssetImage(aggregatedData?.pair.tokenOut ?? "")}
-              <AssetDisplay
-                tokenName={aggregatedData?.pair.tokenOut ?? ""}
-                fingerprint={tokenOutFingerPrint}
-              />
-            </div>
-          </div>
+          <TokenPair
+            tokenIn={aggregatedData?.pair.tokenIn ?? ""}
+            tokenOut={aggregatedData?.pair.tokenOut ?? ""}
+            variant='full'
+            clickable={false}
+          />
         ),
       ),
     },
@@ -233,7 +212,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
         ) : (
           <Tooltip
             content={
-              <div className='flex items-center gap-1/2'>
+              <div className='gap-1/2 flex items-center'>
                 <span>
                   {(aggregatedData?.totalAmountIn ?? 0).toLocaleString()}
                 </span>
@@ -270,7 +249,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
         currency === "ada" ? (
           <Tooltip
             content={
-              <div className='flex items-center gap-1/2'>
+              <div className='gap-1/2 flex items-center'>
                 <span>
                   ₳{" "}
                   {((aggregatedData?.adaPrice ?? 0) / 1e6)
@@ -298,7 +277,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
         ) : (
           <Tooltip
             content={
-              <div className='flex items-center gap-1/2'>
+              <div className='gap-1/2 flex items-center'>
                 <span>$ {usd.toFixed(20).replace(/\.?0+$/, "")}</span>
                 <Copy copyText={usd.toFixed(20).replace(/\.?0+$/, "")} />
               </div>
@@ -328,7 +307,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
         ) : (
           <Tooltip
             content={
-              <div className='flex items-center gap-1/2'>
+              <div className='gap-1/2 flex items-center'>
                 <span>
                   {(
                     (aggregatedData?.totalActualOut ||
@@ -364,7 +343,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
       value: renderWithException(
         aggregatedData?.status,
         <div className='flex items-center'>
-          <p className='flex w-fit items-center gap-1 rounded-m border border-border px-1 text-text-sm'>
+          <p className='rounded-m text-text-sm flex w-fit items-center gap-1 border border-border px-1'>
             {getStatusIcon(aggregatedData?.status)}
             {getStatusText(aggregatedData?.status)}
           </p>
@@ -406,7 +385,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
             return (
               <p
                 key={dexName}
-                className='flex w-fit items-center gap-1/2 rounded-xl border border-border bg-transparent px-1 text-text-sm text-text'
+                className='gap-1/2 text-text-sm flex w-fit items-center rounded-xl border border-border bg-transparent px-1 text-text'
                 style={
                   dex
                     ? {
@@ -420,7 +399,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
                 {!!dex?.icon && (
                   <Image
                     src={dex.icon}
-                    className='h-4 w-4 rounded-max'
+                    className='rounded-max h-4 w-4'
                     alt={dex?.label}
                   />
                 )}
@@ -488,7 +467,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
             {detailItems.map(({ key, title, value, divider }) => (
               <div key={key}>
                 <div className='flex w-full items-start'>
-                  <p className='min-w-[200px] text-text-sm text-grayTextSecondary'>
+                  <p className='text-text-sm min-w-[200px] text-grayTextSecondary'>
                     {title}
                   </p>
                   <div className='w-full'>

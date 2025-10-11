@@ -216,8 +216,8 @@ export const DrepListPage = () => {
       metadataTitle='drepList'
       adsCarousel={false}
     >
-      <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
-        <div className='flex h-full w-full flex-wrap gap-2 md:flex-nowrap'>
+      <section className='mt-1 flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
+        <div className='flex w-full flex-wrap gap-2 md:flex-nowrap'>
           {drepAnalyticsQuery.isLoading ||
           drepStatQuery.isLoading ||
           drepAnalyticsQuery.isFetching ||
@@ -252,7 +252,7 @@ export const DrepListPage = () => {
                 {statCards.map(({ key, icon, label, content, footer }) => (
                   <CarouselItem
                     key={key}
-                    className='basis-full md:basis-1/2 lg:basis-1/3'
+                    className='flex h-full max-h-[150px] basis-full flex-col items-stretch md:basis-1/2 lg:basis-1/3'
                   >
                     <OverviewStatCard
                       icon={icon}

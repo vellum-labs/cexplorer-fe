@@ -69,7 +69,7 @@ export const AddressTypeInitialsBadge = ({ address, className }: Props) => {
         content={<div className='min-w-[100px] text-center'>KeyHash</div>}
       >
         <span
-          className={`flex w-fit items-center gap-1/2 rounded border ${paymentBgColor} px-1 py-0 text-right text-[10px] font-bold ${paymentTextColor} ${className}`}
+          className={`flex w-fit items-center gap-1/2 rounded-xs border ${paymentBgColor} px-1 py-0 text-right text-[10px] font-bold ${paymentTextColor} ${className}`}
         >
           KH
         </span>
@@ -86,7 +86,7 @@ export const AddressTypeInitialsBadge = ({ address, className }: Props) => {
           }
         >
           <span
-            className={`flex w-fit items-center gap-1/2 rounded border ${paymentBgColor} px-1 py-0 text-right text-[10px] font-bold ${paymentTextColor} ${className}`}
+            className={`flex w-fit items-center gap-1/2 rounded-xs border ${paymentBgColor} px-1 py-0 text-right text-[10px] font-bold ${paymentTextColor} ${className}`}
           >
             {getAddressTypeInitials(paymentPart)}
           </span>
@@ -99,7 +99,7 @@ export const AddressTypeInitialsBadge = ({ address, className }: Props) => {
           }
         >
           <span
-            className={`flex w-fit items-center gap-1 rounded border ${delegationBgColor} px-1.5 py-0 text-right text-[10px] font-bold ${delegationTextColor} ${className}`}
+            className={`flex w-fit items-center gap-1 rounded-xs border ${delegationBgColor} px-1.5 py-0 text-right text-[10px] font-bold ${delegationTextColor} ${className}`}
           >
             {getAddressTypeInitials(delegationPart)}
           </span>

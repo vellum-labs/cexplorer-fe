@@ -32,9 +32,7 @@ const DateCell = ({
   const date = new Date(localTime);
 
   return (
-    <p
-      className={`text-nowrap ${tabularNums ? "tabular-nums" : ""} ${className}`}
-    >
+    <p className={` ${tabularNums ? "tabular-nums" : ""} ${className}`}>
       {time
         ? date > currentTime
           ? formatTimeIn(localTime)

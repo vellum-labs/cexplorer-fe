@@ -2,7 +2,7 @@ import type { FC } from "react";
 import type { DeFiOrderListColumns, TableColumns } from "@/types/tableTypes";
 import type { DeFiOrder } from "@/types/tokenTypes";
 
-import { ArrowRight, Check, Ellipsis, FileText, X } from "lucide-react";
+import { Check, Ellipsis, FileText, X } from "lucide-react";
 
 import PulseDot from "../global/PulseDot";
 import ExportButton from "../table/ExportButton";
@@ -18,14 +18,11 @@ import { Tooltip } from "../ui/tooltip";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";
 
 import { defiOrderListTableOptions } from "@/constants/tables/defiOrderListTableOptions";
-import {
-  formatNumber,
-  formatNumberWithSuffix,
-  formatString,
-} from "@/utils/format/format";
+import { formatNumberWithSuffix, formatString } from "@/utils/format/format";
+import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
 import { ADATokenName, currencySigns } from "@/constants/currencies";
 
-import DexhunterIcon from "@/resources/images/icons/dexhunter.svg";
+import { dexConfig } from "@/constants/dexConfig";
 
 import { useDeFiOrderListTableStore } from "@/stores/tables/deFiOrderListTableStore";
 import { useFetchDeFiOrderList } from "@/services/token";
@@ -34,11 +31,12 @@ import { useFetchMiscSearch } from "@/services/misc";
 import { useLocaleStore } from "@/stores/localeStore";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 
-import { renderAssetName } from "@/utils/asset/renderAssetName";
-import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import { addressIcons } from "@/constants/address";
 import { calculateAdaPriceWithHistory } from "@/utils/calculateAdaPriceWithHistory";
 import useDebounce from "@/hooks/useDebounce";
+import { TokenPair } from "../dex/TokenPair";
+import { AssetTicker } from "../dex/AssetTicker";
+import { renderAssetName } from "@/utils/asset/renderAssetName";
 
 interface DeFiOrderListProps {
   page?: number;
@@ -161,7 +159,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
             params={{
               hash: item?.tx_hash,
             }}
-            className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-text-sm text-primary`}
+            className={`text-text-sm block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-primary`}
           >
             {formatString(item?.tx_hash, "short")}
           </Link>
@@ -183,7 +181,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
 
         return (
           <div
-            className={`flex w-[50px] items-center justify-center rounded-s px-[6px] py-[2px] text-text-sm font-medium text-white ${isBuying ? "bg-greenText" : "bg-redText"}`}
+            className={`text-text-sm flex w-[50px] items-center justify-center rounded-s px-[6px] py-[2px] font-medium text-white ${isBuying ? "bg-greenText" : "bg-redText"}`}
           >
             {isBuying ? "Buy" : "Sell"}
           </div>
@@ -284,47 +282,13 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           return "-";
         }
 
-        const tokenInFingerPrint = getAssetFingerprint(item?.token_in?.name);
-        const tokenOutFingerPrint = getAssetFingerprint(item?.token_out?.name);
-
-        const tokenInAssetName = renderAssetName({
-          name: item?.token_in?.name,
-        });
-        const tokenOutAssetName = renderAssetName({
-          name: item?.token_out?.name,
-        });
-
-        const tokenInHasRegistry = item?.token_in?.registry;
-        const tokenOutHasRegistry = item?.token_out?.registry;
-
         return (
-          <div className='flex items-center justify-between'>
-            <Link
-              to='/asset/$fingerprint'
-              params={{
-                fingerprint: tokenInFingerPrint,
-              }}
-            >
-              <p
-                className={`min-w-[50px] ${!tokenInHasRegistry ? "italic" : ""} text-primary`}
-              >
-                {tokenInAssetName === "lovelace" ? "ADA" : tokenInAssetName}
-              </p>
-            </Link>
-            <ArrowRight size={15} className='block min-w-[20px]' />
-            <Link
-              to='/asset/$fingerprint'
-              params={{
-                fingerprint: tokenOutFingerPrint,
-              }}
-            >
-              <p
-                className={`w-fit ${!tokenOutHasRegistry ? "italic" : ""} text-primary`}
-              >
-                {tokenOutAssetName === "lovelace" ? "ADA" : tokenOutAssetName}
-              </p>
-            </Link>
-          </div>
+          <TokenPair
+            tokenIn={item.token_in.name}
+            tokenOut={item.token_out.name}
+            variant='simple'
+            clickable={false}
+          />
         );
       },
       title: "Pair",
@@ -339,11 +303,33 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         }
 
         const isBuying = item?.token_in?.name === ADATokenName;
+        const amount = isBuying ? item?.actual_out_amount : item?.amount_in;
+        const tokenName = isBuying
+          ? item?.token_out?.name
+          : item?.token_in?.name;
+        const displayName =
+          tokenName === ADATokenName
+            ? "ADA"
+            : renderAssetName({ name: tokenName });
 
         return (
-          <p className='text-right'>
-            {formatNumber(isBuying ? item?.actual_out_amount : item?.amount_in)}
-          </p>
+          <div className='flex justify-end'>
+            <Tooltip
+              content={
+                <div className='flex items-center gap-1'>
+                  <span>
+                    {amount.toLocaleString()}{" "}
+                    <AssetTicker tokenName={tokenName} />
+                  </span>
+                  <Copy
+                    copyText={`${amount.toLocaleString()} ${displayName}`}
+                  />
+                </div>
+              }
+            >
+              <p className='text-right'>{formatNumberWithSuffix(amount)}</p>
+            </Tooltip>
+          </div>
         );
       },
       title: <p className='w-full text-nowrap text-right'>Token amount</p>,
@@ -375,23 +361,17 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
             outputAmount = 0;
         }
 
-        const price = isAdaIn
-          ? item.amount_in / (outputAmount || 1)
-          : (outputAmount || 0) / item.amount_in;
-
-        const [ada, usd] = calculateAdaPriceWithHistory(price * 1e6, curr);
+        const adaAmount = isAdaIn ? item.amount_in : outputAmount;
+        const [ada, usd] = calculateAdaPriceWithHistory(adaAmount * 1e6, curr);
 
         const maxAda = 30000 * 1e6;
-        const percentage = Math.min(
-          ((item?.amount_in * 1e6) / maxAda) * 100,
-          100,
-        );
+        const percentage = Math.min(((adaAmount * 1e6) / maxAda) * 100, 100);
 
         return (
           <div className='flex flex-col gap-1'>
             {currency === "ada" ? (
               <p title={ada} className='text-right'>
-                <AdaWithTooltip data={item?.amount_in * 1e6} />
+                <AdaWithTooltip data={adaAmount * 1e6} />
               </p>
             ) : (
               <p title={ada} className='text-right'>
@@ -432,19 +412,68 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
     {
       key: "ada_price",
       render: item => {
-        const adaPrice =
-          item?.actual_out_amount ?? item?.expected_out_amount ?? 0;
+        if (!item?.token_in?.name || !item?.token_out?.name) {
+          return <p className='text-right'>-</p>;
+        }
 
-        const [ada, usd] = calculateAdaPriceWithHistory(adaPrice * 1e6, curr);
+        const isAdaIn = item?.token_in?.name === ADATokenName;
+
+        const status = item?.status?.toLowerCase();
+        let outputAmount = 0;
+
+        switch (status) {
+          case "pending":
+          case "mempool":
+            outputAmount = item?.expected_out_amount ?? 0;
+            break;
+          case "success":
+          case "complete":
+            outputAmount = item?.actual_out_amount ?? 0;
+            break;
+          default:
+            outputAmount = 0;
+        }
+
+        const pricePerToken = isAdaIn
+          ? item.amount_in / (outputAmount || 1)
+          : (outputAmount || 0) / (item.amount_in || 1);
+
+        const [, usd] = calculateAdaPriceWithHistory(pricePerToken * 1e6, curr);
 
         return currency === "ada" ? (
-          <p title={ada} className='text-right'>
-            <AdaWithTooltip data={adaPrice * 1e6} />
-          </p>
+          <div className='flex justify-end'>
+            <Tooltip
+              content={
+                <div className='flex items-center gap-1'>
+                  <span>
+                    ₳ {pricePerToken.toFixed(20).replace(/\.?0+$/, "")}
+                  </span>
+                  <Copy
+                    copyText={pricePerToken.toFixed(20).replace(/\.?0+$/, "")}
+                  />
+                </div>
+              }
+            >
+              <div className='text-sm text-grayTextPrimary'>
+                {formatSmallValueWithSub(pricePerToken, "₳ ", 0.01, 6, 4)}
+              </div>
+            </Tooltip>
+          </div>
         ) : (
-          <p title={ada} className='text-right'>
-            {currencySigns["usd"]} {formatNumberWithSuffix(usd)}
-          </p>
+          <div className='flex justify-end'>
+            <Tooltip
+              content={
+                <div className='flex items-center gap-1'>
+                  <span>$ {usd.toFixed(20).replace(/\.?0+$/, "")}</span>
+                  <Copy copyText={usd.toFixed(20).replace(/\.?0+$/, "")} />
+                </div>
+              }
+            >
+              <div className='text-sm text-grayTextPrimary'>
+                {formatSmallValueWithSub(usd, "$ ", 0.01, 6, 4)}
+              </div>
+            </Tooltip>
+          </div>
         );
       },
       title: (
@@ -475,7 +504,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         const isCanceled = item.status === "CANCELLED";
 
         return (
-          <div className='flex items-center gap-1/2'>
+          <div className='gap-1/2 flex items-center'>
             <Link
               to='/dex/swap/$hash'
               params={{
@@ -485,7 +514,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
             >
               <FileText size={15} className='cursor-pointer text-primary' />
             </Link>
-            <p className='flex items-center gap-1/2 rounded-s border border-border px-1 text-text-sm'>
+            <p className='gap-1/2 text-text-sm flex items-center rounded-s border border-border px-1'>
               {isSuccess ? (
                 <Check className='text-greenText' size={15} />
               ) : isCanceled ? (
@@ -573,7 +602,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         return (
           <div className='flex items-center gap-1'>
             {item?.user?.balance && (
-              <Image src={Icon} className='h-4 w-4 rounded-max' />
+              <Image src={Icon} className='rounded-max h-4 w-4' />
             )}
             <div className='flex items-center gap-1'>
               <Link
@@ -581,7 +610,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                 params={{
                   address: item?.user?.address,
                 }}
-                className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-text-sm text-primary`}
+                className={`text-text-sm block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-primary`}
               >
                 {formatString(item?.user?.address, "short")}
               </Link>
@@ -625,16 +654,59 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
     },
     {
       key: "platform",
-      render: () => {
+      render: item => {
+        if (!item?.dex) {
+          return <p className='text-right'>-</p>;
+        }
+
+        const dexKey = item.dex.toUpperCase();
+        const dex = dexConfig[dexKey];
+
+        if (!dex?.icon) {
+          return <p className='text-right'>-</p>;
+        }
+
+        const dexhunterDex = dexConfig["DEXHUNTER"];
+
         return (
-          <a
-            target='_blank'
-            rel='nofollow'
-            href='https://app.dexhunter.io/'
-            className='flex w-full items-center justify-end'
-          >
-            <Image src={DexhunterIcon} className='h-6 w-6 rounded-max' />
-          </a>
+          <div className='flex items-center justify-end'>
+            <div className='relative'>
+              <div
+                className='flex aspect-square h-6 w-6 items-center justify-center overflow-hidden rounded-full border'
+                style={{
+                  backgroundColor: dex.bgColor,
+                  borderColor: dex.borderColor,
+                  borderRadius: "50%",
+                }}
+              >
+                <Tooltip content={dex.label}>
+                  <Image
+                    src={dex.icon}
+                    className='h-4 w-4 rounded-full'
+                    alt={dex.label}
+                  />
+                </Tooltip>
+              </div>
+              {item.is_dexhunter && (
+                <div
+                  className='absolute -bottom-0.5 -right-0.5 flex aspect-square h-3 w-3 items-center justify-center overflow-hidden rounded-full border'
+                  style={{
+                    backgroundColor: dexhunterDex.bgColor,
+                    borderColor: dexhunterDex.borderColor,
+                    borderRadius: "50%",
+                  }}
+                >
+                  <Tooltip content={dexhunterDex.label}>
+                    <Image
+                      src={dexhunterDex.icon}
+                      className='h-2 w-2 rounded-full'
+                      alt={dexhunterDex.label}
+                    />
+                  </Tooltip>
+                </div>
+              )}
+            </div>
+          </div>
         );
       },
       title: <p ref={anchorRefs?.dex}>Platform</p>,
@@ -651,28 +723,23 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         onReset: () => changeFilterByKey("dex"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
-            <label className='flex items-center gap-1'>
-              <input
-                type='radio'
-                name='dex'
-                value='SUNDAESWAP'
-                className='accent-primary'
-                checked={filterDraft["dex"] === "SUNDAESWAP"}
-                onChange={e => changeDraftFilter("dex", e.currentTarget.value)}
-              />
-              <span className='text-text-sm'>SundaeSwap</span>
-            </label>
-            <label className='flex items-center gap-1'>
-              <input
-                type='radio'
-                name='dex'
-                value='MINSWAP'
-                className='accent-primary'
-                checked={filterDraft["dex"] === "MINSWAP"}
-                onChange={e => changeDraftFilter("dex", e.currentTarget.value)}
-              />
-              <span className='text-text-sm'>Minswap</span>
-            </label>
+            {Object.entries(dexConfig)
+              .filter(([key]) => key !== "DEXHUNTER")
+              .map(([key, value]) => (
+                <label key={key} className='flex items-center gap-2'>
+                  <input
+                    type='radio'
+                    name='dex'
+                    value={key}
+                    className='accent-primary'
+                    checked={filterDraft["dex"] === key}
+                    onChange={e =>
+                      changeDraftFilter("dex", e.currentTarget.value)
+                    }
+                  />
+                  <span className='text-sm'>{value.label}</span>
+                </label>
+              ))}
           </div>
         ),
       },
@@ -682,8 +749,8 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
   ];
 
   return (
-    <div className='flex w-full flex-col gap-1 rounded-m sm:gap-0'>
-      <div className='flex flex-wrap items-center justify-between gap-y-1/2 pb-2'>
+    <div className='rounded-m flex w-full flex-col gap-1 sm:gap-0'>
+      <div className='gap-y-1/2 flex flex-wrap items-center justify-between pb-2'>
         <div className='flex items-center gap-1'>
           {pulseDot && <PulseDot />}
           <h2 className={titleClassname ? titleClassname : ""}>
@@ -707,13 +774,13 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         </div>
       </div>
       {hasFilter && (
-        <div className='flex flex-wrap items-center gap-1/2 md:flex-nowrap'>
+        <div className='gap-1/2 flex flex-wrap items-center md:flex-nowrap'>
           {Object.entries(filter).map(
             ([key, value]) =>
               value && (
                 <div
                   key={key}
-                  className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
+                  className='gap-1/2 rounded-m py-1/4 text-text-xs mb-1 flex w-fit items-center border border-border bg-darker px-1 text-grayTextPrimary'
                 >
                   <span>{key[0].toUpperCase() + key.slice(1)}:</span>
                   {key === "maker" && (

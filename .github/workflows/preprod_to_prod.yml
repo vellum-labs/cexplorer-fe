@@ -1,16 +1,15 @@
-name: "preprod@stage"
-
+name: "Deploy preprod.cexplorer.io"
 on:
   workflow_dispatch:
     inputs:
       branch:
         description: 'Branch to deploy'
         required: true
-        default: 'david/migration'
+        default: 'main'
 
 permissions:
   contents: write
-
+  
 jobs:
   CheckUser:
     runs-on: ubuntu-latest
@@ -18,7 +17,7 @@ jobs:
       - name: Check if user is allowed to run this workflow
         run: |
           echo "Triggered by: ${{ github.actor }}"
-          if [ "${{ github.actor }}" != "josef0xb" ] && [ "${{ github.actor }}" != "dshamsani" ]; then
+          if [ "${{ github.actor }}" != "josef0xb" ]; then
             echo "❌ You are not allowed to run this workflow."
             exit 1
           fi
@@ -32,7 +31,7 @@ jobs:
     steps:
       - name: Set up WireGuard
         env:
-          WG_CONFIG: ${{ secrets.WG_CONFIG }}
+          WG_CONFIG: ${{secrets.WG_CONFIG}}
         run: |
           set -e
           sudo apt update
@@ -43,7 +42,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           ref: ${{ github.event.inputs.branch }}
-
+      
       - name: Set up SSH agent
         uses: webfactory/ssh-agent@v0.8.0
         with:
@@ -58,14 +57,14 @@ jobs:
       - name: Set Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: 22.12.0
+          node-version: 22.19.0
           cache: 'yarn'
           cache-dependency-path: 'yarn.lock'
 
       - name: Install dependencies and build
         env:
           VITE_APP_VERSION: ${{ github.run_number }}
-          VITE_APP_CONFIG: preprod-stage
+          VITE_APP_CONFIG: preprod-prod
           VITE_APP_BLOCKFROST_KEY: ${{ secrets.BLOCKFROST_API_PREPROD }}
         run: |
           set -e
@@ -79,8 +78,8 @@ jobs:
           set -e
           rsync -azv -e "ssh -o UserKnownHostsFile=~/.ssh/known_hosts -o HostKeyAlgorithms=ecdsa-sha2-nistp256,ssh-ed25519,rsa-sha2-512" \
             --omit-dir-times --no-perms --no-owner --no-group --delete \
-            ./dist/ job@$SERVER:/var/www/cexplorer_preprod_stage/
-
+            ./dist/ job@$SERVER:/var/www/cexplorer_preprod/
+            
       - name: Notify Discord
         if: success()
         env:
@@ -88,12 +87,10 @@ jobs:
         run: |
           VERSION="${{ github.run_number }}"
           WORKFLOW_NAME="${{ github.workflow }}"
-          PR_LIST="${{ steps.pr_list.outputs.pr_list }}"
-
-          PR_LIST_ESCAPED=$(echo "$PR_LIST" | sed ':a;N;$!ba;s/\n/\\n/g')
-
-          MESSAGE="🚀 **${WORKFLOW_NAME}** deployed new version #**${VERSION}**!"
-
+          BRANCH="${{ github.event.inputs.branch }}"
+      
+          MESSAGE="🚀 **${WORKFLOW_NAME}** deployed new version #**${VERSION}** ${BRANCH}"
+      
           curl -H "Content-Type: application/json" \
             -X POST \
             -d "{\"content\": \"$MESSAGE\"}" \

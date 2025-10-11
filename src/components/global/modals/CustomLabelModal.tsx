@@ -35,7 +35,7 @@ export const CustomLabelModal = () => {
       try {
         const formattedLabels = updatedLabels.map(l => ({
           ident: l.ident,
-          label: l.label
+          label: l.label,
         }));
         await updateUserLabels(token, formattedLabels);
       } catch (error) {
@@ -99,25 +99,25 @@ export const CustomLabelModal = () => {
 
   return (
     <Modal minHeight='260px' minWidth='400px' maxWidth='95%' onClose={onClose}>
-      <p className='mb-3 pr-4 font-medium'>
+      <p className='mb-1 pr-4 font-medium'>
         {isEdit() ? "Edit label:" : "Create new label:"}
       </p>
       <TextInput
         placeholder='Address'
         onchange={value => setAddress(value)}
         value={address}
-        wrapperClassName='mb-1/2'
+        wrapperClassName='mb-1/4'
         disabled={!!addressToEdit}
         inputClassName={isAddressValid ? "" : "border-redText"}
       />
-      <p className='mb-1.5 h-3 text-text-xs text-redText'>
+      <p className='mb-0.5 h-3 text-text-xs text-redText'>
         {isAddressValid ? "" : "Please enter a valid address"}
       </p>
       <TextInput
         placeholder='Label name'
         onchange={value => setName(value)}
         value={name}
-        wrapperClassName='mb-3'
+        wrapperClassName='mb-1.5'
       />
       <div className='mt-auto flex justify-between gap-1'>
         <Button

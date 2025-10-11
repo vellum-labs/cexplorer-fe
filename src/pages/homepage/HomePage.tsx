@@ -48,11 +48,15 @@ export const Homepage: FC = () => {
 
   return (
     <>
-      <PageBase title='Explore Cardano blockchain' metadataTitle='homepage' isHomepage>
+      <PageBase
+        title='Explore Cardano blockchain'
+        metadataTitle='homepage'
+        isHomepage
+      >
         <section
           className={`flex w-full ${customize ? "select-none" : ""} flex-col items-center`}
         >
-          <div className='my-3 flex w-full max-w-desktop flex-col items-center gap-1.5 px-mobile md:px-desktop'>
+          <div className='mb-3 flex w-full max-w-desktop flex-col items-center gap-1.5 px-mobile md:px-desktop'>
             <div className='flex w-full justify-end gap-2'>
               <Button
                 size='md'
