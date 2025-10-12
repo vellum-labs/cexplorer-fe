@@ -9,23 +9,19 @@ export const formatCurrency = (
   value: number | string,
   currency: string,
   options?: {
-    useFormatNumber?: boolean;
+    applyNumberFormatting?: boolean;
   },
 ): string => {
-  const { useFormatNumber = true } = options || {};
+  const { applyNumberFormatting = true } = options || {};
 
   const numericValue = typeof value === "string" ? parseFloat(value) : value;
-  const formattedValue = useFormatNumber
+  const formattedValue = applyNumberFormatting
     ? formatNumber(numericValue)
     : numericValue.toLocaleString();
 
-  const symbol =
-    currencySigns[currency as keyof typeof currencySigns] ||
-    currency.toUpperCase();
-  const isSuffix =
-    currencyPosition[currency as keyof typeof currencyPosition] ?? false;
-  const hasSpace =
-    currencySpace[currency as keyof typeof currencySpace] ?? false;
+  const symbol = currencySigns[currency] || currency.toUpperCase();
+  const isSuffix = currencyPosition[currency] ?? false;
+  const hasSpace = currencySpace[currency] ?? false;
 
   const space = hasSpace ? " " : "";
 

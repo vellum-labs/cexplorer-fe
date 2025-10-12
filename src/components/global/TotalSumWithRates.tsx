@@ -26,9 +26,15 @@ export const TotalSumWithRates: FC<
       </span>
       <span className='h-[20px] translate-y-[2px] pr-1/2 leading-none text-grayTextPrimary'>
         (
-        <Tooltip content={formatCurrency(sum[1], currency, { useFormatNumber: true })}>
+        <Tooltip
+          content={formatCurrency(sum[1], currency, {
+            applyNumberFormatting: true,
+          })}
+        >
           <span>
-            {formatCurrency((+sum[1]).toFixed(2), currency, { useFormatNumber: false })}
+            {formatCurrency((+sum[1]).toFixed(2), currency, {
+              applyNumberFormatting: false,
+            })}
           </span>
         </Tooltip>{" "}
         |{" "}

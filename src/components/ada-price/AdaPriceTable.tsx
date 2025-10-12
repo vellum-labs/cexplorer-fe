@@ -43,7 +43,9 @@ export const AdaPriceTable: FC = () => {
         </div>
         <div className='flex items-center gap-1'>
           <span className='text-display-xs font-semibold'>
-            {formatCurrency(Number(price.todayValue.toFixed(2)), currency, { useFormatNumber: false })}
+            {formatCurrency(Number(price.todayValue.toFixed(2)), currency, {
+              applyNumberFormatting: false,
+            })}
           </span>
           <span
             className={`rounded-max px-1/2 py-1/4 ml-0.5 flex items-center border text-[11px] font-medium ${price.percentChange < 1 && price.percentChange > -1 ? "border-yellow-500/40 bg-yellow-500/5 text-yellowText" : price.percentChange > 0 ? "border-green-500/40 bg-green-500/5 text-greenText" : "border-red-500/40 bg-red-500/5 text-redText"}`}
