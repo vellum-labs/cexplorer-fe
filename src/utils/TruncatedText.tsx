@@ -1,13 +1,30 @@
 import type { ReactNode } from "react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Children } from "react";
 import { getNodeText } from "@/utils/getNodeText";
 import { useWindowDimensions } from "@/utils/useWindowsDemensions";
+import { isValidElement } from "react";
 
 const truncateTitle = (title: string, maxLength: number = 20): string => {
   if (title.length <= maxLength) return title;
   const prefixLength = 20;
   const suffixLength = 20;
   return `${title.slice(0, prefixLength)}…${title.slice(-suffixLength)}`;
+};
+
+const hasImageInChildren = (children: ReactNode): boolean => {
+  let hasImage = false;
+
+  Children.forEach(children, child => {
+    if (isValidElement(child)) {
+      if (child.type === "img" || child.type?.toString().includes("Image")) {
+        hasImage = true;
+      } else if (child.props?.children) {
+        hasImage = hasImage || hasImageInChildren(child.props.children);
+      }
+    }
+  });
+
+  return hasImage;
 };
 
 const getTruncatedTitle = (
@@ -27,11 +44,13 @@ const getTruncatedTitle = (
 interface TruncatedTextProps {
   children: ReactNode;
   className?: string;
+  onHasImageChange?: (hasImage: boolean) => void;
 }
 
 export const TruncatedText = ({
   children,
   className = "",
+  onHasImageChange,
 }: TruncatedTextProps) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [containerWidth, setContainerWidth] = useState<number | null>(null);
@@ -39,6 +58,13 @@ export const TruncatedText = ({
   const isMobile = width < 768;
   const textRef = useRef<HTMLSpanElement | null>(null);
   const { isTruncated, displayTitle, fullText } = getTruncatedTitle(children);
+
+  useEffect(() => {
+    if (onHasImageChange) {
+      const hasImage = hasImageInChildren(children);
+      onHasImageChange(hasImage);
+    }
+  }, [children, onHasImageChange]);
 
   useEffect(() => {
     if (textRef.current && isTruncated && !containerWidth && !isMobile) {

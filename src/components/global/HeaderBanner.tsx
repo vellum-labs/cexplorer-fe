@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { useState } from "react";
 
 import {
   Breadcrumb,
@@ -50,6 +51,7 @@ export const HeaderBanner = ({
   qrCode,
   isHomepage,
 }: HeaderBannerProps) => {
+  const [hasImage, setHasImage] = useState(false);
   const miscBasicQuery = useFetchMiscBasic();
   const headingAd = miscBasicQuery.data?.data.ads.find(
     ad => ad.type === "heading_featured",
@@ -106,13 +108,20 @@ export const HeaderBanner = ({
               </BreadcrumbList>
             </Breadcrumb>
           )}
-          <div className='pt-1/2 flex items-start gap-1 font-poppins'>
+          <div
+            className={cn(
+              "pt-1/2 flex gap-1 font-poppins",
+              hasImage ? "items-center" : "items-start",
+            )}
+          >
             <h1 className={cn(!subTitle && !isHomepage && "pb-8")}>
-              <TruncatedText>{title}</TruncatedText>
+              <TruncatedText onHasImageChange={setHasImage}>
+                {title}
+              </TruncatedText>
             </h1>
-            {badge && <div className='translate-y-[7px]'>{badge}</div>}
+            {badge && <div className={cn(!hasImage && "mt-[5px]")}>{badge}</div>}
             {!isHomepage && (
-              <div className='translate-y-[7px]'>
+              <div className={cn(!hasImage && "mt-[5px]")}>
                 <ShareButton isHeader />
               </div>
             )}
