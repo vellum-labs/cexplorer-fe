@@ -13,6 +13,7 @@ import ConstLabelBadge from "../global/badges/ConstLabelBadge";
 import Copy from "../global/Copy";
 import { Tooltip } from "../ui/tooltip";
 import type { UtxoSearchMatchType } from "@/utils/tx/filterUtxoBySearch";
+import { useHashHoverStore } from "@/stores/hashHoverStore";
 
 interface Props {
   utxo: TxInfo;
@@ -27,6 +28,11 @@ export const AddressWithTxBadges = ({
   enableHover = false,
   matchTypes = [],
 }: Props) => {
+  const { hoveredHash, setHoveredHash } = useHashHoverStore();
+
+  const isAddressHovered =
+    hoveredHash === utxo.payment_addr_bech32 && !!utxo.payment_addr_bech32;
+
   const shouldHighlightAddress =
     enableHover && matchTypes.includes("payment_address");
   const shouldHighlightPaymentCred =
@@ -41,12 +47,19 @@ export const AddressWithTxBadges = ({
   return (
     <div className='mb-1 flex items-center gap-1'>
       <ConstLabelBadge type='sc' name={utxo.reference_script?.hash} />
-      <AddressCell
-        enableHover={shouldHighlightAddress}
-        forceHighlight={shouldHighlightAddress}
-        highlightStakeKey={shouldHighlightStakeKey}
-        address={utxo.payment_addr_bech32}
-      />
+      <div
+        onMouseEnter={() =>
+          utxo.payment_addr_bech32 && setHoveredHash(utxo.payment_addr_bech32)
+        }
+        onMouseLeave={() => setHoveredHash(null)}
+      >
+        <AddressCell
+          enableHover={shouldHighlightAddress}
+          forceHighlight={shouldHighlightAddress || isAddressHovered}
+          highlightStakeKey={shouldHighlightStakeKey}
+          address={utxo.payment_addr_bech32}
+        />
+      </div>
       <Tooltip
         content={
           <div className='text-text-sm flex w-[200px] flex-col items-center'>
