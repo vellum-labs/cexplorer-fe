@@ -27,17 +27,47 @@ const hasImageInChildren = (children: ReactNode): boolean => {
   return hasImage;
 };
 
+const extractImages = (children: ReactNode): ReactNode[] => {
+  const images: ReactNode[] = [];
+
+  Children.forEach(children, child => {
+    if (isValidElement(child)) {
+      if (child.type === "img" || child.type?.toString().includes("Image")) {
+        images.push(child);
+      } else if (child.props?.children) {
+        images.push(...extractImages(child.props.children));
+      }
+    }
+  });
+
+  return images;
+};
+
 const getTruncatedTitle = (
   title: ReactNode,
-): { isTruncated: boolean; displayTitle: ReactNode; fullText: string } => {
+): {
+  isTruncated: boolean;
+  displayTitle: ReactNode;
+  fullText: string;
+  images: ReactNode[];
+} => {
   const textContent = String(getNodeText(title) || "");
+  const images = extractImages(title);
+
   if (textContent.length <= 40) {
-    return { isTruncated: false, displayTitle: title, fullText: textContent };
+    return {
+      isTruncated: false,
+      displayTitle: title,
+      fullText: textContent,
+      images,
+    };
   }
+
   return {
     isTruncated: true,
     displayTitle: truncateTitle(textContent),
     fullText: textContent,
+    images,
   };
 };
 
@@ -57,7 +87,8 @@ export const TruncatedText = ({
   const { width } = useWindowDimensions();
   const isMobile = width < 768;
   const textRef = useRef<HTMLSpanElement | null>(null);
-  const { isTruncated, displayTitle, fullText } = getTruncatedTitle(children);
+  const { isTruncated, displayTitle, fullText, images } =
+    getTruncatedTitle(children);
 
   useEffect(() => {
     if (onHasImageChange) {
@@ -91,16 +122,24 @@ export const TruncatedText = ({
         onMouseLeave={() => isTruncated && !isMobile && setIsHovered(false)}
       >
         {isTruncated && !isMobile && isHovered ? (
-          <span
-            className='inline-block whitespace-nowrap'
-            style={{
-              animation: "marquee 10s linear infinite",
-            }}
-          >
-            {fullText}
+          <span className='flex items-center gap-1'>
+            {images}
+            <span className='overflow-hidden'>
+              <span
+                className='inline-block whitespace-nowrap'
+                style={{
+                  animation: "marquee 10s linear infinite",
+                }}
+              >
+                {fullText}
+              </span>
+            </span>
           </span>
         ) : isTruncated && !isMobile ? (
-          <span className='inline-block whitespace-nowrap'>{displayTitle}</span>
+          <span className='flex items-center gap-1'>
+            {images}
+            <span>{displayTitle}</span>
+          </span>
         ) : (
           children
         )}
