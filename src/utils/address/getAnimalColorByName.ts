@@ -21,6 +21,6 @@ export const getAnimalColorByName = (name: string): string => {
     case "leviathan":
       return "#81ba71";
     default:
-      return "#d2d8dc"; // default gray color
+      return "#d2d8dc";
   }
 };

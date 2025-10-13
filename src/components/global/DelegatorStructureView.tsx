@@ -61,10 +61,10 @@ const animalOrder = [
   "shrimp",
   "crab",
   "fish",
+  "tuna",
   "dolphin",
   "shark",
   "whale",
-  "tuna",
   "humpback",
   "leviathan",
 ];
