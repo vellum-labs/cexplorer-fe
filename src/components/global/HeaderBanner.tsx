@@ -119,9 +119,16 @@ export const HeaderBanner = ({
                 {title}
               </TruncatedText>
             </h1>
-            {badge && <div className={cn(!hasImage && "mt-[5px]")}>{badge}</div>}
+            {badge && (
+              <div className={cn(!hasImage && "mt-[5px]")}>{badge}</div>
+            )}
             {!isHomepage && (
-              <div className={cn(!hasImage && "mt-[5px]")}>
+              <div
+                className={cn(
+                  !hasImage && "mt-[5px]",
+                  hasImage ? "translate-y-[2px]" : "translate-y-[4px]",
+                )}
+              >
                 <ShareButton isHeader />
               </div>
             )}
