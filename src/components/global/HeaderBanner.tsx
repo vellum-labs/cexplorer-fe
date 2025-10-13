@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { useState } from "react";
 
 import {
   Breadcrumb,
@@ -22,6 +23,7 @@ import type { MiscBasicResponse } from "@/types/miscTypes";
 import { GlobalSearch } from "../search/GlobalSearch";
 import AdDropdown from "./dropdowns/AdDropdown";
 import LoadingSkeleton from "./skeletons/LoadingSkeleton";
+import { ShareButton } from "./ShareButton";
 
 export interface HeaderBannerBreadCrumbItem {
   label: ReactNode;
@@ -49,6 +51,7 @@ export const HeaderBanner = ({
   qrCode,
   isHomepage,
 }: HeaderBannerProps) => {
+  const [hasImage, setHasImage] = useState(false);
   const miscBasicQuery = useFetchMiscBasic();
   const headingAd = miscBasicQuery.data?.data.ads.find(
     ad => ad.type === "heading_featured",
@@ -71,7 +74,7 @@ export const HeaderBanner = ({
   return (
     <header className='mb-1.5 flex min-h-[110px] w-full justify-center bg-gradient-to-b from-bannerGradient to-darker'>
       <div className='flex w-full max-w-desktop flex-wrap justify-between gap-3 p-mobile md:px-desktop md:py-mobile'>
-        <div className='flex flex-col py-1/2'>
+        <div className='py-1/2 flex flex-col'>
           {breadcrumbItems && (
             <Breadcrumb className='w-full'>
               <BreadcrumbList className='flex items-center'>
@@ -105,11 +108,35 @@ export const HeaderBanner = ({
               </BreadcrumbList>
             </Breadcrumb>
           )}
-          <div className='flex items-center gap-1 pt-1/2 font-poppins'>
-            <h1 className={cn(!subTitle && !isHomepage && "pb-8")}>
-              <TruncatedText>{title}</TruncatedText>
+          <div
+            className={cn(
+              "pt-1/2 flex gap-1 font-poppins",
+              hasImage ? "items-center" : "items-start",
+            )}
+          >
+            <h1
+              className={cn(
+                "flex items-end",
+                !subTitle && !isHomepage && "pb-8",
+              )}
+            >
+              <TruncatedText onHasImageChange={setHasImage}>
+                {title}
+              </TruncatedText>
             </h1>
-            {badge && badge}
+            {badge && (
+              <div className={cn(!hasImage && "mt-[5px]")}>{badge}</div>
+            )}
+            {!isHomepage && (
+              <div
+                className={cn(
+                  !hasImage && "mt-[5px]",
+                  hasImage ? "translate-y-[2px]" : "translate-y-[4px]",
+                )}
+              >
+                <ShareButton isHeader />
+              </div>
+            )}
           </div>
           <div className='flex items-center gap-1'>
             {subTitle && subTitle}
@@ -130,7 +157,7 @@ export const HeaderBanner = ({
                   ></p>
                   <Link
                     to='/ads'
-                    className='ml-1/2 flex -translate-y-1 items-center justify-center rounded-max border border-border bg-background px-[6px] text-[10px] font-medium'
+                    className='ml-1/2 rounded-max flex -translate-y-1 items-center justify-center border border-border bg-background px-[6px] text-[10px] font-medium'
                   >
                     Ad
                   </Link>
