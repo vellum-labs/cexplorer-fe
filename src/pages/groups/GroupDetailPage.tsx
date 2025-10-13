@@ -1,6 +1,5 @@
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import PulseDot from "@/components/global/PulseDot";
 import Tabs from "@/components/global/Tabs";
@@ -18,8 +17,6 @@ import {
   BreadcrumbList,
 } from "@/components/ui/breadcrumb";
 import { Tooltip } from "@/components/ui/tooltip";
-import { drepListTableOptions } from "@/constants/tables/drepListTableOptions";
-import { poolsListTableOptions } from "@/constants/tables/poolsListTableOptions";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { cn } from "@/lib/utils";
 import { useFetchGroupDetail } from "@/services/analytics";
@@ -61,18 +58,14 @@ export const GroupDetailPage = () => {
   const {
     columnsVisibility: poolColumnsVisibility,
     rows: poolRows,
-    setColumnVisibility: poolSetColumnVisibility,
     setColumsOrder: poolSetColumsOrder,
     columnsOrder: poolColumnsOrder,
-    setRows: poolSetRows,
   } = usePoolsListTableStore()();
   const {
     columnsVisibility: drepColumnsVisibility,
     rows: drepRows,
-    setColumnVisibility: drepSetColumnVisibility,
     setColumsOrder: drepSetColumsOrder,
     columnsOrder: drepColumnsOrder,
-    setRows: drepSetRows,
   } = useDrepListTableStore()();
   const { data: basicData } = useFetchMiscBasic();
   const miscConst = useMiscConst(basicData?.data.version.const);
@@ -635,45 +628,14 @@ export const GroupDetailPage = () => {
                   onClick={activeTab => setFilter(activeTab as "pool" | "drep")}
                 />
               )}
-              <div className='flex flex-grow items-center gap-1 md:flex-grow-0'>
-                <TableSearchInput
-                  placeholder='Search your results...'
-                  value={tableSearch}
-                  onchange={setTableSearch}
-                  wrapperClassName='md:w-[320px] w-full '
-                  showSearchIcon
-                  showPrefixPopup={false}
-                />
-                <TableSettingsDropdown
-                  rows={filter === "pool" ? poolRows : drepRows}
-                  setRows={filter === "pool" ? poolSetRows : drepSetRows}
-                  columnsOptions={
-                    filter === "pool"
-                      ? poolsListTableOptions.map(item => {
-                          return {
-                            label: item.name,
-                            isVisible: poolColumnsVisibility[item.key],
-                            onClick: () =>
-                              poolSetColumnVisibility(
-                                item.key,
-                                !poolColumnsVisibility[item.key],
-                              ),
-                          };
-                        })
-                      : drepListTableOptions.map(item => {
-                          return {
-                            label: item.name,
-                            isVisible: drepColumnsVisibility[item.key],
-                            onClick: () =>
-                              drepSetColumnVisibility(
-                                item.key,
-                                !drepColumnsVisibility[item.key],
-                              ),
-                          };
-                        })
-                  }
-                />
-              </div>
+              <TableSearchInput
+                placeholder='Search your results...'
+                value={tableSearch}
+                onchange={setTableSearch}
+                wrapperClassName='md:w-[320px] w-full'
+                showSearchIcon
+                showPrefixPopup={false}
+              />
             </div>
           </div>
           {filter === "pool" && <GroupDetailCharts items={filteredItems ?? []} />}
