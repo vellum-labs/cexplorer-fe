@@ -3,9 +3,12 @@ import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 import { Cardano } from "@/resources/images/icons/Cardano";
 import { Link } from "@tanstack/react-router";
 import { Tooltip } from "../ui/tooltip";
+import { useCurrencyStore } from "@/stores/currencyStore";
+import { formatCurrency } from "@/utils/format/formatCurrency";
 
 export const AdaPriceIndicator = () => {
   const price = useAdaPriceWithHistory();
+  const { currency } = useCurrencyStore();
 
   if (price.percentChange === undefined) {
     return (
@@ -28,7 +31,12 @@ export const AdaPriceIndicator = () => {
       <Link to='/ada-price'>
         <div className='flex items-center gap-1/2 text-text-xs font-medium'>
           <Cardano size={18} color={colors.text} />
-          <span className='text-grayTextPrimary'>ADA: {price.today}</span>
+          <span className='text-grayTextPrimary'>
+            ADA:{" "}
+            {formatCurrency(Number(price.todayValue.toFixed(2)), currency, {
+              applyNumberFormatting: false,
+            })}
+          </span>
           <span
             className={`ml-0.5 flex items-center rounded-max border px-1/2 py-1/4 text-[11px] font-medium ${price.percentChange < 1 && price.percentChange > -1 ? "border-yellow-500/40 bg-yellow-500/5 text-yellowText" : price.percentChange > 0 ? "border-green-500/40 bg-green-500/5 text-greenText" : "border-red-500/40 bg-red-500/5 text-redText"}`}
           >

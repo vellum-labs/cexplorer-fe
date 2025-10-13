@@ -1,6 +1,6 @@
 import type { Currencies } from "@/types/storeTypes";
 
-import { currencySigns } from "@/constants/currencies";
+import { formatCurrency } from "@/utils/format/formatCurrency";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useCurrencyStore } from "@/stores/currencyStore";
 
@@ -65,9 +65,16 @@ export const useAdaPriceWithHistory = (overrideCurrency?: Currencies) => {
   return {
     todayValue: scaleForCurrency / todayAda,
     adaToSats,
-    today: currencySigns[currency] + (scaleForCurrency / todayAda).toFixed(2),
-    yesterday:
-      currencySigns[currency] + (scaleForCurrency / yesterdayAda).toFixed(2),
+    today: formatCurrency(
+      Number((scaleForCurrency / todayAda).toFixed(2)),
+      currency,
+      { applyNumberFormatting: false },
+    ),
+    yesterday: formatCurrency(
+      Number((scaleForCurrency / yesterdayAda).toFixed(2)),
+      currency,
+      { applyNumberFormatting: false },
+    ),
     percentChange,
   };
 };
