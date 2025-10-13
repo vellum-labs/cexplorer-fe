@@ -26,7 +26,7 @@
       window.__DISABLE_SW__ = false;
 
       console.log("Forced clear: done. Reloading…");
-      location.reload();
+      setTimeout(() => location.reload());
     } catch (e) {
       console.error("Forced clear failed:", e);
     }
