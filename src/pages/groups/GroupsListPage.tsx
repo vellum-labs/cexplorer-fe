@@ -1,6 +1,7 @@
 import TableSearchInput from "@/components/global/inputs/SearchInput";
-import GlobalTable from "@/components/table/GlobalTable";
 import { formatNumber } from "@/utils/format/format";
+import { GroupsCharts } from "@/components/groups/GroupsCharts";
+import { GroupsTable } from "@/components/groups/GroupsTable";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,21 +11,13 @@ import { useFetchGroupsList } from "@/services/analytics";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import type { GroupsListData } from "@/types/analyticsTypes";
-import type { TableColumns } from "@/types/tableTypes";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet";
 import metadata from "../../../conf/metadata/en-metadata.json";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import { Badge } from "@/components/global/badges/Badge";
-import { Check, Filter, X } from "lucide-react";
-import { getPledgeColor } from "@/utils/getPledgeColor";
-import { cn } from "@/lib/utils";
-import { SortArrow } from "@/components/global/SortArrow";
+import { X } from "lucide-react";
 import { useFilterTable } from "@/hooks/tables/useFilterTable";
-import EChartsReact from "echarts-for-react";
-import { useGraphColors } from "@/hooks/useGraphColors";
 
 export const GroupsListPage = () => {
   const [{ debouncedTableSearch, tableSearch }, setTableSearch] =
@@ -38,7 +31,6 @@ export const GroupsListPage = () => {
   const query = useFetchGroupsList();
   const { data: basicData } = useFetchMiscBasic();
   const miscConst = useMiscConst(basicData?.data.version.const);
-  const { textColor, bgColor } = useGraphColors();
 
   const {
     anchorRefs,
@@ -72,265 +64,6 @@ export const GroupsListPage = () => {
       setSortDirection("desc");
     }
   };
-
-  const columns: TableColumns<GroupsListData> = [
-    {
-      key: "pools_count",
-      title: (
-        <span
-          className='gap-1/2 flex cursor-pointer items-center'
-          onClick={() => handleSort("pools_count")}
-        >
-          Pools count{" "}
-          <SortArrow
-            direction={sortColumn === "pools_count" ? sortDirection : undefined}
-          />
-        </span>
-      ),
-      render: item => (
-        <span className='text-grayTextPrimary'>
-          {item.data?.pool?.count ?? 0}
-        </span>
-      ),
-      widthPx: 30,
-      visible: true,
-    },
-    {
-      key: "name",
-      title: "Group name",
-      render: item => (
-        <Link
-          className='text-primary'
-          to='/groups/$url'
-          params={{ url: item.url }}
-        >
-          {item.name}
-        </Link>
-      ),
-      widthPx: 50,
-      visible: true,
-    },
-    {
-      key: "pool_stake",
-      title: (
-        <span
-          className='gap-1/2 flex w-full cursor-pointer items-center justify-end'
-          onClick={() => handleSort("pool_stake")}
-        >
-          Pool stake{" "}
-          <SortArrow
-            direction={sortColumn === "pool_stake" ? sortDirection : undefined}
-          />
-        </span>
-      ),
-      render: item => (
-        <span className='flex w-full justify-end text-grayTextPrimary'>
-          {item.data?.pool?.stake ? (
-            <AdaWithTooltip data={item.data.pool.stake} />
-          ) : (
-            "-"
-          )}
-        </span>
-      ),
-      widthPx: 30,
-      visible: true,
-    },
-    {
-      key: "delegators",
-      title: (
-        <span
-          className='gap-1/2 flex w-full cursor-pointer items-center justify-end'
-          onClick={() => handleSort("delegators")}
-        >
-          Delegators{" "}
-          <SortArrow
-            direction={sortColumn === "delegators" ? sortDirection : undefined}
-          />
-        </span>
-      ),
-      render: item => (
-        <span className='flex w-full justify-end text-grayTextPrimary'>
-          {item.data?.pool?.delegators ?? "-"}
-        </span>
-      ),
-      widthPx: 30,
-      visible: true,
-    },
-    {
-      key: "share",
-      title: (
-        <span
-          className='gap-1/2 flex w-full cursor-pointer items-center justify-end'
-          onClick={() => handleSort("share")}
-        >
-          Share{" "}
-          <SortArrow
-            direction={sortColumn === "share" ? sortDirection : undefined}
-          />
-        </span>
-      ),
-      render: item => {
-        const groupStake = item.data?.pool?.stake ?? 0;
-        const totalLiveStake = miscConst?.live_stake ?? 1;
-
-        const sharePercentage =
-          totalLiveStake > 0
-            ? ((groupStake / totalLiveStake) * 100).toFixed(2)
-            : "0.00";
-
-        return (
-          <span className='flex w-full justify-end text-grayTextPrimary'>
-            {sharePercentage}%
-          </span>
-        );
-      },
-      widthPx: 30,
-      visible: true,
-    },
-    {
-      key: "pledge",
-      title: (
-        <span
-          className='gap-1/2 flex w-full cursor-pointer items-center justify-end'
-          onClick={() => handleSort("pledge")}
-        >
-          Pledge{" "}
-          <SortArrow
-            direction={sortColumn === "pledge" ? sortDirection : undefined}
-          />
-        </span>
-      ),
-      render: item => {
-        const pledge = item.data?.pool?.pledged ?? 0;
-        const stake = item.data?.pool?.stake ?? 0;
-
-        let leverage = 0;
-        if (pledge > 0) {
-          leverage = Math.round(stake / pledge);
-        }
-
-        return (
-          <div className='flex flex-col items-end'>
-            <div className='gap-1/2 flex items-center'>
-              <Check size={11} className='translate-y-[1px] stroke-[#17B26A]' />
-              <span className='w-[60px] whitespace-nowrap text-grayTextPrimary'>
-                <AdaWithTooltip data={pledge} />
-              </span>
-            </div>
-            <div className='gap-1/2 flex items-center justify-end'>
-              <Filter
-                size={11}
-                color={getPledgeColor(leverage)}
-                className={cn("translate-y-[2px]")}
-              />
-              <span className='text-text-xs text-grayTextPrimary'>
-                {pledge > 0 ? `x${leverage}` : "∞"}
-              </span>
-            </div>
-          </div>
-        );
-      },
-      widthPx: 30,
-      visible: true,
-    },
-    {
-      key: "mu_pledge_per_pool",
-      title: (
-        <span
-          className='gap-1/2 flex w-full cursor-pointer items-center justify-end'
-          onClick={() => handleSort("pledge_per_pool")}
-        >
-          μ Pledge per pool{" "}
-          <SortArrow
-            direction={
-              sortColumn === "pledge_per_pool" ? sortDirection : undefined
-            }
-          />
-        </span>
-      ),
-      render: item => {
-        const pledge = item.data?.pool?.pledged ?? 0;
-        const poolCount = item.data?.pool?.count ?? 1;
-        const pledgePerPool = poolCount > 0 ? pledge / poolCount : 0;
-
-        return (
-          <span className='flex w-full justify-end text-grayTextPrimary'>
-            <AdaWithTooltip data={pledgePerPool} />
-          </span>
-        );
-      },
-      widthPx: 40,
-      visible: true,
-    },
-    {
-      key: "drep",
-      title: (
-        <span className='flex w-full justify-end' ref={anchorRefs.has_drep}>
-          Also DRep
-        </span>
-      ),
-      render: item => {
-        const drepCount = item.data?.drep?.count ?? 0;
-
-        if (drepCount === 0) {
-          return (
-            <span className='flex w-full justify-end'>
-              <Badge color='gray'>No</Badge>
-            </span>
-          );
-        }
-
-        return (
-          <span className='flex w-full justify-end'>
-            <Badge color='blue'>Yes: {drepCount}x</Badge>
-          </span>
-        );
-      },
-      filter: {
-        anchorRef: anchorRefs.has_drep,
-        filterOpen: filterVisibility.has_drep,
-        activeFunnel: !!filter.has_drep,
-        filterButtonDisabled: filter.has_drep
-          ? filter.has_drep === filterDraft.has_drep
-          : false,
-        onShow: e => toggleFilter(e, "has_drep"),
-        onFilter: () => changeFilterByKey("has_drep", filterDraft["has_drep"]),
-        onReset: () => changeFilterByKey("has_drep"),
-        filterContent: (
-          <div className='flex flex-col gap-1 px-2 py-1'>
-            <label className='flex items-center gap-1'>
-              <input
-                type='radio'
-                name='has_drep'
-                value='1'
-                className='accent-primary'
-                checked={filterDraft["has_drep"] === 1}
-                onChange={e =>
-                  changeDraftFilter("has_drep", +e.currentTarget.value)
-                }
-              />
-              <span className='text-text-sm'>Yes</span>
-            </label>
-            <label className='flex items-center gap-1'>
-              <input
-                type='radio'
-                name='has_drep'
-                value='2'
-                className='accent-primary'
-                checked={filterDraft["has_drep"] === 2}
-                onChange={e =>
-                  changeDraftFilter("has_drep", +e.currentTarget.value)
-                }
-              />
-              <span className='text-text-sm'>No</span>
-            </label>
-          </div>
-        ),
-      },
-      widthPx: 30,
-      visible: true,
-    },
-  ];
 
   useEffect(() => {
     let filtered = data;
@@ -419,130 +152,6 @@ export const GroupsListPage = () => {
     filter.has_drep,
   ]);
 
-  const chartData = useMemo(() => {
-    const colors = [
-      "#47CD89",
-      "#92c7e4",
-      "#3a8dde",
-      "#f69972",
-      "#527381",
-      "#81ba71",
-      "#22366c",
-      "#FFA500",
-      "#FF6B6B",
-      "#4ECDC4",
-      "#F38181",
-      "#AA96DA",
-      "#5B8FF9",
-      "#61DDAA",
-      "#65789B",
-      "#F6BD16",
-      "#7262FD",
-      "#78D3F8",
-      "#9661BC",
-      "#F6903D",
-      "#008685",
-      "#F08BB4",
-      "#5D7092",
-      "#5AD8A6",
-      "#E8684A",
-      "#6DC8EC",
-      "#9270CA",
-      "#FF9D4D",
-      "#269A99",
-    ];
-
-    return filteredItems.map((item, index) => {
-      const pledge = item.data?.pool?.pledged ?? 0;
-      const poolCount = item.data?.pool?.count ?? 1;
-      const pledgePerPool = poolCount > 0 ? pledge / poolCount : 0;
-
-      return {
-        name: item.name,
-        pools_count: item.data?.pool?.count ?? 0,
-        pool_stake: item.data?.pool?.stake ?? 0,
-        pledge: pledge,
-        pledge_per_pool: pledgePerPool,
-        color: colors[index % colors.length],
-      };
-    });
-  }, [filteredItems]);
-
-  const getChartOption = (
-    dataKey: "pools_count" | "pool_stake" | "pledge" | "pledge_per_pool",
-    title: string,
-  ) => {
-    const needsAdaFormatting =
-      dataKey === "pool_stake" ||
-      dataKey === "pledge" ||
-      dataKey === "pledge_per_pool";
-
-    return {
-      title: {
-        text: title,
-        left: "center",
-        textStyle: {
-          color: textColor,
-          fontSize: 16,
-        },
-      },
-      tooltip: {
-        trigger: "item",
-        confine: true,
-        backgroundColor: bgColor,
-        textStyle: {
-          color: textColor,
-        },
-        formatter: (params: any) => {
-          if (needsAdaFormatting) {
-            const adaValue = formatNumber(Math.round(params.value / 1000000));
-            return `${params.name}<br/>${params.marker}${adaValue} ₳`;
-          }
-          return `${params.name}<br/>${params.marker}${formatNumber(params.value)}`;
-        },
-      },
-      series: [
-        {
-          type: "pie",
-          radius: ["50%", "80%"],
-          avoidLabelOverlap: true,
-          minShowLabelAngle: 10,
-          label: {
-            show: true,
-            color: textColor,
-            position: "outside",
-            fontSize: 10,
-          },
-          labelLine: {
-            show: true,
-            length: 15,
-            length2: 10,
-            lineStyle: {
-              width: 1,
-            },
-          },
-          emphasis: {
-            labelLine: {
-              show: true,
-              length: 15,
-              length2: 10,
-            },
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: "rgba(0, 0, 0, 0.5)",
-            },
-          },
-          data: chartData.map(item => ({
-            value: item[dataKey],
-            name: item.name,
-            itemStyle: { color: item.color },
-          })),
-        },
-      ],
-    };
-  };
-
   return (
     <>
       <Helmet>
@@ -603,41 +212,20 @@ export const GroupsListPage = () => {
                 )}
               </div>
             )}
-            <div className='mb-2 grid w-full grid-cols-1 gap-2 md:grid-cols-2'>
-              <div className='w-full'>
-                <EChartsReact
-                  option={getChartOption("pools_count", "Pools Count")}
-                  style={{ height: "400px", width: "100%" }}
-                />
-              </div>
-              <div className='w-full'>
-                <EChartsReact
-                  option={getChartOption("pool_stake", "Pool Stake")}
-                  style={{ height: "400px", width: "100%" }}
-                />
-              </div>
-              <div className='w-full'>
-                <EChartsReact
-                  option={getChartOption("pledge", "Pledge")}
-                  style={{ height: "400px", width: "100%" }}
-                />
-              </div>
-              <div className='w-full'>
-                <EChartsReact
-                  option={getChartOption(
-                    "pledge_per_pool",
-                    "μ Pledge per Pool",
-                  )}
-                  style={{ height: "400px", width: "100%" }}
-                />
-              </div>
-            </div>
-            <GlobalTable
-              type='default'
-              scrollable
-              totalItems={filteredItems.length}
-              columns={columns}
-              items={filteredItems}
+            <GroupsCharts filteredItems={filteredItems} />
+            <GroupsTable
+              filteredItems={filteredItems}
+              sortColumn={sortColumn}
+              sortDirection={sortDirection}
+              handleSort={handleSort}
+              miscConstLiveStake={miscConst?.live_stake ?? undefined}
+              anchorRefs={anchorRefs}
+              filterVisibility={filterVisibility}
+              filter={filter}
+              filterDraft={filterDraft}
+              toggleFilter={toggleFilter}
+              changeDraftFilter={changeDraftFilter}
+              changeFilterByKey={changeFilterByKey}
               query={query}
             />
           </section>
