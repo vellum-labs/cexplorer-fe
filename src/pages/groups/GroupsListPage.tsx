@@ -1,5 +1,6 @@
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import GlobalTable from "@/components/table/GlobalTable";
+import { formatNumber } from "@/utils/format/format";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -57,7 +58,6 @@ export const GroupsListPage = () => {
 
   const handleSort = (column: string) => {
     if (sortColumn === column) {
-      // Cycle through: desc -> asc -> undefined (unsorted)
       if (sortDirection === "desc") {
         setSortDirection("asc");
       } else if (sortDirection === "asc") {
@@ -65,7 +65,6 @@ export const GroupsListPage = () => {
         setSortDirection(undefined);
       }
     } else {
-      // First click on a new column: set to descending
       setSortColumn(column);
       setSortDirection("desc");
     }
@@ -171,7 +170,6 @@ export const GroupsListPage = () => {
         const groupStake = item.data?.pool?.stake ?? 0;
         const totalLiveStake = miscConst?.live_stake ?? 1;
 
-        // Calculate share: (group stake / total live stake) * 100
         const sharePercentage =
           totalLiveStake > 0
             ? ((groupStake / totalLiveStake) * 100).toFixed(2)
@@ -203,7 +201,6 @@ export const GroupsListPage = () => {
         const pledge = item.data?.pool?.pledged ?? 0;
         const stake = item.data?.pool?.stake ?? 0;
 
-        // Calculate leverage: stake / pledge (handle infinity case)
         let leverage = 0;
         if (pledge > 0) {
           leverage = Math.round(stake / pledge);
@@ -275,18 +272,14 @@ export const GroupsListPage = () => {
         if (drepCount === 0) {
           return (
             <span className='flex w-full justify-end'>
-              <Badge color='gray' small>
-                No
-              </Badge>
+              <Badge color='gray'>No</Badge>
             </span>
           );
         }
 
         return (
           <span className='flex w-full justify-end'>
-            <Badge color='blue' small>
-              Yes: {drepCount}x
-            </Badge>
+            <Badge color='blue'>Yes: {drepCount}x</Badge>
           </span>
         );
       },
@@ -339,29 +332,24 @@ export const GroupsListPage = () => {
   useEffect(() => {
     let filtered = data;
 
-    // Apply search filter
     if (debouncedTableSearch) {
       filtered = filtered.filter(item =>
         item.name.toLowerCase().includes(debouncedTableSearch.toLowerCase()),
       );
     }
 
-    // Apply DRep filter
     if (filter.has_drep !== undefined) {
       filtered = filtered.filter(item => {
         const hasDrep = (item.data?.drep?.count ?? 0) > 0;
         if (+(filter.has_drep ?? 0) === 1) {
-          // Filter for "Yes" - has DRep
           return hasDrep;
         } else if (+(filter.has_drep ?? 0) === 2) {
-          // Filter for "No" - no DRep
           return !hasDrep;
         }
         return true;
       });
     }
 
-    // Apply sorting only if a column is selected
     if (sortColumn && sortDirection) {
       const sorted = [...filtered].sort((a, b) => {
         const totalLiveStake = miscConst?.live_stake ?? 1;
@@ -412,13 +400,11 @@ export const GroupsListPage = () => {
             comparison = 0;
         }
 
-        // Reverse comparison if ascending
         return sortDirection === "asc" ? -comparison : comparison;
       });
 
       setFilteredItems(sorted);
     } else {
-      // No sorting applied, use filtered data as-is
       setFilteredItems(filtered);
     }
   }, [
@@ -451,14 +437,19 @@ export const GroupsListPage = () => {
             </BreadcrumbList>
           </Breadcrumb>
           <section className='flex min-h-minHeight w-full flex-col items-center'>
-            <TableSearchInput
-              placeholder='Search your results...'
-              value={tableSearch}
-              onchange={setTableSearch}
-              wrapperClassName='mb-2 ml-auto md:w-[320px] w-full '
-              showSearchIcon
-              showPrefixPopup={false}
-            />
+            <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
+              <h3 className='pb-1.5 md:pb-0'>
+                Total of {formatNumber(filteredItems.length)} groups
+              </h3>
+              <TableSearchInput
+                placeholder='Search your results...'
+                value={tableSearch}
+                onchange={setTableSearch}
+                wrapperClassName='md:w-[320px] w-full'
+                showSearchIcon
+                showPrefixPopup={false}
+              />
+            </div>
             {hasFilter && (
               <div className='gap-1/2 mb-1 flex w-full flex-wrap items-center md:flex-nowrap'>
                 {Object.entries(filter).map(
