@@ -244,11 +244,22 @@ export interface GroupsListData {
   name: string;
   url: string;
   description: string;
-  param: string;
+  param: string[];
   data: {
     count: number;
-    pool: null;
+    drep: {
+      count: number;
+      stake: number | null;
+      delegators: number | null;
+    } | null;
+    pool: {
+      count: number;
+      stake: number;
+      pledged: number;
+      delegators: number;
+    } | null;
     asset: null;
+    collection: null;
   };
 }
 
