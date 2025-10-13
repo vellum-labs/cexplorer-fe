@@ -10,6 +10,8 @@ import RoaDiffArrow from "@/components/pool/RoaDiffArrow";
 import DateCell from "@/components/table/DateCell";
 import GlobalTable from "@/components/table/GlobalTable";
 import PoolCell from "@/components/table/PoolCell";
+import { GroupDetailCharts } from "@/components/groups/GroupDetailCharts";
+import { GroupDetailDRepCharts } from "@/components/groups/GroupDetailDRepCharts";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -437,6 +439,25 @@ export const GroupDetailPage = () => {
       widthPx: 50,
     },
     {
+      key: "delegators",
+      render: item => {
+        if (
+          item.type !== "drep" ||
+          !Array.isArray(item.info) ||
+          !item.info[0]?.distr?.count
+        ) {
+          return <p className='text-right'>-</p>;
+        }
+
+        return (
+          <p className='text-right'>{formatNumber(item.info[0].distr.count)}</p>
+        );
+      },
+      title: <p className='w-full text-right'>Delegators</p>,
+      visible: drepColumnsVisibility.delegators,
+      widthPx: 40,
+    },
+    {
       key: "voting_activity",
       render: item => {
         if (
@@ -655,6 +676,10 @@ export const GroupDetailPage = () => {
               </div>
             </div>
           </div>
+          {filter === "pool" && <GroupDetailCharts items={filteredItems ?? []} />}
+          {filter === "drep" && (
+            <GroupDetailDRepCharts items={filteredItems ?? []} />
+          )}
           <GlobalTable
             type='default'
             pagination

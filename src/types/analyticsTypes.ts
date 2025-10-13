@@ -272,6 +272,7 @@ export interface GroupDetailData {
   url: string;
   name: string;
   description: string;
+  param: string[];
   items: (
     | {
         type: "pool";
