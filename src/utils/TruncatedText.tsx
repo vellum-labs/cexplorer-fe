@@ -122,9 +122,9 @@ export const TruncatedText = ({
         onMouseLeave={() => isTruncated && !isMobile && setIsHovered(false)}
       >
         {isTruncated && !isMobile && isHovered ? (
-          <span className='flex items-center gap-1'>
+          <span className='mt-1/2 flex w-full items-center gap-1'>
             {images}
-            <span className='overflow-hidden'>
+            <span className='flex-1 overflow-hidden break-all'>
               <span
                 className='inline-block whitespace-nowrap'
                 style={{
@@ -136,9 +136,9 @@ export const TruncatedText = ({
             </span>
           </span>
         ) : isTruncated && !isMobile ? (
-          <span className='flex items-center gap-1'>
+          <span className='mt-1/2 flex w-full items-center gap-1'>
             {images}
-            <span>{displayTitle}</span>
+            <span className='flex-1 break-all'>{displayTitle}</span>
           </span>
         ) : (
           children

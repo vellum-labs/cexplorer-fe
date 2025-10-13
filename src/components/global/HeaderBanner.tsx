@@ -114,7 +114,12 @@ export const HeaderBanner = ({
               hasImage ? "items-center" : "items-start",
             )}
           >
-            <h1 className={cn(!subTitle && !isHomepage && "pb-8")}>
+            <h1
+              className={cn(
+                "flex items-end",
+                !subTitle && !isHomepage && "pb-8",
+              )}
+            >
               <TruncatedText onHasImageChange={setHasImage}>
                 {title}
               </TruncatedText>
