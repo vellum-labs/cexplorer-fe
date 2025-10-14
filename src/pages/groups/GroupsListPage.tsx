@@ -2,16 +2,11 @@ import TableSearchInput from "@/components/global/inputs/SearchInput";
 import { formatNumber } from "@/utils/format/format";
 import { GroupsCharts } from "@/components/groups/GroupsCharts";
 import { GroupsTable } from "@/components/groups/GroupsTable";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbList,
-} from "@/components/ui/breadcrumb";
+import { HeaderBanner } from "@/components/global/HeaderBanner";
 import { useFetchGroupsList } from "@/services/analytics";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import type { GroupsListData } from "@/types/analyticsTypes";
-import { Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet";
 import metadata from "../../../conf/metadata/en-metadata.json";
@@ -160,19 +155,14 @@ export const GroupsListPage = () => {
         <meta name='description' content={metadata.groupsList.description} />
         <meta name='keywords' content={metadata.groupsList.keywords} />
       </Helmet>
-      <main className='flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
-        <div className='flex w-full max-w-desktop flex-col items-center justify-center px-mobile md:px-desktop'>
-          <Breadcrumb className='mb-2 w-full'>
-            <BreadcrumbList className='flex items-center'>
-              <BreadcrumbItem>
-                <Link className='underline underline-offset-2' to='/'>
-                  Home
-                </Link>
-              </BreadcrumbItem>
-              /<BreadcrumbItem className='text-text'>Groups</BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+      <main className='flex min-h-minHeight w-full flex-col items-center'>
+        <HeaderBanner
+          title='Cardano Groups (Donuts)'
+          breadcrumbItems={[{ label: "Groups" }]}
+        />
+        <div className='flex w-full max-w-desktop flex-col items-center justify-center gap-1 p-mobile md:p-desktop'>
           <section className='flex min-h-minHeight w-full flex-col items-center'>
+            <GroupsCharts filteredItems={filteredItems} />
             <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
               <h3 className='pb-1.5 md:pb-0'>
                 Total of {formatNumber(filteredItems.length)} groups
@@ -212,7 +202,6 @@ export const GroupsListPage = () => {
                 )}
               </div>
             )}
-            <GroupsCharts filteredItems={filteredItems} />
             <GroupsTable
               filteredItems={filteredItems}
               sortColumn={sortColumn}
