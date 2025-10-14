@@ -3,6 +3,7 @@ import { formatNumber } from "@/utils/format/format";
 import { GroupsCharts } from "@/components/groups/GroupsCharts";
 import { GroupsTable } from "@/components/groups/GroupsTable";
 import { HeaderBanner } from "@/components/global/HeaderBanner";
+import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 import { useFetchGroupsList } from "@/services/analytics";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
@@ -161,8 +162,32 @@ export const GroupsListPage = () => {
           breadcrumbItems={[{ label: "Groups" }]}
         />
         <div className='flex w-full max-w-desktop flex-col items-center justify-center gap-1 p-mobile md:p-desktop'>
+          <div className='rounded-m mb-2 w-full border border-border bg-cardBg p-2'>
+            <p className='text-text-sm text-grayTextPrimary'>
+              This dashboard is managed by Cardano community. Everyone can add
+              or modify existing groups via{" "}
+              <a
+                href='https://github.com/vellum-labs/cexplorer-community/'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='text-primary'
+              >
+                cexplorer-community on github
+              </a>
+              .
+            </p>
+          </div>
           <section className='flex min-h-minHeight w-full flex-col items-center'>
-            <GroupsCharts filteredItems={filteredItems} />
+            {query.isLoading ? (
+              <div className='mb-2 grid w-full grid-cols-1 gap-2 md:grid-cols-2'>
+                <LoadingSkeleton height='400px' rounded='lg' />
+                <LoadingSkeleton height='400px' rounded='lg' />
+                <LoadingSkeleton height='400px' rounded='lg' />
+                <LoadingSkeleton height='400px' rounded='lg' />
+              </div>
+            ) : (
+              <GroupsCharts filteredItems={filteredItems} />
+            )}
             <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
               <h3 className='pb-1.5 md:pb-0'>
                 Total of {formatNumber(filteredItems.length)} groups

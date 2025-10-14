@@ -3,6 +3,7 @@ import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import PulseDot from "@/components/global/PulseDot";
 import Tabs from "@/components/global/Tabs";
+import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 import { MetadataCell } from "@/components/metadata/MetadataCell";
 import { PoolListEchart } from "@/components/pool/PoolListEchart";
 import RoaDiffArrow from "@/components/pool/RoaDiffArrow";
@@ -638,9 +639,20 @@ export const GroupDetailPage = () => {
               />
             </div>
           </div>
-          {filter === "pool" && <GroupDetailCharts items={filteredItems ?? []} />}
-          {filter === "drep" && (
-            <GroupDetailDRepCharts items={filteredItems ?? []} />
+          {query.isLoading ? (
+            <div className='mb-2 grid w-full grid-cols-1 gap-2 md:grid-cols-2'>
+              <LoadingSkeleton height='400px' rounded='lg' />
+              <LoadingSkeleton height='400px' rounded='lg' />
+            </div>
+          ) : (
+            <>
+              {filter === "pool" && (
+                <GroupDetailCharts items={filteredItems ?? []} />
+              )}
+              {filter === "drep" && (
+                <GroupDetailDRepCharts items={filteredItems ?? []} />
+              )}
+            </>
           )}
           <GlobalTable
             type='default'
