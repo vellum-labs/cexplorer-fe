@@ -17,7 +17,7 @@ import DateCell from "@/components/table/DateCell";
 import Copy from "@/components/global/Copy";
 import SortBy from "@/components/ui/sortBy";
 
-import { Asterisk, ExternalLink, Landmark, Route, User } from "lucide-react";
+import { Asterisk, ExternalLink, Landmark, Route, User, X } from "lucide-react";
 
 import { useGovernanceListTableStore } from "@/stores/tables/governanceListTableStore";
 import { useEffect, useState } from "react";
@@ -25,6 +25,7 @@ import { useFetchDrepStat } from "@/services/drep";
 import { useFetchGovernanceAction } from "@/services/governance";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
+import { useFilterTable } from "@/hooks/tables/useFilterTable";
 
 import { governanceListTableOptions } from "@/constants/tables/governanceActionsListTableOptions";
 import { formatString } from "@/utils/format/format";
@@ -65,6 +66,20 @@ export const GovernancePage: FC = () => {
   const [selectedItem, setSelectedItem] = useState<
     "All" | "Active" | "Ratified" | "Expired" | "Enacted"
   >(state || "All");
+
+  const {
+    filterVisibility,
+    filter,
+    hasFilter,
+    anchorRefs,
+    filterDraft,
+    changeDraftFilter,
+    changeFilterByKey,
+    toggleFilter,
+  } = useFilterTable({
+    storeKey: "governance_list_filter",
+    filterKeys: ["type"],
+  });
 
   const { data: drepStat } = drepStatQuery;
 
@@ -174,7 +189,46 @@ export const GovernancePage: FC = () => {
 
         return <ActionTypes title={item?.type as ActionTypes} />;
       },
-      title: "Type",
+      title: <p ref={anchorRefs?.type}>Type</p>,
+      filter: {
+        anchorRef: anchorRefs?.type,
+        width: "200px",
+        activeFunnel: !!filter.type,
+        filterOpen: filterVisibility.type,
+        filterButtonDisabled: filter.type
+          ? filter.type === filterDraft["type"]
+          : false,
+        onShow: e => toggleFilter(e, "type"),
+        onFilter: () => changeFilterByKey("type", filterDraft["type"]),
+        onReset: () => changeFilterByKey("type"),
+        filterContent: (
+          <div className='flex flex-col gap-1 px-2 py-1'>
+            {[
+              "NoConfidence",
+              "NewCommittee",
+              "NewConstitution",
+              "HardForkInitiation",
+              "ParameterChange",
+              "TreasuryWithdrawals",
+              "InfoAction",
+            ].map(val => (
+              <label className='flex items-center gap-1' key={val}>
+                <input
+                  type='radio'
+                  name='type'
+                  value={val}
+                  className='accent-primary'
+                  checked={filterDraft["type"] === val}
+                  onChange={e =>
+                    changeDraftFilter("type", e.currentTarget.value)
+                  }
+                />
+                <span className='text-text-sm'>{val}</span>
+              </label>
+            ))}
+          </div>
+        ),
+      },
       visible: columnsVisibility.type,
       widthPx: 90,
     },
@@ -553,6 +607,27 @@ export const GovernancePage: FC = () => {
             </div>
           </div>
         </div>
+        {hasFilter && (
+          <div className='mb-2 flex flex-wrap items-center gap-1/2 md:flex-nowrap'>
+            {Object.entries(filter).map(
+              ([key, value]) =>
+                value && (
+                  <div
+                    key={key}
+                    className='flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
+                  >
+                    <span>{key[0].toUpperCase() + key.slice(1)}:</span>
+                    <span>{value}</span>
+                    <X
+                      size={13}
+                      className='cursor-pointer'
+                      onClick={() => changeFilterByKey(key)}
+                    />
+                  </div>
+                ),
+            )}
+          </div>
+        )}
         <GlobalTable
           type='infinite'
           currentPage={page ?? 1}
