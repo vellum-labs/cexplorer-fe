@@ -77,7 +77,15 @@ export const GlobalSearchProvider: React.FC<GlobalSearchProviderProps> = ({
     locale,
   );
 
-  const categories = getCategories(data?.data);
+  const filteredData = Array.isArray(data?.data)
+    ? searchCategory !== "all" && data.data.length > 0
+      ? data.data.filter(item => item.category === searchCategory)
+      : data.data
+    : typeof data === "undefined"
+      ? []
+      : [data.data];
+
+  const categories = data?.data ? getCategories(filteredData) : undefined;
 
   const handleSearchChange = (value: string) => {
     setSearch(value);
@@ -176,11 +184,7 @@ export const GlobalSearchProvider: React.FC<GlobalSearchProviderProps> = ({
     categoriesRef,
     isLoading,
     searchRef,
-    data: Array.isArray(data?.data)
-      ? data.data
-      : typeof data === "undefined"
-        ? []
-        : [data.data],
+    data: filteredData,
     setRecentSearch,
     setSearchCategory,
     handleSearchChange,
