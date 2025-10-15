@@ -200,6 +200,9 @@ export interface MiscConstResponseData {
   epoch_stat: MiscConstResponseDataEpochStat;
   live_stake: number | null;
   load: MiscConstResponseDataLoad;
+  intra: {
+    min_value: number;
+  };
 }
 
 interface MiscNew {
