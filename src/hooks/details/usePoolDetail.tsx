@@ -20,6 +20,7 @@ import { poolRewardsRoaDiff } from "@/utils/poolRewardsRoaDiff";
 import { format, parseISO } from "date-fns";
 import { useState } from "react";
 import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
+import { buildSocialIcons } from "@/utils/buildSocialIcons";
 
 interface UsePoolDetailArgs {
   query: UseQueryResult<PoolDetailResponse, unknown>;
@@ -74,6 +75,9 @@ export const usePoolDetail = ({
     );
   }
 
+  const extended = data?.pool_name?.extended;
+  const socialIcons = buildSocialIcons(extended);
+
   const aboutList: OverviewList = [
     { label: "Name", value: data?.pool_name.name },
     { label: "Ticker", value: data?.pool_name.ticker },
@@ -118,6 +122,27 @@ export const usePoolDetail = ({
     },
   ];
 
+  if (socialIcons.length > 0) {
+    aboutList.push({
+      label: "",
+      value: (
+        <div className='mt-8 flex gap-2'>
+          {socialIcons.map((social, index) => (
+            <a
+              key={index}
+              href={social.url}
+              target='_blank'
+              rel='noopener noreferrer'
+              title={social.alt}
+            >
+              <img src={social.icon} alt={social.alt} width={24} />
+            </a>
+          ))}
+        </div>
+      ),
+    });
+  }
+
   const stakeAndPledgeList: OverviewList = [
     {
       label: "Saturation",
@@ -156,7 +181,7 @@ export const usePoolDetail = ({
     {
       label: "Recent ROA",
       value: data?.stats?.recent?.roa ? (
-        <div className='flex items-center gap-1/2'>
+        <div className='gap-1/2 flex items-center'>
           <span>{data?.stats?.recent?.roa.toFixed(2) + "%"}</span>
           <RoaDiffArrow color={recentRoaDiff} size={22} />
         </div>
@@ -167,7 +192,7 @@ export const usePoolDetail = ({
     {
       label: "Lifetime ROA",
       value: data?.stats.lifetime.roa ? (
-        <div className='flex items-center gap-1/2'>
+        <div className='gap-1/2 flex items-center'>
           <span>{data?.stats.lifetime.roa.toFixed(2) + "%"}</span>
           <RoaDiffArrow color={lifetimeRoaDiff} size={22} />
         </div>
