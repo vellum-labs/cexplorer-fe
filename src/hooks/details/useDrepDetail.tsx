@@ -18,7 +18,8 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { slotToDate } from "@/utils/slotToDate";
 import { format } from "date-fns";
 import { Tooltip } from "@/components/ui/tooltip";
-import { CircleHelp, Info } from "lucide-react";
+import { CircleHelp } from "lucide-react";
+import { DelegatorsLabel } from "@/components/global/DelegatorsLabel";
 
 interface UseDrepDetailArgs {
   query: ReturnType<typeof useFetchDrepDetail>;
@@ -170,16 +171,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
           ),
         },
         {
-          label: (
-            <span className='flex items-center gap-1'>
-              Delegators
-              <Tooltip
-                content={`Only delegations above ${minDelegationAda} ADA are counted.`}
-              >
-                <Info size={14} className='text-grayTextPrimary' />
-              </Tooltip>
-            </span>
-          ),
+          label: <DelegatorsLabel minDelegationAda={minDelegationAda} />,
           value: currentDelegators
             ? formatNumber(currentDelegators)
             : "Unknown",
@@ -230,16 +222,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
           ),
         },
         {
-          label: (
-            <span className='flex items-center gap-1'>
-              Delegators
-              <Tooltip
-                content={`Only delegations above ${minDelegationAda} ADA are counted.`}
-              >
-                <Info size={14} className='text-grayTextPrimary' />
-              </Tooltip>
-            </span>
-          ),
+          label: <DelegatorsLabel minDelegationAda={minDelegationAda} />,
           value: currentDelegators
             ? formatNumber(currentDelegators)
             : Array.isArray(data?.distr) &&
@@ -294,16 +277,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
           ),
         },
         {
-          label: (
-            <span className='flex items-center gap-1'>
-              Delegators
-              <Tooltip
-                content={`Only delegations above ${minDelegationAda} ADA are counted.`}
-              >
-                <Info size={14} className='text-grayTextPrimary' />
-              </Tooltip>
-            </span>
-          ),
+          label: <DelegatorsLabel minDelegationAda={minDelegationAda} />,
           value: currentDelegators
             ? formatNumber(currentDelegators)
             : "Unknown",

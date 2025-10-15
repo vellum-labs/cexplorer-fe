@@ -21,8 +21,7 @@ import { poolRewardsRoaDiff } from "@/utils/poolRewardsRoaDiff";
 import { format, parseISO } from "date-fns";
 import { useState } from "react";
 import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
-import { Tooltip } from "@/components/ui/tooltip";
-import { Info } from "lucide-react";
+import { DelegatorsLabel } from "@/components/global/DelegatorsLabel";
 
 interface UsePoolDetailArgs {
   query: UseQueryResult<PoolDetailResponse, unknown>;
@@ -102,14 +101,7 @@ export const usePoolDetail = ({
         data?.registered && format(parseISO(data?.registered), "dd.MM.yyyy"),
     },
     {
-      label: (
-        <span className='flex items-center gap-1'>
-          Delegators
-          <Tooltip content={`Only delegations above ${minDelegationAda} ADA are counted.`}>
-            <Info size={14} className='text-grayTextPrimary' />
-          </Tooltip>
-        </span>
-      ),
+      label: <DelegatorsLabel minDelegationAda={minDelegationAda} />,
       value: formatNumber(data?.delegators),
     },
     {
