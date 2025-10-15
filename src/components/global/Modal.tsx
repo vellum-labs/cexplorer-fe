@@ -28,6 +28,11 @@ const Modal = ({
     if (modalRef.current) {
       modalRef.current.focus();
     }
+
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "unset";
+    };
   }, []);
 
   useEffect(() => {
