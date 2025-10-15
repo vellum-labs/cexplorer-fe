@@ -270,19 +270,19 @@ export const GovernancePage: FC = () => {
                 className={"text-text-xs"}
                 disabled={true}
               >
-                {formatString(item?.ident?.id, "long")}
+                {formatString(item?.ident?.bech, "long")}
               </Link>
-              <Copy copyText={item?.ident?.id} size={10} />
+              <Copy copyText={item?.ident?.bech} size={10} />
             </div>
           </div>
         );
       },
       jsonFormat: item => {
-        if (!item?.ident?.id) {
+        if (!item?.ident?.bech) {
           return "-";
         }
 
-        return item?.ident?.id;
+        return item?.ident?.bech;
       },
       title: "Name",
       visible: columnsVisibility.gov_action_name,
