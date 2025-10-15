@@ -97,7 +97,7 @@ export const TreasuryDonationPage = () => {
       )}
       <div className='w-full max-w-desktop p-mobile lg:p-desktop lg:pb-0'>
         <div className='mb-2 w-full rounded-l border border-border bg-cardBg p-2'>
-          <div className='flex flex-col gap-2 md:flex-row md:items-center md:justify-between'>
+          <div className='flex flex-col items-center gap-2 md:flex-row md:items-center md:justify-between'>
             <div className='flex items-start gap-2'>
               <Info size={20} className='mt-1/4 shrink-0 text-primary' />
               <div className='flex flex-col gap-1'>
