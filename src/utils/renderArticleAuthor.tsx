@@ -5,6 +5,7 @@ import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 import { Link } from "@tanstack/react-router";
 import { formatString } from "./format/format";
 import { isEmptySocial } from "./user/isEmptySocial";
+import { getNodeText } from "./getNodeText";
 
 export const renderArticleAuthor = (author: User | undefined) => {
   let authorName;
@@ -49,9 +50,9 @@ export const renderArticleAuthor = (author: User | undefined) => {
       </Tooltip>
     );
   }
-  return (
+  return getNodeText(authorName) ? (
     <span className='flex items-center gap-1/2 text-text-sm text-text'>
       By: {authorName}
     </span>
-  );
+  ) : undefined;
 };
