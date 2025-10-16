@@ -14,6 +14,7 @@ import { lovelaceToAda } from "@/utils/lovelaceToAda";
 
 import parse from "html-react-parser";
 import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
+import { Tooltip } from "@/components/ui/tooltip";
 
 interface UseAssetDetailArgs {
   data: ReturnType<typeof useFetchAssetDetail>;
@@ -112,9 +113,37 @@ export const useAssetDetail = ({
   if ((type === "nft" && nftMarket) || (type === "token" && tokenMarket)) {
     overview.splice(2, 0, {
       label: "Price",
-      value: detailData?.dex?.price
-        ? formatSmallValueWithSub((detailData?.dex?.price ?? 0) / 1e6, "₳")
-        : "-",
+      value: detailData?.dex?.price ? (
+        <Tooltip
+          content={
+            <div className='flex items-center gap-1/2'>
+              <span>
+                ₳{" "}
+                {((detailData?.dex?.price ?? 0) / 1e6)
+                  .toFixed(20)
+                  .replace(/\.?0+$/, "")}
+              </span>
+              <Copy
+                copyText={((detailData?.dex?.price ?? 0) / 1e6)
+                  .toFixed(20)
+                  .replace(/\.?0+$/, "")}
+              />
+            </div>
+          }
+        >
+          <div className='text-text-sm text-grayTextPrimary'>
+            {formatSmallValueWithSub(
+              (detailData?.dex?.price ?? 0) / 1e6,
+              "₳ ",
+              0.01,
+              6,
+              4,
+            )}
+          </div>
+        </Tooltip>
+      ) : (
+        "-"
+      ),
     });
     overview.splice(3, 0, {
       label: "Unique wallets",
