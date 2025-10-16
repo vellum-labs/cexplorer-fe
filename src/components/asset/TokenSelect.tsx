@@ -19,9 +19,10 @@ import useDebounce from "@/hooks/useDebounce";
 import type { AddressAsset } from "@/types/addressTypes";
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";
 import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber, formatNumberWithSuffix } from "@/utils/format/format";
 import TextInput from "../global/inputs/TextInput";
 import AssetCell from "./AssetCell";
+import { Tooltip } from "@/components/ui/tooltip";
 
 const Row = React.memo(({ index, style, data }: any) => {
   const item = data[index];
@@ -33,7 +34,11 @@ const Row = React.memo(({ index, style, data }: any) => {
           imageSize={30}
           isNft={item.quantity === 1}
         />
-        <span className='text-text-xs'>{formatNumber(item.quantity)}</span>
+        <Tooltip content={formatNumber(item.quantity)}>
+          <span className='text-text-xs'>
+            {formatNumberWithSuffix(item.quantity)}
+          </span>
+        </Tooltip>
       </CommandItem>
     </div>
   );
@@ -47,16 +52,34 @@ export const TokenSelectCombobox = React.memo(
     const debouncedSearch = useDebounce(search);
 
     const filteredItems = React.useMemo(() => {
-      return items.filter(
-        item =>
-          item.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-          getAssetFingerprint(item.name).includes(
-            debouncedSearch.toLowerCase(),
-          ) ||
-          encodeAssetName(item.name)
-            .toLowerCase()
-            .includes(debouncedSearch.toLowerCase()),
-      );
+      return items
+        .filter(
+          item =>
+            item.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+            getAssetFingerprint(item.name).includes(
+              debouncedSearch.toLowerCase(),
+            ) ||
+            encodeAssetName(item.name)
+              .toLowerCase()
+              .includes(debouncedSearch.toLowerCase()),
+        )
+        .sort((a, b) => {
+          const calculateValue = (item: AddressAsset) => {
+            const decimals = item?.registry?.decimals ?? 0;
+            const quantity = item?.quantity ?? 0;
+            const price = item?.market?.price ?? 0;
+
+            if (!price) return 0;
+
+            const adjustedQuantity = quantity / Math.pow(10, decimals);
+            return adjustedQuantity * price;
+          };
+
+          const valueA = calculateValue(a);
+          const valueB = calculateValue(b);
+
+          return valueB - valueA;
+        });
     }, [debouncedSearch, items]);
 
     const filteredItemsLength = filteredItems.length;

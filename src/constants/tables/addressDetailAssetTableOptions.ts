@@ -15,10 +15,6 @@ export const addressDetailAssetTableOptions: EpochListOptions[] = [
     name: "Policy ID",
   },
   {
-    key: "ticker",
-    name: "Ticker",
-  },
-  {
     key: "price",
     name: "Price",
   },

@@ -106,6 +106,23 @@ export const AssetsTab: FC<AssetsTabProps> = ({
       }
 
       return item;
+    })
+    .sort((a, b) => {
+      const calculateValue = (item: AddressAsset) => {
+        const decimals = item?.registry?.decimals ?? 0;
+        const quantity = item?.quantity ?? 0;
+        const price = item?.market?.price ?? 0;
+
+        if (!price) return 0;
+
+        const adjustedQuantity = quantity / Math.pow(10, decimals);
+        return adjustedQuantity * price;
+      };
+
+      const valueA = calculateValue(a);
+      const valueB = calculateValue(b);
+
+      return valueB - valueA;
     });
 
   const assetTabItems = [
