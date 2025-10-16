@@ -4,7 +4,6 @@ import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 import AdsCarousel from "@/components/global/ads/AdsCarousel";
 import { FileText } from "lucide-react";
 
-// import { useFetchCommitteeList } from "@/services/governance";
 import { useFetchCommitteeDetail } from "@/services/governance";
 import { useFetchConstitutionList } from "@/services/governance";
 
