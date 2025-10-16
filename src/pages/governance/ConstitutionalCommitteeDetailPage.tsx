@@ -4,7 +4,7 @@ import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 import AdsCarousel from "@/components/global/ads/AdsCarousel";
 import { FileText } from "lucide-react";
 
-import { useFetchCommitteeList } from "@/services/governance";
+// import { useFetchCommitteeList } from "@/services/governance";
 import { useFetchCommitteeDetail } from "@/services/governance";
 import { useFetchConstitutionList } from "@/services/governance";
 
@@ -18,7 +18,6 @@ import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
 
 export const ConstituionalCommitteeDetailPage: FC = () => {
   const [clickedUrl, setClickedUrl] = useState<string | undefined>(undefined);
-  const committeeListQuery = useFetchCommitteeList();
   const committeeDetailQuery = useFetchCommitteeDetail();
   const constitutionListQuery = useFetchConstitutionList();
 
@@ -33,9 +32,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
     ) ?? [];
 
   const isLoading =
-    committeeListQuery.isLoading ||
-    committeeDetailQuery.isLoading ||
-    constitutionListQuery.isLoading;
+    committeeDetailQuery.isLoading || constitutionListQuery.isLoading;
 
   const tabs = [
     {
@@ -58,7 +55,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
       title='Constitutional Committee'
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>Governance</span>,
+          label: <span className='pt-1/2 inline'>Governance</span>,
           link: "/gov",
         },
         { label: "Constitutional committee" },
@@ -79,7 +76,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
                 About
               </h3>
 
-              <div className='flex items-center justify-start text-text-sm'>
+              <div className='text-text-sm flex items-center justify-start'>
                 <span className='min-w-[150px] text-grayTextSecondary'>
                   Members
                 </span>
@@ -89,7 +86,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
                 </span>
               </div>
 
-              <div className='flex items-center justify-start text-text-sm'>
+              <div className='text-text-sm flex items-center justify-start'>
                 <span className='min-w-[150px] text-grayTextSecondary'>
                   Voting threshold
                 </span>
@@ -107,7 +104,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
             </div>
 
             <div className='bg-bgColor flex w-[456px] flex-grow-0 flex-col gap-1.5 rounded-l border border-border p-3 shadow-sm'>
-              <div className='flex items-center gap-1/2'>
+              <div className='gap-1/2 flex items-center'>
                 <div className='flex h-8 w-8 items-center justify-center'>
                   <FileText size={18} className='text-primary' />
                 </div>
@@ -117,7 +114,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
               </div>
 
               {constitution?.anchor?.data_hash && (
-                <div className='break-all text-text-sm font-semibold text-textPrimary'>
+                <div className='text-text-sm text-textPrimary break-all font-semibold'>
                   {constitution.anchor.data_hash}
                 </div>
               )}
@@ -127,7 +124,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
                   href={transformAnchorUrl(constitution.anchor.url)}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='break-all text-text-sm text-primary'
+                  className='text-text-sm break-all text-primary'
                   onClick={e => {
                     e.preventDefault();
                     const transformedUrl = transformAnchorUrl(
