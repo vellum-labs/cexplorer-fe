@@ -81,21 +81,21 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
         <p>Calculating</p>
       ) : (
         <TotalSumWithRates
-          sum={lovelaceToAdaWithRates(data[0].balance, curr)}
-          ada={data[0].balance}
+          sum={lovelaceToAdaWithRates(data?.[0]?.balance, curr)}
+          ada={data?.[0]?.balance}
         />
       ),
     },
-    data[0].stake?.balance?.live
+    data?.[0]?.stake?.balance?.live
       ? {
           label: "Live Stake",
-          value: <AdaWithTooltip data={data[0].stake.balance.live} />,
+          value: <AdaWithTooltip data={data?.[0]?.stake.balance.live} />,
         }
       : undefined,
-    data[0].stake?.balance?.active
+    data?.[0]?.stake?.balance?.active
       ? {
           label: "Active Stake",
-          value: <AdaWithTooltip data={data[0].stake.balance.active} />,
+          value: <AdaWithTooltip data={data?.[0]?.stake.balance.active} />,
         }
       : undefined,
     {
@@ -103,7 +103,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
       value: isRecync ? (
         <p>Currently unavailable</p>
       ) : (
-        <DateCell time={data[0].activity.recent} />
+        <DateCell time={data?.[0]?.activity?.recent} />
       ),
     },
     { label: "Private name", value: <AddCustomLabel address={address} /> },
@@ -159,7 +159,9 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
             >
               {data[0]?.vote?.drep?.data?.given_name &&
                 data[0]?.vote?.drep?.data?.given_name}
-              <span className='text-text-sm text-primary'>Always no confidence</span>
+              <span className='text-text-sm text-primary'>
+                Always no confidence
+              </span>
             </Link>
           ) : (
             <AttributeDropdown
@@ -349,9 +351,9 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
         title='Overview'
         overviewList={overviewList}
         endContent={
-          data[0].asset &&
+          data?.[0]?.asset &&
           data[0].asset.length > 0 && (
-            <TokenSelectCombobox className='mb-1' items={data[0].asset} />
+            <TokenSelectCombobox className='mb-1' items={data?.[0]?.asset} />
           )
         }
         className=''
