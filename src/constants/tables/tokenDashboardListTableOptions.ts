@@ -22,6 +22,10 @@ export const tokenDashboardListTableOptions: TokenDashboardOptions[] = [
     name: "Price",
   },
   {
+    key: "change_24h",
+    name: "24h Change",
+  },
+  {
     key: "volume",
     name: "Volume",
   },
