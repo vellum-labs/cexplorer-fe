@@ -20,6 +20,8 @@ interface Props {
   className?: string;
   enableHover?: boolean;
   stakeKey?: string;
+  forceHighlight?: boolean;
+  highlightStakeKey?: boolean;
 }
 
 const AddressCell = ({
@@ -28,6 +30,8 @@ const AddressCell = ({
   className,
   enableHover = false,
   stakeKey,
+  forceHighlight = false,
+  highlightStakeKey = false,
 }: Props) => {
   const isStake = address.includes("stake");
   const { hoverValue, setHoverValue } = useHoverHighlightState();
@@ -44,10 +48,10 @@ const AddressCell = ({
   };
 
   const handleMouseLeave = () => {
-    setHoverValue(null);
+    if (!forceHighlight) setHoverValue(null);
   };
 
-  const isHighlighted = hoverValue === address;
+  const isHighlighted = forceHighlight || hoverValue === address;
 
   return (
     <>
@@ -92,7 +96,16 @@ const AddressCell = ({
           className={`${label ? "px-[2px] italic" : ""} ${isHighlighted ? "rounded-s bg-hoverHighlight outline outline-1 outline-highlightBorder" : ""} block overflow-hidden overflow-ellipsis whitespace-nowrap ${enableHover ? "px-1/2" : "px-0"} text-text-sm text-primary ${className}`}
           title={label ? address : ""}
         >
-          {label ? label : formatString(address, "longer")}
+          {label ? (
+            label
+          ) : (
+            <>
+              <span className='hidden md:inline'>
+                {formatString(address, "longer")}
+              </span>
+              <span className='md:hidden'>{formatString(address, "shorter")}</span>
+            </>
+          )}
         </Link>
         <Copy copyText={address} />
         {isValidAddress(address) && Address.from(address).stake && (
@@ -113,7 +126,11 @@ const AddressCell = ({
               </div>
             }
           >
-            <KeyRound size={15} color={colors.primary} />
+            <div
+              className={`flex items-center ${highlightStakeKey ? "rounded-s bg-hoverHighlight px-1/2 outline outline-1 outline-highlightBorder" : ""}`}
+            >
+              <KeyRound size={15} color={colors.primary} />
+            </div>
           </Tooltip>
         )}
         {stakeKey && stakeKey !== Address.from(address).rewardAddress && (
