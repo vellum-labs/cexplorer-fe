@@ -91,20 +91,17 @@ export const AssetsTab: FC<AssetsTabProps> = ({
     })
     .filter(item => {
       if (debouncedSearch) {
+        const searchLower = debouncedSearch.toLowerCase();
         return (
-          item.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-          getAssetFingerprint(item.name.toLowerCase()).includes(
-            debouncedSearch.toLowerCase(),
-          ) ||
-          item.registry?.name
-            .toLowerCase()
-            .includes(debouncedSearch.toLowerCase()) ||
-          item.registry?.ticker
-            .toLowerCase()
-            .includes(debouncedSearch.toLowerCase()) ||
-          renderAssetName({ asset: item })
-            .toLowerCase()
-            .includes(debouncedSearch.toLowerCase())
+          item.name.toLowerCase().includes(searchLower) ||
+          getAssetFingerprint(item.name.toLowerCase()).includes(searchLower) ||
+          (item.registry?.name &&
+            typeof item.registry.name === "string" &&
+            item.registry.name.toLowerCase().includes(searchLower)) ||
+          (item.registry?.ticker &&
+            typeof item.registry.ticker === "string" &&
+            item.registry.ticker.toLowerCase().includes(searchLower)) ||
+          renderAssetName({ asset: item }).toLowerCase().includes(searchLower)
         );
       }
 
