@@ -21,7 +21,7 @@ export const renderArticleAuthor = (author: User | undefined) => {
         </Tooltip>
       </span>
     );
-  else if (!author?.profile.name) {
+  else if (!author?.profile?.name) {
     authorName = (
       <Link
         to='/address/$address'
