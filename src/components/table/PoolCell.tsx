@@ -3,6 +3,9 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import { Link } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "../global/Image";
+import { CircleEllipsis } from "lucide-react";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { buildSocialIcons } from "@/utils/buildSocialIcons";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
@@ -22,6 +25,9 @@ const PoolCell = ({
   const id = poolInfo?.id;
   const ticker = poolInfo?.meta?.ticker;
   const name = poolInfo?.meta?.name;
+  const extended = poolInfo?.meta?.extended;
+
+  const socialIcons = buildSocialIcons(extended);
 
   if (!id)
     return (
@@ -60,11 +66,32 @@ const PoolCell = ({
             {name && name}
           </span>
         </Link>
-        <div className='flex w-fit items-center gap-1/2'>
+        <div className='flex w-fit items-center gap-1'>
+          {socialIcons.length > 0 && (
+            <Tooltip
+              content={
+                <div className='flex gap-2'>
+                  {socialIcons.map((social, index) => (
+                    <a
+                      key={index}
+                      href={social.url}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      title={social.alt}
+                    >
+                      <img src={social.icon} alt={social.alt} width={20} />
+                    </a>
+                  ))}
+                </div>
+              }
+            >
+              <CircleEllipsis size={12} className='stroke-grayText' />
+            </Tooltip>
+          )}
           <Link
             to='/pool/$id'
             params={{ id: poolInfo.id }}
-            className={`block w-full overflow-hidden text-ellipsis whitespace-nowrap ${ticker ? "text-text-xs" : "text-[13px]"} text-primary`}
+            className={`overflow-hidden text-ellipsis whitespace-nowrap ${ticker ? "text-text-xs" : "text-[13px]"} text-primary`}
           >
             {cropPoolHash ? formatString(poolInfo.id, "long") : poolInfo.id}
           </Link>

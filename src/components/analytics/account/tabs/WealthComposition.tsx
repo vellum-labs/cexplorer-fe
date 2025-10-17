@@ -9,35 +9,23 @@ import { useFetchMiscBasic } from "@/services/misc";
 import type { TableColumns } from "@/types/tableTypes";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { getAnimalImageByName } from "@/utils/getAnimalImageByName";
+import { getAnimalRangeByName } from "@/utils/address/getAnimalRangeByName";
 import { useWindowDimensions } from "@vellumlabs/cexplorer-sdk";
 import EChartsReact from "echarts-for-react";
 import { useEffect, useState } from "react";
+import type { AnimalName } from "@/constants/animals";
+import { ANIMAL_ORDER, isAnimalName } from "@/constants/animals";
+import { formatAnimalLabel } from "@/utils/formatAnimalLabel";
 
-const ranges = {
-  plankton: "₳ 0 - ₳ 10",
-  shrimp: "₳ 10 - ₳ 1K",
-  crab: "₳ 1K - ₳ 5K",
-  fish: "₳ 5K - ₳ 25K",
-  tuna: "₳ 25K - ₳ 100K",
-  dolphin: "₳ 100K - ₳ 250K",
-  shark: "₳ 250K - ₳ 1M",
-  whale: "₳ 1M - ₳ 5M",
-  humpback: "₳ 5M - ₳ 20M",
-  leviathan: "₳ 20M+",
-};
+interface AnimalStats {
+  count: number;
+  sum: number;
+}
 
-const sortingOrder = [
-  "plankton",
-  "shrimp",
-  "crab",
-  "fish",
-  "tuna",
-  "dolphin",
-  "shark",
-  "whale",
-  "humpback",
-  "leviathan",
-];
+interface WealthCompositionItem {
+  name: AnimalName;
+  stats: AnimalStats;
+}
 
 export const WealthComposition = () => {
   const { data: basicData } = useFetchMiscBasic(true);
@@ -46,73 +34,61 @@ export const WealthComposition = () => {
   const query = useFetchWealthComposition();
   const { width } = useWindowDimensions();
   const [radius, setRadius] = useState<string[]>(["50%", "70%"]);
-  const [arrayData, setArrayData] = useState<
-    Record<string, { count: number; sum: number }>[]
-  >([]);
-  const columns: TableColumns<Record<string, { count: number; sum: number }>> =
-    [
-      {
-        key: "wallet_size",
-        render: item => {
-          return (
-            <div className='flex items-center gap-1'>
-              <img src={getAnimalImageByName(Object.keys(item)[0])} />
-              <p>
-                {Object.keys(item)[0].slice(0, 1).toUpperCase() +
-                  Object.keys(item)[0].slice(1)}
-              </p>
-            </div>
-          );
-        },
-        title: "Wallet size",
-        visible: true,
-        widthPx: 60,
+  const [animalData, setAnimalData] = useState<WealthCompositionItem[]>([]);
+  const columns: TableColumns<WealthCompositionItem> = [
+    {
+      key: "wallet_size",
+      render: item => {
+        return (
+          <div className='flex items-center gap-1'>
+            <img src={getAnimalImageByName(item.name) ?? ""} />
+            <p>{formatAnimalLabel(item.name)}</p>
+          </div>
+        );
       },
-      {
-        key: "count",
-        render: item => {
-          return <p>{formatNumber(item[Object.keys(item)[0]].count)}</p>;
-        },
-        title: "Count",
-        visible: true,
-        widthPx: 50,
+      title: "Wallet size",
+      visible: true,
+      widthPx: 60,
+    },
+    {
+      key: "count",
+      render: item => {
+        return <p>{formatNumber(item.stats.count)}</p>;
       },
-      {
-        key: "sum",
-        render: item => {
-          return <AdaWithTooltip data={item[Object.keys(item)[0]].sum} />;
-        },
-        title: "Sum",
-        visible: true,
-        widthPx: 60,
+      title: "Count",
+      visible: true,
+      widthPx: 50,
+    },
+    {
+      key: "sum",
+      render: item => {
+        return <AdaWithTooltip data={item.stats.sum} />;
       },
-      {
-        key: "sumPercentage",
-        render: item => {
-          return (
-            <p>
-              {(
-                (item[Object.keys(item)[0]].sum / circulatingSupply) *
-                100
-              ).toFixed(1)}
-              %
-            </p>
-          );
-        },
-        title: "Sum %",
-        visible: true,
-        widthPx: 60,
+      title: "Sum",
+      visible: true,
+      widthPx: 60,
+    },
+    {
+      key: "sumPercentage",
+      render: item => {
+        return (
+          <p>{((item.stats.sum / circulatingSupply) * 100).toFixed(1)}%</p>
+        );
       },
-      {
-        key: "range",
-        render: item => {
-          return <p>{ranges[Object.keys(item)[0]]}</p>;
-        },
-        title: "Range",
-        visible: true,
-        widthPx: 60,
+      title: "Sum %",
+      visible: true,
+      widthPx: 60,
+    },
+    {
+      key: "range",
+      render: item => {
+        return <p>{getAnimalRangeByName(item.name)}</p>;
       },
-    ];
+      title: "Range",
+      visible: true,
+      widthPx: 60,
+    },
+  ];
 
   const tabs = [
     {
@@ -121,11 +97,11 @@ export const WealthComposition = () => {
       content: (
         <GlobalTable
           type='default'
-          totalItems={arrayData.length}
+          totalItems={animalData.length}
           minContentWidth={700}
           scrollable
           query={query}
-          items={arrayData}
+          items={animalData}
           columns={columns}
         />
       ),
@@ -138,11 +114,11 @@ export const WealthComposition = () => {
         <div className='flex w-full flex-wrap'>
           <div className='h-full w-full basis-[550px] md:w-1/2'>
             <h3>Total supply</h3>
-            <SumPieChart data={arrayData} radius={radius} />
+            <SumPieChart data={animalData} radius={radius} />
           </div>
           <div className='h-full w-full basis-[550px] md:w-1/2'>
             <h3>Structure</h3>
-            <CountPieChart data={arrayData} radius={radius} />
+            <CountPieChart data={animalData} radius={radius} />
           </div>
         </div>
       ),
@@ -163,17 +139,20 @@ export const WealthComposition = () => {
   useEffect(() => {
     const data = query.data?.data ?? {};
     if (Object.keys(data).length) {
-      const arrayData: Record<string, { count: number; sum: number }>[] = [];
-      Object.keys(data).forEach(key => {
-        arrayData.push({ [key]: data[key] });
-        arrayData.sort((a, b) => {
-          return (
-            sortingOrder.indexOf(Object.keys(a)[0]) -
-            sortingOrder.indexOf(Object.keys(b)[0])
-          );
+      const items = Object.keys(data)
+        .filter(isAnimalName)
+        .map(animal => {
+          const name = animal as AnimalName;
+          return {
+            name,
+            stats: data[name] as AnimalStats,
+          };
+        })
+        .sort((a, b) => {
+          return ANIMAL_ORDER.indexOf(a.name) - ANIMAL_ORDER.indexOf(b.name);
         });
-      });
-      setArrayData(arrayData);
+
+      setAnimalData(items);
     }
   }, [query.data?.data]);
 
@@ -207,15 +186,13 @@ const SumPieChart = ({
   data,
   radius,
 }: {
-  data: Record<string, { count: number; sum: number }>[];
+  data: WealthCompositionItem[];
   radius: string[];
 }) => {
   const { textColor, bgColor } = useGraphColors();
   const pieData = data.map(item => ({
-    value: item[Object.keys(item)[0]].sum,
-    name:
-      Object.keys(item)[0].slice(0, 1).toUpperCase() +
-      Object.keys(item)[0].slice(1),
+    value: item.stats.sum,
+    name: formatAnimalLabel(item.name),
   }));
 
   const option: ReactEChartsProps["option"] = {
@@ -273,15 +250,13 @@ const CountPieChart = ({
   data,
   radius,
 }: {
-  data: Record<string, { count: number; sum: number }>[];
+  data: WealthCompositionItem[];
   radius?: string[];
 }) => {
   const { textColor, bgColor } = useGraphColors();
   const pieData = data.map(item => ({
-    value: item[Object.keys(item)[0]].count,
-    name:
-      Object.keys(item)[0].slice(0, 1).toUpperCase() +
-      Object.keys(item)[0].slice(1),
+    value: item.stats.count,
+    name: formatAnimalLabel(item.name),
   }));
 
   const option: ReactEChartsProps["option"] = {

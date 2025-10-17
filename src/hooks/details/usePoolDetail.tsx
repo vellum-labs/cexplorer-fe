@@ -22,6 +22,7 @@ import { format, parseISO } from "date-fns";
 import { useState } from "react";
 import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
 import { DelegatorsLabel } from "@/components/global/DelegatorsLabel";
+import { buildSocialIcons } from "@/utils/buildSocialIcons";
 
 interface UsePoolDetailArgs {
   query: UseQueryResult<PoolDetailResponse, unknown>;
@@ -82,6 +83,8 @@ export const usePoolDetail = ({
   const minDelegationAda = miscConst?.intra?.min_value
     ? (miscConst.intra.min_value / 1_000_000).toFixed(0)
     : "5";
+  const extended = data?.pool_name?.extended;
+  const socialIcons = buildSocialIcons(extended);
 
   const aboutList: OverviewList = [
     { label: "Name", value: data?.pool_name.name },
@@ -129,6 +132,27 @@ export const usePoolDetail = ({
       ),
     },
   ];
+
+  if (socialIcons.length > 0) {
+    aboutList.push({
+      label: "",
+      value: (
+        <div className='mt-8 flex gap-2'>
+          {socialIcons.map((social, index) => (
+            <a
+              key={index}
+              href={social.url}
+              target='_blank'
+              rel='noopener noreferrer'
+              title={social.alt}
+            >
+              <img src={social.icon} alt={social.alt} width={24} />
+            </a>
+          ))}
+        </div>
+      ),
+    });
+  }
 
   const stakeAndPledgeList: OverviewList = [
     {
