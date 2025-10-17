@@ -33,6 +33,10 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import { alphabetWithNumbers } from "@/constants/alphabet";
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
+import { PriceAdaSmallAmount } from "@/components/global/PriceAdaSmallAmount";
+import { PriceSparkline } from "@/components/charts/PriceSparkline";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { AlertCircle, TrendingUp, TrendingDown } from "lucide-react";
 
 type Volume = "1d" | "1m" | "1w" | "2w" | "3m";
 
@@ -48,6 +52,7 @@ export const TokenDashboardTokenTab: FC = () => {
 
   const [totalItems, setTotalItems] = useState<number>(0);
   const [selectedItem, setSelectedItem] = useState<Volume>("1d");
+  const [changeTimeframe, setChangeTimeframe] = useState<"24h" | "7d">("24h");
 
   const {
     columnsOrder,
@@ -192,19 +197,32 @@ export const TokenDashboardTokenTab: FC = () => {
     {
       key: "price",
       render: item => {
-        const [ada, usd] = calculateAdaPriceWithHistory(
-          item.price ? item.price * 1e6 : 0,
-          curr,
-        );
+        const priceInAda = item.price ?? 0;
+        const [ada, usd] = calculateAdaPriceWithHistory(priceInAda, curr);
+        const liquidity = item.liquidity ?? null;
+        const hasLowLiquidity =
+          liquidity !== null && liquidity > 0 && liquidity < 10_000_000_00;
 
         return currency === "ada" ? (
-          <p title={ada} className='text-right'>
-            <AdaWithTooltip data={item.price} />
-          </p>
+          <div className='flex w-full items-center justify-end gap-1'>
+            <PriceAdaSmallAmount price={priceInAda ? priceInAda : null} />
+            {hasLowLiquidity && (
+              <Tooltip content='Low liquidity (< 1000 ADA)'>
+                <AlertCircle size={14} className='text-yellow-500' />
+              </Tooltip>
+            )}
+          </div>
         ) : (
-          <p title={ada} className='text-right'>
-            {currencySigns["usd"]} {formatNumberWithSuffix(usd)}
-          </p>
+          <div className='flex w-full items-center justify-end gap-1'>
+            <p title={ada} className='text-right'>
+              {currencySigns["usd"]} {formatNumberWithSuffix(usd)}
+            </p>
+            {hasLowLiquidity && (
+              <Tooltip content='Low liquidity (< 1000 ADA)'>
+                <AlertCircle size={14} className='text-yellow-500' />
+              </Tooltip>
+            )}
+          </div>
         );
       },
       title: (
@@ -225,6 +243,55 @@ export const TokenDashboardTokenTab: FC = () => {
       ),
       visible: columnsVisibility.price,
       widthPx: 80,
+    },
+    {
+      key: "change_24h",
+      render: item => {
+        const histData = item?.stat?.hist;
+
+        const requiredLength = changeTimeframe === "24h" ? 2 : 8;
+        if (!histData || histData.length < requiredLength) {
+          return <p className='text-right'>-</p>;
+        }
+
+        const currentPrice = histData[0]?.close;
+        const pastPriceIndex = changeTimeframe === "24h" ? 1 : 7;
+        const pastPrice = histData[pastPriceIndex]?.close;
+
+        if (!currentPrice || !pastPrice) {
+          return <p className='text-right'>-</p>;
+        }
+
+        const changePercent = ((currentPrice - pastPrice) / pastPrice) * 100;
+        const isPositive = changePercent >= 0;
+
+        return (
+          <div className='flex items-center justify-end gap-1'>
+            {isPositive ? (
+              <TrendingUp size={16} className='text-greenText' />
+            ) : (
+              <TrendingDown size={16} className='text-redText' />
+            )}
+            <span className={isPositive ? "text-greenText" : "text-redText"}>
+              {changePercent.toFixed(2)}%
+            </span>
+          </div>
+        );
+      },
+      title: (
+        <p
+          className='flex w-full cursor-pointer justify-end'
+          onClick={() =>
+            setChangeTimeframe(prev => (prev === "24h" ? "7d" : "24h"))
+          }
+        >
+          <span className='text-primary'>{changeTimeframe}</span>
+          <span>&nbsp;</span>
+          <span>Change</span>
+        </p>
+      ),
+      visible: columnsVisibility.change_24h,
+      widthPx: 60,
     },
     {
       key: "volume",
@@ -282,10 +349,17 @@ export const TokenDashboardTokenTab: FC = () => {
     },
     {
       key: "last_week",
-      render: () => null,
+      render: item => {
+        const histData = item?.stat?.hist;
+
+        if (!histData || histData.length === 0) {
+          return <span className='text-text-xs text-grayTextPrimary'>-</span>;
+        }
+        return <PriceSparkline data={histData} width={240} height={40} />;
+      },
       title: <span>Last 7 days</span>,
       visible: columnsVisibility.last_week,
-      widthPx: 40,
+      widthPx: 120,
     },
   ];
 

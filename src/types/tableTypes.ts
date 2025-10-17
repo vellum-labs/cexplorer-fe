@@ -596,6 +596,7 @@ export interface DeFiTokenTableColumns {
   order: boolean;
   token: boolean;
   price: boolean;
+  change_24h: boolean;
   volume: boolean;
   liquidity: boolean;
   age: boolean;

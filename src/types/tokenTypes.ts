@@ -63,6 +63,11 @@ interface DeFiTokenList {
       "7d": number | null;
     };
     today: number | null;
+    hist?: Array<{
+      date: string;
+      close: number;
+    }>;
+    volume?: number;
   };
   is_verified: boolean;
   price: number;
