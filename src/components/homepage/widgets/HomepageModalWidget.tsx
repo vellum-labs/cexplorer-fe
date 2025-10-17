@@ -7,7 +7,7 @@ import TableSearchInput from "@/components/global/inputs/SearchInput";
 import { WidgetTypes } from "@/types/widgetTypes";
 
 import { useEffect, useState } from "react";
-import useDebounce from "@/hooks/useDebounce";
+import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscValidate } from "@/services/misc";
 import { useHomepageStore } from "@/stores/homepageStore";
 interface HomepageModalWidgetProps {
@@ -115,7 +115,7 @@ export const HomepageModalWidget: FC<HomepageModalWidgetProps> = ({
 
   return (
     <div
-      className={`relative h-[150px] w-[300px] cursor-pointer rounded-lg`}
+      className={`rounded-lg relative h-[150px] w-[300px] cursor-pointer`}
       onClick={handleCard}
     >
       <div

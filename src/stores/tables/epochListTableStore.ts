@@ -1,6 +1,6 @@
 import type { EpochListColumns, EpochTableOptions } from "@/types/tableTypes";
 
-import { handlePersistStore } from "../../lib/handlePersistStore";
+import { handlePersistStore } from "@vellumlabs/cexplorer-sdk";
 
 export const useEpochListTableStore = (storeKey?: string) =>
   handlePersistStore<

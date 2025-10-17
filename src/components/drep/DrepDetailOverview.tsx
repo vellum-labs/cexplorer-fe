@@ -2,7 +2,7 @@ import type { useFetchDrepDetail } from "@/services/drep";
 import type { FC } from "react";
 
 import { OverviewCard } from "../global/cards/OverviewCard";
-import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 import { useDrepDetail } from "@/hooks/details/useDrepDetail";
 

@@ -5,15 +5,15 @@ import { ArrowRight, Check, Ellipsis, X, Route } from "lucide-react";
 import { dexConfig } from "@/constants/dexConfig";
 
 import { Link } from "@tanstack/react-router";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "../global/Image";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
 import { ADATokenName } from "@/constants/currencies";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { AssetTicker } from "./AssetTicker";
-import { formatNumberWithSuffix } from "@/utils/format/format";
+import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 import { SwapTypeBadge } from "./SwapTypeBadge";
 import { getAssetImage } from "@/utils/asset/getAssetImage";
 
@@ -100,6 +100,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                   ) : (
                     <AssetTicker
                       tokenName={aggregatedData?.pair?.tokenIn ?? ""}
+                      registry={aggregatedData?.pair?.tokenInRegistry}
                     />
                   )}
                 </span>
@@ -117,6 +118,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                   ) : (
                     <AssetTicker
                       tokenName={aggregatedData?.pair?.tokenOut ?? ""}
+                      registry={aggregatedData?.pair?.tokenOutRegistry}
                     />
                   )}
                 </span>
@@ -175,7 +177,10 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                               "ADA" ? (
                                 "ADA"
                               ) : (
-                                <AssetTicker tokenName={order.token_in.name} />
+                                <AssetTicker
+                                  tokenName={order.token_in.name}
+                                  registry={order.token_in.registry}
+                                />
                               )}
                             </span>
                           </Tooltip>
@@ -191,7 +196,10 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                               "ADA" ? (
                                 "ADA"
                               ) : (
-                                <AssetTicker tokenName={order.token_out.name} />
+                                <AssetTicker
+                                  tokenName={order.token_out.name}
+                                  registry={order.token_out.registry}
+                                />
                               )}
                             </span>
                           </Tooltip>

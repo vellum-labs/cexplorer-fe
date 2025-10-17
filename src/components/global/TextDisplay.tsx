@@ -1,4 +1,4 @@
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   text: string;
@@ -23,7 +23,7 @@ export const TextDisplay = ({
         </div>
       )}
       <p
-        className={`thin-scrollbar break-all font-mono text-text-xs font-medium ${contents ? "max-h-full" : "max-h-28 w-full overflow-scroll rounded-s border border-border bg-background p-1"}`}
+        className={`thin-scrollbar font-mono break-all text-text-xs font-medium ${contents ? "max-h-full" : "max-h-28 w-full overflow-scroll rounded-s border border-border bg-background p-1"}`}
       >
         {text}
       </p>

@@ -1,4 +1,4 @@
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import Dollar from "@/resources/images/dollar.svg";
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";
 import { Link, type ReactNode } from "@tanstack/react-router";

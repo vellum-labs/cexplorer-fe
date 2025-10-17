@@ -3,7 +3,7 @@ import ReactECharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import type { ThresholdsMilestone } from "@/types/governanceTypes";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
 import { useMiscConst } from "@/hooks/useMiscConst";

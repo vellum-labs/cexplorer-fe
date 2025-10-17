@@ -4,12 +4,12 @@ import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
 import { JsonDisplay } from "@/components/global/JsonDisplay";
 import GlobalTable from "@/components/table/GlobalTable";
 
-import useDebounce from "@/hooks/useDebounce";
+import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import { useFetchDatumDetail } from "@/services/datum";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 
 import { convertConstrToObject } from "@/utils/convertConstrToObject";
 import { blake2bHex } from "blakejs";

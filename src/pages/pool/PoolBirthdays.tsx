@@ -1,5 +1,5 @@
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
 import PoolCell from "@/components/table/PoolCell";
@@ -13,9 +13,9 @@ import { useFetchPoolBirthdays } from "@/services/pools";
 import { usePoolBirthdaysTableStore } from "@/stores/tables/poolBirthdaysTableStore";
 import { useEffect, useState } from "react";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import DateCell from "@/components/table/DateCell";
-import { formatNumber } from "@/utils/format/format";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { formatOrdinalSuffix } from "@/utils/format/formatOrdinalSuffix";
 import { format, parse, parseISO } from "date-fns";
 import { PageBase } from "@/components/global/pages/PageBase";

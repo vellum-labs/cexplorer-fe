@@ -16,7 +16,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 export const AveragePool: FC = () => {
   const [selectedItem, setSelectedItem] = useState<GraphTimePeriod>(

@@ -5,7 +5,7 @@ import { fetchWatchlist, fetchAccountList } from "@/services/user";
 import { useWatchlistStore } from "@/stores/watchlistStore";
 import { Star } from "lucide-react";
 import { useEffect, useState } from "react";
-import Button from "../Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import Modal from "../Modal";
 
 interface Props {
@@ -167,7 +167,7 @@ export const WatchlistStar = ({
       )}
       {showRemoveModal && (
         <Modal onClose={() => setShowRemoveModal(false)}>
-          <p className='text-text-sm mt-4'>
+          <p className='mt-4 text-text-sm'>
             Do you wish to remove this item from your watchlist?
           </p>
           <div className='mt-3 flex w-full justify-between'>
@@ -191,10 +191,10 @@ export const WatchlistStar = ({
       {showOptionsModal && (
         <Modal onClose={() => setShowOptionsModal(false)}>
           <div className='text-center'>
-            <h3 className='text-text-lg mb-2 font-semibold'>
+            <h3 className='mb-2 text-text-lg font-semibold'>
               {isStakeKeyInWatchlist ? "Manage Watchlist" : "Add to Watchlist"}
             </h3>
-            <p className='text-text-sm mb-3 text-grayTextPrimary'>
+            <p className='mb-3 text-text-sm text-grayTextPrimary'>
               {isStakeKeyInWatchlist
                 ? "Choose an action for your watchlist:"
                 : "Choose what to add to your watchlist:"}

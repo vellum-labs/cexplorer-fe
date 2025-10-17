@@ -4,7 +4,7 @@ import { AssetsTab } from "@/components/address/tabs/AssetsTab";
 import { RewardsTab } from "@/components/address/tabs/RewardsTab";
 import { UTXOTab } from "@/components/address/tabs/UTXOTab";
 import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import Tabs from "@/components/global/Tabs";
 import { QRCodeSVG } from "qrcode.react";
 import { type FC } from "react";
@@ -12,12 +12,12 @@ import { TxListPage } from "../tx/TxListPage";
 
 import { Address } from "@/utils/address/getStakeAddress";
 
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { getRouteApi, useSearch } from "@tanstack/react-router";
 
 import AdaHandleBadge from "@/components/global/badges/AdaHandleBadge";
 import { WatchlistSection } from "@/components/global/watchlist/WatchlistSection";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { UserBadge } from "@/components/user/UserBadge";
 import { useFetchAddressDetail } from "@/services/address";
 import { useNotFound } from "@/stores/useNotFound";

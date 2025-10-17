@@ -3,9 +3,9 @@ import type { PoolBlockTableColumns, TableColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
 import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
-import Dropdown from "@/components/global/dropdowns/Dropdown";
+import { Dropdown } from "@vellumlabs/cexplorer-sdk";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import PoolCell from "@/components/table/PoolCell";
 import { CircleAlert } from "lucide-react";
 
@@ -13,10 +13,10 @@ import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchAnalyticsPoolBlock } from "@/services/analytics";
 import { useFetchMiscBasic } from "@/services/misc";
 import { usePoolsIssuesMissedBlocksTableStore } from "@/stores/tables/poolIssuesMissedBlocksTableStore";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useCallback, useEffect, useState } from "react";
 
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 import { poolIssuesMissedBlocksTableOptions } from "@/constants/tables/poolIssuesMissedBlocksTableOptions";
 

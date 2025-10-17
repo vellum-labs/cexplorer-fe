@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
 
-import Button from "@/components/global/Button";
-import Copy from "@/components/global/Copy";
+import { Button } from "@vellumlabs/cexplorer-sdk";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Component } from "react";
 
 import DiscordLogo from "../../resources/images/icons/discordSecondary.svg";
 import { ArrowLeft, CircleAlert } from "lucide-react";
 
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { SafeNavbar } from "@/components/layouts/safe/SafeNavbar";
 
 interface ErrorBoundaryProps {

@@ -6,7 +6,7 @@ import type { ReactEChartsProps } from "@/lib/ReactCharts";
 import { GraphTimePeriod } from "@/types/graphTypes";
 import { useEffect, useState, useMemo } from "react";
 import { useGraphColors } from "../useGraphColors";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
 

@@ -8,22 +8,22 @@ import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import type { PoolInfo } from "@/types/poolTypes";
 import { Address } from "@/utils/address/getStakeAddress";
 import { parseShelleyAddress } from "@/utils/address/parseShelleyAddress";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { Link } from "@tanstack/react-router";
 import { TokenSelectCombobox } from "../asset/TokenSelect";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import AdaHandleBadge from "../global/badges/AdaHandleBadge";
 import { AddressTypeInitialsBadge } from "../global/badges/AddressTypeInitialsBadge";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TotalSumWithRates } from "../global/TotalSumWithRates";
-import DateCell from "../table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import PoolCell from "../table/PoolCell";
 import { AddCustomLabel } from "./AddCustomLabel";
 import AddressCell from "./AddressCell";
 import { AttributeDropdown } from "../global/AttributeDropdown";
 import { ChevronRight } from "lucide-react";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 
 interface AddressDetailOverviewProps {
@@ -159,7 +159,9 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
             >
               {data[0]?.vote?.drep?.data?.given_name &&
                 data[0]?.vote?.drep?.data?.given_name}
-              <span className='text-text-sm text-primary'>Always no confidence</span>
+              <span className='text-text-sm text-primary'>
+                Always no confidence
+              </span>
             </Link>
           ) : (
             <AttributeDropdown

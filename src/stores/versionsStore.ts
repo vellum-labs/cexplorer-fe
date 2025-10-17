@@ -1,4 +1,4 @@
-import { handlePersistStore } from "../lib/handlePersistStore";
+import { handlePersistStore } from "@vellumlabs/cexplorer-sdk";
 
 export const useVersionStore = handlePersistStore<
   { rateVersion: number; constVersion: number; storageVersion: number },

@@ -2,7 +2,7 @@ import type { FC } from "react";
 
 import { AdaPriceTable } from "@/components/ada-price/AdaPriceTable";
 import { AdaPriceGraph } from "@/components/ada-price/graphs/AdaPriceGraph";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 
 import { useMiscRate } from "@/hooks/useMiscRate";
@@ -18,13 +18,13 @@ export const AdaPrice: FC = () => {
     <PageBase
       metadataTitle='adaPrice'
       breadcrumbItems={[{ label: "Ada price" }]}
-      title={<div className='gap-1/2 flex items-center'>ADA Price</div>}
+      title={<div className='flex items-center gap-1/2'>ADA Price</div>}
     >
       <div className='flex w-full flex-col pt-4'>
         {graphRates.length ? (
           <section className='flex w-full flex-col items-center pb-3'>
             <div className='flex w-full max-w-desktop items-center justify-between px-mobile md:px-desktop'>
-              <div className='rounded-m flex w-full flex-col justify-between gap-3 lg:flex-row'>
+              <div className='flex w-full flex-col justify-between gap-3 rounded-m lg:flex-row'>
                 <AdaPriceTable />
                 <AdaPriceGraph graphRates={graphRates} />
               </div>
@@ -33,7 +33,7 @@ export const AdaPrice: FC = () => {
         ) : (
           <section className='flex w-full flex-col items-center pb-5'>
             <div className='flex w-full max-w-desktop items-center justify-between px-mobile md:px-desktop'>
-              <div className='flex w-full flex-col items-center justify-between gap-6 rounded-lg lg:flex-row lg:items-start'>
+              <div className='rounded-lg flex w-full flex-col items-center justify-between gap-6 lg:flex-row lg:items-start'>
                 <LoadingSkeleton
                   width='1400px'
                   height='400px'

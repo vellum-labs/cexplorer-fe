@@ -14,14 +14,14 @@ import type { useFetchStakeDetail } from "@/services/stake";
 import {
   formatNumber,
   formatNumberWithSuffix,
-} from "@/utils/format/format";
+} from "@vellumlabs/cexplorer-sdk";
 
 import AssetCell from "../asset/AssetCell";
 import { configJSON } from "@/constants/conf";
 import { PolicyCell } from "../policy/PolicyCell";
 import { PriceAdaSmallAmount } from "@/components/global/PriceAdaSmallAmount";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import { Tooltip } from "@/components/ui/tooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { AlertCircle } from "lucide-react";
 
 interface AddressAssetTableProps {

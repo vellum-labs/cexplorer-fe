@@ -5,7 +5,7 @@ import { Fragment } from "react";
 import { ChevronLeft } from "lucide-react";
 
 import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { SettingsMobileItemTheme } from "./SettingsMobileItemTheme";
 import { SettingsMobileItemLanguage } from "./SettingsMobileItemLanguage";
 import { SettingsMobileItemCurrency } from "./SettingsMobileItemCurrency";

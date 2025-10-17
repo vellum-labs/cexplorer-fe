@@ -1,5 +1,5 @@
 import { colors } from "@/constants/colors";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Search, X } from "lucide-react";
 import type { KeyboardEvent } from "react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
@@ -171,13 +171,15 @@ const TableSearchInput = ({
               .map((prefix, index) => (
                 <button
                   key={index}
-                  className='flex w-full items-center overflow-hidden text-ellipsis border-b border-border px-1.5 py-1 text-text-sm last:rounded-bl-md last:rounded-br-md last:border-b-0 hover:bg-darker'
+                  className='last:rounded-bl-md last:rounded-br-md flex w-full items-center overflow-hidden text-ellipsis border-b border-border px-1.5 py-1 text-text-sm last:border-b-0 hover:bg-darker'
                   onClick={() => {
                     onchange(`${prefix.name}:${value}`);
                     inputRef.current?.focus();
                   }}
                 >
-                  <span className='text-text-sm font-medium'>{prefix.name}:</span>
+                  <span className='text-text-sm font-medium'>
+                    {prefix.name}:
+                  </span>
                   <span className='ml-1/2'>
                     {value.length > 19 ? formatString(value, "long") : value}
                   </span>

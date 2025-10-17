@@ -3,7 +3,7 @@ import type { FC } from "react";
 
 import { useEffect, useState } from "react";
 
-import { formatDate, toUtcDate } from "@/utils/format/format";
+import { formatDate, toUtcDate } from "@vellumlabs/cexplorer-sdk";
 import { formatRemainingTime } from "@/utils/format/formatRemainingTime";
 import PulseDot from "../global/PulseDot";
 import { configJSON } from "@/constants/conf";

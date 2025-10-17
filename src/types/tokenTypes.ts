@@ -18,6 +18,14 @@ export interface AggregatedSwapData {
     tokenIn: string;
     tokenOut: string;
     isMultiplePairs: boolean;
+    tokenInRegistry?: {
+      ticker?: string;
+      name?: string;
+    } | null;
+    tokenOutRegistry?: {
+      ticker?: string;
+      name?: string;
+    } | null;
   };
 
   totalAmountIn: number;
@@ -104,7 +112,10 @@ export type DeFiTokenListResponse = ResponseCore<{
 
 interface DeFiTokenInOut {
   name: string;
-  registry: null;
+  registry: {
+    ticker?: string;
+    name?: string;
+  } | null;
   stat: null;
 }
 

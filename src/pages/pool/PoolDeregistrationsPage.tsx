@@ -1,9 +1,9 @@
 import { BlockCell } from "@/components/blocks/BlockCell";
 import { EpochCell } from "@/components/epoch/EpochCell";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
-import DateCell from "@/components/table/DateCell";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
 import PoolCell from "@/components/table/PoolCell";
@@ -16,7 +16,7 @@ import type {
   PoolRegistrationsColumns,
   TableColumns,
 } from "@/types/tableTypes";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { formatRemainingTime } from "@/utils/format/formatRemainingTime";

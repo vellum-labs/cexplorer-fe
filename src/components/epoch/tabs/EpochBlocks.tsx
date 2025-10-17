@@ -2,8 +2,8 @@ import type { EpochBlockListColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
-import DateCell from "@/components/table/DateCell";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
 import PoolCell from "@/components/table/PoolCell";
@@ -13,7 +13,7 @@ import { Link, useSearch } from "@tanstack/react-router";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 
 import { epochBlockTableOptions } from "@/constants/tables/epochBlockTableOptions";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { isTextNumeric } from "@/utils/isTextNumeric";
 
 import { useEffect, useState } from "react";

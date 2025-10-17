@@ -1,5 +1,5 @@
 import type { BlockListColumns, TableOptionsCore } from "@/types/tableTypes";
-import { handlePersistStore } from "../../lib/handlePersistStore";
+import { handlePersistStore } from "@vellumlabs/cexplorer-sdk";
 
 export const useBlockListTableStore = (storeKey?: string) =>
   handlePersistStore<
