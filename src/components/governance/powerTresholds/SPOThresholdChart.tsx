@@ -3,7 +3,7 @@ import ReactECharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { CircleHelp } from "lucide-react";
-import { formatNumberWithSuffix } from "@/utils/format/format";
+import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 
 interface SPOThresholdChartProps {

@@ -15,7 +15,7 @@ import GlobalTable from "../table/GlobalTable";
 import PoolCell from "../table/PoolCell";
 import { ArrowRight } from "lucide-react";
 
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { getColumnsSortOrder } from "@/utils/getColumnsSortOrder";
 import { calculateLoyaltyDays, slotToDate } from "@/utils/slotToDate";
 import type {

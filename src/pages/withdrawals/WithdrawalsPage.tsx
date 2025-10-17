@@ -11,7 +11,7 @@ import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
 import { useWithdrawalsTableStore } from "@/stores/tables/withdrawalsTableStore";
 import type { Withdrawal } from "@/types/accountTypes";
 import type { TableColumns, WithdrawalsColumns } from "@/types/tableTypes";
-import { formatNumber, formatTimeAgo } from "@/utils/format/format";
+import { formatNumber, formatTimeAgo } from "@vellumlabs/cexplorer-sdk";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { PageBase } from "@/components/global/pages/PageBase";

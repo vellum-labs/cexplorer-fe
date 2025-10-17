@@ -10,7 +10,7 @@ import { Link } from "@tanstack/react-router";
 
 import AddressCell from "@/components/address/AddressCell";
 import { TotalSumWithRates } from "@/components/global/TotalSumWithRates";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { useGetMarketCurrency } from "../useGetMarketCurrency";
 import { useMiscConst } from "@/hooks/useMiscConst";

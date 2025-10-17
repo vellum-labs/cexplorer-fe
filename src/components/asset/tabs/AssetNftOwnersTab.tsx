@@ -12,7 +12,7 @@ import AddressCell from "@/components/address/AddressCell";
 import { AddressTypeInitialsBadge } from "@/components/global/badges/AddressTypeInitialsBadge";
 import { useSearch } from "@tanstack/react-router";
 import { configJSON } from "@/constants/conf";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 interface AssetNftOwnersTabProps {
   name: number;

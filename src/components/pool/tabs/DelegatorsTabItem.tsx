@@ -17,7 +17,7 @@ import { poolDelegatorsTableOptions } from "@/constants/tables/poolDelegatorsTab
 import { poolStructureTableOptions } from "@/constants/tables/poolStructureTableOptions";
 import { usePoolDelegatorsStructureStore } from "@/stores/tables/poolDelegatorsStructureStore";
 import { usePoolMigrationsTableStore } from "@/stores/tables/poolMigrationsTableStore";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 const DelegatorsTabItem = () => {
   const route = getRouteApi("/pool/$id");

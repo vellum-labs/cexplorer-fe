@@ -27,7 +27,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 
 import { governanceListTableOptions } from "@/constants/tables/governanceActionsListTableOptions";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { getEpochByTime } from "@/utils/getEpochByTime";
 import { GovernanceStatusBadge } from "@/components/global/badges/GovernanceStatusBadge";

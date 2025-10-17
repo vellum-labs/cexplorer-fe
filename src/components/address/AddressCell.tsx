@@ -7,7 +7,7 @@ import { getAnimalRangeByAmount } from "@/utils/address/getAddressAnimalRange";
 import { Address } from "@/utils/address/getStakeAddress";
 import { isValidAddress } from "@/utils/address/isValidAddress";
 import { parseShelleyAddress } from "@/utils/address/parseShelleyAddress";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { Code2, KeyRound } from "lucide-react";
 import { Copy } from "@vellumlabs/cexplorer-sdk";

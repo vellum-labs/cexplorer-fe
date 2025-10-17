@@ -10,7 +10,7 @@ import type {
   EpochSort,
   UpcomingEpochs,
 } from "@/types/epochTypes";
-import { formatDate } from "@/utils/format/format";
+import { formatDate } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { Calendar, CheckCircle } from "lucide-react";
 import { useEffect, useState } from "react";

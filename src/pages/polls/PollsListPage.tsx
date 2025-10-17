@@ -16,7 +16,7 @@ import { useFetchPollList } from "@/services/misc";
 import { useFetchUserInfo } from "@/services/user";
 import type { TableColumns } from "@/types/tableTypes";
 import type { Poll } from "@/types/userTypes";
-import { formatDate } from "@/utils/format/format";
+import { formatDate } from "@vellumlabs/cexplorer-sdk";
 import type { FileRoutesByPath } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import parse from "html-react-parser";

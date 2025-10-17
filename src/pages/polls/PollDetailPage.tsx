@@ -12,7 +12,7 @@ import { useFetchPollList } from "@/services/misc";
 import { useFetchUserInfo, useMutatePollVote } from "@/services/user";
 import { useNotFound } from "@/stores/useNotFound";
 import { useWalletStore } from "@/stores/walletStore";
-import { formatDate } from "@/utils/format/format";
+import { formatDate } from "@vellumlabs/cexplorer-sdk";
 import { getRouteApi } from "@tanstack/react-router";
 import EChartsReact from "echarts-for-react";
 import parse from "html-react-parser";

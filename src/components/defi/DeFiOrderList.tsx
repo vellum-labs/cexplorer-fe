@@ -18,7 +18,10 @@ import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";
 
 import { defiOrderListTableOptions } from "@/constants/tables/defiOrderListTableOptions";
-import { formatNumberWithSuffix, formatString } from "@/utils/format/format";
+import {
+  formatNumberWithSuffix,
+  formatString,
+} from "@vellumlabs/cexplorer-sdk";
 import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
 import { ADATokenName, currencySigns } from "@/constants/currencies";
 
@@ -33,7 +36,7 @@ import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 
 import { addressIcons } from "@/constants/address";
 import { calculateAdaPriceWithHistory } from "@/utils/calculateAdaPriceWithHistory";
-import useDebounce from "@/hooks/useDebounce";
+import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import { TokenPair } from "../dex/TokenPair";
 import { AssetTicker } from "../dex/AssetTicker";
 import { renderAssetName } from "@/utils/asset/renderAssetName";

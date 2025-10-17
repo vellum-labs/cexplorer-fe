@@ -5,7 +5,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { useMiscConst } from "@/hooks/useMiscConst";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import type { ThresholdsMilestone } from "@/types/governanceTypes";
 
 interface PowerThresholdsSPODelegationDonutGraphProps {

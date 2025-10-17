@@ -3,7 +3,7 @@ import { useFetchBlocksList } from "@/services/blocks";
 import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
 import { usePoolBlocksTableStore } from "@/stores/tables/poolBlocksTableStore";
 import type { PoolBlocksColumns } from "@/types/tableTypes";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import TableSettingsDropdown from "../global/dropdowns/TableSettingsDropdown";

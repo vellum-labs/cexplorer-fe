@@ -7,7 +7,7 @@ import {
   useMutateUserApi,
 } from "@/services/user";
 import type { UserApiObject } from "@/types/userTypes";
-import { formatDate, formatNumber } from "@/utils/format/format";
+import { formatDate, formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 import type { FileRoutesByPath } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";

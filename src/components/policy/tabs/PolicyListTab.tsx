@@ -4,7 +4,7 @@ import { type FC } from "react";
 import GlobalTable from "@/components/table/GlobalTable";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { formatString, formatNumber } from "@/utils/format/format";
+import { formatString, formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { useFetchPolicyList } from "@/services/user";
 import type { PolicyData } from "@/types/userTypes";

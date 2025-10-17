@@ -20,7 +20,10 @@ import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import { scriptListInteractionTableOptions } from "@/constants/tables/scriptListInteractionTableOptions";
-import { formatNumber, formatNumberWithSuffix } from "@/utils/format/format";
+import {
+  formatNumber,
+  formatNumberWithSuffix,
+} from "@vellumlabs/cexplorer-sdk";
 import { getPercentageColor } from "@/utils/getPercentageColor";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 

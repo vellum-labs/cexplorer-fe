@@ -15,11 +15,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import useDebounce from "@/hooks/useDebounce";
+import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import type { AddressAsset } from "@/types/addressTypes";
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";
 import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import AssetCell from "./AssetCell";
 

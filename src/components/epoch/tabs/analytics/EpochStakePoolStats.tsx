@@ -3,7 +3,7 @@ import type { FC } from "react";
 
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { CircleHelp } from "lucide-react";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";

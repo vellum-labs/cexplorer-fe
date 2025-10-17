@@ -8,7 +8,7 @@ import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import type { PoolInfo } from "@/types/poolTypes";
 import { Address } from "@/utils/address/getStakeAddress";
 import { parseShelleyAddress } from "@/utils/address/parseShelleyAddress";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { Link } from "@tanstack/react-router";
 import { TokenSelectCombobox } from "../asset/TokenSelect";

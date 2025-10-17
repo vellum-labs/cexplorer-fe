@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { Link } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "../../global/Image";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { alphabetWithNumbers } from "@/constants/alphabet";
 
 interface ConstitutionalCommitteeNameCellProps {

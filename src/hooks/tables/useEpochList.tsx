@@ -17,8 +17,8 @@ import {
   formatNumber,
   formatNumberWithSuffix,
   toUtcDate,
-} from "@/utils/format/format";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+} from "@vellumlabs/cexplorer-sdk";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { Link } from "@tanstack/react-router";
 import { format } from "date-fns";

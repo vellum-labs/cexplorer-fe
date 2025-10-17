@@ -5,7 +5,7 @@ import { CircleHelp, GitCompareArrows } from "lucide-react";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import type { PoolInfo } from "@/types/poolTypes";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { Link } from "@tanstack/react-router";
 import { Image } from "../Image";

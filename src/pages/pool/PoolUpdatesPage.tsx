@@ -20,8 +20,8 @@ import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { formatNumber, formatString } from "@/utils/format/format";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 

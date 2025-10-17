@@ -14,7 +14,7 @@ import { DisplayVoteModal } from "@/components/global/modals/DisplayVoteModal";
 import { drepListTableOptions } from "@/constants/tables/drepListTableOptions";
 
 import { WatchlistFilter } from "@/components/global/watchlist/WatchlistFilter";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 
 import { useDrepList } from "@/hooks/tables/useDrepList";
 import { useDrepListTableStore } from "@/stores/tables/drepListTableStore";

@@ -17,7 +17,7 @@ import {
   formatNumber,
   formatString,
   formatTimeAgo,
-} from "@/utils/format/format";
+} from "@vellumlabs/cexplorer-sdk";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 

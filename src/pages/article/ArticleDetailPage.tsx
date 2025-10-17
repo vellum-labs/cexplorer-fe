@@ -11,7 +11,7 @@ import {
 import { webUrl } from "@/constants/confVariables";
 import { useFetchArticleDetail, useFetchArticleList } from "@/services/article";
 import type { ArticleListData } from "@/types/articleTypes";
-import { formatDate } from "@/utils/format/format";
+import { formatDate } from "@vellumlabs/cexplorer-sdk";
 import { renderArticleAuthor } from "@/utils/renderArticleAuthor";
 import { getRouteApi, Link } from "@tanstack/react-router";
 import parse from "html-react-parser";

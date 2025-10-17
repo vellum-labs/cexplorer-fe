@@ -13,8 +13,11 @@ import type {
 } from "@/types/treasuryTypes";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { findNearestTreasuryRate } from "@/utils/findNearestTreasuryRate";
-import { formatNumber, formatNumberWithSuffix } from "@/utils/format/format";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import {
+  formatNumber,
+  formatNumberWithSuffix,
+} from "@vellumlabs/cexplorer-sdk";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { format } from "date-fns";
 import ReactEcharts from "echarts-for-react";

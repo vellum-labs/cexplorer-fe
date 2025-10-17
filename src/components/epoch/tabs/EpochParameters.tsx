@@ -17,7 +17,7 @@ import { Fragment } from "react";
 import { useEffect, useRef } from "react";
 
 import { colors } from "@/constants/colors";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 interface EpochParametersProps {
   param: EpochParam | undefined;

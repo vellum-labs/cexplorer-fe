@@ -1,6 +1,6 @@
 import { colors } from "@/constants/colors";
 import type { ScriptDetailResponse } from "@/types/scriptTypes";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { FileBarChart, LineChart } from "lucide-react";
 import AdsCarousel from "../global/ads/AdsCarousel";

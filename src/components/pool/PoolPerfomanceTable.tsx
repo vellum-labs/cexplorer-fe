@@ -17,7 +17,7 @@ import { useState, useEffect } from "react";
 import { poolPerfomanceTableOptions } from "@/constants/tables/poolPerfomanceTableOptions";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { useElapsedEpochNumber } from "@/hooks/useElapsedEpochNumber";
 import { Badge } from "../global/badges/Badge";

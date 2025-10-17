@@ -16,7 +16,7 @@ import { Landmark, Route, User } from "lucide-react";
 import { GovernanceStatusBadge } from "@/components/global/badges/GovernanceStatusBadge";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { VoteBadge } from "@/components/global/badges/VoteBadge";
 import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";

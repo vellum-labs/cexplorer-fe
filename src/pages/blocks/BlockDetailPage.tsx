@@ -16,7 +16,7 @@ import { useFetchBlockDetail } from "@/services/blocks";
 import { useFetchMiscBasic, useFetchMiscSearch } from "@/services/misc";
 import { Link, getRouteApi, useNavigate } from "@tanstack/react-router";
 
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { getConfirmations } from "@/utils/getConfirmations";
 
 import { MintedByCard } from "@/components/global/cards/MintedByCard";

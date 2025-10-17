@@ -4,7 +4,7 @@ import { AddressTypeInitialsBadge } from "@/components/global/badges/AddressType
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import type { FC } from "react";
 
-import useDebounce from "@/hooks/useDebounce";
+import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import { useLucidAddressInspector } from "@/hooks/useLucidAddressInspector";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useState } from "react";

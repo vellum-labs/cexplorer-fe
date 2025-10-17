@@ -19,7 +19,7 @@ import Tabs from "@/components/global/Tabs";
 import { useState } from "react";
 import { useFetchDrepDelegatorStats } from "@/services/drep";
 
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { useDrepDelegatorsStructureStore } from "@/stores/tables/drepDelegatorStructureTableStore";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { useGraphColors } from "@/hooks/useGraphColors";

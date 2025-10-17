@@ -13,7 +13,7 @@ import { Badge } from "@/components/global/badges/Badge";
 import { PolicyCell } from "@/components/policy/PolicyCell";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "./useSearchTable";
 

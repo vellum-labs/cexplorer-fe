@@ -2,7 +2,7 @@ import { walletInfos } from "@/constants/wallet";
 import { useConnectWallet } from "@/hooks/useConnectWallet";
 import { useFetchUserInfo } from "@/services/user";
 import { useWalletStore } from "@/stores/walletStore";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Wallet } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@vellumlabs/cexplorer-sdk";

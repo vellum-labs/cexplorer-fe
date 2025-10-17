@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 import { policyDetailOwnerOptions } from "@/constants/tables/policyDetailOwnerTableOptions";
 import type { PolicyDetailOwnerTableColumns } from "@/types/tableTypes";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import AddressCell from "../address/AddressCell";
 import TableSettingsDropdown from "../global/dropdowns/TableSettingsDropdown";
 import ExportButton from "../table/ExportButton";

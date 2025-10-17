@@ -14,7 +14,7 @@ import { useMiscConst } from "../useMiscConst";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { formatWebsiteUrl } from "@/utils/format/formatWebsiteUrl";
 import { poolRewardsRoaDiff } from "@/utils/poolRewardsRoaDiff";
 import { format, parseISO } from "date-fns";

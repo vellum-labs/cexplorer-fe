@@ -20,7 +20,7 @@ import { useEffect, useState } from "react";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "@/components/tx/HashCell";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { calculateLoyaltyDays, slotToDate } from "@/utils/slotToDate";
 import { format } from "date-fns";
 import { ArrowRight } from "lucide-react";

@@ -25,7 +25,7 @@ import { metadataTxListTableOptions } from "@/constants/tables/metadataTxListTab
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 import { findLabel } from "@/utils/findLabel";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { isHex } from "@/utils/isHex";
 import { isTextNumeric } from "@/utils/isTextNumeric";
 import { slotToDate } from "@/utils/slotToDate";

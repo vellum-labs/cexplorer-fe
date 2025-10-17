@@ -1,7 +1,7 @@
 import type { MiscConstResponseData } from "@/types/miscTypes";
 import type { FC } from "react";
 
-import { formatDate, formatNumber, toUtcDate } from "@/utils/format/format";
+import { formatDate, formatNumber, toUtcDate } from "@vellumlabs/cexplorer-sdk";
 import { formatRemainingTime } from "@/utils/format/formatRemainingTime";
 import { useFetchMiscBasic } from "@/services/misc";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";

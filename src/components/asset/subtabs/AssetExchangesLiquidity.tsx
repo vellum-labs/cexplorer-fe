@@ -8,8 +8,8 @@ import ReactEcharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { formatNumber } from "@/utils/format/format";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 interface AssetExchangesLiquidityProps {
   query: ReturnType<typeof useFetchAssetDetail>;

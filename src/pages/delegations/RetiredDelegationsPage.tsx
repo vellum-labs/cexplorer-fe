@@ -18,7 +18,7 @@ import type {
   RetiredDelegationsColumns,
   TableColumns,
 } from "@/types/tableTypes";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { HandCoins, SendToBack, Users } from "lucide-react";
 import { useEffect, useState } from "react";

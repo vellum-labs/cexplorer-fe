@@ -1,6 +1,6 @@
 import { colors } from "@/constants/colors";
 import type { TabItem } from "@/types/commonTypes";
-import { useWindowDimensions } from "@/utils/useWindowsDemensions";
+import { useWindowDimensions } from "@vellumlabs/cexplorer-sdk";
 import { ChevronDown } from "lucide-react";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";

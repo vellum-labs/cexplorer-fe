@@ -5,7 +5,7 @@ import GlobalTable from "@/components/table/GlobalTable";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { useFetchPoolAbout, useFetchPoolUpdate } from "@/services/pools";
 import type { PoolDetailResponseData } from "@/types/poolTypes";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { format } from "date-fns";
 import { Clock, Download } from "lucide-react";

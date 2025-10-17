@@ -15,7 +15,7 @@ import TableSearchInput from "@/components/global/inputs/SearchInput";
 import GlobalTable from "@/components/table/GlobalTable";
 import { HashCell } from "@/components/tx/HashCell";
 import { addressDetailUTXOOptions } from "@/constants/tables/addressDetailUTXOTableOptions";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import { calculateMinUtxo } from "@/utils/calculateUTXOSize";

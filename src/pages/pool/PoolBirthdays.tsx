@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { formatOrdinalSuffix } from "@/utils/format/formatOrdinalSuffix";
 import { format, parse, parseISO } from "date-fns";
 import { PageBase } from "@/components/global/pages/PageBase";

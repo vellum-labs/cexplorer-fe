@@ -10,7 +10,10 @@ import { Link, useSearch } from "@tanstack/react-router";
 import { useFetchDeFiTokenList } from "@/services/token";
 import { useEffect, useState } from "react";
 
-import { formatNumberWithSuffix, formatString } from "@/utils/format/format";
+import {
+  formatNumberWithSuffix,
+  formatString,
+} from "@vellumlabs/cexplorer-sdk";
 import { tokenDashboardListTableOptions } from "@/constants/tables/tokenDashboardListTableOptions";
 import { useTokenDashboardListTableStore } from "@/stores/tables/tokenDashboardListTableStore";
 import { currencySigns } from "@/constants/currencies";

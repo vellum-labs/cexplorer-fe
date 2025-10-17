@@ -25,7 +25,7 @@ import type { CexplorerNftsColumns, TableColumns } from "@/types/tableTypes";
 import type { CexplorerNftsData } from "@/types/userTypes";
 import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
-import { formatString, formatTimeIn } from "@/utils/format/format";
+import { formatString, formatTimeIn } from "@vellumlabs/cexplorer-sdk";
 import type { FileRoutesByPath } from "@tanstack/react-router";
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { Star, X, Zap, Wallet } from "lucide-react";

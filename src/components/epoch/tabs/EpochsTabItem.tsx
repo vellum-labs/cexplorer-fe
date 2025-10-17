@@ -8,7 +8,7 @@ import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "../../table/GlobalTable";
 import ExportButton from "@/components/table/ExportButton";
 
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 import { useEpochListTableStore } from "@/stores/tables/epochListTableStore";
 import { epochListTableOptions } from "@/constants/tables/epochListTableOptions";

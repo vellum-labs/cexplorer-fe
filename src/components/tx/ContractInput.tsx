@@ -3,7 +3,7 @@ import { Fragment, useState, type FC } from "react";
 import { LabelBadge } from "../global/badges/LabelBadge";
 import { PurposeBadge } from "../global/badges/PurposeBadge";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { JsonDisplay } from "../global/JsonDisplay";

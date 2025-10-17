@@ -18,7 +18,7 @@ import AdaHandleBadge from "@/components/global/badges/AdaHandleBadge";
 import { ProBadge } from "@/components/global/badges/ProBadge";
 import { adaHandlePolicy, proPolicy } from "@/constants/confVariables";
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import type { FileRoutesByPath } from "@tanstack/react-router";
 import { getRouteApi, useSearch } from "@tanstack/react-router";
 import { DeFiOrderList } from "@/components/defi/DeFiOrderList";

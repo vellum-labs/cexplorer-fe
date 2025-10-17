@@ -8,7 +8,7 @@ import type { FC } from "react";
 import { txListTableOptions } from "@/constants/tables/txListTableOptions";
 import { useTxList } from "@/hooks/tables/useTxList";
 import { useTxListTableStore } from "@/stores/tables/txListTableStore";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useSearch } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
 

@@ -4,13 +4,13 @@ import ReactEcharts from "echarts-for-react";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
-import { useWindowDimensions } from "@/utils/useWindowsDemensions";
+import { useWindowDimensions } from "@vellumlabs/cexplorer-sdk";
 import { useFetchPoolListDefault } from "@/services/pools";
 import { useNavigate } from "@tanstack/react-router";
 
 import { memo } from "react";
 
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { useGraphColors } from "@/hooks/useGraphColors";
 
 interface NetworkBlockVersionsPoolGraphProps {

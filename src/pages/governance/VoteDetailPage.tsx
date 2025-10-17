@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { useMemo } from "react";
 import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
 import { getRouteApi } from "@tanstack/react-router";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Vote } from "lucide-react";
 
 import { useFetchVoteDetail } from "@/services/governance";

@@ -13,7 +13,7 @@ import { Link, useSearch } from "@tanstack/react-router";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 
 import { epochBlockTableOptions } from "@/constants/tables/epochBlockTableOptions";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { isTextNumeric } from "@/utils/isTextNumeric";
 
 import { useEffect, useState } from "react";

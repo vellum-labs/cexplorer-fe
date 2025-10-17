@@ -14,7 +14,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 
 import ReactEcharts from "echarts-for-react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 

@@ -1,4 +1,4 @@
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 
 export const BlockCell = ({ hash, no }: { hash: string; no: number }) => {

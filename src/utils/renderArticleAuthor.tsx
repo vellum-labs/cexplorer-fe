@@ -3,9 +3,9 @@ import { UserSocials } from "@/components/user/UserSocials";
 import type { User } from "@/types/userTypes";
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 import { Link } from "@tanstack/react-router";
-import { formatString } from "./format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { isEmptySocial } from "./user/isEmptySocial";
-import { getNodeText } from "./getNodeText";
+import { getNodeText } from "@vellumlabs/cexplorer-sdk";
 
 export const renderArticleAuthor = (author: User | undefined) => {
   let authorName;

@@ -5,7 +5,7 @@ import type {
   PoolListSearchParams,
 } from "@/types/poolTypes";
 import type { PoolDelegatorsColumns } from "@/types/tableTypes";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { getColumnsSortOrder } from "@/utils/getColumnsSortOrder";
 import { calculateLoyaltyDays, slotToDate } from "@/utils/slotToDate";
 import type {

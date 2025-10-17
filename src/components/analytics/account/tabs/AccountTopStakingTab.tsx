@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
 import PoolCell from "@/components/table/PoolCell";
 import { accountAnalyticsTopStakingTableOptions } from "@/constants/tables/accountAnalyticsTopStakingTableOptions";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { calculateLoyaltyDays } from "@/utils/slotToDate";
 import { useFilterTable } from "@/hooks/tables/useFilterTable";
 import { X } from "lucide-react";

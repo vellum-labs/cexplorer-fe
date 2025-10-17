@@ -8,12 +8,12 @@ import { Link } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "../global/Image";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
 import { ADATokenName } from "@/constants/currencies";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { AssetTicker } from "./AssetTicker";
-import { formatNumberWithSuffix } from "@/utils/format/format";
+import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 import { SwapTypeBadge } from "./SwapTypeBadge";
 import { getAssetImage } from "@/utils/asset/getAssetImage";
 

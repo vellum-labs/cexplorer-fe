@@ -9,7 +9,7 @@ import SortBy from "@/components/ui/sortBy";
 import { articleCategories } from "@/constants/article";
 import { useFetchArticleList } from "@/services/article";
 import type { ArticleCategories } from "@/types/articleTypes";
-import { formatDate } from "@/utils/format/format";
+import { formatDate } from "@vellumlabs/cexplorer-sdk";
 import { renderArticleAuthor } from "@/utils/renderArticleAuthor";
 import { Link, useSearch } from "@tanstack/react-router";
 import parse from "html-react-parser";

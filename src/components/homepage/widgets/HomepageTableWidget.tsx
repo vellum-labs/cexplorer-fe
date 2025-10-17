@@ -15,7 +15,7 @@ import { Search } from "lucide-react";
 
 import { useGetTableWidget } from "@/hooks/widget/useGetWidget";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import useDebounce from "@/hooks/useDebounce";
+import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import { useClickOutsideGroup } from "@/hooks/useClickOutsideGroup";
 
 import { memo } from "react";

@@ -13,7 +13,7 @@ import { useFilterTable } from "@/hooks/tables/useFilterTable";
 
 import { governanceActionDetailAboutTableOptions } from "@/constants/tables/governanceActionDetailAboutTableOptions";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { Link, useSearch } from "@tanstack/react-router";
 import { ExternalLink, Landmark, Route, User, X } from "lucide-react";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";

@@ -34,7 +34,7 @@ import { getConfirmations } from "@/utils/getConfirmations";
 import { renderWithException } from "@/utils/renderWithException";
 import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
 import { ADATokenName } from "@/constants/currencies";
-import { formatNumberWithSuffix } from "@/utils/format/format";
+import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 
 interface ConsolidatedDexSwapDetailCardProps {
   miscBasic: ReturnType<typeof useFetchMiscBasic>["data"];

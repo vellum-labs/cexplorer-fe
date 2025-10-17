@@ -5,7 +5,7 @@ import {
 } from "@/services/user";
 import { useAddressLabelStore } from "@/stores/addressLabelStore";
 import { useCustomLabelModalState } from "@/stores/states/customLabelModalState";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import type { FileRoutesByPath } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import {

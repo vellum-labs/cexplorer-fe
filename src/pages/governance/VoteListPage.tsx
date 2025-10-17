@@ -13,7 +13,7 @@ import { useFetchNewVotes } from "@/services/governance";
 import { useVoteListPageTableStore } from "@/stores/tables/VoteListPageTableStore";
 import { useFilterTable } from "@/hooks/tables/useFilterTable";
 import { voteListPageTableOptions } from "@/constants/tables/voteListPageTableOptions";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { isHex } from "@/utils/isHex";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { GovVoterCell } from "@/components/gov/GovVoterCell";

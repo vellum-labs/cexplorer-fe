@@ -8,7 +8,7 @@ import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDr
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { useRecentVotesTableStore } from "@/stores/tables/recentVotesTableStore";
 import { useFetchCCVotes } from "@/services/governance";
-import { formatString, formatNumber } from "@/utils/format/format";
+import { formatString, formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 import { Image } from "@/components/global/Image";
 import { Link } from "@tanstack/react-router";

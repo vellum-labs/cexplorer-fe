@@ -3,7 +3,7 @@ import { RewardsTab } from "@/components/address/tabs/RewardsTab";
 import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import Tabs from "@/components/global/Tabs";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { getRouteApi, useSearch } from "@tanstack/react-router";
 import { QRCodeSVG } from "qrcode.react";
 import { useLayoutEffect, type FC } from "react";

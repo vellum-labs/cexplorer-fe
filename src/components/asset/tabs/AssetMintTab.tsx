@@ -16,7 +16,7 @@ import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDr
 import { PolicyCell } from "@/components/policy/PolicyCell";
 import ExportButton from "@/components/table/ExportButton";
 import { assetDetailMintTableOptions } from "@/constants/tables/assetDetailMintOptions";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import AssetCell from "../AssetCell";
 
 interface AssetMintTabProps {

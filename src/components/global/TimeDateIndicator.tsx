@@ -4,7 +4,7 @@ import { Clock } from "lucide-react";
 
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 
-import { formatDate } from "@/utils/format/format";
+import { formatDate } from "@vellumlabs/cexplorer-sdk";
 
 interface TimeDateIndicatorProps {
   time: string | undefined;

@@ -16,7 +16,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { articleCategories } from "@/constants/article";
-import { cn } from "@/lib/utils";
+import { cn } from "@vellumlabs/cexplorer-sdk";
 import type { ArticleCategories } from "@/types/articleTypes";
 
 const categoriesOptions = articleCategories.map(category => ({

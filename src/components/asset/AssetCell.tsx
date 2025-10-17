@@ -3,7 +3,7 @@ import type { TxAsset } from "@/types/assetsTypes";
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";
 import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { Link } from "@tanstack/react-router";
 import { memo } from "react";

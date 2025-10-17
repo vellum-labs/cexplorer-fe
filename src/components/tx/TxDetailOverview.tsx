@@ -1,7 +1,11 @@
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import { useFetchMiscBasic } from "@/services/misc";
 import type { TxDetailResponse } from "@/types/txTypes";
-import { formatDate, formatNumber, formatString } from "@/utils/format/format";
+import {
+  formatDate,
+  formatNumber,
+  formatString,
+} from "@vellumlabs/cexplorer-sdk";
 import { getConfirmations } from "@/utils/getConfirmations";
 import { getEpochSlot } from "@/utils/getEpochSlot";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";

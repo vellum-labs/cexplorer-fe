@@ -12,7 +12,10 @@ import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
 import { useScriptDetailUsesTableStore } from "@/stores/tables/scriptDetailUsesTableStore";
 import type { ScriptDetailRedeemerData } from "@/types/scriptTypes";
 import type { ScriptDetailUsesColumns, TableColumns } from "@/types/tableTypes";
-import { formatNumber, formatNumberWithSuffix } from "@/utils/format/format";
+import {
+  formatNumber,
+  formatNumberWithSuffix,
+} from "@vellumlabs/cexplorer-sdk";
 import { getPercentageColor } from "@/utils/getPercentageColor";
 import { getRouteApi } from "@tanstack/react-router";
 import { useEffect, useState } from "react";

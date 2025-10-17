@@ -20,7 +20,7 @@ import { useEffect, useState } from "react";
 import { assetListTableOptionsWithoutType } from "@/constants/tables/assetListTableOptions";
 
 import { useViewStore } from "@/stores/viewStore";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 
 interface PolicyDetailNftAssetProps {

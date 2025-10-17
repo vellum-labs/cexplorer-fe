@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { Link } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 
 interface GovActionCellProps {
   id?: string;

@@ -11,7 +11,7 @@ import { Image } from "../global/Image";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";
 
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchMiscBasic } from "@/services/misc";
 import type { PolicyJson } from "@/types/assetsTypes";

@@ -7,11 +7,11 @@ import { Button } from "@vellumlabs/cexplorer-sdk";
 
 import { useState } from "react";
 import { useLocaleStore } from "@/stores/localeStore";
-import useDebounce from "@/hooks/useDebounce";
+import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscSearch } from "@/services/misc";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { ActionTypes } from "../ActionTypes";
 

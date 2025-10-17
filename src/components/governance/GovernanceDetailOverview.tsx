@@ -9,7 +9,7 @@ import PulseDot from "../global/PulseDot";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 
 import { Image } from "../global/Image";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { Link } from "@tanstack/react-router";
 import { GovernanceStatusBadge } from "@/components/global/badges/GovernanceStatusBadge";

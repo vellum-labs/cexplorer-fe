@@ -18,7 +18,7 @@ import type {
 } from "@/types/delegationTypes";
 import type { MiscConstResponseData } from "@/types/miscTypes";
 import type { PoolDelegatorsColumns, TableColumns } from "@/types/tableTypes";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { calculateLoyaltyDays, slotToDate } from "@/utils/slotToDate";
 import { Link, useSearch } from "@tanstack/react-router";
 import { format } from "date-fns";

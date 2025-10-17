@@ -13,7 +13,7 @@ import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchAnalyticsPoolBlock } from "@/services/analytics";
 import { useFetchMiscBasic } from "@/services/misc";
 import { usePoolsIssuesMissedBlocksTableStore } from "@/stores/tables/poolIssuesMissedBlocksTableStore";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useCallback, useEffect, useState } from "react";
 
 import { Button } from "@vellumlabs/cexplorer-sdk";

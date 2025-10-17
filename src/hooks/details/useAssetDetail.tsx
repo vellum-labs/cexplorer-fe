@@ -8,9 +8,9 @@ import { Link } from "@tanstack/react-router";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 import parse from "html-react-parser";
 import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";

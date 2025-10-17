@@ -5,7 +5,7 @@ import { OverviewCard } from "../global/cards/OverviewCard";
 import type { PoolInfo } from "@/types/poolTypes";
 import type { StakeDetailData } from "@/types/stakeTypes";
 import { Address } from "@/utils/address/getStakeAddress";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { AddCustomLabel } from "../address/AddCustomLabel";
 import { TokenSelectCombobox } from "../asset/TokenSelect";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";

@@ -50,7 +50,7 @@ import Image6 from "@/resources/images/awards/6.svg";
 import Image7 from "@/resources/images/awards/7.svg";
 import Image8 from "@/resources/images/awards/8.svg";
 import Image9 from "@/resources/images/awards/9.svg";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { format } from "date-fns";
 

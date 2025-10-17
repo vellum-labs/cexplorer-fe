@@ -11,8 +11,8 @@ import { useFetchMiscBasic } from "@/services/misc";
 
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
-import { formatNumber } from "@/utils/format/format";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 export const StakeIsSpoDrepGraph: FC = () => {
   const query = useFetchStakeIsSpoDrep();

@@ -6,7 +6,7 @@ import { TimeDateIndicator } from "../global/TimeDateIndicator";
 
 import { useEffect, useState } from "react";
 
-import { formatNumber, toUtcDate } from "@/utils/format/format";
+import { formatNumber, toUtcDate } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 

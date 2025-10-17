@@ -19,8 +19,8 @@ import { EpochCell } from "@/components/epoch/EpochCell";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "@/components/tx/HashCell";
 import { newPoolsTableOptions } from "@/constants/tables/newPoolsTableOptions";
-import { formatString } from "@/utils/format/format";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 
 export const NewPoolsListPage: FC = () => {

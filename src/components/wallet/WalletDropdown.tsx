@@ -1,9 +1,9 @@
 import { walletInfos } from "@/constants/wallet";
 import { useConnectWallet } from "@/hooks/useConnectWallet";
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import nufiCoreSdk from "@nufi/dapp-client-core";
 import { Link } from "@tanstack/react-router";
 import {

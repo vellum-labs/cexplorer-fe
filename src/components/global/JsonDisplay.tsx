@@ -12,7 +12,7 @@ import { Copy } from "@vellumlabs/cexplorer-sdk";
 
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useRef, useState } from "react";
-import useDebounce from "@/hooks/useDebounce";
+import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 
 import { colors } from "@/constants/colors";
 

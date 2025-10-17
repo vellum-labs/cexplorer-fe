@@ -11,7 +11,7 @@ import { useNavigate, useSearch } from "@tanstack/react-router";
 import { useGovActionDetailDrepsTableStore } from "@/stores/tables/governanceDetailDrepsTableStore";
 import { useFetchGovernanceVote } from "@/services/governance";
 
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { governanceActionDetailDrepSposTableOptions } from "@/constants/tables/governanceActionDetailAboutTableOptions";
 import { SortArrow } from "@/components/global/SortArrow";
 import { getColumnsSortOrder } from "@/utils/getColumnsSortOrder";

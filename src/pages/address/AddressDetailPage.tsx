@@ -12,7 +12,7 @@ import { TxListPage } from "../tx/TxListPage";
 
 import { Address } from "@/utils/address/getStakeAddress";
 
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { getRouteApi, useSearch } from "@tanstack/react-router";
 
 import AdaHandleBadge from "@/components/global/badges/AdaHandleBadge";

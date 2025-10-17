@@ -1,6 +1,6 @@
 import { donationAddress } from "@/constants/confVariables";
 import { footerLinks } from "@/constants/footerLinks";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import DiscordLogo from "../../resources/images/icons/discord.svg";
 import GithubLogo from "../../resources/images/icons/github.svg";

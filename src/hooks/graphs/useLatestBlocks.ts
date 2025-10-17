@@ -1,8 +1,8 @@
 import type { useFetchBlocksList } from "@/services/blocks";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 
-import { formatNumber } from "@/utils/format/format";
-import { useWindowDimensions } from "@/utils/useWindowsDemensions";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { useWindowDimensions } from "@vellumlabs/cexplorer-sdk";
 import { useNavigate } from "@tanstack/react-router";
 import { useGraphColors } from "../useGraphColors";
 

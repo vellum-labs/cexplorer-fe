@@ -1,6 +1,10 @@
 import AssetCell from "@/components/asset/AssetCell";
 import { useFetchTxDetail } from "@/services/tx";
-import { formatDate, formatNumber, formatString } from "@/utils/format/format";
+import {
+  formatDate,
+  formatNumber,
+  formatString,
+} from "@vellumlabs/cexplorer-sdk";
 import { Link, getRouteApi } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { DateCell, getNodeText } from "@vellumlabs/cexplorer-sdk";

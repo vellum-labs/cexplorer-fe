@@ -4,7 +4,7 @@ import type { TableColumns } from "@/types/tableTypes";
 import type { CommitteeMember } from "@/types/governanceTypes";
 import { Image } from "@/components/global/Image";
 import type { FC } from "react";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 import { Link } from "@tanstack/react-router";

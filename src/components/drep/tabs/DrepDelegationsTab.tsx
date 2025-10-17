@@ -19,7 +19,7 @@ import { useSearch } from "@tanstack/react-router";
 import { format } from "date-fns";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 export const DrepDelegationsTab = () => {

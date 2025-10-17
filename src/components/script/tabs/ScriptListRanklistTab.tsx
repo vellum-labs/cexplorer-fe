@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { scriptListRanklistOptions } from "@/constants/tables/scriptListRanklistTableOptions";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 

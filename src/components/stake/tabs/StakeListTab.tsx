@@ -6,7 +6,7 @@ import GlobalTable from "@/components/table/GlobalTable";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import AdaHandleBadge from "@/components/global/badges/AdaHandleBadge";
 import { TokenSelectCombobox } from "@/components/asset/TokenSelect";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { useFetchAccountList } from "@/services/user";
 import type { StakeKeyData } from "@/types/userTypes";

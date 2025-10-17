@@ -15,7 +15,7 @@ import { useTxListTableStore } from "@/stores/tables/txListTableStore";
 import { useEffect, useState } from "react";
 import { useMiscConst } from "../useMiscConst";
 
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { isHex } from "@/utils/isHex";
 import { useSearchTable } from "./useSearchTable";
 

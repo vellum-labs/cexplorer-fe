@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { SortArrow } from "@/components/global/SortArrow";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { getColumnsSortOrder } from "@/utils/getColumnsSortOrder";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { X } from "lucide-react";

@@ -6,7 +6,7 @@ import GlobalTable from "@/components/table/GlobalTable";
 import { blocksListTableOptions } from "@/constants/tables/blocksListTableOptions";
 import { useBlockListTableStore } from "@/stores/tables/blockListTableStore";
 import type { BlockListColumns } from "@/types/tableTypes";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { isHex } from "@/utils/isHex";
 import { isTextNumeric } from "@/utils/isTextNumeric";
 import { useSearch } from "@tanstack/react-router";

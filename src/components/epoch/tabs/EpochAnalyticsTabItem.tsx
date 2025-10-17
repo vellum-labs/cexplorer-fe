@@ -10,8 +10,11 @@ import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useRef, useState } from "react";
 import { useFetchEpochAnalytics } from "@/services/analytics";
 
-import { formatNumber, formatNumberWithSuffix } from "@/utils/format/format";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import {
+  formatNumber,
+  formatNumberWithSuffix,
+} from "@vellumlabs/cexplorer-sdk";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
