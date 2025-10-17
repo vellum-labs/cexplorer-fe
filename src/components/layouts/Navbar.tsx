@@ -7,7 +7,7 @@ import { ArrowRight, ChevronsUp } from "lucide-react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import MainLogo from "../global/MainLogo";
 import { InfoCard } from "../global/cards/InfoCard";
-import Dropdown from "../global/dropdowns/Dropdown";
+import { Dropdown } from "@vellumlabs/cexplorer-sdk";
 import { ScreenDropdown } from "../global/dropdowns/ScreenDropdown";
 import SettingsDropdown from "../global/dropdowns/SettingsDropdown";
 import { AdaPriceIndicator } from "../navbar/AdaPriceIndicator";

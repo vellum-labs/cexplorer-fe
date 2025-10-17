@@ -4,7 +4,7 @@ import { useWindowDimensions } from "@/utils/useWindowsDemensions";
 import { ChevronDown } from "lucide-react";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
-import Dropdown from "./dropdowns/Dropdown";
+import { Dropdown } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   items: TabItem[];
@@ -56,7 +56,7 @@ export const MobileTabsSelector = ({
   }, [width, mobileItems, items.length]);
   return (
     <div
-      className={`${withMargin ? "mb-3" : ""} flex items-center ${secondary ? "h-[32px]" : "h-[40px]"} w-fit rounded-m border border-borderFaded bg-darker gap-0.5`}
+      className={`${withMargin ? "mb-3" : ""} flex items-center ${secondary ? "h-[32px]" : "h-[40px]"} w-fit gap-0.5 rounded-m border border-borderFaded bg-darker`}
     >
       {items?.slice(0, visibleItems).map((item, index) => (
         <button
@@ -64,7 +64,7 @@ export const MobileTabsSelector = ({
           aria-selected={activeTab === index}
           aria-controls={`panel-${index}`}
           id={`tab-${index}`}
-          className={`flex items-center px-1.5 py-1 border rounded-m ${secondary ? "h-[32px]" : "h-[40px]"} text-[13px] font-semibold min-[1050px]:text-[15px] ${activeTab === index ? `bg-background z-20 border-border ${secondary ? "text-text hover:text-text" : "text-primary hover:text-primary"}` : "border-transparent text-grayTextPrimary duration-150 hover:text-text"} ${index === 0 ? "-ml-px" : ""} ${index === visibleItems - 1 ? "-mr-px" : ""}`}
+          className={`flex items-center rounded-m border px-1.5 py-1 ${secondary ? "h-[32px]" : "h-[40px]"} text-[13px] font-semibold min-[1050px]:text-[15px] ${activeTab === index ? `z-20 border-border bg-background ${secondary ? "text-text hover:text-text" : "text-primary hover:text-primary"}` : "border-transparent text-grayTextPrimary duration-150 hover:text-text"} ${index === 0 ? "-ml-px" : ""} ${index === visibleItems - 1 ? "-mr-px" : ""}`}
           key={index}
           onClick={() => handleTabChange(index)}
         >

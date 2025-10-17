@@ -1,10 +1,10 @@
 import type { FC } from "react";
 
 import {
-  Breadcrumb,
+  BreadcrumbRaw,
   BreadcrumbItem,
   BreadcrumbList,
-} from "@/components/ui/breadcrumb";
+} from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 
@@ -62,7 +62,7 @@ export const ConfigSwPage: FC = () => {
         <meta charSet='utf-8' />
         <title>Admin sw | Cexplorer.io</title>
       </Helmet>
-      <Breadcrumb className='w-full'>
+      <BreadcrumbRaw className='w-full'>
         <BreadcrumbList className='flex items-center'>
           <BreadcrumbItem>
             <Link className='underline underline-offset-2' to='/'>
@@ -83,7 +83,7 @@ export const ConfigSwPage: FC = () => {
           </BreadcrumbItem>
           /<BreadcrumbItem className='text-text'>SW text</BreadcrumbItem>
         </BreadcrumbList>
-      </Breadcrumb>
+      </BreadcrumbRaw>
       <div
         role='button'
         className='relative rounded-m border border-border bg-darker'

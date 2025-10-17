@@ -2,12 +2,12 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 
 import {
-  Breadcrumb,
+  BreadcrumbRaw,
   BreadcrumbItem,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+} from "@vellumlabs/cexplorer-sdk";
 
 import { TruncatedText } from "@vellumlabs/cexplorer-sdk";
 
@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils";
 import { useFetchMiscBasic } from "@/services/misc";
 import type { MiscBasicResponse } from "@/types/miscTypes";
 import { GlobalSearch } from "../search/GlobalSearch";
-import AdDropdown from "./dropdowns/AdDropdown";
+import { AdDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { ShareButton } from "@vellumlabs/cexplorer-sdk";
 
@@ -76,7 +76,7 @@ export const HeaderBanner = ({
       <div className='flex w-full max-w-desktop flex-wrap justify-between gap-3 p-mobile md:px-desktop md:py-mobile'>
         <div className='flex flex-col py-1/2'>
           {breadcrumbItems && (
-            <Breadcrumb className='w-full'>
+            <BreadcrumbRaw className='w-full'>
               <BreadcrumbList className='flex items-center'>
                 <BreadcrumbItem>
                   <Link className='underline underline-offset-2' to='/'>
@@ -106,7 +106,7 @@ export const HeaderBanner = ({
                   ),
                 )}
               </BreadcrumbList>
-            </Breadcrumb>
+            </BreadcrumbRaw>
           )}
           <div
             className={cn(

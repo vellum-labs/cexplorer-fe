@@ -2,10 +2,10 @@ import { Button } from "@vellumlabs/cexplorer-sdk";
 import TextInput from "@/components/global/inputs/TextInput";
 import SpinningLoader from "@/components/global/SpinningLoader";
 import {
-  Breadcrumb,
+  BreadcrumbRaw,
   BreadcrumbItem,
   BreadcrumbList,
-} from "@/components/ui/breadcrumb";
+} from "@vellumlabs/cexplorer-sdk";
 import { fetchAdminPage, useFetchAdminPage } from "@/services/user";
 import { useAuthTokensStore } from "@/stores/authTokensStore";
 import { useWalletStore } from "@/stores/walletStore";
@@ -103,7 +103,7 @@ export const AdminPageDetail = () => {
         <meta charSet='utf-8' />
         <title>Admin page detail | Cexplorer.io</title>
       </Helmet>
-      <Breadcrumb className='w-full'>
+      <BreadcrumbRaw className='w-full'>
         <BreadcrumbList className='flex items-center'>
           <BreadcrumbItem>
             <Link className='underline underline-offset-2' to='/'>
@@ -124,7 +124,7 @@ export const AdminPageDetail = () => {
           </BreadcrumbItem>
           /<BreadcrumbItem className='text-text'>{data?.name}</BreadcrumbItem>
         </BreadcrumbList>
-      </Breadcrumb>
+      </BreadcrumbRaw>
       {query.isLoading ? (
         <div className='mt-4 flex w-full justify-center'>
           <SpinningLoader />

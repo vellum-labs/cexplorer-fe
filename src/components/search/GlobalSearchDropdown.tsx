@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { ChevronDown } from "lucide-react";
 
-import Dropdown from "../global/dropdowns/Dropdown";
+import { Dropdown } from "@vellumlabs/cexplorer-sdk";
 
 import { useGlobalSearch } from "@/context/GlobalSearchContext";
 

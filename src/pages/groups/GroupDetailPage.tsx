@@ -11,10 +11,10 @@ import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 import PoolCell from "@/components/table/PoolCell";
 import {
-  Breadcrumb,
+  BreadcrumbRaw,
   BreadcrumbItem,
   BreadcrumbList,
-} from "@/components/ui/breadcrumb";
+} from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { drepListTableOptions } from "@/constants/tables/drepListTableOptions";
 import { poolsListTableOptions } from "@/constants/tables/poolsListTableOptions";
@@ -586,7 +586,7 @@ export const GroupDetailPage = () => {
       </Helmet>
       <main className='flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col justify-center'>
-          <Breadcrumb className='mb-2 w-full'>
+          <BreadcrumbRaw className='mb-2 w-full'>
             <BreadcrumbList className='flex items-center'>
               <BreadcrumbItem>
                 <Link className='underline underline-offset-2' to='/'>
@@ -601,7 +601,7 @@ export const GroupDetailPage = () => {
               </BreadcrumbItem>
               / <BreadcrumbItem className='text-text'>{name}</BreadcrumbItem>
             </BreadcrumbList>
-          </Breadcrumb>
+          </BreadcrumbRaw>
           <h1 className='text-left'>{name}</h1>
           <p className='mt-1'>{description}</p>
           <div className='my-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>

@@ -5,7 +5,7 @@ import useEmblaCarousel, {
 } from "embla-carousel-react";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -195,12 +195,11 @@ CarouselItem.displayName = "CarouselItem";
 const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+>(({ className, variant = "tertiary", size = "md", ...props }) => {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
   return (
     <Button
-      ref={ref}
       variant={variant}
       size={size}
       className={cn(
@@ -212,11 +211,14 @@ const CarouselPrevious = React.forwardRef<
       )}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
+      label={
+        <>
+          <ArrowLeftIcon className='h-4 w-4' />
+          <span className='sr-only'>Previous slide</span>
+        </>
+      }
       {...props}
-    >
-      <ArrowLeftIcon className='h-4 w-4' />
-      <span className='sr-only'>Previous slide</span>
-    </Button>
+    />
   );
 });
 CarouselPrevious.displayName = "CarouselPrevious";
@@ -224,12 +226,11 @@ CarouselPrevious.displayName = "CarouselPrevious";
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+>(({ className, variant = "tertiary", size = "md", ...props }) => {
   const { orientation, scrollNext, canScrollNext } = useCarousel();
 
   return (
     <Button
-      ref={ref}
       variant={variant}
       size={size}
       className={cn(
@@ -241,11 +242,14 @@ const CarouselNext = React.forwardRef<
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
+      label={
+        <>
+          <ArrowRightIcon className='h-4 w-4' />
+          <span className='sr-only'>Next slide</span>
+        </>
+      }
       {...props}
-    >
-      <ArrowRightIcon className='h-4 w-4' />
-      <span className='sr-only'>Next slide</span>
-    </Button>
+    />
   );
 });
 CarouselNext.displayName = "CarouselNext";

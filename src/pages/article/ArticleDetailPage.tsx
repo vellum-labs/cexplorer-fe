@@ -4,10 +4,10 @@ import { Image } from "@/components/global/Image";
 import TextInput from "@/components/global/inputs/TextInput";
 import { SingleItemCarousel } from "@/components/global/SingleItemCarousel";
 import {
-  Breadcrumb,
+  BreadcrumbRaw,
   BreadcrumbItem,
   BreadcrumbList,
-} from "@/components/ui/breadcrumb";
+} from "@vellumlabs/cexplorer-sdk";
 import { webUrl } from "@/constants/confVariables";
 import { useFetchArticleDetail, useFetchArticleList } from "@/services/article";
 import type { ArticleListData } from "@/types/articleTypes";
@@ -134,7 +134,7 @@ export const ArticleDetailPage = () => {
         <section className='flex h-auto w-full justify-center bg-gradient-to-b from-bannerGradient to-darker p-3'>
           <div className='flex w-full max-w-desktop flex-col-reverse justify-center gap-1.5 md:flex-row'>
             <div className='flex w-full flex-col justify-between gap-1.5 md:w-[40%]'>
-              <Breadcrumb className='mb-2 w-full'>
+              <BreadcrumbRaw className='mb-2 w-full'>
                 <BreadcrumbList className='flex items-center'>
                   <BreadcrumbItem>
                     <Link className='underline underline-offset-2' to='/'>
@@ -155,7 +155,7 @@ export const ArticleDetailPage = () => {
                     Article detail
                   </BreadcrumbItem>
                 </BreadcrumbList>
-              </Breadcrumb>
+              </BreadcrumbRaw>
               {data && (
                 <div className='mb-auto'>
                   <h2>{parse(data?.name || "")}</h2>
