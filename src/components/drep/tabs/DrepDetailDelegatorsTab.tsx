@@ -1,8 +1,10 @@
 import type { FC } from "react";
+import { useState } from "react";
 
 import Tabs from "@/components/global/Tabs";
 import { DelegatorStructureSubtab } from "../subtabs/DelegatorStructureSubtab";
 import { DelegatorSubtab } from "../subtabs/DelegatorSubtab";
+import { useDrepDelegatorsStructureStore } from "@/stores/tables/drepDelegatorStructureTableStore";
 
 interface DrepDetailDelegatorsTab {
   view: string;
@@ -11,6 +13,10 @@ interface DrepDetailDelegatorsTab {
 export const DrepDetailDelegatorsTab: FC<DrepDetailDelegatorsTab> = ({
   view,
 }) => {
+  const [sortByAnimalSize, setSortByAnimalSize] = useState(false);
+  const { columnsVisibility, setRows, rows, setColumnVisibility } =
+    useDrepDelegatorsStructureStore();
+
   const tabs = [
     {
       key: "all_delegators",
@@ -33,7 +39,17 @@ export const DrepDetailDelegatorsTab: FC<DrepDetailDelegatorsTab> = ({
     {
       key: "structure",
       label: "Structure",
-      content: <DelegatorStructureSubtab view={view} />,
+      content: (
+        <DelegatorStructureSubtab
+          view={view}
+          sortByAnimalSize={sortByAnimalSize}
+          setSortByAnimalSize={setSortByAnimalSize}
+          rows={rows}
+          setRows={setRows}
+          columnsVisibility={columnsVisibility}
+          setColumnVisibility={setColumnVisibility}
+        />
+      ),
       visible: true,
     },
   ];

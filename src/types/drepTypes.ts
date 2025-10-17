@@ -19,14 +19,14 @@ interface DrepCount {
   retired: number | undefined;
 }
 
-interface DrepDistr {
+interface DrepDistrStat {
   stake: number;
   delegators: number;
 }
 
 interface StatDrep {
   count: DrepCount;
-  distr: DrepDistr;
+  distr: DrepDistrStat;
   deposit: number;
 }
 
@@ -250,11 +250,11 @@ export interface DrepDetail {
   } | null;
   cert: DrepCert;
   hash: DrepHash;
-  distr: DrepDistrDetail[];
+  distr: DrepDistr;
   action: DrepAction[];
   stat: DrepStat;
   since: string;
-  votestat?: DrepVoteStat; 
+  votestat?: DrepVoteStat;
 }
 
 interface DrepInfo {

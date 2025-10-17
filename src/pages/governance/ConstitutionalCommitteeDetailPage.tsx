@@ -4,7 +4,6 @@ import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import AdsCarousel from "@/components/global/ads/AdsCarousel";
 import { FileText } from "lucide-react";
 
-import { useFetchCommitteeList } from "@/services/governance";
 import { useFetchCommitteeDetail } from "@/services/governance";
 import { useFetchConstitutionList } from "@/services/governance";
 
@@ -18,7 +17,6 @@ import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
 
 export const ConstituionalCommitteeDetailPage: FC = () => {
   const [clickedUrl, setClickedUrl] = useState<string | undefined>(undefined);
-  const committeeListQuery = useFetchCommitteeList();
   const committeeDetailQuery = useFetchCommitteeDetail();
   const constitutionListQuery = useFetchConstitutionList();
 
@@ -33,9 +31,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
     ) ?? [];
 
   const isLoading =
-    committeeListQuery.isLoading ||
-    committeeDetailQuery.isLoading ||
-    constitutionListQuery.isLoading;
+    committeeDetailQuery.isLoading || constitutionListQuery.isLoading;
 
   const tabs = [
     {

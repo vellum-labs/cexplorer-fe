@@ -4,6 +4,7 @@ import type {
   PoolDetailResponseData,
 } from "@/types/poolTypes";
 import type { UseQueryResult } from "@tanstack/react-query";
+import type { MiscConstResponseData } from "@/types/miscTypes";
 
 import PoolSaturation from "@/components/pool/PoolSaturation";
 import RoaDiffArrow from "@/components/pool/RoaDiffArrow";
@@ -20,10 +21,13 @@ import { poolRewardsRoaDiff } from "@/utils/poolRewardsRoaDiff";
 import { format, parseISO } from "date-fns";
 import { useState } from "react";
 import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
+import { DelegatorsLabel } from "@/components/global/DelegatorsLabel";
+import { buildSocialIcons } from "@/utils/buildSocialIcons";
 
 interface UsePoolDetailArgs {
   query: UseQueryResult<PoolDetailResponse, unknown>;
   estimatedBlocks: number;
+  miscConst?: MiscConstResponseData;
 }
 
 interface UsePoolDetail {
@@ -36,10 +40,12 @@ interface UsePoolDetail {
 export const usePoolDetail = ({
   estimatedBlocks,
   query,
+  miscConst: miscConstProp,
 }: UsePoolDetailArgs): UsePoolDetail => {
   const data = query.data?.data;
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConstFallback = useMiscConst(basicData?.data.version.const);
+  const miscConst = miscConstProp ?? miscConstFallback;
   const epochElapsed = useElapsedEpochNumber(miscConst);
 
   const [linkModal, setLinkModal] = useState<boolean>(false);
@@ -74,6 +80,12 @@ export const usePoolDetail = ({
     );
   }
 
+  const minDelegationAda = miscConst?.intra?.min_value
+    ? (miscConst.intra.min_value / 1_000_000).toFixed(0)
+    : "5";
+  const extended = data?.pool_name?.extended;
+  const socialIcons = buildSocialIcons(extended);
+
   const aboutList: OverviewList = [
     { label: "Name", value: data?.pool_name.name },
     { label: "Ticker", value: data?.pool_name.ticker },
@@ -91,7 +103,10 @@ export const usePoolDetail = ({
       value:
         data?.registered && format(parseISO(data?.registered), "dd.MM.yyyy"),
     },
-    { label: "Delegators", value: formatNumber(data?.delegators) },
+    {
+      label: <DelegatorsLabel minDelegationAda={minDelegationAda} />,
+      value: formatNumber(data?.delegators),
+    },
     {
       label: "Website",
       value: (
@@ -117,6 +132,27 @@ export const usePoolDetail = ({
       ),
     },
   ];
+
+  if (socialIcons.length > 0) {
+    aboutList.push({
+      label: "",
+      value: (
+        <div className='mt-8 flex gap-2'>
+          {socialIcons.map((social, index) => (
+            <a
+              key={index}
+              href={social.url}
+              target='_blank'
+              rel='noopener noreferrer'
+              title={social.alt}
+            >
+              <img src={social.icon} alt={social.alt} width={24} />
+            </a>
+          ))}
+        </div>
+      ),
+    });
+  }
 
   const stakeAndPledgeList: OverviewList = [
     {

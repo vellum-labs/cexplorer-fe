@@ -8,16 +8,17 @@ import Whale from "@/resources/images/icons/whale.svg";
 import Humpback from "@/resources/images/icons/humpback.svg";
 import Dino from "@/resources/images/icons/dino.svg";
 import Tuna from "@/resources/images/icons/tuna.svg";
+import { AnimalName } from "./animals";
 
-export const addressIcons = {
-  plankton: Plankton,
-  shrimp: Shrimp,
-  crab: Crab,
-  fish: Fish,
-  dolphin: Dolphin,
-  shark: Shark,
-  whale: Whale,
-  humpback: Humpback,
-  leviathan: Dino,
-  tuna: Tuna,
+export const addressIcons: Record<AnimalName, string> = {
+  [AnimalName.Plankton]: Plankton,
+  [AnimalName.Shrimp]: Shrimp,
+  [AnimalName.Crab]: Crab,
+  [AnimalName.Fish]: Fish,
+  [AnimalName.Dolphin]: Dolphin,
+  [AnimalName.Shark]: Shark,
+  [AnimalName.Whale]: Whale,
+  [AnimalName.Humpback]: Humpback,
+  [AnimalName.Leviathan]: Dino,
+  [AnimalName.Tuna]: Tuna,
 };

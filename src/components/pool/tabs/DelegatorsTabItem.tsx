@@ -14,7 +14,6 @@ import { getRouteApi, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import { poolDelegatorsTableOptions } from "@/constants/tables/poolDelegatorsTableOptions";
-import { poolStructureTableOptions } from "@/constants/tables/poolStructureTableOptions";
 import { usePoolDelegatorsStructureStore } from "@/stores/tables/poolDelegatorsStructureStore";
 import { usePoolMigrationsTableStore } from "@/stores/tables/poolMigrationsTableStore";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
@@ -27,6 +26,7 @@ const DelegatorsTabItem = () => {
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const [delegatorTableTotalItems, setTotalDelegatorItems] = useState(0);
   const [migrationsTotalItems, setMigrationsTotalItems] = useState(0);
+  const [sortByAnimalSize, setSortByAnimalSize] = useState(false);
   const { page, sort, order } = useSearch({ from: "/pool/$id" });
 
   const {
@@ -182,26 +182,16 @@ const DelegatorsTabItem = () => {
       key: "structure",
       label: "Structure",
       content: (
-        <div className='flex w-full flex-col items-end gap-2'>
-          <PoolStructureTable poolId={id} />
-        </div>
-      ),
-      extraTitle: (
-        <div className='flex w-full justify-end'>
-          <div className='flex items-center gap-1'>
-            <TableSettingsDropdown
-              rows={rows}
-              setRows={setRows}
-              columnsOptions={poolStructureTableOptions.map(item => {
-                return {
-                  label: item.name,
-                  isVisible: columnsVisibility[item.key],
-                  onClick: () =>
-                    setColumnVisibility(item.key, !columnsVisibility[item.key]),
-                };
-              })}
-            />
-          </div>
+        <div className='flex w-full flex-col gap-4'>
+          <PoolStructureTable
+            poolId={id}
+            sortByAnimalSize={sortByAnimalSize}
+            setSortByAnimalSize={setSortByAnimalSize}
+            rows={rows}
+            setRows={setRows}
+            columnsVisibility={columnsVisibility}
+            setColumnVisibility={setColumnVisibility}
+          />
         </div>
       ),
       visible: true,
