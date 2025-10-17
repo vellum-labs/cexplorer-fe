@@ -3,8 +3,8 @@ import type { User } from "@/types/userTypes";
 import { Link } from "@tanstack/react-router";
 import { Edit } from "lucide-react";
 import { Badge } from "../global/badges/Badge";
-import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
-import { Tooltip } from "../ui/tooltip";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { UserSocials } from "./UserSocials";
 
 interface Props {
@@ -30,7 +30,7 @@ export const UserBadge = ({ isLoading, user, address }: Props) => {
                       <Edit size={15} />
                     </Link>
                   )}
-                  <span className='text-grayTextPrimary text-text-xs'>
+                  <span className='text-text-xs text-grayTextPrimary'>
                     User profile ({user?.profile ? "Public" : "Hidden"})
                   </span>
                   <div className='flex gap-1'>

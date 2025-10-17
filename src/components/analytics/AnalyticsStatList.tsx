@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from "react";
 
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
 
 interface AnalyticsStatListProps {

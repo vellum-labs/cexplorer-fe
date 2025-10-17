@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 
 import { useEffect } from "react";
 import { webUrl } from "@/constants/confVariables";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 export const DevelopersPage = () => {
   const query = useFetchArticleDetail("en", "page", "developers");

@@ -1,5 +1,5 @@
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
-import { formatNumber } from "@/utils/format/format";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 interface StakeCellProps {
   stake: number;

@@ -6,7 +6,7 @@ import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import ReactEcharts from "echarts-for-react";
 
 import { useGetGraphWidget } from "@/hooks/widget/useGetWidget";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 
 interface HomepageGraphWidgetProps {
   type: WidgetTypes;

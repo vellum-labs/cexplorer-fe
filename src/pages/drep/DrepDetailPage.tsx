@@ -10,7 +10,7 @@ import { useEffect, useState, type FC } from "react";
 import { useFetchDrepDetail } from "@/services/drep";
 
 import { WatchlistSection } from "@/components/global/watchlist/WatchlistSection";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { getRouteApi } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { DrepDetailStatsTab } from "@/components/drep/tabs/DrepDetailStatsTab";
@@ -94,12 +94,12 @@ export const DrepDetailPage: FC = () => {
       }}
       breadcrumbItems={[
         {
-          label: <span className='pt-1/2 inline'>Governance</span>,
+          label: <span className='inline pt-1/2'>Governance</span>,
           link: "/gov",
         },
         {
           label: (
-            <span className='pt-1/2 inline'>Delegated representatives</span>
+            <span className='inline pt-1/2'>Delegated representatives</span>
           ),
           link: "/drep",
         },

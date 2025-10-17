@@ -11,7 +11,7 @@ import { PowerThresholdsDRepDelegationDonutGraph } from "@/components/governance
 import { DelegatedAdaToDRepsOverTimeGraph } from "@/components/governance/powerTresholds/DelegatedAdaToDRepsOverTimeGraph";
 import { GovernanceThresholdsSection } from "@/components/governance/powerTresholds/GovernanceThresholdsSection";
 import { PowerThresholdsSPOAttackGraph } from "@/components/governance/powerTresholds/PowerThresholdsSPOAttackGraph";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { useGovernanceThresholds } from "@/hooks/useGovernanceThresholds";
 
 export const PowerThresholdsPage: FC = () => {
@@ -163,7 +163,9 @@ export const PowerThresholdsPage: FC = () => {
             <div className='rounded-l border border-border'>
               <div className='flex items-center justify-between p-3'>
                 <div>
-                  <h2 className='text-text-xl font-bold'>Governance Thresholds</h2>
+                  <h2 className='text-text-xl font-bold'>
+                    Governance Thresholds
+                  </h2>
                   <p className='text-text-sm text-grayTextPrimary'>
                     Number of minimum votes needed for approving governance
                     actions by type (includes all DReps).

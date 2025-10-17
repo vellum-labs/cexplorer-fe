@@ -1,7 +1,7 @@
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import type { ReactEChartsProps } from "@/lib/ReactCharts";
-import { formatNumberWithSuffix } from "@/utils/format/format";
+import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 import ReactEcharts from "echarts-for-react";
 import { memo, useMemo, useRef } from "react";
 

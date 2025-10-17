@@ -1,8 +1,8 @@
 import type { FC } from "react";
 import { Link } from "@tanstack/react-router";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "../global/Image";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { GovernanceRole } from "@/types/governanceTypes";
 
@@ -28,11 +28,14 @@ export const GovVoterCell: FC<GovVoterCellProps> = ({ role, info }) => {
   const displayName = meta?.given_name || meta?.name || "";
 
   const imageUrl = generateImageUrl(
-    voterId, 
-    "ico", 
-    role === GovernanceRole.DRep ? "drep" : role === GovernanceRole.ConstitutionalCommittee ? "cc" : undefined
+    voterId,
+    "ico",
+    role === GovernanceRole.DRep
+      ? "drep"
+      : role === GovernanceRole.ConstitutionalCommittee
+        ? "cc"
+        : undefined,
   );
-
 
   const toPath =
     role === GovernanceRole.SPO

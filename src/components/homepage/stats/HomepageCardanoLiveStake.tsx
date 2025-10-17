@@ -1,7 +1,7 @@
 import type { MiscConstResponseData } from "@/types/miscTypes";
 import type { FC } from "react";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 
 interface HomepageCardanoLiveStakeProps {
   miscConst: MiscConstResponseData | undefined;

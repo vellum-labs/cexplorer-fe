@@ -1,5 +1,5 @@
 import type { ReactEChartsProps } from "@/lib/ReactCharts";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import ReactEcharts from "echarts-for-react";
 
 const ActivityVisual = ({ count }: { count: number }) => {

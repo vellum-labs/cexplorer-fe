@@ -4,7 +4,7 @@ import { useAddressLabelStore } from "@/stores/addressLabelStore";
 import { useCustomLabelModalState } from "@/stores/states/customLabelModalState";
 import { Edit } from "lucide-react";
 import { Badge } from "../global/badges/Badge";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
 export const AddCustomLabel = ({ address }: { address: string }) => {
   const { data: userData } = useFetchUserInfo();
@@ -23,7 +23,6 @@ export const AddCustomLabel = ({ address }: { address: string }) => {
     proNfts === 0
       ? "You can only add 10 labels with the free version of Cexplorer"
       : "You can only add 100 labels per NFT with the PRO version of Cexplorer";
-
 
   return (
     <Tooltip

@@ -1,8 +1,8 @@
 import {
-  Breadcrumb,
+  BreadcrumbRaw,
   BreadcrumbItem,
   BreadcrumbList,
-} from "@/components/ui/breadcrumb";
+} from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import type { FC } from "react";
 
@@ -15,7 +15,7 @@ export const ConfigAdminPage: FC = () => {
         <meta charSet='utf-8' />
         <title>Admin config | Cexplorer.io</title>
       </Helmet>
-      <Breadcrumb className='w-full'>
+      <BreadcrumbRaw className='w-full'>
         <BreadcrumbList className='flex items-center'>
           <BreadcrumbItem>
             <Link className='underline underline-offset-2' to='/'>
@@ -35,7 +35,7 @@ export const ConfigAdminPage: FC = () => {
             </Link>
           </BreadcrumbItem>
         </BreadcrumbList>
-      </Breadcrumb>
+      </BreadcrumbRaw>
       <div className='flex flex-col gap-1'>
         <p>Config options:</p>
         <ul className='list-inside list-disc pl-1'>

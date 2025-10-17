@@ -3,7 +3,7 @@ import type { FC } from "react";
 
 import { HeaderBanner } from "@/components/global/HeaderBanner";
 import AdsCarousel from "@/components/global/ads/AdsCarousel";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { WalletRow } from "@/components/wallet/WalletRow";
 import Android from "@/resources/images/platforms/android.svg";
 import AndroidDark from "@/resources/images/platforms/android_dark.svg";
@@ -24,7 +24,7 @@ import { Helmet } from "react-helmet";
 
 import { useFetchCompareWallets } from "@/services/wallet";
 import { useCompareWalletsStore } from "@/stores/tables/compareWalletsStore";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useState } from "react";
 
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";

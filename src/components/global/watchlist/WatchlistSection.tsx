@@ -1,7 +1,7 @@
 import { jamUrl } from "@/constants/confVariables";
 import { ShoppingBasket } from "lucide-react";
-import Button from "../Button";
-import { ShareButton } from "../ShareButton";
+import { Button } from "@vellumlabs/cexplorer-sdk";
+import { ShareButton } from "@vellumlabs/cexplorer-sdk";
 import LoadingSkeleton from "../skeletons/LoadingSkeleton";
 import { WatchlistStar } from "./WatchlistStar";
 import type { useFetchPoolDetail } from "@/services/pools";

@@ -9,7 +9,7 @@ import { GovernanceDetailNotVotedTab } from "@/components/governance/tabs/Govern
 import { useParams } from "@tanstack/react-router";
 import { useFetchGovernanceActionDetail } from "@/services/governance";
 
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { JsonDisplay } from "@/components/global/JsonDisplay";
 
@@ -78,7 +78,9 @@ export const GovernanceDetailPage: FC = () => {
         },
       ]}
       title={
-        <div className='flex items-center gap-1/2'>Governance action detail</div>
+        <div className='flex items-center gap-1/2'>
+          Governance action detail
+        </div>
       }
       subTitle={
         <div className='flex flex-col'>

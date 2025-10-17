@@ -11,11 +11,14 @@ import type {
 } from "@/types/tableTypes";
 
 import type { useFetchStakeDetail } from "@/services/stake";
-import { formatNumber, formatNumberWithSuffix } from "@/utils/format/format";
+import {
+  formatNumber,
+  formatNumberWithSuffix,
+} from "@vellumlabs/cexplorer-sdk";
 
 import AssetCell from "../asset/AssetCell";
 import { configJSON } from "@/constants/conf";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { PolicyCell } from "../policy/PolicyCell";
 
 interface AddressAssetTableProps {
@@ -130,7 +133,7 @@ export const AddressAssetTable: FC<AddressAssetTableProps> = ({
         }
 
         return (
-          <p className={`text-text-sm w-full text-right text-grayTextPrimary`}>
+          <p className={`w-full text-right text-text-sm text-grayTextPrimary`}>
             {lovelaceToAda(item.market?.price)}
           </p>
         );

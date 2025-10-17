@@ -11,7 +11,7 @@ import { useConnectWallet } from "./hooks/useConnectWallet";
 import { useFetchUserInfo } from "./services/user";
 import { useCustomLabelModalState } from "./stores/states/customLabelModalState";
 import { useWalletConfigModalState } from "./stores/states/walletConfigModalState";
-import { useThemeStore } from "./stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useUqStore } from "./stores/uqStore";
 import { useWalletStore } from "./stores/walletStore";
 import { generateUniqueId } from "./utils/generateUniqueId";

@@ -6,20 +6,20 @@ import type { BlockDetailColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 
 import { useBlockDetailTableStore } from "@/stores/tables/blockDetailTableStore";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import { blocksDetailTableOptions } from "@/constants/tables/blocksDetailTableOptions";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { Pagination } from "@/components/global/Pagination";
 import { useState, useMemo } from "react";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 
 interface BlockDetailTableProps {
   txs: BlockDetailResponseDataTxsItem[] | undefined;
