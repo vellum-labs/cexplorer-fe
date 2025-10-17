@@ -14,7 +14,7 @@ import { PolicyCell } from "@/components/policy/PolicyCell";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 
 import { formatNumber } from "@/utils/format/format";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "./useSearchTable";
 
 interface UseAssetListArgs {

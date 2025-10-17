@@ -3,7 +3,7 @@ import { Fragment, type FC } from "react";
 import { VoteBadge } from "../../global/badges/VoteBadge";
 import type { Vote } from "@/constants/votes";
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { useFetchDrepListVote } from "@/services/governance";
 import { Link, useSearch } from "@tanstack/react-router";
 

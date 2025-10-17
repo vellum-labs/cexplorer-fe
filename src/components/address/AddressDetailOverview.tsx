@@ -12,7 +12,7 @@ import { formatNumber, formatString } from "@/utils/format/format";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { Link } from "@tanstack/react-router";
 import { TokenSelectCombobox } from "../asset/TokenSelect";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import AdaHandleBadge from "../global/badges/AdaHandleBadge";
 import { AddressTypeInitialsBadge } from "../global/badges/AddressTypeInitialsBadge";
 import { Copy } from "@vellumlabs/cexplorer-sdk";

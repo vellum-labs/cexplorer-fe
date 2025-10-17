@@ -1,4 +1,4 @@
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { TrendingArrow } from "@/components/global/TrendingArrow";

@@ -1,6 +1,6 @@
 import AddressCell from "@/components/address/AddressCell";
 import AssetLink from "@/components/asset/AssetLink";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { AddressTypeInitialsBadge } from "@/components/global/badges/AddressTypeInitialsBadge";
 import GlobalTable from "@/components/table/GlobalTable";
 import { useFetchTxDetail } from "@/services/tx";

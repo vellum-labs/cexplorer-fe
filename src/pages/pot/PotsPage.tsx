@@ -1,5 +1,5 @@
 import { EpochCell } from "@/components/epoch/EpochCell";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { HeaderBanner } from "@/components/global/HeaderBanner";
 import AdsCarousel from "@/components/global/ads/AdsCarousel";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";

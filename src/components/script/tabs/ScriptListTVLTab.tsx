@@ -7,7 +7,7 @@ import { useFetchTVL } from "@/services/global";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useCallback, useMemo, useRef } from "react";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { formatNumber } from "@/utils/format/format";

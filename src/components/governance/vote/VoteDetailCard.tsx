@@ -9,7 +9,7 @@ import {
 } from "@/components/global/ActionTypes";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@/components/global/Image";
 import { Link } from "@tanstack/react-router";
 import { Landmark, Route, User } from "lucide-react";

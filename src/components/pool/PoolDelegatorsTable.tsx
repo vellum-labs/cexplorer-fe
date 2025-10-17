@@ -14,7 +14,7 @@ import type {
 } from "@tanstack/react-query";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { format } from "date-fns";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { MinMaxRange } from "../global/MinMaxRange";
 import { SortArrow } from "../global/SortArrow";

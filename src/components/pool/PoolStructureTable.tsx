@@ -20,7 +20,7 @@ import { useFetchPoolDelegatorStats } from "@/services/pools";
 import { usePoolDelegatorsStructureStore } from "@/stores/tables/poolDelegatorsStructureStore";
 
 import { getAnimalRangeByName } from "@/utils/address/getAnimalRangeByName";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
 interface PoolStructureTableProps {

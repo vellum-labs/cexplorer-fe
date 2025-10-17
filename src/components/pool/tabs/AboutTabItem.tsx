@@ -1,4 +1,4 @@
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
 import GlobalTable from "@/components/table/GlobalTable";

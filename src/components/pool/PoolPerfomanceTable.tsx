@@ -18,7 +18,7 @@ import { poolPerfomanceTableOptions } from "@/constants/tables/poolPerfomanceTab
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
 import { formatNumber } from "@/utils/format/format";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { useElapsedEpochNumber } from "@/hooks/useElapsedEpochNumber";
 import { Badge } from "../global/badges/Badge";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";

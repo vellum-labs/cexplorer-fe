@@ -4,7 +4,7 @@ import { Calendar } from "lucide-react";
 
 import { useFetchPoolAwards } from "@/services/pools";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import Image0 from "@/resources/images/awards/0.svg";
 import Image1 from "@/resources/images/awards/1.svg";

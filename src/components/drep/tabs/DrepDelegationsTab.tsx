@@ -1,5 +1,5 @@
 import AddressCell from "@/components/address/AddressCell";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";

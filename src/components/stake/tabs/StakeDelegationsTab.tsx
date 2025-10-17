@@ -1,4 +1,4 @@
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Badge } from "@/components/global/badges/Badge";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";

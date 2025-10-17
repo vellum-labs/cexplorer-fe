@@ -15,7 +15,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import ReactEcharts from "echarts-for-react";
 
 import { cn } from "@/lib/utils";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 
 const EpochListPage: FC = () => {

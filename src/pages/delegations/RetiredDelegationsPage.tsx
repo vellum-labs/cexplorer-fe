@@ -1,5 +1,5 @@
 import { EpochCell } from "@/components/epoch/EpochCell";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";

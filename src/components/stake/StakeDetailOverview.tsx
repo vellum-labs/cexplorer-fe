@@ -8,7 +8,7 @@ import { Address } from "@/utils/address/getStakeAddress";
 import { formatNumber, formatString } from "@/utils/format/format";
 import { AddCustomLabel } from "../address/AddCustomLabel";
 import { TokenSelectCombobox } from "../asset/TokenSelect";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { TotalSumWithRates } from "../global/TotalSumWithRates";
 import AdaHandleBadge from "../global/badges/AdaHandleBadge";
 import { Badge } from "../global/badges/Badge";

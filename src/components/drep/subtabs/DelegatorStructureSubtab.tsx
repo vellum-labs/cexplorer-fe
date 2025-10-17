@@ -21,7 +21,7 @@ import { useFetchDrepDelegatorStats } from "@/services/drep";
 
 import { lovelaceToAda } from "@/utils/lovelaceToAda";
 import { useDrepDelegatorsStructureStore } from "@/stores/tables/drepDelegatorStructureTableStore";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { useGraphColors } from "@/hooks/useGraphColors";
 
 interface Items {

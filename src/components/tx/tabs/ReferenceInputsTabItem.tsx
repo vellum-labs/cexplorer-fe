@@ -7,7 +7,7 @@ import type { TableColumns } from "@/types/tableTypes";
 import type { TxInfo } from "@/types/txTypes";
 import { getRouteApi } from "@tanstack/react-router";
 import { HashCell } from "../HashCell";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 
 const ReferenceInputsTabItem = () => {
   const route = getRouteApi("/tx/$hash");

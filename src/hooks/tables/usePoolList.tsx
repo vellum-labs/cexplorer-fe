@@ -13,7 +13,7 @@ import { usePoolsListTableStore } from "@/stores/tables/poolsListTableStore";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { PoolListEchart } from "@/components/pool/PoolListEchart";
 import RoaDiffArrow from "@/components/pool/RoaDiffArrow";
 import PoolCell from "@/components/table/PoolCell";

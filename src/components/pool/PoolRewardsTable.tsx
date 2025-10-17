@@ -12,7 +12,7 @@ import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 import { useSearch } from "@tanstack/react-router";
 import { Network, Users } from "lucide-react";
 import { useEffect, useState } from "react";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Badge } from "../global/badges/Badge";
 import TableSettingsDropdown from "../global/dropdowns/TableSettingsDropdown";
 import PulseDot from "../global/PulseDot";

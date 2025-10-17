@@ -7,7 +7,7 @@ import { formatString } from "@/utils/format/format";
 import { Link } from "@tanstack/react-router";
 
 import { useGlobalSearch } from "@/context/GlobalSearchContext";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 
 interface GlobalSearchCellProps {
   item: MiscSearch;

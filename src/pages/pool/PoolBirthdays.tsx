@@ -13,7 +13,7 @@ import { useFetchPoolBirthdays } from "@/services/pools";
 import { usePoolBirthdaysTableStore } from "@/stores/tables/poolBirthdaysTableStore";
 import { useEffect, useState } from "react";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber } from "@/utils/format/format";
 import { formatOrdinalSuffix } from "@/utils/format/formatOrdinalSuffix";

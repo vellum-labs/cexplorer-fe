@@ -1,5 +1,5 @@
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import PulseDot from "@/components/global/PulseDot";

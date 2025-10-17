@@ -5,7 +5,7 @@ import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { useCurrencyStore } from "@/stores/currencyStore";
 import { formatBitcoinWithSub } from "@/utils/format/formatSmallValue";
 import { formatCurrency } from "@/utils/format/formatCurrency";
-import { AdaWithTooltip } from "./AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 
 interface BlockDetailTransactionsOverviewTotalProps {
   sum: [string, number, number, number];

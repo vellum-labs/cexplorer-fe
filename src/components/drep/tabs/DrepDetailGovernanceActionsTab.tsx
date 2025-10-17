@@ -15,7 +15,7 @@ import { useGovernanceActionsTableStore } from "@/stores/tables/governanceAction
 import { getRouteApi, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { GovActionCell } from "@/components/gov/GovActionCell";
 import { HashCell } from "@/components/tx/HashCell";
 import { Vote } from "@/constants/votes";

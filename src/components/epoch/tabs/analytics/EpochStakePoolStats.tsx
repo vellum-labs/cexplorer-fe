@@ -6,7 +6,7 @@ import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber } from "@/utils/format/format";
 import { CircleHelp } from "lucide-react";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Badge } from "@/components/global/badges/Badge";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";

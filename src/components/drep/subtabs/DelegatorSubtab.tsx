@@ -18,7 +18,7 @@ import { useDrepDelegatorTableStore } from "@/stores/tables/drepDelegatorTableSt
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "@/components/tx/HashCell";
 import { formatString } from "@/utils/format/format";
 import { calculateLoyaltyDays, slotToDate } from "@/utils/slotToDate";

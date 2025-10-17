@@ -2,7 +2,7 @@ import type { TxListTableColumns } from "@/types/tableTypes";
 import type { TxBasicInfo } from "@/types/txTypes";
 import type { Dispatch, SetStateAction } from "react";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { SizeCell } from "@/components/table/SizeCell";
 import { HashCell } from "@/components/tx/HashCell";

@@ -9,7 +9,7 @@ import ExportButton from "../table/ExportButton";
 import TableSettingsDropdown from "../global/dropdowns/TableSettingsDropdown";
 import GlobalTable from "../table/GlobalTable";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "../global/Image";
 import { Link } from "@tanstack/react-router";
 import TextInput from "../global/inputs/TextInput";

@@ -22,7 +22,7 @@ import { useEffect, useState } from "react";
 import { scriptListInteractionTableOptions } from "@/constants/tables/scriptListInteractionTableOptions";
 import { formatNumber, formatNumberWithSuffix } from "@/utils/format/format";
 import { getPercentageColor } from "@/utils/getPercentageColor";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 
 export const ScriptListInteractionsTab: FC = () => {
   const { infiniteScrolling } = useInfiniteScrollingStore();

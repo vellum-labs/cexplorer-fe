@@ -3,7 +3,7 @@ import { type FC } from "react";
 
 import GlobalTable from "@/components/table/GlobalTable";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import AdaHandleBadge from "@/components/global/badges/AdaHandleBadge";
 import { TokenSelectCombobox } from "@/components/asset/TokenSelect";
 import { formatString } from "@/utils/format/format";

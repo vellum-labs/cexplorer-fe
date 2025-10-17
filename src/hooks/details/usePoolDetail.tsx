@@ -12,7 +12,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { useElapsedEpochNumber } from "../useElapsedEpochNumber";
 import { useMiscConst } from "../useMiscConst";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber, formatString } from "@/utils/format/format";
 import { formatWebsiteUrl } from "@/utils/format/formatWebsiteUrl";

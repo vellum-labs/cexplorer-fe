@@ -2,7 +2,7 @@ import type { PlutusContract, TxInput } from "@/types/txTypes";
 import { Fragment, useState, type FC } from "react";
 import { LabelBadge } from "../global/badges/LabelBadge";
 import { PurposeBadge } from "../global/badges/PurposeBadge";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber } from "@/utils/format/format";
 import { Link } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";

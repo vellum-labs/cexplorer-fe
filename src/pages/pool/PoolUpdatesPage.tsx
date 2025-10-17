@@ -19,7 +19,7 @@ import { usePoolUpdatesTableStore } from "@/stores/tables/poolUpdatesTableStore"
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber, formatString } from "@/utils/format/format";
 import { lovelaceToAda } from "@/utils/lovelaceToAda";
 import { PageBase } from "@/components/global/pages/PageBase";

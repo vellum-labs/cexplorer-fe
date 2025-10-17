@@ -6,7 +6,7 @@ import TableSearchInput from "@/components/global/inputs/SearchInput";
 import GlobalTable from "@/components/table/GlobalTable";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchNewVotes } from "@/services/governance";

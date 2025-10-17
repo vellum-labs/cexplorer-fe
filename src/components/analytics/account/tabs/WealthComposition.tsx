@@ -1,4 +1,4 @@
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import Tabs from "@/components/global/Tabs";
 import GlobalTable from "@/components/table/GlobalTable";
 import { useGraphColors } from "@/hooks/useGraphColors";

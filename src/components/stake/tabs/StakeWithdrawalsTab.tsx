@@ -1,4 +1,4 @@
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import TableSearchInput from "@/components/global/inputs/SearchInput";

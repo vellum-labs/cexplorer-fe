@@ -7,7 +7,7 @@ import { TimeDateIndicator } from "../global/TimeDateIndicator";
 import { useEffect, useState } from "react";
 
 import { formatNumber, toUtcDate } from "@/utils/format/format";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 
 interface EpochSummaryProps {

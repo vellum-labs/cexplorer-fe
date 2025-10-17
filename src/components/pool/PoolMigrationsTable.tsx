@@ -24,7 +24,7 @@ import type {
 } from "@tanstack/react-query";
 import { format } from "date-fns";
 import type { FC } from "react";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 
 import Crab from "@/resources/images/icons/crab.svg";
 import Dino from "@/resources/images/icons/dino.svg";

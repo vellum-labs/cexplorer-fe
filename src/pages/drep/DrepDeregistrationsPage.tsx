@@ -1,7 +1,7 @@
 import { BlockCell } from "@/components/blocks/BlockCell";
 import { DrepHashCell } from "@/components/drep/DrepHashCell";
 import { EpochCell } from "@/components/epoch/EpochCell";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { ScriptBadge } from "@/components/global/badges/ScriptBadge";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";

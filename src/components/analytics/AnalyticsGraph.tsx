@@ -185,7 +185,11 @@ export const AnalyticsGraph: FC<Props> = ({
                 className='flex h-[36px] w-[36px] shrink-0 cursor-pointer items-center justify-center gap-1/2 rounded-s border border-border'
                 onClick={showModals}
               >
-                <Download size={15} color={colors.text} className='text-text-md' />
+                <Download
+                  size={15}
+                  color={colors.text}
+                  className='text-text-md'
+                />
               </div>
             )}
           </div>

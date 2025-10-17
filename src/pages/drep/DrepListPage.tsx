@@ -12,7 +12,7 @@ import {
   useFetchStakeDrepRetired,
 } from "@/services/drep";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
 import { formatNumber } from "@/utils/format/format";
 

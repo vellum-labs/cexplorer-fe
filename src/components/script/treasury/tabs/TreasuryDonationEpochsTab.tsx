@@ -1,4 +1,4 @@
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import GlobalTable from "@/components/table/GlobalTable";
 import { useGraphColors } from "@/hooks/useGraphColors";

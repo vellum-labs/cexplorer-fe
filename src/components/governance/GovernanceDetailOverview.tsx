@@ -6,7 +6,7 @@ import { OverviewCard } from "../global/cards/OverviewCard";
 import { CircleHelp } from "lucide-react";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import PulseDot from "../global/PulseDot";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 
 import { Image } from "../global/Image";
 import { formatString } from "@/utils/format/format";

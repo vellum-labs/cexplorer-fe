@@ -15,7 +15,7 @@ import {
   GitFork,
   Lock,
 } from "lucide-react";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TotalSumWithRates } from "../global/TotalSumWithRates";
 import AdsCarousel from "../global/ads/AdsCarousel";
