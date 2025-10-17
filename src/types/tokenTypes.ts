@@ -18,6 +18,14 @@ export interface AggregatedSwapData {
     tokenIn: string;
     tokenOut: string;
     isMultiplePairs: boolean;
+    tokenInRegistry?: {
+      ticker?: string;
+      name?: string;
+    } | null;
+    tokenOutRegistry?: {
+      ticker?: string;
+      name?: string;
+    } | null;
   };
 
   totalAmountIn: number;

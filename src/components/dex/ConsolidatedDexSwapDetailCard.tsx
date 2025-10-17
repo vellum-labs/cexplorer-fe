@@ -196,6 +196,8 @@ export const ConsolidatedDexSwapDetailCard: FC<
             tokenOut={aggregatedData?.pair.tokenOut ?? ""}
             variant='full'
             clickable={false}
+            tokenInRegistry={aggregatedData?.pair.tokenInRegistry}
+            tokenOutRegistry={aggregatedData?.pair.tokenOutRegistry}
           />
         ),
       ),
@@ -226,7 +228,10 @@ export const ConsolidatedDexSwapDetailCard: FC<
           >
             <span className='text-text-sm text-grayTextPrimary'>
               {formatNumberWithSuffix(aggregatedData?.totalAmountIn ?? 0)}{" "}
-              <AssetTicker tokenName={aggregatedData?.pair.tokenIn ?? ""} />
+              <AssetTicker
+                tokenName={aggregatedData?.pair.tokenIn ?? ""}
+                registry={aggregatedData?.pair.tokenInRegistry}
+              />
             </span>
           </Tooltip>
         ),
@@ -331,7 +336,10 @@ export const ConsolidatedDexSwapDetailCard: FC<
                   aggregatedData?.totalExpectedOut) ??
                   0,
               )}{" "}
-              <AssetTicker tokenName={aggregatedData?.pair.tokenOut ?? ""} />
+              <AssetTicker
+                tokenName={aggregatedData?.pair.tokenOut ?? ""}
+                registry={aggregatedData?.pair.tokenOutRegistry}
+              />
             </span>
           </Tooltip>
         ),
