@@ -291,6 +291,8 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
             tokenOut={item.token_out.name}
             variant='simple'
             clickable={false}
+            tokenInRegistry={item.token_in.registry}
+            tokenOutRegistry={item.token_out.registry}
           />
         );
       },
@@ -310,6 +312,9 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         const tokenName = isBuying
           ? item?.token_out?.name
           : item?.token_in?.name;
+        const tokenRegistry = isBuying
+          ? item?.token_out?.registry
+          : item?.token_in?.registry;
         const displayName =
           tokenName === ADATokenName
             ? "ADA"
@@ -322,7 +327,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                 <div className='flex items-center gap-1'>
                   <span>
                     {amount.toLocaleString()}{" "}
-                    <AssetTicker tokenName={tokenName} />
+                    <AssetTicker tokenName={tokenName} registry={tokenRegistry} />
                   </span>
                   <Copy
                     copyText={`${amount.toLocaleString()} ${displayName}`}

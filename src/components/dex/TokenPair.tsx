@@ -10,6 +10,14 @@ interface TokenPairProps {
   tokenOut: string;
   variant?: "full" | "simple";
   clickable?: boolean;
+  tokenInRegistry?: {
+    ticker?: string;
+    name?: string;
+  } | null;
+  tokenOutRegistry?: {
+    ticker?: string;
+    name?: string;
+  } | null;
 }
 
 export const TokenPair: FC<TokenPairProps> = ({
@@ -17,6 +25,8 @@ export const TokenPair: FC<TokenPairProps> = ({
   tokenOut,
   variant = "full",
   clickable = true,
+  tokenInRegistry,
+  tokenOutRegistry,
 }) => {
   const tokenInFingerprint = getAssetFingerprint(tokenIn);
   const tokenOutFingerprint = getAssetFingerprint(tokenOut);
@@ -35,6 +45,7 @@ export const TokenPair: FC<TokenPairProps> = ({
                 tokenName={tokenIn}
                 fingerprint={tokenInFingerprint}
                 fontWeight='normal'
+                registry={tokenInRegistry}
               />
             </Link>
           ) : (
@@ -42,6 +53,7 @@ export const TokenPair: FC<TokenPairProps> = ({
               tokenName={tokenIn}
               fingerprint={tokenInFingerprint}
               fontWeight='normal'
+              registry={tokenInRegistry}
             />
           )}
         </div>
@@ -57,6 +69,7 @@ export const TokenPair: FC<TokenPairProps> = ({
                 tokenName={tokenOut}
                 fingerprint={tokenOutFingerprint}
                 fontWeight='normal'
+                registry={tokenOutRegistry}
               />
             </Link>
           ) : (
@@ -64,6 +77,7 @@ export const TokenPair: FC<TokenPairProps> = ({
               tokenName={tokenOut}
               fingerprint={tokenOutFingerprint}
               fontWeight='normal'
+              registry={tokenOutRegistry}
             />
           )}
         </div>
@@ -83,10 +97,15 @@ export const TokenPair: FC<TokenPairProps> = ({
             <AssetDisplay
               tokenName={tokenIn}
               fingerprint={tokenInFingerprint}
+              registry={tokenInRegistry}
             />
           </Link>
         ) : (
-          <AssetDisplay tokenName={tokenIn} fingerprint={tokenInFingerprint} />
+          <AssetDisplay
+            tokenName={tokenIn}
+            fingerprint={tokenInFingerprint}
+            registry={tokenInRegistry}
+          />
         )}
       </div>
       <ArrowRight size={15} className='block' />
@@ -100,12 +119,14 @@ export const TokenPair: FC<TokenPairProps> = ({
             <AssetDisplay
               tokenName={tokenOut}
               fingerprint={tokenOutFingerprint}
+              registry={tokenOutRegistry}
             />
           </Link>
         ) : (
           <AssetDisplay
             tokenName={tokenOut}
             fingerprint={tokenOutFingerprint}
+            registry={tokenOutRegistry}
           />
         )}
       </div>

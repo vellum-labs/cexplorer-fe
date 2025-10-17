@@ -100,6 +100,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                   ) : (
                     <AssetTicker
                       tokenName={aggregatedData?.pair?.tokenIn ?? ""}
+                      registry={aggregatedData?.pair?.tokenInRegistry}
                     />
                   )}
                 </span>
@@ -117,6 +118,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                   ) : (
                     <AssetTicker
                       tokenName={aggregatedData?.pair?.tokenOut ?? ""}
+                      registry={aggregatedData?.pair?.tokenOutRegistry}
                     />
                   )}
                 </span>
@@ -175,7 +177,10 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                               "ADA" ? (
                                 "ADA"
                               ) : (
-                                <AssetTicker tokenName={order.token_in.name} />
+                                <AssetTicker
+                                  tokenName={order.token_in.name}
+                                  registry={order.token_in.registry}
+                                />
                               )}
                             </span>
                           </Tooltip>
@@ -191,7 +196,10 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                               "ADA" ? (
                                 "ADA"
                               ) : (
-                                <AssetTicker tokenName={order.token_out.name} />
+                                <AssetTicker
+                                  tokenName={order.token_out.name}
+                                  registry={order.token_out.registry}
+                                />
                               )}
                             </span>
                           </Tooltip>
