@@ -7,7 +7,7 @@ import type { FC } from "react";
 
 import { PurposeBadge } from "@/components/global/badges/PurposeBadge";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import DateCell from "@/components/table/DateCell";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";

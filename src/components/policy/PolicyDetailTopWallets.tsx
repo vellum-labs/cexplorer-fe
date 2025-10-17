@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchPolicyDetail, useFetchPolicyOwner } from "@/services/policy";
 import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";

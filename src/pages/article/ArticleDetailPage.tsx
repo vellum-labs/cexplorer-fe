@@ -23,7 +23,7 @@ import DiscordLogo from "../../resources/images/icons/discord.svg";
 import TelegramLogo from "../../resources/images/icons/telegram.svg";
 import TwitterLogo from "../../resources/images/icons/twitter.svg";
 import { RandomDelegationModal } from "@/components/wallet/RandomDelegationModal";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 export const ArticleDetailPage = () => {
   const route = getRouteApi("/article/$url");

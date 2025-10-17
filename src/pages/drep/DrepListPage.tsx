@@ -3,7 +3,7 @@ import { Asterisk, Users, UserX, Zap } from "lucide-react";
 import { DrepAnalyticsTab } from "@/components/drep/tabs/DrepAnalyticsTab";
 import { DrepDelegationsTab } from "@/components/drep/tabs/DrepDelegationsTab";
 import { DrepListTab } from "@/components/drep/tabs/DrepListTab";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import Tabs from "@/components/global/Tabs";
 
 import {

@@ -6,7 +6,7 @@ import {
   qtcreatorLight,
 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
-import LoadingSkeleton from "./skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { ChevronDown, ChevronUp, Search, X } from "lucide-react";
 import Copy from "./Copy";
 
@@ -203,7 +203,7 @@ export const JsonDisplay: FC<JSONDisplayProps> = ({
 
   return (
     <div
-      className={`relative h-full w-full overflow-hidden rounded-m border border-border !bg-cardBg text-text-md text-text-xs shadow`}
+      className={`shadow relative h-full w-full overflow-hidden rounded-m border border-border !bg-cardBg text-text-md text-text-xs`}
     >
       {!isError && !Array.isArray(data?.data) && (
         <div
@@ -219,7 +219,7 @@ export const JsonDisplay: FC<JSONDisplayProps> = ({
             <div className='relative right-[15px] flex items-center'>
               <Search
                 size={15}
-                className={`absolute ${inputOpen ? "left-2 top-1" : ""} cursor-pointer rounded-lg`}
+                className={`absolute ${inputOpen ? "left-2 top-1" : ""} rounded-lg cursor-pointer`}
                 onClick={() => setInputOpen(true)}
                 color={inputOpen ? "black" : undefined}
               />

@@ -1,7 +1,7 @@
 import { AddressesTab } from "@/components/address/tabs/AddressesTab";
 import { RewardsTab } from "@/components/address/tabs/RewardsTab";
 import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import Tabs from "@/components/global/Tabs";
 import { formatString } from "@/utils/format/format";
 import { getRouteApi, useSearch } from "@tanstack/react-router";

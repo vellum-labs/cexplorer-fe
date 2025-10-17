@@ -4,7 +4,7 @@ import { EpochStats } from "@/components/epoch/EpochStats";
 import EpochBlockchainGraph from "@/components/epoch/graphs/EpochBlockchainGraph";
 import { EpochAnalyticsTabItem } from "@/components/epoch/tabs/EpochAnalyticsTabItem";
 import Tabs from "@/components/global/Tabs";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { EpochsTabItem } from "../../components/epoch/tabs/EpochsTabItem";
 
 import { useMiscConst } from "@/hooks/useMiscConst";

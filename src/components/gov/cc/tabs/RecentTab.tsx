@@ -5,7 +5,7 @@ import GlobalTable from "@/components/table/GlobalTable";
 import ExportButton from "@/components/table/ExportButton";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { useRecentVotesTableStore } from "@/stores/tables/recentVotesTableStore";
 import { useFetchCCVotes } from "@/services/governance";
 import { formatString, formatNumber } from "@/utils/format/format";

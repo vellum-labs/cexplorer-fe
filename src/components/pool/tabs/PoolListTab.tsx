@@ -13,7 +13,7 @@ import { PlusIcon, X } from "lucide-react";
 import { formatString } from "@/utils/format/format";
 import { DisplayVoteModal } from "@/components/global/modals/DisplayVoteModal";
 import { formatNumber } from "@/utils/format/format";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import type { PoolsListColumns } from "@/types/tableTypes";
 
 const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {

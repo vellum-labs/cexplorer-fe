@@ -10,7 +10,7 @@ import { PurposeBadge } from "../global/badges/PurposeBadge";
 import Button from "../global/Button";
 import { OverviewCard } from "../global/cards/OverviewCard";
 import { OverviewStatCard } from "../global/cards/OverviewStatCard";
-import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { TextDisplay } from "../global/TextDisplay";
 import { HashCell } from "../tx/HashCell";
 import { AttributeDropdown } from "../global/AttributeDropdown";

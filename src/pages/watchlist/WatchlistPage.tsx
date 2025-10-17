@@ -14,8 +14,12 @@ import { EmptyState } from "@/components/global/EmptyState";
 import Button from "@/components/global/Button";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import { Star, Wallet } from "lucide-react";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
-import { useFetchWatchlist, useFetchAccountList, useFetchPolicyList } from "@/services/user";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import {
+  useFetchWatchlist,
+  useFetchAccountList,
+  useFetchPolicyList,
+} from "@/services/user";
 
 export const WatchlistPage = () => {
   const token = useAuthToken();

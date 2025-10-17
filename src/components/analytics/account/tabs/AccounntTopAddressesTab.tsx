@@ -7,7 +7,7 @@ import type { FC } from "react";
 
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import DateCell from "@/components/table/DateCell";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
@@ -184,7 +184,9 @@ export const AccounntTopAddressesTab: FC = () => {
                   )
                 }
               />
-              <span className='text-text-sm'>Not delegated to a stake pool</span>
+              <span className='text-text-sm'>
+                Not delegated to a stake pool
+              </span>
             </label>
           </div>
         ),

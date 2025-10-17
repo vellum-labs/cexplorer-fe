@@ -3,7 +3,7 @@ import ReactECharts from "echarts-for-react";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useGraphColors } from "@/hooks/useGraphColors";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { lovelaceToAda } from "@/utils/lovelaceToAda";
 import type { ThresholdsMilestone } from "@/types/governanceTypes";
 
@@ -41,7 +41,9 @@ export const PowerThresholdsDRepDelegationDonutGraph: FC<
   if (isUnavailable) {
     return (
       <div className='bg-muted/30 flex h-[300px] w-full items-center justify-center rounded-m'>
-        <span className='text-text-xl font-semibold text-grayTextPrimary'>N/A</span>
+        <span className='text-text-xl font-semibold text-grayTextPrimary'>
+          N/A
+        </span>
       </div>
     );
   }

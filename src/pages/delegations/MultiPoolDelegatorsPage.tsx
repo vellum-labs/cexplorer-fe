@@ -11,7 +11,7 @@ import { multiPoolDelegatorsTableOptions } from "@/constants/tables/multiPoolDel
 import ExportButton from "@/components/table/ExportButton";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import { StakeCell } from "@/components/table/StakeCell";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 
 export const MultiPoolDelegatorsPage = () => {

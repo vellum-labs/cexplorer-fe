@@ -6,7 +6,7 @@ import { useGraphColors } from "@/hooks/useGraphColors";
 import { useEffect, useState } from "react";
 import type { ReactEChartsProps } from "@/lib/ReactCharts";
 import type { ThresholdsMilestone } from "@/types/governanceTypes";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";

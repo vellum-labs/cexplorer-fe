@@ -17,7 +17,7 @@ import { Link } from "@tanstack/react-router";
 import Copy from "../global/Copy";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";
 import { AdaWithTooltip } from "../global/AdaWithTooltip";
-import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { SwapDetailTable } from "./SwapDetailTable";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { AssetTicker } from "./AssetTicker";

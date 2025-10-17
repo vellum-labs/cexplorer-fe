@@ -1,4 +1,4 @@
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
 import { colors } from "@/constants/colors";
 import { epochLength } from "@/constants/confVariables";
@@ -100,7 +100,7 @@ export const EpochCalendarPage = () => {
       metadataTitle='epochCalendar'
     >
       <div className='flex w-full max-w-desktop flex-wrap items-center justify-between gap-2 px-mobile md:px-desktop'>
-        <div className='text-text-sm flex items-center gap-1 text-grayTextPrimary'>
+        <div className='flex items-center gap-1 text-text-sm text-grayTextPrimary'>
           Show upcoming:{" "}
           <SortBy
             selectItems={upcomingEpochsItems}
@@ -155,7 +155,7 @@ const EpochCard = ({ epoch }: { epoch: EpochListData }) => {
     <div className='flex flex-col gap-1 rounded-l border border-border p-2'>
       <div className='mb-1 flex items-center gap-1.5'>
         {epoch.no > currentEpoch ? (
-          <div className='rounded-max p-1/2 bg-grayTextSecondary'>
+          <div className='rounded-max bg-grayTextSecondary p-1/2'>
             <Calendar size={15} color='white' className='' />
           </div>
         ) : (
@@ -169,13 +169,13 @@ const EpochCard = ({ epoch }: { epoch: EpochListData }) => {
         )}
         <h3 className=''>Epoch {epoch.no}</h3>
       </div>
-      <span className='text-text-xs flex justify-between text-grayTextSecondary'>
+      <span className='flex justify-between text-text-xs text-grayTextSecondary'>
         <p className='w-10'>Start</p>
         <span className='ml-1 text-grayTextPrimary'>
           {formatDate(epoch.start_time)}
         </span>
       </span>
-      <span className='text-text-xs flex justify-between text-grayTextSecondary'>
+      <span className='flex justify-between text-text-xs text-grayTextSecondary'>
         <p className='w-10'>End</p>
         <span className='ml-1 text-grayTextPrimary'>
           {formatDate(epoch.end_time)}
@@ -184,7 +184,7 @@ const EpochCard = ({ epoch }: { epoch: EpochListData }) => {
       <div className='mt-1 flex justify-end border-t border-border pt-1'>
         {currentEpoch >= epoch.no ? (
           <Link
-            className='text-text-sm text-right font-medium text-primary'
+            className='text-right text-text-sm font-medium text-primary'
             to='/epoch/$no'
             params={{ no: String(epoch.no) }}
           >

@@ -20,7 +20,7 @@ import type { MouseEventHandler, ReactNode, RefObject } from "react";
 import React, { useEffect, useRef, useState } from "react";
 import { NoResultsFound } from "../global/NoResultsFound";
 import { Pagination } from "../global/Pagination";
-import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Funnel } from "lucide-react";
 import { FunnelFilter } from "../global/FunnelFilter";
 

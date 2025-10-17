@@ -3,7 +3,7 @@ import type { FC } from "react";
 
 import { Download } from "lucide-react";
 
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import {
   Table,
   TableBody,

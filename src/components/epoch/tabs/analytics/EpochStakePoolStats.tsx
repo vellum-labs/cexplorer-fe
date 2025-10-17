@@ -1,7 +1,7 @@
 import type { EpochStatsSummary } from "@/types/epochTypes";
 import type { FC } from "react";
 
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber } from "@/utils/format/format";
 import { CircleHelp } from "lucide-react";

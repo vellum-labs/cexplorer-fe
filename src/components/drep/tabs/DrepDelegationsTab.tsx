@@ -20,7 +20,7 @@ import { format } from "date-fns";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { formatNumber } from "@/utils/format/format";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 export const DrepDelegationsTab = () => {
   const { page } = useSearch({ from: "/drep/" });

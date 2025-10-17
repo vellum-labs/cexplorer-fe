@@ -4,7 +4,7 @@ import { useFetchAssetMetadata } from "@/services/assets";
 
 import Dropdown from "@/components/global/dropdowns/Dropdown";
 import { JsonDisplay } from "@/components/global/JsonDisplay";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@/utils/format/format";
 
 interface AssetMetaDataTabProps {

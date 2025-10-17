@@ -1,10 +1,10 @@
 import type { FC } from "react";
 
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 export const AdaPriceTableSkeleton: FC = () => {
   return (
-    <div className='flex w-full flex-col rounded-lg border border-border bg-cardBg pb-4 pt-4 lg:min-w-[390px] lg:max-w-[400px] lg:pb-0'>
+    <div className='rounded-lg flex w-full flex-col border border-border bg-cardBg pb-4 pt-4 lg:min-w-[390px] lg:max-w-[400px] lg:pb-0'>
       <div className='flex h-[110px] w-full flex-col gap-1 border-b border-border px-6 pb-4'>
         <div className='flex items-center gap-2'>
           <LoadingSkeleton width='36px' height='36px' rounded='md' />

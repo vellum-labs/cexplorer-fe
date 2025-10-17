@@ -9,7 +9,7 @@ import { useFetchVoteDetail } from "@/services/governance";
 import type { GovernanceVote } from "@/types/governanceTypes";
 import Tabs from "@/components/global/Tabs";
 import { VoteDetailCard } from "@/components/governance/vote/VoteDetailCard";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { EmptyState } from "@/components/global/EmptyState";
 
@@ -21,7 +21,9 @@ export const GovernanceVoteDetailPage: FC = () => {
   const votes = voteData?.data?.data ?? [];
 
   const tabs = useMemo(() => {
-    const govActionIds = votes.map((vote: GovernanceVote) => vote?.proposal?.ident?.id);
+    const govActionIds = votes.map(
+      (vote: GovernanceVote) => vote?.proposal?.ident?.id,
+    );
     const hasDuplicates = govActionIds.some(
       (id: string, index: number) => govActionIds.indexOf(id) !== index,
     );

@@ -4,7 +4,7 @@ import { HeaderBanner } from "@/components/global/HeaderBanner";
 import { Image } from "@/components/global/Image";
 import { NoResultsFound } from "@/components/global/NoResultsFound";
 import { Pagination } from "@/components/global/Pagination";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
 import { articleCategories } from "@/constants/article";
 import { useFetchArticleList } from "@/services/article";

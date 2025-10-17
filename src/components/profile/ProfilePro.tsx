@@ -5,7 +5,7 @@ import { EmptyState } from "@/components/global/EmptyState";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import TextInput from "@/components/global/inputs/TextInput";
 import Modal from "@/components/global/Modal";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { WatchlistStar } from "@/components/global/watchlist/WatchlistStar";
 import GlobalTable from "@/components/table/GlobalTable";
 import { Label } from "@/components/ui/label";

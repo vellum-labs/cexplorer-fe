@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Fragment, useRef } from "react";
 import { Search } from "lucide-react";
 
@@ -271,7 +271,7 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
         >
           <Search
             size={15}
-            className={`absolute ${inputOpen ? "left-2" : "-left-4"} cursor-pointer rounded-lg`}
+            className={`absolute ${inputOpen ? "left-2" : "-left-4"} rounded-lg cursor-pointer`}
             onClick={() => setInputOpen(true)}
             color={inputOpen ? "black" : undefined}
           />

@@ -8,7 +8,7 @@ import X from "@/resources/images/icons/twitter.svg";
 
 import { OverviewCard } from "../global/cards/OverviewCard";
 import { Image } from "../global/Image";
-import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";
 
 import { formatNumber, formatString } from "@/utils/format/format";

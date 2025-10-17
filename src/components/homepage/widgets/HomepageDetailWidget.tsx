@@ -1,7 +1,7 @@
 import type { WidgetDataTypes, WidgetTypes } from "@/types/widgetTypes";
 import type { FC } from "react";
 
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { OverviewCard } from "@/components/global/cards/OverviewCard";
 import SortBy from "@/components/ui/sortBy";
 
@@ -93,7 +93,9 @@ export const HomepageDetailWidget: FC<HomepageDetailWidgetProps> = ({
       <div className='flex w-full items-center justify-between gap-1.5 p-1'>
         {title && title}
         <div className='flex flex-wrap items-center gap-x-1'>
-          <span className='text-text-xs text-grayTextPrimary'>Detail block: </span>
+          <span className='text-text-xs text-grayTextPrimary'>
+            Detail block:{" "}
+          </span>
           <SortBy
             selectItems={selectItems as any}
             selectedItem={selectedItem}
@@ -104,7 +106,7 @@ export const HomepageDetailWidget: FC<HomepageDetailWidgetProps> = ({
         </div>
       </div>
       <OverviewCard
-        className='h-full !rounded-none !rounded-b-lg !border-none'
+        className='!rounded-b-lg h-full !rounded-none !border-none'
         title=''
         overviewList={item ? item[1] : []}
       />

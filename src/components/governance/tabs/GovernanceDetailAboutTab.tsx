@@ -17,7 +17,7 @@ import { formatNumber } from "@/utils/format/format";
 import { Link, useSearch } from "@tanstack/react-router";
 import { ExternalLink, Landmark, Route, User, X } from "lucide-react";
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { GovVoterCell } from "@/components/gov/GovVoterCell";
 import { VoteCell } from "@/components/governance/vote/VoteCell";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";

@@ -2,7 +2,7 @@ import type { GovernanceActionDetailAboutListColumns } from "@/types/tableTypes"
 import type { FC } from "react";
 
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import GlobalTable from "@/components/table/GlobalTable";

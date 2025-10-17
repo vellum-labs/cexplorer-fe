@@ -5,7 +5,7 @@ import AdsCarousel from "@/components/global/ads/AdsCarousel";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
 import SortBy from "@/components/ui/sortBy";

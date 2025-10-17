@@ -23,7 +23,7 @@ import { MintedByCard } from "../global/cards/MintedByCard";
 import type { OverviewList } from "../global/cards/OverviewCard";
 import { OverviewCard } from "../global/cards/OverviewCard";
 import { SizeCard } from "../global/cards/SizeCard";
-import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import DateCell from "../table/DateCell";
 import TtlCountdown from "./TtlCountdown";
 import { useEffect, useState } from "react";
@@ -175,7 +175,7 @@ const TxDetailOverview = ({ query }: Props) => {
       value: (
         <div className='flex items-center gap-[2.5px] text-text-sm'>
           {confirmations[1] < 3 && (
-            <CircleX size={15} className='text-red-500 translate-y-[1px]' />
+            <CircleX size={15} className='translate-y-[1px] text-red-500' />
           )}
           {confirmations[1] > 2 && confirmations[1] < 9 && (
             <CircleAlert

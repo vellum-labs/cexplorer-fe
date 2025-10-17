@@ -1,7 +1,7 @@
 import type { useFetchGovernanceActionDetail } from "@/services/governance";
 import type { FC } from "react";
 
-import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { OverviewCard } from "../global/cards/OverviewCard";
 import { CircleHelp } from "lucide-react";
 import Copy from "../global/Copy";

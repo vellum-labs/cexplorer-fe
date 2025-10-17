@@ -4,7 +4,7 @@ import { EpochCell } from "@/components/epoch/EpochCell";
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
 import { ScriptBadge } from "@/components/global/badges/ScriptBadge";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import DateCell from "@/components/table/DateCell";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
@@ -139,7 +139,9 @@ export const DrepUpdatesPage = () => {
           link: "/gov",
         },
         {
-          label: <span className='inline pt-1/2'>Delegated representatives</span>,
+          label: (
+            <span className='inline pt-1/2'>Delegated representatives</span>
+          ),
           link: "/drep",
         },
         { label: "Updates" },

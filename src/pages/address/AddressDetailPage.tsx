@@ -4,7 +4,7 @@ import { AssetsTab } from "@/components/address/tabs/AssetsTab";
 import { RewardsTab } from "@/components/address/tabs/RewardsTab";
 import { UTXOTab } from "@/components/address/tabs/UTXOTab";
 import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import Tabs from "@/components/global/Tabs";
 import { QRCodeSVG } from "qrcode.react";
 import { type FC } from "react";

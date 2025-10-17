@@ -22,8 +22,8 @@ import { useFetchMiscBasic } from "@/services/misc";
 import type { MiscBasicResponse } from "@/types/miscTypes";
 import { GlobalSearch } from "../search/GlobalSearch";
 import AdDropdown from "./dropdowns/AdDropdown";
-import LoadingSkeleton from "./skeletons/LoadingSkeleton";
-import { ShareButton } from "./ShareButton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { ShareButton } from "@vellumlabs/cexplorer-sdk";
 
 export interface HeaderBannerBreadCrumbItem {
   label: ReactNode;

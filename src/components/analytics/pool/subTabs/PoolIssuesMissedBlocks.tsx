@@ -5,7 +5,7 @@ import type { FC } from "react";
 import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
 import Dropdown from "@/components/global/dropdowns/Dropdown";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import PoolCell from "@/components/table/PoolCell";
 import { CircleAlert } from "lucide-react";
 

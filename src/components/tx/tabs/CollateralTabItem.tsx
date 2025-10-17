@@ -7,7 +7,7 @@ import { useFetchTxDetail } from "@/services/tx";
 import type { TableColumns } from "@/types/tableTypes";
 import type { TxInfo } from "@/types/txTypes";
 import { getRouteApi } from "@tanstack/react-router";
-import LoadingSkeleton from "../../global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "../HashCell";
 
 const CollateralTabItem = () => {
@@ -72,7 +72,9 @@ const CollateralTabItem = () => {
   ];
 
   if (!uniqueInputs && !query.isLoading) {
-    return <p className='w-full text-center text-text-sm'>No collateral found</p>;
+    return (
+      <p className='w-full text-center text-text-sm'>No collateral found</p>
+    );
   }
 
   if (query.isLoading) {

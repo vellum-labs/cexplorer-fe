@@ -3,7 +3,7 @@ import type { EpochStatsSummary } from "@/types/epochTypes";
 import type { FC } from "react";
 
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber } from "@/utils/format/format";
 import { lovelaceToAda } from "@/utils/lovelaceToAda";
 import { format } from "date-fns";

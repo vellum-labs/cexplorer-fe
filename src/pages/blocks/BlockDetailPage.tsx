@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 
 import { BlockDetailTable } from "@/components/blocks/BlockDetail/BlockDetailTable";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchBlockDetail } from "@/services/blocks";
 import { useFetchMiscBasic, useFetchMiscSearch } from "@/services/misc";

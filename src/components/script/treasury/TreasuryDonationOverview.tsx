@@ -1,6 +1,6 @@
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
 import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { TrendingArrow } from "@/components/global/TrendingArrow";
 import { colors } from "@/constants/colors";
 import type { TreasuryDonationStatsResponse } from "@/types/treasuryTypes";

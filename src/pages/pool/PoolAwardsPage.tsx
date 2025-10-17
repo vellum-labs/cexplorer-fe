@@ -5,7 +5,7 @@ import { Calendar } from "lucide-react";
 import { useFetchGlobalPoolAwards } from "@/services/pools";
 
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import {
   Pagination,
   PaginationContent,
