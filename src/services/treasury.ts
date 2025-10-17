@@ -41,7 +41,9 @@ export const validateDonationNetwork = (lucid: LucidEvolution): boolean => {
         "Network mismatch: Wallet is on Preprod but donation address is for Mainnet. Please use the Preprod site.",
       );
       return false;
-    } else if (
+    }
+
+    if (
       lucidNetwork === "Mainnet" &&
       (isTestnetAddress || !isMainnetAddress)
     ) {
