@@ -3,7 +3,7 @@ import type {
   PoolBirthdaysTableOptions,
 } from "@/types/tableTypes";
 
-import { handlePersistStore } from "../../lib/handlePersistStore";
+import { handlePersistStore } from "@vellumlabs/cexplorer-sdk";
 
 export const usePoolBirthdaysTableStore = handlePersistStore<
   PoolBirthdaysTableOptions,
@@ -26,7 +26,14 @@ export const usePoolBirthdaysTableStore = handlePersistStore<
     },
     isResponsive: true,
     rows: 20,
-    columnsOrder: ["date", "pool", "birthday", "registered", "delegators", "active_stake"],
+    columnsOrder: [
+      "date",
+      "pool",
+      "birthday",
+      "registered",
+      "delegators",
+      "active_stake",
+    ],
   },
   set => ({
     setColumnVisibility: (columnKey, isVisible) =>

@@ -9,13 +9,13 @@ import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useCurrencyStore } from "@/stores/currencyStore";
 
-import { currencySigns } from "@/constants/currencies";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { formatCurrency } from "@/utils/format/formatCurrency";
 
 import Bitcoin from "@/resources/images/wallet/bitcoin.svg";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { AdaPriceTableSkeleton } from "./AdaPriceTableSkeleton";
 
 export const AdaPriceTable: FC = () => {
@@ -32,29 +32,33 @@ export const AdaPriceTable: FC = () => {
   const totalSupply = genesisParams[0].shelley[0].maxLovelaceSupply;
 
   return (
-    <div className='rounded-m flex w-full flex-col border border-border bg-cardBg pb-2 pt-2 lg:min-w-[390px] lg:max-w-[400px] lg:pb-0'>
-      <div className='gap-1/2 flex h-[110px] w-full flex-col border-b border-border px-3 pb-2'>
+    <div className='flex w-full flex-col rounded-m border border-border bg-cardBg pb-2 pt-2 lg:min-w-[390px] lg:max-w-[400px] lg:pb-0'>
+      <div className='flex h-[110px] w-full flex-col gap-1/2 border-b border-border px-3 pb-2'>
         <div className='flex items-center gap-1'>
-          <div className='gap-1/2 flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-s border border-border'>
+          <div className='flex h-[36px] w-[36px] shrink-0 items-center justify-center gap-1/2 rounded-s border border-border'>
             <Cardano size={20} color={colors.text} />
           </div>
           <h3>Cardano</h3>
           <span className='text-text-sm text-grayTextPrimary'>ADA Price</span>
         </div>
         <div className='flex items-center gap-1'>
-          <span className='text-display-xs font-semibold'>{price.today}</span>
+          <span className='text-display-xs font-semibold'>
+            {formatCurrency(Number(price.todayValue.toFixed(2)), currency, {
+              applyNumberFormatting: false,
+            })}
+          </span>
           <span
-            className={`rounded-max px-1/2 py-1/4 ml-0.5 flex items-center border text-[11px] font-medium ${price.percentChange < 1 && price.percentChange > -1 ? "border-yellow-500/40 bg-yellow-500/5 text-yellowText" : price.percentChange > 0 ? "border-green-500/40 bg-green-500/5 text-greenText" : "border-red-500/40 bg-red-500/5 text-redText"}`}
+            className={`ml-0.5 flex items-center rounded-max border px-1/2 py-1/4 text-[11px] font-medium ${price.percentChange < 1 && price.percentChange > -1 ? "border-yellow-500/40 bg-yellow-500/5 text-yellowText" : price.percentChange > 0 ? "border-green-500/40 bg-green-500/5 text-greenText" : "border-red-500/40 bg-red-500/5 text-redText"}`}
           >
             {price.percentChange > 0 && "+"}
             {price.percentChange?.toFixed(1)}%
           </span>
         </div>
-        <div className='gap-1/2 flex items-center'>
+        <div className='flex items-center gap-1/2'>
           <span className='text-text-xs font-medium text-grayTextPrimary'>
             {Math.round(price.adaToSats)}
           </span>
-          <div className='gap-1/2 flex items-center'>
+          <div className='flex items-center gap-1/2'>
             <img src={Bitcoin} alt='btc' className='h-[14px] w-[14px]' />
             <span className='text-text-xs font-medium text-grayTextPrimary'>
               sats
@@ -64,8 +68,8 @@ export const AdaPriceTable: FC = () => {
       </div>
 
       <div className='flex h-[50px] flex-grow items-center border-b border-border px-3'>
-        <div className='gap-1/2 flex min-w-[160px] items-center'>
-          <span className='text-text-sm inline-block font-medium text-grayTextPrimary'>
+        <div className='flex min-w-[160px] items-center gap-1/2'>
+          <span className='inline-block text-text-sm font-medium text-grayTextPrimary'>
             Market cap
           </span>
           <Tooltip content='ADA price × circulating supply'>
@@ -76,20 +80,20 @@ export const AdaPriceTable: FC = () => {
           </Tooltip>
         </div>
         <span className='text-text-sm font-semibold text-grayTextPrimary'>
-          {currencySigns[currency]}
           {miscConst?.circulating_supply
-            ? formatNumber(
+            ? formatCurrency(
                 Math.round(
                   (miscConst.circulating_supply / 1e6) * price.todayValue,
                 ),
+                currency,
               )
             : "-"}
         </span>
       </div>
 
       <div className='flex h-[50px] flex-grow items-center border-b border-border bg-darker px-3'>
-        <div className='gap-1/2 flex min-w-[160px] items-center'>
-          <span className='text-text-sm inline-block font-medium text-grayTextPrimary'>
+        <div className='flex min-w-[160px] items-center gap-1/2'>
+          <span className='inline-block text-text-sm font-medium text-grayTextPrimary'>
             FDV
           </span>
           <Tooltip
@@ -102,16 +106,18 @@ export const AdaPriceTable: FC = () => {
           </Tooltip>
         </div>
         <span className='text-text-sm font-semibold text-grayTextPrimary'>
-          {currencySigns[currency]}
           {miscConst?.circulating_supply
-            ? formatNumber(Math.round((totalSupply / 1e6) * price.todayValue))
+            ? formatCurrency(
+                Math.round((totalSupply / 1e6) * price.todayValue),
+                currency,
+              )
             : "-"}
         </span>
       </div>
 
       <div className='flex h-[50px] flex-grow items-center border-b border-border px-3'>
-        <div className='gap-1/2 flex min-w-[160px] items-center'>
-          <span className='text-text-sm inline-block font-medium text-grayTextPrimary'>
+        <div className='flex min-w-[160px] items-center gap-1/2'>
+          <span className='inline-block text-text-sm font-medium text-grayTextPrimary'>
             Circulating supply
           </span>
           <Tooltip content='ADA currently in circulation (not locked or unminted)'>
@@ -129,8 +135,8 @@ export const AdaPriceTable: FC = () => {
       </div>
 
       <div className='flex h-[50px] flex-grow items-center border-b border-border bg-darker px-3'>
-        <div className='gap-1/2 flex min-w-[160px] items-center'>
-          <span className='text-text-sm inline-block font-medium text-grayTextPrimary'>
+        <div className='flex min-w-[160px] items-center gap-1/2'>
+          <span className='inline-block text-text-sm font-medium text-grayTextPrimary'>
             Total supply
           </span>
           <Tooltip
@@ -148,8 +154,8 @@ export const AdaPriceTable: FC = () => {
       </div>
 
       <div className='flex h-[50px] flex-grow items-center border-b px-3 lg:border-none'>
-        <div className='gap-1/2 flex min-w-[160px] items-center'>
-          <span className='text-text-sm inline-block font-medium text-grayTextPrimary'>
+        <div className='flex min-w-[160px] items-center gap-1/2'>
+          <span className='inline-block text-text-sm font-medium text-grayTextPrimary'>
             ADA staked
           </span>
           <Tooltip content='ADA delegated to stake pools (out of circulating supply)'>

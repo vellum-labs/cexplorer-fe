@@ -3,7 +3,7 @@ import type { useFetchPoolDetail } from "@/services/pools";
 import { useFetchUserInfo } from "@/services/user";
 import { useWalletStore } from "@/stores/walletStore";
 import { handleDelegation } from "@/utils/wallet/handleDelegation";
-import Button from "../global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import Modal from "../global/Modal";
 import SpinningLoader from "../global/SpinningLoader";
 
@@ -25,7 +25,6 @@ const DelegationModal = ({ onClose, poolQuery }: Props) => {
       ? userQuery.data?.data?.account[0].view
       : undefined;
   const delegationQuery = useCheckUserDelegation(view);
-  const delegationData = delegationQuery.data?.data;
 
   const livePool =
     userQuery.data?.data?.account && userQuery.data?.data?.account.length > 0
@@ -69,7 +68,12 @@ const DelegationModal = ({ onClose, poolQuery }: Props) => {
             label='Delegate'
             size='lg'
             variant='primary'
-            onClick={() => handleDelegation(poolId, lucid, true)}
+            onClick={() =>
+              handleDelegation(
+                { type: "pool", ident: poolId, donation: true },
+                lucid,
+              )
+            }
           />
         </div>
       )}

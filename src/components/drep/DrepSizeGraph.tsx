@@ -4,12 +4,12 @@ import type { FC } from "react";
 import ReactEcharts from "echarts-for-react";
 import GraphWatermark from "../global/graphs/GraphWatermark";
 
-import { useWindowDimensions } from "@/utils/useWindowsDemensions";
+import { useWindowDimensions } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useRef, useState } from "react";
 
 import type { DrepListOrder } from "@/types/drepTypes";
-import { formatString } from "@/utils/format/format";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { useNavigate } from "@tanstack/react-router";
 import { useGraphColors } from "@/hooks/useGraphColors";
 

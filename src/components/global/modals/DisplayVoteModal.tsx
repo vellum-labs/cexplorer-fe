@@ -2,17 +2,17 @@ import type { MiscSearch } from "@/types/miscTypes";
 import type { FC } from "react";
 
 import Modal from "../Modal";
-import TextInput from "../inputs/TextInput";
-import Button from "../Button";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 
 import { useState } from "react";
 import { useLocaleStore } from "@/stores/localeStore";
-import useDebounce from "@/hooks/useDebounce";
+import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscSearch } from "@/services/misc";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
-import { formatString } from "@/utils/format/format";
-import Copy from "../Copy";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { ActionTypes } from "../ActionTypes";
 
 interface DisplayVoteModalProps {

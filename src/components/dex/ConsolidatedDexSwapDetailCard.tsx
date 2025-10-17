@@ -14,12 +14,12 @@ import { dexConfig } from "@/constants/dexConfig";
 
 import { Image } from "../global/Image";
 import { Link } from "@tanstack/react-router";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
-import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { SwapDetailTable } from "./SwapDetailTable";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { AssetTicker } from "./AssetTicker";
 import { SwapTypeBadge } from "./SwapTypeBadge";
 import { FeeDropdown } from "./FeeDropdown";
@@ -35,7 +35,7 @@ import { getConfirmations } from "@/utils/getConfirmations";
 import { renderWithException } from "@/utils/renderWithException";
 import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
 import { ADATokenName } from "@/constants/currencies";
-import { formatNumberWithSuffix } from "@/utils/format/format";
+import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 
 interface ConsolidatedDexSwapDetailCardProps {
   miscBasic: ReturnType<typeof useFetchMiscBasic>["data"];
@@ -106,7 +106,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
         aggregatedData?.address,
         <div className='flex items-center gap-1'>
           {aggregatedData?.orders[0]?.user?.balance && (
-            <Image src={Icon} className='rounded-max h-4 w-4' />
+            <Image src={Icon} className='h-4 w-4 rounded-max' />
           )}
           <div className='flex items-center gap-1'>
             <Link
@@ -114,7 +114,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
               params={{
                 address: aggregatedData?.address ?? "",
               }}
-              className='text-text-sm block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-primary'
+              className='block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-text-sm text-primary'
             >
               {aggregatedData?.address}
             </Link>
@@ -144,7 +144,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
             }}
             className='text-primary'
           >
-            <span className='text-text-sm block overflow-hidden overflow-ellipsis whitespace-nowrap px-0'>
+            <span className='block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-text-sm'>
               {aggregatedData?.txHash}
             </span>
           </Link>
@@ -157,7 +157,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
       title: "Confirmation",
       value: renderWithException(
         aggregatedData?.orders[0]?.block?.no,
-        <div className='text-text-sm flex items-center gap-[2.5px]'>
+        <div className='flex items-center gap-[2.5px] text-text-sm'>
           {confirmations[1] < 3 && (
             <CircleX size={15} className='translate-y-[1px] text-red-500' />
           )}
@@ -197,6 +197,8 @@ export const ConsolidatedDexSwapDetailCard: FC<
             tokenOut={aggregatedData?.pair.tokenOut ?? ""}
             variant='full'
             clickable={false}
+            tokenInRegistry={aggregatedData?.pair.tokenInRegistry}
+            tokenOutRegistry={aggregatedData?.pair.tokenOutRegistry}
           />
         ),
       ),
@@ -213,7 +215,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
         ) : (
           <Tooltip
             content={
-              <div className='gap-1/2 flex items-center'>
+              <div className='flex items-center gap-1/2'>
                 <span>
                   {(aggregatedData?.totalAmountIn ?? 0).toLocaleString()}
                 </span>
@@ -227,7 +229,10 @@ export const ConsolidatedDexSwapDetailCard: FC<
           >
             <span className='text-text-sm text-grayTextPrimary'>
               {formatNumberWithSuffix(aggregatedData?.totalAmountIn ?? 0)}{" "}
-              <AssetTicker tokenName={aggregatedData?.pair.tokenIn ?? ""} />
+              <AssetTicker
+                tokenName={aggregatedData?.pair.tokenIn ?? ""}
+                registry={aggregatedData?.pair.tokenInRegistry}
+              />
             </span>
           </Tooltip>
         ),
@@ -250,7 +255,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
         currency === "ada" ? (
           <Tooltip
             content={
-              <div className='gap-1/2 flex items-center'>
+              <div className='flex items-center gap-1/2'>
                 <span>
                   ₳{" "}
                   {((aggregatedData?.adaPrice ?? 0) / 1e6)
@@ -278,7 +283,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
         ) : (
           <Tooltip
             content={
-              <div className='gap-1/2 flex items-center'>
+              <div className='flex items-center gap-1/2'>
                 <span>$ {usd.toFixed(20).replace(/\.?0+$/, "")}</span>
                 <Copy copyText={usd.toFixed(20).replace(/\.?0+$/, "")} />
               </div>
@@ -308,7 +313,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
         ) : (
           <Tooltip
             content={
-              <div className='gap-1/2 flex items-center'>
+              <div className='flex items-center gap-1/2'>
                 <span>
                   {(
                     (aggregatedData?.totalActualOut ||
@@ -332,7 +337,10 @@ export const ConsolidatedDexSwapDetailCard: FC<
                   aggregatedData?.totalExpectedOut) ??
                   0,
               )}{" "}
-              <AssetTicker tokenName={aggregatedData?.pair.tokenOut ?? ""} />
+              <AssetTicker
+                tokenName={aggregatedData?.pair.tokenOut ?? ""}
+                registry={aggregatedData?.pair.tokenOutRegistry}
+              />
             </span>
           </Tooltip>
         ),
@@ -344,7 +352,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
       value: renderWithException(
         aggregatedData?.status,
         <div className='flex items-center'>
-          <p className='rounded-m text-text-sm flex w-fit items-center gap-1 border border-border px-1'>
+          <p className='flex w-fit items-center gap-1 rounded-m border border-border px-1 text-text-sm'>
             {getStatusIcon(aggregatedData?.status)}
             {getStatusText(aggregatedData?.status)}
           </p>
@@ -386,7 +394,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
             return (
               <p
                 key={dexName}
-                className='gap-1/2 text-text-sm flex w-fit items-center rounded-xl border border-border bg-transparent px-1 text-text'
+                className='flex w-fit items-center gap-1/2 rounded-xl border border-border bg-transparent px-1 text-text-sm text-text'
                 style={
                   dex
                     ? {
@@ -400,7 +408,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
                 {!!dex?.icon && (
                   <Image
                     src={dex.icon}
-                    className='rounded-max h-4 w-4'
+                    className='h-4 w-4 rounded-max'
                     alt={dex?.label}
                   />
                 )}
@@ -468,7 +476,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
             {detailItems.map(({ key, title, value, divider }) => (
               <div key={key}>
                 <div className='flex w-full items-start'>
-                  <p className='text-text-sm min-w-[200px] text-grayTextSecondary'>
+                  <p className='min-w-[200px] text-text-sm text-grayTextSecondary'>
                     {title}
                   </p>
                   <div className='w-full'>

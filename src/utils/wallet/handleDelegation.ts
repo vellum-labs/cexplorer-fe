@@ -1,16 +1,25 @@
 import type { LucidEvolution } from "@lucid-evolution/lucid";
+import { drepIDToCredential } from "@lucid-evolution/utils";
 import { callDelegationToast } from "../error/callDelegationToast";
 import { sendDelegationInfo } from "@/services/tool";
 
+interface DelegationParams {
+  type: "pool" | "drep";
+  ident: string;
+  donation?: boolean;
+}
+
 export const handleDelegation = async (
-  poolId: string,
+  params: DelegationParams,
   lucid: LucidEvolution | null,
-  donation: boolean = false,
 ) => {
   if (!lucid) return;
 
-  if (!poolId) {
-    callDelegationToast({ errorMessage: "Missing poolId." });
+  const delegationId = params.ident;
+  const idLabel = params.type === "pool" ? "poolId" : "DRep ID";
+
+  if (!delegationId) {
+    callDelegationToast({ errorMessage: `Missing ${idLabel}.` });
     return;
   }
 
@@ -40,20 +49,41 @@ export const handleDelegation = async (
       tx.register.Stake(rewardAddress);
     }
 
-    tx.delegate.ToPool(rewardAddress, poolId);
+    if (params.type === "pool") {
+      tx.delegate.ToPool(rewardAddress, delegationId);
+    } else {
+      const drep =
+        delegationId === "drep_always_abstain"
+          ? { __typename: "AlwaysAbstain" as const }
+          : delegationId === "drep_always_no_confidence"
+            ? { __typename: "AlwaysNoConfidence" as const }
+            : drepIDToCredential(delegationId);
+
+      tx.delegate.VoteToDRep(rewardAddress, drep);
+    }
 
     const complete = await tx.complete();
     const signed = await complete.sign.withWallet();
     const signedTx = await signed.complete();
     const hash = await signedTx.submit();
 
-    sendDelegationInfo(hash, donation ? "donation_page" : poolId);
+    const trackingId =
+      params.type === "pool"
+        ? params.donation
+          ? "donation_page"
+          : delegationId
+        : `drep_${delegationId}`;
+
+    sendDelegationInfo(hash, trackingId);
 
     callDelegationToast({ success: true });
     await lucid.awaitTx(hash);
     return hash;
   } catch (e: any) {
-    console.error("Delegation error:", e);
+    console.error(
+      `${params.type === "pool" ? "Pool" : "DRep"} delegation error:`,
+      e,
+    );
 
     const errorString = JSON.stringify(e);
     const errorMessage = e?.message || "";
@@ -87,7 +117,10 @@ export const handleDelegation = async (
       return;
     }
 
-    let friendlyMessage = "Delegation failed. Please try again.";
+    let friendlyMessage =
+      params.type === "pool"
+        ? "Delegation failed. Please try again."
+        : "DRep delegation failed. Please try again.";
 
     if (errorMessage) {
       friendlyMessage = errorMessage;

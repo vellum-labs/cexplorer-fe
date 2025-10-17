@@ -2,8 +2,8 @@ import type { FC } from "react";
 
 import ReactEcharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
-import { useThemeStore } from "@/stores/themeStore";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 interface GovernanceDetailOverviewInfoGraphProps {
   data: any;

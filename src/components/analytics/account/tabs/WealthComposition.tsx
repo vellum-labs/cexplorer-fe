@@ -1,4 +1,4 @@
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import Tabs from "@/components/global/Tabs";
 import GlobalTable from "@/components/table/GlobalTable";
 import { useGraphColors } from "@/hooks/useGraphColors";
@@ -7,10 +7,10 @@ import type { ReactEChartsProps } from "@/lib/ReactCharts";
 import { useFetchWealthComposition } from "@/services/analytics";
 import { useFetchMiscBasic } from "@/services/misc";
 import type { TableColumns } from "@/types/tableTypes";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { getAnimalImageByName } from "@/utils/getAnimalImageByName";
 import { getAnimalRangeByName } from "@/utils/address/getAnimalRangeByName";
-import { useWindowDimensions } from "@/utils/useWindowsDemensions";
+import { useWindowDimensions } from "@vellumlabs/cexplorer-sdk";
 import EChartsReact from "echarts-for-react";
 import { useEffect, useState } from "react";
 import type { AnimalName } from "@/constants/animals";

@@ -4,8 +4,7 @@ import type { FC } from "react";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 import { useCurrencyStore } from "@/stores/currencyStore";
 
-import { currencySigns } from "@/constants/currencies";
-import { formatNumber } from "@/utils/format/format";
+import { formatCurrency } from "@/utils/format/formatCurrency";
 
 import Bitcoin from "@/resources/images/wallet/bitcoin.svg";
 
@@ -37,12 +36,12 @@ export const HomepageCardanoPrice: FC<HomepageCardanoPriceProps> = ({
           </span>
         </div>
         <span className='text-text-sm font-semibold text-grayText'>
-          {currencySigns[currency]}
           {miscConst?.circulating_supply
-            ? formatNumber(
+            ? formatCurrency(
                 Math.round(
                   (miscConst.circulating_supply / 1e6) * price.todayValue,
                 ),
+                currency,
               )
             : "-"}
         </span>

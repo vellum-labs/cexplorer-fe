@@ -5,7 +5,7 @@ import { fetchWatchlist, fetchAccountList } from "@/services/user";
 import { useWatchlistStore } from "@/stores/watchlistStore";
 import { Star } from "lucide-react";
 import { useEffect, useState } from "react";
-import Button from "../Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import Modal from "../Modal";
 
 interface Props {
@@ -201,16 +201,24 @@ export const WatchlistStar = ({
             </p>
             <div className='flex w-full flex-col items-center gap-1.5'>
               <Button
-                onClick={isStakeKeyInWatchlist ? handleAddAddress : handleAddStakeKey}
+                onClick={
+                  isStakeKeyInWatchlist ? handleAddAddress : handleAddStakeKey
+                }
                 variant='primary'
-                label={isStakeKeyInWatchlist ? 'Add Address' : 'Add Stake Key'}
+                label={isStakeKeyInWatchlist ? "Add Address" : "Add Stake Key"}
                 size='lg'
                 className='w-full'
               />
               <Button
-                onClick={isStakeKeyInWatchlist ? handleRemoveStakeKey : handleAddAddress}
+                onClick={
+                  isStakeKeyInWatchlist
+                    ? handleRemoveStakeKey
+                    : handleAddAddress
+                }
                 variant='secondary'
-                label={isStakeKeyInWatchlist ? 'Remove Stake Key' : 'Add Address'}
+                label={
+                  isStakeKeyInWatchlist ? "Remove Stake Key" : "Add Address"
+                }
                 size='md'
                 className='w-full'
               />
@@ -230,22 +238,18 @@ export const WatchlistStar = ({
           />
         </button>
       ) : (
-        <Button
-          leftIcon={
-            <Star
-              strokeWidth={2}
-              stroke={colors.primary}
-              fill={isLiked ? colors.primary : "none"}
-              size={17}
-              onClick={handleClick}
-              className='cursor-pointer'
-            />
-          }
-          size='xs'
-          variant='tertiary'
+        <button
           onClick={handleClick}
-          className='h-8 px-1'
-        />
+          className='flex h-10 w-10 items-center justify-center rounded-s border border-border bg-transparent hover:bg-darker'
+        >
+          <Star
+            strokeWidth={2}
+            stroke={colors.primary}
+            fill={isLiked ? colors.primary : "none"}
+            size={17}
+            className='cursor-pointer'
+          />
+        </button>
       )}
     </>
   );

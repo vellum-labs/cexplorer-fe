@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from "react";
 
-import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 interface AddressInspectorRowProps {
   title: string;

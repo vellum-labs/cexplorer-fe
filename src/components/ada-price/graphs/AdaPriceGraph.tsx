@@ -5,7 +5,7 @@ import { useGraphColors } from "@/hooks/useGraphColors";
 import { useEffect, useMemo, useState } from "react";
 
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import ReactEcharts from "echarts-for-react";
 
 interface AdaPriceGraphProps {
@@ -171,7 +171,7 @@ export const AdaPriceGraph: FC<AdaPriceGraphProps> = ({ graphRates }) => {
   };
 
   return (
-    <div className='rounded-m relative w-full border border-border bg-cardBg lg:py-3'>
+    <div className='relative w-full rounded-m border border-border bg-cardBg lg:py-3'>
       <GraphWatermark />
       <ReactEcharts
         opts={{ height: 350 }}

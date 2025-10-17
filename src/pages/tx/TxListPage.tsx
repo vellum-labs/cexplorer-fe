@@ -1,6 +1,6 @@
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
 import type { TxListTableColumns } from "@/types/tableTypes";
@@ -8,7 +8,7 @@ import type { FC } from "react";
 import { txListTableOptions } from "@/constants/tables/txListTableOptions";
 import { useTxList } from "@/hooks/tables/useTxList";
 import { useTxListTableStore } from "@/stores/tables/txListTableStore";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useSearch } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
 

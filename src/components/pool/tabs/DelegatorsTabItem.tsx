@@ -1,5 +1,5 @@
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import Tabs from "@/components/global/Tabs";
 import PoolDelegatorsTable from "../PoolDelegatorsTable";
 import { PoolMigrationsTable } from "../PoolMigrationsTable";
@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import { poolDelegatorsTableOptions } from "@/constants/tables/poolDelegatorsTableOptions";
 import { usePoolDelegatorsStructureStore } from "@/stores/tables/poolDelegatorsStructureStore";
 import { usePoolMigrationsTableStore } from "@/stores/tables/poolMigrationsTableStore";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 const DelegatorsTabItem = () => {
   const route = getRouteApi("/pool/$id");

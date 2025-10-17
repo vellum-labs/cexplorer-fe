@@ -8,11 +8,11 @@ import { useMiscConst } from "@/hooks/useMiscConst";
 
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 import { AnalyticsGraph } from "../analytics/AnalyticsGraph";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 export const DelegationChangesGraph: FC = () => {
   const query = useFetchDelegEpochChanges();

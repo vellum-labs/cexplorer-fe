@@ -10,7 +10,7 @@ import { calculateMovingAverage } from "@/utils/calculateMovingAverage";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import type { MiscConstResponseData } from "@/types/miscTypes";
 import { format } from "date-fns";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 interface UseBlockProduction {
   json: any;

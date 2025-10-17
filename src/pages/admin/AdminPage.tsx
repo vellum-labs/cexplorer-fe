@@ -1,9 +1,9 @@
 import SpinningLoader from "@/components/global/SpinningLoader";
 import {
-  Breadcrumb,
+  BreadcrumbRaw,
   BreadcrumbItem,
   BreadcrumbList,
-} from "@/components/ui/breadcrumb";
+} from "@vellumlabs/cexplorer-sdk";
 import { useFetchUserInfo } from "@/services/user";
 import { Link } from "@tanstack/react-router";
 import { Helmet } from "react-helmet";
@@ -25,7 +25,7 @@ export const AdminPage = () => {
         <title>Admin | Cexplorer.io</title>
       </Helmet>
       <section className='w-full max-w-desktop'>
-        <Breadcrumb className=''>
+        <BreadcrumbRaw className=''>
           <BreadcrumbList className='flex items-center'>
             <BreadcrumbItem>
               <Link className='underline underline-offset-2' to='/'>
@@ -34,7 +34,7 @@ export const AdminPage = () => {
             </BreadcrumbItem>
             / <BreadcrumbItem className='text-text'>Admin</BreadcrumbItem>
           </BreadcrumbList>
-        </Breadcrumb>
+        </BreadcrumbRaw>
         {userQuery.isLoading ? (
           <div className='mt-4 flex w-full justify-center'>
             <SpinningLoader />

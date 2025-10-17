@@ -9,7 +9,7 @@ import { currencies } from "@/constants/currencies";
 import { locales } from "@/constants/locales";
 import { useCurrencyStore } from "@/stores/currencyStore";
 import { useLocaleStore } from "@/stores/localeStore";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import type { NavigationOptions } from "@/types/navigationTypes";
 import type { Locales } from "@/types/storeTypes";
 import {
@@ -21,7 +21,7 @@ import {
   Settings,
   Sun,
 } from "lucide-react";
-import Dropdown from "./Dropdown";
+import { Dropdown } from "@vellumlabs/cexplorer-sdk";
 import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -29,9 +29,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Command } from "@/components/ui/command";
-import TextInput from "../inputs/TextInput";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
 
 interface SettingsDropdownProps {
   withBorder?: boolean;
@@ -175,16 +175,19 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
           <Popover open={openCurrency} onOpenChange={setOpenCurrency}>
             <PopoverTrigger asChild>
               <Button
-                variant='outline'
-                role='combobox'
+                variant='tertiary'
+                size='md'
                 aria-expanded={openCurrency}
                 className='flex w-[95px] items-center justify-between'
-              >
-                <span className='text-text-xs'>
-                  {currencies[currency].value.toUpperCase()}
-                </span>
-                <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
-              </Button>
+                label={
+                  <>
+                    <span className='text-text-xs'>
+                      {currencies[currency].value.toUpperCase()}
+                    </span>
+                    <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
+                  </>
+                }
+              />
             </PopoverTrigger>
             <PopoverContent className='w-[95px] border-b-0 p-0'>
               <Command className=''>

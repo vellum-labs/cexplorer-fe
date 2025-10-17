@@ -1,4 +1,4 @@
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { colors } from "@/constants/colors";
 import { webUrl } from "@/constants/confVariables";
 import { Twitter } from "@/resources/images/icons/Twitter";
