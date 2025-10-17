@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import GlobalTable from "@/components/table/GlobalTable";
-import { AdaWithTooltip } from "./AdaWithTooltip";
-import { Tooltip } from "../ui/tooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { getAnimalRangeByName } from "@/utils/address/getAnimalRangeByName";
 import ReactEcharts from "echarts-for-react";
 
@@ -125,7 +125,7 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
         };
 
         return (
-          <div className='gap-1/2 flex w-full items-center justify-end'>
+          <div className='flex w-full items-center justify-end gap-1/2'>
             <span>{usage.toFixed(2)}%</span>
             <ReactEcharts option={option} className='max-h-[50px] w-[50px]' />
           </div>
@@ -206,7 +206,7 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
         };
 
         return (
-          <div className='gap-1/2 flex w-full items-center justify-end'>
+          <div className='flex w-full items-center justify-end gap-1/2'>
             <span>{usage.toFixed(2)}%</span>
             <ReactEcharts option={option} className='max-h-[50px] w-[50px]' />
           </div>
