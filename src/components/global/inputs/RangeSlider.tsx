@@ -36,59 +36,6 @@ export const RangeSlider: FC<RangeSliderProps> = ({
         onChange={e => onChange(Number(e.target.value))}
         className='range-slider-input'
       />
-      <style>{`
-        .range-slider-input {
-          position: relative;
-          z-index: 10;
-          width: 100%;
-          height: 8px;
-          cursor: pointer;
-          appearance: none;
-          -webkit-appearance: none;
-          background: transparent;
-          outline: none;
-        }
-
-        .range-slider-input::-webkit-slider-runnable-track {
-          width: 100%;
-          height: 8px;
-          appearance: none;
-          -webkit-appearance: none;
-          border-radius: 9999px;
-          background: transparent;
-        }
-
-        .range-slider-input::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          appearance: none;
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          background: var(--primary);
-          border: 1px solid var(--primary);
-          cursor: pointer;
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-          margin-top: -8px;
-        }
-
-        .range-slider-input::-moz-range-track {
-          width: 100%;
-          height: 8px;
-          border-radius: 9999px;
-          background: transparent;
-        }
-
-        .range-slider-input::-moz-range-thumb {
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          background: var(--primary);
-          border: 1px solid var(--primary);
-          cursor: pointer;
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-          border: none;
-        }
-      `}</style>
     </div>
   );
 };

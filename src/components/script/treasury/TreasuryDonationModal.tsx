@@ -5,13 +5,9 @@ import Modal from "@/components/global/Modal";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { RangeSlider } from "@/components/global/inputs/RangeSlider";
-import {
-  executeTreasuryDonation,
-  handleDonationError,
-} from "@/services/treasury";
-import { toast } from "sonner";
 import { Wallet } from "lucide-react";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { handleDonation } from "@/utils/treasury/handleDonation";
 
 interface TreasuryDonationModalProps {
   onClose: () => void;
@@ -45,29 +41,15 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
     return { treasuryAda, cexplorerAda };
   };
 
-  const handleDonation = async () => {
-    if (!lucid) {
-      toast.error("Wallet not connected");
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const txHash = await executeTreasuryDonation({
-        lucid,
-        amount,
-        cexplorerPercentage,
-        comment,
-      });
-
-      toast.success("Donation successful!");
-      onSuccess(txHash);
-    } catch (error: any) {
-      handleDonationError(error);
-    } finally {
-      setIsSubmitting(false);
-    }
+  const handleDonationClick = () => {
+    handleDonation({
+      lucid,
+      amount,
+      cexplorerPercentage,
+      comment,
+      setIsSubmitting,
+      onSuccess,
+    });
   };
 
   const { treasuryAda, cexplorerAda } = calculateSplit();
@@ -168,7 +150,7 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
                 size='lg'
                 variant='primary'
                 leftIcon={<Wallet />}
-                onClick={handleDonation}
+                onClick={handleDonationClick}
                 disabled={true}
               />
             </div>

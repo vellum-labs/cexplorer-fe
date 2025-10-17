@@ -75,7 +75,9 @@ export const executeTreasuryDonation = async ({
   const pctForCexp = cexplorerPercentage / 100;
 
   const toCexp = BigInt(Math.floor(totalAda * pctForCexp * 1_000_000));
-  const toTreasury = BigInt(Math.floor(totalAda * (1 - pctForCexp) * 1_000_000));
+  const toTreasury = BigInt(
+    Math.floor(totalAda * (1 - pctForCexp) * 1_000_000),
+  );
 
   let tx = lucid.newTx();
 
@@ -84,31 +86,37 @@ export const executeTreasuryDonation = async ({
   }
 
   if (toTreasury > 0n) {
-    if (
-      typeof (tx as any).donate === "object" &&
-      typeof (tx as any).donate.ToTreasury === "function"
-    ) {
-      tx = (tx as any).donate.ToTreasury(toTreasury);
-    } else if (typeof (tx as any).addDonation === "function") {
-      tx = (tx as any).addDonation(toTreasury);
-    } else if (typeof (tx as any).setDonation === "function") {
-      tx = (tx as any).setDonation(toTreasury);
-    } else {
-      toast.error(
-        "Treasury donation not supported in current Lucid version. Sending all to Cexplorer.",
-      );
-      tx = tx.pay.ToAddress(donationAddress, {
-        lovelace: toCexp + toTreasury,
-      });
+    switch (true) {
+      case typeof (tx as any).donate === "object" &&
+        typeof (tx as any).donate.ToTreasury === "function": {
+        tx = (tx as any).donate.ToTreasury(toTreasury);
+        break;
+      }
+      case typeof (tx as any).addDonation === "function": {
+        tx = (tx as any).addDonation(toTreasury);
+        break;
+      }
+      case typeof (tx as any).setDonation === "function": {
+        tx = (tx as any).setDonation(toTreasury);
+        break;
+      }
+      default: {
+        toast.error(
+          "Treasury donation not supported in current Lucid version. Sending all to Cexplorer.",
+        );
+        tx = tx.pay.ToAddress(donationAddress, {
+          lovelace: toCexp + toTreasury,
+        });
 
-      const completed = await tx.complete();
-      const signed = await completed.sign.withWallet();
-      const signedTx = await signed.complete();
-      const txHash = await signedTx.submit();
+        const completed = await tx.complete();
+        const signed = await completed.sign.withWallet();
+        const signedTx = await signed.complete();
+        const txHash = await signedTx.submit();
 
-      sendDelegationInfo(txHash, "lovelace_cexplorer", "donate");
-      lucid.awaitTx(txHash);
-      return txHash;
+        sendDelegationInfo(txHash, "lovelace_cexplorer", "donate");
+        lucid.awaitTx(txHash);
+        return txHash;
+      }
     }
   }
 
