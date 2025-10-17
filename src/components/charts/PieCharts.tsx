@@ -1,6 +1,6 @@
 import EChartsReact from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useMemo } from "react";
 
 export const PIE_CHART_COLORS = [
