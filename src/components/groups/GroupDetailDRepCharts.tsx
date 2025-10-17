@@ -1,6 +1,7 @@
 import type { GroupDetailData } from "@/types/analyticsTypes";
 import { useMemo } from "react";
-import { PieCharts, PIE_CHART_COLORS } from "@/components/charts/PieCharts";
+import { PieCharts } from "@/components/charts/PieCharts";
+import { PIE_CHART_COLORS } from "@/constants/charts";
 
 interface GroupDetailDRepChartsProps {
   items: GroupDetailData["items"];

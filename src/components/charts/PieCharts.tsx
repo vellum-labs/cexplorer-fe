@@ -2,38 +2,7 @@ import EChartsReact from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useMemo } from "react";
-
-export const PIE_CHART_COLORS = [
-  "#47CD89",
-  "#92c7e4",
-  "#3a8dde",
-  "#f69972",
-  "#527381",
-  "#81ba71",
-  "#22366c",
-  "#FFA500",
-  "#FF6B6B",
-  "#4ECDC4",
-  "#F38181",
-  "#AA96DA",
-  "#5B8FF9",
-  "#61DDAA",
-  "#65789B",
-  "#F6BD16",
-  "#7262FD",
-  "#78D3F8",
-  "#9661BC",
-  "#F6903D",
-  "#008685",
-  "#F08BB4",
-  "#5D7092",
-  "#5AD8A6",
-  "#E8684A",
-  "#6DC8EC",
-  "#9270CA",
-  "#FF9D4D",
-  "#269A99",
-];
+import { PIE_CHART_COLORS } from "@/constants/charts";
 
 interface ChartConfig {
   dataKey: string;
@@ -77,7 +46,7 @@ export const PieCharts = <T,>({
         textStyle: {
           color: textColor,
         },
-        formatter: (params: any) => {
+        formatter: params => {
           if (needsAdaFormatting) {
             const adaValue = formatNumber(Math.round(params.value / 1000000));
             return `${params.name}<br/>${params.marker}${adaValue} ₳`;
@@ -85,6 +54,7 @@ export const PieCharts = <T,>({
           return `${params.name}<br/>${params.marker}${formatNumber(params.value)}`;
         },
       },
+      color: PIE_CHART_COLORS,
       series: [
         {
           type: "pie",

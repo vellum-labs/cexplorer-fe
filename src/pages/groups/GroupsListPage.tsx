@@ -7,8 +7,7 @@ import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 import { useFetchGroupsList } from "@/services/analytics";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
-import type { GroupsListData } from "@/types/analyticsTypes";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Helmet } from "react-helmet";
 import metadata from "../../../conf/metadata/en-metadata.json";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
@@ -19,7 +18,6 @@ export const GroupsListPage = () => {
   const [{ debouncedTableSearch, tableSearch }, setTableSearch] =
     useSearchTable();
 
-  const [filteredItems, setFilteredItems] = useState<GroupsListData[]>([]);
   const [sortColumn, setSortColumn] = useState<string | undefined>(undefined);
   const [sortDirection, setSortDirection] = useState<
     "asc" | "desc" | undefined
@@ -47,6 +45,91 @@ export const GroupsListPage = () => {
     [query.data?.data.data],
   );
 
+  const searchFilteredItems = useMemo(() => {
+    if (!debouncedTableSearch) {
+      return data;
+    }
+
+    const lowerCaseQuery = debouncedTableSearch.toLowerCase();
+    return data.filter(item =>
+      item.name.toLowerCase().includes(lowerCaseQuery),
+    );
+  }, [data, debouncedTableSearch]);
+
+  const drepFilteredItems = useMemo(() => {
+    if (filter.has_drep === undefined) {
+      return searchFilteredItems;
+    }
+
+    return searchFilteredItems.filter(item => {
+      const hasDrep = (item.data?.drep?.count ?? 0) > 0;
+      if (+(filter.has_drep ?? 0) === 1) {
+        return hasDrep;
+      }
+      if (+(filter.has_drep ?? 0) === 2) {
+        return !hasDrep;
+      }
+      return true;
+    });
+  }, [searchFilteredItems, filter.has_drep]);
+
+  const filteredItems = useMemo(() => {
+    if (!sortColumn || !sortDirection) {
+      return drepFilteredItems;
+    }
+
+    const totalLiveStake = miscConst?.live_stake ?? 1;
+
+    return [...drepFilteredItems].sort((a, b) => {
+      let comparison = 0;
+
+      switch (sortColumn) {
+        case "pools_count":
+          comparison = (b.data?.pool?.count ?? 0) - (a.data?.pool?.count ?? 0);
+          break;
+
+        case "pool_stake":
+          comparison = (b.data?.pool?.stake ?? 0) - (a.data?.pool?.stake ?? 0);
+          break;
+
+        case "delegators":
+          comparison =
+            (b.data?.pool?.delegators ?? 0) - (a.data?.pool?.delegators ?? 0);
+          break;
+
+        case "share": {
+          const shareA = (a.data?.pool?.stake ?? 0) / totalLiveStake;
+          const shareB = (b.data?.pool?.stake ?? 0) / totalLiveStake;
+          comparison = shareB - shareA;
+          break;
+        }
+
+        case "pledge":
+          comparison =
+            (b.data?.pool?.pledged ?? 0) - (a.data?.pool?.pledged ?? 0);
+          break;
+
+        case "pledge_per_pool": {
+          const pledgePerPoolA =
+            (a.data?.pool?.count ?? 1) > 0
+              ? (a.data?.pool?.pledged ?? 0) / (a.data?.pool?.count ?? 1)
+              : 0;
+          const pledgePerPoolB =
+            (b.data?.pool?.count ?? 1) > 0
+              ? (b.data?.pool?.pledged ?? 0) / (b.data?.pool?.count ?? 1)
+              : 0;
+          comparison = pledgePerPoolB - pledgePerPoolA;
+          break;
+        }
+
+        default:
+          comparison = 0;
+      }
+
+      return sortDirection === "asc" ? -comparison : comparison;
+    });
+  }, [drepFilteredItems, miscConst?.live_stake, sortColumn, sortDirection]);
+
   const handleSort = (column: string) => {
     if (sortColumn === column) {
       if (sortDirection === "desc") {
@@ -60,93 +143,6 @@ export const GroupsListPage = () => {
       setSortDirection("desc");
     }
   };
-
-  useEffect(() => {
-    let filtered = data;
-
-    if (debouncedTableSearch) {
-      filtered = filtered.filter(item =>
-        item.name.toLowerCase().includes(debouncedTableSearch.toLowerCase()),
-      );
-    }
-
-    if (filter.has_drep !== undefined) {
-      filtered = filtered.filter(item => {
-        const hasDrep = (item.data?.drep?.count ?? 0) > 0;
-        if (+(filter.has_drep ?? 0) === 1) {
-          return hasDrep;
-        } else if (+(filter.has_drep ?? 0) === 2) {
-          return !hasDrep;
-        }
-        return true;
-      });
-    }
-
-    if (sortColumn && sortDirection) {
-      const sorted = [...filtered].sort((a, b) => {
-        const totalLiveStake = miscConst?.live_stake ?? 1;
-        let comparison = 0;
-
-        switch (sortColumn) {
-          case "pools_count":
-            comparison =
-              (b.data?.pool?.count ?? 0) - (a.data?.pool?.count ?? 0);
-            break;
-
-          case "pool_stake":
-            comparison =
-              (b.data?.pool?.stake ?? 0) - (a.data?.pool?.stake ?? 0);
-            break;
-
-          case "delegators":
-            comparison =
-              (b.data?.pool?.delegators ?? 0) - (a.data?.pool?.delegators ?? 0);
-            break;
-
-          case "share": {
-            const shareA = (a.data?.pool?.stake ?? 0) / totalLiveStake;
-            const shareB = (b.data?.pool?.stake ?? 0) / totalLiveStake;
-            comparison = shareB - shareA;
-            break;
-          }
-
-          case "pledge":
-            comparison =
-              (b.data?.pool?.pledged ?? 0) - (a.data?.pool?.pledged ?? 0);
-            break;
-
-          case "pledge_per_pool": {
-            const pledgePerPoolA =
-              (a.data?.pool?.count ?? 1) > 0
-                ? (a.data?.pool?.pledged ?? 0) / (a.data?.pool?.count ?? 1)
-                : 0;
-            const pledgePerPoolB =
-              (b.data?.pool?.count ?? 1) > 0
-                ? (b.data?.pool?.pledged ?? 0) / (b.data?.pool?.count ?? 1)
-                : 0;
-            comparison = pledgePerPoolB - pledgePerPoolA;
-            break;
-          }
-
-          default:
-            comparison = 0;
-        }
-
-        return sortDirection === "asc" ? -comparison : comparison;
-      });
-
-      setFilteredItems(sorted);
-    } else {
-      setFilteredItems(filtered);
-    }
-  }, [
-    debouncedTableSearch,
-    data,
-    sortColumn,
-    sortDirection,
-    miscConst?.live_stake,
-    filter.has_drep,
-  ]);
 
   return (
     <>
@@ -162,7 +158,7 @@ export const GroupsListPage = () => {
           breadcrumbItems={[{ label: "Groups" }]}
         />
         <div className='flex w-full max-w-desktop flex-col items-center justify-center gap-1 p-mobile md:p-desktop'>
-          <div className='mb-2 w-full rounded-m border border-border bg-cardBg p-2'>
+          <div className='rounded-m mb-2 w-full border border-border bg-cardBg p-2'>
             <p className='text-text-sm text-grayTextPrimary'>
               This dashboard is managed by Cardano community. Everyone can add
               or modify existing groups via{" "}
@@ -202,13 +198,13 @@ export const GroupsListPage = () => {
               />
             </div>
             {hasFilter && (
-              <div className='mb-1 flex w-full flex-wrap items-center gap-1/2 md:flex-nowrap'>
+              <div className='gap-1/2 mb-1 flex w-full flex-wrap items-center md:flex-nowrap'>
                 {Object.entries(filter).map(
                   ([key, value]) =>
                     value && (
                       <div
                         key={key}
-                        className='flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
+                        className='gap-1/2 rounded-m py-1/4 text-text-xs flex w-fit items-center border border-border bg-darker px-1 text-grayTextPrimary'
                       >
                         <span>{key === "has_drep" && "Also DRep"}:</span>
                         <span>
