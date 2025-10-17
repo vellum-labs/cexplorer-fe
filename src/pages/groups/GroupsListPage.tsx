@@ -1,10 +1,10 @@
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import GlobalTable from "@/components/table/GlobalTable";
 import {
-  Breadcrumb,
+  BreadcrumbRaw,
   BreadcrumbItem,
   BreadcrumbList,
-} from "@/components/ui/breadcrumb";
+} from "@vellumlabs/cexplorer-sdk";
 import { useFetchGroupsList } from "@/services/analytics";
 import type { GroupsListData } from "@/types/analyticsTypes";
 import type { TableColumns } from "@/types/tableTypes";
@@ -79,7 +79,7 @@ export const GroupsListPage = () => {
       </Helmet>
       <main className='flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col items-center justify-center px-mobile md:px-desktop'>
-          <Breadcrumb className='mb-2 w-full'>
+          <BreadcrumbRaw className='mb-2 w-full'>
             <BreadcrumbList className='flex items-center'>
               <BreadcrumbItem>
                 <Link className='underline underline-offset-2' to='/'>
@@ -88,7 +88,7 @@ export const GroupsListPage = () => {
               </BreadcrumbItem>
               /<BreadcrumbItem className='text-text'>Groups</BreadcrumbItem>
             </BreadcrumbList>
-          </Breadcrumb>
+          </BreadcrumbRaw>
           <section className='flex min-h-minHeight w-full flex-col items-center'>
             <TableSearchInput
               placeholder='Search your results...'

@@ -1,6 +1,6 @@
 import { useFetchTxDetail } from "@/services/tx";
 import { getRouteApi } from "@tanstack/react-router";
-import LoadingSkeleton from "../../global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { ContractInput } from "../ContractInput";
 
 export const ContractsTabItem = () => {
@@ -13,7 +13,9 @@ export const ContractsTabItem = () => {
     .toFixed(2);
 
   if (!query.data?.data.plutus_contracts && !query.isLoading) {
-    return <p className='w-full text-center text-text-sm'>No contracts found</p>;
+    return (
+      <p className='w-full text-center text-text-sm'>No contracts found</p>
+    );
   }
 
   if (query.isLoading) {

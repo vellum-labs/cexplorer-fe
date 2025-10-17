@@ -4,7 +4,7 @@ import { PageBase } from "@/components/global/pages/PageBase";
 
 import { useState } from "react";
 import SortBy from "@/components/ui/sortBy";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { FileText, Users } from "lucide-react";
 import { VotingTable } from "@/components/gov/drepVote/VotingTable";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";

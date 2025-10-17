@@ -3,7 +3,7 @@ import PoolFallback from "@/resources/images/fallbacks/poolFallback.svg";
 
 import { alphabetWithNumbers } from "@/constants/alphabet";
 import React, { useEffect, useState } from "react";
-import LoadingSkeleton from "./skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 const ImageWrapper: React.FC<
   React.ImgHTMLAttributes<HTMLImageElement> & {

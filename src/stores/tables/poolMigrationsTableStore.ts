@@ -2,7 +2,7 @@ import type {
   BasicTableOptions,
   PoolDelegatorsColumns,
 } from "@/types/tableTypes";
-import { handlePersistStore } from "../../lib/handlePersistStore";
+import { handlePersistStore } from "@vellumlabs/cexplorer-sdk";
 
 export const usePoolMigrationsTableStore = handlePersistStore<
   BasicTableOptions<PoolDelegatorsColumns>,

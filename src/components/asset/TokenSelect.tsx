@@ -2,7 +2,7 @@ import { ChevronsUpDown } from "lucide-react";
 import * as React from "react";
 import { FixedSizeList as List } from "react-window";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import {
   Command,
   CommandEmpty,
@@ -15,14 +15,17 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import useDebounce from "@/hooks/useDebounce";
+import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import type { AddressAsset } from "@/types/addressTypes";
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";
 import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
-import { formatNumber, formatNumberWithSuffix } from "@/utils/format/format";
-import TextInput from "../global/inputs/TextInput";
+import {
+  formatNumber,
+  formatNumberWithSuffix,
+} from "@vellumlabs/cexplorer-sdk";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import AssetCell from "./AssetCell";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
 const Row = React.memo(({ index, style, data }: any) => {
   const item = data[index];
@@ -126,15 +129,17 @@ export const TokenSelectCombobox = React.memo(
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild className={className}>
             <Button
-              variant='outline'
-              role='combobox'
-              aria-expanded={open}
+              variant='tertiary'
+              size='md'
               className='flex w-[200px] items-center justify-between'
-            >
-              Browse tokens
-              <span className='text-text-xs'>({items.length})</span>
-              <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
-            </Button>
+              label={
+                <>
+                  Browse tokens
+                  <span className='text-text-xs'>({items.length})</span>
+                  <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
+                </>
+              }
+            />
           </PopoverTrigger>
           <PopoverContent ref={contentRef} className='w-[300px] p-0'>
             <Command className=''>

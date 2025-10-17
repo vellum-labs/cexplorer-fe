@@ -1,5 +1,5 @@
 import type { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
-import { formatNumberWithSuffix } from "./format/format";
+import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 
 export const lovelaceToAdaWithRates = (
   lovelace: number,

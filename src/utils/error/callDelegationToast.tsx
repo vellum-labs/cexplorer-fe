@@ -1,4 +1,4 @@
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { X } from "lucide-react";
 import { toast } from "sonner";
 

@@ -3,7 +3,7 @@ import { Asterisk, Users, UserX, Zap } from "lucide-react";
 import { DrepAnalyticsTab } from "@/components/drep/tabs/DrepAnalyticsTab";
 import { DrepDelegationsTab } from "@/components/drep/tabs/DrepDelegationsTab";
 import { DrepListTab } from "@/components/drep/tabs/DrepListTab";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import Tabs from "@/components/global/Tabs";
 
 import {
@@ -12,9 +12,9 @@ import {
   useFetchStakeDrepRetired,
 } from "@/services/drep";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 import {
   Carousel,

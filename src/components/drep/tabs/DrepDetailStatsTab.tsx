@@ -7,7 +7,7 @@ import { memo, useRef } from "react";
 import type { DrepDistrDetail } from "@/types/drepTypes";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 interface DrepDetailStatsTabProps {
   data: DrepDistrDetail[];

@@ -1,9 +1,9 @@
 import type { FC } from "react";
 
 import { CheckSquare, XSquare } from "lucide-react";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { GovernanceDetailOverviewInfoGraph } from "./graphs/GovernanceDetailOverviewInfoGraph";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { VotingBreakdownTooltip } from "../global/VotingBreakdownTooltip";
 
 interface GovernanceCardProps {

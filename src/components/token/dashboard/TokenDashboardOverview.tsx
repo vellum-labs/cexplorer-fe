@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { OverviewCard } from "@/components/global/cards/OverviewCard";
 
 interface TokenDashboardOverviewProps {}

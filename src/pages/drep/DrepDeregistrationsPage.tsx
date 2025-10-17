@@ -1,11 +1,11 @@
 import { BlockCell } from "@/components/blocks/BlockCell";
 import { DrepHashCell } from "@/components/drep/DrepHashCell";
 import { EpochCell } from "@/components/epoch/EpochCell";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { ScriptBadge } from "@/components/global/badges/ScriptBadge";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
-import DateCell from "@/components/table/DateCell";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
 import { HashCell } from "@/components/tx/HashCell";
@@ -17,7 +17,7 @@ import type {
   DrepRegistrationsColumns,
   TableColumns,
 } from "@/types/tableTypes";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { PageBase } from "@/components/global/pages/PageBase";
@@ -140,7 +140,9 @@ export const DrepDeregistrationsPage = () => {
           link: "/gov",
         },
         {
-          label: <span className='inline pt-1/2'>Delegated representatives</span>,
+          label: (
+            <span className='inline pt-1/2'>Delegated representatives</span>
+          ),
           link: "/drep",
         },
         { label: "Deregistrations" },

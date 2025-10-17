@@ -1,4 +1,4 @@
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import DarkLogo from "@/resources/images/navbar_logo_dark.svg";
 import LightLogo from "@/resources/images/navbar_logo_light.svg";
 

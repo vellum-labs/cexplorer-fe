@@ -6,7 +6,7 @@ import type {
 import type { FC } from "react";
 
 import { ActionTypes } from "@/components/global/ActionTypes";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 
 import { useFetchDrepVote } from "@/services/drep";
@@ -15,7 +15,7 @@ import { useGovernanceActionsTableStore } from "@/stores/tables/governanceAction
 import { getRouteApi, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { GovActionCell } from "@/components/gov/GovActionCell";
 import { HashCell } from "@/components/tx/HashCell";
 import { Vote } from "@/constants/votes";

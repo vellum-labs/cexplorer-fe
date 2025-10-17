@@ -1,12 +1,12 @@
 import type { FC } from "react";
 
 import {
-  Breadcrumb,
+  BreadcrumbRaw,
   BreadcrumbItem,
   BreadcrumbList,
-} from "@/components/ui/breadcrumb";
+} from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { SwReadyModal } from "@/components/global/modals/SwReadyModal";
@@ -17,7 +17,7 @@ import {
 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 import { useEffect, useState } from "react";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { fetchSwText, useFetchSwText } from "@/services/config";
 
@@ -62,7 +62,7 @@ export const ConfigSwPage: FC = () => {
         <meta charSet='utf-8' />
         <title>Admin sw | Cexplorer.io</title>
       </Helmet>
-      <Breadcrumb className='w-full'>
+      <BreadcrumbRaw className='w-full'>
         <BreadcrumbList className='flex items-center'>
           <BreadcrumbItem>
             <Link className='underline underline-offset-2' to='/'>
@@ -83,13 +83,13 @@ export const ConfigSwPage: FC = () => {
           </BreadcrumbItem>
           /<BreadcrumbItem className='text-text'>SW text</BreadcrumbItem>
         </BreadcrumbList>
-      </Breadcrumb>
+      </BreadcrumbRaw>
       <div
         role='button'
         className='relative rounded-m border border-border bg-darker'
       >
         <textarea
-          className='absolute inset-0 w-full resize-none overflow-hidden bg-transparent p-1 font-mono text-transparent caret-text outline-none'
+          className='font-mono absolute inset-0 w-full resize-none overflow-hidden bg-transparent p-1 text-transparent caret-text outline-none'
           value={JSON.stringify(JSON.parse(content), undefined, 2)}
           onChange={e => setContent(e.target.value)}
           spellCheck={false}

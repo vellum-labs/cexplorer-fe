@@ -1,4 +1,4 @@
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { webUrl } from "@/constants/confVariables";
 import { useFetchArticleDetail } from "@/services/article";
 import parse from "html-react-parser";

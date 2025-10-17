@@ -7,8 +7,8 @@ import type { FC } from "react";
 
 import { PurposeBadge } from "@/components/global/badges/PurposeBadge";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
-import DateCell from "@/components/table/DateCell";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
 import { HashCell } from "@/components/tx/HashCell";
@@ -20,9 +20,12 @@ import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import { scriptListInteractionTableOptions } from "@/constants/tables/scriptListInteractionTableOptions";
-import { formatNumber, formatNumberWithSuffix } from "@/utils/format/format";
+import {
+  formatNumber,
+  formatNumberWithSuffix,
+} from "@vellumlabs/cexplorer-sdk";
 import { getPercentageColor } from "@/utils/getPercentageColor";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 
 export const ScriptListInteractionsTab: FC = () => {
   const { infiniteScrolling } = useInfiniteScrollingStore();

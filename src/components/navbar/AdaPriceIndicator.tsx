@@ -2,7 +2,7 @@ import { colors } from "@/constants/colors";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 import { Cardano } from "@/resources/images/icons/Cardano";
 import { Link } from "@tanstack/react-router";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { useCurrencyStore } from "@/stores/currencyStore";
 import { formatCurrency } from "@/utils/format/formatCurrency";
 

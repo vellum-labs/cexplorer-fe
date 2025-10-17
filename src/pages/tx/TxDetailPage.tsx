@@ -14,7 +14,7 @@ import { ScriptsTabItem } from "@/components/tx/tabs/ScriptsTabItem";
 import WithdrawalsTabItem from "@/components/tx/tabs/WithdrawalsTabItem";
 import TxDetailOverview from "@/components/tx/TxDetailOverview";
 import { useFetchTxDetail } from "@/services/tx";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { getRouteApi, useNavigate, useSearch } from "@tanstack/react-router";
 import { DeFiOrderList } from "@/components/defi/DeFiOrderList";
 import { Fragment, useEffect, useState } from "react";
