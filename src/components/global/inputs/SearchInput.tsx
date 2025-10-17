@@ -156,33 +156,35 @@ const TableSearchInput = ({
       ) : (
         <></>
       )}
-      {showPrefixes && showPrefixPopup && (
-        <div
-          style={{
-            width: dropdownWidth + "px",
-            top: dropdownHeight + 1 + "px",
-          }}
-          className={`absolute right-0 z-30 min-h-[36px] rounded-s border border-border bg-background`}
-        >
-          {prefixes
-            ?.filter(prefix => prefix.show)
-            .map((prefix, index) => (
-              <button
-                key={index}
-                className='flex w-full items-center overflow-hidden text-ellipsis border-b border-border px-1.5 py-1 text-text-sm last:rounded-bl-md last:rounded-br-md last:border-b-0 hover:bg-darker'
-                onClick={() => {
-                  onchange(`${prefix.name}:${value}`);
-                  inputRef.current?.focus();
-                }}
-              >
-                <span className='text-text-sm font-medium'>{prefix.name}:</span>
-                <span className='ml-1/2'>
-                  {value.length > 19 ? formatString(value, "long") : value}
-                </span>
-              </button>
-            ))}
-        </div>
-      )}
+      {showPrefixes &&
+        showPrefixPopup &&
+        (prefixes?.filter(prefix => prefix.show).length ?? 0) > 0 && (
+          <div
+            style={{
+              width: dropdownWidth + "px",
+              top: dropdownHeight + 1 + "px",
+            }}
+            className={`absolute right-0 z-30 min-h-[36px] rounded-s border border-border bg-background`}
+          >
+            {prefixes
+              ?.filter(prefix => prefix.show)
+              .map((prefix, index) => (
+                <button
+                  key={index}
+                  className='flex w-full items-center overflow-hidden text-ellipsis border-b border-border px-1.5 py-1 text-text-sm last:rounded-bl-md last:rounded-br-md last:border-b-0 hover:bg-darker'
+                  onClick={() => {
+                    onchange(`${prefix.name}:${value}`);
+                    inputRef.current?.focus();
+                  }}
+                >
+                  <span className='text-text-sm font-medium'>{prefix.name}:</span>
+                  <span className='ml-1/2'>
+                    {value.length > 19 ? formatString(value, "long") : value}
+                  </span>
+                </button>
+              ))}
+          </div>
+        )}
     </div>
   );
 };
