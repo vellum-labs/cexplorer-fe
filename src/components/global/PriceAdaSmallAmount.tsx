@@ -1,5 +1,5 @@
-import { Tooltip } from "@/components/ui/tooltip";
-import Copy from "@/components/global/Copy";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
 
 interface PriceAdaSmallAmountProps {
