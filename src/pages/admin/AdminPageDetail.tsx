@@ -1,5 +1,5 @@
 import { Button } from "@vellumlabs/cexplorer-sdk";
-import TextInput from "@/components/global/inputs/TextInput";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import SpinningLoader from "@/components/global/SpinningLoader";
 import {
   BreadcrumbRaw,

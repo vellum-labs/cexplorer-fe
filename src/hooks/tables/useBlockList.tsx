@@ -18,7 +18,7 @@ import { formatNumber, formatString } from "@/utils/format/format";
 import { useSearchTable } from "./useSearchTable";
 import type { FilterState } from "./useFilterTable";
 import { useFilterTable } from "./useFilterTable";
-import TextInput from "@/components/global/inputs/TextInput";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import type { FilterKey } from "./useDrepList";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "../useMiscConst";

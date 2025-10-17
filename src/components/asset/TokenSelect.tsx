@@ -20,7 +20,7 @@ import type { AddressAsset } from "@/types/addressTypes";
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";
 import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import { formatNumber } from "@/utils/format/format";
-import TextInput from "../global/inputs/TextInput";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import AssetCell from "./AssetCell";
 
 const Row = React.memo(({ index, style, data }: any) => {

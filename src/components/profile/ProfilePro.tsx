@@ -3,7 +3,7 @@ import { Badge } from "@/components/global/badges/Badge";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { EmptyState } from "@/components/global/EmptyState";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
-import TextInput from "@/components/global/inputs/TextInput";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import Modal from "@/components/global/Modal";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { WatchlistStar } from "@/components/global/watchlist/WatchlistStar";

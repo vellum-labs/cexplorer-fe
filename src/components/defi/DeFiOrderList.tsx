@@ -12,7 +12,7 @@ import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "../global/Image";
 import { Link } from "@tanstack/react-router";
-import TextInput from "../global/inputs/TextInput";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";

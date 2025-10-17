@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { GlobalSearchCell } from "./GlobalSearchCell";
 import { GlobalSearchDropdown } from "./GlobalSearchDropdown";
 import { GlobalSearchRecent } from "./GlobalSearchRecent";
-import TextInput from "../global/inputs/TextInput";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
 
 import { useGlobalSearch } from "@/context/GlobalSearchContext";
 import { useThemeStore } from "@/stores/themeStore";

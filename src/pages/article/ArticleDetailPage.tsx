@@ -1,7 +1,7 @@
 import { ArticleCard } from "@/components/article/ArticleCard";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@/components/global/Image";
-import TextInput from "@/components/global/inputs/TextInput";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { SingleItemCarousel } from "@/components/global/SingleItemCarousel";
 import {
   BreadcrumbRaw,

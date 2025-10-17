@@ -1,6 +1,6 @@
 import { RewardsTab } from "@/components/address/tabs/RewardsTab";
 import { Button } from "@vellumlabs/cexplorer-sdk";
-import TextInput from "@/components/global/inputs/TextInput";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { colors } from "@/constants/colors";
 import { Address } from "@/utils/address/getStakeAddress";
 import { isValidAddress } from "@/utils/address/isValidAddress";

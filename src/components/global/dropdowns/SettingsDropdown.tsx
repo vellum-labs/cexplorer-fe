@@ -31,7 +31,7 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Command } from "@/components/ui/command";
-import TextInput from "../inputs/TextInput";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
 
 interface SettingsDropdownProps {
   withBorder?: boolean;
