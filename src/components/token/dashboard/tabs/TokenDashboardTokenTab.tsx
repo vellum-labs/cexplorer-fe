@@ -35,7 +35,7 @@ import { encodeAssetName } from "@/utils/asset/encodeAssetName";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { PriceAdaSmallAmount } from "@/components/global/PriceAdaSmallAmount";
 import { PriceSparkline } from "@/components/charts/PriceSparkline";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { AlertCircle, TrendingUp, TrendingDown } from "lucide-react";
 
 type Volume = "1d" | "1m" | "1w" | "2w" | "3m";
@@ -129,7 +129,7 @@ export const TokenDashboardTokenTab: FC = () => {
                   type='asset'
                   height={40}
                   width={40}
-                  className='rounded-max aspect-square shrink-0'
+                  className='aspect-square shrink-0 rounded-max'
                   src={generateImageUrl(assetName, "ico", "token")}
                   fallbackletters={[...encodedNameArr]
                     .filter(char =>
@@ -147,7 +147,7 @@ export const TokenDashboardTokenTab: FC = () => {
                     params={{ fingerprint: fingerprint }}
                     title={fingerprint}
                     key={fingerprint}
-                    className={`text-text-sm flex w-full items-center text-primary`}
+                    className={`flex w-full items-center text-text-sm text-primary`}
                   >
                     {isAdaHandle && (
                       <AdaHandleBadge variant='icon' className='h-2 w-2' />
@@ -163,7 +163,7 @@ export const TokenDashboardTokenTab: FC = () => {
                       className='ml-1'
                     />
                   </Link>
-                  <span className='gap-1/2 flex items-center'>
+                  <span className='flex items-center gap-1/2'>
                     {renderAssetName({ name: assetName }) ? (
                       <p className='text-text-xs text-grayTextPrimary'>
                         {formatString(fingerprint, "long")}
