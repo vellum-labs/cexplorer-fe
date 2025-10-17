@@ -18,12 +18,30 @@ export const AssetStatsTab = ({ fingerprint }: Props) => {
   const query = useFetchAssetStats(undefined, fingerprint);
   const data = query.data?.data?.data;
   const epochs = data?.map(item => item.epoch) || [];
-  const ada_volume = data?.map(item => item.stat[0].ada_volume) || [];
-  const asset_volume = data?.map(item => item.stat[0].asset_volume) || [];
-  const payment_cred = data?.map(item => item.stat[0].payment_cred) || [];
-  const stake = data?.map(item => item.stat[0].stake) || [];
-  const address = data?.map(item => item.stat[0].address) || [];
-  const with_data = data?.map(item => item.stat[0].with_data) || [];
+  const ada_volume =
+    data?.map(item =>
+      Array.isArray(item?.stat) ? item?.stat?.[0]?.ada_volume : 0,
+    ) || [];
+  const asset_volume =
+    data?.map(item =>
+      Array.isArray(item?.stat) ? item.stat?.[0]?.asset_volume : 0,
+    ) || [];
+  const payment_cred =
+    data?.map(item =>
+      Array.isArray(item?.stat) ? item.stat?.[0]?.payment_cred : 0,
+    ) || [];
+  const stake =
+    data?.map(item =>
+      Array.isArray(item?.stat) ? item.stat?.[0]?.stake : 0,
+    ) || [];
+  const address =
+    data?.map(item =>
+      Array.isArray(item?.stat) ? item.stat?.[0]?.address : 0,
+    ) || [];
+  const with_data =
+    data?.map(item =>
+      Array.isArray(item?.stat) ? item.stat?.[0]?.with_data : 0,
+    ) || [];
 
   const {
     textColor,
