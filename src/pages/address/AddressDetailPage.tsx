@@ -57,7 +57,7 @@ export const AddressDetailPage: FC = () => {
     stakeKey = addrObj.stake;
   }
 
-  const user = addressQuery.data?.data[0].user;
+  const user = addressQuery.data?.data?.[0]?.user;
   const addressData = addressQuery.data?.data[0];
   const assets = addressData?.asset ?? [];
 
