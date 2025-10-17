@@ -10,7 +10,7 @@ import { useFetchAccountRewards } from "@/services/account";
 import { useAddressDetailRewardsTableStore } from "@/stores/tables/addressDetailRewardsTableStore";
 
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import PoolCell from "@/components/table/PoolCell";
 import { colors } from "@/constants/colors";
 import { EPOCH_LENGTH_DAYS } from "@/constants/confVariables";

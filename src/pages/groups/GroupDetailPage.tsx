@@ -7,7 +7,7 @@ import Tabs from "@/components/global/Tabs";
 import { MetadataCell } from "@/components/metadata/MetadataCell";
 import { PoolListEchart } from "@/components/pool/PoolListEchart";
 import RoaDiffArrow from "@/components/pool/RoaDiffArrow";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 import PoolCell from "@/components/table/PoolCell";
 import {

@@ -9,7 +9,7 @@ import { useAuthToken } from "@/hooks/useAuthToken";
 import { useFetchPolicyList } from "@/services/user";
 import type { PolicyData } from "@/types/userTypes";
 import Copy from "@/components/global/Copy";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 
 export const PolicyListTab: FC = () => {
   const token = useAuthToken();
@@ -69,27 +69,21 @@ export const PolicyListTab: FC = () => {
     },
     {
       key: "floor",
-      render: item => (
-        <AdaWithTooltip data={item.collection.stats.floor} />
-      ),
+      render: item => <AdaWithTooltip data={item.collection.stats.floor} />,
       title: "Floor Price",
       visible: true,
       widthPx: 120,
     },
     {
       key: "volume",
-      render: item => (
-        <AdaWithTooltip data={item.collection.stats.volume} />
-      ),
+      render: item => <AdaWithTooltip data={item.collection.stats.volume} />,
       title: "Volume",
       visible: true,
       widthPx: 120,
     },
     {
       key: "last_mint",
-      render: item => (
-        <DateCell time={item.policy.last_mint} />
-      ),
+      render: item => <DateCell time={item.policy.last_mint} />,
       title: "Last Mint",
       visible: true,
       widthPx: 120,

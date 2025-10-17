@@ -30,7 +30,7 @@ import { isHex } from "@/utils/isHex";
 import { isTextNumeric } from "@/utils/isTextNumeric";
 import { slotToDate } from "@/utils/slotToDate";
 import { format } from "date-fns";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 

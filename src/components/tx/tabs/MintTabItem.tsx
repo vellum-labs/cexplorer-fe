@@ -3,7 +3,7 @@ import { useFetchTxDetail } from "@/services/tx";
 import { formatDate, formatNumber, formatString } from "@/utils/format/format";
 import { Link, getRouteApi } from "@tanstack/react-router";
 import Copy from "../../global/Copy";
-import DateCell from "../../table/DateCell";
+import { DateCell, getNodeText } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "../../table/GlobalTable";
 
 const MintTabItem = () => {
@@ -16,10 +16,12 @@ const MintTabItem = () => {
       key: "date",
       render: () => (
         <p
-          title={formatDate(
-            query.data?.data.block.time
-              ? query.data?.data.block.time
-              : undefined,
+          title={getNodeText(
+            formatDate(
+              query.data?.data.block.time
+                ? query.data?.data.block.time
+                : undefined,
+            ),
           )}
           className=''
         >

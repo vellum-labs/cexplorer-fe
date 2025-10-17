@@ -4,7 +4,7 @@ import type { Dispatch, SetStateAction } from "react";
 
 import PulseDot from "@/components/global/PulseDot";
 import { MetadataCell } from "@/components/metadata/MetadataCell";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { useFetchDrepList } from "@/services/drep";

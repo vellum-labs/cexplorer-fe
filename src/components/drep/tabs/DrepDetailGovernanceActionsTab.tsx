@@ -6,7 +6,7 @@ import type {
 import type { FC } from "react";
 
 import { ActionTypes } from "@/components/global/ActionTypes";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 
 import { useFetchDrepVote } from "@/services/drep";

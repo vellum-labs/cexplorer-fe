@@ -10,7 +10,7 @@ import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import Copy from "../global/Copy";
 import { MinMaxRange } from "../global/MinMaxRange";
 import { SortArrow } from "../global/SortArrow";
-import DateCell from "../table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "../table/GlobalTable";
 import PoolCell from "../table/PoolCell";
 import { ArrowRight } from "lucide-react";

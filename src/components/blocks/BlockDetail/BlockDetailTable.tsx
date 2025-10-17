@@ -6,7 +6,7 @@ import type { BlockDetailColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 import { formatNumber, formatString } from "@/utils/format/format";
 import { Link } from "@tanstack/react-router";

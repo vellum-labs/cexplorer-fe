@@ -4,7 +4,7 @@ import type { FC } from "react";
 
 import Copy from "@/components/global/Copy";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
 import { Check, X } from "lucide-react";

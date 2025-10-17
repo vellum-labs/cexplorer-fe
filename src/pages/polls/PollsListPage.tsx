@@ -3,7 +3,7 @@ import Button from "@/components/global/Button";
 import Modal from "@/components/global/Modal";
 import PulseDot from "@/components/global/PulseDot";
 import Tabs from "@/components/global/Tabs";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 import {
   Accordion,

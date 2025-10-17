@@ -2,7 +2,7 @@ import Copy from "@/components/global/Copy";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";

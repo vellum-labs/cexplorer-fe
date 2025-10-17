@@ -8,7 +8,7 @@ import type { FC } from "react";
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
 import PoolCell from "@/components/table/PoolCell";

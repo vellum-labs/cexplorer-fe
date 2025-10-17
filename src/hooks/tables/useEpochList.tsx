@@ -4,10 +4,14 @@ import type { Dispatch, SetStateAction } from "react";
 
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
 import PulseDot from "@/components/global/PulseDot";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ReactEcharts from "echarts-for-react";
 
-import { currencySigns, currencyPosition, currencySpace } from "@/constants/currencies";
+import {
+  currencySigns,
+  currencyPosition,
+  currencySpace,
+} from "@/constants/currencies";
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
 import {
   formatNumber,

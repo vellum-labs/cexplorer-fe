@@ -14,7 +14,7 @@ import { usePoolBirthdaysTableStore } from "@/stores/tables/poolBirthdaysTableSt
 import { useEffect, useState } from "react";
 
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber } from "@/utils/format/format";
 import { formatOrdinalSuffix } from "@/utils/format/formatOrdinalSuffix";
 import { format, parse, parseISO } from "date-fns";

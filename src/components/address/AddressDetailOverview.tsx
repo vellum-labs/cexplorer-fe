@@ -17,7 +17,7 @@ import AdaHandleBadge from "../global/badges/AdaHandleBadge";
 import { AddressTypeInitialsBadge } from "../global/badges/AddressTypeInitialsBadge";
 import Copy from "../global/Copy";
 import { TotalSumWithRates } from "../global/TotalSumWithRates";
-import DateCell from "../table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import PoolCell from "../table/PoolCell";
 import { AddCustomLabel } from "./AddCustomLabel";
 import AddressCell from "./AddressCell";
@@ -159,7 +159,9 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
             >
               {data[0]?.vote?.drep?.data?.given_name &&
                 data[0]?.vote?.drep?.data?.given_name}
-              <span className='text-text-sm text-primary'>Always no confidence</span>
+              <span className='text-text-sm text-primary'>
+                Always no confidence
+              </span>
             </Link>
           ) : (
             <AttributeDropdown

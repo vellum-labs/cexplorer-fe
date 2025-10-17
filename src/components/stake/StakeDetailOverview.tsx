@@ -15,7 +15,7 @@ import { Badge } from "../global/badges/Badge";
 import Copy from "../global/Copy";
 import PoolCell from "../table/PoolCell";
 import { AttributeDropdown } from "../global/AttributeDropdown";
-import DateCell from "../table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { ChevronRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useThemeStore } from "@/stores/themeStore";

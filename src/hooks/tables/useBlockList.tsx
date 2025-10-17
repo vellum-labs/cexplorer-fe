@@ -7,7 +7,7 @@ import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
 import { useBlockListTableStore } from "@/stores/tables/blockListTableStore";
 import { useEffect, useState } from "react";
 
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import PoolCell from "@/components/table/PoolCell";
 import { SizeCell } from "@/components/table/SizeCell";
 

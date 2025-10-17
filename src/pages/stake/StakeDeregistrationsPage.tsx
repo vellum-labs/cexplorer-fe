@@ -5,7 +5,7 @@ import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
 import { AddressTypeInitialsBadge } from "@/components/global/badges/AddressTypeInitialsBadge";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
 import { HashCell } from "@/components/tx/HashCell";

@@ -3,7 +3,7 @@ import type { TxBasicInfo } from "@/types/txTypes";
 import type { Dispatch, SetStateAction } from "react";
 
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { SizeCell } from "@/components/table/SizeCell";
 import { HashCell } from "@/components/tx/HashCell";
 import { Link } from "@tanstack/react-router";

@@ -1,7 +1,7 @@
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
 import { Badge } from "@/components/global/badges/Badge";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
 import PoolCell from "@/components/table/PoolCell";

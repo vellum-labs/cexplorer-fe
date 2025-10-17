@@ -7,7 +7,7 @@ import { formatNumber, formatString } from "@/utils/format/format";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import TableSettingsDropdown from "../global/dropdowns/TableSettingsDropdown";
-import DateCell from "../table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "../table/ExportButton";
 import GlobalTable from "../table/GlobalTable";
 import { SizeCell } from "../table/SizeCell";

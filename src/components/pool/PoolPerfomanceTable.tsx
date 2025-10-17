@@ -6,7 +6,7 @@ import TableSettingsDropdown from "../global/dropdowns/TableSettingsDropdown";
 import GlobalTable from "../table/GlobalTable";
 import { Link } from "@tanstack/react-router";
 import PulseDot from "../global/PulseDot";
-import DateCell from "../table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchPoolDetail } from "@/services/pools";
 import { usePoolPerfomanceTableStore } from "@/stores/tables/poolPerfomanceTableStore";

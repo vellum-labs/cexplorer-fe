@@ -1,7 +1,7 @@
 import type { MiscSearch } from "@/types/miscTypes";
 import type { FC } from "react";
 
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 
 import { formatString } from "@/utils/format/format";
 import { Link } from "@tanstack/react-router";

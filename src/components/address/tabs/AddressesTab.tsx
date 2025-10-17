@@ -9,7 +9,7 @@ import GlobalTable from "@/components/table/GlobalTable";
 import { TokenSelectCombobox } from "@/components/asset/TokenSelect";
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
 import { AddressTypeInitialsBadge } from "@/components/global/badges/AddressTypeInitialsBadge";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { useFetchAddressList } from "@/services/address";
