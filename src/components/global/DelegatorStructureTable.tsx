@@ -1,26 +1,30 @@
 import type { FC } from "react";
+import type { UseQueryResult } from "@tanstack/react-query";
+import type { CallbackDataParams } from "echarts/types/dist/shared";
+import type { TableColumns } from "@/types/tableTypes";
+import type {
+  DelegatorStructureColumnKey,
+  DelegatorStructureColumnsState,
+  DelegatorStructureItem,
+} from "./DelegatorStructureView";
 import GlobalTable from "@/components/table/GlobalTable";
 import { AdaWithTooltip } from "./AdaWithTooltip";
 import { Tooltip } from "../ui/tooltip";
 import { getAnimalRangeByName } from "@/utils/address/getAnimalRangeByName";
 import ReactEcharts from "echarts-for-react";
+import type { PoolDelegatorStatsResponse } from "@/types/poolTypes";
 
-interface Items {
-  title: string;
-  icon: string;
-  data: {
-    count: number;
-    sum: number;
-  };
-}
+type PieTooltipParams = CallbackDataParams & {
+  data: { name: string };
+};
 
 interface DelegatorStructureTableProps {
-  items: Items[];
-  columnsOrder: any;
-  columnsVisibility: any;
-  setColumsOrder: any;
+  items: DelegatorStructureItem[];
+  columnsOrder: DelegatorStructureColumnKey[];
+  columnsVisibility: DelegatorStructureColumnsState;
+  setColumsOrder: (order: DelegatorStructureColumnKey[]) => void;
   rows: number;
-  query: any;
+  query: UseQueryResult<PoolDelegatorStatsResponse, unknown>;
   columnType: "pool" | "drep";
 }
 
@@ -33,10 +37,10 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
   query,
   columnType,
 }) => {
-  const columns = [
+  const columns: TableColumns<DelegatorStructureItem> = [
     {
       key: "wallet_size",
-      render: (item: Items) => {
+      render: item => {
         return (
           <Tooltip
             content={
@@ -60,7 +64,7 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
     },
     {
       key: "amount",
-      render: (item: Items) => {
+      render: item => {
         return <p className='text-right'>{item.data.count}</p>;
       },
       title: <p className='w-full text-right'>Count</p>,
@@ -69,7 +73,7 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
     },
     {
       key: "amount_pie",
-      render: (item: Items) => {
+      render: item => {
         const amountSum = items
           .map(item => item.data.count)
           .reduce((a, b) => a + b, 0);
@@ -80,14 +84,14 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
           tooltip: {
             trigger: "item",
             confine: true,
-            formatter: (param: any) => {
+            formatter: (param: PieTooltipParams) => {
               if (param.data.name === "Usage") {
                 const animalName =
                   item.title[0].toUpperCase() + item.title.slice(1);
                 return `${animalName} count: ${usage.toFixed(2)}%`;
-              } else {
-                return `Others count: ${(100 - usage).toFixed(2)}%`;
               }
+
+              return `Others count: ${(100 - usage).toFixed(2)}%`;
             },
           },
           series: [
@@ -133,11 +137,11 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
       },
       title: <p className='w-full text-right'>Count %</p>,
       visible: columnsVisibility.amount_pie,
-      widthPx: columnType === "pool" ? 100 : undefined,
+      widthPx: columnType === "pool" ? 100 : 120,
     },
     {
       key: "holdings",
-      render: (item: Items) => {
+      render: item => {
         return (
           <p className='text-right'>
             <AdaWithTooltip data={item.data.sum} />
@@ -150,7 +154,7 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
     },
     {
       key: "holdings_pie",
-      render: (item: Items) => {
+      render: item => {
         const holdingsSum = items
           .map(item => item.data.sum)
           .reduce((a, b) => a + b, 0);
@@ -161,14 +165,14 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
           tooltip: {
             trigger: "item",
             confine: true,
-            formatter: (param: any) => {
+            formatter: (param: PieTooltipParams) => {
               if (param.data.name === "Usage") {
                 const animalName =
                   item.title[0].toUpperCase() + item.title.slice(1);
                 return `${animalName} stake: ${usage.toFixed(2)}%`;
-              } else {
-                return `Others stake: ${(100 - usage).toFixed(2)}%`;
               }
+
+              return `Others stake: ${(100 - usage).toFixed(2)}%`;
             },
           },
           series: [
@@ -214,7 +218,7 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
       },
       title: <p className='w-full text-right'>Stake %</p>,
       visible: columnsVisibility.holdings_pie,
-      widthPx: columnType === "pool" ? 100 : undefined,
+      widthPx: columnType === "pool" ? 100 : 120,
     },
   ];
 
@@ -229,9 +233,14 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
       query={query}
       items={items}
       columns={columns.sort((a, b) => {
-        return columnsOrder.indexOf(a.key) - columnsOrder.indexOf(b.key);
+        return (
+          columnsOrder.indexOf(a.key as DelegatorStructureColumnKey) -
+          columnsOrder.indexOf(b.key as DelegatorStructureColumnKey)
+        );
       })}
-      onOrderChange={setColumsOrder}
+      onOrderChange={columns =>
+        setColumsOrder(columns as DelegatorStructureColumnKey[])
+      }
     />
   );
 };

@@ -1,26 +1,22 @@
+import { AnimalName, isAnimalName } from "@/constants/animals";
+
+const animalRanges: Record<AnimalName, string> = {
+  [AnimalName.Plankton]: "₳ 0 - ₳ 10",
+  [AnimalName.Shrimp]: "₳ 10 - ₳ 1K",
+  [AnimalName.Crab]: "₳ 1K - ₳ 5K",
+  [AnimalName.Fish]: "₳ 5K - ₳ 25K",
+  [AnimalName.Tuna]: "₳ 25K - ₳ 100K",
+  [AnimalName.Dolphin]: "₳ 100K - ₳ 250K",
+  [AnimalName.Shark]: "₳ 250K - ₳ 1M",
+  [AnimalName.Whale]: "₳ 1M - ₳ 5M",
+  [AnimalName.Humpback]: "₳ 5M - ₳ 20M",
+  [AnimalName.Leviathan]: "₳ 20M+",
+};
+
 export const getAnimalRangeByName = (name: string): string => {
-  switch (name) {
-    case "plankton":
-      return "₳ 0 - ₳ 10";
-    case "shrimp":
-      return "₳ 10 - ₳ 1K";
-    case "crab":
-      return "₳ 1K - ₳ 5K";
-    case "fish":
-      return "₳ 5K - ₳ 25K";
-    case "tuna":
-      return "₳ 25K - ₳ 100K";
-    case "dolphin":
-      return "₳ 100K - ₳ 250K";
-    case "shark":
-      return "₳ 250K - ₳ 1M";
-    case "whale":
-      return "₳ 1M - ₳ 5M";
-    case "humpback":
-      return "₳ 5M - ₳ 20M";
-    case "leviathan":
-      return "₳ 20M+";
-    default:
-      return "";
+  if (isAnimalName(name)) {
+    return animalRanges[name];
   }
+
+  return "";
 };

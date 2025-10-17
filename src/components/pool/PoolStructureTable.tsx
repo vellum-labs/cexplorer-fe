@@ -2,6 +2,7 @@ import type { FC } from "react";
 
 import { useFetchPoolDelegatorStats } from "@/services/pools";
 import { usePoolDelegatorsStructureStore } from "@/stores/tables/poolDelegatorsStructureStore";
+import type { PoolStructureColumns } from "@/types/tableTypes";
 
 import { DelegatorStructureView } from "../global/DelegatorStructureView";
 import { poolStructureTableOptions } from "@/constants/tables/poolStructureTableOptions";
@@ -12,8 +13,11 @@ interface PoolStructureTableProps {
   setSortByAnimalSize?: (value: boolean) => void;
   rows?: number;
   setRows?: (rows: number) => void;
-  columnsVisibility?: any;
-  setColumnVisibility?: (key: string, value: boolean) => void;
+  columnsVisibility?: PoolStructureColumns;
+  setColumnVisibility?: (
+    key: keyof PoolStructureColumns,
+    value: boolean,
+  ) => void;
 }
 
 export const PoolStructureTable: FC<PoolStructureTableProps> = ({

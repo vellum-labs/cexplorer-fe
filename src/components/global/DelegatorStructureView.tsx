@@ -1,24 +1,24 @@
 import type { FC } from "react";
 import { useMemo } from "react";
-
-import Plankton from "@/resources/images/icons/plankton.svg";
-import Shrimp from "@/resources/images/icons/shrimp.svg";
-import Crab from "@/resources/images/icons/crab.svg";
-import Fish from "@/resources/images/icons/fish.svg";
-import Dolphin from "@/resources/images/icons/dolphin.svg";
-import Shark from "@/resources/images/icons/shark.svg";
-import Whale from "@/resources/images/icons/whale.svg";
-import Humpback from "@/resources/images/icons/humpback.svg";
-import Dino from "@/resources/images/icons/dino.svg";
-import Tuna from "@/resources/images/icons/tuna.svg";
+import type { UseQueryResult } from "@tanstack/react-query";
 import { ArrowRight } from "lucide-react";
+
+import { addressIcons } from "@/constants/address";
+import {
+  ANIMAL_ORDER,
+  AnimalName,
+  isAnimalName,
+} from "@/constants/animals";
+
+import type { PoolDelegatorStatsResponse } from "@/types/poolTypes";
+import type { PoolStructureColumns } from "@/types/tableTypes";
 
 import { DelegatorStructureCharts } from "./DelegatorStructureCharts";
 import { DelegatorStructureTable } from "./DelegatorStructureTable";
 import TableSettingsDropdown from "./dropdowns/TableSettingsDropdown";
 
-interface Items {
-  title: string;
+export interface DelegatorStructureItem {
+  title: AnimalName;
   icon: string;
   data: {
     count: number;
@@ -26,48 +26,31 @@ interface Items {
   };
 }
 
+export type DelegatorStructureColumnKey = keyof PoolStructureColumns;
+export type DelegatorStructureColumnsState = Record<
+  DelegatorStructureColumnKey,
+  boolean
+>;
+
 interface DelegatorStructureViewProps {
-  dataQuery: any;
-  columnsOrder: any;
-  columnsVisibility: any;
-  setColumsOrder: any;
+  dataQuery: UseQueryResult<PoolDelegatorStatsResponse, unknown>;
+  columnsOrder: DelegatorStructureColumnKey[];
+  columnsVisibility: DelegatorStructureColumnsState;
+  setColumsOrder: (order: DelegatorStructureColumnKey[]) => void;
   rows: number;
   setRows: (rows: number) => void;
-  setColumnVisibility: (key: string, value: boolean) => void;
+  setColumnVisibility: (
+    key: DelegatorStructureColumnKey,
+    value: boolean,
+  ) => void;
   sortByAnimalSize: boolean;
   setSortByAnimalSize?: (value: boolean) => void;
   columnType: "pool" | "drep";
   tableOptions: Array<{
-    key: string;
+    key: DelegatorStructureColumnKey;
     name: string;
   }>;
 }
-
-const itemIcons: Record<string, string> = {
-  plankton: Plankton,
-  shrimp: Shrimp,
-  crab: Crab,
-  fish: Fish,
-  dolphin: Dolphin,
-  shark: Shark,
-  whale: Whale,
-  humpback: Humpback,
-  leviathan: Dino,
-  tuna: Tuna,
-};
-
-const animalOrder = [
-  "plankton",
-  "shrimp",
-  "crab",
-  "fish",
-  "tuna",
-  "dolphin",
-  "shark",
-  "whale",
-  "humpback",
-  "leviathan",
-];
 
 export const DelegatorStructureView: FC<DelegatorStructureViewProps> = ({
   dataQuery,
@@ -82,22 +65,22 @@ export const DelegatorStructureView: FC<DelegatorStructureViewProps> = ({
   columnType,
   tableOptions,
 }) => {
-  const items = useMemo(() => {
-    const data = dataQuery.data?.data.data[0];
+  const items = useMemo<DelegatorStructureItem[]>(() => {
+    const data = dataQuery.data?.data.data?.[0] as
+      | PoolDelegatorStatsResponse["data"]["data"][number]
+      | undefined;
     if (!data) return [];
 
-    const res: Items[] = [];
+    const validAnimals = Object.keys(data).filter(isAnimalName) as AnimalName[];
 
-    for (const key in data) {
-      res.push({
-        title: key,
-        icon: itemIcons[key],
-        data: data[key],
-      });
-    }
+    const items = validAnimals.map(animalName => ({
+      title: animalName,
+      icon: addressIcons[animalName],
+      data: data[animalName],
+    }));
 
-    const sorted = res.sort((a, b) => {
-      return animalOrder.indexOf(a.title) - animalOrder.indexOf(b.title);
+    const sorted = [...items].sort((a, b) => {
+      return ANIMAL_ORDER.indexOf(a.title) - ANIMAL_ORDER.indexOf(b.title);
     });
 
     if (sortByAnimalSize) {
@@ -120,15 +103,31 @@ export const DelegatorStructureView: FC<DelegatorStructureViewProps> = ({
             >
               {sortByAnimalSize ? (
                 <>
-                  <img src={Plankton} className='h-5 w-5' alt='Plankton' />
+                  <img
+                    src={addressIcons[AnimalName.Plankton]}
+                    className='h-5 w-5'
+                    alt='Plankton'
+                  />
                   <ArrowRight size={16} />
-                  <img src={Dino} className='h-5 w-5' alt='Leviathan' />
+                  <img
+                    src={addressIcons[AnimalName.Leviathan]}
+                    className='h-5 w-5'
+                    alt='Leviathan'
+                  />
                 </>
               ) : (
                 <>
-                  <img src={Dino} className='h-5 w-5' alt='Leviathan' />
+                  <img
+                    src={addressIcons[AnimalName.Leviathan]}
+                    className='h-5 w-5'
+                    alt='Leviathan'
+                  />
                   <ArrowRight size={16} />
-                  <img src={Plankton} className='h-5 w-5' alt='Plankton' />
+                  <img
+                    src={addressIcons[AnimalName.Plankton]}
+                    className='h-5 w-5'
+                    alt='Plankton'
+                  />
                 </>
               )}
             </button>

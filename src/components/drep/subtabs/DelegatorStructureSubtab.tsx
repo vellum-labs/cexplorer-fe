@@ -5,6 +5,7 @@ import { useFetchDrepDelegatorStats } from "@/services/drep";
 import { useDrepDelegatorsStructureStore } from "@/stores/tables/drepDelegatorStructureTableStore";
 import { DelegatorStructureView } from "@/components/global/DelegatorStructureView";
 import { drepStructureTableOptions } from "@/constants/tables/drepStructureTableOptions";
+import type { DrepStructureColumns } from "@/types/tableTypes";
 
 interface DelegatorStructureSubtabProps {
   view: string;
@@ -12,8 +13,11 @@ interface DelegatorStructureSubtabProps {
   setSortByAnimalSize?: (value: boolean) => void;
   rows?: number;
   setRows?: (rows: number) => void;
-  columnsVisibility?: any;
-  setColumnVisibility?: (key: string, value: boolean) => void;
+  columnsVisibility?: DrepStructureColumns;
+  setColumnVisibility?: (
+    key: keyof DrepStructureColumns,
+    value: boolean,
+  ) => void;
 }
 
 export const DelegatorStructureSubtab: FC<DelegatorStructureSubtabProps> = ({

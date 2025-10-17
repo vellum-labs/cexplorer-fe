@@ -9,35 +9,25 @@ import { useFetchMiscBasic } from "@/services/misc";
 import type { TableColumns } from "@/types/tableTypes";
 import { formatNumber } from "@/utils/format/format";
 import { getAnimalImageByName } from "@/utils/getAnimalImageByName";
+import { getAnimalRangeByName } from "@/utils/address/getAnimalRangeByName";
 import { useWindowDimensions } from "@/utils/useWindowsDemensions";
 import EChartsReact from "echarts-for-react";
 import { useEffect, useState } from "react";
+import type { AnimalName } from "@/constants/animals";
+import { ANIMAL_ORDER, isAnimalName } from "@/constants/animals";
 
-const ranges = {
-  plankton: "₳ 0 - ₳ 10",
-  shrimp: "₳ 10 - ₳ 1K",
-  crab: "₳ 1K - ₳ 5K",
-  fish: "₳ 5K - ₳ 25K",
-  tuna: "₳ 25K - ₳ 100K",
-  dolphin: "₳ 100K - ₳ 250K",
-  shark: "₳ 250K - ₳ 1M",
-  whale: "₳ 1M - ₳ 5M",
-  humpback: "₳ 5M - ₳ 20M",
-  leviathan: "₳ 20M+",
+type AnimalStats = {
+  count: number;
+  sum: number;
 };
 
-const sortingOrder = [
-  "plankton",
-  "shrimp",
-  "crab",
-  "fish",
-  "tuna",
-  "dolphin",
-  "shark",
-  "whale",
-  "humpback",
-  "leviathan",
-];
+type WealthCompositionItem = {
+  name: AnimalName;
+  stats: AnimalStats;
+};
+
+const formatAnimalLabel = (name: AnimalName) =>
+  name.charAt(0).toUpperCase() + name.slice(1);
 
 export const WealthComposition = () => {
   const { data: basicData } = useFetchMiscBasic(true);
@@ -46,73 +36,61 @@ export const WealthComposition = () => {
   const query = useFetchWealthComposition();
   const { width } = useWindowDimensions();
   const [radius, setRadius] = useState<string[]>(["50%", "70%"]);
-  const [arrayData, setArrayData] = useState<
-    Record<string, { count: number; sum: number }>[]
-  >([]);
-  const columns: TableColumns<Record<string, { count: number; sum: number }>> =
-    [
-      {
-        key: "wallet_size",
-        render: item => {
-          return (
-            <div className='flex items-center gap-1'>
-              <img src={getAnimalImageByName(Object.keys(item)[0])} />
-              <p>
-                {Object.keys(item)[0].slice(0, 1).toUpperCase() +
-                  Object.keys(item)[0].slice(1)}
-              </p>
-            </div>
-          );
-        },
-        title: "Wallet size",
-        visible: true,
-        widthPx: 60,
+  const [arrayData, setArrayData] = useState<WealthCompositionItem[]>([]);
+  const columns: TableColumns<WealthCompositionItem> = [
+    {
+      key: "wallet_size",
+      render: item => {
+        return (
+          <div className='flex items-center gap-1'>
+            <img src={getAnimalImageByName(item.name) ?? ""} />
+            <p>{formatAnimalLabel(item.name)}</p>
+          </div>
+        );
       },
-      {
-        key: "count",
-        render: item => {
-          return <p>{formatNumber(item[Object.keys(item)[0]].count)}</p>;
-        },
-        title: "Count",
-        visible: true,
-        widthPx: 50,
+      title: "Wallet size",
+      visible: true,
+      widthPx: 60,
+    },
+    {
+      key: "count",
+      render: item => {
+        return <p>{formatNumber(item.stats.count)}</p>;
       },
-      {
-        key: "sum",
-        render: item => {
-          return <AdaWithTooltip data={item[Object.keys(item)[0]].sum} />;
-        },
-        title: "Sum",
-        visible: true,
-        widthPx: 60,
+      title: "Count",
+      visible: true,
+      widthPx: 50,
+    },
+    {
+      key: "sum",
+      render: item => {
+        return <AdaWithTooltip data={item.stats.sum} />;
       },
-      {
-        key: "sumPercentage",
-        render: item => {
-          return (
-            <p>
-              {(
-                (item[Object.keys(item)[0]].sum / circulatingSupply) *
-                100
-              ).toFixed(1)}
-              %
-            </p>
-          );
-        },
-        title: "Sum %",
-        visible: true,
-        widthPx: 60,
+      title: "Sum",
+      visible: true,
+      widthPx: 60,
+    },
+    {
+      key: "sumPercentage",
+      render: item => {
+        return (
+          <p>{((item.stats.sum / circulatingSupply) * 100).toFixed(1)}%</p>
+        );
       },
-      {
-        key: "range",
-        render: item => {
-          return <p>{ranges[Object.keys(item)[0]]}</p>;
-        },
-        title: "Range",
-        visible: true,
-        widthPx: 60,
+      title: "Sum %",
+      visible: true,
+      widthPx: 60,
+    },
+    {
+      key: "range",
+      render: item => {
+        return <p>{getAnimalRangeByName(item.name)}</p>;
       },
-    ];
+      title: "Range",
+      visible: true,
+      widthPx: 60,
+    },
+  ];
 
   const tabs = [
     {
@@ -163,17 +141,20 @@ export const WealthComposition = () => {
   useEffect(() => {
     const data = query.data?.data ?? {};
     if (Object.keys(data).length) {
-      const arrayData: Record<string, { count: number; sum: number }>[] = [];
-      Object.keys(data).forEach(key => {
-        arrayData.push({ [key]: data[key] });
-        arrayData.sort((a, b) => {
-          return (
-            sortingOrder.indexOf(Object.keys(a)[0]) -
-            sortingOrder.indexOf(Object.keys(b)[0])
-          );
+      const items = Object.keys(data)
+        .filter(isAnimalName)
+        .map(animal => {
+          const name = animal as AnimalName;
+          return {
+            name,
+            stats: data[name] as AnimalStats,
+          };
+        })
+        .sort((a, b) => {
+          return ANIMAL_ORDER.indexOf(a.name) - ANIMAL_ORDER.indexOf(b.name);
         });
-      });
-      setArrayData(arrayData);
+
+      setArrayData(items);
     }
   }, [query.data?.data]);
 
@@ -207,15 +188,13 @@ const SumPieChart = ({
   data,
   radius,
 }: {
-  data: Record<string, { count: number; sum: number }>[];
+  data: WealthCompositionItem[];
   radius: string[];
 }) => {
   const { textColor, bgColor } = useGraphColors();
   const pieData = data.map(item => ({
-    value: item[Object.keys(item)[0]].sum,
-    name:
-      Object.keys(item)[0].slice(0, 1).toUpperCase() +
-      Object.keys(item)[0].slice(1),
+    value: item.stats.sum,
+    name: formatAnimalLabel(item.name),
   }));
 
   const option: ReactEChartsProps["option"] = {
@@ -273,15 +252,13 @@ const CountPieChart = ({
   data,
   radius,
 }: {
-  data: Record<string, { count: number; sum: number }>[];
+  data: WealthCompositionItem[];
   radius?: string[];
 }) => {
   const { textColor, bgColor } = useGraphColors();
   const pieData = data.map(item => ({
-    value: item[Object.keys(item)[0]].count,
-    name:
-      Object.keys(item)[0].slice(0, 1).toUpperCase() +
-      Object.keys(item)[0].slice(1),
+    value: item.stats.count,
+    name: formatAnimalLabel(item.name),
   }));
 
   const option: ReactEChartsProps["option"] = {

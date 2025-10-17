@@ -2,19 +2,18 @@ import type { FC } from "react";
 import ReactEcharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { getAnimalColorByName } from "@/utils/address/getAnimalColorByName";
-
-interface Items {
-  title: string;
-  icon: string;
-  data: {
-    count: number;
-    sum: number;
-  };
-}
+import type { CallbackDataParams } from "echarts/types/dist/shared";
+import type { DelegatorStructureItem } from "./DelegatorStructureView";
 
 interface DelegatorStructureChartsProps {
-  items: Items[];
+  items: DelegatorStructureItem[];
 }
+
+type StakeTooltipParams = CallbackDataParams & {
+  marker?: string;
+  name: string;
+  value: number;
+};
 
 export const DelegatorStructureCharts: FC<DelegatorStructureChartsProps> = ({
   items,
@@ -76,9 +75,10 @@ export const DelegatorStructureCharts: FC<DelegatorStructureChartsProps> = ({
     tooltip: {
       trigger: "item",
       confine: true,
-      formatter: (params: any) => {
-        const value = params.value.toLocaleString();
-        return `${params.marker} ${params.name} ${value} ₳`;
+      formatter: (params: StakeTooltipParams) => {
+        const value = Number(params.value).toLocaleString();
+        const marker = params.marker ? `${params.marker} ` : "";
+        return `${marker}${params.name} ${value} ₳`;
       },
     },
     series: [
