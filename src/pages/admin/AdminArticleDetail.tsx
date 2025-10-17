@@ -1,16 +1,16 @@
 import { ArticleCombobox } from "@/components/article/ArticleCombobox";
 import { Badge } from "@/components/global/badges/Badge";
-import Button from "@/components/global/Button";
-import TextInput from "@/components/global/inputs/TextInput";
+import { Button } from "@vellumlabs/cexplorer-sdk";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import SpinningLoader from "@/components/global/SpinningLoader";
 import {
-  Breadcrumb,
+  BreadcrumbRaw,
   BreadcrumbItem,
   BreadcrumbList,
-} from "@/components/ui/breadcrumb";
+} from "@vellumlabs/cexplorer-sdk";
 import { fetchAdminArticle, useFetchAdminArticle } from "@/services/user";
 import { useAuthTokensStore } from "@/stores/authTokensStore";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useWalletStore } from "@/stores/walletStore";
 import type { ArticleCategories, ArticleUrl } from "@/types/articleTypes";
 import type { AdminArticleDetailResponse } from "@/types/userTypes";
@@ -103,7 +103,7 @@ export const AdminArticleDetail = () => {
         <meta charSet='utf-8' />
         <title>Admin article detail | Cexplorer.io</title>
       </Helmet>
-      <Breadcrumb className='w-full'>
+      <BreadcrumbRaw className='w-full'>
         <BreadcrumbList className='flex items-center'>
           <BreadcrumbItem>
             <Link className='underline underline-offset-2' to='/'>
@@ -127,7 +127,7 @@ export const AdminArticleDetail = () => {
           </BreadcrumbItem>
           /<BreadcrumbItem className='text-text'>{data?.name}</BreadcrumbItem>
         </BreadcrumbList>
-      </Breadcrumb>
+      </BreadcrumbRaw>
       {query.isLoading ? (
         <div className='mt-4 flex w-full justify-center'>
           <SpinningLoader />
@@ -190,7 +190,7 @@ export const AdminArticleDetail = () => {
             className='relative rounded-m border border-border bg-darker'
           >
             <textarea
-              className='absolute inset-0 w-full resize-none overflow-hidden bg-transparent p-1 font-mono text-transparent caret-text outline-none'
+              className='font-mono absolute inset-0 w-full resize-none overflow-hidden bg-transparent p-1 text-transparent caret-text outline-none'
               ref={textareaRef}
               value={content}
               onChange={e => setContent(e.target.value)}

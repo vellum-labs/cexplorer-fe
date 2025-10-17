@@ -1,7 +1,11 @@
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import { useFetchMiscBasic } from "@/services/misc";
 import type { TxDetailResponse } from "@/types/txTypes";
-import { formatDate, formatNumber, formatString } from "@/utils/format/format";
+import {
+  formatDate,
+  formatNumber,
+  formatString,
+} from "@vellumlabs/cexplorer-sdk";
 import { getConfirmations } from "@/utils/getConfirmations";
 import { getEpochSlot } from "@/utils/getEpochSlot";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
@@ -15,16 +19,16 @@ import {
   GitFork,
   Lock,
 } from "lucide-react";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
-import Copy from "../global/Copy";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TotalSumWithRates } from "../global/TotalSumWithRates";
 import AdsCarousel from "../global/ads/AdsCarousel";
 import { MintedByCard } from "../global/cards/MintedByCard";
 import type { OverviewList } from "../global/cards/OverviewCard";
 import { OverviewCard } from "../global/cards/OverviewCard";
 import { SizeCard } from "../global/cards/SizeCard";
-import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
-import DateCell from "../table/DateCell";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import TtlCountdown from "./TtlCountdown";
 import { useEffect, useState } from "react";
 import { getAddonsForMetadata } from "@/utils/addons/getAddonsForMetadata";
@@ -175,7 +179,7 @@ const TxDetailOverview = ({ query }: Props) => {
       value: (
         <div className='flex items-center gap-[2.5px] text-text-sm'>
           {confirmations[1] < 3 && (
-            <CircleX size={15} className='text-red-500 translate-y-[1px]' />
+            <CircleX size={15} className='translate-y-[1px] text-red-500' />
           )}
           {confirmations[1] > 2 && confirmations[1] < 9 && (
             <CircleAlert

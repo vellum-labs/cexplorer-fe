@@ -1,15 +1,15 @@
 import { DrepHashCell } from "@/components/drep/DrepHashCell";
-import Button from "@/components/global/Button";
-import TextInput from "@/components/global/inputs/TextInput";
+import { Button } from "@vellumlabs/cexplorer-sdk";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import Modal from "@/components/global/Modal";
 import SpinningLoader from "@/components/global/SpinningLoader";
 import GlobalTable from "@/components/table/GlobalTable";
 import PoolCell from "@/components/table/PoolCell";
 import {
-  Breadcrumb,
+  BreadcrumbRaw,
   BreadcrumbItem,
   BreadcrumbList,
-} from "@/components/ui/breadcrumb";
+} from "@vellumlabs/cexplorer-sdk";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useAuthToken } from "@/hooks/useAuthToken";
@@ -259,7 +259,7 @@ export const AdminGroupDetailPage = () => {
       )}
       <main className='flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col justify-center'>
-          <Breadcrumb className='mb-2 w-full'>
+          <BreadcrumbRaw className='mb-2 w-full'>
             <BreadcrumbList className='flex items-center'>
               <BreadcrumbItem>
                 <Link className='underline underline-offset-2' to='/'>
@@ -286,7 +286,7 @@ export const AdminGroupDetailPage = () => {
                 {data?.name}
               </BreadcrumbItem>
             </BreadcrumbList>
-          </Breadcrumb>
+          </BreadcrumbRaw>
           <h2 className='text-left'>{data?.name}</h2>
           <p className='mb-2 flex items-center gap-1'>
             {data?.description}

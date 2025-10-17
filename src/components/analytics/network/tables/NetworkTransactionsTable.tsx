@@ -6,7 +6,7 @@ import GlobalTable from "@/components/table/GlobalTable";
 
 import { useNetworkTPSTableStore } from "@/stores/tables/networkTPSTableStore";
 
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 interface NetworkTransactionsTableProps {
   query: ReturnType<typeof useFetchEpochAnalytics>;

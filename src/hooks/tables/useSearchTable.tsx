@@ -1,7 +1,7 @@
 import type { Dispatch, SetStateAction } from "react";
 
 import { useEffect, useState } from "react";
-import useDebounce from "../useDebounce";
+import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 
 type UseTableSearch = [

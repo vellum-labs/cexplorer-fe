@@ -1,9 +1,21 @@
 (async () => {
-  const FORCE_CLEAR_DATE = new Date("2025-08-20T00:00:00Z").getTime();
+  const FORCE_CLEAR_DATE = new Date("2025-10-16T15:07:00Z").getTime();
   const lastClearTimestamp = localStorage.getItem("last-clear-timestamp");
 
   window.__DISABLE_SW__ =
     !lastClearTimestamp || parseInt(lastClearTimestamp, 10) < FORCE_CLEAR_DATE;
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.addEventListener("error", () => {
+      window.__DISABLE_SW__ = true;
+    });
+
+    navigator.serviceWorker.addEventListener("message", event => {
+      if (event.data.type === "SW_FETCH_ERROR") {
+        window.__DISABLE_SW__ = true;
+      }
+    });
+  }
 
   if (window.__DISABLE_SW__) {
     try {

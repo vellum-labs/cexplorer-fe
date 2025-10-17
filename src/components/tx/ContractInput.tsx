@@ -2,10 +2,10 @@ import type { PlutusContract, TxInput } from "@/types/txTypes";
 import { Fragment, useState, type FC } from "react";
 import { LabelBadge } from "../global/badges/LabelBadge";
 import { PurposeBadge } from "../global/badges/PurposeBadge";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
-import { formatNumber } from "@/utils/format/format";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { JsonDisplay } from "../global/JsonDisplay";
 import ConstLabelBadge from "../global/badges/ConstLabelBadge";
 import { TextDisplay } from "../global/TextDisplay";
@@ -45,17 +45,17 @@ export const ContractInput: FC<ContractInputProps> = ({
           />
         )}
         {contract.label && <LabelBadge variant='lg' label={contract?.label} />}
-        <div className='rounded-m py-1/2 text-text-xs w-fit border border-border bg-background px-1 font-medium'>
+        <div className='w-fit rounded-m border border-border bg-background px-1 py-1/2 text-text-xs font-medium'>
           Input #{inputIndex + 1}
         </div>
         <PurposeBadge purpose={input.redeemer.purpose} />
-        <span className='rounded-max text-text-xs flex h-[25px] items-center border border-border bg-blue-200/15 px-1 font-medium'>
+        <span className='bg-blue-200/15 flex h-[25px] items-center rounded-max border border-border px-1 text-text-xs font-medium'>
           {contract.type.slice(0, 1).toUpperCase() + contract.type.slice(1)}
         </span>
-        <span className='rounded-max text-text-xs flex h-[25px] items-center border border-border bg-secondaryBg px-1 font-medium'>
+        <span className='flex h-[25px] items-center rounded-max border border-border bg-secondaryBg px-1 text-text-xs font-medium'>
           Size {(contract.size / 1024).toFixed(2)}kB
         </span>
-        <span className='rounded-max text-text-xs flex h-[25px] items-center border border-border bg-secondaryBg px-1 font-medium'>
+        <span className='flex h-[25px] items-center rounded-max border border-border bg-secondaryBg px-1 text-text-xs font-medium'>
           Fee <AdaWithTooltip data={input.redeemer.fee} />
         </span>
       </div>
@@ -87,7 +87,7 @@ export const ContractInput: FC<ContractInputProps> = ({
           search
         />
         <span>
-          <span className='gap-1/2 mt-1 flex items-center'>
+          <span className='mt-1 flex items-center gap-1/2'>
             Script hash:{" "}
             <ConstLabelBadge type='sc' name={contract?.script_hash} />
           </span>

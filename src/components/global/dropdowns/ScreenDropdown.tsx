@@ -1,4 +1,4 @@
-import { useDropdownState } from "@/stores/states/dropdownState";
+import { useDropdownState } from "@vellumlabs/cexplorer-sdk";
 import type { NestedNavigation } from "@/types/navigationTypes";
 import { generateUrlWithParams } from "@/utils/generateUrlWithParams";
 import { Link } from "@tanstack/react-router";
@@ -128,7 +128,7 @@ export const ScreenDropdown: React.FC<DropdownProps> = ({
       <button
         ref={triggerRef}
         onClick={toggleDropdown}
-        className={`gap-1/2 flex items-center font-medium ${triggerClassName}`}
+        className={`flex items-center gap-1/2 font-medium ${triggerClassName}`}
       >
         <span className={`text-text-sm`}>{label}</span>
         {!hideChevron && (
@@ -144,7 +144,7 @@ export const ScreenDropdown: React.FC<DropdownProps> = ({
       {isOpen && (
         <div
           ref={contentRef}
-          className={`rounded-b-l text-text-sm absolute left-1/2 top-[75px] z-20 flex w-full max-w-[1410px] -translate-x-1/2 border border-border border-t-primary bg-cardBg p-2 shadow-lg`}
+          className={`absolute left-1/2 top-[75px] z-20 flex w-full max-w-[1410px] -translate-x-1/2 rounded-b-l border border-border border-t-primary bg-cardBg p-2 text-text-sm shadow-lg`}
         >
           {card}
           <section className='flex w-[max(800px,95%)] justify-around gap-1'>

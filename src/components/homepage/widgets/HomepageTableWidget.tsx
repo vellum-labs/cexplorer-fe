@@ -9,13 +9,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Fragment, useRef } from "react";
 import { Search } from "lucide-react";
 
 import { useGetTableWidget } from "@/hooks/widget/useGetWidget";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import useDebounce from "@/hooks/useDebounce";
+import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import { useClickOutsideGroup } from "@/hooks/useClickOutsideGroup";
 
 import { memo } from "react";
@@ -23,7 +23,7 @@ import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDr
 import { Pagination } from "@/components/global/Pagination";
 import { paginateArray } from "@/utils/paginateArray";
 import { PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Loading } from "@/components/global/Loading";
 
 interface HomepageTableWidgetProps {
@@ -271,7 +271,7 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
         >
           <Search
             size={15}
-            className={`absolute ${inputOpen ? "left-2" : "-left-4"} cursor-pointer rounded-lg`}
+            className={`absolute ${inputOpen ? "left-2" : "-left-4"} rounded-lg cursor-pointer`}
             onClick={() => setInputOpen(true)}
             color={inputOpen ? "black" : undefined}
           />

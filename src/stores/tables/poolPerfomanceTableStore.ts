@@ -2,7 +2,7 @@ import type {
   BasicTableOptions,
   PoolPefomanceColumns,
 } from "@/types/tableTypes";
-import { handlePersistStore } from "../../lib/handlePersistStore";
+import { handlePersistStore } from "@vellumlabs/cexplorer-sdk";
 
 export const usePoolPerfomanceTableStore = handlePersistStore<
   BasicTableOptions<PoolPefomanceColumns>,

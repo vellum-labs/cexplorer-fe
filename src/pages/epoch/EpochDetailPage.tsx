@@ -4,7 +4,7 @@ import { EpochSummary } from "@/components/epoch/EpochSummary";
 import { EpochBlocks } from "@/components/epoch/tabs/EpochBlocks";
 import { EpochDetailAnalytics } from "@/components/epoch/tabs/EpochDetailAnalytics";
 import { EpochParameters } from "@/components/epoch/tabs/EpochParameters";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import Tabs from "@/components/global/Tabs";
 import type { EpochStatsSummary } from "@/types/epochTypes";
 import type { FC } from "react";
@@ -20,7 +20,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { addSeconds, format } from "date-fns";
 import { epochLength } from "@/constants/confVariables";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 
 const EpochDetailPage: FC = () => {
   const route = getRouteApi("/epoch/$no");

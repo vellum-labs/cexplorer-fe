@@ -5,7 +5,7 @@ import { NetworkEnergyGraph } from "../graphs/NetworkEnergyGraph";
 
 import { useFetchAnalyticsRate } from "@/services/analytics";
 
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 export const NetworkEnergyConsumption: FC = () => {
   const rateQuery = useFetchAnalyticsRate();

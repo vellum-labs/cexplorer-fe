@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 
 interface LoadingProps {
   className?: string;

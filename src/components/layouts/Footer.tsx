@@ -1,6 +1,6 @@
 import { donationAddress } from "@/constants/confVariables";
 import { footerLinks } from "@/constants/footerLinks";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import DiscordLogo from "../../resources/images/icons/discord.svg";
 import GithubLogo from "../../resources/images/icons/github.svg";
@@ -10,7 +10,7 @@ import { CoinPaprikaPartner } from "../../resources/images/partners/CoinPaprikaP
 import { NufiPartner } from "../../resources/images/partners/NufiPartner";
 import YoroiPartner from "../../resources/images/partners/YoroiPartner.svg";
 import LinksColumn from "../footer/LinksColumn";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import MainLogo from "../global/MainLogo";
 
 const Footer = () => {

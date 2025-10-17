@@ -2,7 +2,7 @@ import type {
   ContractInteractionsColumns,
   TableOptionsCore,
 } from "@/types/tableTypes";
-import { handlePersistStore } from "../../lib/handlePersistStore";
+import { handlePersistStore } from "@vellumlabs/cexplorer-sdk";
 
 export const useContractInteractionsTableStore = handlePersistStore<
   TableOptionsCore<ContractInteractionsColumns>,

@@ -96,12 +96,14 @@ export const AssetsTab: FC<AssetsTabProps> = ({
           getAssetFingerprint(item.name.toLowerCase()).includes(
             debouncedSearch.toLowerCase(),
           ) ||
-          item.registry?.name
-            .toLowerCase()
-            .includes(debouncedSearch.toLowerCase()) ||
-          item.registry?.ticker
-            .toLowerCase()
-            .includes(debouncedSearch.toLowerCase()) ||
+          (item?.registry?.name &&
+            item?.registry?.name
+              .toLowerCase()
+              .includes(debouncedSearch.toLowerCase())) ||
+          (item?.registry?.ticker &&
+            item?.registry?.ticker
+              .toLowerCase()
+              .includes(debouncedSearch.toLowerCase())) ||
           renderAssetName({ asset: item })
             .toLowerCase()
             .includes(debouncedSearch.toLowerCase())

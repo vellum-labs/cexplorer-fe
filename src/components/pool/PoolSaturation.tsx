@@ -1,6 +1,6 @@
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { activeStakePercentage } from "@/utils/activeStakePercentage";
 import { getGradientColor } from "@/utils/getGradientColor";
 

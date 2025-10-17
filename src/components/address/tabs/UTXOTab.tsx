@@ -2,20 +2,20 @@ import type { AddressDetailUTXOColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 
 import { useFetchAddressUTXO } from "@/services/address";
 import { useAddressDetailUTXOTableStore } from "@/stores/tables/addressDetailUTXOTableStore";
 import { useEffect, useState } from "react";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import Copy from "@/components/global/Copy";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import GlobalTable from "@/components/table/GlobalTable";
 import { HashCell } from "@/components/tx/HashCell";
 import { addressDetailUTXOOptions } from "@/constants/tables/addressDetailUTXOTableOptions";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import { calculateMinUtxo } from "@/utils/calculateUTXOSize";
