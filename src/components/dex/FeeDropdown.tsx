@@ -36,7 +36,7 @@ export const FeeDropdown: FC<FeeDropdownProps> = ({
           onClick: () => {},
         }))}
         width='fit-content'
-        triggerClassName='rounded-xl border border-border px-1 py-1/2 text-text-sm hover:bg-gray-50 cursor-default'
+        triggerClassName='rounded-xl border border-border px-1 py-1/2 text-text-sm cursor-pointer'
         poppoverClassname='w-fit !left-0 !right-auto [&_div[role=menuitem]]:hover:!bg-transparent [&_div[role=menuitem]]:hover:!text-inherit [&_div[role=menuitem]]:cursor-default'
         withBorder={true}
         disableHover={true}
