@@ -21,7 +21,7 @@ import { usePoolDelegatorsStructureStore } from "@/stores/tables/poolDelegatorsS
 
 import { getAnimalRangeByName } from "@/utils/address/getAnimalRangeByName";
 import { AdaWithTooltip } from "../global/AdaWithTooltip";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
 interface PoolStructureTableProps {
   poolId: string;

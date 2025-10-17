@@ -17,7 +17,7 @@ import { getRouteApi, useSearch } from "@tanstack/react-router";
 
 import AdaHandleBadge from "@/components/global/badges/AdaHandleBadge";
 import { WatchlistSection } from "@/components/global/watchlist/WatchlistSection";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { UserBadge } from "@/components/user/UserBadge";
 import { useFetchAddressDetail } from "@/services/address";
 import { useNotFound } from "@/stores/useNotFound";

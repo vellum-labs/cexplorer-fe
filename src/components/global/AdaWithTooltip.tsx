@@ -1,6 +1,6 @@
 import { formatNumber } from "@/utils/format/format";
 import type { FC } from "react";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
 import { lovelaceToAda } from "@/utils/lovelaceToAda";
 import Copy from "./Copy";

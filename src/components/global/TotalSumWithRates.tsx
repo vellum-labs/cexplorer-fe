@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
 import { useCurrencyStore } from "@/stores/currencyStore";
 import { formatBitcoinWithSub } from "@/utils/format/formatSmallValue";

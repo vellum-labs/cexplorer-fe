@@ -11,7 +11,7 @@ import {
 import AddressCell from "../address/AddressCell";
 import ConstLabelBadge from "../global/badges/ConstLabelBadge";
 import Copy from "../global/Copy";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import type { UtxoSearchMatchType } from "@/utils/tx/filterUtxoBySearch";
 import { useHashHoverStore } from "@/stores/hashHoverStore";
 
@@ -62,9 +62,9 @@ export const AddressWithTxBadges = ({
       </div>
       <Tooltip
         content={
-          <div className='text-text-sm flex w-[200px] flex-col items-center'>
+          <div className='flex w-[200px] flex-col items-center text-text-sm'>
             <p className='font-medium'>UTXO</p>
-            <div className='mt-1/2 text-text-sm flex items-end justify-end break-all text-center'>
+            <div className='mt-1/2 flex items-end justify-end break-all text-center text-text-sm'>
               <Link
                 to='/tx/$hash'
                 params={{ hash: utxo.tx_hash }}
@@ -78,7 +78,7 @@ export const AddressWithTxBadges = ({
         }
       >
         <div
-          className={`rounded-max flex h-4 w-4 items-center justify-center border-[1.5px] border-primary p-[2px] ${shouldHighlightUtxo ? "rounded-s bg-hoverHighlight outline outline-1 outline-highlightBorder" : ""}`}
+          className={`flex h-4 w-4 items-center justify-center rounded-max border-[1.5px] border-primary p-[2px] ${shouldHighlightUtxo ? "rounded-s bg-hoverHighlight outline outline-1 outline-highlightBorder" : ""}`}
         >
           <ArrowLeftRight size={12} color={colors.primary} strokeWidth={3} />
         </div>
@@ -88,7 +88,7 @@ export const AddressWithTxBadges = ({
           content={
             <div className='flex w-[200px] flex-col items-center'>
               <p className='w-full text-center font-medium'>Inline datum</p>
-              <div className='mt-1/2 text-text-sm flex items-end justify-end break-all text-center'>
+              <div className='mt-1/2 flex items-end justify-end break-all text-center text-text-sm'>
                 <Link
                   to='/datum'
                   search={{ hash: utxo.datum_hash }}
@@ -109,7 +109,7 @@ export const AddressWithTxBadges = ({
           content={
             <div className='flex w-[200px] flex-col items-center'>
               <p className='w-full text-center font-medium'>Script Hash</p>
-              <div className='mt-1/2 text-text-sm flex items-end justify-end break-all text-center'>
+              <div className='mt-1/2 flex items-end justify-end break-all text-center text-text-sm'>
                 <Link
                   to='/script/$hash'
                   params={{ hash: utxo.reference_script.hash }}
@@ -132,7 +132,7 @@ export const AddressWithTxBadges = ({
               <p className='w-full text-center font-medium'>
                 Consumed by transaction
               </p>
-              <div className='mt-1/2 text-text-sm flex items-end justify-end break-all text-center'>
+              <div className='mt-1/2 flex items-end justify-end break-all text-center text-text-sm'>
                 <Link
                   to='/tx/$hash'
                   params={{ hash: utxo.consumed_utxo }}
@@ -146,7 +146,7 @@ export const AddressWithTxBadges = ({
           }
         >
           <div
-            className={`flex items-center ${shouldHighlightConsumedBy ? "px-1/2 rounded-s bg-hoverHighlight outline outline-1 outline-highlightBorder" : ""}`}
+            className={`flex items-center ${shouldHighlightConsumedBy ? "rounded-s bg-hoverHighlight px-1/2 outline outline-1 outline-highlightBorder" : ""}`}
           >
             <Flame size={16} color={colors.primary} />
           </div>
@@ -156,9 +156,9 @@ export const AddressWithTxBadges = ({
       {utxo.payment_addr_cred && (
         <Tooltip
           content={
-            <div className='text-text-sm flex w-[200px] flex-col items-center'>
+            <div className='flex w-[200px] flex-col items-center text-text-sm'>
               <p className='font-medium'>Payment Credential</p>
-              <div className='mt-1/2 text-text-sm flex items-end justify-end break-all text-center'>
+              <div className='mt-1/2 flex items-end justify-end break-all text-center text-text-sm'>
                 <span className='break-all text-primary'>
                   {utxo.payment_addr_cred}
                 </span>
@@ -168,7 +168,7 @@ export const AddressWithTxBadges = ({
           }
         >
           <div
-            className={`flex items-center ${shouldHighlightPaymentCred ? "px-1/2 rounded-s bg-hoverHighlight outline outline-1 outline-highlightBorder" : ""}`}
+            className={`flex items-center ${shouldHighlightPaymentCred ? "rounded-s bg-hoverHighlight px-1/2 outline outline-1 outline-highlightBorder" : ""}`}
           >
             <CreditCard size={15} color={colors.primary} />
           </div>
@@ -176,7 +176,7 @@ export const AddressWithTxBadges = ({
       )}
 
       <span
-        className={`text-text-xs text-grayTextPrimary ${shouldHighlightIndex ? "px-1/2 rounded-s bg-hoverHighlight outline outline-1 outline-highlightBorder" : ""}`}
+        className={`text-text-xs text-grayTextPrimary ${shouldHighlightIndex ? "rounded-s bg-hoverHighlight px-1/2 outline outline-1 outline-highlightBorder" : ""}`}
       >
         #{utxo?.tx_index}
       </span>

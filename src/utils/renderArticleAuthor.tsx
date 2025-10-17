@@ -1,4 +1,4 @@
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { UserSocials } from "@/components/user/UserSocials";
 import type { User } from "@/types/userTypes";
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";

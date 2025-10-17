@@ -2,7 +2,7 @@ import type { EpochStatsSummary } from "@/types/epochTypes";
 import type { FC } from "react";
 
 import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber } from "@/utils/format/format";
 import { CircleHelp } from "lucide-react";
 
@@ -31,7 +31,9 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
       columns: [
         {
           title: (
-            <p className='text-text-sm font-medium text-grayTextPrimary'>Pools</p>
+            <p className='text-text-sm font-medium text-grayTextPrimary'>
+              Pools
+            </p>
           ),
         },
         {

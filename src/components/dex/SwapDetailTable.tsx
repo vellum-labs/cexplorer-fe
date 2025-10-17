@@ -11,7 +11,7 @@ import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { formatString } from "@/utils/format/format";
 import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
 import { ADATokenName } from "@/constants/currencies";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { AssetTicker } from "./AssetTicker";
 import { formatNumberWithSuffix } from "@/utils/format/format";
 import { SwapTypeBadge } from "./SwapTypeBadge";

@@ -12,7 +12,7 @@ import { NoResultsFound } from "@/components/global/NoResultsFound";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { Pagination } from "@/components/global/Pagination";
 import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { useVotingTableStore } from "@/stores/tables/votingTableTableStore";
 import { CircleHelp } from "lucide-react";
 import { ActivityBadge } from "@/components/global/badges/ActivityBadge";
@@ -103,7 +103,13 @@ export const VotingTable: FC<VotingTableProps> = () => {
         return (
           <div className='flex w-full items-center gap-1/2'>
             <ActivityBadge percentage={percent} />
-            <Tooltip content={<span>Voting activity across treasury withdrawal proposals</span>}>
+            <Tooltip
+              content={
+                <span>
+                  Voting activity across treasury withdrawal proposals
+                </span>
+              }
+            >
               <CircleHelp size={11} />
             </Tooltip>
           </div>

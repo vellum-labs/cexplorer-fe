@@ -13,7 +13,7 @@ import AdaHandleBadge from "@/components/global/badges/AdaHandleBadge";
 import { StakeDetailOverview } from "@/components/stake/StakeDetailOverview";
 import StakeDelegationsTab from "@/components/stake/tabs/StakeDelegationsTab";
 import { StakeWithdrawalsTab } from "@/components/stake/tabs/StakeWithdrawalsTab";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { UserBadge } from "@/components/user/UserBadge";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";

@@ -10,7 +10,7 @@ import { WatchlistStar } from "@/components/global/watchlist/WatchlistStar";
 import GlobalTable from "@/components/table/GlobalTable";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import {
   fetchWatchlist,
@@ -334,13 +334,13 @@ export const ProfilePro = () => {
         <div className='flex min-h-minHeight w-full flex-col'>
           <EmptyState
             icon={<Wallet size={24} />}
-            primaryText="Wallet not connected."
-            secondaryText="Connect your wallet to access your Cexplorer PRO features and manage your NFTs."
+            primaryText='Wallet not connected.'
+            secondaryText='Connect your wallet to access your Cexplorer PRO features and manage your NFTs.'
             button={
               <Button
-                label="Connect wallet"
-                variant="primary"
-                size="md"
+                label='Connect wallet'
+                variant='primary'
+                size='md'
                 onClick={() => setShowConnectModal(true)}
               />
             }
@@ -525,13 +525,13 @@ export const ProfilePro = () => {
             <EmptyState
               icon={<Zap size={24} />}
               primaryText="You don't own any Cexplorer PRO NFTs yet."
-              secondaryText="Get one to unlock PRO features like boosting, API, governance votes, and more."
+              secondaryText='Get one to unlock PRO features like boosting, API, governance votes, and more.'
               button={
                 <Button
-                  label="Get Cexplorer PRO NFT"
-                  variant="purple"
-                  size="md"
-                  href="/pro"
+                  label='Get Cexplorer PRO NFT'
+                  variant='purple'
+                  size='md'
+                  href='/pro'
                 />
               }
             />

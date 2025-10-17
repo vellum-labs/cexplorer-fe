@@ -26,7 +26,7 @@ import { Badge } from "../global/badges/Badge";
 import Button from "../global/Button";
 import Copy from "../global/Copy";
 import SpinningLoader from "../global/SpinningLoader";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { EmptyState } from "../global/EmptyState";
 import ConnectWalletModal from "../wallet/ConnectWalletModal";
 import { useAuthToken } from "@/hooks/useAuthToken";

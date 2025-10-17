@@ -10,7 +10,7 @@ import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 import { useRef } from "react";
 import Button from "../global/Button";
 import Modal from "../global/Modal";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
 const date = new Date();
 const month = date.toLocaleDateString("en-US", { month: "2-digit" });
@@ -66,7 +66,7 @@ const WalletConfigModal = () => {
     if (!lucid || !address) return;
 
     const payload = `cexplorer_${dateNumber}_${address}`;
-    const hexPayload = Buffer.from(payload, 'utf8').toString('hex');
+    const hexPayload = Buffer.from(payload, "utf8").toString("hex");
 
     const message = await lucid.wallet().signMessage(address, hexPayload);
 

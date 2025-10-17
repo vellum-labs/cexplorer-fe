@@ -2,7 +2,7 @@ import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
 import Copy from "@/components/global/Copy";
 import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
 import GlobalTable from "@/components/table/GlobalTable";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { useFetchPoolAbout, useFetchPoolUpdate } from "@/services/pools";
 import type { PoolDetailResponseData } from "@/types/poolTypes";
 import { formatString } from "@/utils/format/format";

@@ -20,7 +20,7 @@ import { LockedPolicy, OpenPolicy } from "../asset/tabs/AssetTimelockTab";
 import { AdaWithTooltip } from "../global/AdaWithTooltip";
 import { Badge } from "../global/badges/Badge";
 import { WatchlistSection } from "../global/watchlist/WatchlistSection";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 
 interface PolicyDetailOverviewProps {

@@ -5,7 +5,7 @@ import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 import DateCell from "@/components/table/DateCell";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import type { PoolData } from "@/types/poolTypes";
 import type { PoolUpdatesColumns, TableColumns } from "@/types/tableTypes";
 import { Check, ExternalLink, X } from "lucide-react";

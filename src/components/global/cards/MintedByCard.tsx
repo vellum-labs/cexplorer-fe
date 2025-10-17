@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { CircleHelp, GitCompareArrows } from "lucide-react";
 
 import Copy from "@/components/global/Copy";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import type { PoolInfo } from "@/types/poolTypes";
 import { formatString } from "@/utils/format/format";
 import { generateImageUrl } from "@/utils/generateImageUrl";

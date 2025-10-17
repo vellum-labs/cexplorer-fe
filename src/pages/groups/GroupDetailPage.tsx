@@ -15,7 +15,7 @@ import {
   BreadcrumbItem,
   BreadcrumbList,
 } from "@/components/ui/breadcrumb";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { drepListTableOptions } from "@/constants/tables/drepListTableOptions";
 import { poolsListTableOptions } from "@/constants/tables/poolsListTableOptions";
 import { useMiscConst } from "@/hooks/useMiscConst";

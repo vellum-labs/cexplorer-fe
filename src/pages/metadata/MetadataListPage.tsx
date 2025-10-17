@@ -9,7 +9,7 @@ import TableSearchInput from "@/components/global/inputs/SearchInput";
 import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { Info } from "lucide-react";
 
 import { useFetchMetadataTxList } from "@/services/metadata";

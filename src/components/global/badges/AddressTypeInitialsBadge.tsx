@@ -1,4 +1,4 @@
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { getAddressTypeInitials } from "@/utils/address/getAddressTypeInitials";
 import { parseShelleyAddress } from "@/utils/address/parseShelleyAddress";
 

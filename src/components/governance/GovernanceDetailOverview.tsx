@@ -29,7 +29,7 @@ import { SafetyLinkModal } from "../global/modals/SafetyLinkModal";
 import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
 
 import { useState } from "react";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { VoteBadge } from "../global/badges/VoteBadge";
 import type { Vote } from "@/constants/votes";
 

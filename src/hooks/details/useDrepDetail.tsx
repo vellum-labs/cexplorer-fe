@@ -17,7 +17,7 @@ import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 import { slotToDate } from "@/utils/slotToDate";
 import { format } from "date-fns";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { CircleHelp } from "lucide-react";
 
 interface UseDrepDetailArgs {

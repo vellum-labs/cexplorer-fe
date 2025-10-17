@@ -18,7 +18,7 @@ import TableSettingsDropdown from "../global/dropdowns/TableSettingsDropdown";
 import PulseDot from "../global/PulseDot";
 import ExportButton from "../table/ExportButton";
 import GlobalTable from "../table/GlobalTable";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   poolId: string;

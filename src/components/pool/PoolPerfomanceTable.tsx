@@ -21,7 +21,7 @@ import { formatNumber } from "@/utils/format/format";
 import { AdaWithTooltip } from "../global/AdaWithTooltip";
 import { useElapsedEpochNumber } from "@/hooks/useElapsedEpochNumber";
 import { Badge } from "../global/badges/Badge";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 
 interface PoolPerfomanceTableProps {

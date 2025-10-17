@@ -1,4 +1,4 @@
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { TZDate } from "@date-fns/tz";
 import { format } from "date-fns";
 
