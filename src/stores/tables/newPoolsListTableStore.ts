@@ -1,5 +1,5 @@
 import type { BasicTableOptions, NewPoolsColumns } from "@/types/tableTypes";
-import { handlePersistStore } from "../../lib/handlePersistStore";
+import { handlePersistStore } from "@vellumlabs/cexplorer-sdk";
 
 export const useNewPoolsListTableStore = handlePersistStore<
   BasicTableOptions<NewPoolsColumns>,

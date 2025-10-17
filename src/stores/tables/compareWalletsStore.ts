@@ -1,6 +1,6 @@
 import type { CompareWalletsOptions } from "@/types/walletTypes";
 
-import { handlePersistStore } from "../../lib/handlePersistStore";
+import { handlePersistStore } from "@vellumlabs/cexplorer-sdk";
 
 export const useCompareWalletsStore = handlePersistStore<
   CompareWalletsOptions,
