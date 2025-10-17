@@ -6,7 +6,7 @@ import GraphWatermark from "../../global/graphs/GraphWatermark";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchEpochList } from "@/services/epoch";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useRef, useState } from "react";
 import { useFetchEpochAnalytics } from "@/services/analytics";
 

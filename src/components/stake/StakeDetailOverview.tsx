@@ -18,7 +18,7 @@ import { AttributeDropdown } from "../global/AttributeDropdown";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { ChevronRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";

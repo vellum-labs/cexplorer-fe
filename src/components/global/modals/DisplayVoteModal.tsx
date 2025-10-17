@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useLocaleStore } from "@/stores/localeStore";
 import useDebounce from "@/hooks/useDebounce";
 import { useFetchMiscSearch } from "@/services/misc";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { formatString } from "@/utils/format/format";
 import { Copy } from "@vellumlabs/cexplorer-sdk";

@@ -3,7 +3,7 @@ import ReactECharts from "@/lib/ReactCharts";
 
 import type { RefObject } from "react";
 import { forwardRef, useRef } from "react";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { cn } from "@/lib/utils";
 
 interface PoolListEchartProps {

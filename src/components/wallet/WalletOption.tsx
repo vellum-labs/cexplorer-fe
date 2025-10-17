@@ -1,5 +1,5 @@
 import { walletInfos } from "@/constants/wallet";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useWalletStore } from "@/stores/walletStore";
 import type { WalletType } from "@/types/walletTypes";
 import { Button } from "@vellumlabs/cexplorer-sdk";

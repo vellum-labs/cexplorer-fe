@@ -16,7 +16,7 @@ import { VersionWatcher } from "@/components/global/VersionWatcher";
 import Navbar from "@/components/layouts/Navbar";
 import { ErrorBoundary } from "@/pages/error/ErrorBoundary";
 
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useGenerateSW } from "@/hooks/useGenerateSW";
 import { useState } from "react";
 import { setGlobalAbortSignal } from "@/lib/handleFetch";

@@ -10,7 +10,7 @@ import {
 } from "@vellumlabs/cexplorer-sdk";
 import { fetchAdminArticle, useFetchAdminArticle } from "@/services/user";
 import { useAuthTokensStore } from "@/stores/authTokensStore";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useWalletStore } from "@/stores/walletStore";
 import type { ArticleCategories, ArticleUrl } from "@/types/articleTypes";
 import type { AdminArticleDetailResponse } from "@/types/userTypes";

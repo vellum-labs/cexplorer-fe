@@ -7,7 +7,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import type { ReactEChartsProps } from "@/lib/ReactCharts";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import type { ScriptStatItem } from "@/types/scriptTypes";
 import { formatNumber } from "@/utils/format/format";
 import { lovelaceToAda } from "@/utils/lovelaceToAda";

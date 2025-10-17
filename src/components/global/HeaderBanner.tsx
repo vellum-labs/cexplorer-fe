@@ -33,13 +33,12 @@ export const HeaderBanner = ({
   isHomepage,
 }: HeaderBannerProps) => {
   const { locale } = useLocaleStore();
-  const { data: miscBasic } = useFetchMiscBasic(true);
+  const miscBasic = useFetchMiscBasic(true);
 
   return (
     <Header
       locale={locale}
-      // Zmenit type
-      miscBasic={miscBasic as any}
+      miscBasic={miscBasic}
       title={title}
       useFetchMiscSearch={useFetchMiscSearch}
       badge={badge}

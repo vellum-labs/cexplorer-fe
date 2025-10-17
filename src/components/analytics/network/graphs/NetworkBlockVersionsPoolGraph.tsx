@@ -3,7 +3,7 @@ import type { FC } from "react";
 import ReactEcharts from "echarts-for-react";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useWindowDimensions } from "@/utils/useWindowsDemensions";
 import { useFetchPoolListDefault } from "@/services/pools";
 import { useNavigate } from "@tanstack/react-router";

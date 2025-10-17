@@ -7,7 +7,7 @@ import { Component } from "react";
 import DiscordLogo from "../../resources/images/icons/discordSecondary.svg";
 import { ArrowLeft, CircleAlert } from "lucide-react";
 
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { SafeNavbar } from "@/components/layouts/safe/SafeNavbar";
 
 interface ErrorBoundaryProps {

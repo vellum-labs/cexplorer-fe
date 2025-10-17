@@ -14,7 +14,7 @@ import { AdaPriceIndicator } from "../navbar/AdaPriceIndicator";
 import MobileMenu from "../navbar/MobileMenu/MobileMenu";
 import WalletButton from "../wallet/WalletButton";
 import { LayoutNotification } from "@/utils/LayoutNotification";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 
 const Navbar = () => {
   const { theme } = useThemeStore();

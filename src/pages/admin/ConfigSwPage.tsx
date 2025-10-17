@@ -17,7 +17,7 @@ import {
 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 import { useEffect, useState } from "react";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { fetchSwText, useFetchSwText } from "@/services/config";
 

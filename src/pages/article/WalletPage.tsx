@@ -24,7 +24,7 @@ import { Helmet } from "react-helmet";
 
 import { useFetchCompareWallets } from "@/services/wallet";
 import { useCompareWalletsStore } from "@/stores/tables/compareWalletsStore";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useState } from "react";
 
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";

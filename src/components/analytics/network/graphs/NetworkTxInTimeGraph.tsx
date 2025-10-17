@@ -8,7 +8,7 @@ import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useState, useEffect } from "react";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 
 interface NetworkTxInTimeGraphProps {
   items: {

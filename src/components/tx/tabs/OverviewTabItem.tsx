@@ -4,7 +4,7 @@ import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import SortBy from "@/components/ui/sortBy";
 import { colors } from "@/constants/colors";
 import { useFetchTxDetail } from "@/services/tx";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useTxSortStore } from "@/stores/tx/txSortStore";
 import type { TxInfo } from "@/types/txTypes";
 import { Address } from "@/utils/address/getStakeAddress";

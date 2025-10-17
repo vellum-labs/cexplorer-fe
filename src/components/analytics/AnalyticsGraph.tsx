@@ -7,7 +7,7 @@ import { FeatureModal } from "../global/modals/FeatureModal";
 import ConnectWalletModal from "../wallet/ConnectWalletModal";
 
 import { useFetchUserInfo } from "@/services/user";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useWalletStore } from "@/stores/walletStore";
 import { useCallback, useRef, useState } from "react";
 

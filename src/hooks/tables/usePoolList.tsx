@@ -31,7 +31,7 @@ import { lovelaceToAda } from "@/utils/lovelaceToAda";
 import { poolRewardsRoaDiff } from "@/utils/poolRewardsRoaDiff";
 import PulseDot from "@/components/global/PulseDot";
 import { useFilterTable } from "./useFilterTable";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { getGradientColor } from "@/utils/getGradientColor";
 import { VoteBadge } from "@/components/global/badges/VoteBadge";
 import type { Vote } from "@/constants/votes";

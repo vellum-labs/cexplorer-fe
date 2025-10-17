@@ -10,7 +10,7 @@ import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { ChevronDown, ChevronUp, Search, X } from "lucide-react";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useRef, useState } from "react";
 import useDebounce from "@/hooks/useDebounce";
 
