@@ -1,4 +1,4 @@
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import TextInput from "@/components/global/inputs/TextInput";
 import Modal from "@/components/global/Modal";
 import SpinningLoader from "@/components/global/SpinningLoader";

@@ -7,7 +7,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
-import Button from "../components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import Footer from "../components/layouts/Footer";
 
 import { SwReadyModal } from "@/components/global/modals/SwReadyModal";

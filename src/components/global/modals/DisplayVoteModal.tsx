@@ -3,7 +3,7 @@ import type { FC } from "react";
 
 import Modal from "../Modal";
 import TextInput from "../inputs/TextInput";
-import Button from "../Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 
 import { useState } from "react";
 import { useLocaleStore } from "@/stores/localeStore";

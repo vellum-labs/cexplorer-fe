@@ -19,7 +19,7 @@ import { formatNumber, formatString } from "@/utils/format/format";
 import { useDrepList } from "@/hooks/tables/useDrepList";
 import { useDrepListTableStore } from "@/stores/tables/drepListTableStore";
 import { useSearch } from "@tanstack/react-router";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 
 export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
   const { page, sort, order } = useSearch({

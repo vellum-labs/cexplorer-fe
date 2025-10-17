@@ -1,4 +1,4 @@
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { ArrowRight, BellRing } from "lucide-react";
 import { Helmet } from "react-helmet";
 

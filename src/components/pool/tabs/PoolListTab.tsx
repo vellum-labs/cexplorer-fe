@@ -8,7 +8,7 @@ import TableSearchInput from "@/components/global/inputs/SearchInput";
 import SortBy from "@/components/ui/sortBy";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import { WatchlistFilter } from "@/components/global/watchlist/WatchlistFilter";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { PlusIcon, X } from "lucide-react";
 import { formatString } from "@/utils/format/format";
 import { DisplayVoteModal } from "@/components/global/modals/DisplayVoteModal";

@@ -1,6 +1,6 @@
 import { PageBase } from "@/components/global/pages/PageBase";
 import { User, Send, FileText, Building, Gauge } from "lucide-react";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 
 interface GovernanceSection {
   label: string;

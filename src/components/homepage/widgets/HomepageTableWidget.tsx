@@ -23,7 +23,7 @@ import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDr
 import { Pagination } from "@/components/global/Pagination";
 import { paginateArray } from "@/utils/paginateArray";
 import { PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Loading } from "@/components/global/Loading";
 
 interface HomepageTableWidgetProps {

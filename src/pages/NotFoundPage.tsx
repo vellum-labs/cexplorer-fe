@@ -1,6 +1,6 @@
 import { useEffect, useState, type FC } from "react";
 
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 
 import { routeTree } from "@/routeTree.gen";
 import { createRouter, useLocation, useNavigate } from "@tanstack/react-router";

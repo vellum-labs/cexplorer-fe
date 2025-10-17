@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Component } from "react";
 

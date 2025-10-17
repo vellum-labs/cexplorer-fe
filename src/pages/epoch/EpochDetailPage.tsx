@@ -20,7 +20,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { addSeconds, format } from "date-fns";
 import { epochLength } from "@/constants/confVariables";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 
 const EpochDetailPage: FC = () => {
   const route = getRouteApi("/epoch/$no");

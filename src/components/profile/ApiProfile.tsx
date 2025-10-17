@@ -23,7 +23,7 @@ import {
 import { useState } from "react";
 import { toast } from "sonner";
 import { Badge } from "../global/badges/Badge";
-import Button from "../global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import SpinningLoader from "../global/SpinningLoader";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";

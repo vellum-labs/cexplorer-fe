@@ -2,7 +2,7 @@ import { walletInfos } from "@/constants/wallet";
 import { useThemeStore } from "@/stores/themeStore";
 import { useWalletStore } from "@/stores/walletStore";
 import type { WalletType } from "@/types/walletTypes";
-import Button from "../global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 
 type Props = {
   name: WalletType;

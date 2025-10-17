@@ -5,7 +5,7 @@ import { useWalletStore } from "@/stores/walletStore";
 import { formatString } from "@/utils/format/format";
 import { Wallet } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import Button from "../global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import ConnectWalletModal from "./ConnectWalletModal";
 import WalletDropdown from "./WalletDropdown";
 import { RandomDelegationModal } from "./RandomDelegationModal";

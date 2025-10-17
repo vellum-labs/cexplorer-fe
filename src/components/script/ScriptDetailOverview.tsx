@@ -7,7 +7,7 @@ import AdsCarousel from "../global/ads/AdsCarousel";
 import { Badge } from "../global/badges/Badge";
 import { LabelBadge } from "../global/badges/LabelBadge";
 import { PurposeBadge } from "../global/badges/PurposeBadge";
-import Button from "../global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { OverviewCard } from "../global/cards/OverviewCard";
 import { OverviewStatCard } from "../global/cards/OverviewStatCard";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";

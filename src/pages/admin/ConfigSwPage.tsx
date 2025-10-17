@@ -6,7 +6,7 @@ import {
   BreadcrumbList,
 } from "@/components/ui/breadcrumb";
 import { Link } from "@tanstack/react-router";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { SwReadyModal } from "@/components/global/modals/SwReadyModal";
@@ -89,7 +89,7 @@ export const ConfigSwPage: FC = () => {
         className='relative rounded-m border border-border bg-darker'
       >
         <textarea
-          className='absolute inset-0 w-full resize-none overflow-hidden bg-transparent p-1 font-mono text-transparent caret-text outline-none'
+          className='font-mono absolute inset-0 w-full resize-none overflow-hidden bg-transparent p-1 text-transparent caret-text outline-none'
           value={JSON.stringify(JSON.parse(content), undefined, 2)}
           onChange={e => setContent(e.target.value)}
           spellCheck={false}

@@ -1,5 +1,5 @@
 import { Badge } from "@/components/global/badges/Badge";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import PulseDot from "@/components/global/PulseDot";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { Label } from "@/components/ui/label";

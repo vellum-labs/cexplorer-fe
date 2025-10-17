@@ -16,7 +16,7 @@ import {
   Wallet,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import Button from "../global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { EmptyState } from "../global/EmptyState";
 import ConnectWalletModal from "../wallet/ConnectWalletModal";
 import { useAuthToken } from "@/hooks/useAuthToken";

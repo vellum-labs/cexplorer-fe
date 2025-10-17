@@ -2,7 +2,7 @@ import { useAddressLabelStore } from "@/stores/addressLabelStore";
 import { useCustomLabelModalState } from "@/stores/states/customLabelModalState";
 import { Address } from "@/utils/address/getStakeAddress";
 import { useEffect, useState } from "react";
-import Button from "../Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import TextInput from "../inputs/TextInput";
 import Modal from "../Modal";
 import { useAuthToken } from "@/hooks/useAuthToken";

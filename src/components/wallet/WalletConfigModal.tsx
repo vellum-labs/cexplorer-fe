@@ -8,7 +8,7 @@ import { useUqStore } from "@/stores/uqStore";
 import { useWalletStore } from "@/stores/walletStore";
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 import { useRef } from "react";
-import Button from "../global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import Modal from "../global/Modal";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 

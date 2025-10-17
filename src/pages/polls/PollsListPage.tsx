@@ -1,5 +1,5 @@
 import { Badge } from "@/components/global/badges/Badge";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import Modal from "@/components/global/Modal";
 import PulseDot from "@/components/global/PulseDot";
 import Tabs from "@/components/global/Tabs";

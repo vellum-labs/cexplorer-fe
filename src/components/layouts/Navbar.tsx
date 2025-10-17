@@ -4,7 +4,7 @@ import { navigationOptions } from "@/constants/navigationOptions";
 import { nestedNavigationOptions } from "@/constants/nestedNavigationOptions";
 import { Cardano } from "@/resources/images/icons/Cardano";
 import { ArrowRight, ChevronsUp } from "lucide-react";
-import Button from "../global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import MainLogo from "../global/MainLogo";
 import { InfoCard } from "../global/cards/InfoCard";
 import Dropdown from "../global/dropdowns/Dropdown";

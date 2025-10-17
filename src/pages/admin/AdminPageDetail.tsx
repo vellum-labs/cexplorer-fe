@@ -1,4 +1,4 @@
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import TextInput from "@/components/global/inputs/TextInput";
 import SpinningLoader from "@/components/global/SpinningLoader";
 import {
@@ -155,7 +155,7 @@ export const AdminPageDetail = () => {
             className='relative rounded-m border border-border bg-darker'
           >
             <textarea
-              className='min-h-[800px] w-full resize-none bg-transparent p-1 font-mono text-text caret-text outline-none'
+              className='font-mono min-h-[800px] w-full resize-none bg-transparent p-1 text-text caret-text outline-none'
               ref={textareaRef}
               value={code}
               onChange={e => setCode(e.target.value)}

@@ -16,7 +16,7 @@ import { usePoolsIssuesMissedBlocksTableStore } from "@/stores/tables/poolIssues
 import { formatNumber } from "@/utils/format/format";
 import { useCallback, useEffect, useState } from "react";
 
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 import { poolIssuesMissedBlocksTableOptions } from "@/constants/tables/poolIssuesMissedBlocksTableOptions";
 

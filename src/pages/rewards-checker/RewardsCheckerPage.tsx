@@ -1,5 +1,5 @@
 import { RewardsTab } from "@/components/address/tabs/RewardsTab";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import TextInput from "@/components/global/inputs/TextInput";
 import { colors } from "@/constants/colors";
 import { Address } from "@/utils/address/getStakeAddress";

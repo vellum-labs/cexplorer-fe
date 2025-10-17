@@ -1,5 +1,5 @@
 import { ArticleCard } from "@/components/article/ArticleCard";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@/components/global/Image";
 import TextInput from "@/components/global/inputs/TextInput";
 import { SingleItemCarousel } from "@/components/global/SingleItemCarousel";
