@@ -2,8 +2,8 @@ import type { FC } from "react";
 import { useState } from "react";
 import type { LucidEvolution } from "@lucid-evolution/lucid";
 import Modal from "@/components/global/Modal";
-import Button from "@/components/global/Button";
-import TextInput from "@/components/global/inputs/TextInput";
+import { Button } from "@vellumlabs/cexplorer-sdk";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { RangeSlider } from "@/components/global/inputs/RangeSlider";
 import {
   executeTreasuryDonation,
@@ -11,7 +11,7 @@ import {
 } from "@/services/treasury";
 import { toast } from "sonner";
 import { Wallet } from "lucide-react";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
 interface TreasuryDonationModalProps {
   onClose: () => void;
@@ -98,7 +98,7 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
         <div className='flex flex-col gap-1'>
           <label className='text-text-sm font-medium'>Comment (optional)</label>
           <textarea
-            className='rounded-m text-text-sm h-20 w-full border border-border bg-background px-2 py-1.5 outline-none focus:border-primary'
+            className='h-20 w-full rounded-m border border-border bg-background px-2 py-1.5 text-text-sm outline-none focus:border-primary'
             value={comment}
             onChange={e => setComment(e.target.value)}
             placeholder='Add an optional message to your donation'
@@ -128,8 +128,8 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
 
         {isValidAmount && (
           <div className='rounded-m border border-border bg-cardBg p-1.5'>
-            <p className='text-text-sm mb-1 font-medium'>Donation Split:</p>
-            <div className='gap-1/2 text-text-sm flex flex-col text-grayTextPrimary'>
+            <p className='mb-1 text-text-sm font-medium'>Donation Split:</p>
+            <div className='flex flex-col gap-1/2 text-text-sm text-grayTextPrimary'>
               <div className='flex justify-between'>
                 <span>Treasury:</span>
                 <span className='font-medium text-text'>
