@@ -3,14 +3,14 @@ import type { OverviewList } from "@/components/global/cards/OverviewCard";
 import type { useFetchAssetDetail } from "@/services/assets";
 
 import AssetCell from "@/components/asset/AssetCell";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 import parse from "html-react-parser";
 import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
@@ -39,10 +39,12 @@ export const useAssetDetail = ({
   const nftMarket = configJSON.market[0].nft[0].active;
   const assetName = (detailData?.policy || "") + detailData?.name;
   const encodedNameArr = encodeAssetName(assetName).split("") || [];
-  const firstMint = detailData?.stat.asset.first_mint;
-  const lastMint = detailData?.stat.asset.last_mint;
+  const firstMint = detailData?.stat?.asset?.first_mint;
+  const lastMint = detailData?.stat?.asset?.last_mint;
 
-  const isStatsAvailable = detailData?.stat?.asset?.stats !== null;
+  const isStatsAvailable =
+    Array.isArray(detailData?.stat?.asset?.stats) &&
+    detailData?.stat?.asset?.stats.length > 0;
 
   const uniqueWallets =
     isStatsAvailable && detailData?.stat?.asset?.stats
@@ -98,14 +100,17 @@ export const useAssetDetail = ({
     },
     {
       label: "Supply",
-      value: detailData?.registry?.decimals
-        ? formatNumber(
-            (
-              detailData?.stat.asset.quantity /
-              10 ** detailData?.registry?.decimals
-            ).toFixed(2),
-          )
-        : formatNumber(detailData?.stat.asset.quantity),
+      value:
+        detailData?.registry?.decimals && detailData?.stat?.asset?.quantity
+          ? formatNumber(
+              (
+                detailData?.stat?.asset?.quantity /
+                10 ** detailData?.registry?.decimals
+              ).toFixed(2),
+            )
+          : detailData?.stat?.asset?.quantity
+            ? formatNumber(detailData?.stat?.asset?.quantity)
+            : "-",
     },
   ];
 
@@ -133,7 +138,9 @@ export const useAssetDetail = ({
               className={`h-[48px] w-[57px] border border-border ${i === 0 ? "rounded-s-m" : ""} ${i === arr.length - 1 ? "rounded-e-m" : ""} flex flex-col justify-center`}
               key={item + "_" + i}
             >
-              <p className='text-center text-text-xs text-grayTextPrimary'>{item}</p>
+              <p className='text-center text-text-xs text-grayTextPrimary'>
+                {item}
+              </p>
               <p className='text-center text-text-sm font-semibold'>TBD</p>
             </div>
           ))}

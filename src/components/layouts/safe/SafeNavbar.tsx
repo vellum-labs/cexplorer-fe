@@ -6,16 +6,15 @@ import { navigationOptions } from "@/constants/navigationOptions";
 import { nestedNavigationOptions } from "@/constants/nestedNavigationOptions";
 import { Cardano } from "@/resources/images/icons/Cardano";
 import { ArrowRight, ChevronsUp } from "lucide-react";
-import Button from "../../global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import MainLogo from "../../global/MainLogo";
 import { InfoCard } from "../../global/cards/InfoCard";
-import Dropdown from "../../global/dropdowns/Dropdown";
+import { Dropdown } from "@vellumlabs/cexplorer-sdk";
 import { ScreenDropdown } from "../../global/dropdowns/ScreenDropdown";
 import SettingsDropdown from "../../global/dropdowns/SettingsDropdown";
 import MobileMenu from "../../navbar/MobileMenu/MobileMenu";
 import WalletButton from "../../wallet/WalletButton";
 export const SafeNavbar: FC = () => {
-
   return (
     <header>
       <nav className='flex h-[75px] w-full items-center justify-center border-b border-borderFaded bg-cardBg py-2 pr-2 lg:pr-0'>

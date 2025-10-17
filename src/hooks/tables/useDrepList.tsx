@@ -4,7 +4,7 @@ import type { Dispatch, SetStateAction } from "react";
 
 import PulseDot from "@/components/global/PulseDot";
 import { MetadataCell } from "@/components/metadata/MetadataCell";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { useFetchDrepList } from "@/services/drep";
@@ -13,15 +13,15 @@ import { useDrepListTableStore } from "@/stores/tables/drepListTableStore";
 import { useEffect, useState } from "react";
 
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { SortArrow } from "@/components/global/SortArrow";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { getColumnsSortOrder } from "@/utils/getColumnsSortOrder";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { Badge } from "@/components/global/badges/Badge";
-import { Tooltip } from "@/components/ui/tooltip";
-import Copy from "@/components/global/Copy";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { useFilterTable } from "./useFilterTable";
 import { VoteBadge } from "@/components/global/badges/VoteBadge";
 import type { Vote } from "@/constants/votes";

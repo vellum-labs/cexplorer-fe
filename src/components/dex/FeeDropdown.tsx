@@ -1,6 +1,6 @@
 import type { FC } from "react";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
-import Dropdown from "../global/dropdowns/Dropdown";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { Dropdown } from "@vellumlabs/cexplorer-sdk";
 import { dexConfig } from "@/constants/dexConfig";
 import type { DeFiOrder } from "@/types/tokenTypes";
 import { renderWithException } from "@/utils/renderWithException";

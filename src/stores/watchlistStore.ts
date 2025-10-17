@@ -1,5 +1,5 @@
 import type { WatchlistResponse } from "@/types/userTypes";
-import { handlePersistStore } from "../lib/handlePersistStore";
+import { handlePersistStore } from "@vellumlabs/cexplorer-sdk";
 
 export const useWatchlistStore = handlePersistStore<
   { watchlist: WatchlistResponse["data"]["data"] | undefined },

@@ -1,7 +1,7 @@
 import { Check, ChevronsUpDown } from "lucide-react";
 import * as React from "react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import {
   Command,
   CommandEmpty,
@@ -16,7 +16,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { articleCategories } from "@/constants/article";
-import { cn } from "@/lib/utils";
+import { cn } from "@vellumlabs/cexplorer-sdk";
 import type { ArticleCategories } from "@/types/articleTypes";
 
 const categoriesOptions = articleCategories.map(category => ({
@@ -41,23 +41,26 @@ export function ArticleCombobox({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild className={className}>
         <Button
-          variant='outline'
-          role='combobox'
+          variant='tertiary'
+          size='md'
           aria-expanded={open}
           className='w-[200px] justify-between bg-background text-text'
-        >
-          <span className='block overflow-hidden text-ellipsis'>
-            {categories.length > 0
-              ? categoriesOptions
-                  .filter(category =>
-                    categories?.find(c => c === category.value),
-                  )
-                  .map(category => category.label)
-                  .join(", ")
-              : "Select categories"}
-          </span>
-          <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
-        </Button>
+          label={
+            <>
+              <span className='block overflow-hidden text-ellipsis'>
+                {categories.length > 0
+                  ? categoriesOptions
+                      .filter(category =>
+                        categories?.find(c => c === category.value),
+                      )
+                      .map(category => category.label)
+                      .join(", ")
+                  : "Select categories"}
+              </span>
+              <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
+            </>
+          }
+        />
       </PopoverTrigger>
       <PopoverContent className='w-[200px] p-0'>
         <Command>

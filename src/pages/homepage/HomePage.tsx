@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { Wand } from "lucide-react";
 import { HomepageGrid } from "@/components/homepage/grid/HomepageGrid";
 import { HomepageOverview } from "@/components/homepage/HomepageOverview";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { HomepageCustomize } from "@/components/homepage/HomepageCustomize";
 import { HomepageModal } from "@/components/homepage/HomepageModal";
 

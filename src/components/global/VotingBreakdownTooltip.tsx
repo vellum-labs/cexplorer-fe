@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { Info } from "lucide-react";
 
 interface VotingBreakdownTooltipProps {
@@ -51,7 +51,10 @@ export const VotingBreakdownTooltip: FC<VotingBreakdownTooltipProps> = ({
         </div>
       }
     >
-      <Info size={14} className='ml-1/2 cursor-pointer text-grayTextSecondary' />
+      <Info
+        size={14}
+        className='ml-1/2 cursor-pointer text-grayTextSecondary'
+      />
     </Tooltip>
   );
 };

@@ -3,9 +3,9 @@ import type { EpochStatsSummary } from "@/types/epochTypes";
 import type { FC } from "react";
 
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
-import { formatNumber } from "@/utils/format/format";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { format } from "date-fns";
 import ReactEcharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";

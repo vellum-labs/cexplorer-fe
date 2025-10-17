@@ -1,4 +1,4 @@
-import { handlePersistStore } from "@/lib/handlePersistStore";
+import { handlePersistStore } from "@vellumlabs/cexplorer-sdk";
 
 type Sort = "value" | "index";
 

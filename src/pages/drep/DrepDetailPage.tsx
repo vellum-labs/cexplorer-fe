@@ -10,7 +10,7 @@ import { useEffect, useState, type FC } from "react";
 import { useFetchDrepDetail } from "@/services/drep";
 
 import { WatchlistSection } from "@/components/global/watchlist/WatchlistSection";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { getRouteApi } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { DrepDetailStatsTab } from "@/components/drep/tabs/DrepDetailStatsTab";
@@ -98,7 +98,9 @@ export const DrepDetailPage: FC = () => {
           link: "/gov",
         },
         {
-          label: <span className='inline pt-1/2'>Delegated representatives</span>,
+          label: (
+            <span className='inline pt-1/2'>Delegated representatives</span>
+          ),
           link: "/drep",
         },
         {
@@ -136,6 +138,7 @@ export const DrepDetailPage: FC = () => {
         <WatchlistSection
           ident={drepHash ?? ""}
           isLoading={drepDetailQuery.isLoading}
+          drepDetailQuery={drepDetailQuery}
         />
       </div>
       <DrepDetailOverview query={drepDetailQuery} />

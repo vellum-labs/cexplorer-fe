@@ -1,15 +1,15 @@
 import type { useFetchGovernanceActionDetail } from "@/services/governance";
 import type { FC } from "react";
 
-import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { OverviewCard } from "../global/cards/OverviewCard";
 import { CircleHelp } from "lucide-react";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import PulseDot from "../global/PulseDot";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 
 import { Image } from "../global/Image";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { Link } from "@tanstack/react-router";
 import { GovernanceStatusBadge } from "@/components/global/badges/GovernanceStatusBadge";
@@ -29,7 +29,7 @@ import { SafetyLinkModal } from "../global/modals/SafetyLinkModal";
 import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
 
 import { useState } from "react";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { VoteBadge } from "../global/badges/VoteBadge";
 import type { Vote } from "@/constants/votes";
 

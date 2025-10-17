@@ -25,7 +25,7 @@ const LoadingSkeleton = ({
         maxWidth: maxWidth,
       }}
       data-testid='skeleton'
-      className={`shimmer shrink-0 bg-gray-400/15 rounded-${rounded} ${className}`}
+      className={`shimmer shrink-0 bg-gray-400 opacity-15 rounded-${rounded} ${className}`}
     />
   );
 };

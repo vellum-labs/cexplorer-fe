@@ -1,8 +1,8 @@
 import type { GovernanceActionDetailAboutListColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import GlobalTable from "@/components/table/GlobalTable";
@@ -11,7 +11,7 @@ import { useNavigate, useSearch } from "@tanstack/react-router";
 import { useGovActionDetailDrepsTableStore } from "@/stores/tables/governanceDetailDrepsTableStore";
 import { useFetchGovernanceVote } from "@/services/governance";
 
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { governanceActionDetailDrepSposTableOptions } from "@/constants/tables/governanceActionDetailAboutTableOptions";
 import { SortArrow } from "@/components/global/SortArrow";
 import { getColumnsSortOrder } from "@/utils/getColumnsSortOrder";

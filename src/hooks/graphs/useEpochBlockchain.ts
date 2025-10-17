@@ -9,8 +9,8 @@ import { useEffect, useState } from "react";
 import { useGraphColors } from "../useGraphColors";
 import { useMiscConst } from "../useMiscConst";
 import { useMiscRate } from "../useMiscRate";
-import { formatNumber } from "@/utils/format/format";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 interface UseEpochBlockchain {
   option: ReactEChartsProps["option"];
@@ -77,11 +77,11 @@ export const useEpochBlockchain = ({
   });
   const apy = filteredData.map((d, index) => {
     const pctMember = d?.stats?.pool_stat?.pct_member;
-    
+
     if (pctMember === null || (index < 2 && pctMember === 0)) {
       return null;
     }
-    
+
     return (pctMember ?? 0).toFixed(2);
   });
   const adaPrice = filteredData.map(

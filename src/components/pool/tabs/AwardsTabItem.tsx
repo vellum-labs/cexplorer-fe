@@ -4,8 +4,8 @@ import { Calendar } from "lucide-react";
 
 import { useFetchPoolAwards } from "@/services/pools";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import Image0 from "@/resources/images/awards/0.svg";
 import Image1 from "@/resources/images/awards/1.svg";
 import Image10 from "@/resources/images/awards/10.svg";
@@ -50,7 +50,7 @@ import Image6 from "@/resources/images/awards/6.svg";
 import Image7 from "@/resources/images/awards/7.svg";
 import Image8 from "@/resources/images/awards/8.svg";
 import Image9 from "@/resources/images/awards/9.svg";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { format } from "date-fns";
 
@@ -206,11 +206,11 @@ export const AwardsTabItem: FC<AwardsTabItemProps> = ({ id }) => {
               </h3>
               <div className='mb-1/2 flex items-center justify-center gap-1'>
                 <Calendar size={12} className='text-grayTextPrimary' />
-                <span className='text-grayTextPrimary text-text-sm'>
+                <span className='text-text-sm text-grayTextPrimary'>
                   {format(new Date(item.time), "dd.MM.yyyy")}
                 </span>
               </div>
-              <div className='text-grayTextPrimary flex justify-between text-text-sm [&>div]:w-1/3'>
+              <div className='flex justify-between text-text-sm text-grayTextPrimary [&>div]:w-1/3'>
                 {renderDetails(item)}
               </div>
             </div>
