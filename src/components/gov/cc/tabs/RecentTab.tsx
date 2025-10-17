@@ -16,7 +16,7 @@ import { X } from "lucide-react";
 import { ActionTypes } from "@/components/global/ActionTypes";
 import { useFilterTable } from "@/hooks/tables/useFilterTable";
 import { isHex } from "@/utils/isHex";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { alphabetWithNumbers } from "@/constants/alphabet";
 import { GovActionCell } from "../../GovActionCell";
 import { VoteCell } from "@/components/governance/vote/VoteCell";

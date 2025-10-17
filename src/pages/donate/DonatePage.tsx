@@ -1,5 +1,5 @@
 import Button from "@/components/global/Button";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import TextInput from "@/components/global/inputs/TextInput";
 import Modal from "@/components/global/Modal";
 import { Checkbox } from "@/components/ui/checkbox";

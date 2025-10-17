@@ -2,7 +2,7 @@ import type { FC } from "react";
 
 import { CircleHelp, GitCompareArrows } from "lucide-react";
 
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import type { PoolInfo } from "@/types/poolTypes";
 import { formatString } from "@/utils/format/format";

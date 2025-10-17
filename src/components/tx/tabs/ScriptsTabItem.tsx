@@ -4,7 +4,7 @@ import { ScriptCell } from "@/components/script/ScriptCell";
 import { useFetchTxDetail } from "@/services/tx";
 import { getRouteApi, Link } from "@tanstack/react-router";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 
 export const ScriptsTabItem = () => {
   const route = getRouteApi("/tx/$hash");

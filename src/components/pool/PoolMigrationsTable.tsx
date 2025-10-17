@@ -7,7 +7,7 @@ import type {
 import type { PoolDelegatorsColumns } from "@/types/tableTypes";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { MinMaxRange } from "../global/MinMaxRange";
 import { SortArrow } from "../global/SortArrow";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";

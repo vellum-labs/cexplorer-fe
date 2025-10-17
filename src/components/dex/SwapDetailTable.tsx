@@ -5,7 +5,7 @@ import { ArrowRight, Check, Ellipsis, X, Route } from "lucide-react";
 import { dexConfig } from "@/constants/dexConfig";
 
 import { Link } from "@tanstack/react-router";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "../global/Image";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { formatString } from "@/utils/format/format";

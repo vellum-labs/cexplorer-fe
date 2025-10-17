@@ -14,7 +14,7 @@ import { dexConfig } from "@/constants/dexConfig";
 
 import { Image } from "../global/Image";
 import { Link } from "@tanstack/react-router";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";
 import { AdaWithTooltip } from "../global/AdaWithTooltip";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";

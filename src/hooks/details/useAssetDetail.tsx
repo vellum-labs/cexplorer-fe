@@ -3,7 +3,7 @@ import type { OverviewList } from "@/components/global/cards/OverviewCard";
 import type { useFetchAssetDetail } from "@/services/assets";
 
 import AssetCell from "@/components/asset/AssetCell";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 
@@ -133,7 +133,9 @@ export const useAssetDetail = ({
               className={`h-[48px] w-[57px] border border-border ${i === 0 ? "rounded-s-m" : ""} ${i === arr.length - 1 ? "rounded-e-m" : ""} flex flex-col justify-center`}
               key={item + "_" + i}
             >
-              <p className='text-center text-text-xs text-grayTextPrimary'>{item}</p>
+              <p className='text-center text-text-xs text-grayTextPrimary'>
+                {item}
+              </p>
               <p className='text-center text-text-sm font-semibold'>TBD</p>
             </div>
           ))}

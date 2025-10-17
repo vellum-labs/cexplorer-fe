@@ -12,7 +12,7 @@ import { useFetchMiscSearch } from "@/services/misc";
 import { useThemeStore } from "@/stores/themeStore";
 import { Link } from "@tanstack/react-router";
 import { formatString } from "@/utils/format/format";
-import Copy from "../Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { ActionTypes } from "../ActionTypes";
 
 interface DisplayVoteModalProps {

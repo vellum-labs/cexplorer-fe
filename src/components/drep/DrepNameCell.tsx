@@ -1,7 +1,7 @@
 import type { FC } from "react";
 
 import { Link } from "@tanstack/react-router";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "../global/Image";
 import { formatString } from "@/utils/format/format";
 import { alphabetWithNumbers } from "@/constants/alphabet";

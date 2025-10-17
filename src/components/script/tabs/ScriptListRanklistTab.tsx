@@ -22,7 +22,7 @@ import { useEffect, useState } from "react";
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
 import { scriptListRanklistOptions } from "@/constants/tables/scriptListRanklistTableOptions";
 import { formatNumber, formatString } from "@/utils/format/format";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 
 export const ScriptListRanklistTab: FC = () => {

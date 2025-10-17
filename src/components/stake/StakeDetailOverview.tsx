@@ -12,7 +12,7 @@ import { AdaWithTooltip } from "../global/AdaWithTooltip";
 import { TotalSumWithRates } from "../global/TotalSumWithRates";
 import AdaHandleBadge from "../global/badges/AdaHandleBadge";
 import { Badge } from "../global/badges/Badge";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import PoolCell from "../table/PoolCell";
 import { AttributeDropdown } from "../global/AttributeDropdown";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";

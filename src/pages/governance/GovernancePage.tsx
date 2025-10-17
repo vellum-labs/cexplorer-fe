@@ -14,7 +14,7 @@ import ExportButton from "@/components/table/ExportButton";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import GlobalTable from "@/components/table/GlobalTable";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
 
 import { Asterisk, ExternalLink, Landmark, Route, User } from "lucide-react";

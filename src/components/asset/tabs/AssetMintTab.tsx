@@ -4,7 +4,7 @@ import type { FC } from "react";
 
 import { Link } from "@tanstack/react-router";
 
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 

@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import AddressCell from "../address/AddressCell";
 import ConstLabelBadge from "../global/badges/ConstLabelBadge";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import type { UtxoSearchMatchType } from "@/utils/tx/filterUtxoBySearch";
 import { useHashHoverStore } from "@/stores/hashHoverStore";

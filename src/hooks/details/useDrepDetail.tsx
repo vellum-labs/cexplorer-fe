@@ -2,7 +2,7 @@ import type { OverviewList } from "@/components/global/cards/OverviewCard";
 import type { useFetchDrepDetail } from "@/services/drep";
 
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import PulseDot from "@/components/global/PulseDot";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 import { Address, isValidAddressFormat } from "@/utils/address/getStakeAddress";

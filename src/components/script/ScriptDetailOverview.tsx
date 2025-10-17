@@ -14,7 +14,7 @@ import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { TextDisplay } from "../global/TextDisplay";
 import { HashCell } from "../tx/HashCell";
 import { AttributeDropdown } from "../global/AttributeDropdown";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   query: UseQueryResult<ScriptDetailResponse>;

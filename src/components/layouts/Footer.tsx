@@ -10,7 +10,7 @@ import { CoinPaprikaPartner } from "../../resources/images/partners/CoinPaprikaP
 import { NufiPartner } from "../../resources/images/partners/NufiPartner";
 import YoroiPartner from "../../resources/images/partners/YoroiPartner.svg";
 import LinksColumn from "../footer/LinksColumn";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import MainLogo from "../global/MainLogo";
 
 const Footer = () => {

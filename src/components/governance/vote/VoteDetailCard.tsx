@@ -7,7 +7,7 @@ import {
   ActionTypes as ActionTypesComponent,
   type ActionTypes,
 } from "@/components/global/ActionTypes";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
 import { Image } from "@/components/global/Image";

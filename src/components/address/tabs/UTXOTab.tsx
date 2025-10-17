@@ -10,7 +10,7 @@ import { useAddressDetailUTXOTableStore } from "@/stores/tables/addressDetailUTX
 import { useEffect, useState } from "react";
 
 import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import GlobalTable from "@/components/table/GlobalTable";
 import { HashCell } from "@/components/tx/HashCell";

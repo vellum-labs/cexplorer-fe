@@ -8,7 +8,7 @@ import { formatString } from "@/utils/format/format";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 import { Link } from "@tanstack/react-router";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { alphabetWithNumbers } from "@/constants/alphabet";
 
 export const CCMembersTab: FC = () => {

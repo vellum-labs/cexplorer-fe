@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 import Button from "@/components/global/Button";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Component } from "react";
 
 import DiscordLogo from "../../resources/images/icons/discordSecondary.svg";

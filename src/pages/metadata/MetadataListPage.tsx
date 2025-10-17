@@ -18,7 +18,7 @@ import { useMetadataTxListTableStore } from "@/stores/tables/metadataTxListTable
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { MetadataCell } from "@/components/metadata/MetadataCell";
 import { SizeCell } from "@/components/table/SizeCell";
 import { metadataTxListTableOptions } from "@/constants/tables/metadataTxListTableOptions";

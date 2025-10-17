@@ -16,7 +16,7 @@ import {
   Lock,
 } from "lucide-react";
 import { AdaWithTooltip } from "../global/AdaWithTooltip";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TotalSumWithRates } from "../global/TotalSumWithRates";
 import AdsCarousel from "../global/ads/AdsCarousel";
 import { MintedByCard } from "../global/cards/MintedByCard";

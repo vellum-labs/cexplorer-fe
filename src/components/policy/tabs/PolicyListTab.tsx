@@ -8,7 +8,7 @@ import { formatString, formatNumber } from "@/utils/format/format";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { useFetchPolicyList } from "@/services/user";
 import type { PolicyData } from "@/types/userTypes";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 
 export const PolicyListTab: FC = () => {

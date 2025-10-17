@@ -10,7 +10,7 @@ import { formatString } from "@/utils/format/format";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { useFetchAccountList } from "@/services/user";
 import type { StakeKeyData } from "@/types/userTypes";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 
 export const StakeListTab: FC = () => {
@@ -82,7 +82,9 @@ export const StakeListTab: FC = () => {
       render: item => {
         if (!item) return <span className='text-grayTextPrimary'>-</span>;
         return (
-          <span className='font-medium'>{item.stake?.active?.accounts ?? 0}</span>
+          <span className='font-medium'>
+            {item.stake?.active?.accounts ?? 0}
+          </span>
         );
       },
       title: "Accounts",

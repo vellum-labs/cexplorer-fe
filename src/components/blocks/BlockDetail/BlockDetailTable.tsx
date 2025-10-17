@@ -19,7 +19,7 @@ import { blocksDetailTableOptions } from "@/constants/tables/blocksDetailTableOp
 import type { UseQueryResult } from "@tanstack/react-query";
 import { Pagination } from "@/components/global/Pagination";
 import { useState, useMemo } from "react";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 
 interface BlockDetailTableProps {
   txs: BlockDetailResponseDataTxsItem[] | undefined;

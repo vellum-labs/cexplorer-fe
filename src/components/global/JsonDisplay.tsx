@@ -8,7 +8,7 @@ import {
 
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { ChevronDown, ChevronUp, Search, X } from "lucide-react";
-import Copy from "./Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 
 import { useThemeStore } from "@/stores/themeStore";
 import { useEffect, useRef, useState } from "react";

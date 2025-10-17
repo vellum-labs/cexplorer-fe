@@ -2,7 +2,7 @@ import { useHoverHighlightState } from "@/stores/states/hoverHighlightState";
 import { formatString } from "@/utils/format/format";
 import type { FileRoutesByPath } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 
 export const HashCell = ({
   hash,

@@ -8,7 +8,7 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import { Link } from "@tanstack/react-router";
 import { memo } from "react";
 import AdaHandleBadge from "../global/badges/AdaHandleBadge";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "../global/Image";
 
 import { configJSON } from "@/constants/conf";

@@ -21,7 +21,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { Badge } from "@/components/global/badges/Badge";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { useFilterTable } from "./useFilterTable";
 import { VoteBadge } from "@/components/global/badges/VoteBadge";
 import type { Vote } from "@/constants/votes";

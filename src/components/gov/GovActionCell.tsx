@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { Link } from "@tanstack/react-router";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@/utils/format/format";
 
 interface GovActionCellProps {

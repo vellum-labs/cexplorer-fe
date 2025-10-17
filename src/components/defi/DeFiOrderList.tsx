@@ -13,7 +13,7 @@ import { AdaWithTooltip } from "../global/AdaWithTooltip";
 import { Image } from "../global/Image";
 import { Link } from "@tanstack/react-router";
 import TextInput from "../global/inputs/TextInput";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";
 

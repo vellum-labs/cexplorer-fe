@@ -10,7 +10,7 @@ import { parseShelleyAddress } from "@/utils/address/parseShelleyAddress";
 import { formatString } from "@/utils/format/format";
 import { Link } from "@tanstack/react-router";
 import { Code2, KeyRound } from "lucide-react";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import PulseDot from "../global/PulseDot";
 

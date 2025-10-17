@@ -2,7 +2,7 @@ import type { PoolData } from "@/types/poolTypes";
 import type { NewPoolsColumns, TableColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
