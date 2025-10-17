@@ -1,9 +1,9 @@
 import GlobalTable from "@/components/table/GlobalTable";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Badge } from "@/components/global/badges/Badge";
 import { Check, Filter } from "lucide-react";
 import { getPledgeColor } from "@/utils/getPledgeColor";
-import { cn } from "@/lib/utils";
+import { cn } from "@vellumlabs/cexplorer-sdk";
 import { SortArrow } from "@/components/global/SortArrow";
 import { Link } from "@tanstack/react-router";
 import type { GroupsListData } from "@/types/analyticsTypes";
@@ -46,7 +46,7 @@ export const GroupsTable = ({
       key: "pools_count",
       title: (
         <span
-          className='gap-1/2 flex cursor-pointer items-center'
+          className='flex cursor-pointer items-center gap-1/2'
           onClick={() => handleSort("pools_count")}
         >
           Pools count{" "}
@@ -82,7 +82,7 @@ export const GroupsTable = ({
       key: "pool_stake",
       title: (
         <span
-          className='gap-1/2 flex w-full cursor-pointer items-center justify-end'
+          className='flex w-full cursor-pointer items-center justify-end gap-1/2'
           onClick={() => handleSort("pool_stake")}
         >
           Pool stake{" "}
@@ -107,7 +107,7 @@ export const GroupsTable = ({
       key: "delegators",
       title: (
         <span
-          className='gap-1/2 flex w-full cursor-pointer items-center justify-end'
+          className='flex w-full cursor-pointer items-center justify-end gap-1/2'
           onClick={() => handleSort("delegators")}
         >
           Delegators{" "}
@@ -128,7 +128,7 @@ export const GroupsTable = ({
       key: "share",
       title: (
         <span
-          className='gap-1/2 flex w-full cursor-pointer items-center justify-end'
+          className='flex w-full cursor-pointer items-center justify-end gap-1/2'
           onClick={() => handleSort("share")}
         >
           Share{" "}
@@ -159,7 +159,7 @@ export const GroupsTable = ({
       key: "pledge",
       title: (
         <span
-          className='gap-1/2 flex w-full cursor-pointer items-center justify-end'
+          className='flex w-full cursor-pointer items-center justify-end gap-1/2'
           onClick={() => handleSort("pledge")}
         >
           Pledge{" "}
@@ -179,13 +179,13 @@ export const GroupsTable = ({
 
         return (
           <div className='flex flex-col items-end'>
-            <div className='gap-1/2 flex items-center'>
+            <div className='flex items-center gap-1/2'>
               <Check size={11} className='translate-y-[1px] stroke-[#17B26A]' />
               <span className='w-[60px] whitespace-nowrap text-grayTextPrimary'>
                 <AdaWithTooltip data={pledge} />
               </span>
             </div>
-            <div className='gap-1/2 flex items-center justify-end'>
+            <div className='flex items-center justify-end gap-1/2'>
               <Filter
                 size={11}
                 color={getPledgeColor(leverage)}
@@ -205,7 +205,7 @@ export const GroupsTable = ({
       key: "mu_pledge_per_pool",
       title: (
         <span
-          className='gap-1/2 flex w-full cursor-pointer items-center justify-end'
+          className='flex w-full cursor-pointer items-center justify-end gap-1/2'
           onClick={() => handleSort("pledge_per_pool")}
         >
           μ Pledge per pool{" "}
