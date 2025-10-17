@@ -7,17 +7,17 @@ import {
   ActionTypes as ActionTypesComponent,
   type ActionTypes,
 } from "@/components/global/ActionTypes";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@/components/global/Image";
 import { Link } from "@tanstack/react-router";
 import { Landmark, Route, User } from "lucide-react";
 import { GovernanceStatusBadge } from "@/components/global/badges/GovernanceStatusBadge";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
-import { formatString } from "@/utils/format/format";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { VoteBadge } from "@/components/global/badges/VoteBadge";
 import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
 import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";

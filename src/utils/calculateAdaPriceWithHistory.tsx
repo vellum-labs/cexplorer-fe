@@ -1,6 +1,6 @@
 import type { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 
-import { formatNumberWithSuffix } from "./format/format";
+import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 
 export const calculateAdaPriceWithHistory = (
   lovelace: number,

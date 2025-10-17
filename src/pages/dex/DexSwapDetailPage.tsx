@@ -7,7 +7,7 @@ import { useFetchDeFiOrderList } from "@/services/token";
 import { aggregateSwapData } from "@/utils/dex/aggregateSwapData";
 
 import { getRouteApi } from "@tanstack/react-router";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 
 export const DexSwapDetailPage: FC = () => {

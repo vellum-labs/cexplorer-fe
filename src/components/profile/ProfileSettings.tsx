@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import { Switch } from "@/components/global/Switch";
 import { ProfileForm } from "@/components/settings/ProfileForm";

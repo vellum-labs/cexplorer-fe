@@ -9,14 +9,14 @@ import { useFetchMiscBasic } from "@/services/misc";
 
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 import { AnalyticsGraph } from "../analytics/AnalyticsGraph";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import { Switch } from "@/components/global/Switch";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { Info } from "lucide-react";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 export const DrepNotSpoGraph: FC = () => {
   const [showFiltered, setShowFiltered] = useState(() => {

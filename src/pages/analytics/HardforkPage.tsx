@@ -10,13 +10,13 @@ import ReactEcharts from "echarts-for-react";
 
 import { useFetchHardforks } from "@/services/analytics";
 import { useHardforkTableStore } from "@/stores/tables/hardforkTableStore";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useState } from "react";
 
 import Tabs from "@/components/global/Tabs";
-import { cn } from "@/lib/utils";
+import { cn } from "@vellumlabs/cexplorer-sdk";
 import { countObjectNonEmptyValues } from "@/utils/countObjectNonEmptyValues";
-import { formatDate } from "@/utils/format/format";
+import { formatDate } from "@vellumlabs/cexplorer-sdk";
 import { hexToRgba } from "@/utils/hexToRgba";
 
 import { PageBase } from "@/components/global/pages/PageBase";

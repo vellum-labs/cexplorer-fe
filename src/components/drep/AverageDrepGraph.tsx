@@ -13,7 +13,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 export const AverageDrepGraph: FC = () => {
   const [graphsVisibility, setGraphsVisibility] = useState({

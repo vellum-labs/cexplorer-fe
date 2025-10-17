@@ -114,10 +114,14 @@ export const fetchAssetDetail = async (fingerprint: string) => {
   return handleFetch<AssetDetailResponse>(url, undefined, options);
 };
 
-export const useFetchAssetDetail = (fingerprint: string) =>
+export const useFetchAssetDetail = (
+  fingerprint: string,
+  options?: { enabled?: boolean },
+) =>
   useQuery({
     queryKey: ["asset-detail", fingerprint],
     queryFn: () => fetchAssetDetail(fingerprint),
+    enabled: options?.enabled ?? true,
   });
 
 export const fetchAssetOwners = async (

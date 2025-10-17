@@ -1,5 +1,5 @@
 import { colors } from "@/constants/colors";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 
 export const useGraphColors = () => {
   const { theme } = useThemeStore();

@@ -1,5 +1,5 @@
 import { epochLength } from "@/constants/confVariables";
-import { toUtcDate } from "./format/format";
+import { toUtcDate } from "@vellumlabs/cexplorer-sdk";
 
 export const calculateEpochTimeByNumber = (
   epoch: number,

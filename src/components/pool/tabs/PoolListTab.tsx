@@ -8,12 +8,12 @@ import TableSearchInput from "@/components/global/inputs/SearchInput";
 import SortBy from "@/components/ui/sortBy";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import { WatchlistFilter } from "@/components/global/watchlist/WatchlistFilter";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { PlusIcon, X } from "lucide-react";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { DisplayVoteModal } from "@/components/global/modals/DisplayVoteModal";
-import { formatNumber } from "@/utils/format/format";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import type { PoolsListColumns } from "@/types/tableTypes";
 
 const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {

@@ -1,6 +1,6 @@
 import type { AdaPotsOptions, AdaPotsTableColumns } from "@/types/tableTypes";
 
-import { handlePersistStore } from "../../lib/handlePersistStore";
+import { handlePersistStore } from "@vellumlabs/cexplorer-sdk";
 
 type EpochsOptions = "all" | "100" | "50" | "25" | "10";
 

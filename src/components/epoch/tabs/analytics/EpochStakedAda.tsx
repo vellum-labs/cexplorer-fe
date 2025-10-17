@@ -1,4 +1,4 @@
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import type { EpochStatsSummary } from "@/types/epochTypes";
 import type { FC } from "react";
 
