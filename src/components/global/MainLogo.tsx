@@ -1,4 +1,4 @@
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useState, useEffect } from "react";
 
 import { Link } from "@tanstack/react-router";

@@ -1,6 +1,6 @@
 import type { TableColumns } from "@/types/tableTypes";
 
-import { getNodeText } from "./getNodeText";
+import { getNodeText } from "@vellumlabs/cexplorer-sdk";
 
 export const getExportJSON = (
   columns: TableColumns<any>,

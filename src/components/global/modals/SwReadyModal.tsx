@@ -6,7 +6,7 @@ import parse from "html-react-parser";
 
 import { useFetchMiscNew, useFetchMiscSW } from "@/services/misc";
 import { useEffect, useState } from "react";
-import Button from "../Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 
 interface SwReadyModalProps {
   firstInstall: boolean;
@@ -65,12 +65,12 @@ export const SwReadyModal: FC<SwReadyModalProps> = ({
           <X size={18} onClick={handleClose} className='cursor-pointer' />
         </div>
         {!firstInstall && (
-          <div className='text-grayTextPrimary flex flex-col text-text-sm'>
+          <div className='flex flex-col text-text-sm text-grayTextPrimary'>
             {parse(message || "")}
           </div>
         )}
         <div className='flex flex-col gap-1/2'>
-          <span className='text-grayTextPrimary text-text-sm font-medium'>
+          <span className='text-text-sm font-medium text-grayTextPrimary'>
             {firstInstall
               ? "Refresh the page to enjoy cexplorer!"
               : "Refresh the page to enjoy the new update."}

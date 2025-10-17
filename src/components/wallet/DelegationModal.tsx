@@ -3,7 +3,7 @@ import type { useFetchPoolDetail } from "@/services/pools";
 import { useFetchUserInfo } from "@/services/user";
 import { useWalletStore } from "@/stores/walletStore";
 import { handleDelegation } from "@/utils/wallet/handleDelegation";
-import Button from "../global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import Modal from "../global/Modal";
 import SpinningLoader from "../global/SpinningLoader";
 
@@ -61,7 +61,7 @@ const DelegationModal = ({ onClose, poolQuery }: Props) => {
           ) : (
             <h3 className='mt-1 break-all text-center'>{poolId}</h3>
           )}
-          <p className='text-text-sm text-center'>{poolName?.description}</p>
+          <p className='text-center text-text-sm'>{poolName?.description}</p>
 
           <Button
             className='mt-5'

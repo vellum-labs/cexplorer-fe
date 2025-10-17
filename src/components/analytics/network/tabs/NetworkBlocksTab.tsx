@@ -10,7 +10,7 @@ import { useFetchEpochAnalytics } from "@/services/analytics";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 export const NetworkBlocksTab: FC = () => {
   const epochQuery = useFetchEpochAnalytics();

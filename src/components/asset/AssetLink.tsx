@@ -1,7 +1,7 @@
 import type { TxAsset } from "@/types/assetsTypes";
 import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
-import { formatNumberWithSuffix } from "@/utils/format/format";
+import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 
 interface Props {

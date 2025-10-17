@@ -10,7 +10,7 @@ import { useFetchEpochAnalytics } from "@/services/analytics";
 import { useFetchMiscBasic } from "@/services/misc";
 
 import { bytesPerMb } from "@/constants/memorySizes";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 export const NetworkStorageTab: FC = () => {
   const epochQuery = useFetchEpochAnalytics();

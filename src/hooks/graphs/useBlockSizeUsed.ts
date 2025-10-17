@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import type { MiscConstResponseData } from "@/types/miscTypes";
 import { format } from "date-fns";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useGraphColors } from "@/hooks/useGraphColors";
 
 interface UseBlockSizeUsed {

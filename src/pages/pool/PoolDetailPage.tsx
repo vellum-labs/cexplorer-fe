@@ -12,7 +12,7 @@ import { activeSlotsCoeff, epochLength } from "@/constants/confVariables";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useFetchPoolDetail } from "@/services/pools";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { getRouteApi } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";

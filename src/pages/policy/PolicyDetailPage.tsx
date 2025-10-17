@@ -11,7 +11,7 @@ import { TxListPage } from "../tx/TxListPage";
 import { useFetchPolicyDetail } from "@/services/policy";
 
 import { AssetTimelockTab } from "@/components/asset/tabs/AssetTimelockTab";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { getRouteApi } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { AssetListPage } from "../assets/AssetListPage";

@@ -2,8 +2,8 @@ import type { TxListTableColumns } from "@/types/tableTypes";
 import type { TxBasicInfo } from "@/types/txTypes";
 import type { Dispatch, SetStateAction } from "react";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import DateCell from "@/components/table/DateCell";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { SizeCell } from "@/components/table/SizeCell";
 import { HashCell } from "@/components/tx/HashCell";
 import { Link } from "@tanstack/react-router";
@@ -15,7 +15,7 @@ import { useTxListTableStore } from "@/stores/tables/txListTableStore";
 import { useEffect, useState } from "react";
 import { useMiscConst } from "../useMiscConst";
 
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { isHex } from "@/utils/isHex";
 import { useSearchTable } from "./useSearchTable";
 

@@ -4,7 +4,7 @@ import type { FC } from "react";
 
 import { Link } from "@tanstack/react-router";
 import { Image } from "../global/Image";
-import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";
 import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";

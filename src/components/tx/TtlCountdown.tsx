@@ -1,5 +1,5 @@
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
-import { formatSecondsToTime } from "@/utils/format/format";
+import { formatSecondsToTime } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useState } from "react";
 
 export interface Props {

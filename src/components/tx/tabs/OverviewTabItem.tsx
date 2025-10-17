@@ -1,10 +1,10 @@
 import TxAssetLink from "@/components/asset/AssetLink";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import SortBy from "@/components/ui/sortBy";
 import { colors } from "@/constants/colors";
 import { useFetchTxDetail } from "@/services/tx";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useTxSortStore } from "@/stores/tx/txSortStore";
 import type { TxInfo } from "@/types/txTypes";
 import { Address } from "@/utils/address/getStakeAddress";
@@ -221,7 +221,7 @@ const OverviewTabItem = () => {
         <div className='relative flex h-[300px] w-full items-center justify-center rounded-l border border-border p-3 md:h-[600px]'>
           <GraphWatermark className='opacity-10' />
           <div
-            className={`rounded-max flex h-20 w-20 shrink-0 grow-0 animate-spin border-[8px] border-solid border-current border-e-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]`}
+            className={`flex h-20 w-20 shrink-0 grow-0 animate-spin rounded-max border-[8px] border-solid border-current border-e-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]`}
             role='status'
           ></div>
         </div>
@@ -254,7 +254,7 @@ const OverviewTabItem = () => {
               <ViewportSetter nodes={nodes} />
               <button
                 onClick={() => setDisabledControls(!disabledControls)}
-                className={`absolute bottom-3 left-1/2 z-50 flex origin-center duration-150 ${disabledControls && interacted ? "border-text" : ""} gap-1/2 rounded-max py-1/2 text-text-sm -translate-x-1/2 items-center border border-border bg-background px-1.5 font-medium shadow`}
+                className={`absolute bottom-3 left-1/2 z-50 flex origin-center duration-150 ${disabledControls && interacted ? "border-text" : ""} shadow -translate-x-1/2 items-center gap-1/2 rounded-max border border-border bg-background px-1.5 py-1/2 text-text-sm font-medium`}
               >
                 {disabledControls ? (
                   <LucideLockOpen size={15} />
@@ -305,7 +305,7 @@ const NodeContent = ({
   type: "input" | "output";
 }) => (
   <div className='pointer-events-auto flex h-full w-full flex-col justify-start'>
-    <div className='mb-1/2 mr-1/2 py-1/2 text-text-xs max-w-fit rounded-s border border-border bg-background px-1 font-medium'>
+    <div className='mb-1/2 mr-1/2 max-w-fit rounded-s border border-border bg-background px-1 py-1/2 text-text-xs font-medium'>
       <AdaWithTooltip data={data.value} />
     </div>
     <AddressWithTxBadges utxo={data} isOutput={type === "output"} />

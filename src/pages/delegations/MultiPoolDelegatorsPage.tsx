@@ -2,8 +2,8 @@ import GlobalTable from "@/components/table/GlobalTable";
 import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useFetchTopMultiDelegators } from "@/services/pools";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { Badge } from "@/components/global/badges/Badge";
 import { Link } from "@tanstack/react-router";
 import { useMultiPoolDelegatorsTableStore } from "@/stores/tables/multiPoolDelegatorsTableStore";
@@ -11,7 +11,7 @@ import { multiPoolDelegatorsTableOptions } from "@/constants/tables/multiPoolDel
 import ExportButton from "@/components/table/ExportButton";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import { StakeCell } from "@/components/table/StakeCell";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 
 export const MultiPoolDelegatorsPage = () => {

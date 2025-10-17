@@ -1,8 +1,8 @@
 import type { OverviewList } from "@/components/global/cards/OverviewCard";
 import type { useFetchDrepDetail } from "@/services/drep";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import Copy from "@/components/global/Copy";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import PulseDot from "@/components/global/PulseDot";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 import { Address, isValidAddressFormat } from "@/utils/address/getStakeAddress";
@@ -10,14 +10,14 @@ import { Link } from "@tanstack/react-router";
 
 import AddressCell from "@/components/address/AddressCell";
 import { TotalSumWithRates } from "@/components/global/TotalSumWithRates";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { useGetMarketCurrency } from "../useGetMarketCurrency";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 import { slotToDate } from "@/utils/slotToDate";
 import { format } from "date-fns";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { CircleHelp } from "lucide-react";
 import { DelegatorsLabel } from "@/components/global/DelegatorsLabel";
 

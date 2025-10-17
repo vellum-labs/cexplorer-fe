@@ -10,13 +10,13 @@ import {
 } from "lucide-react";
 
 import { BlockDetailTable } from "@/components/blocks/BlockDetail/BlockDetailTable";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchBlockDetail } from "@/services/blocks";
 import { useFetchMiscBasic, useFetchMiscSearch } from "@/services/misc";
 import { Link, getRouteApi, useNavigate } from "@tanstack/react-router";
 
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { getConfirmations } from "@/utils/getConfirmations";
 
 import { MintedByCard } from "@/components/global/cards/MintedByCard";
@@ -28,7 +28,7 @@ import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 import { TotalSumWithRates } from "@/components/global/TotalSumWithRates";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 
 const BlockDetailPage: FC = () => {
@@ -176,7 +176,7 @@ const BlockDetailPage: FC = () => {
       value: (
         <div className='flex items-center gap-[2.5px] text-text-sm'>
           {confirmations[1] < 3 && (
-            <CircleX size={15} className='text-red-500 translate-y-[1px]' />
+            <CircleX size={15} className='translate-y-[1px] text-red-500' />
           )}
           {confirmations[1] > 2 && confirmations[1] < 9 && (
             <CircleAlert
