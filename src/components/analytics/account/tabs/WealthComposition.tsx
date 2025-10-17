@@ -15,19 +15,17 @@ import EChartsReact from "echarts-for-react";
 import { useEffect, useState } from "react";
 import type { AnimalName } from "@/constants/animals";
 import { ANIMAL_ORDER, isAnimalName } from "@/constants/animals";
+import { formatAnimalLabel } from "@/utils/formatAnimalLabel";
 
-type AnimalStats = {
+interface AnimalStats {
   count: number;
   sum: number;
-};
+}
 
-type WealthCompositionItem = {
+interface WealthCompositionItem {
   name: AnimalName;
   stats: AnimalStats;
-};
-
-const formatAnimalLabel = (name: AnimalName) =>
-  name.charAt(0).toUpperCase() + name.slice(1);
+}
 
 export const WealthComposition = () => {
   const { data: basicData } = useFetchMiscBasic(true);
@@ -36,7 +34,7 @@ export const WealthComposition = () => {
   const query = useFetchWealthComposition();
   const { width } = useWindowDimensions();
   const [radius, setRadius] = useState<string[]>(["50%", "70%"]);
-  const [arrayData, setArrayData] = useState<WealthCompositionItem[]>([]);
+  const [animalData, setAnimalData] = useState<WealthCompositionItem[]>([]);
   const columns: TableColumns<WealthCompositionItem> = [
     {
       key: "wallet_size",
@@ -99,11 +97,11 @@ export const WealthComposition = () => {
       content: (
         <GlobalTable
           type='default'
-          totalItems={arrayData.length}
+          totalItems={animalData.length}
           minContentWidth={700}
           scrollable
           query={query}
-          items={arrayData}
+          items={animalData}
           columns={columns}
         />
       ),
@@ -116,11 +114,11 @@ export const WealthComposition = () => {
         <div className='flex w-full flex-wrap'>
           <div className='h-full w-full basis-[550px] md:w-1/2'>
             <h3>Total supply</h3>
-            <SumPieChart data={arrayData} radius={radius} />
+            <SumPieChart data={animalData} radius={radius} />
           </div>
           <div className='h-full w-full basis-[550px] md:w-1/2'>
             <h3>Structure</h3>
-            <CountPieChart data={arrayData} radius={radius} />
+            <CountPieChart data={animalData} radius={radius} />
           </div>
         </div>
       ),
@@ -154,7 +152,7 @@ export const WealthComposition = () => {
           return ANIMAL_ORDER.indexOf(a.name) - ANIMAL_ORDER.indexOf(b.name);
         });
 
-      setArrayData(items);
+      setAnimalData(items);
     }
   }, [query.data?.data]);
 

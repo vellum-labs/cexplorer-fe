@@ -4,11 +4,7 @@ import type { UseQueryResult } from "@tanstack/react-query";
 import { ArrowRight } from "lucide-react";
 
 import { addressIcons } from "@/constants/address";
-import {
-  ANIMAL_ORDER,
-  AnimalName,
-  isAnimalName,
-} from "@/constants/animals";
+import { ANIMAL_ORDER, AnimalName, isAnimalName } from "@/constants/animals";
 
 import type { PoolDelegatorStatsResponse } from "@/types/poolTypes";
 import type { PoolStructureColumns } from "@/types/tableTypes";
@@ -65,7 +61,7 @@ export const DelegatorStructureView: FC<DelegatorStructureViewProps> = ({
   columnType,
   tableOptions,
 }) => {
-  const items = useMemo<DelegatorStructureItem[]>(() => {
+  const animals = useMemo<DelegatorStructureItem[]>(() => {
     const data = dataQuery.data?.data.data?.[0] as
       | PoolDelegatorStatsResponse["data"]["data"][number]
       | undefined;
@@ -73,13 +69,13 @@ export const DelegatorStructureView: FC<DelegatorStructureViewProps> = ({
 
     const validAnimals = Object.keys(data).filter(isAnimalName) as AnimalName[];
 
-    const items = validAnimals.map(animalName => ({
+    const animalStructured = validAnimals.map(animalName => ({
       title: animalName,
       icon: addressIcons[animalName],
       data: data[animalName],
     }));
 
-    const sorted = [...items].sort((a, b) => {
+    const sorted = [...animalStructured].sort((a, b) => {
       return ANIMAL_ORDER.indexOf(a.title) - ANIMAL_ORDER.indexOf(b.title);
     });
 
@@ -92,7 +88,7 @@ export const DelegatorStructureView: FC<DelegatorStructureViewProps> = ({
 
   return (
     <div className='flex w-full flex-col gap-2'>
-      <DelegatorStructureCharts items={items} />
+      <DelegatorStructureCharts items={animals} />
       {setSortByAnimalSize && (
         <div className='flex w-full justify-end'>
           <div className='flex items-center gap-1'>
@@ -147,7 +143,7 @@ export const DelegatorStructureView: FC<DelegatorStructureViewProps> = ({
         </div>
       )}
       <DelegatorStructureTable
-        items={items}
+        items={animals}
         columnsOrder={columnsOrder}
         columnsVisibility={columnsVisibility}
         setColumsOrder={setColumsOrder}
