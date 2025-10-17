@@ -148,7 +148,7 @@ const PoolDetailPage = () => {
         </div>
       }
     >
-      <PoolDetailOverview query={query} estimatedBlocks={estimatedBlocks} />
+      <PoolDetailOverview query={query} estimatedBlocks={estimatedBlocks} miscConst={miscConst} />
       <Tabs items={poolDetailTabItems} />
     </PageBase>
   );

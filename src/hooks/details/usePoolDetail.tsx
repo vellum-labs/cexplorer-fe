@@ -4,6 +4,7 @@ import type {
   PoolDetailResponseData,
 } from "@/types/poolTypes";
 import type { UseQueryResult } from "@tanstack/react-query";
+import type { MiscConstResponseData } from "@/types/miscTypes";
 
 import PoolSaturation from "@/components/pool/PoolSaturation";
 import RoaDiffArrow from "@/components/pool/RoaDiffArrow";
@@ -20,11 +21,13 @@ import { poolRewardsRoaDiff } from "@/utils/poolRewardsRoaDiff";
 import { format, parseISO } from "date-fns";
 import { useState } from "react";
 import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
+import { DelegatorsLabel } from "@/components/global/DelegatorsLabel";
 import { buildSocialIcons } from "@/utils/buildSocialIcons";
 
 interface UsePoolDetailArgs {
   query: UseQueryResult<PoolDetailResponse, unknown>;
   estimatedBlocks: number;
+  miscConst?: MiscConstResponseData;
 }
 
 interface UsePoolDetail {
@@ -37,10 +40,12 @@ interface UsePoolDetail {
 export const usePoolDetail = ({
   estimatedBlocks,
   query,
+  miscConst: miscConstProp,
 }: UsePoolDetailArgs): UsePoolDetail => {
   const data = query.data?.data;
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConstFallback = useMiscConst(basicData?.data.version.const);
+  const miscConst = miscConstProp ?? miscConstFallback;
   const epochElapsed = useElapsedEpochNumber(miscConst);
 
   const [linkModal, setLinkModal] = useState<boolean>(false);
@@ -75,6 +80,9 @@ export const usePoolDetail = ({
     );
   }
 
+  const minDelegationAda = miscConst?.intra?.min_value
+    ? (miscConst.intra.min_value / 1_000_000).toFixed(0)
+    : "5";
   const extended = data?.pool_name?.extended;
   const socialIcons = buildSocialIcons(extended);
 
@@ -95,7 +103,10 @@ export const usePoolDetail = ({
       value:
         data?.registered && format(parseISO(data?.registered), "dd.MM.yyyy"),
     },
-    { label: "Delegators", value: formatNumber(data?.delegators) },
+    {
+      label: <DelegatorsLabel minDelegationAda={minDelegationAda} />,
+      value: formatNumber(data?.delegators),
+    },
     {
       label: "Website",
       value: (
@@ -181,7 +192,7 @@ export const usePoolDetail = ({
     {
       label: "Recent ROA",
       value: data?.stats?.recent?.roa ? (
-        <div className='gap-1/2 flex items-center'>
+        <div className='flex items-center gap-1/2'>
           <span>{data?.stats?.recent?.roa.toFixed(2) + "%"}</span>
           <RoaDiffArrow color={recentRoaDiff} size={22} />
         </div>
@@ -192,7 +203,7 @@ export const usePoolDetail = ({
     {
       label: "Lifetime ROA",
       value: data?.stats.lifetime.roa ? (
-        <div className='gap-1/2 flex items-center'>
+        <div className='flex items-center gap-1/2'>
           <span>{data?.stats.lifetime.roa.toFixed(2) + "%"}</span>
           <RoaDiffArrow color={lifetimeRoaDiff} size={22} />
         </div>

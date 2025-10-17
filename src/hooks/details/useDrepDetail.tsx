@@ -19,6 +19,7 @@ import { slotToDate } from "@/utils/slotToDate";
 import { format } from "date-fns";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { CircleHelp } from "lucide-react";
+import { DelegatorsLabel } from "@/components/global/DelegatorsLabel";
 
 interface UseDrepDetailArgs {
   query: ReturnType<typeof useFetchDrepDetail>;
@@ -36,7 +37,6 @@ const isSystemDrep = (id?: string) =>
 export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
   const data = query.data;
   const drepId = data?.hash?.view;
-  const drepIdLegacy = data?.hash?.legacy;
   const isSystem = isSystemDrep(drepId);
   const curr = useGetMarketCurrency();
   const { data: basicData } = useFetchMiscBasic(true);
@@ -55,6 +55,10 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
   const currentPower = currentEpochStats?.power;
   const currentDelegators = currentEpochStats?.represented_by;
 
+  const minDelegationAda = miscConst?.intra?.min_value
+    ? (miscConst.intra.min_value / 1_000_000).toFixed(0)
+    : "5";
+
   const about: OverviewList = isSystem
     ? [
         {
@@ -67,7 +71,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
         {
           label: "DRep ID",
           value: drepId ? (
-            <div className='flex items-center gap-1/2'>
+            <div className='gap-1/2 flex items-center'>
               <span>{drepId}</span>
               <Copy copyText={drepId} className='translate-y-[2px]' />
             </div>
@@ -87,7 +91,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
         {
           label: "DRep ID",
           value: data?.hash?.view ? (
-            <div className='flex items-center gap-1/2'>
+            <div className='gap-1/2 flex items-center'>
               <span>{formatString(data.hash.view, "long")}</span>
               <Copy copyText={data.hash.view} className='translate-y-[2px]' />
             </div>
@@ -98,7 +102,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
         {
           label: "DRep ID (Legacy)",
           value: data?.hash?.legacy ? (
-            <div className='flex items-center gap-1/2'>
+            <div className='gap-1/2 flex items-center'>
               <span>{formatString(data.hash.legacy, "long")}</span>
               <Copy copyText={data.hash.legacy} className='translate-y-[2px]' />
             </div>
@@ -148,7 +152,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
         {
           label: "Status",
           value: (
-            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
+            <div className='rounded-m relative flex h-[24px] w-fit items-center justify-end gap-1 border border-border px-[10px]'>
               <PulseDot color={"#00A9E3"} />
               <span className='text-text-xs font-medium'>System Default</span>
             </div>
@@ -167,7 +171,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
           ),
         },
         {
-          label: "Delegators",
+          label: <DelegatorsLabel minDelegationAda={minDelegationAda} />,
           value: currentDelegators
             ? formatNumber(currentDelegators)
             : "Unknown",
@@ -181,7 +185,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
             typeof data?.is_active === "undefined" ? (
               "-"
             ) : (
-              <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
+              <div className='rounded-m relative flex h-[24px] w-fit items-center justify-end gap-1 border border-border px-[10px]'>
                 <PulseDot color={!data.is_active ? "bg-redText" : undefined} />
                 <span className='text-text-xs font-medium'>
                   {data.is_active ? "Active" : "Inactive"}
@@ -218,7 +222,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
           ),
         },
         {
-          label: "Delegators",
+          label: <DelegatorsLabel minDelegationAda={minDelegationAda} />,
           value: currentDelegators
             ? formatNumber(currentDelegators)
             : Array.isArray(data?.distr) &&
@@ -273,7 +277,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
           ),
         },
         {
-          label: "Delegators",
+          label: <DelegatorsLabel minDelegationAda={minDelegationAda} />,
           value: currentDelegators
             ? formatNumber(currentDelegators)
             : "Unknown",
@@ -321,7 +325,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                 <div className='flex flex-col gap-2'>
                   <div className='flex flex-col items-center gap-1'>
                     <div className='flex w-full items-center justify-between'>
-                      <div className='flex items-center gap-1/2'>
+                      <div className='gap-1/2 flex items-center'>
                         <span className='text-text-sm text-grayTextSecondary'>
                           Recent Activity
                         </span>
@@ -346,7 +350,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
 
                   <div className='flex flex-col items-center gap-1'>
                     <div className='flex w-full items-center justify-between'>
-                      <div className='flex items-center gap-1/2'>
+                      <div className='gap-1/2 flex items-center'>
                         <span className='text-text-sm text-grayTextSecondary'>
                           Lifetime Activity
                         </span>
@@ -387,7 +391,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                         className='flex items-center justify-between gap-1'
                         key={vote}
                       >
-                        <span className='min-w-24 text-text-sm text-grayTextPrimary'>
+                        <span className='text-text-sm min-w-24 text-grayTextPrimary'>
                           {vote} ({voteCount})
                         </span>
                         <div className='relative h-2 w-2/3 overflow-hidden rounded-[4px] bg-[#E4E7EC]'>
@@ -399,7 +403,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                             }}
                           />
                         </div>
-                        <span className='flex min-w-[55px] items-end text-text-sm text-grayTextPrimary'>
+                        <span className='text-text-sm flex min-w-[55px] items-end text-grayTextPrimary'>
                           {votePercent}%
                         </span>
                       </div>

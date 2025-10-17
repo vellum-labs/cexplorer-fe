@@ -4,15 +4,17 @@ import { WatchlistSection } from "../global/watchlist/WatchlistSection";
 
 import { usePoolDetail } from "@/hooks/details/usePoolDetail";
 import type { useFetchPoolDetail } from "@/services/pools";
+import type { MiscConstResponseData } from "@/types/miscTypes";
 
 interface Props {
   query: ReturnType<typeof useFetchPoolDetail>;
   estimatedBlocks: number;
+  miscConst: MiscConstResponseData | undefined;
 }
 
-const PoolDetailOverview = ({ query, estimatedBlocks }: Props) => {
+const PoolDetailOverview = ({ query, estimatedBlocks, miscConst }: Props) => {
   const { data, aboutList, performanceList, stakeAndPledgeList } =
-    usePoolDetail({ estimatedBlocks, query });
+    usePoolDetail({ estimatedBlocks, query, miscConst });
 
   return (
     <div className='flex w-full max-w-desktop flex-col gap-1.5 px-mobile lg:px-desktop'>
