@@ -99,7 +99,10 @@ export type DeFiTokenListResponse = ResponseCore<{
 
 interface DeFiTokenInOut {
   name: string;
-  registry: null;
+  registry: {
+    ticker?: string;
+    name?: string;
+  } | null;
   stat: null;
 }
 
