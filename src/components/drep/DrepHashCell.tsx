@@ -1,7 +1,7 @@
 import { useHoverHighlightState } from "@/stores/states/hoverHighlightState";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 
 export const DrepHashCell = ({
   view,

@@ -1,4 +1,4 @@
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import type { ScriptDetailData } from "@/types/scriptTypes";
 import type { Label } from "@/types/txTypes";
 import type { ReactNode } from "react";

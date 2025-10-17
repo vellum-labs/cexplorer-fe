@@ -6,16 +6,23 @@ import { renderAssetName } from "@/utils/asset/renderAssetName";
 interface AssetTickerProps {
   tokenName: string;
   showFullName?: boolean;
+  registry?: {
+    ticker?: string;
+    name?: string;
+  } | null;
 }
 
 export const AssetTicker: FC<AssetTickerProps> = ({
   tokenName,
   showFullName = false,
+  registry: providedRegistry,
 }) => {
   const fingerprint = getAssetFingerprint(tokenName);
-  const { data } = useFetchAssetDetail(fingerprint);
+  const { data } = useFetchAssetDetail(fingerprint, {
+    enabled: !providedRegistry,
+  });
 
-  const registry = data?.data?.registry;
+  const registry = providedRegistry ?? data?.data?.registry;
   const ticker = registry?.ticker;
   const name = registry?.name;
 

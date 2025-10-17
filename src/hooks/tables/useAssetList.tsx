@@ -11,10 +11,10 @@ import { useAuthToken } from "../useAuthToken";
 import AssetCell from "@/components/asset/AssetCell";
 import { Badge } from "@/components/global/badges/Badge";
 import { PolicyCell } from "@/components/policy/PolicyCell";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 
-import { formatNumber } from "@/utils/format/format";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "./useSearchTable";
 
 interface UseAssetListArgs {

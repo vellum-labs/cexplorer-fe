@@ -1,7 +1,7 @@
 import type { TxInfo } from "@/types/txTypes";
 import { Address } from "@/utils/address/getStakeAddress";
 import { isValidAddress } from "@/utils/address/isValidAddress";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 export type UtxoSearchMatchType =
   | "payment_address"

@@ -7,7 +7,7 @@ import {
 import * as SelectPrimitive from "@radix-ui/react-select";
 import * as React from "react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@vellumlabs/cexplorer-sdk";
 import type { ReactNode } from "react";
 
 const Select = SelectPrimitive.Root;

@@ -2,19 +2,23 @@ import type { EpochListColumns } from "@/types/tableTypes";
 import type { EpochListData } from "@/types/epochTypes";
 import type { Dispatch, SetStateAction } from "react";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import PulseDot from "@/components/global/PulseDot";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ReactEcharts from "echarts-for-react";
 
-import { currencySigns, currencyPosition, currencySpace } from "@/constants/currencies";
+import {
+  currencySigns,
+  currencyPosition,
+  currencySpace,
+} from "@/constants/currencies";
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
 import {
   formatNumber,
   formatNumberWithSuffix,
   toUtcDate,
-} from "@/utils/format/format";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+} from "@vellumlabs/cexplorer-sdk";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { Link } from "@tanstack/react-router";
 import { format } from "date-fns";

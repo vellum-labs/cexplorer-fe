@@ -2,7 +2,7 @@ import type {
   PolicyDetailOwnerTableColumns,
   PolicyDetailOwnerTableOptions,
 } from "@/types/tableTypes";
-import { handlePersistStore } from "../../lib/handlePersistStore";
+import { handlePersistStore } from "@vellumlabs/cexplorer-sdk";
 
 export const usePolicyDetailOwnerTableStore = handlePersistStore<
   PolicyDetailOwnerTableOptions,

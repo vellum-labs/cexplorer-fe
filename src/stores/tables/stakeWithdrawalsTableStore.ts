@@ -2,7 +2,7 @@ import type {
   StakeWithdrawalsColumns,
   StakeWithdrawalsTableOptions,
 } from "@/types/tableTypes";
-import { handlePersistStore } from "../../lib/handlePersistStore";
+import { handlePersistStore } from "@vellumlabs/cexplorer-sdk";
 
 export const useStakeWithdrawalsTableStore = handlePersistStore<
   StakeWithdrawalsTableOptions,

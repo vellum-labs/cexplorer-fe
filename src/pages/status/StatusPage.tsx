@@ -9,7 +9,7 @@ import { useBlockList } from "@/hooks/tables/useBlockList";
 
 import { checkInternetSpeed } from "@/utils/checkInternetSpeed";
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { CircleAlert } from "lucide-react";
 
 import metadata from "../../../conf/metadata/en-metadata.json";

@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { useState } from "react";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import AdsCarousel from "@/components/global/ads/AdsCarousel";
 import { FileText } from "lucide-react";
 
@@ -54,7 +54,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
       title='Constitutional Committee'
       breadcrumbItems={[
         {
-          label: <span className='pt-1/2 inline'>Governance</span>,
+          label: <span className='inline pt-1/2'>Governance</span>,
           link: "/gov",
         },
         { label: "Constitutional committee" },
@@ -75,7 +75,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
                 About
               </h3>
 
-              <div className='text-text-sm flex items-center justify-start'>
+              <div className='flex items-center justify-start text-text-sm'>
                 <span className='min-w-[150px] text-grayTextSecondary'>
                   Members
                 </span>
@@ -85,7 +85,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
                 </span>
               </div>
 
-              <div className='text-text-sm flex items-center justify-start'>
+              <div className='flex items-center justify-start text-text-sm'>
                 <span className='min-w-[150px] text-grayTextSecondary'>
                   Voting threshold
                 </span>
@@ -103,7 +103,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
             </div>
 
             <div className='bg-bgColor flex w-[456px] flex-grow-0 flex-col gap-1.5 rounded-l border border-border p-3 shadow-sm'>
-              <div className='gap-1/2 flex items-center'>
+              <div className='flex items-center gap-1/2'>
                 <div className='flex h-8 w-8 items-center justify-center'>
                   <FileText size={18} className='text-primary' />
                 </div>
@@ -113,7 +113,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
               </div>
 
               {constitution?.anchor?.data_hash && (
-                <div className='text-text-sm text-textPrimary break-all font-semibold'>
+                <div className='text-textPrimary break-all text-text-sm font-semibold'>
                   {constitution.anchor.data_hash}
                 </div>
               )}
@@ -123,7 +123,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
                   href={transformAnchorUrl(constitution.anchor.url)}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='text-text-sm break-all text-primary'
+                  className='break-all text-text-sm text-primary'
                   onClick={e => {
                     e.preventDefault();
                     const transformedUrl = transformAnchorUrl(

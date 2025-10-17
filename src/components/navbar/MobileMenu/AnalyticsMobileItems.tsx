@@ -1,4 +1,4 @@
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { InfoCard } from "@/components/global/cards/InfoCard";
 import { Accordion } from "@/components/ui/accordion";
 import { colors } from "@/constants/colors";

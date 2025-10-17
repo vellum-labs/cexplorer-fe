@@ -5,9 +5,9 @@ import type {
 } from "@/types/tableTypes";
 import type { FC } from "react";
 
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { MinMaxRange } from "@/components/global/MinMaxRange";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 
 import { useMiscConst } from "@/hooks/useMiscConst";
@@ -18,9 +18,9 @@ import { useDrepDelegatorTableStore } from "@/stores/tables/drepDelegatorTableSt
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "@/components/tx/HashCell";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { calculateLoyaltyDays, slotToDate } from "@/utils/slotToDate";
 import { format } from "date-fns";
 import { ArrowRight } from "lucide-react";

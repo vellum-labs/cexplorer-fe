@@ -7,7 +7,7 @@ import LogoMark from "@/resources/images/cexLogo.svg";
 import DarkIcon from "@/resources/images/navbar_logo_dark.svg";
 import LightIcon from "@/resources/images/navbar_logo_light.svg";
 import { webUrl } from "@/constants/confVariables";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 export const BrandAssetsPage = () => {
   const query = useFetchArticleDetail("en", "page", "brand-assets");

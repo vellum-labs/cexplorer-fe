@@ -1,9 +1,9 @@
 import { Badge } from "@/components/global/badges/Badge";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import Modal from "@/components/global/Modal";
 import PulseDot from "@/components/global/PulseDot";
 import Tabs from "@/components/global/Tabs";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 import {
   Accordion,
@@ -16,7 +16,7 @@ import { useFetchPollList } from "@/services/misc";
 import { useFetchUserInfo } from "@/services/user";
 import type { TableColumns } from "@/types/tableTypes";
 import type { Poll } from "@/types/userTypes";
-import { formatDate } from "@/utils/format/format";
+import { formatDate } from "@vellumlabs/cexplorer-sdk";
 import type { FileRoutesByPath } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import parse from "html-react-parser";

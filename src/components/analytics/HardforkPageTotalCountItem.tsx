@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@vellumlabs/cexplorer-sdk";
 
 interface HardforkPageTotalCountItemProps {
   title: string;
@@ -28,7 +28,9 @@ const HardforkPageTotalCountItem: FC<HardforkPageTotalCountItemProps> = ({
       )}
       onClick={onClick}
     >
-      <span className='text-grayTextPrimary text-nowrap text-text-sm'>{title}</span>
+      <span className='text-nowrap text-text-sm text-grayTextPrimary'>
+        {title}
+      </span>
       <span
         className={cn(
           "rounded-xl border px-[10px] py-[2px] text-text-sm font-bold",

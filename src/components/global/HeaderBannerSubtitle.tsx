@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import Copy from "./Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 
 interface BlockDetailSubTitleProps {
   hash: string | undefined;

@@ -1,7 +1,7 @@
 import { Badge } from "@/components/global/badges/Badge";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import PulseDot from "@/components/global/PulseDot";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
@@ -12,7 +12,7 @@ import { useFetchPollList } from "@/services/misc";
 import { useFetchUserInfo, useMutatePollVote } from "@/services/user";
 import { useNotFound } from "@/stores/useNotFound";
 import { useWalletStore } from "@/stores/walletStore";
-import { formatDate } from "@/utils/format/format";
+import { formatDate } from "@vellumlabs/cexplorer-sdk";
 import { getRouteApi } from "@tanstack/react-router";
 import EChartsReact from "echarts-for-react";
 import parse from "html-react-parser";
@@ -194,7 +194,10 @@ export const PollDetailPage = () => {
               </div>
               <div className='flex justify-between text-text-xs'>
                 <span className='text-grayTextPrimary'>Ends in</span>
-                <DateCell className='text-text-xs' time={pollDetail?.date_end} />
+                <DateCell
+                  className='text-text-xs'
+                  time={pollDetail?.date_end}
+                />
               </div>
               <div className='h-2.5 w-full rounded-max bg-border'>
                 <div
@@ -267,7 +270,7 @@ const CustomLegend = ({
             className='flex items-center gap-1 text-text-sm text-grayTextSecondary'
           >
             <div
-              className={`h-3 w-3 rounded-full`}
+              className={`rounded-full h-3 w-3`}
               style={{
                 backgroundColor: graphColors[index % graphColors.length],
               }}

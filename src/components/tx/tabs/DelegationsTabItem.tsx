@@ -1,7 +1,7 @@
 import AddressCell from "@/components/address/AddressCell";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { AddressTypeInitialsBadge } from "@/components/global/badges/AddressTypeInitialsBadge";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 import PoolCell from "@/components/table/PoolCell";
 import { DrepNameCell } from "@/components/drep/DrepNameCell";

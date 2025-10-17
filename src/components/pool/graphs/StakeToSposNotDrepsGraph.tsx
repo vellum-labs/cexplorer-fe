@@ -10,9 +10,9 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { useFetchStakeDrepsNotSpo } from "@/services/pools";
 
 import { format } from "date-fns";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 export const StakeToSposNotDrepsGraph: FC = () => {
   const query = useFetchStakeDrepsNotSpo();

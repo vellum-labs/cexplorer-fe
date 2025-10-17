@@ -8,8 +8,8 @@ import ReactEcharts from "echarts-for-react";
 import { memo, useEffect, useState } from "react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 
-import { formatNumber } from "@/utils/format/format";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
 import { useFetchMiscBasic } from "@/services/misc";
