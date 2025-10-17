@@ -1,5 +1,5 @@
 import type { MiscConstResponseData } from "@/types/miscTypes";
-import { handlePersistStore } from "../lib/handlePersistStore";
+import { handlePersistStore } from "@vellumlabs/cexplorer-sdk";
 
 export const useConstStore = handlePersistStore<
   { constData: MiscConstResponseData | undefined },

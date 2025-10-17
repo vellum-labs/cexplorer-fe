@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import { default as GlobalButton } from "../global/Button";
+import { Button as GlobalButton } from "@vellumlabs/cexplorer-sdk";
 import { Plus, RefreshCcw, Wand } from "lucide-react";
 
 import { useHomepageStore } from "@/stores/homepageStore";
@@ -17,7 +17,9 @@ export const HomepageCustomize: FC = () => {
           onClick={() => setAddWidget(true)}
         >
           <Plus size={16} className='text-primary' />
-          <span className='text-text-sm font-semibold text-primary'>Add widget</span>
+          <span className='text-text-sm font-semibold text-primary'>
+            Add widget
+          </span>
         </div>
         <div className='flex cursor-pointer items-center gap-1/2'>
           <Wand size={16} className='text-primary' />

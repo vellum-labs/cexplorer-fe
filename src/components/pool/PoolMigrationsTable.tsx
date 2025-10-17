@@ -7,15 +7,15 @@ import type {
 import type { PoolDelegatorsColumns } from "@/types/tableTypes";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { MinMaxRange } from "../global/MinMaxRange";
 import { SortArrow } from "../global/SortArrow";
-import DateCell from "../table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "../table/GlobalTable";
 import PoolCell from "../table/PoolCell";
 import { ArrowRight } from "lucide-react";
 
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { getColumnsSortOrder } from "@/utils/getColumnsSortOrder";
 import { calculateLoyaltyDays, slotToDate } from "@/utils/slotToDate";
 import type {
@@ -24,7 +24,7 @@ import type {
 } from "@tanstack/react-query";
 import { format } from "date-fns";
 import type { FC } from "react";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 
 import Crab from "@/resources/images/icons/crab.svg";
 import Dino from "@/resources/images/icons/dino.svg";

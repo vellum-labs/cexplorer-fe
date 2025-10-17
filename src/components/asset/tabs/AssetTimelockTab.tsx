@@ -1,10 +1,10 @@
 import { Badge } from "@/components/global/badges/Badge";
 import { JsonDisplay } from "@/components/global/JsonDisplay";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { colors } from "@/constants/colors";
 import { useFetchMiscBasic } from "@/services/misc";
 import type { NestedScript, PolicyJson } from "@/types/assetsTypes";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { formatRemainingTime } from "@/utils/format/formatRemainingTime";
 import { format } from "date-fns";
 import parse from "html-react-parser";

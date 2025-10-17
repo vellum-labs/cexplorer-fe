@@ -6,7 +6,7 @@ import TableSettingsDropdown from "../global/dropdowns/TableSettingsDropdown";
 import GlobalTable from "../table/GlobalTable";
 import { Link } from "@tanstack/react-router";
 import PulseDot from "../global/PulseDot";
-import DateCell from "../table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchPoolDetail } from "@/services/pools";
 import { usePoolPerfomanceTableStore } from "@/stores/tables/poolPerfomanceTableStore";
@@ -17,11 +17,11 @@ import { useState, useEffect } from "react";
 import { poolPerfomanceTableOptions } from "@/constants/tables/poolPerfomanceTableOptions";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
-import { formatNumber } from "@/utils/format/format";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { useElapsedEpochNumber } from "@/hooks/useElapsedEpochNumber";
 import { Badge } from "../global/badges/Badge";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 
 interface PoolPerfomanceTableProps {

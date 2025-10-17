@@ -9,7 +9,7 @@ import { NetworkBlockVersionsPieGraph } from "../graphs/NetworkBlockVersionsPieG
 import { NetworkBlockVersionsPoolGraph } from "../graphs/NetworkBlockVersionsPoolGraph";
 import { NetworkBlockVersionsTable } from "../tables/NetworkBlockVersionsTable";
 
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchBlocksList } from "@/services/blocks";
 import {
@@ -65,7 +65,7 @@ export const NetworkBlockVersionsTab: FC = () => {
           description={
             <div className='flex gap-1'>
               <div className='flex h-[40px] w-fit flex-grow cursor-pointer items-center justify-center gap-1/2 rounded-s border border-border px-1.5'>
-                <span className='text-text-xs font-medium text-text sm:text-sm'>
+                <span className='sm:text-sm text-text-xs font-medium text-text'>
                   Hardfork status
                 </span>
               </div>

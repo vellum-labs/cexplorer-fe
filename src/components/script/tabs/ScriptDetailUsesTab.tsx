@@ -1,8 +1,8 @@
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { PurposeBadge } from "@/components/global/badges/PurposeBadge";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
-import DateCell from "@/components/table/DateCell";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
 import { HashCell } from "@/components/tx/HashCell";
@@ -12,7 +12,10 @@ import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
 import { useScriptDetailUsesTableStore } from "@/stores/tables/scriptDetailUsesTableStore";
 import type { ScriptDetailRedeemerData } from "@/types/scriptTypes";
 import type { ScriptDetailUsesColumns, TableColumns } from "@/types/tableTypes";
-import { formatNumber, formatNumberWithSuffix } from "@/utils/format/format";
+import {
+  formatNumber,
+  formatNumberWithSuffix,
+} from "@vellumlabs/cexplorer-sdk";
 import { getPercentageColor } from "@/utils/getPercentageColor";
 import { getRouteApi } from "@tanstack/react-router";
 import { useEffect, useState } from "react";

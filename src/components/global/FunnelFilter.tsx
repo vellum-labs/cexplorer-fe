@@ -1,7 +1,7 @@
 import type { ReactNode, RefObject } from "react";
 
 import { createPortal } from "react-dom";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 
 import { useLayoutEffect, useState } from "react";
 

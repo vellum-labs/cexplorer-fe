@@ -1,5 +1,5 @@
 import { OverviewCard } from "../global/cards/OverviewCard";
-import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { WatchlistSection } from "../global/watchlist/WatchlistSection";
 
 import { usePoolDetail } from "@/hooks/details/usePoolDetail";

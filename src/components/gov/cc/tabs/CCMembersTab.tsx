@@ -4,11 +4,11 @@ import type { TableColumns } from "@/types/tableTypes";
 import type { CommitteeMember } from "@/types/governanceTypes";
 import { Image } from "@/components/global/Image";
 import type { FC } from "react";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 import { Link } from "@tanstack/react-router";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { alphabetWithNumbers } from "@/constants/alphabet";
 
 export const CCMembersTab: FC = () => {

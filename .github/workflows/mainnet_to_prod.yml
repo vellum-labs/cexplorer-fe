@@ -1,9 +1,15 @@
-name: "mainnet@prod"
+name: "Deploy cexplorer.io"
 
 on:
   workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to deploy'
+        required: true
+        default: 'main'
+
 permissions:
-  contents: read # Minimal permissions for checkout
+  contents: write
   
 jobs:
   CheckUser:
@@ -35,6 +41,8 @@ jobs:
           sudo wg-quick up wg0
 
       - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.inputs.branch }}
       
       - name: Set up SSH agent
         uses: webfactory/ssh-agent@v0.8.0
@@ -78,14 +86,36 @@ jobs:
           rsync -azv -e "ssh -o UserKnownHostsFile=~/.ssh/known_hosts -o HostKeyAlgorithms=ecdsa-sha2-nistp256,ssh-ed25519,rsa-sha2-512" \
             --omit-dir-times --no-perms --no-owner --no-group --delete \
             ./dist/ job@$SERVER:/var/www/cexplorer_prod/
-      - name: Notify Discord
+
+      - name: Notify Discord on success
         if: success()
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
           VERSION="${{ github.run_number }}"
           WORKFLOW_NAME="${{ github.workflow }}"
+          BRANCH="${{ github.event.inputs.branch }}"
+      
+          MESSAGE="✅ **${WORKFLOW_NAME}** successfully deployed version #**${VERSION}** (${BRANCH})"
+      
           curl -H "Content-Type: application/json" \
             -X POST \
-            -d "{\"content\": \"🚀 **${WORKFLOW_NAME}** deployed new version #**${VERSION}**!\"}" \
+            -d "{\"content\": \"$MESSAGE\"}" \
+            $DISCORD_WEBHOOK_URL
+      
+      # Notifikace při neúspěchu
+      - name: Notify Discord on failure
+        if: failure()
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          VERSION="${{ github.run_number }}"
+          WORKFLOW_NAME="${{ github.workflow }}"
+          BRANCH="${{ github.event.inputs.branch }}"
+      
+          MESSAGE="❌ **${WORKFLOW_NAME}** failed during deployment of version #**${VERSION}** (${BRANCH})"
+      
+          curl -H "Content-Type: application/json" \
+            -X POST \
+            -d "{\"content\": \"$MESSAGE\"}" \
             $DISCORD_WEBHOOK_URL

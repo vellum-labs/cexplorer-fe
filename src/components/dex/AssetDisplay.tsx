@@ -7,12 +7,17 @@ interface AssetDisplayProps {
   tokenName: string;
   fingerprint: string;
   fontWeight?: "normal" | "semibold";
+  registry?: {
+    ticker?: string;
+    name?: string;
+  } | null;
 }
 
 export const AssetDisplay: FC<AssetDisplayProps> = ({
   tokenName,
   fingerprint,
   fontWeight = "semibold",
+  registry,
 }) => {
   const renderedName = renderAssetName({ name: tokenName });
   const isAda =
@@ -35,7 +40,7 @@ export const AssetDisplay: FC<AssetDisplayProps> = ({
       }}
     >
       <p className={`${fontClass} text-primary`}>
-        <AssetTicker tokenName={tokenName} />
+        <AssetTicker tokenName={tokenName} registry={registry} />
       </p>
     </Link>
   );

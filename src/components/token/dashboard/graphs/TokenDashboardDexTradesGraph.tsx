@@ -6,7 +6,7 @@ import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import ReactEcharts from "echarts-for-react";
 
 import { useMemo } from "react";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 
 interface TokenDashboardDexTradesGraphProps {
   data: DeFiTokenStatData[] | undefined;

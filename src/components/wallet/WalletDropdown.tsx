@@ -1,9 +1,9 @@
 import { walletInfos } from "@/constants/wallet";
 import { useConnectWallet } from "@/hooks/useConnectWallet";
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import nufiCoreSdk from "@nufi/dapp-client-core";
 import { Link } from "@tanstack/react-router";
 import {
@@ -17,7 +17,7 @@ import {
 import { memo } from "react";
 import { Badge } from "../global/badges/Badge";
 import Dollar from "../../resources/images/dollar.svg";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import DiscordLogo from "../../resources/images/icons/discord.svg";
 import GithubLogo from "../../resources/images/icons/github.svg";
 import TelegramLogo from "../../resources/images/icons/telegram.svg";
@@ -133,7 +133,9 @@ const WalletDropdown = ({
         <div className='space-y-2 rounded-m border border-border bg-gradient-to-r from-cardBg to-background px-1.5 py-1.5'>
           {adaHandle && (
             <div className='flex items-center justify-between'>
-              <span className='text-text-xs font-medium text-text'>ADA Handle</span>
+              <span className='text-text-xs font-medium text-text'>
+                ADA Handle
+              </span>
               <Badge color='gray' rounded>
                 <img src={Dollar} alt='dollar' />
                 <span>
@@ -146,7 +148,9 @@ const WalletDropdown = ({
           )}
 
           <div className='flex items-center justify-between'>
-            <span className='text-text-xs font-medium text-text'>ADA Balance</span>
+            <span className='text-text-xs font-medium text-text'>
+              ADA Balance
+            </span>
             <span className='text-text-sm font-medium text-text'>
               {lovelaceToAda(balance)}
             </span>

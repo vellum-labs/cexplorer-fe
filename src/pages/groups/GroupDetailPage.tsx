@@ -1,5 +1,5 @@
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import PulseDot from "@/components/global/PulseDot";
 import Tabs from "@/components/global/Tabs";
@@ -7,19 +7,20 @@ import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 import { MetadataCell } from "@/components/metadata/MetadataCell";
 import { PoolListEchart } from "@/components/pool/PoolListEchart";
 import RoaDiffArrow from "@/components/pool/RoaDiffArrow";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 import PoolCell from "@/components/table/PoolCell";
 import { GroupDetailCharts } from "@/components/groups/GroupDetailCharts";
 import { GroupDetailDRepCharts } from "@/components/groups/GroupDetailDRepCharts";
 import {
-  Breadcrumb,
+  BreadcrumbRaw,
   BreadcrumbItem,
   BreadcrumbList,
-} from "@/components/ui/breadcrumb";
-import { Tooltip } from "@/components/ui/tooltip";
+} from "@vellumlabs/cexplorer-sdk";
+
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { useMiscConst } from "@/hooks/useMiscConst";
-import { cn } from "@/lib/utils";
+import { cn } from "@vellumlabs/cexplorer-sdk";
 import { useFetchGroupDetail } from "@/services/analytics";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useDrepListTableStore } from "@/stores/tables/drepListTableStore";
@@ -32,10 +33,10 @@ import type {
 } from "@/types/tableTypes";
 import { activeStakePercentage } from "@/utils/activeStakePercentage";
 import { calculateTotalPoolBlocks } from "@/utils/calculateTotalPoolBlocks";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { getEpochColor } from "@/utils/getEpochColor";
 import { getPledgeColor } from "@/utils/getPledgeColor";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { poolRewardsRoaDiff } from "@/utils/poolRewardsRoaDiff";
 import { getRouteApi, Link } from "@tanstack/react-router";
 import { Check, Filter, X } from "lucide-react";
@@ -601,7 +602,7 @@ export const GroupDetailPage = () => {
       </Helmet>
       <main className='flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col justify-center'>
-          <Breadcrumb className='mb-2 w-full'>
+          <BreadcrumbRaw className='mb-2 w-full'>
             <BreadcrumbList className='flex items-center'>
               <BreadcrumbItem>
                 <Link className='underline underline-offset-2' to='/'>
@@ -616,7 +617,7 @@ export const GroupDetailPage = () => {
               </BreadcrumbItem>
               / <BreadcrumbItem className='text-text'>{name}</BreadcrumbItem>
             </BreadcrumbList>
-          </Breadcrumb>
+          </BreadcrumbRaw>
           <h1 className='text-left'>{name}</h1>
           <p className='mt-1'>{description}</p>
           <div className='my-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>

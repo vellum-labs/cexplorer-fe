@@ -3,7 +3,7 @@ import type { FC } from "react";
 
 import { OverviewCard } from "../global/cards/OverviewCard";
 
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 
 interface EpochPotsProps {
   stats: EpochStatsSummary;

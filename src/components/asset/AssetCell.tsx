@@ -3,12 +3,12 @@ import type { TxAsset } from "@/types/assetsTypes";
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";
 import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { Link } from "@tanstack/react-router";
 import { memo } from "react";
 import AdaHandleBadge from "../global/badges/AdaHandleBadge";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "../global/Image";
 
 import { configJSON } from "@/constants/conf";

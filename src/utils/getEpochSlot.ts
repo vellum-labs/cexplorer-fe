@@ -3,7 +3,7 @@ import {
   epochStart,
   slotDurationByron,
 } from "@/constants/confVariables";
-import { formatNumber } from "./format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 export const getEpochSlot = (blockSlot: number, epoch_no: number) => {
   if (epoch_no < epochStart) {

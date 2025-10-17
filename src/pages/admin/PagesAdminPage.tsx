@@ -1,10 +1,10 @@
 import SpinningLoader from "@/components/global/SpinningLoader";
 import GlobalTable from "@/components/table/GlobalTable";
 import {
-  Breadcrumb,
+  BreadcrumbRaw,
   BreadcrumbItem,
   BreadcrumbList,
-} from "@/components/ui/breadcrumb";
+} from "@vellumlabs/cexplorer-sdk";
 import { useFetchAdminPage } from "@/services/user";
 import { useAuthTokensStore } from "@/stores/authTokensStore";
 import { useWalletStore } from "@/stores/walletStore";
@@ -61,7 +61,7 @@ export const PagesAdminPage = () => {
         <title>Admin Pages | Cexplorer.io</title>
       </Helmet>
       <div className='flex w-full max-w-desktop flex-col items-center justify-center'>
-        <Breadcrumb className='mb-2 w-full'>
+        <BreadcrumbRaw className='mb-2 w-full'>
           <BreadcrumbList className='flex items-center'>
             <BreadcrumbItem>
               <Link className='underline underline-offset-2' to='/'>
@@ -76,7 +76,7 @@ export const PagesAdminPage = () => {
             </BreadcrumbItem>
             /<BreadcrumbItem className='text-text'>Admin Pages</BreadcrumbItem>
           </BreadcrumbList>
-        </Breadcrumb>
+        </BreadcrumbRaw>
         {query.isLoading ? (
           <div className='mt-4 flex w-full justify-center'>
             <SpinningLoader />

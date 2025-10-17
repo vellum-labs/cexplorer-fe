@@ -1,29 +1,29 @@
 import { ArticleCard } from "@/components/article/ArticleCard";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@/components/global/Image";
-import TextInput from "@/components/global/inputs/TextInput";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { SingleItemCarousel } from "@/components/global/SingleItemCarousel";
 import {
-  Breadcrumb,
+  BreadcrumbRaw,
   BreadcrumbItem,
   BreadcrumbList,
-} from "@/components/ui/breadcrumb";
+} from "@vellumlabs/cexplorer-sdk";
 import { webUrl } from "@/constants/confVariables";
 import { useFetchArticleDetail, useFetchArticleList } from "@/services/article";
 import type { ArticleListData } from "@/types/articleTypes";
-import { formatDate } from "@/utils/format/format";
+import { formatDate } from "@vellumlabs/cexplorer-sdk";
 import { renderArticleAuthor } from "@/utils/renderArticleAuthor";
 import { getRouteApi, Link } from "@tanstack/react-router";
 import parse from "html-react-parser";
 import { Check, Copy, Gift, Send } from "lucide-react";
-import { useState, useEffect } from "react";
-import { useNotFound } from "@/stores/useNotFound";
+import { useState } from "react";
 import { Helmet } from "react-helmet";
 import metadata from "../../../conf/metadata/en-metadata.json";
 import DiscordLogo from "../../resources/images/icons/discord.svg";
 import TelegramLogo from "../../resources/images/icons/telegram.svg";
 import TwitterLogo from "../../resources/images/icons/twitter.svg";
 import { RandomDelegationModal } from "@/components/wallet/RandomDelegationModal";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 export const ArticleDetailPage = () => {
   const route = getRouteApi("/article/$url");
@@ -39,13 +39,48 @@ export const ArticleDetailPage = () => {
       .slice(0, 3) || [];
   const [openDelegationModal, setOpenDelegationModal] = useState(false);
 
-  const { setNotFound } = useNotFound();
-
-  useEffect(() => {
-    if (!data || !data.data || data.data.length === 0) {
-      setNotFound(true);
-    }
-  }, [data, setNotFound]);
+  if (detailQuery.isLoading) {
+    return (
+      <main className='mx-auto flex min-h-minHeight w-full max-w-desktop flex-col items-center'>
+        <section className='flex h-auto w-full justify-center bg-gradient-to-b from-bannerGradient to-darker p-3'>
+          <div className='flex w-full max-w-desktop flex-col-reverse justify-center gap-1.5 md:flex-row'>
+            <div className='flex w-full flex-col justify-between gap-1.5 md:w-[40%]'>
+              <LoadingSkeleton height='40px' width='200px' rounded='md' />
+              <div className='mb-auto flex flex-col gap-2'>
+                <LoadingSkeleton height='40px' width='100%' rounded='md' />
+                <LoadingSkeleton height='60px' width='100%' rounded='md' />
+              </div>
+              <LoadingSkeleton height='60px' width='150px' rounded='md' />
+              <LoadingSkeleton height='40px' width='150px' rounded='md' />
+            </div>
+            <div className='flex w-full justify-end md:w-[60%]'>
+              <LoadingSkeleton
+                height='300px'
+                width='100%'
+                className='md:h-[380px]'
+                rounded='md'
+              />
+            </div>
+          </div>
+        </section>
+        <section className='flex w-full max-w-desktop flex-col gap-1.5 p-mobile md:p-desktop lg:flex-row'>
+          <div className='flex w-full flex-wrap items-center justify-between gap-2 lg:hidden'>
+            <LoadingSkeleton height='30px' width='200px' rounded='md' />
+            <LoadingSkeleton height='36px' width='280px' rounded='md' />
+          </div>
+          <article className='my-3 w-full text-left lg:my-0 lg:w-[calc(100%-300px)]'>
+            <LoadingSkeleton height='400px' width='100%' rounded='md' />
+          </article>
+          <div className='hidden w-[300px] flex-col gap-1.5 lg:flex'>
+            <LoadingSkeleton height='100px' width='100%' rounded='md' />
+            <LoadingSkeleton height='150px' width='100%' rounded='md' />
+            <LoadingSkeleton height='200px' width='100%' rounded='md' />
+            <LoadingSkeleton height='200px' width='100%' rounded='md' />
+          </div>
+        </section>
+      </main>
+    );
+  }
 
   return (
     <>
@@ -99,7 +134,7 @@ export const ArticleDetailPage = () => {
         <section className='flex h-auto w-full justify-center bg-gradient-to-b from-bannerGradient to-darker p-3'>
           <div className='flex w-full max-w-desktop flex-col-reverse justify-center gap-1.5 md:flex-row'>
             <div className='flex w-full flex-col justify-between gap-1.5 md:w-[40%]'>
-              <Breadcrumb className='mb-2 w-full'>
+              <BreadcrumbRaw className='mb-2 w-full'>
                 <BreadcrumbList className='flex items-center'>
                   <BreadcrumbItem>
                     <Link className='underline underline-offset-2' to='/'>
@@ -120,7 +155,7 @@ export const ArticleDetailPage = () => {
                     Article detail
                   </BreadcrumbItem>
                 </BreadcrumbList>
-              </Breadcrumb>
+              </BreadcrumbRaw>
               {data && (
                 <div className='mb-auto'>
                   <h2>{parse(data?.name || "")}</h2>
@@ -154,12 +189,12 @@ export const ArticleDetailPage = () => {
             </div>
             <SocialsAndCopy className='order-1 ml-auto block min-w-fit lg:hidden' />
           </div>
-          <article className='my-3 w-full text-left text-text-md lg:my-0 lg:w-[calc(100%-300px)] [&>*]:text-base [&>p]:my-4'>
+          <article className='[&>*]:text-base my-3 w-full text-left text-text-md lg:my-0 lg:w-[calc(100%-300px)] [&>p]:my-4'>
             {parse(data?.data[0] || "")}
           </article>
           <div className='hidden w-[300px] flex-col gap-1.5 lg:flex'>
             <SocialsAndCopy stretchCopy />
-            <div className='flex w-full flex-col gap-2 rounded-m border border-border bg-cardBg p-2'>
+            {/* <div className='flex w-full flex-col gap-2 rounded-m border border-border bg-cardBg p-2'>
               <h3>Support author</h3>
               <p className='text-text-sm text-grayTextPrimary'>
                 You can support the article author by delegating to their stake
@@ -171,11 +206,13 @@ export const ArticleDetailPage = () => {
                 size='sm'
                 onClick={() => setOpenDelegationModal(true)}
               />
-            </div>
-            <NewsletterForm />
+            </div> */}
+            {/* <NewsletterForm /> */}
             <div className='flex w-full flex-col gap-2 rounded-m border border-border bg-cardBg p-2'>
               <h3>Keywords</h3>
-              <p className='text-text-sm text-grayTextPrimary'>{data?.keywords}</p>
+              <p className='text-text-sm text-grayTextPrimary'>
+                {data?.keywords}
+              </p>
             </div>
             {otherArticles.map(article => (
               <ArticleCard
