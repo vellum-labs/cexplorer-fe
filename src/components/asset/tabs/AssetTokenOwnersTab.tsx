@@ -6,10 +6,10 @@ import GlobalTable from "@/components/table/GlobalTable";
 
 import { useFetchAssetOwners } from "@/services/assets";
 import { useAssetOwnerTableStore } from "@/stores/tables/assetOwnerTableStore";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link, useSearch } from "@tanstack/react-router";
 import { configJSON } from "@/constants/conf";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 interface AssetTokenOwnersTabProps {
   name: number;

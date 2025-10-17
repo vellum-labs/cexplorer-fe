@@ -9,7 +9,7 @@ import ReactEcharts from "echarts-for-react";
 import { useEffect, useState } from "react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
 

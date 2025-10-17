@@ -3,8 +3,8 @@ import { TextDisplay } from "@/components/global/TextDisplay";
 import { ScriptCell } from "@/components/script/ScriptCell";
 import { useFetchTxDetail } from "@/services/tx";
 import { getRouteApi, Link } from "@tanstack/react-router";
-import LoadingSkeleton from "../../global/skeletons/LoadingSkeleton";
-import Copy from "@/components/global/Copy";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 
 export const ScriptsTabItem = () => {
   const route = getRouteApi("/tx/$hash");
@@ -44,7 +44,7 @@ export const ScriptsTabItem = () => {
                 Script #{index + 1}
               </div>
               {output.reference_script?.type && (
-                <span className='flex h-[25px] items-center rounded-max border border-border bg-blue-200/15 px-1 text-text-xs font-medium'>
+                <span className='bg-blue-200/15 flex h-[25px] items-center rounded-max border border-border px-1 text-text-xs font-medium'>
                   {output.reference_script?.type.slice(0, 1).toUpperCase() +
                     output.reference_script?.type.slice(1)}
                 </span>

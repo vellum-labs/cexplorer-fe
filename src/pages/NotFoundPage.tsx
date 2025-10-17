@@ -1,10 +1,10 @@
 import { useEffect, useState, type FC } from "react";
 
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 
 import { routeTree } from "@/routeTree.gen";
 import { createRouter, useLocation, useNavigate } from "@tanstack/react-router";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscSearch } from "@/services/misc";
 import { useLocaleStore } from "@/stores/localeStore";
 

@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import ReactECharts from "echarts-for-react";
 import type { ThresholdPoolList } from "@/types/governanceTypes";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { useNavigate } from "@tanstack/react-router";
 
 interface PowerThresholdsSPOAttackGraphProps {

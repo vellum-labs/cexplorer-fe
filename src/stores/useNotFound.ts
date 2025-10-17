@@ -1,4 +1,4 @@
-import { handleCreateStore } from "@/lib/handleCreateStore";
+import { handleCreateStore } from "@vellumlabs/cexplorer-sdk";
 
 export const useNotFound = handleCreateStore<
   { notFound: boolean },

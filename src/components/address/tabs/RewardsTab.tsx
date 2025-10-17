@@ -3,14 +3,14 @@ import { Download } from "lucide-react";
 import { useEffect, useState, type FC } from "react";
 
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 
 import { useFetchAccountRewards } from "@/services/account";
 import { useAddressDetailRewardsTableStore } from "@/stores/tables/addressDetailRewardsTableStore";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import DateCell from "@/components/table/DateCell";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import PoolCell from "@/components/table/PoolCell";
 import { colors } from "@/constants/colors";
 import { EPOCH_LENGTH_DAYS } from "@/constants/confVariables";

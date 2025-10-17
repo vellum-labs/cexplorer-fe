@@ -3,7 +3,7 @@ import {
   currencyPosition,
   currencySpace,
 } from "@/constants/currencies";
-import { formatNumber } from "./format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 export const formatCurrency = (
   value: number | string,

@@ -7,18 +7,18 @@ import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
 import { useBlockListTableStore } from "@/stores/tables/blockListTableStore";
 import { useEffect, useState } from "react";
 
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import PoolCell from "@/components/table/PoolCell";
 import { SizeCell } from "@/components/table/SizeCell";
 
 import { BlockCell } from "@/components/blocks/BlockCell";
 import { ProtocolDot } from "@/components/global/ProtocolDot";
 import { HashCell } from "@/components/tx/HashCell";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "./useSearchTable";
 import type { FilterState } from "./useFilterTable";
 import { useFilterTable } from "./useFilterTable";
-import TextInput from "@/components/global/inputs/TextInput";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import type { FilterKey } from "./useDrepList";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "../useMiscConst";

@@ -12,12 +12,12 @@ import { useGovActionDetailAboutTableStore } from "@/stores/tables/governanceDet
 import { useFilterTable } from "@/hooks/tables/useFilterTable";
 
 import { governanceActionDetailAboutTableOptions } from "@/constants/tables/governanceActionDetailAboutTableOptions";
-import DateCell from "@/components/table/DateCell";
-import { formatNumber } from "@/utils/format/format";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { Link, useSearch } from "@tanstack/react-router";
 import { ExternalLink, Landmark, Route, User, X } from "lucide-react";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { GovVoterCell } from "@/components/gov/GovVoterCell";
 import { VoteCell } from "@/components/governance/vote/VoteCell";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";

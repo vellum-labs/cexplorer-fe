@@ -6,19 +6,19 @@ import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
 import { usePoolRewardsTableStore } from "@/stores/tables/poolRewardsTableStore";
 import type { MiscConstResponse } from "@/types/miscTypes";
 import type { PoolRewardsColumns } from "@/types/tableTypes";
-import { formatNumber } from "@/utils/format/format";
-import { lovelaceToAda } from "@/utils/lovelaceToAda";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 import { useSearch } from "@tanstack/react-router";
 import { Network, Users } from "lucide-react";
 import { useEffect, useState } from "react";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Badge } from "../global/badges/Badge";
 import TableSettingsDropdown from "../global/dropdowns/TableSettingsDropdown";
 import PulseDot from "../global/PulseDot";
 import ExportButton from "../table/ExportButton";
 import GlobalTable from "../table/GlobalTable";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   poolId: string;

@@ -2,7 +2,7 @@ import type { FC } from "react";
 
 import { Moon, Sun } from "lucide-react";
 
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 
 export const SettingsMobileItemTheme: FC = () => {
   const { theme } = useThemeStore();

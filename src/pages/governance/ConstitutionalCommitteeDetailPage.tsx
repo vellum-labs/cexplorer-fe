@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { useState } from "react";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import AdsCarousel from "@/components/global/ads/AdsCarousel";
 import { FileText } from "lucide-react";
 
@@ -117,7 +117,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
               </div>
 
               {constitution?.anchor?.data_hash && (
-                <div className='break-all text-text-sm font-semibold text-textPrimary'>
+                <div className='text-textPrimary break-all text-text-sm font-semibold'>
                   {constitution.anchor.data_hash}
                 </div>
               )}

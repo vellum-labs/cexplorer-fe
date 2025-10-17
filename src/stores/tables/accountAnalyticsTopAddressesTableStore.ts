@@ -3,7 +3,7 @@ import type {
   AccountAnalyticsTopAddressesTableOptions,
 } from "@/types/tableTypes";
 
-import { handlePersistStore } from "../../lib/handlePersistStore";
+import { handlePersistStore } from "@vellumlabs/cexplorer-sdk";
 
 export const useAccountTopAddressesTableStore = handlePersistStore<
   AccountAnalyticsTopAddressesTableOptions,

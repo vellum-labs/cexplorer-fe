@@ -4,8 +4,8 @@ import { Calendar } from "lucide-react";
 
 import { useFetchGlobalPoolAwards } from "@/services/pools";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import {
   Pagination,
   PaginationContent,
@@ -59,7 +59,7 @@ import Image6 from "@/resources/images/awards/6.svg";
 import Image7 from "@/resources/images/awards/7.svg";
 import Image8 from "@/resources/images/awards/8.svg";
 import Image9 from "@/resources/images/awards/9.svg";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { format } from "date-fns";
 import { PageBase } from "@/components/global/pages/PageBase";

@@ -1,5 +1,5 @@
 import type { BasicRate } from "@/types/miscTypes";
-import { handlePersistStore } from "../lib/handlePersistStore";
+import { handlePersistStore } from "@vellumlabs/cexplorer-sdk";
 
 export const useRateStore = handlePersistStore<
   { rate: BasicRate[] },

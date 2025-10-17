@@ -4,7 +4,7 @@ import { useTxSortStore } from "@/stores/tx/txSortStore";
 import { getRouteApi } from "@tanstack/react-router";
 import TxContentTable from "../TxContentTable";
 import { useState } from "react";
-import useDebounce from "@/hooks/useDebounce";
+import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 
 const selectItems = [

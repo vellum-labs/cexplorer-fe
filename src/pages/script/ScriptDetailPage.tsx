@@ -4,7 +4,7 @@ import { ScriptDetailOverview } from "@/components/script/ScriptDetailOverview";
 import { ScriptDetailStatsTab } from "@/components/script/tabs/ScriptDetailStatsTab";
 import { ScriptDetailUsesTab } from "@/components/script/tabs/ScriptDetailUsesTab";
 import { useFetchScriptDetail } from "@/services/script";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { getRouteApi } from "@tanstack/react-router";
 import { TxListPage } from "../tx/TxListPage";
 import { PageBase } from "@/components/global/pages/PageBase";

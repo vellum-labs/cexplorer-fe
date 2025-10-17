@@ -1,12 +1,12 @@
 import type { EpochStatsSummary } from "@/types/epochTypes";
 import type { FC } from "react";
 
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
-import { Tooltip } from "@/components/ui/tooltip";
-import { formatNumber } from "@/utils/format/format";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { CircleHelp } from "lucide-react";
 
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Badge } from "@/components/global/badges/Badge";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
@@ -31,7 +31,9 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
       columns: [
         {
           title: (
-            <p className='text-text-sm font-medium text-grayTextPrimary'>Pools</p>
+            <p className='text-text-sm font-medium text-grayTextPrimary'>
+              Pools
+            </p>
           ),
         },
         {
