@@ -10,9 +10,9 @@ import { useWalletStore } from "@/stores/walletStore";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import Modal from "@/components/global/Modal";
 import { Link } from "@tanstack/react-router";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Wallet, Info } from "lucide-react";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 
 export const TreasuryDonationPage = () => {
   const query = useFetchTreasuryDonationStats();
@@ -107,8 +107,8 @@ export const TreasuryDonationPage = () => {
                 <p className='text-text-sm text-grayTextPrimary'>
                   The Cardano Treasury is a decentralized funding mechanism that
                   supports the development and growth of the Cardano ecosystem.
-                  Donations help fund proposals voted on by the community through
-                  Cardano's governance system.
+                  Donations help fund proposals voted on by the community
+                  through Cardano's governance system.
                 </p>
               </div>
             </div>
