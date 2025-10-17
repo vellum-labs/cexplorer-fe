@@ -1,14 +1,14 @@
 import type {
   BasicTableOptions,
-  PoolStructureColumns,
+  DrepStructureColumns,
 } from "@/types/tableTypes";
 
-interface PoolStructureOptions {
-  key: keyof BasicTableOptions<PoolStructureColumns>["columnsVisibility"];
+interface DrepStructureOptions {
+  key: keyof BasicTableOptions<DrepStructureColumns>["columnsVisibility"];
   name: string;
 }
 
-export const poolStructureTableOptions: PoolStructureOptions[] = [
+export const drepStructureTableOptions: DrepStructureOptions[] = [
   {
     key: "wallet_size",
     name: "Wallet Size",

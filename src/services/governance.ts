@@ -15,10 +15,11 @@ export const fetchGovernenceAction = async (
   offset = 0,
   state: "All" | "Active" | "Ratified" | "Enacted" | "Expired",
   search?: string,
+  type?: string,
 ) => {
   const url = "/gov/gov_action_proposal_list";
   const options = {
-    params: { limit, offset, state, search },
+    params: { limit, offset, state, search, type },
   };
   return handleFetch<GovernanceActionListResponse>(url, offset, options);
 };
@@ -28,11 +29,12 @@ export const useFetchGovernanceAction = (
   page: number,
   state: "All" | "Active" | "Ratified" | "Enacted" | "Expired",
   search?: string,
+  type?: string,
 ) =>
   useInfiniteQuery({
-    queryKey: ["gov-action-list", limit, page, state, search],
+    queryKey: ["gov-action-list", limit, page, state, search, type],
     queryFn: ({ pageParam = page }) =>
-      fetchGovernenceAction(limit, pageParam, state, search),
+      fetchGovernenceAction(limit, pageParam, state, search, type),
     initialPageParam: page,
     getNextPageParam: lastPage => {
       const nextOffset = (lastPage.prevOffset as number) + limit;

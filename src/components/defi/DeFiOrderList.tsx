@@ -35,6 +35,7 @@ import { useLocaleStore } from "@/stores/localeStore";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 
 import { addressIcons } from "@/constants/address";
+import { AnimalName } from "@/constants/animals";
 import { calculateAdaPriceWithHistory } from "@/utils/calculateAdaPriceWithHistory";
 import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import { TokenPair } from "../dex/TokenPair";
@@ -591,17 +592,17 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
 
         const balanceAda = (item?.user?.balance ?? 0) / 1_000_000;
 
-        const getLevel = (balance: number) => {
-          if (balance >= 20_000_000) return "leviathan";
-          if (balance >= 5_000_000) return "humpback";
-          if (balance >= 1_000_000) return "whale";
-          if (balance >= 250_000) return "shark";
-          if (balance >= 100_000) return "dolphin";
-          if (balance >= 25_000) return "tuna";
-          if (balance >= 5_000) return "fish";
-          if (balance >= 1_000) return "crab";
-          if (balance >= 10) return "shrimp";
-          return "plankton";
+        const getLevel = (balance: number): AnimalName => {
+          if (balance >= 20_000_000) return AnimalName.Leviathan;
+          if (balance >= 5_000_000) return AnimalName.Humpback;
+          if (balance >= 1_000_000) return AnimalName.Whale;
+          if (balance >= 250_000) return AnimalName.Shark;
+          if (balance >= 100_000) return AnimalName.Dolphin;
+          if (balance >= 25_000) return AnimalName.Tuna;
+          if (balance >= 5_000) return AnimalName.Fish;
+          if (balance >= 1_000) return AnimalName.Crab;
+          if (balance >= 10) return AnimalName.Shrimp;
+          return AnimalName.Plankton;
         };
 
         const level = getLevel(balanceAda);

@@ -1,23 +1,24 @@
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import PulseDot from "@/components/global/PulseDot";
 import Tabs from "@/components/global/Tabs";
+import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
 import { MetadataCell } from "@/components/metadata/MetadataCell";
 import { PoolListEchart } from "@/components/pool/PoolListEchart";
 import RoaDiffArrow from "@/components/pool/RoaDiffArrow";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 import PoolCell from "@/components/table/PoolCell";
+import { GroupDetailCharts } from "@/components/groups/GroupDetailCharts";
+import { GroupDetailDRepCharts } from "@/components/groups/GroupDetailDRepCharts";
 import {
   BreadcrumbRaw,
   BreadcrumbItem,
   BreadcrumbList,
 } from "@vellumlabs/cexplorer-sdk";
+
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
-import { drepListTableOptions } from "@/constants/tables/drepListTableOptions";
-import { poolsListTableOptions } from "@/constants/tables/poolsListTableOptions";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { cn } from "@vellumlabs/cexplorer-sdk";
 import { useFetchGroupDetail } from "@/services/analytics";
@@ -59,18 +60,14 @@ export const GroupDetailPage = () => {
   const {
     columnsVisibility: poolColumnsVisibility,
     rows: poolRows,
-    setColumnVisibility: poolSetColumnVisibility,
     setColumsOrder: poolSetColumsOrder,
     columnsOrder: poolColumnsOrder,
-    setRows: poolSetRows,
   } = usePoolsListTableStore()();
   const {
     columnsVisibility: drepColumnsVisibility,
     rows: drepRows,
-    setColumnVisibility: drepSetColumnVisibility,
     setColumsOrder: drepSetColumsOrder,
     columnsOrder: drepColumnsOrder,
-    setRows: drepSetRows,
   } = useDrepListTableStore()();
   const { data: basicData } = useFetchMiscBasic();
   const miscConst = useMiscConst(basicData?.data.version.const);
@@ -437,6 +434,25 @@ export const GroupDetailPage = () => {
       widthPx: 50,
     },
     {
+      key: "delegators",
+      render: item => {
+        if (
+          item.type !== "drep" ||
+          !Array.isArray(item.info) ||
+          !item.info[0]?.distr?.count
+        ) {
+          return <p className='text-right'>-</p>;
+        }
+
+        return (
+          <p className='text-right'>{formatNumber(item.info[0].distr.count)}</p>
+        );
+      },
+      title: <p className='w-full text-right'>Delegators</p>,
+      visible: drepColumnsVisibility.delegators,
+      widthPx: 40,
+    },
+    {
       key: "voting_activity",
       render: item => {
         if (
@@ -614,47 +630,31 @@ export const GroupDetailPage = () => {
                   onClick={activeTab => setFilter(activeTab as "pool" | "drep")}
                 />
               )}
-              <div className='flex flex-grow items-center gap-1 md:flex-grow-0'>
-                <TableSearchInput
-                  placeholder='Search your results...'
-                  value={tableSearch}
-                  onchange={setTableSearch}
-                  wrapperClassName='md:w-[320px] w-full '
-                  showSearchIcon
-                  showPrefixPopup={false}
-                />
-                <TableSettingsDropdown
-                  rows={filter === "pool" ? poolRows : drepRows}
-                  setRows={filter === "pool" ? poolSetRows : drepSetRows}
-                  columnsOptions={
-                    filter === "pool"
-                      ? poolsListTableOptions.map(item => {
-                          return {
-                            label: item.name,
-                            isVisible: poolColumnsVisibility[item.key],
-                            onClick: () =>
-                              poolSetColumnVisibility(
-                                item.key,
-                                !poolColumnsVisibility[item.key],
-                              ),
-                          };
-                        })
-                      : drepListTableOptions.map(item => {
-                          return {
-                            label: item.name,
-                            isVisible: drepColumnsVisibility[item.key],
-                            onClick: () =>
-                              drepSetColumnVisibility(
-                                item.key,
-                                !drepColumnsVisibility[item.key],
-                              ),
-                          };
-                        })
-                  }
-                />
-              </div>
+              <TableSearchInput
+                placeholder='Search your results...'
+                value={tableSearch}
+                onchange={setTableSearch}
+                wrapperClassName='md:w-[320px] w-full'
+                showSearchIcon
+                showPrefixPopup={false}
+              />
             </div>
           </div>
+          {query.isLoading ? (
+            <div className='mb-2 grid w-full grid-cols-1 gap-2 md:grid-cols-2'>
+              <LoadingSkeleton height='400px' rounded='lg' />
+              <LoadingSkeleton height='400px' rounded='lg' />
+            </div>
+          ) : (
+            <>
+              {filter === "pool" && (
+                <GroupDetailCharts items={filteredItems ?? []} />
+              )}
+              {filter === "drep" && (
+                <GroupDetailDRepCharts items={filteredItems ?? []} />
+              )}
+            </>
+          )}
           <GlobalTable
             type='default'
             pagination

@@ -107,11 +107,21 @@ export interface PoolsListResponse {
     data: PoolData[];
   };
 }
+export interface PoolMetaExtended {
+  github_handle?: string;
+  twitter_handle?: string;
+  discord_handle?: string;
+  twitch_handle?: string;
+  youtube_handle?: string;
+  facebook_handle?: string;
+  telegram_handle?: string;
+}
+
 export interface PoolMeta {
   ticker: string;
   name: string;
   description: string;
-  extended: null;
+  extended: PoolMetaExtended | null;
   homepage: string;
 }
 

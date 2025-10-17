@@ -17,7 +17,7 @@ import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
 
-import { Asterisk, ExternalLink, Landmark, Route, User } from "lucide-react";
+import { Asterisk, ExternalLink, Landmark, Route, User, X } from "lucide-react";
 
 import { useGovernanceListTableStore } from "@/stores/tables/governanceListTableStore";
 import { useEffect, useState } from "react";
@@ -25,6 +25,7 @@ import { useFetchDrepStat } from "@/services/drep";
 import { useFetchGovernanceAction } from "@/services/governance";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
+import { useFilterTable } from "@/hooks/tables/useFilterTable";
 
 import { governanceListTableOptions } from "@/constants/tables/governanceActionsListTableOptions";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
@@ -35,6 +36,15 @@ import { ActionTypes } from "@/components/global/ActionTypes";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { GovernanceVotingProgress } from "@/components/governance/GovernanceVotingProgress";
+
+const typeLabels: Record<string, string> = {
+  NewCommittee: "New Committee",
+  NewConstitution: "New Constitution",
+  HardForkInitiation: "Hardfork Initiation",
+  ParameterChange: "Parameter change",
+  TreasuryWithdrawals: "Treasury Withdrawals",
+  InfoAction: "Info action",
+};
 
 export const GovernancePage: FC = () => {
   const { page, state } = useSearch({
@@ -66,6 +76,20 @@ export const GovernancePage: FC = () => {
     "All" | "Active" | "Ratified" | "Expired" | "Enacted"
   >(state || "All");
 
+  const {
+    filterVisibility,
+    filter,
+    hasFilter,
+    anchorRefs,
+    filterDraft,
+    changeDraftFilter,
+    changeFilterByKey,
+    toggleFilter,
+  } = useFilterTable({
+    storeKey: "governance_list_filter",
+    filterKeys: ["type"],
+  });
+
   const { data: drepStat } = drepStatQuery;
 
   const govActionQuery = useFetchGovernanceAction(
@@ -73,6 +97,7 @@ export const GovernancePage: FC = () => {
     (page ?? 1) * rows - rows,
     state || "All",
     debouncedTableSearch ? debouncedTableSearch : undefined,
+    filter.type,
   );
 
   const totalItems = govActionQuery.data?.pages[0].data.count;
@@ -133,10 +158,10 @@ export const GovernancePage: FC = () => {
         );
 
         return (
-          <div className='flex flex-col gap-1/2'>
+          <div className='gap-1/2 flex flex-col'>
             <DateCell time={item?.tx?.time} />
             {epoch && (
-              <div className='flex items-center gap-1/2'>
+              <div className='gap-1/2 flex items-center'>
                 <span className='text-text-xs text-grayTextPrimary'>
                   Epoch -{" "}
                 </span>
@@ -174,7 +199,45 @@ export const GovernancePage: FC = () => {
 
         return <ActionTypes title={item?.type as ActionTypes} />;
       },
-      title: "Type",
+      title: <p ref={anchorRefs?.type}>Type</p>,
+      filter: {
+        anchorRef: anchorRefs?.type,
+        width: "200px",
+        activeFunnel: !!filter.type,
+        filterOpen: filterVisibility.type,
+        filterButtonDisabled: filter.type
+          ? filter.type === filterDraft["type"]
+          : false,
+        onShow: e => toggleFilter(e, "type"),
+        onFilter: () => changeFilterByKey("type", filterDraft["type"]),
+        onReset: () => changeFilterByKey("type"),
+        filterContent: (
+          <div className='flex flex-col gap-1 px-2 py-1'>
+            {[
+              { value: "NewCommittee", label: "New Committee" },
+              { value: "NewConstitution", label: "New Constitution" },
+              { value: "HardForkInitiation", label: "Hardfork Initiation" },
+              { value: "ParameterChange", label: "Parameter change" },
+              { value: "TreasuryWithdrawals", label: "Treasury Withdrawals" },
+              { value: "InfoAction", label: "Info action" },
+            ].map(({ value, label }) => (
+              <label className='flex items-center gap-1' key={value}>
+                <input
+                  type='radio'
+                  name='type'
+                  value={value}
+                  className='accent-primary'
+                  checked={filterDraft["type"] === value}
+                  onChange={e =>
+                    changeDraftFilter("type", e.currentTarget.value)
+                  }
+                />
+                <span className='text-text-sm'>{label}</span>
+              </label>
+            ))}
+          </div>
+        ),
+      },
       visible: columnsVisibility.type,
       widthPx: 90,
     },
@@ -207,19 +270,19 @@ export const GovernancePage: FC = () => {
                 className={"text-text-xs"}
                 disabled={true}
               >
-                {formatString(item?.ident?.id, "long")}
+                {formatString(item?.ident?.bech, "long")}
               </Link>
-              <Copy copyText={item?.ident?.id} size={10} />
+              <Copy copyText={item?.ident?.bech} size={10} />
             </div>
           </div>
         );
       },
       jsonFormat: item => {
-        if (!item?.ident?.id) {
+        if (!item?.ident?.bech) {
           return "-";
         }
 
-        return item?.ident?.id;
+        return item?.ident?.bech;
       },
       title: "Name",
       visible: columnsVisibility.gov_action_name,
@@ -258,10 +321,10 @@ export const GovernancePage: FC = () => {
         );
 
         return (
-          <div className='flex flex-col gap-1/2'>
+          <div className='gap-1/2 flex flex-col'>
             <DateCell time={String(endTime)} />
             {item?.expired_epoch && (
-              <div className='flex items-center gap-1/2'>
+              <div className='gap-1/2 flex items-center'>
                 <span className='text-text-xs text-grayTextPrimary'>
                   Epoch -{" "}
                 </span>
@@ -347,20 +410,20 @@ export const GovernancePage: FC = () => {
       ),
       footer: (
         <div className='flex flex-wrap'>
-          <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
+          <div className='gap-1/2 flex w-fit items-center pr-[26px]'>
             <span className='text-text-sm text-grayTextPrimary'>Active</span>
             <span className='text-text-sm text-[#10B981]'>
               {drepStat?.gov_action[0]?.active || 0}
             </span>
           </div>
-          <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
+          <div className='gap-1/2 flex w-fit items-center pr-[26px]'>
             <span className='text-text-sm text-grayTextPrimary'>Ratified</span>
             <span className='text-text-sm text-[#00A9E3]'>
               {drepStat?.gov_action[0]?.ratified || 0}
             </span>
           </div>
           {!!drepStat?.gov_action[0]?.enacted && (
-            <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
+            <div className='gap-1/2 flex w-fit items-center pr-[26px]'>
               <span className='text-text-sm text-grayTextPrimary'>Enacted</span>
               <span className='text-text-sm text-[#876ee1]'>
                 {drepStat?.gov_action[0]?.enacted}
@@ -368,7 +431,7 @@ export const GovernancePage: FC = () => {
             </div>
           )}
           {!!drepStat?.gov_action[0]?.expires && (
-            <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
+            <div className='gap-1/2 flex w-fit items-center pr-[26px]'>
               <span className='text-text-sm text-grayTextPrimary'>Expired</span>
               <span className='text-text-sm text-[#F79009]'>
                 {drepStat?.gov_action[0]?.expires}
@@ -431,7 +494,7 @@ export const GovernancePage: FC = () => {
       title='Governance Actions'
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>Governance</span>,
+          label: <span className='pt-1/2 inline'>Governance</span>,
           link: "/gov",
         },
         { label: "Governance actions" },
@@ -489,7 +552,7 @@ export const GovernancePage: FC = () => {
         </div>
         <div className='my-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
           <div className='flex w-full flex-wrap items-center justify-between gap-1 sm:flex-nowrap md:hidden'>
-            <div className='flex w-full justify-between gap-1/2 md:hidden'>
+            <div className='gap-1/2 flex w-full justify-between md:hidden'>
               <SortBy
                 selectItems={selectItems}
                 selectedItem={selectedItem}
@@ -553,6 +616,29 @@ export const GovernancePage: FC = () => {
             </div>
           </div>
         </div>
+        {hasFilter && (
+          <div className='gap-1/2 mb-2 flex flex-wrap items-center md:flex-nowrap'>
+            {Object.entries(filter).map(
+              ([key, value]) =>
+                value && (
+                  <div
+                    key={key}
+                    className='gap-1/2 rounded-m py-1/4 text-text-xs flex w-fit items-center border border-border bg-darker px-1 text-grayTextPrimary'
+                  >
+                    <span>{key[0].toUpperCase() + key.slice(1)}:</span>
+                    <span>
+                      {key === "type" ? typeLabels[value] || value : value}
+                    </span>
+                    <X
+                      size={13}
+                      className='cursor-pointer'
+                      onClick={() => changeFilterByKey(key)}
+                    />
+                  </div>
+                ),
+            )}
+          </div>
+        )}
         <GlobalTable
           type='infinite'
           currentPage={page ?? 1}

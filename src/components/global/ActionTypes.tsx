@@ -69,7 +69,7 @@ export const ActionTypes: FC<ActionTypesProps> = ({ title }) => {
       <div className='relative flex h-[24px] w-fit items-center justify-end gap-1/2 rounded-m border border-border px-[10px] text-text-xs'>
         <CornerRightUp size={12} className='text-[#FEC84B]' />
         <span className='text-nowrap text-text-xs font-medium'>
-          TreasuryWithdrawals
+          Treasury Withdrawals
         </span>
       </div>
     ),
