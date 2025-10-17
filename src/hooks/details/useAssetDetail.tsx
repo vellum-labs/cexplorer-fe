@@ -13,7 +13,7 @@ import { configJSON } from "@/constants/conf";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 import parse from "html-react-parser";
-import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
+import { PriceAdaSmallAmount } from "@/components/global/PriceAdaSmallAmount";
 
 interface UseAssetDetailArgs {
   data: ReturnType<typeof useFetchAssetDetail>;
@@ -117,9 +117,7 @@ export const useAssetDetail = ({
   if ((type === "nft" && nftMarket) || (type === "token" && tokenMarket)) {
     overview.splice(2, 0, {
       label: "Price",
-      value: detailData?.dex?.price
-        ? formatSmallValueWithSub((detailData?.dex?.price ?? 0) / 1e6, "₳")
-        : "-",
+      value: <PriceAdaSmallAmount price={detailData?.dex?.price} />,
     });
     overview.splice(3, 0, {
       label: "Unique wallets",

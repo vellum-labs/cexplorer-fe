@@ -18,8 +18,11 @@ import {
 
 import AssetCell from "../asset/AssetCell";
 import { configJSON } from "@/constants/conf";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { PolicyCell } from "../policy/PolicyCell";
+import { PriceAdaSmallAmount } from "@/components/global/PriceAdaSmallAmount";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { AlertCircle } from "lucide-react";
 
 interface AddressAssetTableProps {
   assets: AddressAsset[];
@@ -78,9 +81,17 @@ export const AddressAssetTable: FC<AddressAssetTableProps> = ({
         const decimals = item?.registry?.decimals ?? 0;
         const value = item?.quantity ?? 0;
         const adjusted = value / Math.pow(10, decimals);
+        const formattedFull = formatNumber(adjusted.toFixed(2));
+        const formattedShort = formatNumberWithSuffix(
+          parseFloat(adjusted.toFixed(2)),
+        );
 
         return (
-          <p className='text-right'>{formatNumber(adjusted.toFixed(2))}</p>
+          <div className='flex w-full justify-end'>
+            <Tooltip content={formattedFull}>
+              <span className='text-text-sm'>{formattedShort}</span>
+            </Tooltip>
+          </div>
         );
       },
       title: <p className='w-full text-right'>Holdings</p>,
@@ -108,17 +119,6 @@ export const AddressAssetTable: FC<AddressAssetTableProps> = ({
       visible: activeAsset !== "nfts" && columnsVisibility.supply,
       widthPx: 50,
     },
-    {
-      key: "ticker",
-      render: item => {
-        if (item?.quantity === 1) return <p className='text-right'></p>;
-        const ticker = item?.registry?.ticker;
-        return <p className='text-right'>{ticker || "-"}</p>;
-      },
-      title: <p className='w-full text-right'>Ticker</p>,
-      visible: activeAsset !== "nfts" && columnsVisibility.ticker,
-      widthPx: 40,
-    },
   ];
 
   if (
@@ -128,18 +128,48 @@ export const AddressAssetTable: FC<AddressAssetTableProps> = ({
     columns.push({
       key: "price",
       render: item => {
-        if (!item.market?.price) {
-          return <p className='text-right'>-</p>;
-        }
+        const liquidity = item.market?.liquidity ?? null;
+        const hasLowLiquidity =
+          liquidity !== null && liquidity > 0 && liquidity < 10_000_000_00;
 
         return (
-          <p className={`w-full text-right text-text-sm text-grayTextPrimary`}>
-            {lovelaceToAda(item.market?.price)}
-          </p>
+          <div className='flex w-full items-center justify-end gap-1'>
+            <PriceAdaSmallAmount price={item.market?.price} />
+            {hasLowLiquidity && (
+              <Tooltip content='Low liquidity (< 1000 ADA)'>
+                <AlertCircle size={14} className='text-yellow-500' />
+              </Tooltip>
+            )}
+          </div>
         );
       },
       title: <p className='w-full text-right'>Price</p>,
       visible: columnsVisibility.price,
+      widthPx: 50,
+    });
+
+    columns.push({
+      key: "value",
+      render: item => {
+        const decimals = item?.registry?.decimals ?? 0;
+        const quantity = item?.quantity ?? 0;
+        const price = item?.market?.price ?? 0;
+
+        if (!price) {
+          return <p className='text-right'>-</p>;
+        }
+
+        const adjustedQuantity = quantity / Math.pow(10, decimals);
+        const valueInLovelace = adjustedQuantity * price;
+
+        return (
+          <div className='flex w-full justify-end'>
+            <AdaWithTooltip data={valueInLovelace} />
+          </div>
+        );
+      },
+      title: <p className='w-full text-right'>Value</p>,
+      visible: columnsVisibility.value,
       widthPx: 50,
     });
   }

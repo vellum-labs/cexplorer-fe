@@ -51,8 +51,8 @@ export type AddressAsset = AssetCore & {
   registry: AssetRegistry;
   market: {
     quantity: number;
-    price: number;
-    liquidity: number;
+    price: number | null;
+    liquidity: number | null;
   };
 };
 

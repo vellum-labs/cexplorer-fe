@@ -91,26 +91,38 @@ export const AssetsTab: FC<AssetsTabProps> = ({
     })
     .filter(item => {
       if (debouncedSearch) {
+        const searchLower = debouncedSearch.toLowerCase();
         return (
-          item.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-          getAssetFingerprint(item.name.toLowerCase()).includes(
-            debouncedSearch.toLowerCase(),
-          ) ||
-          (item?.registry?.name &&
-            item?.registry?.name
-              .toLowerCase()
-              .includes(debouncedSearch.toLowerCase())) ||
-          (item?.registry?.ticker &&
-            item?.registry?.ticker
-              .toLowerCase()
-              .includes(debouncedSearch.toLowerCase())) ||
-          renderAssetName({ asset: item })
-            .toLowerCase()
-            .includes(debouncedSearch.toLowerCase())
+          item.name.toLowerCase().includes(searchLower) ||
+          getAssetFingerprint(item.name.toLowerCase()).includes(searchLower) ||
+          (item.registry?.name &&
+            typeof item.registry.name === "string" &&
+            item.registry.name.toLowerCase().includes(searchLower)) ||
+          (item.registry?.ticker &&
+            typeof item.registry.ticker === "string" &&
+            item.registry.ticker.toLowerCase().includes(searchLower)) ||
+          renderAssetName({ asset: item }).toLowerCase().includes(searchLower)
         );
       }
 
       return item;
+    })
+    .sort((a, b) => {
+      const calculateValue = (item: AddressAsset) => {
+        const decimals = item?.registry?.decimals ?? 0;
+        const quantity = item?.quantity ?? 0;
+        const price = item?.market?.price ?? 0;
+
+        if (!price) return 0;
+
+        const adjustedQuantity = quantity / Math.pow(10, decimals);
+        return adjustedQuantity * price;
+      };
+
+      const valueA = calculateValue(a);
+      const valueB = calculateValue(b);
+
+      return valueB - valueA;
     });
 
   const assetTabItems = [
