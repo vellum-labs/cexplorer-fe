@@ -163,7 +163,9 @@ export type PoolStructureColumns = {
 export interface DrepStructureColumns {
   wallet_size: boolean;
   amount: boolean;
+  amount_pie: boolean;
   holdings: boolean;
+  holdings_pie: boolean;
 }
 
 export interface DrepRegistrationsColumns {
