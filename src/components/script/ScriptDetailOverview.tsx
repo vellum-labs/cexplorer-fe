@@ -1,20 +1,20 @@
 import { colors } from "@/constants/colors";
 import type { ScriptDetailResponse } from "@/types/scriptTypes";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { FileBarChart, LineChart } from "lucide-react";
 import AdsCarousel from "../global/ads/AdsCarousel";
 import { Badge } from "../global/badges/Badge";
 import { LabelBadge } from "../global/badges/LabelBadge";
 import { PurposeBadge } from "../global/badges/PurposeBadge";
-import Button from "../global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { OverviewCard } from "../global/cards/OverviewCard";
 import { OverviewStatCard } from "../global/cards/OverviewStatCard";
-import LoadingSkeleton from "../global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { TextDisplay } from "../global/TextDisplay";
 import { HashCell } from "../tx/HashCell";
 import { AttributeDropdown } from "../global/AttributeDropdown";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   query: UseQueryResult<ScriptDetailResponse>;

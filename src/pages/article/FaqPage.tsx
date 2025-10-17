@@ -1,4 +1,4 @@
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import {
   Accordion,
   AccordionContent,
@@ -55,7 +55,9 @@ export const FaqPage = () => {
                   className='border-b border-border'
                 >
                   <AccordionTrigger className='AccordionTrigger w-full py-3 text-left'>
-                    <span className='text-text-md font-medium'>{item.title}</span>
+                    <span className='text-text-md font-medium'>
+                      {item.title}
+                    </span>
                   </AccordionTrigger>
                   <AccordionContent>
                     <div className='flex flex-col pb-1.5 text-grayTextPrimary'>

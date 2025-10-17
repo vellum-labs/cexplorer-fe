@@ -1,16 +1,16 @@
 import AssetCell from "@/components/asset/AssetCell";
 import { Badge } from "@/components/global/badges/Badge";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { EmptyState } from "@/components/global/EmptyState";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
-import TextInput from "@/components/global/inputs/TextInput";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import Modal from "@/components/global/Modal";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { WatchlistStar } from "@/components/global/watchlist/WatchlistStar";
 import GlobalTable from "@/components/table/GlobalTable";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import {
   fetchWatchlist,
@@ -25,7 +25,7 @@ import type { CexplorerNftsColumns, TableColumns } from "@/types/tableTypes";
 import type { CexplorerNftsData } from "@/types/userTypes";
 import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
-import { formatString, formatTimeIn } from "@/utils/format/format";
+import { formatString, formatTimeIn } from "@vellumlabs/cexplorer-sdk";
 import type { FileRoutesByPath } from "@tanstack/react-router";
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { Star, X, Zap, Wallet } from "lucide-react";
@@ -334,13 +334,13 @@ export const ProfilePro = () => {
         <div className='flex min-h-minHeight w-full flex-col'>
           <EmptyState
             icon={<Wallet size={24} />}
-            primaryText="Wallet not connected."
-            secondaryText="Connect your wallet to access your Cexplorer PRO features and manage your NFTs."
+            primaryText='Wallet not connected.'
+            secondaryText='Connect your wallet to access your Cexplorer PRO features and manage your NFTs.'
             button={
               <Button
-                label="Connect wallet"
-                variant="primary"
-                size="md"
+                label='Connect wallet'
+                variant='primary'
+                size='md'
                 onClick={() => setShowConnectModal(true)}
               />
             }
@@ -525,13 +525,13 @@ export const ProfilePro = () => {
             <EmptyState
               icon={<Zap size={24} />}
               primaryText="You don't own any Cexplorer PRO NFTs yet."
-              secondaryText="Get one to unlock PRO features like boosting, API, governance votes, and more."
+              secondaryText='Get one to unlock PRO features like boosting, API, governance votes, and more.'
               button={
                 <Button
-                  label="Get Cexplorer PRO NFT"
-                  variant="purple"
-                  size="md"
-                  href="/pro"
+                  label='Get Cexplorer PRO NFT'
+                  variant='purple'
+                  size='md'
+                  href='/pro'
                 />
               }
             />

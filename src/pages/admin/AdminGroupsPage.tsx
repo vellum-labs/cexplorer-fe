@@ -1,13 +1,13 @@
-import Button from "@/components/global/Button";
-import TextInput from "@/components/global/inputs/TextInput";
+import { Button } from "@vellumlabs/cexplorer-sdk";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import Modal from "@/components/global/Modal";
 import SpinningLoader from "@/components/global/SpinningLoader";
 import GlobalTable from "@/components/table/GlobalTable";
 import {
-  Breadcrumb,
+  BreadcrumbRaw,
   BreadcrumbItem,
   BreadcrumbList,
-} from "@/components/ui/breadcrumb";
+} from "@vellumlabs/cexplorer-sdk";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { createAdminGroup, useFetchAdminGroups } from "@/services/user";
 import type { TableColumns } from "@/types/tableTypes";
@@ -97,7 +97,7 @@ export const AdminGroupsPage = () => {
       )}
       <main className='flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col items-center justify-center'>
-          <Breadcrumb className='mb-2 w-full'>
+          <BreadcrumbRaw className='mb-2 w-full'>
             <BreadcrumbList className='flex items-center'>
               <BreadcrumbItem>
                 <Link className='underline underline-offset-2' to='/'>
@@ -115,7 +115,7 @@ export const AdminGroupsPage = () => {
                 Admin groups
               </BreadcrumbItem>
             </BreadcrumbList>
-          </Breadcrumb>
+          </BreadcrumbRaw>
           {query.isLoading ? (
             <div className='mt-4 flex w-full justify-center'>
               <SpinningLoader />

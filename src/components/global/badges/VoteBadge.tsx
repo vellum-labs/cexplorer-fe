@@ -1,5 +1,5 @@
 import { ChevronUp, ChevronDown, Minus } from "lucide-react";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import type { Vote } from "@/constants/votes";
 import { VOTE_OPTIONS } from "@/constants/votes";
 

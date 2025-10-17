@@ -1,7 +1,7 @@
 import type { TxDetailData } from "@/types/txTypes";
 import { useEffect, useState } from "react";
 import AssetLink from "../asset/AssetLink";
-import { AdaWithTooltip } from "../global/AdaWithTooltip";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { AddressWithTxBadges } from "./AddressWithTxBadges";
 import { filterUtxoBySearch } from "@/utils/tx/filterUtxoBySearch";
 
@@ -63,9 +63,9 @@ const TxContentTable = ({
 
   return (
     <section className='m-0 flex h-full w-full flex-col rounded-l border border-border shadow-md'>
-      <div className='rounded-tl-l rounded-tr-l text-text-sm flex w-full justify-between border-b border-border bg-darker px-2 py-1 font-medium text-grayTextPrimary'>
+      <div className='flex w-full justify-between rounded-tl-l rounded-tr-l border-b border-border bg-darker px-2 py-1 text-text-sm font-medium text-grayTextPrimary'>
         <span>{title}</span>
-        <span className='text-text-sm font-regular text-right text-grayTextPrimary'>
+        <span className='text-right text-text-sm font-regular text-grayTextPrimary'>
           Total: <AdaWithTooltip data={totalAda ?? 0} />
         </span>
       </div>
@@ -92,7 +92,7 @@ const TxContentTable = ({
                   asset={utxo.asset}
                 />
               )}
-              <div className='gap-1/2 flex w-full flex-wrap'>
+              <div className='flex w-full flex-wrap gap-1/2'>
                 {utxo?.asset &&
                   utxo.asset.length > 0 &&
                   utxo?.asset?.map((asset, index) => (
@@ -104,7 +104,7 @@ const TxContentTable = ({
                   ))}
               </div>
             </div>
-            <span className='text-text-sm inline-block w-fit text-nowrap'>
+            <span className='inline-block w-fit text-nowrap text-text-sm'>
               <AdaWithTooltip
                 data={utxo.value}
                 triggerClassName={

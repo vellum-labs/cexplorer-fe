@@ -2,7 +2,7 @@ import type { FC } from "react";
 import ReactECharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { CircleHelp } from "lucide-react";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
 interface CCThresholdChartProps {
   chartProps: {

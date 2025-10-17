@@ -10,12 +10,15 @@ import { Link, useSearch } from "@tanstack/react-router";
 import { useFetchDeFiTokenList } from "@/services/token";
 import { useEffect, useState } from "react";
 
-import { formatNumberWithSuffix, formatString } from "@/utils/format/format";
+import {
+  formatNumberWithSuffix,
+  formatString,
+} from "@vellumlabs/cexplorer-sdk";
 import { tokenDashboardListTableOptions } from "@/constants/tables/tokenDashboardListTableOptions";
 import { useTokenDashboardListTableStore } from "@/stores/tables/tokenDashboardListTableStore";
 import { currencySigns } from "@/constants/currencies";
-import { AdaWithTooltip } from "@/components/global/AdaWithTooltip";
-import DateCell from "@/components/table/DateCell";
+import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
 import { TitleSort } from "@/components/table/TitleSort";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
@@ -24,7 +27,7 @@ import { adaHandlePolicy } from "@/constants/confVariables";
 import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import AdaHandleBadge from "@/components/global/badges/AdaHandleBadge";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
-import Copy from "@/components/global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@/components/global/Image";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { alphabetWithNumbers } from "@/constants/alphabet";

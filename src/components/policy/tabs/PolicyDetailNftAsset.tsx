@@ -6,7 +6,7 @@ import AssetCell from "@/components/asset/AssetCell";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import { ViewSwitch } from "@/components/global/ViewSwitch";
-import DateCell from "@/components/table/DateCell";
+import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 import { PolicyAssetGrid } from "../PolicyAssetGrid";
 import { PolicyCell } from "../PolicyCell";
@@ -20,7 +20,7 @@ import { useEffect, useState } from "react";
 import { assetListTableOptionsWithoutType } from "@/constants/tables/assetListTableOptions";
 
 import { useViewStore } from "@/stores/viewStore";
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 
 interface PolicyDetailNftAssetProps {

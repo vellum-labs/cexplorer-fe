@@ -1,7 +1,11 @@
-import { useFetchUserInfo, useUserLabels, updateUserLabels } from "@/services/user";
+import {
+  useFetchUserInfo,
+  useUserLabels,
+  updateUserLabels,
+} from "@/services/user";
 import { useAddressLabelStore } from "@/stores/addressLabelStore";
 import { useCustomLabelModalState } from "@/stores/states/customLabelModalState";
-import { formatString } from "@/utils/format/format";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 import type { FileRoutesByPath } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import {
@@ -12,7 +16,7 @@ import {
   Wallet,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import Button from "../global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import { EmptyState } from "../global/EmptyState";
 import ConnectWalletModal from "../wallet/ConnectWalletModal";
 import { useAuthToken } from "@/hooks/useAuthToken";
@@ -24,7 +28,7 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import type { AddressLabel } from "@/types/commonTypes";
 
 export const CustomLabels = () => {
@@ -32,7 +36,13 @@ export const CustomLabels = () => {
   const { data } = useFetchUserInfo();
   const proNfts = data?.data.membership.nfts || 0;
   const userAddress = data?.data.address;
-  const { labels, setLabels, updateHistoryLabels, getLabelsForWallet, mergeApiLabels } = useAddressLabelStore();
+  const {
+    labels,
+    setLabels,
+    updateHistoryLabels,
+    getLabelsForWallet,
+    mergeApiLabels,
+  } = useAddressLabelStore();
   const { setIsOpen, setAddressToEdit } = useCustomLabelModalState();
   const [currentPage, setCurrentPage] = useState(1);
   const [showConnectModal, setShowConnectModal] = useState(false);
@@ -63,7 +73,7 @@ export const CustomLabels = () => {
       try {
         const formattedLabels = labelsToSync.map(l => ({
           ident: l.ident,
-          label: l.label
+          label: l.label,
         }));
         await updateUserLabels(token, formattedLabels);
       } catch (error) {
@@ -74,10 +84,12 @@ export const CustomLabels = () => {
 
   useEffect(() => {
     if (token && apiLabelsData?.data?.labels) {
-      const apiLabels: AddressLabel[] = apiLabelsData.data.labels.map(l => ({
-        ident: l.ident || l.address || "",
-        label: l.label || ""
-      })).filter(l => l.ident && l.label);
+      const apiLabels: AddressLabel[] = apiLabelsData.data.labels
+        .map(l => ({
+          ident: l.ident || l.address || "",
+          label: l.label || "",
+        }))
+        .filter(l => l.ident && l.label);
 
       mergeApiLabels(apiLabels, userAddress || null);
       const mergedLabels = getLabelsForWallet(userAddress || null);
@@ -89,7 +101,14 @@ export const CustomLabels = () => {
       const emptyLabels = getLabelsForWallet(null);
       setLabels(emptyLabels);
     }
-  }, [token, userAddress, apiLabelsData, mergeApiLabels, getLabelsForWallet, setLabels]);
+  }, [
+    token,
+    userAddress,
+    apiLabelsData,
+    mergeApiLabels,
+    getLabelsForWallet,
+    setLabels,
+  ]);
 
   useEffect(() => {
     updateHistoryLabels(token ? userAddress || null : null, labels);

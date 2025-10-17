@@ -1,4 +1,4 @@
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import {
   Accordion,
   AccordionContent,
@@ -221,7 +221,9 @@ export const ApiInfoPage = () => {
               className='border-b border-border'
             >
               <AccordionTrigger className='AccordionTrigger w-full py-3 text-left'>
-                <span className='text-text-md font-medium'>{item.question}</span>
+                <span className='text-text-md font-medium'>
+                  {item.question}
+                </span>
               </AccordionTrigger>
               <AccordionContent>
                 <div className='flex flex-col pb-1.5 text-left text-grayTextPrimary'>

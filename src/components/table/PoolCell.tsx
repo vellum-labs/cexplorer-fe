@@ -1,12 +1,12 @@
 import type { PoolInfo } from "@/types/poolTypes";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { Link } from "@tanstack/react-router";
-import Copy from "../global/Copy";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "../global/Image";
-import { formatString } from "@/utils/format/format";
 import { CircleEllipsis } from "lucide-react";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { buildSocialIcons } from "@/utils/buildSocialIcons";
+import { formatString } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   poolInfo: PoolInfo;
@@ -45,7 +45,7 @@ const PoolCell = ({
           key={poolInfo.id}
           src={generateImageUrl(id, "ico", "pool")}
           type='pool'
-          className='rounded-max h-8 w-8'
+          className='h-8 w-8 rounded-max'
           height={32}
           width={32}
         />

@@ -6,7 +6,7 @@ import metadata from "../../../../conf/metadata/en-metadata.json";
 import { PlusIcon, X } from "lucide-react";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
 import { DisplayVoteModal } from "@/components/global/modals/DisplayVoteModal";
@@ -14,12 +14,12 @@ import { DisplayVoteModal } from "@/components/global/modals/DisplayVoteModal";
 import { drepListTableOptions } from "@/constants/tables/drepListTableOptions";
 
 import { WatchlistFilter } from "@/components/global/watchlist/WatchlistFilter";
-import { formatNumber, formatString } from "@/utils/format/format";
+import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 
 import { useDrepList } from "@/hooks/tables/useDrepList";
 import { useDrepListTableStore } from "@/stores/tables/drepListTableStore";
 import { useSearch } from "@tanstack/react-router";
-import Button from "@/components/global/Button";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 
 export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
   const { page, sort, order } = useSearch({

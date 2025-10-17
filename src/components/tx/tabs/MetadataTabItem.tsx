@@ -1,6 +1,6 @@
 import ConstLabelBadge from "@/components/global/badges/ConstLabelBadge";
 import { JsonDisplay } from "@/components/global/JsonDisplay";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { useFetchTxDetail } from "@/services/tx";
 import type { TxMetadata } from "@/types/txTypes";
 import { getRouteApi } from "@tanstack/react-router";

@@ -6,7 +6,7 @@ import { Box } from "lucide-react";
 import { AnalyticsStatList } from "../../AnalyticsStatList";
 import { NetworkHealthGraph } from "../graphs/NetworkHealthGraph";
 
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchMiscBasic } from "@/services/misc";
 import { useFetchEpochAnalytics } from "@/services/analytics";

@@ -3,7 +3,7 @@ import type { FC } from "react";
 
 import GlobalTable from "@/components/table/GlobalTable";
 
-import { formatNumber } from "@/utils/format/format";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 interface NetworkBlockVersionsTableProps {
   epochQuery: ReturnType<typeof useFetchEpochAnalytics>;

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@vellumlabs/cexplorer-sdk";
 
 const Table = React.forwardRef<
   HTMLTableElement,
@@ -76,7 +76,7 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      "text-grayTextPrimary h-12 px-2 text-left align-middle font-medium [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+      "h-12 px-2 text-left align-middle font-medium text-grayTextPrimary [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
       className,
     )}
     {...props}
@@ -91,7 +91,7 @@ const TableCell = React.forwardRef<
   <td
     ref={ref}
     className={cn(
-      "text-grayTextPrimary [&>p]:text-grayTextPrimary box-border h-[55px] max-h-[55px] min-h-[55px] grow-0 px-2 py-1 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+      "box-border h-[55px] max-h-[55px] min-h-[55px] grow-0 px-2 py-1 align-middle text-grayTextPrimary [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] [&>p]:text-grayTextPrimary",
       className,
     )}
     {...props}
@@ -105,7 +105,10 @@ const TableCaption = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <caption
     ref={ref}
-    className={cn("mt-2 text-text-sm text-slate-500 dark:text-slate-400", className)}
+    className={cn(
+      "mt-2 text-text-sm text-slate-500 dark:text-slate-400",
+      className,
+    )}
     {...props}
   />
 ));

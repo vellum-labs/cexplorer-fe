@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from "react";
 import { CircleHelp } from "lucide-react";
-import { Tooltip } from "../../ui/tooltip";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
 type OverviewListItem =
   | {
