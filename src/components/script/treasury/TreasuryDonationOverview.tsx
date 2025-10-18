@@ -1,7 +1,7 @@
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import { TrendingArrow } from "@/components/global/TrendingArrow";
+import { TrendingArrow } from "@vellumlabs/cexplorer-sdk";
 import { colors } from "@/constants/colors";
 import type { TreasuryDonationStatsResponse } from "@/types/treasuryTypes";
 import type { UseQueryResult } from "@tanstack/react-query";
