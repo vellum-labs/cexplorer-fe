@@ -6,7 +6,7 @@ import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import SortBy from "@/components/ui/sortBy";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useFetchAssetExchangesGraph } from "@/services/assets";
-import { Loading } from "@/components/global/Loading";
+import { Loading } from "@vellumlabs/cexplorer-sdk";
 
 import { format } from "date-fns";
 
