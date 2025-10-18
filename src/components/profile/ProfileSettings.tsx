@@ -4,7 +4,7 @@ import { Button } from "@vellumlabs/cexplorer-sdk";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import { Switch } from "@/components/global/Switch";
 import { ProfileForm } from "@/components/settings/ProfileForm";
-import { EmptyState } from "@/components/global/EmptyState";
+import { EmptyState } from "@vellumlabs/cexplorer-sdk";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 
 import { useAuthToken } from "@/hooks/useAuthToken";

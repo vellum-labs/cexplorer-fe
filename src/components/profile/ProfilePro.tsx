@@ -1,7 +1,7 @@
 import AssetCell from "@/components/asset/AssetCell";
 import { Badge } from "@/components/global/badges/Badge";
 import { Button } from "@vellumlabs/cexplorer-sdk";
-import { EmptyState } from "@/components/global/EmptyState";
+import { EmptyState } from "@vellumlabs/cexplorer-sdk";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import Modal from "@/components/global/Modal";
