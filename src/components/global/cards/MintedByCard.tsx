@@ -9,7 +9,9 @@ import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { Link } from "@tanstack/react-router";
 import { Image } from "../Image";
-import { ProtocolDot } from "../ProtocolDot";
+import { ProtocolDot } from "@vellumlabs/cexplorer-sdk";
+import { useFetchMiscBasic } from "@/services/misc";
+import { useMiscConst } from "@/hooks/useMiscConst";
 
 interface BlockDetailMintedProps {
   icon?: string;
@@ -28,6 +30,9 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
   poolInfo,
   isGenesisBlock = false,
 }) => {
+  const { data: basicData } = useFetchMiscBasic();
+  const miscData = useMiscConst(basicData?.data.version.const);
+
   return (
     <div className='flex max-h-[110px] min-h-[110px] w-full flex-col gap-1/2 rounded-l border border-border bg-cardBg px-2 py-1.5 shadow-md'>
       <div className='flex w-full items-center gap-1'>
@@ -71,7 +76,10 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
           {protoMajor && (
             <span className='flex items-center gap-1 text-text-sm text-grayTextPrimary'>
               Protocol version
-              <ProtocolDot protNo={Number(`${protoMajor}.${protoMinor}`)} />
+              <ProtocolDot
+                miscData={miscData}
+                protNo={Number(`${protoMajor}.${protoMinor}`)}
+              />
               {protoMajor}
               {protoMinor ? `.${protoMinor}` : ""}, VRF Key
             </span>

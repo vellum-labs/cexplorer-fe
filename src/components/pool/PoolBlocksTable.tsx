@@ -11,7 +11,9 @@ import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "../table/ExportButton";
 import GlobalTable from "../table/GlobalTable";
 import { SizeCell } from "../table/SizeCell";
-import { ProtocolDot } from "../global/ProtocolDot";
+import { ProtocolDot } from "@vellumlabs/cexplorer-sdk";
+import { useFetchMiscBasic } from "@/services/misc";
+import { useMiscConst } from "@/hooks/useMiscConst";
 
 interface Props {
   poolId: string;
@@ -29,6 +31,9 @@ const PoolBlocksTable = ({ poolId }: Props) => {
     setRows,
   } = usePoolBlocksTableStore();
   const [totalItems, setTotalItems] = useState(0);
+
+  const { data: basicData } = useFetchMiscBasic();
+  const miscData = useMiscConst(basicData?.data.version.const);
 
   const poolBlocksQuery = useFetchBlocksList(
     rows,
@@ -155,6 +160,7 @@ const PoolBlocksTable = ({ poolId }: Props) => {
         <div className='flex items-center justify-end gap-1'>
           <ProtocolDot
             protNo={Number(`${item.proto_major}.${item.proto_minor}`)}
+            miscData={miscData}
           />
           <p className='text-right'>{`${item.proto_major}.${item.proto_minor}`}</p>
         </div>
