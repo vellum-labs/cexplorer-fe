@@ -17,7 +17,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
-import { ActionTypes } from "../global/ActionTypes";
+import { ActionTypes } from "@vellumlabs/cexplorer-sdk";
 import { determineApproval } from "@/utils/determineApproval";
 import {
   shouldDRepVote,

@@ -2,7 +2,7 @@ import type { useFetchGovernanceActionDetail } from "@/services/governance";
 import type { FC } from "react";
 
 import { AddressInspectorRow } from "@/components/address/AddressInspectorRow";
-import { ActionTypes } from "@/components/global/ActionTypes";
+import { ActionTypes } from "@vellumlabs/cexplorer-sdk";
 import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
 
 import ReactMarkdown from "react-markdown";

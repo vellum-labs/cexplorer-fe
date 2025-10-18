@@ -13,7 +13,7 @@ import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 import { Image } from "@/components/global/Image";
 import { Link } from "@tanstack/react-router";
 import { X } from "lucide-react";
-import { ActionTypes } from "@/components/global/ActionTypes";
+import { ActionTypes } from "@vellumlabs/cexplorer-sdk";
 import { useFilterTable } from "@/hooks/tables/useFilterTable";
 import { isHex } from "@/utils/isHex";
 import { Copy } from "@vellumlabs/cexplorer-sdk";

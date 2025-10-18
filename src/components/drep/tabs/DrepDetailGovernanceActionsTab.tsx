@@ -5,7 +5,7 @@ import type {
 } from "@/types/tableTypes";
 import type { FC } from "react";
 
-import { ActionTypes } from "@/components/global/ActionTypes";
+import { ActionTypes } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 
@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { GovActionCell } from "@/components/gov/GovActionCell";
 import { HashCell } from "@/components/tx/HashCell";
-import { Vote } from "@/constants/votes";
+import type { Vote } from "@/constants/votes";
 import { VoteCell } from "@/components/governance/vote/VoteCell";
 
 export const DrepDetailGovernanceActionsTab: FC = () => {
