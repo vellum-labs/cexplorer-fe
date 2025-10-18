@@ -3,7 +3,7 @@ import AdsCarousel from "@/components/global/ads/AdsCarousel";
 import { HeaderBanner } from "@/components/global/HeaderBanner";
 import { Image } from "@/components/global/Image";
 import { NoResultsFound } from "@/components/global/NoResultsFound";
-import { Pagination } from "@/components/global/Pagination";
+import { Pagination } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
 import { articleCategories } from "@/constants/article";

@@ -17,7 +17,7 @@ import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import { blocksDetailTableOptions } from "@/constants/tables/blocksDetailTableOptions";
 import type { UseQueryResult } from "@tanstack/react-query";
-import { Pagination } from "@/components/global/Pagination";
+import { Pagination } from "@vellumlabs/cexplorer-sdk";
 import { useState, useMemo } from "react";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 

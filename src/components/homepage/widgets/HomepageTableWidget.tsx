@@ -20,9 +20,9 @@ import { useClickOutsideGroup } from "@/hooks/useClickOutsideGroup";
 
 import { memo } from "react";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import { Pagination } from "@/components/global/Pagination";
+import { Pagination } from "@vellumlabs/cexplorer-sdk";
 import { paginateArray } from "@/utils/paginateArray";
-import { PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { PaginationNext, PaginationPrevious } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Loading } from "@vellumlabs/cexplorer-sdk";
 

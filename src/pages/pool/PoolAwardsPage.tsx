@@ -7,14 +7,14 @@ import { useFetchGlobalPoolAwards } from "@/services/pools";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import {
-  Pagination,
+  PaginationComponent,
   PaginationContent,
   PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination";
+} from "@vellumlabs/cexplorer-sdk";
 import Image0 from "@/resources/images/awards/0.svg";
 import Image1 from "@/resources/images/awards/1.svg";
 import Image10 from "@/resources/images/awards/10.svg";
@@ -257,7 +257,7 @@ export const PoolAwardsPage: FC = () => {
               ))}
         </div>
       </section>
-      <Pagination className='my-2'>
+      <PaginationComponent className='my-2'>
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious
@@ -329,7 +329,7 @@ export const PoolAwardsPage: FC = () => {
             />
           </PaginationItem>
         </PaginationContent>
-      </Pagination>
+      </PaginationComponent>
     </PageBase>
   );
 };
