@@ -4,7 +4,7 @@ import { Badge } from "@/components/global/badges/Badge";
 import { Check, Filter } from "lucide-react";
 import { getPledgeColor } from "@/utils/getPledgeColor";
 import { cn } from "@vellumlabs/cexplorer-sdk";
-import { SortArrow } from "@/components/global/SortArrow";
+import { SortArrow } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import type { GroupsListData } from "@/types/analyticsTypes";
 import type { TableColumns } from "@/types/tableTypes";

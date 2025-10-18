@@ -5,7 +5,7 @@ import type { Dispatch, RefObject, SetStateAction } from "react";
 
 import { Check, Filter, X } from "lucide-react";
 
-import { SortArrow } from "@/components/global/SortArrow";
+import { SortArrow } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchPoolsList } from "@/services/pools";

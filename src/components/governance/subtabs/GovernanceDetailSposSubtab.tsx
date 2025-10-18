@@ -14,7 +14,7 @@ import { useGovActionDetailSposTableStore } from "@/stores/tables/governanceDeta
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { governanceActionDetailDrepSposTableOptions } from "@/constants/tables/governanceActionDetailAboutTableOptions";
 import { getColumnsSortOrder } from "@/utils/getColumnsSortOrder";
-import { SortArrow } from "@/components/global/SortArrow";
+import { SortArrow } from "@vellumlabs/cexplorer-sdk";
 import { GovVoterCell } from "@/components/gov/GovVoterCell";
 
 interface GovernanceDetailSposSubtabProps {

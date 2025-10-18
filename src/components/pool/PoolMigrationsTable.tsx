@@ -9,7 +9,7 @@ import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { MinMaxRange } from "../global/MinMaxRange";
-import { SortArrow } from "../global/SortArrow";
+import { SortArrow } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "../table/GlobalTable";
 import PoolCell from "../table/PoolCell";
