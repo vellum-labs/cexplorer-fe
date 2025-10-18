@@ -24,7 +24,7 @@ import { Pagination } from "@/components/global/Pagination";
 import { paginateArray } from "@/utils/paginateArray";
 import { PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Button } from "@vellumlabs/cexplorer-sdk";
-import { Loading } from "@/components/global/Loading";
+import { Loading } from "@vellumlabs/cexplorer-sdk";
 
 interface HomepageTableWidgetProps {
   rowHeight?: number;
