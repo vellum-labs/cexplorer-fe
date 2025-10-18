@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { useState } from "react";
 import type { LucidEvolution } from "@lucid-evolution/lucid";
-import Modal from "@/components/global/Modal";
+import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { RangeSlider } from "@/components/global/inputs/RangeSlider";

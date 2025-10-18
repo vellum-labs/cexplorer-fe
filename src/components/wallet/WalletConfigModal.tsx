@@ -9,7 +9,7 @@ import { useWalletStore } from "@/stores/walletStore";
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 import { useRef } from "react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
-import Modal from "../global/Modal";
+import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
 const date = new Date();

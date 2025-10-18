@@ -1,6 +1,5 @@
 import { Button } from "@vellumlabs/cexplorer-sdk";
-import Modal from "../Modal";
-
+import { Modal } from "@vellumlabs/cexplorer-sdk";
 export const SafetyLinkModal = ({ url, onClose }) => {
   return (
     <Modal

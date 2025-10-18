@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import Modal from "../global/Modal";
+import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { Plus, X } from "lucide-react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { HomepageModalWidget } from "./widgets/HomepageModalWidget";

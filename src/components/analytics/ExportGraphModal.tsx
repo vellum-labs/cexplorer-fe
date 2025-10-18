@@ -1,7 +1,7 @@
 import type { FC } from "react";
 
 import { Download } from "lucide-react";
-import Modal from "../global/Modal";
+import { Modal } from "@vellumlabs/cexplorer-sdk";
 
 import { useState } from "react";
 
@@ -48,7 +48,7 @@ export const ExportGraphModal: FC<ExportGraphModalProps> = ({
             />
             <div className='flex h-full flex-col'>
               <span className='text-text-sm font-medium'>CSV</span>
-              <span className='text-grayTextPrimary text-text-sm'>
+              <span className='text-text-sm text-grayTextPrimary'>
                 Great for easy viewing in spreadsheet tools.
               </span>
             </div>
@@ -63,7 +63,7 @@ export const ExportGraphModal: FC<ExportGraphModalProps> = ({
             />
             <div className='flex h-full flex-col'>
               <span className='text-text-sm font-medium'>PNG</span>
-              <span className='text-grayTextPrimary text-text-sm'>
+              <span className='text-text-sm text-grayTextPrimary'>
                 Ideal for sharing high-quality images with lossless compression.
               </span>
             </div>

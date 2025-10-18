@@ -1,6 +1,6 @@
 import { Badge } from "@/components/global/badges/Badge";
 import { Button } from "@vellumlabs/cexplorer-sdk";
-import Modal from "@/components/global/Modal";
+import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import Tabs from "@/components/global/Tabs";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";

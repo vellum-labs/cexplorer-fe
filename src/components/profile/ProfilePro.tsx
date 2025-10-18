@@ -4,7 +4,7 @@ import { Button } from "@vellumlabs/cexplorer-sdk";
 import { EmptyState } from "@vellumlabs/cexplorer-sdk";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
-import Modal from "@/components/global/Modal";
+import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { WatchlistStar } from "@/components/global/watchlist/WatchlistStar";
 import GlobalTable from "@/components/table/GlobalTable";

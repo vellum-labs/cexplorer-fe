@@ -6,7 +6,7 @@ import { useWatchlistStore } from "@/stores/watchlistStore";
 import { Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
-import Modal from "../Modal";
+import { Modal } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   ident: string | undefined;

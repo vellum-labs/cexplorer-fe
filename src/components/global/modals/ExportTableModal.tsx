@@ -2,7 +2,7 @@ import type { TableColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
 import { Download } from "lucide-react";
-import Modal from "../Modal";
+import { Modal } from "@vellumlabs/cexplorer-sdk";
 
 import { useState } from "react";
 
@@ -70,7 +70,7 @@ export const ExportTableModal: FC<ExportTableModalProps> = ({
             />
             <div className='flex h-full flex-col'>
               <span className='text-text-sm font-medium'>CSV</span>
-              <span className='text-grayTextPrimary text-text-sm'>
+              <span className='text-text-sm text-grayTextPrimary'>
                 Great for easy viewing in spreadsheet tools.
               </span>
             </div>
@@ -85,7 +85,7 @@ export const ExportTableModal: FC<ExportTableModalProps> = ({
             />
             <div className='flex h-full flex-col'>
               <span className='text-text-sm font-medium'>JSON</span>
-              <span className='text-grayTextPrimary text-text-sm'>
+              <span className='text-text-sm text-grayTextPrimary'>
                 Best for structured data and app integration.
               </span>
             </div>

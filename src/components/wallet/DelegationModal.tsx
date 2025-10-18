@@ -4,7 +4,7 @@ import { useFetchUserInfo } from "@/services/user";
 import { useWalletStore } from "@/stores/walletStore";
 import { handleDelegation } from "@/utils/wallet/handleDelegation";
 import { Button } from "@vellumlabs/cexplorer-sdk";
-import Modal from "../global/Modal";
+import { Modal } from "@vellumlabs/cexplorer-sdk";
 import SpinningLoader from "../global/SpinningLoader";
 
 interface Props {

@@ -1,7 +1,6 @@
 import type { MiscSearch } from "@/types/miscTypes";
 import type { FC } from "react";
-
-import Modal from "../Modal";
+import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 
