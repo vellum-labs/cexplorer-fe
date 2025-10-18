@@ -3,7 +3,7 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { GroupsCharts } from "@/components/groups/GroupsCharts";
 import { GroupsTable } from "@/components/groups/GroupsTable";
 import { HeaderBanner } from "@/components/global/HeaderBanner";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { useFetchGroupsList } from "@/services/analytics";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
@@ -158,7 +158,7 @@ export const GroupsListPage = () => {
           breadcrumbItems={[{ label: "Groups" }]}
         />
         <div className='flex w-full max-w-desktop flex-col items-center justify-center gap-1 p-mobile md:p-desktop'>
-          <div className='rounded-m mb-2 w-full border border-border bg-cardBg p-2'>
+          <div className='mb-2 w-full rounded-m border border-border bg-cardBg p-2'>
             <p className='text-text-sm text-grayTextPrimary'>
               This dashboard is managed by Cardano community. Everyone can add
               or modify existing groups via{" "}
@@ -198,13 +198,13 @@ export const GroupsListPage = () => {
               />
             </div>
             {hasFilter && (
-              <div className='gap-1/2 mb-1 flex w-full flex-wrap items-center md:flex-nowrap'>
+              <div className='mb-1 flex w-full flex-wrap items-center gap-1/2 md:flex-nowrap'>
                 {Object.entries(filter).map(
                   ([key, value]) =>
                     value && (
                       <div
                         key={key}
-                        className='gap-1/2 rounded-m py-1/4 text-text-xs flex w-fit items-center border border-border bg-darker px-1 text-grayTextPrimary'
+                        className='flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
                       >
                         <span>{key === "has_drep" && "Also DRep"}:</span>
                         <span>

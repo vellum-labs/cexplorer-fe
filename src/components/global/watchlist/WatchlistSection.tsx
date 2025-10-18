@@ -2,7 +2,7 @@ import { jamUrl } from "@/constants/confVariables";
 import { ShoppingBasket } from "lucide-react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { ShareButton } from "@vellumlabs/cexplorer-sdk";
-import LoadingSkeleton from "../skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { WatchlistStar } from "./WatchlistStar";
 import type { useFetchPoolDetail } from "@/services/pools";
 import type { useFetchDrepDetail } from "@/services/drep";

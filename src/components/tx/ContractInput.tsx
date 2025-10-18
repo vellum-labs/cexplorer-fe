@@ -8,7 +8,7 @@ import { Link } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { JsonDisplay } from "../global/JsonDisplay";
 import ConstLabelBadge from "../global/badges/ConstLabelBadge";
-import { TextDisplay } from "../global/TextDisplay";
+import { TextDisplay } from "@vellumlabs/cexplorer-sdk";
 import { ChevronDown, ChevronRight } from "lucide-react";
 
 interface ContractInputProps {
