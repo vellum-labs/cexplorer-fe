@@ -13,7 +13,7 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 import { AnalyticsGraph } from "../analytics/AnalyticsGraph";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
-import { Switch } from "@/components/global/Switch";
+import { Switch } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { Info } from "lucide-react";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
