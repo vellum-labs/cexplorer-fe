@@ -2,7 +2,7 @@ import type { DrepListData, DrepListOrder } from "@/types/drepTypes";
 import type { DrepListTableColumns, TableColumns } from "@/types/tableTypes";
 import type { Dispatch, SetStateAction } from "react";
 
-import PulseDot from "@/components/global/PulseDot";
+import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { MetadataCell } from "@/components/metadata/MetadataCell";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 

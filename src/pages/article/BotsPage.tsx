@@ -6,7 +6,7 @@ import Discord from "@/resources/images/icons/discord.svg";
 import Telegram from "@/resources/images/icons/telegram.svg";
 import X from "@/resources/images/icons/twitter.svg";
 
-import PulseDot from "@/components/global/PulseDot";
+import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { useFetchArticleDetail } from "@/services/article";
 import { webUrl } from "@/constants/confVariables";
 // import parse from "html-react-parser";

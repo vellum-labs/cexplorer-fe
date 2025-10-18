@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Badge } from "../global/badges/Badge";
 import TableSettingsDropdown from "../global/dropdowns/TableSettingsDropdown";
-import PulseDot from "../global/PulseDot";
+import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "../table/ExportButton";
 import GlobalTable from "../table/GlobalTable";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";

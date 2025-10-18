@@ -12,7 +12,7 @@ import { Link } from "@tanstack/react-router";
 import { Code2, KeyRound } from "lucide-react";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
-import PulseDot from "../global/PulseDot";
+import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   address: string;

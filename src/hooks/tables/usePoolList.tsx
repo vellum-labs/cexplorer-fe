@@ -29,7 +29,7 @@ import { getEpochColor } from "@/utils/getEpochColor";
 import { getPledgeColor } from "@/utils/getPledgeColor";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { poolRewardsRoaDiff } from "@/utils/poolRewardsRoaDiff";
-import PulseDot from "@/components/global/PulseDot";
+import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { useFilterTable } from "./useFilterTable";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { getGradientColor } from "@/utils/getGradientColor";

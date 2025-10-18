@@ -1,6 +1,6 @@
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
-import PulseDot from "./PulseDot";
+import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   protNo: number;

@@ -4,7 +4,7 @@ import type { DeFiOrder } from "@/types/tokenTypes";
 
 import { Check, Ellipsis, FileText, X } from "lucide-react";
 
-import PulseDot from "../global/PulseDot";
+import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "../table/ExportButton";
 import TableSettingsDropdown from "../global/dropdowns/TableSettingsDropdown";
 import GlobalTable from "../table/GlobalTable";
@@ -163,7 +163,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
             params={{
               hash: item?.tx_hash,
             }}
-            className={`text-text-sm block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-primary`}
+            className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-text-sm text-primary`}
           >
             {formatString(item?.tx_hash, "short")}
           </Link>
@@ -185,7 +185,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
 
         return (
           <div
-            className={`text-text-sm flex w-[50px] items-center justify-center rounded-s px-[6px] py-[2px] font-medium text-white ${isBuying ? "bg-greenText" : "bg-redText"}`}
+            className={`flex w-[50px] items-center justify-center rounded-s px-[6px] py-[2px] text-text-sm font-medium text-white ${isBuying ? "bg-greenText" : "bg-redText"}`}
           >
             {isBuying ? "Buy" : "Sell"}
           </div>
@@ -516,7 +516,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         const isCanceled = item.status === "CANCELLED";
 
         return (
-          <div className='gap-1/2 flex items-center'>
+          <div className='flex items-center gap-1/2'>
             <Link
               to='/dex/swap/$hash'
               params={{
@@ -526,7 +526,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
             >
               <FileText size={15} className='cursor-pointer text-primary' />
             </Link>
-            <p className='gap-1/2 text-text-sm flex items-center rounded-s border border-border px-1'>
+            <p className='flex items-center gap-1/2 rounded-s border border-border px-1 text-text-sm'>
               {isSuccess ? (
                 <Check className='text-greenText' size={15} />
               ) : isCanceled ? (
@@ -614,7 +614,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         return (
           <div className='flex items-center gap-1'>
             {item?.user?.balance && (
-              <Image src={Icon} className='rounded-max h-4 w-4' />
+              <Image src={Icon} className='h-4 w-4 rounded-max' />
             )}
             <div className='flex items-center gap-1'>
               <Link
@@ -622,7 +622,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                 params={{
                   address: item?.user?.address,
                 }}
-                className={`text-text-sm block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-primary`}
+                className={`block overflow-hidden overflow-ellipsis whitespace-nowrap px-0 text-text-sm text-primary`}
               >
                 {formatString(item?.user?.address, "short")}
               </Link>
@@ -684,7 +684,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           <div className='flex items-center justify-end'>
             <div className='relative'>
               <div
-                className='flex aspect-square h-6 w-6 items-center justify-center overflow-hidden rounded-full border'
+                className='rounded-full flex aspect-square h-6 w-6 items-center justify-center overflow-hidden border'
                 style={{
                   backgroundColor: dex.bgColor,
                   borderColor: dex.borderColor,
@@ -694,14 +694,14 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                 <Tooltip content={dex.label}>
                   <Image
                     src={dex.icon}
-                    className='rounded-max h-4 w-4'
+                    className='h-4 w-4 rounded-max'
                     alt={dex.label}
                   />
                 </Tooltip>
               </div>
               {item.is_dexhunter && (
                 <div
-                  className='absolute -bottom-0.5 -right-0.5 flex aspect-square h-3 w-3 items-center justify-center overflow-hidden rounded-full border'
+                  className='rounded-full absolute -bottom-0.5 -right-0.5 flex aspect-square h-3 w-3 items-center justify-center overflow-hidden border'
                   style={{
                     backgroundColor: dexhunterDex.bgColor,
                     borderColor: dexhunterDex.borderColor,
@@ -711,7 +711,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                   <Tooltip content={dexhunterDex.label}>
                     <Image
                       src={dexhunterDex.icon}
-                      className='rounded-max h-2 w-2'
+                      className='h-2 w-2 rounded-max'
                       alt={dexhunterDex.label}
                     />
                   </Tooltip>
@@ -761,8 +761,8 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
   ];
 
   return (
-    <div className='rounded-m flex w-full flex-col gap-1 sm:gap-0'>
-      <div className='gap-y-1/2 flex flex-wrap items-center justify-between pb-2'>
+    <div className='flex w-full flex-col gap-1 rounded-m sm:gap-0'>
+      <div className='flex flex-wrap items-center justify-between gap-y-1/2 pb-2'>
         <div className='flex items-center gap-1'>
           {pulseDot && <PulseDot />}
           <h2 className={titleClassname ? titleClassname : ""}>
@@ -786,13 +786,13 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         </div>
       </div>
       {hasFilter && (
-        <div className='gap-1/2 flex flex-wrap items-center md:flex-nowrap'>
+        <div className='flex flex-wrap items-center gap-1/2 md:flex-nowrap'>
           {Object.entries(filter).map(
             ([key, value]) =>
               value && (
                 <div
                   key={key}
-                  className='gap-1/2 rounded-m py-1/4 text-text-xs mb-1 flex w-fit items-center border border-border bg-darker px-1 text-grayTextPrimary'
+                  className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
                 >
                   <span>{key[0].toUpperCase() + key.slice(1)}:</span>
                   {key === "maker" && (
