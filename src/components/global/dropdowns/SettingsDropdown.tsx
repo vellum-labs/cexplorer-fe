@@ -15,7 +15,6 @@ import type { Locales } from "@/types/storeTypes";
 import {
   Check,
   ChevronDown,
-  ChevronsUpDown,
   ChevronUp,
   Moon,
   Settings,
@@ -24,12 +23,6 @@ import {
 import { Dropdown } from "@vellumlabs/cexplorer-sdk";
 import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
 import { useEffect, useRef, useState } from "react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Command } from "@/components/ui/command";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 
@@ -81,6 +74,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
       });
     }
   }, [currency]);
+  console.log("🚀 ~ SettingsDropdown ~ currency:", currency);
 
   const startScrolling = direction => {
     stopScrolling();
@@ -88,7 +82,6 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
       if (contentRef.current) {
         contentRef.current.scrollBy({
           top: direction === "up" ? -5 : 5,
-          // behavior: "smooth",
         });
       }
     }, 0);
@@ -100,6 +93,12 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
       scrollIntervalRef.current = null;
     }
   };
+
+  useEffect(() => {
+    if (!openCurrency) {
+      stopScrolling();
+    }
+  }, [openCurrency]);
 
   const handleCurrency = (value: any) => {
     setCurrency(value);
@@ -135,7 +134,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
               setLocale(value);
             }}
           >
-            <SelectTrigger className='w-[90px]'>
+            <SelectTrigger className='w-[95px]'>
               <SelectValue
                 placeholder={
                   <div className='flex w-full items-center justify-between gap-1/2 uppercase'>
@@ -172,40 +171,42 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
           className='flex items-center justify-between gap-1.5'
         >
           <span>Currency</span>
-          <Popover open={openCurrency} onOpenChange={setOpenCurrency}>
-            <PopoverTrigger asChild>
-              <Button
-                variant='tertiary'
-                size='md'
-                aria-expanded={openCurrency}
-                className='flex w-[95px] items-center justify-between'
-                label={
-                  <>
-                    <span className='text-text-xs'>
-                      {currencies[currency].value.toUpperCase()}
-                    </span>
-                    <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
-                  </>
+          <Select
+            onValueChange={value => {
+              if (value) {
+                handleCurrency(value);
+              }
+            }}
+          >
+            <SelectTrigger className='w-[95px]'>
+              <SelectValue
+                placeholder={
+                  <div className='flex w-full items-center justify-between gap-1/2 uppercase'>
+                    <span>{currency.toUpperCase()}</span>
+                  </div>
                 }
+                className='justify-end text-nowrap'
               />
-            </PopoverTrigger>
-            <PopoverContent className='w-[95px] border-b-0 p-0'>
-              <Command className=''>
+            </SelectTrigger>
+            <SelectContent
+              padding={false}
+              className='relative w-[90px] border-0 !p-0'
+            >
+              <Command className='fixed top-0 z-[110] h-[40px]'>
                 <TextInput
                   value={currencySearch}
                   onchange={value => setCurrencySearch(value)}
                   placeholder='Search'
-                  wrapperClassName=' mb-1'
-                  className='rounded-none'
+                  className='rounded-none border-none outline-none'
                   inputClassName='border-none outline-none'
                 />
               </Command>
               <div
                 ref={contentRef}
-                className='relative z-[9999] min-w-[90px] overflow-auto overscroll-contain bg-background text-text'
+                className='hide-scrollbar relative z-[100] max-h-[370px] w-[90px] overflow-auto overscroll-contain bg-background pt-7 text-text'
               >
                 <div
-                  className='fixed left-0 top-[40px] z-50 flex h-5 w-full items-center justify-center border-x border-t border-border bg-background'
+                  className='fixed top-10 z-50 flex h-5 w-full items-center justify-center border-t border-border bg-background'
                   onMouseEnter={() => startScrolling("up")}
                   onMouseLeave={stopScrolling}
                 >
@@ -221,31 +222,27 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                     )
                     .map(([key, value]) => {
                       return (
-                        <div
+                        <SelectItem
                           key={key}
                           className={`flex w-full cursor-pointer select-none items-center justify-between rounded-xs px-2 py-1.5 text-text-sm hover:bg-cardBg ${key === currency ? "bg-cardBg" : ""}`}
-                          onClick={() => {
-                            if (value) {
-                              handleCurrency((value as any).value);
-                            }
-                          }}
+                          value={(value as any).value.toUpperCase()}
                         >
                           <span>{(value as any).value.toUpperCase()}</span>
                           {key === currency && <Check size={15} />}
-                        </div>
+                        </SelectItem>
                       );
                     })}
                 </div>
                 <div
-                  className='ove fixed bottom-[-2px] left-0 z-50 flex h-6 w-full items-center justify-center rounded-b-m border-x border-b border-border bg-background'
+                  className='fixed bottom-[-2px] left-0 z-50 flex h-6 w-full items-center justify-center bg-background'
                   onMouseEnter={() => startScrolling("down")}
                   onMouseLeave={stopScrolling}
                 >
                   <ChevronDown size={15} className='h-full' />
                 </div>
               </div>
-            </PopoverContent>
-          </Popover>
+            </SelectContent>
+          </Select>
         </div>
       ),
       onClick: () => {},
