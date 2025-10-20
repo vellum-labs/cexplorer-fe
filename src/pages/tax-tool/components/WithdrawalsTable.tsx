@@ -70,12 +70,11 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
       adaUsd: number;
       adaSecondary: number;
     } => {
-      // Using current price as we don't have historical withdrawal rates
       const usdRate = adaUsdPrice.todayValue ?? 0;
       const secondaryRate =
         secondaryCurrency === "usd"
           ? usdRate
-          : adaSecondaryPrice.todayValue ?? 0;
+          : (adaSecondaryPrice.todayValue ?? 0);
       const usdValue = adaAmount * usdRate;
       const secondaryValue = adaAmount * secondaryRate;
 
@@ -120,7 +119,9 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
         visible: columnsVisibility.timestamp,
         widthPx: 180,
         render: item => (
-          <span className='text-text-sm'>{formatDateTime(item.block.time)}</span>
+          <span className='text-text-sm'>
+            {formatDateTime(item.block.time)}
+          </span>
         ),
       },
       {
@@ -181,8 +182,7 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
             {columnLabels.rewards_secondary}
           </div>
         ),
-        visible:
-          columnsVisibility.rewards_secondary && showSecondaryCurrency,
+        visible: columnsVisibility.rewards_secondary && showSecondaryCurrency,
         render: item => {
           const adaAmount = item.amount / 1_000_000;
           const values = calculateCurrencyValues(adaAmount);
@@ -229,8 +229,7 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
             </Tooltip>
           </div>
         ),
-        visible:
-          columnsVisibility.ada_secondary_rate && showSecondaryCurrency,
+        visible: columnsVisibility.ada_secondary_rate && showSecondaryCurrency,
         render: item => {
           const adaAmount = item.amount / 1_000_000;
           const values = calculateCurrencyValues(adaAmount);

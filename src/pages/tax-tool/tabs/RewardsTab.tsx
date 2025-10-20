@@ -33,32 +33,26 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
 
   const offset = (page - 1) * limit;
 
-  // Get current ADA price in secondary currency for conversions
   const adaPriceSecondary = useAdaPriceWithHistory(secondaryCurrency);
 
-  // Fetch all rewards for summary (first 1000 should be enough for recent months)
   const summaryQuery = useFetchAccountRewards(1000, 0, stakeKey);
 
-  // Fetch paginated rewards for table
   const paginatedQuery = useFetchAccountRewardsPaginated(
     limit,
     offset,
     stakeKey,
   );
 
-  // Get all rewards for summary
   const allRewards = useMemo(() => {
     if (!summaryQuery.data?.pages) return [];
     return summaryQuery.data.pages.flatMap(page => page.data || []);
   }, [summaryQuery.data]);
 
-  // Get paginated rewards for table
   const paginatedRewards = useMemo(() => {
     if (!paginatedQuery.data?.data) return [];
     return paginatedQuery.data.data;
   }, [paginatedQuery.data]);
 
-  // Helper function to extract ADA/USD rate
   const getAdaUsdRate = useCallback((reward: any): number => {
     if (
       !reward.spendable_epoch?.rate ||
@@ -79,14 +73,10 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
     return rateData.ada[0]?.close || 0;
   }, []);
 
-  // Get ADA rate in secondary currency (using current rate as fallback since historical fiat rates may not be available)
   const getAdaSecondaryRate = useCallback((): number => {
-    // Use current ADA price in the secondary currency
-    // Note: This is not historical, but the /account/reward endpoint doesn't return fiat rates
     return adaPriceSecondary.todayValue || 0;
   }, [adaPriceSecondary.todayValue]);
 
-  // Calculate summary for last 3 months
   const summary = useMemo(() => {
     if (!allRewards.length) return [];
 
@@ -102,7 +92,6 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
       const rewardDate = new Date(reward.spendable_epoch.end_time);
       const monthKey = `${rewardDate.getFullYear()}-${String(rewardDate.getMonth() + 1).padStart(2, "0")}`;
 
-      // Only include last 3 months
       const monthsDiff =
         (now.getFullYear() - rewardDate.getFullYear()) * 12 +
         (now.getMonth() - rewardDate.getMonth());
@@ -112,7 +101,7 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
           monthsData[monthKey] = { ada: 0, usd: 0, secondary: 0 };
         }
 
-        const adaAmount = reward.amount / 1_000_000; // Convert lovelace to ADA
+        const adaAmount = reward.amount / 1_000_000;
         const usdRate = getAdaUsdRate(reward);
         const secondaryRate = getAdaSecondaryRate();
 
@@ -138,7 +127,6 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
 
   return (
     <div className='flex w-full flex-col gap-3 pt-3'>
-      {/* Currency Selector */}
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-2'>
           <span className='text-text-sm font-medium'>Secondary currency:</span>
@@ -162,13 +150,8 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
         </div>
       </div>
 
-      {/* Summary Table */}
-      <SummaryTable
-        data={summary}
-        secondaryCurrency={secondaryCurrency}
-      />
+      <SummaryTable data={summary} secondaryCurrency={secondaryCurrency} />
 
-      {/* Epoch by Epoch Table */}
       <EpochRewardsTable
         query={paginatedQuery}
         data={paginatedRewards}

@@ -56,12 +56,10 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
     setRows: setStoredRows,
   } = useTaxToolEpochRewardsTableStore();
 
-  // Keep persisted rows in sync with the prop provided by the parent
   useEffect(() => {
     setStoredRows(itemsPerPage);
   }, [itemsPerPage, setStoredRows]);
 
-  // Get current ADA price in secondary currency for conversions
   const adaPriceSecondary = useAdaPriceWithHistory(secondaryCurrency);
 
   const formatDateTime = (dateString: string | null) => {
@@ -69,7 +67,6 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
     return formatDate(dateString, true);
   };
 
-  // Helper function to extract ADA/USD rate from reward
   const getAdaUsdRate = useCallback((reward: RewardItem): number => {
     if (
       !reward.spendable_epoch?.rate ||
@@ -90,10 +87,7 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
     return rateData.ada[0]?.close || 0;
   }, []);
 
-  // Get ADA rate in secondary currency (using current rate since historical fiat rates not available in API)
   const getAdaSecondaryRate = useCallback((): number => {
-    // Use current ADA price in the secondary currency
-    // Note: This is not historical, but the /account/reward endpoint doesn't return fiat rates
     return adaPriceSecondary.todayValue || 0;
   }, [adaPriceSecondary.todayValue]);
 
@@ -231,8 +225,7 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
             Rewards {secondaryCurrency.toUpperCase()}
           </div>
         ),
-        visible:
-          columnsVisibility.rewards_secondary && showSecondaryCurrency,
+        visible: columnsVisibility.rewards_secondary && showSecondaryCurrency,
         render: item => {
           const adaAmount = item.amount / 1_000_000;
           const values = calculateCurrencyValues(adaAmount, item);
@@ -279,8 +272,7 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
             </Tooltip>
           </div>
         ),
-        visible:
-          columnsVisibility.ada_secondary_rate && showSecondaryCurrency,
+        visible: columnsVisibility.ada_secondary_rate && showSecondaryCurrency,
         render: item => {
           const adaAmount = item.amount / 1_000_000;
           const values = calculateCurrencyValues(adaAmount, item);

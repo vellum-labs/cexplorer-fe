@@ -32,7 +32,6 @@ export const WithdrawalsTab: FC<WithdrawalsTabProps> = ({ stakeKey }) => {
 
   const query = useFetchWithdrawals(limit, 0, stakeKey);
 
-  // Flatten all pages of withdrawals data
   const allWithdrawals = useMemo(() => {
     if (!query.data?.pages) return [];
     return query.data.pages.flatMap(page => page.data?.data || []);
@@ -48,7 +47,6 @@ export const WithdrawalsTab: FC<WithdrawalsTabProps> = ({ stakeKey }) => {
 
   return (
     <div className='flex w-full flex-col gap-3 pt-3'>
-      {/* Currency Selector */}
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-2'>
           <span className='text-text-sm font-medium'>Secondary currency:</span>
@@ -70,7 +68,6 @@ export const WithdrawalsTab: FC<WithdrawalsTabProps> = ({ stakeKey }) => {
         </div>
       </div>
 
-      {/* Withdrawals Table */}
       <WithdrawalsTable
         query={query}
         data={allWithdrawals}

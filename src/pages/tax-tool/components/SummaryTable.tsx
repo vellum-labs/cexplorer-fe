@@ -4,12 +4,12 @@ import { Copy, Tooltip, formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 import GlobalTable from "@/components/table/GlobalTable";
 import type { Column } from "@/components/table/GlobalTable";
-import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import ExportButton from "@/components/table/ExportButton";
 import type { TableColumns } from "@/types/tableTypes";
 import { useTaxToolSummaryTableStore } from "@/stores/tables/taxToolSummaryTableStore";
+import { useStaticQuery } from "@/hooks/useStaticQuery";
 
 interface SummaryData {
   period: string;
@@ -28,10 +28,8 @@ export const SummaryTable: FC<SummaryTableProps> = ({
   secondaryCurrency,
 }) => {
   const showSecondaryCurrency = secondaryCurrency !== "usd";
-  const {
-    columnsVisibility,
-    setColumnVisibility,
-  } = useTaxToolSummaryTableStore();
+  const { columnsVisibility, setColumnVisibility } =
+    useTaxToolSummaryTableStore();
 
   const formatPeriod = (period: string) => {
     const [year, month] = period.split("-");
@@ -52,12 +50,7 @@ export const SummaryTable: FC<SummaryTableProps> = ({
     [secondaryCurrency],
   );
 
-  // Create a dummy query for GlobalTable (it expects a query object)
-  const dummyQuery = useQuery({
-    queryKey: ["summary-table"],
-    queryFn: () => Promise.resolve(data),
-    enabled: false,
-  });
+  const query = useStaticQuery(data);
 
   const columns: Column<SummaryData>[] = useMemo(
     () => [
@@ -128,8 +121,7 @@ export const SummaryTable: FC<SummaryTableProps> = ({
             </Tooltip>
           </div>
         ),
-        visible:
-          columnsVisibility.rewards_secondary && showSecondaryCurrency,
+        visible: columnsVisibility.rewards_secondary && showSecondaryCurrency,
         render: item => (
           <div className='flex items-center justify-end gap-1'>
             <span>
@@ -222,7 +214,7 @@ export const SummaryTable: FC<SummaryTableProps> = ({
         type='default'
         pagination={false}
         scrollable
-        query={dummyQuery}
+        query={query}
         items={data}
         columns={columns}
         disableDrag
