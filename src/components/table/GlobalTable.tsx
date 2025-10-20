@@ -175,15 +175,18 @@ const GlobalTable = <T extends Record<string, any>>({
           ? items?.length - 1
           : 0;
 
+  const paginationActive =
+    "pagination" in props ? props.pagination === true : false;
+
   useEffect(() => {
-    if ("pagination" in props) {
+    if (paginationActive) {
       setTotalPages(
         Array.isArray(baseItems)
           ? Math.ceil(baseItems.length / itemsPerPage)
           : 0,
       );
     }
-  }, [items]);
+  }, [paginationActive, baseItems, itemsPerPage]);
 
   useEffect(() => {
     if (!items && !isLoading) {
@@ -277,7 +280,7 @@ const GlobalTable = <T extends Record<string, any>>({
         >
           <TableHeader
             ref={headerRef}
-            className={`${infiniteScrolling ? "sticky" : "relative"} ${scrolled && infiniteScrolling ? "shadow-md" : ""} top-0 z-10 ${isEmpty && !isLoading ? "border-none" : ""} ${disableDrag && "pointer-events-none"}`}
+            className={`${infiniteScrolling ? "sticky" : "relative"} ${scrolled && infiniteScrolling ? "shadow-md" : ""} top-0 z-10 ${isEmpty && !isLoading ? "border-none" : ""}`}
           >
             <tr className=''>
               {columns.map(({ title, widthPx, visible, filter }, index) => (
@@ -285,7 +288,7 @@ const GlobalTable = <T extends Record<string, any>>({
                   {visible && (
                     <TableHead
                       key={index + "header"}
-                      draggable
+                      draggable={!disableDrag && !!onOrderChange}
                       onDragStart={
                         onOrderChange ? () => handleDragStart(index) : undefined
                       }

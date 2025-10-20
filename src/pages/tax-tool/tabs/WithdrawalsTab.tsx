@@ -1,7 +1,6 @@
 import type { FC } from "react";
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { useFetchWithdrawals } from "@/services/account";
-import { useCurrencyStore } from "@/stores/currencyStore";
 import {
   Select,
   SelectContent,
@@ -12,16 +11,24 @@ import {
 import { currencies } from "@/constants/currencies";
 import type { Currencies } from "@/types/storeTypes";
 import { WithdrawalsTable } from "../components/WithdrawalsTable";
+import { useTaxToolPreferencesStore } from "@/stores/taxToolPreferencesStore";
+import { useTaxToolWithdrawalsTableStore } from "@/stores/tables/taxToolWithdrawalsTableStore";
 
 interface WithdrawalsTabProps {
   stakeKey: string;
 }
 
 export const WithdrawalsTab: FC<WithdrawalsTabProps> = ({ stakeKey }) => {
-  const { currency: globalCurrency } = useCurrencyStore();
-  const [secondaryCurrency, setSecondaryCurrency] = useState<Currencies>("czk" as Currencies);
-  const [limit] = useState(20);
-  const [page] = useState(1);
+  const { secondaryCurrency, setSecondaryCurrency } =
+    useTaxToolPreferencesStore();
+  const { rows: storedRows, setRows: setStoredRows } =
+    useTaxToolWithdrawalsTableStore();
+
+  const handleRowsChange = (rows: number) => {
+    setStoredRows(rows);
+  };
+
+  const limit = storedRows;
 
   const query = useFetchWithdrawals(limit, 0, stakeKey);
 
@@ -42,12 +49,12 @@ export const WithdrawalsTab: FC<WithdrawalsTabProps> = ({ stakeKey }) => {
   return (
     <div className='flex w-full flex-col gap-3 pt-3'>
       {/* Currency Selector */}
-      <div className='flex items-center justify-between px-mobile md:px-desktop'>
+      <div className='flex items-center justify-between'>
         <div className='flex items-center gap-2'>
           <span className='text-text-sm font-medium'>Secondary currency:</span>
           <Select
             value={secondaryCurrency}
-            onValueChange={(value) => setSecondaryCurrency(value as Currencies)}
+            onValueChange={value => setSecondaryCurrency(value as Currencies)}
           >
             <SelectTrigger className='w-[120px]'>
               <SelectValue />
@@ -68,9 +75,10 @@ export const WithdrawalsTab: FC<WithdrawalsTabProps> = ({ stakeKey }) => {
         query={query}
         data={allWithdrawals}
         secondaryCurrency={secondaryCurrency}
-        currentPage={page}
+        currentPage={1}
         totalItems={query.data?.pages[0]?.data?.count || 0}
         itemsPerPage={limit}
+        onItemsPerPageChange={handleRowsChange}
       />
     </div>
   );

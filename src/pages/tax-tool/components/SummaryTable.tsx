@@ -1,16 +1,15 @@
 import type { FC } from "react";
 import type { Currencies } from "@/types/storeTypes";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Copy } from "@vellumlabs/cexplorer-sdk";
-import { formatCurrency } from "@/utils/format/formatCurrency";
-import { Settings } from "lucide-react";
+import { Copy, Tooltip, formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
+import GlobalTable from "@/components/table/GlobalTable";
+import type { Column } from "@/components/table/GlobalTable";
+import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
+import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import ExportButton from "@/components/table/ExportButton";
+import type { TableColumns } from "@/types/tableTypes";
+import { useTaxToolSummaryTableStore } from "@/stores/tables/taxToolSummaryTableStore";
 
 interface SummaryData {
   period: string;
@@ -22,105 +21,212 @@ interface SummaryData {
 interface SummaryTableProps {
   data: SummaryData[];
   secondaryCurrency: Currencies;
-  globalCurrency: Currencies;
 }
 
 export const SummaryTable: FC<SummaryTableProps> = ({
   data,
   secondaryCurrency,
-  globalCurrency,
 }) => {
   const showSecondaryCurrency = secondaryCurrency !== "usd";
+  const {
+    columnsVisibility,
+    setColumnVisibility,
+  } = useTaxToolSummaryTableStore();
 
   const formatPeriod = (period: string) => {
     const [year, month] = period.split("-");
     const date = new Date(parseInt(year), parseInt(month) - 1);
-    return date.toLocaleDateString("en-US", { month: "2-digit", year: "numeric" });
+    return date.toLocaleDateString("en-US", {
+      month: "2-digit",
+      year: "numeric",
+    });
   };
 
-  return (
-    <div className='w-full overflow-hidden rounded-m border border-border'>
-      <div className='flex items-center justify-between border-b border-border bg-darker px-3 py-2'>
-        <h3 className='text-text-md font-semibold'>Summary</h3>
-        <Settings size={18} className='cursor-pointer text-grayTextPrimary' />
-      </div>
+  const columnLabels = useMemo(
+    () => ({
+      period: "Period",
+      rewards_ada: "Rewards ADA",
+      rewards_usd: "Rewards USD",
+      rewards_secondary: `Rewards ${secondaryCurrency.toUpperCase()}`,
+    }),
+    [secondaryCurrency],
+  );
 
-      <div className='w-full overflow-x-auto'>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className='w-[150px]'>Period</TableHead>
-              <TableHead className='text-right'>Rewards ADA</TableHead>
-              <TableHead className='text-right'>Rewards $</TableHead>
-              {showSecondaryCurrency && (
-                <TableHead className='text-right uppercase'>
-                  Rewards {secondaryCurrency}
-                </TableHead>
-              )}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {data.length === 0 ? (
-              <TableRow>
-                <TableCell
-                  colSpan={showSecondaryCurrency ? 4 : 3}
-                  className='text-center text-grayTextPrimary'
-                >
-                  No data available for the last 3 months
-                </TableCell>
-              </TableRow>
-            ) : (
-              data.map((row, index) => (
-                <TableRow key={row.period}>
-                  <TableCell className='font-medium'>
-                    {formatPeriod(row.period)}
-                  </TableCell>
-                  <TableCell className='text-right'>
-                    <div className='flex items-center justify-end gap-1'>
-                      <span>₳ {row.ada.toLocaleString("en-US", {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 6
-                      })}</span>
-                      <Copy
-                        copyText={row.ada.toString()}
-                        className='translate-y-[1px]'
-                      />
-                    </div>
-                  </TableCell>
-                  <TableCell className='text-right'>
-                    <div className='flex items-center justify-end gap-1'>
-                      <span>
-                        {formatCurrency(row.usd, "usd", {
-                          applyNumberFormatting: true,
-                        })}
-                      </span>
-                      <Copy
-                        copyText={row.usd.toFixed(2)}
-                        className='translate-y-[1px]'
-                      />
-                    </div>
-                  </TableCell>
-                  {showSecondaryCurrency && (
-                    <TableCell className='text-right'>
-                      <div className='flex items-center justify-end gap-1'>
-                        <span>
-                          {formatCurrency(row.secondary, secondaryCurrency, {
-                            applyNumberFormatting: true,
-                          })}
-                        </span>
-                        <Copy
-                          copyText={row.secondary.toFixed(2)}
-                          className='translate-y-[1px]'
-                        />
-                      </div>
-                    </TableCell>
-                  )}
-                </TableRow>
-              ))
-            )}
-          </TableBody>
-        </Table>
+  // Create a dummy query for GlobalTable (it expects a query object)
+  const dummyQuery = useQuery({
+    queryKey: ["summary-table"],
+    queryFn: () => Promise.resolve(data),
+    enabled: false,
+  });
+
+  const columns: Column<SummaryData>[] = useMemo(
+    () => [
+      {
+        key: "period",
+        title: columnLabels.period,
+        visible: columnsVisibility.period,
+        widthPx: 150,
+        render: item => (
+          <span className='font-medium'>{formatPeriod(item.period)}</span>
+        ),
+      },
+      {
+        key: "rewards_ada",
+        title: (
+          <div className='flex w-full items-center justify-end gap-1 text-right'>
+            Rewards ADA
+            <Tooltip content='Exchange rates from the epoch end date.'>
+              <QuestionMarkCircledIcon className='h-4 w-4 cursor-help text-grayTextPrimary' />
+            </Tooltip>
+          </div>
+        ),
+        visible: columnsVisibility.rewards_ada,
+        render: item => (
+          <div className='flex items-center justify-end gap-1'>
+            <span>
+              ₳{" "}
+              {item.ada.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 6,
+              })}
+            </span>
+            <Copy
+              copyText={item.ada.toString()}
+              className='translate-y-[1px]'
+            />
+          </div>
+        ),
+      },
+      {
+        key: "rewards_usd",
+        title: (
+          <div className='flex w-full items-center justify-end gap-1 text-right'>
+            Rewards USD
+            <Tooltip content='Exchange rates from the epoch end date.'>
+              <QuestionMarkCircledIcon className='h-4 w-4 cursor-help text-grayTextPrimary' />
+            </Tooltip>
+          </div>
+        ),
+        visible: columnsVisibility.rewards_usd,
+        render: item => (
+          <div className='flex items-center justify-end gap-1'>
+            <span>USD {formatNumber(item.usd.toFixed(2))}</span>
+            <Copy
+              copyText={item.usd.toFixed(2)}
+              className='translate-y-[1px]'
+            />
+          </div>
+        ),
+      },
+      {
+        key: "rewards_secondary",
+        title: (
+          <div className='flex w-full items-center justify-end gap-1 text-right'>
+            Rewards {secondaryCurrency.toUpperCase()}
+            <Tooltip content='Exchange rates from the epoch end date.'>
+              <QuestionMarkCircledIcon className='h-4 w-4 cursor-help text-grayTextPrimary' />
+            </Tooltip>
+          </div>
+        ),
+        visible:
+          columnsVisibility.rewards_secondary && showSecondaryCurrency,
+        render: item => (
+          <div className='flex items-center justify-end gap-1'>
+            <span>
+              {formatNumber(item.secondary.toFixed(2))}{" "}
+              {secondaryCurrency.toUpperCase()}
+            </span>
+            <Copy
+              copyText={item.secondary.toFixed(2)}
+              className='translate-y-[1px]'
+            />
+          </div>
+        ),
+      },
+    ],
+    [
+      columnLabels.period,
+      columnsVisibility.period,
+      columnsVisibility.rewards_ada,
+      columnsVisibility.rewards_secondary,
+      columnsVisibility.rewards_usd,
+      secondaryCurrency,
+      showSecondaryCurrency,
+    ],
+  );
+
+  const exportColumns = useMemo<TableColumns<SummaryData>>(
+    () =>
+      columns
+        .filter(column => column.visible)
+        .map(column => ({
+          key: column.key,
+          title:
+            columnLabels[column.key as keyof typeof columnLabels] ??
+            column.title ??
+            "",
+          visible: Boolean(column.visible),
+          widthPx: column.widthPx ?? 150,
+          render: column.render,
+        })),
+    [columnLabels, columns],
+  );
+
+  const columnsOptions = useMemo(() => {
+    const baseOptions = ["period", "rewards_ada", "rewards_usd"] as const;
+
+    const options = baseOptions.map(key => ({
+      label: columnLabels[key],
+      isVisible: columnsVisibility[key],
+      onClick: () => setColumnVisibility(key, !columnsVisibility[key]),
+    }));
+
+    if (!showSecondaryCurrency) {
+      return options;
+    }
+
+    return [
+      ...options,
+      {
+        label: columnLabels.rewards_secondary,
+        isVisible: columnsVisibility.rewards_secondary,
+        onClick: () =>
+          setColumnVisibility(
+            "rewards_secondary",
+            !columnsVisibility.rewards_secondary,
+          ),
+      },
+    ];
+  }, [
+    columnLabels,
+    columnsVisibility,
+    setColumnVisibility,
+    showSecondaryCurrency,
+  ]);
+
+  return (
+    <div className='flex flex-col gap-2'>
+      <div className='flex items-center justify-between'>
+        <h3 className='text-text-md font-semibold'>Summary</h3>
+        <div className='flex items-center gap-1'>
+          <TableSettingsDropdown
+            rows={data.length || 0}
+            visibleRows={false}
+            setRows={() => undefined}
+            columnsOptions={columnsOptions}
+          />
+          <ExportButton columns={exportColumns} items={data} />
+        </div>
       </div>
+      <GlobalTable
+        type='default'
+        pagination={false}
+        scrollable
+        query={dummyQuery}
+        items={data}
+        columns={columns}
+        disableDrag
+      />
     </div>
   );
 };
