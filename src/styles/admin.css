@@ -6,6 +6,15 @@
   --hoverHighlight: rgba(250, 197, 21, 0.3) !important;
 }
 
+  .hide-scrollbar {
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
 .wrapper {
   display: flex;
   width: 100%;

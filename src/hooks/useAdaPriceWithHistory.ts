@@ -31,7 +31,7 @@ export const useAdaPriceWithHistory = (overrideCurrency?: Currencies) => {
   );
 
   const fiatRates = miscBasic?.data?.rate?.fiat;
-  const currentCurrency = fiatRates?.[currency];
+  const currentCurrency = fiatRates?.[currency.toLowerCase()];
   const usdCurrency = fiatRates?.["usd"];
 
   const isDataValid =
@@ -40,6 +40,8 @@ export const useAdaPriceWithHistory = (overrideCurrency?: Currencies) => {
     adaYesterdayRecord &&
     currentCurrency &&
     usdCurrency;
+
+  console.log(currency);
 
   if (!isDataValid) {
     return {};
