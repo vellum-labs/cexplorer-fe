@@ -279,6 +279,7 @@ export interface GovernanceTx {
   treasury_donation: number;
   block_no: number;
   block_hash: string;
+  epoch: number;
 }
 
 export interface CommitteeListItem {

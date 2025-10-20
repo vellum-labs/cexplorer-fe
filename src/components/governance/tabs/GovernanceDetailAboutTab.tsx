@@ -21,6 +21,7 @@ import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { GovVoterCell } from "@/components/gov/GovVoterCell";
 import { VoteCell } from "@/components/governance/vote/VoteCell";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
+import { isVoteLate } from "@/utils/governance/isVoteLate";
 
 interface GovernanceDetailAboutTabProps {
   id: string;
@@ -197,6 +198,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
             vote={item?.vote}
             txHash={item?.tx?.hash}
             proposalId={item?.proposal?.ident?.id}
+            isLate={isVoteLate(item)}
           />
         );
       },
