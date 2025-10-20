@@ -26,6 +26,7 @@ import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDr
 import ExportButton from "@/components/table/ExportButton";
 import type { TableColumns } from "@/types/tableTypes";
 import { useTaxToolEpochRewardsTableStore } from "@/stores/tables/taxToolEpochRewardsTableStore";
+import { Badge } from "@/components/global/badges/Badge";
 
 interface EpochRewardsTableProps {
   query: UseQueryResult<any, unknown>;
@@ -179,7 +180,9 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
         visible: columnsVisibility.type,
         widthPx: 100,
         render: item => (
-          <span className='capitalize'>{item.type || "Member"}</span>
+          <Badge color='light'>
+            <span className='capitalize'>{item.type || "Member"}</span>
+          </Badge>
         ),
       },
       {
