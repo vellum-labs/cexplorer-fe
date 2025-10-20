@@ -74,7 +74,6 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
       });
     }
   }, [currency]);
-  console.log("🚀 ~ SettingsDropdown ~ currency:", currency);
 
   const startScrolling = direction => {
     stopScrolling();
