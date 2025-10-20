@@ -75,10 +75,18 @@ const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content> & {
     startContent?: ReactNode;
+    padding?: boolean;
   }
 >(
   (
-    { className, children, position = "popper", startContent, ...props },
+    {
+      className,
+      children,
+      position = "popper",
+      startContent,
+      padding = true,
+      ...props
+    },
     ref,
   ) => (
     <SelectPrimitive.Portal>
@@ -97,7 +105,7 @@ const SelectContent = React.forwardRef<
         <SelectScrollUpButton />
         <SelectPrimitive.Viewport
           className={cn(
-            "p-1/2",
+            padding ? "p-1/2" : "",
             position === "popper" &&
               "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]",
           )}
@@ -130,7 +138,7 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex w-full cursor-pointer select-none items-center justify-between rounded-xs py-1 pl-1 pr-4 text-text-sm outline-none focus:bg-darker data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex w-full cursor-pointer select-none items-center justify-between rounded-xs py-1 pl-1 pr-4 text-text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       className,
     )}
     {...props}
