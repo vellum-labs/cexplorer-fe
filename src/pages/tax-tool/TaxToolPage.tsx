@@ -45,8 +45,7 @@ export const TaxToolPage: FC = () => {
     >
       <section className='flex w-full justify-center'>
         <div className='flex w-full max-w-desktop flex-col gap-2 p-mobile md:p-desktop'>
-          {/* Info Banner */}
-          <div className='flex items-start gap-2 rounded-m border border-blue-500/40 bg-blue-500/5 p-2'>
+          <div className='border-blue-500/40 bg-blue-500/5 flex items-start gap-2 rounded-m border p-2'>
             <CircleAlert className='mt-0.5 text-blue-500' size={18} />
             <div className='flex flex-col gap-1 text-text-sm'>
               <p className='font-medium text-text'>
@@ -59,7 +58,6 @@ export const TaxToolPage: FC = () => {
             </div>
           </div>
 
-          {/* Search Input */}
           <div className='flex w-full'>
             <TableSearchInput
               value={search}
@@ -71,7 +69,6 @@ export const TaxToolPage: FC = () => {
             />
           </div>
 
-          {/* Tabs */}
           {debouncedSearch && (
             <Tabs items={tabItems} withPadding={false} withMargin={false} />
           )}
