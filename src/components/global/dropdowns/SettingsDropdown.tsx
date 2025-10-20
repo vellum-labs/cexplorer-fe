@@ -185,12 +185,11 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                     <span>{currency.toUpperCase()}</span>
                   </div>
                 }
-                className='justify-end text-nowrap'
               />
             </SelectTrigger>
             <SelectContent
               padding={false}
-              className='relative w-[90px] border-0 !p-0'
+              className='relative w-[100px] border-0 !p-0'
             >
               <Command className='fixed top-0 z-[110] h-[40px]'>
                 <TextInput
@@ -203,7 +202,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
               </Command>
               <div
                 ref={contentRef}
-                className='hide-scrollbar relative z-[100] max-h-[370px] w-[90px] overflow-auto overscroll-contain bg-background pt-7 text-text'
+                className='hide-scrollbar relative z-[100] max-h-[370px] w-[100px] overflow-auto overscroll-contain bg-background pt-7 text-text'
               >
                 <div
                   className='fixed top-10 z-50 flex h-5 w-full items-center justify-center border-t border-border bg-background'
@@ -222,14 +221,17 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                     )
                     .map(([key, value]) => {
                       return (
-                        <SelectItem
-                          key={key}
-                          className={`flex w-full cursor-pointer select-none items-center justify-between rounded-xs px-2 py-1.5 text-text-sm hover:bg-cardBg ${key === currency ? "bg-cardBg" : ""}`}
-                          value={(value as any).value.toUpperCase()}
+                        <div
+                          className={`flex w-full cursor-pointer select-none flex-nowrap items-center rounded-xs px-1 py-0.5 hover:bg-cardBg ${key === currency ? "bg-cardBg" : ""}`}
                         >
-                          <span>{(value as any).value.toUpperCase()}</span>
-                          {key === currency && <Check size={15} />}
-                        </SelectItem>
+                          <SelectItem
+                            key={key}
+                            className={`text-text-sm`}
+                            value={(value as any).value.toLowerCase()}
+                          >
+                            <span>{(value as any).value.toUpperCase()}</span>
+                          </SelectItem>
+                        </div>
                       );
                     })}
                 </div>
