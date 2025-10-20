@@ -1,9 +1,9 @@
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
-import PulseDot from "@/components/global/PulseDot";
+import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import Tabs from "@/components/global/Tabs";
-import LoadingSkeleton from "@/components/global/skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { MetadataCell } from "@/components/metadata/MetadataCell";
 import { PoolListEchart } from "@/components/pool/PoolListEchart";
 import RoaDiffArrow from "@/components/pool/RoaDiffArrow";

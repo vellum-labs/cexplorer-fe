@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import { formatDate, toUtcDate } from "@vellumlabs/cexplorer-sdk";
 import { formatRemainingTime } from "@/utils/format/formatRemainingTime";
-import PulseDot from "../global/PulseDot";
+import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 
 interface EpochInfoProps {

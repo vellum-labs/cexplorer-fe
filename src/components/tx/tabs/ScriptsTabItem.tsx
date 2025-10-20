@@ -1,5 +1,5 @@
 import { JsonDisplay } from "@/components/global/JsonDisplay";
-import { TextDisplay } from "@/components/global/TextDisplay";
+import { TextDisplay } from "@vellumlabs/cexplorer-sdk";
 import { ScriptCell } from "@/components/script/ScriptCell";
 import { useFetchTxDetail } from "@/services/tx";
 import { getRouteApi, Link } from "@tanstack/react-router";

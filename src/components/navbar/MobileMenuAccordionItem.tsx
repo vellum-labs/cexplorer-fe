@@ -3,7 +3,7 @@ import type { FileRoutesByPath } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import type dynamicIconImports from "lucide-react/dynamicIconImports";
 import type { SetStateAction } from "react";
-import Icon from "../global/Icon";
+import { Icon } from "@vellumlabs/cexplorer-sdk";
 import {
   AccordionContent,
   AccordionItem,

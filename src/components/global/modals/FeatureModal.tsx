@@ -1,6 +1,6 @@
 import type { Dispatch, FC, SetStateAction } from "react";
 
-import Modal from "../Modal";
+import { Modal } from "@vellumlabs/cexplorer-sdk";
 
 import { useEffect, useState } from "react";
 import { useWalletStore } from "@/stores/walletStore";
@@ -52,7 +52,9 @@ export const FeatureModal: FC<FeatureModalProps> = ({
             ) : (
               <div className='flex items-center gap-1'>
                 <WalletMinimal size={15} />
-                <span className='text-text-md font-semibold'>Connect wallet</span>
+                <span className='text-text-md font-semibold'>
+                  Connect wallet
+                </span>
               </div>
             )}
           </button>

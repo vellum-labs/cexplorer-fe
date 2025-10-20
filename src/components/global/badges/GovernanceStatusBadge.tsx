@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import PulseDot from "../PulseDot";
+import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import {
   getGovActionStatus,
   type GovActionStatus,

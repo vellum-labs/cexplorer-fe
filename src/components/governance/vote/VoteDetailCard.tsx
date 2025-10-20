@@ -6,7 +6,7 @@ import { GovernanceRole } from "@/types/governanceTypes";
 import {
   ActionTypes as ActionTypesComponent,
   type ActionTypes,
-} from "@/components/global/ActionTypes";
+} from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";

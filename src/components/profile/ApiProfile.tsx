@@ -27,7 +27,7 @@ import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import SpinningLoader from "../global/SpinningLoader";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
-import { EmptyState } from "../global/EmptyState";
+import { EmptyState } from "@vellumlabs/cexplorer-sdk";
 import ConnectWalletModal from "../wallet/ConnectWalletModal";
 import { useAuthToken } from "@/hooks/useAuthToken";
 

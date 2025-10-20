@@ -1,6 +1,6 @@
 import { Badge } from "@/components/global/badges/Badge";
 import { Button } from "@vellumlabs/cexplorer-sdk";
-import PulseDot from "@/components/global/PulseDot";
+import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";

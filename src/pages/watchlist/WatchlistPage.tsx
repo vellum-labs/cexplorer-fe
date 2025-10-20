@@ -10,7 +10,7 @@ import { AssetListPage } from "../assets/AssetListPage";
 import PoolListTab from "@/components/pool/tabs/PoolListTab";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { Badge } from "@/components/global/badges/Badge";
-import { EmptyState } from "@/components/global/EmptyState";
+import { EmptyState } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import { Star, Wallet } from "lucide-react";

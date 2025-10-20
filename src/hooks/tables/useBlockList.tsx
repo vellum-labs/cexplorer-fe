@@ -12,7 +12,7 @@ import PoolCell from "@/components/table/PoolCell";
 import { SizeCell } from "@/components/table/SizeCell";
 
 import { BlockCell } from "@/components/blocks/BlockCell";
-import { ProtocolDot } from "@/components/global/ProtocolDot";
+import { ProtocolDot } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "@/components/tx/HashCell";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "./useSearchTable";
@@ -369,6 +369,7 @@ export const useBlockList = ({
         <div className='flex items-center justify-end gap-1'>
           <ProtocolDot
             protNo={Number(`${item.proto_major}.${item.proto_minor}`)}
+            miscData={miscConst}
           />
           <p className='text-right'>{`${item.proto_major}.${item.proto_minor}`}</p>
         </div>

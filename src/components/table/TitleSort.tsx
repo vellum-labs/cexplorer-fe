@@ -2,7 +2,7 @@ import type { FC, ReactNode } from "react";
 
 import { getColumnsSortOrder } from "@/utils/getColumnsSortOrder";
 import { useNavigate } from "@tanstack/react-router";
-import { SortArrow } from "../global/SortArrow";
+import { SortArrow } from "@vellumlabs/cexplorer-sdk";
 
 interface TitleSortProps {
   order?: string;

@@ -5,7 +5,7 @@ import {
 } from "@/components/ui/carousel";
 import { useFetchMiscBasic } from "@/services/misc";
 import Autoplay from "embla-carousel-autoplay";
-import LoadingSkeleton from "../skeletons/LoadingSkeleton";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import AdCard from "./AdCard";
 
 interface Props {

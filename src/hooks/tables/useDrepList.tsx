@@ -2,7 +2,7 @@ import type { DrepListData, DrepListOrder } from "@/types/drepTypes";
 import type { DrepListTableColumns, TableColumns } from "@/types/tableTypes";
 import type { Dispatch, SetStateAction } from "react";
 
-import PulseDot from "@/components/global/PulseDot";
+import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { MetadataCell } from "@/components/metadata/MetadataCell";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 
@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { SortArrow } from "@/components/global/SortArrow";
+import { SortArrow } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { getColumnsSortOrder } from "@/utils/getColumnsSortOrder";
 import { Link, useNavigate } from "@tanstack/react-router";

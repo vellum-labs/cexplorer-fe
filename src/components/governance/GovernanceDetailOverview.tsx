@@ -5,7 +5,7 @@ import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { OverviewCard } from "../global/cards/OverviewCard";
 import { CircleHelp } from "lucide-react";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import PulseDot from "../global/PulseDot";
+import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 
 import { Image } from "../global/Image";
@@ -17,7 +17,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
-import { ActionTypes } from "../global/ActionTypes";
+import { ActionTypes } from "@vellumlabs/cexplorer-sdk";
 import { determineApproval } from "@/utils/determineApproval";
 import {
   shouldDRepVote,

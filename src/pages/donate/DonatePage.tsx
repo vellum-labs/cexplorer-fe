@@ -1,7 +1,7 @@
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
-import Modal from "@/components/global/Modal";
+import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { Checkbox } from "@/components/ui/checkbox";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import { colors } from "@/constants/colors";

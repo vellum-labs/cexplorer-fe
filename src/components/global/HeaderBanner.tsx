@@ -1,20 +1,13 @@
 import type { ReactNode } from "react";
 
+import type { HeaderProps } from "@vellumlabs/cexplorer-sdk";
 import { BreadcrumbSeparator, Header } from "@vellumlabs/cexplorer-sdk";
 
-import type { FileRoutesByPath } from "@tanstack/react-router";
 import { useLocaleStore } from "@/stores/localeStore";
 import { useFetchMiscBasic, useFetchMiscSearch } from "@/services/misc";
 
-export interface HeaderBannerBreadCrumbItem {
-  label: ReactNode;
-  link?: FileRoutesByPath[keyof FileRoutesByPath]["path"];
-  params?: Record<string, string>;
-  ident?: string;
-}
-
 interface HeaderBannerProps {
-  breadcrumbItems?: HeaderBannerBreadCrumbItem[];
+  breadcrumbItems?: HeaderProps["breadcrumbItems"];
   breadcrumbSeparator?: ReactNode;
   title: ReactNode;
   subTitle?: ReactNode;

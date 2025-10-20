@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import PulseDot from "../global/PulseDot";
+import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 
 interface PulsedBadgeProps {
   title: string;

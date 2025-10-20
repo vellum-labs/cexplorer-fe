@@ -11,7 +11,7 @@ import Tabs from "@/components/global/Tabs";
 import { VoteDetailCard } from "@/components/governance/vote/VoteDetailCard";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
-import { EmptyState } from "@/components/global/EmptyState";
+import { EmptyState } from "@vellumlabs/cexplorer-sdk";
 
 export const GovernanceVoteDetailPage: FC = () => {
   const route = getRouteApi("/gov/vote/$hash");

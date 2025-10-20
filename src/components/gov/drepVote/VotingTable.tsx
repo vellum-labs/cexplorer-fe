@@ -10,7 +10,7 @@ import { Link, useSearch } from "@tanstack/react-router";
 import govActions from "../../../../conf/governance-actions.json";
 import { NoResultsFound } from "@/components/global/NoResultsFound";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
-import { Pagination } from "@/components/global/Pagination";
+import { Pagination } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { useVotingTableStore } from "@/stores/tables/votingTableTableStore";

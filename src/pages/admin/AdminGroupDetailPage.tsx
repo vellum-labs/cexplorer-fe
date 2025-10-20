@@ -1,7 +1,7 @@
 import { DrepHashCell } from "@/components/drep/DrepHashCell";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
-import Modal from "@/components/global/Modal";
+import { Modal } from "@vellumlabs/cexplorer-sdk";
 import SpinningLoader from "@/components/global/SpinningLoader";
 import GlobalTable from "@/components/table/GlobalTable";
 import PoolCell from "@/components/table/PoolCell";

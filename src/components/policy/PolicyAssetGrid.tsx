@@ -12,7 +12,7 @@ import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 
 import { alphabetWithNumbers } from "@/constants/alphabet";
-import { Pagination } from "../global/Pagination";
+import { Pagination } from "@vellumlabs/cexplorer-sdk";
 
 interface PolicyAssetGridProps {
   query: ReturnType<typeof useFetchAssetList>;

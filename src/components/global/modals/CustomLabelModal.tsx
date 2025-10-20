@@ -4,7 +4,7 @@ import { Address } from "@/utils/address/getStakeAddress";
 import { useEffect, useState } from "react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
-import Modal from "../Modal";
+import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { useFetchUserInfo, updateUserLabels } from "@/services/user";
 import type { AddressLabel } from "@/types/commonTypes";

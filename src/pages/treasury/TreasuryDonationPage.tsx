@@ -8,7 +8,7 @@ import { TreasuryDonationModal } from "@/components/script/treasury/TreasuryDona
 import { useState } from "react";
 import { useWalletStore } from "@/stores/walletStore";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
-import Modal from "@/components/global/Modal";
+import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Wallet, Info } from "lucide-react";

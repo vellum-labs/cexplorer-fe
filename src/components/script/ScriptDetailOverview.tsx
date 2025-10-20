@@ -11,7 +11,7 @@ import { Button } from "@vellumlabs/cexplorer-sdk";
 import { OverviewCard } from "../global/cards/OverviewCard";
 import { OverviewStatCard } from "../global/cards/OverviewStatCard";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import { TextDisplay } from "../global/TextDisplay";
+import { TextDisplay } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "../tx/HashCell";
 import { AttributeDropdown } from "../global/AttributeDropdown";
 import { Copy } from "@vellumlabs/cexplorer-sdk";

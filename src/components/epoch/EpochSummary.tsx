@@ -1,7 +1,7 @@
 import type { FC } from "react";
 
 import { OverviewCard } from "../global/cards/OverviewCard";
-import PulseDot from "../global/PulseDot";
+import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";
 
 import { useEffect, useState } from "react";

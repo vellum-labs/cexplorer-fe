@@ -1,4 +1,4 @@
-import { ActionTypes } from "@/components/global/ActionTypes";
+import { ActionTypes } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { VoterRoleBadge } from "@/components/global/badges/VoterRoleBadge";
 import type { Vote } from "@/constants/votes";

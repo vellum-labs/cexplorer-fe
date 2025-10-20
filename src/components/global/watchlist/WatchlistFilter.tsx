@@ -3,7 +3,7 @@ import { colors } from "@/constants/colors";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { Star } from "lucide-react";
 import React, { useState } from "react";
-import { Switch } from "../Switch";
+import { Switch } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   watchlistOnly: boolean;
