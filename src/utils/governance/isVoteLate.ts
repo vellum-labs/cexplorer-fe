@@ -29,5 +29,5 @@ export function isVoteLate(vote: GovernanceVote): boolean {
 
   const minClosingEpoch = Math.min(...closingEpochs);
 
-  return voteEpoch > minClosingEpoch;
+  return voteEpoch >= minClosingEpoch;
 }
