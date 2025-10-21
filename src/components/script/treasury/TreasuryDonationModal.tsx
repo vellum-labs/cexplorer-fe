@@ -139,8 +139,8 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
           <Tooltip
             content={
               <div className='max-w-[250px] text-center'>
-                Treasury donations are not currently supported. We're working on
-                adding this feature.
+                Treasury donations are not currently supported by lucid-evolution.
+                We're working on adding this feature.
               </div>
             }
           >
