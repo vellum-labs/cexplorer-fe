@@ -4,7 +4,7 @@ import type { LucidEvolution } from "@lucid-evolution/lucid";
 import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
-import { RangeSlider } from "@/components/global/inputs/RangeSlider";
+import { RangeSlider } from "@vellumlabs/cexplorer-sdk";
 import { Wallet } from "lucide-react";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { handleDonation } from "@/utils/treasury/handleDonation";
