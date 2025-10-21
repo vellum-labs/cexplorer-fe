@@ -1,7 +1,7 @@
 import type { GovernanceVote } from "@/types/governanceTypes";
 
 export function isVoteLate(vote: GovernanceVote): boolean {
-  const voteEpoch = vote?.tx?.epoch;
+  const voteEpoch = vote?.tx?.epoch_no;
 
   if (voteEpoch === undefined || voteEpoch === null) {
     return false;
