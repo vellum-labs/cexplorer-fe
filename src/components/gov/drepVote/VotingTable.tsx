@@ -15,7 +15,7 @@ import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { useVotingTableStore } from "@/stores/tables/votingTableTableStore";
 import { CircleHelp } from "lucide-react";
-import { ActivityBadge } from "@/components/global/badges/ActivityBadge";
+import { ActivityBadge } from "@vellumlabs/cexplorer-sdk";
 
 interface VotingTableProps {}
 
