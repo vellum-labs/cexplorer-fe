@@ -20,7 +20,7 @@ import { format } from "date-fns";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { useElapsedEpochNumber } from "@/hooks/useElapsedEpochNumber";
-import { Badge } from "../global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 

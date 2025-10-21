@@ -4,7 +4,7 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { FileBarChart, LineChart } from "lucide-react";
 import AdsCarousel from "../global/ads/AdsCarousel";
-import { Badge } from "../global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { LabelBadge } from "../global/badges/LabelBadge";
 import { PurposeBadge } from "../global/badges/PurposeBadge";
 import { Button } from "@vellumlabs/cexplorer-sdk";

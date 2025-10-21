@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { useAuthToken } from "../useAuthToken";
 
 import AssetCell from "@/components/asset/AssetCell";
-import { Badge } from "@/components/global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { PolicyCell } from "@/components/policy/PolicyCell";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 

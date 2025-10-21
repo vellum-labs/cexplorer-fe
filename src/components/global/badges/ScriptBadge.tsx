@@ -1,5 +1,5 @@
 import { Code, User } from "lucide-react";
-import { Badge } from "./Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   isScript: boolean;

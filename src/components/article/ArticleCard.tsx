@@ -7,7 +7,7 @@ import { Link } from "@tanstack/react-router";
 import parse from "html-react-parser";
 import { Clock } from "lucide-react";
 import { Image } from "../global/Image";
-import { Badge } from "../global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   article: ArticleListData;

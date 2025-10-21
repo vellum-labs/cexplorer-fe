@@ -18,7 +18,7 @@ import type { PolicyJson } from "@/types/assetsTypes";
 import { getRouteApi, Link } from "@tanstack/react-router";
 import { LockedPolicy, OpenPolicy } from "../asset/tabs/AssetTimelockTab";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { Badge } from "../global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { WatchlistSection } from "../global/watchlist/WatchlistSection";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";

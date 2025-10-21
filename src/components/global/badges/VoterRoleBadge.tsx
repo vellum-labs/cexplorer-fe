@@ -1,8 +1,7 @@
 import { Landmark, Network, User } from "lucide-react";
-import { Badge } from "./Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 
 export const VoterRoleBadge = ({ role }: { role: string }) => {
-  //   DRep SPO CC
   const getIcon = () => {
     switch (role) {
       case "DRep":

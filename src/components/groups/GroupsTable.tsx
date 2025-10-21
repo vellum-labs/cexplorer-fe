@@ -1,6 +1,6 @@
 import GlobalTable from "@/components/table/GlobalTable";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { Badge } from "@/components/global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Check, Filter } from "lucide-react";
 import { getPledgeColor } from "@/utils/getPledgeColor";
 import { cn } from "@vellumlabs/cexplorer-sdk";

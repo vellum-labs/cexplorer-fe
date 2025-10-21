@@ -1,4 +1,4 @@
-import { Badge } from "./Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 
 export const PurposeBadge = ({
   purpose,

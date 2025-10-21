@@ -2,7 +2,7 @@ import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import type { ScriptDetailData } from "@/types/scriptTypes";
 import type { Label } from "@/types/txTypes";
 import type { ReactNode } from "react";
-import { Badge } from "./Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { ExtraLabelBadge } from "./ExtraLabelBadge";
 
 interface Props {

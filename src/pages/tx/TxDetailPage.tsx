@@ -1,4 +1,4 @@
-import { Badge } from "@/components/global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
 import Tabs from "@/components/global/Tabs";
 import CollateralTabItem from "@/components/tx/tabs/CollateralTabItem";

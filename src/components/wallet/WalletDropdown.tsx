@@ -15,7 +15,7 @@ import {
   Wallet,
 } from "lucide-react";
 import { memo } from "react";
-import { Badge } from "../global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import Dollar from "../../resources/images/dollar.svg";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import DiscordLogo from "../../resources/images/icons/discord.svg";
