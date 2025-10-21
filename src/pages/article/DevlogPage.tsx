@@ -10,15 +10,12 @@ import {
 } from "@/components/ui/accordion";
 
 import { useFetchArticleDetail } from "@/services/article";
-import { webUrl } from "@/constants/confVariables";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 export const DevlogPage: FC = () => {
   const query = useFetchArticleDetail("en", "page", "devlog");
   const data = query.data;
   const name = data?.name;
-  const description = data?.description;
-  const keywords = data?.keywords;
 
   const devlog = (
     query.data?.data.some(item => Array.isArray(item))
@@ -28,18 +25,7 @@ export const DevlogPage: FC = () => {
 
   return (
     <>
-      <Helmet>
-        <meta charSet='utf-8' />
-        {description && <meta name='description' content={description} />}
-        {keywords && <meta name='keywords' content={keywords} />}
-        {name && <title>{name}</title>}
-        {name && <meta property='og:title' content={name} />}
-        {description && (
-          <meta property='og:description' content={description} />
-        )}
-        <meta property='og:type' content='website' />
-        <meta property='og:url' content={webUrl + location.pathname} />
-      </Helmet>
+      <Helmet>{name && <title>{name}</title>}</Helmet>
       <div className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col items-center'>
           <h1>What’s new?</h1>

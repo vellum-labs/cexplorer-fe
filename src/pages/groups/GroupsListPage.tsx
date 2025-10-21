@@ -146,12 +146,7 @@ export const GroupsListPage = () => {
 
   return (
     <>
-      <Helmet>
-        <meta charSet='utf-8' />
-        {<title>{metadata.groupsList.title}</title>}
-        <meta name='description' content={metadata.groupsList.description} />
-        <meta name='keywords' content={metadata.groupsList.keywords} />
-      </Helmet>
+      <Helmet>{<title>{metadata.groupsList.title}</title>}</Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center'>
         <HeaderBanner
           title='Cardano Groups (Donuts)'

@@ -8,7 +8,6 @@ import {
   BreadcrumbItem,
   BreadcrumbList,
 } from "@vellumlabs/cexplorer-sdk";
-import { webUrl } from "@/constants/confVariables";
 import { useFetchArticleDetail, useFetchArticleList } from "@/services/article";
 import type { ArticleListData } from "@/types/articleTypes";
 import { formatDate } from "@vellumlabs/cexplorer-sdk";
@@ -85,7 +84,6 @@ export const ArticleDetailPage = () => {
   return (
     <>
       <Helmet>
-        <meta charSet='utf-8' />
         {
           <title>
             {metadata.articleDetail.title.replace(
@@ -94,36 +92,6 @@ export const ArticleDetailPage = () => {
             )}
           </title>
         }
-        <meta
-          name='description'
-          content={metadata.articleDetail.description.replace(
-            "%description%",
-            data?.description || "",
-          )}
-        />
-        <meta
-          name='keywords'
-          content={metadata.articleDetail.keywords.replace(
-            "%keywords%",
-            data?.keywords || "",
-          )}
-        />
-        <meta
-          property='og:title'
-          content={metadata.articleDetail.title.replace(
-            "%article%",
-            String(parse(data?.name ?? "")) || "Article",
-          )}
-        />
-        <meta
-          property='og:description'
-          content={metadata.articleDetail.description.replace(
-            "%description%",
-            data?.description || "",
-          )}
-        />
-        <meta property='og:type' content='website' />
-        <meta property='og:url' content={webUrl + location.pathname} />
       </Helmet>
       <main className='mx-auto flex min-h-minHeight w-full max-w-desktop flex-col items-center'>
         {openDelegationModal && (

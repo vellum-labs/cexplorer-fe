@@ -21,7 +21,6 @@ import ReactEcharts from "echarts-for-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import metadata from "../../../conf/metadata/en-metadata.json";
-import { webUrl } from "@/constants/confVariables";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
@@ -159,19 +158,7 @@ export const PotsPage = () => {
 
   return (
     <>
-      <Helmet>
-        <meta charSet='utf-8' />
-        {<title>{metadata.adaPots.title}</title>}
-        <meta name='description' content={metadata.adaPots.description} />
-        <meta name='keywords' content={metadata.adaPots.keywords} />
-        <meta property='og:title' content={metadata.adaPots.title} />
-        <meta
-          property='og:description'
-          content={metadata.adaPots.description}
-        />
-        <meta property='og:type' content='website' />
-        <meta property='og:url' content={webUrl + location.pathname} />
-      </Helmet>
+      <Helmet>{<title>{metadata.adaPots.title}</title>}</Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center'>
         <HeaderBanner
           title='Pots'
