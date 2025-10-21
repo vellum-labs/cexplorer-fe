@@ -67,7 +67,7 @@ export default defineConfig({
       writeBundle() {
         setTimeout(() => {
           process.exit(0);
-        }, 2000);
+        }, 20000);
       },
     },
   ],
