@@ -134,11 +134,11 @@ const routes = [
   },
   {
     path: "/article/:url",
-    title: "%article% | Learn About Cardano | Cexplorer.io",
+    title: "%name%",
     description: "%description%",
-    keywords:
-      "Cardano, blockchain, Cexplorer, Cardano news, Cardano projects, Cardano articles, %tags%",
-    api: `${API_URL}/article/detail`,
+    keywords: "%keywords%",
+    api: `${API_URL}/article/detail?type=article&url=%url%&lng=%lng%`,
+    image: "%image%"
   },
   {
     path: "/asset",
