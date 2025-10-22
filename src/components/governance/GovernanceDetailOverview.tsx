@@ -12,7 +12,7 @@ import { Image } from "../global/Image";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { Link } from "@tanstack/react-router";
-import { GovernanceStatusBadge } from "@/components/global/badges/GovernanceStatusBadge";
+import { GovernanceStatusBadge } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";

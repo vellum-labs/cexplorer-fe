@@ -13,7 +13,7 @@ import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@/components/global/Image";
 import { Link } from "@tanstack/react-router";
 import { Landmark, Route, User } from "lucide-react";
-import { GovernanceStatusBadge } from "@/components/global/badges/GovernanceStatusBadge";
+import { GovernanceStatusBadge } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { formatString } from "@vellumlabs/cexplorer-sdk";

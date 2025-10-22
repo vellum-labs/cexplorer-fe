@@ -31,7 +31,7 @@ import { governanceListTableOptions } from "@/constants/tables/governanceActions
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { getEpochByTime } from "@/utils/getEpochByTime";
-import { GovernanceStatusBadge } from "@/components/global/badges/GovernanceStatusBadge";
+import { GovernanceStatusBadge } from "@vellumlabs/cexplorer-sdk";
 import { ActionTypes } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
