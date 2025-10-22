@@ -9,7 +9,7 @@ import { Link } from "@tanstack/react-router";
 import { memo } from "react";
 import AdaHandleBadge from "../global/badges/AdaHandleBadge";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import { Image } from "../global/Image";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 
 import { configJSON } from "@/constants/conf";
 

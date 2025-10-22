@@ -2,7 +2,7 @@ import { DrepDetailOverview } from "@/components/drep/DrepDetailOverview";
 import { DrepDetailAboutTab } from "@/components/drep/tabs/DrepDetailAboutTab";
 import { DrepDetailDelegatorsTab } from "@/components/drep/tabs/DrepDetailDelegatorsTab";
 import { DrepDetailGovernanceActionsTab } from "@/components/drep/tabs/DrepDetailGovernanceActionsTab";
-import { Image } from "@/components/global/Image";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
 import Tabs from "@/components/global/Tabs";
 import { useEffect, useState, type FC } from "react";

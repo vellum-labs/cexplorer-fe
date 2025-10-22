@@ -2,7 +2,7 @@ import type { useFetchAssetDetail } from "@/services/assets";
 import type { FC } from "react";
 
 import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
-import { Image } from "../global/Image";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { WatchlistSection } from "../global/watchlist/WatchlistSection";
 
 import { alphabetWithNumbers } from "@/constants/alphabet";

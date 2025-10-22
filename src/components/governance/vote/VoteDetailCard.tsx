@@ -10,7 +10,7 @@ import {
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { Image } from "@/components/global/Image";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { Landmark, Route, User } from "lucide-react";
 import { GovernanceStatusBadge } from "@vellumlabs/cexplorer-sdk";

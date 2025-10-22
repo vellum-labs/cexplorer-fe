@@ -7,7 +7,7 @@ import Discord from "@/resources/images/icons/discord.svg";
 import X from "@/resources/images/icons/twitter.svg";
 
 import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
-import { Image } from "../global/Image";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";
 

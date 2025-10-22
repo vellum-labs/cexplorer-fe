@@ -1,7 +1,7 @@
 import { ArticleCard } from "@/components/article/ArticleCard";
 import AdsCarousel from "@/components/global/ads/AdsCarousel";
 import { HeaderBanner } from "@/components/global/HeaderBanner";
-import { Image } from "@/components/global/Image";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { NoResultsFound } from "@/components/global/NoResultsFound";
 import { Pagination } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
