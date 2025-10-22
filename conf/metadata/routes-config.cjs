@@ -600,12 +600,14 @@ const routes = [
   },
   {
     path: "/pool/:id",
-    title: "Pool %poolName% (%poolTicker%) | Cexplorer.io",
+    title: "Pool %name% (%ticker%) | Cexplorer.io",
     description:
-      "Detailed information about stake pool %poolName% with ticker %poolTicker%. View comprehensive performance metrics, lifetime blocks minted, current delegation, fee structure, rewards history, saturation level, pledge amount, and complete pool operational history.",
+      "Detailed information about stake pool %poolName% with ticker %ticker%. View comprehensive performance metrics, lifetime blocks minted, current delegation, fee structure, rewards history, saturation level, pledge amount, and complete pool operational history.",
     keywords:
       "stake pool, %poolName%, %poolTicker%, pool details, pool performance, Cardano staking, Cexplorer, pool stats, delegation",
-    api: false,
+      api: `${API_URL}/pool/detail?pool_id=%id%`,
+
+
   },
   {
     path: "/pool/deregistrations",
