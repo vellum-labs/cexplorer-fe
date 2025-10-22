@@ -6,7 +6,7 @@ import { FileBarChart, LineChart } from "lucide-react";
 import AdsCarousel from "../global/ads/AdsCarousel";
 import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { LabelBadge } from "@vellumlabs/cexplorer-sdk";
-import { PurposeBadge } from "../global/badges/PurposeBadge";
+import { PurposeBadge } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { OverviewCard } from "../global/cards/OverviewCard";
 import { OverviewStatCard } from "../global/cards/OverviewStatCard";
