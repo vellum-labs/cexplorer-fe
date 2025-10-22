@@ -20,7 +20,7 @@ import { DeFiOrderList } from "@/components/defi/DeFiOrderList";
 import { Fragment, useEffect, useState } from "react";
 import { getAddonsForMetadata } from "@/utils/addons/getAddonsForMetadata";
 import { PageBase } from "@/components/global/pages/PageBase";
-import { LabelBadge } from "@/components/global/badges/LabelBadge";
+import { LabelBadge } from "@vellumlabs/cexplorer-sdk";
 
 const TxDetailPage = () => {
   const route = getRouteApi("/tx/$hash");

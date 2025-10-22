@@ -1,6 +1,6 @@
 import type { PlutusContract, TxInput } from "@/types/txTypes";
 import { Fragment, useState, type FC } from "react";
-import { LabelBadge } from "../global/badges/LabelBadge";
+import { LabelBadge } from "@vellumlabs/cexplorer-sdk";
 import { PurposeBadge } from "../global/badges/PurposeBadge";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
