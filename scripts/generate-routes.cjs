@@ -3,11 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 const { routes: routesConfig } = require("../conf/metadata/routes-config.cjs");
-const {
-  BASE_URL,
-  defaultTemplate,
-  generateJsonLd,
-} = require("./route-templates.cjs");
+const { defaultTemplate, generateJsonLd } = require("./route-templates.cjs");
 
 function generateRoute(config) {
   const route = {
@@ -15,7 +11,7 @@ function generateRoute(config) {
     title: config.title,
     description: config.description,
     keywords: config.keywords || "",
-    canonical: `${BASE_URL}${config.path}`,
+    canonical: config.path,
 
     og_title: config.og_title || config.title,
     og_description: config.og_description || config.description,

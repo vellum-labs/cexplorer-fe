@@ -2,11 +2,11 @@ const BASE_URL = "https://beta.cexplorer.io";
 
 const defaultTemplate = {
   og_type: "website",
-  og_image: "./images/preview.png",
+  og_image: "./resources/preview.png",
   og_site_name: "beta.cexplorer.io",
   og_locale: "en_US",
   twitter_card: "summary_large_image",
-  twitter_image: "./images/preview.png",
+  twitter_image: "./resources/preview.png",
   twitter_site: "@cexplorer_io",
 };
 
@@ -34,7 +34,7 @@ function generateJsonLd(config) {
     },
     image: {
       "@type": "ImageObject",
-      url: `${BASE_URL}/images/preview.png`,
+      url: `${BASE_URL}/resources/preview.png`,
     },
   };
 
