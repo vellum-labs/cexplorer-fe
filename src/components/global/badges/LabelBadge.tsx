@@ -3,7 +3,7 @@ import type { ScriptDetailData } from "@/types/scriptTypes";
 import type { Label } from "@/types/txTypes";
 import type { ReactNode } from "react";
 import { Badge } from "@vellumlabs/cexplorer-sdk";
-import { ExtraLabelBadge } from "./ExtraLabelBadge";
+import { ExtraLabelBadge } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   variant: "sm" | "lg" | "textOnly";
