@@ -8,15 +8,11 @@ import X from "@/resources/images/icons/twitter.svg";
 
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { useFetchArticleDetail } from "@/services/article";
-import { webUrl } from "@/constants/confVariables";
-// import parse from "html-react-parser";
 
 export const BotsPage = () => {
   const query = useFetchArticleDetail("en", "page", "bots");
   const data = query.data;
   const name = data?.name;
-  const description = data?.description;
-  const keywords = data?.keywords;
 
   const bots = [
     {
@@ -47,18 +43,7 @@ export const BotsPage = () => {
 
   return (
     <>
-      <Helmet>
-        <meta charSet='utf-8' />
-        {description && <meta name='description' content={description} />}
-        {keywords && <meta name='keywords' content={keywords} />}
-        {name && <title>Bots | Cexplorer.io</title>}
-        {name && <meta property='og:title' content={name} />}
-        {description && (
-          <meta property='og:description' content={description} />
-        )}
-        <meta property='og:type' content='website' />
-        <meta property='og:url' content={webUrl + location.pathname} />
-      </Helmet>
+      <Helmet>{name && <title>Bots | Cexplorer.io</title>}</Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center px-mobile md:px-desktop'>
         <div className='flex w-full max-w-desktop flex-col items-center'>
           <h1 className='py-4'>Cexplorer.io Bots</h1>

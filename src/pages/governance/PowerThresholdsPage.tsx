@@ -1,5 +1,4 @@
 import { HeaderBanner } from "@/components/global/HeaderBanner";
-import { webUrl } from "@/constants/confVariables";
 import type { FC } from "react";
 import metadata from "../../../conf/metadata/en-metadata.json";
 
@@ -34,20 +33,7 @@ export const PowerThresholdsPage: FC = () => {
   return (
     <>
       <Helmet>
-        <meta charSet='utf-8' />
         <title>{metadata.powerThresholds.title}</title>
-        <meta
-          name='description'
-          content={metadata.powerThresholds.description}
-        />
-        <meta name='keywords' content={metadata.powerThresholds.keywords} />
-        <meta property='og:title' content={metadata.powerThresholds.title} />
-        <meta
-          property='og:description'
-          content={metadata.powerThresholds.description}
-        />
-        <meta property='og:type' content='website' />
-        <meta property='og:url' content={webUrl + location.pathname} />
       </Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center'>
         <HeaderBanner

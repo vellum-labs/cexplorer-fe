@@ -252,12 +252,6 @@ const Tabs = ({
           >
             {tabTitle && (
               <Helmet>
-                {/* <title> */}
-                {/* {document.title.replace(" | Cexplorer.io", "")} */}
-                {/* -{" "}
-              {items[activeTab].title || String(items[activeTab].label)} |
-              Cexplorer.io */}
-                {/* </title> */}
                 <title>{tabTitle}</title>
               </Helmet>
             )}

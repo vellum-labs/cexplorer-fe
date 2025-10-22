@@ -1,7 +1,5 @@
 import type { FilterKey } from "@/hooks/tables/useDrepList";
 import type { DrepListTableColumns } from "@/types/tableTypes";
-import { Helmet } from "react-helmet";
-import metadata from "../../../../conf/metadata/en-metadata.json";
 
 import { PlusIcon, X } from "lucide-react";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
@@ -59,11 +57,6 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
 
   return (
     <>
-      <Helmet>
-        <meta charSet='utf-8' />
-        <meta name='description' content={metadata.drepList.description} />
-        <meta name='keywords' content={metadata.drepList.keywords} />
-      </Helmet>
       <div className='mb-1 flex w-full flex-col justify-between gap-1 min-[870px]:flex-row min-[870px]:items-center'>
         <div className='flex flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
           {!watchlist && (

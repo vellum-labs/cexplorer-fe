@@ -30,8 +30,6 @@ import { useEffect, useState } from "react";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 
 import { Select, SelectTrigger } from "@/components/ui/select";
-import { webUrl } from "@/constants/confVariables";
-import { useLocation } from "@tanstack/react-router";
 import { configJSON } from "@/constants/conf";
 
 export const WalletPage: FC = () => {
@@ -45,11 +43,8 @@ export const WalletPage: FC = () => {
       onClick: () => void;
     }[]
   >([]);
-  const description = data?.data.description;
-  const keywords = data?.data.keywords;
   const name = data?.data.name;
   const [walletsData, setWalletsData] = useState<CompareWallet[]>([]);
-  const location = useLocation();
 
   const { supportedWallets } = configJSON;
 
@@ -698,21 +693,7 @@ export const WalletPage: FC = () => {
 
   return (
     <>
-      <Helmet>
-        <meta charSet='utf-8' />
-        {description && <meta name='description' content={description} />}
-        {keywords && <meta name='keywords' content={keywords} />}
-        {name && <title>{name} | Cexplorer.io</title>}
-
-        {name && (
-          <meta property='og:title' content={`${name} | Cexplorer.io`} />
-        )}
-        {description && (
-          <meta property='og:description' content={description} />
-        )}
-        <meta property='og:url' content={webUrl + location.pathname} />
-        <meta property='og:type' content='website' />
-      </Helmet>
+      <Helmet>{name && <title>{name} | Cexplorer.io</title>}</Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center'>
         <HeaderBanner
           title='Compare Cardano Wallets'

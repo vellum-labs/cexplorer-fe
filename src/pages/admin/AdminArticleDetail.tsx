@@ -100,7 +100,6 @@ export const AdminArticleDetail = () => {
   return (
     <main className='relative flex min-h-minHeight max-w-desktop flex-col gap-1 p-mobile md:p-desktop'>
       <Helmet>
-        <meta charSet='utf-8' />
         <title>Admin article detail | Cexplorer.io</title>
       </Helmet>
       <BreadcrumbRaw className='w-full'>

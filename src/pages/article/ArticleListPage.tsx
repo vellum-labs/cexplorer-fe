@@ -17,7 +17,6 @@ import type { SetStateAction } from "react";
 import React, { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import metadata from "../../../conf/metadata/en-metadata.json";
-import { webUrl } from "@/constants/confVariables";
 
 export const ArticleListPage = () => {
   const { page } = useSearch({ from: "/article/" });
@@ -59,19 +58,7 @@ export const ArticleListPage = () => {
   if (query.isLoading && firstRender.current) {
     return (
       <>
-        <Helmet>
-          <meta charSet='utf-8' />
-          {<title>{metadata.articleList.title}</title>}
-          <meta name='description' content={metadata.articleList.description} />
-          <meta name='keywords' content={metadata.articleList.keywords} />
-          <meta property='og:title' content={metadata.articleList.title} />
-          <meta
-            property='og:description'
-            content={metadata.articleList.description}
-          />
-          <meta property='og:type' content='website' />
-          <meta property='og:url' content={webUrl + location.pathname} />
-        </Helmet>
+        <Helmet>{<title>{metadata.articleList.title}</title>}</Helmet>
         <main className='flex min-h-minHeight w-full flex-col items-center'>
           <HeaderBanner
             title='Learn About Cardano'
@@ -118,19 +105,7 @@ export const ArticleListPage = () => {
 
   return (
     <>
-      <Helmet>
-        <meta charSet='utf-8' />
-        {<title>{metadata.articleList.title}</title>}
-        <meta name='description' content={metadata.articleList.description} />
-        <meta name='keywords' content={metadata.articleList.keywords} />
-        <meta property='og:title' content={metadata.articleList.title} />
-        <meta
-          property='og:description'
-          content={metadata.articleList.description}
-        />
-        <meta property='og:type' content='website' />
-        <meta property='og:url' content={webUrl + location.pathname} />
-      </Helmet>
+      <Helmet>{<title>{metadata.articleList.title}</title>}</Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center'>
         <HeaderBanner
           title='Learn About Cardano'
