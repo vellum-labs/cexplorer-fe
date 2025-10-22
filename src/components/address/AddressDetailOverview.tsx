@@ -14,7 +14,7 @@ import { Link } from "@tanstack/react-router";
 import { TokenSelectCombobox } from "../asset/TokenSelect";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import AdaHandleBadge from "../global/badges/AdaHandleBadge";
-import { AddressTypeInitialsBadge } from "../global/badges/AddressTypeInitialsBadge";
+import { AddressTypeInitialsBadge } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TotalSumWithRates } from "../global/TotalSumWithRates";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
