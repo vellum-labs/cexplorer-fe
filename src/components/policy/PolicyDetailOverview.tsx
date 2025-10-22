@@ -6,7 +6,7 @@ import Attach from "@/resources/images/icons/attach.svg";
 import Discord from "@/resources/images/icons/discord.svg";
 import X from "@/resources/images/icons/twitter.svg";
 
-import { OverviewCard } from "../global/cards/OverviewCard";
+import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "../global/Image";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";

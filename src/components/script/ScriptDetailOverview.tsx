@@ -8,7 +8,7 @@ import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { LabelBadge } from "@vellumlabs/cexplorer-sdk";
 import { PurposeBadge } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
-import { OverviewCard } from "../global/cards/OverviewCard";
+import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { TextDisplay } from "@vellumlabs/cexplorer-sdk";

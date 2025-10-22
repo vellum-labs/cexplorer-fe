@@ -8,7 +8,7 @@ import type {
   PoolsListColumns,
   TxListTableColumns,
 } from "@/types/tableTypes";
-import type { OverviewList } from "@/components/global/cards/OverviewCard";
+import type { OverviewList } from "@vellumlabs/cexplorer-sdk";
 import type { ReactEChartsProps } from "@/lib/ReactCharts";
 import type { Dispatch, SetStateAction } from "react";
 import type { EpochAnalyticsResponseData } from "@/types/analyticsTypes";

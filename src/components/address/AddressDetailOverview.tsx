@@ -1,7 +1,7 @@
 import type { AddressDetailData } from "@/types/addressTypes";
 import type { FC } from "react";
 
-import { OverviewCard } from "../global/cards/OverviewCard";
+import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";
 
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";

@@ -1,4 +1,4 @@
-import { OverviewCard } from "../global/cards/OverviewCard";
+import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { WatchlistSection } from "../global/watchlist/WatchlistSection";
 

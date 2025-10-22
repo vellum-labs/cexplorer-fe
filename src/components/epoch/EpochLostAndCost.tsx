@@ -1,7 +1,7 @@
 import type { EpochParam, EpochStatsSummary } from "@/types/epochTypes";
 import type { FC } from "react";
 
-import { OverviewCard } from "../global/cards/OverviewCard";
+import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 import { TotalSumWithRates } from "../global/TotalSumWithRates";
 
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
