@@ -18,7 +18,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import { VoteBadge } from "@/components/global/badges/VoteBadge";
+import { VoteBadge } from "@vellumlabs/cexplorer-sdk";
 import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
 import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
 import { generateImageUrl } from "@/utils/generateImageUrl";

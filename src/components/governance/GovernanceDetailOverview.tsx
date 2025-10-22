@@ -30,7 +30,7 @@ import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
 
 import { useState } from "react";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
-import { VoteBadge } from "../global/badges/VoteBadge";
+import { VoteBadge } from "@vellumlabs/cexplorer-sdk";
 import type { Vote } from "@/constants/votes";
 
 interface GovernanceDetailOverviewProps {

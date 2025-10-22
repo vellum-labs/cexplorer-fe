@@ -23,7 +23,7 @@ import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { useFilterTable } from "./useFilterTable";
-import { VoteBadge } from "@/components/global/badges/VoteBadge";
+import { VoteBadge } from "@vellumlabs/cexplorer-sdk";
 import type { Vote } from "@/constants/votes";
 import { useSearchTable } from "./useSearchTable";
 
