@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "dev:host": "vite --host",
-    "build": "rimraf dist & vite build & node ./scripts/generate-routes.cjs",
+    "build": "rimraf dist && vite build && node ./scripts/generate-routes.cjs",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
