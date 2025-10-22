@@ -22,7 +22,7 @@ import { getConfirmations } from "@/utils/getConfirmations";
 import { MintedByCard } from "@/components/global/cards/MintedByCard";
 import type { OverviewList } from "@/components/global/cards/OverviewCard";
 import { OverviewCard } from "@/components/global/cards/OverviewCard";
-import { SizeCard } from "@/components/global/cards/SizeCard";
+import { SizeCard } from "@vellumlabs/cexplorer-sdk";
 import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 import { TotalSumWithRates } from "@/components/global/TotalSumWithRates";

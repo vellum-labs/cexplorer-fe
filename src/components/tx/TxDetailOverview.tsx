@@ -26,7 +26,7 @@ import AdsCarousel from "../global/ads/AdsCarousel";
 import { MintedByCard } from "../global/cards/MintedByCard";
 import type { OverviewList } from "../global/cards/OverviewCard";
 import { OverviewCard } from "../global/cards/OverviewCard";
-import { SizeCard } from "../global/cards/SizeCard";
+import { SizeCard } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import TtlCountdown from "./TtlCountdown";
