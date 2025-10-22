@@ -70,10 +70,13 @@ jobs:
         run: |
           echo "🧶 Installing dependencies..."
           time yarn install
-      
+
           echo "🔨 Starting build..."
           time yarn build
-      
+
+          echo "📝 Generating routes.json..."
+          time yarn generate:routes
+
           echo "✅ Build complete"
 
 
