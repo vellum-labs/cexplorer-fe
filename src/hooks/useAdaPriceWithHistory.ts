@@ -41,8 +41,6 @@ export const useAdaPriceWithHistory = (overrideCurrency?: Currencies) => {
     currentCurrency &&
     usdCurrency;
 
-  console.log(currency);
-
   if (!isDataValid) {
     return {};
   }
