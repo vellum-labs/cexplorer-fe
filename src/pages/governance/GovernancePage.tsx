@@ -6,7 +6,7 @@ import type {
 import type { FC } from "react";
 
 import AdsCarousel from "@/components/global/ads/AdsCarousel";
-import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
+import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";

@@ -13,7 +13,7 @@ import {
 } from "@/services/drep";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
+import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 import {

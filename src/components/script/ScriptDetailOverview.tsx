@@ -9,7 +9,7 @@ import { LabelBadge } from "@vellumlabs/cexplorer-sdk";
 import { PurposeBadge } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { OverviewCard } from "../global/cards/OverviewCard";
-import { OverviewStatCard } from "../global/cards/OverviewStatCard";
+import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { TextDisplay } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "../tx/HashCell";
