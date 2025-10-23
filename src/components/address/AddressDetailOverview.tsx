@@ -14,7 +14,7 @@ import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { Link } from "@tanstack/react-router";
 import { TokenSelectCombobox } from "../asset/TokenSelect";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import AdaHandleBadge from "../global/badges/AdaHandleBadge";
+import { AdaHandleBadge } from "@vellumlabs/cexplorer-sdk";
 import { AddressTypeInitialsBadge } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TotalSumWithRates } from "../global/TotalSumWithRates";
@@ -41,6 +41,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
   const stakeAddr = Address.from(address).rewardAddress;
   const tokenMarket = configJSON.market[0].token[0].active;
   const nftMarket = configJSON.market[0].nft[0].active;
+  const policyId = configJSON.integration[0].adahandle[0].policy;
   const curr = useGetMarketCurrency();
   const isStaking = data[0]?.stake?.active_pool || data[0]?.stake?.live_pool;
   const isRecync = data[0]?.address === null;
@@ -50,7 +51,13 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
     data[0]?.adahandle
       ? {
           label: "Handle",
-          value: <AdaHandleBadge hex={data[0].adahandle.hex} link />,
+          value: (
+            <AdaHandleBadge
+              hex={data[0].adahandle.hex}
+              link
+              policyId={policyId}
+            />
+          ),
         }
       : undefined,
     {

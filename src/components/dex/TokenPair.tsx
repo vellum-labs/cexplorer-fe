@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { AssetDisplay } from "./AssetDisplay";
 import { getAssetImage } from "@/utils/asset/getAssetImage";
-import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
+import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
 
 interface TokenPairProps {
   tokenIn: string;

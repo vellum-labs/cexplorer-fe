@@ -24,19 +24,20 @@ import { TitleSort } from "@vellumlabs/cexplorer-sdk";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 import { calculateAdaPriceWithHistory } from "@/utils/calculateAdaPriceWithHistory";
 import { adaHandlePolicy } from "@/constants/confVariables";
-import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
-import AdaHandleBadge from "@/components/global/badges/AdaHandleBadge";
+import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
+import { AdaHandleBadge } from "@vellumlabs/cexplorer-sdk";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { alphabetWithNumbers } from "@/constants/alphabet";
-import { encodeAssetName } from "@/utils/asset/encodeAssetName";
+import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { PriceAdaSmallAmount } from "@/components/global/PriceAdaSmallAmount";
 import { PriceSparkline } from "@/components/charts/PriceSparkline";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { AlertCircle, TrendingUp, TrendingDown } from "lucide-react";
+import { configJSON } from "@/constants/conf";
 
 type Volume = "1d" | "1m" | "1w" | "2w" | "3m";
 
@@ -53,6 +54,8 @@ export const TokenDashboardTokenTab: FC = () => {
   const [totalItems, setTotalItems] = useState<number>(0);
   const [selectedItem, setSelectedItem] = useState<Volume>("1d");
   const [changeTimeframe, setChangeTimeframe] = useState<"24h" | "7d">("24h");
+
+  const policyId = configJSON.integration[0].adahandle[0].policy;
 
   const {
     columnsOrder,
@@ -150,7 +153,11 @@ export const TokenDashboardTokenTab: FC = () => {
                     className={`flex w-full items-center text-text-sm text-primary`}
                   >
                     {isAdaHandle && (
-                      <AdaHandleBadge variant='icon' className='h-2 w-2' />
+                      <AdaHandleBadge
+                        variant='icon'
+                        className='h-2 w-2'
+                        policyId={policyId}
+                      />
                     )}
                     <span
                       className={`block overflow-hidden text-ellipsis whitespace-nowrap`}

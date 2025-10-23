@@ -9,7 +9,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { useLayoutEffect, type FC } from "react";
 
 import { AssetsTab } from "@/components/address/tabs/AssetsTab";
-import AdaHandleBadge from "@/components/global/badges/AdaHandleBadge";
+import { AdaHandleBadge } from "@vellumlabs/cexplorer-sdk";
 import { StakeDetailOverview } from "@/components/stake/StakeDetailOverview";
 import StakeDelegationsTab from "@/components/stake/tabs/StakeDelegationsTab";
 import { StakeWithdrawalsTab } from "@/components/stake/tabs/StakeWithdrawalsTab";
@@ -25,6 +25,7 @@ import { TxListPage } from "../tx/TxListPage";
 import { DeFiOrderList } from "@/components/defi/DeFiOrderList";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { WatchlistSection } from "@/components/global/watchlist/WatchlistSection";
+import { configJSON } from "@/constants/conf";
 
 export const StakeDetailPage: FC = () => {
   const route = getRouteApi("/stake/$stakeAddr");
@@ -44,6 +45,8 @@ export const StakeDetailPage: FC = () => {
   const { page } = useSearch({
     from: "/stake/$stakeAddr",
   });
+
+  const policyId = configJSON.integration[0].adahandle[0].policy;
 
   const tabs = [
     {
@@ -124,7 +127,10 @@ export const StakeDetailPage: FC = () => {
       }
       badge={
         stakeQuery.data?.adahandle && (
-          <AdaHandleBadge hex={stakeQuery.data?.adahandle?.hex} />
+          <AdaHandleBadge
+            hex={stakeQuery.data?.adahandle?.hex}
+            policyId={policyId}
+          />
         )
       }
       qrCode={

@@ -4,7 +4,7 @@ import { type FC } from "react";
 import GlobalTable from "@/components/table/GlobalTable";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import AdaHandleBadge from "@/components/global/badges/AdaHandleBadge";
+import { AdaHandleBadge } from "@vellumlabs/cexplorer-sdk";
 import { TokenSelectCombobox } from "@/components/asset/TokenSelect";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { useAuthToken } from "@/hooks/useAuthToken";
@@ -12,10 +12,13 @@ import { useFetchAccountList } from "@/services/user";
 import type { StakeKeyData } from "@/types/userTypes";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
+import { configJSON } from "@/constants/conf";
 
 export const StakeListTab: FC = () => {
   const token = useAuthToken();
   const accountListQuery = useFetchAccountList(token);
+
+  const policyId = configJSON.integration[0].adahandle[0].policy;
 
   const data = accountListQuery?.data?.data?.data ?? [];
 
@@ -46,7 +49,12 @@ export const StakeListTab: FC = () => {
                 {formatString(item.view, "long")}
               </Link>
               {item.adahandle && (
-                <AdaHandleBadge hex={item.adahandle} link className='mt-1/2' />
+                <AdaHandleBadge
+                  hex={item.adahandle}
+                  link
+                  className='mt-1/2'
+                  policyId={policyId}
+                />
               )}
             </div>
             <Copy copyText={item.view} />

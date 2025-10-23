@@ -1,6 +1,6 @@
 import { walletInfos } from "@/constants/wallet";
 import { useConnectWallet } from "@/hooks/useConnectWallet";
-import { encodeAssetName } from "@/utils/asset/encodeAssetName";
+import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";

@@ -13,7 +13,7 @@ import { addressDetailAssetTableOptions } from "@/constants/tables/addressDetail
 import type { useFetchAddressDetail } from "@/services/address";
 import type { useFetchStakeDetail } from "@/services/stake";
 import type { AddressDetailAssetTableOptions } from "@/types/tableTypes";
-import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
+import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { configJSON } from "@/constants/conf";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";

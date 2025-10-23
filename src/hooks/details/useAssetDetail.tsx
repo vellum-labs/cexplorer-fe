@@ -7,7 +7,7 @@ import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 
-import { encodeAssetName } from "@/utils/asset/encodeAssetName";
+import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";

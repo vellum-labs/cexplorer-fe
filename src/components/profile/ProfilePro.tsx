@@ -23,7 +23,7 @@ import { useWalletStore } from "@/stores/walletStore";
 import { useWatchlistStore } from "@/stores/watchlistStore";
 import type { CexplorerNftsColumns, TableColumns } from "@/types/tableTypes";
 import type { CexplorerNftsData } from "@/types/userTypes";
-import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
+import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
 import { formatString, formatTimeIn } from "@vellumlabs/cexplorer-sdk";
 import type { FileRoutesByPath } from "@tanstack/react-router";
