@@ -7,7 +7,7 @@ import DarkLogo from "/resources/preloader_logo_dark.svg";
 import LightLogo from "/resources/preloader_logo_light.svg";
 import DarkLogoOffline from "/resources/logo_darkmode_offline.svg";
 import LightLogoOffline from "/resources/logo_lightmode_offline.svg";
-import { Badge } from "./badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { EnvironmentBadge } from "./badges/EnvironmentBadge";
 
 const MainLogo = ({

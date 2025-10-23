@@ -1,4 +1,4 @@
-import type { OverviewList } from "@/components/global/cards/OverviewCard";
+import type { OverviewList } from "@vellumlabs/cexplorer-sdk";
 import type { useFetchDrepDetail } from "@/services/drep";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";

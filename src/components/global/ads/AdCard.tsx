@@ -3,7 +3,7 @@ import type { MiscBasicResponse } from "@/types/miscTypes";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import parse from "html-react-parser";
 import type { ReactNode } from "react";
-import { Image } from "../Image";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 
 type Props = {
   className?: string;

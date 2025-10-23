@@ -2,7 +2,7 @@ import { useWalletStore } from "@/stores/walletStore";
 import type { User } from "@/types/userTypes";
 import { Link } from "@tanstack/react-router";
 import { Edit } from "lucide-react";
-import { Badge } from "../global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { UserSocials } from "./UserSocials";

@@ -1,7 +1,7 @@
 import type { AssetOwnerColumns } from "@/types/tableTypes";
 import { useEffect, useState, type FC } from "react";
 
-import { AddressTypeInitialsBadge } from "@/components/global/badges/AddressTypeInitialsBadge";
+import { AddressTypeInitialsBadge } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 
 import { useFetchAssetOwners } from "@/services/assets";

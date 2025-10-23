@@ -9,7 +9,7 @@ import { useFetchNftAssetOwners } from "@/services/assets";
 import { useAssetOwnerNftTableStore } from "@/stores/tables/AssetOwnerNftTableStore";
 
 import AddressCell from "@/components/address/AddressCell";
-import { AddressTypeInitialsBadge } from "@/components/global/badges/AddressTypeInitialsBadge";
+import { AddressTypeInitialsBadge } from "@vellumlabs/cexplorer-sdk";
 import { useSearch } from "@tanstack/react-router";
 import { configJSON } from "@/constants/conf";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";

@@ -33,7 +33,7 @@ import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { useFilterTable } from "./useFilterTable";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { getGradientColor } from "@/utils/getGradientColor";
-import { VoteBadge } from "@/components/global/badges/VoteBadge";
+import { VoteBadge } from "@vellumlabs/cexplorer-sdk";
 import type { Vote } from "@/constants/votes";
 import { useSearchTable } from "./useSearchTable";
 

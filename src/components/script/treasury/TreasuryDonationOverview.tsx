@@ -1,5 +1,5 @@
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
+import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { TrendingArrow } from "@vellumlabs/cexplorer-sdk";
 import { colors } from "@/constants/colors";

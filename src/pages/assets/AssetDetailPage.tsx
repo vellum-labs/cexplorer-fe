@@ -15,7 +15,7 @@ import { useFetchAssetDetail } from "@/services/assets";
 import { AssetStatsTab } from "@/components/asset/tabs/AssetStatsTab";
 import { AssetTimelockTab } from "@/components/asset/tabs/AssetTimelockTab";
 import AdaHandleBadge from "@/components/global/badges/AdaHandleBadge";
-import { ProBadge } from "@/components/global/badges/ProBadge";
+import { ProBadge } from "@vellumlabs/cexplorer-sdk";
 import { adaHandlePolicy, proPolicy } from "@/constants/confVariables";
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";
 import { formatString } from "@vellumlabs/cexplorer-sdk";

@@ -11,7 +11,7 @@ import GlobalTable from "@/components/table/GlobalTable";
 import { useFetchAssetMint } from "@/services/assets";
 import { useAssetDetailMintTableStore } from "@/stores/tables/assetDetailMintTableStore";
 
-import { Badge } from "@/components/global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import { PolicyCell } from "@/components/policy/PolicyCell";
 import ExportButton from "@/components/table/ExportButton";

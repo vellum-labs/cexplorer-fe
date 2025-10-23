@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { Cardano } from "@/resources/images/icons/Cardano";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Box, Coins } from "lucide-react";
-import { OverviewStatCard } from "../global/cards/OverviewStatCard";
+import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 
 import { HomepageCardanoEpoch } from "./stats/HomepageCardanoEpoch";
 import { HomepageCardanoLiveStake } from "./stats/HomepageCardanoLiveStake";

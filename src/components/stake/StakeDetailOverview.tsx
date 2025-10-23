@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { OverviewCard } from "../global/cards/OverviewCard";
+import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 
 import type { PoolInfo } from "@/types/poolTypes";
 import type { StakeDetailData } from "@/types/stakeTypes";
@@ -11,7 +11,7 @@ import { TokenSelectCombobox } from "../asset/TokenSelect";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { TotalSumWithRates } from "../global/TotalSumWithRates";
 import AdaHandleBadge from "../global/badges/AdaHandleBadge";
-import { Badge } from "../global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import PoolCell from "../table/PoolCell";
 import { AttributeDropdown } from "../global/AttributeDropdown";

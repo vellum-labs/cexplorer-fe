@@ -7,7 +7,7 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { CircleHelp } from "lucide-react";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { Badge } from "@/components/global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 

@@ -2,7 +2,7 @@ import type { PoolBlock } from "@/types/analyticsTypes";
 import type { PoolBlockTableColumns, TableColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
-import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
+import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 import { Dropdown } from "@vellumlabs/cexplorer-sdk";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";

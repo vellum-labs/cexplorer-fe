@@ -9,7 +9,7 @@ import { useMemo, useState } from "react";
 import { AssetListPage } from "../assets/AssetListPage";
 import PoolListTab from "@/components/pool/tabs/PoolListTab";
 import { PageBase } from "@/components/global/pages/PageBase";
-import { Badge } from "@/components/global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { EmptyState } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";

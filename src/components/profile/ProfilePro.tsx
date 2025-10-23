@@ -1,5 +1,5 @@
 import AssetCell from "@/components/asset/AssetCell";
-import { Badge } from "@/components/global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { EmptyState } from "@vellumlabs/cexplorer-sdk";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
@@ -31,7 +31,7 @@ import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { Star, X, Zap, Wallet } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { ProBadge } from "../global/badges/ProBadge";
+import { ProBadge } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 
 export const ProfilePro = () => {

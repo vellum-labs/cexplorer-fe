@@ -1,7 +1,7 @@
 import type { AddressDetailData } from "@/types/addressTypes";
 import type { FC } from "react";
 
-import { OverviewCard } from "../global/cards/OverviewCard";
+import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";
 
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
@@ -14,7 +14,7 @@ import { Link } from "@tanstack/react-router";
 import { TokenSelectCombobox } from "../asset/TokenSelect";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import AdaHandleBadge from "../global/badges/AdaHandleBadge";
-import { AddressTypeInitialsBadge } from "../global/badges/AddressTypeInitialsBadge";
+import { AddressTypeInitialsBadge } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TotalSumWithRates } from "../global/TotalSumWithRates";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";

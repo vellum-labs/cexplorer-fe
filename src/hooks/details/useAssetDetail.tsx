@@ -1,5 +1,5 @@
 import type { AssetDetail } from "@/types/assetsTypes";
-import type { OverviewList } from "@/components/global/cards/OverviewCard";
+import type { OverviewList } from "@vellumlabs/cexplorer-sdk";
 import type { useFetchAssetDetail } from "@/services/assets";
 
 import AssetCell from "@/components/asset/AssetCell";
