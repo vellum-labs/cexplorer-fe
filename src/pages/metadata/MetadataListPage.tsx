@@ -20,7 +20,7 @@ import { useEffect, useState } from "react";
 
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { MetadataCell } from "@/components/metadata/MetadataCell";
-import { SizeCell } from "@/components/table/SizeCell";
+import { SizeCell } from "@vellumlabs/cexplorer-sdk";
 import { metadataTxListTableOptions } from "@/constants/tables/metadataTxListTableOptions";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";

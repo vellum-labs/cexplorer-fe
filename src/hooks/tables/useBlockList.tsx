@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
-import { SizeCell } from "@/components/table/SizeCell";
+import { SizeCell } from "@vellumlabs/cexplorer-sdk";
 
 import { BlockCell } from "@/components/blocks/BlockCell";
 import { ProtocolDot } from "@vellumlabs/cexplorer-sdk";
@@ -279,7 +279,13 @@ export const useBlockList = ({
         if (item.epoch_no === null) {
           return <span>Genesis block</span>;
         }
-        return <PoolCell key={String(item.slot_no)} poolInfo={item.pool} poolImageUrl={generateImageUrl(item.pool.id, "ico", "pool")} />;
+        return (
+          <PoolCell
+            key={String(item.slot_no)}
+            poolInfo={item.pool}
+            poolImageUrl={generateImageUrl(item.pool.id, "ico", "pool")}
+          />
+        );
       },
       jsonFormat: item => {
         if (item.epoch_no === null) {

@@ -10,7 +10,7 @@ import TableSettingsDropdown from "../global/dropdowns/TableSettingsDropdown";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "../table/ExportButton";
 import GlobalTable from "../table/GlobalTable";
-import { SizeCell } from "../table/SizeCell";
+import { SizeCell } from "@vellumlabs/cexplorer-sdk";
 import { ProtocolDot } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
