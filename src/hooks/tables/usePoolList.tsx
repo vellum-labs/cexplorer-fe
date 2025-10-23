@@ -25,7 +25,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { activeStakePercentage } from "@/utils/activeStakePercentage";
 import { calculateTotalPoolBlocks } from "@/utils/calculateTotalPoolBlocks";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
-import { getColumnsSortOrder } from "@/utils/getColumnsSortOrder";
+import { getColumnsSortOrder } from "@vellumlabs/cexplorer-sdk";
 import { getEpochColor } from "@/utils/getEpochColor";
 import { getPledgeColor } from "@/utils/getPledgeColor";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";

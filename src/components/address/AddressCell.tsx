@@ -6,7 +6,7 @@ import { getAddressAnimalImage } from "@/utils/address/getAddressAnimalImage";
 import { getAnimalRangeByAmount } from "@/utils/address/getAddressAnimalRange";
 import { Address } from "@/utils/address/getStakeAddress";
 import { isValidAddress } from "@/utils/address/isValidAddress";
-import { parseShelleyAddress } from "@/utils/address/parseShelleyAddress";
+import { parseShelleyAddress } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { Code2, KeyRound } from "lucide-react";

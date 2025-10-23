@@ -7,7 +7,7 @@ import { TimeDateIndicator } from "../global/TimeDateIndicator";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import type { PoolInfo } from "@/types/poolTypes";
 import { Address } from "@/utils/address/getStakeAddress";
-import { parseShelleyAddress } from "@/utils/address/parseShelleyAddress";
+import { parseShelleyAddress } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";

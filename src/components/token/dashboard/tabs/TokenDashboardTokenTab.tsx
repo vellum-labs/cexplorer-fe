@@ -20,7 +20,7 @@ import { currencySigns } from "@/constants/currencies";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
-import { TitleSort } from "@/components/table/TitleSort";
+import { TitleSort } from "@vellumlabs/cexplorer-sdk";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 import { calculateAdaPriceWithHistory } from "@/utils/calculateAdaPriceWithHistory";
 import { adaHandlePolicy } from "@/constants/confVariables";

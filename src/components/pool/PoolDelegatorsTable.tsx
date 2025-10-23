@@ -6,7 +6,7 @@ import type {
 } from "@/types/poolTypes";
 import type { PoolDelegatorsColumns } from "@/types/tableTypes";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
-import { getColumnsSortOrder } from "@/utils/getColumnsSortOrder";
+import { getColumnsSortOrder } from "@vellumlabs/cexplorer-sdk";
 import { calculateLoyaltyDays, slotToDate } from "@/utils/slotToDate";
 import type {
   InfiniteData,
@@ -261,7 +261,11 @@ const PoolDelegatorsTable = ({
                     id: previousPool.id,
                     meta: previousPool.meta,
                   }}
-                  poolImageUrl={generateImageUrl(previousPool.id, "ico", "pool")}
+                  poolImageUrl={generateImageUrl(
+                    previousPool.id,
+                    "ico",
+                    "pool",
+                  )}
                   fontSize='12px'
                 />
               ) : (
