@@ -10,7 +10,7 @@ import { useMultiPoolDelegatorsTableStore } from "@/stores/tables/multiPoolDeleg
 import { multiPoolDelegatorsTableOptions } from "@/constants/tables/multiPoolDelegatorsTableOptions";
 import ExportButton from "@/components/table/ExportButton";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import { StakeCell } from "@/components/table/StakeCell";
+import { StakeCell } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 
