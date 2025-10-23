@@ -13,7 +13,8 @@ import { TotalSumWithRates } from "../global/TotalSumWithRates";
 import AdaHandleBadge from "../global/badges/AdaHandleBadge";
 import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import PoolCell from "../table/PoolCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { AttributeDropdown } from "../global/AttributeDropdown";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { ChevronRight } from "lucide-react";
@@ -111,6 +112,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
                   (data?.stake?.active?.deleg ??
                     data?.stake?.live?.deleg) as PoolInfo
                 }
+                poolImageUrl={generateImageUrl((data?.stake?.active?.deleg?.id ?? data?.stake?.live?.deleg?.id), "ico", "pool")}
               />
             </div>
           ),

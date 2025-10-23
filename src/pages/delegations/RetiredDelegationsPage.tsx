@@ -6,8 +6,9 @@ import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import Tabs from "@/components/global/Tabs";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
-import PoolCell from "@/components/table/PoolCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { colors } from "@/constants/colors";
 import { retiredDelegationsTableOptions } from "@/constants/tables/retiredDelegationsTableOptions";
 import { useFetchRetiredPools } from "@/services/pools";
@@ -90,7 +91,12 @@ export const RetiredDelegationsPage = () => {
     },
     {
       key: "pool",
-      render: item => <PoolCell poolInfo={item.name} />,
+      render: item => (
+        <PoolCell
+          poolInfo={item.name}
+          poolImageUrl={generateImageUrl(item.name?.id, "ico", "pool")}
+        />
+      ),
       jsonFormat: item => {
         if (!item?.name?.id) {
           return "-";

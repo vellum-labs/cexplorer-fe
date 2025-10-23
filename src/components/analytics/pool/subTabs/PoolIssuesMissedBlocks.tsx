@@ -6,7 +6,8 @@ import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 import { Dropdown } from "@vellumlabs/cexplorer-sdk";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import PoolCell from "@/components/table/PoolCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { CircleAlert } from "lucide-react";
 
 import { useMiscConst } from "@/hooks/useMiscConst";
@@ -108,6 +109,7 @@ export const PoolIssuesMissedBlocks: FC = () => {
             id: item.pool_id,
             meta: item.pool.meta,
           }}
+          poolImageUrl={generateImageUrl(item.pool_id, "ico", "pool")}
         />
       ),
       title: "Pool",

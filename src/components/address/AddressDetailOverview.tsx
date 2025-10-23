@@ -9,6 +9,7 @@ import type { PoolInfo } from "@/types/poolTypes";
 import { Address } from "@/utils/address/getStakeAddress";
 import { parseShelleyAddress } from "@/utils/address/parseShelleyAddress";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { Link } from "@tanstack/react-router";
 import { TokenSelectCombobox } from "../asset/TokenSelect";
@@ -18,7 +19,7 @@ import { AddressTypeInitialsBadge } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TotalSumWithRates } from "../global/TotalSumWithRates";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
-import PoolCell from "../table/PoolCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import { AddCustomLabel } from "./AddCustomLabel";
 import AddressCell from "./AddressCell";
 import { AttributeDropdown } from "../global/AttributeDropdown";
@@ -130,6 +131,12 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
                 (data[0]?.stake?.active_pool ??
                   data[0]?.stake?.live_pool) as PoolInfo
               }
+              poolImageUrl={generateImageUrl(
+                (data[0]?.stake?.active_pool?.id ??
+                  data[0]?.stake?.live_pool?.id) as string,
+                "ico",
+                "pool",
+              )}
             />
           ) : (
             "Not delegated"

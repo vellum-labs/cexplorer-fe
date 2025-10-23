@@ -12,7 +12,8 @@ import { MinMaxRange } from "../global/MinMaxRange";
 import { SortArrow } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "../table/GlobalTable";
-import PoolCell from "../table/PoolCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { ArrowRight } from "lucide-react";
 
 import { formatString } from "@vellumlabs/cexplorer-sdk";
@@ -264,6 +265,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
                     id: previousPool.id,
                     meta: previousPool.meta,
                   }}
+                  poolImageUrl={generateImageUrl(previousPool.id, "ico", "pool")}
                   fontSize='12px'
                 />
               ) : (
@@ -280,6 +282,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
                     id: livePool.id,
                     meta: livePool.meta,
                   }}
+                  poolImageUrl={generateImageUrl(livePool.id, "ico", "pool")}
                   fontSize='12px'
                 />
               ) : (

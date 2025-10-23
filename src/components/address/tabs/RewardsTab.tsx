@@ -11,7 +11,8 @@ import { useAddressDetailRewardsTableStore } from "@/stores/tables/addressDetail
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
-import PoolCell from "@/components/table/PoolCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { colors } from "@/constants/colors";
 import { EPOCH_LENGTH_DAYS } from "@/constants/confVariables";
 import { addressDetailRewardsTableOptions } from "@/constants/tables/addressDetailRewardsTableOptions";
@@ -78,7 +79,7 @@ export const RewardsTab: FC<RewardsTabProps> = ({
     },
     {
       key: "stake_pool",
-      render: item => <PoolCell poolInfo={item.pool} />,
+      render: item => <PoolCell poolInfo={item.pool} poolImageUrl={generateImageUrl(item.pool.id, "ico", "pool")} />,
       title: "Stake Pool",
       visible: columnsVisibility.stake_pool,
       widthPx: 50,
