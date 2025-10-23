@@ -1,5 +1,5 @@
 import { nestedNavigationOptions } from "@/constants/nestedNavigationOptions";
-import { generateUrlWithParams } from "@/utils/generateUrlWithParams";
+import { generateUrlWithParams } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import pools from "@/resources/images/analytics/pools.svg";
 import dapps from "@/resources/images/analytics/dapps.svg";
