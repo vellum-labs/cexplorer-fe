@@ -15,7 +15,7 @@ import { dexConfig } from "@/constants/dexConfig";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import { TimeDateIndicator } from "../global/TimeDateIndicator";
+import { TimeDateIndicator } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { SwapDetailTable } from "./SwapDetailTable";
@@ -33,7 +33,7 @@ import { AnimalName } from "@/constants/animals";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { getConfirmations } from "@/utils/getConfirmations";
 import { renderWithException } from "@/utils/renderWithException";
-import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
+import { formatSmallValueWithSub } from "@vellumlabs/cexplorer-sdk";
 import { ADATokenName } from "@vellumlabs/cexplorer-sdk";
 import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 

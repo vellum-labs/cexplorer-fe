@@ -15,7 +15,7 @@ import { Link } from "@tanstack/react-router";
 import { GovernanceStatusBadge } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
-import { TimeDateIndicator } from "../global/TimeDateIndicator";
+import { TimeDateIndicator } from "@vellumlabs/cexplorer-sdk";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { ActionTypes } from "@vellumlabs/cexplorer-sdk";
 import { determineApproval } from "@/utils/determineApproval";

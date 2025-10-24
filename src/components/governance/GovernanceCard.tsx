@@ -4,7 +4,7 @@ import { CheckSquare, XSquare } from "lucide-react";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { GovernanceDetailOverviewInfoGraph } from "./graphs/GovernanceDetailOverviewInfoGraph";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
-import { VotingBreakdownTooltip } from "../global/VotingBreakdownTooltip";
+import { VotingBreakdownTooltip } from "@vellumlabs/cexplorer-sdk";
 
 interface GovernanceCardProps {
   query?: any;

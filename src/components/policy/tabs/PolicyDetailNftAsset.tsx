@@ -5,7 +5,7 @@ import type { FC } from "react";
 import AssetCell from "@/components/asset/AssetCell";
 import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
-import { ViewSwitch } from "@/components/global/ViewSwitch";
+import { ViewSwitch } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { PolicyAssetGrid } from "../PolicyAssetGrid";

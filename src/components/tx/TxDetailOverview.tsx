@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import { TotalSumWithRates } from "../global/TotalSumWithRates";
+import { TotalSumWithRates } from "@vellumlabs/cexplorer-sdk";
 import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
 import { MintedByCard } from "@vellumlabs/cexplorer-sdk";
 import type { OverviewList } from "@vellumlabs/cexplorer-sdk";
@@ -34,6 +34,7 @@ import { useEffect, useState } from "react";
 import { getAddonsForMetadata } from "@/utils/addons/getAddonsForMetadata";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { useMiscConst } from "@/hooks/useMiscConst";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   query: UseQueryResult<TxDetailResponse, unknown>;
@@ -47,6 +48,8 @@ const TxDetailOverview = ({ query }: Props) => {
   const { data: miscBasic } = miscBasicQuery;
 
   const miscData = useMiscConst(miscBasic?.data.version.const);
+
+  const { currency } = useCurrencyStore();
 
   const [addonComponents, setAddonComponents] = useState<any[]>([]);
   const confirmations = getConfirmations(
@@ -110,11 +113,23 @@ const TxDetailOverview = ({ query }: Props) => {
     },
     {
       label: "Total Output",
-      value: <TotalSumWithRates sum={outsum} ada={data?.out_sum ?? 0} />,
+      value: (
+        <TotalSumWithRates
+          sum={outsum}
+          ada={data?.out_sum ?? 0}
+          currency={currency}
+        />
+      ),
     },
     {
       label: "Fee",
-      value: <TotalSumWithRates sum={feesum} ada={data?.fee ?? 0} />,
+      value: (
+        <TotalSumWithRates
+          sum={feesum}
+          ada={data?.fee ?? 0}
+          currency={currency}
+        />
+      ),
     },
     {
       label: "Epoch",

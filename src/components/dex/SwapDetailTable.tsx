@@ -9,7 +9,7 @@ import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
-import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
+import { formatSmallValueWithSub } from "@vellumlabs/cexplorer-sdk";
 import { ADATokenName } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { AssetTicker } from "./AssetTicker";

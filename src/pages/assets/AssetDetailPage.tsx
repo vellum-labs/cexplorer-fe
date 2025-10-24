@@ -3,7 +3,7 @@ import { AssetMetaDataTab } from "@/components/asset/tabs/AssetMetaDataTab";
 import { AssetMintTab } from "@/components/asset/tabs/AssetMintTab";
 import { AssetNftOwnersTab } from "@/components/asset/tabs/AssetNftOwnersTab";
 import { AssetTokenOwnersTab } from "@/components/asset/tabs/AssetTokenOwnersTab";
-import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
+import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useState, type FC } from "react";

@@ -33,7 +33,7 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import { alphabetWithNumbers } from "@/constants/alphabet";
 import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
-import { PriceAdaSmallAmount } from "@/components/global/PriceAdaSmallAmount";
+import { PriceAdaSmallAmount } from "@vellumlabs/cexplorer-sdk";
 import { PriceSparkline } from "@/components/charts/PriceSparkline";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { AlertCircle, TrendingUp, TrendingDown } from "lucide-react";

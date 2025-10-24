@@ -3,13 +3,13 @@ import parse from "html-react-parser";
 import type { FC } from "react";
 
 import Attach from "@/resources/images/icons/attach.svg";
-import Discord from "@/resources/images/icons/discord.svg";
-import X from "@/resources/images/icons/twitter.svg";
+import { DiscordLogo } from "@vellumlabs/cexplorer-sdk";
+import { TwitterLogo } from "@vellumlabs/cexplorer-sdk";
 
 import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import { TimeDateIndicator } from "../global/TimeDateIndicator";
+import { TimeDateIndicator } from "@vellumlabs/cexplorer-sdk";
 
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 
@@ -318,8 +318,18 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
                             width={160}
                           />
                           <div className='flex w-[180px] justify-center gap-4'>
-                            <img src={X} alt='X' height={24} width={24} />
-                            <img src={Discord} alt='X' height={24} width={24} />
+                            <img
+                              src={TwitterLogo}
+                              alt='X'
+                              height={24}
+                              width={24}
+                            />
+                            <img
+                              src={DiscordLogo}
+                              alt='X'
+                              height={24}
+                              width={24}
+                            />
                             <img src={Attach} alt='X' height={24} width={24} />
                           </div>
                         </div>

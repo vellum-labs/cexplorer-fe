@@ -2,7 +2,7 @@ import { ArticleCombobox } from "@/components/article/ArticleCombobox";
 import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
-import SpinningLoader from "@/components/global/SpinningLoader";
+import { SpinningLoader } from "@vellumlabs/cexplorer-sdk";
 import {
   BreadcrumbRaw,
   BreadcrumbItem,

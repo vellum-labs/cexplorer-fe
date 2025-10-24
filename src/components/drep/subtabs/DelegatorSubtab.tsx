@@ -6,7 +6,7 @@ import type {
 import type { FC } from "react";
 
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import { MinMaxRange } from "@/components/global/MinMaxRange";
+import { MinMaxRange } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
