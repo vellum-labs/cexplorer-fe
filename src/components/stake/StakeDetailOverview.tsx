@@ -23,7 +23,7 @@ import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
-import { useCurrencyStore } from "@/stores/currencyStore";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 
 interface AddressDetailOverviewProps {
   data: StakeDetailData | undefined;

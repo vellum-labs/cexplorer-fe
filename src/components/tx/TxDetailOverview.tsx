@@ -34,7 +34,7 @@ import { useEffect, useState } from "react";
 import { getAddonsForMetadata } from "@/utils/addons/getAddonsForMetadata";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { useMiscConst } from "@/hooks/useMiscConst";
-import { useCurrencyStore } from "@/stores/currencyStore";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   query: UseQueryResult<TxDetailResponse, unknown>;

@@ -32,7 +32,7 @@ import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { generateImageUrl } from "@/utils/generateImageUrl";
-import { useCurrencyStore } from "@/stores/currencyStore";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 
 const BlockDetailPage: FC = () => {
   const route = getRouteApi("/block/$hash");

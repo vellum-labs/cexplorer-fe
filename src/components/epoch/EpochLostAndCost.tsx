@@ -7,7 +7,7 @@ import { TotalSumWithRates } from "@vellumlabs/cexplorer-sdk";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import { formatBytes } from "@/utils/format/formatBytes";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
-import { useCurrencyStore } from "@/stores/currencyStore";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 
 interface EpochLostAndCostProps {
   params: EpochParam;

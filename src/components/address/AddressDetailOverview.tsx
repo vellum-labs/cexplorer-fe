@@ -26,7 +26,7 @@ import { AttributeDropdown } from "@vellumlabs/cexplorer-sdk";
 import { ChevronRight } from "lucide-react";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
-import { useCurrencyStore } from "@/stores/currencyStore";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 
 interface AddressDetailOverviewProps {
   data: AddressDetailData[];

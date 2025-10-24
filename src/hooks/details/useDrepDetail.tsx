@@ -20,7 +20,7 @@ import { format } from "date-fns";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { CircleHelp } from "lucide-react";
 import { DelegatorsLabel } from "@vellumlabs/cexplorer-sdk";
-import { useCurrencyStore } from "@/stores/currencyStore";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 
 interface UseDrepDetailArgs {
   query: ReturnType<typeof useFetchDrepDetail>;
