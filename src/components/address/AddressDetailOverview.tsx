@@ -22,7 +22,7 @@ import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import { AddCustomLabel } from "./AddCustomLabel";
 import AddressCell from "./AddressCell";
-import { AttributeDropdown } from "../global/AttributeDropdown";
+import { AttributeDropdown } from "@vellumlabs/cexplorer-sdk";
 import { ChevronRight } from "lucide-react";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";

@@ -23,7 +23,7 @@ import {
 import { Dropdown } from "@vellumlabs/cexplorer-sdk";
 import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
 import { useEffect, useRef, useState } from "react";
-import { Command } from "@/components/ui/command";
+import { Command } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 
 interface SettingsDropdownProps {
