@@ -27,7 +27,7 @@ import { useCompareWalletsStore } from "@/stores/tables/compareWalletsStore";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useState } from "react";
 
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 
 import { Select, SelectTrigger } from "@/components/ui/select";
 import { webUrl } from "@/constants/confVariables";

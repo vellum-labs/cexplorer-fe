@@ -12,7 +12,7 @@ import { useFetchAssetMint } from "@/services/assets";
 import { useAssetDetailMintTableStore } from "@/stores/tables/assetDetailMintTableStore";
 
 import { Badge } from "@/components/global/badges/Badge";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { PolicyCell } from "@/components/policy/PolicyCell";
 import ExportButton from "@/components/table/ExportButton";
 import { assetDetailMintTableOptions } from "@/constants/tables/assetDetailMintOptions";
