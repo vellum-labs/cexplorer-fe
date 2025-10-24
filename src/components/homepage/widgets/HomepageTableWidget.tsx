@@ -8,7 +8,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Fragment, useRef } from "react";
 import { Search } from "lucide-react";
@@ -21,7 +21,7 @@ import { useClickOutsideGroup } from "@/hooks/useClickOutsideGroup";
 import { memo } from "react";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { Pagination } from "@vellumlabs/cexplorer-sdk";
-import { paginateArray } from "@/utils/paginateArray";
+import { paginateArray } from "@vellumlabs/cexplorer-sdk";
 import { PaginationNext, PaginationPrevious } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Loading } from "@vellumlabs/cexplorer-sdk";
