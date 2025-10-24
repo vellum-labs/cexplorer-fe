@@ -2,7 +2,7 @@ import type { useFetchAddressDetail } from "@/services/address";
 import type { AddressAsset } from "@/types/addressTypes";
 import type { FC } from "react";
 
-import GlobalTable from "../table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { useAddressDetailAssetTableStore } from "@/stores/tables/addressDetailAssetTableStore";
 import type {

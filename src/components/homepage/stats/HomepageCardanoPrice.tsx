@@ -2,7 +2,7 @@ import type { MiscConstResponseData } from "@/types/miscTypes";
 import type { FC } from "react";
 
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
-import { useCurrencyStore } from "@/stores/currencyStore";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 
 import { formatCurrency } from "@vellumlabs/cexplorer-sdk";
 

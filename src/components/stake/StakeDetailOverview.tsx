@@ -15,7 +15,7 @@ import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
-import { AttributeDropdown } from "../global/AttributeDropdown";
+import { AttributeDropdown } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { ChevronRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";

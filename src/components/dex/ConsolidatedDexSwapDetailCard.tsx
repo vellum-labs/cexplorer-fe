@@ -34,7 +34,7 @@ import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { getConfirmations } from "@/utils/getConfirmations";
 import { renderWithException } from "@/utils/renderWithException";
 import { formatSmallValueWithSub } from "@vellumlabs/cexplorer-sdk";
-import { ADATokenName } from "@/constants/currencies";
+import { ADATokenName } from "@vellumlabs/cexplorer-sdk";
 import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 
 interface ConsolidatedDexSwapDetailCardProps {

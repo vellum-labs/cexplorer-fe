@@ -3,7 +3,7 @@ import type { PoolPefomanceColumns } from "@/types/tableTypes";
 
 import ExportButton from "../table/ExportButton";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "../table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";

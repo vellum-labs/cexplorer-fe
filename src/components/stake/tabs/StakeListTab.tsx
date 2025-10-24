@@ -1,7 +1,7 @@
 import type { TableColumns } from "@/types/tableTypes";
 import { type FC } from "react";
 
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { AdaHandleBadge } from "@vellumlabs/cexplorer-sdk";

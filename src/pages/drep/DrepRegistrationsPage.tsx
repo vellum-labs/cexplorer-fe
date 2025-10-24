@@ -7,7 +7,7 @@ import { ScriptBadge } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "@/components/tx/HashCell";
 import { drepRegistrationsTableOptions } from "@/constants/tables/drepRegistrationsTableOptions";
 import { useFetchDrepRegistrations } from "@/services/tx";

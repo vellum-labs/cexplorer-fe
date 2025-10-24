@@ -1,13 +1,13 @@
 import type { FC } from "react";
 
 import { colors } from "@/constants/colors";
-import { Cardano } from "@/resources/images/icons/Cardano";
+import { Cardano } from "@vellumlabs/cexplorer-sdk";
 import { CircleHelp } from "lucide-react";
 
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
-import { useCurrencyStore } from "@/stores/currencyStore";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { formatCurrency } from "@vellumlabs/cexplorer-sdk";

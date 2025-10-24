@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchPolicyDetail, useFetchPolicyOwner } from "@/services/policy";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { usePolicyDetailOwnerTableStore } from "@/stores/tables/policyDetailOwnersTableStore";
 import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
@@ -14,7 +14,7 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import AddressCell from "../address/AddressCell";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "../table/ExportButton";
-import GlobalTable from "../table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 interface PolicyDetailTopWalletsProps {
   policyId: string;

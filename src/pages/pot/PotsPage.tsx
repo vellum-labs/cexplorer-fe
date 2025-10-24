@@ -7,7 +7,7 @@ import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
 import { adaPotsTableOptions } from "@/constants/tables/adaPotsTableOptions";
 import { useGraphColors } from "@/hooks/useGraphColors";

@@ -7,7 +7,7 @@ import { Check, Ellipsis, FileText, X } from "lucide-react";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "../table/ExportButton";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "../table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@vellumlabs/cexplorer-sdk";
@@ -23,7 +23,7 @@ import {
   formatString,
 } from "@vellumlabs/cexplorer-sdk";
 import { formatSmallValueWithSub } from "@vellumlabs/cexplorer-sdk";
-import { ADATokenName, currencySigns } from "@/constants/currencies";
+import { ADATokenName, currencySigns } from "@vellumlabs/cexplorer-sdk";
 
 import { dexConfig } from "@/constants/dexConfig";
 

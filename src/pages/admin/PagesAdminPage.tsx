@@ -1,5 +1,5 @@
 import { SpinningLoader } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import {
   BreadcrumbRaw,
   BreadcrumbItem,

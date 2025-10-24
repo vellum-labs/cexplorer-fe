@@ -1,4 +1,4 @@
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useFetchTopMultiDelegators } from "@/services/pools";

@@ -1,7 +1,7 @@
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { useFetchPoolAbout, useFetchPoolUpdate } from "@/services/pools";
 import type { PoolDetailResponseData } from "@/types/poolTypes";

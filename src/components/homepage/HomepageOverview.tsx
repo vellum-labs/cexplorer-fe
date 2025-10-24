@@ -1,13 +1,12 @@
 import type { FC } from "react";
 
-import { Cardano } from "@/resources/images/icons/Cardano";
+import { Cardano } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Box, Coins } from "lucide-react";
 import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 
 import { HomepageCardanoEpoch } from "./stats/HomepageCardanoEpoch";
 import { HomepageCardanoLiveStake } from "./stats/HomepageCardanoLiveStake";
-// import { HomepageCardanoNativeAssets } from "./stats/HomepageCardanoNativeAssets";
 import { HomepageCardanoPrice } from "./stats/HomepageCardanoPrice";
 
 import { colors } from "@/constants/colors";

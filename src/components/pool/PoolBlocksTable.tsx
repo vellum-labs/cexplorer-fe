@@ -1,6 +1,6 @@
 import { poolBlocksTableOptions } from "@/constants/tables/poolBlocksTableOptions";
 import { useFetchBlocksList } from "@/services/blocks";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { usePoolBlocksTableStore } from "@/stores/tables/poolBlocksTableStore";
 import type { PoolBlocksColumns } from "@/types/tableTypes";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "../table/ExportButton";
-import GlobalTable from "../table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { SizeCell } from "@vellumlabs/cexplorer-sdk";
 import { ProtocolDot } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic } from "@/services/misc";

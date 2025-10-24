@@ -2,7 +2,7 @@ import type { Currencies } from "@/types/storeTypes";
 
 import { formatCurrency } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic } from "@/services/misc";
-import { useCurrencyStore } from "@/stores/currencyStore";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 
 export const useAdaPriceWithHistory = (overrideCurrency?: Currencies) => {
   const { currency: storeCurrency } = useCurrencyStore();
