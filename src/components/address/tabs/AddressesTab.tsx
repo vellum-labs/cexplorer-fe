@@ -4,7 +4,7 @@ import type {
 } from "@/types/tableTypes";
 import { useState, type FC } from "react";
 
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { TokenSelectCombobox } from "@/components/asset/TokenSelect";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";

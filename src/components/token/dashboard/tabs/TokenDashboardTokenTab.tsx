@@ -4,7 +4,7 @@ import type { FC } from "react";
 import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { Link, useSearch } from "@tanstack/react-router";
 import { useFetchDeFiTokenList } from "@/services/token";
@@ -16,7 +16,7 @@ import {
 } from "@vellumlabs/cexplorer-sdk";
 import { tokenDashboardListTableOptions } from "@/constants/tables/tokenDashboardListTableOptions";
 import { useTokenDashboardListTableStore } from "@/stores/tables/tokenDashboardListTableStore";
-import { currencySigns } from "@/constants/currencies";
+import { currencySigns } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";

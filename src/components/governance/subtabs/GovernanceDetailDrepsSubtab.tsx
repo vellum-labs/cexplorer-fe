@@ -5,7 +5,7 @@ import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { useGovActionDetailDrepsTableStore } from "@/stores/tables/governanceDetailDrepsTableStore";

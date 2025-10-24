@@ -1,5 +1,5 @@
 import { Image } from "@vellumlabs/cexplorer-sdk";
-import { ADATokenName } from "@/constants/currencies";
+import { ADATokenName } from "@vellumlabs/cexplorer-sdk";
 import { alphabetWithNumbers } from "@/constants/alphabet";
 import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
 import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";

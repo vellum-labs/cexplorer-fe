@@ -2,9 +2,9 @@ import type { FC } from "react";
 
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
-import { useCurrencyStore } from "@/stores/currencyStore";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 import { formatBitcoinWithSub } from "@/utils/format/formatSmallValue";
-import { formatCurrency } from "@/utils/format/formatCurrency";
+import { formatCurrency } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 
 interface BlockDetailTransactionsOverviewTotalProps {

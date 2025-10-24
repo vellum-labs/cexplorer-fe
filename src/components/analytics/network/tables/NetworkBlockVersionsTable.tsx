@@ -1,7 +1,7 @@
 import type { useFetchEpochAnalytics } from "@/services/analytics";
 import type { FC } from "react";
 
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 

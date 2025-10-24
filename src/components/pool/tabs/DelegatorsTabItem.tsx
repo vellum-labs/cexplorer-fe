@@ -8,7 +8,7 @@ import { PoolStructureTable } from "../PoolStructureTable";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useFetchPoolDelegators } from "@/services/pools";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { usePoolDelegatorsTableStore } from "@/stores/tables/poolDelegatorsTableStore";
 import { getRouteApi, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";

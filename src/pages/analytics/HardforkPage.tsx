@@ -5,7 +5,7 @@ import type { FC } from "react";
 
 import HardforkPageTotalCountItem from "@/components/analytics/HardforkPageTotalCountItem";
 import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import ReactEcharts from "echarts-for-react";
 
 import { useFetchHardforks } from "@/services/analytics";

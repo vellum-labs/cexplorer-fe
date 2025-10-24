@@ -2,7 +2,7 @@ import AddressCell from "@/components/address/AddressCell";
 import AssetLink from "@/components/asset/AssetLink";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { AddressTypeInitialsBadge } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { useFetchTxDetail } from "@/services/tx";
 import type { TableColumns } from "@/types/tableTypes";
 import type { TxInfo } from "@/types/txTypes";

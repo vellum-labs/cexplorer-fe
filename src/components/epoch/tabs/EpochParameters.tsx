@@ -11,7 +11,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@vellumlabs/cexplorer-sdk";
 import { Fragment } from "react";
 
 import { useEffect, useRef } from "react";

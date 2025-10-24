@@ -7,9 +7,11 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { JsonDisplay } from "@vellumlabs/cexplorer-sdk";
-import ConstLabelBadge from "../global/badges/ConstLabelBadge";
+import { ConstLabelBadge } from "@vellumlabs/cexplorer-sdk";
 import { TextDisplay } from "@vellumlabs/cexplorer-sdk";
 import { ChevronDown, ChevronRight } from "lucide-react";
+import { useFetchMiscBasic } from "@/services/misc";
+import { useMiscConst } from "@/hooks/useMiscConst";
 
 interface ContractInputProps {
   input: TxInput;
@@ -27,6 +29,9 @@ export const ContractInput: FC<ContractInputProps> = ({
   isLoading,
 }) => {
   const [open, setOpen] = useState<boolean>(inputIndex === 0);
+
+  const { data: basicData } = useFetchMiscBasic();
+  const miscConst = useMiscConst(basicData?.data.version.const);
 
   return (
     <Fragment>
@@ -89,7 +94,11 @@ export const ContractInput: FC<ContractInputProps> = ({
         <span>
           <span className='mt-1 flex items-center gap-1/2'>
             Script hash:{" "}
-            <ConstLabelBadge type='sc' name={contract?.script_hash} />
+            <ConstLabelBadge
+              type='sc'
+              name={contract?.script_hash}
+              miscConst={miscConst}
+            />
           </span>
           <span className='flex items-center gap-1'>
             <Link

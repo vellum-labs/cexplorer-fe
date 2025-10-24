@@ -8,7 +8,7 @@ import {
 import { Link, getRouteApi } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { DateCell, getNodeText } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "../../table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 const MintTabItem = () => {
   const route = getRouteApi("/tx/$hash");

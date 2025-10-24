@@ -8,7 +8,7 @@ import { DateCell } from "@vellumlabs/cexplorer-sdk";
 
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { useFetchDrepList } from "@/services/drep";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useDrepListTableStore } from "@/stores/tables/drepListTableStore";
 import { useEffect, useState } from "react";
 

@@ -11,7 +11,7 @@ import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { MinMaxRange } from "../global/MinMaxRange";
 import { SortArrow } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "../table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { ArrowRight } from "lucide-react";

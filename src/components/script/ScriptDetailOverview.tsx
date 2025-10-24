@@ -13,7 +13,7 @@ import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { TextDisplay } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "../tx/HashCell";
-import { AttributeDropdown } from "../global/AttributeDropdown";
+import { AttributeDropdown } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic } from "@/services/misc";
 import { generateImageUrl } from "@/utils/generateImageUrl";

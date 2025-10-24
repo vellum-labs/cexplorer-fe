@@ -9,7 +9,7 @@ import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchAnalyticsStakingAccounts } from "@/services/analytics";

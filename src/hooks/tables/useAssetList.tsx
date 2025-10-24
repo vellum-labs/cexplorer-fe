@@ -3,7 +3,7 @@ import type { AssetListTableColumns, TableColumns } from "@/types/tableTypes";
 import type { Dispatch, SetStateAction } from "react";
 
 import { useFetchAssetList } from "@/services/assets";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useAssetListTableStore } from "@/stores/tables/assetListTableStore";
 import { useEffect, useState } from "react";
 import { useAuthToken } from "../useAuthToken";

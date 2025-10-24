@@ -4,7 +4,7 @@ import type { FC } from "react";
 import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { useAssetListTableStore } from "@/stores/tables/assetListTableStore";
 import { useSearch } from "@tanstack/react-router";

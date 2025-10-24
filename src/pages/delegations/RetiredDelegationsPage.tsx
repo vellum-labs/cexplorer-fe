@@ -5,14 +5,14 @@ import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { colors } from "@/constants/colors";
 import { retiredDelegationsTableOptions } from "@/constants/tables/retiredDelegationsTableOptions";
 import { useFetchRetiredPools } from "@/services/pools";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useRetiredDelegationsTableStore } from "@/stores/tables/retiredDelegationsTableStore";
 import type { RetiredPoolItem } from "@/types/poolTypes";
 import type {

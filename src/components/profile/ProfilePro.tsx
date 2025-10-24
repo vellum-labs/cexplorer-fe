@@ -7,7 +7,7 @@ import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { WatchlistStar } from "@/components/global/watchlist/WatchlistStar";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";

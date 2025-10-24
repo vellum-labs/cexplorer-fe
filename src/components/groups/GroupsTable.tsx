@@ -1,4 +1,4 @@
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Check, Filter } from "lucide-react";
