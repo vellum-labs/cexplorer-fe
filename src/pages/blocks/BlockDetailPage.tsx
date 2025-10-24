@@ -19,7 +19,7 @@ import { Link, getRouteApi, useNavigate } from "@tanstack/react-router";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { getConfirmations } from "@/utils/getConfirmations";
 
-import { MintedByCard } from "@/components/global/cards/MintedByCard";
+import { MintedByCard } from "@vellumlabs/cexplorer-sdk";
 import type { OverviewList } from "@/components/global/cards/OverviewCard";
 import { OverviewCard } from "@/components/global/cards/OverviewCard";
 import { SizeCard } from "@/components/global/cards/SizeCard";
@@ -30,6 +30,8 @@ import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useMiscConst } from "@/hooks/useMiscConst";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 
 const BlockDetailPage: FC = () => {
   const route = getRouteApi("/block/$hash");
@@ -49,6 +51,8 @@ const BlockDetailPage: FC = () => {
   const { data } = blockDetail;
   const { data: miscBasic } = useFetchMiscBasic(true);
   const curr = useGetMarketCurrency();
+
+  const miscData = useMiscConst(miscBasic?.data.version.const);
 
   const confirmations = getConfirmations(
     miscBasic?.data.block.block_no,
@@ -338,6 +342,8 @@ const BlockDetailPage: FC = () => {
                   protoMajor={data?.proto_major}
                   protoMinor={data?.proto_minor}
                   isGenesisBlock={data?.epoch_no === null}
+                  generateImageUrl={generateImageUrl}
+                  miscData={miscData}
                 />
                 <SizeCard
                   size={data.size}

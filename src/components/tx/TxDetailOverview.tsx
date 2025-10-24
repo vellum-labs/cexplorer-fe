@@ -23,7 +23,7 @@ import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TotalSumWithRates } from "../global/TotalSumWithRates";
 import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
-import { MintedByCard } from "../global/cards/MintedByCard";
+import { MintedByCard } from "@vellumlabs/cexplorer-sdk";
 import type { OverviewList } from "../global/cards/OverviewCard";
 import { OverviewCard } from "../global/cards/OverviewCard";
 import { SizeCard } from "../global/cards/SizeCard";
@@ -33,6 +33,7 @@ import TtlCountdown from "./TtlCountdown";
 import { useEffect, useState } from "react";
 import { getAddonsForMetadata } from "@/utils/addons/getAddonsForMetadata";
 import { generateImageUrl } from "@/utils/generateImageUrl";
+import { useMiscConst } from "@/hooks/useMiscConst";
 
 interface Props {
   query: UseQueryResult<TxDetailResponse, unknown>;
@@ -44,6 +45,8 @@ const TxDetailOverview = ({ query }: Props) => {
   const miscBasicQuery = useFetchMiscBasic();
 
   const { data: miscBasic } = miscBasicQuery;
+
+  const miscData = useMiscConst(miscBasic?.data.version.const);
 
   const [addonComponents, setAddonComponents] = useState<any[]>([]);
   const confirmations = getConfirmations(
@@ -282,6 +285,8 @@ const TxDetailOverview = ({ query }: Props) => {
             <MintedByCard
               poolInfo={data?.pool}
               isGenesisBlock={data?.block?.epoch_no === null}
+              miscData={miscData}
+              generateImageUrl={generateImageUrl}
             />
             <SizeCard
               size={data?.size}
