@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
 import { useCurrencyStore } from "@/stores/currencyStore";
-import { formatBitcoinWithSub } from "@/utils/format/formatSmallValue";
+import { formatBitcoinWithSub } from "@vellumlabs/cexplorer-sdk";
 import { formatCurrency } from "@/utils/format/formatCurrency";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 

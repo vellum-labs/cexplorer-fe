@@ -19,7 +19,7 @@ import {
 import AssetCell from "../asset/AssetCell";
 import { configJSON } from "@/constants/conf";
 import { PolicyCell } from "../policy/PolicyCell";
-import { PriceAdaSmallAmount } from "@/components/global/PriceAdaSmallAmount";
+import { PriceAdaSmallAmount } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { AlertCircle } from "lucide-react";

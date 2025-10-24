@@ -13,7 +13,7 @@ import { configJSON } from "@/constants/conf";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 import parse from "html-react-parser";
-import { PriceAdaSmallAmount } from "@/components/global/PriceAdaSmallAmount";
+import { PriceAdaSmallAmount } from "@vellumlabs/cexplorer-sdk";
 
 interface UseAssetDetailArgs {
   data: ReturnType<typeof useFetchAssetDetail>;
