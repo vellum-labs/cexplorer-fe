@@ -4,7 +4,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@vellumlabs/cexplorer-sdk";
 import { currencies } from "@/constants/currencies";
 import { locales } from "@/constants/locales";
 import { useCurrencyStore } from "@/stores/currencyStore";
