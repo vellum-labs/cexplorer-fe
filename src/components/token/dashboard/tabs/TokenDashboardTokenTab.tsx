@@ -16,7 +16,7 @@ import {
 } from "@vellumlabs/cexplorer-sdk";
 import { tokenDashboardListTableOptions } from "@/constants/tables/tokenDashboardListTableOptions";
 import { useTokenDashboardListTableStore } from "@/stores/tables/tokenDashboardListTableStore";
-import { currencySigns } from "@/constants/currencies";
+import { currencySigns } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";

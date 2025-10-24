@@ -11,7 +11,7 @@ import {
   currencySigns,
   currencyPosition,
   currencySpace,
-} from "@/constants/currencies";
+} from "@vellumlabs/cexplorer-sdk";
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
 import {
   formatNumber,
@@ -24,7 +24,7 @@ import { Link } from "@tanstack/react-router";
 import { format } from "date-fns";
 
 import { useFetchEpochList } from "@/services/epoch";
-import { useCurrencyStore } from "@/stores/currencyStore";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 import { useEpochListTableStore } from "@/stores/tables/epochListTableStore";
 import { useEffect, useState } from "react";
 import { useGetMarketCurrency } from "../useGetMarketCurrency";

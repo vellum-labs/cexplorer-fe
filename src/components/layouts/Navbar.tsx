@@ -2,7 +2,7 @@ import { colors } from "@/constants/colors";
 import { enabledWalletConnector } from "@/constants/confVariables";
 import { navigationOptions } from "@/constants/navigationOptions";
 import { nestedNavigationOptions } from "@/constants/nestedNavigationOptions";
-import { Cardano } from "@/resources/images/icons/Cardano";
+import { Cardano } from "@vellumlabs/cexplorer-sdk";
 import { ArrowRight, ChevronsUp } from "lucide-react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import MainLogo from "../global/MainLogo";
@@ -10,14 +10,17 @@ import { InfoCard } from "@vellumlabs/cexplorer-sdk";
 import { Dropdown } from "@vellumlabs/cexplorer-sdk";
 import { ScreenDropdown } from "@vellumlabs/cexplorer-sdk";
 import SettingsDropdown from "../global/dropdowns/SettingsDropdown";
-import { AdaPriceIndicator } from "../navbar/AdaPriceIndicator";
+import { AdaPriceIndicator } from "@vellumlabs/cexplorer-sdk";
 import MobileMenu from "../navbar/MobileMenu/MobileMenu";
 import WalletButton from "../wallet/WalletButton";
 import { LayoutNotification } from "@/utils/LayoutNotification";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
+import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 
 const Navbar = () => {
   const { theme } = useThemeStore();
+  const price = useAdaPriceWithHistory();
+
   return (
     <header>
       <nav className='flex h-[75px] w-full items-center justify-center border-b border-borderFaded bg-cardBg py-2 pr-2 lg:pr-0'>
@@ -25,7 +28,7 @@ const Navbar = () => {
           <div className='flex items-center gap-1'>
             <MainLogo className='-translate-x-[6px]' />
             <div className='hidden xl:contents'>
-              <AdaPriceIndicator />
+              <AdaPriceIndicator price={price} />
             </div>
           </div>
           <div className='hidden items-center gap-2 xl:flex xl:h-[75px]'>

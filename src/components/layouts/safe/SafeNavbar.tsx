@@ -4,7 +4,7 @@ import { colors } from "@/constants/colors";
 import { enabledWalletConnector } from "@/constants/confVariables";
 import { navigationOptions } from "@/constants/navigationOptions";
 import { nestedNavigationOptions } from "@/constants/nestedNavigationOptions";
-import { Cardano } from "@/resources/images/icons/Cardano";
+import { Cardano } from "@vellumlabs/cexplorer-sdk";
 import { ArrowRight, ChevronsUp } from "lucide-react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import MainLogo from "../../global/MainLogo";

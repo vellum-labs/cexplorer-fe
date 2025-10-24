@@ -5,9 +5,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@vellumlabs/cexplorer-sdk";
-import { currencies } from "@/constants/currencies";
+import { currencies } from "@vellumlabs/cexplorer-sdk";
 import { locales } from "@/constants/locales";
-import { useCurrencyStore } from "@/stores/currencyStore";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import type { NavigationOptions } from "@/types/navigationTypes";
@@ -186,10 +186,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                 }
               />
             </SelectTrigger>
-            <SelectContent
-              padding={false}
-              className='relative w-[100px] border-0 !p-0'
-            >
+            <SelectContent className='relative w-[100px] border-0 !p-0'>
               <Command className='fixed top-0 z-[110] h-[40px]'>
                 <TextInput
                   value={currencySearch}

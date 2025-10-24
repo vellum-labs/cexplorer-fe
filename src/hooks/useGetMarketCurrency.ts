@@ -1,7 +1,7 @@
 import type { Currencies } from "@/types/storeTypes";
 
 import { useFetchMiscBasic } from "@/services/misc";
-import { useCurrencyStore } from "@/stores/currencyStore";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 import { findNearestRate } from "@/utils/findNearestRate";
 import { useMiscRate } from "./useMiscRate";
 

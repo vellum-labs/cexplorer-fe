@@ -3,7 +3,7 @@ import { InfoCard } from "@vellumlabs/cexplorer-sdk";
 import { Accordion } from "@vellumlabs/cexplorer-sdk";
 import { colors } from "@/constants/colors";
 import { nestedNavigationOptions } from "@/constants/nestedNavigationOptions";
-import { Cardano } from "@/resources/images/icons/Cardano";
+import { Cardano } from "@vellumlabs/cexplorer-sdk";
 import type { MenuItem } from "@/types/navigationTypes";
 import { ArrowRight, ChevronLeft } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";

@@ -23,7 +23,7 @@ import {
   formatString,
 } from "@vellumlabs/cexplorer-sdk";
 import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
-import { ADATokenName, currencySigns } from "@/constants/currencies";
+import { ADATokenName, currencySigns } from "@vellumlabs/cexplorer-sdk";
 
 import { dexConfig } from "@/constants/dexConfig";
 

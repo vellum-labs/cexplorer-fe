@@ -5,7 +5,7 @@ import { useGraphColors } from "@/hooks/useGraphColors";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import type { ReactEChartsProps } from "@/lib/ReactCharts";
 import { useFetchMiscBasic } from "@/services/misc";
-import { useCurrencyStore } from "@/stores/currencyStore";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 import type { TableColumns } from "@/types/tableTypes";
 import type {
   TreasuryDonationStatsEpoch,
