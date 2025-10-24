@@ -2,7 +2,7 @@ import type { AddressDetailRewardsTableColumns } from "@/types/tableTypes";
 import { Download } from "lucide-react";
 import { useEffect, useState, type FC } from "react";
 
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 

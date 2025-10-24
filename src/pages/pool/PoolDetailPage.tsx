@@ -1,6 +1,6 @@
 import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@vellumlabs/cexplorer-sdk";
-import Tabs from "@/components/global/Tabs";
 import PoolDetailOverview from "@/components/pool/PoolDetailOverview";
 import AboutTabItem from "@/components/pool/tabs/AboutTabItem";
 import { AwardsTabItem } from "@/components/pool/tabs/AwardsTabItem";

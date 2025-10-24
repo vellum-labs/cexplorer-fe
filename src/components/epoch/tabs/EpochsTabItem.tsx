@@ -2,7 +2,7 @@ import type { EpochListData } from "@/types/epochTypes";
 import type { EpochListColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
-import TableSettingsDropdown from "../../global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import TableSearchInput from "../../global/inputs/SearchInput";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "../../table/GlobalTable";

@@ -4,7 +4,7 @@ import type { FC } from "react";
 import { AssetExchangesCandlestickGraph } from "../subtabs/AssetExchangesGraph";
 import { AssetExchangesLiquidity } from "../subtabs/AssetExchangesLiquidity";
 
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 
 interface AssetExchangesTabProps {
   assetname: string;

@@ -1,6 +1,6 @@
 import { AssetMintTab } from "@/components/asset/tabs/AssetMintTab";
 import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { PolicyDetailOverview } from "@/components/policy/PolicyDetailOverview";
 import { PolicyAnalyticsTab } from "@/components/policy/tabs/PolicyAnalyticsTab";
 import { PolicyDetailNftAsset } from "@/components/policy/tabs/PolicyDetailNftAsset";

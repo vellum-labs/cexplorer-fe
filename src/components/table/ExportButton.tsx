@@ -4,7 +4,7 @@ import type { FC } from "react";
 import { colors } from "@/constants/colors";
 import { Download } from "lucide-react";
 
-import { ExportTableModal } from "../global/modals/ExportTableModal";
+import { ExportTableModal } from "@vellumlabs/cexplorer-sdk";
 import { FeatureModal } from "../global/modals/FeatureModal";
 import ConnectWalletModal from "../wallet/ConnectWalletModal";
 

@@ -4,11 +4,11 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@vellumlabs/cexplorer-sdk";
 import { currencies } from "@/constants/currencies";
 import { locales } from "@/constants/locales";
 import { useCurrencyStore } from "@/stores/currencyStore";
-import { useLocaleStore } from "@/stores/localeStore";
+import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import type { NavigationOptions } from "@/types/navigationTypes";
 import type { Locales } from "@/types/storeTypes";

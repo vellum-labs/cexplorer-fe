@@ -6,7 +6,7 @@ import { Check, Ellipsis, FileText, X } from "lucide-react";
 
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "../table/ExportButton";
-import TableSettingsDropdown from "../global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "../table/GlobalTable";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
@@ -31,7 +31,7 @@ import { useDeFiOrderListTableStore } from "@/stores/tables/deFiOrderListTableSt
 import { useFetchDeFiOrderList } from "@/services/token";
 import { useFilterTable } from "@/hooks/tables/useFilterTable";
 import { useFetchMiscSearch } from "@/services/misc";
-import { useLocaleStore } from "@/stores/localeStore";
+import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 
 import { addressIcons } from "@/constants/address";

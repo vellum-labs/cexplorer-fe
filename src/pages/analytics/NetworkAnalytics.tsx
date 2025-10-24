@@ -6,7 +6,7 @@ import { NetworkEnergyConsumption } from "@/components/analytics/network/tabs/Ne
 import { NetworkHealthTab } from "@/components/analytics/network/tabs/NetworkHealthTab";
 import { NetworkStorageTab } from "@/components/analytics/network/tabs/NetworkStorageTab";
 import { NetworkTransactionTab } from "@/components/analytics/network/tabs/NetworkTransactionsTab";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 
 import { PageBase } from "@/components/global/pages/PageBase";
 

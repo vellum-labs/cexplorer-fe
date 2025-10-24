@@ -2,8 +2,8 @@ import type { AddressAsset } from "@/types/addressTypes";
 import { useEffect, type FC, type ReactNode } from "react";
 
 import { Switch } from "@vellumlabs/cexplorer-sdk";
-import Tabs from "@/components/global/Tabs";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import { AddressAssetTable } from "../AddressAssetTable";
 

@@ -13,7 +13,7 @@ import { useHardforkTableStore } from "@/stores/tables/hardforkTableStore";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useState } from "react";
 
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { cn } from "@vellumlabs/cexplorer-sdk";
 import { countObjectNonEmptyValues } from "@/utils/countObjectNonEmptyValues";
 import { formatDate } from "@vellumlabs/cexplorer-sdk";

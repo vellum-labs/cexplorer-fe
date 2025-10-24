@@ -1,5 +1,5 @@
+import { JsonDisplay } from "@vellumlabs/cexplorer-sdk";
 import { Badge } from "@vellumlabs/cexplorer-sdk";
-import { JsonDisplay } from "@/components/global/JsonDisplay";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { colors } from "@/constants/colors";
 import { useFetchMiscBasic } from "@/services/misc";

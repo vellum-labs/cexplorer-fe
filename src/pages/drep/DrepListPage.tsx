@@ -4,7 +4,7 @@ import { DrepAnalyticsTab } from "@/components/drep/tabs/DrepAnalyticsTab";
 import { DrepDelegationsTab } from "@/components/drep/tabs/DrepDelegationsTab";
 import { DrepListTab } from "@/components/drep/tabs/DrepListTab";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 
 import {
   useFetchDrepAnalytics,
@@ -20,7 +20,7 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel";
+} from "@vellumlabs/cexplorer-sdk";
 import Autoplay from "embla-carousel-autoplay";
 import { PageBase } from "@/components/global/pages/PageBase";
 

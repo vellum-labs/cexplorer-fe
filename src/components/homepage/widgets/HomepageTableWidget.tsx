@@ -19,7 +19,7 @@ import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import { useClickOutsideGroup } from "@/hooks/useClickOutsideGroup";
 
 import { memo } from "react";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { Pagination } from "@vellumlabs/cexplorer-sdk";
 import { paginateArray } from "@/utils/paginateArray";
 import { PaginationNext, PaginationPrevious } from "@vellumlabs/cexplorer-sdk";

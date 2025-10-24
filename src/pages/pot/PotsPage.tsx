@@ -1,8 +1,8 @@
 import { EpochCell } from "@/components/epoch/EpochCell";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { HeaderBanner } from "@/components/global/HeaderBanner";
-import AdsCarousel from "@/components/global/ads/AdsCarousel";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
@@ -27,6 +27,7 @@ import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 
 export const PotsPage = () => {
   const [
@@ -47,6 +48,8 @@ export const PotsPage = () => {
   } = useAdaPotsTableStore();
   const query = useFetchAdaPots();
   const count = query.data?.data.count ?? 0;
+
+  const miscBasicQuery = useFetchMiscBasic();
 
   const sortOptions = [
     {
@@ -165,7 +168,10 @@ export const PotsPage = () => {
           breadcrumbItems={[{ label: "Pots" }]}
           subTitle
         />
-        <AdsCarousel />
+        <AdsCarousel
+          generateImageUrl={generateImageUrl}
+          miscBasicQuery={miscBasicQuery}
+        />
         <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
           <div className='mb-1 ml-auto flex items-center'>
             <span className='mr-1 text-text-sm text-grayTextPrimary'>
