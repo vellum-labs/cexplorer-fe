@@ -11,7 +11,7 @@ import { useFetchGovernanceActionDetail } from "@/services/governance";
 
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
-import { JsonDisplay } from "@/components/global/JsonDisplay";
+import { JsonDisplay } from "@vellumlabs/cexplorer-sdk";
 
 export const GovernanceDetailPage: FC = () => {
   const { id } = useParams({
