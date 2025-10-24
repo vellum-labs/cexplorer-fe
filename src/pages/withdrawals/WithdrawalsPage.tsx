@@ -8,7 +8,7 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import { HashCell } from "@/components/tx/HashCell";
 import { withdrawalsTableOptions } from "@/constants/tables/withdrawalsTableOptions";
 import { useFetchWithdrawals } from "@/services/account";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useWithdrawalsTableStore } from "@/stores/tables/withdrawalsTableStore";
 import type { Withdrawal } from "@/types/accountTypes";
 import type { TableColumns, WithdrawalsColumns } from "@/types/tableTypes";
@@ -119,7 +119,10 @@ export const WithdrawalsPage = () => {
       key: "delegated_to",
       render: item => (
         <div className='flex items-center gap-1/2'>
-          <PoolCell poolInfo={item.pool.live} poolImageUrl={generateImageUrl(item.pool.live.id, "ico", "pool")} />
+          <PoolCell
+            poolInfo={item.pool.live}
+            poolImageUrl={generateImageUrl(item.pool.live.id, "ico", "pool")}
+          />
         </div>
       ),
       jsonFormat: item => {

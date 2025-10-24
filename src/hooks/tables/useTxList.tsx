@@ -10,7 +10,7 @@ import { Link } from "@tanstack/react-router";
 
 import { useFetchMiscBasic } from "@/services/misc";
 import { useFetchTxList } from "@/services/tx";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useTxListTableStore } from "@/stores/tables/txListTableStore";
 import { useEffect, useState } from "react";
 import { useMiscConst } from "../useMiscConst";

@@ -1,7 +1,7 @@
 import type { FC } from "react";
 
 import { Check } from "lucide-react";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 
 export const SettingsMobileItemScrolling: FC = () => {
   const { infiniteScrolling } = useInfiniteScrollingStore();

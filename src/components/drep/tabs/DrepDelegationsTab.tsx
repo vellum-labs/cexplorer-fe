@@ -10,7 +10,7 @@ import { drepDelegationsTableOptions } from "@/constants/tables/drepDelegationsT
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchDrepDelegations } from "@/services/drepDelegations";
 import { useFetchMiscBasic } from "@/services/misc";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useDrepDelegationsTableStore } from "@/stores/tables/drepDelegationsTableStore";
 import type { DrepDelegationData } from "@/types/delegationTypes";
 import type { DrepDelegationsColumns, TableColumns } from "@/types/tableTypes";

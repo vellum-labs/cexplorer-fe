@@ -13,7 +13,7 @@ import GlobalTable from "@/components/table/GlobalTable";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchDrepDelegator } from "@/services/drep";
 import { useFetchMiscBasic } from "@/services/misc";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useDrepDelegatorTableStore } from "@/stores/tables/drepDelegatorTableStore";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";

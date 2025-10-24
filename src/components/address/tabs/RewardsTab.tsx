@@ -16,7 +16,7 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import { colors } from "@/constants/colors";
 import { EPOCH_LENGTH_DAYS } from "@/constants/confVariables";
 import { addressDetailRewardsTableOptions } from "@/constants/tables/addressDetailRewardsTableOptions";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useSearch } from "@tanstack/react-router";
 import { RewardsGraph } from "../graphs/RewardsGraph";
 
@@ -79,7 +79,12 @@ export const RewardsTab: FC<RewardsTabProps> = ({
     },
     {
       key: "stake_pool",
-      render: item => <PoolCell poolInfo={item.pool} poolImageUrl={generateImageUrl(item.pool.id, "ico", "pool")} />,
+      render: item => (
+        <PoolCell
+          poolInfo={item.pool}
+          poolImageUrl={generateImageUrl(item.pool.id, "ico", "pool")}
+        />
+      ),
       title: "Stake Pool",
       visible: columnsVisibility.stake_pool,
       widthPx: 50,

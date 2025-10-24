@@ -13,7 +13,7 @@ import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { Info } from "lucide-react";
 
 import { useFetchMetadataTxList } from "@/services/metadata";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useMetadataTxListTableStore } from "@/stores/tables/metadataTxListTableStore";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";

@@ -14,7 +14,7 @@ import GlobalTable from "@/components/table/GlobalTable";
 import SortBy from "@/components/ui/sortBy";
 
 import { useFetchScriptList } from "@/services/script";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useScriptListRanklistTableStore } from "@/stores/tables/scriptListRanklistTableStore";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";

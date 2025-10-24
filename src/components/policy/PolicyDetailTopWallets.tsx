@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchPolicyDetail, useFetchPolicyOwner } from "@/services/policy";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { usePolicyDetailOwnerTableStore } from "@/stores/tables/policyDetailOwnersTableStore";
 import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";

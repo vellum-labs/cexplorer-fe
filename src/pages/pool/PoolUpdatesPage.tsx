@@ -14,7 +14,7 @@ import type { FC } from "react";
 import { poolUpdatesTableOptions } from "@/constants/tables/poolUpdatesTableOptions";
 
 import { useFetchPoolsList } from "@/services/pools";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { usePoolUpdatesTableStore } from "@/stores/tables/poolUpdatesTableStore";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";

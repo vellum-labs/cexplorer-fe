@@ -3,7 +3,7 @@ import type { BlockListColumns, TableColumns } from "@/types/tableTypes";
 import type { Dispatch, SetStateAction } from "react";
 
 import { useFetchBlocksList } from "@/services/blocks";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useBlockListTableStore } from "@/stores/tables/blockListTableStore";
 import { useEffect, useState } from "react";
 

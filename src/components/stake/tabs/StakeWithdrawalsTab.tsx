@@ -8,7 +8,7 @@ import GlobalTable from "@/components/table/GlobalTable";
 import { stakeWithdrawalTableOptions } from "@/constants/tables/stakeWithdrawalsTableOptions";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { useFetchWithdrawals } from "@/services/account";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useStakeWithdrawalsTableStore } from "@/stores/tables/stakeWithdrawalsTableStore";
 import type { Withdrawal } from "@/types/accountTypes";
 import type { MiscConstResponseData } from "@/types/miscTypes";

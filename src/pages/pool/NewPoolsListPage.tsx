@@ -10,7 +10,7 @@ import GlobalTable from "@/components/table/GlobalTable";
 import { Check, X } from "lucide-react";
 
 import { useFetchPoolsList } from "@/services/pools";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useNewPoolsListTableStore } from "@/stores/tables/newPoolsListTableStore";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";

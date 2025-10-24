@@ -2,7 +2,7 @@ import { activeSlotsCoeff, epochLength } from "@/constants/confVariables";
 import { poolRewardsTableOptions } from "@/constants/tables/poolRewardsTableOptions";
 import { useElapsedEpochNumber } from "@/hooks/useElapsedEpochNumber";
 import { useFetchPoolDetail, useFetchPoolReward } from "@/services/pools";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { usePoolRewardsTableStore } from "@/stores/tables/poolRewardsTableStore";
 import type { MiscConstResponse } from "@/types/miscTypes";
 import type { PoolRewardsColumns } from "@/types/tableTypes";

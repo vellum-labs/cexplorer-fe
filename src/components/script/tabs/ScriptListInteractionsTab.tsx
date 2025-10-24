@@ -14,7 +14,7 @@ import GlobalTable from "@/components/table/GlobalTable";
 import { HashCell } from "@/components/tx/HashCell";
 
 import { useFetchScriptDetailRedeemer } from "@/services/script";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useScriptListInteractionsTableStore } from "@/stores/tables/scriptListInteractionsTableStore";
 import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";

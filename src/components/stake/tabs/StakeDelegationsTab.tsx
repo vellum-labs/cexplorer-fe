@@ -11,7 +11,7 @@ import {
   useFetchDelegations,
   useFetchDelegationsState,
 } from "@/services/delegations";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { usePoolDelegatorsTableStore } from "@/stores/tables/poolDelegatorsTableStore";
 import type {
   DelegationData,
@@ -86,7 +86,14 @@ const StakeDelegationsTab = ({ address, miscConst }: Props) => {
       render: item => (
         <div className='flex items-center gap-1/2'>
           {item.delegation?.live?.pool?.id ? (
-            <PoolCell poolInfo={item.delegation.live.pool} poolImageUrl={generateImageUrl(item.delegation.live.pool.id, "ico", "pool")} />
+            <PoolCell
+              poolInfo={item.delegation.live.pool}
+              poolImageUrl={generateImageUrl(
+                item.delegation.live.pool.id,
+                "ico",
+                "pool",
+              )}
+            />
           ) : (
             <Badge color='yellow'>Not delegated</Badge>
           )}
@@ -214,7 +221,10 @@ const StakeDelegationsTab = ({ address, miscConst }: Props) => {
       key: "address",
       render: item => (
         <div className='flex items-center gap-1/2'>
-          <PoolCell poolInfo={item.pool.live} poolImageUrl={generateImageUrl(item.pool.live.id, "ico", "pool")} />
+          <PoolCell
+            poolInfo={item.pool.live}
+            poolImageUrl={generateImageUrl(item.pool.live.id, "ico", "pool")}
+          />
         </div>
       ),
       jsonFormat: item => {

@@ -12,7 +12,7 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import { colors } from "@/constants/colors";
 import { retiredDelegationsTableOptions } from "@/constants/tables/retiredDelegationsTableOptions";
 import { useFetchRetiredPools } from "@/services/pools";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useRetiredDelegationsTableStore } from "@/stores/tables/retiredDelegationsTableStore";
 import type { RetiredPoolItem } from "@/types/poolTypes";
 import type {

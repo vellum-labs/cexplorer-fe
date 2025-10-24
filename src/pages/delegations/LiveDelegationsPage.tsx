@@ -12,7 +12,7 @@ import { liveDelegationsTableOptions } from "@/constants/tables/liveDelegationsT
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchDelegations } from "@/services/delegations";
 import { useFetchMiscBasic } from "@/services/misc";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useLiveDelegationsTableStore } from "@/stores/tables/liveDelegationsTableStore";
 import type { DelegationData } from "@/types/delegationTypes";
 import type { LiveDelegationsColumns, TableColumns } from "@/types/tableTypes";
@@ -137,13 +137,25 @@ export const LiveDelegationsPage = () => {
         <div className='grid w-full grid-cols-7 items-center gap-1/2'>
           {item.pool?.previous.id && (
             <>
-              <PoolCell className='col-span-3' poolInfo={item.pool.previous} poolImageUrl={generateImageUrl(item.pool.previous.id, "ico", "pool")} />
+              <PoolCell
+                className='col-span-3'
+                poolInfo={item.pool.previous}
+                poolImageUrl={generateImageUrl(
+                  item.pool.previous.id,
+                  "ico",
+                  "pool",
+                )}
+              />
               <div className='col-span-1 flex items-center justify-center'>
                 <ArrowRight size={18} className='shrink-0' />
               </div>
             </>
           )}
-          <PoolCell poolInfo={item.pool.live} className='col-span-3' poolImageUrl={generateImageUrl(item.pool.live.id, "ico", "pool")} />
+          <PoolCell
+            poolInfo={item.pool.live}
+            className='col-span-3'
+            poolImageUrl={generateImageUrl(item.pool.live.id, "ico", "pool")}
+          />
         </div>
       ),
       jsonFormat: item => {

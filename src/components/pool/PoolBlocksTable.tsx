@@ -1,6 +1,6 @@
 import { poolBlocksTableOptions } from "@/constants/tables/poolBlocksTableOptions";
 import { useFetchBlocksList } from "@/services/blocks";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { usePoolBlocksTableStore } from "@/stores/tables/poolBlocksTableStore";
 import type { PoolBlocksColumns } from "@/types/tableTypes";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";

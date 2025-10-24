@@ -19,7 +19,7 @@ import { isTextNumeric } from "@/utils/isTextNumeric";
 
 import { useEffect, useState } from "react";
 import { useFetchBlocksList } from "@/services/blocks";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 
 interface EpochBlocksProps {

@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/table";
 import { useNavigate } from "@tanstack/react-router";
 
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { isMobileDevice } from "@/utils/isMobileDevice";
 import { paginateArray } from "@/utils/paginateArray";
 import type {
