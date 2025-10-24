@@ -147,6 +147,12 @@ export default defineConfig({
       "@anastasia-labs/cardano-multiplatform-lib-nodejs":
         "@anastasia-labs/cardano-multiplatform-lib-browser",
     },
+    dedupe: [
+      "@tanstack/react-router",
+      "@tanstack/router-core",
+      "@tanstack/react-store",
+      "@tanstack/history",
+    ],
   },
   server: {
     port: 3001,
