@@ -7,20 +7,26 @@ import { nestedNavigationOptions } from "@/constants/nestedNavigationOptions";
 import { Cardano } from "@vellumlabs/cexplorer-sdk";
 import { ArrowRight, ChevronsUp } from "lucide-react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
-import MainLogo from "../../global/MainLogo";
+import { MainLogo } from "@vellumlabs/cexplorer-sdk";
 import { InfoCard } from "@vellumlabs/cexplorer-sdk";
 import { Dropdown } from "@vellumlabs/cexplorer-sdk";
 import { ScreenDropdown } from "@vellumlabs/cexplorer-sdk";
 import SettingsDropdown from "../../global/dropdowns/SettingsDropdown";
 import MobileMenu from "../../navbar/MobileMenu/MobileMenu";
 import WalletButton from "../../wallet/WalletButton";
+
+import { configJSON } from "@/constants/conf";
+
 export const SafeNavbar: FC = () => {
   return (
     <header>
       <nav className='flex h-[75px] w-full items-center justify-center border-b border-borderFaded bg-cardBg py-2 pr-2 lg:pr-0'>
         <div className='flex w-full max-w-desktop justify-between p-mobile md:px-desktop md:py-mobile'>
           <div className='flex items-center gap-1'>
-            <MainLogo className='-translate-x-[6px]' />
+            <MainLogo
+              className='-translate-x-[6px]'
+              network={configJSON.network}
+            />
           </div>
           <div className='hidden items-center gap-3 xl:flex xl:h-[75px]'>
             <Dropdown

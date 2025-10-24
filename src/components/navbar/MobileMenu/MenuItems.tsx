@@ -3,7 +3,7 @@ import type { Dispatch, FC, SetStateAction } from "react";
 
 import { navigationOptions } from "@/constants/navigationOptions";
 
-import MainLogo from "@/components/global/MainLogo";
+import { MainLogo } from "@vellumlabs/cexplorer-sdk";
 import { Accordion } from "@vellumlabs/cexplorer-sdk";
 import WalletButton from "@/components/wallet/WalletButton";
 import { enabledWalletConnector } from "@/constants/confVariables";
@@ -13,6 +13,8 @@ import { MobileMenuAccordionItem } from "@vellumlabs/cexplorer-sdk";
 import SettingsMobile from "../SettingsMobile";
 import { AdaPriceIndicator } from "@vellumlabs/cexplorer-sdk";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
+
+import { configJSON } from "@/constants/conf";
 
 interface MenuItemsProps {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -61,6 +63,7 @@ export const MenuItems: FC<MenuItemsProps> = ({ setOpen, setActiveMenu }) => {
         className='-translate-x-1'
         size={120}
         onClick={() => setOpen(false)}
+        network={configJSON.network}
       />
       <Accordion className='' type='single' collapsible>
         {menuItems.map((menuItem, index) => (
