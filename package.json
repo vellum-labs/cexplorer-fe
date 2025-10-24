@@ -15,7 +15,7 @@
     "prepare": "husky",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "reinstall": "rimraf yarn.lock & yarn"
+    "reinstall:sdk": "yarn remove @vellumlabs/cexplorer-sdk && yarn add file:../cexplorer-sdk"
   },
   "dependencies": {
     "@date-fns/tz": "^1.4.1",

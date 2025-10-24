@@ -4,7 +4,7 @@ import { DrepDetailDelegatorsTab } from "@/components/drep/tabs/DrepDetailDelega
 import { DrepDetailGovernanceActionsTab } from "@/components/drep/tabs/DrepDetailGovernanceActionsTab";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useState, type FC } from "react";
 
 import { useFetchDrepDetail } from "@/services/drep";

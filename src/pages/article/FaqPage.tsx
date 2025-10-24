@@ -4,7 +4,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@vellumlabs/cexplorer-sdk";
 import { useFetchArticleDetail } from "@/services/article";
 import parse from "html-react-parser";
 import { Helmet } from "react-helmet";

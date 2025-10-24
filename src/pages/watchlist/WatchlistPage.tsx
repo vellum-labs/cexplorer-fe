@@ -2,7 +2,7 @@ import { AddressesTab } from "@/components/address/tabs/AddressesTab";
 import { DrepListTab } from "@/components/drep/tabs/DrepListTab";
 import { StakeListTab } from "@/components/stake/tabs/StakeListTab";
 import { PolicyListTab } from "@/components/policy/tabs/PolicyListTab";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { useWatchlistStore } from "@/stores/watchlistStore";
 import { useMemo, useState } from "react";

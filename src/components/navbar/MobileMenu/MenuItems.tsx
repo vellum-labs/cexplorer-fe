@@ -4,12 +4,12 @@ import type { Dispatch, FC, SetStateAction } from "react";
 import { navigationOptions } from "@/constants/navigationOptions";
 
 import MainLogo from "@/components/global/MainLogo";
-import { Accordion } from "@/components/ui/accordion";
+import { Accordion } from "@vellumlabs/cexplorer-sdk";
 import WalletButton from "@/components/wallet/WalletButton";
 import { enabledWalletConnector } from "@/constants/confVariables";
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
 import { ChevronRight, ChevronRightIcon, LineChart } from "lucide-react";
-import MobileMenuAccordionItem from "../MobileMenuAccordionItem";
+import { MobileMenuAccordionItem } from "@vellumlabs/cexplorer-sdk";
 import SettingsMobile from "../SettingsMobile";
 import { AdaPriceIndicator } from "../AdaPriceIndicator";
 

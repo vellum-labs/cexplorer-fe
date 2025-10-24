@@ -1,6 +1,6 @@
 import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import CollateralTabItem from "@/components/tx/tabs/CollateralTabItem";
 import ContentTabItem from "@/components/tx/tabs/ContentTabItem";
 import { ContractsTabItem } from "@/components/tx/tabs/ContractsTabItem";

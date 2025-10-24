@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { useState } from "react";
 
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { DelegatorStructureSubtab } from "../subtabs/DelegatorStructureSubtab";
 import { DelegatorSubtab } from "../subtabs/DelegatorSubtab";
 import { useDrepDelegatorsStructureStore } from "@/stores/tables/drepDelegatorStructureTableStore";

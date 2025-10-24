@@ -2,7 +2,7 @@ import type { FC } from "react";
 import type { PoolPefomanceColumns } from "@/types/tableTypes";
 
 import ExportButton from "../table/ExportButton";
-import TableSettingsDropdown from "../global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "../table/GlobalTable";
 import { Link } from "@tanstack/react-router";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";

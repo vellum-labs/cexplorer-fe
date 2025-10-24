@@ -6,7 +6,7 @@ import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import { JsonDisplay } from "../global/JsonDisplay";
+import { JsonDisplay } from "@vellumlabs/cexplorer-sdk";
 import ConstLabelBadge from "../global/badges/ConstLabelBadge";
 import { TextDisplay } from "@vellumlabs/cexplorer-sdk";
 import { ChevronDown, ChevronRight } from "lucide-react";

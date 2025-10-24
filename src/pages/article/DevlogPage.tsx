@@ -7,7 +7,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchArticleDetail } from "@/services/article";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";

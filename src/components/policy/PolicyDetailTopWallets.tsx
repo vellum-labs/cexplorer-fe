@@ -12,7 +12,7 @@ import { policyDetailOwnerOptions } from "@/constants/tables/policyDetailOwnerTa
 import type { PolicyDetailOwnerTableColumns } from "@/types/tableTypes";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import AddressCell from "../address/AddressCell";
-import TableSettingsDropdown from "../global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "../table/ExportButton";
 import GlobalTable from "../table/GlobalTable";
 

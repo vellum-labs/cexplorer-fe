@@ -1,5 +1,5 @@
 import ConstLabelBadge from "@/components/global/badges/ConstLabelBadge";
-import { JsonDisplay } from "@/components/global/JsonDisplay";
+import { JsonDisplay } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { useFetchTxDetail } from "@/services/tx";
 import type { TxMetadata } from "@/types/txTypes";

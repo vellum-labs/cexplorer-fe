@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FileJson } from "lucide-react";
 
 import { Modal } from "@vellumlabs/cexplorer-sdk";
-import { JsonDisplay } from "../global/JsonDisplay";
+import { JsonDisplay } from "@vellumlabs/cexplorer-sdk";
 
 interface MetadataCellProps {
   metadata: any;

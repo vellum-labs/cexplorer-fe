@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { TokenDashboardTokenTab } from "@/components/token/dashboard/tabs/TokenDashboardTokenTab";
 import { TokenDashboardExchangeTab } from "@/components/token/dashboard/tabs/TokenDashboardExchangeTab";
 import { DeFiOrderList } from "@/components/defi/DeFiOrderList";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { useSearch } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
 

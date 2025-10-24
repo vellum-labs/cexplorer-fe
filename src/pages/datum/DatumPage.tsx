@@ -1,7 +1,7 @@
 import type { FC } from "react";
 
 import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
-import { JsonDisplay } from "@/components/global/JsonDisplay";
+import { JsonDisplay } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 
 import { useDebounce } from "@vellumlabs/cexplorer-sdk";

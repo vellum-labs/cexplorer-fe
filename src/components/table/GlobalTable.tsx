@@ -22,7 +22,7 @@ import { NoResultsFound } from "@vellumlabs/cexplorer-sdk";
 import { Pagination } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Funnel } from "lucide-react";
-import { FunnelFilter } from "../global/FunnelFilter";
+import { FunnelFilter } from "@vellumlabs/cexplorer-sdk";
 
 export type Column<T> = {
   key: string;

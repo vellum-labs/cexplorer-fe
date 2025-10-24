@@ -2,7 +2,7 @@ import { AddressesTab } from "@/components/address/tabs/AddressesTab";
 import { RewardsTab } from "@/components/address/tabs/RewardsTab";
 import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { getRouteApi, useSearch } from "@tanstack/react-router";
 import { QRCodeSVG } from "qrcode.react";
