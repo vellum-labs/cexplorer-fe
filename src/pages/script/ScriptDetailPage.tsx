@@ -1,4 +1,4 @@
-import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
+import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { ScriptDetailOverview } from "@/components/script/ScriptDetailOverview";
 import { ScriptDetailStatsTab } from "@/components/script/tabs/ScriptDetailStatsTab";

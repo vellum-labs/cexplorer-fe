@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
+import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
 import { JsonDisplay } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 

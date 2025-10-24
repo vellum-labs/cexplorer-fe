@@ -1,6 +1,6 @@
 import { AddressesTab } from "@/components/address/tabs/AddressesTab";
 import { RewardsTab } from "@/components/address/tabs/RewardsTab";
-import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
+import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";

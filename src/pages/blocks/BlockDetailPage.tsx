@@ -23,7 +23,7 @@ import { MintedByCard } from "@vellumlabs/cexplorer-sdk";
 import type { OverviewList } from "@vellumlabs/cexplorer-sdk";
 import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 import { SizeCard } from "@vellumlabs/cexplorer-sdk";
-import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
+import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
 import { TotalSumWithRates } from "@/components/global/TotalSumWithRates";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";

@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
+import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
 import { GovernanceDetailMetadataTab } from "@/components/governance/tabs/GovernanceDetailMetadataTab";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { GovernanceDetailOverview } from "@/components/governance/GovernanceDetailOverview";
