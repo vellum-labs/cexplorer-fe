@@ -5,8 +5,8 @@ import type {
 } from "@/types/tableTypes";
 import type { FC } from "react";
 
-import { PurposeBadge } from "@/components/global/badges/PurposeBadge";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
+import { PurposeBadge } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";

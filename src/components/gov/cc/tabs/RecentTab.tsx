@@ -10,7 +10,7 @@ import { useRecentVotesTableStore } from "@/stores/tables/recentVotesTableStore"
 import { useFetchCCVotes } from "@/services/governance";
 import { formatString, formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
-import { Image } from "@/components/global/Image";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { ActionTypes } from "@vellumlabs/cexplorer-sdk";

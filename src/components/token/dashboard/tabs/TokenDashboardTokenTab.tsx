@@ -28,7 +28,7 @@ import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 import AdaHandleBadge from "@/components/global/badges/AdaHandleBadge";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import { Image } from "@/components/global/Image";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { alphabetWithNumbers } from "@/constants/alphabet";
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";

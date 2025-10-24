@@ -3,7 +3,7 @@ import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import type { FC } from "react";
 
 import { Link } from "@tanstack/react-router";
-import { Image } from "../global/Image";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";

@@ -8,7 +8,7 @@ import { Cardano } from "@/resources/images/icons/Cardano";
 import { ArrowRight, ChevronsUp } from "lucide-react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import MainLogo from "../../global/MainLogo";
-import { InfoCard } from "../../global/cards/InfoCard";
+import { InfoCard } from "@vellumlabs/cexplorer-sdk";
 import { Dropdown } from "@vellumlabs/cexplorer-sdk";
 import { ScreenDropdown } from "../../global/dropdowns/ScreenDropdown";
 import SettingsDropdown from "../../global/dropdowns/SettingsDropdown";

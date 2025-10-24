@@ -582,23 +582,11 @@ export const GroupDetailPage = () => {
   return (
     <>
       <Helmet>
-        <meta charSet='utf-8' />
         {
           <title>
             {metadata.groupDetail.title.replace("%group%", name ?? "")}
           </title>
         }
-        <meta
-          name='description'
-          content={metadata.groupDetail.description.replace(
-            "%group%",
-            name ?? "",
-          )}
-        />
-        <meta
-          name='keywords'
-          content={metadata.groupDetail.keywords.replace("%group%", name ?? "")}
-        />
       </Helmet>
       <main className='flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col justify-center'>

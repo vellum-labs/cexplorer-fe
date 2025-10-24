@@ -1,8 +1,9 @@
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import Dollar from "@/resources/images/dollar.svg";
 import { encodeAssetName } from "@/utils/asset/encodeAssetName";
-import { Link, type ReactNode } from "@tanstack/react-router";
-import { Badge } from "./Badge";
+import { Link } from "@tanstack/react-router";
+import type { ReactNode } from "react";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
 
 import { configJSON } from "@/constants/conf";

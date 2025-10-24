@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { dexConfig } from "@/constants/dexConfig";
 
-import { Image } from "../global/Image";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";

@@ -6,7 +6,7 @@ import type {
 import type { FC } from "react";
 
 import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
-import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
+import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
@@ -31,7 +31,7 @@ import { governanceListTableOptions } from "@/constants/tables/governanceActions
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { getEpochByTime } from "@/utils/getEpochByTime";
-import { GovernanceStatusBadge } from "@/components/global/badges/GovernanceStatusBadge";
+import { GovernanceStatusBadge } from "@vellumlabs/cexplorer-sdk";
 import { ActionTypes } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";

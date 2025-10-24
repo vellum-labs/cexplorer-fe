@@ -1,7 +1,7 @@
 import { EpochCell } from "@/components/epoch/EpochCell";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
+import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";

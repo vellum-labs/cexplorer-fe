@@ -19,11 +19,11 @@ import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { getColumnsSortOrder } from "@/utils/getColumnsSortOrder";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { X } from "lucide-react";
-import { Badge } from "@/components/global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { useFilterTable } from "./useFilterTable";
-import { VoteBadge } from "@/components/global/badges/VoteBadge";
+import { VoteBadge } from "@vellumlabs/cexplorer-sdk";
 import type { Vote } from "@/constants/votes";
 import { useSearchTable } from "./useSearchTable";
 

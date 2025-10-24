@@ -1,6 +1,6 @@
 import AddressCell from "@/components/address/AddressCell";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { AddressTypeInitialsBadge } from "@/components/global/badges/AddressTypeInitialsBadge";
+import { AddressTypeInitialsBadge } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 import { useFetchTxDetail } from "@/services/tx";

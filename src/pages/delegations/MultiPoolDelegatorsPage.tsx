@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useFetchTopMultiDelegators } from "@/services/pools";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
-import { Badge } from "@/components/global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { useMultiPoolDelegatorsTableStore } from "@/stores/tables/multiPoolDelegatorsTableStore";
 import { multiPoolDelegatorsTableOptions } from "@/constants/tables/multiPoolDelegatorsTableOptions";

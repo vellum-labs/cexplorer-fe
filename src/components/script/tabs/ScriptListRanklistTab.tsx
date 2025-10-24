@@ -5,7 +5,7 @@ import type {
 } from "@/types/tableTypes";
 import type { FC } from "react";
 
-import { Badge } from "@/components/global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";

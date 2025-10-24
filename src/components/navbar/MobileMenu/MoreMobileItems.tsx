@@ -1,5 +1,5 @@
 import { Button } from "@vellumlabs/cexplorer-sdk";
-import { InfoCard } from "@/components/global/cards/InfoCard";
+import { InfoCard } from "@vellumlabs/cexplorer-sdk";
 import { Accordion } from "@vellumlabs/cexplorer-sdk";
 import { colors } from "@/constants/colors";
 import { nestedNavigationOptions } from "@/constants/nestedNavigationOptions";

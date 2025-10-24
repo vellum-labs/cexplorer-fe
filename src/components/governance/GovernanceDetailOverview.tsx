@@ -2,17 +2,17 @@ import type { useFetchGovernanceActionDetail } from "@/services/governance";
 import type { FC } from "react";
 
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import { OverviewCard } from "../global/cards/OverviewCard";
+import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 import { CircleHelp } from "lucide-react";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 
-import { Image } from "../global/Image";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { Link } from "@tanstack/react-router";
-import { GovernanceStatusBadge } from "@/components/global/badges/GovernanceStatusBadge";
+import { GovernanceStatusBadge } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { TimeDateIndicator } from "../global/TimeDateIndicator";
@@ -30,7 +30,7 @@ import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
 
 import { useState } from "react";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
-import { VoteBadge } from "../global/badges/VoteBadge";
+import { VoteBadge } from "@vellumlabs/cexplorer-sdk";
 import type { Vote } from "@/constants/votes";
 
 interface GovernanceDetailOverviewProps {
@@ -252,7 +252,9 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
     {
       label: "Voting deadline",
       value:
-        query?.data?.data?.expiration && startTime ? (
+        query?.data?.data?.expiration &&
+        startTime &&
+        !isNaN(startTime.getTime()) ? (
           <TimeDateIndicator time={startTime.toISOString()} />
         ) : (
           "-"

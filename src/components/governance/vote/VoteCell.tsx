@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { Link } from "@tanstack/react-router";
 import { FileText } from "lucide-react";
-import { VoteBadge } from "@/components/global/badges/VoteBadge";
+import { VoteBadge } from "@vellumlabs/cexplorer-sdk";
 import type { Vote } from "@/constants/votes";
 
 interface VoteCellProps {
@@ -10,11 +10,7 @@ interface VoteCellProps {
   proposalId?: string;
 }
 
-export const VoteCell: FC<VoteCellProps> = ({
-  vote,
-  txHash,
-  proposalId,
-}) => {
+export const VoteCell: FC<VoteCellProps> = ({ vote, txHash, proposalId }) => {
   if (!vote) {
     return "-";
   }

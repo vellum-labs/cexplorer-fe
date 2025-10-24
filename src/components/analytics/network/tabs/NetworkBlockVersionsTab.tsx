@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
+import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 import { Router } from "lucide-react";
 import { AnalyticsGraph } from "../../AnalyticsGraph";
 import { NetworkBlockVersionsByDatePieGraph } from "../graphs/NetworkBlockVersionsByDatePieGraph";

@@ -6,7 +6,7 @@ import { dexConfig } from "@/constants/dexConfig";
 
 import { Link } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import { Image } from "../global/Image";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";

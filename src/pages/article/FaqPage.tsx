@@ -5,7 +5,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@vellumlabs/cexplorer-sdk";
-import { webUrl } from "@/constants/confVariables";
 import { useFetchArticleDetail } from "@/services/article";
 import parse from "html-react-parser";
 import { Helmet } from "react-helmet";
@@ -14,26 +13,13 @@ export const FaqPage = () => {
   const query = useFetchArticleDetail("en", "page", "faq");
   const data = query.data;
   const name = data?.name;
-  const description = data?.description;
-  const keywords = data?.keywords;
   const faq: any = query.data?.data.some(item => Array.isArray(item))
     ? query.data?.data[0]
     : query.data?.data;
 
   return (
     <>
-      <Helmet>
-        <meta charSet='utf-8' />
-        {description && <meta name='description' content={description} />}
-        {keywords && <meta name='keywords' content={keywords} />}
-        {name && <title>{name} | Cexplorer.io</title>}
-        {name && <meta property='og:title' content={name} />}
-        {description && (
-          <meta property='og:description' content={description} />
-        )}
-        <meta property='og:type' content='website' />
-        <meta property='og:url' content={webUrl + location.pathname} />
-      </Helmet>
+      <Helmet>{name && <title>{name} | Cexplorer.io</title>}</Helmet>
       <div className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col items-center'>
           <h1>Frequently asked questions</h1>

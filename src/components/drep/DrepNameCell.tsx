@@ -2,7 +2,7 @@ import type { FC } from "react";
 
 import { Link } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import { Image } from "../global/Image";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { alphabetWithNumbers } from "@/constants/alphabet";
 import { generateImageUrl } from "@/utils/generateImageUrl";
