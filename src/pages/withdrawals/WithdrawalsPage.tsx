@@ -3,7 +3,8 @@ import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
-import PoolCell from "@/components/table/PoolCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { HashCell } from "@/components/tx/HashCell";
 import { withdrawalsTableOptions } from "@/constants/tables/withdrawalsTableOptions";
 import { useFetchWithdrawals } from "@/services/account";
@@ -118,7 +119,7 @@ export const WithdrawalsPage = () => {
       key: "delegated_to",
       render: item => (
         <div className='flex items-center gap-1/2'>
-          <PoolCell poolInfo={item.pool.live} />
+          <PoolCell poolInfo={item.pool.live} poolImageUrl={generateImageUrl(item.pool.live.id, "ico", "pool")} />
         </div>
       ),
       jsonFormat: item => {

@@ -5,7 +5,8 @@ import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
-import PoolCell from "@/components/table/PoolCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { HashCell } from "@/components/tx/HashCell";
 import { liveDelegationsTableOptions } from "@/constants/tables/liveDelegationsTableOptions";
 import { useMiscConst } from "@/hooks/useMiscConst";
@@ -136,13 +137,13 @@ export const LiveDelegationsPage = () => {
         <div className='grid w-full grid-cols-7 items-center gap-1/2'>
           {item.pool?.previous.id && (
             <>
-              <PoolCell className='col-span-3' poolInfo={item.pool.previous} />
+              <PoolCell className='col-span-3' poolInfo={item.pool.previous} poolImageUrl={generateImageUrl(item.pool.previous.id, "ico", "pool")} />
               <div className='col-span-1 flex items-center justify-center'>
                 <ArrowRight size={18} className='shrink-0' />
               </div>
             </>
           )}
-          <PoolCell poolInfo={item.pool.live} className='col-span-3' />
+          <PoolCell poolInfo={item.pool.live} className='col-span-3' poolImageUrl={generateImageUrl(item.pool.live.id, "ico", "pool")} />
         </div>
       ),
       jsonFormat: item => {

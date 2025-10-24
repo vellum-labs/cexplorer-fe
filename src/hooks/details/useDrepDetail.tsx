@@ -19,7 +19,7 @@ import { slotToDate } from "@/utils/slotToDate";
 import { format } from "date-fns";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { CircleHelp } from "lucide-react";
-import { DelegatorsLabel } from "@/components/global/DelegatorsLabel";
+import { DelegatorsLabel } from "@vellumlabs/cexplorer-sdk";
 
 interface UseDrepDetailArgs {
   query: ReturnType<typeof useFetchDrepDetail>;

@@ -18,7 +18,7 @@ import type {
 } from "@tanstack/react-query";
 import type { MouseEventHandler, ReactNode, RefObject } from "react";
 import React, { useEffect, useRef, useState } from "react";
-import { NoResultsFound } from "../global/NoResultsFound";
+import { NoResultsFound } from "@vellumlabs/cexplorer-sdk";
 import { Pagination } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Funnel } from "lucide-react";

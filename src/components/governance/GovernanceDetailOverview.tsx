@@ -25,7 +25,7 @@ import {
   shouldCCVote,
 } from "@/utils/governanceVoting";
 import { GovernanceCard } from "./GovernanceCard";
-import { SafetyLinkModal } from "../global/modals/SafetyLinkModal";
+import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
 
 import { useState } from "react";

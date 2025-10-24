@@ -1,8 +1,8 @@
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import { ADATokenName } from "@/constants/currencies";
 import { alphabetWithNumbers } from "@/constants/alphabet";
-import { getAssetFingerprint } from "./getAssetFingerprint";
-import { encodeAssetName } from "./encodeAssetName";
+import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
+import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "../generateImageUrl";
 import AdaIcon from "@/resources/images/icons/ada.webp";
 

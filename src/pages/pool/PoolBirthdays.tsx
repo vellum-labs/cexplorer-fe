@@ -2,7 +2,8 @@ import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
-import PoolCell from "@/components/table/PoolCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import type { PoolBirthday } from "@/types/poolTypes";
 import type { PoolBirthdaysColumns, TableColumns } from "@/types/tableTypes";
 import type { FC } from "react";
@@ -75,6 +76,7 @@ export const PoolBirthdays: FC = () => {
               id: item.pool.id,
               meta: item.pool.meta,
             }}
+            poolImageUrl={generateImageUrl(item.pool.id, "ico", "pool")}
           />
         );
       },

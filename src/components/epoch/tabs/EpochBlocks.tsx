@@ -6,11 +6,12 @@ import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
-import PoolCell from "@/components/table/PoolCell";
-import { SizeCell } from "@/components/table/SizeCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
+import { SizeCell } from "@vellumlabs/cexplorer-sdk";
 import { useEpochBlockListTableStore } from "@/stores/tables/epochBlockListTableStore";
 import { Link, useSearch } from "@tanstack/react-router";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 
 import { epochBlockTableOptions } from "@/constants/tables/epochBlockTableOptions";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
@@ -124,7 +125,12 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
     },
     {
       key: "minted_by",
-      render: item => <PoolCell poolInfo={item.pool} />,
+      render: item => (
+        <PoolCell
+          poolInfo={item.pool}
+          poolImageUrl={generateImageUrl(item.pool.id, "ico", "pool")}
+        />
+      ),
       jsonFormat: item => {
         if (!item.pool?.id) {
           return "-";

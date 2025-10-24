@@ -16,15 +16,16 @@ import { useEffect, useRef, useState } from "react";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { PoolListEchart } from "@/components/pool/PoolListEchart";
 import RoaDiffArrow from "@/components/pool/RoaDiffArrow";
-import PoolCell from "@/components/table/PoolCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import { useAuthToken } from "@/hooks/useAuthToken";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { cn } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic } from "@/services/misc";
 import { activeStakePercentage } from "@/utils/activeStakePercentage";
 import { calculateTotalPoolBlocks } from "@/utils/calculateTotalPoolBlocks";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
-import { getColumnsSortOrder } from "@/utils/getColumnsSortOrder";
+import { getColumnsSortOrder } from "@vellumlabs/cexplorer-sdk";
 import { getEpochColor } from "@/utils/getEpochColor";
 import { getPledgeColor } from "@/utils/getPledgeColor";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
@@ -266,6 +267,7 @@ export const usePoolList = ({
             id: item.pool_id,
             meta: item.pool_name,
           }}
+          poolImageUrl={generateImageUrl(item.pool_id, "ico", "pool")}
           cropPoolHash={cropPoolHash}
         />
       ),

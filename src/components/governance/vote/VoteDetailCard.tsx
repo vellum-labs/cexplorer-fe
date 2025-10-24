@@ -19,7 +19,7 @@ import { useMiscConst } from "@/hooks/useMiscConst";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { VoteBadge } from "@vellumlabs/cexplorer-sdk";
-import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
+import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 

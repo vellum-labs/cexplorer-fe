@@ -3,7 +3,7 @@ import type { FC, ReactNode } from "react";
 import { Children, cloneElement, isValidElement } from "react";
 
 import { Download } from "lucide-react";
-import { FeatureModal } from "../global/modals/FeatureModal";
+import { FeatureModal } from "@vellumlabs/cexplorer-sdk";
 import ConnectWalletModal from "../wallet/ConnectWalletModal";
 
 import { useFetchUserInfo } from "@/services/user";
@@ -131,6 +131,8 @@ export const AnalyticsGraph: FC<Props> = ({
         <FeatureModal
           onClose={() => setShowFeatureModal(false)}
           setShowConnectWallet={setShowConnectWallet}
+          address={address}
+          walletApi={walletApi}
         />
       )}
       {showConnectWallet && (

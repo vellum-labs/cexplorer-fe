@@ -4,8 +4,8 @@ import type {
   TableColumns,
 } from "@/types/tableTypes";
 import type { FC } from "react";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
@@ -20,7 +20,7 @@ import { useEffect, useState } from "react";
 
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { MetadataCell } from "@/components/metadata/MetadataCell";
-import { SizeCell } from "@/components/table/SizeCell";
+import { SizeCell } from "@vellumlabs/cexplorer-sdk";
 import { metadataTxListTableOptions } from "@/constants/tables/metadataTxListTableOptions";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";

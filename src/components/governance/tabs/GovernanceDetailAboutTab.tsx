@@ -3,7 +3,7 @@ import type { GovernanceActionDetailAboutListColumns } from "@/types/tableTypes"
 import type { FC } from "react";
 
 import ExportButton from "@/components/table/ExportButton";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 

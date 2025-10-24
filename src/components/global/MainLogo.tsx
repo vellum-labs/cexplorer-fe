@@ -8,7 +8,8 @@ import LightLogo from "/resources/preloader_logo_light.svg";
 import DarkLogoOffline from "/resources/logo_darkmode_offline.svg";
 import LightLogoOffline from "/resources/logo_lightmode_offline.svg";
 import { Badge } from "@vellumlabs/cexplorer-sdk";
-import { EnvironmentBadge } from "./badges/EnvironmentBadge";
+import { EnvironmentBadge } from "@vellumlabs/cexplorer-sdk";
+import { configJSON } from "@/constants/conf";
 
 const MainLogo = ({
   size = 150,
@@ -21,6 +22,7 @@ const MainLogo = ({
 }) => {
   const { theme } = useThemeStore();
   const [isOnline, setIsOnline] = useState<boolean>(true);
+  const network = configJSON.network;
 
   useEffect(() => {
     const checkConnection = async () => {
@@ -72,7 +74,7 @@ const MainLogo = ({
         >
           beta
         </Badge>
-        <EnvironmentBadge />
+        <EnvironmentBadge network={network} />
       </div>
     </Link>
   );

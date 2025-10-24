@@ -2,8 +2,8 @@ import type { EpochListData } from "@/types/epochTypes";
 import type { EpochListColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
-import TableSearchInput from "../../global/inputs/SearchInput";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "../../table/GlobalTable";
 import ExportButton from "@/components/table/ExportButton";

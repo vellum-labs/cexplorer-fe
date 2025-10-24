@@ -3,7 +3,8 @@ import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { AddressTypeInitialsBadge } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
-import PoolCell from "@/components/table/PoolCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
 import { useFetchTxDetail } from "@/services/tx";
 import { getRouteApi } from "@tanstack/react-router";
@@ -61,7 +62,7 @@ const DelegationsTabItem = () => {
           };
           return <DrepNameCell item={drepItem} />;
         } else {
-          return <PoolCell poolInfo={item.detail} />;
+          return <PoolCell poolInfo={item.detail} poolImageUrl={generateImageUrl(item.detail.id, "ico", "pool")} />;
         }
       },
       title: "Delegation",

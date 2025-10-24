@@ -1,13 +1,13 @@
 import { alphabetWithNumbers } from "@/constants/alphabet";
 import type { TxAsset } from "@/types/assetsTypes";
-import { encodeAssetName } from "@/utils/asset/encodeAssetName";
-import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
+import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";
+import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { Link } from "@tanstack/react-router";
 import { memo } from "react";
-import AdaHandleBadge from "../global/badges/AdaHandleBadge";
+import { AdaHandleBadge } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 
@@ -88,7 +88,11 @@ const AssetCell = memo((props: Props) => {
             className={`flex w-full items-center text-text-sm text-primary`}
           >
             {isAdaHandle && (
-              <AdaHandleBadge variant='icon' className='h-2 w-2' />
+              <AdaHandleBadge
+                variant='icon'
+                className='h-2 w-2'
+                policyId={adaHandlePolicy}
+              />
             )}
             <span
               className={`${withCopy ? "" : "w-full"} block overflow-hidden text-ellipsis whitespace-nowrap`}

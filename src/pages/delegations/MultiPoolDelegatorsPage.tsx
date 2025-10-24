@@ -9,8 +9,8 @@ import { Link } from "@tanstack/react-router";
 import { useMultiPoolDelegatorsTableStore } from "@/stores/tables/multiPoolDelegatorsTableStore";
 import { multiPoolDelegatorsTableOptions } from "@/constants/tables/multiPoolDelegatorsTableOptions";
 import ExportButton from "@/components/table/ExportButton";
+import { StakeCell } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
-import { StakeCell } from "@/components/table/StakeCell";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 

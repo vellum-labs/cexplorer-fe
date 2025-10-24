@@ -6,7 +6,7 @@ import type {
 } from "@/types/poolTypes";
 import type { PoolDelegatorsColumns } from "@/types/tableTypes";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
-import { getColumnsSortOrder } from "@/utils/getColumnsSortOrder";
+import { getColumnsSortOrder } from "@vellumlabs/cexplorer-sdk";
 import { calculateLoyaltyDays, slotToDate } from "@/utils/slotToDate";
 import type {
   InfiniteData,
@@ -20,7 +20,8 @@ import { MinMaxRange } from "../global/MinMaxRange";
 import { SortArrow } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "../table/GlobalTable";
-import PoolCell from "../table/PoolCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { ArrowRight } from "lucide-react";
 
 import Crab from "@/resources/images/icons/crab.svg";
@@ -260,6 +261,11 @@ const PoolDelegatorsTable = ({
                     id: previousPool.id,
                     meta: previousPool.meta,
                   }}
+                  poolImageUrl={generateImageUrl(
+                    previousPool.id,
+                    "ico",
+                    "pool",
+                  )}
                   fontSize='12px'
                 />
               ) : (
@@ -276,6 +282,7 @@ const PoolDelegatorsTable = ({
                     id: livePool.id,
                     meta: livePool.meta,
                   }}
+                  poolImageUrl={generateImageUrl(livePool.id, "ico", "pool")}
                   fontSize='12px'
                 />
               ) : (

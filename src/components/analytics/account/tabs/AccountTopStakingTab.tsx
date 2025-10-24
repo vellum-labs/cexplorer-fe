@@ -19,7 +19,8 @@ import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
-import PoolCell from "@/components/table/PoolCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { accountAnalyticsTopStakingTableOptions } from "@/constants/tables/accountAnalyticsTopStakingTableOptions";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { calculateLoyaltyDays } from "@/utils/slotToDate";
@@ -152,6 +153,7 @@ export const AccountTopStakingTab: FC = () => {
               id: item.deleg?.id,
               meta: item.deleg?.meta,
             }}
+            poolImageUrl={generateImageUrl(item.deleg?.id, "ico", "pool")}
           />
         );
       },

@@ -1,6 +1,6 @@
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
@@ -9,8 +9,9 @@ import { PoolListEchart } from "@/components/pool/PoolListEchart";
 import RoaDiffArrow from "@/components/pool/RoaDiffArrow";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
-import PoolCell from "@/components/table/PoolCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import { GroupDetailCharts } from "@/components/groups/GroupDetailCharts";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { GroupDetailDRepCharts } from "@/components/groups/GroupDetailDRepCharts";
 import {
   BreadcrumbRaw,
@@ -112,6 +113,11 @@ export const GroupDetailPage = () => {
               id: item?.info[0]?.pool_id,
               meta: item?.info[0]?.pool_name,
             }}
+            poolImageUrl={generateImageUrl(
+              item?.info[0]?.pool_id,
+              "ico",
+              "pool",
+            )}
           />
         );
       },

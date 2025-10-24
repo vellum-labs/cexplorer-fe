@@ -1,4 +1,4 @@
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { GroupsCharts } from "@/components/groups/GroupsCharts";
 import { GroupsTable } from "@/components/groups/GroupsTable";

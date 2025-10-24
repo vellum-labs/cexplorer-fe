@@ -2,7 +2,7 @@ import { ArticleCard } from "@/components/article/ArticleCard";
 import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
 import { HeaderBanner } from "@/components/global/HeaderBanner";
 import { Image } from "@vellumlabs/cexplorer-sdk";
-import { NoResultsFound } from "@/components/global/NoResultsFound";
+import { NoResultsFound } from "@vellumlabs/cexplorer-sdk";
 import { Pagination } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";

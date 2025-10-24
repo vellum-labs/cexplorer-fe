@@ -8,7 +8,7 @@ import { Button } from "@vellumlabs/cexplorer-sdk";
 import MainLogo from "../global/MainLogo";
 import { InfoCard } from "@vellumlabs/cexplorer-sdk";
 import { Dropdown } from "@vellumlabs/cexplorer-sdk";
-import { ScreenDropdown } from "../global/dropdowns/ScreenDropdown";
+import { ScreenDropdown } from "@vellumlabs/cexplorer-sdk";
 import SettingsDropdown from "../global/dropdowns/SettingsDropdown";
 import { AdaPriceIndicator } from "../navbar/AdaPriceIndicator";
 import MobileMenu from "../navbar/MobileMenu/MobileMenu";

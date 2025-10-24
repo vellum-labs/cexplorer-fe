@@ -6,7 +6,8 @@ import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
-import PoolCell from "@/components/table/PoolCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { HashCell } from "@/components/tx/HashCell";
 import { poolRegistrationsTableOptions } from "@/constants/tables/poolRegistrationsOptions";
 import { useFetchPoolRegistrations } from "@/services/tx";
@@ -64,6 +65,7 @@ export const PoolRegistrationsPage = () => {
             id: item.data.view,
             meta: item.data.meta,
           }}
+          poolImageUrl={generateImageUrl(item.data.view, "ico", "pool")}
         />
       ),
       jsonFormat: item => {

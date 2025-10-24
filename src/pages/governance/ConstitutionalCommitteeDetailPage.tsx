@@ -12,7 +12,7 @@ import { CCMembersTab } from "@/components/gov/cc/tabs/CCMembersTab";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { CCGovernanceVotestab } from "@/components/gov/cc/tabs/CCGovernanceVotesTab";
 import { PageBase } from "@/components/global/pages/PageBase";
-import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
+import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
 import { useFetchMiscBasic } from "@/services/misc";
 import { generateImageUrl } from "@/utils/generateImageUrl";

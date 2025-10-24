@@ -10,10 +10,11 @@ import { AddCustomLabel } from "../address/AddCustomLabel";
 import { TokenSelectCombobox } from "../asset/TokenSelect";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { TotalSumWithRates } from "../global/TotalSumWithRates";
-import AdaHandleBadge from "../global/badges/AdaHandleBadge";
+import { AdaHandleBadge } from "@vellumlabs/cexplorer-sdk";
 import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import PoolCell from "../table/PoolCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { AttributeDropdown } from "../global/AttributeDropdown";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { ChevronRight } from "lucide-react";
@@ -36,6 +37,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
   const addrObj = Address.from(address);
   const rawAddress = Address.toHexString(addrObj.raw);
   const tokenMarket = configJSON.market[0].token[0].active;
+  const policyId = configJSON.integration[0].adahandle[0].policy;
   const { theme } = useThemeStore();
 
   const curr = useGetMarketCurrency();
@@ -55,7 +57,13 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
     data?.adahandle
       ? {
           label: "Handle",
-          value: <AdaHandleBadge hex={data?.adahandle?.hex} link />,
+          value: (
+            <AdaHandleBadge
+              hex={data?.adahandle?.hex}
+              link
+              policyId={policyId}
+            />
+          ),
         }
       : undefined,
     {
@@ -111,6 +119,13 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
                   (data?.stake?.active?.deleg ??
                     data?.stake?.live?.deleg) as PoolInfo
                 }
+                poolImageUrl={generateImageUrl(
+                  data?.stake?.active?.deleg?.id ??
+                    data?.stake?.live?.deleg?.id ??
+                    "",
+                  "ico",
+                  "pool",
+                )}
               />
             </div>
           ),
