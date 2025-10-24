@@ -20,7 +20,7 @@ import { formatWebsiteUrl } from "@/utils/format/formatWebsiteUrl";
 import { poolRewardsRoaDiff } from "@/utils/poolRewardsRoaDiff";
 import { format, parseISO } from "date-fns";
 import { useState } from "react";
-import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
+import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import { DelegatorsLabel } from "@/components/global/DelegatorsLabel";
 import { buildSocialIcons } from "@/utils/buildSocialIcons";
 
@@ -124,7 +124,7 @@ export const usePoolDetail = ({
           </a>
           {linkModal && (
             <SafetyLinkModal
-              url={data?.pool_name.homepage}
+              url={data?.pool_name.homepage ?? ""}
               onClose={() => setLinkModal(false)}
             />
           )}
