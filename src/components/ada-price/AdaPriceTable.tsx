@@ -10,7 +10,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { useCurrencyStore } from "@/stores/currencyStore";
 
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
-import { formatCurrency } from "@/utils/format/formatCurrency";
+import { formatCurrency } from "@vellumlabs/cexplorer-sdk";
 
 import Bitcoin from "@/resources/images/wallet/bitcoin.svg";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";

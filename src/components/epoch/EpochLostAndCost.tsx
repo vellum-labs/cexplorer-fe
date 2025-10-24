@@ -2,11 +2,12 @@ import type { EpochParam, EpochStatsSummary } from "@/types/epochTypes";
 import type { FC } from "react";
 
 import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
-import { TotalSumWithRates } from "../global/TotalSumWithRates";
+import { TotalSumWithRates } from "@vellumlabs/cexplorer-sdk";
 
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import { formatBytes } from "@/utils/format/formatBytes";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
+import { useCurrencyStore } from "@/stores/currencyStore";
 
 interface EpochLostAndCostProps {
   params: EpochParam;
@@ -31,6 +32,8 @@ export const EpochLostAndCost: FC<EpochLostAndCostProps> = ({
 
   const pricePerSum = lovelaceToAdaWithRates(pricePer, curr);
 
+  const { currency } = useCurrencyStore();
+
   const overviewList = [
     {
       label: "Size of all blocks in epoch",
@@ -38,7 +41,13 @@ export const EpochLostAndCost: FC<EpochLostAndCostProps> = ({
     },
     {
       label: "Price per MB",
-      value: <TotalSumWithRates sum={pricePerSum} ada={pricePer} />,
+      value: (
+        <TotalSumWithRates
+          sum={pricePerSum}
+          ada={pricePer}
+          currency={currency}
+        />
+      ),
     },
     {
       label: "Average TX size",

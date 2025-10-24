@@ -9,7 +9,7 @@ import { Address, isValidAddressFormat } from "@/utils/address/getStakeAddress";
 import { Link } from "@tanstack/react-router";
 
 import AddressCell from "@/components/address/AddressCell";
-import { TotalSumWithRates } from "@/components/global/TotalSumWithRates";
+import { TotalSumWithRates } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { useGetMarketCurrency } from "../useGetMarketCurrency";
@@ -20,6 +20,7 @@ import { format } from "date-fns";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { CircleHelp } from "lucide-react";
 import { DelegatorsLabel } from "@vellumlabs/cexplorer-sdk";
+import { useCurrencyStore } from "@/stores/currencyStore";
 
 interface UseDrepDetailArgs {
   query: ReturnType<typeof useFetchDrepDetail>;
@@ -42,6 +43,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
   const { data: basicData } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(basicData?.data.version.const);
   const latestEpochNo = miscConst?.no;
+  const { currency } = useCurrencyStore();
 
   let outsum: [string, number, number, number] = ["", 0, 0, 0];
   if (data?.owner?.balance && Object.values(curr).length) {
@@ -216,7 +218,11 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
         {
           label: "Own voting power",
           value: data?.owner?.balance ? (
-            <TotalSumWithRates sum={outsum} ada={data.owner.balance} />
+            <TotalSumWithRates
+              sum={outsum}
+              ada={data.owner.balance}
+              currency={currency}
+            />
           ) : (
             "Unknown"
           ),

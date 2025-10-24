@@ -1,6 +1,6 @@
 import type { Currencies } from "@/types/storeTypes";
 
-import { formatCurrency } from "@/utils/format/formatCurrency";
+import { formatCurrency } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useCurrencyStore } from "@/stores/currencyStore";
 

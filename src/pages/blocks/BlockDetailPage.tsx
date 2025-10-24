@@ -25,13 +25,14 @@ import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 import { SizeCard } from "@vellumlabs/cexplorer-sdk";
 import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "@vellumlabs/cexplorer-sdk";
-import { TotalSumWithRates } from "@/components/global/TotalSumWithRates";
+import { TotalSumWithRates } from "@vellumlabs/cexplorer-sdk";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { generateImageUrl } from "@/utils/generateImageUrl";
+import { useCurrencyStore } from "@/stores/currencyStore";
 
 const BlockDetailPage: FC = () => {
   const route = getRouteApi("/block/$hash");
@@ -41,6 +42,8 @@ const BlockDetailPage: FC = () => {
   const [blockHeight, setBlockHeight] = useState<number>();
 
   const navigate = useNavigate();
+
+  const { currency } = useCurrencyStore();
 
   const { data: searchData } = useFetchMiscSearch(
     blockHeight ? String(blockHeight) : undefined,
@@ -221,6 +224,7 @@ const BlockDetailPage: FC = () => {
           ada={
             data?.txs?.map(item => item.out_sum).reduce((a, b) => a + b, 0) ?? 0
           }
+          currency={currency}
         />
       ),
     },
@@ -230,12 +234,19 @@ const BlockDetailPage: FC = () => {
         <TotalSumWithRates
           sum={feesum}
           ada={data?.txs?.map(item => item.fee).reduce((a, b) => a + b, 0) ?? 0}
+          currency={currency}
         />
       ),
     },
     {
       label: "Total Rewards",
-      value: <TotalSumWithRates sum={rewards} ada={data?.rewards ?? 0} />,
+      value: (
+        <TotalSumWithRates
+          sum={rewards}
+          ada={data?.rewards ?? 0}
+          currency={currency}
+        />
+      ),
     },
   ];
 

@@ -9,7 +9,7 @@ import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { AddCustomLabel } from "../address/AddCustomLabel";
 import { TokenSelectCombobox } from "../asset/TokenSelect";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { TotalSumWithRates } from "../global/TotalSumWithRates";
+import { TotalSumWithRates } from "@vellumlabs/cexplorer-sdk";
 import { AdaHandleBadge } from "@vellumlabs/cexplorer-sdk";
 import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
@@ -23,6 +23,7 @@ import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
+import { useCurrencyStore } from "@/stores/currencyStore";
 
 interface AddressDetailOverviewProps {
   data: StakeDetailData | undefined;
@@ -39,6 +40,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
   const tokenMarket = configJSON.market[0].token[0].active;
   const policyId = configJSON.integration[0].adahandle[0].policy;
   const { theme } = useThemeStore();
+  const { currency } = useCurrencyStore();
 
   const curr = useGetMarketCurrency();
 
@@ -72,6 +74,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
         <TotalSumWithRates
           sum={totalBalanceSum}
           ada={data?.stake?.live.amount ?? 0}
+          currency={currency}
         />
       ),
     },
@@ -82,6 +85,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
         <TotalSumWithRates
           sum={adaBalanceSum}
           ada={data?.stake?.active?.amount ?? 0}
+          currency={currency}
         />
       ),
     },

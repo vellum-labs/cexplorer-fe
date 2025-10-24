@@ -4,7 +4,7 @@ import { Cardano } from "@/resources/images/icons/Cardano";
 import { Link } from "@tanstack/react-router";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { useCurrencyStore } from "@/stores/currencyStore";
-import { formatCurrency } from "@/utils/format/formatCurrency";
+import { formatCurrency } from "@vellumlabs/cexplorer-sdk";
 
 export const AdaPriceIndicator = () => {
   const price = useAdaPriceWithHistory();

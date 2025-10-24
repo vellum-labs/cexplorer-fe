@@ -4,7 +4,7 @@ import type { FC } from "react";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 import { useCurrencyStore } from "@/stores/currencyStore";
 
-import { formatCurrency } from "@/utils/format/formatCurrency";
+import { formatCurrency } from "@vellumlabs/cexplorer-sdk";
 
 import Bitcoin from "@/resources/images/wallet/bitcoin.svg";
 
@@ -31,11 +31,11 @@ export const HomepageCardanoPrice: FC<HomepageCardanoPriceProps> = ({
       </div>
       <div className='flex flex-grow items-center pb-[11px]'>
         <div className='flex min-w-[160px] items-center gap-1/2'>
-          <span className='inline-block text-text-sm font-medium text-grayText'>
+          <span className='text-grayText inline-block text-text-sm font-medium'>
             Market cap
           </span>
         </div>
-        <span className='text-text-sm font-semibold text-grayText'>
+        <span className='text-grayText text-text-sm font-semibold'>
           {miscConst?.circulating_supply
             ? formatCurrency(
                 Math.round(
@@ -48,17 +48,17 @@ export const HomepageCardanoPrice: FC<HomepageCardanoPriceProps> = ({
       </div>
       <div className='flex flex-grow items-center'>
         <div className='flex min-w-[160px] items-center gap-1/2'>
-          <span className='inline-block text-text-sm font-medium text-grayText'>
+          <span className='text-grayText inline-block text-text-sm font-medium'>
             ADA/BTC
           </span>
         </div>
         <div className='flex items-center gap-1/2'>
-          <span className='text-text-xs font-medium text-grayText'>
+          <span className='text-grayText text-text-xs font-medium'>
             {Math.round(price.adaToSats)}
           </span>
           <div className='flex items-center gap-1/2'>
             <img src={Bitcoin} alt='btc' className='h-[14px] w-[14px]' />
-            <span className='text-text-xs font-medium text-grayText'>sats</span>
+            <span className='text-grayText text-text-xs font-medium'>sats</span>
           </div>
         </div>
       </div>

@@ -17,7 +17,7 @@ import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { AdaHandleBadge } from "@vellumlabs/cexplorer-sdk";
 import { AddressTypeInitialsBadge } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import { TotalSumWithRates } from "../global/TotalSumWithRates";
+import { TotalSumWithRates } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import { AddCustomLabel } from "./AddCustomLabel";
@@ -26,6 +26,7 @@ import { AttributeDropdown } from "../global/AttributeDropdown";
 import { ChevronRight } from "lucide-react";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
+import { useCurrencyStore } from "@/stores/currencyStore";
 
 interface AddressDetailOverviewProps {
   data: AddressDetailData[];
@@ -46,6 +47,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
   const isStaking = data[0]?.stake?.active_pool || data[0]?.stake?.live_pool;
   const isRecync = data[0]?.address === null;
   const rawAddress = Address.toHexString(Address.from(address).raw);
+  const { currency } = useCurrencyStore();
 
   const overviewList = [
     data[0]?.adahandle
@@ -91,6 +93,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
         <TotalSumWithRates
           sum={lovelaceToAdaWithRates(data?.[0]?.balance, curr)}
           ada={data?.[0]?.balance}
+          currency={currency}
         />
       ),
     },
