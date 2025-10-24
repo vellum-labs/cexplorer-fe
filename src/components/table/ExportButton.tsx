@@ -5,7 +5,7 @@ import { colors } from "@/constants/colors";
 import { Download } from "lucide-react";
 
 import { ExportTableModal } from "../global/modals/ExportTableModal";
-import { FeatureModal } from "../global/modals/FeatureModal";
+import { FeatureModal } from "@vellumlabs/cexplorer-sdk";
 import ConnectWalletModal from "../wallet/ConnectWalletModal";
 
 import { useFetchUserInfo } from "@/services/user";
@@ -51,6 +51,8 @@ const ExportButton: FC<ExportButtonProps> = ({
         <FeatureModal
           onClose={() => setShowFeatureModal(false)}
           setShowConnectWallet={setShowConnectWallet}
+          address={address}
+          walletApi={walletApi}
         />
       )}
       {showConnectWallet && (
