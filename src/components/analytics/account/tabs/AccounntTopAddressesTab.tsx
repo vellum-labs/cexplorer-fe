@@ -6,7 +6,7 @@ import type {
 import type { FC } from "react";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
