@@ -5,7 +5,7 @@ import type {
 import type { BlockDetailColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
