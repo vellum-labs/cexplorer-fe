@@ -1,6 +1,6 @@
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import PoolDelegatorsTable from "../PoolDelegatorsTable";
 import { PoolMigrationsTable } from "../PoolMigrationsTable";
 import { PoolStructureTable } from "../PoolStructureTable";

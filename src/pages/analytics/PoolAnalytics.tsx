@@ -2,7 +2,7 @@ import type { FC } from "react";
 
 import { PoolIssuesAnalytics } from "@/components/analytics/pool/tabs/PoolIssuesAnalytics";
 import { AveragePool } from "@/components/analytics/pool/tabs/AveragePool";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 
 export const PoolAnalytics: FC = () => {

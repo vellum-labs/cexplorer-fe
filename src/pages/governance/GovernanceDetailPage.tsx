@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
 import { GovernanceDetailMetadataTab } from "@/components/governance/tabs/GovernanceDetailMetadataTab";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { GovernanceDetailOverview } from "@/components/governance/GovernanceDetailOverview";
 import { GovernanceDetailAboutTab } from "@/components/governance/tabs/GovernanceDetailAboutTab";
 import { GovernanceDetailNotVotedTab } from "@/components/governance/tabs/GovernanceDetailNotVotedTab";

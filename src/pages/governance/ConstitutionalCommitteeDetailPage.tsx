@@ -9,7 +9,7 @@ import { useFetchConstitutionList } from "@/services/governance";
 
 import type { CommitteeDetailResponse } from "@/types/governanceTypes";
 import { CCMembersTab } from "@/components/gov/cc/tabs/CCMembersTab";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { CCGovernanceVotestab } from "@/components/gov/cc/tabs/CCGovernanceVotesTab";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";

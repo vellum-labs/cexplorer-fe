@@ -2,7 +2,7 @@ import { Badge } from "@/components/global/badges/Badge";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";
 import {

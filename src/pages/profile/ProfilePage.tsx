@@ -4,7 +4,7 @@ import { ProfileSettings } from "@/components/profile/ProfileSettings";
 import { Helmet } from "react-helmet";
 import metadata from "../../../conf/metadata/en-metadata.json";
 
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { ApiProfile } from "@/components/profile/ApiProfile";
 import { ProfilePro } from "@/components/profile/ProfilePro";
 import { webUrl } from "@/constants/confVariables";

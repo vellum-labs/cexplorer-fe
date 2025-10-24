@@ -3,7 +3,7 @@ import { HeaderBanner } from "@/components/global/HeaderBanner";
 import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
 import metadata from "../../../conf/metadata/en-metadata.json";
 import { webUrl } from "@/constants/confVariables";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import PoolListTab from "@/components/pool/tabs/PoolListTab";
 import PoolAnalyticsTab from "@/components/pool/tabs/PoolAnalyticsTab";
 import type { FC } from "react";
