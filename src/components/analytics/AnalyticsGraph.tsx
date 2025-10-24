@@ -13,7 +13,7 @@ import { useCallback, useRef, useState } from "react";
 
 import { colors } from "@/constants/colors";
 import { type GraphSortData } from "@/types/graphTypes";
-import { convertJSONToCSV } from "@/utils/convertJSONToCSV";
+import { convertJSONToCSV } from "@vellumlabs/cexplorer-sdk";
 import { toPng } from "html-to-image";
 import { GraphEpochSort } from "../global/graphs/GraphEpochSort";
 import { ExportGraphModal } from "./ExportGraphModal";

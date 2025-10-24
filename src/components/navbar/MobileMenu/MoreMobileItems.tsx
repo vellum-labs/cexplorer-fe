@@ -1,12 +1,12 @@
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { InfoCard } from "@/components/global/cards/InfoCard";
-import { Accordion } from "@/components/ui/accordion";
+import { Accordion } from "@vellumlabs/cexplorer-sdk";
 import { colors } from "@/constants/colors";
 import { nestedNavigationOptions } from "@/constants/nestedNavigationOptions";
 import type { MenuItem } from "@/types/navigationTypes";
 import { ArrowRight, ChevronLeft, ChevronsUp } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
-import MobileMenuAccordionItem from "../MobileMenuAccordionItem";
+import { MobileMenuAccordionItem } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   onBack?: () => void;
