@@ -14,7 +14,7 @@
     "prepare": "husky",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "reinstall": "rimraf yarn.lock & yarn"
+    "reinstall:sdk": "yarn remove @vellumlabs/cexplorer-sdk && yarn add file:../cexplorer-sdk"
   },
   "dependencies": {
     "@date-fns/tz": "^1.4.1",
@@ -40,7 +40,7 @@
     "@tanstack/react-query": "^5.44.0",
     "@tanstack/react-router": "^1.35.6",
     "@types/prismjs": "^1.26.4",
-    "@vellumlabs/cexplorer-sdk": "^1.1.1",
+    "@vellumlabs/cexplorer-sdk": "^1.1.3",
     "@xyflow/react": "^12.0.4",
     "autoprefixer": "^10.4.19",
     "bech32": "^2.0.0",
