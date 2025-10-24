@@ -15,7 +15,7 @@ import { Link } from "@tanstack/react-router";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
-import { TimeDateIndicator } from "../global/TimeDateIndicator";
+import { TimeDateIndicator } from "@vellumlabs/cexplorer-sdk";
 
 import { defiOrderListTableOptions } from "@/constants/tables/defiOrderListTableOptions";
 import {

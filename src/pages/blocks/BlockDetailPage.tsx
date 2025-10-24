@@ -24,7 +24,7 @@ import type { OverviewList } from "@vellumlabs/cexplorer-sdk";
 import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 import { SizeCard } from "@vellumlabs/cexplorer-sdk";
 import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
-import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
+import { TimeDateIndicator } from "@vellumlabs/cexplorer-sdk";
 import { TotalSumWithRates } from "@/components/global/TotalSumWithRates";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";

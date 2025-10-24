@@ -5,7 +5,7 @@ import type { useFetchAssetDetail } from "@/services/assets";
 import AssetCell from "@/components/asset/AssetCell";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
-import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
+import { TimeDateIndicator } from "@vellumlabs/cexplorer-sdk";
 
 import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";

@@ -9,7 +9,7 @@ import X from "@/resources/images/icons/twitter.svg";
 import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import { TimeDateIndicator } from "../global/TimeDateIndicator";
+import { TimeDateIndicator } from "@vellumlabs/cexplorer-sdk";
 
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 

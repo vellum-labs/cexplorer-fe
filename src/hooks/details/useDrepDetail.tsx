@@ -4,7 +4,7 @@ import type { useFetchDrepDetail } from "@/services/drep";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
-import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
+import { TimeDateIndicator } from "@vellumlabs/cexplorer-sdk";
 import { Address, isValidAddressFormat } from "@/utils/address/getStakeAddress";
 import { Link } from "@tanstack/react-router";
 
