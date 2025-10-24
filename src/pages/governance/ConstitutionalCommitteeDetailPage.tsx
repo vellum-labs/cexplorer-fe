@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { useState } from "react";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import AdsCarousel from "@/components/global/ads/AdsCarousel";
+import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
 import { FileText } from "lucide-react";
 
 import { useFetchCommitteeDetail } from "@/services/governance";
@@ -14,11 +14,15 @@ import { CCGovernanceVotestab } from "@/components/gov/cc/tabs/CCGovernanceVotes
 import { PageBase } from "@/components/global/pages/PageBase";
 import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
 import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
+import { useFetchMiscBasic } from "@/services/misc";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 
 export const ConstituionalCommitteeDetailPage: FC = () => {
   const [clickedUrl, setClickedUrl] = useState<string | undefined>(undefined);
   const committeeDetailQuery = useFetchCommitteeDetail();
   const constitutionListQuery = useFetchConstitutionList();
+
+  const miscBasicQuery = useFetchMiscBasic();
 
   const committeeDetailResponse: CommitteeDetailResponse | undefined =
     committeeDetailQuery.data;
@@ -143,6 +147,8 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
                 adCardClassname='!border-none !py-0'
                 filterByType='drep'
                 maxWidth={false}
+                generateImageUrl={generateImageUrl}
+                miscBasicQuery={miscBasicQuery}
               />
             </div>
           </div>

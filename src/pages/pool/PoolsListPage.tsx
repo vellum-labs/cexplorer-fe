@@ -1,12 +1,14 @@
 import { Helmet } from "react-helmet";
 import { HeaderBanner } from "@/components/global/HeaderBanner";
-import AdsCarousel from "@/components/global/ads/AdsCarousel";
+import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
 import metadata from "../../../conf/metadata/en-metadata.json";
 import { webUrl } from "@/constants/confVariables";
 import Tabs from "@/components/global/Tabs";
 import PoolListTab from "@/components/pool/tabs/PoolListTab";
 import PoolAnalyticsTab from "@/components/pool/tabs/PoolAnalyticsTab";
 import type { FC } from "react";
+import { useFetchMiscBasic } from "@/services/misc";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 
 interface PoolListProps {
   watchlist?: boolean;
@@ -28,6 +30,8 @@ const PoolListPage: FC<PoolListProps> = ({ watchlist }) => {
     },
   ];
 
+  const miscBasicQuery = useFetchMiscBasic();
+
   return (
     <main className='flex min-h-minHeight w-full flex-col items-center'>
       <Helmet>
@@ -47,7 +51,10 @@ const PoolListPage: FC<PoolListProps> = ({ watchlist }) => {
         title='Cardano Stake Pools'
         breadcrumbItems={[{ label: "Pools" }]}
       />
-      <AdsCarousel />
+      <AdsCarousel
+        generateImageUrl={generateImageUrl}
+        miscBasicQuery={miscBasicQuery}
+      />
       <Tabs items={tabs} wrapperClassname='mt-0' />
     </main>
   );

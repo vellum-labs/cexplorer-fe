@@ -5,7 +5,7 @@ import type {
 } from "@/types/tableTypes";
 import type { FC } from "react";
 
-import AdsCarousel from "@/components/global/ads/AdsCarousel";
+import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
 import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
@@ -36,6 +36,7 @@ import { ActionTypes } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { GovernanceVotingProgress } from "@/components/governance/GovernanceVotingProgress";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 
 const typeLabels: Record<string, string> = {
   NewCommittee: "New Committee",
@@ -63,7 +64,10 @@ export const GovernancePage: FC = () => {
   } = useGovernanceListTableStore();
 
   const drepStatQuery = useFetchDrepStat();
-  const { data: basicData } = useFetchMiscBasic(true);
+  const miscBasicQuery = useFetchMiscBasic(true);
+
+  const { data: basicData } = miscBasicQuery;
+
   const miscConst = useMiscConst(basicData?.data.version.const);
 
   const [{ debouncedTableSearch, tableSearch }, setTableSearch] =
@@ -479,6 +483,8 @@ export const GovernancePage: FC = () => {
           adCardClassname='!border-none !py-0'
           filterByType='drep'
           maxWidth={false}
+          generateImageUrl={generateImageUrl}
+          miscBasicQuery={miscBasicQuery}
         />
       ),
       content: <></>,

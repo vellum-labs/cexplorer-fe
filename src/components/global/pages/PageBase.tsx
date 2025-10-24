@@ -1,12 +1,14 @@
 import type { FC, ReactNode } from "react";
-import type { HeaderBannerBreadCrumbItem } from "../HeaderBanner";
 
 import { Helmet } from "react-helmet";
 import { HeaderBanner } from "../HeaderBanner";
-import AdsCarousel from "../ads/AdsCarousel";
+import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
 
 import metadata from "../../../../conf/metadata/en-metadata.json";
 import { webUrl } from "@/constants/confVariables";
+import type { HeaderProps } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
+import { useFetchMiscBasic } from "@/services/misc";
 
 interface PageBaseInitProps {
   children: ReactNode;
@@ -15,7 +17,7 @@ interface PageBaseInitProps {
     after: string;
   };
   title: ReactNode;
-  breadcrumbItems?: HeaderBannerBreadCrumbItem[];
+  breadcrumbItems?: HeaderProps["breadcrumbItems"];
   breadcrumbSeparator?: ReactNode;
   adsCarousel?: boolean;
   subTitle?: ReactNode;
@@ -58,6 +60,8 @@ export const PageBase: FC<PageBaseProps> = ({
   showMetadata = true,
   isHomepage,
 }) => {
+  const miscBasicQuery = useFetchMiscBasic();
+
   const metadataTitleInit = metadataOverride
     ? metadataOverride?.title
     : metadataReplace
@@ -110,7 +114,12 @@ export const PageBase: FC<PageBaseProps> = ({
           isHomepage={isHomepage}
         />
       )}
-      {adsCarousel && <AdsCarousel />}
+      {adsCarousel && (
+        <AdsCarousel
+          generateImageUrl={generateImageUrl}
+          miscBasicQuery={miscBasicQuery}
+        />
+      )}
       {children}
     </main>
   );

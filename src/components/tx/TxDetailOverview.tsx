@@ -22,7 +22,7 @@ import {
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TotalSumWithRates } from "../global/TotalSumWithRates";
-import AdsCarousel from "../global/ads/AdsCarousel";
+import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
 import { MintedByCard } from "../global/cards/MintedByCard";
 import type { OverviewList } from "../global/cards/OverviewCard";
 import { OverviewCard } from "../global/cards/OverviewCard";
@@ -32,6 +32,7 @@ import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import TtlCountdown from "./TtlCountdown";
 import { useEffect, useState } from "react";
 import { getAddonsForMetadata } from "@/utils/addons/getAddonsForMetadata";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 
 interface Props {
   query: UseQueryResult<TxDetailResponse, unknown>;
@@ -40,7 +41,10 @@ interface Props {
 const TxDetailOverview = ({ query }: Props) => {
   const data = query.data?.data;
 
-  const { data: miscBasic } = useFetchMiscBasic();
+  const miscBasicQuery = useFetchMiscBasic();
+
+  const { data: miscBasic } = miscBasicQuery;
+
   const [addonComponents, setAddonComponents] = useState<any[]>([]);
   const confirmations = getConfirmations(
     miscBasic?.data?.block.block_no,
@@ -285,7 +289,12 @@ const TxDetailOverview = ({ query }: Props) => {
               title='Transaction size'
               icon={<GitFork size={20} className='text-primary' />}
             />
-            <AdsCarousel singleItem className='p-0 md:p-0' />
+            <AdsCarousel
+              generateImageUrl={generateImageUrl}
+              miscBasicQuery={miscBasicQuery}
+              singleItem
+              className='p-0 md:p-0'
+            />
           </section>
         </>
       )}

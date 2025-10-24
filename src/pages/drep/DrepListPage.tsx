@@ -20,7 +20,7 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel";
+} from "@vellumlabs/cexplorer-sdk";
 import Autoplay from "embla-carousel-autoplay";
 import { PageBase } from "@/components/global/pages/PageBase";
 

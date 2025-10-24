@@ -6,7 +6,7 @@ import { BreadcrumbSeparator, Header } from "@vellumlabs/cexplorer-sdk";
 import { useLocaleStore } from "@/stores/localeStore";
 import { useFetchMiscBasic, useFetchMiscSearch } from "@/services/misc";
 
-interface HeaderBannerProps {
+export interface HeaderBannerProps {
   breadcrumbItems?: HeaderProps["breadcrumbItems"];
   breadcrumbSeparator?: ReactNode;
   title: ReactNode;

@@ -2,7 +2,7 @@ import type { CompareWallet } from "@/types/walletTypes";
 import type { FC } from "react";
 
 import { HeaderBanner } from "@/components/global/HeaderBanner";
-import AdsCarousel from "@/components/global/ads/AdsCarousel";
+import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { WalletRow } from "@/components/wallet/WalletRow";
 import Android from "@/resources/images/platforms/android.svg";
@@ -33,10 +33,14 @@ import { Select, SelectTrigger } from "@/components/ui/select";
 import { webUrl } from "@/constants/confVariables";
 import { useLocation } from "@tanstack/react-router";
 import { configJSON } from "@/constants/conf";
+import { useFetchMiscBasic } from "@/services/misc";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 
 export const WalletPage: FC = () => {
   const { theme } = useThemeStore();
   const { data, isLoading } = useFetchCompareWallets();
+
+  const miscBasicQuery = useFetchMiscBasic();
 
   const [compareWalletOptions, setCompareWalletOptions] = useState<
     {
@@ -719,7 +723,10 @@ export const WalletPage: FC = () => {
           breadcrumbItems={[{ label: "Wallets" }]}
           subTitle='Explore and compare the unique features of various Cardano wallets to find the best fit for your needs.'
         />
-        <AdsCarousel />
+        <AdsCarousel
+          generateImageUrl={generateImageUrl}
+          miscBasicQuery={miscBasicQuery}
+        />
         <section className='flex w-full justify-center'>
           <div className='flex w-full max-w-desktop flex-col items-end gap-3 p-mobile md:p-desktop'>
             <div className='flex w-fit'>
