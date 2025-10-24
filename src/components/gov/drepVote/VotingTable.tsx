@@ -8,7 +8,7 @@ import { useFetchDrepListVote } from "@/services/governance";
 import { Link, useSearch } from "@tanstack/react-router";
 
 import govActions from "../../../../conf/governance-actions.json";
-import { NoResultsFound } from "@/components/global/NoResultsFound";
+import { NoResultsFound } from "@vellumlabs/cexplorer-sdk";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { Pagination } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
