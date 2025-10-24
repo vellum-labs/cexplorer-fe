@@ -21,7 +21,7 @@ import { poolRewardsRoaDiff } from "@/utils/poolRewardsRoaDiff";
 import { format, parseISO } from "date-fns";
 import { useState } from "react";
 import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
-import { DelegatorsLabel } from "@/components/global/DelegatorsLabel";
+import { DelegatorsLabel } from "@vellumlabs/cexplorer-sdk";
 import { buildSocialIcons } from "@/utils/buildSocialIcons";
 
 interface UsePoolDetailArgs {
