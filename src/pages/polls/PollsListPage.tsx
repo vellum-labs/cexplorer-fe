@@ -10,7 +10,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@vellumlabs/cexplorer-sdk";
 import { colors } from "@/constants/colors";
 import { useFetchPollList } from "@/services/misc";
 import { useFetchUserInfo } from "@/services/user";

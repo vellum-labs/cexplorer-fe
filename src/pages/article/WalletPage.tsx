@@ -29,7 +29,7 @@ import { useEffect, useState } from "react";
 
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 
-import { Select, SelectTrigger } from "@/components/ui/select";
+import { Select, SelectTrigger } from "@vellumlabs/cexplorer-sdk";
 import { webUrl } from "@/constants/confVariables";
 import { useLocation } from "@tanstack/react-router";
 import { configJSON } from "@/constants/conf";

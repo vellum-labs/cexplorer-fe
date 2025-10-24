@@ -7,7 +7,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchArticleDetail } from "@/services/article";
 import { webUrl } from "@/constants/confVariables";
