@@ -138,13 +138,11 @@ export const currencySpace: Record<string, boolean> = {
   zar: false,
 };
 
-export const currencies = currencyValues.reduce((a, b) => {
-  a[b] = {
-    value: b,
-  };
-
-  return a;
-}, {});
+export const currencies: Record<string, { value: string }> =
+  currencyValues.reduce<Record<string, { value: string }>>((acc, code) => {
+    acc[code] = { value: code };
+    return acc;
+  }, {});
 
 export const ADATokenName =
   "000000000000000000000000000000000000000000000000000000006c6f76656c616365";

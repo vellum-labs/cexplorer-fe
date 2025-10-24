@@ -53,6 +53,24 @@ export const useFetchAccountRewards = (
     enabled: !!view,
   });
 
+export const useFetchAccountRewardsPaginated = (
+  limit: number,
+  offset: number,
+  view: string,
+) =>
+  useQuery({
+    queryKey: ["account-rewards-paginated", limit, offset, view],
+    queryFn: async () => {
+      const { data } = await fetchAccountRewards({
+        view,
+        limit,
+        offset,
+      });
+      return data;
+    },
+    enabled: !!view,
+  });
+
 export const checkUserDelegation = async (view: string | undefined | null) => {
   const url = "/account/has_delegation";
   const options = {
