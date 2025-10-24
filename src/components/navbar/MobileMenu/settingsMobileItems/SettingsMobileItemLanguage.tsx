@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { useLocaleStore } from "@/stores/localeStore";
+import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 
 import { locales } from "@/constants/locales";
 

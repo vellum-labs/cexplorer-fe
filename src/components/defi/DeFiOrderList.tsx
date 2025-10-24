@@ -31,7 +31,7 @@ import { useDeFiOrderListTableStore } from "@/stores/tables/deFiOrderListTableSt
 import { useFetchDeFiOrderList } from "@/services/token";
 import { useFilterTable } from "@/hooks/tables/useFilterTable";
 import { useFetchMiscSearch } from "@/services/misc";
-import { useLocaleStore } from "@/stores/localeStore";
+import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 
 import { addressIcons } from "@/constants/address";

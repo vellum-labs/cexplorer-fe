@@ -4,12 +4,12 @@ import { Helmet } from "react-helmet";
 import metadata from "../../../../conf/metadata/en-metadata.json";
 
 import { PlusIcon, X } from "lucide-react";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import TableSearchInput from "@/components/global/inputs/SearchInput";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";
-import { DisplayVoteModal } from "@/components/global/modals/DisplayVoteModal";
+import { DisplayVoteModal } from "@vellumlabs/cexplorer-sdk";
 
 import { drepListTableOptions } from "@/constants/tables/drepListTableOptions";
 
@@ -20,6 +20,7 @@ import { useDrepList } from "@/hooks/tables/useDrepList";
 import { useDrepListTableStore } from "@/stores/tables/drepListTableStore";
 import { useSearch } from "@tanstack/react-router";
 import { Button } from "@vellumlabs/cexplorer-sdk";
+import { useFetchMiscSearch } from "@/services/misc";
 
 export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
   const { page, sort, order } = useSearch({
@@ -201,6 +202,7 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
         <DisplayVoteModal
           onClose={() => setDisplayVoteModal(false)}
           onDisplay={handleAddVoteFilter}
+          useFetchMiscSearch={useFetchMiscSearch}
         />
       )}
     </>

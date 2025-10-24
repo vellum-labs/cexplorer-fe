@@ -6,7 +6,7 @@ import { routeTree } from "@/routeTree.gen";
 import { createRouter, useLocation, useNavigate } from "@tanstack/react-router";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscSearch } from "@/services/misc";
-import { useLocaleStore } from "@/stores/localeStore";
+import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 
 export const NotFoundPage: FC = () => {
   const { theme } = useThemeStore();

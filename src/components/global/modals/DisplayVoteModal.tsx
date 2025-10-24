@@ -5,7 +5,7 @@ import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 
 import { useState } from "react";
-import { useLocaleStore } from "@/stores/localeStore";
+import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscSearch } from "@/services/misc";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";

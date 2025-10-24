@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import type { HeaderProps } from "@vellumlabs/cexplorer-sdk";
 import { BreadcrumbSeparator, Header } from "@vellumlabs/cexplorer-sdk";
 
-import { useLocaleStore } from "@/stores/localeStore";
+import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic, useFetchMiscSearch } from "@/services/misc";
 
 export interface HeaderBannerProps {
