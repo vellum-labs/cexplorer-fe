@@ -24,7 +24,7 @@ import { SizeCell } from "@vellumlabs/cexplorer-sdk";
 import { metadataTxListTableOptions } from "@/constants/tables/metadataTxListTableOptions";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
-import { findLabel } from "@/utils/findLabel";
+import { findLabel } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { isHex } from "@/utils/isHex";
 import { isTextNumeric } from "@/utils/isTextNumeric";
