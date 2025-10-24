@@ -18,9 +18,9 @@ import { Check, Copy, Gift, Send } from "lucide-react";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 import metadata from "../../../conf/metadata/en-metadata.json";
-import DiscordLogo from "../../resources/images/icons/discord.svg";
-import TelegramLogo from "../../resources/images/icons/telegram.svg";
-import TwitterLogo from "../../resources/images/icons/twitter.svg";
+import { DiscordLogo } from "@vellumlabs/cexplorer-sdk";
+import { TelegramLogo } from "@vellumlabs/cexplorer-sdk";
+import { TwitterLogo } from "@vellumlabs/cexplorer-sdk";
 import { RandomDelegationModal } from "@/components/wallet/RandomDelegationModal";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 

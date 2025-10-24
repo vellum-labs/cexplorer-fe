@@ -2,9 +2,9 @@ import { Button } from "@vellumlabs/cexplorer-sdk";
 import { ArrowRight, BellRing } from "lucide-react";
 import { Helmet } from "react-helmet";
 
-import Discord from "@/resources/images/icons/discord.svg";
-import Telegram from "@/resources/images/icons/telegram.svg";
-import X from "@/resources/images/icons/twitter.svg";
+import { DiscordLogo } from "@vellumlabs/cexplorer-sdk";
+import { TelegramLogo } from "@vellumlabs/cexplorer-sdk";
+import { TwitterLogo } from "@vellumlabs/cexplorer-sdk";
 
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { useFetchArticleDetail } from "@/services/article";
@@ -18,7 +18,7 @@ export const BotsPage = () => {
     {
       key: "x",
       title: "X notification bot",
-      icon: X,
+      icon: TwitterLogo,
       description: "Coming soon...",
       tags: ["Global", "Live"],
       link: undefined,
@@ -26,7 +26,7 @@ export const BotsPage = () => {
     {
       key: "tg",
       title: "Telegram bot",
-      icon: Telegram,
+      icon: TelegramLogo,
       description: "Coming soon...",
       tags: ["Customizable", "Coming soon"],
       link: undefined,
@@ -34,7 +34,7 @@ export const BotsPage = () => {
     {
       key: "dc",
       title: "Discord bot",
-      icon: Discord,
+      icon: DiscordLogo,
       description: "Coming soon...",
       tags: ["Customizable", "Coming soon"],
       link: undefined,

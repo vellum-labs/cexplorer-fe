@@ -16,12 +16,12 @@ import {
 } from "lucide-react";
 import { memo } from "react";
 import { Badge } from "@vellumlabs/cexplorer-sdk";
-import Dollar from "../../resources/images/dollar.svg";
+import { DollarIcon } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import DiscordLogo from "../../resources/images/icons/discord.svg";
-import GithubLogo from "../../resources/images/icons/github.svg";
-import TelegramLogo from "../../resources/images/icons/telegram.svg";
-import TwitterLogo from "../../resources/images/icons/twitter.svg";
+import { DiscordLogo } from "@vellumlabs/cexplorer-sdk";
+import { GithubLogo } from "@vellumlabs/cexplorer-sdk";
+import { TelegramLogo } from "@vellumlabs/cexplorer-sdk";
+import { TwitterLogo } from "@vellumlabs/cexplorer-sdk";
 
 interface WalletDropdownProps {
   isOpen: boolean;
@@ -137,7 +137,7 @@ const WalletDropdown = ({
                 ADA Handle
               </span>
               <Badge color='gray' rounded>
-                <img src={Dollar} alt='dollar' />
+                <img src={DollarIcon} alt='dollar' />
                 <span>
                   {encodeAssetName(
                     adaHandle.replace(/^(000de140|0014df10|000643b0)/, ""),
