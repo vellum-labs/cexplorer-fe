@@ -4,7 +4,7 @@ import type { FC } from "react";
 
 import AssetCell from "@/components/asset/AssetCell";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { ViewSwitch } from "@/components/global/ViewSwitch";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "@/components/table/GlobalTable";

@@ -3,7 +3,7 @@ import type { EpochListColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
 import TableSettingsDropdown from "../../global/dropdowns/TableSettingsDropdown";
-import TableSearchInput from "../../global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import GlobalTable from "../../table/GlobalTable";
 import ExportButton from "@/components/table/ExportButton";

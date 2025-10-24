@@ -1,6 +1,6 @@
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import Tabs from "@/components/global/Tabs";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";

@@ -3,7 +3,7 @@ import { useSearch } from "@tanstack/react-router";
 
 import GlobalTable from "@/components/table/GlobalTable";
 import ExportButton from "@/components/table/ExportButton";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { useRecentVotesTableStore } from "@/stores/tables/recentVotesTableStore";

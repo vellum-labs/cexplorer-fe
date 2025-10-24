@@ -1,7 +1,7 @@
 import { AddressInspectorRow } from "@/components/address/AddressInspectorRow";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { AddressTypeInitialsBadge } from "@vellumlabs/cexplorer-sdk";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import type { FC } from "react";
 
 import { useDebounce } from "@vellumlabs/cexplorer-sdk";

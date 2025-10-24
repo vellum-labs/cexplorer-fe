@@ -4,7 +4,7 @@ import { usePoolsListTableStore } from "@/stores/tables/poolsListTableStore";
 import { useFetchTopMarginsWithDelegators } from "@/services/pools";
 import GlobalTable from "@/components/table/GlobalTable";
 import { poolsListTableOptions } from "@/constants/tables/poolsListTableOptions";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import { WatchlistFilter } from "@/components/global/watchlist/WatchlistFilter";

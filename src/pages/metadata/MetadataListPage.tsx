@@ -5,7 +5,7 @@ import type {
 } from "@/types/tableTypes";
 import type { FC } from "react";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import GlobalTable from "@/components/table/GlobalTable";

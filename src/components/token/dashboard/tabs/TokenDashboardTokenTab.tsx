@@ -1,7 +1,7 @@
 import type { DeFiTokenTableColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
 import GlobalTable from "@/components/table/GlobalTable";

@@ -11,7 +11,7 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import { SizeCell } from "@vellumlabs/cexplorer-sdk";
 import { useEpochBlockListTableStore } from "@/stores/tables/epochBlockListTableStore";
 import { Link, useSearch } from "@tanstack/react-router";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 
 import { epochBlockTableOptions } from "@/constants/tables/epochBlockTableOptions";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
