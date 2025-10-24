@@ -7,7 +7,7 @@ import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { ViewSwitch } from "@/components/global/ViewSwitch";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { PolicyAssetGrid } from "../PolicyAssetGrid";
 import { PolicyCell } from "../PolicyCell";
 

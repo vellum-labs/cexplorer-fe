@@ -2,7 +2,7 @@ import { useSearch } from "@tanstack/react-router";
 import { usePoolList } from "@/hooks/tables/usePoolList";
 import { usePoolsListTableStore } from "@/stores/tables/poolsListTableStore";
 import { useFetchTopMarginsWithDelegators } from "@/services/pools";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { poolsListTableOptions } from "@/constants/tables/poolsListTableOptions";
 import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";

@@ -14,7 +14,7 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import AddressCell from "../address/AddressCell";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "../table/ExportButton";
-import GlobalTable from "../table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 interface PolicyDetailTopWalletsProps {
   policyId: string;

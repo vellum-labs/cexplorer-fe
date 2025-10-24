@@ -4,7 +4,7 @@ import { useEffect, useState, type FC } from "react";
 
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchAccountRewards } from "@/services/account";
 import { useAddressDetailRewardsTableStore } from "@/stores/tables/addressDetailRewardsTableStore";

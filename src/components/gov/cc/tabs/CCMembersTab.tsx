@@ -1,4 +1,4 @@
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { useFetchCommitteeDetail } from "@/services/governance";
 import type { TableColumns } from "@/types/tableTypes";
 import type { CommitteeMember } from "@/types/governanceTypes";

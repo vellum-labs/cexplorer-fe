@@ -8,7 +8,7 @@ import { MetadataCell } from "@/components/metadata/MetadataCell";
 import { PoolListEchart } from "@/components/pool/PoolListEchart";
 import RoaDiffArrow from "@/components/pool/RoaDiffArrow";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import { GroupDetailCharts } from "@/components/groups/GroupDetailCharts";
 import { generateImageUrl } from "@/utils/generateImageUrl";

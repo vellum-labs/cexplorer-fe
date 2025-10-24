@@ -3,7 +3,7 @@ import type { AssetOwnerNftColumns, TableColumns } from "@/types/tableTypes";
 import { useEffect, useState, type FC } from "react";
 
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchNftAssetOwners } from "@/services/assets";
 import { useAssetOwnerNftTableStore } from "@/stores/tables/AssetOwnerNftTableStore";

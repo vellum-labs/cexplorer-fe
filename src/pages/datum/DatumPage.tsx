@@ -2,7 +2,7 @@ import type { FC } from "react";
 
 import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
 import { JsonDisplay } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import { useFetchDatumDetail } from "@/services/datum";

@@ -2,7 +2,7 @@ import AddressCell from "@/components/address/AddressCell";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { AddressTypeInitialsBadge } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
@@ -62,7 +62,12 @@ const DelegationsTabItem = () => {
           };
           return <DrepNameCell item={drepItem} />;
         } else {
-          return <PoolCell poolInfo={item.detail} poolImageUrl={generateImageUrl(item.detail.id, "ico", "pool")} />;
+          return (
+            <PoolCell
+              poolInfo={item.detail}
+              poolImageUrl={generateImageUrl(item.detail.id, "ico", "pool")}
+            />
+          );
         }
       },
       title: "Delegation",

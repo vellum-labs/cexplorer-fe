@@ -5,7 +5,7 @@ import type { Vote } from "@/constants/votes";
 import { GovActionCell } from "@/components/gov/GovActionCell";
 import { VoteCell } from "@/components/governance/vote/VoteCell";
 import { GovVoterCell } from "@/components/gov/GovVoterCell";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { useFetchTxDetail } from "@/services/tx";
 import type { TableColumns } from "@/types/tableTypes";
 import type { TxDetailData } from "@/types/txTypes";

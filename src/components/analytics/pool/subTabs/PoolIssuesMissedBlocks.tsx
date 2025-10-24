@@ -18,7 +18,7 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useCallback, useEffect, useState } from "react";
 
 import { Button } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { poolIssuesMissedBlocksTableOptions } from "@/constants/tables/poolIssuesMissedBlocksTableOptions";
 
 export const PoolIssuesMissedBlocks: FC = () => {

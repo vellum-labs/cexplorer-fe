@@ -4,7 +4,7 @@ import type { FC } from "react";
 import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { Link, useSearch } from "@tanstack/react-router";
 import { useFetchDeFiTokenList } from "@/services/token";
