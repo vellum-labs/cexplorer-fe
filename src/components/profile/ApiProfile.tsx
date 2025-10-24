@@ -25,7 +25,7 @@ import { toast } from "sonner";
 import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import SpinningLoader from "../global/SpinningLoader";
+import { SpinningLoader } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { EmptyState } from "@vellumlabs/cexplorer-sdk";
 import ConnectWalletModal from "../wallet/ConnectWalletModal";

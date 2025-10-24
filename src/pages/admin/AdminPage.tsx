@@ -1,4 +1,4 @@
-import SpinningLoader from "@/components/global/SpinningLoader";
+import { SpinningLoader } from "@vellumlabs/cexplorer-sdk";
 import {
   BreadcrumbRaw,
   BreadcrumbItem,
