@@ -55,23 +55,9 @@ export interface DelegationData {
   active_epoch_no: number;
 }
 
-export interface DelegationToRetiredData {
-  pool: PoolInfo;
-  view: string;
-  account: {
-    script: null;
-    live_stake: number;
-  };
-}
-
 export type DelegationResponse = ResponseCore<{
   count: number;
   data: DelegationData[];
-}>;
-
-export type DelegationToRetiredResponse = ResponseCore<{
-  count: number;
-  data: DelegationToRetiredData[];
 }>;
 
 export interface DrepInfo {
