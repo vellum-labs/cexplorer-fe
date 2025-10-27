@@ -9,14 +9,11 @@ import FeatureGovernance from "@/resources/images/features/feature_governance.sv
 
 import { useEffect, useRef } from "react";
 import { useNotFound } from "@/stores/useNotFound";
-import { webUrl } from "@/constants/confVariables";
 
 export const ProPage = () => {
   const query = useFetchArticleDetail("en", "page", "pro");
   const data = query.data;
   const name = data?.name;
-  const description = data?.description;
-  const keywords = data?.keywords;
 
   const { setNotFound } = useNotFound();
 
@@ -121,18 +118,7 @@ export const ProPage = () => {
 
   return (
     <>
-      <Helmet>
-        <meta charSet='utf-8' />
-        {description && <meta name='description' content={description} />}
-        {keywords && <meta name='keywords' content={keywords} />}
-        {name && <title>{name}</title>}
-        {name && <meta property='og:title' content={name} />}
-        {description && (
-          <meta property='og:description' content={description} />
-        )}
-        <meta property='og:type' content='website' />
-        <meta property='og:url' content={webUrl + location.pathname} />
-      </Helmet>
+      <Helmet>{name && <title>{name}</title>}</Helmet>
       <main
         ref={accordionRef}
         className='flex min-h-minHeight w-full flex-col items-center px-mobile md:px-desktop'

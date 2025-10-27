@@ -1,8 +1,8 @@
 import { ArticleCombobox } from "@/components/article/ArticleCombobox";
-import { Badge } from "@/components/global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
-import SpinningLoader from "@/components/global/SpinningLoader";
+import { SpinningLoader } from "@vellumlabs/cexplorer-sdk";
 import {
   BreadcrumbRaw,
   BreadcrumbItem,
@@ -100,7 +100,6 @@ export const AdminArticleDetail = () => {
   return (
     <main className='relative flex min-h-minHeight max-w-desktop flex-col gap-1 p-mobile md:p-desktop'>
       <Helmet>
-        <meta charSet='utf-8' />
         <title>Admin article detail | Cexplorer.io</title>
       </Helmet>
       <BreadcrumbRaw className='w-full'>

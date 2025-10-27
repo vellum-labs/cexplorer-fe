@@ -70,6 +70,7 @@ jobs:
           set -e
           yarn install
           yarn build
+          yarn generate:routes
 
       - name: Copy files & deploy
         env:

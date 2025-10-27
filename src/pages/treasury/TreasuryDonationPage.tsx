@@ -1,4 +1,4 @@
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { TreasuryDonationEpochsTab } from "@/components/script/treasury/tabs/TreasuryDonationEpochsTab";
 import { TreasuryDonationOverview } from "@/components/script/treasury/TreasuryDonationOverview";
 import { useFetchTreasuryDonationStats } from "@/services/treasury";

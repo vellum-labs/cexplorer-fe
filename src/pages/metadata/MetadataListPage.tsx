@@ -4,27 +4,27 @@ import type {
   TableColumns,
 } from "@/types/tableTypes";
 import type { FC } from "react";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { Info } from "lucide-react";
 
 import { useFetchMetadataTxList } from "@/services/metadata";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useMetadataTxListTableStore } from "@/stores/tables/metadataTxListTableStore";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { MetadataCell } from "@/components/metadata/MetadataCell";
-import { SizeCell } from "@/components/table/SizeCell";
+import { SizeCell } from "@vellumlabs/cexplorer-sdk";
 import { metadataTxListTableOptions } from "@/constants/tables/metadataTxListTableOptions";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
-import { findLabel } from "@/utils/findLabel";
+import { findLabel } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { isHex } from "@/utils/isHex";
 import { isTextNumeric } from "@/utils/isTextNumeric";

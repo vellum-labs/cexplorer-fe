@@ -1,7 +1,7 @@
 import type { AddressDetailUTXOColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 
@@ -11,13 +11,13 @@ import { useEffect, useState } from "react";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
-import GlobalTable from "@/components/table/GlobalTable";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "@/components/tx/HashCell";
 import { addressDetailUTXOOptions } from "@/constants/tables/addressDetailUTXOTableOptions";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
-import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
+import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
 import { calculateMinUtxo } from "@/utils/calculateUTXOSize";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 

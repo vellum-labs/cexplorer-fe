@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { PoolIssuesMissedBlocks } from "../subTabs/PoolIssuesMissedBlocks";
 
 export const PoolIssuesAnalytics: FC = () => {

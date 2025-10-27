@@ -1,12 +1,12 @@
 import type { FC, ReactNode } from "react";
-import type { HeaderBannerBreadCrumbItem } from "../HeaderBanner";
 
 import { Helmet } from "react-helmet";
 import { HeaderBanner } from "../HeaderBanner";
-import AdsCarousel from "../ads/AdsCarousel";
+import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
 
 import metadata from "../../../../conf/metadata/en-metadata.json";
-import { webUrl } from "@/constants/confVariables";
+import { generateImageUrl } from "@/utils/generateImageUrl";
+import { useFetchMiscBasic } from "@/services/misc";
 
 interface PageBaseInitProps {
   children: ReactNode;
@@ -15,7 +15,9 @@ interface PageBaseInitProps {
     after: string;
   };
   title: ReactNode;
-  breadcrumbItems?: HeaderBannerBreadCrumbItem[];
+  breadcrumbItems?: {
+    [key: string]: ReactNode | object;
+  }[];
   breadcrumbSeparator?: ReactNode;
   adsCarousel?: boolean;
   subTitle?: ReactNode;
@@ -58,6 +60,8 @@ export const PageBase: FC<PageBaseProps> = ({
   showMetadata = true,
   isHomepage,
 }) => {
+  const miscBasicQuery = useFetchMiscBasic();
+
   const metadataTitleInit = metadataOverride
     ? metadataOverride?.title
     : metadataReplace
@@ -67,42 +71,17 @@ export const PageBase: FC<PageBaseProps> = ({
         )
       : metadata[metadataTitle]?.title;
 
-  const metadataDescription = metadataOverride
-    ? metadataOverride?.description
-    : metadataReplace
-      ? metadata[metadataTitle]?.description.replace(
-          metadataReplace?.before,
-          metadataReplace?.after || "",
-        )
-      : metadata[metadataTitle]?.description;
-
-  const metadataKeyword = metadataOverride
-    ? metadataOverride?.keyword
-    : metadataReplace
-      ? metadata[metadataTitle]?.keywords.replace(
-          metadataReplace?.before,
-          metadataReplace?.after || "",
-        )
-      : metadata[metadataTitle]?.keywords;
-
   return (
     <main className='flex min-h-minHeight w-full flex-col items-center'>
       {showMetadata && (
         <Helmet>
-          <meta charSet='utf-8' />
           <title>{metadataTitleInit}</title>
-          <meta name='description' content={metadataDescription} />
-          <meta name='keywords' content={metadataKeyword} />
-          <meta property='og:title' content={metadataTitleInit} />
-          <meta property='og:description' content={metadataDescription} />
-          <meta property='og:type' content='website' />
-          <meta property='og:url' content={webUrl + location.pathname} />
         </Helmet>
       )}
       {showHeader && (
         <HeaderBanner
           title={title}
-          breadcrumbItems={breadcrumbItems}
+          breadcrumbItems={breadcrumbItems as any}
           subTitle={subTitle}
           badge={badge}
           qrCode={qrCode}
@@ -110,7 +89,12 @@ export const PageBase: FC<PageBaseProps> = ({
           isHomepage={isHomepage}
         />
       )}
-      {adsCarousel && <AdsCarousel />}
+      {adsCarousel && (
+        <AdsCarousel
+          generateImageUrl={generateImageUrl}
+          miscBasicQuery={miscBasicQuery}
+        />
+      )}
       {children}
     </main>
   );

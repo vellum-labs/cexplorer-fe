@@ -2,8 +2,8 @@ import type { FC } from "react";
 import type { PoolPefomanceColumns } from "@/types/tableTypes";
 
 import ExportButton from "../table/ExportButton";
-import TableSettingsDropdown from "../global/dropdowns/TableSettingsDropdown";
-import GlobalTable from "../table/GlobalTable";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
@@ -20,7 +20,7 @@ import { format } from "date-fns";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { useElapsedEpochNumber } from "@/hooks/useElapsedEpochNumber";
-import { Badge } from "../global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 

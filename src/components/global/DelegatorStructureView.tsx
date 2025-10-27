@@ -11,7 +11,7 @@ import type { PoolStructureColumns } from "@/types/tableTypes";
 
 import { DelegatorStructureCharts } from "./DelegatorStructureCharts";
 import { DelegatorStructureTable } from "./DelegatorStructureTable";
-import TableSettingsDropdown from "./dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 
 export interface DelegatorStructureItem {
   title: AnimalName;

@@ -1,9 +1,11 @@
-import ConstLabelBadge from "@/components/global/badges/ConstLabelBadge";
-import { JsonDisplay } from "@/components/global/JsonDisplay";
+import { ConstLabelBadge } from "@vellumlabs/cexplorer-sdk";
+import { JsonDisplay } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { useFetchTxDetail } from "@/services/tx";
 import type { TxMetadata } from "@/types/txTypes";
 import { getRouteApi } from "@tanstack/react-router";
+import { useFetchMiscBasic } from "@/services/misc";
+import { useMiscConst } from "@/hooks/useMiscConst";
 
 const MetadataTabItem = () => {
   const route = getRouteApi("/tx/$hash");
@@ -11,6 +13,9 @@ const MetadataTabItem = () => {
   const query = useFetchTxDetail(hash);
   const metadata = query?.data?.data?.metadata;
   const metadataArr: TxMetadata[] = [];
+
+  const { data: basicData } = useFetchMiscBasic();
+  const miscConst = useMiscConst(basicData?.data.version.const);
 
   for (const obj in metadata) {
     metadataArr.push({ [obj]: metadata[obj] });
@@ -42,6 +47,7 @@ const MetadataTabItem = () => {
               type='metadatum'
               name={Object.values(item)[0].key}
               className='h-7'
+              miscConst={miscConst}
             />
           </div>
           <JsonDisplay

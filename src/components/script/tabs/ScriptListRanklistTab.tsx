@@ -5,16 +5,16 @@ import type {
 } from "@/types/tableTypes";
 import type { FC } from "react";
 
-import { Badge } from "@/components/global/badges/Badge";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
 
 import { useFetchScriptList } from "@/services/script";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useScriptListRanklistTableStore } from "@/stores/tables/scriptListRanklistTableStore";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";

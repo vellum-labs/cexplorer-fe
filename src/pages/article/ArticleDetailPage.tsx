@@ -1,14 +1,13 @@
 import { ArticleCard } from "@/components/article/ArticleCard";
 import { Button } from "@vellumlabs/cexplorer-sdk";
-import { Image } from "@/components/global/Image";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
-import { SingleItemCarousel } from "@/components/global/SingleItemCarousel";
+import { SingleItemCarousel } from "@vellumlabs/cexplorer-sdk";
 import {
   BreadcrumbRaw,
   BreadcrumbItem,
   BreadcrumbList,
 } from "@vellumlabs/cexplorer-sdk";
-import { webUrl } from "@/constants/confVariables";
 import { useFetchArticleDetail, useFetchArticleList } from "@/services/article";
 import type { ArticleListData } from "@/types/articleTypes";
 import { formatDate } from "@vellumlabs/cexplorer-sdk";
@@ -19,9 +18,9 @@ import { Check, Copy, Gift, Send } from "lucide-react";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 import metadata from "../../../conf/metadata/en-metadata.json";
-import DiscordLogo from "../../resources/images/icons/discord.svg";
-import TelegramLogo from "../../resources/images/icons/telegram.svg";
-import TwitterLogo from "../../resources/images/icons/twitter.svg";
+import { DiscordLogo } from "@vellumlabs/cexplorer-sdk";
+import { TelegramLogo } from "@vellumlabs/cexplorer-sdk";
+import { TwitterLogo } from "@vellumlabs/cexplorer-sdk";
 import { RandomDelegationModal } from "@/components/wallet/RandomDelegationModal";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
@@ -85,7 +84,6 @@ export const ArticleDetailPage = () => {
   return (
     <>
       <Helmet>
-        <meta charSet='utf-8' />
         {
           <title>
             {metadata.articleDetail.title.replace(
@@ -94,36 +92,6 @@ export const ArticleDetailPage = () => {
             )}
           </title>
         }
-        <meta
-          name='description'
-          content={metadata.articleDetail.description.replace(
-            "%description%",
-            data?.description || "",
-          )}
-        />
-        <meta
-          name='keywords'
-          content={metadata.articleDetail.keywords.replace(
-            "%keywords%",
-            data?.keywords || "",
-          )}
-        />
-        <meta
-          property='og:title'
-          content={metadata.articleDetail.title.replace(
-            "%article%",
-            String(parse(data?.name ?? "")) || "Article",
-          )}
-        />
-        <meta
-          property='og:description'
-          content={metadata.articleDetail.description.replace(
-            "%description%",
-            data?.description || "",
-          )}
-        />
-        <meta property='og:type' content='website' />
-        <meta property='og:url' content={webUrl + location.pathname} />
       </Helmet>
       <main className='mx-auto flex min-h-minHeight w-full max-w-desktop flex-col items-center'>
         {openDelegationModal && (
@@ -225,7 +193,7 @@ export const ArticleDetailPage = () => {
             <SingleItemCarousel
               items={otherArticles}
               isLoading={listQuery.isLoading}
-              card={ArticleCardWrapper}
+              card={ArticleCardWrapper as any}
               className='h-full basis-[300px] md:max-w-[300px]'
             />
             <div className='flex w-full min-w-[230px] shrink grow basis-[280px] flex-col gap-2 rounded-m border border-border bg-cardBg p-2'>

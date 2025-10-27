@@ -1,6 +1,6 @@
 import { Fragment, type FC } from "react";
 
-import { VoteBadge } from "../../global/badges/VoteBadge";
+import { VoteBadge } from "@vellumlabs/cexplorer-sdk";
 import type { Vote } from "@/constants/votes";
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
@@ -8,14 +8,14 @@ import { useFetchDrepListVote } from "@/services/governance";
 import { Link, useSearch } from "@tanstack/react-router";
 
 import govActions from "../../../../conf/governance-actions.json";
-import { NoResultsFound } from "@/components/global/NoResultsFound";
+import { NoResultsFound } from "@vellumlabs/cexplorer-sdk";
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { Pagination } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { useVotingTableStore } from "@/stores/tables/votingTableTableStore";
 import { CircleHelp } from "lucide-react";
-import { ActivityBadge } from "@/components/global/badges/ActivityBadge";
+import { ActivityBadge } from "@vellumlabs/cexplorer-sdk";
 
 interface VotingTableProps {}
 

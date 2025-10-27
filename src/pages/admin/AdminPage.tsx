@@ -1,4 +1,4 @@
-import SpinningLoader from "@/components/global/SpinningLoader";
+import { SpinningLoader } from "@vellumlabs/cexplorer-sdk";
 import {
   BreadcrumbRaw,
   BreadcrumbItem,
@@ -21,7 +21,6 @@ export const AdminPage = () => {
   return (
     <main className='relative flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
       <Helmet>
-        <meta charSet='utf-8' />
         <title>Admin | Cexplorer.io</title>
       </Helmet>
       <section className='w-full max-w-desktop'>

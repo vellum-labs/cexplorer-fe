@@ -5,7 +5,7 @@ import { EpochBlocks } from "@/components/epoch/tabs/EpochBlocks";
 import { EpochDetailAnalytics } from "@/components/epoch/tabs/EpochDetailAnalytics";
 import { EpochParameters } from "@/components/epoch/tabs/EpochParameters";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import type { EpochStatsSummary } from "@/types/epochTypes";
 import type { FC } from "react";
 

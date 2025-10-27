@@ -2,27 +2,23 @@ import { Button } from "@vellumlabs/cexplorer-sdk";
 import { ArrowRight, BellRing } from "lucide-react";
 import { Helmet } from "react-helmet";
 
-import Discord from "@/resources/images/icons/discord.svg";
-import Telegram from "@/resources/images/icons/telegram.svg";
-import X from "@/resources/images/icons/twitter.svg";
+import { DiscordLogo } from "@vellumlabs/cexplorer-sdk";
+import { TelegramLogo } from "@vellumlabs/cexplorer-sdk";
+import { TwitterLogo } from "@vellumlabs/cexplorer-sdk";
 
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { useFetchArticleDetail } from "@/services/article";
-import { webUrl } from "@/constants/confVariables";
-// import parse from "html-react-parser";
 
 export const BotsPage = () => {
   const query = useFetchArticleDetail("en", "page", "bots");
   const data = query.data;
   const name = data?.name;
-  const description = data?.description;
-  const keywords = data?.keywords;
 
   const bots = [
     {
       key: "x",
       title: "X notification bot",
-      icon: X,
+      icon: TwitterLogo,
       description: "Coming soon...",
       tags: ["Global", "Live"],
       link: undefined,
@@ -30,7 +26,7 @@ export const BotsPage = () => {
     {
       key: "tg",
       title: "Telegram bot",
-      icon: Telegram,
+      icon: TelegramLogo,
       description: "Coming soon...",
       tags: ["Customizable", "Coming soon"],
       link: undefined,
@@ -38,7 +34,7 @@ export const BotsPage = () => {
     {
       key: "dc",
       title: "Discord bot",
-      icon: Discord,
+      icon: DiscordLogo,
       description: "Coming soon...",
       tags: ["Customizable", "Coming soon"],
       link: undefined,
@@ -47,18 +43,7 @@ export const BotsPage = () => {
 
   return (
     <>
-      <Helmet>
-        <meta charSet='utf-8' />
-        {description && <meta name='description' content={description} />}
-        {keywords && <meta name='keywords' content={keywords} />}
-        {name && <title>Bots | Cexplorer.io</title>}
-        {name && <meta property='og:title' content={name} />}
-        {description && (
-          <meta property='og:description' content={description} />
-        )}
-        <meta property='og:type' content='website' />
-        <meta property='og:url' content={webUrl + location.pathname} />
-      </Helmet>
+      <Helmet>{name && <title>Bots | Cexplorer.io</title>}</Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center px-mobile md:px-desktop'>
         <div className='flex w-full max-w-desktop flex-col items-center'>
           <h1 className='py-4'>Cexplorer.io Bots</h1>

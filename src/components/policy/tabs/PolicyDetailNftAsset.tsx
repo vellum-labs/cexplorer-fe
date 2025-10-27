@@ -3,16 +3,16 @@ import type { AssetListTableColumns, TableColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
 import AssetCell from "@/components/asset/AssetCell";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
-import { ViewSwitch } from "@/components/global/ViewSwitch";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
+import { ViewSwitch } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { PolicyAssetGrid } from "../PolicyAssetGrid";
 import { PolicyCell } from "../PolicyCell";
 
 import { useFetchAssetList } from "@/services/assets";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { usePolicyDetailAssetListTableStore } from "@/stores/tables/policyDetailAssetListTableStore";
 import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";

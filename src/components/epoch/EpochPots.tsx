@@ -1,7 +1,7 @@
 import type { EpochStatsSummary } from "@/types/epochTypes";
 import type { FC } from "react";
 
-import { OverviewCard } from "../global/cards/OverviewCard";
+import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 

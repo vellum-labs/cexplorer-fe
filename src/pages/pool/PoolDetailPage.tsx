@@ -1,6 +1,6 @@
-import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
-import { Image } from "@/components/global/Image";
-import Tabs from "@/components/global/Tabs";
+import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import PoolDetailOverview from "@/components/pool/PoolDetailOverview";
 import AboutTabItem from "@/components/pool/tabs/AboutTabItem";
 import { AwardsTabItem } from "@/components/pool/tabs/AwardsTabItem";
@@ -148,7 +148,11 @@ const PoolDetailPage = () => {
         </div>
       }
     >
-      <PoolDetailOverview query={query} estimatedBlocks={estimatedBlocks} miscConst={miscConst} />
+      <PoolDetailOverview
+        query={query}
+        estimatedBlocks={estimatedBlocks}
+        miscConst={miscConst}
+      />
       <Tabs items={poolDetailTabItems} />
     </PageBase>
   );

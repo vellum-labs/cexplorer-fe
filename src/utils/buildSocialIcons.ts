@@ -1,11 +1,11 @@
 import type { PoolMetaExtended } from "@/types/poolTypes";
-import TwitterLogo from "@/resources/images/icons/twitter.svg";
-import DiscordLogo from "@/resources/images/icons/discord.svg";
-import TelegramLogo from "@/resources/images/icons/telegram.svg";
-import GithubLogo from "@/resources/images/icons/github.svg";
-import FacebookLogo from "@/resources/images/icons/facebook.svg";
-import YoutubeLogo from "@/resources/images/icons/youtube.svg";
-import TwitchLogo from "@/resources/images/icons/twitch.svg";
+import { TwitterLogo } from "@vellumlabs/cexplorer-sdk";
+import { DiscordLogo } from "@vellumlabs/cexplorer-sdk";
+import { TelegramLogo } from "@vellumlabs/cexplorer-sdk";
+import { GithubLogo } from "@vellumlabs/cexplorer-sdk";
+import { FacebookLogo } from "@vellumlabs/cexplorer-sdk";
+import { YoutubeLogo } from "@vellumlabs/cexplorer-sdk";
+import { TwitchLogo } from "@vellumlabs/cexplorer-sdk";
 
 export interface SocialIcon {
   icon: string;

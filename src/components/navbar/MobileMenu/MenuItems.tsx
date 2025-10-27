@@ -3,15 +3,18 @@ import type { Dispatch, FC, SetStateAction } from "react";
 
 import { navigationOptions } from "@/constants/navigationOptions";
 
-import MainLogo from "@/components/global/MainLogo";
-import { Accordion } from "@/components/ui/accordion";
+import { MainLogo } from "@vellumlabs/cexplorer-sdk";
+import { Accordion } from "@vellumlabs/cexplorer-sdk";
 import WalletButton from "@/components/wallet/WalletButton";
 import { enabledWalletConnector } from "@/constants/confVariables";
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
 import { ChevronRight, ChevronRightIcon, LineChart } from "lucide-react";
-import MobileMenuAccordionItem from "../MobileMenuAccordionItem";
+import { MobileMenuAccordionItem } from "@vellumlabs/cexplorer-sdk";
 import SettingsMobile from "../SettingsMobile";
-import { AdaPriceIndicator } from "../AdaPriceIndicator";
+import { AdaPriceIndicator } from "@vellumlabs/cexplorer-sdk";
+import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
+
+import { configJSON } from "@/constants/conf";
 
 interface MenuItemsProps {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -19,6 +22,8 @@ interface MenuItemsProps {
 }
 
 export const MenuItems: FC<MenuItemsProps> = ({ setOpen, setActiveMenu }) => {
+  const price = useAdaPriceWithHistory();
+
   const menuItems: MenuItem[] = [
     {
       label: "Blockchain",
@@ -58,6 +63,7 @@ export const MenuItems: FC<MenuItemsProps> = ({ setOpen, setActiveMenu }) => {
         className='-translate-x-1'
         size={120}
         onClick={() => setOpen(false)}
+        network={configJSON.network}
       />
       <Accordion className='' type='single' collapsible>
         {menuItems.map((menuItem, index) => (
@@ -117,12 +123,10 @@ export const MenuItems: FC<MenuItemsProps> = ({ setOpen, setActiveMenu }) => {
         onClick={() => setActiveMenu("settings")}
       />
       <div className='flex w-full flex-col md:hidden'>
-        {enabledWalletConnector && (
-          <WalletButton variant='long' onClick={() => setOpen(false)} />
-        )}
+        {enabledWalletConnector && <WalletButton variant='long' />}
       </div>
       <div className='w-full pt-1.5' onClick={() => setOpen(false)}>
-        <AdaPriceIndicator />
+        <AdaPriceIndicator price={price} />
       </div>
     </>
   );
