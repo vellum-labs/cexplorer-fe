@@ -1,14 +1,14 @@
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { stakeWithdrawalTableOptions } from "@/constants/tables/stakeWithdrawalsTableOptions";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { useFetchWithdrawals } from "@/services/account";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useStakeWithdrawalsTableStore } from "@/stores/tables/stakeWithdrawalsTableStore";
 import type { Withdrawal } from "@/types/accountTypes";
 import type { MiscConstResponseData } from "@/types/miscTypes";

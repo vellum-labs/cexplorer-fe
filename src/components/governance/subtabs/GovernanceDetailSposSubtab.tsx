@@ -4,8 +4,8 @@ import type { FC } from "react";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import GlobalTable from "@/components/table/GlobalTable";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { useFetchGovernanceVote } from "@/services/governance";
@@ -13,7 +13,7 @@ import { useGovActionDetailSposTableStore } from "@/stores/tables/governanceDeta
 
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { governanceActionDetailDrepSposTableOptions } from "@/constants/tables/governanceActionDetailAboutTableOptions";
-import { getColumnsSortOrder } from "@/utils/getColumnsSortOrder";
+import { getColumnsSortOrder } from "@vellumlabs/cexplorer-sdk";
 import { SortArrow } from "@vellumlabs/cexplorer-sdk";
 import { GovVoterCell } from "@/components/gov/GovVoterCell";
 

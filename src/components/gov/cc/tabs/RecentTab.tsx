@@ -1,16 +1,16 @@
 import type { FC } from "react";
 import { useSearch } from "@tanstack/react-router";
 
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { useRecentVotesTableStore } from "@/stores/tables/recentVotesTableStore";
 import { useFetchCCVotes } from "@/services/governance";
 import { formatString, formatNumber } from "@vellumlabs/cexplorer-sdk";
-import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
-import { Image } from "@/components/global/Image";
+import { TimeDateIndicator } from "@vellumlabs/cexplorer-sdk";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { ActionTypes } from "@vellumlabs/cexplorer-sdk";

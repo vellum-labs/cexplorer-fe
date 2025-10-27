@@ -8,7 +8,7 @@ import { DateCell } from "@vellumlabs/cexplorer-sdk";
 
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { useFetchDrepList } from "@/services/drep";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useDrepListTableStore } from "@/stores/tables/drepListTableStore";
 import { useEffect, useState } from "react";
 
@@ -16,14 +16,14 @@ import { DrepNameCell } from "@/components/drep/DrepNameCell";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { SortArrow } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
-import { getColumnsSortOrder } from "@/utils/getColumnsSortOrder";
+import { getColumnsSortOrder } from "@vellumlabs/cexplorer-sdk";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { X } from "lucide-react";
-import { Badge } from "@/components/global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { useFilterTable } from "./useFilterTable";
-import { VoteBadge } from "@/components/global/badges/VoteBadge";
+import { VoteBadge } from "@vellumlabs/cexplorer-sdk";
 import type { Vote } from "@/constants/votes";
 import { useSearchTable } from "./useSearchTable";
 

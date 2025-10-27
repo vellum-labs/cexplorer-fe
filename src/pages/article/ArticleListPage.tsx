@@ -1,8 +1,8 @@
 import { ArticleCard } from "@/components/article/ArticleCard";
-import AdsCarousel from "@/components/global/ads/AdsCarousel";
+import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
 import { HeaderBanner } from "@/components/global/HeaderBanner";
-import { Image } from "@/components/global/Image";
-import { NoResultsFound } from "@/components/global/NoResultsFound";
+import { Image } from "@vellumlabs/cexplorer-sdk";
+import { NoResultsFound } from "@vellumlabs/cexplorer-sdk";
 import { Pagination } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
@@ -17,7 +17,8 @@ import type { SetStateAction } from "react";
 import React, { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import metadata from "../../../conf/metadata/en-metadata.json";
-import { webUrl } from "@/constants/confVariables";
+import { useFetchMiscBasic } from "@/services/misc";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 
 export const ArticleListPage = () => {
   const { page } = useSearch({ from: "/article/" });
@@ -39,6 +40,8 @@ export const ArticleListPage = () => {
     Math.ceil(totalItems / 20),
   );
 
+  const miscBasicQuery = useFetchMiscBasic();
+
   const firstRender = useRef(true);
 
   const categoriesOptions = articleCategories.map(category => ({
@@ -59,19 +62,7 @@ export const ArticleListPage = () => {
   if (query.isLoading && firstRender.current) {
     return (
       <>
-        <Helmet>
-          <meta charSet='utf-8' />
-          {<title>{metadata.articleList.title}</title>}
-          <meta name='description' content={metadata.articleList.description} />
-          <meta name='keywords' content={metadata.articleList.keywords} />
-          <meta property='og:title' content={metadata.articleList.title} />
-          <meta
-            property='og:description'
-            content={metadata.articleList.description}
-          />
-          <meta property='og:type' content='website' />
-          <meta property='og:url' content={webUrl + location.pathname} />
-        </Helmet>
+        <Helmet>{<title>{metadata.articleList.title}</title>}</Helmet>
         <main className='flex min-h-minHeight w-full flex-col items-center'>
           <HeaderBanner
             title='Learn About Cardano'
@@ -97,7 +88,10 @@ export const ArticleListPage = () => {
               </div>
             </div>
           </div>
-          <AdsCarousel />
+          <AdsCarousel
+            generateImageUrl={generateImageUrl}
+            miscBasicQuery={miscBasicQuery}
+          />
           <div className='flex w-full max-w-desktop flex-col gap-1.5 p-mobile md:p-desktop'>
             <div className='ml-auto flex items-center gap-1'>
               <span className='text-text-sm'>Category:</span>
@@ -118,19 +112,7 @@ export const ArticleListPage = () => {
 
   return (
     <>
-      <Helmet>
-        <meta charSet='utf-8' />
-        {<title>{metadata.articleList.title}</title>}
-        <meta name='description' content={metadata.articleList.description} />
-        <meta name='keywords' content={metadata.articleList.keywords} />
-        <meta property='og:title' content={metadata.articleList.title} />
-        <meta
-          property='og:description'
-          content={metadata.articleList.description}
-        />
-        <meta property='og:type' content='website' />
-        <meta property='og:url' content={webUrl + location.pathname} />
-      </Helmet>
+      <Helmet>{<title>{metadata.articleList.title}</title>}</Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center'>
         <HeaderBanner
           title='Learn About Cardano'
@@ -184,7 +166,10 @@ export const ArticleListPage = () => {
             </div>
           )}
         </div>
-        <AdsCarousel />
+        <AdsCarousel
+          generateImageUrl={generateImageUrl}
+          miscBasicQuery={miscBasicQuery}
+        />
         <div className='flex w-full max-w-desktop flex-col gap-1.5 p-mobile md:p-desktop'>
           <div className='ml-auto flex items-center gap-1'>
             <span className='text-text-sm'>Category:</span>

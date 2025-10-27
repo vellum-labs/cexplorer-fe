@@ -9,12 +9,12 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "@vellumlabs/cexplorer-sdk";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@vellumlabs/cexplorer-sdk";
 import { articleCategories } from "@/constants/article";
 import { cn } from "@vellumlabs/cexplorer-sdk";
 import type { ArticleCategories } from "@/types/articleTypes";

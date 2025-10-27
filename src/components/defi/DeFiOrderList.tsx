@@ -6,24 +6,24 @@ import { Check, Ellipsis, FileText, X } from "lucide-react";
 
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "../table/ExportButton";
-import TableSettingsDropdown from "../global/dropdowns/TableSettingsDropdown";
-import GlobalTable from "../table/GlobalTable";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { Image } from "../global/Image";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
-import { TimeDateIndicator } from "../global/TimeDateIndicator";
+import { TimeDateIndicator } from "@vellumlabs/cexplorer-sdk";
 
 import { defiOrderListTableOptions } from "@/constants/tables/defiOrderListTableOptions";
 import {
   formatNumberWithSuffix,
   formatString,
 } from "@vellumlabs/cexplorer-sdk";
-import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
-import { ADATokenName, currencySigns } from "@/constants/currencies";
+import { formatSmallValueWithSub } from "@vellumlabs/cexplorer-sdk";
+import { ADATokenName, currencySigns } from "@vellumlabs/cexplorer-sdk";
 
 import { dexConfig } from "@/constants/dexConfig";
 
@@ -31,7 +31,7 @@ import { useDeFiOrderListTableStore } from "@/stores/tables/deFiOrderListTableSt
 import { useFetchDeFiOrderList } from "@/services/token";
 import { useFilterTable } from "@/hooks/tables/useFilterTable";
 import { useFetchMiscSearch } from "@/services/misc";
-import { useLocaleStore } from "@/stores/localeStore";
+import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 
 import { addressIcons } from "@/constants/address";

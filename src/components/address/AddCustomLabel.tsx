@@ -3,7 +3,7 @@ import { useFetchUserInfo } from "@/services/user";
 import { useAddressLabelStore } from "@/stores/addressLabelStore";
 import { useCustomLabelModalState } from "@/stores/states/customLabelModalState";
 import { Edit } from "lucide-react";
-import { Badge } from "../global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
 export const AddCustomLabel = ({ address }: { address: string }) => {

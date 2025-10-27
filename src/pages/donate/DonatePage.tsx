@@ -5,11 +5,7 @@ import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { Checkbox } from "@/components/ui/checkbox";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import { colors } from "@/constants/colors";
-import {
-  donationAddress,
-  supportedPools,
-  webUrl,
-} from "@/constants/confVariables";
+import { donationAddress, supportedPools } from "@/constants/confVariables";
 import CexLogo from "@/resources/images/cexLogo.svg";
 import Patreon from "@/resources/images/patreon.svg";
 import Paypal from "@/resources/images/paypal.svg";
@@ -127,19 +123,7 @@ export const DonatePage = () => {
 
   return (
     <>
-      <Helmet>
-        <meta charSet='utf-8' />
-        {<title>{metadata.donatePage.title}</title>}
-        <meta name='description' content={metadata.donatePage.description} />
-        <meta name='keywords' content={metadata.donatePage.keywords} />
-        <meta property='og:title' content={metadata.donatePage.title} />
-        <meta
-          property='og:description'
-          content={metadata.donatePage.description}
-        />
-        <meta property='og:type' content='website' />
-        <meta property='og:url' content={webUrl + location.pathname} />
-      </Helmet>
+      <Helmet>{<title>{metadata.donatePage.title}</title>}</Helmet>
       {showWalletModal && (
         <ConnectWalletModal onClose={() => setShowWalletModal(false)} />
       )}

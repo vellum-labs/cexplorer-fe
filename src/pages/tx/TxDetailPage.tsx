@@ -1,6 +1,6 @@
-import { Badge } from "@/components/global/badges/Badge";
-import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
-import Tabs from "@/components/global/Tabs";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
+import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import CollateralTabItem from "@/components/tx/tabs/CollateralTabItem";
 import ContentTabItem from "@/components/tx/tabs/ContentTabItem";
 import { ContractsTabItem } from "@/components/tx/tabs/ContractsTabItem";
@@ -20,7 +20,7 @@ import { DeFiOrderList } from "@/components/defi/DeFiOrderList";
 import { Fragment, useEffect, useState } from "react";
 import { getAddonsForMetadata } from "@/utils/addons/getAddonsForMetadata";
 import { PageBase } from "@/components/global/pages/PageBase";
-import { LabelBadge } from "@/components/global/badges/LabelBadge";
+import { LabelBadge } from "@vellumlabs/cexplorer-sdk";
 
 const TxDetailPage = () => {
   const route = getRouteApi("/tx/$hash");

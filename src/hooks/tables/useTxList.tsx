@@ -4,13 +4,13 @@ import type { Dispatch, SetStateAction } from "react";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
-import { SizeCell } from "@/components/table/SizeCell";
+import { SizeCell } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "@/components/tx/HashCell";
 import { Link } from "@tanstack/react-router";
 
 import { useFetchMiscBasic } from "@/services/misc";
 import { useFetchTxList } from "@/services/tx";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useTxListTableStore } from "@/stores/tables/txListTableStore";
 import { useEffect, useState } from "react";
 import { useMiscConst } from "../useMiscConst";

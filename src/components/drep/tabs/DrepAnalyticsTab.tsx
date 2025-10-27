@@ -1,7 +1,7 @@
 import type { useFetchDrepAnalytics } from "@/services/drep";
 import type { FC } from "react";
 
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { DrepAnalytcsPieGraph } from "../DrepAnalytcsPieGraph";
 import { DrepPoolGraph } from "../DrepPoolGraph";
 import { DrepSizeGraph } from "../DrepSizeGraph";

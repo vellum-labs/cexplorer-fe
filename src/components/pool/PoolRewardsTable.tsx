@@ -2,7 +2,7 @@ import { activeSlotsCoeff, epochLength } from "@/constants/confVariables";
 import { poolRewardsTableOptions } from "@/constants/tables/poolRewardsTableOptions";
 import { useElapsedEpochNumber } from "@/hooks/useElapsedEpochNumber";
 import { useFetchPoolDetail, useFetchPoolReward } from "@/services/pools";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { usePoolRewardsTableStore } from "@/stores/tables/poolRewardsTableStore";
 import type { MiscConstResponse } from "@/types/miscTypes";
 import type { PoolRewardsColumns } from "@/types/tableTypes";
@@ -13,11 +13,11 @@ import { useSearch } from "@tanstack/react-router";
 import { Network, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { Badge } from "../global/badges/Badge";
-import TableSettingsDropdown from "../global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "../table/ExportButton";
-import GlobalTable from "../table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {

@@ -1,13 +1,13 @@
 import type { FC } from "react";
 import { useMemo } from "react";
-import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
+import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
 import { getRouteApi } from "@tanstack/react-router";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Vote } from "lucide-react";
 
 import { useFetchVoteDetail } from "@/services/governance";
 import type { GovernanceVote } from "@/types/governanceTypes";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { VoteDetailCard } from "@/components/governance/vote/VoteDetailCard";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";

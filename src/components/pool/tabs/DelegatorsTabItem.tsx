@@ -1,6 +1,6 @@
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import PoolDelegatorsTable from "../PoolDelegatorsTable";
 import { PoolMigrationsTable } from "../PoolMigrationsTable";
 import { PoolStructureTable } from "../PoolStructureTable";
@@ -8,7 +8,7 @@ import { PoolStructureTable } from "../PoolStructureTable";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useFetchPoolDelegators } from "@/services/pools";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { usePoolDelegatorsTableStore } from "@/stores/tables/poolDelegatorsTableStore";
 import { getRouteApi, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";

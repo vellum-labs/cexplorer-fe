@@ -2,9 +2,10 @@ import { DrepHashCell } from "@/components/drep/DrepHashCell";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { Modal } from "@vellumlabs/cexplorer-sdk";
-import SpinningLoader from "@/components/global/SpinningLoader";
-import GlobalTable from "@/components/table/GlobalTable";
-import PoolCell from "@/components/table/PoolCell";
+import { SpinningLoader } from "@vellumlabs/cexplorer-sdk";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import {
   BreadcrumbRaw,
   BreadcrumbItem,
@@ -113,7 +114,10 @@ export const AdminGroupDetailPage = () => {
       title: "Name",
       render: item => {
         return item.type === "pool" ? (
-          <PoolCell poolInfo={{ id: item.ident, meta: null }} />
+          <PoolCell
+            poolInfo={{ id: item.ident, meta: null }}
+            poolImageUrl={generateImageUrl(item.ident, "ico", "pool")}
+          />
         ) : (
           <DrepHashCell view={item.ident} />
         );

@@ -2,11 +2,12 @@ import type { PoolBlock } from "@/types/analyticsTypes";
 import type { PoolBlockTableColumns, TableColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
-import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
+import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 import { Dropdown } from "@vellumlabs/cexplorer-sdk";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import PoolCell from "@/components/table/PoolCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { CircleAlert } from "lucide-react";
 
 import { useMiscConst } from "@/hooks/useMiscConst";
@@ -17,7 +18,7 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useCallback, useEffect, useState } from "react";
 
 import { Button } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { poolIssuesMissedBlocksTableOptions } from "@/constants/tables/poolIssuesMissedBlocksTableOptions";
 
 export const PoolIssuesMissedBlocks: FC = () => {
@@ -108,6 +109,7 @@ export const PoolIssuesMissedBlocks: FC = () => {
             id: item.pool_id,
             meta: item.pool.meta,
           }}
+          poolImageUrl={generateImageUrl(item.pool_id, "ico", "pool")}
         />
       ),
       title: "Pool",

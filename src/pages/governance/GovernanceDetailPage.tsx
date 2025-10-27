@@ -1,7 +1,7 @@
 import type { FC } from "react";
-import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
+import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
 import { GovernanceDetailMetadataTab } from "@/components/governance/tabs/GovernanceDetailMetadataTab";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { GovernanceDetailOverview } from "@/components/governance/GovernanceDetailOverview";
 import { GovernanceDetailAboutTab } from "@/components/governance/tabs/GovernanceDetailAboutTab";
 import { GovernanceDetailNotVotedTab } from "@/components/governance/tabs/GovernanceDetailNotVotedTab";
@@ -11,7 +11,7 @@ import { useFetchGovernanceActionDetail } from "@/services/governance";
 
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
-import { JsonDisplay } from "@/components/global/JsonDisplay";
+import { JsonDisplay } from "@vellumlabs/cexplorer-sdk";
 
 export const GovernanceDetailPage: FC = () => {
   const { id } = useParams({

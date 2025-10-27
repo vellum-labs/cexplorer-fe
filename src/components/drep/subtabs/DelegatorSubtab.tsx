@@ -6,14 +6,14 @@ import type {
 import type { FC } from "react";
 
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import { MinMaxRange } from "@/components/global/MinMaxRange";
+import { MinMaxRange } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchDrepDelegator } from "@/services/drep";
 import { useFetchMiscBasic } from "@/services/misc";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useDrepDelegatorTableStore } from "@/stores/tables/drepDelegatorTableStore";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";

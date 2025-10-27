@@ -2,7 +2,7 @@ import type { WidgetDataTypes, WidgetTypes } from "@/types/widgetTypes";
 import type { FC } from "react";
 
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import { OverviewCard } from "@/components/global/cards/OverviewCard";
+import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
 
 import { useEffect, useState } from "react";

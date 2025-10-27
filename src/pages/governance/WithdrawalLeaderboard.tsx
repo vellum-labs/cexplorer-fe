@@ -7,7 +7,7 @@ import SortBy from "@/components/ui/sortBy";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { FileText, Users } from "lucide-react";
 import { VotingTable } from "@/components/gov/drepVote/VotingTable";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { useVotingTableStore } from "@/stores/tables/votingTableTableStore";
 
 type SelectItemsType = "Voting power (ASC)" | "Voting power (DESC)";

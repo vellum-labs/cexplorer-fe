@@ -4,7 +4,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@vellumlabs/cexplorer-sdk";
 import { colors } from "@/constants/colors";
 import CexLogo from "@/resources/images/cexLogo.svg";
 import { useFetchMiscApi } from "@/services/misc";

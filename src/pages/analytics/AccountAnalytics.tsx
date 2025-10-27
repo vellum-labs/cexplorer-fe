@@ -1,7 +1,7 @@
 import { AccounntTopAddressesTab } from "@/components/analytics/account/tabs/AccounntTopAddressesTab";
 import { AccountTopStakingTab } from "@/components/analytics/account/tabs/AccountTopStakingTab";
 import { AccountWalletActivityTab } from "@/components/analytics/account/tabs/AccountWalletActivityTab";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import type { FC } from "react";
 
 import { WealthComposition } from "@/components/analytics/account/tabs/WealthComposition";

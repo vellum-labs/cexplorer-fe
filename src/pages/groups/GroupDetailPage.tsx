@@ -1,16 +1,17 @@
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { MetadataCell } from "@/components/metadata/MetadataCell";
 import { PoolListEchart } from "@/components/pool/PoolListEchart";
 import RoaDiffArrow from "@/components/pool/RoaDiffArrow";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
-import PoolCell from "@/components/table/PoolCell";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import { GroupDetailCharts } from "@/components/groups/GroupDetailCharts";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { GroupDetailDRepCharts } from "@/components/groups/GroupDetailDRepCharts";
 import {
   BreadcrumbRaw,
@@ -112,6 +113,11 @@ export const GroupDetailPage = () => {
               id: item?.info[0]?.pool_id,
               meta: item?.info[0]?.pool_name,
             }}
+            poolImageUrl={generateImageUrl(
+              item?.info[0]?.pool_id,
+              "ico",
+              "pool",
+            )}
           />
         );
       },
@@ -582,23 +588,11 @@ export const GroupDetailPage = () => {
   return (
     <>
       <Helmet>
-        <meta charSet='utf-8' />
         {
           <title>
             {metadata.groupDetail.title.replace("%group%", name ?? "")}
           </title>
         }
-        <meta
-          name='description'
-          content={metadata.groupDetail.description.replace(
-            "%group%",
-            name ?? "",
-          )}
-        />
-        <meta
-          name='keywords'
-          content={metadata.groupDetail.keywords.replace("%group%", name ?? "")}
-        />
       </Helmet>
       <main className='flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col justify-center'>
