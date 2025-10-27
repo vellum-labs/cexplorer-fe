@@ -1,4 +1,4 @@
-import type { ReactNode } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import type { MouseEventHandler, RefObject } from "react";
 
 interface TableColumn<T> {
@@ -117,6 +117,7 @@ export type PoolBlocksColumns = {
   hash: boolean;
   size: boolean;
   protocol: boolean;
+  cert_counter: boolean;
 };
 
 export interface PoolPefomanceColumns {
