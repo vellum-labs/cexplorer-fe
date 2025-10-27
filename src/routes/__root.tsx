@@ -7,7 +7,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
-import { Button } from "@vellumlabs/cexplorer-sdk";
+import { Button, SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import Footer from "../components/layouts/Footer";
 
 import { SwReadyModal } from "@/components/global/modals/SwReadyModal";
@@ -27,6 +27,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 const RootComponent = () => {
   const { notFound, setNotFound } = useNotFound();
   const location = useLocation();
+  const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
   const { location: locationState } = useRouterState();
 
@@ -135,7 +136,12 @@ const RootComponent = () => {
       </Helmet>
       {randomTopAd && (
         <div className='flex min-h-[75px] w-full items-center justify-center bg-background'>
-          <div className='h-full w-full max-w-desktop md:px-desktop'>
+          <div
+            className='h-full w-full max-w-desktop cursor-pointer md:px-desktop'
+            onClick={() => {
+              setClickedUrl(randomTopAd.data.link);
+            }}
+          >
             {randomTopAd.data.img ? (
               <img
                 src={randomTopAd.data.img}
@@ -171,6 +177,9 @@ const RootComponent = () => {
       <Footer />
       {updateReady && <SwReadyModal firstInstall={isFirstInstall} />}
       <VersionWatcher />
+      {clickedUrl && (
+        <SafetyLinkModal url={clickedUrl} onClose={() => setClickedUrl(null)} />
+      )}
       {/* <TanStackRouterDevtools /> */}
     </>
   );
