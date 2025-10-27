@@ -28,12 +28,6 @@ interface HomepageAdsProps {
 export const HomepageAds: FC<HomepageAdsProps> = ({ miscBasicAds }) => {
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
-  const HOMEPAGE_ADS_TYPE = "header_featured";
-
-  const homepageAds = miscBasicAds.filter(
-    item => item.type === HOMEPAGE_ADS_TYPE,
-  );
-
   return (
     <div className='flex h-full w-full items-center overflow-hidden rounded-m'>
       <Carousel
@@ -45,7 +39,7 @@ export const HomepageAds: FC<HomepageAdsProps> = ({ miscBasicAds }) => {
           wrapperClassName='w-full h-full !-mx-0 !-my-0 !p-0'
           className='-ml-0 flex h-full w-full items-stretch overflow-visible'
         >
-          {homepageAds.map(({ data: { img, title, text, link } }) => (
+          {miscBasicAds.map(({ data: { img, title, text, link } }) => (
             <CarouselItem
               className='flex h-full w-full !basis-full cursor-pointer items-center justify-center bg-cardBg !pl-0'
               onClick={() => {
@@ -53,11 +47,7 @@ export const HomepageAds: FC<HomepageAdsProps> = ({ miscBasicAds }) => {
               }}
             >
               {img ? (
-                <img
-                  src={img}
-                  alt={homepageAds[1].data.title}
-                  className='h-full w-full'
-                />
+                <img src={img} alt={title} className='h-full w-full' />
               ) : (
                 <div className='flex flex-col items-center p-1'>
                   <h3>{title}</h3>

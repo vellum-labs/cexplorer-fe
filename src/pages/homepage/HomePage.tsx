@@ -26,6 +26,12 @@ export const Homepage: FC = () => {
       ? miscBasic?.data?.data?.ads
       : false;
 
+  const HOMEPAGE_ADS_TYPE = "header_featured";
+
+  const homepageAds = miscBasicAds
+    ? miscBasicAds.filter(item => item.type === HOMEPAGE_ADS_TYPE)
+    : undefined;
+
   return (
     <>
       <PageBase
@@ -33,9 +39,9 @@ export const Homepage: FC = () => {
         metadataTitle='homepage'
         isHomepage
         homepageAd={
-          miscBasicAds ? (
+          homepageAds ? (
             <HomepageAds
-              miscBasicAds={miscBasicAds.sort(() => Math.random() - 0.5)}
+              miscBasicAds={homepageAds.sort(() => Math.random() - 0.5)}
             />
           ) : undefined
         }
