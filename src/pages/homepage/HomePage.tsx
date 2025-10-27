@@ -6,45 +6,31 @@ import { HomepageOverview } from "@/components/homepage/HomepageOverview";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { HomepageCustomize } from "@/components/homepage/HomepageCustomize";
 import { HomepageModal } from "@/components/homepage/HomepageModal";
-
-import { useLocation } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { HomepageAds } from "@/components/homepage/HomepageAds";
 
 import { useHomepageStore } from "@/stores/homepageStore";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useFetchMiscBasic } from "@/services/misc";
 
 export const Homepage: FC = () => {
   const { handleCustomize, addWidget, customize } = useHomepageStore();
-  const location = useLocation();
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    const configScript = document.createElement("script");
+  const miscBasic = useFetchMiscBasic();
 
-    script.src = "https://i.jamonbread.io/host/embed.js";
+  const miscBasicAds =
+    !miscBasic.isLoading &&
+    miscBasic?.data &&
+    miscBasic?.data?.data?.ads &&
+    Array.isArray(miscBasic?.data?.data?.ads) &&
+    miscBasic?.data?.data?.ads.length > 0
+      ? miscBasic?.data?.data?.ads
+      : false;
 
-    configScript.text = `
-        window.jamConfig = {
-          affilCode : "",
-          theme: "dark",
-          logoUrl: "",
-          logoSize: "30px",
-          projectName: "",
-          nameFontSize: "14px",
-          showPopup: true,
-          wallet : "",
-          alwaysDisplayButton: false,
-        };
-      `;
+  const HOMEPAGE_ADS_TYPE = "header_featured";
 
-    document.body.appendChild(configScript);
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(configScript);
-      document.body.removeChild(script);
-    };
-  }, [location.pathname]);
+  const homepageAds = miscBasicAds
+    ? miscBasicAds.filter(item => item.type === HOMEPAGE_ADS_TYPE)
+    : undefined;
 
   return (
     <>
@@ -52,6 +38,13 @@ export const Homepage: FC = () => {
         title='Explore Cardano blockchain'
         metadataTitle='homepage'
         isHomepage
+        homepageAd={
+          homepageAds ? (
+            <HomepageAds
+              miscBasicAds={homepageAds.sort(() => Math.random() - 0.5)}
+            />
+          ) : undefined
+        }
       >
         <section
           className={`flex w-full ${customize ? "select-none" : ""} flex-col items-center`}

@@ -22,6 +22,7 @@ import { useState } from "react";
 import { setGlobalAbortSignal } from "@/lib/handleFetch";
 import { abortControllers } from "@/lib/handleAbortController";
 import { NotFoundPage } from "@/pages/NotFoundPage";
+import { useFetchMiscBasic } from "@/services/misc";
 
 const RootComponent = () => {
   const { notFound, setNotFound } = useNotFound();
@@ -33,6 +34,27 @@ const RootComponent = () => {
   const { updateReady, isFirstInstall } = useGenerateSW();
 
   const [resetKey, setResetKey] = useState<number>(0);
+
+  const miscBasic = useFetchMiscBasic();
+
+  const miscBasicAds =
+    !miscBasic.isLoading &&
+    miscBasic?.data &&
+    miscBasic?.data?.data?.ads &&
+    Array.isArray(miscBasic?.data?.data?.ads) &&
+    miscBasic?.data?.data?.ads.length > 0
+      ? miscBasic?.data?.data?.ads
+      : false;
+
+  const TOP_ADS_TYPE = "top_featured";
+
+  const topAds = miscBasicAds
+    ? miscBasicAds.filter(item => item.type === TOP_ADS_TYPE)
+    : undefined;
+
+  const randomTopAd = topAds
+    ? topAds[Math.floor(Math.random() * topAds.length)]
+    : undefined;
 
   const prevLocationRef = useRef<{
     pathname: string;
@@ -111,6 +133,24 @@ const RootComponent = () => {
       <Helmet>
         <title>Cexplorer.io</title>
       </Helmet>
+      {randomTopAd && (
+        <div className='flex min-h-[75px] w-full items-center justify-center bg-background'>
+          <div className='h-full w-full max-w-desktop md:px-desktop'>
+            {randomTopAd.data.img ? (
+              <img
+                src={randomTopAd.data.img}
+                alt={randomTopAd.data.title}
+                className='h-[75px] w-full'
+              />
+            ) : (
+              <div className='flex flex-col items-center p-1'>
+                <h3>{randomTopAd.data.title}</h3>
+                <span>{randomTopAd.data.text}</span>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
       <ErrorBoundary key={resetKey}>
         <Navbar />
         {notFound ? (
