@@ -1,3 +1,0 @@
-# Cexplorer Frontend Documentation
-
-Hi!
