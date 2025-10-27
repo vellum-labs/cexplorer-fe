@@ -436,15 +436,6 @@ export const useBlockList = ({
       widthPx: 70,
     },
     {
-      key: "cert_counter",
-      render: item => (
-        <p className='text-right'>{item.op_cert_counter ?? "-"}</p>
-      ),
-      title: <p className='w-full text-right'>Cert No</p>,
-      visible: columnsVisibility.cert_counter,
-      widthPx: 70,
-    },
-    {
       key: "size",
       title: <p>Size</p>,
       render: item => (
@@ -472,6 +463,15 @@ export const useBlockList = ({
       },
       visible: columnsVisibility.size,
       widthPx: 90,
+    },
+    {
+      key: "cert_counter",
+      render: item => (
+        <p className='text-right'>{item.op_cert_counter ?? "-"}</p>
+      ),
+      title: <p className='w-full text-right'>Cert Count</p>,
+      visible: columnsVisibility.cert_counter,
+      widthPx: 70,
     },
   ];
 

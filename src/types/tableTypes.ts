@@ -109,6 +109,7 @@ export type PoolBlocksColumns = {
   hash: boolean;
   size: boolean;
   protocol: boolean;
+  cert_counter: boolean;
 };
 
 export interface PoolPefomanceColumns {
