@@ -8,18 +8,18 @@ import {
   type ActionTypes,
 } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
+import { TimeDateIndicator } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { Image } from "@/components/global/Image";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { Landmark, Route, User } from "lucide-react";
-import { GovernanceStatusBadge } from "@/components/global/badges/GovernanceStatusBadge";
+import { GovernanceStatusBadge } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import { VoteBadge } from "@/components/global/badges/VoteBadge";
-import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
+import { VoteBadge } from "@vellumlabs/cexplorer-sdk";
+import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 

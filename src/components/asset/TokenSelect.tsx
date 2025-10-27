@@ -9,16 +9,16 @@ import {
   CommandGroup,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "@vellumlabs/cexplorer-sdk";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@vellumlabs/cexplorer-sdk";
 import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import type { AddressAsset } from "@/types/addressTypes";
-import { encodeAssetName } from "@/utils/asset/encodeAssetName";
-import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
+import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";
+import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
 import {
   formatNumber,
   formatNumberWithSuffix,

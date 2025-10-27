@@ -3,14 +3,14 @@ import type { NewPoolsColumns, TableColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { Check, X } from "lucide-react";
 
 import { useFetchPoolsList } from "@/services/pools";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useNewPoolsListTableStore } from "@/stores/tables/newPoolsListTableStore";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";

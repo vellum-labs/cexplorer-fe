@@ -1,5 +1,5 @@
-import SpinningLoader from "@/components/global/SpinningLoader";
-import GlobalTable from "@/components/table/GlobalTable";
+import { SpinningLoader } from "@vellumlabs/cexplorer-sdk";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import {
   BreadcrumbRaw,
   BreadcrumbItem,
@@ -57,7 +57,6 @@ export const PagesAdminPage = () => {
   return (
     <div className='flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
       <Helmet>
-        <meta charSet='utf-8' />
         <title>Admin Pages | Cexplorer.io</title>
       </Helmet>
       <div className='flex w-full max-w-desktop flex-col items-center justify-center'>

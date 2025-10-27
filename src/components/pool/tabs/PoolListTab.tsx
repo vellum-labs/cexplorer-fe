@@ -2,19 +2,20 @@ import { useSearch } from "@tanstack/react-router";
 import { usePoolList } from "@/hooks/tables/usePoolList";
 import { usePoolsListTableStore } from "@/stores/tables/poolsListTableStore";
 import { useFetchTopMarginsWithDelegators } from "@/services/pools";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { poolsListTableOptions } from "@/constants/tables/poolsListTableOptions";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { WatchlistFilter } from "@/components/global/watchlist/WatchlistFilter";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { PlusIcon, X } from "lucide-react";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
-import { DisplayVoteModal } from "@/components/global/modals/DisplayVoteModal";
+import { DisplayVoteModal } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import type { PoolsListColumns } from "@/types/tableTypes";
+import { useFetchMiscSearch } from "@/services/misc";
 
 const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {
   const { page, sort, order } = useSearch({
@@ -219,6 +220,7 @@ const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {
         <DisplayVoteModal
           onClose={() => setDisplayVoteModal(false)}
           onDisplay={handleAddVoteFilter}
+          useFetchMiscSearch={useFetchMiscSearch}
         />
       )}
     </section>

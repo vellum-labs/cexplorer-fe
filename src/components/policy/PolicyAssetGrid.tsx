@@ -3,11 +3,11 @@ import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import type { FC } from "react";
 
 import { Link } from "@tanstack/react-router";
-import { Image } from "../global/Image";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
-import { encodeAssetName } from "@/utils/asset/encodeAssetName";
-import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
+import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";
+import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 

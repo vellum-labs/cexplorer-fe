@@ -1,8 +1,8 @@
 import type { useFetchAssetDetail } from "@/services/assets";
 import type { FC } from "react";
 
-import { OverviewCard } from "../global/cards/OverviewCard";
-import { Image } from "../global/Image";
+import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { WatchlistSection } from "../global/watchlist/WatchlistSection";
 
 import { alphabetWithNumbers } from "@/constants/alphabet";

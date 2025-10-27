@@ -1,5 +1,5 @@
 import type { AggregatedSwapData, DeFiOrder } from "@/types/tokenTypes";
-import { ADATokenName } from "@/constants/currencies";
+import { ADATokenName } from "@vellumlabs/cexplorer-sdk";
 
 export function aggregateSwapData(
   orders: DeFiOrder[],

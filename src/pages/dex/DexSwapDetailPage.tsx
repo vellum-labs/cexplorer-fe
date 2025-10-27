@@ -1,5 +1,5 @@
 import { useMemo, type FC } from "react";
-import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
+import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
 import { ConsolidatedDexSwapDetailCard } from "@/components/dex/ConsolidatedDexSwapDetailCard";
 
 import { useFetchMiscBasic } from "@/services/misc";

@@ -7,9 +7,9 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@vellumlabs/cexplorer-sdk";
 
-import { useLocaleStore } from "@/stores/localeStore";
+import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 
 import { locales } from "@/constants/locales";
 

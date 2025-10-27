@@ -4,8 +4,8 @@ import type { HardforkTableColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
 import HardforkPageTotalCountItem from "@/components/analytics/HardforkPageTotalCountItem";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
-import GlobalTable from "@/components/table/GlobalTable";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import ReactEcharts from "echarts-for-react";
 
 import { useFetchHardforks } from "@/services/analytics";
@@ -13,7 +13,7 @@ import { useHardforkTableStore } from "@/stores/tables/hardforkTableStore";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useState } from "react";
 
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { cn } from "@vellumlabs/cexplorer-sdk";
 import { countObjectNonEmptyValues } from "@/utils/countObjectNonEmptyValues";
 import { formatDate } from "@vellumlabs/cexplorer-sdk";

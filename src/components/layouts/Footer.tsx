@@ -2,16 +2,18 @@ import { donationAddress } from "@/constants/confVariables";
 import { footerLinks } from "@/constants/footerLinks";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
-import DiscordLogo from "../../resources/images/icons/discord.svg";
-import GithubLogo from "../../resources/images/icons/github.svg";
-import TelegramLogo from "../../resources/images/icons/telegram.svg";
-import TwitterLogo from "../../resources/images/icons/twitter.svg";
+import { DiscordLogo } from "@vellumlabs/cexplorer-sdk";
+import { GithubLogo } from "@vellumlabs/cexplorer-sdk";
+import { TelegramLogo } from "@vellumlabs/cexplorer-sdk";
+import { TwitterLogo } from "@vellumlabs/cexplorer-sdk";
 import { CoinPaprikaPartner } from "../../resources/images/partners/CoinPaprikaPartner";
 import { NufiPartner } from "../../resources/images/partners/NufiPartner";
 import YoroiPartner from "../../resources/images/partners/YoroiPartner.svg";
 import LinksColumn from "../footer/LinksColumn";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import MainLogo from "../global/MainLogo";
+import { MainLogo } from "@vellumlabs/cexplorer-sdk";
+
+import { configJSON } from "@/constants/conf";
 
 const Footer = () => {
   return (
@@ -20,7 +22,10 @@ const Footer = () => {
         <div className='flex w-full max-w-desktop flex-col p-mobile md:px-desktop md:py-mobile'>
           <section className='flex w-full flex-col gap-2 py-4 md:flex-row md:justify-between'>
             <div className='flex w-[250px] shrink-0 flex-col gap-3'>
-              <MainLogo className='-translate-x-[5px]' />
+              <MainLogo
+                className='-translate-x-[5px]'
+                network={configJSON.network}
+              />
               <p className='w-full text-text-sm text-grayTextPrimary'>
                 The oldest and most feature-rich Cardano explorer, serving you
                 since the Incentivized Testnet.

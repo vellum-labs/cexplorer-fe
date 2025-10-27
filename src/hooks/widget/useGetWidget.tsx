@@ -8,7 +8,7 @@ import type {
   PoolsListColumns,
   TxListTableColumns,
 } from "@/types/tableTypes";
-import type { OverviewList } from "@/components/global/cards/OverviewCard";
+import type { OverviewList } from "@vellumlabs/cexplorer-sdk";
 import type { ReactEChartsProps } from "@/lib/ReactCharts";
 import type { Dispatch, SetStateAction } from "react";
 import type { EpochAnalyticsResponseData } from "@/types/analyticsTypes";
@@ -21,7 +21,8 @@ import { WidgetTypes } from "@/types/widgetTypes";
 
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
 import AssetCell from "@/components/asset/AssetCell";
-import PoolCell from "@/components/table/PoolCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 
 import { useDrepList } from "@/hooks/tables/useDrepList";
 import { useTxList } from "../tables/useTxList";
@@ -782,6 +783,7 @@ const PoolDetailWidget = (detailAddr: string): useDetailWidget => {
           id: data.pool_id,
           meta: data.pool_name,
         }}
+        poolImageUrl={generateImageUrl(data.pool_id, "ico", "pool")}
         className='min-w-[100px] max-w-[200px]'
       />
     ) : (

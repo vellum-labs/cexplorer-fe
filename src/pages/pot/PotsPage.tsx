@@ -1,13 +1,13 @@
 import { EpochCell } from "@/components/epoch/EpochCell";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { HeaderBanner } from "@/components/global/HeaderBanner";
-import AdsCarousel from "@/components/global/ads/AdsCarousel";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
 import { adaPotsTableOptions } from "@/constants/tables/adaPotsTableOptions";
 import { useGraphColors } from "@/hooks/useGraphColors";
@@ -21,13 +21,13 @@ import ReactEcharts from "echarts-for-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import metadata from "../../../conf/metadata/en-metadata.json";
-import { webUrl } from "@/constants/confVariables";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 
 export const PotsPage = () => {
   const [
@@ -48,6 +48,8 @@ export const PotsPage = () => {
   } = useAdaPotsTableStore();
   const query = useFetchAdaPots();
   const count = query.data?.data.count ?? 0;
+
+  const miscBasicQuery = useFetchMiscBasic();
 
   const sortOptions = [
     {
@@ -159,26 +161,17 @@ export const PotsPage = () => {
 
   return (
     <>
-      <Helmet>
-        <meta charSet='utf-8' />
-        {<title>{metadata.adaPots.title}</title>}
-        <meta name='description' content={metadata.adaPots.description} />
-        <meta name='keywords' content={metadata.adaPots.keywords} />
-        <meta property='og:title' content={metadata.adaPots.title} />
-        <meta
-          property='og:description'
-          content={metadata.adaPots.description}
-        />
-        <meta property='og:type' content='website' />
-        <meta property='og:url' content={webUrl + location.pathname} />
-      </Helmet>
+      <Helmet>{<title>{metadata.adaPots.title}</title>}</Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center'>
         <HeaderBanner
           title='Pots'
           breadcrumbItems={[{ label: "Pots" }]}
           subTitle
         />
-        <AdsCarousel />
+        <AdsCarousel
+          generateImageUrl={generateImageUrl}
+          miscBasicQuery={miscBasicQuery}
+        />
         <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
           <div className='mb-1 ml-auto flex items-center'>
             <span className='mr-1 text-text-sm text-grayTextPrimary'>

@@ -3,7 +3,7 @@ import { EpochInfo } from "@/components/epoch/EpochInfo";
 import { EpochStats } from "@/components/epoch/EpochStats";
 import EpochBlockchainGraph from "@/components/epoch/graphs/EpochBlockchainGraph";
 import { EpochAnalyticsTabItem } from "@/components/epoch/tabs/EpochAnalyticsTabItem";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { EpochsTabItem } from "../../components/epoch/tabs/EpochsTabItem";
 

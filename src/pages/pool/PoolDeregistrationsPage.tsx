@@ -1,12 +1,13 @@
 import { BlockCell } from "@/components/blocks/BlockCell";
 import { EpochCell } from "@/components/epoch/EpochCell";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
-import GlobalTable from "@/components/table/GlobalTable";
-import PoolCell from "@/components/table/PoolCell";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { HashCell } from "@/components/tx/HashCell";
 import { poolDeregistrationsTableOptions } from "@/constants/tables/poolDeregistrationsOptions";
 import { useFetchPoolDeregistrations } from "@/services/tx";
@@ -78,6 +79,7 @@ export const PoolDeregistrationsPage = () => {
             id: item.data.view,
             meta: item.data.meta,
           }}
+          poolImageUrl={generateImageUrl(item.data.view, "ico", "pool")}
         />
       ),
       jsonFormat: item => {

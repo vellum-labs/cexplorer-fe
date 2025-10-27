@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { useFetchAssetDetail } from "@/services/assets";
-import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
+import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
 
 interface AssetTickerProps {

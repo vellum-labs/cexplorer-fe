@@ -2,9 +2,9 @@ import type { AddressAsset } from "@/types/addressTypes";
 import { useEffect, type FC, type ReactNode } from "react";
 
 import { Switch } from "@vellumlabs/cexplorer-sdk";
-import Tabs from "@/components/global/Tabs";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { AddressAssetTable } from "../AddressAssetTable";
 
 import { useAddressDetailAssetTableStore } from "@/stores/tables/addressDetailAssetTableStore";
@@ -13,7 +13,7 @@ import { addressDetailAssetTableOptions } from "@/constants/tables/addressDetail
 import type { useFetchAddressDetail } from "@/services/address";
 import type { useFetchStakeDetail } from "@/services/stake";
 import type { AddressDetailAssetTableOptions } from "@/types/tableTypes";
-import { getAssetFingerprint } from "@/utils/asset/getAssetFingerprint";
+import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { configJSON } from "@/constants/conf";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";

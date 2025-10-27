@@ -1,8 +1,8 @@
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { Modal } from "@vellumlabs/cexplorer-sdk";
-import SpinningLoader from "@/components/global/SpinningLoader";
-import GlobalTable from "@/components/table/GlobalTable";
+import { SpinningLoader } from "@vellumlabs/cexplorer-sdk";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import {
   BreadcrumbRaw,
   BreadcrumbItem,
@@ -116,7 +116,6 @@ export const ArticlesAdminPage = () => {
       )}
       <div className='flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
         <Helmet>
-          <meta charSet='utf-8' />
           <title>Admin articles | Cexplorer.io</title>
         </Helmet>
         <div className='flex w-full max-w-desktop flex-col items-center justify-center'>

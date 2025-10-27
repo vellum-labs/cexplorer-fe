@@ -1,30 +1,32 @@
 import type { AddressDetailData } from "@/types/addressTypes";
 import type { FC } from "react";
 
-import { OverviewCard } from "../global/cards/OverviewCard";
-import { TimeDateIndicator } from "../global/TimeDateIndicator";
+import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
+import { TimeDateIndicator } from "@vellumlabs/cexplorer-sdk";
 
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import type { PoolInfo } from "@/types/poolTypes";
 import { Address } from "@/utils/address/getStakeAddress";
-import { parseShelleyAddress } from "@/utils/address/parseShelleyAddress";
+import { parseShelleyAddress } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { Link } from "@tanstack/react-router";
 import { TokenSelectCombobox } from "../asset/TokenSelect";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import AdaHandleBadge from "../global/badges/AdaHandleBadge";
-import { AddressTypeInitialsBadge } from "../global/badges/AddressTypeInitialsBadge";
+import { AdaHandleBadge } from "@vellumlabs/cexplorer-sdk";
+import { AddressTypeInitialsBadge } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import { TotalSumWithRates } from "../global/TotalSumWithRates";
+import { TotalSumWithRates } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
-import PoolCell from "../table/PoolCell";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import { AddCustomLabel } from "./AddCustomLabel";
 import AddressCell from "./AddressCell";
-import { AttributeDropdown } from "../global/AttributeDropdown";
+import { AttributeDropdown } from "@vellumlabs/cexplorer-sdk";
 import { ChevronRight } from "lucide-react";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 
 interface AddressDetailOverviewProps {
   data: AddressDetailData[];
@@ -40,16 +42,24 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
   const stakeAddr = Address.from(address).rewardAddress;
   const tokenMarket = configJSON.market[0].token[0].active;
   const nftMarket = configJSON.market[0].nft[0].active;
+  const policyId = configJSON.integration[0].adahandle[0].policy;
   const curr = useGetMarketCurrency();
   const isStaking = data[0]?.stake?.active_pool || data[0]?.stake?.live_pool;
   const isRecync = data[0]?.address === null;
   const rawAddress = Address.toHexString(Address.from(address).raw);
+  const { currency } = useCurrencyStore();
 
   const overviewList = [
     data[0]?.adahandle
       ? {
           label: "Handle",
-          value: <AdaHandleBadge hex={data[0].adahandle.hex} link />,
+          value: (
+            <AdaHandleBadge
+              hex={data[0].adahandle.hex}
+              link
+              policyId={policyId}
+            />
+          ),
         }
       : undefined,
     {
@@ -83,6 +93,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
         <TotalSumWithRates
           sum={lovelaceToAdaWithRates(data?.[0]?.balance, curr)}
           ada={data?.[0]?.balance}
+          currency={currency}
         />
       ),
     },
@@ -130,6 +141,12 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
                 (data[0]?.stake?.active_pool ??
                   data[0]?.stake?.live_pool) as PoolInfo
               }
+              poolImageUrl={generateImageUrl(
+                (data[0]?.stake?.active_pool?.id ??
+                  data[0]?.stake?.live_pool?.id) as string,
+                "ico",
+                "pool",
+              )}
             />
           ) : (
             "Not delegated"

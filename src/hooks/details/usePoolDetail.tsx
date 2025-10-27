@@ -1,4 +1,4 @@
-import type { OverviewList } from "@/components/global/cards/OverviewCard";
+import type { OverviewList } from "@vellumlabs/cexplorer-sdk";
 import type {
   PoolDetailResponse,
   PoolDetailResponseData,
@@ -20,8 +20,8 @@ import { formatWebsiteUrl } from "@/utils/format/formatWebsiteUrl";
 import { poolRewardsRoaDiff } from "@/utils/poolRewardsRoaDiff";
 import { format, parseISO } from "date-fns";
 import { useState } from "react";
-import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
-import { DelegatorsLabel } from "@/components/global/DelegatorsLabel";
+import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
+import { DelegatorsLabel } from "@vellumlabs/cexplorer-sdk";
 import { buildSocialIcons } from "@/utils/buildSocialIcons";
 
 interface UsePoolDetailArgs {
@@ -124,7 +124,7 @@ export const usePoolDetail = ({
           </a>
           {linkModal && (
             <SafetyLinkModal
-              url={data?.pool_name.homepage}
+              url={data?.pool_name.homepage ?? ""}
               onClose={() => setLinkModal(false)}
             />
           )}
