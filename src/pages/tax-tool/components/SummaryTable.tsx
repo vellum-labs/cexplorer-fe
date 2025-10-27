@@ -2,10 +2,9 @@ import type { FC } from "react";
 import type { Currencies } from "@/types/storeTypes";
 import { Copy, Tooltip, formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
-import GlobalTable from "@/components/table/GlobalTable";
-import type { Column } from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { useMemo } from "react";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import type { TableColumns } from "@/types/tableTypes";
 import { useTaxToolSummaryTableStore } from "@/stores/tables/taxToolSummaryTableStore";
@@ -52,7 +51,7 @@ export const SummaryTable: FC<SummaryTableProps> = ({
 
   const query = useStaticQuery(data);
 
-  const columns: Column<SummaryData>[] = useMemo(
+  const columns = useMemo(
     () => [
       {
         key: "period",

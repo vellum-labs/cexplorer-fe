@@ -3,18 +3,20 @@ import type { ScriptDetailResponse } from "@/types/scriptTypes";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { FileBarChart, LineChart } from "lucide-react";
-import AdsCarousel from "../global/ads/AdsCarousel";
-import { Badge } from "../global/badges/Badge";
-import { LabelBadge } from "../global/badges/LabelBadge";
-import { PurposeBadge } from "../global/badges/PurposeBadge";
+import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
+import { LabelBadge } from "@vellumlabs/cexplorer-sdk";
+import { PurposeBadge } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
-import { OverviewCard } from "../global/cards/OverviewCard";
-import { OverviewStatCard } from "../global/cards/OverviewStatCard";
+import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
+import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { TextDisplay } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "../tx/HashCell";
-import { AttributeDropdown } from "../global/AttributeDropdown";
+import { AttributeDropdown } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
+import { useFetchMiscBasic } from "@/services/misc";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 
 interface Props {
   query: UseQueryResult<ScriptDetailResponse>;
@@ -22,6 +24,8 @@ interface Props {
 
 export const ScriptDetailOverview = ({ query }: Props) => {
   const data = query.data?.data;
+
+  const miscBasicQuery = useFetchMiscBasic();
 
   const overviewList = data
     ? [
@@ -171,7 +175,12 @@ export const ScriptDetailOverview = ({ query }: Props) => {
               }`}
               className='max-h-[140px]'
             />
-            <AdsCarousel singleItem className='p-0 md:p-0' />
+            <AdsCarousel
+              miscBasicQuery={miscBasicQuery}
+              generateImageUrl={generateImageUrl}
+              singleItem
+              className='p-0 md:p-0'
+            />
           </section>
         </>
       )}

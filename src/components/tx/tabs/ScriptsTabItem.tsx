@@ -1,4 +1,4 @@
-import { JsonDisplay } from "@/components/global/JsonDisplay";
+import { JsonDisplay } from "@vellumlabs/cexplorer-sdk";
 import { TextDisplay } from "@vellumlabs/cexplorer-sdk";
 import { ScriptCell } from "@/components/script/ScriptCell";
 import { useFetchTxDetail } from "@/services/tx";

@@ -19,17 +19,20 @@ import { Link, getRouteApi, useNavigate } from "@tanstack/react-router";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { getConfirmations } from "@/utils/getConfirmations";
 
-import { MintedByCard } from "@/components/global/cards/MintedByCard";
-import type { OverviewList } from "@/components/global/cards/OverviewCard";
-import { OverviewCard } from "@/components/global/cards/OverviewCard";
-import { SizeCard } from "@/components/global/cards/SizeCard";
-import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
-import { TimeDateIndicator } from "@/components/global/TimeDateIndicator";
-import { TotalSumWithRates } from "@/components/global/TotalSumWithRates";
+import { MintedByCard } from "@vellumlabs/cexplorer-sdk";
+import type { OverviewList } from "@vellumlabs/cexplorer-sdk";
+import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
+import { SizeCard } from "@vellumlabs/cexplorer-sdk";
+import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
+import { TimeDateIndicator } from "@vellumlabs/cexplorer-sdk";
+import { TotalSumWithRates } from "@vellumlabs/cexplorer-sdk";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useMiscConst } from "@/hooks/useMiscConst";
+import { generateImageUrl } from "@/utils/generateImageUrl";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 
 const BlockDetailPage: FC = () => {
   const route = getRouteApi("/block/$hash");
@@ -40,6 +43,8 @@ const BlockDetailPage: FC = () => {
 
   const navigate = useNavigate();
 
+  const { currency } = useCurrencyStore();
+
   const { data: searchData } = useFetchMiscSearch(
     blockHeight ? String(blockHeight) : undefined,
     "block",
@@ -49,6 +54,8 @@ const BlockDetailPage: FC = () => {
   const { data } = blockDetail;
   const { data: miscBasic } = useFetchMiscBasic(true);
   const curr = useGetMarketCurrency();
+
+  const miscData = useMiscConst(miscBasic?.data.version.const);
 
   const confirmations = getConfirmations(
     miscBasic?.data.block.block_no,
@@ -217,6 +224,7 @@ const BlockDetailPage: FC = () => {
           ada={
             data?.txs?.map(item => item.out_sum).reduce((a, b) => a + b, 0) ?? 0
           }
+          currency={currency}
         />
       ),
     },
@@ -226,12 +234,19 @@ const BlockDetailPage: FC = () => {
         <TotalSumWithRates
           sum={feesum}
           ada={data?.txs?.map(item => item.fee).reduce((a, b) => a + b, 0) ?? 0}
+          currency={currency}
         />
       ),
     },
     {
       label: "Total Rewards",
-      value: <TotalSumWithRates sum={rewards} ada={data?.rewards ?? 0} />,
+      value: (
+        <TotalSumWithRates
+          sum={rewards}
+          ada={data?.rewards ?? 0}
+          currency={currency}
+        />
+      ),
     },
   ];
 
@@ -338,6 +353,8 @@ const BlockDetailPage: FC = () => {
                   protoMajor={data?.proto_major}
                   protoMinor={data?.proto_minor}
                   isGenesisBlock={data?.epoch_no === null}
+                  generateImageUrl={generateImageUrl}
+                  miscData={miscData}
                 />
                 <SizeCard
                   size={data.size}

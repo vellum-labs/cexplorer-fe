@@ -2,7 +2,7 @@ import type { CompareWallet } from "@/types/walletTypes";
 import type { FC } from "react";
 
 import { HeaderBanner } from "@/components/global/HeaderBanner";
-import AdsCarousel from "@/components/global/ads/AdsCarousel";
+import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { WalletRow } from "@/components/wallet/WalletRow";
 import Android from "@/resources/images/platforms/android.svg";
@@ -27,16 +27,18 @@ import { useCompareWalletsStore } from "@/stores/tables/compareWalletsStore";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useState } from "react";
 
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 
-import { Select, SelectTrigger } from "@/components/ui/select";
-import { webUrl } from "@/constants/confVariables";
-import { useLocation } from "@tanstack/react-router";
+import { Select, SelectTrigger } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
+import { useFetchMiscBasic } from "@/services/misc";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 
 export const WalletPage: FC = () => {
   const { theme } = useThemeStore();
   const { data, isLoading } = useFetchCompareWallets();
+
+  const miscBasicQuery = useFetchMiscBasic();
 
   const [compareWalletOptions, setCompareWalletOptions] = useState<
     {
@@ -45,11 +47,8 @@ export const WalletPage: FC = () => {
       onClick: () => void;
     }[]
   >([]);
-  const description = data?.data.description;
-  const keywords = data?.data.keywords;
   const name = data?.data.name;
   const [walletsData, setWalletsData] = useState<CompareWallet[]>([]);
-  const location = useLocation();
 
   const { supportedWallets } = configJSON;
 
@@ -698,28 +697,17 @@ export const WalletPage: FC = () => {
 
   return (
     <>
-      <Helmet>
-        <meta charSet='utf-8' />
-        {description && <meta name='description' content={description} />}
-        {keywords && <meta name='keywords' content={keywords} />}
-        {name && <title>{name} | Cexplorer.io</title>}
-
-        {name && (
-          <meta property='og:title' content={`${name} | Cexplorer.io`} />
-        )}
-        {description && (
-          <meta property='og:description' content={description} />
-        )}
-        <meta property='og:url' content={webUrl + location.pathname} />
-        <meta property='og:type' content='website' />
-      </Helmet>
+      <Helmet>{name && <title>{name} | Cexplorer.io</title>}</Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center'>
         <HeaderBanner
           title='Compare Cardano Wallets'
           breadcrumbItems={[{ label: "Wallets" }]}
           subTitle='Explore and compare the unique features of various Cardano wallets to find the best fit for your needs.'
         />
-        <AdsCarousel />
+        <AdsCarousel
+          generateImageUrl={generateImageUrl}
+          miscBasicQuery={miscBasicQuery}
+        />
         <section className='flex w-full justify-center'>
           <div className='flex w-full max-w-desktop flex-col items-end gap-3 p-mobile md:p-desktop'>
             <div className='flex w-fit'>

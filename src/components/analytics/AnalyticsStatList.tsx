@@ -1,7 +1,7 @@
 import type { FC, ReactNode } from "react";
 
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
+import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 
 interface AnalyticsStatListProps {
   isLoading: boolean;

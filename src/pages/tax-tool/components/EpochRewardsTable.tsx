@@ -9,8 +9,7 @@ import {
   formatNumber,
 } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
-import GlobalTable from "@/components/table/GlobalTable";
-import type { Column } from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 import { Pagination } from "@vellumlabs/cexplorer-sdk";
@@ -22,11 +21,11 @@ import {
   type SetStateAction,
 } from "react";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import type { TableColumns } from "@/types/tableTypes";
 import { useTaxToolEpochRewardsTableStore } from "@/stores/tables/taxToolEpochRewardsTableStore";
-import { Badge } from "@/components/global/badges/Badge";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 
 interface EpochRewardsTableProps {
   query: UseQueryResult<any, unknown>;
@@ -139,7 +138,7 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
     [secondaryCurrency],
   );
 
-  const columns: Column<RewardItem>[] = useMemo(
+  const columns = useMemo(
     () => [
       {
         key: "epoch",

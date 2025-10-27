@@ -3,7 +3,7 @@ import type { FC } from "react";
 
 import { AddressInspectorRow } from "@/components/address/AddressInspectorRow";
 import { ActionTypes } from "@vellumlabs/cexplorer-sdk";
-import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
+import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";

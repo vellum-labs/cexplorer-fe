@@ -6,11 +6,11 @@ import { dexConfig } from "@/constants/dexConfig";
 
 import { Link } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import { Image } from "../global/Image";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
-import { formatSmallValueWithSub } from "@/utils/format/formatSmallValue";
-import { ADATokenName } from "@/constants/currencies";
+import { formatSmallValueWithSub } from "@vellumlabs/cexplorer-sdk";
+import { ADATokenName } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { AssetTicker } from "./AssetTicker";
 import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";

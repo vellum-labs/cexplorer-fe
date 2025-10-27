@@ -1,4 +1,4 @@
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { GroupsCharts } from "@/components/groups/GroupsCharts";
 import { GroupsTable } from "@/components/groups/GroupsTable";
@@ -146,12 +146,7 @@ export const GroupsListPage = () => {
 
   return (
     <>
-      <Helmet>
-        <meta charSet='utf-8' />
-        {<title>{metadata.groupsList.title}</title>}
-        <meta name='description' content={metadata.groupsList.description} />
-        <meta name='keywords' content={metadata.groupsList.keywords} />
-      </Helmet>
+      <Helmet>{<title>{metadata.groupsList.title}</title>}</Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center'>
         <HeaderBanner
           title='Cardano Groups (Donuts)'

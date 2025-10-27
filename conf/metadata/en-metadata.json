@@ -338,5 +338,10 @@
     "title": "Governance Votes | Cexplorer.io",
     "description": "Browse and analyze on-chain governance votes on the Cardano blockchain. View proposals, voting results, and DRep participation details.",
     "keywords": "cardano, governance, votes, proposals, dreps, cexplorer"
+  },
+  "taxTool": {
+    "title": "Tax Tool | Cexplorer.io",
+    "description": "Calculate and track your Cardano staking rewards for tax purposes. View withdrawal history with real-time exchange rates in multiple currencies.",
+    "keywords": "cardano, tax tool, staking rewards, withdrawals, tax reporting, ADA rewards, cexplorer"
   }
 }

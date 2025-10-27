@@ -7,7 +7,7 @@ import type {
   DelegatorStructureColumnsState,
   DelegatorStructureItem,
 } from "./DelegatorStructureView";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { getAnimalRangeByName } from "@/utils/address/getAnimalRangeByName";

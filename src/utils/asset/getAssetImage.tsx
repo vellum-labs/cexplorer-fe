@@ -1,8 +1,8 @@
-import { Image } from "@/components/global/Image";
-import { ADATokenName } from "@/constants/currencies";
+import { Image } from "@vellumlabs/cexplorer-sdk";
+import { ADATokenName } from "@vellumlabs/cexplorer-sdk";
 import { alphabetWithNumbers } from "@/constants/alphabet";
-import { getAssetFingerprint } from "./getAssetFingerprint";
-import { encodeAssetName } from "./encodeAssetName";
+import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
+import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "../generateImageUrl";
 import AdaIcon from "@/resources/images/icons/ada.webp";
 
@@ -18,7 +18,7 @@ export const getAssetImage = (tokenName: string, isNft = false, size = 20) => {
       <img
         src={AdaIcon}
         alt='ADA'
-        className='rounded-max aspect-square shrink-0'
+        className='aspect-square shrink-0 rounded-max'
         height={size}
         width={size}
       />
@@ -33,7 +33,7 @@ export const getAssetImage = (tokenName: string, isNft = false, size = 20) => {
       type='asset'
       height={size}
       width={size}
-      className='rounded-max aspect-square shrink-0'
+      className='aspect-square shrink-0 rounded-max'
       src={generateImageUrl(
         isNft ? fingerprint : tokenName,
         "ico",

@@ -6,12 +6,13 @@ import type {
 import type { FC } from "react";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
-import GlobalTable from "@/components/table/GlobalTable";
-import PoolCell from "@/components/table/PoolCell";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 
 import { useFetchAnalyticsTopAddresses } from "@/services/analytics";
 import { useAccountTopAddressesTableStore } from "@/stores/tables/accountAnalyticsTopAddressesTableStore";
@@ -127,6 +128,7 @@ export const AccounntTopAddressesTab: FC = () => {
               id: item.deleg?.id,
               meta: item.deleg?.meta,
             }}
+            poolImageUrl={generateImageUrl(item.deleg?.id, "ico", "pool")}
           />
         );
       },

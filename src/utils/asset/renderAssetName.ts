@@ -1,6 +1,6 @@
 import type { TxAsset } from "@/types/assetsTypes";
-import { encodeAssetName } from "./encodeAssetName";
-import { getAssetFingerprint } from "./getAssetFingerprint";
+import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";
+import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
 
 interface AssetProps {
   name?: string;

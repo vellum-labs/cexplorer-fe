@@ -13,7 +13,6 @@ import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { CircleAlert } from "lucide-react";
 
 import metadata from "../../../conf/metadata/en-metadata.json";
-import { webUrl } from "@/constants/confVariables";
 
 export const StatusPage: FC = () => {
   const [internetSpeed, setInternetSpeed] = useState<number>();
@@ -102,14 +101,7 @@ export const StatusPage: FC = () => {
   return (
     <>
       <Helmet>
-        <meta charSet='utf-8' />
         <title>{metadata.status.title}</title>
-        <meta name='description' content={metadata.status.description} />
-        <meta name='keywords' content={metadata.status.keywords} />
-        <meta property='og:title' content={metadata.status.title} />
-        <meta property='og:description' content={metadata.status.description} />
-        <meta property='og:type' content='website' />
-        <meta property='og:url' content={webUrl + location.pathname} />
       </Helmet>
       <div className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
         <div className='flex w-full max-w-desktop flex-col items-center'>

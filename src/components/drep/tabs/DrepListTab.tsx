@@ -1,15 +1,13 @@
 import type { FilterKey } from "@/hooks/tables/useDrepList";
 import type { DrepListTableColumns } from "@/types/tableTypes";
-import { Helmet } from "react-helmet";
-import metadata from "../../../../conf/metadata/en-metadata.json";
 
 import { PlusIcon, X } from "lucide-react";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
-import GlobalTable from "@/components/table/GlobalTable";
-import { DisplayVoteModal } from "@/components/global/modals/DisplayVoteModal";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
+import { DisplayVoteModal } from "@vellumlabs/cexplorer-sdk";
 
 import { drepListTableOptions } from "@/constants/tables/drepListTableOptions";
 
@@ -20,6 +18,7 @@ import { useDrepList } from "@/hooks/tables/useDrepList";
 import { useDrepListTableStore } from "@/stores/tables/drepListTableStore";
 import { useSearch } from "@tanstack/react-router";
 import { Button } from "@vellumlabs/cexplorer-sdk";
+import { useFetchMiscSearch } from "@/services/misc";
 
 export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
   const { page, sort, order } = useSearch({
@@ -59,11 +58,6 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
 
   return (
     <>
-      <Helmet>
-        <meta charSet='utf-8' />
-        <meta name='description' content={metadata.drepList.description} />
-        <meta name='keywords' content={metadata.drepList.keywords} />
-      </Helmet>
       <div className='mb-1 flex w-full flex-col justify-between gap-1 min-[870px]:flex-row min-[870px]:items-center'>
         <div className='flex flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
           {!watchlist && (
@@ -201,6 +195,7 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
         <DisplayVoteModal
           onClose={() => setDisplayVoteModal(false)}
           onDisplay={handleAddVoteFilter}
+          useFetchMiscSearch={useFetchMiscSearch}
         />
       )}
     </>

@@ -7,11 +7,11 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@vellumlabs/cexplorer-sdk";
 
-import { useCurrencyStore } from "@/stores/currencyStore";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 
-import { currencies } from "@/constants/currencies";
+import { currencies } from "@vellumlabs/cexplorer-sdk";
 
 export const SettingsMobileItemCurrency: FC = () => {
   const { currency, setCurrency } = useCurrencyStore();

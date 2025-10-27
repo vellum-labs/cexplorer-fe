@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-import { OverviewCard } from "../global/cards/OverviewCard";
+import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 
 import type { PoolInfo } from "@/types/poolTypes";
 import type { StakeDetailData } from "@/types/stakeTypes";
@@ -9,12 +9,13 @@ import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { AddCustomLabel } from "../address/AddCustomLabel";
 import { TokenSelectCombobox } from "../asset/TokenSelect";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { TotalSumWithRates } from "../global/TotalSumWithRates";
-import AdaHandleBadge from "../global/badges/AdaHandleBadge";
-import { Badge } from "../global/badges/Badge";
+import { TotalSumWithRates } from "@vellumlabs/cexplorer-sdk";
+import { AdaHandleBadge } from "@vellumlabs/cexplorer-sdk";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import PoolCell from "../table/PoolCell";
-import { AttributeDropdown } from "../global/AttributeDropdown";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
+import { AttributeDropdown } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { ChevronRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
@@ -22,6 +23,7 @@ import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 
 interface AddressDetailOverviewProps {
   data: StakeDetailData | undefined;
@@ -36,7 +38,9 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
   const addrObj = Address.from(address);
   const rawAddress = Address.toHexString(addrObj.raw);
   const tokenMarket = configJSON.market[0].token[0].active;
+  const policyId = configJSON.integration[0].adahandle[0].policy;
   const { theme } = useThemeStore();
+  const { currency } = useCurrencyStore();
 
   const curr = useGetMarketCurrency();
 
@@ -55,7 +59,13 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
     data?.adahandle
       ? {
           label: "Handle",
-          value: <AdaHandleBadge hex={data?.adahandle?.hex} link />,
+          value: (
+            <AdaHandleBadge
+              hex={data?.adahandle?.hex}
+              link
+              policyId={policyId}
+            />
+          ),
         }
       : undefined,
     {
@@ -64,6 +74,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
         <TotalSumWithRates
           sum={totalBalanceSum}
           ada={data?.stake?.live.amount ?? 0}
+          currency={currency}
         />
       ),
     },
@@ -74,6 +85,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
         <TotalSumWithRates
           sum={adaBalanceSum}
           ada={data?.stake?.active?.amount ?? 0}
+          currency={currency}
         />
       ),
     },
@@ -111,6 +123,13 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
                   (data?.stake?.active?.deleg ??
                     data?.stake?.live?.deleg) as PoolInfo
                 }
+                poolImageUrl={generateImageUrl(
+                  data?.stake?.active?.deleg?.id ??
+                    data?.stake?.live?.deleg?.id ??
+                    "",
+                  "ico",
+                  "pool",
+                )}
               />
             </div>
           ),

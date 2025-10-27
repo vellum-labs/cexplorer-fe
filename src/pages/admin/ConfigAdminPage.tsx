@@ -12,7 +12,6 @@ export const ConfigAdminPage: FC = () => {
   return (
     <div className='flex min-h-minHeight flex-col gap-3 p-mobile md:p-desktop'>
       <Helmet>
-        <meta charSet='utf-8' />
         <title>Admin config | Cexplorer.io</title>
       </Helmet>
       <BreadcrumbRaw className='w-full'>

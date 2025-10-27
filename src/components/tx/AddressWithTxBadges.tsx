@@ -9,11 +9,13 @@ import {
   CreditCard,
 } from "lucide-react";
 import AddressCell from "../address/AddressCell";
-import ConstLabelBadge from "../global/badges/ConstLabelBadge";
+import { ConstLabelBadge } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import type { UtxoSearchMatchType } from "@/utils/tx/filterUtxoBySearch";
 import { useHashHoverStore } from "@/stores/hashHoverStore";
+import { useFetchMiscBasic } from "@/services/misc";
+import { useMiscConst } from "@/hooks/useMiscConst";
 
 interface Props {
   utxo: TxInfo;
@@ -29,6 +31,9 @@ export const AddressWithTxBadges = ({
   matchTypes = [],
 }: Props) => {
   const { hoveredHash, setHoveredHash } = useHashHoverStore();
+
+  const { data: basicData } = useFetchMiscBasic();
+  const miscConst = useMiscConst(basicData?.data.version.const);
 
   const isAddressHovered =
     hoveredHash === utxo.payment_addr_bech32 && !!utxo.payment_addr_bech32;
@@ -46,7 +51,11 @@ export const AddressWithTxBadges = ({
 
   return (
     <div className='mb-1 flex items-center gap-1'>
-      <ConstLabelBadge type='sc' name={utxo.reference_script?.hash} />
+      <ConstLabelBadge
+        type='sc'
+        name={utxo.reference_script?.hash}
+        miscConst={miscConst}
+      />
       <div
         onMouseEnter={() =>
           utxo.payment_addr_bech32 && setHoveredHash(utxo.payment_addr_bech32)

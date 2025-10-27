@@ -3,7 +3,7 @@ import type { FC, ReactNode } from "react";
 import { Children, cloneElement, isValidElement } from "react";
 
 import { Download } from "lucide-react";
-import { FeatureModal } from "../global/modals/FeatureModal";
+import { FeatureModal } from "@vellumlabs/cexplorer-sdk";
 import ConnectWalletModal from "../wallet/ConnectWalletModal";
 
 import { useFetchUserInfo } from "@/services/user";
@@ -13,7 +13,7 @@ import { useCallback, useRef, useState } from "react";
 
 import { colors } from "@/constants/colors";
 import { type GraphSortData } from "@/types/graphTypes";
-import { convertJSONToCSV } from "@/utils/convertJSONToCSV";
+import { convertJSONToCSV } from "@vellumlabs/cexplorer-sdk";
 import { toPng } from "html-to-image";
 import { GraphEpochSort } from "../global/graphs/GraphEpochSort";
 import { ExportGraphModal } from "./ExportGraphModal";
@@ -131,6 +131,8 @@ export const AnalyticsGraph: FC<Props> = ({
         <FeatureModal
           onClose={() => setShowFeatureModal(false)}
           setShowConnectWallet={setShowConnectWallet}
+          address={address}
+          walletApi={walletApi}
         />
       )}
       {showConnectWallet && (

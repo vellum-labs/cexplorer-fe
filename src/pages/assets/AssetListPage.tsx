@@ -1,10 +1,10 @@
 import type { AssetListTableColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
-import Tabs from "@/components/global/Tabs";
-import GlobalTable from "@/components/table/GlobalTable";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { useAssetListTableStore } from "@/stores/tables/assetListTableStore";
 import { useSearch } from "@tanstack/react-router";

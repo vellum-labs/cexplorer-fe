@@ -2,7 +2,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Link } from "@tanstack/react-router";
 import { useState, type FC } from "react";
-import { SafetyLinkModal } from "@/components/global/modals/SafetyLinkModal";
+import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import { markdownComponents } from "@/constants/markdows";
 
 interface DrepDetailAboutTabProps {
@@ -25,7 +25,7 @@ export const DrepDetailAboutTab: FC<DrepDetailAboutTabProps> = ({ data }) => {
         return (
           <div
             key={key + "-" + index}
-            className={`flex ${index % 2 !== 0 ? "bg-darker" : ""} flex-col gap-3 border-x border-t border-border px-3 py-[26px] text-left first:rounded-t-lg last:rounded-b-lg last:border-b md:flex-row`}
+            className={`flex ${index % 2 !== 0 ? "bg-darker" : ""} first:rounded-t-lg last:rounded-b-lg flex-col gap-3 border-x border-t border-border px-3 py-[26px] text-left last:border-b md:flex-row`}
           >
             <span className='min-w-[150px]text-text-sm font-semibold'>
               {title}
@@ -35,12 +35,12 @@ export const DrepDetailAboutTab: FC<DrepDetailAboutTabProps> = ({ data }) => {
               <Link
                 to='/address/$address'
                 params={{ address: value }}
-                className='text-text-sm w-full break-all text-primary'
+                className='w-full break-all text-text-sm text-primary'
               >
                 {value}
               </Link>
             ) : (
-              <div className='text-text-sm w-full break-words'>
+              <div className='w-full break-words text-text-sm'>
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={markdownComponents(setClickedUrl)}

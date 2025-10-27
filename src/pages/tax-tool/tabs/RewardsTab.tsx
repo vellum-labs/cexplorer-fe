@@ -11,8 +11,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { currencies } from "@/constants/currencies";
+} from "@vellumlabs/cexplorer-sdk";
+import { currencies } from "@vellumlabs/cexplorer-sdk";
 import type { Currencies } from "@/types/storeTypes";
 import { SummaryTable } from "../components/SummaryTable";
 import { EpochRewardsTable } from "../components/EpochRewardsTable";
@@ -142,7 +142,7 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
             <SelectContent>
               {Object.entries(currencies).map(([key, value]) => (
                 <SelectItem key={key} value={key}>
-                  <span className='uppercase'>{value.value}</span>
+                  <span className='uppercase'>{(value as any).value}</span>
                 </SelectItem>
               ))}
             </SelectContent>

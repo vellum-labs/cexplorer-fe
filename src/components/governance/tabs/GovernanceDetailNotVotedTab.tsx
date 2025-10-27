@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import type { GovernanceActionDetail } from "@/types/governanceTypes";
 
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { GovernanceDetailDrepsSubtab } from "../subtabs/GovernanceDetailDrepsSubtab";
 import { GovernanceDetailSposSubtab } from "../subtabs/GovernanceDetailSposSubtab";
 import { shouldSPOVote } from "@/utils/governanceVoting";

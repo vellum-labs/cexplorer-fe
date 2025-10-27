@@ -1,13 +1,14 @@
 import AddressCell from "@/components/address/AddressCell";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
-import GlobalTable from "@/components/table/GlobalTable";
-import PoolCell from "@/components/table/PoolCell";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 import { HashCell } from "@/components/tx/HashCell";
 import { withdrawalsTableOptions } from "@/constants/tables/withdrawalsTableOptions";
 import { useFetchWithdrawals } from "@/services/account";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useWithdrawalsTableStore } from "@/stores/tables/withdrawalsTableStore";
 import type { Withdrawal } from "@/types/accountTypes";
 import type { TableColumns, WithdrawalsColumns } from "@/types/tableTypes";
@@ -118,7 +119,10 @@ export const WithdrawalsPage = () => {
       key: "delegated_to",
       render: item => (
         <div className='flex items-center gap-1/2'>
-          <PoolCell poolInfo={item.pool.live} />
+          <PoolCell
+            poolInfo={item.pool.live}
+            poolImageUrl={generateImageUrl(item.pool.live.id, "ico", "pool")}
+          />
         </div>
       ),
       jsonFormat: item => {

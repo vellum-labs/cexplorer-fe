@@ -1,4 +1,4 @@
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { ScriptListInteractionsTab } from "@/components/script/tabs/ScriptListInteractionsTab";
 import { ScriptListRanklistTab } from "@/components/script/tabs/ScriptListRanklistTab";
 import { ScriptListTVLTab } from "@/components/script/tabs/ScriptListTVLTab";

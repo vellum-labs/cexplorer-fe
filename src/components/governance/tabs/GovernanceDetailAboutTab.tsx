@@ -3,9 +3,9 @@ import type { GovernanceActionDetailAboutListColumns } from "@/types/tableTypes"
 import type { FC } from "react";
 
 import ExportButton from "@/components/table/ExportButton";
-import TableSearchInput from "@/components/global/inputs/SearchInput";
-import GlobalTable from "@/components/table/GlobalTable";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchGovernanceVote } from "@/services/governance";
 import { useGovActionDetailAboutTableStore } from "@/stores/tables/governanceDetailAboutTableStore";

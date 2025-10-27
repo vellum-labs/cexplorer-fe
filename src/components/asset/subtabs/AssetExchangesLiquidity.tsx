@@ -1,7 +1,7 @@
 import type { useFetchAssetDetail } from "@/services/assets";
 import type { FC } from "react";
 
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import ReactEcharts from "echarts-for-react";
 

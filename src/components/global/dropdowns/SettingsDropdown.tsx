@@ -4,11 +4,11 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { currencies } from "@/constants/currencies";
+} from "@vellumlabs/cexplorer-sdk";
+import { currencies } from "@vellumlabs/cexplorer-sdk";
 import { locales } from "@/constants/locales";
-import { useCurrencyStore } from "@/stores/currencyStore";
-import { useLocaleStore } from "@/stores/localeStore";
+import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
+import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import type { NavigationOptions } from "@/types/navigationTypes";
 import type { Locales } from "@/types/storeTypes";
@@ -21,9 +21,9 @@ import {
   Sun,
 } from "lucide-react";
 import { Dropdown } from "@vellumlabs/cexplorer-sdk";
-import { useInfiniteScrollingStore } from "@/stores/infiniteScrollingStore";
+import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useRef, useState } from "react";
-import { Command } from "@/components/ui/command";
+import { Command } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 
 interface SettingsDropdownProps {
@@ -74,7 +74,6 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
       });
     }
   }, [currency]);
-  console.log("🚀 ~ SettingsDropdown ~ currency:", currency);
 
   const startScrolling = direction => {
     stopScrolling();
@@ -187,10 +186,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                 }
               />
             </SelectTrigger>
-            <SelectContent
-              padding={false}
-              className='relative w-[100px] border-0 !p-0'
-            >
+            <SelectContent className='relative w-[100px] border-0 !p-0'>
               <Command className='fixed top-0 z-[110] h-[40px]'>
                 <TextInput
                   value={currencySearch}

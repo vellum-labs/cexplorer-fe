@@ -11,7 +11,7 @@ import "@nufi/sso-button-react/dist/style.css";
 import React, { useEffect, useState } from "react";
 import { browserName, isMobile, isSafari, isTablet } from "react-device-detect";
 import { Modal } from "@vellumlabs/cexplorer-sdk";
-import SpinningLoader from "../global/SpinningLoader";
+import { SpinningLoader } from "@vellumlabs/cexplorer-sdk";
 import WalletOption from "./WalletOption";
 
 type Props = {

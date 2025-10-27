@@ -6,13 +6,13 @@ import { Link } from "@tanstack/react-router";
 
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchAssetMint } from "@/services/assets";
 import { useAssetDetailMintTableStore } from "@/stores/tables/assetDetailMintTableStore";
 
-import { Badge } from "@/components/global/badges/Badge";
-import TableSettingsDropdown from "@/components/global/dropdowns/TableSettingsDropdown";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
+import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { PolicyCell } from "@/components/policy/PolicyCell";
 import ExportButton from "@/components/table/ExportButton";
 import { assetDetailMintTableOptions } from "@/constants/tables/assetDetailMintOptions";

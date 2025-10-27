@@ -3,9 +3,9 @@ import { AddressesTab } from "@/components/address/tabs/AddressesTab";
 import { AssetsTab } from "@/components/address/tabs/AssetsTab";
 import { RewardsTab } from "@/components/address/tabs/RewardsTab";
 import { UTXOTab } from "@/components/address/tabs/UTXOTab";
-import { HeaderBannerSubtitle } from "@/components/global/HeaderBannerSubtitle";
+import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import Tabs from "@/components/global/Tabs";
+import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { QRCodeSVG } from "qrcode.react";
 import { type FC } from "react";
 import { TxListPage } from "../tx/TxListPage";
@@ -15,7 +15,7 @@ import { Address } from "@/utils/address/getStakeAddress";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { getRouteApi, useSearch } from "@tanstack/react-router";
 
-import AdaHandleBadge from "@/components/global/badges/AdaHandleBadge";
+import { AdaHandleBadge } from "@vellumlabs/cexplorer-sdk";
 import { WatchlistSection } from "@/components/global/watchlist/WatchlistSection";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { UserBadge } from "@/components/user/UserBadge";
@@ -25,6 +25,7 @@ import { isValidAddress } from "@/utils/address/isValidAddress";
 import { QrCode } from "lucide-react";
 import { DeFiOrderList } from "@/components/defi/DeFiOrderList";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { configJSON } from "@/constants/conf";
 
 export const AddressDetailPage: FC = () => {
   const route = getRouteApi("/address/$address");
@@ -60,6 +61,8 @@ export const AddressDetailPage: FC = () => {
   const user = addressQuery.data?.data?.[0]?.user;
   const addressData = addressQuery.data?.data[0];
   const assets = addressData?.asset ?? [];
+
+  const policyId = configJSON.integration[0].adahandle[0].policy;
 
   const tabs = [
     {
@@ -156,7 +159,11 @@ export const AddressDetailPage: FC = () => {
       }
       badge={
         addressData?.adahandle && (
-          <AdaHandleBadge hex={addressData?.adahandle?.hex} link />
+          <AdaHandleBadge
+            hex={addressData?.adahandle?.hex}
+            link
+            policyId={policyId}
+          />
         )
       }
       qrCode={

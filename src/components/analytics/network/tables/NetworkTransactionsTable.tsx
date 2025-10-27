@@ -2,7 +2,7 @@ import type { useFetchEpochAnalytics } from "@/services/analytics";
 import type { FC } from "react";
 import type { NetworkTPSTableColumns, TableColumns } from "@/types/tableTypes";
 
-import GlobalTable from "@/components/table/GlobalTable";
+import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { useNetworkTPSTableStore } from "@/stores/tables/networkTPSTableStore";
 

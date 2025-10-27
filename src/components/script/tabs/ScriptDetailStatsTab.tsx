@@ -1,5 +1,5 @@
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { OverviewStatCard } from "@/components/global/cards/OverviewStatCard";
+import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import { colors } from "@/constants/colors";
 import { useGraphColors } from "@/hooks/useGraphColors";
