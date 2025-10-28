@@ -27,6 +27,10 @@ export const nestedNavigationOptions: {
           label: "Rewards checker",
           href: "/rewards-checker",
         },
+        {
+          label: "Tax tool",
+          href: "/tax-tool",
+        },
       ],
     },
     services: {

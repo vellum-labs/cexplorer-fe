@@ -745,6 +745,15 @@ const routes = [
     api: false,
   },
   {
+    path: "/tax-tool",
+    title: "Tax Tool | Cexplorer.io",
+    description:
+      "Calculate and track your Cardano staking rewards for tax purposes. View withdrawal history with real-time exchange rates in multiple currencies, export detailed reports, and simplify your cryptocurrency tax reporting with comprehensive ADA rewards data.",
+    keywords:
+      "cardano, tax tool, staking rewards, withdrawals, tax reporting, ADA rewards, cexplorer, crypto tax, reward history, tax calculator",
+    api: false,
+  },
+  {
     path: "/token/dashboard",
     title: "Token Dashboard | Cexplorer.io",
     description:
