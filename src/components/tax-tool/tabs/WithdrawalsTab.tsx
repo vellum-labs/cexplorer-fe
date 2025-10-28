@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { useMemo } from "react";
 import { useFetchWithdrawals } from "@/services/account";
+import { isValidAddress } from "@/utils/address/isValidAddress";
 import {
   Select,
   SelectContent,
@@ -30,20 +31,21 @@ export const WithdrawalsTab: FC<WithdrawalsTabProps> = ({ stakeKey }) => {
   };
 
   const limit = storedRows;
+  const isValidStakeKey = stakeKey && isValidAddress(stakeKey);
 
-  const query = useFetchWithdrawals(limit, 0, stakeKey);
+  const query = useFetchWithdrawals(
+    limit,
+    0,
+    isValidStakeKey ? stakeKey : "",
+  );
 
   const allWithdrawals = useMemo(() => {
     if (!query.data?.pages) return [];
     return query.data.pages.flatMap(page => page.data?.data || []);
   }, [query.data]);
 
-  if (!stakeKey) {
-    return (
-      <div className='flex w-full items-center justify-center py-8 text-grayTextPrimary'>
-        Enter a stake key to view withdrawals
-      </div>
-    );
+  if (!stakeKey || !isValidStakeKey) {
+    return null;
   }
 
   const isLoading = query.isLoading || (query.isFetching && !allWithdrawals.length);

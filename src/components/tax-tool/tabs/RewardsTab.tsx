@@ -2,6 +2,7 @@ import type { FC } from "react";
 import { useMemo, useCallback, useEffect, useState } from "react";
 import { useFetchAccountRewardsPaginated } from "@/services/account";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
+import { isValidAddress } from "@/utils/address/isValidAddress";
 import {
   Select,
   SelectContent,
@@ -36,13 +37,14 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
   const limit = storedRows;
 
   const offset = (page - 1) * limit;
+  const isValidStakeKey = stakeKey && isValidAddress(stakeKey);
 
   const adaPriceSecondary = useAdaPriceWithHistory(secondaryCurrency);
 
   const paginatedQuery = useFetchAccountRewardsPaginated(
     limit,
     offset,
-    stakeKey,
+    isValidStakeKey ? stakeKey : "",
   );
 
   const paginatedRewards = useMemo(() => {
@@ -130,12 +132,8 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
     setLastStakeKey(stakeKey);
   }, [stakeKey, lastStakeKey, setCachedSummary, setLastStakeKey]);
 
-  if (!stakeKey) {
-    return (
-      <div className='flex w-full items-center justify-center py-8 text-grayTextPrimary'>
-        Enter a stake key to view rewards
-      </div>
-    );
+  if (!stakeKey || !isValidStakeKey) {
+    return null;
   }
 
   const isLoading =
