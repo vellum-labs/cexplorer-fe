@@ -6,9 +6,8 @@ import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { useMemo } from "react";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
-import type { TableColumns } from "@/types/tableTypes";
 import { useTaxToolSummaryTableStore } from "@/stores/tables/taxToolSummaryTableStore";
-import { useStaticQuery } from "@/hooks/useStaticQuery";
+import type { UseQueryResult } from "@tanstack/react-query";
 
 interface SummaryData {
   period: string;
@@ -20,11 +19,13 @@ interface SummaryData {
 interface SummaryTableProps {
   data: SummaryData[];
   secondaryCurrency: Currencies;
+  query: UseQueryResult<any, unknown>;
 }
 
 export const SummaryTable: FC<SummaryTableProps> = ({
   data,
   secondaryCurrency,
+  query,
 }) => {
   const showSecondaryCurrency = secondaryCurrency !== "usd";
   const { columnsVisibility, setColumnVisibility } =
@@ -49,8 +50,6 @@ export const SummaryTable: FC<SummaryTableProps> = ({
     [secondaryCurrency],
   );
 
-  const query = useStaticQuery(data);
-
   const columns = useMemo(
     () => [
       {
@@ -65,10 +64,12 @@ export const SummaryTable: FC<SummaryTableProps> = ({
       {
         key: "rewards_ada",
         title: (
-          <div className='flex w-full items-center justify-end gap-1 text-right'>
-            Rewards ADA
+          <div className='flex w-full justify-end'>
             <Tooltip content='Exchange rates from the epoch end date.'>
-              <QuestionMarkCircledIcon className='h-4 w-4 cursor-help text-grayTextPrimary' />
+              <div className='flex items-center gap-1 cursor-help' style={{pointerEvents: 'auto'}}>
+                Rewards ADA
+                <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
+              </div>
             </Tooltip>
           </div>
         ),
@@ -92,10 +93,12 @@ export const SummaryTable: FC<SummaryTableProps> = ({
       {
         key: "rewards_usd",
         title: (
-          <div className='flex w-full items-center justify-end gap-1 text-right'>
-            Rewards USD
+          <div className='flex w-full justify-end'>
             <Tooltip content='Exchange rates from the epoch end date.'>
-              <QuestionMarkCircledIcon className='h-4 w-4 cursor-help text-grayTextPrimary' />
+              <div className='flex items-center gap-1 cursor-help' style={{pointerEvents: 'auto'}}>
+                Rewards USD
+                <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
+              </div>
             </Tooltip>
           </div>
         ),
@@ -113,10 +116,12 @@ export const SummaryTable: FC<SummaryTableProps> = ({
       {
         key: "rewards_secondary",
         title: (
-          <div className='flex w-full items-center justify-end gap-1 text-right'>
-            Rewards {secondaryCurrency.toUpperCase()}
+          <div className='flex w-full justify-end'>
             <Tooltip content='Exchange rates from the epoch end date.'>
-              <QuestionMarkCircledIcon className='h-4 w-4 cursor-help text-grayTextPrimary' />
+              <div className='flex items-center gap-1 cursor-help' style={{pointerEvents: 'auto'}}>
+                Rewards {secondaryCurrency.toUpperCase()}
+                <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
+              </div>
             </Tooltip>
           </div>
         ),
@@ -144,23 +149,6 @@ export const SummaryTable: FC<SummaryTableProps> = ({
       secondaryCurrency,
       showSecondaryCurrency,
     ],
-  );
-
-  const exportColumns = useMemo<TableColumns<SummaryData>>(
-    () =>
-      columns
-        .filter(column => column.visible)
-        .map(column => ({
-          key: column.key,
-          title:
-            columnLabels[column.key as keyof typeof columnLabels] ??
-            column.title ??
-            "",
-          visible: Boolean(column.visible),
-          widthPx: column.widthPx ?? 150,
-          render: column.render,
-        })),
-    [columnLabels, columns],
   );
 
   const columnsOptions = useMemo(() => {
@@ -206,7 +194,12 @@ export const SummaryTable: FC<SummaryTableProps> = ({
             setRows={() => undefined}
             columnsOptions={columnsOptions}
           />
-          <ExportButton columns={exportColumns} items={data} />
+          <ExportButton
+            columns={columns
+              .filter(col => col.visible)
+              .map(col => ({ ...col, widthPx: col.widthPx ?? 150 }))}
+            items={data}
+          />
         </div>
       </div>
       <GlobalTable

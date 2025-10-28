@@ -19,7 +19,6 @@ import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 import { useCallback, useEffect, useMemo } from "react";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
-import type { TableColumns } from "@/types/tableTypes";
 import { useTaxToolWithdrawalsTableStore } from "@/stores/tables/taxToolWithdrawalsTableStore";
 
 interface WithdrawalsTableProps {
@@ -108,10 +107,12 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
       {
         key: "timestamp",
         title: (
-          <div className='flex items-center gap-1'>
-            {columnLabels.timestamp}
+          <div className='flex w-full justify-start'>
             <Tooltip content='Exchange rates from the epoch end date.'>
-              <QuestionMarkCircledIcon className='h-4 w-4 cursor-help text-grayTextPrimary' />
+              <div className='flex items-center gap-1 cursor-help' style={{pointerEvents: 'auto'}}>
+                {columnLabels.timestamp}
+                <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
+              </div>
             </Tooltip>
           </div>
         ),
@@ -202,10 +203,12 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
       {
         key: "ada_usd_rate",
         title: (
-          <div className='flex w-full items-center justify-end gap-1 text-right'>
-            <span>{columnLabels.ada_usd_rate}</span>
+          <div className='flex w-full justify-end'>
             <Tooltip content='Exchange rates from the epoch end date.'>
-              <QuestionMarkCircledIcon className='h-4 w-4 cursor-help text-grayTextPrimary' />
+              <div className='flex items-center gap-1 cursor-help' style={{pointerEvents: 'auto'}}>
+                {columnLabels.ada_usd_rate}
+                <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
+              </div>
             </Tooltip>
           </div>
         ),
@@ -221,10 +224,12 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
       {
         key: "ada_secondary_rate",
         title: (
-          <div className='flex w-full items-center justify-end gap-1 text-right'>
-            <span>{columnLabels.ada_secondary_rate}</span>
+          <div className='flex w-full justify-end'>
             <Tooltip content='Exchange rates from the epoch end date.'>
-              <QuestionMarkCircledIcon className='h-4 w-4 cursor-help text-grayTextPrimary' />
+              <div className='flex items-center gap-1 cursor-help' style={{pointerEvents: 'auto'}}>
+                {columnLabels.ada_secondary_rate}
+                <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
+              </div>
             </Tooltip>
           </div>
         ),
@@ -257,23 +262,6 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
       secondaryCurrency,
       showSecondaryCurrency,
     ],
-  );
-
-  const exportColumns = useMemo<TableColumns<Withdrawal>>(
-    () =>
-      columns
-        .filter(column => column.visible)
-        .map(column => ({
-          key: column.key,
-          title:
-            columnLabels[column.key as keyof typeof columnLabels] ??
-            column.title ??
-            "",
-          visible: Boolean(column.visible),
-          widthPx: column.widthPx ?? 150,
-          render: column.render,
-        })),
-    [columnLabels, columns],
   );
 
   const columnsOptions = useMemo(() => {
@@ -342,7 +330,9 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
             columnsOptions={columnsOptions}
           />
           <ExportButton
-            columns={exportColumns}
+            columns={columns
+              .filter(col => col.visible)
+              .map(col => ({ ...col, widthPx: col.widthPx ?? 150 }))}
             items={data}
             currentPage={currentPage}
           />

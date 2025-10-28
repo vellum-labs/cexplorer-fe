@@ -194,6 +194,7 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
           <SummaryTable
             data={cachedSummary}
             secondaryCurrency={secondaryCurrency}
+            query={paginatedQuery}
           />
 
           <EpochRewardsTable

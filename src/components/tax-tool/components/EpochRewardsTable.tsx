@@ -23,7 +23,6 @@ import {
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
-import type { TableColumns } from "@/types/tableTypes";
 import { useTaxToolEpochRewardsTableStore } from "@/stores/tables/taxToolEpochRewardsTableStore";
 import { Badge } from "@vellumlabs/cexplorer-sdk";
 
@@ -158,10 +157,12 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
       {
         key: "end_time",
         title: (
-          <div className='flex items-center gap-1'>
-            End Time
+          <div className='flex w-full justify-start'>
             <Tooltip content='Exchange rates from the epoch end date.'>
-              <QuestionMarkCircledIcon className='h-4 w-4 cursor-help text-grayTextPrimary' />
+              <div className='flex items-center gap-1 cursor-help' style={{pointerEvents: 'auto'}}>
+                End Time
+                <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
+              </div>
             </Tooltip>
           </div>
         ),
@@ -248,10 +249,12 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
       {
         key: "ada_usd_rate",
         title: (
-          <div className='flex w-full items-center justify-end gap-1 text-right'>
-            <span>ADA/USD</span>
+          <div className='flex w-full justify-end'>
             <Tooltip content='Exchange rates from the epoch end date.'>
-              <QuestionMarkCircledIcon className='h-4 w-4 cursor-help text-grayTextPrimary' />
+              <div className='flex items-center gap-1 cursor-help' style={{pointerEvents: 'auto'}}>
+                ADA/USD
+                <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
+              </div>
             </Tooltip>
           </div>
         ),
@@ -267,10 +270,12 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
       {
         key: "ada_secondary_rate",
         title: (
-          <div className='flex w-full items-center justify-end gap-1 text-right'>
-            <span>ADA/{secondaryCurrency.toUpperCase()}</span>
+          <div className='flex w-full justify-end'>
             <Tooltip content='Exchange rates from the epoch end date.'>
-              <QuestionMarkCircledIcon className='h-4 w-4 cursor-help text-grayTextPrimary' />
+              <div className='flex items-center gap-1 cursor-help' style={{pointerEvents: 'auto'}}>
+                ADA/{secondaryCurrency.toUpperCase()}
+                <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
+              </div>
             </Tooltip>
           </div>
         ),
@@ -299,23 +304,6 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
       secondaryCurrency,
       showSecondaryCurrency,
     ],
-  );
-
-  const exportColumns = useMemo<TableColumns<RewardItem>>(
-    () =>
-      columns
-        .filter(column => column.visible)
-        .map(column => ({
-          key: column.key,
-          title:
-            columnLabels[column.key as keyof typeof columnLabels] ??
-            column.title ??
-            "",
-          visible: Boolean(column.visible),
-          widthPx: column.widthPx ?? 150,
-          render: column.render,
-        })),
-    [columnLabels, columns],
   );
 
   const columnsOptions = useMemo(() => {
@@ -391,7 +379,9 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
             columnsOptions={columnsOptions}
           />
           <ExportButton
-            columns={exportColumns}
+            columns={columns
+              .filter(col => col.visible)
+              .map(col => ({ ...col, widthPx: col.widthPx ?? 150 }))}
             items={data}
             currentPage={currentPage}
           />
