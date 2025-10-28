@@ -7,6 +7,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  LoadingSkeleton,
 } from "@vellumlabs/cexplorer-sdk";
 import { currencies } from "@vellumlabs/cexplorer-sdk";
 import type { Currencies } from "@/types/storeTypes";
@@ -45,6 +46,8 @@ export const WithdrawalsTab: FC<WithdrawalsTabProps> = ({ stakeKey }) => {
     );
   }
 
+  const isLoading = query.isLoading || (query.isFetching && !allWithdrawals.length);
+
   return (
     <div className='flex w-full flex-col gap-3 pt-3'>
       <div className='flex items-center justify-between'>
@@ -68,15 +71,28 @@ export const WithdrawalsTab: FC<WithdrawalsTabProps> = ({ stakeKey }) => {
         </div>
       </div>
 
-      <WithdrawalsTable
-        query={query}
-        data={allWithdrawals}
-        secondaryCurrency={secondaryCurrency}
-        currentPage={1}
-        totalItems={query.data?.pages[0]?.data?.count || 0}
-        itemsPerPage={limit}
-        onItemsPerPageChange={handleRowsChange}
-      />
+      {isLoading ? (
+        <div className='flex flex-col gap-2'>
+          <div className='flex items-center justify-between'>
+            <LoadingSkeleton height='24px' width='150px' />
+            <div className='flex gap-1'>
+              <LoadingSkeleton height='36px' width='36px' />
+              <LoadingSkeleton height='36px' width='100px' />
+            </div>
+          </div>
+          <LoadingSkeleton height='400px' width='100%' />
+        </div>
+      ) : (
+        <WithdrawalsTable
+          query={query}
+          data={allWithdrawals}
+          secondaryCurrency={secondaryCurrency}
+          currentPage={1}
+          totalItems={query.data?.pages[0]?.data?.count || 0}
+          itemsPerPage={limit}
+          onItemsPerPageChange={handleRowsChange}
+        />
+      )}
     </div>
   );
 };

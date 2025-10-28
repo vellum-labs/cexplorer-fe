@@ -5,8 +5,18 @@ import type {
   TaxToolEpochRewardsColumns,
 } from "@/types/tableTypes";
 
+interface SummaryData {
+  period: string;
+  ada: number;
+  usd: number;
+  secondary: number;
+}
+
 export const useTaxToolEpochRewardsTableStore = handlePersistStore<
-  BasicTableOptions<TaxToolEpochRewardsColumns>,
+  BasicTableOptions<TaxToolEpochRewardsColumns> & {
+    cachedSummary: SummaryData[];
+    lastStakeKey: string;
+  },
   {
     setColumnVisibility: (
       columnKey: keyof TaxToolEpochRewardsColumns,
@@ -17,6 +27,8 @@ export const useTaxToolEpochRewardsTableStore = handlePersistStore<
       columnsOrder: (keyof TaxToolEpochRewardsColumns)[],
     ) => void;
     setIsResponsive: (isResponsive: boolean) => void;
+    setCachedSummary: (summary: SummaryData[]) => void;
+    setLastStakeKey: (stakeKey: string) => void;
   }
 >(
   "tax_tool_epoch_rewards_table_store",
@@ -43,6 +55,8 @@ export const useTaxToolEpochRewardsTableStore = handlePersistStore<
       "ada_usd_rate",
       "ada_secondary_rate",
     ],
+    cachedSummary: [],
+    lastStakeKey: "",
   },
   set => ({
     setColumnVisibility: (columnKey, isVisible) =>
@@ -60,6 +74,14 @@ export const useTaxToolEpochRewardsTableStore = handlePersistStore<
     setIsResponsive: isResponsive =>
       set(state => {
         state.isResponsive = isResponsive;
+      }),
+    setCachedSummary: summary =>
+      set(state => {
+        state.cachedSummary = summary;
+      }),
+    setLastStakeKey: stakeKey =>
+      set(state => {
+        state.lastStakeKey = stakeKey;
       }),
   }),
 );

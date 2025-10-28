@@ -1,21 +1,41 @@
 import type { FC } from "react";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useSearch } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
-import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
+import { TableSearchInput, LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
-import { RewardsTab } from "./tabs/RewardsTab";
-import { WithdrawalsTab } from "./tabs/WithdrawalsTab";
+import { RewardsTab } from "../../components/tax-tool/tabs/RewardsTab";
+import { WithdrawalsTab } from "../../components/tax-tool/tabs/WithdrawalsTab";
 import { CircleAlert } from "lucide-react";
 import { useDebounce } from "@vellumlabs/cexplorer-sdk";
+import { isValidAddress } from "@/utils/address/isValidAddress";
+import { toast } from "sonner";
 
 export const TaxToolPage: FC = () => {
   const { view } = useSearch({
     from: "/tax-tool",
   });
 
-  const [search, setSearch] = useState<string>(view ?? "");
+  const [search, setSearch] = useState<string>(() => {
+    const saved = localStorage.getItem("tax_tool_stake_key");
+    return view ?? saved ?? "";
+  });
   const debouncedSearch = useDebounce(search);
+  const [isValid, setIsValid] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (debouncedSearch && !isValidAddress(debouncedSearch)) {
+      toast.error("Invalid stake address");
+      setIsValid(false);
+    } else if (debouncedSearch) {
+      setIsValid(true);
+      localStorage.setItem("tax_tool_stake_key", debouncedSearch);
+    } else {
+      setIsValid(false);
+    }
+  }, [debouncedSearch]);
+
+  const isDebouncing = search !== debouncedSearch && search.length > 0;
 
   const tabItems = useMemo(
     () => [
@@ -42,11 +62,12 @@ export const TaxToolPage: FC = () => {
       metadataTitle='taxTool'
       title='Tax tool'
       breadcrumbItems={[{ label: "Tax tool" }]}
+      adsCarousel={false}
     >
       <section className='flex w-full justify-center'>
         <div className='flex w-full max-w-desktop flex-col gap-2 p-mobile md:p-desktop'>
-          <div className='border-blue-500/40 bg-blue-500/5 flex items-start gap-2 rounded-m border p-2'>
-            <CircleAlert className='mt-0.5 text-blue-500' size={18} />
+          <div className='flex items-start gap-2 rounded-m border border-border p-2'>
+            <CircleAlert className='mt-0.5 text-primary' size={18} />
             <div className='flex flex-col gap-1 text-text-sm'>
               <p className='font-medium text-text'>
                 Please note that the data is for informational purposes only, we
@@ -69,8 +90,25 @@ export const TaxToolPage: FC = () => {
             />
           </div>
 
-          {debouncedSearch && (
-            <Tabs items={tabItems} withPadding={false} withMargin={false} />
+          {isDebouncing ? (
+            <div className='flex flex-col gap-2 pt-3'>
+              <div className='flex gap-2'>
+                <LoadingSkeleton height='40px' width='100px' />
+                <LoadingSkeleton height='40px' width='120px' />
+              </div>
+              <div className='flex flex-col gap-3'>
+                <LoadingSkeleton height='24px' width='200px' />
+                <div className='flex flex-col gap-2'>
+                  <LoadingSkeleton height='200px' width='100%' />
+                  <LoadingSkeleton height='400px' width='100%' />
+                </div>
+              </div>
+            </div>
+          ) : (
+            debouncedSearch &&
+            isValid && (
+              <Tabs items={tabItems} withPadding={false} withMargin={false} />
+            )
           )}
         </div>
       </section>

@@ -1,9 +1,6 @@
 import type { FC } from "react";
-import { useMemo, useCallback, useState } from "react";
-import {
-  useFetchAccountRewards,
-  useFetchAccountRewardsPaginated,
-} from "@/services/account";
+import { useMemo, useCallback, useEffect, useState } from "react";
+import { useFetchAccountRewardsPaginated } from "@/services/account";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 import {
   Select,
@@ -11,6 +8,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  LoadingSkeleton,
 } from "@vellumlabs/cexplorer-sdk";
 import { currencies } from "@vellumlabs/cexplorer-sdk";
 import type { Currencies } from "@/types/storeTypes";
@@ -26,7 +24,13 @@ interface RewardsTabProps {
 export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
   const { secondaryCurrency, setSecondaryCurrency } =
     useTaxToolPreferencesStore();
-  const { rows: storedRows } = useTaxToolEpochRewardsTableStore();
+  const {
+    rows: storedRows,
+    cachedSummary,
+    setCachedSummary,
+    lastStakeKey,
+    setLastStakeKey,
+  } = useTaxToolEpochRewardsTableStore();
   const [page, setPage] = useState(1);
 
   const limit = storedRows;
@@ -35,18 +39,11 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
 
   const adaPriceSecondary = useAdaPriceWithHistory(secondaryCurrency);
 
-  const summaryQuery = useFetchAccountRewards(1000, 0, stakeKey);
-
   const paginatedQuery = useFetchAccountRewardsPaginated(
     limit,
     offset,
     stakeKey,
   );
-
-  const allRewards = useMemo(() => {
-    if (!summaryQuery.data?.pages) return [];
-    return summaryQuery.data.pages.flatMap(page => page.data || []);
-  }, [summaryQuery.data]);
 
   const paginatedRewards = useMemo(() => {
     if (!paginatedQuery.data?.data) return [];
@@ -77,8 +74,8 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
     return adaPriceSecondary.todayValue || 0;
   }, [adaPriceSecondary.todayValue]);
 
-  const summary = useMemo(() => {
-    if (!allRewards.length) return [];
+  useEffect(() => {
+    if (page !== 1 || !paginatedRewards.length) return;
 
     const now = new Date();
     const monthsData: Record<
@@ -86,7 +83,7 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
       { ada: number; usd: number; secondary: number }
     > = {};
 
-    allRewards.forEach(reward => {
+    paginatedRewards.forEach(reward => {
       if (!reward.spendable_epoch?.end_time) return;
 
       const rewardDate = new Date(reward.spendable_epoch.end_time);
@@ -111,11 +108,27 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
       }
     });
 
-    return Object.entries(monthsData)
+    const summary = Object.entries(monthsData)
       .map(([period, data]) => ({ period, ...data }))
       .sort((a, b) => b.period.localeCompare(a.period))
       .slice(0, 3);
-  }, [allRewards, getAdaSecondaryRate, getAdaUsdRate]);
+
+    setCachedSummary(summary);
+  }, [
+    page,
+    paginatedRewards,
+    getAdaUsdRate,
+    getAdaSecondaryRate,
+    setCachedSummary,
+  ]);
+
+  useEffect(() => {
+    if (lastStakeKey && lastStakeKey !== stakeKey) {
+      setPage(1);
+      setCachedSummary([]);
+    }
+    setLastStakeKey(stakeKey);
+  }, [stakeKey, lastStakeKey, setCachedSummary, setLastStakeKey]);
 
   if (!stakeKey) {
     return (
@@ -124,6 +137,10 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
       </div>
     );
   }
+
+  const isLoading =
+    paginatedQuery.isLoading ||
+    (paginatedQuery.isFetching && !paginatedRewards.length);
 
   return (
     <div className='flex w-full flex-col gap-3 pt-3'>
@@ -150,17 +167,48 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
         </div>
       </div>
 
-      <SummaryTable data={summary} secondaryCurrency={secondaryCurrency} />
+      {isLoading && !cachedSummary.length ? (
+        <>
+          <div className='flex flex-col gap-2'>
+            <div className='flex items-center justify-between'>
+              <LoadingSkeleton height='24px' width='100px' />
+              <div className='flex gap-1'>
+                <LoadingSkeleton height='36px' width='36px' />
+                <LoadingSkeleton height='36px' width='100px' />
+              </div>
+            </div>
+            <LoadingSkeleton height='200px' width='100%' />
+          </div>
 
-      <EpochRewardsTable
-        query={paginatedQuery}
-        data={paginatedRewards}
-        secondaryCurrency={secondaryCurrency}
-        currentPage={page}
-        onPageChange={setPage}
-        totalItems={paginatedQuery.data?.count || 0}
-        itemsPerPage={limit}
-      />
+          <div className='flex flex-col gap-2'>
+            <div className='flex items-center justify-between'>
+              <LoadingSkeleton height='24px' width='150px' />
+              <div className='flex gap-1'>
+                <LoadingSkeleton height='36px' width='36px' />
+                <LoadingSkeleton height='36px' width='100px' />
+              </div>
+            </div>
+            <LoadingSkeleton height='400px' width='100%' />
+          </div>
+        </>
+      ) : (
+        <>
+          <SummaryTable
+            data={cachedSummary}
+            secondaryCurrency={secondaryCurrency}
+          />
+
+          <EpochRewardsTable
+            query={paginatedQuery}
+            data={paginatedRewards}
+            secondaryCurrency={secondaryCurrency}
+            currentPage={page}
+            onPageChange={setPage}
+            totalItems={paginatedQuery.data?.count || 0}
+            itemsPerPage={limit}
+          />
+        </>
+      )}
     </div>
   );
 };
