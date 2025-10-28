@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@date-fns/tz": "^1.4.1",
+    "@dexhunterio/swaps": "^0.0.196",
     "@emurgo/cip14-js": "^3.0.1",
     "@harmoniclabs/bytestring": "^1.0.0",
     "@harmoniclabs/cbor": "^1.6.6",
