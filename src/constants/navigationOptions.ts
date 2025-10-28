@@ -157,6 +157,10 @@ export const navigationOptions: {
       href: "/token/dashboard",
       params: { tab: "tokens" },
     },
+    {
+      label: "Swap",
+      href: "/swap",
+    },
   ],
   nfts: [
     {
