@@ -9,7 +9,7 @@ interface Props {
   className?: string;
 }
 
-const PoolSaturation = ({ live_stake, className }: Props) => {
+export const PoolSaturation = ({ live_stake, className }: Props) => {
   const { data: basicData } = useFetchMiscBasic();
   const miscConst = useMiscConst(basicData?.data.version.const);
 
@@ -41,11 +41,9 @@ const PoolSaturation = ({ live_stake, className }: Props) => {
           }}
         ></span>
       </div>
-      <span className='w-11 text-right text-text-xs font-medium'>
+      <span className='w-14 whitespace-nowrap text-right text-text-xs font-medium'>
         {String(fixedPoolCapUsed).length < 10 && fixedPoolCapUsed}%
       </span>
     </div>
   );
 };
-
-export default PoolSaturation;
