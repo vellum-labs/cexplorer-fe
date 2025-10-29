@@ -176,6 +176,15 @@ const PoolBlocksTable = ({ poolId }: Props) => {
       visible: columnsVisibility.protocol,
       widthPx: 50,
     },
+    {
+      key: "cert_counter",
+      render: item => (
+        <p className='text-right'>{item.op_cert_counter ?? "-"}</p>
+      ),
+      title: <p className='w-full text-right'>Cert Count</p>,
+      visible: columnsVisibility.cert_counter,
+      widthPx: 70,
+    },
   ];
 
   useEffect(() => {

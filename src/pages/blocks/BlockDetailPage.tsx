@@ -355,6 +355,7 @@ const BlockDetailPage: FC = () => {
                   isGenesisBlock={data?.epoch_no === null}
                   generateImageUrl={generateImageUrl}
                   miscData={miscData}
+                  opCounter={data.op_cert_counter}
                 />
                 <SizeCard
                   size={data.size}
