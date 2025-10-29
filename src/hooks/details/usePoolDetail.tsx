@@ -6,7 +6,7 @@ import type {
 import type { UseQueryResult } from "@tanstack/react-query";
 import type { MiscConstResponseData } from "@/types/miscTypes";
 
-import PoolSaturation from "@/components/pool/PoolSaturation";
+import { PoolSaturation } from "@/components/pool/PoolSaturation";
 import RoaDiffArrow from "@/components/pool/RoaDiffArrow";
 
 import { useFetchMiscBasic } from "@/services/misc";
