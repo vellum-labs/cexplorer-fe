@@ -38,8 +38,6 @@ interface PageWithCustomMetadata extends PageBaseInitProps {
   metadataTitle?: never;
   metadataOverride: {
     title: string;
-    keyword: string;
-    description: string;
   };
 }
 
