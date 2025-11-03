@@ -244,3 +244,41 @@ export type MiscSearchResponse = ResponseCore<MiscSearch[] | MiscSearch>;
 export type MiscApiResponse = ResponseCore<{
   plans: MiscApiData;
 }>;
+
+interface MaterializedView {
+  name: string;
+  has_indexes: boolean;
+  is_populated: boolean;
+}
+
+interface CexplorerData {
+  now: string;
+  runner: string;
+  pool_stat: number;
+  milestone: number;
+  rate: string;
+  views: MaterializedView[];
+}
+
+interface BlockchainData {
+  time: string;
+  epoch_no: number;
+}
+
+interface HealthData {
+  blockchain: BlockchainData;
+  cexplorer: CexplorerData;
+}
+
+export interface MiscHealthResponse {
+  license: string;
+  code: number;
+  data: {
+    is_healthy: boolean;
+    data: HealthData[];
+    err: string[];
+  };
+  tokens: number;
+  ex: number;
+  debug: boolean;
+}

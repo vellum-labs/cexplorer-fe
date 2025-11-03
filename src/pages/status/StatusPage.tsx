@@ -3,14 +3,13 @@ import type { FC } from "react";
 import { PulsedBadge } from "@/components/ui/pulsedBadge";
 import { Helmet } from "react-helmet";
 
-import { useFetchMiscBasic } from "@/services/misc";
+import { useFetchMiscBasic, useFetchMiscHealth } from "@/services/misc";
 import { useEffect, useState } from "react";
-import { useBlockList } from "@/hooks/tables/useBlockList";
 
 import { checkInternetSpeed } from "@/utils/checkInternetSpeed";
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import { CircleAlert } from "lucide-react";
+import { Check, CircleAlert, ExternalLink, X } from "lucide-react";
 
 import metadata from "../../../conf/metadata/en-metadata.json";
 
@@ -18,13 +17,16 @@ export const StatusPage: FC = () => {
   const [internetSpeed, setInternetSpeed] = useState<number>();
 
   const { data: miscBasic } = useFetchMiscBasic(true);
-  const { items } = useBlockList({ page: 1 });
+  const { data: miscHealth } = useFetchMiscHealth(true);
 
   const version = import.meta.env.VITE_APP_VERSION;
   const readOnlyMode = miscBasic?.data?.instance?.readonly;
   const server = miscBasic?.data?.instance?.server;
-  const blockChainSync = items
-    ? (Date.now() - new Date(convertUtcToLocal(items[0].time)).getTime()) /
+  const blockChainSync = miscHealth?.data?.data?.[0]?.blockchain?.time
+    ? (Date.now() -
+        new Date(
+          convertUtcToLocal(miscHealth.data.data[0].blockchain.time),
+        ).getTime()) /
       1000 /
       60
     : undefined;
@@ -96,6 +98,13 @@ export const StatusPage: FC = () => {
       badgeColor: undefined,
       withoutPulse: false,
     },
+    {
+      title: "Services",
+      badgeTitle: "",
+      badgeColor: undefined,
+      withoutPulse: false,
+      isLink: true,
+    },
   ];
 
   return (
@@ -109,21 +118,82 @@ export const StatusPage: FC = () => {
           <p className='mt-1.5 font-regular text-grayTextPrimary'>
             Check and share your current status for quick troubleshooting.
           </p>
+          {miscHealth?.data && (
+            <div
+              className={`mt-5 w-full max-w-[800px] rounded-m border p-3 ${
+                miscHealth.data.is_healthy
+                  ? "bg-greenText/10 border-greenText"
+                  : "bg-redText/10 border-redText"
+              }`}
+            >
+              <div className='flex items-start gap-2'>
+                <div
+                  className={`rounded-s flex aspect-square w-[24px] items-center justify-center ${
+                    miscHealth.data.is_healthy ? "bg-greenText" : "bg-redText"
+                  }`}
+                >
+                  {miscHealth.data.is_healthy ? (
+                    <Check size={16} className='text-white' />
+                  ) : (
+                    <X size={16} className='text-white' />
+                  )}
+                </div>
+                <div className='flex flex-col gap-1'>
+                  <span
+                    className={`text-text-sm font-semibold ${
+                      miscHealth.data.is_healthy
+                        ? "text-greenText"
+                        : "text-redText"
+                    }`}
+                  >
+                    {miscHealth.data.is_healthy
+                      ? "System is healthy"
+                      : "System is experiencing issues"}
+                  </span>
+                  {!miscHealth.data.is_healthy &&
+                    miscHealth.data.err.length > 0 && (
+                      <div className='flex flex-col gap-1'>
+                        {miscHealth.data.err.map((error, index) => (
+                          <span
+                            key={index}
+                            className='text-text-sm text-redText'
+                          >
+                            • {error}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                </div>
+              </div>
+            </div>
+          )}
           <div className='mt-5 flex w-full max-w-[800px] flex-col gap-3 rounded-m border border-border p-3'>
             <h3>Your status</h3>
             <div className='flex w-full flex-col gap-2'>
               {statuses.map(
-                ({ badgeColor, badgeTitle, title, withoutPulse }) => (
+                ({ badgeColor, badgeTitle, title, withoutPulse, isLink }) => (
                   <div className='flex flex-col justify-between gap-1/2 min-[450px]:flex-row min-[450px]:items-center min-[450px]:gap-0'>
                     <span className='text-text-sm font-medium text-grayTextPrimary'>
                       {title}
                     </span>
                     <div className='min-w-[170px]'>
-                      <PulsedBadge
-                        title={badgeTitle}
-                        badgeColor={badgeColor}
-                        withoutPulse={withoutPulse}
-                      />
+                      {isLink ? (
+                        <a
+                          href='https://stats.uptimerobot.com/9DcoZ2jzDP'
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          className='flex items-center gap-1 text-text-sm font-medium text-primary'
+                        >
+                          Status page
+                          <ExternalLink size={14} />
+                        </a>
+                      ) : (
+                        <PulsedBadge
+                          title={badgeTitle}
+                          badgeColor={badgeColor}
+                          withoutPulse={withoutPulse}
+                        />
+                      )}
                     </div>
                   </div>
                 ),

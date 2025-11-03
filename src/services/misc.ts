@@ -8,6 +8,7 @@ import type {
   MiscApiResponse,
   MiscBasicResponse,
   MiscConstResponse,
+  MiscHealthResponse,
   MiscNewResponse,
   MiscRateResponse,
   MiscSearchResponse,
@@ -47,6 +48,22 @@ export const useFetchMiscBasic = (disableRefetch: boolean = false) => {
   const query = useQuery({
     queryKey: ["misc-basic"],
     queryFn: () => fetchMiscBasic(),
+    refetchInterval: disableRefetch ? false : 60000,
+  });
+
+  return query;
+};
+
+export const fetchMiscHealth = async () => {
+  const url = "/misc/health";
+
+  return handleFetch<MiscHealthResponse>(url, undefined, {});
+};
+
+export const useFetchMiscHealth = (disableRefetch: boolean = false) => {
+  const query = useQuery({
+    queryKey: ["misc-health"],
+    queryFn: () => fetchMiscHealth(),
     refetchInterval: disableRefetch ? false : 60000,
   });
 
