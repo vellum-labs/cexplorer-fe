@@ -1,347 +1,209 @@
 {
   "tokenDashboard": {
-    "title": "Token Dashboard | Cexplorer.io",
-    "description": "Manage and track DeFi tokens in real-time with Cexplorer.io. Stay updated on market trends, liquidity, trading volume, and token analytics.",
-    "keywords": "DeFi tokens, token tracking, decentralized finance, liquidity, token analytics, Cexplorer"
+    "title": "Token Dashboard | Cexplorer.io"
   },
   "treasuryWithdrawalLeaderboard": {
-    "title": "Withdrawal leaderboard | Cexplorer.io",
-    "description": "Explore how DReps vote on Cardano treasury withdrawal proposals. View voting power, activity, and decisions in a compact, real-time leaderboard format.",
-    "keywords": "Cardano treasury, withdrawal proposals, DRep votes, governance leaderboard, on-chain voting, Cexplorer"
+    "title": "Withdrawal leaderboard | Cexplorer.io"
   },
   "dexSwapDetail": {
-    "title": "Swap %tx% Detail | Cexplorer.io",
-    "description": "View detailed information about a %tx% swap on the blockchain. Analyze trading pairs, swap amounts, and transaction details.",
-    "keywords": "DEX swap, %tx%, decentralized exchange, trading pairs, blockchain, Cexplorer"
+    "title": "Swap %tx% Detail | Cexplorer.io"
   },
   "govVoteDetail": {
-    "title": "Governance Vote %tx% Detail | Cexplorer.io",
-    "description": "Explore detailed information about governance vote %tx% on the Cardano blockchain. See vote choices, voting power, voter roles, and governance action details.",
-    "keywords": "Cardano governance, vote %tx%, DRep, SPO, CC, voting, decentralized governance, Cexplorer"
+    "title": "Governance Vote %tx% Detail | Cexplorer.io"
   },
   "committee": {
-    "title": "Constitutional Committee Detail | Cexplorer.io",
-    "description": "Explore the current composition and rules of the Constitutional Committee on the Cardano blockchain. View member count, voting threshold, and the latest constitution document.",
-    "keywords": "Cardano governance, Constitutional Committee, committee members, voting threshold, constitution, decentralized governance, Cexplorer"
+    "title": "Constitutional Committee Detail | Cexplorer.io"
   },
   "adaPrice": {
-    "title": "ADA Price | Cexplorer.io",
-    "description": "Track the real-time price of ADA with Cexplorer.io. Get historical data, market trends, and detailed price analytics.",
-    "keywords": "ADA price, Cardano price, real-time ADA price, ADA market trends, Cexplorer"
+    "title": "ADA Price | Cexplorer.io"
   },
   "analytics": {
-    "title": "Analytics | Cexplorer.io",
-    "description": "Dive into comprehensive blockchain analytics on Cexplorer.io. Explore trends, metrics, and insights to make data-driven decisions.",
-    "keywords": "blockchain analytics, data insights, blockchain trends, Cexplorer, analytics dashboard"
+    "title": "Analytics | Cexplorer.io"
   },
   "datumInspector": {
-    "title": "Datum Inspector | Cexplorer.io",
-    "description": "Analyze and inspect datum data on the blockchain with Cexplorer.io. Gain insights into stored data and its structure.",
-    "keywords": "datum inspector, blockchain data, datum analysis, Cexplorer, data inspection"
+    "title": "Datum Inspector | Cexplorer.io"
   },
   "status": {
-    "title": "Status | Cexplorer.io",
-    "description": "Check the current status of the blockchain and its components on Cexplorer.io. Stay updated with real-time operational insights.",
-    "keywords": "blockchain status, real-time updates, Cexplorer, operational status, blockchain health"
+    "title": "Status | Cexplorer.io"
   },
   "homepage": {
-    "title": "Homepage | Cexplorer.io",
-    "description": "Explore the blockchain with Cexplorer.io. Access real-time data, analytics, and insights.",
-    "keywords": "blockchain explorer, real-time data, Cexplorer, analytics, blockchain insights"
+    "title": "Homepage | Cexplorer.io"
   },
   "hardfork": {
-    "title": "Hardfork | Cexplorer.io",
-    "description": "Discover detailed information about blockchain hardforks on Cexplorer.io. Stay informed about historical and upcoming network upgrades.",
-    "keywords": "blockchain hardforks, network upgrades, blockchain updates, Cexplorer, hardfork history"
+    "title": "Hardfork | Cexplorer.io"
   },
   "transactionList": {
-    "title": "Transactions | Cexplorer.io",
-    "description": "List of transactions on the blockchain.",
-    "keywords": "transactions, blockchain, cexplorer"
+    "title": "Transactions | Cexplorer.io"
   },
   "transactionDetail": {
-    "title": "Tx %tx% detail | Cexplorer.io",
-    "description": "Details of a %tx% transaction on the blockchain.",
-    "keywords": "transaction, %tx%, blockchain, cexplorer"
+    "title": "Tx %tx% detail | Cexplorer.io"
   },
   "blockList": {
-    "title": "Blocks | Cexplorer.io",
-    "description": "List of blocks on the blockchain.",
-    "keywords": "blocks, blockchain, cexplorer"
+    "title": "Blocks | Cexplorer.io"
   },
   "blockDetail": {
-    "title": "Block %block% detail | Cexplorer.io",
-    "description": "Details of a %block% block on the blockchain.",
-    "keywords": "block, blockchain, %block%, cexplorer"
+    "title": "Block %block% detail | Cexplorer.io"
   },
   "assetsList": {
-    "title": "Assets | Cexplorer.io",
-    "description": "List of assets on the blockchain.",
-    "keywords": "assets, blockchain, cexplorer"
+    "title": "Assets | Cexplorer.io"
   },
   "assetDetail": {
-    "title": "Asset %encodedname% detail | Cexplorer.io",
-    "description": "Details of an %encodedname% asset on the blockchain.",
-    "keywords": "asset, blockchain, %encodedname%, %registry%, %asset%, cexplorer"
+    "title": "Asset %encodedname% detail | Cexplorer.io"
   },
   "epochsList": {
-    "title": "Epochs | Cexplorer.io",
-    "description": "List of epochs on the blockchain.",
-    "keywords": "epochs, blockchain, cexplorer"
+    "title": "Epochs | Cexplorer.io"
   },
   "epochDetail": {
-    "title": "Epoch %epoch% detail | Cexplorer.io",
-    "description": "Details of an %epoch% epoch on the blockchain.",
-    "keywords": "epoch, blockchain, %epoch%, cexplorer"
+    "title": "Epoch %epoch% detail | Cexplorer.io"
   },
   "poolsList": {
-    "title": "Pools | Cexplorer.io",
-    "description": "List of pools on the blockchain.",
-    "keywords": "pools, blockchain, cexplorer"
+    "title": "Pools | Cexplorer.io"
   },
   "poolDetail": {
-    "title": "Pool %name% detail | Cexplorer.io",
-    "description": "Details of a %name% pool on the blockchain.",
-    "keywords": "pool, blockchain, %name%, %ticker%, %id%, cexplorer"
+    "title": "Pool %name% detail | Cexplorer.io"
   },
   "poolRegistrations": {
-    "title": "Pool Registrations | Cexplorer.io",
-    "description": "List of pool registrations on the blockchain.",
-    "keywords": "pool registrations, blockchain, cexplorer"
+    "title": "Pool Registrations | Cexplorer.io"
   },
   "poolDeregistrations": {
-    "title": "Pool Deregistrations | Cexplorer.io",
-    "description": "List of pool deregistrations on the blockchain.",
-    "keywords": "pool deregistrations, blockchain, cexplorer"
+    "title": "Pool Deregistrations | Cexplorer.io"
   },
   "poolAwards": {
-    "title": "Pool Awards | Cexplorer.io",
-    "description": "List of pool awards on the blockchain.",
-    "keywords": "pool awards, blockchain, cexplorer"
+    "title": "Pool Awards | Cexplorer.io"
   },
   "poolUpdates": {
-    "title": "Pool Updates | Cexplorer.io",
-    "description": "List of pool updates on the blockchain.",
-    "keywords": "pool updates, blockchain, cexplorer"
+    "title": "Pool Updates | Cexplorer.io"
   },
   "stakeRegistrations": {
-    "title": "Stake Registrations | Cexplorer.io",
-    "description": "List of stake registrations on the blockchain.",
-    "keywords": "stake registrations, blockchain, cexplorer"
+    "title": "Stake Registrations | Cexplorer.io"
   },
   "stakeDeregistrations": {
-    "title": "Stake Deregistrations | Cexplorer.io",
-    "description": "List of stake deregistrations on the blockchain.",
-    "keywords": "stake deregistrations, blockchain, cexplorer"
+    "title": "Stake Deregistrations | Cexplorer.io"
   },
   "contractInteractions": {
-    "title": "Contract Interactions | Cexplorer.io",
-    "description": "List of contract interactions on the blockchain.",
-    "keywords": "contract interactions, blockchain, cexplorer"
+    "title": "Contract Interactions | Cexplorer.io"
   },
   "newPoolsList": {
-    "title": "New Pools | Cexplorer.io",
-    "description": "List of new pools on the blockchain.",
-    "keywords": "new pools, blockchain, cexplorer"
+    "title": "New Pools | Cexplorer.io"
   },
   "metadataTxList": {
-    "title": "Metadata Transactions | Cexplorer.io",
-    "description": "List of metadata transactions on the blockchain.",
-    "keywords": "metadata transactions, blockchain, cexplorer"
+    "title": "Metadata Transactions | Cexplorer.io"
   },
   "retiredPoolsList": {
-    "title": "Retired Pools | Cexplorer.io",
-    "description": "List of retired pools on the blockchain.",
-    "keywords": "retired pools, blockchain, cexplorer"
+    "title": "Retired Pools | Cexplorer.io"
   },
   "withdrawalsList": {
-    "title": "Withdrawals | Cexplorer.io",
-    "description": "List of withdrawals on the blockchain.",
-    "keywords": "withdrawals, blockchain, cexplorer"
+    "title": "Withdrawals | Cexplorer.io"
   },
   "liveDelegationsList": {
-    "title": "Live Delegations | Cexplorer.io",
-    "description": "List of live delegations on the blockchain.",
-    "keywords": "live delegations, blockchain, cexplorer"
+    "title": "Live Delegations | Cexplorer.io"
   },
   "poolUpdatesList": {
-    "title": "Pool Updates | Cexplorer.io",
-    "description": "List of pool updates on the blockchain.",
-    "keywords": "pool updates, blockchain, cexplorer"
+    "title": "Pool Updates | Cexplorer.io"
   },
   "poolBirthdayList": {
-    "title": "Pool Birthdays | Cexplorer.io",
-    "description": "List of pool birthdays on the blockchain.",
-    "keywords": "pool birthdays, blockchain, cexplorer"
+    "title": "Pool Birthdays | Cexplorer.io"
   },
   "drepList": {
-    "title": "DRep | Cexplorer.io",
-    "description": "List of DREP on the blockchain.",
-    "keywords": "drep, blockchain, cexplorer"
+    "title": "DRep | Cexplorer.io"
   },
   "drepRegistrations": {
-    "title": "DRep Registrations | Cexplorer.io",
-    "description": "List of DREP registrations on the blockchain.",
-    "keywords": "drep, registrations, blockchain, cexplorer"
+    "title": "DRep Registrations | Cexplorer.io"
   },
   "drepDeregistrations": {
-    "title": "DRep Deregistrations | Cexplorer.io",
-    "description": "List of DREP deregistrations on the blockchain.",
-    "keywords": "drep, deregistrations, blockchain, cexplorer"
+    "title": "DRep Deregistrations | Cexplorer.io"
   },
   "drepUpdates": {
-    "title": "DRep Updates | Cexplorer.io",
-    "description": "List of DREP updates on the blockchain.",
-    "keywords": "drep, updates, blockchain, cexplorer"
+    "title": "DRep Updates | Cexplorer.io"
   },
   "drepDetail": {
-    "title": "DRep %drep% detail | Cexplorer.io",
-    "description": "Details of a %drep% DREP on the blockchain.",
-    "keywords": "drep, blockchain, %drep%, cexplorer"
+    "title": "DRep %drep% detail | Cexplorer.io"
   },
   "governanceActionDetail": {
-    "title": "Governance Action %gov% detail | Cexplorer.io",
-    "description": "Details of a %gov% Governance Action on the blockchain.",
-    "keywords": "governance action, blockchain, %gov%, cexplorer"
+    "title": "Governance Action %gov% detail | Cexplorer.io"
   },
   "cexplorerNfts": {
-    "title": "Cexplorer NFTs | Cexplorer.io",
-    "description": "List of Cexplorer NFTs.",
-    "keywords": "cexplorer, nfts, blockchain"
+    "title": "Cexplorer NFTs | Cexplorer.io"
   },
   "treasuryDonations": {
-    "title": "Treasury Donations | Cexplorer.io",
-    "description": "List of treasury donations.",
-    "keywords": "treasury, donations, blockchain"
+    "title": "Treasury Donations | Cexplorer.io"
   },
   "scriptList": {
-    "title": "Scripts | Cexplorer.io",
-    "description": "List of scripts on the blockchain.",
-    "keywords": "scripts, blockchain, cexplorer"
+    "title": "Scripts | Cexplorer.io"
   },
   "scriptDetail": {
-    "title": "Script %script% detail | Cexplorer.io",
-    "description": "Details of a script on the blockchain.",
-    "keywords": "script, blockchain, cexplorer"
+    "title": "Script %script% detail | Cexplorer.io"
   },
   "articleList": {
-    "title": "Articles | Cexplorer.io",
-    "description": "List of articles on the blockchain.",
-    "keywords": "articles, blockchain, cexplorer"
+    "title": "Articles | Cexplorer.io"
   },
   "articleDetail": {
-    "title": "%article% | Cexplorer.io",
-    "description": "%description%",
-    "keywords": "%keywords%"
+    "title": "%article% | Cexplorer.io"
   },
   "addressInspector": {
-    "title": "Address Inspector | Cexplorer.io",
-    "description": "Inspect an address on the blockchain.",
-    "keywords": "address, inspector, blockchain"
+    "title": "Address Inspector | Cexplorer.io"
   },
   "poolAnalytics": {
-    "title": "Pool Analytics | Cexplorer.io",
-    "description": "Analytics of a pool on the blockchain.",
-    "keywords": "pool, analytics, blockchain"
+    "title": "Pool Analytics | Cexplorer.io"
   },
   "accountAnalytics": {
-    "title": "Account Analytics | Cexplorer.io",
-    "description": "Analytics of an account on the blockchain.",
-    "keywords": "account, analytics, blockchain"
+    "title": "Account Analytics | Cexplorer.io"
   },
   "networkAnalytics": {
-    "title": "Network Analytics | Cexplorer.io",
-    "description": "Analytics of the network on the blockchain.",
-    "keywords": "network, analytics, blockchain"
+    "title": "Network Analytics | Cexplorer.io"
   },
   "powerThresholds": {
-    "title": "Power Thresholds | Cexplorer.io",
-    "description": "Visual analysis of governance thresholds, voting power, and delegation distributions for DReps, SPOs, and the Constitutional Committee.",
-    "keywords": "power thresholds, governance, DRePs, SPOs, constitutional committee, Cardano, delegation"
+    "title": "Power Thresholds | Cexplorer.io"
   },
   "profile": {
-    "title": "Profile | Cexplorer.io",
-    "description": "Profile of a user on Cexplorer.io.",
-    "keywords": "profile, user, cexplorer"
+    "title": "Profile | Cexplorer.io"
   },
   "watchlist": {
-    "title": "Watchlist | Cexplorer.io",
-    "description": "Watchlist of a user on Cexplorer.io.",
-    "keywords": "watchlist, user, cexplorer"
+    "title": "Watchlist | Cexplorer.io"
   },
   "addressDetail": {
-    "title": "Address %address% detail | Cexplorer.io",
-    "description": "Details of an %address% address on the blockchain.",
-    "keywords": "address, blockchain, %address%, cexplorer"
+    "title": "Address %address% detail | Cexplorer.io"
   },
   "stakeAddressDetail": {
-    "title": "Stake address %address% detail | Cexplorer.io",
-    "description": "Details of a %address% stake address on the blockchain.",
-    "keywords": "address, stake, blockchain, %address%, cexplorer"
+    "title": "Stake address %address% detail | Cexplorer.io"
   },
   "donatePage": {
-    "title": "Donate | Cexplorer.io",
-    "description": "Donate to Cexplorer.io.",
-    "keywords": "donate, cexplorer"
+    "title": "Donate | Cexplorer.io"
   },
   "policyDetail": {
-    "title": "Policy %policy% detail | Cexplorer.io",
-    "description": "Details of a %policy% policy on the blockchain.",
-    "keywords": "policy, blockchain, %policy%, cexplorer"
+    "title": "Policy %policy% detail | Cexplorer.io"
   },
   "pollsPage": {
-    "title": "Polls | Cexplorer.io",
-    "description": "Polls on Cexplorer.io.",
-    "keywords": "polls, voting, cexplorer, governance"
+    "title": "Polls | Cexplorer.io"
   },
   "pollDetail": {
-    "title": "Poll %poll% | Cexplorer.io",
-    "description": "Details of a %poll% poll on the blockchain.",
-    "keywords": "poll, blockchain, %poll%, cexplorer"
+    "title": "Poll %poll% | Cexplorer.io"
   },
   "epochCalendar": {
-    "title": "Epoch calendar | Cexplorer.io",
-    "description": "Calendar of epochs on the blockchain.",
-    "keywords": "epochs, blockchain, calendar, cexplorer"
+    "title": "Epoch calendar | Cexplorer.io"
   },
   "adaPots": {
-    "title": "Pots | Cexplorer.io",
-    "description": "Ada pots on the blockchain.",
-    "keywords": "pots, blockchain, cexplorer"
+    "title": "Pots | Cexplorer.io"
   },
   "groupsList": {
-    "title": "Groups | Cexplorer.io",
-    "description": "List of groups on the blockchain.",
-    "keywords": "groups, blockchain, cexplorer"
+    "title": "Groups | Cexplorer.io"
   },
   "groupDetail": {
-    "title": "Group %group% detail | Cexplorer.io",
-    "description": "Details of a %group% group on the blockchain.",
-    "keywords": "group, blockchain, %group%, cexplorer"
+    "title": "Group %group% detail | Cexplorer.io"
   },
   "governance": {
-    "title": "Governance Actions | Cexplorer.io",
-    "description": "Explore the latest Governance Actions on Cexplorer.io. Stay informed about proposals, voting outcomes, and governance decisions shaping the Cardano ecosystem.",
-    "keywords": "Governance Actions, Cardano governance, voting proposals, blockchain governance, Cexplorer"
+    "title": "Governance Actions | Cexplorer.io"
   },
   "rewardsChecker": {
-    "title": "Rewards Checker | Cexplorer.io",
-    "description": "Check rewards of the stake address.",
-    "keywords": "rewards, blockchain, cexplorer, stake address"
+    "title": "Rewards Checker | Cexplorer.io"
   },
   "multiPoolDelegators": {
-    "title": "Multi-pool Delegators | Cexplorer.io",
-    "description": "Explore Cardano payment credentials that delegate to multiple stake pools. Visualize stake distribution and delegation counts.",
-    "keywords": "cardano, multi-pool delegators, delegation, stake pools, cexplorer"
+    "title": "Multi-pool Delegators | Cexplorer.io"
   },
   "voteListPage": {
-    "title": "Governance Votes | Cexplorer.io",
-    "description": "Browse and analyze on-chain governance votes on the Cardano blockchain. View proposals, voting results, and DRep participation details.",
-    "keywords": "cardano, governance, votes, proposals, dreps, cexplorer"
+    "title": "Governance Votes | Cexplorer.io"
   },
   "taxTool": {
-    "title": "Tax Tool | Cexplorer.io",
-    "description": "Calculate and track your Cardano staking rewards for tax purposes. View withdrawal history with real-time exchange rates in multiple currencies.",
-    "keywords": "cardano, tax tool, staking rewards, withdrawals, tax reporting, ADA rewards, cexplorer"
+    "title": "Tax Tool | Cexplorer.io"
   }
 }
