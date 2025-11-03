@@ -12,7 +12,7 @@ import { TimeDateIndicator } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
-import { Landmark, Route, User } from "lucide-react";
+import { Landmark, Route, User, TriangleAlert } from "lucide-react";
 import { GovernanceStatusBadge } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
@@ -22,6 +22,8 @@ import { VoteBadge } from "@vellumlabs/cexplorer-sdk";
 import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
 import { generateImageUrl } from "@/utils/generateImageUrl";
+import { isVoteLate } from "@/utils/governance/isVoteLate";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 
 interface VoteDetailCardProps {
   vote: GovernanceVote;
@@ -37,6 +39,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
   const { data: basicData } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(basicData?.data.version.const);
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
+  const { theme } = useThemeStore();
 
   const currentEpoch = miscConst?.no;
 
@@ -313,9 +316,36 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
         if (!vote?.vote) {
           return "-";
         }
+        const voteLate = isVoteLate(vote);
+
+        const warningStyles =
+          theme === "dark"
+            ? {
+                border: "border-[#DC6803]",
+                bg: "bg-[#392E33]",
+                text: "text-white",
+              }
+            : {
+                border: "border-[#FEDF89]",
+                bg: "bg-[#FFFAEB]",
+                text: "text-[#DC6803]",
+              };
+
         return (
-          <div className='flex items-center gap-1'>
+          <div className='flex flex-wrap items-center gap-1'>
             <VoteBadge vote={vote.vote} />
+            {voteLate && (
+              <div
+                className={`flex h-[24px] w-fit items-center gap-1 rounded-xl border ${warningStyles.border} ${warningStyles.bg} px-[8px] py-[2px]`}
+              >
+                <TriangleAlert size={14} className={warningStyles.text} />
+                <span
+                  className={`text-text-xs font-medium ${warningStyles.text}`}
+                >
+                  This vote was submitted after voting closed
+                </span>
+              </div>
+            )}
           </div>
         );
       })(),

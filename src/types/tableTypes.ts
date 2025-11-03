@@ -257,6 +257,34 @@ export interface StakeWithdrawalsTableOptions {
   rows: number;
 }
 
+export type TaxToolSummaryColumns = {
+  period: boolean;
+  rewards_ada: boolean;
+  rewards_usd: boolean;
+  rewards_secondary: boolean;
+};
+
+export type TaxToolEpochRewardsColumns = {
+  epoch: boolean;
+  end_time: boolean;
+  type: boolean;
+  rewards_ada: boolean;
+  rewards_usd: boolean;
+  rewards_secondary: boolean;
+  ada_usd_rate: boolean;
+  ada_secondary_rate: boolean;
+};
+
+export type TaxToolWithdrawalsColumns = {
+  timestamp: boolean;
+  transaction: boolean;
+  rewards_ada: boolean;
+  rewards_usd: boolean;
+  rewards_secondary: boolean;
+  ada_usd_rate: boolean;
+  ada_secondary_rate: boolean;
+};
+
 export interface BlockDetailTableOptions
   extends Pick<TableOptionsCore<BlockDetailColumns>, "isResponsive" | "rows"> {
   columnsVisibility: BlockDetailColumns;

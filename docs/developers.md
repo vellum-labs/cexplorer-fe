@@ -1,0 +1,253 @@
+# Developer Guide
+
+## Tech Stack
+
+- **React 18** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+- **TanStack Router** - File-based routing
+- **TanStack Query** - Server state management
+- **Zustand** - Client state management
+- **TailwindCSS** - Styling
+- **Shadcn UI** - UI components library
+- **Cexplorer SDK** - API client
+
+## Project Structure
+
+```
+src/
+pages/          # Page components
+routes/         # File-based routing (TanStack Router)
+components/     # Reusable UI components
+stores/         # Zustand stores
+hooks/          # Custom React hooks
+services/       # API services (TanStack Query)
+lib/            # Libraries and helpers
+utils/          # Utility functions
+constants/      # Constants and configurations
+types/          # TypeScript type definitions
+resources/      # Static assets (images, icons, etc.)
+workers/        # Web Workers
+```
+
+## Creating a New Page
+
+### 1. Create Page Component
+
+Create a new page component in `src/pages/`:
+
+```tsx
+// src/pages/my-feature/MyFeaturePage.tsx
+export const MyFeaturePage = () => {
+  return (
+    <div>
+      <h1>My Feature</h1>
+    </div>
+  );
+};
+```
+
+### 2. Create Route
+
+Create a route file in `src/routes/`:
+
+```tsx
+// src/routes/my-feature/index.tsx
+import { createFileRoute } from "@tanstack/react-router";
+import { MyFeaturePage } from "@/pages/my-feature/MyFeaturePage";
+
+export const Route = createFileRoute("/my-feature/")({
+  component: MyFeaturePage,
+});
+```
+
+#### Dynamic Routes
+
+For dynamic routes (e.g., `/pool/$id`):
+
+```tsx
+// src/routes/my-feature/$id.tsx
+import { createFileRoute } from "@tanstack/react-router";
+import { MyFeatureDetailPage } from "@/pages/my-feature/MyFeatureDetailPage";
+
+export const Route = createFileRoute("/my-feature/$id")({
+  component: MyFeatureDetailPage,
+});
+
+// Access params in component:
+const { id } = Route.useParams();
+```
+
+### 3. Generate Routes
+
+After creating route files, run:
+
+```bash
+yarn generate:routes
+```
+
+This generates `src/routeTree.gen.ts` automatically.
+
+## State Management
+
+### Zustand Stores
+
+Create stores in `src/stores/`:
+
+```tsx
+// src/stores/myFeatureStore.ts
+import { create } from "zustand";
+
+interface MyFeatureState {
+  value: string;
+  setValue: (value: string) => void;
+}
+
+export const useMyFeatureStore = create<MyFeatureState>(set => ({
+  value: "",
+  setValue: value => set({ value }),
+}));
+```
+
+## Data Fetching
+
+### API Requests
+
+API requests are made using `handleFetch` wrapper from `@/lib/handleFetch`
+combined with TanStack Query.
+
+Create service hooks in `src/services/`:
+
+```tsx
+// src/services/myFeature.ts
+import { useQuery } from "@tanstack/react-query";
+import { handleFetch } from "@/lib/handleFetch";
+import type { MyFeatureResponse } from "@/types/myFeatureTypes";
+
+// Fetch function
+export const fetchMyFeature = async (id: string) => {
+  const url = `/my-feature/detail`;
+
+  return handleFetch<MyFeatureResponse>(url, undefined, {
+    params: { id },
+  });
+};
+
+// React Query hook
+export const useFetchMyFeature = (id: string) => {
+  return useQuery({
+    queryKey: ["myFeature", id],
+    queryFn: async () => {
+      const { data } = await fetchMyFeature(id);
+      return data;
+    },
+  });
+};
+```
+
+### Cexplorer SDK
+
+The project uses
+[@vellumlabs/cexplorer-sdk](https://github.com/vellum-labs/cexplorer-sdk) for
+**UI components only** (buttons, cards, modals, etc.).
+
+### Types
+
+Define API response types in `src/types/`:
+
+```tsx
+// src/types/myFeatureTypes.ts
+export interface MyFeatureResponse {
+  data: {
+    id: string;
+    name: string;
+    value: number;
+  };
+}
+```
+
+## Components
+
+### Component Organization
+
+- Place page-specific components in `src/components/[feature-name]/`
+- Place shared components in `src/components/global/`
+- Use Shadcn UI components from `@vellumlabs/cexplorer-sdk` or
+  `src/components/ui/`
+
+### Example Component
+
+```tsx
+// src/components/my-feature/MyFeatureCard.tsx
+import { Button, AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+
+interface MyFeatureCardProps {
+  title: string;
+  amount: number;
+  onAction: () => void;
+}
+
+export const MyFeatureCard = ({
+  title,
+  amount,
+  onAction,
+}: MyFeatureCardProps) => {
+  return (
+    <div className='rounded-lg border p-4'>
+      <h2 className='text-lg font-semibold'>{title}</h2>
+      <AdaWithTooltip value={amount} />
+      <Button label='Action' onClick={onAction} variant='primary' />
+    </div>
+  );
+};
+```
+
+## Styling
+
+- Use TailwindCSS utility classes
+- Follow existing component patterns for consistency
+
+## Development
+
+### Scripts
+
+```bash
+yarn dev              # Start dev server (localhost:3001)
+yarn dev:host         # Start dev server with network access
+yarn build            # Build for production
+yarn generate:routes  # Generate route tree
+yarn typecheck        # Run TypeScript checks
+yarn lint             # Run ESLint
+yarn format           # Format code with Prettier
+```
+
+### Path Aliases
+
+- `@/` maps to `src/` directory
+- Example: `import { Component } from '@/components/Component'`
+
+## Pull Requests
+
+### SDK Dependencies
+
+If your merge request depends on changes from the SDK:
+
+1. Add label **`SDK`** to your merge request
+2. Wait for SDK changes to be merged and published
+3. Update SDK version in `package.json`
+
+### Before Submitting
+
+- Run `yarn typecheck` to ensure no TypeScript errors
+- Run `yarn lint` to check for linting issues
+- Run `yarn format` to format code
+- Test your changes locally
+- Ensure routes are generated with `yarn generate:routes`
+
+## Additional Resources
+
+- [Cexplorer SDK Repository](https://github.com/vellum-labs/cexplorer-sdk)
+- [TanStack Router Docs](https://tanstack.com/router)
+- [TanStack Query Docs](https://tanstack.com/query)
+- [Zustand Docs](https://zustand-demo.pmnd.rs/)
+- [TailwindCSS Docs](https://tailwindcss.com)

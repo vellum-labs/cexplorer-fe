@@ -15,11 +15,28 @@ interface RewardAccount {
   epoch_stake: number;
 }
 
+interface PriceData {
+  low: number;
+  high: number;
+  open: number;
+  close: number;
+  volume: number;
+  time_open: string;
+  market_cap: number;
+  time_close: string;
+}
+
+interface RateData {
+  ada: PriceData[];
+  btc: PriceData[];
+  date: string;
+}
+
 interface RewardSpendableEpoch {
   no: number | null;
   start_time: string | null;
   end_time: string | null;
-  rate: number | null;
+  rate: RateData[] | null;
 }
 
 interface RewardPool {

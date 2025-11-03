@@ -216,7 +216,9 @@ export const useAssetDetail = ({
       : undefined,
     {
       label: "Mint Count",
-      value: formatNumber(detailData?.stat?.asset?.mintc),
+      value: detailData?.stat?.asset?.mintc
+        ? formatNumber(detailData?.stat?.asset?.mintc)
+        : "-",
     },
   ];
 

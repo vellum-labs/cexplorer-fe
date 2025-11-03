@@ -319,24 +319,10 @@ const fetchAverageDrep = async () => {
   return handleFetch<AverageDrepResponse>(url);
 };
 
-export const useFetchAverageDrep = () => {
-  return useQuery({
-    queryKey: ["average-drep"],
-    queryFn: () => fetchAverageDrep(),
-  });
-};
-
 const fetchDrepSpoSameTime = () => {
   const url = "/analytics/drep_spo?type=power_drep_spo_same_time";
 
   return handleFetch<DrepSpoSameTimeResponse>(url);
-};
-
-export const useFetchDrepSpoSameTime = () => {
-  return useQuery({
-    queryKey: ["drep-spo-same-time"],
-    queryFn: () => fetchDrepSpoSameTime(),
-  });
 };
 
 const fetchCombinedAverageDrep =

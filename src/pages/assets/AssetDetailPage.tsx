@@ -199,17 +199,6 @@ export const AssetDetailPage: FC = () => {
           "%encodedname%",
           nameByRegistry || title,
         ),
-        keyword: metadata.assetDetail.keywords.replace(
-          "%encodedname%",
-          nameByRegistry || title,
-        ),
-        description: metadata.assetDetail.description
-          .replace("%encodedname%", nameByRegistry || title)
-          .replace("%asset%", title)
-          .replace(
-            "%registry%",
-            assetDetailQuery.data?.data?.registry?.name ?? "",
-          ),
       }}
     >
       <section className='flex w-full justify-center'>
