@@ -202,5 +202,8 @@
   },
   "voteListPage": {
     "title": "Governance Votes | Cexplorer.io"
+  },
+  "taxTool": {
+    "title": "Tax Tool | Cexplorer.io"
   }
 }

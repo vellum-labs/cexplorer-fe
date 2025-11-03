@@ -22,6 +22,7 @@ export type MiscBasicResponse = {
         type: string;
         link: string;
         text: string;
+        img: string | null;
       };
       type: string;
     }[];

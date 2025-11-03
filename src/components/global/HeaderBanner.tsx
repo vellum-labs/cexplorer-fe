@@ -14,6 +14,7 @@ export interface HeaderBannerProps {
   badge?: ReactNode;
   qrCode?: ReactNode;
   isHomepage?: boolean;
+  homepageAd?: ReactNode;
 }
 
 export const HeaderBanner = ({
@@ -24,6 +25,7 @@ export const HeaderBanner = ({
   badge,
   qrCode,
   isHomepage,
+  homepageAd,
 }: HeaderBannerProps) => {
   const { locale } = useLocaleStore();
   const miscBasic = useFetchMiscBasic(true);
@@ -40,6 +42,7 @@ export const HeaderBanner = ({
       isHomepage={isHomepage}
       qrCode={qrCode}
       subTitle={subTitle}
+      homepageAd={homepageAd}
     />
   );
 };

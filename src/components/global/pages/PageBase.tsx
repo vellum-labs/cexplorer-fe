@@ -26,6 +26,7 @@ interface PageBaseInitProps {
   showHeader?: boolean;
   showMetadata?: boolean;
   isHomepage?: boolean;
+  homepageAd?: ReactNode;
 }
 
 interface PageWithSimpleMetadata extends PageBaseInitProps {
@@ -59,6 +60,7 @@ export const PageBase: FC<PageBaseProps> = ({
   showHeader = true,
   showMetadata = true,
   isHomepage,
+  homepageAd,
 }) => {
   const miscBasicQuery = useFetchMiscBasic();
 
@@ -87,6 +89,7 @@ export const PageBase: FC<PageBaseProps> = ({
           qrCode={qrCode}
           breadcrumbSeparator={breadcrumbSeparator}
           isHomepage={isHomepage}
+          homepageAd={homepageAd}
         />
       )}
       {adsCarousel && (

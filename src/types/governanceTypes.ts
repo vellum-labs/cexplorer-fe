@@ -2,8 +2,8 @@ import type { ResponseCore } from "./commonTypes";
 
 export enum GovernanceRole {
   DRep = "DRep",
-  SPO = "SPO", 
-  ConstitutionalCommittee = "ConstitutionalCommittee"
+  SPO = "SPO",
+  ConstitutionalCommittee = "ConstitutionalCommittee",
 }
 
 interface GovernanceActionIdent {
@@ -279,6 +279,7 @@ export interface GovernanceTx {
   treasury_donation: number;
   block_no: number;
   block_hash: string;
+  epoch_no: number;
 }
 
 export interface CommitteeListItem {
@@ -798,4 +799,4 @@ export interface ConstitutionDataItem {
   anchor: ConstitutionAnchor;
   script_hash: string;
   gov_action_proposal: any | null;
-} 
+}
