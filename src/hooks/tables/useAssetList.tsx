@@ -16,6 +16,7 @@ import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "./useSearchTable";
+import { useSearch } from "@tanstack/react-router";
 
 interface UseAssetListArgs {
   page?: number;
@@ -39,7 +40,6 @@ interface UseAssetList {
     | Omit<AssetListTableColumns, "type">
     | Omit<AssetListTableColumns, "type" | "mint_quantity">;
   setWatchlistOnly: Dispatch<SetStateAction<boolean>>;
-  setTabParam: Dispatch<SetStateAction<"nft" | "token" | "all">>;
   setTableSearch: Dispatch<SetStateAction<string>>;
   setColumnVisibility: (storeKey: string, isVisible: boolean) => void;
 }
@@ -56,10 +56,11 @@ export const useAssetList = ({
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { columnsVisibility, setColumnVisibility, rows } =
     useAssetListTableStore(storeKey)(type === "all" ? undefined : type)();
+  const { tab } = useSearch({ strict: false });
 
   const [{ debouncedTableSearch, tableSearch }, setTableSearch] =
     useSearchTable();
-  const [tabParam, setTabParam] = useState<"nft" | "token" | "all">("all");
+
   const [watchlistOnly, setWatchlistOnly] = useState(false);
 
   const [totalItems, setTotalItems] = useState(0);
@@ -76,9 +77,9 @@ export const useAssetList = ({
       ? "token"
       : type === "recent-nfts"
         ? "nft"
-        : tabParam === "all"
+        : tab === "all"
           ? undefined
-          : tabParam,
+          : tab,
     overrideTableSearch
       ? overrideTableSearch
       : debouncedTableSearch.length > 0
@@ -224,7 +225,6 @@ export const useAssetList = ({
     totalItems,
     columnsVisibility,
     setColumnVisibility,
-    setTabParam,
     setWatchlistOnly,
     setTableSearch,
   };
