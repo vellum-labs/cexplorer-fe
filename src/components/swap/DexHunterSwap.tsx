@@ -16,6 +16,11 @@ interface DexHunterSwapProps {
   partnerCode?: string;
   partnerName?: string;
   displayType?: "WIDGET" | "DEFAULT" | "BUTTON";
+  defaultToken?: string;
+  inputs?: string[];
+  onSwapSuccess?: (data: any) => void;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 export const DexHunterSwap = ({
@@ -33,6 +38,11 @@ export const DexHunterSwap = ({
   partnerCode = "cexplorernextgen61646472317139737a356b773430706d6e6b636d6d667673736d35667932767a6b6b376c30777535737a7632356e6e66666b716e6b633335717972676e717538746c3936753565656a79746776747371617472326d733668727868647a713470736c767032726dda39a3ee5e6b4b0d3255bfef95601890afd80709",
   partnerName = "cexplorernextgen",
   displayType = "DEFAULT",
+  defaultToken,
+  inputs,
+  onSwapSuccess,
+  className,
+  style,
 }: DexHunterSwapProps) => {
   return (
     <div className="w-full">
@@ -44,6 +54,11 @@ export const DexHunterSwap = ({
         partnerCode={partnerCode}
         partnerName={partnerName}
         displayType={displayType}
+        defaultToken={defaultToken}
+        inputs={inputs}
+        onSwapSuccess={onSwapSuccess}
+        className={className}
+        style={style}
       />
     </div>
   );
