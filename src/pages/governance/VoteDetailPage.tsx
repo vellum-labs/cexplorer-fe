@@ -45,6 +45,9 @@ export const GovernanceVoteDetailPage: FC = () => {
     }));
   }, [votes, isLoading]);
 
+  const firstVote = votes[0];
+  const governanceActionId = firstVote?.proposal?.ident?.id;
+
   return (
     <PageBase
       metadataTitle='govVoteDetail'
@@ -58,9 +61,21 @@ export const GovernanceVoteDetailPage: FC = () => {
           link: "/gov",
         },
         {
-          label: <span className='inline pt-1/2'>Votes</span>,
-          link: "/gov/vote",
+          label: <span className='inline pt-1/2'>Governance actions</span>,
+          link: "/gov/action",
         },
+        ...(governanceActionId
+          ? [
+              {
+                label: (
+                  <span className='inline pt-1/2'>
+                    {formatString(governanceActionId, "long")}
+                  </span>
+                ),
+                link: `/gov/action/${encodeURIComponent(governanceActionId)}`,
+              },
+            ]
+          : []),
         {
           label: <span>{formatString(hash ?? "", "long")}</span>,
           ident: hash,
