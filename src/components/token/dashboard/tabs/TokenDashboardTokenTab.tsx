@@ -36,7 +36,12 @@ import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { PriceAdaSmallAmount } from "@vellumlabs/cexplorer-sdk";
 import { PriceSparkline } from "@/components/charts/PriceSparkline";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
-import { AlertCircle, TrendingUp, TrendingDown } from "lucide-react";
+import {
+  AlertCircle,
+  TrendingUp,
+  TrendingDown,
+  ShoppingBasket,
+} from "lucide-react";
 import { configJSON } from "@/constants/conf";
 
 type Volume = "1d" | "1m" | "1w" | "2w" | "3m";
@@ -367,6 +372,30 @@ export const TokenDashboardTokenTab: FC = () => {
       title: <span>Last 7 days</span>,
       visible: columnsVisibility.last_week,
       widthPx: 120,
+    },
+    {
+      key: "buy",
+      render: item => {
+        const assetName = item?.assetname;
+        if (!assetName) {
+          return null;
+        }
+        return (
+          <div className='flex justify-end'>
+            <Link
+              to='/swap'
+              search={{ asset: assetName }}
+              className='text-primary'
+              title='Buy'
+            >
+              <ShoppingBasket size={18} />
+            </Link>
+          </div>
+        );
+      },
+      title: <span className='flex w-full justify-end'>Buy</span>,
+      visible: columnsVisibility.buy,
+      widthPx: 40,
     },
   ];
 

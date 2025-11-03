@@ -243,6 +243,8 @@ export const AssetDetailPage: FC = () => {
                 formattedHex={
                   formattedHex ? encodeAssetName(formattedHex) : undefined
                 }
+                hasDex={!!assetDetailQuery?.data?.data?.dex}
+                assetName={assetName}
               />
             )}
           </div>
