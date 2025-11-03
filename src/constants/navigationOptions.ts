@@ -113,8 +113,8 @@ export const navigationOptions: {
     },
   ],
   governance: [
-    { label: "DReps", href: "/drep" },
-    { label: "CC", href: "/gov/cc" },
+    { label: "DReps", href: "/drep", params: { tab: "list" } },
+    { label: "CC", href: "/gov/cc", params: { tab: "members" } },
     { label: "Votes", href: "/gov/vote" },
     { label: "Power Thresholds", href: "/gov/power-thresholds" },
     { label: "Governance Actions", href: "/gov/action" },
