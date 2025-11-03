@@ -23,6 +23,7 @@ import { setGlobalAbortSignal } from "@/lib/handleFetch";
 import { abortControllers } from "@/lib/handleAbortController";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { useFetchMiscBasic } from "@/services/misc";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const RootComponent = () => {
   const { notFound, setNotFound } = useNotFound();
@@ -181,6 +182,7 @@ const RootComponent = () => {
         <SafetyLinkModal url={clickedUrl} onClose={() => setClickedUrl(null)} />
       )}
       {/* <TanStackRouterDevtools /> */}
+      {/* <ReactQueryDevtools /> */}
     </>
   );
 };

@@ -59,7 +59,6 @@ export const AssetListPage: FC<AssetListPageProps> = ({
     columns,
     totalItems,
     items,
-    setTabParam,
     setWatchlistOnly,
     setTableSearch,
   } = useAssetList({
@@ -137,9 +136,6 @@ export const AssetListPage: FC<AssetListPageProps> = ({
                 withMargin={false}
                 withPadding={false}
                 mobileItemsCount={3}
-                onClick={activeTab =>
-                  setTabParam(activeTab as "nft" | "token" | "all")
-                }
               />
             )}
             <div className='flex items-center gap-1 md:hidden'>

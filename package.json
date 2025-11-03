@@ -93,6 +93,7 @@
   "devDependencies": {
     "@playwright/test": "^1.52.0",
     "@tanstack/eslint-plugin-query": "^5.43.1",
+    "@tanstack/react-query-devtools": "^5.90.2",
     "@tanstack/router-devtools": "^1.36.0",
     "@tanstack/router-vite-plugin": "^1.116.1",
     "@types/node": "^20.14.2",
