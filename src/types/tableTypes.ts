@@ -1,4 +1,4 @@
-import type { ReactNode } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import type { MouseEventHandler, RefObject } from "react";
 
 interface TableColumn<T> {
@@ -631,6 +631,7 @@ export interface DeFiTokenTableColumns {
   liquidity: boolean;
   age: boolean;
   last_week: boolean;
+  buy: boolean;
 }
 
 export interface DrepListTableColumns {

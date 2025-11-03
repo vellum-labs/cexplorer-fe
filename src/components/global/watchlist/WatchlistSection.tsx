@@ -20,6 +20,8 @@ export const WatchlistSection = ({
   drepDetailQuery,
   enableWatchlistModal = false,
   stakeKey,
+  hasDex = false,
+  assetName,
 }: {
   ident: string | undefined;
   isLoading: boolean;
@@ -29,6 +31,8 @@ export const WatchlistSection = ({
   drepDetailQuery?: ReturnType<typeof useFetchDrepDetail>;
   enableWatchlistModal?: boolean;
   stakeKey?: string;
+  hasDex?: boolean;
+  assetName?: string;
 }) => {
   const { lucid, address, walletType } = useWalletStore();
   const [showWalletModal, setShowWalletModal] = useState<boolean>(false);
@@ -74,6 +78,14 @@ export const WatchlistSection = ({
             className='h-8'
           />
         )}
+        {hasDex && (
+          <LoadingSkeleton
+            height='32px'
+            width='70px'
+            rounded='lg'
+            className='h-8'
+          />
+        )}
         <LoadingSkeleton
           height='32px'
           width='32px'
@@ -100,6 +112,15 @@ export const WatchlistSection = ({
           variant='primary'
           label='Marketplace'
           className='h-[32px]'
+        />
+      )}
+      {hasDex && assetName && (
+        <Button
+          href={`/swap?asset=${assetName}` as any}
+          size='md'
+          leftIcon={<ShoppingBasket size={18} />}
+          variant='primary'
+          label='Buy'
         />
       )}
       <ShareButton />
