@@ -9,6 +9,7 @@ import App from "./App.tsx";
 import { routeTree } from "./routeTree.gen.ts";
 import "./styles/admin.css";
 import "@vellumlabs/cexplorer-sdk/style.css";
+import "@dexhunterio/swaps/lib/assets/style.css";
 
 export const router = createRouter({ routeTree });
 
