@@ -30,7 +30,7 @@ const ContentTabItem = () => {
 
   const inputsCount = data?.all_inputs?.length || 0;
   const outputsCount = data?.all_outputs?.length || 0;
-  const showSearch = inputsCount > 10 || outputsCount > 10;
+  const showSearch = inputsCount > 5 || outputsCount > 5;
 
   return (
     <>
