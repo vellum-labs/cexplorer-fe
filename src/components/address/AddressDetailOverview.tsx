@@ -38,15 +38,17 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
   address,
 }) => {
   const { theme } = useThemeStore();
-  const stakeKey = Address.from(address).stake;
-  const stakeAddr = Address.from(address).rewardAddress;
+  const addressData = Address.from(address);
+  const paymentCredential = addressData.payment;
+  const stakeKey = addressData.stake;
+  const stakeAddr = addressData.rewardAddress;
   const tokenMarket = configJSON.market[0].token[0].active;
   const nftMarket = configJSON.market[0].nft[0].active;
   const policyId = configJSON.integration[0].adahandle[0].policy;
   const curr = useGetMarketCurrency();
   const isStaking = data[0]?.stake?.active_pool || data[0]?.stake?.live_pool;
   const isRecync = data[0]?.address === null;
-  const rawAddress = Address.toHexString(Address.from(address).raw);
+  const rawAddress = Address.toHexString(addressData.raw);
   const { currency } = useCurrencyStore();
 
   const overviewList = [
@@ -65,20 +67,9 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
     {
       label: "Address",
       value: (
-        <p
-          className='flex items-center gap-[6px]'
-          title={isRecync ? address : (data[0]?.address ?? "")}
-        >
-          <span>
-            {formatString(
-              isRecync ? address : (data[0]?.address ?? ""),
-              "long",
-            )}
-          </span>
-          <Copy
-            copyText={isRecync ? address : (data[0]?.address ?? "")}
-            className='translate-y-[2px]'
-          />
+        <p className='flex items-center gap-[6px]' title={address}>
+          <span>{formatString(address, "long")}</span>
+          <Copy copyText={address} className='translate-y-[2px]' />
         </p>
       ),
     },
@@ -296,15 +287,9 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
     {
       label: "Address",
       value: (
-        <p
-          className='flex items-center gap-[6px]'
-          title={data[0]?.extract?.address ?? ""}
-        >
-          <span>{formatString(data[0]?.extract?.address ?? "", "long")}</span>
-          <Copy
-            copyText={data[0]?.extract?.address ?? ""}
-            className='translate-y-[2px]'
-          />
+        <p className='flex items-center gap-[6px]' title={address}>
+          <span>{formatString(address, "long")}</span>
+          <Copy copyText={address} className='translate-y-[2px]' />
         </p>
       ),
     },
@@ -313,21 +298,21 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
       value: (
         <p
           className='flex items-center gap-[6px]'
-          title={data[0]?.extract?.payment ?? ""}
+          title={paymentCredential}
         >
           {parseShelleyAddress(address)?.paymentPart === "ScriptHash" ? (
             <Link
               to='/script/$hash'
-              params={{ hash: data[0].extract?.payment }}
+              params={{ hash: paymentCredential }}
               className='text-primary'
             >
-              {formatString(data[0]?.extract?.payment ?? "", "long")}
+              {formatString(paymentCredential, "long")}
             </Link>
           ) : (
-            <span>{formatString(data[0]?.extract?.payment ?? "", "long")}</span>
+            <span>{formatString(paymentCredential, "long")}</span>
           )}
           <Copy
-            copyText={data[0]?.extract?.payment ?? ""}
+            copyText={paymentCredential}
             className='translate-y-[2px]'
           />
         </p>
@@ -336,19 +321,9 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
     {
       label: "Staking Credential",
       value: (
-        <p
-          className='flex items-center gap-[6px]'
-          title={data[0]?.extract?.stake ?? ""}
-        >
-          <span>
-            {data[0]?.extract?.stake
-              ? formatString(data[0]?.extract?.stake, "long")
-              : "-"}
-          </span>
-          <Copy
-            copyText={data[0]?.extract?.stake ?? ""}
-            className='translate-y-[2px]'
-          />
+        <p className='flex items-center gap-[6px]' title={stakeKey}>
+          <span>{stakeKey ? formatString(stakeKey, "long") : "-"}</span>
+          <Copy copyText={stakeKey} className='translate-y-[2px]' />
         </p>
       ),
     },
