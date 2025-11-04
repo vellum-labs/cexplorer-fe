@@ -126,9 +126,9 @@ export const StatusPage: FC = () => {
                   : "bg-redText/10 border-redText"
               }`}
             >
-              <div className='flex items-start gap-2'>
+              <div className='flex items-center gap-2'>
                 <div
-                  className={`rounded-s flex aspect-square w-[24px] items-center justify-center ${
+                  className={`flex aspect-square w-[24px] items-center justify-center rounded-s ${
                     miscHealth.data.is_healthy ? "bg-greenText" : "bg-redText"
                   }`}
                 >
