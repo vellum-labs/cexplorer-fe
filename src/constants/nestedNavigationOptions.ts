@@ -118,6 +118,10 @@ export const nestedNavigationOptions: {
           label: "Hardfork",
           href: "/hardfork",
         },
+        {
+          label: "Treasury projection",
+          href: "/treasury/projection",
+        },
       ],
     },
     others: {
