@@ -340,6 +340,8 @@ export type CommitteeDetailResponse = ResponseCore<{
   committee: CommitteeInfo;
 }>;
 
+export type CCMemberDetailResponse = ResponseCore<CommitteeMember[]>;
+
 export interface ConstitutionAnchor {
   url: string;
   data_hash: string;

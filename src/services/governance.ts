@@ -1,4 +1,5 @@
 import type {
+  CCMemberDetailResponse,
   CommitteeDetailResponse,
   CommitteeListResponse,
   ConstitutionListResponse,
@@ -173,6 +174,25 @@ export const useFetchCommitteeDetail = () => {
   return useQuery({
     queryKey: ["committee-detail"],
     queryFn: () => fetchCommitteeDetail(),
+  });
+};
+
+export const fetchCCMemberDetail = async (ident: string) => {
+  const url = "/gov/committee_member";
+  const options = {
+    params: {
+      ident,
+    },
+  };
+
+  return handleFetch<CCMemberDetailResponse>(url, undefined, options);
+};
+
+export const useFetchCCMemberDetail = (ident: string) => {
+  return useQuery({
+    queryKey: ["cc-member-detail", ident],
+    queryFn: () => fetchCCMemberDetail(ident),
+    enabled: !!ident,
   });
 };
 
