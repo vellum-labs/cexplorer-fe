@@ -119,5 +119,5 @@ export const DEXHUNTER_COLORS = {
   subText: "var(--grayTextPrimary)",
   mainText: "var(--text)",
   buttonText: "var(--white)",
-  accent: "var(--primary)",
+  accent: "var(--darkBlue)",
 };
