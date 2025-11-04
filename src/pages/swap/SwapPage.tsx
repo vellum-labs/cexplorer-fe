@@ -1,12 +1,17 @@
 import type { FC } from "react";
 import { useState, useEffect, useRef } from "react";
 import { useSearch, useNavigate } from "@tanstack/react-router";
+import Swap from "@dexhunterio/swaps";
 
 import { PageBase } from "@/components/global/pages/PageBase";
-import { DexHunterSwap } from "@/components/swap/DexHunterSwap";
 import { AssetExchangesCandlestickGraph } from "@/components/asset/subtabs/AssetExchangesGraph";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { fetchAssetList } from "@/services/assets";
+import {
+  DEXHUNTER_PARTNER_CODE,
+  DEXHUNTER_PARTNER_NAME,
+  DEXHUNTER_COLORS,
+} from "@/constants/dexConfig";
 
 export const SwapPage: FC = () => {
   const { theme } = useThemeStore();
@@ -22,6 +27,7 @@ export const SwapPage: FC = () => {
 
   const swapContainerRef = useRef<HTMLDivElement>(null);
   const isInitialMount = useRef(true);
+  const lastDetectedTokenRef = useRef<string>("");
 
   const resolveAssetIdentifier = async (ticker: string) => {
     if (!ticker) return;
@@ -71,8 +77,6 @@ export const SwapPage: FC = () => {
   useEffect(() => {
     if (!swapContainerRef.current) return;
 
-    let lastDetectedToken = selectedTicker;
-
     const detectToken = () => {
       const swapContainer = swapContainerRef.current;
       if (!swapContainer) return;
@@ -104,15 +108,15 @@ export const SwapPage: FC = () => {
         targetToken = buyToken;
       }
 
-      if (targetToken && targetToken !== lastDetectedToken) {
-        lastDetectedToken = targetToken;
+      if (targetToken && targetToken !== lastDetectedTokenRef.current) {
+        lastDetectedTokenRef.current = targetToken;
         setSelectedTicker(targetToken);
       }
     };
 
     const observer = new MutationObserver(detectToken);
 
-    const timeoutId = setTimeout(() => {
+    const rafId = requestAnimationFrame(() => {
       if (!swapContainerRef.current) return;
 
       observer.observe(swapContainerRef.current, {
@@ -122,22 +126,13 @@ export const SwapPage: FC = () => {
       });
 
       detectToken();
-    }, 500);
+    });
 
     return () => {
-      clearTimeout(timeoutId);
+      cancelAnimationFrame(rafId);
       observer.disconnect();
     };
   }, []);
-
-  const colors = {
-    background: "var(--cardBg)",
-    containers: "var(--background)",
-    subText: "var(--grayTextPrimary)",
-    mainText: "var(--text)",
-    buttonText: "var(--white)",
-    accent: "var(--primary)",
-  };
 
   return (
     <PageBase
@@ -156,7 +151,7 @@ export const SwapPage: FC = () => {
                     className='!py-[67px]'
                   />
                 ) : (
-                  <div className='rounded-lg flex min-h-[500px] items-center justify-center border border-border bg-cardBg p-4'>
+                  <div className='flex min-h-[500px] items-center justify-center rounded-m border border-border bg-cardBg p-4'>
                     <p className='text-grayTextPrimary'>
                       Select a token in the swap widget to view chart
                     </p>
@@ -168,17 +163,19 @@ export const SwapPage: FC = () => {
                 className='w-full lg:w-auto lg:flex-shrink-0'
                 ref={swapContainerRef}
               >
-                <DexHunterSwap
-                  orderTypes={["SWAP", "LIMIT"]}
-                  colors={colors}
-                  theme={theme}
-                  width='400'
-                  partnerCode='cexplorernextgen61646472317139737a356b773430706d6e6b636d6d667673736d35667932767a6b6b376c30777535737a7632356e6e66666b716e6b633335717972676e717538746c3936753565656a79746776747371617472326d733668727868647a713470736c767032726dda39a3ee5e6b4b0d3255bfef95601890afd80709'
-                  partnerName='cexplorernextgen'
-                  displayType='DEFAULT'
-                  defaultToken={assetFromUrl || undefined}
-                  className='!rounded-[27px] !border !border-border'
-                />
+                <div className='w-full'>
+                  <Swap
+                    orderTypes={["SWAP", "LIMIT"] as any}
+                    colors={DEXHUNTER_COLORS as any}
+                    theme={theme}
+                    width='400'
+                    partnerCode={DEXHUNTER_PARTNER_CODE}
+                    partnerName={DEXHUNTER_PARTNER_NAME}
+                    displayType='DEFAULT'
+                    defaultToken={assetFromUrl || undefined}
+                    className='!rounded-[27px] !border !border-border'
+                  />
+                </div>
               </div>
             </div>
           </div>
