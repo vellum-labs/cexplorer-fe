@@ -90,7 +90,12 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
     )
     .reduce((sum, order) => sum + (order.amount_in ?? 0), 0);
 
-  const remainingPendingAmount = summaryAmountIn - totalCompletedAmountIn;
+  const totalCancelledAmountIn = aggregatedData.orders
+    .filter(order => order != null && order.status === "CANCELLED")
+    .reduce((sum, order) => sum + (order.amount_in ?? 0), 0);
+
+  const remainingPendingAmount =
+    summaryAmountIn - totalCompletedAmountIn - totalCancelledAmountIn;
   const hasPendingAmount = remainingPendingAmount > 0.001;
 
   return (
