@@ -38,8 +38,6 @@ export const ContractTransactionsPage = () => {
   const count = query.data?.pages[0].data.count;
   const items = query.data?.pages.flatMap(page => page.data.data);
 
-  console.log("items", items);
-
   const columns: TableColumns<ContractInteractionsData> = [
     {
       key: "date",
