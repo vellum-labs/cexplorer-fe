@@ -82,6 +82,17 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
   const summaryAmountOut =
     aggregatedData.totalActualOut || aggregatedData.totalExpectedOut;
 
+  const totalCompletedAmountIn = aggregatedData.orders
+    .filter(
+      order =>
+        order != null &&
+        (order.status === "COMPLETE" || order.status === "PARTIALLY_COMPLETE"),
+    )
+    .reduce((sum, order) => sum + (order.amount_in ?? 0), 0);
+
+  const remainingPendingAmount = summaryAmountIn - totalCompletedAmountIn;
+  const hasPendingAmount = remainingPendingAmount > 0.001;
+
   return (
     <div className='w-full overflow-x-auto rounded-xl border border-border xl:overflow-x-visible'>
       <div className='min-w-fit xl:min-w-full'>
@@ -281,6 +292,46 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                     </div>
                   );
                 })}
+
+            {hasPendingAmount && (
+              <div
+                className='grid gap-2 text-text-sm'
+                style={{ gridTemplateColumns: "55% 15% 15% 15%" }}
+              >
+                <div className='flex items-center gap-1'>
+                  <Route size={16} className='text-grayTextSecondary' />
+                  <div className='flex items-center gap-1/2'>
+                    {getAssetImage(aggregatedData?.pair?.tokenIn, false, 16)}
+                    <Tooltip
+                      content={safeToLocaleString(remainingPendingAmount)}
+                    >
+                      <span>
+                        {formatNumberWithSuffix(remainingPendingAmount)}{" "}
+                        {formatTokenName(aggregatedData?.pair?.tokenIn) ===
+                        "ADA" ? (
+                          "ADA"
+                        ) : (
+                          <AssetTicker
+                            tokenName={aggregatedData?.pair?.tokenIn ?? ""}
+                            registry={aggregatedData?.pair?.tokenInRegistry}
+                          />
+                        )}
+                      </span>
+                    </Tooltip>
+                  </div>
+                  <ArrowRight size={14} />
+                  <span className='text-grayTextSecondary'>Pending</span>
+                </div>
+                <div>-</div>
+                <div className='flex items-center'>
+                  <p className='flex w-fit items-center gap-1/2 rounded-m border border-border px-1 text-text-sm'>
+                    <Ellipsis size={15} className='text-yellowText' />
+                    <span className='capitalize'>Pending</span>
+                  </p>
+                </div>
+                <div>-</div>
+              </div>
+            )}
           </div>
         </div>
       </div>
