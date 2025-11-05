@@ -2,7 +2,7 @@ import { type FC, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link } from "@tanstack/react-router";
 import { FileText, TriangleAlert, FileUser } from "lucide-react";
-import { VoteBadge } from "@vellumlabs/cexplorer-sdk";
+import { VoteBadge, formatString } from "@vellumlabs/cexplorer-sdk";
 import type { Vote } from "@/constants/votes";
 import { Tooltip, Modal } from "@vellumlabs/cexplorer-sdk";
 import type { AnchorInfo } from "@/types/governanceTypes";
@@ -157,7 +157,22 @@ export const VoteCell: FC<VoteCellProps> = ({
         createPortal(
           <Modal onClose={() => setIsModalOpen(false)} maxWidth='800px'>
             <div className='p-4'>
-              <h3 className='text-lg mb-4 font-semibold'>Metadata</h3>
+              <div className='mb-4 flex items-center justify-between'>
+                <h3 className='text-lg font-semibold'>Metadata</h3>
+                {txHash && (
+                  <Link
+                    to='/gov/vote/$hash'
+                    params={{ hash: txHash }}
+                    search={{ tab: proposalId }}
+                    className='text-sm text-primary hover:opacity-80'
+                  >
+                    <span className='mr-1'>Vote:</span>
+                    <span className='font-mono'>
+                      {formatString(txHash, "long")}
+                    </span>
+                  </Link>
+                )}
+              </div>
               {isLoading ? (
                 <p className='text-grayTextPrimary'>Loading...</p>
               ) : (
