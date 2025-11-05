@@ -209,6 +209,7 @@ export interface StakeRegistrationsColumns {
 
 export interface ContractInteractionsColumns {
   date: boolean;
+  type: boolean;
   purpose: boolean;
   view: boolean;
   deposit: boolean;

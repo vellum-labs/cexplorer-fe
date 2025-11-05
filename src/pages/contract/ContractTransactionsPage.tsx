@@ -5,6 +5,7 @@ import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { PurposeBadge } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
+import { Badge } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "@/components/tx/HashCell";
@@ -37,6 +38,8 @@ export const ContractTransactionsPage = () => {
   const count = query.data?.pages[0].data.count;
   const items = query.data?.pages.flatMap(page => page.data.data);
 
+  console.log("items", items);
+
   const columns: TableColumns<ContractInteractionsData> = [
     {
       key: "date",
@@ -54,6 +57,24 @@ export const ContractTransactionsPage = () => {
       },
       title: "Date",
       visible: columnsVisibility.date,
+      widthPx: 30,
+    },
+    {
+      key: "type",
+      render: item => {
+        return item.data.type ? (
+          <Badge color='blue' rounded>
+            {item.data.type}
+          </Badge>
+        ) : (
+          <span>-</span>
+        );
+      },
+      jsonFormat: item => {
+        return item.data.type || "-";
+      },
+      title: "Type",
+      visible: columnsVisibility.type,
       widthPx: 30,
     },
     {
