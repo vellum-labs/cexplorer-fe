@@ -10,7 +10,6 @@ import { useFetchTxDetail } from "@/services/tx";
 import type { TableColumns } from "@/types/tableTypes";
 import type { TxDetailData } from "@/types/txTypes";
 import { getRouteApi } from "@tanstack/react-router";
-import type { AnchorInfo } from "@/types/governanceTypes";
 import { isVoteLate } from "@/utils/governance/isVoteLate";
 
 export const GovernanceTabItem = () => {
@@ -19,8 +18,6 @@ export const GovernanceTabItem = () => {
   const query = useFetchTxDetail(hash);
   const governance = query.data?.data.governance?.voting_procedure;
   const txEpochNo = query.data?.data.block?.epoch_no;
-
-  console.log("governance", governance);
 
   const columns: TableColumns<
     NonNullable<TxDetailData["governance"]>["voting_procedure"][number]
@@ -74,19 +71,6 @@ export const GovernanceTabItem = () => {
           return "-";
         }
 
-        // Transform proposal anchor to AnchorInfo format
-        const anchorInfo: AnchorInfo | undefined = item?.proposal?.anchor
-          ? {
-              url: item.proposal.anchor.url || null,
-              data_hash: item.proposal.anchor.data_hash || null,
-              offchain: {
-                comment: null,
-                url: item.proposal.anchor.url || null,
-              },
-            }
-          : undefined;
-
-        // Check if vote is late using the existing isVoteLate utility
         const isLate =
           txEpochNo && item?.proposal
             ? isVoteLate({
@@ -104,7 +88,7 @@ export const GovernanceTabItem = () => {
             vote={item.vote as Vote}
             txHash={hash}
             proposalId={item?.proposal?.ident?.id}
-            anchorInfo={anchorInfo}
+            anchorInfo={item?.anchor}
             isLate={isLate}
           />
         );
