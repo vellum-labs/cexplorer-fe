@@ -2,10 +2,17 @@ import { type FC, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link } from "@tanstack/react-router";
 import { FileText, TriangleAlert, FileUser } from "lucide-react";
-import { VoteBadge, formatString } from "@vellumlabs/cexplorer-sdk";
+import {
+  VoteBadge,
+  formatString,
+  Button,
+} from "@vellumlabs/cexplorer-sdk";
 import type { Vote } from "@/constants/votes";
-import { Tooltip, Modal } from "@vellumlabs/cexplorer-sdk";
+import { Tooltip, Modal, SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import type { AnchorInfo } from "@/types/governanceTypes";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { markdownComponents } from "@/constants/markdows";
 
 interface VoteCellProps {
   vote?: Vote | string;
@@ -27,6 +34,7 @@ export const VoteCell: FC<VoteCellProps> = ({
   const [fullMetadata, setFullMetadata] = useState<string>("");
   const [showFullMetadata, setShowFullMetadata] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
   if (!vote) {
     return "-";
@@ -177,18 +185,31 @@ export const VoteCell: FC<VoteCellProps> = ({
                 <p className='text-grayTextPrimary'>Loading...</p>
               ) : (
                 <>
-                  <div className='rounded-lg text-sm max-h-[500px] overflow-auto whitespace-pre-wrap break-words p-3'>
-                    {showFullMetadata && fullMetadata
-                      ? fullMetadata
-                      : modalContent}
+                  <div className='max-h-[500px] overflow-auto rounded-lg p-3 text-sm'>
+                    {showFullMetadata && fullMetadata ? (
+                      <pre className='whitespace-pre-wrap break-words'>
+                        {fullMetadata}
+                      </pre>
+                    ) : (
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        components={markdownComponents(setClickedUrl)}
+                      >
+                        {modalContent}
+                      </ReactMarkdown>
+                    )}
                   </div>
                   {fullMetadata && (
-                    <button
-                      onClick={() => setShowFullMetadata(!showFullMetadata)}
-                      className='text-sm mt-3 rounded-m bg-primary px-3 py-1.5 text-white hover:opacity-90'
-                    >
-                      {showFullMetadata ? "Show Summary" : "Show Full Metadata"}
-                    </button>
+                    <div className='mt-3'>
+                      <Button
+                        size='sm'
+                        variant='primary'
+                        label={
+                          showFullMetadata ? "Show Summary" : "Show Full Metadata"
+                        }
+                        onClick={() => setShowFullMetadata(!showFullMetadata)}
+                      />
+                    </div>
                   )}
                 </>
               )}
@@ -196,6 +217,9 @@ export const VoteCell: FC<VoteCellProps> = ({
           </Modal>,
           document.body,
         )}
+      {clickedUrl && (
+        <SafetyLinkModal url={clickedUrl} onClose={() => setClickedUrl(null)} />
+      )}
     </div>
   );
 };
