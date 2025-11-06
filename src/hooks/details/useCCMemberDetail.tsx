@@ -49,9 +49,9 @@ export const useCCMemberDetail = ({
         typeof isActive === "undefined" ? (
           "-"
         ) : (
-          <div className="relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]">
+          <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
             <PulseDot color={!isActive ? "bg-redText" : undefined} />
-            <span className="text-text-xs font-medium">
+            <span className='text-text-xs font-medium'>
               {isActive ? "Active" : "Inactive"}
             </span>
           </div>
@@ -60,9 +60,9 @@ export const useCCMemberDetail = ({
     {
       label: "Hash",
       value: memberData?.ident?.raw ? (
-        <div className="flex items-center gap-1/2">
+        <div className='flex items-center gap-1/2'>
           <span>{formatString(memberData.ident.raw, "long")}</span>
-          <Copy copyText={memberData.ident.raw} className="translate-y-[2px]" />
+          <Copy copyText={memberData.ident.raw} className='translate-y-[2px]' />
         </div>
       ) : (
         "-"
@@ -70,10 +70,13 @@ export const useCCMemberDetail = ({
     },
     {
       label: "Cold key",
-      value: memberData?.key?.cold ? (
-        <div className="flex items-center gap-1/2">
-          <span>{formatString(memberData.key.cold, "long")}</span>
-          <Copy copyText={memberData.key.cold} className="translate-y-[2px]" />
+      value: memberData?.ident?.cold ? (
+        <div className='flex items-center gap-1/2'>
+          <span>{formatString(memberData.ident.cold, "long")}</span>
+          <Copy
+            copyText={memberData.ident.cold}
+            className='translate-y-[2px]'
+          />
         </div>
       ) : (
         "-"
@@ -81,10 +84,10 @@ export const useCCMemberDetail = ({
     },
     {
       label: "Hot key",
-      value: memberData?.key?.hot ? (
-        <div className="flex items-center gap-1/2">
-          <span>{formatString(memberData.key.hot, "long")}</span>
-          <Copy copyText={memberData.key.hot} className="translate-y-[2px]" />
+      value: memberData?.ident?.hot ? (
+        <div className='flex items-center gap-1/2'>
+          <span>{formatString(memberData.ident.hot, "long")}</span>
+          <Copy copyText={memberData.ident.hot} className='translate-y-[2px]' />
         </div>
       ) : (
         "-"
@@ -95,7 +98,8 @@ export const useCCMemberDetail = ({
       value:
         expirationDate && memberData?.expiration_epoch ? (
           <span>
-            In {formatDistanceToNow(expirationDate)} ({format(expirationDate, "dd/MM/yyyy, HH:mm")})
+            In {formatDistanceToNow(expirationDate)} (
+            {format(expirationDate, "dd/MM/yyyy, HH:mm")})
           </span>
         ) : (
           "-"

@@ -306,6 +306,8 @@ export interface CommitteeKey {
 export interface CommitteeIdent {
   raw: string;
   has_script: boolean;
+  cold: string;
+  hot: string;
 }
 
 export interface CommitteeRegistry {

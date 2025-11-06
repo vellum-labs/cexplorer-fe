@@ -37,18 +37,18 @@ export const CCMembersTab: FC = () => {
       visible: true,
       render: item => {
         const name = item.registry?.name ?? "Unknown";
-        const identRaw = item.ident?.raw ?? "N/A";
+        const identCold = item.ident?.cold ?? "N/A";
 
         const fallbackletters = [...name]
           .filter(char => alphabetWithNumbers.includes(char.toLowerCase()))
           .join("");
 
-        const toPath = identRaw !== "N/A" ? `/gov/cc/${identRaw}` : undefined;
+        const toPath = identCold !== "N/A" ? `/gov/cc/${identCold}` : undefined;
 
         return (
           <div className='relative flex max-h-[75px] w-full items-center gap-1'>
             <Image
-              src={generateImageUrl(identRaw, "ico", "cc")}
+              src={generateImageUrl(identCold, "ico", "cc")}
               type='user'
               className='h-8 w-8 rounded-max'
               height={32}
@@ -72,13 +72,13 @@ export const CCMembersTab: FC = () => {
                     }
                     disabled={!!(name && name !== "Unknown")}
                   >
-                    {formatString(identRaw, "long")}
+                    {formatString(identCold, "long")}
                   </Link>
                 ) : (
-                  <span>{formatString(identRaw, "long")}</span>
+                  <span>{formatString(identCold, "long")}</span>
                 )}
                 <Copy
-                  copyText={identRaw}
+                  copyText={identCold}
                   size={name && name !== "Unknown" ? 10 : 13}
                 />
               </div>

@@ -4,18 +4,12 @@ import { useFetchCCMemberDetail } from "@/services/governance";
 import {
   HeaderBannerSubtitle,
   Image,
-  InfoCard,
   Tabs,
   GlobalTable,
 } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { CCMemberDetailOverview } from "@/components/gov/cc/CCMemberDetailOverview";
-import { Calendar } from "lucide-react";
-import { Link } from "@tanstack/react-router";
-import { useFetchEpochDetailParam } from "@/services/epoch";
-import { useFetchMiscBasic } from "@/services/misc";
-import { useMiscConst } from "@/hooks/useMiscConst";
 import type { TableColumns } from "@/types/tableTypes";
 import { useMemo } from "react";
 
@@ -24,25 +18,11 @@ export const CCMemberDetailPage = () => {
   const { coldKey } = route.useParams();
   const { data } = useFetchCCMemberDetail(coldKey);
 
-  const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
-  const currentEpoch = miscConst?.epoch?.no ?? 0;
-  const { data: epochParam } = useFetchEpochDetailParam(currentEpoch);
-
   const memberData = Array.isArray(data?.data)
     ? data.data.sort(
         (a, b) => (b.expiration_epoch ?? 0) - (a.expiration_epoch ?? 0),
       )[0]
     : data?.data;
-
-  const committeeMaxTermLength = epochParam?.committee_max_term_length;
-  const expirationEpoch = memberData?.expiration_epoch;
-
-  const startEpoch =
-    expirationEpoch && committeeMaxTermLength
-      ? expirationEpoch - committeeMaxTermLength
-      : null;
-  const endEpoch = expirationEpoch ?? null;
 
   interface CCVoteData {
     date: string;
@@ -264,14 +244,14 @@ export const CCMemberDetailPage = () => {
       subTitle={
         <div className='flex flex-col'>
           <HeaderBannerSubtitle
-            hashString={formatString(memberData?.key?.cold ?? "", "long")}
-            hash={memberData?.key?.cold ?? undefined}
+            hashString={formatString(memberData?.ident?.cold ?? "", "long")}
+            hash={memberData?.ident?.cold ?? undefined}
             title='Cold Key'
             className='!mb-0'
           />
           <HeaderBannerSubtitle
-            hashString={formatString(memberData?.key?.hot ?? "", "long")}
-            hash={memberData?.key?.hot ?? undefined}
+            hashString={formatString(memberData?.ident?.hot ?? "", "long")}
+            hash={memberData?.ident?.hot ?? undefined}
             title='Hot Key'
             className='!mt-0'
           />
@@ -287,37 +267,6 @@ export const CCMemberDetailPage = () => {
               isLoading={!data}
               isError={false}
             />
-          </div>
-
-          <div className='h-[110px] w-full max-w-[390px] flex-shrink-0'>
-            <InfoCard
-              icon={<Calendar size={20} className='text-primary' />}
-              title='Mandate duration'
-              className='h-full'
-            >
-              {startEpoch && endEpoch ? (
-                <div className='text-text-lg font-semibold'>
-                  Epoch{" "}
-                  <Link
-                    to='/epoch/$no'
-                    params={{ no: startEpoch.toString() }}
-                    className='text-primary'
-                  >
-                    {startEpoch}
-                  </Link>
-                  {" - "}Epoch{" "}
-                  <Link
-                    to='/epoch/$no'
-                    params={{ no: endEpoch.toString() }}
-                    className='text-primary'
-                  >
-                    {endEpoch}
-                  </Link>
-                </div>
-              ) : (
-                <span className='text-text-lg font-semibold'>Unknown</span>
-              )}
-            </InfoCard>
           </div>
         </div>
       </section>
