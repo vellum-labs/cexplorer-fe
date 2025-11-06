@@ -15,6 +15,16 @@ const __dirname = dirname(__filename);
 export default defineConfig({
   plugins: [
     {
+      name: "strip-data-modulepreload",
+      apply: "build",
+      transformIndexHtml(html: string) {
+        return html.replace(
+          /<link\s+rel="modulepreload"\s+href="data:application\/octet-stream[^"]*"\s*\/?>/g,
+          "",
+        );
+      },
+    },
+    {
       name: "force-lucide-single-chunk",
       outputOptions(output: any) {
         const original = output.manualChunks;
