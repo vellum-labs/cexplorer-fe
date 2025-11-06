@@ -15,7 +15,8 @@
     "prepare": "husky",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "reinstall:sdk": "yarn remove @vellumlabs/cexplorer-sdk && yarn add file:../cexplorer-sdk"
+    "reinstall:sdk": "yarn remove @vellumlabs/cexplorer-sdk && yarn add file:../cexplorer-sdk",
+    "svgo": "svgo -f dist/assets -o dist/assets"
   },
   "dependencies": {
     "@date-fns/tz": "^1.4.1",
@@ -61,7 +62,6 @@
     "embla-carousel-react": "^8.1.5",
     "flatted": "^3.3.1",
     "format": "^0.2.2",
-    "helmet": "^7.1.0",
     "html-react-parser": "^5.1.18",
     "html-to-image": "^1.11.11",
     "immer": "^10.1.1",
@@ -111,6 +111,7 @@
     "prettier": "^3.3.2",
     "prettier-plugin-tailwindcss": "^0.6.2",
     "rimraf": "^6.0.1",
+    "svgo": "^4.0.0",
     "typescript": "^5.5.0",
     "vite": "^7.1.7",
     "vite-plugin-node-polyfills": "^0.24.0",
