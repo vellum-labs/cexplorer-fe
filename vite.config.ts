@@ -75,6 +75,7 @@ export default defineConfig({
     target: "ESNext",
     sourcemap: false,
     rollupOptions: {
+      onwarn: () => undefined,
       output: {
         manualChunks: {
           vendor: [
