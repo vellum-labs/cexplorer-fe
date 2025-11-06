@@ -74,6 +74,9 @@ jobs:
           echo "🔨 Starting build..."
           time yarn build
 
+          echo "🎨 Optimizing SVG icons..."
+          time yarn run svgo
+
           echo "📝 Generating routes.json..."
           time yarn generate:routes
 
