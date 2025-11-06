@@ -14,6 +14,40 @@ const __dirname = dirname(__filename);
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    {
+      name: "force-lucide-single-chunk",
+      outputOptions(output: any) {
+        const original = output.manualChunks;
+
+        output.manualChunks = (id: any, meta: any) => {
+          if (id && id.includes("node_modules/lucide-react/")) {
+            return "vendor";
+          }
+
+          if (original && typeof original === "object") {
+            for (const [name, pkgs] of Object.entries(original)) {
+              if (
+                Array.isArray(pkgs) &&
+                pkgs.some(pkg =>
+                  id.includes(`node_modules/${pkg.replace(/\\/g, "/")}`),
+                )
+              ) {
+                return name;
+              }
+            }
+            return null;
+          }
+
+          if (typeof original === "function") {
+            return original(id, meta);
+          }
+
+          return null;
+        };
+
+        return output;
+      },
+    },
     nodePolyfills({
       globals: {
         Buffer: true,
@@ -93,8 +127,7 @@ export default defineConfig({
             "react-resizable",
             "react-device-detect",
             "react-day-picker",
-          ],
-          ui: [
+            "lucide-react",
             "@radix-ui/react-accordion",
             "@radix-ui/react-dialog",
             "@radix-ui/react-dropdown-menu",
@@ -107,15 +140,23 @@ export default defineConfig({
             "@radix-ui/react-slot",
             "@radix-ui/react-icons",
             "@vellumlabs/cexplorer-sdk",
-            "lucide-react",
+            "@xyflow/react",
+            "echarts-for-react",
+            "@dexhunterio/swaps",
+            "embla-carousel-autoplay",
+            "sonner",
+            "embla-carousel-react",
+            "html-react-parser",
+            "react-markdown",
+            "remark-gfm",
+            "react-syntax-highlighter",
+            "qrcode.react",
+            "react-helmet",
+            "helmet",
             "class-variance-authority",
             "clsx",
             "tailwind-merge",
             "cmdk",
-            "sonner",
-            "@xyflow/react",
-            "embla-carousel-autoplay",
-            "embla-carousel-react",
           ],
           cardano: [
             "@emurgo/cip14-js",
@@ -132,24 +173,8 @@ export default defineConfig({
             "@harmoniclabs/cbor",
             "@harmoniclabs/bytestring",
           ],
-          charts: [
-            "echarts",
-            "echarts-for-react",
-            "echarts-stat",
-            "@dexhunterio/swaps",
-          ],
-          utils: [
-            "html-react-parser",
-            "react-markdown",
-            "remark-gfm",
-            "react-syntax-highlighter",
-            "html-to-image",
-            "qrcode.react",
-            "react-helmet",
-            "helmet",
-            "flatted",
-            "zod",
-          ],
+          charts: ["echarts", "echarts-stat"],
+          utils: ["html-to-image", "flatted", "zod"],
         },
       },
     },
