@@ -736,6 +736,15 @@ const routes = [
     api: false,
   },
   {
+    path: "/swap",
+    title: "Token Swap | Cexplorer.io",
+    description:
+      "Swap Cardano native tokens directly on Cexplorer.io with DexHunter integration. Trade ADA and native assets through decentralized exchanges with real-time price charts, market data, limit orders, and seamless wallet integration for secure token swapping.",
+    keywords:
+      "token swap, Cardano swap, DEX swap, DexHunter, token exchange, ADA swap, native asset swap, decentralized exchange, Cexplorer, token trading",
+    api: false,
+  },
+  {
     path: "/terms",
     title: "Terms of Service | Cexplorer.io",
     description:
