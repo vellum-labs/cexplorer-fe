@@ -1,3 +1,4 @@
+import { PageBase } from "@/components/global/pages/PageBase";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
@@ -25,9 +26,7 @@ import {
   Zap,
 } from "lucide-react";
 import { useRef, useState } from "react";
-import { Helmet } from "react-helmet";
 import { toast } from "sonner";
-import metadata from "../../../conf/metadata/en-metadata.json";
 import { RandomDelegationModal } from "@/components/wallet/RandomDelegationModal";
 import { sendDelegationInfo } from "@/services/tool";
 
@@ -122,8 +121,13 @@ export const DonatePage = () => {
   };
 
   return (
-    <>
-      <Helmet>{<title>{metadata.donatePage.title}</title>}</Helmet>
+    <PageBase
+      metadataOverride={{ title: "Donate | Cexplorer.io" }}
+      title='Fuel the Future of Cexplorer'
+      subTitle='Your support helps us operate, maintain and improve everything on Cexplorer.io'
+      breadcrumbItems={[{ label: "Donate" }]}
+      adsCarousel={false}
+    >
       {showWalletModal && (
         <ConnectWalletModal onClose={() => setShowWalletModal(false)} />
       )}
@@ -154,14 +158,7 @@ export const DonatePage = () => {
           </div>
         </Modal>
       )}
-      <div className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
-        <p className='mt-4 text-text-sm font-semibold text-primary'>Donation</p>
-        <h1 className='mb-2'>Fuel the Future of Cexplorer</h1>
-        <p className='font-regular text-grayTextPrimary'>
-          Your support helps us operate, maintain and improve everything on
-          Cexplorer.io
-        </p>
-        <div className='flex w-full max-w-desktop flex-col'>
+      <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
           <section className='mt-6 flex flex-wrap gap-4'>
             <InfoCard
               icon={<Zap color={colors.darkBlue} />}
@@ -360,9 +357,8 @@ export const DonatePage = () => {
               </div>
             </div>
           </section>
-        </div>
-      </div>
-    </>
+      </section>
+    </PageBase>
   );
 };
 
