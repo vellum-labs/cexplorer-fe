@@ -1,19 +1,14 @@
+import { PageBase } from "@/components/global/pages/PageBase";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { ArrowRight, BellRing } from "lucide-react";
-import { Helmet } from "react-helmet";
 
 import { DiscordLogo } from "@vellumlabs/cexplorer-sdk";
 import { TelegramLogo } from "@vellumlabs/cexplorer-sdk";
 import { TwitterLogo } from "@vellumlabs/cexplorer-sdk";
 
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
-import { useFetchArticleDetail } from "@/services/article";
 
 export const BotsPage = () => {
-  const query = useFetchArticleDetail("en", "page", "bots");
-  const data = query.data;
-  const name = data?.name;
-
   const bots = [
     {
       key: "x",
@@ -42,12 +37,14 @@ export const BotsPage = () => {
   ];
 
   return (
-    <>
-      <Helmet>{name && <title>Bots | Cexplorer.io</title>}</Helmet>
-      <main className='flex min-h-minHeight w-full flex-col items-center px-mobile md:px-desktop'>
-        <div className='flex w-full max-w-desktop flex-col items-center'>
-          <h1 className='py-4'>Cexplorer.io Bots</h1>
-          <div className='flex w-full flex-col items-center gap-4 px-mobile md:px-desktop'>
+    <PageBase
+      metadataOverride={{ title: "Bots | Cexplorer.io" }}
+      title='Cexplorer.io Bots'
+      subTitle='Stay connected with automated notifications and updates'
+      breadcrumbItems={[{ label: "Bots" }]}
+      adsCarousel={false}
+    >
+      <section className='flex w-full max-w-desktop flex-col items-center gap-4 px-mobile pb-3 md:px-desktop'>
             {bots.map(item => (
               <div
                 key={item.key}
@@ -124,10 +121,8 @@ export const BotsPage = () => {
                 contact us directly.
               </p>
             </div>
-          </div>
-        </div>
         {/* // TODO? {parse(data?.data.map(item => item).join("") || "")} */}
-      </main>
-    </>
+      </section>
+    </PageBase>
   );
 };
