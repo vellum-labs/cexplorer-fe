@@ -16,32 +16,30 @@ const StakeDelegationsTab = ({ address, miscConst }: Props) => {
     {
       key: "stake-pools",
       label: "Stake Pools",
+      content: (
+        <StakePoolDelegationsContent address={address} miscConst={miscConst} />
+      ),
       visible: true,
     },
     {
       key: "dreps",
       label: "DReps",
+      content: (
+        <DRepDelegationsContent address={address} miscConst={miscConst} />
+      ),
       visible: true,
     },
   ];
 
   return (
-    <>
-      <Tabs
-        withPadding={false}
-        withMargin={false}
-        tabParam='delegation'
-        items={tabItems}
-        activeTabValue={activeTab}
-        onClick={setActiveTab}
-      />
-      {activeTab === "stake-pools" && (
-        <StakePoolDelegationsContent address={address} miscConst={miscConst} />
-      )}
-      {activeTab === "dreps" && (
-        <DRepDelegationsContent address={address} miscConst={miscConst} />
-      )}
-    </>
+    <Tabs
+      withPadding={false}
+      withMargin={false}
+      tabParam='delegation'
+      items={tabItems}
+      activeTabValue={activeTab}
+      onClick={setActiveTab}
+    />
   );
 };
 

@@ -241,8 +241,7 @@ export const StakePoolDelegationsContent: FC<
   }, [totalCount, totalItems]);
 
   return (
-    <section className='flex flex-col-reverse gap-4'>
-      <MultiDelegationsTable address={address} miscConst={miscConst} />
+    <section className='flex flex-col gap-4'>
       <div className='flex flex-col'>
         <div className='flex items-center justify-between gap-1'>
           <h3 className='my-2'>Delegation history</h3>
@@ -280,6 +279,7 @@ export const StakePoolDelegationsContent: FC<
           onOrderChange={setColumsOrder}
         />
       </div>
+      <MultiDelegationsTable address={address} miscConst={miscConst} />
     </section>
   );
 };
