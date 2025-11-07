@@ -10,6 +10,10 @@ interface AssetProps {
 export const renderAssetName = ({ asset, name }: AssetProps) => {
   const assetName = asset?.name || name || "";
 
+  if (!name) {
+    return "n/a";
+  }
+
   if (asset?.registry?.name && asset?.registry?.ticker) {
     return `[${asset.registry.ticker}] ${asset.registry.name}`;
   }
