@@ -165,6 +165,7 @@ export const ApiInfoPage = () => {
       subTitle='Effortless access to blockchain data. Choose the perfect plan for your needs.'
       breadcrumbItems={[{ label: "API Plans" }]}
       adsCarousel={false}
+      customPage={true}
     >
       <section className='flex w-full max-w-desktop flex-col items-center gap-4 px-mobile pb-3 text-center md:px-desktop'>
         <section className='mt-4 flex w-full flex-wrap items-center justify-center gap-3'>

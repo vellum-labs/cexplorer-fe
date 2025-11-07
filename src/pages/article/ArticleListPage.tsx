@@ -1,6 +1,5 @@
 import { ArticleCard } from "@/components/article/ArticleCard";
 import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
-import { HeaderBanner } from "@/components/global/HeaderBanner";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import { NoResultsFound } from "@vellumlabs/cexplorer-sdk";
 import { Pagination } from "@vellumlabs/cexplorer-sdk";
@@ -15,10 +14,9 @@ import { Link, useSearch } from "@tanstack/react-router";
 import parse from "html-react-parser";
 import type { SetStateAction } from "react";
 import React, { useEffect, useRef, useState } from "react";
-import { Helmet } from "react-helmet";
-import metadata from "../../../conf/metadata/en-metadata.json";
 import { useFetchMiscBasic } from "@/services/misc";
 import { generateImageUrl } from "@/utils/generateImageUrl";
+import { PageBase } from "@/components/global/pages/PageBase";
 
 export const ArticleListPage = () => {
   const { page } = useSearch({ from: "/article/" });
@@ -61,110 +59,32 @@ export const ArticleListPage = () => {
 
   if (query.isLoading && firstRender.current) {
     return (
-      <>
-        <Helmet>{<title>{metadata.articleList.title}</title>}</Helmet>
-        <main className='flex min-h-minHeight w-full flex-col items-center'>
-          <HeaderBanner
-            title='Learn About Cardano'
-            breadcrumbItems={[{ label: "Articles" }]}
-          />
-          <div className='m-2 flex h-auto w-full max-w-desktop justify-center rounded-m p-mobile hover:text-text md:m-5 md:p-desktop'>
-            <div className='flex w-full max-w-desktop flex-col-reverse justify-center gap-1.5 rounded-m border border-border bg-gradient-to-b from-bannerGradient to-darker p-3 md:flex-row'>
-              <div className='flex w-full justify-end md:w-[60%]'>
-                <LoadingSkeleton
-                  height='300px'
-                  width='100%'
-                  className='md:h-[380px]'
-                  rounded='md'
-                />
-              </div>
-              <div className='flex w-full flex-col justify-between gap-1.5 md:w-[40%]'>
-                <div className='mb-auto flex flex-col gap-2'>
-                  <LoadingSkeleton height='40px' width='100%' rounded='md' />
-                  <LoadingSkeleton height='60px' width='100%' rounded='md' />
-                </div>
-                <LoadingSkeleton height='60px' width='150px' rounded='md' />
-                <LoadingSkeleton height='40px' width='150px' rounded='md' />
-              </div>
-            </div>
-          </div>
-          <AdsCarousel
-            generateImageUrl={generateImageUrl}
-            miscBasicQuery={miscBasicQuery}
-          />
-          <div className='flex w-full max-w-desktop flex-col gap-1.5 p-mobile md:p-desktop'>
-            <div className='ml-auto flex items-center gap-1'>
-              <span className='text-text-sm'>Category:</span>
-              <LoadingSkeleton height='36px' width='120px' rounded='md' />
-            </div>
-            <section className='grid w-full grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-1.5'>
-              {Array.from({ length: 20 }).map((_, index) => (
-                <LoadingSkeleton height='430px' key={index} rounded='lg' />
-              ))}
-            </section>
-          </div>
-        </main>
-      </>
-    );
-  }
-
-  firstRender.current = false;
-
-  return (
-    <>
-      <Helmet>{<title>{metadata.articleList.title}</title>}</Helmet>
-      <main className='flex min-h-minHeight w-full flex-col items-center'>
-        <HeaderBanner
-          title='Learn About Cardano'
-          breadcrumbItems={[{ label: "Articles" }]}
-        />
+      <PageBase
+        metadataOverride={{ title: "Articles | Cexplorer.io" }}
+        title='Learn About Cardano'
+        breadcrumbItems={[{ label: "Articles" }]}
+        adsCarousel={false}
+        customPage={true}
+      >
         <div className='m-2 flex h-auto w-full max-w-desktop justify-center rounded-m p-mobile hover:text-text md:m-5 md:p-desktop'>
-          {items && items.length > 0 && (
-            <div className='flex w-full max-w-desktop flex-col-reverse justify-center gap-1.5 rounded-m border border-border bg-gradient-to-b from-bannerGradient to-darker p-3 md:flex-row'>
-              <div className='flex w-full justify-end md:w-[60%]'>
-                <Link
-                  to='/article/$url'
-                  params={{
-                    url: firstArticle?.url ?? "",
-                  }}
-                  className='w-full'
-                >
-                  <Image
-                    src={firstArticle?.image || ""}
-                    className='h-[300px] w-full rounded-m object-cover md:h-[380px]'
-                    height={380}
-                  />
-                </Link>
-              </div>
-              <div className='flex w-full flex-col justify-between gap-1.5 md:w-[40%]'>
-                <div className='mb-auto'>
-                  <Link
-                    to='/article/$url'
-                    className='text-display-xs font-medium text-primary'
-                    params={{
-                      url: firstArticle?.url ?? "",
-                    }}
-                  >
-                    {parse(firstArticle?.name || "")}
-                  </Link>
-                  <p className='text-grayTextPrimary'>
-                    {parse(firstArticle?.description || "")}
-                  </p>
-                </div>
-                <div className='flex flex-col text-text-sm'>
-                  {renderArticleAuthor(firstArticle?.user_owner)}
-                </div>
-                <div className='flex flex-col text-text-sm'>
-                  <span className='text-grayTextPrimary'>Published</span>
-                  <span>
-                    {firstArticle?.pub_date
-                      ? formatDate(firstArticle?.pub_date)
-                      : "-"}
-                  </span>
-                </div>
-              </div>
+          <div className='flex w-full max-w-desktop flex-col-reverse justify-center gap-1.5 rounded-m border border-border bg-gradient-to-b from-bannerGradient to-darker p-3 md:flex-row'>
+            <div className='flex w-full justify-end md:w-[60%]'>
+              <LoadingSkeleton
+                height='300px'
+                width='100%'
+                className='md:h-[380px]'
+                rounded='md'
+              />
             </div>
-          )}
+            <div className='flex w-full flex-col justify-between gap-1.5 md:w-[40%]'>
+              <div className='mb-auto flex flex-col gap-2'>
+                <LoadingSkeleton height='40px' width='100%' rounded='md' />
+                <LoadingSkeleton height='60px' width='100%' rounded='md' />
+              </div>
+              <LoadingSkeleton height='60px' width='150px' rounded='md' />
+              <LoadingSkeleton height='40px' width='150px' rounded='md' />
+            </div>
+          </div>
         </div>
         <AdsCarousel
           generateImageUrl={generateImageUrl}
@@ -173,31 +93,105 @@ export const ArticleListPage = () => {
         <div className='flex w-full max-w-desktop flex-col gap-1.5 p-mobile md:p-desktop'>
           <div className='ml-auto flex items-center gap-1'>
             <span className='text-text-sm'>Category:</span>
-            <SortBy
-              selectItems={[{ key: "all", value: "all" }, ...categoriesOptions]}
-              selectedItem={category}
-              setSelectedItem={
-                setCategory as React.Dispatch<
-                  SetStateAction<string | undefined>
-                >
-              }
-              label={false}
-            />
+            <LoadingSkeleton height='36px' width='120px' rounded='md' />
           </div>
-          {items.length === 0 ? (
-            <NoResultsFound />
-          ) : (
-            <section className='grid w-full grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-1.5'>
-              {items.slice(1).map(item => (
-                <ArticleCard key={item.name + item.pub_date} article={item} />
-              ))}
-            </section>
-          )}
-          {totalItems > 20 && (
-            <Pagination currentPage={currentPage} totalPages={totalPages} />
-          )}
+          <section className='grid w-full grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-1.5'>
+            {Array.from({ length: 20 }).map((_, index) => (
+              <LoadingSkeleton height='430px' key={index} rounded='lg' />
+            ))}
+          </section>
         </div>
-      </main>
-    </>
+      </PageBase>
+    );
+  }
+
+  firstRender.current = false;
+
+  return (
+    <PageBase
+      metadataOverride={{ title: "Articles | Cexplorer.io" }}
+      title='Learn About Cardano'
+      breadcrumbItems={[{ label: "Articles" }]}
+      adsCarousel={false}
+      customPage={true}
+    >
+      <div className='m-2 flex h-auto w-full max-w-desktop justify-center rounded-m p-mobile hover:text-text md:m-5 md:p-desktop'>
+        {items && items.length > 0 && (
+          <div className='flex w-full max-w-desktop flex-col-reverse justify-center gap-1.5 rounded-m border border-border bg-gradient-to-b from-bannerGradient to-darker p-3 md:flex-row'>
+            <div className='flex w-full justify-end md:w-[60%]'>
+              <Link
+                to='/article/$url'
+                params={{
+                  url: firstArticle?.url ?? "",
+                }}
+                className='w-full'
+              >
+                <Image
+                  src={firstArticle?.image || ""}
+                  className='h-[300px] w-full rounded-m object-cover md:h-[380px]'
+                  height={380}
+                />
+              </Link>
+            </div>
+            <div className='flex w-full flex-col justify-between gap-1.5 md:w-[40%]'>
+              <div className='mb-auto'>
+                <Link
+                  to='/article/$url'
+                  className='text-display-xs font-medium text-primary'
+                  params={{
+                    url: firstArticle?.url ?? "",
+                  }}
+                >
+                  {parse(firstArticle?.name || "")}
+                </Link>
+                <p className='text-grayTextPrimary'>
+                  {parse(firstArticle?.description || "")}
+                </p>
+              </div>
+              <div className='flex flex-col text-text-sm'>
+                {renderArticleAuthor(firstArticle?.user_owner)}
+              </div>
+              <div className='flex flex-col text-text-sm'>
+                <span className='text-grayTextPrimary'>Published</span>
+                <span>
+                  {firstArticle?.pub_date
+                    ? formatDate(firstArticle?.pub_date)
+                    : "-"}
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+      <AdsCarousel
+        generateImageUrl={generateImageUrl}
+        miscBasicQuery={miscBasicQuery}
+      />
+      <div className='flex w-full max-w-desktop flex-col gap-1.5 p-mobile md:p-desktop'>
+        <div className='ml-auto flex items-center gap-1'>
+          <span className='text-text-sm'>Category:</span>
+          <SortBy
+            selectItems={[{ key: "all", value: "all" }, ...categoriesOptions]}
+            selectedItem={category}
+            setSelectedItem={
+              setCategory as React.Dispatch<SetStateAction<string | undefined>>
+            }
+            label={false}
+          />
+        </div>
+        {items.length === 0 ? (
+          <NoResultsFound />
+        ) : (
+          <section className='grid w-full grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-1.5'>
+            {items.slice(1).map(item => (
+              <ArticleCard key={item.name + item.pub_date} article={item} />
+            ))}
+          </section>
+        )}
+        {totalItems > 20 && (
+          <Pagination currentPage={currentPage} totalPages={totalPages} />
+        )}
+      </div>
+    </PageBase>
   );
 };

@@ -95,11 +95,10 @@ export const AdsPage = () => {
       subTitle='Promote your project on Cexplorer'
       breadcrumbItems={[{ label: "Advertise with us" }]}
       adsCarousel={false}
+      customPage={true}
     >
       <section className='flex w-full max-w-desktop flex-col items-center gap-16 px-mobile pb-3 md:px-desktop'>
-        {/* Reach your audience! Section */}
         <div className='flex w-full flex-col gap-10 md:flex-row md:items-start md:justify-between'>
-          {/* Left - Text */}
           <div
             className='flex flex-1 flex-col'
             style={{ minWidth: "280px", maxWidth: "500px" }}
@@ -122,7 +121,6 @@ export const AdsPage = () => {
             />
           </div>
 
-          {/* Right - Metrics Grid */}
           <div
             className='grid flex-1 grid-cols-2 gap-8'
             style={{ minWidth: "280px" }}
@@ -146,9 +144,7 @@ export const AdsPage = () => {
           </div>
         </div>
 
-        {/* Promote with Cexplorer PRO Section */}
         <div className='flex w-full flex-col gap-10 md:flex-row md:items-start md:justify-between'>
-          {/* Left - Text & Features */}
           <div
             className='flex flex-1 flex-col'
             style={{ minWidth: "280px", maxWidth: "600px" }}
@@ -241,7 +237,6 @@ export const AdsPage = () => {
             </div>
           </div>
 
-          {/* Right - Featured Cards */}
           <div
             className='flex flex-1 items-center justify-center'
             style={{ minWidth: "280px" }}
@@ -254,9 +249,7 @@ export const AdsPage = () => {
           </div>
         </div>
 
-        {/* Boosts Section */}
         <div className='flex w-full flex-col gap-10 md:flex-row md:items-start md:justify-between'>
-          {/* Left - Preview */}
           <div
             className='flex flex-1 items-center justify-center'
             style={{ minWidth: "280px" }}
@@ -268,7 +261,6 @@ export const AdsPage = () => {
             />
           </div>
 
-          {/* Right - Content */}
           <div className='flex flex-1 flex-col' style={{ minWidth: "280px" }}>
             <div className='mb-3 flex h-12 w-12 items-center justify-center rounded-xl border border-border'>
               <svg
@@ -333,9 +325,7 @@ export const AdsPage = () => {
           </div>
         </div>
 
-        {/* Banner Advertising Section */}
         <div className='flex w-full flex-col gap-10 md:flex-row md:items-start md:justify-between'>
-          {/* Left - Content */}
           <div className='flex flex-1 flex-col' style={{ minWidth: "280px" }}>
             <div className='mb-3 flex h-12 w-12 items-center justify-center rounded-xl border border-border'>
               <Code2 size={24} className='text-darkBlue' />
@@ -404,7 +394,6 @@ export const AdsPage = () => {
             </div>
           </div>
 
-          {/* Right - Banner Examples */}
           <div
             className='flex flex-1 items-center justify-center'
             style={{ minWidth: "280px" }}

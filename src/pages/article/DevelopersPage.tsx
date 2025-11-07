@@ -62,9 +62,9 @@ export const DevelopersPage = () => {
       subTitle='API, instances support and permalink structure'
       breadcrumbItems={[{ label: "Developers" }]}
       adsCarousel={false}
+      customPage={true}
     >
       <section className='flex w-full max-w-desktop flex-col items-center gap-4 px-mobile pb-3 md:px-desktop'>
-        {/* API Card */}
         <div className='rounded-lg flex w-full max-w-[800px] flex-col overflow-hidden rounded-xl border border-border sm:flex-row'>
           <div className='flex w-full flex-col items-center justify-center gap-1 bg-gradient-to-b from-[#2188bb] to-[#697088] sm:max-w-[240px]'>
             <img src={CexLogo} alt='Cexplorer' width='80' height='80' />
@@ -87,7 +87,6 @@ export const DevelopersPage = () => {
           </div>
         </div>
 
-        {/* Instances Card */}
         <div className='rounded-lg flex w-full max-w-[800px] flex-col gap-3 rounded-xl border border-border p-6'>
           <h3 className='text-xl font-semibold'>Instances</h3>
           <p className='text-sm text-grayTextPrimary'>
@@ -113,7 +112,6 @@ export const DevelopersPage = () => {
           </div>
         </div>
 
-        {/* Permalinks Card */}
         <div className='flex w-full max-w-[800px] flex-col overflow-hidden rounded-xl border border-border'>
           <div className='flex items-start justify-between gap-4 p-6 pb-0'>
             <h3 className='text-xl pt-2 font-semibold'>Permalinks</h3>

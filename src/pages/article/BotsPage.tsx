@@ -43,6 +43,7 @@ export const BotsPage = () => {
       subTitle='Stay connected with automated notifications and updates'
       breadcrumbItems={[{ label: "Bots" }]}
       adsCarousel={false}
+      customPage={true}
     >
       <section className='flex w-full max-w-desktop flex-col items-center gap-4 px-mobile pb-3 md:px-desktop'>
         {bots.map(item => (
