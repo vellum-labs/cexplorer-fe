@@ -1,6 +1,5 @@
 import type { TxAsset } from "@/types/assetsTypes";
 import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";
-import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
 
 interface AssetProps {
   name?: string;
@@ -18,9 +17,21 @@ export const renderAssetName = ({ asset, name }: AssetProps) => {
     return `[${asset.registry.ticker}] ${asset.registry.name}`;
   }
 
-  if (encodeAssetName(assetName)) {
-    return encodeAssetName(assetName);
+  if (assetName.length <= 56) {
+    return "n/a";
   }
 
-  return getAssetFingerprint(assetName);
+  const nameOnly = assetName.slice(56);
+
+  if (!nameOnly || nameOnly.trim().length === 0) {
+    return "n/a";
+  }
+
+  const encodedName = encodeAssetName(assetName);
+
+  if (encodedName && encodedName.trim().length > 0) {
+    return encodedName;
+  }
+
+  return "n/a";
 };

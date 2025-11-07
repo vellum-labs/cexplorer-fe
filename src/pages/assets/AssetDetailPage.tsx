@@ -148,11 +148,15 @@ export const AssetDetailPage: FC = () => {
     setTitle(encodeAssetName(assetDetailQuery?.data?.data?.name || ""));
   }, [assetDetailQuery?.data?.data?.name]);
 
-  const formattedHex = assetDetailQuery.data?.data?.name
+  const rawFormattedHex = assetDetailQuery.data?.data?.name
     ? assetDetailQuery.data?.data?.name.replace(
         /^(000de140|0014df10|000643b0)/,
         "",
       )
+    : undefined;
+
+  const formattedHex = rawFormattedHex
+    ? encodeAssetName(rawFormattedHex)
     : undefined;
 
   const nameByRegistry =
@@ -167,8 +171,8 @@ export const AssetDetailPage: FC = () => {
         <div className='flex items-center gap-1/2'>
           {nameByRegistry
             ? nameByRegistry
-            : formattedHex
-              ? encodeAssetName(formattedHex)
+            : formattedHex && formattedHex.trim().length > 0
+              ? formattedHex
               : formatString(fingerprint, "longer")}
         </div>
       }
@@ -230,7 +234,9 @@ export const AssetDetailPage: FC = () => {
                 }
                 isLoading={assetDetailQuery.isLoading}
                 formattedHex={
-                  formattedHex ? encodeAssetName(formattedHex) : undefined
+                  formattedHex && formattedHex.trim().length > 0
+                    ? formattedHex
+                    : undefined
                 }
                 hasDex={!!assetDetailQuery?.data?.data?.dex}
                 assetName={assetName}
