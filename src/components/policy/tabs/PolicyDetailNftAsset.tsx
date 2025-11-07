@@ -83,6 +83,7 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
               registry: item.registry,
               quantity: item.stat.asset.quantity,
             }}
+            name={item.name}
             isNft={item?.stat?.asset?.quantity === 1}
           />
         );
