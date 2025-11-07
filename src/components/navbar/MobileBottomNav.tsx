@@ -2,7 +2,13 @@ import type { FC } from "react";
 import { Wallet, Settings, Search, Menu } from "lucide-react";
 import CexLogo from "@/resources/images/cexLogo.svg";
 import { useState, useEffect } from "react";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+  SheetDescription,
+} from "@/components/ui/sheet";
 import { MenuItems } from "./MobileMenu/MenuItems";
 import { AnalyticsMobileItems } from "./MobileMenu/AnalyticsMobileItems";
 import { GovernanceMobileItems } from "./MobileMenu/GovernanceMobileItems";
@@ -49,17 +55,14 @@ export const MobileBottomNav: FC = () => {
             "0 -10px 15px -3px rgba(0, 0, 0, 0.1), 0 -4px 6px -4px rgba(0, 0, 0, 0.1)",
         }}
       >
-        {/* Wallet Icon */}
         <button
           className='flex flex-col items-center gap-1'
           onClick={() => {
             if (address && walletType) {
-              // Open main menu when wallet is connected
               setActiveMenu(null);
               setAutoOpenWallet(true);
               setIsOpen(true);
             } else {
-              // Show connect wallet modal when not connected
               setShowWalletModal(true);
             }
           }}
@@ -67,7 +70,6 @@ export const MobileBottomNav: FC = () => {
           <Wallet size={24} className='text-grayTextPrimary' />
         </button>
 
-        {/* Settings Icon */}
         <button
           className='flex flex-col items-center gap-1'
           onClick={() => {
@@ -78,14 +80,12 @@ export const MobileBottomNav: FC = () => {
           <Settings size={24} className='text-grayTextPrimary' />
         </button>
 
-        {/* ADA Logo - Center (Highlighted) */}
         <Link to='/' className='flex flex-col items-center gap-1'>
           <div className='rounded-full flex h-12 w-12 items-center justify-center'>
             <img src={CexLogo} alt='Cexplorer' className='h-7 w-7' />
           </div>
         </Link>
 
-        {/* Search Icon */}
         <button
           className='flex flex-col items-center gap-1'
           onClick={() => setShowSearchModal(true)}
@@ -93,7 +93,6 @@ export const MobileBottomNav: FC = () => {
           <Search size={24} className='text-grayTextPrimary' />
         </button>
 
-        {/* Menu Icon with Sheet */}
         <Sheet
           open={isOpen}
           onOpenChange={() => {
