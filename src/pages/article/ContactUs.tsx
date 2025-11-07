@@ -30,10 +30,11 @@ export const ContactUsPage = () => {
   return (
     <PageBase
       metadataOverride={{ title: "Contact us | Cexplorer.io" }}
-      title="Contact us"
-      subTitle="Get in touch"
+      title='Contact us'
+      subTitle='Get in touch'
       breadcrumbItems={[{ label: "Contact us" }]}
       adsCarousel={false}
+      customPage={true}
     >
       <section className='flex w-full max-w-desktop flex-col items-center px-mobile pb-3 md:px-desktop'>
         <section className='flex w-full max-w-[800px] flex-col gap-4 border-b border-border pb-8'>

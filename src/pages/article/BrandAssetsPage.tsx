@@ -71,6 +71,7 @@ export const BrandAssetsPage = () => {
       title='Brand assets'
       breadcrumbItems={[{ label: "Brand assets" }]}
       adsCarousel={false}
+      customPage={true}
     >
       <section className='flex w-full max-w-desktop flex-col items-center gap-12 px-mobile pb-3 md:px-desktop'>
         <div className='flex w-full max-w-[800px] flex-col items-center text-center'>

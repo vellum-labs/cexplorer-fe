@@ -57,9 +57,9 @@ export const ContributorsPage = () => {
       subTitle='Recognizing those who help Cexplorer thrive and how you can contribute too.'
       breadcrumbItems={[{ label: "Contributors" }]}
       adsCarousel={false}
+      customPage={true}
     >
       <section className='flex w-full max-w-desktop flex-col items-center px-mobile pb-3 md:px-desktop'>
-        {/* Long-term Contributors Section */}
         <div className='mb-8 w-full max-w-[800px]'>
           <div className='mb-6 text-center'>
             <h2>Long-term Cexplorer contributors</h2>
@@ -81,7 +81,7 @@ export const ContributorsPage = () => {
                     <span className='text-primary'>{contributor.role}</span>
                   </span>
                 </div>
-                <p className='text-start text-sm text-grayTextPrimary'>
+                <p className='text-sm text-start text-grayTextPrimary'>
                   {contributor.description}
                 </p>
               </div>
@@ -89,7 +89,6 @@ export const ContributorsPage = () => {
           </div>
         </div>
 
-        {/* How You Can Get Involved Section */}
         <div className='w-full max-w-[800px]'>
           <div className='mb-6 text-center'>
             <h2>How you can get involved</h2>

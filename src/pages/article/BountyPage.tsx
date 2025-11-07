@@ -17,6 +17,7 @@ export const BountyPage = () => {
       subTitle='Find bugs, get rewarded.'
       breadcrumbItems={[{ label: "Bug Bounty" }]}
       adsCarousel={false}
+      customPage={true}
     >
       <section className='flex w-full max-w-desktop flex-col items-center px-mobile pb-3 md:px-desktop'>
         <div className='mb-6 w-full max-w-[800px] rounded-xl border border-border p-6'>

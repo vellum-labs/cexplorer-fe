@@ -49,16 +49,27 @@ export const FaqPage = () => {
       subTitle='Everything you need to know about the product and billing.'
       breadcrumbItems={[{ label: "FAQ" }]}
       adsCarousel={false}
+      customPage={true}
     >
       <section className='flex w-full max-w-desktop flex-col items-center px-mobile pb-3 md:px-desktop'>
-        <Accordion type='single' collapsible className='mt-2 w-full max-w-[600px]'>
+        <Accordion
+          type='single'
+          collapsible
+          className='mt-2 w-full max-w-[600px]'
+        >
           {faq.map(item => (
-            <AccordionItem key={item.title} value={item.title} className='border-b border-border'>
+            <AccordionItem
+              key={item.title}
+              value={item.title}
+              className='border-b border-border'
+            >
               <AccordionTrigger className='AccordionTrigger w-full py-3 text-left'>
                 <span className='text-text-md font-medium'>{item.title}</span>
               </AccordionTrigger>
               <AccordionContent>
-                <div className='flex flex-col pb-1.5 text-grayTextPrimary'>{item.msg}</div>
+                <div className='flex flex-col pb-1.5 text-grayTextPrimary'>
+                  {item.msg}
+                </div>
               </AccordionContent>
             </AccordionItem>
           ))}

@@ -8,6 +8,7 @@ export const PrivacyPage = () => {
       subTitle='Updated on 18 July 2025'
       breadcrumbItems={[{ label: "Privacy policy" }]}
       adsCarousel={false}
+      customPage={true}
     >
       <section className='flex w-full justify-center px-mobile pb-3 md:px-desktop'>
         <div className='flex max-w-[800px] flex-col'>
