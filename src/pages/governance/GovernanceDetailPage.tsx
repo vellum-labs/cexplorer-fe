@@ -18,21 +18,23 @@ export const GovernanceDetailPage: FC = () => {
     from: "/gov/action/$id",
   });
 
-  const detailQuery = useFetchGovernanceActionDetail(id);
+  const decodedId = id?.replace(/%23/g, "#");
+
+  const detailQuery = useFetchGovernanceActionDetail(decodedId);
   const data = detailQuery?.data?.data;
 
   const tabs = [
     {
       key: "voted",
       label: "Voted",
-      content: <GovernanceDetailAboutTab id={id} key={1} />,
+      content: <GovernanceDetailAboutTab id={decodedId} key={1} />,
       visible: true,
     },
     {
       key: "not_voted",
       label: "Not voted",
       content: (
-        <GovernanceDetailNotVotedTab id={id} governanceAction={data} key={2} />
+        <GovernanceDetailNotVotedTab id={decodedId} governanceAction={data} key={2} />
       ),
       visible: true,
     },
@@ -61,7 +63,7 @@ export const GovernanceDetailPage: FC = () => {
       metadataTitle='governanceActionDetail'
       metadataReplace={{
         before: "%gov%",
-        after: id || "Governance Action",
+        after: decodedId || "Governance Action",
       }}
       breadcrumbItems={[
         {
@@ -73,8 +75,8 @@ export const GovernanceDetailPage: FC = () => {
           link: "/gov/action",
         },
         {
-          label: <span className=''>{formatString(id ?? "", "long")}</span>,
-          ident: id,
+          label: <span className=''>{formatString(decodedId ?? "", "long")}</span>,
+          ident: decodedId,
         },
       ]}
       title={
