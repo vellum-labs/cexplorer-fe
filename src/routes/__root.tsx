@@ -16,13 +16,13 @@ import { VersionWatcher } from "@/components/global/VersionWatcher";
 import Navbar from "@/components/layouts/Navbar";
 import { ErrorBoundary } from "@/pages/error/ErrorBoundary";
 
-import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
+import { useThemeStore, GlobalSearchProvider, useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 import { useGenerateSW } from "@/hooks/useGenerateSW";
 import { useState } from "react";
 import { setGlobalAbortSignal } from "@/lib/handleFetch";
 import { abortControllers } from "@/lib/handleAbortController";
 import { NotFoundPage } from "@/pages/NotFoundPage";
-import { useFetchMiscBasic } from "@/services/misc";
+import { useFetchMiscBasic, useFetchMiscSearch } from "@/services/misc";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const RootComponent = () => {
@@ -33,6 +33,7 @@ const RootComponent = () => {
   const { location: locationState } = useRouterState();
 
   const { theme } = useThemeStore();
+  const { locale } = useLocaleStore();
   const { updateReady, isFirstInstall } = useGenerateSW();
 
   const [resetKey, setResetKey] = useState<number>(0);
@@ -131,59 +132,61 @@ const RootComponent = () => {
   }, [locationState.pathname, locationState.searchStr]);
 
   return (
-    <>
-      <Helmet>
-        <title>Cexplorer.io</title>
-      </Helmet>
-      {randomTopAd && (
-        <div className='flex min-h-[75px] w-full items-center justify-center bg-background'>
-          <div
-            className='h-full w-full max-w-desktop cursor-pointer md:px-desktop'
-            onClick={() => {
-              setClickedUrl(randomTopAd.data.link);
-            }}
-          >
-            {randomTopAd.data.img ? (
-              <img
-                src={randomTopAd.data.img}
-                alt={randomTopAd.data.title}
-                className='h-[75px] w-full'
-              />
-            ) : (
-              <div className='flex flex-col items-center p-1'>
-                <h3>{randomTopAd.data.title}</h3>
-                <span>{randomTopAd.data.text}</span>
-              </div>
-            )}
+    <GlobalSearchProvider useFetchMiscSearch={useFetchMiscSearch} locale={locale}>
+      <>
+        <Helmet>
+          <title>Cexplorer.io</title>
+        </Helmet>
+        {randomTopAd && (
+          <div className='flex min-h-[75px] w-full items-center justify-center bg-background'>
+            <div
+              className='h-full w-full max-w-desktop cursor-pointer md:px-desktop'
+              onClick={() => {
+                setClickedUrl(randomTopAd.data.link);
+              }}
+            >
+              {randomTopAd.data.img ? (
+                <img
+                  src={randomTopAd.data.img}
+                  alt={randomTopAd.data.title}
+                  className='h-[75px] w-full'
+                />
+              ) : (
+                <div className='flex flex-col items-center p-1'>
+                  <h3>{randomTopAd.data.title}</h3>
+                  <span>{randomTopAd.data.text}</span>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      )}
-      <ErrorBoundary key={resetKey}>
-        <Navbar />
-        {notFound ? (
-          <div className='flex min-h-minHeight w-full flex-col items-center justify-center gap-2 text-text-xl'>
-            <p>This page doesn't exist...</p>
-            <Button
-              label='Go back'
-              variant='primary'
-              size='md'
-              href='/'
-              className='hover:text-white'
-            />
-          </div>
-        ) : (
-          <Outlet />
         )}
-      </ErrorBoundary>
-      <Footer />
-      {updateReady && <SwReadyModal firstInstall={isFirstInstall} />}
-      <VersionWatcher />
-      {clickedUrl && (
-        <SafetyLinkModal url={clickedUrl} onClose={() => setClickedUrl(null)} />
-      )}
-      {/* <TanStackRouterDevtools /> */}
-      {/* <ReactQueryDevtools /> */}
-    </>
+        <ErrorBoundary key={resetKey}>
+          <Navbar />
+          {notFound ? (
+            <div className='flex min-h-minHeight w-full flex-col items-center justify-center gap-2 text-text-xl'>
+              <p>This page doesn't exist...</p>
+              <Button
+                label='Go back'
+                variant='primary'
+                size='md'
+                href='/'
+                className='hover:text-white'
+              />
+            </div>
+          ) : (
+            <Outlet />
+          )}
+        </ErrorBoundary>
+        <Footer />
+        {updateReady && <SwReadyModal firstInstall={isFirstInstall} />}
+        <VersionWatcher />
+        {clickedUrl && (
+          <SafetyLinkModal url={clickedUrl} onClose={() => setClickedUrl(null)} />
+        )}
+        {/* <TanStackRouterDevtools /> */}
+        {/* <ReactQueryDevtools /> */}
+      </>
+    </GlobalSearchProvider>
   );
 };
 

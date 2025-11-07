@@ -1,8 +1,8 @@
 import type { FC } from "react";
 import { Wallet, Settings, Search, Menu } from "lucide-react";
 import CexLogo from "@/resources/images/cexLogo.svg";
-import { useState } from "react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useState, useEffect } from "react";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { MenuItems } from "./MobileMenu/MenuItems";
 import { AnalyticsMobileItems } from "./MobileMenu/AnalyticsMobileItems";
 import { GovernanceMobileItems } from "./MobileMenu/GovernanceMobileItems";
@@ -14,21 +14,41 @@ import type { MobileMenuScreen } from "@/types/navigationTypes";
 import ConnectWalletModal from "../wallet/ConnectWalletModal";
 import { useWalletStore } from "@/stores/walletStore";
 import { Link } from "@tanstack/react-router";
+import { GlobalSearch } from "@vellumlabs/cexplorer-sdk";
 
 export const MobileBottomNav: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [activeMenu, setActiveMenu] = useState<MobileMenuScreen>(null);
   const [showWalletModal, setShowWalletModal] = useState(false);
+  const [showSearchModal, setShowSearchModal] = useState(false);
   const [autoOpenWallet, setAutoOpenWallet] = useState(false);
   const infoQuery = useFetchUserInfo();
   const { address, walletType } = useWalletStore();
+
+  useEffect(() => {
+    if (showSearchModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showSearchModal]);
 
   return (
     <>
       {showWalletModal && (
         <ConnectWalletModal onClose={() => setShowWalletModal(false)} />
       )}
-      <nav className='fixed bottom-0 left-0 right-0 z-50 flex items-center justify-between border-t border-border bg-background px-4 md:hidden' style={{ boxShadow: '0 -10px 15px -3px rgba(0, 0, 0, 0.1), 0 -4px 6px -4px rgba(0, 0, 0, 0.1)' }}>
+      <nav
+        className='fixed bottom-0 left-0 right-0 z-50 flex items-center justify-between border-t border-border bg-background px-4 md:hidden'
+        style={{
+          boxShadow:
+            "0 -10px 15px -3px rgba(0, 0, 0, 0.1), 0 -4px 6px -4px rgba(0, 0, 0, 0.1)",
+        }}
+      >
         {/* Wallet Icon */}
         <button
           className='flex flex-col items-center gap-1'
@@ -66,7 +86,10 @@ export const MobileBottomNav: FC = () => {
         </Link>
 
         {/* Search Icon */}
-        <button className='flex flex-col items-center gap-1'>
+        <button
+          className='flex flex-col items-center gap-1'
+          onClick={() => setShowSearchModal(true)}
+        >
           <Search size={24} className='text-grayTextPrimary' />
         </button>
 
@@ -85,6 +108,10 @@ export const MobileBottomNav: FC = () => {
             </button>
           </SheetTrigger>
           <SheetContent className='hide-scrollbar overflow-y-auto'>
+            <SheetTitle className='sr-only'>Navigation Menu</SheetTitle>
+            <SheetDescription className='sr-only'>
+              Access navigation options, settings, and account features
+            </SheetDescription>
             {activeMenu === "settings" ? (
               <SettingsMobileItems onBack={() => setActiveMenu(null)} />
             ) : activeMenu === "analytics" ? (
@@ -119,6 +146,20 @@ export const MobileBottomNav: FC = () => {
           </SheetContent>
         </Sheet>
       </nav>
+
+      {showSearchModal && (
+        <div
+          className='bg-black/60 fixed inset-0 z-[100] flex items-start justify-center pt-20 backdrop-blur-sm'
+          onClick={() => setShowSearchModal(false)}
+        >
+          <div
+            className='w-full max-w-2xl px-4'
+            onClick={e => e.stopPropagation()}
+          >
+            <GlobalSearch />
+          </div>
+        </div>
+      )}
     </>
   );
 };
