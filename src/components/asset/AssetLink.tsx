@@ -25,7 +25,7 @@ const AssetLink = ({ asset, type, className }: Props) => {
       className={`flex w-fit max-w-full rounded-s border border-border bg-background px-1 py-[1px] text-text-xs font-medium text-primary ${className}`}
     >
       <span className='block overflow-hidden text-ellipsis whitespace-nowrap'>
-        {renderAssetName(asset)}
+        {renderAssetName({ asset })}
       </span>
       <span className='ml-auto min-w-fit pl-1'>
         {`${type === "input" ? "-" : ""}${formatNumberWithSuffix(asset.quantity / divideNumber, true)}`}

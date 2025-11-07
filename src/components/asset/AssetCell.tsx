@@ -91,6 +91,7 @@ const AssetCell = memo((props: AssetProps) => {
                 : formattedHex
                   ? formattedHex
                   : renderAssetName({
+                      asset,
                       name: isAdaHandle ? adaHandleName : name,
                     })}
             </span>
@@ -101,14 +102,14 @@ const AssetCell = memo((props: AssetProps) => {
                     ? nameByRegistry
                     : formattedHex
                       ? formattedHex
-                      : renderAssetName({ name })
+                      : renderAssetName({ asset, name })
                 }
                 className='ml-1'
               />
             )}
           </Link>
           <span className='flex items-center gap-1/2'>
-            {nameByRegistry || renderAssetName({ name }) ? (
+            {nameByRegistry || renderAssetName({ asset, name }) !== "n/a" ? (
               <p className='text-text-xs text-grayTextPrimary'>
                 {formatString(fingerprint, "long")}
               </p>
@@ -124,7 +125,7 @@ const AssetCell = memo((props: AssetProps) => {
               </Link>
             )}
             <Copy
-              size={renderAssetName({ name }) ? 10 : 13}
+              size={renderAssetName({ asset, name }) !== "n/a" ? 10 : 13}
               copyText={fingerprint}
             />
           </span>
