@@ -56,6 +56,7 @@ export const AboutUsPage = () => {
       title='About us'
       breadcrumbItems={[{ label: "About us" }]}
       adsCarousel={false}
+      customPage={true}
     >
       <section className='flex w-full max-w-desktop flex-col items-center px-mobile pb-3 md:px-desktop'>
         <div className='mb-12 flex w-full max-w-[800px] flex-col items-center text-center'>
