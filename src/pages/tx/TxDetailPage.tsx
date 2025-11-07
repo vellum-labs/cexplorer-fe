@@ -51,7 +51,7 @@ const TxDetailPage = () => {
     {
       key: "overview",
       label: "Overview",
-      content: <OverviewTabItem />,
+      content: <OverviewTabItem query={query} />,
       visible: true,
     },
     {
@@ -289,11 +289,7 @@ const TxDetailPage = () => {
           ))}
       </div>
       <TxDetailOverview query={query} />
-      <Tabs
-        items={txTabItems}
-        mobileItemsCount={3}
-        apiLoading={query.isLoading}
-      />
+      <Tabs items={txTabItems} mobileItemsCount={3} />
     </PageBase>
   );
 };
