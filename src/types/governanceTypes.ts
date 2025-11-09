@@ -370,11 +370,6 @@ export interface CommitteeKey {
   cold: string | null;
 }
 
-export interface CommitteeIdent {
-  raw: string;
-  has_script: boolean;
-}
-
 export interface CommitteeRegistry {
   img: string;
   name: string;

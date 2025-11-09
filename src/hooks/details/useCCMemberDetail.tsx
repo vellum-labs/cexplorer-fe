@@ -4,10 +4,15 @@ import type { CommitteeMember } from "@/types/governanceTypes";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
+import { useFetchEpochDetailParam } from "@/services/epoch";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { formatDistanceToNow, format } from "date-fns";
+import { generateImageUrl } from "@/utils/generateImageUrl";
+import { alphabetWithNumbers } from "@/constants/alphabet";
+import { Link } from "@tanstack/react-router";
 
 interface UseCCMemberDetailArgs {
   memberData: CommitteeMember | undefined;
@@ -24,6 +29,11 @@ export const useCCMemberDetail = ({
   const miscConst = useMiscConst(basicData?.data.version.const);
   const currentEpochNo = miscConst?.epoch?.no ?? 0;
 
+  const expirationEpoch = memberData?.expiration_epoch ?? 0;
+  const epochParamQuery = useFetchEpochDetailParam(currentEpochNo);
+  const committeeMaxTermLength =
+    epochParamQuery.data?.committee_max_term_length ?? 0;
+
   const isActive =
     memberData?.expiration_epoch !== null &&
     memberData?.expiration_epoch !== undefined &&
@@ -38,10 +48,31 @@ export const useCCMemberDetail = ({
         ).endTime
       : null;
 
+  const name = memberData?.registry?.name ?? "-";
+  const identRaw = memberData?.ident?.raw ?? "";
+
+  const fallbackletters = [...name]
+    .filter(char => alphabetWithNumbers.includes(char.toLowerCase()))
+    .join("");
+
+  const startEpoch = expirationEpoch - committeeMaxTermLength;
+
   const about: OverviewList = [
     {
       label: "Name",
-      value: memberData?.registry?.name ?? "-",
+      value: (
+        <div className='flex items-center gap-2'>
+          <Image
+            src={generateImageUrl(identRaw, "ico", "cc")}
+            type='user'
+            className='h-8 w-8 rounded-max'
+            height={32}
+            width={32}
+            fallbackletters={fallbackletters}
+          />
+          <span>{name}</span>
+        </div>
+      ),
     },
     {
       label: "Status",
@@ -58,15 +89,29 @@ export const useCCMemberDetail = ({
         ),
     },
     {
-      label: "Hash",
-      value: memberData?.ident?.raw ? (
-        <div className='flex items-center gap-1/2'>
-          <span>{formatString(memberData.ident.raw, "long")}</span>
-          <Copy copyText={memberData.ident.raw} className='translate-y-[2px]' />
-        </div>
-      ) : (
-        "-"
-      ),
+      label: "Term duration",
+      value:
+        startEpoch > 0 && expirationEpoch > 0 ? (
+          <div className='flex items-center gap-1'>
+            <Link
+              to='/epoch/$no'
+              params={{ no: String(startEpoch) }}
+              className='text-primary'
+            >
+              {startEpoch}
+            </Link>
+            <span>-</span>
+            <Link
+              to='/epoch/$no'
+              params={{ no: String(expirationEpoch) }}
+              className='text-primary'
+            >
+              {expirationEpoch}
+            </Link>
+          </div>
+        ) : (
+          "-"
+        ),
     },
     {
       label: "Cold key",

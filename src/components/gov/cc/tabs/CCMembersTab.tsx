@@ -38,6 +38,7 @@ export const CCMembersTab: FC = () => {
       render: item => {
         const name = item.registry?.name ?? "Unknown";
         const identCold = item.ident?.cold ?? "N/A";
+        const identRaw = item.ident?.raw ?? "";
 
         const fallbackletters = [...name]
           .filter(char => alphabetWithNumbers.includes(char.toLowerCase()))
@@ -48,7 +49,7 @@ export const CCMembersTab: FC = () => {
         return (
           <div className='relative flex max-h-[75px] w-full items-center gap-1'>
             <Image
-              src={generateImageUrl(identCold, "ico", "cc")}
+              src={generateImageUrl(identRaw, "ico", "cc")}
               type='user'
               className='h-8 w-8 rounded-max'
               height={32}
