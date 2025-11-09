@@ -5,6 +5,7 @@ import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { GovernanceDetailOverview } from "@/components/governance/GovernanceDetailOverview";
 import { GovernanceDetailAboutTab } from "@/components/governance/tabs/GovernanceDetailAboutTab";
 import { GovernanceDetailNotVotedTab } from "@/components/governance/tabs/GovernanceDetailNotVotedTab";
+import { GovernanceDetailStatusHistoryTab } from "@/components/governance/tabs/GovernanceDetailStatusHistoryTab";
 
 import { useParams } from "@tanstack/react-router";
 import { useFetchGovernanceActionDetail } from "@/services/governance";
@@ -34,8 +35,18 @@ export const GovernanceDetailPage: FC = () => {
       key: "not_voted",
       label: "Not voted",
       content: (
-        <GovernanceDetailNotVotedTab id={decodedId} governanceAction={data} key={2} />
+        <GovernanceDetailNotVotedTab
+          id={decodedId}
+          governanceAction={data}
+          key={2}
+        />
       ),
+      visible: true,
+    },
+    {
+      key: "status_history",
+      label: "Status History",
+      content: <GovernanceDetailStatusHistoryTab query={detailQuery} key={3} />,
       visible: true,
     },
     {
@@ -75,7 +86,9 @@ export const GovernanceDetailPage: FC = () => {
           link: "/gov/action",
         },
         {
-          label: <span className=''>{formatString(decodedId ?? "", "long")}</span>,
+          label: (
+            <span className=''>{formatString(decodedId ?? "", "long")}</span>
+          ),
           ident: decodedId,
         },
       ]}
