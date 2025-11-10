@@ -23,7 +23,7 @@ export const HomepageCardanoPrice: FC<HomepageCardanoPriceProps> = ({
       <div className='flex items-center gap-1 pb-2'>
         <span className='text-display-sm font-semibold'>{price.today}</span>
         <span
-          className={`ml-0.5 flex max-h-[22px] items-center rounded-max border px-1/2 py-1/4 text-[11px] font-medium`}
+          className={`ml-0.5 flex max-h-[22px] items-center rounded-max border px-1/2 py-1/4 text-[11px] font-medium ${price.percentChange < 1 && price.percentChange > -1 ? "text-yellowText" : price.percentChange > 0 ? "text-greenText" : "text-redText"}`}
           style={{
             border: `1px solid ${
               price.percentChange < 1 && price.percentChange > -1
