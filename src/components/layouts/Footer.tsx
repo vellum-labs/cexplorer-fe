@@ -66,7 +66,7 @@ const Footer = () => {
             ❤️
           </span>
         </div>
-        <div className='flex h-auto w-full max-w-desktop items-center gap-2 p-mobile py-2 md:px-desktop md:py-mobile'>
+        <div className='flex h-auto w-full max-w-desktop items-center gap-2 p-mobile py-2 pb-[80px] md:px-desktop md:py-mobile md:pb-mobile'>
           <span className='md:text-sm text-text-xs text-grayTextPrimary'>
             Partners:{" "}
           </span>

@@ -27,7 +27,7 @@ const MobileMenu: FC = () => {
         setActiveMenu(null);
       }}
     >
-      <SheetTrigger className='block xl:hidden'>
+      <SheetTrigger>
         <Menu size={25} />
       </SheetTrigger>
       <SheetContent className='hide-scrollbar overflow-y-auto'>
