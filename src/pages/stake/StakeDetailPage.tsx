@@ -138,6 +138,7 @@ export const StakeDetailPage: FC = () => {
           <QrCode size={15} className='-translate-y-0.5' />
         </Tooltip>
       }
+      homepageAd
     >
       <div className='mb-1.5 flex w-full max-w-desktop items-center justify-between px-mobile md:px-desktop'>
         <UserBadge
