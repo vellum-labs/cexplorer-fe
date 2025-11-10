@@ -47,11 +47,11 @@ export const blocksListTableOptions: BlockListOptions = [
     name: "Protocol",
   },
   {
-    key: "cert_counter",
-    name: "Cert counter",
-  },
-  {
     key: "size",
     name: "Size",
+  },
+  {
+    key: "cert_counter",
+    name: "Cert counter",
   },
 ];
