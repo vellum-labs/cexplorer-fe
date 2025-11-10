@@ -23,7 +23,22 @@ export const HomepageCardanoPrice: FC<HomepageCardanoPriceProps> = ({
       <div className='flex items-center gap-1 pb-2'>
         <span className='text-display-sm font-semibold'>{price.today}</span>
         <span
-          className={`ml-0.5 flex max-h-[22px] items-center rounded-max border px-1/2 py-1/4 text-[11px] font-medium ${price.percentChange < 1 && price.percentChange > -1 ? "border-yellow-500/40 bg-yellow-500/5 text-yellowText" : price.percentChange > 0 ? "border-green-500/40 bg-green-500/5 text-greenText" : "border-red-500/40 bg-red-500/5 text-redText"}`}
+          className={`ml-0.5 flex max-h-[22px] items-center rounded-max border px-1/2 py-1/4 text-[11px] font-medium ${price.percentChange < 1 && price.percentChange > -1 ? "text-yellowText" : price.percentChange > 0 ? "text-greenText" : "text-redText"}`}
+          style={{
+            border: `1px solid ${
+              price.percentChange < 1 && price.percentChange > -1
+                ? "rgba(234, 179, 8, 0.4)"
+                : price.percentChange > 0
+                  ? "rgba(34, 197, 94, 0.4)"
+                  : "rgba(239, 68, 68, 0.4)"
+            }`,
+            backgroundColor:
+              price.percentChange < 1 && price.percentChange > -1
+                ? "rgba(234, 179, 8, 0.05)"
+                : price.percentChange > 0
+                  ? "rgba(34, 197, 94, 0.05)"
+                  : "rgba(239, 68, 68, 0.05)",
+          }}
         >
           {price.percentChange > 0 && "+"}
           {price.percentChange?.toFixed(1)}%
