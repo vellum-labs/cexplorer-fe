@@ -133,6 +133,7 @@ export const DrepDetailPage: FC = () => {
           hash={drepHash ?? ""}
         />
       }
+      homepageAd
     >
       <div className='flex w-full max-w-desktop items-center justify-between px-mobile md:px-desktop'>
         <WatchlistSection

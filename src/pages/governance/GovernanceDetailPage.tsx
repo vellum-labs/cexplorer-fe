@@ -113,6 +113,7 @@ export const GovernanceDetailPage: FC = () => {
           />
         </div>
       }
+      homepageAd
     >
       <GovernanceDetailOverview query={detailQuery} />
       <Tabs items={tabs} apiLoading={detailQuery.isLoading} />
