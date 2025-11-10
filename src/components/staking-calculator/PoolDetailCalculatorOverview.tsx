@@ -34,12 +34,12 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
         <h3 className='text-text-lg font-semibold'>Pool Info</h3>
         <div className='grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-6'>
           <div className='flex flex-col gap-3'>
-            {[1, 2, 3, 4, 5, 6].map(i => (
+            {[1, 2, 3, 4, 5, 6, 7].map(i => (
               <LoadingSkeleton key={i} height='24px' rounded='sm' />
             ))}
           </div>
           <div className='flex flex-col gap-3'>
-            {[1, 2, 3, 4, 5, 6].map(i => (
+            {[1, 2, 3, 4, 5, 6, 7].map(i => (
               <LoadingSkeleton key={i} height='24px' rounded='sm' />
             ))}
           </div>
@@ -71,6 +71,12 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
     {
       label: "Delegators",
       value: formatNumber(data.delegators),
+    },
+    {
+      label: "Recent ROA",
+      value: data.stats?.recent?.roa
+        ? `${data.stats.recent.roa.toFixed(2)}%`
+        : "-",
     },
     {
       label: "Website",
@@ -123,6 +129,12 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
     {
       label: "Active Pledge",
       value: <AdaWithTooltip data={data.pledged ?? 0} />,
+    },
+    {
+      label: "Lifetime ROA",
+      value: data.stats?.lifetime?.roa
+        ? `${data.stats.lifetime.roa.toFixed(2)}%`
+        : "-",
     },
     {
       label: "Margin Fee",
