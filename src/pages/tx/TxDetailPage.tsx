@@ -277,6 +277,7 @@ const TxDetailPage = () => {
         />
       }
       adsCarousel={false}
+      homepageAd
     >
       <div className='flex h-full w-full max-w-desktop flex-col gap-3 px-mobile py-1 lg:flex-row lg:px-desktop'>
         {uniqueContracts &&
