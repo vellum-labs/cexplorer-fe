@@ -73,6 +73,17 @@ const TxDetailOverview = ({ query }: Props) => {
     }
   }
 
+  const tx_ex_mem =
+    data?.plutus_contracts
+      ?.flatMap(contract => contract.input || [])
+      .reduce((sum, input) => sum + (input?.redeemer?.unit?.mem || 0), 0) || 0;
+
+  const tx_ex_steps =
+    data?.plutus_contracts
+      ?.flatMap(contract => contract.input || [])
+      .reduce((sum, input) => sum + (input?.redeemer?.unit?.steps || 0), 0) ||
+    0;
+
   const overviewListItems: OverviewList = [
     {
       label: "Hash",
@@ -305,9 +316,14 @@ const TxDetailOverview = ({ query }: Props) => {
             />
             <SizeCard
               size={data?.size}
-              maxSize={data?.epoch_param?.max_block_size}
+              maxSize={data?.epoch_param?.max_tx_size}
               title='Transaction size'
               icon={<GitFork size={20} className='text-primary' />}
+              isTx={true}
+              max_tx_ex_mem={data?.epoch_param?.max_tx_ex_mem}
+              max_tx_ex_steps={data?.epoch_param?.max_tx_ex_steps}
+              tx_ex_mem={tx_ex_mem}
+              tx_ex_steps={tx_ex_steps}
             />
             <AdsCarousel
               generateImageUrl={generateImageUrl}
