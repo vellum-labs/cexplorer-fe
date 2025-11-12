@@ -15,6 +15,8 @@ interface AssetDetailOverviewProps {
   type: "nft" | "token";
   formattedHex?: string;
   isLoading?: boolean;
+  hasDex?: boolean;
+  assetName?: string;
 }
 
 export const AssetDetailOverview: FC<AssetDetailOverviewProps> = ({
@@ -22,6 +24,8 @@ export const AssetDetailOverview: FC<AssetDetailOverviewProps> = ({
   type,
   isLoading,
   formattedHex,
+  hasDex,
+  assetName,
 }) => {
   const { detailData, blockchain, overview, tokenRegistry, encodedNameArr } =
     useAssetDetail({ data, type, formattedHex });
@@ -31,6 +35,8 @@ export const AssetDetailOverview: FC<AssetDetailOverviewProps> = ({
       <WatchlistSection
         ident={detailData?.fingerprint}
         isLoading={!!isLoading}
+        hasDex={hasDex}
+        assetName={assetName}
       />
       <div className='flex flex-wrap gap-3'>
         <div className='flex-grow basis-[390px] md:flex-shrink-0'>

@@ -302,6 +302,7 @@ const BlockDetailPage: FC = () => {
           hash={hash}
         />
       }
+      homepageAd
     >
       <section className='flex w-full justify-center'>
         <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 p-mobile md:p-desktop xl:flex-nowrap xl:justify-start'>
@@ -355,6 +356,7 @@ const BlockDetailPage: FC = () => {
                   isGenesisBlock={data?.epoch_no === null}
                   generateImageUrl={generateImageUrl}
                   miscData={miscData}
+                  opCounter={data.op_cert_counter}
                 />
                 <SizeCard
                   size={data.size}

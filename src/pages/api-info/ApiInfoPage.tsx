@@ -1,3 +1,4 @@
+import { PageBase } from "@/components/global/pages/PageBase";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import {
   Accordion,
@@ -158,22 +159,15 @@ export const ApiInfoPage = () => {
   };
 
   return (
-    <main className='flex min-h-minHeight w-full flex-col items-center'>
-      <div className='mt-6 flex w-full max-w-desktop flex-col items-center gap-4 px-mobile pb-3 text-center md:px-desktop'>
-        <span className='text-text-sm font-medium text-primary'>
-          Elevate your projects with
-        </span>
-        <h1 className='-my-4 md:text-[40px] md:leading-[45px]'>
-          Cexplorer <span className='text-primary'>API</span> Plans
-        </h1>
-        <p className='text-grayTextPrimary'>
-          Effortless access to blockchain data. Choose the perfect plan for your
-          needs.
-        </p>
-        <div className='flex w-full items-center justify-center gap-1'>
-          <Button label='Docs' variant='tertiary' size='md' />
-          <Button label='API plans' variant='primary' size='md' />
-        </div>
+    <PageBase
+      metadataOverride={{ title: "API Plans | Cexplorer.io" }}
+      title='API Plans'
+      subTitle='Effortless access to blockchain data. Choose the perfect plan for your needs.'
+      breadcrumbItems={[{ label: "API Plans" }]}
+      adsCarousel={false}
+      customPage={true}
+    >
+      <section className='flex w-full max-w-desktop flex-col items-center gap-4 px-mobile pb-3 text-center md:px-desktop'>
         <section className='mt-4 flex w-full flex-wrap items-center justify-center gap-3'>
           {Object.entries(priceTiers).map(([key, value]) => (
             <PriceCard
@@ -183,7 +177,6 @@ export const ApiInfoPage = () => {
               subtitle={value.subtitle}
               features={value.features}
               cta={value.cta}
-              ctaHref='/'
               icon={priceTierIcons[key]}
             />
           ))}
@@ -248,12 +241,11 @@ export const ApiInfoPage = () => {
             label='Get in touch'
             variant='primary'
             size='md'
-            href='/'
             className='w-[220px] max-w-none'
           />
         </section>
-      </div>
-    </main>
+      </section>
+    </PageBase>
   );
 };
 
@@ -263,7 +255,6 @@ interface PriceCardProps {
   subtitle: string;
   features: string[];
   cta: string;
-  ctaHref: string;
   icon: ReactNode;
 }
 
@@ -299,7 +290,6 @@ const PriceCard = ({
         label={cta}
         variant='primary'
         size='md'
-        href='/'
         className='mt-auto w-full max-w-none'
       />
     </div>

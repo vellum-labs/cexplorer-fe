@@ -1,12 +1,11 @@
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { colors } from "@/constants/colors";
 import { Twitter } from "@/resources/images/icons/Twitter";
-import { useFetchArticleDetail } from "@/services/article";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check, Copy, Heart, Mail, Zap } from "lucide-react";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
+import { PageBase } from "@/components/global/pages/PageBase";
 
 interface InfoCardProps {
   icon: ReactNode;
@@ -17,9 +16,6 @@ interface InfoCardProps {
 
 export const ContactUsPage = () => {
   const [isCopied, setIsCopied] = useState(false);
-  const query = useFetchArticleDetail("en", "page", "contact-us");
-  const data = query.data;
-  const name = data?.name;
   const email = "hello@cexplorer.io";
 
   useEffect(() => {
@@ -32,14 +28,16 @@ export const ContactUsPage = () => {
   }, [isCopied]);
 
   return (
-    <>
-      <Helmet>{name && <title>{name} | Cexplorer.io</title>}</Helmet>
-      <main className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
-        <section className='wrapper border-b border-border pb-8'>
-          <div className='flex flex-col items-center gap-1'>
-            <h2 className='text-text-md text-primary'>Contact us</h2>
-            <h1 className='text-display-sm'>Get in touch</h1>
-          </div>
+    <PageBase
+      metadataOverride={{ title: "Contact us | Cexplorer.io" }}
+      title='Contact us'
+      subTitle='Get in touch'
+      breadcrumbItems={[{ label: "Contact us" }]}
+      adsCarousel={false}
+      customPage={true}
+    >
+      <section className='flex w-full max-w-desktop flex-col items-center px-mobile pb-3 md:px-desktop'>
+        <section className='flex w-full max-w-[800px] flex-col gap-4 border-b border-border pb-8'>
           <div className='contributors__item'>
             <div className='contributors__item--title'>
               <h3>Support Our Work</h3>
@@ -237,20 +235,20 @@ export const ContactUsPage = () => {
             </div>
           </div>
         </section>
-        <section className='flex max-w-[800px] flex-wrap gap-2 pt-8'>
+        <section className='flex w-full max-w-[800px] flex-wrap gap-2 pt-8'>
           <InfoCard
             icon={<Zap size={18} color={colors.darkBlue} />}
             heading='Request a feature'
-            description='Let us know, what you’re like to see on Cexplorer next!'
+            description="Let us know, what you're like to see on Cexplorer next!"
             button={
-              <Button
-                size='md'
-                variant='tertiary'
-                href='/'
-                label='Request a feature'
-                rightIcon={<ArrowRight size={16} />}
-                className='ml-auto mt-auto'
-              />
+              <Link to='/' className='ml-auto mt-auto'>
+                <Button
+                  size='md'
+                  variant='tertiary'
+                  label='Request a feature'
+                  rightIcon={<ArrowRight size={16} />}
+                />
+              </Link>
             }
           />
           <InfoCard
@@ -258,19 +256,19 @@ export const ContactUsPage = () => {
             heading='Donate'
             description='Support our mission and keep the Cexplorer rolling'
             button={
-              <Button
-                size='md'
-                variant='tertiary'
-                href='/donate'
-                label='Donate page'
-                rightIcon={<ArrowRight size={16} />}
-                className='ml-auto mt-auto'
-              />
+              <Link to='/donate' className='ml-auto mt-auto'>
+                <Button
+                  size='md'
+                  variant='tertiary'
+                  label='Donate page'
+                  rightIcon={<ArrowRight size={16} />}
+                />
+              </Link>
             }
           />
         </section>
-      </main>
-    </>
+      </section>
+    </PageBase>
   );
 };
 

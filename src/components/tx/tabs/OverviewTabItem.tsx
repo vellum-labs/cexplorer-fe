@@ -3,17 +3,17 @@ import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import SortBy from "@/components/ui/sortBy";
 import { colors } from "@/constants/colors";
-import { useFetchTxDetail } from "@/services/tx";
+import type { useFetchTxDetail } from "@/services/tx";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useTxSortStore } from "@/stores/tx/txSortStore";
 import type { TxInfo } from "@/types/txTypes";
 import { Address } from "@/utils/address/getStakeAddress";
 import { isValidAddress } from "@/utils/address/isValidAddress";
-import { getRouteApi } from "@tanstack/react-router";
 import type { Edge, Node, Position } from "@xyflow/react";
 import { ReactFlow, ReactFlowProvider, useReactFlow } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { Lock, LucideLockOpen } from "lucide-react";
+import type { FC } from "react";
 import { useEffect, useRef, useState } from "react";
 import { AddressWithTxBadges } from "../AddressWithTxBadges";
 
@@ -28,16 +28,18 @@ const selectItems = [
   },
 ];
 
-const OverviewTabItem = () => {
+interface OverviewTabItemProps {
+  query: ReturnType<typeof useFetchTxDetail>;
+}
+
+const OverviewTabItem: FC<OverviewTabItemProps> = ({ query }) => {
   const [uniqueInputs, setUniqueInputs] = useState<TxInfo[]>([]);
   const [uniqueOutputs, setUniqueOutputs] = useState<TxInfo[]>([]);
-  const route = getRouteApi("/tx/$hash");
-  const { hash } = route.useParams();
   const { theme } = useThemeStore();
   const [disabledControls, setDisabledControls] = useState(true);
   const [interacted, setInteracted] = useState(false);
   const { sort, setSort } = useTxSortStore();
-  const query = useFetchTxDetail(hash);
+
   const data = query.data?.data;
 
   const getStakeAddr = (address: string) => {

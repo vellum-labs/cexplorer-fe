@@ -41,4 +41,8 @@ export const tokenDashboardListTableOptions: TokenDashboardOptions[] = [
     key: "last_week",
     name: "Last 7 days",
   },
+  {
+    key: "buy",
+    name: "Buy",
+  },
 ];

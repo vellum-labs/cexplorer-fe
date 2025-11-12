@@ -258,7 +258,7 @@ export const GovernancePage: FC = () => {
               <Link
                 to='/gov/action/$id'
                 params={{
-                  id: item?.ident?.id,
+                  id: item?.ident?.id?.replace(/#/g, "%23"),
                 }}
                 className={"text-primary"}
               >
@@ -269,7 +269,7 @@ export const GovernancePage: FC = () => {
               <Link
                 to='/gov/action/$id'
                 params={{
-                  id: item?.ident?.id,
+                  id: item?.ident?.id?.replace(/#/g, "%23"),
                 }}
                 className={"text-text-xs"}
                 disabled={true}

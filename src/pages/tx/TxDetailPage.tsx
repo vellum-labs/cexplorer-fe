@@ -51,7 +51,7 @@ const TxDetailPage = () => {
     {
       key: "overview",
       label: "Overview",
-      content: <OverviewTabItem />,
+      content: <OverviewTabItem query={query} />,
       visible: true,
     },
     {
@@ -277,6 +277,7 @@ const TxDetailPage = () => {
         />
       }
       adsCarousel={false}
+      homepageAd
     >
       <div className='flex h-full w-full max-w-desktop flex-col gap-3 px-mobile py-1 lg:flex-row lg:px-desktop'>
         {uniqueContracts &&
@@ -289,11 +290,7 @@ const TxDetailPage = () => {
           ))}
       </div>
       <TxDetailOverview query={query} />
-      <Tabs
-        items={txTabItems}
-        mobileItemsCount={3}
-        apiLoading={query.isLoading}
-      />
+      <Tabs items={txTabItems} mobileItemsCount={3} />
     </PageBase>
   );
 };

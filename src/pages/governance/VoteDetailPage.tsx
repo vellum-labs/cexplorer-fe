@@ -88,6 +88,7 @@ export const GovernanceVoteDetailPage: FC = () => {
           hash={hash}
         />
       }
+      homepageAd
     >
       <div className='w-full max-w-desktop py-2'>
         {isLoading ? (

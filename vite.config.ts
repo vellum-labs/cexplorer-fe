@@ -14,6 +14,50 @@ const __dirname = dirname(__filename);
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    {
+      name: "strip-data-modulepreload",
+      apply: "build",
+      transformIndexHtml(html: string) {
+        return html.replace(
+          /<link\s+rel="modulepreload"\s+href="data:application\/octet-stream[^"]*"\s*\/?>/g,
+          "",
+        );
+      },
+    },
+    {
+      name: "force-lucide-single-chunk",
+      outputOptions(output: any) {
+        const original = output.manualChunks;
+
+        output.manualChunks = (id: any, meta: any) => {
+          if (id && id.includes("node_modules/lucide-react/")) {
+            return "vendor";
+          }
+
+          if (original && typeof original === "object") {
+            for (const [name, pkgs] of Object.entries(original)) {
+              if (
+                Array.isArray(pkgs) &&
+                pkgs.some(pkg =>
+                  id.includes(`node_modules/${pkg.replace(/\\/g, "/")}`),
+                )
+              ) {
+                return name;
+              }
+            }
+            return null;
+          }
+
+          if (typeof original === "function") {
+            return original(id, meta);
+          }
+
+          return null;
+        };
+
+        return output;
+      },
+    },
     nodePolyfills({
       globals: {
         Buffer: true,
@@ -75,6 +119,7 @@ export default defineConfig({
     target: "ESNext",
     sourcemap: false,
     rollupOptions: {
+      onwarn: () => undefined,
       output: {
         manualChunks: {
           vendor: [
@@ -82,13 +127,6 @@ export default defineConfig({
             "react-dom",
             "@tanstack/react-query",
             "@tanstack/react-router",
-            "zustand",
-            "immer",
-            "query-string",
-            "date-fns",
-            "@date-fns/tz",
-          ],
-          ui: [
             "@radix-ui/react-accordion",
             "@radix-ui/react-dialog",
             "@radix-ui/react-dropdown-menu",
@@ -100,11 +138,21 @@ export default defineConfig({
             "@radix-ui/react-select",
             "@radix-ui/react-slot",
             "@radix-ui/react-icons",
+            "zustand",
+            "immer",
             "lucide-react",
-            "class-variance-authority",
-            "clsx",
-            "tailwind-merge",
+            "@dexhunterio/swaps",
             "cmdk",
+            "sonner",
+            "echarts-for-react",
+            "html-react-parser",
+            "qrcode.react",
+          ],
+          ui: [
+            "@xyflow/react",
+            "@vellumlabs/cexplorer-sdk",
+            "embla-carousel-autoplay",
+            "embla-carousel-react",
           ],
           cardano: [
             "@emurgo/cip14-js",
@@ -117,18 +165,30 @@ export default defineConfig({
             "@nufi/dapp-client-cardano",
             "@nufi/dapp-client-core",
             "@nufi/sso-button-react",
+            "@harmoniclabs/pair",
+            "@harmoniclabs/cbor",
+            "@harmoniclabs/bytestring",
           ],
-          charts: ["echarts", "echarts-for-react", "echarts-stat"],
+          charts: ["echarts", "echarts-stat"],
           utils: [
-            "html-react-parser",
+            "html-to-image",
+            "flatted",
+            "zod",
             "react-markdown",
             "remark-gfm",
             "react-syntax-highlighter",
-            "html-to-image",
-            "qrcode.react",
+            "query-string",
+            "date-fns",
+            "@date-fns/tz",
+            "react-grid-layout",
+            "react-window",
+            "react-resizable",
+            "react-device-detect",
+            "react-day-picker",
+            "class-variance-authority",
+            "clsx",
+            "tailwind-merge",
             "react-helmet",
-            "helmet",
-            "flatted",
           ],
         },
       },

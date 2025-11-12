@@ -12,13 +12,14 @@ import { format } from "date-fns";
 
 interface AssetExchangesCandlestickGraphProps {
   assetname: string;
+  className?: string;
 }
 
 type Periods = "1min" | "5min" | "15min" | "30min" | "1hour" | "4hour" | "1day";
 
 export const AssetExchangesCandlestickGraph: FC<
   AssetExchangesCandlestickGraphProps
-> = ({ assetname }) => {
+> = ({ assetname, className }) => {
   const LS_KEY = "asset_exchanges_candlestick_period";
 
   const [period, setPeriod] = useState<string | undefined>(() => {
@@ -32,7 +33,7 @@ export const AssetExchangesCandlestickGraph: FC<
     period as Periods,
   );
 
-  const volumeData = rawData?.data.map(item => Number(item.volume)) ?? [];
+  const volumeData = rawData?.data?.map(item => Number(item.volume)) ?? [];
 
   useEffect(() => {
     if (period) {
@@ -41,7 +42,7 @@ export const AssetExchangesCandlestickGraph: FC<
   }, [period]);
 
   const candlestickData =
-    rawData?.data.map(item => [
+    rawData?.data?.map(item => [
       Number(item.open),
       Number(item.close),
       Number(item.low),
@@ -49,7 +50,7 @@ export const AssetExchangesCandlestickGraph: FC<
     ]) ?? [];
 
   const candlestickTimestamps =
-    rawData?.data.map(item =>
+    rawData?.data?.map(item =>
       format(new Date(item.unix * 1000), "dd.MM.yyyy HH:mm"),
     ) ?? [];
 
@@ -229,7 +230,7 @@ export const AssetExchangesCandlestickGraph: FC<
   };
 
   return (
-    <div className={`w-full rounded-m border border-border bg-cardBg p-5`}>
+    <div className={`w-full rounded-m border border-border bg-cardBg p-5 ${className || ''}`}>
       <div className={`flex flex-col justify-end pb-1.5 md:flex-row md:pb-0`}>
         <SortBy
           label={false}
