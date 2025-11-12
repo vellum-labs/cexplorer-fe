@@ -1,17 +1,17 @@
 import { PageBase } from "@/components/global/pages/PageBase";
 import { getRouteApi } from "@tanstack/react-router";
-import { useFetchCCMemberDetail } from "@/services/governance";
+import { useFetchCCMemberDetail, useFetchCCMemberVote } from "@/services/governance";
 import {
   HeaderBannerSubtitle,
   Image,
   Tabs,
-  GlobalTable,
 } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { CCMemberDetailOverview } from "@/components/gov/cc/CCMemberDetailOverview";
-import type { TableColumns } from "@/types/tableTypes";
-import { useMemo } from "react";
+import { CCMemberVotesTab } from "@/components/gov/cc/tabs/CCMemberVotesTab";
+import { CCMemberHotKeysTab } from "@/components/gov/cc/tabs/CCMemberHotKeysTab";
+import { CCMemberStatusHistoryTab } from "@/components/gov/cc/tabs/CCMemberStatusHistoryTab";
 
 export const CCMemberDetailPage = () => {
   const route = getRouteApi("/gov/cc/$coldKey");
@@ -24,139 +24,8 @@ export const CCMemberDetailPage = () => {
       )[0]
     : data?.data;
 
-  interface CCVoteData {
-    date: string;
-    type: string;
-    actionName: string;
-    vote: string;
-    tx: string;
-  }
-
-  interface CCStatusHistoryData {
-    date: string;
-    type: string;
-    effective: string;
-    expiration: string;
-    tx: string;
-  }
-
-  const votesColumns: TableColumns<CCVoteData> = useMemo(
-    () => [
-      {
-        key: "date",
-        render: () => <span>TBD</span>,
-        title: <p>Date</p>,
-        visible: true,
-        widthPx: 80,
-      },
-      {
-        key: "type",
-        render: () => <span>TBD</span>,
-        title: "Type",
-        visible: true,
-        widthPx: 110,
-      },
-      {
-        key: "actionName",
-        render: () => <span>TBD</span>,
-        title: "Governance action name",
-        visible: true,
-        widthPx: 200,
-      },
-      {
-        key: "vote",
-        render: () => <span className='flex justify-end'>TBD</span>,
-        title: <p className='w-full text-right'>Vote</p>,
-        visible: true,
-        widthPx: 80,
-      },
-      {
-        key: "tx",
-        render: () => <span className='flex justify-end'>TBD</span>,
-        title: <p className='w-full text-right'>Tx</p>,
-        visible: true,
-        widthPx: 50,
-      },
-    ],
-    [],
-  );
-
-  const mockVotesData: CCVoteData[] = [
-    {
-      date: "TBD",
-      type: "TBD",
-      actionName: "TBD",
-      vote: "TBD",
-      tx: "TBD",
-    },
-  ];
-
-  const mockVotesQuery = {
-    data: mockVotesData,
-    isLoading: false,
-    isError: false,
-    error: null,
-    refetch: () => Promise.resolve({} as any),
-  } as any;
-
-  const statusHistoryColumns: TableColumns<CCStatusHistoryData> = useMemo(
-    () => [
-      {
-        key: "date",
-        render: () => <span>TBD</span>,
-        title: <p>Date</p>,
-        visible: true,
-        widthPx: 80,
-      },
-      {
-        key: "type",
-        render: () => <span>TBD</span>,
-        title: "Type",
-        visible: true,
-        widthPx: 110,
-      },
-      {
-        key: "effective",
-        render: () => <span>TBD</span>,
-        title: "Effective",
-        visible: true,
-        widthPx: 110,
-      },
-      {
-        key: "expiration",
-        render: () => <span>TBD</span>,
-        title: "Expiration",
-        visible: true,
-        widthPx: 110,
-      },
-      {
-        key: "tx",
-        render: () => <span className='flex justify-end'>TBD</span>,
-        title: <p className='w-full text-right'>Tx</p>,
-        visible: true,
-        widthPx: 50,
-      },
-    ],
-    [],
-  );
-
-  const mockStatusHistoryData: CCStatusHistoryData[] = [
-    {
-      date: "TBD",
-      type: "TBD",
-      effective: "TBD",
-      expiration: "TBD",
-      tx: "TBD",
-    },
-  ];
-
-  const mockStatusHistoryQuery = {
-    data: mockStatusHistoryData,
-    isLoading: false,
-    isError: false,
-    error: null,
-    refetch: () => Promise.resolve({} as any),
-  } as any;
+  const hotKey = memberData?.ident?.hot;
+  const votesQuery = useFetchCCMemberVote(1000, 0, undefined, hotKey, undefined);
 
   const tabItems = [
     {
@@ -164,14 +33,25 @@ export const CCMemberDetailPage = () => {
       label: "Votes",
       content: (
         <div className='w-full max-w-desktop'>
-          <GlobalTable
-            type='default'
-            itemsPerPage={10}
-            rowHeight={60}
-            scrollable
-            query={mockVotesQuery}
-            items={mockVotesData}
-            columns={votesColumns}
+          <CCMemberVotesTab hotKey={hotKey} />
+        </div>
+      ),
+      visible: true,
+    },
+    {
+      key: "hot-keys",
+      label: "Hot keys",
+      content: (
+        <div className='w-full max-w-desktop'>
+          <CCMemberHotKeysTab
+            memberHistory={
+              Array.isArray(data?.data)
+                ? data.data
+                : data?.data
+                  ? [data.data]
+                  : undefined
+            }
+            isLoading={!data}
           />
         </div>
       ),
@@ -182,14 +62,15 @@ export const CCMemberDetailPage = () => {
       label: "Status history",
       content: (
         <div className='w-full max-w-desktop'>
-          <GlobalTable
-            type='default'
-            itemsPerPage={10}
-            rowHeight={60}
-            scrollable
-            query={mockStatusHistoryQuery}
-            items={mockStatusHistoryData}
-            columns={statusHistoryColumns}
+          <CCMemberStatusHistoryTab
+            memberHistory={
+              Array.isArray(data?.data)
+                ? data.data
+                : data?.data
+                  ? [data.data]
+                  : undefined
+            }
+            isLoading={!data}
           />
         </div>
       ),
@@ -261,11 +142,12 @@ export const CCMemberDetailPage = () => {
     >
       <section className='flex w-full flex-col items-center'>
         <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 px-mobile pt-1.5 md:px-desktop xl:flex-nowrap xl:justify-start'>
-          <div className='flex-grow basis-[410px]'>
+          <div className='w-full'>
             <CCMemberDetailOverview
               memberData={memberData}
               isLoading={!data}
               isError={false}
+              votesData={votesQuery.data}
             />
           </div>
         </div>

@@ -319,13 +319,13 @@ export interface CommitteeMember {
   key: CommitteeKey;
   ident: CommitteeIdent;
   registry: CommitteeRegistry | null;
-  registration: {
+  registration: Array<{
     hash: string;
     time: string;
     index: number;
     invalid_hereafter: null | number;
     treasury_donation: number;
-  } | null;
+  }> | null;
   de_registration: null;
   expiration_epoch: number | null;
 }

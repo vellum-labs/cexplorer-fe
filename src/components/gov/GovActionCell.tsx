@@ -11,9 +11,11 @@ interface GovActionCellProps {
 export const GovActionCell: FC<GovActionCellProps> = ({ id, name }) => {
   if (!id) return <span>-</span>;
 
+  const encodedId = encodeURIComponent(id);
+
   const to = {
     to: "/gov/action/$id",
-    params: { id },
+    params: { id: encodedId },
   };
 
   return (

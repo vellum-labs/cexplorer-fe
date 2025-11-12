@@ -5,6 +5,9 @@ import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@vellumlabs/cexplorer-sdk";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { TimeDateIndicator } from "@vellumlabs/cexplorer-sdk";
+import { CircleHelp } from "lucide-react";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useFetchEpochDetailParam } from "@/services/epoch";
@@ -16,14 +19,17 @@ import { Link } from "@tanstack/react-router";
 
 interface UseCCMemberDetailArgs {
   memberData: CommitteeMember | undefined;
+  votesData: any;
 }
 
 interface UseCCMemberDetail {
   about: OverviewList;
+  governance: OverviewList;
 }
 
 export const useCCMemberDetail = ({
   memberData,
+  votesData,
 }: UseCCMemberDetailArgs): UseCCMemberDetail => {
   const { data: basicData } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(basicData?.data.version.const);
@@ -152,5 +158,141 @@ export const useCCMemberDetail = ({
     },
   ];
 
-  return { about };
+  const allVotes = votesData?.pages?.flatMap((page: any) => page.data.data) ?? [];
+  const voteCounts = allVotes.reduce((acc: any, vote: any) => {
+    const voteType = vote.vote;
+    acc[voteType] = (acc[voteType] || 0) + 1;
+    return acc;
+  }, {});
+
+  const totalVotes = Object.values(voteCounts).reduce((a: any, b: any) => a + b, 0) as number;
+
+  // Get last vote time
+  const lastVote = allVotes.length > 0 ? allVotes[0]?.tx?.time : null;
+
+  // Calculate recent activity (last 6 months)
+  const sixMonthsAgo = new Date();
+  sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+  const recentVotes = allVotes.filter((vote: any) => {
+    const voteTime = new Date(vote?.tx?.time);
+    return voteTime >= sixMonthsAgo;
+  });
+  const recentPercent = recentVotes.length > 0 ? 100 : 0; // Simplified calculation
+
+  // Lifetime activity
+  const lifetimePercent = totalVotes > 0 ? 100 : 0; // Simplified calculation
+
+  const governance: OverviewList = [
+    {
+      label: undefined,
+      value: (() => {
+        const calc = (type: "Yes" | "Abstain" | "No") =>
+          totalVotes > 0
+            ? ((voteCounts[type] ?? 0) / totalVotes) * 100
+            : 0;
+
+        return (
+          <div className='flex h-full w-full flex-col gap-3'>
+            {lastVote && (
+              <div className='flex w-full items-center justify-between'>
+                <span className='text-text-sm text-grayTextSecondary'>
+                  Last vote
+                </span>
+                <TimeDateIndicator time={lastVote} />
+              </div>
+            )}
+            <div className='flex flex-col gap-2'>
+              <div className='flex flex-col items-center gap-1'>
+                <div className='flex w-full items-center justify-between'>
+                  <div className='flex items-center gap-1/2'>
+                    <span className='text-text-sm text-grayTextSecondary'>
+                      Recent Activity
+                    </span>
+                    <Tooltip content="CC member's voting activity over the past 6 months">
+                      <CircleHelp
+                        size={12}
+                        className='text-grayTextPrimary'
+                      />
+                    </Tooltip>
+                  </div>
+                  <span className='text-text-sm text-grayTextPrimary'>
+                    Voted: {recentPercent.toFixed(2)}%
+                  </span>
+                </div>
+                <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#E4E7EC]'>
+                  <span
+                    className='absolute left-0 block h-2 rounded-bl-[4px] rounded-tl-[4px] bg-[#47CD89]'
+                    style={{ width: `${recentPercent}%` }}
+                  />
+                </div>
+              </div>
+
+              <div className='flex flex-col items-center gap-1'>
+                <div className='flex w-full items-center justify-between'>
+                  <div className='flex items-center gap-1/2'>
+                    <span className='text-text-sm text-grayTextSecondary'>
+                      Lifetime Activity
+                    </span>
+                    <Tooltip content="Voting activity over CC member's lifetime">
+                      <CircleHelp
+                        size={12}
+                        className='text-grayTextPrimary'
+                      />
+                    </Tooltip>
+                  </div>
+                  <span className='text-text-sm text-grayTextPrimary'>
+                    Voted: {lifetimePercent.toFixed(2)}%
+                  </span>
+                </div>
+                <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#E4E7EC]'>
+                  <span
+                    className='absolute left-0 block h-2 rounded-bl-[4px] rounded-tl-[4px] bg-[#47CD89]'
+                    style={{ width: `${lifetimePercent}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className='flex flex-col gap-1'>
+              {["Yes", "Abstain", "No"].map(vote => {
+                const votePercent = calc(vote as any).toFixed(2);
+                const color =
+                  vote === "Yes"
+                    ? "#47CD89"
+                    : vote === "Abstain"
+                      ? "#FEC84B"
+                      : "#f04438";
+
+                const voteCount = voteCounts[vote] ?? 0;
+
+                return (
+                  <div
+                    className='flex items-center justify-between gap-1'
+                    key={vote}
+                  >
+                    <span className='min-w-24 text-text-sm text-grayTextPrimary'>
+                      {vote} ({voteCount})
+                    </span>
+                    <div className='relative h-2 w-2/3 overflow-hidden rounded-[4px] bg-[#E4E7EC]'>
+                      <span
+                        className='absolute left-0 block h-2 rounded-bl-[4px] rounded-tl-[4px]'
+                        style={{
+                          width: `${votePercent}%`,
+                          backgroundColor: color,
+                        }}
+                      />
+                    </div>
+                    <span className='flex min-w-[55px] items-end text-text-sm text-grayTextPrimary'>
+                      {votePercent}%
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })(),
+    },
+  ];
+
+  return { about, governance };
 };

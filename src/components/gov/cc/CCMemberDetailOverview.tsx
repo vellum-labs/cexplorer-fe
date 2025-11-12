@@ -10,22 +10,31 @@ interface CCMemberDetailOverviewProps {
   memberData: CommitteeMember | undefined;
   isLoading: boolean;
   isError: boolean;
+  votesData: any;
 }
 
 export const CCMemberDetailOverview: FC<CCMemberDetailOverviewProps> = ({
   memberData,
   isLoading,
   isError,
+  votesData,
 }) => {
-  const { about } = useCCMemberDetail({ memberData });
+  const { about, governance } = useCCMemberDetail({ memberData, votesData });
 
   if (isLoading) {
     return (
-      <LoadingSkeleton
-        height="227px"
-        rounded="xl"
-        className="w-full px-4 py-2"
-      />
+      <div className='flex flex-col gap-2 xl:flex-row'>
+        <LoadingSkeleton
+          height='227px'
+          rounded='xl'
+          className='w-full px-4 py-2 xl:flex-1'
+        />
+        <LoadingSkeleton
+          height='450px'
+          rounded='xl'
+          className='w-full px-4 py-2 xl:w-[450px]'
+        />
+      </div>
     );
   }
 
@@ -34,6 +43,17 @@ export const CCMemberDetailOverview: FC<CCMemberDetailOverviewProps> = ({
   }
 
   return (
-    <OverviewCard title="About" overviewList={about} className="h-full" />
+    <div className='flex flex-col gap-2 xl:flex-row'>
+      <div className='flex-1'>
+        <OverviewCard title='About' overviewList={about} className='h-full' />
+      </div>
+      <div className='w-full xl:w-[450px]'>
+        <OverviewCard
+          title='Governance'
+          overviewList={governance}
+          className='h-full'
+        />
+      </div>
+    </div>
   );
 };

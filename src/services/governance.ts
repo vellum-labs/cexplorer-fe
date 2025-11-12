@@ -217,9 +217,9 @@ export const useFetchConstitutionList = () => {
 export const fetchCCVotes = async (
   limit = 10,
   offset = 0,
-  vote,
-  committee_voter,
-  tx,
+  vote?: string,
+  committee_voter?: string,
+  tx?: string,
 ) => {
   const url = "/gov/vote";
   const options = {
@@ -257,6 +257,63 @@ export const useFetchCCVotes = (
     refetchInterval: 300000,
   });
 };
+
+interface CCMemberVoteParams {
+  limit?: number;
+  offset?: number;
+  vote?: string;
+  committee_voter?: string;
+  tx?: string;
+}
+
+export const fetchCCMemberVote = async ({
+  limit = 10,
+  offset = 0,
+  vote,
+  committee_voter,
+  tx,
+}: CCMemberVoteParams) => {
+  const url = "/gov/vote";
+  const options = {
+    params: {
+      limit,
+      offset,
+      voter_role: "ConstitutionalCommittee",
+      vote,
+      committee_voter,
+      tx,
+    },
+  };
+
+  return handleFetch<any>(url, offset, options);
+};
+
+export const useFetchCCMemberVote = (
+  limit: number,
+  page: number,
+  vote?: string,
+  committee_voter?: string,
+  tx?: string,
+) =>
+  useInfiniteQuery({
+    queryKey: ["cc-member-vote", limit, page, vote, committee_voter, tx],
+    queryFn: ({ pageParam = page }) =>
+      fetchCCMemberVote({
+        limit,
+        offset: pageParam,
+        vote,
+        committee_voter,
+        tx,
+      }),
+    initialPageParam: page,
+    getNextPageParam: lastPage => {
+      const nextOffset = (lastPage.prevOffset as number) + limit;
+      if (nextOffset >= lastPage.data.count) return undefined;
+      return nextOffset;
+    },
+    refetchOnWindowFocus: false,
+    refetchInterval: 60000,
+  });
 
 export const fetchNewVotes = async (
   limit: number = 10,
