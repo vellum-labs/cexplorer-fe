@@ -6,6 +6,8 @@ import {
   VoteBadge,
   formatString,
   Button,
+  JsonDisplay,
+  LoadingSkeleton,
 } from "@vellumlabs/cexplorer-sdk";
 import type { Vote } from "@/constants/votes";
 import { Tooltip, Modal, SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
@@ -51,34 +53,59 @@ export const VoteCell: FC<VoteCellProps> = ({
     return url;
   };
 
+  const fetchFullMetadata = async (url: string) => {
+    try {
+      const fetchUrl = convertIpfsUrl(url);
+      const response = await fetch(fetchUrl);
+      const data = await response.text();
+
+      try {
+        const jsonData = JSON.parse(data);
+        setFullMetadata(JSON.stringify(jsonData, null, 2));
+      } catch {
+        setFullMetadata(data);
+      }
+    } catch {
+      setFullMetadata("");
+    }
+  };
+
+  const extractContentFromJson = (jsonData: any): string => {
+    const comment = jsonData?.body?.comment;
+    const rationaleStatement = jsonData?.body?.rationaleStatement;
+    const rationale = jsonData?.body?.rationale;
+
+    const parts: string[] = [];
+
+    if (comment) parts.push(`Comment:\n${comment}`);
+    if (rationaleStatement)
+      parts.push(`Rationale Statement:\n${rationaleStatement}`);
+    if (rationale) parts.push(`Rationale:\n${rationale}`);
+
+    return parts.join("\n\n");
+  };
+
   const handleAnchorClick = async () => {
-    if (anchorInfo?.offchain?.comment) {
+    if (!anchorInfo) return;
+
+    if (anchorInfo.offchain?.comment) {
       setModalContent(anchorInfo.offchain.comment);
       setShowFullMetadata(false);
       setIsModalOpen(true);
 
-      if (anchorInfo?.url) {
-        try {
-          const fetchUrl = convertIpfsUrl(anchorInfo.url);
-          const response = await fetch(fetchUrl);
-          const data = await response.text();
-
-          try {
-            const jsonData = JSON.parse(data);
-            setFullMetadata(JSON.stringify(jsonData, null, 2));
-          } catch {
-            setFullMetadata(data);
-          }
-        } catch {
-          setFullMetadata("");
-        }
+      if (anchorInfo.url) {
+        await fetchFullMetadata(anchorInfo.url);
       } else {
         setFullMetadata("");
       }
-    } else if (anchorInfo?.url) {
+      return;
+    }
+
+    if (anchorInfo.url) {
       setIsLoading(true);
       setIsModalOpen(true);
       setShowFullMetadata(false);
+
       try {
         const fetchUrl = convertIpfsUrl(anchorInfo.url);
         const response = await fetch(fetchUrl);
@@ -86,25 +113,7 @@ export const VoteCell: FC<VoteCellProps> = ({
 
         try {
           const jsonData = JSON.parse(data);
-          const comment = jsonData?.body?.comment;
-          const rationaleStatement = jsonData?.body?.rationaleStatement;
-          const rationale = jsonData?.body?.rationale;
-
-          let extractedContent = "";
-
-          if (comment && rationaleStatement) {
-            extractedContent = `Comment:\n${comment}\n\nRationale Statement:\n${rationaleStatement}`;
-          } else if (comment && rationale) {
-            extractedContent = `Comment:\n${comment}\n\nRationale:\n${rationale}`;
-          } else if (rationaleStatement && rationale) {
-            extractedContent = `Rationale Statement:\n${rationaleStatement}\n\nRationale:\n${rationale}`;
-          } else if (comment) {
-            extractedContent = comment;
-          } else if (rationaleStatement) {
-            extractedContent = rationaleStatement;
-          } else if (rationale) {
-            extractedContent = rationale;
-          }
+          const extractedContent = extractContentFromJson(jsonData);
 
           if (extractedContent) {
             setModalContent(extractedContent);
@@ -117,7 +126,7 @@ export const VoteCell: FC<VoteCellProps> = ({
           setModalContent(data);
           setFullMetadata("");
         }
-      } catch (error) {
+      } catch {
         setModalContent("Failed to fetch content from URL");
         setFullMetadata("");
       } finally {
@@ -182,14 +191,33 @@ export const VoteCell: FC<VoteCellProps> = ({
                 )}
               </div>
               {isLoading ? (
-                <p className='text-grayTextPrimary'>Loading...</p>
+                <div className='flex flex-col gap-3'>
+                  <LoadingSkeleton height='24px' rounded='sm' />
+                  <LoadingSkeleton height='24px' rounded='sm' />
+                  <LoadingSkeleton height='24px' rounded='sm' />
+                  <LoadingSkeleton height='24px' rounded='sm' />
+                </div>
               ) : (
                 <>
-                  <div className='max-h-[500px] overflow-auto rounded-lg p-3 text-sm'>
+                  <div className='rounded-lg text-sm max-h-[500px] overflow-auto p-3'>
                     {showFullMetadata && fullMetadata ? (
-                      <pre className='whitespace-pre-wrap break-words'>
-                        {fullMetadata}
-                      </pre>
+                      (() => {
+                        try {
+                          return (
+                            <JsonDisplay
+                              data={JSON.parse(fullMetadata)}
+                              isLoading={false}
+                              isError={false}
+                            />
+                          );
+                        } catch {
+                          return (
+                            <pre className='whitespace-pre-wrap break-words'>
+                              {fullMetadata}
+                            </pre>
+                          );
+                        }
+                      })()
                     ) : (
                       <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
@@ -205,7 +233,9 @@ export const VoteCell: FC<VoteCellProps> = ({
                         size='sm'
                         variant='primary'
                         label={
-                          showFullMetadata ? "Show Summary" : "Show Full Metadata"
+                          showFullMetadata
+                            ? "Show Summary"
+                            : "Show Full Metadata"
                         }
                         onClick={() => setShowFullMetadata(!showFullMetadata)}
                       />
