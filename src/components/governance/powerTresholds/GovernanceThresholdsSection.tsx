@@ -32,11 +32,12 @@ interface GovernanceThresholdsSectionProps {
     poolList: ThresholdPoolList;
     totalSpoStake: number;
   };
+  onlySecurity?: boolean;
 }
 
 export const GovernanceThresholdsSection: FC<
   GovernanceThresholdsSectionProps
-> = ({ thresholdProps }) => {
+> = ({ thresholdProps, onlySecurity = false }) => {
   const {
     epochParam,
     ccData,
@@ -108,6 +109,7 @@ export const GovernanceThresholdsSection: FC<
             drepCount,
             spoCount,
           }}
+          onlySecurity={onlySecurity}
         />
         <CCThresholdChart
           chartProps={{
