@@ -1,8 +1,8 @@
 import EChartsReact from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
-import { useMemo } from "react";
 import { PIE_CHART_COLORS } from "@/constants/charts";
+import { useMemo } from "react";
 
 interface ChartConfig {
   dataKey: string;
@@ -13,7 +13,7 @@ interface ChartConfig {
 interface PieChartsProps<T> {
   items: T[];
   charts: ChartConfig[];
-  getChartData: (items: T[]) => Array<Record<string, any>>;
+  getChartData: (items: T[], dataKey: string) => Array<Record<string, any>>;
 }
 
 export const PieCharts = <T,>({
@@ -23,94 +23,88 @@ export const PieCharts = <T,>({
 }: PieChartsProps<T>) => {
   const { textColor, bgColor } = useGraphColors();
 
-  const chartData = useMemo(() => getChartData(items), [items, getChartData]);
+  const chartOptions = useMemo(() => {
+    return charts.map(chart => {
+      const chartData = getChartData(items, chart.dataKey);
 
-  const getChartOption = (
-    dataKey: string,
-    title: string,
-    needsAdaFormatting = false,
-  ) => {
-    return {
-      title: {
-        text: title,
-        left: "center",
-        textStyle: {
-          color: textColor,
-          fontSize: 16,
-        },
-      },
-      tooltip: {
-        trigger: "item",
-        confine: true,
-        backgroundColor: bgColor,
-        textStyle: {
-          color: textColor,
-        },
-        formatter: params => {
-          if (needsAdaFormatting) {
-            const adaValue = formatNumber(Math.round(params.value / 1000000));
-            return `${params.name}<br/>${params.marker}${adaValue} ₳`;
-          }
-          return `${params.name}<br/>${params.marker}${formatNumber(params.value)}`;
-        },
-      },
-      color: PIE_CHART_COLORS,
-      series: [
-        {
-          type: "pie",
-          radius: ["50%", "80%"],
-          avoidLabelOverlap: true,
-          minShowLabelAngle: 10,
-          label: {
-            show: true,
+      return {
+        title: {
+          text: chart.title,
+          left: "center",
+          textStyle: {
             color: textColor,
-            position: "outside",
-            fontSize: 10,
+            fontSize: 16,
           },
-          labelLine: {
-            show: true,
-            length: 15,
-            length2: 10,
-            lineStyle: {
-              width: 1,
+        },
+        tooltip: {
+          trigger: "item",
+          confine: true,
+          backgroundColor: bgColor,
+          textStyle: {
+            color: textColor,
+          },
+          formatter: (params: any) => {
+            if (chart.needsAdaFormatting) {
+              const adaValue = formatNumber(Math.round(params.value / 1000000));
+              return `${params.name}<br/>${params.marker}${adaValue} ₳`;
+            }
+            return `${params.name}<br/>${params.marker}${formatNumber(params.value)}`;
+          },
+        },
+        color: PIE_CHART_COLORS,
+        series: [
+          {
+            type: "pie",
+            radius: ["50%", "80%"],
+            avoidLabelOverlap: true,
+            minShowLabelAngle: 10,
+            label: {
+              show: true,
+              color: textColor,
+              position: "outside",
+              fontSize: 10,
             },
-          },
-          emphasis: {
             labelLine: {
               show: true,
               length: 15,
               length2: 10,
+              lineStyle: {
+                width: 1,
+              },
             },
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: "rgba(0, 0, 0, 0.5)",
+            emphasis: {
+              labelLine: {
+                show: true,
+                length: 15,
+                length2: 10,
+              },
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: "rgba(0, 0, 0, 0.5)",
+              },
             },
+            data: chartData.map(item => ({
+              value: item[chart.dataKey],
+              name: item.name,
+              itemStyle: { color: item.color },
+            })),
           },
-          data: chartData.map(item => ({
-            value: item[dataKey],
-            name: item.name,
-            itemStyle: { color: item.color },
-          })),
-        },
-      ],
-    };
-  };
+        ],
+      };
+    });
+  }, [items, charts, getChartData, textColor, bgColor]);
 
-  if (chartData.length === 0) {
+  if (items.length === 0) {
     return null;
   }
 
   return (
     <div className='mb-2 grid w-full grid-cols-1 gap-2 md:grid-cols-2'>
-      {charts.map(chart => (
-        <div key={chart.dataKey} className='w-full'>
+      {chartOptions.map((option, index) => (
+        <div key={charts[index].dataKey} className='w-full'>
           <EChartsReact
-            option={getChartOption(
-              chart.dataKey,
-              chart.title,
-              chart.needsAdaFormatting,
-            )}
+            option={option}
             style={{ height: "400px", width: "100%" }}
           />
         </div>
