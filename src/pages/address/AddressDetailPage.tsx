@@ -168,7 +168,7 @@ export const AddressDetailPage: FC = () => {
       }
       qrCode={
         <Tooltip content={<QRCodeSVG value={address} size={120} />}>
-          <QrCode size={15} className='-translate-y-0.5' />
+          <QrCode size={15} className='-translate-y-2' />
         </Tooltip>
       }
       homepageAd
