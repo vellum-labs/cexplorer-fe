@@ -7,7 +7,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
-import { Button, SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
+import { Button } from "@vellumlabs/cexplorer-sdk";
 import Footer from "../components/layouts/Footer";
 
 import { SwReadyModal } from "@/components/global/modals/SwReadyModal";
@@ -28,7 +28,6 @@ import { useFetchMiscBasic } from "@/services/misc";
 const RootComponent = () => {
   const { notFound, setNotFound } = useNotFound();
   const location = useLocation();
-  const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
   const { location: locationState } = useRouterState();
 
@@ -140,7 +139,7 @@ const RootComponent = () => {
           <div
             className='h-full w-full max-w-desktop cursor-pointer md:px-desktop'
             onClick={() => {
-              setClickedUrl(randomTopAd.data.link);
+              window.open(randomTopAd.data.link, "_blank");
             }}
           >
             {randomTopAd.data.img ? (
@@ -178,9 +177,7 @@ const RootComponent = () => {
       <Footer />
       {updateReady && <SwReadyModal firstInstall={isFirstInstall} />}
       <VersionWatcher />
-      {clickedUrl && (
-        <SafetyLinkModal url={clickedUrl} onClose={() => setClickedUrl(null)} />
-      )}
+
       {/* <TanStackRouterDevtools /> */}
       {/* <ReactQueryDevtools /> */}
     </>

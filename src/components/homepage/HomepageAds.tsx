@@ -1,11 +1,10 @@
-import { useState, type FC } from "react";
+import type { FC } from "react";
 
 import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  SafetyLinkModal,
 } from "@vellumlabs/cexplorer-sdk";
 import type dynamicIconImports from "lucide-react/dynamicIconImports";
 
@@ -26,8 +25,6 @@ interface HomepageAdsProps {
 }
 
 export const HomepageAds: FC<HomepageAdsProps> = ({ miscBasicAds }) => {
-  const [clickedUrl, setClickedUrl] = useState<string | null>(null);
-
   return (
     <div className='flex h-full w-full items-center overflow-hidden rounded-m'>
       <Carousel
@@ -43,7 +40,7 @@ export const HomepageAds: FC<HomepageAdsProps> = ({ miscBasicAds }) => {
             <CarouselItem
               className='flex h-full w-full !basis-full cursor-pointer items-center justify-center bg-cardBg !pl-0'
               onClick={() => {
-                setClickedUrl(link);
+                window.open(link, "_blank");
               }}
             >
               {img ? (
@@ -58,9 +55,6 @@ export const HomepageAds: FC<HomepageAdsProps> = ({ miscBasicAds }) => {
           ))}
         </CarouselContent>
       </Carousel>
-      {clickedUrl && (
-        <SafetyLinkModal url={clickedUrl} onClose={() => setClickedUrl(null)} />
-      )}
     </div>
   );
 };
