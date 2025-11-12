@@ -5,9 +5,9 @@ import {
   NetworkFirst,
   CacheFirst,
   StaleWhileRevalidate,
+  NetworkOnly,
 } from "workbox-strategies";
 import { ExpirationPlugin } from "workbox-expiration";
-import { CacheableResponsePlugin } from "workbox-cacheable-response";
 
 self.skipWaiting();
 clientsClaim();
@@ -162,6 +162,13 @@ if (!("caches" in self)) {
   );
 
   registerRoute(
+    /^https:\/\/api-preprod-stage\.cexplorer\.io\/.*(\/list|\/filter)/,
+    new NetworkOnly({
+      networkTimeoutSeconds: 20,
+    }),
+  );
+
+  registerRoute(
     /^https:\/\/api-preprod-stage\.cexplorer\.io\/.*$/,
     new NetworkFirst({
       cacheName: "api-cache",
@@ -169,10 +176,7 @@ if (!("caches" in self)) {
       plugins: [
         new ExpirationPlugin({
           maxEntries: 50,
-          maxAgeSeconds: 5 * 60,
-        }),
-        new CacheableResponsePlugin({
-          statuses: [0, 200],
+          maxAgeSeconds: 60,
         }),
       ],
     }),

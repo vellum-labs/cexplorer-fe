@@ -15,26 +15,15 @@ import { configJSON } from "@/constants/conf";
 
 interface AssetProps {
   asset: TxAsset;
-  name?: never;
+  name?: string;
   formattedHex?: string;
   isNft?: boolean;
   hideImage?: boolean;
   imageSize?: number;
-}
-
-interface NameProps {
-  asset?: never;
-  name: string;
-  isNft?: boolean;
-  formattedHex?: string;
-  hideImage?: boolean;
   withCopy?: boolean;
-  imageSize?: number;
 }
 
-type Props = AssetProps | NameProps;
-
-const AssetCell = memo((props: Props) => {
+const AssetCell = memo((props: AssetProps) => {
   const { asset, name, isNft, hideImage, imageSize, formattedHex } = props;
 
   const assetName = asset?.name || name || "";
@@ -102,7 +91,8 @@ const AssetCell = memo((props: Props) => {
                 : formattedHex
                   ? formattedHex
                   : renderAssetName({
-                      name: isAdaHandle ? adaHandleName : assetName,
+                      asset,
+                      name: isAdaHandle ? adaHandleName : name,
                     })}
             </span>
             {withCopy && (
@@ -112,14 +102,14 @@ const AssetCell = memo((props: Props) => {
                     ? nameByRegistry
                     : formattedHex
                       ? formattedHex
-                      : renderAssetName({ name: assetName })
+                      : renderAssetName({ asset, name })
                 }
                 className='ml-1'
               />
             )}
           </Link>
           <span className='flex items-center gap-1/2'>
-            {nameByRegistry || renderAssetName({ name: assetName }) ? (
+            {nameByRegistry || renderAssetName({ asset, name }) !== "n/a" ? (
               <p className='text-text-xs text-grayTextPrimary'>
                 {formatString(fingerprint, "long")}
               </p>
@@ -135,7 +125,7 @@ const AssetCell = memo((props: Props) => {
               </Link>
             )}
             <Copy
-              size={renderAssetName({ name: assetName }) ? 10 : 13}
+              size={renderAssetName({ asset, name }) !== "n/a" ? 10 : 13}
               copyText={fingerprint}
             />
           </span>

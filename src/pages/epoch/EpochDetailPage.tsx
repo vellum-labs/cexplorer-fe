@@ -113,6 +113,7 @@ const EpochDetailPage: FC = () => {
       }}
       title='Epoch Detail'
       breadcrumbItems={[{ label: "Epochs", link: "/epoch" }, { label: no }]}
+      homepageAd
     >
       {futureStartTime && futureEndTime ? (
         <div className='flex min-h-[70vh] w-full items-center justify-center'>

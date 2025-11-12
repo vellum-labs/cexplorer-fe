@@ -147,6 +147,7 @@ const PoolDetailPage = () => {
           />
         </div>
       }
+      homepageAd
     >
       <PoolDetailOverview
         query={query}

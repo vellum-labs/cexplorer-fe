@@ -171,6 +171,7 @@ export const AddressDetailPage: FC = () => {
           <QrCode size={15} className='-translate-y-0.5' />
         </Tooltip>
       }
+      homepageAd
     >
       <section className='flex w-full flex-col items-center'>
         <div className='flex w-full max-w-desktop items-center justify-between px-mobile md:px-desktop'>

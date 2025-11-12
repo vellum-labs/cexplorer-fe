@@ -112,6 +112,7 @@ export const PolicyDetailPage: FC = () => {
           hashString={formatString(policyId, "long")}
         />
       }
+      homepageAd
     >
       <PolicyDetailOverview
         type={type}

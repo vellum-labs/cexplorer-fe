@@ -89,6 +89,8 @@ export const handleFetch = async <T>(
     } catch (error) {
       if (attempt !== retryCount) {
         console.warn(`Attempt ${attempt + 1} failed. Retrying...`);
+
+        await new Promise(resolve => setTimeout(resolve, 3000));
         continue;
       }
 

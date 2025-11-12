@@ -203,6 +203,9 @@
   "voteListPage": {
     "title": "Governance Votes | Cexplorer.io"
   },
+  "swap": {
+    "title": "Token Swap | Cexplorer.io"
+  },
   "taxTool": {
     "title": "Tax Tool | Cexplorer.io"
   }
