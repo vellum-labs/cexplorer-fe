@@ -94,6 +94,7 @@ export const StakeDetailPage: FC = () => {
           stakeAddress={address}
           tabName='defi'
           page={page}
+          disabledKeys={["dex"]}
         />
       ),
       visible: true,
