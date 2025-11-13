@@ -36,6 +36,10 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
     (a, b) => new Date(b.time).getTime() - new Date(a.time).getTime(),
   )[0];
 
+  const updateItems = (updateQuery.data?.data.data || []).sort(
+    (a, b) => new Date(b.time).getTime() - new Date(a.time).getTime(),
+  );
+
   const relayItems = aboutQuery.data?.data?.relay;
 
   const retirmentItems = retirmentQuery.data?.data?.data;
@@ -497,7 +501,7 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
             pagination={false}
             minContentWidth={1100}
             query={updateQuery}
-            items={[updateItem]}
+            items={updateItems}
             columns={certificatesColumns}
           />
         </div>
