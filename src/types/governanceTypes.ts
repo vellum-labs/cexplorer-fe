@@ -306,6 +306,8 @@ export interface CommitteeKey {
 export interface CommitteeIdent {
   raw: string;
   has_script: boolean;
+  cold: string;
+  hot: string;
 }
 
 export interface CommitteeRegistry {
@@ -317,13 +319,13 @@ export interface CommitteeMember {
   key: CommitteeKey;
   ident: CommitteeIdent;
   registry: CommitteeRegistry | null;
-  registration: {
+  registration: Array<{
     hash: string;
     time: string;
     index: number;
     invalid_hereafter: null | number;
     treasury_donation: number;
-  } | null;
+  }> | null;
   de_registration: null;
   expiration_epoch: number | null;
 }
@@ -339,6 +341,8 @@ export type CommitteeDetailResponse = ResponseCore<{
   member: CommitteeMember[];
   committee: CommitteeInfo;
 }>;
+
+export type CCMemberDetailResponse = ResponseCore<CommitteeMember[]>;
 
 export interface ConstitutionAnchor {
   url: string;
@@ -364,11 +368,6 @@ export interface CommitteeStat {
 export interface CommitteeKey {
   hot: string | null;
   cold: string | null;
-}
-
-export interface CommitteeIdent {
-  raw: string;
-  has_script: boolean;
 }
 
 export interface CommitteeRegistry {
