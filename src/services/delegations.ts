@@ -2,6 +2,7 @@ import { handleFetch } from "@/lib/handleFetch";
 import type {
   DelegationResponse,
   DelegationStateResponse,
+  DrepDelegationResponse,
 } from "@/types/delegationTypes";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import type { AddressDetailParams } from "./stake";
@@ -49,6 +50,46 @@ export const useFetchDelegations = (
     queryKey: ["delegations", address, limit, page],
     queryFn: async ({ pageParam = page }) =>
       fetchStakeDelegations({
+        view: address,
+        limit,
+        offset: pageParam,
+      }),
+    initialPageParam: page,
+    getNextPageParam: lastPage => {
+      const nextOffset = (lastPage.prevOffset as number) + limit;
+      if (nextOffset >= lastPage.data.count) return undefined;
+      return nextOffset;
+    },
+    refetchInterval: 60_000,
+  });
+
+export const fetchDrepDelegations = async ({
+  view,
+  limit = 20,
+  offset = 0,
+}: AddressDetailParams) => {
+  const url = `/account/delegation_vote`;
+
+  const options = {
+    params: {
+      view,
+      limit,
+      offset,
+    },
+  };
+
+  return handleFetch<DrepDelegationResponse>(url, offset, options);
+};
+
+export const useFetchDrepDelegations = (
+  limit: number,
+  page: number,
+  address?: string,
+) =>
+  useInfiniteQuery({
+    queryKey: ["drep-delegations", address, limit, page],
+    queryFn: async ({ pageParam = page }) =>
+      fetchDrepDelegations({
         view: address,
         limit,
         offset: pageParam,
