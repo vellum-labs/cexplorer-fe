@@ -21,6 +21,7 @@ import { alphabetWithNumbers } from "@/constants/alphabet";
 import { GovActionCell } from "../../GovActionCell";
 import { VoteCell } from "@/components/governance/vote/VoteCell";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
+import { isVoteLate } from "@/utils/governance/isVoteLate";
 
 export const RecentTab: FC = () => {
   const { page = 1 } = useSearch({ from: "/gov/cc/" });
@@ -155,7 +156,7 @@ export const RecentTab: FC = () => {
     {
       key: "vote",
       title: <p ref={anchorRefs?.vote}>Vote</p>,
-      widthPx: 100,
+      widthPx: 130,
       visible: columnsVisibility.vote,
       render: item => {
         const vote = item.vote;
@@ -164,6 +165,8 @@ export const RecentTab: FC = () => {
             vote={vote}
             txHash={item?.tx?.hash}
             proposalId={item?.proposal?.ident?.id}
+            anchorInfo={item?.anchor}
+            isLate={isVoteLate(item)}
           />
         );
       },

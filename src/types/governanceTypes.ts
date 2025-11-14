@@ -6,6 +6,15 @@ export enum GovernanceRole {
   ConstitutionalCommittee = "ConstitutionalCommittee",
 }
 
+export interface AnchorInfo {
+  url: string | null;
+  data_hash: string | null;
+  offchain: {
+    comment: string | null;
+    url: string | null;
+  };
+}
+
 interface GovernanceActionIdent {
   id: string;
   bech: string;
@@ -215,13 +224,7 @@ export interface GovernanceVote {
   proposal: GovernanceProposal;
   info: GovernanceVoterInfo;
   tx: GovernanceTx;
-  anchor: {
-    url: string | null;
-    data_hash: string | null;
-    offchain: {
-      comment: string | null;
-    };
-  };
+  anchor: AnchorInfo;
 }
 
 export interface GovernanceProposal {

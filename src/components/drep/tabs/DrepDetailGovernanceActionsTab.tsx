@@ -20,6 +20,7 @@ import { GovActionCell } from "@/components/gov/GovActionCell";
 import { HashCell } from "@/components/tx/HashCell";
 import type { Vote } from "@/constants/votes";
 import { VoteCell } from "@/components/governance/vote/VoteCell";
+import { isVoteLate } from "@/utils/governance/isVoteLate";
 
 export const DrepDetailGovernanceActionsTab: FC = () => {
   const { infiniteScrolling } = useInfiniteScrollingStore();
@@ -101,6 +102,8 @@ export const DrepDetailGovernanceActionsTab: FC = () => {
             vote={item.vote as Vote}
             txHash={item?.tx?.hash}
             proposalId={item?.proposal?.ident?.id}
+            anchorInfo={item?.anchor}
+            isLate={isVoteLate(item)}
           />
         );
       },

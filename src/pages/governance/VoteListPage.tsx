@@ -247,6 +247,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
             vote={item.vote as Vote}
             txHash={item.tx?.hash}
             proposalId={item?.proposal?.ident?.id}
+            anchorInfo={item?.anchor}
           />
         );
       },
@@ -283,7 +284,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
         ),
       },
       visible: columnsVisibility.vote,
-      widthPx: 45,
+      widthPx: 55,
     },
     {
       key: "epoch",

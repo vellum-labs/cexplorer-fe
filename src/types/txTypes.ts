@@ -5,6 +5,7 @@ import type { DrepProposal, DrepVoteItem } from "./drepTypes";
 import type { EpochParam } from "./epochTypes";
 import type { PoolInfo } from "./poolTypes";
 import type { DrepInfo } from "./delegationTypes";
+import type { AnchorInfo } from "./governanceTypes";
 
 export type TxTabItemKeys =
   | "overview"
@@ -149,6 +150,7 @@ export type TxDetailData = TxBasicInfo & {
       vote: string;
       proposal: DrepProposal;
       voter_role: DrepVoteItem["voter_role"];
+      anchor?: AnchorInfo;
     }[];
   } | null;
 };
