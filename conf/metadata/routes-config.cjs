@@ -763,6 +763,15 @@ const routes = [
     api: false,
   },
   {
+    path: "/rewards-calculator",
+    title: "Rewards Calculator | Cexplorer.io",
+    description:
+      "Calculate your potential Cardano rewards with our advanced rewards calculator. Estimate future ADA earnings based on stake amount, pool performance, and network parameters to make informed decisions.",
+    keywords:
+      "cardano, rewards calculator, ADA rewards calculator, rewards, ADA calculator, rewards estimator, cexplorer, cardano calculator",
+    api: false,
+  },
+  {
     path: "/token/dashboard",
     title: "Token Dashboard | Cexplorer.io",
     description:
