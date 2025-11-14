@@ -100,6 +100,7 @@ export const AddressDetailPage: FC = () => {
           pulseDot={false}
           page={page}
           titleClassname='text-text-md'
+          disabledKeys={["dex"]}
         />
       ),
       visible: true,
