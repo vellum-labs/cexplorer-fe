@@ -330,28 +330,7 @@ const StakeDelegationsTab = ({ address, miscConst }: Props) => {
   }, [totalCount, totalItems]);
 
   return (
-    <section className='flex flex-col-reverse gap-4'>
-      {delegationStateQuery.data?.count &&
-        delegationStateQuery.data?.count > 1 && (
-          <div>
-            <h3 className='mb-2 flex items-center gap-1'>Multi delegations</h3>
-            <GlobalTable
-              type='default'
-              itemsPerPage={10}
-              rowHeight={60}
-              scrollable
-              query={delegationStateQuery}
-              items={delegationStateQuery.data?.data}
-              columns={delegationStateColumns.sort((a, b) => {
-                return (
-                  columnsOrder.indexOf(a.key as keyof PoolDelegatorsColumns) -
-                  columnsOrder.indexOf(b.key as keyof PoolDelegatorsColumns)
-                );
-              })}
-              onOrderChange={setColumsOrder}
-            />
-          </div>
-        )}
+    <section className='flex flex-col gap-4'>
       <div className='flex flex-col'>
         <div className='flex items-center justify-between gap-1'>
           <h3 className='my-2'>Delegation history</h3>
@@ -389,6 +368,27 @@ const StakeDelegationsTab = ({ address, miscConst }: Props) => {
           onOrderChange={setColumsOrder}
         />
       </div>
+      {!!delegationStateQuery.data?.count &&
+        delegationStateQuery.data?.count > 1 && (
+          <div>
+            <h3 className='mb-2 flex items-center gap-1'>Multi delegations</h3>
+            <GlobalTable
+              type='default'
+              itemsPerPage={10}
+              rowHeight={60}
+              scrollable
+              query={delegationStateQuery}
+              items={delegationStateQuery.data?.data}
+              columns={delegationStateColumns.sort((a, b) => {
+                return (
+                  columnsOrder.indexOf(a.key as keyof PoolDelegatorsColumns) -
+                  columnsOrder.indexOf(b.key as keyof PoolDelegatorsColumns)
+                );
+              })}
+              onOrderChange={setColumsOrder}
+            />
+          </div>
+        )}
     </section>
   );
 };
