@@ -1,20 +1,8 @@
 import { ChevronsUpDown } from "lucide-react";
-import * as React from "react";
+import { useEffect, memo, useRef, useState, useMemo } from "react";
 import { FixedSizeList as List } from "react-window";
 
 import { Button } from "@vellumlabs/cexplorer-sdk";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandItem,
-  CommandList,
-} from "@vellumlabs/cexplorer-sdk";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@vellumlabs/cexplorer-sdk";
 import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import type { AddressAsset } from "@/types/addressTypes";
 import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";
@@ -27,34 +15,39 @@ import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import AssetCell from "./AssetCell";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
-const Row = React.memo(({ index, style, data }: any) => {
+const Row = memo(({ index, style, data }: any) => {
   const item = data[index];
   return (
     <div style={style}>
-      <CommandItem>
+      <div className='hover:bg-accent flex cursor-pointer items-center justify-between overflow-x-hidden px-2 py-1'>
         <AssetCell
           name={item.name}
           imageSize={30}
           isNft={item.quantity === 1}
+          asset={{
+            name: item.name,
+            quantity: item.quantity,
+          }}
         />
         <Tooltip content={formatNumber(item.quantity)}>
           <span className='text-text-xs'>
             {formatNumberWithSuffix(item.quantity)}
           </span>
         </Tooltip>
-      </CommandItem>
+      </div>
     </div>
   );
 });
 
-export const TokenSelectCombobox = React.memo(
+export const TokenSelectCombobox = memo(
   ({ items, className }: { items: AddressAsset[]; className?: string }) => {
-    const contentRef = React.useRef<HTMLDivElement>(null);
-    const [open, setOpen] = React.useState(false);
-    const [search, setSearch] = React.useState("");
+    const contentRef = useRef<HTMLDivElement>(null);
+    const buttonRef = useRef<HTMLDivElement>(null);
+    const [open, setOpen] = useState(false);
+    const [search, setSearch] = useState("");
     const debouncedSearch = useDebounce(search);
 
-    const filteredItems = React.useMemo(() => {
+    const filteredItems = useMemo(() => {
       return items
         .filter(
           item =>
@@ -98,7 +91,7 @@ export const TokenSelectCombobox = React.memo(
       }
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
       const controller = new AbortController();
       const signal = controller.signal;
 
@@ -120,55 +113,81 @@ export const TokenSelectCombobox = React.memo(
       };
     }, [open, filteredItemsLength]);
 
+    useEffect(() => {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (
+          contentRef.current &&
+          !contentRef.current.contains(event.target as Node) &&
+          buttonRef.current &&
+          !buttonRef.current.contains(event.target as Node)
+        ) {
+          setOpen(false);
+        }
+      };
+
+      if (open) {
+        document.addEventListener("mousedown", handleClickOutside);
+      }
+
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [open]);
+
     if (items.length === 0) {
       return null;
     }
 
     return (
-      <>
-        <Popover open={open} onOpenChange={setOpen}>
-          <PopoverTrigger asChild className={className}>
-            <Button
-              variant='tertiary'
-              size='md'
-              className='flex w-[200px] items-center justify-between'
-              label={
-                <>
-                  Browse tokens
-                  <span className='text-text-xs'>({items.length})</span>
-                  <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
-                </>
-              }
-            />
-          </PopoverTrigger>
-          <PopoverContent ref={contentRef} className='w-[300px] p-0'>
-            <Command className=''>
+      <div className='relative max-w-fit' ref={buttonRef}>
+        <Button
+          variant='tertiary'
+          size='md'
+          className={`flex w-[200px] items-center justify-between ${className || ""}`}
+          onClick={() => setOpen(!open)}
+          label={
+            <div className='flex items-center gap-1'>
+              <span>Browse tokens</span>
+              <span className='text-text-xs'>({items.length})</span>
+              <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
+            </div>
+          }
+        />
+        {open && (
+          <div
+            ref={contentRef}
+            className='rounded-md text-popover-foreground absolute z-50 w-[300px] overflow-x-hidden rounded-m border border-border bg-background p-0 shadow-md outline-none'
+          >
+            <div className='overflow-x-hidden'>
               <TextInput
                 value={search}
                 onchange={value => setSearch(value)}
                 placeholder='Search token...'
                 wrapperClassName='px-1 py-1'
               />
-              <CommandList className='overflow-hidden'>
-                <CommandEmpty>No token found.</CommandEmpty>
-                <CommandGroup className=''>
+              <div className='overflow-hidden'>
+                {filteredItems.length === 0 ? (
+                  <div className='text-sm py-6 text-center'>
+                    No token found.
+                  </div>
+                ) : (
                   <List
                     height={290}
                     itemCount={filteredItems.length}
                     itemSize={50}
                     width='100%'
                     itemData={filteredItems}
-                    className='overscroll-contain scroll-smooth'
+                    className='overflow-x-hidden overscroll-contain scroll-smooth'
                     overscanCount={40}
                   >
                     {Row}
                   </List>
-                </CommandGroup>
-              </CommandList>
-            </Command>
-          </PopoverContent>
-        </Popover>
-      </>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     );
   },
 );
