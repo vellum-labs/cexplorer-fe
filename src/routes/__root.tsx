@@ -26,13 +26,16 @@ import { useFetchMiscBasic } from "@/services/misc";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const RootComponent = () => {
+  useGenerateSW();
+
+  const [updateModal, setUpdateModal] = useState<boolean>(false);
+
   const { notFound, setNotFound } = useNotFound();
   const location = useLocation();
 
   const { location: locationState } = useRouterState();
 
   const { theme } = useThemeStore();
-  const { updateReady, isFirstInstall } = useGenerateSW();
 
   const [resetKey, setResetKey] = useState<number>(0);
 
@@ -129,6 +132,14 @@ const RootComponent = () => {
     };
   }, [locationState.pathname, locationState.searchStr]);
 
+  useEffect(() => {
+    const updateModal = localStorage.getItem("should_update");
+
+    if (updateModal && updateModal === "true") {
+      setUpdateModal(true);
+    }
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -175,7 +186,7 @@ const RootComponent = () => {
         )}
       </ErrorBoundary>
       <Footer />
-      {updateReady && <SwReadyModal firstInstall={isFirstInstall} />}
+      {updateModal && <SwReadyModal />}
       <VersionWatcher />
 
       {/* <TanStackRouterDevtools /> */}
