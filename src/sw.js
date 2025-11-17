@@ -162,14 +162,14 @@ if (!("caches" in self)) {
   );
 
   registerRoute(
-    /^https:\/\/api-(preprod|mainnet|preview)-stage\.cexplorer\.io\/.*(\/list|\/filter)/,
+    /^https:\/\/api-(preprod|mainnet|preview)(-stage)?\.cexplorer\.io\/.*(\/list|\/filter)/,
     new NetworkOnly({
       networkTimeoutSeconds: 20,
     }),
   );
 
   registerRoute(
-    /^https:\/\/api-(preprod|mainnet|preview)-stage\.cexplorer\.io\/.*$/,
+    /^https:\/\/api-(preprod|mainnet|preview)(-stage)?\.cexplorer\.io\/.*$/,
     new NetworkFirst({
       cacheName: "api-cache",
       networkTimeoutSeconds: 10,
