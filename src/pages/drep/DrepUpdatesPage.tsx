@@ -1,4 +1,4 @@
-import { BlockCell } from "@/components/blocks/BlockCell";
+import { BlockCell } from "@vellumlabs/cexplorer-sdk";
 import { DrepHashCell } from "@/components/drep/DrepHashCell";
 import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";

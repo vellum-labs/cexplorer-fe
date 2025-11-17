@@ -13,7 +13,7 @@ import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { SizeCell } from "@vellumlabs/cexplorer-sdk";
 
-import { BlockCell } from "@/components/blocks/BlockCell";
+import { BlockCell } from "@vellumlabs/cexplorer-sdk";
 import { ProtocolDot } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "@/components/tx/HashCell";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";

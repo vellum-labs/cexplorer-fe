@@ -6,7 +6,7 @@ import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { EpochCell } from "@vellumlabs/cexplorer-sdk";
-import { BlockCell } from "@/components/blocks/BlockCell";
+import { BlockCell } from "@vellumlabs/cexplorer-sdk";
 import { stakeWithdrawalTableOptions } from "@/constants/tables/stakeWithdrawalsTableOptions";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { useFetchWithdrawals } from "@/services/account";
