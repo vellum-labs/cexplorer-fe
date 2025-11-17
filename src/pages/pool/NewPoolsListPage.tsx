@@ -14,8 +14,9 @@ import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useNewPoolsListTableStore } from "@/stores/tables/newPoolsListTableStore";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { useFetchMiscBasic } from "@/services/misc";
 
-import { EpochCell } from "@/components/epoch/EpochCell";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "@/components/tx/HashCell";
 import { newPoolsTableOptions } from "@/constants/tables/newPoolsTableOptions";
@@ -36,6 +37,8 @@ export const NewPoolsListPage: FC = () => {
   } = useNewPoolsListTableStore();
 
   const [totalItems, setTotalItems] = useState<number>(0);
+  const miscQuery = useFetchMiscBasic();
+  const currentEpoch = miscQuery.data?.data.block.epoch_no;
 
   const poolsListQuery = useFetchPoolsList(
     rows,
@@ -115,7 +118,7 @@ export const NewPoolsListPage: FC = () => {
     {
       key: "epoch",
       render: item => (
-        <EpochCell no={item.active_epochs} substractFromCurrent />
+        <EpochCell no={item.active_epochs} substractFromCurrent currentEpoch={currentEpoch} />
       ),
       title: <p className='w-full text-right'>Epoch</p>,
       visible: columnsVisibility.epoch,

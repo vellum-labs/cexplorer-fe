@@ -1,4 +1,4 @@
-import { EpochCell } from "@/components/epoch/EpochCell";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { HeaderBanner } from "@/components/global/HeaderBanner";
 import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
