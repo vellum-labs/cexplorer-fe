@@ -14,9 +14,13 @@ import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchBlockDetail } from "@/services/blocks";
 import { useFetchMiscBasic, useFetchMiscSearch } from "@/services/misc";
-import { Link, getRouteApi, useNavigate } from "@tanstack/react-router";
+import { getRouteApi, useNavigate } from "@tanstack/react-router";
 
-import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
+import {
+  formatNumber,
+  formatString,
+  EpochCell,
+} from "@vellumlabs/cexplorer-sdk";
 import { getConfirmations } from "@/utils/getConfirmations";
 
 import { MintedByCard } from "@vellumlabs/cexplorer-sdk";
@@ -158,11 +162,9 @@ const BlockDetailPage: FC = () => {
     {
       label: "Epoch",
       value: (
-        <span className='cursor-pointer text-text-sm font-medium text-primary'>
-          <Link to='/epoch/$no' params={{ no: String(data?.epoch_no ?? 0) }}>
-            {data?.epoch_no}
-          </Link>
-        </span>
+        <div className='text-text-sm'>
+          <EpochCell no={data?.epoch_no} justify='start' />
+        </div>
       ),
     },
     {

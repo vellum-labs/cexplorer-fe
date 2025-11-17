@@ -2,7 +2,11 @@ import type { FC } from "react";
 import { useMemo } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { Link } from "@tanstack/react-router";
-import { GlobalTable, GovernanceStatusBadge } from "@vellumlabs/cexplorer-sdk";
+import {
+  GlobalTable,
+  GovernanceStatusBadge,
+  EpochCell,
+} from "@vellumlabs/cexplorer-sdk";
 import { ExternalLink } from "lucide-react";
 
 interface GovernanceDetailStatusHistoryTabProps {
@@ -102,20 +106,9 @@ export const GovernanceDetailStatusHistoryTab: FC<
     },
     {
       key: "epoch",
-      render: (item: StatusHistoryRow) => {
-        if (item.epoch !== null) {
-          return (
-            <Link
-              to='/epoch/$no'
-              params={{ no: String(item.epoch) }}
-              className='text-primary'
-            >
-              {item.epoch}
-            </Link>
-          );
-        }
-        return "-";
-      },
+      render: (item: StatusHistoryRow) => (
+        <EpochCell no={item.epoch ?? undefined} justify='start' />
+      ),
       title: "Epoch",
       visible: true,
       widthPx: 90,

@@ -3,6 +3,7 @@ import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
@@ -108,21 +109,12 @@ export const PoolUpdatesPage: FC = () => {
         }
 
         return (
-          <Link
-            to='/epoch/$no'
-            params={{
-              no: String(
-                item?.pool_update?.active?.active_epoch_no ||
-                  item?.pool_update?.live?.active_epoch_no,
-              ),
-            }}
-            className='text-primary'
-          >
-            <p className='text-right'>
-              {item?.pool_update?.active?.active_epoch_no ||
-                item?.pool_update?.live?.active_epoch_no}
-            </p>
-          </Link>
+          <EpochCell
+            no={
+              item?.pool_update?.active?.active_epoch_no ||
+              item?.pool_update?.live?.active_epoch_no
+            }
+          />
         );
       },
       title: <p className='w-full text-right'>Epoch</p>,

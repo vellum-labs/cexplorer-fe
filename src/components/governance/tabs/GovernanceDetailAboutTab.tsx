@@ -22,6 +22,7 @@ import { GovVoterCell } from "@/components/gov/GovVoterCell";
 import { VoteCell } from "@/components/governance/vote/VoteCell";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { isVoteLate } from "@/utils/governance/isVoteLate";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 
 interface GovernanceDetailAboutTabProps {
   id: string;
@@ -240,25 +241,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
 
     {
       key: "epoch",
-      render: item => {
-        if (!item?.proposal?.expiration) {
-          return <p className='text-right'>-</p>;
-        }
-
-        return (
-          <p className='text-right'>
-            <Link
-              className='text-primary'
-              to='/epoch/$no'
-              params={{
-                no: item?.proposal?.expiration,
-              }}
-            >
-              {item?.proposal?.expiration}
-            </Link>
-          </p>
-        );
-      },
+      render: item => <EpochCell no={item?.proposal?.expiration} />,
       title: <p className='w-full text-right'>Epoch</p>,
       visible: columnsVisibility.epoch,
       widthPx: 50,

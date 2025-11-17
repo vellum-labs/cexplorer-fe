@@ -5,8 +5,9 @@ import type { Dispatch, SetStateAction } from "react";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { SizeCell } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "@/components/tx/HashCell";
-import { Link } from "@tanstack/react-router";
+import { BlockCell } from "@/components/blocks/BlockCell";
 
 import { useFetchMiscBasic } from "@/services/misc";
 import { useFetchTxList } from "@/services/tx";
@@ -143,21 +144,9 @@ export const useTxList = ({
       key: "block",
       render: item => (
         <div className='flex items-center justify-end gap-[2px] text-primary'>
-          <Link
-            to='/epoch/$no'
-            params={{ no: item?.block?.epoch_no }}
-            className='flex justify-end'
-          >
-            {formatNumber(item?.block?.epoch_no ?? 0)}
-          </Link>
+          <EpochCell no={item?.block?.epoch_no} />
           /
-          <Link
-            to='/block/$hash'
-            params={{ hash: item?.block?.hash }}
-            className='flex justify-end'
-          >
-            {formatNumber(item?.block?.no ?? 0)}
-          </Link>
+          <BlockCell hash={item?.block?.hash} no={item?.block?.no ?? 0} />
         </div>
       ),
       jsonFormat: item =>

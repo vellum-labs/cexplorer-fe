@@ -5,6 +5,8 @@ import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
+import { BlockCell } from "@/components/blocks/BlockCell";
 import { stakeWithdrawalTableOptions } from "@/constants/tables/stakeWithdrawalsTableOptions";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { useFetchWithdrawals } from "@/services/account";
@@ -98,25 +100,15 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
     },
     {
       key: "block",
-      render: item => (
-        <div className='flex items-center justify-end gap-[2px] text-primary'>
-          <Link
-            to='/epoch/$no'
-            params={{ no: String(item?.block?.epoch_no) }}
-            className='flex justify-end text-primary'
-          >
-            {formatNumber(item?.block?.epoch_no ?? 0)}
-          </Link>
-          /
-          <Link
-            to='/block/$hash'
-            params={{ hash: item?.block?.hash }}
-            className='flex justify-end text-primary'
-          >
-            {formatNumber(item?.block?.epoch_no ?? 0)}
-          </Link>
-        </div>
-      ),
+      render: item => {
+        return (
+          <div className='flex items-center justify-end gap-[2px] text-primary'>
+            <EpochCell no={item?.block?.epoch_no} />
+            /
+            <BlockCell hash={item?.block?.hash} no={item?.block?.no ?? 0} />
+          </div>
+        );
+      },
       jsonFormat: item => {
         return (item?.block?.epoch_no ?? "-") + " / " + item?.block?.epoch_no;
       },

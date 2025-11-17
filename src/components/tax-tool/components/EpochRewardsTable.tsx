@@ -7,8 +7,8 @@ import {
   AdaWithTooltip,
   formatDate,
   formatNumber,
+  EpochCell,
 } from "@vellumlabs/cexplorer-sdk";
-import { Link } from "@tanstack/react-router";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
@@ -144,15 +144,7 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
         title: columnLabels.epoch,
         visible: columnsVisibility.epoch,
         widthPx: 100,
-        render: item => (
-          <Link
-            to='/epoch/$no'
-            params={{ no: String(item.earned_epoch) }}
-            className='text-primary hover:underline'
-          >
-            {item.earned_epoch}
-          </Link>
-        ),
+        render: item => <EpochCell no={item.earned_epoch} justify="start" />,
       },
       {
         key: "end_time",

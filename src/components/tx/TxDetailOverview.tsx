@@ -5,6 +5,7 @@ import {
   formatDate,
   formatNumber,
   formatString,
+  EpochCell,
 } from "@vellumlabs/cexplorer-sdk";
 import { getConfirmations } from "@/utils/getConfirmations";
 import { getEpochSlot } from "@/utils/getEpochSlot";
@@ -145,15 +146,9 @@ const TxDetailOverview = ({ query }: Props) => {
     {
       label: "Epoch",
       value: (
-        <span className='cursor-pointer text-text-sm font-medium text-primary'>
-          <Link
-            to='/epoch/$no'
-            params={{ no: String(data?.epoch_param?.epoch_no ?? 0) }}
-            className='text-primary'
-          >
-            {data?.epoch_param?.epoch_no}
-          </Link>
-        </span>
+        <div className='text-text-sm'>
+          <EpochCell no={data?.epoch_param?.epoch_no} justify='start' />
+        </div>
       ),
     },
     data?.invalid_before && data?.invalid_hereafter

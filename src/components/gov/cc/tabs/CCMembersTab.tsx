@@ -10,6 +10,7 @@ import { TimeDateIndicator } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { alphabetWithNumbers } from "@/constants/alphabet";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 
 export const CCMembersTab: FC = () => {
   const query = useFetchCommitteeDetail();
@@ -124,23 +125,9 @@ export const CCMembersTab: FC = () => {
       title: "Expiration Epoch",
       widthPx: 120,
       visible: true,
-      render: item => {
-        const epoch = item.expiration_epoch;
-
-        return epoch !== undefined && epoch !== null ? (
-          <Link
-            to='/epoch/$no'
-            params={{
-              no: String(epoch),
-            }}
-            className='text-primary'
-          >
-            {epoch}
-          </Link>
-        ) : (
-          <span>N/A</span>
-        );
-      },
+      render: item => (
+        <EpochCell no={item.expiration_epoch ?? undefined} justify='start' />
+      ),
     },
   ];
 
