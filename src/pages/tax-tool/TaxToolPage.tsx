@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { useState, useMemo, useEffect } from "react";
-import { useSearch } from "@tanstack/react-router";
+import { useSearch, useNavigate } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { TableSearchInput, LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
@@ -12,16 +12,25 @@ import { isValidAddress } from "@/utils/address/isValidAddress";
 import { toast } from "sonner";
 
 export const TaxToolPage: FC = () => {
-  const { view } = useSearch({
+  const { stake } = useSearch({
     from: "/tax-tool",
   });
 
+  const navigate = useNavigate();
+
   const [search, setSearch] = useState<string>(() => {
     const saved = localStorage.getItem("tax_tool_stake_key");
-    return view ?? saved ?? "";
+    return stake ?? saved ?? "";
   });
   const debouncedSearch = useDebounce(search);
   const [isValid, setIsValid] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (stake && isValidAddress(stake)) {
+      localStorage.setItem("tax_tool_stake_key", stake);
+      setSearch(stake);
+    }
+  }, [stake]);
 
   useEffect(() => {
     if (debouncedSearch && !isValidAddress(debouncedSearch)) {
@@ -30,10 +39,22 @@ export const TaxToolPage: FC = () => {
     } else if (debouncedSearch) {
       setIsValid(true);
       localStorage.setItem("tax_tool_stake_key", debouncedSearch);
+
+      navigate({
+        to: "/tax-tool",
+        search: { stake: debouncedSearch },
+        replace: true,
+      });
     } else {
       setIsValid(false);
+
+      navigate({
+        to: "/tax-tool",
+        search: {},
+        replace: true,
+      });
     }
-  }, [debouncedSearch]);
+  }, [debouncedSearch, navigate]);
 
   const isDebouncing = search !== debouncedSearch && search.length > 0;
 

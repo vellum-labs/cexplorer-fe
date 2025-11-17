@@ -11,6 +11,7 @@ import type { UseQueryResult } from "@tanstack/react-query";
 
 interface SummaryData {
   period: string;
+  epochs: number;
   ada: number;
   usd: number;
   secondary: number;
@@ -43,6 +44,7 @@ export const SummaryTable: FC<SummaryTableProps> = ({
   const columnLabels = useMemo(
     () => ({
       period: "Period",
+      epochs: "Epochs",
       rewards_ada: "Rewards ADA",
       rewards_usd: "Rewards USD",
       rewards_secondary: `Rewards ${secondaryCurrency.toUpperCase()}`,
@@ -59,6 +61,15 @@ export const SummaryTable: FC<SummaryTableProps> = ({
         widthPx: 150,
         render: item => (
           <span className='font-medium'>{formatPeriod(item.period)}</span>
+        ),
+      },
+      {
+        key: "epochs",
+        title: columnLabels.epochs,
+        visible: columnsVisibility.epochs,
+        widthPx: 100,
+        render: item => (
+          <span>{item.epochs}</span>
         ),
       },
       {
@@ -142,7 +153,9 @@ export const SummaryTable: FC<SummaryTableProps> = ({
     ],
     [
       columnLabels.period,
+      columnLabels.epochs,
       columnsVisibility.period,
+      columnsVisibility.epochs,
       columnsVisibility.rewards_ada,
       columnsVisibility.rewards_secondary,
       columnsVisibility.rewards_usd,
@@ -152,7 +165,7 @@ export const SummaryTable: FC<SummaryTableProps> = ({
   );
 
   const columnsOptions = useMemo(() => {
-    const baseOptions = ["period", "rewards_ada", "rewards_usd"] as const;
+    const baseOptions = ["period", "epochs", "rewards_ada", "rewards_usd"] as const;
 
     const options = baseOptions.map(key => ({
       label: columnLabels[key],

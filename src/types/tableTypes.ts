@@ -261,6 +261,7 @@ export interface StakeWithdrawalsTableOptions {
 
 export type TaxToolSummaryColumns = {
   period: boolean;
+  epochs: boolean;
   rewards_ada: boolean;
   rewards_usd: boolean;
   rewards_secondary: boolean;
