@@ -94,6 +94,7 @@ export const StakeDetailPage: FC = () => {
           stakeAddress={address}
           tabName='defi'
           page={page}
+          disabledKeys={["dex"]}
         />
       ),
       visible: true,
@@ -135,7 +136,7 @@ export const StakeDetailPage: FC = () => {
       }
       qrCode={
         <Tooltip content={<QRCodeSVG value={address} size={120} />}>
-          <QrCode size={15} className='-translate-y-0.5' />
+          <QrCode size={15} className='-translate-y-2' />
         </Tooltip>
       }
       homepageAd

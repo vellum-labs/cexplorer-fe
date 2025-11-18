@@ -66,7 +66,7 @@ export const ArticleListPage = () => {
         adsCarousel={false}
         customPage={true}
       >
-        <div className='m-2 flex h-auto w-full max-w-desktop justify-center rounded-m p-mobile hover:text-text md:m-5 md:p-desktop'>
+        <div className='flex h-auto w-full max-w-desktop justify-center rounded-m p-mobile hover:text-text md:p-desktop'>
           <div className='flex w-full max-w-desktop flex-col-reverse justify-center gap-1.5 rounded-m border border-border bg-gradient-to-b from-bannerGradient to-darker p-3 md:flex-row'>
             <div className='flex w-full justify-end md:w-[60%]'>
               <LoadingSkeleton
@@ -115,7 +115,7 @@ export const ArticleListPage = () => {
       adsCarousel={false}
       customPage={true}
     >
-      <div className='m-2 flex h-auto w-full max-w-desktop justify-center rounded-m p-mobile hover:text-text md:m-5 md:p-desktop'>
+      <div className='flex h-auto w-full max-w-desktop justify-center rounded-m p-mobile hover:text-text md:p-desktop'>
         {items && items.length > 0 && (
           <div className='flex w-full max-w-desktop flex-col-reverse justify-center gap-1.5 rounded-m border border-border bg-gradient-to-b from-bannerGradient to-darker p-3 md:flex-row'>
             <div className='flex w-full justify-end md:w-[60%]'>
