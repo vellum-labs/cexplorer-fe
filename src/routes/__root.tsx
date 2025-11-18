@@ -43,7 +43,7 @@ const RootComponent = () => {
 
   const { theme } = useThemeStore();
   const { locale } = useLocaleStore();
-  const { updateReady, isFirstInstall } = useGenerateSW();
+  useGenerateSW();
 
   const [resetKey, setResetKey] = useState<number>(0);
 
@@ -198,7 +198,7 @@ const RootComponent = () => {
           )}
         </ErrorBoundary>
         <Footer />
-        {updateReady && <SwReadyModal firstInstall={isFirstInstall} />}
+        {updateModal && <SwReadyModal />}
         <VersionWatcher />
         {clickedUrl && (
           <SafetyLinkModal
