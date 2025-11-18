@@ -1,22 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-interface GenerateSW {
-  updateReady: boolean;
-  isFirstInstall: boolean;
-}
-
-export const useGenerateSW = (): GenerateSW => {
-  const [updateReady, setUpdateReady] = useState<boolean>(false);
-  const [isFirstInstall, setIsFirstInstall] = useState(false);
-
+export const useGenerateSW = () => {
   useEffect(() => {
-    const hasInstalled = localStorage.getItem("sw-installed");
-
-    if (!hasInstalled) {
-      localStorage.setItem("sw-installed", "true");
-      setIsFirstInstall(true);
-    }
-
     if ("serviceWorker" in navigator && !(window as any).__DISABLE_SW__) {
       const swUrl = `/sw.js`;
 
@@ -26,8 +11,6 @@ export const useGenerateSW = (): GenerateSW => {
         })
         .then(registration => {
           const handleUpdate = () => {
-            setUpdateReady(false);
-
             const installingWorker =
               registration.installing || registration.waiting;
 
@@ -37,7 +20,8 @@ export const useGenerateSW = (): GenerateSW => {
 
                 switch (sw.state) {
                   case "activated":
-                    setUpdateReady(true);
+                    localStorage.setItem("should_update", "true");
+                    location.reload();
                     break;
                   default:
                     console.warn(
@@ -102,9 +86,4 @@ export const useGenerateSW = (): GenerateSW => {
       updateChannel.close();
     };
   }, []);
-
-  return {
-    updateReady,
-    isFirstInstall,
-  };
 };

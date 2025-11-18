@@ -29,10 +29,12 @@ interface TotalThresholdChartProps {
     drepCount?: number;
     spoCount?: number;
   };
+  onlySecurity: boolean;
 }
 
 export const TotalThresholdChart: FC<TotalThresholdChartProps> = ({
   chartProps,
+  onlySecurity,
 }) => {
   const {
     ccData,
@@ -105,9 +107,11 @@ export const TotalThresholdChart: FC<TotalThresholdChartProps> = ({
           show: true,
           position: "center",
           formatter: () =>
-            security > 0
-              ? `{main|${nonSecurity}}\n{gap|}\n{highlight|${security}}`
-              : `{main|${nonSecurity}}`,
+            onlySecurity
+              ? `{main|${security}}`
+              : security > 0
+                ? `{main|${nonSecurity}}\n{gap|}\n{highlight|${security}}`
+                : `{main|${nonSecurity}}`,
           rich: {
             main: {
               fontSize: 22,

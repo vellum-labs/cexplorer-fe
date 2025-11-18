@@ -100,6 +100,7 @@ export const AddressDetailPage: FC = () => {
           pulseDot={false}
           page={page}
           titleClassname='text-text-md'
+          disabledKeys={["dex"]}
         />
       ),
       visible: true,
@@ -168,9 +169,10 @@ export const AddressDetailPage: FC = () => {
       }
       qrCode={
         <Tooltip content={<QRCodeSVG value={address} size={120} />}>
-          <QrCode size={15} className='-translate-y-0.5' />
+          <QrCode size={15} className='-translate-y-2' />
         </Tooltip>
       }
+      homepageAd
     >
       <section className='flex w-full flex-col items-center'>
         <div className='flex w-full max-w-desktop items-center justify-between px-mobile md:px-desktop'>

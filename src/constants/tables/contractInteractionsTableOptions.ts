@@ -14,6 +14,10 @@ export const contractInteractionsTableOptions: Options = [
     name: "Date",
   },
   {
+    key: "type",
+    name: "Type",
+  },
+  {
     key: "purpose",
     name: "Purpose",
   },

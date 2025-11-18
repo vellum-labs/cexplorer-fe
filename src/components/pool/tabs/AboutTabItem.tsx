@@ -1,15 +1,20 @@
-import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { AdaWithTooltip, DateCell } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
-import { useFetchPoolAbout, useFetchPoolUpdate } from "@/services/pools";
+import {
+  useFetchPoolAbout,
+  useFetchPoolRetirment,
+  useFetchPoolUpdate,
+} from "@/services/pools";
 import type { PoolDetailResponseData } from "@/types/poolTypes";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { format } from "date-fns";
 import { Clock, Download } from "lucide-react";
 import { useState, type FC } from "react";
+import { HashCell } from "@/components/tx/HashCell";
 
 interface AboutTabItemProps {
   id: string;
@@ -25,12 +30,19 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
   const [activeUrl, setActiveUrl] = useState<string>("");
   const updateQuery = useFetchPoolUpdate(id);
   const aboutQuery = useFetchPoolAbout(id);
+  const retirmentQuery = useFetchPoolRetirment(id);
 
   const updateItem = (updateQuery.data?.data.data || []).sort(
     (a, b) => new Date(b.time).getTime() - new Date(a.time).getTime(),
   )[0];
 
+  const updateItems = (updateQuery.data?.data.data || []).sort(
+    (a, b) => new Date(b.time).getTime() - new Date(a.time).getTime(),
+  );
+
   const relayItems = aboutQuery.data?.data?.relay;
+
+  const retirmentItems = retirmentQuery.data?.data?.data;
 
   const liveStake = detailData?.live_stake ?? 0;
   const pledged = detailData?.pledged ?? 0;
@@ -385,6 +397,57 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
     },
   ];
 
+  const retirmentColumns = [
+    {
+      key: "date",
+      render: item => {
+        if (!item?.time) {
+          return "-";
+        }
+
+        return <DateCell time={item.time} />;
+      },
+      title: "Date",
+      visible: true,
+      widthPx: 60,
+    },
+    {
+      key: "tx",
+      render: item => {
+        if (!item?.tx_hash) {
+          return "-";
+        }
+
+        return <HashCell hash={item.tx_hash} formatType='longer' />;
+      },
+      title: "Transaction ID",
+      visible: true,
+      widthPx: 180,
+    },
+    {
+      key: "epoch",
+      render: item => {
+        if (!item?.retiring_epoch) {
+          return "-";
+        }
+
+        return (
+          <Link
+            to='/epoch/$no'
+            params={{
+              no: item?.retiring_epoch,
+            }}
+          >
+            <p className='w-full text-end'>{item?.retiring_epoch}</p>
+          </Link>
+        );
+      },
+      title: <p className='w-full text-end'>Retiring epoch</p>,
+      visible: true,
+      widthPx: 180,
+    },
+  ];
+
   return (
     <>
       {activeUrl && (
@@ -438,8 +501,20 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
             pagination={false}
             minContentWidth={1100}
             query={updateQuery}
-            items={[updateItem]}
+            items={updateItems}
             columns={certificatesColumns}
+          />
+        </div>
+        <div className='flex flex-col gap-2'>
+          <h3>Retirement</h3>
+          <GlobalTable
+            type='default'
+            scrollable
+            pagination={false}
+            minContentWidth={1100}
+            query={retirmentQuery}
+            items={retirmentItems}
+            columns={retirmentColumns}
           />
         </div>
       </div>

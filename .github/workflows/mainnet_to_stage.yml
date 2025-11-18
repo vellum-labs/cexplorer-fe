@@ -1,4 +1,5 @@
-name: "Deploy preview.cexplorer.io"
+name: "Deploy mainnet-stage.cexplorer.io"
+
 on:
   workflow_dispatch:
     inputs:
@@ -32,13 +33,13 @@ jobs:
       - name: Set up WireGuard
         env:
           WG_CONFIG: ${{secrets.WG_CONFIG}}
+
         run: |
-          set -e
           sudo apt update
           sudo apt install -y wireguard
-          echo "$WG_CONFIG" | sudo tee /etc/wireguard/wg0.conf
           echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
           echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf
+          echo "$WG_CONFIG" | sudo tee /etc/wireguard/wg0.conf
           sudo wg-quick up wg0
 
       - uses: actions/checkout@v5
@@ -52,9 +53,9 @@ jobs:
 
       - name: Add server to known_hosts
         run: |
-          set -e
           mkdir -p ~/.ssh
           ssh-keyscan -H -t ecdsa,ed25519,rsa 10.0.0.1 >> ~/.ssh/known_hosts
+        # Alternatively, store known_hosts as a secret and use it
 
       - name: Set Node.js
         uses: actions/setup-node@v5
@@ -62,29 +63,39 @@ jobs:
           node-version: 22.19.0
           cache: 'yarn'
           cache-dependency-path: 'yarn.lock'
-
+      
       - name: Install dependencies and build
         env:
           VITE_APP_VERSION: ${{ github.run_number }}
-          VITE_APP_CONFIG: preview-prod
-          VITE_APP_BLOCKFROST_KEY: ${{ secrets.BLOCKFROST_API_PREVIEW }}
+          VITE_APP_CONFIG: mainnet-stage
+          VITE_APP_BLOCKFROST_KEY: ${{ secrets.BLOCKFROST_API_MAINNET }}
         run: |
-          set -e
-          yarn install
-          yarn build
-          yarn run svgo
-          yarn generate:routes
+          echo "🧶 Installing dependencies..."
+          time yarn install
 
+          echo "🔨 Starting build..."
+          time yarn build
+
+          echo "🎨 Optimizing SVG icons..."
+          time yarn run svgo
+
+          echo "📝 Generating routes.json..."
+          time yarn generate:routes
+
+          echo "✅ Build complete"
+
+
+
+          
       - name: Copy files & deploy
         env:
           SERVER: 10.0.0.1
         run: |
-          set -e
           rsync -azv -e "ssh -o UserKnownHostsFile=~/.ssh/known_hosts -o HostKeyAlgorithms=ecdsa-sha2-nistp256,ssh-ed25519,rsa-sha2-512" \
             --omit-dir-times --no-perms --no-owner --no-group --delete \
-            ./dist/ job@$SERVER:/var/www/cexplorer_preview/
-            
-      - name: Notify Discord
+            ./dist/ job@$SERVER:/var/www/cexplorer_prod_stage/
+
+      - name: Notify Discord on success
         if: success()
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
@@ -93,7 +104,24 @@ jobs:
           WORKFLOW_NAME="${{ github.workflow }}"
           BRANCH="${{ github.event.inputs.branch }}"
       
-          MESSAGE="🚀 **${WORKFLOW_NAME}** deployed new version #**${VERSION}** ${BRANCH}"
+          MESSAGE="✅ **${WORKFLOW_NAME}** successfully deployed version #**${VERSION}** (${BRANCH})"
+      
+          curl -H "Content-Type: application/json" \
+            -X POST \
+            -d "{\"content\": \"$MESSAGE\"}" \
+            $DISCORD_WEBHOOK_URL
+      
+      # Notifikace při neúspěchu
+      - name: Notify Discord on failure
+        if: failure()
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          VERSION="${{ github.run_number }}"
+          WORKFLOW_NAME="${{ github.workflow }}"
+          BRANCH="${{ github.event.inputs.branch }}"
+      
+          MESSAGE="❌ **${WORKFLOW_NAME}** failed during deployment of version #**${VERSION}** (${BRANCH})"
       
           curl -H "Content-Type: application/json" \
             -X POST \

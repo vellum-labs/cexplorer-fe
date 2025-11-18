@@ -38,4 +38,8 @@ export const poolBlocksTableOptions: PoolBlocksOptions = [
     key: "protocol",
     name: "Protocol",
   },
+  {
+    key: "cert_counter",
+    name: "Cert counter",
+  },
 ];
