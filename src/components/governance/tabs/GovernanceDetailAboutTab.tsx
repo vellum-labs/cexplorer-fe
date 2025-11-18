@@ -200,6 +200,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
             txHash={item?.tx?.hash}
             proposalId={item?.proposal?.ident?.id}
             isLate={isVoteLate(item)}
+            anchorInfo={item?.anchor}
           />
         );
       },
