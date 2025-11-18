@@ -3,6 +3,7 @@ import {
   createRootRoute,
   Outlet,
   useLocation,
+  useRouter,
   useRouterState,
 } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
@@ -35,6 +36,8 @@ const RootComponent = () => {
   const [updateModal, setUpdateModal] = useState<boolean>(false);
 
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
+
+  const router = useRouter();
 
   const { notFound, setNotFound } = useNotFound();
   const location = useLocation();
@@ -147,6 +150,16 @@ const RootComponent = () => {
       setUpdateModal(true);
     }
   }, []);
+
+  useEffect(() => {
+    const unsubscribe = router.subscribe("onBeforeNavigate", () => {
+      if ("startViewTransition" in document) {
+        document.startViewTransition(() => {});
+      }
+    });
+
+    return () => unsubscribe();
+  }, [router]);
 
   return (
     <GlobalSearchProvider
