@@ -1,6 +1,17 @@
 import type { GovernanceVote } from "@/types/governanceTypes";
 
-export function isVoteLate(vote: GovernanceVote): boolean {
+type VoteWithEpochs = {
+  tx: {
+    epoch_no: number;
+  };
+  proposal: {
+    expired_epoch: number | null;
+    enacted_epoch: number | null;
+    ratified_epoch: number | null;
+  };
+};
+
+export function isVoteLate(vote: GovernanceVote | VoteWithEpochs): boolean {
   const voteEpoch = vote?.tx?.epoch_no;
 
   if (voteEpoch === undefined || voteEpoch === null) {

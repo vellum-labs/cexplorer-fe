@@ -66,14 +66,6 @@ export type LiveDelegationsColumns = {
   tx: boolean;
 };
 
-export type DrepDelegationsColumns = {
-  date: boolean;
-  address: boolean;
-  amount: boolean;
-  delegation: boolean;
-  tx: boolean;
-};
-
 export type RetiredDelegationsColumns = {
   index: boolean;
   pool: boolean;
@@ -149,8 +141,18 @@ export type PoolDelegatorsColumns = {
   address: boolean;
   amount: boolean;
   loyalty: boolean;
+  tx: boolean;
   registered: boolean;
   pool_delegation: boolean;
+};
+
+export type DrepDelegationsColumns = {
+  date: boolean;
+  drep: boolean;
+  active_stake: boolean;
+  live_stake: boolean;
+  loyalty: boolean;
+  tx: boolean;
 };
 
 export type PoolStructureColumns = {

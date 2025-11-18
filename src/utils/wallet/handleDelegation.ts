@@ -13,7 +13,12 @@ export const handleDelegation = async (
   params: DelegationParams,
   lucid: LucidEvolution | null,
 ) => {
-  if (!lucid) return;
+  if (!lucid) {
+    callDelegationToast({
+      errorMessage: "Wallet not connected. Please connect your wallet first.",
+    });
+    return;
+  }
 
   const delegationId = params.ident;
   const idLabel = params.type === "pool" ? "poolId" : "DRep ID";

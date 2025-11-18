@@ -19,9 +19,10 @@ import { configJSON } from "@/constants/conf";
 interface MenuItemsProps {
   setOpen: Dispatch<SetStateAction<boolean>>;
   setActiveMenu: Dispatch<SetStateAction<MobileMenuScreen>>;
+  autoOpenWallet?: boolean;
 }
 
-export const MenuItems: FC<MenuItemsProps> = ({ setOpen, setActiveMenu }) => {
+export const MenuItems: FC<MenuItemsProps> = ({ setOpen, setActiveMenu, autoOpenWallet = false }) => {
   const price = useAdaPriceWithHistory();
 
   const menuItems: MenuItem[] = [
@@ -123,7 +124,7 @@ export const MenuItems: FC<MenuItemsProps> = ({ setOpen, setActiveMenu }) => {
         onClick={() => setActiveMenu("settings")}
       />
       <div className='flex w-full flex-col md:hidden'>
-        {enabledWalletConnector && <WalletButton variant='long' />}
+        {enabledWalletConnector && <WalletButton variant='long' autoOpen={autoOpenWallet} />}
       </div>
       <div className='w-full pt-1.5' onClick={() => setOpen(false)}>
         <AdaPriceIndicator price={price} />

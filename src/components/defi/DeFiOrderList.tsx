@@ -140,8 +140,10 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
     filterByType("sell"),
   );
 
-  const items = query.data?.pages.flatMap(page => page.data?.data);
-  const totalItems = query.data?.pages[0].data?.count;
+  const items = query.data?.pages
+    .flatMap(page => page.data?.data)
+    .filter(Boolean);
+  const totalItems = query.data?.pages[0]?.data?.count ?? 0;
 
   const curr = useAdaPriceWithHistory(currency as any);
 

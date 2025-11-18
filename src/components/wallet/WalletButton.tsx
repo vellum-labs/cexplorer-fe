@@ -12,11 +12,12 @@ import { RandomDelegationModal } from "./RandomDelegationModal";
 
 interface Props {
   variant?: "short" | "long";
+  autoOpen?: boolean;
 }
 
-const WalletButton = ({ variant = "short" }: Props) => {
+const WalletButton = ({ variant = "short", autoOpen = false }: Props) => {
   const [showWalletModal, setShowWalletModal] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(autoOpen);
 
   const timeoutRef = useRef<NodeJS.Timeout>();
 
