@@ -1,10 +1,11 @@
 import type { FC } from "react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useGlobalSearch } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
+import { useClickOutsideGroup } from "@/hooks/useClickOutsideGroup";
 
 interface Pool {
   pool_id: string;
@@ -31,20 +32,10 @@ export const PoolSelector: FC<PoolSelectorProps> = ({
 
   const poolResults = data.filter(item => item.category === "pool");
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        searchRef.current &&
-        !searchRef.current.contains(event.target as Node)
-      ) {
-        setLocalFocused(false);
-        handleSearchChange("");
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  useClickOutsideGroup([searchRef], () => {
+    setLocalFocused(false);
+    handleSearchChange("");
+  });
 
   const handleSelect = (pool: any) => {
     onSelectPool({

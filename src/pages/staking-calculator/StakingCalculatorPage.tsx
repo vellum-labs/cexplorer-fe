@@ -46,12 +46,12 @@ export const StakingCalculatorPage: FC = () => {
   }, [adaAmount]);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (selectedPool) {
-        localStorage.setItem(STORAGE_KEY_POOL, JSON.stringify(selectedPool));
-      } else {
-        localStorage.removeItem(STORAGE_KEY_POOL);
-      }
+    if (typeof window === "undefined") return;
+
+    if (selectedPool) {
+      localStorage.setItem(STORAGE_KEY_POOL, JSON.stringify(selectedPool));
+    } else {
+      localStorage.removeItem(STORAGE_KEY_POOL);
     }
     setSelectedRoa(null);
   }, [selectedPool]);
