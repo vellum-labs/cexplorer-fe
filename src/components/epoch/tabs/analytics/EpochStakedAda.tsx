@@ -5,18 +5,24 @@ import type { FC } from "react";
 import ReactEcharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 
+import type { MiscConstResponseData } from "@/types/miscTypes";
+
 interface EpochStakedAdaProps {
   stats: EpochStatsSummary;
   isLoading: boolean;
   isError: boolean;
+  constData?: MiscConstResponseData;
 }
 
 export const EpochStakedAda: FC<EpochStakedAdaProps> = ({
   stats,
   isError,
   isLoading,
+  constData,
 }) => {
-  const stakedAda = (stats?.stake?.active / stats?.stake?.epoch) * 100;
+  const stakedAda =
+    (stats?.stake?.epoch / (constData?.circulating_supply ?? 1)) * 100;
+
   const { textColor, bgColor } = useGraphColors();
 
   const option = {

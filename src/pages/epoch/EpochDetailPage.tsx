@@ -79,6 +79,7 @@ const EpochDetailPage: FC = () => {
           stats={statsData as EpochStatsSummary}
           isLoading={isStatsDataLoading}
           isError={isStatsDataError}
+          constData={constData}
         />
       ),
       visible: true,

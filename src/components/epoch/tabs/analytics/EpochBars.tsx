@@ -9,26 +9,39 @@ import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { format } from "date-fns";
 import ReactEcharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
+import type { MiscConstResponseData } from "@/types/miscTypes";
 
 interface EpochBars {
   stats: EpochStatsSummary;
   isError: boolean;
   isLoading: boolean;
+  constData?: MiscConstResponseData;
 }
 
-export const EpochBars: FC<EpochBars> = ({ stats, isError, isLoading }) => {
+export const EpochBars: FC<EpochBars> = ({
+  stats,
+  isError,
+  isLoading,
+  constData,
+}) => {
   const { bgColor, textColor } = useGraphColors();
 
   const epochDates = (stats?.daily || []).map(item =>
     new Date(item?.date).getTime(),
   );
 
-  const fees = stats?.pots?.fees ?? 0;
-  const treasury = stats?.pots?.treasury ?? 0;
-  const pieChartTotal = fees + treasury;
+  const fees =
+    (stats?.pots?.fees ?? 0) *
+    (1 - +(constData?.epoch_param?.treasury_growth_rate ?? 0.2));
+  const reserves =
+    (stats?.pots?.reserves ?? 0) *
+    +(constData?.epoch_param?.monetary_expand_rate ?? 0.003) *
+    (1 - +(constData?.epoch_param?.treasury_growth_rate ?? 0.2));
+
+  const pieChartTotal = fees + reserves;
 
   const feesPercentage = (fees / pieChartTotal) * 100;
-  const treasuryPercentage = (treasury / pieChartTotal) * 100;
+  const reservesPercentage = (reserves / pieChartTotal) * 100;
 
   const items = [
     {
@@ -119,8 +132,8 @@ export const EpochBars: FC<EpochBars> = ({ stats, isError, isLoading }) => {
             itemStyle: { color: "#47CD89" },
           },
           {
-            value: treasuryPercentage.toFixed(2),
-            name: "Treasury",
+            value: reservesPercentage.toFixed(2),
+            name: "Reserves",
             itemStyle: { color: "#FEC84B" },
           },
         ],
@@ -228,7 +241,7 @@ export const EpochBars: FC<EpochBars> = ({ stats, isError, isLoading }) => {
         <div className='flex flex-col'>
           <h3>Rewards Structure</h3>
           <span className='text-text-md font-semibold text-grayTextPrimary'>
-            Earned by fees / Treasury
+            Earned by fees / Reserves
           </span>
         </div>
         <div className='relative w-full'>
