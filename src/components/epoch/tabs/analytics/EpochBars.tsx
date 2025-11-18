@@ -31,10 +31,10 @@ export const EpochBars: FC<EpochBars> = ({
   );
 
   const fees =
-    (stats?.pots?.fees ?? 0) *
+    (stats?.pots?.fees ?? 1) *
     (1 - +(constData?.epoch_param?.treasury_growth_rate ?? 0.2));
   const reserves =
-    (stats?.pots?.reserves ?? 0) *
+    (stats?.pots?.reserves ?? 1) *
     +(constData?.epoch_param?.monetary_expand_rate ?? 0.003) *
     (1 - +(constData?.epoch_param?.treasury_growth_rate ?? 0.2));
 
