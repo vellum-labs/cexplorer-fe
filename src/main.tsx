@@ -8,7 +8,6 @@ import { Toaster } from "sonner";
 import App from "./App.tsx";
 import { routeTree } from "./routeTree.gen.ts";
 import "./styles/admin.css";
-import "./styles/view-transitions.css";
 import "@vellumlabs/cexplorer-sdk/style.css";
 import "@dexhunterio/swaps/lib/assets/style.css";
 
