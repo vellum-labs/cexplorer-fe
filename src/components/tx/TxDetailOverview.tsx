@@ -6,12 +6,13 @@ import {
   formatNumber,
   formatString,
   EpochCell,
+  BlockCell,
 } from "@vellumlabs/cexplorer-sdk";
 import { getConfirmations } from "@/utils/getConfirmations";
 import { getEpochSlot } from "@/utils/getEpochSlot";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import type { UseQueryResult } from "@tanstack/react-query";
-import { Link, useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import {
   CircleAlert,
   CircleCheck,
@@ -114,13 +115,13 @@ const TxDetailOverview = ({ query }: Props) => {
     {
       label: "Height",
       value: (
-        <Link
-          to='/block/$hash'
-          params={{ hash: String(data?.block?.hash) || "" }}
-          className='text-text-sm font-medium text-primary'
-        >
-          {formatNumber(data?.block?.no ?? 0)}
-        </Link>
+        <div className='text-text-sm'>
+          <BlockCell
+            hash={String(data?.block?.hash) || ""}
+            no={data?.block?.no ?? 0}
+            justify='start'
+          />
+        </div>
       ),
     },
     {

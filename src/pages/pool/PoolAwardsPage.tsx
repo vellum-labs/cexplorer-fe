@@ -6,6 +6,8 @@ import { useFetchGlobalPoolAwards } from "@/services/pools";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
+import { BlockCell } from "@vellumlabs/cexplorer-sdk";
 import {
   PaginationComponent,
   PaginationContent,
@@ -15,6 +17,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@vellumlabs/cexplorer-sdk";
+import { HashCell } from "@/components/tx/HashCell";
 import Image0 from "@/resources/images/awards/0.svg";
 import Image1 from "@/resources/images/awards/1.svg";
 import Image10 from "@/resources/images/awards/10.svg";
@@ -59,8 +62,8 @@ import Image6 from "@/resources/images/awards/6.svg";
 import Image7 from "@/resources/images/awards/7.svg";
 import Image8 from "@/resources/images/awards/8.svg";
 import Image9 from "@/resources/images/awards/9.svg";
-import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
-import { Link, useNavigate, useSearch } from "@tanstack/react-router";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { useNavigate, useSearch } from "@tanstack/react-router";
 import { format } from "date-fns";
 import { PageBase } from "@/components/global/pages/PageBase";
 
@@ -137,19 +140,15 @@ export const PoolAwardsPage: FC = () => {
           <>
             <div className='flex w-full flex-col'>
               <span>Hash: </span>
-              {formatString(item.detail.hash, "short")}
+              <HashCell
+                hash={item.detail.hash}
+                href='/block/$hash'
+                formatType='short'
+              />
             </div>
             <div className='flex flex-col'>
               <span>Height:</span>
-              <Link
-                className='text-primary'
-                to='/block/$hash'
-                params={{
-                  hash: item.detail.hash,
-                }}
-              >
-                {item.detail.height}
-              </Link>
+              <BlockCell hash={item.detail.hash} no={item.detail.height} />
             </div>
           </>
         );
@@ -158,19 +157,15 @@ export const PoolAwardsPage: FC = () => {
           <>
             <div className='flex w-full flex-col'>
               <span>Hash: </span>
-              <span>{formatString(item.detail.hash, "short")}</span>
+              <HashCell
+                hash={item.detail.hash}
+                href='/block/$hash'
+                formatType='short'
+              />
             </div>
             <div className='flex flex-col'>
               <span>Height:</span>
-              <Link
-                className='text-primary'
-                to='/block/$hash'
-                params={{
-                  hash: item.detail.hash,
-                }}
-              >
-                {item.detail.height}
-              </Link>
+              <BlockCell hash={item.detail.hash} no={item.detail.height} />
             </div>
           </>
         );
@@ -182,7 +177,7 @@ export const PoolAwardsPage: FC = () => {
           <>
             <div className='flex w-full flex-col'>
               <span>Epoch: </span>
-              {item.detail.epoch_no}
+              <EpochCell no={item.detail.epoch_no} justify='start' />
             </div>
             <div className='flex min-w-fit flex-col'>
               <span>Stake:</span>
