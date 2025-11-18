@@ -13,7 +13,7 @@ import { toast } from "sonner";
 
 export const TaxToolPage: FC = () => {
   const { stake } = useSearch({
-    from: "/tax-tool",
+    from: "/tax-tool/",
   });
 
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ export const TaxToolPage: FC = () => {
       localStorage.setItem("tax_tool_stake_key", debouncedSearch);
 
       navigate({
-        to: "/tax-tool",
+        to: "/tax-tool/",
         search: { stake: debouncedSearch },
         replace: true,
       });
@@ -49,7 +49,7 @@ export const TaxToolPage: FC = () => {
       setIsValid(false);
 
       navigate({
-        to: "/tax-tool",
+        to: "/tax-tool/",
         search: {},
         replace: true,
       });

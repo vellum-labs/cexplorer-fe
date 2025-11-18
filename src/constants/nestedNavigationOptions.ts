@@ -29,7 +29,7 @@ export const nestedNavigationOptions: {
         },
         {
           label: "Tax tool",
-          href: "/tax-tool",
+          href: "/tax-tool/",
         },
         {
           label: "Rewards calculator",
