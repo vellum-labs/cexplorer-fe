@@ -3,17 +3,20 @@ import { useFetchBlocksList } from "@/services/blocks";
 import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { usePoolBlocksTableStore } from "@/stores/tables/poolBlocksTableStore";
 import type { PoolBlocksColumns } from "@/types/tableTypes";
-import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
-import { Link, useSearch } from "@tanstack/react-router";
+import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
+import { BlockCell } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "../table/ExportButton";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { SizeCell } from "@vellumlabs/cexplorer-sdk";
 import { ProtocolDot } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
+import { HashCell } from "@/components/tx/HashCell";
 
 interface Props {
   poolId: string;
@@ -67,22 +70,14 @@ const PoolBlocksTable = ({ poolId }: Props) => {
     },
     {
       key: "block_no",
-      render: item => (
-        <Link
-          to='/block/$hash'
-          params={{ hash: item.hash }}
-          className='flex justify-end text-primary'
-        >
-          {formatNumber(item.block_no ?? 0)}
-        </Link>
-      ),
+      render: item => <BlockCell hash={item.hash} no={item.block_no ?? 0} />,
       title: <p className='w-full text-right'>Height</p>,
       visible: columnsVisibility.block_no,
       widthPx: 75,
     },
     {
       key: "epoch_no",
-      render: item => <p className='text-right'>{item.epoch_no}</p>,
+      render: item => <EpochCell no={item.epoch_no} />,
       title: <p className='w-full text-right'>Epoch</p>,
       visible: columnsVisibility.epoch_no,
       widthPx: 50,
@@ -106,13 +101,9 @@ const PoolBlocksTable = ({ poolId }: Props) => {
     {
       key: "hash",
       render: item => (
-        <Link
-          to='/block/$hash'
-          params={{ hash: item.hash }}
-          className='flex justify-end text-primary'
-        >
-          {formatString(item.hash, "long")}
-        </Link>
+        <div className='flex justify-end'>
+          <HashCell hash={item.hash} href='/block/$hash' formatType='long' />
+        </div>
       ),
       jsonFormat: item => {
         if (!item.hash) {

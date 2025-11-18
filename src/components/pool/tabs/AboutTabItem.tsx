@@ -3,6 +3,7 @@ import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import {
   useFetchPoolAbout,
   useFetchPoolRetirment,
@@ -294,9 +295,7 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
     },
     {
       key: "active_in",
-      render: item => {
-        return <p className='text-right'>{item.active_epoch_no}</p>;
-      },
+      render: item => <EpochCell no={item.active_epoch_no} />,
       title: <p className='w-full text-right'>Active in</p>,
       visible: true,
       widthPx: 20,
@@ -426,22 +425,7 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
     },
     {
       key: "epoch",
-      render: item => {
-        if (!item?.retiring_epoch) {
-          return "-";
-        }
-
-        return (
-          <Link
-            to='/epoch/$no'
-            params={{
-              no: item?.retiring_epoch,
-            }}
-          >
-            <p className='w-full text-end'>{item?.retiring_epoch}</p>
-          </Link>
-        );
-      },
+      render: item => <EpochCell no={item?.retiring_epoch} />,
       title: <p className='w-full text-end'>Retiring epoch</p>,
       visible: true,
       widthPx: 180,

@@ -61,7 +61,7 @@ const AddressCell = ({
         className='flex items-center gap-1'
         role='button'
       >
-        {amount && (
+        {amount != null && (
           <Tooltip
             content={
               <div className='min-w-[130px] text-center'>

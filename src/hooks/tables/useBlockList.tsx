@@ -9,10 +9,11 @@ import { useEffect, useState } from "react";
 
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { SizeCell } from "@vellumlabs/cexplorer-sdk";
 
-import { BlockCell } from "@/components/blocks/BlockCell";
+import { BlockCell } from "@vellumlabs/cexplorer-sdk";
 import { ProtocolDot } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "@/components/tx/HashCell";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
@@ -216,7 +217,7 @@ export const useBlockList = ({
     },
     {
       key: "epoch_no",
-      render: item => <p className='text-right'>{item.epoch_no}</p>,
+      render: item => <EpochCell no={item.epoch_no} />,
       title: (
         <p ref={anchorRefs?.epoch_no} className='w-full text-right'>
           Epoch

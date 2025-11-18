@@ -15,6 +15,7 @@ import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
 
 import { Asterisk, ExternalLink, Landmark, Route, User, X } from "lucide-react";
@@ -169,15 +170,9 @@ export const GovernancePage: FC = () => {
                 <span className='text-text-xs text-grayTextPrimary'>
                   Epoch -{" "}
                 </span>
-                <Link
-                  to='/epoch/$no'
-                  params={{
-                    no: String(epoch),
-                  }}
-                  className='text-text-xs text-primary'
-                >
-                  {epoch}
-                </Link>
+                <div className='text-text-xs'>
+                  <EpochCell no={epoch} justify='start' />
+                </div>
               </div>
             )}
           </div>
@@ -332,15 +327,9 @@ export const GovernancePage: FC = () => {
                 <span className='text-text-xs text-grayTextPrimary'>
                   Epoch -{" "}
                 </span>
-                <Link
-                  to='/epoch/$no'
-                  params={{
-                    no: item?.expired_epoch,
-                  }}
-                  className='text-text-xs text-primary'
-                >
-                  {item.expired_epoch}
-                </Link>
+                <div className='text-text-xs'>
+                  <EpochCell no={item?.expired_epoch} justify='start' />
+                </div>
               </div>
             )}
           </div>

@@ -5,12 +5,14 @@ import {
   formatDate,
   formatNumber,
   formatString,
+  EpochCell,
+  BlockCell,
 } from "@vellumlabs/cexplorer-sdk";
 import { getConfirmations } from "@/utils/getConfirmations";
 import { getEpochSlot } from "@/utils/getEpochSlot";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import type { UseQueryResult } from "@tanstack/react-query";
-import { Link, useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import {
   CircleAlert,
   CircleCheck,
@@ -113,13 +115,13 @@ const TxDetailOverview = ({ query }: Props) => {
     {
       label: "Height",
       value: (
-        <Link
-          to='/block/$hash'
-          params={{ hash: String(data?.block?.hash) || "" }}
-          className='text-text-sm font-medium text-primary'
-        >
-          {formatNumber(data?.block?.no ?? 0)}
-        </Link>
+        <div className='text-text-sm'>
+          <BlockCell
+            hash={String(data?.block?.hash) || ""}
+            no={data?.block?.no ?? 0}
+            justify='start'
+          />
+        </div>
       ),
     },
     {
@@ -145,15 +147,9 @@ const TxDetailOverview = ({ query }: Props) => {
     {
       label: "Epoch",
       value: (
-        <span className='cursor-pointer text-text-sm font-medium text-primary'>
-          <Link
-            to='/epoch/$no'
-            params={{ no: String(data?.epoch_param?.epoch_no ?? 0) }}
-            className='text-primary'
-          >
-            {data?.epoch_param?.epoch_no}
-          </Link>
-        </span>
+        <div className='text-text-sm'>
+          <EpochCell no={data?.epoch_param?.epoch_no} justify='start' />
+        </div>
       ),
     },
     data?.invalid_before && data?.invalid_hereafter

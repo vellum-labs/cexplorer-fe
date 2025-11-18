@@ -4,9 +4,8 @@ import type { PoolPefomanceColumns } from "@/types/tableTypes";
 import ExportButton from "../table/ExportButton";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
-import { Link } from "@tanstack/react-router";
-import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchPoolDetail } from "@/services/pools";
 import { usePoolPerfomanceTableStore } from "@/stores/tables/poolPerfomanceTableStore";
@@ -127,28 +126,9 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
   const columns = [
     {
       key: "epoch",
-      render: item => {
-        if (!item?.epoch) {
-          return "-";
-        }
-
-        return (
-          <div className='relative'>
-            <div className='absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2'>
-              {miscConst?.epoch.no === item.epoch && <PulseDot />}
-            </div>
-            <p className='cursor-pointer pl-1.5 text-text-sm text-primary'>
-              <Link
-                to='/epoch/$no'
-                params={{ no: String(item.epoch ?? 0) }}
-                className='text-primary'
-              >
-                {item.epoch}
-              </Link>
-            </p>
-          </div>
-        );
-      },
+      render: item => (
+        <EpochCell no={item?.epoch} showPulseDot currentEpoch={miscConst?.epoch.no} />
+      ),
       title: "Epoch",
       visible: columnsVisibility.epoch,
       widthPx: 55,

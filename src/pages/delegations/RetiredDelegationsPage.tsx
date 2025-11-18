@@ -1,4 +1,4 @@
-import { EpochCell } from "@/components/epoch/EpochCell";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";

@@ -7,10 +7,11 @@ import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { BlockCell } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { SizeCell } from "@vellumlabs/cexplorer-sdk";
 import { useEpochBlockListTableStore } from "@/stores/tables/epochBlockListTableStore";
-import { Link, useSearch } from "@tanstack/react-router";
+import { useSearch } from "@tanstack/react-router";
 import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 
 import { epochBlockTableOptions } from "@/constants/tables/epochBlockTableOptions";
@@ -87,15 +88,7 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
     },
     {
       key: "block_no",
-      render: item => (
-        <Link
-          to='/block/$hash'
-          params={{ hash: item.hash }}
-          className='flex justify-end text-primary'
-        >
-          {formatNumber(item?.block_no ?? 0)}
-        </Link>
-      ),
+      render: item => <BlockCell hash={item.hash} no={item?.block_no ?? 0} />,
       title: <p className='w-full text-right'>Height</p>,
       visible: columnsVisibility.block_no,
       widthPx: 75,

@@ -6,9 +6,9 @@ import {
   Tooltip,
   AdaWithTooltip,
   formatNumber,
+  EpochCell,
   formatDate,
 } from "@vellumlabs/cexplorer-sdk";
-import { Link } from "@tanstack/react-router";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
@@ -139,22 +139,17 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
         title: columnLabels.epoch,
         visible: columnsVisibility.epoch,
         widthPx: 100,
-        render: item => (
-          <Link
-            to='/epoch/$no'
-            params={{ no: String(item.earned_epoch) }}
-            className='text-primary hover:underline'
-          >
-            {item.earned_epoch}
-          </Link>
-        ),
+        render: item => <EpochCell no={item.earned_epoch} justify='start' />,
       },
       {
         key: "end_time",
         title: (
           <div className='flex w-full justify-start'>
             <Tooltip content='Exchange rates from the epoch end date.'>
-              <div className='flex items-center gap-1 cursor-help' style={{pointerEvents: 'auto'}}>
+              <div
+                className='flex cursor-help items-center gap-1'
+                style={{ pointerEvents: "auto" }}
+              >
                 End Time
                 <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
               </div>
@@ -247,7 +242,10 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
         title: (
           <div className='flex w-full justify-end'>
             <Tooltip content='Exchange rates from the epoch end date.'>
-              <div className='flex items-center gap-1 cursor-help' style={{pointerEvents: 'auto'}}>
+              <div
+                className='flex cursor-help items-center gap-1'
+                style={{ pointerEvents: "auto" }}
+              >
                 ADA/USD
                 <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
               </div>
@@ -268,7 +266,10 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
         title: (
           <div className='flex w-full justify-end'>
             <Tooltip content='Exchange rates from the epoch end date.'>
-              <div className='flex items-center gap-1 cursor-help' style={{pointerEvents: 'auto'}}>
+              <div
+                className='flex cursor-help items-center gap-1'
+                style={{ pointerEvents: "auto" }}
+              >
                 ADA/{secondaryCurrency.toUpperCase()}
                 <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
               </div>

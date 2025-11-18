@@ -1,5 +1,5 @@
 import AddressCell from "@/components/address/AddressCell";
-import { EpochCell } from "@/components/epoch/EpochCell";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";

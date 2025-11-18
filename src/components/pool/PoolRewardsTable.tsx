@@ -15,10 +15,10 @@ import { useEffect, useState } from "react";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { Badge } from "@vellumlabs/cexplorer-sdk";
-import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "../table/ExportButton";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   poolId: string;
@@ -74,16 +74,7 @@ const PoolRewardsTable = ({
   const columns = [
     {
       key: "epoch",
-      render: item => (
-        <div className='flex items-center justify-end gap-1.5 text-right'>
-          {miscConst?.no === item.no ? (
-            <PulseDot />
-          ) : (
-            <div className='h-2 w-2' />
-          )}
-          {item.no}
-        </div>
-      ),
+      render: item => <EpochCell no={item.no} showPulseDot currentEpoch={miscConst?.no} />,
       title: <p className='w-full text-right'>Epoch</p>,
       visible: columnsVisibility.epoch,
       widthPx: 30,
