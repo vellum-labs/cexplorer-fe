@@ -29,6 +29,7 @@ export interface EpochParam {
   monetary_expand_rate: number;
   treasury_growth_rate: number;
   max_collateral_inputs: number;
+  committee_max_term_length?: number;
 }
 
 interface PotStatsDeposits {
