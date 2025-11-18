@@ -5,11 +5,12 @@ import type {
 import { handlePersistStore } from "@vellumlabs/cexplorer-sdk";
 
 export const usePoolDelegatorsTableStore = handlePersistStore<
-  BasicTableOptions<PoolDelegatorsColumns>,
+  BasicTableOptions<PoolDelegatorsColumns> & { activeTab: string },
   {
     setColumnVisibility: (columnKey: string, isVisible: boolean) => void;
     setRows: (rows: number) => void;
     setColumsOrder: (columnsOrder: (keyof PoolDelegatorsColumns)[]) => void;
+    setActiveTab: (activeTab: string) => void;
   }
 >(
   "pool_delegators_table_store",
@@ -20,6 +21,7 @@ export const usePoolDelegatorsTableStore = handlePersistStore<
       address: true,
       amount: true,
       loyalty: true,
+      tx: true,
       registered: true,
       pool_delegation: true,
     },
@@ -33,7 +35,9 @@ export const usePoolDelegatorsTableStore = handlePersistStore<
       "amount",
       "loyalty",
       "registered",
+      "tx",
     ],
+    activeTab: "stake-pools",
   },
   set => ({
     setColumnVisibility: (columnKey, isVisible) =>
@@ -47,6 +51,10 @@ export const usePoolDelegatorsTableStore = handlePersistStore<
     setColumsOrder: columnsOrder =>
       set(state => {
         state.columnsOrder = columnsOrder;
+      }),
+    setActiveTab: activeTab =>
+      set(state => {
+        state.activeTab = activeTab;
       }),
   }),
 );
