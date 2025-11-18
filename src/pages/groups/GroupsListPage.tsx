@@ -144,9 +144,6 @@ export const GroupsListPage = () => {
     }
   };
 
-  const hasActiveFilters = Boolean(debouncedTableSearch || filter.has_drep);
-  const hasTableSorting = Boolean(sortColumn && sortDirection);
-
   return (
     <>
       <Helmet>{<title>{metadata.groupsList.title}</title>}</Helmet>
@@ -180,11 +177,7 @@ export const GroupsListPage = () => {
                 <LoadingSkeleton height='400px' rounded='lg' />
               </div>
             ) : (
-              <GroupsCharts
-                filteredItems={filteredItems}
-                hasActiveFilters={hasActiveFilters}
-                hasTableSorting={hasTableSorting}
-              />
+              <GroupsCharts filteredItems={data} />
             )}
             <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
               <h3 className='pb-1.5 md:pb-0'>

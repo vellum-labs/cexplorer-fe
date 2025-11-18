@@ -5,14 +5,10 @@ import { PIE_CHART_COLORS } from "@/constants/charts";
 
 interface GroupsChartsProps {
   filteredItems: GroupsListData[];
-  hasActiveFilters: boolean;
-  hasTableSorting: boolean;
 }
 
 export const GroupsCharts = ({
   filteredItems,
-  hasActiveFilters,
-  hasTableSorting,
 }: GroupsChartsProps) => {
   const getChartData = useMemo(
     () => (items: GroupsListData[], dataKey: string) => {
@@ -24,30 +20,27 @@ export const GroupsCharts = ({
         );
       });
 
-      let sortedItems = items;
-      if (!hasActiveFilters && !hasTableSorting) {
-        sortedItems = [...items].sort((a, b) => {
-          const pledge = (item: GroupsListData) =>
-            item.data?.pool?.pledged ?? 0;
-          const poolCount = (item: GroupsListData) =>
-            item.data?.pool?.count ?? 1;
-          const pledgePerPool = (item: GroupsListData) =>
-            poolCount(item) > 0 ? pledge(item) / poolCount(item) : 0;
+      const sortedItems = [...items].sort((a, b) => {
+        const pledge = (item: GroupsListData) =>
+          item.data?.pool?.pledged ?? 0;
+        const poolCount = (item: GroupsListData) =>
+          item.data?.pool?.count ?? 1;
+        const pledgePerPool = (item: GroupsListData) =>
+          poolCount(item) > 0 ? pledge(item) / poolCount(item) : 0;
 
-          switch (dataKey) {
-            case "pools_count":
-              return (b.data?.pool?.count ?? 0) - (a.data?.pool?.count ?? 0);
-            case "pool_stake":
-              return (b.data?.pool?.stake ?? 0) - (a.data?.pool?.stake ?? 0);
-            case "pledge":
-              return pledge(b) - pledge(a);
-            case "pledge_per_pool":
-              return pledgePerPool(b) - pledgePerPool(a);
-            default:
-              return 0;
-          }
-        });
-      }
+        switch (dataKey) {
+          case "pools_count":
+            return (b.data?.pool?.count ?? 0) - (a.data?.pool?.count ?? 0);
+          case "pool_stake":
+            return (b.data?.pool?.stake ?? 0) - (a.data?.pool?.stake ?? 0);
+          case "pledge":
+            return pledge(b) - pledge(a);
+          case "pledge_per_pool":
+            return pledgePerPool(b) - pledgePerPool(a);
+          default:
+            return 0;
+        }
+      });
 
       return sortedItems.map(item => {
         const pledge = item.data?.pool?.pledged ?? 0;
@@ -64,7 +57,7 @@ export const GroupsCharts = ({
         };
       });
     },
-    [hasActiveFilters, hasTableSorting],
+    [],
   );
 
   const charts = [
