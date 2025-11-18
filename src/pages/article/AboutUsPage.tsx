@@ -105,7 +105,7 @@ export const AboutUsPage = () => {
                         <ArrowRight size={15} />
                       </span>
                     }
-                    href={service.link}
+                    href={service.link as any}
                   />
                 </div>
               );
