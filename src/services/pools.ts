@@ -14,6 +14,7 @@ import type {
   StakeDrepsNotSpoResponse,
   TopMarginsWithDelegatorsResponse,
   TopMultiDelegatorsResponse,
+  PoolRetirmentResponse,
 } from "@/types/poolTypes";
 
 import { handleFetch } from "@/lib/handleFetch";
@@ -576,5 +577,24 @@ export const useFetchStakeDrepsNotSpo = () => {
   return useQuery({
     queryKey: ["stake-drep-not-spo"],
     queryFn: () => fetchStakeDrepsNotSpo(),
+  });
+};
+
+const fetchPoolRetirment = (hash: string) => {
+  const url = `/pool/retire`;
+
+  const options = {
+    params: {
+      pool_id: hash,
+    },
+  };
+
+  return handleFetch<PoolRetirmentResponse>(url, undefined, options);
+};
+
+export const useFetchPoolRetirment = (hash: string) => {
+  return useQuery({
+    queryKey: ["pool_retirment", hash],
+    queryFn: () => fetchPoolRetirment(hash),
   });
 };

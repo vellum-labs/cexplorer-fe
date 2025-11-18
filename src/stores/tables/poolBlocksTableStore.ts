@@ -20,6 +20,7 @@ export const usePoolBlocksTableStore = handlePersistStore<
       hash: true,
       size: true,
       protocol: true,
+      cert_counter: false,
     },
     isResponsive: true,
     rows: 20,
@@ -32,6 +33,7 @@ export const usePoolBlocksTableStore = handlePersistStore<
       "hash",
       "size",
       "protocol",
+      "cert_counter",
     ],
   },
   set => ({

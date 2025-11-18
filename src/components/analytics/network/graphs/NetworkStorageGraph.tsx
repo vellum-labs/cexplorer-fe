@@ -48,32 +48,36 @@ export const NetworkStorageGraph: FC<NetworkStorageGraphProps> = ({
 
   const epochs = (data ?? []).map(item => item?.no);
 
+  const storageIncreaseMap = new Map<number, number>();
+  const storageTotalMap = new Map<number, number>();
+
+  (allTime ?? []).forEach(item => {
+    const countBlk = (item?.stat?.count_block ?? 0) as number;
+    const avgBlkSize = (item?.stat?.avg_block_size ?? 0) as number;
+    const currentTotal = countBlk * avgBlkSize;
+
+    storageIncreaseMap.set(item?.no, currentTotal / bytesPerMb);
+  });
+
+  const sortedAllTime = [...(allTime ?? [])].sort((a, b) => a.no - b.no);
+
   let accumulatedTotal = 0;
+  sortedAllTime.forEach(item => {
+    const countBlk = (item?.stat?.count_block ?? 0) as number;
+    const avgBlkSize = (item?.stat?.avg_block_size ?? 0) as number;
+    const currentTotal = countBlk * avgBlkSize;
 
-  const storageIncrease = (allTime ?? [])
-    .map((item, index) => {
-      const countBlk = (item?.stat?.count_block ?? 0) as number;
-      const avgBlkSize = (item?.stat?.avg_block_size ?? 0) as number;
-      const currentTotal = countBlk * avgBlkSize;
+    accumulatedTotal += currentTotal;
+    storageTotalMap.set(item?.no, accumulatedTotal / bytesPerMb);
+  });
 
-      const increase = index > 0 ? currentTotal : 0;
-
-      accumulatedTotal += currentTotal;
-
-      return {
-        increase: increase / bytesPerMb,
-        total: accumulatedTotal / bytesPerMb,
-      };
-    })
-    .slice(0, (data ?? []).length);
-
-  const storageIncreaseData = storageIncrease.map(item =>
-    item.increase.toFixed(2),
+  const storageIncreaseData = epochs.map(epochNo =>
+    (storageIncreaseMap.get(epochNo) ?? 0).toFixed(2),
   );
 
-  const storageTotalData = [...storageIncrease]
-    .reverse()
-    .map(item => item.total.toFixed(2));
+  const storageTotalData = epochs.map(epochNo =>
+    (storageTotalMap.get(epochNo) ?? 0).toFixed(2),
+  );
 
   const { splitLineColor, textColor, bgColor, inactivePageIconColor } =
     useGraphColors();
@@ -234,7 +238,7 @@ export const NetworkStorageGraph: FC<NetworkStorageGraphProps> = ({
         name: "Storage Total (MB)",
         yAxisIndex: 1,
         lineStyle: {
-          color: textColor,
+          color: "#22c55e",
         },
         showSymbol: false,
         symbol: "none",
@@ -242,23 +246,6 @@ export const NetworkStorageGraph: FC<NetworkStorageGraphProps> = ({
       },
     ],
   };
-
-  useEffect(() => {
-    if (window && "localStorage" in window) {
-      const graphStore = JSON.parse(
-        localStorage.getItem("network_storage_graph_store") as string,
-      );
-
-      if (graphStore) {
-        setGraphsVisibility(graphStore);
-      } else {
-        localStorage.setItem(
-          "network_storage_graph_store",
-          JSON.stringify(graphsVisibility),
-        );
-      }
-    }
-  }, []);
 
   useEffect(() => {
     if (setJson) {
@@ -293,11 +280,7 @@ export const NetworkStorageGraph: FC<NetworkStorageGraphProps> = ({
           onEvents={{
             legendselectchanged: params => {
               const { selected } = params;
-
-              localStorage.setItem(
-                "network_storage_graph_store",
-                JSON.stringify(selected),
-              );
+              setGraphsVisibility(selected);
             },
           }}
           option={option}

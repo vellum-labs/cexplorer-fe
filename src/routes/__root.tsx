@@ -16,7 +16,11 @@ import { VersionWatcher } from "@/components/global/VersionWatcher";
 import Navbar from "@/components/layouts/Navbar";
 import { ErrorBoundary } from "@/pages/error/ErrorBoundary";
 
-import { useThemeStore, GlobalSearchProvider, useLocaleStore } from "@vellumlabs/cexplorer-sdk";
+import {
+  useThemeStore,
+  GlobalSearchProvider,
+  useLocaleStore,
+} from "@vellumlabs/cexplorer-sdk";
 import { useGenerateSW } from "@/hooks/useGenerateSW";
 import { useState } from "react";
 import { setGlobalAbortSignal } from "@/lib/handleFetch";
@@ -26,9 +30,14 @@ import { useFetchMiscBasic, useFetchMiscSearch } from "@/services/misc";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const RootComponent = () => {
+  useGenerateSW();
+
+  const [updateModal, setUpdateModal] = useState<boolean>(false);
+
+  const [clickedUrl, setClickedUrl] = useState<string | null>(null);
+
   const { notFound, setNotFound } = useNotFound();
   const location = useLocation();
-  const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
   const { location: locationState } = useRouterState();
 
@@ -131,8 +140,19 @@ const RootComponent = () => {
     };
   }, [locationState.pathname, locationState.searchStr]);
 
+  useEffect(() => {
+    const updateModal = localStorage.getItem("should_update");
+
+    if (updateModal && updateModal === "true") {
+      setUpdateModal(true);
+    }
+  }, []);
+
   return (
-    <GlobalSearchProvider useFetchMiscSearch={useFetchMiscSearch} locale={locale}>
+    <GlobalSearchProvider
+      useFetchMiscSearch={useFetchMiscSearch}
+      locale={locale}
+    >
       <>
         <Helmet>
           <title>Cexplorer.io</title>
@@ -181,7 +201,10 @@ const RootComponent = () => {
         {updateReady && <SwReadyModal firstInstall={isFirstInstall} />}
         <VersionWatcher />
         {clickedUrl && (
-          <SafetyLinkModal url={clickedUrl} onClose={() => setClickedUrl(null)} />
+          <SafetyLinkModal
+            url={clickedUrl}
+            onClose={() => setClickedUrl(null)}
+          />
         )}
         {/* <TanStackRouterDevtools /> */}
         {/* <ReactQueryDevtools /> */}

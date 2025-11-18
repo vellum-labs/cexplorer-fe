@@ -16,14 +16,15 @@ export const useDrepDelegationsTableStore = handlePersistStore<
   {
     columnsVisibility: {
       date: true,
-      address: true,
-      amount: true,
-      delegation: true,
+      drep: true,
+      active_stake: true,
+      live_stake: true,
+      loyalty: true,
       tx: true,
     },
     isResponsive: true,
     rows: 20,
-    columnsOrder: ["date", "address", "amount", "delegation", "tx"],
+    columnsOrder: ["date", "drep", "active_stake", "live_stake", "loyalty", "tx"],
   },
   set => ({
     setColumnVisibility: (columnKey, isVisible) =>

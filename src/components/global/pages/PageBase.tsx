@@ -7,6 +7,7 @@ import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
 import metadata from "../../../../conf/metadata/en-metadata.json";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { useFetchMiscBasic } from "@/services/misc";
+import { HomepageAds } from "@/components/homepage/HomepageAds";
 
 interface PageBaseInitProps {
   children: ReactNode;
@@ -27,6 +28,7 @@ interface PageBaseInitProps {
   showMetadata?: boolean;
   isHomepage?: boolean;
   homepageAd?: ReactNode;
+  customPage?: boolean;
 }
 
 interface PageWithSimpleMetadata extends PageBaseInitProps {
@@ -59,8 +61,24 @@ export const PageBase: FC<PageBaseProps> = ({
   showMetadata = true,
   isHomepage,
   homepageAd,
+  customPage,
 }) => {
   const miscBasicQuery = useFetchMiscBasic();
+
+  const miscBasicAds =
+    !miscBasicQuery.isLoading &&
+    miscBasicQuery?.data &&
+    miscBasicQuery?.data?.data?.ads &&
+    Array.isArray(miscBasicQuery?.data?.data?.ads) &&
+    miscBasicQuery?.data?.data?.ads.length > 0
+      ? miscBasicQuery?.data?.data?.ads
+      : false;
+
+  const HOMEPAGE_ADS_TYPE = "header_featured";
+
+  const homepageAds = miscBasicAds
+    ? miscBasicAds.filter(item => item.type === HOMEPAGE_ADS_TYPE)
+    : undefined;
 
   const metadataTitleInit = metadataOverride
     ? metadataOverride?.title
@@ -87,7 +105,14 @@ export const PageBase: FC<PageBaseProps> = ({
           qrCode={qrCode}
           breadcrumbSeparator={breadcrumbSeparator}
           isHomepage={isHomepage}
-          homepageAd={homepageAd}
+          homepageAd={
+            homepageAd && homepageAds ? (
+              <HomepageAds
+                miscBasicAds={homepageAds.sort(() => Math.random() - 0.5)}
+              />
+            ) : undefined
+          }
+          customPage={customPage}
         />
       )}
       {adsCarousel && (

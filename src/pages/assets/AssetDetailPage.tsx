@@ -204,6 +204,7 @@ export const AssetDetailPage: FC = () => {
           nameByRegistry || title,
         ),
       }}
+      homepageAd
     >
       <section className='flex w-full justify-center'>
         <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 px-mobile md:px-desktop xl:flex-nowrap xl:justify-start'>

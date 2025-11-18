@@ -207,6 +207,7 @@ export const PowerThresholdsPage: FC = () => {
                   </h3>
                   <GovernanceThresholdsSection
                     thresholdProps={voteOfHardForkInitiationProps}
+                    onlySecurity={true}
                   />
 
                   <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>

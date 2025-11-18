@@ -6,6 +6,7 @@ export interface ContractInteractionsData {
   tx: Omit<TxBasicInfo, "block">;
   data: {
     purpose: string;
+    type: string;
     unit_mem: number;
     data_hash: string | null;
     data_value: string | null;

@@ -36,8 +36,12 @@ export const useBlockListTableStore = (storeKey?: string) =>
         "slot_no",
         "tx_count",
         "minted_by",
+        "hash",
         "epoch_slot_no",
+        "vrf_key",
+        "protocol",
         "size",
+        "cert_counter",
       ],
     },
     set => ({

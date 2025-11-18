@@ -37,6 +37,8 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y wireguard
+          echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+          echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf
           echo "$WG_CONFIG" | sudo tee /etc/wireguard/wg0.conf
           sudo wg-quick up wg0
 
