@@ -1,11 +1,13 @@
 import { ConstLabelBadge } from "@vellumlabs/cexplorer-sdk";
 import { JsonDisplay } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { SensitiveContentWarning } from "@vellumlabs/cexplorer-sdk";
 import { useFetchTxDetail } from "@/services/tx";
 import type { TxMetadata } from "@/types/txTypes";
 import { getRouteApi } from "@tanstack/react-router";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
+import { useState } from "react";
 
 const MetadataTabItem = () => {
   const route = getRouteApi("/tx/$hash");
@@ -16,6 +18,10 @@ const MetadataTabItem = () => {
 
   const { data: basicData } = useFetchMiscBasic();
   const miscConst = useMiscConst(basicData?.data.version.const);
+
+  const [showContent, setShowContent] = useState(() => {
+    return localStorage.getItem("showSensitiveContent") === "true";
+  });
 
   for (const obj in metadata) {
     metadataArr.push({ [obj]: metadata[obj] });
@@ -29,6 +35,17 @@ const MetadataTabItem = () => {
       <div className='flex flex-col gap-1.5'>
         <LoadingSkeleton rounded='xl' height='130px' />
       </div>
+    );
+  }
+
+  if (!showContent) {
+    return (
+      <SensitiveContentWarning
+        onDisplay={() => setShowContent(true)}
+        localStorageKey='showSensitiveContent'
+        title='User-generated content'
+        description='Following content is user-generated and unmoderated by the Cexplorer team.'
+      />
     );
   }
 
