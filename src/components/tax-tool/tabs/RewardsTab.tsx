@@ -72,9 +72,47 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
     return rateData.ada[0]?.close || 0;
   }, []);
 
-  const getAdaSecondaryRate = useCallback((): number => {
+  const getAdaSecondaryRate = useCallback((reward: any): number => {
+    if (secondaryCurrency === 'usd') {
+      if (
+        !reward?.spendable_epoch?.rate ||
+        !Array.isArray(reward.spendable_epoch.rate)
+      ) {
+        return 0;
+      }
+
+      const rateData = reward.spendable_epoch.rate[0];
+      if (
+        !rateData?.ada ||
+        !Array.isArray(rateData.ada) ||
+        rateData.ada.length === 0
+      ) {
+        return 0;
+      }
+
+      return rateData.ada[0]?.close || 0;
+    }
+
+    if (
+      !reward?.spendable_epoch?.rate ||
+      !Array.isArray(reward.spendable_epoch.rate)
+    ) {
+      return adaPriceSecondary.todayValue || 0;
+    }
+
+    const rateData = reward.spendable_epoch.rate[0];
+    const currencyData = rateData?.[secondaryCurrency];
+
+    if (
+      currencyData &&
+      Array.isArray(currencyData) &&
+      currencyData.length > 0
+    ) {
+      return currencyData[0]?.close || 0;
+    }
+
     return adaPriceSecondary.todayValue || 0;
-  }, [adaPriceSecondary.todayValue]);
+  }, [secondaryCurrency, adaPriceSecondary.todayValue]);
 
   useEffect(() => {
     if (page !== 1 || !paginatedRewards.length) return;
@@ -82,7 +120,7 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
     const now = new Date();
     const monthsData: Record<
       string,
-      { ada: number; usd: number; secondary: number }
+      { ada: number; usd: number; secondary: number; epochs: Set<number> }
     > = {};
 
     paginatedRewards.forEach(reward => {
@@ -97,21 +135,22 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
 
       if (monthsDiff < 3 && monthsDiff >= 0) {
         if (!monthsData[monthKey]) {
-          monthsData[monthKey] = { ada: 0, usd: 0, secondary: 0 };
+          monthsData[monthKey] = { ada: 0, usd: 0, secondary: 0, epochs: new Set() };
         }
 
         const adaAmount = reward.amount / 1_000_000;
         const usdRate = getAdaUsdRate(reward);
-        const secondaryRate = getAdaSecondaryRate();
+        const secondaryRate = getAdaSecondaryRate(reward);
 
         monthsData[monthKey].ada += adaAmount;
         monthsData[monthKey].usd += adaAmount * usdRate;
         monthsData[monthKey].secondary += adaAmount * secondaryRate;
+        monthsData[monthKey].epochs.add(reward.earned_epoch);
       }
     });
 
     const summary = Object.entries(monthsData)
-      .map(([period, data]) => ({ period, ...data }))
+      .map(([period, data]) => ({ period, epochs: data.epochs.size, ada: data.ada, usd: data.usd, secondary: data.secondary }))
       .sort((a, b) => b.period.localeCompare(a.period))
       .slice(0, 3);
 

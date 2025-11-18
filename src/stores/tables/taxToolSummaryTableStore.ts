@@ -23,6 +23,7 @@ export const useTaxToolSummaryTableStore = handlePersistStore<
   {
     columnsVisibility: {
       period: true,
+      epochs: true,
       rewards_ada: true,
       rewards_usd: true,
       rewards_secondary: true,
@@ -31,6 +32,7 @@ export const useTaxToolSummaryTableStore = handlePersistStore<
     rows: 20,
     columnsOrder: [
       "period",
+      "epochs",
       "rewards_ada",
       "rewards_usd",
       "rewards_secondary",

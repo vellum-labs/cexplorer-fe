@@ -11,7 +11,7 @@ export const Route = createFileRoute("/tax-tool")({
   validateSearch: (input: PaginatedSearchParams) =>
     z
       .object({
-        view: z.string().optional().catch(""),
+        stake: z.string().optional().catch(""),
       })
       .parse(input),
 });
