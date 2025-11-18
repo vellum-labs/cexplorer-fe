@@ -60,7 +60,7 @@ export const AssetMetaDataTab: FC<AssetMetaDataTabProps> = ({
     <div className='flex flex-grow flex-col gap-1.5 md:flex-shrink-0'>
       <>
         {items.length > 0 && (
-          <div className='w-fit border'>
+          <div className='w-fit rounded-m border border-border'>
             <Dropdown
               id='1'
               width='200px'
