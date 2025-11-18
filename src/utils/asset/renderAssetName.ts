@@ -9,7 +9,7 @@ interface AssetProps {
 export const renderAssetName = ({ asset, name }: AssetProps) => {
   const assetName = asset?.name || name || "";
 
-  if (!name) {
+  if (!assetName) {
     return "n/a";
   }
 
