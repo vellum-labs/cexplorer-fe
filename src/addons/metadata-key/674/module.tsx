@@ -3,9 +3,15 @@ import { SensitiveContentWarning } from "@vellumlabs/cexplorer-sdk";
 import { useState } from "react";
 
 export function render({ type, data }: ModuleInput): ModuleOutput {
-  const messages: string[] = data?.md.msg ?? [];
+  const msgData = data?.md.msg;
 
-  if (!Array.isArray(messages) || messages.length === 0) {
+  const messages: string[] = Array.isArray(msgData)
+    ? msgData
+    : msgData
+      ? [msgData]
+      : [];
+
+  if (messages.length === 0) {
     return { component: null };
   }
 
