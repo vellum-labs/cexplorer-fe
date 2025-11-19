@@ -2,17 +2,18 @@ import type { PoolData } from "@/types/poolTypes";
 import type { NewPoolsColumns, TableColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
-import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { Check, X } from "lucide-react";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 
 import { useFetchPoolsList } from "@/services/pools";
 import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useNewPoolsListTableStore } from "@/stores/tables/newPoolsListTableStore";
-import { Link, useSearch } from "@tanstack/react-router";
+import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useFetchMiscBasic } from "@/services/misc";
 
@@ -20,7 +21,6 @@ import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "@/components/tx/HashCell";
 import { newPoolsTableOptions } from "@/constants/tables/newPoolsTableOptions";
-import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 
@@ -68,31 +68,13 @@ export const NewPoolsListPage: FC = () => {
     {
       key: "pool",
       render: item => (
-        <div className='flex flex-col'>
-          <Link to='/pool/$id' params={{ id: item.pool_id }}>
-            <span
-              title={item.pool_id}
-              className='cursor-pointer text-text-sm text-primary'
-            >
-              {item.pool_name?.ticker && `[${item.pool_name.ticker}] `}
-              {item.pool_name?.name && item.pool_name.name}
-            </span>
-          </Link>
-          <div className='item-center flex gap-1'>
-            <Link to='/pool/$id' params={{ id: item.pool_id }}>
-              <span
-                className={`${item.pool_name?.ticker ? "text-text-xs" : "text-text-sm"} text-primary`}
-              >
-                {formatString(item.pool_id, "long")}
-              </span>
-            </Link>
-            <Copy
-              copyText={item.pool_id}
-              size={10}
-              className='stroke-grayText translate-y-[6px]'
-            />
-          </div>
-        </div>
+        <PoolCell
+          poolInfo={{
+            id: item.pool_id,
+            meta: item.pool_name,
+          }}
+          poolImageUrl={generateImageUrl(item.pool_id, "ico", "pool")}
+        />
       ),
       jsonFormat: item => {
         if (!item.pool_name.ticker && !item.pool_name.name && !item.pool_id) {
