@@ -41,7 +41,14 @@ export const HomepageOverview: FC = () => {
       icon: <Box className='text-primary' />,
       label: (
         <span className='text-text-sm font-semibold'>
-          Epoch <span className='text-primary'>{miscConst?.no}</span>
+          Epoch{" "}
+          <Link
+            to='/epoch/$no'
+            params={{ no: String(miscConst?.no ?? 0) }}
+            className='text-primary'
+          >
+            {miscConst?.no}
+          </Link>
         </span>
       ),
       content: <HomepageCardanoEpoch miscConst={miscConst} />,
