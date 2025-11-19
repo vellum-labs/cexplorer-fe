@@ -21,6 +21,7 @@ export const Route = createFileRoute("/retired-delegations/")({
         limit: z.number().optional().catch(20),
         type: z.string().optional().catch("live"),
         order: z.string().optional().catch("date"),
+        tab: z.enum(["live", "active"]).optional().catch("live"),
       })
       .parse(input),
 });
