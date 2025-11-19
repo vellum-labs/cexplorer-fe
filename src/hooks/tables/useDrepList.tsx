@@ -541,17 +541,17 @@ export const useDrepList = ({
               forceDirection='left'
               content={
                 <div>
-                  {item.pool.map(({ ident }: { ident: string }) => (
+                  {item.pool.map((poolId: string) => (
                     <div
-                      key={ident}
+                      key={poolId}
                       className='flex items-center justify-end gap-1/2 text-right'
                     >
-                      <Link to='/pool/$id' params={{ id: ident }}>
+                      <Link to='/pool/$id' params={{ id: poolId }}>
                         <p className='min-w-36 text-primary'>
-                          {formatString(ident, "long")}
+                          {formatString(poolId, "long")}
                         </p>
                       </Link>
-                      <Copy copyText={ident} />
+                      <Copy copyText={poolId} />
                     </div>
                   ))}
                 </div>

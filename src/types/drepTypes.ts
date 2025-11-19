@@ -163,9 +163,7 @@ export interface DrepListData {
   gov_action?: {
     vote: string;
   } | null;
-  pool?: {
-    ident: string;
-  }[];
+  pool?: string[];
   top_delegator: {
     view: string;
     stake: number;
