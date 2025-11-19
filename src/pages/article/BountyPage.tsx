@@ -4,9 +4,8 @@ import { ExternalLink, MessageCircle, Heart, ArrowRight } from "lucide-react";
 import { colors } from "@/constants/colors";
 
 const guidelines = [
-  "Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.",
-  "Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.",
-  "Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.",
+  "Not available yet. We will open this initiative soon.",
+  "TBA.",
 ];
 
 export const BountyPage = () => {
@@ -23,8 +22,7 @@ export const BountyPage = () => {
         <div className='mb-6 w-full max-w-[800px] rounded-xl border border-border p-6'>
           <h3 className='text-xl mt-0 font-semibold'>Guidelines</h3>
           <p className='text-sm mb-4 text-grayTextPrimary'>
-            Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque
-            faucibus ex sapien vitae pellentesque sem placerat.
+            Not available yet.
           </p>
           <ul className='mb-4 flex flex-col gap-3'>
             {guidelines.map((guideline, index) => (
@@ -36,7 +34,7 @@ export const BountyPage = () => {
             ))}
           </ul>
           <p className='text-sm'>
-            <strong>Note:</strong> XYZ
+            <strong></strong>
           </p>
         </div>
 
@@ -51,7 +49,7 @@ export const BountyPage = () => {
           </div>
           <div className='flex-shrink-0'>
             <a
-              href='https://github.com'
+              href='https://github.com/vellum-labs/cexplorer-fe/issues'
               target='_blank'
               rel='noreferrer noopener'
             >
@@ -77,7 +75,7 @@ export const BountyPage = () => {
           </div>
           <div className='flex-shrink-0'>
             <a
-              href='https://github.com'
+              href='https://github.com/vellum-labs/cexplorer-fe/issues'
               target='_blank'
               rel='noreferrer noopener'
             >
@@ -110,7 +108,7 @@ export const BountyPage = () => {
             </p>
             <div className='ml-auto mt-auto'>
               <a
-                href='https://discord.gg/yourlink'
+                href='https://discord.gg/PGCmmQC3dj'
                 target='_blank'
                 rel='noreferrer noopener'
               >
