@@ -19,7 +19,7 @@ export const NetworkEnergyConsumption: FC = () => {
 
   const consumptionPerDevice = 45;
   const estimatedBitcoinConsumptionY = 185000;
-  const conversionFactor = 1_000_000;
+  const conversionFactor = 1_000_000_000;
 
   const countPoolRelayUniq = lastDataItem?.stat?.count_pool_relay_uniq ?? 0;
   const countPool = lastDataItem?.stat?.count_pool ?? 0;
@@ -28,6 +28,7 @@ export const NetworkEnergyConsumption: FC = () => {
   const estimatedYearlyConsumption =
     (consumptionPerDevice * 365 * 24 * estimatedUniqueDevices) /
     conversionFactor;
+
   const cardanoVsBitcoinEfficiency =
     estimatedBitcoinConsumptionY / estimatedYearlyConsumption;
 
