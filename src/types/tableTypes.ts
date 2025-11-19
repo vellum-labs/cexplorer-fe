@@ -153,6 +153,9 @@ export type DrepDelegationsColumns = {
   live_stake: boolean;
   loyalty: boolean;
   tx: boolean;
+  address: boolean;
+  amount: boolean;
+  delegation: boolean;
 };
 
 export type PoolStructureColumns = {
