@@ -8,20 +8,11 @@ import FeatureData from "@/resources/images/features/feature_data.svg";
 import FeatureGovernance from "@/resources/images/features/feature_governance.svg";
 
 import { useEffect, useRef } from "react";
-import { useNotFound } from "@/stores/useNotFound";
 
 export const ProPage = () => {
   const query = useFetchArticleDetail("en", "page", "pro");
   const data = query.data;
   const name = data?.name;
-
-  const { setNotFound } = useNotFound();
-
-  useEffect(() => {
-    if (!data?.data || data.data.length === 0) {
-      setNotFound(true);
-    }
-  }, [data, setNotFound]);
 
   const accordionRef = useRef<HTMLDivElement>(null);
 
