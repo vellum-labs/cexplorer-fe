@@ -5,6 +5,8 @@ export const useGenerateSW = () => {
     if ("serviceWorker" in navigator && !(window as any).__DISABLE_SW__) {
       const swUrl = `/sw.js`;
 
+      const swInstalled = sessionStorage.getItem("sw_installed");
+
       navigator.serviceWorker
         .register(swUrl, {
           scope: "/",
@@ -36,12 +38,15 @@ export const useGenerateSW = () => {
 
                 switch (sw.state) {
                   case "activated": {
-                    console.log("✅ SW activated! Setting should_update...");
-                    console.log("⏰ Current time:", new Date().toISOString());
-                    localStorage.setItem("should_update", "true");
-                    console.log("🔄 Timeout fired! Reloading now...");
-                    console.log("⏰ Reload time:", new Date().toISOString());
-                    location.reload();
+                    if (!swInstalled) {
+                      console.log("✅ SW activated! Setting should_update...");
+                      console.log("⏰ Current time:", new Date().toISOString());
+                      localStorage.setItem("should_update", "true");
+                      console.log("🔄 Timeout fired! Reloading now...");
+                      console.log("⏰ Reload time:", new Date().toISOString());
+                      sessionStorage.setItem("sw_installed", "true");
+                      location.reload();
+                    }
                     break;
                   }
                   case "installing":
