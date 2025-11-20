@@ -46,7 +46,6 @@ const RootComponent = () => {
 
   const { theme } = useThemeStore();
   const { locale } = useLocaleStore();
-  useGenerateSW();
 
   const [resetKey, setResetKey] = useState<number>(0);
 
