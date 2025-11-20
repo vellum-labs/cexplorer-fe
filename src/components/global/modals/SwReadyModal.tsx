@@ -24,7 +24,7 @@ export const SwReadyModal: FC<SwReadyModalProps> = ({
   const message = testMessage ? testMessage.data.en : data?.data?.message?.en;
 
   const handleClose = () => {
-    localStorage.setItem("should_update", "false");
+    localStorage.removeItem("should_update");
 
     if (onClose) {
       onClose();
