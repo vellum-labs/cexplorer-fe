@@ -8,6 +8,7 @@ import FeatureData from "@/resources/images/features/feature_data.svg";
 import FeatureGovernance from "@/resources/images/features/feature_governance.svg";
 
 import { useEffect, useRef } from "react";
+import { Banner } from "@/components/global/Banner";
 
 export const ProPage = () => {
   const query = useFetchArticleDetail("en", "page", "pro");
@@ -114,6 +115,7 @@ export const ProPage = () => {
         ref={accordionRef}
         className='flex min-h-minHeight w-full flex-col items-center px-mobile md:px-desktop'
       >
+        <Banner description='Mint is not live yet. It will be available at a later date.' />
         {parse(data?.data.map(item => item).join("") || "")}
       </main>
     </>
