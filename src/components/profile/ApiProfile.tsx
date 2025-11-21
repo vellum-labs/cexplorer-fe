@@ -28,6 +28,7 @@ import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { SpinningLoader } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { EmptyState } from "@vellumlabs/cexplorer-sdk";
+import { ProBadge } from "@vellumlabs/cexplorer-sdk";
 import ConnectWalletModal from "../wallet/ConnectWalletModal";
 import { useAuthToken } from "@/hooks/useAuthToken";
 
@@ -117,14 +118,18 @@ export const ApiProfile = () => {
         <span className='flex items-center gap-1/2 text-grayTextPrimary'>
           {/* Your plan: <Badge color='gray'>{!nfts ? "Basic" : "PRO"}</Badge> */}
         </span>
-        <Link
-          to={
-            "/profile?tab=pro" as FileRoutesByPath[keyof FileRoutesByPath]["path"]
-          }
-          className='gold-shimmer flex items-center gap-1/2 bg-purpleText bg-clip-text font-medium text-transparent underline hover:text-transparent'
-        >
-          NFTs held: <span className=''>{nfts}</span>
-        </Link>
+        {!nfts ? (
+          <ProBadge get />
+        ) : (
+          <Link
+            to={
+              "/profile?tab=pro" as FileRoutesByPath[keyof FileRoutesByPath]["path"]
+            }
+            className='gold-shimmer flex items-center gap-1/2 bg-purpleText bg-clip-text font-medium text-transparent underline hover:text-transparent'
+          >
+            NFTs held: <span className=''>{nfts}</span>
+          </Link>
+        )}
         <span className='flex items-center gap-1/2 text-grayTextPrimary'>
           API key limit: <span className='text-text'>1</span>
         </span>

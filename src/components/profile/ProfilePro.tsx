@@ -483,14 +483,18 @@ export const ProfilePro = () => {
                     <ProBadge />
                   )}
                 </span>
-                <Link
-                  to={
-                    "/profile?tab=pro" as FileRoutesByPath[keyof FileRoutesByPath]["path"]
-                  }
-                  className='gold-shimmer flex items-center gap-1/2 bg-purpleText bg-clip-text font-medium text-transparent underline hover:text-transparent'
-                >
-                  NFTs held: <span className=''>{totalCount}</span>
-                </Link>
+                {!totalCount ? (
+                  <ProBadge />
+                ) : (
+                  <Link
+                    to={
+                      "/profile?tab=pro" as FileRoutesByPath[keyof FileRoutesByPath]["path"]
+                    }
+                    className='gold-shimmer flex items-center gap-1/2 bg-purpleText bg-clip-text font-medium text-transparent underline hover:text-transparent'
+                  >
+                    NFTs held: <span className=''>{totalCount}</span>
+                  </Link>
+                )}
                 <span className='flex items-center gap-1/2 text-grayTextPrimary'>
                   API key limit: <span className='text-text'>1</span>
                 </span>

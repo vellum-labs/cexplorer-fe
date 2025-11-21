@@ -5,13 +5,13 @@ import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
+import { ProBadge } from "@vellumlabs/cexplorer-sdk";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@vellumlabs/cexplorer-sdk";
-import { colors } from "@/constants/colors";
 import { useFetchPollList } from "@/services/misc";
 import { useFetchUserInfo } from "@/services/user";
 import type { TableColumns } from "@/types/tableTypes";
@@ -20,7 +20,7 @@ import { formatDate } from "@vellumlabs/cexplorer-sdk";
 import type { FileRoutesByPath } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import parse from "html-react-parser";
-import { Info, Sparkles } from "lucide-react";
+import { Info } from "lucide-react";
 import { useEffect, useState } from "react";
 import { PageBase } from "@/components/global/pages/PageBase";
 
@@ -192,15 +192,7 @@ export const PollsListPage = () => {
             mobileItemsCount={3}
           />
           <div className='-mt-8 mb-2 ml-auto flex items-center gap-2'>
-            {nfts === 0 && (
-              <Link
-                to='/pro'
-                className='gold-shimmer flex min-w-fit items-center gap-1/2 bg-purpleText bg-clip-text text-text-sm font-medium text-transparent underline hover:text-transparent'
-              >
-                Get Cexplorer PRO{" "}
-                <Sparkles color={colors.purpleText} size={15} />
-              </Link>
-            )}
+            {nfts === 0 && <ProBadge get />}
             <button
               onClick={() => setOpenFaq(true)}
               className='flex min-w-fit items-center gap-1/2 text-text-sm text-grayTextPrimary underline underline-offset-2'
