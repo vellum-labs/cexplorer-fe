@@ -75,7 +75,7 @@ export const EpochPots: FC<EpochPotsProps> = ({ stats, constData }) => {
     },
     {
       label: (
-        <Tooltip content='Portion of rewards coming from fees vs reserves'>
+        <Tooltip content='Portion of staking rewards coming from fees vs reserves'>
           <span className='cursor-help'>Fees / Reserves</span>
         </Tooltip>
       ),
