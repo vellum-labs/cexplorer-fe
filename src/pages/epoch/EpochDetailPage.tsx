@@ -186,7 +186,7 @@ const EpochDetailPage: FC = () => {
                       stats={statsData}
                       startTime={statsData.epoch?.start_time ?? ""}
                     />
-                    <EpochPots stats={statsData} />
+                    <EpochPots stats={statsData} constData={constData} />
                   </>
                 )}
               </div>
