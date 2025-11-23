@@ -59,12 +59,16 @@ const PoolRewardsTable = ({
   ).toFixed(2);
   const epochElapsed = useElapsedEpochNumber(miscConst);
   const proratedLuck = detailQuery.data?.data?.epochs[0].data.block
-    ? (
-        ((detailQuery.data?.data?.blocks?.epoch ?? 0) /
-          detailQuery.data?.data?.epochs[0]?.data?.block?.estimated) *
-        100 *
-        (1 + epochElapsed)
-      ).toFixed(2) + "%"
+    ? (() => {
+        const estimated = detailQuery.data?.data?.epochs[0]?.data?.block?.estimated ?? 0;
+        if (estimated === 0) return "-";
+
+        return (
+          ((detailQuery.data?.data?.blocks?.epoch ?? 0) / estimated) *
+          100 *
+          (1 + epochElapsed)
+        ).toFixed(2) + "%";
+      })()
     : "-";
 
   const totalCount = poolRewardsQuery.data?.pages[0].data.count;
@@ -213,7 +217,13 @@ const PoolRewardsTable = ({
               {proratedLuck}
             </div>
           ) : (
-            <>{((item.block?.luck ?? 0) * 100).toFixed(1) + "%"}</>
+            <>
+              {(() => {
+                const luck = (item.block?.luck ?? 0) * 100;
+                if (!isFinite(luck)) return "-";
+                return luck.toFixed(1) + "%";
+              })()}
+            </>
           )}
         </div>
       ),
