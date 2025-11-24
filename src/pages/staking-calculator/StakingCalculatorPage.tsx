@@ -94,7 +94,7 @@ export const StakingCalculatorPage: FC = () => {
     >
       <section className='flex w-full justify-center'>
         <div className='flex w-full max-w-desktop flex-col gap-3 p-mobile md:flex-row md:items-start md:p-desktop'>
-          <div className='flex flex-1 flex-col gap-4 rounded-xl border border-border bg-cardBg p-4 md:p-6'>
+          <div className='flex flex-1 flex-col gap-4 rounded-xl border border-border bg-cardBg p-2'>
             <div className='flex flex-col gap-2'>
               <h3 className='text-text-lg font-semibold'>
                 Amount of ADA to stake
@@ -115,7 +115,7 @@ export const StakingCalculatorPage: FC = () => {
             </div>
 
             <div className='grid grid-cols-1 gap-3 md:grid-cols-2'>
-              <div className='flex flex-col items-center gap-1 rounded-xl border border-border bg-cardBg p-4'>
+              <div className='flex flex-col items-center gap-1 rounded-xl border border-border bg-cardBg p-2'>
                 <p className='text-text-2xl font-bold'>
                   {selectedPool && (selectedRoa ?? poolData?.stats?.recent?.roa)
                     ? `${adaAmount ? ((Number(adaAmount) * (selectedRoa ?? poolData?.stats?.recent?.roa ?? 0)) / 100).toFixed(2) : "0"} ADA`
@@ -127,7 +127,7 @@ export const StakingCalculatorPage: FC = () => {
                   Staking Reward per year in ADA
                 </p>
               </div>
-              <div className='flex flex-col items-center gap-1 rounded-xl border border-border bg-cardBg p-4'>
+              <div className='flex flex-col items-center gap-1 rounded-xl border border-border bg-cardBg p-2'>
                 <p className='text-text-2xl font-bold'>
                   {selectedPool && (selectedRoa ?? poolData?.stats?.recent?.roa)
                     ? `${(selectedRoa ?? poolData?.stats?.recent?.roa ?? 0).toFixed(2)}%`
@@ -168,21 +168,9 @@ export const StakingCalculatorPage: FC = () => {
           </div>
 
           <div className='flex w-full flex-col-reverse gap-3 md:w-[400px] md:flex-col'>
-            <div className='flex flex-col gap-3 rounded-xl border border-border bg-cardBg p-4 md:p-6'>
+            <div className='flex flex-col gap-3 rounded-xl border border-border bg-cardBg p-2'>
               <h3 className='text-text-lg font-semibold'>Information</h3>
               <div className='flex flex-col gap-3 text-text-sm text-grayTextPrimary'>
-                <p>
-                  This is a simplified, open-source version of a{" "}
-                  <a
-                    href='https://cardano.org/calculator/'
-                    className='text-primary'
-                    target='_blank'
-                    rel='noopener noreferrer'
-                  >
-                    Cardano Foundation's staking rewards calculator
-                  </a>
-                  .
-                </p>
                 <p>
                   It uses live network data to estimate potential rewards when
                   you delegate your ADA to a staking pool.
