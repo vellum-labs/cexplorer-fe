@@ -46,7 +46,6 @@ const RootComponent = () => {
 
   const { theme } = useThemeStore();
   const { locale } = useLocaleStore();
-  useGenerateSW();
 
   const [resetKey, setResetKey] = useState<number>(0);
 
@@ -152,9 +151,21 @@ const RootComponent = () => {
   }, []);
 
   useEffect(() => {
+    let activeTransition: ViewTransition | null = null;
+
     const unsubscribe = router.subscribe("onBeforeNavigate", () => {
+      if (activeTransition) {
+        return;
+      }
+
       if ("startViewTransition" in document) {
-        document.startViewTransition(() => {});
+        activeTransition = document.startViewTransition(() => {});
+
+        activeTransition.finished
+          .catch(() => undefined)
+          .finally(() => {
+            activeTransition = null;
+          });
       }
     });
 

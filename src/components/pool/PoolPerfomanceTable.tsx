@@ -81,7 +81,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
     ...(query.data?.data?.epochs ?? []),
   ];
 
-  const items = (detailedData ?? []).map(item => ({
+  const allItems = (detailedData ?? []).map(item => ({
     epoch: item.no,
     activeStake: item.data.epoch_stake,
     blocks: item.data.block.minted,
@@ -91,10 +91,10 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
     roa: item.data.reward.member_pct,
   }));
 
-  const totalItems = items.length;
+  const totalItems = allItems.length;
 
   const { startTime: firstEpochStartTime } = calculateEpochTimeByNumber(
-    items[0]?.epoch,
+    allItems[0]?.epoch,
     miscConst?.epoch.no ?? 0,
     miscConst?.epoch.start_time ?? "",
   );
@@ -127,7 +127,11 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
     {
       key: "epoch",
       render: item => (
-        <EpochCell no={item?.epoch} showPulseDot currentEpoch={miscConst?.epoch.no} />
+        <EpochCell
+          no={item?.epoch}
+          showPulseDot
+          currentEpoch={miscConst?.epoch.no}
+        />
       ),
       title: "Epoch",
       visible: columnsVisibility.epoch,
@@ -156,7 +160,11 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
                 : "-"}
             </span>
             <DateCell
-              time={startTime ? startTime.toISOString() : ""}
+              time={
+                startTime && !isNaN(startTime.getTime())
+                  ? startTime.toISOString()
+                  : ""
+              }
               withoutConvert
               className='text-text-xs text-grayTextPrimary'
             />
@@ -226,7 +234,11 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
                 : "-"}
             </span>
             <DateCell
-              time={endTime ? endTime.toISOString() : ""}
+              time={
+                endTime && !isNaN(endTime.getTime())
+                  ? endTime.toISOString()
+                  : ""
+              }
               withoutConvert
               className='text-text-xs text-grayTextPrimary'
             />
@@ -389,7 +401,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
   return (
     <>
       <div className='flex items-center gap-1'>
-        <ExportButton columns={columns} items={items} />
+        <ExportButton columns={columns} items={allItems} />
         <TableSettingsDropdown
           rows={rows}
           setRows={setRows}
@@ -409,7 +421,8 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
         itemsPerPage={rows}
         scrollable
         query={query}
-        items={items}
+        pagination={true}
+        items={allItems}
         columns={columns.sort((a, b) => {
           return (
             columnsOrder.indexOf(a.key as keyof PoolPefomanceColumns) -

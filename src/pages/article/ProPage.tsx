@@ -25,6 +25,8 @@ import {
 } from "@/constants/proFeatures";
 import { ProFeatureSection } from "@/components/article/ProFeatureSection";
 
+import { Banner } from "@/components/global/Banner";
+
 const faqItems = [
   {
     question: "How to get the Cexplorer PRO NFT?",
@@ -130,6 +132,7 @@ export const ProPage = () => {
       customPage={true}
     >
       <section className='flex w-full max-w-desktop flex-col items-center gap-16 px-mobile pb-3 md:px-desktop'>
+        <Banner description='Mint is not live yet. It will be available at a later date.' />
         <div className='flex w-full flex-col items-center gap-6 text-center'>
           <h1 className='text-4xl md:text-5xl font-bold'>
             Utilize Cexplorer to the fullest with{" "}
@@ -207,7 +210,7 @@ export const ProPage = () => {
         <ProFeatureSection
           icon={<ApiIcon />}
           title='API Key Access'
-          description='Get access to Cexplorer&apos;s data with a basic API key, enabling easy integration with your projects.'
+          description="Get access to Cexplorer's data with a basic API key, enabling easy integration with your projects."
           features={apiFeatures}
           featureIdPrefix='api'
           imageSrc={FeatureData}
