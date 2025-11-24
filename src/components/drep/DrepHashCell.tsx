@@ -20,24 +20,30 @@ export const DrepHashCell = ({
     setHoverValue(null);
   };
 
+  const handleCopyMouseEnter = () => {
+    setHoverValue(null);
+  };
+
   const isHighlighted = hoverValue === view;
 
   if (!view) return "-";
 
   return (
     <div
-      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className='flex items-center gap-1'
     >
       <Link
         to='/drep/$hash'
         params={{ hash: view }}
+        onMouseEnter={handleMouseEnter}
         className={` ${isHighlighted ? "rounded-s bg-hoverHighlight outline outline-1 outline-highlightBorder" : ""} block overflow-hidden overflow-ellipsis whitespace-nowrap ${enableHover ? "px-1/2" : "px-0"} text-text-sm text-primary`}
       >
         {formatString(view, "long")}
       </Link>
-      <Copy copyText={view} />
+      <div onMouseEnter={handleCopyMouseEnter}>
+        <Copy copyText={view} />
+      </div>
     </div>
   );
 };
