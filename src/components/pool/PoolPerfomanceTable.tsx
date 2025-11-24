@@ -234,7 +234,11 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
                 : "-"}
             </span>
             <DateCell
-              time={endTime ? endTime.toISOString() : ""}
+              time={
+                endTime && !isNaN(endTime.getTime())
+                  ? endTime.toISOString()
+                  : ""
+              }
               withoutConvert
               className='text-text-xs text-grayTextPrimary'
             />
