@@ -203,6 +203,7 @@ export const PoolIssuesMissedBlocks: FC = () => {
               label={title}
               size='sm'
               variant={active === key ? "primary" : "tertiary"}
+              className='!border'
             />
           ))}
         </div>
@@ -258,7 +259,7 @@ export const PoolIssuesMissedBlocks: FC = () => {
           ) : query.isError ? (
             <></>
           ) : (
-            <h3 className='basis-[230px]'>
+            <h3 className='whitespace-nowrap'>
               Total of {formatNumber(totalItems)} pool issues
             </h3>
           )}
