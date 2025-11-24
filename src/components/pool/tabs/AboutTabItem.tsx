@@ -48,6 +48,16 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
   const liveStake = detailData?.live_stake ?? 0;
   const pledged = detailData?.pledged ?? 0;
 
+  const ownerItems = Array.isArray(updateItem?.account?.owner)
+    ? updateItem.account.owner.map(owner => ({
+        ...updateItem,
+        account: {
+          ...updateItem.account,
+          owner: [owner],
+        },
+      }))
+    : [];
+
   const ownerColumns = [
     {
       key: "address",
@@ -451,7 +461,7 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
             pagination={false}
             scrollable
             query={updateQuery}
-            items={[updateItem]}
+            items={ownerItems}
             columns={ownerColumns}
           />
         </div>
