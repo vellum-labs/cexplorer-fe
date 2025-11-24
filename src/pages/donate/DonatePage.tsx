@@ -310,7 +310,10 @@ export const DonatePage = () => {
           className='mt-8 flex w-full flex-wrap justify-between rounded-l bg-cardBg px-4 py-5'
         >
           <div className='flex basis-[550px] gap-4'>
-            <img className='hidden shrink md:block' src={CexLogo} />
+            <img
+              className='hidden h-[206px] w-[160px] shrink md:block'
+              src={CexLogo}
+            />
             <div className='flex flex-col gap-1.5'>
               <h2>Stake with Cexplorer.io</h2>
               <p className='max-w-[350px] font-regular text-grayTextPrimary'>
