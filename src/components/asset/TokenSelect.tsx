@@ -17,6 +17,11 @@ import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
 const Row = memo(({ index, style, data }: any) => {
   const item = data[index];
+
+  const decimals = item?.registry?.decimals ?? 0;
+  const value = item?.quantity ?? 0;
+  const adjusted = value / Math.pow(10, decimals);
+
   return (
     <div style={style}>
       <div className='hover:bg-accent flex cursor-pointer items-center justify-between overflow-x-hidden px-2 py-1'>
@@ -29,9 +34,9 @@ const Row = memo(({ index, style, data }: any) => {
             quantity: item.quantity,
           }}
         />
-        <Tooltip content={formatNumber(item.quantity)}>
+        <Tooltip content={formatNumber(adjusted)}>
           <span className='text-text-xs'>
-            {formatNumberWithSuffix(item.quantity)}
+            {formatNumberWithSuffix(adjusted)}
           </span>
         </Tooltip>
       </div>
