@@ -127,7 +127,11 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
     {
       key: "epoch",
       render: item => (
-        <EpochCell no={item?.epoch} showPulseDot currentEpoch={miscConst?.epoch.no} />
+        <EpochCell
+          no={item?.epoch}
+          showPulseDot
+          currentEpoch={miscConst?.epoch.no}
+        />
       ),
       title: "Epoch",
       visible: columnsVisibility.epoch,
@@ -156,7 +160,11 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
                 : "-"}
             </span>
             <DateCell
-              time={startTime ? startTime.toISOString() : ""}
+              time={
+                startTime && !isNaN(startTime.getTime())
+                  ? startTime.toISOString()
+                  : ""
+              }
               withoutConvert
               className='text-text-xs text-grayTextPrimary'
             />
@@ -226,7 +234,11 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
                 : "-"}
             </span>
             <DateCell
-              time={endTime ? endTime.toISOString() : ""}
+              time={
+                endTime && !isNaN(endTime.getTime())
+                  ? endTime.toISOString()
+                  : ""
+              }
               withoutConvert
               className='text-text-xs text-grayTextPrimary'
             />
