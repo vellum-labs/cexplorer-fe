@@ -790,6 +790,15 @@ const routes = [
     api: false,
   },
   {
+    path: "/treasury/projection",
+    title: "Treasury Projection | Cexplorer.io",
+    description:
+      "Project Cardano treasury and reserves balance over the next 20 years. Simulate treasury growth based on transaction fees, governance withdrawals, and monetary policy parameters. Visualize long-term sustainability of Cardano's funding model.",
+    keywords:
+      "treasury projection, Cardano treasury, reserves projection, treasury calculator, monetary policy, treasury simulation, Cexplorer, ADA reserves forecast, treasury sustainability",
+    api: false,
+  },
+  {
     path: "/tx",
     title: "Transactions | Cexplorer.io",
     description:
