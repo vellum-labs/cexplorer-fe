@@ -18,10 +18,12 @@ import { Link, useSearch } from "@tanstack/react-router";
 import { ExternalLink, Landmark, Route, User, X } from "lucide-react";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { BlockCell } from "@vellumlabs/cexplorer-sdk";
 import { GovVoterCell } from "@/components/gov/GovVoterCell";
 import { VoteCell } from "@/components/governance/vote/VoteCell";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { isVoteLate } from "@/utils/governance/isVoteLate";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 
 interface GovernanceDetailAboutTabProps {
   id: string;
@@ -199,6 +201,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
             txHash={item?.tx?.hash}
             proposalId={item?.proposal?.ident?.id}
             isLate={isVoteLate(item)}
+            anchorInfo={item?.anchor}
           />
         );
       },
@@ -240,25 +243,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
 
     {
       key: "epoch",
-      render: item => {
-        if (!item?.proposal?.expiration) {
-          return <p className='text-right'>-</p>;
-        }
-
-        return (
-          <p className='text-right'>
-            <Link
-              className='text-primary'
-              to='/epoch/$no'
-              params={{
-                no: item?.proposal?.expiration,
-              }}
-            >
-              {item?.proposal?.expiration}
-            </Link>
-          </p>
-        );
-      },
+      render: item => <EpochCell no={item?.proposal?.expiration} />,
       title: <p className='w-full text-right'>Epoch</p>,
       visible: columnsVisibility.epoch,
       widthPx: 50,
@@ -270,19 +255,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
           return <p className='text-right'>-</p>;
         }
 
-        return (
-          <p className='text-right'>
-            <Link
-              to='/block/$hash'
-              params={{
-                hash: item?.tx?.block_hash,
-              }}
-              className='text-primary'
-            >
-              {formatNumber(item.tx.block_no)}
-            </Link>
-          </p>
-        );
+        return <BlockCell hash={item?.tx?.block_hash} no={item.tx.block_no} />;
       },
       title: <p className='w-full text-right'>Block</p>,
       visible: columnsVisibility.block,

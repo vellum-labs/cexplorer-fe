@@ -102,10 +102,10 @@ export const DrepListPage = () => {
       content: drepStat?.stake?.total ? (
         <AdaWithTooltip
           data={drepStat.stake.total}
-          triggerClassName='font-semibold !text-2xl !text-text'
+          triggerClassName='text-display-xs font-semibold text-text'
         />
       ) : (
-        <p className='!text-2xl font-semibold !text-text'>-</p>
+        <p className='text-display-xs font-semibold'>-</p>
       ),
       footer: (
         <div className='flex flex-wrap'>
@@ -175,10 +175,10 @@ export const DrepListPage = () => {
       content: stakeDrepRetired?.delegator?.stake ? (
         <AdaWithTooltip
           data={stakeDrepRetired.delegator.stake / 1e6}
-          triggerClassName='font-semibold !text-2xl !text-text'
+          triggerClassName='text-display-xs font-semibold text-text'
         />
       ) : (
-        <p className='!text-2xl font-semibold !text-text'>-</p>
+        <p className='text-display-xs font-semibold'>-</p>
       ),
       footer: (
         <div className='flex flex-wrap gap-2'>

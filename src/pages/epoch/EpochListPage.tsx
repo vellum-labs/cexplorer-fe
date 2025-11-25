@@ -87,12 +87,12 @@ const EpochListPage: FC = () => {
               data: [
                 {
                   value: usagePercentage,
-                  name: "Usage",
+                  name: "Used",
                   itemStyle: { color: "#47CD89" },
                 },
                 {
                   value: (100 - blockUsage).toFixed(2),
-                  name: "Left",
+                  name: "Unused",
                   itemStyle: { color: "#FEC84B" },
                 },
               ],

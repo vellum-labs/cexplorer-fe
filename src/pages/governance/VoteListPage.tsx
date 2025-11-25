@@ -8,6 +8,8 @@ import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
+import { BlockCell } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchNewVotes } from "@/services/governance";
 import { useVoteListPageTableStore } from "@/stores/tables/VoteListPageTableStore";
@@ -247,6 +249,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
             vote={item.vote as Vote}
             txHash={item.tx?.hash}
             proposalId={item?.proposal?.ident?.id}
+            anchorInfo={item?.anchor}
           />
         );
       },
@@ -283,7 +286,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
         ),
       },
       visible: columnsVisibility.vote,
-      widthPx: 45,
+      widthPx: 55,
     },
     {
       key: "epoch",
@@ -292,19 +295,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
           return <p className='text-right'>-</p>;
         }
 
-        return (
-          <p className='text-right'>
-            <Link
-              className='text-primary'
-              to='/epoch/$no'
-              params={{
-                no: item.proposal.expiration,
-              }}
-            >
-              {item.proposal.expiration}
-            </Link>
-          </p>
-        );
+        return <EpochCell no={item.proposal.expiration} />;
       },
       title: <p className='w-full text-right'>Epoch</p>,
       visible: columnsVisibility.epoch,
@@ -317,19 +308,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
           return <p className='text-right'>-</p>;
         }
 
-        return (
-          <p className='text-right'>
-            <Link
-              to='/block/$hash'
-              params={{
-                hash: item.tx.block_hash,
-              }}
-              className='text-primary'
-            >
-              {formatNumber(item.tx.block_no)}
-            </Link>
-          </p>
-        );
+        return <BlockCell hash={item.tx.block_hash} no={item.tx.block_no} />;
       },
       title: <p className='w-full text-right'>Block</p>,
       visible: columnsVisibility.block,

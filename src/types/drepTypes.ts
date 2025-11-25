@@ -1,6 +1,7 @@
 import type { BlockBasicInfo } from "./blockTypes";
 import type { ResponseCore } from "./commonTypes";
 import type { TxBasicInfo } from "./txTypes";
+import type { AnchorInfo, GovernanceRole } from "./governanceTypes";
 
 export type DrepListOrder =
   | "average_power"
@@ -162,9 +163,7 @@ export interface DrepListData {
   gov_action?: {
     vote: string;
   } | null;
-  pool?: {
-    ident: string;
-  }[];
+  pool?: string[];
   top_delegator: {
     view: string;
     stake: number;
@@ -199,6 +198,9 @@ interface DrepActionTx {
   time: string;
   invalid_hereafter: null | string;
   treasury_donation: number;
+  block_no: number;
+  block_hash: string;
+  epoch_no: number;
 }
 
 export interface DrepAction {
@@ -262,6 +264,7 @@ interface DrepInfo {
   meta: null | any;
   power: {
     stake: number;
+    represented_by: number;
   } | null;
 }
 
@@ -274,8 +277,8 @@ interface DelegatorInfo {
 interface DrepAnchor {
   url: string;
   data_hash: string;
-  offchain?: {
-    name: string;
+  offchain: {
+    name: string | null;
   };
 }
 
@@ -287,6 +290,8 @@ export interface DrepProposal {
   tx: {
     hash: string;
     time: string;
+    invalid_hereafter: string | null;
+    treasury_donation: number;
   };
   type: string;
   anchor: DrepAnchor;
@@ -303,11 +308,12 @@ export interface DrepProposal {
 }
 
 export interface DrepVoteItem {
-  voter_role: "DRep" | "SPO" | "ConstitutionalCommittee";
-  vote: string;
+  voter_role: GovernanceRole;
+  vote: "Yes" | "No" | "Abstain";
   proposal: DrepProposal;
   info: DrepInfo;
   tx: DrepActionTx;
+  anchor?: AnchorInfo;
 }
 
 interface DrepVote {

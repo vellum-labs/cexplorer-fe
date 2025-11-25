@@ -1,6 +1,6 @@
 import AddressCell from "@/components/address/AddressCell";
-import { BlockCell } from "@/components/blocks/BlockCell";
-import { EpochCell } from "@/components/epoch/EpochCell";
+import { BlockCell } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { AddressTypeInitialsBadge } from "@vellumlabs/cexplorer-sdk";

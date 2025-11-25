@@ -1,9 +1,17 @@
 import type { ModuleInput, ModuleOutput } from "@/addons/types";
+import { SensitiveContentWarning } from "@vellumlabs/cexplorer-sdk";
+import { useState } from "react";
 
 export function render({ type, data }: ModuleInput): ModuleOutput {
-  const messages: string[] = data?.md.msg ?? [];
+  const msgData = data?.md.msg;
 
-  if (!Array.isArray(messages) || messages.length === 0) {
+  const messages: string[] = Array.isArray(msgData)
+    ? msgData
+    : msgData
+      ? [msgData]
+      : [];
+
+  if (messages.length === 0) {
     return { component: null };
   }
 
@@ -14,8 +22,23 @@ export function render({ type, data }: ModuleInput): ModuleOutput {
   }
 
   if (type === "full-view") {
-    return {
-      component: (
+    const MessageContent = () => {
+      const [showContent, setShowContent] = useState(() => {
+        return localStorage.getItem("showSensitiveContent") === "true";
+      });
+
+      if (!showContent) {
+        return (
+          <SensitiveContentWarning
+            onDisplay={() => setShowContent(true)}
+            localStorageKey='showSensitiveContent'
+            title='User-generated content'
+            description='Following content is user-generated and unmoderated by the Cexplorer team.'
+          />
+        );
+      }
+
+      return (
         <div className='rounded-l border border-border bg-darker p-2'>
           <h3 className='mb-1 font-semibold text-text'>CIP-20 Messages</h3>
           <ul className='list-disc pl-3 text-text-sm text-grayTextPrimary'>
@@ -24,7 +47,11 @@ export function render({ type, data }: ModuleInput): ModuleOutput {
             ))}
           </ul>
         </div>
-      ),
+      );
+    };
+
+    return {
+      component: <MessageContent />,
     };
   }
 

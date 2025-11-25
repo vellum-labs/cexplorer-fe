@@ -4,6 +4,7 @@ import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { HashCell } from "@/components/tx/HashCell";
 import { withdrawalsTableOptions } from "@/constants/tables/withdrawalsTableOptions";
@@ -12,8 +13,8 @@ import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useWithdrawalsTableStore } from "@/stores/tables/withdrawalsTableStore";
 import type { Withdrawal } from "@/types/accountTypes";
 import type { TableColumns, WithdrawalsColumns } from "@/types/tableTypes";
-import { formatNumber, formatTimeAgo } from "@vellumlabs/cexplorer-sdk";
-import { Link, useSearch } from "@tanstack/react-router";
+import { formatTimeAgo } from "@vellumlabs/cexplorer-sdk";
+import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { PageBase } from "@/components/global/pages/PageBase";
 
@@ -56,15 +57,7 @@ export const WithdrawalsPage = () => {
     },
     {
       key: "epoch",
-      render: item => (
-        <Link
-          to='/epoch/$no'
-          params={{ no: String(item?.block?.epoch_no) }}
-          className='flex justify-end text-primary'
-        >
-          {formatNumber(item?.block?.epoch_no ?? 0)}
-        </Link>
-      ),
+      render: item => <EpochCell no={item?.block?.epoch_no} />,
       title: <p className='w-full text-right'>Epoch</p>,
       visible: columnsVisibility.epoch,
       widthPx: 35,

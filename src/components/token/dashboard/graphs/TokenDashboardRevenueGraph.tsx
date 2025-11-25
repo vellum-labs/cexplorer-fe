@@ -7,6 +7,7 @@ import ReactEcharts from "echarts-for-react";
 
 import { useMemo } from "react";
 import { useGraphColors } from "@/hooks/useGraphColors";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 interface TokenDashboardRevenueGraphProps {
   data: DeFiTokenStatData[] | undefined;
@@ -15,7 +16,7 @@ interface TokenDashboardRevenueGraphProps {
 export const TokenDashboardRevenueGraph: FC<
   TokenDashboardRevenueGraphProps
 > = ({ data }) => {
-  const { textColor } = useGraphColors();
+  const { textColor, bgColor } = useGraphColors();
 
   const { xAxisData, seriesData } = useMemo(() => {
     const dexMap = new Map<string, Record<string, number>>();
@@ -83,6 +84,34 @@ export const TokenDashboardRevenueGraph: FC<
       trigger: "axis",
       confine: true,
       axisPointer: { type: "shadow" },
+      backgroundColor: bgColor,
+      textStyle: {
+        color: textColor,
+      },
+      formatter: (params: any) => {
+        if (!params || params.length === 0) return "";
+
+        const date = params[0].axisValue;
+        const total = params.reduce(
+          (sum: number, item: any) => sum + item.value,
+          0,
+        );
+
+        let result = `<b>Trading volume</b><br/>${date}<br/><br/>`;
+        result += `<b>Total: ${total.toLocaleString()}</b><br/><br/>`;
+
+        const sortedParams = [...params].sort(
+          (a: any, b: any) => b.value - a.value,
+        );
+
+        sortedParams.forEach((item: any) => {
+          if (item.value > 0) {
+            result += `${item.marker} ${item.seriesName}: ${item.value.toLocaleString()}<br/>`;
+          }
+        });
+
+        return result;
+      },
     },
     legend: {
       top: 10,
@@ -111,6 +140,14 @@ export const TokenDashboardRevenueGraph: FC<
     ],
     series: seriesData,
   };
+
+  if (!data) {
+    return (
+      <AnalyticsGraph className='border-none' exportButton>
+        <LoadingSkeleton height='490px' width='100%' rounded='full' />
+      </AnalyticsGraph>
+    );
+  }
 
   return (
     <AnalyticsGraph className='border-none' exportButton>

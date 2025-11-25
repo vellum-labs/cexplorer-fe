@@ -5,12 +5,14 @@ import {
   formatDate,
   formatNumber,
   formatString,
+  EpochCell,
+  BlockCell,
 } from "@vellumlabs/cexplorer-sdk";
 import { getConfirmations } from "@/utils/getConfirmations";
 import { getEpochSlot } from "@/utils/getEpochSlot";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import type { UseQueryResult } from "@tanstack/react-query";
-import { Link, useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import {
   CircleAlert,
   CircleCheck,
@@ -73,6 +75,17 @@ const TxDetailOverview = ({ query }: Props) => {
     }
   }
 
+  const tx_ex_mem =
+    data?.plutus_contracts
+      ?.flatMap(contract => contract.input || [])
+      .reduce((sum, input) => sum + (input?.redeemer?.unit?.mem || 0), 0) || 0;
+
+  const tx_ex_steps =
+    data?.plutus_contracts
+      ?.flatMap(contract => contract.input || [])
+      .reduce((sum, input) => sum + (input?.redeemer?.unit?.steps || 0), 0) ||
+    0;
+
   const overviewListItems: OverviewList = [
     {
       label: "Hash",
@@ -102,13 +115,13 @@ const TxDetailOverview = ({ query }: Props) => {
     {
       label: "Height",
       value: (
-        <Link
-          to='/block/$hash'
-          params={{ hash: String(data?.block?.hash) || "" }}
-          className='text-text-sm font-medium text-primary'
-        >
-          {formatNumber(data?.block?.no ?? 0)}
-        </Link>
+        <div className='text-text-sm'>
+          <BlockCell
+            hash={String(data?.block?.hash) || ""}
+            no={data?.block?.no ?? 0}
+            justify='start'
+          />
+        </div>
       ),
     },
     {
@@ -134,15 +147,9 @@ const TxDetailOverview = ({ query }: Props) => {
     {
       label: "Epoch",
       value: (
-        <span className='cursor-pointer text-text-sm font-medium text-primary'>
-          <Link
-            to='/epoch/$no'
-            params={{ no: String(data?.epoch_param?.epoch_no ?? 0) }}
-            className='text-primary'
-          >
-            {data?.epoch_param?.epoch_no}
-          </Link>
-        </span>
+        <div className='text-text-sm'>
+          <EpochCell no={data?.epoch_param?.epoch_no} justify='start' />
+        </div>
       ),
     },
     data?.invalid_before && data?.invalid_hereafter
@@ -305,9 +312,14 @@ const TxDetailOverview = ({ query }: Props) => {
             />
             <SizeCard
               size={data?.size}
-              maxSize={data?.epoch_param?.max_block_size}
+              maxSize={data?.epoch_param?.max_tx_size}
               title='Transaction size'
               icon={<GitFork size={20} className='text-primary' />}
+              isTx={true}
+              max_tx_ex_mem={data?.epoch_param?.max_tx_ex_mem}
+              max_tx_ex_steps={data?.epoch_param?.max_tx_ex_steps}
+              tx_ex_mem={tx_ex_mem}
+              tx_ex_steps={tx_ex_steps}
             />
             <AdsCarousel
               generateImageUrl={generateImageUrl}

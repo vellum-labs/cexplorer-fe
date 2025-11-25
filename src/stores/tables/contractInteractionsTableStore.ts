@@ -19,6 +19,7 @@ export const useContractInteractionsTableStore = handlePersistStore<
   {
     columnsVisibility: {
       date: true,
+      type: true,
       purpose: true,
       view: true,
       deposit: true,
@@ -30,6 +31,7 @@ export const useContractInteractionsTableStore = handlePersistStore<
     rows: 20,
     columnsOrder: [
       "date",
+      "type",
       "purpose",
       "view",
       "deposit",

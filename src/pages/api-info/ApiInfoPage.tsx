@@ -1,3 +1,4 @@
+import { PageBase } from "@/components/global/pages/PageBase";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import {
   Accordion,
@@ -11,6 +12,7 @@ import { useFetchMiscApi } from "@/services/misc";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle, Layers, Layers2, Zap } from "lucide-react";
 import type { ReactNode } from "react";
+import { Banner } from "@/components/global/Banner";
 
 const faq = [
   {
@@ -127,6 +129,8 @@ export const ApiInfoPage = () => {
         `${apiData?.starter.rq_day} requests per day`,
         `${apiData?.starter.tok_day} tokens per day`,
       ],
+      disabled: false,
+      link: undefined,
     },
     basic: {
       tier: "NFT tier",
@@ -140,6 +144,8 @@ export const ApiInfoPage = () => {
         `${apiData?.basic.rq_day} requests per day for each NFT`,
         `${apiData?.basic.tok_day} tokens per day for each NFT`,
       ],
+      disabled: true,
+      link: undefined,
     },
     pro: {
       tier: "Individual",
@@ -154,26 +160,22 @@ export const ApiInfoPage = () => {
         `${apiData?.pro.tok_day}+ tokens per day`,
         "Priority support",
       ],
+      disabled: false,
+      link: "https://discord.gg/YuSFx7GS7y",
     },
   };
 
   return (
-    <main className='flex min-h-minHeight w-full flex-col items-center'>
-      <div className='mt-6 flex w-full max-w-desktop flex-col items-center gap-4 px-mobile pb-3 text-center md:px-desktop'>
-        <span className='text-text-sm font-medium text-primary'>
-          Elevate your projects with
-        </span>
-        <h1 className='-my-4 md:text-[40px] md:leading-[45px]'>
-          Cexplorer <span className='text-primary'>API</span> Plans
-        </h1>
-        <p className='text-grayTextPrimary'>
-          Effortless access to blockchain data. Choose the perfect plan for your
-          needs.
-        </p>
-        <div className='flex w-full items-center justify-center gap-1'>
-          <Button label='Docs' variant='tertiary' size='md' />
-          <Button label='API plans' variant='primary' size='md' />
-        </div>
+    <PageBase
+      metadataOverride={{ title: "API Plans | Cexplorer.io" }}
+      title='API Plans'
+      subTitle='Effortless access to blockchain data. Choose the perfect plan for your needs.'
+      breadcrumbItems={[{ label: "API Plans" }]}
+      adsCarousel={false}
+      customPage={true}
+    >
+      <section className='flex w-full max-w-desktop flex-col items-center gap-4 px-mobile pb-3 text-center md:px-desktop'>
+        <Banner description='Only the Starter API is available right now. Additional tiers are coming later.' />
         <section className='mt-4 flex w-full flex-wrap items-center justify-center gap-3'>
           {Object.entries(priceTiers).map(([key, value]) => (
             <PriceCard
@@ -183,8 +185,9 @@ export const ApiInfoPage = () => {
               subtitle={value.subtitle}
               features={value.features}
               cta={value.cta}
-              ctaHref='/'
               icon={priceTierIcons[key]}
+              disabled={value.disabled}
+              link={value.link}
             />
           ))}
         </section>
@@ -195,13 +198,19 @@ export const ApiInfoPage = () => {
               Explore the API docs to get started with your project!{" "}
             </p>
           </div>
-          <Button
-            rightIcon={<ArrowRight />}
-            label='View documentation'
-            variant='tertiary'
-            size='md'
-            className='h-[40px]'
-          />
+          <a
+            className='w-full max-w-[200px] text-nowrap hover:text-text'
+            href='https://github.com/vellum-labs/cexplorer-api/tree/main/packages/cexplorer-api'
+            target='_blank'
+          >
+            <Button
+              rightIcon={<ArrowRight />}
+              label='View documentation'
+              variant='tertiary'
+              size='md'
+              className='h-[40px]'
+            />
+          </a>
         </section>
         <h2 className='-mb-4 mt-4 md:text-[30px]'>
           Frequently asked questions
@@ -244,16 +253,17 @@ export const ApiInfoPage = () => {
             Can’t find the answer you’re looking for? Get in touch with our
             friendly team.
           </p>
-          <Button
-            label='Get in touch'
-            variant='primary'
-            size='md'
-            href='/'
-            className='w-[220px] max-w-none'
-          />
+          <a href='https://x.com/cexplorer_io' target='_blank'>
+            <Button
+              label='Get in touch'
+              variant='primary'
+              size='md'
+              className='w-[220px] max-w-none'
+            />
+          </a>
         </section>
-      </div>
-    </main>
+      </section>
+    </PageBase>
   );
 };
 
@@ -263,8 +273,9 @@ interface PriceCardProps {
   subtitle: string;
   features: string[];
   cta: string;
-  ctaHref: string;
   icon: ReactNode;
+  disabled?: boolean;
+  link?: string;
 }
 
 const PriceCard = ({
@@ -274,6 +285,8 @@ const PriceCard = ({
   features,
   cta,
   icon,
+  disabled = false,
+  link,
 }: PriceCardProps) => {
   return (
     <div className='relative mt-1 flex min-h-[420px] basis-[350px] flex-col items-center rounded-l bg-darker p-2 shadow-md'>
@@ -295,13 +308,25 @@ const PriceCard = ({
           </li>
         ))}
       </ul>
-      <Button
-        label={cta}
-        variant='primary'
-        size='md'
-        href='/'
-        className='mt-auto w-full max-w-none'
-      />
+      {link ? (
+        <a href={link} target='_blank' className='mt-auto w-full max-w-none'>
+          <Button
+            label={`${cta} ${disabled ? "(Coming soon...)" : ""}`}
+            variant='primary'
+            size='md'
+            className='mt-auto w-full max-w-none'
+            disabled={disabled}
+          />
+        </a>
+      ) : (
+        <Button
+          label={`${cta} ${disabled ? "(Coming soon...)" : ""}`}
+          variant='primary'
+          size='md'
+          className='mt-auto w-full max-w-none'
+          disabled={disabled}
+        />
+      )}
     </div>
   );
 };

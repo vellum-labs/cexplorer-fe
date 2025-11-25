@@ -82,6 +82,7 @@ export interface Withdrawal {
     epoch_no: number;
     hash: string;
     time: string;
+    no: number;
   };
   account: {
     live_stake: number;

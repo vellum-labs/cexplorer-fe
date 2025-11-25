@@ -53,6 +53,7 @@ interface DeFiOrderListProps {
   tabName?: string;
   pulseDot?: boolean;
   titleClassname?: string;
+  disabledKeys?: ("type" | "status" | "maker" | "dex")[];
 }
 
 interface FilterType {
@@ -71,6 +72,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
   tabName,
   pulseDot = true,
   titleClassname,
+  disabledKeys,
 }) => {
   const { locale } = useLocaleStore();
 
@@ -102,6 +104,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
     },
     disableSearchSync,
     tabName,
+    disabledKeys,
   });
 
   const debouncedFilterDraftValue = useDebounce(
@@ -137,8 +140,10 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
     filterByType("sell"),
   );
 
-  const items = query.data?.pages.flatMap(page => page.data?.data);
-  const totalItems = query.data?.pages[0].data?.count;
+  const items = query.data?.pages
+    .flatMap(page => page.data?.data)
+    .filter(Boolean);
+  const totalItems = query.data?.pages[0]?.data?.count ?? 0;
 
   const curr = useAdaPriceWithHistory(currency as any);
 

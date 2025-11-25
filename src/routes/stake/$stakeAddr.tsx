@@ -15,7 +15,7 @@ export const Route = createFileRoute("/stake/$stakeAddr")({
           .catch(1),
         limit: z.number().optional().catch(20),
         order: z.enum(["balance", "last"]).optional().catch("balance"),
-        asset: z.enum(["all", "tokens", "nft"]).optional().catch("all"),
+        asset: z.enum(["all", "tokens", "nfts"]).optional().catch("all"),
       })
       .parse(input),
 });

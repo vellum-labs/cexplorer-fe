@@ -9,10 +9,11 @@ import { useEffect, useState } from "react";
 
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { SizeCell } from "@vellumlabs/cexplorer-sdk";
 
-import { BlockCell } from "@/components/blocks/BlockCell";
+import { BlockCell } from "@vellumlabs/cexplorer-sdk";
 import { ProtocolDot } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "@/components/tx/HashCell";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
@@ -216,7 +217,7 @@ export const useBlockList = ({
     },
     {
       key: "epoch_no",
-      render: item => <p className='text-right'>{item.epoch_no}</p>,
+      render: item => <EpochCell no={item.epoch_no} />,
       title: (
         <p ref={anchorRefs?.epoch_no} className='w-full text-right'>
           Epoch
@@ -436,15 +437,6 @@ export const useBlockList = ({
       widthPx: 70,
     },
     {
-      key: "cert_counter",
-      render: item => (
-        <p className='text-right'>{item.op_cert_counter ?? "-"}</p>
-      ),
-      title: <p className='w-full text-right'>Cert No</p>,
-      visible: columnsVisibility.cert_counter,
-      widthPx: 70,
-    },
-    {
       key: "size",
       title: <p>Size</p>,
       render: item => (
@@ -472,6 +464,15 @@ export const useBlockList = ({
       },
       visible: columnsVisibility.size,
       widthPx: 90,
+    },
+    {
+      key: "cert_counter",
+      render: item => (
+        <p className='text-right'>{item.op_cert_counter ?? "-"}</p>
+      ),
+      title: <p className='w-full text-right'>Cert Count</p>,
+      visible: columnsVisibility.cert_counter,
+      widthPx: 70,
     },
   ];
 

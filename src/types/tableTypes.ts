@@ -1,4 +1,4 @@
-import type { ReactNode } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import type { MouseEventHandler, RefObject } from "react";
 
 interface TableColumn<T> {
@@ -66,14 +66,6 @@ export type LiveDelegationsColumns = {
   tx: boolean;
 };
 
-export type DrepDelegationsColumns = {
-  date: boolean;
-  address: boolean;
-  amount: boolean;
-  delegation: boolean;
-  tx: boolean;
-};
-
 export type RetiredDelegationsColumns = {
   index: boolean;
   pool: boolean;
@@ -117,6 +109,7 @@ export type PoolBlocksColumns = {
   hash: boolean;
   size: boolean;
   protocol: boolean;
+  cert_counter: boolean;
 };
 
 export interface PoolPefomanceColumns {
@@ -148,8 +141,21 @@ export type PoolDelegatorsColumns = {
   address: boolean;
   amount: boolean;
   loyalty: boolean;
+  tx: boolean;
   registered: boolean;
   pool_delegation: boolean;
+};
+
+export type DrepDelegationsColumns = {
+  date: boolean;
+  drep: boolean;
+  active_stake: boolean;
+  live_stake: boolean;
+  loyalty: boolean;
+  tx: boolean;
+  address: boolean;
+  amount: boolean;
+  delegation: boolean;
 };
 
 export type PoolStructureColumns = {
@@ -209,6 +215,7 @@ export interface StakeRegistrationsColumns {
 
 export interface ContractInteractionsColumns {
   date: boolean;
+  type: boolean;
   purpose: boolean;
   view: boolean;
   deposit: boolean;
@@ -259,6 +266,7 @@ export interface StakeWithdrawalsTableOptions {
 
 export type TaxToolSummaryColumns = {
   period: boolean;
+  epochs: boolean;
   rewards_ada: boolean;
   rewards_usd: boolean;
   rewards_secondary: boolean;
@@ -629,6 +637,7 @@ export interface DeFiTokenTableColumns {
   liquidity: boolean;
   age: boolean;
   last_week: boolean;
+  buy: boolean;
 }
 
 export interface DrepListTableColumns {

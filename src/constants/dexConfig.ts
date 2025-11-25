@@ -107,3 +107,17 @@ export const dexConfig: Record<string, DexConfig> = {
     borderColor: "#FCA5A5",
   },
 };
+
+export const DEXHUNTER_PARTNER_CODE =
+  "cexplorernextgen61646472317139737a356b773430706d6e6b636d6d667673736d35667932767a6b6b376c30777535737a7632356e6e66666b716e6b633335717972676e717538746c3936753565656a79746776747371617472326d733668727868647a713470736c767032726mda39a3ee5e6b4b0d3255bfef95601890afd80709";
+
+export const DEXHUNTER_PARTNER_NAME = "cexplorernextgen";
+
+export const DEXHUNTER_COLORS = {
+  background: "var(--cardBg)",
+  containers: "var(--background)",
+  subText: "var(--grayTextPrimary)",
+  mainText: "var(--text)",
+  buttonText: "var(--white)",
+  accent: "var(--darkBlue)",
+};
