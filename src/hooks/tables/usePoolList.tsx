@@ -365,14 +365,14 @@ export const usePoolList = ({
           miscConst,
         );
 
-        const epochs = item?.epochs ? Object.values(item.epochs).slice(2) : [];
+        const epochs = item?.epochs ? Object.values(item.epochs).filter(epoch => epoch !== null && epoch !== undefined).slice(2) : [];
 
         const rewardsData = epochs.map(epoch => ({
-          epoch: (epoch as any).no,
-          leader_lovelace: (epoch as any).data.reward.leader_lovelace,
-          leader_pct: (epoch as any).data.reward.leader_pct,
-          member_lovelace: (epoch as any).data.reward.member_lovelace,
-          member_pct: (epoch as any).data.reward.member_pct,
+          epoch: (epoch as any)?.no,
+          leader_lovelace: (epoch as any)?.data?.reward?.leader_lovelace,
+          leader_pct: (epoch as any)?.data?.reward?.leader_pct,
+          member_lovelace: (epoch as any)?.data?.reward?.member_lovelace,
+          member_pct: (epoch as any)?.data?.reward?.member_pct,
         }));
 
         const rewardsDataSource = rewardsData.map(({ epoch, member_pct }) => [
@@ -381,7 +381,7 @@ export const usePoolList = ({
         ]);
 
         const rewardsDataSourceNotEmpty =
-          rewardsDataSource.map(item => item[1]).filter(e => e).length > 0;
+          rewardsDataSource.filter(item => item && item[1]).map(item => item[1]).filter(e => e).length > 0;
 
         return (
           <div className='w-full justify-end'>
@@ -398,22 +398,24 @@ export const usePoolList = ({
                   dataSource={rewardsDataSource}
                   ref={tableRef}
                   color={params =>
-                    getEpochColor(rewardsData[params.dataIndex].member_pct)
+                    rewardsData[params.dataIndex] ? getEpochColor(rewardsData[params.dataIndex].member_pct) : "#ccc"
                   }
                   toolTipFormatter={params => {
                     const data = rewardsData[params.dataIndex];
 
+                    if (!data) return '';
+
                     return `
                           <div style="font-size: 12px; line-height: 15px">
-                            <span>Epoch: ${data.epoch}</span>
+                            <span>Epoch: ${data.epoch ?? 'N/A'}</span>
                             <br/>
-                            <span>Leader Ada: ${lovelaceToAda(data.leader_lovelace)}</span>
+                            <span>Leader Ada: ${data.leader_lovelace ? lovelaceToAda(data.leader_lovelace) : 'N/A'}</span>
                             <br/>
-                            <span>Leader Pct: ${data.leader_pct.toFixed(2)}</span>
+                            <span>Leader Pct: ${data.leader_pct ? data.leader_pct.toFixed(2) : 'N/A'}</span>
                             <br/>
-                            <span>Member Ada: ${lovelaceToAda(data.member_lovelace)}</span>
+                            <span>Member Ada: ${data.member_lovelace ? lovelaceToAda(data.member_lovelace) : 'N/A'}</span>
                             <br/>
-                            <span>Member Pct: ${data.member_pct}%</span>
+                            <span>Member Pct: ${data.member_pct ?? 'N/A'}%</span>
                           </div>`;
                   }}
                 />
@@ -489,7 +491,7 @@ export const usePoolList = ({
     {
       key: "drep",
       render: item => {
-        const drep = item.drep?.[0];
+        const drep = item?.drep && Array.isArray(item.drep) ? item.drep[0] : null;
 
         if (!drep || !drep.ident) {
           return <p className='text-right text-grayTextPrimary'>-</p>;
@@ -593,12 +595,12 @@ export const usePoolList = ({
           : 0;
         const formattedTotalBlocks = formatNumber(item?.blocks?.total);
 
-        const epochs = item?.epochs ? Object.values(item?.epochs).slice(2) : [];
+        const epochs = item?.epochs ? Object.values(item?.epochs).filter(epoch => epoch !== null && epoch !== undefined).slice(2) : [];
         const epochData = epochs.map(epoch => ({
-          epoch: (epoch as any).no,
-          minted: (epoch as any).data.block.minted,
-          estimated: (epoch as any).data.block.estimated,
-          luck: (epoch as any).data.block.luck,
+          epoch: (epoch as any)?.no,
+          minted: (epoch as any)?.data?.block?.minted,
+          estimated: (epoch as any)?.data?.block?.estimated,
+          luck: (epoch as any)?.data?.block?.luck,
         }));
 
         return (
@@ -613,6 +615,7 @@ export const usePoolList = ({
                 ])}
                 color={params => {
                   const currentData = epochData[params.dataIndex];
+                  if (!currentData) return "#ccc";
                   return currentData.minted === 0
                     ? "red"
                     : getEpochColor(currentData.luck);
@@ -620,11 +623,13 @@ export const usePoolList = ({
                 toolTipFormatter={params => {
                   const data = epochData[params.dataIndex];
 
+                  if (!data) return '';
+
                   return `
                   <div style="font-size: 12px; line-height: 14px;">
-                    <span>Epoch: ${data.epoch}</span>
+                    <span>Epoch: ${data.epoch ?? 'N/A'}</span>
                     <br/>
-                    <span>Minted: ${data.minted}</span>
+                    <span>Minted: ${data.minted ?? 'N/A'}</span>
                     <br/>
                     <span>Estimated: ${(data.estimated ?? 0).toFixed(2)}</span>
                     <br/>
@@ -835,13 +840,13 @@ export const usePoolList = ({
     {
       key: "avg_stake",
       render: item => {
-        if (!item.live_stake && !item.delegators) {
+        if (!item?.live_stake || !item?.delegators) {
           return "-";
         }
 
         return (
           <p className='text-right'>
-            <AdaWithTooltip data={item?.live_stake / item?.delegators} />
+            <AdaWithTooltip data={item.live_stake / item.delegators} />
           </p>
         );
       },
@@ -906,12 +911,12 @@ export const usePoolList = ({
     {
       key: "top_delegator",
       render: item => {
-        if (!item?.top_delegator?.stake) {
+        if (!item?.top_delegator?.stake || !item?.live_stake) {
           return <p className='text-right'>-</p>;
         }
 
         const topDelegator =
-          (item?.top_delegator.stake / item?.live_stake) * 100;
+          (item.top_delegator.stake / item.live_stake) * 100;
 
         return (
           <div className={`flex w-full items-center justify-end`}>
