@@ -340,8 +340,8 @@ export const TreasuryProjectionPage = () => {
               {PROJECTION_YEARS}-Year Projection
             </h3>
             <p className='text-text-sm text-grayTextPrimary'>
-              Treasury income: {(tau * 100).toFixed(1)}% of (Reserves growth +
-              Fees) • Reserves decrease: {(rho * 100).toFixed(2)}% per epoch
+              Treasury income: {(tau * 100).toFixed(1)}% of (Reserve emission +
+              Fees) • Reserve emission: {(rho * 100).toFixed(2)}% per epoch
             </p>
           </div>
           <div className='relative h-[450px] w-full'>
