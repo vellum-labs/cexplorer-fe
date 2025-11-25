@@ -1,6 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 
@@ -32,6 +32,8 @@ export const useSearchTable = ({
 }: UseSearchTableArgs = {}): UseTableSearch => {
   const { search, ...rest } = useSearch({ strict: false }) as UseSearch;
   const navigate = useNavigate();
+
+  const prevSearchRef = useRef<string | undefined>(search);
 
   const parseSearchFromURL = (urlSearch: string) => {
     if (!urlSearch || !urlSearch.includes(":")) {
@@ -66,6 +68,24 @@ export const useSearchTable = ({
     if (withoutURL) {
       return;
     }
+
+    const currentUrlSearch = search ?? "";
+    const prevUrlSearch = prevSearchRef.current ?? "";
+
+    if (prevUrlSearch && !currentUrlSearch) {
+      const currentStateSearch = searchPrefix
+        ? `${searchPrefix}:${tableSearch}`
+        : tableSearch;
+
+      if (currentStateSearch !== currentUrlSearch) {
+        setSearchPrefix("");
+        setTableSearch("");
+        prevSearchRef.current = search;
+        return;
+      }
+    }
+
+    prevSearchRef.current = search;
 
     const formatSearchForURL = () => {
       if (!debouncedTableSearch) {
