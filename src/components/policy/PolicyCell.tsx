@@ -1,4 +1,4 @@
-import { useHoverHighlightState } from "@/stores/states/hoverHighlightState";
+import { useHoverHighlight } from "@/hooks/useHoverHighlight";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
@@ -10,21 +10,8 @@ export const PolicyCell = ({
   policyId: string;
   enableHover?: boolean;
 }) => {
-  const { hoverValue, setHoverValue } = useHoverHighlightState();
-
-  const handleMouseEnter = () => {
-    if (enableHover) setHoverValue(policyId);
-  };
-
-  const handleMouseLeave = () => {
-    setHoverValue(null);
-  };
-
-  const handleCopyMouseEnter = () => {
-    setHoverValue(null);
-  };
-
-  const isHighlighted = hoverValue === policyId;
+  const { handleMouseEnter, handleMouseLeave, handleCopyMouseEnter, isHighlighted } =
+    useHoverHighlight(policyId, enableHover);
   return (
     <div
       onMouseLeave={handleMouseLeave}

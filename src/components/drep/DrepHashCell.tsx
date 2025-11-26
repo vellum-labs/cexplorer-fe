@@ -1,4 +1,4 @@
-import { useHoverHighlightState } from "@/stores/states/hoverHighlightState";
+import { useHoverHighlight } from "@/hooks/useHoverHighlight";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
@@ -10,21 +10,8 @@ export const DrepHashCell = ({
   view: string;
   enableHover?: boolean;
 }) => {
-  const { hoverValue, setHoverValue } = useHoverHighlightState();
-
-  const handleMouseEnter = () => {
-    if (enableHover) setHoverValue(view);
-  };
-
-  const handleMouseLeave = () => {
-    setHoverValue(null);
-  };
-
-  const handleCopyMouseEnter = () => {
-    setHoverValue(null);
-  };
-
-  const isHighlighted = hoverValue === view;
+  const { handleMouseEnter, handleMouseLeave, handleCopyMouseEnter, isHighlighted } =
+    useHoverHighlight(view, enableHover);
 
   if (!view) return "-";
 
