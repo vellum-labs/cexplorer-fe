@@ -10,16 +10,16 @@ import { useRecentVotesTableStore } from "@/stores/tables/recentVotesTableStore"
 import { useFetchCCVotes } from "@/services/governance";
 import { formatString, formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "@vellumlabs/cexplorer-sdk";
-import { Image } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { ActionTypes } from "@vellumlabs/cexplorer-sdk";
 import { useFilterTable } from "@/hooks/tables/useFilterTable";
 import { isHex } from "@/utils/isHex";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
-import { alphabetWithNumbers } from "@/constants/alphabet";
 import { GovActionCell } from "../../GovActionCell";
 import { VoteCell } from "@/components/governance/vote/VoteCell";
+import { GovVoterCell } from "../../GovVoterCell";
+import { GovernanceRole } from "@/types/governanceTypes";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { isVoteLate } from "@/utils/governance/isVoteLate";
 
@@ -115,41 +115,20 @@ export const RecentTab: FC = () => {
       widthPx: 220,
       visible: columnsVisibility.cc_member,
       render: item => {
-        const meta = item.info?.meta;
-        const id = item.info?.id ?? "N/A";
-        const name = meta?.name ?? "Unknown";
-        const img = meta?.img;
+        const voterId = item?.info?.id;
 
-        const fallbackletters = [...name]
-          .filter(char => alphabetWithNumbers.includes(char.toLowerCase()))
-          .join("");
+        if (!voterId) {
+          return "-";
+        }
 
         return (
-          <div className='flex items-center gap-1.5'>
-            <div className='min-w-[32px]'>
-              <Image
-                src={img}
-                alt='member'
-                className='rounded-max'
-                width={32}
-                height={32}
-                fallbackletters={fallbackletters}
-              />
-            </div>
-            <div className='flex flex-col'>
-              <span className='text-textPrimary font-medium'>{name}</span>
-              <div className='flex gap-1'>
-                {/* <Link
-                  to='/gov/cc/$coldKey'
-                  params={{ coldKey: id }}
-                  className='text-primary'
-                >
-                </Link> */}
-                {formatString(id, "long")}
-                <Copy copyText={id} />
-              </div>
-            </div>
-          </div>
+          <GovVoterCell
+            role={GovernanceRole.ConstitutionalCommittee}
+            info={{
+              id: voterId,
+              meta: item?.info?.meta,
+            }}
+          />
         );
       },
     },
