@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { Input, AdsCarousel } from "@vellumlabs/cexplorer-sdk";
 import { PoolSelector } from "@/components/staking-calculator/PoolSelector";
@@ -38,6 +38,22 @@ export const StakingCalculatorPage: FC = () => {
   });
 
   const [selectedRoa, setSelectedRoa] = useState<number | null>(null);
+  const [memorizedHeight, setMemorizedHeight] = useState<number | null>(null);
+  const infoCardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!selectedPool && infoCardRef.current) {
+      const observer = new ResizeObserver(entries => {
+        for (const entry of entries) {
+          setMemorizedHeight(entry.target.clientHeight);
+        }
+      });
+
+      observer.observe(infoCardRef.current);
+
+      return () => observer.disconnect();
+    }
+  }, [selectedPool]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -93,7 +109,9 @@ export const StakingCalculatorPage: FC = () => {
       adsCarousel={false}
     >
       <section className='flex w-full justify-center'>
-        <div className='flex w-full max-w-desktop flex-col gap-3 p-mobile md:flex-row md:items-start md:p-desktop'>
+        <div
+          className={`flex w-full max-w-desktop flex-col gap-3 p-mobile md:flex-row md:p-desktop ${!selectedPool ? "md:items-stretch" : "md:items-start"}`}
+        >
           <div className='flex flex-1 flex-col gap-4 rounded-xl border border-border bg-cardBg p-2'>
             <div className='flex flex-col gap-2'>
               <h3 className='text-text-lg font-semibold'>
@@ -168,25 +186,33 @@ export const StakingCalculatorPage: FC = () => {
           </div>
 
           <div className='flex w-full flex-col-reverse gap-3 md:w-[400px] md:flex-col'>
-            <div className='flex flex-col gap-3 rounded-xl border border-border bg-cardBg p-2'>
+            <div
+              ref={infoCardRef}
+              className={`flex flex-col gap-3 rounded-xl border border-border bg-cardBg p-2 ${!selectedPool ? "md:h-full" : ""}`}
+              style={
+                selectedPool && memorizedHeight
+                  ? { minHeight: `${memorizedHeight}px` }
+                  : {}
+              }
+            >
               <h3 className='text-text-lg font-semibold'>Information</h3>
-              <div className='flex flex-col gap-3 text-text-sm text-grayTextPrimary'>
+              <div className='-mt-1 flex flex-col gap-3 text-text-sm text-grayTextPrimary'>
                 <p>
-                  It uses live network data to estimate potential rewards when
-                  you delegate your ADA to a staking pool.
+                  Enter any amount of ADA to see a detailed simulation of your
+                  potential staking rewards.
                 </p>
                 <p>
-                  The calculator uses a Monte Carlo simulation, which runs many
-                  random scenarios to estimate possible outcomes. This gives a
-                  probabilistic view of potential rewards based on different
-                  network conditions and staking parameters.
+                  You can also select a specific stake pool to see how your
+                  stake would perform in that pool.
                 </p>
                 <p>
-                  Enter any amount of ADA to see a simulation of your potential
-                  returns.
+                  The calculator uses live network data, current blockchain
+                  parameters, and the latest epoch statistics to estimate your
+                  rewards.
                 </p>
                 <p>
-                  It uses current blockchain parameters for the calculation.
+                  Keep in mind that actual rewards may vary from epoch to epoch
+                  and change over time.
                 </p>
               </div>
             </div>
