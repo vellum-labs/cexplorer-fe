@@ -32,6 +32,14 @@ interface GovernanceDetailAboutTabProps {
 export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
   id,
 }) => {
+  type VoterRole = "ConstitutionalCommittee" | "DRep" | "SPO";
+
+  const voterRoleLabels: Record<VoterRole, string> = {
+    ConstitutionalCommittee: "Constitutional Committee",
+    DRep: "DRep",
+    SPO: "SPO",
+  };
+
   const { page } = useSearch({
     from: "/gov/action/$id",
   });
@@ -150,7 +158,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
         onReset: () => changeFilterByKey("voter_role"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
-            {["ConstitutionalCommittee", "SPO", "DRep"].map(val => (
+            {(["ConstitutionalCommittee", "SPO", "DRep"] as VoterRole[]).map(val => (
               <label className='flex items-center gap-1' key={val}>
                 <input
                   type='radio'
@@ -162,7 +170,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
                     changeDraftFilter("voter_role", e.currentTarget.value)
                   }
                 />
-                <span className='text-text-sm'>{val}</span>
+                <span className='text-text-sm'>{voterRoleLabels[val]}</span>
               </label>
             ))}
           </div>
@@ -372,7 +380,9 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
                     {key[0].toUpperCase() + key.split("_").join(" ").slice(1)}:
                   </span>
                   <span>
-                    {value[0].toUpperCase() + value.slice(1).toLowerCase()}
+                    {key === "voter_role" && value in voterRoleLabels
+                      ? voterRoleLabels[value as VoterRole]
+                      : value[0].toUpperCase() + value.slice(1).toLowerCase()}
                   </span>
                   <X
                     size={13}

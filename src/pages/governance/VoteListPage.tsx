@@ -67,6 +67,13 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
   });
 
   type VoterRole = "ConstitutionalCommittee" | "DRep" | "SPO";
+
+  const voterRoleLabels: Record<VoterRole, string> = {
+    ConstitutionalCommittee: "Constitutional Committee",
+    DRep: "DRep",
+    SPO: "SPO",
+  };
+
   const voterRole =
     filter?.voter_role &&
     ["ConstitutionalCommittee", "DRep", "SPO"].includes(filter.voter_role)
@@ -199,7 +206,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
         onReset: () => changeFilterByKey("voter_role"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
-            {["ConstitutionalCommittee", "SPO", "DRep"].map(val => (
+            {(["ConstitutionalCommittee", "SPO", "DRep"] as VoterRole[]).map(val => (
               <label className='flex items-center gap-1' key={val}>
                 <input
                   type='radio'
@@ -211,7 +218,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
                     changeDraftFilter("voter_role", e.currentTarget.value)
                   }
                 />
-                <span className='text-text-sm'>{val}</span>
+                <span className='text-text-sm'>{voterRoleLabels[val]}</span>
               </label>
             ))}
           </div>
@@ -460,7 +467,9 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
                       :
                     </span>
                     <span>
-                      {value[0].toUpperCase() + value.slice(1).toLowerCase()}
+                      {key === "voter_role" && value in voterRoleLabels
+                        ? voterRoleLabels[value as VoterRole]
+                        : value[0].toUpperCase() + value.slice(1).toLowerCase()}
                     </span>
                     <X
                       size={13}
