@@ -19,9 +19,7 @@ export const WikiListPage = () => {
   const query = useFetchWikiList("en", 0, 100);
   const items = query.data?.pages.flatMap(page => page.data.data) ?? [];
   const firstRender = useRef(true);
-  const [openItem, setOpenItem] = useState<string | undefined>(
-    items.length > 0 ? items[0].url : undefined,
-  );
+  const [openItem, setOpenItem] = useState<string | undefined>(undefined);
 
   if (query.isLoading && firstRender.current) {
     return (
