@@ -25,15 +25,16 @@ export const TreasuryProjectionPage = () => {
   const { constData } = useConstStore();
   const currentEpoch = constData?.epoch?.no ?? 0;
 
-  const { data: epochParam, isLoading: isLoadingEpoch } = useFetchEpochDetailParam(currentEpoch);
+  const { data: epochParam, isLoading: isLoadingEpoch } =
+    useFetchEpochDetailParam(currentEpoch);
   const { data: adaPotsResponse, isLoading: isLoadingPots } = useFetchAdaPots();
 
   const { textColor, bgColor, splitLineColor } = useGraphColors();
 
   const currentAdaPot = adaPotsResponse?.data?.data?.[0];
-  const currentFees = (currentAdaPot?.fees ?? 0) / 1_000_000;
-  const initialReserves = (currentAdaPot?.reserves ?? 0) / 1_000_000;
-  const initialTreasury = (currentAdaPot?.treasury ?? 0) / 1_000_000;
+  const currentFees = (currentAdaPot?.fees ?? 1) / 1_000_000;
+  const initialReserves = (currentAdaPot?.reserves ?? 1) / 1_000_000;
+  const initialTreasury = (currentAdaPot?.treasury ?? 1) / 1_000_000;
 
   const tau = epochParam?.treasury_growth_rate ?? 0.2;
   const rho = epochParam?.monetary_expand_rate ?? 0.003;
