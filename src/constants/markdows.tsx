@@ -4,6 +4,7 @@ import type { Components } from "react-markdown";
 export const markdownComponents = (
   setClickedUrl: Dispatch<SetStateAction<string | null>>,
 ): Components => ({
+  span: ({ children }) => <span className='text-sm'>{children}</span>,
   a: ({ href, children }) => {
     let url = href ?? "#";
 
@@ -18,31 +19,41 @@ export const markdownComponents = (
     }
 
     return (
-      <a
-        href={url}
-        rel='nofollow'
-        className='overflow-wrap-anywhere break-all text-primary underline'
+      <button
+        type='button'
+        className='overflow-wrap-anywhere text-sm cursor-pointer break-all border-none bg-transparent p-0 text-primary'
+        onMouseDown={e => {
+          e.preventDefault();
+          e.stopPropagation();
+          setClickedUrl(url);
+        }}
         onClick={e => {
           e.preventDefault();
-          setClickedUrl(url);
+          e.stopPropagation();
         }}
       >
         {children}
-      </a>
+      </button>
     );
   },
   pre: ({ children }) => (
-    <pre className='whitespace-pre-wrap break-words'>{children}</pre>
+    <pre className='text-sm whitespace-pre-wrap break-words'>{children}</pre>
   ),
   p: ({ children }) => (
-    <p className='overflow-wrap-anywhere mb-1 break-words'>{children}</p>
+    <p className='overflow-wrap-anywhere text-sm mb-1 break-words'>
+      {children}
+    </p>
   ),
   li: ({ children }) => (
-    <li className='overflow-wrap-anywhere break-words'>{children}</li>
+    <li className='overflow-wrap-anywhere text-sm mb-1 break-words'>
+      {children}
+    </li>
   ),
-  ul: ({ children }) => <ul className='mb-2'>{children}</ul>,
-  ol: ({ children }) => <ol className='mb-2'>{children}</ol>,
-  h1: ({ children }) => <h1 className='mb-2 text-text-xl font-bold'>{children}</h1>,
+  ul: ({ children }) => <ul className='text-sm mb-2 ml-5'>{children}</ul>,
+  ol: ({ children }) => <ol className='text-sm mb-2 ml-5'>{children}</ol>,
+  h1: ({ children }) => (
+    <h1 className='mb-2 text-text-xl font-bold'>{children}</h1>
+  ),
   h2: ({ children }) => (
     <h2 className='mb-1.5 text-text-lg font-semibold'>{children}</h2>
   ),
@@ -72,4 +83,15 @@ export const markdownComponents = (
       {children}
     </th>
   ),
+  code: ({ children }) => <code className='text-sm'>{children}</code>,
+  strong: ({ children }) => (
+    <strong className='text-sm font-semibold'>{children}</strong>
+  ),
+  em: ({ children }) => <em className='text-sm'>{children}</em>,
+  blockquote: ({ children }) => (
+    <blockquote className='text-sm border-l-2 border-border pl-3'>
+      {children}
+    </blockquote>
+  ),
+  div: ({ children }) => <div className='text-sm'>{children}</div>,
 });

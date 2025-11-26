@@ -57,6 +57,11 @@ export const VoteCell: FC<VoteCellProps> = ({
     try {
       const fetchUrl = convertIpfsUrl(url);
       const response = await fetch(fetchUrl);
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
       const data = await response.text();
 
       try {
@@ -109,6 +114,11 @@ export const VoteCell: FC<VoteCellProps> = ({
       try {
         const fetchUrl = convertIpfsUrl(anchorInfo.url);
         const response = await fetch(fetchUrl);
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
         const data = await response.text();
 
         try {
@@ -126,8 +136,9 @@ export const VoteCell: FC<VoteCellProps> = ({
           setModalContent(data);
           setFullMetadata("");
         }
-      } catch {
-        setModalContent("Failed to fetch content from URL");
+      } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : "Unknown error";
+        setModalContent(`Failed to fetch content from URL:\n\n${anchorInfo.url}\n\nError: ${errorMessage}`);
         setFullMetadata("");
       } finally {
         setIsLoading(false);
@@ -171,6 +182,7 @@ export const VoteCell: FC<VoteCellProps> = ({
       )}
 
       {isModalOpen &&
+        !clickedUrl &&
         createPortal(
           <Modal onClose={() => setIsModalOpen(false)} maxWidth='800px'>
             <div className='p-4'>
@@ -199,7 +211,7 @@ export const VoteCell: FC<VoteCellProps> = ({
                 </div>
               ) : (
                 <>
-                  <div className='rounded-lg text-sm max-h-[500px] overflow-auto p-3'>
+                  <div className='rounded-lg text-sm max-h-[500px] overflow-auto'>
                     {showFullMetadata && fullMetadata ? (
                       (() => {
                         try {
@@ -219,12 +231,20 @@ export const VoteCell: FC<VoteCellProps> = ({
                         }
                       })()
                     ) : (
-                      <ReactMarkdown
-                        remarkPlugins={[remarkGfm]}
-                        components={markdownComponents(setClickedUrl)}
+                      <div
+                        className='text-sm'
+                        style={{
+                          fontSize: "var(--font-size-text-sm)",
+                          lineHeight: "var(--line-height-text-sm)",
+                        }}
                       >
-                        {modalContent}
-                      </ReactMarkdown>
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          components={markdownComponents(setClickedUrl)}
+                        >
+                          {modalContent}
+                        </ReactMarkdown>
+                      </div>
                     )}
                   </div>
                   {fullMetadata && (
@@ -248,7 +268,12 @@ export const VoteCell: FC<VoteCellProps> = ({
           document.body,
         )}
       {clickedUrl && (
-        <SafetyLinkModal url={clickedUrl} onClose={() => setClickedUrl(null)} />
+        <SafetyLinkModal
+          url={clickedUrl}
+          onClose={() => {
+            setClickedUrl(null);
+          }}
+        />
       )}
     </div>
   );
