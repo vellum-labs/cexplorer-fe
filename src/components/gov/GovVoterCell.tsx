@@ -43,7 +43,7 @@ export const GovVoterCell: FC<GovVoterCellProps> = ({ role, info }) => {
       : role === GovernanceRole.DRep
         ? `/drep/${voterId}`
         : role === GovernanceRole.ConstitutionalCommittee
-          ? `/gov/cc/${voterId}`
+          ? `/gov/cc`
           : undefined;
 
   return (
