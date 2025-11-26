@@ -218,7 +218,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                     .map(([key, value]) => {
                       return (
                         <div
-                          className={`flex w-full cursor-pointer select-none flex-nowrap items-center rounded-xs px-1 py-0.5 hover:bg-cardBg ${key === currency ? "bg-cardBg" : ""}`}
+                          className={`flex w-full cursor-pointer select-none flex-nowrap items-center rounded-xs px-1 py-0.5 ${key === currency ? "bg-cardBg" : ""}`}
                         >
                           <SelectItem
                             key={key}
@@ -269,7 +269,9 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
       }
       options={settingsOptions}
       width='200px'
-      poppoverClassname={withBorder ? "border border-border" : undefined}
+      poppoverClassname={
+        withBorder ? "border border-border !p-0 !w-[200px]" : undefined
+      }
     />
   );
 };
