@@ -19,8 +19,8 @@ import { useFetchUserInfo } from "@/services/user";
 import type { MobileMenuScreen } from "@/types/navigationTypes";
 import ConnectWalletModal from "../wallet/ConnectWalletModal";
 import { useWalletStore } from "@/stores/walletStore";
-import { Link } from "@tanstack/react-router";
 import { GlobalSearch } from "@vellumlabs/cexplorer-sdk";
+import { useNavigate } from "@tanstack/react-router";
 
 export const MobileBottomNav: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -31,17 +31,24 @@ export const MobileBottomNav: FC = () => {
   const infoQuery = useFetchUserInfo();
   const { address, walletType } = useWalletStore();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (showSearchModal) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "";
+      document.body.style.overflow = "auto";
     }
 
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = "auto";
     };
   }, [showSearchModal]);
+
+  const handleLogo = () => {
+    window.scrollTo({ top: 0 });
+    navigate({ to: "/" });
+  };
 
   return (
     <>
@@ -80,11 +87,12 @@ export const MobileBottomNav: FC = () => {
           <Settings size={24} className='text-grayTextPrimary' />
         </button>
 
-        <Link to='/' className='flex flex-col items-center gap-1'>
-          <div className='rounded-full flex h-12 w-12 items-center justify-center'>
-            <img src={CexLogo} alt='Cexplorer' className='h-7 w-7' />
-          </div>
-        </Link>
+        <div
+          className='rounded-full flex h-12 w-12 flex-col items-center justify-center gap-1'
+          onClick={handleLogo}
+        >
+          <img src={CexLogo} alt='Cexplorer' className='h-7 w-7' />
+        </div>
 
         <button
           className='flex flex-col items-center gap-1'
