@@ -219,7 +219,13 @@ const PoolRewardsTable = ({
               {proratedLuck}
             </div>
           ) : (
-            <>{((item.block?.luck ?? 0) * 100).toFixed(1) + "%"}</>
+            <>
+              {(() => {
+                const luck = (item.block?.luck ?? 0) * 100;
+                if (!isFinite(luck)) return "-";
+                return luck.toFixed(1) + "%";
+              })()}
+            </>
           )}
         </div>
       ),
