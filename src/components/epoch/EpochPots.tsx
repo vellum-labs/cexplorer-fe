@@ -1,21 +1,36 @@
 import type { EpochStatsSummary } from "@/types/epochTypes";
 import type { FC } from "react";
+import type { MiscConstResponseData } from "@/types/miscTypes";
 
 import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 
 interface EpochPotsProps {
   stats: EpochStatsSummary;
+  constData?: MiscConstResponseData;
 }
 
-export const EpochPots: FC<EpochPotsProps> = ({ stats }) => {
+export const EpochPots: FC<EpochPotsProps> = ({ stats, constData }) => {
   const treasury = stats?.pots?.treasury;
   const reserves = stats?.pots?.reserves;
   const rewards = stats?.pots?.rewards;
   const depositsStake = stats?.pots?.deposits?.deposits_stake;
   const fees = stats?.pots?.fees;
-  const epoch = stats?.epoch;
+
+  const feesForRewards =
+    (stats?.pots?.fees ?? 1) *
+    (1 - +(constData?.epoch_param?.treasury_growth_rate ?? 0.2));
+  const reservesForRewards =
+    (stats?.pots?.reserves ?? 1) *
+    +(constData?.epoch_param?.monetary_expand_rate ?? 0.003) *
+    (1 - +(constData?.epoch_param?.treasury_growth_rate ?? 0.2));
+
+  const rewardsTotal = feesForRewards + reservesForRewards;
+
+  const feesPercentage = (feesForRewards / rewardsTotal) * 100;
+  const reservesPercentage = (reservesForRewards / rewardsTotal) * 100;
 
   const overviewList = [
     {
@@ -59,16 +74,16 @@ export const EpochPots: FC<EpochPotsProps> = ({ stats }) => {
       ),
     },
     {
-      label: "Earned / Treasury",
-      value: (() => {
-        const earnedTreasuryPercentage = (epoch?.fees / treasury) * 100;
-
-        return (
-          <p className='text-text-sm font-medium'>
-            {earnedTreasuryPercentage.toFixed(6)}%
-          </p>
-        );
-      })(),
+      label: (
+        <Tooltip content='Portion of staking rewards coming from fees vs reserves'>
+          <span className='cursor-help'>Fees / Reserves</span>
+        </Tooltip>
+      ),
+      value: (
+        <p className='text-text-sm font-medium'>
+          {feesPercentage.toFixed(2)}% / {reservesPercentage.toFixed(2)}%
+        </p>
+      ),
     },
   ];
 

@@ -58,16 +58,16 @@ const PoolRewardsTable = ({
     (detailQuery.data?.data?.active_stake ?? 1)
   ).toFixed(2);
   const epochElapsed = useElapsedEpochNumber(miscConst);
+
   const proratedLuck = detailQuery.data?.data?.epochs[0].data.block
     ? (() => {
-        const estimated = detailQuery.data?.data?.epochs[0]?.data?.block?.estimated ?? 0;
-        if (estimated === 0) return "-";
+        const percent =
+          ((detailQuery.data?.data?.blocks?.epoch || 0) /
+            (detailQuery.data?.data?.epochs[0]?.data?.block?.estimated || 1) /
+            epochElapsed) *
+          100;
 
-        return (
-          ((detailQuery.data?.data?.blocks?.epoch ?? 0) / estimated) *
-          100 *
-          (1 + epochElapsed)
-        ).toFixed(2) + "%";
+        return Number.isNaN(percent) ? "-" : percent.toFixed(2) + "%";
       })()
     : "-";
 
@@ -78,7 +78,9 @@ const PoolRewardsTable = ({
   const columns = [
     {
       key: "epoch",
-      render: item => <EpochCell no={item.no} showPulseDot currentEpoch={miscConst?.no} />,
+      render: item => (
+        <EpochCell no={item.no} showPulseDot currentEpoch={miscConst?.no} />
+      ),
       title: <p className='w-full text-right'>Epoch</p>,
       visible: columnsVisibility.epoch,
       widthPx: 30,

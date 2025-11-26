@@ -100,7 +100,7 @@ const fetchMiscConst = async () => {
 };
 
 export const useFetchMiscConst = (basicVersion: number | undefined) => {
-  const { setConst, constData } = useConstStore();
+  const { setConst } = useConstStore();
   const { setConstVersion, constVersion } = useVersionStore();
 
   const query = useQuery({
@@ -109,14 +109,11 @@ export const useFetchMiscConst = (basicVersion: number | undefined) => {
     enabled:
       constVersion !== undefined &&
       basicVersion !== undefined &&
-      (constVersion !== basicVersion || !constData),
+      constVersion !== basicVersion,
   });
 
-  if (basicVersion && query.isSuccess) {
+  if (basicVersion && query.isSuccess && query.data) {
     setConstVersion(basicVersion);
-  }
-
-  if (query.data) {
     setConst(query.data.data);
   }
 
