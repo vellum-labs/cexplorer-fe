@@ -12,10 +12,14 @@ export const WikiDetailPage = () => {
   const detailQuery = useFetchWikiDetail("en", url);
   const listQuery = useFetchWikiList("en", 0, 100);
   const data = detailQuery.data;
-  const otherWikis =
+  const allOtherWikis =
     listQuery.data?.pages
       .flatMap(page => page.data.data)
       .filter(wiki => wiki.url !== url) || [];
+
+  const otherWikis = allOtherWikis
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 5);
 
   if (detailQuery.isLoading) {
     return (
