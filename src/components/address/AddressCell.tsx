@@ -62,33 +62,37 @@ const AddressCell = ({
         role='button'
       >
         {amount != null && (
-          <Tooltip
-            content={
-              <div className='min-w-[130px] text-center'>
-                {getAnimalRangeByAmount(amount)}
-              </div>
-            }
-          >
-            <img
-              src={getAddressAnimalImage(amount)}
-              alt='Sea animal'
-              width={25}
-              height={25}
-            />
-          </Tooltip>
+          <div onMouseEnter={() => !forceHighlight && setHoverValue(null)}>
+            <Tooltip
+              content={
+                <div className='min-w-[130px] text-center'>
+                  {getAnimalRangeByAmount(amount)}
+                </div>
+              }
+            >
+              <img
+                src={getAddressAnimalImage(amount)}
+                alt='Sea animal'
+                width={25}
+                height={25}
+              />
+            </Tooltip>
+          </div>
         )}
         {parseShelleyAddress(address)?.paymentPart === "ScriptHash" && (
-          <Tooltip
-            content={
-              <div className='flex w-[166px] flex-col items-center text-text-sm'>
-                <p className='font-medium'>Smart Contract Address</p>
+          <div onMouseEnter={() => !forceHighlight && setHoverValue(null)}>
+            <Tooltip
+              content={
+                <div className='flex w-[166px] flex-col items-center text-text-sm'>
+                  <p className='font-medium'>Smart Contract Address</p>
+                </div>
+              }
+            >
+              <div className='flex h-[15px] w-[15px] items-center justify-center rounded-max bg-darkBlue p-[2px]'>
+                <Code2 size={15} strokeWidth={2.5} color='white' />
               </div>
-            }
-          >
-            <div className='flex h-[15px] w-[15px] items-center justify-center rounded-max bg-darkBlue p-[2px]'>
-              <Code2 size={15} strokeWidth={2.5} color='white' />
-            </div>
-          </Tooltip>
+            </Tooltip>
+          </div>
         )}
         <Link
           to={isStake ? "/stake/$stakeAddr" : "/address/$address"}
@@ -109,7 +113,9 @@ const AddressCell = ({
             </>
           )}
         </Link>
-        <Copy copyText={address} />
+        <div onMouseEnter={() => !forceHighlight && setHoverValue(null)}>
+          <Copy copyText={address} />
+        </div>
         {isValidAddress(address) && Address.from(address).stake && (
           <Tooltip
             content={
@@ -129,6 +135,7 @@ const AddressCell = ({
             }
           >
             <div
+              onMouseEnter={() => !forceHighlight && setHoverValue(null)}
               className={`flex items-center ${highlightStakeKey ? "rounded-s bg-hoverHighlight px-1/2 outline outline-1 outline-highlightBorder" : ""}`}
             >
               <KeyRound size={15} color={colors.primary} />
@@ -136,16 +143,18 @@ const AddressCell = ({
           </Tooltip>
         )}
         {stakeKey && stakeKey !== Address.from(address).rewardAddress && (
-          <Tooltip
-            content={
-              <p className='w-[200px] text-center'>
-                This address belongs to a different stake key than you're
-                currently viewing.
-              </p>
-            }
-          >
-            <PulseDot animate={false} color='#F79009' />
-          </Tooltip>
+          <div onMouseEnter={() => !forceHighlight && setHoverValue(null)}>
+            <Tooltip
+              content={
+                <p className='w-[200px] text-center'>
+                  This address belongs to a different stake key than you're
+                  currently viewing.
+                </p>
+              }
+            >
+              <PulseDot animate={false} color='#F79009' />
+            </Tooltip>
+          </div>
         )}
       </div>
     </>
