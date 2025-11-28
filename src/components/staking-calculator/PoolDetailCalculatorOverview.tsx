@@ -8,6 +8,7 @@ import {
 } from "@vellumlabs/cexplorer-sdk";
 import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { format, parseISO } from "date-fns";
 import { formatWebsiteUrl } from "@/utils/format/formatWebsiteUrl";
 import type { useFetchPoolDetail } from "@/services/pools";
@@ -26,7 +27,7 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
 }) => {
   const data = query.data?.data;
   const [linkModal, setLinkModal] = useState<boolean>(false);
-  const [selectedRoaType, setSelectedRoaType] = useState<'upper' | 'average' | 'lower'>('average');
+  const [selectedRoaType, setSelectedRoaType] = useState<'upper' | 'actual' | 'lower'>('actual');
 
   if (query.isLoading) {
     return (
@@ -186,50 +187,62 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
 
       <h3 className='mt-4 text-text-lg font-semibold'>Expected returns</h3>
       <div className='grid grid-cols-1 gap-3 sm:grid-cols-3'>
-        <button
-          onClick={() => {
-            setSelectedRoaType('upper');
-            onRoaChange?.(upperRoa);
-          }}
-          className={`flex flex-col items-center gap-1 rounded-xl border p-2 transition-colors ${
-            selectedRoaType === 'upper'
-              ? 'border-primary bg-cardBg'
-              : 'border-border bg-cardBg hover:border-primary/50'
-          }`}
-        >
-          <p className='text-text-2xl font-bold'>{upperRoa.toFixed(2)}%</p>
-          <p className='text-center text-text-sm text-grayTextPrimary'>Upper</p>
-        </button>
-        <button
-          onClick={() => {
-            setSelectedRoaType('average');
-            onRoaChange?.(recentRoa);
-          }}
-          className={`flex flex-col items-center gap-1 rounded-xl border p-2 transition-colors ${
-            selectedRoaType === 'average'
-              ? 'border-primary bg-cardBg'
-              : 'border-border bg-cardBg hover:border-primary/50'
-          }`}
-        >
-          <p className='text-text-2xl font-bold'>{recentRoa.toFixed(2)}%</p>
-          <p className='text-center text-text-sm text-grayTextPrimary'>
-            Average
-          </p>
-        </button>
-        <button
-          onClick={() => {
-            setSelectedRoaType('lower');
-            onRoaChange?.(lowerRoa);
-          }}
-          className={`flex flex-col items-center gap-1 rounded-xl border p-2 transition-colors ${
-            selectedRoaType === 'lower'
-              ? 'border-primary bg-cardBg'
-              : 'border-border bg-cardBg hover:border-primary/50'
-          }`}
-        >
-          <p className='text-text-2xl font-bold'>{lowerRoa.toFixed(2)}%</p>
-          <p className='text-center text-text-sm text-grayTextPrimary'>Lower</p>
-        </button>
+        <Tooltip content="Optimistic rate estimate (+10% above actual)">
+          <div>
+            <button
+              onClick={() => {
+                setSelectedRoaType('upper');
+                onRoaChange?.(upperRoa);
+              }}
+              className={`flex w-full flex-col items-center gap-1 rounded-xl border p-2 transition-colors ${
+                selectedRoaType === 'upper'
+                  ? 'border-primary bg-cardBg'
+                  : 'border-border bg-cardBg hover:border-primary/50'
+              }`}
+            >
+              <p className='text-text-2xl font-bold'>{upperRoa.toFixed(2)}%</p>
+              <p className='text-center text-text-sm text-grayTextPrimary'>Upper</p>
+            </button>
+          </div>
+        </Tooltip>
+        <Tooltip content="Current pool performance based on recent data">
+          <div>
+            <button
+              onClick={() => {
+                setSelectedRoaType('actual');
+                onRoaChange?.(recentRoa);
+              }}
+              className={`flex w-full flex-col items-center gap-1 rounded-xl border p-2 transition-colors ${
+                selectedRoaType === 'actual'
+                  ? 'border-primary bg-cardBg'
+                  : 'border-border bg-cardBg hover:border-primary/50'
+              }`}
+            >
+              <p className='text-text-2xl font-bold'>{recentRoa.toFixed(2)}%</p>
+              <p className='text-center text-text-sm text-grayTextPrimary'>
+                Actual
+              </p>
+            </button>
+          </div>
+        </Tooltip>
+        <Tooltip content="Pessimistic rate estimate (-10% below actual)">
+          <div>
+            <button
+              onClick={() => {
+                setSelectedRoaType('lower');
+                onRoaChange?.(lowerRoa);
+              }}
+              className={`flex w-full flex-col items-center gap-1 rounded-xl border p-2 transition-colors ${
+                selectedRoaType === 'lower'
+                  ? 'border-primary bg-cardBg'
+                  : 'border-border bg-cardBg hover:border-primary/50'
+              }`}
+            >
+              <p className='text-text-2xl font-bold'>{lowerRoa.toFixed(2)}%</p>
+              <p className='text-center text-text-sm text-grayTextPrimary'>Lower</p>
+            </button>
+          </div>
+        </Tooltip>
       </div>
     </>
   );
