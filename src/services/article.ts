@@ -2,6 +2,8 @@ import { handleFetch } from "@/lib/handleFetch";
 import type {
   ArticleDetailResponse,
   ArticleListResponse,
+  WikiDetailResponse,
+  WikiListResponse,
 } from "@/types/articleTypes";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
@@ -88,6 +90,72 @@ export const useFetchArticleList = (
         offset: pageParam,
         limit,
         category,
+      }),
+    initialPageParam: page,
+    getNextPageParam: lastPage => {
+      const nextOffset = (lastPage.prevOffset as number) + limit;
+      if (nextOffset >= lastPage.data.count) return undefined;
+      return nextOffset;
+    },
+    staleTime: 1000 * 60 * 5,
+  });
+
+export const fetchWikiDetail = async ({ lng, url }: { lng: "en"; url: string }) => {
+  const apiUrl = "/article/detail";
+
+  const options = {
+    params: {
+      lng,
+      type: "wiki",
+      url,
+    },
+  };
+
+  return handleFetch<WikiDetailResponse>(apiUrl, undefined, options);
+};
+
+export const useFetchWikiDetail = (lng: "en", url: string, enabled: boolean = true) =>
+  useQuery({
+    queryKey: ["wikiDetail", lng, url],
+    queryFn: async () => {
+      const { data } = await fetchWikiDetail({ lng, url });
+      return data;
+    },
+    staleTime: 1000 * 60 * 5,
+    enabled,
+  });
+
+export const fetchWikiList = async ({
+  lng,
+  offset,
+  limit,
+}: {
+  lng: "en";
+  offset: number;
+  limit: number;
+}) => {
+  const apiUrl = "/article/list";
+
+  const options = {
+    params: {
+      lng,
+      type: "wiki",
+      limit,
+      offset,
+    },
+  };
+
+  return handleFetch<WikiListResponse>(apiUrl, offset, options);
+};
+
+export const useFetchWikiList = (lng: "en", page: number, limit: number) =>
+  useInfiniteQuery({
+    queryKey: ["wiki-list", lng, page, limit],
+    queryFn: async ({ pageParam = page }) =>
+      await fetchWikiList({
+        lng,
+        offset: pageParam,
+        limit,
       }),
     initialPageParam: page,
     getNextPageParam: lastPage => {

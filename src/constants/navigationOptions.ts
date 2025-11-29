@@ -185,6 +185,10 @@ export const navigationOptions: {
   ],
   education: [
     {
+      label: "Wiki",
+      href: "/wiki",
+    },
+    {
       label: "Articles",
       href: "/article",
     },

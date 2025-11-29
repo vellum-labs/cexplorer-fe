@@ -141,6 +141,22 @@ const routes = [
     image: "%image%"
   },
   {
+    path: "/wiki",
+    title: "Cardano Wiki | Cexplorer.io",
+    description:
+      "Learn about Cardano blockchain with comprehensive wiki articles. Explore short guides covering core mechanisms, staking, wallets, governance, smart contracts, and essential Cardano concepts explained in easy-to-understand format.",
+    keywords:
+      "Cardano wiki, blockchain guide, Cardano education, staking guide, wallet guide, Cardano tutorial, learn Cardano, blockchain basics, Cexplorer wiki",
+    api: false,
+  },
+  {
+    path: "/wiki/:url",
+    title: "%name% | Wiki | Cexplorer.io",
+    description: "%description%",
+    keywords: "%keywords%",
+    api: `${API_URL}/article/detail?type=wiki&url=%url%&lng=%lng%`,
+  },
+  {
     path: "/asset",
     title: "Assets | Cexplorer.io",
     description:
