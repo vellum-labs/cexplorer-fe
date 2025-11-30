@@ -1,8 +1,8 @@
-import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
@@ -10,6 +10,8 @@ import type { PoolData } from "@/types/poolTypes";
 import type { PoolUpdatesColumns, TableColumns } from "@/types/tableTypes";
 import { Check, ExternalLink, X } from "lucide-react";
 import type { FC } from "react";
+import { PoolCell } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 
 import { poolUpdatesTableOptions } from "@/constants/tables/poolUpdatesTableOptions";
 
@@ -108,21 +110,12 @@ export const PoolUpdatesPage: FC = () => {
         }
 
         return (
-          <Link
-            to='/epoch/$no'
-            params={{
-              no: String(
-                item?.pool_update?.active?.active_epoch_no ||
-                  item?.pool_update?.live?.active_epoch_no,
-              ),
-            }}
-            className='text-primary'
-          >
-            <p className='text-right'>
-              {item?.pool_update?.active?.active_epoch_no ||
-                item?.pool_update?.live?.active_epoch_no}
-            </p>
-          </Link>
+          <EpochCell
+            no={
+              item?.pool_update?.active?.active_epoch_no ||
+              item?.pool_update?.live?.active_epoch_no
+            }
+          />
         );
       },
       title: <p className='w-full text-right'>Epoch</p>,
@@ -132,31 +125,13 @@ export const PoolUpdatesPage: FC = () => {
     {
       key: "pool",
       render: item => (
-        <div className='flex flex-col'>
-          <Link to='/pool/$id' params={{ id: item.pool_id }}>
-            <span
-              title={item.pool_id}
-              className='cursor-pointer text-text-sm text-primary'
-            >
-              {item.pool_name?.ticker && `[${item.pool_name.ticker}] `}
-              {item.pool_name?.name && item.pool_name.name}
-            </span>
-          </Link>
-          <div className='item-center flex gap-1'>
-            <Link to='/pool/$id' params={{ id: item.pool_id }}>
-              <span
-                className={`${item.pool_name?.ticker ? "text-text-xs" : "text-text-sm"} text-primary`}
-              >
-                {formatString(item.pool_id, "long")}
-              </span>
-            </Link>
-            <Copy
-              copyText={item.pool_id}
-              size={10}
-              className='stroke-grayText translate-y-[6px]'
-            />
-          </div>
-        </div>
+        <PoolCell
+          poolInfo={{
+            id: item.pool_id,
+            meta: item.pool_name,
+          }}
+          poolImageUrl={generateImageUrl(item.pool_id, "ico", "pool")}
+        />
       ),
       jsonFormat: item => {
         if (!item.pool_name.ticker && !item.pool_name.name && !item.pool_id) {

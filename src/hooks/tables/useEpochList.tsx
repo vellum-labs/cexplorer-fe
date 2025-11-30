@@ -3,8 +3,8 @@ import type { EpochListData } from "@/types/epochTypes";
 import type { Dispatch, SetStateAction } from "react";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import ReactEcharts from "echarts-for-react";
 
 import {
@@ -20,7 +20,6 @@ import {
 } from "@vellumlabs/cexplorer-sdk";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
-import { Link } from "@tanstack/react-router";
 import { format } from "date-fns";
 
 import { useFetchEpochList } from "@/services/epoch";
@@ -187,20 +186,12 @@ export const useEpochList = ({
       render: item => {
         const epochNo = item.params?.[0]?.epoch_no ?? item.no;
         return (
-          <div className='relative'>
-            <div className='absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2'>
-              {+epoch_number - 1 === epochNo && <PulseDot />}
-            </div>
-            <p className='cursor-pointer pl-1.5 text-text-sm text-primary'>
-              <Link
-                to='/epoch/$no'
-                params={{ no: String(epochNo) }}
-                className='text-primary'
-              >
-                {epochNo}
-              </Link>
-            </p>
-          </div>
+          <EpochCell
+            no={epochNo}
+            showPulseDot
+            currentEpoch={epoch_number - 1}
+            justify='start'
+          />
         );
       },
       title: <p>Epoch</p>,
@@ -384,12 +375,12 @@ export const useEpochList = ({
               data: [
                 {
                   value: usagePercentage,
-                  name: "Usage",
+                  name: "Used",
                   itemStyle: { color: "#47CD89" },
                 },
                 {
                   value: (100 - blockUsage).toFixed(2),
-                  name: "Left",
+                  name: "Unused",
                   itemStyle: { color: "#FEC84B" },
                 },
               ],

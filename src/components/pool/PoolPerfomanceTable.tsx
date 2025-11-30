@@ -4,9 +4,8 @@ import type { PoolPefomanceColumns } from "@/types/tableTypes";
 import ExportButton from "../table/ExportButton";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
-import { Link } from "@tanstack/react-router";
-import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchPoolDetail } from "@/services/pools";
 import { usePoolPerfomanceTableStore } from "@/stores/tables/poolPerfomanceTableStore";
@@ -82,7 +81,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
     ...(query.data?.data?.epochs ?? []),
   ];
 
-  const items = (detailedData ?? []).map(item => ({
+  const allItems = (detailedData ?? []).map(item => ({
     epoch: item.no,
     activeStake: item.data.epoch_stake,
     blocks: item.data.block.minted,
@@ -92,10 +91,10 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
     roa: item.data.reward.member_pct,
   }));
 
-  const totalItems = items.length;
+  const totalItems = allItems.length;
 
   const { startTime: firstEpochStartTime } = calculateEpochTimeByNumber(
-    items[0]?.epoch,
+    allItems[0]?.epoch,
     miscConst?.epoch.no ?? 0,
     miscConst?.epoch.start_time ?? "",
   );
@@ -127,28 +126,13 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
   const columns = [
     {
       key: "epoch",
-      render: item => {
-        if (!item?.epoch) {
-          return "-";
-        }
-
-        return (
-          <div className='relative'>
-            <div className='absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2'>
-              {miscConst?.epoch.no === item.epoch && <PulseDot />}
-            </div>
-            <p className='cursor-pointer pl-1.5 text-text-sm text-primary'>
-              <Link
-                to='/epoch/$no'
-                params={{ no: String(item.epoch ?? 0) }}
-                className='text-primary'
-              >
-                {item.epoch}
-              </Link>
-            </p>
-          </div>
-        );
-      },
+      render: item => (
+        <EpochCell
+          no={item?.epoch}
+          showPulseDot
+          currentEpoch={miscConst?.epoch.no}
+        />
+      ),
       title: "Epoch",
       visible: columnsVisibility.epoch,
       widthPx: 55,
@@ -176,7 +160,11 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
                 : "-"}
             </span>
             <DateCell
-              time={startTime ? startTime.toISOString() : ""}
+              time={
+                startTime && !isNaN(startTime.getTime())
+                  ? startTime.toISOString()
+                  : ""
+              }
               withoutConvert
               className='text-text-xs text-grayTextPrimary'
             />
@@ -246,7 +234,11 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
                 : "-"}
             </span>
             <DateCell
-              time={endTime ? endTime.toISOString() : ""}
+              time={
+                endTime && !isNaN(endTime.getTime())
+                  ? endTime.toISOString()
+                  : ""
+              }
               withoutConvert
               className='text-text-xs text-grayTextPrimary'
             />
@@ -409,7 +401,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
   return (
     <>
       <div className='flex items-center gap-1'>
-        <ExportButton columns={columns} items={items} />
+        <ExportButton columns={columns} items={allItems} />
         <TableSettingsDropdown
           rows={rows}
           setRows={setRows}
@@ -429,7 +421,8 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
         itemsPerPage={rows}
         scrollable
         query={query}
-        items={items}
+        pagination={true}
+        items={allItems}
         columns={columns.sort((a, b) => {
           return (
             columnsOrder.indexOf(a.key as keyof PoolPefomanceColumns) -

@@ -15,10 +15,10 @@ import { useEffect, useState } from "react";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { Badge } from "@vellumlabs/cexplorer-sdk";
-import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "../table/ExportButton";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   poolId: string;
@@ -58,13 +58,17 @@ const PoolRewardsTable = ({
     (detailQuery.data?.data?.active_stake ?? 1)
   ).toFixed(2);
   const epochElapsed = useElapsedEpochNumber(miscConst);
+
   const proratedLuck = detailQuery.data?.data?.epochs[0].data.block
-    ? (
-        ((detailQuery.data?.data?.blocks?.epoch ?? 0) /
-          detailQuery.data?.data?.epochs[0]?.data?.block?.estimated) *
-        100 *
-        (1 + epochElapsed)
-      ).toFixed(2) + "%"
+    ? (() => {
+        const percent =
+          ((detailQuery.data?.data?.blocks?.epoch || 0) /
+            (detailQuery.data?.data?.epochs[0]?.data?.block?.estimated || 1) /
+            epochElapsed) *
+          100;
+
+        return Number.isNaN(percent) ? "-" : percent.toFixed(2) + "%";
+      })()
     : "-";
 
   const totalCount = poolRewardsQuery.data?.pages[0].data.count;
@@ -75,14 +79,7 @@ const PoolRewardsTable = ({
     {
       key: "epoch",
       render: item => (
-        <div className='flex items-center justify-end gap-1.5 text-right'>
-          {miscConst?.no === item.no ? (
-            <PulseDot />
-          ) : (
-            <div className='h-2 w-2' />
-          )}
-          {item.no}
-        </div>
+        <EpochCell no={item.no} showPulseDot currentEpoch={miscConst?.no} />
       ),
       title: <p className='w-full text-right'>Epoch</p>,
       visible: columnsVisibility.epoch,
@@ -222,7 +219,13 @@ const PoolRewardsTable = ({
               {proratedLuck}
             </div>
           ) : (
-            <>{((item.block?.luck ?? 0) * 100).toFixed(1) + "%"}</>
+            <>
+              {(() => {
+                const luck = (item.block?.luck ?? 0) * 100;
+                if (!isFinite(luck)) return "-";
+                return luck.toFixed(1) + "%";
+              })()}
+            </>
           )}
         </div>
       ),

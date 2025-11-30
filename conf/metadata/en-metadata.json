@@ -128,6 +128,9 @@
   "treasuryDonations": {
     "title": "Treasury Donations | Cexplorer.io"
   },
+  "treasuryProjection": {
+    "title": "Treasury Projection | Cexplorer.io"
+  },
   "scriptList": {
     "title": "Scripts | Cexplorer.io"
   },
@@ -208,5 +211,8 @@
   },
   "taxTool": {
     "title": "Tax Tool | Cexplorer.io"
+  },
+  "stakingCalculator": {
+    "title": "Rewards Calculator | Cexplorer.io"
   }
 }

@@ -24,6 +24,7 @@ import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { isVoteLate } from "@/utils/governance/isVoteLate";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 
 interface VoteDetailCardProps {
   vote: GovernanceVote;
@@ -107,16 +108,10 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
             key: "enacted_epoch",
             title: "Enacted epoch",
             value: (
-              <span className='text-text-sm'>
-                Epoch{" "}
-                <Link
-                  to='/epoch/$no'
-                  params={{ no: vote?.proposal?.enacted_epoch?.toString() }}
-                  className='text-primary'
-                >
-                  {vote?.proposal?.enacted_epoch}
-                </Link>
-              </span>
+              <div className='flex items-center gap-1 text-text-sm'>
+                <span>Epoch</span>
+                <EpochCell no={vote?.proposal?.enacted_epoch} />
+              </div>
             ),
           },
         ]
@@ -127,16 +122,10 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
             key: "ratified_epoch",
             title: "Ratified epoch",
             value: (
-              <span className='text-text-sm'>
-                Epoch{" "}
-                <Link
-                  to='/epoch/$no'
-                  params={{ no: vote?.proposal?.ratified_epoch?.toString() }}
-                  className='text-primary'
-                >
-                  {vote?.proposal?.ratified_epoch}
-                </Link>
-              </span>
+              <div className='flex items-center gap-1 text-text-sm'>
+                <span>Epoch</span>
+                <EpochCell no={vote?.proposal?.ratified_epoch} />
+              </div>
             ),
           },
         ]
@@ -147,16 +136,10 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
             key: "expired_epoch",
             title: "Expired epoch",
             value: (
-              <span className='text-text-sm'>
-                Epoch{" "}
-                <Link
-                  to='/epoch/$no'
-                  params={{ no: vote?.proposal?.expired_epoch?.toString() }}
-                  className='text-primary'
-                >
-                  {vote?.proposal?.expired_epoch}
-                </Link>
-              </span>
+              <div className='flex items-center gap-1 text-text-sm'>
+                <span>Epoch</span>
+                <EpochCell no={vote?.proposal?.expired_epoch} />
+              </div>
             ),
           },
         ]
@@ -174,16 +157,10 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       key: "voting_end",
       title: "Voting deadline",
       value: vote?.proposal?.expiration ? (
-        <span className='text-text-sm'>
-          Epoch{" "}
-          <Link
-            to='/epoch/$no'
-            params={{ no: vote?.proposal?.expiration?.toString() }}
-            className='text-primary'
-          >
-            {vote?.proposal?.expiration}
-          </Link>
-        </span>
+        <div className='flex items-center gap-1 text-text-sm'>
+          <span>Epoch</span>
+          <EpochCell no={vote?.proposal?.expiration} />
+        </div>
       ) : (
         "-"
       ),

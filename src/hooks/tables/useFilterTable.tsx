@@ -27,6 +27,7 @@ interface useFilterTableArgs {
   tabName?: string;
   hrefName?: string;
   onlyURL?: string[];
+  disabledKeys?: string[];
 }
 
 interface useFilterTableReturn {
@@ -49,6 +50,7 @@ export const useFilterTable = ({
   tabName,
   hrefName,
   onlyURL = [],
+  disabledKeys,
 }: useFilterTableArgs): useFilterTableReturn => {
   const { search, searchStr, href } = useLocation();
 
@@ -149,7 +151,9 @@ export const useFilterTable = ({
         Object.entries(newFilter).filter(item => !onlyURL.includes(item[0])),
       );
 
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(filteredFilter));
+      if (disabledKeys && !disabledKeys.includes(key)) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(filteredFilter));
+      }
 
       return newFilter;
     });

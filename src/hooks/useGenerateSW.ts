@@ -1,67 +1,112 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-interface GenerateSW {
-  updateReady: boolean;
-  isFirstInstall: boolean;
-}
-
-export const useGenerateSW = (): GenerateSW => {
-  const [updateReady, setUpdateReady] = useState<boolean>(false);
-  const [isFirstInstall, setIsFirstInstall] = useState(false);
-
+export const useGenerateSW = () => {
   useEffect(() => {
-    const hasInstalled = localStorage.getItem("sw-installed");
-
-    if (!hasInstalled) {
-      localStorage.setItem("sw-installed", "true");
-      setIsFirstInstall(true);
-    }
-
     if ("serviceWorker" in navigator && !(window as any).__DISABLE_SW__) {
       const swUrl = `/sw.js`;
+
+      const swInstalled = sessionStorage.getItem("sw_installed");
 
       navigator.serviceWorker
         .register(swUrl, {
           scope: "/",
         })
         .then(registration => {
-          const handleUpdate = () => {
-            setUpdateReady(false);
+          console.log("🎯 Service Worker registered successfully");
+          console.log("📊 Registration state:", {
+            installing: registration.installing,
+            waiting: registration.waiting,
+            active: registration.active,
+          });
 
+          const handleUpdate = () => {
+            console.log("📦 handleUpdate called");
             const installingWorker =
               registration.installing || registration.waiting;
+
+            console.log("🔍 Worker found:", {
+              worker: installingWorker,
+              state: installingWorker?.state,
+              isInstalling: !!registration.installing,
+              isWaiting: !!registration.waiting,
+            });
 
             if (installingWorker) {
               installingWorker.addEventListener("statechange", e => {
                 const sw = e.currentTarget as ServiceWorker;
+                console.log("🔄 State changed to:", sw.state);
 
                 switch (sw.state) {
-                  case "activated":
-                    setUpdateReady(true);
+                  case "activated": {
+                    if (!swInstalled) {
+                      console.log("✅ SW activated! Setting should_update...");
+                      console.log("⏰ Current time:", new Date().toISOString());
+                      localStorage.setItem("should_update", "true");
+                      console.log("🔄 Timeout fired! Reloading now...");
+                      console.log("⏰ Reload time:", new Date().toISOString());
+                      sessionStorage.setItem("sw_installed", "true");
+                      location.reload();
+                    }
+                    break;
+                  }
+                  case "installing":
+                    console.log("⏳ SW is installing...");
+                    break;
+                  case "installed":
+                    console.log("📥 SW installed (waiting to activate)");
+                    break;
+                  case "activating":
+                    console.log("🔄 SW is activating...");
+                    break;
+                  case "redundant":
+                    console.log("❌ SW became redundant");
                     break;
                   default:
                     console.warn(
+                      "⚠️ Unknown SW state:",
+                      sw.state,
                       "An error occurred while the SW was updating. Please let us know about it on our Discord channel.",
                     );
                 }
               });
+              console.log("✅ statechange listener added to worker");
+            } else {
+              console.log("❌ No installing or waiting worker found");
             }
           };
 
           registration.onupdatefound = () => {
+            console.log("🔄 onupdatefound triggered!");
             if (!registration.installing) {
+              console.log("❌ No installing worker in onupdatefound");
               return;
             }
+            console.log(
+              "✅ Installing worker found in onupdatefound, calling handleUpdate",
+            );
             handleUpdate();
           };
 
           if (registration.installing || registration.waiting) {
+            console.log(
+              "🚀 Initial installation/waiting detected, calling handleUpdate immediately",
+            );
             handleUpdate();
+          } else {
+            console.log(
+              "ℹ️ No installing/waiting worker on initial registration",
+            );
+            console.log("🔍 Checking for updates...");
+            registration.update().then(() => {
+              console.log("✅ Update check completed");
+            });
           }
         })
         .catch(error => {
-          console.error("Service Worker error ", error);
+          console.error("❌ Service Worker error:", error);
         });
+    } else {
+      console.log("⚠️ Service Worker not supported or disabled");
     }
   }, []);
 
@@ -102,9 +147,4 @@ export const useGenerateSW = (): GenerateSW => {
       updateChannel.close();
     };
   }, []);
-
-  return {
-    updateReady,
-    isFirstInstall,
-  };
 };

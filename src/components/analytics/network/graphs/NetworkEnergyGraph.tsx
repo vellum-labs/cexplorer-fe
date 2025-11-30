@@ -7,6 +7,7 @@ import ReactEcharts from "echarts-for-react";
 
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useEffect, useState } from "react";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 interface NetworkEnergyGraphProps {
   setJson?: Dispatch<SetStateAction<any>>;
@@ -23,8 +24,8 @@ export const NetworkEnergyGraph: FC<NetworkEnergyGraphProps> = ({
     "Energy Consumption (GWh)": true,
   });
 
-  const consumptionPerDevice = 45; // 45W - фиксированное значение
-  const conversionFactor = 1_000_000; // Преобразование Втч в ГВтч
+  const consumptionPerDevice = 45;
+  const conversionFactor = 1_000_000_000;
 
   const energyConsumptionRates = data.map(item => {
     const countPoolRelayUniq = item?.stat?.count_pool_relay_uniq ?? 0;
@@ -155,6 +156,10 @@ export const NetworkEnergyGraph: FC<NetworkEnergyGraphProps> = ({
       );
     }
   }, [setJson]);
+
+  if (rateQuery.isLoading) {
+    return <LoadingSkeleton height='490px' width='100%' rounded='lg' />;
+  }
 
   return (
     <div className='relative flex w-full'>

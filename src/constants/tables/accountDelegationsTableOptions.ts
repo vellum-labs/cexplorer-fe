@@ -26,11 +26,15 @@ export const accountDelegationsTableOptions: AccountDelegationsTableOptions = [
     name: "active_stake",
   },
   {
+    key: "loyalty",
+    name: "Loyalty",
+  },
+  {
     key: "registered",
     name: "Registered",
   },
   {
-    key: "loyalty",
-    name: "Loyalty",
+    key: "tx",
+    name: "Tx",
   },
 ];

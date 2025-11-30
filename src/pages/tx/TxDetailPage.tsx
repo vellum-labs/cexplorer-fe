@@ -219,9 +219,9 @@ const TxDetailPage = () => {
   useEffect(() => {
     if (!data?.metadata) return;
 
-    getAddonsForMetadata(data?.metadata as any, "full-view").then(results =>
-      setAddonComponents(results),
-    );
+    getAddonsForMetadata(data?.metadata as any, "full-view").then(results => {
+      setAddonComponents(results);
+    });
   }, [data?.metadata]);
 
   return (

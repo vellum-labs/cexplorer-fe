@@ -6,12 +6,12 @@ import { TaxToolPage } from "@/pages/tax-tool/TaxToolPage";
 
 import { z } from "zod";
 
-export const Route = createFileRoute("/tax-tool")({
+export const Route = createFileRoute("/tax-tool/")({
   component: () => <TaxToolPage />,
   validateSearch: (input: PaginatedSearchParams) =>
     z
       .object({
-        view: z.string().optional().catch(""),
+        stake: z.string().optional().catch(""),
       })
       .parse(input),
 });

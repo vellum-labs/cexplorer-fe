@@ -79,6 +79,7 @@ const EpochDetailPage: FC = () => {
           stats={statsData as EpochStatsSummary}
           isLoading={isStatsDataLoading}
           isError={isStatsDataError}
+          constData={constData}
         />
       ),
       visible: true,
@@ -185,7 +186,7 @@ const EpochDetailPage: FC = () => {
                       stats={statsData}
                       startTime={statsData.epoch?.start_time ?? ""}
                     />
-                    <EpochPots stats={statsData} />
+                    <EpochPots stats={statsData} constData={constData} />
                   </>
                 )}
               </div>

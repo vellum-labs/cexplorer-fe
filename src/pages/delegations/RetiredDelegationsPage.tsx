@@ -1,4 +1,4 @@
-import { EpochCell } from "@/components/epoch/EpochCell";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
@@ -26,9 +26,9 @@ import { useEffect, useState } from "react";
 import { PageBase } from "@/components/global/pages/PageBase";
 
 export const RetiredDelegationsPage = () => {
-  const { page, order } = useSearch({ from: "/retired-delegations/" });
+  const { page, order, tab } = useSearch({ from: "/retired-delegations/" });
   const { infiniteScrolling } = useInfiniteScrollingStore();
-  const [tabParam, setTabParam] = useState<"active" | "live">("live");
+  const [tabParam, setTabParam] = useState<"active" | "live">(tab ?? "live");
   const {
     columnsVisibility,
     columnsOrder,
@@ -170,6 +170,7 @@ export const RetiredDelegationsPage = () => {
     navigate({
       search: {
         order: selectedItem as "date" | "live_stake",
+        tab,
       } as any,
     });
   }, [selectedItem, navigate]);
@@ -238,6 +239,7 @@ export const RetiredDelegationsPage = () => {
             <div>
               <Tabs
                 items={tabItems}
+                activeTabValue={tabParam}
                 withPadding={false}
                 withMargin={false}
                 onClick={activeTab => {

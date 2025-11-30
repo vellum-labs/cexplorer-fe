@@ -239,20 +239,16 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
     <div className='flex h-[520px] w-1/2 flex-grow basis-[600px] flex-col gap-2 rounded-m border border-border p-3 md:flex-shrink-0'>
       <h3>Stake Pool Stats</h3>
 
-      <div className='flex w-full flex-col'>
+      <div className='flex w-full flex-col overflow-hidden rounded-xl border border-border'>
         {statsRows.map(({ key, columns }, index) => (
           <div
-            className={`${index % 2 === 0 ? "rounded-s-m bg-darker" : ""} ${index === 0 ? "rounded-t-m" : ""} flex min-h-[55px] flex-grow`}
+            className={`${index % 2 !== 0 ? "bg-darker" : ""} ${index !== statsRows.length - 1 ? "border-b border-border" : ""} flex h-[55px] flex-grow gap-2`}
             key={key}
           >
-            {columns.map(({ title }, index) => (
+            {columns.map(({ title }, columnIndex) => (
               <div
-                key={index}
-                style={{
-                  width: 230,
-                  maxWidth: 230,
-                }}
-                className={`flex h-[55px] items-center py-1.5 text-left first:pl-4 last:pr-4 [&>a]:text-primary`}
+                key={columnIndex}
+                className={`flex items-center first:flex-grow first:pl-4 last:pr-4 last:text-right md:flex-1 md:text-left [&>a]:text-primary`}
               >
                 {isError || isLoading || !stats ? (
                   <LoadingSkeleton height='20px' />

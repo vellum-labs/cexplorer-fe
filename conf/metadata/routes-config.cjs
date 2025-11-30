@@ -763,6 +763,15 @@ const routes = [
     api: false,
   },
   {
+    path: "/rewards-calculator",
+    title: "Rewards Calculator | Cexplorer.io",
+    description:
+      "Calculate your potential Cardano rewards with our advanced rewards calculator. Estimate future ADA earnings based on stake amount, pool performance, and network parameters to make informed decisions.",
+    keywords:
+      "cardano, rewards calculator, ADA rewards calculator, rewards, ADA calculator, rewards estimator, cexplorer, cardano calculator",
+    api: false,
+  },
+  {
     path: "/token/dashboard",
     title: "Token Dashboard | Cexplorer.io",
     description:
@@ -778,6 +787,15 @@ const routes = [
       "View voluntary donations to the Cardano treasury fund. Track community contributions supporting ecosystem development, protocol funding, and treasury growth, showing the community's commitment to Cardano's decentralized funding model.",
     keywords:
       "treasury donations, Cardano treasury, voluntary donations, ecosystem funding, protocol donations, Cexplorer, community contributions, treasury support",
+    api: false,
+  },
+  {
+    path: "/treasury/projection",
+    title: "Treasury Projection | Cexplorer.io",
+    description:
+      "Project Cardano treasury and reserves balance over the next 20 years. Simulate treasury growth based on transaction fees, governance withdrawals, and monetary policy parameters. Visualize long-term sustainability of Cardano's funding model.",
+    keywords:
+      "treasury projection, Cardano treasury, reserves projection, treasury calculator, monetary policy, treasury simulation, Cexplorer, ADA reserves forecast, treasury sustainability",
     api: false,
   },
   {

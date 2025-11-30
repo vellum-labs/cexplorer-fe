@@ -53,8 +53,8 @@ export const usePoolDetail = ({
   const proratedLuck = data?.epochs[0].data.block
     ? (() => {
         const percent =
-          ((data?.blocks?.epoch ?? 0) /
-            data?.epochs[0]?.data?.block?.estimated /
+          ((data?.blocks?.epoch || 0) /
+            (data?.epochs[0]?.data?.block?.estimated || 1) /
             epochElapsed) *
           100;
 

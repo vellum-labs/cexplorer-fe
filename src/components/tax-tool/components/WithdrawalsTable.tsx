@@ -5,8 +5,8 @@ import {
   Copy,
   Tooltip,
   AdaWithTooltip,
-  formatDate,
   formatNumber,
+  formatDate,
 } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
@@ -53,11 +53,6 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
   useEffect(() => {
     setStoredRows(itemsPerPage);
   }, [itemsPerPage, setStoredRows]);
-
-  const formatDateTime = (dateString: string | null) => {
-    if (!dateString) return "N/A";
-    return formatDate(dateString, true);
-  };
 
   const calculateCurrencyValues = useCallback(
     (
@@ -118,11 +113,12 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
         ),
         visible: columnsVisibility.timestamp,
         widthPx: 180,
-        render: item => (
-          <span className='text-text-sm'>
-            {formatDateTime(item.block.time)}
-          </span>
-        ),
+        render: item => {
+          const time = item.block.time;
+          if (!time) return "-";
+
+          return formatDate(time, false, false, true, true);
+        },
       },
       {
         key: "transaction",

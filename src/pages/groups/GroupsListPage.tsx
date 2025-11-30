@@ -177,7 +177,7 @@ export const GroupsListPage = () => {
                 <LoadingSkeleton height='400px' rounded='lg' />
               </div>
             ) : (
-              <GroupsCharts filteredItems={filteredItems} />
+              <GroupsCharts filteredItems={data} />
             )}
             <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
               <h3 className='pb-1.5 md:pb-0'>

@@ -1,51 +1,57 @@
 import { PageBase } from "@/components/global/pages/PageBase";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import {
-  MessagesSquare,
+  Check,
+  TrendingUp,
+  Landmark,
+  User,
   Zap,
-  SquareArrowOutUpRight,
-  Smile,
-  Command,
-  MessageCircleHeart,
+  Heart,
   ArrowRight,
 } from "lucide-react";
 
 const services = [
   {
-    icon: MessagesSquare,
-    title: "Share team inboxes",
+    icon: Check,
+    title: "Explore everything on Cardano",
     description:
-      "Whether you have a team of 2 or 200, our shared team inboxes keep everyone on the same page and in the loop.",
+      "Cexplorer lets you browse everything happening on the Cardano blockchain. From blocks and transactions to epochs, assets, and smart contracts, all network activity is transparent and easy to explore.",
+    link: "/tx",
+  },
+  {
+    icon: TrendingUp,
+    title: "Rich analytics and insights",
+    description:
+      "Gain a deeper understanding of Cardano through clear data and visual metrics. Track staking performance, transaction volumes, and protocol activity to stay informed and ahead.",
+    link: "/analytics",
+  },
+  {
+    icon: Landmark,
+    title: "Governance made simple",
+    description:
+      "Take part in Cardano governance directly within the explorer. Delegate your stake to DReps, follow proposals and votes, and stay updated on key network decisions.",
+    link: "/gov",
+  },
+  {
+    icon: User,
+    title: "Powerful tools for developers",
+    description:
+      "Cexplorer provides a complete set of developer tools, including the API, SDK, and specialized inspectors for addresses and datum. Access real-time Cardano data, integrate it into your apps, and explore both mainnet and testnet environments with ease.",
+    link: "/more",
   },
   {
     icon: Zap,
-    title: "Deliver instant answers",
+    title: "Built for reliability & performance",
     description:
-      "An all-in-one customer service platform that helps you balance everything your customers need to be happy.",
+      "Cexplorer is optimized for speed, accuracy, and uptime. Every part of the platform is designed to deliver a smooth, dependable experience across desktop and mobile.",
+    link: "/faq",
   },
   {
-    icon: SquareArrowOutUpRight,
-    title: "Manage your team with reports",
+    icon: Heart,
+    title: "Built for the community",
     description:
-      "Measure what matters with Untitled's easy-to-use reports. You can filter, export, and drilldown on the data in a couple clicks.",
-  },
-  {
-    icon: Smile,
-    title: "Connect with customers",
-    description:
-      "Solve a problem or close a sale in real-time with chat. If no one is available, customers are seamlessly routed to email without confusion.",
-  },
-  {
-    icon: Command,
-    title: "Connect the tools you already use",
-    description:
-      "Explore 100+ integrations that make your day-to-day workflow more efficient and familiar. Plus, our extensive developer tools.",
-  },
-  {
-    icon: MessageCircleHeart,
-    title: "Our people make the difference",
-    description:
-      "We're an extension of your customer service team, and all of our resources are free. Chat to our friendly team 24/7 when you need help.",
+      "Serving as an essential resource for the Cardano ecosystem since the Incentivized Testnet. We have been building and maintaining Cexplorer while actively supporting decentralization as a DRep and SPO.",
+    link: "/donate",
   },
 ];
 
@@ -70,9 +76,9 @@ export const AboutUsPage = () => {
         </div>
 
         <div className='flex w-full max-w-desktop flex-col items-center'>
-          <h2 className='text-2xl mb-2 font-semibold'>Services</h2>
+          <h2 className='text-2xl mb-2 font-semibold'>Cexplorer</h2>
           <p className='text-base text-muted-foreground mb-8'>
-            Our shared values keep us connected and guide us as one team.
+            Supporting the Cardano ecosystem with tools and data.
           </p>
 
           <div className='grid w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
@@ -99,7 +105,7 @@ export const AboutUsPage = () => {
                         <ArrowRight size={15} />
                       </span>
                     }
-                    onClick={() => {}}
+                    href={service.link as any}
                   />
                 </div>
               );

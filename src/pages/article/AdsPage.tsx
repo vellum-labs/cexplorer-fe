@@ -15,6 +15,7 @@ import { Button } from "@vellumlabs/cexplorer-sdk";
 import adsFeatured from "@/resources/images/ads_featured.svg";
 import adsBoost from "@/resources/images/ads_boost.svg";
 import adsJam from "@/resources/images/ads_jam.svg";
+import { Banner } from "@/components/global/Banner";
 
 const reachStats = [
   {
@@ -97,7 +98,9 @@ export const AdsPage = () => {
       adsCarousel={false}
       customPage={true}
     >
-      <section className='flex w-full max-w-desktop flex-col items-center gap-16 px-mobile pb-3 md:px-desktop'>
+      <section className='flex w-full max-w-desktop flex-col items-center gap-16 px-mobile py-2 pb-3 md:px-desktop'>
+        <Banner description='Ads will be available at a later date.' />
+
         <div className='flex w-full flex-col gap-10 md:flex-row md:items-start md:justify-between'>
           <div
             className='flex flex-1 flex-col'
@@ -116,8 +119,9 @@ export const AdsPage = () => {
             <Button
               size='lg'
               variant='primary'
-              label='Advertise'
+              label='Advertise (Coming soon...)'
               rightIcon={<ChevronDown size={20} />}
+              disabled
             />
           </div>
 

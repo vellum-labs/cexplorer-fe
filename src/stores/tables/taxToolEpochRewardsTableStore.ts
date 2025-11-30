@@ -7,6 +7,7 @@ import type {
 
 interface SummaryData {
   period: string;
+  epochs: number;
   ada: number;
   usd: number;
   secondary: number;

@@ -29,7 +29,11 @@ export const nestedNavigationOptions: {
         },
         {
           label: "Tax tool",
-          href: "/tax-tool",
+          href: "/tax-tool/",
+        },
+        {
+          label: "Rewards calculator",
+          href: "/rewards-calculator",
         },
       ],
     },
@@ -117,6 +121,10 @@ export const nestedNavigationOptions: {
         {
           label: "Hardfork",
           href: "/hardfork",
+        },
+        {
+          label: "Treasury projection",
+          href: "/treasury/projection",
         },
       ],
     },
