@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: read
   
 jobs:
   CheckUser:
@@ -105,11 +106,20 @@ jobs:
           BRANCH="${{ github.event.inputs.branch }}"
       
           MESSAGE="✅ **${WORKFLOW_NAME}** successfully deployed version #**${VERSION}** (${BRANCH})"
-      
+
           curl -H "Content-Type: application/json" \
             -X POST \
             -d "{\"content\": \"$MESSAGE\"}" \
             $DISCORD_WEBHOOK_URL
+
+  GenerateChangelog:
+    needs: DeployToServer
+    if: success()
+    uses: ./.github/workflows/changelog.yml
+    with:
+      deployment_name: "mainnet-stage.cexplorer.io"
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       # Notifikace při neúspěchu
       - name: Notify Discord on failure
