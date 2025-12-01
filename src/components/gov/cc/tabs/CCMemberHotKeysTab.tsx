@@ -26,7 +26,6 @@ export const CCMemberHotKeysTab: FC<CCMemberHotKeysTabProps> = ({
   const sortedRegistrations = useMemo(() => {
     if (!memberHistory || !Array.isArray(memberHistory)) return [];
 
-    // Flatten all registrations from all member history items
     const allRegistrations: RegistrationWithHotKey[] = [];
     const seenHashes = new Set<string>();
 
@@ -35,7 +34,6 @@ export const CCMemberHotKeysTab: FC<CCMemberHotKeysTabProps> = ({
       if (!hotKey || !member.registration) return;
 
       member.registration.forEach(reg => {
-        // Deduplicate by hash
         if (!seenHashes.has(reg.hash)) {
           seenHashes.add(reg.hash);
           allRegistrations.push({
@@ -47,7 +45,6 @@ export const CCMemberHotKeysTab: FC<CCMemberHotKeysTabProps> = ({
       });
     });
 
-    // Sort by time (most recent first)
     return allRegistrations.sort(
       (a, b) => new Date(b.time).getTime() - new Date(a.time).getTime(),
     );
@@ -62,7 +59,7 @@ export const CCMemberHotKeysTab: FC<CCMemberHotKeysTabProps> = ({
         }
         return <DateCell time={item.time} />;
       },
-      title: <p>Type</p>,
+      title: <p>Date</p>,
       visible: true,
       widthPx: 80,
     },

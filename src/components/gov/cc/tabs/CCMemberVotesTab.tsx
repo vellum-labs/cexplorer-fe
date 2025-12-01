@@ -8,13 +8,13 @@ import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { useFetchCCMemberVote } from "@/services/governance";
 import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useGovernanceActionsTableStore } from "@/stores/tables/governanceActionsTableStore";
-import { useSearch } from "@tanstack/react-router";
+import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import { GovActionCell } from "@/components/gov/GovActionCell";
-import { HashCell } from "@/components/tx/HashCell";
 import type { Vote } from "@/constants/votes";
 import { VoteCell } from "@/components/governance/vote/VoteCell";
+import { ExternalLink } from "lucide-react";
 
 interface CCMemberVoteItem {
   tx?: {
@@ -121,13 +121,20 @@ export const CCMemberVotesTab: FC<{ hotKey?: string }> = ({ hotKey }) => {
     {
       key: "tx",
       render: item => {
-        if (!item?.tx?.hash) {
-          return "-";
+        if (item?.tx?.hash) {
+          return (
+            <Link
+              to='/tx/$hash'
+              params={{ hash: item.tx.hash }}
+              className='flex items-center justify-end text-primary'
+            >
+              <ExternalLink size={18} />
+            </Link>
+          );
         }
-
-        return <HashCell hash={item?.tx?.hash} />;
+        return <p className='text-right'>-</p>;
       },
-      title: <p>Tx</p>,
+      title: <p className='w-full text-right'>Tx</p>,
       visible: columnsVisibility.tx,
       widthPx: 60,
     },
