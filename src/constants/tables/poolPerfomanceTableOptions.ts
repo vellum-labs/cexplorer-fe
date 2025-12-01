@@ -23,7 +23,7 @@ export const poolPerfomanceTableOptions: PoolPerfomanceOptions = [
   },
   {
     key: "active_stake",
-    name: "Active stake",
+    name: "Epoch stake",
   },
   {
     key: "blocks",

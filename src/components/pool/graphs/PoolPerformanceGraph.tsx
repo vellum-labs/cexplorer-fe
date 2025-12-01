@@ -33,7 +33,7 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
     Delegators: true,
     "Luck (%)": true,
     Blocks: true,
-    "Active Stake": true,
+    "Epoch Stake": true,
     "ROA (%)": true,
     Pledged: true,
   });
@@ -61,7 +61,7 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
           "Delegators",
           "Luck (%)",
           "Blocks",
-          "Active Stake",
+          "Epoch Stake",
           "ROA (%)",
           "Pledged",
         ],
@@ -102,7 +102,7 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
               case "Luck (%)":
                 return `${Number(value).toFixed(2)}`;
               case "Pledged":
-              case "Active Stake":
+              case "Epoch Stake":
                 return lovelaceToAda(Number(value));
               case "Delegators":
               case "Blocks":
@@ -305,7 +305,7 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
             opacity: 0.12,
           },
           data: activeStake,
-          name: "Active Stake",
+          name: "Epoch Stake",
           yAxisIndex: 1,
           itemStyle: {
             color: "#21fc1e",
