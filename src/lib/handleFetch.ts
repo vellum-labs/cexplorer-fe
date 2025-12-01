@@ -65,7 +65,7 @@ export const handleFetch = async <T>(
         signal,
       });
 
-      if (response.status === 404 && attempt === retryCount) {
+      if (response.status === 404) {
         useNotFound.getState().setNotFound(true);
       }
 
