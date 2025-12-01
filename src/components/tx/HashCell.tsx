@@ -1,4 +1,4 @@
-import { useHoverHighlightState } from "@/stores/states/hoverHighlightState";
+import { useHoverHighlight } from "@/hooks/useHoverHighlight";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import type { FileRoutesByPath } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
@@ -15,34 +15,27 @@ export const HashCell = ({
   href?: FileRoutesByPath[keyof FileRoutesByPath]["path"];
   formatType?: "short" | "long" | "shorter" | "longer";
 }) => {
-  const { hoverValue, setHoverValue } = useHoverHighlightState();
-
-  const handleMouseEnter = () => {
-    if (enableHover) setHoverValue(hash);
-  };
-
-  const handleMouseLeave = () => {
-    setHoverValue(null);
-  };
-
-  const isHighlighted = hoverValue === hash;
+  const { handleMouseEnter, handleMouseLeave, handleCopyMouseEnter, isHighlighted } =
+    useHoverHighlight(hash, enableHover);
 
   if (!hash) return "-";
 
   return (
     <div
-      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className='flex items-center gap-1'
     >
       <Link
         to={href || "/tx/$hash"}
         params={{ hash: hash }}
+        onMouseEnter={handleMouseEnter}
         className={` ${isHighlighted ? "rounded-s bg-hoverHighlight outline outline-1 outline-highlightBorder" : ""} block overflow-hidden overflow-ellipsis whitespace-nowrap ${enableHover ? "px-1/2" : "px-0"}text-text-sm text-primary`}
       >
         {formatString(hash, formatType)}
       </Link>
-      <Copy copyText={hash} />
+      <div onMouseEnter={handleCopyMouseEnter}>
+        <Copy copyText={hash} />
+      </div>
     </div>
   );
 };
