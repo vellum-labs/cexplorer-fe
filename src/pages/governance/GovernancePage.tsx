@@ -118,16 +118,16 @@ export const GovernancePage: FC = () => {
       value: "Active",
     },
     {
+      key: "Enacted",
+      value: "Enacted",
+    },
+    {
       key: "Ratified",
       value: "Ratified",
     },
     {
       key: "Expired",
-      value: "Expired",
-    },
-    {
-      key: "Enacted",
-      value: "Enacted",
+      value: "Expired / Dropped",
     },
   ];
 
@@ -403,20 +403,20 @@ export const GovernancePage: FC = () => {
       ),
       footer: (
         <div className='flex flex-wrap'>
-          <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
+          <div className='flex w-fit items-center gap-1/2 pr-3'>
             <span className='text-text-sm text-grayTextPrimary'>Active</span>
             <span className='text-text-sm text-[#10B981]'>
               {drepStat?.gov_action[0]?.active || 0}
             </span>
           </div>
-          <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
+          <div className='flex w-fit items-center gap-1/2 pr-3'>
             <span className='text-text-sm text-grayTextPrimary'>Ratified</span>
             <span className='text-text-sm text-[#00A9E3]'>
               {drepStat?.gov_action[0]?.ratified || 0}
             </span>
           </div>
           {!!drepStat?.gov_action[0]?.enacted && (
-            <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
+            <div className='flex w-fit items-center gap-1/2 pr-3'>
               <span className='text-text-sm text-grayTextPrimary'>Enacted</span>
               <span className='text-text-sm text-[#876ee1]'>
                 {drepStat?.gov_action[0]?.enacted}
@@ -424,8 +424,8 @@ export const GovernancePage: FC = () => {
             </div>
           )}
           {!!drepStat?.gov_action[0]?.expires && (
-            <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
-              <span className='text-text-sm text-grayTextPrimary'>Expired</span>
+            <div className='flex w-fit items-center gap-1/2 pr-2'>
+              <span className='text-text-sm text-grayTextPrimary'>Expired / Dropped</span>
               <span className='text-text-sm text-[#F79009]'>
                 {drepStat?.gov_action[0]?.expires}
               </span>
