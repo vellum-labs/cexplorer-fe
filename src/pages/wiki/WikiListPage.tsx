@@ -1,18 +1,16 @@
-import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import { NoResultsFound } from "@vellumlabs/cexplorer-sdk";
-import { Button } from "@vellumlabs/cexplorer-sdk";
 import {
   Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
+  Button,
+  LoadingSkeleton,
+  NoResultsFound,
 } from "@vellumlabs/cexplorer-sdk";
-import { useFetchWikiList, useFetchWikiDetail } from "@/services/article";
 import { Link } from "@tanstack/react-router";
 import { useRef, useState } from "react";
-import { PageBase } from "@/components/global/pages/PageBase";
 import { FileText } from "lucide-react";
-import parse from "html-react-parser";
+
+import { PageBase } from "@/components/global/pages/PageBase";
+import { WikiAccordionItem } from "@/components/wiki/WikiAccordionItem";
+import { useFetchWikiList } from "@/services/article";
 import LogoMark from "@/resources/images/cexLogo.svg";
 
 export const WikiListPage = () => {
@@ -100,51 +98,5 @@ export const WikiListPage = () => {
         </div>
       </div>
     </PageBase>
-  );
-};
-
-const WikiAccordionItem = ({
-  url,
-  name,
-  isOpen,
-}: {
-  url: string;
-  name: string;
-  isOpen: boolean;
-}) => {
-  const detailQuery = useFetchWikiDetail("en", url, isOpen);
-  const data = detailQuery.data;
-
-  return (
-    <AccordionItem value={url} className='border-b border-border'>
-      <AccordionTrigger className='AccordionTrigger w-full py-4 text-left'>
-        <span className='font-semibold'>{name}</span>
-      </AccordionTrigger>
-      <AccordionContent>
-        {detailQuery.isLoading ? (
-          <div className='flex flex-col gap-2 pb-4'>
-            <LoadingSkeleton height='20px' width='100%' />
-            <LoadingSkeleton height='20px' width='100%' />
-            <LoadingSkeleton height='20px' width='80%' />
-          </div>
-        ) : (
-          <div className='pb-4'>
-            <div className='prose prose-sm max-w-none text-grayTextPrimary [&>p]:my-2'>
-              {parse(data?.data[0] || "")}
-            </div>
-            <div className='text-sm mt-4 flex items-center gap-2'>
-              <span className='text-grayTextPrimary'>Link</span>
-              <Link
-                to='/wiki/$url'
-                params={{ url }}
-                className='text-primary hover:underline'
-              >
-                cexplorer.io/wiki/{url}
-              </Link>
-            </div>
-          </div>
-        )}
-      </AccordionContent>
-    </AccordionItem>
   );
 };
