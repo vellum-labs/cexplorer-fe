@@ -97,11 +97,15 @@ const PoolRewardsTable = ({
             <div className='flex flex-col items-end gap-1/2'>
               <p className='flex items-center gap-1/2'>
                 <AdaWithTooltip data={item.reward?.leader_lovelace ?? 0} />
-                <Network size={16} />
+                <Tooltip content='Pool operator rewards'>
+                  <Network size={16} className='cursor-help' />
+                </Tooltip>
               </p>
               <p className='flex items-center gap-1/2'>
                 <AdaWithTooltip data={item.reward?.member_lovelace ?? 0} />
-                <Users size={16} />
+                <Tooltip content='Delegator rewards'>
+                  <Users size={16} className='cursor-help' />
+                </Tooltip>
               </p>
             </div>
           )}
