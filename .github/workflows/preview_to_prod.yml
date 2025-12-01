@@ -107,5 +107,3 @@ jobs:
     uses: ./.github/workflows/changelog.yml
     with:
       deployment_name: "preview.cexplorer.io Production"
-    secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
