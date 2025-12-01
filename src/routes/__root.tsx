@@ -184,7 +184,7 @@ const RootComponent = () => {
         {randomTopAd && (
           <div className='flex min-h-[75px] w-full items-center justify-center bg-background'>
             <div
-              className='h-full w-full max-w-desktop cursor-pointer md:px-desktop'
+              className='h-full w-full cursor-pointer'
               onClick={() => {
                 setClickedUrl(randomTopAd.data.link);
               }}
