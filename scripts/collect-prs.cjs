@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { execSync } = require("child_process");
+const { execSync, execFileSync } = require("child_process");
 const fs = require("fs");
 
 class PRCollector {
@@ -212,8 +212,9 @@ class PRCollector {
       fs.writeFileSync(tempFile, releaseData.body);
 
       try {
-        execSync(
-          `gh release create "${tag}" --title "${title}" --notes-file "${tempFile}" --latest`,
+        execFileSync(
+          "gh",
+          ["release", "create", tag, "--title", title, "--notes-file", tempFile, "--latest"],
           { stdio: "inherit" }
         );
         console.log(`✅ GitHub release created: ${tag}`);
