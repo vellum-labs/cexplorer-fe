@@ -292,7 +292,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
           </p>
         );
       },
-      title: <p className='w-full text-right'>Active Stake</p>,
+      title: <p className='w-full text-right'>Epoch Stake</p>,
       visible: columnsVisibility.active_stake,
       widthPx: 50,
     },
