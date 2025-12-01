@@ -2,7 +2,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Link } from "@tanstack/react-router";
 import { useState, type FC } from "react";
-import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
+import { SafetyLinkModal, Copy } from "@vellumlabs/cexplorer-sdk";
 import { markdownComponents } from "@/constants/markdows";
 
 interface DrepDetailAboutTabProps {
@@ -12,9 +12,11 @@ interface DrepDetailAboutTabProps {
 export const DrepDetailAboutTab: FC<DrepDetailAboutTabProps> = ({ data }) => {
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
+  const entries = Object.entries(data);
+
   return (
-    <section className='flex w-full flex-col'>
-      {Object.entries(data).map(([key, value], index) => {
+    <section className='flex w-full flex-col overflow-hidden rounded-xl border border-border'>
+      {entries.map(([key, value], index) => {
         const title = key
           .split("_")
           .map((w, i) => (i === 0 ? w[0]?.toUpperCase() + w.slice(1) : w))
@@ -25,20 +27,25 @@ export const DrepDetailAboutTab: FC<DrepDetailAboutTabProps> = ({ data }) => {
         return (
           <div
             key={key + "-" + index}
-            className={`flex ${index % 2 !== 0 ? "bg-darker" : ""} first:rounded-t-lg last:rounded-b-lg flex-col gap-3 border-x border-t border-border px-3 py-[26px] text-left last:border-b md:flex-row`}
+            className={`flex min-h-[55px] flex-col gap-3 px-4 py-3 text-left md:flex-row md:items-center ${index % 2 !== 0 ? "bg-darker" : ""} ${index !== entries.length - 1 ? "border-b border-border" : ""}`}
           >
-            <span className='min-w-[150px]text-text-sm font-semibold'>
+            <span className='min-w-[150px] text-text-sm font-medium text-grayTextPrimary'>
               {title}
             </span>
 
-            {isAddress ? (
-              <Link
-                to='/address/$address'
-                params={{ address: value }}
-                className='w-full break-all text-text-sm text-primary'
-              >
-                {value}
-              </Link>
+            {!value || value.trim() === "" ? (
+              <span className='text-text-sm text-grayTextPrimary'>-</span>
+            ) : isAddress ? (
+              <div className='flex w-full items-center gap-2'>
+                <Link
+                  to='/address/$address'
+                  params={{ address: value }}
+                  className='break-all text-text-sm text-primary'
+                >
+                  {value}
+                </Link>
+                <Copy copyText={value} />
+              </div>
             ) : (
               <div className='w-full break-words text-text-sm'>
                 <ReactMarkdown

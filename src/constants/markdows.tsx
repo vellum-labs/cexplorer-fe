@@ -49,8 +49,12 @@ export const markdownComponents = (
       {children}
     </li>
   ),
-  ul: ({ children }) => <ul className='text-sm mb-2 ml-5'>{children}</ul>,
-  ol: ({ children }) => <ol className='text-sm mb-2 ml-5'>{children}</ol>,
+  ul: ({ children }) => (
+    <ul className='mb-2 ml-5 list-disc text-sm'>{children}</ul>
+  ),
+  ol: ({ children }) => (
+    <ol className='mb-2 ml-5 list-decimal text-sm'>{children}</ol>
+  ),
   h1: ({ children }) => (
     <h1 className='mb-2 text-text-xl font-bold'>{children}</h1>
   ),
