@@ -29,8 +29,8 @@ export const DrepAnalyticsTab: FC<DrepAnalyticsTabProps> = ({ query }) => {
   const abstain = query.data?.delegator?.drep_always_abstain?.stake ?? 0;
   const noConfidence =
     query.data?.delegator?.drep_always_no_confidence?.stake ?? 0;
-  const delegatedToPools =
-    query.data?.delegator?.delegated_stake_pools?.stake ?? 0;
+  const totalStake = query.data?.delegator?.total?.stake ?? 0;
+  const delegatedToDreps = totalStake - abstain - noConfidence;
 
   const items = [
     {
@@ -69,12 +69,13 @@ export const DrepAnalyticsTab: FC<DrepAnalyticsTabProps> = ({ query }) => {
   const governancePieData = [
     { value: abstain, name: "Abstain DRep" },
     { value: noConfidence, name: "No Confidence DRep" },
-    { value: delegatedToPools, name: "Delegated to DReps" },
+    { value: delegatedToDreps, name: "Delegated to DReps" },
   ];
 
   const activeVotingPieData = [
+    { value: abstain, name: "Abstain (not active)" },
     { value: noConfidence, name: "No Confidence" },
-    { value: delegatedToPools, name: "Delegated to DReps" },
+    { value: delegatedToDreps, name: "Delegated to DReps" },
   ];
 
   const governanceOption = {
