@@ -22,15 +22,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Need full history for changelog generation
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
           node-version: '22.19.0'
-
-      - name: Make script executable
-        run: chmod +x scripts/collect-prs.js
 
       - name: Generate changelog and create release
         env:
@@ -38,21 +35,8 @@ jobs:
           DEPLOYMENT_NAME: ${{ inputs.deployment_name }}
         run: |
           echo "🚀 Generating changelog for deployment: $DEPLOYMENT_NAME"
-
-          # Install GitHub CLI if not available
-          if ! command -v gh &> /dev/null; then
-            echo "📥 Installing GitHub CLI..."
-            curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-            echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-            sudo apt update
-            sudo apt install gh -y
-          fi
-
-          # Authenticate GitHub CLI
           echo "$GITHUB_TOKEN" | gh auth login --with-token
-
-          # Run the changelog script
-          node scripts/collect-prs.js
+          node scripts/collect-prs.cjs
 
       - name: Notify about changelog generation
         if: success()
