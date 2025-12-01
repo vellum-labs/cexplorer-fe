@@ -45,7 +45,7 @@ export const GovernanceDetailPage: FC = () => {
     },
     {
       key: "status_history",
-      label: "Status History",
+      label: "Status history",
       content: <GovernanceDetailStatusHistoryTab query={detailQuery} key={3} />,
       visible: true,
     },
