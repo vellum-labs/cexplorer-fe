@@ -115,6 +115,15 @@ const routes = [
     api: false,
   },
   {
+    path: "/analytics/genesis",
+    title: "Genesis Addresses | Cexplorer.io",
+    description:
+      "Explore the original Cardano genesis addresses from the blockchain launch. View initial ADA distribution, current balances, first and last activity timestamps, and track the historical allocation of ADA from the genesis block.",
+    keywords:
+      "genesis addresses, Cardano genesis, initial distribution, genesis block, ADA allocation, Cexplorer, blockchain launch, original addresses",
+    api: false,
+  },
+  {
     path: "/api",
     title: "API Plans | Cexplorer.io",
     description:

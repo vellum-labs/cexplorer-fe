@@ -182,6 +182,10 @@ export const navigationOptions: {
       label: "Network",
       href: "/analytics/network",
     },
+    {
+      label: "Genesis Addresses",
+      href: "/analytics/genesis",
+    },
   ],
   education: [
     {
