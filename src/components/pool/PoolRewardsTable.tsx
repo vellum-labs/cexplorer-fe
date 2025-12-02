@@ -59,11 +59,11 @@ const PoolRewardsTable = ({
   ).toFixed(2);
   const epochElapsed = useElapsedEpochNumber(miscConst);
 
-  const proratedLuck = detailQuery.data?.data?.epochs[0].data.block
+  const proratedLuck = detailQuery.data?.data?.epochs[0].data.block && parseFloat(estimatedBlocks) > 0
     ? (() => {
         const percent =
           ((detailQuery.data?.data?.blocks?.epoch || 0) /
-            (detailQuery.data?.data?.epochs[0]?.data?.block?.estimated || 1) /
+            parseFloat(estimatedBlocks) /
             epochElapsed) *
           100;
 
