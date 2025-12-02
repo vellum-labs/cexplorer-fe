@@ -50,20 +50,19 @@ const PoolRewardsTable = ({
     rows,
     infiniteScrolling ? 0 : (page ?? 1) * rows - rows,
   );
-  const estimatedBlocks = (
+  const estimatedBlocks =
     ((epochLength *
       activeSlotsCoeff *
       (1 - (miscConst?.epoch_param?.decentralisation ?? 0))) /
       (miscConst?.epoch_stat.stake.active ?? 1)) *
-    (detailQuery.data?.data?.active_stake ?? 1)
-  ).toFixed(2);
+    (detailQuery.data?.data?.active_stake ?? 1);
   const epochElapsed = useElapsedEpochNumber(miscConst);
 
-  const proratedLuck = detailQuery.data?.data?.epochs[0].data.block
+  const proratedLuck = detailQuery.data?.data?.epochs[0].data.block && estimatedBlocks > 0
     ? (() => {
         const percent =
           ((detailQuery.data?.data?.blocks?.epoch || 0) /
-            (detailQuery.data?.data?.epochs[0]?.data?.block?.estimated || 1) /
+            estimatedBlocks /
             epochElapsed) *
           100;
 
@@ -239,7 +238,7 @@ const PoolRewardsTable = ({
       render: item => (
         <div className='text-right'>
           {currentEpoch === item.no
-            ? `${formatNumber(detailQuery.data?.data?.blocks?.epoch)} / ${formatNumber(estimatedBlocks)}`
+            ? `${formatNumber(detailQuery.data?.data?.blocks?.epoch)} / ${formatNumber(estimatedBlocks.toFixed(2))}`
             : `${formatNumber(item.block?.minted ?? 0)} / ${formatNumber(item.block?.estimated?.toFixed(2))}`}
         </div>
       ),

@@ -50,13 +50,10 @@ export const usePoolDetail = ({
 
   const [linkModal, setLinkModal] = useState<boolean>(false);
 
-  const proratedLuck = data?.epochs[0].data.block
+  const proratedLuck = data?.epochs[0].data.block && estimatedBlocks > 0
     ? (() => {
         const percent =
-          ((data?.blocks?.epoch || 0) /
-            (data?.epochs[0]?.data?.block?.estimated || 1) /
-            epochElapsed) *
-          100;
+          ((data?.blocks?.epoch || 0) / estimatedBlocks / epochElapsed) * 100;
 
         return Number.isNaN(percent) ? "-" : percent.toFixed(2) + "%";
       })()
@@ -217,7 +214,7 @@ export const usePoolDetail = ({
     },
     {
       label: "Estimated Blocks",
-      value: formatNumber(Math.round(estimatedBlocks)),
+      value: estimatedBlocks.toFixed(2),
     },
     {
       label: "Prorated Luck",
