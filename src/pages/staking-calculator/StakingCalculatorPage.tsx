@@ -38,22 +38,7 @@ export const StakingCalculatorPage: FC = () => {
   });
 
   const [selectedRoa, setSelectedRoa] = useState<number | null>(null);
-  const [memorizedHeight, setMemorizedHeight] = useState<number | null>(null);
   const infoCardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!selectedPool && infoCardRef.current) {
-      const observer = new ResizeObserver(entries => {
-        for (const entry of entries) {
-          setMemorizedHeight(entry.target.clientHeight);
-        }
-      });
-
-      observer.observe(infoCardRef.current);
-
-      return () => observer.disconnect();
-    }
-  }, [selectedPool]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -189,11 +174,6 @@ export const StakingCalculatorPage: FC = () => {
             <div
               ref={infoCardRef}
               className={`flex flex-col gap-3 rounded-xl border border-border bg-cardBg p-2 ${!selectedPool ? "md:h-full" : ""}`}
-              style={
-                selectedPool && memorizedHeight
-                  ? { minHeight: `${memorizedHeight}px` }
-                  : {}
-              }
             >
               <h3 className='text-text-lg font-semibold'>Information</h3>
               <div className='-mt-1 flex flex-col gap-3 text-text-sm text-grayTextPrimary'>
