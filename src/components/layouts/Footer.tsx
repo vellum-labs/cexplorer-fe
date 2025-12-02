@@ -12,6 +12,7 @@ import YoroiPartner from "../../resources/images/partners/YoroiPartner.svg";
 import LinksColumn from "../footer/LinksColumn";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { MainLogo } from "@vellumlabs/cexplorer-sdk";
+import { NetworkSelectorDropdown } from "../global/dropdowns/NetworkSelectorDropdown";
 
 import { configJSON } from "@/constants/conf";
 
@@ -22,10 +23,13 @@ const Footer = () => {
         <div className='flex w-full max-w-desktop flex-col p-mobile md:px-desktop md:py-mobile'>
           <section className='flex w-full flex-col gap-2 py-4 md:flex-row md:justify-between'>
             <div className='flex w-[250px] shrink-0 flex-col gap-3'>
-              <MainLogo
-                className='-translate-x-[5px]'
-                network={configJSON.network}
-              />
+              <div className='flex items-center gap-2'>
+                <MainLogo
+                  className='-translate-x-[5px]'
+                  network={configJSON.network}
+                />
+                <NetworkSelectorDropdown />
+              </div>
               <p className='w-full text-text-sm text-grayTextPrimary'>
                 The oldest and most feature-rich Cardano explorer, serving you
                 since the Incentivized Testnet.
