@@ -118,5 +118,3 @@ jobs:
     uses: ./.github/workflows/changelog.yml
     with:
       deployment_name: "mainnet-stage.cexplorer.io"
-    secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
