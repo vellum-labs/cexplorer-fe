@@ -4,8 +4,9 @@ import type { FC } from "react";
 
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
-import { HashCell } from "@/components/tx/HashCell";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
+import { Link } from "@tanstack/react-router";
+import { ExternalLink } from "lucide-react";
 import { useMemo } from "react";
 
 interface CCMemberHotKeysTabProps {
@@ -81,16 +82,24 @@ export const CCMemberHotKeysTab: FC<CCMemberHotKeysTabProps> = ({
       widthPx: 200,
     },
     {
-      key: "tx_hash",
+      key: "tx",
       render: item => {
         if (!item?.hash) {
-          return "-";
+          return <p className='text-right'>-</p>;
         }
-        return <HashCell hash={item.hash} />;
+        return (
+          <Link
+            to='/tx/$hash'
+            params={{ hash: item.hash }}
+            className='flex items-center justify-end text-primary'
+          >
+            <ExternalLink size={18} />
+          </Link>
+        );
       },
-      title: "Transaction Hash",
+      title: <p className='w-full text-right'>Tx</p>,
       visible: true,
-      widthPx: 110,
+      widthPx: 50,
     },
   ];
 

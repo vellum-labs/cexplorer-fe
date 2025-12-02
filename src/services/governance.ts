@@ -313,6 +313,7 @@ export const useFetchCCMemberVote = (
     },
     refetchOnWindowFocus: false,
     refetchInterval: 60000,
+    enabled: !!committee_voter,
   });
 
 export const fetchNewVotes = async (

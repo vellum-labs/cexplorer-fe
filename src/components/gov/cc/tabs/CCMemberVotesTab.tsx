@@ -53,8 +53,10 @@ export const CCMemberVotesTab: FC<{ hotKey?: string }> = ({ hotKey }) => {
     undefined,
   );
 
-  const totalVotes = votesQuery.data?.pages[0].data.count;
-  const items = votesQuery.data?.pages.flatMap(page => page.data.data);
+  const totalVotes = hotKey ? votesQuery.data?.pages[0].data.count : 0;
+  const items = hotKey
+    ? votesQuery.data?.pages.flatMap(page => page.data.data)
+    : [];
 
   const columns: TableColumns<CCMemberVoteItem> = [
     {
