@@ -1,25 +1,7 @@
 import { Dropdown } from "@vellumlabs/cexplorer-sdk";
 import { ChevronDown } from "lucide-react";
 
-import { configJSON } from "@/constants/conf";
-
-const networks = [
-  {
-    label: "Mainnet",
-    url: "https://cexplorer.io",
-    isActive: configJSON.network === "mainnet",
-  },
-  {
-    label: "Preprod testnet",
-    url: "https://preprod.cexplorer.io",
-    isActive: configJSON.network === "preprod",
-  },
-  {
-    label: "Preview testnet",
-    url: "https://preview.cexplorer.io",
-    isActive: configJSON.network === "preview",
-  },
-];
+import { networks } from "@/constants/networks";
 
 export const NetworkSelectorDropdown = () => {
   const currentNetwork = networks.find(n => n.isActive) || networks[0];
@@ -40,7 +22,7 @@ export const NetworkSelectorDropdown = () => {
         <span className='text-text-xs text-grayTextPrimary'>{network.url}</span>
       </a>
     ),
-    onClick: () => {},
+    onClick: () => undefined,
   }));
 
   return (
