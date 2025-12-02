@@ -58,6 +58,10 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
       }))
     : [];
 
+  const totalActivePledge = ownerItems.reduce((sum, owner) => {
+    return sum + (owner.account.owner[0].active_stake ?? 0);
+  }, 0);
+
   const ownerColumns = [
     {
       key: "address",
@@ -115,31 +119,31 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
     {
       key: "relative_pledge",
       render: item => {
-        const liveStakeOwn = item?.account?.owner[0].live_stake ?? 0;
+        const activeStakeOwn = item?.account?.owner[0].active_stake ?? 0;
 
-        const relativePledge = (pledged / liveStakeOwn) * 100;
+        if (totalActivePledge === 0 || activeStakeOwn === 0) {
+          return <p className='text-right'>-</p>;
+        }
 
-        const displayValue =
-          relativePledge < 1 && relativePledge > 0
-            ? relativePledge.toFixed(4)
-            : Math.floor(relativePledge).toString();
+        const relativePledge = (activeStakeOwn / totalActivePledge) * 100;
+        const displayValue = relativePledge.toFixed(2);
 
-        return relativePledge && !isNaN(Number(relativePledge)) ? (
+        return (
           <div className='flex items-center justify-end'>
-            <div className='flex w-2/3 items-center gap-1.5'>
+            <div className='flex w-4/5 items-center gap-1.5'>
               <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#FEC84B]'>
                 <span
                   className='absolute left-0 block h-2 rounded-bl-[4px] rounded-tl-[4px] bg-[#47CD89]'
                   style={{ width: `${Math.min(relativePledge, 100)}%` }}
                 />
               </div>
-              <span className='self-end text-text-sm text-grayTextPrimary'>
-                {displayValue}%
-              </span>
+              <Tooltip content={`${relativePledge}%`}>
+                <span className='self-end text-text-sm text-grayTextPrimary'>
+                  {displayValue}%
+                </span>
+              </Tooltip>
             </div>
           </div>
-        ) : (
-          "-"
         );
       },
       title: <p className='w-full text-right'>Relative Pledge</p>,
