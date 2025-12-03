@@ -1,20 +1,27 @@
 import type { TxAsset } from "@/types/assetsTypes";
-import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";
+import { encodeAssetName, formatString } from "@vellumlabs/cexplorer-sdk";
 
 interface AssetProps {
   name?: string;
   asset?: TxAsset;
+  type?: "long" | "short" | "shorter";
 }
 
-export const renderAssetName = ({ asset, name }: AssetProps) => {
+export const renderAssetName = ({ asset, name, type }: AssetProps) => {
   const assetName = asset?.name || name || "";
+
+  const FORMAT_LIMIT = 20;
 
   if (!assetName) {
     return "n/a";
   }
 
   if (asset?.registry?.name && asset?.registry?.ticker) {
-    return `[${asset.registry.ticker}] ${asset.registry.name}`;
+    const formatedName = `[${asset.registry.ticker}] ${asset.registry.name}`;
+
+    return type && formatedName.length > FORMAT_LIMIT
+      ? formatString(formatedName, type)
+      : formatedName;
   }
 
   if (assetName.length <= 56) {
@@ -30,7 +37,9 @@ export const renderAssetName = ({ asset, name }: AssetProps) => {
   const encodedName = encodeAssetName(assetName);
 
   if (encodedName && encodedName.trim().length > 0) {
-    return encodedName;
+    return type && encodedName.length > FORMAT_LIMIT
+      ? formatString(encodedName, type)
+      : encodedName;
   }
 
   return "n/a";
