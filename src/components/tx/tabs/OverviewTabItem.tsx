@@ -312,13 +312,12 @@ const NodeContent = ({
     </div>
     <AddressWithTxBadges utxo={data} isOutput={type === "output"} />
     {data.asset && (
-      <div className='mt-1 grid w-full max-w-[690px] grid-cols-[repeat(auto-fit,_minmax(130px,_1fr))] gap-1'>
+      <div className='mt-1 flex w-full max-w-[690px] flex-wrap gap-1'>
         <>
           {!Array.isArray(data.asset) && (
             <TxAssetLink
               type={type}
               asset={data.asset}
-              className='min-w-[130px] max-w-[130px]'
             />
           )}
           {Array.isArray(data.asset) &&
@@ -327,7 +326,6 @@ const NodeContent = ({
                 type={type}
                 asset={asset}
                 key={asset.name + i}
-                className='min-w-[130px] max-w-[130px]'
               />
             ))}
         </>

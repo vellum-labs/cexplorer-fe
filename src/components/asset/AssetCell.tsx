@@ -41,7 +41,7 @@ const AssetCell = memo((props: AssetProps) => {
 
   const adaHandleName = assetName
     .replace(adaHandlePolicy, "")
-    .replace(/^(000de140|0014df10|000643b0)/, "");
+    .replace(/^(000de140|0014df10|000643b0|000010)/, "");
 
   const fingerprint = getAssetFingerprint(assetName);
   const isAdaHandle = assetName.includes(adaHandlePolicy);
@@ -103,6 +103,7 @@ const AssetCell = memo((props: AssetProps) => {
                       asset,
                       name: isAdaHandle ? adaHandleName : name,
                       type: formatTitle,
+                      fingerprint,
                     })}
             </span>
             {withCopy && (
@@ -112,14 +113,14 @@ const AssetCell = memo((props: AssetProps) => {
                     ? nameByRegistry
                     : formattedHex
                       ? formattedHex
-                      : renderAssetName({ asset, name })
+                      : renderAssetName({ asset, name, fingerprint })
                 }
                 className='ml-1'
               />
             )}
           </Link>
           <span className='flex items-center gap-1/2'>
-            {nameByRegistry || renderAssetName({ asset, name }) !== "n/a" ? (
+            {nameByRegistry || renderAssetName({ asset, name, fingerprint }) !== "n/a" ? (
               <p className='break-words break-all text-text-xs text-grayTextPrimary'>
                 {formatString(fingerprint, "long")}
               </p>
@@ -135,7 +136,7 @@ const AssetCell = memo((props: AssetProps) => {
               </Link>
             )}
             <Copy
-              size={renderAssetName({ asset, name }) !== "n/a" ? 10 : 13}
+              size={renderAssetName({ asset, name, fingerprint }) !== "n/a" ? 10 : 13}
               copyText={fingerprint}
             />
           </span>
