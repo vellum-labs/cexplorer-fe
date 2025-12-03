@@ -33,6 +33,7 @@ const Row = memo(({ index, style, data }: any) => {
             name: item.name,
             quantity: item.quantity,
           }}
+          formatTitle='long'
         />
         <Tooltip content={formatNumber(adjusted)}>
           <span className='text-text-xs'>
