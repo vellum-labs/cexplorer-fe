@@ -6,7 +6,9 @@ import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { getRouteApi, useSearch } from "@tanstack/react-router";
 import { QRCodeSVG } from "qrcode.react";
-import { useLayoutEffect, type FC } from "react";
+import { useLayoutEffect, useMemo, type FC } from "react";
+import { addressIcons } from "@/constants/address";
+import { getAnimalNameByAmount } from "@/utils/address/getAnimalNameByAmount";
 
 import { AssetsTab } from "@/components/address/tabs/AssetsTab";
 import { AdaHandleBadge } from "@vellumlabs/cexplorer-sdk";
@@ -41,6 +43,12 @@ export const StakeDetailPage: FC = () => {
     !data?.stake?.active?.deleg?.id &&
     !data?.stake?.live?.deleg?.id &&
     !data?.reward?.withdrawn;
+
+  const stakeIcon = useMemo(() => {
+    const amount = data?.stake?.live?.amount ?? 0;
+    const animalName = getAnimalNameByAmount(amount);
+    return addressIcons[animalName];
+  }, [data?.stake?.live?.amount]);
 
   const { page } = useSearch({
     from: "/stake/$stakeAddr",
@@ -115,6 +123,7 @@ export const StakeDetailPage: FC = () => {
         after: address,
       }}
       title='Stake Detail'
+      icon={<img src={stakeIcon} alt='stake level' className='h-6 w-6' />}
       breadcrumbItems={[
         { label: "Address", link: "/address" },
         { label: formatString(address, "long"), ident: address },

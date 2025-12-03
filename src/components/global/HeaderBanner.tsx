@@ -13,6 +13,7 @@ export interface HeaderBannerProps {
   subTitle?: ReactNode;
   badge?: ReactNode;
   qrCode?: ReactNode;
+  icon?: ReactNode;
   isHomepage?: boolean;
   homepageAd?: ReactNode;
   customPage?: boolean;
@@ -25,6 +26,7 @@ export const HeaderBanner = ({
   subTitle,
   badge,
   qrCode,
+  icon,
   isHomepage,
   homepageAd,
   customPage,
@@ -46,6 +48,7 @@ export const HeaderBanner = ({
       subTitle={subTitle}
       homepageAd={homepageAd}
       customPage={customPage}
+      icon={icon}
     />
   );
 };

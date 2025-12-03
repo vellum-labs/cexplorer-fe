@@ -24,6 +24,7 @@ interface PageBaseInitProps {
   subTitle?: ReactNode;
   badge?: ReactNode;
   qrCode?: ReactNode;
+  icon?: ReactNode;
   showHeader?: boolean;
   showMetadata?: boolean;
   isHomepage?: boolean;
@@ -54,6 +55,7 @@ export const PageBase: FC<PageBaseProps> = ({
   adsCarousel = true,
   badge,
   qrCode,
+  icon,
   subTitle,
   breadcrumbSeparator,
   metadataOverride,
@@ -103,6 +105,7 @@ export const PageBase: FC<PageBaseProps> = ({
           subTitle={subTitle}
           badge={badge}
           qrCode={qrCode}
+          icon={icon}
           breadcrumbSeparator={breadcrumbSeparator}
           isHomepage={isHomepage}
           homepageAd={
