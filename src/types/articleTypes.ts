@@ -57,3 +57,45 @@ export type ArticleListResponse = ResponseCore<{
 }>;
 
 export type ArticleCategories = (typeof articleCategories)[number];
+
+export interface WikiListData {
+  name: string;
+  url: string;
+  type: string;
+  category: string[];
+  pub_date: string;
+  mod_date: string;
+  keywords: string;
+  description: string;
+  image: string;
+  license: string | null;
+  state: string | null;
+  user_owner: User;
+  user_approved: User;
+}
+
+export type WikiListResponse = ResponseCore<{
+  count: number;
+  data: WikiListData[];
+}>;
+
+export interface WikiDetailData {
+  name: string;
+  url: string;
+  type: string;
+  category: string[];
+  data: string[];
+  pub_date: string;
+  mod_date: string;
+  keywords: string;
+  description: string;
+  image: string;
+  license: string | null;
+  state: string | null;
+  render: string;
+  mirroring_article: string | null;
+  user_owner: User;
+  user_approved: User;
+}
+
+export type WikiDetailResponse = ResponseCore<WikiDetailData>;

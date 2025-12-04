@@ -146,6 +146,12 @@
   "articleDetail": {
     "title": "%article% | Cexplorer.io"
   },
+  "wikiList": {
+    "title": "Wiki | Cexplorer.io"
+  },
+  "wikiDetail": {
+    "title": "%wiki% | Wiki | Cexplorer.io"
+  },
   "addressInspector": {
     "title": "Address Inspector | Cexplorer.io"
   },
