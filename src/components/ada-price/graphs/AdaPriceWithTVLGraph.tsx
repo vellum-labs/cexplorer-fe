@@ -5,37 +5,36 @@ import { memo, useMemo } from "react";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import ReactEcharts from "echarts-for-react";
 import { AnalyticsGraph } from "@/components/analytics/AnalyticsGraph";
-import { useAdaPrice } from "@/hooks/graphs/useAdaPrice";
+import { useAdaPriceWithTVL } from "@/hooks/graphs/useAdaPriceWithTVL";
 
-interface AdaPriceGraphProps {
-  graphRates: BasicRate[];
+interface TVLData {
+  date: number;
+  totalLiquidityUSD: number;
 }
 
-export const AdaPriceGraph: FC<AdaPriceGraphProps> = memo(
-  function AdaPriceGraph({ graphRates }) {
-    const {
-      json,
-      option,
-      selectedItem,
-      setData,
-      setSelectedItem,
-      onLegendSelectChanged,
-      allData,
-    } = useAdaPrice(graphRates);
+interface AdaPriceWithTVLGraphProps {
+  graphRates: BasicRate[];
+  tvlData: TVLData[];
+}
+
+export const AdaPriceWithTVLGraph: FC<AdaPriceWithTVLGraphProps> = memo(
+  function AdaPriceWithTVLGraph({ graphRates, tvlData }) {
+    const { json, option, selectedItem, setData, setSelectedItem, allMergedData } =
+      useAdaPriceWithTVL(graphRates, tvlData);
 
     // Create a fake query object for GraphEpochSort
     const fakeQuery = useMemo(
       () => ({
-        data: { data: allData },
+        data: { data: allMergedData },
         isLoading: false,
         isFetching: false,
       }),
-      [allData],
+      [allMergedData],
     );
 
     return (
       <AnalyticsGraph
-        title='ADA/BTC Price'
+        title='ADA/BTC Price vs Total Value Locked (TVL)'
         exportButton
         graphSortData={{
           query: fakeQuery as any,
@@ -50,9 +49,6 @@ export const AdaPriceGraph: FC<AdaPriceGraphProps> = memo(
           <GraphWatermark />
           <ReactEcharts
             opts={{ height: 350 }}
-            onEvents={{
-              legendselectchanged: onLegendSelectChanged,
-            }}
             option={option}
             notMerge={true}
             lazyUpdate={true}

@@ -1,41 +1,42 @@
 import type { BasicRate } from "@/types/miscTypes";
+import type { AnalyticsRateResponseData } from "@/types/analyticsTypes";
 import type { FC } from "react";
 
 import { memo, useMemo } from "react";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import ReactEcharts from "echarts-for-react";
 import { AnalyticsGraph } from "@/components/analytics/AnalyticsGraph";
-import { useAdaPrice } from "@/hooks/graphs/useAdaPrice";
+import { useAdaPriceWithTxCount } from "@/hooks/graphs/useAdaPriceWithTxCount";
 
-interface AdaPriceGraphProps {
+interface AdaPriceWithTxCountGraphProps {
   graphRates: BasicRate[];
+  analyticsData: AnalyticsRateResponseData[];
 }
 
-export const AdaPriceGraph: FC<AdaPriceGraphProps> = memo(
-  function AdaPriceGraph({ graphRates }) {
+export const AdaPriceWithTxCountGraph: FC<AdaPriceWithTxCountGraphProps> = memo(
+  function AdaPriceWithTxCountGraph({ graphRates, analyticsData }) {
     const {
       json,
       option,
       selectedItem,
       setData,
       setSelectedItem,
-      onLegendSelectChanged,
-      allData,
-    } = useAdaPrice(graphRates);
+      allMergedData,
+    } = useAdaPriceWithTxCount(graphRates, analyticsData);
 
     // Create a fake query object for GraphEpochSort
     const fakeQuery = useMemo(
       () => ({
-        data: { data: allData },
+        data: { data: allMergedData },
         isLoading: false,
         isFetching: false,
       }),
-      [allData],
+      [allMergedData],
     );
 
     return (
       <AnalyticsGraph
-        title='ADA/BTC Price'
+        title='ADA/BTC Price vs Transaction Count'
         exportButton
         graphSortData={{
           query: fakeQuery as any,
@@ -50,9 +51,6 @@ export const AdaPriceGraph: FC<AdaPriceGraphProps> = memo(
           <GraphWatermark />
           <ReactEcharts
             opts={{ height: 350 }}
-            onEvents={{
-              legendselectchanged: onLegendSelectChanged,
-            }}
             option={option}
             notMerge={true}
             lazyUpdate={true}
