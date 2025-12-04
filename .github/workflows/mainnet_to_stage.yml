@@ -76,7 +76,7 @@ jobs:
           VITE_APP_BLOCKFROST_KEY: ${{ secrets.BLOCKFROST_API_MAINNET }}
         run: |
           echo "Installing dependencies..."
-          yarn install --frozen-lockfile
+          yarn install
 
           echo "Building..."
           yarn build
