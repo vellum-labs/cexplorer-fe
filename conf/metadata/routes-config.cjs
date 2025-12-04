@@ -283,6 +283,15 @@ const routes = [
     api: false,
   },
   {
+    path: "/dev",
+    title: "Developer Tools | Cexplorer.io",
+    description:
+      "Access developer tools for building on Cardano. Explore address inspector, datum inspector, Cexplorer API, SDK, and connect with our community through Discord and GitHub.",
+    keywords:
+      "Cardano developer tools, address inspector, datum inspector, Cexplorer API, SDK, developer resources, blockchain tools, Cardano development",
+    api: false,
+  },
+  {
     path: "/developers",
     title: "Developers | Cexplorer.io",
     description:

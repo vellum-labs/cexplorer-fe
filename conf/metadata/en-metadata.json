@@ -224,6 +224,9 @@
   "stakingCalculator": {
     "title": "Rewards Calculator | Cexplorer.io"
   },
+  "devTooling": {
+    "title": "Developer Tools | Cexplorer.io"
+  },
   "genesisAddresses": {
     "title": "Genesis Addresses | Cexplorer.io"
   }

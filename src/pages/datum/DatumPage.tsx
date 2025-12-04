@@ -155,7 +155,10 @@ export const DatumPage: FC = () => {
       adsCarousel={false}
       metadataTitle='datumInspector'
       title='Datum Inspector'
-      breadcrumbItems={[{ label: "Datum" }]}
+      breadcrumbItems={[
+        { label: "Developers", link: "/dev" },
+        { label: "Datum" },
+      ]}
       subTitle={
         inputHash ? (
           <HeaderBannerSubtitle
