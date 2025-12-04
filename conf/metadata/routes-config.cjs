@@ -420,6 +420,15 @@ const routes = [
     api: false,
   },
   {
+    path: "/gov/cc/:coldKey",
+    title: "CC Member %name% | Cexplorer.io",
+    description:
+      "Detailed profile of Constitutional Committee member %name% (cold key: %coldKey%) on Cardano. View complete voting history, hot keys, governance participation statistics, proposals voted on, status history, registration details, and term information.",
+    keywords:
+      "CC member details, %coldKey%, Constitutional Committee member, Cardano governance, voting history, Cexplorer, CC member profile, committee votes, governance oversight",
+    api: false,
+  },
+  {
     path: "/gov/drep-vote",
     title: "DRep Votes | Cexplorer.io",
     description:
