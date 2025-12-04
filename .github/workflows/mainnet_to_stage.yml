@@ -112,9 +112,19 @@ jobs:
             -d "{\"content\": \"$MESSAGE\"}" \
             $DISCORD_WEBHOOK_URL
 
-  GenerateChangelog:
-    needs: DeployToServer
-    if: success()
-    uses: ./.github/workflows/changelog.yml
-    with:
-      deployment_name: "mainnet-stage.cexplorer.io"
+      - name: Create GitHub Release
+        if: success()
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ github.run_number }}
+          name: "Release ${{ github.workflow }} #${{ github.run_number }} (${{ github.event.inputs.branch }})"
+          body: |
+            Automated deployment release.
+
+            **Workflow:** ${{ github.workflow }}
+            **Version:** ${{ github.run_number }}
+            **Branch:** ${{ github.event.inputs.branch }}
+            **Triggered by:** ${{ github.actor }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
