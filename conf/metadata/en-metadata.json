@@ -223,5 +223,8 @@
   },
   "stakingCalculator": {
     "title": "Rewards Calculator | Cexplorer.io"
+  },
+  "genesisAddresses": {
+    "title": "Genesis Addresses | Cexplorer.io"
   }
 }

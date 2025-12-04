@@ -300,36 +300,17 @@ export interface AveragePool {
 
 export type AveragePoolResponse = ResponseCore<AveragePool[]>;
 
-// {
-//     "data": null,
-//     "hash": {
-//       "raw": "5bfef20b43131c5ca870846b561ef4f395add12019e9c7a47f756d44",
-//       "view": "drep1t0l0yz6rzvw9e2rss344v8h57w26m5fqr85u0frlw4k5gashtw9",
-//       "has_script": false
-//     },
-//     "stat": {
-//       "total": {
-//         "votes": [
-//           {
-//             "vote": "Yes",
-//             "count": 1
-//           }
-//         ],
-//         "opportunity": 9
-//       },
-//       "recently": "TBD"
-//     },
-//     "distr": {
-//       "count": 37,
-//       "amount": 23377713066938,
-//       "active_until": 199
-//     },
-//     "owner": {
-//       "stake": "stake_test1uzyy407v2k5fcvvqcaq5ddd4wflgt77r7sg873ljnkg4r6qssl3wm",
-//       "address": "addr_test1qrmz4dd600tzgn3q05pz27l44ugzxryrw7ut7t0f66wuqzugf2luc4dgnsccp36pg66m2un7shau8aqs0arl98v3285qmzkxtt",
-//       "balance": 2498924441405
-//     },
-//     "since": "2024-11-12T19:57:33",
-//     "amount": 23377713066938,
-//     "is_active": false
-//   }
+export interface GenesisAddress {
+  address: string;
+  value: number;
+  detail: {
+    last: string | null;
+    first: string | null;
+    balance: number;
+  };
+}
+
+export type GenesisAddressResponse = ResponseCore<{
+  count: number;
+  data: GenesisAddress[];
+}>;

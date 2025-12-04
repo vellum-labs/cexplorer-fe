@@ -160,6 +160,10 @@ export const nestedNavigationOptions: {
           href: "/analytics/account",
           params: { tab: "wealth_composition" },
         },
+        {
+          label: "Genesis addresses",
+          href: "/analytics/genesis",
+        },
       ],
     },
     pools: {
