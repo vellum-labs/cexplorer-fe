@@ -117,13 +117,15 @@ jobs:
       - name: Generate change log since last release
         id: changelog
         run: |
-          if [ -z "${{ steps.prev.outputs.tag }}" ]; then
+          TAG="${{ steps.prev.outputs.tag }}"
+          if [ -z "$TAG" ]; then
             echo "changes=No previous releases." >> $GITHUB_OUTPUT
           else
-            LOG=$(git log ${{ steps.prev.outputs.tag }}..HEAD --pretty=format:"- %s")
+            LOG=$(git log "$TAG"..HEAD --pretty=format:"- %s")
             echo "changes<<EOF" >> $GITHUB_OUTPUT
             echo "$LOG" >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
+          fi
 
       # -------------------------------
       # Create Release
