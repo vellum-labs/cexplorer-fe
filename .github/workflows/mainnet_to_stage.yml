@@ -11,16 +11,16 @@ on:
 permissions:
   contents: write
   pull-requests: read
-
+  
 jobs:
   CheckUser:
     runs-on: ubuntu-latest
     steps:
-      - name: Check allowed user
+      - name: Check if user is allowed to run this workflow
         run: |
           echo "Triggered by: ${{ github.actor }}"
           if [ "${{ github.actor }}" != "josef0xb" ]; then
-            echo "Access denied – only josef0xb can run this workflow."
+            echo "You are not allowed to run this workflow."
             exit 1
           fi
 
@@ -30,29 +30,28 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.event_name }}
       cancel-in-progress: true
-
     steps:
       - name: Set up WireGuard
         env:
-          WG_CONFIG: ${{ secrets.WG_CONFIG }}
+          WG_CONFIG: ${{secrets.WG_CONFIG}}
         run: |
-          sudo apt update && sudo apt install -y wireguard
-          echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf > /dev/null
-          echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf > /dev/null
-          echo "$WG_CONFIG" | sudo tee /etc/wireguard/wg0.conf > /dev/null
+          sudo apt update
+          sudo apt install -y wireguard
+          echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+          echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf
+          echo "$WG_CONFIG" | sudo tee /etc/wireguard/wg0.conf
           sudo wg-quick up wg0
 
       - uses: actions/checkout@v5
         with:
           ref: ${{ github.event.inputs.branch }}
           fetch-depth: 0
-
-      # Zaručí plnou historii + všechny tagy (bez chybové hlášky)
-      - name: Fetch full history & tags (safe)
+      
+      - name: Fetch full history and tags (safe – no error on complete repo)
         run: |
           git fetch --prune --tags || git fetch --prune --unshallow --tags
 
-      - name: Setup SSH agent
+      - name: Set up SSH agent
         uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -60,117 +59,113 @@ jobs:
       - name: Add server to known_hosts
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -H 10.0.0.1 >> ~/.ssh/known_hosts 2>/dev/null
+          ssh-keyscan -H -t ecdsa,ed25519,rsa 10.0.0.1 >> ~/.ssh/known_hosts
 
-      - name: Setup Node.js
+      - name: Set Node.js
         uses: actions/setup-node@v5
         with:
           node-version: 22.19.0
           cache: 'yarn'
-          cache-dependency-path: yarn.lock
-
-      - name: Install & Build
+          cache-dependency-path: 'yarn.lock'
+      
+      - name: Install dependencies and build
         env:
           VITE_APP_VERSION: ${{ github.run_number }}
           VITE_APP_CONFIG: mainnet-stage
           VITE_APP_BLOCKFROST_KEY: ${{ secrets.BLOCKFROST_API_MAINNET }}
         run: |
           echo "Installing dependencies..."
-          yarn install
+          time yarn install
 
-          echo "Building..."
-          yarn build
+          echo "Starting build..."
+          time yarn build
 
-          echo "Optimizing SVGs..."
-          yarn run svgo
+          echo "Optimizing SVG icons..."
+          time yarn run svgo
 
-          echo "Generating routes..."
-          yarn generate:routes
+          echo "Generating routes.json..."
+          time yarn generate:routes
 
-          echo "Build completed successfully"
+          echo "Build complete"
 
-      - name: Deploy to server
+      - name: Copy files & deploy
+        env:
+          SERVER: 10.0.0.1
         run: |
-          rsync -az --delete \
-            -e "ssh -o StrictHostKeyChecking=no" \
-            ./dist/ job@10.0.0.1:/var/www/cexplorer_prod_stage/
+          rsync -azv -e "ssh -o UserKnownHostsFile=~/.ssh/known_hosts -o HostKeyAlgorithms=ecdsa-sha2-nistp256,ssh-ed25519,rsa-sha2-512" \
+            --omit-dir-times --no-perms --no-owner --no-group --delete \
+            ./dist/ job@$SERVER:/var/www/cexplorer_prod_stage/
 
-      # ————————————————————————
-      # Release & Changelog
-      # ————————————————————————
-      - name: Extract clean environment name
+      # -------------------------------
+      # Release metadata preparation
+      # -------------------------------
+      - name: Extract clean workflow name (remove "Deploy ")
         id: wf
         run: |
           CLEAN="${GITHUB_WORKFLOW#Deploy }"
-          echo "clean=$CLEAN" >> $GITHUB_OUTPUT
+          echo "clean=${CLEAN}" >> $GITHUB_OUTPUT
 
       - name: Get current UTC date
         id: date
-        run: |
-          echo "date=$(date -u '+%Y-%m-%d %H:%M UTC')" >> $GITHUB_OUTPUT
+        run: echo "date=$(date -u +"%Y-%m-%d %H:%M UTC")" >> $GITHUB_OUTPUT
 
-      - name: Find previous tag for this environment
+      - name: Get previous tag for this workflow
         id: prev
         run: |
-          CLEAN="${{ steps.wf.outputs.clean }}"
-          PREV_TAG=$(git tag --list "${CLEAN}_v*" \
-                           --sort=-version:refname \
-                           --merged HEAD \
-                           | head -n 2 | tail -n 1)
+          PREV=$(git tag --list "${GITHUB_WORKFLOW#Deploy }_*" --sort=-creatordate | sed -n '2p')
+          echo "tag=${PREV}" >> $GITHUB_OUTPUT
 
-          if [ -z "$PREV_TAG" ]; then
-            echo "tag=" >> $GITHUB_OUTPUT
-            echo "No previous tag – first deployment"
-          else
-            echo "tag=$PREV_TAG" >> $GITHUB_OUTPUT
-            echo "Previous tag: $PREV_TAG"
-          fi
-
-      - name: Generate changelog
+      - name: Generate change log since last release
         id: changelog
         run: |
           TAG="${{ steps.prev.outputs.tag }}"
           if [ -z "$TAG" ]; then
-            echo "changes=No previous release for this environment." >> $GITHUB_OUTPUT
+            echo "changes=No previous releases." >> $GITHUB_OUTPUT
           else
-            LOG=$(git log "$TAG"..HEAD --no-merges --pretty=format:"• %s ([%h](https://github.com/${{ github.repository }}/commit/%H))")
-            if [ -z "$LOG" ]; then
-              LOG="_(no new commits – possibly rebased or force-pushed)_"
-            fi
+            LOG=$(git log "$TAG"..HEAD --pretty=format:"- %s")
             echo "changes<<EOF" >> $GITHUB_OUTPUT
             echo "$LOG" >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
           fi
 
+      # -------------------------------
+      # Create Release
+      # -------------------------------
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
         if: success()
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: "${{ steps.wf.outputs.clean }}_v${{ github.run_number }}"
-          name: "${{ steps.wf.outputs.clean }} #${{ github.run_number }}"
+          name: "${{ steps.wf.outputs.clean }}_v${{ github.run_number }}"
           body: |
-            Automated deployment
+            Automated deployment release.
 
-            **Environment:** ${{ steps.wf.outputs.clean }}
-            **Version:** #${{ github.run_number }}
-            **Branch:** `${{ github.event.inputs.branch }}`
-            **Triggered by:** @${{ github.actor }}
+            **Workflow:** ${{ steps.wf.outputs.clean }}
+            **Version:** ${{ github.run_number }}
+            **Branch:** ${{ github.event.inputs.branch }}
+            **Triggered by:** ${{ github.actor }}
             **Date:** ${{ steps.date.outputs.date }}
 
-            ### Changes
+            ## Changes since last release
             ${{ steps.changelog.outputs.changes }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Notify Discord
+      # -------------------------------
+      # Discord notification
+      # -------------------------------
+      - name: Notify Discord on success
         if: success()
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
-          TAG="${{ steps.wf.outputs.clean }}_v${{ github.run_number }}"
-          URL="https://github.com/${{ github.repository }}/releases/tag/$TAG"
-          MSG="**${{ steps.wf.outputs.clean }}** deployed\nVersion #${{ github.run_number }} (${{ github.event.inputs.branch }})\n<$URL>"
+          VERSION="${{ github.run_number }}"
+          WORKFLOW_NAME="${{ steps.wf.outputs.clean }}"
+          BRANCH="${{ github.event.inputs.branch }}"
+      
+          MESSAGE="**${WORKFLOW_NAME}** successfully deployed version #**${VERSION}** (${BRANCH})"
 
-          curl -X POST -H "Content-Type: application/json" \
-               -d "{\"content\": \"$MSG\"}" \
-               "$DISCORD_WEBHOOK_URL"
+          curl -H "Content-Type: application/json" \
+            -X POST \
+            -d "{\"content\": \"$MESSAGE\"}" \
+            $DISCORD_WEBHOOK_URL
