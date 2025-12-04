@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 import { policyDetailOwnerOptions } from "@/constants/tables/policyDetailOwnerTableOptions";
 import type { PolicyDetailOwnerTableColumns } from "@/types/tableTypes";
-import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { formatNumber, formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 import AddressCell from "../address/AddressCell";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "../table/ExportButton";
@@ -79,7 +79,7 @@ export const PolicyDetailTopWallets: FC<PolicyDetailTopWalletsProps> = ({
 
         return (
           <p className='w-full text-right'>
-            {formatNumber(item.total_quantity)}
+            {formatNumberWithSuffix(item.total_quantity)}
           </p>
         );
       },
