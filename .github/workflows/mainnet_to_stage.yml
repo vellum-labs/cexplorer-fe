@@ -34,7 +34,6 @@ jobs:
       - name: Set up WireGuard
         env:
           WG_CONFIG: ${{secrets.WG_CONFIG}}
-
         run: |
           sudo apt update
           sudo apt install -y wireguard
@@ -96,7 +95,6 @@ jobs:
       # -------------------------------
       # Release metadata preparation
       # -------------------------------
-
       - name: Extract clean workflow name (remove "Deploy ")
         id: wf
         run: |
@@ -110,10 +108,10 @@ jobs:
       - name: Fetch git tags
         run: git fetch --tags
 
-      - name: Get previous tag
+      - name: Get previous tag for this workflow
         id: prev
         run: |
-          PREV=$(git tag --sort=-creatordate | sed -n '2p')
+          PREV=$(git tag --list "${GITHUB_WORKFLOW#Deploy }_*" --sort=-creatordate | sed -n '2p')
           echo "tag=${PREV}" >> $GITHUB_OUTPUT
 
       - name: Generate change log since last release
@@ -126,7 +124,6 @@ jobs:
             echo "changes<<EOF" >> $GITHUB_OUTPUT
             echo "$LOG" >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
-          fi
 
       # -------------------------------
       # Create Release
@@ -135,7 +132,7 @@ jobs:
         if: success()
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ github.run_number }}
+          tag_name: "${{ steps.wf.outputs.clean }}_v${{ github.run_number }}"
           name: "${{ steps.wf.outputs.clean }}_v${{ github.run_number }}"
           body: |
             Automated deployment release.
