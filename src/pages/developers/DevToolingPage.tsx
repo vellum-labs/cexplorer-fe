@@ -13,165 +13,151 @@ import {
 } from "lucide-react";
 import { DiscordLogo, GithubLogo } from "@vellumlabs/cexplorer-sdk";
 
-interface DevToolingSection {
-  label: string;
-  description: string;
-  buttons: Array<{
-    label: string;
-    href: string;
-    variant: "primary" | "tertiary" | "discord";
-    icon?: React.ReactNode;
-    external?: boolean;
-    isActiveNetwork?: boolean;
-  }>;
-  icon: React.ReactNode;
-}
-
-const devToolingSections: DevToolingSection[] = [
-  {
-    label: "Address inspector",
-    description: "Decode and analyze any Cardano address.",
-    buttons: [
-      {
-        label: "Address inspector",
-        href: "/address/inspector",
-        variant: "primary",
-        icon: <ArrowRight size={16} />,
-      },
-    ],
-    icon: <Search className='text-primary' />,
-  },
-  {
-    label: "Datum inspector",
-    description: "Parse on-chain datum values stored in scripts.",
-    buttons: [
-      {
-        label: "Datum inspector",
-        href: "/datum",
-        variant: "primary",
-        icon: <ArrowRight size={16} />,
-      },
-    ],
-    icon: <Code className='text-primary' />,
-  },
-  {
-    label: "Cexplorer API",
-    description:
-      "Access real-time Cardano on-chain data and integrate directly into your apps.",
-    buttons: [
-      {
-        label: "Documentation",
-        href: "https://docs.cexplorer.io",
-        variant: "tertiary",
-        external: true,
-      },
-      {
-        label: "Get API key",
-        href: "/api",
-        variant: "tertiary",
-      },
-      {
-        label: "API Page",
-        href: "/api",
-        variant: "primary",
-        icon: <ArrowRight size={16} />,
-      },
-    ],
-    icon: <Link className='text-primary' />,
-  },
-  {
-    label: "Cexplorer SDK",
-    description: "An official set of tooling for Cexplorer front-end.",
-    buttons: [
-      {
-        label: "SDK",
-        href: "https://github.com/vellum-labs/cexplorer-sdk",
-        variant: "primary",
-        icon: <ArrowRight size={16} />,
-        external: true,
-      },
-    ],
-    icon: <Wrench className='text-primary' />,
-  },
-  {
-    label: "Cexplorer instances",
-    description:
-      "Access blockchain explorer for both Cardano mainnet and testnet environments.",
-    buttons: networks.map(network => ({
-      label: network.label.split(" ")[0],
-      href: network.url,
-      variant: "tertiary" as const,
-      external: true,
-      isActiveNetwork: network.isActive,
-    })),
-    icon: <ArrowLeftRight className='text-primary' />,
-  },
-  {
-    label: "Github",
-    description: "Explore the source, contribute, and track updates.",
-    buttons: [
-      {
-        label: "Report a bug",
-        href: "https://github.com/vellum-labs/cexplorer-fe/issues/new?template=bug_report.md",
-        variant: "tertiary",
-        external: true,
-      },
-      {
-        label: "Suggest a feature",
-        href: "https://github.com/vellum-labs/cexplorer-fe/issues/new?template=feature_request.md",
-        variant: "tertiary",
-        external: true,
-      },
-      {
-        label: "Github",
-        href: "https://github.com/vellum-labs/cexplorer-fe",
-        variant: "tertiary",
-        external: true,
-      },
-    ],
-    icon: (
-      <img
-        src={GithubLogo}
-        alt='Github'
-        width={24}
-        height={24}
-        className='text-primary'
-      />
-    ),
-  },
-  {
-    label: "Get in touch",
-    description:
-      "Reach out to our team for questions, partnerships, feedback, or developer support.",
-    buttons: [
-      {
-        label: "Email",
-        href: "mailto:support@cexplorer.io",
-        variant: "tertiary",
-        icon: <Mail size={16} />,
-        external: true,
-      },
-      {
-        label: "Join Discord",
-        href: "https://discord.gg/PGCmmQC3dj",
-        variant: "discord",
-        icon: (
-          <img
-            src={DiscordLogo}
-            alt='Discord'
-            width={16}
-            height={16}
-            className='brightness-0 invert'
-          />
-        ),
-        external: true,
-      },
-    ],
-    icon: <MessageSquare className='text-primary' />,
-  },
-];
-
 export const DevToolingPage = () => {
+  const devToolingSections = [
+    {
+      label: "Address inspector",
+      description: "Decode and analyze any Cardano address.",
+      buttons: [
+        {
+          label: "Address inspector",
+          href: "/address/inspector",
+          variant: "primary" as const,
+          icon: <ArrowRight size={16} />,
+        },
+      ],
+      icon: <Search className='text-primary' />,
+    },
+    {
+      label: "Datum inspector",
+      description: "Parse on-chain datum values stored in scripts.",
+      buttons: [
+        {
+          label: "Datum inspector",
+          href: "/datum",
+          variant: "primary" as const,
+          icon: <ArrowRight size={16} />,
+        },
+      ],
+      icon: <Code className='text-primary' />,
+    },
+    {
+      label: "Cexplorer API",
+      description:
+        "Access real-time Cardano on-chain data and integrate directly into your apps.",
+      buttons: [
+        {
+          label: "Documentation",
+          href: "https://docs.cexplorer.io",
+          variant: "tertiary" as const,
+          external: true,
+        },
+        {
+          label: "Get API key",
+          href: "/api",
+          variant: "tertiary" as const,
+        },
+        {
+          label: "API Page",
+          href: "/api",
+          variant: "primary" as const,
+          icon: <ArrowRight size={16} />,
+        },
+      ],
+      icon: <Link className='text-primary' />,
+    },
+    {
+      label: "Cexplorer SDK",
+      description: "An official set of tooling for Cexplorer front-end.",
+      buttons: [
+        {
+          label: "SDK",
+          href: "https://github.com/vellum-labs/cexplorer-sdk",
+          variant: "primary" as const,
+          icon: <ArrowRight size={16} />,
+          external: true,
+        },
+      ],
+      icon: <Wrench className='text-primary' />,
+    },
+    {
+      label: "Cexplorer instances",
+      description:
+        "Access blockchain explorer for both Cardano mainnet and testnet environments.",
+      buttons: networks.map(network => ({
+        label: network.label.split(" ")[0],
+        href: network.url,
+        variant: "tertiary" as const,
+        external: true,
+        isActiveNetwork: network.isActive,
+      })),
+      icon: <ArrowLeftRight className='text-primary' />,
+    },
+    {
+      label: "Github",
+      description: "Explore the source, contribute, and track updates.",
+      buttons: [
+        {
+          label: "Report a bug",
+          href: "https://github.com/vellum-labs/cexplorer-fe/issues/new?template=bug_report.md",
+          variant: "tertiary" as const,
+          external: true,
+        },
+        {
+          label: "Suggest a feature",
+          href: "https://github.com/vellum-labs/cexplorer-fe/issues/new?template=feature_request.md",
+          variant: "tertiary" as const,
+          external: true,
+        },
+        {
+          label: "Github",
+          href: "https://github.com/vellum-labs/cexplorer-fe",
+          variant: "tertiary" as const,
+          external: true,
+        },
+      ],
+      icon: (
+        <img
+          src={GithubLogo}
+          alt='Github'
+          width={24}
+          height={24}
+          className='text-primary'
+        />
+      ),
+    },
+    {
+      label: "Get in touch",
+      description:
+        "Reach out to our team for questions, partnerships, feedback, or developer support.",
+      buttons: [
+        {
+          label: "Email",
+          href: "mailto:support@cexplorer.io",
+          variant: "tertiary" as const,
+          icon: <Mail size={16} />,
+          external: true,
+        },
+        {
+          label: "Join Discord",
+          href: "https://discord.gg/PGCmmQC3dj",
+          variant: "discord" as const,
+          icon: (
+            <img
+              src={DiscordLogo}
+              alt='Discord'
+              width={16}
+              height={16}
+              className='brightness-0 invert'
+            />
+          ),
+          external: true,
+        },
+      ],
+      icon: <MessageSquare className='text-primary' />,
+    },
+  ];
+
   return (
     <PageBase
       metadataTitle='devTooling'
