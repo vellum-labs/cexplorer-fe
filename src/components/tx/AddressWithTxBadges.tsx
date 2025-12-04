@@ -154,11 +154,13 @@ export const AddressWithTxBadges = ({
             </div>
           }
         >
-          <div
+          <Link
+            to='/tx/$hash'
+            params={{ hash: utxo.consumed_utxo }}
             className={`flex items-center ${shouldHighlightConsumedBy ? "rounded-s bg-hoverHighlight px-1/2 outline outline-1 outline-highlightBorder" : ""}`}
           >
             <Flame size={16} color={colors.primary} />
-          </div>
+          </Link>
         </Tooltip>
       )}
 
