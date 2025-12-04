@@ -150,13 +150,21 @@ export const AssetDetailPage: FC = () => {
 
   const rawFormattedHex = assetDetailQuery.data?.data?.name
     ? assetDetailQuery.data?.data?.name.replace(
-        /^(000de140|0014df10|000643b0)/,
+        /^(000de140|0014df10|000643b0|000010)/,
         "",
       )
     : undefined;
 
-  const formattedHex = rawFormattedHex
+  const decodedHex = rawFormattedHex
     ? encodeAssetName(rawFormattedHex)
+    : undefined;
+
+  const isSafeToDisplay = (name: string): boolean => {
+    return /^[\x20-\x7E]+$/.test(name);
+  };
+
+  const formattedHex = decodedHex && isSafeToDisplay(decodedHex)
+    ? decodedHex
     : undefined;
 
   const nameByRegistry =

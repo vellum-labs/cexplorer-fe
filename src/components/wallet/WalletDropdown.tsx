@@ -140,7 +140,7 @@ const WalletDropdown = ({
                 <img src={DollarIcon} alt='dollar' />
                 <span>
                   {encodeAssetName(
-                    adaHandle.replace(/^(000de140|0014df10|000643b0)/, ""),
+                    adaHandle.replace(/^(000de140|0014df10|000643b0|000010)/, ""),
                   )}
                 </span>
               </Badge>
