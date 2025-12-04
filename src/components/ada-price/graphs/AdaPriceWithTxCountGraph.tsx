@@ -24,7 +24,6 @@ export const AdaPriceWithTxCountGraph: FC<AdaPriceWithTxCountGraphProps> = memo(
       allMergedData,
     } = useAdaPriceWithTxCount(graphRates, analyticsData);
 
-    // Create a fake query object for GraphEpochSort
     const fakeQuery = useMemo(
       () => ({
         data: { data: allMergedData },

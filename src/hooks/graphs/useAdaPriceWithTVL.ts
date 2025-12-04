@@ -41,7 +41,6 @@ export const useAdaPriceWithTVL = (
   const { splitLineColor, textColor, bgColor } = useGraphColors();
   const { theme } = useThemeStore();
 
-  // Create merged data from rates and TVL
   const allMergedData = useMemo(() => {
     const tvlMap = new Map(
       tvlData.map(item => {
@@ -60,7 +59,6 @@ export const useAdaPriceWithTVL = (
       }));
   }, [graphRates, tvlData]);
 
-  // Use filtered data or all data
   const displayData = data ?? allMergedData;
 
   const dates = displayData.map(d => d.date);
@@ -177,7 +175,6 @@ export const useAdaPriceWithTVL = (
     ],
   };
 
-  // Create table data for CSV export
   useEffect(() => {
     const tableData = displayData.map(item => ({
       Date: item.date,

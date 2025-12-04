@@ -19,10 +19,15 @@ interface AdaPriceWithTVLGraphProps {
 
 export const AdaPriceWithTVLGraph: FC<AdaPriceWithTVLGraphProps> = memo(
   function AdaPriceWithTVLGraph({ graphRates, tvlData }) {
-    const { json, option, selectedItem, setData, setSelectedItem, allMergedData } =
-      useAdaPriceWithTVL(graphRates, tvlData);
+    const {
+      json,
+      option,
+      selectedItem,
+      setData,
+      setSelectedItem,
+      allMergedData,
+    } = useAdaPriceWithTVL(graphRates, tvlData);
 
-    // Create a fake query object for GraphEpochSort
     const fakeQuery = useMemo(
       () => ({
         data: { data: allMergedData },

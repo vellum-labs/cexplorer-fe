@@ -37,7 +37,6 @@ export const useAdaPriceWithActiveAddresses = (
   const { splitLineColor, textColor, bgColor } = useGraphColors();
   const { theme } = useThemeStore();
 
-  // Create merged data from rates and analytics
   const allMergedData = useMemo(() => {
     const analyticsMap = new Map(
       analyticsData.map(item => [
@@ -56,7 +55,6 @@ export const useAdaPriceWithActiveAddresses = (
       }));
   }, [graphRates, analyticsData]);
 
-  // Use filtered data or all data
   const displayData = data ?? allMergedData;
 
   const dates = displayData.map(d => d.date);
@@ -167,7 +165,6 @@ export const useAdaPriceWithActiveAddresses = (
     ],
   };
 
-  // Create table data for CSV export
   useEffect(() => {
     const tableData = displayData.map(item => ({
       Date: item.date,

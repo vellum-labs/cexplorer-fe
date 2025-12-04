@@ -37,7 +37,6 @@ export const useAdaPriceWithTxVolume = (
   const { splitLineColor, textColor, bgColor } = useGraphColors();
   const { theme } = useThemeStore();
 
-  // Create merged data from rates and analytics
   const allMergedData = useMemo(() => {
     const analyticsMap = new Map(
       analyticsData.map(item => [item.date, item.stat?.count_tx_out ?? 0]),
@@ -53,7 +52,6 @@ export const useAdaPriceWithTxVolume = (
       }));
   }, [graphRates, analyticsData]);
 
-  // Use filtered data or all data
   const displayData = data ?? allMergedData;
 
   const dates = displayData.map(d => d.date);
@@ -164,7 +162,6 @@ export const useAdaPriceWithTxVolume = (
     ],
   };
 
-  // Create table data for CSV export
   useEffect(() => {
     const tableData = displayData.map(item => ({
       Date: item.date,

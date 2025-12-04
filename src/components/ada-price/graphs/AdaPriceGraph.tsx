@@ -23,7 +23,6 @@ export const AdaPriceGraph: FC<AdaPriceGraphProps> = memo(
       allData,
     } = useAdaPrice(graphRates);
 
-    // Create a fake query object for GraphEpochSort
     const fakeQuery = useMemo(
       () => ({
         data: { data: allData },

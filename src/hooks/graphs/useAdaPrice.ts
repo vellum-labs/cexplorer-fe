@@ -55,7 +55,6 @@ export const useAdaPrice = (graphRates: BasicRate[]): UseAdaPrice => {
     }
   }, []);
 
-  // Use filtered data or all data
   const displayData = data ?? graphRates;
 
   const dates = displayData.map(d => d.date);
@@ -199,7 +198,6 @@ export const useAdaPrice = (graphRates: BasicRate[]): UseAdaPrice => {
     ],
   };
 
-  // Create table data for CSV export
   useEffect(() => {
     const tableData = displayData.map(item => ({
       Date: item.date,

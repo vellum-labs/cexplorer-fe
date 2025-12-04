@@ -13,8 +13,8 @@ interface AdaPriceWithTxVolumeGraphProps {
   analyticsData: AnalyticsRateResponseData[];
 }
 
-export const AdaPriceWithTxVolumeGraph: FC<AdaPriceWithTxVolumeGraphProps> = memo(
-  function AdaPriceWithTxVolumeGraph({ graphRates, analyticsData }) {
+export const AdaPriceWithTxVolumeGraph: FC<AdaPriceWithTxVolumeGraphProps> =
+  memo(function AdaPriceWithTxVolumeGraph({ graphRates, analyticsData }) {
     const {
       json,
       option,
@@ -24,7 +24,6 @@ export const AdaPriceWithTxVolumeGraph: FC<AdaPriceWithTxVolumeGraphProps> = mem
       allMergedData,
     } = useAdaPriceWithTxVolume(graphRates, analyticsData);
 
-    // Create a fake query object for GraphEpochSort
     const fakeQuery = useMemo(
       () => ({
         data: { data: allMergedData },
@@ -59,5 +58,4 @@ export const AdaPriceWithTxVolumeGraph: FC<AdaPriceWithTxVolumeGraphProps> = mem
         </div>
       </AnalyticsGraph>
     );
-  },
-);
+  });

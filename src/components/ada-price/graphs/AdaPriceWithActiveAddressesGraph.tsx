@@ -13,54 +13,52 @@ interface AdaPriceWithActiveAddressesGraphProps {
   analyticsData: AnalyticsRateResponseData[];
 }
 
-export const AdaPriceWithActiveAddressesGraph: FC<
-  AdaPriceWithActiveAddressesGraphProps
-> = memo(function AdaPriceWithActiveAddressesGraph({
-  graphRates,
-  analyticsData,
-}) {
-  const {
-    json,
-    option,
-    selectedItem,
-    setData,
-    setSelectedItem,
-    allMergedData,
-  } = useAdaPriceWithActiveAddresses(graphRates, analyticsData);
+export const AdaPriceWithActiveAddressesGraph: FC<AdaPriceWithActiveAddressesGraphProps> =
+  memo(function AdaPriceWithActiveAddressesGraph({
+    graphRates,
+    analyticsData,
+  }) {
+    const {
+      json,
+      option,
+      selectedItem,
+      setData,
+      setSelectedItem,
+      allMergedData,
+    } = useAdaPriceWithActiveAddresses(graphRates, analyticsData);
 
-  // Create a fake query object for GraphEpochSort
-  const fakeQuery = useMemo(
-    () => ({
-      data: { data: allMergedData },
-      isLoading: false,
-      isFetching: false,
-    }),
-    [allMergedData],
-  );
+    const fakeQuery = useMemo(
+      () => ({
+        data: { data: allMergedData },
+        isLoading: false,
+        isFetching: false,
+      }),
+      [allMergedData],
+    );
 
-  return (
-    <AnalyticsGraph
-      title='ADA/BTC Price vs Daily Active Addresses'
-      exportButton
-      graphSortData={{
-        query: fakeQuery as any,
-        setData,
-        setSelectedItem,
-        selectedItem,
-      }}
-      sortBy='days'
-      csvJson={json}
-    >
-      <div className='relative w-full'>
-        <GraphWatermark />
-        <ReactEcharts
-          opts={{ height: 350 }}
-          option={option}
-          notMerge={true}
-          lazyUpdate={true}
-          className='h-full w-full max-w-full'
-        />
-      </div>
-    </AnalyticsGraph>
-  );
-});
+    return (
+      <AnalyticsGraph
+        title='ADA/BTC Price vs Daily Active Addresses'
+        exportButton
+        graphSortData={{
+          query: fakeQuery as any,
+          setData,
+          setSelectedItem,
+          selectedItem,
+        }}
+        sortBy='days'
+        csvJson={json}
+      >
+        <div className='relative w-full'>
+          <GraphWatermark />
+          <ReactEcharts
+            opts={{ height: 350 }}
+            option={option}
+            notMerge={true}
+            lazyUpdate={true}
+            className='h-full w-full max-w-full'
+          />
+        </div>
+      </AnalyticsGraph>
+    );
+  });
