@@ -5,8 +5,7 @@ import {
 } from "@/services/user";
 import { useAddressLabelStore } from "@/stores/addressLabelStore";
 import { useCustomLabelModalState } from "@/stores/states/customLabelModalState";
-import { formatString } from "@vellumlabs/cexplorer-sdk";
-import type { FileRoutesByPath } from "@tanstack/react-router";
+import { formatString, ProBadge } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import {
   ChevronLeft,
@@ -170,14 +169,7 @@ export const CustomLabels = () => {
         <div className='mb-1 mt-3 flex w-full items-center justify-between gap-1 text-text-sm'>
           <span className='flex items-center gap-1/2'>
             <ChevronsUp size={25} /> Unlock up to 5000 labels with{" "}
-            <Link
-              to={
-                "/profile?tab=pro" as FileRoutesByPath[keyof FileRoutesByPath]["path"]
-              }
-              className='gold-shimmer bg-purpleText bg-clip-text font-bold text-transparent underline hover:text-transparent'
-            >
-              Cexplorer PRO
-            </Link>
+            <ProBadge get />
           </span>
           <Tooltip
             content={<div className='w-[150px]'>{tooltipText}</div>}

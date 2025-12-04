@@ -21,10 +21,19 @@ interface AssetProps {
   hideImage?: boolean;
   imageSize?: number;
   withCopy?: boolean;
+  formatTitle?: "short" | "long" | "shorter";
 }
 
 const AssetCell = memo((props: AssetProps) => {
-  const { asset, name, isNft, hideImage, imageSize, formattedHex } = props;
+  const {
+    asset,
+    name,
+    isNft,
+    hideImage,
+    imageSize,
+    formattedHex,
+    formatTitle = "long",
+  } = props;
 
   const assetName = asset?.name || name || "";
 
@@ -32,7 +41,7 @@ const AssetCell = memo((props: AssetProps) => {
 
   const adaHandleName = assetName
     .replace(adaHandlePolicy, "")
-    .replace(/^(000de140|0014df10|000643b0)/, "");
+    .replace(/^(000de140|0014df10|000643b0|000010)/, "");
 
   const fingerprint = getAssetFingerprint(assetName);
   const isAdaHandle = assetName.includes(adaHandlePolicy);
@@ -93,6 +102,8 @@ const AssetCell = memo((props: AssetProps) => {
                   : renderAssetName({
                       asset,
                       name: isAdaHandle ? adaHandleName : name,
+                      type: formatTitle,
+                      fingerprint,
                     })}
             </span>
             {withCopy && (
@@ -102,15 +113,15 @@ const AssetCell = memo((props: AssetProps) => {
                     ? nameByRegistry
                     : formattedHex
                       ? formattedHex
-                      : renderAssetName({ asset, name })
+                      : renderAssetName({ asset, name, fingerprint })
                 }
                 className='ml-1'
               />
             )}
           </Link>
           <span className='flex items-center gap-1/2'>
-            {nameByRegistry || renderAssetName({ asset, name }) !== "n/a" ? (
-              <p className='text-text-xs text-grayTextPrimary'>
+            {nameByRegistry || renderAssetName({ asset, name, fingerprint }) !== "n/a" ? (
+              <p className='break-words break-all text-text-xs text-grayTextPrimary'>
                 {formatString(fingerprint, "long")}
               </p>
             ) : (
@@ -119,13 +130,13 @@ const AssetCell = memo((props: AssetProps) => {
                 params={{ fingerprint: fingerprint }}
                 title={fingerprint}
                 key={fingerprint}
-                className='text-text-sm text-primary'
+                className='break-words break-all text-text-sm text-primary'
               >
                 {formatString(fingerprint, "long")}
               </Link>
             )}
             <Copy
-              size={renderAssetName({ asset, name }) !== "n/a" ? 10 : 13}
+              size={renderAssetName({ asset, name, fingerprint }) !== "n/a" ? 10 : 13}
               copyText={fingerprint}
             />
           </span>

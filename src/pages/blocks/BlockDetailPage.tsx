@@ -33,6 +33,7 @@ import { TotalSumWithRates } from "@vellumlabs/cexplorer-sdk";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { generateImageUrl } from "@/utils/generateImageUrl";
@@ -106,6 +107,7 @@ const BlockDetailPage: FC = () => {
           <span className='text-text-sm font-medium text-text'>
             {formatNumber(data?.block_no ?? 0)}
           </span>
+          <Copy copyText={String(data?.block_no ?? 0)} />
           <div>
             <div className='flex items-center gap-1/2'>
               <Tooltip
@@ -174,6 +176,7 @@ const BlockDetailPage: FC = () => {
           <span className='font-medium text-text'>
             {formatNumber(data?.slot_no ?? 0)}
           </span>
+          <Copy copyText={String(data?.slot_no ?? 0)} />
           <span className='pr-1/2 text-grayTextPrimary'>
             (epoch slot {formatNumber(data?.epoch_slot_no ?? 0)})
           </span>

@@ -14,6 +14,9 @@
   "committee": {
     "title": "Constitutional Committee Detail | Cexplorer.io"
   },
+  "ccMemberDetail": {
+    "title": "CC Member %name% | Cexplorer.io"
+  },
   "adaPrice": {
     "title": "ADA Price | Cexplorer.io"
   },
@@ -143,6 +146,12 @@
   "articleDetail": {
     "title": "%article% | Cexplorer.io"
   },
+  "wikiList": {
+    "title": "Wiki | Cexplorer.io"
+  },
+  "wikiDetail": {
+    "title": "%wiki% | Wiki | Cexplorer.io"
+  },
   "addressInspector": {
     "title": "Address Inspector | Cexplorer.io"
   },
@@ -217,5 +226,8 @@
   },
   "devTooling": {
     "title": "Developer Tools | Cexplorer.io"
+  },
+  "genesisAddresses": {
+    "title": "Genesis Addresses | Cexplorer.io"
   }
 }

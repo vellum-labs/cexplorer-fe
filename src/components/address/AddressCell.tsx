@@ -134,12 +134,14 @@ const AddressCell = ({
               </div>
             }
           >
-            <div
+            <Link
+              to='/stake/$stakeAddr'
+              params={{ stakeAddr: Address.from(address).rewardAddress }}
               onMouseEnter={() => !forceHighlight && setHoverValue(null)}
               className={`flex items-center ${highlightStakeKey ? "rounded-s bg-hoverHighlight px-1/2 outline outline-1 outline-highlightBorder" : ""}`}
             >
               <KeyRound size={15} color={colors.primary} />
-            </div>
+            </Link>
           </Tooltip>
         )}
         {stakeKey && stakeKey !== Address.from(address).rewardAddress && (

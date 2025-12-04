@@ -77,9 +77,11 @@ export const useAssetList = ({
       ? "token"
       : type === "recent-nfts"
         ? "nft"
-        : tab === "all"
+        : policyId
           ? undefined
-          : tab,
+          : tab === "all"
+            ? undefined
+            : tab,
     overrideTableSearch
       ? overrideTableSearch
       : debouncedTableSearch.length > 0

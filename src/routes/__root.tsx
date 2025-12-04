@@ -213,7 +213,6 @@ const RootComponent = () => {
                 label='Go back'
                 variant='primary'
                 size='md'
-                href='/'
                 className='hover:text-white'
               />
             </div>

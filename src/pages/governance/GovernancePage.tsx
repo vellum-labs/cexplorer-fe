@@ -321,7 +321,7 @@ export const GovernancePage: FC = () => {
 
         return (
           <div className='flex flex-col gap-1/2'>
-            <DateCell time={String(endTime)} />
+            <DateCell time={String(endTime)} withoutConvert />
             {item?.expired_epoch && (
               <div className='flex items-center gap-1/2'>
                 <span className='text-text-xs text-grayTextPrimary'>
@@ -425,7 +425,9 @@ export const GovernancePage: FC = () => {
           )}
           {!!drepStat?.gov_action[0]?.expires && (
             <div className='flex w-fit items-center gap-1/2 pr-2'>
-              <span className='text-text-sm text-grayTextPrimary'>Expired / Dropped</span>
+              <span className='text-text-sm text-grayTextPrimary'>
+                Expired / Dropped
+              </span>
               <span className='text-text-sm text-[#F79009]'>
                 {drepStat?.gov_action[0]?.expires}
               </span>

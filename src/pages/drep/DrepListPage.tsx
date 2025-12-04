@@ -101,7 +101,10 @@ export const DrepListPage = () => {
       label: "Active voting stake",
       content: drepStat?.stake?.total ? (
         <AdaWithTooltip
-          data={drepStat.stake.total}
+          data={
+            drepStat.stake.total -
+            (drepStat.stake.drep_always_abstain ?? 0)
+          }
           triggerClassName='text-display-xs font-semibold text-text'
         />
       ) : (

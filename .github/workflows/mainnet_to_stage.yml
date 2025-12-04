@@ -34,7 +34,6 @@ jobs:
       - name: Set up WireGuard
         env:
           WG_CONFIG: ${{secrets.WG_CONFIG}}
-
         run: |
           sudo apt update
           sudo apt install -y wireguard
@@ -46,6 +45,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           ref: ${{ github.event.inputs.branch }}
+          fetch-depth: 0   # důležité pro získání commit historie a tagů
       
       - name: Set up SSH agent
         uses: webfactory/ssh-agent@v0.8.0
@@ -56,7 +56,6 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan -H -t ecdsa,ed25519,rsa 10.0.0.1 >> ~/.ssh/known_hosts
-        # Alternatively, store known_hosts as a secret and use it
 
       - name: Set Node.js
         uses: actions/setup-node@v5
@@ -85,9 +84,6 @@ jobs:
 
           echo "✅ Build complete"
 
-
-
-          
       - name: Copy files & deploy
         env:
           SERVER: 10.0.0.1
@@ -96,13 +92,74 @@ jobs:
             --omit-dir-times --no-perms --no-owner --no-group --delete \
             ./dist/ job@$SERVER:/var/www/cexplorer_prod_stage/
 
+      # -------------------------------
+      # Release metadata preparation
+      # -------------------------------
+      - name: Extract clean workflow name (remove "Deploy ")
+        id: wf
+        run: |
+          CLEAN="${GITHUB_WORKFLOW#Deploy }"
+          echo "clean=${CLEAN}" >> $GITHUB_OUTPUT
+
+      - name: Get current UTC date
+        id: date
+        run: echo "date=$(date -u +"%Y-%m-%d %H:%M UTC")" >> $GITHUB_OUTPUT
+
+      - name: Fetch git tags
+        run: git fetch --tags
+
+      - name: Get previous tag for this workflow
+        id: prev
+        run: |
+          PREV=$(git tag --list "${GITHUB_WORKFLOW#Deploy }_*" --sort=-creatordate | sed -n '2p')
+          echo "tag=${PREV}" >> $GITHUB_OUTPUT
+
+      - name: Generate change log since last release
+        id: changelog
+        run: |
+          TAG="${{ steps.prev.outputs.tag }}"
+          if [ -z "$TAG" ]; then
+            echo "changes=No previous releases." >> $GITHUB_OUTPUT
+          else
+            LOG=$(git log "$TAG"..HEAD --pretty=format:"- %s")
+            echo "changes<<EOF" >> $GITHUB_OUTPUT
+            echo "$LOG" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          fi
+
+      # -------------------------------
+      # Create Release
+      # -------------------------------
+      - name: Create GitHub Release
+        if: success()
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: "${{ steps.wf.outputs.clean }}_v${{ github.run_number }}"
+          name: "${{ steps.wf.outputs.clean }}_v${{ github.run_number }}"
+          body: |
+            Automated deployment release.
+
+            **Workflow:** ${{ steps.wf.outputs.clean }}
+            **Version:** ${{ github.run_number }}
+            **Branch:** ${{ github.event.inputs.branch }}
+            **Triggered by:** ${{ github.actor }}
+            **Date:** ${{ steps.date.outputs.date }}
+
+            ## Changes since last release
+            ${{ steps.changelog.outputs.changes }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # -------------------------------
+      # Discord notification
+      # -------------------------------
       - name: Notify Discord on success
         if: success()
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
           VERSION="${{ github.run_number }}"
-          WORKFLOW_NAME="${{ github.workflow }}"
+          WORKFLOW_NAME="${{ steps.wf.outputs.clean }}"
           BRANCH="${{ github.event.inputs.branch }}"
       
           MESSAGE="✅ **${WORKFLOW_NAME}** successfully deployed version #**${VERSION}** (${BRANCH})"
@@ -111,10 +168,3 @@ jobs:
             -X POST \
             -d "{\"content\": \"$MESSAGE\"}" \
             $DISCORD_WEBHOOK_URL
-
-  GenerateChangelog:
-    needs: DeployToServer
-    if: success()
-    uses: ./.github/workflows/changelog.yml
-    with:
-      deployment_name: "mainnet-stage.cexplorer.io"

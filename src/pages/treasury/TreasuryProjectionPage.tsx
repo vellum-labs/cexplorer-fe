@@ -3,12 +3,13 @@ import { PageBase } from "@/components/global/pages/PageBase";
 import { RangeSlider } from "@vellumlabs/cexplorer-sdk";
 import { useFetchEpochDetailParam } from "@/services/epoch";
 import { useFetchAdaPots } from "@/services/analytics";
-import { useConstStore } from "@/stores/constStore";
 import ReactEcharts from "echarts-for-react";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { EPOCH_LENGTH_DAYS } from "@/constants/confVariables";
 import { RotateCcw } from "lucide-react";
+import { useMiscConst } from "@/hooks/useMiscConst";
+import { useFetchMiscBasic } from "@/services/misc";
 
 interface ProjectionDataPoint {
   epoch: number;
@@ -22,8 +23,9 @@ const STORAGE_KEY_WITHDRAWAL = "treasuryProjection_annualWithdrawal";
 const DEFAULT_ANNUAL_WITHDRAWAL = 320_000_000;
 
 export const TreasuryProjectionPage = () => {
-  const { constData } = useConstStore();
-  const currentEpoch = constData?.epoch?.no ?? 0;
+  const { data: basicData } = useFetchMiscBasic(true);
+  const miscConst = useMiscConst(basicData?.data.version.const);
+  const currentEpoch = miscConst?.epoch?.no ?? 0;
 
   const { data: epochParam, isLoading: isLoadingEpoch } =
     useFetchEpochDetailParam(currentEpoch);

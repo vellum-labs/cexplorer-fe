@@ -1,6 +1,7 @@
 import type {
   AnalyticsAdaPotsResponse,
   AveragePoolResponse,
+  GenesisAddressResponse,
   GroupDetailResponse,
   GroupsListResponse,
   WealthCompositionResponse,
@@ -247,3 +248,34 @@ export const useFetchAveragePool = () => {
     queryFn: () => fetchAveragePool(),
   });
 };
+
+export const fetchGenesisAddresses = async ({
+  limit = 10,
+  offset = 0,
+}: {
+  limit?: number;
+  offset?: number;
+}) => {
+  const url = "/analytics/genesis_addr";
+  const options = {
+    params: { limit, offset },
+  };
+
+  return handleFetch<GenesisAddressResponse>(url, offset, options);
+};
+
+export const useFetchGenesisAddresses = (page: number, limit: number) =>
+  useInfiniteQuery({
+    queryKey: ["analytics_genesis_addresses", limit, page],
+    queryFn: ({ pageParam = page }) =>
+      fetchGenesisAddresses({
+        limit,
+        offset: pageParam,
+      }),
+    initialPageParam: page,
+    getNextPageParam: lastPage => {
+      const nextOffset = (lastPage.prevOffset as number) + limit;
+      if (nextOffset >= lastPage.data.count) return undefined;
+      return nextOffset;
+    },
+  });

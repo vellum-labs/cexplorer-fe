@@ -22,6 +22,7 @@ import { DiscordLogo } from "@vellumlabs/cexplorer-sdk";
 import { GithubLogo } from "@vellumlabs/cexplorer-sdk";
 import { TelegramLogo } from "@vellumlabs/cexplorer-sdk";
 import { TwitterLogo } from "@vellumlabs/cexplorer-sdk";
+import { ProBadge } from "@vellumlabs/cexplorer-sdk";
 
 interface WalletDropdownProps {
   isOpen: boolean;
@@ -113,18 +114,7 @@ const WalletDropdown = ({
             </div>
           </div>
           <div className='flex flex-col items-end gap-1/2'>
-            {hasMembership ? (
-              <span className='flex w-fit items-center gap-1/2 rounded-max bg-gradient-to-r from-darkBlue to-purple-700 px-1 py-1/4 text-right text-text-xs font-medium text-white'>
-                PRO
-              </span>
-            ) : (
-              <Link
-                to='/pro'
-                className='gold-shimmer cursor-pointer bg-purpleText bg-clip-text text-text-xs font-medium leading-[18px] text-transparent underline hover:text-transparent'
-              >
-                Get PRO
-              </Link>
-            )}
+            {hasMembership ? <ProBadge /> : <ProBadge get />}
           </div>
         </div>
       </div>
@@ -140,7 +130,7 @@ const WalletDropdown = ({
                 <img src={DollarIcon} alt='dollar' />
                 <span>
                   {encodeAssetName(
-                    adaHandle.replace(/^(000de140|0014df10|000643b0)/, ""),
+                    adaHandle.replace(/^(000de140|0014df10|000643b0|000010)/, ""),
                   )}
                 </span>
               </Badge>
