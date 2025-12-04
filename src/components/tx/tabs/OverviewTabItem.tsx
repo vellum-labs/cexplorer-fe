@@ -84,6 +84,18 @@ const OverviewTabItem: FC<OverviewTabItemProps> = ({ query }) => {
 
   const stakeAddrToHueRotation = new Map<string, number>();
 
+  const maxInputAssets = Math.max(
+    ...(uniqueInputs?.map(input => Math.min(5, input.asset?.length || 1)) || [
+      1,
+    ]),
+  );
+  const maxOutputAssets = Math.max(
+    ...(uniqueOutputs?.map(output =>
+      Math.min(5, output.asset?.length || 1),
+    ) || [1]),
+  );
+  const maxNodeWidth = 300 + Math.max(maxInputAssets, maxOutputAssets) * 80;
+
   const inputNodes: Node[] =
     uniqueInputs?.map((input, index) => {
       const stakeAddr = getStakeAddr(input.payment_addr_bech32);
@@ -110,11 +122,11 @@ const OverviewTabItem: FC<OverviewTabItemProps> = ({ query }) => {
       const node = {
         id: nodeId,
         position: {
-          x: -100 - Math.min(5, input.asset?.length || 1) * 80,
+          x: -80 - maxNodeWidth,
           y: currentYPosition + cumulativeYOffset,
         },
         data: { label: <NodeContent data={input} type='input' /> },
-        width: 300 + Math.min(5, input.asset?.length || 1) * 80,
+        width: maxNodeWidth,
         targetPosition: "right" as Position,
         sourcePosition: "right" as Position,
         style: {
@@ -164,7 +176,7 @@ const OverviewTabItem: FC<OverviewTabItemProps> = ({ query }) => {
           y: currentYPosition + cumulativeYOffset,
         },
         data: { label: <NodeContent data={output} type='output' /> },
-        width: 300 + Math.min(5, output.asset?.length || 1) * 80,
+        width: maxNodeWidth,
         targetPosition: "left" as Position,
         sourcePosition: "left" as Position,
         style: {
