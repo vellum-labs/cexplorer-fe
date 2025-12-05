@@ -352,11 +352,28 @@ export interface ConstitutionAnchor {
   data_hash: string;
 }
 
+export interface ConstitutionGovActionProposal {
+  id: number;
+  type: string;
+  anchor: ConstitutionAnchor;
+  deposit: number;
+  expiration: number;
+  description: {
+    tag: string;
+    contents: any[];
+  };
+  previous: number | null;
+  ratified_epoch: number | null;
+  enacted_epoch: number | null;
+  dropped_epoch: number | null;
+  expired_epoch: number | null;
+}
+
 export interface ConstitutionDataItem {
   id: number;
   anchor: ConstitutionAnchor;
   script_hash: string;
-  gov_action_proposal: any | null;
+  gov_action_proposal: ConstitutionGovActionProposal | null;
 }
 
 export type ConstitutionListResponse = ResponseCore<{
@@ -790,15 +807,3 @@ export interface Threshold {
 }
 
 export type ThresholdResponse = ResponseCore<Threshold>;
-
-export interface ConstitutionAnchor {
-  url: string;
-  data_hash: string;
-}
-
-export interface ConstitutionDataItem {
-  id: number;
-  anchor: ConstitutionAnchor;
-  script_hash: string;
-  gov_action_proposal: any | null;
-}
