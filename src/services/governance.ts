@@ -196,7 +196,7 @@ export const useFetchCCMemberDetail = (ident: string) => {
   });
 };
 
-export const fetchConstitutionList = async (limit: number = 1) => {
+export const fetchConstitutionList = async (limit: number = 10) => {
   const url = "/gov/constitution_list";
   const options = {
     params: {
