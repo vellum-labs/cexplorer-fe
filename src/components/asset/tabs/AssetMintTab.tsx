@@ -16,7 +16,7 @@ import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { PolicyCell } from "@/components/policy/PolicyCell";
 import ExportButton from "@/components/table/ExportButton";
 import { assetDetailMintTableOptions } from "@/constants/tables/assetDetailMintOptions";
-import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
+import { formatNumberWithSuffix, formatString } from "@vellumlabs/cexplorer-sdk";
 import AssetCell from "../AssetCell";
 
 interface AssetMintTabProps {
@@ -94,7 +94,9 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
     {
       key: "mint_quantity",
       render: item => (
-        <p className={`text-right`}>{formatNumber(item?.quantity) ?? "-"}</p>
+        <p className='text-right'>
+          {item?.quantity ? formatNumberWithSuffix(item.quantity) : "-"}
+        </p>
       ),
       title: <p className='w-full text-right'>Mint Quantity</p>,
       visible: columnsVisibility.mint_quantity,
