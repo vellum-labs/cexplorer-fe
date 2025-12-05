@@ -70,11 +70,7 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
   const columns = [
     {
       key: "date",
-      render: item => (
-        <div title={item.time} className=''>
-          <DateCell time={item.time} />
-        </div>
-      ),
+      render: item => <DateCell time={item.time} />,
       jsonFormat: item => {
         if (!item.time) {
           return "-";
