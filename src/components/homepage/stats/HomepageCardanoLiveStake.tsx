@@ -19,7 +19,10 @@ export const HomepageCardanoLiveStake: FC<HomepageCardanoLiveStakeProps> = ({
     <div className='mx-1.5 min-h-[110px] flex-grow'>
       <div className='flex w-full flex-col gap-1 pb-2'>
         <span className='text-display-sm font-semibold'>
-          <AdaWithTooltip data={liveStake ?? 0} />
+          <AdaWithTooltip
+            data={liveStake ?? 0}
+            triggerClassName='!text-text'
+          />
         </span>
         <div className='flex items-center gap-1.5'>
           <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#FEC84B]'>
