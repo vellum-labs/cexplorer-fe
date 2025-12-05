@@ -115,11 +115,15 @@ export const ConstitutionTab: FC<ConstitutionTabProps> = ({ currentEpoch }) => {
         if (!item?.gov_action_proposal) {
           return (
             <div className='flex flex-col'>
-              <span className='text-primary'>Genesis Constitution</span>
+              <span className='text-textPrimary'>Genesis Constitution</span>
               <div className='flex items-center gap-1'>
-                <span className='text-text-xs text-grayTextPrimary'>
+                <Link
+                  to='/script/$hash'
+                  params={{ hash: item.script_hash }}
+                  className='text-text-xs text-primary'
+                >
                   {formatString(item.script_hash, "long")}
-                </span>
+                </Link>
                 <Copy copyText={item.script_hash} size={10} />
               </div>
             </div>
@@ -128,19 +132,15 @@ export const ConstitutionTab: FC<ConstitutionTabProps> = ({ currentEpoch }) => {
 
         return (
           <div className='flex flex-col'>
-            <Link
-              to='/gov/action/$id'
-              params={{
-                id: `gov_action${item.gov_action_proposal.id}`,
-              }}
-              className='text-primary'
-            >
-              {item.gov_action_proposal.type}
-            </Link>
+            <span className='text-textPrimary'>{item.gov_action_proposal.type}</span>
             <div className='flex items-center gap-1'>
-              <span className='text-text-xs text-grayTextPrimary'>
+              <Link
+                to='/script/$hash'
+                params={{ hash: item.script_hash }}
+                className='text-text-xs text-primary'
+              >
                 {formatString(item.script_hash, "long")}
-              </span>
+              </Link>
               <Copy copyText={item.script_hash} size={10} />
             </div>
           </div>
