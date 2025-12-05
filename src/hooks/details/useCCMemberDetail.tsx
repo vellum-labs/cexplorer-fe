@@ -1,5 +1,8 @@
 import type { OverviewList } from "@vellumlabs/cexplorer-sdk";
-import type { CommitteeMember } from "@/types/governanceTypes";
+import type {
+  CommitteeMember,
+  CommitteeMemberRegistration,
+} from "@/types/governanceTypes";
 
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
@@ -16,6 +19,14 @@ import { formatDistanceToNow, format } from "date-fns";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { alphabetWithNumbers } from "@/constants/alphabet";
 import { Link } from "@tanstack/react-router";
+
+const getFirstRegistration = (
+  reg: CommitteeMemberRegistration | CommitteeMemberRegistration[] | null,
+): CommitteeMemberRegistration | null => {
+  if (!reg) return null;
+  if (Array.isArray(reg)) return reg[0] ?? null;
+  return reg;
+};
 
 interface UseCCMemberDetailArgs {
   memberData: CommitteeMember | undefined;
@@ -40,7 +51,11 @@ export const useCCMemberDetail = ({
   const committeeMaxTermLength =
     epochParamQuery.data?.committee_max_term_length ?? 0;
 
+  const deReg = getFirstRegistration(memberData?.de_registration ?? null);
+  const isRetired = deReg ? new Date(deReg.time) <= new Date() : false;
+
   const isActive =
+    !isRetired &&
     memberData?.expiration_epoch !== null &&
     memberData?.expiration_epoch !== undefined &&
     memberData.expiration_epoch > currentEpochNo;
@@ -89,7 +104,7 @@ export const useCCMemberDetail = ({
           <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
             <PulseDot color={!isActive ? "bg-redText" : undefined} />
             <span className='text-text-xs font-medium'>
-              {isActive ? "Active" : "Inactive"}
+              {isActive ? "Active" : isRetired ? "Retired" : "Inactive"}
             </span>
           </div>
         ),
@@ -158,38 +173,37 @@ export const useCCMemberDetail = ({
     },
   ];
 
-  const allVotes = votesData?.pages?.flatMap((page: any) => page.data.data) ?? [];
+  const allVotes =
+    votesData?.pages?.flatMap((page: any) => page.data.data) ?? [];
   const voteCounts = allVotes.reduce((acc: any, vote: any) => {
     const voteType = vote.vote;
     acc[voteType] = (acc[voteType] || 0) + 1;
     return acc;
   }, {});
 
-  const totalVotes = Object.values(voteCounts).reduce((a: any, b: any) => a + b, 0) as number;
+  const totalVotes = Object.values(voteCounts).reduce(
+    (a: any, b: any) => a + b,
+    0,
+  ) as number;
 
-  // Get last vote time
   const lastVote = allVotes.length > 0 ? allVotes[0]?.tx?.time : null;
 
-  // Calculate recent activity (last 6 months)
   const sixMonthsAgo = new Date();
   sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
   const recentVotes = allVotes.filter((vote: any) => {
     const voteTime = new Date(vote?.tx?.time);
     return voteTime >= sixMonthsAgo;
   });
-  const recentPercent = recentVotes.length > 0 ? 100 : 0; // Simplified calculation
+  const recentPercent = recentVotes.length > 0 ? 100 : 0;
 
-  // Lifetime activity
-  const lifetimePercent = totalVotes > 0 ? 100 : 0; // Simplified calculation
+  const lifetimePercent = totalVotes > 0 ? 100 : 0;
 
   const governance: OverviewList = [
     {
       label: undefined,
       value: (() => {
         const calc = (type: "Yes" | "Abstain" | "No") =>
-          totalVotes > 0
-            ? ((voteCounts[type] ?? 0) / totalVotes) * 100
-            : 0;
+          totalVotes > 0 ? ((voteCounts[type] ?? 0) / totalVotes) * 100 : 0;
 
         return (
           <div className='flex h-full w-full flex-col gap-3'>
@@ -209,10 +223,7 @@ export const useCCMemberDetail = ({
                       Recent Activity
                     </span>
                     <Tooltip content="CC member's voting activity over the past 6 months">
-                      <CircleHelp
-                        size={12}
-                        className='text-grayTextPrimary'
-                      />
+                      <CircleHelp size={12} className='text-grayTextPrimary' />
                     </Tooltip>
                   </div>
                   <span className='text-text-sm text-grayTextPrimary'>
@@ -234,10 +245,7 @@ export const useCCMemberDetail = ({
                       Lifetime Activity
                     </span>
                     <Tooltip content="Voting activity over CC member's lifetime">
-                      <CircleHelp
-                        size={12}
-                        className='text-grayTextPrimary'
-                      />
+                      <CircleHelp size={12} className='text-grayTextPrimary' />
                     </Tooltip>
                   </div>
                   <span className='text-text-sm text-grayTextPrimary'>

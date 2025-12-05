@@ -1,7 +1,10 @@
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { useFetchCommitteeDetail } from "@/services/governance";
 import type { TableColumns } from "@/types/tableTypes";
-import type { CommitteeMember } from "@/types/governanceTypes";
+import type {
+  CommitteeMember,
+  CommitteeMemberRegistration,
+} from "@/types/governanceTypes";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import type { FC } from "react";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
@@ -11,6 +14,24 @@ import { Link } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { alphabetWithNumbers } from "@/constants/alphabet";
 import { EpochCell } from "@vellumlabs/cexplorer-sdk";
+import { PulseDot } from "@vellumlabs/cexplorer-sdk";
+
+const getFirstRegistration = (
+  reg: CommitteeMemberRegistration | CommitteeMemberRegistration[] | null,
+): CommitteeMemberRegistration | null => {
+  if (!reg) return null;
+  if (Array.isArray(reg)) return reg[0] ?? null;
+  return reg;
+};
+
+const isActiveMember = (member: CommitteeMember): boolean => {
+  const deReg = getFirstRegistration(member.de_registration);
+  if (!deReg) {
+    return true;
+  }
+  const deRegistrationDate = new Date(deReg.time);
+  return deRegistrationDate > new Date();
+};
 
 export const CCMembersTab: FC = () => {
   const query = useFetchCommitteeDetail();
@@ -22,14 +43,31 @@ export const CCMembersTab: FC = () => {
   const indexedMembers = members.map((m, index) => ({
     ...m,
     _rowIndex: index,
+    _isActive: isActiveMember(m),
   }));
-  const columns: TableColumns<CommitteeMember & { _rowIndex: number }> = [
+  const columns: TableColumns<
+    CommitteeMember & { _rowIndex: number; _isActive: boolean }
+  > = [
     {
       key: "index",
       title: "#",
       widthPx: 40,
       visible: true,
       render: item => <span>{item._rowIndex + 1}</span>,
+    },
+    {
+      key: "status",
+      title: "Status",
+      widthPx: 100,
+      visible: true,
+      render: item => (
+        <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
+          <PulseDot color={!item._isActive ? "bg-redText" : undefined} />
+          <span className='text-text-xs font-medium'>
+            {item._isActive ? "Active" : "Retired"}
+          </span>
+        </div>
+      ),
     },
     {
       key: "member",
@@ -95,8 +133,9 @@ export const CCMembersTab: FC = () => {
       widthPx: 250,
       visible: true,
       render: item => {
-        const hash = item.registration?.hash ?? "N/A";
-        const time = item.registration?.time;
+        const reg = getFirstRegistration(item.registration);
+        const hash = reg?.hash ?? "N/A";
+        const time = reg?.time;
 
         return (
           <div className='flex flex-col text-text-sm'>

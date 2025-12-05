@@ -232,7 +232,7 @@ export interface GovernanceProposal {
     id: string;
     bech: string;
   };
-  type: string; // e.g. "InfoAction"
+  type: string;
   anchor: {
     url: string;
     data_hash: string;
@@ -318,18 +318,26 @@ export interface CommitteeRegistry {
   name: string;
 }
 
+export interface CommitteeMemberRegistration {
+  hash: string;
+  time: string;
+  index: number;
+  invalid_hereafter: null | number;
+  treasury_donation: number;
+}
+
 export interface CommitteeMember {
-  key: CommitteeKey;
+  key?: CommitteeKey;
   ident: CommitteeIdent;
   registry: CommitteeRegistry | null;
-  registration: Array<{
-    hash: string;
-    time: string;
-    index: number;
-    invalid_hereafter: null | number;
-    treasury_donation: number;
-  }> | null;
-  de_registration: null;
+  registration:
+    | CommitteeMemberRegistration
+    | CommitteeMemberRegistration[]
+    | null;
+  de_registration:
+    | CommitteeMemberRegistration
+    | CommitteeMemberRegistration[]
+    | null;
   expiration_epoch: number | null;
 }
 

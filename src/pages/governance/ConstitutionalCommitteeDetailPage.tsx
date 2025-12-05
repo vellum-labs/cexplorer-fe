@@ -2,12 +2,16 @@ import type { FC } from "react";
 import { useState } from "react";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
-import { FileText } from "lucide-react";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { FileText, AlertTriangle } from "lucide-react";
 
 import { useFetchCommitteeDetail } from "@/services/governance";
 import { useFetchConstitutionList } from "@/services/governance";
 
-import type { CommitteeDetailResponse } from "@/types/governanceTypes";
+import type {
+  CommitteeDetailResponse,
+  CommitteeMemberRegistration,
+} from "@/types/governanceTypes";
 import { CCMembersTab } from "@/components/gov/cc/tabs/CCMembersTab";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { CCGovernanceVotestab } from "@/components/gov/cc/tabs/CCGovernanceVotesTab";
@@ -16,6 +20,14 @@ import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
 import { useFetchMiscBasic } from "@/services/misc";
 import { generateImageUrl } from "@/utils/generateImageUrl";
+
+const getFirstRegistration = (
+  reg: CommitteeMemberRegistration | CommitteeMemberRegistration[] | null,
+): CommitteeMemberRegistration | null => {
+  if (!reg) return null;
+  if (Array.isArray(reg)) return reg[0] ?? null;
+  return reg;
+};
 
 export const ConstituionalCommitteeDetailPage: FC = () => {
   const [clickedUrl, setClickedUrl] = useState<string | undefined>(undefined);
@@ -33,6 +45,15 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
     committeeDetail?.member.filter(
       m => !m.expiration_epoch || m.expiration_epoch >= 0,
     ) ?? [];
+
+  const activeMembers = currentMembers.filter(m => {
+    const deReg = getFirstRegistration(m.de_registration);
+    if (!deReg) {
+      return true;
+    }
+    const deRegistrationDate = new Date(deReg.time);
+    return deRegistrationDate > new Date();
+  });
 
   const isLoading =
     committeeDetailQuery.isLoading || constitutionListQuery.isLoading;
@@ -81,11 +102,17 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
 
               <div className='flex items-center justify-start text-text-sm'>
                 <span className='min-w-[150px] text-grayTextSecondary'>
-                  Members
+                  Active Members
                 </span>
-                <span className='text-textPrimary font-medium'>
-                  {currentMembers.length}/
-                  {committeeDetail?.member.length ?? "-"}
+                <span className='text-textPrimary flex items-center gap-1 font-medium'>
+                  {activeMembers.length}/{currentMembers.length}
+                  {activeMembers.length < currentMembers.length && (
+                    <Tooltip
+                      content={`${currentMembers.length - activeMembers.length} member${currentMembers.length - activeMembers.length > 1 ? "s" : ""} retired`}
+                    >
+                      <AlertTriangle size={14} className='text-[#F79009]' />
+                    </Tooltip>
+                  )}
                 </span>
               </div>
 

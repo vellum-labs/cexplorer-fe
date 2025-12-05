@@ -1,4 +1,7 @@
-import type { CommitteeMember } from "@/types/governanceTypes";
+import type {
+  CommitteeMember,
+  CommitteeMemberRegistration,
+} from "@/types/governanceTypes";
 import type { TableColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
@@ -8,6 +11,14 @@ import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { useMemo } from "react";
 import { Calendar, ExternalLink, UserMinus, UserPlus } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+
+const toArray = (
+  reg: CommitteeMemberRegistration | CommitteeMemberRegistration[] | null,
+): CommitteeMemberRegistration[] => {
+  if (!reg) return [];
+  if (Array.isArray(reg)) return reg;
+  return [reg];
+};
 
 interface CCMemberStatusHistoryTabProps {
   memberHistory: CommitteeMember[] | undefined;
@@ -29,10 +40,11 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
     {
       key: "date",
       render: item => {
-        if (!item?.registration || item.registration.length === 0) {
+        const registrations = toArray(item?.registration);
+        if (registrations.length === 0) {
           return "-";
         }
-        const sortedRegistrations = [...item.registration].sort(
+        const sortedRegistrations = [...registrations].sort(
           (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime(),
         );
         return <DateCell time={sortedRegistrations[0].time} />;
@@ -44,7 +56,8 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
     {
       key: "type",
       render: item => {
-        const hasRegistration = item?.registration && item.registration.length > 0;
+        const registrations = toArray(item?.registration);
+        const hasRegistration = registrations.length > 0;
         const hasDeregistration = item?.de_registration !== null && item?.de_registration !== undefined;
 
         if (hasDeregistration) {
@@ -85,10 +98,11 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
     {
       key: "effective",
       render: item => {
-        if (!item?.registration || item.registration.length === 0) {
+        const registrations = toArray(item?.registration);
+        if (registrations.length === 0) {
           return "-";
         }
-        const sortedRegistrations = [...item.registration].sort(
+        const sortedRegistrations = [...registrations].sort(
           (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime(),
         );
         const effectiveEpoch = sortedRegistrations[0].index;
@@ -123,8 +137,9 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
     {
       key: "tx",
       render: item => {
-        if (item?.registration && item.registration.length > 0) {
-          const sortedRegistrations = [...item.registration].sort(
+        const registrations = toArray(item?.registration);
+        if (registrations.length > 0) {
+          const sortedRegistrations = [...registrations].sort(
             (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime(),
           );
           return (

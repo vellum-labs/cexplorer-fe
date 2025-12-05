@@ -34,7 +34,11 @@ export const CCMemberHotKeysTab: FC<CCMemberHotKeysTabProps> = ({
       const hotKey = member.ident?.hot;
       if (!hotKey || !member.registration) return;
 
-      member.registration.forEach(reg => {
+      const registrations = Array.isArray(member.registration)
+        ? member.registration
+        : [member.registration];
+
+      registrations.forEach(reg => {
         if (!seenHashes.has(reg.hash)) {
           seenHashes.add(reg.hash);
           allRegistrations.push({
