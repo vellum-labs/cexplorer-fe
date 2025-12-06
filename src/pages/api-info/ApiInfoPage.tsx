@@ -170,7 +170,7 @@ export const ApiInfoPage = () => {
       metadataOverride={{ title: "API Plans | Cexplorer.io" }}
       title='API Plans'
       subTitle='Effortless access to blockchain data. Choose the perfect plan for your needs.'
-      breadcrumbItems={[{ label: "API Plans" }]}
+      breadcrumbItems={[{ label: "Developers", link: "/dev" }, { label: "API Plans" }]}
       adsCarousel={false}
       customPage={true}
     >

@@ -292,8 +292,8 @@ const routes = [
     api: false,
   },
   {
-    path: "/developers",
-    title: "Developers | Cexplorer.io",
+    path: "/envs",
+    title: "Environments | Cexplorer.io",
     description:
       "Comprehensive resources for developers building on Cardano. Access detailed API documentation, integration guides, code examples, SDKs in multiple languages, technical tutorials, and developer tools to accelerate your blockchain application development.",
     keywords:

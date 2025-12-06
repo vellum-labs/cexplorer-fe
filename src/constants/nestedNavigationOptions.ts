@@ -66,8 +66,12 @@ export const nestedNavigationOptions: {
           href: "/api",
         },
         {
+          label: "Environments",
+          href: "/envs",
+        },
+        {
           label: "Developers",
-          href: "/developers",
+          href: "/dev",
         },
         {
           label: "Devlog",
