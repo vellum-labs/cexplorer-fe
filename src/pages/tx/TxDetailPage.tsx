@@ -188,7 +188,7 @@ const TxDetailPage = () => {
       content:
         addonComponents.length > 0 &&
         addonComponents.map(item => item.component),
-      visible: !!addonComponents.length,
+      visible: addonComponents.some(item => item.component !== null),
     },
   ];
 
