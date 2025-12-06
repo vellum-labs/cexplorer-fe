@@ -229,5 +229,8 @@
   },
   "genesisAddresses": {
     "title": "Genesis Addresses | Cexplorer.io"
+  },
+  "devlog": {
+    "title": "Devlog | Cexplorer.io"
   }
 }

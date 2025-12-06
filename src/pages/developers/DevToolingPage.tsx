@@ -4,7 +4,7 @@ import { Button } from "@vellumlabs/cexplorer-sdk";
 import {
   ArrowRight,
   Code,
-  Link,
+  Link as LinkIcon,
   Mail,
   MessageSquare,
   Search,
@@ -12,6 +12,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { DiscordLogo, GithubLogo } from "@vellumlabs/cexplorer-sdk";
+import { Link } from "@tanstack/react-router";
 
 export const DevToolingPage = () => {
   const devToolingSections = [
@@ -64,7 +65,7 @@ export const DevToolingPage = () => {
           icon: <ArrowRight size={16} />,
         },
       ],
-      icon: <Link className='text-primary' />,
+      icon: <LinkIcon className='text-primary' />,
     },
     {
       label: "Cexplorer SDK",
@@ -184,22 +185,9 @@ export const DevToolingPage = () => {
               </p>
 
               <div className='mt-6 flex flex-wrap gap-2'>
-                {section.buttons.map((button, btnIndex) => (
-                  <div
-                    key={btnIndex}
-                    className={
-                      button.variant === "tertiary" && button.external
-                        ? "[&>button]:hover:text-primary"
-                        : ""
-                    }
-                  >
+                {section.buttons.map((button, btnIndex) => {
+                  const buttonContent = (
                     <Button
-                      href={button.external ? undefined : (button.href as any)}
-                      onClick={
-                        button.external
-                          ? () => window.open(button.href, "_blank")
-                          : undefined
-                      }
                       variant={button.variant}
                       size='sm'
                       label={
@@ -217,8 +205,35 @@ export const DevToolingPage = () => {
                         </span>
                       }
                     />
-                  </div>
-                ))}
+                  );
+
+                  if (button.external) {
+                    return (
+                      <a
+                        key={btnIndex}
+                        href={button.href}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className={
+                          button.variant === "tertiary"
+                            ? "[&>button]:hover:text-primary"
+                            : ""
+                        }
+                      >
+                        {buttonContent}
+                      </a>
+                    );
+                  }
+
+                  return (
+                    <Link
+                      key={btnIndex}
+                      to={button.href as any}
+                    >
+                      {buttonContent}
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           ))}
