@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "dev:host": "vite --host",
-    "build": "NODE_OPTIONS=--max-old-space-size=8096 vite build",
+    "build": "cross-env NODE_OPTIONS=--max-old-space-size=8096 vite build",
     "generate:routes": "node ./scripts/generate-routes.cjs",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write .",
