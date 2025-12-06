@@ -363,13 +363,15 @@ const WalletDropdown = ({
               className='opacity-60 transition-opacity hover:opacity-100'
             />
           </a>
-          <img
-            src={GithubLogo}
-            alt='Github'
-            width={20}
-            height={20}
-            className='cursor-pointer opacity-60 transition-opacity hover:opacity-100'
-          />
+          <a href='https://github.com/vellum-labs/cexplorer-fe' target='_blank'>
+            <img
+              src={GithubLogo}
+              alt='Github'
+              width={20}
+              height={20}
+              className='cursor-pointer opacity-60 transition-opacity hover:opacity-100'
+            />
+          </a>
         </div>
       </div>
     </div>
