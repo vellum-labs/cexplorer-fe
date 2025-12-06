@@ -1,13 +1,8 @@
-import { articleCategories } from "@/constants/article";
-import { colors } from "@/constants/colors";
-import type { ArticleCategories, ArticleListData } from "@/types/articleTypes";
+import type { ArticleListData } from "@/types/articleTypes";
 import { formatDate } from "@vellumlabs/cexplorer-sdk";
 import { renderArticleAuthor } from "@/utils/renderArticleAuthor";
 import { Link } from "@tanstack/react-router";
-import parse from "html-react-parser";
-import { Clock } from "lucide-react";
 import { Image } from "@vellumlabs/cexplorer-sdk";
-import { Badge } from "@vellumlabs/cexplorer-sdk";
 
 interface Props {
   article: ArticleListData;
@@ -15,49 +10,46 @@ interface Props {
 }
 
 export const ArticleCard = ({ article, className }: Props) => {
+  const author = renderArticleAuthor(article.user_owner);
+
   return (
-    <article
-      key={article.url}
-      className={`flex w-full max-w-desktop flex-col gap-1 rounded-m border border-border bg-cardBg p-1.5 text-primary shadow-sm ${className}`}
+    <Link
+      to='/article/$url'
+      params={{ url: article.url }}
+      className='w-full rounded-m shadow-sm transition-all duration-300 hover:bg-cardBg hover:text-text min-[1000px]:max-w-[430px]'
     >
-      <Link to='/article/$url' params={{ url: article.url }} className='w-full'>
+      <article
+        key={article.url}
+        className={`flex h-[450px] flex-col gap-1 ${className}`}
+      >
         <Image
           src={article.image}
-          className='h-[200px] w-full rounded-m object-cover'
+          className='h-[240px] w-full rounded-l object-cover'
           alt={article.name}
-          height={200}
+          height={240}
         />
-      </Link>
-      <div className='flex w-full flex-wrap items-center justify-between gap-1/2'>
-        <span className='flex basis-[170px] items-center gap-1/2 text-text-sm text-text'>
-          <Clock size={14} color={colors.text} />
-          {formatDate(article.pub_date, true)}
-        </span>
-        {renderArticleAuthor(article.user_owner)}
-      </div>
-      <Link
-        className='w-fit text-text-lg font-medium leading-[24px]'
-        to='/article/$url'
-        params={{ url: article.url }}
-      >
-        {parse(article.name)}
-      </Link>
-      <p className='text-text-sm text-grayTextPrimary'>
-        {parse(article.description)}
-      </p>
-      <div className='mt-auto flex items-center gap-1/2'>
-        {article.category.map(category => (
-          <Badge
-            key={category}
-            color='blue'
-            style={{
-              filter: `hue-rotate(${articleCategories.indexOf(category as ArticleCategories) * 17.1}deg)`,
-            }}
-          >
-            {category}
-          </Badge>
-        ))}
-      </div>
-    </article>
+        <div className='flex items-center gap-1 px-1 text-text-sm font-semibold text-primary'>
+          {author && (
+            <>
+              <span>{author}</span>
+              <span>•</span>
+            </>
+          )}
+          <span>{formatDate(article.pub_date, true)}</span>
+        </div>
+        <h3 className='w-fit px-1 text-text-lg font-medium leading-[24px]'>
+          {article.name.length > 80
+            ? article.name.slice(0, 80) + "..."
+            : article.name}
+        </h3>
+        {article.description && (
+          <p className='px-1 text-grayTextSecondary'>
+            {article.description.length > 300
+              ? article.description.slice(0, 300) + "..."
+              : article.description}
+          </p>
+        )}
+      </article>
+    </Link>
   );
 };

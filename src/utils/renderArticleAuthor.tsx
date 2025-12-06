@@ -52,7 +52,9 @@ export const renderArticleAuthor = (author: User | undefined) => {
   }
   return getNodeText(authorName) ? (
     <span className='flex items-center gap-1/2 text-text-sm text-text'>
-      By: {authorName}
+      {getNodeText(authorName).length > 30
+        ? formatString(getNodeText(authorName), "long")
+        : authorName}
     </span>
   ) : undefined;
 };
