@@ -28,7 +28,7 @@ export const fetchGovernenceAction = async (
 export const useFetchGovernanceAction = (
   limit: number,
   page: number,
-  state: "All" | "Active" | "Ratified" | "Enacted" | "Expired",
+  state: "All" | "Active" | "Ratified" | "Enacted" | "Expired" | "Approved",
   search?: string,
   type?: string,
 ) =>

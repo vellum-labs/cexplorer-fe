@@ -43,7 +43,6 @@ const typeLabels: Record<string, string> = {
 
 interface GovernanceActionsTabProps {
   miscConst: MiscConstResponseData | undefined;
-  /** When true, shows only Ratified and Enacted items without status filter */
   outcomesOnly?: boolean;
 }
 
@@ -72,10 +71,14 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
         tableSearch.toLowerCase().slice(tableSearch.indexOf(":") + 1),
     });
 
-  // For outcomesOnly mode, default to "Enacted" (most relevant outcomes)
   const [selectedItem, setSelectedItem] = useState<
-    "All" | "Active" | "Ratified" | "Expired" | "Enacted"
-  >(outcomesOnly ? "Enacted" : (state as "All" | "Active" | "Ratified" | "Expired" | "Enacted") || "All");
+    "All" | "Active" | "Ratified" | "Expired" | "Enacted" | "Approved"
+  >(
+    outcomesOnly
+      ? "Approved"
+      : (state as "All" | "Active" | "Ratified" | "Expired" | "Enacted") ||
+          "All",
+  );
 
   const {
     filterVisibility,
@@ -91,7 +94,6 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
     filterKeys: ["type"],
   });
 
-  // For outcomesOnly, use the selectedItem (Ratified or Enacted), otherwise use URL state
   const queryState = outcomesOnly ? selectedItem : state || "All";
 
   const govActionQuery = useFetchGovernanceAction(
@@ -107,6 +109,10 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
 
   const selectItems = outcomesOnly
     ? [
+        {
+          key: "Approved",
+          value: "Approved",
+        },
         {
           key: "Enacted",
           value: "Enacted",
@@ -139,16 +145,22 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
         },
       ];
 
-  // Sync selectedItem with URL state for non-outcomes mode
   useEffect(() => {
     if (outcomesOnly) return;
     if (state && state !== selectedItem) {
-      setSelectedItem(state as "All" | "Active" | "Ratified" | "Expired" | "Enacted");
+      setSelectedItem(
+        state as
+          | "All"
+          | "Active"
+          | "Ratified"
+          | "Expired"
+          | "Enacted"
+          | "Approved",
+      );
     }
   }, [state, outcomesOnly]);
 
   useEffect(() => {
-    // Skip URL navigation for outcomesOnly mode
     if (outcomesOnly) return;
 
     if (state !== selectedItem && selectedItem !== "All") {
@@ -466,10 +478,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
                   label: item.name,
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
-                    setColumnVisibility(
-                      item.key,
-                      !columnsVisibility[item.key],
-                    ),
+                    setColumnVisibility(item.key, !columnsVisibility[item.key]),
                 };
               })}
             />
