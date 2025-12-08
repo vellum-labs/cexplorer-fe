@@ -47,19 +47,33 @@ export const AdminArticleDetail = () => {
   const data = query?.data?.data as AdminArticleDetailResponse["data"];
 
   const needCheck = data?.need_check === 1 ? true : false;
-  const [name, setName] = useState<string>(data?.name || "");
-  const [image, setImage] = useState<string>(data?.image || "");
-  const [content, setContent] = useState<string>(
-    data?.data ? data?.data[0] : "",
-  );
-  const [pubDate, setPubDate] = useState<string>(
-    data?.pub_date || new Date().toISOString(),
-  );
-  const [description, setDescription] = useState<string>(
-    data?.description || "",
-  );
-  const [keywords, setKeywords] = useState<string>(data?.keywords || "");
-  const [categories, setCategories] = useState<string[]>(data?.category || []);
+
+  interface FormState {
+    name: string;
+    image: string;
+    content: string;
+    pubDate: string;
+    description: string;
+    keywords: string;
+    categories: string[];
+  }
+
+  const [formState, setFormState] = useState<FormState>({
+    name: "",
+    image: "",
+    content: "",
+    pubDate: new Date().toISOString(),
+    description: "",
+    keywords: "",
+    categories: [],
+  });
+
+  const updateField = <K extends keyof FormState>(
+    field: K,
+    value: FormState[K],
+  ) => {
+    setFormState(prev => ({ ...prev, [field]: value }));
+  };
 
   const handleUpdate = async () => {
     if (!token) return;
@@ -75,13 +89,13 @@ export const AdminArticleDetail = () => {
           usertoken: token,
         },
         body: JSON.stringify({
-          name,
-          description,
-          keywords,
-          data: content,
-          category: categories,
-          image,
-          pub_date: pubDate,
+          name: formState.name,
+          description: formState.description,
+          keywords: formState.keywords,
+          data: formState.content,
+          category: formState.categories,
+          image: formState.image,
+          pub_date: formState.pubDate,
         }),
       });
 
@@ -104,13 +118,15 @@ export const AdminArticleDetail = () => {
   }, [tokens, address]);
 
   useEffect(() => {
-    setContent((data?.data ? data.data[0] : "") as string);
-    setDescription(data?.description || "");
-    setKeywords(data?.keywords || "");
-    setCategories(data?.category || []);
-    setName(data?.name || "");
-    setImage(data?.image || "");
-    setPubDate(data?.pub_date);
+    setFormState({
+      name: data?.name || "",
+      image: data?.image || "",
+      content: data?.data ? data.data[0] : "",
+      pubDate: data?.pub_date || new Date().toISOString(),
+      description: data?.description || "",
+      keywords: data?.keywords || "",
+      categories: data?.category || [],
+    });
   }, [data]);
 
   return (
@@ -158,20 +174,21 @@ export const AdminArticleDetail = () => {
           <p>Name:</p>
           <TextInput
             placeholder='Name'
-            onchange={value => setName(value)}
-            value={name}
+            onchange={value => updateField("name", value)}
+            value={formState.name}
           />
           <p>Description:</p>
           <TextInput
             placeholder='Description'
-            onchange={value => setDescription(value)}
-            value={description}
+            onchange={value => updateField("description", value)}
+            value={formState.description}
           />
           <p>Categories:</p>
           <ArticleCombobox
-            categories={categories as ArticleCategories[]}
+            categories={formState.categories as ArticleCategories[]}
             setCategories={
-              setCategories as React.Dispatch<
+              ((value: ArticleCategories[]) =>
+                updateField("categories", value)) as React.Dispatch<
                 SetStateAction<ArticleCategories[]>
               >
             }
@@ -179,21 +196,21 @@ export const AdminArticleDetail = () => {
           <p>Keywords:</p>
           <TextInput
             placeholder='Keywords'
-            onchange={value => setKeywords(value)}
-            value={keywords}
+            onchange={value => updateField("keywords", value)}
+            value={formState.keywords}
           />
           <p>Image:</p>
           <TextInput
             placeholder='Image'
-            onchange={value => setImage(value)}
-            value={image}
+            onchange={value => updateField("image", value)}
+            value={formState.image}
           />
           <p>Publish date:</p>
           <div className='mb-4 flex flex-col items-start gap-1/2'>
             <input
               type='datetime-local'
-              value={pubDate || new Date().toISOString()}
-              onChange={e => setPubDate(e.target.value)}
+              value={formState.pubDate || new Date().toISOString()}
+              onChange={e => updateField("pubDate", e.target.value)}
               className='mb-4 bg-background text-text'
             />
           </div>
@@ -207,8 +224,8 @@ export const AdminArticleDetail = () => {
             <textarea
               className='font-mono absolute inset-0 w-full resize-none overflow-hidden bg-transparent p-1 text-transparent caret-text outline-none'
               ref={textareaRef}
-              value={content}
-              onChange={e => setContent(e.target.value)}
+              value={formState.content}
+              onChange={e => updateField("content", e.target.value)}
             />
             <SyntaxHighlighter
               language='html'
@@ -216,7 +233,7 @@ export const AdminArticleDetail = () => {
               className='min-h-minHeight overflow-auto text-text'
               wrapLongLines
             >
-              {content}
+              {formState.content}
             </SyntaxHighlighter>
           </div>
           <Button
