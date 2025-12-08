@@ -15,7 +15,7 @@ import WithdrawalsTabItem from "@/components/tx/tabs/WithdrawalsTabItem";
 import TxDetailOverview from "@/components/tx/TxDetailOverview";
 import { useFetchTxDetail } from "@/services/tx";
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
-import { getRouteApi, useNavigate, useSearch } from "@tanstack/react-router";
+import { getRouteApi, useSearch } from "@tanstack/react-router";
 import { DeFiOrderList } from "@/components/defi/DeFiOrderList";
 import { Fragment, useEffect, useState } from "react";
 import { getAddonsForMetadata } from "@/utils/addons/getAddonsForMetadata";
@@ -26,11 +26,9 @@ const TxDetailPage = () => {
   const route = getRouteApi("/tx/$hash");
   const { hash } = route.useParams();
 
-  const { tab, page } = useSearch({
+  const { page } = useSearch({
     from: "/tx/$hash",
   });
-
-  const navigate = useNavigate();
 
   const query = useFetchTxDetail(hash);
   const data = query.data?.data;
@@ -49,15 +47,15 @@ const TxDetailPage = () => {
 
   const txTabItems = [
     {
-      key: "overview",
-      label: "Overview",
-      content: <OverviewTabItem query={query} />,
-      visible: true,
-    },
-    {
       key: "content",
       label: "Content",
       content: <ContentTabItem />,
+      visible: true,
+    },
+    {
+      key: "overview",
+      label: "Overview",
+      content: <OverviewTabItem query={query} />,
       visible: true,
     },
     {
@@ -190,31 +188,9 @@ const TxDetailPage = () => {
       content:
         addonComponents.length > 0 &&
         addonComponents.map(item => item.component),
-      visible: !!addonComponents.length,
+      visible: addonComponents.some(item => item.component !== null),
     },
   ];
-
-  useEffect(() => {
-    if (tab === "content" || tab === "overview") {
-      localStorage.setItem("tx_detail_init_tab", tab);
-    }
-  }, [tab]);
-
-  useEffect(() => {
-    if (tab) {
-      return;
-    }
-
-    const tabStorage = localStorage.getItem("tx_detail_init_tab");
-
-    if (tabStorage) {
-      navigate({
-        search: {
-          tab: tabStorage,
-        } as any,
-      });
-    }
-  }, []);
 
   useEffect(() => {
     if (!data?.metadata) return;
@@ -290,7 +266,7 @@ const TxDetailPage = () => {
           ))}
       </div>
       <TxDetailOverview query={query} />
-      <Tabs items={txTabItems} mobileItemsCount={3} />
+      {!query.isLoading && <Tabs items={txTabItems} mobileItemsCount={3} />}
     </PageBase>
   );
 };

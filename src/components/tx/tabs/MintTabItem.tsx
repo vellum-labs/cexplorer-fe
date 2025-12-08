@@ -2,7 +2,7 @@ import AssetCell from "@/components/asset/AssetCell";
 import { useFetchTxDetail } from "@/services/tx";
 import {
   formatDate,
-  formatNumber,
+  formatNumberWithSuffix,
   formatString,
 } from "@vellumlabs/cexplorer-sdk";
 import { Link, getRouteApi } from "@tanstack/react-router";
@@ -90,8 +90,19 @@ const MintTabItem = () => {
           return <p className='w-full text-right'>-</p>;
         }
 
+        const decimals = item?.registry?.decimals;
+        const isNegative = item.quantity < 0;
+        const absQuantity = Math.abs(item.quantity);
+        const adjustedQuantity =
+          decimals !== undefined && decimals !== null && decimals > 0
+            ? absQuantity / Math.pow(10, decimals)
+            : absQuantity;
+
         return (
-          <p className='w-full text-right'>{formatNumber(item.quantity)}</p>
+          <p className='w-full text-right'>
+            {isNegative ? "-" : ""}
+            {formatNumberWithSuffix(adjustedQuantity)}
+          </p>
         );
       },
       title: <p className='w-full text-right'>Quantity</p>,

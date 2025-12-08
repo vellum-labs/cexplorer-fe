@@ -66,8 +66,12 @@ export const nestedNavigationOptions: {
           href: "/api",
         },
         {
+          label: "Environments",
+          href: "/envs",
+        },
+        {
           label: "Developers",
-          href: "/developers",
+          href: "/dev",
         },
         {
           label: "Devlog",
@@ -122,10 +126,6 @@ export const nestedNavigationOptions: {
           label: "Hardfork",
           href: "/hardfork",
         },
-        {
-          label: "Treasury projection",
-          href: "/treasury/projection",
-        },
       ],
     },
     others: {
@@ -134,6 +134,10 @@ export const nestedNavigationOptions: {
         {
           label: "Pots",
           href: "/pot",
+        },
+        {
+          label: "Treasury projection",
+          href: "/treasury/projection",
         },
       ],
     },

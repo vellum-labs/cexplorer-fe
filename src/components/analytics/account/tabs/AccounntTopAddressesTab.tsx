@@ -69,7 +69,7 @@ export const AccounntTopAddressesTab: FC = () => {
   const columns: TableColumns<AnalyticsTopAddresses> = [
     {
       key: "order",
-      render: () => {},
+      render: () => undefined,
       title: "#",
       standByRanking: true,
       visible: columnsVisibility.order,
@@ -406,6 +406,9 @@ export const AccounntTopAddressesTab: FC = () => {
         })}
         onOrderChange={setColumsOrder}
       />
+      <h3 className='mt-2 text-center'>
+        Accounts with less than 100,000 ADA were excluded from this list.
+      </h3>
     </div>
   );
 };

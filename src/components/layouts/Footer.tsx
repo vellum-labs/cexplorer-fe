@@ -44,7 +44,9 @@ const Footer = () => {
                 <a href='https://t.me/cexplorer' target='_blank'>
                   <img src={TelegramLogo} alt='Telegram' width={30} />
                 </a>
-                <img src={GithubLogo} alt='Github' width={30} />
+                <a href='https://github.com/vellum-labs/cexplorer-fe' target='_blank'>
+                  <img src={GithubLogo} alt='Github' width={30} />
+                </a>
               </div>
             </div>
             <div className='mt-3 flex w-full justify-start gap-[10%] md:mt-0 md:justify-end'>
