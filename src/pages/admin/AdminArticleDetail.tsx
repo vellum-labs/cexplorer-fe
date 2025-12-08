@@ -8,14 +8,14 @@ import {
   BreadcrumbItem,
   BreadcrumbList,
 } from "@vellumlabs/cexplorer-sdk";
-import { fetchAdminArticle, useFetchAdminArticle } from "@/services/user";
+import { useFetchAdminArticle } from "@/services/user";
+import { getUrl } from "@/utils/getUrl";
 import { useAuthTokensStore } from "@/stores/authTokensStore";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useWalletStore } from "@/stores/walletStore";
 import type { ArticleCategories, ArticleUrl } from "@/types/articleTypes";
 import type { AdminArticleDetailResponse } from "@/types/userTypes";
 import { getRouteApi, Link, useSearch } from "@tanstack/react-router";
-import parse from "html-react-parser";
 import type { SetStateAction } from "react";
 import { useEffect, useRef, useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
@@ -47,7 +47,7 @@ export const AdminArticleDetail = () => {
   const data = query?.data?.data as AdminArticleDetailResponse["data"];
 
   const needCheck = data?.need_check === 1 ? true : false;
-  const [name, setName] = useState<string>(parse(data?.name || "") as string);
+  const [name, setName] = useState<string>(data?.name || "");
   const [image, setImage] = useState<string>(data?.image || "");
   const [content, setContent] = useState<string>(
     data?.data ? data?.data[0] : "",
@@ -63,24 +63,40 @@ export const AdminArticleDetail = () => {
 
   const handleUpdate = async () => {
     if (!token) return;
-    await fetchAdminArticle({
-      token,
-      type: "update",
-      lang: lang || "en",
-      url,
-      body: {
-        name: parse(name) as string,
-        description: parse(description) as string,
-        keywords,
-        data: parse(content) as string,
-        category: categories,
-        image,
-        pub_date: pubDate,
-      },
-    });
+    try {
+      const apiUrl = getUrl("/admin/article", {
+        url,
+        lang: lang || "en",
+        type: "update",
+      });
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          usertoken: token,
+        },
+        body: JSON.stringify({
+          name,
+          description,
+          keywords,
+          data: content,
+          category: categories,
+          image,
+          pub_date: pubDate,
+        }),
+      });
 
-    toast.success("Page updated");
-    query.refetch();
+      const result = await response.json();
+
+      if (typeof result?.data === "string") {
+        toast.error(result.data);
+        return;
+      }
+
+      toast.success("Page updated");
+      query.refetch();
+    } catch {
+      toast.error("Failed to update article");
+    }
   };
 
   useEffect(() => {
@@ -89,10 +105,10 @@ export const AdminArticleDetail = () => {
 
   useEffect(() => {
     setContent((data?.data ? data.data[0] : "") as string);
-    setDescription(parse(data?.description || "") as string);
+    setDescription(data?.description || "");
     setKeywords(data?.keywords || "");
     setCategories(data?.category || []);
-    setName(parse(data?.name || "") as string);
+    setName(data?.name || "");
     setImage(data?.image || "");
     setPubDate(data?.pub_date);
   }, [data]);
