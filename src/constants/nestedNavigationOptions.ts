@@ -122,10 +122,6 @@ export const nestedNavigationOptions: {
           label: "Hardfork",
           href: "/hardfork",
         },
-        {
-          label: "Treasury projection",
-          href: "/treasury/projection",
-        },
       ],
     },
     others: {
@@ -134,6 +130,10 @@ export const nestedNavigationOptions: {
         {
           label: "Pots",
           href: "/pot",
+        },
+        {
+          label: "Treasury projection",
+          href: "/treasury/projection",
         },
       ],
     },
