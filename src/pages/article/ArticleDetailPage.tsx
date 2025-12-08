@@ -1,5 +1,5 @@
 import { ArticleCard } from "@/components/article/ArticleCard";
-import { Button } from "@vellumlabs/cexplorer-sdk";
+import { Button, SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { SingleItemCarousel } from "@vellumlabs/cexplorer-sdk";
@@ -23,10 +23,16 @@ import { TelegramLogo } from "@vellumlabs/cexplorer-sdk";
 import { TwitterLogo } from "@vellumlabs/cexplorer-sdk";
 import { RandomDelegationModal } from "@/components/wallet/RandomDelegationModal";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
+import { markdownComponents } from "@/constants/markdows";
 
 export const ArticleDetailPage = () => {
   const route = getRouteApi("/article/$url");
   const { url } = route.useParams();
+
+  const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
   const detailQuery = useFetchArticleDetail("en", "article", url);
   const listQuery = useFetchArticleList("en", 0, 20);
@@ -158,7 +164,13 @@ export const ArticleDetailPage = () => {
             <SocialsAndCopy className='order-1 ml-auto block min-w-fit lg:hidden' />
           </div>
           <article className='[&>*]:text-base my-3 w-full text-left text-text-md lg:my-0 lg:w-[calc(100%-300px)] [&>p]:my-4'>
-            {parse(data?.data[0] || "")}
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw]}
+              components={markdownComponents(setClickedUrl)}
+            >
+              {data?.data[0] || ""}
+            </ReactMarkdown>
           </article>
           <div className='hidden w-[300px] flex-col gap-1.5 lg:flex'>
             <SocialsAndCopy stretchCopy />
@@ -218,6 +230,9 @@ export const ArticleDetailPage = () => {
           </div>
         </section>
       </main>
+      {clickedUrl && (
+        <SafetyLinkModal url={clickedUrl} onClose={() => setClickedUrl(null)} />
+      )}
     </>
   );
 };

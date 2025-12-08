@@ -1,4 +1,5 @@
 import type { ResponseCore } from "./commonTypes";
+import type { DrepInfo } from "./delegationTypes";
 import type { MiscApiData } from "./miscTypes";
 import type { PoolInfo } from "./poolTypes";
 
@@ -34,6 +35,8 @@ export interface User {
     nfts: number;
     extra: string[];
   };
+  pool: PoolInfo;
+  drep: DrepInfo;
 }
 
 export interface UserInfoResponse {

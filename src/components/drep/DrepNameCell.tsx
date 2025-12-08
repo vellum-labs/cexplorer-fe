@@ -11,7 +11,7 @@ interface DrepNameCellProps {
   item?: {
     data?: {
       given_name?: string;
-      image_url?: string;
+      image_url?: string | null;
     };
     hash?: {
       view?: string;
