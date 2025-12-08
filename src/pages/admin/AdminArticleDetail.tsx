@@ -44,13 +44,13 @@ export const AdminArticleDetail = () => {
   });
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const data = query.data?.data as AdminArticleDetailResponse["data"];
+  const data = query?.data?.data as AdminArticleDetailResponse["data"];
 
-  const needCheck = data.need_check === 1 ? true : false;
+  const needCheck = data?.need_check === 1 ? true : false;
   const [name, setName] = useState<string>(parse(data?.name || "") as string);
   const [image, setImage] = useState<string>(data?.image || "");
   const [content, setContent] = useState<string>(
-    data?.data ? data.data[0] : "",
+    data?.data ? data?.data[0] : "",
   );
   const [pubDate, setPubDate] = useState<string>(
     data?.pub_date || new Date().toISOString(),
