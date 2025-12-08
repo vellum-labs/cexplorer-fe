@@ -31,6 +31,8 @@ export const ConstitutionTab: FC<ConstitutionTabProps> = ({ currentEpoch }) => {
   const items = constitutionListQuery.data?.data?.data ?? [];
   const totalItems = constitutionListQuery.data?.data?.count ?? 0;
 
+  console.log("items", items);
+
   const convertIpfsUrl = (url: string): string => {
     if (url.startsWith("ipfs://")) {
       const hash = url.replace("ipfs://", "");
@@ -115,38 +117,41 @@ export const ConstitutionTab: FC<ConstitutionTabProps> = ({ currentEpoch }) => {
         if (!item?.gov_action_proposal) {
           return (
             <div className='flex flex-col'>
-              <span className='text-textPrimary'>Genesis Constitution</span>
+              <span className='text-primary'>Genesis Constitution</span>
               <div className='flex items-center gap-1'>
-                <Link
-                  to='/script/$hash'
-                  params={{ hash: item.script_hash }}
-                  className='text-text-xs text-primary'
-                >
+                <span className='text-textSecondary text-text-xs'>
                   {formatString(item.script_hash, "long")}
-                </Link>
+                </span>
                 <Copy copyText={item.script_hash} size={10} />
               </div>
             </div>
           );
         }
 
+        const txId = item.gov_action_proposal.description?.contents?.[0]?.txId;
+
         return (
           <div className='flex flex-col'>
-            <span className='text-textPrimary'>{item.gov_action_proposal.type}</span>
+            <Link
+              to='/tx/$hash'
+              params={{ hash: txId ?? "" }}
+              className='text-primary'
+            >
+              {item.gov_action_proposal.type}
+            </Link>
             <div className='flex items-center gap-1'>
-              <Link
-                to='/script/$hash'
-                params={{ hash: item.script_hash }}
-                className='text-text-xs text-primary'
-              >
-                {formatString(item.script_hash, "long")}
-              </Link>
-              <Copy copyText={item.script_hash} size={10} />
+              <span className='text-textSecondary text-text-xs'>
+                {formatString(txId ?? item.script_hash, "long")}
+              </span>
+              <Copy copyText={txId ?? item.script_hash} size={10} />
             </div>
           </div>
         );
       },
-      jsonFormat: item => item?.script_hash ?? "-",
+      jsonFormat: item =>
+        item?.gov_action_proposal?.description?.contents?.[0]?.txId ??
+        item?.script_hash ??
+        "-",
       title: "Governance action",
       visible: true,
       widthPx: 220,

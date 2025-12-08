@@ -360,6 +360,13 @@ export interface ConstitutionAnchor {
   data_hash: string;
 }
 
+export interface ConstitutionDescriptionContent {
+  govActionIx: number;
+  txId: string;
+  anchor?: ConstitutionAnchor;
+  script?: string;
+}
+
 export interface ConstitutionGovActionProposal {
   id: number;
   type: string;
@@ -368,7 +375,7 @@ export interface ConstitutionGovActionProposal {
   expiration: number;
   description: {
     tag: string;
-    contents: any[];
+    contents: ConstitutionDescriptionContent[];
   };
   previous: number | null;
   ratified_epoch: number | null;
