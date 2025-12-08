@@ -21,6 +21,8 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
   const slot = miscConst?.epoch_stat?.pots?.slot_no;
   const { data: basicData } = useFetchMiscBasic();
 
+  const epochSlot = basicData?.data?.block?.epoch_slot_no;
+
   const constDataLoad = basicData?.data?.loads?.["24h"] ?? 0;
   const load7d = basicData?.data?.loads?.["7d"] ?? 0;
   const load1h = basicData?.data?.loads?.["1h"] ?? 0;
@@ -98,8 +100,9 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
             Slots
           </span>
         </div>
-        <span className='text-grayText text-text-sm font-semibold'>
-          {formatNumber(slot)}
+        <span className='text-grayText flex items-center gap-1 text-text-sm'>
+          <span className='font-semibold'>{formatNumber(slot)}</span>
+          <span className='font-medium'>({formatNumber(epochSlot)})</span>
         </span>
       </div>
       <div className='flex flex-grow items-center pb-[11px]'>

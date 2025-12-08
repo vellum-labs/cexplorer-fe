@@ -11,6 +11,7 @@ export type MiscBasicResponse = {
       epoch_no: number;
       block_no: number;
       slot_no: number;
+      epoch_slot_no: number;
       proto: number;
     };
     ads: {
