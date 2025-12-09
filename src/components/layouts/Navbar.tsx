@@ -44,42 +44,42 @@ const Navbar = () => {
                 label='Blockchain'
                 options={navigationOptions.blockchain}
                 withBorder
-                wrapperClassname='z-[90]'
+                wrapperClassname='z-[50]'
               />
               <Dropdown
                 id='staking'
                 label='Staking'
                 options={navigationOptions.staking}
                 withBorder
-                wrapperClassname='z-[90]'
+                wrapperClassname='z-[50]'
               />
               <Dropdown
                 id='governance'
                 label='Governance'
                 options={navigationOptions.governance}
                 withBorder
-                wrapperClassname='z-[90]'
+                wrapperClassname='z-[50]'
               />
               <Dropdown
                 id='tokens'
                 label='Tokens'
                 options={navigationOptions.tokens}
                 withBorder
-                wrapperClassname='z-[90]'
+                wrapperClassname='z-[50]'
               />
               <Dropdown
                 id='nfts'
                 label='NFTs'
                 options={navigationOptions.nfts}
                 withBorder
-                wrapperClassname='z-[90]'
+                wrapperClassname='z-[50]'
               />
               <Dropdown
                 id='education'
                 label='Education'
                 options={navigationOptions.education}
                 withBorder
-                wrapperClassname='z-[90]'
+                wrapperClassname='z-[50]'
               />
               <ScreenDropdown
                 id='analytics'
