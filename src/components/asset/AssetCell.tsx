@@ -75,7 +75,7 @@ const AssetCell = memo((props: AssetProps) => {
         </Link>
       )}
       <div
-        className={`block w-full ${isAdaHandle ? "" : "overflow-hidden"} text-text-sm text-primary`}
+        className={`flex w-full ${isAdaHandle ? "" : "overflow-hidden"} flex-col`}
       >
         <span className='flex w-full flex-col items-start'>
           <Link
@@ -120,24 +120,34 @@ const AssetCell = memo((props: AssetProps) => {
             )}
           </Link>
           <span className='flex items-center gap-1/2'>
-            {nameByRegistry || renderAssetName({ asset, name, fingerprint }) !== "n/a" ? (
-              <p className='break-words break-all text-text-xs text-grayTextPrimary'>
-                {formatString(fingerprint, "long")}
-              </p>
+            {nameByRegistry ||
+            renderAssetName({ asset, name, fingerprint }) !== "n/a" ? (
+              <span className='overflow-hidden text-ellipsis whitespace-nowrap text-text-xs text-grayText'>
+                <Link
+                  to='/asset/$fingerprint'
+                  params={{ fingerprint: fingerprint }}
+                  title={fingerprint}
+                  className='!text-inherit hover:!text-inherit'
+                >
+                  {formatString(fingerprint, "long")}
+                </Link>
+              </span>
             ) : (
               <Link
                 to='/asset/$fingerprint'
                 params={{ fingerprint: fingerprint }}
                 title={fingerprint}
-                key={fingerprint}
                 className='break-words break-all text-text-sm text-primary'
               >
                 {formatString(fingerprint, "long")}
               </Link>
             )}
             <Copy
-              size={renderAssetName({ asset, name, fingerprint }) !== "n/a" ? 10 : 13}
+              size={
+                renderAssetName({ asset, name, fingerprint }) !== "n/a" ? 10 : 13
+              }
               copyText={fingerprint}
+              className='stroke-grayText'
             />
           </span>
         </span>

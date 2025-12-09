@@ -14,7 +14,6 @@ import ExportButton from "@/components/table/ExportButton";
 import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
-import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
 
@@ -29,7 +28,6 @@ import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFilterTable } from "@/hooks/tables/useFilterTable";
 
 import { governanceListTableOptions } from "@/constants/tables/governanceActionsListTableOptions";
-import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { getEpochByTime } from "@/utils/getEpochByTime";
 import { GovernanceStatusBadge } from "@vellumlabs/cexplorer-sdk";
@@ -37,6 +35,7 @@ import { ActionTypes } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { GovernanceVotingProgress } from "@/components/governance/GovernanceVotingProgress";
+import { GovActionCell } from "@/components/gov/GovActionCell";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 
 const typeLabels: Record<string, string> = {
@@ -244,40 +243,13 @@ export const GovernancePage: FC = () => {
     },
     {
       key: "gov_action_name",
-      render: item => {
-        if (!item?.ident?.id) {
-          return "-";
-        }
-
-        return (
-          <div className='flex flex-col'>
-            {
-              <Link
-                to='/gov/action/$id'
-                params={{
-                  id: item?.ident?.id?.replace(/#/g, "%23"),
-                }}
-                className={"text-primary"}
-              >
-                {item?.anchor?.offchain?.name ?? "⚠️ Invalid metadata"}
-              </Link>
-            }
-            <div className='flex items-center gap-1'>
-              <Link
-                to='/gov/action/$id'
-                params={{
-                  id: item?.ident?.id?.replace(/#/g, "%23"),
-                }}
-                className={"text-text-xs"}
-                disabled={true}
-              >
-                {formatString(item?.ident?.bech, "long")}
-              </Link>
-              <Copy copyText={item?.ident?.bech} size={10} />
-            </div>
-          </div>
-        );
-      },
+      render: item => (
+        <GovActionCell
+          id={item?.ident?.id}
+          bech={item?.ident?.bech}
+          name={item?.anchor?.offchain?.name ?? "⚠️ Invalid metadata"}
+        />
+      ),
       jsonFormat: item => {
         if (!item?.ident?.bech) {
           return "-";
