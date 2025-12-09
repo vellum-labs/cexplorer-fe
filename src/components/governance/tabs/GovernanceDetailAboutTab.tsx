@@ -112,6 +112,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
             info={{
               id: voterId,
               meta: item?.info?.meta,
+              ident: item?.info?.ident,
             }}
             role={role}
           />
