@@ -164,7 +164,9 @@ export const GovernancePage: FC = () => {
 
         return (
           <div className='flex flex-col gap-1/2'>
-            <DateCell time={item?.tx?.time} />
+            {item?.tx?.time && !isNaN(new Date(item?.tx?.time).getTime()) && (
+              <DateCell time={item?.tx?.time} />
+            )}
             {epoch && (
               <div className='flex items-center gap-1/2'>
                 <span className='text-text-xs text-grayTextPrimary'>
@@ -321,7 +323,9 @@ export const GovernancePage: FC = () => {
 
         return (
           <div className='flex flex-col gap-1/2'>
-            <DateCell time={String(endTime)} withoutConvert />
+            {endTime && !isNaN(endTime.getTime()) && (
+              <DateCell time={String(endTime)} withoutConvert />
+            )}
             {item?.expired_epoch && (
               <div className='flex items-center gap-1/2'>
                 <span className='text-text-xs text-grayTextPrimary'>
