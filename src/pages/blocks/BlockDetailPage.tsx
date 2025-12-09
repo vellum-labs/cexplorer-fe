@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 
 import { BlockDetailTable } from "@/components/blocks/BlockDetail/BlockDetailTable";
-import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { LoadingSkeleton, useThemeStore } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchBlockDetail } from "@/services/blocks";
 import { useFetchMiscBasic, useFetchMiscSearch } from "@/services/misc";
@@ -39,22 +39,32 @@ import { useMiscConst } from "@/hooks/useMiscConst";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 
+enum NavigationDirections {
+  LEFT = "left",
+  RIGHT = "right",
+}
+
 const BlockDetailPage: FC = () => {
   const route = getRouteApi("/block/$hash");
   const { hash } = route.useParams();
   const blockDetail = useFetchBlockDetail(hash ?? "");
 
+  const { theme } = useThemeStore();
+
   const [blockHeight, setBlockHeight] = useState<number>();
+  const [navigationDirection, setNavigationDirection] =
+    useState<NavigationDirections>();
 
   const navigate = useNavigate();
 
   const { currency } = useCurrencyStore();
 
-  const { data: searchData } = useFetchMiscSearch(
-    blockHeight ? String(blockHeight) : undefined,
-    "block",
-    "en",
-  );
+  const { data: searchData, isLoading: isBlockDataLoading } =
+    useFetchMiscSearch(
+      blockHeight ? String(blockHeight) : undefined,
+      "block",
+      "en",
+    );
 
   const { data } = blockDetail;
   const { data: miscBasic } = useFetchMiscBasic(true);
@@ -120,17 +130,25 @@ const BlockDetailPage: FC = () => {
                 }
               >
                 <div
-                  className={`flex h-5 w-5 cursor-pointer items-center justify-center rounded-[4px] border border-border ${disablePreviousBlock ? "pointer-events-none" : ""}`}
-                  onClick={() =>
+                  className={`flex h-5 w-5 cursor-pointer items-center justify-center rounded-[4px] border border-border ${disablePreviousBlock || isBlockDataLoading ? "pointer-events-none" : ""}`}
+                  onClick={() => {
+                    setNavigationDirection(NavigationDirections.LEFT);
                     setBlockHeight(
                       data?.block_no ? data?.block_no - 1 : undefined,
-                    )
-                  }
+                    );
+                  }}
                 >
-                  <ChevronLeft
-                    size={14}
-                    className={disablePreviousBlock ? "text-border" : ""}
-                  />
+                  {isBlockDataLoading &&
+                  navigationDirection === NavigationDirections.LEFT ? (
+                    <div
+                      className={`loader h-3 w-3 border ${theme === "light" ? "border-[#F2F4F7] border-t-darkBlue" : "border-[#475467] border-t-[#5EDFFA]"} border-t`}
+                    ></div>
+                  ) : (
+                    <ChevronLeft
+                      size={14}
+                      className={disablePreviousBlock ? "text-border" : ""}
+                    />
+                  )}
                 </div>
               </Tooltip>
               <Tooltip
@@ -143,17 +161,25 @@ const BlockDetailPage: FC = () => {
                 }
               >
                 <div
-                  className={`flex h-5 w-5 cursor-pointer items-center justify-center rounded-[4px] border border-border ${disableNextBlock ? "pointer-events-none" : ""}`}
-                  onClick={() =>
+                  className={`flex h-5 w-5 cursor-pointer items-center justify-center rounded-[4px] border border-border ${disableNextBlock || isBlockDataLoading ? "pointer-events-none" : ""}`}
+                  onClick={() => {
+                    setNavigationDirection(NavigationDirections.RIGHT);
                     setBlockHeight(
                       data?.block_no ? data?.block_no + 1 : undefined,
-                    )
-                  }
+                    );
+                  }}
                 >
-                  <ChevronRight
-                    size={14}
-                    className={disableNextBlock ? "text-border" : ""}
-                  />
+                  {isBlockDataLoading &&
+                  navigationDirection === NavigationDirections.RIGHT ? (
+                    <div
+                      className={`loader h-3 w-3 border ${theme === "light" ? "border-[#F2F4F7] border-t-darkBlue" : "border-[#475467] border-t-[#5EDFFA]"} border-t`}
+                    ></div>
+                  ) : (
+                    <ChevronRight
+                      size={14}
+                      className={disablePreviousBlock ? "text-border" : ""}
+                    />
+                  )}
                 </div>
               </Tooltip>
             </div>
