@@ -62,7 +62,7 @@ const AssetCell = memo((props: AssetProps) => {
             type='asset'
             height={imageSize || 40}
             width={imageSize || 40}
-            className='aspect-square shrink-0 rounded-max'
+            className='aspect-square h-[40px] max-h-[40px] w-[40px] max-w-[40px] shrink-0 rounded-max'
             src={generateImageUrl(
               isNft ? fingerprint : assetName,
               "sm",
