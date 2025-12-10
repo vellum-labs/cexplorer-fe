@@ -4,6 +4,7 @@ import { PageBase } from "@/components/global/pages/PageBase";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { DebuggerTab } from "@/components/pool-debug/tabs/DebuggerTab";
 import { CheatSheetTab } from "@/components/pool-debug/tabs/CheatSheetTab";
+import { useNavigate, useSearch } from "@tanstack/react-router";
 
 interface Pool {
   pool_id: string;
@@ -16,7 +17,16 @@ interface Pool {
 const STORAGE_KEY_POOL = "poolDebug_selectedPool";
 
 export const PoolDebugPage: FC = () => {
+  const { pool_id: urlPoolId } = useSearch({ from: "/pool-debug/" });
+  const navigate = useNavigate();
+
   const [selectedPool, setSelectedPool] = useState<Pool | null>(() => {
+    if (urlPoolId) {
+      return {
+        pool_id: urlPoolId,
+        pool_name: { ticker: "", name: urlPoolId },
+      };
+    }
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem(STORAGE_KEY_POOL);
       return saved ? JSON.parse(saved) : null;
@@ -32,10 +42,18 @@ export const PoolDebugPage: FC = () => {
 
     if (selectedPool) {
       localStorage.setItem(STORAGE_KEY_POOL, JSON.stringify(selectedPool));
+      navigate({
+        search: { pool_id: selectedPool.pool_id } as any,
+        replace: true,
+      });
     } else {
       localStorage.removeItem(STORAGE_KEY_POOL);
+      navigate({
+        search: { pool_id: undefined } as any,
+        replace: true,
+      });
     }
-  }, [selectedPool]);
+  }, [selectedPool, navigate]);
 
   const tabItems = [
     {
