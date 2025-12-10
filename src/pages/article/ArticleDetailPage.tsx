@@ -1,5 +1,5 @@
 import { ArticleCard } from "@/components/article/ArticleCard";
-import { Button, PoolCell, SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
+import { Button, SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import {
   BreadcrumbRaw,
@@ -7,7 +7,7 @@ import {
   BreadcrumbList,
 } from "@vellumlabs/cexplorer-sdk";
 import { useFetchArticleDetail, useFetchArticleList } from "@/services/article";
-import { formatDate } from "@vellumlabs/cexplorer-sdk";
+import { formatDate, formatString } from "@vellumlabs/cexplorer-sdk";
 import { renderArticleAuthor } from "@/utils/renderArticleAuthor";
 import { getRouteApi, Link } from "@tanstack/react-router";
 import parse from "html-react-parser";
@@ -20,11 +20,14 @@ import { TelegramLogo } from "@vellumlabs/cexplorer-sdk";
 import { TwitterLogo } from "@vellumlabs/cexplorer-sdk";
 import { RandomDelegationModal } from "@/components/wallet/RandomDelegationModal";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { Twitter } from "@/resources/images/icons/Twitter";
+import { Facebook } from "@/resources/images/icons/Facebook";
+import { Instagram, LinkIcon } from "lucide-react";
+import { isEmptySocial } from "@/utils/user/isEmptySocial";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { markdownComponents } from "@/constants/markdows";
-import { DrepHashCell } from "@/components/drep/DrepHashCell";
 import { handleDelegation } from "@/utils/wallet/handleDelegation";
 import { useWalletStore } from "@/stores/walletStore";
 
@@ -162,7 +165,7 @@ export const ArticleDetailPage = () => {
                   rehypePlugins={[rehypeRaw]}
                   components={markdownComponents(setClickedUrl)}
                 >
-                  {data?.data[0] || ""}
+                  {data?.data[0]}
                 </ReactMarkdown>
               </article>
             </div>
@@ -173,19 +176,95 @@ export const ArticleDetailPage = () => {
                 <h2>{renderArticleAuthor(data?.user_owner)}</h2>
                 <div className='flex w-full items-center justify-between gap-1.5 text-text-sm text-grayTextSecondary'>
                   <span className='inline-block text-nowrap'>Stake pool:</span>
-                  <PoolCell
-                    fontSize='12px'
-                    className='w-[60%]'
-                    poolInfo={{
-                      id: data?.user_owner?.pool?.id ?? "",
-                      meta: data?.user_owner?.pool?.meta || null,
-                    }}
-                  />
+                  {data?.user_owner?.pool?.meta?.ticker ? (
+                    <Link
+                      to='/pool/$id'
+                      params={{ id: data.user_owner.pool.id }}
+                      className='w-[60%] overflow-hidden text-ellipsis whitespace-nowrap text-right text-text-sm text-primary'
+                    >
+                      [{data.user_owner.pool.meta.ticker}]
+                    </Link>
+                  ) : data?.user_owner?.pool?.id ? (
+                    <Link
+                      to='/pool/$id'
+                      params={{ id: data.user_owner.pool.id }}
+                      className='w-[60%] overflow-hidden text-ellipsis whitespace-nowrap text-right text-text-sm text-primary'
+                    >
+                      {formatString(data.user_owner.pool.id, "long")}
+                    </Link>
+                  ) : (
+                    <span className='w-[60%] text-right text-text-sm'>-</span>
+                  )}
                 </div>
                 <div className='flex w-full items-center justify-between gap-1.5 text-text-sm text-grayTextSecondary [&>div]:w-[60%]'>
                   <span className='inline-block text-nowrap'>Drep:</span>
-                  <DrepHashCell view={data?.user_owner?.drep?.id ?? ""} />
+                  {data?.user_owner?.drep?.meta?.given_name ? (
+                    <Link
+                      to='/drep/$hash'
+                      params={{ hash: data.user_owner.drep.id }}
+                      className='w-[60%] overflow-hidden text-ellipsis whitespace-nowrap text-right text-text-sm text-primary'
+                    >
+                      {data.user_owner.drep.meta.given_name}
+                    </Link>
+                  ) : data?.user_owner?.drep?.id ? (
+                    <Link
+                      to='/drep/$hash'
+                      params={{ hash: data.user_owner.drep.id }}
+                      className='w-[60%] overflow-hidden text-ellipsis whitespace-nowrap text-right text-text-sm text-primary'
+                    >
+                      {formatString(data.user_owner.drep.id, "long")}
+                    </Link>
+                  ) : (
+                    <span className='w-[60%] text-right text-text-sm'>-</span>
+                  )}
                 </div>
+                {data?.user_owner?.profile?.social && (
+                  <div className='flex w-full items-center justify-between gap-1.5 text-text-sm text-grayTextSecondary'>
+                    <span className='inline-block text-nowrap'>Socials:</span>
+                    <div className='flex items-center gap-2'>
+                      {!isEmptySocial(data.user_owner.profile.social.xcom) && (
+                        <a
+                          href={data.user_owner.profile.social.xcom}
+                          target='_blank'
+                          rel='nofollow noopener'
+                        >
+                          <Twitter size={20} color='#98A2B3' />
+                        </a>
+                      )}
+                      {!isEmptySocial(
+                        data.user_owner.profile.social.facebook,
+                      ) && (
+                        <a
+                          href={data.user_owner.profile.social.facebook}
+                          target='_blank'
+                          rel='nofollow noopener'
+                        >
+                          <Facebook size={20} color='#98A2B3' />
+                        </a>
+                      )}
+                      {!isEmptySocial(
+                        data.user_owner.profile.social.instagram,
+                      ) && (
+                        <a
+                          href={data.user_owner.profile.social.instagram}
+                          target='_blank'
+                          rel='nofollow noopener'
+                        >
+                          <Instagram size={20} color='#98A2B3' />
+                        </a>
+                      )}
+                      {!isEmptySocial(data.user_owner.profile.social.web) && (
+                        <a
+                          href={data.user_owner.profile.social.web}
+                          target='_blank'
+                          rel='nofollow noopener'
+                        >
+                          <LinkIcon size={20} color='#98A2B3' />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                )}
                 <div className='flex flex-wrap items-center gap-1'>
                   {data?.user_owner?.pool?.id && (
                     <Button
