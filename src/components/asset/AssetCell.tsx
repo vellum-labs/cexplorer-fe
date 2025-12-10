@@ -1,6 +1,6 @@
 import { alphabetWithNumbers } from "@/constants/alphabet";
 import type { TxAsset } from "@/types/assetsTypes";
-import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";
+import { encodeAssetName, getNodeText } from "@vellumlabs/cexplorer-sdk";
 import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
@@ -62,7 +62,7 @@ const AssetCell = memo((props: AssetProps) => {
             type='asset'
             height={imageSize || 40}
             width={imageSize || 40}
-            className='aspect-square shrink-0 rounded-max'
+            className='aspect-square h-[40px] max-h-[40px] w-[40px] max-w-[40px] shrink-0 rounded-max'
             src={generateImageUrl(
               isNft ? fingerprint : assetName,
               "ico",
@@ -113,14 +113,17 @@ const AssetCell = memo((props: AssetProps) => {
                     ? nameByRegistry
                     : formattedHex
                       ? formattedHex
-                      : renderAssetName({ asset, name, fingerprint })
+                      : getNodeText(
+                          renderAssetName({ asset, name, fingerprint }),
+                        )
                 }
                 className='ml-1'
               />
             )}
           </Link>
           <span className='flex items-center gap-1/2'>
-            {nameByRegistry || renderAssetName({ asset, name, fingerprint }) !== "n/a" ? (
+            {nameByRegistry ||
+            renderAssetName({ asset, name, fingerprint }) !== "n/a" ? (
               <p className='break-words break-all text-text-xs text-grayTextPrimary'>
                 {formatString(fingerprint, "long")}
               </p>
@@ -136,7 +139,11 @@ const AssetCell = memo((props: AssetProps) => {
               </Link>
             )}
             <Copy
-              size={renderAssetName({ asset, name, fingerprint }) !== "n/a" ? 10 : 13}
+              size={
+                renderAssetName({ asset, name, fingerprint }) !== "n/a"
+                  ? 10
+                  : 13
+              }
               copyText={fingerprint}
             />
           </span>
