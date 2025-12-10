@@ -36,7 +36,7 @@ export const getAssetImage = (tokenName: string, isNft = false, size = 20) => {
       className='aspect-square shrink-0 rounded-max'
       src={generateImageUrl(
         isNft ? fingerprint : tokenName,
-        "ico",
+        "sm",
         isNft ? "nft" : "token",
       )}
       fallbackletters={[...encodedNameArr]

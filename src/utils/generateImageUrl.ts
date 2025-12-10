@@ -1,47 +1,46 @@
-import { cexAssetUrl } from "@/constants/confVariables";
+import {
+  cexAssetUrl,
+  cexNftImageUrl,
+  network,
+} from "@/constants/confVariables";
 
-const buildJamonbreadUrl = (ident: string, size: string): string => {
-  if (ident.length < 32) {
+const buildNftImageUrl = (
+  fingerprint: string,
+  size: "sm" | "md" | "lg" = "sm",
+): string => {
+  if (!fingerprint || fingerprint.length < 32) {
     return "-";
   }
-  
-  const pathParts = [
-    ident[6],
-    ident[12],
-    ident[17],
-    ident[25],
-    ident[27],
-    ident[31],
-  ];
-  
-  return `https://i.jamonbread.io/${pathParts.join('/')}/${ident}/${size}`;
+
+  return `${cexNftImageUrl}${network}/${fingerprint}/${size}`;
 };
 
 export const generateImageUrl = (
   ident: string,
-  size: "ico" | "sm" | "md" | "lg",
+  size: "ico" | "sm" | "md" | "lg" = "sm",
   type?: "nft" | "pool" | "drep" | "token" | "cc",
 ): string => {
   if (!ident) {
-    return "-"; 
+    return "-";
   }
 
   if (ident.startsWith("drep")) {
     return `${cexAssetUrl}${ident}`;
   }
-  
+
   if (ident.startsWith("pool")) {
     return `${cexAssetUrl}${ident}`;
-  }
-  
-  if (ident.startsWith("asset1")) {
-    return buildJamonbreadUrl(ident, size);
   }
 
   if (type === "cc") {
     return `${cexAssetUrl}cc/${ident}`;
   }
-  
+
+  if (ident.startsWith("asset1") && type === "nft") {
+    const nftSize = size === "ico" ? "sm" : size;
+    return buildNftImageUrl(ident, nftSize as "sm" | "md" | "lg");
+  }
+
   if (type === "token") {
     return `${cexAssetUrl}asset/${ident}`;
   }

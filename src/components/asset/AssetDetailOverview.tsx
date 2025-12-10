@@ -2,11 +2,7 @@ import type { useFetchAssetDetail } from "@/services/assets";
 import type { FC } from "react";
 
 import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
-import { Image } from "@vellumlabs/cexplorer-sdk";
 import { WatchlistSection } from "../global/watchlist/WatchlistSection";
-
-import { alphabetWithNumbers } from "@/constants/alphabet";
-import { generateImageUrl } from "@/utils/generateImageUrl";
 
 import { useAssetDetail } from "@/hooks/details/useAssetDetail";
 
@@ -27,8 +23,11 @@ export const AssetDetailOverview: FC<AssetDetailOverviewProps> = ({
   hasDex,
   assetName,
 }) => {
-  const { detailData, blockchain, overview, tokenRegistry, encodedNameArr } =
-    useAssetDetail({ data, type, formattedHex });
+  const { detailData, blockchain, overview, tokenRegistry } = useAssetDetail({
+    data,
+    type,
+    formattedHex,
+  });
 
   return (
     <section className='flex w-full flex-col gap-1.5'>
@@ -49,25 +48,6 @@ export const AssetDetailOverview: FC<AssetDetailOverviewProps> = ({
                   This asset has been burned
                 </span>
               ) : null
-            }
-            startContent={
-              <Image
-                src={generateImageUrl(
-                  type === "nft"
-                    ? detailData?.fingerprint || ""
-                    : (detailData?.policy || "") + detailData?.name,
-                  "md",
-                  type === "nft" ? "nft" : "token",
-                )}
-                className='aspect-square rounded-m'
-                fallbackletters={[...encodedNameArr]
-                  .filter(char =>
-                    alphabetWithNumbers.includes(char.toLowerCase()),
-                  )
-                  .join("")}
-                height={48}
-                width={48}
-              />
             }
             labelClassname='min-w-[135px] text-nowrap'
             className='md:h-full'
