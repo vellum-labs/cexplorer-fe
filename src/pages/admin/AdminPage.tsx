@@ -16,6 +16,8 @@ export const AdminPage = () => {
   const articleAdmin = userData?.power?.includes("articleAdmin");
   const configAdmin = userData?.power?.includes("softConfig");
 
+  console.log("userData", userData);
+
   const hasAdminRights = adminRight || articleAdmin || configAdmin;
 
   return (
@@ -62,6 +64,11 @@ export const AdminPage = () => {
             {configAdmin && (
               <Link className='text-text-lg' to='/admin/groups'>
                 Groups
+              </Link>
+            )}
+            {configAdmin && (
+              <Link className='text-text-lg' to='/admin/wiki'>
+                Wiki
               </Link>
             )}
           </div>

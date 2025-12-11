@@ -242,6 +242,7 @@ export const fetchAdminArticle = async ({
   url,
   lang,
   body,
+  articleType,
 }: {
   token: string;
   type: "list" | "detail" | "update" | "create";
@@ -259,12 +260,15 @@ export const fetchAdminArticle = async ({
     image?: string;
     pub_date?: string;
   };
+  articleType?: "article" | "wiki";
 }) => {
   const apiUrl = "/admin/article";
 
+  const typeParam = type === "list" && articleType ? articleType : type;
+
   const options = {
     method: type === "update" || type === "create" ? "POST" : "GET",
-    params: { url, lang, type },
+    params: { url, lang, type: typeParam },
     headers: {
       usertoken: token,
     },
@@ -291,15 +295,17 @@ export const useFetchAdminArticle = ({
   type,
   url,
   lang,
+  articleType,
 }: {
   token: string;
   type: "list" | "detail" | "update" | "create";
   url?: ArticleUrl;
   lang?: "en";
+  articleType?: "article" | "wiki";
 }) => {
   return useQuery({
-    queryKey: ["admin-article", token, type, url, lang],
-    queryFn: () => fetchAdminArticle({ token, type, url, lang }),
+    queryKey: ["admin-article", token, type, url, lang, articleType],
+    queryFn: () => fetchAdminArticle({ token, type, url, lang, articleType }),
     enabled: !!token,
   });
 };
