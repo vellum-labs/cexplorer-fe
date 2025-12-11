@@ -29,7 +29,7 @@ export const SearchPage: FC = () => {
 
   const { data, isLoading } = useFetchMiscSearch(
     debouncedValue ? debouncedValue : undefined,
-    "all",
+    undefined,
     "en",
   );
 
