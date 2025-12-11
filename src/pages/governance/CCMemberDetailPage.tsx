@@ -123,20 +123,10 @@ export const CCMemberDetailPage = () => {
         },
       ]}
       subTitle={
-        <div className='flex flex-col'>
-          <HeaderBannerSubtitle
-            hashString={formatString(memberData?.ident?.cold ?? "", "long")}
-            hash={memberData?.ident?.cold ?? undefined}
-            title='Cold Key'
-            className='!mb-0'
-          />
-          <HeaderBannerSubtitle
-            hashString={formatString(memberData?.ident?.hot ?? "", "long")}
-            hash={memberData?.ident?.hot ?? undefined}
-            title='Hot Key'
-            className='!mt-0'
-          />
-        </div>
+        <HeaderBannerSubtitle
+          hashString={formatString(memberData?.ident?.raw ?? "", "long")}
+          hash={memberData?.ident?.raw ?? undefined}
+        />
       }
       adsCarousel={false}
     >
