@@ -9,9 +9,11 @@ import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { JsonDisplay } from "@vellumlabs/cexplorer-sdk";
 import { ConstLabelBadge } from "@vellumlabs/cexplorer-sdk";
 import { TextDisplay } from "@vellumlabs/cexplorer-sdk";
+import { Button, Switch } from "@vellumlabs/cexplorer-sdk";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
+import { parseCborHex } from "@/utils/uplc/uplc";
 
 interface ContractInputProps {
   input: TxInput;
@@ -29,9 +31,31 @@ export const ContractInput: FC<ContractInputProps> = ({
   isLoading,
 }) => {
   const [open, setOpen] = useState<boolean>(inputIndex === 0);
+  const [uplcData, setUplcData] = useState<{
+    compact: string;
+    pretty: string;
+  } | null>(null);
+  const [uplcError, setUplcError] = useState<string | null>(null);
+  const [prettyMode, setPrettyMode] = useState(false);
 
   const { data: basicData } = useFetchMiscBasic();
   const miscConst = useMiscConst(basicData?.data.version.const);
+
+  const handleConvertUplc = () => {
+    try {
+      const parsed = parseCborHex(contract.bytecode);
+      setUplcData({
+        compact: parsed.compact,
+        pretty: parsed.pretty,
+      });
+      setUplcError(null);
+    } catch (error) {
+      setUplcError(
+        error instanceof Error ? error.message : "Failed to parse UPLC",
+      );
+      setUplcData(null);
+    }
+  };
 
   return (
     <Fragment>
@@ -111,8 +135,46 @@ export const ContractInput: FC<ContractInputProps> = ({
             <Copy copyText={contract?.script_hash} />
           </span>
         </span>
-        <span className='mt-1'>Bytes:</span>
+        <div className='mt-2'>
+          <span className='text-text-sm font-medium'>Bytes:</span>
+        </div>
         <TextDisplay text={contract?.bytecode} />
+
+        {!uplcData && (
+          <div className='mt-3'>
+            <Button
+              label='Convert UPLC'
+              variant='primary'
+              size='sm'
+              onClick={handleConvertUplc}
+            />
+          </div>
+        )}
+
+        {uplcError && (
+          <div className='mt-2 rounded-m border border-red-500 bg-red-50 p-2 text-text-sm text-red-700 dark:bg-red-950 dark:text-red-300'>
+            {uplcError}
+          </div>
+        )}
+
+        {uplcData && (
+          <div className='mt-4 flex flex-col gap-2'>
+            <div className='flex items-center gap-2'>
+              <span className='text-text-sm font-medium'>UPLC</span>
+              <div className='flex items-center gap-2 text-text-sm'>
+                <span>Pretty-print</span>
+                <Switch
+                  active={prettyMode}
+                  onChange={checked => setPrettyMode(checked)}
+                />
+              </div>
+            </div>
+            <pre className='h-[300px] w-full overflow-auto rounded-m border border-border bg-cardBg p-[10px] font-mono text-text-xs shadow-md'>
+              {prettyMode ? uplcData.pretty : uplcData.compact}
+            </pre>
+          </div>
+        )}
+
         {(contract.output || []).map(output => (
           <span className='mt-1'>
             Datum hash:{" "}

@@ -168,6 +168,8 @@ export default defineConfig({
             "@harmoniclabs/pair",
             "@harmoniclabs/cbor",
             "@harmoniclabs/bytestring",
+            "@harmoniclabs/uplc",
+            "@harmoniclabs/uint8array-utils",
           ],
           charts: ["echarts", "echarts-stat"],
           utils: [
