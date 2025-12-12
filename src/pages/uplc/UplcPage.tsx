@@ -1,4 +1,4 @@
-import type { ChangeEvent, FC } from "react";
+import type { FC } from "react";
 import {
   predictLanguage,
   type DetectedLanguage,
@@ -9,13 +9,12 @@ import {
   encodeProgram,
   parseCborHex,
   parseTextSource,
-  TEST_CASE_EXAMPLES,
   versionToString,
   type SourceKind,
 } from "@/utils/uplc/uplc";
 
 import { PageBase } from "@/components/global/pages/PageBase";
-import { Button } from "@vellumlabs/cexplorer-sdk";
+import { Button, Switch, Copy } from "@vellumlabs/cexplorer-sdk";
 
 import { useId, useMemo, useState } from "react";
 
@@ -66,7 +65,6 @@ export const UplcPage: FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [lastAction, setLastAction] = useState<string | null>(null);
   const [prettyMode, setPrettyMode] = useState(false);
-  const [selectedExampleId, setSelectedExampleId] = useState<string>("");
 
   const hasContent = input.trim().length > 0;
   const detectedKind = useMemo(() => detectSourceKind(input), [input]);
@@ -93,7 +91,6 @@ export const UplcPage: FC = () => {
     setError(null);
     setLastAction(null);
     setPrettyMode(false);
-    setSelectedExampleId("");
   };
 
   const handleProcess = () => {
@@ -161,35 +158,6 @@ export const UplcPage: FC = () => {
     }
   };
 
-  const handleCopy = async (value: string) => {
-    try {
-      await navigator.clipboard.writeText(value);
-      setLastAction("Copied value to clipboard.");
-    } catch {
-      setLastAction("Copy failed—please copy manually.");
-    }
-  };
-
-  const handleExampleSelect = (event: ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value;
-    if (!value) {
-      return;
-    }
-
-    const example = TEST_CASE_EXAMPLES.find(item => item.id === value);
-    setSelectedExampleId("");
-
-    if (!example) {
-      return;
-    }
-
-    setInput(example.hex);
-    setResult(EMPTY_RESULT);
-    setError(null);
-    setPrettyMode(false);
-    setLastAction(`Loaded ${example.label} from tests.`);
-  };
-
   const currentLanguagePrediction = result?.languagePrediction ?? null;
   const languageBadgeLabel = currentLanguagePrediction
     ? LANGUAGE_LABELS[currentLanguagePrediction.language]
@@ -208,11 +176,39 @@ export const UplcPage: FC = () => {
         { label: "UPLC Viewer" },
       ]}
     >
-      <section className='flex w-full max-w-desktop flex-col px-mobile py-1 md:px-desktop'>
-        <div className='mb-2 flex w-full flex-col justify-between gap-2'>
-          <div className='flex flex-col gap-1'>
+      <section className='flex w-full justify-center'>
+        <div className='flex w-full max-w-desktop flex-col gap-2 p-mobile md:p-desktop'>
+          <p className='text-text-sm text-grayTextPrimary'>
+            Universal tool for inspecting and formatting Untyped Plutus Core
+            (UPLC): native, flat encoded or CBOR-wrapped. Implemented from the
+            opensource code built by{" "}
+            <a
+              href='https://github.com/OpShin/uplc'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='text-primary hover:underline'
+            >
+              OpShin
+            </a>{" "}
+            team.
+          </p>
+
+          <p className='text-text-sm text-grayTextPrimary'>
+            Repository on GitHub:{" "}
+            <a
+              href='https://github.com/HarmonicLabs/uplc'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='text-primary hover:underline'
+            >
+              @HarmonicLabs/uplc
+            </a>
+          </p>
+
+          <div className='flex w-full flex-col gap-1'>
             <div className='flex items-center gap-2'>
-              <h3>Input</h3>
+              <span className='text-text-sm font-medium'>Input</span>
+              <span className='text-text-xs text-grayTextPrimary'>*</span>
               {hasContent && (
                 <span className='rounded-s bg-cardBg px-2 py-0.5 text-text-xs font-medium text-primary shadow-sm'>
                   {detectedKind === "text"
@@ -242,25 +238,12 @@ export const UplcPage: FC = () => {
               disabled={!hasContent}
             />
             <Button
-              label='Clear'
+              label='Clear Input'
               variant='secondary'
               size='md'
               onClick={handleClear}
               disabled={!hasContent && !result}
             />
-            <select
-              value={selectedExampleId}
-              onChange={handleExampleSelect}
-              aria-label='Load example program'
-              className='h-[40px] rounded-s border border-border bg-cardBg px-3 text-text-sm shadow-md outline-none'
-            >
-              <option value=''>Load example</option>
-              {TEST_CASE_EXAMPLES.map(example => (
-                <option key={example.id} value={example.id}>
-                  {example.label}
-                </option>
-              ))}
-            </select>
           </div>
 
           {error && (
@@ -273,123 +256,119 @@ export const UplcPage: FC = () => {
               {lastAction}
             </div>
           )}
-        </div>
 
         {result && (
-          <div className='mt-4 flex w-full flex-col gap-4'>
-            <div className='flex flex-wrap items-center gap-2 text-text-sm'>
-              <span className='rounded-s bg-cardBg px-2 py-1 text-text-xs font-medium shadow-sm'>
-                {result.kind === "text" ? "UPLC text" : "CBOR hex"}
-              </span>
-              <span className='text-text-sm'>Version: {result.version}</span>
-              <span className='text-text-sm text-grayTextPrimary'>
-                Flat bytes: {result.flatLength.toLocaleString()} · CBOR bytes:{" "}
-                {result.cborLength.toLocaleString()}
-              </span>
-              {languageBadgeLabel && languageEvidence && (
-                <div className='group relative'>
-                  <span
-                    className='cursor-help rounded-s bg-primary/10 px-2 py-1 text-text-xs font-medium text-primary shadow-sm'
-                    tabIndex={0}
-                    aria-describedby={languageTooltipId}
-                  >
-                    Likely {languageBadgeLabel} ⓘ
+          <>
+            <div className='mt-4 flex w-full flex-col gap-2'>
+              <span className='text-text-sm font-medium'>Output</span>
+              <div className='flex flex-wrap items-center gap-2 rounded-m border border-border bg-cardBg p-3'>
+                <div className='flex items-center gap-1.5'>
+                  <span className='text-text-xs text-grayTextPrimary'>
+                    Version:
                   </span>
-                  <div
-                    className='absolute left-0 top-full z-10 mt-1 hidden w-64 rounded-m border border-border bg-cardBg p-2 text-text-xs shadow-lg group-hover:block group-focus:block'
-                    role='tooltip'
-                    id={languageTooltipId}
-                  >
-                    {languageEvidence}
-                  </div>
-                </div>
-              )}
-              {!languageBadgeLabel && (
-                <div className='group relative'>
-                  <span
-                    className='cursor-help text-text-sm text-grayTextPrimary'
-                    tabIndex={0}
-                    aria-describedby={languageTooltipId}
-                  >
-                    Language unknown ⓘ
+                  <span className='text-text-sm font-medium'>
+                    {result.version}
                   </span>
-                  <div
-                    className='absolute left-0 top-full z-10 mt-1 hidden w-64 rounded-m border border-border bg-cardBg p-2 text-text-xs shadow-lg group-hover:block group-focus:block'
-                    role='tooltip'
-                    id={languageTooltipId}
-                  >
-                    Could not identify the smart contract language based on
-                    unique markers
-                  </div>
                 </div>
-              )}
+                <div className='h-4 w-px bg-border' />
+                <div className='flex items-center gap-1.5'>
+                  <span className='text-text-xs text-grayTextPrimary'>
+                    Flat bytes:
+                  </span>
+                  <span className='text-text-sm font-medium'>
+                    {result.flatLength.toLocaleString()}
+                  </span>
+                </div>
+                <div className='h-4 w-px bg-border' />
+                <div className='flex items-center gap-1.5'>
+                  <span className='text-text-xs text-grayTextPrimary'>
+                    CBOR bytes:
+                  </span>
+                  <span className='text-text-sm font-medium'>
+                    {result.cborLength.toLocaleString()}
+                  </span>
+                </div>
+                {languageBadgeLabel && languageEvidence && (
+                  <>
+                    <div className='h-4 w-px bg-border' />
+                    <div className='group relative'>
+                      <span
+                        className='cursor-help rounded-s bg-primary/10 px-2 py-0.5 text-text-xs font-medium text-primary shadow-sm'
+                        tabIndex={0}
+                        aria-describedby={languageTooltipId}
+                      >
+                        Likely {languageBadgeLabel} ⓘ
+                      </span>
+                      <div
+                        className='absolute left-0 top-full z-10 mt-1 hidden max-w-[320px] rounded-m border border-border bg-cardBg p-2 text-text-xs shadow-lg group-hover:block group-focus:block'
+                        role='tooltip'
+                        id={languageTooltipId}
+                      >
+                        <p className='break-words'>{languageEvidence}</p>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
 
-            <div className='flex flex-col gap-1'>
-              <div className='flex items-center justify-between'>
-                <h3>Flat Encoding (hex)</h3>
-                <Button
-                  label='Copy'
-                  variant='secondary'
-                  size='sm'
-                  onClick={() => handleCopy(result.flatHex)}
+            <div className='flex w-full flex-col gap-4'>
+              <div className='flex flex-col gap-1'>
+                <div className='flex items-center justify-between'>
+                  <span className='text-text-sm font-medium'>
+                    Flat Encoding (Hex)
+                  </span>
+                  <Copy copyText={result.flatHex} />
+                </div>
+                <textarea
+                  value={result.flatHex}
+                  readOnly
+                  spellCheck={false}
+                  className='h-[120px] w-full resize-none rounded-m border border-border bg-cardBg p-[10px] font-mono text-text-xs shadow-md outline-none'
                 />
               </div>
-              <textarea
-                value={result.flatHex}
-                readOnly
-                spellCheck={false}
-                className='h-[120px] w-full resize-none rounded-m border border-border bg-cardBg p-[10px] font-mono text-text-xs shadow-md outline-none'
-              />
-            </div>
 
-            <div className='flex flex-col gap-1'>
-              <div className='flex items-center justify-between'>
-                <h3>CBOR-wrapped (hex)</h3>
-                <Button
-                  label='Copy'
-                  variant='secondary'
-                  size='sm'
-                  onClick={() => handleCopy(result.cborHex)}
+              <div className='flex flex-col gap-1'>
+                <div className='flex items-center justify-between'>
+                  <span className='text-text-sm font-medium'>
+                    CBOR-wrapped (Hex)
+                  </span>
+                  <Copy copyText={result.cborHex} />
+                </div>
+                <textarea
+                  value={result.cborHex}
+                  readOnly
+                  spellCheck={false}
+                  className='h-[120px] w-full resize-none rounded-m border border-border bg-cardBg p-[10px] font-mono text-text-xs shadow-md outline-none'
                 />
               </div>
-              <textarea
-                value={result.cborHex}
-                readOnly
-                spellCheck={false}
-                className='h-[120px] w-full resize-none rounded-m border border-border bg-cardBg p-[10px] font-mono text-text-xs shadow-md outline-none'
-              />
-            </div>
 
-            <div className='flex flex-col gap-1'>
-              <div className='flex items-center justify-between'>
-                <h3>UPLC</h3>
-                <div className='flex items-center gap-2'>
-                  <label className='flex items-center gap-1.5 text-text-sm'>
-                    <input
-                      type='checkbox'
-                      checked={prettyMode}
-                      onChange={event => setPrettyMode(event.target.checked)}
-                      className='h-4 w-4 rounded-xs border-border shadow-md'
+              <div className='flex flex-col gap-1'>
+                <div className='flex items-center justify-between'>
+                  <span className='text-text-sm font-medium'>UPLC</span>
+                  <div className='flex items-center gap-2'>
+                    <div className='flex items-center gap-2 text-text-sm'>
+                      <span>Pretty-print</span>
+                      <Switch
+                        active={prettyMode}
+                        onChange={checked => setPrettyMode(checked)}
+                      />
+                    </div>
+                    <Copy
+                      copyText={
+                        prettyMode ? result.pretty : result.compact
+                      }
                     />
-                    <span>Pretty-print</span>
-                  </label>
-                  <Button
-                    label='Copy'
-                    variant='secondary'
-                    size='sm'
-                    onClick={() =>
-                      handleCopy(prettyMode ? result.pretty : result.compact)
-                    }
-                  />
+                  </div>
                 </div>
+                <pre className='h-[300px] w-full overflow-auto rounded-m border border-border bg-cardBg p-[10px] font-mono text-text-xs shadow-md'>
+                  {prettyMode ? result.pretty : result.compact}
+                </pre>
               </div>
-              <pre className='h-[300px] w-full overflow-auto rounded-m border border-border bg-cardBg p-[10px] font-mono text-text-xs shadow-md'>
-                {prettyMode ? result.pretty : result.compact}
-              </pre>
             </div>
-          </div>
+          </>
         )}
+        </div>
       </section>
     </PageBase>
   );
