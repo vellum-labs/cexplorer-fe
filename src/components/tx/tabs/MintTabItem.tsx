@@ -91,16 +91,13 @@ const MintTabItem = () => {
         }
 
         const decimals = item?.registry?.decimals;
-        const isNegative = item.quantity < 0;
-        const absQuantity = Math.abs(item.quantity);
         const adjustedQuantity =
           decimals !== undefined && decimals !== null && decimals > 0
-            ? absQuantity / Math.pow(10, decimals)
-            : absQuantity;
+            ? item.quantity / Math.pow(10, decimals)
+            : item.quantity;
 
         return (
           <p className='w-full text-right'>
-            {isNegative ? "-" : ""}
             {formatNumberWithSuffix(adjustedQuantity)}
           </p>
         );

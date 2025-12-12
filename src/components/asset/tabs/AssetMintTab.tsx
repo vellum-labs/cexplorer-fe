@@ -2,7 +2,8 @@ import type { AssetMint } from "@/types/assetsTypes";
 import type { AssetMintColumns, TableColumns } from "@/types/tableTypes";
 import type { FC } from "react";
 
-import { Link } from "@tanstack/react-router";
+import { Link, useSearch } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
@@ -31,7 +32,11 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
   policyId,
 }) => {
   const assetname = policy && name ? policy + name : undefined;
-  const mintQuery = useFetchAssetMint(assetname, policyId);
+  const { page } = useSearch({
+    from: "/asset/$fingerprint",
+  });
+
+  const [totalItems, setTotalItems] = useState(0);
 
   const {
     columnsOrder,
@@ -42,9 +47,21 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
     setRows,
   } = useAssetDetailMintTableStore();
 
-  const { data } = mintQuery;
+  const mintQuery = useFetchAssetMint(
+    rows,
+    (page ?? 1) * rows - rows,
+    assetname,
+    policyId,
+  );
 
-  const items = data?.data?.data;
+  const totalMints = mintQuery.data?.pages[0]?.data?.count;
+  const items = mintQuery.data?.pages.flatMap(p => p?.data?.data ?? []);
+
+  useEffect(() => {
+    if (totalMints !== undefined && totalMints !== totalItems) {
+      setTotalItems(totalMints);
+    }
+  }, [totalMints, totalItems]);
 
   const columns: TableColumns<AssetMint> = [
     {
@@ -138,9 +155,10 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
         />
       </div>
       <GlobalTable
-        type='default'
-        totalItems={(items || []).length}
-        itemsPerPage={items?.length}
+        type='infinite'
+        currentPage={page ?? 1}
+        totalItems={totalItems}
+        itemsPerPage={rows}
         scrollable
         query={mintQuery}
         items={items}
