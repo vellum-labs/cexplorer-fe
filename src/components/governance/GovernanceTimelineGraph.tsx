@@ -313,7 +313,7 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
         </div>
       </div>
       <div className='mt-2 flex flex-wrap items-center justify-center gap-3'>
-        {(["ACTIVE", "ENACTED", "RATIFIED", "DROPPED"] as GovStatus[]).map(
+        {(["ACTIVE", "ENACTED", "RATIFIED", "DROPPED", "EXPIRED"] as GovStatus[]).map(
           status => (
             <div key={status} className='flex items-center gap-1'>
               <div
