@@ -1,12 +1,16 @@
 import type { FC } from "react";
-import { useState } from "react";
+import { createPortal } from "react-dom";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
+import { Modal } from "@vellumlabs/cexplorer-sdk";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { FileText, AlertTriangle } from "lucide-react";
 
 import { useFetchCommitteeDetail } from "@/services/governance";
 import { useFetchConstitutionList } from "@/services/governance";
+import { useFetchUrlContent } from "@/hooks/useFetchUrlContent";
 
 import type {
   CommitteeDetailResponse,
@@ -16,10 +20,10 @@ import { CCMembersTab } from "@/components/gov/cc/tabs/CCMembersTab";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { CCGovernanceVotestab } from "@/components/gov/cc/tabs/CCGovernanceVotesTab";
 import { PageBase } from "@/components/global/pages/PageBase";
-import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
-import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
 import { useFetchMiscBasic } from "@/services/misc";
+import { useMiscConst } from "@/hooks/useMiscConst";
 import { generateImageUrl } from "@/utils/generateImageUrl";
+import { getCurrentConstitution } from "@/utils/getConstitutionStatus";
 
 const getFirstRegistration = (
   reg: CommitteeMemberRegistration | CommitteeMemberRegistration[] | null,
@@ -30,16 +34,28 @@ const getFirstRegistration = (
 };
 
 export const ConstituionalCommitteeDetailPage: FC = () => {
-  const [clickedUrl, setClickedUrl] = useState<string | undefined>(undefined);
+  const {
+    content: modalContent,
+    isLoading: isModalLoading,
+    isOpen: isModalOpen,
+    fetchContent: handleFullTextClick,
+    close: closeModal,
+  } = useFetchUrlContent();
+
   const committeeDetailQuery = useFetchCommitteeDetail();
   const constitutionListQuery = useFetchConstitutionList();
-
   const miscBasicQuery = useFetchMiscBasic();
+
+  const { data: basicData } = miscBasicQuery;
+  const miscConst = useMiscConst(basicData?.data.version.const);
+  const currentEpoch = miscConst?.epoch?.no ?? 0;
 
   const committeeDetailResponse: CommitteeDetailResponse | undefined =
     committeeDetailQuery.data;
   const committeeDetail = committeeDetailResponse?.data;
-  const constitution = constitutionListQuery.data?.data?.data?.[0];
+
+  const constitutionItems = constitutionListQuery.data?.data?.data ?? [];
+  const constitution = getCurrentConstitution(constitutionItems, currentEpoch);
 
   const currentMembers =
     committeeDetail?.member.filter(
@@ -150,21 +166,13 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
               )}
 
               {constitution?.anchor?.url && (
-                <a
-                  href={transformAnchorUrl(constitution.anchor.url)}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='break-all text-text-sm text-primary'
-                  onClick={e => {
-                    e.preventDefault();
-                    const transformedUrl = transformAnchorUrl(
-                      constitution.anchor.url,
-                    );
-                    setClickedUrl(transformedUrl);
-                  }}
+                <button
+                  onClick={() => handleFullTextClick(constitution.anchor.url)}
+                  className='flex items-center gap-1 text-text-sm text-primary hover:opacity-80'
                 >
-                  Fulltext of the Cardano Constitution
-                </a>
+                  <FileText size={14} />
+                  <span>Fulltext of the Cardano Constitution</span>
+                </button>
               )}
             </div>
 
@@ -184,12 +192,41 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <Tabs withPadding={false} items={tabs} />
       </section>
-      {clickedUrl && (
-        <SafetyLinkModal
-          url={clickedUrl}
-          onClose={() => setClickedUrl(undefined)}
-        />
-      )}
+      {isModalOpen &&
+        createPortal(
+          <Modal onClose={closeModal} maxWidth='900px'>
+            <div className='p-4'>
+              <div className='mb-4 flex items-center justify-between'>
+                <h3 className='text-lg font-semibold'>
+                  Constitution Full Text
+                </h3>
+              </div>
+              {isModalLoading ? (
+                <div className='flex flex-col gap-3'>
+                  <LoadingSkeleton height='24px' rounded='sm' />
+                  <LoadingSkeleton height='24px' rounded='sm' />
+                  <LoadingSkeleton height='24px' rounded='sm' />
+                  <LoadingSkeleton height='24px' rounded='sm' />
+                </div>
+              ) : (
+                <div className='rounded-lg text-sm max-h-[70vh] overflow-auto'>
+                  <div
+                    className='prose prose-sm dark:prose-invert max-w-none'
+                    style={{
+                      fontSize: "var(--font-size-text-sm)",
+                      lineHeight: "1.6",
+                    }}
+                  >
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {modalContent}
+                    </ReactMarkdown>
+                  </div>
+                </div>
+              )}
+            </div>
+          </Modal>,
+          document.body,
+        )}
     </PageBase>
   );
 };

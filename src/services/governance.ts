@@ -28,7 +28,7 @@ export const fetchGovernenceAction = async (
 export const useFetchGovernanceAction = (
   limit: number,
   page: number,
-  state: "All" | "Active" | "Ratified" | "Enacted" | "Expired",
+  state: "All" | "Active" | "Ratified" | "Enacted" | "Expired" | "Approved",
   search?: string,
   type?: string,
 ) =>
@@ -196,7 +196,7 @@ export const useFetchCCMemberDetail = (ident: string) => {
   });
 };
 
-export const fetchConstitutionList = async (limit: number = 1) => {
+export const fetchConstitutionList = async (limit: number = 10) => {
   const url = "/gov/constitution_list";
   const options = {
     params: {

@@ -12,6 +12,7 @@ import {
 import type { Vote } from "@/constants/votes";
 import { Tooltip, Modal, SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import type { AnchorInfo } from "@/types/governanceTypes";
+import { useFetchUrlContent } from "@/hooks/useFetchUrlContent";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { markdownComponents } from "@/constants/markdows";
@@ -31,11 +32,18 @@ export const VoteCell: FC<VoteCellProps> = ({
   isLate = false,
   anchorInfo,
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<string>("");
-  const [fullMetadata, setFullMetadata] = useState<string>("");
+  const {
+    content: modalContent,
+    isLoading,
+    isOpen: isModalOpen,
+    fetchContent,
+    close: closeModal,
+  } = useFetchUrlContent();
+  const {
+    content: fullMetadata,
+    fetchContent: fetchFullMetadata,
+  } = useFetchUrlContent();
   const [showFullMetadata, setShowFullMetadata] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
   if (!vote) {
@@ -45,103 +53,15 @@ export const VoteCell: FC<VoteCellProps> = ({
   const hasAnchorInfo =
     anchorInfo?.offchain?.comment || anchorInfo?.url ? true : false;
 
-  const convertIpfsUrl = (url: string): string => {
-    if (url.startsWith("ipfs://")) {
-      const hash = url.replace("ipfs://", "");
-      return `https://ipfs.io/ipfs/${hash}`;
-    }
-    return url;
-  };
-
-  const fetchFullMetadata = async (url: string) => {
-    try {
-      const fetchUrl = convertIpfsUrl(url);
-      const response = await fetch(fetchUrl);
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      }
-
-      const data = await response.text();
-
-      try {
-        const jsonData = JSON.parse(data);
-        setFullMetadata(JSON.stringify(jsonData, null, 2));
-      } catch {
-        setFullMetadata(data);
-      }
-    } catch {
-      setFullMetadata("");
-    }
-  };
-
-  const extractContentFromJson = (jsonData: any): string => {
-    const comment = jsonData?.body?.comment;
-    const rationaleStatement = jsonData?.body?.rationaleStatement;
-    const rationale = jsonData?.body?.rationale;
-
-    const parts: string[] = [];
-
-    if (comment) parts.push(`Comment:\n${comment}`);
-    if (rationaleStatement)
-      parts.push(`Rationale Statement:\n${rationaleStatement}`);
-    if (rationale) parts.push(`Rationale:\n${rationale}`);
-
-    return parts.join("\n\n");
-  };
-
   const handleAnchorClick = async () => {
     if (!anchorInfo) return;
 
-    if (anchorInfo.offchain?.comment) {
-      setModalContent(anchorInfo.offchain.comment);
-      setShowFullMetadata(false);
-      setIsModalOpen(true);
-
-      if (anchorInfo.url) {
-        await fetchFullMetadata(anchorInfo.url);
-      } else {
-        setFullMetadata("");
-      }
-      return;
-    }
+    setShowFullMetadata(false);
 
     if (anchorInfo.url) {
-      setIsLoading(true);
-      setIsModalOpen(true);
-      setShowFullMetadata(false);
-
-      try {
-        const fetchUrl = convertIpfsUrl(anchorInfo.url);
-        const response = await fetch(fetchUrl);
-
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-
-        const data = await response.text();
-
-        try {
-          const jsonData = JSON.parse(data);
-          const extractedContent = extractContentFromJson(jsonData);
-
-          if (extractedContent) {
-            setModalContent(extractedContent);
-            setFullMetadata(JSON.stringify(jsonData, null, 2));
-          } else {
-            setModalContent(JSON.stringify(jsonData, null, 2));
-            setFullMetadata("");
-          }
-        } catch {
-          setModalContent(data);
-          setFullMetadata("");
-        }
-      } catch (error) {
-        const errorMessage = error instanceof Error ? error.message : "Unknown error";
-        setModalContent(`Failed to fetch content from URL:\n\n${anchorInfo.url}\n\nError: ${errorMessage}`);
-        setFullMetadata("");
-      } finally {
-        setIsLoading(false);
+      await fetchContent(anchorInfo.url);
+      if (anchorInfo.offchain?.comment) {
+        await fetchFullMetadata(anchorInfo.url);
       }
     }
   };
@@ -184,7 +104,7 @@ export const VoteCell: FC<VoteCellProps> = ({
       {isModalOpen &&
         !clickedUrl &&
         createPortal(
-          <Modal onClose={() => setIsModalOpen(false)} maxWidth='800px'>
+          <Modal onClose={closeModal} maxWidth='800px'>
             <div className='p-4'>
               <div className='mb-4 flex items-center justify-between'>
                 <h3 className='text-lg font-semibold'>Metadata</h3>
