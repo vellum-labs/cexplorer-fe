@@ -83,32 +83,33 @@ export const GraphEpochSort = ({
     },
   ];
 
+  const getDataBySelectedItem = () => {
+    switch (selectedItem) {
+      case GraphTimePeriod.AllTime:
+        return allTime;
+      case GraphTimePeriod.FiveDays:
+        return fiveItems;
+      case GraphTimePeriod.TenDays:
+        return tenItems;
+      case GraphTimePeriod.HundredDays:
+        return hundredItems;
+      case GraphTimePeriod.FiveHundredDays:
+        return fiveHundredItems;
+      case GraphTimePeriod.ThirtyDays:
+      default:
+        return thirtyItems;
+    }
+  };
+
   useEffect(() => {
     if (!query.isLoading && !query.isFetching && Array.isArray(allTime)) {
-      setData(thirtyItems);
+      setData(getDataBySelectedItem());
     }
   }, [query.isLoading, query.isFetching, allTime]);
 
   useEffect(() => {
-    switch (selectedItem) {
-      case GraphTimePeriod.AllTime:
-        setData(allTime);
-        break;
-      case GraphTimePeriod.FiveDays:
-        setData(fiveItems);
-        break;
-      case GraphTimePeriod.TenDays:
-        setData(tenItems);
-        break;
-      case GraphTimePeriod.ThirtyDays:
-        setData(thirtyItems);
-        break;
-      case GraphTimePeriod.HundredDays:
-        setData(hundredItems);
-        break;
-      case GraphTimePeriod.FiveHundredDays:
-        setData(fiveHundredItems);
-        break;
+    if (Array.isArray(allTime)) {
+      setData(getDataBySelectedItem());
     }
   }, [selectedItem]);
 
