@@ -29,6 +29,7 @@ interface PageBaseInitProps {
   isHomepage?: boolean;
   homepageAd?: ReactNode;
   customPage?: boolean;
+  withoutSearch?: boolean;
 }
 
 interface PageWithSimpleMetadata extends PageBaseInitProps {
@@ -62,6 +63,7 @@ export const PageBase: FC<PageBaseProps> = ({
   isHomepage,
   homepageAd,
   customPage,
+  withoutSearch = false,
 }) => {
   const miscBasicQuery = useFetchMiscBasic();
 
@@ -105,6 +107,7 @@ export const PageBase: FC<PageBaseProps> = ({
           qrCode={qrCode}
           breadcrumbSeparator={breadcrumbSeparator}
           isHomepage={isHomepage}
+          withoutSearch={withoutSearch}
           homepageAd={
             homepageAd && homepageAds ? (
               <HomepageAds

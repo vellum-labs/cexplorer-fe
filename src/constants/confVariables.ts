@@ -24,6 +24,7 @@ export const adaHandlePolicy = configJSON.integration[0].adahandle[0].policy;
 const protocol = `${configJSON.proto}://`;
 
 export const cexAssetUrl = "https://ix.cexplorer.io/";
+export const cexNftImageUrl = "https://im.cexplorer.io/";
 export const jamUrl = "https://jamonbread.io/";
 
 export const webUrl = `${protocol + configJSON.domain}`;
