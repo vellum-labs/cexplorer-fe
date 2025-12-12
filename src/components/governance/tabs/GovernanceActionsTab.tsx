@@ -32,6 +32,8 @@ import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { GovernanceVotingProgress } from "@/components/governance/GovernanceVotingProgress";
 import type { MiscConstResponseData } from "@/types/miscTypes";
 
+type GovernanceStatusFilter = "All" | "Active" | "Ratified" | "Expired" | "Enacted" | "Approved";
+
 const typeLabels: Record<string, string> = {
   NewCommittee: "New Committee",
   NewConstitution: "New Constitution",
@@ -71,13 +73,10 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
         tableSearch.toLowerCase().slice(tableSearch.indexOf(":") + 1),
     });
 
-  const [selectedItem, setSelectedItem] = useState<
-    "All" | "Active" | "Ratified" | "Expired" | "Enacted" | "Approved"
-  >(
+  const [selectedItem, setSelectedItem] = useState<GovernanceStatusFilter>(
     outcomesOnly
       ? "Approved"
-      : (state as "All" | "Active" | "Ratified" | "Expired" | "Enacted") ||
-          "All",
+      : (state as GovernanceStatusFilter) || "All",
   );
 
   const {
@@ -148,15 +147,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
   useEffect(() => {
     if (outcomesOnly) return;
     if (state && state !== selectedItem) {
-      setSelectedItem(
-        state as
-          | "All"
-          | "Active"
-          | "Ratified"
-          | "Expired"
-          | "Enacted"
-          | "Approved",
-      );
+      setSelectedItem(state as GovernanceStatusFilter);
     }
   }, [state, outcomesOnly]);
 
