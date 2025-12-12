@@ -42,11 +42,7 @@ export const PoolDeregistrationsPage = () => {
   const columns: TableColumns<PoolRegistrationsData> = [
     {
       key: "date",
-      render: item => (
-        <div title={item.block.time} className=''>
-          <DateCell time={item.block.time} />
-        </div>
-      ),
+      render: item => <DateCell time={item.block.time} />,
       jsonFormat: item => {
         if (!item.block.time) {
           return "-";

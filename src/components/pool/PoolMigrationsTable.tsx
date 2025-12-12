@@ -11,6 +11,7 @@ import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { MinMaxRange } from "@vellumlabs/cexplorer-sdk";
 import { SortArrow } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
@@ -119,7 +120,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
       key: "active_in",
       render: item => (
         <div className='flex flex-col items-end gap-1/2'>
-          {item?.active_pool?.delegation?.tx?.active_epoch_no ?? ""}
+          <EpochCell no={item?.active_pool?.delegation?.tx?.active_epoch_no} />
         </div>
       ),
       title: <p className='w-full text-right'>Active epoch</p>,
@@ -145,7 +146,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
               to='/address/$address'
               params={{ address: item.view || "" }}
             >
-              {formatString(item.view, "longer")}
+              {formatString(item.view, "long")}
             </Link>
             <Copy copyText={item.view} />
           </div>
