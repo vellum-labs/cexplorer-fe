@@ -86,7 +86,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
     activeStake: item.data.epoch_stake,
     blocks: item.data.block.minted,
     delegators: item.data.delegators,
-    luck: item.data.block.luck,
+    luck: item?.data?.block?.luck ? item?.data?.block?.luck : "0",
     pledged: item.data.pledged,
     roa: item.data.reward.member_pct,
   }));
