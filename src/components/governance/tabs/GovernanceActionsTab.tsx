@@ -43,10 +43,12 @@ const typeLabels: Record<string, string> = {
 
 interface GovernanceActionsTabProps {
   miscConst: MiscConstResponseData | undefined;
+  outcomesOnly?: boolean;
 }
 
 export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
   miscConst,
+  outcomesOnly = false,
 }) => {
   const { page, state } = useSearch({
     from: "/gov/action/",
@@ -70,8 +72,13 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
     });
 
   const [selectedItem, setSelectedItem] = useState<
-    "All" | "Active" | "Ratified" | "Expired" | "Enacted"
-  >(state || "All");
+    "All" | "Active" | "Ratified" | "Expired" | "Enacted" | "Approved"
+  >(
+    outcomesOnly
+      ? "Approved"
+      : (state as "All" | "Active" | "Ratified" | "Expired" | "Enacted") ||
+          "All",
+  );
 
   const {
     filterVisibility,
@@ -87,10 +94,12 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
     filterKeys: ["type"],
   });
 
+  const queryState = outcomesOnly ? selectedItem : state || "All";
+
   const govActionQuery = useFetchGovernanceAction(
     rows,
     (page ?? 1) * rows - rows,
-    state || "All",
+    queryState,
     debouncedTableSearch ? debouncedTableSearch : undefined,
     filter.type,
   );
@@ -98,39 +107,78 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
   const totalItems = govActionQuery.data?.pages[0].data.count;
   const items = govActionQuery.data?.pages.flatMap(page => page.data.data);
 
-  const selectItems = [
-    {
-      key: "All",
-      value: "All",
-    },
-    {
-      key: "Active",
-      value: "Active",
-    },
-    {
-      key: "Enacted",
-      value: "Enacted",
-    },
-    {
-      key: "Ratified",
-      value: "Ratified",
-    },
-    {
-      key: "Expired",
-      value: "Expired / Dropped",
-    },
-  ];
+  const selectItems = outcomesOnly
+    ? [
+        {
+          key: "Approved",
+          value: "Approved",
+        },
+        {
+          key: "Enacted",
+          value: "Enacted",
+        },
+        {
+          key: "Ratified",
+          value: "Ratified",
+        },
+      ]
+    : [
+        {
+          key: "All",
+          value: "All",
+        },
+        {
+          key: "Active",
+          value: "Active",
+        },
+        {
+          key: "Enacted",
+          value: "Enacted",
+        },
+        {
+          key: "Ratified",
+          value: "Ratified",
+        },
+        {
+          key: "Expired",
+          value: "Expired / Dropped",
+        },
+      ];
 
   useEffect(() => {
-    if (state !== selectedItem) {
+    if (outcomesOnly) return;
+    if (state && state !== selectedItem) {
+      setSelectedItem(
+        state as
+          | "All"
+          | "Active"
+          | "Ratified"
+          | "Expired"
+          | "Enacted"
+          | "Approved",
+      );
+    }
+  }, [state, outcomesOnly]);
+
+  useEffect(() => {
+    if (outcomesOnly) return;
+
+    if (state !== selectedItem && selectedItem !== "All") {
       navigate({
         search: {
           page: 1,
-          state: selectedItem === "All" ? undefined : selectedItem,
+          state: selectedItem,
+        } as any,
+      });
+    } else if (selectedItem === "All" && state) {
+      navigate({
+        search: {
+          page: 1,
+          state: undefined,
         } as any,
       });
     }
-  }, [selectedItem]);
+  }, [selectedItem, outcomesOnly]);
 
   const columns: TableColumns<GovernanceActionList> = [
     {
@@ -431,10 +479,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
                   label: item.name,
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
-                    setColumnVisibility(
-                      item.key,
-                      !columnsVisibility[item.key],
-                    ),
+                    setColumnVisibility(item.key, !columnsVisibility[item.key]),
                 };
               })}
             />

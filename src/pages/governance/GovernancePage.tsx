@@ -127,7 +127,21 @@ export const GovernancePage: FC = () => {
     {
       key: "governance_actions",
       label: "Governance actions",
-      content: <GovernanceActionsTab miscConst={miscConst} />,
+      content: (
+        <GovernanceActionsTab key='governance_actions' miscConst={miscConst} />
+      ),
+      visible: true,
+    },
+    {
+      key: "outcomes",
+      label: "Outcomes",
+      content: (
+        <GovernanceActionsTab
+          key='outcomes'
+          miscConst={miscConst}
+          outcomesOnly
+        />
+      ),
       visible: true,
     },
     {
