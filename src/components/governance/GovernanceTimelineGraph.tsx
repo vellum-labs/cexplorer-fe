@@ -8,40 +8,18 @@ import { useNavigate } from "@tanstack/react-router";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { getEpochByTime } from "@/utils/getEpochByTime";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
+import {
+  type GovStatus,
+  govStatusColors,
+  govStatusBgColors,
+  govTypeLabels,
+} from "@/constants/governance";
 
 interface GovernanceTimelineGraphProps {
   items: GovernanceActionList[];
   currentEpoch: number;
   epochStartTime: string;
 }
-
-type GovStatus = "ACTIVE" | "ENACTED" | "RATIFIED" | "DROPPED" | "EXPIRED";
-
-const statusColors: Record<GovStatus, string> = {
-  ACTIVE: "#10B981",
-  ENACTED: "#10B981",
-  RATIFIED: "#3B82F6",
-  DROPPED: "#F59E0B",
-  EXPIRED: "#F59E0B",
-};
-
-const statusBgColors: Record<GovStatus, string> = {
-  ACTIVE: "#D1FAE5",
-  ENACTED: "#D1FAE5",
-  RATIFIED: "#DBEAFE",
-  DROPPED: "#FEF3C7",
-  EXPIRED: "#FEF3C7",
-};
-
-const typeLabels: Record<string, string> = {
-  NewCommittee: "New Committee",
-  NewConstitution: "New Constitution",
-  HardForkInitiation: "Hardfork Initiation",
-  ParameterChange: "Parameter Change",
-  TreasuryWithdrawals: "Treasury Withdrawals",
-  InfoAction: "Info Action",
-  NoConfidence: "No Confidence",
-};
 
 const getStatus = (
   item: GovernanceActionList,
@@ -77,7 +55,7 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
       );
       const endEpoch = item.expiration;
       const status = getStatus(item, currentEpoch);
-      const typeLabel = typeLabels[item.type] || item.type;
+      const typeLabel = govTypeLabels[item.type] || item.type;
       const name = item.anchor?.offchain?.name || typeLabel;
 
       return {
@@ -118,8 +96,8 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
       return {
         value: item.endEpoch - item.startEpoch,
         itemStyle: {
-          color: statusBgColors[item.status],
-          borderColor: statusColors[item.status],
+          color: govStatusBgColors[item.status],
+          borderColor: govStatusColors[item.status],
           borderWidth: 1,
           borderRadius: [4, 4, 4, 4],
         },
@@ -129,7 +107,7 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
           formatter: `{status|${item.status}} {name|${item.typeLabel}}`,
           rich: {
             status: {
-              backgroundColor: statusColors[item.status],
+              backgroundColor: govStatusColors[item.status],
               color: "#fff",
               padding: statusPadding,
               borderRadius: 3,
@@ -185,7 +163,7 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
           const itemData = chartData.processedItems?.[durationItem.dataIndex];
           if (!itemData) return "";
 
-          const borderColor = statusColors[itemData.status as GovStatus];
+          const borderColor = govStatusColors[itemData.status as GovStatus];
 
           return `
             <div style="padding: 8px; border: 1px solid ${borderColor}; border-radius: 4px; background: ${bgColor};">
@@ -319,8 +297,8 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
               <div
                 className='rounded-sm h-3 w-3 border'
                 style={{
-                  backgroundColor: statusBgColors[status],
-                  borderColor: statusColors[status],
+                  backgroundColor: govStatusBgColors[status],
+                  borderColor: govStatusColors[status],
                 }}
               />
               <span className='text-text-sm text-grayTextPrimary'>
