@@ -2,7 +2,6 @@ import type { FC } from "react";
 import type { ConstitutionDataItem } from "@/types/governanceTypes";
 import type { TableColumns } from "@/types/tableTypes";
 
-import { useState } from "react";
 import { createPortal } from "react-dom";
 import { Link } from "@tanstack/react-router";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
@@ -13,6 +12,7 @@ import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { useFetchConstitutionList } from "@/services/governance";
+import { useFetchUrlContent } from "@/hooks/useFetchUrlContent";
 import { FileText } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -23,54 +23,17 @@ interface ConstitutionTabProps {
 }
 
 export const ConstitutionTab: FC<ConstitutionTabProps> = ({ currentEpoch }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<string>("");
-  const [isLoading, setIsLoading] = useState(false);
+  const {
+    content: modalContent,
+    isLoading,
+    isOpen: isModalOpen,
+    fetchContent: handleFullTextClick,
+    close: closeModal,
+  } = useFetchUrlContent();
   const constitutionListQuery = useFetchConstitutionList();
 
   const items = constitutionListQuery.data?.data?.data ?? [];
   const totalItems = constitutionListQuery.data?.data?.count ?? 0;
-
-  console.log("items", items);
-
-  const convertIpfsUrl = (url: string): string => {
-    if (url.startsWith("ipfs://")) {
-      const hash = url.replace("ipfs://", "");
-      return `https://ipfs.io/ipfs/${hash}`;
-    }
-    return url;
-  };
-
-  const handleFullTextClick = async (url: string) => {
-    setIsLoading(true);
-    setIsModalOpen(true);
-
-    try {
-      const fetchUrl = convertIpfsUrl(url);
-      const response = await fetch(fetchUrl);
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      }
-
-      const data = await response.text();
-
-      try {
-        const jsonData = JSON.parse(data);
-        setModalContent(JSON.stringify(jsonData, null, 2));
-      } catch {
-        setModalContent(data);
-      }
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : "Unknown error";
-      setModalContent(
-        `Failed to fetch content from URL:\n\n${url}\n\nError: ${errorMessage}`,
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const columns: TableColumns<ConstitutionDataItem & { index: number }> = [
     {
@@ -243,7 +206,7 @@ export const ConstitutionTab: FC<ConstitutionTabProps> = ({ currentEpoch }) => {
       </div>
       {isModalOpen &&
         createPortal(
-          <Modal onClose={() => setIsModalOpen(false)} maxWidth='900px'>
+          <Modal onClose={closeModal} maxWidth='900px'>
             <div className='p-4'>
               <div className='mb-4 flex items-center justify-between'>
                 <h3 className='text-lg font-semibold'>

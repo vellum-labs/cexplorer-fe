@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import { useState } from "react";
 import { createPortal } from "react-dom";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
@@ -11,6 +10,7 @@ import { FileText, AlertTriangle } from "lucide-react";
 
 import { useFetchCommitteeDetail } from "@/services/governance";
 import { useFetchConstitutionList } from "@/services/governance";
+import { useFetchUrlContent } from "@/hooks/useFetchUrlContent";
 
 import type {
   CommitteeDetailResponse,
@@ -34,9 +34,13 @@ const getFirstRegistration = (
 };
 
 export const ConstituionalCommitteeDetailPage: FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<string>("");
-  const [isModalLoading, setIsModalLoading] = useState(false);
+  const {
+    content: modalContent,
+    isLoading: isModalLoading,
+    isOpen: isModalOpen,
+    fetchContent: handleFullTextClick,
+    close: closeModal,
+  } = useFetchUrlContent();
 
   const committeeDetailQuery = useFetchCommitteeDetail();
   const constitutionListQuery = useFetchConstitutionList();
@@ -69,45 +73,6 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
 
   const isLoading =
     committeeDetailQuery.isLoading || constitutionListQuery.isLoading;
-
-  const convertIpfsUrl = (url: string): string => {
-    if (url.startsWith("ipfs://")) {
-      const hash = url.replace("ipfs://", "");
-      return `https://ipfs.io/ipfs/${hash}`;
-    }
-    return url;
-  };
-
-  const handleFullTextClick = async (url: string) => {
-    setIsModalLoading(true);
-    setIsModalOpen(true);
-
-    try {
-      const fetchUrl = convertIpfsUrl(url);
-      const response = await fetch(fetchUrl);
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      }
-
-      const data = await response.text();
-
-      try {
-        const jsonData = JSON.parse(data);
-        setModalContent(JSON.stringify(jsonData, null, 2));
-      } catch {
-        setModalContent(data);
-      }
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : "Unknown error";
-      setModalContent(
-        `Failed to fetch content from URL:\n\n${url}\n\nError: ${errorMessage}`,
-      );
-    } finally {
-      setIsModalLoading(false);
-    }
-  };
 
   const tabs = [
     {
@@ -229,7 +194,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
       </section>
       {isModalOpen &&
         createPortal(
-          <Modal onClose={() => setIsModalOpen(false)} maxWidth='900px'>
+          <Modal onClose={closeModal} maxWidth='900px'>
             <div className='p-4'>
               <div className='mb-4 flex items-center justify-between'>
                 <h3 className='text-lg font-semibold'>

@@ -122,17 +122,11 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
   ];
 
   useEffect(() => {
-    if (state !== selectedItem && selectedItem !== "All") {
+    if (state !== selectedItem) {
       navigate({
         search: {
           page: 1,
-          state: selectedItem,
-        } as any,
-      });
-    } else if (selectedItem === "All" && state) {
-      navigate({
-        search: {
-          page: 1,
+          state: selectedItem === "All" ? undefined : selectedItem,
         } as any,
       });
     }
