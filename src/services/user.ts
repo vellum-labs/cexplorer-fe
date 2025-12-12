@@ -276,11 +276,11 @@ export const fetchAdminArticle = async ({
 }) => {
   const apiUrl = "/admin/article";
 
-  const typeParam = type === "list" && articleType ? articleType : type;
+  const category = type === "list" ? (articleType ?? "article") : undefined;
 
   const options = {
     method: type === "update" || type === "create" ? "POST" : "GET",
-    params: { url, lang, type: typeParam },
+    params: { url, lang, type, category },
     headers: {
       usertoken: token,
     },
