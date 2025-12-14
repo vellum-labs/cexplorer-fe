@@ -156,7 +156,7 @@ export default defineConfig({
           ],
           cardano: [
             "@emurgo/cip14-js",
-            "@lucid-evolution/lucid",
+            "@meshsdk/core",
             "bech32",
             "blake2b",
             "blakejs",
@@ -195,7 +195,7 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ["@lucid-evolution/lucid"],
+    include: ["@meshsdk/core"],
     exclude: [
       "@anastasia-labs/cardano-multiplatform-lib-browser",
       "@anastasia-labs/cardano-multiplatform-lib-nodejs",

@@ -1,24 +1,23 @@
 import type { FC } from "react";
 import { useState } from "react";
-import type { LucidEvolution } from "@lucid-evolution/lucid";
+import type { BrowserWallet } from "@meshsdk/core";
 import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { RangeSlider } from "@vellumlabs/cexplorer-sdk";
 import { Wallet } from "lucide-react";
-import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { handleDonation } from "@/utils/treasury/handleDonation";
 
 interface TreasuryDonationModalProps {
   onClose: () => void;
   onSuccess: (hash: string) => void;
-  lucid: LucidEvolution | null;
+  wallet: BrowserWallet | null;
 }
 
 export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
   onClose,
   onSuccess,
-  lucid,
+  wallet,
 }) => {
   const [amount, setAmount] = useState<string>("");
   const [cexplorerPercentage, setCexplorerPercentage] = useState<number>(10);
@@ -43,7 +42,7 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
 
   const handleDonationClick = () => {
     handleDonation({
-      lucid,
+      wallet,
       amount,
       cexplorerPercentage,
       comment,
@@ -136,25 +135,14 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
             onClick={onClose}
             disabled={isSubmitting}
           />
-          <Tooltip
-            content={
-              <div className='max-w-[250px] text-center'>
-                Treasury donations are not currently supported by lucid-evolution.
-                We're working on adding this feature.
-              </div>
-            }
-          >
-            <div>
-              <Button
-                label='Donate'
-                size='lg'
-                variant='primary'
-                leftIcon={<Wallet />}
-                onClick={handleDonationClick}
-                disabled={true}
-              />
-            </div>
-          </Tooltip>
+          <Button
+            label={isSubmitting ? "Submitting..." : "Donate"}
+            size='lg'
+            variant='primary'
+            leftIcon={<Wallet />}
+            onClick={handleDonationClick}
+            disabled={!isValidAmount || isSubmitting || !wallet}
+          />
         </div>
       </div>
     </Modal>

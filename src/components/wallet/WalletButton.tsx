@@ -31,7 +31,7 @@ const WalletButton = ({ variant = "short", autoOpen = false }: Props) => {
       setShowDropdown(false);
     }, 250);
   };
-  const { address, walletType, lucid, setWalletState } = useWalletStore();
+  const { address, walletType, wallet, setWalletState } = useWalletStore();
   const { disconnect } = useConnectWallet();
   const [balance, setBalance] = useState(0);
   const userQuery = useFetchUserInfo();
@@ -105,14 +105,16 @@ const WalletButton = ({ variant = "short", autoOpen = false }: Props) => {
 
   useEffect(() => {
     const getBalance = async () => {
-      if (!lucid || !address) return;
+      if (!wallet || !address) return;
 
       try {
-        const utxos = await lucid.wallet().getUtxos();
-        const totalLovelace = utxos.reduce(
-          (sum, utxo) => sum + utxo.assets.lovelace,
-          0n,
-        );
+        const utxos = await wallet.getUtxos();
+        const totalLovelace = utxos.reduce((sum, utxo) => {
+          const lovelaceAsset = utxo.output.amount.find(
+            a => a.unit === "lovelace",
+          );
+          return sum + BigInt(lovelaceAsset?.quantity || "0");
+        }, 0n);
         setBalance(Number(totalLovelace));
       } catch (error) {
         console.error("Error fetching balance:", error);
@@ -120,10 +122,10 @@ const WalletButton = ({ variant = "short", autoOpen = false }: Props) => {
       }
     };
 
-    if (address && lucid) {
+    if (address && wallet) {
       getBalance();
     }
-  }, [address, lucid]);
+  }, [address, wallet]);
 
   return (
     <>

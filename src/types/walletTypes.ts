@@ -1,13 +1,12 @@
-import type { WalletApi, LucidEvolution } from "@lucid-evolution/lucid";
+import type { BrowserWallet } from "@meshsdk/core";
 import type { ResponseCore } from "./commonTypes";
 
 export interface WalletState {
   address: string | undefined;
   stakeKey: string | undefined;
   walletType: WalletType | undefined;
-  walletApi: WalletApi | undefined;
   disabledExt?: boolean;
-  lucid: LucidEvolution | null;
+  wallet: BrowserWallet | null;
 }
 
 export type WalletInfo = {

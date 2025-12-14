@@ -23,7 +23,7 @@ const ExportButton: FC<ExportButtonProps> = ({
   items,
   currentPage,
 }) => {
-  const { address, walletApi } = useWalletStore();
+  const { address, wallet } = useWalletStore();
   const userQuery = useFetchUserInfo();
   const nftCount = userQuery.data?.data?.membership.nfts;
 
@@ -34,7 +34,7 @@ const ExportButton: FC<ExportButtonProps> = ({
   const showModals = () => {
     if (
       !address ||
-      !walletApi ||
+      !wallet ||
       typeof nftCount === "undefined" ||
       nftCount < 1
     ) {
@@ -52,7 +52,7 @@ const ExportButton: FC<ExportButtonProps> = ({
           onClose={() => setShowFeatureModal(false)}
           setShowConnectWallet={setShowConnectWallet}
           address={address}
-          walletApi={walletApi}
+          walletApi={wallet as any}
         />
       )}
       {showConnectWallet && (

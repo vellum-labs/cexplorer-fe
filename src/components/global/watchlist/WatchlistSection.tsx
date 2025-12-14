@@ -34,7 +34,7 @@ export const WatchlistSection = ({
   hasDex?: boolean;
   assetName?: string;
 }) => {
-  const { lucid, address, walletType } = useWalletStore();
+  const { wallet, address, walletType } = useWalletStore();
   const [showWalletModal, setShowWalletModal] = useState<boolean>(false);
 
   const drepName = drepDetailQuery?.data?.data?.given_name;
@@ -49,7 +49,7 @@ export const WatchlistSection = ({
 
     handleDelegation(
       { type: isPool ? "pool" : "drep", ident: ident ?? "" },
-      lucid,
+      wallet,
     );
   };
 

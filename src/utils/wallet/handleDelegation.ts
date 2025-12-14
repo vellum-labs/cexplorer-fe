@@ -1,5 +1,5 @@
-import type { LucidEvolution } from "@lucid-evolution/lucid";
-import { drepIDToCredential } from "@lucid-evolution/utils";
+import type { BrowserWallet } from "@meshsdk/core";
+import { BlockfrostProvider, MeshTxBuilder } from "@meshsdk/core";
 import { callDelegationToast } from "../error/callDelegationToast";
 import { sendDelegationInfo } from "@/services/tool";
 
@@ -11,9 +11,9 @@ interface DelegationParams {
 
 export const handleDelegation = async (
   params: DelegationParams,
-  lucid: LucidEvolution | null,
+  wallet: BrowserWallet | null,
 ) => {
-  if (!lucid) {
+  if (!wallet) {
     callDelegationToast({
       errorMessage: "Wallet not connected. Please connect your wallet first.",
     });
@@ -28,14 +28,15 @@ export const handleDelegation = async (
     return;
   }
 
-  const rewardAddress = await lucid.wallet().rewardAddress();
+  const rewardAddresses = await wallet.getRewardAddresses();
+  const rewardAddress = rewardAddresses?.[0];
   if (!rewardAddress) {
     callDelegationToast({ errorMessage: "No reward address from wallet." });
     return;
   }
 
-  const utxos = await lucid.wallet().getUtxos();
-  if (!utxos.length) {
+  const utxos = await wallet.getUtxos();
+  if (!utxos || !utxos.length) {
     callDelegationToast({
       errorMessage:
         "Wallet has no UTxOs. Fund the wallet (deposit + fees required).",
@@ -44,33 +45,67 @@ export const handleDelegation = async (
   }
 
   try {
-    const delegation = await lucid.wallet().getDelegation();
+    const apiKey = import.meta.env.VITE_APP_BLOCKFROST_KEY;
 
-    const stakeKeyRegistered = !delegation || delegation?.poolId === null;
+    const provider = new BlockfrostProvider(apiKey);
+    const changeAddress = await wallet.getChangeAddress();
 
-    const tx = lucid.newTx();
+    const txBuilder = new MeshTxBuilder({
+      fetcher: provider,
+      evaluator: provider,
+    });
 
-    if (stakeKeyRegistered) {
-      tx.register.Stake(rewardAddress);
+    // Check if stake key is registered by querying account info
+    let stakeKeyRegistered = false;
+    try {
+      const accountInfo = await provider.fetchAccountInfo(rewardAddress);
+      stakeKeyRegistered = accountInfo !== null && accountInfo !== undefined;
+    } catch {
+      // If we can't fetch account info, assume not registered
+      stakeKeyRegistered = false;
+    }
+
+    // Register stake key if not registered
+    if (!stakeKeyRegistered) {
+      txBuilder.registerStakeCertificate(rewardAddress);
     }
 
     if (params.type === "pool") {
-      tx.delegate.ToPool(rewardAddress, delegationId);
+      // Pass pool ID directly - MeshJS will handle deserialization internally
+      txBuilder.delegateStakeCertificate(rewardAddress, delegationId);
     } else {
-      const drep =
-        delegationId === "drep_always_abstain"
-          ? { __typename: "AlwaysAbstain" as const }
-          : delegationId === "drep_always_no_confidence"
-            ? { __typename: "AlwaysNoConfidence" as const }
-            : drepIDToCredential(delegationId);
-
-      tx.delegate.VoteToDRep(rewardAddress, drep);
+      // DRep delegation
+      if (delegationId === "drep_always_abstain") {
+        txBuilder.voteDelegationCertificate(
+          {
+            alwaysAbstain: null,
+          },
+          rewardAddress,
+        );
+      } else if (delegationId === "drep_always_no_confidence") {
+        txBuilder.voteDelegationCertificate(
+          {
+            alwaysNoConfidence: null,
+          },
+          rewardAddress,
+        );
+      } else {
+        txBuilder.voteDelegationCertificate(
+          {
+            dRepId: delegationId,
+          },
+          rewardAddress,
+        );
+      }
     }
 
-    const complete = await tx.complete();
-    const signed = await complete.sign.withWallet();
-    const signedTx = await signed.complete();
-    const hash = await signedTx.submit();
+    const unsignedTx = await txBuilder
+      .selectUtxosFrom(utxos)
+      .changeAddress(changeAddress)
+      .complete();
+
+    const signedTx = await wallet.signTx(unsignedTx);
+    const hash = await wallet.submitTx(signedTx);
 
     const trackingId =
       params.type === "pool"
@@ -82,7 +117,6 @@ export const handleDelegation = async (
     sendDelegationInfo(hash, trackingId);
 
     callDelegationToast({ success: true });
-    await lucid.awaitTx(hash);
     return hash;
   } catch (e: any) {
     console.error(

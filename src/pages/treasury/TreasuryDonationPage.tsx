@@ -20,10 +20,10 @@ export const TreasuryDonationPage = () => {
   const [showWalletModal, setShowWalletModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [txHash, setTxHash] = useState<string>("");
-  const { walletApi, lucid } = useWalletStore();
+  const { wallet } = useWalletStore();
 
   const handleDonateClick = () => {
-    if (!walletApi) {
+    if (!wallet) {
       setShowWalletModal(true);
       return;
     }
@@ -68,7 +68,7 @@ export const TreasuryDonationPage = () => {
         <TreasuryDonationModal
           onClose={() => setShowDonationModal(false)}
           onSuccess={handleSuccess}
-          lucid={lucid}
+          wallet={wallet}
         />
       )}
       {showSuccessModal && (

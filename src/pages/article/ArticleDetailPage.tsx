@@ -35,7 +35,7 @@ export const ArticleDetailPage = () => {
   const route = getRouteApi("/article/$url");
   const { url } = route.useParams();
 
-  const { lucid } = useWalletStore();
+  const { wallet } = useWalletStore();
 
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
@@ -278,7 +278,7 @@ export const ArticleDetailPage = () => {
                               ident: data?.user_owner?.pool?.id,
                               type: "pool",
                             },
-                            lucid,
+                            wallet,
                           );
                         }
                       }}
@@ -296,7 +296,7 @@ export const ArticleDetailPage = () => {
                               ident: data?.user_owner?.drep?.id,
                               type: "drep",
                             },
-                            lucid,
+                            wallet,
                           );
                         }
                       }}
