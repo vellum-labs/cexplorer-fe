@@ -1360,12 +1360,12 @@
     "@harmoniclabs/crypto" "^0.2.4"
     "@harmoniclabs/uint8array-utils" "^1.0.0"
 
-"@harmoniclabs/uint8array-utils@^1.0.0", "@harmoniclabs/uint8array-utils@^1.0.3":
+"@harmoniclabs/uint8array-utils@^1.0.0", "@harmoniclabs/uint8array-utils@^1.0.3", "@harmoniclabs/uint8array-utils@^1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@harmoniclabs/uint8array-utils/-/uint8array-utils-1.0.4.tgz#e5a3a053514e425ff8688715ddbbe44653276e3c"
   integrity sha512-Z454prSbX4geXGHyjjcn9vm6u9NsD3VJykv8f8yE1VjIXSPitaLPEnm8u2+B+GMp1chYlLilOq+kW4OvJ6y28A==
 
-"@harmoniclabs/uplc@^1.2.4":
+"@harmoniclabs/uplc@^1.2.4", "@harmoniclabs/uplc@^1.4.1":
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/@harmoniclabs/uplc/-/uplc-1.4.1.tgz#c0c9cd1f4d9b51706f45e1239dc042f86830d78e"
   integrity sha512-sELKStjxPBPBxBMylU4oBSUe0/8eJe2HqRblNSwrMu8Fso4YpSPDqHZ33iDZ8QAadVUsT5r2EQKX0TLrj7qXvQ==
@@ -3233,10 +3233,10 @@
   resolved "https://registry.yarnpkg.com/@ungap/structured-clone/-/structured-clone-1.3.0.tgz#d06bbb384ebcf6c505fde1c3d0ed4ddffe0aaff8"
   integrity sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==
 
-"@vellumlabs/cexplorer-sdk@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@vellumlabs/cexplorer-sdk/-/cexplorer-sdk-1.2.0.tgz#77c4f550aad4db8dc5cf21c729e48e953e634674"
-  integrity sha512-yqyMkN0TBhYzQo92E8uAxRV8bSVpS8ztRNd4EDRo/i9W9WWmPPUKRH/CPMj5O36/hTjEsYYZabcsAgqhqOMPxA==
+"@vellumlabs/cexplorer-sdk@^1.1.10":
+  version "1.1.10"
+  resolved "https://registry.yarnpkg.com/@vellumlabs/cexplorer-sdk/-/cexplorer-sdk-1.1.10.tgz#8d834cb148a6d0e3d3e0d8d018ba51390c3aab6b"
+  integrity sha512-AADWRfrrMUCLOfYgUfYFYuVpFRzc43OHS5Vv+/fTUJ0hFh1QkOU+39GZtrM0lPAbyijkFjZ/1FP2yELyWfq3og==
   dependencies:
     class-variance-authority "^0.7.1"
 
