@@ -5,7 +5,7 @@ import type {
 } from "@/types/addressTypes";
 
 import { handleFetch } from "@/lib/handleFetch";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQueries, useQuery } from "@tanstack/react-query";
 
 interface AddressDetailParams {
   view?: string;
@@ -25,6 +25,14 @@ export const useFetchAddressDetail = (address: string) =>
 
       return data;
     },
+  });
+
+export const useFetchMultipleAddressDetails = (addresses: string[]) =>
+  useQueries({
+    queries: addresses.map(address => ({
+      queryKey: ["address-detail", { address }],
+      queryFn: () => fetchAddressDetail({ view: address }),
+    })),
   });
 
 export const fetchAddressList = async ({

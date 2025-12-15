@@ -4,9 +4,11 @@ import type {
   PoolAwardsResponse,
   PoolBirthdaysResponse,
   PoolBlocksResponse,
+  PoolDebugResponse,
   PoolDelegatorsResponse,
   PoolDelegatorStatsResponse,
   PoolDetailResponse,
+  PoolRetirmentResponse,
   PoolRewardsResponse,
   PoolsListResponse,
   PoolUpdateResponse,
@@ -14,7 +16,6 @@ import type {
   StakeDrepsNotSpoResponse,
   TopMarginsWithDelegatorsResponse,
   TopMultiDelegatorsResponse,
-  PoolRetirmentResponse,
 } from "@/types/poolTypes";
 
 import { handleFetch } from "@/lib/handleFetch";
@@ -596,5 +597,25 @@ export const useFetchPoolRetirment = (hash: string) => {
   return useQuery({
     queryKey: ["pool_retirment", hash],
     queryFn: () => fetchPoolRetirment(hash),
+  });
+};
+
+const fetchPoolDebug = (pool_id: string) => {
+  const url = `/pool/debug`;
+
+  const options = {
+    params: {
+      pool_id,
+    },
+  };
+
+  return handleFetch<PoolDebugResponse>(url, undefined, options);
+};
+
+export const useFetchPoolDebug = (pool_id: string) => {
+  return useQuery({
+    queryKey: ["pool_debug", pool_id],
+    queryFn: () => fetchPoolDebug(pool_id),
+    enabled: !!pool_id && pool_id.startsWith("pool1"),
   });
 };

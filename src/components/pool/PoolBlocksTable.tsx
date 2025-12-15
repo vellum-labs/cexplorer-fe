@@ -52,11 +52,7 @@ const PoolBlocksTable = ({ poolId }: Props) => {
   const columns = [
     {
       key: "date",
-      render: item => (
-        <p title={item.time} className=''>
-          <DateCell time={item.time} />
-        </p>
-      ),
+      render: item => <DateCell time={item.time} />,
       jsonFormat: item => {
         if (!item.time) {
           return "-";

@@ -110,11 +110,7 @@ export const useTxList = ({
   const columns = [
     {
       key: "date",
-      render: item => (
-        <div title={item?.block?.time}>
-          <DateCell time={item?.block?.time} />
-        </div>
-      ),
+      render: item => <DateCell time={item?.block?.time} />,
       jsonFormat: item => {
         if (!item?.block?.time) {
           return "-";
