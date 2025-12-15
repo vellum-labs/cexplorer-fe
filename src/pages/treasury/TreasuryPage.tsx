@@ -1,7 +1,7 @@
 import { PageBase } from "@/components/global/pages/PageBase";
 import { TREASURY_WALLETS } from "@/constants/treasury";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
-import { useFetchAddressDetail } from "@/services/address";
+import { useFetchMultipleAddressDetails } from "@/services/address";
 import {
   Copy,
   formatNumberWithSuffix,
@@ -9,6 +9,7 @@ import {
   GlobalTable,
 } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
+import { useMemo } from "react";
 
 interface WalletRowData {
   name: string;
@@ -21,19 +22,18 @@ export const TreasuryPage = () => {
   const currencyMarket = useGetMarketCurrency();
   const adaUsdRate = currencyMarket?.adaUsdClose ?? 0;
 
-  const wallet1Query = useFetchAddressDetail(TREASURY_WALLETS[0].address);
-  const wallet2Query = useFetchAddressDetail(TREASURY_WALLETS[1].address);
+  const addresses = useMemo(
+    () => TREASURY_WALLETS.map(wallet => wallet.address),
+    [],
+  );
+  const walletQueries = useFetchMultipleAddressDetails(addresses);
 
-  const isLoading = wallet1Query.isLoading || wallet2Query.isLoading;
-
-  const getAdaBalance = (data: typeof wallet1Query.data) => {
-    const addressData = data?.data?.[0];
-    return addressData?.balance ?? 0;
-  };
+  const isLoading = walletQueries.some(query => query.isLoading);
 
   const walletData: WalletRowData[] = TREASURY_WALLETS.map((wallet, index) => {
-    const query = index === 0 ? wallet1Query : wallet2Query;
-    const balanceLovelace = getAdaBalance(query.data);
+    const query = walletQueries[index];
+    const addressData = query.data?.data?.data?.[0];
+    const balanceLovelace = addressData?.balance ?? 0;
     const adaBalance = balanceLovelace / 1e6;
     const usdBalance = adaBalance * adaUsdRate;
 
@@ -115,7 +115,7 @@ export const TreasuryPage = () => {
           itemsPerPage={walletData.length}
           items={walletData}
           columns={columns}
-          query={wallet1Query}
+          query={walletQueries[0]}
         />
       </div>
     </PageBase>
