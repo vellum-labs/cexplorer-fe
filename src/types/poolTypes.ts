@@ -541,3 +541,15 @@ export interface PoolRetirment {
 export type DrepNotSpoSameTimeResponse = ResponseCore<DrepNotSpoSameTime[]>;
 
 export type PoolRetirmentResponse = ResponseCore<PoolRetirment>;
+
+export interface PoolDebugError {
+  type: string;
+  description: string;
+  date: string;
+}
+
+export interface PoolDebugData {
+  error: PoolDebugError[];
+}
+
+export type PoolDebugResponse = ResponseCore<PoolDebugData>;
