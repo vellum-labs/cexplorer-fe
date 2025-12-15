@@ -213,12 +213,16 @@ export const useFetchAssetMetadata = (assetname: string | undefined) =>
 export const fetchAssetMint = async (
   assetname: string | undefined,
   id?: string,
+  limit?: number,
+  offset?: number,
 ) => {
   const url = `/policy/mint`;
   const options = {
     params: {
       assetname,
       id,
+      limit,
+      offset,
     },
   };
 
@@ -226,12 +230,21 @@ export const fetchAssetMint = async (
 };
 
 export const useFetchAssetMint = (
+  limit: number,
+  offset: number,
   assetname: string | undefined,
   policyId?: string,
 ) =>
-  useQuery({
-    queryKey: ["asset-mint", assetname, policyId],
-    queryFn: () => fetchAssetMint(assetname, policyId),
+  useInfiniteQuery({
+    queryKey: ["asset-mint", limit, offset, assetname, policyId],
+    queryFn: ({ pageParam = 0 }) =>
+      fetchAssetMint(assetname, policyId, limit, pageParam),
+    initialPageParam: offset,
+    getNextPageParam: (lastPage, allPages) => {
+      const totalItems = lastPage?.data?.count ?? 0;
+      const loadedItems = allPages.flatMap(page => page?.data?.data ?? []).length;
+      return loadedItems < totalItems ? loadedItems : undefined;
+    },
     enabled: !!assetname || !!policyId,
   });
 
