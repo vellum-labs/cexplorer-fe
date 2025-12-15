@@ -89,19 +89,11 @@ export const handleFetch = async <T>(
 
       const data: T & { code?: string; msg?: string } = await response.json();
 
-      console.log("handleFetch response:", {
-        status: response.status,
-        dataCode: data.code,
-        dataMsg: data.msg,
-        url: response.url,
-      });
-
       const isInvalidToken =
         (data.code === "403" && data.msg === "Invalid user-token") ||
         (response.status === 403 && data.msg === "Invalid user-token");
 
       if (isInvalidToken) {
-        console.log("Invalid token detected, clearing auth token");
         handleInvalidToken();
       }
 
