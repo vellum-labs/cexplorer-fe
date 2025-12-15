@@ -15,6 +15,7 @@ import { useMiscConst } from "@/hooks/useMiscConst";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { GovernanceActionsTab } from "@/components/governance/tabs/GovernanceActionsTab";
 import { ConstitutionTab } from "@/components/governance/tabs/ConstitutionTab";
+import { GovernanceTimelineTab } from "@/components/governance/tabs/GovernanceTimelineTab";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 
 export const GovernancePage: FC = () => {
@@ -142,6 +143,12 @@ export const GovernancePage: FC = () => {
           outcomesOnly
         />
       ),
+      visible: true,
+    },
+    {
+      key: "timeline",
+      label: "Timeline",
+      content: <GovernanceTimelineTab miscConst={miscConst} />,
       visible: true,
     },
     {
