@@ -5,6 +5,7 @@ import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { RangeSlider } from "@vellumlabs/cexplorer-sdk";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { Wallet } from "lucide-react";
 import { handleDonation } from "@/utils/treasury/handleDonation";
 
@@ -135,14 +136,26 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
             onClick={onClose}
             disabled={isSubmitting}
           />
-          <Button
-            label={isSubmitting ? "Submitting..." : "Donate"}
-            size='lg'
-            variant='primary'
-            leftIcon={<Wallet />}
-            onClick={handleDonationClick}
-            disabled={!isValidAmount || isSubmitting || !wallet}
-          />
+          <div className='h-fit'>
+            <Tooltip
+              content={
+                <div className='max-w-[150px]'>
+                  Note: MeshJS does not support treasury donations yet. You can
+                  donate only to Cexplorer for now.
+                </div>
+              }
+              forceDirection='top'
+            >
+              <Button
+                label={isSubmitting ? "Submitting..." : "Donate"}
+                size='lg'
+                variant='primary'
+                leftIcon={<Wallet />}
+                onClick={handleDonationClick}
+                disabled={!isValidAmount || isSubmitting || !wallet}
+              />
+            </Tooltip>
+          </div>
         </div>
       </div>
     </Modal>
