@@ -6,6 +6,7 @@ import { AssetTokenOwnersTab } from "@/components/asset/tabs/AssetTokenOwnersTab
 import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
+import { Image } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useState, type FC } from "react";
 import metadata from "../../../conf/metadata/en-metadata.json";
 import { TxListPage } from "../tx/TxListPage";
@@ -25,6 +26,8 @@ import { DeFiOrderList } from "@/components/defi/DeFiOrderList";
 import { AssetExchangesTab } from "@/components/asset/tabs/AssetExchangesTab";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { configJSON } from "@/constants/conf";
+import { generateImageUrl } from "@/utils/generateImageUrl";
+import { alphabetWithNumbers } from "@/constants/alphabet";
 
 export const AssetDetailPage: FC = () => {
   const [title, setTitle] = useState<string>("");
@@ -163,9 +166,8 @@ export const AssetDetailPage: FC = () => {
     return /^[\x20-\x7E]+$/.test(name);
   };
 
-  const formattedHex = decodedHex && isSafeToDisplay(decodedHex)
-    ? decodedHex
-    : undefined;
+  const formattedHex =
+    decodedHex && isSafeToDisplay(decodedHex) ? decodedHex : undefined;
 
   const nameByRegistry =
     assetDetailQuery?.data?.data?.registry?.name &&
@@ -173,16 +175,57 @@ export const AssetDetailPage: FC = () => {
       ? `[${assetDetailQuery?.data?.data?.registry?.ticker}] ${assetDetailQuery?.data?.data?.registry?.name}`
       : undefined;
 
+  const encodedNameArr = assetDetailQuery.data?.data?.name
+    ? encodeAssetName(assetDetailQuery.data.data.name) || ""
+    : "";
+
   return (
     <PageBase
       title={
-        <div className='flex items-center gap-1/2'>
-          {nameByRegistry
-            ? nameByRegistry
-            : formattedHex && formattedHex.trim().length > 0
-              ? formattedHex
-              : formatString(fingerprint, "longer")}
-        </div>
+        <span className='mt-1/2 flex w-full items-center gap-1'>
+          <div className='group relative flex items-center'>
+            <Image
+              src={generateImageUrl(
+                assetSupply && assetSupply === 1
+                  ? fingerprint
+                  : (assetDetailQuery.data?.data?.policy || "") +
+                      assetDetailQuery.data?.data?.name,
+                "md",
+                assetSupply && assetSupply === 1 ? "nft" : "token",
+              )}
+              type='asset'
+              className='aspect-square flex-shrink-0 rounded-max'
+              fallbackletters={[...encodedNameArr]
+                .filter(char =>
+                  alphabetWithNumbers.includes(char.toLowerCase()),
+                )
+                .join("")}
+              height={35}
+              width={35}
+            />
+            <div className='pointer-events-none absolute left-0 top-full z-50 mt-2 hidden opacity-0 transition-opacity duration-200 group-hover:block group-hover:opacity-100'>
+              <img
+                src={generateImageUrl(
+                  assetSupply && assetSupply === 1
+                    ? fingerprint
+                    : (assetDetailQuery.data?.data?.policy || "") +
+                        assetDetailQuery.data?.data?.name,
+                  "lg",
+                  assetSupply && assetSupply === 1 ? "nft" : "token",
+                )}
+                alt='Asset preview'
+                className='h-auto w-[300px] max-w-[300px] rounded-m shadow-2xl ring-1 ring-border'
+              />
+            </div>
+          </div>
+          <span className='flex-1 break-all'>
+            {nameByRegistry
+              ? nameByRegistry
+              : formattedHex && formattedHex.trim().length > 0
+                ? formattedHex
+                : formatString(fingerprint, "longer")}
+          </span>
+        </span>
       }
       breadcrumbItems={[
         {
