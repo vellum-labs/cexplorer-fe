@@ -25,16 +25,7 @@ import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { ArrowRight } from "lucide-react";
 
-import Crab from "@/resources/images/icons/crab.svg";
-import Dino from "@/resources/images/icons/dino.svg";
-import Dolphin from "@/resources/images/icons/dolphin.svg";
-import Fish from "@/resources/images/icons/fish.svg";
-import Humpback from "@/resources/images/icons/humpback.svg";
-import Plankton from "@/resources/images/icons/plankton.svg";
-import Shark from "@/resources/images/icons/shark.svg";
-import Shrimp from "@/resources/images/icons/shrimp.svg";
-import Tuna from "@/resources/images/icons/tuna.svg";
-import Whale from "@/resources/images/icons/whale.svg";
+import { getIconByAmount } from "@/utils/address/getIconByAmount";
 
 interface Props {
   delegatorsQuery: UseInfiniteQueryResult<
@@ -58,33 +49,6 @@ const PoolDelegatorsTable = ({
   const { columnsVisibility, setColumsOrder, columnsOrder, rows } =
     usePoolDelegatorsTableStore();
   const items = delegatorsQuery.data?.pages.flatMap(page => page.data.data);
-
-  const getIconByAmount = (amount: number) => {
-    switch (true) {
-      case amount < 10:
-        return Plankton;
-      case amount <= 10 && amount < 1000:
-        return Shrimp;
-      case amount <= 1000 && amount < 5000:
-        return Crab;
-      case amount <= 5000 && amount < 25000:
-        return Fish;
-      case amount <= 25000 && amount < 100000:
-        return Dolphin;
-      case amount <= 100000 && amount < 250000:
-        return Shark;
-      case amount <= 250000 && amount < 1e6:
-        return Whale;
-      case amount <= 1e6 && amount < 5e6:
-        return Tuna;
-      case amount <= 5e6 && amount < 20e6:
-        return Humpback;
-      case amount >= 20e6:
-        return Dino;
-      default:
-        return undefined;
-    }
-  };
 
   const columns = [
     {
