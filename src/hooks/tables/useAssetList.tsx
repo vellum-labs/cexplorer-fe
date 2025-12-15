@@ -13,7 +13,7 @@ import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { PolicyCell } from "@/components/policy/PolicyCell";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 
-import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "./useSearchTable";
 import { useSearch } from "@tanstack/react-router";
@@ -77,9 +77,11 @@ export const useAssetList = ({
       ? "token"
       : type === "recent-nfts"
         ? "nft"
-        : tab === "all"
+        : policyId
           ? undefined
-          : tab,
+          : tab === "all"
+            ? undefined
+            : tab,
     overrideTableSearch
       ? overrideTableSearch
       : debouncedTableSearch.length > 0
@@ -192,22 +194,20 @@ export const useAssetList = ({
     columns.splice(3, 0, {
       key: "mint_quantity",
       render: item => {
-        if (!item?.registry?.decimals) {
-          return (
-            <p className='text-right'>
-              {formatNumber(item?.stat?.asset?.quantity.toFixed(2)) ?? "-"}
-            </p>
-          );
+        const quantity = item?.stat?.asset?.quantity;
+        if (quantity === undefined || quantity === null) {
+          return <p className='text-right'>-</p>;
         }
+
+        const decimals = item?.registry?.decimals;
+        const adjustedQuantity =
+          decimals !== undefined && decimals !== null && decimals > 0
+            ? quantity / 10 ** decimals
+            : quantity;
 
         return (
           <p className='text-right'>
-            {formatNumber(
-              (
-                item?.stat.asset.quantity /
-                10 ** item?.registry?.decimals
-              ).toFixed(2),
-            )}
+            {formatNumberWithSuffix(adjustedQuantity)}
           </p>
         );
       },

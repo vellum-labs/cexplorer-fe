@@ -1,3 +1,5 @@
+import type { FC } from "react";
+
 import { colors } from "@/constants/colors";
 import { enabledWalletConnector } from "@/constants/confVariables";
 import { navigationOptions } from "@/constants/navigationOptions";
@@ -20,7 +22,11 @@ import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 
 import { configJSON } from "@/constants/conf";
 
-const Navbar = () => {
+interface NavbarProps {
+  randomTopAd?: boolean;
+}
+
+const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
   const { theme } = useThemeStore();
   const price = useAdaPriceWithHistory();
 
@@ -85,6 +91,7 @@ const Navbar = () => {
                 id='analytics'
                 label='Analytics'
                 options={nestedNavigationOptions.analyticsOptions}
+                randomTopAd={randomTopAd}
                 card={
                   <InfoCard
                     icon={<Cardano size={24} color={colors.primary} />}
@@ -114,6 +121,7 @@ const Navbar = () => {
                 id='more'
                 label='More'
                 options={nestedNavigationOptions.moreOptions}
+                randomTopAd={randomTopAd}
                 card={
                   <InfoCard
                     icon={<ChevronsUp color={colors.purpleText} />}

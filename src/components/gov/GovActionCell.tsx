@@ -11,9 +11,11 @@ interface GovActionCellProps {
 export const GovActionCell: FC<GovActionCellProps> = ({ id, name }) => {
   if (!id) return <span>-</span>;
 
+  const encodedId = encodeURIComponent(id);
+
   const to = {
     to: "/gov/action/$id",
-    params: { id },
+    params: { id: encodedId },
   };
 
   return (
@@ -27,9 +29,7 @@ export const GovActionCell: FC<GovActionCellProps> = ({ id, name }) => {
         <Link
           {...to}
           className={`${
-            name
-              ? "pointer-events-none text-text-xs text-inherit"
-              : "text-text-sm text-primary"
+            name ? "text-text-xs text-inherit" : "text-text-sm text-primary"
           }`}
         >
           {formatString(id, "long")}

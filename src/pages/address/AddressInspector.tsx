@@ -270,7 +270,10 @@ export const AddressInspector: FC = () => {
       <PageBase
         metadataTitle='addressInspector'
         title='Address inspector'
-        breadcrumbItems={[{ label: "Address inspector" }]}
+        breadcrumbItems={[
+          { label: "Developers", link: "/dev" },
+          { label: "Address inspector" },
+        ]}
       >
         <section className='flex w-full justify-center'>
           <div className='flex w-full max-w-desktop flex-col items-end gap-2 p-mobile md:p-desktop'>

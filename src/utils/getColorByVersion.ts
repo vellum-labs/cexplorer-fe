@@ -10,13 +10,13 @@ const colors = [
   "#b80058",
 ];
 
-const versionColorMap = new Map();
+const versions = new Set();
 
 export function getColorForVersion(version) {
-  if (!versionColorMap.has(version)) {
-    const versionCount = versionColorMap.size;
-    versionColorMap.set(version, colors[versionCount % colors.length]);
-  }
+  versions.add(version);
 
-  return versionColorMap.get(version);
+  const sorted = [...versions].sort((a, b) => (b as number) - (a as number));
+  const index = sorted.indexOf(version);
+
+  return colors[index % colors.length];
 }

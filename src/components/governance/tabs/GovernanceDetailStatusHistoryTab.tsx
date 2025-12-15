@@ -1,11 +1,11 @@
 import type { FC } from "react";
 import { useMemo } from "react";
-import { formatDistanceToNow } from "date-fns";
 import { Link } from "@tanstack/react-router";
 import {
   GlobalTable,
   GovernanceStatusBadge,
   EpochCell,
+  DateCell,
 } from "@vellumlabs/cexplorer-sdk";
 import { ExternalLink } from "lucide-react";
 
@@ -92,13 +92,7 @@ export const GovernanceDetailStatusHistoryTab: FC<
     {
       key: "timestamp",
       render: (item: StatusHistoryRow) => {
-        return (
-          <span className='text-grayTextPrimary'>
-            {formatDistanceToNow(new Date(item.timestamp), {
-              addSuffix: true,
-            })}
-          </span>
-        );
+        return <DateCell time={item.timestamp} />;
       },
       title: "Timestamp",
       visible: true,

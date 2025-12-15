@@ -17,6 +17,7 @@ export interface HeaderBannerProps {
   isHomepage?: boolean;
   homepageAd?: ReactNode;
   customPage?: boolean;
+  withoutSearch?: boolean;
 }
 
 export const HeaderBanner = ({
@@ -30,6 +31,7 @@ export const HeaderBanner = ({
   isHomepage,
   homepageAd,
   customPage,
+  withoutSearch,
 }: HeaderBannerProps) => {
   const { locale } = useLocaleStore();
   const miscBasic = useFetchMiscBasic(true);
@@ -49,6 +51,7 @@ export const HeaderBanner = ({
       homepageAd={homepageAd}
       customPage={customPage}
       icon={icon}
+      withoutSearch={withoutSearch}
     />
   );
 };

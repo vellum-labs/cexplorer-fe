@@ -84,6 +84,18 @@ const OverviewTabItem: FC<OverviewTabItemProps> = ({ query }) => {
 
   const stakeAddrToHueRotation = new Map<string, number>();
 
+  const maxInputAssets = Math.max(
+    ...(uniqueInputs?.map(input => Math.min(5, input.asset?.length || 1)) || [
+      1,
+    ]),
+  );
+  const maxOutputAssets = Math.max(
+    ...(uniqueOutputs?.map(output =>
+      Math.min(5, output.asset?.length || 1),
+    ) || [1]),
+  );
+  const maxNodeWidth = 300 + Math.max(maxInputAssets, maxOutputAssets) * 80;
+
   const inputNodes: Node[] =
     uniqueInputs?.map((input, index) => {
       const stakeAddr = getStakeAddr(input.payment_addr_bech32);
@@ -110,11 +122,11 @@ const OverviewTabItem: FC<OverviewTabItemProps> = ({ query }) => {
       const node = {
         id: nodeId,
         position: {
-          x: -100 - Math.min(5, input.asset?.length || 1) * 80,
+          x: -80 - maxNodeWidth,
           y: currentYPosition + cumulativeYOffset,
         },
         data: { label: <NodeContent data={input} type='input' /> },
-        width: 300 + Math.min(5, input.asset?.length || 1) * 80,
+        width: maxNodeWidth,
         targetPosition: "right" as Position,
         sourcePosition: "right" as Position,
         style: {
@@ -164,7 +176,7 @@ const OverviewTabItem: FC<OverviewTabItemProps> = ({ query }) => {
           y: currentYPosition + cumulativeYOffset,
         },
         data: { label: <NodeContent data={output} type='output' /> },
-        width: 300 + Math.min(5, output.asset?.length || 1) * 80,
+        width: maxNodeWidth,
         targetPosition: "left" as Position,
         sourcePosition: "left" as Position,
         style: {
@@ -312,13 +324,12 @@ const NodeContent = ({
     </div>
     <AddressWithTxBadges utxo={data} isOutput={type === "output"} />
     {data.asset && (
-      <div className='mt-1 grid w-full max-w-[690px] grid-cols-[repeat(auto-fit,_minmax(130px,_1fr))] gap-1'>
+      <div className='mt-1 flex w-full max-w-[690px] flex-wrap gap-1'>
         <>
           {!Array.isArray(data.asset) && (
             <TxAssetLink
               type={type}
               asset={data.asset}
-              className='min-w-[130px] max-w-[130px]'
             />
           )}
           {Array.isArray(data.asset) &&
@@ -327,7 +338,6 @@ const NodeContent = ({
                 type={type}
                 asset={asset}
                 key={asset.name + i}
-                className='min-w-[130px] max-w-[130px]'
               />
             ))}
         </>

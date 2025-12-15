@@ -34,25 +34,20 @@ export const renderArticleAuthor = (author: User | undefined) => {
     );
   } else {
     authorName = (
-      <Tooltip
-        hide={Object.values(author?.profile.social).every(social =>
-          isEmptySocial(social),
-        )}
-        content={<UserSocials author={author} className='w-[120px]' />}
+      <Link
+        to='/address/$address'
+        params={{ address: author?.address }}
+        className='text-primary'
       >
-        <Link
-          to='/address/$address'
-          params={{ address: author?.address }}
-          className='text-primary'
-        >
-          {author?.profile.name}
-        </Link>
-      </Tooltip>
+        {author?.profile.name}
+      </Link>
     );
   }
   return getNodeText(authorName) ? (
     <span className='flex items-center gap-1/2 text-text-sm text-text'>
-      By: {authorName}
+      {getNodeText(authorName).length > 30
+        ? formatString(getNodeText(authorName), "long")
+        : authorName}
     </span>
   ) : undefined;
 };

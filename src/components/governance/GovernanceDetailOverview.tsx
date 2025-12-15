@@ -648,10 +648,12 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                           >
                             <div className='mt-1 flex w-full items-center justify-between border-t border-border pt-1'>
                               <div className='flex items-center gap-[2px]'>
-                                <CircleHelp
-                                  size={11}
-                                  className='text-grayTextPrimary'
-                                />
+                                <Tooltip forceDirection='right' content={<span className='inline-block max-w-[200px]'>Minimum percentage of Constitutional Committee members required to approve this governance action</span>}>
+                                  <CircleHelp
+                                    size={11}
+                                    className='cursor-help text-grayTextPrimary'
+                                  />
+                                </Tooltip>
                                 <span className='text-text-xs font-medium text-grayTextPrimary'>
                                   Threshold:
                                 </span>

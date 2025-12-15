@@ -1,6 +1,5 @@
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { handleFetch } from "@/lib/handleFetch";
-import { useConstStore } from "@/stores/constStore";
 
 import { useRateStore } from "@/stores/rateStore";
 import { useVersionStore } from "@/stores/versionsStore";
@@ -100,22 +99,11 @@ const fetchMiscConst = async () => {
 };
 
 export const useFetchMiscConst = (basicVersion: number | undefined) => {
-  const { setConst } = useConstStore();
-  const { setConstVersion, constVersion } = useVersionStore();
-
   const query = useQuery({
-    queryKey: ["misc-const", basicVersion, constVersion],
+    queryKey: ["misc-const", basicVersion],
     queryFn: () => fetchMiscConst(),
-    enabled:
-      constVersion !== undefined &&
-      basicVersion !== undefined &&
-      constVersion !== basicVersion,
+    staleTime: 5_000,
   });
-
-  if (basicVersion && query.isSuccess && query.data) {
-    setConstVersion(basicVersion);
-    setConst(query.data.data);
-  }
 
   return query;
 };

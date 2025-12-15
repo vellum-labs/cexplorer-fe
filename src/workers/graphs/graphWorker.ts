@@ -86,8 +86,12 @@ self.addEventListener("message", event => {
       const delegators = detailDataEpochs?.map(epoch => epoch.data.delegators);
       const luck = detailDataEpochs?.map((epoch, index) =>
         index > 0
-          ? (epoch.data.block.luck * 100).toFixed(2)
-          : epoch.data.block.luck.toFixed(2),
+          ? epoch.data.block.luck
+            ? Number(epoch.data.block.luck * 100).toFixed(2)
+            : "0.00"
+          : epoch.data.block.luck
+            ? Number(epoch.data.block.luck).toFixed(2)
+            : "0.00",
       );
       const blocks = detailDataEpochs.map(epoch => epoch.data.block.minted);
       const activeStake = detailDataEpochs?.map(

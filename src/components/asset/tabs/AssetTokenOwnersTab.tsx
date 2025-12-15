@@ -6,7 +6,7 @@ import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchAssetOwners } from "@/services/assets";
 import { useAssetOwnerTableStore } from "@/stores/tables/assetOwnerTableStore";
-import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
+import { formatNumberWithSuffix, formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link, useSearch } from "@tanstack/react-router";
 import { configJSON } from "@/constants/conf";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
@@ -77,13 +77,20 @@ export const AssetTokenOwnersTab: FC<AssetTokenOwnersTabProps> = ({
     },
     {
       key: "quantity",
-      render: item => (
-        <p className='text-right'>
-          {item?.quantity
-            ? formatNumber((item.quantity / Math.pow(10, decimals)).toFixed(2))
-            : "-"}
-        </p>
-      ),
+      render: item => {
+        if (!item?.quantity) {
+          return <p className='text-right'>-</p>;
+        }
+
+        const adjustedQuantity =
+          decimals !== undefined && decimals !== null && decimals > 0
+            ? item.quantity / Math.pow(10, decimals)
+            : item.quantity;
+
+        return (
+          <p className='text-right'>{formatNumberWithSuffix(adjustedQuantity)}</p>
+        );
+      },
       title: <p className='w-full text-right'>Quantity</p>,
       visible: true,
       widthPx: 65,

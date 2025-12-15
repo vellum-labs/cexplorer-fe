@@ -232,7 +232,7 @@ export interface GovernanceProposal {
     id: string;
     bech: string;
   };
-  type: string; // e.g. "InfoAction"
+  type: string;
   anchor: {
     url: string;
     data_hash: string;
@@ -309,6 +309,8 @@ export interface CommitteeKey {
 export interface CommitteeIdent {
   raw: string;
   has_script: boolean;
+  cold: string;
+  hot: string;
 }
 
 export interface CommitteeRegistry {
@@ -316,18 +318,26 @@ export interface CommitteeRegistry {
   name: string;
 }
 
+export interface CommitteeMemberRegistration {
+  hash: string;
+  time: string;
+  index: number;
+  invalid_hereafter: null | number;
+  treasury_donation: number;
+}
+
 export interface CommitteeMember {
-  key: CommitteeKey;
+  key?: CommitteeKey;
   ident: CommitteeIdent;
   registry: CommitteeRegistry | null;
-  registration: {
-    hash: string;
-    time: string;
-    index: number;
-    invalid_hereafter: null | number;
-    treasury_donation: number;
-  } | null;
-  de_registration: null;
+  registration:
+    | CommitteeMemberRegistration
+    | CommitteeMemberRegistration[]
+    | null;
+  de_registration:
+    | CommitteeMemberRegistration
+    | CommitteeMemberRegistration[]
+    | null;
   expiration_epoch: number | null;
 }
 
@@ -342,6 +352,8 @@ export type CommitteeDetailResponse = ResponseCore<{
   member: CommitteeMember[];
   committee: CommitteeInfo;
 }>;
+
+export type CCMemberDetailResponse = ResponseCore<CommitteeMember[]>;
 
 export interface ConstitutionAnchor {
   url: string;
@@ -367,11 +379,6 @@ export interface CommitteeStat {
 export interface CommitteeKey {
   hot: string | null;
   cold: string | null;
-}
-
-export interface CommitteeIdent {
-  raw: string;
-  has_script: boolean;
 }
 
 export interface CommitteeRegistry {

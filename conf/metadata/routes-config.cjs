@@ -115,6 +115,15 @@ const routes = [
     api: false,
   },
   {
+    path: "/analytics/genesis",
+    title: "Genesis Addresses | Cexplorer.io",
+    description:
+      "Explore the original Cardano genesis addresses from the blockchain launch. View initial ADA distribution, current balances, first and last activity timestamps, and track the historical allocation of ADA from the genesis block.",
+    keywords:
+      "genesis addresses, Cardano genesis, initial distribution, genesis block, ADA allocation, Cexplorer, blockchain launch, original addresses",
+    api: false,
+  },
+  {
     path: "/api",
     title: "API Plans | Cexplorer.io",
     description:
@@ -139,6 +148,22 @@ const routes = [
     keywords: "%keywords%",
     api: `${API_URL}/article/detail?type=article&url=%url%&lng=%lng%`,
     image: "%image%"
+  },
+  {
+    path: "/wiki",
+    title: "Cardano Wiki | Cexplorer.io",
+    description:
+      "Learn about Cardano blockchain with comprehensive wiki articles. Explore short guides covering core mechanisms, staking, wallets, governance, smart contracts, and essential Cardano concepts explained in easy-to-understand format.",
+    keywords:
+      "Cardano wiki, blockchain guide, Cardano education, staking guide, wallet guide, Cardano tutorial, learn Cardano, blockchain basics, Cexplorer wiki",
+    api: false,
+  },
+  {
+    path: "/wiki/:url",
+    title: "%name% | Wiki | Cexplorer.io",
+    description: "%description%",
+    keywords: "%keywords%",
+    api: `${API_URL}/article/detail?type=wiki&url=%url%&lng=%lng%`,
   },
   {
     path: "/asset",
@@ -258,8 +283,17 @@ const routes = [
     api: false,
   },
   {
-    path: "/developers",
-    title: "Developers | Cexplorer.io",
+    path: "/dev",
+    title: "Developer Tools | Cexplorer.io",
+    description:
+      "Access developer tools for building on Cardano. Explore address inspector, datum inspector, Cexplorer API, SDK, and connect with our community through Discord and GitHub.",
+    keywords:
+      "Cardano developer tools, address inspector, datum inspector, Cexplorer API, SDK, developer resources, blockchain tools, Cardano development",
+    api: false,
+  },
+  {
+    path: "/envs",
+    title: "Environments | Cexplorer.io",
     description:
       "Comprehensive resources for developers building on Cardano. Access detailed API documentation, integration guides, code examples, SDKs in multiple languages, technical tutorials, and developer tools to accelerate your blockchain application development.",
     keywords:
@@ -417,6 +451,15 @@ const routes = [
       "Track the Cardano Constitutional Committee members and their governance activities. View committee composition, individual member voting records, participation rates, constitutional oversight decisions, and their role in Cardano's governance framework.",
     keywords:
       "Constitutional Committee, CC members, Cardano governance, committee voting, governance oversight, Cexplorer, constitutional oversight, committee members",
+    api: false,
+  },
+  {
+    path: "/gov/cc/:coldKey",
+    title: "CC Member %name% | Cexplorer.io",
+    description:
+      "Detailed profile of Constitutional Committee member %name% (cold key: %coldKey%) on Cardano. View complete voting history, hot keys, governance participation statistics, proposals voted on, status history, registration details, and term information.",
+    keywords:
+      "CC member details, %coldKey%, Constitutional Committee member, Cardano governance, voting history, Cexplorer, CC member profile, committee votes, governance oversight",
     api: false,
   },
   {

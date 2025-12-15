@@ -73,7 +73,7 @@ export const AccountTopStakingTab: FC = () => {
   const columns: TableColumns<AnalyticsTopStakingAccounts> = [
     {
       key: "order",
-      render: () => {},
+      render: () => undefined,
       title: "#",
       standByRanking: true,
       visible: columnsVisibility.order,
@@ -375,6 +375,9 @@ export const AccountTopStakingTab: FC = () => {
         })}
         onOrderChange={setColumsOrder}
       />
+      <h3 className='mt-2 text-center'>
+        Accounts with less than 100,000 ADA were excluded from this list.
+      </h3>
     </div>
   );
 };

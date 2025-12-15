@@ -537,6 +537,23 @@ export interface TxListTableOptions
   columnsOrder: (keyof TxListTableColumns)[];
 }
 
+export interface GenesisAddressesTableColumns {
+  order: boolean;
+  address: boolean;
+  value: boolean;
+  balance: boolean;
+  first_activity: boolean;
+  last_activity: boolean;
+}
+export interface GenesisAddressesTableOptions
+  extends Pick<
+    TableOptionsCore<GenesisAddressesTableColumns>,
+    "isResponsive" | "rows"
+  > {
+  columnsVisibility: GenesisAddressesTableColumns;
+  columnsOrder: (keyof GenesisAddressesTableColumns)[];
+}
+
 export interface MetadataTxListTableColumns {
   date: boolean;
   key: boolean;

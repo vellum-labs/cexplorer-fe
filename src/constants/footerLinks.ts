@@ -29,7 +29,7 @@ export const footerLinks: { [T in Header]: FooterLinks } = {
       href: "/privacy",
       target: "_self",
     },
-        {
+    {
       label: "Terms & conditions",
       href: "/terms",
       target: "_self",
@@ -53,7 +53,7 @@ export const footerLinks: { [T in Header]: FooterLinks } = {
     },
     {
       label: "Developers",
-      href: "/developers",
+      href: "/dev",
       target: "_self",
     },
     {
@@ -84,7 +84,7 @@ export const footerLinks: { [T in Header]: FooterLinks } = {
       target: "_blank",
     },
     {
-      label: "Buy me a coffee", 
+      label: "Buy me a coffee",
       href: "https://buymeacoffee.com/vellumlabs",
       target: "_blank",
     },

@@ -138,7 +138,7 @@ export const TokenDashboardTokenTab: FC = () => {
                   height={40}
                   width={40}
                   className='aspect-square shrink-0 rounded-max'
-                  src={generateImageUrl(assetName, "ico", "token")}
+                  src={generateImageUrl(assetName, "sm", "token")}
                   fallbackletters={[...encodedNameArr]
                     .filter(char =>
                       alphabetWithNumbers.includes(char.toLowerCase()),

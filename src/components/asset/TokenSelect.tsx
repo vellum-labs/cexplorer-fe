@@ -33,6 +33,7 @@ const Row = memo(({ index, style, data }: any) => {
             name: item.name,
             quantity: item.quantity,
           }}
+          formatTitle='long'
         />
         <Tooltip content={formatNumber(adjusted)}>
           <span className='text-text-xs'>
@@ -148,7 +149,7 @@ export const TokenSelectCombobox = memo(
         <Button
           variant='tertiary'
           size='md'
-          className={`flex w-[200px] items-center justify-between ${className || ""}`}
+          className={`flex w-[200px] items-center justify-between text-nowrap ${className || ""}`}
           onClick={() => setOpen(!open)}
           label={
             <div className='flex items-center gap-1'>
