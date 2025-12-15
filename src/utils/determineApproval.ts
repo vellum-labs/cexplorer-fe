@@ -22,7 +22,7 @@ export const determineApproval = (
       case "NoConfidence":
         return epochParams.dvt_motion_no_confidence ?? 0.67;
       case "NewCommittee":
-        return epochParams.dvt_committee_no_confidence ?? 0.6;
+        return epochParams.dvt_committee_normal ?? 0.67;
       case "NewConstitution":
         return epochParams.dvt_update_to_constitution ?? 0.75;
       case "ParameterChange":
@@ -41,7 +41,7 @@ export const determineApproval = (
       case "NoConfidence":
         return epochParams.pvt_motion_no_confidence ?? 0.51;
       case "NewCommittee":
-        return epochParams.pvt_committee_no_confidence ?? 0.51;
+        return epochParams.pvt_committee_normal ?? 0.51;
       case "NewConstitution":
         return epochParams.pvt_update_to_constitution ?? 0.67;
       case "ParameterChange":
