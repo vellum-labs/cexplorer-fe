@@ -46,7 +46,6 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
   const retirmentItems = retirmentQuery.data?.data?.data;
 
   const liveStake = detailData?.live_stake ?? 0;
-  const pledged = detailData?.pledged ?? 0;
 
   const ownerItems = Array.isArray(updateItem?.account?.owner)
     ? updateItem.account.owner.map(owner => ({
@@ -137,7 +136,7 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
                   style={{ width: `${Math.min(relativePledge, 100)}%` }}
                 />
               </div>
-              <Tooltip content={`${relativePledge}%`}>
+              <Tooltip content={`${relativePledge.toFixed(4)}%`}>
                 <span className='self-end text-text-sm text-grayTextPrimary'>
                   {displayValue}%
                 </span>
@@ -152,8 +151,9 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
     },
     {
       key: "pledge_staked",
-      render: () => {
-        const pledgeStakedRatio = (pledged / liveStake) * 100;
+      render: (item) => {
+        const ownerLiveStake = item?.account?.owner[0].live_stake ?? 0;
+        const pledgeStakedRatio = (ownerLiveStake / liveStake) * 100;
 
         return pledgeStakedRatio ? (
           <div className='update flex h-full w-full justify-end'>
