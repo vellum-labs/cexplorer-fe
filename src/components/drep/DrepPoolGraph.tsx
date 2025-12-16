@@ -22,7 +22,7 @@ interface DrepPoolGraphProps {
 
 export const DrepPoolGraph: FC<DrepPoolGraphProps> = ({ epochs, query }) => {
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const [graphsVisibility, setGraphsVisibility] = useState({
     "Total Delegated Stake (₳)": true,
     "Drep Delegated": true,

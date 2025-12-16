@@ -19,7 +19,7 @@ export const PowerThresholdsDRepDelegationDonutGraph: FC<
   const { textColor, bgColor } = useGraphColors();
 
   const { data: basicData, isLoading: basicLoading } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const currentEpoch = miscConst?.no;
 
   const currentDRepEpoch =

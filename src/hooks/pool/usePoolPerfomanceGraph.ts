@@ -47,7 +47,7 @@ export const usePoolPerfomanceGraph = (id: string): PoolPerfomanceGraph => {
   const workerRef = useRef<Worker | null>(null);
 
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const epochElapsed = useElapsedEpochNumber(miscConst);
 
   useEffect(() => {

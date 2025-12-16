@@ -42,7 +42,7 @@ const EpochDetailPage: FC = () => {
 
   const { data: basicData, isLoading: isFetchMiscBasicLoading } =
     useFetchMiscBasic();
-  const constData = useMiscConst(basicData?.data.version.const);
+  const constData = useMiscConst(basicData?.data?.version?.const);
 
   const requestedEpoch = +no;
   const currentEpoch = constData?.epoch?.no ?? 0;

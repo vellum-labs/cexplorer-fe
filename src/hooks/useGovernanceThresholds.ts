@@ -5,7 +5,7 @@ import type { ThresholdPoolList } from "@/types/governanceTypes";
 
 export const useGovernanceThresholds = () => {
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const query = useFetchThreshold();
 
 

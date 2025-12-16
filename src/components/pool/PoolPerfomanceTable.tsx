@@ -38,7 +38,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
   const data = query?.data?.data;
 
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const {
     columnsOrder,

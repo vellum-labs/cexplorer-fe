@@ -29,7 +29,7 @@ export const NetworkTransactionTab: FC = () => {
 
   const epochs = (epochQuery.data?.data ?? []).filter(item => item?.stat);
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const allTimeDates = rateQuery.data?.data;
   const threeMonthDates = (allTimeDates ?? [])?.slice(0, 90);
