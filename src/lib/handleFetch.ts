@@ -1,6 +1,8 @@
 import type { StringifiableRecord } from "query-string";
 
+import { useAuthTokensStore } from "@/stores/authTokensStore";
 import { useNotFound } from "@/stores/useNotFound";
+import { useWalletStore } from "@/stores/walletStore";
 import { callNetworkErrorToast } from "@/utils/error/callNetworkErrorToast";
 import { getUrl } from "@/utils/getUrl";
 
@@ -41,6 +43,17 @@ const fetchWithTimeout = (
   });
 };
 
+const handleInvalidToken = () => {
+  const { address } = useWalletStore.getState();
+  const { tokens, setTokens } = useAuthTokensStore.getState();
+
+  if (address && tokens[address]) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { [address]: _removed, ...updatedTokens } = tokens;
+    setTokens(updatedTokens);
+  }
+};
+
 export const handleFetch = async <T>(
   url: string,
   prevOffset?: number,
@@ -74,7 +87,17 @@ export const handleFetch = async <T>(
         responseHeaders[key] = value;
       });
 
-      if (response.status !== 200 && !hideToast) {
+      const data: T & { code?: string; msg?: string } = await response.json();
+
+      const isInvalidToken =
+        (data.code === "403" && data.msg === "Invalid user-token") ||
+        (response.status === 403 && data.msg === "Invalid user-token");
+
+      if (isInvalidToken) {
+        handleInvalidToken();
+      }
+
+      if (response.status !== 200 && !hideToast && !isInvalidToken) {
         callNetworkErrorToast({
           status: response.status,
           apiUrl: response.url,
@@ -82,8 +105,6 @@ export const handleFetch = async <T>(
         });
         throw new Error("The network response failed.");
       }
-
-      const data: T & { code?: number; msg?: string } = await response.json();
 
       return { ...data, prevOffset: prevOffset, responseHeaders };
     } catch (error) {

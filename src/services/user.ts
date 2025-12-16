@@ -1,7 +1,5 @@
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { handleFetch } from "@/lib/handleFetch";
-import { useAuthTokensStore } from "@/stores/authTokensStore";
-import { useWalletStore } from "@/stores/walletStore";
 import type { ArticleUrl } from "@/types/articleTypes";
 import type { ResponseCore } from "@/types/commonTypes";
 import type {
@@ -90,25 +88,15 @@ export const fetchUserInfo = async ({ token }: { token: string }) => {
 };
 
 export const useFetchUserInfo = () => {
-  const { address } = useWalletStore();
-  const { tokens, setTokens } = useAuthTokensStore();
   const token = useAuthToken();
 
-  const query = useQuery({
+  return useQuery({
     queryKey: ["user-info", token],
     queryFn: () => fetchUserInfo({ token }),
     enabled: !!token,
     refetchInterval: 120000,
     staleTime: 120000,
   });
-
-  if (query.data?.code === "403") {
-    const tempTokens = { ...tokens };
-    delete tempTokens[address || ""];
-    setTokens(tempTokens);
-  }
-
-  return query;
 };
 
 type UserApiProps = {
