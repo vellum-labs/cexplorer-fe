@@ -1633,7 +1633,7 @@
     "@harmoniclabs/crypto" "^0.2.4"
     "@harmoniclabs/uint8array-utils" "^1.0.0"
 
-"@harmoniclabs/uint8array-utils@^1.0.0", "@harmoniclabs/uint8array-utils@^1.0.3":
+"@harmoniclabs/uint8array-utils@^1.0.0", "@harmoniclabs/uint8array-utils@^1.0.3", "@harmoniclabs/uint8array-utils@^1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@harmoniclabs/uint8array-utils/-/uint8array-utils-1.0.4.tgz#e5a3a053514e425ff8688715ddbbe44653276e3c"
   integrity sha512-Z454prSbX4geXGHyjjcn9vm6u9NsD3VJykv8f8yE1VjIXSPitaLPEnm8u2+B+GMp1chYlLilOq+kW4OvJ6y28A==

@@ -15,11 +15,7 @@ import { useStakeWithdrawalsTableStore } from "@/stores/tables/stakeWithdrawalsT
 import type { Withdrawal } from "@/types/accountTypes";
 import type { MiscConstResponseData } from "@/types/miscTypes";
 import type { StakeWithdrawalsColumns, TableColumns } from "@/types/tableTypes";
-import {
-  formatNumber,
-  formatString,
-  formatTimeAgo,
-} from "@vellumlabs/cexplorer-sdk";
+import { formatNumber, formatString, DateCell } from "@vellumlabs/cexplorer-sdk";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
@@ -56,9 +52,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
   const columns: TableColumns<Withdrawal> = [
     {
       key: "date",
-      render: item => (
-        <div title={item?.block.time}>{formatTimeAgo(item.block.time)}</div>
-      ),
+      render: item => <DateCell time={item?.block.time} />,
       jsonFormat: item => {
         if (!item?.block.time) {
           return "-";

@@ -1,7 +1,6 @@
-// Governance Action Types - following the pattern from votes.ts
 export const governanceActionTypes = [
   "NoConfidence",
-  "NewCommittee", 
+  "NewCommittee",
   "NewConstitution",
   "HardForkInitiation",
   "ParameterChange",
@@ -11,7 +10,6 @@ export const governanceActionTypes = [
 
 export type GovernanceActionType = (typeof governanceActionTypes)[number];
 
-// Voter Role Types
 export const voterRoles = {
   constitutionalCommittee: "ConstitutionalCommittee",
   drep: "DRep",
@@ -20,7 +18,6 @@ export const voterRoles = {
 
 export type VoterRole = (typeof voterRoles)[keyof typeof voterRoles];
 
-// Helper arrays for voting eligibility
 export const drepVotingActions = [
   "NoConfidence",
   "NewCommittee",
@@ -38,7 +35,6 @@ export const spoVotingActions = [
   "InfoAction",
 ] as const;
 
-// Constitutional Committee voting actions (they vote on most actions except those that affect them directly)
 export const ccVotingActions = [
   "NewConstitution",
   "HardForkInitiation",
@@ -46,3 +42,36 @@ export const ccVotingActions = [
   "TreasuryWithdrawals",
   "InfoAction",
 ] as const;
+
+export type GovStatus =
+  | "ACTIVE"
+  | "ENACTED"
+  | "RATIFIED"
+  | "DROPPED"
+  | "EXPIRED";
+
+export const govStatusColors: Record<GovStatus, string> = {
+  ACTIVE: "#10B981",
+  ENACTED: "#10B981",
+  RATIFIED: "#3B82F6",
+  DROPPED: "#F59E0B",
+  EXPIRED: "#F59E0B",
+};
+
+export const govStatusBgColors: Record<GovStatus, string> = {
+  ACTIVE: "#D1FAE5",
+  ENACTED: "#D1FAE5",
+  RATIFIED: "#DBEAFE",
+  DROPPED: "#FEF3C7",
+  EXPIRED: "#FEF3C7",
+};
+
+export const govTypeLabels: Record<string, string> = {
+  NewCommittee: "New Committee",
+  NewConstitution: "New Constitution",
+  HardForkInitiation: "Hardfork Initiation",
+  ParameterChange: "Parameter Change",
+  TreasuryWithdrawals: "Treasury Withdrawals",
+  InfoAction: "Info Action",
+  NoConfidence: "No Confidence",
+};

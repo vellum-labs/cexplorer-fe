@@ -127,6 +127,7 @@ export const RecentTab: FC = () => {
             info={{
               id: voterId,
               meta: item?.info?.meta,
+              ident: item?.info?.ident,
             }}
           />
         );

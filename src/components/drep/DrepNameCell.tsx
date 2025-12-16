@@ -38,14 +38,16 @@ export const DrepNameCell: FC<DrepNameCellProps> = ({ item }) => {
 
   return (
     <div className='relative flex max-h-[75px] w-full items-center gap-1'>
-      <Image
-        src={generateImageUrl(item?.hash?.view ?? "", "ico", "drep")}
-        type='user'
-        className='h-8 w-8 rounded-max'
-        height={32}
-        width={32}
-        fallbackletters={fallbackletters}
-      />
+      <Link to='/drep/$hash' params={{ hash: item?.hash?.view ?? "" }}>
+        <Image
+          src={generateImageUrl(item?.hash?.view ?? "", "ico", "drep")}
+          type='user'
+          className='h-8 w-8 rounded-max'
+          height={32}
+          width={32}
+          fallbackletters={fallbackletters}
+        />
+      </Link>
 
       <div className={`flex w-[calc(100%-40px)] flex-col text-text-sm`}>
         {item?.data?.given_name && (
@@ -60,19 +62,24 @@ export const DrepNameCell: FC<DrepNameCellProps> = ({ item }) => {
           </Link>
         )}
         <div className='flex items-center gap-1/2'>
-          <Link
-            to='/drep/$hash'
-            params={{ hash: item?.hash?.view ?? "" }}
-            className={
-              item?.data?.given_name
-                ? "text-text-xs hover:text-grayTextPrimary"
-                : "text-text-sm text-primary"
-            }
-            disabled={!!item?.data?.given_name}
+          <span
+            className={`overflow-hidden text-ellipsis whitespace-nowrap ${
+              item?.data?.given_name ? "text-text-xs" : "text-text-sm"
+            } text-grayText`}
           >
-            {formatString(item?.hash?.view ?? "", "long")}
-          </Link>
-          <Copy copyText={item?.hash?.view} size={item?.data ? 10 : 13} />
+            <Link
+              to='/drep/$hash'
+              params={{ hash: item?.hash?.view ?? "" }}
+              className='!text-inherit hover:!text-inherit'
+            >
+              {formatString(item?.hash?.view ?? "", "long")}
+            </Link>
+          </span>
+          <Copy
+            copyText={item?.hash?.view}
+            size={item?.data ? 10 : 13}
+            className='stroke-grayText'
+          />
         </div>
       </div>
     </div>

@@ -161,6 +161,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
             info={{
               id: voterId,
               meta: item?.info?.meta,
+              ident: item?.info?.ident,
             }}
           />
         );

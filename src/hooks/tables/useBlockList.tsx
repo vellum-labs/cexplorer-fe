@@ -192,11 +192,7 @@ export const useBlockList = ({
   const columns: TableColumns<BlocksListResponse["data"]["data"][number]> = [
     {
       key: "date",
-      render: item => (
-        <div title={item.time} className=''>
-          <DateCell time={item.time} className='text-nowrap' />
-        </div>
-      ),
+      render: item => <DateCell time={item.time} className='text-nowrap' />,
       jsonFormat: item => {
         if (!item.time) {
           return "-";

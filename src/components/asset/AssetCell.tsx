@@ -75,7 +75,7 @@ const AssetCell = memo((props: AssetProps) => {
         </Link>
       )}
       <div
-        className={`block w-full ${isAdaHandle ? "" : "overflow-hidden"} text-text-sm text-primary`}
+        className={`flex w-full ${isAdaHandle ? "" : "overflow-hidden"} flex-col`}
       >
         <span className='flex w-full flex-col items-start'>
           <Link
@@ -124,15 +124,23 @@ const AssetCell = memo((props: AssetProps) => {
           <span className='flex items-center gap-1/2'>
             {nameByRegistry ||
             renderAssetName({ asset, name, fingerprint }) !== "n/a" ? (
-              <p className='break-words break-all text-text-xs text-grayTextPrimary'>
-                {formatString(fingerprint, "long")}
-              </p>
+              <span className='text-grayText overflow-hidden text-ellipsis whitespace-nowrap text-text-xs'>
+                <Link
+                  to='/asset/$fingerprint'
+                  params={{ fingerprint: fingerprint }}
+                  title={fingerprint}
+                  className='!text-inherit hover:!text-inherit'
+                >
+                  <p className='break-words break-all text-text-xs text-grayTextPrimary'>
+                    {formatString(fingerprint, "long")}
+                  </p>
+                </Link>
+              </span>
             ) : (
               <Link
                 to='/asset/$fingerprint'
                 params={{ fingerprint: fingerprint }}
                 title={fingerprint}
-                key={fingerprint}
                 className='break-words break-all text-text-sm text-primary'
               >
                 {formatString(fingerprint, "long")}
@@ -145,6 +153,7 @@ const AssetCell = memo((props: AssetProps) => {
                   : 13
               }
               copyText={fingerprint}
+              className='stroke-grayText'
             />
           </span>
         </span>

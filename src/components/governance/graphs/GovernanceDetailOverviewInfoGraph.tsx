@@ -68,7 +68,7 @@ export const GovernanceDetailOverviewInfoGraph: FC<
   };
 
   return (
-    <div className='max-h-[145px] w-[145px]'>
+    <div className='max-h-[145px] w-[145px] overflow-hidden'>
       <ReactEcharts
         opts={{ height: 145 }}
         option={option}

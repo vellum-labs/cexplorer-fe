@@ -11,6 +11,7 @@ import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { MinMaxRange } from "@vellumlabs/cexplorer-sdk";
 import { SortArrow } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
@@ -27,16 +28,7 @@ import { format } from "date-fns";
 import type { FC } from "react";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 
-import Crab from "@/resources/images/icons/crab.svg";
-import Dino from "@/resources/images/icons/dino.svg";
-import Dolphin from "@/resources/images/icons/dolphin.svg";
-import Fish from "@/resources/images/icons/fish.svg";
-import Humpback from "@/resources/images/icons/humpback.svg";
-import Plankton from "@/resources/images/icons/plankton.svg";
-import Shark from "@/resources/images/icons/shark.svg";
-import Shrimp from "@/resources/images/icons/shrimp.svg";
-import Tuna from "@/resources/images/icons/tuna.svg";
-import Whale from "@/resources/images/icons/whale.svg";
+import { getIconByAmount } from "@/utils/address/getIconByAmount";
 
 interface PoolMigrationsTableProps {
   miscConst: MiscConstResponse["data"] | undefined;
@@ -67,33 +59,6 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
       : undefined;
   };
 
-  const getIconByAmount = (amount: number) => {
-    switch (true) {
-      case amount < 10:
-        return Plankton;
-      case amount <= 10 && amount < 1000:
-        return Shrimp;
-      case amount <= 1000 && amount < 5000:
-        return Crab;
-      case amount <= 5000 && amount < 25000:
-        return Fish;
-      case amount <= 25000 && amount < 100000:
-        return Dolphin;
-      case amount <= 100000 && amount < 250000:
-        return Shark;
-      case amount <= 250000 && amount < 1e6:
-        return Whale;
-      case amount <= 1e6 && amount < 5e6:
-        return Tuna;
-      case amount <= 5e6 && amount < 20e6:
-        return Humpback;
-      case amount >= 20e6:
-        return Dino;
-      default:
-        return undefined;
-    }
-  };
-
   const columns = [
     {
       key: "date",
@@ -119,7 +84,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
       key: "active_in",
       render: item => (
         <div className='flex flex-col items-end gap-1/2'>
-          {item?.active_pool?.delegation?.tx?.active_epoch_no ?? ""}
+          <EpochCell no={item?.active_pool?.delegation?.tx?.active_epoch_no} />
         </div>
       ),
       title: <p className='w-full text-right'>Active epoch</p>,
@@ -145,7 +110,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
               to='/address/$address'
               params={{ address: item.view || "" }}
             >
-              {formatString(item.view, "longer")}
+              {formatString(item.view, "long")}
             </Link>
             <Copy copyText={item.view} />
           </div>
