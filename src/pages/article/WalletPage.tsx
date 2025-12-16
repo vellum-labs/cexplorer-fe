@@ -3,7 +3,6 @@ import type { FC } from "react";
 
 import { HeaderBanner } from "@/components/global/HeaderBanner";
 import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
-import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { WalletRow } from "@/components/wallet/WalletRow";
 import Android from "@/resources/images/platforms/android.svg";
 import AndroidDark from "@/resources/images/platforms/android_dark.svg";
@@ -22,7 +21,7 @@ import Trezor from "@/resources/images/wallet/trezor.svg";
 import { CircleCheck, CircleHelp, Minus } from "lucide-react";
 import { Helmet } from "react-helmet";
 
-import { useFetchCompareWallets } from "@/services/wallet";
+import walletComparisonData from "@/../conf/wallet-comparison-data.json";
 import { useCompareWalletsStore } from "@/stores/tables/compareWalletsStore";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useState } from "react";
@@ -36,7 +35,7 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 
 export const WalletPage: FC = () => {
   const { theme } = useThemeStore();
-  const { data, isLoading } = useFetchCompareWallets();
+  const walletData = walletComparisonData as CompareWallet[];
 
   const miscBasicQuery = useFetchMiscBasic();
 
@@ -47,7 +46,6 @@ export const WalletPage: FC = () => {
       onClick: () => void;
     }[]
   >([]);
-  const name = data?.data.name;
   const [walletsData, setWalletsData] = useState<CompareWallet[]>([]);
 
   const { supportedWallets } = configJSON;
@@ -56,11 +54,11 @@ export const WalletPage: FC = () => {
     useCompareWalletsStore();
 
   useEffect(() => {
-    if (!isLoading && Array.isArray(data?.data.data)) {
+    if (Array.isArray(walletData)) {
       const columnsKeys = Object.keys(columnsVisibility);
 
       for (let i = 0; i < columnsKeys.length; i++) {
-        const findData = data?.data.data[0].find(
+        const findData = walletData.find(
           item => item.internalName === columnsKeys[i],
         );
 
@@ -69,7 +67,7 @@ export const WalletPage: FC = () => {
         }
       }
     }
-  }, [columnsVisibility, data, isLoading]);
+  }, [columnsVisibility, walletData]);
 
   useEffect(() => {
     const columnsVisibilityEntries = Object.entries(columnsVisibility);
@@ -86,8 +84,7 @@ export const WalletPage: FC = () => {
   }, [columnsVisibility]);
 
   useEffect(() => {
-    if (Array.isArray(data?.data?.data) && !isLoading) {
-      const walletData = data?.data?.data[0];
+    if (Array.isArray(walletData)) {
       for (let i = 0; i < walletData.length; i++) {
         if (
           typeof columnsVisibility[walletData[i].internalName] === "undefined"
@@ -96,16 +93,16 @@ export const WalletPage: FC = () => {
         }
       }
     }
-  }, [data, isLoading]);
+  }, [walletData]);
 
   useEffect(() => {
-    if (Array.isArray(data?.data?.data) && !isLoading) {
+    if (Array.isArray(walletData)) {
       const walletsPos = Object.entries(supportedWallets[0]).filter(
         ([walletName]) =>
-          data?.data?.data[0].find(item => item.internalName === walletName),
+          walletData.find(item => item.internalName === walletName),
       );
 
-      const walletDataInstance = data?.data?.data[0].filter(
+      const walletDataInstance = walletData.filter(
         item =>
           typeof columnsVisibility[item.internalName] === "undefined" ||
           columnsVisibility[item.internalName],
@@ -127,7 +124,7 @@ export const WalletPage: FC = () => {
         }),
       );
     }
-  }, [columnsVisibility, data, isLoading]);
+  }, [columnsVisibility, walletData]);
 
   const columns = [
     {
@@ -697,7 +694,9 @@ export const WalletPage: FC = () => {
 
   return (
     <>
-      <Helmet>{name && <title>{name} | Cexplorer.io</title>}</Helmet>
+      <Helmet>
+        <title>Compare Cardano Wallets | Cexplorer.io</title>
+      </Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center'>
         <HeaderBanner
           title='Compare Cardano Wallets'
@@ -743,45 +742,41 @@ export const WalletPage: FC = () => {
                 />
               </div>
             </div>
-            {isLoading ? (
-              <LoadingSkeleton rounded='lg' width='1300px' height='1400px' />
-            ) : (
+            <div
+              className='thin-scrollbar relative w-full overflow-auto overflow-x-auto rounded-m border border-border bg-cardBg'
+              style={{
+                transform: "rotateX(180deg)",
+              }}
+            >
               <div
-                className='thin-scrollbar relative w-full overflow-auto overflow-x-auto rounded-m border border-border bg-cardBg'
+                className='w-full min-w-[1300px]'
                 style={{
                   transform: "rotateX(180deg)",
                 }}
               >
-                <div
-                  className='w-full min-w-[1300px]'
-                  style={{
-                    transform: "rotateX(180deg)",
-                  }}
-                >
-                  {columns.map(
-                    ({
-                      title,
-                      key,
-                      cells,
-                      darker,
-                      className,
-                      dynamicHeight,
-                      wrapperClassname,
-                    }) => (
-                      <WalletRow
-                        title={title}
-                        key={key}
-                        darker={darker}
-                        cells={cells}
-                        className={className}
-                        dynamicHeight={dynamicHeight}
-                        wrapperClassname={wrapperClassname}
-                      />
-                    ),
-                  )}
-                </div>
+                {columns.map(
+                  ({
+                    title,
+                    key,
+                    cells,
+                    darker,
+                    className,
+                    dynamicHeight,
+                    wrapperClassname,
+                  }) => (
+                    <WalletRow
+                      title={title}
+                      key={key}
+                      darker={darker}
+                      cells={cells}
+                      className={className}
+                      dynamicHeight={dynamicHeight}
+                      wrapperClassname={wrapperClassname}
+                    />
+                  ),
+                )}
               </div>
-            )}
+            </div>
           </div>
         </section>
       </main>

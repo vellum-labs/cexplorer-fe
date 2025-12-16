@@ -861,11 +861,11 @@ const routes = [
   },
   {
     path: "/wallet",
-    title: "Wallet Integration | Cexplorer.io",
+    title: "Compare Cardano Wallets | Cexplorer.io",
     description:
-      "Connect your Cardano wallet to Cexplorer.io for enhanced features. Access personalized portfolio tracking, monitor your assets and NFTs, view transaction history, manage delegations, and seamlessly interact with blockchain data through wallet integration.",
+      "Compare Cardano wallets side by side. Explore features, supported platforms, hardware wallet compatibility, staking support, governance features, and integrations to find the best wallet for your needs.",
     keywords:
-      "wallet integration, connect wallet, Cardano wallet, wallet connection, portfolio tracker, Cexplorer, wallet sync, asset tracking",
+      "compare wallets, Cardano wallets, wallet comparison, best Cardano wallet, wallet features, hardware wallet, staking wallet, Cexplorer, wallet guide",
     api: false,
   },
   {
