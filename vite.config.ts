@@ -58,6 +58,13 @@ export default defineConfig({
         return output;
       },
     },
+    TanStackRouterVite({
+      target: "react",
+      autoCodeSplitting: false,
+    }),
+    react(),
+    wasm(),
+    topLevelAwait(),
     nodePolyfills({
       globals: {
         Buffer: true,
@@ -66,13 +73,6 @@ export default defineConfig({
       },
       protocolImports: true,
     }),
-    TanStackRouterVite({
-      target: "react",
-      autoCodeSplitting: false,
-    }),
-    react(),
-    topLevelAwait(),
-    wasm(),
     VitePWA({
       strategies: "injectManifest",
       srcDir: "src",
@@ -165,11 +165,12 @@ export default defineConfig({
             "@nufi/dapp-client-cardano",
             "@nufi/dapp-client-core",
             "@nufi/sso-button-react",
+            "@harmoniclabs/uplc",
             "@harmoniclabs/pair",
             "@harmoniclabs/cbor",
             "@harmoniclabs/bytestring",
-            "@harmoniclabs/uplc",
             "@harmoniclabs/uint8array-utils",
+            "@harmoniclabs/plutus-data",
           ],
           charts: ["echarts", "echarts-stat"],
           utils: [
