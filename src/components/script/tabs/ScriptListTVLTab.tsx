@@ -81,11 +81,15 @@ export const ScriptListTVLTab: FC = () => {
   );
 
   const totalValueUSD = useMemo(() => {
-    return graphData.reduce((acc, item) => acc + item.valueUSD * 1e6, 0);
+    if (graphData.length === 0) return 0;
+    const lastItem = graphData[graphData.length - 1];
+    return lastItem.valueUSD * 1e6;
   }, [graphData]);
 
   const totalValueADA = useMemo(() => {
-    return graphData.reduce((acc, item) => acc + item.valueADA * 1e6, 0);
+    if (graphData.length === 0) return 0;
+    const lastItem = graphData[graphData.length - 1];
+    return lastItem.valueADA * 1e6;
   }, [graphData]);
 
   return (
