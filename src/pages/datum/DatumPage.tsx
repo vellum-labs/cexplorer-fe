@@ -17,27 +17,26 @@ import { deserializeDatum } from "@meshsdk/core";
 import { Cbor } from "@harmoniclabs/cbor";
 
 import { PageBase } from "@/components/global/pages/PageBase";
+import { convertCborToJson } from "@/utils/datum/convertCborToJson";
 
 const parseSimpleCborInt = (hex: string): { int: string } | null => {
   if (!hex || typeof hex !== "string" || hex.length < 2) return null;
   const firstByte = parseInt(hex.slice(0, 2), 16);
 
-  if (firstByte <= 0x17 && hex.length === 2) {
-    return { int: String(firstByte) };
+  switch (true) {
+    case firstByte <= 0x17 && hex.length === 2:
+      return { int: String(firstByte) };
+    case firstByte === 0x18 && hex.length === 4:
+      return { int: String(parseInt(hex.slice(2, 4), 16)) };
+    case firstByte === 0x19 && hex.length === 6:
+      return { int: String(parseInt(hex.slice(2, 6), 16)) };
+    case firstByte === 0x1a && hex.length === 10:
+      return { int: String(parseInt(hex.slice(2, 10), 16)) };
+    case firstByte >= 0x20 && firstByte <= 0x37 && hex.length === 2:
+      return { int: String(-1 - (firstByte - 0x20)) };
+    default:
+      return null;
   }
-  if (firstByte === 0x18 && hex.length === 4) {
-    return { int: String(parseInt(hex.slice(2, 4), 16)) };
-  }
-  if (firstByte === 0x19 && hex.length === 6) {
-    return { int: String(parseInt(hex.slice(2, 6), 16)) };
-  }
-  if (firstByte === 0x1a && hex.length === 10) {
-    return { int: String(parseInt(hex.slice(2, 10), 16)) };
-  }
-  if (firstByte >= 0x20 && firstByte <= 0x37 && hex.length === 2) {
-    return { int: String(-1 - (firstByte - 0x20)) };
-  }
-  return null;
 };
 
 const decodeDatum = (input: any): any => {
@@ -67,41 +66,6 @@ const decodeDatum = (input: any): any => {
       return {};
     }
   }
-};
-
-const convertCborToJson = (value: any): any => {
-  if (typeof value === "number" || typeof value === "bigint") {
-    return { int: String(value) };
-  }
-  if (typeof value === "string") {
-    return { bytes: Buffer.from(value).toString("hex") };
-  }
-  if (value instanceof Uint8Array || Buffer.isBuffer(value)) {
-    return { bytes: Buffer.from(value).toString("hex") };
-  }
-  if (Array.isArray(value)) {
-    return { list: value.map(convertCborToJson) };
-  }
-  if (value instanceof Map) {
-    return {
-      map: Array.from(value.entries()).map(([k, v]) => ({
-        k: convertCborToJson(k),
-        v: convertCborToJson(v),
-      })),
-    };
-  }
-  if (typeof value === "object" && value !== null) {
-    if ("tag" in value && "data" in value) {
-      return {
-        constructor: String(value.tag - 121),
-        fields: Array.isArray(value.data)
-          ? value.data.map(convertCborToJson)
-          : [convertCborToJson(value.data)],
-      };
-    }
-    return value;
-  }
-  return { int: String(value) };
 };
 
 export const DatumPage: FC = () => {
@@ -183,14 +147,13 @@ export const DatumPage: FC = () => {
   }, [inputDatum]);
 
   useEffect(() => {
-    if (datum) {
-      try {
-        const datumStr = String(datum);
-        const datumBuffer = Buffer.from(datumStr, "hex");
-        setHash(blake2bHex(datumBuffer, undefined, 32));
-      } catch {
-        // empty
-      }
+    if (!datum) return;
+
+    try {
+      const datumBuffer = Buffer.from(String(datum), "hex");
+      setHash(blake2bHex(datumBuffer, undefined, 32));
+    } catch {
+      setHash("");
     }
   }, [datum]);
 

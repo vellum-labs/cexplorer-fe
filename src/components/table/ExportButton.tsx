@@ -1,5 +1,6 @@
 import type { TableColumns } from "@/types/tableTypes";
 import type { FC } from "react";
+import type { WalletApi } from "@/types/walletTypes";
 
 import { colors } from "@/constants/colors";
 import { Download } from "lucide-react";
@@ -52,7 +53,7 @@ const ExportButton: FC<ExportButtonProps> = ({
           onClose={() => setShowFeatureModal(false)}
           setShowConnectWallet={setShowConnectWallet}
           address={address}
-          walletApi={wallet as any}
+          walletApi={wallet as unknown as WalletApi}
         />
       )}
       {showConnectWallet && (

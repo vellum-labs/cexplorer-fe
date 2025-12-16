@@ -13,6 +13,7 @@ import { useCallback, useRef, useState } from "react";
 
 import { colors } from "@/constants/colors";
 import { type GraphSortData } from "@/types/graphTypes";
+import type { WalletApi } from "@/types/walletTypes";
 import { convertJSONToCSV } from "@vellumlabs/cexplorer-sdk";
 import { toPng } from "html-to-image";
 import { GraphEpochSort } from "../global/graphs/GraphEpochSort";
@@ -131,7 +132,7 @@ export const AnalyticsGraph: FC<Props> = ({
           onClose={() => setShowFeatureModal(false)}
           setShowConnectWallet={setShowConnectWallet}
           address={address}
-          walletApi={wallet as any}
+          walletApi={wallet as unknown as WalletApi}
         />
       )}
       {showConnectWallet && (
