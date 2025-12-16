@@ -122,8 +122,9 @@ export const navigationOptions: {
       label: "DRep delegations",
       href: "/drep",
       params: { tab: "delegations" },
+      divider: true,
     },
-    { label: "Withdrawal leaderboard", href: "/gov/drep-vote", divider: true },
+    // { label: "Withdrawal leaderboard", href: "/gov/drep-vote", divider: true },
     {
       label: "Certificates",
       nestedOptions: [
