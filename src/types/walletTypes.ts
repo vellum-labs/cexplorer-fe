@@ -1,13 +1,37 @@
-import type { WalletApi, LucidEvolution } from "@lucid-evolution/lucid";
+import type { BrowserWallet } from "@meshsdk/core";
 import type { ResponseCore } from "./commonTypes";
+
+export type WalletApi = {
+  getNetworkId(): Promise<number>;
+  getUtxos(): Promise<string[] | undefined>;
+  getBalance(): Promise<string>;
+  getUsedAddresses(): Promise<string[]>;
+  getUnusedAddresses(): Promise<string[]>;
+  getChangeAddress(): Promise<string>;
+  getRewardAddresses(): Promise<string[]>;
+  signTx(tx: string, partialSign: boolean): Promise<string>;
+  signData(
+    address: string,
+    payload: string,
+  ): Promise<{
+    signature: string;
+    key: string;
+  }>;
+  submitTx(tx: string): Promise<string>;
+  getCollateral(): Promise<string[]>;
+  experimental: {
+    getCollateral(): Promise<string[]>;
+    on(eventName: string, callback: (...args: unknown[]) => void): void;
+    off(eventName: string, callback: (...args: unknown[]) => void): void;
+  };
+};
 
 export interface WalletState {
   address: string | undefined;
   stakeKey: string | undefined;
   walletType: WalletType | undefined;
-  walletApi: WalletApi | undefined;
   disabledExt?: boolean;
-  lucid: LucidEvolution | null;
+  wallet: BrowserWallet | null;
 }
 
 export type WalletInfo = {

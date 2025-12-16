@@ -1,24 +1,24 @@
 import type { FC } from "react";
 import { useState } from "react";
-import type { LucidEvolution } from "@lucid-evolution/lucid";
+import type { BrowserWallet } from "@meshsdk/core";
 import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { RangeSlider } from "@vellumlabs/cexplorer-sdk";
-import { Wallet } from "lucide-react";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { Wallet } from "lucide-react";
 import { handleDonation } from "@/utils/treasury/handleDonation";
 
 interface TreasuryDonationModalProps {
   onClose: () => void;
   onSuccess: (hash: string) => void;
-  lucid: LucidEvolution | null;
+  wallet: BrowserWallet | null;
 }
 
 export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
   onClose,
   onSuccess,
-  lucid,
+  wallet,
 }) => {
   const [amount, setAmount] = useState<string>("");
   const [cexplorerPercentage, setCexplorerPercentage] = useState<number>(10);
@@ -43,7 +43,7 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
 
   const handleDonationClick = () => {
     handleDonation({
-      lucid,
+      wallet,
       amount,
       cexplorerPercentage,
       comment,
@@ -136,25 +136,26 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
             onClick={onClose}
             disabled={isSubmitting}
           />
-          <Tooltip
-            content={
-              <div className='max-w-[250px] text-center'>
-                Treasury donations are not currently supported by lucid-evolution.
-                We're working on adding this feature.
-              </div>
-            }
-          >
-            <div>
+          <div className='h-fit'>
+            <Tooltip
+              content={
+                <div className='max-w-[150px]'>
+                  Note: MeshJS does not support treasury donations yet. You can
+                  donate only to Cexplorer for now.
+                </div>
+              }
+              forceDirection='top'
+            >
               <Button
-                label='Donate'
+                label={isSubmitting ? "Submitting..." : "Donate"}
                 size='lg'
                 variant='primary'
                 leftIcon={<Wallet />}
                 onClick={handleDonationClick}
-                disabled={true}
+                disabled={!isValidAmount || isSubmitting || !wallet}
               />
-            </div>
-          </Tooltip>
+            </Tooltip>
+          </div>
         </div>
       </div>
     </Modal>

@@ -1,9 +1,12 @@
-import type { LucidEvolution } from "@lucid-evolution/lucid";
+import type { BrowserWallet } from "@meshsdk/core";
 import { toast } from "sonner";
-import { executeTreasuryDonation, handleDonationError } from "@/services/treasury";
+import {
+  executeTreasuryDonation,
+  handleDonationError,
+} from "@/services/treasury";
 
 interface HandleDonationParams {
-  lucid: LucidEvolution | null;
+  wallet: BrowserWallet | null;
   amount: string;
   cexplorerPercentage: number;
   comment: string;
@@ -12,14 +15,14 @@ interface HandleDonationParams {
 }
 
 export const handleDonation = async ({
-  lucid,
+  wallet,
   amount,
   cexplorerPercentage,
   comment,
   setIsSubmitting,
   onSuccess,
 }: HandleDonationParams) => {
-  if (!lucid) {
+  if (!wallet) {
     toast.error("Wallet not connected");
     return;
   }
@@ -28,7 +31,7 @@ export const handleDonation = async ({
 
   try {
     const txHash = await executeTreasuryDonation({
-      lucid,
+      wallet,
       amount,
       cexplorerPercentage,
       comment,

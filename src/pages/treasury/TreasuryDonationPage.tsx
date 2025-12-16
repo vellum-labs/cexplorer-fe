@@ -6,11 +6,13 @@ import { TxListPage } from "../tx/TxListPage";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { TreasuryDonationModal } from "@/components/script/treasury/TreasuryDonationModal";
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { useWalletStore } from "@/stores/walletStore";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@vellumlabs/cexplorer-sdk";
+import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { Wallet, Info } from "lucide-react";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 
@@ -20,10 +22,10 @@ export const TreasuryDonationPage = () => {
   const [showWalletModal, setShowWalletModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [txHash, setTxHash] = useState<string>("");
-  const { walletApi, lucid } = useWalletStore();
+  const { wallet } = useWalletStore();
 
   const handleDonateClick = () => {
-    if (!walletApi) {
+    if (!wallet) {
       setShowWalletModal(true);
       return;
     }
@@ -64,13 +66,15 @@ export const TreasuryDonationPage = () => {
       {showWalletModal && (
         <ConnectWalletModal onClose={() => setShowWalletModal(false)} />
       )}
-      {showDonationModal && (
-        <TreasuryDonationModal
-          onClose={() => setShowDonationModal(false)}
-          onSuccess={handleSuccess}
-          lucid={lucid}
-        />
-      )}
+      {showDonationModal &&
+        createPortal(
+          <TreasuryDonationModal
+            onClose={() => setShowDonationModal(false)}
+            onSuccess={handleSuccess}
+            wallet={wallet}
+          />,
+          document.body,
+        )}
       {showSuccessModal && (
         <Modal
           minWidth='400px'
@@ -112,14 +116,20 @@ export const TreasuryDonationPage = () => {
                 </p>
               </div>
             </div>
-            <Button
-              size='lg'
-              label='Donate to Treasury'
-              variant='primary'
-              leftIcon={<Wallet />}
-              onClick={handleDonateClick}
-              className='shrink-0'
-            />
+            <div className='h-fit shrink-0'>
+              <Tooltip
+                content='Note: MeshJS does not support treasury donations yet. You can donate only to Cexplorer for now.'
+                forceDirection='bottom'
+              >
+                <Button
+                  size='lg'
+                  label='Donate to Treasury'
+                  variant='primary'
+                  leftIcon={<Wallet />}
+                  onClick={handleDonateClick}
+                />
+              </Tooltip>
+            </div>
           </div>
         </div>
       </div>

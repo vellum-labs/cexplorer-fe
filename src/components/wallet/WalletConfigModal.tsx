@@ -22,7 +22,7 @@ const WalletConfigModal = () => {
   const { uq } = useUqStore();
   const secureRef = useRef<0 | 1>(0);
   const expirationRef = useRef<"d" | "w" | "m" | "y">("y");
-  const { address, lucid } = useWalletStore();
+  const { address, wallet } = useWalletStore();
   const { tokens, setTokens } = useAuthTokensStore();
   const { disconnect } = useConnectWallet();
 
@@ -63,12 +63,12 @@ const WalletConfigModal = () => {
   };
 
   const handleConfirmation = async () => {
-    if (!lucid || !address) return;
+    if (!wallet || !address) return;
 
     const payload = `cexplorer_${dateNumber}_${address}`;
     const hexPayload = Buffer.from(payload, "utf8").toString("hex");
 
-    const message = await lucid.wallet().signMessage(address, hexPayload);
+    const message = await wallet.signData(address, hexPayload);
 
     const loginData = await loginUser({
       address,

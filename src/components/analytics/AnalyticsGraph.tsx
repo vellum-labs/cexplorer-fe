@@ -13,6 +13,7 @@ import { useCallback, useRef, useState } from "react";
 
 import { colors } from "@/constants/colors";
 import { type GraphSortData } from "@/types/graphTypes";
+import type { WalletApi } from "@/types/walletTypes";
 import { convertJSONToCSV } from "@vellumlabs/cexplorer-sdk";
 import { toPng } from "html-to-image";
 import { GraphEpochSort } from "../global/graphs/GraphEpochSort";
@@ -55,7 +56,7 @@ export const AnalyticsGraph: FC<Props> = ({
   actions,
   sortBy,
 }) => {
-  const { address, walletApi } = useWalletStore();
+  const { address, wallet } = useWalletStore();
   const userQuery = useFetchUserInfo();
   const nftCount = userQuery.data?.data?.membership.nfts;
 
@@ -70,8 +71,7 @@ export const AnalyticsGraph: FC<Props> = ({
 
   const modifiedChildren = Children.map(children, child =>
     isValidElement(child)
-      ? //@ts-expect-error types
-        cloneElement(child, { setJson })
+      ? cloneElement(child, { setJson } as any)
       : child,
   );
 
@@ -114,7 +114,7 @@ export const AnalyticsGraph: FC<Props> = ({
   const showModals = () => {
     if (
       !address ||
-      !walletApi ||
+      !wallet ||
       typeof nftCount === "undefined" ||
       nftCount < 1
     ) {
@@ -132,7 +132,7 @@ export const AnalyticsGraph: FC<Props> = ({
           onClose={() => setShowFeatureModal(false)}
           setShowConnectWallet={setShowConnectWallet}
           address={address}
-          walletApi={walletApi}
+          walletApi={wallet as unknown as WalletApi}
         />
       )}
       {showConnectWallet && (

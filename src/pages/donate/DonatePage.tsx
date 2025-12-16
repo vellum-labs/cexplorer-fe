@@ -63,7 +63,7 @@ export const DonatePage = () => {
   const [openDelegationModal, setOpenDelegationModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [hash, setHash] = useState<string | undefined>("");
-  const { walletApi, lucid } = useWalletStore();
+  const { wallet } = useWalletStore();
   const randomPool =
     supportedPools[Math.floor(Math.random() * supportedPools.length)];
 
@@ -76,28 +76,43 @@ export const DonatePage = () => {
   };
 
   const handleDonation = async () => {
-    if (!walletApi || !lucid) {
+    if (!wallet) {
       setShowWalletModal(true);
       return;
     }
 
-    const amountToSend = BigInt(
-      activeDonation
-        ? activeDonation * 1000000
-        : Number(customAmount) * 1000000,
-    );
+    const amountToSend =
+      activeDonation !== undefined && activeDonation > 0
+        ? String(activeDonation * 1000000)
+        : String(Number(customAmount) * 1000000);
 
     try {
-      const tx = await lucid
-        .newTx()
-        .pay.ToAddress(donationAddress, {
-          lovelace: amountToSend,
-        })
+      const { MeshTxBuilder, BlockfrostProvider } = await import(
+        "@meshsdk/core"
+      );
+
+      const apiKey = import.meta.env.VITE_APP_BLOCKFROST_KEY;
+
+      const provider = new BlockfrostProvider(apiKey);
+      const utxos = await wallet.getUtxos();
+      const changeAddress = await wallet.getChangeAddress();
+
+      const txBuilder = new MeshTxBuilder({
+        fetcher: provider,
+        evaluator: provider,
+      });
+
+      txBuilder.txOut(donationAddress, [
+        { unit: "lovelace", quantity: amountToSend },
+      ]);
+
+      const unsignedTx = await txBuilder
+        .selectUtxosFrom(utxos)
+        .changeAddress(changeAddress)
         .complete();
 
-      const signed = await tx.sign.withWallet();
-      const signedTx = await signed.complete();
-      const txHash = await signedTx.submit();
+      const signedTx = await wallet.signTx(unsignedTx);
+      const txHash = await wallet.submitTx(signedTx);
       sendDelegationInfo(txHash, "donation_page", "donate");
       setHash(txHash);
       setShowSuccessModal(true);
@@ -113,7 +128,7 @@ export const DonatePage = () => {
   };
 
   const handleDelegation = () => {
-    if (!walletApi) {
+    if (!wallet) {
       setShowWalletModal(true);
       return;
     }

@@ -5,8 +5,7 @@ import { useWalletConfigModalState } from "@/stores/states/walletConfigModalStat
 import { useWalletStore } from "@/stores/walletStore";
 import { useWatchlistStore } from "@/stores/watchlistStore";
 import type { WalletState, WalletType } from "@/types/walletTypes";
-import type { WalletApi } from "@lucid-evolution/lucid";
-import { Lucid, Blockfrost } from "@lucid-evolution/lucid";
+import { BrowserWallet } from "@meshsdk/core";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { useAuthToken } from "./useAuthToken";
@@ -15,9 +14,8 @@ const defaultState: WalletState = {
   address: undefined,
   stakeKey: undefined,
   walletType: undefined,
-  walletApi: undefined,
   disabledExt: false,
-  lucid: null,
+  wallet: null,
 };
 
 export const useConnectWallet = () => {
@@ -35,52 +33,13 @@ export const useConnectWallet = () => {
   }, [watchlistData]);
 
   const _connect = async (walletType: WalletType) => {
-    const wallet =
-      typeof window !== "undefined"
-        ? window?.cardano && window.cardano?.[walletType]
-        : undefined;
-    const walletApi = await wallet?.enable();
+    const wallet = await BrowserWallet.enable(walletType);
 
-    const config = (() => {
-      const configRaw = import.meta.env.VITE_APP_CONFIG ?? "preprod-stage";
+    const usedAddresses = await wallet.getUsedAddresses();
+    const address = usedAddresses[0];
 
-      switch (configRaw) {
-        case "preprod-stage":
-        case "preprod-prod":
-          return "Preprod";
-        case "preview-stage":
-        case "preview-prod":
-          return "Preview";
-        case "mainnet-stage":
-        case "mainnet-prod":
-          return "Mainnet";
-        default:
-          return "Preprod";
-      }
-    })();
-
-    const blockfrostEndpoint = (() => {
-      switch (config) {
-        case "Mainnet":
-          return "https://cardano-mainnet.blockfrost.io/api/v0";
-        case "Preview":
-          return "https://cardano-preview.blockfrost.io/api/v0";
-        case "Preprod":
-        default:
-          return "https://cardano-preprod.blockfrost.io/api/v0";
-      }
-    })();
-
-    const apiKey = import.meta.env.VITE_APP_BLOCKFROST_KEY;
-
-    const lucid = await Lucid(
-      new Blockfrost(blockfrostEndpoint, apiKey),
-      config,
-    );
-    lucid.selectWallet.fromAPI(walletApi as WalletApi);
-
-    const address = await lucid.wallet().address();
-    const rewardAddress = await lucid.wallet().rewardAddress();
+    const rewardAddresses = await wallet.getRewardAddresses();
+    const rewardAddress = rewardAddresses?.[0];
     const stakeKey = rewardAddress ? rewardAddress.slice(-56) : "";
 
     if (address.startsWith("addr_test1") && network !== "preprod") {
@@ -109,8 +68,7 @@ export const useConnectWallet = () => {
       address,
       stakeKey,
       disabledExt: false,
-      lucid,
-      walletApi,
+      wallet,
     });
 
     if (!tokens[address]) {

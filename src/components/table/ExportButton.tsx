@@ -1,5 +1,6 @@
 import type { TableColumns } from "@/types/tableTypes";
 import type { FC } from "react";
+import type { WalletApi } from "@/types/walletTypes";
 
 import { colors } from "@/constants/colors";
 import { Download } from "lucide-react";
@@ -23,7 +24,7 @@ const ExportButton: FC<ExportButtonProps> = ({
   items,
   currentPage,
 }) => {
-  const { address, walletApi } = useWalletStore();
+  const { address, wallet } = useWalletStore();
   const userQuery = useFetchUserInfo();
   const nftCount = userQuery.data?.data?.membership.nfts;
 
@@ -34,7 +35,7 @@ const ExportButton: FC<ExportButtonProps> = ({
   const showModals = () => {
     if (
       !address ||
-      !walletApi ||
+      !wallet ||
       typeof nftCount === "undefined" ||
       nftCount < 1
     ) {
@@ -52,7 +53,7 @@ const ExportButton: FC<ExportButtonProps> = ({
           onClose={() => setShowFeatureModal(false)}
           setShowConnectWallet={setShowConnectWallet}
           address={address}
-          walletApi={walletApi}
+          walletApi={wallet as unknown as WalletApi}
         />
       )}
       {showConnectWallet && (
