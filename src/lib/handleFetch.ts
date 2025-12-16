@@ -48,8 +48,8 @@ const handleInvalidToken = () => {
   const { tokens, setTokens } = useAuthTokensStore.getState();
 
   if (address && tokens[address]) {
-    const updatedTokens = { ...tokens };
-    delete updatedTokens[address];
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { [address]: _removed, ...updatedTokens } = tokens;
     setTokens(updatedTokens);
   }
 };
