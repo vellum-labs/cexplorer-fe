@@ -1,102 +1,350 @@
 [
   {
-    "internalName": "vespr",
-    "supportedPlatforms": {
-      "web": true,
-      "iOS": true,
-      "android": true
-    },
-    "opensource": false,
-    "smartContractInteraction": true,
-    "stakingSupport": true,
-    "multiPoolDelegation": false,
-    "nftMarketplaceIntegration": {
-      "enabled": false,
-      "partner": ""
-    },
-    "swapsInWallet": {
-      "enabled": true,
-      "partner": "DexHunter"
-    },
-    "fiatOnramp": {
-      "enabled": true,
-      "partner": "Topper by Uphold"
-    },
-    "dAppBrowser": true,
-    "governanceRegistration": true,
-    "governanceRegistrationInfo": "full support via gov.tools",
-    "cardanoGovernanceFeatures": true,
-    "otherFeatures": {
-      "feature1": "Multi-language support",
-      "feature2": "Boost - using DexHunter submit nodes",
-      "feature3": "Biometric authentication and tx signing",
-      "feature4": "Discreet Mode",
-      "feature5": "Proof of Onboarding - QR code token claim",
-      "feature6": "Light/Dark Mode",
-      "feature7": "Unlimited wallets"
-    },
-    "hardwareWalletCompatibility": {
-      "ledger": true,
-      "trezor": false,
-      "keystone": true
-    },
-    "multipleAccounts": false,
-    "customNode": false,
-    "crossChainCompatibility": {
-      "enabled": false,
-      "supportedChains": []
-    },
-    "addressBook": false,
-    "testnetSupport": true
+      "customNode": [],
+      "fiatOnramp": {
+          "enabled": [],
+          "partner": "Transak"
+      },
+      "opensource": [],
+      "addressBook": [],
+      "dAppBrowser": [],
+      "internalName": "begin",
+      "otherFeatures": {
+          "feature1": "Begin ID",
+          "feature2": "ADA Handle",
+          "feature3": "Multi-Account",
+          "feature4": "Contacts",
+          "feature5": "Bookmarks",
+          "feature6": "Realtime Chart",
+          "feature7": "Notifications",
+          "feature8": "Price alert",
+          "feature9": "Custom Lookscreen",
+          "feature10": "Deeplink"
+      },
+      "swapsInWallet": {
+          "enabled": [],
+          "partner": "DexHunter"
+      },
+      "governanceInfo": "",
+      "stakingSupport": [],
+      "testnetSupport": [],
+      "multipleAccounts": [],
+      "governanceSupport": [],
+      "supportedPlatforms": {
+          "iOS": [],
+          "web": [],
+          "android": []
+      },
+      "multiPoolDelegation": false,
+      "crossChainCompatibility": {
+          "enabled": false,
+          "supportedChains": []
+      },
+      "smartContractInteraction": [],
+      "nftMarketplaceIntegration": {
+          "enabled": [],
+          "partner": "JPG Store"
+      },
+      "hardwareWalletCompatibility": {
+          "ledger": [],
+          "trezor": false,
+          "keystone": []
+      }
   },
   {
-    "internalName": "lace",
-    "supportedPlatforms": {
-      "web": true,
-      "iOS": true,
-      "android": true
-    },
-    "opensource": true,
-    "smartContractInteraction": true,
-    "stakingSupport": true,
-    "multiPoolDelegation": true,
-    "cardanoGovernanceFeatures": false,
-    "nftMarketplaceIntegration": {
-      "enabled": true,
-      "partner": ""
-    },
-    "swapsInWallet": {
-      "enabled": true,
-      "partner": ""
-    },
-    "fiatOnramp": {
-      "enabled": true,
-      "partner": ""
-    },
-    "dAppBrowser": true,
-    "governanceSupport": true,
-    "governanceInfo": "",
-    "otherFeatures": {
-      "feature1": "",
-      "feature2": "",
-      "feature3": "",
-      "feature4": "",
-      "feature5": "",
-      "feature6": "",
-      "feature7": ""
-    },
-    "hardwareWalletCompatibility": {
-      "ledger": true,
-      "trezor": false,
-      "keystone": true
-    },
-    "multipleAccounts": false,
-    "customNode": false,
-    "crossChainCompatibility": {
-      "enabled": false,
-      "supportedChains": []
-    },
-    "addressBook": false,
-    "testnetSupport": true
+      "customNode": [],
+      "fiatOnramp": {
+          "enabled": [],
+          "partner": "Guardarian, Mercuryo and Transak"
+      },
+      "opensource": false,
+      "addressBook": [],
+      "dAppBrowser": [],
+      "internalName": "eternl",
+      "otherFeatures": {
+          "feature1": "CardanoConnect (CIP-45)",
+          "feature2": "WalletConnect",
+          "feature3": "Eternl Guard Scam Prevention",
+          "feature4": "Custom Transaction Building",
+          "feature5": "Wallet Rebalancing (Token Fragmentation & Collecting UTxOs)",
+          "feature6": "Catalyst support",
+          "feature7": "Encrypted Wallet Backups"
+      },
+      "swapsInWallet": {
+          "enabled": [],
+          "partner": "MuesliSwap, DexHunter, ADA Markets and SteelSwap"
+      },
+      "governanceInfo": "Full support through govtools, ability to delegate to a specific DRep in-wallet",
+      "stakingSupport": [],
+      "testnetSupport": [],
+      "multipleAccounts": [],
+      "governanceSupport": [],
+      "supportedPlatforms": {
+          "iOS": [],
+          "web": [],
+          "android": []
+      },
+      "multiPoolDelegation": false,
+      "crossChainCompatibility": {
+          "enabled": [],
+          "supportedChains": [
+              "Apex Fusion"
+          ]
+      },
+      "smartContractInteraction": [],
+      "nftMarketplaceIntegration": {
+          "enabled": [],
+          "partner": "JPG.store and Wayup.io through DApp Browser"
+      },
+      "hardwareWalletCompatibility": {
+          "ledger": [],
+          "trezor": [],
+          "keystone": []
+      }
+  },
+  {
+      "customNode": false,
+      "fiatOnramp": {
+          "enabled": [],
+          "partner": "Topper by Uphold"
+      },
+      "opensource": false,
+      "addressBook": false,
+      "dAppBrowser": [],
+      "internalName": "vespr",
+      "otherFeatures": {
+          "feature1": "Multi-language support",
+          "feature2": "Boost - using DexHunter submit nodes",
+          "feature3": "Biometric authentication and tx signing",
+          "feature4": "Discreet Mode",
+          "feature5": "Proof of Onboarding - QR code token claim",
+          "feature6": "Light/Dark Mode",
+          "feature7": "Unlimited wallets"
+      },
+      "swapsInWallet": {
+          "enabled": [],
+          "partner": "DexHunter"
+      },
+      "stakingSupport": [],
+      "testnetSupport": [],
+      "multipleAccounts": false,
+      "supportedPlatforms": {
+          "iOS": [],
+          "web": [],
+          "android": []
+      },
+      "multiPoolDelegation": false,
+      "governanceRegistration": [],
+      "crossChainCompatibility": {
+          "enabled": false,
+          "supportedChains": []
+      },
+      "smartContractInteraction": [],
+      "nftMarketplaceIntegration": {
+          "enabled": false,
+          "partner": ""
+      },
+      "governanceRegistrationInfo": "full support via gov.tools",
+      "hardwareWalletCompatibility": {
+          "ledger": [],
+          "trezor": false,
+          "keystone": []
+      }
+  },
+  {
+      "customNode": false,
+      "fiatOnramp": {
+          "enabled": [],
+          "partner": ""
+      },
+      "opensource": [],
+      "addressBook": false,
+      "dAppBrowser": [],
+      "internalName": "lace",
+      "otherFeatures": {
+          "feature1": "",
+          "feature2": "",
+          "feature3": "",
+          "feature4": "",
+          "feature5": "",
+          "feature6": "",
+          "feature7": ""
+      },
+      "swapsInWallet": {
+          "enabled": [],
+          "partner": ""
+      },
+      "governanceInfo": "",
+      "stakingSupport": [],
+      "testnetSupport": [],
+      "multipleAccounts": false,
+      "governanceSupport": [],
+      "supportedPlatforms": {
+          "iOS": [],
+          "web": [],
+          "android": []
+      },
+      "multiPoolDelegation": [],
+      "crossChainCompatibility": {
+          "enabled": false,
+          "supportedChains": []
+      },
+      "smartContractInteraction": [],
+      "nftMarketplaceIntegration": {
+          "enabled": [],
+          "partner": ""
+      },
+      "hardwareWalletCompatibility": {
+          "ledger": [],
+          "trezor": false,
+          "keystone": []
+      }
+  },
+  {
+      "customNode": false,
+      "fiatOnramp": {
+          "enabled": [],
+          "partner": ""
+      },
+      "opensource": [],
+      "addressBook": false,
+      "dAppBrowser": [],
+      "internalName": "yoroi",
+      "otherFeatures": {
+          "feature1": "",
+          "feature2": "",
+          "feature3": "",
+          "feature4": "",
+          "feature5": "",
+          "feature6": "",
+          "feature7": ""
+      },
+      "swapsInWallet": {
+          "enabled": [],
+          "partner": ""
+      },
+      "governanceInfo": "",
+      "stakingSupport": [],
+      "testnetSupport": [],
+      "multipleAccounts": false,
+      "governanceSupport": [],
+      "supportedPlatforms": {
+          "iOS": [],
+          "web": [],
+          "android": []
+      },
+      "multiPoolDelegation": [],
+      "crossChainCompatibility": {
+          "enabled": false,
+          "supportedChains": []
+      },
+      "smartContractInteraction": [],
+      "nftMarketplaceIntegration": {
+          "enabled": [],
+          "partner": ""
+      },
+      "hardwareWalletCompatibility": {
+          "ledger": [],
+          "trezor": false,
+          "keystone": []
+      }
+  },
+  {
+      "customNode": false,
+      "fiatOnramp": {
+          "enabled": [],
+          "partner": ""
+      },
+      "opensource": [],
+      "addressBook": false,
+      "dAppBrowser": [],
+      "internalName": "tokeo",
+      "otherFeatures": {
+          "feature1": "",
+          "feature2": "",
+          "feature3": "",
+          "feature4": "",
+          "feature5": "",
+          "feature6": "",
+          "feature7": ""
+      },
+      "swapsInWallet": {
+          "enabled": [],
+          "partner": ""
+      },
+      "governanceInfo": "",
+      "stakingSupport": [],
+      "testnetSupport": [],
+      "multipleAccounts": false,
+      "governanceSupport": [],
+      "supportedPlatforms": {
+          "iOS": [],
+          "web": [],
+          "android": []
+      },
+      "multiPoolDelegation": [],
+      "crossChainCompatibility": {
+          "enabled": false,
+          "supportedChains": []
+      },
+      "smartContractInteraction": [],
+      "nftMarketplaceIntegration": {
+          "enabled": [],
+          "partner": ""
+      },
+      "hardwareWalletCompatibility": {
+          "ledger": [],
+          "trezor": false,
+          "keystone": []
+      }
+  },
+  {
+      "customNode": false,
+      "fiatOnramp": {
+          "enabled": [],
+          "partner": ""
+      },
+      "opensource": [],
+      "addressBook": false,
+      "dAppBrowser": [],
+      "internalName": "nufi",
+      "otherFeatures": {
+          "feature1": "",
+          "feature2": "",
+          "feature3": "",
+          "feature4": "",
+          "feature5": "",
+          "feature6": "",
+          "feature7": ""
+      },
+      "swapsInWallet": {
+          "enabled": [],
+          "partner": ""
+      },
+      "governanceInfo": "",
+      "stakingSupport": [],
+      "testnetSupport": [],
+      "multipleAccounts": false,
+      "governanceSupport": [],
+      "supportedPlatforms": {
+          "iOS": [],
+          "web": [],
+          "android": []
+      },
+      "multiPoolDelegation": [],
+      "crossChainCompatibility": {
+          "enabled": false,
+          "supportedChains": []
+      },
+      "smartContractInteraction": [],
+      "nftMarketplaceIntegration": {
+          "enabled": [],
+          "partner": ""
+      },
+      "hardwareWalletCompatibility": {
+          "ledger": [],
+          "trezor": false,
+          "keystone": []
+      }
   }
 ]
