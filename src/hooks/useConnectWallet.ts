@@ -82,6 +82,7 @@ export const useConnectWallet = () => {
 
   const disconnect = () => {
     setWalletState(defaultState);
+    localStorage.removeItem("wallet-store");
   };
 
   return { connect, disconnect };

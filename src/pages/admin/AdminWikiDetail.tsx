@@ -36,21 +36,22 @@ interface FormState {
   categories: string[];
 }
 
-export const AdminArticleDetail = () => {
-  const route = getRouteApi("/admin/articles/$url");
+export const AdminWikiDetail = () => {
+  const route = getRouteApi("/admin/wiki/$url");
   const { theme } = useThemeStore();
   const { url }: { url: ArticleUrl } = route.useParams();
   const { tokens } = useAuthTokensStore();
   const { address } = useWalletStore();
   const [token, setToken] = useState(tokens[address || ""]?.token);
   const { lang } = useSearch({
-    from: "/admin/articles/$url",
+    from: "/admin/wiki/$url",
   }) as any;
   const query = useFetchAdminArticle({
     token,
     type: "detail",
     lang: lang || "en",
     url,
+    category: "wiki",
   });
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -82,7 +83,7 @@ export const AdminArticleDetail = () => {
   }, [data]);
 
   const { clearDraft, hasDraft, discardDraft } = useFormDraft(
-    `article_${url}_${lang || "en"}`,
+    `wiki_${url}_${lang || "en"}`,
     formState,
     setFormState,
     serverData,
@@ -99,13 +100,14 @@ export const AdminArticleDetail = () => {
     token,
     url,
     lang: lang || "en",
+    category: "wiki",
     onSuccess: () => {
       clearDraft();
-      toast.success("Article updated");
+      toast.success("Wiki article updated");
       query.refetch();
     },
     onError: (error: Error) => {
-      toast.error(error.message || "Failed to update article");
+      toast.error(error.message || "Failed to update wiki article");
     },
   });
 
@@ -131,7 +133,7 @@ export const AdminArticleDetail = () => {
   return (
     <main className='relative flex min-h-minHeight max-w-desktop flex-col gap-1 p-mobile md:p-desktop'>
       <Helmet>
-        <title>Admin article detail | Cexplorer.io</title>
+        <title>Admin wiki detail | Cexplorer.io</title>
       </Helmet>
       <BreadcrumbRaw className='w-full'>
         <BreadcrumbList className='flex items-center'>
@@ -148,11 +150,8 @@ export const AdminArticleDetail = () => {
           </BreadcrumbItem>
           /
           <BreadcrumbItem>
-            <Link
-              className='underline underline-offset-2'
-              to={"/admin/articles"}
-            >
-              Admin articles
+            <Link className='underline underline-offset-2' to={"/admin/wiki"}>
+              Admin wiki
             </Link>
           </BreadcrumbItem>
           /<BreadcrumbItem className='text-text'>{data?.name}</BreadcrumbItem>
@@ -208,6 +207,7 @@ export const AdminArticleDetail = () => {
               >
             }
           />
+
           {(
             [
               { label: "Keywords", field: "keywords", placeholder: "Keywords" },
@@ -233,6 +233,7 @@ export const AdminArticleDetail = () => {
               className='mb-4 bg-background text-text'
             />
           </div>
+
           <p>Content:</p>
           <div
             role='button'

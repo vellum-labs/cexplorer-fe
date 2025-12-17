@@ -20,7 +20,7 @@ import { toast } from "sonner";
 
 import { Helmet } from "react-helmet";
 
-export const ArticlesAdminPage = () => {
+export const WikiAdminPage = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState<string>("");
@@ -29,6 +29,7 @@ export const ArticlesAdminPage = () => {
   const query = useFetchAdminArticle({
     token,
     type: "list",
+    category: "wiki",
   }) as UseQueryResult<AdminArticleListResponse>;
 
   const data = query.data?.data.data;
@@ -36,16 +37,16 @@ export const ArticlesAdminPage = () => {
   const createMutation = useCreateAdminArticle({
     token,
     lang: "en",
-    category: "article",
+    category: "wiki",
     onSuccess: data => {
-      toast.success("Article created");
+      toast.success("Wiki article created");
       setShowModal(false);
       navigate({
-        to: `/admin/articles/${data.data.url}`,
+        to: `/admin/wiki/${data.data.url}`,
       });
     },
     onError: (error: Error) => {
-      toast.error(error.message || "Failed to create article");
+      toast.error(error.message || "Failed to create wiki article");
     },
   });
 
@@ -58,7 +59,7 @@ export const ArticlesAdminPage = () => {
       render: item => (
         <Link
           className='text-primary'
-          to='/admin/articles/$url'
+          to='/admin/wiki/$url'
           search={{ lang: item.lang }}
           params={{ url: item.url }}
         >
@@ -89,7 +90,7 @@ export const ArticlesAdminPage = () => {
     createMutation.mutate({
       name,
       lng: "en",
-      type: "article",
+      type: "wiki",
       render: "html",
     });
   };
@@ -105,7 +106,7 @@ export const ArticlesAdminPage = () => {
         >
           <div className='mt-4'>
             <TextInput
-              placeholder='Article name'
+              placeholder='Wiki article name'
               value={name}
               onchange={value => setName(value)}
             />
@@ -121,7 +122,7 @@ export const ArticlesAdminPage = () => {
       )}
       <div className='flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
         <Helmet>
-          <title>Admin articles | Cexplorer.io</title>
+          <title>Admin wiki | Cexplorer.io</title>
         </Helmet>
         <div className='flex w-full max-w-desktop flex-col items-center justify-center'>
           <BreadcrumbRaw className='mb-2 w-full'>
@@ -138,9 +139,7 @@ export const ArticlesAdminPage = () => {
                 </Link>
               </BreadcrumbItem>
               /
-              <BreadcrumbItem className='text-text'>
-                Admin Articles
-              </BreadcrumbItem>
+              <BreadcrumbItem className='text-text'>Admin Wiki</BreadcrumbItem>
             </BreadcrumbList>
           </BreadcrumbRaw>
           {query.isLoading ? (

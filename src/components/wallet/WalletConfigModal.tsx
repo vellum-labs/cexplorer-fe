@@ -1,16 +1,17 @@
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useConnectWallet } from "@/hooks/useConnectWallet";
-import { loginUser } from "@/services/user";
+import { useLoginUser } from "@/services/user";
 import { useAuthTokensStore } from "@/stores/authTokensStore";
 import { useWalletConfigModalState } from "@/stores/states/walletConfigModalState";
 import { useUqStore } from "@/stores/uqStore";
 import { useWalletStore } from "@/stores/walletStore";
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { toast } from "sonner";
 
 const date = new Date();
 const month = date.toLocaleDateString("en-US", { month: "2-digit" });
@@ -21,10 +22,41 @@ const WalletConfigModal = () => {
   const { isOpen, setIsOpen } = useWalletConfigModalState();
   const { uq } = useUqStore();
   const secureRef = useRef<0 | 1>(0);
-  const expirationRef = useRef<"d" | "w" | "m" | "y">("y");
+  const expirationRef = useRef<"d" | "w" | "m" | "y">("d");
   const { address, wallet } = useWalletStore();
   const { tokens, setTokens } = useAuthTokensStore();
   const { disconnect } = useConnectWallet();
+  const [isSigningData, setIsSigningData] = useState(false);
+
+  const loginMutation = useLoginUser({
+    onSuccess: data => {
+      const token = data?.data.token;
+
+      if (!token) {
+        toast.error("Failed to get authorization token.");
+        return;
+      }
+
+      if (address) {
+        setTokens({
+          ...tokens,
+          [address]: {
+            token,
+          },
+        });
+      }
+
+      setIsOpen(false);
+    },
+    onError: error => {
+      console.error("Login error:", error);
+      toast.error(
+        error instanceof Error ? error.message : "Failed to login",
+      );
+    },
+  });
+
+  const isLoading = isSigningData || loginMutation.isPending;
 
   const closeAndDisconnect = () => {
     disconnect();
@@ -63,35 +95,35 @@ const WalletConfigModal = () => {
   };
 
   const handleConfirmation = async () => {
-    if (!wallet || !address) return;
+    if (!wallet || !address) {
+      toast.error("Wallet not connected. Please try reconnecting.");
+      return;
+    }
 
-    const payload = `cexplorer_${dateNumber}_${address}`;
-    const hexPayload = Buffer.from(payload, "utf8").toString("hex");
+    try {
+      setIsSigningData(true);
+      const payload = `cexplorer_${dateNumber}_${address}`;
+      const hexPayload = Buffer.from(payload, "utf8").toString("hex");
 
-    const message = await wallet.signData(address, hexPayload);
+      const message = await wallet.signData(hexPayload, address);
+      setIsSigningData(false);
 
-    const loginData = await loginUser({
-      address,
-      uq,
-      signature: message.signature,
-      key: message.key,
-      version: 1,
-      secure: secureRef.current,
-      expiration: translateExpiration(expirationRef.current),
-    });
-
-    const token = loginData?.data.token;
-
-    if (!token || !address) return;
-
-    setTokens({
-      ...tokens,
-      [address]: {
-        token,
-      },
-    });
-
-    setIsOpen(false);
+      loginMutation.mutate({
+        address,
+        uq,
+        signature: message.signature,
+        key: message.key,
+        version: 1,
+        secure: secureRef.current,
+        expiration: translateExpiration(expirationRef.current),
+      });
+    } catch (error) {
+      setIsSigningData(false);
+      console.error("Wallet signing error:", error);
+      toast.error(
+        error instanceof Error ? error.message : "Failed to sign message",
+      );
+    }
   };
 
   if (!isOpen) return null;
@@ -152,7 +184,7 @@ const WalletConfigModal = () => {
         onValueChange={value => {
           expirationRef.current = value as "d" | "w" | "m" | "y";
         }}
-        defaultValue='y'
+        defaultValue='d'
         className='mt-1.5 flex gap-2'
       >
         <div className='flex items-center space-x-2'>
@@ -175,10 +207,11 @@ const WalletConfigModal = () => {
       <div className='flex justify-end'>
         <Button
           className='mt-5 px-4'
-          label='Confirm'
+          label={isLoading ? "Confirming..." : "Confirm"}
           size='md'
           onClick={handleConfirmation}
           variant='primary'
+          disabled={isLoading}
         />
       </div>
     </Modal>
