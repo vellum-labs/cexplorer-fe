@@ -10,6 +10,7 @@ import {
   Search,
   ArrowLeftRight,
   Wrench,
+  Binary,
 } from "lucide-react";
 import { DiscordLogo, GithubLogo } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
@@ -80,6 +81,20 @@ export const DevToolingPage = () => {
         },
       ],
       icon: <Wrench className='text-primary' />,
+    },
+    {
+      label: "UPLC Viewer",
+      description:
+        "Inspect and explore UPLC scripts in a readable, structured format.",
+      buttons: [
+        {
+          label: "UPLC Viewer",
+          href: "/uplc",
+          variant: "primary" as const,
+          icon: <ArrowRight size={16} />,
+        },
+      ],
+      icon: <Binary className='text-primary' />,
     },
     {
       label: "Cexplorer instances",
@@ -226,10 +241,7 @@ export const DevToolingPage = () => {
                   }
 
                   return (
-                    <Link
-                      key={btnIndex}
-                      to={button.href as any}
-                    >
+                    <Link key={btnIndex} to={button.href as any}>
                       {buttonContent}
                     </Link>
                   );
