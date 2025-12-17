@@ -1,7 +1,6 @@
 import { Check, ChevronsUpDown } from "lucide-react";
 import * as React from "react";
 
-import { Button } from "@vellumlabs/cexplorer-sdk";
 import {
   Command,
   CommandEmpty,
@@ -31,76 +30,71 @@ interface Props {
 }
 
 export function ArticleCombobox({
-  categories,
+  categories: categoriesProp,
   setCategories,
   className,
 }: Props) {
   const [open, setOpen] = React.useState(false);
+  const categories = Array.isArray(categoriesProp) ? categoriesProp : [];
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild className={className}>
-        <Button
-          variant='tertiary'
-          size='md'
+      <PopoverTrigger className={cn("w-full", className)}>
+        <div
+          role='combobox'
           aria-expanded={open}
-          className='w-[200px] justify-between bg-background text-text'
-          label={
-            <>
-              <span className='block overflow-hidden text-ellipsis'>
-                {categories.length > 0
-                  ? categoriesOptions
-                      .filter(category =>
-                        categories?.find(c => c === category.value),
-                      )
-                      .map(category => category.label)
-                      .join(", ")
-                  : "Select categories"}
-              </span>
-              <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
-            </>
-          }
-        />
+          className='flex h-[34px] w-full cursor-pointer items-center justify-between rounded-m border border-border bg-background px-2 text-text-sm text-text hover:bg-cardBg'
+        >
+          <span className='truncate'>
+            {categories.length > 0
+              ? categoriesOptions
+                  .filter(category =>
+                    categories?.find(c => c === category.value),
+                  )
+                  .map(category => category.label)
+                  .join(", ")
+              : "Select categories"}
+          </span>
+          <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
+        </div>
       </PopoverTrigger>
-      <PopoverContent className='w-[200px] p-0'>
+      <PopoverContent className='w-[var(--radix-popover-trigger-width)] p-0' align='start'>
         <Command>
           <CommandInput placeholder='Search categories...' />
           <CommandList>
             <CommandEmpty>No category found.</CommandEmpty>
             <CommandGroup>
-              {categoriesOptions.map(category => (
-                <CommandItem
-                  key={category.value}
-                  value={category.value}
-                  onSelect={currentValue => {
-                    const newCategories = categories;
-                    if (
-                      newCategories.includes(currentValue as ArticleCategories)
-                    ) {
-                      newCategories.splice(
-                        newCategories.indexOf(
-                          currentValue as ArticleCategories,
-                        ),
-                        1,
-                      );
-                    } else {
-                      newCategories.push(currentValue as ArticleCategories);
-                    }
-                    setCategories(() => [...newCategories]);
-                  }}
-                >
-                  <Check
-                    className={cn(
-                      "mr-1 h-4 w-4",
-                      categories.length > 0 &&
-                        categories?.find(c => c === category.value)
-                        ? "opacity-100"
-                        : "opacity-0",
-                    )}
-                  />
-                  {category.label}
-                </CommandItem>
-              ))}
+              {categoriesOptions.map(category => {
+                const isSelected = categories.includes(
+                  category.value as ArticleCategories,
+                );
+                return (
+                  <CommandItem
+                    key={category.value}
+                    value={category.value}
+                    onSelect={() => {
+                      if (isSelected) {
+                        setCategories(
+                          categories.filter(c => c !== category.value),
+                        );
+                      } else {
+                        setCategories([
+                          ...categories,
+                          category.value as ArticleCategories,
+                        ]);
+                      }
+                    }}
+                  >
+                    <Check
+                      className={cn(
+                        "mr-1 h-4 w-4",
+                        isSelected ? "opacity-100" : "opacity-0",
+                      )}
+                    />
+                    {category.label}
+                  </CommandItem>
+                );
+              })}
             </CommandGroup>
           </CommandList>
         </Command>
