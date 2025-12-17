@@ -7,10 +7,11 @@ import { useWalletConfigModalState } from "@/stores/states/walletConfigModalStat
 import { useUqStore } from "@/stores/uqStore";
 import { useWalletStore } from "@/stores/walletStore";
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { toast } from "sonner";
 
 const date = new Date();
 const month = date.toLocaleDateString("en-US", { month: "2-digit" });
@@ -21,10 +22,11 @@ const WalletConfigModal = () => {
   const { isOpen, setIsOpen } = useWalletConfigModalState();
   const { uq } = useUqStore();
   const secureRef = useRef<0 | 1>(0);
-  const expirationRef = useRef<"d" | "w" | "m" | "y">("y");
+  const expirationRef = useRef<"d" | "w" | "m" | "y">("d");
   const { address, wallet } = useWalletStore();
   const { tokens, setTokens } = useAuthTokensStore();
   const { disconnect } = useConnectWallet();
+  const [isLoading, setIsLoading] = useState(false);
 
   const closeAndDisconnect = () => {
     disconnect();
@@ -63,35 +65,52 @@ const WalletConfigModal = () => {
   };
 
   const handleConfirmation = async () => {
-    if (!wallet || !address) return;
+    if (!wallet || !address) {
+      toast.error("Wallet not connected. Please try reconnecting.");
+      return;
+    }
 
-    const payload = `cexplorer_${dateNumber}_${address}`;
-    const hexPayload = Buffer.from(payload, "utf8").toString("hex");
+    setIsLoading(true);
 
-    const message = await wallet.signData(address, hexPayload);
+    try {
+      const payload = `cexplorer_${dateNumber}_${address}`;
+      const hexPayload = Buffer.from(payload, "utf8").toString("hex");
 
-    const loginData = await loginUser({
-      address,
-      uq,
-      signature: message.signature,
-      key: message.key,
-      version: 1,
-      secure: secureRef.current,
-      expiration: translateExpiration(expirationRef.current),
-    });
+      const message = await wallet.signData(hexPayload, address);
 
-    const token = loginData?.data.token;
+      const loginData = await loginUser({
+        address,
+        uq,
+        signature: message.signature,
+        key: message.key,
+        version: 1,
+        secure: secureRef.current,
+        expiration: translateExpiration(expirationRef.current),
+      });
 
-    if (!token || !address) return;
+      const token = loginData?.data.token;
 
-    setTokens({
-      ...tokens,
-      [address]: {
-        token,
-      },
-    });
+      if (!token) {
+        toast.error("Failed to get authorization token.");
+        return;
+      }
 
-    setIsOpen(false);
+      setTokens({
+        ...tokens,
+        [address]: {
+          token,
+        },
+      });
+
+      setIsOpen(false);
+    } catch (error) {
+      console.error("Wallet confirmation error:", error);
+      toast.error(
+        error instanceof Error ? error.message : "Failed to sign message",
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (!isOpen) return null;
@@ -152,7 +171,7 @@ const WalletConfigModal = () => {
         onValueChange={value => {
           expirationRef.current = value as "d" | "w" | "m" | "y";
         }}
-        defaultValue='y'
+        defaultValue='d'
         className='mt-1.5 flex gap-2'
       >
         <div className='flex items-center space-x-2'>
@@ -175,10 +194,11 @@ const WalletConfigModal = () => {
       <div className='flex justify-end'>
         <Button
           className='mt-5 px-4'
-          label='Confirm'
+          label={isLoading ? "Confirming..." : "Confirm"}
           size='md'
           onClick={handleConfirmation}
           variant='primary'
+          disabled={isLoading}
         />
       </div>
     </Modal>
