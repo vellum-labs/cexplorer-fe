@@ -36,7 +36,20 @@ export const useConnectWallet = () => {
     const wallet = await BrowserWallet.enable(walletType);
 
     const usedAddresses = await wallet.getUsedAddresses();
-    const address = usedAddresses[0];
+    let address = usedAddresses[0];
+
+    if (!address) {
+      const unusedAddresses = await wallet.getUnusedAddresses();
+      address = unusedAddresses[0];
+    }
+
+    if (!address) {
+      toast.error(
+        "No address found in wallet. Please ensure your wallet has an address.",
+      );
+      setWalletState(defaultState);
+      return;
+    }
 
     const rewardAddresses = await wallet.getRewardAddresses();
     const rewardAddress = rewardAddresses?.[0];
