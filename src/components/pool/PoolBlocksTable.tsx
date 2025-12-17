@@ -62,7 +62,7 @@ const PoolBlocksTable = ({ poolId }: Props) => {
       },
       title: "Date",
       visible: columnsVisibility.date,
-      widthPx: 95,
+      widthPx: 65,
     },
     {
       key: "block_no",
