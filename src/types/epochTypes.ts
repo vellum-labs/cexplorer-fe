@@ -139,7 +139,15 @@ interface EpochDaily {
 export interface EpochStatsSummary {
   pots: PotStats;
   daily: EpochDaily[];
-  epoch: EpochStat;
+  epoch: {
+    block_count: number;
+    block_size: number;
+    end_time: string;
+    fees: number;
+    out_sum: number;
+    start_time: string;
+    tx_count: number;
+  };
   proto: ProtoStats;
   stake: StakeStats;
   rewards: RewardStats;
