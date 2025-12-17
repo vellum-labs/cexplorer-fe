@@ -20,14 +20,14 @@ export const ShortcutsModal: FC<ShortcutsModalProps> = ({ onClose }) => {
     {
       title: "Navigation",
       shortcuts: [
-        { label: "Homepage", keys: ["g", "then", "h"] },
-        { label: "Transactions", keys: ["g", "then", "t"] },
-        { label: "Blocks", keys: ["g", "then", "b"] },
-        { label: "Epochs", keys: ["g", "then", "e"] },
-        { label: "Pools", keys: ["g", "then", "p"] },
-        { label: "DReps", keys: ["g", "then", "d"] },
-        { label: "Assets", keys: ["g", "then", "a"] },
-        { label: "Governance actions", keys: ["g", "then", "o"] },
+        { label: "Homepage", keys: ["g", "+", "h"] },
+        { label: "Transactions", keys: ["g", "+", "t"] },
+        { label: "Blocks", keys: ["g", "+", "b"] },
+        { label: "Epochs", keys: ["g", "+", "e"] },
+        { label: "Pools", keys: ["g", "+", "p"] },
+        { label: "DReps", keys: ["g", "+", "d"] },
+        { label: "Assets", keys: ["g", "+", "a"] },
+        { label: "Governance actions", keys: ["g", "+", "o"] },
       ],
     },
     {
@@ -43,10 +43,10 @@ export const ShortcutsModal: FC<ShortcutsModalProps> = ({ onClose }) => {
   ];
 
   const renderKey = (key: string, index: number) => {
-    if (key === "then") {
+    if (key === "+") {
       return (
         <span key={index} className='px-1 text-text-sm text-grayTextPrimary'>
-          then
+          +
         </span>
       );
     }
