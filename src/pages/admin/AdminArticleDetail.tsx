@@ -16,8 +16,9 @@ import type { ArticleCategories, ArticleUrl } from "@/types/articleTypes";
 import type { AdminArticleDetailResponse } from "@/types/userTypes";
 import { getRouteApi, Link, useSearch } from "@tanstack/react-router";
 import type { SetStateAction } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
+import { useFormDraft } from "@/hooks/useFormDraft";
 import {
   nord,
   qtcreatorLight,
@@ -67,6 +68,26 @@ export const AdminArticleDetail = () => {
     categories: [],
   });
 
+  const serverData = useMemo<FormState | undefined>(() => {
+    if (!data) return undefined;
+    return {
+      name: data.name || "",
+      image: data.image || "",
+      content: data.data ? data.data[0] : "",
+      pubDate: data.pub_date || new Date().toISOString(),
+      description: data.description || "",
+      keywords: data.keywords || "",
+      categories: data.category || [],
+    };
+  }, [data]);
+
+  const { clearDraft, hasDraft, discardDraft } = useFormDraft(
+    `article_${url}_${lang || "en"}`,
+    formState,
+    setFormState,
+    serverData,
+  );
+
   const updateField = <K extends keyof FormState>(
     field: K,
     value: FormState[K],
@@ -79,6 +100,7 @@ export const AdminArticleDetail = () => {
     url,
     lang: lang || "en",
     onSuccess: () => {
+      clearDraft();
       toast.success("Article updated");
       query.refetch();
     },
@@ -105,18 +127,6 @@ export const AdminArticleDetail = () => {
   useEffect(() => {
     setToken(tokens[address || ""]?.token);
   }, [tokens, address]);
-
-  useEffect(() => {
-    setFormState({
-      name: data?.name || "",
-      image: data?.image || "",
-      content: data?.data ? data.data[0] : "",
-      pubDate: data?.pub_date || new Date().toISOString(),
-      description: data?.description || "",
-      keywords: data?.keywords || "",
-      categories: data?.category || [],
-    });
-  }, [data]);
 
   return (
     <main className='relative flex min-h-minHeight max-w-desktop flex-col gap-1 p-mobile md:p-desktop'>
@@ -158,8 +168,15 @@ export const AdminArticleDetail = () => {
         </p>
       ) : (
         <>
-          <h2>{data?.name}</h2>
-          {needCheck && <Badge color='red'>Needs check</Badge>}
+          <div className='flex items-center gap-2'>
+            <h2>{data?.name}</h2>
+            {needCheck && <Badge color='red'>Needs check</Badge>}
+            {hasDraft() && (
+              <button type='button' onClick={discardDraft}>
+                <Badge color='yellow'>Unsaved draft (click to discard)</Badge>
+              </button>
+            )}
+          </div>
 
           {(
             [
