@@ -30,8 +30,13 @@ import { NotFoundPage } from "@/pages/NotFoundPage";
 import { useFetchMiscBasic, useFetchMiscSearch } from "@/services/misc";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
+import { useShortcuts } from "@/hooks/shortcuts/useShortcuts";
+import { ShortcutsModal } from "@/components/global/ShortcutsModal";
+
 const RootComponent = () => {
   useGenerateSW();
+
+  const { openHelp, setOpenHelp } = useShortcuts();
 
   const [updateModal, setUpdateModal] = useState<boolean>(false);
 
@@ -231,6 +236,7 @@ const RootComponent = () => {
         )}
         {/* <TanStackRouterDevtools /> */}
         {/* <ReactQueryDevtools /> */}
+        {openHelp && <ShortcutsModal onClose={() => setOpenHelp(false)} />}
       </>
     </GlobalSearchProvider>
   );
