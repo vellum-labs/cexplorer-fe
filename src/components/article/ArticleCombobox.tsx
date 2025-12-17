@@ -1,5 +1,6 @@
 import { Check, ChevronsUpDown } from "lucide-react";
-import * as React from "react";
+import type { Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 
 import {
   Command,
@@ -25,7 +26,7 @@ const categoriesOptions = articleCategories.map(category => ({
 
 interface Props {
   categories: ArticleCategories[];
-  setCategories: React.Dispatch<React.SetStateAction<ArticleCategories[]>>;
+  setCategories: Dispatch<SetStateAction<ArticleCategories[]>>;
   className?: string;
 }
 
@@ -34,7 +35,7 @@ export function ArticleCombobox({
   setCategories,
   className,
 }: Props) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const categories = Array.isArray(categoriesProp) ? categoriesProp : [];
 
   return (
