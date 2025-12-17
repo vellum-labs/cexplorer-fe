@@ -39,6 +39,10 @@ export const nestedNavigationOptions: {
           label: "Pool debug",
           href: "/pool-debug",
         },
+        {
+          label: "UPLC viewer",
+          href: "/uplc",
+        },
       ],
     },
     services: {
