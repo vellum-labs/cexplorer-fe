@@ -9,16 +9,14 @@ import {
   BreadcrumbList,
 } from "@vellumlabs/cexplorer-sdk";
 import { useAuthToken } from "@/hooks/useAuthToken";
-import { fetchAdminArticle, useFetchAdminArticle } from "@/services/user";
+import { useCreateAdminArticle, useFetchAdminArticle } from "@/services/user";
 import type { TableColumns } from "@/types/tableTypes";
-import type {
-  AdminArticleCreationResponse,
-  AdminArticleListResponse,
-} from "@/types/userTypes";
+import type { AdminArticleListResponse } from "@/types/userTypes";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 import parse from "html-react-parser";
 import { useState } from "react";
+import { toast } from "sonner";
 
 import { Helmet } from "react-helmet";
 
@@ -35,6 +33,22 @@ export const WikiAdminPage = () => {
   }) as UseQueryResult<AdminArticleListResponse>;
 
   const data = query.data?.data.data;
+
+  const createMutation = useCreateAdminArticle({
+    token,
+    lang: "en",
+    category: "wiki",
+    onSuccess: data => {
+      toast.success("Wiki article created");
+      setShowModal(false);
+      navigate({
+        to: `/admin/wiki/${data.data.url}`,
+      });
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || "Failed to create wiki article");
+    },
+  });
 
   const columns: TableColumns<
     AdminArticleListResponse["data"]["data"][number]
@@ -71,23 +85,13 @@ export const WikiAdminPage = () => {
     },
   ];
 
-  const handleCreate = async () => {
+  const handleCreate = () => {
     if (!token) return;
-    const data = (await fetchAdminArticle({
-      token,
-      type: "create",
-      lang: "en",
-      category: "wiki",
-      body: {
-        name,
-        lng: "en",
-        type: "wiki",
-        render: "html",
-      },
-    })) as AdminArticleCreationResponse;
-
-    navigate({
-      to: `/admin/wiki/${data.data.url}`,
+    createMutation.mutate({
+      name,
+      lng: "en",
+      type: "wiki",
+      render: "html",
     });
   };
 

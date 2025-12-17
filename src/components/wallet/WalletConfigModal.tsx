@@ -1,7 +1,7 @@
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useConnectWallet } from "@/hooks/useConnectWallet";
-import { loginUser } from "@/services/user";
+import { useLoginUser } from "@/services/user";
 import { useAuthTokensStore } from "@/stores/authTokensStore";
 import { useWalletConfigModalState } from "@/stores/states/walletConfigModalState";
 import { useUqStore } from "@/stores/uqStore";
@@ -26,7 +26,37 @@ const WalletConfigModal = () => {
   const { address, wallet } = useWalletStore();
   const { tokens, setTokens } = useAuthTokensStore();
   const { disconnect } = useConnectWallet();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSigningData, setIsSigningData] = useState(false);
+
+  const loginMutation = useLoginUser({
+    onSuccess: data => {
+      const token = data?.data.token;
+
+      if (!token) {
+        toast.error("Failed to get authorization token.");
+        return;
+      }
+
+      if (address) {
+        setTokens({
+          ...tokens,
+          [address]: {
+            token,
+          },
+        });
+      }
+
+      setIsOpen(false);
+    },
+    onError: error => {
+      console.error("Login error:", error);
+      toast.error(
+        error instanceof Error ? error.message : "Failed to login",
+      );
+    },
+  });
+
+  const isLoading = isSigningData || loginMutation.isPending;
 
   const closeAndDisconnect = () => {
     disconnect();
@@ -70,15 +100,15 @@ const WalletConfigModal = () => {
       return;
     }
 
-    setIsLoading(true);
-
     try {
+      setIsSigningData(true);
       const payload = `cexplorer_${dateNumber}_${address}`;
       const hexPayload = Buffer.from(payload, "utf8").toString("hex");
 
       const message = await wallet.signData(hexPayload, address);
+      setIsSigningData(false);
 
-      const loginData = await loginUser({
+      loginMutation.mutate({
         address,
         uq,
         signature: message.signature,
@@ -87,29 +117,12 @@ const WalletConfigModal = () => {
         secure: secureRef.current,
         expiration: translateExpiration(expirationRef.current),
       });
-
-      const token = loginData?.data.token;
-
-      if (!token) {
-        toast.error("Failed to get authorization token.");
-        return;
-      }
-
-      setTokens({
-        ...tokens,
-        [address]: {
-          token,
-        },
-      });
-
-      setIsOpen(false);
     } catch (error) {
-      console.error("Wallet confirmation error:", error);
+      setIsSigningData(false);
+      console.error("Wallet signing error:", error);
       toast.error(
         error instanceof Error ? error.message : "Failed to sign message",
       );
-    } finally {
-      setIsLoading(false);
     }
   };
 

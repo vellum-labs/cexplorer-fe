@@ -8,8 +8,7 @@ import {
   BreadcrumbItem,
   BreadcrumbList,
 } from "@vellumlabs/cexplorer-sdk";
-import { useFetchAdminArticle } from "@/services/user";
-import { getUrl } from "@/utils/getUrl";
+import { useFetchAdminArticle, useUpdateAdminArticle } from "@/services/user";
 import { useAuthTokensStore } from "@/stores/authTokensStore";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useWalletStore } from "@/stores/walletStore";
@@ -25,6 +24,16 @@ import {
 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { toast } from "sonner";
 import { Helmet } from "react-helmet";
+
+interface FormState {
+  name: string;
+  image: string;
+  content: string;
+  pubDate: string;
+  description: string;
+  keywords: string;
+  categories: string[];
+}
 
 export const AdminArticleDetail = () => {
   const route = getRouteApi("/admin/articles/$url");
@@ -48,16 +57,6 @@ export const AdminArticleDetail = () => {
 
   const needCheck = data?.need_check === 1 ? true : false;
 
-  interface FormState {
-    name: string;
-    image: string;
-    content: string;
-    pubDate: string;
-    description: string;
-    keywords: string;
-    categories: string[];
-  }
-
   const [formState, setFormState] = useState<FormState>({
     name: "",
     image: "",
@@ -75,45 +74,32 @@ export const AdminArticleDetail = () => {
     setFormState(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleUpdate = async () => {
-    if (!token) return;
-    try {
-      const apiUrl = getUrl("/admin/article", {
-        url,
-        lang: lang || "en",
-        type: "update",
-      });
-      const payload = {
-        name: formState.name,
-        description: formState.description,
-        keywords: formState.keywords,
-        data: formState.content,
-        category: formState.categories,
-        image: formState.image,
-        pub_date: formState.pubDate,
-        render: "html",
-      };
-
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          usertoken: token,
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const result = await response.json();
-
-      if (typeof result?.data === "string") {
-        toast.error(result.data);
-        return;
-      }
-
-      toast.success("Page updated");
+  const updateMutation = useUpdateAdminArticle({
+    token,
+    url,
+    lang: lang || "en",
+    onSuccess: () => {
+      toast.success("Article updated");
       query.refetch();
-    } catch {
-      toast.error("Failed to update article");
-    }
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || "Failed to update article");
+    },
+  });
+
+  const handleUpdate = () => {
+    if (!token) return;
+
+    updateMutation.mutate({
+      name: formState.name,
+      description: formState.description,
+      keywords: formState.keywords,
+      data: formState.content,
+      category: formState.categories,
+      image: formState.image,
+      pub_date: formState.pubDate,
+      render: "html",
+    });
   };
 
   useEffect(() => {
@@ -174,18 +160,27 @@ export const AdminArticleDetail = () => {
         <>
           <h2>{data?.name}</h2>
           {needCheck && <Badge color='red'>Needs check</Badge>}
-          <p>Name:</p>
-          <TextInput
-            placeholder='Name'
-            onchange={value => updateField("name", value)}
-            value={formState.name}
-          />
-          <p>Description:</p>
-          <TextInput
-            placeholder='Description'
-            onchange={value => updateField("description", value)}
-            value={formState.description}
-          />
+
+          {(
+            [
+              { label: "Name", field: "name", placeholder: "Name" },
+              {
+                label: "Description",
+                field: "description",
+                placeholder: "Description",
+              },
+            ] as const
+          ).map(({ label, field, placeholder }) => (
+            <div key={field}>
+              <p>{label}:</p>
+              <TextInput
+                placeholder={placeholder}
+                onchange={value => updateField(field, value)}
+                value={formState[field]}
+              />
+            </div>
+          ))}
+
           <p>Categories:</p>
           <ArticleCombobox
             categories={formState.categories as ArticleCategories[]}
@@ -196,18 +191,22 @@ export const AdminArticleDetail = () => {
               >
             }
           />
-          <p>Keywords:</p>
-          <TextInput
-            placeholder='Keywords'
-            onchange={value => updateField("keywords", value)}
-            value={formState.keywords}
-          />
-          <p>Image:</p>
-          <TextInput
-            placeholder='Image'
-            onchange={value => updateField("image", value)}
-            value={formState.image}
-          />
+          {(
+            [
+              { label: "Keywords", field: "keywords", placeholder: "Keywords" },
+              { label: "Image", field: "image", placeholder: "Image" },
+            ] as const
+          ).map(({ label, field, placeholder }) => (
+            <div key={field}>
+              <p>{label}:</p>
+              <TextInput
+                placeholder={placeholder}
+                onchange={value => updateField(field, value)}
+                value={formState[field]}
+              />
+            </div>
+          ))}
+
           <p>Publish date:</p>
           <div className='mb-4 flex flex-col items-start gap-1/2'>
             <input

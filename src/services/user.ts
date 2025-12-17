@@ -64,7 +64,7 @@ export const loginUser = async ({
   version,
   key,
 }: Props) => {
-  if (!address) return;
+  if (!address) throw new Error("Address is required");
 
   const url = "/user/login";
 
@@ -73,6 +73,20 @@ export const loginUser = async ({
   };
 
   return handleFetch<UserLoginResponse>(url, undefined, options);
+};
+
+export const useLoginUser = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: (data: UserLoginResponse) => void;
+  onError?: (error: Error) => void;
+} = {}) => {
+  return useMutation({
+    mutationFn: loginUser,
+    onSuccess,
+    onError,
+  });
 };
 
 export const fetchUserInfo = async ({ token }: { token: string }) => {
@@ -305,6 +319,72 @@ export const useFetchAdminArticle = ({
     queryKey: ["admin-article", token, type, url, lang, category],
     queryFn: () => fetchAdminArticle({ token, type, url, lang, category }),
     enabled: !!token,
+  });
+};
+
+export const useUpdateAdminArticle = ({
+  token,
+  url,
+  lang,
+  category,
+  onSuccess,
+  onError,
+}: {
+  token: string;
+  url: ArticleUrl;
+  lang?: string;
+  category?: "wiki" | "article";
+  onSuccess?: () => void;
+  onError?: (error: Error) => void;
+}) => {
+  return useMutation({
+    mutationFn: (body: {
+      name: string;
+      description: string;
+      keywords: string;
+      data: string;
+      category: string[];
+      image: string;
+      pub_date: string;
+      render: string;
+    }) =>
+      fetchAdminArticle({
+        token,
+        type: "update",
+        url,
+        lang,
+        category,
+        body,
+      }),
+    onSuccess,
+    onError,
+  });
+};
+
+export const useCreateAdminArticle = ({
+  token,
+  lang,
+  category,
+  onSuccess,
+  onError,
+}: {
+  token: string;
+  lang?: string;
+  category?: "wiki" | "article";
+  onSuccess?: (data: AdminArticleCreationResponse) => void;
+  onError?: (error: Error) => void;
+}) => {
+  return useMutation({
+    mutationFn: (body: { name: string; lng: string; type: string; render: string }) =>
+      fetchAdminArticle({
+        token,
+        type: "create",
+        lang,
+        category,
+        body,
+      }) as Promise<AdminArticleCreationResponse>,
+    onSuccess,
+    onError,
   });
 };
 

@@ -9,16 +9,14 @@ import {
   BreadcrumbList,
 } from "@vellumlabs/cexplorer-sdk";
 import { useAuthToken } from "@/hooks/useAuthToken";
-import { fetchAdminArticle, useFetchAdminArticle } from "@/services/user";
+import { useCreateAdminArticle, useFetchAdminArticle } from "@/services/user";
 import type { TableColumns } from "@/types/tableTypes";
-import type {
-  AdminArticleCreationResponse,
-  AdminArticleListResponse,
-} from "@/types/userTypes";
+import type { AdminArticleListResponse } from "@/types/userTypes";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 import parse from "html-react-parser";
 import { useState } from "react";
+import { toast } from "sonner";
 
 import { Helmet } from "react-helmet";
 
@@ -34,6 +32,22 @@ export const ArticlesAdminPage = () => {
   }) as UseQueryResult<AdminArticleListResponse>;
 
   const data = query.data?.data.data;
+
+  const createMutation = useCreateAdminArticle({
+    token,
+    lang: "en",
+    category: "article",
+    onSuccess: data => {
+      toast.success("Article created");
+      setShowModal(false);
+      navigate({
+        to: `/admin/articles/${data.data.url}`,
+      });
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || "Failed to create article");
+    },
+  });
 
   const columns: TableColumns<
     AdminArticleListResponse["data"]["data"][number]
@@ -70,22 +84,13 @@ export const ArticlesAdminPage = () => {
     },
   ];
 
-  const handleCreate = async () => {
+  const handleCreate = () => {
     if (!token) return;
-    const data = (await fetchAdminArticle({
-      token,
-      type: "create",
-      lang: "en",
-      body: {
-        name,
-        lng: "en",
-        type: "article",
-        render: "html",
-      },
-    })) as AdminArticleCreationResponse;
-
-    navigate({
-      to: `/admin/articles/${data.data.url}`,
+    createMutation.mutate({
+      name,
+      lng: "en",
+      type: "article",
+      render: "html",
     });
   };
 
