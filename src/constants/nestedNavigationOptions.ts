@@ -36,10 +36,6 @@ export const nestedNavigationOptions: {
           href: "/rewards-calculator",
         },
         {
-          label: "Rewards calculator",
-          href: "/rewards-calculator",
-        },
-        {
           label: "Pool debug",
           href: "/pool-debug",
         },
