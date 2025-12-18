@@ -93,6 +93,7 @@ export interface Withdrawal {
     live: PoolInfo;
   };
   view: string;
+  rate?: RateData[];
 }
 
 export type WithdrawalsData = {
