@@ -30,6 +30,7 @@ interface RateData {
   ada: PriceData[];
   btc: PriceData[];
   date: string;
+  fiat?: Record<string, [number, number]>;
 }
 
 interface RewardSpendableEpoch {

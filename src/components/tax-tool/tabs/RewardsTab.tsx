@@ -52,6 +52,7 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
     return paginatedQuery.data.data;
   }, [paginatedQuery.data]);
 
+
   const getAdaUsdRate = useCallback((reward: any): number => {
     if (
       !reward.spendable_epoch?.rate ||

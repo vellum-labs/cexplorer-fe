@@ -234,7 +234,10 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
           const adaAmount = item.amount / 1_000_000;
           const values = calculateCurrencyValues(adaAmount);
           return (
-            <div className='text-right'>{formatRate(values.adaSecondary)}</div>
+            <div className='text-right'>
+              {formatNumber(formatRate(values.adaSecondary))}{" "}
+              {secondaryCurrency.toUpperCase()}
+            </div>
           );
         },
       },

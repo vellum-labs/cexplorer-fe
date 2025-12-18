@@ -81,9 +81,43 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
     return rateData.ada[0]?.close || 0;
   }, []);
 
-  const getAdaSecondaryRate = useCallback((): number => {
-    return adaPriceSecondary.todayValue || 0;
-  }, [adaPriceSecondary.todayValue]);
+  const getAdaSecondaryRate = useCallback(
+    (reward: RewardItem): number => {
+      // For USD, just return the ADA/USD rate
+      if (secondaryCurrency === "usd") {
+        return getAdaUsdRate(reward);
+      }
+
+      const rateData = reward.spendable_epoch?.rate?.[0];
+      const fiatRates = rateData?.fiat;
+
+      // Check if we have historical fiat rates
+      if (fiatRates) {
+        const secondaryFiat = fiatRates[secondaryCurrency];
+        const usdFiat = fiatRates["usd"];
+
+        if (secondaryFiat && usdFiat) {
+          const [secondaryToCzk, secondaryScale] = secondaryFiat;
+          const [usdToCzk, usdScale] = usdFiat;
+
+          // ADA/USD rate
+          const adaUsdRate = getAdaUsdRate(reward);
+          if (!adaUsdRate) return adaPriceSecondary.todayValue || 0;
+
+          // Convert: ADA/Secondary = ADA/USD * (USD_CZK / Secondary_CZK)
+          const usdRate = usdToCzk / usdScale;
+          const secondaryRate = secondaryToCzk / secondaryScale;
+          const adaSecondaryRate = adaUsdRate * (usdRate / secondaryRate);
+
+          return adaSecondaryRate;
+        }
+      }
+
+      // Fallback to today's rate
+      return adaPriceSecondary.todayValue || 0;
+    },
+    [secondaryCurrency, getAdaUsdRate, adaPriceSecondary.todayValue],
+  );
 
   const calculateCurrencyValues = useCallback(
     (
@@ -102,7 +136,7 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
       }
 
       const usdValue = adaAmount * adaUsdRate;
-      const adaSecondaryRate = getAdaSecondaryRate();
+      const adaSecondaryRate = getAdaSecondaryRate(reward);
       const secondaryValue = adaAmount * adaSecondaryRate;
 
       return {
@@ -281,7 +315,10 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
           const adaAmount = item.amount / 1_000_000;
           const values = calculateCurrencyValues(adaAmount, item);
           return (
-            <div className='text-right'>{formatRate(values.adaSecondary)}</div>
+            <div className='text-right'>
+              {formatNumber(formatRate(values.adaSecondary))}{" "}
+              {secondaryCurrency.toUpperCase()}
+            </div>
           );
         },
       },
