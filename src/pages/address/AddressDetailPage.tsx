@@ -7,7 +7,7 @@ import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { QRCodeSVG } from "qrcode.react";
-import { useMemo, type FC } from "react";
+import type { FC } from "react";
 import { TxListPage } from "../tx/TxListPage";
 
 import { Address } from "@/utils/address/getStakeAddress";
@@ -46,13 +46,10 @@ export const AddressDetailPage: FC = () => {
 
   const policyId = configJSON.integration[0].adahandle[0].policy;
 
-  const addressIcon = useMemo(() => {
-    const liveStake = addressData?.stake?.balance?.live ?? 0;
-    const balance = addressData?.balance ?? 0;
-    const amount = liveStake > 0 ? liveStake : balance;
-    const animalName = getAnimalNameByAmount(amount);
-    return addressIcons[animalName];
-  }, [addressData?.stake?.balance?.live, addressData?.balance]);
+  const liveStake = addressData?.stake?.balance?.live ?? 0;
+  const addressBalance = addressData?.balance ?? 0;
+  const addressIcon =
+    addressIcons[getAnimalNameByAmount(liveStake > 0 ? liveStake : addressBalance)];
 
   if (!isValidAddress(address)) {
     setNotFound(true);
