@@ -168,7 +168,7 @@ export const usePoolList = ({
     filter.is_drep && +filter.is_drep === 2 ? 1 : undefined,
   );
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const totalPools = poolsListQuery.data?.pages[0].data.count;
   const items = poolsListQuery.data?.pages.flatMap(page => page.data.data);

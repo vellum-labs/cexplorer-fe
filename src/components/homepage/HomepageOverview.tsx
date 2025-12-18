@@ -15,7 +15,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 
 export const HomepageOverview: FC = () => {
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const statCards = [
     {

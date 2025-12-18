@@ -17,7 +17,7 @@ const MetadataTabItem = () => {
   const metadataArr: TxMetadata[] = [];
 
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const [showContent, setShowContent] = useState(() => {
     return localStorage.getItem("showSensitiveContent") === "true";

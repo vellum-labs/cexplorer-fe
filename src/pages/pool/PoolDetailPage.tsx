@@ -26,7 +26,7 @@ const PoolDetailPage = () => {
     id.startsWith("pool1") ? undefined : id,
   );
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const data = query.data?.data;
 

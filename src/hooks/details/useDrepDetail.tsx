@@ -41,7 +41,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
   const isSystem = isSystemDrep(drepId);
   const curr = useGetMarketCurrency();
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const latestEpochNo = miscConst?.no;
   const { currency } = useCurrencyStore();
 

@@ -11,7 +11,7 @@ interface Props {
 
 export const PoolSaturation = ({ live_stake, className }: Props) => {
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const { theme } = useThemeStore();
 

@@ -24,7 +24,7 @@ export const ScriptDetailStatsTab = ({
   const { theme } = useThemeStore();
   const { bgColor, lineColor, splitLineColor, textColor } = useGraphColors();
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const interactions = items?.map(item => item?.item?.data?.redeemer?.count);
   const output = items?.map(item =>

@@ -23,7 +23,7 @@ import { poolIssuesMissedBlocksTableOptions } from "@/constants/tables/poolIssue
 
 export const PoolIssuesMissedBlocks: FC = () => {
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const [totalItems, setTotalItems] = useState<number>(0);
   const [active, setActive] = useState<string>("recent");

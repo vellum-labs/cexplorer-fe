@@ -43,7 +43,7 @@ export const useCCMemberDetail = ({
   votesData,
 }: UseCCMemberDetailArgs): UseCCMemberDetail => {
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const currentEpochNo = miscConst?.epoch?.no ?? 0;
 
   const expirationEpoch = memberData?.expiration_epoch ?? 0;

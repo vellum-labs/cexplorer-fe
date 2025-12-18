@@ -17,7 +17,7 @@ export const NetworkStorageTab: FC = () => {
 
   const data = epochQuery.data?.data.slice(0, epochQuery.data?.data.length - 4);
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const currStorIncrease =
     (((data ?? [])[0]?.stat?.count_block ?? 0) *

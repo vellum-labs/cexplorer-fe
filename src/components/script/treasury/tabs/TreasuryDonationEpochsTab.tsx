@@ -29,7 +29,7 @@ interface Props {
 
 export const TreasuryDonationEpochsTab = ({ query }: Props) => {
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const { currency } = useCurrencyStore();
   const epochs = query.data?.epoch;
   const totalAdaDonations = epochs?.map(item => item.treasury_donation);

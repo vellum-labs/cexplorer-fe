@@ -33,7 +33,7 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
   } = useGraphColors();
 
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const [graphsVisibility, setGraphsVisibility] = useState({
     "Delegators ROA (%)": true,

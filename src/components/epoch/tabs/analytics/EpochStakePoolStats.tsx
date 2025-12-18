@@ -23,7 +23,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
   stats,
 }) => {
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const statsRows = [
     {
