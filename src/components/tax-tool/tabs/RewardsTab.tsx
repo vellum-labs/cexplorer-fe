@@ -26,7 +26,6 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
   const { secondaryCurrency, setSecondaryCurrency } =
     useTaxToolPreferencesStore();
   const {
-    rows: storedRows,
     cachedSummary,
     setCachedSummary,
     lastStakeKey,
@@ -34,7 +33,7 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
   } = useTaxToolEpochRewardsTableStore();
   const [page, setPage] = useState(1);
 
-  const limit = storedRows;
+  const limit = 100;
 
   const offset = (page - 1) * limit;
   const isValidStakeKey = stakeKey && isValidAddress(stakeKey);
