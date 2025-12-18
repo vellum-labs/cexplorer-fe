@@ -7,10 +7,12 @@ import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { QRCodeSVG } from "qrcode.react";
-import { type FC } from "react";
+import { useMemo, type FC } from "react";
 import { TxListPage } from "../tx/TxListPage";
 
 import { Address } from "@/utils/address/getStakeAddress";
+import { addressIcons } from "@/constants/address";
+import { getAnimalNameByAmount } from "@/utils/address/getAnimalNameByAmount";
 
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { getRouteApi, useSearch } from "@tanstack/react-router";
@@ -38,6 +40,20 @@ export const AddressDetailPage: FC = () => {
   const { setNotFound } = useNotFound();
   const addressQuery = useFetchAddressDetail(address);
 
+  const user = addressQuery.data?.data?.[0]?.user;
+  const addressData = addressQuery.data?.data[0];
+  const assets = addressData?.asset ?? [];
+
+  const policyId = configJSON.integration[0].adahandle[0].policy;
+
+  const addressIcon = useMemo(() => {
+    const liveStake = addressData?.stake?.balance?.live ?? 0;
+    const balance = addressData?.balance ?? 0;
+    const amount = liveStake > 0 ? liveStake : balance;
+    const animalName = getAnimalNameByAmount(amount);
+    return addressIcons[animalName];
+  }, [addressData?.stake?.balance?.live, addressData?.balance]);
+
   if (!isValidAddress(address)) {
     setNotFound(true);
     return undefined;
@@ -57,12 +73,6 @@ export const AddressDetailPage: FC = () => {
     rewardsAddress = addrObj.rewardAddress;
     stakeKey = addrObj.stake;
   }
-
-  const user = addressQuery.data?.data?.[0]?.user;
-  const addressData = addressQuery.data?.data[0];
-  const assets = addressData?.asset ?? [];
-
-  const policyId = configJSON.integration[0].adahandle[0].policy;
 
   const tabs = [
     {
@@ -151,6 +161,7 @@ export const AddressDetailPage: FC = () => {
         },
       ]}
       title={<div className='flex items-center gap-1/2'>Address detail</div>}
+      icon={<img src={addressIcon} alt='address level' className='h-6 w-6' />}
       subTitle={
         <HeaderBannerSubtitle
           title='Address'
