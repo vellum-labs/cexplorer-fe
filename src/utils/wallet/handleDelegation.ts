@@ -50,62 +50,94 @@ export const handleDelegation = async (
     const provider = new BlockfrostProvider(apiKey);
     const changeAddress = await wallet.getChangeAddress();
 
-    const txBuilder = new MeshTxBuilder({
-      fetcher: provider,
-      evaluator: provider,
-    });
+    const buildTransaction = async (includeRegistration: boolean) => {
+      const innerTxBuilder = new MeshTxBuilder({
+        fetcher: provider,
+        evaluator: provider,
+      });
 
-    // Check if stake key is registered by querying account info
-    let stakeKeyRegistered = false;
-    try {
-      const accountInfo = await provider.fetchAccountInfo(rewardAddress);
-      stakeKeyRegistered = accountInfo !== null && accountInfo !== undefined;
-    } catch {
-      // If we can't fetch account info, assume not registered
-      stakeKeyRegistered = false;
-    }
+      if (includeRegistration) {
+        innerTxBuilder.registerStakeCertificate(rewardAddress);
+      }
 
-    // Register stake key if not registered
-    if (!stakeKeyRegistered) {
-      txBuilder.registerStakeCertificate(rewardAddress);
-    }
-
-    if (params.type === "pool") {
-      // Pass pool ID directly - MeshJS will handle deserialization internally
-      txBuilder.delegateStakeCertificate(rewardAddress, delegationId);
-    } else {
-      // DRep delegation
-      if (delegationId === "drep_always_abstain") {
-        txBuilder.voteDelegationCertificate(
-          {
-            alwaysAbstain: null,
-          },
-          rewardAddress,
-        );
-      } else if (delegationId === "drep_always_no_confidence") {
-        txBuilder.voteDelegationCertificate(
-          {
-            alwaysNoConfidence: null,
-          },
-          rewardAddress,
-        );
+      if (params.type === "pool") {
+        innerTxBuilder.delegateStakeCertificate(rewardAddress, delegationId);
       } else {
-        txBuilder.voteDelegationCertificate(
-          {
-            dRepId: delegationId,
-          },
-          rewardAddress,
+        if (delegationId === "drep_always_abstain") {
+          innerTxBuilder.voteDelegationCertificate(
+            { alwaysAbstain: null },
+            rewardAddress,
+          );
+        } else if (delegationId === "drep_always_no_confidence") {
+          innerTxBuilder.voteDelegationCertificate(
+            { alwaysNoConfidence: null },
+            rewardAddress,
+          );
+        } else {
+          innerTxBuilder.voteDelegationCertificate(
+            { dRepId: delegationId },
+            rewardAddress,
+          );
+        }
+      }
+
+      return innerTxBuilder
+        .selectUtxosFrom(utxos)
+        .changeAddress(changeAddress)
+        .complete();
+    };
+
+    const isStakeAlreadyRegisteredError = (error: any): boolean => {
+      const errorStr = JSON.stringify(error);
+      return (
+        errorStr.includes("StakeKeyRegisteredDELEG") ||
+        errorStr.includes("already registered") ||
+        errorStr.includes("KeyDeposit")
+      );
+    };
+
+    const isStakeNotRegisteredError = (error: any): boolean => {
+      const errorStr = JSON.stringify(error);
+      return (
+        errorStr.includes("StakeKeyNotRegisteredDELEG") ||
+        errorStr.includes("unknown stake credential") ||
+        errorStr.includes("not registered")
+      );
+    };
+
+    const submitWithRetry = async (
+      includeRegistration: boolean,
+    ): Promise<string> => {
+      const unsignedTx = await buildTransaction(includeRegistration);
+      const signedTx = await wallet.signTx(unsignedTx);
+      return wallet.submitTx(signedTx);
+    };
+
+    let hash: string;
+    try {
+      hash = await submitWithRetry(false);
+    } catch (e: any) {
+      if (isStakeNotRegisteredError(e)) {
+        console.log("Stake not registered, retrying with registration");
+        try {
+          hash = await submitWithRetry(true);
+        } catch (retryError: any) {
+          if (isStakeAlreadyRegisteredError(retryError)) {
+            console.log(
+              "Conflicting state: chain says both registered and not registered",
+            );
+          }
+          throw retryError;
+        }
+      } else if (isStakeAlreadyRegisteredError(e)) {
+        console.log(
+          "Stake already registered, but we didn't include registration cert",
         );
+        throw e;
+      } else {
+        throw e;
       }
     }
-
-    const unsignedTx = await txBuilder
-      .selectUtxosFrom(utxos)
-      .changeAddress(changeAddress)
-      .complete();
-
-    const signedTx = await wallet.signTx(unsignedTx);
-    const hash = await wallet.submitTx(signedTx);
 
     const trackingId =
       params.type === "pool"
