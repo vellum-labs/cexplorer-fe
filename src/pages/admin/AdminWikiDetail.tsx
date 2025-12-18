@@ -26,6 +26,8 @@ import {
 import { toast } from "sonner";
 import { Helmet } from "react-helmet";
 
+type RenderMode = "html" | "markdown";
+
 interface FormState {
   name: string;
   image: string;
@@ -34,6 +36,7 @@ interface FormState {
   description: string;
   keywords: string;
   categories: string[];
+  render: RenderMode;
 }
 
 export const AdminWikiDetail = () => {
@@ -67,6 +70,7 @@ export const AdminWikiDetail = () => {
     description: "",
     keywords: "",
     categories: [],
+    render: "html",
   });
 
   const serverData = useMemo<FormState | undefined>(() => {
@@ -79,6 +83,7 @@ export const AdminWikiDetail = () => {
       description: data.description || "",
       keywords: data.keywords || "",
       categories: data.category || [],
+      render: (data.render as RenderMode) || "html",
     };
   }, [data]);
 
@@ -122,7 +127,7 @@ export const AdminWikiDetail = () => {
       category: formState.categories,
       image: formState.image,
       pub_date: formState.pubDate,
-      render: "html",
+      render: formState.render,
     });
   };
 
@@ -234,6 +239,32 @@ export const AdminWikiDetail = () => {
             />
           </div>
 
+          <p>Render mode:</p>
+          <div className='mb-2 flex gap-2'>
+            <button
+              type='button'
+              onClick={() => updateField("render", "html")}
+              className={`rounded-m px-3 py-1 text-text-sm ${
+                formState.render === "html"
+                  ? "bg-primary text-white"
+                  : "bg-darker text-text"
+              }`}
+            >
+              HTML
+            </button>
+            <button
+              type='button'
+              onClick={() => updateField("render", "markdown")}
+              className={`rounded-m px-3 py-1 text-text-sm ${
+                formState.render === "markdown"
+                  ? "bg-primary text-white"
+                  : "bg-darker text-text"
+              }`}
+            >
+              Markdown
+            </button>
+          </div>
+
           <p>Content:</p>
           <div
             role='button'
@@ -248,7 +279,7 @@ export const AdminWikiDetail = () => {
               onChange={e => updateField("content", e.target.value)}
             />
             <SyntaxHighlighter
-              language='html'
+              language={formState.render === "markdown" ? "markdown" : "html"}
               style={theme === "dark" ? nord : qtcreatorLight}
               className='min-h-minHeight overflow-auto text-text'
               wrapLongLines
