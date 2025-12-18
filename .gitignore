@@ -30,3 +30,5 @@ test-results
 
 sonar-project.properties
 .scannerwork
+
+*.instructions.md
