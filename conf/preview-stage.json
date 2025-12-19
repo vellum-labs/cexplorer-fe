@@ -166,7 +166,8 @@
           "activeSlotsCoeff": 0.05,
           "shelleyStartEpoch": 0,
           "epochLength": 86400,
-          "maxLovelaceSupply": 45000000000000000
+          "maxLovelaceSupply": 45000000000000000,
+          "slotsPerKESPeriod": 129600
         }
       ]
     }

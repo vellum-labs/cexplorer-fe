@@ -11,6 +11,8 @@ export const epochStart =
 
 export const slotDurationByron =
   configJSON.genesisParams[0].byron[0].slotDuration;
+export const slotsPerKESPeriod =
+  configJSON.genesisParams[0].shelley[0].slotsPerKESPeriod;
 
 export const supportedWallets = configJSON.supportedWallets[0];
 export const enabledWalletConnector = configJSON.enabledFeatures.some(

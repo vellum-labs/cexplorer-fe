@@ -123,3 +123,46 @@ export interface BlockDetailResponse {
   code: number;
   data: BlockDetailResponseData;
 }
+
+export interface BlockTipData {
+  block_no: number;
+  time: string;
+  hash: string;
+  epoch_no: number;
+  slot_no: number;
+  epoch_slot_no: number;
+  size: number;
+  proto_minor: number;
+  proto_major: number;
+  op_cert_counter: number;
+  vrf_key: string;
+  tx_count: number;
+  pool: {
+    id: string;
+    meta: {
+      ticker: string;
+      name: string;
+      description: string;
+      extended: string | null;
+      homepage: string;
+    };
+  };
+  epoch_param: {
+    max_block_size: number;
+    protocol_major: number;
+    protocol_minor: number;
+    max_block_ex_mem: number;
+    max_block_ex_steps: number;
+  };
+}
+
+export interface BlockTipResponse {
+  code: number;
+  data: {
+    date: string;
+    tip: {
+      data: BlockTipData[];
+      count: number;
+    };
+  };
+}
