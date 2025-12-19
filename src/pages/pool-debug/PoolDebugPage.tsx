@@ -33,9 +33,6 @@ export const PoolDebugPage: FC = () => {
     }
     return null;
   });
-  const [activeTab, setActiveTab] = useState<"debugger" | "cheatsheet">(
-    "debugger",
-  );
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -59,11 +56,18 @@ export const PoolDebugPage: FC = () => {
     {
       key: "debugger",
       label: "Debugger",
+      content: (
+        <DebuggerTab
+          selectedPool={selectedPool}
+          onSelectPool={setSelectedPool}
+        />
+      ),
       visible: true,
     },
     {
       key: "cheatsheet",
       label: "Cheat sheet",
+      content: <CheatSheetTab />,
       visible: true,
     },
   ];
@@ -76,22 +80,7 @@ export const PoolDebugPage: FC = () => {
       adsCarousel={false}
     >
       <div className='flex w-full max-w-desktop flex-col gap-3 p-mobile lg:p-desktop'>
-        <Tabs
-          items={tabItems}
-          activeTabValue={activeTab}
-          withPadding={false}
-          withMargin={false}
-          onClick={tab => setActiveTab(tab as "debugger" | "cheatsheet")}
-        />
-
-        {activeTab === "debugger" && (
-          <DebuggerTab
-            selectedPool={selectedPool}
-            onSelectPool={setSelectedPool}
-          />
-        )}
-
-        {activeTab === "cheatsheet" && <CheatSheetTab />}
+        <Tabs items={tabItems} />
       </div>
     </PageBase>
   );
