@@ -26,31 +26,45 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
   const { secondaryCurrency, setSecondaryCurrency } =
     useTaxToolPreferencesStore();
   const {
-    rows: storedRows,
     cachedSummary,
     setCachedSummary,
     lastStakeKey,
     setLastStakeKey,
+    rows: storedRows,
+    setRows: setStoredRows,
   } = useTaxToolEpochRewardsTableStore();
   const [page, setPage] = useState(1);
 
-  const limit = storedRows;
-
-  const offset = (page - 1) * limit;
+  const SUMMARY_LIMIT = 100;
+  const itemsPerPage = storedRows;
+  const offset = (page - 1) * itemsPerPage;
   const isValidStakeKey = stakeKey && isValidAddress(stakeKey);
 
   const adaPriceSecondary = useAdaPriceWithHistory(secondaryCurrency);
 
-  const paginatedQuery = useFetchAccountRewardsPaginated(
-    limit,
+  const summaryQuery = useFetchAccountRewardsPaginated(
+    SUMMARY_LIMIT,
+    0,
+    isValidStakeKey ? stakeKey : "",
+  );
+
+  const summaryRewards = useMemo(() => {
+    if (!summaryQuery.data?.data) return [];
+    return summaryQuery.data.data;
+  }, [summaryQuery.data]);
+
+  const epochQuery = useFetchAccountRewardsPaginated(
+    itemsPerPage,
     offset,
     isValidStakeKey ? stakeKey : "",
   );
 
-  const paginatedRewards = useMemo(() => {
-    if (!paginatedQuery.data?.data) return [];
-    return paginatedQuery.data.data;
-  }, [paginatedQuery.data]);
+  const epochRewards = useMemo(() => {
+    if (!epochQuery.data?.data) return [];
+    return epochQuery.data.data;
+  }, [epochQuery.data]);
+
+  const isDataTruncated = summaryQuery.data?.count === SUMMARY_LIMIT;
 
   const getAdaUsdRate = useCallback((reward: any): number => {
     if (
@@ -72,96 +86,84 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
     return rateData.ada[0]?.close || 0;
   }, []);
 
-  const getAdaSecondaryRate = useCallback((reward: any): number => {
-    if (secondaryCurrency === 'usd') {
-      if (
-        !reward?.spendable_epoch?.rate ||
-        !Array.isArray(reward.spendable_epoch.rate)
-      ) {
-        return 0;
+  const getAdaSecondaryRate = useCallback(
+    (reward: any): number => {
+      if (secondaryCurrency === "usd") {
+        return getAdaUsdRate(reward);
       }
 
-      const rateData = reward.spendable_epoch.rate[0];
-      if (
-        !rateData?.ada ||
-        !Array.isArray(rateData.ada) ||
-        rateData.ada.length === 0
-      ) {
-        return 0;
+      const rateData = reward.spendable_epoch?.rate?.[0];
+      const fiatRates = rateData?.fiat;
+
+      if (fiatRates) {
+        const secondaryFiat = fiatRates[secondaryCurrency];
+        const usdFiat = fiatRates["usd"];
+
+        if (secondaryFiat && usdFiat) {
+          const [secondaryToCzk, secondaryScale] = secondaryFiat;
+          const [usdToCzk, usdScale] = usdFiat;
+
+          const adaUsdRate = getAdaUsdRate(reward);
+          if (!adaUsdRate) return adaPriceSecondary.todayValue || 0;
+
+          const usdRate = usdToCzk / usdScale;
+          const secondaryRate = secondaryToCzk / secondaryScale;
+          const adaSecondaryRate = adaUsdRate * (usdRate / secondaryRate);
+
+          return adaSecondaryRate;
+        }
       }
 
-      return rateData.ada[0]?.close || 0;
-    }
-
-    if (
-      !reward?.spendable_epoch?.rate ||
-      !Array.isArray(reward.spendable_epoch.rate)
-    ) {
       return adaPriceSecondary.todayValue || 0;
-    }
-
-    const rateData = reward.spendable_epoch.rate[0];
-    const currencyData = rateData?.[secondaryCurrency];
-
-    if (
-      currencyData &&
-      Array.isArray(currencyData) &&
-      currencyData.length > 0
-    ) {
-      return currencyData[0]?.close || 0;
-    }
-
-    return adaPriceSecondary.todayValue || 0;
-  }, [secondaryCurrency, adaPriceSecondary.todayValue]);
+    },
+    [secondaryCurrency, getAdaUsdRate, adaPriceSecondary.todayValue],
+  );
 
   useEffect(() => {
-    if (page !== 1 || !paginatedRewards.length) return;
+    if (!summaryRewards.length) return;
 
-    const now = new Date();
     const monthsData: Record<
       string,
       { ada: number; usd: number; secondary: number; epochs: Set<number> }
     > = {};
 
-    paginatedRewards.forEach(reward => {
+    summaryRewards.forEach(reward => {
       if (!reward.spendable_epoch?.end_time) return;
 
       const rewardDate = new Date(reward.spendable_epoch.end_time);
       const monthKey = `${rewardDate.getFullYear()}-${String(rewardDate.getMonth() + 1).padStart(2, "0")}`;
 
-      const monthsDiff =
-        (now.getFullYear() - rewardDate.getFullYear()) * 12 +
-        (now.getMonth() - rewardDate.getMonth());
-
-      if (monthsDiff < 3 && monthsDiff >= 0) {
-        if (!monthsData[monthKey]) {
-          monthsData[monthKey] = { ada: 0, usd: 0, secondary: 0, epochs: new Set() };
-        }
-
-        const adaAmount = reward.amount / 1_000_000;
-        const usdRate = getAdaUsdRate(reward);
-        const secondaryRate = getAdaSecondaryRate(reward);
-
-        monthsData[monthKey].ada += adaAmount;
-        monthsData[monthKey].usd += adaAmount * usdRate;
-        monthsData[monthKey].secondary += adaAmount * secondaryRate;
-        monthsData[monthKey].epochs.add(reward.earned_epoch);
+      if (!monthsData[monthKey]) {
+        monthsData[monthKey] = {
+          ada: 0,
+          usd: 0,
+          secondary: 0,
+          epochs: new Set(),
+        };
       }
+
+      const adaAmount = reward.amount / 1_000_000;
+      const usdRate = getAdaUsdRate(reward);
+      const secondaryRate = getAdaSecondaryRate(reward);
+
+      monthsData[monthKey].ada += adaAmount;
+      monthsData[monthKey].usd += adaAmount * usdRate;
+      monthsData[monthKey].secondary += adaAmount * secondaryRate;
+      monthsData[monthKey].epochs.add(reward.earned_epoch);
     });
 
     const summary = Object.entries(monthsData)
-      .map(([period, data]) => ({ period, epochs: data.epochs.size, ada: data.ada, usd: data.usd, secondary: data.secondary }))
-      .sort((a, b) => b.period.localeCompare(a.period))
-      .slice(0, 3);
+      .map(([period, data]) => ({
+        period,
+        epochs: data.epochs.size,
+        ada: data.ada,
+        usd: data.usd,
+        secondary: data.secondary,
+      }))
+      .sort((a, b) => b.period.localeCompare(a.period));
 
     setCachedSummary(summary);
-  }, [
-    page,
-    paginatedRewards,
-    getAdaUsdRate,
-    getAdaSecondaryRate,
-    setCachedSummary,
-  ]);
+  }, [summaryRewards, getAdaUsdRate, getAdaSecondaryRate, setCachedSummary]);
 
   useEffect(() => {
     if (lastStakeKey && lastStakeKey !== stakeKey) {
@@ -176,8 +178,9 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
   }
 
   const isLoading =
-    paginatedQuery.isLoading ||
-    (paginatedQuery.isFetching && !paginatedRewards.length);
+    summaryQuery.isLoading ||
+    epochQuery.isLoading ||
+    (summaryQuery.isFetching && !summaryRewards.length);
 
   return (
     <div className='flex w-full flex-col gap-3 pt-3'>
@@ -233,17 +236,22 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
           <SummaryTable
             data={cachedSummary}
             secondaryCurrency={secondaryCurrency}
-            query={paginatedQuery}
+            query={summaryQuery}
+            isOldestMonthIncomplete={isDataTruncated}
           />
 
           <EpochRewardsTable
-            query={paginatedQuery}
-            data={paginatedRewards}
+            query={epochQuery}
+            data={epochRewards}
             secondaryCurrency={secondaryCurrency}
             currentPage={page}
             onPageChange={setPage}
-            totalItems={paginatedQuery.data?.count || 0}
-            itemsPerPage={limit}
+            totalItems={epochQuery.data?.count || 0}
+            itemsPerPage={itemsPerPage}
+            onItemsPerPageChange={rows => {
+              setStoredRows(rows);
+              setPage(1);
+            }}
           />
         </>
       )}
