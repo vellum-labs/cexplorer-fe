@@ -83,7 +83,6 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
 
   const getAdaSecondaryRate = useCallback(
     (reward: RewardItem): number => {
-      // For USD, just return the ADA/USD rate
       if (secondaryCurrency === "usd") {
         return getAdaUsdRate(reward);
       }
@@ -91,7 +90,6 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
       const rateData = reward.spendable_epoch?.rate?.[0];
       const fiatRates = rateData?.fiat;
 
-      // Check if we have historical fiat rates
       if (fiatRates) {
         const secondaryFiat = fiatRates[secondaryCurrency];
         const usdFiat = fiatRates["usd"];
@@ -100,11 +98,9 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
           const [secondaryToCzk, secondaryScale] = secondaryFiat;
           const [usdToCzk, usdScale] = usdFiat;
 
-          // ADA/USD rate
           const adaUsdRate = getAdaUsdRate(reward);
           if (!adaUsdRate) return adaPriceSecondary.todayValue || 0;
 
-          // Convert: ADA/Secondary = ADA/USD * (USD_CZK / Secondary_CZK)
           const usdRate = usdToCzk / usdScale;
           const secondaryRate = secondaryToCzk / secondaryScale;
           const adaSecondaryRate = adaUsdRate * (usdRate / secondaryRate);
@@ -113,7 +109,6 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
         }
       }
 
-      // Fallback to today's rate
       return adaPriceSecondary.todayValue || 0;
     },
     [secondaryCurrency, getAdaUsdRate, adaPriceSecondary.todayValue],
