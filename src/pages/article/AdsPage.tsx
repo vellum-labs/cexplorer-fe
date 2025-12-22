@@ -12,7 +12,7 @@ import {
   Code2,
 } from "lucide-react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
-import adsFeatured from "@/resources/images/ads_featured.svg";
+import adsFeatured from "@/resources/images/features/feature_cards.svg";
 import adsBoost from "@/resources/images/ads_boost.svg";
 import adsJam from "@/resources/images/ads_jam.svg";
 import { Banner } from "@/components/global/Banner";

@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC, Dispatch, SetStateAction } from "react";
 import type { Currencies } from "@/types/storeTypes";
 import type { Withdrawal } from "@/types/accountTypes";
 import {
@@ -7,14 +7,13 @@ import {
   AdaWithTooltip,
   formatNumber,
   formatDate,
+  formatString,
+  Pagination,
 } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
-import type {
-  UseInfiniteQueryResult,
-  InfiniteData,
-} from "@tanstack/react-query";
+import type { UseQueryResult } from "@tanstack/react-query";
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 import { useCallback, useEffect, useMemo } from "react";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
@@ -22,10 +21,11 @@ import ExportButton from "@/components/table/ExportButton";
 import { useTaxToolWithdrawalsTableStore } from "@/stores/tables/taxToolWithdrawalsTableStore";
 
 interface WithdrawalsTableProps {
-  query: UseInfiniteQueryResult<InfiniteData<any>, unknown>;
+  query: UseQueryResult<any, unknown>;
   data: Withdrawal[];
   secondaryCurrency: Currencies;
   currentPage: number;
+  onPageChange: Dispatch<SetStateAction<number>>;
   totalItems: number;
   itemsPerPage: number;
   onItemsPerPageChange?: (rows: number) => void;
@@ -36,6 +36,7 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
   data,
   secondaryCurrency,
   currentPage,
+  onPageChange,
   totalItems,
   itemsPerPage,
   onItemsPerPageChange,
@@ -54,20 +55,71 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
     setStoredRows(itemsPerPage);
   }, [itemsPerPage, setStoredRows]);
 
+  const getAdaUsdRate = useCallback(
+    (withdrawal: Withdrawal): number => {
+      if (!withdrawal.rate || !Array.isArray(withdrawal.rate)) {
+        return adaUsdPrice.todayValue ?? 0;
+      }
+
+      const rateData = withdrawal.rate[0];
+      if (
+        !rateData?.ada ||
+        !Array.isArray(rateData.ada) ||
+        rateData.ada.length === 0
+      ) {
+        return adaUsdPrice.todayValue ?? 0;
+      }
+
+      return rateData.ada[0]?.close || adaUsdPrice.todayValue || 0;
+    },
+    [adaUsdPrice.todayValue],
+  );
+
+  const getAdaSecondaryRate = useCallback(
+    (withdrawal: Withdrawal): number => {
+      if (secondaryCurrency === "usd") {
+        return getAdaUsdRate(withdrawal);
+      }
+
+      const rateData = withdrawal.rate?.[0];
+      const fiatRates = rateData?.fiat;
+
+      if (fiatRates) {
+        const secondaryFiat = fiatRates[secondaryCurrency];
+        const usdFiat = fiatRates["usd"];
+
+        if (secondaryFiat && usdFiat) {
+          const [secondaryToCzk, secondaryScale] = secondaryFiat;
+          const [usdToCzk, usdScale] = usdFiat;
+
+          const adaUsdRate = getAdaUsdRate(withdrawal);
+          if (!adaUsdRate) return adaSecondaryPrice.todayValue || 0;
+
+          const usdRate = usdToCzk / usdScale;
+          const secondaryRate = secondaryToCzk / secondaryScale;
+          const adaSecondaryRate = adaUsdRate * (usdRate / secondaryRate);
+
+          return adaSecondaryRate;
+        }
+      }
+
+      return adaSecondaryPrice.todayValue || 0;
+    },
+    [secondaryCurrency, getAdaUsdRate, adaSecondaryPrice.todayValue],
+  );
+
   const calculateCurrencyValues = useCallback(
     (
       adaAmount: number,
+      withdrawal: Withdrawal,
     ): {
       usd: number;
       secondary: number;
       adaUsd: number;
       adaSecondary: number;
     } => {
-      const usdRate = adaUsdPrice.todayValue ?? 0;
-      const secondaryRate =
-        secondaryCurrency === "usd"
-          ? usdRate
-          : (adaSecondaryPrice.todayValue ?? 0);
+      const usdRate = getAdaUsdRate(withdrawal);
+      const secondaryRate = getAdaSecondaryRate(withdrawal);
       const usdValue = adaAmount * usdRate;
       const secondaryValue = adaAmount * secondaryRate;
 
@@ -78,7 +130,7 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
         adaSecondary: secondaryRate,
       };
     },
-    [adaSecondaryPrice.todayValue, adaUsdPrice.todayValue, secondaryCurrency],
+    [getAdaUsdRate, getAdaSecondaryRate],
   );
 
   const formatRate = (rate: number) =>
@@ -103,8 +155,11 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
         key: "timestamp",
         title: (
           <div className='flex w-full justify-start'>
-            <Tooltip content='Exchange rates from the epoch end date.'>
-              <div className='flex items-center gap-1 cursor-help' style={{pointerEvents: 'auto'}}>
+            <Tooltip content='Exchange rates from the withdrawal date.'>
+              <div
+                className='flex cursor-help items-center gap-1'
+                style={{ pointerEvents: "auto" }}
+              >
                 {columnLabels.timestamp}
                 <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
               </div>
@@ -129,9 +184,9 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
           <Link
             to='/tx/$hash'
             params={{ hash: item.tx.hash }}
-            className='text-primary hover:underline'
+            className='text-primary'
           >
-            {item.tx.hash.slice(0, 12)}...
+            {formatString(item.tx.hash, "long")}
           </Link>
         ),
       },
@@ -159,7 +214,7 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
         visible: columnsVisibility.rewards_usd,
         render: item => {
           const adaAmount = item.amount / 1_000_000;
-          const values = calculateCurrencyValues(adaAmount);
+          const values = calculateCurrencyValues(adaAmount, item);
           return (
             <div className='flex items-center justify-end gap-1'>
               <span>USD {formatNumber(values.usd.toFixed(2))}</span>
@@ -181,7 +236,7 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
         visible: columnsVisibility.rewards_secondary && showSecondaryCurrency,
         render: item => {
           const adaAmount = item.amount / 1_000_000;
-          const values = calculateCurrencyValues(adaAmount);
+          const values = calculateCurrencyValues(adaAmount, item);
           return (
             <div className='flex items-center justify-end gap-1'>
               <span>
@@ -200,8 +255,11 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
         key: "ada_usd_rate",
         title: (
           <div className='flex w-full justify-end'>
-            <Tooltip content='Exchange rates from the epoch end date.'>
-              <div className='flex items-center gap-1 cursor-help' style={{pointerEvents: 'auto'}}>
+            <Tooltip content='Exchange rates from the withdrawal date.'>
+              <div
+                className='flex cursor-help items-center gap-1'
+                style={{ pointerEvents: "auto" }}
+              >
                 {columnLabels.ada_usd_rate}
                 <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
               </div>
@@ -211,7 +269,7 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
         visible: columnsVisibility.ada_usd_rate,
         render: item => {
           const adaAmount = item.amount / 1_000_000;
-          const values = calculateCurrencyValues(adaAmount);
+          const values = calculateCurrencyValues(adaAmount, item);
           return (
             <div className='text-right'>USD {formatRate(values.adaUsd)}</div>
           );
@@ -221,8 +279,11 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
         key: "ada_secondary_rate",
         title: (
           <div className='flex w-full justify-end'>
-            <Tooltip content='Exchange rates from the epoch end date.'>
-              <div className='flex items-center gap-1 cursor-help' style={{pointerEvents: 'auto'}}>
+            <Tooltip content='Exchange rates from the withdrawal date.'>
+              <div
+                className='flex cursor-help items-center gap-1'
+                style={{ pointerEvents: "auto" }}
+              >
                 {columnLabels.ada_secondary_rate}
                 <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
               </div>
@@ -232,9 +293,12 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
         visible: columnsVisibility.ada_secondary_rate && showSecondaryCurrency,
         render: item => {
           const adaAmount = item.amount / 1_000_000;
-          const values = calculateCurrencyValues(adaAmount);
+          const values = calculateCurrencyValues(adaAmount, item);
           return (
-            <div className='text-right'>{formatRate(values.adaSecondary)}</div>
+            <div className='text-right'>
+              {formatNumber(formatRate(values.adaSecondary))}{" "}
+              {secondaryCurrency.toUpperCase()}
+            </div>
           );
         },
       },
@@ -311,9 +375,14 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
     (rows: number) => {
       setStoredRows(rows);
       onItemsPerPageChange?.(rows);
+      onPageChange(1);
     },
-    [onItemsPerPageChange, setStoredRows],
+    [onItemsPerPageChange, setStoredRows, onPageChange],
   );
+
+  const totalPages = useMemo(() => {
+    return Math.ceil(totalItems / itemsPerPage);
+  }, [totalItems, itemsPerPage]);
 
   return (
     <div className='flex flex-col gap-2'>
@@ -335,8 +404,8 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
         </div>
       </div>
       <GlobalTable
-        type='infinite'
-        currentPage={currentPage}
+        type='default'
+        pagination={false}
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}
         scrollable
@@ -345,6 +414,13 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
         columns={columns}
         disableDrag
       />
+      {totalItems > itemsPerPage && (
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={onPageChange}
+          totalPages={totalPages}
+        />
+      )}
     </div>
   );
 };
