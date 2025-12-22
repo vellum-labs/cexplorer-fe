@@ -93,12 +93,14 @@ export const useAdaPrice = (graphRates: BasicRate[]): UseAdaPrice => {
           color: textColor,
         },
         formatter: params => {
-          return params
+          const date = params[0]?.name ?? "";
+          const items = params
             .map(
               item =>
                 `${item.marker} ${item.seriesName}: <strong>${item.value}</strong>`,
             )
             .join("<br/>");
+          return `${date}<hr style="margin: 4px 0"/>${items}`;
         },
       },
       legend: {
