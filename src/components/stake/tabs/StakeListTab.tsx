@@ -6,13 +6,11 @@ import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { AdaHandleBadge } from "@vellumlabs/cexplorer-sdk";
 import { TokenSelectCombobox } from "@/components/asset/TokenSelect";
-import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { useFetchAccountList } from "@/services/user";
 import type { StakeKeyData } from "@/types/userTypes";
-import { Copy } from "@vellumlabs/cexplorer-sdk";
-import { Link } from "@tanstack/react-router";
 import { configJSON } from "@/constants/conf";
+import AddressCell from "@/components/address/AddressCell";
 
 export const StakeListTab: FC = () => {
   const token = useAuthToken();
@@ -39,25 +37,15 @@ export const StakeListTab: FC = () => {
         }
 
         return (
-          <div className='flex items-center gap-1'>
-            <div className='flex flex-col'>
-              <Link
-                to='/stake/$stakeAddr'
-                params={{ stakeAddr: item.view }}
-                className='font-medium text-primary hover:underline'
-              >
-                {formatString(item.view, "long")}
-              </Link>
-              {item.adahandle && (
-                <AdaHandleBadge
-                  hex={item.adahandle}
-                  link
-                  className='mt-1/2'
-                  policyId={policyId}
-                />
-              )}
-            </div>
-            <Copy copyText={item.view} />
+          <div className='flex flex-col gap-1/2'>
+            <AddressCell address={item.view} />
+            {item.adahandle && (
+              <AdaHandleBadge
+                hex={item.adahandle}
+                link
+                policyId={policyId}
+              />
+            )}
           </div>
         );
       },
