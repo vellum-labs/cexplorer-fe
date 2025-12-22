@@ -30,8 +30,7 @@ function normalizeUri(uri: string): string {
   const trimmed = uri.trim();
 
   if (trimmed.startsWith("ipfs://")) {
-    const cid = trimmed.replace("ipfs://", "");
-    return `https://ipfs.io/ipfs/${cid}`;
+    return `https://ipfs.io/ipfs/${trimmed.slice(7)}`;
   }
 
   if (
@@ -49,6 +48,50 @@ function normalizeUri(uri: string): string {
   return trimmed;
 }
 
+function formatInternalVote(
+  iv: NonNullable<CIP136Body["internalVote"]>,
+): string {
+  const voteFields = [
+    { key: "constitutional", label: "Constitutional" },
+    { key: "unconstitutional", label: "Unconstitutional" },
+    { key: "abstain", label: "Abstain" },
+    { key: "didNotVote", label: "Did Not Vote" },
+    { key: "againstVote", label: "Against Vote" },
+  ] as const;
+
+  const votes = voteFields
+    .filter(({ key }) => iv[key] !== undefined)
+    .map(({ key, label }) => `- **${label}:** ${iv[key]}`);
+
+  return votes.length > 0 ? `\n## Internal Vote\n${votes.join("\n")}\n` : "";
+}
+
+function formatReferences(refs: NonNullable<CIP136Body["references"]>): string {
+  const formatted = refs
+    .filter(ref => ref.label && ref.uri)
+    .map(ref => {
+      const normalizedUri = normalizeUri(ref.uri!);
+      return normalizedUri
+        ? `- [${ref.label}](${normalizedUri})`
+        : `- ${ref.label}: \`${ref.uri}\``;
+    });
+
+  return formatted.length > 0
+    ? `\n## References\n${formatted.join("\n")}\n`
+    : "";
+}
+
+function formatAuthors(
+  authors: NonNullable<CIP136Metadata["authors"]>,
+): string {
+  const names = authors
+    .map(a => a.name)
+    .filter(Boolean)
+    .join(", ");
+
+  return names ? `\n---\n**Authors:** ${names}` : "";
+}
+
 function formatCIP136(obj: CIP136Metadata): string | null {
   const body = obj?.body;
   if (!body) return null;
@@ -61,79 +104,41 @@ function formatCIP136(obj: CIP136Metadata): string | null {
 
   if (!hasCIP136Fields) return null;
 
-  const parts: string[] = [];
+  const sections: Array<{ condition: boolean; content: string }> = [
+    {
+      condition: !!body.summary,
+      content: body.summary || "",
+    },
+    {
+      condition: !!body.rationaleStatement,
+      content: `\n---\n## Rationale\n${body.rationaleStatement}`,
+    },
+    {
+      condition: !!body.precedentDiscussion,
+      content: `\n## Precedent Discussion\n${body.precedentDiscussion}`,
+    },
+    {
+      condition: !!body.counterargumentDiscussion,
+      content: `\n## Counterargument Discussion\n${body.counterargumentDiscussion}`,
+    },
+    {
+      condition: !!body.conclusion,
+      content: `\n## Conclusion\n${body.conclusion}`,
+    },
+  ];
 
-  if (body.summary) {
-    parts.push(body.summary);
-  }
-
-  if (body.rationaleStatement) {
-    if (parts.length > 0) parts.push("\n---\n");
-    parts.push("## Rationale\n");
-    parts.push(body.rationaleStatement);
-  }
-
-  if (body.precedentDiscussion) {
-    parts.push("\n## Precedent Discussion\n");
-    parts.push(body.precedentDiscussion);
-  }
-
-  if (body.counterargumentDiscussion) {
-    parts.push("\n## Counterargument Discussion\n");
-    parts.push(body.counterargumentDiscussion);
-  }
-
-  if (body.conclusion) {
-    parts.push("\n## Conclusion\n");
-    parts.push(body.conclusion);
-  }
+  const parts = sections.filter(s => s.condition).map(s => s.content);
 
   if (body.internalVote) {
-    const iv = body.internalVote;
-    const hasVotes =
-      iv.constitutional !== undefined ||
-      iv.unconstitutional !== undefined ||
-      iv.abstain !== undefined ||
-      iv.didNotVote !== undefined ||
-      iv.againstVote !== undefined;
-
-    if (hasVotes) {
-      parts.push("\n## Internal Vote\n");
-      if (iv.constitutional !== undefined)
-        parts.push(`- **Constitutional:** ${iv.constitutional}\n`);
-      if (iv.unconstitutional !== undefined)
-        parts.push(`- **Unconstitutional:** ${iv.unconstitutional}\n`);
-      if (iv.abstain !== undefined)
-        parts.push(`- **Abstain:** ${iv.abstain}\n`);
-      if (iv.didNotVote !== undefined)
-        parts.push(`- **Did Not Vote:** ${iv.didNotVote}\n`);
-      if (iv.againstVote !== undefined)
-        parts.push(`- **Against Vote:** ${iv.againstVote}\n`);
-    }
+    parts.push(formatInternalVote(body.internalVote));
   }
 
-  if (body.references && body.references.length > 0) {
-    parts.push("\n## References\n");
-    for (const ref of body.references) {
-      if (ref.label && ref.uri) {
-        const normalizedUri = normalizeUri(ref.uri);
-        if (normalizedUri) {
-          parts.push(`- [${ref.label}](${normalizedUri})\n`);
-        } else {
-          parts.push(`- ${ref.label}: \`${ref.uri}\`\n`);
-        }
-      }
-    }
+  if (body.references?.length) {
+    parts.push(formatReferences(body.references));
   }
 
-  if (obj.authors && obj.authors.length > 0) {
-    const authorNames = obj.authors
-      .map(a => a.name)
-      .filter(Boolean)
-      .join(", ");
-    if (authorNames) {
-      parts.push(`\n---\n**Authors:** ${authorNames}`);
-    }
+  if (obj.authors?.length) {
+    parts.push(formatAuthors(obj.authors));
   }
 
   return parts.length > 0 ? parts.join("") : null;
@@ -141,29 +146,29 @@ function formatCIP136(obj: CIP136Metadata): string | null {
 
 export function toMarkdown(input: MdInput): string {
   if (typeof input !== "string") {
-    return "```json\n" + JSON.stringify(input, null, 2) + "\n```";
+    return `\`\`\`json\n${JSON.stringify(input, null, 2)}\n\`\`\``;
   }
 
   const s = input.trim();
-
-  if (
+  const isJson =
     (s.startsWith("{") && s.endsWith("}")) ||
-    (s.startsWith("[") && s.endsWith("]"))
-  ) {
-    try {
-      const obj = JSON.parse(s);
+    (s.startsWith("[") && s.endsWith("]"));
 
-      const comment = obj?.body?.comment;
-      if (typeof comment === "string" && comment.trim()) return comment;
+  if (!isJson) return input;
 
-      const cip136 = formatCIP136(obj);
-      if (cip136) return cip136;
+  try {
+    const obj = JSON.parse(s);
 
-      return "```json\n" + JSON.stringify(obj, null, 2) + "\n```";
-    } catch {
-      return input;
+    const comment = obj?.body?.comment;
+    if (typeof comment === "string" && comment.trim()) {
+      return comment;
     }
-  }
 
-  return input;
+    const cip136 = formatCIP136(obj);
+    if (cip136) return cip136;
+
+    return `\`\`\`json\n${JSON.stringify(obj, null, 2)}\n\`\`\``;
+  } catch {
+    return input;
+  }
 }
