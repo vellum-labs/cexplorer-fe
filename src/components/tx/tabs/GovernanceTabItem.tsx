@@ -71,25 +71,16 @@ export const GovernanceTabItem = () => {
           return "-";
         }
 
-        const isLate =
-          txEpochNo && item?.proposal
-            ? isVoteLate({
-                tx: { epoch_no: txEpochNo },
-                proposal: {
-                  expired_epoch: item.proposal.expired_epoch,
-                  enacted_epoch: item.proposal.enacted_epoch,
-                  ratified_epoch: item.proposal.ratified_epoch,
-                },
-              })
-            : false;
-
         return (
           <VoteCell
             vote={item.vote as Vote}
             txHash={hash}
             proposalId={item?.proposal?.ident?.id}
             anchorInfo={item?.anchor}
-            isLate={isLate}
+            isLate={isVoteLate({
+              tx: { epoch_no: txEpochNo ?? 0 },
+              proposal: item.proposal,
+            })}
           />
         );
       },
