@@ -1,17 +1,25 @@
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import { useFetchWikiDetail, useFetchWikiList } from "@/services/article";
 import { getRouteApi, Link } from "@tanstack/react-router";
 import parse from "html-react-parser";
 import { Helmet } from "react-helmet";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
+import { markdownComponents } from "@/constants/markdows";
 
 export const WikiDetailPage = () => {
   const route = getRouteApi("/wiki/$url");
   const { url } = route.useParams();
+  const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
   const detailQuery = useFetchWikiDetail("en", url);
   const listQuery = useFetchWikiList("en", 0, 100);
   const data = detailQuery.data;
+  const isMarkdown = data?.render === "markdown";
   const allOtherWikis =
     listQuery.data?.pages
       .flatMap(page => page.data.data)
@@ -71,7 +79,17 @@ export const WikiDetailPage = () => {
               {parse(data?.name || "")}
             </h2>
             <div className='prose prose-sm max-w-none text-grayTextPrimary [&>p]:my-3'>
-              {parse(data?.data[0] || "")}
+              {isMarkdown ? (
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  rehypePlugins={[rehypeRaw]}
+                  components={markdownComponents(setClickedUrl)}
+                >
+                  {data?.data[0] || ""}
+                </ReactMarkdown>
+              ) : (
+                parse(data?.data[0] || "")
+              )}
             </div>
           </article>
 
@@ -96,6 +114,9 @@ export const WikiDetailPage = () => {
           )}
         </div>
       </PageBase>
+      {clickedUrl && (
+        <SafetyLinkModal url={clickedUrl} onClose={() => setClickedUrl(null)} />
+      )}
     </>
   );
 };
