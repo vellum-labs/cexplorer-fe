@@ -114,8 +114,18 @@ export const RetiredDelegationsPage = () => {
     },
     {
       key: "epoch",
-      render: item => <EpochCell no={item.pool_retire.live.retiring_epoch} />,
-      title: <p className='w-full text-right'>Retired in Epoch</p>,
+      render: item => {
+        const retiringEpoch =
+          tabParam === "active"
+            ? item.pool_retire?.active?.retiring_epoch
+            : item.pool_retire?.live?.retiring_epoch;
+        return <EpochCell no={retiringEpoch} />;
+      },
+      title: (
+        <p className='w-full text-right'>
+          {tabParam === "active" ? "Retiring in Epoch" : "Retired in Epoch"}
+        </p>
+      ),
       visible: columnsVisibility.epoch,
       widthPx: 50,
     },
@@ -123,7 +133,7 @@ export const RetiredDelegationsPage = () => {
       key: "stake",
       render: item => (
         <div className='flex flex-col items-end gap-1/2'>
-          <AdaWithTooltip data={item.stat.live ?? 0} />
+          <AdaWithTooltip data={item?.stat?.live ?? 0} />
         </div>
       ),
       title: (
@@ -136,9 +146,9 @@ export const RetiredDelegationsPage = () => {
     },
     {
       key: "delegators",
-      render: item => <div className='text-right'>{item.stat.accounts}</div>,
+      render: item => <div className='text-right'>{item?.stat?.accounts}</div>,
       jsonFormat: item => {
-        if (!item.stat.accounts) {
+        if (!item?.stat?.accounts) {
           return "-";
         }
 
@@ -151,10 +161,10 @@ export const RetiredDelegationsPage = () => {
     {
       key: "longevity",
       render: item => {
-        return <p className='text-right'>{item.stat.epochs}</p>;
+        return <p className='text-right'>{item?.stat?.epochs}</p>;
       },
       jsonFormat: item => {
-        if (!item.stat.epochs) {
+        if (!item?.stat?.epochs) {
           return "-";
         }
 
