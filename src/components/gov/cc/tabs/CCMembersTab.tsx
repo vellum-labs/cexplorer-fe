@@ -76,14 +76,16 @@ export const CCMembersTab: FC = () => {
       visible: true,
       render: item => {
         const name = item.registry?.name ?? "Unknown";
-        const identCold = item.ident?.cold ?? "N/A";
+        const identCold = item.ident?.cold;
         const identRaw = item.ident?.raw ?? "";
+
+        const displayIdent = identCold || identRaw || "N/A";
 
         const fallbackletters = [...name]
           .filter(char => alphabetWithNumbers.includes(char.toLowerCase()))
           .join("");
 
-        const toPath = identCold !== "N/A" ? `/gov/cc/${identCold}` : undefined;
+        const toPath = identCold ? `/gov/cc/${identCold}` : undefined;
 
         return (
           <div className='relative flex max-h-[75px] w-full items-center gap-1'>
@@ -96,11 +98,17 @@ export const CCMembersTab: FC = () => {
               fallbackletters={fallbackletters}
             />
             <div className='flex w-[calc(100%-40px)] flex-col text-text-sm'>
-              {name && name !== "Unknown" && toPath && (
-                <Link to={toPath} className='w-fit text-primary'>
-                  {name.length > 50 ? `${name.slice(0, 50)}...` : name}
-                </Link>
-              )}
+              {name &&
+                name !== "Unknown" &&
+                (toPath ? (
+                  <Link to={toPath} className='w-fit text-primary'>
+                    {name.length > 50 ? `${name.slice(0, 50)}...` : name}
+                  </Link>
+                ) : (
+                  <span className='w-fit text-text'>
+                    {name.length > 50 ? `${name.slice(0, 50)}...` : name}
+                  </span>
+                ))}
               <div className='flex items-center gap-1/2'>
                 {toPath ? (
                   <Link
@@ -112,13 +120,15 @@ export const CCMembersTab: FC = () => {
                     }
                     disabled={!!(name && name !== "Unknown")}
                   >
-                    {formatString(identCold, "long")}
+                    {formatString(displayIdent, "long")}
                   </Link>
                 ) : (
-                  <span>{formatString(identCold, "long")}</span>
+                  <span className='text-text-xs'>
+                    {formatString(displayIdent, "long")}
+                  </span>
                 )}
                 <Copy
-                  copyText={identCold}
+                  copyText={displayIdent}
                   size={name && name !== "Unknown" ? 10 : 13}
                 />
               </div>
