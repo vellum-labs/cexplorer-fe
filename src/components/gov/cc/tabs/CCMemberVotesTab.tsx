@@ -15,11 +15,13 @@ import { GovActionCell } from "@/components/gov/GovActionCell";
 import type { Vote } from "@/constants/votes";
 import { VoteCell } from "@/components/governance/vote/VoteCell";
 import { ExternalLink } from "lucide-react";
+import { isVoteLate } from "@/utils/governance/isVoteLate";
 
 interface CCMemberVoteItem {
   tx?: {
     time?: string;
     hash?: string;
+    epoch_no?: number;
   };
   proposal?: {
     type?: string;
@@ -31,8 +33,19 @@ interface CCMemberVoteItem {
         name?: string;
       };
     };
+    expired_epoch?: number | null;
+    enacted_epoch?: number | null;
+    ratified_epoch?: number | null;
   };
   vote?: string;
+  anchor?: {
+    url: string | null;
+    data_hash: string | null;
+    offchain: {
+      comment: string | null;
+      url: string | null;
+    };
+  };
 }
 
 export const CCMemberVotesTab: FC<{ hotKey?: string }> = ({ hotKey }) => {
@@ -109,11 +122,15 @@ export const CCMemberVotesTab: FC<{ hotKey?: string }> = ({ hotKey }) => {
         if (!item?.vote) {
           return "-";
         }
+
+        console.log("item", item);
         return (
           <VoteCell
             vote={item.vote as Vote}
             txHash={item?.tx?.hash}
             proposalId={item?.proposal?.ident?.id}
+            isLate={isVoteLate(item as Parameters<typeof isVoteLate>[0])}
+            anchorInfo={item?.anchor}
           />
         );
       },
