@@ -52,18 +52,18 @@ export type GovStatus =
 
 export const govStatusColors: Record<GovStatus, string> = {
   ACTIVE: "#10B981",
-  ENACTED: "#10B981",
-  RATIFIED: "#3B82F6",
-  DROPPED: "#F59E0B",
-  EXPIRED: "#F59E0B",
+  RATIFIED: "#00A9E3",
+  ENACTED: "#886fe2",
+  EXPIRED: "#F79009",
+  DROPPED: "#EF4444",
 };
 
 export const govStatusBgColors: Record<GovStatus, string> = {
   ACTIVE: "#D1FAE5",
-  ENACTED: "#D1FAE5",
-  RATIFIED: "#DBEAFE",
-  DROPPED: "#FEF3C7",
-  EXPIRED: "#FEF3C7",
+  RATIFIED: "#E0F7FA",
+  ENACTED: "#EDE9FE",
+  EXPIRED: "#FFEDD5",
+  DROPPED: "#FEE2E2",
 };
 
 export const govTypeLabels: Record<string, string> = {
