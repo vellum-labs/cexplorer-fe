@@ -73,7 +73,7 @@ export const WatchlistPage = () => {
     () => [
       {
         key: "stakes",
-        title: "Stakes",
+        title: "Accounts",
         label: (
           <div className='flex items-center gap-1/2'>
             Stakes <Badge color='gray'>{count.stakes}</Badge>
@@ -148,7 +148,7 @@ export const WatchlistPage = () => {
       },
       {
         key: "policies",
-        title: "Policies",
+        title: "Collections",
         label: (
           <div className='flex items-center gap-1/2'>
             Policies <Badge color='gray'>{count.policies}</Badge>
