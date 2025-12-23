@@ -10,9 +10,15 @@ interface Props {
   query: ReturnType<typeof useFetchPoolDetail>;
   estimatedBlocks: number;
   miscConst: MiscConstResponseData | undefined;
+  isPoolRetiredOrRetiring?: boolean;
 }
 
-const PoolDetailOverview = ({ query, estimatedBlocks, miscConst }: Props) => {
+const PoolDetailOverview = ({
+  query,
+  estimatedBlocks,
+  miscConst,
+  isPoolRetiredOrRetiring = false,
+}: Props) => {
   const { data, aboutList, performanceList, stakeAndPledgeList } =
     usePoolDetail({ estimatedBlocks, query, miscConst });
 
@@ -23,6 +29,7 @@ const PoolDetailOverview = ({ query, estimatedBlocks, miscConst }: Props) => {
         ticker={data?.pool_name?.ticker}
         isLoading={query.isLoading}
         poolDetailQuery={query}
+        isPoolRetiredOrRetiring={isPoolRetiredOrRetiring}
       />
       <div className='flex w-full flex-wrap items-stretch gap-3'>
         {query.isLoading ? (

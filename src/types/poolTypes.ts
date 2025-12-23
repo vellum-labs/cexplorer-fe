@@ -73,6 +73,17 @@ export interface PoolUpdateRetire {
   live: PoolUpdateRetireItem;
 }
 
+interface PoolRetireItem {
+  index: number | null;
+  tx_id: number | null;
+  retiring_epoch: number | null;
+}
+
+export interface PoolRetire {
+  active: PoolRetireItem;
+  live: PoolRetireItem;
+}
+
 interface PoolStatsItem {
   epochs: number;
   luck: number;
@@ -91,7 +102,7 @@ export interface PoolData {
   epochs: PoolsListResponseDataItemEpochs;
   active_epochs: number;
   pool_name: PoolMeta;
-  pool_retire: PoolUpdateRetire;
+  pool_retire: PoolRetire;
   pool_update: PoolUpdateRetire;
   stats: PoolStats;
   pledged: number;
