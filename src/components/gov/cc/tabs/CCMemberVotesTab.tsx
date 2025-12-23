@@ -123,7 +123,6 @@ export const CCMemberVotesTab: FC<{ hotKey?: string }> = ({ hotKey }) => {
           return "-";
         }
 
-        console.log("item", item);
         return (
           <VoteCell
             vote={item.vote as Vote}
