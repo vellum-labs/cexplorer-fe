@@ -222,7 +222,7 @@ export const useTxList = ({
       jsonFormat: item => {
         return item?.script_size;
       },
-      title: <span className='flex justify-end'>Script size</span>,
+      title: <p className='w-full text-right'>Script size</p>,
       visible: columnsVisibility.script_size,
       widthPx: 35,
     },
