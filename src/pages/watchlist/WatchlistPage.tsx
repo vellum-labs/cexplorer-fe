@@ -73,6 +73,7 @@ export const WatchlistPage = () => {
     () => [
       {
         key: "stakes",
+        title: "Stakes",
         label: (
           <div className='flex items-center gap-1/2'>
             Stakes <Badge color='gray'>{count.stakes}</Badge>
@@ -87,6 +88,7 @@ export const WatchlistPage = () => {
       },
       {
         key: "wallets",
+        title: "Wallets",
         label: (
           <div className='flex items-center gap-1/2'>
             Wallets <Badge color='gray'>{count.addresses}</Badge>
@@ -101,6 +103,7 @@ export const WatchlistPage = () => {
       },
       {
         key: "assets",
+        title: "Assets",
         label: (
           <div className='flex items-center gap-1/2'>
             Assets <Badge color='gray'>{count.assets}</Badge>
@@ -115,6 +118,7 @@ export const WatchlistPage = () => {
       },
       {
         key: "pools",
+        title: "Pools",
         label: (
           <div className='flex items-center gap-1/2'>
             Pools <Badge color='gray'>{count.pools}</Badge>
@@ -129,6 +133,7 @@ export const WatchlistPage = () => {
       },
       {
         key: "dreps",
+        title: "DReps",
         label: (
           <div className='flex items-center gap-1/2'>
             Dreps <Badge color='gray'>{count.dreps}</Badge>
@@ -143,6 +148,7 @@ export const WatchlistPage = () => {
       },
       {
         key: "policies",
+        title: "Policies",
         label: (
           <div className='flex items-center gap-1/2'>
             Policies <Badge color='gray'>{count.policies}</Badge>
