@@ -10,22 +10,74 @@ interface ChartConfig {
   needsAdaFormatting?: boolean;
 }
 
+interface GroupedItem {
+  name: string;
+  value: number;
+  color: string;
+  isOthers?: boolean;
+  groupedItems?: Array<{ name: string; value: number }>;
+}
+
 interface PieChartsProps<T> {
   items: T[];
   charts: ChartConfig[];
   getChartData: (items: T[], dataKey: string) => Array<Record<string, any>>;
+  minThreshold?: number;
 }
+
+const OTHERS_COLOR = "#6B7280";
 
 export const PieCharts = <T,>({
   items,
   charts,
   getChartData,
+  minThreshold = 0.5,
 }: PieChartsProps<T>) => {
   const { textColor, bgColor } = useGraphColors();
 
   const chartOptions = useMemo(() => {
     return charts.map(chart => {
       const chartData = getChartData(items, chart.dataKey);
+
+      const total = chartData.reduce(
+        (sum, item) => sum + (item[chart.dataKey] ?? 0),
+        0,
+      );
+
+      const thresholdValue = (minThreshold / 100) * total;
+
+      const mainItems: GroupedItem[] = [];
+      const smallItems: Array<{ name: string; value: number }> = [];
+
+      chartData.forEach(item => {
+        const value = item[chart.dataKey] ?? 0;
+        if (value >= thresholdValue) {
+          mainItems.push({
+            name: item.name,
+            value: value,
+            color: item.color,
+          });
+        } else {
+          smallItems.push({
+            name: item.name,
+            value: value,
+          });
+        }
+      });
+
+      if (smallItems.length > 0) {
+        const othersValue = smallItems.reduce(
+          (sum, item) => sum + item.value,
+          0,
+        );
+        mainItems.push({
+          name: "Others",
+          value: othersValue,
+          color: OTHERS_COLOR,
+          isOthers: true,
+          groupedItems: smallItems.sort((a, b) => b.value - a.value),
+        });
+      }
 
       return {
         title: {
@@ -44,11 +96,40 @@ export const PieCharts = <T,>({
             color: textColor,
           },
           formatter: (params: any) => {
+            const dataItem = mainItems.find(item => item.name === params.name);
+
+            if (dataItem?.isOthers && dataItem.groupedItems) {
+              const percentage = ((params.value / total) * 100).toFixed(1);
+              let tooltipContent = `<strong>Others (${dataItem.groupedItems.length} items)</strong><br/>`;
+              tooltipContent += `${params.marker}Total: ${chart.needsAdaFormatting ? formatNumber(Math.round(params.value / 1000000)) + " ₳" : formatNumber(params.value)} (${percentage}%)<br/><br/>`;
+
+              const maxItemsToShow = 15;
+              const itemsToShow = dataItem.groupedItems.slice(
+                0,
+                maxItemsToShow,
+              );
+
+              itemsToShow.forEach(item => {
+                const itemPercentage = ((item.value / total) * 100).toFixed(2);
+                const formattedValue = chart.needsAdaFormatting
+                  ? formatNumber(Math.round(item.value / 1000000)) + " ₳"
+                  : formatNumber(item.value);
+                tooltipContent += `${item.name}: ${formattedValue} (${itemPercentage}%)<br/>`;
+              });
+
+              if (dataItem.groupedItems.length > maxItemsToShow) {
+                tooltipContent += `<br/>... and ${dataItem.groupedItems.length - maxItemsToShow} more`;
+              }
+
+              return tooltipContent;
+            }
+
+            const percentage = ((params.value / total) * 100).toFixed(1);
             if (chart.needsAdaFormatting) {
               const adaValue = formatNumber(Math.round(params.value / 1000000));
-              return `${params.name}<br/>${params.marker}${adaValue} ₳`;
+              return `${params.name}<br/>${params.marker}${adaValue} ₳ (${percentage}%)`;
             }
-            return `${params.name}<br/>${params.marker}${formatNumber(params.value)}`;
+            return `${params.name}<br/>${params.marker}${formatNumber(params.value)} (${percentage}%)`;
           },
         },
         color: PIE_CHART_COLORS,
@@ -84,8 +165,8 @@ export const PieCharts = <T,>({
                 shadowColor: "rgba(0, 0, 0, 0.5)",
               },
             },
-            data: chartData.map(item => ({
-              value: item[chart.dataKey],
+            data: mainItems.map(item => ({
+              value: item.value,
               name: item.name,
               itemStyle: { color: item.color },
             })),
@@ -93,7 +174,7 @@ export const PieCharts = <T,>({
         ],
       };
     });
-  }, [items, charts, getChartData, textColor, bgColor]);
+  }, [items, charts, getChartData, textColor, bgColor, minThreshold]);
 
   if (items.length === 0) {
     return null;
