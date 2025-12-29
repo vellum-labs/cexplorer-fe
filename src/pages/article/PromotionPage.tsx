@@ -78,7 +78,6 @@ export const PromotionPage = () => {
     }
   }, [selectedItem]);
 
-  // Validate item when selected
   useEffect(() => {
     if (!selectedItem) {
       setValidation({ isLoading: false, error: null, preview: null });
@@ -239,7 +238,7 @@ export const PromotionPage = () => {
         customPage={true}
       >
         <section className='flex w-full max-w-[800px] flex-col items-center gap-4 px-mobile py-4 md:px-desktop'>
-          <div className='flex w-full items-start gap-2 rounded-m border border-yellow-500 bg-yellow-500/10 p-4'>
+          <div className='bg-yellow-500/10 flex w-full items-start gap-2 rounded-m border border-yellow-500 p-4'>
             <AlertTriangle className='mt-0.5 text-yellow-500' size={18} />
             <div>
               <p className='font-semibold text-yellow-500'>
