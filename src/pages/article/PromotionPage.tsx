@@ -52,7 +52,7 @@ export const PromotionPage = () => {
     return stored ? JSON.parse(stored) : null;
   });
   const [billingPeriod, setBillingPeriod] = useState<"renewal" | "onetime">(
-    "renewal",
+    "onetime",
   );
   const [localFocused, setLocalFocused] = useState(false);
   const [validation, setValidation] = useState<ValidationState>({
@@ -428,16 +428,13 @@ export const PromotionPage = () => {
               setBillingPeriod(value)
             }
           >
-            <div
-              className='flex cursor-pointer items-center justify-between rounded-m border border-border p-4'
-              onClick={() => setBillingPeriod("renewal")}
-            >
+            <div className='flex cursor-not-allowed items-center justify-between rounded-m border border-border p-4 opacity-50'>
               <div className='flex items-center gap-3'>
-                <RadioGroupItem value='renewal' id='renewal' />
-                <Label htmlFor='renewal' className='cursor-pointer'>
+                <RadioGroupItem value='renewal' id='renewal' disabled />
+                <Label htmlFor='renewal' className='cursor-not-allowed'>
                   <div className='font-semibold'>30 Days - Renewal</div>
                   <div className='text-text-sm text-grayTextPrimary'>
-                    Renews every 30 days - Rotation Banners
+                    Renews every 30 days - Rotation Banners (Coming soon)
                   </div>
                 </Label>
               </div>
