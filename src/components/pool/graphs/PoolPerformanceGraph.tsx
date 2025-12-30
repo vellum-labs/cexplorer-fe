@@ -1,11 +1,11 @@
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import { useGraphColors } from "@/hooks/useGraphColors";
+import { useADADisplay } from "@/hooks/useADADisplay";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import type { ReactEChartsProps } from "@/lib/ReactCharts";
 import { useFetchMiscBasic } from "@/services/misc";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { format } from "date-fns";
 import ReactEcharts from "echarts-for-react";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
@@ -41,6 +41,7 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
   const miscConst = useMiscConst(basicData?.data.version.const);
   const { textColor, bgColor, splitLineColor, inactivePageIconColor } =
     useGraphColors();
+  const { formatLovelace } = useADADisplay();
 
   const chartRef = useRef(null);
 
@@ -103,7 +104,7 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
                 return `${Number(value).toFixed(2)}`;
               case "Pledged":
               case "Epoch Stake":
-                return lovelaceToAda(Number(value));
+                return formatLovelace(Number(value));
               case "Delegators":
               case "Blocks":
               default:
