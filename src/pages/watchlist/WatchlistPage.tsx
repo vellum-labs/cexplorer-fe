@@ -20,9 +20,11 @@ import {
   useFetchAccountList,
   useFetchPolicyList,
 } from "@/services/user";
+import { useWalletStore } from "@/stores/walletStore";
 
 export const WatchlistPage = () => {
   const token = useAuthToken();
+  const { address } = useWalletStore();
   const query = useFetchWatchlist(token);
   const accountListQuery = useFetchAccountList(token);
   const policyListQuery = useFetchPolicyList(token);
@@ -181,6 +183,7 @@ export const WatchlistPage = () => {
     count.policies;
   const isLoading = token && (query.isLoading || accountListQuery.isLoading);
   const hasError = token && (query.isError || accountListQuery.isError);
+  const isWalletConnectedButNoToken = !token && !!address;
 
   return (
     <>
@@ -222,6 +225,13 @@ export const WatchlistPage = () => {
                 secondaryText='Star your favorite stake pools, DReps, wallets, or assets to keep track of them here.'
               />
             )}
+          </div>
+        ) : isWalletConnectedButNoToken ? (
+          <div className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
+            <div className='flex flex-col gap-2'>
+              <LoadingSkeleton height='40px' width='100%' />
+              <LoadingSkeleton height='200px' width='100%' />
+            </div>
           </div>
         ) : (
           <div className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
