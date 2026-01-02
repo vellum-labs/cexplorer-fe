@@ -242,8 +242,26 @@ export interface MiscApiData {
 export type MiscConstResponse = ResponseCore<MiscConstResponseData>;
 export type MiscNewResponse = ResponseCore<MiscNew>;
 export type MiscSearchResponse = ResponseCore<MiscSearch[] | MiscSearch>;
+export interface MiscApiStripe {
+  active: number | boolean;
+  price: number;
+  max_period?: number;
+}
+
+export interface MiscPaymentData {
+  ok: boolean;
+  msg: string;
+  redir?: string;
+}
+
+export type MiscPaymentResponse = ResponseCore<MiscPaymentData>;
+
+export type PromotionType = "pool" | "drep" | "asset" | "policy";
+export type PaymentAction = "payment_one_time" | "payment_recurring";
+
 export type MiscApiResponse = ResponseCore<{
   plans: MiscApiData;
+  stripe?: MiscApiStripe;
 }>;
 
 interface MaterializedView {

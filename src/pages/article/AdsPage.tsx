@@ -7,11 +7,11 @@ import {
   CircleCheck,
   Bell,
   Mail,
-  ChevronDown,
   ArrowRight,
   Code2,
 } from "lucide-react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
+import { Link } from "@tanstack/react-router";
 import adsFeatured from "@/resources/images/features/feature_cards.svg";
 import adsBoost from "@/resources/images/ads_boost.svg";
 import adsJam from "@/resources/images/ads_jam.svg";
@@ -116,13 +116,14 @@ export const AdsPage = () => {
               Advertise with us, to reach an audience of Cardano enthusiasts and
               developers, gaining exposure within the growing Cardano community.
             </p>
-            <Button
-              size='lg'
-              variant='primary'
-              label='Advertise (Coming soon...)'
-              rightIcon={<ChevronDown size={20} />}
-              disabled
-            />
+            <Link to='/ads/promotion'>
+              <Button
+                size='lg'
+                variant='primary'
+                label='Promote'
+                rightIcon={<ArrowRight size={20} />}
+              />
+            </Link>
           </div>
 
           <div

@@ -6,6 +6,7 @@ export interface ResponseCore<T> {
   tokens: number;
   ex: number;
   debug: boolean;
+  msg?: string;
 }
 
 export type SupportedCurrencies =
