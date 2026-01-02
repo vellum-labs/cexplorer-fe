@@ -16,4 +16,5 @@ export const colors = {
   redText: "var(--redText)",
   greenText: "var(--greenText)",
   yellowText: "var(--yellowText)",
+  othersGray: "#6B7280",
 } as const;
