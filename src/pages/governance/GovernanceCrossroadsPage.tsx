@@ -1,5 +1,5 @@
 import { PageBase } from "@/components/global/pages/PageBase";
-import { User, Send, FileText, Building, Gauge } from "lucide-react";
+import { User, Send, FileText, Building, Gauge, ScrollText } from "lucide-react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 
 interface GovernanceSection {
@@ -51,6 +51,13 @@ const governanceSections: GovernanceSection[] = [
     href: "/gov/power-thresholds",
     buttonText: "View Power Thresholds",
     icon: <Gauge className='text-primary' />,
+  },
+  {
+    label: "Constitution",
+    description: "View the current and past Cardano constitutions and their governance history.",
+    href: "/gov/constitution",
+    buttonText: "View Constitution",
+    icon: <ScrollText className='text-primary' />,
   },
   {
     label: "Certificates",

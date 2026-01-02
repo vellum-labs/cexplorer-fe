@@ -12,17 +12,18 @@ import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { useFetchConstitutionList } from "@/services/governance";
+import { useFetchMiscBasic } from "@/services/misc";
 import { useFetchUrlContent } from "@/hooks/useFetchUrlContent";
 import { FileText } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { getConstitutionStatus } from "@/utils/getConstitutionStatus";
+import { PageBase } from "@/components/global/pages/PageBase";
 
-interface ConstitutionTabProps {
-  currentEpoch: number;
-}
+export const ConstitutionPage: FC = () => {
+  const { data: miscBasic } = useFetchMiscBasic();
+  const currentEpoch = Number(miscBasic?.data?.block?.epoch_no ?? 0);
 
-export const ConstitutionTab: FC<ConstitutionTabProps> = ({ currentEpoch }) => {
   const {
     content: modalContent,
     isLoading,
@@ -189,8 +190,20 @@ export const ConstitutionTab: FC<ConstitutionTabProps> = ({ currentEpoch }) => {
   const itemsWithIndex = items.map((item, index) => ({ ...item, index }));
 
   return (
-    <>
-      <div className='mt-2'>
+    <PageBase
+      metadataTitle='constitution'
+      title='Constitution'
+      breadcrumbItems={[
+        {
+          label: <span className='inline pt-1/2'>Governance</span>,
+          link: "/gov",
+        },
+        {
+          label: <span>Constitution</span>,
+        },
+      ]}
+    >
+      <div className='w-full max-w-desktop px-2 py-3'>
         <GlobalTable
           type='default'
           totalItems={totalItems}
@@ -239,6 +252,6 @@ export const ConstitutionTab: FC<ConstitutionTabProps> = ({ currentEpoch }) => {
           </Modal>,
           document.body,
         )}
-    </>
+    </PageBase>
   );
 };

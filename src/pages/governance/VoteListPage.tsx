@@ -23,6 +23,7 @@ import { GovActionCell } from "@/components/gov/GovActionCell";
 import type { Vote } from "@/constants/votes";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { VoteCell } from "@/components/governance/vote/VoteCell";
+import { isVoteLate } from "@/utils/governance/isVoteLate";
 
 interface VoteListPageProps {
   poolId?: string;
@@ -258,6 +259,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
           <VoteCell
             vote={item.vote as Vote}
             txHash={item.tx?.hash}
+            isLate={isVoteLate(item)}
             proposalId={item?.proposal?.ident?.id}
             anchorInfo={item?.anchor}
           />
@@ -301,11 +303,11 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
     {
       key: "epoch",
       render: item => {
-        if (!item?.proposal?.expiration) {
+        if (!item?.tx?.epoch_no) {
           return <p className='text-right'>-</p>;
         }
 
-        return <EpochCell no={item.proposal.expiration} />;
+        return <EpochCell no={item.tx?.epoch_no} />;
       },
       title: <p className='w-full text-right'>Epoch</p>,
       visible: columnsVisibility.epoch,

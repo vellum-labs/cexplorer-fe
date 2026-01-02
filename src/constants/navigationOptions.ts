@@ -118,10 +118,10 @@ export const navigationOptions: {
     { label: "Votes", href: "/gov/vote" },
     { label: "Power Thresholds", href: "/gov/power-thresholds" },
     { label: "Governance Actions", href: "/gov/action" },
+    { label: "DRep delegations", href: "/drep", params: { tab: "delegations" } },
     {
-      label: "DRep delegations",
-      href: "/drep",
-      params: { tab: "delegations" },
+      label: "Constitution",
+      href: "/gov/constitution",
       divider: true,
     },
     // { label: "Withdrawal leaderboard", href: "/gov/drep-vote", divider: true },
