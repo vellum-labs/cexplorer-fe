@@ -74,7 +74,7 @@ export const usePoolRewardGraph = (
         workerRef.current = null;
       }
     };
-  }, [rewardQuery.data]);
+  }, [rewardQuery.data, miscConst]);
 
   return {
     epochs,

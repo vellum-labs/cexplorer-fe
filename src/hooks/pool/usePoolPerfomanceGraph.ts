@@ -90,7 +90,7 @@ export const usePoolPerfomanceGraph = (id: string): PoolPerfomanceGraph => {
         workerRef.current = null;
       }
     };
-  }, [detailQuery.data]);
+  }, [detailQuery.data, epochElapsed]);
 
   return {
     activeStake,
