@@ -2,6 +2,7 @@ import EChartsReact from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { PIE_CHART_COLORS } from "@/constants/charts";
+import { colors } from "@/constants/colors";
 import { useMemo } from "react";
 
 interface ChartConfig {
@@ -24,8 +25,6 @@ interface PieChartsProps<T> {
   getChartData: (items: T[], dataKey: string) => Array<Record<string, any>>;
   minThreshold?: number;
 }
-
-const OTHERS_COLOR = "#6B7280";
 
 export const PieCharts = <T,>({
   items,
@@ -73,7 +72,7 @@ export const PieCharts = <T,>({
         mainItems.push({
           name: "Others",
           value: othersValue,
-          color: OTHERS_COLOR,
+          color: colors.othersGray,
           isOthers: true,
           groupedItems: smallItems.sort((a, b) => b.value - a.value),
         });
