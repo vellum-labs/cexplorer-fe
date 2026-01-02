@@ -2,11 +2,11 @@ import { EPOCH_LENGTH_DAYS } from "@/constants/confVariables";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useMiscRate } from "@/hooks/useMiscRate";
+import { useADADisplay } from "@/hooks/useADADisplay";
 import { useFetchMiscBasic } from "@/services/misc";
 import type { RewardItem } from "@/types/accountTypes";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { format } from "date-fns";
 import ReactEcharts from "echarts-for-react";
 import { useEffect, useState } from "react";
@@ -20,6 +20,8 @@ export const RewardsGraph = ({ data }: RewardsGraphProps) => {
   const { data: miscBasic } = useFetchMiscBasic(true);
   const rates = useMiscRate(miscBasic?.data.version.rate);
   const miscConst = useMiscConst(miscBasic?.data.version.const);
+  const { formatLovelace } = useADADisplay();
+
   const [graphsVisibility, setGraphsVisibility] = useState({
     "Rewards (₳)": true,
     "Rewards ($)": true,
@@ -90,7 +92,7 @@ export const RewardsGraph = ({ data }: RewardsGraphProps) => {
               if (item.data == null || isNaN(Number(item.data))) {
                 formattedValue = "—";
               } else if (item.seriesName.includes("Rewards (₳)")) {
-                formattedValue = lovelaceToAda(Number(item.data * 1e6));
+                formattedValue = formatLovelace(Number(item.data) * 1e6);
                 return `<p style="margin:2px 0;">${marker(item)} Rewards: ${formattedValue}</p>`;
               } else if (item.seriesName.includes("Rewards ($)")) {
                 formattedValue = Number(item.data).toFixed(2);
@@ -99,7 +101,7 @@ export const RewardsGraph = ({ data }: RewardsGraphProps) => {
                 formattedValue = Number(item.data).toFixed(2);
                 return `<p style="margin:2px 0;">${marker(item)} ROA: ${formattedValue}%</p>`;
               } else if (item.seriesName.includes("Active Stake (₳)")) {
-                formattedValue = lovelaceToAda(item.data);
+                formattedValue = formatLovelace(Number(item.data));
                 return `<p style="margin:2px 0;">${marker(item)} Stake: ${formattedValue}</p>`;
               } else {
                 formattedValue = item.data;

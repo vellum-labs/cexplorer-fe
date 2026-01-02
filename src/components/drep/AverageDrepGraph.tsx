@@ -8,12 +8,12 @@ import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import { useEffect, useState } from "react";
 import { useFetchCombinedAverageDrep } from "@/services/drep";
 import { useGraphColors } from "@/hooks/useGraphColors";
+import { useADADisplay } from "@/hooks/useADADisplay";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 export const AverageDrepGraph: FC = () => {
   const [graphsVisibility, setGraphsVisibility] = useState({
@@ -29,6 +29,7 @@ export const AverageDrepGraph: FC = () => {
 
   const { splitLineColor, textColor, bgColor, inactivePageIconColor } =
     useGraphColors();
+  const { formatLovelace } = useADADisplay();
 
   const epochs = (query.data?.averageDrep ?? []).map(item => item.epoch_no);
   const avgDelegator = (query.data?.averageDrep ?? []).map(
@@ -77,7 +78,7 @@ export const AverageDrepGraph: FC = () => {
           "Average delegators per DRep": (item: any) =>
             item ? Math.round(item.data) : "N/A",
           "Average stake per DRep (₳)": (item: any) =>
-            item ? lovelaceToAda(item.data) : "N/A",
+            item ? formatLovelace(item.data) : "N/A",
           "Voting power (%) of DReps that are SPOs at the same time": (
             item: any,
           ) =>

@@ -1,9 +1,9 @@
 import type { FC } from "react";
 import ReactECharts from "echarts-for-react";
+import { useADADisplay } from "@/hooks/useADADisplay";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { CircleHelp } from "lucide-react";
-import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 
 interface SPOThresholdChartProps {
@@ -29,6 +29,7 @@ export const SPOThresholdChart: FC<SPOThresholdChartProps> = ({
     totalSpoStake,
   } = chartProps;
 
+  const { formatLovelace } = useADADisplay();
   const { textColor, bgColor } = useGraphColors();
 
   const threshold = params ? epochParam[params] : 0;
@@ -118,15 +119,13 @@ export const SPOThresholdChart: FC<SPOThresholdChartProps> = ({
         }
 
         if (params.data.isOther) {
-          const stakeInAda = formatNumberWithSuffix(params.data.value / 1e6);
-          return `Other SPOs<br/>Stake: ${stakeInAda} ADA<br/>Not needed for threshold`;
+          const stakeFormatted = formatLovelace(params.data.value);
+          return `Other SPOs<br/>Stake: ${stakeFormatted}<br/>Not needed for threshold`;
         }
 
         if (params.data.poolData) {
           const pool = params.data.poolData;
-          const stakeInAda = formatNumberWithSuffix(
-            Number(pool.live_stake ?? 0) / 1e6,
-          );
+          const stakeFormatted = formatLovelace(Number(pool.live_stake ?? 0));
           const imageUrl = generateImageUrl(pool.pool_id ?? "", "sm", "pool");
 
           return `
@@ -135,14 +134,14 @@ export const SPOThresholdChart: FC<SPOThresholdChartProps> = ({
                 <img src="${imageUrl}" alt="Pool" style="width: 16px; height: 16px; border-radius: 50%; object-fit: cover;" onerror="this.style.display='none'"/>
                 ${params.data.name}
               </div>
-              <div>Live Stake: ${stakeInAda} ADA</div>
+              <div>Live Stake: ${stakeFormatted}</div>
               <div>Delegators: ${pool.delegators ?? "N/A"}</div>
             </div>
           `;
         }
 
-        const stakeInAda = formatNumberWithSuffix(params.data.value / 1e6);
-        return `${params.data.name}<br/>Stake: ${stakeInAda} ADA`;
+        const stakeFormatted = formatLovelace(params.data.value);
+        return `${params.data.name}<br/>Stake: ${stakeFormatted}`;
       },
     },
     series: [

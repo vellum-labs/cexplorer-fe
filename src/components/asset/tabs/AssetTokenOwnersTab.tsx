@@ -6,10 +6,11 @@ import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchAssetOwners } from "@/services/assets";
 import { useAssetOwnerTableStore } from "@/stores/tables/assetOwnerTableStore";
-import { formatNumberWithSuffix, formatString } from "@vellumlabs/cexplorer-sdk";
-import { Link, useSearch } from "@tanstack/react-router";
+import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
+import { useSearch } from "@tanstack/react-router";
 import { configJSON } from "@/constants/conf";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
+import { AddressOrHandleCell } from "@/components/address/AddressOrHandleCell";
 
 interface AssetTokenOwnersTabProps {
   name: number;
@@ -59,15 +60,10 @@ export const AssetTokenOwnersTab: FC<AssetTokenOwnersTabProps> = ({
       key: "owner",
       render: item =>
         item?.address ? (
-          <Link
-            to='/address/$address'
-            params={{
-              address: item.address,
-            }}
-            className='text-primary'
-          >
-            {formatString(item.address, "long")}
-          </Link>
+          <AddressOrHandleCell
+            address={item.address}
+            adahandle={item.adahandle}
+          />
         ) : (
           "-"
         ),

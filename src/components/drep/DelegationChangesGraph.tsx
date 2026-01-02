@@ -3,6 +3,7 @@ import ReactEcharts from "echarts-for-react";
 
 import { useFetchDelegEpochChanges } from "@/services/drep";
 import { useGraphColors } from "@/hooks/useGraphColors";
+import { useADADisplay } from "@/hooks/useADADisplay";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 
@@ -12,7 +13,6 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 import { AnalyticsGraph } from "../analytics/AnalyticsGraph";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 export const DelegationChangesGraph: FC = () => {
   const query = useFetchDelegEpochChanges();
@@ -24,6 +24,7 @@ export const DelegationChangesGraph: FC = () => {
 
   const { splitLineColor, textColor, bgColor, inactivePageIconColor } =
     useGraphColors();
+  const { formatLovelace } = useADADisplay();
 
   const epochs = data.map(d => d.no);
   const stake = data.map(d => d.stat.stake);
@@ -61,7 +62,7 @@ export const DelegationChangesGraph: FC = () => {
 
               const value =
                 item.seriesName === "Stake Moved (₳)"
-                  ? lovelaceToAda(item.data)
+                  ? formatLovelace(item.data)
                   : formatNumber(item.data);
 
               return `<p>${item.marker} ${name}: ${value}</p>`;

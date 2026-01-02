@@ -3,7 +3,7 @@ import type { FC } from "react";
 import ReactEcharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
+import { useADADisplay } from "@/hooks/useADADisplay";
 
 interface GovernanceDetailOverviewInfoGraphProps {
   data: any;
@@ -20,6 +20,7 @@ export const GovernanceDetailOverviewInfoGraph: FC<
 
   const { theme } = useThemeStore();
   const { textColor, bgColor } = useGraphColors();
+  const { formatLovelace } = useADADisplay();
 
   const isLightTheme = theme === "light";
 
@@ -48,7 +49,7 @@ export const GovernanceDetailOverviewInfoGraph: FC<
         const value = params.value ?? 0;
         const name = params.name ?? "Unknown";
         const percent = params.percent ?? 0;
-        return `${name}<br/>Stake: ${lovelaceToAda(value)} ADA<br/>(${percent}%)`;
+        return `${name}<br/>Stake: ${formatLovelace(value)}<br/>(${percent}%)`;
       },
     },
     legend: {

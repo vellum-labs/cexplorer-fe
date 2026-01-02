@@ -9,9 +9,9 @@ import { useEffect, useRef, useState } from "react";
 
 import type { DrepListOrder } from "@/types/drepTypes";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { useNavigate } from "@tanstack/react-router";
 import { useGraphColors } from "@/hooks/useGraphColors";
+import { useADADisplay } from "@/hooks/useADADisplay";
 
 interface DrepSizeGraphProps {
   type: DrepListOrder;
@@ -25,6 +25,7 @@ export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
   const items = data?.pages[0].data.data;
   const chartRef = useRef(null);
   const { textColor, bgColor } = useGraphColors();
+  const { formatLovelace } = useADADisplay();
 
   const onChartReadyCallback = chart => {
     chartRef.current = chart;
@@ -144,7 +145,7 @@ export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
         const drepName = item?.data?.given_name;
         const fullDisplayName =
           drepName || formatString(item?.hash?.view || null, "long");
-        return `<b>${fullDisplayName}</b> <br/> ${type === "power" ? `Voting Power: ${lovelaceToAda(params.data.value)}` : type === "delegator" ? `Delegators: ${params.data.value}` : type === "own" ? `Owner Stake: ${lovelaceToAda(params.data.value)}` : type === "average_stake" ? `Average Stake: ${lovelaceToAda(params.data.value)}` : `Value: ${lovelaceToAda(params.data.value)}`}`;
+        return `<b>${fullDisplayName}</b> <br/> ${type === "power" ? `Voting Power: ${formatLovelace(params.data.value)}` : type === "delegator" ? `Delegators: ${params.data.value}` : type === "own" ? `Owner Stake: ${formatLovelace(params.data.value)}` : type === "average_stake" ? `Average Stake: ${formatLovelace(params.data.value)}` : `Value: ${formatLovelace(params.data.value)}`}`;
       },
     },
     series: [

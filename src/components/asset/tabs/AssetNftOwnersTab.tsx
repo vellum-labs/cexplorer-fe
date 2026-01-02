@@ -8,7 +8,7 @@ import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { useFetchNftAssetOwners } from "@/services/assets";
 import { useAssetOwnerNftTableStore } from "@/stores/tables/AssetOwnerNftTableStore";
 
-import AddressCell from "@/components/address/AddressCell";
+import { AddressOrHandleCell } from "@/components/address/AddressOrHandleCell";
 import { AddressTypeInitialsBadge } from "@vellumlabs/cexplorer-sdk";
 import { useSearch } from "@tanstack/react-router";
 import { configJSON } from "@/constants/conf";
@@ -57,7 +57,10 @@ export const AssetNftOwnersTab: FC<AssetNftOwnersTabProps> = ({
         item?.owner?.address ? (
           <div className='flex items-center gap-1/2'>
             <AddressTypeInitialsBadge address={item?.owner.address} />
-            <AddressCell address={item?.owner?.address} />
+            <AddressOrHandleCell
+              address={item.owner.address}
+              adahandle={item.adahandle}
+            />
           </div>
         ) : (
           "-"

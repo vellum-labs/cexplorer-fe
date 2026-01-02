@@ -1,8 +1,8 @@
 import type { FC } from "react";
 import ReactECharts from "echarts-for-react";
 import type { ThresholdPoolList } from "@/types/governanceTypes";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { useNavigate } from "@tanstack/react-router";
+import { useADADisplay } from "@/hooks/useADADisplay";
 
 interface PowerThresholdsSPOAttackGraphProps {
   poolList: ThresholdPoolList;
@@ -17,6 +17,7 @@ export const PowerThresholdsSPOAttackGraph: FC<
   );
 
   const navigate = useNavigate();
+  const { formatLovelace } = useADADisplay();
 
   const targetStake = liveStake * 0.51;
   let accumulated = 0;
@@ -52,7 +53,7 @@ export const PowerThresholdsSPOAttackGraph: FC<
         const ada = params.data.rawAda.toFixed(2);
         return `
     <strong>Pool:</strong> ${params.name}<br/>
-    <strong>Stake:</strong> ${lovelaceToAda(ada)}<br/>
+    <strong>Stake:</strong> ${formatLovelace(ada)}<br/>
     <strong>Percentage of total stake:</strong> ${percentOfTarget}%
   `;
       },

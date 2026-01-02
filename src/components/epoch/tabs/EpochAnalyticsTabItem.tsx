@@ -13,14 +13,16 @@ import { useFetchEpochAnalytics } from "@/services/analytics";
 import {
   formatNumber,
   formatNumberWithSuffix,
+  lovelaceToAda,
 } from "@vellumlabs/cexplorer-sdk";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
+import { useADADisplay } from "@/hooks/useADADisplay";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
 
 export const EpochAnalyticsTabItem: FC = () => {
   const { theme } = useThemeStore();
+  const { formatLovelace } = useADADisplay();
   const { bgColor, textColor } = useGraphColors();
 
   const [colorByTheme, setColorByTheme] = useState<string>(
@@ -242,7 +244,7 @@ export const EpochAnalyticsTabItem: FC = () => {
                   let formattedValue = "";
 
                   if (changeLovelaceToAda) {
-                    formattedValue = lovelaceToAda(value);
+                    formattedValue = formatLovelace(value);
                   } else if (tooltipProcents) {
                     formattedValue = value.toFixed(2) + "%";
                   } else {

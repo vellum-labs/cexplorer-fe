@@ -12,7 +12,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
+import { useADADisplay } from "@/hooks/useADADisplay";
 
 export const StakeIsSpoDrepGraph: FC = () => {
   const query = useFetchStakeIsSpoDrep();
@@ -23,6 +23,7 @@ export const StakeIsSpoDrepGraph: FC = () => {
 
   const { splitLineColor, textColor, bgColor, inactivePageIconColor } =
     useGraphColors();
+  const { formatLovelace } = useADADisplay();
 
   const epochs = data.map(item => item.epoch_no);
   const count = data.map(item => item.count);
@@ -62,7 +63,7 @@ export const StakeIsSpoDrepGraph: FC = () => {
             .map(item => {
               const value =
                 item.seriesName === "Stake (₳)"
-                  ? lovelaceToAda(item.data)
+                  ? formatLovelace(item.data)
                   : formatNumber(item.data);
               return `<p>${item.marker} ${labelMap[item.seriesName]}: ${value}</p>`;
             })

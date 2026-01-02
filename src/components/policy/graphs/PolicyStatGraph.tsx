@@ -9,7 +9,7 @@ import { memo, useEffect, useState } from "react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
+import { useADADisplay } from "@/hooks/useADADisplay";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
 import { useFetchMiscBasic } from "@/services/misc";
@@ -34,6 +34,7 @@ export const PolicyStatGraph: FC<PolicyStatGraphProps> = memo(
     });
 
     const { textColor, bgColor } = useGraphColors();
+    const { formatLovelace } = useADADisplay();
 
     const data = query?.data?.data?.data;
 
@@ -98,7 +99,7 @@ export const PolicyStatGraph: FC<PolicyStatGraphProps> = memo(
           const content = params
             .map(item => {
               const value = item.seriesName.includes("volume")
-                ? lovelaceToAda(item.value)
+                ? formatLovelace(item.value)
                 : formatNumber(item.value);
 
               return `${item.marker} ${item.seriesName}: ${value}`;

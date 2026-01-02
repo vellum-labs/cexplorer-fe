@@ -1,9 +1,9 @@
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
+import { useADADisplay } from "@/hooks/useADADisplay";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import type { ReactEChartsProps } from "@/lib/ReactCharts";
 import { useFetchAssetStats } from "@/services/assets";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import ReactEcharts from "echarts-for-react";
 import { useEffect, useRef, useState } from "react";
 import { format } from "date-fns";
@@ -51,6 +51,7 @@ export const AssetStatsTab = ({ fingerprint }: Props) => {
     lineColor,
     purpleColor,
   } = useGraphColors();
+  const { formatLovelace } = useADADisplay();
   const miscConst = useMiscConst(query.data?.data[0]?.version?.const);
   const chartRef = useRef(null);
 
@@ -103,7 +104,7 @@ export const AssetStatsTab = ({ fingerprint }: Props) => {
                   item.seriesName === "ADA Output" ||
                   item.seriesName === "Asset Volume"
                 ) {
-                  formatted = lovelaceToAda(value);
+                  formatted = formatLovelace(value);
                 } else {
                   formatted = formatNumber(value);
                 }

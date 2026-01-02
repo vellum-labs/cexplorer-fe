@@ -4,7 +4,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
+import { useADADisplay } from "@/hooks/useADADisplay";
 import type { ThresholdsMilestone } from "@/types/governanceTypes";
 
 interface PowerThresholdsDRepDelegationDonutGraphProps {
@@ -17,6 +17,7 @@ export const PowerThresholdsDRepDelegationDonutGraph: FC<
   PowerThresholdsDRepDelegationDonutGraphProps
 > = ({ milestone, isLoading, currentSupplyEpoch }) => {
   const { textColor, bgColor } = useGraphColors();
+  const { formatLovelace } = useADADisplay();
 
   const { data: basicData, isLoading: basicLoading } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(basicData?.data.version.const);
@@ -60,7 +61,7 @@ export const PowerThresholdsDRepDelegationDonutGraph: FC<
       backgroundColor: bgColor,
       textStyle: { color: textColor },
       formatter: ({ name, value, percent }: any) =>
-        `<b>${name}</b><br/>Voting Power: ${lovelaceToAda(value)}<br/>Share: ${percent.toFixed(2)}%`,
+        `<b>${name}</b><br/>Voting Power: ${formatLovelace(value)}<br/>Share: ${percent.toFixed(2)}%`,
     },
     series: [
       {

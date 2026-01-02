@@ -1,4 +1,5 @@
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
+import { useADADisplay } from "@/hooks/useADADisplay";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
@@ -7,7 +8,6 @@ import { memo, useRef } from "react";
 import type { DrepDistrDetail } from "@/types/drepTypes";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 interface DrepDetailStatsTabProps {
   data: DrepDistrDetail[];
@@ -18,6 +18,7 @@ export const DrepDetailStatsTab = memo(function DrepDetailStatsTabMemo({
 }: DrepDetailStatsTabProps) {
   const { data: miscBasic } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(miscBasic?.data.version.const);
+  const { formatLovelace } = useADADisplay();
   const { textColor, bgColor } = useGraphColors();
   const chartRef = useRef(null);
 
@@ -41,7 +42,7 @@ export const DrepDetailStatsTab = memo(function DrepDetailStatsTabMemo({
         );
 
         const nameFunc = {
-          Power: item => (item ? lovelaceToAda(item.data) : "Power"),
+          Power: item => (item ? formatLovelace(item.data) : "Power"),
           Delegators: item => (item ? `${item.data} delegators` : "Delegators"),
         };
 

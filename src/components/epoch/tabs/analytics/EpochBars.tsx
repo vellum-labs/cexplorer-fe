@@ -3,9 +3,9 @@ import type { EpochStatsSummary } from "@/types/epochTypes";
 import type { FC } from "react";
 
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
+import { useADADisplay } from "@/hooks/useADADisplay";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
-import { formatNumber } from "@vellumlabs/cexplorer-sdk";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
+import { formatNumber, lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { format } from "date-fns";
 import ReactEcharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
@@ -24,6 +24,7 @@ export const EpochBars: FC<EpochBars> = ({
   isLoading,
   constData,
 }) => {
+  const { formatLovelace } = useADADisplay();
   const { bgColor, textColor } = useGraphColors();
 
   const epochDates = (stats?.daily || []).map(item =>
@@ -195,7 +196,7 @@ export const EpochBars: FC<EpochBars> = ({
               let formattedValue = "";
 
               if (key === "fees_earned") {
-                formattedValue = `${lovelaceToAda(value)}`;
+                formattedValue = `${formatLovelace(value)}`;
               } else if (key === "blk_size_used") {
                 formattedValue = `${value.toFixed(2)} B`;
               } else {

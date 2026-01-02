@@ -9,15 +9,16 @@ import { useCallback, useMemo, useRef } from "react";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { useADADisplay } from "@/hooks/useADADisplay";
 import { useGraphColors } from "@/hooks/useGraphColors";
-import { formatNumber } from "@vellumlabs/cexplorer-sdk";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
+import { formatNumber, lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { ArrowRight, CircleDollarSign } from "lucide-react";
 
 export const ScriptListTVLTab: FC = () => {
   const { data: miscBasic } = useFetchMiscBasic();
   const usdRate = miscBasic?.data.rate.ada[0].close ?? 0;
   const { data, isLoading } = useFetchTVL();
+  const { formatLovelace } = useADADisplay();
   const { textColor, splitLineColor, bgColor } = useGraphColors();
 
   const graphData = useMemo(() => {
@@ -60,7 +61,7 @@ export const ScriptListTVLTab: FC = () => {
             `<div style="font-weight: 400">` +
             `Date: ${item.date}<br/>` +
             `USD: $${formatNumber(item.valueUSD)}<br/>` +
-            `ADA Equivalent: ${item.valueADA ? lovelaceToAda(item.valueADA * 1e6) : "-"}` +
+            `ADA Equivalent: ${item.valueADA ? formatLovelace(item.valueADA * 1e6) : "-"}` +
             `</div>`
           );
         },

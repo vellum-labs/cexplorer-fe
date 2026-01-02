@@ -5,11 +5,11 @@ import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import ReactEcharts from "echarts-for-react";
 
+import { useADADisplay } from "@/hooks/useADADisplay";
 import { useGraphColors } from "@/hooks/useGraphColors";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 interface AssetExchangesLiquidityProps {
   query: ReturnType<typeof useFetchAssetDetail>;
@@ -18,6 +18,7 @@ interface AssetExchangesLiquidityProps {
 export const AssetExchangesLiquidity: FC<AssetExchangesLiquidityProps> = ({
   query,
 }) => {
+  const { formatLovelace } = useADADisplay();
   const { textColor, bgColor } = useGraphColors();
 
   const items = [...(query?.data?.data?.dex?.ada_pools ?? [])].sort(
@@ -91,7 +92,7 @@ export const AssetExchangesLiquidity: FC<AssetExchangesLiquidityProps> = ({
         color: textColor,
       },
       formatter: function (params) {
-        const value = lovelaceToAda(params.value);
+        const value = formatLovelace(params.value);
         return `${params.name}: ${value} (${params.percent}%)`;
       },
     },
