@@ -92,7 +92,6 @@ export const RewardsGraph = ({ data }: RewardsGraphProps) => {
               if (item.data == null || isNaN(Number(item.data))) {
                 formattedValue = "—";
               } else if (item.seriesName.includes("Rewards (₳)")) {
-                // Data is in ADA, convert to lovelace for formatLovelace
                 formattedValue = formatLovelace(Number(item.data) * 1e6);
                 return `<p style="margin:2px 0;">${marker(item)} Rewards: ${formattedValue}</p>`;
               } else if (item.seriesName.includes("Rewards ($)")) {
@@ -102,7 +101,6 @@ export const RewardsGraph = ({ data }: RewardsGraphProps) => {
                 formattedValue = Number(item.data).toFixed(2);
                 return `<p style="margin:2px 0;">${marker(item)} ROA: ${formattedValue}%</p>`;
               } else if (item.seriesName.includes("Active Stake (₳)")) {
-                // Data is in lovelace
                 formattedValue = formatLovelace(Number(item.data));
                 return `<p style="margin:2px 0;">${marker(item)} Stake: ${formattedValue}</p>`;
               } else {
