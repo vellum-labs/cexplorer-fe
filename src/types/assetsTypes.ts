@@ -130,9 +130,15 @@ interface AssetBlock {
   epoch_no: number;
 }
 
+export interface AssetOwnerAdaHandle {
+  name: string;
+  type: "wallet" | "script";
+}
+
 export interface AssetOwner {
   address: string;
   quantity: number;
+  adahandle?: AssetOwnerAdaHandle | null;
 }
 
 interface AssetOwners {
@@ -143,8 +149,9 @@ interface AssetOwners {
 export interface AssetOwnersNftItem {
   tx: AssetTx;
   block: AssetBlock;
-  owner: AssetOwner;
+  owner: Pick<AssetOwner, "address">;
   quantity: number;
+  adahandle?: AssetOwnerAdaHandle | null;
 }
 
 interface AssetOwnersNft {
