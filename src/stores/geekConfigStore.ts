@@ -22,7 +22,7 @@ export const useGeekConfigStore = handlePersistStore<
   {
     displayHandles: true,
     displayADAInTooltips: true,
-    sortUTxOs: "index",
+    sortUTxOs: "value",
   },
   set => ({
     setDisplayHandles: value =>

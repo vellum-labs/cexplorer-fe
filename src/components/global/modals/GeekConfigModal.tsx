@@ -103,7 +103,7 @@ export const GeekConfigModal = () => {
               <SelectTrigger className="w-[100px]">
                 <SelectValue placeholder="Index" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="z-[100]">
                 <SelectItem value="index">Index</SelectItem>
                 <SelectItem value="value">Value</SelectItem>
               </SelectContent>
