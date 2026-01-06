@@ -29,7 +29,7 @@ export const useTaxToolSummaryTableStore = handlePersistStore<
       rewards_secondary: true,
     },
     isResponsive: true,
-    rows: 20,
+    rows: 5,
     columnsOrder: [
       "period",
       "epochs",
