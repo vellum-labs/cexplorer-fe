@@ -5,6 +5,7 @@ import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import ReactEcharts from "echarts-for-react";
 
+import { useADADisplay } from "@/hooks/useADADisplay";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { dexConfig } from "@/constants/dexConfig";
 
@@ -23,6 +24,7 @@ interface AssetExchangesLiquidityProps {
 export const AssetExchangesLiquidity: FC<AssetExchangesLiquidityProps> = ({
   query,
 }) => {
+  const { formatADA } = useADADisplay();
   const { textColor, bgColor } = useGraphColors();
 
   const ticker = query?.data?.data?.registry?.ticker || "Token";
@@ -154,8 +156,8 @@ export const AssetExchangesLiquidity: FC<AssetExchangesLiquidityProps> = ({
         color: textColor,
       },
       formatter: function (params) {
-        const value = formatNumberWithSuffix(params.value);
-        return `${params.name}: ₳ ${value} (${params.percent}%)`;
+        const value = formatADA(params.value);
+        return `${params.name}: ${value} (${params.percent}%)`;
       },
     },
     series: [

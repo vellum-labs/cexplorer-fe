@@ -5,12 +5,14 @@ import {
 } from "@nufi/dapp-client-core";
 import { useEffect } from "react";
 import { CustomLabelModal } from "./components/global/modals/CustomLabelModal";
+import { GeekConfigModal } from "./components/global/modals/GeekConfigModal";
 import WalletConfigModal from "./components/wallet/WalletConfigModal";
 import { enabledWalletConnector, network } from "./constants/confVariables";
 import { useConnectWallet } from "./hooks/useConnectWallet";
 import { useFetchUserInfo } from "./services/user";
 import { useCustomLabelModalState } from "./stores/states/customLabelModalState";
 import { useWalletConfigModalState } from "./stores/states/walletConfigModalState";
+import { useGeekConfigModalState } from "./stores/states/geekConfigModalState";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useUqStore } from "./stores/uqStore";
 import { useWalletStore } from "./stores/walletStore";
@@ -24,6 +26,7 @@ function App() {
   const { setUq, uq } = useUqStore();
   const { isOpen } = useCustomLabelModalState();
   const { isOpen: isConfigOpen } = useWalletConfigModalState();
+  const { isOpen: isGeekConfigOpen } = useGeekConfigModalState();
   const userQuery = useFetchUserInfo();
 
   useEffect(() => {
@@ -82,6 +85,7 @@ function App() {
     <>
       {isConfigOpen && <WalletConfigModal />}
       {isOpen && <CustomLabelModal />}
+      {isGeekConfigOpen && <GeekConfigModal />}
       <GoogleAnalytics />
     </>
   );
