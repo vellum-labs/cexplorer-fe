@@ -539,8 +539,10 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
               ) : (
                 <Ellipsis size={15} className='text-yellowText' />
               )}
-              {item.status[0].toUpperCase() +
-                item.status.slice(1).toLowerCase()}
+              {typeof item.status === "string"
+                ? item.status[0].toUpperCase() +
+                  item.status.slice(1).toLowerCase()
+                : "-"}
             </p>
           </div>
         );
@@ -803,11 +805,12 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                   {key === "maker" && (
                     <span>{formatString(value, "long")}</span>
                   )}
-                  {(key === "status" || key === "dex") && (
-                    <span>
-                      {value[0].toUpperCase() + value.slice(1).toLowerCase()}
-                    </span>
-                  )}
+                  {(key === "status" || key === "dex") &&
+                    typeof value === "string" && (
+                      <span>
+                        {value[0].toUpperCase() + value.slice(1).toLowerCase()}
+                      </span>
+                    )}
                   {key === "type" && (
                     <span>
                       {(JSON.parse(value) as unknown as FilterType)?.value ===
