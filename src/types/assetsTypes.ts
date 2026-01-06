@@ -112,6 +112,9 @@ export interface AssetDetailDex {
     dex_name: string;
     token_1_amount: number;
     token_2_amount: number;
+    pool_fee?: number;
+    pool_id?: string;
+    pool_name?: string;
   }[];
   price: number;
   liquidity: number;
