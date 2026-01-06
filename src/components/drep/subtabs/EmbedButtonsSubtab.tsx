@@ -10,11 +10,7 @@ export const EmbedButtonsSubtab: FC<EmbedButtonsSubtabProps> = ({
   drepId,
   drepName,
 }) => {
-  const baseUrl =
-    typeof window !== "undefined"
-      ? window.location.origin
-      : "https://cexplorer.io";
-  const drepUrl = `${baseUrl}/drep/${drepId}?action=delegate`;
+  const drepUrl = `https://cexplorer.io/drep/${drepId}?action=delegate`;
   const previewUrl = drepUrl;
 
   const displayName = drepName || "DRep";

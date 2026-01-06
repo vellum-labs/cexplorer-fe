@@ -10,11 +10,7 @@ export const EmbedButtonsSubtab: FC<EmbedButtonsSubtabProps> = ({
   poolId,
   poolTicker,
 }) => {
-  const baseUrl =
-    typeof window !== "undefined"
-      ? window.location.origin
-      : "https://cexplorer.io";
-  const poolUrl = `${baseUrl}/pool/${poolId}?action=delegate`;
+  const poolUrl = `https://cexplorer.io/pool/${poolId}?action=delegate`;
   const previewUrl = poolUrl;
 
   const delegationButtonCode = `<a href="${poolUrl}" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; padding: 4px 8px; background-color: #1ba3e0; color: white; border: 2px solid #1ba3e0; border-radius: 8px; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 14px; line-height: 20px; transition: transform 150ms; box-sizing: border-box;" onmouseover="this.style.transform='scale(1.01)'" onmouseout="this.style.transform='scale(1)'">Delegate to [${poolTicker || "POOL"}]</a>`;

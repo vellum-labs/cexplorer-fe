@@ -16,7 +16,6 @@ export const useDelegateAction = ({ type, ident }: UseDelegateActionProps) => {
   const [pendingDelegation, setPendingDelegation] = useState(false);
   const hasAuthToken = address ? !!tokens[address]?.token : false;
 
-  // Check URL on mount for delegation action
   useEffect(() => {
     const timer = setTimeout(() => {
       const urlParams = new URLSearchParams(window.location.search);
@@ -35,9 +34,7 @@ export const useDelegateAction = ({ type, ident }: UseDelegateActionProps) => {
             .then(freshWallet => {
               handleDelegation({ type, ident }, freshWallet);
             })
-            .catch(err => {
-              console.error("[Delegate Action] Error enabling wallet:", err);
-            });
+            .catch(() => {});
         }
       }
     }, 100);
@@ -46,15 +43,14 @@ export const useDelegateAction = ({ type, ident }: UseDelegateActionProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Trigger delegation after wallet connects and auth token is obtained
   useEffect(() => {
     const triggerDelegation = async () => {
       if (pendingDelegation && walletType && address && hasAuthToken) {
         try {
           const freshWallet = await BrowserWallet.enable(walletType);
           await handleDelegation({ type, ident }, freshWallet);
-        } catch (error) {
-          console.error("[Delegate Action] Delegation error:", error);
+        } catch {
+          // Error handled in handleDelegation
         }
         setPendingDelegation(false);
       }
