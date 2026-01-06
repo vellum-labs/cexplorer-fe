@@ -46,26 +46,46 @@ interface AdminContentDetailProps {
   lang: "en";
 }
 
-const CONFIG = {
+interface ContentTypeConfig {
+  category: "wiki" | undefined;
+  draftPrefix: string;
+  successMessage: string;
+  errorMessage: string;
+  pageTitle: string;
+  breadcrumbLink: "/admin/articles" | "/admin/wiki";
+  breadcrumbLabel: string;
+}
+
+const CONFIG: Record<ContentType, ContentTypeConfig> = {
   article: {
-    category: undefined as "wiki" | undefined,
+    category: undefined,
     draftPrefix: "article",
     successMessage: "Article updated",
     errorMessage: "Failed to update article",
     pageTitle: "Admin article detail | Cexplorer.io",
-    breadcrumbLink: "/admin/articles" as const,
+    breadcrumbLink: "/admin/articles",
     breadcrumbLabel: "Admin articles",
   },
   wiki: {
-    category: "wiki" as "wiki" | undefined,
+    category: "wiki",
     draftPrefix: "wiki",
     successMessage: "Wiki article updated",
     errorMessage: "Failed to update wiki article",
     pageTitle: "Admin wiki detail | Cexplorer.io",
-    breadcrumbLink: "/admin/wiki" as const,
+    breadcrumbLink: "/admin/wiki",
     breadcrumbLabel: "Admin wiki",
   },
 };
+
+const PRIMARY_FIELDS = [
+  { label: "Name", field: "name", placeholder: "Name" },
+  { label: "Description", field: "description", placeholder: "Description" },
+] as const;
+
+const SECONDARY_FIELDS = [
+  { label: "Keywords", field: "keywords", placeholder: "Keywords" },
+  { label: "Image", field: "image", placeholder: "Image" },
+] as const;
 
 export const AdminContentDetail = ({
   type,
@@ -214,16 +234,7 @@ export const AdminContentDetail = ({
             )}
           </div>
 
-          {(
-            [
-              { label: "Name", field: "name", placeholder: "Name" },
-              {
-                label: "Description",
-                field: "description",
-                placeholder: "Description",
-              },
-            ] as const
-          ).map(({ label, field, placeholder }) => (
+          {PRIMARY_FIELDS.map(({ label, field, placeholder }) => (
             <div key={field}>
               <p>{label}:</p>
               <TextInput
@@ -245,12 +256,7 @@ export const AdminContentDetail = ({
             }
           />
 
-          {(
-            [
-              { label: "Keywords", field: "keywords", placeholder: "Keywords" },
-              { label: "Image", field: "image", placeholder: "Image" },
-            ] as const
-          ).map(({ label, field, placeholder }) => (
+          {SECONDARY_FIELDS.map(({ label, field, placeholder }) => (
             <div key={field}>
               <p>{label}:</p>
               <TextInput
