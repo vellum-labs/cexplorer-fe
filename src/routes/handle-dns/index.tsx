@@ -6,6 +6,9 @@ export const Route = createFileRoute("/handle-dns/")({
   validateSearch: (search: Record<string, unknown>) => {
     return {
       page: Number(search?.page) || 1,
+      search: typeof search?.search === "string" ? search.search : undefined,
+      tab: typeof search?.tab === "string" ? search.tab : undefined,
+      handle: typeof search?.handle === "string" ? search.handle : undefined,
     };
   },
 });

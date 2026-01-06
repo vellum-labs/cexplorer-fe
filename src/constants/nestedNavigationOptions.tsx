@@ -2,6 +2,7 @@ import type {
   NestedNavigation,
   NestedNavigationOptionType,
 } from "@/types/navigationTypes";
+import { DollarIcon } from "@vellumlabs/cexplorer-sdk";
 
 export const nestedNavigationOptions: {
   [T in NestedNavigationOptionType]: NestedNavigation;
@@ -44,7 +45,12 @@ export const nestedNavigationOptions: {
           href: "/uplc",
         },
         {
-          label: "$handle DNS",
+          label: (
+            <span className='flex items-center'>
+              <img src={DollarIcon} alt='$' className='-ml-[3px] h-4 w-4' />
+              handle DNS
+            </span>
+          ),
           href: "/handle-dns",
         },
       ],

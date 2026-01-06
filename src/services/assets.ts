@@ -1,4 +1,5 @@
 import type {
+  AdaHandleResponse,
   AssetDetailResponse,
   AssetListResponse,
   AssetMetadataResponse,
@@ -329,4 +330,29 @@ export const useFetchAssetExchangesGraph = (
 
       return response.json();
     },
+  });
+
+export const fetchAdaHandle = async (hex: string) => {
+  const url = `/asset/adahandle`;
+  const options = {
+    params: {
+      hex,
+    },
+  };
+
+  return handleFetch<AdaHandleResponse>(url, undefined, options);
+};
+
+export const useFetchAdaHandle = (hex: string | undefined) =>
+  useQuery({
+    queryKey: ["ada-handle", hex],
+    queryFn: async () => {
+      try {
+        return await fetchAdaHandle(hex!);
+      } catch {
+        return { code: 404, data: null } as AdaHandleResponse;
+      }
+    },
+    enabled: !!hex,
+    retry: false,
   });
