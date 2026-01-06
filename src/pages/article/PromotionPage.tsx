@@ -1,33 +1,12 @@
-import { useState, useRef, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
-import {
-  Button,
-  TextInput,
-  useGlobalSearch,
-  AdCard,
-  formatString,
-} from "@vellumlabs/cexplorer-sdk";
+import { Button, TextInput, AdCard, formatString } from "@vellumlabs/cexplorer-sdk";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { CircleAlert, Search, AlertTriangle, Loader2 } from "lucide-react";
-import { useClickOutsideGroup } from "@/hooks/useClickOutsideGroup";
 import { generateImageUrl } from "@/utils/generateImageUrl";
-import { useFetchMiscApi, miscValidate, miscPayment } from "@/services/misc";
-import type { MiscValidatePreview } from "@/types/userTypes";
+import { usePromotion } from "@/hooks/usePromotion";
 import type { PromotionType } from "@/types/miscTypes";
-
-interface SelectedItem {
-  id: string;
-  name: string;
-  type: PromotionType;
-}
-
-interface ValidationState {
-  isLoading: boolean;
-  error: string | null;
-  preview: MiscValidatePreview | null;
-}
 
 const promotionTypes = [
   { key: "pool" as PromotionType, label: "Stake pool" },
@@ -36,170 +15,29 @@ const promotionTypes = [
   { key: "policy" as PromotionType, label: "Policy ID" },
 ];
 
-const STORAGE_KEY = "promotion_selected_item";
-
 export const PromotionPage = () => {
-  const [selectedType, setSelectedType] = useState<PromotionType>(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      const parsed = JSON.parse(stored) as SelectedItem;
-      return parsed.type;
-    }
-    return "pool";
-  });
-  const [selectedItem, setSelectedItem] = useState<SelectedItem | null>(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    return stored ? JSON.parse(stored) : null;
-  });
-  const [billingPeriod, setBillingPeriod] = useState<"renewal" | "onetime">(
-    "onetime",
-  );
-  const [localFocused, setLocalFocused] = useState(false);
-  const [validation, setValidation] = useState<ValidationState>({
-    isLoading: false,
-    error: null,
-    preview: null,
-  });
-  const [paymentLoading, setPaymentLoading] = useState(false);
-  const [paymentError, setPaymentError] = useState<string | null>(null);
-  const searchRef = useRef<HTMLDivElement>(null);
-
-  const { data: miscApiData, isLoading: isMiscApiLoading } = useFetchMiscApi();
-  const { search, handleSearchChange, data } = useGlobalSearch();
-
-  const stripeActive = !!miscApiData?.data?.stripe?.active;
-  const price = miscApiData?.data?.stripe?.price ?? 100;
-
-  useEffect(() => {
-    if (selectedItem) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(selectedItem));
-    } else {
-      localStorage.removeItem(STORAGE_KEY);
-    }
-  }, [selectedItem]);
-
-  useEffect(() => {
-    if (!selectedItem) {
-      setValidation({ isLoading: false, error: null, preview: null });
-      return;
-    }
-
-    const validateItem = async () => {
-      setValidation({ isLoading: true, error: null, preview: null });
-
-      try {
-        const response = await miscValidate(selectedItem.type, selectedItem.id);
-
-        if (response.code !== 200) {
-          setValidation({
-            isLoading: false,
-            error: response.msg || "Validation failed",
-            preview: null,
-          });
-          return;
-        }
-
-        if (!response.data.valid) {
-          setValidation({
-            isLoading: false,
-            error: "Item not found or does not exist",
-            preview: null,
-          });
-          return;
-        }
-
-        if (response.data.preview === false) {
-          setValidation({
-            isLoading: false,
-            error: "Promotion is not available for this item",
-            preview: null,
-          });
-          return;
-        }
-
-        setValidation({
-          isLoading: false,
-          error: null,
-          preview: response.data.preview,
-        });
-      } catch {
-        setValidation({
-          isLoading: false,
-          error: "Failed to validate item. Please try again.",
-          preview: null,
-        });
-      }
-    };
-
-    validateItem();
-  }, [selectedItem]);
-
-  const filteredResults = data.filter(item => {
-    if (selectedType === "pool") return item.category === "pool";
-    if (selectedType === "drep") return item.category === "drep";
-    if (selectedType === "asset") return item.category === "asset";
-    if (selectedType === "policy") return item.category === "policy";
-    return false;
-  });
-
-  useClickOutsideGroup([searchRef], () => {
-    setLocalFocused(false);
-  });
-
-  const handleSelect = (item: any) => {
-    const id = item.url.split("/").pop() || "";
-    setSelectedItem({
-      id,
-      name: item.title,
-      type: selectedType,
-    });
-    handleSearchChange("");
-    setLocalFocused(false);
-    setPaymentError(null);
-  };
-
-  const handlePayment = async () => {
-    if (!selectedItem || !validation.preview) return;
-
-    setPaymentLoading(true);
-    setPaymentError(null);
-
-    try {
-      const action =
-        billingPeriod === "renewal" ? "payment_recurring" : "payment_one_time";
-      const response = await miscPayment(
-        action,
-        selectedItem.type,
-        selectedItem.id,
-      );
-
-      if (response.code === 429) {
-        setPaymentError("Too many requests. Please try again later.");
-        return;
-      }
-
-      if (response.code !== 200) {
-        setPaymentError(response.msg || "Payment request failed");
-        return;
-      }
-
-      if (!response.data.ok) {
-        setPaymentError(response.data.msg || "Payment failed");
-        return;
-      }
-
-      if (response.data.redir) {
-        window.open(response.data.redir, "_blank");
-      }
-    } catch {
-      setPaymentError("Failed to process payment. Please try again.");
-    } finally {
-      setPaymentLoading(false);
-    }
-  };
-
-  const canProceedToPayment =
-    selectedItem && validation.preview && !validation.error && stripeActive;
+  const {
+    selectedType,
+    selectedItem,
+    billingPeriod,
+    localFocused,
+    validation,
+    paymentLoading,
+    paymentError,
+    searchRef,
+    search,
+    filteredResults,
+    stripeActive,
+    price,
+    isMiscApiLoading,
+    canProceedToPayment,
+    setLocalFocused,
+    setBillingPeriod,
+    handleSearchChange,
+    handleSelect,
+    handleTypeChange,
+    handlePayment,
+  } = usePromotion();
 
   if (isMiscApiLoading) {
     return (
@@ -293,12 +131,7 @@ export const PromotionPage = () => {
                 size='sm'
                 label={type.label}
                 className='!border !border-border'
-                onClick={() => {
-                  setSelectedType(type.key);
-                  setSelectedItem(null);
-                  handleSearchChange("");
-                  setPaymentError(null);
-                }}
+                onClick={() => handleTypeChange(type.key)}
               />
             ))}
           </div>
