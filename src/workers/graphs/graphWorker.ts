@@ -52,7 +52,7 @@ self.addEventListener("message", event => {
       const detailData = data.data.detailData;
       const epochElapsed = data.data.epochElapsed;
 
-      const proratedLuck = detailData?.epochs[0].data.block
+      const proratedLuck = detailData?.epochs[0].data.block && epochElapsed > 0
         ? (() => {
             const percent =
               ((detailData?.blocks?.epoch ?? 0) /
@@ -60,9 +60,9 @@ self.addEventListener("message", event => {
                 epochElapsed) *
               100;
 
-            return Number.isNaN(percent) ? "-" : percent;
+            return Number.isNaN(percent) || !Number.isFinite(percent) ? 0 : percent;
           })()
-        : "-";
+        : 0;
 
       const detailDataEpochs = [
         {
@@ -87,11 +87,11 @@ self.addEventListener("message", event => {
       const luck = detailDataEpochs?.map((epoch, index) =>
         index > 0
           ? epoch.data.block.luck
-            ? Number(epoch.data.block.luck * 100).toFixed(2)
-            : "0.00"
+            ? Number((epoch.data.block.luck * 100).toFixed(2))
+            : 0
           : epoch.data.block.luck
-            ? Number(epoch.data.block.luck).toFixed(2)
-            : "0.00",
+            ? Number(Number(epoch.data.block.luck).toFixed(2))
+            : 0,
       );
       const blocks = detailDataEpochs.map(epoch => epoch.data.block.minted);
       const activeStake = detailDataEpochs?.map(

@@ -170,6 +170,6 @@ export const useFetchDeFiOrderList = (
       return nextOffset;
     },
     refetchOnWindowFocus: false,
-    refetchInterval: 60000,
+    refetchInterval: 30000,
   });
 };

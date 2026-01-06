@@ -454,6 +454,15 @@ const routes = [
     api: false,
   },
   {
+    path: "/gov/constitution",
+    title: "Constitution | Cexplorer.io",
+    description:
+      "View the Cardano Constitution history including the current constitution, past constitutions, and proposed constitutional amendments. Track governance actions related to constitutional changes and their ratification status.",
+    keywords:
+      "Cardano Constitution, constitutional history, governance, constitutional amendments, Cexplorer, Cardano governance, constitution text",
+    api: false,
+  },
+  {
     path: "/gov/cc/:coldKey",
     title: "CC Member %name% | Cexplorer.io",
     description:

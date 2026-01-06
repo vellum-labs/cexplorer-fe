@@ -2,6 +2,7 @@ import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import { colors } from "@/constants/colors";
+import { useADADisplay } from "@/hooks/useADADisplay";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
@@ -9,8 +10,7 @@ import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import type { ReactEChartsProps } from "@/lib/ReactCharts";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import type { ScriptStatItem } from "@/types/scriptTypes";
-import { formatNumber } from "@vellumlabs/cexplorer-sdk";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
+import { formatNumber, lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import ReactEcharts from "echarts-for-react";
 import { BarChart, FileBarChart, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -22,6 +22,7 @@ export const ScriptDetailStatsTab = ({
   items: ScriptStatItem[] | undefined;
 }) => {
   const { theme } = useThemeStore();
+  const { formatLovelace } = useADADisplay();
   const { bgColor, lineColor, splitLineColor, textColor } = useGraphColors();
   const { data: basicData } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(basicData?.data.version.const);
@@ -90,7 +91,7 @@ export const ScriptDetailStatsTab = ({
                 if (item.data == null || isNaN(Number(item.data))) {
                   formattedValue = "—";
                 } else if (item.seriesName.includes("Output")) {
-                  formattedValue = lovelaceToAda(Number(item.data));
+                  formattedValue = formatLovelace(Number(item.data));
                 } else {
                   formattedValue = formatNumber(Number(item.data));
                 }

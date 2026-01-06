@@ -59,13 +59,9 @@ export const VoteCell: FC<VoteCellProps> = ({
 
     if (anchorInfo.url) {
       await fetchContent(anchorInfo.url);
-      if (anchorInfo.offchain?.comment) {
-        await fetchFullMetadata(anchorInfo.url);
-      }
+      await fetchFullMetadata(anchorInfo.url);
     }
   };
-
-  console.log("modalContent", modalContent);
 
   return (
     <div className='flex items-center gap-1'>

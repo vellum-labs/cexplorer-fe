@@ -112,6 +112,9 @@ export interface AssetDetailDex {
     dex_name: string;
     token_1_amount: number;
     token_2_amount: number;
+    pool_fee?: number;
+    pool_id?: string;
+    pool_name?: string;
   }[];
   price: number;
   liquidity: number;
@@ -130,9 +133,15 @@ interface AssetBlock {
   epoch_no: number;
 }
 
+export interface AssetOwnerAdaHandle {
+  name: string;
+  type: "wallet" | "script";
+}
+
 export interface AssetOwner {
   address: string;
   quantity: number;
+  adahandle?: AssetOwnerAdaHandle | null;
 }
 
 interface AssetOwners {
@@ -143,8 +152,9 @@ interface AssetOwners {
 export interface AssetOwnersNftItem {
   tx: AssetTx;
   block: AssetBlock;
-  owner: AssetOwner;
+  owner: Pick<AssetOwner, "address">;
   quantity: number;
+  adahandle?: AssetOwnerAdaHandle | null;
 }
 
 interface AssetOwnersNft {

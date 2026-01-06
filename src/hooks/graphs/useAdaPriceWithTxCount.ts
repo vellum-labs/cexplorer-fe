@@ -67,7 +67,8 @@ export const useAdaPriceWithTxCount = (
       confine: true,
       textStyle: { color: textColor },
       formatter: params => {
-        return params
+        const date = params[0]?.name ?? "";
+        const items = params
           .map(item => {
             const value =
               item.seriesName === "TX Count"
@@ -76,6 +77,7 @@ export const useAdaPriceWithTxCount = (
             return `${item.marker} ${item.seriesName}: <strong>${value}</strong>`;
           })
           .join("<br/>");
+        return `${date}<hr style="margin: 4px 0"/>${items}`;
       },
     },
     legend: {
