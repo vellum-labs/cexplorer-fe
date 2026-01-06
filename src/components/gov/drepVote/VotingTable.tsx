@@ -221,7 +221,7 @@ export const VotingTable: FC<VotingTableProps> = () => {
                         <Link
                           to='/gov/action/$id'
                           params={{
-                            id: action.id,
+                            id: encodeURIComponent(action.id),
                           }}
                           target='_blank'
                         >
