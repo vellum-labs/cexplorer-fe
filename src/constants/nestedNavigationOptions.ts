@@ -43,6 +43,10 @@ export const nestedNavigationOptions: {
           label: "UPLC viewer",
           href: "/uplc",
         },
+        {
+          label: "$handle DNS",
+          href: "/handle-dns",
+        },
       ],
     },
     services: {

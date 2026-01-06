@@ -283,6 +283,15 @@ const routes = [
     api: false,
   },
   {
+    path: "/handle-dns",
+    title: "$handle DNS | Cexplorer.io",
+    description:
+      "Explore and validate ADA Handles on Cardano. View recently minted handles, check handle availability, and resolve handles to their associated addresses and metadata using the Cardano Domain Name Service standard.",
+    keywords:
+      "$handle, ADA Handle, Cardano DNS, handle resolver, handle validator, domain name service, Cexplorer, handle lookup",
+    api: false,
+  },
+  {
     path: "/dev",
     title: "Developer Tools | Cexplorer.io",
     description:
