@@ -2,6 +2,7 @@ import { DrepDetailOverview } from "@/components/drep/DrepDetailOverview";
 import { DrepDetailAboutTab } from "@/components/drep/tabs/DrepDetailAboutTab";
 import { DrepDetailDelegatorsTab } from "@/components/drep/tabs/DrepDetailDelegatorsTab";
 import { DrepDetailGovernanceActionsTab } from "@/components/drep/tabs/DrepDetailGovernanceActionsTab";
+import { DrepDetailEmbedTab } from "@/components/drep/tabs/DrepDetailEmbedTab";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
@@ -15,15 +16,23 @@ import { getRouteApi } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { DrepDetailStatsTab } from "@/components/drep/tabs/DrepDetailStatsTab";
 import { generateImageUrl } from "@/utils/generateImageUrl";
+import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
+import { useDelegateAction } from "@/hooks/useDelegateAction";
 
 export const DrepDetailPage: FC = () => {
   const [title, setTitle] = useState<string>("");
   const route = getRouteApi("/drep/$hash");
   const { hash } = route.useParams();
 
+  const { showWalletModal, setShowWalletModal } = useDelegateAction({
+    type: "drep",
+    ident: hash,
+  });
+
   const drepDetailQuery = useFetchDrepDetail(hash);
 
   const drepHash = drepDetailQuery?.data?.hash?.view;
+  const drepName = drepDetailQuery?.data?.data?.given_name;
 
   const tabs = [
     {
@@ -42,6 +51,14 @@ export const DrepDetailPage: FC = () => {
       key: "stats",
       label: "Stats",
       content: <DrepDetailStatsTab data={drepDetailQuery.data?.distr ?? []} />,
+      visible: true,
+    },
+    {
+      key: "embed",
+      label: "Embed",
+      content: (
+        <DrepDetailEmbedTab drepId={hash} drepName={drepName ?? undefined} />
+      ),
       visible: true,
     },
   ];
@@ -144,6 +161,9 @@ export const DrepDetailPage: FC = () => {
       </div>
       <DrepDetailOverview query={drepDetailQuery} />
       <Tabs items={tabs} />
+      {showWalletModal && (
+        <ConnectWalletModal onClose={() => setShowWalletModal(false)} />
+      )}
     </PageBase>
   );
 };
