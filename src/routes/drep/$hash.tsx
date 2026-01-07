@@ -6,7 +6,9 @@ import { z } from "zod";
 
 export const Route = createFileRoute("/drep/$hash")({
   component: () => <DrepDetailPage />,
-  validateSearch: (input: PaginatedSearchParams) =>
+  validateSearch: (
+    input: PaginatedSearchParams & { action: string | undefined },
+  ) =>
     z
       .object({
         offset: z.number().optional().catch(0),
@@ -16,6 +18,7 @@ export const Route = createFileRoute("/drep/$hash")({
           .catch(1),
         limit: z.number().optional().catch(20),
         tab: z.string().optional().catch("governance_actions"),
+        action: z.string().optional().catch(undefined),
       })
       .parse(input),
 });
