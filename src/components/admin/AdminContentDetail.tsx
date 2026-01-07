@@ -25,9 +25,14 @@ import {
 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { toast } from "sonner";
 import { Helmet } from "react-helmet";
+import {
+  ADMIN_CONTENT_CONFIG,
+  PRIMARY_FIELDS,
+  SECONDARY_FIELDS,
+  type ContentType,
+} from "@/constants/adminContent";
 
 type RenderMode = "html" | "markdown";
-type ContentType = "article" | "wiki";
 
 interface FormState {
   name: string;
@@ -46,53 +51,12 @@ interface AdminContentDetailProps {
   lang: "en";
 }
 
-interface ContentTypeConfig {
-  category: "wiki" | undefined;
-  draftPrefix: string;
-  successMessage: string;
-  errorMessage: string;
-  pageTitle: string;
-  breadcrumbLink: "/admin/articles" | "/admin/wiki";
-  breadcrumbLabel: string;
-}
-
-const CONFIG: Record<ContentType, ContentTypeConfig> = {
-  article: {
-    category: undefined,
-    draftPrefix: "article",
-    successMessage: "Article updated",
-    errorMessage: "Failed to update article",
-    pageTitle: "Admin article detail | Cexplorer.io",
-    breadcrumbLink: "/admin/articles",
-    breadcrumbLabel: "Admin articles",
-  },
-  wiki: {
-    category: "wiki",
-    draftPrefix: "wiki",
-    successMessage: "Wiki article updated",
-    errorMessage: "Failed to update wiki article",
-    pageTitle: "Admin wiki detail | Cexplorer.io",
-    breadcrumbLink: "/admin/wiki",
-    breadcrumbLabel: "Admin wiki",
-  },
-};
-
-const PRIMARY_FIELDS = [
-  { label: "Name", field: "name", placeholder: "Name" },
-  { label: "Description", field: "description", placeholder: "Description" },
-] as const;
-
-const SECONDARY_FIELDS = [
-  { label: "Keywords", field: "keywords", placeholder: "Keywords" },
-  { label: "Image", field: "image", placeholder: "Image" },
-] as const;
-
 export const AdminContentDetail = ({
   type,
   url,
   lang,
 }: AdminContentDetailProps) => {
-  const config = CONFIG[type];
+  const config = ADMIN_CONTENT_CONFIG[type];
   const { theme } = useThemeStore();
   const { tokens } = useAuthTokensStore();
   const { address } = useWalletStore();
