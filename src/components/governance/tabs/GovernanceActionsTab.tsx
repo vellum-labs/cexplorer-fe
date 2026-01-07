@@ -273,7 +273,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
               <Link
                 to='/gov/action/$id'
                 params={{
-                  id: item?.ident?.id?.replace(/#/g, "%23"),
+                  id: encodeURIComponent(item?.ident?.id ?? ""),
                 }}
                 className={"text-primary"}
               >
@@ -284,7 +284,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
               <Link
                 to='/gov/action/$id'
                 params={{
-                  id: item?.ident?.id?.replace(/#/g, "%23"),
+                  id: encodeURIComponent(item?.ident?.id ?? ""),
                 }}
                 className={"text-text-xs"}
                 disabled={true}

@@ -270,7 +270,7 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
     if (params.seriesName === "Duration" && params.data?.ident?.id) {
       navigate({
         to: "/gov/action/$id",
-        params: { id: params.data.ident.id.replace(/#/g, "%23") },
+        params: { id: encodeURIComponent(params.data.ident.id) },
       });
     }
   };
