@@ -9,8 +9,11 @@ import type {
   MiscConstResponse,
   MiscHealthResponse,
   MiscNewResponse,
+  MiscPaymentResponse,
   MiscRateResponse,
   MiscSearchResponse,
+  PaymentAction,
+  PromotionType,
 } from "@/types/miscTypes";
 import type { Locales } from "@/types/storeTypes";
 import type {
@@ -209,3 +212,20 @@ export const useFetchMiscValidate = (
     queryFn: async () => await miscValidate(type, ident),
     enabled: !!ident,
   });
+
+export const miscPayment = async (
+  action: PaymentAction,
+  type: PromotionType,
+  ident: string,
+) => {
+  const url = "/misc/payment";
+  const options = {
+    params: {
+      action,
+      type,
+      ident,
+    },
+  };
+
+  return handleFetch<MiscPaymentResponse>(url, undefined, options, true);
+};
