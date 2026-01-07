@@ -1,9 +1,22 @@
 import type { FC } from "react";
-import { BUILD_NODE_CODE, KES_UPDATE_CODE } from "@/constants/poolDebug";
-import { Copy } from "@vellumlabs/cexplorer-sdk";
+import { BUILD_NODE_CODE } from "@/constants/poolDebug";
+import { slotsPerKESPeriod } from "@/constants/confVariables";
+import { Copy, LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Info } from "lucide-react";
+import { useFetchBlockTip } from "@/services/blocks";
 
 export const CheatSheetTab: FC = () => {
+  const { data: tipData, isLoading } = useFetchBlockTip();
+  const currentSlot = tipData?.slot_no ?? 0;
+  const kesPeriod = Math.floor(currentSlot / slotsPerKESPeriod);
+
+  const kesUpdateCode = `cardano-cli node issue-op-cert \\
+--kes-verification-key-file kes.vkey \\
+--cold-signing-key-file cold.skey \\
+--operational-certificate-issue-counter cold.counter \\
+--kes-period ${kesPeriod} \\
+--out-file node.cert`;
+
   return (
     <div className='flex flex-col gap-4'>
       <div className='flex flex-col gap-3 rounded-xl border border-border bg-cardBg p-3'>
@@ -23,7 +36,7 @@ export const CheatSheetTab: FC = () => {
         </h3>
         <div className='relative rounded-xl border border-border bg-cardBg p-3'>
           <Copy copyText={BUILD_NODE_CODE} className='absolute right-3 top-3' />
-          <pre className='overflow-x-auto whitespace-pre-wrap font-mono text-text-sm text-grayTextPrimary'>
+          <pre className='font-mono overflow-x-auto whitespace-pre-wrap text-text-sm text-grayTextPrimary'>
             {BUILD_NODE_CODE}
           </pre>
         </div>
@@ -31,16 +44,25 @@ export const CheatSheetTab: FC = () => {
 
       <div className='flex flex-col gap-2'>
         <h3 className='text-text-lg font-semibold'>KES update</h3>
-        <p className='text-text-sm text-grayTextPrimary'>
-          slotsPerKESPeriod: 129600 slot: 172484179 {'>'} expr 172484179 /
-          129600: 1330
-        </p>
-        <div className='relative rounded-xl border border-border bg-cardBg p-3'>
-          <Copy copyText={KES_UPDATE_CODE} className='absolute right-3 top-3' />
-          <pre className='overflow-x-auto whitespace-pre-wrap font-mono text-text-sm text-grayTextPrimary'>
-            {KES_UPDATE_CODE}
-          </pre>
-        </div>
+        {isLoading ? (
+          <LoadingSkeleton height='20px' width='70%' />
+        ) : (
+          <p className='text-text-sm text-grayTextPrimary'>
+            slotsPerKESPeriod: {slotsPerKESPeriod.toLocaleString()} slot:{" "}
+            {currentSlot.toLocaleString()} {">"} expr {currentSlot} /{" "}
+            {slotsPerKESPeriod}: {kesPeriod}
+          </p>
+        )}
+        {isLoading ? (
+          <LoadingSkeleton height='140px' width='100%' rounded='xl' />
+        ) : (
+          <div className='relative rounded-xl border border-border bg-cardBg p-3'>
+            <Copy copyText={kesUpdateCode} className='absolute right-3 top-3' />
+            <pre className='font-mono overflow-x-auto whitespace-pre-wrap text-text-sm text-grayTextPrimary'>
+              {kesUpdateCode}
+            </pre>
+          </div>
+        )}
       </div>
     </div>
   );

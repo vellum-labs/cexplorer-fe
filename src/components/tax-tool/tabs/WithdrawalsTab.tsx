@@ -1,6 +1,6 @@
 import type { FC } from "react";
-import { useMemo } from "react";
-import { useFetchWithdrawals } from "@/services/account";
+import { useMemo, useState } from "react";
+import { useFetchWithdrawalsPaginated } from "@/services/account";
 import { isValidAddress } from "@/utils/address/isValidAddress";
 import {
   Select,
@@ -25,30 +25,28 @@ export const WithdrawalsTab: FC<WithdrawalsTabProps> = ({ stakeKey }) => {
     useTaxToolPreferencesStore();
   const { rows: storedRows, setRows: setStoredRows } =
     useTaxToolWithdrawalsTableStore();
-
-  const handleRowsChange = (rows: number) => {
-    setStoredRows(rows);
-  };
+  const [page, setPage] = useState(1);
 
   const limit = storedRows;
+  const offset = (page - 1) * limit;
   const isValidStakeKey = stakeKey && isValidAddress(stakeKey);
 
-  const query = useFetchWithdrawals(
+  const query = useFetchWithdrawalsPaginated(
     limit,
-    0,
+    offset,
     isValidStakeKey ? stakeKey : "",
   );
 
-  const allWithdrawals = useMemo(() => {
-    if (!query.data?.pages) return [];
-    return query.data.pages.flatMap(page => page.data?.data || []);
+  const withdrawals = useMemo(() => {
+    if (!query.data?.data) return [];
+    return query.data.data;
   }, [query.data]);
 
   if (!stakeKey || !isValidStakeKey) {
     return null;
   }
 
-  const isLoading = query.isLoading || (query.isFetching && !allWithdrawals.length);
+  const isLoading = query.isLoading || (query.isFetching && !withdrawals.length);
 
   return (
     <div className='flex w-full flex-col gap-3 pt-3'>
@@ -87,12 +85,16 @@ export const WithdrawalsTab: FC<WithdrawalsTabProps> = ({ stakeKey }) => {
       ) : (
         <WithdrawalsTable
           query={query}
-          data={allWithdrawals}
+          data={withdrawals}
           secondaryCurrency={secondaryCurrency}
-          currentPage={1}
-          totalItems={query.data?.pages[0]?.data?.count || 0}
+          currentPage={page}
+          onPageChange={setPage}
+          totalItems={query.data?.count || 0}
           itemsPerPage={limit}
-          onItemsPerPageChange={handleRowsChange}
+          onItemsPerPageChange={(rows) => {
+            setStoredRows(rows);
+            setPage(1);
+          }}
         />
       )}
     </div>

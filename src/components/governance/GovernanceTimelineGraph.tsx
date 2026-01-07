@@ -212,25 +212,10 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
       },
       series: [
         {
-          name: "Offset",
-          type: "bar",
-          stack: "timeline",
-          data: chartData.offsetData,
-          barWidth: 24,
-          silent: true,
-        },
-        {
-          name: "Duration",
-          type: "bar",
-          stack: "timeline",
-          data: chartData.durationData,
-          barWidth: 24,
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 4,
-              shadowColor: "rgba(0, 0, 0, 0.3)",
-            },
-          },
+          name: "CurrentEpochLine",
+          type: "line",
+          data: [],
+          zlevel: 0,
           markLine: {
             silent: true,
             symbol: "none",
@@ -254,6 +239,29 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
             ],
           },
         },
+        {
+          name: "Offset",
+          type: "bar",
+          stack: "timeline",
+          data: chartData.offsetData,
+          barWidth: 24,
+          silent: true,
+          zlevel: 1,
+        },
+        {
+          name: "Duration",
+          type: "bar",
+          stack: "timeline",
+          data: chartData.durationData,
+          barWidth: 24,
+          zlevel: 1,
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 4,
+              shadowColor: "rgba(0, 0, 0, 0.3)",
+            },
+          },
+        },
       ],
     };
   }, [chartData, currentEpoch, textColor, bgColor, splitLineColor, lineColor]);
@@ -262,7 +270,7 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
     if (params.seriesName === "Duration" && params.data?.ident?.id) {
       navigate({
         to: "/gov/action/$id",
-        params: { id: params.data.ident.id.replace(/#/g, "%23") },
+        params: { id: encodeURIComponent(params.data.ident.id) },
       });
     }
   };

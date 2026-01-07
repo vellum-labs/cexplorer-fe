@@ -11,28 +11,70 @@ import { useEffect, useState } from "react";
 
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 
-import { convertConstrToObject } from "@/utils/convertConstrToObject";
 import { blake2bHex } from "blakejs";
 import { Buffer } from "buffer";
-import { Data } from "@lucid-evolution/lucid";
+import { deserializeDatum } from "@meshsdk/core";
+import { Cbor } from "@harmoniclabs/cbor";
 
 import { PageBase } from "@/components/global/pages/PageBase";
+import { convertCborToJson } from "@/utils/datum/convertCborToJson";
+
+const parseSimpleCborInt = (hex: string): { int: string } | null => {
+  if (!hex || typeof hex !== "string" || hex.length < 2) return null;
+  const firstByte = parseInt(hex.slice(0, 2), 16);
+
+  switch (true) {
+    case firstByte <= 0x17 && hex.length === 2:
+      return { int: String(firstByte) };
+    case firstByte === 0x18 && hex.length === 4:
+      return { int: String(parseInt(hex.slice(2, 4), 16)) };
+    case firstByte === 0x19 && hex.length === 6:
+      return { int: String(parseInt(hex.slice(2, 6), 16)) };
+    case firstByte === 0x1a && hex.length === 10:
+      return { int: String(parseInt(hex.slice(2, 10), 16)) };
+    case firstByte >= 0x20 && firstByte <= 0x37 && hex.length === 2:
+      return { int: String(-1 - (firstByte - 0x20)) };
+    default:
+      return null;
+  }
+};
+
+const decodeDatum = (input: any): any => {
+  if (!input) return {};
+  const hex = typeof input === "string" ? input : String(input);
+
+  const simpleInt = parseSimpleCborInt(hex);
+  if (simpleInt) {
+    return simpleInt;
+  }
+
+  try {
+    const result = deserializeDatum(hex);
+    if (typeof result === "number" || typeof result === "bigint") {
+      return { int: String(result) };
+    }
+    if (typeof result === "boolean") {
+      return { int: result ? "1" : "0" };
+    }
+    return result;
+  } catch {
+    try {
+      const bytes = Buffer.from(hex, "hex");
+      const decoded = Cbor.parse(bytes);
+      return convertCborToJson(decoded);
+    } catch {
+      return {};
+    }
+  }
+};
 
 export const DatumPage: FC = () => {
   const { datum, hash } = useSearch({ from: "/datum/" });
   const [inputHash, setHash] = useState(hash ?? "");
   const [inputDatum, setInputDatum] = useState<string>();
   const [isInitialLoad, setIsInitialLoad] = useState(true);
-  const [lucidData, setLucidData] = useState<any>(
-    (() => {
-      try {
-        if (datum) {
-          return convertConstrToObject(Data.from(datum ?? ""));
-        }
-      } catch {
-        return {};
-      }
-    })(),
+  const [parsedDatum, setParsedDatum] = useState<any>(
+    datum ? decodeDatum(datum) : {},
   );
 
   const debouncedHash = useDebounce(inputHash.toLowerCase());
@@ -43,18 +85,14 @@ export const DatumPage: FC = () => {
 
   const changeInputDatum = (value: string) => {
     setInputDatum(value);
+    setIsInitialLoad(false);
   };
 
   useEffect(() => {
-    if (inputDatum && (isError || Array.isArray(data?.data))) {
-      try {
-        const decodedData = Data.from(inputDatum ?? "");
-        setLucidData(convertConstrToObject(decodedData));
-      } catch {
-        setLucidData({});
-      }
+    if (inputDatum) {
+      setParsedDatum(decodeDatum(inputDatum));
     }
-  }, [inputDatum, isError, data]);
+  }, [inputDatum]);
 
   useEffect(() => {
     if (
@@ -63,6 +101,7 @@ export const DatumPage: FC = () => {
       !isFetching &&
       !Array.isArray(data?.data) &&
       data?.data &&
+      data.data.datum &&
       isInitialLoad
     ) {
       setInputDatum(data.data.datum);
@@ -95,19 +134,26 @@ export const DatumPage: FC = () => {
 
   useEffect(() => {
     if (inputDatum) {
-      const datumBuffer = Buffer.from(inputDatum, "hex");
-
-      setHash(blake2bHex(datumBuffer, undefined, 32));
+      try {
+        const datumStr = String(inputDatum);
+        const datumBuffer = Buffer.from(datumStr, "hex");
+        setHash(blake2bHex(datumBuffer, undefined, 32));
+      } catch {
+        setHash("");
+      }
     } else {
       setHash("");
     }
   }, [inputDatum]);
 
   useEffect(() => {
-    if (datum) {
-      const datumBuffer = Buffer.from(datum, "hex");
+    if (!datum) return;
 
+    try {
+      const datumBuffer = Buffer.from(String(datum), "hex");
       setHash(blake2bHex(datumBuffer, undefined, 32));
+    } catch {
+      setHash("");
     }
   }, [datum]);
 
@@ -185,9 +231,9 @@ export const DatumPage: FC = () => {
             <div className='flex h-[360px] w-1/2 flex-grow flex-col gap-1'>
               <h3>Output</h3>
               <JsonDisplay
-                data={isError || Array.isArray(data?.data) ? lucidData : data}
-                isLoading={isLoading || isFetching}
-                isError={isError}
+                data={parsedDatum}
+                isLoading={false}
+                isError={false}
                 search
               />
             </div>

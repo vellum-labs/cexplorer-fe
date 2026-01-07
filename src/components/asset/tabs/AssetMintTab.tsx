@@ -17,7 +17,10 @@ import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { PolicyCell } from "@/components/policy/PolicyCell";
 import ExportButton from "@/components/table/ExportButton";
 import { assetDetailMintTableOptions } from "@/constants/tables/assetDetailMintOptions";
-import { formatNumberWithSuffix, formatString } from "@vellumlabs/cexplorer-sdk";
+import {
+  formatNumberWithSuffix,
+  formatString,
+} from "@vellumlabs/cexplorer-sdk";
 import AssetCell from "../AssetCell";
 
 interface AssetMintTabProps {
@@ -33,7 +36,7 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
 }) => {
   const assetname = policy && name ? policy + name : undefined;
   const { page } = useSearch({
-    strict: false,
+    from: policyId ? "/policy/$policyId" : "/asset/$fingerprint",
   });
 
   const [totalItems, setTotalItems] = useState(0);

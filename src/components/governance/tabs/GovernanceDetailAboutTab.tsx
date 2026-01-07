@@ -159,21 +159,23 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
         onReset: () => changeFilterByKey("voter_role"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
-            {(["ConstitutionalCommittee", "SPO", "DRep"] as VoterRole[]).map(val => (
-              <label className='flex items-center gap-1' key={val}>
-                <input
-                  type='radio'
-                  name='status'
-                  value={val}
-                  className='accent-primary'
-                  checked={filterDraft["voter_role"] === val}
-                  onChange={e =>
-                    changeDraftFilter("voter_role", e.currentTarget.value)
-                  }
-                />
-                <span className='text-text-sm'>{voterRoleLabels[val]}</span>
-              </label>
-            ))}
+            {(["ConstitutionalCommittee", "SPO", "DRep"] as VoterRole[]).map(
+              val => (
+                <label className='flex items-center gap-1' key={val}>
+                  <input
+                    type='radio'
+                    name='status'
+                    value={val}
+                    className='accent-primary'
+                    checked={filterDraft["voter_role"] === val}
+                    onChange={e =>
+                      changeDraftFilter("voter_role", e.currentTarget.value)
+                    }
+                  />
+                  <span className='text-text-sm'>{voterRoleLabels[val]}</span>
+                </label>
+              ),
+            )}
           </div>
         ),
       },
@@ -252,7 +254,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
 
     {
       key: "epoch",
-      render: item => <EpochCell no={item?.proposal?.expiration} />,
+      render: item => <EpochCell no={item?.tx?.epoch_no} />,
       title: <p className='w-full text-right'>Epoch</p>,
       visible: columnsVisibility.epoch,
       widthPx: 50,

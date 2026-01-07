@@ -54,6 +54,11 @@ export const AdminPage = () => {
                 Articles
               </Link>
             )}
+            {articleAdmin && (
+              <Link className='text-text-lg' to='/admin/wiki'>
+                Wiki
+              </Link>
+            )}
             {configAdmin && (
               <Link className='text-text-lg' to='/admin/config'>
                 Config

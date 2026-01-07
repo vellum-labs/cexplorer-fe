@@ -96,7 +96,7 @@ export const AddressWithTxBadges = ({
         <Tooltip
           content={
             <div className='flex w-[200px] flex-col items-center'>
-              <p className='w-full text-center font-medium'>Inline datum</p>
+              <p className='w-full text-center font-medium'>Datum hash</p>
               <div className='mt-1/2 flex items-end justify-end break-all text-center text-text-sm'>
                 <Link
                   to='/datum'

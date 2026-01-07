@@ -125,7 +125,7 @@ export const StakeDetailPage: FC = () => {
       title='Stake Detail'
       icon={<img src={stakeIcon} alt='stake level' className='h-6 w-6' />}
       breadcrumbItems={[
-        { label: "Address", link: "/address" },
+        { label: "Address" },
         { label: formatString(address, "long"), ident: address },
       ]}
       subTitle={

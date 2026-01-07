@@ -64,7 +64,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
         <Link
           to={"/gov/action/$id"}
           params={{
-            id: vote?.proposal?.ident?.id ?? "",
+            id: encodeURIComponent(vote?.proposal?.ident?.id ?? ""),
           }}
           className='text-text-sm text-primary'
         >

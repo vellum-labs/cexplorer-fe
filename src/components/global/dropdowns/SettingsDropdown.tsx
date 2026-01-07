@@ -19,12 +19,14 @@ import {
   Moon,
   Settings,
   Sun,
+  SlidersHorizontal,
 } from "lucide-react";
-import { Dropdown } from "@vellumlabs/cexplorer-sdk";
+import { Dropdown, useDropdownState } from "@vellumlabs/cexplorer-sdk";
 import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useRef, useState } from "react";
 import { Command } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
+import { useGeekConfigModalState } from "@/stores/states/geekConfigModalState";
 
 interface SettingsDropdownProps {
   withBorder?: boolean;
@@ -38,6 +40,8 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
     infiniteScrolling,
     toggleInfiniteScrolling: toggleInfiniteScrolling,
   } = useInfiniteScrollingStore();
+  const { setIsOpen: setGeekConfigOpen } = useGeekConfigModalState();
+  const { setOpenId } = useDropdownState();
 
   const settingsChannel = new BroadcastChannel("settings_channel");
 
@@ -254,6 +258,18 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
       ),
       onClick: () => {
         toggleInfiniteScrolling();
+      },
+    },
+    {
+      label: (
+        <button className='flex w-full items-center justify-between'>
+          <span>Geek configuration</span>
+          <SlidersHorizontal size={18} />
+        </button>
+      ),
+      onClick: () => {
+        setOpenId("geekConfigModal");
+        setGeekConfigOpen(true);
       },
     },
   ];

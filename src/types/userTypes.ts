@@ -328,10 +328,22 @@ export interface Poll {
 
 export type PollListResponse = ResponseCore<Poll[]>;
 
+export interface MiscValidatePreview {
+  type: string;
+  title: string;
+  text: string;
+  link: string;
+  content?: string;
+  section?: string;
+  icon?: string;
+  img?: string | null;
+}
+
 interface MiscValidate {
   type: string;
   ident: string;
   valid: boolean;
+  preview: MiscValidatePreview | false;
 }
 
 export type MiscValidateResponse = ResponseCore<MiscValidate>;
@@ -371,4 +383,10 @@ export interface UserLabels {
 
 export type GetUserLabelsResponse = ResponseCore<UserLabels>;
 
-export type GroupType = "pool" | "ident" | "asset" | "drep" | "collection";
+export type GroupType =
+  | "pool"
+  | "ident"
+  | "asset"
+  | "drep"
+  | "collection"
+  | "policy";

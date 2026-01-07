@@ -15,9 +15,6 @@ import { Check, Copy } from "lucide-react";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 import metadata from "../../../conf/metadata/en-metadata.json";
-import { DiscordLogo } from "@vellumlabs/cexplorer-sdk";
-import { TelegramLogo } from "@vellumlabs/cexplorer-sdk";
-import { TwitterLogo } from "@vellumlabs/cexplorer-sdk";
 import { RandomDelegationModal } from "@/components/wallet/RandomDelegationModal";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Twitter } from "@/resources/images/icons/Twitter";
@@ -35,7 +32,7 @@ export const ArticleDetailPage = () => {
   const route = getRouteApi("/article/$url");
   const { url } = route.useParams();
 
-  const { lucid } = useWalletStore();
+  const { wallet } = useWalletStore();
 
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
@@ -278,7 +275,7 @@ export const ArticleDetailPage = () => {
                               ident: data?.user_owner?.pool?.id,
                               type: "pool",
                             },
-                            lucid,
+                            wallet,
                           );
                         }
                       }}
@@ -296,7 +293,7 @@ export const ArticleDetailPage = () => {
                               ident: data?.user_owner?.drep?.id,
                               type: "drep",
                             },
-                            lucid,
+                            wallet,
                           );
                         }
                       }}
@@ -344,6 +341,22 @@ const SocialsAndCopy = ({
     timeout = setTimeout(() => setCopied(false), 2000);
   };
 
+  const handleShareX = () => {
+    window.open(
+      `https://x.com/intent/tweet?text=${encodeURIComponent(window.location.href)}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
+  };
+
+  const handleShareFacebook = () => {
+    window.open(
+      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
+  };
+
   return (
     <div className={`flex h-9 gap-1/2 ${className}`}>
       <Button
@@ -355,19 +368,16 @@ const SocialsAndCopy = ({
         onClick={handleCopy}
       />
       <Button
-        leftIcon={<img src={TelegramLogo} />}
+        leftIcon={<Twitter size={20} color='#98A2B3' />}
         variant='tertiary'
         size='sm'
+        onClick={handleShareX}
       />
       <Button
-        leftIcon={<img src={DiscordLogo} />}
+        leftIcon={<Facebook size={20} color='#98A2B3' />}
         variant='tertiary'
         size='sm'
-      />
-      <Button
-        leftIcon={<img src={TwitterLogo} />}
-        variant='tertiary'
-        size='sm'
+        onClick={handleShareFacebook}
       />
     </div>
   );

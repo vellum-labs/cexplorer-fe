@@ -4,6 +4,7 @@ import { Image } from "@vellumlabs/cexplorer-sdk";
 import PoolDetailOverview from "@/components/pool/PoolDetailOverview";
 import AboutTabItem from "@/components/pool/tabs/AboutTabItem";
 import { AwardsTabItem } from "@/components/pool/tabs/AwardsTabItem";
+import { EmbedTabItem } from "@/components/pool/tabs/EmbedTabItem";
 import BlocksTabItem from "@/components/pool/tabs/BlocksTabItem";
 import DelegatorsTabItem from "@/components/pool/tabs/DelegatorsTabItem";
 import PerformanceTabItem from "@/components/pool/tabs/PerformanceTabItem";
@@ -17,10 +18,19 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import { getRouteApi } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { VoteListPage } from "../governance/VoteListPage";
+import { AlertTriangle } from "lucide-react";
+import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
+import { useDelegateAction } from "@/hooks/useDelegateAction";
 
 const PoolDetailPage = () => {
   const route = getRouteApi("/pool/$id");
   const { id } = route.useParams();
+
+  const { showWalletModal, setShowWalletModal } = useDelegateAction({
+    type: "pool",
+    ident: id,
+  });
+
   const query = useFetchPoolDetail(
     id.startsWith("pool1") ? id : undefined,
     id.startsWith("pool1") ? undefined : id,
@@ -36,6 +46,13 @@ const PoolDetailPage = () => {
       (1 - (miscConst?.epoch_param?.decentralisation ?? 0))) /
       (miscConst?.epoch_stat.stake.active ?? 1)) *
     (data?.active_stake ?? 1);
+
+  const currentEpoch = basicData?.data?.block?.epoch_no;
+  const retiringEpoch = data?.pool_retire?.live?.retiring_epoch;
+  const isRetiring = retiringEpoch !== null && retiringEpoch !== undefined;
+  const isAlreadyRetired =
+    isRetiring && currentEpoch !== undefined && retiringEpoch <= currentEpoch;
+  const isPoolRetiredOrRetiring = isRetiring;
 
   const poolDetailTabItems = [
     {
@@ -89,6 +106,14 @@ const PoolDetailPage = () => {
       key: "gov",
       label: "Governance",
       content: <VoteListPage poolId={id} />,
+      visible: true,
+    },
+    {
+      key: "embed",
+      label: "Embed",
+      content: (
+        <EmbedTabItem poolId={id} poolTicker={data?.pool_name?.ticker} />
+      ),
       visible: true,
     },
   ];
@@ -149,12 +174,26 @@ const PoolDetailPage = () => {
       }
       homepageAd
     >
+      {isRetiring && (
+        <div className='mx-mobile mb-3 flex max-w-desktop items-center gap-2 rounded-m border border-red-500 bg-red-500/10 px-3 py-2 text-red-500 lg:mx-desktop'>
+          <AlertTriangle size={20} />
+          <span className='font-medium'>
+            {isAlreadyRetired
+              ? `This pool is retired since epoch ${retiringEpoch}`
+              : `This pool will be retired from epoch ${retiringEpoch}`}
+          </span>
+        </div>
+      )}
       <PoolDetailOverview
         query={query}
         estimatedBlocks={estimatedBlocks}
         miscConst={miscConst}
+        isPoolRetiredOrRetiring={isPoolRetiredOrRetiring}
       />
       <Tabs items={poolDetailTabItems} />
+      {showWalletModal && (
+        <ConnectWalletModal onClose={() => setShowWalletModal(false)} />
+      )}
     </PageBase>
   );
 };

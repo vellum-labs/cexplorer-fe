@@ -14,9 +14,8 @@ const defaultState: WalletState = {
   address: undefined,
   stakeKey: undefined,
   walletType: undefined,
-  walletApi: undefined,
   disabledExt: false,
-  lucid: null,
+  wallet: null,
 };
 
 export const useWalletStore = create<

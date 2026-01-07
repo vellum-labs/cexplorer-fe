@@ -11,19 +11,23 @@ const PerformanceTabItem = memo(function PerfomanceTabItem() {
   const { activeStake, blocks, delegators, epochs, luck, pledged, roa } =
     usePoolPerfomanceGraph(id);
 
+  const hasData = epochs.length > 0;
+
   return (
     <div>
       <div className='relative w-full'>
         <h2 className='mb-1'>Performance</h2>
-        <PoolPerformanceGraph
-          activeStake={activeStake}
-          blocks={blocks}
-          delegators={delegators}
-          epochs={epochs}
-          luck={luck}
-          pledged={pledged}
-          roa={roa}
-        />
+        {hasData && (
+          <PoolPerformanceGraph
+            activeStake={activeStake}
+            blocks={blocks}
+            delegators={delegators}
+            epochs={epochs}
+            luck={luck}
+            pledged={pledged}
+            roa={roa}
+          />
+        )}
       </div>
       <div className='flex flex-col items-end gap-2'>
         <PoolPerfomanceTable poolId={id} />

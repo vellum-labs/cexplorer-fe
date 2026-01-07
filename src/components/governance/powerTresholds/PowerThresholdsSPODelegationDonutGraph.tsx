@@ -5,7 +5,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { useMiscConst } from "@/hooks/useMiscConst";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
+import { useADADisplay } from "@/hooks/useADADisplay";
 import type { ThresholdsMilestone } from "@/types/governanceTypes";
 
 interface PowerThresholdsSPODelegationDonutGraphProps {
@@ -18,6 +18,7 @@ export const PowerThresholdsSPODelegationDonutGraph: FC<
   PowerThresholdsSPODelegationDonutGraphProps
 > = ({ milestone, isLoading, currentSupplyEpoch }) => {
   const { textColor, bgColor } = useGraphColors();
+  const { formatLovelace } = useADADisplay();
 
   const { data: basicData, isLoading: basicDataLoading } =
     useFetchMiscBasic(true);
@@ -61,7 +62,7 @@ export const PowerThresholdsSPODelegationDonutGraph: FC<
       backgroundColor: bgColor,
       textStyle: { color: textColor },
       formatter: ({ name, value, percent }: any) =>
-        `<b>${name}</b><br/>Stake: ${lovelaceToAda(value)}<br/>Share: ${percent.toFixed(2)}%`,
+        `<b>${name}</b><br/>Stake: ${formatLovelace(value)}<br/>Share: ${percent.toFixed(2)}%`,
     },
     series: [
       {

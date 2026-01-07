@@ -8,8 +8,7 @@ import {
   BreadcrumbItem,
   BreadcrumbList,
 } from "@vellumlabs/cexplorer-sdk";
-import { useFetchAdminArticle } from "@/services/user";
-import { getUrl } from "@/utils/getUrl";
+import { useFetchAdminArticle, useUpdateAdminArticle } from "@/services/user";
 import { useAuthTokensStore } from "@/stores/authTokensStore";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useWalletStore } from "@/stores/walletStore";
@@ -17,14 +16,25 @@ import type { ArticleCategories, ArticleUrl } from "@/types/articleTypes";
 import type { AdminArticleDetailResponse } from "@/types/userTypes";
 import { getRouteApi, Link, useSearch } from "@tanstack/react-router";
 import type { SetStateAction } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
+import { useFormDraft } from "@/hooks/useFormDraft";
 import {
   nord,
   qtcreatorLight,
 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { toast } from "sonner";
 import { Helmet } from "react-helmet";
+
+interface FormState {
+  name: string;
+  image: string;
+  content: string;
+  pubDate: string;
+  description: string;
+  keywords: string;
+  categories: string[];
+}
 
 export const AdminArticleDetail = () => {
   const route = getRouteApi("/admin/articles/$url");
@@ -48,16 +58,6 @@ export const AdminArticleDetail = () => {
 
   const needCheck = data?.need_check === 1 ? true : false;
 
-  interface FormState {
-    name: string;
-    image: string;
-    content: string;
-    pubDate: string;
-    description: string;
-    keywords: string;
-    categories: string[];
-  }
-
   const [formState, setFormState] = useState<FormState>({
     name: "",
     image: "",
@@ -68,6 +68,26 @@ export const AdminArticleDetail = () => {
     categories: [],
   });
 
+  const serverData = useMemo<FormState | undefined>(() => {
+    if (!data) return undefined;
+    return {
+      name: data.name || "",
+      image: data.image || "",
+      content: data.data ? data.data[0] : "",
+      pubDate: data.pub_date || new Date().toISOString(),
+      description: data.description || "",
+      keywords: data.keywords || "",
+      categories: data.category || [],
+    };
+  }, [data]);
+
+  const { clearDraft, hasDraft, discardDraft } = useFormDraft(
+    `article_${url}_${lang || "en"}`,
+    formState,
+    setFormState,
+    serverData,
+  );
+
   const updateField = <K extends keyof FormState>(
     field: K,
     value: FormState[K],
@@ -75,59 +95,38 @@ export const AdminArticleDetail = () => {
     setFormState(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleUpdate = async () => {
-    if (!token) return;
-    try {
-      const apiUrl = getUrl("/admin/article", {
-        url,
-        lang: lang || "en",
-        type: "update",
-      });
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          usertoken: token,
-        },
-        body: JSON.stringify({
-          name: formState.name,
-          description: formState.description,
-          keywords: formState.keywords,
-          data: formState.content,
-          category: formState.categories,
-          image: formState.image,
-          pub_date: formState.pubDate,
-        }),
-      });
-
-      const result = await response.json();
-
-      if (typeof result?.data === "string") {
-        toast.error(result.data);
-        return;
-      }
-
-      toast.success("Page updated");
+  const updateMutation = useUpdateAdminArticle({
+    token,
+    url,
+    lang: lang || "en",
+    onSuccess: () => {
+      clearDraft();
+      toast.success("Article updated");
       query.refetch();
-    } catch {
-      toast.error("Failed to update article");
-    }
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || "Failed to update article");
+    },
+  });
+
+  const handleUpdate = () => {
+    if (!token) return;
+
+    updateMutation.mutate({
+      name: formState.name,
+      description: formState.description,
+      keywords: formState.keywords,
+      data: formState.content,
+      category: formState.categories,
+      image: formState.image,
+      pub_date: formState.pubDate,
+      render: "html",
+    });
   };
 
   useEffect(() => {
     setToken(tokens[address || ""]?.token);
   }, [tokens, address]);
-
-  useEffect(() => {
-    setFormState({
-      name: data?.name || "",
-      image: data?.image || "",
-      content: data?.data ? data.data[0] : "",
-      pubDate: data?.pub_date || new Date().toISOString(),
-      description: data?.description || "",
-      keywords: data?.keywords || "",
-      categories: data?.category || [],
-    });
-  }, [data]);
 
   return (
     <main className='relative flex min-h-minHeight max-w-desktop flex-col gap-1 p-mobile md:p-desktop'>
@@ -169,20 +168,36 @@ export const AdminArticleDetail = () => {
         </p>
       ) : (
         <>
-          <h2>{data?.name}</h2>
-          {needCheck && <Badge color='red'>Needs check</Badge>}
-          <p>Name:</p>
-          <TextInput
-            placeholder='Name'
-            onchange={value => updateField("name", value)}
-            value={formState.name}
-          />
-          <p>Description:</p>
-          <TextInput
-            placeholder='Description'
-            onchange={value => updateField("description", value)}
-            value={formState.description}
-          />
+          <div className='flex items-center gap-2'>
+            <h2>{data?.name}</h2>
+            {needCheck && <Badge color='red'>Needs check</Badge>}
+            {hasDraft() && (
+              <button type='button' onClick={discardDraft}>
+                <Badge color='yellow'>Unsaved draft (click to discard)</Badge>
+              </button>
+            )}
+          </div>
+
+          {(
+            [
+              { label: "Name", field: "name", placeholder: "Name" },
+              {
+                label: "Description",
+                field: "description",
+                placeholder: "Description",
+              },
+            ] as const
+          ).map(({ label, field, placeholder }) => (
+            <div key={field}>
+              <p>{label}:</p>
+              <TextInput
+                placeholder={placeholder}
+                onchange={value => updateField(field, value)}
+                value={formState[field]}
+              />
+            </div>
+          ))}
+
           <p>Categories:</p>
           <ArticleCombobox
             categories={formState.categories as ArticleCategories[]}
@@ -193,18 +208,22 @@ export const AdminArticleDetail = () => {
               >
             }
           />
-          <p>Keywords:</p>
-          <TextInput
-            placeholder='Keywords'
-            onchange={value => updateField("keywords", value)}
-            value={formState.keywords}
-          />
-          <p>Image:</p>
-          <TextInput
-            placeholder='Image'
-            onchange={value => updateField("image", value)}
-            value={formState.image}
-          />
+          {(
+            [
+              { label: "Keywords", field: "keywords", placeholder: "Keywords" },
+              { label: "Image", field: "image", placeholder: "Image" },
+            ] as const
+          ).map(({ label, field, placeholder }) => (
+            <div key={field}>
+              <p>{label}:</p>
+              <TextInput
+                placeholder={placeholder}
+                onchange={value => updateField(field, value)}
+                value={formState[field]}
+              />
+            </div>
+          ))}
+
           <p>Publish date:</p>
           <div className='mb-4 flex flex-col items-start gap-1/2'>
             <input

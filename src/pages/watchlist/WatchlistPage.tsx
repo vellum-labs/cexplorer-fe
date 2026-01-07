@@ -20,9 +20,11 @@ import {
   useFetchAccountList,
   useFetchPolicyList,
 } from "@/services/user";
+import { useWalletStore } from "@/stores/walletStore";
 
 export const WatchlistPage = () => {
   const token = useAuthToken();
+  const { address } = useWalletStore();
   const query = useFetchWatchlist(token);
   const accountListQuery = useFetchAccountList(token);
   const policyListQuery = useFetchPolicyList(token);
@@ -73,6 +75,7 @@ export const WatchlistPage = () => {
     () => [
       {
         key: "stakes",
+        title: "Accounts",
         label: (
           <div className='flex items-center gap-1/2'>
             Stakes <Badge color='gray'>{count.stakes}</Badge>
@@ -87,6 +90,7 @@ export const WatchlistPage = () => {
       },
       {
         key: "wallets",
+        title: "Wallets",
         label: (
           <div className='flex items-center gap-1/2'>
             Wallets <Badge color='gray'>{count.addresses}</Badge>
@@ -101,6 +105,7 @@ export const WatchlistPage = () => {
       },
       {
         key: "assets",
+        title: "Assets",
         label: (
           <div className='flex items-center gap-1/2'>
             Assets <Badge color='gray'>{count.assets}</Badge>
@@ -115,6 +120,7 @@ export const WatchlistPage = () => {
       },
       {
         key: "pools",
+        title: "Pools",
         label: (
           <div className='flex items-center gap-1/2'>
             Pools <Badge color='gray'>{count.pools}</Badge>
@@ -129,6 +135,7 @@ export const WatchlistPage = () => {
       },
       {
         key: "dreps",
+        title: "DReps",
         label: (
           <div className='flex items-center gap-1/2'>
             Dreps <Badge color='gray'>{count.dreps}</Badge>
@@ -143,6 +150,7 @@ export const WatchlistPage = () => {
       },
       {
         key: "policies",
+        title: "Collections",
         label: (
           <div className='flex items-center gap-1/2'>
             Policies <Badge color='gray'>{count.policies}</Badge>
@@ -175,6 +183,7 @@ export const WatchlistPage = () => {
     count.policies;
   const isLoading = token && (query.isLoading || accountListQuery.isLoading);
   const hasError = token && (query.isError || accountListQuery.isError);
+  const isWalletConnectedButNoToken = !token && !!address;
 
   return (
     <>
@@ -216,6 +225,13 @@ export const WatchlistPage = () => {
                 secondaryText='Star your favorite stake pools, DReps, wallets, or assets to keep track of them here.'
               />
             )}
+          </div>
+        ) : isWalletConnectedButNoToken ? (
+          <div className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
+            <div className='flex flex-col gap-2'>
+              <LoadingSkeleton height='40px' width='100%' />
+              <LoadingSkeleton height='200px' width='100%' />
+            </div>
           </div>
         ) : (
           <div className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>

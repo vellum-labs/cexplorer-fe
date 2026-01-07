@@ -20,7 +20,8 @@ export const EpochLostAndCost: FC<EpochLostAndCostProps> = ({
   stats,
 }) => {
   const pricePer = parseFloat(params.price_mem) * 1024 * 1024;
-  const avgTXSize = stats?.epoch?.out_sum / stats?.epoch?.tx_count / 1024;
+  const avgTXSize =
+    stats?.epoch?.out_sum / stats?.epoch?.tx_count / 1024 / 1024;
   const sizeOfAllBlocksMB = (stats?.epoch?.block_size / (1024 * 1024)).toFixed(
     2,
   );

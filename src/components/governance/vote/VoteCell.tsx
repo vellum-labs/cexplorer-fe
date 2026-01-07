@@ -16,6 +16,7 @@ import { useFetchUrlContent } from "@/hooks/useFetchUrlContent";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { markdownComponents } from "@/constants/markdows";
+import { toMarkdown } from "@/utils/toMarkdown";
 
 interface VoteCellProps {
   vote?: Vote | string;
@@ -39,10 +40,8 @@ export const VoteCell: FC<VoteCellProps> = ({
     fetchContent,
     close: closeModal,
   } = useFetchUrlContent();
-  const {
-    content: fullMetadata,
-    fetchContent: fetchFullMetadata,
-  } = useFetchUrlContent();
+  const { content: fullMetadata, fetchContent: fetchFullMetadata } =
+    useFetchUrlContent();
   const [showFullMetadata, setShowFullMetadata] = useState(false);
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
@@ -60,9 +59,7 @@ export const VoteCell: FC<VoteCellProps> = ({
 
     if (anchorInfo.url) {
       await fetchContent(anchorInfo.url);
-      if (anchorInfo.offchain?.comment) {
-        await fetchFullMetadata(anchorInfo.url);
-      }
+      await fetchFullMetadata(anchorInfo.url);
     }
   };
 
@@ -133,23 +130,11 @@ export const VoteCell: FC<VoteCellProps> = ({
                 <>
                   <div className='rounded-lg text-sm max-h-[500px] overflow-auto'>
                     {showFullMetadata && fullMetadata ? (
-                      (() => {
-                        try {
-                          return (
-                            <JsonDisplay
-                              data={JSON.parse(fullMetadata)}
-                              isLoading={false}
-                              isError={false}
-                            />
-                          );
-                        } catch {
-                          return (
-                            <pre className='whitespace-pre-wrap break-words'>
-                              {fullMetadata}
-                            </pre>
-                          );
-                        }
-                      })()
+                      <JsonDisplay
+                        data={JSON.parse(fullMetadata)}
+                        isLoading={false}
+                        isError={false}
+                      />
                     ) : (
                       <div
                         className='text-sm'
@@ -162,7 +147,7 @@ export const VoteCell: FC<VoteCellProps> = ({
                           remarkPlugins={[remarkGfm]}
                           components={markdownComponents(setClickedUrl)}
                         >
-                          {modalContent}
+                          {toMarkdown(modalContent)}
                         </ReactMarkdown>
                       </div>
                     )}

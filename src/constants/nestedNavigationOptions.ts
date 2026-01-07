@@ -35,6 +35,14 @@ export const nestedNavigationOptions: {
           label: "Rewards calculator",
           href: "/rewards-calculator",
         },
+        {
+          label: "Pool debug",
+          href: "/pool-debug",
+        },
+        {
+          label: "UPLC viewer",
+          href: "/uplc",
+        },
       ],
     },
     services: {
@@ -43,6 +51,10 @@ export const nestedNavigationOptions: {
         {
           label: "Advertising",
           href: "/ads",
+        },
+        {
+          label: "Promotion",
+          href: "/ads/promotion",
         },
         {
           label: "API plans",

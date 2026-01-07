@@ -123,3 +123,21 @@ export const useFetchWithdrawals = (
     },
     refetchInterval: 30_000,
   });
+
+export const useFetchWithdrawalsPaginated = (
+  limit: number,
+  offset: number,
+  view: string,
+) =>
+  useQuery({
+    queryKey: ["withdrawals-paginated", limit, offset, view],
+    queryFn: async () => {
+      const { data } = await fetchWithrawals({
+        view,
+        limit,
+        offset,
+      });
+      return data;
+    },
+    enabled: !!view,
+  });

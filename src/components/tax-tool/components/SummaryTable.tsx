@@ -1,9 +1,15 @@
 import type { FC } from "react";
 import type { Currencies } from "@/types/storeTypes";
-import { Copy, Tooltip, formatNumber } from "@vellumlabs/cexplorer-sdk";
+import {
+  Copy,
+  Tooltip,
+  formatNumber,
+  Badge,
+  Pagination,
+} from "@vellumlabs/cexplorer-sdk";
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
-import { useMemo } from "react";
+import { useMemo, useState, useCallback } from "react";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import { useTaxToolSummaryTableStore } from "@/stores/tables/taxToolSummaryTableStore";
@@ -21,16 +27,41 @@ interface SummaryTableProps {
   data: SummaryData[];
   secondaryCurrency: Currencies;
   query: UseQueryResult<any, unknown>;
+  isOldestMonthIncomplete?: boolean;
 }
 
 export const SummaryTable: FC<SummaryTableProps> = ({
   data,
   secondaryCurrency,
   query,
+  isOldestMonthIncomplete = false,
 }) => {
   const showSecondaryCurrency = secondaryCurrency !== "usd";
-  const { columnsVisibility, setColumnVisibility } =
-    useTaxToolSummaryTableStore();
+  const {
+    columnsVisibility,
+    setColumnVisibility,
+    rows: storedRows,
+    setRows: setStoredRows,
+  } = useTaxToolSummaryTableStore();
+  const [page, setPage] = useState(1);
+
+  const itemsPerPage = storedRows;
+  const totalItems = data.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const paginatedData = useMemo(() => {
+    const start = (page - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    return data.slice(start, end);
+  }, [data, page, itemsPerPage]);
+
+  const handleRowsChange = useCallback(
+    (rows: number) => {
+      setStoredRows(rows);
+      setPage(1);
+    },
+    [setStoredRows],
+  );
 
   const formatPeriod = (period: string) => {
     const [year, month] = period.split("-");
@@ -59,25 +90,38 @@ export const SummaryTable: FC<SummaryTableProps> = ({
         title: columnLabels.period,
         visible: columnsVisibility.period,
         widthPx: 150,
-        render: item => (
-          <span className='font-medium'>{formatPeriod(item.period)}</span>
-        ),
+        render: (item: SummaryData) => {
+          const oldestPeriod = data[data.length - 1]?.period;
+          const isOldest = item.period === oldestPeriod;
+          const showIncompleteBadge = isOldest && isOldestMonthIncomplete;
+          return (
+            <div className='flex items-center gap-1'>
+              <span className='font-medium'>{formatPeriod(item.period)}</span>
+              {showIncompleteBadge && (
+                <Tooltip content='This month may be incomplete due to data limit'>
+                  <Badge color='yellow'>Incomplete</Badge>
+                </Tooltip>
+              )}
+            </div>
+          );
+        },
       },
       {
         key: "epochs",
         title: columnLabels.epochs,
         visible: columnsVisibility.epochs,
         widthPx: 100,
-        render: item => (
-          <span>{item.epochs}</span>
-        ),
+        render: item => <span>{item.epochs}</span>,
       },
       {
         key: "rewards_ada",
         title: (
           <div className='flex w-full justify-end'>
             <Tooltip content='Exchange rates from the epoch end date.'>
-              <div className='flex items-center gap-1 cursor-help' style={{pointerEvents: 'auto'}}>
+              <div
+                className='flex cursor-help items-center gap-1'
+                style={{ pointerEvents: "auto" }}
+              >
                 Rewards ADA
                 <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
               </div>
@@ -106,7 +150,10 @@ export const SummaryTable: FC<SummaryTableProps> = ({
         title: (
           <div className='flex w-full justify-end'>
             <Tooltip content='Exchange rates from the epoch end date.'>
-              <div className='flex items-center gap-1 cursor-help' style={{pointerEvents: 'auto'}}>
+              <div
+                className='flex cursor-help items-center gap-1'
+                style={{ pointerEvents: "auto" }}
+              >
                 Rewards USD
                 <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
               </div>
@@ -129,7 +176,10 @@ export const SummaryTable: FC<SummaryTableProps> = ({
         title: (
           <div className='flex w-full justify-end'>
             <Tooltip content='Exchange rates from the epoch end date.'>
-              <div className='flex items-center gap-1 cursor-help' style={{pointerEvents: 'auto'}}>
+              <div
+                className='flex cursor-help items-center gap-1'
+                style={{ pointerEvents: "auto" }}
+              >
                 Rewards {secondaryCurrency.toUpperCase()}
                 <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
               </div>
@@ -161,11 +211,18 @@ export const SummaryTable: FC<SummaryTableProps> = ({
       columnsVisibility.rewards_usd,
       secondaryCurrency,
       showSecondaryCurrency,
+      data,
+      isOldestMonthIncomplete,
     ],
   );
 
   const columnsOptions = useMemo(() => {
-    const baseOptions = ["period", "epochs", "rewards_ada", "rewards_usd"] as const;
+    const baseOptions = [
+      "period",
+      "epochs",
+      "rewards_ada",
+      "rewards_usd",
+    ] as const;
 
     const options = baseOptions.map(key => ({
       label: columnLabels[key],
@@ -202,9 +259,8 @@ export const SummaryTable: FC<SummaryTableProps> = ({
         <h3 className='text-text-md font-semibold'>Summary</h3>
         <div className='flex items-center gap-1'>
           <TableSettingsDropdown
-            rows={data.length || 0}
-            visibleRows={false}
-            setRows={() => undefined}
+            rows={itemsPerPage}
+            setRows={handleRowsChange}
             columnsOptions={columnsOptions}
           />
           <ExportButton
@@ -220,10 +276,17 @@ export const SummaryTable: FC<SummaryTableProps> = ({
         pagination={false}
         scrollable
         query={query}
-        items={data}
+        items={paginatedData}
         columns={columns}
         disableDrag
       />
+      {totalItems > itemsPerPage && (
+        <Pagination
+          currentPage={page}
+          setCurrentPage={setPage}
+          totalPages={totalPages}
+        />
+      )}
     </div>
   );
 };

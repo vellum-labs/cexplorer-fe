@@ -8,12 +8,12 @@ import GraphWatermark from "../global/graphs/GraphWatermark";
 import { useEffect, useRef, useState } from "react";
 
 import { useGraphColors } from "@/hooks/useGraphColors";
+import { useADADisplay } from "@/hooks/useADADisplay";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 interface DrepPoolGraphProps {
   epochs: number[];
@@ -22,7 +22,8 @@ interface DrepPoolGraphProps {
 
 export const DrepPoolGraph: FC<DrepPoolGraphProps> = ({ epochs, query }) => {
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data?.version?.const);
+  const miscConst = useMiscConst(basicData?.data.version.const);
+  const { formatLovelace } = useADADisplay();
   const [graphsVisibility, setGraphsVisibility] = useState({
     "Total Delegated Stake (₳)": true,
     "Drep Delegated": true,
@@ -88,13 +89,13 @@ export const DrepPoolGraph: FC<DrepPoolGraphProps> = ({ epochs, query }) => {
 
               if (label === "Total Delegated Stake (₳)") {
                 label = "Total Delegated Stake";
-                value = lovelaceToAda(item.data);
+                value = formatLovelace(item.data);
               } else if (label === "Abstain Drep (₳)") {
                 label = "Abstain Drep";
-                value = lovelaceToAda(item.data);
+                value = formatLovelace(item.data);
               } else if (label === "No Confidence Drep (₳)") {
                 label = "No Confidence Drep";
-                value = lovelaceToAda(item.data);
+                value = formatLovelace(item.data);
               } else {
                 value = formatNumber(item.data);
               }

@@ -4,7 +4,7 @@ import { PageBase } from "@/components/global/pages/PageBase";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { DebuggerTab } from "@/components/pool-debug/tabs/DebuggerTab";
 import { CheatSheetTab } from "@/components/pool-debug/tabs/CheatSheetTab";
-import { useNavigate, useSearch } from "@tanstack/react-router";
+import { useNavigate, useParams } from "@tanstack/react-router";
 
 interface Pool {
   pool_id: string;
@@ -17,7 +17,8 @@ interface Pool {
 const STORAGE_KEY_POOL = "poolDebug_selectedPool";
 
 export const PoolDebugPage: FC = () => {
-  const { pool_id: urlPoolId } = useSearch({ from: "/pool-debug/" });
+  const params = useParams({ strict: false }) as { poolId?: string };
+  const urlPoolId = params.poolId;
   const navigate = useNavigate();
 
   const [selectedPool, setSelectedPool] = useState<Pool | null>(() => {
@@ -33,37 +34,48 @@ export const PoolDebugPage: FC = () => {
     }
     return null;
   });
-  const [activeTab, setActiveTab] = useState<"debugger" | "cheatsheet">(
-    "debugger",
-  );
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
     if (selectedPool) {
       localStorage.setItem(STORAGE_KEY_POOL, JSON.stringify(selectedPool));
-      navigate({
-        search: { pool_id: selectedPool.pool_id } as any,
-        replace: true,
-      });
+      if (urlPoolId !== selectedPool.pool_id) {
+        navigate({
+          to: "/pool-debug/$poolId",
+          params: { poolId: selectedPool.pool_id },
+          replace: true,
+        });
+      }
     } else {
       localStorage.removeItem(STORAGE_KEY_POOL);
-      navigate({
-        search: { pool_id: undefined } as any,
-        replace: true,
-      });
+      if (urlPoolId) {
+        navigate({
+          to: "/pool-debug",
+          replace: true,
+        });
+      }
     }
-  }, [selectedPool, navigate]);
+  }, [selectedPool, navigate, urlPoolId]);
+
+  const isUrlInSync = !selectedPool || urlPoolId === selectedPool.pool_id;
 
   const tabItems = [
     {
       key: "debugger",
       label: "Debugger",
+      content: (
+        <DebuggerTab
+          selectedPool={isUrlInSync ? selectedPool : null}
+          onSelectPool={setSelectedPool}
+        />
+      ),
       visible: true,
     },
     {
       key: "cheatsheet",
       label: "Cheat sheet",
+      content: <CheatSheetTab />,
       visible: true,
     },
   ];
@@ -76,22 +88,7 @@ export const PoolDebugPage: FC = () => {
       adsCarousel={false}
     >
       <div className='flex w-full max-w-desktop flex-col gap-3 p-mobile lg:p-desktop'>
-        <Tabs
-          items={tabItems}
-          activeTabValue={activeTab}
-          withPadding={false}
-          withMargin={false}
-          onClick={tab => setActiveTab(tab as "debugger" | "cheatsheet")}
-        />
-
-        {activeTab === "debugger" && (
-          <DebuggerTab
-            selectedPool={selectedPool}
-            onSelectPool={setSelectedPool}
-          />
-        )}
-
-        {activeTab === "cheatsheet" && <CheatSheetTab />}
+        <Tabs items={tabItems} />
       </div>
     </PageBase>
   );

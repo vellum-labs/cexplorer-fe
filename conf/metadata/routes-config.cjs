@@ -79,6 +79,15 @@ const routes = [
     api: false,
   },
   {
+    path: "/ads/promotion",
+    title: "Promotion | Cexplorer.io",
+    description:
+      "Promote your Cardano project with Cexplorer.io. Boost visibility for your stake pool, token, dRep, or NFT collection through targeted promotion packages and advertising options.",
+    keywords:
+      "Cardano promotion, Cexplorer promotion, blockchain advertising, stake pool promotion, token promotion, dRep promotion, NFT promotion",
+    api: false,
+  },
+  {
     path: "/analytics",
     title: "Analytics | Cexplorer.io",
     description:
@@ -451,6 +460,15 @@ const routes = [
       "Track the Cardano Constitutional Committee members and their governance activities. View committee composition, individual member voting records, participation rates, constitutional oversight decisions, and their role in Cardano's governance framework.",
     keywords:
       "Constitutional Committee, CC members, Cardano governance, committee voting, governance oversight, Cexplorer, constitutional oversight, committee members",
+    api: false,
+  },
+  {
+    path: "/gov/constitution",
+    title: "Constitution | Cexplorer.io",
+    description:
+      "View the Cardano Constitution history including the current constitution, past constitutions, and proposed constitutional amendments. Track governance actions related to constitutional changes and their ratification status.",
+    keywords:
+      "Cardano Constitution, constitutional history, governance, constitutional amendments, Cexplorer, Cardano governance, constitution text",
     api: false,
   },
   {
@@ -861,11 +879,11 @@ const routes = [
   },
   {
     path: "/wallet",
-    title: "Wallet Integration | Cexplorer.io",
+    title: "Compare Cardano Wallets | Cexplorer.io",
     description:
-      "Connect your Cardano wallet to Cexplorer.io for enhanced features. Access personalized portfolio tracking, monitor your assets and NFTs, view transaction history, manage delegations, and seamlessly interact with blockchain data through wallet integration.",
+      "Compare Cardano wallets side by side. Explore features, supported platforms, hardware wallet compatibility, staking support, governance features, and integrations to find the best wallet for your needs.",
     keywords:
-      "wallet integration, connect wallet, Cardano wallet, wallet connection, portfolio tracker, Cexplorer, wallet sync, asset tracking",
+      "compare wallets, Cardano wallets, wallet comparison, best Cardano wallet, wallet features, hardware wallet, staking wallet, Cexplorer, wallet guide",
     api: false,
   },
   {

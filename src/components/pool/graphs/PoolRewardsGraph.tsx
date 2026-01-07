@@ -1,10 +1,10 @@
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import { useGraphColors } from "@/hooks/useGraphColors";
+import { useADADisplay } from "@/hooks/useADADisplay";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import ReactEcharts from "echarts-for-react";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { format } from "date-fns";
@@ -33,7 +33,8 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
   } = useGraphColors();
 
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data?.version?.const);
+  const miscConst = useMiscConst(basicData?.data.version.const);
+  const { formatLovelace } = useADADisplay();
 
   const [graphsVisibility, setGraphsVisibility] = useState({
     "Delegators ROA (%)": true,
@@ -72,7 +73,7 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
                   .replace("(%)", "")
                   .trim();
                 const value = isAda
-                  ? lovelaceToAda(item.value * 1e6)
+                  ? formatLovelace(item.value * 1e6)
                   : Number(item.value).toFixed(2);
                 return `${item.marker} ${cleanName}: ${value}`;
               })
@@ -97,7 +98,7 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
               .replace("(%)", "")
               .trim();
             const value = isAda
-              ? lovelaceToAda(item.value * 1e6)
+              ? formatLovelace(item.value * 1e6)
               : `${Number(item.value).toFixed(2)}%`;
             return `${item.marker} ${cleanName}: ${value}`;
           });
@@ -212,6 +213,7 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
       memberLovelace,
       leaderLovelace,
       miscConst,
+      formatLovelace,
     ],
   );
 

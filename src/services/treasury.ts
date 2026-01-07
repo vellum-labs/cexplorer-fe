@@ -1,7 +1,8 @@
 import { handleFetch } from "@/lib/handleFetch";
 import type { TreasuryDonationStatsResponse } from "@/types/treasuryTypes";
 import { useQuery } from "@tanstack/react-query";
-import type { LucidEvolution } from "@lucid-evolution/lucid";
+import type { BrowserWallet } from "@meshsdk/core";
+import { BlockfrostProvider, MeshTxBuilder } from "@meshsdk/core";
 import { donationAddress } from "@/constants/confVariables";
 import { sendDelegationInfo } from "@/services/tool";
 import { toast } from "sonner";
@@ -24,31 +25,31 @@ export const useFetchTreasuryDonationStats = () => {
 };
 
 interface DonationParams {
-  lucid: LucidEvolution;
+  wallet: BrowserWallet;
   amount: string;
   cexplorerPercentage: number;
   comment?: string;
 }
 
-export const validateDonationNetwork = (lucid: LucidEvolution): boolean => {
+export const validateDonationNetwork = async (
+  wallet: BrowserWallet,
+): Promise<boolean> => {
   try {
-    const lucidNetwork = lucid.config().network;
+    const networkId = await wallet.getNetworkId();
+    const isMainnetWallet = networkId === 1;
     const isMainnetAddress = donationAddress.startsWith("addr1q");
     const isTestnetAddress = donationAddress.startsWith("addr_test");
 
-    if (lucidNetwork === "Preprod" && isMainnetAddress) {
+    if (!isMainnetWallet && isMainnetAddress) {
       toast.error(
-        "Network mismatch: Wallet is on Preprod but donation address is for Mainnet. Please use the Preprod site.",
+        "Network mismatch: Wallet is on Testnet but donation address is for Mainnet. Please use the Mainnet site.",
       );
       return false;
     }
 
-    if (
-      lucidNetwork === "Mainnet" &&
-      (isTestnetAddress || !isMainnetAddress)
-    ) {
+    if (isMainnetWallet && (isTestnetAddress || !isMainnetAddress)) {
       toast.error(
-        "Network mismatch: Wallet is on Mainnet but donation address is for Testnet. Please use the Mainnet site.",
+        "Network mismatch: Wallet is on Mainnet but donation address is for Testnet. Please use the Testnet site.",
       );
       return false;
     }
@@ -60,16 +61,16 @@ export const validateDonationNetwork = (lucid: LucidEvolution): boolean => {
 };
 
 export const executeTreasuryDonation = async ({
-  lucid,
+  wallet,
   amount,
   cexplorerPercentage,
   comment,
 }: DonationParams): Promise<string> => {
-  if (!lucid || !amount || Number(amount) <= 0) {
+  if (!wallet || !amount || Number(amount) <= 0) {
     throw new Error("Please enter a valid amount");
   }
 
-  if (!validateDonationNetwork(lucid)) {
+  if (!(await validateDonationNetwork(wallet))) {
     throw new Error("Network validation failed");
   }
 
@@ -81,55 +82,58 @@ export const executeTreasuryDonation = async ({
     Math.floor(totalAda * (1 - pctForCexp) * 1_000_000),
   );
 
-  let tx = lucid.newTx();
+  const apiKey = import.meta.env.VITE_APP_BLOCKFROST_KEY;
+
+  const provider = new BlockfrostProvider(apiKey);
+  const utxos = await wallet.getUtxos();
+  const changeAddress = await wallet.getChangeAddress();
+
+  const txBuilder = new MeshTxBuilder({
+    fetcher: provider,
+    evaluator: provider,
+  });
 
   if (comment?.trim()) {
-    tx = tx.attachMetadata(674, { msg: [comment] });
+    txBuilder.metadataValue(674, { msg: [comment] });
   }
 
   if (toTreasury > 0n) {
-    switch (true) {
-      case typeof (tx as any).donate === "object" &&
-        typeof (tx as any).donate.ToTreasury === "function": {
-        tx = (tx as any).donate.ToTreasury(toTreasury);
-        break;
-      }
-      case typeof (tx as any).addDonation === "function": {
-        tx = (tx as any).addDonation(toTreasury);
-        break;
-      }
-      case typeof (tx as any).setDonation === "function": {
-        tx = (tx as any).setDonation(toTreasury);
-        break;
-      }
-      default: {
-        toast.error(
-          "Treasury donation not supported in current Lucid version. Sending all to Cexplorer.",
-        );
-        tx = tx.pay.ToAddress(donationAddress, {
-          lovelace: toCexp + toTreasury,
-        });
+    if (typeof (txBuilder as any).treasuryDonation === "function") {
+      (txBuilder as any).treasuryDonation(toTreasury.toString());
+    } else {
+      toast.error(
+        "Treasury donation not supported in current MeshJS version. Sending all to Cexplorer.",
+      );
+      txBuilder.txOut(donationAddress, [
+        { unit: "lovelace", quantity: (toCexp + toTreasury).toString() },
+      ]);
 
-        const completed = await tx.complete();
-        const signed = await completed.sign.withWallet();
-        const signedTx = await signed.complete();
-        const txHash = await signedTx.submit();
+      const unsignedTx = await txBuilder
+        .selectUtxosFrom(utxos)
+        .changeAddress(changeAddress)
+        .complete();
 
-        sendDelegationInfo(txHash, "lovelace_cexplorer", "donate");
-        lucid.awaitTx(txHash);
-        return txHash;
-      }
+      const signedTx = await wallet.signTx(unsignedTx);
+      const txHash = await wallet.submitTx(signedTx);
+
+      sendDelegationInfo(txHash, "lovelace_cexplorer", "donate");
+      return txHash;
     }
   }
 
   if (toCexp > 0n) {
-    tx = tx.pay.ToAddress(donationAddress, { lovelace: toCexp });
+    txBuilder.txOut(donationAddress, [
+      { unit: "lovelace", quantity: toCexp.toString() },
+    ]);
   }
 
-  const completed = await tx.complete();
-  const signed = await completed.sign.withWallet();
-  const signedTx = await signed.complete();
-  const txHash = await signedTx.submit();
+  const unsignedTx = await txBuilder
+    .selectUtxosFrom(utxos)
+    .changeAddress(changeAddress)
+    .complete();
+
+  const signedTx = await wallet.signTx(unsignedTx);
+  const txHash = await wallet.submitTx(signedTx);
 
   const campaigns = [
     toTreasury > 0n ? "lovelace_treasury" : null,
@@ -139,7 +143,6 @@ export const executeTreasuryDonation = async ({
     .join(",");
 
   sendDelegationInfo(txHash, campaigns, "donate");
-  lucid.awaitTx(txHash);
 
   return txHash;
 };

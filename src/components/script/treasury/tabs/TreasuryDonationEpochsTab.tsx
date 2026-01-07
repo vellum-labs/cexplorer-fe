@@ -1,6 +1,7 @@
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
+import { useADADisplay } from "@/hooks/useADADisplay";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import type { ReactEChartsProps } from "@/lib/ReactCharts";
@@ -17,7 +18,6 @@ import {
   formatNumber,
   formatNumberWithSuffix,
 } from "@vellumlabs/cexplorer-sdk";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { format } from "date-fns";
 import ReactEcharts from "echarts-for-react";
@@ -29,7 +29,8 @@ interface Props {
 
 export const TreasuryDonationEpochsTab = ({ query }: Props) => {
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data?.version?.const);
+  const miscConst = useMiscConst(basicData?.data.version.const);
+  const { formatLovelace } = useADADisplay();
   const { currency } = useCurrencyStore();
   const epochs = query.data?.epoch;
   const totalAdaDonations = epochs?.map(item => item.treasury_donation);
@@ -103,7 +104,7 @@ export const TreasuryDonationEpochsTab = ({ query }: Props) => {
             .trim();
 
           const value = isAda
-            ? lovelaceToAda(item.data)
+            ? formatLovelace(item.data)
             : formatNumber(item.data);
 
           return `<p>${item.marker} ${cleanName}: ${value}</p>`;

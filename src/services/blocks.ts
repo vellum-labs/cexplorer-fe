@@ -2,6 +2,7 @@ import type {
   BlockDetailParams,
   BlockDetailResponse,
   BlocksListResponse,
+  BlockTipResponse,
 } from "@/types/blockTypes";
 
 import { handleFetch } from "@/lib/handleFetch";
@@ -110,4 +111,21 @@ export const useFetchBlockDetail = (hash: string) =>
 
       return data;
     },
+  });
+
+export const fetchBlockTip = async () => {
+  const url = "/block/tip";
+
+  return handleFetch<BlockTipResponse>(url);
+};
+
+export const useFetchBlockTip = () =>
+  useQuery({
+    queryKey: ["block-tip"],
+    queryFn: async () => {
+      const { data } = await fetchBlockTip();
+
+      return data.tip.data[0];
+    },
+    refetchInterval: 20000,
   });

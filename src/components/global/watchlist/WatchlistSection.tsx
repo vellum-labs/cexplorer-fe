@@ -22,6 +22,7 @@ export const WatchlistSection = ({
   stakeKey,
   hasDex = false,
   assetName,
+  isPoolRetiredOrRetiring = false,
 }: {
   ident: string | undefined;
   isLoading: boolean;
@@ -33,8 +34,9 @@ export const WatchlistSection = ({
   stakeKey?: string;
   hasDex?: boolean;
   assetName?: string;
+  isPoolRetiredOrRetiring?: boolean;
 }) => {
-  const { lucid, address, walletType } = useWalletStore();
+  const { wallet, address, walletType } = useWalletStore();
   const [showWalletModal, setShowWalletModal] = useState<boolean>(false);
 
   const drepName = drepDetailQuery?.data?.data?.given_name;
@@ -49,7 +51,7 @@ export const WatchlistSection = ({
 
     handleDelegation(
       { type: isPool ? "pool" : "drep", ident: ident ?? "" },
-      lucid,
+      wallet,
     );
   };
 
@@ -123,14 +125,18 @@ export const WatchlistSection = ({
           label='Buy'
         />
       )}
-      <ShareButton />
-      <WatchlistStar
-        ident={ident}
-        showOptionsModal={enableWatchlistModal}
-        stakeKey={stakeKey}
-      />
-      <Button label='Promote' variant='tertiary' size='md' href='/pro' />
-      {(isPool || isDrep) && (
+      {!isPoolRetiredOrRetiring && <ShareButton />}
+      {!isPoolRetiredOrRetiring && (
+        <WatchlistStar
+          ident={ident}
+          showOptionsModal={enableWatchlistModal}
+          stakeKey={stakeKey}
+        />
+      )}
+      {!isPoolRetiredOrRetiring && (
+        <Button label='Promote' variant='tertiary' size='md' href='/pro' />
+      )}
+      {(isPool || isDrep) && !isPoolRetiredOrRetiring && (
         <Button
           label={getDelegateLabel()}
           variant='primary'

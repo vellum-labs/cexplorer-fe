@@ -206,6 +206,9 @@
   "governance": {
     "title": "Governance Actions | Cexplorer.io"
   },
+  "constitution": {
+    "title": "Constitution | Cexplorer.io"
+  },
   "rewardsChecker": {
     "title": "Rewards Checker | Cexplorer.io"
   },
@@ -232,5 +235,11 @@
   },
   "devlog": {
     "title": "Devlog | Cexplorer.io"
+  },
+  "walletComparison": {
+    "title": "Compare Cardano Wallets | Cexplorer.io"
+  },
+  "adsPromotion": {
+    "title": "Promotion | Cexplorer.io"
   }
 }
