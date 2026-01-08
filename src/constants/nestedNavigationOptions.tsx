@@ -40,6 +40,11 @@ export const nestedNavigationOptions: {
           label: "Pool debug",
           href: "/pool-debug",
         },
+      ],
+    },
+    others: {
+      label: "",
+      options: [
         {
           label: "UPLC viewer",
           href: "/uplc",

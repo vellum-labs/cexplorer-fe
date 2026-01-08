@@ -234,4 +234,15 @@ export interface AdaHandle {
   updated_slot: number;
 }
 
+export interface AdaHandleListItem extends AdaHandle {
+  last_mint: string;
+  last_mint_tx: string;
+}
+
+interface AdaHandleListData {
+  count: number;
+  data: AdaHandleListItem[];
+}
+
 export type AdaHandleResponse = ResponseCore<AdaHandle>;
+export type AdaHandleListResponse = ResponseCore<AdaHandleListData>;

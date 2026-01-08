@@ -4,9 +4,8 @@ export type HandlesListColumns =
   | "minted"
   | "standard"
   | "handle"
-  | "policy"
-  | "quantity"
-  | "transaction";
+  | "rarity"
+  | "holder";
 
 export interface HandlesListTableOptions {
   columnsVisibility: Record<HandlesListColumns, boolean>;
@@ -27,9 +26,8 @@ export const useHandlesListTableStore = () =>
         minted: true,
         standard: true,
         handle: true,
-        policy: true,
-        quantity: true,
-        transaction: true,
+        rarity: true,
+        holder: true,
       },
       rows: 20,
     },

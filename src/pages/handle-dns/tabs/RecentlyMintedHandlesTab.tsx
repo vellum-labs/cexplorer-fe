@@ -4,18 +4,17 @@ import { useState, useRef } from "react";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { Badge } from "@vellumlabs/cexplorer-sdk";
-import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";
 import { DollarIcon } from "@vellumlabs/cexplorer-sdk";
 import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
+import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
-import { useFetchAssetMint } from "@/services/assets";
-import { adaHandlePolicy } from "@/constants/confVariables";
+import { useFetchAdaHandleList } from "@/services/assets";
 import { useHandlesListTableStore } from "@/stores/tables/handlesListTableStore";
 import { handlesListTableOptions } from "@/constants/tables/handlesListTableOptions";
-import type { AssetMint } from "@/types/assetsTypes";
+import type { AdaHandleListItem } from "@/types/assetsTypes";
 import { getHandleStandard } from "@/utils/getHandleStandard";
 
 export const RecentlyMintedHandlesTab: FC = () => {
@@ -42,11 +41,10 @@ export const RecentlyMintedHandlesTab: FC = () => {
     });
   };
 
-  const query = useFetchAssetMint(
+  const query = useFetchAdaHandleList(
     rows,
     offset,
     debouncedSearch || undefined,
-    adaHandlePolicy,
   );
 
   const items =
@@ -61,16 +59,17 @@ export const RecentlyMintedHandlesTab: FC = () => {
   const columns = [
     {
       key: "minted",
-      render: (item: AssetMint) =>
-        item.tx?.time ? <DateCell time={item.tx.time} /> : "-",
+      render: (item: AdaHandleListItem) => {
+        return item.last_mint ? <DateCell time={item.last_mint} /> : "-";
+      },
       title: "Asset minted",
       visible: columnsVisibility.minted,
       widthPx: 150,
     },
     {
       key: "standard",
-      render: (item: AssetMint) => {
-        const standard = getHandleStandard(item.asset?.name ?? "");
+      render: (item: AdaHandleListItem) => {
+        const standard = getHandleStandard(item.hex);
         return (
           <Badge color='gray' className='min-w-[95px] justify-center'>
             {standard}
@@ -83,18 +82,15 @@ export const RecentlyMintedHandlesTab: FC = () => {
     },
     {
       key: "handle",
-      render: (item: AssetMint) => {
-        const nameHex = item.asset?.name ?? "";
-        const cleanedHex = nameHex.replace(/^(000de140|0014df10|000643b0)/, "");
-        const handleName = encodeAssetName(cleanedHex);
+      render: (item: AdaHandleListItem) => {
         return (
           <Link
             to='/handle-dns'
-            search={{ page: 1, search: undefined, tab: "validator", handle: `$${handleName}` }}
+            search={{ page: 1, search: undefined, tab: "validator", handle: `$${item.name}` }}
             className='flex items-center gap-1/2 text-text hover:text-primary'
           >
             <img src={DollarIcon} alt='$' className='h-[14px] w-[14px]' />
-            {handleName}
+            {item.name}
           </Link>
         );
       },
@@ -103,50 +99,42 @@ export const RecentlyMintedHandlesTab: FC = () => {
       widthPx: 200,
     },
     {
-      key: "policy",
-      render: (item: AssetMint) => {
-        const policy = item.asset?.policy ?? "";
+      key: "rarity",
+      render: (item: AdaHandleListItem) => {
+        const rarityColors: Record<string, "gray" | "blue" | "purple" | "yellow"> = {
+          basic: "gray",
+          common: "blue",
+          rare: "purple",
+          ultra_rare: "yellow",
+        };
+        const color = rarityColors[item.rarity] ?? "gray";
+        const displayRarity = item.rarity?.replace("_", " ") ?? "unknown";
+        return (
+          <Badge color={color} className='min-w-[80px] justify-center capitalize'>
+            {displayRarity}
+          </Badge>
+        );
+      },
+      title: "Rarity",
+      visible: columnsVisibility.rarity,
+      widthPx: 120,
+    },
+    {
+      key: "holder",
+      render: (item: AdaHandleListItem) => {
+        const holderAddress = item.holder?.holder ?? "";
         return (
           <Link
-            to='/policy/$policyId'
-            params={{ policyId: policy }}
+            to='/stake/$stakeAddr'
+            params={{ stakeAddr: holderAddress }}
             className='text-primary'
           >
-            {formatString(policy, "short")}
+            {formatString(holderAddress, "short")}
           </Link>
         );
       },
-      title: "Policy ID",
-      visible: columnsVisibility.policy,
-      widthPx: 140,
-    },
-    {
-      key: "quantity",
-      render: (item: AssetMint) => {
-        const qty = item.quantity ?? 0;
-        const isPositive = qty > 0;
-        return (
-          <span className={isPositive ? "text-greenText" : "text-redText"}>
-            {isPositive ? `+${qty}` : qty}
-          </span>
-        );
-      },
-      title: "Mint quantity",
-      visible: columnsVisibility.quantity,
-      widthPx: 100,
-    },
-    {
-      key: "transaction",
-      render: (item: AssetMint) => {
-        const hash = item.tx?.hash ?? "";
-        return (
-          <Link to='/tx/$hash' params={{ hash }} className='text-primary'>
-            {formatString(hash, "short")}
-          </Link>
-        );
-      },
-      title: "Transaction",
-      visible: columnsVisibility.transaction,
+      title: "Holder",
+      visible: columnsVisibility.holder,
       widthPx: 140,
     },
   ];
@@ -155,11 +143,13 @@ export const RecentlyMintedHandlesTab: FC = () => {
     <div className='flex w-full flex-col gap-3'>
       <div className='flex w-full flex-col gap-2'>
         <div className='flex w-full flex-wrap items-end justify-between gap-1'>
-          {totalItems > 0 && (
+          {query.isLoading && totalItems === 0 ? (
+            <LoadingSkeleton height='27px' width='220px' />
+          ) : totalItems > 0 ? (
             <h3 className='text-text-lg font-medium'>
               Total of {totalItems.toLocaleString()} handles
             </h3>
-          )}
+          ) : null}
           <div className='flex items-center gap-1'>
             <TableSearchInput
               value={searchValue}

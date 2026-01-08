@@ -19,15 +19,11 @@ export const handlesListTableOptions: HandlesListOptions = [
     name: "Asset",
   },
   {
-    key: "policy",
-    name: "Policy ID",
+    key: "rarity",
+    name: "Rarity",
   },
   {
-    key: "quantity",
-    name: "Mint quantity",
-  },
-  {
-    key: "transaction",
-    name: "Transaction",
+    key: "holder",
+    name: "Holder",
   },
 ];

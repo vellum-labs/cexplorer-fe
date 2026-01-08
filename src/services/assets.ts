@@ -1,5 +1,6 @@
 import type {
   AdaHandleResponse,
+  AdaHandleListResponse,
   AssetDetailResponse,
   AssetListResponse,
   AssetMetadataResponse,
@@ -19,7 +20,7 @@ interface AssetListProps {
   order?: "collection_quantity" | "native" | "mint";
   policy?: string;
   name?: string;
-  filter?: "nft" | "token";
+  filter?: "nft" | "token" | "assets";
   watchlist?: "1" | undefined;
   token?: string;
 }
@@ -355,4 +356,40 @@ export const useFetchAdaHandle = (hex: string | undefined) =>
     },
     enabled: !!hex,
     retry: false,
+  });
+
+export const fetchAdaHandleList = async (
+  limit: number,
+  offset: number,
+  name?: string,
+) => {
+  const url = `/asset/adahandle`;
+  const options = {
+    params: {
+      limit,
+      offset,
+      name,
+    },
+  };
+
+  return handleFetch<AdaHandleListResponse>(url, offset, options);
+};
+
+export const useFetchAdaHandleList = (
+  limit: number,
+  offset: number,
+  name?: string,
+) =>
+  useInfiniteQuery({
+    queryKey: ["ada-handle-list", limit, offset, name],
+    queryFn: ({ pageParam = offset }) =>
+      fetchAdaHandleList(limit, pageParam, name),
+    initialPageParam: offset,
+    getNextPageParam: lastPage => {
+      const nextOffset = (lastPage.prevOffset as number) + limit;
+      if (nextOffset >= lastPage.data.count) return undefined;
+      return nextOffset;
+    },
+    refetchOnWindowFocus: false,
+    refetchInterval: 20000,
   });
