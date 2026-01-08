@@ -200,7 +200,7 @@ export const ApiInfoPage = () => {
           </div>
           <a
             className='w-full max-w-[200px] text-nowrap hover:text-text'
-            href='https://github.com/vellum-labs/cexplorer-api/tree/main/packages/cexplorer-api'
+            href='https://cexplorer.apidocumentation.com/cexplorer-api'
             target='_blank'
           >
             <Button
