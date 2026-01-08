@@ -97,12 +97,17 @@ export const ApiProfile = () => {
           </p>
         </div>
         <div className='flex gap-1 md:justify-end'>
-          <Button
-            label='Documentation'
-            variant='tertiary'
-            size='md'
-            href='/api'
-          />
+          <a
+            href='https://cexplorer.apidocumentation.com/cexplorer-api'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <Button
+              label='Documentation'
+              variant='tertiary'
+              size='md'
+            />
+          </a>
           <Button
             label='New project'
             leftIcon={<Plus size={15} />}
