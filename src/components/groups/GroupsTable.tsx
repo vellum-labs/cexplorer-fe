@@ -9,6 +9,7 @@ import { Link } from "@tanstack/react-router";
 import type { GroupsListData } from "@/types/analyticsTypes";
 import type { TableColumns } from "@/types/tableTypes";
 import type { UseQueryResult } from "@tanstack/react-query";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface GroupsTableProps {
   filteredItems: GroupsListData[];
@@ -41,6 +42,8 @@ export const GroupsTable = ({
   changeFilterByKey,
   query,
 }: GroupsTableProps) => {
+  const { t } = useAppTranslation("pages");
+
   const columns: TableColumns<GroupsListData> = [
     {
       key: "pools_count",
@@ -49,7 +52,7 @@ export const GroupsTable = ({
           className='flex cursor-pointer items-center gap-1/2'
           onClick={() => handleSort("pools_count")}
         >
-          Pools count{" "}
+          {t("groups.table.poolsCount")}{" "}
           <SortArrow
             direction={sortColumn === "pools_count" ? sortDirection : undefined}
           />
@@ -65,7 +68,7 @@ export const GroupsTable = ({
     },
     {
       key: "name",
-      title: "Group name",
+      title: t("groups.table.groupName"),
       render: item => (
         <Link
           className='text-primary'
@@ -85,7 +88,7 @@ export const GroupsTable = ({
           className='flex w-full cursor-pointer items-center justify-end gap-1/2'
           onClick={() => handleSort("pool_stake")}
         >
-          Pool stake{" "}
+          {t("groups.table.poolStake")}{" "}
           <SortArrow
             direction={sortColumn === "pool_stake" ? sortDirection : undefined}
           />
@@ -110,7 +113,7 @@ export const GroupsTable = ({
           className='flex w-full cursor-pointer items-center justify-end gap-1/2'
           onClick={() => handleSort("delegators")}
         >
-          Delegators{" "}
+          {t("groups.table.delegators")}{" "}
           <SortArrow
             direction={sortColumn === "delegators" ? sortDirection : undefined}
           />
@@ -131,7 +134,7 @@ export const GroupsTable = ({
           className='flex w-full cursor-pointer items-center justify-end gap-1/2'
           onClick={() => handleSort("share")}
         >
-          Share{" "}
+          {t("groups.table.share")}{" "}
           <SortArrow
             direction={sortColumn === "share" ? sortDirection : undefined}
           />
@@ -162,7 +165,7 @@ export const GroupsTable = ({
           className='flex w-full cursor-pointer items-center justify-end gap-1/2'
           onClick={() => handleSort("pledge")}
         >
-          Pledge{" "}
+          {t("groups.table.pledge")}{" "}
           <SortArrow
             direction={sortColumn === "pledge" ? sortDirection : undefined}
           />
@@ -208,7 +211,7 @@ export const GroupsTable = ({
           className='flex w-full cursor-pointer items-center justify-end gap-1/2'
           onClick={() => handleSort("pledge_per_pool")}
         >
-          μ Pledge per pool{" "}
+          {t("groups.table.pledgePerPool")}{" "}
           <SortArrow
             direction={
               sortColumn === "pledge_per_pool" ? sortDirection : undefined
@@ -234,7 +237,7 @@ export const GroupsTable = ({
       key: "drep",
       title: (
         <span className='flex w-full justify-end' ref={anchorRefs.has_drep}>
-          Also DRep
+          {t("groups.table.alsoDrep")}
         </span>
       ),
       render: item => {
@@ -243,14 +246,14 @@ export const GroupsTable = ({
         if (drepCount === 0) {
           return (
             <span className='flex w-full justify-end'>
-              <Badge color='gray'>No</Badge>
+              <Badge color='gray'>{t("groups.no")}</Badge>
             </span>
           );
         }
 
         return (
           <span className='flex w-full justify-end'>
-            <Badge color='blue'>Yes: {drepCount}x</Badge>
+            <Badge color='blue'>{t("groups.yes")}: {drepCount}x</Badge>
           </span>
         );
       },
@@ -277,7 +280,7 @@ export const GroupsTable = ({
                   changeDraftFilter("has_drep", +e.currentTarget.value)
                 }
               />
-              <span className='text-text-sm'>Yes</span>
+              <span className='text-text-sm'>{t("groups.yes")}</span>
             </label>
             <label className='flex items-center gap-1'>
               <input
@@ -290,7 +293,7 @@ export const GroupsTable = ({
                   changeDraftFilter("has_drep", +e.currentTarget.value)
                 }
               />
-              <span className='text-text-sm'>No</span>
+              <span className='text-text-sm'>{t("groups.no")}</span>
             </label>
           </div>
         ),

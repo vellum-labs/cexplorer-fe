@@ -15,8 +15,10 @@ import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { Wallet, Info } from "lucide-react";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const TreasuryDonationPage = () => {
+  const { t } = useAppTranslation("pages");
   const query = useFetchTreasuryDonationStats();
   const [showDonationModal, setShowDonationModal] = useState(false);
   const [showWalletModal, setShowWalletModal] = useState(false);
@@ -41,13 +43,13 @@ export const TreasuryDonationPage = () => {
   const tabItems = [
     {
       key: "donations",
-      label: "Recent Donations",
+      label: t("treasuryDonations.tabs.recentDonations"),
       content: <TxListPage key='donation' isDonationPage />,
       visible: true,
     },
     {
       key: "stats",
-      label: "Epoch by epoch",
+      label: t("treasuryDonations.tabs.epochByEpoch"),
       content: <TreasuryDonationEpochsTab query={query} />,
       visible: true,
     },
@@ -55,10 +57,10 @@ export const TreasuryDonationPage = () => {
   return (
     <PageBase
       metadataTitle='treasuryDonations'
-      title='Treasury Donations'
+      title={t("treasuryDonations.title")}
       breadcrumbItems={[
         {
-          label: "Treasury Donations",
+          label: t("treasuryDonations.title"),
         },
       ]}
       adsCarousel={false}
@@ -82,9 +84,9 @@ export const TreasuryDonationPage = () => {
           onClose={() => setShowSuccessModal(false)}
         >
           <div className='mt-2 flex h-full w-full flex-col items-center overflow-hidden p-1.5'>
-            <h3>Transaction successful, thank you for your donation! ❤️</h3>
+            <h3>{t("treasuryDonations.success.title")} ❤️</h3>
             <div className='mt-4 flex w-full flex-col items-center gap-2'>
-              <p className='text-text-sm'>Transaction Hash:</p>
+              <p className='text-text-sm'>{t("treasuryDonations.success.txHashLabel")}</p>
               <div className='flex items-center gap-1'>
                 <Link
                   to='/tx/$hash'
@@ -106,24 +108,21 @@ export const TreasuryDonationPage = () => {
               <Info size={20} className='mt-1/4 shrink-0 text-primary' />
               <div className='flex flex-col gap-1'>
                 <h3 className='text-text-md font-semibold'>
-                  What is the Cardano Treasury?
+                  {t("treasuryDonations.info.title")}
                 </h3>
                 <p className='text-text-sm text-grayTextPrimary'>
-                  The Cardano Treasury is a decentralized funding mechanism that
-                  supports the development and growth of the Cardano ecosystem.
-                  Donations help fund proposals voted on by the community
-                  through Cardano's governance system.
+                  {t("treasuryDonations.info.description")}
                 </p>
               </div>
             </div>
             <div className='h-fit shrink-0'>
               <Tooltip
-                content='Note: MeshJS does not support treasury donations yet. You can donate only to Cexplorer for now.'
+                content={t("treasuryDonations.info.donateTooltip")}
                 forceDirection='bottom'
               >
                 <Button
                   size='lg'
-                  label='Donate to Treasury'
+                  label={t("treasuryDonations.info.donateButton")}
                   variant='primary'
                   leftIcon={<Wallet />}
                   onClick={handleDonateClick}

@@ -24,8 +24,10 @@ import { useNavigate, useSearch } from "@tanstack/react-router";
 import { HandCoins, SendToBack, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const RetiredDelegationsPage = () => {
+  const { t } = useAppTranslation(["pages", "common"]);
   const { page, order, tab } = useSearch({ from: "/retired-delegations/" });
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const [tabParam, setTabParam] = useState<"active" | "live">(tab ?? "live");
@@ -57,12 +59,12 @@ export const RetiredDelegationsPage = () => {
   const tabItems = [
     {
       key: "live",
-      label: "Retired",
+      label: t("delegations.retired.tabs.retired"),
       visible: true,
     },
     {
       key: "active",
-      label: "To Be Retired",
+      label: t("delegations.retired.tabs.toBeRetired"),
       visible: true,
     },
   ];
@@ -70,11 +72,11 @@ export const RetiredDelegationsPage = () => {
   const selectItems = [
     {
       key: "date",
-      value: "Date",
+      value: t("delegations.retired.sortOptions.date"),
     },
     {
       key: "live_stake",
-      value: "Live Stake",
+      value: t("delegations.retired.sortOptions.liveStake"),
     },
   ];
 
@@ -84,7 +86,7 @@ export const RetiredDelegationsPage = () => {
       render: () => {
         return <></>;
       },
-      title: <p>#</p>,
+      title: <p>{t("delegations.retired.table.index")}</p>,
       standByRanking: true,
       visible: columnsVisibility.index,
       widthPx: 40,
@@ -108,7 +110,7 @@ export const RetiredDelegationsPage = () => {
 
         return ticker && name ? `[${ticker}] ${name}` : id;
       },
-      title: "Stake Pool",
+      title: t("delegations.retired.table.stakePool"),
       visible: columnsVisibility.pool,
       widthPx: 145,
     },
@@ -123,7 +125,7 @@ export const RetiredDelegationsPage = () => {
       },
       title: (
         <p className='w-full text-right'>
-          {tabParam === "active" ? "Retiring in Epoch" : "Retired in Epoch"}
+          {tabParam === "active" ? t("delegations.retired.table.retiringInEpoch") : t("delegations.retired.table.retiredInEpoch")}
         </p>
       ),
       visible: columnsVisibility.epoch,
@@ -138,7 +140,7 @@ export const RetiredDelegationsPage = () => {
       ),
       title: (
         <div className='flex w-full justify-end'>
-          <span>Active Stake</span>
+          <span>{t("delegations.retired.table.activeStake")}</span>
         </div>
       ),
       visible: columnsVisibility.stake,
@@ -154,7 +156,7 @@ export const RetiredDelegationsPage = () => {
 
         return item.stat.accounts;
       },
-      title: <p className='w-full text-right'>Delegators</p>,
+      title: <p className='w-full text-right'>{t("delegations.retired.table.delegators")}</p>,
       visible: columnsVisibility.delegators,
       widthPx: 50,
     },
@@ -170,7 +172,7 @@ export const RetiredDelegationsPage = () => {
 
         return item.stat.epochs;
       },
-      title: <p className='w-full text-right'>Longevity</p>,
+      title: <p className='w-full text-right'>{t("delegations.retired.table.longevity")}</p>,
       visible: columnsVisibility.longevity,
       widthPx: 50,
     },
@@ -198,14 +200,14 @@ export const RetiredDelegationsPage = () => {
   return (
     <PageBase
       metadataTitle='retiredPoolsList'
-      title='Delegations to Retired Pools'
-      breadcrumbItems={[{ label: "Delegations to Retired Pools" }]}
+      title={t("delegations.retired.title")}
+      breadcrumbItems={[{ label: t("delegations.retired.title") }]}
     >
       <div className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         {stats ? (
           <div className='mb-2 flex flex-wrap items-center gap-2'>
             <OverviewStatCard
-              title='ADA delegated to retired pools'
+              title={t("delegations.retired.stats.adaDelegated")}
               icon={<HandCoins color={colors.primary} />}
               value={
                 <AdaWithTooltip
@@ -215,12 +217,12 @@ export const RetiredDelegationsPage = () => {
               }
             />
             <OverviewStatCard
-              title='Accounts delegated to retired pools'
+              title={t("delegations.retired.stats.accountsDelegated")}
               icon={<Users color={colors.primary} />}
               value={stats?.accounts ?? 0}
             />
             <OverviewStatCard
-              title='Retired pools with delegations'
+              title={t("delegations.retired.stats.retiredPools")}
               icon={<SendToBack color={colors.primary} />}
               value={formatNumber(stats?.count ?? 0)}
             />
@@ -262,6 +264,7 @@ export const RetiredDelegationsPage = () => {
                 selectItems={selectItems}
                 selectedItem={selectedItem}
                 setSelectedItem={setSelectedItem as any}
+                labelName={t("common:actions.sortBy")}
               />
               <ExportButton
                 columns={delegationColumns}
@@ -272,8 +275,16 @@ export const RetiredDelegationsPage = () => {
                 rows={rows}
                 setRows={setRows}
                 columnsOptions={retiredDelegationsTableOptions.map(item => {
+                  const keyToTranslation: Record<string, string> = {
+                    index: "index",
+                    pool: "stakePool",
+                    epoch: tabParam === "active" ? "retiringInEpoch" : "retiredInEpoch",
+                    stake: "activeStake",
+                    delegators: "delegators",
+                    longevity: "longevity",
+                  };
                   return {
-                    label: item.name,
+                    label: t(`delegations.retired.table.${keyToTranslation[item.key]}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(

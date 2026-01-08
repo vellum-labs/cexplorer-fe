@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { EmbedButtonsSubtab } from "../subtabs/EmbedButtonsSubtab";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface EmbedTabItemProps {
   poolId: string;
@@ -8,10 +9,11 @@ interface EmbedTabItemProps {
 }
 
 export const EmbedTabItem: FC<EmbedTabItemProps> = ({ poolId, poolTicker }) => {
+  const { t } = useAppTranslation("pages");
   const embedTabs = [
     {
       key: "buttons",
-      label: "Buttons",
+      label: t("pools.detailPage.embed.buttons"),
       content: <EmbedButtonsSubtab poolId={poolId} poolTicker={poolTicker} />,
       visible: true,
     },

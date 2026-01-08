@@ -13,8 +13,10 @@ import metadata from "../../../conf/metadata/en-metadata.json";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { X } from "lucide-react";
 import { useFilterTable } from "@/hooks/tables/useFilterTable";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const GroupsListPage = () => {
+  const { t } = useAppTranslation("pages");
   const [{ debouncedTableSearch, tableSearch }, setTableSearch] =
     useSearchTable();
 
@@ -149,14 +151,13 @@ export const GroupsListPage = () => {
       <Helmet>{<title>{metadata.groupsList.title}</title>}</Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center'>
         <HeaderBanner
-          title='Cardano Groups (Donuts)'
-          breadcrumbItems={[{ label: "Groups" }]}
+          title={t("groups.title")}
+          breadcrumbItems={[{ label: t("groups.breadcrumb") }]}
         />
         <div className='flex w-full max-w-desktop flex-col items-center justify-center gap-1 p-mobile md:p-desktop'>
           <div className='mb-2 w-full rounded-m border border-border bg-cardBg p-2'>
             <p className='text-text-sm text-grayTextPrimary'>
-              This dashboard is managed by Cardano community. Everyone can add
-              or modify existing groups via{" "}
+              {t("groups.info")}{" "}
               <a
                 href='https://github.com/vellum-labs/cexplorer-community/'
                 target='_blank'
@@ -181,10 +182,10 @@ export const GroupsListPage = () => {
             )}
             <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
               <h3 className='pb-1.5 md:pb-0'>
-                Total of {formatNumber(filteredItems.length)} groups
+                {t("groups.totalOf")} {formatNumber(filteredItems.length)} {t("groups.totalOfSuffix")}
               </h3>
               <TableSearchInput
-                placeholder='Search your results...'
+                placeholder={t("groups.searchPlaceholder")}
                 value={tableSearch}
                 onchange={setTableSearch}
                 wrapperClassName='md:w-[320px] w-full'
@@ -201,10 +202,10 @@ export const GroupsListPage = () => {
                         key={key}
                         className='flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
                       >
-                        <span>{key === "has_drep" && "Also DRep"}:</span>
+                        <span>{key === "has_drep" && t("groups.alsoDrep")}:</span>
                         <span>
-                          {key === "has_drep" && +value === 1 && "Yes"}
-                          {key === "has_drep" && +value === 2 && "No"}
+                          {key === "has_drep" && +value === 1 && t("groups.yes")}
+                          {key === "has_drep" && +value === 2 && t("groups.no")}
                         </span>
                         <X
                           size={13}

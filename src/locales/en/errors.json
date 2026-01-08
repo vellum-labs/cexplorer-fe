@@ -1,0 +1,32 @@
+{
+  "network": {
+    "connectionFailed": "Connection failed",
+    "timeout": "Request timeout",
+    "serverError": "Server error",
+    "notFound": "Not found",
+    "unauthorized": "Unauthorized",
+    "forbidden": "Forbidden",
+    "badRequest": "Bad request",
+    "tryAgain": "Please try again later"
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address",
+    "invalidAddress": "Invalid address",
+    "invalidAmount": "Invalid amount",
+    "minLength": "Minimum length is {{min}} characters",
+    "maxLength": "Maximum length is {{max}} characters"
+  },
+  "wallet": {
+    "notConnected": "Wallet not connected",
+    "connectionFailed": "Failed to connect wallet",
+    "transactionFailed": "Transaction failed",
+    "insufficientFunds": "Insufficient funds",
+    "userRejected": "Transaction rejected by user"
+  },
+  "api": {
+    "fetchFailed": "Failed to fetch data",
+    "submitFailed": "Failed to submit data",
+    "unknownError": "An unknown error occurred"
+  }
+}

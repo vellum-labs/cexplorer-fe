@@ -13,6 +13,7 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useEpochListTableStore } from "@/stores/tables/epochListTableStore";
 import { epochListTableOptions } from "@/constants/tables/epochListTableOptions";
 import { useEpochList } from "@/hooks/tables/useEpochList";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface EpochsTabItemProps {
   epoch_number: number;
@@ -23,6 +24,7 @@ export const EpochsTabItem: FC<EpochsTabItemProps> = ({
   epoch_number,
   data,
 }) => {
+  const { t } = useAppTranslation(["pages", "common"]);
   const {
     columnsVisibility,
     columnsOrder,
@@ -43,7 +45,7 @@ export const EpochsTabItem: FC<EpochsTabItemProps> = ({
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : epoch_number > 0 ? (
             <h3 className='basis-[230px] text-nowrap'>
-              Total of {formatNumber(epoch_number)} epochs
+              {t("epochs.totalOf")} {formatNumber(epoch_number)} {t("epochs.totalOfSuffix")}
             </h3>
           ) : (
             ""
@@ -65,7 +67,7 @@ export const EpochsTabItem: FC<EpochsTabItemProps> = ({
                 setRows={setRows}
                 columnsOptions={epochListTableOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(
@@ -81,7 +83,7 @@ export const EpochsTabItem: FC<EpochsTabItemProps> = ({
 
         <div className='flex gap-1'>
           <TableSearchInput
-            placeholder='Search  your results...'
+            placeholder={t("epochs.searchPlaceholder")}
             value={tableSearch}
             onchange={setTableSearch}
             wrapperClassName='md:w-[320px] w-full '
@@ -104,7 +106,7 @@ export const EpochsTabItem: FC<EpochsTabItemProps> = ({
               setRows={setRows}
               columnsOptions={epochListTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),

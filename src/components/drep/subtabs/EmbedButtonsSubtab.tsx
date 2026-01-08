@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface EmbedButtonsSubtabProps {
   drepId: string;
@@ -10,6 +11,7 @@ export const EmbedButtonsSubtab: FC<EmbedButtonsSubtabProps> = ({
   drepId,
   drepName,
 }) => {
+  const { t } = useAppTranslation("pages");
   const drepUrl = `https://cexplorer.io/drep/${drepId}?action=delegate`;
   const previewUrl = drepUrl;
 
@@ -20,7 +22,7 @@ export const EmbedButtonsSubtab: FC<EmbedButtonsSubtabProps> = ({
     <div className='flex flex-col gap-2 pt-4'>
       <div className='flex flex-col gap-4 md:flex-row md:gap-6'>
         <div className='flex flex-1 flex-col gap-2'>
-          <span className='text-text-sm font-medium'>DRep delegation button</span>
+          <span className='text-text-sm font-medium'>{t("dreps.detailPage.embed.drepDelegationButton")}</span>
           <div className='relative rounded-m border border-border bg-darker p-3 pr-10'>
             <pre className='overflow-x-auto whitespace-pre-wrap break-all text-text-sm text-grayTextPrimary'>
               {delegationButtonCode}
@@ -31,14 +33,14 @@ export const EmbedButtonsSubtab: FC<EmbedButtonsSubtabProps> = ({
           </div>
         </div>
         <div className='flex flex-col gap-2'>
-          <span className='text-text-sm font-medium'>Preview</span>
+          <span className='text-text-sm font-medium'>{t("dreps.detailPage.embed.preview")}</span>
           <a
             href={previewUrl}
             target='_blank'
             rel='noopener noreferrer'
             className='inline-flex w-fit items-center justify-center rounded-[8px] border-2 border-darkBlue bg-darkBlue px-[16px] py-[8px] text-text-sm font-medium text-white duration-150 hover:scale-[101%] hover:text-white active:scale-[98%]'
           >
-            Delegate to {displayName}
+            {t("dreps.detailPage.delegateTo", { name: displayName })}
           </a>
         </div>
       </div>

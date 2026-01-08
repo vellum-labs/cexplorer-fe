@@ -33,8 +33,10 @@ import { format } from "date-fns";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const MetadataListPage: FC = () => {
+  const { t } = useAppTranslation("pages");
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { page } = useSearch({ from: "/metadata/" });
 
@@ -97,7 +99,7 @@ export const MetadataListPage: FC = () => {
           />
         );
       },
-      title: <p>Date</p>,
+      title: <p>{t("metadata.table.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 60,
     },
@@ -121,7 +123,7 @@ export const MetadataListPage: FC = () => {
           </div>
         );
       },
-      title: <p>Key</p>,
+      title: <p>{t("metadata.table.key")}</p>,
       visible: columnsVisibility.key,
       widthPx: 60,
     },
@@ -151,7 +153,7 @@ export const MetadataListPage: FC = () => {
 
         return item.tx.hash;
       },
-      title: <p>TX Hash</p>,
+      title: <p>{t("metadata.table.txHash")}</p>,
       visible: columnsVisibility.hash,
       widthPx: 60,
     },
@@ -176,7 +178,7 @@ export const MetadataListPage: FC = () => {
           "%"
         );
       },
-      title: <p className='w-full text-right'>Size</p>,
+      title: <p className='w-full text-right'>{t("metadata.table.size")}</p>,
       visible: columnsVisibility.size,
       widthPx: 30,
     },
@@ -190,7 +192,7 @@ export const MetadataListPage: FC = () => {
 
         return JSON.stringify(item.md);
       },
-      title: <p className='w-full text-right'>Metadata</p>,
+      title: <p className='w-full text-right'>{t("metadata.table.metadata")}</p>,
       visible: columnsVisibility.md,
       widthPx: 60,
     },
@@ -205,8 +207,8 @@ export const MetadataListPage: FC = () => {
   return (
     <PageBase
       metadataTitle='metadataTxList'
-      title='Metadata Transactions List'
-      breadcrumbItems={[{ label: "Metadata Transactions List" }]}
+      title={t("metadata.title")}
+      breadcrumbItems={[{ label: t("metadata.title") }]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
@@ -215,7 +217,7 @@ export const MetadataListPage: FC = () => {
               <LoadingSkeleton height='27px' width={"220px"} />
             ) : totalItems > 0 ? (
               <h3 className='basis-[230px] text-nowrap'>
-                Total of {formatNumber(totalItems)} transactions
+                {t("metadata.totalOf")} {formatNumber(totalItems)} {t("metadata.totalOfSuffix")}
               </h3>
             ) : (
               ""
@@ -244,7 +246,7 @@ export const MetadataListPage: FC = () => {
 
           <div className='flex gap-1'>
             <TableSearchInput
-              placeholder='Search your results...'
+              placeholder={t("metadata.searchPlaceholder")}
               value={tableSearch}
               onchange={setTableSearch}
               wrapperClassName='md:w-[320px] w-full'
@@ -252,12 +254,12 @@ export const MetadataListPage: FC = () => {
               prefixes={[
                 {
                   key: "hash",
-                  name: "Hash",
+                  name: t("metadata.search.hash"),
                   show: tableSearch.length < 1 || isHex(tableSearch),
                 },
                 {
                   key: "key",
-                  name: "Key",
+                  name: t("metadata.search.key"),
                   show: isTextNumeric(tableSearch),
                 },
               ]}

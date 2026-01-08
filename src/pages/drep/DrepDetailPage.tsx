@@ -18,8 +18,10 @@ import { DrepDetailStatsTab } from "@/components/drep/tabs/DrepDetailStatsTab";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import { useDelegateAction } from "@/hooks/useDelegateAction";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const DrepDetailPage: FC = () => {
+  const { t } = useAppTranslation("pages");
   const [title, setTitle] = useState<string>("");
   const route = getRouteApi("/drep/$hash");
   const { hash } = route.useParams();
@@ -37,25 +39,25 @@ export const DrepDetailPage: FC = () => {
   const tabs = [
     {
       key: "governance_actions",
-      label: "Governance actions",
+      label: t("dreps.detailPage.tabs.governanceActions"),
       content: <DrepDetailGovernanceActionsTab />,
       visible: true,
     },
     {
       key: "delegators",
-      label: "Delegators",
+      label: t("dreps.detailPage.tabs.delegators"),
       content: <DrepDetailDelegatorsTab view={drepHash ?? ""} />,
       visible: true,
     },
     {
       key: "stats",
-      label: "Stats",
+      label: t("dreps.detailPage.tabs.stats"),
       content: <DrepDetailStatsTab data={drepDetailQuery.data?.distr ?? []} />,
       visible: true,
     },
     {
       key: "embed",
-      label: "Embed",
+      label: t("dreps.detailPage.tabs.embed"),
       content: (
         <DrepDetailEmbedTab drepId={hash} drepName={drepName ?? undefined} />
       ),
@@ -74,7 +76,7 @@ export const DrepDetailPage: FC = () => {
   ) {
     tabs.push({
       key: "about",
-      label: "About",
+      label: t("dreps.detailPage.tabs.about"),
       content: (
         <DrepDetailAboutTab
           data={{
@@ -111,12 +113,12 @@ export const DrepDetailPage: FC = () => {
       }}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>Governance</span>,
+          label: <span className='inline pt-1/2'>{t("governance.title")}</span>,
           link: "/gov",
         },
         {
           label: (
-            <span className='inline pt-1/2'>Delegated representatives</span>
+            <span className='inline pt-1/2'>{t("dreps.breadcrumb")}</span>
           ),
           link: "/drep",
         },
@@ -145,7 +147,7 @@ export const DrepDetailPage: FC = () => {
       }
       subTitle={
         <HeaderBannerSubtitle
-          title='Drep ID'
+          title={t("dreps.detailPage.drepId")}
           hashString={formatString(drepHash ?? "", "long")}
           hash={drepHash ?? ""}
         />

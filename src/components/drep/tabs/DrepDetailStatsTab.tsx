@@ -8,6 +8,7 @@ import { memo, useRef } from "react";
 import type { DrepDistrDetail } from "@/types/drepTypes";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface DrepDetailStatsTabProps {
   data: DrepDistrDetail[];
@@ -16,6 +17,7 @@ interface DrepDetailStatsTabProps {
 export const DrepDetailStatsTab = memo(function DrepDetailStatsTabMemo({
   data,
 }: DrepDetailStatsTabProps) {
+  const { t } = useAppTranslation("pages");
   const { data: miscBasic } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(miscBasic?.data.version.const);
   const { formatLovelace } = useADADisplay();
@@ -26,6 +28,11 @@ export const DrepDetailStatsTab = memo(function DrepDetailStatsTabMemo({
   const powerSeries = data?.map(item => Number(item.power)).reverse() ?? [];
   const delegatorsSeries =
     data?.map(item => item.represented_by).reverse() ?? [];
+
+  const powerLabel = t("dreps.detailPage.statsGraph.power");
+  const delegatorsLabel = t("dreps.detailPage.statsGraph.delegators");
+  const epochLabel = t("dreps.detailPage.statsGraph.epoch");
+  const dateLabel = t("dreps.detailPage.statsGraph.date");
 
   const option = {
     tooltip: {
@@ -42,12 +49,12 @@ export const DrepDetailStatsTab = memo(function DrepDetailStatsTabMemo({
         );
 
         const nameFunc = {
-          Power: item => (item ? formatLovelace(item.data) : "Power"),
-          Delegators: item => (item ? `${item.data} delegators` : "Delegators"),
+          [powerLabel]: item => (item ? formatLovelace(item.data) : powerLabel),
+          [delegatorsLabel]: item => (item ? `${item.data} ${delegatorsLabel.toLowerCase()}` : delegatorsLabel),
         };
 
         return (
-          `Date: ${format(startTime, "dd.MM.yy")} – ${format(endTime, "dd.MM.yy")} (Epoch: ${params[0].axisValue})<hr/>` +
+          `${dateLabel}: ${format(startTime, "dd.MM.yy")} – ${format(endTime, "dd.MM.yy")} (${epochLabel}: ${params[0].axisValue})<hr/>` +
           params
             .map(
               item =>
@@ -72,7 +79,7 @@ export const DrepDetailStatsTab = memo(function DrepDetailStatsTabMemo({
       type: "category",
       data: epochs,
       inverse: false,
-      name: "Epoch",
+      name: epochLabel,
       nameLocation: "middle",
       nameGap: 28,
       axisLabel: { color: textColor },
@@ -81,7 +88,7 @@ export const DrepDetailStatsTab = memo(function DrepDetailStatsTabMemo({
     yAxis: [
       {
         type: "value",
-        name: "Power",
+        name: powerLabel,
         nameRotate: 90,
         nameLocation: "middle",
         nameGap: 40,
@@ -89,7 +96,7 @@ export const DrepDetailStatsTab = memo(function DrepDetailStatsTabMemo({
       },
       {
         type: "value",
-        name: "Delegators",
+        name: delegatorsLabel,
         nameRotate: 90,
         nameLocation: "middle",
         nameGap: 40,
@@ -100,7 +107,7 @@ export const DrepDetailStatsTab = memo(function DrepDetailStatsTabMemo({
     series: [
       {
         type: "line",
-        name: "Power",
+        name: powerLabel,
         yAxisIndex: 0,
         data: powerSeries,
         itemStyle: { color: "#21fc1e" },
@@ -109,7 +116,7 @@ export const DrepDetailStatsTab = memo(function DrepDetailStatsTabMemo({
       },
       {
         type: "line",
-        name: "Delegators",
+        name: delegatorsLabel,
         yAxisIndex: 1,
         data: delegatorsSeries,
         itemStyle: { color: "#35c2f5" },

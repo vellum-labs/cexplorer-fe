@@ -21,6 +21,7 @@ import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { CircleHelp } from "lucide-react";
 import { DelegatorsLabel } from "@vellumlabs/cexplorer-sdk";
 import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface UseDrepDetailArgs {
   query: ReturnType<typeof useFetchDrepDetail>;
@@ -36,6 +37,7 @@ const isSystemDrep = (id?: string) =>
   id === "drep_always_abstain" || id === "drep_always_no_confidence";
 
 export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
+  const { t } = useAppTranslation("pages");
   const data = query.data;
   const drepId = data?.hash?.view;
   const isSystem = isSystemDrep(drepId);
@@ -64,14 +66,14 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
   const about: OverviewList = isSystem
     ? [
         {
-          label: "Name",
+          label: t("dreps.detailPage.about.name"),
           value:
             drepId === "drep_always_abstain"
-              ? "Always Abstain"
-              : "Always No Confidence",
+              ? t("dreps.detailPage.about.alwaysAbstain")
+              : t("dreps.detailPage.about.alwaysNoConfidence"),
         },
         {
-          label: "DRep ID",
+          label: t("dreps.detailPage.about.drepId"),
           value: drepId ? (
             <div className='flex items-center gap-1/2'>
               <span>{drepId}</span>
@@ -81,17 +83,17 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
             "-"
           ),
         },
-        { label: "Stake key", value: "N/A (system DRep)" },
-        { label: "Registered", value: "System Default" },
-        { label: "Last updated", value: "-" },
+        { label: t("dreps.detailPage.about.stakeKey"), value: t("dreps.detailPage.about.naSystemDrep") },
+        { label: t("dreps.detailPage.about.registered"), value: t("dreps.detailPage.about.systemDefault") },
+        { label: t("dreps.detailPage.about.lastUpdated"), value: "-" },
       ]
     : [
         {
-          label: "Name",
+          label: t("dreps.detailPage.about.name"),
           value: data?.data?.given_name ?? "-",
         },
         {
-          label: "DRep ID",
+          label: t("dreps.detailPage.about.drepId"),
           value: data?.hash?.view ? (
             <div className='flex items-center gap-1/2'>
               <span>{formatString(data.hash.view, "long")}</span>
@@ -102,7 +104,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
           ),
         },
         {
-          label: "DRep ID (Legacy)",
+          label: t("dreps.detailPage.about.drepIdLegacy"),
           value: data?.hash?.legacy ? (
             <div className='flex items-center gap-1/2'>
               <span>{formatString(data.hash.legacy, "long")}</span>
@@ -113,19 +115,19 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
           ),
         },
         {
-          label: "Stake key",
+          label: t("dreps.detailPage.about.stakeKey"),
           value: data?.owner?.stake ? (
             <AddressCell address={data.owner.stake} />
           ) : (
-            "Unknown"
+            t("dreps.detailPage.about.unknown")
           ),
         },
         {
-          label: "Registered",
+          label: t("dreps.detailPage.about.registered"),
           value: data?.since ? <TimeDateIndicator time={data.since} /> : "-",
         },
         {
-          label: "Last updated",
+          label: t("dreps.detailPage.about.lastUpdated"),
           value:
             Array.isArray(data?.action) &&
             data.action[data.action.length - 1]?.tx?.time ? (
@@ -152,37 +154,37 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
   const voting: OverviewList = isSystem
     ? [
         {
-          label: "Status",
+          label: t("dreps.detailPage.voting.status"),
           value: (
             <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
               <PulseDot color={"#00A9E3"} />
-              <span className='text-text-xs font-medium'>System Default</span>
+              <span className='text-text-xs font-medium'>{t("dreps.detailPage.about.systemDefault")}</span>
             </div>
           ),
         },
         {
-          label: "DRep metadata",
+          label: t("dreps.detailPage.voting.drepMetadata"),
           value: <span className='font-medium'>-</span>,
         },
         {
-          label: "Voting power",
+          label: t("dreps.detailPage.voting.votingPower"),
           value: currentPower ? (
             <AdaWithTooltip data={currentPower} />
           ) : (
-            "Unknown"
+            t("dreps.detailPage.about.unknown")
           ),
         },
         {
           label: <DelegatorsLabel minDelegationAda={minDelegationAda} />,
           value: currentDelegators
             ? formatNumber(currentDelegators)
-            : "Unknown",
+            : t("dreps.detailPage.about.unknown"),
         },
-        { label: "Rewards address", value: "-" },
+        { label: t("dreps.detailPage.voting.rewardsAddress"), value: "-" },
       ]
     : [
         {
-          label: "Status",
+          label: t("dreps.detailPage.voting.status"),
           value:
             typeof data?.is_active === "undefined" ? (
               "-"
@@ -190,16 +192,16 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
               <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
                 <PulseDot color={!data.is_active ? "bg-redText" : undefined} />
                 <span className='text-text-xs font-medium'>
-                  {data.is_active ? "Active" : "Inactive"}
+                  {data.is_active ? t("dreps.detailPage.voting.active") : t("dreps.detailPage.voting.inactive")}
                 </span>
               </div>
             ),
         },
         {
-          label: "DRep metadata",
+          label: t("dreps.detailPage.voting.drepMetadata"),
           value:
             data?.data === null ? (
-              <span className='font-medium text-redText'>Not provided</span>
+              <span className='font-medium text-redText'>{t("dreps.detailPage.voting.notProvided")}</span>
             ) : (
               <Link
                 to='/drep/$hash'
@@ -207,16 +209,16 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                 search={{ tab: "about" }}
                 className='font-medium text-greenText'
               >
-                Provided
+                {t("dreps.detailPage.voting.provided")}
               </Link>
             ),
         },
         {
-          label: "Voting power",
+          label: t("dreps.detailPage.voting.votingPower"),
           value: data?.amount ? <AdaWithTooltip data={data.amount} /> : "-",
         },
         {
-          label: "Own voting power",
+          label: t("dreps.detailPage.voting.ownVotingPower"),
           value: data?.owner?.balance ? (
             <TotalSumWithRates
               sum={outsum}
@@ -224,7 +226,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
               currency={currency}
             />
           ) : (
-            "Unknown"
+            t("dreps.detailPage.about.unknown")
           ),
         },
         {
@@ -238,7 +240,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
               : "-",
         },
         {
-          label: "Rewards address",
+          label: t("dreps.detailPage.voting.rewardsAddress"),
           value: (() => {
             const address = data?.data?.payment_address;
 
@@ -268,25 +270,25 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
   const governance: OverviewList = isSystem
     ? [
         {
-          label: "Behavior",
+          label: t("dreps.detailPage.governance.behavior"),
           value:
             drepId === "drep_always_abstain"
-              ? "Automatically abstains from all governance votes."
-              : "Automatically votes 'No Confidence' depending on the action type.",
+              ? t("dreps.detailPage.governance.abstainBehavior")
+              : t("dreps.detailPage.governance.noConfidenceBehavior"),
         },
         {
-          label: "Delegated Stake",
+          label: t("dreps.detailPage.governance.delegatedStake"),
           value: currentPower ? (
             <AdaWithTooltip data={currentPower} />
           ) : (
-            "Unknown"
+            t("dreps.detailPage.about.unknown")
           ),
         },
         {
           label: <DelegatorsLabel minDelegationAda={minDelegationAda} />,
           value: currentDelegators
             ? formatNumber(currentDelegators)
-            : "Unknown",
+            : t("dreps.detailPage.about.unknown"),
         },
       ]
     : [
@@ -323,7 +325,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                 {data?.votestat?.recent_vote && (
                   <div className='flex w-full items-center justify-between'>
                     <span className='text-text-sm text-grayTextSecondary'>
-                      Last vote
+                      {t("dreps.detailPage.governance.lastVote")}
                     </span>
                     <TimeDateIndicator time={data.votestat.recent_vote} />
                   </div>
@@ -333,9 +335,9 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                     <div className='flex w-full items-center justify-between'>
                       <div className='flex items-center gap-1/2'>
                         <span className='text-text-sm text-grayTextSecondary'>
-                          Recent Activity
+                          {t("dreps.detailPage.governance.recentActivity")}
                         </span>
-                        <Tooltip content="DRep's voting activity over the past 6 months">
+                        <Tooltip content={t("dreps.detailPage.governance.recentActivityTooltip")}>
                           <CircleHelp
                             size={12}
                             className='text-grayTextPrimary'
@@ -343,7 +345,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                         </Tooltip>
                       </div>
                       <span className='text-text-sm text-grayTextPrimary'>
-                        Voted: {recentPercent.toFixed(2)}%
+                        {t("dreps.detailPage.governance.voted")} {recentPercent.toFixed(2)}%
                       </span>
                     </div>
                     <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#E4E7EC]'>
@@ -358,9 +360,9 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                     <div className='flex w-full items-center justify-between'>
                       <div className='flex items-center gap-1/2'>
                         <span className='text-text-sm text-grayTextSecondary'>
-                          Lifetime Activity
+                          {t("dreps.detailPage.governance.lifetimeActivity")}
                         </span>
-                        <Tooltip content="Voting activity over DRep's lifetime">
+                        <Tooltip content={t("dreps.detailPage.governance.lifetimeActivityTooltip")}>
                           <CircleHelp
                             size={12}
                             className='text-grayTextPrimary'
@@ -368,7 +370,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                         </Tooltip>
                       </div>
                       <span className='text-text-sm text-grayTextPrimary'>
-                        Voted: {lifetimePercent.toFixed(2)}%
+                        {t("dreps.detailPage.governance.voted")} {lifetimePercent.toFixed(2)}%
                       </span>
                     </div>
                     <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#E4E7EC]'>
@@ -392,13 +394,20 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                     const voteCount =
                       votes.find(v => v.vote === vote)?.count ?? 0;
 
+                    const voteLabel =
+                      vote === "Yes"
+                        ? t("dreps.detailPage.governance.yes")
+                        : vote === "Abstain"
+                          ? t("dreps.detailPage.governance.abstain")
+                          : t("dreps.detailPage.governance.no");
+
                     return (
                       <div
                         className='flex items-center justify-between gap-1'
                         key={vote}
                       >
                         <span className='min-w-24 text-text-sm text-grayTextPrimary'>
-                          {vote} ({voteCount})
+                          {voteLabel} ({voteCount})
                         </span>
                         <div className='relative h-2 w-2/3 overflow-hidden rounded-[4px] bg-[#E4E7EC]'>
                           <span

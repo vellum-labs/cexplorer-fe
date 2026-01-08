@@ -26,6 +26,7 @@ import { useFilterTable } from "./useFilterTable";
 import { VoteBadge } from "@vellumlabs/cexplorer-sdk";
 import type { Vote } from "@/constants/votes";
 import { useSearchTable } from "./useSearchTable";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export type FilterKey = "spo";
 
@@ -75,6 +76,7 @@ export const useDrepList = ({
   overrideTableSearch?: string;
   isHomepage?: boolean;
 }): UseDrepList => {
+  const { t } = useAppTranslation("pages");
   const { infiniteScrolling } = useInfiniteScrollingStore();
 
   const token = useAuthToken();
@@ -189,12 +191,14 @@ export const useDrepList = ({
           <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
             <PulseDot color={!item.is_active ? "bg-redText" : undefined} />
             <span className='text-text-xs font-medium'>
-              {item.is_active ? "Active" : "Inactive"}
+              {item.is_active
+                ? t("dreps.stats.active")
+                : t("dreps.stats.inactive")}
             </span>
           </div>
         );
       },
-      title: <p>Status</p>,
+      title: <p>{t("dreps.table.status")}</p>,
       visible: columnsVisibility.status,
       widthPx: 40,
     },
@@ -218,7 +222,7 @@ export const useDrepList = ({
 
         return item?.hash?.view;
       },
-      title: <p>DRep name</p>,
+      title: <p>{t("dreps.table.drepName")}</p>,
       visible: columnsVisibility.drep_name,
       widthPx: 120,
     },
@@ -254,7 +258,7 @@ export const useDrepList = ({
               setList("power");
             }}
           >
-            <span>Voting power</span>
+            <span>{t("dreps.table.votingPower")}</span>
             <SortArrow direction={order === "power" ? sort : undefined} />
           </div>
         </div>
@@ -278,11 +282,11 @@ export const useDrepList = ({
           <Tooltip
             content={
               <div className='w-[180px]'>
-                Voting activity over DRep's lifetime
+                {t("dreps.table.lifetimeActivityTooltip")}
               </div>
             }
           >
-            <p className='cursor-help'>Lifetime Activity</p>
+            <p className='cursor-help'>{t("dreps.table.lifetimeActivity")}</p>
           </Tooltip>
         </div>
       ),
@@ -308,11 +312,11 @@ export const useDrepList = ({
           <Tooltip
             content={
               <div className='w-[180px]'>
-                DRep's voting activity over the past 6 months
+                {t("dreps.table.recentActivityTooltip")}
               </div>
             }
           >
-            <p className='cursor-help'>Recent Activity</p>
+            <p className='cursor-help'>{t("dreps.table.recentActivity")}</p>
           </Tooltip>
         </div>
       ),
@@ -349,7 +353,7 @@ export const useDrepList = ({
               setList("own");
             }}
           >
-            <span>Owner stake</span>
+            <span>{t("dreps.table.ownerStake")}</span>
             <SortArrow direction={order === "own" ? sort : undefined} />
           </div>
         </div>
@@ -394,7 +398,7 @@ export const useDrepList = ({
               setList("average_stake");
             }}
           >
-            <span>Average stake</span>
+            <span>{t("dreps.table.averageStake")}</span>
             <SortArrow
               direction={order === "average_stake" ? sort : undefined}
             />
@@ -439,7 +443,7 @@ export const useDrepList = ({
               setList("since");
             }}
           >
-            <span>Registered</span>
+            <span>{t("dreps.table.registered")}</span>
             <SortArrow direction={order === "since" ? sort : undefined} />
           </div>
         </div>
@@ -480,7 +484,7 @@ export const useDrepList = ({
               setList("delegator");
             }}
           >
-            <span>Delegators</span>
+            <span>{t("dreps.table.delegators")}</span>
             <SortArrow direction={order === "delegator" ? sort : undefined} />
           </div>
         </div>
@@ -504,7 +508,7 @@ export const useDrepList = ({
 
         return JSON.stringify(item.data);
       },
-      title: <p className='w-full text-right'>DRep metadata</p>,
+      title: <p className='w-full text-right'>{t("dreps.table.drepMetadata")}</p>,
       visible: columnsVisibility.metadata,
       widthPx: 50,
     },
@@ -519,7 +523,7 @@ export const useDrepList = ({
       },
       title: (
         <div className='flex w-full items-center justify-end gap-1/2'>
-          <p className='text-right'>Selected vote</p>
+          <p className='text-right'>{t("dreps.table.selectedVote")}</p>
           <X
             size={15}
             className='translate-y-[1px] cursor-pointer'
@@ -593,7 +597,7 @@ export const useDrepList = ({
                 checked={filterDraft.spo === "YES"}
                 onChange={e => changeDraftFilter("spo", e.currentTarget.value)}
               />
-              <span className='text-text-sm'>Yes</span>
+              <span className='text-text-sm'>{t("dreps.filter.yes")}</span>
             </label>
             <label className='flex items-center gap-1'>
               <input
@@ -604,7 +608,7 @@ export const useDrepList = ({
                 checked={filterDraft.spo === "NO"}
                 onChange={e => changeDraftFilter("spo", e.currentTarget.value)}
               />
-              <span className='text-text-sm'>No</span>
+              <span className='text-text-sm'>{t("dreps.filter.no")}</span>
             </label>
           </div>
         ),
@@ -670,7 +674,7 @@ export const useDrepList = ({
               }
             }}
           >
-            <span>Top delegator</span>
+            <span>{t("dreps.table.topDelegator")}</span>
             <SortArrow
               direction={order === "top_delegator" ? sort : undefined}
             />

@@ -9,12 +9,14 @@ import { useADADisplay } from "@/hooks/useADADisplay";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useFetchDelegEpochRegistered } from "@/services/pools";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 import { format } from "date-fns";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 
 export const StakeFirstRegisteredGraph: FC = () => {
+  const { t } = useAppTranslation("pages");
   const query = useFetchDelegEpochRegistered();
   const data = query.data?.data ?? [];
 
@@ -30,10 +32,15 @@ export const StakeFirstRegisteredGraph: FC = () => {
   const counts = data.map(item => item.stat.count);
   const stakes = data.map(item => item.stat.stake);
 
+  const stakeLabel = t("pools.analytics.legend.stake");
+  const countLabel = t("pools.analytics.legend.count");
+  const dateLabel = t("pools.analytics.tooltip.date");
+  const epochLabel = t("pools.analytics.tooltip.epoch");
+
   const option = {
     legend: {
       type: "scroll",
-      data: ["Stake (₳)", "Count"],
+      data: [stakeLabel, countLabel],
       textStyle: { color: textColor },
       pageIconColor: textColor,
       pageIconInactiveColor: inactivePageIconColor,
@@ -51,7 +58,7 @@ export const StakeFirstRegisteredGraph: FC = () => {
           miscConst?.epoch.start_time ?? "",
         );
 
-        const header = `Date: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (Epoch: ${params[0]?.axisValue})<hr style="margin: 4px 0;" />`;
+        const header = `${dateLabel}: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${epochLabel}: ${params[0]?.axisValue})<hr style="margin: 4px 0;" />`;
 
         const lines = params.map(item => {
           const isStake = item.seriesName.includes("Stake");
@@ -74,7 +81,7 @@ export const StakeFirstRegisteredGraph: FC = () => {
     xAxis: {
       type: "category",
       data: epochs,
-      name: "Epoch",
+      name: epochLabel,
       nameLocation: "middle",
       nameGap: 28,
       boundaryGap: false,
@@ -101,14 +108,14 @@ export const StakeFirstRegisteredGraph: FC = () => {
     series: [
       {
         type: "bar",
-        name: "Stake (₳)",
+        name: stakeLabel,
         data: stakes,
         yAxisIndex: 1,
         itemStyle: { color: "#f39c12" },
       },
       {
         type: "line",
-        name: "Count",
+        name: countLabel,
         data: counts,
         yAxisIndex: 0,
         symbol: "none",
@@ -120,8 +127,8 @@ export const StakeFirstRegisteredGraph: FC = () => {
 
   return (
     <AnalyticsGraph
-      title='First-time Stake Registrations'
-      description='Number of new staking wallets and total stake registered in each epoch.'
+      title={t("pools.analytics.firstTimeRegistrations.title")}
+      description={t("pools.analytics.firstTimeRegistrations.description")}
       className='border-none'
     >
       <div className='relative w-full'>

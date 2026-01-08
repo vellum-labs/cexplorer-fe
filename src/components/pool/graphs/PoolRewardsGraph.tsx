@@ -8,6 +8,7 @@ import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 import ReactEcharts from "echarts-for-react";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { format } from "date-fns";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   epochs: number[];
@@ -24,6 +25,7 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
   membetPct,
   operatorPct,
 }: Props) {
+  const { t } = useAppTranslation("pages");
   const {
     textColor,
     bgColor,
@@ -43,6 +45,14 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
     "Operator rewards (₳)": true,
   });
 
+  // Mapping from internal keys to translated labels
+  const seriesLabels = useMemo(() => ({
+    "Delegators ROA (%)": t("pools.detailPage.rewardsGraph.delegatorsRoa"),
+    "Operators ROA (%)": t("pools.detailPage.rewardsGraph.operatorsRoa"),
+    "Delegators Rewards (₳)": t("pools.detailPage.rewardsGraph.delegatorsRewards"),
+    "Operator rewards (₳)": t("pools.detailPage.rewardsGraph.operatorRewards"),
+  }), [t]);
+
   const chartRef = useRef(null);
 
   const option = useMemo(
@@ -53,6 +63,7 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
         pageTextStyle: { color: textColor },
         type: "scroll",
         data: Object.keys(graphsVisibility),
+        formatter: (name) => seriesLabels[name] || name,
         textStyle: { color: textColor },
         selected: graphsVisibility,
       },
@@ -68,7 +79,8 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
             return params
               .map(item => {
                 const isAda = item.seriesName.includes("₳");
-                const cleanName = item.seriesName
+                const translatedName = seriesLabels[item.seriesName] || item.seriesName;
+                const cleanName = translatedName
                   .replace("(₳)", "")
                   .replace("(%)", "")
                   .trim();
@@ -86,14 +98,15 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
             miscConst.epoch.start_time,
           );
 
-          const header = `Date: ${format(startTime, "dd.MM.yy")} - ${format(
+          const header = `${t("pools.detailPage.rewardsGraph.date")}: ${format(startTime, "dd.MM.yy")} - ${format(
             endTime,
             "dd.MM.yy",
-          )} (Epoch: ${epoch})<hr style="margin: 4px 0;" />`;
+          )} (${t("pools.detailPage.rewardsGraph.epoch")}: ${epoch})<hr style="margin: 4px 0;" />`;
 
           const lines = params.map(item => {
             const isAda = item.seriesName.includes("₳");
-            const cleanName = item.seriesName
+            const translatedName = seriesLabels[item.seriesName] || item.seriesName;
+            const cleanName = translatedName
               .replace("(₳)", "")
               .replace("(%)", "")
               .trim();
@@ -116,7 +129,7 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
         type: "category",
         data: epochs,
         inverse: true,
-        name: "Epoch",
+        name: t("pools.detailPage.rewardsGraph.epoch"),
         nameLocation: "middle",
         nameGap: 28,
         axisLabel: { color: textColor },
@@ -126,7 +139,7 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
         {
           type: "value",
           position: "left",
-          name: "Rewards (₳)",
+          name: t("pools.detailPage.rewardsGraph.rewards"),
           nameRotate: 90,
           nameLocation: "middle",
           nameGap: 45,
@@ -214,6 +227,8 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
       leaderLovelace,
       miscConst,
       formatLovelace,
+      t,
+      seriesLabels,
     ],
   );
 

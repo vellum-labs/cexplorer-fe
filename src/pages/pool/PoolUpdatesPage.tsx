@@ -26,8 +26,10 @@ import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const PoolUpdatesPage: FC = () => {
+  const { t } = useAppTranslation(["pages", "common"]);
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { page } = useSearch({ from: "/pool-updates/" });
 
@@ -95,7 +97,7 @@ export const PoolUpdatesPage: FC = () => {
           item?.pool_update?.live?.tx?.time
         );
       },
-      title: <p>Date</p>,
+      title: <p>{t("pools.table.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 50,
     },
@@ -118,7 +120,7 @@ export const PoolUpdatesPage: FC = () => {
           />
         );
       },
-      title: <p className='w-full text-right'>Epoch</p>,
+      title: <p className='w-full text-right'>{t("pools.table.epoch")}</p>,
       visible: columnsVisibility.epoch,
       widthPx: 30,
     },
@@ -150,7 +152,7 @@ export const PoolUpdatesPage: FC = () => {
 
         return format;
       },
-      title: "Pool",
+      title: t("pools.table.pool"),
       visible: columnsVisibility.pool,
       widthPx: 100,
     },
@@ -171,7 +173,7 @@ export const PoolUpdatesPage: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>Active Stake</p>,
+      title: <p className='w-full text-right'>{t("pools.table.activeStake")}</p>,
       visible: columnsVisibility.active_stake,
       widthPx: 45,
     },
@@ -219,7 +221,7 @@ export const PoolUpdatesPage: FC = () => {
 
         return format;
       },
-      title: <p className='w-full text-right'>Fees</p>,
+      title: <p className='w-full text-right'>{t("pools.table.fees")}</p>,
       visible: columnsVisibility.fees,
       widthPx: 50,
     },
@@ -261,7 +263,7 @@ export const PoolUpdatesPage: FC = () => {
           </div>
         );
       },
-      title: <p className='w-full text-right'>Pledge</p>,
+      title: <p className='w-full text-right'>{t("pools.table.pledge")}</p>,
       visible: columnsVisibility.pledge,
       widthPx: 55,
     },
@@ -306,7 +308,7 @@ export const PoolUpdatesPage: FC = () => {
           item?.pool_update?.live?.tx?.hash
         );
       },
-      title: <p>Transaction Hash</p>,
+      title: <p>{t("pools.table.transactionHash")}</p>,
       visible: columnsVisibility.tx_hash,
       widthPx: 60,
     },
@@ -343,7 +345,7 @@ export const PoolUpdatesPage: FC = () => {
 
         return item.pool_id;
       },
-      title: <p className='w-full text-nowrap text-right'>Certificate</p>,
+      title: <p className='w-full text-nowrap text-right'>{t("pools.table.certificate")}</p>,
       visible: columnsVisibility.certificate,
       widthPx: 30,
     },
@@ -358,8 +360,8 @@ export const PoolUpdatesPage: FC = () => {
   return (
     <PageBase
       metadataTitle='poolUpdatesList'
-      title='Pool Updates'
-      breadcrumbItems={[{ label: "Pool Updates" }]}
+      title={t("pools.updates.title")}
+      breadcrumbItems={[{ label: t("pools.updates.title") }]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
@@ -368,7 +370,7 @@ export const PoolUpdatesPage: FC = () => {
               <LoadingSkeleton height='27px' width={"220px"} />
             ) : totalItems > 0 ? (
               <h3 className='basis-[230px] text-nowrap'>
-                Total of {formatNumber(totalItems)} pools
+                {t("pools.updates.totalOf")} {formatNumber(totalItems)} {t("pools.updates.totalOfSuffix")}
               </h3>
             ) : (
               ""
@@ -381,7 +383,7 @@ export const PoolUpdatesPage: FC = () => {
                   setRows={setRows}
                   columnsOptions={poolUpdatesTableOptions.map(item => {
                     return {
-                      label: item.name,
+                      label: t(`common:tableSettings.${item.key}`),
                       isVisible: columnsVisibility[item.key],
                       onClick: () =>
                         setColumnVisibility(
@@ -397,7 +399,7 @@ export const PoolUpdatesPage: FC = () => {
 
           <div className='flex gap-1'>
             <TableSearchInput
-              placeholder='Search your results...'
+              placeholder={t("pools.updates.searchPlaceholder")}
               value={tableSearch}
               onchange={setTableSearch}
               wrapperClassName='md:w-[320px] w-full '
@@ -411,7 +413,7 @@ export const PoolUpdatesPage: FC = () => {
                 setRows={setRows}
                 columnsOptions={poolUpdatesTableOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(

@@ -21,8 +21,10 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const StakeDeregistrationsPage = () => {
+  const { t } = useAppTranslation("pages");
   const [totalItems, setTotalItems] = useState(0);
   const { page } = useSearch({ from: "/stake/deregistrations" });
   const {
@@ -38,6 +40,15 @@ export const StakeDeregistrationsPage = () => {
   const count = query.data?.pages[0].data.count;
   const items = query.data?.pages.flatMap(page => page.data.data);
 
+  const tableColumnTranslations: Record<string, string> = {
+    date: t("stake.deregistrations.table.date"),
+    type: t("stake.deregistrations.table.type"),
+    view: t("stake.deregistrations.table.stakeKey"),
+    deposit: t("stake.deregistrations.table.deposit"),
+    hash: t("stake.deregistrations.table.txHash"),
+    epoch_block: t("stake.deregistrations.table.epochBlock"),
+  };
+
   const columns: TableColumns<StakeRegistrationsData> = [
     {
       key: "date",
@@ -49,7 +60,7 @@ export const StakeDeregistrationsPage = () => {
 
         return item.block.time;
       },
-      title: "Date",
+      title: t("stake.deregistrations.table.date"),
       visible: columnsVisibility.date,
       widthPx: 30,
     },
@@ -58,7 +69,7 @@ export const StakeDeregistrationsPage = () => {
       render: item => {
         return <AddressTypeInitialsBadge address={item.data.view} />;
       },
-      title: "Type",
+      title: t("stake.deregistrations.table.type"),
       visible: columnsVisibility.type,
       widthPx: 30,
     },
@@ -72,7 +83,7 @@ export const StakeDeregistrationsPage = () => {
 
         return item?.data?.view;
       },
-      title: <p>Stake key</p>,
+      title: <p>{t("stake.deregistrations.table.stakeKey")}</p>,
       visible: columnsVisibility.view,
       widthPx: 50,
     },
@@ -83,7 +94,11 @@ export const StakeDeregistrationsPage = () => {
           <AdaWithTooltip data={item.tx.deposit} />
         </div>
       ),
-      title: <p className='w-full text-right'>Deposit</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("stake.deregistrations.table.deposit")}
+        </p>
+      ),
       visible: columnsVisibility.deposit,
       widthPx: 40,
     },
@@ -97,7 +112,7 @@ export const StakeDeregistrationsPage = () => {
 
         return item.tx.hash;
       },
-      title: "TX hash",
+      title: t("stake.deregistrations.table.txHash"),
       visible: columnsVisibility.hash,
       widthPx: 40,
     },
@@ -116,7 +131,11 @@ export const StakeDeregistrationsPage = () => {
 
         return `${item.block.epoch_no}/${item.block.no}`;
       },
-      title: <p className='w-full text-right'>Epoch/Block</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("stake.deregistrations.table.epochBlock")}
+        </p>
+      ),
       visible: columnsVisibility.epoch_block,
       widthPx: 40,
     },
@@ -131,8 +150,8 @@ export const StakeDeregistrationsPage = () => {
   return (
     <PageBase
       metadataTitle='stakeDeregistrations'
-      title='Stake deregistrations'
-      breadcrumbItems={[{ label: "Stake deregistrations" }]}
+      title={t("stake.deregistrations.title")}
+      breadcrumbItems={[{ label: t("stake.deregistrations.title") }]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='mb-2 flex w-full items-center justify-between gap-1'>
@@ -140,7 +159,9 @@ export const StakeDeregistrationsPage = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[250px]'>
-              Total of {formatNumber(totalItems ?? 0)} deregistrations
+              {t("stake.deregistrations.totalOf")}{" "}
+              {formatNumber(totalItems ?? 0)}{" "}
+              {t("stake.deregistrations.totalOfSuffix")}
             </h3>
           )}
           <div className='flex items-center gap-1'>
@@ -150,7 +171,7 @@ export const StakeDeregistrationsPage = () => {
               setRows={setRows}
               columnsOptions={stakeRegistrationsTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: tableColumnTranslations[item.key] || item.name,
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),

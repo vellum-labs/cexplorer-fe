@@ -17,8 +17,10 @@ import { formatTimeAgo } from "@vellumlabs/cexplorer-sdk";
 import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const WithdrawalsPage = () => {
+  const { t } = useAppTranslation(["pages", "common"]);
   const { page } = useSearch({ from: "/withdrawals/" });
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const {
@@ -51,14 +53,14 @@ export const WithdrawalsPage = () => {
 
         return item.block.time;
       },
-      title: <p>Date</p>,
+      title: <p>{t("withdrawals.table.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 70,
     },
     {
       key: "epoch",
       render: item => <EpochCell no={item?.block?.epoch_no} />,
-      title: <p className='w-full text-right'>Epoch</p>,
+      title: <p className='w-full text-right'>{t("withdrawals.table.epoch")}</p>,
       visible: columnsVisibility.epoch,
       widthPx: 35,
     },
@@ -74,7 +76,7 @@ export const WithdrawalsPage = () => {
 
         return item.view;
       },
-      title: "Address",
+      title: t("withdrawals.table.address"),
       visible: columnsVisibility.address,
       widthPx: 110,
     },
@@ -87,7 +89,7 @@ export const WithdrawalsPage = () => {
       ),
       title: (
         <div className='flex w-full justify-end'>
-          <span>Amount Controlled</span>
+          <span>{t("withdrawals.table.amountControlled")}</span>
         </div>
       ),
       visible: columnsVisibility.amount_controlled,
@@ -102,7 +104,7 @@ export const WithdrawalsPage = () => {
       ),
       title: (
         <div className='flex w-full justify-end'>
-          <span>Amount Withdrawn</span>
+          <span>{t("withdrawals.table.amountWithdrawn")}</span>
         </div>
       ),
       visible: columnsVisibility.amount_withdrawn,
@@ -129,7 +131,7 @@ export const WithdrawalsPage = () => {
 
         return ticker && name ? `[${ticker}] ${name}` : id;
       },
-      title: "Delegation",
+      title: t("withdrawals.table.delegation"),
       visible: columnsVisibility.delegated_to,
       widthPx: 160,
     },
@@ -145,7 +147,7 @@ export const WithdrawalsPage = () => {
 
         return item.tx.hash;
       },
-      title: "Tx",
+      title: t("withdrawals.table.tx"),
       visible: columnsVisibility.tx,
       widthPx: 80,
     },
@@ -160,8 +162,8 @@ export const WithdrawalsPage = () => {
   return (
     <PageBase
       metadataTitle='withdrawalsList'
-      title='Withdrawals'
-      breadcrumbItems={[{ label: "Withdrawals" }]}
+      title={t("withdrawals.title")}
+      breadcrumbItems={[{ label: t("withdrawals.title") }]}
     >
       <div className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='mb-2 ml-auto flex w-fit justify-end gap-1'>
@@ -171,7 +173,7 @@ export const WithdrawalsPage = () => {
             setRows={setRows}
             columnsOptions={withdrawalsTableOptions.map(item => {
               return {
-                label: item.name,
+                label: t(`common:tableSettings.${item.key}`),
                 isVisible: columnsVisibility[item.key],
                 onClick: () =>
                   setColumnVisibility(item.key, !columnsVisibility[item.key]),

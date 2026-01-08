@@ -21,8 +21,10 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const ContractTransactionsPage = () => {
+  const { t } = useAppTranslation("pages");
   const [totalItems, setTotalItems] = useState(0);
   const { page } = useSearch({ from: "/contract/interactions" });
   const {
@@ -49,7 +51,7 @@ export const ContractTransactionsPage = () => {
 
         return item.block.time;
       },
-      title: "Date",
+      title: t("contractTransactions.table.date"),
       visible: columnsVisibility.date,
       widthPx: 30,
     },
@@ -67,7 +69,7 @@ export const ContractTransactionsPage = () => {
       jsonFormat: item => {
         return item.data.type || "-";
       },
-      title: "Type",
+      title: t("contractTransactions.table.type"),
       visible: columnsVisibility.type,
       widthPx: 30,
     },
@@ -76,7 +78,7 @@ export const ContractTransactionsPage = () => {
       render: item => {
         return <PurposeBadge purpose={item.data.purpose} />;
       },
-      title: "Purpose",
+      title: t("contractTransactions.table.purpose"),
       visible: columnsVisibility.purpose,
       widthPx: 30,
     },
@@ -92,7 +94,7 @@ export const ContractTransactionsPage = () => {
 
         return item?.data?.script_hash;
       },
-      title: <p>Script hash</p>,
+      title: <p>{t("contractTransactions.table.scriptHash")}</p>,
       visible: columnsVisibility.view,
       widthPx: 50,
     },
@@ -103,7 +105,7 @@ export const ContractTransactionsPage = () => {
           <AdaWithTooltip data={item.tx.deposit} />
         </div>
       ),
-      title: <p className='w-full text-right'>Deposit</p>,
+      title: <p className='w-full text-right'>{t("contractTransactions.table.deposit")}</p>,
       visible: columnsVisibility.deposit,
       widthPx: 40,
     },
@@ -114,7 +116,7 @@ export const ContractTransactionsPage = () => {
           {formatNumber(item.data.unit_steps)}
         </div>
       ),
-      title: <p className='w-full text-right'>Unit steps</p>,
+      title: <p className='w-full text-right'>{t("contractTransactions.table.unitSteps")}</p>,
       visible: columnsVisibility.unit_steps,
       widthPx: 40,
     },
@@ -128,7 +130,7 @@ export const ContractTransactionsPage = () => {
 
         return item.tx.hash;
       },
-      title: "TX hash",
+      title: t("contractTransactions.table.txHash"),
       visible: columnsVisibility.hash,
       widthPx: 50,
     },
@@ -147,7 +149,7 @@ export const ContractTransactionsPage = () => {
 
         return `${item.block.epoch_no}/${item.block.no}`;
       },
-      title: <p className='w-full text-right'>Epoch/Block</p>,
+      title: <p className='w-full text-right'>{t("contractTransactions.table.epochBlock")}</p>,
       visible: columnsVisibility.epoch_block,
       widthPx: 40,
     },
@@ -162,8 +164,8 @@ export const ContractTransactionsPage = () => {
   return (
     <PageBase
       metadataTitle='contractInteractions'
-      title='Contract interactions'
-      breadcrumbItems={[{ label: "Contract interactions" }]}
+      title={t("contractTransactions.title")}
+      breadcrumbItems={[{ label: t("contractTransactions.title") }]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='mb-2 flex w-full items-center justify-between gap-1'>
@@ -171,7 +173,7 @@ export const ContractTransactionsPage = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[250px]'>
-              Total of {formatNumber(totalItems ?? 0)} interactions
+              {t("contractTransactions.totalOf")} {formatNumber(totalItems ?? 0)} {t("contractTransactions.totalOfSuffix")}
             </h3>
           )}
           <div className='flex items-center gap-1'>

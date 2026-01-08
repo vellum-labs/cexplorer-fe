@@ -1,0 +1,957 @@
+{
+  "home": {
+    "title": "Home",
+    "welcome": "Welcome to Cexplorer"
+  },
+  "transactions": {
+    "title": "Transactions",
+    "detail": "Transaction detail",
+    "totalOf": "Total of",
+    "totalOfSuffix": "transactions",
+    "searchPlaceholder": "Search by tx hash...",
+    "tabs": {
+      "content": "Content",
+      "overview": "Overview",
+      "scripts": "Scripts",
+      "contracts": "Contracts",
+      "collateral": "Collateral",
+      "metadata": "Metadata",
+      "mints": "Mints",
+      "withdrawals": "Withdrawals",
+      "referenceInputs": "Reference inputs",
+      "delegations": "Delegations",
+      "governance": "Governance",
+      "trading": "Trading",
+      "message": "Message"
+    },
+    "table": {
+      "date": "Date",
+      "hash": "Hash",
+      "block": "Block",
+      "epochBlock": "Epoch / Block",
+      "totalOutput": "Total Output",
+      "treasuryDonation": "Treasury Donation",
+      "fee": "Fee",
+      "size": "Size",
+      "scriptSize": "Script size"
+    }
+  },
+  "blocks": {
+    "title": "Blocks",
+    "detail": "Block Detail",
+    "totalOf": "Total of",
+    "totalOfSuffix": "blocks",
+    "searchPlaceholder": "Search your results...",
+    "overview": {
+      "title": "Block Overview",
+      "date": "Date",
+      "height": "Height",
+      "epoch": "Epoch",
+      "slot": "Slot",
+      "epochSlot": "epoch slot",
+      "confirmations": "Confirmations",
+      "viewPreviousBlock": "View previous block",
+      "viewNextBlock": "View next block",
+      "cantMovePrevious": "Can't move to previous block",
+      "cantMoveNext": "Can't move to next block"
+    },
+    "transactions": {
+      "title": "Transactions and Fees",
+      "totalTransactions": "Total Transactions",
+      "totalOutput": "Total Output",
+      "totalFees": "Total Fees",
+      "totalRewards": "Total Rewards"
+    },
+    "size": {
+      "title": "Block size"
+    },
+    "search": {
+      "poolId": "Pool ID",
+      "epoch": "Epoch",
+      "hash": "Hash",
+      "slot": "Slot",
+      "height": "Height"
+    },
+    "table": {
+      "epoch": "Epoch",
+      "slot": "Slot",
+      "time": "Time",
+      "block": "Block",
+      "hash": "Hash",
+      "transactions": "Transactions",
+      "output": "Output",
+      "size": "Size",
+      "pool": "Pool"
+    }
+  },
+  "epochs": {
+    "title": "Epochs",
+    "detail": "Epoch detail",
+    "totalOf": "Total of",
+    "totalOfSuffix": "epochs",
+    "current": "Current epoch",
+    "searchPlaceholder": "Search your results...",
+    "tabs": {
+      "epochs": "Epochs",
+      "analytics": "Analytics",
+      "parameters": "Parameters",
+      "blocks": "Blocks"
+    },
+    "info": {
+      "currentEpoch": "Current Epoch",
+      "start": "Start",
+      "left": "Left",
+      "arrived": "Arrived"
+    },
+    "stats": {
+      "title": "Epoch Stats",
+      "blocks": "Blocks",
+      "txs": "TXs",
+      "stake": "Stake",
+      "usage": "Usage",
+      "used": "Used",
+      "unused": "Unused"
+    },
+    "graph": {
+      "blocks": "Blocks",
+      "outputs": "Outputs (₳)",
+      "stake": "Stake (₳)",
+      "transactions": "Transactions",
+      "stakingRewards": "Staking Rewards (₳)",
+      "apy": "APY (%)",
+      "adaPrice": "ADA Price ($)",
+      "yearlyPer1000": "Yearly per 1000 ADA ($)",
+      "epoch": "Epoch",
+      "amount": "Amount",
+      "date": "Date",
+      "tbd": "TBD"
+    },
+    "table": {
+      "epoch": "Epoch",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "blocks": "Blocks",
+      "transactions": "Transactions",
+      "output": "Output",
+      "fees": "Fees",
+      "rewards": "Rewards",
+      "stake": "Stake",
+      "pending": "Pending"
+    }
+  },
+  "pools": {
+    "title": "Stake pools",
+    "detail": "Pool detail",
+    "breadcrumb": "Pools",
+    "list": "Pool list",
+    "cardanoStakePools": "Cardano Stake Pools",
+    "totalOf": "Total of",
+    "totalOfSuffix": "stake pools",
+    "searchPlaceholder": "Search your results...",
+    "displayVote": "Display vote",
+    "sortBy": "Sort By",
+    "filter": {
+      "selectedVotes": "Selected votes",
+      "isDrep": "Is DRep",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "sortOptions": {
+      "nativeRankings": "Native Rankings",
+      "pledgeLeverage": "Pledge Leverage",
+      "topMargins": "Top Margins with Delegators"
+    },
+    "tabs": {
+      "list": "List",
+      "analytics": "Analytics"
+    },
+    "newPools": {
+      "title": "New Pools",
+      "welcome": "Welcome, new pool operators!"
+    },
+    "birthdays": {
+      "title": "Pool Birthdays",
+      "happyBirthday": "Happy Birthday, {{count}} pools!"
+    },
+    "updates": {
+      "title": "Pool Updates",
+      "totalOf": "Total of",
+      "totalOfSuffix": "pools",
+      "searchPlaceholder": "Search your results..."
+    },
+    "deregistrations": {
+      "title": "Pool deregistrations",
+      "totalOf": "Total of",
+      "totalOfSuffix": "deregistrations"
+    },
+    "registrations": {
+      "title": "Pool registrations",
+      "totalOf": "Total of",
+      "totalOfSuffix": "registrations",
+      "table": {
+        "date": "Date",
+        "pool": "Pool",
+        "deposit": "Deposit",
+        "pledge": "Pledge",
+        "fee": "Fee",
+        "txHash": "TX hash",
+        "epochBlock": "Epoch/Block"
+      }
+    },
+    "table": {
+      "date": "Date",
+      "pool": "Pool",
+      "epoch": "Epoch",
+      "fees": "Fees",
+      "pledge": "Pledge",
+      "txHash": "Tx Hash",
+      "birthday": "Birthday",
+      "registered": "Registered",
+      "delegators": "Delegators",
+      "activeStake": "Active Stake",
+      "transactionHash": "Transaction Hash",
+      "certificate": "Certificate",
+      "longetivity": "Longetivity",
+      "deposit": "Deposit",
+      "fee": "Fee",
+      "epochBlock": "Epoch/Block"
+    },
+    "analytics": {
+      "newStakers": "New Stakers",
+      "stakeComposition": "Stake Composition",
+      "firstTimeRegistrations": {
+        "title": "First-time Stake Registrations",
+        "description": "Number of new staking wallets and total stake registered in each epoch."
+      },
+      "stakeToSposNotDreps": {
+        "title": "Stake delegated to SPOs that are not DReps",
+        "description": "Epoch-level view of stake, SPO count, and delegator count delegated to SPOs who are not DReps"
+      },
+      "stakeToSpoDreps": {
+        "title": "Stake delegated to entities that are both SPOs and DRep",
+        "description": "Stake, DRep count, and delegator count delegated to entities serving as both SPOs and DRep"
+      },
+      "legend": {
+        "stake": "Stake (₳)",
+        "count": "Count",
+        "delegators": "Delegators",
+        "spoDrepCount": "SPO+DRep Count"
+      },
+      "tooltip": {
+        "date": "Date",
+        "epoch": "Epoch"
+      }
+    },
+    "detailPage": {
+      "poolId": "Pool ID",
+      "poolDetail": "Pool detail",
+      "retired": "This pool is retired since epoch {{epoch}}",
+      "retiring": "This pool will be retired from epoch {{epoch}}",
+      "delegateTo": "Delegate to [{{ticker}}]",
+      "tabs": {
+        "performance": "Performance",
+        "blocks": "Blocks",
+        "rewards": "Rewards",
+        "delegators": "Delegators",
+        "about": "About",
+        "awards": "Awards",
+        "governance": "Governance",
+        "embed": "Embed"
+      },
+      "about": {
+        "title": "About",
+        "name": "Name",
+        "ticker": "Ticker",
+        "poolId": "Pool ID",
+        "created": "Created",
+        "delegators": "Delegators",
+        "website": "Website"
+      },
+      "stakeAndPledge": {
+        "title": "Stake and Pledge",
+        "saturation": "Saturation",
+        "liveStake": "Live Stake",
+        "activeStake": "Active Stake",
+        "declaredPledge": "Declared Pledge",
+        "activePledge": "Active Pledge",
+        "pledgeLeverage": "Pledge Leverage",
+        "marginFee": "Margin Fee",
+        "fixedFee": "Fixed Fee"
+      },
+      "performance": {
+        "title": "Performance",
+        "recentRoa": "Recent ROA",
+        "lifetimeRoa": "Lifetime ROA",
+        "blocksInEpoch": "Blocks in Epoch",
+        "estimatedBlocks": "Estimated Blocks",
+        "proratedLuck": "Prorated Luck",
+        "blocksLifetime": "Blocks Lifetime",
+        "lifetimeLuck": "Lifetime Luck"
+      },
+      "delegatorsTabs": {
+        "newcomers": "Newcomers",
+        "migrations": "Migrations",
+        "structure": "Structure",
+        "totalNewcomers": "Total of {{count}} newcomers",
+        "totalMigrations": "Total of {{count}} migrations"
+      },
+      "aboutTab": {
+        "aboutPool": "About Pool",
+        "ownersPledge": "Owners (Pledge)",
+        "rewards": "Rewards",
+        "relays": "Relays",
+        "poolCertificates": "Pool Certificates",
+        "retirement": "Retirement",
+        "address": "Address",
+        "activeStake": "Active Stake",
+        "liveStake": "Live Stake",
+        "relativePledge": "Relative Pledge",
+        "pledgeStaked": "Pledge / Staked",
+        "port": "Port",
+        "date": "Date",
+        "tx": "Tx",
+        "activeIn": "Active in",
+        "rewardsAddress": "Rewards Address",
+        "ownerAddress": "Owner Address",
+        "params": "Params",
+        "pledge": "Pledge",
+        "fixedCosts": "Fixed Costs",
+        "margin": "Margin",
+        "metadata": "Metadata",
+        "download": "Download",
+        "transactionId": "Transaction ID",
+        "retiringEpoch": "Retiring epoch"
+      },
+      "awards": {
+        "hash": "Hash",
+        "height": "Height",
+        "epoch": "Epoch",
+        "stake": "Stake",
+        "delegators": "Delegators"
+      },
+      "embed": {
+        "buttons": "Buttons",
+        "spoDelegationButton": "SPO delegation button",
+        "preview": "Preview"
+      },
+      "structure": {
+        "byCount": "Delegators structure by count",
+        "byStake": "Delegators structure by stake"
+      },
+      "delegatorsTable": {
+        "date": "Date",
+        "activeEpoch": "Active epoch",
+        "address": "Address",
+        "poolDelegation": "Pool Delegation",
+        "amount": "Amount",
+        "loyalty": "Loyalty",
+        "registered": "Registered"
+      },
+      "performanceGraph": {
+        "delegators": "Delegators",
+        "luck": "Luck (%)",
+        "blocks": "Blocks",
+        "epochStake": "Epoch Stake",
+        "roa": "ROA (%)",
+        "pledged": "Pledged",
+        "amount": "Amount",
+        "epoch": "Epoch",
+        "date": "Date"
+      },
+      "blocksGraph": {
+        "day": "Day",
+        "blocks": "Blocks",
+        "avgTxCount": "Avg TX Count"
+      },
+      "rewardsGraph": {
+        "delegatorsRoa": "Delegators ROA (%)",
+        "operatorsRoa": "Operators ROA (%)",
+        "delegatorsRewards": "Delegators Rewards (₳)",
+        "operatorRewards": "Operator rewards (₳)",
+        "rewards": "Rewards (₳)",
+        "epoch": "Epoch",
+        "date": "Date"
+      },
+      "performanceTable": {
+        "epoch": "Epoch",
+        "startTime": "Start Time",
+        "endTime": "End Time",
+        "blocks": "Blocks",
+        "epochStake": "Epoch Stake",
+        "delegators": "Delegators",
+        "luck": "Luck",
+        "pledged": "Pledged",
+        "roa": "ROA",
+        "roaTooltip": "ROA: Return on ADA — annualized return percentage for delegators",
+        "current": "Current",
+        "pending": "Pending"
+      },
+      "blocksTable": {
+        "date": "Date",
+        "height": "Height",
+        "epoch": "Epoch",
+        "slot": "Slot",
+        "txs": "TXs",
+        "hash": "Hash",
+        "size": "Size",
+        "protocol": "Protocol",
+        "certCount": "Cert Count"
+      },
+      "rewardsTable": {
+        "epoch": "Epoch",
+        "rewards": "Rewards",
+        "activeStake": "Active Stake",
+        "epochStake": "Epoch Stake",
+        "roa": "ROA",
+        "roaTooltip": "ROA: Return on ADA — annualized return percentage for delegators",
+        "luck": "Luck",
+        "blocks": "Blocks",
+        "delegators": "Delegators",
+        "pending": "Pending",
+        "pendingTwoEpochs": "The data will be available two epochs later",
+        "pendingNextEpoch": "The data will be available next epoch.",
+        "proratedLuckTooltip": "This is prorated luck.",
+        "poolOperatorRewards": "Pool operator rewards",
+        "delegatorRewards": "Delegator rewards"
+      }
+    }
+  },
+  "delegations": {
+    "live": {
+      "title": "Live Delegations"
+    },
+    "multiPool": {
+      "title": "Multi-pool Delegators",
+      "totalOf": "Total of",
+      "totalOfSuffix": "multi-pool delegators."
+    },
+    "retired": {
+      "title": "Delegations to Retired Pools",
+      "stats": {
+        "adaDelegated": "ADA delegated to retired pools",
+        "accountsDelegated": "Accounts delegated to retired pools",
+        "retiredPools": "Retired pools with delegations"
+      },
+      "tabs": {
+        "retired": "Retired",
+        "toBeRetired": "To Be Retired"
+      },
+      "sortOptions": {
+        "date": "Date",
+        "liveStake": "Live Stake"
+      },
+      "table": {
+        "index": "#",
+        "stakePool": "Stake Pool",
+        "retiredInEpoch": "Retired in Epoch",
+        "retiringInEpoch": "Retiring in Epoch",
+        "activeStake": "Active Stake",
+        "delegators": "Delegators",
+        "longevity": "Longevity"
+      }
+    },
+    "table": {
+      "date": "Date",
+      "epoch": "Epoch",
+      "address": "Address",
+      "liveStake": "Live Stake",
+      "delegation": "Delegation",
+      "tx": "Tx",
+      "paymentCredential": "Payment credential",
+      "stake": "Stake",
+      "stakeKeys": "Stake keys"
+    }
+  },
+  "withdrawals": {
+    "title": "Withdrawals",
+    "table": {
+      "date": "Date",
+      "epoch": "Epoch",
+      "address": "Address",
+      "amountControlled": "Amount Controlled",
+      "amountWithdrawn": "Amount Withdrawn",
+      "delegation": "Delegation",
+      "tx": "Tx"
+    }
+  },
+  "rewardsChecker": {
+    "title": "Rewards checker",
+    "searchPlaceholder": "Search stake address...",
+    "addressDetail": "Address detail",
+    "invalidAddress": "Invalid address",
+    "noStakeKey": "This address has no stake key"
+  },
+  "groups": {
+    "title": "Cardano Groups (Donuts)",
+    "breadcrumb": "Groups",
+    "totalOf": "Total of",
+    "totalOfSuffix": "groups",
+    "searchPlaceholder": "Search your results...",
+    "info": "This dashboard is managed by Cardano community. Everyone can add or modify existing groups via",
+    "alsoDrep": "Also DRep",
+    "yes": "Yes",
+    "no": "No",
+    "charts": {
+      "poolsCount": "Pools Count",
+      "poolStake": "Pool Stake",
+      "pledge": "Pledge",
+      "pledgePerPool": "μ Pledge per Pool"
+    },
+    "table": {
+      "poolsCount": "Pools count",
+      "groupName": "Group name",
+      "poolStake": "Pool stake",
+      "delegators": "Delegators",
+      "share": "Share",
+      "pledge": "Pledge",
+      "pledgePerPool": "μ Pledge per pool",
+      "alsoDrep": "Also DRep"
+    },
+    "tooltip": {
+      "others": "Others",
+      "items": "items",
+      "total": "Total",
+      "andMore": "and {{count}} more"
+    }
+  },
+  "dreps": {
+    "title": "Delegated Representatives",
+    "detail": "DRep detail",
+    "list": "DRep list",
+    "breadcrumb": "Delegated representatives",
+    "totalOf": "Total of",
+    "totalOfSuffix": "dreps",
+    "searchPlaceholder": "Search by Drep ID...",
+    "displayVote": "Display vote",
+    "tabs": {
+      "list": "List",
+      "delegations": "Delegations",
+      "analytics": "Analytics"
+    },
+    "stats": {
+      "registeredDreps": "Registered DReps",
+      "activeVotingStake": "Active voting stake",
+      "delegators": "Delegators",
+      "stakeToRetiredDreps": "Stake to retired DReps",
+      "active": "Active",
+      "inactive": "Inactive",
+      "retired": "Retired",
+      "abstain": "Abstain",
+      "noConfidence": "No confidence",
+      "delegations": "Delegations",
+      "retiredDreps": "Retired DReps"
+    },
+    "filter": {
+      "selectedVotes": "Selected votes",
+      "alsoSpo": "Also SPO",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "table": {
+      "ranking": "#",
+      "status": "Status",
+      "drepName": "DRep name",
+      "votingPower": "Voting power",
+      "lifetimeActivity": "Lifetime Activity",
+      "lifetimeActivityTooltip": "Voting activity over DRep's lifetime",
+      "recentActivity": "Recent Activity",
+      "recentActivityTooltip": "DRep's voting activity over the past 6 months",
+      "ownerStake": "Owner stake",
+      "averageStake": "Average stake",
+      "registered": "Registered",
+      "delegators": "Delegators",
+      "drepMetadata": "DRep metadata",
+      "selectedVote": "Selected vote",
+      "spo": "SPO",
+      "topDelegator": "Top delegator"
+    },
+    "delegations": {
+      "totalOf": "Total of",
+      "totalOfSuffix": "delegations",
+      "table": {
+        "date": "Date",
+        "address": "Address",
+        "amount": "Amount",
+        "delegation": "Delegation",
+        "tx": "Tx"
+      }
+    },
+    "analytics": {
+      "poolGraph": "Pool Graph",
+      "stakeCompositionByRole": "Stake Composition by Role",
+      "delegationChanges": "Delegation Changes",
+      "adaInGovernance": "ADA in Governance",
+      "activeVotingStake": "Active Voting Stake",
+      "drepSize": "Drep Size",
+      "tabs": {
+        "votingPower": "Voting Power",
+        "delegators": "Delegators",
+        "ownerStake": "Owner Stake",
+        "averageStake": "Average Stake"
+      },
+      "pie": {
+        "abstainDrep": "Abstain DRep",
+        "noConfidenceDrep": "No Confidence DRep",
+        "delegatedToDreps": "Delegated to DReps",
+        "abstainNotActive": "Abstain (not active)",
+        "noConfidence": "No Confidence"
+      }
+    },
+    "detailPage": {
+      "drepId": "Drep ID",
+      "promote": "Promote",
+      "delegateTo": "Delegate to {{name}}",
+      "tabs": {
+        "governanceActions": "Governance actions",
+        "delegators": "Delegators",
+        "stats": "Stats",
+        "embed": "Embed",
+        "about": "About"
+      },
+      "about": {
+        "title": "About",
+        "name": "Name",
+        "drepId": "DRep ID",
+        "drepIdLegacy": "DRep ID (Legacy)",
+        "stakeKey": "Stake key",
+        "registered": "Registered",
+        "lastUpdated": "Last updated",
+        "alwaysAbstain": "Always Abstain",
+        "alwaysNoConfidence": "Always No Confidence",
+        "naSystemDrep": "N/A (system DRep)",
+        "systemDefault": "System Default",
+        "unknown": "Unknown"
+      },
+      "voting": {
+        "title": "Voting",
+        "status": "Status",
+        "drepMetadata": "DRep metadata",
+        "votingPower": "Voting power",
+        "ownVotingPower": "Own voting power",
+        "rewardsAddress": "Rewards address",
+        "active": "Active",
+        "inactive": "Inactive",
+        "notProvided": "Not provided",
+        "provided": "Provided"
+      },
+      "governance": {
+        "title": "Governance",
+        "lastVote": "Last vote",
+        "recentActivity": "Recent Activity",
+        "recentActivityTooltip": "DRep's voting activity over the past 6 months",
+        "lifetimeActivity": "Lifetime Activity",
+        "lifetimeActivityTooltip": "Voting activity over DRep's lifetime",
+        "voted": "Voted:",
+        "yes": "Yes",
+        "abstain": "Abstain",
+        "no": "No",
+        "behavior": "Behavior",
+        "delegatedStake": "Delegated Stake",
+        "abstainBehavior": "Automatically abstains from all governance votes.",
+        "noConfidenceBehavior": "Automatically votes 'No Confidence' depending on the action type."
+      },
+      "governanceActionsTable": {
+        "date": "Date",
+        "type": "Type",
+        "governanceAction": "Governance action",
+        "vote": "Vote",
+        "votingPower": "Voting Power",
+        "tx": "Tx"
+      },
+      "delegatorsTabs": {
+        "allDelegators": "All Delegators",
+        "newDelegators": "New Delegators",
+        "migrations": "Migrations",
+        "structure": "Structure"
+      },
+      "delegatorsTable": {
+        "delegated": "Delegated",
+        "activeIn": "Active In",
+        "stake": "Stake",
+        "amount": "Amount",
+        "drepDelegation": "DRep Delegation",
+        "loyalty": "Loyalty",
+        "tx": "Tx"
+      },
+      "statsGraph": {
+        "power": "Power",
+        "delegators": "Delegators",
+        "epoch": "Epoch",
+        "date": "Date"
+      },
+      "embed": {
+        "buttons": "Buttons",
+        "drepDelegationButton": "DRep delegation button",
+        "preview": "Preview"
+      },
+      "aboutFields": {
+        "image_url": "Image URL",
+        "given_name": "Given name",
+        "objectives": "Objectives",
+        "motivations": "Motivations",
+        "qualifications": "Qualifications",
+        "payment_address": "Payment address"
+      },
+      "structure": {
+        "byCount": "Delegators structure by count",
+        "byStake": "Delegators structure by stake"
+      }
+    }
+  },
+  "assets": {
+    "title": "Assets",
+    "detail": "Asset detail",
+    "tokens": "Tokens",
+    "nfts": "NFTs",
+    "all": "All Assets",
+    "recentTokens": "Recent Tokens",
+    "recentNfts": "Recent NFTs",
+    "searchPlaceholder": "Search by asset...",
+    "tabs": {
+      "all": "All",
+      "tokens": "Tokens",
+      "nfts": "NFTs"
+    },
+    "table": {
+      "name": "Name",
+      "fingerprint": "Fingerprint",
+      "policy": "Policy",
+      "quantity": "Quantity",
+      "holders": "Holders",
+      "transactions": "Transactions",
+      "mintTime": "Mint Time",
+      "type": "Type",
+      "token": "Token",
+      "nft": "NFT",
+      "supply": "Supply",
+      "price": "Price"
+    }
+  },
+  "contractTransactions": {
+    "title": "Contract interactions",
+    "totalOf": "Total of",
+    "totalOfSuffix": "interactions",
+    "table": {
+      "date": "Date",
+      "type": "Type",
+      "purpose": "Purpose",
+      "scriptHash": "Script hash",
+      "deposit": "Deposit",
+      "unitSteps": "Unit steps",
+      "txHash": "TX hash",
+      "epochBlock": "Epoch/Block"
+    }
+  },
+  "metadata": {
+    "title": "Metadata Transactions List",
+    "totalOf": "Total of",
+    "totalOfSuffix": "transactions",
+    "searchPlaceholder": "Search your results...",
+    "search": {
+      "hash": "Hash",
+      "key": "Key"
+    },
+    "table": {
+      "date": "Date",
+      "key": "Key",
+      "txHash": "TX Hash",
+      "size": "Size",
+      "metadata": "Metadata"
+    }
+  },
+  "treasuryDonations": {
+    "title": "Treasury Donations",
+    "tabs": {
+      "recentDonations": "Recent Donations",
+      "epochByEpoch": "Epoch by epoch"
+    },
+    "info": {
+      "title": "What is the Cardano Treasury?",
+      "description": "The Cardano Treasury is a decentralized funding mechanism that supports the development and growth of the Cardano ecosystem. Donations help fund proposals voted on by the community through Cardano's governance system.",
+      "donateButton": "Donate to Treasury",
+      "donateTooltip": "Note: MeshJS does not support treasury donations yet. You can donate only to Cexplorer for now."
+    },
+    "success": {
+      "title": "Transaction successful, thank you for your donation!",
+      "txHashLabel": "Transaction Hash:"
+    }
+  },
+  "governance": {
+    "title": "Governance",
+    "actions": "Governance actions",
+    "votes": "Votes",
+    "constitution": "Constitution"
+  },
+  "address": {
+    "title": "Address",
+    "detail": "Address detail"
+  },
+  "stake": {
+    "title": "Stake address",
+    "detail": "Stake detail",
+    "detailPage": {
+      "title": "Stake Detail",
+      "breadcrumb": "Address",
+      "stakeAddress": "Stake address",
+      "tabs": {
+        "assets": "Assets",
+        "transactions": "Transactions",
+        "withdrawals": "Withdrawals",
+        "addresses": "Addresses",
+        "delegations": "Delegations",
+        "rewards": "Rewards",
+        "trading": "Trading"
+      },
+      "overview": {
+        "title": "Overview",
+        "handle": "Handle",
+        "totalBalance": "Total balance",
+        "assetsBalance": "Assets balance",
+        "adaBalance": "ADA balance",
+        "privateName": "Private name"
+      },
+      "staking": {
+        "title": "Staking",
+        "status": "Status",
+        "active": "Active",
+        "inactive": "Inactive",
+        "deregistered": "Deregistered",
+        "stakePool": "Stake pool",
+        "rewardsAvailable": "Rewards available",
+        "drepDelegation": "DRep delegation",
+        "alwaysAbstain": "Always abstain",
+        "alwaysNoConfidence": "Always no confidence",
+        "amount": "Amount",
+        "since": "Since",
+        "id": "ID",
+        "rewardsWithdrawn": "Rewards withdrawn",
+        "stakeKey": "Stake key",
+        "rawAddress": "Raw address"
+      },
+      "delegationsTab": {
+        "stakePools": "Stake Pools",
+        "dreps": "DReps"
+      },
+      "withdrawalsTable": {
+        "totalOf": "Total of",
+        "withdrawals": "withdrawals",
+        "searchPlaceholder": "Search by tx hash...",
+        "date": "Date",
+        "hash": "Hash",
+        "epochBlock": "Epoch / Block",
+        "totalOutput": "Total Output",
+        "fee": "Fee",
+        "amount": "Amount",
+        "size": "Size"
+      },
+      "poolDelegationsTable": {
+        "delegationHistory": "Delegation history",
+        "date": "Date",
+        "activeEpoch": "Active epoch",
+        "stakePool": "Stake Pool",
+        "activeStake": "Active Stake",
+        "loyalty": "Loyalty",
+        "registered": "Registered",
+        "tx": "Tx"
+      },
+      "drepDelegationsTable": {
+        "delegationHistory": "DRep Delegation history",
+        "date": "Date",
+        "drep": "DRep",
+        "activeStake": "Active Stake",
+        "liveStake": "Live Stake",
+        "loyalty": "Loyalty",
+        "tx": "Tx"
+      },
+      "multiDelegationsTable": {
+        "title": "Multi delegations",
+        "address": "Address",
+        "activeEpoch": "Active epoch",
+        "stakePool": "Stake Pool",
+        "notDelegated": "Not delegated",
+        "activeStake": "Active Stake",
+        "loyalty": "Loyalty",
+        "registered": "Registered"
+      }
+    },
+    "registrations": {
+      "title": "Stake registrations",
+      "totalOf": "Total of",
+      "totalOfSuffix": "registrations",
+      "table": {
+        "date": "Date",
+        "type": "Type",
+        "stakeKey": "Stake key",
+        "deposit": "Deposit",
+        "txHash": "TX hash",
+        "epochBlock": "Epoch/Block"
+      }
+    },
+    "deregistrations": {
+      "title": "Stake deregistrations",
+      "totalOf": "Total of",
+      "totalOfSuffix": "deregistrations",
+      "table": {
+        "date": "Date",
+        "type": "Type",
+        "stakeKey": "Stake key",
+        "deposit": "Deposit",
+        "txHash": "TX hash",
+        "epochBlock": "Epoch/Block"
+      }
+    }
+  },
+  "policy": {
+    "title": "Policy",
+    "detail": "Policy detail"
+  },
+  "script": {
+    "title": "Script",
+    "detail": "Script detail"
+  },
+  "analytics": {
+    "title": "Analytics",
+    "network": "Network analytics",
+    "genesis": "Genesis addresses",
+    "graph": {
+      "blocks": "Blocks",
+      "blockSize": "Block Size",
+      "movingAverage": "Moving Average (5 epochs)",
+      "transactions": "Transactions",
+      "version": "Version",
+      "blockNo": "Block No",
+      "dates": "Dates",
+      "smartContractTransactions": "Smart contract transactions",
+      "datum": "Datum",
+      "delegation": "Delegation",
+      "delegationVote": "Delegation vote",
+      "drepRegistration": "DRep registration",
+      "govActionProposal": "Government action proposal",
+      "maTokenMinting": "Multi-Asset minting",
+      "maTokenTransfers": "Multi-Asset transfers",
+      "poolUpdate": "Pool update",
+      "redeemerData": "Redeemer data",
+      "stakeRegistration": "Stake registration",
+      "stakeDeregistration": "Stake deregistration",
+      "txMetadata": "Transaction metadata",
+      "withdrawal": "Withdrawal",
+      "other": "Other"
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "settings": "Settings",
+    "watchlist": "Watchlist",
+    "labels": "Labels"
+  },
+  "admin": {
+    "title": "Admin",
+    "articles": "Admin articles",
+    "wiki": "Admin wiki"
+  },
+  "errors": {
+    "notFound": "Page not found",
+    "serverError": "Server error",
+    "unauthorized": "Unauthorized"
+  }
+}

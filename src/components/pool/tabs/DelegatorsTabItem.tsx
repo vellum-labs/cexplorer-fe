@@ -17,8 +17,10 @@ import { poolDelegatorsTableOptions } from "@/constants/tables/poolDelegatorsTab
 import { usePoolDelegatorsStructureStore } from "@/stores/tables/poolDelegatorsStructureStore";
 import { usePoolMigrationsTableStore } from "@/stores/tables/poolMigrationsTableStore";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const DelegatorsTabItem = () => {
+  const { t } = useAppTranslation("pages");
   const route = getRouteApi("/pool/$id");
   const { id } = route.useParams();
   const miscBasic = useFetchMiscBasic();
@@ -88,7 +90,7 @@ const DelegatorsTabItem = () => {
   const delegatorPoolTabs = [
     {
       key: "newcomers",
-      label: "Newcomers",
+      label: t("pools.detailPage.delegatorsTabs.newcomers"),
       content: (
         <div className='flex w-full flex-col items-center gap-2'>
           <PoolDelegatorsTable
@@ -106,7 +108,7 @@ const DelegatorsTabItem = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : delegatorTableTotalItems > 0 ? (
             <h3 className='basis-[220px]'>
-              Total of {formatNumber(delegatorTableTotalItems)} newcomers
+              {t("pools.detailPage.delegatorsTabs.totalNewcomers", { count: String(formatNumber(delegatorTableTotalItems)) })}
             </h3>
           ) : (
             <></>
@@ -134,7 +136,7 @@ const DelegatorsTabItem = () => {
     },
     {
       key: "migrations",
-      label: "Migrations",
+      label: t("pools.detailPage.delegatorsTabs.migrations"),
       content: (
         <div className='flex w-full flex-col items-center gap-2'>
           <PoolMigrationsTable
@@ -152,7 +154,7 @@ const DelegatorsTabItem = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : migrationsTotalItems > 0 ? (
             <h3 className='basis-[220px]'>
-              Total of {formatNumber(migrationsTotalItems)} migrations
+              {t("pools.detailPage.delegatorsTabs.totalMigrations", { count: String(formatNumber(migrationsTotalItems)) })}
             </h3>
           ) : (
             <></>
@@ -180,7 +182,7 @@ const DelegatorsTabItem = () => {
     },
     {
       key: "structure",
-      label: "Structure",
+      label: t("pools.detailPage.delegatorsTabs.structure"),
       content: (
         <div className='flex w-full flex-col gap-4'>
           <PoolStructureTable

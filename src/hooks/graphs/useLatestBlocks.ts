@@ -5,6 +5,7 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useWindowDimensions } from "@vellumlabs/cexplorer-sdk";
 import { useNavigate } from "@tanstack/react-router";
 import { useGraphColors } from "../useGraphColors";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface UseLatestBlocks {
   onEvents: (params: any) => void;
@@ -20,6 +21,7 @@ export const useLatestBlocks = ({
   query,
   sortedVersions,
 }: UseLatestBlocksArgs): UseLatestBlocks => {
+  const { t } = useAppTranslation("pages");
   const { data } = query;
   const navigate = useNavigate();
 
@@ -73,8 +75,8 @@ export const useLatestBlocks = ({
         const version = params.data.version;
 
         return `
-          Version: ${version}<br />
-          Block No: ${blockNo}
+          ${t("analytics.graph.version")}: ${version}<br />
+          ${t("analytics.graph.blockNo")}: ${blockNo}
         `;
       },
     },

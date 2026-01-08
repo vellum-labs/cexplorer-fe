@@ -11,6 +11,7 @@ import { useMiscConst } from "../useMiscConst";
 import { useMiscRate } from "../useMiscRate";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface UseEpochBlockchain {
   option: ReactEChartsProps["option"];
@@ -24,6 +25,8 @@ interface UseEpochBlockchainArgs {
 export const useEpochBlockchain = ({
   data,
 }: UseEpochBlockchainArgs): UseEpochBlockchain => {
+  const { t } = useAppTranslation("pages");
+
   const filteredData = data
     .filter(d => d?.no)
     .filter(
@@ -37,15 +40,27 @@ export const useEpochBlockchain = ({
         d?.params?.monetary_expand_rate,
     );
 
+  // Translation mapping for graph series
+  const graphLabels = {
+    blocks: t("epochs.graph.blocks"),
+    outputs: t("epochs.graph.outputs"),
+    stake: t("epochs.graph.stake"),
+    transactions: t("epochs.graph.transactions"),
+    stakingRewards: t("epochs.graph.stakingRewards"),
+    apy: t("epochs.graph.apy"),
+    adaPrice: t("epochs.graph.adaPrice"),
+    yearlyPer1000: t("epochs.graph.yearlyPer1000"),
+  };
+
   const [graphsVisibility, setGraphsVisibility] = useState({
-    Blocks: true,
-    Outputs: true,
-    "Stake (₳)": true,
-    Transactions: true,
-    "Staking Rewards (₳)": true,
-    "APY (%)": true,
-    "ADA Price ($)": true,
-    "Yearly per 1000 ADA ($)": true,
+    [graphLabels.blocks]: true,
+    [graphLabels.outputs]: true,
+    [graphLabels.stake]: true,
+    [graphLabels.transactions]: true,
+    [graphLabels.stakingRewards]: true,
+    [graphLabels.apy]: true,
+    [graphLabels.adaPrice]: true,
+    [graphLabels.yearlyPer1000]: true,
   });
   const { data: miscBasic } = useFetchMiscBasic(true);
   const rates = useMiscRate(miscBasic?.data.version.rate);
@@ -134,14 +149,14 @@ export const useEpochBlockchain = ({
       },
       type: "scroll",
       data: [
-        "Blocks",
-        "Outputs (₳)",
-        "Stake (₳)",
-        "Transactions",
-        "Staking Rewards (₳)",
-        "APY (%)",
-        "ADA Price ($)",
-        "Yearly per 1000 ADA ($)",
+        graphLabels.blocks,
+        graphLabels.outputs,
+        graphLabels.stake,
+        graphLabels.transactions,
+        graphLabels.stakingRewards,
+        graphLabels.apy,
+        graphLabels.adaPrice,
+        graphLabels.yearlyPer1000,
       ],
       textStyle: {
         color: textColor,
@@ -161,10 +176,10 @@ export const useEpochBlockchain = ({
       formatter: function (params) {
         const marker = dataPoint => dataPoint?.marker;
         const name = dataPoint => {
-          if (dataPoint.seriesName === "Stake (₳)") return "Stake";
-          if (dataPoint.seriesName === "Staking Rewards (₳)")
-            return "Staking Rewards";
-          if (dataPoint.seriesName === "Outputs (₳)") return "Outputs";
+          if (dataPoint.seriesName === graphLabels.stake) return t("epochs.stats.stake");
+          if (dataPoint.seriesName === graphLabels.stakingRewards)
+            return t("epochs.graph.stakingRewards").replace(" (₳)", "");
+          if (dataPoint.seriesName === graphLabels.outputs) return t("epochs.graph.outputs").replace(" (₳)", "");
           return dataPoint?.seriesName;
         };
 
@@ -174,18 +189,18 @@ export const useEpochBlockchain = ({
           miscConst?.epoch.start_time ?? "",
         );
 
-        let tooltipContent = `Date: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (Epoch: ${params[0].axisValue})<hr>`;
+        let tooltipContent = `${t("epochs.graph.date")}: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${t("epochs.graph.epoch")}: ${params[0].axisValue})<hr>`;
 
         params.forEach(param => {
           const seriesName = param.seriesName;
           let value = param.data;
 
           if (value === null) {
-            value = "TBD";
+            value = t("epochs.graph.tbd");
           } else if (
-            seriesName === "Outputs (₳)" ||
-            seriesName === "Stake (₳)" ||
-            seriesName === "Staking Rewards (₳)"
+            seriesName === graphLabels.outputs ||
+            seriesName === graphLabels.stake ||
+            seriesName === graphLabels.stakingRewards
           ) {
             value = lovelaceToAda(Number(value));
           } else {
@@ -208,7 +223,7 @@ export const useEpochBlockchain = ({
       type: "category",
       data: epochs,
       inverse: true,
-      name: "Epoch",
+      name: t("epochs.graph.epoch"),
       nameLocation: "middle",
       nameGap: 28,
       axisLabel: {
@@ -225,7 +240,7 @@ export const useEpochBlockchain = ({
         type: "value",
         position: "left",
         show: true,
-        name: "Amount",
+        name: t("epochs.graph.amount"),
         nameRotate: 90,
         nameLocation: "middle",
         nameGap: 5,
@@ -413,7 +428,7 @@ export const useEpochBlockchain = ({
       {
         type: "line",
         data: blocks,
-        name: "Blocks",
+        name: graphLabels.blocks,
         yAxisIndex: 0,
         showSymbol: false,
         itemStyle: {
@@ -424,7 +439,7 @@ export const useEpochBlockchain = ({
       {
         type: "line",
         data: outputs,
-        name: "Outputs (₳)",
+        name: graphLabels.outputs,
         showSymbol: false,
         yAxisIndex: 1,
         itemStyle: {
@@ -435,7 +450,7 @@ export const useEpochBlockchain = ({
       {
         type: "line",
         data: stakes,
-        name: "Stake (₳)",
+        name: graphLabels.stake,
         showSymbol: false,
         yAxisIndex: 2,
         itemStyle: {
@@ -446,7 +461,7 @@ export const useEpochBlockchain = ({
       {
         type: "line",
         data: transactions,
-        name: "Transactions",
+        name: graphLabels.transactions,
         showSymbol: false,
         yAxisIndex: 3,
         itemStyle: {
@@ -457,7 +472,7 @@ export const useEpochBlockchain = ({
       {
         type: "line",
         data: rewards,
-        name: "Staking Rewards (₳)",
+        name: graphLabels.stakingRewards,
         showSymbol: false,
         yAxisIndex: 4,
         connectNulls: false,
@@ -469,7 +484,7 @@ export const useEpochBlockchain = ({
       {
         type: "line",
         data: apy,
-        name: "APY (%)",
+        name: graphLabels.apy,
         yAxisIndex: 5,
         showSymbol: false,
         connectNulls: false,
@@ -484,7 +499,7 @@ export const useEpochBlockchain = ({
       {
         type: "line",
         data: adaPrice,
-        name: "ADA Price ($)",
+        name: graphLabels.adaPrice,
         showSymbol: false,
         yAxisIndex: 6,
         areaStyle: {
@@ -498,7 +513,7 @@ export const useEpochBlockchain = ({
       {
         type: "line",
         data: yearlyPerAda,
-        name: "Yearly per 1000 ADA ($)",
+        name: graphLabels.yearlyPer1000,
         showSymbol: false,
         yAxisIndex: 7,
         connectNulls: false,

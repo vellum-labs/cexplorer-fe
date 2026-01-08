@@ -88,7 +88,7 @@ export const DelegatorStructureView: FC<DelegatorStructureViewProps> = ({
 
   return (
     <div className='flex w-full flex-col gap-2'>
-      <DelegatorStructureCharts items={animals} />
+      <DelegatorStructureCharts items={animals} type={columnType} />
       {setSortByAnimalSize && (
         <div className='flex w-full justify-end'>
           <div className='flex items-center gap-1'>

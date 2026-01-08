@@ -8,12 +8,14 @@ import { getRouteApi } from "@tanstack/react-router";
 import PoolRewardsGraph from "../graphs/PoolRewardsGraph";
 import PoolRewardsTable from "../PoolRewardsTable";
 import { usePoolRewardGraph } from "@/hooks/pool/usePoolRewardGraph";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface RewardsTabItemProps {
   query: UseQueryResult<PoolDetailResponse, unknown>;
 }
 
 const RewardsTabItem: FC<RewardsTabItemProps> = ({ query }) => {
+  const { t } = useAppTranslation("pages");
   const data = query.data?.data;
 
   const currentEpochStake = data?.live_stake;
@@ -29,7 +31,7 @@ const RewardsTabItem: FC<RewardsTabItemProps> = ({ query }) => {
 
   return (
     <div>
-      <h2 className='mb-1'>Rewards</h2>
+      <h2 className='mb-1'>{t("pools.detailPage.tabs.rewards")}</h2>
       <PoolRewardsGraph
         epochs={epochs}
         leaderLovelace={leaderLovelace}

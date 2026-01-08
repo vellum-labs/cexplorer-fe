@@ -24,6 +24,7 @@ import { configJSON } from "@/constants/conf";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface AddressDetailOverviewProps {
   data: StakeDetailData | undefined;
@@ -34,6 +35,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
   data,
   stakeAddress,
 }) => {
+  const { t } = useAppTranslation("pages");
   const address = data?.view || stakeAddress;
   const addrObj = Address.from(address);
   const rawAddress = Address.toHexString(addrObj.raw);
@@ -58,7 +60,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
   const overviewList = [
     data?.adahandle
       ? {
-          label: "Handle",
+          label: t("stake.detailPage.overview.handle"),
           value: (
             <AdaHandleBadge
               hex={data?.adahandle?.hex}
@@ -69,7 +71,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
         }
       : undefined,
     {
-      label: "Total balance",
+      label: t("stake.detailPage.overview.totalBalance"),
       value: (
         <TotalSumWithRates
           sum={totalBalanceSum}
@@ -78,9 +80,9 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
         />
       ),
     },
-    tokenMarket ? { label: "Assets balance", value: "TBD" } : undefined,
+    tokenMarket ? { label: t("stake.detailPage.overview.assetsBalance"), value: "TBD" } : undefined,
     {
-      label: "ADA balance",
+      label: t("stake.detailPage.overview.adaBalance"),
       value: (
         <TotalSumWithRates
           sum={adaBalanceSum}
@@ -89,25 +91,25 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
         />
       ),
     },
-    { label: "Private name", value: <AddCustomLabel address={address} /> },
+    { label: t("stake.detailPage.overview.privateName"), value: <AddCustomLabel address={address} /> },
   ];
 
   const stakeKey = [
     {
-      label: "Status",
+      label: t("stake.detailPage.staking.status"),
       value: (
         <>
           {data?.stake?.info?.active ? (
             <Badge className='' color='green'>
-              Active
+              {t("stake.detailPage.staking.active")}
             </Badge>
           ) : data?.stake?.info?.active === null ? (
             <Badge className='' color='red'>
-              Inactive
+              {t("stake.detailPage.staking.inactive")}
             </Badge>
           ) : (
             <Badge className='' color='yellow'>
-              Deregistered
+              {t("stake.detailPage.staking.deregistered")}
             </Badge>
           )}
         </>
@@ -115,7 +117,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
     },
     data?.stake?.info?.active
       ? {
-          label: "Stake pool",
+          label: t("stake.detailPage.staking.stakePool"),
           value: (
             <div className='w-full max-w-[220px] sm:max-w-[250px]'>
               <PoolCell
@@ -136,7 +138,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
         }
       : undefined,
     {
-      label: "Rewards available",
+      label: t("stake.detailPage.staking.rewardsAvailable"),
       value: (
         <AdaWithTooltip
           data={(data?.reward?.total ?? 0) - (data?.reward?.withdrawn ?? 0)}
@@ -144,7 +146,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
       ),
     },
     {
-      label: "DRep delegation",
+      label: t("stake.detailPage.staking.drepDelegation"),
       value: (
         <div className='flex flex-col'>
           {data?.vote?.vote?.live_drep === "drep_always_abstain" ? (
@@ -155,7 +157,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
             >
               {data?.vote?.drep?.data?.given_name &&
                 data?.vote?.drep?.data?.given_name}
-              <span className='text-text-sm text-primary'>Always abstain</span>
+              <span className='text-text-sm text-primary'>{t("stake.detailPage.staking.alwaysAbstain")}</span>
             </Link>
           ) : data?.vote?.vote?.live_drep === "drep_always_no_confidence" ? (
             <Link
@@ -166,28 +168,28 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
               {data?.vote?.drep?.data?.given_name &&
                 data?.vote?.drep?.data?.given_name}
               <span className='text-text-sm text-primary'>
-                Always no confidence
+                {t("stake.detailPage.staking.alwaysNoConfidence")}
               </span>
             </Link>
           ) : (
             <AttributeDropdown
               items={[
                 {
-                  label: "Status",
+                  label: t("stake.detailPage.staking.status"),
                   value: data?.vote?.drep?.is_active ? (
-                    <span className='text-greenText'>Active</span>
+                    <span className='text-greenText'>{t("stake.detailPage.staking.active")}</span>
                   ) : (
-                    <span className='text-redText'>Inactive</span>
+                    <span className='text-redText'>{t("stake.detailPage.staking.inactive")}</span>
                   ),
                 },
                 {
-                  label: "Amount",
+                  label: t("stake.detailPage.staking.amount"),
                   value: data?.vote?.drep?.amount
                     ? formatNumber(data?.vote?.drep?.amount)
                     : "-",
                 },
                 {
-                  label: "Since",
+                  label: t("stake.detailPage.staking.since"),
                   value: (
                     <DateCell
                       time={data?.vote?.drep?.since}
@@ -196,7 +198,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
                   ),
                 },
                 {
-                  label: "ID",
+                  label: t("stake.detailPage.staking.id"),
                   value: (
                     <div className='flex items-center gap-1'>
                       <span className={"text-text-xs"}>
@@ -244,11 +246,11 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
       visible: !!data?.vote,
     },
     {
-      label: "Rewards withdrawn",
+      label: t("stake.detailPage.staking.rewardsWithdrawn"),
       value: <AdaWithTooltip data={data?.reward?.withdrawn ?? 0} />,
     },
     {
-      label: "Stake key",
+      label: t("stake.detailPage.staking.stakeKey"),
       value: (
         <p className='flex items-center gap-[6px]' title={address}>
           <span>{formatString(address, "longer")}</span>
@@ -257,7 +259,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
       ),
     },
     {
-      label: "Raw address",
+      label: t("stake.detailPage.staking.rawAddress"),
       value: (
         <p className='flex items-center gap-[6px]' title={rawAddress}>
           <span>{formatString(rawAddress, "longer")}</span>
@@ -270,7 +272,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
   return (
     <>
       <OverviewCard
-        title='Overview'
+        title={t("stake.detailPage.overview.title")}
         overviewList={overviewList}
         className='min-h-[320px]'
         endContent={
@@ -281,7 +283,7 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
         }
       />
       <OverviewCard
-        title='Staking'
+        title={t("stake.detailPage.staking.title")}
         overviewList={stakeKey}
         className='min-h-[320px]'
       />

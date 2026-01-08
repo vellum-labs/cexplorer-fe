@@ -16,8 +16,10 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import type { PoolsListColumns } from "@/types/tableTypes";
 import { useFetchMiscSearch } from "@/services/misc";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {
+  const { t } = useAppTranslation(["pages", "common"]);
   const { page, sort, order } = useSearch({
     from: watchlist ? "/watchlist/" : "/pool/",
   });
@@ -71,7 +73,7 @@ const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {
                 <LoadingSkeleton height='27px' width={"220px"} />
               ) : (
                 <h3 className='basis-[230px]'>
-                  Total of {formatNumber(totalItems)} stake pools
+                  {t("pools.totalOf")} {formatNumber(totalItems)} {t("pools.totalOfSuffix")}
                 </h3>
               )}
             </div>
@@ -82,6 +84,7 @@ const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {
                 selectItems={selectItems}
                 setSelectedItem={setSelectedItem}
                 selectedItem={selectedItem}
+                labelName={t("pools.sortBy") + ":"}
               />
             </div>
             <div className='flex items-center gap-1 min-[790px]:flex-grow-0'>
@@ -92,7 +95,7 @@ const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {
                 />
               )}
               <TableSearchInput
-                placeholder='Search your results...'
+                placeholder={t("pools.searchPlaceholder")}
                 value={tableSearch}
                 onchange={setTableSearch}
                 wrapperClassName='min-[790px]:w-[320px] hidden min-[790px]:flex w-full'
@@ -102,7 +105,7 @@ const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {
               <Button
                 size='md'
                 leftIcon={<PlusIcon size={15} />}
-                label='Display vote'
+                label={t("pools.displayVote")}
                 variant='tertiary'
                 onClick={() => setDisplayVoteModal(true)}
               />
@@ -110,7 +113,7 @@ const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {
                 rows={rows}
                 setRows={setRows}
                 columnsOptions={poolsListTableOptions.map(item => ({
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -118,7 +121,7 @@ const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {
               />
             </div>
             <TableSearchInput
-              placeholder='Search your results...'
+              placeholder={t("pools.searchPlaceholder")}
               value={tableSearch}
               onchange={setTableSearch}
               wrapperClassName='min-[790px]:w-[320px] flex min-[790px]:hidden w-full'
@@ -138,14 +141,14 @@ const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {
                   className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
                 >
                   <span>
-                    {key === "gov_action" ? "Selected votes:" : "Is Drep"}:
+                    {key === "gov_action" ? t("pools.filter.selectedVotes") : t("pools.filter.isDrep")}:
                   </span>
                   <span>
                     {key === "gov_action"
                       ? formatString(value, "long")
                       : +value === 1
-                        ? "Yes"
-                        : "No"}
+                        ? t("pools.filter.yes")
+                        : t("pools.filter.no")}
                   </span>
                   <X
                     size={13}

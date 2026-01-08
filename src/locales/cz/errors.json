@@ -1,0 +1,32 @@
+{
+  "network": {
+    "connectionFailed": "Připojení selhalo",
+    "timeout": "Časový limit vypršel",
+    "serverError": "Chyba serveru",
+    "notFound": "Nenalezeno",
+    "unauthorized": "Neautorizováno",
+    "forbidden": "Zakázáno",
+    "badRequest": "Chybný požadavek",
+    "tryAgain": "Zkuste to prosím znovu později"
+  },
+  "validation": {
+    "required": "Toto pole je povinné",
+    "invalidEmail": "Neplatná emailová adresa",
+    "invalidAddress": "Neplatná adresa",
+    "invalidAmount": "Neplatná částka",
+    "minLength": "Minimální délka je {{min}} znaků",
+    "maxLength": "Maximální délka je {{max}} znaků"
+  },
+  "wallet": {
+    "notConnected": "Peněženka není připojena",
+    "connectionFailed": "Připojení peněženky selhalo",
+    "transactionFailed": "Transakce selhala",
+    "insufficientFunds": "Nedostatečné prostředky",
+    "userRejected": "Transakce odmítnuta uživatelem"
+  },
+  "api": {
+    "fetchFailed": "Načítání dat selhalo",
+    "submitFailed": "Odeslání dat selhalo",
+    "unknownError": "Došlo k neznámé chybě"
+  }
+}

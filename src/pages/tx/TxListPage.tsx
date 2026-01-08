@@ -5,12 +5,13 @@ import ExportButton from "@/components/table/ExportButton";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import type { TxListTableColumns } from "@/types/tableTypes";
 import type { FC } from "react";
-import { txListTableOptions } from "@/constants/tables/txListTableOptions";
+import { useTxListTableOptions } from "@/hooks/tables/useTxListTableOptions";
 import { useTxList } from "@/hooks/tables/useTxList";
 import { useTxListTableStore } from "@/stores/tables/txListTableStore";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useSearch } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface TxListPageProps {
   address?: string;
@@ -29,6 +30,9 @@ export const TxListPage: FC<TxListPageProps> = ({
   isDonationPage,
   policyId,
 }) => {
+  const { t } = useAppTranslation("pages");
+  const txListTableOptions = useTxListTableOptions();
+
   const { page } = useSearch({
     from:
       stake && !address
@@ -79,8 +83,8 @@ export const TxListPage: FC<TxListPageProps> = ({
       metadataTitle='transactionList'
       showHeader={!specifiedParams}
       adsCarousel={!specifiedParams}
-      title='Transactions'
-      breadcrumbItems={[{ label: "Transactions" }]}
+      title={t("transactions.title")}
+      breadcrumbItems={[{ label: t("transactions.title") }]}
     >
       <section
         className={`flex w-full max-w-desktop flex-col ${specifiedParams ? "" : "px-mobile pb-3 md:px-desktop"}`}
@@ -92,7 +96,7 @@ export const TxListPage: FC<TxListPageProps> = ({
               <LoadingSkeleton height='27px' width={"220px"} />
             ) : totalItems > 0 ? (
               <h3 className='basis-[230px] text-nowrap'>
-                Total of {formatNumber(totalItems)} transactions
+                {t("transactions.totalOf")} {formatNumber(totalItems)} {t("transactions.totalOfSuffix")}
               </h3>
             ) : (
               ""
@@ -121,7 +125,7 @@ export const TxListPage: FC<TxListPageProps> = ({
 
           <div className='flex gap-1'>
             <TableSearchInput
-              placeholder='Search by tx hash...'
+              placeholder={t("transactions.searchPlaceholder")}
               value={tableSearch}
               onchange={setTableSearch}
               wrapperClassName='md:w-[320px] w-full'

@@ -2,8 +2,8 @@ import type { FC } from "react";
 
 import { colors } from "@/constants/colors";
 import { enabledWalletConnector } from "@/constants/confVariables";
-import { navigationOptions } from "@/constants/navigationOptions";
-import { nestedNavigationOptions } from "@/constants/nestedNavigationOptions";
+import { useNavigationOptions } from "@/hooks/useNavigationOptions";
+import { useNestedNavigationOptions } from "@/hooks/useNestedNavigationOptions";
 import { Cardano } from "@vellumlabs/cexplorer-sdk";
 import { ArrowRight, ChevronsUp } from "lucide-react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
@@ -29,6 +29,8 @@ interface NavbarProps {
 const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
   const { theme } = useThemeStore();
   const price = useAdaPriceWithHistory();
+  const { navigationOptions, labels } = useNavigationOptions();
+  const { nestedNavigationOptions } = useNestedNavigationOptions();
 
   return (
     <>
@@ -47,49 +49,49 @@ const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
             <div className='hidden items-center gap-2 xl:flex xl:h-[75px]'>
               <Dropdown
                 id='blockchain'
-                label='Blockchain'
+                label={labels.blockchain}
                 options={navigationOptions.blockchain}
                 withBorder
                 wrapperClassname='z-[50]'
               />
               <Dropdown
                 id='staking'
-                label='Staking'
+                label={labels.staking}
                 options={navigationOptions.staking}
                 withBorder
                 wrapperClassname='z-[50]'
               />
               <Dropdown
                 id='governance'
-                label='Governance'
+                label={labels.governance}
                 options={navigationOptions.governance}
                 withBorder
                 wrapperClassname='z-[50]'
               />
               <Dropdown
                 id='tokens'
-                label='Tokens'
+                label={labels.tokens}
                 options={navigationOptions.tokens}
                 withBorder
                 wrapperClassname='z-[50]'
               />
               <Dropdown
                 id='nfts'
-                label='NFTs'
+                label={labels.nfts}
                 options={navigationOptions.nfts}
                 withBorder
                 wrapperClassname='z-[50]'
               />
               <Dropdown
                 id='education'
-                label='Education'
+                label={labels.education}
                 options={navigationOptions.education}
                 withBorder
                 wrapperClassname='z-[50]'
               />
               <ScreenDropdown
                 id='analytics'
-                label='Analytics'
+                label={labels.analytics}
                 options={nestedNavigationOptions.analyticsOptions}
                 randomTopAd={randomTopAd}
                 card={
@@ -119,7 +121,7 @@ const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
               />
               <ScreenDropdown
                 id='more'
-                label='More'
+                label={labels.more}
                 options={nestedNavigationOptions.moreOptions}
                 randomTopAd={randomTopAd}
                 card={

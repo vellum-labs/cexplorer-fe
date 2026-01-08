@@ -5,9 +5,11 @@ import { getAnimalColorByName } from "@/utils/address/getAnimalColorByName";
 import type { CallbackDataParams } from "echarts/types/dist/shared";
 import type { DelegatorStructureItem } from "./DelegatorStructureView";
 import { useADADisplay } from "@/hooks/useADADisplay";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface DelegatorStructureChartsProps {
   items: DelegatorStructureItem[];
+  type?: "drep" | "pool";
 }
 
 type StakeTooltipParams = CallbackDataParams & {
@@ -18,9 +20,13 @@ type StakeTooltipParams = CallbackDataParams & {
 
 export const DelegatorStructureCharts: FC<DelegatorStructureChartsProps> = ({
   items,
+  type = "drep",
 }) => {
+  const { t } = useAppTranslation("pages");
   const { textColor } = useGraphColors();
   const { formatLovelace } = useADADisplay();
+
+  const translationKey = type === "pool" ? "pools.detailPage.structure" : "dreps.detailPage.structure";
 
   const countChartData = items
     .filter(item => item.data.count > 0)
@@ -115,14 +121,14 @@ export const DelegatorStructureCharts: FC<DelegatorStructureChartsProps> = ({
   return (
     <div className='flex w-full flex-wrap gap-4 xl:flex-nowrap'>
       <div className='w-full xl:w-1/2'>
-        <h3 className='mb-2 text-center'>Delegators structure by count</h3>
+        <h3 className='mb-2 text-center'>{t(`${translationKey}.byCount`)}</h3>
         <ReactEcharts
           className='h-full w-full md:min-h-[500px]'
           option={countChartOption}
         />
       </div>
       <div className='w-full xl:w-1/2'>
-        <h3 className='mb-2 text-center'>Delegators structure by stake</h3>
+        <h3 className='mb-2 text-center'>{t(`${translationKey}.byStake`)}</h3>
         <ReactEcharts
           className='h-full w-full md:min-h-[500px]'
           option={stakeChartOption}

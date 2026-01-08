@@ -22,6 +22,7 @@ import { useElapsedEpochNumber } from "@/hooks/useElapsedEpochNumber";
 import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface PoolPerfomanceTableProps {
   poolId: string;
@@ -30,6 +31,7 @@ interface PoolPerfomanceTableProps {
 export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
   poolId,
 }) => {
+  const { t } = useAppTranslation("pages");
   const query = useFetchPoolDetail(
     poolId.startsWith("pool1") ? poolId : undefined,
     poolId.startsWith("pool1") ? undefined : poolId,
@@ -133,7 +135,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
           currentEpoch={miscConst?.epoch.no}
         />
       ),
-      title: "Epoch",
+      title: t("pools.detailPage.performanceTable.epoch"),
       visible: columnsVisibility.epoch,
       widthPx: 55,
     },
@@ -184,7 +186,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
 
         return String(startTime);
       },
-      title: "Start Time",
+      title: t("pools.detailPage.performanceTable.startTime"),
       visible: columnsVisibility.date_start,
       widthPx: 50,
     },
@@ -262,7 +264,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
 
         return String(endTime);
       },
-      title: "End Time",
+      title: t("pools.detailPage.performanceTable.endTime"),
       visible: columnsVisibility.date_end,
       widthPx: 80,
     },
@@ -275,7 +277,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
 
         return <p className='text-right'>{formatNumber(item.blocks)}</p>;
       },
-      title: <p className='w-full text-right'>Blocks</p>,
+      title: <p className='w-full text-right'>{t("pools.detailPage.performanceTable.blocks")}</p>,
       visible: columnsVisibility.blocks,
       widthPx: 50,
     },
@@ -292,7 +294,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
           </p>
         );
       },
-      title: <p className='w-full text-right'>Epoch Stake</p>,
+      title: <p className='w-full text-right'>{t("pools.detailPage.performanceTable.epochStake")}</p>,
       visible: columnsVisibility.active_stake,
       widthPx: 50,
     },
@@ -305,7 +307,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
 
         return <p className='text-right'>{formatNumber(item.delegators)}</p>;
       },
-      title: <p className='w-full text-right'>Delegators</p>,
+      title: <p className='w-full text-right'>{t("pools.detailPage.performanceTable.delegators")}</p>,
       visible: columnsVisibility.delegators,
       widthPx: 50,
     },
@@ -320,7 +322,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
           return (
             <div className='flex justify-end'>
               <Badge color='blue' className='ml-auto'>
-                Current
+                {t("pools.detailPage.performanceTable.current")}
               </Badge>
             </div>
           );
@@ -332,7 +334,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
 
         return <p className='text-right'>{(item.luck * 100)?.toFixed(2)}%</p>;
       },
-      title: <p className='w-full text-right'>Luck</p>,
+      title: <p className='w-full text-right'>{t("pools.detailPage.performanceTable.luck")}</p>,
       visible: columnsVisibility.luck,
       widthPx: 50,
     },
@@ -349,7 +351,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
           </p>
         );
       },
-      title: <p className='w-full text-right'>Pledged</p>,
+      title: <p className='w-full text-right'>{t("pools.detailPage.performanceTable.pledged")}</p>,
       visible: columnsVisibility.pledged,
       widthPx: 50,
     },
@@ -364,7 +366,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
           return (
             <div className='flex justify-end'>
               <Badge color='yellow' className='ml-auto'>
-                Pending
+                {t("pools.detailPage.performanceTable.pending")}
               </Badge>
             </div>
           );
@@ -385,11 +387,11 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
           <Tooltip
             content={
               <div style={{ width: "150px" }}>
-                ROA: Return on ADA — annualized return percentage for delegators
+                {t("pools.detailPage.performanceTable.roaTooltip")}
               </div>
             }
           >
-            <span className='cursor-help'>ROA</span>
+            <span className='cursor-help'>{t("pools.detailPage.performanceTable.roa")}</span>
           </Tooltip>
         </div>
       ),

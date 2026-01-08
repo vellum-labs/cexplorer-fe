@@ -4,6 +4,7 @@ import type { PoolData, PoolListSearchParams } from "@/types/poolTypes";
 import type { Dispatch, RefObject, SetStateAction } from "react";
 
 import { Check, Filter, X } from "lucide-react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 import { SortArrow } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
@@ -108,6 +109,7 @@ export const usePoolList = ({
   overrideTableSearch,
   isHomepage,
 }: UsePoolListArgs): UsePoolList => {
+  const { t } = useAppTranslation("pages");
   const [{ debouncedTableSearch, tableSearch }, setTableSearch] =
     useSearchTable();
 
@@ -199,15 +201,15 @@ export const usePoolList = ({
   const selectItems = [
     {
       key: "Native Rankings",
-      value: "Native Rankings",
+      value: t("pools.sortOptions.nativeRankings"),
     },
     {
       key: "Pledge Leverage",
-      value: "Pledge Leverage",
+      value: t("pools.sortOptions.pledgeLeverage"),
     },
     {
       key: "Top Margins with Delegators",
-      value: "Top Margins with Delegators",
+      value: t("pools.sortOptions.topMargins"),
     },
   ];
 

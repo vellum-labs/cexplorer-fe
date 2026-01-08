@@ -18,6 +18,7 @@ import type { StakeWithdrawalsColumns, TableColumns } from "@/types/tableTypes";
 import { formatNumber, formatString, DateCell } from "@vellumlabs/cexplorer-sdk";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   view: string;
@@ -25,6 +26,7 @@ interface Props {
 }
 
 export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
+  const { t } = useAppTranslation("pages");
   const {
     columnsOrder,
     columnsVisibility,
@@ -60,7 +62,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
 
         return item?.block.time;
       },
-      title: "Date",
+      title: t("stake.detailPage.withdrawalsTable.date"),
       visible: columnsVisibility.date,
       widthPx: 50,
     },
@@ -88,7 +90,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
 
         return item?.tx?.hash;
       },
-      title: "Hash",
+      title: t("stake.detailPage.withdrawalsTable.hash"),
       visible: columnsVisibility.tx_hash,
       widthPx: 80,
     },
@@ -106,7 +108,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
       jsonFormat: item => {
         return (item?.block?.epoch_no ?? "-") + " / " + item?.block?.epoch_no;
       },
-      title: <p className='w-full text-right'>Epoch / Block</p>,
+      title: <p className='w-full text-right'>{t("stake.detailPage.withdrawalsTable.epochBlock")}</p>,
       visible: columnsVisibility.block,
       widthPx: 55,
     },
@@ -117,7 +119,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
           <AdaWithTooltip data={item?.tx?.out_sum} />
         </p>
       ),
-      title: <p className='w-full text-right'>Total Output</p>,
+      title: <p className='w-full text-right'>{t("stake.detailPage.withdrawalsTable.totalOutput")}</p>,
       visible: columnsVisibility.total_output,
       widthPx: 55,
     },
@@ -128,7 +130,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
           <AdaWithTooltip data={item.tx?.fee} />
         </p>
       ),
-      title: <p className='w-full text-right'>Fee</p>,
+      title: <p className='w-full text-right'>{t("stake.detailPage.withdrawalsTable.fee")}</p>,
       visible: columnsVisibility.fee,
       widthPx: 50,
     },
@@ -139,7 +141,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
           <AdaWithTooltip data={item?.amount} />
         </p>
       ),
-      title: <p className='w-full text-right'>Amount</p>,
+      title: <p className='w-full text-right'>{t("stake.detailPage.withdrawalsTable.amount")}</p>,
       visible: columnsVisibility.amount,
       widthPx: 50,
     },
@@ -183,7 +185,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
           "%"
         );
       },
-      title: <p className='w-full text-right'>Size</p>,
+      title: <p className='w-full text-right'>{t("stake.detailPage.withdrawalsTable.size")}</p>,
       visible: columnsVisibility.size,
       widthPx: 50,
     },
@@ -201,7 +203,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[230px] text-nowrap'>
-              Total of {formatNumber(totalItems)} withdrawals
+              {t("stake.detailPage.withdrawalsTable.totalOf")} {formatNumber(totalItems)} {t("stake.detailPage.withdrawalsTable.withdrawals")}
             </h3>
           )}
           <div className='flex justify-end max-[435px]:w-full md:hidden'>
@@ -228,7 +230,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
 
         <div className='flex gap-1'>
           <TableSearchInput
-            placeholder='Search by tx hash...'
+            placeholder={t("stake.detailPage.withdrawalsTable.searchPlaceholder")}
             value={tableSearch}
             onchange={setTableSearch}
             wrapperClassName='md:w-[320px] w-full'

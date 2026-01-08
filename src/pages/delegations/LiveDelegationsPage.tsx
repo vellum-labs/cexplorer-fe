@@ -22,8 +22,10 @@ import { format } from "date-fns";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const LiveDelegationsPage = () => {
+  const { t } = useAppTranslation(["pages", "common"]);
   const { page } = useSearch({ from: "/live-delegations/" });
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const {
@@ -85,14 +87,14 @@ export const LiveDelegationsPage = () => {
           "yyy-MM-dd HH:mm:ss",
         );
       },
-      title: <p>Date</p>,
+      title: <p>{t("delegations.table.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 55,
     },
     {
       key: "epoch",
       render: item => <EpochCell no={item.active_epoch_no} />,
-      title: <p className='w-full text-right'>Epoch</p>,
+      title: <p className='w-full text-right'>{t("delegations.table.epoch")}</p>,
       visible: columnsVisibility.epoch,
       widthPx: 25,
     },
@@ -112,7 +114,7 @@ export const LiveDelegationsPage = () => {
 
         return item.view;
       },
-      title: "Address",
+      title: t("delegations.table.address"),
       visible: columnsVisibility.address,
       widthPx: 90,
     },
@@ -125,7 +127,7 @@ export const LiveDelegationsPage = () => {
       ),
       title: (
         <div className='flex w-full justify-end'>
-          <span>Live Stake</span>
+          <span>{t("delegations.table.liveStake")}</span>
         </div>
       ),
       visible: columnsVisibility.amount,
@@ -163,7 +165,7 @@ export const LiveDelegationsPage = () => {
           .filter(e => e)
           .join(" -> ");
       },
-      title: "Delegation",
+      title: t("delegations.table.delegation"),
       visible: columnsVisibility.delegation,
       widthPx: 190,
     },
@@ -179,7 +181,7 @@ export const LiveDelegationsPage = () => {
 
         return item.tx.hash;
       },
-      title: "Tx",
+      title: t("delegations.table.tx"),
       visible: columnsVisibility.tx,
       widthPx: 80,
     },
@@ -194,8 +196,8 @@ export const LiveDelegationsPage = () => {
   return (
     <PageBase
       metadataTitle='liveDelegationsList'
-      title='Live Delegations'
-      breadcrumbItems={[{ label: "Live Delegations" }]}
+      title={t("delegations.live.title")}
+      breadcrumbItems={[{ label: t("delegations.live.title") }]}
     >
       <div className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='mb-2 ml-auto flex w-fit justify-end gap-1'>
@@ -209,7 +211,7 @@ export const LiveDelegationsPage = () => {
             setRows={setRows}
             columnsOptions={liveDelegationsTableOptions.map(item => {
               return {
-                label: item.name,
+                label: t(`common:tableSettings.${item.key}`),
                 isVisible: columnsVisibility[item.key],
                 onClick: () =>
                   setColumnVisibility(item.key, !columnsVisibility[item.key]),

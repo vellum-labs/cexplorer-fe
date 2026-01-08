@@ -2,6 +2,7 @@ import type { GroupsListData } from "@/types/analyticsTypes";
 import { useMemo } from "react";
 import { PieCharts } from "@/components/charts/PieCharts";
 import { PIE_CHART_COLORS } from "@/constants/charts";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface GroupsChartsProps {
   filteredItems: GroupsListData[];
@@ -10,6 +11,32 @@ interface GroupsChartsProps {
 export const GroupsCharts = ({
   filteredItems,
 }: GroupsChartsProps) => {
+  const { t } = useAppTranslation("pages");
+
+  const tooltipTranslations = useMemo(
+    () => ({
+      others: t("groups.tooltip.others"),
+      items: t("groups.tooltip.items"),
+      total: t("groups.tooltip.total"),
+      andMore: (count: number) => t("groups.tooltip.andMore", { count }),
+    }),
+    [t],
+  );
+
+  const charts = useMemo(
+    () => [
+      { dataKey: "pools_count", title: t("groups.charts.poolsCount") },
+      { dataKey: "pool_stake", title: t("groups.charts.poolStake"), needsAdaFormatting: true },
+      { dataKey: "pledge", title: t("groups.charts.pledge"), needsAdaFormatting: true },
+      {
+        dataKey: "pledge_per_pool",
+        title: t("groups.charts.pledgePerPool"),
+        needsAdaFormatting: true,
+      },
+    ],
+    [t],
+  );
+
   const getChartData = useMemo(
     () => (items: GroupsListData[], dataKey: string) => {
       const colorMap = new Map<string, string>();
@@ -60,22 +87,12 @@ export const GroupsCharts = ({
     [],
   );
 
-  const charts = [
-    { dataKey: "pools_count", title: "Pools Count" },
-    { dataKey: "pool_stake", title: "Pool Stake", needsAdaFormatting: true },
-    { dataKey: "pledge", title: "Pledge", needsAdaFormatting: true },
-    {
-      dataKey: "pledge_per_pool",
-      title: "μ Pledge per Pool",
-      needsAdaFormatting: true,
-    },
-  ];
-
   return (
     <PieCharts
       items={filteredItems}
       charts={charts}
       getChartData={getChartData}
+      tooltipTranslations={tooltipTranslations}
     />
   );
 };

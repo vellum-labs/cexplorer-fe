@@ -23,6 +23,7 @@ import { useState } from "react";
 import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import { DelegatorsLabel } from "@vellumlabs/cexplorer-sdk";
 import { buildSocialIcons } from "@/utils/buildSocialIcons";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface UsePoolDetailArgs {
   query: UseQueryResult<PoolDetailResponse, unknown>;
@@ -42,6 +43,7 @@ export const usePoolDetail = ({
   query,
   miscConst: miscConstProp,
 }: UsePoolDetailArgs): UsePoolDetail => {
+  const { t } = useAppTranslation("pages");
   const data = query.data?.data;
   const { data: basicData } = useFetchMiscBasic();
   const miscConstFallback = useMiscConst(basicData?.data.version.const);
@@ -84,10 +86,10 @@ export const usePoolDetail = ({
   const socialIcons = buildSocialIcons(extended);
 
   const aboutList: OverviewList = [
-    { label: "Name", value: data?.pool_name.name },
-    { label: "Ticker", value: data?.pool_name.ticker },
+    { label: t("pools.detailPage.about.name"), value: data?.pool_name.name },
+    { label: t("pools.detailPage.about.ticker"), value: data?.pool_name.ticker },
     {
-      label: "Pool ID",
+      label: t("pools.detailPage.about.poolId"),
       value: (
         <span className='flex items-center gap-1'>
           {formatString(data?.pool_id || "", "long")}
@@ -96,7 +98,7 @@ export const usePoolDetail = ({
       ),
     },
     {
-      label: "Created",
+      label: t("pools.detailPage.about.created"),
       value:
         data?.registered && format(parseISO(data?.registered), "dd.MM.yyyy"),
     },
@@ -105,7 +107,7 @@ export const usePoolDetail = ({
       value: formatNumber(data?.delegators),
     },
     {
-      label: "Website",
+      label: t("pools.detailPage.about.website"),
       value: (
         <>
           <a
@@ -153,32 +155,32 @@ export const usePoolDetail = ({
 
   const stakeAndPledgeList: OverviewList = [
     {
-      label: "Saturation",
+      label: t("pools.detailPage.stakeAndPledge.saturation"),
       value: <PoolSaturation live_stake={data?.live_stake} />,
     },
     {
-      label: "Live Stake",
+      label: t("pools.detailPage.stakeAndPledge.liveStake"),
       value: <AdaWithTooltip data={data?.live_stake || 0} />,
     },
     {
-      label: "Active Stake",
+      label: t("pools.detailPage.stakeAndPledge.activeStake"),
       value: <AdaWithTooltip data={data?.active_stake || 0} />,
     },
     {
-      label: "Declared Pledge",
+      label: t("pools.detailPage.stakeAndPledge.declaredPledge"),
       value: <AdaWithTooltip data={data?.pool_update?.active?.pledge ?? 0} />,
     },
     {
-      label: "Active Pledge",
+      label: t("pools.detailPage.stakeAndPledge.activePledge"),
       value: <AdaWithTooltip data={data?.pledged ?? 0} />,
     },
-    { label: "Pledge Leverage", value: pledgeLeverage },
+    { label: t("pools.detailPage.stakeAndPledge.pledgeLeverage"), value: pledgeLeverage },
     {
-      label: "Margin Fee",
+      label: t("pools.detailPage.stakeAndPledge.marginFee"),
       value: ((data?.pool_update?.active?.margin ?? 0) * 100).toFixed(2) + "%",
     },
     {
-      label: "Fixed Fee",
+      label: t("pools.detailPage.stakeAndPledge.fixedFee"),
       value: (
         <AdaWithTooltip data={data?.pool_update?.active?.fixed_cost ?? 0} />
       ),
@@ -187,7 +189,7 @@ export const usePoolDetail = ({
 
   const performanceList: OverviewList = [
     {
-      label: "Recent ROA",
+      label: t("pools.detailPage.performance.recentRoa"),
       value: data?.stats?.recent?.roa ? (
         <div className='flex items-center gap-1/2'>
           <span>{data?.stats?.recent?.roa.toFixed(2) + "%"}</span>
@@ -198,7 +200,7 @@ export const usePoolDetail = ({
       ),
     },
     {
-      label: "Lifetime ROA",
+      label: t("pools.detailPage.performance.lifetimeRoa"),
       value: data?.stats.lifetime.roa ? (
         <div className='flex items-center gap-1/2'>
           <span>{data?.stats.lifetime.roa.toFixed(2) + "%"}</span>
@@ -209,23 +211,23 @@ export const usePoolDetail = ({
       ),
     },
     {
-      label: "Blocks in Epoch",
+      label: t("pools.detailPage.performance.blocksInEpoch"),
       value: formatNumber(data?.blocks?.epoch),
     },
     {
-      label: "Estimated Blocks",
+      label: t("pools.detailPage.performance.estimatedBlocks"),
       value: estimatedBlocks.toFixed(2),
     },
     {
-      label: "Prorated Luck",
+      label: t("pools.detailPage.performance.proratedLuck"),
       value: proratedLuck,
     },
     {
-      label: "Blocks Lifetime",
+      label: t("pools.detailPage.performance.blocksLifetime"),
       value: formatNumber(data?.blocks?.total ?? 0),
     },
     {
-      label: "Lifetime Luck",
+      label: t("pools.detailPage.performance.lifetimeLuck"),
       value: ((data?.stats?.lifetime.luck ?? 0) * 100).toFixed(2) + "%",
     },
   ];

@@ -4,23 +4,35 @@ import { Link } from "@tanstack/react-router";
 import { useState, type FC } from "react";
 import { SafetyLinkModal, Copy } from "@vellumlabs/cexplorer-sdk";
 import { markdownComponents } from "@/constants/markdows";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface DrepDetailAboutTabProps {
   data: Record<string, string>;
 }
 
 export const DrepDetailAboutTab: FC<DrepDetailAboutTabProps> = ({ data }) => {
+  const { t } = useAppTranslation("pages");
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
   const entries = Object.entries(data);
 
+  const getFieldTitle = (key: string): string => {
+    const translationKey = `dreps.detailPage.aboutFields.${key}`;
+    const translated = t(translationKey);
+    // If translation exists (not same as key), use it; otherwise fallback to formatted key
+    if (translated !== translationKey) {
+      return translated;
+    }
+    return key
+      .split("_")
+      .map((w, i) => (i === 0 ? w[0]?.toUpperCase() + w.slice(1) : w))
+      .join(" ");
+  };
+
   return (
     <section className='flex w-full flex-col overflow-hidden rounded-xl border border-border'>
       {entries.map(([key, value], index) => {
-        const title = key
-          .split("_")
-          .map((w, i) => (i === 0 ? w[0]?.toUpperCase() + w.slice(1) : w))
-          .join(" ");
+        const title = getFieldTitle(key);
 
         const isAddress = value.startsWith("addr");
 

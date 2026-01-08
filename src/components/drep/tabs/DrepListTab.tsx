@@ -19,8 +19,10 @@ import { useDrepListTableStore } from "@/stores/tables/drepListTableStore";
 import { useSearch } from "@tanstack/react-router";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscSearch } from "@/services/misc";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
+  const { t } = useAppTranslation("pages");
   const { page, sort, order } = useSearch({
     from: watchlist ? "/watchlist/" : "/drep/",
   });
@@ -56,6 +58,22 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
     setColumsOrder,
   } = useDrepListTableStore()();
 
+  const tableColumnTranslations: Record<string, string> = {
+    ranking: t("dreps.table.ranking"),
+    status: t("dreps.table.status"),
+    drep_name: t("dreps.table.drepName"),
+    voting_power: t("dreps.table.votingPower"),
+    voting_activity: t("dreps.table.lifetimeActivity"),
+    recent_activity: t("dreps.table.recentActivity"),
+    owner_stake: t("dreps.table.ownerStake"),
+    average_stake: t("dreps.table.averageStake"),
+    registered: t("dreps.table.registered"),
+    delegators: t("dreps.table.delegators"),
+    metadata: t("dreps.table.drepMetadata"),
+    spo: t("dreps.table.spo"),
+    top_delegator: t("dreps.table.topDelegator"),
+  };
+
   return (
     <>
       <div className='mb-1 flex w-full flex-col justify-between gap-1 min-[870px]:flex-row min-[870px]:items-center'>
@@ -66,7 +84,8 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
                 <LoadingSkeleton height='27px' width={"220px"} />
               ) : totalItems !== undefined ? (
                 <h3 className='basis-[230px] text-nowrap'>
-                  Total of {formatNumber(totalItems)} dreps
+                  {t("dreps.totalOf")} {formatNumber(totalItems)}{" "}
+                  {t("dreps.totalOfSuffix")}
                 </h3>
               ) : (
                 ""
@@ -79,7 +98,7 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
               <Button
                 size='md'
                 leftIcon={<PlusIcon size={15} />}
-                label='Display vote'
+                label={t("dreps.displayVote")}
                 variant='tertiary'
                 onClick={() => setDisplayVoteModal(true)}
               />
@@ -88,7 +107,7 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
                 setRows={setRows}
                 columnsOptions={drepListTableOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: tableColumnTranslations[item.key] || item.name,
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(
@@ -110,7 +129,7 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
             />
           )}
           <TableSearchInput
-            placeholder='Search by Drep ID...'
+            placeholder={t("dreps.searchPlaceholder")}
             value={tableSearch}
             onchange={setTableSearch}
             wrapperClassName='min-[870px]:w-[320px] w-full '
@@ -122,7 +141,7 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
             <Button
               size='md'
               leftIcon={<PlusIcon size={15} />}
-              label='Display vote'
+              label={t("dreps.displayVote")}
               variant='tertiary'
               onClick={() => setDisplayVoteModal(true)}
             />
@@ -131,7 +150,7 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
               setRows={setRows}
               columnsOptions={drepListTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: tableColumnTranslations[item.key] || item.name,
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -152,14 +171,16 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
                 >
                   <span>
                     {key === "gov_action"
-                      ? "Selected votes:"
-                      : `Also ${key[0].toUpperCase() + key.slice(1)}:`}
+                      ? `${t("dreps.filter.selectedVotes")}:`
+                      : `${t("dreps.filter.alsoSpo")}:`}
                   </span>
 
                   <span>
                     {key === "gov_action"
                       ? formatString(value, "long")
-                      : value[0].toUpperCase() + value.slice(1).toLowerCase()}
+                      : value === "YES"
+                        ? t("dreps.filter.yes")
+                        : t("dreps.filter.no")}
                   </span>
 
                   <X

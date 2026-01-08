@@ -17,12 +17,14 @@ import { ProtocolDot } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { HashCell } from "@/components/tx/HashCell";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   poolId: string;
 }
 
 const PoolBlocksTable = ({ poolId }: Props) => {
+  const { t } = useAppTranslation("pages");
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { page } = useSearch({ from: "/pool/$id" });
   const {
@@ -60,21 +62,21 @@ const PoolBlocksTable = ({ poolId }: Props) => {
 
         return item.time;
       },
-      title: "Date",
+      title: t("pools.detailPage.blocksTable.date"),
       visible: columnsVisibility.date,
       widthPx: 95,
     },
     {
       key: "block_no",
       render: item => <BlockCell hash={item.hash} no={item.block_no ?? 0} />,
-      title: <p className='w-full text-right'>Height</p>,
+      title: <p className='w-full text-right'>{t("pools.detailPage.blocksTable.height")}</p>,
       visible: columnsVisibility.block_no,
       widthPx: 75,
     },
     {
       key: "epoch_no",
       render: item => <EpochCell no={item.epoch_no} />,
-      title: <p className='w-full text-right'>Epoch</p>,
+      title: <p className='w-full text-right'>{t("pools.detailPage.blocksTable.epoch")}</p>,
       visible: columnsVisibility.epoch_no,
       widthPx: 50,
     },
@@ -83,14 +85,14 @@ const PoolBlocksTable = ({ poolId }: Props) => {
       render: item => (
         <p className='text-right'>{formatNumber(item.slot_no)}</p>
       ),
-      title: <p className='w-full text-right'>Slot</p>,
+      title: <p className='w-full text-right'>{t("pools.detailPage.blocksTable.slot")}</p>,
       visible: columnsVisibility.slot_no,
       widthPx: 80,
     },
     {
       key: "tx_count",
       render: item => <p className='text-right'>{item.tx_count}</p>,
-      title: <p className='w-full text-right'>TXs</p>,
+      title: <p className='w-full text-right'>{t("pools.detailPage.blocksTable.txs")}</p>,
       visible: columnsVisibility.tx_count,
       widthPx: 50,
     },
@@ -108,13 +110,13 @@ const PoolBlocksTable = ({ poolId }: Props) => {
 
         return item.hash;
       },
-      title: <p className='flex w-full justify-end'>Hash</p>,
+      title: <p className='flex w-full justify-end'>{t("pools.detailPage.blocksTable.hash")}</p>,
       visible: columnsVisibility.hash,
       widthPx: 90,
     },
     {
       key: "size",
-      title: "Size",
+      title: t("pools.detailPage.blocksTable.size"),
       render: item => (
         <div className='text-right'>
           {
@@ -159,7 +161,7 @@ const PoolBlocksTable = ({ poolId }: Props) => {
 
         return `${item.protocol.major}.${item.protocol.minor}`;
       },
-      title: <span className='flex w-full justify-end'>Protocol</span>,
+      title: <span className='flex w-full justify-end'>{t("pools.detailPage.blocksTable.protocol")}</span>,
       visible: columnsVisibility.protocol,
       widthPx: 50,
     },
@@ -168,7 +170,7 @@ const PoolBlocksTable = ({ poolId }: Props) => {
       render: item => (
         <p className='text-right'>{item.op_cert_counter ?? "-"}</p>
       ),
-      title: <p className='w-full text-right'>Cert Count</p>,
+      title: <p className='w-full text-right'>{t("pools.detailPage.blocksTable.certCount")}</p>,
       visible: columnsVisibility.cert_counter,
       widthPx: 70,
     },

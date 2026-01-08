@@ -5,6 +5,7 @@ import { WatchlistSection } from "../global/watchlist/WatchlistSection";
 import { usePoolDetail } from "@/hooks/details/usePoolDetail";
 import type { useFetchPoolDetail } from "@/services/pools";
 import type { MiscConstResponseData } from "@/types/miscTypes";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   query: ReturnType<typeof useFetchPoolDetail>;
@@ -19,6 +20,7 @@ const PoolDetailOverview = ({
   miscConst,
   isPoolRetiredOrRetiring = false,
 }: Props) => {
+  const { t } = useAppTranslation("pages");
   const { data, aboutList, performanceList, stakeAndPledgeList } =
     usePoolDetail({ estimatedBlocks, query, miscConst });
 
@@ -52,12 +54,12 @@ const PoolDetailOverview = ({
           </>
         ) : (
           <>
-            <OverviewCard title='About' overviewList={aboutList} />
+            <OverviewCard title={t("pools.detailPage.about.title")} overviewList={aboutList} />
             <OverviewCard
-              title='Stake and Pledge'
+              title={t("pools.detailPage.stakeAndPledge.title")}
               overviewList={stakeAndPledgeList}
             />
-            <OverviewCard title='Performance' overviewList={performanceList} />
+            <OverviewCard title={t("pools.detailPage.performance.title")} overviewList={performanceList} />
           </>
         )}
       </div>

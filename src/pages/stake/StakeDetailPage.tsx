@@ -28,8 +28,10 @@ import { DeFiOrderList } from "@/components/defi/DeFiOrderList";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { WatchlistSection } from "@/components/global/watchlist/WatchlistSection";
 import { configJSON } from "@/constants/conf";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const StakeDetailPage: FC = () => {
+  const { t } = useAppTranslation("pages");
   const route = getRouteApi("/stake/$stakeAddr");
   const { stakeAddr: address } = route.useParams();
   const stakeQuery = useFetchStakeDetail(address);
@@ -59,43 +61,43 @@ export const StakeDetailPage: FC = () => {
   const tabs = [
     {
       key: "assets",
-      label: "Assets",
+      label: t("stake.detailPage.tabs.assets"),
       content: <AssetsTab assets={assets} addressQuery={stakeQuery} isStake />,
       visible: true,
     },
     {
       key: "transactions",
-      label: "Transactions",
+      label: t("stake.detailPage.tabs.transactions"),
       content: <TxListPage key='stake' stake={address} />,
       visible: true,
     },
     {
       key: "withdrawals",
-      label: "Withdrawals",
+      label: t("stake.detailPage.tabs.withdrawals"),
       content: <StakeWithdrawalsTab view={address} miscConst={miscConst} />,
       visible: !hideDelegTab,
     },
     {
       key: "addresses",
-      label: "Addresses",
+      label: t("stake.detailPage.tabs.addresses"),
       content: <AddressesTab view={address} stakeKey={data?.view} />,
       visible: true,
     },
     {
       key: "delegations",
-      label: "Delegations",
+      label: t("stake.detailPage.tabs.delegations"),
       content: <StakeDelegationsTab address={address} miscConst={miscConst} />,
       visible: !hideDelegTab,
     },
     {
       key: "rewards",
-      label: "Rewards",
+      label: t("stake.detailPage.tabs.rewards"),
       content: <RewardsTab stakeAddress={address} parentPage='stake' />,
       visible: !hideDelegTab,
     },
     {
       key: "defi",
-      label: "Trading",
+      label: t("stake.detailPage.tabs.trading"),
       content: () => (
         <DeFiOrderList
           storeKey='stake_detail_defi_order'
@@ -122,15 +124,15 @@ export const StakeDetailPage: FC = () => {
         before: "%address%",
         after: address,
       }}
-      title='Stake Detail'
+      title={t("stake.detailPage.title")}
       icon={<img src={stakeIcon} alt='stake level' className='h-6 w-6' />}
       breadcrumbItems={[
-        { label: "Address" },
+        { label: t("stake.detailPage.breadcrumb") },
         { label: formatString(address, "long"), ident: address },
       ]}
       subTitle={
         <HeaderBannerSubtitle
-          title='Stake address'
+          title={t("stake.detailPage.stakeAddress")}
           hashString={formatString(address ?? "", "long")}
           hash={address}
         />

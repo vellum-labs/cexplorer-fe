@@ -7,6 +7,7 @@ import { formatDate, toUtcDate } from "@vellumlabs/cexplorer-sdk";
 import { formatRemainingTime } from "@/utils/format/formatRemainingTime";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface EpochInfoProps {
   number: number;
@@ -14,6 +15,7 @@ interface EpochInfoProps {
 }
 
 export const EpochInfo: FC<EpochInfoProps> = ({ number, data }) => {
+  const { t } = useAppTranslation("pages");
   const startDate = new Date(toUtcDate(data[0]?.start_time)).getTime();
 
   const { epochLength } = configJSON.genesisParams[0].shelley[0];
@@ -43,7 +45,7 @@ export const EpochInfo: FC<EpochInfoProps> = ({ number, data }) => {
         <div className='absolute left-2'>
           <PulseDot />
         </div>
-        <span className='text-text-xs font-medium'>Current Epoch</span>
+        <span className='text-text-xs font-medium'>{t("epochs.info.currentEpoch")}</span>
       </div>
       <span className='text-display-md font-semibold'>{number}</span>
       <div className='flex flex-col'>
@@ -74,9 +76,9 @@ export const EpochInfo: FC<EpochInfoProps> = ({ number, data }) => {
           </span>
         </div>
         <div className='flex items-center justify-between text-[#98A2B3]'>
-          <span className='text-text-xs'>Start</span>
+          <span className='text-text-xs'>{t("epochs.info.start")}</span>
           <span className='text-text-xs'>
-            {formatRemainingTime(timeLeft) ? "Left" : "Arrived"}
+            {formatRemainingTime(timeLeft) ? t("epochs.info.left") : t("epochs.info.arrived")}
           </span>
         </div>
       </div>
