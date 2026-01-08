@@ -1,0 +1,912 @@
+{
+  "year": 2025,
+  "currency": "ADA",
+  "generated_at": "2026-01-08T20:05:41.838947+00:00",
+  "epoch_range": {
+    "first_epoch": 532,
+    "last_epoch": 603,
+    "full_epochs_only": true,
+    "excluded_partial_epochs": [
+      531,
+      604
+    ]
+  },
+  "inputs": {
+    "koios_base": "https://api.koios.rest/api/v1",
+    "sundae_instance_id": "9e65e4ed7d6fd86fc4827d2b45da6d2c601fb920e8bfd794b8ecc619",
+    "sundae_endpoint": "",
+    "sundae_graphql_endpoint": "https://api.treasury.sundae.fi/graphql",
+    "sundae_graphql_query_used": false,
+    "sundae_graphql_payload_used": true
+  },
+  "raw": {
+    "totals_start": {
+      "epoch_no": 532,
+      "circulation": 35151153813,
+      "treasury": 1641656329,
+      "reward": 706535416,
+      "supply": 37504226088,
+      "reserves": 7495773912,
+      "fees": 107387,
+      "deposits_stake": 4331644,
+      "deposits_drep": 341500,
+      "deposits_proposal": 100000
+    },
+    "totals_end": {
+      "epoch_no": 603,
+      "circulation": 35932600980,
+      "treasury": 1664603074,
+      "reward": 731447170,
+      "supply": 38334220573,
+      "reserves": 6665779427,
+      "fees": 77071,
+      "deposits_stake": 4392778,
+      "deposits_drep": 499500,
+      "deposits_proposal": 600000
+    },
+    "epoch_fees_ada": 4589134,
+    "treasury_withdrawals_total_ada": 260626489,
+    "treasury_donations_ada": 735710
+  },
+  "computed": {
+    "reserve_emissions_ada": 829994484,
+    "treasury_delta_ada": 22946745,
+    "treasury_via_tau_ada": 282837524,
+    "staking_rewards_ada": 551746094
+  },
+  "treasury_withdrawals": {
+    "count": 0,
+    "sources": [],
+    "enabled": false,
+    "total_ada": 260626489,
+    "koios_total_ada": 0,
+    "tracker_total_ada": 260626489
+  },
+  "tracker": {
+    "entries": 356,
+    "matched": 0,
+    "unmatched_tracker_entries": 356,
+    "unmatched_withdrawals": 0,
+    "graphql_endpoint": "https://api.treasury.sundae.fi/graphql",
+    "graphql_query_used": false,
+    "graphql_payload_used": true,
+    "matched_total_ada": 0,
+    "unmatched_withdrawals_total_ada": 0,
+    "breakdown_ada": {
+      "Spent (Withdrawn) (2025)": 107832572,
+      "Allocated (Active/Matured/Paused) (2025)": 147793917,
+      "Loans (2025)": 5000000
+    },
+    "bucket_item_breakdown_ada": {
+      "Spent (Withdrawn) (2025)": {
+        "IOR - Cardano Vision Work Program 2025": 13420000,
+        "IOG - Beyond Minimum Viable Governance": 81695,
+        "IOG - Blockfrost Platform Community Budget Proposal": 812500,
+        "Input Output Engineering Core Development Proposal (6of6)": 7341000,
+        "Input Output Engineering Core Development Proposal (5of6)": 1248000,
+        "Input Output Engineering Core Development Proposal (4of6)": 901334,
+        "Input Output Engineering Core Development Proposal (3of6)": 2177893,
+        "Input Output Engineering Core Development Proposal (2of6)": 1487200,
+        "Input Output Engineering Core Development Proposal (1of6)": 6179593,
+        "Allowlist Fund Test": 10,
+        "Product Committee - Local Gatherings, Business Calls, Workshops": 190000,
+        "PyCardano - FAIR IO, LLC": 108080,
+        "OpShin - Python Smart Contracts for Cardano": 68636,
+        "Anzens - Expanding Stablecoin / Cardano Native Asset Support / Fiat Ramps": 950000,
+        "Supplyoneers FZ-LLC - Cardano Ecosystem Pavilions at Exhibitions": 819750,
+        "Flowdesk - Market Making as a service & Ecosystem Exchange Listing": 567840,
+        "Rainfire DAO - Cardano Builder DAO": 6330000,
+        "Cardano Foundation - Unveiling the First Unified Global Events Marketing Strategy for Cardano": 5099176,
+        "Cardano Foundation - Cardano Summit 2025 and regional tech events": 6000000,
+        "Catalyst FC - Catalyst 2025 Proposal": 43300000,
+        "Intersect MBO - A member-based organization for the Cardano ecosystem": 6300000,
+        "AdaStat.net Cardano blockchain explorer (1 of 2)": 37452,
+        "NFTCDN - A free Native Asset CDN for Cardano Developers": 105000,
+        "MLabs- Core Tool Maintenance: Cardano.nix & Plutarch, Research towards Tooling for Elliptical Curves": 96775,
+        "Vellum Labs: Developer-Focused Blockchain Explorer for Cardano": 266667,
+        "Lantr - Scalus: DApps Development Platform": 220448,
+        "BloxBean Java Tools Maintenance and Enhancement": 39840,
+        "Tastenkunst GmbH - Eternl Maintenance": 200162,
+        "Cooperativa de Trabajo Eryx - ZK Bridge": 332000,
+        "Open Source Committee - Developer Advocates Program, Committee Travel Budget, Bug Bounty": 250000,
+        "GO MAESTRO INC - Complete Web3 developer stack": 406000,
+        "VacuumLabs - Hardware Wallets Maintenance & Ledger App Rewrite": 291600,
+        "zkFold ZK Rollup": 531610,
+        "TxPipe - Pallas, UTxO RPC, Dolos": 172311,
+        "Pragma - Amaru Budget Proposal": 1500000
+      },
+      "Allocated (Active/Matured/Paused) (2025)": {
+        "IOR - Cardano Vision Work Program 2025": 13420000,
+        "IOG - Advancing Decentralised Community Innovation Funding & Infrastructure": 5159000,
+        "IOG - Beyond Minimum Viable Governance": 511085,
+        "IOG - Blockfrost Platform Community Budget Proposal": 487500,
+        "Input Output Engineering Core Development Proposal (6of6)": 26323800,
+        "Input Output Engineering Core Development Proposal (5of6)": 10244000,
+        "Input Output Engineering Core Development Proposal (4of6)": 9914666,
+        "Input Output Engineering Core Development Proposal (3of6)": 6692108,
+        "Input Output Engineering Core Development Proposal (2of6)": 6286800,
+        "Input Output Engineering Core Development Proposal (1of6)": 18020687,
+        "PSSC Fund Test 2": 10,
+        "Product Committee - Local Gatherings, Business Calls, Workshops": 160000,
+        "PyCardano - FAIR IO, LLC": 206720,
+        "OpShin - Python Smart Contracts for Cardano": 131275,
+        "Anzens - Expanding Stablecoin / Cardano Native Asset Support / Fiat Ramps": 3050000,
+        "Supplyoneers FZ-LLC - Cardano Ecosystem Pavilions at Exhibitions": 69750,
+        "Flowdesk - Market Making as a service & Ecosystem Exchange Listing": 2558160,
+        "Rainfire DAO - Cardano Builder DAO": 5670000,
+        "Cardano Foundation - Unveiling the First Unified Global Events Marketing Strategy for Cardano": 900824,
+        "Catalyst FC - Catalyst 2025 Proposal": 21000000,
+        "Intersect MBO - A member-based organization for the Cardano ecosystem": 9450000,
+        "AdaStat.net Cardano blockchain explorer (1 of 2)": 114832,
+        "NFTCDN - A free Native Asset CDN for Cardano Developers": 500000,
+        "MLabs- Core Tool Maintenance: Cardano.nix & Plutarch, Research towards Tooling for Elliptical Curves": 296267,
+        "Lantr - Scalus: DApps Development Platform": 437244,
+        "BloxBean Java Tools Maintenance and Enhancement": 59760,
+        "Tastenkunst GmbH - Eternl Maintenance": 382838,
+        "Cooperativa de Trabajo Eryx - ZK Bridge": 368000,
+        "Harmonic Laboratories: Gerolamo - Cardano Node in typescript": 578571,
+        "Open Source Committee - Developer Advocates Program, Committee Travel Budget, Bug Bounty": 760000,
+        "GO MAESTRO INC - Complete Web3 developer stack": 194000,
+        "VacuumLabs - Hardware Wallets Maintenance & Ledger App Rewrite": 433200,
+        "zkFold ZK Rollup": 629390,
+        "Midgard Labs - Lucid Evolution Maintenance": 130903,
+        "TxPipe - Pallas, UTxO RPC, Dolos": 490431,
+        "Midgard - Optimistic Rollups": 2162096
+      },
+      "Loans (2025)": {
+        "Snek Foundation - 5M ADA Loan for Cardano's Global Listing Expansion": 5000000
+      }
+    },
+    "status_totals_ada": {
+      "Withdrawn": 107832572,
+      "Active": 106080003,
+      "Matured": 15345230,
+      "Paused": 26368684,
+      "Loan": 5000000
+    },
+    "project_totals_ada": {
+      "IOR - Cardano Vision Work Program 2025": 26840000,
+      "IOG - Advancing Decentralised Community Innovation Funding & Infrastructure": 5159000,
+      "IOG - Beyond Minimum Viable Governance": 592780,
+      "IOG - Blockfrost Platform Community Budget Proposal": 1300000,
+      "Input Output Engineering Core Development Proposal (6of6)": 33664800,
+      "Input Output Engineering Core Development Proposal (5of6)": 11492000,
+      "Input Output Engineering Core Development Proposal (4of6)": 10816000,
+      "Input Output Engineering Core Development Proposal (3of6)": 8870001,
+      "Input Output Engineering Core Development Proposal (2of6)": 7774000,
+      "Input Output Engineering Core Development Proposal (1of6)": 24200280,
+      "Allowlist Fund Test": 10,
+      "PSSC Fund Test 2": 10,
+      "Product Committee - Local Gatherings, Business Calls, Workshops": 350000,
+      "PyCardano - FAIR IO, LLC": 314800,
+      "OpShin - Python Smart Contracts for Cardano": 199911,
+      "Anzens - Expanding Stablecoin / Cardano Native Asset Support / Fiat Ramps": 4000000,
+      "Supplyoneers FZ-LLC - Cardano Ecosystem Pavilions at Exhibitions": 889500,
+      "Flowdesk - Market Making as a service & Ecosystem Exchange Listing": 3126000,
+      "Rainfire DAO - Cardano Builder DAO ": 12000000,
+      "Cardano Foundation - Unveiling the First Unified Global Events Marketing Strategy for Cardano": 6000000,
+      "Cardano Foundation - Cardano Summit 2025 and regional tech events": 6000000,
+      "Catalyst FC - Catalyst 2025 Proposal": 64300000,
+      "Intersect MBO - A member-based organization for the Cardano ecosystem": 15750000,
+      "AdaStat.net Cardano blockchain explorer (1 of 2)": 152284,
+      "NFTCDN - A free Native Asset CDN for Cardano Developers": 605000,
+      "MLabs- Core Tool Maintenance: Cardano.nix & Plutarch, Research towards Tooling for Elliptical Curves": 393042,
+      "Vellum Labs: Developer-Focused Blockchain Explorer for Cardano": 266667,
+      "Lantr - Scalus: DApps Development Platform": 657692,
+      "BloxBean Java Tools Maintenance and Enhancement": 99600,
+      "Tastenkunst GmbH - Eternl Maintenance": 583000,
+      "Cooperativa de Trabajo Eryx - ZK Bridge": 700000,
+      "Harmonic Laboratories: Gerolamo - Cardano Node in typescript": 578571,
+      "Open Source Committee - Developer Advocates Program, Committee Travel Budget, Bug Bounty": 1010000,
+      "GO MAESTRO INC - Complete Web3 developer stack": 600000,
+      "VacuumLabs - Hardware Wallets Maintenance & Ledger App Rewrite": 724800,
+      "zkFold ZK Rollup": 1161000,
+      "Midgard Labs - Lucid Evolution Maintenance": 130903,
+      "TxPipe - Pallas, UTxO RPC, Dolos": 662742,
+      "Midgard - Optimistic Rollups": 2162096,
+      "Pragma - Amaru Budget Proposal": 1500000,
+      "Snek Foundation - 5M ADA Loan for Cardano's Global Listing Expansion": 5000000
+    },
+    "vendor_totals_ada": {
+      "IOR": 26840000,
+      "IOG": 7051780,
+      "Input Output Engineering Core Development Proposal (6of6)": 33664800,
+      "Input Output Engineering Core Development Proposal (5of6)": 11492000,
+      "Input Output Engineering Core Development Proposal (4of6)": 10816000,
+      "Input Output Engineering Core Development Proposal (3of6)": 8870001,
+      "Input Output Engineering Core Development Proposal (2of6)": 7774000,
+      "Input Output Engineering Core Development Proposal (1of6)": 24200280,
+      "Allowlist": 10,
+      "addr1q8rjaatvmmakqz3jek68uvlwjs4c9ckqfnl404a3yjrnrnlaepuyxvahzd69cnrvm4ssk6wj3ucy3sgtvyfxccp8mn5sfxt6e2": 10,
+      "addr1q8kmt82cgxnv4dapm8926uz50t58cy4vg0mdmcv3mdmq7e489jcdt3fvg0zfvywehy0vzvvxyzgsfkjwcnhsq62ay2fq5c6lpc": 350000,
+      "addr1qyu57x0c9sjutfstgq22gurl2dwyyvvsr7mwlh4qulxghv24ffmv8lur8q65ecu59klc8njlsr0v9cdeefctmlx23aqsxjpdex": 314800,
+      "addr1qy236l8zxnyvvm7uaxtvp87k36a045h8em0y82clams4wfuwpj9clsvsf85cd4xc59zjztr5zwpummwckmzr2myjwjnsrv508n": 199911,
+      "addr1q9gcxfl9fe9ulluvtc2sxj6xux7jfa49zzq4aheyywqm0k3gudvqrjyfk4nqpvscu2ggqg67x9e0dk5l5p4s6msvkpys6qv4v6": 5000000,
+      "addr1q9yv22yvu6krccqg3rsx3th4lgd0ar8gjx4zsp2avjk32vucm6spkj57ajfcu23pskrlvys3t99v3ej553h2eh9r86csg5a07e": 4000000,
+      "addr1q9knu3thwqfnwly0ggfn0fen5ac50v0smvjgrlxkskkrxgv9srwtryv28yxsrv4x5agruavj3dykhyperms8smxhqt4saqm9v6": 889500,
+      "addr1qxve6vc0c53jxyvk9k92ek3h5jyg8pwrq5hyqp4rafcws7jvalcz772r2rk0ytnvc5mfrxq6rq9vkwzsymq45a33utwqxy3cv8": 3126000,
+      "addr1qxnuhkxz0mgh0vx6jg9zg4qp9pg27ckm6uv622fsxtghap3sruuxr0ev6mn5907qz4wl4s6qvsygmvrdc5qzwq0mlrwsannve8": 12000000,
+      "addr1qxkty7fvrjcswfpj0pf2ergrlpc8xtzmersscg4ghqyezsg77rkpz23uwdfe2e4au6m2heqmk7gersd6560dljc9s8eqr6r3v3": 12000000,
+      "addr1q8q7jyap76l0d5gqj8naw5t49yu3f0h7qkzsps9z0gfjcu25uj747vu83mvg3fuh6ttdgwshjwtcne6esrpct2uzmnuqdqd82j": 64300000,
+      "addr1q9qk3n36gv5pclrym2dhedv9hqs2dchkt0nf36tscap3paaf7ma3972u24k8d0ejjgakphc9yp6zsxc2q0nsjmuvcmxsly0a5a": 15750000,
+      "addr1qyjk85v68tmpy9afm8l3k536sa98ktna5hknxlq3sdl2daall4ts4vx7py55p4whtyr3d3s5rgw7rdztv7jzqg4am7squssllz": 152284,
+      "addr1q92q9yv2yfvcf55tqeyeyysnspzfujyyt4htg2y5y449mzs5vszfuaa53gyets7sdty2ynrrtssv0t8qy009q4efsfrst57f7j": 605000,
+      "addr1q86nycg8kryrkvskcdktvsup3gdmwnlk6z376rml5qfvccda0gvtkuuq7ypygj4ztfrvvemch6hd8ua42ccywcxkt4gqtznf6s": 393042,
+      "addr1q9sz5kw40pmnkcmmfvssm5fy2vzkk7l0wu5szv25nnffkqnkc35qyrgnqu8tl96u5eejytgvtsqatr2ms6hrxhdzq4pslvp2rm": 266667,
+      "addr1q8hy6hpgvgxzkpy5dhpjl4sgp4e007s5a2qddcrn9g4v0f280705mn54gt7qvve3jmwykq8shht0kk4464caf2e732nq05zszr": 657692,
+      "addr1q8jwgfgsykah9kawn7ve7lam7wrey4jery5yrn5xfuc23vhd332ffcu6l2jmzc22fym9szkejlt3cszkf53kd425gq6saxvzdt": 99600,
+      "addr1qyekd5cyq73usa5czjjgpn8esawy59evvdhnwt52jlaepmnmzs4pv8t3hz0t3edydewp50m66e402jqxfzjke5xse8pqk5zmd8": 583000,
+      "addr1q84naykw9dnu8znm7dej9fd3rhgajwray3r68ares8t294zd3qgc7sm9sg36suavqwgedx3q2s6nz9jp54xwg3drr9wsmrvged": 700000,
+      "addr1q9a80rmurvk388224szqxtdfn723yt2hmh2f3z7gkw2srczevw9gj6c93r2900smfyks6dyqayvra7hhectfuh35lhqqex327p": 578571,
+      "addr1q9kpwrdezpmyxn0g87fcdrnp7spqaauyqy3kx6aq5jj3926z8sjcfkfh9jhkskg9x72wfg86yt23me9j6dejjgwkycvs3gy7pn": 1010000,
+      "addr1qyn28fkuh5qwxrvl69u38j74nntcphr7hsktw563yc9l4aj9qmnf27m74mhyrs6hkfh4pgmsgv39eypdcufq6g4t6mssgdvca8": 600000,
+      "addr1q9c0wgxuygu6plh23kmxkl0wewypmgrewe706g8q0y5psdz32x5hqy5y2v0mt7hgsd2mpm3cwqwhzevrh6sn04gfg5nsj6r0a3": 724800,
+      "addr1q8phtw2jlcwfxg8mhusvy7wuzxechtam5ehg4xqc7s8ut4r2lnqksm9q37dmlpjuyf2vp3qlarg5nrx56peqqwmme3gs9vp2d3": 1161000,
+      "addr1q9rsaat50djvcxc3sh6uapzt6ktmqm5kaufw3vr8wg4qy5hst733xv48tak2k433cj864u762cjrtcz6dk3x6e2nawgsssa7nv": 2292999,
+      "addr1q94dne7wfqvsf724gx2dycgpmzfz43psgtrmc6ksst442eswc8fz3e6r6s7xjca8eh7hjflq06sfqcxc0uz63evz03cs9xjqzs": 662742
+    }
+  },
+  "nodes": [
+    {
+      "id": "Reserve emissions (2025)"
+    },
+    {
+      "id": "Fee revenue (2025)"
+    },
+    {
+      "id": "Treasury donations (2025)"
+    },
+    {
+      "id": "Rewards pot (2025)"
+    },
+    {
+      "id": "Treasury via \u03c4 (2025)"
+    },
+    {
+      "id": "Staking rewards (2025)"
+    },
+    {
+      "id": "Treasury (2025)"
+    },
+    {
+      "id": "Budget Expenditures (2025)"
+    },
+    {
+      "id": "Spent (Withdrawn) (2025)"
+    },
+    {
+      "id": "IOR - Cardano Vision Work Program 2025 (Withdrawn 2025)"
+    },
+    {
+      "id": "IOG - Beyond Minimum Viable Governance (Withdrawn 2025)"
+    },
+    {
+      "id": "IOG - Blockfrost Platform Community Budget Proposal (Withdrawn 2025)"
+    },
+    {
+      "id": "Input Output Engineering Core Development Proposal (6of6) (Withdrawn 2025)"
+    },
+    {
+      "id": "Input Output Engineering Core Development Proposal (5of6) (Withdrawn 2025)"
+    },
+    {
+      "id": "Input Output Engineering Core Development Proposal (4of6) (Withdrawn 2025)"
+    },
+    {
+      "id": "Input Output Engineering Core Development Proposal (3of6) (Withdrawn 2025)"
+    },
+    {
+      "id": "Input Output Engineering Core Development Proposal (2of6) (Withdrawn 2025)"
+    },
+    {
+      "id": "Input Output Engineering Core Development Proposal (1of6) (Withdrawn 2025)"
+    },
+    {
+      "id": "Allowlist Fund Test (Withdrawn 2025)"
+    },
+    {
+      "id": "Product Committee - Local Gatherings, Business Calls, Workshops (Withdrawn 2025)"
+    },
+    {
+      "id": "PyCardano - FAIR IO, LLC (Withdrawn 2025)"
+    },
+    {
+      "id": "OpShin - Python Smart Contracts for Cardano (Withdrawn 2025)"
+    },
+    {
+      "id": "Anzens - Expanding Stablecoin / Cardano Native Asset Support / Fiat Ramps (Withdrawn 2025)"
+    },
+    {
+      "id": "Supplyoneers FZ-LLC - Cardano Ecosystem Pavilions at Exhibitions (Withdrawn 2025)"
+    },
+    {
+      "id": "Flowdesk - Market Making as a service & Ecosystem Exchange Listing (Withdrawn 2025)"
+    },
+    {
+      "id": "Rainfire DAO - Cardano Builder DAO (Withdrawn 2025)"
+    },
+    {
+      "id": "Cardano Foundation - Unveiling the First Unified Global Events Marketing Strategy for Cardano (Withdrawn 2025)"
+    },
+    {
+      "id": "Cardano Foundation - Cardano Summit 2025 and regional tech events (Withdrawn 2025)"
+    },
+    {
+      "id": "Catalyst FC - Catalyst 2025 Proposal (Withdrawn 2025)"
+    },
+    {
+      "id": "Intersect MBO - A member-based organization for the Cardano ecosystem (Withdrawn 2025)"
+    },
+    {
+      "id": "AdaStat.net Cardano blockchain explorer (1 of 2) (Withdrawn 2025)"
+    },
+    {
+      "id": "NFTCDN - A free Native Asset CDN for Cardano Developers (Withdrawn 2025)"
+    },
+    {
+      "id": "MLabs- Core Tool Maintenance: Cardano.nix & Plutarch, Research towards Tooling for Elliptical Curves (Withdrawn 2025)"
+    },
+    {
+      "id": "Vellum Labs: Developer-Focused Blockchain Explorer for Cardano (Withdrawn 2025)"
+    },
+    {
+      "id": "Lantr - Scalus: DApps Development Platform (Withdrawn 2025)"
+    },
+    {
+      "id": "BloxBean Java Tools Maintenance and Enhancement (Withdrawn 2025)"
+    },
+    {
+      "id": "Tastenkunst GmbH - Eternl Maintenance (Withdrawn 2025)"
+    },
+    {
+      "id": "Cooperativa de Trabajo Eryx - ZK Bridge (Withdrawn 2025)"
+    },
+    {
+      "id": "Open Source Committee - Developer Advocates Program, Committee Travel Budget, Bug Bounty (Withdrawn 2025)"
+    },
+    {
+      "id": "GO MAESTRO INC - Complete Web3 developer stack (Withdrawn 2025)"
+    },
+    {
+      "id": "VacuumLabs - Hardware Wallets Maintenance & Ledger App Rewrite (Withdrawn 2025)"
+    },
+    {
+      "id": "zkFold ZK Rollup (Withdrawn 2025)"
+    },
+    {
+      "id": "TxPipe - Pallas, UTxO RPC, Dolos (Withdrawn 2025)"
+    },
+    {
+      "id": "Allocated (Active/Matured/Paused) (2025)"
+    },
+    {
+      "id": "IOR - Cardano Vision Work Program 2025 (Allocated 2025)"
+    },
+    {
+      "id": "IOG - Advancing Decentralised Community Innovation Funding & Infrastructure (Allocated 2025)"
+    },
+    {
+      "id": "IOG - Beyond Minimum Viable Governance (Allocated 2025)"
+    },
+    {
+      "id": "IOG - Blockfrost Platform Community Budget Proposal (Allocated 2025)"
+    },
+    {
+      "id": "Input Output Engineering Core Development Proposal (6of6) (Allocated 2025)"
+    },
+    {
+      "id": "Input Output Engineering Core Development Proposal (5of6) (Allocated 2025)"
+    },
+    {
+      "id": "Input Output Engineering Core Development Proposal (4of6) (Allocated 2025)"
+    },
+    {
+      "id": "Input Output Engineering Core Development Proposal (3of6) (Allocated 2025)"
+    },
+    {
+      "id": "Input Output Engineering Core Development Proposal (2of6) (Allocated 2025)"
+    },
+    {
+      "id": "Input Output Engineering Core Development Proposal (1of6) (Allocated 2025)"
+    },
+    {
+      "id": "PSSC Fund Test 2 (Allocated 2025)"
+    },
+    {
+      "id": "Product Committee - Local Gatherings, Business Calls, Workshops (Allocated 2025)"
+    },
+    {
+      "id": "PyCardano - FAIR IO, LLC (Allocated 2025)"
+    },
+    {
+      "id": "OpShin - Python Smart Contracts for Cardano (Allocated 2025)"
+    },
+    {
+      "id": "Anzens - Expanding Stablecoin / Cardano Native Asset Support / Fiat Ramps (Allocated 2025)"
+    },
+    {
+      "id": "Supplyoneers FZ-LLC - Cardano Ecosystem Pavilions at Exhibitions (Allocated 2025)"
+    },
+    {
+      "id": "Flowdesk - Market Making as a service & Ecosystem Exchange Listing (Allocated 2025)"
+    },
+    {
+      "id": "Rainfire DAO - Cardano Builder DAO (Allocated 2025)"
+    },
+    {
+      "id": "Cardano Foundation - Unveiling the First Unified Global Events Marketing Strategy for Cardano (Allocated 2025)"
+    },
+    {
+      "id": "Catalyst FC - Catalyst 2025 Proposal (Allocated 2025)"
+    },
+    {
+      "id": "Intersect MBO - A member-based organization for the Cardano ecosystem (Allocated 2025)"
+    },
+    {
+      "id": "AdaStat.net Cardano blockchain explorer (1 of 2) (Allocated 2025)"
+    },
+    {
+      "id": "NFTCDN - A free Native Asset CDN for Cardano Developers (Allocated 2025)"
+    },
+    {
+      "id": "MLabs- Core Tool Maintenance: Cardano.nix & Plutarch, Research towards Tooling for Elliptical Curves (Allocated 2025)"
+    },
+    {
+      "id": "Lantr - Scalus: DApps Development Platform (Allocated 2025)"
+    },
+    {
+      "id": "BloxBean Java Tools Maintenance and Enhancement (Allocated 2025)"
+    },
+    {
+      "id": "Tastenkunst GmbH - Eternl Maintenance (Allocated 2025)"
+    },
+    {
+      "id": "Cooperativa de Trabajo Eryx - ZK Bridge (Allocated 2025)"
+    },
+    {
+      "id": "Harmonic Laboratories: Gerolamo - Cardano Node in typescript (Allocated 2025)"
+    },
+    {
+      "id": "Open Source Committee - Developer Advocates Program, Committee Travel Budget, Bug Bounty (Allocated 2025)"
+    },
+    {
+      "id": "GO MAESTRO INC - Complete Web3 developer stack (Allocated 2025)"
+    },
+    {
+      "id": "VacuumLabs - Hardware Wallets Maintenance & Ledger App Rewrite (Allocated 2025)"
+    },
+    {
+      "id": "zkFold ZK Rollup (Allocated 2025)"
+    },
+    {
+      "id": "Midgard Labs - Lucid Evolution Maintenance (Allocated 2025)"
+    },
+    {
+      "id": "TxPipe - Pallas, UTxO RPC, Dolos (Allocated 2025)"
+    },
+    {
+      "id": "Midgard - Optimistic Rollups (Allocated 2025)"
+    },
+    {
+      "id": "Loans (2025)"
+    },
+    {
+      "id": "Pragma - Amaru Budget Proposal (Withdrawn 2025)"
+    },
+    {
+      "id": "Snek Foundation - 5M ADA Loan for Cardano's Global Listing Expansion (Loan 2025)"
+    }
+  ],
+  "links": [
+    {
+      "source": "Reserve emissions (2025)",
+      "target": "Rewards pot (2025)",
+      "value": 829994484
+    },
+    {
+      "source": "Fee revenue (2025)",
+      "target": "Rewards pot (2025)",
+      "value": 4589134
+    },
+    {
+      "source": "Treasury donations (2025)",
+      "target": "Treasury (2025)",
+      "value": 735710
+    },
+    {
+      "source": "Rewards pot (2025)",
+      "target": "Treasury via \u03c4 (2025)",
+      "value": 282837524
+    },
+    {
+      "source": "Rewards pot (2025)",
+      "target": "Staking rewards (2025)",
+      "value": 551746094
+    },
+    {
+      "source": "Treasury via \u03c4 (2025)",
+      "target": "Treasury (2025)",
+      "value": 282837524
+    },
+    {
+      "source": "Treasury (2025)",
+      "target": "Budget Expenditures (2025)",
+      "value": 260626489
+    },
+    {
+      "source": "Budget Expenditures (2025)",
+      "target": "Spent (Withdrawn) (2025)",
+      "value": 107832572
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "IOR - Cardano Vision Work Program 2025 (Withdrawn 2025)",
+      "value": 13420000
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "IOG - Beyond Minimum Viable Governance (Withdrawn 2025)",
+      "value": 81695
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "IOG - Blockfrost Platform Community Budget Proposal (Withdrawn 2025)",
+      "value": 812500
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Input Output Engineering Core Development Proposal (6of6) (Withdrawn 2025)",
+      "value": 7341000
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Input Output Engineering Core Development Proposal (5of6) (Withdrawn 2025)",
+      "value": 1248000
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Input Output Engineering Core Development Proposal (4of6) (Withdrawn 2025)",
+      "value": 901334
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Input Output Engineering Core Development Proposal (3of6) (Withdrawn 2025)",
+      "value": 2177893
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Input Output Engineering Core Development Proposal (2of6) (Withdrawn 2025)",
+      "value": 1487200
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Input Output Engineering Core Development Proposal (1of6) (Withdrawn 2025)",
+      "value": 6179593
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Allowlist Fund Test (Withdrawn 2025)",
+      "value": 10
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Product Committee - Local Gatherings, Business Calls, Workshops (Withdrawn 2025)",
+      "value": 190000
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "PyCardano - FAIR IO, LLC (Withdrawn 2025)",
+      "value": 108080
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "OpShin - Python Smart Contracts for Cardano (Withdrawn 2025)",
+      "value": 68636
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Anzens - Expanding Stablecoin / Cardano Native Asset Support / Fiat Ramps (Withdrawn 2025)",
+      "value": 950000
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Supplyoneers FZ-LLC - Cardano Ecosystem Pavilions at Exhibitions (Withdrawn 2025)",
+      "value": 819750
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Flowdesk - Market Making as a service & Ecosystem Exchange Listing (Withdrawn 2025)",
+      "value": 567840
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Rainfire DAO - Cardano Builder DAO (Withdrawn 2025)",
+      "value": 6330000
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Cardano Foundation - Unveiling the First Unified Global Events Marketing Strategy for Cardano (Withdrawn 2025)",
+      "value": 5099176
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Cardano Foundation - Cardano Summit 2025 and regional tech events (Withdrawn 2025)",
+      "value": 6000000
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Catalyst FC - Catalyst 2025 Proposal (Withdrawn 2025)",
+      "value": 43300000
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Intersect MBO - A member-based organization for the Cardano ecosystem (Withdrawn 2025)",
+      "value": 6300000
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "AdaStat.net Cardano blockchain explorer (1 of 2) (Withdrawn 2025)",
+      "value": 37452
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "NFTCDN - A free Native Asset CDN for Cardano Developers (Withdrawn 2025)",
+      "value": 105000
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "MLabs- Core Tool Maintenance: Cardano.nix & Plutarch, Research towards Tooling for Elliptical Curves (Withdrawn 2025)",
+      "value": 96775
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Vellum Labs: Developer-Focused Blockchain Explorer for Cardano (Withdrawn 2025)",
+      "value": 266667
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Lantr - Scalus: DApps Development Platform (Withdrawn 2025)",
+      "value": 220448
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "BloxBean Java Tools Maintenance and Enhancement (Withdrawn 2025)",
+      "value": 39840
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Tastenkunst GmbH - Eternl Maintenance (Withdrawn 2025)",
+      "value": 200162
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Cooperativa de Trabajo Eryx - ZK Bridge (Withdrawn 2025)",
+      "value": 332000
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Open Source Committee - Developer Advocates Program, Committee Travel Budget, Bug Bounty (Withdrawn 2025)",
+      "value": 250000
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "GO MAESTRO INC - Complete Web3 developer stack (Withdrawn 2025)",
+      "value": 406000
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "VacuumLabs - Hardware Wallets Maintenance & Ledger App Rewrite (Withdrawn 2025)",
+      "value": 291600
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "zkFold ZK Rollup (Withdrawn 2025)",
+      "value": 531610
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "TxPipe - Pallas, UTxO RPC, Dolos (Withdrawn 2025)",
+      "value": 172311
+    },
+    {
+      "source": "Budget Expenditures (2025)",
+      "target": "Allocated (Active/Matured/Paused) (2025)",
+      "value": 147793917
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "IOR - Cardano Vision Work Program 2025 (Allocated 2025)",
+      "value": 13420000
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "IOG - Advancing Decentralised Community Innovation Funding & Infrastructure (Allocated 2025)",
+      "value": 5159000
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "IOG - Beyond Minimum Viable Governance (Allocated 2025)",
+      "value": 511085
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "IOG - Blockfrost Platform Community Budget Proposal (Allocated 2025)",
+      "value": 487500
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Input Output Engineering Core Development Proposal (6of6) (Allocated 2025)",
+      "value": 26323800
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Input Output Engineering Core Development Proposal (5of6) (Allocated 2025)",
+      "value": 10244000
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Input Output Engineering Core Development Proposal (4of6) (Allocated 2025)",
+      "value": 9914666
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Input Output Engineering Core Development Proposal (3of6) (Allocated 2025)",
+      "value": 6692108
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Input Output Engineering Core Development Proposal (2of6) (Allocated 2025)",
+      "value": 6286800
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Input Output Engineering Core Development Proposal (1of6) (Allocated 2025)",
+      "value": 18020687
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "PSSC Fund Test 2 (Allocated 2025)",
+      "value": 10
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Product Committee - Local Gatherings, Business Calls, Workshops (Allocated 2025)",
+      "value": 160000
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "PyCardano - FAIR IO, LLC (Allocated 2025)",
+      "value": 206720
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "OpShin - Python Smart Contracts for Cardano (Allocated 2025)",
+      "value": 131275
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Anzens - Expanding Stablecoin / Cardano Native Asset Support / Fiat Ramps (Allocated 2025)",
+      "value": 3050000
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Supplyoneers FZ-LLC - Cardano Ecosystem Pavilions at Exhibitions (Allocated 2025)",
+      "value": 69750
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Flowdesk - Market Making as a service & Ecosystem Exchange Listing (Allocated 2025)",
+      "value": 2558160
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Rainfire DAO - Cardano Builder DAO (Allocated 2025)",
+      "value": 5670000
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Cardano Foundation - Unveiling the First Unified Global Events Marketing Strategy for Cardano (Allocated 2025)",
+      "value": 900824
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Catalyst FC - Catalyst 2025 Proposal (Allocated 2025)",
+      "value": 21000000
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Intersect MBO - A member-based organization for the Cardano ecosystem (Allocated 2025)",
+      "value": 9450000
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "AdaStat.net Cardano blockchain explorer (1 of 2) (Allocated 2025)",
+      "value": 114832
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "NFTCDN - A free Native Asset CDN for Cardano Developers (Allocated 2025)",
+      "value": 500000
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "MLabs- Core Tool Maintenance: Cardano.nix & Plutarch, Research towards Tooling for Elliptical Curves (Allocated 2025)",
+      "value": 296267
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Lantr - Scalus: DApps Development Platform (Allocated 2025)",
+      "value": 437244
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "BloxBean Java Tools Maintenance and Enhancement (Allocated 2025)",
+      "value": 59760
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Tastenkunst GmbH - Eternl Maintenance (Allocated 2025)",
+      "value": 382838
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Cooperativa de Trabajo Eryx - ZK Bridge (Allocated 2025)",
+      "value": 368000
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Harmonic Laboratories: Gerolamo - Cardano Node in typescript (Allocated 2025)",
+      "value": 578571
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Open Source Committee - Developer Advocates Program, Committee Travel Budget, Bug Bounty (Allocated 2025)",
+      "value": 760000
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "GO MAESTRO INC - Complete Web3 developer stack (Allocated 2025)",
+      "value": 194000
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "VacuumLabs - Hardware Wallets Maintenance & Ledger App Rewrite (Allocated 2025)",
+      "value": 433200
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "zkFold ZK Rollup (Allocated 2025)",
+      "value": 629390
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Midgard Labs - Lucid Evolution Maintenance (Allocated 2025)",
+      "value": 130903
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "TxPipe - Pallas, UTxO RPC, Dolos (Allocated 2025)",
+      "value": 490431
+    },
+    {
+      "source": "Allocated (Active/Matured/Paused) (2025)",
+      "target": "Midgard - Optimistic Rollups (Allocated 2025)",
+      "value": 2162096
+    },
+    {
+      "source": "Budget Expenditures (2025)",
+      "target": "Loans (2025)",
+      "value": 5000000
+    },
+    {
+      "source": "Spent (Withdrawn) (2025)",
+      "target": "Pragma - Amaru Budget Proposal (Withdrawn 2025)",
+      "value": 1500000
+    },
+    {
+      "source": "Loans (2025)",
+      "target": "Snek Foundation - 5M ADA Loan for Cardano's Global Listing Expansion (Loan 2025)",
+      "value": 5000000
+    }
+  ]
+}
