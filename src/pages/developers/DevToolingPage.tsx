@@ -50,13 +50,13 @@ export const DevToolingPage = () => {
       buttons: [
         {
           label: "Documentation",
-          href: "https://docs.cexplorer.io",
+          href: "https://cexplorer.apidocumentation.com/cexplorer-api",
           variant: "tertiary" as const,
           external: true,
         },
         {
           label: "Get API key",
-          href: "/api",
+          href: "/profile?tab=api",
           variant: "tertiary" as const,
         },
         {
