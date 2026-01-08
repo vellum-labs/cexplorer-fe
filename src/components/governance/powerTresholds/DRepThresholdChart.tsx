@@ -1,9 +1,9 @@
 import type { FC } from "react";
 import ReactECharts from "echarts-for-react";
+import { useADADisplay } from "@/hooks/useADADisplay";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { CircleHelp } from "lucide-react";
-import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 
 interface DRepThresholdChartProps {
@@ -22,6 +22,7 @@ export const DRepThresholdChart: FC<DRepThresholdChartProps> = ({
   const { epochParam, visibility, activeVotingStake, filteredDReps, params } =
     chartProps;
 
+  const { formatLovelace } = useADADisplay();
   const { textColor, bgColor } = useGraphColors();
 
   const threshold = params ? epochParam[params] : 0;
@@ -96,15 +97,13 @@ export const DRepThresholdChart: FC<DRepThresholdChartProps> = ({
         }
 
         if (params.data.isOther) {
-          const stakeInAda = formatNumberWithSuffix(params.data.value / 1e6);
-          return `Other DReps<br/>Stake: ${stakeInAda} ADA<br/>Not needed for threshold`;
+          const stakeFormatted = formatLovelace(params.data.value);
+          return `Other DReps<br/>Stake: ${stakeFormatted}<br/>Not needed for threshold`;
         }
 
         if (params.data.drepData) {
           const drep = params.data.drepData;
-          const stakeInAda = formatNumberWithSuffix(
-            Number(drep.amount ?? 0) / 1e6,
-          );
+          const stakeFormatted = formatLovelace(Number(drep.amount ?? 0));
           const imageUrl = generateImageUrl(
             drep.hash?.view ?? "",
             "sm",
@@ -117,14 +116,14 @@ export const DRepThresholdChart: FC<DRepThresholdChartProps> = ({
                 <img src="${imageUrl}" alt="DRep" style="width: 16px; height: 16px; border-radius: 50%; object-fit: cover;" onerror="this.style.display='none'"/>
                 ${params.data.name}
               </div>
-              <div>Voting Power: ${stakeInAda} ADA</div>
+              <div>Voting Power: ${stakeFormatted}</div>
               <div>Delegators: ${drep.distr?.count ?? "N/A"}</div>
             </div>
           `;
         }
 
-        const stakeInAda = formatNumberWithSuffix(params.data.value / 1e6);
-        return `${params.data.name}<br/>Stake: ${stakeInAda} ADA`;
+        const stakeFormatted = formatLovelace(params.data.value);
+        return `${params.data.name}<br/>Stake: ${stakeFormatted}`;
       },
     },
     series: [

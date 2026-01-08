@@ -116,6 +116,8 @@ export const TreasuryPage = () => {
           items={walletData}
           columns={columns}
           query={walletQueries[0]}
+          scrollable
+          minContentWidth={700}
         />
       </div>
     </PageBase>

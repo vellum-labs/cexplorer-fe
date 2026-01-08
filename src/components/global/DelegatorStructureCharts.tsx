@@ -4,6 +4,7 @@ import { useGraphColors } from "@/hooks/useGraphColors";
 import { getAnimalColorByName } from "@/utils/address/getAnimalColorByName";
 import type { CallbackDataParams } from "echarts/types/dist/shared";
 import type { DelegatorStructureItem } from "./DelegatorStructureView";
+import { useADADisplay } from "@/hooks/useADADisplay";
 
 interface DelegatorStructureChartsProps {
   items: DelegatorStructureItem[];
@@ -19,6 +20,7 @@ export const DelegatorStructureCharts: FC<DelegatorStructureChartsProps> = ({
   items,
 }) => {
   const { textColor } = useGraphColors();
+  const { formatLovelace } = useADADisplay();
 
   const countChartData = items
     .filter(item => item.data.count > 0)
@@ -31,7 +33,7 @@ export const DelegatorStructureCharts: FC<DelegatorStructureChartsProps> = ({
   const stakeChartData = items
     .filter(item => item.data.sum > 0)
     .map(item => ({
-      value: Math.round(item.data.sum / 1e6),
+      value: item.data.sum,
       name: item.title.charAt(0).toUpperCase() + item.title.slice(1),
       itemStyle: { color: getAnimalColorByName(item.title) },
     }));
@@ -76,9 +78,8 @@ export const DelegatorStructureCharts: FC<DelegatorStructureChartsProps> = ({
       trigger: "item",
       confine: true,
       formatter: (params: StakeTooltipParams) => {
-        const value = Number(params.value).toLocaleString();
         const marker = params.marker ? `${params.marker} ` : "";
-        return `${marker}${params.name} ${value} ₳`;
+        return `${marker}${params.name} ${formatLovelace(params.value)}`;
       },
     },
     series: [

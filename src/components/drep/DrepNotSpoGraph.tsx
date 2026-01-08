@@ -16,7 +16,7 @@ import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import { Switch } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { Info } from "lucide-react";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
+import { useADADisplay } from "@/hooks/useADADisplay";
 
 export const DrepNotSpoGraph: FC = () => {
   const [showFiltered, setShowFiltered] = useState(() => {
@@ -41,6 +41,7 @@ export const DrepNotSpoGraph: FC = () => {
 
   const { splitLineColor, textColor, bgColor, inactivePageIconColor } =
     useGraphColors();
+  const { formatLovelace } = useADADisplay();
 
   const epochs = data.map(d => d.epoch_no);
   const count = data.map(d => (showFiltered ? d.total.count : d.count));
@@ -79,7 +80,7 @@ export const DrepNotSpoGraph: FC = () => {
 
               const value =
                 item.seriesName === "Stake (₳)"
-                  ? lovelaceToAda(item.data)
+                  ? formatLovelace(item.data)
                   : formatNumber(item.data);
 
               return `<p>${item.marker} ${seriesName}: ${value}</p>`;

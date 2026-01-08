@@ -79,6 +79,15 @@ const routes = [
     api: false,
   },
   {
+    path: "/ads/promotion",
+    title: "Promotion | Cexplorer.io",
+    description:
+      "Promote your Cardano project with Cexplorer.io. Boost visibility for your stake pool, token, dRep, or NFT collection through targeted promotion packages and advertising options.",
+    keywords:
+      "Cardano promotion, Cexplorer promotion, blockchain advertising, stake pool promotion, token promotion, dRep promotion, NFT promotion",
+    api: false,
+  },
+  {
     path: "/analytics",
     title: "Analytics | Cexplorer.io",
     description:

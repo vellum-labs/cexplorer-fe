@@ -4,6 +4,7 @@ import { Image } from "@vellumlabs/cexplorer-sdk";
 import PoolDetailOverview from "@/components/pool/PoolDetailOverview";
 import AboutTabItem from "@/components/pool/tabs/AboutTabItem";
 import { AwardsTabItem } from "@/components/pool/tabs/AwardsTabItem";
+import { EmbedTabItem } from "@/components/pool/tabs/EmbedTabItem";
 import BlocksTabItem from "@/components/pool/tabs/BlocksTabItem";
 import DelegatorsTabItem from "@/components/pool/tabs/DelegatorsTabItem";
 import PerformanceTabItem from "@/components/pool/tabs/PerformanceTabItem";
@@ -18,10 +19,18 @@ import { getRouteApi } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { VoteListPage } from "../governance/VoteListPage";
 import { AlertTriangle } from "lucide-react";
+import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
+import { useDelegateAction } from "@/hooks/useDelegateAction";
 
 const PoolDetailPage = () => {
   const route = getRouteApi("/pool/$id");
   const { id } = route.useParams();
+
+  const { showWalletModal, setShowWalletModal } = useDelegateAction({
+    type: "pool",
+    ident: id,
+  });
+
   const query = useFetchPoolDetail(
     id.startsWith("pool1") ? id : undefined,
     id.startsWith("pool1") ? undefined : id,
@@ -99,6 +108,14 @@ const PoolDetailPage = () => {
       content: <VoteListPage poolId={id} />,
       visible: true,
     },
+    {
+      key: "embed",
+      label: "Embed",
+      content: (
+        <EmbedTabItem poolId={id} poolTicker={data?.pool_name?.ticker} />
+      ),
+      visible: true,
+    },
   ];
 
   return (
@@ -174,6 +191,9 @@ const PoolDetailPage = () => {
         isPoolRetiredOrRetiring={isPoolRetiredOrRetiring}
       />
       <Tabs items={poolDetailTabItems} />
+      {showWalletModal && (
+        <ConnectWalletModal onClose={() => setShowWalletModal(false)} />
+      )}
     </PageBase>
   );
 };

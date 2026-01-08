@@ -9,6 +9,7 @@ export const Route = createFileRoute("/pool/$id")({
     input: PaginatedSearchParams & {
       order: "live_stake" | "slot_update" | undefined;
       sort: "asc" | "desc" | undefined;
+      action: string | undefined;
     },
   ) =>
     z
@@ -25,6 +26,7 @@ export const Route = createFileRoute("/pool/$id")({
           .catch("live_stake"),
         sort: z.enum(["asc", "desc"]).optional().catch("asc"),
         tab: z.string().optional().catch("overview"),
+        action: z.string().optional().catch(undefined),
       })
       .parse(input),
 });

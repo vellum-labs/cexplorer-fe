@@ -5,6 +5,7 @@ import { AnalyticsGraph } from "@/components/analytics/AnalyticsGraph";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 
 import { useGraphColors } from "@/hooks/useGraphColors";
+import { useADADisplay } from "@/hooks/useADADisplay";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useFetchStakeDrepsNotSpo } from "@/services/pools";
@@ -12,7 +13,6 @@ import { useFetchStakeDrepsNotSpo } from "@/services/pools";
 import { format } from "date-fns";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
-import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 export const StakeToSposNotDrepsGraph: FC = () => {
   const query = useFetchStakeDrepsNotSpo();
@@ -24,6 +24,7 @@ export const StakeToSposNotDrepsGraph: FC = () => {
 
   const { splitLineColor, textColor, bgColor, inactivePageIconColor } =
     useGraphColors();
+  const { formatLovelace } = useADADisplay();
 
   const epochs = data.map(item => item.epoch_no);
   const stake = data.map(item => item.stake);
@@ -61,7 +62,7 @@ export const StakeToSposNotDrepsGraph: FC = () => {
           const cleanName = item.seriesName.replace(" (₳)", "");
 
           const value = isStake
-            ? formatNumber(lovelaceToAda(item.data))
+            ? formatLovelace(item.data)
             : formatNumber(item.data);
 
           return `<p>${item.marker} ${cleanName}: ${value}</p>`;

@@ -1,6 +1,6 @@
 import SortBy from "@/components/ui/sortBy";
 import { useFetchTxDetail } from "@/services/tx";
-import { useTxSortStore } from "@/stores/tx/txSortStore";
+import { useGeekConfigStore } from "@/stores/geekConfigStore";
 import { getRouteApi } from "@tanstack/react-router";
 import TxContentTable from "../TxContentTable";
 import { useState } from "react";
@@ -19,7 +19,7 @@ const selectItems = [
 ];
 
 const ContentTabItem = () => {
-  const { setSort, sort } = useTxSortStore();
+  const { sortUTxOs, setSortUTxOs } = useGeekConfigStore();
   const route = getRouteApi("/tx/$hash");
   const { hash } = route.useParams();
   const query = useFetchTxDetail(hash);
@@ -46,8 +46,8 @@ const ContentTabItem = () => {
         )}
         <SortBy
           selectItems={selectItems}
-          setSelectedItem={setSort as any}
-          selectedItem={sort}
+          setSelectedItem={setSortUTxOs as any}
+          selectedItem={sortUTxOs}
           className='ml-auto w-fit'
         />
       </div>
@@ -55,14 +55,14 @@ const ContentTabItem = () => {
         <TxContentTable
           title='Inputs'
           data={data}
-          sort={sort as "value" | "index"}
+          sort={sortUTxOs}
           isOutput={false}
           searchQuery={debouncedSearch}
         />
         <TxContentTable
           title='Outputs'
           data={data}
-          sort={sort as "value" | "index"}
+          sort={sortUTxOs}
           isOutput={true}
           searchQuery={debouncedSearch}
         />
