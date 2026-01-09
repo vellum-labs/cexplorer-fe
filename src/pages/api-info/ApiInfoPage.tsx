@@ -130,7 +130,7 @@ export const ApiInfoPage = () => {
         `${apiData?.starter.tok_day} tokens per day`,
       ],
       disabled: false,
-      link: undefined,
+      link: "/profile?tab=api",
     },
     basic: {
       tier: "NFT tier",
@@ -288,6 +288,8 @@ const PriceCard = ({
   disabled = false,
   link,
 }: PriceCardProps) => {
+  const isExternalLink = link?.startsWith('http');
+
   return (
     <div className='relative mt-1 flex min-h-[420px] basis-[350px] flex-col items-center rounded-l bg-darker p-2 shadow-md'>
       <div className='absolute -top-5 rounded-s border border-border bg-background p-1'>
@@ -309,15 +311,27 @@ const PriceCard = ({
         ))}
       </ul>
       {link ? (
-        <a href={link} target='_blank' className='mt-auto w-full max-w-none'>
-          <Button
-            label={`${cta} ${disabled ? "(Coming soon...)" : ""}`}
-            variant='primary'
-            size='md'
-            className='mt-auto w-full max-w-none'
-            disabled={disabled}
-          />
-        </a>
+        isExternalLink ? (
+          <a href={link} target='_blank' className='mt-auto w-full max-w-none'>
+            <Button
+              label={`${cta} ${disabled ? "(Coming soon...)" : ""}`}
+              variant='primary'
+              size='md'
+              className='mt-auto w-full max-w-none'
+              disabled={disabled}
+            />
+          </a>
+        ) : (
+          <Link to={link} className='mt-auto w-full max-w-none'>
+            <Button
+              label={`${cta} ${disabled ? "(Coming soon...)" : ""}`}
+              variant='primary'
+              size='md'
+              className='mt-auto w-full max-w-none'
+              disabled={disabled}
+            />
+          </Link>
+        )
       ) : (
         <Button
           label={`${cta} ${disabled ? "(Coming soon...)" : ""}`}
