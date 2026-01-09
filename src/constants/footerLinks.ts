@@ -42,6 +42,11 @@ export const footerLinks: { [T in Header]: FooterLinks } = {
       target: "_self",
     },
     {
+      label: "Promotion",
+      href: "/promotion",
+      target: "_self",
+    },
+    {
       label: "API",
       href: "/api",
       target: "_self",

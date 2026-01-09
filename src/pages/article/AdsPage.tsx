@@ -116,7 +116,7 @@ export const AdsPage = () => {
               Advertise with us, to reach an audience of Cardano enthusiasts and
               developers, gaining exposure within the growing Cardano community.
             </p>
-            <Link to='/ads/promotion'>
+            <Link to='/promotion'>
               <Button
                 size='lg'
                 variant='primary'
