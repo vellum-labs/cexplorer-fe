@@ -55,13 +55,13 @@ export const DevToolingPage = () => {
           external: true,
         },
         {
-          label: "Get API key",
-          href: "/profile?tab=api",
+          label: "API tiers",
+          href: "/api",
           variant: "tertiary" as const,
         },
         {
-          label: "API Page",
-          href: "/api",
+          label: "Get API key",
+          href: "/profile?tab=api",
           variant: "primary" as const,
           icon: <ArrowRight size={16} />,
         },
