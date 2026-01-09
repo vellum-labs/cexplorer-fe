@@ -1,143 +1,41 @@
-import { useMemo } from "react";
+import type { FC } from "react";
+import type { ReactEChartsProps } from "@/lib/ReactCharts";
+import type { SankeyLink, SankeyNode } from "@/types/treasuryTypes";
+
 import ReactEcharts from "echarts-for-react";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
+
+import {
+  BUDGET_NODE_ID,
+  HIDE_NODE_LABELS,
+  TAU_NODE_ID,
+} from "@/constants/treasury";
+
+import {
+  formatAda,
+  formatPercent,
+  getDisplayName,
+  getLinkColor,
+  getNodeColor,
+  isDonationLink,
+  isRewardsToStakingLink,
+  isRewardsToTreasuryLink,
+} from "@/utils/treasury/sankeyDiagram";
+
+import { useMemo } from "react";
 import { useGraphColors } from "@/hooks/useGraphColors";
-import type { ReactEChartsProps } from "@/lib/ReactCharts";
 
-export type SankeyNode = {
-  id: string;
-};
-
-export type SankeyLink = {
-  source: string;
-  target: string;
-  value: number;
-};
-
-type SankeyDiagramProps = {
-  nodes: ReadonlyArray<SankeyNode>;
-  links: ReadonlyArray<SankeyLink>;
+interface SankeyDiagramProps {
+  nodes: Readonly<SankeyNode[]>;
+  links: Readonly<SankeyLink[]>;
   className?: string;
-};
+}
 
-const TAU_NODE_ID = "Treasury via τ (2025)";
-const BUDGET_NODE_ID = "Budget Expenditures (2025)";
-const REWARDS_POT_NODE_ID = "Rewards pot (2025)";
-const STAKING_REWARDS_NODE_ID = "Staking rewards (2025)";
-const TREASURY_NODE_ID = "Treasury (2025)";
-const SPENT_NODE_ID = "Spent (Withdrawn) (2025)";
-const ALLOCATED_NODE_ID = "Allocated (Active/Matured/Paused) (2025)";
-
-const INCOME_NODES = new Set([
-  "Reserve emissions (2025)",
-  "Fee revenue (2025)",
-  "Treasury donations (2025)",
-]);
-
-const COLORS = {
-  income: "#16a34a",
-  neutral: "#9ca3af",
-  expenditure: "#ef4444",
-  loan: "#3b82f6",
-};
-
-const isIncomeNode = (name: string) => INCOME_NODES.has(name);
-
-const isExpenditureNode = (name: string) =>
-  name.includes("Budget Expenditures") ||
-  name.includes("Staking rewards") ||
-  name.includes("Spent (Withdrawn)") ||
-  name.includes("Allocated (Active/Matured/Paused)") ||
-  name.includes("(Withdrawn 2025)") ||
-  name.includes("(Allocated 2025)");
-
-const isLoanNode = (name: string) =>
-  name.includes("Loans (2025)") || name.includes("(Loan 2025)");
-
-const isDonationLink = (link: SankeyLink) =>
-  link.source === "Treasury donations (2025)" &&
-  link.target === "Treasury (2025)";
-
-const isRewardsToStakingLink = (link: SankeyLink) =>
-  link.source === REWARDS_POT_NODE_ID &&
-  link.target === STAKING_REWARDS_NODE_ID;
-
-const isRewardsToTreasuryLink = (link: SankeyLink) =>
-  link.source === REWARDS_POT_NODE_ID && link.target === TREASURY_NODE_ID;
-
-const isTreasuryToSpentLink = (link: SankeyLink) =>
-  link.source === TREASURY_NODE_ID && link.target === SPENT_NODE_ID;
-
-const isTreasuryToAllocatedLink = (link: SankeyLink) =>
-  link.source === TREASURY_NODE_ID && link.target === ALLOCATED_NODE_ID;
-
-const HIDE_NODE_LABELS = new Set([
-  REWARDS_POT_NODE_ID,
-  STAKING_REWARDS_NODE_ID,
-  TREASURY_NODE_ID,
-]);
-
-const LABEL_OVERRIDES: Record<string, string> = {
-  [TREASURY_NODE_ID]: "Treasury Flows",
-  [SPENT_NODE_ID]: "Budget Spent",
-  [ALLOCATED_NODE_ID]: "Budget Allocations",
-  ["Loans (2025)"]: "Budget Loans",
-};
-
-const stripYear = (label: string) =>
-  label
-    .replace(/\s*2025(?=\))/g, "")
-    .replace(/\s*\(2025\)/g, "")
-    .replace(/\s*\((Withdrawn|Allocated|Loan)\)/g, "")
-    .replace(/\s*\(\s*\)/g, "")
-    .replace(/\s+\)/g, ")")
-    .replace(/\s{2,}/g, " ")
-    .trim();
-
-const getDisplayName = (label: string) =>
-  LABEL_OVERRIDES[label] ?? stripYear(label);
-
-const getNodeColor = (name: string) => {
-  if (isLoanNode(name)) {
-    return COLORS.loan;
-  }
-  if (isExpenditureNode(name)) {
-    return COLORS.expenditure;
-  }
-  if (isIncomeNode(name)) {
-    return COLORS.income;
-  }
-  return COLORS.neutral;
-};
-
-const getLinkColor = (source: string, target: string) => {
-  if (isLoanNode(target) || isLoanNode(source)) {
-    return COLORS.loan;
-  }
-  if (isExpenditureNode(target) || isExpenditureNode(source)) {
-    return COLORS.expenditure;
-  }
-  if (isIncomeNode(source)) {
-    return COLORS.income;
-  }
-  return COLORS.neutral;
-};
-
-const formatAda = (value: number) =>
-  `${value.toLocaleString("en-US", { maximumFractionDigits: 0 })} ADA`;
-
-const formatPercent = (value: number) => {
-  if (value > 0 && value < 0.1) {
-    return "<0.1%";
-  }
-  return `${value.toFixed(1)}%`;
-};
-
-export const SankeyDiagram = ({
+export const SankeyDiagram: FC<SankeyDiagramProps> = ({
   nodes,
   links,
   className,
-}: SankeyDiagramProps) => {
+}) => {
   const { textColor, bgColor, splitLineColor } = useGraphColors();
 
   const { displayNodes, displayLinks } = useMemo(() => {
@@ -302,8 +200,8 @@ export const SankeyDiagram = ({
                 `</div>`,
               percent !== null
                 ? `<div style="display:flex; justify-content:space-between; gap:12px;">` +
-                    `<span>Share of ${displaySource}:</span><span style="font-weight:600;">${formatPercent(percent)}</span>` +
-                    `</div>`
+                  `<span>Share of ${displaySource}:</span><span style="font-weight:600;">${formatPercent(percent)}</span>` +
+                  `</div>`
                 : "",
             ].join("");
           }
@@ -318,7 +216,9 @@ export const SankeyDiagram = ({
               ? outgoingTotals.get(parent)
               : 0;
           const parentPercent =
-            parent && parentTotal > 0 ? (incoming / parentTotal) * 100 : null;
+            parent && parentTotal && parentTotal > 0
+              ? (incoming / parentTotal) * 100
+              : null;
           const displayName = getDisplayName(name ?? "");
           const displayParent = parent ? getDisplayName(parent) : "";
 
@@ -329,8 +229,8 @@ export const SankeyDiagram = ({
               `</div>`,
             parentPercent !== null
               ? `<div style="display:flex; justify-content:space-between; gap:12px;">` +
-                  `<span>Share of ${displayParent}:</span><span style="font-weight:600;">${formatPercent(parentPercent)}</span>` +
-                  `</div>`
+                `<span>Share of ${displayParent}:</span><span style="font-weight:600;">${formatPercent(parentPercent)}</span>` +
+                `</div>`
               : "",
           ].join("");
         },
@@ -376,10 +276,8 @@ export const SankeyDiagram = ({
     ],
   );
 
-  const containerClassName = `relative w-full ${className ?? ""}`.trim();
-
   return (
-    <div className={containerClassName}>
+    <div className={`relative w-full ${className ?? ""}`}>
       <GraphWatermark />
       <ReactEcharts
         option={option}
