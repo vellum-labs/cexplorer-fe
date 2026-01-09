@@ -10,6 +10,9 @@ import { EPOCH_LENGTH_DAYS } from "@/constants/confVariables";
 import { RotateCcw } from "lucide-react";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
+import { SankeyDiagram } from "@/components/treasury/SankeyDiagram";
+import cardano2025Flows from "../../../data/cardano-2025-flows.json";
+import { AnalyticsGraph } from "@/components/analytics/AnalyticsGraph";
 
 interface ProjectionDataPoint {
   epoch: number;
@@ -367,6 +370,19 @@ export const TreasuryProjectionPage = () => {
             )}
           </div>
         </div>
+
+        <AnalyticsGraph
+          title='Cardano 2025 Value Flows'
+          description='Sankey diagram of 2025 income, treasury inflows, expenditures, and
+              loans.'
+          className='my-3'
+        >
+          <SankeyDiagram
+            nodes={cardano2025Flows.nodes}
+            links={cardano2025Flows.links}
+            className='h-[650px] md:h-[720px]'
+          />
+        </AnalyticsGraph>
       </div>
     </PageBase>
   );

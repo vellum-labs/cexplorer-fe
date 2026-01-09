@@ -18,6 +18,16 @@ export interface TreasuryDonationStatsEpoch {
   };
 }
 
+export interface SankeyNode {
+  id: string;
+}
+
+export interface SankeyLink {
+  source: string;
+  target: string;
+  value: number;
+}
+
 export type TreasuryDonationStatsResponse = ResponseCore<{
   epoch: TreasuryDonationStatsEpoch[];
   stat: { total: number };
