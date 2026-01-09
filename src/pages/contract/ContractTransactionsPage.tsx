@@ -24,7 +24,7 @@ import { PageBase } from "@/components/global/pages/PageBase";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const ContractTransactionsPage = () => {
-  const { t } = useAppTranslation("pages");
+  const { t } = useAppTranslation(["pages", "common"]);
   const [totalItems, setTotalItems] = useState(0);
   const { page } = useSearch({ from: "/contract/interactions" });
   const {
@@ -51,7 +51,7 @@ export const ContractTransactionsPage = () => {
 
         return item.block.time;
       },
-      title: t("contractTransactions.table.date"),
+      title: t("common:labels.date"),
       visible: columnsVisibility.date,
       widthPx: 30,
     },
@@ -69,7 +69,7 @@ export const ContractTransactionsPage = () => {
       jsonFormat: item => {
         return item.data.type || "-";
       },
-      title: t("contractTransactions.table.type"),
+      title: t("common:labels.type"),
       visible: columnsVisibility.type,
       widthPx: 30,
     },
@@ -78,7 +78,7 @@ export const ContractTransactionsPage = () => {
       render: item => {
         return <PurposeBadge purpose={item.data.purpose} />;
       },
-      title: t("contractTransactions.table.purpose"),
+      title: t("common:labels.purpose"),
       visible: columnsVisibility.purpose,
       widthPx: 30,
     },
@@ -94,7 +94,7 @@ export const ContractTransactionsPage = () => {
 
         return item?.data?.script_hash;
       },
-      title: <p>{t("contractTransactions.table.scriptHash")}</p>,
+      title: <p>{t("common:labels.scriptHash")}</p>,
       visible: columnsVisibility.view,
       widthPx: 50,
     },
@@ -105,7 +105,7 @@ export const ContractTransactionsPage = () => {
           <AdaWithTooltip data={item.tx.deposit} />
         </div>
       ),
-      title: <p className='w-full text-right'>{t("contractTransactions.table.deposit")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.deposit")}</p>,
       visible: columnsVisibility.deposit,
       widthPx: 40,
     },
@@ -116,7 +116,7 @@ export const ContractTransactionsPage = () => {
           {formatNumber(item.data.unit_steps)}
         </div>
       ),
-      title: <p className='w-full text-right'>{t("contractTransactions.table.unitSteps")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.unitSteps")}</p>,
       visible: columnsVisibility.unit_steps,
       widthPx: 40,
     },
@@ -130,7 +130,7 @@ export const ContractTransactionsPage = () => {
 
         return item.tx.hash;
       },
-      title: t("contractTransactions.table.txHash"),
+      title: t("common:labels.txHash"),
       visible: columnsVisibility.hash,
       widthPx: 50,
     },
@@ -149,7 +149,7 @@ export const ContractTransactionsPage = () => {
 
         return `${item.block.epoch_no}/${item.block.no}`;
       },
-      title: <p className='w-full text-right'>{t("contractTransactions.table.epochBlock")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.epochBlock")}</p>,
       visible: columnsVisibility.epoch_block,
       widthPx: 40,
     },
@@ -173,7 +173,7 @@ export const ContractTransactionsPage = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[250px]'>
-              {t("contractTransactions.totalOf")} {formatNumber(totalItems ?? 0)} {t("contractTransactions.totalOfSuffix")}
+              {t("common:phrases.totalOf")} {formatNumber(totalItems ?? 0)} {t("contractTransactions.totalOfSuffix")}
             </h3>
           )}
           <div className='flex items-center gap-1'>
@@ -183,7 +183,7 @@ export const ContractTransactionsPage = () => {
               setRows={setRows}
               columnsOptions={contractInteractionsTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),

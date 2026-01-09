@@ -3,6 +3,7 @@ import { useGraphColors } from "@/hooks/useGraphColors";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useMiscRate } from "@/hooks/useMiscRate";
 import { useADADisplay } from "@/hooks/useADADisplay";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useFetchMiscBasic } from "@/services/misc";
 import type { RewardItem } from "@/types/accountTypes";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
@@ -16,6 +17,7 @@ interface RewardsGraphProps {
 }
 
 export const RewardsGraph = ({ data }: RewardsGraphProps) => {
+  const { t } = useAppTranslation("common");
   const { splitLineColor, textColor, bgColor } = useGraphColors();
   const { data: miscBasic } = useFetchMiscBasic(true);
   const rates = useMiscRate(miscBasic?.data.version.rate);
@@ -84,7 +86,7 @@ export const RewardsGraph = ({ data }: RewardsGraphProps) => {
         );
 
         return (
-          `Date: ${format(startTime, "dd.MM.yy")} – ${format(endTime, "dd.MM.yy")} (Epoch: ${epoch})<hr>` +
+          `${t("rewards.tooltipDate")}: ${format(startTime, "dd.MM.yy")} – ${format(endTime, "dd.MM.yy")} (${t("rewards.tooltipEpoch")}: ${epoch})<hr>` +
           `<div>` +
           params
             .map(item => {
@@ -272,7 +274,7 @@ export const RewardsGraph = ({ data }: RewardsGraphProps) => {
 
   return (
     <div className='flex flex-col'>
-      <h2 className='mb-1'>Rewards</h2>
+      <h2 className='mb-1'>{t("rewards.title")}</h2>
       <ReactEcharts
         onEvents={{
           legendselectchanged: params => {

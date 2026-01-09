@@ -1,5 +1,6 @@
 import type { FC } from "react";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchPolicyDetail, useFetchPolicyOwner } from "@/services/policy";
@@ -23,6 +24,7 @@ interface PolicyDetailTopWalletsProps {
 export const PolicyDetailTopWallets: FC<PolicyDetailTopWalletsProps> = ({
   policyId,
 }) => {
+  const { t } = useAppTranslation("common");
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { page } = useSearch({ from: "/policy/$policyId" });
   const policyDetailQuery = useFetchPolicyDetail(policyId);
@@ -132,7 +134,7 @@ export const PolicyDetailTopWallets: FC<PolicyDetailTopWalletsProps> = ({
               setRows={setRows}
               columnsOptions={policyDetailOwnerOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),

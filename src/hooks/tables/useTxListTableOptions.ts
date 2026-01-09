@@ -14,19 +14,19 @@ export const useTxListTableOptions = () => {
     () => [
       {
         key: "date",
-        name: t("transactions.table.date"),
+        name: t("common:labels.date"),
       },
       {
         key: "hash",
-        name: t("transactions.table.hash"),
+        name: t("common:labels.hash"),
       },
       {
         key: "block",
-        name: t("transactions.table.block"),
+        name: t("common:labels.block"),
       },
       {
         key: "total_output",
-        name: t("transactions.table.totalOutput"),
+        name: t("common:labels.totalOutput"),
       },
       {
         key: "donation",
@@ -34,11 +34,11 @@ export const useTxListTableOptions = () => {
       },
       {
         key: "fee",
-        name: t("transactions.table.fee"),
+        name: t("common:labels.fee"),
       },
       {
         key: "size",
-        name: t("transactions.table.size"),
+        name: t("common:labels.size"),
       },
       {
         key: "script_size",

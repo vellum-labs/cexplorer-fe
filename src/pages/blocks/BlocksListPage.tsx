@@ -18,7 +18,7 @@ import SortBy from "@/components/ui/sortBy";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const BlocksListPage = () => {
-  const { t } = useAppTranslation("pages");
+  const { t } = useAppTranslation(["pages", "common"]);
   const { page, order, ...rest } = useSearch({ from: "/block/" });
 
   const {
@@ -64,7 +64,7 @@ const BlocksListPage = () => {
           </p>
         ) : (
           <h3 className='pb-1.5'>
-            {t("blocks.totalOf")} {formatNumber(totalItems ?? 0)} {t("blocks.totalOfSuffix")}
+            {t("common:phrases.totalOf")} {formatNumber(totalItems ?? 0)} {t("blocks.totalOfSuffix")}
           </h3>
         )}
         <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
@@ -83,7 +83,7 @@ const BlocksListPage = () => {
                 setRows={setRows}
                 columnsOptions={blocksListTableOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(
@@ -154,7 +154,7 @@ const BlocksListPage = () => {
                 setRows={setRows}
                 columnsOptions={blocksListTableOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(

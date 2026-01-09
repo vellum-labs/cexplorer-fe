@@ -16,6 +16,7 @@ import { GraphTimePeriod } from "@/types/graphTypes";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
 import { configJSON } from "@/constants/conf";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 interface NetworkStorageGraphProps {
   epochQuery: ReturnType<typeof useFetchEpochAnalytics>;
   miscConst: MiscConstResponseData | undefined;
@@ -25,6 +26,7 @@ export const NetworkStorageGraph: FC<NetworkStorageGraphProps> = ({
   epochQuery,
   miscConst,
 }) => {
+  const { t } = useAppTranslation("common");
   const { genesisParams } = configJSON;
   const { shelley } = genesisParams[0];
   const { shelleyStartEpoch } = shelley[0];
@@ -132,7 +134,7 @@ export const NetworkStorageGraph: FC<NetworkStorageGraphProps> = ({
         };
 
         return (
-          `Date: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (Epoch: ${params[0].axisValue})<hr>` +
+          `${t("labels.date")}: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${t("labels.epoch")}: ${params[0].axisValue})<hr>` +
           `<div>
         ${params
           .map(
@@ -155,7 +157,7 @@ export const NetworkStorageGraph: FC<NetworkStorageGraphProps> = ({
     xAxis: {
       type: "category",
       data: epochs,
-      name: "Epoch",
+      name: t("labels.epoch"),
       nameLocation: "middle",
       nameGap: 28,
       inverse: true,
@@ -263,7 +265,7 @@ export const NetworkStorageGraph: FC<NetworkStorageGraphProps> = ({
 
   return (
     <AnalyticsGraph
-      title='Network storage in time'
+      title={t("analytics.networkStorageInTime")}
       exportButton
       graphSortData={{
         query: epochQuery,

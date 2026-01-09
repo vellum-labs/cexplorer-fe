@@ -13,6 +13,7 @@ import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { getAnimalRangeByName } from "@/utils/address/getAnimalRangeByName";
 import ReactEcharts from "echarts-for-react";
 import type { PoolDelegatorStatsResponse } from "@/types/poolTypes";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 type PieTooltipParams = CallbackDataParams & {
   data: { name: string };
@@ -37,6 +38,7 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
   query,
   columnType,
 }) => {
+  const { t } = useAppTranslation();
   const columns: TableColumns<DelegatorStructureItem> = [
     {
       key: "wallet_size",
@@ -58,7 +60,7 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
           </Tooltip>
         );
       },
-      title: <p>Wallet Size</p>,
+      title: <p>{t("global.delegatorStructure.walletSize")}</p>,
       visible: columnsVisibility.wallet_size,
       widthPx: columnType === "pool" ? 150 : 50,
     },
@@ -67,7 +69,7 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
       render: item => {
         return <p className='text-right'>{item.data.count}</p>;
       },
-      title: <p className='w-full text-right'>Count</p>,
+      title: <p className='w-full text-right'>{t("global.delegatorStructure.count")}</p>,
       visible: columnsVisibility.amount,
       widthPx: columnType === "pool" ? 100 : 50,
     },
@@ -88,10 +90,10 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
               if (param.data.name === "Usage") {
                 const animalName =
                   item.title[0].toUpperCase() + item.title.slice(1);
-                return `${animalName} count: ${usage.toFixed(2)}%`;
+                return t("global.delegatorStructure.countTooltip", { name: animalName, value: usage.toFixed(2) });
               }
 
-              return `Others count: ${(100 - usage).toFixed(2)}%`;
+              return t("global.delegatorStructure.othersCountTooltip", { value: (100 - usage).toFixed(2) });
             },
           },
           series: [
@@ -135,7 +137,7 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
           </div>
         );
       },
-      title: <p className='w-full text-right'>Count %</p>,
+      title: <p className='w-full text-right'>{t("global.delegatorStructure.countPercent")}</p>,
       visible: columnsVisibility.amount_pie,
       widthPx: columnType === "pool" ? 100 : 120,
     },
@@ -148,7 +150,7 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
           </p>
         );
       },
-      title: <p className='w-full text-right'>Stake</p>,
+      title: <p className='w-full text-right'>{t("global.delegatorStructure.stake")}</p>,
       visible: columnsVisibility.holdings,
       widthPx: columnType === "pool" ? 100 : 50,
     },
@@ -169,10 +171,10 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
               if (param.data.name === "Usage") {
                 const animalName =
                   item.title[0].toUpperCase() + item.title.slice(1);
-                return `${animalName} stake: ${usage.toFixed(2)}%`;
+                return t("global.delegatorStructure.stakeTooltip", { name: animalName, value: usage.toFixed(2) });
               }
 
-              return `Others stake: ${(100 - usage).toFixed(2)}%`;
+              return t("global.delegatorStructure.othersStakeTooltip", { value: (100 - usage).toFixed(2) });
             },
           },
           series: [
@@ -216,7 +218,7 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
           </div>
         );
       },
-      title: <p className='w-full text-right'>Stake %</p>,
+      title: <p className='w-full text-right'>{t("global.delegatorStructure.stakePercent")}</p>,
       visible: columnsVisibility.holdings_pie,
       widthPx: columnType === "pool" ? 100 : 120,
     },

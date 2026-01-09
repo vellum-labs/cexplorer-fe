@@ -6,6 +6,7 @@ import { useGraphColors } from "@/hooks/useGraphColors";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { useADADisplay } from "@/hooks/useADADisplay";
 import type { ThresholdsMilestone } from "@/types/governanceTypes";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface PowerThresholdsDRepDelegationDonutGraphProps {
   milestone: ThresholdsMilestone;
@@ -16,6 +17,7 @@ interface PowerThresholdsDRepDelegationDonutGraphProps {
 export const PowerThresholdsDRepDelegationDonutGraph: FC<
   PowerThresholdsDRepDelegationDonutGraphProps
 > = ({ milestone, isLoading, currentSupplyEpoch }) => {
+  const { t } = useAppTranslation();
   const { textColor, bgColor } = useGraphColors();
   const { formatLovelace } = useADADisplay();
 
@@ -61,11 +63,11 @@ export const PowerThresholdsDRepDelegationDonutGraph: FC<
       backgroundColor: bgColor,
       textStyle: { color: textColor },
       formatter: ({ name, value, percent }: any) =>
-        `<b>${name}</b><br/>Voting Power: ${formatLovelace(value)}<br/>Share: ${percent.toFixed(2)}%`,
+        `<b>${name}</b><br/>${t("governance.common.votingPower")} ${formatLovelace(value)}<br/>${t("governance.common.share")} ${percent.toFixed(2)}%`,
     },
     series: [
       {
-        name: "DRep Delegation",
+        name: t("governance.delegation.drepDelegation"),
         type: "pie",
         radius: ["50%", "70%"],
         avoidLabelOverlap: false,
@@ -81,13 +83,13 @@ export const PowerThresholdsDRepDelegationDonutGraph: FC<
         data: [
           {
             value: delegatedADA,
-            name: "Delegated Voting Power",
+            name: t("governance.delegation.delegatedVotingPower"),
             itemStyle: { color: "#0284C7" },
             emphasis: { itemStyle: { color: "#0284C7" } },
           },
           {
             value: undelegatedADA,
-            name: "Undelegated",
+            name: t("governance.delegation.undelegated"),
             itemStyle: { color: "#E4E7EC" },
             emphasis: { itemStyle: { color: "#E4E7EC" } },
           },
@@ -108,7 +110,7 @@ export const PowerThresholdsDRepDelegationDonutGraph: FC<
       </div>
       <div className='mt-13 text-center text-text-sm text-grayTextPrimary'>
         <p>
-          DRep Count: {currentDRepEpoch?.stat?.drep_distr?.count_uniq ?? "–"}
+          {t("governance.delegation.drepCount")} {currentDRepEpoch?.stat?.drep_distr?.count_uniq ?? "–"}
         </p>
       </div>
     </div>

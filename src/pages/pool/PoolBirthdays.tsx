@@ -57,7 +57,7 @@ export const PoolBirthdays: FC = () => {
 
         return item.anniversary;
       },
-      title: <p>{t("pools.table.date")}</p>,
+      title: <p>{t("common:labels.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 50,
     },
@@ -82,7 +82,7 @@ export const PoolBirthdays: FC = () => {
           />
         );
       },
-      title: t("pools.table.pool"),
+      title: t("common:labels.pool"),
       visible: columnsVisibility.pool,
       widthPx: 150,
     },
@@ -112,7 +112,7 @@ export const PoolBirthdays: FC = () => {
           </div>
         );
       },
-      title: <p className='w-full text-right'>{t("pools.table.birthday")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.birthday")}</p>,
       visible: columnsVisibility.birthday,
       widthPx: 50,
     },
@@ -149,7 +149,7 @@ export const PoolBirthdays: FC = () => {
 
         return `${formattedDate}, ${formattedTime}`;
       },
-      title: <p className='w-full text-right'>{t("pools.table.registered")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.registered")}</p>,
       visible: columnsVisibility.registered,
       widthPx: 60,
     },
@@ -162,7 +162,7 @@ export const PoolBirthdays: FC = () => {
 
         return <p className='text-right'>{formatNumber(item.delegators)}</p>;
       },
-      title: <p className='w-full text-right'>{t("pools.table.delegators")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.delegators")}</p>,
       visible: columnsVisibility.delegators,
       widthPx: 50,
     },
@@ -179,7 +179,7 @@ export const PoolBirthdays: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>{t("pools.table.activeStake")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.activeStake")}</p>,
       visible: columnsVisibility.active_stake,
       widthPx: 50,
     },

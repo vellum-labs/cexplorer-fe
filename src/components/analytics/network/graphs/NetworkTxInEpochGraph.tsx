@@ -8,6 +8,7 @@ import ReactEcharts from "echarts-for-react";
 import { memo } from "react";
 import { AnalyticsGraph } from "../../AnalyticsGraph";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useTxInEpoch } from "@/hooks/graphs/useTxInEpoch";
 
 interface NetworkTxInEpochGraphProps {
@@ -22,13 +23,14 @@ export const NetworkTxInEpochGraph: FC<NetworkTxInEpochGraphProps> = memo(
     epochQuery,
     miscConst,
   }) {
+    const { t } = useAppTranslation("common");
     const { json, option, selectedItem, setData, setSelectedItem } =
       useTxInEpoch(miscConst);
 
     return (
       <AnalyticsGraph
-        title='Transactions in epoch'
-        description='Visual expression of all transactions on the Cardano network in time.'
+        title={t("analytics.txInEpoch")}
+        description={t("analytics.txInEpochDescription")}
         exportButton
         graphSortData={{
           query: epochQuery,

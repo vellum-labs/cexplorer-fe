@@ -10,10 +10,12 @@ import { format } from "date-fns";
 import parse from "html-react-parser";
 import { LockIcon, LockOpen } from "lucide-react";
 import { type FC } from "react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const AssetTimelockTab: FC<{ json: PolicyJson | undefined }> = ({
   json,
 }) => {
+  const { t } = useAppTranslation("common");
   const { data } = useFetchMiscBasic();
   const currentSlot = data?.data.block.slot_no ?? 0;
 
@@ -21,7 +23,7 @@ export const AssetTimelockTab: FC<{ json: PolicyJson | undefined }> = ({
     script: PolicyJson | undefined,
     indentLevel: number = 0,
   ): [boolean, string] => {
-    if (!script || !script.type) return [false, "Unknown script type"];
+    if (!script || !script.type) return [false, t("asset.unknownScriptType")];
 
     const evaluate = (
       script: PolicyJson,
@@ -29,23 +31,24 @@ export const AssetTimelockTab: FC<{ json: PolicyJson | undefined }> = ({
       indentLevel: number = 0,
     ): [boolean, string] => {
       const indent = "   ".repeat(indentLevel);
+      const ruleLabel = indentLevel <= 1 ? t("asset.rule") : t("asset.subRule");
       switch (script.type) {
         case "sig": {
           return [
             false,
-            `${indent} ${indentLevel <= 1 ? "Rule" : "Sub-rule"} #${ruleNumber}: Signed by key ${script.keyHash}`,
+            `${indent} ${ruleLabel} #${ruleNumber}: ${t("asset.signedByKey")} ${script.keyHash}`,
           ];
         }
         case "before": {
           return [
             script.slot < currentSlot,
-            `${indent} ${indentLevel <= 1 ? "Rule" : "Sub-rule"} #${ruleNumber}: Before slot ${formatNumber(script.slot)} (current slot: ${formatNumber(currentSlot)})`,
+            `${indent} ${ruleLabel} #${ruleNumber}: ${t("asset.beforeSlot", { slot: formatNumber(script.slot), currentSlot: formatNumber(currentSlot) })}`,
           ];
         }
         case "after": {
           return [
             script.slot > currentSlot,
-            `${indent} ${indentLevel <= 1 ? "Rule" : "Sub-rule"} #${ruleNumber}: After slot ${formatNumber(script.slot)} (current slot: ${formatNumber(currentSlot)})`,
+            `${indent} ${ruleLabel} #${ruleNumber}: ${t("asset.afterSlot", { slot: formatNumber(script.slot), currentSlot: formatNumber(currentSlot) })}`,
           ];
         }
         case "all": {
@@ -58,7 +61,7 @@ export const AssetTimelockTab: FC<{ json: PolicyJson | undefined }> = ({
             .join("\n");
           return [
             someLocked,
-            `${indent}<b>All rules must be met:</b>\n${allConditions}`,
+            `${indent}<b>${t("asset.allRulesMustBeMet")}</b>\n${allConditions}`,
           ];
         }
         case "any": {
@@ -71,7 +74,7 @@ export const AssetTimelockTab: FC<{ json: PolicyJson | undefined }> = ({
             .join("\n");
           return [
             anyLocked,
-            `${indent}<b>At least one rule must be met</b>:\n${anyConditions}`,
+            `${indent}<b>${t("asset.atLeastOneRuleMustBeMet")}</b>:\n${anyConditions}`,
           ];
         }
         case "atLeast": {
@@ -86,11 +89,11 @@ export const AssetTimelockTab: FC<{ json: PolicyJson | undefined }> = ({
             .join("\n");
           return [
             atLeastLocked,
-            `${indent}<b>At least ${script.required} rules must be met</b>:\n${atLeastConditions}`,
+            `${indent}<b>${t("asset.atLeastNRulesMustBeMet", { count: script.required })}</b>:\n${atLeastConditions}`,
           ];
         }
         default:
-          return [false, "Unknown script type"];
+          return [false, t("asset.unknownScriptType")];
       }
     };
 
@@ -124,8 +127,8 @@ export const AssetTimelockTab: FC<{ json: PolicyJson | undefined }> = ({
           <div className='flex gap-1'>
             <span className='flex h-fit w-fit items-center gap-1/2 rounded-s border border-border bg-background px-1 py-1/4 text-text-xs font-medium'>
               {indentLevel <= 1
-                ? `Rule #${ruleNumber}`
-                : `Sub-rule #${ruleNumber}`}
+                ? `${t("asset.rule")} #${ruleNumber}`
+                : `${t("asset.subRule")} #${ruleNumber}`}
             </span>
             <Badge color='blue'>
               {script.type.slice(0, 1).toUpperCase() + script.type.slice(1)}
@@ -170,7 +173,7 @@ export const AssetTimelockTab: FC<{ json: PolicyJson | undefined }> = ({
 
   return (
     <>
-      <h3 className='mb-1'>Minting policy</h3>
+      <h3 className='mb-1'>{t("asset.mintingPolicy")}</h3>
       <section className='mb-2 flex gap-2 rounded-l bg-darker p-2 text-text-sm'>
         {isLocked ? (
           <LockIcon
@@ -207,17 +210,19 @@ export const AssetTimelockTab: FC<{ json: PolicyJson | undefined }> = ({
 };
 
 export const OpenPolicy = () => {
+  const { t } = useAppTranslation("common");
   return (
     <div className='flex h-fit w-fit items-center gap-1/2 rounded-s border border-border bg-background px-1 py-1/4 text-text-xs font-medium'>
-      Policy is open
+      {t("asset.policyIsOpen")}
     </div>
   );
 };
 
 export const LockedPolicy = () => {
+  const { t } = useAppTranslation("common");
   return (
     <div className='flex h-fit w-fit items-center gap-1/2 rounded-s border border-border bg-background px-1 py-1/4 text-text-xs font-medium'>
-      Policy is locked
+      {t("asset.policyIsLocked")}
     </div>
   );
 };

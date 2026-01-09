@@ -12,8 +12,10 @@ import { CCMemberDetailOverview } from "@/components/gov/cc/CCMemberDetailOvervi
 import { CCMemberVotesTab } from "@/components/gov/cc/tabs/CCMemberVotesTab";
 import { CCMemberHotKeysTab } from "@/components/gov/cc/tabs/CCMemberHotKeysTab";
 import { CCMemberStatusHistoryTab } from "@/components/gov/cc/tabs/CCMemberStatusHistoryTab";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const CCMemberDetailPage = () => {
+  const { t } = useAppTranslation();
   const route = getRouteApi("/gov/cc/$coldKey");
   const { coldKey } = route.useParams();
   const { data } = useFetchCCMemberDetail(coldKey);
@@ -30,7 +32,7 @@ export const CCMemberDetailPage = () => {
   const tabItems = [
     {
       key: "votes",
-      label: "Votes",
+      label: t("gov.cc.votes"),
       content: (
         <div className='w-full max-w-desktop'>
           <CCMemberVotesTab hotKey={hotKey} />
@@ -40,7 +42,7 @@ export const CCMemberDetailPage = () => {
     },
     {
       key: "hot-keys",
-      label: "Hot keys",
+      label: t("gov.cc.hotKeys"),
       content: (
         <div className='w-full max-w-desktop'>
           <CCMemberHotKeysTab
@@ -59,7 +61,7 @@ export const CCMemberDetailPage = () => {
     },
     {
       key: "status-history",
-      label: "Status history",
+      label: t("gov.cc.statusHistory"),
       content: (
         <div className='w-full max-w-desktop'>
           <CCMemberStatusHistoryTab
@@ -100,18 +102,18 @@ export const CCMemberDetailPage = () => {
             />
           )}
           <span className='flex-1 break-all'>
-            {memberData?.registry?.name || "CC Member"}
+            {memberData?.registry?.name || t("gov.cc.ccMember")}
           </span>
         </span>
       }
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>Governance</span>,
+          label: <span className='inline pt-1/2'>{t("gov.cc.governance")}</span>,
           link: "/gov",
         },
         {
           label: (
-            <span className='inline pt-1/2'>Constitutional Committee</span>
+            <span className='inline pt-1/2'>{t("gov.cc.constitutionalCommittee")}</span>
           ),
           link: "/gov/cc",
         },

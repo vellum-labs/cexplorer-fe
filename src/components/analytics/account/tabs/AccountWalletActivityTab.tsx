@@ -5,6 +5,7 @@ import type { FC } from "react";
 import { AnalyticsGraph } from "../../AnalyticsGraph";
 import { AccountWalletActivityGraph } from "../graphs/AccountWalletActivityGraph";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 import { GraphTimePeriod } from "@/types/graphTypes";
@@ -17,6 +18,7 @@ interface AccountWalletActivityTabProps {
 export const AccountWalletActivityTab: FC<AccountWalletActivityTabProps> = ({
   epochQuery,
 }) => {
+  const { t } = useAppTranslation("common");
   const { data: basicData } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(basicData?.data.version.const);
   const [data, setData] = useState<EpochAnalyticsResponseData[]>();
@@ -26,8 +28,8 @@ export const AccountWalletActivityTab: FC<AccountWalletActivityTabProps> = ({
 
   return (
     <AnalyticsGraph
-      title='Wallets'
-      description='First-time-active and unique wallets with a transaction record in the selected period'
+      title={t("analytics.wallets")}
+      description={t("analytics.walletsDescription")}
       exportButton
       graphSortData={{
         query: epochQuery,

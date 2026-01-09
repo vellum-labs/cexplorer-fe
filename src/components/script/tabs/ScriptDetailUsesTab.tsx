@@ -19,8 +19,10 @@ import {
 import { getPercentageColor } from "@/utils/getPercentageColor";
 import { getRouteApi } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const ScriptDetailUsesTab = () => {
+  const { t } = useAppTranslation("common");
   const route = getRouteApi("/script/$hash");
   const { hash } = route.useParams();
   const { page } = route.useSearch();
@@ -200,7 +202,7 @@ export const ScriptDetailUsesTab = () => {
             setRows={setRows}
             columnsOptions={scriptDetailUsesTableOptions.map(item => {
               return {
-                label: item.name,
+                label: t(`common:tableSettings.${item.key}`),
                 isVisible: columnsVisibility[item.key],
                 onClick: () =>
                   setColumnVisibility(item.key, !columnsVisibility[item.key]),

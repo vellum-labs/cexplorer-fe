@@ -24,8 +24,10 @@ import { scriptListRanklistOptions } from "@/constants/tables/scriptListRanklist
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const ScriptListRanklistTab: FC = () => {
+  const { t } = useAppTranslation("common");
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { page, order } = useSearch({ from: "/script/" });
 
@@ -255,7 +257,7 @@ export const ScriptListRanklistTab: FC = () => {
                 setRows={setRows}
                 columnsOptions={scriptListRanklistOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(
@@ -289,7 +291,7 @@ export const ScriptListRanklistTab: FC = () => {
               setRows={setRows}
               columnsOptions={scriptListRanklistOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),

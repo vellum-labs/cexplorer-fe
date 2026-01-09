@@ -32,7 +32,7 @@ export const AssetListPage: FC<AssetListPageProps> = ({
   watchlist,
   showHeader = true,
 }) => {
-  const { t } = useAppTranslation("pages");
+  const { t } = useAppTranslation(["pages", "common"]);
   const {
     columnsOrder,
     columnsVisibility,
@@ -135,7 +135,7 @@ export const AssetListPage: FC<AssetListPageProps> = ({
                   .filter(item => columnsVisibility[item.key])
                   .map(item => {
                     return {
-                      label: item.name,
+                      label: t(`common:tableSettings.${item.key}`),
                       isVisible: columnsVisibility[item.key],
                       onClick: () =>
                         setColumnVisibility(
@@ -169,7 +169,7 @@ export const AssetListPage: FC<AssetListPageProps> = ({
                 setRows={setRows}
                 columnsOptions={assetListTableOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(

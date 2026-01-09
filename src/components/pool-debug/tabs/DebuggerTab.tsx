@@ -5,6 +5,7 @@ import { useFetchPoolDebug } from "@/services/pools";
 import type { PoolDebugError } from "@/types/poolTypes";
 import { Link } from "@tanstack/react-router";
 import { Info, Check, X } from "lucide-react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Pool {
   pool_id: string;
@@ -23,6 +24,7 @@ export const DebuggerTab: FC<DebuggerTabProps> = ({
   selectedPool,
   onSelectPool,
 }) => {
+  const { t } = useAppTranslation("pages");
   const debugQuery = useFetchPoolDebug(selectedPool?.pool_id ?? "");
 
   const errors = debugQuery.data?.data?.error ?? [];
@@ -39,14 +41,14 @@ export const DebuggerTab: FC<DebuggerTabProps> = ({
   const columns = [
     {
       key: "date",
-      title: "Date",
+      title: t("poolDebug.debugger.date"),
       visible: true,
       widthPx: 100,
       render: (item: PoolDebugError) => <DateCell time={item.date} />,
     },
     {
       key: "type",
-      title: "Type",
+      title: t("poolDebug.debugger.type"),
       visible: true,
       widthPx: 150,
       render: (item: PoolDebugError) => (
@@ -57,7 +59,7 @@ export const DebuggerTab: FC<DebuggerTabProps> = ({
     },
     {
       key: "description",
-      title: "Description",
+      title: t("poolDebug.debugger.errorDescription"),
       visible: true,
       widthPx: 500,
       render: (item: PoolDebugError) => {
@@ -91,10 +93,7 @@ export const DebuggerTab: FC<DebuggerTabProps> = ({
         <div className='flex items-start gap-2'>
           <Info className='mt-0.5 h-5 w-5 flex-shrink-0 text-grayTextPrimary' />
           <p className='text-text-sm text-grayTextPrimary'>
-            Enter your pool ID to check your stake pool configuration. After
-            submitting, you'll see a detailed list of any issues that need
-            attention, or confirmation that everything appears to be set up
-            correctly.
+            {t("poolDebug.debugger.description")}
           </p>
         </div>
 
@@ -110,14 +109,14 @@ export const DebuggerTab: FC<DebuggerTabProps> = ({
               ) : (
                 <X className='h-4 w-4' />
               )}
-              <span>{errorCount} Errors</span>
+              <span>{t("poolDebug.debugger.errors", { count: errorCount })}</span>
             </div>
             <Link
               to='/pool/$id'
               params={{ id: selectedPool.pool_id }}
               className='flex items-center gap-1 text-text-sm text-primary'
             >
-              Pool detail →
+              {t("poolDebug.debugger.poolDetail")}
             </Link>
           </div>
         )}

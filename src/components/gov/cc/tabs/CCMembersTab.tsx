@@ -15,6 +15,7 @@ import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { alphabetWithNumbers } from "@/constants/alphabet";
 import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const getFirstRegistration = (
   reg: CommitteeMemberRegistration | CommitteeMemberRegistration[] | null,
@@ -34,6 +35,7 @@ const isActiveMember = (member: CommitteeMember): boolean => {
 };
 
 export const CCMembersTab: FC = () => {
+  const { t } = useAppTranslation();
   const query = useFetchCommitteeDetail();
   const members =
     query.data?.data?.member.filter(
@@ -57,21 +59,21 @@ export const CCMembersTab: FC = () => {
     },
     {
       key: "status",
-      title: "Status",
+      title: t("gov.cc.status"),
       widthPx: 100,
       visible: true,
       render: item => (
         <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
           <PulseDot color={!item._isActive ? "bg-redText" : undefined} />
           <span className='text-text-xs font-medium'>
-            {item._isActive ? "Active" : "Retired"}
+            {item._isActive ? t("gov.cc.active") : t("gov.cc.retired")}
           </span>
         </div>
       ),
     },
     {
       key: "member",
-      title: "CC member",
+      title: t("gov.cc.ccMember"),
       widthPx: 200,
       visible: true,
       render: item => {
@@ -139,7 +141,7 @@ export const CCMembersTab: FC = () => {
     },
     {
       key: "registration",
-      title: "Registration",
+      title: t("gov.cc.registration"),
       widthPx: 250,
       visible: true,
       render: item => {
@@ -172,7 +174,7 @@ export const CCMembersTab: FC = () => {
     },
     {
       key: "expiration_epoch",
-      title: "Expiration Epoch",
+      title: t("gov.cc.expirationEpoch"),
       widthPx: 120,
       visible: true,
       render: item => (

@@ -5,6 +5,7 @@ import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useFetchAddressUTXO } from "@/services/address";
 import { useAddressDetailUTXOTableStore } from "@/stores/tables/addressDetailUTXOTableStore";
 import { useEffect, useState } from "react";
@@ -26,6 +27,7 @@ interface UTXOTabProps {
 }
 
 export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
+  const { t } = useAppTranslation("common");
   const utxoQuery = useFetchAddressUTXO(address);
   const { data, isLoading } = utxoQuery;
 
@@ -60,7 +62,7 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
 
         return item.tx_hash;
       },
-      title: "TX Hash",
+      title: t("labels.txHash"),
       visible: columnsVisibility.hash,
       widthPx: 65,
     },
@@ -76,7 +78,7 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
 
         return item.tx_index;
       },
-      title: <p>Index</p>,
+      title: <p>{t("address.index")}</p>,
       visible: columnsVisibility.index,
       widthPx: 20,
     },
@@ -133,7 +135,7 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
                 ) : (
                   <div className='flex items-center gap-1/2'>
                     <span>+</span>
-                    <span>NoDatum</span>
+                    <span>{t("address.noDatum")}</span>
                   </div>
                 )}
               </div>
@@ -146,7 +148,7 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
       extraContent: (
         <div className='h-[400px] w-full border border-border'></div>
       ),
-      title: <p>Amount</p>,
+      title: <p>{t("labels.amount")}</p>,
       visible: columnsVisibility.amount,
       widthPx: 260,
     },
@@ -170,7 +172,7 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
 
         return 1000000 + item?.asset_list?.length * 500000;
       },
-      title: <p className='w-full text-right'>Min UTXO ADA</p>,
+      title: <p className='w-full text-right'>{t("address.minUtxoAda")}</p>,
       visible: columnsVisibility.min_utxo,
       widthPx: 55,
     },
@@ -190,7 +192,7 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[230px] text-nowrap'>
-              Total of {formatNumber(totalItems)} UTXOs
+              {t("address.totalUtxos", { count: formatNumber(totalItems) })}
             </h3>
           )}
           <div className='flex justify-end max-[435px]:w-full md:hidden'>
@@ -201,7 +203,7 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
                 setRows={setRows}
                 columnsOptions={addressDetailUTXOOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(
@@ -217,7 +219,7 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
 
         <div className='flex gap-1'>
           <TableSearchInput
-            placeholder='Search by tx hash...'
+            placeholder={t("address.searchByTxHash")}
             value={tableSearch}
             onchange={setTableSearch}
             wrapperClassName='md:w-[320px] w-full'
@@ -231,7 +233,7 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
               setRows={setRows}
               columnsOptions={addressDetailUTXOOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),

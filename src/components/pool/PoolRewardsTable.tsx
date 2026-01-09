@@ -34,7 +34,7 @@ const PoolRewardsTable = ({
   currentActiveStake,
   currentEpochStake,
 }: Props) => {
-  const { t } = useAppTranslation("pages");
+  const { t } = useAppTranslation(["pages", "common"]);
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { page } = useSearch({ from: "/pool/$id" });
   const {
@@ -82,7 +82,7 @@ const PoolRewardsTable = ({
       render: item => (
         <EpochCell no={item.no} showPulseDot currentEpoch={miscConst?.no} />
       ),
-      title: <p className='w-full text-right'>{t("pools.detailPage.rewardsTable.epoch")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.epoch")}</p>,
       visible: columnsVisibility.epoch,
       widthPx: 30,
     },
@@ -91,9 +91,9 @@ const PoolRewardsTable = ({
       render: item => (
         <>
           {currentEpoch === item.no ? (
-            <PendingTag text={t("pools.detailPage.rewardsTable.pendingTwoEpochs")} pendingLabel={t("pools.detailPage.rewardsTable.pending")} />
+            <PendingTag text={t("pools.detailPage.rewardsTable.pendingTwoEpochs")} pendingLabel={t("common:labels.pending")} />
           ) : currentEpoch && currentEpoch - 1 === item.no ? (
-            <PendingTag text={t("pools.detailPage.rewardsTable.pendingNextEpoch")} pendingLabel={t("pools.detailPage.rewardsTable.pending")} />
+            <PendingTag text={t("pools.detailPage.rewardsTable.pendingNextEpoch")} pendingLabel={t("common:labels.pending")} />
           ) : (
             <div className='flex flex-col items-end gap-1/2'>
               <p className='flex items-center gap-1/2'>
@@ -123,7 +123,7 @@ const PoolRewardsTable = ({
 
         return `${lovelaceToAda(item.reward?.leader_lovelace ?? 0)} ${lovelaceToAda(item.reward?.member_lovelace ?? 0)}`;
       },
-      title: <p className='w-full text-right'>{t("pools.detailPage.rewardsTable.rewards")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.rewards")}</p>,
       visible: columnsVisibility.rewards,
       widthPx: 50,
     },
@@ -148,7 +148,7 @@ const PoolRewardsTable = ({
           </div>
         );
       },
-      title: <p className='w-full text-right'>{t("pools.detailPage.rewardsTable.activeStake")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.activeStake")}</p>,
       visible: columnsVisibility.active_stake,
       widthPx: 50,
     },
@@ -173,7 +173,7 @@ const PoolRewardsTable = ({
           </div>
         );
       },
-      title: <p className='w-full text-right'>{t("pools.detailPage.rewardsTable.epochStake")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.epochStake")}</p>,
       visible: columnsVisibility.epoch_stake,
       widthPx: 50,
     },
@@ -182,9 +182,9 @@ const PoolRewardsTable = ({
       render: item => (
         <div className='text-right'>
           {currentEpoch === item.no ? (
-            <PendingTag text={t("pools.detailPage.rewardsTable.pendingTwoEpochs")} pendingLabel={t("pools.detailPage.rewardsTable.pending")} />
+            <PendingTag text={t("pools.detailPage.rewardsTable.pendingTwoEpochs")} pendingLabel={t("common:labels.pending")} />
           ) : currentEpoch && currentEpoch - 1 === item.no ? (
-            <PendingTag text={t("pools.detailPage.rewardsTable.pendingNextEpoch")} pendingLabel={t("pools.detailPage.rewardsTable.pending")} />
+            <PendingTag text={t("pools.detailPage.rewardsTable.pendingNextEpoch")} pendingLabel={t("common:labels.pending")} />
           ) : item.reward?.member_pct ? (
             item.reward.member_pct.toFixed(2) + "%"
           ) : (
@@ -201,7 +201,7 @@ const PoolRewardsTable = ({
               </div>
             }
           >
-            <span className='cursor-help'>{t("pools.detailPage.rewardsTable.roa")}</span>
+            <span className='cursor-help'>{t("common:labels.roa")}</span>
           </Tooltip>
         </div>
       ),
@@ -234,13 +234,13 @@ const PoolRewardsTable = ({
           )}
         </div>
       ),
-      title: <p className='w-full text-right'>{t("pools.detailPage.rewardsTable.luck")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.luck")}</p>,
       visible: columnsVisibility.luck,
       widthPx: 30,
     },
     {
       key: "blocks",
-      title: <p className='w-full text-right'>{t("pools.detailPage.rewardsTable.blocks")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.blocks")}</p>,
       render: item => (
         <div className='text-right'>
           {currentEpoch === item.no
@@ -253,7 +253,7 @@ const PoolRewardsTable = ({
     },
     {
       key: "delegators",
-      title: <p className='w-full text-right'>{t("pools.detailPage.rewardsTable.delegators")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.delegators")}</p>,
       render: item => (
         <div className='text-right'>
           {currentEpoch === item.no
@@ -281,7 +281,7 @@ const PoolRewardsTable = ({
           setRows={setRows}
           columnsOptions={poolRewardsTableOptions.map(item => {
             return {
-              label: item.name,
+              label: t(`common:tableSettings.${item.key}`),
               isVisible: columnsVisibility[item.key],
               onClick: () =>
                 setColumnVisibility(item.key, !columnsVisibility[item.key]),

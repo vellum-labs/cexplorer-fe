@@ -6,6 +6,7 @@ import ReactEcharts from "echarts-for-react";
 
 import { getColorForVersion } from "@/utils/getColorByVersion";
 import { useGraphColors } from "@/hooks/useGraphColors";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface NetworkBlockVersionsByDatePieGraphProps {
   query: ReturnType<typeof useFetchAnalyticsRate>;
@@ -15,6 +16,7 @@ interface NetworkBlockVersionsByDatePieGraphProps {
 export const NetworkBlockVersionsByDatePieGraph: FC<
   NetworkBlockVersionsByDatePieGraphProps
 > = ({ query, day }) => {
+  const { t } = useAppTranslation("common");
   const { textColor, bgColor } = useGraphColors();
 
   const { data: rateData } = query;
@@ -67,7 +69,7 @@ export const NetworkBlockVersionsByDatePieGraph: FC<
     },
     series: [
       {
-        name: "Block Versions",
+        name: t("analytics.blockVersionsTab"),
         type: "pie",
         radius: ["40%", "60%"],
         avoidLabelOverlap: false,

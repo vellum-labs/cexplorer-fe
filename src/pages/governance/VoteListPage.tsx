@@ -24,12 +24,14 @@ import type { Vote } from "@/constants/votes";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { VoteCell } from "@/components/governance/vote/VoteCell";
 import { isVoteLate } from "@/utils/governance/isVoteLate";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface VoteListPageProps {
   poolId?: string;
 }
 
 export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
+  const { t } = useAppTranslation("common");
   const { page } = useSearch({
     from: poolId ? "/pool/$id" : "/gov/vote/",
   });
@@ -392,7 +394,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
                   setRows={setRows}
                   columnsOptions={voteListPageTableOptions.map(item => {
                     return {
-                      label: item.name,
+                      label: t(`common:tableSettings.${item.key}`),
                       isVisible: columnsVisibility[item.key],
                       onClick: () =>
                         setColumnVisibility(

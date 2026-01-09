@@ -14,12 +14,22 @@ import { useFetchMiscBasic } from "@/services/misc";
 
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const AverageDrepGraph: FC = () => {
+  const { t } = useAppTranslation("pages");
+
+  // Keys for state/localStorage (must stay in English)
+  const KEYS = {
+    avgDelegators: "avgDelegators",
+    avgStake: "avgStake",
+    votingPower: "votingPower",
+  };
+
   const [graphsVisibility, setGraphsVisibility] = useState({
-    "Average delegators per DRep": true,
-    "Average stake per DRep (₳)": true,
-    "Voting power (%) of DReps that are SPOs at the same time": true,
+    [KEYS.avgDelegators]: true,
+    [KEYS.avgStake]: true,
+    [KEYS.votingPower]: true,
   });
 
   const query = useFetchCombinedAverageDrep();
@@ -43,6 +53,19 @@ export const AverageDrepGraph: FC = () => {
     item.delegator ? (item.count / item.delegator) * 100 : 0,
   );
 
+  // Translation mapping for display labels
+  const legendLabels = {
+    [KEYS.avgDelegators]: t("dreps.graphs.averageDreps.avgDelegatorsPerDrep"),
+    [KEYS.avgStake]: t("dreps.graphs.averageDreps.avgStakePerDrep"),
+    [KEYS.votingPower]: t("dreps.graphs.averageDreps.votingPowerSpoSameTime"),
+  };
+
+  const tooltipLabels = {
+    [KEYS.avgDelegators]: t("dreps.graphs.averageDreps.avgDelegatorsPerDrep"),
+    [KEYS.avgStake]: t("dreps.graphs.averageDreps.avgStakePerDrepShort"),
+    [KEYS.votingPower]: t("dreps.graphs.averageDreps.votingPowerShort"),
+  };
+
   const option: ReactEChartsProps["option"] = {
     legend: {
       pageIconColor: textColor,
@@ -50,10 +73,11 @@ export const AverageDrepGraph: FC = () => {
       pageTextStyle: { color: textColor },
       type: "scroll",
       data: [
-        "Average delegators per DRep",
-        "Average stake per DRep (₳)",
-        "Voting power (%) of DReps that are SPOs at the same time",
+        { name: KEYS.avgDelegators, icon: "circle" },
+        { name: KEYS.avgStake, icon: "circle" },
+        { name: KEYS.votingPower, icon: "circle" },
       ],
+      formatter: (name: string) => legendLabels[name] || name,
       textStyle: { color: textColor },
       selected: Object.keys(graphsVisibility).reduce((acc, key) => {
         acc[key] = graphsVisibility[key];
@@ -75,11 +99,11 @@ export const AverageDrepGraph: FC = () => {
         );
 
         const formatMap = {
-          "Average delegators per DRep": (item: any) =>
+          [KEYS.avgDelegators]: (item: any) =>
             item ? Math.round(item.data) : "N/A",
-          "Average stake per DRep (₳)": (item: any) =>
+          [KEYS.avgStake]: (item: any) =>
             item ? formatLovelace(item.data) : "N/A",
-          "Voting power (%) of DReps that are SPOs at the same time": (
+          [KEYS.votingPower]: (
             item: any,
           ) =>
             item && typeof item.data === "number"
@@ -87,22 +111,15 @@ export const AverageDrepGraph: FC = () => {
               : "N/A",
         };
 
-        const labelMap = {
-          "Average delegators per DRep": "Average delegators per DRep",
-          "Average stake per DRep (₳)": "Average stake per DRep",
-          "Voting power (%) of DReps that are SPOs at the same time":
-            "Voting power",
-        };
-
         return (
-          `Date: ${format(startTime, "dd.MM.yy")} - ${format(
+          `${t("dreps.graphs.date")} ${format(startTime, "dd.MM.yy")} - ${format(
             endTime,
             "dd.MM.yy",
-          )} (Epoch: ${params[0].axisValue})<hr>` +
+          )} (${t("dreps.graphs.epoch")} ${params[0].axisValue})<hr>` +
           params
             .map(
               item =>
-                `<p>${marker(item)} ${labelMap[item.seriesName]}: ${formatMap[item.seriesName](item)}</p>`,
+                `<p>${marker(item)} ${tooltipLabels[item.seriesName]}: ${formatMap[item.seriesName](item)}</p>`,
             )
             .join("")
         );
@@ -117,7 +134,7 @@ export const AverageDrepGraph: FC = () => {
     xAxis: {
       type: "category",
       data: epochs,
-      name: "Epoch",
+      name: t("common:labels.epoch"),
       nameLocation: "middle",
       nameGap: 28,
       boundaryGap: false,
@@ -160,7 +177,7 @@ export const AverageDrepGraph: FC = () => {
       {
         type: "line",
         data: avgDelegator,
-        name: "Average delegators per DRep",
+        name: KEYS.avgDelegators,
         yAxisIndex: 0,
         lineStyle: { color: "#35c2f5" },
         itemStyle: { color: "#35c2f5" },
@@ -171,7 +188,7 @@ export const AverageDrepGraph: FC = () => {
       {
         type: "line",
         data: avgEpochStake,
-        name: "Average stake per DRep (₳)",
+        name: KEYS.avgStake,
         yAxisIndex: 1,
         lineStyle: { color: textColor },
         itemStyle: { color: textColor },
@@ -182,7 +199,7 @@ export const AverageDrepGraph: FC = () => {
       {
         type: "line",
         data: votingPower,
-        name: "Voting power (%) of DReps that are SPOs at the same time",
+        name: KEYS.votingPower,
         yAxisIndex: 2,
         lineStyle: { color: "#FFA500" },
         itemStyle: { color: "#FFA500" },
@@ -208,7 +225,7 @@ export const AverageDrepGraph: FC = () => {
   }, []);
 
   return (
-    <AnalyticsGraph title='Average DReps'>
+    <AnalyticsGraph title={t("dreps.graphs.averageDreps.title")}>
       <div className='relative w-full'>
         <GraphWatermark />
         <ReactEcharts

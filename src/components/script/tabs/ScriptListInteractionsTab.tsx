@@ -26,8 +26,10 @@ import {
 } from "@vellumlabs/cexplorer-sdk";
 import { getPercentageColor } from "@/utils/getPercentageColor";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const ScriptListInteractionsTab: FC = () => {
+  const { t } = useAppTranslation("common");
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { page } = useSearch({ from: "/script/" });
 
@@ -208,7 +210,7 @@ export const ScriptListInteractionsTab: FC = () => {
             setRows={setRows}
             columnsOptions={scriptListInteractionTableOptions.map(item => {
               return {
-                label: item.name,
+                label: t(`common:tableSettings.${item.key}`),
                 isVisible: columnsVisibility[item.key],
                 onClick: () =>
                   setColumnVisibility(item.key, !columnsVisibility[item.key]),

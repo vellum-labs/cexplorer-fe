@@ -7,6 +7,7 @@ import parse from "html-react-parser";
 import { useFetchMiscNew, useFetchMiscSW } from "@/services/misc";
 import { useEffect, useState } from "react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface SwReadyModalProps {
   testMessage?: any;
@@ -19,6 +20,7 @@ export const SwReadyModal: FC<SwReadyModalProps> = ({
 }) => {
   const [open, setOpen] = useState<boolean>(true);
   const { data } = useFetchMiscNew();
+  const { t } = useAppTranslation();
   useFetchMiscSW("done");
 
   const message = testMessage ? testMessage.data.en : data?.data?.message?.en;
@@ -46,7 +48,7 @@ export const SwReadyModal: FC<SwReadyModalProps> = ({
       <div className='fixed bottom-[10px] right-1 z-50 flex w-full max-w-[340px] flex-col gap-1.5 rounded-l border border-border bg-background p-3 md:right-[10px]'>
         <div className='flex items-center justify-between'>
           <h3 className='text-text-sm font-semibold'>
-            Cexplorer update completed 💪
+            {t("global.swReady.updateCompleted")} 💪
           </h3>
           <X size={18} onClick={handleClose} className='cursor-pointer' />
         </div>
@@ -57,7 +59,7 @@ export const SwReadyModal: FC<SwReadyModalProps> = ({
 
         <div className='flex flex-col gap-1/2'>
           <span className='text-text-sm font-medium text-grayTextPrimary'>
-            Please confirm that you’ve read this message.
+            {t("global.swReady.confirmMessage")}
           </span>
           {!testMessage && (
             <Button
@@ -65,7 +67,7 @@ export const SwReadyModal: FC<SwReadyModalProps> = ({
               variant='primary'
               className='max-w-full'
               onClick={handleClose}
-              label='I understand'
+              label={t("global.swReady.iUnderstand")}
             />
           )}
         </div>

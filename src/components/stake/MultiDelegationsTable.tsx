@@ -46,7 +46,7 @@ export const MultiDelegationsTable: FC<MultiDelegationsTableProps> = ({
             </Link>
           );
         },
-        title: <p>{t("stake.detailPage.multiDelegationsTable.address")}</p>,
+        title: <p>{t("common:labels.address")}</p>,
         visible: columnsVisibility.date,
         widthPx: 80,
       },
@@ -92,7 +92,7 @@ export const MultiDelegationsTable: FC<MultiDelegationsTableProps> = ({
         ),
         title: (
           <div className='flex w-full justify-end'>
-            <span>{t("stake.detailPage.multiDelegationsTable.activeStake")}</span>
+            <span>{t("common:labels.activeStake")}</span>
           </div>
         ),
         visible: columnsVisibility.amount,
@@ -112,7 +112,7 @@ export const MultiDelegationsTable: FC<MultiDelegationsTableProps> = ({
         title: (
           <div className='flex w-full justify-end'>
             <div className='flex w-fit cursor-pointer items-center gap-1/2 text-right'>
-              <span>{t("stake.detailPage.multiDelegationsTable.loyalty")}</span>
+              <span>{t("common:labels.loyalty")}</span>
             </div>
           </div>
         ),
@@ -136,7 +136,7 @@ export const MultiDelegationsTable: FC<MultiDelegationsTableProps> = ({
             />
           );
         },
-        title: <p className=''>{t("stake.detailPage.multiDelegationsTable.registered")}</p>,
+        title: <p className=''>{t("common:labels.registered")}</p>,
         visible: columnsVisibility.registered,
         widthPx: 80,
       },

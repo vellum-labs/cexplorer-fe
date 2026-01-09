@@ -7,6 +7,7 @@ import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useADADisplay } from "@/hooks/useADADisplay";
 import type { ThresholdsMilestone } from "@/types/governanceTypes";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface PowerThresholdsSPODelegationDonutGraphProps {
   milestone: ThresholdsMilestone;
@@ -17,6 +18,7 @@ interface PowerThresholdsSPODelegationDonutGraphProps {
 export const PowerThresholdsSPODelegationDonutGraph: FC<
   PowerThresholdsSPODelegationDonutGraphProps
 > = ({ milestone, isLoading, currentSupplyEpoch }) => {
+  const { t } = useAppTranslation();
   const { textColor, bgColor } = useGraphColors();
   const { formatLovelace } = useADADisplay();
 
@@ -62,11 +64,11 @@ export const PowerThresholdsSPODelegationDonutGraph: FC<
       backgroundColor: bgColor,
       textStyle: { color: textColor },
       formatter: ({ name, value, percent }: any) =>
-        `<b>${name}</b><br/>Stake: ${formatLovelace(value)}<br/>Share: ${percent.toFixed(2)}%`,
+        `<b>${name}</b><br/>${t("governance.common.stake")} ${formatLovelace(value)}<br/>${t("governance.common.share")} ${percent.toFixed(2)}%`,
     },
     series: [
       {
-        name: "SPO Delegation",
+        name: t("governance.delegation.spoDelegation"),
         type: "pie",
         radius: ["50%", "70%"],
         avoidLabelOverlap: false,
@@ -82,13 +84,13 @@ export const PowerThresholdsSPODelegationDonutGraph: FC<
         data: [
           {
             value: delegatedADA,
-            name: "Delegated ADA",
+            name: t("governance.delegation.delegatedAda"),
             itemStyle: { color: "#0284C7" },
             emphasis: { itemStyle: { color: "#0284C7" } },
           },
           {
             value: undelegatedADA,
-            name: "Undelegated ADA",
+            name: t("governance.delegation.undelegatedAda"),
             itemStyle: { color: "#E4E7EC" },
             emphasis: { itemStyle: { color: "#E4E7EC" } },
           },
@@ -109,11 +111,11 @@ export const PowerThresholdsSPODelegationDonutGraph: FC<
       </div>
       <div className='mt-13 text-center text-text-sm text-grayTextPrimary'>
         <p>
-          Stake Pool Count:{" "}
+          {t("governance.delegation.stakePoolCount")}{" "}
           {currentPoolEpoch?.stat?.pool_distr?.count_pool_uniq ?? "–"}
         </p>
         <p>
-          Unique Addresses Delegated:{" "}
+          {t("governance.delegation.uniqueAddressesDelegated")}{" "}
           {currentPoolEpoch?.stat?.pool_distr?.count_addr_uniq ?? "–"}
         </p>
       </div>

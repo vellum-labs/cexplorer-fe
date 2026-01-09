@@ -110,7 +110,7 @@ export const RetiredDelegationsPage = () => {
 
         return ticker && name ? `[${ticker}] ${name}` : id;
       },
-      title: t("delegations.retired.table.stakePool"),
+      title: t("common:labels.stakePool"),
       visible: columnsVisibility.pool,
       widthPx: 145,
     },
@@ -140,7 +140,7 @@ export const RetiredDelegationsPage = () => {
       ),
       title: (
         <div className='flex w-full justify-end'>
-          <span>{t("delegations.retired.table.activeStake")}</span>
+          <span>{t("common:labels.activeStake")}</span>
         </div>
       ),
       visible: columnsVisibility.stake,
@@ -156,7 +156,7 @@ export const RetiredDelegationsPage = () => {
 
         return item.stat.accounts;
       },
-      title: <p className='w-full text-right'>{t("delegations.retired.table.delegators")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.delegators")}</p>,
       visible: columnsVisibility.delegators,
       widthPx: 50,
     },
@@ -275,16 +275,8 @@ export const RetiredDelegationsPage = () => {
                 rows={rows}
                 setRows={setRows}
                 columnsOptions={retiredDelegationsTableOptions.map(item => {
-                  const keyToTranslation: Record<string, string> = {
-                    index: "index",
-                    pool: "stakePool",
-                    epoch: tabParam === "active" ? "retiringInEpoch" : "retiredInEpoch",
-                    stake: "activeStake",
-                    delegators: "delegators",
-                    longevity: "longevity",
-                  };
                   return {
-                    label: t(`delegations.retired.table.${keyToTranslation[item.key]}`),
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(

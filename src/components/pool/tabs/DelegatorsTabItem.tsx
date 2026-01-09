@@ -20,7 +20,7 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const DelegatorsTabItem = () => {
-  const { t } = useAppTranslation("pages");
+  const { t } = useAppTranslation(["pages", "common"]);
   const route = getRouteApi("/pool/$id");
   const { id } = route.useParams();
   const miscBasic = useFetchMiscBasic();
@@ -119,7 +119,7 @@ const DelegatorsTabItem = () => {
               setRows={setDelegatorRows}
               columnsOptions={poolDelegatorsTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: delegatorsColumnsVisibility[item.key],
                   onClick: () =>
                     setDelegatorsColumnVisibility(
@@ -165,7 +165,7 @@ const DelegatorsTabItem = () => {
               setRows={setMigrationsRows}
               columnsOptions={poolDelegatorsTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: migrationsColumnsVisibility[item.key],
                   onClick: () =>
                     setMigrationsColumnsVisibility(

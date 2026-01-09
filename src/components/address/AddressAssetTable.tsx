@@ -4,6 +4,7 @@ import type { FC } from "react";
 
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useAddressDetailAssetTableStore } from "@/stores/tables/addressDetailAssetTableStore";
 import type {
   AddressDetailAssetColumns,
@@ -39,6 +40,7 @@ export const AddressAssetTable: FC<AddressAssetTableProps> = ({
   activeAsset,
   assets,
 }) => {
+  const { t } = useAppTranslation("common");
   const { columnsVisibility, columnsOrder, setColumsOrder } =
     useAddressDetailAssetTableStore();
 
@@ -46,10 +48,10 @@ export const AddressAssetTable: FC<AddressAssetTableProps> = ({
   const nftMarket = configJSON.market[0].nft[0].active;
   const tokenColumnName =
     activeAsset === "nfts"
-      ? "NFT"
+      ? t("labels.nft")
       : activeAsset === "tokens"
-        ? "Token"
-        : "Asset";
+        ? t("labels.token")
+        : t("address.asset");
 
   const columns: TableColumns<(typeof assets)[0]> = [
     {
@@ -71,7 +73,7 @@ export const AddressAssetTable: FC<AddressAssetTableProps> = ({
           enableHover
         />
       ),
-      title: "Policy ID",
+      title: t("address.policyId"),
       visible: columnsVisibility.policy_id,
       widthPx: 100,
     },
@@ -94,7 +96,7 @@ export const AddressAssetTable: FC<AddressAssetTableProps> = ({
           </div>
         );
       },
-      title: <p className='w-full text-right'>Holdings</p>,
+      title: <p className='w-full text-right'>{t("address.holdings")}</p>,
       visible: columnsVisibility.holdings,
       widthPx: 100,
     },
@@ -115,7 +117,7 @@ export const AddressAssetTable: FC<AddressAssetTableProps> = ({
           </p>
         );
       },
-      title: <p className='w-full text-right'>% Supply</p>,
+      title: <p className='w-full text-right'>{t("address.percentSupply")}</p>,
       visible: activeAsset !== "nfts" && columnsVisibility.supply,
       widthPx: 50,
     },
@@ -136,14 +138,14 @@ export const AddressAssetTable: FC<AddressAssetTableProps> = ({
           <div className='flex w-full items-center justify-end gap-1'>
             <PriceAdaSmallAmount price={item.market?.price} />
             {hasLowLiquidity && (
-              <Tooltip content='Low liquidity (< 1000 ADA)'>
+              <Tooltip content={t("address.lowLiquidity")}>
                 <AlertCircle size={14} className='text-yellow-500' />
               </Tooltip>
             )}
           </div>
         );
       },
-      title: <p className='w-full text-right'>Price</p>,
+      title: <p className='w-full text-right'>{t("labels.price")}</p>,
       visible: columnsVisibility.price,
       widthPx: 50,
     });
@@ -168,7 +170,7 @@ export const AddressAssetTable: FC<AddressAssetTableProps> = ({
           </div>
         );
       },
-      title: <p className='w-full text-right'>Value</p>,
+      title: <p className='w-full text-right'>{t("address.value")}</p>,
       visible: columnsVisibility.value,
       widthPx: 50,
     });

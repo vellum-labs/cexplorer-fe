@@ -1,5 +1,4 @@
 import { donationAddress } from "@/constants/confVariables";
-import { footerLinks } from "@/constants/footerLinks";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { DiscordLogo } from "@vellumlabs/cexplorer-sdk";
@@ -13,10 +12,15 @@ import LinksColumn from "../footer/LinksColumn";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { MainLogo } from "@vellumlabs/cexplorer-sdk";
 import { NetworkSelectorDropdown } from "../global/dropdowns/NetworkSelectorDropdown";
+import { useFooterLinks } from "@/hooks/useFooterLinks";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 import { configJSON } from "@/constants/conf";
 
 const Footer = () => {
+  const { t } = useAppTranslation("navigation");
+  const { footerLinks, headers } = useFooterLinks();
+
   return (
     <footer className='flex w-full flex-col items-center border-t border-borderFaded'>
       <div className='flex w-full justify-center'>
@@ -31,8 +35,7 @@ const Footer = () => {
                 <NetworkSelectorDropdown />
               </div>
               <p className='w-full text-text-sm text-grayTextPrimary'>
-                The oldest and most feature-rich Cardano explorer, serving you
-                since the Incentivized Testnet.
+                {t("footer.description")}
               </p>
               <div className='flex gap-3'>
                 <a href='https://x.com/cexplorer_io' target='_blank'>
@@ -50,9 +53,9 @@ const Footer = () => {
               </div>
             </div>
             <div className='mt-3 flex w-full justify-start gap-[10%] md:mt-0 md:justify-end'>
-              <LinksColumn header='Company' links={footerLinks.company} />
-              <LinksColumn header='Information' links={footerLinks.resources} />
-              <LinksColumn header='Support us' links={footerLinks.supportUs} />
+              <LinksColumn header={headers.company} links={footerLinks.company} />
+              <LinksColumn header={headers.information} links={footerLinks.resources} />
+              <LinksColumn header={headers.supportUs} links={footerLinks.supportUs} />
             </div>
           </section>
         </div>
@@ -60,11 +63,10 @@ const Footer = () => {
       <section className='flex w-full flex-col items-center bg-darker'>
         <div className='flex h-auto w-full max-w-desktop items-center justify-between gap-3 p-mobile py-2 md:h-[60px] md:px-desktop md:py-mobile'>
           <span className='md:text-sm text-text-sm text-grayTextPrimary'>
-            Copyright © 2019-{new Date().getFullYear()} Cexplorer. All rights
-            reserved.
+            {t("footer.copyright", { year: new Date().getFullYear() })}
           </span>
           <span className='md:text-sm flex items-center text-text-sm text-grayTextPrimary'>
-            Donations:{" "}
+            {t("footer.donations")}{" "}
             <Link to='/donate' className='ml-1/2 text-primary underline'>
               {formatString(donationAddress, "short")}
             </Link>{" "}
@@ -74,7 +76,7 @@ const Footer = () => {
         </div>
         <div className='flex h-auto w-full max-w-desktop items-center gap-2 p-mobile py-2 pb-[80px] md:px-desktop md:py-mobile md:pb-mobile'>
           <span className='md:text-sm text-text-xs text-grayTextPrimary'>
-            Partners:{" "}
+            {t("footer.partners")}{" "}
           </span>
           <div className='flex w-full flex-wrap items-center justify-around gap-1'>
             <a

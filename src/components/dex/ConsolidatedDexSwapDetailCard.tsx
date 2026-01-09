@@ -27,6 +27,7 @@ import { TokenPair } from "./TokenPair";
 
 import { useDeFiOrderListTableStore } from "@/stores/tables/deFiOrderListTableStore";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 import { addressIcons } from "@/constants/address";
 import { AnimalName } from "@/constants/animals";
@@ -65,6 +66,7 @@ const getStatusText = (status: string | undefined) => {
 export const ConsolidatedDexSwapDetailCard: FC<
   ConsolidatedDexSwapDetailCardProps
 > = ({ miscBasic, aggregatedData, isLoading }) => {
+  const { t } = useAppTranslation("common");
   const { currency, setCurrency } = useDeFiOrderListTableStore()();
 
   const curr = useGetMarketCurrency(
@@ -98,10 +100,16 @@ export const ConsolidatedDexSwapDetailCard: FC<
     aggregatedData?.orders[0]?.block?.no,
   );
 
+  const getStatusTextTranslated = (status: string | undefined) => {
+    if (!status) return "";
+    if (status === "PARTIALLY_COMPLETE") return t("dex.partiallyCompleted");
+    return status[0].toUpperCase() + status.slice(1).toLowerCase();
+  };
+
   const detailItems = [
     {
       key: "address",
-      title: "Address",
+      title: t("dex.address"),
       value: renderWithException(
         aggregatedData?.address,
         <div className='flex items-center gap-1'>
@@ -125,7 +133,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
     },
     {
       key: "timestamp",
-      title: "Timestamp",
+      title: t("dex.timestamp"),
       value: renderWithException(
         aggregatedData?.timestamp,
         <TimeDateIndicator time={aggregatedData?.timestamp} />,
@@ -133,7 +141,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
     },
     {
       key: "tx",
-      title: "Transaction",
+      title: t("dex.transaction"),
       value: renderWithException(
         aggregatedData?.txHash,
         <div className='flex items-center gap-1'>
@@ -154,7 +162,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
     },
     {
       key: "confirmation",
-      title: "Confirmation",
+      title: t("dex.confirmation"),
       value: renderWithException(
         aggregatedData?.orders[0]?.block?.no,
         <div className='flex items-center gap-[2.5px] text-text-sm'>
@@ -184,12 +192,12 @@ export const ConsolidatedDexSwapDetailCard: FC<
     },
     {
       key: "pair",
-      title: "Pair",
+      title: t("dex.pair"),
       value: renderWithException(
         aggregatedData?.pair && !aggregatedData.pair.isMultiplePairs,
         aggregatedData?.pair.isMultiplePairs ? (
           <div className='text-text-sm text-yellow-600'>
-            Multiple pairs detected - see individual trades below
+            {t("dex.multiplePairsDetected")}
           </div>
         ) : (
           <TokenPair
@@ -205,7 +213,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
     },
     {
       key: "input",
-      title: "Input",
+      title: t("dex.input"),
       value: renderWithException(
         aggregatedData?.totalAmountIn,
         aggregatedData?.pair.tokenIn === ADATokenName ||
@@ -248,7 +256,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
           >
             {currency === "ada" ? "ADA" : "USD"}{" "}
           </span>
-          <span>price</span>
+          <span>{t("dex.price").toLowerCase()}</span>
         </div>
       ),
       value:
@@ -297,7 +305,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
     },
     {
       key: "output",
-      title: "Output",
+      title: t("dex.output"),
       value: renderWithException(
         aggregatedData?.totalExpectedOut || aggregatedData?.totalActualOut,
         aggregatedData?.pair.tokenOut === ADATokenName ||
@@ -348,20 +356,20 @@ export const ConsolidatedDexSwapDetailCard: FC<
     },
     {
       key: "status",
-      title: "Status",
+      title: t("dex.status"),
       value: renderWithException(
         aggregatedData?.status,
         <div className='flex items-center'>
           <p className='flex w-fit items-center gap-1 rounded-m border border-border px-1 text-text-sm'>
             {getStatusIcon(aggregatedData?.status)}
-            {getStatusText(aggregatedData?.status)}
+            {getStatusTextTranslated(aggregatedData?.status)}
           </p>
         </div>,
       ),
     },
     {
       key: "lastUpdate",
-      title: "Last Update",
+      title: t("dex.lastUpdate"),
       value: renderWithException(
         aggregatedData?.lastUpdate,
         <TimeDateIndicator time={aggregatedData?.lastUpdate} />,
@@ -370,7 +378,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
     },
     {
       key: "type",
-      title: "Type",
+      title: t("dex.type"),
       value: renderWithException(
         aggregatedData?.type,
         <SwapTypeBadge
@@ -383,7 +391,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
     },
     {
       key: "dexes",
-      title: "Dexes",
+      title: t("dex.dexes"),
       value: renderWithException(
         aggregatedData?.dexes && aggregatedData.dexes.length > 0,
         <div className='flex flex-wrap items-center gap-1'>
@@ -426,7 +434,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
     },
     {
       key: "batcherFees",
-      title: "Batcher fees",
+      title: t("dex.batcherFees"),
       value: (
         <FeeDropdown
           total={aggregatedData?.totalBatcherFees}
@@ -438,7 +446,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
     },
     {
       key: "deposits",
-      title: "Deposits",
+      title: t("dex.deposits"),
       value: (
         <FeeDropdown
           total={aggregatedData?.totalDeposits}
@@ -450,7 +458,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
     },
     {
       key: "swapDetail",
-      title: "Swap detail",
+      title: t("dex.swapDetail"),
       value: aggregatedData ? (
         <SwapDetailTable aggregatedData={aggregatedData} />
       ) : null,
@@ -471,7 +479,7 @@ export const ConsolidatedDexSwapDetailCard: FC<
         }}
       >
         <>
-          <h2 className='text-base'>Overview</h2>
+          <h2 className='text-base'>{t("dex.overview")}</h2>
           <div className='flex flex-col gap-2 pt-2'>
             {detailItems.map(({ key, title, value, divider }) => (
               <div key={key}>

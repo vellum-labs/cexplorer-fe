@@ -130,7 +130,7 @@ export const useAssetList = ({
           />
         );
       },
-      title: t("assets.table.name"),
+      title: t("common:labels.name"),
       visible: columnsVisibility.asset,
       widthPx: 150,
     },
@@ -146,14 +146,14 @@ export const useAssetList = ({
           enableHover
         />
       ),
-      title: t("assets.table.policy"),
+      title: t("common:labels.policy"),
       visible: columnsVisibility.policy_id && !policyId,
       widthPx: 150,
     },
     {
       key: "asset_minted",
       render: item => <DateCell time={item?.stat?.asset?.last_mint ?? ""} />,
-      title: t("assets.table.mintTime"),
+      title: t("common:labels.mintTime"),
       visible: columnsVisibility.asset_minted,
       widthPx: 60,
     },
@@ -170,7 +170,7 @@ export const useAssetList = ({
           </p>
         );
       },
-      title: <p className='w-full text-right'>{t("assets.table.price")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.price")}</p>,
       visible: columnsVisibility.price,
       widthPx: 50,
     },
@@ -181,12 +181,12 @@ export const useAssetList = ({
       key: "type",
       render: item => {
         if (item?.stat?.asset?.quantity > 1) {
-          return <Badge color='blue'>{t("assets.table.token")}</Badge>;
+          return <Badge color='blue'>{t("common:labels.token")}</Badge>;
         }
 
-        return <Badge color='yellow'>{t("assets.table.nft")}</Badge>;
+        return <Badge color='yellow'>{t("common:labels.nft")}</Badge>;
       },
-      title: t("assets.table.type"),
+      title: t("common:labels.type"),
       visible: (columnsVisibility as AssetListTableColumns).type,
       widthPx: 50,
     });
@@ -213,7 +213,7 @@ export const useAssetList = ({
           </p>
         );
       },
-      title: <p className='w-full text-right'>{t("assets.table.supply")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.supply")}</p>,
       visible: (columnsVisibility as AssetListTableColumns).mint_quantity,
       widthPx: 120,
     });

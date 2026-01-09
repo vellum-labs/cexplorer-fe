@@ -21,8 +21,10 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const DrepDeregistrationsPage = () => {
+  const { t } = useAppTranslation("common");
   const [totalItems, setTotalItems] = useState(0);
   const { page } = useSearch({ from: "/drep/deregistrations" });
   const {
@@ -160,7 +162,7 @@ export const DrepDeregistrationsPage = () => {
               setRows={setRows}
               columnsOptions={drepRegistrationsTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),

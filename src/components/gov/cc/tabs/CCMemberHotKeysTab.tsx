@@ -8,6 +8,7 @@ import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { ExternalLink } from "lucide-react";
 import { useMemo } from "react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface CCMemberHotKeysTabProps {
   memberHistory: CommitteeMember[] | undefined;
@@ -24,6 +25,7 @@ export const CCMemberHotKeysTab: FC<CCMemberHotKeysTabProps> = ({
   memberHistory,
   isLoading,
 }) => {
+  const { t } = useAppTranslation();
   const sortedRegistrations = useMemo(() => {
     if (!memberHistory || !Array.isArray(memberHistory)) return [];
 
@@ -64,7 +66,7 @@ export const CCMemberHotKeysTab: FC<CCMemberHotKeysTabProps> = ({
         }
         return <DateCell time={item.time} />;
       },
-      title: <p>Date</p>,
+      title: <p>{t("gov.cc.date")}</p>,
       visible: true,
       widthPx: 80,
     },
@@ -81,7 +83,7 @@ export const CCMemberHotKeysTab: FC<CCMemberHotKeysTabProps> = ({
           </div>
         );
       },
-      title: "Hot key authorization",
+      title: t("gov.cc.hotKeyAuthorization"),
       visible: true,
       widthPx: 200,
     },
@@ -101,7 +103,7 @@ export const CCMemberHotKeysTab: FC<CCMemberHotKeysTabProps> = ({
           </Link>
         );
       },
-      title: <p className='w-full text-right'>Tx</p>,
+      title: <p className='w-full text-right'>{t("gov.cc.tx")}</p>,
       visible: true,
       widthPx: 50,
     },

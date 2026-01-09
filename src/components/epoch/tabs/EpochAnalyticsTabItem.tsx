@@ -19,8 +19,10 @@ import { useADADisplay } from "@/hooks/useADADisplay";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const EpochAnalyticsTabItem: FC = () => {
+  const { t } = useAppTranslation("pages");
   const { theme } = useThemeStore();
   const { formatLovelace } = useADADisplay();
   const { bgColor, textColor } = useGraphColors();
@@ -50,7 +52,7 @@ export const EpochAnalyticsTabItem: FC = () => {
   }[] = [
     {
       key: "blocks",
-      title: "Blocks",
+      title: t("epochs.graph.blocks"),
       epochs: ([...filteredDataItems].reverse() || [])
         .filter(item => item.blk_count)
         .map(item => item.no),
@@ -60,7 +62,7 @@ export const EpochAnalyticsTabItem: FC = () => {
     },
     {
       key: "blocks_usage",
-      title: "Block Usage",
+      title: t("epochs.analyticsTab.blockUsage"),
       epochs: ([...filteredDataItems].reverse() || [])
         .filter(item => {
           return (
@@ -94,7 +96,7 @@ export const EpochAnalyticsTabItem: FC = () => {
     },
     {
       key: "transactions",
-      title: "Transactions",
+      title: t("epochs.graph.transactions"),
       epochs: ([...filteredDataItems].reverse() || [])
         .filter(item => item?.tx_count)
         .map(item => item.no),
@@ -104,7 +106,7 @@ export const EpochAnalyticsTabItem: FC = () => {
     },
     {
       key: "staked_ada",
-      title: "Staked ADA",
+      title: t("epochs.analyticsTab.stakedAda"),
       epochs: ([...filteredDataItems].reverse() || [])
         .filter(item => item.stats?.stake?.epoch)
         .map(item => item.no),
@@ -115,7 +117,7 @@ export const EpochAnalyticsTabItem: FC = () => {
     },
     {
       key: "staked_wallets",
-      title: "Staked Wallets",
+      title: t("epochs.analyticsTab.stakedWallets"),
       epochs: ([...filteredDataItems].reverse() || [])
         .filter(item => item?.stats?.stake?.accounts)
         .map(item => item.no),
@@ -125,7 +127,7 @@ export const EpochAnalyticsTabItem: FC = () => {
     },
     {
       key: "rewards",
-      title: "Rewards",
+      title: t("epochs.analyticsTab.rewards"),
       epochs: ([...filteredDataItems].reverse() || [])
         .filter(item => item?.stats?.stake?.active)
         .map(item => item.no),
@@ -136,7 +138,7 @@ export const EpochAnalyticsTabItem: FC = () => {
     },
     {
       key: "active_wallets",
-      title: "Active Wallets",
+      title: t("epochs.analyticsTab.activeWallets"),
       epochs: ([...filteredAnalyticsEpoch].reverse() || [])
         .filter(item => item.stat && item?.stat?.count_tx_out_stake)
         .map(item => item.no),
@@ -146,7 +148,7 @@ export const EpochAnalyticsTabItem: FC = () => {
     },
     {
       key: "new_wallets",
-      title: "New Wallets",
+      title: t("epochs.analyticsTab.newWallets"),
       epochs: ([...filteredAnalyticsEpoch].reverse() || [])
         .filter(
           item => item.stat && item?.stat?.count_tx_out_stake_not_yesterday,
@@ -187,7 +189,7 @@ export const EpochAnalyticsTabItem: FC = () => {
               xAxis: {
                 type: "category",
                 data: epochs,
-                name: "Epochs",
+                name: t("epochs.title"),
                 nameLocation: "middle",
                 nameGap: 30,
               },
@@ -252,7 +254,7 @@ export const EpochAnalyticsTabItem: FC = () => {
                   }
 
                   return `
-      Date: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (Epoch: ${epoch})<hr style="margin: 4px 0;" />
+      ${t("epochs.graph.date")}: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${t("epochs.graph.epoch")}: ${epoch})<hr style="margin: 4px 0;" />
       <p>${marker} ${titleFormatted}: ${formattedValue}</p>
     `;
                 },
@@ -267,7 +269,7 @@ export const EpochAnalyticsTabItem: FC = () => {
                 <div className='flex flex-col self-start'>
                   <span className='text-text-lg font-semibold'>{title}</span>
                   <span className='text-text-md font-semibold text-grayTextPrimary'>
-                    By epoch
+                    {t("epochs.analyticsTab.byEpoch")}
                   </span>
                 </div>
                 <div className='relative w-full' ref={echartsRef}>
@@ -278,7 +280,7 @@ export const EpochAnalyticsTabItem: FC = () => {
                   ) : (
                     <>
                       <span className='absolute left-0 top-1/2 -translate-y-1/2 rotate-[270deg] text-text-xs font-bold text-[#6e7076] md:left-[4%] xl:left-[7%]'>
-                        Values
+                        {t("epochs.analyticsTab.values")}
                       </span>
                       <GraphWatermark />
                       <ReactEcharts

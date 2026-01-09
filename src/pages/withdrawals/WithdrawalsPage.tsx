@@ -53,14 +53,14 @@ export const WithdrawalsPage = () => {
 
         return item.block.time;
       },
-      title: <p>{t("withdrawals.table.date")}</p>,
+      title: <p>{t("common:labels.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 70,
     },
     {
       key: "epoch",
       render: item => <EpochCell no={item?.block?.epoch_no} />,
-      title: <p className='w-full text-right'>{t("withdrawals.table.epoch")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.epoch")}</p>,
       visible: columnsVisibility.epoch,
       widthPx: 35,
     },
@@ -76,7 +76,7 @@ export const WithdrawalsPage = () => {
 
         return item.view;
       },
-      title: t("withdrawals.table.address"),
+      title: t("common:labels.address"),
       visible: columnsVisibility.address,
       widthPx: 110,
     },
@@ -131,7 +131,7 @@ export const WithdrawalsPage = () => {
 
         return ticker && name ? `[${ticker}] ${name}` : id;
       },
-      title: t("withdrawals.table.delegation"),
+      title: t("common:labels.delegation"),
       visible: columnsVisibility.delegated_to,
       widthPx: 160,
     },
@@ -147,7 +147,7 @@ export const WithdrawalsPage = () => {
 
         return item.tx.hash;
       },
-      title: t("withdrawals.table.tx"),
+      title: t("common:labels.tx"),
       visible: columnsVisibility.tx,
       widthPx: 80,
     },

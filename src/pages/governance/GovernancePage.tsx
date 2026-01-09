@@ -16,8 +16,10 @@ import { PageBase } from "@/components/global/pages/PageBase";
 import { GovernanceActionsTab } from "@/components/governance/tabs/GovernanceActionsTab";
 import { GovernanceTimelineTab } from "@/components/governance/tabs/GovernanceTimelineTab";
 import { generateImageUrl } from "@/utils/generateImageUrl";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const GovernancePage: FC = () => {
+  const { t } = useAppTranslation();
   const drepStatQuery = useFetchDrepStat();
   const miscBasicQuery = useFetchMiscBasic(true);
 
@@ -126,7 +128,7 @@ export const GovernancePage: FC = () => {
   const tabs = [
     {
       key: "governance_actions",
-      label: "Governance actions",
+      label: t("tabs.governance.governanceActions"),
       content: (
         <GovernanceActionsTab key='governance_actions' miscConst={miscConst} />
       ),
@@ -134,7 +136,7 @@ export const GovernancePage: FC = () => {
     },
     {
       key: "outcomes",
-      label: "Outcomes",
+      label: t("tabs.governance.outcomes"),
       content: (
         <GovernanceActionsTab
           key='outcomes'
@@ -146,7 +148,7 @@ export const GovernancePage: FC = () => {
     },
     {
       key: "timeline",
-      label: "Timeline",
+      label: t("tabs.governance.timeline"),
       content: <GovernanceTimelineTab miscConst={miscConst} />,
       visible: true,
     },
@@ -155,13 +157,13 @@ export const GovernancePage: FC = () => {
   return (
     <PageBase
       metadataTitle='governance'
-      title='Governance Actions'
+      title={t("pages.governance.title")}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>Governance</span>,
+          label: <span className='inline pt-1/2'>{t("governance.breadcrumbs.governance")}</span>,
           link: "/gov",
         },
-        { label: "Governance actions" },
+        { label: t("governance.breadcrumbs.governanceActions") },
       ]}
       adsCarousel={false}
     >

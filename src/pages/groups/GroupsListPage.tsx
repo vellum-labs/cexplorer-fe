@@ -182,7 +182,7 @@ export const GroupsListPage = () => {
             )}
             <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
               <h3 className='pb-1.5 md:pb-0'>
-                {t("groups.totalOf")} {formatNumber(filteredItems.length)} {t("groups.totalOfSuffix")}
+                {t("common:phrases.totalOf")} {formatNumber(filteredItems.length)} {t("groups.totalOfSuffix")}
               </h3>
               <TableSearchInput
                 placeholder={t("groups.searchPlaceholder")}

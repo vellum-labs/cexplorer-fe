@@ -25,6 +25,7 @@ import { paginateArray } from "@vellumlabs/cexplorer-sdk";
 import { PaginationNext, PaginationPrevious } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Loading } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface HomepageTableWidgetProps {
   rowHeight?: number;
@@ -43,6 +44,7 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
   rowHeight,
   width,
 }) => {
+  const { t } = useAppTranslation("common");
   const [initLoading, setInitLoading] = useState<boolean>(true);
 
   const [page, setPage] = useState<number>(1);
@@ -232,7 +234,7 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
             columnsVisibility && setColumnVisibility && tableOptions
               ? tableOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item?.key],
                     onClick: () =>
                       setColumnVisibility(

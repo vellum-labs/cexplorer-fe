@@ -5,6 +5,7 @@ import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 import { useCCMemberDetail } from "@/hooks/details/useCCMemberDetail";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface CCMemberDetailOverviewProps {
   memberData: CommitteeMember | undefined;
@@ -19,6 +20,7 @@ export const CCMemberDetailOverview: FC<CCMemberDetailOverviewProps> = ({
   isError,
   votesData,
 }) => {
+  const { t } = useAppTranslation();
   const { about, governance } = useCCMemberDetail({ memberData, votesData });
 
   if (isLoading) {
@@ -45,11 +47,11 @@ export const CCMemberDetailOverview: FC<CCMemberDetailOverviewProps> = ({
   return (
     <div className='flex flex-col gap-2 xl:flex-row'>
       <div className='flex-1'>
-        <OverviewCard title='About' overviewList={about} className='h-full' />
+        <OverviewCard title={t("gov.cc.about")} overviewList={about} className='h-full' />
       </div>
       <div className='w-full xl:w-[450px]'>
         <OverviewCard
-          title='Governance'
+          title={t("gov.cc.governance")}
           overviewList={governance}
           className='h-full'
         />

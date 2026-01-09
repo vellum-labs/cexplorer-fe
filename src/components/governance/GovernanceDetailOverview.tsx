@@ -7,6 +7,7 @@ import { CircleHelp } from "lucide-react";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
@@ -40,6 +41,7 @@ interface GovernanceDetailOverviewProps {
 export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
   query,
 }) => {
+  const { t } = useAppTranslation();
   const committeeMembers = query?.data?.data?.committee?.member;
   const votingProcedure = query?.data?.data?.voting_procedure;
 
@@ -145,37 +147,37 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
   const generatePieChartData = (yes, no, noConfidence, notVoted) => [
     {
       value: yes,
-      name: "Yes",
+      name: t("governance.common.yes"),
       itemStyle: { color: "#1296DB" },
     },
     {
       value: no,
-      name: "No",
+      name: t("governance.common.no"),
       itemStyle: { color: "#D66A10" },
     },
     {
       value: noConfidence,
-      name: "No confidence",
+      name: t("governance.common.noConfidence"),
       itemStyle: { color: "#E89128" },
     },
     {
       value: notVoted,
-      name: "Not voted",
+      name: t("governance.common.notVoted"),
       itemStyle: { color: "#F7B96E" },
     },
   ];
 
   const drepsPieChartData = [
-    { value: drepsYes, name: "Yes", itemStyle: { color: "#1296DB" } },
-    { value: drepsNo, name: "No", itemStyle: { color: "#D66A10" } },
+    { value: drepsYes, name: t("governance.common.yes"), itemStyle: { color: "#1296DB" } },
+    { value: drepsNo, name: t("governance.common.no"), itemStyle: { color: "#D66A10" } },
     {
       value: drepsNoConfidence,
-      name: "No confidence",
+      name: t("governance.common.noConfidence"),
       itemStyle: { color: "#E89128" },
     },
     {
       value: drepsNotVotedStake,
-      name: "Not voted",
+      name: t("governance.common.notVoted"),
       itemStyle: { color: "#F7B96E" },
     },
   ];
@@ -219,11 +221,11 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
 
   const action = [
     {
-      label: "Title",
+      label: t("governance.overview.title"),
       value: query?.data?.data?.anchor?.offchain?.name ?? "⚠️ Invalid metadata",
     },
     {
-      label: "Action type",
+      label: t("governance.overview.actionType"),
       value: query?.data?.data?.type ? (
         <ActionTypes title={query?.data?.data?.type as ActionTypes} />
       ) : (
@@ -231,7 +233,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       ),
     },
     {
-      label: "Action ID",
+      label: t("governance.overview.actionId"),
       value: (
         <div className='flex items-center gap-1/2'>
           <span>
@@ -242,7 +244,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       ),
     },
     {
-      label: "Action start date",
+      label: t("governance.overview.actionStartDate"),
       value: query?.data?.data?.tx?.time ? (
         <TimeDateIndicator time={query?.data?.data?.tx?.time} />
       ) : (
@@ -250,7 +252,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       ),
     },
     {
-      label: "Voting deadline",
+      label: t("governance.overview.votingDeadline"),
       value:
         query?.data?.data?.expiration &&
         startTime &&
@@ -264,7 +266,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
 
   const blockchain_records = [
     {
-      label: "Submit transaction",
+      label: t("governance.overview.submitTransaction"),
       value: (
         <Link
           to='/tx/$hash'
@@ -279,7 +281,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       ),
     },
     {
-      label: "Stake address",
+      label: t("governance.overview.stakeAddress"),
       value: (
         <Link
           to='/stake/$stakeAddr'
@@ -297,11 +299,11 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
       ),
     },
     {
-      label: "Deposit",
+      label: t("governance.overview.deposit"),
       value: <AdaWithTooltip data={query?.data?.data?.deposit ?? 0} />,
     },
     {
-      label: "Anchor",
+      label: t("governance.overview.anchor"),
       value: (
         <div className='flex flex-col gap-1/2'>
           <span>
@@ -395,8 +397,8 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
     {
       label: (
         <div className='flex items-center gap-1/2'>
-          <span>Total stake</span>
-          <Tooltip content='All ADA delegated to DReps'>
+          <span>{t("governance.overview.totalStake")}</span>
+          <Tooltip content={t("governance.overview.totalStakeTooltipDRep")}>
             <CircleHelp size={11} className='text-grayTextPrimary' />
           </Tooltip>
         </div>
@@ -411,8 +413,8 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
     {
       label: (
         <div className='flex items-center gap-1/2'>
-          <span>Abstain stake</span>
-          <Tooltip content='ADA that abstains from voting'>
+          <span>{t("governance.overview.abstainStake")}</span>
+          <Tooltip content={t("governance.overview.abstainStakeTooltip")}>
             <CircleHelp size={11} className='text-grayTextPrimary' />
           </Tooltip>
         </div>
@@ -423,11 +425,11 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
             content={
               <div className='flex flex-col'>
                 <span>
-                  DRep votes:{" "}
+                  {t("governance.overview.drepVotes")}{" "}
                   <AdaWithTooltip data={drepsAbstainManual} tooltip={false} />
                 </span>
                 <span>
-                  Always abstain:{" "}
+                  {t("governance.overview.alwaysAbstain")}{" "}
                   <AdaWithTooltip data={drepsAbstainAuto} tooltip={false} />
                 </span>
               </div>
@@ -444,8 +446,8 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
     {
       label: (
         <div className='flex items-center gap-1/2'>
-          <span>Voting stake</span>
-          <Tooltip content='ADA participating in voting'>
+          <span>{t("governance.overview.votingStake")}</span>
+          <Tooltip content={t("governance.overview.votingStakeTooltip")}>
             <CircleHelp size={11} className='text-grayTextPrimary' />
           </Tooltip>
         </div>
@@ -465,8 +467,8 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
     {
       label: (
         <div className='flex items-center gap-1/2'>
-          <span>Total stake</span>
-          <Tooltip content='All ADA delegated to SPOs'>
+          <span>{t("governance.overview.totalStake")}</span>
+          <Tooltip content={t("governance.overview.totalStakeTooltipSPO")}>
             <CircleHelp size={11} className='text-grayTextPrimary' />
           </Tooltip>
         </div>
@@ -481,8 +483,8 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
     {
       label: (
         <div className='flex items-center gap-1/2'>
-          <span>Abstain stake</span>
-          <Tooltip content='ADA that abstains from voting'>
+          <span>{t("governance.overview.abstainStake")}</span>
+          <Tooltip content={t("governance.overview.abstainStakeTooltip")}>
             <CircleHelp size={11} className='text-grayTextPrimary' />
           </Tooltip>
         </div>
@@ -493,11 +495,11 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
             content={
               <div className='flex flex-col'>
                 <span>
-                  SPO votes:{" "}
+                  {t("governance.overview.spoVotes")}{" "}
                   <AdaWithTooltip data={spoAbstainManual} tooltip={false} />
                 </span>
                 <span>
-                  Always abstain:{" "}
+                  {t("governance.overview.alwaysAbstain")}{" "}
                   <AdaWithTooltip data={spoAlwaysAbstain} tooltip={false} />
                 </span>
               </div>
@@ -518,8 +520,8 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
     {
       label: (
         <div className='flex items-center gap-1/2'>
-          <span>Voting stake</span>
-          <Tooltip content='ADA participating in voting'>
+          <span>{t("governance.overview.votingStake")}</span>
+          <Tooltip content={t("governance.overview.votingStakeTooltip")}>
             <CircleHelp size={11} className='text-grayTextPrimary' />
           </Tooltip>
         </div>
@@ -562,7 +564,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                 <>
                   <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                     <OverviewCard
-                      title='Governance action'
+                      title={t("governance.overview.governanceAction")}
                       subTitle={
                         <GovernanceStatusBadge
                           item={
@@ -583,7 +585,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
 
                   <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                     <OverviewCard
-                      title='Blockchain records'
+                      title={t("governance.overview.blockchainRecords")}
                       overviewList={blockchain_records}
                       className='h-full'
                     />
@@ -619,20 +621,20 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                   {shouldCCVote(query.data?.data?.type ?? "") ? (
                     <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                       <OverviewCard
-                        title='Constitutional committee'
+                        title={t("governance.overview.constitutionalCommittee")}
                         subTitle={
                           constitutionalCommitteeApproved ? (
                             <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
                               <PulseDot color='#17B26A' animate />
                               <span className='text-text-xs font-medium text-[#17B26A]'>
-                                Approved
+                                {t("governance.overview.approved")}
                               </span>
                             </div>
                           ) : (
                             <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
                               <PulseDot color='#F79009' animate />
                               <span className='text-text-xs font-medium text-[#B54708]'>
-                                Not approved
+                                {t("governance.overview.notApproved")}
                               </span>
                             </div>
                           )
@@ -648,14 +650,14 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                           >
                             <div className='mt-1 flex w-full items-center justify-between border-t border-border pt-1'>
                               <div className='flex items-center gap-[2px]'>
-                                <Tooltip forceDirection='right' content={<span className='inline-block max-w-[200px]'>Minimum percentage of Constitutional Committee members required to approve this governance action</span>}>
+                                <Tooltip forceDirection='right' content={<span className='inline-block max-w-[200px]'>{t("governance.overview.thresholdTooltip")}</span>}>
                                   <CircleHelp
                                     size={11}
                                     className='cursor-help text-grayTextPrimary'
                                   />
                                 </Tooltip>
                                 <span className='text-text-xs font-medium text-grayTextPrimary'>
-                                  Threshold:
+                                  {t("governance.common.threshold")}
                                 </span>
                               </div>
                               <span className='text-text-xs font-medium text-grayTextPrimary'>
@@ -702,7 +704,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                       <OverviewCard
                         title={
                           <div className='flex items-center gap-1'>
-                            <span>DReps</span>
+                            <span>{t("governance.overview.dreps")}</span>
                             <span className='text-text-sm font-regular text-grayTextPrimary'>
                               {query.data?.data?.total.drep.count}
                             </span>
@@ -713,14 +715,14 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                             <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
                               <PulseDot color='#17B26A' animate />
                               <span className='text-text-xs font-medium text-[#17B26A]'>
-                                Approved
+                                {t("governance.overview.approved")}
                               </span>
                             </div>
                           ) : (
                             <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
                               <PulseDot color='#F79009' animate />
                               <span className='text-text-xs font-medium text-[#B54708]'>
-                                Not approved
+                                {t("governance.overview.notApproved")}
                               </span>
                             </div>
                           )
@@ -766,7 +768,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                       <OverviewCard
                         title={
                           <div className='flex items-center gap-1'>
-                            <span>DReps</span>
+                            <span>{t("governance.overview.dreps")}</span>
                             <span className='text-text-sm font-regular text-grayTextPrimary'>
                               {query.data?.data?.total.drep.count}
                             </span>
@@ -776,7 +778,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         className='h-full'
                         endContent={
                           <div className='flex h-full items-center justify-center text-text-sm text-grayTextSecondary'>
-                            DReps are not voting on this governance action
+                            {t("governance.overview.drepsNotVoting")}
                           </div>
                         }
                       />
@@ -791,7 +793,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                       <OverviewCard
                         title={
                           <div className='flex items-center gap-1'>
-                            <span>SPOs</span>
+                            <span>{t("governance.overview.spos")}</span>
                             <span className='text-text-sm font-regular text-grayTextPrimary'>
                               {query.data?.data?.total.spo.count}
                             </span>
@@ -802,14 +804,14 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                             <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#ABEFC6] bg-[#ECFDF3] px-[10px]'>
                               <PulseDot color='#17B26A' animate />
                               <span className='text-text-xs font-medium text-[#17B26A]'>
-                                Approved
+                                {t("governance.overview.approved")}
                               </span>
                             </div>
                           ) : (
                             <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-xl border border-[#FEDF89] bg-[#FFFAEB] px-[10px]'>
                               <PulseDot color='#F79009' animate />
                               <span className='text-text-xs font-medium text-[#B54708]'>
-                                Not approved
+                                {t("governance.overview.notApproved")}
                               </span>
                             </div>
                           )
@@ -861,7 +863,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                       <OverviewCard
                         title={
                           <div className='flex items-center gap-1'>
-                            <span>SPOs</span>
+                            <span>{t("governance.overview.spos")}</span>
                             <span className='text-text-sm font-regular text-grayTextPrimary'>
                               {query.data?.data?.total.spo.count}
                             </span>
@@ -871,7 +873,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         className='h-full'
                         endContent={
                           <div className='flex h-full items-center justify-center text-text-sm text-grayTextSecondary'>
-                            SPOs are not voting on this governance action
+                            {t("governance.overview.sposNotVoting")}
                           </div>
                         }
                       />

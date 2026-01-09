@@ -28,8 +28,10 @@ import { QrCode } from "lucide-react";
 import { DeFiOrderList } from "@/components/defi/DeFiOrderList";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { configJSON } from "@/constants/conf";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const AddressDetailPage: FC = () => {
+  const { t } = useAppTranslation();
   const route = getRouteApi("/address/$address");
   const { address } = route.useParams();
 
@@ -74,7 +76,7 @@ export const AddressDetailPage: FC = () => {
   const tabs = [
     {
       key: "assets",
-      label: "Assets",
+      label: t("tabs.address.assets"),
       content: (
         <AssetsTab
           assets={assets}
@@ -86,19 +88,19 @@ export const AddressDetailPage: FC = () => {
     },
     {
       key: "transactions",
-      label: "Transactions",
+      label: t("tabs.address.transactions"),
       content: <TxListPage key='address' address={address} />,
       visible: true,
     },
     {
       key: "utxos",
-      label: "UTXOs",
+      label: t("tabs.address.utxos"),
       content: <UTXOTab address={address} />,
       visible: true,
     },
     {
       key: "defi",
-      label: "Trading",
+      label: t("tabs.address.trading"),
       content: () => (
         <DeFiOrderList
           storeKey='address_detail_defi_order'
@@ -117,7 +119,7 @@ export const AddressDetailPage: FC = () => {
   if (stakeKey) {
     tabs.push({
       key: "addresses",
-      label: "Addresses",
+      label: t("tabs.address.addresses"),
       content: <AddressesTab paymentAddress={paymentAddress} />,
       visible: true,
     });
@@ -129,7 +131,7 @@ export const AddressDetailPage: FC = () => {
   ) {
     tabs.push({
       key: "rewards",
-      label: "Rewards",
+      label: t("tabs.address.rewards"),
       content: (
         <RewardsTab stakeAddress={rewardsAddress ?? ""} parentPage='addr' />
       ),
@@ -146,22 +148,22 @@ export const AddressDetailPage: FC = () => {
       breadcrumbItems={[
         stakeKey
           ? {
-              label: "Stake",
+              label: t("breadcrumbs.stake"),
               link: `/stake/${stakeAddr}` as any,
             }
           : {
-              label: "Address",
+              label: t("breadcrumbs.address"),
             },
         {
           label: formatString(address, "long"),
           ident: address,
         },
       ]}
-      title={<div className='flex items-center gap-1/2'>Address detail</div>}
+      title={<div className='flex items-center gap-1/2'>{t("pages.addressDetail.title")}</div>}
       icon={<img src={addressIcon} alt='address level' className='h-6 w-6' />}
       subTitle={
         <HeaderBannerSubtitle
-          title='Address'
+          title={t("labels.address")}
           hashString={formatString(address ?? "", "long")}
           hash={address}
         />

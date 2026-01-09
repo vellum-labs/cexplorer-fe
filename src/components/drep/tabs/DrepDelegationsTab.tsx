@@ -46,14 +46,6 @@ export const DrepDelegationsTab = () => {
   const items = delegationQuery.data?.pages.flatMap(page => page.data.data);
   const totalCount = delegationQuery.data?.pages[0].data.count;
 
-  const tableColumnTranslations: Record<string, string> = {
-    date: t("dreps.delegations.table.date"),
-    address: t("dreps.delegations.table.address"),
-    amount: t("dreps.delegations.table.amount"),
-    delegation: t("dreps.delegations.table.delegation"),
-    tx: t("dreps.delegations.table.tx"),
-  };
-
   const delegationColumns: TableColumns<DrepDelegationData> = [
     {
       key: "date",
@@ -94,7 +86,7 @@ export const DrepDelegationsTab = () => {
           "yyy-MM-dd HH:mm:ss",
         );
       },
-      title: <p>{t("dreps.delegations.table.date")}</p>,
+      title: <p>{t("common:labels.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 55,
     },
@@ -114,7 +106,7 @@ export const DrepDelegationsTab = () => {
 
         return item.view;
       },
-      title: t("dreps.delegations.table.address"),
+      title: t("common:labels.address"),
       visible: columnsVisibility.address,
       widthPx: 90,
     },
@@ -127,7 +119,7 @@ export const DrepDelegationsTab = () => {
       ),
       title: (
         <div className='flex w-full justify-end'>
-          <span>{t("dreps.delegations.table.amount")}</span>
+          <span>{t("common:labels.amount")}</span>
         </div>
       ),
       visible: columnsVisibility.amount,
@@ -171,7 +163,7 @@ export const DrepDelegationsTab = () => {
           .filter(e => e)
           .join(" -> ");
       },
-      title: t("dreps.delegations.table.delegation"),
+      title: t("common:labels.delegation"),
       visible: columnsVisibility.delegation,
       widthPx: 190,
     },
@@ -187,7 +179,7 @@ export const DrepDelegationsTab = () => {
 
         return item.tx.hash;
       },
-      title: t("dreps.delegations.table.tx"),
+      title: t("common:labels.tx"),
       visible: columnsVisibility.tx,
       widthPx: 80,
     },
@@ -207,7 +199,7 @@ export const DrepDelegationsTab = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : totalItems !== undefined ? (
             <h3 className='basis-[230px] text-nowrap'>
-              {t("dreps.delegations.totalOf")} {formatNumber(totalItems)}{" "}
+              {t("common:phrases.totalOf")} {formatNumber(totalItems)}{" "}
               {t("dreps.delegations.totalOfSuffix")}
             </h3>
           ) : (
@@ -225,7 +217,7 @@ export const DrepDelegationsTab = () => {
                 setRows={setRows}
                 columnsOptions={drepDelegationsTableOptions.map(item => {
                   return {
-                    label: tableColumnTranslations[item.key] || item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(
@@ -251,7 +243,7 @@ export const DrepDelegationsTab = () => {
               setRows={setRows}
               columnsOptions={drepDelegationsTableOptions.map(item => {
                 return {
-                  label: tableColumnTranslations[item.key] || item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),

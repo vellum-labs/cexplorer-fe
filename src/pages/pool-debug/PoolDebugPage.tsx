@@ -5,6 +5,7 @@ import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { DebuggerTab } from "@/components/pool-debug/tabs/DebuggerTab";
 import { CheatSheetTab } from "@/components/pool-debug/tabs/CheatSheetTab";
 import { useNavigate, useParams } from "@tanstack/react-router";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Pool {
   pool_id: string;
@@ -17,6 +18,7 @@ interface Pool {
 const STORAGE_KEY_POOL = "poolDebug_selectedPool";
 
 export const PoolDebugPage: FC = () => {
+  const { t } = useAppTranslation();
   const params = useParams({ strict: false }) as { poolId?: string };
   const urlPoolId = params.poolId;
   const navigate = useNavigate();
@@ -63,7 +65,7 @@ export const PoolDebugPage: FC = () => {
   const tabItems = [
     {
       key: "debugger",
-      label: "Debugger",
+      label: t("tabs.poolDebug.debugger"),
       content: (
         <DebuggerTab
           selectedPool={isUrlInSync ? selectedPool : null}
@@ -74,7 +76,7 @@ export const PoolDebugPage: FC = () => {
     },
     {
       key: "cheatsheet",
-      label: "Cheat sheet",
+      label: t("tabs.poolDebug.cheatSheet"),
       content: <CheatSheetTab />,
       visible: true,
     },
@@ -83,8 +85,8 @@ export const PoolDebugPage: FC = () => {
   return (
     <PageBase
       metadataTitle='poolDebug'
-      title='SPO Debug'
-      breadcrumbItems={[{ label: "SPO Debug" }]}
+      title={t("pages.poolDebug.title")}
+      breadcrumbItems={[{ label: t("breadcrumbs.poolDebug") }]}
       adsCarousel={false}
     >
       <div className='flex w-full max-w-desktop flex-col gap-3 p-mobile lg:p-desktop'>

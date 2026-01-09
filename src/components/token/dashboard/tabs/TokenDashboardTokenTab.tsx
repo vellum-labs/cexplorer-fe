@@ -43,10 +43,12 @@ import {
   ShoppingBasket,
 } from "lucide-react";
 import { configJSON } from "@/constants/conf";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 type Volume = "1d" | "1m" | "1w" | "2w" | "3m";
 
 export const TokenDashboardTokenTab: FC = () => {
+  const { t } = useAppTranslation("common");
   const { page, order, sort } = useSearch({
     from: "/token/dashboard/",
   });
@@ -424,7 +426,7 @@ export const TokenDashboardTokenTab: FC = () => {
                 setRows={setRows}
                 columnsOptions={tokenDashboardListTableOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(
@@ -454,7 +456,7 @@ export const TokenDashboardTokenTab: FC = () => {
               setRows={setRows}
               columnsOptions={tokenDashboardListTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),

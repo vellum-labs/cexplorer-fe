@@ -31,7 +31,7 @@ interface PoolPerfomanceTableProps {
 export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
   poolId,
 }) => {
-  const { t } = useAppTranslation("pages");
+  const { t } = useAppTranslation(["pages", "common"]);
   const query = useFetchPoolDetail(
     poolId.startsWith("pool1") ? poolId : undefined,
     poolId.startsWith("pool1") ? undefined : poolId,
@@ -135,7 +135,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
           currentEpoch={miscConst?.epoch.no}
         />
       ),
-      title: t("pools.detailPage.performanceTable.epoch"),
+      title: t("common:labels.epoch"),
       visible: columnsVisibility.epoch,
       widthPx: 55,
     },
@@ -186,7 +186,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
 
         return String(startTime);
       },
-      title: t("pools.detailPage.performanceTable.startTime"),
+      title: t("common:labels.startTime"),
       visible: columnsVisibility.date_start,
       widthPx: 50,
     },
@@ -264,7 +264,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
 
         return String(endTime);
       },
-      title: t("pools.detailPage.performanceTable.endTime"),
+      title: t("common:labels.endTime"),
       visible: columnsVisibility.date_end,
       widthPx: 80,
     },
@@ -277,7 +277,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
 
         return <p className='text-right'>{formatNumber(item.blocks)}</p>;
       },
-      title: <p className='w-full text-right'>{t("pools.detailPage.performanceTable.blocks")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.blocks")}</p>,
       visible: columnsVisibility.blocks,
       widthPx: 50,
     },
@@ -294,7 +294,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
           </p>
         );
       },
-      title: <p className='w-full text-right'>{t("pools.detailPage.performanceTable.epochStake")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.epochStake")}</p>,
       visible: columnsVisibility.active_stake,
       widthPx: 50,
     },
@@ -307,7 +307,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
 
         return <p className='text-right'>{formatNumber(item.delegators)}</p>;
       },
-      title: <p className='w-full text-right'>{t("pools.detailPage.performanceTable.delegators")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.delegators")}</p>,
       visible: columnsVisibility.delegators,
       widthPx: 50,
     },
@@ -334,7 +334,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
 
         return <p className='text-right'>{(item.luck * 100)?.toFixed(2)}%</p>;
       },
-      title: <p className='w-full text-right'>{t("pools.detailPage.performanceTable.luck")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.luck")}</p>,
       visible: columnsVisibility.luck,
       widthPx: 50,
     },
@@ -366,7 +366,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
           return (
             <div className='flex justify-end'>
               <Badge color='yellow' className='ml-auto'>
-                {t("pools.detailPage.performanceTable.pending")}
+                {t("common:labels.pending")}
               </Badge>
             </div>
           );
@@ -391,7 +391,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
               </div>
             }
           >
-            <span className='cursor-help'>{t("pools.detailPage.performanceTable.roa")}</span>
+            <span className='cursor-help'>{t("common:labels.roa")}</span>
           </Tooltip>
         </div>
       ),
@@ -409,7 +409,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
           setRows={setRows}
           columnsOptions={poolPerfomanceTableOptions.map(item => {
             return {
-              label: item.name,
+              label: t(`common:tableSettings.${item.key}`),
               isVisible: columnsVisibility[item.key],
               onClick: () =>
                 setColumnVisibility(item.key, !columnsVisibility[item.key]),

@@ -22,6 +22,7 @@ import { assetListTableOptionsWithoutType } from "@/constants/tables/assetListTa
 import { useViewStore } from "@/stores/viewStore";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface PolicyDetailNftAssetProps {
   policyId: string;
@@ -30,6 +31,7 @@ interface PolicyDetailNftAssetProps {
 export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
   policyId,
 }) => {
+  const { t } = useAppTranslation("common");
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { page } = useSearch({
     from: "/policy/$policyId",
@@ -171,7 +173,7 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
                         .filter(item => columnsVisibility[item.key])
                         .map(item => {
                           return {
-                            label: item.name,
+                            label: t(`common:tableSettings.${item.key}`),
                             isVisible: columnsVisibility[item.key],
                             onClick: () =>
                               setColumnVisibility(

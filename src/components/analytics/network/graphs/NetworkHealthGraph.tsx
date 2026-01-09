@@ -15,6 +15,7 @@ import { GraphTimePeriod } from "@/types/graphTypes";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
 import { configJSON } from "@/constants/conf";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface NetworkHealthGraphProps {
   epochQuery: ReturnType<typeof useFetchEpochAnalytics>;
@@ -25,6 +26,7 @@ export const NetworkHealthGraph: FC<NetworkHealthGraphProps> = ({
   epochQuery,
   miscConst,
 }) => {
+  const { t } = useAppTranslation("common");
   const [json, setJson] = useState<any>();
 
   const { genesisParams } = configJSON;
@@ -100,7 +102,7 @@ export const NetworkHealthGraph: FC<NetworkHealthGraphProps> = ({
         };
 
         return (
-          `Date: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (Epoch: ${params[0].axisValue})<hr>` +
+          `${t("labels.date")}: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${t("labels.epoch")}: ${params[0].axisValue})<hr>` +
           `<div>
         ${params
           .map(
@@ -122,7 +124,7 @@ export const NetworkHealthGraph: FC<NetworkHealthGraphProps> = ({
     xAxis: {
       type: "category",
       data: epochs,
-      name: "Epoch",
+      name: t("labels.epoch"),
       nameLocation: "middle",
       nameGap: 28,
       boundaryGap: false,
@@ -216,8 +218,8 @@ export const NetworkHealthGraph: FC<NetworkHealthGraphProps> = ({
 
   return (
     <AnalyticsGraph
-      title='Chain density'
-      description="Reflects the overall health and consistency of block production, with an ideal chain density target of around 5% based on the network's parameters."
+      title={t("analytics.chainDensity")}
+      description={t("analytics.chainDensityDescription")}
       exportButton
       graphSortData={{
         query: epochQuery,

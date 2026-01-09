@@ -8,8 +8,10 @@ import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { getRouteApi } from "@tanstack/react-router";
 import { TxListPage } from "../tx/TxListPage";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const ScriptDetailPage = () => {
+  const { t } = useAppTranslation();
   const route = getRouteApi("/script/$hash");
   const { hash } = route.useParams();
 
@@ -18,19 +20,19 @@ export const ScriptDetailPage = () => {
   const scriptDetailTabItems = [
     {
       key: "stats",
-      label: "Stats",
+      label: t("tabs.scriptDetail.stats"),
       content: <ScriptDetailStatsTab items={query.data?.data.stat} />,
       visible: true,
     },
     {
       key: "uses",
-      label: "Uses",
+      label: t("tabs.scriptDetail.uses"),
       content: <ScriptDetailUsesTab />,
       visible: true,
     },
     {
       key: "transactions",
-      label: "Transactions",
+      label: t("tabs.scriptDetail.transactions"),
       content: <TxListPage script={hash} />,
       visible: true,
     },
@@ -49,10 +51,10 @@ export const ScriptDetailPage = () => {
         before: "%script%",
         after: hash,
       }}
-      title='Script detail'
+      title={t("pages.scriptDetail.title")}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>Script List</span>,
+          label: <span className='inline pt-1/2'>{t("breadcrumbs.scriptList")}</span>,
           link: "/script",
         },
         {

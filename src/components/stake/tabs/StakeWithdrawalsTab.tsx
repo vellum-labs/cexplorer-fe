@@ -62,7 +62,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
 
         return item?.block.time;
       },
-      title: t("stake.detailPage.withdrawalsTable.date"),
+      title: t("common:labels.date"),
       visible: columnsVisibility.date,
       widthPx: 50,
     },
@@ -90,7 +90,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
 
         return item?.tx?.hash;
       },
-      title: t("stake.detailPage.withdrawalsTable.hash"),
+      title: t("common:labels.hash"),
       visible: columnsVisibility.tx_hash,
       widthPx: 80,
     },
@@ -130,7 +130,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
           <AdaWithTooltip data={item.tx?.fee} />
         </p>
       ),
-      title: <p className='w-full text-right'>{t("stake.detailPage.withdrawalsTable.fee")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.fee")}</p>,
       visible: columnsVisibility.fee,
       widthPx: 50,
     },
@@ -141,7 +141,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
           <AdaWithTooltip data={item?.amount} />
         </p>
       ),
-      title: <p className='w-full text-right'>{t("stake.detailPage.withdrawalsTable.amount")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.amount")}</p>,
       visible: columnsVisibility.amount,
       widthPx: 50,
     },
@@ -185,7 +185,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
           "%"
         );
       },
-      title: <p className='w-full text-right'>{t("stake.detailPage.withdrawalsTable.size")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.size")}</p>,
       visible: columnsVisibility.size,
       widthPx: 50,
     },
@@ -203,7 +203,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[230px] text-nowrap'>
-              {t("stake.detailPage.withdrawalsTable.totalOf")} {formatNumber(totalItems)} {t("stake.detailPage.withdrawalsTable.withdrawals")}
+              {t("common:phrases.totalOf")} {formatNumber(totalItems)} {t("stake.detailPage.withdrawalsTable.withdrawals")}
             </h3>
           )}
           <div className='flex justify-end max-[435px]:w-full md:hidden'>
@@ -214,7 +214,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
                 setRows={setRows}
                 columnsOptions={stakeWithdrawalTableOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(
@@ -244,7 +244,7 @@ export const StakeWithdrawalsTab = ({ view, miscConst }: Props) => {
               setRows={setRows}
               columnsOptions={stakeWithdrawalTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),

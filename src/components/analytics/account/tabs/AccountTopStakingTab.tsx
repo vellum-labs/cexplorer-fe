@@ -11,6 +11,7 @@ import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchAnalyticsStakingAccounts } from "@/services/analytics";
 import { useFetchMiscBasic } from "@/services/misc";
@@ -28,6 +29,7 @@ import { useFilterTable } from "@/hooks/tables/useFilterTable";
 import { X } from "lucide-react";
 
 export const AccountTopStakingTab: FC = () => {
+  const { t } = useAppTranslation("common");
   const { page, drep_only, pool_only } = useSearch({
     from: "/analytics/account",
   });
@@ -98,7 +100,7 @@ export const AccountTopStakingTab: FC = () => {
           </Link>
         );
       },
-      title: "Account",
+      title: t("analytics.account"),
       visible: columnsVisibility.account,
       widthPx: 30,
     },
@@ -115,7 +117,7 @@ export const AccountTopStakingTab: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>Live stake</p>,
+      title: <p className='w-full text-right'>{t("analytics.liveStake")}</p>,
       visible: columnsVisibility.live_stake,
       widthPx: 30,
     },
@@ -136,7 +138,7 @@ export const AccountTopStakingTab: FC = () => {
           </p>
         );
       },
-      title: <p>Loyalty</p>,
+      title: <p>{t("analytics.loyalty")}</p>,
       visible: columnsVisibility.loyalty,
       widthPx: 30,
     },
@@ -159,7 +161,7 @@ export const AccountTopStakingTab: FC = () => {
       },
       title: (
         <div className='flex items-center gap-1' ref={anchorRefs?.pool_only}>
-          Pool delegation
+          {t("analytics.poolDelegation")}
         </div>
       ),
       filter: {
@@ -186,7 +188,7 @@ export const AccountTopStakingTab: FC = () => {
                   changeDraftFilter("pool_only", +e.currentTarget.value)
                 }
               />
-              <span className='text-text-sm'>Delegated to a stake pool</span>
+              <span className='text-text-sm'>{t("analytics.delegatedToPool")}</span>
             </label>
             <label className='flex items-center gap-1'>
               <input
@@ -200,7 +202,7 @@ export const AccountTopStakingTab: FC = () => {
                 }
               />
               <span className='text-text-sm'>
-                Not delegated to a stake pool
+                {t("analytics.notDelegatedToPool")}
               </span>
             </label>
           </div>
@@ -231,7 +233,7 @@ export const AccountTopStakingTab: FC = () => {
       },
       title: (
         <div className='flex items-center gap-1' ref={anchorRefs?.drep_only}>
-          DRep delegation
+          {t("analytics.drepDelegation")}
         </div>
       ),
       filter: {
@@ -258,7 +260,7 @@ export const AccountTopStakingTab: FC = () => {
                   changeDraftFilter("drep_only", +e.currentTarget.value)
                 }
               />
-              <span className='text-text-sm'>Delegated to a DRep</span>
+              <span className='text-text-sm'>{t("analytics.delegatedToDrep")}</span>
             </label>
             <label className='flex items-center gap-1'>
               <input
@@ -271,7 +273,7 @@ export const AccountTopStakingTab: FC = () => {
                   changeDraftFilter("drep_only", +e.currentTarget.value)
                 }
               />
-              <span className='text-text-sm'>Not delegated to a DRep</span>
+              <span className='text-text-sm'>{t("analytics.notDelegatedToDrep")}</span>
             </label>
           </div>
         ),
@@ -295,7 +297,7 @@ export const AccountTopStakingTab: FC = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : totalItems > 0 ? (
             <h3 className='basis-[230px] text-wrap'>
-              Total of {formatNumber(totalItems)} accounts
+              {t("analytics.totalAccounts", { count: formatNumber(totalItems) })}
             </h3>
           ) : (
             ""
@@ -312,7 +314,7 @@ export const AccountTopStakingTab: FC = () => {
             setRows={setRows}
             columnsOptions={accountAnalyticsTopStakingTableOptions.map(item => {
               return {
-                label: item.name,
+                label: t(`common:tableSettings.${item.key}`),
                 isVisible: columnsVisibility[item.key],
                 onClick: () =>
                   setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -330,19 +332,19 @@ export const AccountTopStakingTab: FC = () => {
                   key={key}
                   className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
                 >
-                  {key === "pool_only" && <span>Pool delegation:</span>}
+                  {key === "pool_only" && <span>{t("analytics.poolDelegation")}:</span>}
                   <span>
                     {key === "pool_only" &&
                       (+value === 1
-                        ? "Delegated to a stake pool"
-                        : "Not delegated to a stake pool")}
+                        ? t("analytics.delegatedToPool")
+                        : t("analytics.notDelegatedToPool"))}
                   </span>
-                  {key === "drep_only" && <span>DRep delegation:</span>}
+                  {key === "drep_only" && <span>{t("analytics.drepDelegation")}:</span>}
                   <span>
                     {key === "drep_only" &&
                       (+value === 1
-                        ? "Delegated to a DRep"
-                        : "Not delegated to a DRep")}
+                        ? t("analytics.delegatedToDrep")
+                        : t("analytics.notDelegatedToDrep"))}
                   </span>
                   <X
                     size={13}
@@ -376,7 +378,7 @@ export const AccountTopStakingTab: FC = () => {
         onOrderChange={setColumsOrder}
       />
       <h3 className='mt-2 text-center'>
-        Accounts with less than 100,000 ADA were excluded from this list.
+        {t("analytics.accountsExcluded")}
       </h3>
     </div>
   );

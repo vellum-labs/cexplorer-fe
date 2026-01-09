@@ -6,7 +6,6 @@
   "transactions": {
     "title": "Transakce",
     "detail": "Detail transakce",
-    "totalOf": "Celkem",
     "totalOfSuffix": "transakcí",
     "searchPlaceholder": "Hledat podle hash transakce...",
     "tabs": {
@@ -25,21 +24,13 @@
       "message": "Zpráva"
     },
     "table": {
-      "date": "Datum",
-      "hash": "Hash",
-      "block": "Blok",
-      "epochBlock": "Epocha / Blok",
-      "totalOutput": "Celkový výstup",
       "treasuryDonation": "Dar do pokladny",
-      "fee": "Poplatek",
-      "size": "Velikost",
       "scriptSize": "Velikost skriptu"
     }
   },
   "blocks": {
     "title": "Bloky",
     "detail": "Detail bloku",
-    "totalOf": "Celkem",
     "totalOfSuffix": "bloků",
     "searchPlaceholder": "Hledat ve výsledcích...",
     "overview": {
@@ -71,23 +62,11 @@
       "hash": "Hash",
       "slot": "Slot",
       "height": "Výška"
-    },
-    "table": {
-      "epoch": "Epocha",
-      "slot": "Slot",
-      "time": "Čas",
-      "block": "Blok",
-      "hash": "Hash",
-      "transactions": "Transakce",
-      "output": "Výstup",
-      "size": "Velikost",
-      "pool": "Pool"
     }
   },
   "epochs": {
     "title": "Epochy",
     "detail": "Detail epochy",
-    "totalOf": "Celkem",
     "totalOfSuffix": "epoch",
     "current": "Aktuální epocha",
     "searchPlaceholder": "Hledat ve výsledcích...",
@@ -126,17 +105,120 @@
       "date": "Datum",
       "tbd": "Brzy"
     },
-    "table": {
-      "epoch": "Epocha",
-      "startTime": "Čas zahájení",
-      "endTime": "Čas ukončení",
+    "analyticsTab": {
+      "blockUsage": "Využití bloků",
+      "stakedAda": "Stakovaná ADA",
+      "stakedWallets": "Stakované peněženky",
+      "rewards": "Odměny",
+      "activeWallets": "Aktivní peněženky",
+      "newWallets": "Nové peněženky",
+      "byEpoch": "Podle epochy",
+      "values": "Hodnoty"
+    },
+    "blocksTable": {
+      "totalOfBlocks": "Celkem {{count}} bloků",
+      "date": "Datum",
+      "height": "Výška",
+      "slot": "Slot",
+      "txs": "TX",
+      "mintedBy": "Vytěženo",
+      "size": "Velikost"
+    },
+    "detailAnalytics": {
+      "blocksInEpoch": "Bloky v epoše",
+      "transactionsInEpoch": "Transakce v epoše",
+      "blockSizeUsed": "Využitá velikost bloku",
+      "feesEarned": "Vybrané poplatky",
+      "byDay": "podle dne",
+      "rewardsStructure": "Struktura odměn",
+      "earnedByFeesReserves": "Z poplatků / rezerv",
+      "fees": "Poplatky",
+      "reserves": "Rezervy"
+    },
+    "stakedAda": {
+      "title": "Stakovaná ADA",
+      "subtitle": "Stakovaná / Nestakovaná zásoba",
+      "staked": "Stakovaná",
+      "unstaked": "Nestakovaná"
+    },
+    "stakePoolStats": {
+      "title": "Statistiky stake poolů",
+      "pools": "Pooly",
+      "apyLeader": "APY % Vedoucí",
+      "apyMember": "APY % Člen",
+      "averageStake": "Průměrný stake",
+      "delegatorCount": "Počet delegátorů",
+      "delegatorCountWeighted": "Vážený počet delegátorů",
+      "delegatorAverage": "Průměr delegátorů",
+      "delegatorAverageWeighted": "Vážený průměr delegátorů",
+      "pending": "Čeká se",
+      "dcwTooltip": "Vážený počet delegátorů (DCW) je metrika ve statistikách stake poolů, která vypočítává vážený průměrný počet delegátorů přispívajících do poolu.",
+      "daTooltip": "Průměr delegátorů (DA) je metrika ve statistikách stake poolů, která představuje jednoduchý průměr částky stake delegované každým delegátorem.",
+      "dawTooltip": "Vážený průměr delegátorů (DAW) ve statistikách stake poolů měří průměrnou částku stake delegovanou všemi delegátory, váženou velikostí každé delegace."
+    },
+    "parameters": {
+      "title": "Parametry epochy",
+      "export": "Export",
+      "explanation": "Vysvětlení",
+      "parameter": "Parametr",
+      "value": "Hodnota",
+      "minFeeA": "Parametr 'a' pro výpočet minimálního transakčního poplatku.",
+      "minFeeB": "Parametr 'b' pro výpočet minimálního transakčního poplatku.",
+      "maxBlockSize": "Maximální velikost bloku (v bajtech).",
+      "maxTxSize": "Maximální velikost transakce (v bajtech).",
+      "maxBhSize": "Maximální velikost hlavičky bloku (v bajtech).",
+      "keyDeposit": "Částka (v Lovelace) potřebná jako vklad pro registraci StakeAddress.",
+      "poolDeposit": "Částka (v Lovelace) potřebná jako vklad pro registraci stake poolu.",
+      "maxEpoch": "Maximální počet epoch v budoucnosti, pro které lze naplánovat odchod poolu do důchodu.",
+      "optimalPoolCount": "Optimální počet stake poolů.",
+      "influence": "Vliv zástavy na pravděpodobnost stake poolu při ražení bloku.",
+      "monetaryExpandRate": "Míra monetární expanze.",
+      "treasuryGrowthRate": "Míra růstu pokladnice.",
+      "decentralisation": "Parametr decentralizace (1 plně centralizovaný, 0 plně decentralizovaný).",
+      "protocolMajor": "Hlavní číslo protokolu.",
+      "protocolMinor": "Vedlejší číslo protokolu.",
+      "minUtxoValue": "Minimální hodnota UTxO záznamu.",
+      "minPoolCost": "Minimální náklady poolu.",
+      "nonce": "Hodnota nonce pro tuto epochu.",
+      "priceMem": "Cena za slovo využití paměti skriptu.",
+      "priceStep": "Cena za krok provádění skriptu.",
+      "maxTxExMem": "Maximální množství paměti pro provádění povolené v jedné transakci.",
+      "maxTxExSteps": "Maximální počet kroků provádění povolených v jedné transakci.",
+      "maxBlockExMem": "Maximální množství paměti pro provádění povolené v jednom bloku.",
+      "maxBlockExSteps": "Maximální počet kroků provádění povolených v jednom bloku.",
+      "maxValSize": "Maximální velikost Val.",
+      "collateralPercent": "Procento txfee, které musí být poskytnuto jako kolaterál při zahrnutí nenativních skriptů.",
+      "maxCollateralInputs": "Maximální počet kolaterálních vstupů povolených v transakci."
+    },
+    "pots": {
+      "title": "Zásoby",
+      "treasury": "Pokladnice",
+      "reserves": "Rezervy",
+      "rewards": "Odměny",
+      "deposits": "Vklady",
+      "fees": "Poplatky",
+      "feesReserves": "Poplatky / Rezervy",
+      "feesReservesTooltip": "Podíl odměn za staking pocházející z poplatků vs rezerv"
+    },
+    "summary": {
+      "title": "Souhrn",
+      "currentEpoch": "Aktuální epocha",
+      "beginning": "Začátek",
+      "end": "Konec",
       "blocks": "Bloky",
       "transactions": "Transakce",
-      "output": "Výstup",
-      "fees": "Poplatky",
-      "rewards": "Odměny",
-      "stake": "Stake",
-      "pending": "Čekající"
+      "feesGenerated": "Vygenerované poplatky",
+      "tps": "TPS:",
+      "used": "využito",
+      "cap": "kapacita"
+    },
+    "loadAndCost": {
+      "title": "Zatížení a náklady",
+      "sizeOfAllBlocks": "Velikost všech bloků v epoše",
+      "pricePerMB": "Cena za MB",
+      "averageTxSize": "Průměrná velikost TX",
+      "averageBlockSize": "Průměrná velikost bloku",
+      "maxBlockSize": "Max velikost bloku"
     }
   },
   "pools": {
@@ -145,7 +227,6 @@
     "breadcrumb": "Pooly",
     "list": "Seznam poolů",
     "cardanoStakePools": "Cardano Stake Pooly",
-    "totalOf": "Celkem",
     "totalOfSuffix": "stake poolů",
     "searchPlaceholder": "Hledat ve výsledcích...",
     "displayVote": "Zobrazit hlas",
@@ -175,46 +256,20 @@
     },
     "updates": {
       "title": "Aktualizace poolů",
-      "totalOf": "Celkem",
       "totalOfSuffix": "poolů",
       "searchPlaceholder": "Hledat ve výsledcích..."
     },
     "deregistrations": {
       "title": "Zrušení registrace poolů",
-      "totalOf": "Celkem",
       "totalOfSuffix": "zrušení"
     },
     "registrations": {
       "title": "Registrace poolů",
-      "totalOf": "Celkem",
-      "totalOfSuffix": "registrací",
-      "table": {
-        "date": "Datum",
-        "pool": "Pool",
-        "deposit": "Záloha",
-        "pledge": "Pledge",
-        "fee": "Poplatek",
-        "txHash": "TX hash",
-        "epochBlock": "Epocha/Blok"
-      }
+      "totalOfSuffix": "registrací"
     },
     "table": {
-      "date": "Datum",
-      "pool": "Pool",
-      "epoch": "Epocha",
-      "fees": "Poplatky",
-      "pledge": "Pledge",
-      "txHash": "TX Hash",
-      "birthday": "Narozeniny",
-      "registered": "Registrováno",
-      "delegators": "Delegátoři",
-      "activeStake": "Aktivní stake",
       "transactionHash": "Hash transakce",
-      "certificate": "Certifikát",
-      "longetivity": "Délka života",
-      "deposit": "Záloha",
-      "fee": "Poplatek",
-      "epochBlock": "Epocha/Blok"
+      "longetivity": "Délka života"
     },
     "analytics": {
       "newStakers": "Noví stakeři",
@@ -341,6 +396,7 @@
       "delegatorsTable": {
         "date": "Datum",
         "activeEpoch": "Aktivní epocha",
+        "activeIn": "Aktivní od",
         "address": "Adresa",
         "poolDelegation": "Delegace poolu",
         "amount": "Množství",
@@ -422,7 +478,6 @@
     },
     "multiPool": {
       "title": "Multi-pool delegátoři",
-      "totalOf": "Celkem",
       "totalOfSuffix": "multi-pool delegátorů."
     },
     "retired": {
@@ -442,36 +497,20 @@
       },
       "table": {
         "index": "#",
-        "stakePool": "Stake Pool",
         "retiredInEpoch": "Zrušeno v epoše",
-        "retiringInEpoch": "Zruší se v epoše",
-        "activeStake": "Aktivní stake",
-        "delegators": "Delegátoři",
-        "longevity": "Délka života"
+        "retiringInEpoch": "Zruší se v epoše"
       }
     },
     "table": {
-      "date": "Datum",
-      "epoch": "Epocha",
-      "address": "Adresa",
-      "liveStake": "Živý stake",
-      "delegation": "Delegace",
-      "tx": "TX",
       "paymentCredential": "Platební credential",
-      "stake": "Stake",
       "stakeKeys": "Stake klíče"
     }
   },
   "withdrawals": {
     "title": "Výběry odměn",
     "table": {
-      "date": "Datum",
-      "epoch": "Epocha",
-      "address": "Adresa",
       "amountControlled": "Kontrolované množství",
-      "amountWithdrawn": "Vybrané množství",
-      "delegation": "Delegace",
-      "tx": "TX"
+      "amountWithdrawn": "Vybrané množství"
     }
   },
   "rewardsChecker": {
@@ -484,7 +523,6 @@
   "groups": {
     "title": "Cardano Skupiny (Donuts)",
     "breadcrumb": "Skupiny",
-    "totalOf": "Celkem",
     "totalOfSuffix": "skupin",
     "searchPlaceholder": "Hledat ve výsledcích...",
     "info": "Tento dashboard je spravován komunitou Cardano. Každý může přidat nebo upravit existující skupiny přes",
@@ -501,9 +539,7 @@
       "poolsCount": "Počet poolů",
       "groupName": "Název skupiny",
       "poolStake": "Stake poolu",
-      "delegators": "Delegátoři",
       "share": "Podíl",
-      "pledge": "Pledge",
       "pledgePerPool": "μ Pledge na pool",
       "alsoDrep": "Také DRep"
     },
@@ -519,7 +555,6 @@
     "detail": "Detail DRep",
     "list": "Seznam DReps",
     "breadcrumb": "Delegovaní zástupci",
-    "totalOf": "Celkem",
     "totalOfSuffix": "DRepů",
     "searchPlaceholder": "Hledat podle Drep ID...",
     "displayVote": "Zobrazit hlas",
@@ -549,32 +584,19 @@
     },
     "table": {
       "ranking": "#",
-      "status": "Stav",
       "drepName": "Jméno DRep",
-      "votingPower": "Hlasovací síla",
       "lifetimeActivity": "Celoživotní aktivita",
       "lifetimeActivityTooltip": "Hlasovací aktivita za celou dobu DRep",
       "recentActivity": "Nedávná aktivita",
       "recentActivityTooltip": "Hlasovací aktivita DRep za posledních 6 měsíců",
       "ownerStake": "Stake vlastníka",
       "averageStake": "Průměrný stake",
-      "registered": "Registrován",
-      "delegators": "Delegátoři",
       "drepMetadata": "Metadata DRep",
       "selectedVote": "Vybraný hlas",
-      "spo": "SPO",
       "topDelegator": "Hlavní delegátor"
     },
     "delegations": {
-      "totalOf": "Celkem",
-      "totalOfSuffix": "delegací",
-      "table": {
-        "date": "Datum",
-        "address": "Adresa",
-        "amount": "Množství",
-        "delegation": "Delegace",
-        "tx": "Tx"
-      }
+      "totalOfSuffix": "delegací"
     },
     "analytics": {
       "poolGraph": "Graf poolů",
@@ -696,6 +718,51 @@
         "byCount": "Struktura delegátorů podle počtu",
         "byStake": "Struktura delegátorů podle stake"
       }
+    },
+    "graphs": {
+      "date": "Datum:",
+      "epoch": "Epocha:",
+      "averageDreps": {
+        "title": "Průměrní DRepové",
+        "avgDelegatorsPerDrep": "Průměrný počet delegátorů na DRepa",
+        "avgStakePerDrep": "Průměrný stake na DRepa (₳)",
+        "avgStakePerDrepShort": "Průměrný stake na DRepa",
+        "votingPowerSpoSameTime": "Hlasovací síla (%) DRepů, kteří jsou zároveň SPO",
+        "votingPowerShort": "Hlasovací síla"
+      },
+      "delegationChanges": {
+        "title": "Delegátoři a stake měnící hlasovací i ražební delegaci",
+        "description": "Změny delegátorů a stake přepínajících hlasovací nebo ražební delegaci po epochách",
+        "delegatorCount": "Počet delegátorů",
+        "stakeMoved": "Přesunutý stake (₳)",
+        "stakeMovedShort": "Přesunutý stake"
+      },
+      "drepsNotSpo": {
+        "title": "DRepové, kteří nejsou SPO",
+        "description": "Pohled na stake, počet DRepů a delegátorů delegovaných k DRepům, kteří nejsou SPO, po epochách",
+        "drepCount": "Počet DRepů",
+        "stake": "Stake (₳)",
+        "stakeShort": "Stake",
+        "delegators": "Delegátoři",
+        "showFiltered": "Zobrazit filtrované",
+        "filterTooltip": "Vylučuje DRepy 'Zdržet se' a 'Nedůvěra' z počtu a stake."
+      },
+      "drepPool": {
+        "totalDelegatedStake": "Celkový delegovaný stake (₳)",
+        "totalDelegatedStakeShort": "Celkový delegovaný stake",
+        "drepDelegated": "Delegováno k DRepům",
+        "abstainDrep": "DRep Zdržet se (₳)",
+        "abstainDrepShort": "DRep Zdržet se",
+        "noConfidenceDrep": "DRep Nedůvěra (₳)",
+        "noConfidenceDrepShort": "DRep Nedůvěra"
+      },
+      "drepSize": {
+        "votingPower": "Hlasovací síla:",
+        "delegators": "Delegátoři:",
+        "ownerStake": "Stake vlastníka:",
+        "averageStake": "Průměrný stake:",
+        "value": "Hodnota:"
+      }
     }
   },
   "assets": {
@@ -711,52 +778,19 @@
       "all": "Vše",
       "tokens": "Tokeny",
       "nfts": "NFTs"
-    },
-    "table": {
-      "name": "Název",
-      "fingerprint": "Fingerprint",
-      "policy": "Policy",
-      "quantity": "Množství",
-      "holders": "Držitelé",
-      "transactions": "Transakce",
-      "mintTime": "Čas vytvoření",
-      "type": "Typ",
-      "token": "Token",
-      "nft": "NFT",
-      "supply": "Zásoby",
-      "price": "Cena"
     }
   },
   "contractTransactions": {
     "title": "Interakce s kontrakty",
-    "totalOf": "Celkem",
-    "totalOfSuffix": "interakcí",
-    "table": {
-      "date": "Datum",
-      "type": "Typ",
-      "purpose": "Účel",
-      "scriptHash": "Hash skriptu",
-      "deposit": "Záloha",
-      "unitSteps": "Jednotkové kroky",
-      "txHash": "TX hash",
-      "epochBlock": "Epocha/Blok"
-    }
+    "totalOfSuffix": "interakcí"
   },
   "metadata": {
     "title": "Seznam metadat transakcí",
-    "totalOf": "Celkem",
     "totalOfSuffix": "transakcí",
     "searchPlaceholder": "Hledat ve výsledcích...",
     "search": {
       "hash": "Hash",
       "key": "Klíč"
-    },
-    "table": {
-      "date": "Datum",
-      "key": "Klíč",
-      "txHash": "TX Hash",
-      "size": "Velikost",
-      "metadata": "Metadata"
     }
   },
   "treasuryDonations": {
@@ -833,7 +867,6 @@
         "dreps": "DRepy"
       },
       "withdrawalsTable": {
-        "totalOf": "Celkem",
         "withdrawals": "výběrů",
         "searchPlaceholder": "Hledat podle tx hash...",
         "date": "Datum",
@@ -876,29 +909,11 @@
     },
     "registrations": {
       "title": "Registrace stake",
-      "totalOf": "Celkem",
-      "totalOfSuffix": "registrací",
-      "table": {
-        "date": "Datum",
-        "type": "Typ",
-        "stakeKey": "Stake klíč",
-        "deposit": "Záloha",
-        "txHash": "TX hash",
-        "epochBlock": "Epocha/Blok"
-      }
+      "totalOfSuffix": "registrací"
     },
     "deregistrations": {
       "title": "Zrušení registrace stake",
-      "totalOf": "Celkem",
-      "totalOfSuffix": "zrušení",
-      "table": {
-        "date": "Datum",
-        "type": "Typ",
-        "stakeKey": "Stake klíč",
-        "deposit": "Záloha",
-        "txHash": "TX hash",
-        "epochBlock": "Epocha/Blok"
-      }
+      "totalOfSuffix": "zrušení"
     }
   },
   "policy": {
@@ -908,6 +923,30 @@
   "script": {
     "title": "Script",
     "detail": "Detail scriptu"
+  },
+  "scriptList": {
+    "title": "Seznam skriptů"
+  },
+  "scriptDetail": {
+    "title": "Detail skriptu"
+  },
+  "taxTool": {
+    "title": "Daňový nástroj"
+  },
+  "polls": {
+    "title": "Akce správy Cexplorer"
+  },
+  "poolDebug": {
+    "title": "SPO Debug"
+  },
+  "poolAnalytics": {
+    "title": "Analytika poolů"
+  },
+  "addressDetail": {
+    "title": "Adresa"
+  },
+  "policyDetail": {
+    "title": "Policy"
   },
   "analytics": {
     "title": "Analytika",
@@ -949,9 +988,39 @@
     "articles": "Admin články",
     "wiki": "Admin wiki"
   },
+  "breadcrumbs": {
+    "home": "Domů",
+    "groups": "Skupiny",
+    "scriptList": "Seznam skriptů",
+    "taxTool": "Daňový nástroj",
+    "voting": "Hlasování",
+    "poolDebug": "SPO Debug",
+    "stake": "Stake",
+    "address": "Adresa",
+    "assets": "Aktiva",
+    "settings": "Nastavení"
+  },
   "errors": {
     "notFound": "Stránka nenalezena",
     "serverError": "Chyba serveru",
     "unauthorized": "Neautorizováno"
+  },
+  "poolDebug": {
+    "cheatSheet": {
+      "description": "Rychlý průvodce pro operátory stake poolů. Příkazy k okopírování pro sestavení cardano-node, výpočet KES period a generování operačních certifikátů—tahák, který SPO skutečně používají.",
+      "buildAndUpdate": "Sestavení a aktualizace Cardano Node",
+      "kesUpdate": "KES aktualizace",
+      "slotsPerKESPeriod": "slotsPerKESPeriod:",
+      "slot": "slot:",
+      "expr": "expr"
+    },
+    "debugger": {
+      "description": "Zadejte ID vašeho poolu pro kontrolu konfigurace stake poolu. Po odeslání uvidíte podrobný seznam případných problémů, které vyžadují pozornost, nebo potvrzení, že vše je správně nastaveno.",
+      "date": "Datum",
+      "type": "Typ",
+      "errorDescription": "Popis",
+      "errors": "{{count}} Chyb",
+      "poolDetail": "Detail poolu →"
+    }
   }
 }

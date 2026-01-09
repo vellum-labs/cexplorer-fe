@@ -4,24 +4,27 @@ import { ScriptListRanklistTab } from "@/components/script/tabs/ScriptListRankli
 import { ScriptListTVLTab } from "@/components/script/tabs/ScriptListTVLTab";
 import type { FC } from "react";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const ScriptListPage: FC = () => {
+  const { t } = useAppTranslation();
+
   const tabs = [
     {
       key: "ranklist",
-      label: "Ranklist",
+      label: t("tabs.script.ranklist"),
       content: <ScriptListRanklistTab />,
       visible: true,
     },
     {
       key: "interactions",
-      label: "Interactions",
+      label: t("tabs.script.interactions"),
       content: <ScriptListInteractionsTab />,
       visible: true,
     },
     {
       key: "tvl",
-      label: "TVL",
+      label: t("tabs.script.tvl"),
       content: <ScriptListTVLTab />,
       visible: true,
     },
@@ -30,8 +33,8 @@ export const ScriptListPage: FC = () => {
   return (
     <PageBase
       metadataTitle='scriptList'
-      title='Script List'
-      breadcrumbItems={[{ label: "Script List" }]}
+      title={t("pages.scriptList.title")}
+      breadcrumbItems={[{ label: t("breadcrumbs.scriptList") }]}
     >
       <Tabs mobileItemsCount={3} items={tabs} />
     </PageBase>

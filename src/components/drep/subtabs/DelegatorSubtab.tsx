@@ -139,7 +139,7 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
           </div>
         );
       },
-      title: <p>{t("dreps.detailPage.delegatorsTable.stake")}</p>,
+      title: <p>{t("common:labels.stake")}</p>,
       visible: columnsVisibility.stake,
       widthPx: 70,
     },
@@ -156,7 +156,7 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>{t("dreps.detailPage.delegatorsTable.amount")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.amount")}</p>,
       visible: columnsVisibility.amount,
       widthPx: 30,
     },
@@ -232,7 +232,7 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
           </div>
         );
       },
-      title: <p className='w-full text-right'>{t("dreps.detailPage.delegatorsTable.loyalty")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.loyalty")}</p>,
       visible: columnsVisibility.loyalty,
       widthPx: 20,
     },
@@ -245,7 +245,7 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
 
         return <HashCell hash={item?.live_drep?.tx?.tx_hash} />;
       },
-      title: <p>{t("dreps.detailPage.delegatorsTable.tx")}</p>,
+      title: <p>{t("common:labels.tx")}</p>,
       visible: columnsVisibility.tx,
       widthPx: 60,
     },

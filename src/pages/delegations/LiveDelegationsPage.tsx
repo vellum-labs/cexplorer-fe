@@ -87,14 +87,14 @@ export const LiveDelegationsPage = () => {
           "yyy-MM-dd HH:mm:ss",
         );
       },
-      title: <p>{t("delegations.table.date")}</p>,
+      title: <p>{t("common:labels.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 55,
     },
     {
       key: "epoch",
       render: item => <EpochCell no={item.active_epoch_no} />,
-      title: <p className='w-full text-right'>{t("delegations.table.epoch")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.epoch")}</p>,
       visible: columnsVisibility.epoch,
       widthPx: 25,
     },
@@ -114,7 +114,7 @@ export const LiveDelegationsPage = () => {
 
         return item.view;
       },
-      title: t("delegations.table.address"),
+      title: t("common:labels.address"),
       visible: columnsVisibility.address,
       widthPx: 90,
     },
@@ -127,7 +127,7 @@ export const LiveDelegationsPage = () => {
       ),
       title: (
         <div className='flex w-full justify-end'>
-          <span>{t("delegations.table.liveStake")}</span>
+          <span>{t("common:labels.liveStake")}</span>
         </div>
       ),
       visible: columnsVisibility.amount,
@@ -165,7 +165,7 @@ export const LiveDelegationsPage = () => {
           .filter(e => e)
           .join(" -> ");
       },
-      title: t("delegations.table.delegation"),
+      title: t("common:labels.delegation"),
       visible: columnsVisibility.delegation,
       widthPx: 190,
     },
@@ -181,7 +181,7 @@ export const LiveDelegationsPage = () => {
 
         return item.tx.hash;
       },
-      title: t("delegations.table.tx"),
+      title: t("common:labels.tx"),
       visible: columnsVisibility.tx,
       widthPx: 80,
     },

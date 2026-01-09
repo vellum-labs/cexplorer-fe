@@ -14,6 +14,7 @@ import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 
 import parse from "html-react-parser";
 import { PriceAdaSmallAmount } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface UseAssetDetailArgs {
   data: ReturnType<typeof useFetchAssetDetail>;
@@ -34,6 +35,7 @@ export const useAssetDetail = ({
   type,
   formattedHex,
 }: UseAssetDetailArgs): UseAssetDetail => {
+  const { t } = useAppTranslation("common");
   const detailData = data?.data?.data;
   const tokenMarket = configJSON.market[0].token[0].active;
   const nftMarket = configJSON.market[0].nft[0].active;
@@ -58,7 +60,7 @@ export const useAssetDetail = ({
 
   const overview: OverviewList = [
     {
-      label: "Name",
+      label: t("asset.name"),
       value: (
         <div className='max-w-[150px] sm:w-full'>
           <AssetCell
@@ -75,7 +77,7 @@ export const useAssetDetail = ({
       ),
     },
     {
-      label: "Encoded Name",
+      label: t("asset.encodedName"),
       value: detailData?.name ? (
         <div className='flex items-center gap-1'>
           {detailData?.name?.length <= 8
@@ -88,7 +90,7 @@ export const useAssetDetail = ({
       ),
     },
     {
-      label: "Asset name",
+      label: t("asset.assetName"),
       value: detailData?.policy ? (
         <div className='flex items-center gap-1'>
           {formatString((detailData?.policy || "") + detailData?.name, "long")}
@@ -99,7 +101,7 @@ export const useAssetDetail = ({
       ),
     },
     {
-      label: "Supply",
+      label: t("labels.supply"),
       value:
         detailData?.registry?.decimals && detailData?.stat?.asset?.quantity
           ? formatNumber(
@@ -116,15 +118,15 @@ export const useAssetDetail = ({
 
   if ((type === "nft" && nftMarket) || (type === "token" && tokenMarket)) {
     overview.splice(2, 0, {
-      label: "Price",
+      label: t("asset.price"),
       value: <PriceAdaSmallAmount price={detailData?.dex?.price} />,
     });
     overview.splice(3, 0, {
-      label: "Unique wallets",
+      label: t("asset.uniqueWallets"),
       value: uniqueWallets,
     });
     overview.splice(5, 0, {
-      label: "Volume",
+      label: t("asset.volume"),
       value: adaVolume,
     });
     overview.push({
@@ -149,7 +151,7 @@ export const useAssetDetail = ({
 
   const blockchain: OverviewList = [
     {
-      label: "Asset ID",
+      label: t("asset.assetId"),
       value: detailData?.fingerprint ? (
         <div className='flex items-center gap-1/2'>
           <span title={detailData?.fingerprint} className='text-text-sm'>
@@ -162,7 +164,7 @@ export const useAssetDetail = ({
       ),
     },
     {
-      label: "Policy ID",
+      label: t("asset.policyId"),
       value: detailData?.policy ? (
         <div className='flex items-center gap-1/2'>
           <Link
@@ -180,7 +182,7 @@ export const useAssetDetail = ({
     },
     firstMint !== lastMint
       ? {
-          label: "First mint",
+          label: t("asset.firstMint"),
           value: detailData?.stat?.asset?.first_mint ? (
             <TimeDateIndicator
               time={detailData?.stat?.asset?.first_mint ?? ""}
@@ -192,7 +194,7 @@ export const useAssetDetail = ({
       : undefined,
     firstMint !== lastMint
       ? {
-          label: "Last mint",
+          label: t("asset.lastMint"),
           value: detailData?.stat?.asset?.last_mint ? (
             <TimeDateIndicator
               time={detailData?.stat?.asset?.last_mint ?? ""}
@@ -204,7 +206,7 @@ export const useAssetDetail = ({
       : undefined,
     firstMint === lastMint
       ? {
-          label: "Minted",
+          label: t("asset.minted"),
           value: detailData?.stat?.asset?.last_mint ? (
             <TimeDateIndicator
               time={detailData?.stat?.asset?.last_mint ?? ""}
@@ -215,7 +217,7 @@ export const useAssetDetail = ({
         }
       : undefined,
     {
-      label: "Mint Count",
+      label: t("asset.mintCount"),
       value: detailData?.stat?.asset?.mintc
         ? formatNumber(detailData?.stat?.asset?.mintc)
         : "-",
@@ -224,15 +226,15 @@ export const useAssetDetail = ({
 
   const tokenRegistry: OverviewList = [
     {
-      label: "Name",
+      label: t("asset.name"),
       value: detailData?.registry?.name,
     },
     {
-      label: "Ticker",
+      label: t("asset.ticker"),
       value: detailData?.registry?.ticker,
     },
     {
-      label: "Description",
+      label: t("asset.description"),
       value: detailData?.registry?.description
         ? parse(detailData?.registry?.description)
         : "-",

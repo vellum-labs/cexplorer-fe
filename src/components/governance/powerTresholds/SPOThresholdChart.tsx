@@ -5,6 +5,7 @@ import { useGraphColors } from "@/hooks/useGraphColors";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { CircleHelp } from "lucide-react";
 import { generateImageUrl } from "@/utils/generateImageUrl";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface SPOThresholdChartProps {
   chartProps: {
@@ -20,6 +21,7 @@ interface SPOThresholdChartProps {
 export const SPOThresholdChart: FC<SPOThresholdChartProps> = ({
   chartProps,
 }) => {
+  const { t } = useAppTranslation();
   const {
     epochParam,
     visibility,
@@ -90,7 +92,7 @@ export const SPOThresholdChart: FC<SPOThresholdChartProps> = ({
         })),
         {
           value: totalStake - accumulated,
-          name: "Other SPOs",
+          name: t("governance.thresholds.otherSPOs"),
           itemStyle: {
             color: getOtherColor(),
             borderColor: "#ffffff",
@@ -102,7 +104,7 @@ export const SPOThresholdChart: FC<SPOThresholdChartProps> = ({
     : [
         {
           value: 1,
-          name: "Not applicable",
+          name: t("governance.common.notApplicable"),
           itemStyle: { color: "#E4E7EC" },
         },
       ];
@@ -115,12 +117,12 @@ export const SPOThresholdChart: FC<SPOThresholdChartProps> = ({
       textStyle: { color: textColor },
       formatter: (params: any) => {
         if (!visibility) {
-          return "SPOs do not vote on this action";
+          return t("governance.thresholds.spoNotVoting");
         }
 
         if (params.data.isOther) {
           const stakeFormatted = formatLovelace(params.data.value);
-          return `Other SPOs<br/>Stake: ${stakeFormatted}<br/>Not needed for threshold`;
+          return `${t("governance.thresholds.otherSPOs")}<br/>${t("governance.common.stake")} ${stakeFormatted}<br/>${t("governance.common.notNeededForThreshold")}`;
         }
 
         if (params.data.poolData) {
@@ -134,14 +136,14 @@ export const SPOThresholdChart: FC<SPOThresholdChartProps> = ({
                 <img src="${imageUrl}" alt="Pool" style="width: 16px; height: 16px; border-radius: 50%; object-fit: cover;" onerror="this.style.display='none'"/>
                 ${params.data.name}
               </div>
-              <div>Live Stake: ${stakeFormatted}</div>
-              <div>Delegators: ${pool.delegators ?? "N/A"}</div>
+              <div>${t("governance.thresholds.liveStake")} ${stakeFormatted}</div>
+              <div>${t("governance.common.delegators")} ${pool.delegators ?? "N/A"}</div>
             </div>
           `;
         }
 
         const stakeFormatted = formatLovelace(params.data.value);
-        return `${params.data.name}<br/>Stake: ${stakeFormatted}`;
+        return `${params.data.name}<br/>${t("governance.common.stake")} ${stakeFormatted}`;
       },
     },
     series: [
@@ -169,13 +171,13 @@ export const SPOThresholdChart: FC<SPOThresholdChartProps> = ({
   return (
     <div className='flex flex-col items-center justify-center'>
       <div className='flex items-center gap-1'>
-        <p className='mb-1 font-medium'>SPOs</p>
+        <p className='mb-1 font-medium'>{t("governance.thresholds.spoTitle")}</p>
         <Tooltip
           content={
             <p className='max-w-[200px]'>
               {params === "pvtpp_security_group"
-                ? "Theoretical minimum number of SPOs with enough stake to pass this proposal. SPOs only vote if the parameter is a security parameter."
-                : "Theoretical number of SPOs with enough stake to pass this proposal."}
+                ? t("governance.thresholds.spoTooltipSecurity")
+                : t("governance.thresholds.spoTooltip")}
             </p>
           }
         >
@@ -192,10 +194,10 @@ export const SPOThresholdChart: FC<SPOThresholdChartProps> = ({
         />
       </div>
       <p className='text-text-sm text-text'>
-        Threshold:{" "}
+        {t("governance.common.threshold")}{" "}
         {visibility
           ? `${((threshold || 0) * 100).toFixed(0)}%`
-          : "Not applicable"}
+          : t("governance.common.notApplicable")}
       </p>
     </div>
   );

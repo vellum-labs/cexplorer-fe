@@ -97,7 +97,7 @@ export const DRepDelegationsContent: FC<DRepDelegationsContentProps> = ({
             "yyy-MM-dd HH:mm:ss",
           );
         },
-        title: <p>{t("stake.detailPage.drepDelegationsTable.date")}</p>,
+        title: <p>{t("common:labels.date")}</p>,
         visible: columnsVisibility.date,
         widthPx: 80,
       },
@@ -145,7 +145,7 @@ export const DRepDelegationsContent: FC<DRepDelegationsContentProps> = ({
         ),
         title: (
           <div className='flex w-full justify-end'>
-            <span>{t("stake.detailPage.drepDelegationsTable.activeStake")}</span>
+            <span>{t("common:labels.activeStake")}</span>
           </div>
         ),
         visible: columnsVisibility.active_stake,
@@ -160,7 +160,7 @@ export const DRepDelegationsContent: FC<DRepDelegationsContentProps> = ({
         ),
         title: (
           <div className='flex w-full justify-end'>
-            <span>{t("stake.detailPage.drepDelegationsTable.liveStake")}</span>
+            <span>{t("common:labels.liveStake")}</span>
           </div>
         ),
         visible: columnsVisibility.live_stake,
@@ -179,7 +179,7 @@ export const DRepDelegationsContent: FC<DRepDelegationsContentProps> = ({
         title: (
           <div className='flex w-full justify-end'>
             <div className='flex w-fit cursor-pointer items-center gap-1/2 text-right'>
-              <span>{t("stake.detailPage.drepDelegationsTable.loyalty")}</span>
+              <span>{t("common:labels.loyalty")}</span>
             </div>
           </div>
         ),
@@ -202,7 +202,7 @@ export const DRepDelegationsContent: FC<DRepDelegationsContentProps> = ({
         jsonFormat: item => item.tx.hash,
         title: (
           <div className='flex w-full justify-end'>
-            <span>{t("stake.detailPage.drepDelegationsTable.tx")}</span>
+            <span>{t("common:labels.tx")}</span>
           </div>
         ),
         visible: columnsVisibility.tx,
@@ -224,7 +224,7 @@ export const DRepDelegationsContent: FC<DRepDelegationsContentProps> = ({
               setRows={setRows}
               columnsOptions={accountDrepDelegationsTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),

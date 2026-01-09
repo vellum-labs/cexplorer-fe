@@ -24,7 +24,7 @@ import { PageBase } from "@/components/global/pages/PageBase";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const PoolRegistrationsPage = () => {
-  const { t } = useAppTranslation("pages");
+  const { t } = useAppTranslation(["pages", "common"]);
   const [totalItems, setTotalItems] = useState(0);
   const { page } = useSearch({ from: "/pool/registrations" });
   const {
@@ -41,13 +41,13 @@ export const PoolRegistrationsPage = () => {
   const items = query.data?.pages.flatMap(page => page.data.data);
 
   const tableColumnTranslations: Record<string, string> = {
-    date: t("pools.registrations.table.date"),
-    view: t("pools.registrations.table.pool"),
-    deposit: t("pools.registrations.table.deposit"),
-    pledge: t("pools.registrations.table.pledge"),
-    fee: t("pools.registrations.table.fee"),
-    hash: t("pools.registrations.table.txHash"),
-    epoch_block: t("pools.registrations.table.epochBlock"),
+    date: t("common:labels.date"),
+    view: t("common:labels.pool"),
+    deposit: t("common:labels.deposit"),
+    pledge: t("common:labels.pledge"),
+    fee: t("common:labels.fee"),
+    hash: t("common:labels.txHash"),
+    epoch_block: t("common:labels.epochBlock"),
   };
 
   const columns: TableColumns<PoolRegistrationsData> = [
@@ -61,7 +61,7 @@ export const PoolRegistrationsPage = () => {
 
         return item.block.time;
       },
-      title: t("pools.registrations.table.date"),
+      title: t("common:labels.date"),
       visible: columnsVisibility.date,
       widthPx: 30,
     },
@@ -83,7 +83,7 @@ export const PoolRegistrationsPage = () => {
 
         return item?.data?.view;
       },
-      title: <p>{t("pools.registrations.table.pool")}</p>,
+      title: <p>{t("common:labels.pool")}</p>,
       visible: columnsVisibility.view,
       widthPx: 50,
     },
@@ -96,7 +96,7 @@ export const PoolRegistrationsPage = () => {
       ),
       title: (
         <p className='w-full text-right'>
-          {t("pools.registrations.table.deposit")}
+          {t("common:labels.deposit")}
         </p>
       ),
       visible: columnsVisibility.deposit,
@@ -111,7 +111,7 @@ export const PoolRegistrationsPage = () => {
       ),
       title: (
         <p className='w-full text-right'>
-          {t("pools.registrations.table.pledge")}
+          {t("common:labels.pledge")}
         </p>
       ),
       visible: columnsVisibility.pledge,
@@ -127,7 +127,7 @@ export const PoolRegistrationsPage = () => {
       ),
       title: (
         <p className='w-full text-right'>
-          {t("pools.registrations.table.fee")}
+          {t("common:labels.fee")}
         </p>
       ),
       visible: columnsVisibility.fee,
@@ -143,7 +143,7 @@ export const PoolRegistrationsPage = () => {
 
         return item.tx.hash;
       },
-      title: t("pools.registrations.table.txHash"),
+      title: t("common:labels.txHash"),
       visible: columnsVisibility.hash,
       widthPx: 40,
     },
@@ -164,7 +164,7 @@ export const PoolRegistrationsPage = () => {
       },
       title: (
         <p className='w-full text-right'>
-          {t("pools.registrations.table.epochBlock")}
+          {t("common:labels.epochBlock")}
         </p>
       ),
       visible: columnsVisibility.epoch_block,
@@ -190,7 +190,7 @@ export const PoolRegistrationsPage = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[230px]'>
-              {t("pools.registrations.totalOf")} {formatNumber(totalItems ?? 0)}{" "}
+              {t("common:phrases.totalOf")} {formatNumber(totalItems ?? 0)}{" "}
               {t("pools.registrations.totalOfSuffix")}
             </h3>
           )}
@@ -201,7 +201,7 @@ export const PoolRegistrationsPage = () => {
               setRows={setRows}
               columnsOptions={poolRegistrationsTableOptions.map(item => {
                 return {
-                  label: tableColumnTranslations[item.key] || item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),

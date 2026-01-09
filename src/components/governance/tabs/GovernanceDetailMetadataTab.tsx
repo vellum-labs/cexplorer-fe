@@ -10,6 +10,7 @@ import remarkGfm from "remark-gfm";
 
 import { useState } from "react";
 import { markdownComponents } from "@/constants/markdows";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface GovernanceDetailMetadataTabProps {
   query: ReturnType<typeof useFetchGovernanceActionDetail>;
@@ -18,13 +19,14 @@ interface GovernanceDetailMetadataTabProps {
 export const GovernanceDetailMetadataTab: FC<
   GovernanceDetailMetadataTabProps
 > = ({ query }) => {
+  const { t } = useAppTranslation();
   const anchor = query?.data?.data?.anchor;
 
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
   const rows = [
     {
-      title: "Action type",
+      title: t("governance.metadata.actionType"),
       value: query?.data?.data?.type ? (
         <div className='px-1.5'>
           <ActionTypes title={query?.data?.data?.type as ActionTypes} />
@@ -35,7 +37,7 @@ export const GovernanceDetailMetadataTab: FC<
       darker: false,
     },
     {
-      title: "Title",
+      title: t("governance.metadata.title"),
       value: (
         <div className='overflow-wrap-anywhere max-w-full break-words p-1 font-regular text-grayTextPrimary'>
           {anchor?.offchain?.name ? (
@@ -53,7 +55,7 @@ export const GovernanceDetailMetadataTab: FC<
       darker: true,
     },
     {
-      title: "Abstracts",
+      title: t("governance.metadata.abstracts"),
       value: (
         <div className='overflow-wrap-anywhere max-w-full break-words p-1 font-regular text-grayTextPrimary'>
           {anchor?.offchain?.abstract ? (
@@ -72,7 +74,7 @@ export const GovernanceDetailMetadataTab: FC<
       darker: false,
     },
     {
-      title: "Rationale",
+      title: t("governance.metadata.rationale"),
       value: (
         <div className='overflow-wrap-anywhere max-w-full break-words p-1 font-regular text-grayTextPrimary'>
           {anchor?.offchain?.rationale ? (

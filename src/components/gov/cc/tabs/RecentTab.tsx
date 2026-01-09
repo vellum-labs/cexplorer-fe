@@ -22,8 +22,10 @@ import { GovVoterCell } from "../../GovVoterCell";
 import { GovernanceRole } from "@/types/governanceTypes";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { isVoteLate } from "@/utils/governance/isVoteLate";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const RecentTab: FC = () => {
+  const { t } = useAppTranslation();
   const { page = 1 } = useSearch({ from: "/gov/cc/" });
 
   const {
@@ -82,7 +84,7 @@ export const RecentTab: FC = () => {
     },
     {
       key: "proposal",
-      title: "Governance Action",
+      title: t("gov.cc.governanceAction"),
       widthPx: 150,
       visible: columnsVisibility.proposal,
       render: item => {
@@ -96,7 +98,7 @@ export const RecentTab: FC = () => {
     },
     {
       key: "governance_action_name",
-      title: "Name",
+      title: t("gov.cc.name"),
       widthPx: 220,
       visible: columnsVisibility.governance_action_name ?? true,
       render: item => {
@@ -111,7 +113,7 @@ export const RecentTab: FC = () => {
     },
     {
       key: "cc_member",
-      title: "CC Member",
+      title: t("gov.cc.ccMember"),
       widthPx: 220,
       visible: columnsVisibility.cc_member,
       render: item => {
@@ -135,7 +137,7 @@ export const RecentTab: FC = () => {
     },
     {
       key: "vote",
-      title: <p ref={anchorRefs?.vote}>Vote</p>,
+      title: <p ref={anchorRefs?.vote}>{t("gov.cc.vote")}</p>,
       widthPx: 130,
       visible: columnsVisibility.vote,
       render: item => {
@@ -182,7 +184,7 @@ export const RecentTab: FC = () => {
     },
     {
       key: "tx",
-      title: "Tx Hash",
+      title: t("gov.cc.txHash"),
       widthPx: 200,
       visible: columnsVisibility.tx,
       render: item => {
@@ -201,7 +203,7 @@ export const RecentTab: FC = () => {
     },
     {
       key: "time",
-      title: "Time",
+      title: t("gov.cc.time"),
       widthPx: 180,
       visible: columnsVisibility.time,
       render: item => <TimeDateIndicator time={item.tx?.time} />,
@@ -216,7 +218,7 @@ export const RecentTab: FC = () => {
             <LoadingSkeleton height='27px' width='220px' />
           ) : (
             <h3 className='basis-[230px]'>
-              Total of {formatNumber(totalItems)} votes
+              {t("gov.cc.totalVotes", { count: formatNumber(totalItems) })}
             </h3>
           )}
           <div className='flex items-center gap-1 md:hidden'>
@@ -241,7 +243,7 @@ export const RecentTab: FC = () => {
 
         <div className='flex gap-1'>
           <TableSearchInput
-            placeholder='Search your results...'
+            placeholder={t("gov.cc.searchResults")}
             value={tableSearch}
             onchange={setTableSearch}
             wrapperClassName='md:w-[320px] w-full'
@@ -249,12 +251,12 @@ export const RecentTab: FC = () => {
             prefixes={[
               {
                 key: "committee_voter",
-                name: "CC Member",
+                name: t("gov.cc.ccMember"),
                 show: tableSearch.length < 1 || isHex(tableSearch),
               },
               {
                 key: "tx_hash",
-                name: "Tx Hash",
+                name: t("gov.cc.txHash"),
                 show: tableSearch.length < 1 || isHex(tableSearch),
               },
             ]}

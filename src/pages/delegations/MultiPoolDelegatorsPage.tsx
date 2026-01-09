@@ -59,7 +59,7 @@ export const MultiPoolDelegatorsPage = () => {
     },
     {
       key: "stake",
-      title: t("delegations.table.stake"),
+      title: t("common:labels.stake"),
       visible: columnsVisibility.stake,
       widthPx: 160,
       render: (row: any) => (
@@ -104,7 +104,7 @@ export const MultiPoolDelegatorsPage = () => {
             <LoadingSkeleton height='27px' width={"290px"} />
           ) : (
             <h3 className='basis-[230px] text-nowrap'>
-              {t("delegations.multiPool.totalOf")} {formatNumber(total)} {t("delegations.multiPool.totalOfSuffix")}
+              {t("common:phrases.totalOf")} {formatNumber(total)} {t("delegations.multiPool.totalOfSuffix")}
             </h3>
           )}
           <div className='flex items-center gap-1'>

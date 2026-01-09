@@ -45,7 +45,7 @@ export const EpochsTabItem: FC<EpochsTabItemProps> = ({
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : epoch_number > 0 ? (
             <h3 className='basis-[230px] text-nowrap'>
-              {t("epochs.totalOf")} {formatNumber(epoch_number)} {t("epochs.totalOfSuffix")}
+              {t("common:phrases.totalOf")} {formatNumber(epoch_number)} {t("epochs.totalOfSuffix")}
             </h3>
           ) : (
             ""

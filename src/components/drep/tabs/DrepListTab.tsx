@@ -58,22 +58,6 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
     setColumsOrder,
   } = useDrepListTableStore()();
 
-  const tableColumnTranslations: Record<string, string> = {
-    ranking: t("dreps.table.ranking"),
-    status: t("dreps.table.status"),
-    drep_name: t("dreps.table.drepName"),
-    voting_power: t("dreps.table.votingPower"),
-    voting_activity: t("dreps.table.lifetimeActivity"),
-    recent_activity: t("dreps.table.recentActivity"),
-    owner_stake: t("dreps.table.ownerStake"),
-    average_stake: t("dreps.table.averageStake"),
-    registered: t("dreps.table.registered"),
-    delegators: t("dreps.table.delegators"),
-    metadata: t("dreps.table.drepMetadata"),
-    spo: t("dreps.table.spo"),
-    top_delegator: t("dreps.table.topDelegator"),
-  };
-
   return (
     <>
       <div className='mb-1 flex w-full flex-col justify-between gap-1 min-[870px]:flex-row min-[870px]:items-center'>
@@ -84,7 +68,7 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
                 <LoadingSkeleton height='27px' width={"220px"} />
               ) : totalItems !== undefined ? (
                 <h3 className='basis-[230px] text-nowrap'>
-                  {t("dreps.totalOf")} {formatNumber(totalItems)}{" "}
+                  {t("common:phrases.totalOf")} {formatNumber(totalItems)}{" "}
                   {t("dreps.totalOfSuffix")}
                 </h3>
               ) : (
@@ -107,7 +91,7 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
                 setRows={setRows}
                 columnsOptions={drepListTableOptions.map(item => {
                   return {
-                    label: tableColumnTranslations[item.key] || item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(
@@ -150,7 +134,7 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
               setRows={setRows}
               columnsOptions={drepListTableOptions.map(item => {
                 return {
-                  label: tableColumnTranslations[item.key] || item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),

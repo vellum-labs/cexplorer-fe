@@ -16,6 +16,7 @@ import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import AddressCell from "@/components/address/AddressCell";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import ExportButton from "@/components/table/ExportButton";
 import { genesisAddressesTableOptions } from "@/constants/tables/genesisAddressesTableOptions";
 import { useFetchGenesisAddresses } from "@/services/analytics";
@@ -23,6 +24,7 @@ import { useGenesisAddressesTableStore } from "@/stores/tables/genesisAddressesT
 import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 
 export const GenesisAddressesPage: FC = () => {
+  const { t } = useAppTranslation("common");
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { page } = useSearch({ from: "/analytics/genesis" });
 
@@ -168,7 +170,7 @@ export const GenesisAddressesPage: FC = () => {
                 setRows={setRows}
                 columnsOptions={genesisAddressesTableOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(item.key, !columnsVisibility[item.key]),

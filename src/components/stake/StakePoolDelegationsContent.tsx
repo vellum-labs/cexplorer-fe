@@ -91,7 +91,7 @@ export const StakePoolDelegationsContent: FC<
             "yyy-MM-dd HH:mm:ss",
           );
         },
-        title: <p>{t("stake.detailPage.poolDelegationsTable.date")}</p>,
+        title: <p>{t("common:labels.date")}</p>,
         visible: columnsVisibility.date,
         widthPx: 80,
       },
@@ -140,7 +140,7 @@ export const StakePoolDelegationsContent: FC<
         ),
         title: (
           <div className='flex w-full justify-end'>
-            <span>{t("stake.detailPage.poolDelegationsTable.activeStake")}</span>
+            <span>{t("common:labels.activeStake")}</span>
           </div>
         ),
         visible: columnsVisibility.amount,
@@ -159,7 +159,7 @@ export const StakePoolDelegationsContent: FC<
         title: (
           <div className='flex w-full justify-end'>
             <div className='flex w-fit cursor-pointer items-center gap-1/2 text-right'>
-              <span>{t("stake.detailPage.poolDelegationsTable.loyalty")}</span>
+              <span>{t("common:labels.loyalty")}</span>
             </div>
           </div>
         ),
@@ -206,7 +206,7 @@ export const StakePoolDelegationsContent: FC<
             "yyy-MM-dd HH:mm:ss",
           );
         },
-        title: <p className='w-full text-right'>{t("stake.detailPage.poolDelegationsTable.registered")}</p>,
+        title: <p className='w-full text-right'>{t("common:labels.registered")}</p>,
         visible: columnsVisibility.registered,
         widthPx: 80,
       },
@@ -226,7 +226,7 @@ export const StakePoolDelegationsContent: FC<
         jsonFormat: item => item.tx.hash,
         title: (
           <div className='flex w-full justify-end'>
-            <span>{t("stake.detailPage.poolDelegationsTable.tx")}</span>
+            <span>{t("common:labels.tx")}</span>
           </div>
         ),
         visible: columnsVisibility.tx,
@@ -254,7 +254,7 @@ export const StakePoolDelegationsContent: FC<
               setRows={setRows}
               columnsOptions={accountDelegationsTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),

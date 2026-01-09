@@ -198,7 +198,7 @@ export const useDrepList = ({
           </div>
         );
       },
-      title: <p>{t("dreps.table.status")}</p>,
+      title: <p>{t("common:labels.status")}</p>,
       visible: columnsVisibility.status,
       widthPx: 40,
     },
@@ -258,7 +258,7 @@ export const useDrepList = ({
               setList("power");
             }}
           >
-            <span>{t("dreps.table.votingPower")}</span>
+            <span>{t("common:labels.votingPower")}</span>
             <SortArrow direction={order === "power" ? sort : undefined} />
           </div>
         </div>
@@ -443,7 +443,7 @@ export const useDrepList = ({
               setList("since");
             }}
           >
-            <span>{t("dreps.table.registered")}</span>
+            <span>{t("common:labels.registered")}</span>
             <SortArrow direction={order === "since" ? sort : undefined} />
           </div>
         </div>
@@ -484,7 +484,7 @@ export const useDrepList = ({
               setList("delegator");
             }}
           >
-            <span>{t("dreps.table.delegators")}</span>
+            <span>{t("common:labels.delegators")}</span>
             <SortArrow direction={order === "delegator" ? sort : undefined} />
           </div>
         </div>

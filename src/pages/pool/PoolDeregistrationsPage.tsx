@@ -52,7 +52,7 @@ export const PoolDeregistrationsPage = () => {
 
         return item.block.time;
       },
-      title: t("pools.table.date"),
+      title: t("common:labels.date"),
       visible: columnsVisibility.date,
       widthPx: 30,
     },
@@ -65,7 +65,7 @@ export const PoolDeregistrationsPage = () => {
 
         return <div>{formatRemainingTime(timeDifference / 1000)}</div>;
       },
-      title: t("pools.table.longetivity"),
+      title: t("common:labels.longevity"),
       visible: columnsVisibility.longetivity,
       widthPx: 40,
     },
@@ -87,7 +87,7 @@ export const PoolDeregistrationsPage = () => {
 
         return item?.data?.view;
       },
-      title: <p>{t("pools.table.pool")}</p>,
+      title: <p>{t("common:labels.pool")}</p>,
       visible: columnsVisibility.view,
       widthPx: 50,
     },
@@ -98,7 +98,7 @@ export const PoolDeregistrationsPage = () => {
           <AdaWithTooltip data={item.tx.deposit} />
         </div>
       ),
-      title: <p className='w-full text-right'>{t("pools.table.deposit")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.deposit")}</p>,
       visible: columnsVisibility.deposit,
       widthPx: 40,
     },
@@ -109,7 +109,7 @@ export const PoolDeregistrationsPage = () => {
           <AdaWithTooltip data={item.tx.fee} />
         </div>
       ),
-      title: <p className='w-full text-right'>{t("pools.table.fee")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.fee")}</p>,
       visible: columnsVisibility.fee,
       widthPx: 50,
     },
@@ -123,7 +123,7 @@ export const PoolDeregistrationsPage = () => {
 
         return item.tx.hash;
       },
-      title: t("pools.table.txHash"),
+      title: t("common:labels.txHash"),
       visible: columnsVisibility.hash,
       widthPx: 40,
     },
@@ -142,7 +142,7 @@ export const PoolDeregistrationsPage = () => {
 
         return `${item.block.epoch_no}/${item.block.no}`;
       },
-      title: <p className='w-full text-right'>{t("pools.table.epochBlock")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.epochBlock")}</p>,
       visible: columnsVisibility.epoch_block,
       widthPx: 40,
     },
@@ -166,7 +166,7 @@ export const PoolDeregistrationsPage = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[230px]'>
-              {t("pools.deregistrations.totalOf")} {formatNumber(totalItems ?? 0)} {t("pools.deregistrations.totalOfSuffix")}
+              {t("common:phrases.totalOf")} {formatNumber(totalItems ?? 0)} {t("pools.deregistrations.totalOfSuffix")}
             </h3>
           )}
           <div className='flex items-center gap-1'>

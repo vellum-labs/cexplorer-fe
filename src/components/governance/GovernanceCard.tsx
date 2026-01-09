@@ -5,6 +5,7 @@ import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { GovernanceDetailOverviewInfoGraph } from "./graphs/GovernanceDetailOverviewInfoGraph";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { VotingBreakdownTooltip } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface GovernanceCardProps {
   query?: any;
@@ -38,6 +39,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
   breakdown,
   voterType = "drep",
 }) => {
+  const { t } = useAppTranslation();
   const { theme } = useThemeStore();
 
   const totalVotes = yes + no + noConfidence + notVoted;
@@ -59,7 +61,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
             className={`flex items-center justify-between rounded-[4px] border border-[#0094D4] p-1 ${theme === "dark" ? "bg-[#1C384B]" : "bg-[#EFFAFF]"}`}
           >
             <span className='text-text-sm font-medium text-grayTextPrimary'>
-              Yes
+              {t("governance.common.yes")}
             </span>
             <div className='flex items-center justify-end'>
               <AdaWithTooltip
@@ -89,7 +91,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
           >
             <div className='flex items-center justify-between'>
               <span className='text-text-sm font-medium text-grayTextPrimary'>
-                No
+                {t("governance.common.no")}
               </span>
               <div className='flex items-center justify-end'>
                 <AdaWithTooltip
@@ -105,7 +107,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
             </div>
             <div className='flex items-center justify-between'>
               <span className='text-text-sm font-medium text-grayTextPrimary'>
-                No confidence
+                {t("governance.common.noConfidence")}
               </span>
               <div className='flex items-center justify-end text-nowrap'>
                 <AdaWithTooltip
@@ -121,7 +123,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
             </div>
             <div className='flex items-center justify-between'>
               <span className='text-text-sm font-medium text-grayTextPrimary'>
-                Not voted
+                {t("governance.common.notVoted")}
               </span>
               <div className='flex items-center justify-end'>
                 <AdaWithTooltip

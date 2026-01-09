@@ -36,7 +36,7 @@ import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const MetadataListPage: FC = () => {
-  const { t } = useAppTranslation("pages");
+  const { t } = useAppTranslation(["pages", "common"]);
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { page } = useSearch({ from: "/metadata/" });
 
@@ -99,7 +99,7 @@ export const MetadataListPage: FC = () => {
           />
         );
       },
-      title: <p>{t("metadata.table.date")}</p>,
+      title: <p>{t("common:labels.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 60,
     },
@@ -123,7 +123,7 @@ export const MetadataListPage: FC = () => {
           </div>
         );
       },
-      title: <p>{t("metadata.table.key")}</p>,
+      title: <p>{t("common:labels.key")}</p>,
       visible: columnsVisibility.key,
       widthPx: 60,
     },
@@ -153,7 +153,7 @@ export const MetadataListPage: FC = () => {
 
         return item.tx.hash;
       },
-      title: <p>{t("metadata.table.txHash")}</p>,
+      title: <p>{t("common:labels.txHash")}</p>,
       visible: columnsVisibility.hash,
       widthPx: 60,
     },
@@ -178,7 +178,7 @@ export const MetadataListPage: FC = () => {
           "%"
         );
       },
-      title: <p className='w-full text-right'>{t("metadata.table.size")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.size")}</p>,
       visible: columnsVisibility.size,
       widthPx: 30,
     },
@@ -192,7 +192,7 @@ export const MetadataListPage: FC = () => {
 
         return JSON.stringify(item.md);
       },
-      title: <p className='w-full text-right'>{t("metadata.table.metadata")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.metadata")}</p>,
       visible: columnsVisibility.md,
       widthPx: 60,
     },
@@ -217,7 +217,7 @@ export const MetadataListPage: FC = () => {
               <LoadingSkeleton height='27px' width={"220px"} />
             ) : totalItems > 0 ? (
               <h3 className='basis-[230px] text-nowrap'>
-                {t("metadata.totalOf")} {formatNumber(totalItems)} {t("metadata.totalOfSuffix")}
+                {t("common:phrases.totalOf")} {formatNumber(totalItems)} {t("metadata.totalOfSuffix")}
               </h3>
             ) : (
               ""
@@ -230,7 +230,7 @@ export const MetadataListPage: FC = () => {
                   setRows={setRows}
                   columnsOptions={metadataTxListTableOptions.map(item => {
                     return {
-                      label: item.name,
+                      label: t(`common:tableSettings.${item.key}`),
                       isVisible: columnsVisibility[item.key],
                       onClick: () =>
                         setColumnVisibility(

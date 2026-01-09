@@ -58,7 +58,7 @@ export const DrepDetailGovernanceActionsTab: FC = () => {
 
         return <DateCell time={item.tx.time} />;
       },
-      title: <p>{t("dreps.detailPage.governanceActionsTable.date")}</p>,
+      title: <p>{t("common:labels.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 50,
     },
@@ -73,7 +73,7 @@ export const DrepDetailGovernanceActionsTab: FC = () => {
           <>{<ActionTypes title={item?.proposal?.type as ActionTypes} />}</>
         );
       },
-      title: <p>{t("dreps.detailPage.governanceActionsTable.type")}</p>,
+      title: <p>{t("common:labels.type")}</p>,
       visible: columnsVisibility.type,
       widthPx: 60,
     },
@@ -136,7 +136,7 @@ export const DrepDetailGovernanceActionsTab: FC = () => {
 
         return <HashCell hash={item?.tx?.hash} />;
       },
-      title: <p>{t("dreps.detailPage.governanceActionsTable.tx")}</p>,
+      title: <p>{t("common:labels.tx")}</p>,
       visible: columnsVisibility.tx,
       widthPx: 60,
     },

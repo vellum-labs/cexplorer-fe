@@ -120,6 +120,7 @@
   },
   "footer": {
     "company": "Company",
+    "information": "Information",
     "resources": "Resources",
     "supportUs": "Support us",
     "aboutUs": "About us",
@@ -140,6 +141,19 @@
     "buyMeACoffee": "Buy me a coffee",
     "reportABug": "Report a bug",
     "suggestAFeature": "Suggest a feature",
-    "bugBounty": "Bug bounty"
+    "bugBounty": "Bug bounty",
+    "description": "The oldest and most feature-rich Cardano explorer, serving you since the Incentivized Testnet.",
+    "copyright": "Copyright © 2019-{{year}} Cexplorer. All rights reserved.",
+    "donations": "Donations:",
+    "partners": "Partners:"
+  },
+  "navbar": {
+    "poweredBy": "Powered by",
+    "cardanoBlockchain": "Cardano Blockchain",
+    "apiDescription": "Access Our API for Comprehensive Blockchain Data and Build Your Next-Level dApp!",
+    "startBuilding": "Start building",
+    "getCexplorer": "Get Cexplorer.io",
+    "pro": "PRO",
+    "getPro": "Get PRO"
   }
 }

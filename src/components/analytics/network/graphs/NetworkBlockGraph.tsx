@@ -5,19 +5,21 @@ import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import ReactEcharts from "echarts-for-react";
 import { AnalyticsGraph } from "../../AnalyticsGraph";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useBlockProduction } from "@/hooks/graphs/useBlockProduction";
 
 export const NetworkBlockGraph: FC<NetworkBlockGraphProps> = ({
   epochQuery,
   miscConst,
 }) => {
+  const { t } = useAppTranslation("common");
   const { json, option, selectedItem, setData, setSelectedItem } =
     useBlockProduction(miscConst);
 
   return (
     <AnalyticsGraph
-      title='Block production'
-      description='Visual expression of block production on Cardano'
+      title={t("analytics.blockProduction")}
+      description={t("analytics.blockProductionDescription")}
       exportButton
       graphSortData={{
         query: epochQuery,

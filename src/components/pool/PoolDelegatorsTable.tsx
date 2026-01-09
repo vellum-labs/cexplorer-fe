@@ -69,7 +69,7 @@ const PoolDelegatorsTable = ({
           />
         );
       },
-      title: <p>{t("pools.detailPage.delegatorsTable.date")}</p>,
+      title: <p>{t("common:labels.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 20,
     },
@@ -115,7 +115,7 @@ const PoolDelegatorsTable = ({
           </div>
         );
       },
-      title: t("pools.detailPage.delegatorsTable.address"),
+      title: t("common:labels.address"),
       visible: columnsVisibility.address,
       widthPx: 90,
     },
@@ -140,7 +140,7 @@ const PoolDelegatorsTable = ({
               });
             }}
           >
-            <span>{t("pools.detailPage.delegatorsTable.amount")}</span>
+            <span>{t("common:labels.amount")}</span>
             <SortArrow direction={order === "live_stake" ? sort : undefined} />
           </div>
         </div>
@@ -184,7 +184,7 @@ const PoolDelegatorsTable = ({
               });
             }}
           >
-            <span>{t("pools.detailPage.delegatorsTable.loyalty")}</span>
+            <span>{t("common:labels.loyalty")}</span>
             <SortArrow direction={order === "slot_update" ? sort : undefined} />
           </div>
         </div>
@@ -209,7 +209,7 @@ const PoolDelegatorsTable = ({
           />
         );
       },
-      title: <p className='w-full text-right'>{t("pools.detailPage.delegatorsTable.registered")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.registered")}</p>,
       visible: columnsVisibility.registered,
       widthPx: 40,
     },

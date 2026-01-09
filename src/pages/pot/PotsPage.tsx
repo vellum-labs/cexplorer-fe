@@ -28,8 +28,10 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { generateImageUrl } from "@/utils/generateImageUrl";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const PotsPage = () => {
+  const { t } = useAppTranslation("common");
   const [
     { debouncedTableSearch: debouncedSearch, tableSearch },
     setTableSearch,
@@ -204,7 +206,7 @@ export const PotsPage = () => {
                     setRows={setRows}
                     columnsOptions={adaPotsTableOptions.map(item => {
                       return {
-                        label: item.name,
+                        label: t(`common:tableSettings.${item.key}`),
                         isVisible: columnsVisibility[item.key],
                         onClick: () =>
                           setColumnVisibility(

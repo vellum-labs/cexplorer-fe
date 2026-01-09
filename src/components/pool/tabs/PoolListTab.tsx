@@ -73,7 +73,7 @@ const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {
                 <LoadingSkeleton height='27px' width={"220px"} />
               ) : (
                 <h3 className='basis-[230px]'>
-                  {t("pools.totalOf")} {formatNumber(totalItems)} {t("pools.totalOfSuffix")}
+                  {t("common:phrases.totalOf")} {formatNumber(totalItems)} {t("pools.totalOfSuffix")}
                 </h3>
               )}
             </div>

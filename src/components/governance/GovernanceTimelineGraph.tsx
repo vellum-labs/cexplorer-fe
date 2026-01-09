@@ -14,6 +14,7 @@ import {
   govStatusBgColors,
   govTypeLabels,
 } from "@/constants/governance";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface GovernanceTimelineGraphProps {
   items: GovernanceActionList[];
@@ -38,6 +39,7 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
   currentEpoch,
   epochStartTime,
 }) => {
+  const { t } = useAppTranslation();
   const navigate = useNavigate();
   const { textColor, bgColor, splitLineColor, lineColor } = useGraphColors();
 
@@ -168,9 +170,9 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
           return `
             <div style="padding: 8px; border: 1px solid ${borderColor}; border-radius: 4px; background: ${bgColor};">
               <div style="font-weight: bold; margin-bottom: 4px;">${itemData.name}</div>
-              <div>Type: ${itemData.typeLabel}</div>
-              <div>Status: ${itemData.status}</div>
-              <div>Voting period: Epoch ${itemData.startEpoch} to ${itemData.endEpoch}</div>
+              <div>${t("governance.timeline.type")} ${itemData.typeLabel}</div>
+              <div>${t("governance.timeline.status")} ${itemData.status}</div>
+              <div>${t("governance.actions.votingPeriod", { start: itemData.startEpoch, end: itemData.endEpoch })}</div>
             </div>
           `;
         },
@@ -229,7 +231,7 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
                 xAxis: currentEpoch - chartData.minEpoch,
                 label: {
                   show: true,
-                  formatter: `Current Epoch: ${currentEpoch}`,
+                  formatter: t("governance.actions.currentEpoch", { epoch: currentEpoch }),
                   position: "start",
                   color: lineColor,
                   fontSize: 11,
@@ -278,14 +280,14 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
   if (!items.length) {
     return (
       <div className='flex h-[400px] items-center justify-center rounded-m border border-border'>
-        <p className='text-grayTextPrimary'>No governance actions found</p>
+        <p className='text-grayTextPrimary'>{t("governance.actions.noActionsFound")}</p>
       </div>
     );
   }
 
   return (
     <div className='relative w-full rounded-m border border-border p-3'>
-      <h2 className='mb-2'>Governance Actions Timeline</h2>
+      <h2 className='mb-2'>{t("governance.timeline.title")}</h2>
       <div className='thin-scrollbar overflow-x-auto xl:overflow-visible'>
         <div className='relative min-w-[1400px] xl:min-w-0'>
           <GraphWatermark />

@@ -113,7 +113,7 @@ export const GroupsTable = ({
           className='flex w-full cursor-pointer items-center justify-end gap-1/2'
           onClick={() => handleSort("delegators")}
         >
-          {t("groups.table.delegators")}{" "}
+          {t("common:labels.delegators")}{" "}
           <SortArrow
             direction={sortColumn === "delegators" ? sortDirection : undefined}
           />
@@ -165,7 +165,7 @@ export const GroupsTable = ({
           className='flex w-full cursor-pointer items-center justify-end gap-1/2'
           onClick={() => handleSort("pledge")}
         >
-          {t("groups.table.pledge")}{" "}
+          {t("common:labels.pledge")}{" "}
           <SortArrow
             direction={sortColumn === "pledge" ? sortDirection : undefined}
           />

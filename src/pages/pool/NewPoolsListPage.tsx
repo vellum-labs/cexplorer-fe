@@ -63,7 +63,7 @@ export const NewPoolsListPage: FC = () => {
 
         return item?.pool_update?.active?.tx.time;
       },
-      title: <p>{t("pools.table.date")}</p>,
+      title: <p>{t("common:labels.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 50,
     },
@@ -95,7 +95,7 @@ export const NewPoolsListPage: FC = () => {
 
         return format;
       },
-      title: t("pools.table.pool"),
+      title: t("common:labels.pool"),
       visible: columnsVisibility.pool,
       widthPx: 90,
     },
@@ -104,7 +104,7 @@ export const NewPoolsListPage: FC = () => {
       render: item => (
         <EpochCell no={item.active_epochs} substractFromCurrent currentEpoch={currentEpoch} />
       ),
-      title: <p className='w-full text-right'>{t("pools.table.epoch")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.epoch")}</p>,
       visible: columnsVisibility.epoch,
       widthPx: 15,
     },
@@ -143,7 +143,7 @@ export const NewPoolsListPage: FC = () => {
 
         return format;
       },
-      title: <p className='w-full text-right'>{t("pools.table.fees")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.fees")}</p>,
       visible: columnsVisibility.fees,
       widthPx: 50,
     },
@@ -165,7 +165,7 @@ export const NewPoolsListPage: FC = () => {
           </div>
         );
       },
-      title: <p className='w-full text-right'>{t("pools.table.pledge")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.pledge")}</p>,
       visible: columnsVisibility.pledge,
       widthPx: 40,
     },
@@ -179,7 +179,7 @@ export const NewPoolsListPage: FC = () => {
 
         return item?.pool_update?.active?.tx.hash;
       },
-      title: <p>{t("pools.table.txHash")}</p>,
+      title: <p>{t("common:labels.txHash")}</p>,
       visible: columnsVisibility.tx_hash,
       widthPx: 60,
     },

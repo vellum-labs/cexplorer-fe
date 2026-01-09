@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { formatNumber, toUtcDate } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface EpochSummaryProps {
   stats: any;
@@ -19,6 +20,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
   stats,
   currentEpoch,
 }) => {
+  const { t } = useAppTranslation("pages");
   const startDate = new Date(toUtcDate(stats.epoch?.start_time)).getTime();
   const endDate = new Date(toUtcDate(stats.epoch?.end_time)).getTime();
   const epochDurationSeconds = (endDate - startDate) / 1000;
@@ -52,11 +54,11 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
 
   const overviewList = [
     {
-      label: "Beginning",
+      label: t("epochs.summary.beginning"),
       value: <TimeDateIndicator time={stats.epoch?.start_time ?? ""} />,
     },
     {
-      label: "End",
+      label: t("epochs.summary.end"),
       value:
         stats.epoch_no === currentEpoch ? (
           <div className='flex items-center gap-1.5'>
@@ -82,7 +84,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
         ),
     },
     {
-      label: "Blocks",
+      label: t("epochs.summary.blocks"),
       value: (
         <p className='text-text-sm font-medium'>
           {formatNumber(stats?.epoch?.block_count)}
@@ -90,7 +92,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
       ),
     },
     {
-      label: "Transactions",
+      label: t("epochs.summary.transactions"),
       value: (
         <p className='text-text-sm font-medium'>
           {formatNumber(stats?.epoch?.tx_count)}
@@ -98,7 +100,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
       ),
     },
     {
-      label: "Fees Generated",
+      label: t("epochs.summary.feesGenerated"),
       value: (
         <p className='text-text-sm font-medium'>
           <AdaWithTooltip data={stats?.epoch?.fees} />
@@ -106,10 +108,10 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
       ),
     },
     {
-      label: "TPS:",
+      label: t("epochs.summary.tps"),
       value: (
         <p className='text-text-sm font-medium'>
-          {usedTPS?.toFixed(2)} (used) / {capTps?.toFixed(2)} (cap)
+          {usedTPS?.toFixed(2)} ({t("epochs.summary.used")}) / {capTps?.toFixed(2)} ({t("epochs.summary.cap")})
         </p>
       ),
     },
@@ -117,14 +119,14 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
 
   return (
     <OverviewCard
-      title='Summary'
+      title={t("epochs.summary.title")}
       subTitle={
         stats.epoch_no === currentEpoch && (
           <div className='relative flex h-[24px] w-[115px] items-center justify-end rounded-m border border-border px-[10px]'>
             <div className='absolute left-2'>
               <PulseDot />
             </div>
-            <span className='text-text-xs font-medium'>Current Epoch</span>
+            <span className='text-text-xs font-medium'>{t("epochs.summary.currentEpoch")}</span>
           </div>
         )
       }

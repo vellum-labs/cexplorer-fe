@@ -1,11 +1,11 @@
 import type { GovernanceActionDetailAboutListColumns } from "@/types/tableTypes";
-0;
 import type { FC } from "react";
 
 import ExportButton from "@/components/table/ExportButton";
 import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 import { useFetchGovernanceVote } from "@/services/governance";
 import { useGovActionDetailAboutTableStore } from "@/stores/tables/governanceDetailAboutTableStore";
@@ -32,12 +32,13 @@ interface GovernanceDetailAboutTabProps {
 export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
   id,
 }) => {
+  const { t } = useAppTranslation();
   type VoterRole = "ConstitutionalCommittee" | "DRep" | "SPO";
 
   const voterRoleLabels: Record<VoterRole, string> = {
-    ConstitutionalCommittee: "Constitutional Committee",
-    DRep: "DRep",
-    SPO: "SPO",
+    ConstitutionalCommittee: t("governance.voteDetail.constitutionalCommittee"),
+    DRep: t("labels.drep"),
+    SPO: t("labels.spo"),
   };
 
   const { page } = useSearch({
@@ -93,7 +94,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
 
         return <DateCell time={item.tx.time} withoutConvert />;
       },
-      title: "Date",
+      title: t("labels.date"),
       visible: columnsVisibility.date,
       widthPx: 90,
     },
@@ -118,7 +119,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
           />
         );
       },
-      title: "Voter",
+      title: t("governance.voting.voter"),
       visible: columnsVisibility.voter,
       widthPx: 160,
     },
@@ -145,7 +146,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
           </div>
         );
       },
-      title: <p ref={anchorRefs?.voter_role}>Voter role</p>,
+      title: <p ref={anchorRefs?.voter_role}>{t("governance.voting.voterRole")}</p>,
       filter: {
         anchorRef: anchorRefs?.voter_role,
         activeFunnel: !!filter.voter_role,
@@ -195,7 +196,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
           </p>
         );
       },
-      title: <p className='w-full text-right'>Voting power</p>,
+      title: <p className='w-full text-right'>{t("governance.voting.votingPower")}</p>,
       visible: columnsVisibility.voting_power,
       widthPx: 90,
     },
@@ -216,7 +217,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
           />
         );
       },
-      title: <p ref={anchorRefs?.vote}>Vote</p>,
+      title: <p ref={anchorRefs?.vote}>{t("labels.vote")}</p>,
       filter: {
         anchorRef: anchorRefs?.vote,
         width: "170px",
@@ -230,19 +231,23 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
         onReset: () => changeFilterByKey("vote"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
-            {["Yes", "No", "Abstain"].map(val => (
-              <label className='flex items-center gap-1' key={val}>
+            {[
+              { value: "Yes", label: t("governance.common.yes") },
+              { value: "No", label: t("governance.common.no") },
+              { value: "Abstain", label: t("governance.common.abstain") },
+            ].map(({ value, label }) => (
+              <label className='flex items-center gap-1' key={value}>
                 <input
                   type='radio'
                   name='status'
-                  value={val}
+                  value={value}
                   className='accent-primary'
-                  checked={filterDraft["vote"] === val}
+                  checked={filterDraft["vote"] === value}
                   onChange={e =>
                     changeDraftFilter("vote", e.currentTarget.value)
                   }
                 />
-                <span className='text-text-sm'>{val}</span>
+                <span className='text-text-sm'>{label}</span>
               </label>
             ))}
           </div>
@@ -255,7 +260,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
     {
       key: "epoch",
       render: item => <EpochCell no={item?.tx?.epoch_no} />,
-      title: <p className='w-full text-right'>Epoch</p>,
+      title: <p className='w-full text-right'>{t("governance.voting.epoch")}</p>,
       visible: columnsVisibility.epoch,
       widthPx: 50,
     },
@@ -268,7 +273,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
 
         return <BlockCell hash={item?.tx?.block_hash} no={item.tx.block_no} />;
       },
-      title: <p className='w-full text-right'>Block</p>,
+      title: <p className='w-full text-right'>{t("governance.voting.block")}</p>,
       visible: columnsVisibility.block,
       widthPx: 90,
     },
@@ -291,7 +296,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
           </Link>
         );
       },
-      title: <p className='w-full text-right'>Tx</p>,
+      title: <p className='w-full text-right'>{t("labels.tx")}</p>,
       visible: columnsVisibility.tx,
       widthPx: 90,
     },
@@ -308,8 +313,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : totalItems !== undefined ? (
             <h3 className='basis-[230px] text-nowrap'>
-              Total of {formatNumber(totalItems)}{" "}
-              {totalItems === 1 ? "vote" : "votes"}
+              {t("governance.voting.totalVotes", { count: formatNumber(totalItems) })}
             </h3>
           ) : (
             ""
@@ -324,7 +328,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
                 columnsOptions={governanceActionDetailAboutTableOptions.map(
                   item => {
                     return {
-                      label: item.name,
+                      label: t(`common:tableSettings.${item.key}`),
                       isVisible: columnsVisibility[item.key],
                       onClick: () =>
                         setColumnVisibility(
@@ -341,7 +345,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
 
         <div className='flex gap-1'>
           <TableSearchInput
-            placeholder='Search  your results...'
+            placeholder={t("governance.voting.searchPlaceholder")}
             value={tableSearch}
             onchange={setTableSearch}
             wrapperClassName='md:w-[320px] w-full '
@@ -356,7 +360,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
               columnsOptions={governanceActionDetailAboutTableOptions.map(
                 item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(

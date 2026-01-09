@@ -11,6 +11,7 @@ import { FileText, AlertTriangle } from "lucide-react";
 import { useFetchCommitteeDetail } from "@/services/governance";
 import { useFetchConstitutionList } from "@/services/governance";
 import { useFetchUrlContent } from "@/hooks/useFetchUrlContent";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 import type {
   CommitteeDetailResponse,
@@ -34,6 +35,7 @@ const getFirstRegistration = (
 };
 
 export const ConstituionalCommitteeDetailPage: FC = () => {
+  const { t } = useAppTranslation();
   const {
     content: modalContent,
     isLoading: isModalLoading,
@@ -77,13 +79,13 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
   const tabs = [
     {
       key: "members",
-      label: "Members",
+      label: t("gov.cc.members"),
       content: <CCMembersTab />,
       visible: true,
     },
     {
       key: "governance_vote",
-      label: "Governance vote",
+      label: t("gov.cc.governanceVote"),
       content: <CCGovernanceVotestab />,
       visible: true,
     },
@@ -92,13 +94,13 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
   return (
     <PageBase
       metadataTitle='committee'
-      title='Constitutional Committee'
+      title={t("gov.cc.constitutionalCommittee")}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>Governance</span>,
+          label: <span className='inline pt-1/2'>{t("gov.cc.governance")}</span>,
           link: "/gov",
         },
-        { label: "Constitutional committee" },
+        { label: t("gov.cc.constitutionalCommittee") },
       ]}
       adsCarousel={false}
     >
@@ -113,18 +115,20 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
           <div className='flex h-full w-full flex-wrap items-stretch gap-2 lg:flex-nowrap'>
             <div className='bg-bgColor flex w-[456px] flex-grow-0 flex-col gap-2 rounded-l border border-border p-3 shadow-sm'>
               <h3 className='text-textPrimary text-text-lg font-semibold'>
-                About
+                {t("gov.cc.about")}
               </h3>
 
               <div className='flex items-center justify-start text-text-sm'>
                 <span className='min-w-[150px] text-grayTextSecondary'>
-                  Active Members
+                  {t("gov.cc.activeMembers")}
                 </span>
                 <span className='text-textPrimary flex items-center gap-1 font-medium'>
                   {activeMembers.length}/{currentMembers.length}
                   {activeMembers.length < currentMembers.length && (
                     <Tooltip
-                      content={`${currentMembers.length - activeMembers.length} member${currentMembers.length - activeMembers.length > 1 ? "s" : ""} retired`}
+                      content={currentMembers.length - activeMembers.length > 1
+                        ? t("gov.cc.membersRetiredPlural", { count: currentMembers.length - activeMembers.length })
+                        : t("gov.cc.membersRetired", { count: currentMembers.length - activeMembers.length })}
                     >
                       <AlertTriangle size={14} className='text-[#F79009]' />
                     </Tooltip>
@@ -134,7 +138,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
 
               <div className='flex items-center justify-start text-text-sm'>
                 <span className='min-w-[150px] text-grayTextSecondary'>
-                  Voting threshold
+                  {t("gov.cc.votingThreshold")}
                 </span>
                 <span className='text-textPrimary font-medium'>
                   {committeeDetail?.committee?.quorum_numerator &&
@@ -155,7 +159,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
                   <FileText size={18} className='text-primary' />
                 </div>
                 <h3 className='text-textPrimary text-text-lg font-semibold'>
-                  Constitution
+                  {t("gov.cc.constitution")}
                 </h3>
               </div>
 
@@ -171,7 +175,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
                   className='flex items-center gap-1 text-text-sm text-primary hover:opacity-80'
                 >
                   <FileText size={14} />
-                  <span>Fulltext of the Cardano Constitution</span>
+                  <span>{t("gov.cc.fulltextOfConstitution")}</span>
                 </button>
               )}
             </div>
@@ -198,7 +202,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
             <div className='p-4'>
               <div className='mb-4 flex items-center justify-between'>
                 <h3 className='text-lg font-semibold'>
-                  Constitution Full Text
+                  {t("gov.cc.constitutionFullText")}
                 </h3>
               </div>
               {isModalLoading ? (

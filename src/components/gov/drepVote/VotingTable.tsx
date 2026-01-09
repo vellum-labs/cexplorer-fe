@@ -16,10 +16,12 @@ import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { useVotingTableStore } from "@/stores/tables/votingTableTableStore";
 import { CircleHelp } from "lucide-react";
 import { ActivityBadge } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface VotingTableProps {}
 
 export const VotingTable: FC<VotingTableProps> = () => {
+  const { t } = useAppTranslation();
   const { page } = useSearch({
     from: "/gov/drep-vote",
   });
@@ -60,7 +62,7 @@ export const VotingTable: FC<VotingTableProps> = () => {
   const staticColumns = [
     {
       key: "drep",
-      title: "DRep",
+      title: t("gov.voting.drep"),
       render: item => {
         return <DrepNameCell item={item} />;
       },
@@ -68,7 +70,7 @@ export const VotingTable: FC<VotingTableProps> = () => {
     },
     {
       key: "voting_power",
-      title: "Voting power",
+      title: t("gov.voting.votingPower"),
       render: item => {
         if (!item?.amount) {
           return <p className='text-right'>-</p>;
@@ -84,7 +86,7 @@ export const VotingTable: FC<VotingTableProps> = () => {
     },
     {
       key: "activity",
-      title: "Activity",
+      title: t("gov.voting.activity"),
       render: item => {
         if (!actions || !Array.isArray(actions))
           return <p className='text-right'>-</p>;
@@ -106,7 +108,7 @@ export const VotingTable: FC<VotingTableProps> = () => {
             <Tooltip
               content={
                 <span>
-                  Voting activity across treasury withdrawal proposals
+                  {t("gov.voting.activityTooltip")}
                 </span>
               }
             >

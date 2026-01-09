@@ -12,6 +12,7 @@ import type { PoolStructureColumns } from "@/types/tableTypes";
 import { DelegatorStructureCharts } from "./DelegatorStructureCharts";
 import { DelegatorStructureTable } from "./DelegatorStructureTable";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export interface DelegatorStructureItem {
   title: AnimalName;
@@ -61,6 +62,7 @@ export const DelegatorStructureView: FC<DelegatorStructureViewProps> = ({
   columnType,
   tableOptions,
 }) => {
+  const { t } = useAppTranslation();
   const animals = useMemo<DelegatorStructureItem[]>(() => {
     const data = dataQuery.data?.data.data?.[0] as
       | PoolDelegatorStatsResponse["data"]["data"][number]
@@ -95,7 +97,7 @@ export const DelegatorStructureView: FC<DelegatorStructureViewProps> = ({
             <button
               onClick={() => setSortByAnimalSize(!sortByAnimalSize)}
               className={`flex h-10 items-center gap-1 rounded-s border border-border px-2 transition-colors ${sortByAnimalSize ? "bg-primary/10" : "bg-transparent hover:bg-darker"}`}
-              title='Sort by animal size'
+              title={t("global.delegatorStructure.sortByAnimalSize")}
             >
               {sortByAnimalSize ? (
                 <>
@@ -132,7 +134,7 @@ export const DelegatorStructureView: FC<DelegatorStructureViewProps> = ({
               setRows={setRows}
               columnsOptions={tableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),

@@ -97,7 +97,7 @@ export const PoolUpdatesPage: FC = () => {
           item?.pool_update?.live?.tx?.time
         );
       },
-      title: <p>{t("pools.table.date")}</p>,
+      title: <p>{t("common:labels.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 50,
     },
@@ -120,7 +120,7 @@ export const PoolUpdatesPage: FC = () => {
           />
         );
       },
-      title: <p className='w-full text-right'>{t("pools.table.epoch")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.epoch")}</p>,
       visible: columnsVisibility.epoch,
       widthPx: 30,
     },
@@ -152,7 +152,7 @@ export const PoolUpdatesPage: FC = () => {
 
         return format;
       },
-      title: t("pools.table.pool"),
+      title: t("common:labels.pool"),
       visible: columnsVisibility.pool,
       widthPx: 100,
     },
@@ -173,7 +173,7 @@ export const PoolUpdatesPage: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>{t("pools.table.activeStake")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.activeStake")}</p>,
       visible: columnsVisibility.active_stake,
       widthPx: 45,
     },
@@ -221,7 +221,7 @@ export const PoolUpdatesPage: FC = () => {
 
         return format;
       },
-      title: <p className='w-full text-right'>{t("pools.table.fees")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.fees")}</p>,
       visible: columnsVisibility.fees,
       widthPx: 50,
     },
@@ -263,7 +263,7 @@ export const PoolUpdatesPage: FC = () => {
           </div>
         );
       },
-      title: <p className='w-full text-right'>{t("pools.table.pledge")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.pledge")}</p>,
       visible: columnsVisibility.pledge,
       widthPx: 55,
     },
@@ -345,7 +345,7 @@ export const PoolUpdatesPage: FC = () => {
 
         return item.pool_id;
       },
-      title: <p className='w-full text-nowrap text-right'>{t("pools.table.certificate")}</p>,
+      title: <p className='w-full text-nowrap text-right'>{t("common:labels.certificate")}</p>,
       visible: columnsVisibility.certificate,
       widthPx: 30,
     },
@@ -370,7 +370,7 @@ export const PoolUpdatesPage: FC = () => {
               <LoadingSkeleton height='27px' width={"220px"} />
             ) : totalItems > 0 ? (
               <h3 className='basis-[230px] text-nowrap'>
-                {t("pools.updates.totalOf")} {formatNumber(totalItems)} {t("pools.updates.totalOfSuffix")}
+                {t("common:phrases.totalOf")} {formatNumber(totalItems)} {t("pools.updates.totalOfSuffix")}
               </h3>
             ) : (
               ""

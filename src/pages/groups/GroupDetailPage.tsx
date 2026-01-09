@@ -45,8 +45,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import metadata from "../../../conf/metadata/en-metadata.json";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const GroupDetailPage = () => {
+  const { t } = useAppTranslation();
   const [isAnyDrepItem, setIsAnyDrepItem] = useState(false);
   const [filter, setFilter] = useState<"pool" | "drep">("pool");
 
@@ -84,12 +86,12 @@ export const GroupDetailPage = () => {
   const tabItems = [
     {
       key: "pool",
-      label: "Stake pools",
+      label: t("tabs.groups.stakePools"),
       visible: true,
     },
     {
       key: "drep",
-      label: "DReps",
+      label: t("tabs.groups.dreps"),
       visible: true,
     },
   ];
@@ -600,13 +602,13 @@ export const GroupDetailPage = () => {
             <BreadcrumbList className='flex items-center'>
               <BreadcrumbItem>
                 <Link className='underline underline-offset-2' to='/'>
-                  Home
+                  {t("breadcrumbs.home")}
                 </Link>
               </BreadcrumbItem>
               /
               <BreadcrumbItem>
                 <Link className='underline underline-offset-2' to={"/groups"}>
-                  Groups
+                  {t("breadcrumbs.groups")}
                 </Link>
               </BreadcrumbItem>
               / <BreadcrumbItem className='text-text'>{name}</BreadcrumbItem>
@@ -625,7 +627,7 @@ export const GroupDetailPage = () => {
                 />
               )}
               <TableSearchInput
-                placeholder='Search your results...'
+                placeholder={t("placeholders.searchResults")}
                 value={tableSearch}
                 onchange={setTableSearch}
                 wrapperClassName='md:w-[320px] w-full'

@@ -9,6 +9,7 @@ import ReactEcharts from "echarts-for-react";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 
 import { useEffect, useState } from "react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useFetchAveragePool } from "@/services/analytics";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useMiscConst } from "@/hooks/useMiscConst";
@@ -19,6 +20,7 @@ import { format } from "date-fns";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 export const AveragePool: FC = () => {
+  const { t } = useAppTranslation("common");
   const [selectedItem, setSelectedItem] = useState<GraphTimePeriod>(
     GraphTimePeriod.ThirtyDays,
   );
@@ -87,7 +89,7 @@ export const AveragePool: FC = () => {
         };
 
         return (
-          `Date: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (Epoch: ${params[0].axisValue})<hr>` +
+          `${t("labels.date")}: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${t("labels.epoch")}: ${params[0].axisValue})<hr>` +
           `<div>
         ${params
           .map(
@@ -109,7 +111,7 @@ export const AveragePool: FC = () => {
     xAxis: {
       type: "category",
       data: epochs,
-      name: "Epoch",
+      name: t("labels.epoch"),
       nameLocation: "middle",
       nameGap: 28,
       boundaryGap: false,
@@ -234,7 +236,7 @@ export const AveragePool: FC = () => {
 
   return (
     <AnalyticsGraph
-      title='Average pools'
+      title={t("analytics.averagePools")}
       exportButton
       graphSortData={{
         query,

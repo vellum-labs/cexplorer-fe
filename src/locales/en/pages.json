@@ -6,7 +6,6 @@
   "transactions": {
     "title": "Transactions",
     "detail": "Transaction detail",
-    "totalOf": "Total of",
     "totalOfSuffix": "transactions",
     "searchPlaceholder": "Search by tx hash...",
     "tabs": {
@@ -25,21 +24,13 @@
       "message": "Message"
     },
     "table": {
-      "date": "Date",
-      "hash": "Hash",
-      "block": "Block",
-      "epochBlock": "Epoch / Block",
-      "totalOutput": "Total Output",
       "treasuryDonation": "Treasury Donation",
-      "fee": "Fee",
-      "size": "Size",
       "scriptSize": "Script size"
     }
   },
   "blocks": {
     "title": "Blocks",
     "detail": "Block Detail",
-    "totalOf": "Total of",
     "totalOfSuffix": "blocks",
     "searchPlaceholder": "Search your results...",
     "overview": {
@@ -71,23 +62,11 @@
       "hash": "Hash",
       "slot": "Slot",
       "height": "Height"
-    },
-    "table": {
-      "epoch": "Epoch",
-      "slot": "Slot",
-      "time": "Time",
-      "block": "Block",
-      "hash": "Hash",
-      "transactions": "Transactions",
-      "output": "Output",
-      "size": "Size",
-      "pool": "Pool"
     }
   },
   "epochs": {
     "title": "Epochs",
     "detail": "Epoch detail",
-    "totalOf": "Total of",
     "totalOfSuffix": "epochs",
     "current": "Current epoch",
     "searchPlaceholder": "Search your results...",
@@ -126,17 +105,120 @@
       "date": "Date",
       "tbd": "TBD"
     },
-    "table": {
-      "epoch": "Epoch",
-      "startTime": "Start Time",
-      "endTime": "End Time",
+    "analyticsTab": {
+      "blockUsage": "Block Usage",
+      "stakedAda": "Staked ADA",
+      "stakedWallets": "Staked Wallets",
+      "rewards": "Rewards",
+      "activeWallets": "Active Wallets",
+      "newWallets": "New Wallets",
+      "byEpoch": "By epoch",
+      "values": "Values"
+    },
+    "blocksTable": {
+      "totalOfBlocks": "Total of {{count}} blocks",
+      "date": "Date",
+      "height": "Height",
+      "slot": "Slot",
+      "txs": "TXs",
+      "mintedBy": "Minted by",
+      "size": "Size"
+    },
+    "detailAnalytics": {
+      "blocksInEpoch": "Blocks in Epoch",
+      "transactionsInEpoch": "Transactions in Epoch",
+      "blockSizeUsed": "Block Size Used",
+      "feesEarned": "Fees Earned",
+      "byDay": "by day",
+      "rewardsStructure": "Rewards Structure",
+      "earnedByFeesReserves": "Earned by fees / Reserves",
+      "fees": "Fees",
+      "reserves": "Reserves"
+    },
+    "stakedAda": {
+      "title": "Staked ADA",
+      "subtitle": "Staked / Unstaked supply",
+      "staked": "Staked",
+      "unstaked": "Unstaked"
+    },
+    "stakePoolStats": {
+      "title": "Stake Pool Stats",
+      "pools": "Pools",
+      "apyLeader": "APY % Leader",
+      "apyMember": "APY % Member",
+      "averageStake": "Average Stake",
+      "delegatorCount": "Delegator Count",
+      "delegatorCountWeighted": "Delegator Count Weighted",
+      "delegatorAverage": "Delegator Average",
+      "delegatorAverageWeighted": "Delegator Average Weighted",
+      "pending": "Pending",
+      "dcwTooltip": "Delegator Count Weighted (DCW) is a metric in staking pool statistics that calculates the weighted average number of delegators contributing to a pool.",
+      "daTooltip": "Delegator Average (DA) is a metric in staking pool statistics that represents the simple average amount of stake delegated by each delegator.",
+      "dawTooltip": "Delegator Average Weighted (DAW) in Stake Pool Stats measures the average stake amount delegated by all delegators, weighted by the size of each delegation."
+    },
+    "parameters": {
+      "title": "Epoch Parameters",
+      "export": "Export",
+      "explanation": "Explanation",
+      "parameter": "Parameter",
+      "value": "Value",
+      "minFeeA": "The 'a' parameter to calculate the minimum transaction fee.",
+      "minFeeB": "The 'b' parameter to calculate the minimum transaction fee.",
+      "maxBlockSize": "The maximum block size (in bytes).",
+      "maxTxSize": "The maximum transaction size (in bytes).",
+      "maxBhSize": "The maximum block header size (in bytes).",
+      "keyDeposit": "The amount (in Lovelace) require for a deposit to register a StakeAddress.",
+      "poolDeposit": "The amount (in Lovelace) require for a deposit to register a stake pool.",
+      "maxEpoch": "The maximum number of epochs in the future that a pool retirement is allowed to be scheduled for.",
+      "optimalPoolCount": "The optimal number of stake pools.",
+      "influence": "The influence of the pledge on a stake pool's probability on minting a block.",
+      "monetaryExpandRate": "The monetary expansion rate.",
+      "treasuryGrowthRate": "The treasury growth rate.",
+      "decentralisation": "The decentralisation parameter (1 fully centralised, 0 fully decentralised).",
+      "protocolMajor": "The protocol major number.",
+      "protocolMinor": "The protocol minor number.",
+      "minUtxoValue": "The minimum value of a UTxO entry.",
+      "minPoolCost": "The minimum pool cost.",
+      "nonce": "The nonce value for this epoch.",
+      "priceMem": "The per word cost of script memory usage.",
+      "priceStep": "The cost of script execution step usage.",
+      "maxTxExMem": "The maximum number of execution memory allowed to be used in a single transaction.",
+      "maxTxExSteps": "The maximum number of execution steps allowed to be used in a single transaction.",
+      "maxBlockExMem": "The maximum number of execution memory allowed to be used in a single block.",
+      "maxBlockExSteps": "The maximum number of execution steps allowed to be used in a single block.",
+      "maxValSize": "The maximum Val size.",
+      "collateralPercent": "The percentage of the txfee which must be provided as collateral when including non-native scripts.",
+      "maxCollateralInputs": "The maximum number of collateral inputs allowed in a transaction."
+    },
+    "pots": {
+      "title": "Pots",
+      "treasury": "Treasury",
+      "reserves": "Reserves",
+      "rewards": "Rewards",
+      "deposits": "Deposits",
+      "fees": "Fees",
+      "feesReserves": "Fees / Reserves",
+      "feesReservesTooltip": "Portion of staking rewards coming from fees vs reserves"
+    },
+    "summary": {
+      "title": "Summary",
+      "currentEpoch": "Current Epoch",
+      "beginning": "Beginning",
+      "end": "End",
       "blocks": "Blocks",
       "transactions": "Transactions",
-      "output": "Output",
-      "fees": "Fees",
-      "rewards": "Rewards",
-      "stake": "Stake",
-      "pending": "Pending"
+      "feesGenerated": "Fees Generated",
+      "tps": "TPS:",
+      "used": "used",
+      "cap": "cap"
+    },
+    "loadAndCost": {
+      "title": "Load and Cost",
+      "sizeOfAllBlocks": "Size of all blocks in epoch",
+      "pricePerMB": "Price per MB",
+      "averageTxSize": "Average TX size",
+      "averageBlockSize": "Average Block Size",
+      "maxBlockSize": "Max Block Size"
     }
   },
   "pools": {
@@ -145,7 +227,6 @@
     "breadcrumb": "Pools",
     "list": "Pool list",
     "cardanoStakePools": "Cardano Stake Pools",
-    "totalOf": "Total of",
     "totalOfSuffix": "stake pools",
     "searchPlaceholder": "Search your results...",
     "displayVote": "Display vote",
@@ -175,46 +256,20 @@
     },
     "updates": {
       "title": "Pool Updates",
-      "totalOf": "Total of",
       "totalOfSuffix": "pools",
       "searchPlaceholder": "Search your results..."
     },
     "deregistrations": {
       "title": "Pool deregistrations",
-      "totalOf": "Total of",
       "totalOfSuffix": "deregistrations"
     },
     "registrations": {
       "title": "Pool registrations",
-      "totalOf": "Total of",
-      "totalOfSuffix": "registrations",
-      "table": {
-        "date": "Date",
-        "pool": "Pool",
-        "deposit": "Deposit",
-        "pledge": "Pledge",
-        "fee": "Fee",
-        "txHash": "TX hash",
-        "epochBlock": "Epoch/Block"
-      }
+      "totalOfSuffix": "registrations"
     },
     "table": {
-      "date": "Date",
-      "pool": "Pool",
-      "epoch": "Epoch",
-      "fees": "Fees",
-      "pledge": "Pledge",
-      "txHash": "Tx Hash",
-      "birthday": "Birthday",
-      "registered": "Registered",
-      "delegators": "Delegators",
-      "activeStake": "Active Stake",
       "transactionHash": "Transaction Hash",
-      "certificate": "Certificate",
-      "longetivity": "Longetivity",
-      "deposit": "Deposit",
-      "fee": "Fee",
-      "epochBlock": "Epoch/Block"
+      "longetivity": "Longetivity"
     },
     "analytics": {
       "newStakers": "New Stakers",
@@ -341,6 +396,7 @@
       "delegatorsTable": {
         "date": "Date",
         "activeEpoch": "Active epoch",
+        "activeIn": "Active In",
         "address": "Address",
         "poolDelegation": "Pool Delegation",
         "amount": "Amount",
@@ -422,7 +478,6 @@
     },
     "multiPool": {
       "title": "Multi-pool Delegators",
-      "totalOf": "Total of",
       "totalOfSuffix": "multi-pool delegators."
     },
     "retired": {
@@ -442,36 +497,20 @@
       },
       "table": {
         "index": "#",
-        "stakePool": "Stake Pool",
         "retiredInEpoch": "Retired in Epoch",
-        "retiringInEpoch": "Retiring in Epoch",
-        "activeStake": "Active Stake",
-        "delegators": "Delegators",
-        "longevity": "Longevity"
+        "retiringInEpoch": "Retiring in Epoch"
       }
     },
     "table": {
-      "date": "Date",
-      "epoch": "Epoch",
-      "address": "Address",
-      "liveStake": "Live Stake",
-      "delegation": "Delegation",
-      "tx": "Tx",
       "paymentCredential": "Payment credential",
-      "stake": "Stake",
       "stakeKeys": "Stake keys"
     }
   },
   "withdrawals": {
     "title": "Withdrawals",
     "table": {
-      "date": "Date",
-      "epoch": "Epoch",
-      "address": "Address",
       "amountControlled": "Amount Controlled",
-      "amountWithdrawn": "Amount Withdrawn",
-      "delegation": "Delegation",
-      "tx": "Tx"
+      "amountWithdrawn": "Amount Withdrawn"
     }
   },
   "rewardsChecker": {
@@ -484,7 +523,6 @@
   "groups": {
     "title": "Cardano Groups (Donuts)",
     "breadcrumb": "Groups",
-    "totalOf": "Total of",
     "totalOfSuffix": "groups",
     "searchPlaceholder": "Search your results...",
     "info": "This dashboard is managed by Cardano community. Everyone can add or modify existing groups via",
@@ -501,9 +539,7 @@
       "poolsCount": "Pools count",
       "groupName": "Group name",
       "poolStake": "Pool stake",
-      "delegators": "Delegators",
       "share": "Share",
-      "pledge": "Pledge",
       "pledgePerPool": "μ Pledge per pool",
       "alsoDrep": "Also DRep"
     },
@@ -519,7 +555,6 @@
     "detail": "DRep detail",
     "list": "DRep list",
     "breadcrumb": "Delegated representatives",
-    "totalOf": "Total of",
     "totalOfSuffix": "dreps",
     "searchPlaceholder": "Search by Drep ID...",
     "displayVote": "Display vote",
@@ -549,32 +584,19 @@
     },
     "table": {
       "ranking": "#",
-      "status": "Status",
       "drepName": "DRep name",
-      "votingPower": "Voting power",
       "lifetimeActivity": "Lifetime Activity",
       "lifetimeActivityTooltip": "Voting activity over DRep's lifetime",
       "recentActivity": "Recent Activity",
       "recentActivityTooltip": "DRep's voting activity over the past 6 months",
       "ownerStake": "Owner stake",
       "averageStake": "Average stake",
-      "registered": "Registered",
-      "delegators": "Delegators",
       "drepMetadata": "DRep metadata",
       "selectedVote": "Selected vote",
-      "spo": "SPO",
       "topDelegator": "Top delegator"
     },
     "delegations": {
-      "totalOf": "Total of",
-      "totalOfSuffix": "delegations",
-      "table": {
-        "date": "Date",
-        "address": "Address",
-        "amount": "Amount",
-        "delegation": "Delegation",
-        "tx": "Tx"
-      }
+      "totalOfSuffix": "delegations"
     },
     "analytics": {
       "poolGraph": "Pool Graph",
@@ -696,6 +718,51 @@
         "byCount": "Delegators structure by count",
         "byStake": "Delegators structure by stake"
       }
+    },
+    "graphs": {
+      "date": "Date:",
+      "epoch": "Epoch:",
+      "averageDreps": {
+        "title": "Average DReps",
+        "avgDelegatorsPerDrep": "Average delegators per DRep",
+        "avgStakePerDrep": "Average stake per DRep (₳)",
+        "avgStakePerDrepShort": "Average stake per DRep",
+        "votingPowerSpoSameTime": "Voting power (%) of DReps that are SPOs at the same time",
+        "votingPowerShort": "Voting power"
+      },
+      "delegationChanges": {
+        "title": "Delegators & Stake Changing both Voting and Minting Delegation",
+        "description": "Epoch-by-epoch changes in delegators and stake switching voting or minting delegation",
+        "delegatorCount": "Delegator Count",
+        "stakeMoved": "Stake Moved (₳)",
+        "stakeMovedShort": "Stake Moved"
+      },
+      "drepsNotSpo": {
+        "title": "DReps that are not SPOs",
+        "description": "Epoch-level view of stake, DRep count, and delegator count delegated to DReps who are not SPOs",
+        "drepCount": "DRep Count",
+        "stake": "Stake (₳)",
+        "stakeShort": "Stake",
+        "delegators": "Delegators",
+        "showFiltered": "Show Filtered",
+        "filterTooltip": "Excludes 'Abstain' and 'No Confidence' DReps from Count and Stake."
+      },
+      "drepPool": {
+        "totalDelegatedStake": "Total Delegated Stake (₳)",
+        "totalDelegatedStakeShort": "Total Delegated Stake",
+        "drepDelegated": "Drep Delegated",
+        "abstainDrep": "Abstain Drep (₳)",
+        "abstainDrepShort": "Abstain Drep",
+        "noConfidenceDrep": "No Confidence Drep (₳)",
+        "noConfidenceDrepShort": "No Confidence Drep"
+      },
+      "drepSize": {
+        "votingPower": "Voting Power:",
+        "delegators": "Delegators:",
+        "ownerStake": "Owner Stake:",
+        "averageStake": "Average Stake:",
+        "value": "Value:"
+      }
     }
   },
   "assets": {
@@ -711,52 +778,19 @@
       "all": "All",
       "tokens": "Tokens",
       "nfts": "NFTs"
-    },
-    "table": {
-      "name": "Name",
-      "fingerprint": "Fingerprint",
-      "policy": "Policy",
-      "quantity": "Quantity",
-      "holders": "Holders",
-      "transactions": "Transactions",
-      "mintTime": "Mint Time",
-      "type": "Type",
-      "token": "Token",
-      "nft": "NFT",
-      "supply": "Supply",
-      "price": "Price"
     }
   },
   "contractTransactions": {
     "title": "Contract interactions",
-    "totalOf": "Total of",
-    "totalOfSuffix": "interactions",
-    "table": {
-      "date": "Date",
-      "type": "Type",
-      "purpose": "Purpose",
-      "scriptHash": "Script hash",
-      "deposit": "Deposit",
-      "unitSteps": "Unit steps",
-      "txHash": "TX hash",
-      "epochBlock": "Epoch/Block"
-    }
+    "totalOfSuffix": "interactions"
   },
   "metadata": {
     "title": "Metadata Transactions List",
-    "totalOf": "Total of",
     "totalOfSuffix": "transactions",
     "searchPlaceholder": "Search your results...",
     "search": {
       "hash": "Hash",
       "key": "Key"
-    },
-    "table": {
-      "date": "Date",
-      "key": "Key",
-      "txHash": "TX Hash",
-      "size": "Size",
-      "metadata": "Metadata"
     }
   },
   "treasuryDonations": {
@@ -833,7 +867,6 @@
         "dreps": "DReps"
       },
       "withdrawalsTable": {
-        "totalOf": "Total of",
         "withdrawals": "withdrawals",
         "searchPlaceholder": "Search by tx hash...",
         "date": "Date",
@@ -876,29 +909,11 @@
     },
     "registrations": {
       "title": "Stake registrations",
-      "totalOf": "Total of",
-      "totalOfSuffix": "registrations",
-      "table": {
-        "date": "Date",
-        "type": "Type",
-        "stakeKey": "Stake key",
-        "deposit": "Deposit",
-        "txHash": "TX hash",
-        "epochBlock": "Epoch/Block"
-      }
+      "totalOfSuffix": "registrations"
     },
     "deregistrations": {
       "title": "Stake deregistrations",
-      "totalOf": "Total of",
-      "totalOfSuffix": "deregistrations",
-      "table": {
-        "date": "Date",
-        "type": "Type",
-        "stakeKey": "Stake key",
-        "deposit": "Deposit",
-        "txHash": "TX hash",
-        "epochBlock": "Epoch/Block"
-      }
+      "totalOfSuffix": "deregistrations"
     }
   },
   "policy": {
@@ -908,6 +923,30 @@
   "script": {
     "title": "Script",
     "detail": "Script detail"
+  },
+  "scriptList": {
+    "title": "Script List"
+  },
+  "scriptDetail": {
+    "title": "Script detail"
+  },
+  "taxTool": {
+    "title": "Tax tool"
+  },
+  "polls": {
+    "title": "Cexplorer governance actions"
+  },
+  "poolDebug": {
+    "title": "SPO Debug"
+  },
+  "poolAnalytics": {
+    "title": "Pool analytics"
+  },
+  "addressDetail": {
+    "title": "Address"
+  },
+  "policyDetail": {
+    "title": "Policy"
   },
   "analytics": {
     "title": "Analytics",
@@ -949,9 +988,39 @@
     "articles": "Admin articles",
     "wiki": "Admin wiki"
   },
+  "breadcrumbs": {
+    "home": "Home",
+    "groups": "Groups",
+    "scriptList": "Script List",
+    "taxTool": "Tax tool",
+    "voting": "Voting",
+    "poolDebug": "SPO Debug",
+    "stake": "Stake",
+    "address": "Address",
+    "assets": "Assets",
+    "settings": "Settings"
+  },
   "errors": {
     "notFound": "Page not found",
     "serverError": "Server error",
     "unauthorized": "Unauthorized"
+  },
+  "poolDebug": {
+    "cheatSheet": {
+      "description": "Quick reference guide for stake pool operators. Copy-paste commands for building cardano-node, calculating KES periods, and generating operational certificates—the cheatsheet that SPOs actually use.",
+      "buildAndUpdate": "Build and update Cardano Node",
+      "kesUpdate": "KES update",
+      "slotsPerKESPeriod": "slotsPerKESPeriod:",
+      "slot": "slot:",
+      "expr": "expr"
+    },
+    "debugger": {
+      "description": "Enter your pool ID to check your stake pool configuration. After submitting, you'll see a detailed list of any issues that need attention, or confirmation that everything appears to be set up correctly.",
+      "date": "Date",
+      "type": "Type",
+      "errorDescription": "Description",
+      "errors": "{{count}} Errors",
+      "poolDetail": "Pool detail →"
+    }
   }
 }

@@ -16,6 +16,7 @@ import { governanceActionDetailDrepSposTableOptions } from "@/constants/tables/g
 import { SortArrow } from "@vellumlabs/cexplorer-sdk";
 import { getColumnsSortOrder } from "@vellumlabs/cexplorer-sdk";
 import { GovVoterCell } from "@/components/gov/GovVoterCell";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface GovernanceDetailDrepsSubtabProps {
   id: string;
@@ -24,6 +25,7 @@ interface GovernanceDetailDrepsSubtabProps {
 export const GovernanceDetailDrepsSubtab: FC<
   GovernanceDetailDrepsSubtabProps
 > = ({ id }) => {
+  const { t } = useAppTranslation();
   const { page, order, sort } = useSearch({
     from: "/gov/action/$id",
   });
@@ -61,7 +63,7 @@ export const GovernanceDetailDrepsSubtab: FC<
         if (!item?.info?.id) return "-";
         return <GovVoterCell role='DRep' info={item.info} />;
       },
-      title: "Voter",
+      title: t("governance.voting.voter"),
       visible: columnsVisibility.voter,
       widthPx: 120,
     },
@@ -92,7 +94,7 @@ export const GovernanceDetailDrepsSubtab: FC<
             return;
           }}
         >
-          <span>Stake</span>
+          <span>{t("governance.voting.stake")}</span>
           <SortArrow direction={order === "stake" ? sort : undefined} />
         </div>
       ),
@@ -127,7 +129,7 @@ export const GovernanceDetailDrepsSubtab: FC<
             return;
           }}
         >
-          <span>Delegators</span>
+          <span>{t("governance.voting.delegators")}</span>
           <SortArrow
             direction={order === "represented_by" ? sort : undefined}
           />
@@ -149,7 +151,7 @@ export const GovernanceDetailDrepsSubtab: FC<
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : totalItems !== undefined ? (
             <h3 className='basis-[230px] text-nowrap'>
-              Total of {formatNumber(totalItems)} DReps
+              {t("governance.voting.totalDReps", { count: formatNumber(totalItems) })}
             </h3>
           ) : (
             ""
@@ -164,7 +166,7 @@ export const GovernanceDetailDrepsSubtab: FC<
                 columnsOptions={governanceActionDetailDrepSposTableOptions.map(
                   item => {
                     return {
-                      label: item.name,
+                      label: t(`common:tableSettings.${item.key}`),
                       isVisible: columnsVisibility[item.key],
                       onClick: () =>
                         setColumnVisibility(
@@ -188,7 +190,7 @@ export const GovernanceDetailDrepsSubtab: FC<
               columnsOptions={governanceActionDetailDrepSposTableOptions.map(
                 item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(

@@ -24,7 +24,7 @@ import { PageBase } from "@/components/global/pages/PageBase";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const StakeRegistrationsPage = () => {
-  const { t } = useAppTranslation("pages");
+  const { t } = useAppTranslation(["pages", "common"]);
   const [totalItems, setTotalItems] = useState(0);
   const { page } = useSearch({ from: "/stake/registrations" });
   const {
@@ -41,12 +41,12 @@ export const StakeRegistrationsPage = () => {
   const items = query.data?.pages.flatMap(page => page.data.data);
 
   const tableColumnTranslations: Record<string, string> = {
-    date: t("stake.registrations.table.date"),
-    type: t("stake.registrations.table.type"),
-    view: t("stake.registrations.table.stakeKey"),
-    deposit: t("stake.registrations.table.deposit"),
-    hash: t("stake.registrations.table.txHash"),
-    epoch_block: t("stake.registrations.table.epochBlock"),
+    date: t("common:labels.date"),
+    type: t("common:labels.type"),
+    view: t("common:labels.stakeKey"),
+    deposit: t("common:labels.deposit"),
+    hash: t("common:labels.txHash"),
+    epoch_block: t("common:labels.epochBlock"),
   };
 
   const columns: TableColumns<StakeRegistrationsData> = [
@@ -60,7 +60,7 @@ export const StakeRegistrationsPage = () => {
 
         return item.block.time;
       },
-      title: t("stake.registrations.table.date"),
+      title: t("common:labels.date"),
       visible: columnsVisibility.date,
       widthPx: 30,
     },
@@ -69,7 +69,7 @@ export const StakeRegistrationsPage = () => {
       render: item => {
         return <AddressTypeInitialsBadge address={item.data.view} />;
       },
-      title: t("stake.registrations.table.type"),
+      title: t("common:labels.type"),
       visible: columnsVisibility.type,
       widthPx: 30,
     },
@@ -83,7 +83,7 @@ export const StakeRegistrationsPage = () => {
 
         return item?.data?.view;
       },
-      title: <p>{t("stake.registrations.table.stakeKey")}</p>,
+      title: <p>{t("common:labels.stakeKey")}</p>,
       visible: columnsVisibility.view,
       widthPx: 50,
     },
@@ -96,7 +96,7 @@ export const StakeRegistrationsPage = () => {
       ),
       title: (
         <p className='w-full text-right'>
-          {t("stake.registrations.table.deposit")}
+          {t("common:labels.deposit")}
         </p>
       ),
       visible: columnsVisibility.deposit,
@@ -112,7 +112,7 @@ export const StakeRegistrationsPage = () => {
 
         return item.tx.hash;
       },
-      title: t("stake.registrations.table.txHash"),
+      title: t("common:labels.txHash"),
       visible: columnsVisibility.hash,
       widthPx: 40,
     },
@@ -133,7 +133,7 @@ export const StakeRegistrationsPage = () => {
       },
       title: (
         <p className='w-full text-right'>
-          {t("stake.registrations.table.epochBlock")}
+          {t("common:labels.epochBlock")}
         </p>
       ),
       visible: columnsVisibility.epoch_block,
@@ -159,7 +159,7 @@ export const StakeRegistrationsPage = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[230px]'>
-              {t("stake.registrations.totalOf")} {formatNumber(totalItems ?? 0)}{" "}
+              {t("common:phrases.totalOf")} {formatNumber(totalItems ?? 0)}{" "}
               {t("stake.registrations.totalOfSuffix")}
             </h3>
           )}
@@ -170,7 +170,7 @@ export const StakeRegistrationsPage = () => {
               setRows={setRows}
               columnsOptions={stakeRegistrationsTableOptions.map(item => {
                 return {
-                  label: tableColumnTranslations[item.key] || item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),

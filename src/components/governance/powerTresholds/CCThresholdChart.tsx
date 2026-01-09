@@ -3,6 +3,7 @@ import ReactECharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { CircleHelp } from "lucide-react";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface CCThresholdChartProps {
   chartProps: {
@@ -17,6 +18,7 @@ interface CCThresholdChartProps {
 }
 
 export const CCThresholdChart: FC<CCThresholdChartProps> = ({ chartProps }) => {
+  const { t } = useAppTranslation();
   const { ccData, visibility } = chartProps;
 
   const { textColor, bgColor } = useGraphColors();
@@ -72,18 +74,18 @@ export const CCThresholdChart: FC<CCThresholdChartProps> = ({ chartProps }) => {
       },
       formatter: (params: any) => {
         if (!visibility) {
-          return "CC Members do not vote on this action";
+          return t("governance.thresholds.ccNotVoting");
         }
 
         if (params.data.isVotingYes) {
-          return `${params.data.name}<br/>Vote: Yes<br/>Needed for threshold`;
+          return `${params.data.name}<br/>${t("governance.card.voteYes")}<br/>${t("governance.common.neededForThreshold")}`;
         }
 
         if (params.data.isVotingNo) {
-          return `${params.data.name}<br/>Vote: No<br/>Not needed for threshold`;
+          return `${params.data.name}<br/>${t("governance.card.voteNo")}<br/>${t("governance.common.notNeededForThreshold")}`;
         }
 
-        return `${params.data.name}<br/>CC Members: ${params.data.value}`;
+        return `${params.data.name}<br/>${t("governance.thresholds.ccMembers")}: ${params.data.value}`;
       },
     },
     series: [
@@ -111,11 +113,11 @@ export const CCThresholdChart: FC<CCThresholdChartProps> = ({ chartProps }) => {
   return (
     <div className='flex flex-col items-center justify-center'>
       <div className='flex items-center gap-1'>
-        <p className='mb-1 font-medium'>Constitutional Committee</p>
+        <p className='mb-1 font-medium'>{t("governance.thresholds.ccTitle")}</p>
         <Tooltip
           content={
             <p className='max-w-[200px]'>
-              Minimum number of CC members required to approve this proposal.
+              {t("governance.thresholds.ccTooltip")}
             </p>
           }
         >
@@ -132,14 +134,14 @@ export const CCThresholdChart: FC<CCThresholdChartProps> = ({ chartProps }) => {
         />
       </div>
       <p className='text-text-sm text-text'>
-        Threshold:{" "}
+        {t("governance.common.threshold")}{" "}
         {visibility
           ? `${Math.round(
               ccData.quorum_denominator > 0
                 ? (ccData.quorum_numerator / ccData.quorum_denominator) * 100
                 : 0,
             )}%`
-          : "Not applicable"}
+          : t("governance.common.notApplicable")}
       </p>
     </div>
   );

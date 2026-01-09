@@ -17,6 +17,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { markdownComponents } from "@/constants/markdows";
 import { toMarkdown } from "@/utils/toMarkdown";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface VoteCellProps {
   vote?: Vote | string;
@@ -33,6 +34,7 @@ export const VoteCell: FC<VoteCellProps> = ({
   isLate = false,
   anchorInfo,
 }) => {
+  const { t } = useAppTranslation();
   const {
     content: modalContent,
     isLoading,
@@ -74,7 +76,7 @@ export const VoteCell: FC<VoteCellProps> = ({
             : "cursor-not-allowed text-grayTextSecondary opacity-50"
         }`}
         title={
-          hasAnchorInfo ? "View anchor information" : "No anchor information"
+          hasAnchorInfo ? t("governance.vote.viewAnchorInfo") : t("governance.vote.noAnchorInfo")
         }
       >
         <FileUser size={16} />
@@ -86,14 +88,14 @@ export const VoteCell: FC<VoteCellProps> = ({
           params={{ hash: txHash }}
           search={{ tab: proposalId }}
           className='text-muted-foreground text-primary'
-          title='Open vote detail'
+          title={t("governance.vote.openVoteDetail")}
         >
           <FileText size={16} />
         </Link>
       )}
       <VoteBadge vote={vote as Vote} />
       {isLate && (
-        <Tooltip content='This vote was submitted after voting closed'>
+        <Tooltip content={t("governance.vote.lateVoteWarning")}>
           <TriangleAlert size={16} className='text-yellow-500' />
         </Tooltip>
       )}
@@ -104,7 +106,7 @@ export const VoteCell: FC<VoteCellProps> = ({
           <Modal onClose={closeModal} maxWidth='800px'>
             <div className='p-4'>
               <div className='mb-4 flex items-center justify-between'>
-                <h3 className='text-lg font-semibold'>Metadata</h3>
+                <h3 className='text-lg font-semibold'>{t("governance.vote.metadata")}</h3>
                 {txHash && (
                   <Link
                     to='/gov/vote/$hash'
@@ -112,7 +114,7 @@ export const VoteCell: FC<VoteCellProps> = ({
                     search={{ tab: proposalId }}
                     className='text-sm text-primary hover:opacity-80'
                   >
-                    <span className='mr-1'>Vote:</span>
+                    <span className='mr-1'>{t("governance.vote.voteLabel")}</span>
                     <span className='font-mono'>
                       {formatString(txHash, "long")}
                     </span>
@@ -159,8 +161,8 @@ export const VoteCell: FC<VoteCellProps> = ({
                         variant='primary'
                         label={
                           showFullMetadata
-                            ? "Show Summary"
-                            : "Show Full Metadata"
+                            ? t("governance.vote.showSummary")
+                            : t("governance.vote.showFullMetadata")
                         }
                         onClick={() => setShowFullMetadata(!showFullMetadata)}
                       />

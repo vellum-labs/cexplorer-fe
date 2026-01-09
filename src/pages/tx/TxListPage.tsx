@@ -30,7 +30,7 @@ export const TxListPage: FC<TxListPageProps> = ({
   isDonationPage,
   policyId,
 }) => {
-  const { t } = useAppTranslation("pages");
+  const { t } = useAppTranslation(["pages", "common"]);
   const txListTableOptions = useTxListTableOptions();
 
   const { page } = useSearch({
@@ -96,7 +96,7 @@ export const TxListPage: FC<TxListPageProps> = ({
               <LoadingSkeleton height='27px' width={"220px"} />
             ) : totalItems > 0 ? (
               <h3 className='basis-[230px] text-nowrap'>
-                {t("transactions.totalOf")} {formatNumber(totalItems)} {t("transactions.totalOfSuffix")}
+                {t("common:phrases.totalOf")} {formatNumber(totalItems)} {t("transactions.totalOfSuffix")}
               </h3>
             ) : (
               ""
@@ -139,7 +139,7 @@ export const TxListPage: FC<TxListPageProps> = ({
                 setRows={setRows}
                 columnsOptions={txListTableOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(

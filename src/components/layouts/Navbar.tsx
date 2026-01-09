@@ -19,6 +19,7 @@ import WalletButton from "../wallet/WalletButton";
 import { LayoutNotification } from "@/utils/LayoutNotification";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 import { configJSON } from "@/constants/conf";
 
@@ -27,6 +28,7 @@ interface NavbarProps {
 }
 
 const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
+  const { t } = useAppTranslation("navigation");
   const { theme } = useThemeStore();
   const price = useAdaPriceWithHistory();
   const { navigationOptions, labels } = useNavigationOptions();
@@ -99,19 +101,18 @@ const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
                     icon={<Cardano size={24} color={colors.primary} />}
                     title={
                       <span className='text-text-lg font-semibold'>
-                        Powered by{" "}
-                        <span className='text-primary'>Cardano Blockchain</span>
+                        {t("navbar.poweredBy")}{" "}
+                        <span className='text-primary'>{t("navbar.cardanoBlockchain")}</span>
                       </span>
                     }
                     className='bg-darker'
                   >
                     <p className='font-regular'>
-                      Access Our API for Comprehensive Blockchain Data and Build
-                      Your Next-Level dApp!
+                      {t("navbar.apiDescription")}
                     </p>
                     <Button
                       className='mt-auto'
-                      label='Start building'
+                      label={t("navbar.startBuilding")}
                       rightIcon={<ArrowRight />}
                       variant='primary'
                       size='lg'
@@ -129,20 +130,19 @@ const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
                     icon={<ChevronsUp color={colors.purpleText} />}
                     title={
                       <span className='text-text-lg font-semibold'>
-                        Get Cexplorer.io{" "}
-                        <span className='text-purpleText'>PRO</span>
+                        {t("navbar.getCexplorer")}{" "}
+                        <span className='text-purpleText'>{t("navbar.pro")}</span>
                       </span>
                     }
                     className='bg-darker'
                   >
                     <p className='font-regular'>
-                      Access Our API for Comprehensive Blockchain Data and Build
-                      Your Next-Level dApp!
+                      {t("navbar.apiDescription")}
                     </p>
                     <Button
                       href='/pro'
                       className='mt-auto'
-                      label='Get PRO'
+                      label={t("navbar.getPro")}
                       rightIcon={<ArrowRight />}
                       variant='purple'
                       size='lg'

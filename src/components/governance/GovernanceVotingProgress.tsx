@@ -6,6 +6,7 @@ import {
   shouldCCVote,
 } from "@/utils/governanceVoting";
 import { voterRoles } from "@/constants/governance";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface GovernanceVotingProgressProps {
   governanceAction: GovernanceActionList;
@@ -14,6 +15,7 @@ interface GovernanceVotingProgressProps {
 export const GovernanceVotingProgress: FC<GovernanceVotingProgressProps> = ({
   governanceAction,
 }) => {
+  const { t } = useAppTranslation();
   const roundPercentage = (percent: number): number =>
     Math.round(percent * 100) / 100;
 
@@ -112,7 +114,7 @@ export const GovernanceVotingProgress: FC<GovernanceVotingProgressProps> = ({
   if (progressBars.length === 0) {
     return (
       <div className='flex h-full items-center justify-center text-text-xs text-grayTextSecondary'>
-        No voting data
+        {t("governance.voting.noVotingData")}
       </div>
     );
   }

@@ -16,6 +16,7 @@ import { AssetTicker } from "./AssetTicker";
 import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 import { SwapTypeBadge } from "./SwapTypeBadge";
 import { getAssetImage } from "@/utils/asset/getAssetImage";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface SwapDetailTableProps {
   aggregatedData: AggregatedSwapData;
@@ -24,6 +25,8 @@ interface SwapDetailTableProps {
 export const SwapDetailTable: FC<SwapDetailTableProps> = ({
   aggregatedData,
 }) => {
+  const { t } = useAppTranslation("common");
+
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "COMPLETE":
@@ -104,7 +107,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
         <div className='bg-grayBgTertiary border-b border-border px-2 py-1.5'>
           <div className='flex items-center gap-1 text-text-sm'>
             <span className='font-medium text-grayTextSecondary'>
-              Token swap order:{" "}
+              {t("dex.tokenSwapOrder")}{" "}
             </span>
             <div className='flex items-center gap-1'>
               {getAssetImage(aggregatedData?.pair?.tokenIn, false, 16)}
@@ -122,7 +125,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                 </span>
               </Tooltip>
             </div>
-            <span className='mx-1 text-grayTextSecondary'>to</span>
+            <span className='mx-1 text-grayTextSecondary'>{t("dex.to")}</span>
             <div className='flex items-center gap-1'>
               {getAssetImage(aggregatedData?.pair?.tokenOut, false, 16)}
               <Tooltip content={safeToLocaleString(summaryAmountOut)}>
@@ -140,7 +143,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                 </span>
               </Tooltip>
             </div>
-            <span className='ml-1 text-grayTextSecondary'>via</span>
+            <span className='ml-1 text-grayTextSecondary'>{t("dex.via")}</span>
             <div className='ml-1/2'>
               <SwapTypeBadge
                 uniqueDexesCount={aggregatedData?.dexes?.length ?? 0}
@@ -155,10 +158,10 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
             className='text-sm mt-1.5 grid gap-2 font-medium text-grayTextSecondary'
             style={{ gridTemplateColumns: "55% 15% 15% 15%" }}
           >
-            <div className='flex items-center gap-1'>Route</div>
-            <div>Price</div>
-            <div>Status</div>
-            <div>Completion tx</div>
+            <div className='flex items-center gap-1'>{t("dex.route")}</div>
+            <div>{t("dex.price")}</div>
+            <div>{t("dex.status")}</div>
+            <div>{t("dex.completionTx")}</div>
           </div>
         </div>
 
@@ -221,7 +224,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                           </Tooltip>
                         </div>
                         <span className='text-text-sm text-grayTextSecondary'>
-                          on
+                          {t("dex.on")}
                         </span>
                         <div
                           className='flex items-center gap-1/2 whitespace-nowrap rounded-xl border border-border bg-transparent px-1/2 text-text-sm text-text sm:px-1'
@@ -272,7 +275,7 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                           {getStatusIcon(order.status)}
                           <span className='capitalize'>
                             {order.status === "PARTIALLY_COMPLETE"
-                              ? "Partially completed"
+                              ? t("dex.partiallyCompleted")
                               : order.status[0].toUpperCase() +
                                 order.status.slice(1).toLowerCase()}
                           </span>
@@ -325,13 +328,13 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                     </Tooltip>
                   </div>
                   <ArrowRight size={14} />
-                  <span className='text-grayTextSecondary'>Pending</span>
+                  <span className='text-grayTextSecondary'>{t("dex.pending")}</span>
                 </div>
                 <div>-</div>
                 <div className='flex items-center'>
                   <p className='flex w-fit items-center gap-1/2 rounded-m border border-border px-1 text-text-sm'>
                     <Ellipsis size={15} className='text-yellowText' />
-                    <span className='capitalize'>Pending</span>
+                    <span className='capitalize'>{t("dex.pending")}</span>
                   </p>
                 </div>
                 <div>-</div>

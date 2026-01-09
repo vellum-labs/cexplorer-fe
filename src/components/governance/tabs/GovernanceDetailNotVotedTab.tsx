@@ -5,6 +5,7 @@ import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { GovernanceDetailDrepsSubtab } from "../subtabs/GovernanceDetailDrepsSubtab";
 import { GovernanceDetailSposSubtab } from "../subtabs/GovernanceDetailSposSubtab";
 import { shouldSPOVote } from "@/utils/governanceVoting";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface GovernanceDetailNotVotedTabProps {
   id: string;
@@ -14,19 +15,20 @@ interface GovernanceDetailNotVotedTabProps {
 export const GovernanceDetailNotVotedTab: FC<
   GovernanceDetailNotVotedTabProps
 > = ({ id, governanceAction }) => {
+  const { t } = useAppTranslation();
   const governanceActionType = governanceAction?.type ?? "";
   const votingProcedure = governanceAction?.voting_procedure;
 
   const tabs = [
     {
       key: "dreps",
-      label: "DReps",
+      label: t("governance.thresholds.drepTitle"),
       content: <GovernanceDetailDrepsSubtab id={id} />,
       visible: true,
     },
     {
       key: "spos",
-      label: "SPOs",
+      label: t("governance.thresholds.spoTitle"),
       content: <GovernanceDetailSposSubtab id={id} />,
       visible: shouldSPOVote(governanceActionType, votingProcedure),
     },

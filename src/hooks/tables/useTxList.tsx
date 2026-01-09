@@ -120,7 +120,7 @@ export const useTxList = ({
 
         return item?.block?.time;
       },
-      title: t("transactions.table.date"),
+      title: t("common:labels.date"),
       visible: columnsVisibility.date,
       widthPx: 60,
     },
@@ -134,7 +134,7 @@ export const useTxList = ({
 
         return item?.hash;
       },
-      title: t("transactions.table.hash"),
+      title: t("common:labels.hash"),
       visible: columnsVisibility.hash,
       widthPx: 80,
     },
@@ -151,7 +151,7 @@ export const useTxList = ({
         formatNumber(item?.block?.epoch_no ?? 0) +
         " / " +
         formatNumber(item?.block?.no ?? 0),
-      title: <p className='w-full text-right'>{t("transactions.table.epochBlock")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.epochBlock")}</p>,
       visible: columnsVisibility.block,
       widthPx: 65,
     },
@@ -162,7 +162,7 @@ export const useTxList = ({
           <AdaWithTooltip data={item?.out_sum ?? 0} />
         </span>
       ),
-      title: <p className='w-full text-right'>{t("transactions.table.totalOutput")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.totalOutput")}</p>,
       visible: columnsVisibility.total_output,
       widthPx: 75,
     },
@@ -184,7 +184,7 @@ export const useTxList = ({
           <AdaWithTooltip data={item?.fee ?? 0} />
         </span>
       ),
-      title: <p className='w-full text-right'>{t("transactions.table.fee")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.fee")}</p>,
       visible: columnsVisibility.fee,
       widthPx: 75,
     },
@@ -210,7 +210,7 @@ export const useTxList = ({
           "%"
         );
       },
-      title: <p className='w-full text-right'>{t("transactions.table.size")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.size")}</p>,
       visible: columnsVisibility.size,
       widthPx: 55,
     },

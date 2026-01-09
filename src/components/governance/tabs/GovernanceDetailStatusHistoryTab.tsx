@@ -8,6 +8,7 @@ import {
   DateCell,
 } from "@vellumlabs/cexplorer-sdk";
 import { ExternalLink } from "lucide-react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface GovernanceDetailStatusHistoryTabProps {
   query: any;
@@ -27,29 +28,30 @@ interface StatusHistoryRow {
   txHash?: string;
 }
 
-const getDescription = (status: string) => {
-  switch (status) {
-    case "submitted":
-      return "Governance action submitted to the blockchain.";
-    case "active":
-      return "Voting period has started. Governance bodies can now vote.";
-    case "ratified":
-      return "Proposal passed the vote check at the epoch boundary. It will be enacted in the next epoch.";
-    case "enacted":
-      return "Proposal's changes applied on-chain at the epoch boundary.";
-    case "expired":
-      return "Voting period has ended without reaching the required threshold.";
-    case "dropped":
-      return "Proposal withdrawn before the vote check.";
-    default:
-      return "";
-  }
-};
-
 export const GovernanceDetailStatusHistoryTab: FC<
   GovernanceDetailStatusHistoryTabProps
 > = ({ query }) => {
+  const { t } = useAppTranslation();
   const data = query?.data?.data;
+
+  const getDescription = (status: string) => {
+    switch (status) {
+      case "submitted":
+        return t("governance.statusHistory.submitted");
+      case "active":
+        return t("governance.statusHistory.active");
+      case "ratified":
+        return t("governance.statusHistory.ratified");
+      case "enacted":
+        return t("governance.statusHistory.enacted");
+      case "expired":
+        return t("governance.statusHistory.expired");
+      case "dropped":
+        return t("governance.statusHistory.dropped");
+      default:
+        return "";
+    }
+  };
 
   const statusHistory = useMemo(() => {
     if (!data) return [];
@@ -94,7 +96,7 @@ export const GovernanceDetailStatusHistoryTab: FC<
       render: (item: StatusHistoryRow) => {
         return <DateCell time={item.timestamp} />;
       },
-      title: "Timestamp",
+      title: t("governance.statusHistory.timestamp"),
       visible: true,
       widthPx: 120,
     },
@@ -103,7 +105,7 @@ export const GovernanceDetailStatusHistoryTab: FC<
       render: (item: StatusHistoryRow) => (
         <EpochCell no={item.epoch ?? undefined} justify='start' />
       ),
-      title: "Epoch",
+      title: t("governance.statusHistory.epoch"),
       visible: true,
       widthPx: 90,
     },
@@ -171,7 +173,7 @@ export const GovernanceDetailStatusHistoryTab: FC<
           />
         );
       },
-      title: "Status change",
+      title: t("governance.statusHistory.statusChange"),
       visible: true,
       widthPx: 120,
     },
@@ -180,7 +182,7 @@ export const GovernanceDetailStatusHistoryTab: FC<
       render: (item: StatusHistoryRow) => {
         return <span className='text-grayTextPrimary'>{item.description}</span>;
       },
-      title: "Description",
+      title: t("governance.statusHistory.description"),
       visible: true,
       widthPx: 300,
     },
@@ -200,7 +202,7 @@ export const GovernanceDetailStatusHistoryTab: FC<
         }
         return <p className='text-right'>-</p>;
       },
-      title: <p className='w-full text-right'>Tx</p>,
+      title: <p className='w-full text-right'>{t("governance.statusHistory.tx")}</p>,
       visible: true,
       widthPx: 90,
     },

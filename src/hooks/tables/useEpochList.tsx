@@ -125,7 +125,7 @@ export const useEpochList = ({
 
         return item.start_time;
       },
-      title: t("epochs.table.startTime"),
+      title: t("common:labels.startTime"),
       visible: columnsVisibility.start_time,
       widthPx: 90,
     },
@@ -179,7 +179,7 @@ export const useEpochList = ({
 
         return item.end_time;
       },
-      title: t("epochs.table.endTime"),
+      title: t("common:labels.endTime"),
       visible: columnsVisibility.end_time,
       widthPx: 90,
     },
@@ -196,7 +196,7 @@ export const useEpochList = ({
           />
         );
       },
-      title: <p>{t("epochs.table.epoch")}</p>,
+      title: <p>{t("common:labels.epoch")}</p>,
       visible: columnsVisibility.epoch,
       widthPx: 50,
     },
@@ -210,7 +210,7 @@ export const useEpochList = ({
           {formatNumber(item?.stats?.epoch?.block_count ?? item?.blk_count)}
         </p>
       ),
-      title: <p className='w-full text-right'>{t("epochs.table.blocks")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.blocks")}</p>,
       visible: columnsVisibility.blocks,
       widthPx: 50,
     },
@@ -221,7 +221,7 @@ export const useEpochList = ({
           {formatNumber(item?.tx_count)}
         </p>
       ),
-      title: <p className='w-full text-right'>{t("epochs.table.transactions")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.transactions")}</p>,
       visible: columnsVisibility.txs,
       widthPx: 50,
     },
@@ -232,7 +232,7 @@ export const useEpochList = ({
           <AdaWithTooltip data={item?.out_sum} />
         </p>
       ),
-      title: <p className='w-full text-right'>{t("epochs.table.output")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.output")}</p>,
       visible: columnsVisibility.output,
       widthPx: 55,
     },
@@ -264,7 +264,7 @@ export const useEpochList = ({
 
         return `${fees}, ${feesperTx} per TX`;
       },
-      title: t("epochs.table.fees"),
+      title: t("common:labels.fees"),
       visible: columnsVisibility.fees,
       widthPx: 50,
     },
@@ -281,7 +281,7 @@ export const useEpochList = ({
           return (
             <div className='flex justify-end'>
               <Badge color='yellow' className='ml-auto'>
-                {t("epochs.table.pending")}
+                {t("common:labels.pending")}
               </Badge>
             </div>
           );
@@ -307,7 +307,7 @@ export const useEpochList = ({
           </div>
         );
       },
-      title: <p className='w-full text-right'>{t("epochs.table.rewards")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.rewards")}</p>,
       visible: columnsVisibility.rewards,
       widthPx: 50,
     },
@@ -324,7 +324,7 @@ export const useEpochList = ({
           </p>
         );
       },
-      title: <p className='w-full text-right'>{t("epochs.table.stake")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.stake")}</p>,
       visible: columnsVisibility.stake,
       widthPx: 50,
     },

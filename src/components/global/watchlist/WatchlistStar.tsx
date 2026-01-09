@@ -7,6 +7,7 @@ import { Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Modal } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   ident: string | undefined;
@@ -30,6 +31,7 @@ export const WatchlistStar = ({
   const [showConnectModal, setShowConnectModal] = useState(false);
   const [showOptionsModal, setShowOptionsModal] = useState(false);
   const [isStakeKeyInWatchlist, setIsStakeKeyInWatchlist] = useState(false);
+  const { t } = useAppTranslation();
 
   useEffect(() => {
     setIsLiked(!!watchlist?.some(item => item.ident === ident));
@@ -168,21 +170,21 @@ export const WatchlistStar = ({
       {showRemoveModal && (
         <Modal onClose={() => setShowRemoveModal(false)}>
           <p className='mt-4 text-text-sm'>
-            Do you wish to remove this item from your watchlist?
+            {t("global.watchlist.removeFromWatchlist")}
           </p>
           <div className='mt-3 flex w-full justify-between'>
             <Button
               onClick={() => setShowRemoveModal(false)}
               className='mr-1'
               variant='secondary'
-              label='Cancel'
+              label={t("actions.cancel")}
               size='md'
             />
             <Button
               onClick={handleUnlike}
               className='mr-1'
               variant='primary'
-              label='Remove'
+              label={t("global.watchlist.remove")}
               size='md'
             />
           </div>
@@ -192,12 +194,12 @@ export const WatchlistStar = ({
         <Modal onClose={() => setShowOptionsModal(false)}>
           <div className='text-center'>
             <h3 className='mb-2 text-text-lg font-semibold'>
-              {isStakeKeyInWatchlist ? "Manage Watchlist" : "Add to Watchlist"}
+              {isStakeKeyInWatchlist ? t("global.watchlist.manageWatchlist") : t("global.watchlist.addToWatchlist")}
             </h3>
             <p className='mb-3 text-text-sm text-grayTextPrimary'>
               {isStakeKeyInWatchlist
-                ? "Choose an action for your watchlist:"
-                : "Choose what to add to your watchlist:"}
+                ? t("global.watchlist.chooseAction")
+                : t("global.watchlist.chooseWhatToAdd")}
             </p>
             <div className='flex w-full flex-col items-center gap-1.5'>
               <Button
@@ -205,7 +207,7 @@ export const WatchlistStar = ({
                   isStakeKeyInWatchlist ? handleAddAddress : handleAddStakeKey
                 }
                 variant='primary'
-                label={isStakeKeyInWatchlist ? "Add Address" : "Add Stake Key"}
+                label={isStakeKeyInWatchlist ? t("global.watchlist.addAddress") : t("global.watchlist.addStakeKey")}
                 size='lg'
                 className='w-full'
               />
@@ -217,7 +219,7 @@ export const WatchlistStar = ({
                 }
                 variant='secondary'
                 label={
-                  isStakeKeyInWatchlist ? "Remove Stake Key" : "Add Address"
+                  isStakeKeyInWatchlist ? t("global.watchlist.removeStakeKey") : t("global.watchlist.addAddress")
                 }
                 size='md'
                 className='w-full'

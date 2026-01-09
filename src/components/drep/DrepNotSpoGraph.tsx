@@ -17,8 +17,11 @@ import { Switch } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { Info } from "lucide-react";
 import { useADADisplay } from "@/hooks/useADADisplay";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const DrepNotSpoGraph: FC = () => {
+  const { t } = useAppTranslation("pages");
+
   const [showFiltered, setShowFiltered] = useState(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("drep_not_spo_show_filtered");
@@ -48,12 +51,36 @@ export const DrepNotSpoGraph: FC = () => {
   const stake = data.map(d => (showFiltered ? d.total.stake : d.stake));
   const delegators = data.map(d => d.delegator);
 
+  // Keys for series (used for matching in tooltip)
+  const KEYS = {
+    drepCount: "drepCount",
+    stake: "stake",
+    delegators: "delegators",
+  };
+
+  const legendLabels = {
+    [KEYS.drepCount]: t("dreps.graphs.drepsNotSpo.drepCount"),
+    [KEYS.stake]: t("dreps.graphs.drepsNotSpo.stake"),
+    [KEYS.delegators]: t("dreps.graphs.drepsNotSpo.delegators"),
+  };
+
+  const tooltipLabels = {
+    [KEYS.drepCount]: t("dreps.graphs.drepsNotSpo.drepCount"),
+    [KEYS.stake]: t("dreps.graphs.drepsNotSpo.stakeShort"),
+    [KEYS.delegators]: t("dreps.graphs.drepsNotSpo.delegators"),
+  };
+
   const groupRef = useRef<HTMLDivElement>(null);
 
   const option = {
     legend: {
       type: "scroll",
-      data: ["DRep Count", "Stake (₳)", "Delegators"],
+      data: [
+        { name: KEYS.drepCount, icon: "circle" },
+        { name: KEYS.stake, icon: "circle" },
+        { name: KEYS.delegators, icon: "circle" },
+      ],
+      formatter: (name: string) => legendLabels[name] || name,
       textStyle: { color: textColor },
       pageIconColor: textColor,
       pageIconInactiveColor: inactivePageIconColor,
@@ -72,18 +99,15 @@ export const DrepNotSpoGraph: FC = () => {
         );
 
         return (
-          `Date: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (Epoch: ${params[0]?.axisValue})<hr>` +
+          `${t("dreps.graphs.date")} ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${t("dreps.graphs.epoch")} ${params[0]?.axisValue})<hr>` +
           params
             .map(item => {
-              const seriesName =
-                item.seriesName === "Stake (₳)" ? "Stake" : item.seriesName;
-
               const value =
-                item.seriesName === "Stake (₳)"
+                item.seriesName === KEYS.stake
                   ? formatLovelace(item.data)
                   : formatNumber(item.data);
 
-              return `<p>${item.marker} ${seriesName}: ${value}</p>`;
+              return `<p>${item.marker} ${tooltipLabels[item.seriesName]}: ${value}</p>`;
             })
             .join("")
         );
@@ -98,7 +122,7 @@ export const DrepNotSpoGraph: FC = () => {
     xAxis: {
       type: "category",
       data: epochs,
-      name: "Epoch",
+      name: t("common:labels.epoch"),
       nameLocation: "middle",
       nameGap: 28,
       boundaryGap: false,
@@ -125,7 +149,7 @@ export const DrepNotSpoGraph: FC = () => {
     series: [
       {
         type: "line",
-        name: "DRep Count",
+        name: KEYS.drepCount,
         data: count,
         yAxisIndex: 0,
         symbol: "none",
@@ -135,7 +159,7 @@ export const DrepNotSpoGraph: FC = () => {
       },
       {
         type: "line",
-        name: "Stake (₳)",
+        name: KEYS.stake,
         data: stake,
         yAxisIndex: 1,
         symbol: "none",
@@ -145,7 +169,7 @@ export const DrepNotSpoGraph: FC = () => {
       },
       {
         type: "line",
-        name: "Delegators",
+        name: KEYS.delegators,
         data: delegators,
         yAxisIndex: 0,
         symbol: "none",
@@ -158,8 +182,8 @@ export const DrepNotSpoGraph: FC = () => {
 
   return (
     <AnalyticsGraph
-      title='DReps that are not SPOs'
-      description='Epoch-level view of stake, DRep count, and delegator count delegated to DReps who are not SPOs'
+      title={t("dreps.graphs.drepsNotSpo.title")}
+      description={t("dreps.graphs.drepsNotSpo.description")}
       className='border-none'
       actions={
         <div
@@ -171,10 +195,10 @@ export const DrepNotSpoGraph: FC = () => {
             htmlFor='filter-toggle'
             className='text-muted-foreground text-text-sm'
           >
-            Show Filtered
+            {t("dreps.graphs.drepsNotSpo.showFiltered")}
           </label>
           <Tooltip
-            content="Excludes 'Abstain' and 'No Confidence' DReps from Count and Stake."
+            content={t("dreps.graphs.drepsNotSpo.filterTooltip")}
             widthRef={groupRef}
           >
             <Info
