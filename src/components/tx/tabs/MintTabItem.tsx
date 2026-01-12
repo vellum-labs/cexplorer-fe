@@ -9,8 +9,10 @@ import { Link, getRouteApi } from "@tanstack/react-router";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { DateCell, getNodeText } from "@vellumlabs/cexplorer-sdk";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const MintTabItem = () => {
+  const { t } = useAppTranslation("common");
   const route = getRouteApi("/tx/$hash");
   const { hash } = route.useParams();
   const query = useFetchTxDetail(hash);
@@ -32,14 +34,14 @@ const MintTabItem = () => {
           <DateCell time={query.data?.data.block.time || ""} />
         </p>
       ),
-      title: "Date",
+      title: t("tx.columns.date"),
       visible: true,
       widthPx: 45,
     },
     {
       key: "asset",
       render: item => <AssetCell asset={item} />,
-      title: "Asset",
+      title: t("tx.columns.asset"),
       visible: true,
       widthPx: 80,
     },
@@ -61,7 +63,7 @@ const MintTabItem = () => {
           </div>
         );
       },
-      title: "Policy ID",
+      title: t("tx.columns.policyId"),
       visible: true,
       widthPx: 80,
     },
@@ -79,7 +81,7 @@ const MintTabItem = () => {
           <Copy copyText={query.data?.data.hash || ""} />
         </div>
       ),
-      title: "Tx Hash",
+      title: t("tx.columns.txHash"),
       visible: true,
       widthPx: 80,
     },
@@ -102,14 +104,14 @@ const MintTabItem = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>Quantity</p>,
+      title: <p className='w-full text-right'>{t("tx.columns.quantity")}</p>,
       visible: true,
       widthPx: 40,
     },
   ];
 
   if (!query.data?.data.mints && !query.isLoading) {
-    return <div className='text-center text-text-sm'>No mints found</div>;
+    return <div className='text-center text-text-sm'>{t("tx.noMintsFound")}</div>;
   }
 
   return (

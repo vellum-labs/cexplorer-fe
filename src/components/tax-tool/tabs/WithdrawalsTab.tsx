@@ -2,6 +2,7 @@ import type { FC } from "react";
 import { useMemo, useState } from "react";
 import { useFetchWithdrawalsPaginated } from "@/services/account";
 import { isValidAddress } from "@/utils/address/isValidAddress";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import {
   Select,
   SelectContent,
@@ -21,6 +22,7 @@ interface WithdrawalsTabProps {
 }
 
 export const WithdrawalsTab: FC<WithdrawalsTabProps> = ({ stakeKey }) => {
+  const { t } = useAppTranslation("common");
   const { secondaryCurrency, setSecondaryCurrency } =
     useTaxToolPreferencesStore();
   const { rows: storedRows, setRows: setStoredRows } =
@@ -52,7 +54,7 @@ export const WithdrawalsTab: FC<WithdrawalsTabProps> = ({ stakeKey }) => {
     <div className='flex w-full flex-col gap-3 pt-3'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-2'>
-          <span className='text-text-sm font-medium'>Secondary currency:</span>
+          <span className='text-text-sm font-medium'>{t("taxTool.secondaryCurrency")}</span>
           <Select
             value={secondaryCurrency}
             onValueChange={value => setSecondaryCurrency(value as Currencies)}

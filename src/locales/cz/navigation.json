@@ -154,6 +154,17 @@
     "startBuilding": "Začít tvořit",
     "getCexplorer": "Získat Cexplorer.io",
     "pro": "PRO",
-    "getPro": "Získat PRO"
+    "getPro": "Získat PRO",
+    "navigationMenu": "Navigační menu",
+    "navigationMenuDescription": "Přístup k možnostem navigace, nastavení a funkcím účtu",
+    "stakingCertificates": "Stakingové certifikáty",
+    "governanceCertificates": "Certifikáty správy",
+    "settings": "Nastavení"
+  },
+  "settings": {
+    "theme": "Motiv",
+    "language": "Jazyk",
+    "currency": "Měna",
+    "infiniteScrolling": "Nekonečné rolování"
   }
 }

@@ -10,6 +10,7 @@ import { SettingsMobileItemTheme } from "./SettingsMobileItemTheme";
 import { SettingsMobileItemLanguage } from "./SettingsMobileItemLanguage";
 import { SettingsMobileItemCurrency } from "./SettingsMobileItemCurrency";
 import { SettingsMobileItemScrolling } from "./SettingsMobileItemScrolling";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface SettingsMobileItemsProps {
   onBack?: () => void;
@@ -18,6 +19,7 @@ interface SettingsMobileItemsProps {
 export const SettingsMobileItems: FC<SettingsMobileItemsProps> = ({
   onBack,
 }) => {
+  const { t } = useAppTranslation("navigation");
   const { toggleTheme } = useThemeStore();
   const { toggleInfiniteScrolling } = useInfiniteScrollingStore();
 
@@ -50,7 +52,7 @@ export const SettingsMobileItems: FC<SettingsMobileItemsProps> = ({
         className='flex h-[34px] -translate-x-1 items-center gap-1 font-medium'
       >
         <ChevronLeft size={20} className='font-regular' />
-        <span>Settings</span>
+        <span>{t("navbar.settings")}</span>
       </button>
       <div className='h-full w-full py-1'>
         {(settingsMobileItems || []).map(({ component, onClick }, i) => (

@@ -12,13 +12,15 @@ import {
 import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 
 import { currencies } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const SettingsMobileItemCurrency: FC = () => {
+  const { t } = useAppTranslation("navigation");
   const { currency, setCurrency } = useCurrencyStore();
 
   return (
     <>
-      <span>Currency</span>
+      <span>{t("settings.currency")}</span>
       <Select
         defaultValue={currency}
         onValueChange={(value: Currencies) => {

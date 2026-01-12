@@ -68,7 +68,7 @@ export const PolicyDetailTopWallets: FC<PolicyDetailTopWalletsProps> = ({
 
         return <AddressCell address={item.address} />;
       },
-      title: "Address",
+      title: t("policy.address"),
       visible: columnsVisibility.address,
       widthPx: 60,
     },
@@ -85,13 +85,13 @@ export const PolicyDetailTopWallets: FC<PolicyDetailTopWalletsProps> = ({
           </p>
         );
       },
-      title: <p className='w-full text-right'>Quantity</p>,
+      title: <p className='w-full text-right'>{t("policy.quantity")}</p>,
       visible: columnsVisibility.quantity,
       widthPx: 15,
     },
     {
       key: "share",
-      title: <p className='w-full text-right'>Share</p>,
+      title: <p className='w-full text-right'>{t("policy.share")}</p>,
       render: item => (
         <p className='w-full text-right'>
           {((item.total_quantity / mintc) * 100).toFixed(2)}%
@@ -116,7 +116,7 @@ export const PolicyDetailTopWallets: FC<PolicyDetailTopWalletsProps> = ({
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : totalItems > 0 ? (
             <h3 className='basis-[230px] text-nowrap'>
-              Total of {formatNumber(totalItems)} owners
+              {t("policy.totalOwners", { count: formatNumber(totalItems) })}
             </h3>
           ) : (
             ""

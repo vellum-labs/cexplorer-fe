@@ -12,8 +12,10 @@ import { HomepageCardanoPrice } from "./stats/HomepageCardanoPrice";
 import { colors } from "@/constants/colors";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const HomepageOverview: FC = () => {
+  const { t } = useAppTranslation("common");
   const { data: basicData } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(basicData?.data.version.const);
 
@@ -21,14 +23,18 @@ export const HomepageOverview: FC = () => {
     {
       key: "cardano_price",
       icon: <Cardano color={colors.primary} size={25} />,
-      label: <span className='text-text-sm font-semibold'>Cardano price</span>,
+      label: (
+        <span className='text-text-sm font-semibold'>
+          {t("homepage.cardanoPrice")}
+        </span>
+      ),
       content: <HomepageCardanoPrice miscConst={miscConst} />,
       footer: (
         <div className='flex h-[40px] items-center justify-end border-t border-border px-3'>
           <Link to='/ada-price'>
             <div className='flex items-center gap-1/2'>
               <span className='text-text-sm font-semibold text-primary'>
-                Price graph
+                {t("homepage.priceGraph")}
               </span>
               <ArrowRight size={15} className='text-primary' />
             </div>
@@ -41,7 +47,7 @@ export const HomepageOverview: FC = () => {
       icon: <Box className='text-primary' />,
       label: (
         <span className='text-text-sm font-semibold'>
-          Epoch{" "}
+          {t("homepage.epoch")}{" "}
           <Link
             to='/epoch/$no'
             params={{ no: String(miscConst?.no ?? 0) }}
@@ -57,7 +63,7 @@ export const HomepageOverview: FC = () => {
           <Link to='/epoch'>
             <div className='flex items-center gap-1/2'>
               <span className='text-text-sm font-semibold text-primary'>
-                Epoch list
+                {t("homepage.epochList")}
               </span>
               <ArrowRight size={15} className='text-primary' />
             </div>
@@ -68,14 +74,18 @@ export const HomepageOverview: FC = () => {
     {
       key: "live_stake",
       icon: <Coins className='text-primary' />,
-      label: <span className='text-text-sm font-semibold'>Live stake</span>,
+      label: (
+        <span className='text-text-sm font-semibold'>
+          {t("homepage.liveStake")}
+        </span>
+      ),
       content: <HomepageCardanoLiveStake miscConst={miscConst} />,
       footer: (
         <div className='flex h-[40px] items-center justify-end border-t border-border px-3'>
           <Link to='/analytics/pool'>
             <div className='flex items-center gap-1/2'>
               <span className='text-text-sm font-semibold text-primary'>
-                Staking analytics
+                {t("homepage.stakingAnalytics")}
               </span>
               <ArrowRight size={15} className='text-primary' />
             </div>

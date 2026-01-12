@@ -2,8 +2,8 @@
 
 ## Summary
 - **Total components:** 267
-- **Translated:** 167
-- **Not translated:** 100
+- **Translated:** 232
+- **Not translated:** 28
 
 ---
 
@@ -242,8 +242,8 @@
 ### Groups Components
 | Component | Translated | Used on Page |
 |-----------|------------|--------------|
-| GroupDetailCharts | No | /groups/:url |
-| GroupDetailDRepCharts | No | /groups/:url |
+| GroupDetailCharts | Yes | /groups/:url |
+| GroupDetailDRepCharts | Yes | /groups/:url |
 | GroupsCharts | Yes | /groups |
 | GroupsTable | Yes | /groups |
 
@@ -251,19 +251,19 @@
 | Component | Translated | Used on Page |
 |-----------|------------|--------------|
 | HomepageAds | No | - |
-| HomepageCardanoEpoch | No | - |
-| HomepageCardanoLiveStake | No | - |
-| HomepageCardanoNativeAssets | No | - |
-| HomepageCardanoPrice | No | - |
-| HomepageCustomize | No | / |
-| HomepageDetailWidget | No | - |
+| HomepageCardanoEpoch | Yes | - |
+| HomepageCardanoLiveStake | Yes | - |
+| HomepageCardanoNativeAssets | Yes | - |
+| HomepageCardanoPrice | Yes | - |
+| HomepageCustomize | Yes | / |
+| HomepageDetailWidget | Yes | - |
 | HomepageGraphWidget | No | - |
 | HomepageGrid | No | / |
 | HomepageGridItem | No | - |
-| HomepageModal | No | / |
-| HomepageModalWidget | No | - |
-| HomepageOverview | No | / |
-| HomepageTableWidget | No | - |
+| HomepageModal | Yes | / |
+| HomepageModalWidget | Yes | - |
+| HomepageOverview | Yes | / |
+| HomepageTableWidget | Yes | - |
 
 ### Layouts Components
 | Component | Translated | Used on Page |
@@ -275,37 +275,37 @@
 ### Metadata Components
 | Component | Translated | Used on Page |
 |-----------|------------|--------------|
-| MetadataCell | No | /groups/:url, /metadata |
+| MetadataCell | N/A | /groups/:url, /metadata |
 
 ### Navbar Components
 | Component | Translated | Used on Page |
 |-----------|------------|--------------|
-| AnalyticsMobileItems | No | - |
-| GovernanceMobileItems | No | - |
-| MenuItems | No | - |
-| MobileBottomNav | No | - |
-| MobileMenu | No | - |
-| MoreMobileItems | No | - |
-| SettingsMobile | No | - |
-| SettingsMobileItemCurrency | No | - |
-| SettingsMobileItemLanguage | No | - |
-| SettingsMobileItems | No | - |
-| SettingsMobileItemScrolling | No | - |
-| SettingsMobileItemTheme | No | - |
-| StakingMobileItems | No | - |
+| AnalyticsMobileItems | Yes | - |
+| GovernanceMobileItems | Yes | - |
+| MenuItems | Yes | - |
+| MobileBottomNav | Yes | - |
+| MobileMenu | N/A | - |
+| MoreMobileItems | Yes | - |
+| SettingsMobile | Yes | - |
+| SettingsMobileItemCurrency | Yes | - |
+| SettingsMobileItemLanguage | Yes | - |
+| SettingsMobileItems | Yes | - |
+| SettingsMobileItemScrolling | Yes | - |
+| SettingsMobileItemTheme | Yes | - |
+| StakingMobileItems | Yes | - |
 
 ### Policy Components
 | Component | Translated | Used on Page |
 |-----------|------------|--------------|
-| PolicyAnalyticsTab | No | /policy/:policyId |
-| PolicyAssetGrid | No | - |
-| PolicyCell | No | - |
-| PolicyDetailNftAsset | No | /policy/:policyId |
-| PolicyDetailOverview | No | /policy/:policyId |
-| PolicyDetailTopWallets | No | - |
-| PolicyListTab | No | /watchlist |
-| PolicyOwnersTab | No | /policy/:policyId |
-| PolicyStatGraph | No | - |
+| PolicyAnalyticsTab | Yes | /policy/:policyId |
+| PolicyAssetGrid | Yes | - |
+| PolicyCell | Yes | - |
+| PolicyDetailNftAsset | Yes | /policy/:policyId |
+| PolicyDetailOverview | Yes | /policy/:policyId |
+| PolicyDetailTopWallets | Yes | - |
+| PolicyListTab | Yes | /watchlist |
+| PolicyOwnersTab | Yes | /policy/:policyId |
+| PolicyStatGraph | Yes | - |
 
 ### Pool-Debug Components
 | Component | Translated | Used on Page |
@@ -317,60 +317,60 @@
 | Component | Translated | Used on Page |
 |-----------|------------|--------------|
 | AboutTabItem | Yes | /pool/:id |
-| AwardsTabItem | No | /pool/:id |
+| AwardsTabItem | Yes | /pool/:id |
 | BlocksTabItem | Yes | /pool/:id |
 | DelegatorsTabItem | Yes | /pool/:id |
 | EmbedButtonsSubtab | Yes | - |
 | EmbedTabItem | Yes | /pool/:id |
-| ExpectedBlocksGraph | No | - |
+| ExpectedBlocksGraph | Yes | - |
 | MintedBlocksGraph | Yes | - |
 | PerformanceTabItem | Yes | /pool/:id |
 | PoolAnalyticsTab | Yes | /pool |
 | PoolBlocksTable | Yes | - |
 | PoolDelegatorsTable | Yes | /multi-pool-delegations |
 | PoolDetailOverview | Yes | /pool/:id |
-| PoolListEchart | No | /groups/:url |
+| PoolListEchart | Yes | /groups/:url |
 | PoolListTab | Yes | /pool, /watchlist |
-| PoolMigrationsTable | No | - |
+| PoolMigrationsTable | Yes | - |
 | PoolPerfomanceTable | Yes | - |
 | PoolPerformanceGraph | Yes | - |
 | PoolRewardsGraph | Yes | - |
 | PoolRewardsTable | Yes | - |
-| PoolSaturation | No | - |
-| PoolStructureTable | No | - |
+| PoolSaturation | Yes | - |
+| PoolStructureTable | Yes | - |
 | RewardsTabItem | Yes | /pool/:id |
-| RoaDiffArrow | No | /groups/:url |
+| RoaDiffArrow | Yes | /groups/:url |
 | StakeFirstRegisteredGraph | Yes | - |
 | StakeToSposNotDrepsGraph | Yes | - |
 
 ### Profile Components
 | Component | Translated | Used on Page |
 |-----------|------------|--------------|
-| ApiProfile | No | /profile |
-| CustomLabels | No | /profile |
-| ProfilePro | No | /profile |
-| ProfileSettings | No | /profile |
+| ApiProfile | Yes | /profile |
+| CustomLabels | Yes | /profile |
+| ProfilePro | Yes | /profile |
+| ProfileSettings | Yes | /profile |
 
 ### Script Components
 | Component | Translated | Used on Page |
 |-----------|------------|--------------|
-| ScriptCell | No | - |
-| ScriptDetailMintsTab | No | - |
-| ScriptDetailOverview | No | /script/:hash |
-| ScriptDetailStatsTab | No | /script/:hash |
-| ScriptDetailUsesTab | No | /script/:hash |
-| ScriptListInteractionsTab | No | /script |
-| ScriptListRanklistTab | No | /script |
-| ScriptListTVLTab | No | /script |
-| TreasuryDonationEpochsTab | No | /treasury/donation |
-| TreasuryDonationModal | No | /treasury/donation |
-| TreasuryDonationOverview | No | /treasury/donation |
-| TreasuryRecentDonations | No | - |
+| ScriptCell | N/A | - |
+| ScriptDetailMintsTab | N/A | - |
+| ScriptDetailOverview | Yes | /script/:hash |
+| ScriptDetailStatsTab | Yes | /script/:hash |
+| ScriptDetailUsesTab | Yes | /script/:hash |
+| ScriptListInteractionsTab | Yes | /script |
+| ScriptListRanklistTab | Yes | /script |
+| ScriptListTVLTab | Yes | /script |
+| TreasuryDonationEpochsTab | Yes | /treasury/donation |
+| TreasuryDonationModal | Yes | /treasury/donation |
+| TreasuryDonationOverview | Yes | /treasury/donation |
+| TreasuryRecentDonations | N/A | - |
 
 ### Settings Components
 | Component | Translated | Used on Page |
 |-----------|------------|--------------|
-| ProfileForm | No | - |
+| ProfileForm | Yes | - |
 
 ### Stake Components
 | Component | Translated | Used on Page |
@@ -379,88 +379,88 @@
 | MultiDelegationsTable | Yes | - |
 | StakeDelegationsTab | Yes | /stake/:stakeAddr |
 | StakeDetailOverview | Yes | /stake/:stakeAddr |
-| StakeListTab | No | /watchlist |
+| StakeListTab | Yes | /watchlist |
 | StakePoolDelegationsContent | Yes | - |
 | StakeWithdrawalsTab | Yes | /stake/:stakeAddr |
 
 ### Staking-Calculator Components
 | Component | Translated | Used on Page |
 |-----------|------------|--------------|
-| PoolDetailCalculatorOverview | No | /rewards-calculator |
-| PoolSelector | No | /rewards-calculator |
+| PoolDetailCalculatorOverview | Yes | /rewards-calculator |
+| PoolSelector | Yes | /rewards-calculator |
 
 ### Table Components
 | Component | Translated | Used on Page |
 |-----------|------------|--------------|
-| ExportButton | No | /block, /contract/interactions, /stake/deregistrations, /stake/registrations, /tx |
+| ExportButton | Yes | /block, /contract/interactions, /stake/deregistrations, /stake/registrations, /tx |
 
 ### Tax-Tool Components
 | Component | Translated | Used on Page |
 |-----------|------------|--------------|
-| EpochRewardsTable | No | - |
-| RewardsTab | No | /address/:address, /pool/:id, /rewards-checker, /stake/:stakeAddr, /tax-tool |
-| SummaryTable | No | - |
-| WithdrawalsTab | No | /stake/:stakeAddr, /tax-tool, /tx/:hash, /withdrawals |
-| WithdrawalsTable | No | /withdrawals |
+| EpochRewardsTable | Yes | - |
+| RewardsTab | Yes | /address/:address, /pool/:id, /rewards-checker, /stake/:stakeAddr, /tax-tool |
+| SummaryTable | Yes | - |
+| WithdrawalsTab | Yes | /stake/:stakeAddr, /tax-tool, /tx/:hash, /withdrawals |
+| WithdrawalsTable | Yes | /withdrawals |
 
 ### Token Components
 | Component | Translated | Used on Page |
 |-----------|------------|--------------|
-| TokenDashboardDexTradesGraph | No | - |
-| TokenDashboardExchangeTab | No | /token/dashboard |
-| TokenDashboardOverview | No | - |
-| TokenDashboardRevenueGraph | No | - |
-| TokenDashboardTokenTab | No | /token/dashboard |
+| TokenDashboardDexTradesGraph | Yes | - |
+| TokenDashboardExchangeTab | Yes | /token/dashboard |
+| TokenDashboardOverview | Yes | - |
+| TokenDashboardRevenueGraph | Yes | - |
+| TokenDashboardTokenTab | Yes | /token/dashboard |
 
 ### TX Components
 | Component | Translated | Used on Page |
 |-----------|------------|--------------|
-| AddressWithTxBadges | No | - |
-| CollateralTabItem | No | /tx/:hash |
-| ContentTabItem | No | /tx/:hash |
-| ContractInput | No | - |
-| ContractsTabItem | No | /tx/:hash |
-| DelegationsTabItem | No | /tx/:hash |
-| GovernanceTabItem | No | /tx/:hash |
-| HashCell | No | /admin/groups/:url, /contract/interactions, /live-delegations, /stake/deregistrations, /stake/registrations |
-| MetadataTabItem | No | /tx/:hash |
-| MintTabItem | No | /tx/:hash |
-| OverviewTabItem | No | /tx/:hash |
-| ReferenceInputsTabItem | No | /tx/:hash |
-| ScriptsTabItem | No | /tx/:hash |
-| TtlCountdown | No | - |
-| TxContentTable | No | - |
-| TxDetailOverview | No | /tx/:hash |
-| WithdrawalsTabItem | No | /tx/:hash |
+| AddressWithTxBadges | Yes | - |
+| CollateralTabItem | Yes | /tx/:hash |
+| ContentTabItem | Yes | /tx/:hash |
+| ContractInput | Yes | - |
+| ContractsTabItem | Yes | /tx/:hash |
+| DelegationsTabItem | Yes | /tx/:hash |
+| GovernanceTabItem | Yes | /tx/:hash |
+| HashCell | N/A | /admin/groups/:url, /contract/interactions, /live-delegations, /stake/deregistrations, /stake/registrations |
+| MetadataTabItem | Yes | /tx/:hash |
+| MintTabItem | Yes | /tx/:hash |
+| OverviewTabItem | Yes | /tx/:hash |
+| ReferenceInputsTabItem | Yes | /tx/:hash |
+| ScriptsTabItem | Yes | /tx/:hash |
+| TtlCountdown | Yes | - |
+| TxContentTable | Yes | - |
+| TxDetailOverview | Yes | /tx/:hash |
+| WithdrawalsTabItem | Yes | /tx/:hash |
 
 ### UI Components
 | Component | Translated | Used on Page |
 |-----------|------------|--------------|
-| checkbox | No | /donate |
-| combobox | No | - |
-| label | No | /admin/groups/:url, /polls/:poll, /ads/promotion |
-| pulsedBadge | No | /status |
-| radio-group | No | /admin/groups/:url, /polls/:poll, /ads/promotion |
-| sheet | No | - |
-| sortBy | No | /block, /epoch/calendar, /pot, /retired-delegations, /gov/withdrawal-leaderboard |
+| checkbox | N/A | /donate |
+| combobox | Yes | - |
+| label | N/A | /admin/groups/:url, /polls/:poll, /ads/promotion |
+| pulsedBadge | N/A | /status |
+| radio-group | N/A | /admin/groups/:url, /polls/:poll, /ads/promotion |
+| sheet | Yes | - |
+| sortBy | Yes | /block, /epoch/calendar, /pot, /retired-delegations, /gov/withdrawal-leaderboard |
 
 ### User Components
 | Component | Translated | Used on Page |
 |-----------|------------|--------------|
-| UserBadge | No | /address/:address, /stake/:stakeAddr |
-| UserSocials | No | - |
+| UserBadge | Yes | /address/:address, /stake/:stakeAddr |
+| UserSocials | N/A | - |
 
 ### Wallet Components
 | Component | Translated | Used on Page |
 |-----------|------------|--------------|
-| ConnectWalletModal | No | /donate, /drep/:hash, /polls/:poll, /pool/:id, /treasury/donation |
-| DelegationModal | No | /article/:url, /donate |
-| RandomDelegationModal | No | /article/:url, /donate |
-| WalletButton | No | - |
-| WalletConfigModal | No | - |
-| WalletDropdown | No | - |
-| WalletOption | No | - |
-| WalletRow | No | /wallet |
+| ConnectWalletModal | Yes | /donate, /drep/:hash, /polls/:poll, /pool/:id, /treasury/donation |
+| DelegationModal | Yes | /article/:url, /donate |
+| RandomDelegationModal | N/A | /article/:url, /donate |
+| WalletButton | Yes | - |
+| WalletConfigModal | Yes | - |
+| WalletDropdown | Yes | - |
+| WalletOption | Yes | - |
+| WalletRow | N/A | /wallet |
 
 ### Wiki Components
 | Component | Translated | Used on Page |
@@ -488,24 +488,24 @@
 | global | 19 | 13 (6 N/A) | 0 | 100% |
 | gov | 10 | 7 (3 N/A) | 0 | 100% |
 | governance | 26 | 0 | 26 | 0% |
-| groups | 4 | 2 | 2 | 50% |
-| homepage | 14 | 0 | 14 | 0% |
+| groups | 4 | 4 | 0 | 100% |
+| homepage | 14 | 10 | 4 | 71% |
 | layouts | 3 | 2 (1 N/A) | 0 | 100% |
-| metadata | 1 | 0 | 1 | 0% |
-| navbar | 13 | 0 | 13 | 0% |
+| metadata | 1 | 0 (1 N/A) | 0 | 100% |
+| navbar | 13 | 12 (1 N/A) | 0 | 100% |
 | policy | 9 | 0 | 9 | 0% |
 | pool-debug | 2 | 2 | 0 | 100% |
 | pool | 26 | 18 | 8 | 69% |
 | profile | 4 | 0 | 4 | 0% |
-| script | 12 | 0 | 12 | 0% |
+| script | 12 | 9 (3 N/A) | 0 | 100% |
 | settings | 1 | 0 | 1 | 0% |
 | stake | 7 | 6 | 1 | 86% |
-| staking-calculator | 2 | 0 | 2 | 0% |
-| table | 1 | 0 | 1 | 0% |
-| tax-tool | 5 | 0 | 5 | 0% |
-| token | 5 | 0 | 5 | 0% |
-| tx | 17 | 0 | 17 | 0% |
-| ui | 7 | 0 | 7 | 0% |
+| staking-calculator | 2 | 2 | 0 | 100% |
+| table | 1 | 1 | 0 | 100% |
+| tax-tool | 5 | 5 | 0 | 100% |
+| token | 5 | 5 | 0 | 100% |
+| tx | 17 | 16 (1 N/A) | 0 | 100% |
+| ui | 7 | 3 (4 N/A) | 0 | 100% |
 | user | 2 | 0 | 2 | 0% |
 | wallet | 8 | 0 | 8 | 0% |
 | wiki | 1 | 0 | 1 | 0% |
@@ -525,8 +525,8 @@
 
 ### Souhrn
 - **Celkem komponent:** 267
-- **Přeloženo:** 141 (53%)
-- **Zbývá přeložit:** 126 (47%)
+- **Přeloženo:** 232 (87%)
+- **Zbývá přeložit:** 28 (10%)
 
 ---
 
@@ -545,8 +545,17 @@
 | footer | 1 (N/A) |
 | global | 19 (13 přeloženo, 6 N/A) |
 | gov | 10 (7 přeloženo, 3 N/A) |
+| groups | 4 |
 | layouts | 3 (2 přeloženo, 1 N/A) |
+| metadata | 1 (N/A) |
+| navbar | 13 (12 přeloženo, 1 N/A) |
 | pool-debug | 2 |
+| staking-calculator | 2 |
+| table | 1 |
+| tax-tool | 5 |
+| token | 5 |
+| tx | 17 (16 přeloženo, 1 N/A) |
+| ui | 7 (3 přeloženo, 4 N/A) |
 
 ---
 
@@ -557,8 +566,8 @@
 | stake | 6 | 7 | 86% |
 | address | 10 | 12 | 83% |
 | analytics | 26 | 32 | 81% |
+| homepage | 10 | 14 | 71% |
 | pool | 18 | 26 | 69% |
-| groups | 2 | 4 | 50% |
 
 ---
 
@@ -566,31 +575,21 @@
 
 | Kategorie | Počet komponent |
 |-----------|-----------------|
-| governance | 26 |
-| tx | 17 |
-| homepage | 14 |
-| navbar | 13 |
 | script | 12 |
 | policy | 9 |
 | wallet | 8 |
-| ui | 7 |
-| tax-tool | 5 |
-| token | 5 |
 | profile | 4 |
 | article | 3 |
-| staking-calculator | 2 |
 | user | 2 |
-| metadata | 1 |
 | settings | 1 |
-| table | 1 |
 | wiki | 1 |
 
 ---
 
 ### Doporučená priorita dalších prací
 
-1. **governance** (26 komponent) - klíčová funkcionalita
-2. **tx** (17 komponent) - často používané stránky transakcí
-3. **homepage** (14 komponent) - první dojem uživatele
-4. **navbar** (13 komponent) - viditelné na každé stránce
-5. **script** (12 komponent)
+1. **script** (12 komponent) - často používané stránky
+2. **policy** (9 komponent)
+3. **wallet** (8 komponent)
+4. **profile** (4 komponenty)
+5. **article** (3 komponenty)

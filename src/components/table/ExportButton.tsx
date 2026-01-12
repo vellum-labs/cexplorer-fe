@@ -4,6 +4,7 @@ import type { WalletApi } from "@/types/walletTypes";
 
 import { colors } from "@/constants/colors";
 import { Download } from "lucide-react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 import { FeatureModal } from "@vellumlabs/cexplorer-sdk";
 import { ExportTableModal } from "@vellumlabs/cexplorer-sdk";
@@ -24,6 +25,7 @@ const ExportButton: FC<ExportButtonProps> = ({
   items,
   currentPage,
 }) => {
+  const { t } = useAppTranslation("common");
   const { address, wallet } = useWalletStore();
   const userQuery = useFetchUserInfo();
   const nftCount = userQuery.data?.data?.membership.nfts;
@@ -72,7 +74,7 @@ const ExportButton: FC<ExportButtonProps> = ({
         onClick={showModals}
       >
         <Download size={20} color={colors.text} />
-        <span className='text-text-sm font-medium'>Export</span>
+        <span className='text-text-sm font-medium'>{t("actions.export")}</span>
       </div>
     </>
   );

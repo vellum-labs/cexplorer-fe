@@ -290,7 +290,7 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
         <Button
           variant='tertiary'
           size='md'
-          label='Remove filters'
+          label={t("homepage.removeFilters")}
           className='absolute left-28 top-[6px]'
           onClick={handleRemoveFilters}
         />

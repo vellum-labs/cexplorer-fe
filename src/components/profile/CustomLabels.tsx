@@ -29,8 +29,10 @@ import {
 } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import type { AddressLabel } from "@/types/commonTypes";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const CustomLabels = () => {
+  const { t } = useAppTranslation("common");
   const token = useAuthToken();
   const { data } = useFetchUserInfo();
   const proNfts = data?.data.membership.nfts || 0;
@@ -64,8 +66,8 @@ export const CustomLabels = () => {
 
   const tooltipText =
     proNfts === 0
-      ? "You can only add 10 labels with the free version of Cexplorer"
-      : "You can only add 100 labels per NFT with the PRO version of Cexplorer";
+      ? t("profile.labels.freeLimitTooltip")
+      : t("profile.labels.proLimitTooltip");
 
   const syncWithApi = async (labelsToSync: AddressLabel[]) => {
     if (token && userAddress) {
@@ -141,11 +143,11 @@ export const CustomLabels = () => {
         <div className='flex w-full max-w-desktop flex-col'>
           <EmptyState
             icon={<Wallet size={24} />}
-            primaryText='Wallet not connected.'
-            secondaryText='Connect your wallet to create and manage custom labels for addresses.'
+            primaryText={t("profile.walletNotConnected")}
+            secondaryText={t("profile.labels.connectToAccess")}
             button={
               <Button
-                label='Connect wallet'
+                label={t("profile.connectWallet")}
                 variant='primary'
                 size='md'
                 onClick={() => setShowConnectModal(true)}
@@ -160,15 +162,14 @@ export const CustomLabels = () => {
   return (
     <>
       <div className='flex w-full max-w-desktop flex-col'>
-        <h2>Custom labels</h2>
+        <h2>{t("profile.labels.title")}</h2>
         <p className='border-b border-border pb-2 text-grayTextPrimary'>
-          Easily rename any address with custom text for better tracking and
-          organization.
+          {t("profile.labels.description")}
         </p>
 
         <div className='mb-1 mt-3 flex w-full items-center justify-between gap-1 text-text-sm'>
           <span className='flex items-center gap-1/2'>
-            <ChevronsUp size={25} /> Unlock up to 5000 labels with{" "}
+            <ChevronsUp size={25} /> {t("profile.labels.unlockLabels")}{" "}
             <ProBadge get />
           </span>
           <Tooltip
@@ -176,7 +177,7 @@ export const CustomLabels = () => {
             hide={!isAddingDisabled}
           >
             <Button
-              label='Add label'
+              label={t("profile.labels.addLabel")}
               onClick={() => setIsOpen(true)}
               variant='primary'
               size='xs'
@@ -202,11 +203,10 @@ export const CustomLabels = () => {
               className={`relative top-0 z-10 ${labels.length === 0 ? "border-none" : ""}`}
             >
               <tr className={labels.length ? "border-border" : "border-none"}>
-                <TableHead>Address</TableHead>
-                <TableHead>Label</TableHead>
+                <TableHead>{t("profile.labels.address")}</TableHead>
+                <TableHead>{t("profile.labels.label")}</TableHead>
                 <TableHead className='text-right text-text-xs leading-[13px]'>
-                  {labels.length}/{proNfts === 0 ? 10 : proNfts * 100} labels
-                  created
+                  {t("profile.labels.labelsCreated", { count: labels.length, max: proNfts === 0 ? 10 : proNfts * 100 })}
                 </TableHead>
               </tr>
             </TableHeader>
@@ -259,7 +259,7 @@ export const CustomLabels = () => {
             onClick={handleFirstPage}
             disabled={currentPage === 1}
           >
-            First
+            {t("profile.labels.first")}
           </button>
           <button
             className='rounded-m border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'
@@ -269,7 +269,7 @@ export const CustomLabels = () => {
             <ChevronLeft size={15} />
           </button>
           <span>
-            Page {currentPage} of {totalPages}
+            {t("profile.labels.pageOf", { current: currentPage, total: totalPages })}
           </span>
           <button
             className='rounded-m border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'
@@ -283,7 +283,7 @@ export const CustomLabels = () => {
             onClick={handleLastPage}
             disabled={currentPage === totalPages}
           >
-            Last
+            {t("profile.labels.last")}
           </button>
         </div>
       </div>

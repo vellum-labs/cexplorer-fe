@@ -16,15 +16,16 @@ import { Lock, LucideLockOpen } from "lucide-react";
 import type { FC } from "react";
 import { useEffect, useRef, useState } from "react";
 import { AddressWithTxBadges } from "../AddressWithTxBadges";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
-const selectItems = [
+const getSelectItems = (t: (key: string) => string) => [
   {
     key: "value",
-    value: "Value",
+    value: t("tx.sortBy.value"),
   },
   {
     key: "index",
-    value: "Index",
+    value: t("tx.sortBy.index"),
   },
 ];
 
@@ -33,9 +34,11 @@ interface OverviewTabItemProps {
 }
 
 const OverviewTabItem: FC<OverviewTabItemProps> = ({ query }) => {
+  const { t } = useAppTranslation("common");
   const [uniqueInputs, setUniqueInputs] = useState<TxInfo[]>([]);
   const [uniqueOutputs, setUniqueOutputs] = useState<TxInfo[]>([]);
   const { theme } = useThemeStore();
+  const selectItems = getSelectItems(t);
   const [disabledControls, setDisabledControls] = useState(true);
   const [interacted, setInteracted] = useState(false);
   const { sort, setSort } = useTxSortStore();
@@ -276,8 +279,8 @@ const OverviewTabItem: FC<OverviewTabItemProps> = ({ query }) => {
                   <Lock size={15} />
                 )}{" "}
                 {disabledControls
-                  ? "Unlock interactivity"
-                  : "Lock interactivity"}
+                  ? t("tx.unlockInteractivity")
+                  : t("tx.lockInteractivity")}
               </button>
               <GraphWatermark className='opacity-10' />
             </ReactFlow>

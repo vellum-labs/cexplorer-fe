@@ -90,7 +90,7 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
           />
         );
       },
-      title: "Asset",
+      title: t("policy.asset"),
       visible: columnsVisibility.asset,
       widthPx: 110,
     },
@@ -106,14 +106,14 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
           enableHover
         />
       ),
-      title: "Policy ID",
+      title: t("policy.policyId"),
       visible: columnsVisibility.policy_id && !policyId,
       widthPx: 100,
     },
     {
       key: "asset_minted",
       render: item => <DateCell time={item?.stat?.asset?.last_mint ?? ""} />,
-      title: "Asset Minted",
+      title: t("policy.assetMinted"),
       visible: columnsVisibility.asset_minted,
       widthPx: 45,
     },
@@ -124,7 +124,7 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
           {formatNumber(item?.stat?.asset?.quantity) ?? "-"}
         </p>
       ),
-      title: <p className='w-full text-right'>Mint Quantity</p>,
+      title: <p className='w-full text-right'>{t("policy.mintQuantity")}</p>,
       visible: (columnsVisibility as AssetListTableColumns).mint_quantity,
       widthPx: 45,
     },
@@ -135,7 +135,7 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
           {formatNumber(item?.stat?.asset?.mintc) ?? "-"}
         </p>
       ),
-      title: <p className='w-full text-right'>Mint Count</p>,
+      title: <p className='w-full text-right'>{t("asset.mintCount")}</p>,
       visible: columnsVisibility.mint_count,
       widthPx: 50,
     },
@@ -156,7 +156,7 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
           </div>
           <div className='flex w-full gap-1 min-[500px]:w-fit'>
             <TableSearchInput
-              placeholder='Search by asset...'
+              placeholder={t("policy.searchByAsset")}
               value={tableSearch}
               onchange={setTableSearch}
               wrapperClassName='min-[500px]:w-[320px] w-full'

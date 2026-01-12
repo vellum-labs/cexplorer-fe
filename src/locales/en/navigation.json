@@ -154,6 +154,17 @@
     "startBuilding": "Start building",
     "getCexplorer": "Get Cexplorer.io",
     "pro": "PRO",
-    "getPro": "Get PRO"
+    "getPro": "Get PRO",
+    "navigationMenu": "Navigation Menu",
+    "navigationMenuDescription": "Access navigation options, settings, and account features",
+    "stakingCertificates": "Staking certificates",
+    "governanceCertificates": "Governance certificates",
+    "settings": "Settings"
+  },
+  "settings": {
+    "theme": "Theme",
+    "language": "Language",
+    "currency": "Currency",
+    "infiniteScrolling": "Infinite scrolling"
   }
 }

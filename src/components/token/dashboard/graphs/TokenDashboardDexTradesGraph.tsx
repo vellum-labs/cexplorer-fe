@@ -9,6 +9,7 @@ import { useMemo } from "react";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { useGraphColors } from "@/hooks/useGraphColors";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface TokenDashboardDexTradesGraphProps {
   data: DeFiTokenStatData[] | undefined;
@@ -17,6 +18,7 @@ interface TokenDashboardDexTradesGraphProps {
 export const TokenDashboardDexTradesGraph: FC<
   TokenDashboardDexTradesGraphProps
 > = ({ data }) => {
+  const { t } = useAppTranslation("common");
   const { theme } = useThemeStore();
   const { textColor, bgColor } = useGraphColors();
   const aggregated = useMemo(() => {
@@ -60,7 +62,7 @@ export const TokenDashboardDexTradesGraph: FC<
         color: textColor,
       },
       formatter: (params: any) => {
-        const header = "<b>Market share</b><br/><br/>";
+        const header = `<b>${t("tokenDashboard.graph.marketShare")}</b><br/><br/>`;
 
         const sortedItems = [...aggregated]
           .filter(item => (item.value / total) * 100 >= 1)

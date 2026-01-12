@@ -21,8 +21,10 @@ import ConnectWalletModal from "../wallet/ConnectWalletModal";
 import { useWalletStore } from "@/stores/walletStore";
 import { GlobalSearch } from "@vellumlabs/cexplorer-sdk";
 import { useNavigate } from "@tanstack/react-router";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const MobileBottomNav: FC = () => {
+  const { t } = useAppTranslation("navigation");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [activeMenu, setActiveMenu] = useState<MobileMenuScreen>(null);
   const [showWalletModal, setShowWalletModal] = useState(false);
@@ -115,9 +117,11 @@ export const MobileBottomNav: FC = () => {
             </button>
           </SheetTrigger>
           <SheetContent className='hide-scrollbar overflow-y-auto'>
-            <SheetTitle className='sr-only'>Navigation Menu</SheetTitle>
+            <SheetTitle className='sr-only'>
+              {t("navbar.navigationMenu")}
+            </SheetTitle>
             <SheetDescription className='sr-only'>
-              Access navigation options, settings, and account features
+              {t("navbar.navigationMenuDescription")}
             </SheetDescription>
             {activeMenu === "settings" ? (
               <SettingsMobileItems onBack={() => setActiveMenu(null)} />

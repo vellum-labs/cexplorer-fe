@@ -9,6 +9,7 @@ import { Button } from "@vellumlabs/cexplorer-sdk";
 import ConnectWalletModal from "./ConnectWalletModal";
 import WalletDropdown from "./WalletDropdown";
 import { RandomDelegationModal } from "./RandomDelegationModal";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   variant?: "short" | "long";
@@ -16,6 +17,7 @@ interface Props {
 }
 
 const WalletButton = ({ variant = "short", autoOpen = false }: Props) => {
+  const { t } = useAppTranslation("common");
   const [showWalletModal, setShowWalletModal] = useState(false);
   const [showDropdown, setShowDropdown] = useState(autoOpen);
 
@@ -137,7 +139,7 @@ const WalletButton = ({ variant = "short", autoOpen = false }: Props) => {
       )}
       {!address && !walletType ? (
         <Button
-          label={variant === "short" ? "Wallet" : "Connect Wallet"}
+          label={variant === "short" ? t("wallet.wallet") : t("wallet.connect")}
           variant='secondary'
           size='md'
           leftIcon={<Wallet size={20} />}

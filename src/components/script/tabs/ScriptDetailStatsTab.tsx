@@ -15,17 +15,25 @@ import ReactEcharts from "echarts-for-react";
 import { BarChart, FileBarChart, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { format } from "date-fns";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const ScriptDetailStatsTab = ({
   items,
 }: {
   items: ScriptStatItem[] | undefined;
 }) => {
+  const { t } = useAppTranslation("common");
   const { theme } = useThemeStore();
   const { formatLovelace } = useADADisplay();
   const { bgColor, lineColor, splitLineColor, textColor } = useGraphColors();
   const { data: basicData } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(basicData?.data.version.const);
+
+  const legendLabels = {
+    interactions: t("script.stats.graph.interactions"),
+    output: t("script.stats.graph.output"),
+    averageOutput: t("script.stats.graph.averageOutput"),
+  };
 
   const interactions = items?.map(item => item?.item?.data?.redeemer?.count);
   const output = items?.map(item =>
@@ -45,9 +53,9 @@ export const ScriptDetailStatsTab = ({
   const chartRef = useRef(null);
 
   const [graphsVisibility, setGraphsVisibility] = useState({
-    Interactions: true,
-    Output: true,
-    "Average Output": true,
+    [legendLabels.interactions]: true,
+    [legendLabels.output]: true,
+    [legendLabels.averageOutput]: true,
   });
 
   const onChartReadyCallback = chart => {
@@ -62,7 +70,7 @@ export const ScriptDetailStatsTab = ({
         color: theme === "dark" ? "white" : "#101828",
       },
       type: "scroll",
-      data: ["Interactions", "Output", "Average Output"],
+      data: [legendLabels.interactions, legendLabels.output, legendLabels.averageOutput],
       textStyle: { color: textColor },
       selected: Object.fromEntries(Object.entries(graphsVisibility)),
     },
@@ -83,14 +91,14 @@ export const ScriptDetailStatsTab = ({
         );
 
         return (
-          `Date: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (Epoch: ${epochNumber})<hr>` +
+          `${t("script.stats.graph.date")}: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${t("script.stats.graph.epoch")}: ${epochNumber})<hr>` +
           `<div>
             ${params
               .map(item => {
                 let formattedValue: string;
                 if (item.data == null || isNaN(Number(item.data))) {
                   formattedValue = "—";
-                } else if (item.seriesName.includes("Output")) {
+                } else if (item.seriesName.includes(legendLabels.output)) {
                   formattedValue = formatLovelace(Number(item.data));
                 } else {
                   formattedValue = formatNumber(Number(item.data));
@@ -112,7 +120,7 @@ export const ScriptDetailStatsTab = ({
       type: "category",
       data: items?.map(item => item.item.epoch_no),
       inverse: true,
-      name: "Epoch",
+      name: t("script.stats.graph.epoch"),
       nameLocation: "middle",
       nameGap: 28,
       axisLabel: { color: textColor },
@@ -123,7 +131,7 @@ export const ScriptDetailStatsTab = ({
         type: "value",
         position: "left",
         show: true,
-        name: "Amount",
+        name: t("script.stats.graph.amount"),
         nameRotate: 90,
         nameLocation: "middle",
         nameGap: 45,
@@ -140,7 +148,7 @@ export const ScriptDetailStatsTab = ({
         position: "right",
         id: "1",
         show: true,
-        name: "Output",
+        name: legendLabels.output,
         nameRotate: 90,
         nameLocation: "middle",
         nameGap: 49,
@@ -166,14 +174,14 @@ export const ScriptDetailStatsTab = ({
       {
         type: "bar",
         data: interactions,
-        name: "Interactions",
+        name: legendLabels.interactions,
         yAxisIndex: 0,
         itemStyle: { opacity: 0.7, color: "#e3033a" },
       },
       {
         type: "line",
         data: output,
-        name: "Output",
+        name: legendLabels.output,
         yAxisIndex: 1,
         showSymbol: false,
         itemStyle: { color: lineColor },
@@ -183,7 +191,7 @@ export const ScriptDetailStatsTab = ({
       {
         type: "line",
         data: averageOutput,
-        name: "Average Output",
+        name: legendLabels.averageOutput,
         yAxisIndex: 2,
         showSymbol: false,
         itemStyle: { color: textColor },
@@ -211,7 +219,7 @@ export const ScriptDetailStatsTab = ({
     <div>
       <div className='flex flex-wrap gap-2'>
         <OverviewStatCard
-          title='Volume'
+          title={t("script.stats.volume")}
           value={
             items ? (
               <AdaWithTooltip data={items[0].item.data.redeemer.sum} />
@@ -220,19 +228,19 @@ export const ScriptDetailStatsTab = ({
             )
           }
           icon={<BarChart color={colors.primary} />}
-          description='In the past epoch'
+          description={t("script.stats.inPastEpoch")}
         />
         <OverviewStatCard
-          title='Users'
+          title={t("script.stats.users")}
           value={items ? formatNumber(items[0].item.data.redeemer.stake) : "-"}
           icon={<Users color={colors.primary} />}
-          description='Unique users in the past epoch'
+          description={t("script.stats.uniqueUsersInPastEpoch")}
         />
         <OverviewStatCard
-          title='Interactions'
+          title={t("script.stats.interactions")}
           value={items ? formatNumber(items[0].item.data.redeemer.count) : "-"}
           icon={<FileBarChart color={colors.primary} />}
-          description='Average interactions per user'
+          description={t("script.stats.averageInteractionsPerUser")}
         />
       </div>
       <div className='relative mt-4 w-full'>

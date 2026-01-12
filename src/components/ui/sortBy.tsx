@@ -7,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 type SelectItem = {
   key: string;
@@ -35,13 +36,14 @@ const SortBy: FC<SortByProps> = ({
   className,
   disabled = false,
 }) => {
+  const { t } = useAppTranslation("common");
   return (
     <div
       className={`flex items-center gap-1 ${className} ${disabled ? "pointer-events-none cursor-not-allowed opacity-50" : ""}`}
     >
       {label && (
         <span className='min-w-fit text-text-sm text-grayTextPrimary'>
-          {labelName || "Sort By:"}
+          {labelName || t("actions.sortBy")}
         </span>
       )}
       <Select

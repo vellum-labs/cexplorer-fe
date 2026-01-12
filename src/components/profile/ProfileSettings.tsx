@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { X, Wallet } from "lucide-react";
 import { toast } from "sonner";
 import { useLocation } from "@tanstack/react-router";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface UserInfo {
   public: boolean;
@@ -33,6 +34,7 @@ interface UserInfo {
 }
 
 export const ProfileSettings: FC = () => {
+  const { t } = useAppTranslation("common");
   const token = useAuthToken();
   const [showConnectModal, setShowConnectModal] = useState(false);
 
@@ -93,22 +95,15 @@ export const ProfileSettings: FC = () => {
   };
 
   const errorMessages = {
-    web: "Please enter a valid URL.",
-    xcom: "Username can contain letters, numbers, and underscores, up to 30 characters.",
-    telegram:
-      "Telegram username must be 5-32 characters and can contain letters, numbers, and underscores.",
-    discord:
-      'Discord username must be in the format "username" or "username#digits".',
-    patreon:
-      "Patreon username must be 3-50 characters and can contain letters, numbers, and underscores.",
-    facebook:
-      "Facebook username must be 5-50 characters and can contain letters, numbers, and dots.",
-    instagram:
-      "Instagram username cannot have consecutive dots or start/end with a dot, up to 30 characters.",
-    github:
-      "GitHub username must be 1-39 characters, cannot start/end with a hyphen, and can contain letters, numbers, and hyphens.",
-    linkedin:
-      "LinkedIn username must be 3-100 characters and can contain letters, numbers, and hyphens.",
+    web: t("profile.settings.errors.web"),
+    xcom: t("profile.settings.errors.xcom"),
+    telegram: t("profile.settings.errors.telegram"),
+    discord: t("profile.settings.errors.discord"),
+    patreon: t("profile.settings.errors.patreon"),
+    facebook: t("profile.settings.errors.facebook"),
+    instagram: t("profile.settings.errors.instagram"),
+    github: t("profile.settings.errors.github"),
+    linkedin: t("profile.settings.errors.linkedin"),
   };
 
   const socialsData = Object.entries(userInfo?.social || {});
@@ -166,7 +161,7 @@ export const ProfileSettings: FC = () => {
     const hasErrors = Object.values(errors).some(error => error !== undefined);
 
     if (hasErrors) {
-      toast("Please, fix error before saving", {
+      toast(t("profile.settings.fixErrors"), {
         action: {
           label: <X size={15} className='stroke-text' />,
           onClick: () => undefined,
@@ -196,7 +191,7 @@ export const ProfileSettings: FC = () => {
       },
     })
       .then(() => {
-        toast("Successfully updated", {
+        toast(t("profile.settings.successfullyUpdated"), {
           action: {
             label: <X size={15} className='stroke-text' />,
             onClick: () => undefined,
@@ -206,7 +201,7 @@ export const ProfileSettings: FC = () => {
       .catch(error => {
         console.error("err", String(error));
         if (String(error).includes("read-only")) return;
-        toast("Update failed", {
+        toast(t("profile.settings.updateFailed"), {
           action: {
             label: <X size={15} className='stroke-text' />,
             onClick: () => undefined,
@@ -279,11 +274,11 @@ export const ProfileSettings: FC = () => {
         <div className='flex w-full max-w-desktop flex-col'>
           <EmptyState
             icon={<Wallet size={24} />}
-            primaryText='Wallet not connected.'
-            secondaryText='Connect your wallet to access and manage your profile settings.'
+            primaryText={t("profile.walletNotConnected")}
+            secondaryText={t("profile.settings.connectToAccess")}
             button={
               <Button
-                label='Connect wallet'
+                label={t("profile.connectWallet")}
                 variant='primary'
                 size='md'
                 onClick={() => setShowConnectModal(true)}
@@ -297,14 +292,13 @@ export const ProfileSettings: FC = () => {
 
   return (
     <div className='flex w-full max-w-desktop flex-col'>
-      <h2>Profile settings</h2>
+      <h2>{t("profile.settings.title")}</h2>
       <p className='border-b border-border pb-2 text-grayTextPrimary'>
-        Update your profile picture photo and details here.
+        {t("profile.settings.description")}
       </p>
       <ProfileForm
-        title='Public profile'
-        description='When turned on, users will see your profile information on your wallet
-          address detail.'
+        title={t("profile.settings.publicProfile")}
+        description={t("profile.settings.publicProfileDescription")}
         sideContent={
           <Switch
             className='self-center'
@@ -314,13 +308,13 @@ export const ProfileSettings: FC = () => {
         }
       />
       <ProfileForm
-        title='Username'
-        description='This will be displayed on your wallet address only if profile is public.'
+        title={t("profile.settings.username")}
+        description={t("profile.settings.usernameDescription")}
         sideContent={
           <div className='w-full self-center min-[680px]:w-[300px]'>
             <TableSearchInput
               onchange={val => handleChange("name", val)}
-              placeholder='You don’t have a username'
+              placeholder={t("profile.settings.noUsername")}
               value={userInfo.name}
               showPrefixPopup={false}
             />
@@ -328,13 +322,13 @@ export const ProfileSettings: FC = () => {
         }
       />
       <ProfileForm
-        title='Profile picture'
-        description='Update your profile picture to be easily recognized.'
-        sideContent={<p className='self-center'>Soon</p>}
+        title={t("profile.settings.profilePicture")}
+        description={t("profile.settings.profilePictureDescription")}
+        sideContent={<p className='self-center'>{t("profile.settings.soon")}</p>}
       />
       <ProfileForm
-        title='Social profiles'
-        description='Social profiles will be visible on you address detail only when profile is public.'
+        title={t("profile.settings.socialProfiles")}
+        description={t("profile.settings.socialProfilesDescription")}
         sideContent={
           <div className='flex w-full flex-col gap-1.5 self-center min-[680px]:w-[300px]'>
             {socialsData.map(([key, value]) => (
@@ -368,12 +362,12 @@ export const ProfileSettings: FC = () => {
       />
       <div className='flex w-full justify-end gap-1'>
         <Button
-          label='Cancel'
+          label={t("profile.cancel")}
           size='lg'
           variant='tertiary'
           onClick={handleCancel}
         />
-        <Button label='Save' size='lg' variant='primary' onClick={handleSave} />
+        <Button label={t("profile.save")} size='lg' variant='primary' onClick={handleSave} />
       </div>
     </div>
   );

@@ -91,23 +91,23 @@ export const TokenDashboardTokenTab: FC = () => {
   const selectItems = [
     {
       key: "1d",
-      value: "24 hours",
+      value: t("tokenDashboard.timeframes.24hours"),
     },
     {
       key: "1w",
-      value: "1 week",
+      value: t("tokenDashboard.timeframes.1week"),
     },
     {
       key: "2w",
-      value: "2 week",
+      value: t("tokenDashboard.timeframes.2weeks"),
     },
     {
       key: "1m",
-      value: "1 month",
+      value: t("tokenDashboard.timeframes.1month"),
     },
     {
       key: "3m",
-      value: "3 month",
+      value: t("tokenDashboard.timeframes.3months"),
     },
   ];
 
@@ -204,7 +204,7 @@ export const TokenDashboardTokenTab: FC = () => {
           </>
         );
       },
-      title: <span>Token</span>,
+      title: <span>{t("tokenDashboard.columns.token")}</span>,
       visible: columnsVisibility.token,
       widthPx: 100,
     },
@@ -221,7 +221,7 @@ export const TokenDashboardTokenTab: FC = () => {
           <div className='flex w-full items-center justify-end gap-1'>
             <PriceAdaSmallAmount price={priceInAda ? priceInAda : null} />
             {hasLowLiquidity && (
-              <Tooltip content='Low liquidity (< 1000 ADA)'>
+              <Tooltip content={t("tokenDashboard.lowLiquidity")}>
                 <AlertCircle size={14} className='text-yellow-500' />
               </Tooltip>
             )}
@@ -232,7 +232,7 @@ export const TokenDashboardTokenTab: FC = () => {
               {currencySigns["usd"]} {formatNumberWithSuffix(usd)}
             </p>
             {hasLowLiquidity && (
-              <Tooltip content='Low liquidity (< 1000 ADA)'>
+              <Tooltip content={t("tokenDashboard.lowLiquidity")}>
                 <AlertCircle size={14} className='text-yellow-500' />
               </Tooltip>
             )}
@@ -251,7 +251,7 @@ export const TokenDashboardTokenTab: FC = () => {
             >
               {currency === "ada" ? "ADA" : "USD"}
             </span>{" "}
-            Price
+            {t("tokenDashboard.columns.price")}
           </p>
         </TitleSort>
       ),
@@ -301,7 +301,7 @@ export const TokenDashboardTokenTab: FC = () => {
         >
           <span className='text-primary'>{changeTimeframe}</span>
           <span>&nbsp;</span>
-          <span>Change</span>
+          <span>{t("tokenDashboard.columns.change")}</span>
         </p>
       ),
       visible: columnsVisibility.change_24h,
@@ -332,7 +332,7 @@ export const TokenDashboardTokenTab: FC = () => {
             <span className='inline-block text-primary'>
               {selectedItem === "1d" ? "24h" : selectedItem}
             </span>{" "}
-            Volume
+            {t("tokenDashboard.columns.volume")}
           </p>
         </TitleSort>
       ),
@@ -348,7 +348,7 @@ export const TokenDashboardTokenTab: FC = () => {
       ),
       title: (
         <TitleSort titleOrder='liquidity' order={order} sort={sort}>
-          <p className='text-right'>Liquidity</p>
+          <p className='text-right'>{t("tokenDashboard.columns.liquidity")}</p>
         </TitleSort>
       ),
       visible: columnsVisibility.liquidity,
@@ -357,7 +357,7 @@ export const TokenDashboardTokenTab: FC = () => {
     {
       key: "age",
       render: item => <DateCell time={item.updated} />,
-      title: <span>Age</span>,
+      title: <span>{t("tokenDashboard.columns.age")}</span>,
       visible: columnsVisibility.age,
       widthPx: 70,
     },
@@ -371,7 +371,7 @@ export const TokenDashboardTokenTab: FC = () => {
         }
         return <PriceSparkline data={histData} width={240} height={40} />;
       },
-      title: <span>Last 7 days</span>,
+      title: <span>{t("tokenDashboard.columns.last7Days")}</span>,
       visible: columnsVisibility.last_week,
       widthPx: 120,
     },
@@ -388,14 +388,14 @@ export const TokenDashboardTokenTab: FC = () => {
               to='/swap'
               search={{ asset: assetName }}
               className='text-primary'
-              title='Buy'
+              title={t("tokenDashboard.columns.buy")}
             >
               <ShoppingBasket size={18} />
             </Link>
           </div>
         );
       },
-      title: <span className='flex w-full justify-end'>Buy</span>,
+      title: <span className='flex w-full justify-end'>{t("tokenDashboard.columns.buy")}</span>,
       visible: columnsVisibility.buy,
       widthPx: 40,
     },
@@ -415,7 +415,7 @@ export const TokenDashboardTokenTab: FC = () => {
             selectItems={selectItems}
             selectedItem={selectedItem}
             setSelectedItem={setSelectedItem as any}
-            labelName='Volume:'
+            labelName={t("tokenDashboard.volumeLabel")}
           />
 
           <div className='flex w-fit justify-end min-[870px]:hidden'>
@@ -442,7 +442,7 @@ export const TokenDashboardTokenTab: FC = () => {
 
         <div className='flex gap-1'>
           <TableSearchInput
-            placeholder='Search by asset name...'
+            placeholder={t("tokenDashboard.searchPlaceholder")}
             value={tableSearch}
             onchange={setTableSearch}
             wrapperClassName='min-[870px]:w-[320px] w-full '

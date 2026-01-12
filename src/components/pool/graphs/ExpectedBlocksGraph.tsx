@@ -1,5 +1,6 @@
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import { useGraphColors } from "@/hooks/useGraphColors";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import ReactEcharts from "echarts-for-react";
 import { memo, useMemo, useRef } from "react";
 
@@ -14,6 +15,7 @@ const ExpectedBlocksGraph = memo(function ExpectedBlocksGraph({
   blockCounts,
   probabilities,
 }: Props) {
+  const { t } = useAppTranslation("common");
   const { textColor, bgColor, splitLineColor } = useGraphColors();
 
   const chartRef = useRef(null);
@@ -34,7 +36,7 @@ const ExpectedBlocksGraph = memo(function ExpectedBlocksGraph({
         formatter: function (params) {
           const value = params[0].value;
           const blocks = params[0].axisValue;
-          return `Probability ${value}% for ${blocks} Blocks`;
+          return t("pool.graph.probabilityForBlocks", { value, blocks });
         },
       },
       grid: {
@@ -49,7 +51,7 @@ const ExpectedBlocksGraph = memo(function ExpectedBlocksGraph({
           Number.isInteger(count) ? count : count.toFixed(2),
         ),
         inverse: false,
-        name: "Expected Blocks",
+        name: t("pool.graph.expectedBlocks"),
         nameLocation: "middle",
         nameGap: 28,
         axisLabel: {
@@ -70,7 +72,7 @@ const ExpectedBlocksGraph = memo(function ExpectedBlocksGraph({
           type: "value",
           position: "left",
           show: true,
-          name: "Probability (%)",
+          name: t("pool.graph.probabilityPercent"),
           nameRotate: 90,
           nameLocation: "middle",
           nameGap: 40,
@@ -95,7 +97,7 @@ const ExpectedBlocksGraph = memo(function ExpectedBlocksGraph({
         {
           data: probabilities,
           type: "bar",
-          name: "Probability",
+          name: t("pool.graph.probability"),
           itemStyle: {
             opacity: 0.7,
             color: params => {
@@ -116,6 +118,7 @@ const ExpectedBlocksGraph = memo(function ExpectedBlocksGraph({
       blockCounts,
       probabilities,
       blocksInEpoch,
+      t,
     ],
   );
 

@@ -12,6 +12,7 @@ import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { toast } from "sonner";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const date = new Date();
 const month = date.toLocaleDateString("en-US", { month: "2-digit" });
@@ -19,6 +20,7 @@ const year = date.toLocaleDateString("en-US", { year: "2-digit" });
 const dateNumber = month + year;
 
 const WalletConfigModal = () => {
+  const { t } = useAppTranslation("common");
   const { isOpen, setIsOpen } = useWalletConfigModalState();
   const { uq } = useUqStore();
   const secureRef = useRef<0 | 1>(0);
@@ -135,27 +137,24 @@ const WalletConfigModal = () => {
       onClose={closeAndDisconnect}
       className='border border-border'
     >
-      <h2 className='mb-3 text-text-lg font-medium'>Authorization Token</h2>
+      <h2 className='mb-3 text-text-lg font-medium'>{t("wallet.authorizationToken")}</h2>
 
       <div className='mb-2 rounded-m border border-border bg-cardBg p-1.5'>
         <p className='text-muted-foreground mb-1.5 text-text-sm'>
-          We use a signature token to protect your privacy and keep your
-          watchlist, custom names, and personal data secure.
+          {t("wallet.authTokenDescription")}
         </p>
         <p className='text-muted-foreground text-text-sm'>
-          If you cancel or remove the authorization token, we cannot connect
-          your wallet.
+          {t("wallet.authTokenWarning")}
         </p>
       </div>
 
       <div className='flex items-center gap-1'>
-        <span className='text-text-sm'>Security level:</span>
+        <span className='text-text-sm'>{t("wallet.securityLevel")}</span>
         <Tooltip
           forceDirection='left'
           content={
             <p className='w-[150px]'>
-              Strong security restricts token usage to your current IP address
-              only.
+              {t("wallet.securityLevelTooltip")}
             </p>
           }
         >
@@ -171,15 +170,15 @@ const WalletConfigModal = () => {
       >
         <div className='flex items-center space-x-2'>
           <RadioGroupItem value='0' id='0' />
-          <Label htmlFor='0'>Normal</Label>
+          <Label htmlFor='0'>{t("wallet.securityNormal")}</Label>
         </div>
         <div className='flex items-center space-x-2'>
           <RadioGroupItem value='1' id='1' />
-          <Label htmlFor='1'>Strong</Label>
+          <Label htmlFor='1'>{t("wallet.securityStrong")}</Label>
         </div>
       </RadioGroup>
 
-      <div className='mt-3 text-text-sm'>Token duration:</div>
+      <div className='mt-3 text-text-sm'>{t("wallet.tokenDuration")}</div>
       <RadioGroup
         onValueChange={value => {
           expirationRef.current = value as "d" | "w" | "m" | "y";
@@ -189,25 +188,25 @@ const WalletConfigModal = () => {
       >
         <div className='flex items-center space-x-2'>
           <RadioGroupItem value='d' id='d' />
-          <Label htmlFor='d'>Day</Label>
+          <Label htmlFor='d'>{t("wallet.durationDay")}</Label>
         </div>
         <div className='flex items-center space-x-2'>
           <RadioGroupItem value='w' id='w' />
-          <Label htmlFor='w'>Week</Label>
+          <Label htmlFor='w'>{t("wallet.durationWeek")}</Label>
         </div>
         <div className='flex items-center space-x-2'>
           <RadioGroupItem value='m' id='m' />
-          <Label htmlFor='m'>Month</Label>
+          <Label htmlFor='m'>{t("wallet.durationMonth")}</Label>
         </div>
         <div className='flex items-center space-x-2'>
           <RadioGroupItem value='y' id='y' />
-          <Label htmlFor='y'>Year</Label>
+          <Label htmlFor='y'>{t("wallet.durationYear")}</Label>
         </div>
       </RadioGroup>
       <div className='flex justify-end'>
         <Button
           className='mt-5 px-4'
-          label={isLoading ? "Confirming..." : "Confirm"}
+          label={isLoading ? t("wallet.confirming") : t("wallet.confirm")}
           size='md'
           onClick={handleConfirmation}
           variant='primary'

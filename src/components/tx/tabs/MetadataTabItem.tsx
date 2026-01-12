@@ -8,8 +8,10 @@ import { getRouteApi } from "@tanstack/react-router";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useState } from "react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const MetadataTabItem = () => {
+  const { t } = useAppTranslation("common");
   const route = getRouteApi("/tx/$hash");
   const { hash } = route.useParams();
   const query = useFetchTxDetail(hash);
@@ -27,7 +29,7 @@ const MetadataTabItem = () => {
     metadataArr.push({ [obj]: metadata[obj] });
   }
   if (!metadata && !query.isLoading) {
-    return <p className='w-full text-center text-text-sm'>No metadata found</p>;
+    return <p className='w-full text-center text-text-sm'>{t("tx.noMetadataFound")}</p>;
   }
 
   if (query.isLoading) {
@@ -43,8 +45,8 @@ const MetadataTabItem = () => {
       <SensitiveContentWarning
         onDisplay={() => setShowContent(true)}
         localStorageKey='showSensitiveContent'
-        title='User-generated content'
-        description='Following content is user-generated and unmoderated by the Cexplorer team.'
+        title={t("tx.userGeneratedContent")}
+        description={t("tx.userGeneratedContentDescription")}
       />
     );
   }

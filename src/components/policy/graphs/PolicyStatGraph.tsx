@@ -14,6 +14,7 @@ import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface PolicyStatGraphProps {
   query: ReturnType<typeof useFetchPolicyStats>;
@@ -22,15 +23,29 @@ interface PolicyStatGraphProps {
 
 export const PolicyStatGraph: FC<PolicyStatGraphProps> = memo(
   function PolicyStatGraphMemo({ setJson, query }) {
+    const { t } = useAppTranslation("common");
+
+    const legendLabels = {
+      epoch: t("policy.graph.epoch"),
+      totalCount: t("policy.graph.totalCount"),
+      totalStake: t("policy.graph.totalStake"),
+      totalAddress: t("policy.graph.totalAddress"),
+      totalWithData: t("policy.graph.totalWithData"),
+      totalAdaVolume: t("policy.graph.totalAdaVolume"),
+      totalAssetVolume: t("policy.graph.totalAssetVolume"),
+      totalPaymentCredits: t("policy.graph.totalPaymentCredits"),
+      assets: t("policy.graph.assets"),
+    };
+
     const [graphsVisibility, setGraphsVisibility] = useState({
-      "Total count": true,
-      "Total stake": true,
-      "Total address": true,
-      "Total with data": true,
-      "Total ada volume": true,
-      "Total asset volume": true,
-      "Total payment credits": true,
-      Assets: true,
+      [legendLabels.totalCount]: true,
+      [legendLabels.totalStake]: true,
+      [legendLabels.totalAddress]: true,
+      [legendLabels.totalWithData]: true,
+      [legendLabels.totalAdaVolume]: true,
+      [legendLabels.totalAssetVolume]: true,
+      [legendLabels.totalPaymentCredits]: true,
+      [legendLabels.assets]: true,
     });
 
     const { textColor, bgColor } = useGraphColors();
@@ -94,7 +109,7 @@ export const PolicyStatGraph: FC<PolicyStatGraphProps> = memo(
             miscConst?.epoch.start_time ?? "",
           );
 
-          const header = `Date: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (Epoch: ${epoch})<hr style="margin: 4px 0;" />`;
+          const header = `${t("policy.graph.date")}: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${t("policy.graph.epoch")}: ${epoch})<hr style="margin: 4px 0;" />`;
 
           const content = params
             .map(item => {
@@ -111,14 +126,14 @@ export const PolicyStatGraph: FC<PolicyStatGraphProps> = memo(
       },
       legend: {
         data: [
-          "Total count",
-          "Total stake",
-          "Total address",
-          "Total with data",
-          "Total ada volume",
-          "Total asset volume",
-          "Total payment credits",
-          "Assets",
+          legendLabels.totalCount,
+          legendLabels.totalStake,
+          legendLabels.totalAddress,
+          legendLabels.totalWithData,
+          legendLabels.totalAdaVolume,
+          legendLabels.totalAssetVolume,
+          legendLabels.totalPaymentCredits,
+          legendLabels.assets,
         ],
         textStyle: {
           color: textColor,
@@ -161,7 +176,7 @@ export const PolicyStatGraph: FC<PolicyStatGraphProps> = memo(
 
       series: [
         {
-          name: "Total count",
+          name: legendLabels.totalCount,
           type: "line",
           showSymbol: false,
           data: totalCount,
@@ -171,7 +186,7 @@ export const PolicyStatGraph: FC<PolicyStatGraphProps> = memo(
           z: 3,
         },
         {
-          name: "Total stake",
+          name: legendLabels.totalStake,
           type: "line",
           showSymbol: false,
           data: totalStake,
@@ -181,7 +196,7 @@ export const PolicyStatGraph: FC<PolicyStatGraphProps> = memo(
           z: 3,
         },
         {
-          name: "Total address",
+          name: legendLabels.totalAddress,
           type: "line",
           showSymbol: false,
           data: totalAddress,
@@ -191,7 +206,7 @@ export const PolicyStatGraph: FC<PolicyStatGraphProps> = memo(
           z: 3,
         },
         {
-          name: "Total with data",
+          name: legendLabels.totalWithData,
           type: "line",
           showSymbol: false,
           data: totalWithData,
@@ -201,7 +216,7 @@ export const PolicyStatGraph: FC<PolicyStatGraphProps> = memo(
           z: 3,
         },
         {
-          name: "Total ada volume",
+          name: legendLabels.totalAdaVolume,
           type: "line",
           showSymbol: false,
           data: totalAdaVolume,
@@ -211,7 +226,7 @@ export const PolicyStatGraph: FC<PolicyStatGraphProps> = memo(
           z: 3,
         },
         {
-          name: "Total asset volume",
+          name: legendLabels.totalAssetVolume,
           type: "line",
           showSymbol: false,
           data: totalAssetVolume,
@@ -221,7 +236,7 @@ export const PolicyStatGraph: FC<PolicyStatGraphProps> = memo(
           z: 3,
         },
         {
-          name: "Total payment credits",
+          name: legendLabels.totalPaymentCredits,
           type: "line",
           showSymbol: false,
           data: totalPaymentCredits,
@@ -231,7 +246,7 @@ export const PolicyStatGraph: FC<PolicyStatGraphProps> = memo(
           z: 3,
         },
         {
-          name: "Assets",
+          name: legendLabels.assets,
           type: "line",
           showSymbol: false,
           data: assets,
@@ -248,15 +263,15 @@ export const PolicyStatGraph: FC<PolicyStatGraphProps> = memo(
         setJson(
           (epochs ?? []).map((epoch, index) => {
             return {
-              Epoch: epoch,
-              "Total count": totalCount[index],
-              "Total stake": totalStake[index],
-              "Total address": totalAddress[index],
-              "Total with data": totalWithData[index],
-              "Total ada volume": totalAdaVolume[index],
-              "Total asset volume": totalAssetVolume[index],
-              "Total payment credits": totalPaymentCredits[index],
-              Assets: assets[index],
+              [legendLabels.epoch]: epoch,
+              [legendLabels.totalCount]: totalCount[index],
+              [legendLabels.totalStake]: totalStake[index],
+              [legendLabels.totalAddress]: totalAddress[index],
+              [legendLabels.totalWithData]: totalWithData[index],
+              [legendLabels.totalAdaVolume]: totalAdaVolume[index],
+              [legendLabels.totalAssetVolume]: totalAssetVolume[index],
+              [legendLabels.totalPaymentCredits]: totalPaymentCredits[index],
+              [legendLabels.assets]: assets[index],
             };
           }),
         );

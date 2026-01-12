@@ -56,12 +56,14 @@ import Image9 from "@/resources/images/awards/9.svg";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { format } from "date-fns";
 import { Link } from "@tanstack/react-router";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface AwardsTabItemProps {
   id: string;
 }
 
 export const AwardsTabItem: FC<AwardsTabItemProps> = ({ id }) => {
+  const { t } = useAppTranslation("common");
   const { data, isLoading, isError } = useFetchPoolAwards(id);
 
   const awards = data?.data.data;
@@ -119,7 +121,7 @@ export const AwardsTabItem: FC<AwardsTabItemProps> = ({ id }) => {
         return (
           <>
             <div className='flex w-full flex-col'>
-              <span>Hash: </span>
+              <span>{t("pool.awards.hash")}: </span>
               <div className='flex items-center gap-1/2'>
                 <Link
                   to='/block/$hash'
@@ -132,7 +134,7 @@ export const AwardsTabItem: FC<AwardsTabItemProps> = ({ id }) => {
               </div>
             </div>
             <div className='flex flex-col'>
-              <span>Height:</span>
+              <span>{t("pool.awards.height")}:</span>
               <BlockCell hash={item.detail.hash} no={item.detail.height} />
             </div>
           </>
@@ -141,7 +143,7 @@ export const AwardsTabItem: FC<AwardsTabItemProps> = ({ id }) => {
         return (
           <>
             <div className='flex w-full flex-col'>
-              <span>Hash: </span>
+              <span>{t("pool.awards.hash")}: </span>
               <div className='flex items-center gap-1/2'>
                 <Link
                   to='/block/$hash'
@@ -154,7 +156,7 @@ export const AwardsTabItem: FC<AwardsTabItemProps> = ({ id }) => {
               </div>
             </div>
             <div className='flex flex-col'>
-              <span>Height:</span>
+              <span>{t("pool.awards.height")}:</span>
               <BlockCell hash={item.detail.hash} no={item.detail.height} />
             </div>
           </>
@@ -166,15 +168,15 @@ export const AwardsTabItem: FC<AwardsTabItemProps> = ({ id }) => {
         return (
           <>
             <div className='flex w-full flex-col'>
-              <span>Epoch: </span>
+              <span>{t("pool.awards.epoch")}: </span>
               <EpochCell no={item.detail.epoch_no} justify='start' />
             </div>
             <div className='flex min-w-fit flex-col'>
-              <span>Stake:</span>
+              <span>{t("pool.awards.stake")}:</span>
               <AdaWithTooltip data={item.detail.epoch_stake} />
             </div>
             <div className='flex flex-col'>
-              <span>Delegators:</span> {item.detail.delegator}
+              <span>{t("pool.awards.delegators")}:</span> {item.detail.delegator}
             </div>
           </>
         );
@@ -194,20 +196,21 @@ export const AwardsTabItem: FC<AwardsTabItemProps> = ({ id }) => {
               <LoadingSkeleton width='100%' height='280px' />
             </div>
           ))
-        : awards?.map((item, i) => (
+        : awards?.map((item, i) => {
+              const categoryLabel = t(`pool.awards.categories.${item.category}`);
+              const typeLabel = String(item.type).replace("_", " ");
+              return (
             <div
               key={`${item.time}_${i}`}
               className='flex flex-col gap-1/2 rounded-m border border-border bg-cardBg px-1.5 py-1'
             >
               <img
                 src={imageMap[`${item.category}_${item.type}`]}
-                alt='Pool Created'
+                alt={`${categoryLabel} ${typeLabel}`}
               />
               <h3 className='text-center'>
-                {item.category.replace("_", " ").slice(0, 1).toUpperCase() +
-                  item.category.replace("_", " ").slice(1)}{" "}
-                {String(item.type).replace("_", " ").slice(0, 1).toUpperCase() +
-                  String(item.type).replace("_", " ").slice(1)}
+                {categoryLabel}{" "}
+                {typeLabel.slice(0, 1).toUpperCase() + typeLabel.slice(1)}
               </h3>
               <div className='mb-1/2 flex items-center justify-center gap-1'>
                 <Calendar size={12} className='text-grayTextPrimary' />
@@ -219,7 +222,7 @@ export const AwardsTabItem: FC<AwardsTabItemProps> = ({ id }) => {
                 {renderDetails(item)}
               </div>
             </div>
-          ))}
+          );})}
     </div>
   );
 };

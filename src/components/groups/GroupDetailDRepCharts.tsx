@@ -2,6 +2,7 @@ import type { GroupDetailData } from "@/types/analyticsTypes";
 import { useMemo } from "react";
 import { PieCharts } from "@/components/charts/PieCharts";
 import { PIE_CHART_COLORS } from "@/constants/charts";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface GroupDetailDRepChartsProps {
   items: GroupDetailData["items"];
@@ -10,6 +11,7 @@ interface GroupDetailDRepChartsProps {
 export const GroupDetailDRepCharts = ({
   items,
 }: GroupDetailDRepChartsProps) => {
+  const { t } = useAppTranslation("common");
   const drepItems = useMemo(() => {
     return items?.filter(item => item.type === "drep") ?? [];
   }, [items]);
@@ -35,13 +37,25 @@ export const GroupDetailDRepCharts = ({
   const charts = [
     {
       dataKey: "voting_power",
-      title: "Voting Power",
+      title: t("groups.votingPower"),
       needsAdaFormatting: true,
     },
-    { dataKey: "delegators", title: "Delegators" },
+    { dataKey: "delegators", title: t("groups.delegators") },
   ];
 
+  const tooltipTranslations = {
+    others: t("charts.others"),
+    items: t("charts.items"),
+    total: t("charts.total"),
+    andMore: (count: number) => t("charts.andMore", { count }),
+  };
+
   return (
-    <PieCharts items={drepItems} charts={charts} getChartData={getChartData} />
+    <PieCharts
+      items={drepItems}
+      charts={charts}
+      getChartData={getChartData}
+      tooltipTranslations={tooltipTranslations}
+    />
   );
 };

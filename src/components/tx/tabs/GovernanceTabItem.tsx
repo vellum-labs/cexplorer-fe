@@ -11,8 +11,10 @@ import type { TableColumns } from "@/types/tableTypes";
 import type { TxDetailData } from "@/types/txTypes";
 import { getRouteApi } from "@tanstack/react-router";
 import { isVoteLate } from "@/utils/governance/isVoteLate";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const GovernanceTabItem = () => {
+  const { t } = useAppTranslation("common");
   const route = getRouteApi("/tx/$hash");
   const { hash } = route.useParams();
   const query = useFetchTxDetail(hash);
@@ -25,14 +27,14 @@ export const GovernanceTabItem = () => {
     {
       key: "role",
       render: item => <VoterRoleBadge role={item.voter_role} />,
-      title: "Voter role",
+      title: t("tx.columns.voterRole"),
       visible: true,
       widthPx: 120,
     },
     {
       key: "voter",
       render: item => <GovVoterCell role={item.voter_role} info={item.info} />,
-      title: "Voter",
+      title: t("tx.columns.voter"),
       visible: true,
       widthPx: 200,
     },
@@ -45,7 +47,7 @@ export const GovernanceTabItem = () => {
 
         return <ActionTypes title={item?.proposal?.type as ActionTypes} />;
       },
-      title: <p>Type</p>,
+      title: <p>{t("tx.columns.type")}</p>,
       visible: true,
       widthPx: 150,
     },
@@ -60,7 +62,7 @@ export const GovernanceTabItem = () => {
 
         return <GovActionCell id={id} name={name} />;
       },
-      title: <p>Governance action</p>,
+      title: <p>{t("tx.columns.governanceAction")}</p>,
       visible: true,
       widthPx: 300,
     },
@@ -84,7 +86,7 @@ export const GovernanceTabItem = () => {
           />
         );
       },
-      title: <p>Vote</p>,
+      title: <p>{t("tx.columns.vote")}</p>,
       visible: true,
       widthPx: 100,
     },
@@ -99,7 +101,7 @@ export const GovernanceTabItem = () => {
           )}
         </p>
       ),
-      title: <p className='w-full text-right'>Voting Power</p>,
+      title: <p className='w-full text-right'>{t("tx.columns.votingPower")}</p>,
       visible: true,
       widthPx: 130,
     },

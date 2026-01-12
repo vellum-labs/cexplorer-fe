@@ -7,6 +7,7 @@ import type { MenuItem } from "@/types/navigationTypes";
 import { ArrowRight, ChevronLeft, ChevronsUp } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
 import { MobileMenuAccordionItem } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   onBack?: () => void;
@@ -15,19 +16,21 @@ interface Props {
 }
 
 export const MoreMobileItems = ({ onBack, setOpen, power }: Props) => {
+  const { t } = useAppTranslation("navigation");
+
   const menuItems: MenuItem[] = [
     {
-      label: "Tools",
+      label: t("main.tools"),
       icon: "wrench",
       items: nestedNavigationOptions.moreOptions["tools"].options,
     },
     {
-      label: "Services",
+      label: t("main.services"),
       icon: "database",
       items: nestedNavigationOptions.moreOptions["services"].options,
     },
     {
-      label: "Cexplorer",
+      label: t("main.cexplorer"),
       icon: "notebook-text",
       items: nestedNavigationOptions.moreOptions["cexplorer"].options,
     },
@@ -40,25 +43,24 @@ export const MoreMobileItems = ({ onBack, setOpen, power }: Props) => {
         className='mb-1 flex h-[34px] -translate-x-1 items-center gap-1 font-medium'
       >
         <ChevronLeft size={20} className='font-regular' />
-        <span>Analytics</span>
+        <span>{t("main.more")}</span>
       </button>
       {power === 0 && (
         <InfoCard
           icon={<ChevronsUp color={colors.purpleText} />}
           title={
             <span className='text-text-lg font-semibold'>
-              Get Cexplorer.io <span className='text-purpleText'>PRO</span>
+              {t("navbar.getCexplorer")} <span className='text-purpleText'>{t("navbar.pro")}</span>
             </span>
           }
           className='max-h-[200px] bg-darker'
         >
           <p className='text-text-xs font-regular'>
-            Access Our API for Comprehensive Blockchain Data and Build Your
-            Next-Level dApp!
+            {t("navbar.apiDescription")}
           </p>
           <Button
             className='mt-auto'
-            label='Get PRO'
+            label={t("navbar.getPro")}
             rightIcon={<ArrowRight />}
             variant='purple'
             size='sm'

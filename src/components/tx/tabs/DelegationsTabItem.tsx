@@ -9,8 +9,10 @@ import { DrepNameCell } from "@/components/drep/DrepNameCell";
 import { useFetchTxDetail } from "@/services/tx";
 import { getRouteApi } from "@tanstack/react-router";
 import { Route, User } from "lucide-react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const DelegationsTabItem = () => {
+  const { t } = useAppTranslation("common");
   const route = getRouteApi("/tx/$hash");
   const { hash } = route.useParams();
   const query = useFetchTxDetail(hash);
@@ -25,7 +27,7 @@ const DelegationsTabItem = () => {
           <AddressCell address={item.view} />
         </div>
       ),
-      title: "Address",
+      title: t("tx.columns.address"),
       visible: true,
       widthPx: 120,
     },
@@ -46,7 +48,7 @@ const DelegationsTabItem = () => {
           </div>
         );
       },
-      title: "Delegation Type",
+      title: t("tx.columns.delegationType"),
       visible: true,
       widthPx: 80,
     },
@@ -70,7 +72,7 @@ const DelegationsTabItem = () => {
           );
         }
       },
-      title: "Delegation",
+      title: t("tx.columns.delegation"),
       visible: true,
       widthPx: 80,
     },
@@ -81,7 +83,7 @@ const DelegationsTabItem = () => {
           <AdaWithTooltip data={item.stake?.live} />
         </span>
       ),
-      title: <p className='w-full text-right'>Live Stake</p>,
+      title: <p className='w-full text-right'>{t("tx.columns.liveStake")}</p>,
       visible: true,
       widthPx: 80,
     },
@@ -92,14 +94,14 @@ const DelegationsTabItem = () => {
           <AdaWithTooltip data={item.stake?.active} />
         </p>
       ),
-      title: <p className='w-full text-right'>Active Stake</p>,
+      title: <p className='w-full text-right'>{t("tx.columns.activeStake")}</p>,
       visible: true,
       widthPx: 80,
     },
   ];
 
   if (!delegations && !query.isLoading) {
-    return <p className='w-full text-center text-text-sm'>No withdrawals</p>;
+    return <p className='w-full text-center text-text-sm'>{t("tx.noDelegationsFound")}</p>;
   }
 
   if (query.isLoading) {

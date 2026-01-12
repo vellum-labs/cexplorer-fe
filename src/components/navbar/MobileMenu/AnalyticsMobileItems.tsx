@@ -8,6 +8,7 @@ import type { MenuItem } from "@/types/navigationTypes";
 import { ArrowRight, ChevronLeft } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
 import { MobileMenuAccordionItem } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   onBack?: () => void;
@@ -16,21 +17,23 @@ interface Props {
 }
 
 export const AnalyticsMobileItems = ({ onBack, setOpen, power }: Props) => {
+  const { t } = useAppTranslation("navigation");
+
   const menuItems: MenuItem[] = [
     {
-      label: "dApps",
+      label: t("analytics.dapps"),
       icon: "layout-grid",
       items: nestedNavigationOptions.analyticsOptions["dapps"].options,
       href: nestedNavigationOptions.analyticsOptions["dapps"].labelHref,
     },
     {
-      label: "Accounts",
+      label: t("analytics.accounts"),
       icon: "users",
       items: nestedNavigationOptions.analyticsOptions["accounts"].options,
       href: nestedNavigationOptions.analyticsOptions["accounts"].labelHref,
     },
     {
-      label: "Network",
+      label: t("analytics.network"),
       icon: "network",
       items: [
         ...nestedNavigationOptions.analyticsOptions["network"].options,
@@ -47,26 +50,25 @@ export const AnalyticsMobileItems = ({ onBack, setOpen, power }: Props) => {
         className='mb-1 flex h-[34px] -translate-x-1 items-center gap-1 font-medium'
       >
         <ChevronLeft size={20} className='font-regular' />
-        <span>Analytics</span>
+        <span>{t("main.analytics")}</span>
       </button>
       {power === 0 && (
         <InfoCard
           icon={<Cardano size={24} color={colors.primary} />}
           title={
             <span className='text-text-lg font-semibold'>
-              Powered by{" "}
-              <span className='text-primary'>Cardano Blockchain</span>
+              {t("navbar.poweredBy")}{" "}
+              <span className='text-primary'>{t("navbar.cardanoBlockchain")}</span>
             </span>
           }
           className='max-h-[200px] bg-darker'
         >
           <p className='text-text-xs font-regular'>
-            Access Our API for Comprehensive Blockchain Data and Build Your
-            Next-Level dApp!
+            {t("navbar.apiDescription")}
           </p>
           <Button
             className='mt-auto'
-            label='Start building'
+            label={t("navbar.startBuilding")}
             rightIcon={<ArrowRight />}
             variant='primary'
             size='sm'
