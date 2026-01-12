@@ -1178,7 +1178,41 @@
     "removeFilters": "Odstranit filtry",
     "detailInformation": "Detailní informace",
     "typeHashIdAddress": "Zadejte hash,id,adresu...",
-    "unknownIdent": "Neznámý identifikátor!"
+    "unknownIdent": "Neznámý identifikátor!",
+    "widgets": {
+      "titles": {
+        "Block list": "Seznam bloků",
+        "Drep list": "Seznam DRepů",
+        "Pool list": "Seznam poolů",
+        "Tx list": "Seznam transakcí",
+        "Transactions in epoch": "Transakce v epoše",
+        "Block production": "Produkce bloků",
+        "Block size used": "Využitá velikost bloku",
+        "Latest blocks": "Nejnovější bloky",
+        "Drep detail": "Detail DRepu",
+        "Asset list": "Seznam aktiv",
+        "Asset detail": "Detail aktiva",
+        "Epoch list": "Seznam epoch",
+        "Epochs": "Epochy",
+        "Pool detail": "Detail poolu"
+      },
+      "linkTitles": {
+        "All blocks": "Všechny bloky",
+        "All dreps": "Všechny DRepy",
+        "All pools": "Všechny pooly",
+        "All TXs": "Všechny TX",
+        "All assets": "Všechna aktiva",
+        "All epochs": "Všechny epochy"
+      },
+      "categories": {
+        "Transactions": "Transakce",
+        "Blocks": "Bloky",
+        "Drep": "DRep",
+        "Asset": "Aktivum",
+        "Epoch": "Epocha",
+        "Pool": "Pool"
+      }
+    }
   },
   "dex": {
     "overview": "Přehled",

@@ -44,7 +44,7 @@ export const HomepageModal: FC = () => {
               }}
             >
               <span className='text-text-sm font-semibold text-inherit'>
-                {item.title}
+                {t(`homepage.widgets.categories.${item.title}`, item.title)}
               </span>
             </div>
           ))}

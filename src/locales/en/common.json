@@ -1178,7 +1178,41 @@
     "removeFilters": "Remove filters",
     "detailInformation": "Detail information",
     "typeHashIdAddress": "Type hash,id,address...",
-    "unknownIdent": "Unknown ident!"
+    "unknownIdent": "Unknown ident!",
+    "widgets": {
+      "titles": {
+        "Block list": "Block list",
+        "Drep list": "DRep list",
+        "Pool list": "Pool list",
+        "Tx list": "Tx list",
+        "Transactions in epoch": "Transactions in epoch",
+        "Block production": "Block production",
+        "Block size used": "Block size used",
+        "Latest blocks": "Latest blocks",
+        "Drep detail": "DRep detail",
+        "Asset list": "Asset list",
+        "Asset detail": "Asset detail",
+        "Epoch list": "Epoch list",
+        "Epochs": "Epochs",
+        "Pool detail": "Pool detail"
+      },
+      "linkTitles": {
+        "All blocks": "All blocks",
+        "All dreps": "All DReps",
+        "All pools": "All pools",
+        "All TXs": "All TXs",
+        "All assets": "All assets",
+        "All epochs": "All epochs"
+      },
+      "categories": {
+        "Transactions": "Transactions",
+        "Blocks": "Blocks",
+        "Drep": "DRep",
+        "Asset": "Asset",
+        "Epoch": "Epoch",
+        "Pool": "Pool"
+      }
+    }
   },
   "dex": {
     "overview": "Overview",

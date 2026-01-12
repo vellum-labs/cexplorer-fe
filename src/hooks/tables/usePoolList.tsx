@@ -273,7 +273,7 @@ export const usePoolList = ({
           cropPoolHash={cropPoolHash}
         />
       ),
-      title: "Pool",
+      title: t("pools.table.pool"),
       visible: columnsVisibility.pool,
       widthPx: 150,
     },
@@ -340,7 +340,7 @@ export const usePoolList = ({
                 setList("live_stake");
               }}
             >
-              <span>Stake</span>
+              <span>{t("pools.table.stake")}</span>
               <SortArrow
                 direction={order === "live_stake" ? sort : undefined}
               />
@@ -348,7 +348,7 @@ export const usePoolList = ({
           </div>
         ) : (
           <div className='flex w-full justify-end'>
-            <span>Stake</span>
+            <span>{t("pools.table.stake")}</span>
           </div>
         ),
       visible: columnsVisibility.stake,
@@ -457,14 +457,14 @@ export const usePoolList = ({
                 setList("roa_lifetime");
               }}
             >
-              <span>Rewards</span>
+              <span>{t("pools.table.rewards")}</span>
               <SortArrow
                 direction={order === "roa_lifetime" ? sort : undefined}
               />
             </div>
           ) : (
             <div className='flex w-full justify-end'>
-              <span>Rewards</span>
+              <span>{t("pools.table.rewards")}</span>
             </div>
           )}
         </div>
@@ -484,7 +484,7 @@ export const usePoolList = ({
       ),
       title: (
         <div className='flex w-full justify-end'>
-          <p className='text-right'>Luck</p>
+          <p className='text-right'>{t("pools.table.luck")}</p>
         </div>
       ),
       visible: columnsVisibility.luck,
@@ -514,7 +514,7 @@ export const usePoolList = ({
       title: (
         <div className='flex w-full justify-end'>
           <p className='text-right' ref={anchorRefs.is_drep}>
-            DRep
+            {t("pools.table.drep")}
           </p>
         </div>
       ),
@@ -582,7 +582,7 @@ export const usePoolList = ({
       ),
       title: (
         <div className='flex w-full justify-end'>
-          <p className='text-right'>Fees</p>
+          <p className='text-right'>{t("pools.table.fees")}</p>
         </div>
       ),
       visible: columnsVisibility.fees,
@@ -669,13 +669,13 @@ export const usePoolList = ({
                 setList("blocks_total");
               }}
             >
-              <span>Blocks</span>
+              <span>{t("pools.table.blocks")}</span>
               <SortArrow
                 direction={order === "blocks_total" ? sort : undefined}
               />
             </div>
           ) : (
-            <span className='w-full text-right'>Blocks</span>
+            <span className='w-full text-right'>{t("pools.table.blocks")}</span>
           )}
         </div>
       ),
@@ -730,13 +730,13 @@ export const usePoolList = ({
             }}
           >
             <div className='flex w-fit cursor-pointer items-center gap-1/2'>
-              <span>Pledge</span>
+              <span>{t("pools.table.pledge")}</span>
               <SortArrow direction={order === "pledge" ? sort : undefined} />
             </div>
           </div>
         ) : (
           <div className='flex w-full justify-end'>
-            <span>Pledge</span>
+            <span>{t("pools.table.pledge")}</span>
           </div>
         ),
       visible: columnsVisibility.pledge,
@@ -784,13 +784,13 @@ export const usePoolList = ({
                 setList("leverage");
               }}
             >
-              <span className='text-right'>Pledge Leverage</span>
+              <span className='text-right'>{t("pools.table.pledgeLeverage")}</span>
               <SortArrow direction={order === "leverage" ? sort : undefined} />
             </div>
           </div>
         ) : (
           <div className='flex w-full justify-end'>
-            <span className='text-right'>Pledge Leverage</span>
+            <span className='text-right'>{t("pools.table.pledgeLeverage")}</span>
           </div>
         ),
 
@@ -825,7 +825,7 @@ export const usePoolList = ({
             }}
           >
             <div className='flex w-fit cursor-pointer items-center gap-1/2'>
-              <span>Delegators</span>
+              <span>{t("pools.table.delegators")}</span>
               <SortArrow
                 direction={order === "delegators" ? sort : undefined}
               />
@@ -833,7 +833,7 @@ export const usePoolList = ({
           </div>
         ) : (
           <div className='flex w-full justify-end'>
-            <p className='text-right'>Delegators</p>
+            <p className='text-right'>{t("pools.table.delegators")}</p>
           </div>
         ),
       visible: columnsVisibility.delegators,
@@ -874,7 +874,7 @@ export const usePoolList = ({
             }}
           >
             <div className='flex w-fit cursor-pointer items-center gap-1/2'>
-              <span className='text-nowrap'>Average stake</span>
+              <span className='text-nowrap'>{t("pools.table.averageStake")}</span>
               <SortArrow
                 direction={order === "average_stake" ? sort : undefined}
               />
@@ -882,7 +882,7 @@ export const usePoolList = ({
           </div>
         ) : (
           <div className='flex w-full justify-end'>
-            <p className='w-full text-nowrap text-right'>Average stake</p>
+            <p className='w-full text-nowrap text-right'>{t("pools.table.averageStake")}</p>
           </div>
         ),
       visible: columnsVisibility.avg_stake,
@@ -899,7 +899,7 @@ export const usePoolList = ({
       },
       title: (
         <div className='flex w-full items-center justify-end gap-1/2 text-nowrap'>
-          <p className='text-right'>Selected vote</p>
+          <p className='text-right'>{t("pools.table.selectedVote")}</p>
           <X
             size={15}
             className='translate-y-[1px] cursor-pointer'
@@ -974,14 +974,14 @@ export const usePoolList = ({
                 setList("top_delegator");
               }}
             >
-              <span>Top delegator</span>
+              <span>{t("pools.table.topDelegator")}</span>
               <SortArrow
                 direction={order === "top_delegator" ? sort : undefined}
               />
             </div>
           ) : (
             <div className='flex w-full justify-end'>
-              <span>Top delegator</span>
+              <span>{t("pools.table.topDelegator")}</span>
             </div>
           )}
         </div>

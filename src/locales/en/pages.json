@@ -62,6 +62,20 @@
       "hash": "Hash",
       "slot": "Slot",
       "height": "Height"
+    },
+    "table": {
+      "date": "Date",
+      "height": "Height",
+      "slot": "Slot",
+      "txs": "TXs",
+      "mintedBy": "Minted by",
+      "hash": "Hash",
+      "epochSlot": "Epoch slot",
+      "vrfKey": "VRF key",
+      "size": "Size",
+      "certCount": "Cert Count",
+      "protoVersion": "Proto Version",
+      "protoVersionTooltip": "Protocol version"
     }
   },
   "epochs": {
@@ -269,7 +283,21 @@
     },
     "table": {
       "transactionHash": "Transaction Hash",
-      "longetivity": "Longetivity"
+      "longetivity": "Longetivity",
+      "pool": "Pool",
+      "stake": "Stake",
+      "rewards": "Rewards",
+      "luck": "Luck",
+      "drep": "DRep",
+      "fees": "Fees",
+      "blocks": "Blocks",
+      "pledge": "Pledge",
+      "pledgeLeverage": "Pledge Leverage",
+      "delegators": "Delegators",
+      "averageStake": "Average stake",
+      "selectedVote": "Selected vote",
+      "topDelegator": "Top delegator",
+      "epoch": "Epoch"
     },
     "analytics": {
       "newStakers": "New Stakers",

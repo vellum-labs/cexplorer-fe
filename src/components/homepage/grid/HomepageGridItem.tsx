@@ -11,6 +11,7 @@ import { HomepageDetailWidget } from "../widgets/HomepageDetailWidget";
 import { HomepageTableWidget } from "../widgets/HomepageTableWidget";
 
 import { useHomepageStore } from "@/stores/homepageStore";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface HomepageGridItemProps {
   title: string;
@@ -33,7 +34,11 @@ export const HomepageGridItem: FC<HomepageGridItemProps> = ({
   detailAddr,
   width,
 }) => {
+  const { t } = useAppTranslation("common");
   const { customize, handleRemoveWidget } = useHomepageStore();
+
+  const translatedTitle = t(`homepage.widgets.titles.${title}`, title);
+  const translatedLinkTitle = t(`homepage.widgets.linkTitles.${linkTitle}`, linkTitle);
 
   return (
     <div className='relative h-full w-full'>
@@ -48,12 +53,12 @@ export const HomepageGridItem: FC<HomepageGridItemProps> = ({
             }}
           />
         )}
-        {<span className='text-text-lg font-semibold'>{title}</span>}
+        {<span className='text-text-lg font-semibold'>{translatedTitle}</span>}
         {type === WidgetTypes.TABLE && (
           <Link to={link}>
-            <div className='flex items-center gap-1/2'>
-              <span className='text-text-sm font-semibold text-primary'>
-                {linkTitle}
+            <div className='flex shrink-0 items-center gap-1/2'>
+              <span className='text-nowrap text-text-sm font-semibold text-primary'>
+                {translatedLinkTitle}
               </span>
               <ArrowRight size={15} className='text-primary' />
             </div>

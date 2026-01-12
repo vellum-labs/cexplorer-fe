@@ -225,7 +225,7 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
 
   return (
     <>
-      <div className='absolute right-28 top-2'>
+      <div className='absolute right-36 top-2'>
         <TableSettingsDropdown
           rows={0}
           setRows={() => {}}
@@ -255,7 +255,7 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
         />
       </div>
       {width > 1 && (
-        <div className='absolute right-40 top-[8px]'>
+        <div className='absolute right-48 top-[8px]'>
           <PaginationPrevious
             disabled={page === 1}
             onClick={() => setPage(prev => prev - 1)}
@@ -268,7 +268,7 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
       )}
       {width > 1 && (
         <div
-          className='absolute right-[260px] top-[11px] flex h-[30px] items-center'
+          className='absolute right-[285px] top-[11px] flex h-[30px] items-center'
           ref={inputRef}
         >
           <Search
