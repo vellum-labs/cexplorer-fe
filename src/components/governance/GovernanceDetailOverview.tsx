@@ -889,6 +889,9 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
         <SafetyLinkModal
           url={clickedUrl}
           onClose={() => setClickedUrl(undefined)}
+          warningText={t("sdk.safetyLink.warningText")}
+          goBackLabel={t("sdk.safetyLink.goBackLabel")}
+          visitLabel={t("sdk.safetyLink.visitLabel")}
         />
       )}
     </>

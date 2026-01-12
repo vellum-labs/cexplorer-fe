@@ -103,7 +103,13 @@ export const usePoolDetail = ({
         data?.registered && format(parseISO(data?.registered), "dd.MM.yyyy"),
     },
     {
-      label: <DelegatorsLabel minDelegationAda={minDelegationAda} />,
+      label: (
+        <DelegatorsLabel
+          minDelegationAda={minDelegationAda}
+          label={t("common:sdk.delegatorsLabel.label")}
+          tooltipText={t("common:sdk.delegatorsLabel.tooltipText", { minDelegationAda })}
+        />
+      ),
       value: formatNumber(data?.delegators),
     },
     {
@@ -125,6 +131,9 @@ export const usePoolDetail = ({
             <SafetyLinkModal
               url={data?.pool_name.homepage ?? ""}
               onClose={() => setLinkModal(false)}
+              warningText={t("sdk.safetyLink.warningText")}
+              goBackLabel={t("sdk.safetyLink.goBackLabel")}
+              visitLabel={t("sdk.safetyLink.visitLabel")}
             />
           )}
         </>

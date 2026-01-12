@@ -116,6 +116,7 @@ export const ContractInput: FC<ContractInputProps> = ({
           isLoading={isLoading}
           data={input.redeemer.datum.value}
           search
+          noDataLabel={t("sdk.jsonDisplay.noDataLabel")}
         />
         <span>
           <span className='mt-1 flex items-center gap-1/2'>
@@ -197,6 +198,7 @@ export const ContractInput: FC<ContractInputProps> = ({
               isLoading={isLoading}
               search
               data={output?.value}
+              noDataLabel={t("sdk.jsonDisplay.noDataLabel")}
             />
           </span>
         ))}

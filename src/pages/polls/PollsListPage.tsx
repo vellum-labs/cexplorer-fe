@@ -183,8 +183,8 @@ export const PollsListPage = () => {
       <PageBase
         adsCarousel={false}
         metadataTitle='pollsPage'
-        title={t("pages.polls.title")}
-        breadcrumbItems={[{ label: t("breadcrumbs.voting") }]}
+        title={t("pages:polls.title")}
+        breadcrumbItems={[{ label: t("pages:breadcrumbs.voting") }]}
       >
         <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
           <Tabs

@@ -9,6 +9,7 @@ import ConnectWalletModal from "../wallet/ConnectWalletModal";
 import { useFetchUserInfo } from "@/services/user";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useWalletStore } from "@/stores/walletStore";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useCallback, useRef, useState } from "react";
 
 import { colors } from "@/constants/colors";
@@ -56,6 +57,7 @@ export const AnalyticsGraph: FC<Props> = ({
   actions,
   sortBy,
 }) => {
+  const { t } = useAppTranslation("common");
   const { address, wallet } = useWalletStore();
   const userQuery = useFetchUserInfo();
   const nftCount = userQuery.data?.data?.membership.nfts;
@@ -133,6 +135,11 @@ export const AnalyticsGraph: FC<Props> = ({
           setShowConnectWallet={setShowConnectWallet}
           address={address}
           walletApi={wallet as unknown as WalletApi}
+          title={t("sdk.featureModal.title")}
+          subTitle={t("sdk.featureModal.subTitle")}
+          cancelLabel={t("sdk.featureModal.cancelLabel")}
+          connectWalletLabel={t("sdk.featureModal.connectWalletLabel")}
+          getProLabel={t("sdk.featureModal.getProLabel")}
         />
       )}
       {showConnectWallet && (

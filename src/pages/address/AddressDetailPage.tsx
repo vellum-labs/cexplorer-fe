@@ -148,18 +148,18 @@ export const AddressDetailPage: FC = () => {
       breadcrumbItems={[
         stakeKey
           ? {
-              label: t("breadcrumbs.stake"),
+              label: t("pages:breadcrumbs.stake"),
               link: `/stake/${stakeAddr}` as any,
             }
           : {
-              label: t("breadcrumbs.address"),
+              label: t("pages:breadcrumbs.address"),
             },
         {
           label: formatString(address, "long"),
           ident: address,
         },
       ]}
-      title={<div className='flex items-center gap-1/2'>{t("pages.addressDetail.title")}</div>}
+      title={<div className='flex items-center gap-1/2'>{t("pages:addressDetail.title")}</div>}
       icon={<img src={addressIcon} alt='address level' className='h-6 w-6' />}
       subTitle={
         <HeaderBannerSubtitle

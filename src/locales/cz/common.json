@@ -1743,5 +1743,95 @@
     "userProfile": "Uživatelský profil",
     "public": "Veřejný",
     "hidden": "Skrytý"
+  },
+  "sdk": {
+    "header": {
+      "featuredLabel": "Doporučené:",
+      "adLabel": "Reklama"
+    },
+    "globalSearch": {
+      "recentlySearched": "Nedávno hledané",
+      "noRecentSearches": "Nemáte žádná nedávná hledání",
+      "homepagePlaceholder": "Hledat podle Adresy / Tx hash / Block hash / $Handle / Pool name...",
+      "placeholder": "Hledat bloky, transakce, ID aktiv...",
+      "notFoundLabel": "Nenalezeno",
+      "categories": {
+        "all": "Vše",
+        "tx": "Tx",
+        "block": "Blok",
+        "pool": "Pool",
+        "asset": "Aktivum",
+        "policy": "Policy",
+        "address": "Adresa",
+        "stake": "Stake",
+        "adahandle": "ADA Handle",
+        "user": "Uživatel",
+        "article": "Článek",
+        "page": "Stránka",
+        "gov": "Správa",
+        "drep": "DRep"
+      }
+    },
+    "pagination": {
+      "morePages": "Více stránek",
+      "nextPage": "Přejít na další stránku",
+      "previousPage": "Přejít na předchozí stránku"
+    },
+    "noResultsFound": "Žádné výsledky",
+    "jsonDisplay": {
+      "noDataLabel": "Žádná data nenalezena"
+    },
+    "exportTable": {
+      "title": "Exportovat tabulku",
+      "csvLabel": "CSV",
+      "csvDescription": "Skvělé pro snadné zobrazení v tabulkových nástrojích.",
+      "jsonLabel": "JSON",
+      "jsonDescription": "Nejlepší pro strukturovaná data a integraci aplikací.",
+      "cancelLabel": "Zrušit",
+      "exportLabel": "Exportovat"
+    },
+    "sensitiveContent": {
+      "rememberLabel": "Zapamatovat toto nastavení",
+      "displayLabel": "Zobrazit"
+    },
+    "safetyLink": {
+      "warningText": "Přecházíte na externí, nemoderovanou URL: ",
+      "goBackLabel": "Zpět",
+      "visitLabel": "Navštívit"
+    },
+    "displayVote": {
+      "placeholder": "Hledat ID akce správy...",
+      "emptyStateMessage": "Vypadá to, že vám chybí ID akce správy. Zadejte ho pro nalezení výsledků!",
+      "noResultsMessage": "Žádné výsledky. Zkontrolujte vstup a zkuste to znovu.",
+      "typeLabel": "Typ",
+      "titleLabel": "Název",
+      "idLabel": "ID",
+      "identLabel": "Ident",
+      "cancelLabel": "Zrušit",
+      "addActionLabel": "Přidat akci správy"
+    },
+    "featureModal": {
+      "title": "Funkce Cexplorer PRO",
+      "subTitle": "Pro přístup k prémiovým funkcím potřebujete vlastnit Cexplorer NFT...",
+      "cancelLabel": "Zrušit",
+      "connectWalletLabel": "Připojit peněženku",
+      "getProLabel": "Získat PRO"
+    },
+    "delegatorsLabel": {
+      "label": "Delegátoři",
+      "tooltipText": "Nezahrnuje delegátory se stakem menším než {{minDelegationAda}} ADA"
+    },
+    "stakeCell": {
+      "unknownLabel": "Neznámý"
+    },
+    "votingBreakdownTooltip": {
+      "voteLabel": "Hlas:",
+      "votersLabel": "Voliči:",
+      "voterLabel": "volič",
+      "delegatorsLabel": "Delegátoři:",
+      "noConfidenceLabel": "Delegátoři bez důvěry:",
+      "autoAbstainStakeLabel": "Auto abstain stake:",
+      "manualAbstainStakeLabel": "Manuální abstain stake:"
+    }
   }
 }

@@ -18,6 +18,7 @@ import { Cbor } from "@harmoniclabs/cbor";
 
 import { PageBase } from "@/components/global/pages/PageBase";
 import { convertCborToJson } from "@/utils/datum/convertCborToJson";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const parseSimpleCborInt = (hex: string): { int: string } | null => {
   if (!hex || typeof hex !== "string" || hex.length < 2) return null;
@@ -69,6 +70,7 @@ const decodeDatum = (input: any): any => {
 };
 
 export const DatumPage: FC = () => {
+  const { t } = useAppTranslation("common");
   const { datum, hash } = useSearch({ from: "/datum/" });
   const [inputHash, setHash] = useState(hash ?? "");
   const [inputDatum, setInputDatum] = useState<string>();
@@ -235,6 +237,7 @@ export const DatumPage: FC = () => {
                 isLoading={false}
                 isError={false}
                 search
+                noDataLabel={t("sdk.jsonDisplay.noDataLabel")}
               />
             </div>
           </div>

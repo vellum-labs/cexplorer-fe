@@ -26,10 +26,10 @@ export const PoolAnalytics: FC = () => {
 
   return (
     <PageBase
-      title={t("pages.poolAnalytics.title")}
+      title={t("pages:poolAnalytics.title")}
       breadcrumbItems={[
-        { label: t("breadcrumbs.analytics"), link: "/analytics" },
-        { label: t("breadcrumbs.pool") },
+        { label: t("pages:breadcrumbs.analytics"), link: "/analytics" },
+        { label: t("pages:breadcrumbs.pool") },
       ]}
       metadataTitle='poolAnalytics'
     >

@@ -201,6 +201,15 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
           onClose={() => setDisplayVoteModal(false)}
           onDisplay={handleAddVoteFilter}
           useFetchMiscSearch={useFetchMiscSearch}
+          placeholder={t("common:sdk.displayVote.placeholder")}
+          emptyStateMessage={t("common:sdk.displayVote.emptyStateMessage")}
+          noResultsMessage={t("common:sdk.displayVote.noResultsMessage")}
+          typeLabel={t("common:sdk.displayVote.typeLabel")}
+          titleLabel={t("common:sdk.displayVote.titleLabel")}
+          idLabel={t("common:sdk.displayVote.idLabel")}
+          identLabel={t("common:sdk.displayVote.identLabel")}
+          cancelLabel={t("common:sdk.displayVote.cancelLabel")}
+          addActionLabel={t("common:sdk.displayVote.addActionLabel")}
         />
       )}
     </>

@@ -136,6 +136,7 @@ export const VoteCell: FC<VoteCellProps> = ({
                         data={JSON.parse(fullMetadata)}
                         isLoading={false}
                         isError={false}
+                        noDataLabel={t("common:sdk.jsonDisplay.noDataLabel")}
                       />
                     ) : (
                       <div
@@ -180,6 +181,9 @@ export const VoteCell: FC<VoteCellProps> = ({
           onClose={() => {
             setClickedUrl(null);
           }}
+          warningText={t("common:sdk.safetyLink.warningText")}
+          goBackLabel={t("common:sdk.safetyLink.goBackLabel")}
+          visitLabel={t("common:sdk.safetyLink.visitLabel")}
         />
       )}
     </div>

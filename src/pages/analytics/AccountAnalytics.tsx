@@ -44,10 +44,10 @@ export const AccountAnalytics: FC = () => {
     <PageBase
       metadataTitle='accountAnalytics'
       breadcrumbItems={[
-        { label: t("breadcrumbs.analytics"), link: "/analytics" },
-        { label: t("breadcrumbs.account") },
+        { label: t("pages:breadcrumbs.analytics"), link: "/analytics" },
+        { label: t("pages:breadcrumbs.account") },
       ]}
-      title={t("pages.accountAnalytics.title")}
+      title={t("pages:accountAnalytics.title")}
     >
       <Tabs
         items={tabs}

@@ -59,6 +59,7 @@ export const GovernanceDetailPage: FC = () => {
           data={detailQuery?.data?.data?.description?.contents}
           isError={false}
           isLoading={false}
+          noDataLabel={t("sdk.jsonDisplay.noDataLabel")}
         />
       ),
       visible: !!detailQuery?.data?.data?.description?.contents,

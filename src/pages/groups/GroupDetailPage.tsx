@@ -602,13 +602,13 @@ export const GroupDetailPage = () => {
             <BreadcrumbList className='flex items-center'>
               <BreadcrumbItem>
                 <Link className='underline underline-offset-2' to='/'>
-                  {t("breadcrumbs.home")}
+                  {t("pages:breadcrumbs.home")}
                 </Link>
               </BreadcrumbItem>
               /
               <BreadcrumbItem>
                 <Link className='underline underline-offset-2' to={"/groups"}>
-                  {t("breadcrumbs.groups")}
+                  {t("pages:breadcrumbs.groups")}
                 </Link>
               </BreadcrumbItem>
               / <BreadcrumbItem className='text-text'>{name}</BreadcrumbItem>

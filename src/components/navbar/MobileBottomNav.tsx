@@ -167,7 +167,32 @@ export const MobileBottomNav: FC = () => {
             className='w-full max-w-2xl px-4'
             onClick={e => e.stopPropagation()}
           >
-            <GlobalSearch />
+            <GlobalSearch
+              isHomepage
+              recentLabels={{
+                recentlySearchedLabel: t("common:sdk.globalSearch.recentlySearched"),
+                noRecentSearchesLabel: t("common:sdk.globalSearch.noRecentSearches"),
+              }}
+              categoryLabels={{
+                all: t("common:sdk.globalSearch.categories.all"),
+                tx: t("common:sdk.globalSearch.categories.tx"),
+                block: t("common:sdk.globalSearch.categories.block"),
+                pool: t("common:sdk.globalSearch.categories.pool"),
+                asset: t("common:sdk.globalSearch.categories.asset"),
+                policy: t("common:sdk.globalSearch.categories.policy"),
+                address: t("common:sdk.globalSearch.categories.address"),
+                stake: t("common:sdk.globalSearch.categories.stake"),
+                adahandle: t("common:sdk.globalSearch.categories.adahandle"),
+                user: t("common:sdk.globalSearch.categories.user"),
+                article: t("common:sdk.globalSearch.categories.article"),
+                page: t("common:sdk.globalSearch.categories.page"),
+                gov: t("common:sdk.globalSearch.categories.gov"),
+                drep: t("common:sdk.globalSearch.categories.drep"),
+              }}
+              homepagePlaceholder={t("common:sdk.globalSearch.homepagePlaceholder")}
+              placeholder={t("common:sdk.globalSearch.placeholder")}
+              notFoundLabel={t("common:sdk.globalSearch.notFoundLabel")}
+            />
           </div>
         </div>
       )}

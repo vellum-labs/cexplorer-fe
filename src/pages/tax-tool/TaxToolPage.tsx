@@ -83,8 +83,8 @@ export const TaxToolPage: FC = () => {
   return (
     <PageBase
       metadataTitle='taxTool'
-      title={t("pages.taxTool.title")}
-      breadcrumbItems={[{ label: t("breadcrumbs.taxTool") }]}
+      title={t("pages:taxTool.title")}
+      breadcrumbItems={[{ label: t("pages:breadcrumbs.taxTool") }]}
       adsCarousel={false}
     >
       <section className='flex w-full justify-center'>

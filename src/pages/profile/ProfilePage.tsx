@@ -18,8 +18,8 @@ export const ProfilePage = () => {
         <Helmet>{<title>{metadata.profile.title}</title>}</Helmet>
 
         <HeaderBanner
-          title={t("pages.profile.title")}
-          breadcrumbItems={[{ label: t("breadcrumbs.settings") }]}
+          title={t("pages:profile.title")}
+          breadcrumbItems={[{ label: t("pages:breadcrumbs.settings") }]}
           subTitle
         />
         <Tabs

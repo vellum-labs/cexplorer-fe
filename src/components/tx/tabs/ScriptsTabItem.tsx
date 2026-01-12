@@ -69,6 +69,7 @@ export const ScriptsTabItem = () => {
                   isLoading={query.isLoading}
                   data={output.reference_script.value}
                   search
+                  noDataLabel={t("sdk.jsonDisplay.noDataLabel")}
                 />
               )}
               {output?.datum_hash && (

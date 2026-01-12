@@ -5,6 +5,7 @@ import { BreadcrumbSeparator, Header } from "@vellumlabs/cexplorer-sdk";
 
 import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic, useFetchMiscSearch } from "@/services/misc";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export interface HeaderBannerProps {
   breadcrumbItems?: HeaderProps["breadcrumbItems"];
@@ -33,6 +34,7 @@ export const HeaderBanner = ({
   customPage,
   withoutSearch,
 }: HeaderBannerProps) => {
+  const { t } = useAppTranslation("common");
   const { locale } = useLocaleStore();
   const miscBasic = useFetchMiscBasic(true);
 
@@ -52,6 +54,33 @@ export const HeaderBanner = ({
       customPage={customPage}
       icon={icon}
       withoutSearch={withoutSearch}
+      featuredLabel={t("sdk.header.featuredLabel")}
+      adLabel={t("sdk.header.adLabel")}
+      globalSearchLabels={{
+        recentLabels: {
+          recentlySearchedLabel: t("sdk.globalSearch.recentlySearched"),
+          noRecentSearchesLabel: t("sdk.globalSearch.noRecentSearches"),
+        },
+        categoryLabels: {
+          all: t("sdk.globalSearch.categories.all"),
+          tx: t("sdk.globalSearch.categories.tx"),
+          block: t("sdk.globalSearch.categories.block"),
+          pool: t("sdk.globalSearch.categories.pool"),
+          asset: t("sdk.globalSearch.categories.asset"),
+          policy: t("sdk.globalSearch.categories.policy"),
+          address: t("sdk.globalSearch.categories.address"),
+          stake: t("sdk.globalSearch.categories.stake"),
+          adahandle: t("sdk.globalSearch.categories.adahandle"),
+          user: t("sdk.globalSearch.categories.user"),
+          article: t("sdk.globalSearch.categories.article"),
+          page: t("sdk.globalSearch.categories.page"),
+          gov: t("sdk.globalSearch.categories.gov"),
+          drep: t("sdk.globalSearch.categories.drep"),
+        },
+        homepagePlaceholder: t("sdk.globalSearch.homepagePlaceholder"),
+        placeholder: t("sdk.globalSearch.placeholder"),
+        notFoundLabel: t("sdk.globalSearch.notFoundLabel"),
+      }}
     />
   );
 };

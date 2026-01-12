@@ -421,6 +421,11 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
           currentPage={currentPage}
           setCurrentPage={onPageChange}
           totalPages={totalPages}
+          labels={{
+            ellipsisSrLabel: t("sdk.pagination.morePages"),
+            nextAriaLabel: t("sdk.pagination.nextPage"),
+            previousAriaLabel: t("sdk.pagination.previousPage"),
+          }}
         />
       )}
     </div>

@@ -9,11 +9,13 @@ import { useRef, useState } from "react";
 import { FileText } from "lucide-react";
 
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { WikiAccordionItem } from "@/components/wiki/WikiAccordionItem";
 import { useFetchWikiList } from "@/services/article";
 import LogoMark from "@/resources/images/cexLogo.svg";
 
 export const WikiListPage = () => {
+  const { t } = useAppTranslation("common");
   const query = useFetchWikiList("en", 0, 100);
   const items = query.data?.pages.flatMap(page => page.data.data) ?? [];
   const firstRender = useRef(true);
@@ -60,7 +62,7 @@ export const WikiListPage = () => {
     >
       <div className='mx-auto flex w-full max-w-[900px] flex-col gap-1.5 p-mobile md:p-desktop'>
         {items.length === 0 ? (
-          <NoResultsFound />
+          <NoResultsFound label={t("sdk.noResultsFound")} />
         ) : (
           <Accordion
             type='single'

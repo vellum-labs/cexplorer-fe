@@ -47,6 +47,8 @@ const MetadataTabItem = () => {
         localStorageKey='showSensitiveContent'
         title={t("tx.userGeneratedContent")}
         description={t("tx.userGeneratedContentDescription")}
+        rememberLabel={t("sdk.sensitiveContent.rememberLabel")}
+        displayLabel={t("sdk.sensitiveContent.displayLabel")}
       />
     );
   }
@@ -74,6 +76,7 @@ const MetadataTabItem = () => {
             isLoading={query.isLoading}
             isError={query.isError}
             search
+            noDataLabel={t("sdk.jsonDisplay.noDataLabel")}
           />
         </section>
       ))}

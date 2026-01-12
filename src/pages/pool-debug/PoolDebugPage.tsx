@@ -85,8 +85,8 @@ export const PoolDebugPage: FC = () => {
   return (
     <PageBase
       metadataTitle='poolDebug'
-      title={t("pages.poolDebug.title")}
-      breadcrumbItems={[{ label: t("breadcrumbs.poolDebug") }]}
+      title={t("pages:poolDebug.title")}
+      breadcrumbItems={[{ label: t("pages:breadcrumbs.poolDebug") }]}
       adsCarousel={false}
     >
       <div className='flex w-full max-w-desktop flex-col gap-3 p-mobile lg:p-desktop'>

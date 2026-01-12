@@ -970,6 +970,9 @@
   "poolAnalytics": {
     "title": "Analytika poolů"
   },
+  "accountAnalytics": {
+    "title": "Analytika účtů"
+  },
   "addressDetail": {
     "title": "Adresa"
   },
@@ -1026,7 +1029,10 @@
     "stake": "Stake",
     "address": "Adresa",
     "assets": "Aktiva",
-    "settings": "Nastavení"
+    "settings": "Nastavení",
+    "analytics": "Analytika",
+    "account": "Účet",
+    "pool": "Pool"
   },
   "errors": {
     "notFound": "Stránka nenalezena",

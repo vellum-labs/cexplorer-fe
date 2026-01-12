@@ -33,8 +33,8 @@ export const ScriptListPage: FC = () => {
   return (
     <PageBase
       metadataTitle='scriptList'
-      title={t("pages.scriptList.title")}
-      breadcrumbItems={[{ label: t("breadcrumbs.scriptList") }]}
+      title={t("pages:scriptList.title")}
+      breadcrumbItems={[{ label: t("pages:breadcrumbs.scriptList") }]}
     >
       <Tabs mobileItemsCount={3} items={tabs} />
     </PageBase>

@@ -252,6 +252,11 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
           currentPage={page}
           setCurrentPage={setPage}
           totalPages={totalPages}
+          labels={{
+            ellipsisSrLabel: t("common:sdk.pagination.morePages"),
+            nextAriaLabel: t("common:sdk.pagination.nextPage"),
+            previousAriaLabel: t("common:sdk.pagination.previousPage"),
+          }}
         />
       </div>
       {width > 1 && (
@@ -259,10 +264,12 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
           <PaginationPrevious
             disabled={page === 1}
             onClick={() => setPage(prev => prev - 1)}
+            ariaLabel={t("common:sdk.pagination.previousPage")}
           />
           <PaginationNext
             disabled={page >= totalPages}
             onClick={() => setPage(prev => prev + 1)}
+            ariaLabel={t("common:sdk.pagination.nextPage")}
           />
         </div>
       )}

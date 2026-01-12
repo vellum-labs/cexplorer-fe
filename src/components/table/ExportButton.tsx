@@ -56,6 +56,11 @@ const ExportButton: FC<ExportButtonProps> = ({
           setShowConnectWallet={setShowConnectWallet}
           address={address}
           walletApi={wallet as unknown as WalletApi}
+          title={t("sdk.featureModal.title")}
+          subTitle={t("sdk.featureModal.subTitle")}
+          cancelLabel={t("sdk.featureModal.cancelLabel")}
+          connectWalletLabel={t("sdk.featureModal.connectWalletLabel")}
+          getProLabel={t("sdk.featureModal.getProLabel")}
         />
       )}
       {showConnectWallet && (
@@ -67,6 +72,13 @@ const ExportButton: FC<ExportButtonProps> = ({
           columns={columns}
           items={items}
           currentPage={currentPage}
+          title={t("sdk.exportTable.title")}
+          csvLabel={t("sdk.exportTable.csvLabel")}
+          csvDescription={t("sdk.exportTable.csvDescription")}
+          jsonLabel={t("sdk.exportTable.jsonLabel")}
+          jsonDescription={t("sdk.exportTable.jsonDescription")}
+          cancelLabel={t("sdk.exportTable.cancelLabel")}
+          exportLabel={t("sdk.exportTable.exportLabel")}
         />
       )}
       <div

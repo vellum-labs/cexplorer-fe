@@ -92,7 +92,15 @@ export const PolicyAssetGrid: FC<PolicyAssetGridProps> = ({
       {!infiniteScrolling &&
         totalItems > itemsPerPage &&
         (query as UseInfiniteQueryResult).fetchNextPage && (
-          <Pagination currentPage={currentPage} totalPages={totalPages} />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            labels={{
+              ellipsisSrLabel: t("sdk.pagination.morePages"),
+              nextAriaLabel: t("sdk.pagination.nextPage"),
+              previousAriaLabel: t("sdk.pagination.previousPage"),
+            }}
+          />
         )}
       {((!query.isLoading && query.isError) ||
         (!query.isLoading && !(items ?? []).length)) && (

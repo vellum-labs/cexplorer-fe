@@ -175,7 +175,13 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
           ),
         },
         {
-          label: <DelegatorsLabel minDelegationAda={minDelegationAda} />,
+          label: (
+            <DelegatorsLabel
+              minDelegationAda={minDelegationAda}
+              label={t("common:sdk.delegatorsLabel.label")}
+              tooltipText={t("common:sdk.delegatorsLabel.tooltipText", { minDelegationAda })}
+            />
+          ),
           value: currentDelegators
             ? formatNumber(currentDelegators)
             : t("dreps.detailPage.about.unknown"),
@@ -230,7 +236,13 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
           ),
         },
         {
-          label: <DelegatorsLabel minDelegationAda={minDelegationAda} />,
+          label: (
+            <DelegatorsLabel
+              minDelegationAda={minDelegationAda}
+              label={t("common:sdk.delegatorsLabel.label")}
+              tooltipText={t("common:sdk.delegatorsLabel.tooltipText", { minDelegationAda })}
+            />
+          ),
           value: currentDelegators
             ? formatNumber(currentDelegators)
             : Array.isArray(data?.distr) &&
@@ -285,7 +297,13 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
           ),
         },
         {
-          label: <DelegatorsLabel minDelegationAda={minDelegationAda} />,
+          label: (
+            <DelegatorsLabel
+              minDelegationAda={minDelegationAda}
+              label={t("common:sdk.delegatorsLabel.label")}
+              tooltipText={t("common:sdk.delegatorsLabel.tooltipText", { minDelegationAda })}
+            />
+          ),
           value: currentDelegators
             ? formatNumber(currentDelegators)
             : t("dreps.detailPage.about.unknown"),

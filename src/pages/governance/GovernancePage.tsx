@@ -157,7 +157,7 @@ export const GovernancePage: FC = () => {
   return (
     <PageBase
       metadataTitle='governance'
-      title={t("pages.governance.title")}
+      title={t("pages:governance.title")}
       breadcrumbItems={[
         {
           label: <span className='inline pt-1/2'>{t("governance.breadcrumbs.governance")}</span>,

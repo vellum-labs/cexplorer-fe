@@ -970,6 +970,9 @@
   "poolAnalytics": {
     "title": "Pool analytics"
   },
+  "accountAnalytics": {
+    "title": "Account analytics"
+  },
   "addressDetail": {
     "title": "Address"
   },
@@ -1026,7 +1029,10 @@
     "stake": "Stake",
     "address": "Address",
     "assets": "Assets",
-    "settings": "Settings"
+    "settings": "Settings",
+    "analytics": "Analytics",
+    "account": "Account",
+    "pool": "Pool"
   },
   "errors": {
     "notFound": "Page not found",

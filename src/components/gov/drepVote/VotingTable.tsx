@@ -268,11 +268,16 @@ export const VotingTable: FC<VotingTableProps> = () => {
           )}
         </div>
       </div>
-      {!query.isLoading && !items?.length && <NoResultsFound />}
+      {!query.isLoading && !items?.length && <NoResultsFound label={t("common:sdk.noResultsFound")} />}
       {totalItems > rows && (query as UseInfiniteQueryResult).fetchNextPage && (
         <Pagination
           currentPage={page ?? 1}
           totalPages={Math.ceil(totalItems / rows)}
+          labels={{
+            ellipsisSrLabel: t("common:sdk.pagination.morePages"),
+            nextAriaLabel: t("common:sdk.pagination.nextPage"),
+            previousAriaLabel: t("common:sdk.pagination.previousPage"),
+          }}
         />
       )}
     </>

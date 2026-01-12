@@ -94,12 +94,12 @@ export const PolicyDetailPage: FC = () => {
       }}
       title={
         <div className='flex items-center gap-1/2'>
-          {collectionName ? collectionName : t("pages.policyDetail.title")}
+          {collectionName ? collectionName : t("pages:policyDetail.title")}
         </div>
       }
       breadcrumbItems={[
         {
-          label: t("breadcrumbs.assets"),
+          label: t("pages:breadcrumbs.assets"),
           link: "/asset",
         },
         {

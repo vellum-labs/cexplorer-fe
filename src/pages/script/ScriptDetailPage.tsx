@@ -51,10 +51,10 @@ export const ScriptDetailPage = () => {
         before: "%script%",
         after: hash,
       }}
-      title={t("pages.scriptDetail.title")}
+      title={t("pages:scriptDetail.title")}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>{t("breadcrumbs.scriptList")}</span>,
+          label: <span className='inline pt-1/2'>{t("pages:breadcrumbs.scriptList")}</span>,
           link: "/script",
         },
         {

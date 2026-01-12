@@ -27,8 +27,10 @@ import rehypeRaw from "rehype-raw";
 import { markdownComponents } from "@/constants/markdows";
 import { handleDelegation } from "@/utils/wallet/handleDelegation";
 import { useWalletStore } from "@/stores/walletStore";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const ArticleDetailPage = () => {
+  const { t } = useAppTranslation("common");
   const route = getRouteApi("/article/$url");
   const { url } = route.useParams();
 
@@ -318,7 +320,13 @@ export const ArticleDetailPage = () => {
         </section>
       </main>
       {clickedUrl && (
-        <SafetyLinkModal url={clickedUrl} onClose={() => setClickedUrl(null)} />
+        <SafetyLinkModal
+          url={clickedUrl}
+          onClose={() => setClickedUrl(null)}
+          warningText={t("sdk.safetyLink.warningText")}
+          goBackLabel={t("sdk.safetyLink.goBackLabel")}
+          visitLabel={t("sdk.safetyLink.visitLabel")}
+        />
       )}
     </>
   );

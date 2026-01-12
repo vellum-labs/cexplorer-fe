@@ -22,8 +22,10 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const ArticleListPage = () => {
+  const { t } = useAppTranslation("common");
   const { page } = useSearch({ from: "/article/" });
   const currentPage = page ?? 1;
   const [category, setCategory] = useState<
@@ -200,7 +202,7 @@ export const ArticleListPage = () => {
         </div>
 
         {!query.isLoading && items.length === 0 ? (
-          <NoResultsFound />
+          <NoResultsFound label={t("sdk.noResultsFound")} />
         ) : !query.isLoading ? (
           <div className='flex w-full flex-wrap justify-between gap-y-3'>
             {items.slice(1).map(item => (
@@ -219,7 +221,15 @@ export const ArticleListPage = () => {
           </div>
         )}
         {totalItems > 20 && (
-          <Pagination currentPage={currentPage} totalPages={totalPages} />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            labels={{
+              ellipsisSrLabel: t("sdk.pagination.morePages"),
+              nextAriaLabel: t("sdk.pagination.nextPage"),
+              previousAriaLabel: t("sdk.pagination.previousPage"),
+            }}
+          />
         )}
       </section>
     </PageBase>
