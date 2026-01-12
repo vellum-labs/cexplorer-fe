@@ -18,7 +18,7 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import { getRouteApi } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { VoteListPage } from "../governance/VoteListPage";
-import { AlertTriangle } from "lucide-react";
+import { CircleAlert } from "lucide-react";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import { useDelegateAction } from "@/hooks/useDelegateAction";
 
@@ -175,9 +175,9 @@ const PoolDetailPage = () => {
       homepageAd
     >
       {isRetiring && (
-        <div className='mx-mobile mb-3 flex max-w-desktop items-center gap-2 rounded-m border border-red-500 bg-red-500/10 px-3 py-2 text-red-500 lg:mx-desktop'>
-          <AlertTriangle size={20} />
-          <span className='font-medium'>
+        <div className='mx-mobile mb-3 flex max-w-desktop items-start gap-2 rounded-m border border-border p-2 lg:mx-desktop'>
+          <CircleAlert className='mt-0.5 flex-shrink-0 text-red-500' size={18} />
+          <span className='font-medium text-red-500'>
             {isAlreadyRetired
               ? `This pool is retired since epoch ${retiringEpoch}`
               : `This pool will be retired from epoch ${retiringEpoch}`}
