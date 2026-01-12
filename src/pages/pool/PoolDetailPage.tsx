@@ -49,7 +49,15 @@ const PoolDetailPage = () => {
 
   const currentEpoch = basicData?.data?.block?.epoch_no;
   const retiringEpoch = data?.pool_retire?.live?.retiring_epoch;
-  const isRetiring = retiringEpoch !== null && retiringEpoch !== undefined;
+  const poolUpdateTxId = data?.pool_update?.live?.tx?.id;
+  const poolRetireTxId = data?.pool_retire?.live?.tx_id;
+  const isRetireValid =
+    poolUpdateTxId !== undefined &&
+    poolRetireTxId !== undefined &&
+    poolRetireTxId !== null &&
+    poolUpdateTxId <= poolRetireTxId;
+  const isRetiring =
+    retiringEpoch !== null && retiringEpoch !== undefined && isRetireValid;
   const isAlreadyRetired =
     isRetiring && currentEpoch !== undefined && retiringEpoch <= currentEpoch;
   const isPoolRetiredOrRetiring = isRetiring;
