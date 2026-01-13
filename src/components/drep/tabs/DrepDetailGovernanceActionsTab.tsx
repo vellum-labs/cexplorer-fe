@@ -54,7 +54,7 @@ export const DrepDetailGovernanceActionsTab: FC = () => {
           return "-";
         }
 
-        return <DateCell time={item.tx.time} />;
+        return <DateCell time={item.tx.time} withoutConvert />;
       },
       title: <p>Date</p>,
       visible: columnsVisibility.date,
