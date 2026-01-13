@@ -24,7 +24,7 @@ const WalletConfigModal = () => {
   const { isOpen, setIsOpen } = useWalletConfigModalState();
   const { uq } = useUqStore();
   const secureRef = useRef<0 | 1>(0);
-  const expirationRef = useRef<"d" | "w" | "m" | "y">("d");
+  const expirationRef = useRef<"d" | "w" | "m" | "y">("y");
   const { address, wallet } = useWalletStore();
   const { tokens, setTokens } = useAuthTokensStore();
   const { disconnect } = useConnectWallet();
@@ -183,7 +183,7 @@ const WalletConfigModal = () => {
         onValueChange={value => {
           expirationRef.current = value as "d" | "w" | "m" | "y";
         }}
-        defaultValue='d'
+        defaultValue='y'
         className='mt-1.5 flex gap-2'
       >
         <div className='flex items-center space-x-2'>

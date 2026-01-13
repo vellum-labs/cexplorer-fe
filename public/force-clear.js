@@ -1,5 +1,5 @@
 (async () => {
-  const FORCE_CLEAR_DATE = new Date("2025-11-24T05:07:00Z").getTime();
+  const FORCE_CLEAR_DATE = new Date("2026-01-09T15:15:00Z").getTime();
   const lastClearTimestamp = localStorage.getItem("last-clear-timestamp");
 
   window.__DISABLE_SW__ =

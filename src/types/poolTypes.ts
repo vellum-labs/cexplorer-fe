@@ -63,6 +63,7 @@ interface PoolUpdateRetireItem {
   reward_addr_id: number;
   tx_id: number;
   tx: {
+    id: number;
     hash: string;
     time: string;
   };

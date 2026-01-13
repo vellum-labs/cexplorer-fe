@@ -11,6 +11,9 @@ import { RotateCcw } from "lucide-react";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { SankeyDiagram } from "@/components/treasury/SankeyDiagram";
+import cardano2025Flows from "../../../data/cardano-2025-flows.json";
+import { AnalyticsGraph } from "@/components/analytics/AnalyticsGraph";
 
 interface ProjectionDataPoint {
   epoch: number;
@@ -157,7 +160,10 @@ export const TreasuryProjectionPage = () => {
         },
       },
       legend: {
-        data: [t("treasuryProjection.chart.treasury"), t("treasuryProjection.chart.reserves")],
+        data: [
+          t("treasuryProjection.chart.treasury"),
+          t("treasuryProjection.chart.reserves"),
+        ],
         textStyle: {
           color: textColor,
         },
@@ -276,7 +282,9 @@ export const TreasuryProjectionPage = () => {
                 {t("treasuryProjection.cardTitle")}
               </h3>
               <p className='text-text-sm text-grayTextPrimary'>
-                {t("treasuryProjection.cardDescription", { years: PROJECTION_YEARS })}
+                {t("treasuryProjection.cardDescription", {
+                  years: PROJECTION_YEARS,
+                })}
               </p>
             </div>
             <button
@@ -285,7 +293,9 @@ export const TreasuryProjectionPage = () => {
               title={t("treasuryProjection.resetTitle")}
             >
               <RotateCcw size={16} />
-              <span className='hidden sm:inline'>{t("treasuryProjection.reset")}</span>
+              <span className='hidden sm:inline'>
+                {t("treasuryProjection.reset")}
+              </span>
             </button>
           </div>
 
@@ -341,10 +351,15 @@ export const TreasuryProjectionPage = () => {
         <div className='mt-3 w-full rounded-l border border-border bg-cardBg p-2'>
           <div className='mb-2'>
             <h3 className='text-text-lg font-semibold'>
-              {t("treasuryProjection.yearProjection", { years: PROJECTION_YEARS })}
+              {t("treasuryProjection.yearProjection", {
+                years: PROJECTION_YEARS,
+              })}
             </h3>
             <p className='text-text-sm text-grayTextPrimary'>
-              {t("treasuryProjection.treasuryIncome", { tau: (tau * 100).toFixed(1), rho: (rho * 100).toFixed(2) })}
+              {t("treasuryProjection.treasuryIncome", {
+                tau: (tau * 100).toFixed(1),
+                rho: (rho * 100).toFixed(2),
+              })}
             </p>
           </div>
           <div className='relative h-[450px] w-full'>
@@ -367,6 +382,19 @@ export const TreasuryProjectionPage = () => {
             )}
           </div>
         </div>
+
+        <AnalyticsGraph
+          title='Cardano 2025 Value Flows'
+          description='Sankey diagram of 2025 income, treasury inflows, expenditures, and
+              loans.'
+          className='my-3'
+        >
+          <SankeyDiagram
+            nodes={cardano2025Flows.nodes}
+            links={cardano2025Flows.links}
+            className='h-[650px] md:h-[720px]'
+          />
+        </AnalyticsGraph>
       </div>
     </PageBase>
   );

@@ -99,12 +99,17 @@ export const ApiProfile = () => {
           </p>
         </div>
         <div className='flex gap-1 md:justify-end'>
-          <Button
-            label={t("profile.api.documentation")}
-            variant='tertiary'
-            size='md'
-            href='/api'
-          />
+          <a
+            href='https://cexplorer.apidocumentation.com/cexplorer-api'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <Button
+              label={t("profile.api.documentation")}
+              variant='tertiary'
+              size='md'
+            />
+          </a>
           <Button
             label={t("profile.api.newProject")}
             leftIcon={<Plus size={15} />}

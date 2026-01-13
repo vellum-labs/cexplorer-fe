@@ -33,7 +33,13 @@ import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { GovernanceVotingProgress } from "@/components/governance/GovernanceVotingProgress";
 import type { MiscConstResponseData } from "@/types/miscTypes";
 
-type GovernanceStatusFilter = "All" | "Active" | "Ratified" | "Expired" | "Enacted" | "Approved";
+type GovernanceStatusFilter =
+  | "All"
+  | "Active"
+  | "Ratified"
+  | "Expired"
+  | "Enacted"
+  | "Approved";
 
 interface GovernanceActionsTabProps {
   miscConst: MiscConstResponseData | undefined;
@@ -77,9 +83,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
     });
 
   const [selectedItem, setSelectedItem] = useState<GovernanceStatusFilter>(
-    outcomesOnly
-      ? "Approved"
-      : (state as GovernanceStatusFilter) || "All",
+    outcomesOnly ? "Approved" : (state as GovernanceStatusFilter) || "All",
   );
 
   const {
@@ -187,7 +191,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
 
         return (
           <div className='flex flex-col gap-1/2'>
-            <DateCell time={item?.tx?.time} />
+            <DateCell time={item?.tx?.time} withoutConvert />
             {epoch && (
               <div className='flex items-center gap-1/2'>
                 <span className='text-text-xs text-grayTextPrimary'>
@@ -344,7 +348,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
 
         return (
           <div className='flex flex-col gap-1/2'>
-            <DateCell time={String(endTime)} withoutConvert />
+            <DateCell time={endTime.toISOString()} withoutConvert />
             {item?.expired_epoch && (
               <div className='flex items-center gap-1/2'>
                 <span className='text-text-xs text-grayTextPrimary'>

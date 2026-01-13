@@ -18,7 +18,7 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import { getRouteApi } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { VoteListPage } from "../governance/VoteListPage";
-import { AlertTriangle } from "lucide-react";
+import { CircleAlert } from "lucide-react";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import { useDelegateAction } from "@/hooks/useDelegateAction";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
@@ -51,7 +51,15 @@ const PoolDetailPage = () => {
 
   const currentEpoch = basicData?.data?.block?.epoch_no;
   const retiringEpoch = data?.pool_retire?.live?.retiring_epoch;
-  const isRetiring = retiringEpoch !== null && retiringEpoch !== undefined;
+  const poolUpdateTxId = data?.pool_update?.live?.tx?.id;
+  const poolRetireTxId = data?.pool_retire?.live?.tx_id;
+  const isRetireValid =
+    poolUpdateTxId !== undefined &&
+    poolRetireTxId !== undefined &&
+    poolRetireTxId !== null &&
+    poolUpdateTxId <= poolRetireTxId;
+  const isRetiring =
+    retiringEpoch !== null && retiringEpoch !== undefined && isRetireValid;
   const isAlreadyRetired =
     isRetiring && currentEpoch !== undefined && retiringEpoch <= currentEpoch;
   const isPoolRetiredOrRetiring = isRetiring;
@@ -177,9 +185,9 @@ const PoolDetailPage = () => {
       homepageAd
     >
       {isRetiring && (
-        <div className='mx-mobile mb-3 flex max-w-desktop items-center gap-2 rounded-m border border-red-500 bg-red-500/10 px-3 py-2 text-red-500 lg:mx-desktop'>
-          <AlertTriangle size={20} />
-          <span className='font-medium'>
+        <div className='mx-mobile mb-3 flex max-w-desktop items-start gap-2 rounded-m border border-border p-2 lg:mx-desktop'>
+          <CircleAlert className='mt-0.5 flex-shrink-0 text-red-500' size={18} />
+          <span className='font-medium text-red-500'>
             {isAlreadyRetired
               ? t("pools.detailPage.retired", { epoch: retiringEpoch })
               : t("pools.detailPage.retiring", { epoch: retiringEpoch })}

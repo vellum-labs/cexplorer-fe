@@ -69,7 +69,7 @@ export const AdsPage = () => {
             <p className='text-sm text-textPrimary mb-6 leading-relaxed'>
               {t("adsPage.reach.description2")}
             </p>
-            <Link to='/ads/promotion'>
+            <Link to='/promotion'>
               <Button
                 size='lg'
                 variant='primary'
