@@ -106,8 +106,8 @@ export const usePoolDetail = ({
       label: (
         <DelegatorsLabel
           minDelegationAda={minDelegationAda}
-          label={t("common:sdk.delegatorsLabel.label")}
-          tooltipText={t("common:sdk.delegatorsLabel.tooltipText", { minDelegationAda })}
+          label={t("sdk:delegatorsLabel.label")}
+          tooltipText={t("sdk:delegatorsLabel.tooltipText", { minDelegationAda })}
         />
       ),
       value: formatNumber(data?.delegators),
@@ -131,9 +131,9 @@ export const usePoolDetail = ({
             <SafetyLinkModal
               url={data?.pool_name.homepage ?? ""}
               onClose={() => setLinkModal(false)}
-              warningText={t("sdk.safetyLink.warningText")}
-              goBackLabel={t("sdk.safetyLink.goBackLabel")}
-              visitLabel={t("sdk.safetyLink.visitLabel")}
+              warningText={t("sdk:safetyLink.warningText")}
+              goBackLabel={t("sdk:safetyLink.goBackLabel")}
+              visitLabel={t("sdk:safetyLink.visitLabel")}
             />
           )}
         </>

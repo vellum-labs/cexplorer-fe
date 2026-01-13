@@ -288,9 +288,9 @@ export const SummaryTable: FC<SummaryTableProps> = ({
           setCurrentPage={setPage}
           totalPages={totalPages}
           labels={{
-            ellipsisSrLabel: t("sdk.pagination.morePages"),
-            nextAriaLabel: t("sdk.pagination.nextPage"),
-            previousAriaLabel: t("sdk.pagination.previousPage"),
+            ellipsisSrLabel: t("sdk:pagination.morePages"),
+            nextAriaLabel: t("sdk:pagination.nextPage"),
+            previousAriaLabel: t("sdk:pagination.previousPage"),
           }}
         />
       )}

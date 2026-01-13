@@ -19,8 +19,10 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { getConstitutionStatus } from "@/utils/getConstitutionStatus";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const ConstitutionPage: FC = () => {
+  const { t } = useAppTranslation();
   const { data: miscBasic } = useFetchMiscBasic();
   const currentEpoch = Number(miscBasic?.data?.block?.epoch_no ?? 0);
 
@@ -42,7 +44,7 @@ export const ConstitutionPage: FC = () => {
       render: item => (
         <span className='text-grayTextPrimary'>{item.index + 1}</span>
       ),
-      title: "#",
+      title: t("governance.constitution.columns.rowNumber"),
       visible: true,
       widthPx: 40,
     },
@@ -56,9 +58,9 @@ export const ConstitutionPage: FC = () => {
           past: "bg-redText",
         };
         const labelMap = {
-          current: "Current constitution",
-          draft: "Draft",
-          past: "Past constitution",
+          current: t("governance.constitution.statusCurrent"),
+          draft: t("governance.constitution.statusDraft"),
+          past: t("governance.constitution.statusPast"),
         };
         return (
           <div className='flex h-[24px] w-fit items-center gap-[6px] rounded-m border border-border px-1.5'>
@@ -71,7 +73,7 @@ export const ConstitutionPage: FC = () => {
           </div>
         );
       },
-      title: "Status",
+      title: t("governance.constitution.columns.status"),
       visible: true,
       widthPx: 150,
     },
@@ -81,7 +83,7 @@ export const ConstitutionPage: FC = () => {
         if (!item?.gov_action_proposal) {
           return (
             <div className='flex flex-col'>
-              <span className='text-primary'>Genesis Constitution</span>
+              <span className='text-primary'>{t("governance.constitution.genesisConstitution")}</span>
               <div className='flex items-center gap-1'>
                 <span className='text-textSecondary text-text-xs'>
                   {formatString(item.script_hash, "long")}
@@ -116,7 +118,7 @@ export const ConstitutionPage: FC = () => {
         item?.gov_action_proposal?.description?.contents?.[0]?.txId ??
         item?.script_hash ??
         "-",
-      title: "Governance action",
+      title: t("governance.constitution.columns.governanceAction"),
       visible: true,
       widthPx: 220,
     },
@@ -133,11 +135,11 @@ export const ConstitutionPage: FC = () => {
             className='flex items-center gap-1 text-primary hover:opacity-80'
           >
             <FileText size={14} />
-            <span>Full text</span>
+            <span>{t("governance.constitution.fullText")}</span>
           </button>
         );
       },
-      title: "Content",
+      title: t("governance.constitution.columns.content"),
       visible: true,
       widthPx: 100,
     },
@@ -152,14 +154,14 @@ export const ConstitutionPage: FC = () => {
         return (
           <div className='flex flex-col'>
             <div className='flex items-center gap-1/2'>
-              <span className='text-grayTextPrimary'>Epoch</span>
+              <span className='text-grayTextPrimary'>{t("labels.epoch")}</span>
               <EpochCell no={ratifiedEpoch} />
             </div>
           </div>
         );
       },
       jsonFormat: item => item?.gov_action_proposal?.ratified_epoch ?? "-",
-      title: "Ratified epoch",
+      title: t("governance.constitution.columns.ratifiedEpoch"),
       visible: true,
       widthPx: 120,
     },
@@ -174,14 +176,14 @@ export const ConstitutionPage: FC = () => {
         return (
           <div className='flex flex-col'>
             <div className='flex items-center gap-1/2'>
-              <span className='text-grayTextPrimary'>Epoch</span>
+              <span className='text-grayTextPrimary'>{t("labels.epoch")}</span>
               <EpochCell no={enactedEpoch} />
             </div>
           </div>
         );
       },
       jsonFormat: item => item?.gov_action_proposal?.enacted_epoch ?? "-",
-      title: "Enacted epoch",
+      title: t("governance.constitution.columns.enactedEpoch"),
       visible: true,
       widthPx: 120,
     },
@@ -192,14 +194,14 @@ export const ConstitutionPage: FC = () => {
   return (
     <PageBase
       metadataTitle='constitution'
-      title='Constitution'
+      title={t("governance.constitution.title")}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>Governance</span>,
+          label: <span className='inline pt-1/2'>{t("governance.breadcrumbs.governance")}</span>,
           link: "/gov",
         },
         {
-          label: <span>Constitution</span>,
+          label: <span>{t("governance.constitution.breadcrumb")}</span>,
         },
       ]}
     >
@@ -223,7 +225,7 @@ export const ConstitutionPage: FC = () => {
             <div className='p-4'>
               <div className='mb-4 flex items-center justify-between'>
                 <h3 className='text-lg font-semibold'>
-                  Constitution Full Text
+                  {t("governance.constitution.fullTextModal")}
                 </h3>
               </div>
               {isLoading ? (

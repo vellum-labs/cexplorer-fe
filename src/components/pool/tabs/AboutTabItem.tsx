@@ -454,9 +454,9 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
         <SafetyLinkModal
           url={activeUrl}
           onClose={() => setActiveUrl("")}
-          warningText={t("sdk.safetyLink.warningText")}
-          goBackLabel={t("sdk.safetyLink.goBackLabel")}
-          visitLabel={t("sdk.safetyLink.visitLabel")}
+          warningText={t("sdk:safetyLink.warningText")}
+          goBackLabel={t("sdk:safetyLink.goBackLabel")}
+          visitLabel={t("sdk:safetyLink.visitLabel")}
         />
       )}
       <div className='flex flex-col gap-2'>

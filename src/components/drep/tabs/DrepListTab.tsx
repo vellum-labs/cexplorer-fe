@@ -201,15 +201,15 @@ export const DrepListTab = ({ watchlist }: { watchlist?: boolean }) => {
           onClose={() => setDisplayVoteModal(false)}
           onDisplay={handleAddVoteFilter}
           useFetchMiscSearch={useFetchMiscSearch}
-          placeholder={t("common:sdk.displayVote.placeholder")}
-          emptyStateMessage={t("common:sdk.displayVote.emptyStateMessage")}
-          noResultsMessage={t("common:sdk.displayVote.noResultsMessage")}
-          typeLabel={t("common:sdk.displayVote.typeLabel")}
-          titleLabel={t("common:sdk.displayVote.titleLabel")}
-          idLabel={t("common:sdk.displayVote.idLabel")}
-          identLabel={t("common:sdk.displayVote.identLabel")}
-          cancelLabel={t("common:sdk.displayVote.cancelLabel")}
-          addActionLabel={t("common:sdk.displayVote.addActionLabel")}
+          placeholder={t("sdk:displayVote.placeholder")}
+          emptyStateMessage={t("sdk:displayVote.emptyStateMessage")}
+          noResultsMessage={t("sdk:displayVote.noResultsMessage")}
+          typeLabel={t("sdk:displayVote.typeLabel")}
+          titleLabel={t("sdk:displayVote.titleLabel")}
+          idLabel={t("sdk:displayVote.idLabel")}
+          identLabel={t("sdk:displayVote.identLabel")}
+          cancelLabel={t("sdk:displayVote.cancelLabel")}
+          addActionLabel={t("sdk:displayVote.addActionLabel")}
         />
       )}
     </>

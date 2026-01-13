@@ -65,7 +65,7 @@ export const GenesisAddressesPage: FC = () => {
 
         return <AddressCell address={item.address} />;
       },
-      title: "Address",
+      title: t("genesis.table.address"),
       visible: columnsVisibility.address,
       widthPx: 150,
     },
@@ -82,7 +82,7 @@ export const GenesisAddressesPage: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>Initial Value</p>,
+      title: <p className='w-full text-right'>{t("genesis.table.initialValue")}</p>,
       visible: columnsVisibility.value,
       widthPx: 80,
     },
@@ -99,7 +99,7 @@ export const GenesisAddressesPage: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>Current Balance</p>,
+      title: <p className='w-full text-right'>{t("genesis.table.currentBalance")}</p>,
       visible: columnsVisibility.balance,
       widthPx: 80,
     },
@@ -112,7 +112,7 @@ export const GenesisAddressesPage: FC = () => {
 
         return <DateCell time={item.detail.first} />;
       },
-      title: <p>First activity</p>,
+      title: <p>{t("genesis.table.firstActivity")}</p>,
       visible: columnsVisibility.first_activity,
       widthPx: 60,
     },
@@ -125,7 +125,7 @@ export const GenesisAddressesPage: FC = () => {
 
         return <DateCell time={item.detail.last} />;
       },
-      title: <p>Last activity</p>,
+      title: <p>{t("genesis.table.lastActivity")}</p>,
       visible: columnsVisibility.last_activity,
       widthPx: 60,
     },
@@ -141,10 +141,10 @@ export const GenesisAddressesPage: FC = () => {
     <PageBase
       metadataTitle='genesisAddresses'
       breadcrumbItems={[
-        { label: "Analytics", link: "/analytics" },
-        { label: "Genesis Addresses" },
+        { label: t("genesis.breadcrumbs.analytics"), link: "/analytics" },
+        { label: t("genesis.breadcrumbs.genesisAddresses") },
       ]}
-      title='Genesis Addresses'
+      title={t("genesis.title")}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
@@ -154,7 +154,7 @@ export const GenesisAddressesPage: FC = () => {
               <LoadingSkeleton height='27px' width='220px' />
             ) : totalItems > 0 ? (
               <h3 className='basis-[230px] text-nowrap'>
-                Total of {formatNumber(totalItems)} genesis addresses
+                {t("genesis.totalAddresses", { count: formatNumber(totalItems) })}
               </h3>
             ) : (
               ""
@@ -170,7 +170,7 @@ export const GenesisAddressesPage: FC = () => {
                 setRows={setRows}
                 columnsOptions={genesisAddressesTableOptions.map(item => {
                   return {
-                    label: t(`common:tableSettings.${item.key}`),
+                    label: t(`tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(item.key, !columnsVisibility[item.key]),

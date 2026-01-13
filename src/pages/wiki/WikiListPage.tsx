@@ -62,7 +62,7 @@ export const WikiListPage = () => {
     >
       <div className='mx-auto flex w-full max-w-[900px] flex-col gap-1.5 p-mobile md:p-desktop'>
         {items.length === 0 ? (
-          <NoResultsFound label={t("sdk.noResultsFound")} />
+          <NoResultsFound label={t("sdk:noResultsFound")} />
         ) : (
           <Accordion
             type='single'

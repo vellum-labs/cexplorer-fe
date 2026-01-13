@@ -32,8 +32,10 @@ import { Select, SelectTrigger } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 import { useFetchMiscBasic } from "@/services/misc";
 import { generateImageUrl } from "@/utils/generateImageUrl";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const WalletPage: FC = () => {
+  const { t } = useAppTranslation();
   const { theme } = useThemeStore();
   const walletData = walletComparisonData as CompareWallet[];
 
@@ -132,7 +134,7 @@ export const WalletPage: FC = () => {
       title: (
         <div className='flex h-full w-full items-end px-3 pb-2'>
           <span className='text-center text-text-sm font-semibold text-primary'>
-            Basic features
+            {t("wallet.comparison.sections.basicFeatures")}
           </span>
         </div>
       ),
@@ -151,7 +153,7 @@ export const WalletPage: FC = () => {
       key: "supported_platforms",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-text-sm font-medium'>Supported platforms</span>
+          <span className='text-text-sm font-medium'>{t("wallet.comparison.rows.supportedPlatforms")}</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -183,7 +185,7 @@ export const WalletPage: FC = () => {
       key: "opensource",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-text-sm font-medium'>Opensource</span>
+          <span className='text-text-sm font-medium'>{t("wallet.comparison.rows.opensource")}</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -206,7 +208,7 @@ export const WalletPage: FC = () => {
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-text-sm font-medium'>
-            Smart contracts interaction
+            {t("wallet.comparison.rows.smartContractsInteraction")}
           </span>
           <CircleHelp
             size={13}
@@ -229,7 +231,7 @@ export const WalletPage: FC = () => {
       key: "testnet_support",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-text-sm font-medium'>Testnet support</span>
+          <span className='text-text-sm font-medium'>{t("wallet.comparison.rows.testnetSupport")}</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -252,7 +254,7 @@ export const WalletPage: FC = () => {
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-nowrap text-text-sm font-medium'>
-            Hardware wallet compatibility
+            {t("wallet.comparison.rows.hardwareWalletCompatibility")}
           </span>
           <CircleHelp
             size={13}
@@ -295,7 +297,7 @@ export const WalletPage: FC = () => {
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-nowrap text-text-sm font-medium'>
-            Cross-chain compatibility
+            {t("wallet.comparison.rows.crossChainCompatibility")}
           </span>
           <CircleHelp
             size={13}
@@ -342,7 +344,7 @@ export const WalletPage: FC = () => {
       title: (
         <div className='flex h-full w-full items-end px-3 pb-2'>
           <span className='text-center text-text-sm font-semibold text-primary'>
-            Staking and governance
+            {t("wallet.comparison.sections.stakingAndGovernance")}
           </span>
         </div>
       ),
@@ -352,7 +354,7 @@ export const WalletPage: FC = () => {
       key: "staking_support",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-text-sm font-medium'>Staking support</span>
+          <span className='text-text-sm font-medium'>{t("wallet.comparison.rows.stakingSupport")}</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -375,7 +377,7 @@ export const WalletPage: FC = () => {
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-text-sm font-medium'>
-            Cardano governance features
+            {t("wallet.comparison.rows.cardanoGovernanceFeatures")}
           </span>
           <CircleHelp
             size={13}
@@ -399,7 +401,7 @@ export const WalletPage: FC = () => {
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
           <span className='text-text-sm font-medium'>
-            Project Catalyst registration
+            {t("wallet.comparison.rows.projectCatalystRegistration")}
           </span>
           <CircleHelp
             size={13}
@@ -422,7 +424,7 @@ export const WalletPage: FC = () => {
       key: "multipool_delegation",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-text-sm font-medium'>Multipool delegation</span>
+          <span className='text-text-sm font-medium'>{t("wallet.comparison.rows.multipoolDelegation")}</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -446,7 +448,7 @@ export const WalletPage: FC = () => {
       title: (
         <div className='flex h-full w-full items-end px-3 pb-2'>
           <span className='text-center text-text-sm font-semibold text-primary'>
-            Features
+            {t("wallet.comparison.sections.features")}
           </span>
         </div>
       ),
@@ -456,7 +458,7 @@ export const WalletPage: FC = () => {
       key: "dapp_browser",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-text-sm font-medium'>dApp browser</span>
+          <span className='text-text-sm font-medium'>{t("wallet.comparison.rows.dappBrowser")}</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -478,7 +480,7 @@ export const WalletPage: FC = () => {
       key: "multiple_accounts",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-text-sm font-medium'>Multiple accounts</span>
+          <span className='text-text-sm font-medium'>{t("wallet.comparison.rows.multipleAccounts")}</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -500,7 +502,7 @@ export const WalletPage: FC = () => {
       key: "custom_node",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-text-sm font-medium'>Custom node</span>
+          <span className='text-text-sm font-medium'>{t("wallet.comparison.rows.customNode")}</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -522,7 +524,7 @@ export const WalletPage: FC = () => {
       key: "address_book",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-text-sm font-medium'>Address book</span>
+          <span className='text-text-sm font-medium'>{t("wallet.comparison.rows.addressBook")}</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -544,7 +546,7 @@ export const WalletPage: FC = () => {
       key: "other",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-text-sm font-medium'>Other</span>
+          <span className='text-text-sm font-medium'>{t("wallet.comparison.rows.other")}</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -576,7 +578,7 @@ export const WalletPage: FC = () => {
       title: (
         <div className='flex h-full w-full items-end px-3 pb-2'>
           <span className='text-center text-text-sm font-semibold text-primary'>
-            Integrations
+            {t("wallet.comparison.sections.integrations")}
           </span>
         </div>
       ),
@@ -586,7 +588,7 @@ export const WalletPage: FC = () => {
       key: "nft_marketplace",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-text-sm font-medium'>NFT marketplace</span>
+          <span className='text-text-sm font-medium'>{t("wallet.comparison.rows.nftMarketplace")}</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -622,7 +624,7 @@ export const WalletPage: FC = () => {
       key: "swaps_in_wallets",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-text-sm font-medium'>Swaps in wallets</span>
+          <span className='text-text-sm font-medium'>{t("wallet.comparison.rows.swapsInWallets")}</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -658,7 +660,7 @@ export const WalletPage: FC = () => {
       key: "fiat_onramp",
       title: (
         <div className='flex h-full w-full items-center gap-1/2 px-3'>
-          <span className='text-text-sm font-medium'>Fiat onramp</span>
+          <span className='text-text-sm font-medium'>{t("wallet.comparison.rows.fiatOnramp")}</span>
           <CircleHelp
             size={13}
             className='translate-y-[1px] text-grayTextPrimary'
@@ -695,13 +697,13 @@ export const WalletPage: FC = () => {
   return (
     <>
       <Helmet>
-        <title>Compare Cardano Wallets | Cexplorer.io</title>
+        <title>{t("wallet.comparison.pageTitle")}</title>
       </Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center'>
         <HeaderBanner
-          title='Compare Cardano Wallets'
-          breadcrumbItems={[{ label: "Wallets" }]}
-          subTitle='Explore and compare the unique features of various Cardano wallets to find the best fit for your needs.'
+          title={t("wallet.comparison.title")}
+          breadcrumbItems={[{ label: t("wallet.comparison.breadcrumb") }]}
+          subTitle={t("wallet.comparison.subtitle")}
         />
         <AdsCarousel
           generateImageUrl={generateImageUrl}
@@ -712,7 +714,7 @@ export const WalletPage: FC = () => {
             <div className='flex w-fit'>
               <div className='flex flex-col items-start gap-1/2'>
                 <span className='w-fit text-text-xs font-medium'>
-                  Compare wallets
+                  {t("wallet.comparison.compareWallets")}
                 </span>
                 <TableSettingsDropdown
                   rows={10}
@@ -728,7 +730,7 @@ export const WalletPage: FC = () => {
                               item => item,
                             ).length
                           }{" "}
-                          selected
+                          {t("wallet.comparison.selected")}
                         </span>
                       </SelectTrigger>
                     </Select>

@@ -36,7 +36,7 @@ export const TaxToolPage: FC = () => {
 
   useEffect(() => {
     if (debouncedSearch && !isValidAddress(debouncedSearch)) {
-      toast.error("Invalid stake address");
+      toast.error(t("taxTool.invalidStakeAddress"));
       setIsValid(false);
     } else if (debouncedSearch) {
       setIsValid(true);
@@ -93,11 +93,10 @@ export const TaxToolPage: FC = () => {
             <CircleAlert className='mt-0.5 text-primary' size={18} />
             <div className='flex flex-col gap-1 text-text-sm'>
               <p className='font-medium text-text'>
-                Please note that the data is for informational purposes only, we
-                do not guarantee its correctness or accuracy.
+                {t("taxTool.disclaimer.title")}
               </p>
               <p className='text-grayTextPrimary'>
-                Always consult your taxes with professional tax advisor.
+                {t("taxTool.disclaimer.subtitle")}
               </p>
             </div>
           </div>

@@ -12,8 +12,10 @@ import {
   DEXHUNTER_PARTNER_NAME,
   DEXHUNTER_COLORS,
 } from "@/constants/dexConfig";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const SwapPage: FC = () => {
+  const { t } = useAppTranslation();
   const { theme } = useThemeStore();
   const navigate = useNavigate({ from: "/swap" });
 
@@ -137,8 +139,8 @@ export const SwapPage: FC = () => {
   return (
     <PageBase
       metadataTitle='swap'
-      breadcrumbItems={[{ label: "Swap" }]}
-      title={<div className='flex items-center gap-1/2'>Swap</div>}
+      breadcrumbItems={[{ label: t("swap.breadcrumb") }]}
+      title={<div className='flex items-center gap-1/2'>{t("swap.title")}</div>}
     >
       <div className='flex w-full flex-col pt-4'>
         <section className='flex w-full flex-col items-center pb-3'>
@@ -153,7 +155,7 @@ export const SwapPage: FC = () => {
                 ) : (
                   <div className='flex min-h-[500px] items-center justify-center rounded-m border border-border bg-cardBg p-4'>
                     <p className='text-grayTextPrimary'>
-                      Select a token in the swap widget to view chart
+                      {t("swap.selectTokenToViewChart")}
                     </p>
                   </div>
                 )}

@@ -13,8 +13,10 @@ import { Address } from "@/utils/address/getStakeAddress";
 import { isValidAddress } from "@/utils/address/isValidAddress";
 import { ArrowRight } from "lucide-react";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const AddressInspector: FC = () => {
+  const { t } = useAppTranslation();
   const { view } = useSearch({
     from: "/address/inspector",
   });
@@ -35,7 +37,7 @@ export const AddressInspector: FC = () => {
 
   const getAddressTypeInfo = () => {
     if (!data?.header || data.header === -1) {
-      return { type: "Unknown", network: "Unknown" };
+      return { type: t("addressInspector.addressTypes.unknown"), network: t("addressInspector.network.unknown") };
     }
 
     const headerByte = data.header;
@@ -45,40 +47,40 @@ export const AddressInspector: FC = () => {
     let typeDescription = "";
     switch (addressType) {
       case 0:
-        typeDescription = "Payment address (key)";
+        typeDescription = t("addressInspector.addressTypes.paymentKey");
         break;
       case 1:
-        typeDescription = "Payment address (script)";
+        typeDescription = t("addressInspector.addressTypes.paymentScript");
         break;
       case 2:
-        typeDescription = "Payment address with stake key";
+        typeDescription = t("addressInspector.addressTypes.paymentStakeKey");
         break;
       case 3:
-        typeDescription = "Payment address with stake script";
+        typeDescription = t("addressInspector.addressTypes.paymentStakeScript");
         break;
       case 4:
-        typeDescription = "Payment address with stake pointer";
+        typeDescription = t("addressInspector.addressTypes.paymentStakePointer");
         break;
       case 5:
-        typeDescription = "Payment address with stake script pointer";
+        typeDescription = t("addressInspector.addressTypes.paymentStakeScriptPointer");
         break;
       case 6:
-        typeDescription = "Enterprise address (key)";
+        typeDescription = t("addressInspector.addressTypes.enterpriseKey");
         break;
       case 7:
-        typeDescription = "Enterprise address (script)";
+        typeDescription = t("addressInspector.addressTypes.enterpriseScript");
         break;
       case 14:
-        typeDescription = "Stake address (key)";
+        typeDescription = t("addressInspector.addressTypes.stakeKey");
         break;
       case 15:
-        typeDescription = "Stake address (script)";
+        typeDescription = t("addressInspector.addressTypes.stakeScript");
         break;
       default:
-        typeDescription = `Unknown type (${addressType})`;
+        typeDescription = t("addressInspector.addressTypes.unknownType", { type: addressType });
     }
 
-    const network = networkId === 1 ? "Mainnet" : "Testnet";
+    const network = networkId === 1 ? t("addressInspector.network.mainnet") : t("addressInspector.network.testnet");
 
     return { type: typeDescription, network };
   };
@@ -87,11 +89,11 @@ export const AddressInspector: FC = () => {
 
   const rows = [
     {
-      title: "Address",
+      title: t("addressInspector.rows.address"),
       darker: true,
       value: (() => {
         if (!data?.address) {
-          return "Not found";
+          return t("addressInspector.notFound");
         }
 
         return (
@@ -103,22 +105,22 @@ export const AddressInspector: FC = () => {
       })(),
     },
     {
-      title: "Address type",
+      title: t("addressInspector.rows.addressType"),
       darker: false,
       value: (() => {
         if (!data?.address || !addr?.raw) {
-          return "Not found";
+          return t("addressInspector.notFound");
         }
 
         return <AddressTypeInitialsBadge address={data?.address} />;
       })(),
     },
     {
-      title: "Address details",
+      title: t("addressInspector.rows.addressDetails"),
       darker: true,
       value: (() => {
         if (!data?.header || data.header === -1) {
-          return "Not found";
+          return t("addressInspector.notFound");
         }
 
         return (
@@ -132,7 +134,7 @@ export const AddressInspector: FC = () => {
       })(),
     },
     {
-      title: "Stake key",
+      title: t("addressInspector.rows.stakeKey"),
       darker: false,
       value: (() => {
         const isStakeAddress =
@@ -149,7 +151,7 @@ export const AddressInspector: FC = () => {
         }
 
         if (!addr?.rewardAddress) {
-          return "Not found";
+          return t("addressInspector.notFound");
         }
 
         return (
@@ -164,37 +166,37 @@ export const AddressInspector: FC = () => {
       })(),
     },
     {
-      title: "Network",
+      title: t("addressInspector.rows.network"),
       darker: true,
       value: (() => {
         if (typeof data?.magic === "undefined" || data.magic === -1) {
-          return "Not found";
+          return t("addressInspector.notFound");
         }
-        return data.magic === 1 ? "Mainnet" : "Testnet";
+        return data.magic === 1 ? t("addressInspector.network.mainnet") : t("addressInspector.network.testnet");
       })(),
     },
     {
-      title: "Magic",
+      title: t("addressInspector.rows.magic"),
       darker: false,
       value:
         typeof data?.magic === "undefined" || data.magic === -1
-          ? "Not found"
+          ? t("addressInspector.notFound")
           : data.magic,
     },
     {
-      title: "Header",
+      title: t("addressInspector.rows.header"),
       darker: true,
       value:
         typeof data?.header === "undefined" || data?.header === -1
-          ? "Not found"
+          ? t("addressInspector.notFound")
           : `0x${data.header.toString(16).padStart(2, "0")}`,
     },
     {
-      title: "Raw address",
+      title: t("addressInspector.rows.rawAddress"),
       darker: false,
       value: (() => {
         if (!data?.address) {
-          return "Not found";
+          return t("addressInspector.notFound");
         }
 
         const addressInput = debouncedAddressSearch;
@@ -214,7 +216,7 @@ export const AddressInspector: FC = () => {
             if (addr.raw && addr.raw.length > 0) {
               rawHex = Address.toHexString(addr.raw);
             } else {
-              return "Not found";
+              return t("addressInspector.notFound");
             }
           }
         }
@@ -230,11 +232,11 @@ export const AddressInspector: FC = () => {
       })(),
     },
     {
-      title: "Payment credential",
+      title: t("addressInspector.rows.paymentCredential"),
       darker: true,
       value: (() => {
         if (!data?.payment) {
-          return "Not found";
+          return t("addressInspector.notFound");
         }
 
         return (
@@ -246,11 +248,11 @@ export const AddressInspector: FC = () => {
       })(),
     },
     {
-      title: "Staking credential",
+      title: t("addressInspector.rows.stakingCredential"),
       darker: false,
       value: (() => {
         if (!data?.stake) {
-          return "Not found";
+          return t("addressInspector.notFound");
         }
 
         return (
@@ -269,10 +271,10 @@ export const AddressInspector: FC = () => {
     <>
       <PageBase
         metadataTitle='addressInspector'
-        title='Address inspector'
+        title={t("addressInspector.title")}
         breadcrumbItems={[
-          { label: "Developers", link: "/dev" },
-          { label: "Address inspector" },
+          { label: t("addressInspector.breadcrumbs.developers"), link: "/dev" },
+          { label: t("addressInspector.breadcrumbs.addressInspector") },
         ]}
       >
         <section className='flex w-full justify-center'>
@@ -281,7 +283,7 @@ export const AddressInspector: FC = () => {
               <TableSearchInput
                 value={search}
                 onchange={val => setSearch(val)}
-                placeholder='Address...'
+                placeholder={t("addressInspector.placeholder")}
                 showSearchIcon
                 wrapperClassName='w-full'
                 showPrefixPopup={false}
@@ -299,7 +301,7 @@ export const AddressInspector: FC = () => {
                     className='flex items-center gap-1/2'
                   >
                     <span className='text-text-sm font-semibold text-primary'>
-                      Stake detail
+                      {t("addressInspector.stakeDetail")}
                     </span>
                     <ArrowRight className='text-primary' size={15} />
                   </Link>
@@ -314,7 +316,7 @@ export const AddressInspector: FC = () => {
                     className='flex items-center gap-1/2'
                   >
                     <span className='text-text-sm font-semibold text-primary'>
-                      Address detail
+                      {t("addressInspector.addressDetail")}
                     </span>
                     <ArrowRight className='text-primary' size={15} />
                   </Link>

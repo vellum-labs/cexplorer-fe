@@ -66,7 +66,7 @@ export const MultiPoolDelegatorsPage = () => {
         <StakeCell
           stake={row.stake.balance ?? 0}
           maxStake={maxStake}
-          unknownLabel={t("common:sdk.stakeCell.unknownLabel")}
+          unknownLabel={t("sdk:stakeCell.unknownLabel")}
         />
       ),
       jsonFormat: (row: any) => lovelaceToAda(row.stake.balance ?? 0),

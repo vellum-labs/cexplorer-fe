@@ -170,28 +170,28 @@ export const MobileBottomNav: FC = () => {
             <GlobalSearch
               isHomepage
               recentLabels={{
-                recentlySearchedLabel: t("common:sdk.globalSearch.recentlySearched"),
-                noRecentSearchesLabel: t("common:sdk.globalSearch.noRecentSearches"),
+                recentlySearchedLabel: t("sdk:globalSearch.recentlySearched"),
+                noRecentSearchesLabel: t("sdk:globalSearch.noRecentSearches"),
               }}
               categoryLabels={{
-                all: t("common:sdk.globalSearch.categories.all"),
-                tx: t("common:sdk.globalSearch.categories.tx"),
-                block: t("common:sdk.globalSearch.categories.block"),
-                pool: t("common:sdk.globalSearch.categories.pool"),
-                asset: t("common:sdk.globalSearch.categories.asset"),
-                policy: t("common:sdk.globalSearch.categories.policy"),
-                address: t("common:sdk.globalSearch.categories.address"),
-                stake: t("common:sdk.globalSearch.categories.stake"),
-                adahandle: t("common:sdk.globalSearch.categories.adahandle"),
-                user: t("common:sdk.globalSearch.categories.user"),
-                article: t("common:sdk.globalSearch.categories.article"),
-                page: t("common:sdk.globalSearch.categories.page"),
-                gov: t("common:sdk.globalSearch.categories.gov"),
-                drep: t("common:sdk.globalSearch.categories.drep"),
+                all: t("sdk:globalSearch.categories.all"),
+                tx: t("sdk:globalSearch.categories.tx"),
+                block: t("sdk:globalSearch.categories.block"),
+                pool: t("sdk:globalSearch.categories.pool"),
+                asset: t("sdk:globalSearch.categories.asset"),
+                policy: t("sdk:globalSearch.categories.policy"),
+                address: t("sdk:globalSearch.categories.address"),
+                stake: t("sdk:globalSearch.categories.stake"),
+                adahandle: t("sdk:globalSearch.categories.adahandle"),
+                user: t("sdk:globalSearch.categories.user"),
+                article: t("sdk:globalSearch.categories.article"),
+                page: t("sdk:globalSearch.categories.page"),
+                gov: t("sdk:globalSearch.categories.gov"),
+                drep: t("sdk:globalSearch.categories.drep"),
               }}
-              homepagePlaceholder={t("common:sdk.globalSearch.homepagePlaceholder")}
-              placeholder={t("common:sdk.globalSearch.placeholder")}
-              notFoundLabel={t("common:sdk.globalSearch.notFoundLabel")}
+              homepagePlaceholder={t("sdk:globalSearch.homepagePlaceholder")}
+              placeholder={t("sdk:globalSearch.placeholder")}
+              notFoundLabel={t("sdk:globalSearch.notFoundLabel")}
             />
           </div>
         </div>

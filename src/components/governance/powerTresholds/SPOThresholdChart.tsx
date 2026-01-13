@@ -34,7 +34,7 @@ export const SPOThresholdChart: FC<SPOThresholdChartProps> = ({
   const { formatLovelace } = useADADisplay();
   const { textColor, bgColor } = useGraphColors();
 
-  const threshold = params ? epochParam[params] : 0;
+  const threshold = params ? epochParam?.[params] ?? 0 : 0;
 
   const pools = poolList?.data ?? [];
   const totalStake =

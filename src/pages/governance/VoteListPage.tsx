@@ -72,7 +72,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
   type VoterRole = "ConstitutionalCommittee" | "DRep" | "SPO";
 
   const voterRoleLabels: Record<VoterRole, string> = {
-    ConstitutionalCommittee: "Constitutional Committee",
+    ConstitutionalCommittee: t("gov.voteList.constitutionalCommittee"),
     DRep: "DRep",
     SPO: "SPO",
   };
@@ -119,7 +119,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
         }
         return <DateCell time={item.tx.time} />;
       },
-      title: "Date",
+      title: t("gov.voteList.date"),
       visible: columnsVisibility.date,
       widthPx: 60,
     },
@@ -128,7 +128,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
       render: item => {
         const id = item?.proposal?.ident?.id;
         const name =
-          item?.proposal?.anchor?.offchain?.name ?? "⚠️ Invalid metadata";
+          item?.proposal?.anchor?.offchain?.name ?? `⚠️ ${t("gov.voteList.invalidMetadata")}`;
 
         if (!id) {
           return "-";
@@ -139,7 +139,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
       jsonFormat: item => {
         return item?.proposal?.ident?.id || "-";
       },
-      title: "Name",
+      title: t("gov.voteList.name"),
       visible: columnsVisibility.gov_action,
       widthPx: 140,
     },
@@ -169,7 +169,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
           />
         );
       },
-      title: "Voter",
+      title: t("gov.voteList.voter"),
       visible: columnsVisibility.voter,
       widthPx: 220,
     },
@@ -196,7 +196,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
           </div>
         );
       },
-      title: <p ref={anchorRefs?.voter_role}>Voter role</p>,
+      title: <p ref={anchorRefs?.voter_role}>{t("gov.voteList.voterRole")}</p>,
       filter: {
         anchorRef: anchorRefs?.voter_role,
         activeFunnel: !!filter.voter_role,
@@ -246,7 +246,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>Voting power</p>,
+      title: <p className='w-full text-right'>{t("gov.voteList.votingPower")}</p>,
       visible: columnsVisibility.voting_power,
       widthPx: 60,
     },
@@ -267,7 +267,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
           />
         );
       },
-      title: <p ref={anchorRefs?.vote}>Vote</p>,
+      title: <p ref={anchorRefs?.vote}>{t("gov.voteList.vote")}</p>,
       filter: {
         anchorRef: anchorRefs?.vote,
         width: "170px",
@@ -281,7 +281,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
         onReset: () => changeFilterByKey("vote"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
-            {["Yes", "No", "Abstain"].map(val => (
+            {(["Yes", "No", "Abstain"] as const).map(val => (
               <label className='flex items-center gap-1' key={val}>
                 <input
                   type='radio'
@@ -293,7 +293,9 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
                     changeDraftFilter("vote", e.currentTarget.value)
                   }
                 />
-                <span className='text-text-sm'>{val}</span>
+                <span className='text-text-sm'>
+                  {t(`gov.voteList.${val.toLowerCase()}`)}
+                </span>
               </label>
             ))}
           </div>
@@ -311,7 +313,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
 
         return <EpochCell no={item.tx?.epoch_no} />;
       },
-      title: <p className='w-full text-right'>Epoch</p>,
+      title: <p className='w-full text-right'>{t("gov.voteList.epoch")}</p>,
       visible: columnsVisibility.epoch,
       widthPx: 60,
     },
@@ -324,7 +326,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
 
         return <BlockCell hash={item.tx.block_hash} no={item.tx.block_no} />;
       },
-      title: <p className='w-full text-right'>Block</p>,
+      title: <p className='w-full text-right'>{t("gov.voteList.block")}</p>,
       visible: columnsVisibility.block,
       widthPx: 60,
     },
@@ -347,7 +349,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
           </Link>
         );
       },
-      title: <p className='w-full text-right'>Tx</p>,
+      title: <p className='w-full text-right'>{t("gov.voteList.tx")}</p>,
       visible: columnsVisibility.tx,
       widthPx: 60,
     },
@@ -363,14 +365,14 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
       adsCarousel={!poolId}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>Governance</span>,
+          label: <span className='inline pt-1/2'>{t("gov.governance")}</span>,
           link: "/gov",
         },
         {
-          label: <span className=''>Votes</span>,
+          label: <span className=''>{t("gov.votes")}</span>,
         },
       ]}
-      title={<div className='flex items-center gap-1/2'>All Votes</div>}
+      title={<div className='flex items-center gap-1/2'>{t("gov.allVotes")}</div>}
     >
       <div className={`w-full max-w-desktop ${!poolId ? "px-2 py-3" : ""}`}>
         <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
@@ -379,8 +381,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
               <LoadingSkeleton height='27px' width={"220px"} />
             ) : totalItems !== undefined ? (
               <h3 className='basis-[230px] text-nowrap'>
-                Total of {formatNumber(totalItems)}{" "}
-                {totalItems === 1 ? "vote" : "votes"}
+                {t("gov.totalVotes", { count: formatNumber(totalItems) })}
               </h3>
             ) : (
               ""
@@ -410,7 +411,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
 
           <div className='flex gap-1'>
             <TableSearchInput
-              placeholder='Search your results...'
+              placeholder={t("gov.searchResults")}
               value={tableSearch}
               onchange={setTableSearch}
               prefixes={[

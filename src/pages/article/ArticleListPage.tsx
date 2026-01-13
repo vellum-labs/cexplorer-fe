@@ -202,7 +202,7 @@ export const ArticleListPage = () => {
         </div>
 
         {!query.isLoading && items.length === 0 ? (
-          <NoResultsFound label={t("sdk.noResultsFound")} />
+          <NoResultsFound label={t("sdk:noResultsFound")} />
         ) : !query.isLoading ? (
           <div className='flex w-full flex-wrap justify-between gap-y-3'>
             {items.slice(1).map(item => (
@@ -225,9 +225,9 @@ export const ArticleListPage = () => {
             currentPage={currentPage}
             totalPages={totalPages}
             labels={{
-              ellipsisSrLabel: t("sdk.pagination.morePages"),
-              nextAriaLabel: t("sdk.pagination.nextPage"),
-              previousAriaLabel: t("sdk.pagination.previousPage"),
+              ellipsisSrLabel: t("sdk:pagination.morePages"),
+              nextAriaLabel: t("sdk:pagination.nextPage"),
+              previousAriaLabel: t("sdk:pagination.previousPage"),
             }}
           />
         )}

@@ -51,7 +51,7 @@ export const DrepUpdatesPage = () => {
 
         return item.block.time;
       },
-      title: "Date",
+      title: t("drep.columns.date"),
       visible: columnsVisibility.date,
       widthPx: 30,
     },
@@ -65,14 +65,14 @@ export const DrepUpdatesPage = () => {
 
         return item?.data?.view;
       },
-      title: <p>DRep</p>,
+      title: <p>{t("drep.columns.drep")}</p>,
       visible: columnsVisibility.view,
       widthPx: 50,
     },
     {
       key: "type",
       render: item => <ScriptBadge isScript={item.data.has_script} />,
-      title: "Type",
+      title: t("drep.columns.type"),
       visible: columnsVisibility.type,
       widthPx: 50,
     },
@@ -83,7 +83,7 @@ export const DrepUpdatesPage = () => {
           <AdaWithTooltip data={item.data.deposit} />
         </div>
       ),
-      title: <p className='w-full text-right'>Deposit</p>,
+      title: <p className='w-full text-right'>{t("drep.columns.deposit")}</p>,
       visible: columnsVisibility.deposit,
       widthPx: 40,
     },
@@ -97,7 +97,7 @@ export const DrepUpdatesPage = () => {
 
         return item.tx.hash;
       },
-      title: "TX hash",
+      title: t("drep.columns.txHash"),
       visible: columnsVisibility.hash,
       widthPx: 40,
     },
@@ -116,7 +116,7 @@ export const DrepUpdatesPage = () => {
 
         return `${item.block.epoch_no}/${item.block.no}`;
       },
-      title: <p className='w-full text-right'>Epoch/Block</p>,
+      title: <p className='w-full text-right'>{t("drep.columns.epochBlock")}</p>,
       visible: columnsVisibility.epoch_block,
       widthPx: 40,
     },
@@ -130,19 +130,19 @@ export const DrepUpdatesPage = () => {
 
   return (
     <PageBase
-      title='DRep updates'
+      title={t("drep.updates.title")}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>Governance</span>,
+          label: <span className='inline pt-1/2'>{t("governance.breadcrumbs.governance")}</span>,
           link: "/gov",
         },
         {
           label: (
-            <span className='inline pt-1/2'>Delegated representatives</span>
+            <span className='inline pt-1/2'>{t("drep.breadcrumbs.delegatedRepresentatives")}</span>
           ),
           link: "/drep",
         },
-        { label: "Updates" },
+        { label: t("drep.updates.breadcrumb") },
       ]}
       metadataTitle='drepUpdates'
     >
@@ -152,7 +152,7 @@ export const DrepUpdatesPage = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[230px]'>
-              Total of {formatNumber(totalItems ?? 0)} updates
+              {t("drep.updates.total", { count: formatNumber(totalItems ?? 0) })}
             </h3>
           )}
           <div className='flex items-center gap-1'>

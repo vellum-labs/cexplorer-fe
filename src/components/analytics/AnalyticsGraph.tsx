@@ -135,11 +135,11 @@ export const AnalyticsGraph: FC<Props> = ({
           setShowConnectWallet={setShowConnectWallet}
           address={address}
           walletApi={wallet as unknown as WalletApi}
-          title={t("sdk.featureModal.title")}
-          subTitle={t("sdk.featureModal.subTitle")}
-          cancelLabel={t("sdk.featureModal.cancelLabel")}
-          connectWalletLabel={t("sdk.featureModal.connectWalletLabel")}
-          getProLabel={t("sdk.featureModal.getProLabel")}
+          title={t("sdk:featureModal.title")}
+          subTitle={t("sdk:featureModal.subTitle")}
+          cancelLabel={t("sdk:featureModal.cancelLabel")}
+          connectWalletLabel={t("sdk:featureModal.connectWalletLabel")}
+          getProLabel={t("sdk:featureModal.getProLabel")}
         />
       )}
       {showConnectWallet && (

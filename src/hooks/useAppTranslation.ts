@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import i18n from "@/lib/i18n";
 import type { Locales } from "@/types/storeTypes";
 
-type Namespace = "common" | "navigation" | "pages" | "errors";
+type Namespace = "common" | "navigation" | "pages" | "errors" | "sdk" | "shared";
 
 export const useAppTranslation = (namespace: Namespace | Namespace[] = "common") => {
   const { t } = useTranslation(namespace);

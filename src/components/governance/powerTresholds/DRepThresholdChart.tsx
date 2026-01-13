@@ -27,7 +27,7 @@ export const DRepThresholdChart: FC<DRepThresholdChartProps> = ({
   const { formatLovelace } = useADADisplay();
   const { textColor, bgColor } = useGraphColors();
 
-  const threshold = params ? epochParam[params] : 0;
+  const threshold = params ? epochParam?.[params] ?? 0 : 0;
 
   const votingStake = activeVotingStake;
   const requiredStake =

@@ -45,6 +45,17 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
 
   const epochStartTimestamp = new Date(epochStartTime).getTime() / 1000;
 
+  const getStatusLabel = (status: GovStatus): string => {
+    const statusLabels: Record<GovStatus, string> = {
+      ACTIVE: t("governance.actions.statusActive"),
+      ENACTED: t("governance.actions.statusEnacted"),
+      RATIFIED: t("governance.actions.statusRatified"),
+      DROPPED: t("governance.actions.statusDropped"),
+      EXPIRED: t("governance.actions.statusExpired"),
+    };
+    return statusLabels[status];
+  };
+
   const chartData = useMemo(() => {
     if (!items.length)
       return { data: [], categories: [], minEpoch: 0, maxEpoch: 0 };
@@ -94,6 +105,7 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
       const statusFontSize = isLongLabel ? 9 : 9;
       const statusPadding = isLongLabel ? [1, 3, 1, 3] : [2, 5, 2, 5];
       const namePadding = isLongLabel ? [0, 4, 0, 4] : [0, 6, 0, 6];
+      const statusLabel = getStatusLabel(item.status);
 
       return {
         value: item.endEpoch - item.startEpoch,
@@ -106,7 +118,7 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
         label: {
           show: true,
           position: "insideLeft" as const,
-          formatter: `{status|${item.status}} {name|${item.typeLabel}}`,
+          formatter: `{status|${statusLabel}} {name|${item.typeLabel}}`,
           rich: {
             status: {
               backgroundColor: govStatusColors[item.status],
@@ -171,8 +183,8 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
             <div style="padding: 8px; border: 1px solid ${borderColor}; border-radius: 4px; background: ${bgColor};">
               <div style="font-weight: bold; margin-bottom: 4px;">${itemData.name}</div>
               <div>${t("governance.timeline.type")} ${itemData.typeLabel}</div>
-              <div>${t("governance.timeline.status")} ${itemData.status}</div>
-              <div>${t("governance.actions.votingPeriod", { start: itemData.startEpoch, end: itemData.endEpoch })}</div>
+              <div>${t("governance.timeline.status")} ${getStatusLabel(itemData.status as GovStatus)}</div>
+              <div>${t("governance.timeline.votingPeriod", { start: itemData.startEpoch, end: itemData.endEpoch })}</div>
             </div>
           `;
         },
@@ -231,7 +243,7 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
                 xAxis: currentEpoch - chartData.minEpoch,
                 label: {
                   show: true,
-                  formatter: t("governance.actions.currentEpoch", { epoch: currentEpoch }),
+                  formatter: t("governance.timeline.currentEpoch", { epoch: currentEpoch }),
                   position: "start",
                   color: lineColor,
                   fontSize: 11,
@@ -312,7 +324,7 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
                 }}
               />
               <span className='text-text-sm text-grayTextPrimary'>
-                {status}
+                {getStatusLabel(status)}
               </span>
             </div>
           ),

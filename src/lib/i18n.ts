@@ -6,12 +6,16 @@ import enCommon from "@/locales/en/common.json";
 import enNavigation from "@/locales/en/navigation.json";
 import enPages from "@/locales/en/pages.json";
 import enErrors from "@/locales/en/errors.json";
+import enSdk from "@/locales/en/sdk.json";
+import enShared from "@/locales/en/shared.json";
 
 // Czech translations
 import czCommon from "@/locales/cz/common.json";
 import czNavigation from "@/locales/cz/navigation.json";
 import czPages from "@/locales/cz/pages.json";
 import czErrors from "@/locales/cz/errors.json";
+import czSdk from "@/locales/cz/sdk.json";
+import czShared from "@/locales/cz/shared.json";
 
 const resources = {
   en: {
@@ -19,12 +23,16 @@ const resources = {
     navigation: enNavigation,
     pages: enPages,
     errors: enErrors,
+    sdk: enSdk,
+    shared: enShared,
   },
   cz: {
     common: czCommon,
     navigation: czNavigation,
     pages: czPages,
     errors: czErrors,
+    sdk: czSdk,
+    shared: czShared,
   },
 };
 
@@ -51,7 +59,7 @@ i18n.use(initReactI18next).init({
   lng: getInitialLanguage(),
   fallbackLng: "en",
   defaultNS: "common",
-  ns: ["common", "navigation", "pages", "errors"],
+  ns: ["common", "navigation", "pages", "errors", "sdk", "shared"],
   interpolation: {
     escapeValue: false,
   },

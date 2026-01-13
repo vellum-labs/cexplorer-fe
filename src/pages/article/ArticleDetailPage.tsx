@@ -323,9 +323,9 @@ export const ArticleDetailPage = () => {
         <SafetyLinkModal
           url={clickedUrl}
           onClose={() => setClickedUrl(null)}
-          warningText={t("sdk.safetyLink.warningText")}
-          goBackLabel={t("sdk.safetyLink.goBackLabel")}
-          visitLabel={t("sdk.safetyLink.visitLabel")}
+          warningText={t("sdk:safetyLink.warningText")}
+          goBackLabel={t("sdk:safetyLink.goBackLabel")}
+          visitLabel={t("sdk:safetyLink.visitLabel")}
         />
       )}
     </>

@@ -178,8 +178,8 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
           label: (
             <DelegatorsLabel
               minDelegationAda={minDelegationAda}
-              label={t("common:sdk.delegatorsLabel.label")}
-              tooltipText={t("common:sdk.delegatorsLabel.tooltipText", { minDelegationAda })}
+              label={t("sdk:delegatorsLabel.label")}
+              tooltipText={t("sdk:delegatorsLabel.tooltipText", { minDelegationAda })}
             />
           ),
           value: currentDelegators
@@ -239,8 +239,8 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
           label: (
             <DelegatorsLabel
               minDelegationAda={minDelegationAda}
-              label={t("common:sdk.delegatorsLabel.label")}
-              tooltipText={t("common:sdk.delegatorsLabel.tooltipText", { minDelegationAda })}
+              label={t("sdk:delegatorsLabel.label")}
+              tooltipText={t("sdk:delegatorsLabel.tooltipText", { minDelegationAda })}
             />
           ),
           value: currentDelegators
@@ -300,8 +300,8 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
           label: (
             <DelegatorsLabel
               minDelegationAda={minDelegationAda}
-              label={t("common:sdk.delegatorsLabel.label")}
-              tooltipText={t("common:sdk.delegatorsLabel.tooltipText", { minDelegationAda })}
+              label={t("sdk:delegatorsLabel.label")}
+              tooltipText={t("sdk:delegatorsLabel.tooltipText", { minDelegationAda })}
             />
           ),
           value: currentDelegators

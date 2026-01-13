@@ -432,9 +432,9 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
         <SafetyLinkModal
           url={clickedUrl}
           onClose={() => setClickedUrl(null)}
-          warningText={t("sdk.safetyLink.warningText")}
-          goBackLabel={t("sdk.safetyLink.goBackLabel")}
-          visitLabel={t("sdk.safetyLink.visitLabel")}
+          warningText={t("sdk:safetyLink.warningText")}
+          goBackLabel={t("sdk:safetyLink.goBackLabel")}
+          visitLabel={t("sdk:safetyLink.visitLabel")}
         />
       )}
     </>

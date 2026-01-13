@@ -194,9 +194,9 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
           totalPages={totalPages}
           setCurrentPage={setCurrentPage}
           labels={{
-            ellipsisSrLabel: t("sdk.pagination.morePages"),
-            nextAriaLabel: t("sdk.pagination.nextPage"),
-            previousAriaLabel: t("sdk.pagination.previousPage"),
+            ellipsisSrLabel: t("sdk:pagination.morePages"),
+            nextAriaLabel: t("sdk:pagination.nextPage"),
+            previousAriaLabel: t("sdk:pagination.previousPage"),
           }}
         />
       )}

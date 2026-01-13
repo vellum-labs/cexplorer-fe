@@ -54,8 +54,8 @@ export const AssetMetaDataTab: FC<AssetMetaDataTabProps> = ({
         localStorageKey='showSensitiveContent'
         title={t("asset.userGeneratedContent")}
         description={t("asset.userGeneratedContentDescription")}
-        rememberLabel={t("sdk.sensitiveContent.rememberLabel")}
-        displayLabel={t("sdk.sensitiveContent.displayLabel")}
+        rememberLabel={t("sdk:sensitiveContent.rememberLabel")}
+        displayLabel={t("sdk:sensitiveContent.displayLabel")}
       />
     );
   }
@@ -80,7 +80,7 @@ export const AssetMetaDataTab: FC<AssetMetaDataTabProps> = ({
           isLoading={isLoading || isFetching}
           isError={isError || items.length === 0}
           search
-          noDataLabel={t("sdk.jsonDisplay.noDataLabel")}
+          noDataLabel={t("sdk:jsonDisplay.noDataLabel")}
         />
       </>
     </div>

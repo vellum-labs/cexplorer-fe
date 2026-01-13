@@ -264,7 +264,7 @@ export const PoolAwardsPage: FC = () => {
                   search: { page: (page ?? 1) - 1 } as any,
                 })
               }
-              ariaLabel={t("sdk.pagination.previousPage")}
+              ariaLabel={t("sdk:pagination.previousPage")}
             />
           </PaginationItem>
           <PaginationItem>
@@ -277,7 +277,7 @@ export const PoolAwardsPage: FC = () => {
           </PaginationItem>
           {(page ?? 1) > 2 && (
             <PaginationItem>
-              <PaginationEllipsis srLabel={t("sdk.pagination.morePages")} />
+              <PaginationEllipsis srLabel={t("sdk:pagination.morePages")} />
             </PaginationItem>
           )}
           {(page ?? 1) > 1 && (page ?? 1) < totalPages && (
@@ -297,7 +297,7 @@ export const PoolAwardsPage: FC = () => {
           )}
           {(page ?? 1) < totalPages - 1 && (
             <PaginationItem>
-              <PaginationEllipsis srLabel={t("sdk.pagination.morePages")} />
+              <PaginationEllipsis srLabel={t("sdk:pagination.morePages")} />
             </PaginationItem>
           )}
           {totalPages > 1 && (
@@ -324,7 +324,7 @@ export const PoolAwardsPage: FC = () => {
                   } as any,
                 })
               }
-              ariaLabel={t("sdk.pagination.nextPage")}
+              ariaLabel={t("sdk:pagination.nextPage")}
             />
           </PaginationItem>
         </PaginationContent>

@@ -40,7 +40,7 @@ export const MetadataCell: FC<MetadataCellProps> = ({ metadata }) => {
               isError={false}
               search
               onClose={() => setOpen(false)}
-              noDataLabel={t("sdk.jsonDisplay.noDataLabel")}
+              noDataLabel={t("sdk:jsonDisplay.noDataLabel")}
             />
           </Modal>,
           document.body,

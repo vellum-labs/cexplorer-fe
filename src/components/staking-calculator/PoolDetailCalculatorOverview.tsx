@@ -100,9 +100,9 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
             <SafetyLinkModal
               url={data.pool_name.homepage ?? ""}
               onClose={() => setLinkModal(false)}
-              warningText={t("sdk.safetyLink.warningText")}
-              goBackLabel={t("sdk.safetyLink.goBackLabel")}
-              visitLabel={t("sdk.safetyLink.visitLabel")}
+              warningText={t("sdk:safetyLink.warningText")}
+              goBackLabel={t("sdk:safetyLink.goBackLabel")}
+              visitLabel={t("sdk:safetyLink.visitLabel")}
             />
           )}
         </>

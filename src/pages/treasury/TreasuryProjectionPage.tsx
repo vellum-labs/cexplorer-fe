@@ -10,6 +10,7 @@ import { EPOCH_LENGTH_DAYS } from "@/constants/confVariables";
 import { RotateCcw } from "lucide-react";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface ProjectionDataPoint {
   epoch: number;
@@ -23,6 +24,7 @@ const STORAGE_KEY_WITHDRAWAL = "treasuryProjection_annualWithdrawal";
 const DEFAULT_ANNUAL_WITHDRAWAL = 320_000_000;
 
 export const TreasuryProjectionPage = () => {
+  const { t } = useAppTranslation();
   const { data: basicData } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(basicData?.data.version.const);
   const currentEpoch = miscConst?.epoch?.no ?? 0;
@@ -143,7 +145,7 @@ export const TreasuryProjectionPage = () => {
           const displayYear = month > 12 ? fullYear + 1 : fullYear;
           const formattedDate = `${displayMonth.toString().padStart(2, "0")}.${displayYear}`;
 
-          let tooltip = `<div style="font-weight: 600; margin-bottom: 8px;">Epoch ${dataPoint.epoch} (${formattedDate})</div>`;
+          let tooltip = `<div style="font-weight: 600; margin-bottom: 8px;">${t("treasuryProjection.chart.epoch")} ${dataPoint.epoch} (${formattedDate})</div>`;
           params.forEach((param: any) => {
             const value = typeof param.value === "number" ? param.value : 0;
             tooltip += `<div style="display: flex; justify-content: space-between; gap: 16px; margin-bottom: 4px;">
@@ -155,7 +157,7 @@ export const TreasuryProjectionPage = () => {
         },
       },
       legend: {
-        data: ["Treasury", "Reserves"],
+        data: [t("treasuryProjection.chart.treasury"), t("treasuryProjection.chart.reserves")],
         textStyle: {
           color: textColor,
         },
@@ -217,7 +219,7 @@ export const TreasuryProjectionPage = () => {
       },
       series: [
         {
-          name: "Treasury",
+          name: t("treasuryProjection.chart.treasury"),
           type: "line",
           smooth: true,
           data: projectionData.map(d => d.treasury),
@@ -234,7 +236,7 @@ export const TreasuryProjectionPage = () => {
           },
         },
         {
-          name: "Reserves",
+          name: t("treasuryProjection.chart.reserves"),
           type: "line",
           smooth: true,
           data: projectionData.map(d => d.reserves),
@@ -252,16 +254,16 @@ export const TreasuryProjectionPage = () => {
         },
       ],
     }),
-    [projectionData, textColor, bgColor, splitLineColor, EPOCHS_PER_YEAR],
+    [projectionData, textColor, bgColor, splitLineColor, EPOCHS_PER_YEAR, t],
   );
 
   return (
     <PageBase
       metadataTitle='treasuryProjection'
-      title='Treasury Projection'
+      title={t("treasuryProjection.title")}
       breadcrumbItems={[
         {
-          label: "Treasury Projection",
+          label: t("treasuryProjection.breadcrumb"),
         },
       ]}
       adsCarousel={false}
@@ -271,20 +273,19 @@ export const TreasuryProjectionPage = () => {
           <div className='mb-3 flex items-start justify-between'>
             <div>
               <h3 className='mb-1 text-text-lg font-semibold'>
-                Treasury & Reserves Projection
+                {t("treasuryProjection.cardTitle")}
               </h3>
               <p className='text-text-sm text-grayTextPrimary'>
-                Adjust parameters to project Treasury and Reserves balance over
-                the next {PROJECTION_YEARS} years.
+                {t("treasuryProjection.cardDescription", { years: PROJECTION_YEARS })}
               </p>
             </div>
             <button
               onClick={handleReset}
               className='flex items-center gap-1 rounded-s border border-border bg-cardBg px-2 py-1 text-text-sm text-grayTextPrimary transition-colors hover:border-primary hover:text-primary'
-              title='Reset to default values'
+              title={t("treasuryProjection.resetTitle")}
             >
               <RotateCcw size={16} />
-              <span className='hidden sm:inline'>Reset</span>
+              <span className='hidden sm:inline'>{t("treasuryProjection.reset")}</span>
             </button>
           </div>
 
@@ -292,7 +293,7 @@ export const TreasuryProjectionPage = () => {
             <div className='flex flex-col gap-1.5'>
               <div className='flex items-center justify-between'>
                 <label className='text-text-sm font-medium'>
-                  Average Fees per Epoch
+                  {t("treasuryProjection.avgFeesPerEpoch")}
                 </label>
                 <span className='text-text-sm font-semibold text-primary'>
                   {avgFeesPerEpoch.toLocaleString("en-US", {
@@ -309,7 +310,7 @@ export const TreasuryProjectionPage = () => {
                 onChange={setAvgFeesPerEpoch}
               />
               <p className='text-text-xs text-grayTextPrimary'>
-                Current:{" "}
+                {t("treasuryProjection.current")}{" "}
                 {currentFees.toLocaleString("en-US", {
                   maximumFractionDigits: 0,
                 })}{" "}
@@ -320,7 +321,7 @@ export const TreasuryProjectionPage = () => {
             <div className='flex flex-col gap-1.5'>
               <div className='flex items-center justify-between'>
                 <label className='text-text-sm font-medium'>
-                  Annual Treasury Withdrawal
+                  {t("treasuryProjection.annualWithdrawal")}
                 </label>
                 <span className='text-text-sm font-semibold text-primary'>
                   {(annualWithdrawal / 1_000_000).toFixed(0)}M ₳
@@ -340,18 +341,17 @@ export const TreasuryProjectionPage = () => {
         <div className='mt-3 w-full rounded-l border border-border bg-cardBg p-2'>
           <div className='mb-2'>
             <h3 className='text-text-lg font-semibold'>
-              {PROJECTION_YEARS}-Year Projection
+              {t("treasuryProjection.yearProjection", { years: PROJECTION_YEARS })}
             </h3>
             <p className='text-text-sm text-grayTextPrimary'>
-              Treasury income: {(tau * 100).toFixed(1)}% of (Reserve emission +
-              Fees) • Reserve emission: {(rho * 100).toFixed(2)}% per epoch
+              {t("treasuryProjection.treasuryIncome", { tau: (tau * 100).toFixed(1), rho: (rho * 100).toFixed(2) })}
             </p>
           </div>
           <div className='relative h-[450px] w-full'>
             <GraphWatermark />
             {isLoadingPots || isLoadingEpoch || !currentEpoch ? (
               <div className='flex h-full items-center justify-center text-grayTextPrimary'>
-                Loading chart data...
+                {t("treasuryProjection.loadingChart")}
               </div>
             ) : initialTreasury > 0 && initialReserves > 0 ? (
               <ReactEcharts
@@ -362,7 +362,7 @@ export const TreasuryProjectionPage = () => {
               />
             ) : (
               <div className='flex h-full items-center justify-center text-grayTextPrimary'>
-                No data available
+                {t("treasuryProjection.noData")}
               </div>
             )}
           </div>
