@@ -3,6 +3,7 @@ import {
   Button,
   LoadingSkeleton,
   NoResultsFound,
+  useLocaleStore,
 } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { useRef, useState } from "react";
@@ -16,7 +17,8 @@ import LogoMark from "@/resources/images/cexLogo.svg";
 
 export const WikiListPage = () => {
   const { t } = useAppTranslation("common");
-  const query = useFetchWikiList("en", 0, 100);
+  const { locale } = useLocaleStore();
+  const query = useFetchWikiList(locale, 0, 100);
   const items = query.data?.pages.flatMap(page => page.data.data) ?? [];
   const firstRender = useRef(true);
   const [openItem, setOpenItem] = useState<string | undefined>(undefined);
@@ -24,9 +26,9 @@ export const WikiListPage = () => {
   if (query.isLoading && firstRender.current) {
     return (
       <PageBase
-        metadataOverride={{ title: "Wiki | Cexplorer.io" }}
-        title='Learn about Cardano'
-        breadcrumbItems={[{ label: "Wiki" }]}
+        metadataOverride={{ title: t("wikiPage.metaTitle") }}
+        title={t("wikiPage.title")}
+        breadcrumbItems={[{ label: t("wikiPage.breadcrumb") }]}
         adsCarousel={false}
         customPage={true}
       >
@@ -53,10 +55,10 @@ export const WikiListPage = () => {
 
   return (
     <PageBase
-      metadataOverride={{ title: "Wiki | Cexplorer.io" }}
-      title='Learn about Cardano'
-      subTitle='Short-guides about Cardano and its core mechanisms'
-      breadcrumbItems={[{ label: "Wiki" }]}
+      metadataOverride={{ title: t("wikiPage.metaTitle") }}
+      title={t("wikiPage.title")}
+      subTitle={t("wikiPage.subtitle")}
+      breadcrumbItems={[{ label: t("wikiPage.breadcrumb") }]}
       adsCarousel={false}
       customPage={true}
     >
@@ -84,15 +86,14 @@ export const WikiListPage = () => {
 
         <div className='mt-12 flex flex-col items-center gap-4 rounded-xl border border-border bg-cardBg p-2 text-center'>
           <img src={LogoMark} alt='Cexplorer logo' className='h-16 w-16' />
-          <h2 className='text-2xl font-bold'>Everything Cardano</h2>
+          <h2 className='text-2xl font-bold'>{t("wikiPage.cta.title")}</h2>
           <p className='text-grayTextPrimary'>
-            Stay ahead of the curve with the latest updates and developments on
-            Cardano—read our blog now!
+            {t("wikiPage.cta.description")}
           </p>
           <Link to='/article'>
             <Button
               leftIcon={<FileText size={16} />}
-              label='Blog'
+              label={t("wikiPage.cta.button")}
               variant='primary'
               size='md'
             />

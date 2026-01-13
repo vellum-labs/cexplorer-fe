@@ -248,12 +248,6 @@ const RootComponent = () => {
 };
 
 export const Route = createRootRoute({
-  component: () => {
-    return (
-      <GlobalSearchProvider useFetchMiscSearch={useFetchMiscSearch} locale='en'>
-        <RootComponent />
-      </GlobalSearchProvider>
-    );
-  },
+  component: RootComponent,
   notFoundComponent: NotFoundPage,
 });

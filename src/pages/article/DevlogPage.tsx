@@ -6,6 +6,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  useLocaleStore,
 } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchArticleDetail } from "@/services/article";
@@ -13,7 +14,8 @@ import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 
 export const DevlogPage: FC = () => {
-  const query = useFetchArticleDetail("en", "page", "devlog");
+  const { locale } = useLocaleStore();
+  const query = useFetchArticleDetail(locale, "page", "devlog");
 
   const devlog = (
     query.data?.data.some(item => Array.isArray(item))

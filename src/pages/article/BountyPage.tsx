@@ -2,33 +2,33 @@ import { PageBase } from "@/components/global/pages/PageBase";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { ExternalLink, MessageCircle, Heart, ArrowRight } from "lucide-react";
 import { colors } from "@/constants/colors";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
-const guidelines = [
-  "Not available yet. We will open this initiative soon.",
-  "TBA.",
-];
+const guidelineKeys = ["g1", "g2"];
 
 export const BountyPage = () => {
+  const { t } = useAppTranslation();
+
   return (
     <PageBase
-      metadataOverride={{ title: "Bug Bounty Program | Cexplorer.io" }}
-      title='Bug Bounty Program'
-      subTitle='Find bugs, get rewarded.'
-      breadcrumbItems={[{ label: "Bug Bounty" }]}
+      metadataOverride={{ title: t("bountyPage.metaTitle") }}
+      title={t("bountyPage.title")}
+      subTitle={t("bountyPage.subtitle")}
+      breadcrumbItems={[{ label: t("bountyPage.breadcrumb") }]}
       adsCarousel={false}
       customPage={true}
     >
       <section className='flex w-full max-w-desktop flex-col items-center px-mobile pb-3 md:px-desktop'>
         <div className='mb-6 w-full max-w-[800px] rounded-xl border border-border p-6'>
-          <h3 className='text-xl mt-0 font-semibold'>Guidelines</h3>
+          <h3 className='text-xl mt-0 font-semibold'>{t("bountyPage.guidelines.title")}</h3>
           <p className='text-sm mb-4 text-grayTextPrimary'>
-            Not available yet.
+            {t("bountyPage.guidelines.description")}
           </p>
           <ul className='mb-4 flex flex-col gap-3'>
-            {guidelines.map((guideline, index) => (
-              <li key={index} className='flex items-start gap-3'>
+            {guidelineKeys.map(key => (
+              <li key={key} className='flex items-start gap-3'>
                 <span className='text-sm text-grayTextPrimary'>
-                  {guideline}
+                  {t(`bountyPage.guidelines.items.${key}`)}
                 </span>
               </li>
             ))}
@@ -41,10 +41,10 @@ export const BountyPage = () => {
         <div className='mb-4 flex w-full max-w-[800px] flex-col justify-between gap-4 rounded-xl border border-border p-6 sm:flex-row sm:items-center'>
           <div className='flex flex-col'>
             <h3 className='text-xl mb-2 font-semibold'>
-              Report a bug on GitHub
+              {t("bountyPage.reportBug.title")}
             </h3>
             <p className='text-sm text-grayTextPrimary'>
-              Spotted something off? Help us squash bugs and improve Cexplorer.
+              {t("bountyPage.reportBug.description")}
             </p>
           </div>
           <div className='flex-shrink-0'>
@@ -56,7 +56,7 @@ export const BountyPage = () => {
               <Button
                 size='md'
                 variant='primary'
-                label='Report a bug'
+                label={t("bountyPage.reportBug.button")}
                 rightIcon={<ExternalLink size={15} />}
               />
             </a>
@@ -66,11 +66,10 @@ export const BountyPage = () => {
         <div className='mb-6 flex w-full max-w-[800px] flex-col justify-between gap-4 rounded-xl border border-border p-6 sm:flex-row sm:items-center'>
           <div className='flex flex-col'>
             <h3 className='text-xl mb-2 font-semibold'>
-              Suggest a new feature
+              {t("bountyPage.suggestFeature.title")}
             </h3>
             <p className='text-sm text-grayTextPrimary'>
-              Think we should add something? Suggest a feature you'd love to
-              see.
+              {t("bountyPage.suggestFeature.description")}
             </p>
           </div>
           <div className='flex-shrink-0'>
@@ -82,7 +81,7 @@ export const BountyPage = () => {
               <Button
                 size='md'
                 variant='primary'
-                label='Suggest a feature'
+                label={t("bountyPage.suggestFeature.button")}
                 rightIcon={<ExternalLink size={15} />}
               />
             </a>
@@ -101,10 +100,10 @@ export const BountyPage = () => {
               >
                 <MessageCircle size={20} color={colors.darkBlue} />
               </div>
-              <h3 className='text-lg m-0 font-semibold'>Support</h3>
+              <h3 className='text-lg m-0 font-semibold'>{t("bountyPage.support.title")}</h3>
             </div>
             <p className='text-sm mb-4 pl-11 text-grayTextPrimary'>
-              Join our Discord to get in touch with our support team.
+              {t("bountyPage.support.description")}
             </p>
             <div className='ml-auto mt-auto'>
               <a
@@ -112,7 +111,7 @@ export const BountyPage = () => {
                 target='_blank'
                 rel='noreferrer noopener'
               >
-                <Button size='sm' variant='discord' label='Join Discord' />
+                <Button size='sm' variant='discord' label={t("bountyPage.support.button")} />
               </a>
             </div>
           </div>
@@ -128,17 +127,17 @@ export const BountyPage = () => {
               >
                 <Heart size={20} color={colors.darkBlue} />
               </div>
-              <h3 className='text-lg m-0 font-semibold'>Donate</h3>
+              <h3 className='text-lg m-0 font-semibold'>{t("bountyPage.donate.title")}</h3>
             </div>
             <p className='text-sm mb-4 pl-11 text-grayTextPrimary'>
-              Support our mission and keep the Cexplorer rolling
+              {t("bountyPage.donate.description")}
             </p>
             <div className='ml-auto mt-auto'>
               <a href='/donate'>
                 <Button
                   size='sm'
                   variant='tertiary'
-                  label='Donate page'
+                  label={t("bountyPage.donate.button")}
                   rightIcon={<ArrowRight size={16} />}
                 />
               </a>

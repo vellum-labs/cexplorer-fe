@@ -8,77 +8,79 @@ import {
   Zap,
   Heart,
   ArrowRight,
+  type LucideIcon,
 } from "lucide-react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
-const services = [
+interface Service {
+  icon: LucideIcon;
+  titleKey: string;
+  descriptionKey: string;
+  link: string;
+}
+
+const services: Service[] = [
   {
     icon: Check,
-    title: "Explore everything on Cardano",
-    description:
-      "Cexplorer lets you browse everything happening on the Cardano blockchain. From blocks and transactions to epochs, assets, and smart contracts, all network activity is transparent and easy to explore.",
+    titleKey: "aboutPage.services.explore.title",
+    descriptionKey: "aboutPage.services.explore.description",
     link: "/tx",
   },
   {
     icon: TrendingUp,
-    title: "Rich analytics and insights",
-    description:
-      "Gain a deeper understanding of Cardano through clear data and visual metrics. Track staking performance, transaction volumes, and protocol activity to stay informed and ahead.",
+    titleKey: "aboutPage.services.analytics.title",
+    descriptionKey: "aboutPage.services.analytics.description",
     link: "/analytics",
   },
   {
     icon: Landmark,
-    title: "Governance made simple",
-    description:
-      "Take part in Cardano governance directly within the explorer. Delegate your stake to DReps, follow proposals and votes, and stay updated on key network decisions.",
+    titleKey: "aboutPage.services.governance.title",
+    descriptionKey: "aboutPage.services.governance.description",
     link: "/gov",
   },
   {
     icon: User,
-    title: "Powerful tools for developers",
-    description:
-      "Cexplorer provides a complete set of developer tools, including the API, SDK, and specialized inspectors for addresses and datum. Access real-time Cardano data, integrate it into your apps, and explore both mainnet and testnet environments with ease.",
+    titleKey: "aboutPage.services.developers.title",
+    descriptionKey: "aboutPage.services.developers.description",
     link: "/more",
   },
   {
     icon: Zap,
-    title: "Built for reliability & performance",
-    description:
-      "Cexplorer is optimized for speed, accuracy, and uptime. Every part of the platform is designed to deliver a smooth, dependable experience across desktop and mobile.",
+    titleKey: "aboutPage.services.reliability.title",
+    descriptionKey: "aboutPage.services.reliability.description",
     link: "/faq",
   },
   {
     icon: Heart,
-    title: "Built for the community",
-    description:
-      "Serving as an essential resource for the Cardano ecosystem since the Incentivized Testnet. We have been building and maintaining Cexplorer while actively supporting decentralization as a DRep and SPO.",
+    titleKey: "aboutPage.services.community.title",
+    descriptionKey: "aboutPage.services.community.description",
     link: "/donate",
   },
 ];
 
 export const AboutUsPage = () => {
+  const { t } = useAppTranslation();
   return (
     <PageBase
-      metadataOverride={{ title: "About us | Cexplorer.io" }}
-      title='About us'
-      breadcrumbItems={[{ label: "About us" }]}
+      metadataOverride={{ title: t("aboutPage.metaTitle") }}
+      title={t("aboutPage.title")}
+      breadcrumbItems={[{ label: t("aboutPage.breadcrumb") }]}
       adsCarousel={false}
       customPage={true}
     >
       <section className='flex w-full max-w-desktop flex-col items-center px-mobile pb-3 md:px-desktop'>
         <div className='mb-12 flex w-full max-w-[800px] flex-col items-center text-center'>
           <p className='text-base text-muted-foreground'>
-            Cexplorer.io, the independent and most feature-rich Cardano
-            blockchain explorer, empowers users and developers with
-            comprehensive tools for browsing the blockchain, staking and
-            analysis, serving as an essential resource for the Cardano ecosystem
-            since the Incentivized Testnet.
+            {t("aboutPage.description")}
           </p>
         </div>
 
         <div className='flex w-full max-w-desktop flex-col items-center'>
-          <h2 className='text-2xl mb-2 font-semibold'>Cexplorer</h2>
+          <h2 className='text-2xl mb-2 font-semibold'>
+            {t("aboutPage.sectionTitle")}
+          </h2>
           <p className='text-base text-muted-foreground mb-8'>
-            Supporting the Cardano ecosystem with tools and data.
+            {t("aboutPage.sectionSubtitle")}
           </p>
 
           <div className='grid w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
@@ -92,16 +94,18 @@ export const AboutUsPage = () => {
                   <div className='flex h-12 w-12 items-center justify-center rounded-xl border border-border'>
                     <Icon size={20} className='text-foreground' />
                   </div>
-                  <h3 className='text-lg font-semibold'>{service.title}</h3>
+                  <h3 className='text-lg font-semibold'>
+                    {t(service.titleKey)}
+                  </h3>
                   <p className='text-sm text-muted-foreground'>
-                    {service.description}
+                    {t(service.descriptionKey)}
                   </p>
                   <Button
                     variant='primary'
                     size='sm'
                     label={
                       <span className='flex items-center gap-2'>
-                        Learn more
+                        {t("aboutPage.learnMore")}
                         <ArrowRight size={15} />
                       </span>
                     }

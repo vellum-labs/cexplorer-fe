@@ -6,6 +6,7 @@ import { ArrowRight, Check, Copy, Heart, Mail, Zap } from "lucide-react";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface InfoCardProps {
   icon: ReactNode;
@@ -15,6 +16,7 @@ interface InfoCardProps {
 }
 
 export const ContactUsPage = () => {
+  const { t } = useAppTranslation();
   const [isCopied, setIsCopied] = useState(false);
   const email = "hello@cexplorer.io";
 
@@ -29,10 +31,10 @@ export const ContactUsPage = () => {
 
   return (
     <PageBase
-      metadataOverride={{ title: "Contact us | Cexplorer.io" }}
-      title='Contact us'
-      subTitle='Get in touch'
-      breadcrumbItems={[{ label: "Contact us" }]}
+      metadataOverride={{ title: t("contactPage.metaTitle") }}
+      title={t("contactPage.title")}
+      subTitle={t("contactPage.subtitle")}
+      breadcrumbItems={[{ label: t("contactPage.breadcrumb") }]}
       adsCarousel={false}
       customPage={true}
     >
@@ -40,15 +42,14 @@ export const ContactUsPage = () => {
         <section className='flex w-full max-w-[800px] flex-col gap-4 border-b border-border pb-8'>
           <div className='contributors__item'>
             <div className='contributors__item--title'>
-              <h3>Support Our Work</h3>
+              <h3>{t("contactPage.supportWork.title")}</h3>
               <span className='description contributors__item--description'>
-                Consider donating or staking with our stake pool to support
-                ongoing development and maintenance.
+                {t("contactPage.supportWork.description")}
               </span>
             </div>
             <div className='contributors__item--btn'>
               <Link to='/donate' className='btn btn--primary'>
-                Donate
+                {t("contactPage.supportWork.button")}
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   width='15'
@@ -71,10 +72,10 @@ export const ContactUsPage = () => {
             <div className='contributors__item--title'>
               <span className='flex items-center gap-1'>
                 <Twitter size={24} />
-                <h3>X (former Twitter)</h3>
+                <h3>{t("contactPage.twitter.title")}</h3>
               </span>
               <span className='description contributors__item--description'>
-                Stay in touch with latest updates around Cexplorer and Cardano.
+                {t("contactPage.twitter.description")}
               </span>
             </div>
             <div className='contributors__item--btn'>
@@ -84,7 +85,7 @@ export const ContactUsPage = () => {
                 rel='noreferrer noopener nofollow'
                 className='btn btn--primary'
               >
-                Join
+                {t("contactPage.twitter.button")}
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   width='15'
@@ -122,11 +123,10 @@ export const ContactUsPage = () => {
                     fill={colors.text}
                   />
                 </svg>
-                <h3>Discord</h3>
+                <h3>{t("contactPage.discord.title")}</h3>
               </span>
               <span className='description contributors__item--description'>
-                Join the conversation, or raise a support ticker - we’re here
-                for you.
+                {t("contactPage.discord.description")}
               </span>
             </div>
             <div className='contributors__item--btn'>
@@ -136,7 +136,7 @@ export const ContactUsPage = () => {
                 rel='noreferrer noopener nofollow'
                 className='btn btn--primary'
               >
-                Join
+                {t("contactPage.discord.button")}
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   width='15'
@@ -179,10 +179,10 @@ export const ContactUsPage = () => {
                     </clipPath>
                   </defs>
                 </svg>
-                <h3>Telegram</h3>
+                <h3>{t("contactPage.telegram.title")}</h3>
               </span>
               <span className='description contributors__item--description'>
-                Join the Cexplorer community on our Telegram.
+                {t("contactPage.telegram.description")}
               </span>
             </div>
             <div className='contributors__item--btn'>
@@ -192,7 +192,7 @@ export const ContactUsPage = () => {
                 rel='noreferrer noopener nofollow'
                 className='btn btn--primary'
               >
-                Join
+                {t("contactPage.telegram.button")}
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   width='15'
@@ -215,10 +215,10 @@ export const ContactUsPage = () => {
             <div className='contributors__item--title'>
               <span className='flex items-center gap-1'>
                 <Mail size={24} />
-                <h3>E-mail</h3>
+                <h3>{t("contactPage.email.title")}</h3>
               </span>
               <span className='description contributors__item--description'>
-                Reach out to us with business or custom API inquires.
+                {t("contactPage.email.description")}
               </span>
             </div>
             <div className='contributors__item--btn'>
@@ -238,14 +238,14 @@ export const ContactUsPage = () => {
         <section className='flex w-full max-w-[800px] flex-wrap gap-2 pt-8'>
           <InfoCard
             icon={<Zap size={18} color={colors.darkBlue} />}
-            heading='Request a feature'
-            description="Let us know, what you're like to see on Cexplorer next!"
+            heading={t("contactPage.requestFeature.title")}
+            description={t("contactPage.requestFeature.description")}
             button={
               <Link to='/' className='ml-auto mt-auto'>
                 <Button
                   size='md'
                   variant='tertiary'
-                  label='Request a feature'
+                  label={t("contactPage.requestFeature.button")}
                   rightIcon={<ArrowRight size={16} />}
                 />
               </Link>
@@ -253,14 +253,14 @@ export const ContactUsPage = () => {
           />
           <InfoCard
             icon={<Heart size={18} color={colors.darkBlue} />}
-            heading='Donate'
-            description='Support our mission and keep the Cexplorer rolling'
+            heading={t("contactPage.donate.title")}
+            description={t("contactPage.donate.description")}
             button={
               <Link to='/donate' className='ml-auto mt-auto'>
                 <Button
                   size='md'
                   variant='tertiary'
-                  label='Donate page'
+                  label={t("contactPage.donate.button")}
                   rightIcon={<ArrowRight size={16} />}
                 />
               </Link>

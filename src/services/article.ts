@@ -5,10 +5,17 @@ import type {
   WikiDetailResponse,
   WikiListResponse,
 } from "@/types/articleTypes";
+import type { Locales } from "@/types/storeTypes";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
+// Map app locale to API language code
+const toApiLang = (locale: Locales): string => {
+  if (locale === "cz") return "cs";
+  return locale;
+};
+
 interface ArticleDetailProps {
-  lng: "en";
+  lng: Locales;
   type: "page" | "article";
   url: string;
 }
@@ -22,7 +29,7 @@ export const fetchArticleDetail = async ({
 
   const options = {
     params: {
-      lng,
+      lng: toApiLang(lng),
       type,
       url,
     },
@@ -32,7 +39,7 @@ export const fetchArticleDetail = async ({
 };
 
 export const useFetchArticleDetail = (
-  lng: "en",
+  lng: Locales,
   type: "page" | "article",
   url: string,
 ) =>
@@ -56,7 +63,7 @@ export const fetchArticleList = async ({
   limit,
   category,
 }: {
-  lng: "en";
+  lng: Locales;
   offset: number;
   limit: number;
   category?: string;
@@ -65,7 +72,7 @@ export const fetchArticleList = async ({
 
   const options = {
     params: {
-      lng,
+      lng: toApiLang(lng),
       type: "article",
       limit,
       offset,
@@ -77,7 +84,7 @@ export const fetchArticleList = async ({
 };
 
 export const useFetchArticleList = (
-  lng: "en",
+  lng: Locales,
   page: number,
   limit: number,
   category?: string,
@@ -100,12 +107,12 @@ export const useFetchArticleList = (
     staleTime: 1000 * 60 * 5,
   });
 
-export const fetchWikiDetail = async ({ lng, url }: { lng: "en"; url: string }) => {
+export const fetchWikiDetail = async ({ lng, url }: { lng: Locales; url: string }) => {
   const apiUrl = "/article/detail";
 
   const options = {
     params: {
-      lng,
+      lng: toApiLang(lng),
       type: "wiki",
       url,
     },
@@ -114,7 +121,7 @@ export const fetchWikiDetail = async ({ lng, url }: { lng: "en"; url: string }) 
   return handleFetch<WikiDetailResponse>(apiUrl, undefined, options);
 };
 
-export const useFetchWikiDetail = (lng: "en", url: string, enabled: boolean = true) =>
+export const useFetchWikiDetail = (lng: Locales, url: string, enabled: boolean = true) =>
   useQuery({
     queryKey: ["wikiDetail", lng, url],
     queryFn: async () => {
@@ -130,7 +137,7 @@ export const fetchWikiList = async ({
   offset,
   limit,
 }: {
-  lng: "en";
+  lng: Locales;
   offset: number;
   limit: number;
 }) => {
@@ -138,7 +145,7 @@ export const fetchWikiList = async ({
 
   const options = {
     params: {
-      lng,
+      lng: toApiLang(lng),
       type: "wiki",
       limit,
       offset,
@@ -148,7 +155,7 @@ export const fetchWikiList = async ({
   return handleFetch<WikiListResponse>(apiUrl, offset, options);
 };
 
-export const useFetchWikiList = (lng: "en", page: number, limit: number) =>
+export const useFetchWikiList = (lng: Locales, page: number, limit: number) =>
   useInfiniteQuery({
     queryKey: ["wiki-list", lng, page, limit],
     queryFn: async ({ pageParam = page }) =>

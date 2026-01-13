@@ -2181,5 +2181,599 @@
         "joinDiscord": "Join Discord"
       }
     }
+  },
+  "aboutPage": {
+    "title": "About us",
+    "breadcrumb": "About us",
+    "metaTitle": "About us | Cexplorer.io",
+    "description": "Cexplorer.io, the independent and most feature-rich Cardano blockchain explorer, empowers users and developers with comprehensive tools for browsing the blockchain, staking and analysis, serving as an essential resource for the Cardano ecosystem since the Incentivized Testnet.",
+    "sectionTitle": "Cexplorer",
+    "sectionSubtitle": "Supporting the Cardano ecosystem with tools and data.",
+    "learnMore": "Learn more",
+    "services": {
+      "explore": {
+        "title": "Explore everything on Cardano",
+        "description": "Cexplorer lets you browse everything happening on the Cardano blockchain. From blocks and transactions to epochs, assets, and smart contracts, all network activity is transparent and easy to explore."
+      },
+      "analytics": {
+        "title": "Rich analytics and insights",
+        "description": "Gain a deeper understanding of Cardano through clear data and visual metrics. Track staking performance, transaction volumes, and protocol activity to stay informed and ahead."
+      },
+      "governance": {
+        "title": "Governance made simple",
+        "description": "Take part in Cardano governance directly within the explorer. Delegate your stake to DReps, follow proposals and votes, and stay updated on key network decisions."
+      },
+      "developers": {
+        "title": "Powerful tools for developers",
+        "description": "Cexplorer provides a complete set of developer tools, including the API, SDK, and specialized inspectors for addresses and datum. Access real-time Cardano data, integrate it into your apps, and explore both mainnet and testnet environments with ease."
+      },
+      "reliability": {
+        "title": "Built for reliability & performance",
+        "description": "Cexplorer is optimized for speed, accuracy, and uptime. Every part of the platform is designed to deliver a smooth, dependable experience across desktop and mobile."
+      },
+      "community": {
+        "title": "Built for the community",
+        "description": "Serving as an essential resource for the Cardano ecosystem since the Incentivized Testnet. We have been building and maintaining Cexplorer while actively supporting decentralization as a DRep and SPO."
+      }
+    }
+  },
+  "analyticsPage": {
+    "title": "Analytics",
+    "breadcrumb": "Analytics",
+    "categories": {
+      "network": "Network",
+      "accounts": "Accounts",
+      "pools": "Staking",
+      "dapps": "dApps"
+    },
+    "options": {
+      "blocks": "Blocks",
+      "blockVersions": "Block versions",
+      "energyConsumption": "Energy consumption",
+      "health": "Health",
+      "storage": "Storage",
+      "transactions": "Transactions",
+      "hardfork": "Hardfork",
+      "pots": "Pots",
+      "treasuryProjection": "Treasury projection",
+      "walletActivity": "Wallet activity",
+      "topAddresses": "Top addresses",
+      "topStakingAccounts": "Top staking accounts",
+      "wealthComposition": "Wealth composition",
+      "genesisAddresses": "Genesis addresses",
+      "poolIssues": "Pool issues",
+      "averagePools": "Average pools",
+      "ranklist": "Ranklist",
+      "interactions": "Interactions",
+      "tvl": "TVL"
+    }
+  },
+  "governanceCrossroads": {
+    "title": "Governance",
+    "breadcrumb": "Governance",
+    "sections": {
+      "dreps": {
+        "label": "Delegated Representatives (DReps)",
+        "description": "Explore all Cardano DReps, their voting history, and participation stats.",
+        "viewAll": "View all DReps",
+        "analytics": "Analytics"
+      },
+      "votes": {
+        "label": "Governance Votes",
+        "description": "Browse all votes from DReps, SPOs, and the Constitutional Committee.",
+        "button": "View votes"
+      },
+      "actions": {
+        "label": "Governance Actions",
+        "description": "View every governance action, its details, and the outcomes.",
+        "button": "View governance actions"
+      },
+      "cc": {
+        "label": "Constitutional Committee (CC)",
+        "description": "See who's on the committee, their role, and how they've voted.",
+        "button": "View Constitutional Committee"
+      },
+      "powerThresholds": {
+        "label": "Power Thresholds",
+        "description": "See Cardano power distribution and governance.",
+        "button": "View Power Thresholds"
+      },
+      "constitution": {
+        "label": "Constitution",
+        "description": "View the current and past Cardano constitutions and their governance history.",
+        "button": "View Constitution"
+      },
+      "certificates": {
+        "label": "Certificates",
+        "description": "All transactions with DRep registrations, updates, and deregistrations.",
+        "registrations": "DRep registrations",
+        "deregistrations": "DRep deregistrations",
+        "updates": "DRep updates"
+      }
+    }
+  },
+  "brandPage": {
+    "title": "Brand assets",
+    "breadcrumb": "Brand assets",
+    "metaTitle": "Brand assets | Cexplorer.io",
+    "description": "For using Cexplorer.io branding in press on graphics materials.",
+    "guidelines": {
+      "title": "Guidelines",
+      "description": "These guidelines ensure consistent and proper use of the Cexplorer name and logo. By following them, you help maintain our brand's integrity and clarity across all platforms.",
+      "items": {
+        "reference": "Always use \"Cexplorer\" or \"Cexplorer.io\" when referencing our brand.",
+        "noAlterations": "Use the Cexplorer logo as provided, without any alterations or modifications.",
+        "contrast": "Ensure you choose the appropriate logo variant to maintain clear contrast with the background.",
+        "noCombine": "Do not combine the Cexplorer logo with other images or logos without prior consent.",
+        "noEndorsement": "Do not use the Cexplorer name or logo in any way that implies endorsement, affiliation, or partnership without permission.",
+        "noUnlawful": "Avoid using the Cexplorer brand in association with any unlawful activities, promotions, or products.",
+        "dataReference": "If you're using data from Cexplorer, be sure to reference it clearly with a direct link to",
+        "dataProvidedBy": "Data provided by Cexplorer",
+        "source": "Source: Cexplorer"
+      },
+      "apiNote": "Note: API data usage is allowed only if you have valid license for specific use-case (NOT end-consumer frontend license)"
+    },
+    "logos": {
+      "title": "Logos",
+      "logomark": "Logomark",
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "colors": {
+      "title": "Colors",
+      "red": "Red",
+      "white": "White",
+      "black": "Black",
+      "blue": "Blue",
+      "proGradient": "PRO gradient"
+    }
+  },
+  "contactPage": {
+    "title": "Contact us",
+    "metaTitle": "Contact us | Cexplorer.io",
+    "subtitle": "Get in touch",
+    "breadcrumb": "Contact us",
+    "supportWork": {
+      "title": "Support Our Work",
+      "description": "Consider donating or staking with our stake pool to support ongoing development and maintenance.",
+      "button": "Donate"
+    },
+    "twitter": {
+      "title": "X (former Twitter)",
+      "description": "Stay in touch with latest updates around Cexplorer and Cardano.",
+      "button": "Join"
+    },
+    "discord": {
+      "title": "Discord",
+      "description": "Join the conversation, or raise a support ticket - we're here for you.",
+      "button": "Join"
+    },
+    "telegram": {
+      "title": "Telegram",
+      "description": "Join the Cexplorer community on our Telegram.",
+      "button": "Join"
+    },
+    "email": {
+      "title": "E-mail",
+      "description": "Reach out to us with business or custom API inquiries."
+    },
+    "requestFeature": {
+      "title": "Request a feature",
+      "description": "Let us know what you'd like to see on Cexplorer next!",
+      "button": "Request a feature"
+    },
+    "donate": {
+      "title": "Donate",
+      "description": "Support our mission and keep the Cexplorer rolling",
+      "button": "Donate page"
+    }
+  },
+  "adsPage": {
+    "title": "Advertise with us",
+    "metaTitle": "Promotion & Advertising | Cexplorer.io",
+    "subtitle": "Promote your project on Cexplorer",
+    "breadcrumb": "Advertise with us",
+    "banner": "Ads will be available at a later date.",
+    "stats": {
+      "monthlyPageViews": "Monthly page views",
+      "uniqueUsers": "Unique users",
+      "adImpressions": "Ad impressions",
+      "averageCtr": "Average CTR"
+    },
+    "reach": {
+      "title": "Reach your audience!",
+      "description1": "Cexplorer.io is the top Cardano blockchain explorer and analytics platform, offering insights into blockchain, staking, governance, and more.",
+      "description2": "Advertise with us, to reach an audience of Cardano enthusiasts and developers, gaining exposure within the growing Cardano community.",
+      "button": "Promote"
+    },
+    "pro": {
+      "title": "Promote with Cexplorer",
+      "description": "By holding the Cexplorer PRO NFT, you can promote assets, policy IDs, stake pools, or dReps while enjoying perks and exclusive features.",
+      "features": {
+        "exposure": {
+          "title": "More NFTs, More Exposure",
+          "description": "The more NFTs promoting a dRep, stake pool, assets, or policy, the more frequently it appears across Cexplorer.io"
+        },
+        "continuous": {
+          "title": "Continuous Promotion",
+          "description": "Keep your promotion active with the ability to update anytime."
+        },
+        "targeted": {
+          "title": "Targeted Exposure",
+          "description": "Promote directly to our engaged user base, with visibility on relevant Cexplorer pages based on the type of promotion, ensuring maximum reach."
+        }
+      },
+      "documentation": "Documentation",
+      "getCexplorerPro": "Get Cexplorer PRO"
+    },
+    "boosts": {
+      "title": "Boosts – Get Noticed Instantly",
+      "description": "Boosts provide a temporary yet impactful highlight for stake pools, dReps, tokens, or NFT collections, making them stand out across Cexplorer's UI.",
+      "features": {
+        "instant": {
+          "title": "Instant Visibility",
+          "description": "projects gets featured prominently for a set duration."
+        },
+        "anyone": {
+          "title": "Anyone Can Boost",
+          "description": "Boosts are open to all; you don't need to own the project to promote it. Boost multiple times for extended visibility."
+        },
+        "strategic": {
+          "title": "Strategic Placement",
+          "description": "Boosted items appear highlighted and in lists and across Cexplorer, maximizing exposure."
+        }
+      },
+      "comingSoon": "Coming soon"
+    },
+    "banners": {
+      "title": "Banner Advertising on Cexplorer",
+      "description": "Banner advertisements offer a way to reach our engaged and promote your project or upcoming launch.",
+      "features": {
+        "visibility": {
+          "title": "High Visibility",
+          "description": "Ads appear on key sections of Cexplorer, ensuring maximum exposure."
+        },
+        "reach": {
+          "title": "Expanded Reach",
+          "description": "Your ad will not only be visible on Cexplorer.io but also on all preview/preprod instances managed by Cexplorer."
+        }
+      },
+      "coinzillaText": "We work with",
+      "coinzillaDescription": ", a trusted advertising network that manually reviews campaigns to maintain quality and relevance.",
+      "documentation": "Documentation",
+      "email": "E-mail"
+    }
+  },
+  "apiPage": {
+    "metaTitle": "API Plans | Cexplorer.io",
+    "title": "API Plans",
+    "subtitle": "Effortless access to blockchain data. Choose the perfect plan for your needs.",
+    "breadcrumb": {
+      "developers": "Developers",
+      "apiPlans": "API Plans"
+    },
+    "banner": "Only the Starter API is available right now. Additional tiers are coming later.",
+    "tiers": {
+      "starter": {
+        "tier": "Free plan",
+        "title": "Starter",
+        "subtitle": "Available to all Cexplorer users.",
+        "cta": "Get started",
+        "features": {
+          "ideal": "Ideal for developers and private projects",
+          "requestsPerMinute": "{{count}} requests per minute",
+          "requestsPerDay": "{{count}} requests per day",
+          "tokensPerDay": "{{count}} tokens per day"
+        }
+      },
+      "basic": {
+        "tier": "NFT tier",
+        "title": "Basic",
+        "subtitle": "Comes with owning Cexplorer PRO NFT.",
+        "cta": "Get started",
+        "features": {
+          "ideal": "Ideal for small to medium sized projects",
+          "stackingNote": "Owning multiple NFTs stacks the API requests limits",
+          "requestsPerMinute": "{{count}} requests per minute",
+          "requestsPerDayNft": "{{count}} requests per day for each NFT",
+          "tokensPerDayNft": "{{count}} tokens per day for each NFT"
+        }
+      },
+      "pro": {
+        "tier": "Individual",
+        "title": "PRO",
+        "subtitle": "Tailored individually based on your needs.",
+        "cta": "Contact us",
+        "features": {
+          "ideal": "Ideal for large sized projects",
+          "flexibleLimits": "Limits are always flexible & set based on the project needs",
+          "requestsPerMinute": "{{count}}+ requests per minute",
+          "requestsPerDay": "{{count}}+ requests per day",
+          "tokensPerDay": "{{count}}+ tokens per day",
+          "prioritySupport": "Priority support"
+        }
+      },
+      "comingSoon": "(Coming soon...)"
+    },
+    "documentation": {
+      "title": "API documentation",
+      "description": "Explore the API docs to get started with your project!",
+      "button": "View documentation"
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "description": "Everything you need to know about the product and billing.",
+      "questions": {
+        "q1": {
+          "question": "1. What does the Starter plan include?",
+          "answer": "The Starter plan is a free-tier program designed for personal or single developer use. This program is available to every Cexplorer.io user."
+        },
+        "q2": {
+          "question": "2. What are the benefits of the Basic plan?",
+          "answerPart1": "The Basic plan comes with owning a",
+          "answerLink": "Cexplorer PRO NFT",
+          "answerPart2": ". With each NFTs your limits are boosted. The more NFTs you own, the higher your API limits."
+        },
+        "q3": {
+          "question": "3. How does the PRO plan work?",
+          "answer": "The PRO plan is tailored individually to fit the needs of large-sized projects. Please reach out to us with details about your intended use, and we'll customize the limits and features to suit your requirements."
+        },
+        "q4": {
+          "question": "4. Can I combine multiple Basic-tier NFTs for increased limits?",
+          "answerPart1": "Yes! If you own multiple",
+          "answerLink": "Cexplorer PRO NFT",
+          "answerPart2": ", their API request limits stack, giving you higher overall limits."
+        },
+        "q5": {
+          "question": "5. What are tokens, and how are they used?",
+          "answer": "Tokens represent the usage limit for specific API features. Each request may consume a certain number of tokens depending on its complexity or data retrieved."
+        },
+        "q6": {
+          "question": "6. How can I switch to a higher-tier plan?",
+          "answerPart1": "To upgrade to the Basic tier, purchase a",
+          "answerLink": "Cexplorer PRO NFT",
+          "answerPart2": ". For the PRO plan, contact our support team to discuss your specific requirements."
+        },
+        "q7": {
+          "question": "7. Is there a way to get extra support if I'm on the Basic plan?",
+          "answer": "Priority support is available exclusively for PRO API plan. However, all users can access general support through our standard channels."
+        },
+        "q8": {
+          "question": "8. Are there any additional perks for owning a Cexplorer PRO NFT?",
+          "answerIntro": "Yes! Alongside the Basic API tier benefits,",
+          "answerLink": "Cexplorer PRO NFT",
+          "answerIntro2": "holders gain access to:",
+          "perk1": "Governance votes",
+          "perk2": "PRO features like exporting data in CSV or JSON formats",
+          "perk3": "Custom wallet labeling (up to 5,000 wallets)",
+          "perk4": "A PRO badge on their profile"
+        },
+        "q9": {
+          "question": "9. Can I test the API before committing to a paid tier?",
+          "answer": "Absolutely! The Starter plan is free and allows you to test the API's basic functionalities with limited requests and tokens."
+        },
+        "q10": {
+          "question": "10. How do I contact support for the PRO plan?",
+          "answer": "A dedicated support channel will be created for you on our Discord server for direct and priority assistance."
+        }
+      }
+    },
+    "stillHaveQuestions": {
+      "title": "Still have questions?",
+      "description": "Can't find the answer you're looking for? Get in touch with our friendly team.",
+      "button": "Get in touch"
+    }
+  },
+  "botsPage": {
+    "metaTitle": "Bots | Cexplorer.io",
+    "title": "Cexplorer.io Bots",
+    "subtitle": "Stay connected with automated notifications and updates",
+    "breadcrumb": "Bots",
+    "bots": {
+      "x": {
+        "title": "X notification bot",
+        "description": "Coming soon..."
+      },
+      "telegram": {
+        "title": "Telegram bot",
+        "description": "Coming soon..."
+      },
+      "discord": {
+        "title": "Discord bot",
+        "description": "Coming soon..."
+      }
+    },
+    "tags": {
+      "global": "Global",
+      "live": "Live",
+      "customizable": "Customizable",
+      "comingSoon": "Coming soon"
+    },
+    "buttons": {
+      "follow": "Follow",
+      "comingSoon": "Coming Soon"
+    },
+    "policy": {
+      "title": "Bots and Automation",
+      "paragraph1": "At Cexplorer, we prioritize fair and responsible use of our platform. As such, the use of automated bots or scripts to crawl, scrape, or interact with our website and API is strictly prohibited. Our API is intended for genuine user interaction, and any automated access, including bot usage, is not allowed.",
+      "paragraph2": "For any questions or concerns regarding our policy, feel free to contact us directly."
+    }
+  },
+  "faqPage": {
+    "metaTitle": "FAQ | Cexplorer.io",
+    "title": "Frequently asked questions",
+    "subtitle": "Everything you need to know about the product and billing.",
+    "breadcrumb": "FAQ",
+    "questions": {
+      "q1": {
+        "title": "What is Cexplorer?",
+        "answer": "Cexplorer.io is a comprehensive Cardano blockchain explorer designed to help users navigate the Cardano blockchain efficiently. We provide real-time data, advanced analytics, and in-depth insights, making us the go-to platform for everything happening on the Cardano blockchain. Beyond exploring, we also offer educational resources to keep you updated on the latest developments in the Cardano ecosystem."
+      },
+      "q2": {
+        "title": "How long has Cexplorer.io been around?",
+        "answer": "We've been around since the Incentivized Testnet, making Cexplorer one of the oldest and most trusted Cardano blockchain explorers. For years, we've been supporting the Cardano community with essential tools and insights for both users and developers."
+      },
+      "q3": {
+        "title": "Is Cexplorer free to use?",
+        "answer": "Yes, Cexplorer is free for everyone! Our blockchain explorer, advanced analytics, and educational sections are all completely free to use. We also offer a Pro version for additional features like data exports, graph exports, API access, and advertising options."
+      },
+      "q4": {
+        "title": "What insights can I gain from Cexplorer's analytics sections?",
+        "answer": "Cexplorer provides a wealth of analytics across categories like blockchain, account, governance, staking, and dApp insights. You can explore key metrics such as Transactions Per Second (TPS), blockchain health, active accounts, dApp rank list, and many more. Our detailed data offers multiple perspectives, empowering you to make informed decisions and optimize your blockchain experience."
+      },
+      "q5": {
+        "title": "Can I export data & graphs from Cexplorer for analysis?",
+        "answer": "Exporting data will be available to all Cexplorer PRO users."
+      },
+      "q6": {
+        "title": "What is Cexplorer PRO?",
+        "answer": "Cexplorer PRO is designed for those who want to unlock the full potential of our platform. With PRO, users gain access to exclusive features such as a featured slot, PRO-specific functionalities, a profile badge, and soon, governance voting and a basic API key. You can expect even more advanced tools and benefits in the future. Cexplorer PRO is perfect for users who want to take full advantage of everything our platform offers. More details about Cexplorer PRO and its benefits will be revealed soon—stay tuned!"
+      },
+      "q7": {
+        "title": "Does Cexplorer have an API for developers?",
+        "answer": "Yes, Cexplorer offers a basic API for PRO users, and we're actively developing multiple API programs that will be revealed soon. In the meantime, developers can reach out to us via Discord or email at hello@cexplorer.io for any API requests. Stay tuned for exciting updates!"
+      },
+      "q8": {
+        "title": "How do I suggest a new feature for Cexplorer?",
+        "answer": "We love hearing from our community! You can suggest a new feature by reaching out to us directly on Discord, sending an email, or using GitHub. Your feedback helps us improve Cexplorer, so don't hesitate to share your ideas!"
+      }
+    }
+  },
+  "donatePage": {
+    "metaTitle": "Donate | Cexplorer.io",
+    "title": "Fuel the Future of Cexplorer",
+    "subtitle": "Your support helps us operate, maintain and improve everything on Cexplorer.io",
+    "breadcrumb": "Donate",
+    "infoCards": {
+      "itn": {
+        "heading": "Here for Cardano since ITN",
+        "description": "We've been the oldest and most featured Cardano explorer since the Incentivized Testnet, providing essential tools for navigating the blockchain."
+      },
+      "community": {
+        "heading": "From community for community",
+        "description": "Created by Cardano enthusiasts, our independent tool supports all users with staking, decision-making, and education. We aim to maximize your profit and protect you from bad practices."
+      },
+      "builders": {
+        "heading": "Utilized by Cardano builders",
+        "description": "Many builders rely on our tools to develop on Cardano. Supporting us helps maintain and enhance these resources, benefiting the entire development community."
+      }
+    },
+    "buttons": {
+      "stakeWithCexplorer": "Stake with Cexplorer",
+      "sendDonation": "Send a donation",
+      "donate": "Donate",
+      "delegateToPools": "Delegate to [POOLS]"
+    },
+    "donateSection": {
+      "title": "Donate",
+      "thankYou": "Thank you for supporting the development of independent Cardano explorer! ❤️",
+      "sendDonationHere": "Send your donation here",
+      "otherMethods": "Other donation methods",
+      "useDappConnector": "Or use our dApp connector"
+    },
+    "donationCards": {
+      "coffee": {
+        "title": "Coffee For Devs",
+        "description": "Fueling the minds behind the code."
+      },
+      "commit": {
+        "title": "Code Commit",
+        "description": "Helping push new features and fixes."
+      },
+      "bug": {
+        "title": "Bug Squasher",
+        "description": "Cleaning up code and fixing bugs."
+      },
+      "api": {
+        "title": "API-ncredible Support",
+        "description": "Tools for powerful integrations."
+      },
+      "custom": {
+        "title": "dApp Your Way",
+        "description": "Empowering developers with the freedom to innovate.",
+        "placeholder": "Choose the amount"
+      }
+    },
+    "stakeSection": {
+      "title": "Stake with Cexplorer.io",
+      "description1": "Support Cexplorer and earn staking rewards by delegating your ADA to our pool.",
+      "description2": "Enjoy top-tier infrastructure and a win-win for both you and us!",
+      "poolPerformance": "Our stake pool performance",
+      "delegateViaDapp": "Delegate via dApp",
+      "poolIdLabel": "Pool ID for delegation via wallet"
+    },
+    "successModal": {
+      "message": "Transaction successful, thank you so much for supporting Cexplorer.io ❤️",
+      "transactionHash": "Transaction Hash:"
+    }
+  },
+  "bountyPage": {
+    "metaTitle": "Bug Bounty Program | Cexplorer.io",
+    "title": "Bug Bounty Program",
+    "subtitle": "Find bugs, get rewarded.",
+    "breadcrumb": "Bug Bounty",
+    "guidelines": {
+      "title": "Guidelines",
+      "description": "Not available yet.",
+      "items": {
+        "g1": "Not available yet. We will open this initiative soon.",
+        "g2": "TBA."
+      }
+    },
+    "reportBug": {
+      "title": "Report a bug on GitHub",
+      "description": "Spotted something off? Help us squash bugs and improve Cexplorer.",
+      "button": "Report a bug"
+    },
+    "suggestFeature": {
+      "title": "Suggest a new feature",
+      "description": "Think we should add something? Suggest a feature you'd love to see.",
+      "button": "Suggest a feature"
+    },
+    "support": {
+      "title": "Support",
+      "description": "Join our Discord to get in touch with our support team.",
+      "button": "Join Discord"
+    },
+    "donate": {
+      "title": "Donate",
+      "description": "Support our mission and keep the Cexplorer rolling",
+      "button": "Donate page"
+    }
+  },
+  "wikiPage": {
+    "metaTitle": "Wiki | Cexplorer.io",
+    "title": "Learn about Cardano",
+    "subtitle": "Short-guides about Cardano and its core mechanisms",
+    "breadcrumb": "Wiki",
+    "otherTopics": "Other topics",
+    "cta": {
+      "title": "Everything Cardano",
+      "description": "Stay ahead of the curve with the latest updates and developments on Cardano—read our blog now!",
+      "button": "Blog"
+    }
+  },
+  "articlePage": {
+    "metaTitle": "Articles | Cexplorer.io",
+    "title": "Learn About Cardano",
+    "subtitle": "Subscribe to receive new articles, educational materials, and development releases directly to your email.",
+    "breadcrumb": "Articles",
+    "breadcrumbDetail": "Article detail",
+    "emailPlaceholder": "Enter your email",
+    "getStarted": "Get started",
+    "privacyNote": "We care about your data in our privacy policy.",
+    "category": "Category:",
+    "searchPlaceholder": "Search...",
+    "home": "Home",
+    "published": "Published",
+    "author": "Author",
+    "stakePool": "Stake pool:",
+    "drep": "Drep:",
+    "socials": "Socials:",
+    "delegateTo": "Delegate to {{name}}",
+    "delegateToPool": "Delegate to Pool",
+    "delegateToDrep": "Delegate to DRep",
+    "keywords": "Keywords",
+    "copyLink": "Copy link"
   }
 }

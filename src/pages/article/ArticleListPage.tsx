@@ -23,9 +23,11 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { DrepNameCell } from "@/components/drep/DrepNameCell";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 
 export const ArticleListPage = () => {
   const { t } = useAppTranslation("common");
+  const { locale } = useLocaleStore();
   const { page } = useSearch({ from: "/article/" });
   const currentPage = page ?? 1;
   const [category, setCategory] = useState<
@@ -33,7 +35,7 @@ export const ArticleListPage = () => {
   >(undefined);
 
   const query = useFetchArticleList(
-    "en",
+    locale,
     (page ?? 1) * 20 - 20,
     20,
     category !== "all" ? category?.toLowerCase() : undefined,
@@ -66,15 +68,14 @@ export const ArticleListPage = () => {
 
   return (
     <PageBase
-      metadataOverride={{ title: "Articles | Cexplorer.io" }}
-      title='Learn About Cardano'
+      metadataOverride={{ title: t("articlePage.metaTitle") }}
+      title={t("articlePage.title")}
       subTitle={
         <p className='text-text-md text-grayTextSecondary'>
-          Subscribe to receive new articles, educational materials, and
-          development releases directly to your email.
+          {t("articlePage.subtitle")}
         </p>
       }
-      breadcrumbItems={[{ label: "Articles" }]}
+      breadcrumbItems={[{ label: t("articlePage.breadcrumb") }]}
       adsCarousel={false}
     >
       <section className='mx-auto flex w-full max-w-desktop flex-col gap-4 px-mobile py-6 md:px-desktop'>
@@ -84,13 +85,13 @@ export const ArticleListPage = () => {
               value=''
               onchange={() => undefined}
               disabled
-              placeholder='Enter your email'
+              placeholder={t("articlePage.emailPlaceholder")}
               className='sm:w-[335px]'
             />
-            <Button size='md' label='Get started' variant='primary' disabled />
+            <Button size='md' label={t("articlePage.getStarted")} variant='primary' disabled />
           </div>
           <span className='text-[14px] text-grayTextSecondary'>
-            We care about your data in our privacy policy.
+            {t("articlePage.privacyNote")}
           </span>
         </div>
         {firstArticle &&
@@ -181,7 +182,7 @@ export const ArticleListPage = () => {
 
         <div className='flex flex-wrap items-center justify-between gap-y-1'>
           <div className='flex items-center gap-1'>
-            <span className='text-text-sm'>Category:</span>
+            <span className='text-text-sm'>{t("articlePage.category")}</span>
             <SortBy
               selectItems={[{ key: "all", value: "all" }, ...categoriesOptions]}
               selectedItem={category}
@@ -195,7 +196,7 @@ export const ArticleListPage = () => {
           </div>
           <TextInput
             onchange={() => undefined}
-            placeholder='Search...'
+            placeholder={t("articlePage.searchPlaceholder")}
             value=''
             disabled
           />

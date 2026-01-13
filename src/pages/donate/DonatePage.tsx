@@ -29,6 +29,7 @@ import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { RandomDelegationModal } from "@/components/wallet/RandomDelegationModal";
 import { sendDelegationInfo } from "@/services/tool";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface InfoCardProps {
   icon: React.ReactNode;
@@ -50,9 +51,13 @@ interface CustomDonateCardProps {
   setAmount: (amount: string) => void;
   isActive?: boolean;
   onClick?: () => void;
+  title: string;
+  description: string;
+  placeholder: string;
 }
 
 export const DonatePage = () => {
+  const { t } = useAppTranslation();
   const donateRef = useRef<HTMLDivElement>(null);
   const stakeRef = useRef<HTMLDivElement>(null);
   const [customAmount, setCustomAmount] = useState<string>("");
@@ -137,10 +142,10 @@ export const DonatePage = () => {
 
   return (
     <PageBase
-      metadataOverride={{ title: "Donate | Cexplorer.io" }}
-      title='Fuel the Future of Cexplorer'
-      subTitle='Your support helps us operate, maintain and improve everything on Cexplorer.io'
-      breadcrumbItems={[{ label: "Donate" }]}
+      metadataOverride={{ title: t("donatePage.metaTitle") }}
+      title={t("donatePage.title")}
+      subTitle={t("donatePage.subtitle")}
+      breadcrumbItems={[{ label: t("donatePage.breadcrumb") }]}
       adsCarousel={false}
       customPage={true}
     >
@@ -158,11 +163,10 @@ export const DonatePage = () => {
         >
           <div className='mt-2 flex h-full w-full flex-col items-center overflow-hidden p-1.5'>
             <h3>
-              Transaction successful, thank you so much for supporting
-              Cexplorer.io ❤️
+              {t("donatePage.successModal.message")}
             </h3>
             <p className='mt-4'>
-              Transaction Hash:{" "}
+              {t("donatePage.successModal.transactionHash")}{" "}
               <Link
                 to='/tx/$hash'
                 params={{ hash: hash ?? "" }}
@@ -178,24 +182,24 @@ export const DonatePage = () => {
         <section className='mt-6 flex flex-wrap gap-4'>
           <InfoCard
             icon={<Zap color={colors.darkBlue} />}
-            heading='Here for Cardano since ITN'
-            description='We’ve been the oldest and most featured Cardano explorer since the Incentivized Testnet, providing essential tools for navigating the blockchain.'
+            heading={t("donatePage.infoCards.itn.heading")}
+            description={t("donatePage.infoCards.itn.description")}
           />
           <InfoCard
             icon={<Users color={colors.darkBlue} />}
-            heading='From community for community'
-            description='Created by Cardano enthusiasts, our independent tool supports all users with staking, decision-making, and education. We aim to maximize your profit and protect you from bad practices.'
+            heading={t("donatePage.infoCards.community.heading")}
+            description={t("donatePage.infoCards.community.description")}
           />
           <InfoCard
             icon={<Wrench color={colors.darkBlue} />}
-            heading='Utilized by Cardano builders'
-            description='Many builders rely on our tools to develop on Cardano. Supporting us helps maintain and enhance these resources, benefiting the entire development community.'
+            heading={t("donatePage.infoCards.builders.heading")}
+            description={t("donatePage.infoCards.builders.description")}
           />
         </section>
         <section className='mt-6 flex flex-wrap justify-center gap-4 border-b border-border pb-5'>
           <Button
             size='lg'
-            label='Stake with Cexplorer'
+            label={t("donatePage.buttons.stakeWithCexplorer")}
             variant='tertiary'
             leftIcon={<CornerRightDown />}
             onClick={scrollToStake}
@@ -203,7 +207,7 @@ export const DonatePage = () => {
           />
           <Button
             size='lg'
-            label='Send a donation'
+            label={t("donatePage.buttons.sendDonation")}
             variant='primary'
             leftIcon={<Wallet />}
             onClick={scrollToDonate}
@@ -211,15 +215,14 @@ export const DonatePage = () => {
           />
         </section>
         <section ref={donateRef} className='border-b border-border py-8'>
-          <h2>Donate</h2>
+          <h2>{t("donatePage.donateSection.title")}</h2>
           <div className='flex flex-wrap justify-between gap-2'>
             <div className='flex flex-col'>
               <p className='mt-2 font-regular text-grayTextPrimary'>
-                Thank you for supporting the development of independent Cardano
-                explorer! ❤️
+                {t("donatePage.donateSection.thankYou")}
               </p>
               <p className='mb-1 mt-2 text-text-sm font-medium'>
-                Send your donation here
+                {t("donatePage.donateSection.sendDonationHere")}
               </p>
               <div className='relative flex w-full max-w-[390px] items-center'>
                 <input
@@ -234,7 +237,7 @@ export const DonatePage = () => {
               </div>
             </div>
             <div className='flex flex-col gap-2'>
-              <p className='text-text-sm font-medium'>Other donation methods</p>
+              <p className='text-text-sm font-medium'>{t("donatePage.donateSection.otherMethods")}</p>
               <div className='flex flex-wrap gap-2'>
                 <a
                   href='https://www.paypal.com/donate?business=billing@vellumlabs.cz&item_name=Cexplorer.io+-+maintenance,+development,+servers&currency_code=USD'
@@ -266,38 +269,38 @@ export const DonatePage = () => {
             </div>
           </div>
           <p className='mb-1 mt-5 text-text-sm font-medium'>
-            Or use our dApp connector
+            {t("donatePage.donateSection.useDappConnector")}
           </p>
           <div className='flex flex-wrap gap-2'>
             <DonateCard
               icon={<Coffee color={colors.darkBlue} />}
               amount={10}
-              title='Coffee For Devs'
-              description='Fueling the minds behind the code.'
+              title={t("donatePage.donationCards.coffee.title")}
+              description={t("donatePage.donationCards.coffee.description")}
               onClick={() => setActiveDonation(10)}
               isActive={activeDonation === 10}
             />
             <DonateCard
               icon={<GitCommitHorizontal color={colors.darkBlue} />}
               amount={50}
-              title='Code Commit'
-              description='Helping push new features and fixes.'
+              title={t("donatePage.donationCards.commit.title")}
+              description={t("donatePage.donationCards.commit.description")}
               onClick={() => setActiveDonation(50)}
               isActive={activeDonation === 50}
             />
             <DonateCard
               icon={<Bug color={colors.darkBlue} />}
               amount={100}
-              title='Bug Squasher'
-              description='Cleaning up code and fixing bugs.'
+              title={t("donatePage.donationCards.bug.title")}
+              description={t("donatePage.donationCards.bug.description")}
               onClick={() => setActiveDonation(100)}
               isActive={activeDonation === 100}
             />
             <DonateCard
               icon={<Code color={colors.darkBlue} />}
               amount={500}
-              title='API-ncredible Support'
-              description='Tools for powerful integrations.'
+              title={t("donatePage.donationCards.api.title")}
+              description={t("donatePage.donationCards.api.description")}
               onClick={() => setActiveDonation(500)}
               isActive={activeDonation === 500}
             />
@@ -306,12 +309,15 @@ export const DonatePage = () => {
               setAmount={setCustomAmount}
               isActive={activeDonation === 0}
               onClick={() => setActiveDonation(0)}
+              title={t("donatePage.donationCards.custom.title")}
+              description={t("donatePage.donationCards.custom.description")}
+              placeholder={t("donatePage.donationCards.custom.placeholder")}
             />
           </div>
           <div className='flex w-full justify-center'>
             <Button
               size='lg'
-              label='Donate'
+              label={t("donatePage.buttons.donate")}
               variant='primary'
               leftIcon={<Wallet />}
               className='mt-4'
@@ -330,35 +336,34 @@ export const DonatePage = () => {
               src={CexLogo}
             />
             <div className='flex flex-col gap-1.5'>
-              <h2>Stake with Cexplorer.io</h2>
+              <h2>{t("donatePage.stakeSection.title")}</h2>
               <p className='max-w-[350px] font-regular text-grayTextPrimary'>
-                Support Cexplorer and earn staking rewards by delegating your
-                ADA to our pool.
+                {t("donatePage.stakeSection.description1")}
               </p>
               <p className='max-w-[350px] font-regular text-grayTextPrimary'>
-                Enjoy top-tier infrastructure and a win-win for both you and us!
+                {t("donatePage.stakeSection.description2")}
               </p>
               <Link
                 to='/pool/$id'
                 params={{ id: randomPool }}
                 className='my-2 flex items-center text-text-sm font-medium text-grayTextPrimary'
               >
-                Our stake pool performance <ArrowRight />
+                {t("donatePage.stakeSection.poolPerformance")} <ArrowRight />
               </Link>
             </div>
           </div>
           <div className='flex flex-col'>
-            <p className='text-text-xs'>Delegate via dApp</p>
+            <p className='text-text-xs'>{t("donatePage.stakeSection.delegateViaDapp")}</p>
             <Button
               size='lg'
-              label='Delegate to [POOLS]'
+              label={t("donatePage.buttons.delegateToPools")}
               variant='primary'
               leftIcon={<Wallet />}
               onClick={handleDelegation}
             />
             <p className='mt-4 text-text-xs'>
               {" "}
-              Pool ID for delegation via wallet
+              {t("donatePage.stakeSection.poolIdLabel")}
             </p>
             <div className='relative flex w-full max-w-[430px] items-center'>
               <input
@@ -403,6 +408,9 @@ const CustomDonateCard = ({
   setAmount,
   isActive,
   onClick,
+  title,
+  description,
+  placeholder,
 }: CustomDonateCardProps) => {
   const handleAmountChange = (value: string) => {
     if (value === "") setAmount(value);
@@ -432,11 +440,11 @@ const CustomDonateCard = ({
         wrapperClassName='w-full max-w-[300px]'
         value={amount}
         onchange={value => handleAmountChange(value)}
-        placeholder='Choose the amount'
+        placeholder={placeholder}
       />
-      <p className='font-medium'>dApp Your Way</p>
+      <p className='font-medium'>{title}</p>
       <p className='mt-1.5 text-left text-text-sm text-grayTextPrimary'>
-        Empowering developers with the freedom to innovate.
+        {description}
       </p>
     </div>
   );

@@ -28,9 +28,11 @@ import { markdownComponents } from "@/constants/markdows";
 import { handleDelegation } from "@/utils/wallet/handleDelegation";
 import { useWalletStore } from "@/stores/walletStore";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 
 export const ArticleDetailPage = () => {
   const { t } = useAppTranslation("common");
+  const { locale } = useLocaleStore();
   const route = getRouteApi("/article/$url");
   const { url } = route.useParams();
 
@@ -38,8 +40,8 @@ export const ArticleDetailPage = () => {
 
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
-  const detailQuery = useFetchArticleDetail("en", "article", url);
-  const listQuery = useFetchArticleList("en", 0, 20);
+  const detailQuery = useFetchArticleDetail(locale, "article", url);
+  const listQuery = useFetchArticleList(locale, 0, 20);
   const data = detailQuery.data;
   const otherArticles =
     listQuery.data?.pages
@@ -115,7 +117,7 @@ export const ArticleDetailPage = () => {
                   <BreadcrumbList className='flex items-center'>
                     <BreadcrumbItem>
                       <Link className='underline underline-offset-2' to='/'>
-                        Home
+                        {t("articlePage.home")}
                       </Link>
                     </BreadcrumbItem>
                     /
@@ -124,12 +126,12 @@ export const ArticleDetailPage = () => {
                         className='underline underline-offset-2'
                         to={"/article"}
                       >
-                        Articles
+                        {t("articlePage.breadcrumb")}
                       </Link>
                     </BreadcrumbItem>
                     /
                     <BreadcrumbItem className='text-text'>
-                      Article detail
+                      {t("articlePage.breadcrumbDetail")}
                     </BreadcrumbItem>
                   </BreadcrumbList>
                 </BreadcrumbRaw>
@@ -145,7 +147,7 @@ export const ArticleDetailPage = () => {
                   {renderArticleAuthor(data?.user_owner)}
                 </div>
                 <div className='flex flex-col text-text-sm'>
-                  <span className='text-grayTextPrimary'>Published</span>
+                  <span className='text-grayTextPrimary'>{t("articlePage.published")}</span>
                   <span>
                     {data?.pub_date ? formatDate(data?.pub_date) : "-"}
                   </span>
@@ -171,10 +173,10 @@ export const ArticleDetailPage = () => {
             <div className='flex w-[400px] flex-col gap-1.5'>
               <SocialsAndCopy stretchCopy />
               <div className='flex w-full flex-col gap-1.5 rounded-m border border-border bg-cardBg p-2'>
-                <h3>Author</h3>
+                <h3>{t("articlePage.author")}</h3>
                 <h2>{renderArticleAuthor(data?.user_owner)}</h2>
                 <div className='flex w-full items-center justify-between gap-1.5 text-text-sm text-grayTextSecondary'>
-                  <span className='inline-block text-nowrap'>Stake pool:</span>
+                  <span className='inline-block text-nowrap'>{t("articlePage.stakePool")}</span>
                   {data?.user_owner?.pool?.meta?.ticker ? (
                     <Link
                       to='/pool/$id'
@@ -196,7 +198,7 @@ export const ArticleDetailPage = () => {
                   )}
                 </div>
                 <div className='flex w-full items-center justify-between gap-1.5 text-text-sm text-grayTextSecondary [&>div]:w-[60%]'>
-                  <span className='inline-block text-nowrap'>Drep:</span>
+                  <span className='inline-block text-nowrap'>{t("articlePage.drep")}</span>
                   {data?.user_owner?.drep?.meta?.given_name ? (
                     <Link
                       to='/drep/$hash'
@@ -219,7 +221,7 @@ export const ArticleDetailPage = () => {
                 </div>
                 {data?.user_owner?.profile?.social && (
                   <div className='flex w-full items-center justify-between gap-1.5 text-text-sm text-grayTextSecondary'>
-                    <span className='inline-block text-nowrap'>Socials:</span>
+                    <span className='inline-block text-nowrap'>{t("articlePage.socials")}</span>
                     <div className='flex items-center gap-2'>
                       {!isEmptySocial(data.user_owner.profile.social.xcom) && (
                         <a
@@ -269,7 +271,9 @@ export const ArticleDetailPage = () => {
                     <Button
                       size='sm'
                       variant='primary'
-                      label={`Delegate to ${data?.user_owner?.pool?.meta?.ticker ? `[${data?.user_owner?.pool?.meta?.ticker}]` : "Pool"}`}
+                      label={data?.user_owner?.pool?.meta?.ticker
+                        ? t("articlePage.delegateTo", { name: `[${data?.user_owner?.pool?.meta?.ticker}]` })
+                        : t("articlePage.delegateToPool")}
                       onClick={() => {
                         if (data?.user_owner?.pool?.id) {
                           handleDelegation(
@@ -287,7 +291,7 @@ export const ArticleDetailPage = () => {
                     <Button
                       size='sm'
                       variant='primary'
-                      label='Delegate to DRep'
+                      label={t("articlePage.delegateToDrep")}
                       onClick={() => {
                         if (data?.user_owner?.drep?.id) {
                           handleDelegation(
@@ -304,7 +308,7 @@ export const ArticleDetailPage = () => {
                 </div>
               </div>
               <div className='flex w-full flex-col gap-2 rounded-m border border-border bg-cardBg p-2'>
-                <h3>Keywords</h3>
+                <h3>{t("articlePage.keywords")}</h3>
                 <p className='text-text-sm text-grayTextPrimary'>
                   {data?.keywords}
                 </p>
@@ -339,6 +343,7 @@ const SocialsAndCopy = ({
   className?: string;
   stretchCopy?: boolean;
 }) => {
+  const { t } = useAppTranslation();
   const [copied, setCopied] = useState(false);
   let timeout: NodeJS.Timeout;
 
@@ -369,7 +374,7 @@ const SocialsAndCopy = ({
     <div className={`flex h-9 gap-1/2 ${className}`}>
       <Button
         leftIcon={copied ? <Check size={15} /> : <Copy size={15} />}
-        label='Copy link'
+        label={t("articlePage.copyLink")}
         className={stretchCopy ? "w-full max-w-full" : ""}
         variant='tertiary'
         size='sm'

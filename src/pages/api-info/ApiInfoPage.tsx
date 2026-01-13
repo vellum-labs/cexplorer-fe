@@ -13,98 +13,26 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle, Layers, Layers2, Zap } from "lucide-react";
 import type { ReactNode } from "react";
 import { Banner } from "@/components/global/Banner";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
-const faq = [
-  {
-    question: "1. What does the Starter plan include?",
-    answer:
-      "The Starter plan is a free-tier program designed for personal or single developer use. This program is available to every Cexplorer.io user.",
-  },
-  {
-    question: "2. What are the benefits of the Basic plan?",
-    answer: (
-      <p>
-        The Basic plan comes with owning a{" "}
-        <Link className='text-primary underline' to='/pro'>
-          Cexplorer PRO NFT
-        </Link>
-        . With each NFTs your limits are boosted. The more NFTs you own, the
-        higher your API limits.
-      </p>
-    ),
-  },
-  {
-    question: "3. How does the PRO plan work?",
-    answer:
-      "The PRO plan is tailored individually to fit the needs of large-sized projects. Please reach out to us with details about your intended use, and we’ll customize the limits and features to suit your requirements.",
-  },
-  {
-    question: "4. Can I combine multiple Basic-tier NFTs for increased limits?",
-    answer: (
-      <p>
-        Yes! If you own multiple{" "}
-        <Link className='text-primary underline' to='/pro'>
-          Cexplorer PRO NFT
-        </Link>
-        , their API request limits stack, giving you higher overall limits.
-      </p>
-    ),
-  },
-  {
-    question: "5. What are tokens, and how are they used?",
-    answer:
-      "Tokens represent the usage limit for specific API features. Each request may consume a certain number of tokens depending on its complexity or data retrieved.",
-  },
-  {
-    question: "6. How can I switch to a higher-tier plan?",
-    answer: (
-      <p>
-        To upgrade to the Basic tier, purchase a{" "}
-        <Link className='text-primary underline' to='/pro'>
-          Cexplorer PRO NFT
-        </Link>
-        . For the PRO plan, contact our support team to discuss your specific
-        requirements.
-      </p>
-    ),
-  },
-  {
-    question:
-      "7. Is there a way to get extra support if I’m on the Basic plan?",
-    answer:
-      "Priority support is available exclusively for PRO API plan. However, all users can access general support through our standard channels.",
-  },
-  {
-    question:
-      "8. Are there any additional perks for owning a Cexplorer PRO NFT?",
-    answer: (
-      <div className='flex flex-col gap-1'>
-        <span className='flex gap-1/2'>
-          Yes! Alongside the Basic API tier benefits,{" "}
-          <Link className='text-primary underline' to='/pro'>
-            Cexplorer PRO NFT
-          </Link>{" "}
-          holders gain access to:
-        </span>
-        <ul className='list-inside list-disc'>
-          <li>Governance votes</li>
-          <li>PRO features like exporting data in CSV or JSON formats</li>
-          <li>Custom wallet labeling (up to 5,000 wallets)</li>
-          <li>A PRO badge on their profile</li>
-        </ul>
-      </div>
-    ),
-  },
-  {
-    question: "9. Can I test the API before committing to a paid tier?",
-    answer:
-      "Absolutely! The Starter plan is free and allows you to test the API’s basic functionalities with limited requests and tokens.",
-  },
-  {
-    question: "10. How do I contact support for the PRO plan?",
-    answer:
-      "A dedicated support channel will be created for you on our Discord server for direct and priority assistance.",
-  },
+type FaqItemType = "simple" | "withLink" | "withPerks";
+
+interface FaqConfigItem {
+  id: string;
+  type: FaqItemType;
+}
+
+const faqConfig: FaqConfigItem[] = [
+  { id: "q1", type: "simple" },
+  { id: "q2", type: "withLink" },
+  { id: "q3", type: "simple" },
+  { id: "q4", type: "withLink" },
+  { id: "q5", type: "simple" },
+  { id: "q6", type: "withLink" },
+  { id: "q7", type: "simple" },
+  { id: "q8", type: "withPerks" },
+  { id: "q9", type: "simple" },
+  { id: "q10", type: "simple" },
 ];
 
 const priceTierIcons = {
@@ -114,68 +42,111 @@ const priceTierIcons = {
 };
 
 export const ApiInfoPage = () => {
+  const { t } = useAppTranslation();
   const { data } = useFetchMiscApi();
   const apiData = data?.data.plans;
 
   const priceTiers = {
     starter: {
-      tier: "Free plan",
-      title: "Starter",
-      subtitle: "Available to all Cexplorer users.",
-      cta: "Get started",
+      tier: t("apiPage.tiers.starter.tier"),
+      title: t("apiPage.tiers.starter.title"),
+      subtitle: t("apiPage.tiers.starter.subtitle"),
+      cta: t("apiPage.tiers.starter.cta"),
       features: [
-        "Ideal for developers and private projects",
-        `${apiData?.starter.rq_min} requests per minute`,
-        `${apiData?.starter.rq_day} requests per day`,
-        `${apiData?.starter.tok_day} tokens per day`,
+        t("apiPage.tiers.starter.features.ideal"),
+        t("apiPage.tiers.starter.features.requestsPerMinute", { count: apiData?.starter.rq_min }),
+        t("apiPage.tiers.starter.features.requestsPerDay", { count: apiData?.starter.rq_day }),
+        t("apiPage.tiers.starter.features.tokensPerDay", { count: apiData?.starter.tok_day }),
       ],
       disabled: false,
       link: undefined,
     },
     basic: {
-      tier: "NFT tier",
-      title: "Basic",
-      subtitle: "Comes with owning Cexplorer PRO NFT.",
-      cta: "Get started",
+      tier: t("apiPage.tiers.basic.tier"),
+      title: t("apiPage.tiers.basic.title"),
+      subtitle: t("apiPage.tiers.basic.subtitle"),
+      cta: t("apiPage.tiers.basic.cta"),
       features: [
-        "Ideal for small to medium sized projects",
-        "Owning multiple NFTs stacks the API requests limits",
-        `${apiData?.basic.rq_min} requests per minute`,
-        `${apiData?.basic.rq_day} requests per day for each NFT`,
-        `${apiData?.basic.tok_day} tokens per day for each NFT`,
+        t("apiPage.tiers.basic.features.ideal"),
+        t("apiPage.tiers.basic.features.stackingNote"),
+        t("apiPage.tiers.basic.features.requestsPerMinute", { count: apiData?.basic.rq_min }),
+        t("apiPage.tiers.basic.features.requestsPerDayNft", { count: apiData?.basic.rq_day }),
+        t("apiPage.tiers.basic.features.tokensPerDayNft", { count: apiData?.basic.tok_day }),
       ],
       disabled: true,
       link: undefined,
     },
     pro: {
-      tier: "Individual",
-      title: "PRO",
-      subtitle: "Tailored individually based on your needs.",
-      cta: "Contact us",
+      tier: t("apiPage.tiers.pro.tier"),
+      title: t("apiPage.tiers.pro.title"),
+      subtitle: t("apiPage.tiers.pro.subtitle"),
+      cta: t("apiPage.tiers.pro.cta"),
       features: [
-        "Ideal for large sized projects",
-        "Limits are always flexible & set based on the project needs",
-        `${apiData?.pro.rq_min}+ requests per minute`,
-        `${apiData?.pro.rq_day}+ requests per day`,
-        `${apiData?.pro.tok_day}+ tokens per day`,
-        "Priority support",
+        t("apiPage.tiers.pro.features.ideal"),
+        t("apiPage.tiers.pro.features.flexibleLimits"),
+        t("apiPage.tiers.pro.features.requestsPerMinute", { count: apiData?.pro.rq_min }),
+        t("apiPage.tiers.pro.features.requestsPerDay", { count: apiData?.pro.rq_day }),
+        t("apiPage.tiers.pro.features.tokensPerDay", { count: apiData?.pro.tok_day }),
+        t("apiPage.tiers.pro.features.prioritySupport"),
       ],
       disabled: false,
       link: "https://discord.gg/YuSFx7GS7y",
     },
   };
 
+  const renderFaqAnswer = (item: FaqConfigItem) => {
+    const baseKey = `apiPage.faq.questions.${item.id}`;
+
+    if (item.type === "simple") {
+      return t(`${baseKey}.answer`);
+    }
+
+    if (item.type === "withLink") {
+      return (
+        <p>
+          {t(`${baseKey}.answerPart1`)}{" "}
+          <Link className='text-primary underline' to='/pro'>
+            {t(`${baseKey}.answerLink`)}
+          </Link>
+          {t(`${baseKey}.answerPart2`)}
+        </p>
+      );
+    }
+
+    if (item.type === "withPerks") {
+      return (
+        <div className='flex flex-col gap-1'>
+          <span className='flex gap-1/2'>
+            {t(`${baseKey}.answerIntro`)}{" "}
+            <Link className='text-primary underline' to='/pro'>
+              {t(`${baseKey}.answerLink`)}
+            </Link>{" "}
+            {t(`${baseKey}.answerIntro2`)}
+          </span>
+          <ul className='list-inside list-disc'>
+            <li>{t(`${baseKey}.perk1`)}</li>
+            <li>{t(`${baseKey}.perk2`)}</li>
+            <li>{t(`${baseKey}.perk3`)}</li>
+            <li>{t(`${baseKey}.perk4`)}</li>
+          </ul>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <PageBase
-      metadataOverride={{ title: "API Plans | Cexplorer.io" }}
-      title='API Plans'
-      subTitle='Effortless access to blockchain data. Choose the perfect plan for your needs.'
-      breadcrumbItems={[{ label: "Developers", link: "/dev" }, { label: "API Plans" }]}
+      metadataOverride={{ title: t("apiPage.metaTitle") }}
+      title={t("apiPage.title")}
+      subTitle={t("apiPage.subtitle")}
+      breadcrumbItems={[{ label: t("apiPage.breadcrumb.developers"), link: "/dev" }, { label: t("apiPage.breadcrumb.apiPlans") }]}
       adsCarousel={false}
       customPage={true}
     >
       <section className='flex w-full max-w-desktop flex-col items-center gap-4 px-mobile pb-3 text-center md:px-desktop'>
-        <Banner description='Only the Starter API is available right now. Additional tiers are coming later.' />
+        <Banner description={t("apiPage.banner")} />
         <section className='mt-4 flex w-full flex-wrap items-center justify-center gap-3'>
           {Object.entries(priceTiers).map(([key, value]) => (
             <PriceCard
@@ -185,17 +156,18 @@ export const ApiInfoPage = () => {
               subtitle={value.subtitle}
               features={value.features}
               cta={value.cta}
-              icon={priceTierIcons[key]}
+              icon={priceTierIcons[key as keyof typeof priceTierIcons]}
               disabled={value.disabled}
               link={value.link}
+              comingSoonText={t("apiPage.tiers.comingSoon")}
             />
           ))}
         </section>
         <section className='mt-4 flex w-full max-w-[500px] flex-col items-center justify-between gap-3 rounded-l border border-border p-2 md:flex-row md:text-left'>
           <div className='flex flex-col gap-2'>
-            <h3>API documentation</h3>{" "}
+            <h3>{t("apiPage.documentation.title")}</h3>{" "}
             <p className='text-grayTextPrimary'>
-              Explore the API docs to get started with your project!{" "}
+              {t("apiPage.documentation.description")}{" "}
             </p>
           </div>
           <a
@@ -205,7 +177,7 @@ export const ApiInfoPage = () => {
           >
             <Button
               rightIcon={<ArrowRight />}
-              label='View documentation'
+              label={t("apiPage.documentation.button")}
               variant='tertiary'
               size='md'
               className='h-[40px]'
@@ -213,30 +185,30 @@ export const ApiInfoPage = () => {
           </a>
         </section>
         <h2 className='-mb-4 mt-4 md:text-[30px]'>
-          Frequently asked questions
+          {t("apiPage.faq.title")}
         </h2>
         <p className='text-grayTextPrimary'>
-          Everything you need to know about the product and billing.
+          {t("apiPage.faq.description")}
         </p>
         <Accordion
           type='single'
           collapsible
           className='mt-2 w-full max-w-[600px]'
         >
-          {faq?.map(item => (
+          {faqConfig.map(item => (
             <AccordionItem
-              key={item.question}
-              value={item.question}
+              key={item.id}
+              value={item.id}
               className='border-b border-border'
             >
               <AccordionTrigger className='AccordionTrigger w-full py-3 text-left'>
                 <span className='text-text-md font-medium'>
-                  {item.question}
+                  {t(`apiPage.faq.questions.${item.id}.question`)}
                 </span>
               </AccordionTrigger>
               <AccordionContent>
                 <div className='flex flex-col pb-1.5 text-left text-grayTextPrimary'>
-                  {item.answer}
+                  {renderFaqAnswer(item)}
                 </div>
               </AccordionContent>
             </AccordionItem>
@@ -248,14 +220,13 @@ export const ApiInfoPage = () => {
             alt='Cexplorer logo'
             className='mx-auto mt-4 h-12 w-12'
           />
-          <h3>Still have questions?</h3>
+          <h3>{t("apiPage.stillHaveQuestions.title")}</h3>
           <p className='text-grayTextPrimary'>
-            Can’t find the answer you’re looking for? Get in touch with our
-            friendly team.
+            {t("apiPage.stillHaveQuestions.description")}
           </p>
           <a href='https://x.com/cexplorer_io' target='_blank'>
             <Button
-              label='Get in touch'
+              label={t("apiPage.stillHaveQuestions.button")}
               variant='primary'
               size='md'
               className='w-[220px] max-w-none'
@@ -276,6 +247,7 @@ interface PriceCardProps {
   icon: ReactNode;
   disabled?: boolean;
   link?: string;
+  comingSoonText?: string;
 }
 
 const PriceCard = ({
@@ -287,6 +259,7 @@ const PriceCard = ({
   icon,
   disabled = false,
   link,
+  comingSoonText = "(Coming soon...)",
 }: PriceCardProps) => {
   return (
     <div className='relative mt-1 flex min-h-[420px] basis-[350px] flex-col items-center rounded-l bg-darker p-2 shadow-md'>
@@ -311,7 +284,7 @@ const PriceCard = ({
       {link ? (
         <a href={link} target='_blank' className='mt-auto w-full max-w-none'>
           <Button
-            label={`${cta} ${disabled ? "(Coming soon...)" : ""}`}
+            label={`${cta} ${disabled ? comingSoonText : ""}`}
             variant='primary'
             size='md'
             className='mt-auto w-full max-w-none'
@@ -320,7 +293,7 @@ const PriceCard = ({
         </a>
       ) : (
         <Button
-          label={`${cta} ${disabled ? "(Coming soon...)" : ""}`}
+          label={`${cta} ${disabled ? comingSoonText : ""}`}
           variant='primary'
           size='md'
           className='mt-auto w-full max-w-none'

@@ -2181,5 +2181,599 @@
         "joinDiscord": "Připojit se na Discord"
       }
     }
+  },
+  "aboutPage": {
+    "title": "O nás",
+    "breadcrumb": "O nás",
+    "metaTitle": "O nás | Cexplorer.io",
+    "description": "Cexplorer.io, nezávislý a nejkomplexnější Cardano blockchain explorer, poskytuje uživatelům a vývojářům komplexní nástroje pro prohlížení blockchainu, staking a analýzu. Slouží jako klíčový zdroj pro Cardano ekosystém od Incentivized Testnet.",
+    "sectionTitle": "Cexplorer",
+    "sectionSubtitle": "Podporujeme Cardano ekosystém nástroji a daty.",
+    "learnMore": "Zjistit více",
+    "services": {
+      "explore": {
+        "title": "Prozkoumejte vše na Cardano",
+        "description": "Cexplorer vám umožňuje prohlížet vše, co se děje na Cardano blockchainu. Od bloků a transakcí po epochy, aktiva a smart kontrakty - veškerá aktivita sítě je transparentní a snadno prozkoumatelná."
+      },
+      "analytics": {
+        "title": "Bohaté analytiky a přehledy",
+        "description": "Získejte hlubší porozumění Cardano prostřednictvím přehledných dat a vizuálních metrik. Sledujte výkon stakingu, objemy transakcí a aktivitu protokolu, abyste zůstali informovaní."
+      },
+      "governance": {
+        "title": "Governance jednoduše",
+        "description": "Zapojte se do Cardano governance přímo v exploreru. Delegujte svůj stake na DRepy, sledujte návrhy a hlasování a buďte informováni o klíčových rozhodnutích sítě."
+      },
+      "developers": {
+        "title": "Výkonné nástroje pro vývojáře",
+        "description": "Cexplorer poskytuje kompletní sadu vývojářských nástrojů včetně API, SDK a specializovaných inspektorů pro adresy a datum. Přistupujte k real-time datům Cardano, integrujte je do svých aplikací a prozkoumávejte mainnet i testnet prostředí."
+      },
+      "reliability": {
+        "title": "Postaveno pro spolehlivost a výkon",
+        "description": "Cexplorer je optimalizován pro rychlost, přesnost a dostupnost. Každá část platformy je navržena tak, aby poskytovala hladký a spolehlivý zážitek na počítači i mobilu."
+      },
+      "community": {
+        "title": "Postaveno pro komunitu",
+        "description": "Sloužíme jako klíčový zdroj pro Cardano ekosystém od Incentivized Testnet. Budujeme a udržujeme Cexplorer a aktivně podporujeme decentralizaci jako DRep a SPO."
+      }
+    }
+  },
+  "analyticsPage": {
+    "title": "Analytiky",
+    "breadcrumb": "Analytiky",
+    "categories": {
+      "network": "Síť",
+      "accounts": "Účty",
+      "pools": "Staking",
+      "dapps": "dApps"
+    },
+    "options": {
+      "blocks": "Bloky",
+      "blockVersions": "Verze bloků",
+      "energyConsumption": "Spotřeba energie",
+      "health": "Zdraví",
+      "storage": "Úložiště",
+      "transactions": "Transakce",
+      "hardfork": "Hardfork",
+      "pots": "Pokladny",
+      "treasuryProjection": "Projekce pokladny",
+      "walletActivity": "Aktivita peněženek",
+      "topAddresses": "Nejlepší adresy",
+      "topStakingAccounts": "Nejlepší staking účty",
+      "wealthComposition": "Složení bohatství",
+      "genesisAddresses": "Genesis adresy",
+      "poolIssues": "Problémy poolů",
+      "averagePools": "Průměrné pooly",
+      "ranklist": "Žebříček",
+      "interactions": "Interakce",
+      "tvl": "TVL"
+    }
+  },
+  "governanceCrossroads": {
+    "title": "Správa",
+    "breadcrumb": "Správa",
+    "sections": {
+      "dreps": {
+        "label": "Delegovaní zástupci (DReps)",
+        "description": "Prozkoumejte všechny Cardano DRepy, jejich hlasovací historii a statistiky účasti.",
+        "viewAll": "Zobrazit všechny DRepy",
+        "analytics": "Analytiky"
+      },
+      "votes": {
+        "label": "Hlasy správy",
+        "description": "Procházejte všechny hlasy od DRepů, SPO a Ústavního výboru.",
+        "button": "Zobrazit hlasy"
+      },
+      "actions": {
+        "label": "Akce správy",
+        "description": "Zobrazit všechny akce správy, jejich detaily a výsledky.",
+        "button": "Zobrazit akce správy"
+      },
+      "cc": {
+        "label": "Ústavní výbor (CC)",
+        "description": "Zjistěte, kdo je ve výboru, jejich role a jak hlasovali.",
+        "button": "Zobrazit Ústavní výbor"
+      },
+      "powerThresholds": {
+        "label": "Prahy hlasování",
+        "description": "Podívejte se na rozložení hlasovací síly a správy Cardano.",
+        "button": "Zobrazit prahy hlasování"
+      },
+      "constitution": {
+        "label": "Ústava",
+        "description": "Zobrazit současnou a minulé ústavy Cardano a jejich historii správy.",
+        "button": "Zobrazit Ústavu"
+      },
+      "certificates": {
+        "label": "Certifikáty",
+        "description": "Všechny transakce s registracemi, aktualizacemi a deregistracemi DRepů.",
+        "registrations": "Registrace DRepů",
+        "deregistrations": "Deregistrace DRepů",
+        "updates": "Aktualizace DRepů"
+      }
+    }
+  },
+  "brandPage": {
+    "title": "Grafické podklady",
+    "breadcrumb": "Grafické podklady",
+    "metaTitle": "Grafické podklady | Cexplorer.io",
+    "description": "Pro použití značky Cexplorer.io v tisku nebo grafických materiálech.",
+    "guidelines": {
+      "title": "Pravidla",
+      "description": "Tato pravidla zajišťují konzistentní a správné použití názvu a loga Cexplorer. Jejich dodržováním pomáháte udržovat integritu a jasnost naší značky na všech platformách.",
+      "items": {
+        "reference": "Při odkazování na naši značku vždy používejte \"Cexplorer\" nebo \"Cexplorer.io\".",
+        "noAlterations": "Používejte logo Cexplorer tak, jak je poskytnuto, bez jakýchkoli úprav nebo modifikací.",
+        "contrast": "Ujistěte se, že volíte vhodnou variantu loga pro zachování jasného kontrastu s pozadím.",
+        "noCombine": "Nekombinujte logo Cexplorer s jinými obrázky nebo logy bez předchozího souhlasu.",
+        "noEndorsement": "Nepoužívejte název nebo logo Cexplorer způsobem, který naznačuje podporu, příslušnost nebo partnerství bez povolení.",
+        "noUnlawful": "Nepoužívejte značku Cexplorer ve spojení s jakýmikoli nezákonnými aktivitami, propagačními akcemi nebo produkty.",
+        "dataReference": "Pokud používáte data z Cexploreru, nezapomeňte je jasně uvést s přímým odkazem na",
+        "dataProvidedBy": "Data poskytuje Cexplorer",
+        "source": "Zdroj: Cexplorer"
+      },
+      "apiNote": "Poznámka: Použití dat API je povoleno pouze s platnou licencí pro konkrétní případ použití (NE licence pro koncové uživatele frontendu)"
+    },
+    "logos": {
+      "title": "Loga",
+      "logomark": "Značka",
+      "light": "Světlé",
+      "dark": "Tmavé"
+    },
+    "colors": {
+      "title": "Barvy",
+      "red": "Červená",
+      "white": "Bílá",
+      "black": "Černá",
+      "blue": "Modrá",
+      "proGradient": "PRO gradient"
+    }
+  },
+  "contactPage": {
+    "title": "Kontaktujte nás",
+    "metaTitle": "Kontaktujte nás | Cexplorer.io",
+    "subtitle": "Spojte se s námi",
+    "breadcrumb": "Kontaktujte nás",
+    "supportWork": {
+      "title": "Podpořte naši práci",
+      "description": "Zvažte darování nebo staking s naším stake poolem pro podporu probíhajícího vývoje a údržby.",
+      "button": "Darovat"
+    },
+    "twitter": {
+      "title": "X (dříve Twitter)",
+      "description": "Zůstaňte v kontaktu s nejnovějšími aktualizacemi kolem Cexploreru a Cardano.",
+      "button": "Připojit se"
+    },
+    "discord": {
+      "title": "Discord",
+      "description": "Připojte se ke konverzaci nebo vytvořte support ticket - jsme tu pro vás.",
+      "button": "Připojit se"
+    },
+    "telegram": {
+      "title": "Telegram",
+      "description": "Připojte se ke komunitě Cexplorer na našem Telegramu.",
+      "button": "Připojit se"
+    },
+    "email": {
+      "title": "E-mail",
+      "description": "Kontaktujte nás s obchodními dotazy nebo požadavky na vlastní API."
+    },
+    "requestFeature": {
+      "title": "Navrhnout funkci",
+      "description": "Dejte nám vědět, co byste chtěli na Cexploreru vidět příště!",
+      "button": "Navrhnout funkci"
+    },
+    "donate": {
+      "title": "Darovat",
+      "description": "Podpořte naši misi a udržujte Cexplorer v chodu",
+      "button": "Stránka darování"
+    }
+  },
+  "adsPage": {
+    "title": "Inzerujte u nás",
+    "metaTitle": "Propagace a reklama | Cexplorer.io",
+    "subtitle": "Propagujte svůj projekt na Cexploreru",
+    "breadcrumb": "Inzerujte u nás",
+    "banner": "Reklamy budou k dispozici později.",
+    "stats": {
+      "monthlyPageViews": "Měsíční zobrazení stránek",
+      "uniqueUsers": "Unikátní uživatelé",
+      "adImpressions": "Zobrazení reklam",
+      "averageCtr": "Průměrné CTR"
+    },
+    "reach": {
+      "title": "Oslovte své publikum!",
+      "description1": "Cexplorer.io je přední Cardano blockchain explorer a analytická platforma, která nabízí přehledy o blockchainu, stakingu, governance a dalších.",
+      "description2": "Inzerujte u nás a oslovte publikum nadšenců a vývojářů Cardano, získejte viditelnost v rostoucí komunitě Cardano.",
+      "button": "Propagovat"
+    },
+    "pro": {
+      "title": "Propagujte s Cexplorer",
+      "description": "Držením Cexplorer PRO NFT můžete propagovat aktiva, policy ID, stake pooly nebo DRepy a zároveň využívat výhody a exkluzivní funkce.",
+      "features": {
+        "exposure": {
+          "title": "Více NFT, více viditelnosti",
+          "description": "Čím více NFT propaguje DRepa, stake pool, aktiva nebo policy, tím častěji se objevuje na Cexplorer.io"
+        },
+        "continuous": {
+          "title": "Kontinuální propagace",
+          "description": "Udržujte svou propagaci aktivní s možností aktualizace kdykoli."
+        },
+        "targeted": {
+          "title": "Cílená viditelnost",
+          "description": "Propagujte přímo naší angažované uživatelské základně s viditelností na relevantních stránkách Cexploreru podle typu propagace, zajišťující maximální dosah."
+        }
+      },
+      "documentation": "Dokumentace",
+      "getCexplorerPro": "Získat Cexplorer PRO"
+    },
+    "boosts": {
+      "title": "Boosty – Získejte pozornost okamžitě",
+      "description": "Boosty poskytují dočasné, ale výrazné zvýraznění stake poolů, DRepů, tokenů nebo NFT kolekcí, díky čemuž vyniknou v celém rozhraní Cexploreru.",
+      "features": {
+        "instant": {
+          "title": "Okamžitá viditelnost",
+          "description": "projekty získají prominentní pozici na stanovenou dobu."
+        },
+        "anyone": {
+          "title": "Kdokoli může boostovat",
+          "description": "Boosty jsou otevřeny všem; nemusíte vlastnit projekt, abyste ho propagovali. Boostujte vícekrát pro prodlouženou viditelnost."
+        },
+        "strategic": {
+          "title": "Strategické umístění",
+          "description": "Boostované položky se zobrazují zvýrazněné v seznamech a po celém Cexploreru, maximalizující viditelnost."
+        }
+      },
+      "comingSoon": "Již brzy"
+    },
+    "banners": {
+      "title": "Bannerová reklama na Cexploreru",
+      "description": "Bannerové reklamy nabízejí způsob, jak oslovit naše angažované publikum a propagovat váš projekt nebo nadcházející launch.",
+      "features": {
+        "visibility": {
+          "title": "Vysoká viditelnost",
+          "description": "Reklamy se zobrazují v klíčových sekcích Cexploreru, zajišťující maximální viditelnost."
+        },
+        "reach": {
+          "title": "Rozšířený dosah",
+          "description": "Vaše reklama bude viditelná nejen na Cexplorer.io, ale také na všech preview/preprod instancích spravovaných Cexplorerem."
+        }
+      },
+      "coinzillaText": "Spolupracujeme s",
+      "coinzillaDescription": ", důvěryhodnou reklamní sítí, která manuálně kontroluje kampaně pro udržení kvality a relevance.",
+      "documentation": "Dokumentace",
+      "email": "E-mail"
+    }
+  },
+  "apiPage": {
+    "metaTitle": "API plány | Cexplorer.io",
+    "title": "API plány",
+    "subtitle": "Snadný přístup k datům blockchainu. Vyberte si plán, který vyhovuje vašim potřebám.",
+    "breadcrumb": {
+      "developers": "Vývojáři",
+      "apiPlans": "API plány"
+    },
+    "banner": "V současné době je k dispozici pouze Starter API. Další úrovně budou přidány později.",
+    "tiers": {
+      "starter": {
+        "tier": "Bezplatný plán",
+        "title": "Starter",
+        "subtitle": "Dostupné pro všechny uživatele Cexploreru.",
+        "cta": "Začít",
+        "features": {
+          "ideal": "Ideální pro vývojáře a soukromé projekty",
+          "requestsPerMinute": "{{count}} požadavků za minutu",
+          "requestsPerDay": "{{count}} požadavků za den",
+          "tokensPerDay": "{{count}} tokenů za den"
+        }
+      },
+      "basic": {
+        "tier": "NFT úroveň",
+        "title": "Basic",
+        "subtitle": "Získáte vlastnictvím Cexplorer PRO NFT.",
+        "cta": "Začít",
+        "features": {
+          "ideal": "Ideální pro malé až střední projekty",
+          "stackingNote": "Vlastnictví více NFT kumuluje limity API požadavků",
+          "requestsPerMinute": "{{count}} požadavků za minutu",
+          "requestsPerDayNft": "{{count}} požadavků za den pro každé NFT",
+          "tokensPerDayNft": "{{count}} tokenů za den pro každé NFT"
+        }
+      },
+      "pro": {
+        "tier": "Individuální",
+        "title": "PRO",
+        "subtitle": "Přizpůsobeno individuálně podle vašich potřeb.",
+        "cta": "Kontaktujte nás",
+        "features": {
+          "ideal": "Ideální pro velké projekty",
+          "flexibleLimits": "Limity jsou vždy flexibilní a nastavené podle potřeb projektu",
+          "requestsPerMinute": "{{count}}+ požadavků za minutu",
+          "requestsPerDay": "{{count}}+ požadavků za den",
+          "tokensPerDay": "{{count}}+ tokenů za den",
+          "prioritySupport": "Prioritní podpora"
+        }
+      },
+      "comingSoon": "(Již brzy...)"
+    },
+    "documentation": {
+      "title": "API dokumentace",
+      "description": "Prozkoumejte API dokumentaci a začněte s vaším projektem!",
+      "button": "Zobrazit dokumentaci"
+    },
+    "faq": {
+      "title": "Často kladené otázky",
+      "description": "Vše, co potřebujete vědět o produktu a fakturaci.",
+      "questions": {
+        "q1": {
+          "question": "1. Co zahrnuje plán Starter?",
+          "answer": "Plán Starter je bezplatný program určený pro osobní použití nebo jednotlivé vývojáře. Tento program je dostupný každému uživateli Cexplorer.io."
+        },
+        "q2": {
+          "question": "2. Jaké jsou výhody plánu Basic?",
+          "answerPart1": "Plán Basic získáte vlastnictvím",
+          "answerLink": "Cexplorer PRO NFT",
+          "answerPart2": ". S každým NFT se vaše limity zvyšují. Čím více NFT vlastníte, tím vyšší máte API limity."
+        },
+        "q3": {
+          "question": "3. Jak funguje plán PRO?",
+          "answer": "Plán PRO je přizpůsoben individuálně potřebám velkých projektů. Kontaktujte nás s podrobnostmi o zamýšleném použití a my přizpůsobíme limity a funkce vašim požadavkům."
+        },
+        "q4": {
+          "question": "4. Mohu kombinovat více NFT úrovně Basic pro zvýšení limitů?",
+          "answerPart1": "Ano! Pokud vlastníte více",
+          "answerLink": "Cexplorer PRO NFT",
+          "answerPart2": ", jejich limity API požadavků se sčítají, což vám dává celkově vyšší limity."
+        },
+        "q5": {
+          "question": "5. Co jsou tokeny a jak se používají?",
+          "answer": "Tokeny představují limit využití pro specifické API funkce. Každý požadavek může spotřebovat určitý počet tokenů v závislosti na jeho složitosti nebo získaných datech."
+        },
+        "q6": {
+          "question": "6. Jak mohu přejít na vyšší plán?",
+          "answerPart1": "Pro upgrade na úroveň Basic si zakupte",
+          "answerLink": "Cexplorer PRO NFT",
+          "answerPart2": ". Pro plán PRO kontaktujte náš tým podpory a prodiskutujte vaše specifické požadavky."
+        },
+        "q7": {
+          "question": "7. Existuje způsob, jak získat extra podporu na plánu Basic?",
+          "answer": "Prioritní podpora je k dispozici výhradně pro plán PRO API. Všichni uživatelé však mají přístup k obecné podpoře prostřednictvím našich standardních kanálů."
+        },
+        "q8": {
+          "question": "8. Existují další výhody pro držitele Cexplorer PRO NFT?",
+          "answerIntro": "Ano! Kromě výhod úrovně Basic API,",
+          "answerLink": "Cexplorer PRO NFT",
+          "answerIntro2": "držitelé získají přístup k:",
+          "perk1": "Hlasování v governance",
+          "perk2": "PRO funkce jako export dat ve formátech CSV nebo JSON",
+          "perk3": "Vlastní označení peněženek (až 5 000 peněženek)",
+          "perk4": "PRO odznak na jejich profilu"
+        },
+        "q9": {
+          "question": "9. Mohu API otestovat před závazkem k placené úrovni?",
+          "answer": "Rozhodně! Plán Starter je zdarma a umožňuje vám otestovat základní funkce API s omezeným počtem požadavků a tokenů."
+        },
+        "q10": {
+          "question": "10. Jak kontaktovat podporu pro plán PRO?",
+          "answer": "Pro vás bude vytvořen dedikovaný kanál podpory na našem Discord serveru pro přímou a prioritní pomoc."
+        }
+      }
+    },
+    "stillHaveQuestions": {
+      "title": "Stále máte otázky?",
+      "description": "Nemůžete najít odpověď, kterou hledáte? Spojte se s naším přátelským týmem.",
+      "button": "Kontaktovat"
+    }
+  },
+  "botsPage": {
+    "metaTitle": "Boti | Cexplorer.io",
+    "title": "Cexplorer.io Boti",
+    "subtitle": "Zůstaňte ve spojení s automatickými notifikacemi a aktualizacemi",
+    "breadcrumb": "Boti",
+    "bots": {
+      "x": {
+        "title": "X notifikační bot",
+        "description": "Již brzy..."
+      },
+      "telegram": {
+        "title": "Telegram bot",
+        "description": "Již brzy..."
+      },
+      "discord": {
+        "title": "Discord bot",
+        "description": "Již brzy..."
+      }
+    },
+    "tags": {
+      "global": "Globální",
+      "live": "Živě",
+      "customizable": "Přizpůsobitelné",
+      "comingSoon": "Již brzy"
+    },
+    "buttons": {
+      "follow": "Sledovat",
+      "comingSoon": "Již brzy"
+    },
+    "policy": {
+      "title": "Boti a automatizace",
+      "paragraph1": "V Cexploreru upřednostňujeme férové a zodpovědné používání naší platformy. Použití automatizovaných botů nebo skriptů k procházení, stahování nebo interakci s naším webem a API je přísně zakázáno. Naše API je určeno pro skutečnou uživatelskou interakci a jakýkoli automatizovaný přístup, včetně použití botů, není povolen.",
+      "paragraph2": "V případě jakýchkoli otázek nebo obav ohledně naší politiky nás neváhejte přímo kontaktovat."
+    }
+  },
+  "faqPage": {
+    "metaTitle": "FAQ | Cexplorer.io",
+    "title": "Často kladené otázky",
+    "subtitle": "Vše, co potřebujete vědět o produktu a fakturaci.",
+    "breadcrumb": "FAQ",
+    "questions": {
+      "q1": {
+        "title": "Co je Cexplorer?",
+        "answer": "Cexplorer.io je komplexní průzkumník blockchainu Cardano navržený tak, aby uživatelům pomohl efektivně procházet Cardano blockchain. Poskytujeme data v reálném čase, pokročilé analytiky a hloubkové přehledy, což z nás dělá hlavní platformu pro vše, co se děje na blockchainu Cardano. Kromě prozkoumávání nabízíme také vzdělávací zdroje, které vás udrží v obraze o nejnovějším vývoji v ekosystému Cardano."
+      },
+      "q2": {
+        "title": "Jak dlouho Cexplorer.io existuje?",
+        "answer": "Existujeme od Incentivized Testnet, což z Cexploreru dělá jeden z nejstarších a nejdůvěryhodnějších průzkumníků blockchainu Cardano. Po mnoho let podporujeme komunitu Cardano nezbytnými nástroji a přehledy pro uživatele i vývojáře."
+      },
+      "q3": {
+        "title": "Je Cexplorer zdarma?",
+        "answer": "Ano, Cexplorer je zdarma pro všechny! Náš průzkumník blockchainu, pokročilé analytiky a vzdělávací sekce jsou zcela zdarma k použití. Nabízíme také verzi Pro pro další funkce jako export dat, export grafů, přístup k API a reklamní možnosti."
+      },
+      "q4": {
+        "title": "Jaké přehledy mohu získat z analytických sekcí Cexploreru?",
+        "answer": "Cexplorer poskytuje množství analytik napříč kategoriemi jako blockchain, účty, governance, staking a přehledy dApps. Můžete prozkoumávat klíčové metriky jako Transakce za sekundu (TPS), zdraví blockchainu, aktivní účty, žebříček dApps a mnoho dalšího. Naše detailní data nabízejí více perspektiv, což vám umožňuje činit informovaná rozhodnutí a optimalizovat vaši zkušenost s blockchainem."
+      },
+      "q5": {
+        "title": "Mohu exportovat data a grafy z Cexploreru pro analýzu?",
+        "answer": "Export dat bude k dispozici všem uživatelům Cexplorer PRO."
+      },
+      "q6": {
+        "title": "Co je Cexplorer PRO?",
+        "answer": "Cexplorer PRO je navržen pro ty, kteří chtějí odemknout plný potenciál naší platformy. S PRO získají uživatelé přístup k exkluzivním funkcím jako featured slot, PRO-specifické funkcionality, profilový odznak a brzy také hlasování v governance a základní API klíč. V budoucnu můžete očekávat ještě pokročilejší nástroje a výhody. Cexplorer PRO je ideální pro uživatele, kteří chtějí plně využít vše, co naše platforma nabízí. Více podrobností o Cexplorer PRO a jeho výhodách bude brzy odhaleno – zůstaňte naladěni!"
+      },
+      "q7": {
+        "title": "Má Cexplorer API pro vývojáře?",
+        "answer": "Ano, Cexplorer nabízí základní API pro PRO uživatele a aktivně vyvíjíme více API programů, které budou brzy odhaleny. Mezitím se na nás vývojáři mohou obrátit prostřednictvím Discordu nebo e-mailem na hello@cexplorer.io s jakýmikoli požadavky na API. Zůstaňte naladěni na vzrušující novinky!"
+      },
+      "q8": {
+        "title": "Jak mohu navrhnout novou funkci pro Cexplorer?",
+        "answer": "Rádi slyšíme od naší komunity! Novou funkci můžete navrhnout tak, že nás kontaktujete přímo na Discordu, pošlete e-mail nebo použijete GitHub. Vaše zpětná vazba nám pomáhá vylepšovat Cexplorer, takže neváhejte sdílet své nápady!"
+      }
+    }
+  },
+  "donatePage": {
+    "metaTitle": "Darovat | Cexplorer.io",
+    "title": "Podpořte budoucnost Cexploreru",
+    "subtitle": "Vaše podpora nám pomáhá provozovat, udržovat a vylepšovat vše na Cexplorer.io",
+    "breadcrumb": "Darovat",
+    "infoCards": {
+      "itn": {
+        "heading": "Zde pro Cardano od ITN",
+        "description": "Jsme nejstarší a nejvíce vybavený Cardano explorer od Incentivized Testnet, poskytující nezbytné nástroje pro navigaci v blockchainu."
+      },
+      "community": {
+        "heading": "Od komunity pro komunitu",
+        "description": "Vytvořeno nadšenci Cardano, náš nezávislý nástroj podporuje všechny uživatele se stakingem, rozhodováním a vzděláváním. Naším cílem je maximalizovat váš profit a chránit vás před špatnými praktikami."
+      },
+      "builders": {
+        "heading": "Využíváno staviteli Cardano",
+        "description": "Mnoho vývojářů spoléhá na naše nástroje při vývoji na Cardano. Vaše podpora nám pomáhá udržovat a vylepšovat tyto zdroje, což prospívá celé vývojářské komunitě."
+      }
+    },
+    "buttons": {
+      "stakeWithCexplorer": "Stakovat s Cexplorerem",
+      "sendDonation": "Poslat dar",
+      "donate": "Darovat",
+      "delegateToPools": "Delegovat na [POOLS]"
+    },
+    "donateSection": {
+      "title": "Darovat",
+      "thankYou": "Děkujeme za podporu vývoje nezávislého Cardano exploreru! ❤️",
+      "sendDonationHere": "Pošlete svůj dar sem",
+      "otherMethods": "Další způsoby darování",
+      "useDappConnector": "Nebo použijte náš dApp konektor"
+    },
+    "donationCards": {
+      "coffee": {
+        "title": "Káva pro vývojáře",
+        "description": "Pohání mysli za kódem."
+      },
+      "commit": {
+        "title": "Code Commit",
+        "description": "Pomáhá přinášet nové funkce a opravy."
+      },
+      "bug": {
+        "title": "Lovec chyb",
+        "description": "Čištění kódu a oprava chyb."
+      },
+      "api": {
+        "title": "API-ncredible podpora",
+        "description": "Nástroje pro výkonné integrace."
+      },
+      "custom": {
+        "title": "dApp vaším způsobem",
+        "description": "Umožňuje vývojářům svobodu inovovat.",
+        "placeholder": "Zvolte částku"
+      }
+    },
+    "stakeSection": {
+      "title": "Stakujte s Cexplorer.io",
+      "description1": "Podpořte Cexplorer a získejte stakingové odměny delegováním vaší ADA na náš pool.",
+      "description2": "Užijte si špičkovou infrastrukturu a výhru pro obě strany!",
+      "poolPerformance": "Výkon našeho stake poolu",
+      "delegateViaDapp": "Delegovat přes dApp",
+      "poolIdLabel": "Pool ID pro delegaci přes peněženku"
+    },
+    "successModal": {
+      "message": "Transakce úspěšná, moc děkujeme za podporu Cexplorer.io ❤️",
+      "transactionHash": "Hash transakce:"
+    }
+  },
+  "bountyPage": {
+    "metaTitle": "Bug Bounty Program | Cexplorer.io",
+    "title": "Bug Bounty Program",
+    "subtitle": "Najděte chyby, získejte odměnu.",
+    "breadcrumb": "Bug Bounty",
+    "guidelines": {
+      "title": "Pravidla",
+      "description": "Zatím nedostupné.",
+      "items": {
+        "g1": "Zatím nedostupné. Brzy tuto iniciativu spustíme.",
+        "g2": "Bude oznámeno."
+      }
+    },
+    "reportBug": {
+      "title": "Nahlásit chybu na GitHubu",
+      "description": "Všimli jste si něčeho? Pomozte nám odstranit chyby a zlepšit Cexplorer.",
+      "button": "Nahlásit chybu"
+    },
+    "suggestFeature": {
+      "title": "Navrhnout novou funkci",
+      "description": "Myslíte, že bychom měli něco přidat? Navrhněte funkci, kterou byste rádi viděli.",
+      "button": "Navrhnout funkci"
+    },
+    "support": {
+      "title": "Podpora",
+      "description": "Připojte se k našemu Discordu a kontaktujte náš tým podpory.",
+      "button": "Připojit se na Discord"
+    },
+    "donate": {
+      "title": "Přispět",
+      "description": "Podpořte naši misi a pomozte udržet Cexplorer v chodu",
+      "button": "Stránka s příspěvky"
+    }
+  },
+  "wikiPage": {
+    "metaTitle": "Wiki | Cexplorer.io",
+    "title": "Naučte se o Cardano",
+    "subtitle": "Krátké průvodce o Cardano a jeho klíčových mechanismech",
+    "breadcrumb": "Wiki",
+    "otherTopics": "Další témata",
+    "cta": {
+      "title": "Vše o Cardano",
+      "description": "Buďte v obraze s nejnovějšími aktualizacemi a vývojem Cardano—přečtěte si náš blog!",
+      "button": "Blog"
+    }
+  },
+  "articlePage": {
+    "metaTitle": "Články | Cexplorer.io",
+    "title": "Naučte se o Cardano",
+    "subtitle": "Přihlaste se k odběru nových článků, vzdělávacích materiálů a vývojových novinek přímo do vašeho e-mailu.",
+    "breadcrumb": "Články",
+    "breadcrumbDetail": "Detail článku",
+    "emailPlaceholder": "Zadejte váš e-mail",
+    "getStarted": "Začít",
+    "privacyNote": "Záleží nám na vašich datech podle našich zásad ochrany soukromí.",
+    "category": "Kategorie:",
+    "searchPlaceholder": "Hledat...",
+    "home": "Domů",
+    "published": "Publikováno",
+    "author": "Autor",
+    "stakePool": "Stake pool:",
+    "drep": "Drep:",
+    "socials": "Sociální sítě:",
+    "delegateTo": "Delegovat na {{name}}",
+    "delegateToPool": "Delegovat na Pool",
+    "delegateToDrep": "Delegovat na DRep",
+    "keywords": "Klíčová slova",
+    "copyLink": "Kopírovat odkaz"
   }
 }
