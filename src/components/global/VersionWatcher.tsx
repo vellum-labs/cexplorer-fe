@@ -14,7 +14,6 @@ export const VersionWatcher: FC = () => {
     "theme_store",
     "versions_store",
     "address_label_store",
-    "auth_tokens_store",
     "watchlist_store",
     "navbar-line-1",
   ];
