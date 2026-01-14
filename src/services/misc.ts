@@ -23,7 +23,6 @@ import type {
 } from "@/types/userTypes";
 import { useQuery } from "@tanstack/react-query";
 
-// Map app locale to API language code
 const toApiLang = (locale: Locales): string => {
   if (locale === "cz") return "cs";
   return locale;

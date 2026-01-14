@@ -19,7 +19,6 @@ import { useAppTranslation } from "@/hooks/useAppTranslation";
 export const AverageDrepGraph: FC = () => {
   const { t } = useAppTranslation("pages");
 
-  // Keys for state/localStorage (must stay in English)
   const KEYS = {
     avgDelegators: "avgDelegators",
     avgStake: "avgStake",
@@ -53,7 +52,6 @@ export const AverageDrepGraph: FC = () => {
     item.delegator ? (item.count / item.delegator) * 100 : 0,
   );
 
-  // Translation mapping for display labels
   const legendLabels = {
     [KEYS.avgDelegators]: t("dreps.graphs.averageDreps.avgDelegatorsPerDrep"),
     [KEYS.avgStake]: t("dreps.graphs.averageDreps.avgStakePerDrep"),

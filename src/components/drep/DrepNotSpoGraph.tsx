@@ -51,7 +51,6 @@ export const DrepNotSpoGraph: FC = () => {
   const stake = data.map(d => (showFiltered ? d.total.stake : d.stake));
   const delegators = data.map(d => d.delegator);
 
-  // Keys for series (used for matching in tooltip)
   const KEYS = {
     drepCount: "drepCount",
     stake: "stake",

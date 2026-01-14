@@ -40,7 +40,6 @@ export const useEpochBlockchain = ({
         d?.params?.monetary_expand_rate,
     );
 
-  // Translation mapping for graph series
   const graphLabels = {
     blocks: t("epochs.graph.blocks"),
     outputs: t("epochs.graph.outputs"),

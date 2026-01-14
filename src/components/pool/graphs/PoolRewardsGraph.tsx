@@ -45,7 +45,6 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
     "Operator rewards (₳)": true,
   });
 
-  // Mapping from internal keys to translated labels
   const seriesLabels = useMemo(
     () => ({
       "Delegators ROA (%)": t("pools.detailPage.rewardsGraph.delegatorsRoa"),

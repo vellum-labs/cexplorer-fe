@@ -41,7 +41,6 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
   });
   const { data: basicData } = useFetchMiscBasic(true);
 
-  // Mapping from internal keys to translated labels
   const seriesLabels = useMemo(
     () => ({
       Delegators: t("pools.detailPage.performanceGraph.delegators"),

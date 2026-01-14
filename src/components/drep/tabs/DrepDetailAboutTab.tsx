@@ -19,7 +19,6 @@ export const DrepDetailAboutTab: FC<DrepDetailAboutTabProps> = ({ data }) => {
   const getFieldTitle = (key: string): string => {
     const translationKey = `dreps.detailPage.aboutFields.${key}`;
     const translated = t(translationKey);
-    // If translation exists (not same as key), use it; otherwise fallback to formatted key
     if (translated !== translationKey) {
       return translated;
     }

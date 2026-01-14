@@ -1,7 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-// English translations
 import enCommon from "@/locales/en/common.json";
 import enNavigation from "@/locales/en/navigation.json";
 import enPages from "@/locales/en/pages.json";
@@ -9,7 +8,6 @@ import enErrors from "@/locales/en/errors.json";
 import enSdk from "@/locales/en/sdk.json";
 import enShared from "@/locales/en/shared.json";
 
-// Czech translations
 import czCommon from "@/locales/cz/common.json";
 import czNavigation from "@/locales/cz/navigation.json";
 import czPages from "@/locales/cz/pages.json";
@@ -36,7 +34,6 @@ const resources = {
   },
 };
 
-// Get initial language from localStorage or default to 'en'
 const getInitialLanguage = (): string => {
   if (typeof window !== "undefined") {
     try {
@@ -47,9 +44,7 @@ const getInitialLanguage = (): string => {
           return parsed.state.locale;
         }
       }
-    } catch {
-      // Ignore parsing errors
-    }
+    } catch {}
   }
   return "en";
 };

@@ -18,7 +18,6 @@ export const useAppTranslation = (
   const { t } = useTranslation(namespace);
   const { locale, setLocale } = useLocaleStore();
 
-  // Sync i18n language with locale store
   useEffect(() => {
     if (i18n.language !== locale) {
       i18n.changeLanguage(locale);

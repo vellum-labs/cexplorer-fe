@@ -28,7 +28,6 @@ export const DrepPoolGraph: FC<DrepPoolGraphProps> = ({ epochs, query }) => {
   const miscConst = useMiscConst(basicData?.data.version.const);
   const { formatLovelace } = useADADisplay();
 
-  // Keys for series (used for matching in tooltip and localStorage)
   const KEYS = {
     totalDelegatedStake: "totalDelegatedStake",
     drepDelegated: "drepDelegated",

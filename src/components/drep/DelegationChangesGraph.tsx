@@ -32,7 +32,6 @@ export const DelegationChangesGraph: FC = () => {
   const stake = data.map(d => d.stat.stake);
   const count = data.map(d => d.stat.count);
 
-  // Keys for series (used for matching in tooltip)
   const KEYS = {
     delegatorCount: "delegatorCount",
     stakeMoved: "stakeMoved",
