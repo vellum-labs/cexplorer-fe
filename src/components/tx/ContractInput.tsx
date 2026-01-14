@@ -94,8 +94,12 @@ export const ContractInput: FC<ContractInputProps> = ({
       <div
         className={`gap-1text-text-sm mt-4 flex-col ${open ? "flex" : "hidden"}`}
       >
-        <span>{t("tx.mem")}: {formatNumber(input?.redeemer?.unit.mem)}</span>
-        <span>{t("tx.steps")}: {formatNumber(input?.redeemer?.unit.steps)}</span>
+        <span>
+          {t("tx.mem")}: {formatNumber(input?.redeemer?.unit.mem)}
+        </span>
+        <span>
+          {t("tx.steps")}: {formatNumber(input?.redeemer?.unit.steps)}
+        </span>
         <span className='mt-1'>
           {t("tx.redeemerDataHash")}:{" "}
           <span className='flex items-center gap-1'>
@@ -172,7 +176,7 @@ export const ContractInput: FC<ContractInputProps> = ({
                 />
               </div>
             </div>
-            <pre className='h-[300px] w-full overflow-auto rounded-m border border-border bg-cardBg p-[10px] font-mono text-text-xs shadow-md'>
+            <pre className='font-mono h-[300px] w-full overflow-auto rounded-m border border-border bg-cardBg p-[10px] text-text-xs shadow-md'>
               {prettyMode ? uplcData.pretty : uplcData.compact}
             </pre>
           </div>

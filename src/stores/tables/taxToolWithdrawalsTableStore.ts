@@ -13,9 +13,7 @@ export const useTaxToolWithdrawalsTableStore = handlePersistStore<
       isVisible: boolean,
     ) => void;
     setRows: (rows: number) => void;
-    setColumsOrder: (
-      columnsOrder: (keyof TaxToolWithdrawalsColumns)[],
-    ) => void;
+    setColumsOrder: (columnsOrder: (keyof TaxToolWithdrawalsColumns)[]) => void;
     setIsResponsive: (isResponsive: boolean) => void;
   }
 >(

@@ -242,7 +242,9 @@ export const useFetchAssetMint = (
     initialPageParam: offset,
     getNextPageParam: (lastPage, allPages) => {
       const totalItems = lastPage?.data?.count ?? 0;
-      const loadedItems = allPages.flatMap(page => page?.data?.data ?? []).length;
+      const loadedItems = allPages.flatMap(
+        page => page?.data?.data ?? [],
+      ).length;
       return loadedItems < totalItems ? loadedItems : undefined;
     },
     enabled: !!assetname || !!policyId,

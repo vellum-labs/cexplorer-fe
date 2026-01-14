@@ -13,9 +13,7 @@ export const useTaxToolSummaryTableStore = handlePersistStore<
       isVisible: boolean,
     ) => void;
     setRows: (rows: number) => void;
-    setColumsOrder: (
-      columnsOrder: (keyof TaxToolSummaryColumns)[],
-    ) => void;
+    setColumsOrder: (columnsOrder: (keyof TaxToolSummaryColumns)[]) => void;
     setIsResponsive: (isResponsive: boolean) => void;
   }
 >(

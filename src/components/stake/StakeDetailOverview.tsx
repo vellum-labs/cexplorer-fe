@@ -80,7 +80,9 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
         />
       ),
     },
-    tokenMarket ? { label: t("stake.detailPage.overview.assetsBalance"), value: "TBD" } : undefined,
+    tokenMarket
+      ? { label: t("stake.detailPage.overview.assetsBalance"), value: "TBD" }
+      : undefined,
     {
       label: t("stake.detailPage.overview.adaBalance"),
       value: (
@@ -91,7 +93,10 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
         />
       ),
     },
-    { label: t("stake.detailPage.overview.privateName"), value: <AddCustomLabel address={address} /> },
+    {
+      label: t("stake.detailPage.overview.privateName"),
+      value: <AddCustomLabel address={address} />,
+    },
   ];
 
   const stakeKey = [
@@ -157,7 +162,9 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
             >
               {data?.vote?.drep?.data?.given_name &&
                 data?.vote?.drep?.data?.given_name}
-              <span className='text-text-sm text-primary'>{t("stake.detailPage.staking.alwaysAbstain")}</span>
+              <span className='text-text-sm text-primary'>
+                {t("stake.detailPage.staking.alwaysAbstain")}
+              </span>
             </Link>
           ) : data?.vote?.vote?.live_drep === "drep_always_no_confidence" ? (
             <Link
@@ -177,9 +184,13 @@ export const StakeDetailOverview: FC<AddressDetailOverviewProps> = ({
                 {
                   label: t("stake.detailPage.staking.status"),
                   value: data?.vote?.drep?.is_active ? (
-                    <span className='text-greenText'>{t("stake.detailPage.staking.active")}</span>
+                    <span className='text-greenText'>
+                      {t("stake.detailPage.staking.active")}
+                    </span>
                   ) : (
-                    <span className='text-redText'>{t("stake.detailPage.staking.inactive")}</span>
+                    <span className='text-redText'>
+                      {t("stake.detailPage.staking.inactive")}
+                    </span>
                   ),
                 },
                 {

@@ -37,7 +37,10 @@ export const AddressInspector: FC = () => {
 
   const getAddressTypeInfo = () => {
     if (!data?.header || data.header === -1) {
-      return { type: t("addressInspector.addressTypes.unknown"), network: t("addressInspector.network.unknown") };
+      return {
+        type: t("addressInspector.addressTypes.unknown"),
+        network: t("addressInspector.network.unknown"),
+      };
     }
 
     const headerByte = data.header;
@@ -59,10 +62,14 @@ export const AddressInspector: FC = () => {
         typeDescription = t("addressInspector.addressTypes.paymentStakeScript");
         break;
       case 4:
-        typeDescription = t("addressInspector.addressTypes.paymentStakePointer");
+        typeDescription = t(
+          "addressInspector.addressTypes.paymentStakePointer",
+        );
         break;
       case 5:
-        typeDescription = t("addressInspector.addressTypes.paymentStakeScriptPointer");
+        typeDescription = t(
+          "addressInspector.addressTypes.paymentStakeScriptPointer",
+        );
         break;
       case 6:
         typeDescription = t("addressInspector.addressTypes.enterpriseKey");
@@ -77,10 +84,15 @@ export const AddressInspector: FC = () => {
         typeDescription = t("addressInspector.addressTypes.stakeScript");
         break;
       default:
-        typeDescription = t("addressInspector.addressTypes.unknownType", { type: addressType });
+        typeDescription = t("addressInspector.addressTypes.unknownType", {
+          type: addressType,
+        });
     }
 
-    const network = networkId === 1 ? t("addressInspector.network.mainnet") : t("addressInspector.network.testnet");
+    const network =
+      networkId === 1
+        ? t("addressInspector.network.mainnet")
+        : t("addressInspector.network.testnet");
 
     return { type: typeDescription, network };
   };
@@ -172,7 +184,9 @@ export const AddressInspector: FC = () => {
         if (typeof data?.magic === "undefined" || data.magic === -1) {
           return t("addressInspector.notFound");
         }
-        return data.magic === 1 ? t("addressInspector.network.mainnet") : t("addressInspector.network.testnet");
+        return data.magic === 1
+          ? t("addressInspector.network.mainnet")
+          : t("addressInspector.network.testnet");
       })(),
     },
     {

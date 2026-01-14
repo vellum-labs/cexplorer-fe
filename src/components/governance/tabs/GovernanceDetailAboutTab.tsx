@@ -32,13 +32,15 @@ interface GovernanceDetailAboutTabProps {
 export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
   id,
 }) => {
-  const { t } = useAppTranslation();
+  const { t } = useAppTranslation(["pages", "common"]);
   type VoterRole = "ConstitutionalCommittee" | "DRep" | "SPO";
 
   const voterRoleLabels: Record<VoterRole, string> = {
-    ConstitutionalCommittee: t("governance.voteDetail.constitutionalCommittee"),
-    DRep: t("labels.drep"),
-    SPO: t("labels.spo"),
+    ConstitutionalCommittee: t(
+      "common:governance.voteDetail.constitutionalCommittee",
+    ),
+    DRep: t("common:labels.drep"),
+    SPO: t("common:labels.spo"),
   };
 
   const { page } = useSearch({
@@ -94,7 +96,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
 
         return <DateCell time={item.tx.time} withoutConvert />;
       },
-      title: t("labels.date"),
+      title: t("common:labels.date"),
       visible: columnsVisibility.date,
       widthPx: 90,
     },
@@ -119,7 +121,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
           />
         );
       },
-      title: t("governance.voting.voter"),
+      title: t("common:governance.voting.voter"),
       visible: columnsVisibility.voter,
       widthPx: 160,
     },
@@ -146,7 +148,11 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
           </div>
         );
       },
-      title: <p ref={anchorRefs?.voter_role}>{t("governance.voting.voterRole")}</p>,
+      title: (
+        <p ref={anchorRefs?.voter_role}>
+          {t("common:governance.voting.voterRole")}
+        </p>
+      ),
       filter: {
         anchorRef: anchorRefs?.voter_role,
         activeFunnel: !!filter.voter_role,
@@ -158,6 +164,8 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
         onFilter: () =>
           changeFilterByKey("voter_role", filterDraft["voter_role"]),
         onReset: () => changeFilterByKey("voter_role"),
+        resetLabel: t("common:actions.reset"),
+        filterLabel: t("common:actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             {(["ConstitutionalCommittee", "SPO", "DRep"] as VoterRole[]).map(
@@ -196,7 +204,11 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
           </p>
         );
       },
-      title: <p className='w-full text-right'>{t("governance.voting.votingPower")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("common:governance.voting.votingPower")}
+        </p>
+      ),
       visible: columnsVisibility.voting_power,
       widthPx: 90,
     },
@@ -217,7 +229,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
           />
         );
       },
-      title: <p ref={anchorRefs?.vote}>{t("labels.vote")}</p>,
+      title: <p ref={anchorRefs?.vote}>{t("common:labels.vote")}</p>,
       filter: {
         anchorRef: anchorRefs?.vote,
         width: "170px",
@@ -229,12 +241,17 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
         onShow: e => toggleFilter(e, "vote"),
         onFilter: () => changeFilterByKey("vote", filterDraft["vote"]),
         onReset: () => changeFilterByKey("vote"),
+        resetLabel: t("common:actions.reset"),
+        filterLabel: t("common:actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             {[
-              { value: "Yes", label: t("governance.common.yes") },
-              { value: "No", label: t("governance.common.no") },
-              { value: "Abstain", label: t("governance.common.abstain") },
+              { value: "Yes", label: t("common:governance.common.yes") },
+              { value: "No", label: t("common:governance.common.no") },
+              {
+                value: "Abstain",
+                label: t("common:governance.common.abstain"),
+              },
             ].map(({ value, label }) => (
               <label className='flex items-center gap-1' key={value}>
                 <input
@@ -260,7 +277,11 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
     {
       key: "epoch",
       render: item => <EpochCell no={item?.tx?.epoch_no} />,
-      title: <p className='w-full text-right'>{t("governance.voting.epoch")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("common:governance.voting.epoch")}
+        </p>
+      ),
       visible: columnsVisibility.epoch,
       widthPx: 50,
     },
@@ -273,7 +294,11 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
 
         return <BlockCell hash={item?.tx?.block_hash} no={item.tx.block_no} />;
       },
-      title: <p className='w-full text-right'>{t("governance.voting.block")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("common:governance.voting.block")}
+        </p>
+      ),
       visible: columnsVisibility.block,
       widthPx: 90,
     },
@@ -296,7 +321,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
           </Link>
         );
       },
-      title: <p className='w-full text-right'>{t("labels.tx")}</p>,
+      title: <p className='w-full text-right'>{t("common:labels.tx")}</p>,
       visible: columnsVisibility.tx,
       widthPx: 90,
     },
@@ -313,7 +338,9 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : totalItems !== undefined ? (
             <h3 className='basis-[230px] text-nowrap'>
-              {t("governance.voting.totalVotes", { count: formatNumber(totalItems) })}
+              {t("common:governance.voting.totalVotes", {
+                count: formatNumber(totalItems),
+              })}
             </h3>
           ) : (
             ""
@@ -325,6 +352,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("common:table.rows")}
                 columnsOptions={governanceActionDetailAboutTableOptions.map(
                   item => {
                     return {
@@ -345,7 +373,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
 
         <div className='flex gap-1'>
           <TableSearchInput
-            placeholder={t("governance.voting.searchPlaceholder")}
+            placeholder={t("common:governance.voting.searchPlaceholder")}
             value={tableSearch}
             onchange={setTableSearch}
             wrapperClassName='md:w-[320px] w-full '
@@ -357,6 +385,7 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={governanceActionDetailAboutTableOptions.map(
                 item => {
                   return {
@@ -422,6 +451,10 @@ export const GovernanceDetailAboutTab: FC<GovernanceDetailAboutTabProps> = ({
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("common:table.displaying", { count, total })
+        }
+        noItemsLabel={t("common:table.noItems")}
       />
     </>
   );

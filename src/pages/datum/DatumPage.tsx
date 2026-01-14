@@ -255,6 +255,10 @@ export const DatumPage: FC = () => {
                     pagination={false}
                     items={data?.data.tx}
                     query={datumQuery}
+                    renderDisplayText={(count, total) =>
+                      t("table.displaying", { count, total })
+                    }
+                    noItemsLabel={t("table.noItems")}
                   />
                 </div>
                 <div className='flex w-[360px] flex-grow flex-col gap-1'>
@@ -266,6 +270,10 @@ export const DatumPage: FC = () => {
                     pagination={false}
                     items={data?.data.datums_in_same_tx}
                     query={datumQuery}
+                    renderDisplayText={(count, total) =>
+                      t("table.displaying", { count, total })
+                    }
+                    noItemsLabel={t("table.noItems")}
                   />
                 </div>
               </div>

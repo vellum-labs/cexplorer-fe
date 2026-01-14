@@ -663,6 +663,10 @@ export const GroupDetailPage = () => {
             onOrderChange={
               filter === "pool" ? poolSetColumsOrder : drepSetColumsOrder
             }
+            renderDisplayText={(count, total) =>
+              t("table.displaying", { count, total })
+            }
+            noItemsLabel={t("table.noItems")}
           />
         </div>
       </main>

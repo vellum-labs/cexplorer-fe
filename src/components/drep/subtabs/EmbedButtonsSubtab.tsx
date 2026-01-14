@@ -22,7 +22,9 @@ export const EmbedButtonsSubtab: FC<EmbedButtonsSubtabProps> = ({
     <div className='flex flex-col gap-2 pt-4'>
       <div className='flex flex-col gap-4 md:flex-row md:gap-6'>
         <div className='flex flex-1 flex-col gap-2'>
-          <span className='text-text-sm font-medium'>{t("dreps.detailPage.embed.drepDelegationButton")}</span>
+          <span className='text-text-sm font-medium'>
+            {t("dreps.detailPage.embed.drepDelegationButton")}
+          </span>
           <div className='relative rounded-m border border-border bg-darker p-3 pr-10'>
             <pre className='overflow-x-auto whitespace-pre-wrap break-all text-text-sm text-grayTextPrimary'>
               {delegationButtonCode}
@@ -33,7 +35,9 @@ export const EmbedButtonsSubtab: FC<EmbedButtonsSubtabProps> = ({
           </div>
         </div>
         <div className='flex flex-col gap-2'>
-          <span className='text-text-sm font-medium'>{t("dreps.detailPage.embed.preview")}</span>
+          <span className='text-text-sm font-medium'>
+            {t("dreps.detailPage.embed.preview")}
+          </span>
           <a
             href={previewUrl}
             target='_blank'

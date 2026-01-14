@@ -191,6 +191,10 @@ export const CCMembersTab: FC = () => {
       query={query}
       items={indexedMembers}
       columns={columns}
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

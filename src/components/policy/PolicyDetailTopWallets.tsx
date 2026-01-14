@@ -11,7 +11,10 @@ import { useEffect, useState } from "react";
 
 import { policyDetailOwnerOptions } from "@/constants/tables/policyDetailOwnerTableOptions";
 import type { PolicyDetailOwnerTableColumns } from "@/types/tableTypes";
-import { formatNumber, formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
+import {
+  formatNumber,
+  formatNumberWithSuffix,
+} from "@vellumlabs/cexplorer-sdk";
 import AddressCell from "../address/AddressCell";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "../table/ExportButton";
@@ -132,6 +135,7 @@ export const PolicyDetailTopWallets: FC<PolicyDetailTopWalletsProps> = ({
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("table.rows")}
               columnsOptions={policyDetailOwnerOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),
@@ -164,6 +168,10 @@ export const PolicyDetailTopWallets: FC<PolicyDetailTopWalletsProps> = ({
           }) as any
         }
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </>
   );

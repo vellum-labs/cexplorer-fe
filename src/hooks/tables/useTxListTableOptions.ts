@@ -45,7 +45,7 @@ export const useTxListTableOptions = () => {
         name: t("transactions.table.scriptSize"),
       },
     ],
-    [t]
+    [t],
   );
 
   return txListTableOptions;

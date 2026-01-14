@@ -174,7 +174,11 @@ export const ScriptListRanklistTab: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>{t("script.table.interactionsThisEpoch")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("script.table.interactionsThisEpoch")}
+        </p>
+      ),
       visible: columnsVisibility.int_this_epoch,
       widthPx: 80,
     },
@@ -196,7 +200,9 @@ export const ScriptListRanklistTab: FC = () => {
 
         return <p className='text-right'>{percent}%</p>;
       },
-      title: <p className='w-full text-right'>{t("script.table.activityChange")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("script.table.activityChange")}</p>
+      ),
       visible: columnsVisibility.activity_change,
       widthPx: 80,
     },
@@ -213,7 +219,9 @@ export const ScriptListRanklistTab: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>{t("script.table.epochVolume")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("script.table.epochVolume")}</p>
+      ),
       visible: columnsVisibility.epoch_volume,
       widthPx: 80,
     },
@@ -255,6 +263,7 @@ export const ScriptListRanklistTab: FC = () => {
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("table.rows")}
                 columnsOptions={scriptListRanklistOptions.map(item => {
                   return {
                     label: t(`common:tableSettings.${item.key}`),
@@ -289,6 +298,7 @@ export const ScriptListRanklistTab: FC = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("table.rows")}
               columnsOptions={scriptListRanklistOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),
@@ -319,6 +329,10 @@ export const ScriptListRanklistTab: FC = () => {
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </>
   );

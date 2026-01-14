@@ -33,7 +33,8 @@ export const UserBadge = ({ isLoading, user, address }: Props) => {
                     </Link>
                   )}
                   <span className='text-text-xs text-grayTextPrimary'>
-                    {t("user.userProfile")} ({user?.profile ? t("user.public") : t("user.hidden")})
+                    {t("user.userProfile")} (
+                    {user?.profile ? t("user.public") : t("user.hidden")})
                   </span>
                   <div className='flex gap-1'>
                     <img

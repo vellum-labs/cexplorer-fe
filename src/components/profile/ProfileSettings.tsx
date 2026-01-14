@@ -324,7 +324,9 @@ export const ProfileSettings: FC = () => {
       <ProfileForm
         title={t("profile.settings.profilePicture")}
         description={t("profile.settings.profilePictureDescription")}
-        sideContent={<p className='self-center'>{t("profile.settings.soon")}</p>}
+        sideContent={
+          <p className='self-center'>{t("profile.settings.soon")}</p>
+        }
       />
       <ProfileForm
         title={t("profile.settings.socialProfiles")}
@@ -367,7 +369,12 @@ export const ProfileSettings: FC = () => {
           variant='tertiary'
           onClick={handleCancel}
         />
-        <Button label={t("profile.save")} size='lg' variant='primary' onClick={handleSave} />
+        <Button
+          label={t("profile.save")}
+          size='lg'
+          variant='primary'
+          onClick={handleSave}
+        />
       </div>
     </div>
   );

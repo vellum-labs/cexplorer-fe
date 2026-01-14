@@ -76,7 +76,7 @@ export const useDrepList = ({
   overrideTableSearch?: string;
   isHomepage?: boolean;
 }): UseDrepList => {
-  const { t } = useAppTranslation("pages");
+  const { t } = useAppTranslation(["pages", "common"]);
   const { infiniteScrolling } = useInfiniteScrollingStore();
 
   const token = useAuthToken();
@@ -508,7 +508,9 @@ export const useDrepList = ({
 
         return JSON.stringify(item.data);
       },
-      title: <p className='w-full text-right'>{t("dreps.table.drepMetadata")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("dreps.table.drepMetadata")}</p>
+      ),
       visible: columnsVisibility.metadata,
       widthPx: 50,
     },
@@ -586,6 +588,8 @@ export const useDrepList = ({
         onShow: e => toggleFilter(e, "spo"),
         onFilter: () => changeFilterByKey("spo", filterDraft.spo),
         onReset: () => changeFilterByKey("spo"),
+        resetLabel: t("common:actions.reset"),
+        filterLabel: t("common:actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             <label className='flex items-center gap-1'>

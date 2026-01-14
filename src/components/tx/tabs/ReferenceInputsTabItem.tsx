@@ -52,7 +52,9 @@ const ReferenceInputsTabItem = () => {
           <AdaWithTooltip data={item.value} />
         </span>
       ),
-      title: <span className='flex w-full justify-end'>{t("tx.columns.value")}</span>,
+      title: (
+        <span className='flex w-full justify-end'>{t("tx.columns.value")}</span>
+      ),
       visible: true,
       widthPx: 80,
     },
@@ -71,6 +73,10 @@ const ReferenceInputsTabItem = () => {
       totalItems={query.data?.data.reference_inputs?.length ?? 0}
       scrollable
       minContentWidth={800}
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

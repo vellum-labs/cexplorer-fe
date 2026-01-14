@@ -38,7 +38,10 @@ export const HomepageGridItem: FC<HomepageGridItemProps> = ({
   const { customize, handleRemoveWidget } = useHomepageStore();
 
   const translatedTitle = t(`homepage.widgets.titles.${title}`, title);
-  const translatedLinkTitle = t(`homepage.widgets.linkTitles.${linkTitle}`, linkTitle);
+  const translatedLinkTitle = t(
+    `homepage.widgets.linkTitles.${linkTitle}`,
+    linkTitle,
+  );
 
   return (
     <div className='relative h-full w-full'>

@@ -117,9 +117,12 @@ export const useBlockProduction = (
         );
 
         const nameFunc = {
-          [graphLabels.blocks]: item => (item ? `${formatNumber(item.value)}` : graphLabels.blocks),
+          [graphLabels.blocks]: item =>
+            item ? `${formatNumber(item.value)}` : graphLabels.blocks,
           [graphLabels.movingAverage]: item =>
-            item ? `${formatNumber(item.value.toFixed(2))}` : graphLabels.movingAverage,
+            item
+              ? `${formatNumber(item.value.toFixed(2))}`
+              : graphLabels.movingAverage,
         };
 
         return (

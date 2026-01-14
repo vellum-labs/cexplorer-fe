@@ -73,7 +73,8 @@ const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {
                 <LoadingSkeleton height='27px' width={"220px"} />
               ) : (
                 <h3 className='basis-[230px]'>
-                  {t("common:phrases.totalOf")} {formatNumber(totalItems)} {t("pools.totalOfSuffix")}
+                  {t("common:phrases.totalOf")} {formatNumber(totalItems)}{" "}
+                  {t("pools.totalOfSuffix")}
                 </h3>
               )}
             </div>
@@ -112,6 +113,7 @@ const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("common:table.rows")}
                 columnsOptions={poolsListTableOptions.map(item => ({
                   label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
@@ -141,7 +143,10 @@ const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {
                   className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
                 >
                   <span>
-                    {key === "gov_action" ? t("pools.filter.selectedVotes") : t("pools.filter.isDrep")}:
+                    {key === "gov_action"
+                      ? t("pools.filter.selectedVotes")
+                      : t("pools.filter.isDrep")}
+                    :
                   </span>
                   <span>
                     {key === "gov_action"
@@ -217,6 +222,10 @@ const PoolListTab = ({ watchlist }: { watchlist?: boolean }) => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </div>
       {displayVoteModal && (

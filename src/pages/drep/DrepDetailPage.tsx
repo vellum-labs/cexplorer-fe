@@ -117,9 +117,7 @@ export const DrepDetailPage: FC = () => {
           link: "/gov",
         },
         {
-          label: (
-            <span className='inline pt-1/2'>{t("dreps.breadcrumb")}</span>
-          ),
+          label: <span className='inline pt-1/2'>{t("dreps.breadcrumb")}</span>,
           link: "/drep",
         },
         {

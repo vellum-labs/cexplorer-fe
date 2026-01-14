@@ -66,12 +66,14 @@
     "table": {
       "date": "Datum",
       "height": "Výška",
+      "epoch": "Epocha",
       "slot": "Slot",
       "txs": "TX",
       "mintedBy": "Vytěžil",
       "hash": "Hash",
       "epochSlot": "Slot epochy",
       "vrfKey": "VRF klíč",
+      "protocol": "Protokol",
       "size": "Velikost",
       "certCount": "Počet certifikátů",
       "protoVersion": "Verze protokolu",
@@ -964,9 +966,6 @@
   "polls": {
     "title": "Akce správy Cexplorer"
   },
-  "poolDebug": {
-    "title": "SPO Debug"
-  },
   "poolAnalytics": {
     "title": "Analytika poolů"
   },
@@ -1040,6 +1039,7 @@
     "unauthorized": "Neautorizováno"
   },
   "poolDebug": {
+    "title": "SPO Debug",
     "cheatSheet": {
       "description": "Rychlý průvodce pro operátory stake poolů. Příkazy k okopírování pro sestavení cardano-node, výpočet KES period a generování operačních certifikátů—tahák, který SPO skutečně používají.",
       "buildAndUpdate": "Sestavení a aktualizace Cardano Node",

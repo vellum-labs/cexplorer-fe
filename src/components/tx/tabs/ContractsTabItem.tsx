@@ -16,7 +16,9 @@ export const ContractsTabItem = () => {
 
   if (!query.data?.data.plutus_contracts && !query.isLoading) {
     return (
-      <p className='w-full text-center text-text-sm'>{t("tx.noContractsFound")}</p>
+      <p className='w-full text-center text-text-sm'>
+        {t("tx.noContractsFound")}
+      </p>
     );
   }
 

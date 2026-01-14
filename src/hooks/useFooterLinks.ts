@@ -111,7 +111,7 @@ export const useFooterLinks = () => {
         },
       ],
     }),
-    [t]
+    [t],
   );
 
   const headers = useMemo(
@@ -120,7 +120,7 @@ export const useFooterLinks = () => {
       information: t("footer.information"),
       supportUs: t("footer.supportUs"),
     }),
-    [t]
+    [t],
   );
 
   return { footerLinks, headers };

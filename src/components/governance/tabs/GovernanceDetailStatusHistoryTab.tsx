@@ -170,6 +170,13 @@ export const GovernanceDetailStatusHistoryTab: FC<
           <GovernanceStatusBadge
             item={governanceItem}
             currentEpoch={currentEpoch}
+            labels={{
+              Active: t("governance.status.active"),
+              Ratified: t("governance.status.ratified"),
+              Enacted: t("governance.status.enacted"),
+              Expired: t("governance.status.expired"),
+              Dropped: t("governance.status.dropped"),
+            }}
           />
         );
       },
@@ -202,7 +209,9 @@ export const GovernanceDetailStatusHistoryTab: FC<
         }
         return <p className='text-right'>-</p>;
       },
-      title: <p className='w-full text-right'>{t("governance.statusHistory.tx")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("governance.statusHistory.tx")}</p>
+      ),
       visible: true,
       widthPx: 90,
     },
@@ -241,6 +250,10 @@ export const GovernanceDetailStatusHistoryTab: FC<
       rowHeight={67}
       minContentWidth={800}
       scrollable
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

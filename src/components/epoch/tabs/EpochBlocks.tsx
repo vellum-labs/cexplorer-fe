@@ -88,7 +88,9 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
     {
       key: "block_no",
       render: item => <BlockCell hash={item.hash} no={item?.block_no ?? 0} />,
-      title: <p className='w-full text-right'>{t("epochs.blocksTable.height")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("epochs.blocksTable.height")}</p>
+      ),
       visible: columnsVisibility.block_no,
       widthPx: 75,
     },
@@ -97,7 +99,9 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
       render: item => (
         <p className='text-right'>{formatNumber(item?.slot_no ?? 0)}</p>
       ),
-      title: <p className='w-full text-right'>{t("epochs.blocksTable.slot")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("epochs.blocksTable.slot")}</p>
+      ),
       visible: columnsVisibility.slot_no,
       widthPx: 80,
     },
@@ -184,7 +188,9 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[230px]'>
-              {t("epochs.blocksTable.totalOfBlocks", { count: formatNumber(totalItems) })}
+              {t("epochs.blocksTable.totalOfBlocks", {
+                count: formatNumber(totalItems),
+              })}
             </h3>
           )}
           <div className='flex items-center gap-1 md:hidden'>
@@ -192,6 +198,7 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={epochBlockTableOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),
@@ -231,6 +238,7 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={epochBlockTableOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),
@@ -258,6 +266,10 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("common:table.displaying", { count, total })
+        }
+        noItemsLabel={t("common:table.noItems")}
       />
     </>
   );

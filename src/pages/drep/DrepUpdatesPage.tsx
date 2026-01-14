@@ -116,7 +116,9 @@ export const DrepUpdatesPage = () => {
 
         return `${item.block.epoch_no}/${item.block.no}`;
       },
-      title: <p className='w-full text-right'>{t("drep.columns.epochBlock")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("drep.columns.epochBlock")}</p>
+      ),
       visible: columnsVisibility.epoch_block,
       widthPx: 40,
     },
@@ -133,12 +135,18 @@ export const DrepUpdatesPage = () => {
       title={t("drep.updates.title")}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>{t("governance.breadcrumbs.governance")}</span>,
+          label: (
+            <span className='inline pt-1/2'>
+              {t("governance.breadcrumbs.governance")}
+            </span>
+          ),
           link: "/gov",
         },
         {
           label: (
-            <span className='inline pt-1/2'>{t("drep.breadcrumbs.delegatedRepresentatives")}</span>
+            <span className='inline pt-1/2'>
+              {t("drep.breadcrumbs.delegatedRepresentatives")}
+            </span>
           ),
           link: "/drep",
         },
@@ -152,7 +160,9 @@ export const DrepUpdatesPage = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[230px]'>
-              {t("drep.updates.total", { count: formatNumber(totalItems ?? 0) })}
+              {t("drep.updates.total", {
+                count: formatNumber(totalItems ?? 0),
+              })}
             </h3>
           )}
           <div className='flex items-center gap-1'>
@@ -160,6 +170,7 @@ export const DrepUpdatesPage = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("table.rows")}
               columnsOptions={drepRegistrationsTableOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),
@@ -186,6 +197,10 @@ export const DrepUpdatesPage = () => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("table.displaying", { count, total })
+          }
+          noItemsLabel={t("table.noItems")}
         />
       </section>
     </PageBase>

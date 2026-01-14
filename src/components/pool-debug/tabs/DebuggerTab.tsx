@@ -109,7 +109,9 @@ export const DebuggerTab: FC<DebuggerTabProps> = ({
               ) : (
                 <X className='h-4 w-4' />
               )}
-              <span>{t("poolDebug.debugger.errors", { count: errorCount })}</span>
+              <span>
+                {t("poolDebug.debugger.errors", { count: errorCount })}
+              </span>
             </div>
             <Link
               to='/pool/$id'
@@ -131,6 +133,10 @@ export const DebuggerTab: FC<DebuggerTabProps> = ({
           columns={columns}
           query={debugQuery}
           scrollable
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       )}
     </div>

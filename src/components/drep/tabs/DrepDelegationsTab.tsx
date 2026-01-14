@@ -215,6 +215,7 @@ export const DrepDelegationsTab = () => {
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("common:table.rows")}
                 columnsOptions={drepDelegationsTableOptions.map(item => {
                   return {
                     label: t(`common:tableSettings.${item.key}`),
@@ -241,6 +242,7 @@ export const DrepDelegationsTab = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={drepDelegationsTableOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),
@@ -270,6 +272,10 @@ export const DrepDelegationsTab = () => {
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("common:table.displaying", { count, total })
+        }
+        noItemsLabel={t("common:table.noItems")}
       />
     </>
   );

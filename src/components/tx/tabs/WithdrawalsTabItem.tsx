@@ -36,14 +36,22 @@ const WithdrawalsTabItem = () => {
           <AdaWithTooltip data={item.amount} />
         </span>
       ),
-      title: <span className='flex w-full justify-end'>{t("tx.columns.amount")}</span>,
+      title: (
+        <span className='flex w-full justify-end'>
+          {t("tx.columns.amount")}
+        </span>
+      ),
       visible: true,
       widthPx: 80,
     },
   ];
 
   if (!withdrawals && !query.isLoading) {
-    return <p className='w-full text-center text-text-sm'>{t("tx.noWithdrawalsFound")}</p>;
+    return (
+      <p className='w-full text-center text-text-sm'>
+        {t("tx.noWithdrawalsFound")}
+      </p>
+    );
   }
 
   if (query.isLoading) {
@@ -59,6 +67,10 @@ const WithdrawalsTabItem = () => {
       minContentWidth={500}
       totalItems={withdrawals?.length || 0}
       scrollable
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

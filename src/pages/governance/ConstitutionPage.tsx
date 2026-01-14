@@ -83,7 +83,9 @@ export const ConstitutionPage: FC = () => {
         if (!item?.gov_action_proposal) {
           return (
             <div className='flex flex-col'>
-              <span className='text-primary'>{t("governance.constitution.genesisConstitution")}</span>
+              <span className='text-primary'>
+                {t("governance.constitution.genesisConstitution")}
+              </span>
               <div className='flex items-center gap-1'>
                 <span className='text-textSecondary text-text-xs'>
                   {formatString(item.script_hash, "long")}
@@ -197,7 +199,11 @@ export const ConstitutionPage: FC = () => {
       title={t("governance.constitution.title")}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>{t("governance.breadcrumbs.governance")}</span>,
+          label: (
+            <span className='inline pt-1/2'>
+              {t("governance.breadcrumbs.governance")}
+            </span>
+          ),
           link: "/gov",
         },
         {
@@ -217,6 +223,10 @@ export const ConstitutionPage: FC = () => {
           query={constitutionListQuery}
           items={itemsWithIndex}
           columns={columns}
+          renderDisplayText={(count, total) =>
+            t("table.displaying", { count, total })
+          }
+          noItemsLabel={t("table.noItems")}
         />
       </div>
       {isModalOpen &&

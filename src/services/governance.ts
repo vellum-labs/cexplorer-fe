@@ -81,7 +81,7 @@ export const fetchGovernenceVote = async (
       order: isNotVotedEndpoint ? (order ?? "stake") : order,
       sort: isNotVotedEndpoint ? (sort ?? "desc") : sort,
       vote,
-      search, 
+      search,
     },
   };
   return handleFetch<any>(url, undefined, options);

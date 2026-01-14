@@ -17,7 +17,9 @@ const SettingsMobile: FC<SettingsMobileProps> = ({ onClick, className }) => {
       onClick={onClick}
     >
       <Settings size={20} />
-      <span className='font-medium hover:underline'>{t("navbar.settings")}</span>
+      <span className='font-medium hover:underline'>
+        {t("navbar.settings")}
+      </span>
       <ChevronRightIcon
         height={16}
         width={16}

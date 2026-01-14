@@ -104,7 +104,9 @@ export const PolicyAssetGrid: FC<PolicyAssetGridProps> = ({
         )}
       {((!query.isLoading && query.isError) ||
         (!query.isLoading && !(items ?? []).length)) && (
-        <div className='flex w-full justify-center'>{t("policy.resultNotFound")}</div>
+        <div className='flex w-full justify-center'>
+          {t("policy.resultNotFound")}
+        </div>
       )}
     </>
   );

@@ -34,7 +34,7 @@ export const SPOThresholdChart: FC<SPOThresholdChartProps> = ({
   const { formatLovelace } = useADADisplay();
   const { textColor, bgColor } = useGraphColors();
 
-  const threshold = params ? epochParam?.[params] ?? 0 : 0;
+  const threshold = params ? (epochParam?.[params] ?? 0) : 0;
 
   const pools = poolList?.data ?? [];
   const totalStake =
@@ -171,7 +171,9 @@ export const SPOThresholdChart: FC<SPOThresholdChartProps> = ({
   return (
     <div className='flex flex-col items-center justify-center'>
       <div className='flex items-center gap-1'>
-        <p className='mb-1 font-medium'>{t("governance.thresholds.spoTitle")}</p>
+        <p className='mb-1 font-medium'>
+          {t("governance.thresholds.spoTitle")}
+        </p>
         <Tooltip
           content={
             <p className='max-w-[200px]'>

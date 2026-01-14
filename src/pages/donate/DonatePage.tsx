@@ -162,9 +162,7 @@ export const DonatePage = () => {
           onClose={() => setShowSuccessModal(false)}
         >
           <div className='mt-2 flex h-full w-full flex-col items-center overflow-hidden p-1.5'>
-            <h3>
-              {t("donatePage.successModal.message")}
-            </h3>
+            <h3>{t("donatePage.successModal.message")}</h3>
             <p className='mt-4'>
               {t("donatePage.successModal.transactionHash")}{" "}
               <Link
@@ -237,7 +235,9 @@ export const DonatePage = () => {
               </div>
             </div>
             <div className='flex flex-col gap-2'>
-              <p className='text-text-sm font-medium'>{t("donatePage.donateSection.otherMethods")}</p>
+              <p className='text-text-sm font-medium'>
+                {t("donatePage.donateSection.otherMethods")}
+              </p>
               <div className='flex flex-wrap gap-2'>
                 <a
                   href='https://www.paypal.com/donate?business=billing@vellumlabs.cz&item_name=Cexplorer.io+-+maintenance,+development,+servers&currency_code=USD'
@@ -353,7 +353,9 @@ export const DonatePage = () => {
             </div>
           </div>
           <div className='flex flex-col'>
-            <p className='text-text-xs'>{t("donatePage.stakeSection.delegateViaDapp")}</p>
+            <p className='text-text-xs'>
+              {t("donatePage.stakeSection.delegateViaDapp")}
+            </p>
             <Button
               size='lg'
               label={t("donatePage.buttons.delegateToPools")}

@@ -113,7 +113,11 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
 
         return <p className='text-right'>{item?.live_drep?.tx?.epoch_no}</p>;
       },
-      title: <p className='w-full text-right'>{t("dreps.detailPage.delegatorsTable.activeIn")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("dreps.detailPage.delegatorsTable.activeIn")}
+        </p>
+      ),
       visible: columnsVisibility.active_in,
       widthPx: 30,
     },
@@ -274,6 +278,10 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
         );
       })}
       onOrderChange={setColumsOrder}
+      renderDisplayText={(count, total) =>
+        t("common:table.displaying", { count, total })
+      }
+      noItemsLabel={t("common:table.noItems")}
     />
   );
 };

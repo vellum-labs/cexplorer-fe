@@ -102,7 +102,11 @@ export const NewPoolsListPage: FC = () => {
     {
       key: "epoch",
       render: item => (
-        <EpochCell no={item.active_epochs} substractFromCurrent currentEpoch={currentEpoch} />
+        <EpochCell
+          no={item.active_epochs}
+          substractFromCurrent
+          currentEpoch={currentEpoch}
+        />
       ),
       title: <p className='w-full text-right'>{t("common:labels.epoch")}</p>,
       visible: columnsVisibility.epoch,
@@ -206,6 +210,7 @@ export const NewPoolsListPage: FC = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={newPoolsTableOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),
@@ -233,6 +238,10 @@ export const NewPoolsListPage: FC = () => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </section>
     </PageBase>

@@ -100,6 +100,13 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
             ratified_epoch: vote?.proposal?.ratified_epoch ?? null,
           }}
           currentEpoch={currentEpoch ?? 0}
+          labels={{
+            Active: t("governance.status.active"),
+            Ratified: t("governance.status.ratified"),
+            Enacted: t("governance.status.enacted"),
+            Expired: t("governance.status.expired"),
+            Dropped: t("governance.status.dropped"),
+          }}
         />
       ),
     },
@@ -397,7 +404,9 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
   return (
     <>
       <div className='w-full rounded-xl border border-border px-3 py-2'>
-        <h2 className='text-base font-semibold'>{t("governance.voteDetail.overview")}</h2>
+        <h2 className='text-base font-semibold'>
+          {t("governance.voteDetail.overview")}
+        </h2>
         <div className='flex flex-col gap-2 pt-2'>
           {detailItems.map(({ key, title, value, divider, fullWidth }) => (
             <div key={key} className='flex flex-col'>

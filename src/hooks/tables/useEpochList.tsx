@@ -221,7 +221,9 @@ export const useEpochList = ({
           {formatNumber(item?.tx_count)}
         </p>
       ),
-      title: <p className='w-full text-right'>{t("common:labels.transactions")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.transactions")}</p>
+      ),
       visible: columnsVisibility.txs,
       widthPx: 50,
     },

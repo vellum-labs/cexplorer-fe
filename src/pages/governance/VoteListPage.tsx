@@ -73,8 +73,8 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
 
   const voterRoleLabels: Record<VoterRole, string> = {
     ConstitutionalCommittee: t("gov.voteList.constitutionalCommittee"),
-    DRep: "DRep",
-    SPO: "SPO",
+    DRep: t("labels.drep"),
+    SPO: t("labels.spo"),
   };
 
   const voterRole =
@@ -128,7 +128,8 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
       render: item => {
         const id = item?.proposal?.ident?.id;
         const name =
-          item?.proposal?.anchor?.offchain?.name ?? `⚠️ ${t("gov.voteList.invalidMetadata")}`;
+          item?.proposal?.anchor?.offchain?.name ??
+          `⚠️ ${t("gov.voteList.invalidMetadata")}`;
 
         if (!id) {
           return "-";
@@ -208,6 +209,8 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
         onFilter: () =>
           changeFilterByKey("voter_role", filterDraft["voter_role"]),
         onReset: () => changeFilterByKey("voter_role"),
+        resetLabel: t("actions.reset"),
+        filterLabel: t("actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             {(["ConstitutionalCommittee", "SPO", "DRep"] as VoterRole[]).map(
@@ -246,7 +249,9 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>{t("gov.voteList.votingPower")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("gov.voteList.votingPower")}</p>
+      ),
       visible: columnsVisibility.voting_power,
       widthPx: 60,
     },
@@ -279,6 +284,8 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
         onShow: e => toggleFilter(e, "vote"),
         onFilter: () => changeFilterByKey("vote", filterDraft["vote"]),
         onReset: () => changeFilterByKey("vote"),
+        resetLabel: t("actions.reset"),
+        filterLabel: t("actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             {(["Yes", "No", "Abstain"] as const).map(val => (
@@ -372,7 +379,9 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
           label: <span className=''>{t("gov.votes")}</span>,
         },
       ]}
-      title={<div className='flex items-center gap-1/2'>{t("gov.allVotes")}</div>}
+      title={
+        <div className='flex items-center gap-1/2'>{t("gov.allVotes")}</div>
+      }
     >
       <div className={`w-full max-w-desktop ${!poolId ? "px-2 py-3" : ""}`}>
         <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
@@ -393,6 +402,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
                 <TableSettingsDropdown
                   rows={rows}
                   setRows={setRows}
+                  rowsLabel={t("table.rows")}
                   columnsOptions={voteListPageTableOptions.map(item => {
                     return {
                       label: t(`common:tableSettings.${item.key}`),
@@ -446,6 +456,7 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("table.rows")}
                 columnsOptions={voteListPageTableOptions.map(item => {
                   return {
                     label: item.name,
@@ -506,6 +517,10 @@ export const VoteListPage: FC<VoteListPageProps> = ({ poolId }) => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("table.displaying", { count, total })
+          }
+          noItemsLabel={t("table.noItems")}
         />
       </div>
     </PageBase>

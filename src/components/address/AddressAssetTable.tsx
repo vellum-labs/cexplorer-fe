@@ -192,6 +192,10 @@ export const AddressAssetTable: FC<AddressAssetTableProps> = ({
         );
       })}
       onOrderChange={setColumsOrder}
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

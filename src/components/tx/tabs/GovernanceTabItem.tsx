@@ -119,6 +119,10 @@ export const GovernanceTabItem = () => {
         itemsPerPage={20}
         minContentWidth={1150}
         disableDrag
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </div>
   );

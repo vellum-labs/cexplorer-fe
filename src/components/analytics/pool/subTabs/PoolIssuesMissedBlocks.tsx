@@ -149,7 +149,9 @@ export const PoolIssuesMissedBlocks: FC = () => {
         );
       },
       title: (
-        <p className='flex w-full justify-end text-right'>{t("analytics.mintedBlocks")}</p>
+        <p className='flex w-full justify-end text-right'>
+          {t("analytics.mintedBlocks")}
+        </p>
       ),
       visible: columnsVisibility.minted_blocks,
       widthPx: 150,
@@ -168,7 +170,9 @@ export const PoolIssuesMissedBlocks: FC = () => {
         );
       },
       title: (
-        <p className='flex w-full justify-end text-right'>{t("analytics.estimatedBlocks")}</p>
+        <p className='flex w-full justify-end text-right'>
+          {t("analytics.estimatedBlocks")}
+        </p>
       ),
       visible: columnsVisibility.estimated_blocks,
       widthPx: 150,
@@ -224,7 +228,9 @@ export const PoolIssuesMissedBlocks: FC = () => {
         </div>
         <div className='flex flex-wrap items-center gap-2'>
           <div className='flex gap-1/2 text-text-xs'>
-            <span className='text-grayTextPrimary'>{t("analytics.monitoredEpochs")}</span>
+            <span className='text-grayTextPrimary'>
+              {t("analytics.monitoredEpochs")}
+            </span>
             <span>
               {miscConst?.epoch?.no ? miscConst?.epoch?.no - epochCount : 0}
             </span>
@@ -240,7 +246,9 @@ export const PoolIssuesMissedBlocks: FC = () => {
             </span>
           </div>
           <div className='flex gap-1/2 text-text-xs'>
-            <span className='text-grayTextPrimary'>{t("analytics.allowedDeviation")}</span>
+            <span className='text-grayTextPrimary'>
+              {t("analytics.allowedDeviation")}
+            </span>
             <span>
               {mintedBlocks && estimatedBlocks
                 ? calculateTotalDeviation(
@@ -262,7 +270,9 @@ export const PoolIssuesMissedBlocks: FC = () => {
             <></>
           ) : (
             <h3 className='whitespace-nowrap'>
-              {t("analytics.totalPoolIssues", { count: formatNumber(totalItems) })}
+              {t("analytics.totalPoolIssues", {
+                count: formatNumber(totalItems),
+              })}
             </h3>
           )}
 
@@ -270,6 +280,7 @@ export const PoolIssuesMissedBlocks: FC = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("table.rows")}
               columnsOptions={poolIssuesMissedBlocksTableOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),
@@ -299,6 +310,10 @@ export const PoolIssuesMissedBlocks: FC = () => {
         })}
         minContentWidth={700}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </section>
   );

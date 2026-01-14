@@ -176,10 +176,12 @@ export const useEpochBlockchain = ({
       formatter: function (params) {
         const marker = dataPoint => dataPoint?.marker;
         const name = dataPoint => {
-          if (dataPoint.seriesName === graphLabels.stake) return t("epochs.stats.stake");
+          if (dataPoint.seriesName === graphLabels.stake)
+            return t("epochs.stats.stake");
           if (dataPoint.seriesName === graphLabels.stakingRewards)
             return t("epochs.graph.stakingRewards").replace(" (₳)", "");
-          if (dataPoint.seriesName === graphLabels.outputs) return t("epochs.graph.outputs").replace(" (₳)", "");
+          if (dataPoint.seriesName === graphLabels.outputs)
+            return t("epochs.graph.outputs").replace(" (₳)", "");
           return dataPoint?.seriesName;
         };
 

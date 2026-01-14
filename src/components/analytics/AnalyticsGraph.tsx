@@ -72,9 +72,7 @@ export const AnalyticsGraph: FC<Props> = ({
   const ref = useRef<HTMLDivElement>(null);
 
   const modifiedChildren = Children.map(children, child =>
-    isValidElement(child)
-      ? cloneElement(child, { setJson } as any)
-      : child,
+    isValidElement(child) ? cloneElement(child, { setJson } as any) : child,
   );
 
   const exportGraphToPng = useCallback(() => {

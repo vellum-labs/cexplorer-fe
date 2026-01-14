@@ -226,6 +226,8 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           changeFilterByKey("type", JSON.stringify(filterDraft["type"]));
         },
         onReset: () => changeFilterByKey("type"),
+        resetLabel: t("actions.reset"),
+        filterLabel: t("actions.filter"),
         filterContent: (
           <div className='flex w-full flex-col justify-center gap-1 p-1'>
             <div className='flex items-center gap-1.5'>
@@ -351,7 +353,9 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           </div>
         );
       },
-      title: <p className='w-full text-nowrap text-right'>{t("defi.tokenAmount")}</p>,
+      title: (
+        <p className='w-full text-nowrap text-right'>{t("defi.tokenAmount")}</p>
+      ),
       visible: columnsVisibility.token_amount,
       widthPx: 83,
     },
@@ -561,6 +565,8 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         onShow: e => toggleFilter(e, "status"),
         onFilter: () => changeFilterByKey("status", filterDraft["status"]),
         onReset: () => changeFilterByKey("status"),
+        resetLabel: t("actions.reset"),
+        filterLabel: t("actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             <label className='flex items-center gap-1'>
@@ -658,6 +664,8 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
               onFilter: () =>
                 changeFilterByKey("maker", filterDraft["makerSearch"]),
               onReset: () => changeFilterByKey("maker"),
+              resetLabel: t("actions.reset"),
+              filterLabel: t("actions.filter"),
               filterContent: (
                 <div className='flex h-[60px] w-full items-center justify-center px-1'>
                   <TextInput
@@ -742,6 +750,8 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         onShow: e => toggleFilter(e, "dex"),
         onFilter: () => changeFilterByKey("dex", filterDraft["dex"]),
         onReset: () => changeFilterByKey("dex"),
+        resetLabel: t("actions.reset"),
+        filterLabel: t("actions.filter"),
         filterContent: (
           <div className='flex max-h-[200px] flex-col gap-1 overflow-y-auto px-2 py-1'>
             {Object.entries(dexConfig)
@@ -783,6 +793,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           <TableSettingsDropdown
             rows={rows}
             setRows={setRows}
+            rowsLabel={t("table.rows")}
             columnsOptions={defiOrderListTableOptions.map(item => {
               return {
                 label: t(`common:tableSettings.${item.key}`),
@@ -847,6 +858,10 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </div>
   );

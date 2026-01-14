@@ -183,6 +183,10 @@ export const CCMemberVotesTab: FC<{ hotKey?: string }> = ({ hotKey }) => {
         );
       })}
       onOrderChange={setColumsOrder}
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

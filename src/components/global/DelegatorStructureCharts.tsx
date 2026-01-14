@@ -26,7 +26,10 @@ export const DelegatorStructureCharts: FC<DelegatorStructureChartsProps> = ({
   const { textColor } = useGraphColors();
   const { formatLovelace } = useADADisplay();
 
-  const translationKey = type === "pool" ? "pools.detailPage.structure" : "dreps.detailPage.structure";
+  const translationKey =
+    type === "pool"
+      ? "pools.detailPage.structure"
+      : "dreps.detailPage.structure";
 
   const countChartData = items
     .filter(item => item.data.count > 0)

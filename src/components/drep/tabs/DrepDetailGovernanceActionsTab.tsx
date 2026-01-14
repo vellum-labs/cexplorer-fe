@@ -88,7 +88,9 @@ export const DrepDetailGovernanceActionsTab: FC = () => {
 
         return <GovActionCell id={id} name={name} />;
       },
-      title: <p>{t("dreps.detailPage.governanceActionsTable.governanceAction")}</p>,
+      title: (
+        <p>{t("dreps.detailPage.governanceActionsTable.governanceAction")}</p>
+      ),
       visible: columnsVisibility.governance_action_name,
       widthPx: 200,
     },
@@ -123,7 +125,11 @@ export const DrepDetailGovernanceActionsTab: FC = () => {
           )}
         </p>
       ),
-      title: <p className='w-full text-right'>{t("dreps.detailPage.governanceActionsTable.votingPower")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("dreps.detailPage.governanceActionsTable.votingPower")}
+        </p>
+      ),
       visible: columnsVisibility.voting_power,
       widthPx: 40,
     },
@@ -165,6 +171,10 @@ export const DrepDetailGovernanceActionsTab: FC = () => {
         );
       })}
       onOrderChange={setColumsOrder}
+      renderDisplayText={(count, total) =>
+        t("common:table.displaying", { count, total })
+      }
+      noItemsLabel={t("common:table.noItems")}
     />
   );
 };

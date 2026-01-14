@@ -149,6 +149,7 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
         <TableSettingsDropdown
           rows={rows}
           setRows={setRows}
+          rowsLabel={t("table.rows")}
           columnsOptions={assetDetailMintTableOptions.map(item => {
             return {
               label: t(`common:tableSettings.${item.key}`),
@@ -174,6 +175,10 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </>
   );

@@ -132,7 +132,10 @@ const WalletDropdown = ({
                 <img src={DollarIcon} alt='dollar' />
                 <span>
                   {encodeAssetName(
-                    adaHandle.replace(/^(000de140|0014df10|000643b0|000010)/, ""),
+                    adaHandle.replace(
+                      /^(000de140|0014df10|000643b0|000010)/,
+                      "",
+                    ),
                   )}
                 </span>
               </Badge>
@@ -149,7 +152,9 @@ const WalletDropdown = ({
           </div>
 
           <div className='flex items-center justify-between'>
-            <span className='text-text-xs font-medium text-text'>{t("wallet.pool")}</span>
+            <span className='text-text-xs font-medium text-text'>
+              {t("wallet.pool")}
+            </span>
             <div className='flex items-center gap-1/2'>
               {livePool && livePool.id ? (
                 <Link
@@ -180,7 +185,9 @@ const WalletDropdown = ({
           </div>
 
           <div className='flex items-center justify-between'>
-            <span className='text-text-xs font-medium text-text'>{t("wallet.drep")}</span>
+            <span className='text-text-xs font-medium text-text'>
+              {t("wallet.drep")}
+            </span>
             <div className='flex items-center gap-1/2'>
               {drep && drep.id ? (
                 <>

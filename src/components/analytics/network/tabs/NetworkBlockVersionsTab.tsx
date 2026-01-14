@@ -70,7 +70,9 @@ export const NetworkBlockVersionsTab: FC = () => {
                 </span>
               </div>
               <Button
-                label={t("analytics.readMore", { version: latestBlockVersion.toFixed(1) })}
+                label={t("analytics.readMore", {
+                  version: latestBlockVersion.toFixed(1),
+                })}
                 variant='primary'
                 size='sm'
               />

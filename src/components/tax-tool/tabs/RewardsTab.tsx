@@ -188,7 +188,9 @@ export const RewardsTab: FC<RewardsTabProps> = ({ stakeKey }) => {
     <div className='flex w-full flex-col gap-3 pt-3'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-2'>
-          <span className='text-text-sm font-medium'>{t("taxTool.secondaryCurrency")}</span>
+          <span className='text-text-sm font-medium'>
+            {t("taxTool.secondaryCurrency")}
+          </span>
           <Select
             value={secondaryCurrency}
             onValueChange={(value: string) =>

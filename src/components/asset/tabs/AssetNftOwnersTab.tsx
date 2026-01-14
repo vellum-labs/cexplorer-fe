@@ -114,6 +114,10 @@ export const AssetNftOwnersTab: FC<AssetNftOwnersTabProps> = ({
         );
       })}
       onOrderChange={setColumsOrder}
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

@@ -91,7 +91,10 @@ export const EpochPots: FC<EpochPotsProps> = ({ stats, constData }) => {
 
   return (
     <div className='flex flex-grow basis-[410px] items-stretch md:flex-shrink-0'>
-      <OverviewCard title={t("epochs.pots.title")} overviewList={overviewList} />
+      <OverviewCard
+        title={t("epochs.pots.title")}
+        overviewList={overviewList}
+      />
     </div>
   );
 };

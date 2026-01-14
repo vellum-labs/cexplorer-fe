@@ -102,14 +102,14 @@ const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
                     title={
                       <span className='text-text-lg font-semibold'>
                         {t("navbar.poweredBy")}{" "}
-                        <span className='text-primary'>{t("navbar.cardanoBlockchain")}</span>
+                        <span className='text-primary'>
+                          {t("navbar.cardanoBlockchain")}
+                        </span>
                       </span>
                     }
                     className='bg-darker'
                   >
-                    <p className='font-regular'>
-                      {t("navbar.apiDescription")}
-                    </p>
+                    <p className='font-regular'>{t("navbar.apiDescription")}</p>
                     <Button
                       className='mt-auto'
                       label={t("navbar.startBuilding")}
@@ -131,14 +131,14 @@ const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
                     title={
                       <span className='text-text-lg font-semibold'>
                         {t("navbar.getCexplorer")}{" "}
-                        <span className='text-purpleText'>{t("navbar.pro")}</span>
+                        <span className='text-purpleText'>
+                          {t("navbar.pro")}
+                        </span>
                       </span>
                     }
                     className='bg-darker'
                   >
-                    <p className='font-regular'>
-                      {t("navbar.apiDescription")}
-                    </p>
+                    <p className='font-regular'>{t("navbar.apiDescription")}</p>
                     <Button
                       href='/pro'
                       className='mt-auto'

@@ -89,7 +89,9 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
           <EpochCell no={item?.active_pool?.delegation?.tx?.active_epoch_no} />
         </div>
       ),
-      title: <p className='w-full text-right'>{t("pool.migrations.activeEpoch")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("pool.migrations.activeEpoch")}</p>
+      ),
       visible: columnsVisibility.active_in,
       widthPx: 45,
     },
@@ -213,7 +215,9 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
           />
         );
       },
-      title: <p className='w-full text-right'>{t("pool.migrations.registered")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("pool.migrations.registered")}</p>
+      ),
       visible: columnsVisibility.registered,
       widthPx: 40,
     },
@@ -288,6 +292,10 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
         );
       })}
       onOrderChange={setColumsOrder}
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

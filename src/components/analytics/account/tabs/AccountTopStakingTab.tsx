@@ -175,6 +175,8 @@ export const AccountTopStakingTab: FC = () => {
         onFilter: () =>
           changeFilterByKey("pool_only", +filterDraft["pool_only"]),
         onReset: () => changeFilterByKey("pool_only"),
+        resetLabel: t("actions.reset"),
+        filterLabel: t("actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             <label className='flex items-center gap-1'>
@@ -188,7 +190,9 @@ export const AccountTopStakingTab: FC = () => {
                   changeDraftFilter("pool_only", +e.currentTarget.value)
                 }
               />
-              <span className='text-text-sm'>{t("analytics.delegatedToPool")}</span>
+              <span className='text-text-sm'>
+                {t("analytics.delegatedToPool")}
+              </span>
             </label>
             <label className='flex items-center gap-1'>
               <input
@@ -247,6 +251,8 @@ export const AccountTopStakingTab: FC = () => {
         onFilter: () =>
           changeFilterByKey("drep_only", +filterDraft["drep_only"]),
         onReset: () => changeFilterByKey("drep_only"),
+        resetLabel: t("actions.reset"),
+        filterLabel: t("actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             <label className='flex items-center gap-1'>
@@ -260,7 +266,9 @@ export const AccountTopStakingTab: FC = () => {
                   changeDraftFilter("drep_only", +e.currentTarget.value)
                 }
               />
-              <span className='text-text-sm'>{t("analytics.delegatedToDrep")}</span>
+              <span className='text-text-sm'>
+                {t("analytics.delegatedToDrep")}
+              </span>
             </label>
             <label className='flex items-center gap-1'>
               <input
@@ -273,7 +281,9 @@ export const AccountTopStakingTab: FC = () => {
                   changeDraftFilter("drep_only", +e.currentTarget.value)
                 }
               />
-              <span className='text-text-sm'>{t("analytics.notDelegatedToDrep")}</span>
+              <span className='text-text-sm'>
+                {t("analytics.notDelegatedToDrep")}
+              </span>
             </label>
           </div>
         ),
@@ -297,7 +307,9 @@ export const AccountTopStakingTab: FC = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : totalItems > 0 ? (
             <h3 className='basis-[230px] text-wrap'>
-              {t("analytics.totalAccounts", { count: formatNumber(totalItems) })}
+              {t("analytics.totalAccounts", {
+                count: formatNumber(totalItems),
+              })}
             </h3>
           ) : (
             ""
@@ -312,6 +324,7 @@ export const AccountTopStakingTab: FC = () => {
           <TableSettingsDropdown
             rows={rows}
             setRows={setRows}
+            rowsLabel={t("table.rows")}
             columnsOptions={accountAnalyticsTopStakingTableOptions.map(item => {
               return {
                 label: t(`common:tableSettings.${item.key}`),
@@ -332,14 +345,18 @@ export const AccountTopStakingTab: FC = () => {
                   key={key}
                   className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
                 >
-                  {key === "pool_only" && <span>{t("analytics.poolDelegation")}:</span>}
+                  {key === "pool_only" && (
+                    <span>{t("analytics.poolDelegation")}:</span>
+                  )}
                   <span>
                     {key === "pool_only" &&
                       (+value === 1
                         ? t("analytics.delegatedToPool")
                         : t("analytics.notDelegatedToPool"))}
                   </span>
-                  {key === "drep_only" && <span>{t("analytics.drepDelegation")}:</span>}
+                  {key === "drep_only" && (
+                    <span>{t("analytics.drepDelegation")}:</span>
+                  )}
                   <span>
                     {key === "drep_only" &&
                       (+value === 1
@@ -376,10 +393,12 @@ export const AccountTopStakingTab: FC = () => {
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
-      <h3 className='mt-2 text-center'>
-        {t("analytics.accountsExcluded")}
-      </h3>
+      <h3 className='mt-2 text-center'>{t("analytics.accountsExcluded")}</h3>
     </div>
   );
 };

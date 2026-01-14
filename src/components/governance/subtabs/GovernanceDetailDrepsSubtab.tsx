@@ -151,7 +151,9 @@ export const GovernanceDetailDrepsSubtab: FC<
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : totalItems !== undefined ? (
             <h3 className='basis-[230px] text-nowrap'>
-              {t("governance.voting.totalDReps", { count: formatNumber(totalItems) })}
+              {t("governance.voting.totalDReps", {
+                count: formatNumber(totalItems),
+              })}
             </h3>
           ) : (
             ""
@@ -163,6 +165,7 @@ export const GovernanceDetailDrepsSubtab: FC<
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("table.rows")}
                 columnsOptions={governanceActionDetailDrepSposTableOptions.map(
                   item => {
                     return {
@@ -187,6 +190,7 @@ export const GovernanceDetailDrepsSubtab: FC<
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("table.rows")}
               columnsOptions={governanceActionDetailDrepSposTableOptions.map(
                 item => {
                   return {
@@ -225,6 +229,10 @@ export const GovernanceDetailDrepsSubtab: FC<
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </>
   );

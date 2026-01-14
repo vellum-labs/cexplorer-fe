@@ -243,7 +243,9 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
                 xAxis: currentEpoch - chartData.minEpoch,
                 label: {
                   show: true,
-                  formatter: t("governance.timeline.currentEpoch", { epoch: currentEpoch }),
+                  formatter: t("governance.timeline.currentEpoch", {
+                    epoch: currentEpoch,
+                  }),
                   position: "start",
                   color: lineColor,
                   fontSize: 11,
@@ -292,7 +294,9 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
   if (!items.length) {
     return (
       <div className='flex h-[400px] items-center justify-center rounded-m border border-border'>
-        <p className='text-grayTextPrimary'>{t("governance.actions.noActionsFound")}</p>
+        <p className='text-grayTextPrimary'>
+          {t("governance.actions.noActionsFound")}
+        </p>
       </div>
     );
   }
@@ -313,22 +317,22 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
         </div>
       </div>
       <div className='mt-2 flex flex-wrap items-center justify-center gap-3'>
-        {(["ACTIVE", "ENACTED", "RATIFIED", "DROPPED", "EXPIRED"] as GovStatus[]).map(
-          status => (
-            <div key={status} className='flex items-center gap-1'>
-              <div
-                className='rounded-sm h-3 w-3 border'
-                style={{
-                  backgroundColor: govStatusBgColors[status],
-                  borderColor: govStatusColors[status],
-                }}
-              />
-              <span className='text-text-sm text-grayTextPrimary'>
-                {getStatusLabel(status)}
-              </span>
-            </div>
-          ),
-        )}
+        {(
+          ["ACTIVE", "ENACTED", "RATIFIED", "DROPPED", "EXPIRED"] as GovStatus[]
+        ).map(status => (
+          <div key={status} className='flex items-center gap-1'>
+            <div
+              className='rounded-sm h-3 w-3 border'
+              style={{
+                backgroundColor: govStatusBgColors[status],
+                borderColor: govStatusColors[status],
+              }}
+            />
+            <span className='text-text-sm text-grayTextPrimary'>
+              {getStatusLabel(status)}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );

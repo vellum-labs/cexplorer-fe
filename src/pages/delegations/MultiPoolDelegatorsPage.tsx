@@ -73,7 +73,9 @@ export const MultiPoolDelegatorsPage = () => {
     },
     {
       key: "delegated_to",
-      title: <p className='w-full text-right'>{t("delegations.table.stakeKeys")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("delegations.table.stakeKeys")}</p>
+      ),
       visible: columnsVisibility.delegated_to,
       widthPx: 200,
       render: (row: any) => (
@@ -108,7 +110,8 @@ export const MultiPoolDelegatorsPage = () => {
             <LoadingSkeleton height='27px' width={"290px"} />
           ) : (
             <h3 className='basis-[230px] text-nowrap'>
-              {t("common:phrases.totalOf")} {formatNumber(total)} {t("delegations.multiPool.totalOfSuffix")}
+              {t("common:phrases.totalOf")} {formatNumber(total)}{" "}
+              {t("delegations.multiPool.totalOfSuffix")}
             </h3>
           )}
           <div className='flex items-center gap-1'>
@@ -116,6 +119,7 @@ export const MultiPoolDelegatorsPage = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={multiPoolDelegatorsTableOptions.map(col => ({
                 label: t(`common:tableSettings.${col.key}`),
                 isVisible: columnsVisibility[col.key],
@@ -139,6 +143,10 @@ export const MultiPoolDelegatorsPage = () => {
           )}
           onOrderChange={setColumsOrder}
           scrollable
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </section>
     </PageBase>

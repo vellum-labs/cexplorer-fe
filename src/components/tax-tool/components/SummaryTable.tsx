@@ -80,7 +80,9 @@ export const SummaryTable: FC<SummaryTableProps> = ({
       epochs: t("taxTool.columns.epochs"),
       rewards_ada: t("taxTool.columns.rewardsAda"),
       rewards_usd: t("taxTool.columns.rewardsUsd"),
-      rewards_secondary: t("taxTool.columns.rewardsCurrency", { currency: secondaryCurrency.toUpperCase() }),
+      rewards_secondary: t("taxTool.columns.rewardsCurrency", {
+        currency: secondaryCurrency.toUpperCase(),
+      }),
     }),
     [secondaryCurrency, t],
   );
@@ -182,7 +184,9 @@ export const SummaryTable: FC<SummaryTableProps> = ({
                 className='flex cursor-help items-center gap-1'
                 style={{ pointerEvents: "auto" }}
               >
-                {t("taxTool.columns.rewardsCurrency", { currency: secondaryCurrency.toUpperCase() })}
+                {t("taxTool.columns.rewardsCurrency", {
+                  currency: secondaryCurrency.toUpperCase(),
+                })}
                 <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
               </div>
             </Tooltip>
@@ -263,6 +267,7 @@ export const SummaryTable: FC<SummaryTableProps> = ({
           <TableSettingsDropdown
             rows={itemsPerPage}
             setRows={handleRowsChange}
+            rowsLabel={t("table.rows")}
             columnsOptions={columnsOptions}
           />
           <ExportButton
@@ -281,6 +286,10 @@ export const SummaryTable: FC<SummaryTableProps> = ({
         items={paginatedData}
         columns={columns}
         disableDrag
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
       {totalItems > itemsPerPage && (
         <Pagination

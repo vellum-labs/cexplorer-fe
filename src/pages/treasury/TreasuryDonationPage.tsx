@@ -86,7 +86,9 @@ export const TreasuryDonationPage = () => {
           <div className='mt-2 flex h-full w-full flex-col items-center overflow-hidden p-1.5'>
             <h3>{t("treasuryDonations.success.title")} ❤️</h3>
             <div className='mt-4 flex w-full flex-col items-center gap-2'>
-              <p className='text-text-sm'>{t("treasuryDonations.success.txHashLabel")}</p>
+              <p className='text-text-sm'>
+                {t("treasuryDonations.success.txHashLabel")}
+              </p>
               <div className='flex items-center gap-1'>
                 <Link
                   to='/tx/$hash'

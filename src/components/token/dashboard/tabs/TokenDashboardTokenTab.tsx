@@ -395,7 +395,11 @@ export const TokenDashboardTokenTab: FC = () => {
           </div>
         );
       },
-      title: <span className='flex w-full justify-end'>{t("tokenDashboard.columns.buy")}</span>,
+      title: (
+        <span className='flex w-full justify-end'>
+          {t("tokenDashboard.columns.buy")}
+        </span>
+      ),
       visible: columnsVisibility.buy,
       widthPx: 40,
     },
@@ -424,6 +428,7 @@ export const TokenDashboardTokenTab: FC = () => {
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("table.rows")}
                 columnsOptions={tokenDashboardListTableOptions.map(item => {
                   return {
                     label: t(`common:tableSettings.${item.key}`),
@@ -454,6 +459,7 @@ export const TokenDashboardTokenTab: FC = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("table.rows")}
               columnsOptions={tokenDashboardListTableOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),
@@ -481,6 +487,10 @@ export const TokenDashboardTokenTab: FC = () => {
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </>
   );

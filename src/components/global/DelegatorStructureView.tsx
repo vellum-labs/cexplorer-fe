@@ -132,6 +132,7 @@ export const DelegatorStructureView: FC<DelegatorStructureViewProps> = ({
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("table.rows")}
               columnsOptions={tableOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),

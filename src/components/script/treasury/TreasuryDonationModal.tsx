@@ -67,7 +67,8 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
 
         <div className='flex flex-col gap-1'>
           <label className='text-text-sm font-medium'>
-            {t("treasury.modal.amountLabel")} <span className='text-redText'>*</span>
+            {t("treasury.modal.amountLabel")}{" "}
+            <span className='text-redText'>*</span>
           </label>
           <TextInput
             inputClassName='h-10'
@@ -79,7 +80,9 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
         </div>
 
         <div className='flex flex-col gap-1'>
-          <label className='text-text-sm font-medium'>{t("treasury.modal.commentLabel")}</label>
+          <label className='text-text-sm font-medium'>
+            {t("treasury.modal.commentLabel")}
+          </label>
           <textarea
             className='h-20 w-full rounded-m border border-border bg-background px-2 py-1.5 text-text-sm outline-none focus:border-primary'
             value={comment}
@@ -94,7 +97,9 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
 
         <div className='flex flex-col gap-2'>
           <label className='text-text-sm font-medium'>
-            {t("treasury.modal.cexplorerSupport", { percentage: cexplorerPercentage })}
+            {t("treasury.modal.cexplorerSupport", {
+              percentage: cexplorerPercentage,
+            })}
           </label>
           <RangeSlider
             min={0}
@@ -110,7 +115,9 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
 
         {isValidAmount && (
           <div className='rounded-m border border-border bg-cardBg p-1.5'>
-            <p className='mb-1 text-text-sm font-medium'>{t("treasury.modal.donationSplit")}</p>
+            <p className='mb-1 text-text-sm font-medium'>
+              {t("treasury.modal.donationSplit")}
+            </p>
             <div className='flex flex-col gap-1/2 text-text-sm text-grayTextPrimary'>
               <div className='flex justify-between'>
                 <span>{t("treasury.modal.treasury")}</span>
@@ -146,7 +153,11 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
               forceDirection='top'
             >
               <Button
-                label={isSubmitting ? t("treasury.modal.submitting") : t("treasury.modal.donate")}
+                label={
+                  isSubmitting
+                    ? t("treasury.modal.submitting")
+                    : t("treasury.modal.donate")
+                }
                 size='lg'
                 variant='primary'
                 leftIcon={<Wallet />}

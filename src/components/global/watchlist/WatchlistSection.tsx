@@ -59,7 +59,9 @@ export const WatchlistSection = ({
 
   const getDelegateLabel = () => {
     if (isPool) {
-      return !ticker ? t("global.watchlist.delegate") : t("global.watchlist.delegateTo", { ticker });
+      return !ticker
+        ? t("global.watchlist.delegate")
+        : t("global.watchlist.delegateTo", { ticker });
     }
 
     if (!isDrep) return "";
@@ -136,7 +138,12 @@ export const WatchlistSection = ({
         />
       )}
       {!isPoolRetiredOrRetiring && (
-        <Button label={t("global.watchlist.promote")} variant='tertiary' size='md' href='/pro' />
+        <Button
+          label={t("global.watchlist.promote")}
+          variant='tertiary'
+          size='md'
+          href='/pro'
+        />
       )}
       {(isPool || isDrep) && !isPoolRetiredOrRetiring && (
         <Button

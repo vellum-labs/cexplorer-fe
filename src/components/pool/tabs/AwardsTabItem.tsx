@@ -176,7 +176,8 @@ export const AwardsTabItem: FC<AwardsTabItemProps> = ({ id }) => {
               <AdaWithTooltip data={item.detail.epoch_stake} />
             </div>
             <div className='flex flex-col'>
-              <span>{t("pool.awards.delegators")}:</span> {item.detail.delegator}
+              <span>{t("pool.awards.delegators")}:</span>{" "}
+              {item.detail.delegator}
             </div>
           </>
         );
@@ -197,32 +198,33 @@ export const AwardsTabItem: FC<AwardsTabItemProps> = ({ id }) => {
             </div>
           ))
         : awards?.map((item, i) => {
-              const categoryLabel = t(`pool.awards.categories.${item.category}`);
-              const typeLabel = String(item.type).replace("_", " ");
-              return (
-            <div
-              key={`${item.time}_${i}`}
-              className='flex flex-col gap-1/2 rounded-m border border-border bg-cardBg px-1.5 py-1'
-            >
-              <img
-                src={imageMap[`${item.category}_${item.type}`]}
-                alt={`${categoryLabel} ${typeLabel}`}
-              />
-              <h3 className='text-center'>
-                {categoryLabel}{" "}
-                {typeLabel.slice(0, 1).toUpperCase() + typeLabel.slice(1)}
-              </h3>
-              <div className='mb-1/2 flex items-center justify-center gap-1'>
-                <Calendar size={12} className='text-grayTextPrimary' />
-                <span className='text-text-sm text-grayTextPrimary'>
-                  {format(new Date(item.time), "dd.MM.yyyy")}
-                </span>
+            const categoryLabel = t(`pool.awards.categories.${item.category}`);
+            const typeLabel = String(item.type).replace("_", " ");
+            return (
+              <div
+                key={`${item.time}_${i}`}
+                className='flex flex-col gap-1/2 rounded-m border border-border bg-cardBg px-1.5 py-1'
+              >
+                <img
+                  src={imageMap[`${item.category}_${item.type}`]}
+                  alt={`${categoryLabel} ${typeLabel}`}
+                />
+                <h3 className='text-center'>
+                  {categoryLabel}{" "}
+                  {typeLabel.slice(0, 1).toUpperCase() + typeLabel.slice(1)}
+                </h3>
+                <div className='mb-1/2 flex items-center justify-center gap-1'>
+                  <Calendar size={12} className='text-grayTextPrimary' />
+                  <span className='text-text-sm text-grayTextPrimary'>
+                    {format(new Date(item.time), "dd.MM.yyyy")}
+                  </span>
+                </div>
+                <div className='flex justify-between text-text-sm text-grayTextPrimary [&>div]:w-1/3'>
+                  {renderDetails(item)}
+                </div>
               </div>
-              <div className='flex justify-between text-text-sm text-grayTextPrimary [&>div]:w-1/3'>
-                {renderDetails(item)}
-              </div>
-            </div>
-          );})}
+            );
+          })}
     </div>
   );
 };

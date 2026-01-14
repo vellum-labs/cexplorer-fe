@@ -63,7 +63,7 @@ export const useBlockList = ({
   order,
   restSearch,
 }: BlockListArgs): UseBlockList => {
-  const { t } = useAppTranslation("pages");
+  const { t } = useAppTranslation(["pages", "common"]);
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { columnsVisibility, setColumnVisibility, rows } =
     useBlockListTableStore(storeKey)();
@@ -235,11 +235,13 @@ export const useBlockList = ({
         onShow: e => toggleFilter(e, "epoch_no"),
         onFilter: () => changeFilterByKey("epoch_no", +filterDraft.epoch_no),
         onReset: () => changeFilterByKey("epoch_no"),
+        resetLabel: t("common:actions.reset"),
+        filterLabel: t("common:actions.filter"),
         filterContent: (
           <div className='flex h-[60px] w-full items-center justify-center px-1'>
             <TextInput
               onchange={value => changeDraftFilter("epoch_no", value)}
-              placeholder='Filter by epoch...'
+              placeholder={t("common:blocks.filter.byEpoch")}
               value={filterDraft["epoch_no"] ?? ""}
               wrapperClassName='w-full'
             />
@@ -312,11 +314,13 @@ export const useBlockList = ({
         onShow: e => toggleFilter(e, "pool_id"),
         onFilter: () => changeFilterByKey("pool_id", filterDraft.pool_id),
         onReset: () => changeFilterByKey("pool_id"),
+        resetLabel: t("common:actions.reset"),
+        filterLabel: t("common:actions.filter"),
         filterContent: (
           <div className='flex h-[60px] w-full items-center justify-center px-1'>
             <TextInput
               onchange={value => changeDraftFilter("pool_id", value)}
-              placeholder='Filter by pool id...'
+              placeholder={t("common:blocks.filter.byPoolId")}
               value={filterDraft["pool_id"] ?? ""}
               wrapperClassName='w-full'
             />
@@ -397,6 +401,8 @@ export const useBlockList = ({
         onShow: e => toggleFilter(e, "proto"),
         onFilter: () => changeFilterByKey("proto", filterDraft.proto),
         onReset: () => changeFilterByKey("proto"),
+        resetLabel: t("common:actions.reset"),
+        filterLabel: t("common:actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             {(protocolVersions || []).map(version => (
@@ -420,7 +426,7 @@ export const useBlockList = ({
             ))}
             <TextInput
               onchange={value => changeDraftFilter("proto", value)}
-              placeholder='Custom protocol...'
+              placeholder={t("common:blocks.filter.customProtocol")}
               value={
                 !protocolVersions.includes(String(filterDraft["proto"]))
                   ? filterDraft["proto"]

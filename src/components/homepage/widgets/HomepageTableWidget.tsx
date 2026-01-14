@@ -229,6 +229,7 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
         <TableSettingsDropdown
           rows={0}
           setRows={() => {}}
+          rowsLabel={t("table.rows")}
           visibleRows={false}
           columnsOptions={
             columnsVisibility && setColumnVisibility && tableOptions

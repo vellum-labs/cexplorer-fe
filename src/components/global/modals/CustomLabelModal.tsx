@@ -102,7 +102,9 @@ export const CustomLabelModal = () => {
   return (
     <Modal minHeight='260px' minWidth='400px' maxWidth='95%' onClose={onClose}>
       <p className='mb-1 pr-4 font-medium'>
-        {isEdit() ? t("global.customLabel.editLabel") : t("global.customLabel.createNewLabel")}
+        {isEdit()
+          ? t("global.customLabel.editLabel")
+          : t("global.customLabel.createNewLabel")}
       </p>
       <TextInput
         placeholder={t("global.customLabel.address")}
@@ -137,7 +139,12 @@ export const CustomLabelModal = () => {
             className='ml-auto'
           />
         )}
-        <Button onClick={handleSave} variant='primary' size='md' label={t("actions.save")} />
+        <Button
+          onClick={handleSave}
+          variant='primary'
+          size='md'
+          label={t("actions.save")}
+        />
       </div>
     </Modal>
   );

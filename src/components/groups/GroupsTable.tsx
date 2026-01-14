@@ -42,7 +42,7 @@ export const GroupsTable = ({
   changeFilterByKey,
   query,
 }: GroupsTableProps) => {
-  const { t } = useAppTranslation("pages");
+  const { t } = useAppTranslation(["pages", "common"]);
 
   const columns: TableColumns<GroupsListData> = [
     {
@@ -253,7 +253,9 @@ export const GroupsTable = ({
 
         return (
           <span className='flex w-full justify-end'>
-            <Badge color='blue'>{t("groups.yes")}: {drepCount}x</Badge>
+            <Badge color='blue'>
+              {t("groups.yes")}: {drepCount}x
+            </Badge>
           </span>
         );
       },
@@ -267,6 +269,8 @@ export const GroupsTable = ({
         onShow: e => toggleFilter(e, "has_drep"),
         onFilter: () => changeFilterByKey("has_drep", filterDraft["has_drep"]),
         onReset: () => changeFilterByKey("has_drep"),
+        resetLabel: t("common:actions.reset"),
+        filterLabel: t("common:actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             <label className='flex items-center gap-1'>
@@ -311,6 +315,10 @@ export const GroupsTable = ({
       columns={columns}
       items={filteredItems}
       query={query}
+      renderDisplayText={(count, total) =>
+        t("common:table.displaying", { count, total })
+      }
+      noItemsLabel={t("common:table.noItems")}
     />
   );
 };

@@ -94,11 +94,7 @@ export const PoolRegistrationsPage = () => {
           <AdaWithTooltip data={item.tx.deposit} />
         </div>
       ),
-      title: (
-        <p className='w-full text-right'>
-          {t("common:labels.deposit")}
-        </p>
-      ),
+      title: <p className='w-full text-right'>{t("common:labels.deposit")}</p>,
       visible: columnsVisibility.deposit,
       widthPx: 40,
     },
@@ -109,11 +105,7 @@ export const PoolRegistrationsPage = () => {
           <AdaWithTooltip data={item.data.pledge} />
         </div>
       ),
-      title: (
-        <p className='w-full text-right'>
-          {t("common:labels.pledge")}
-        </p>
-      ),
+      title: <p className='w-full text-right'>{t("common:labels.pledge")}</p>,
       visible: columnsVisibility.pledge,
       widthPx: 40,
     },
@@ -125,11 +117,7 @@ export const PoolRegistrationsPage = () => {
           <AdaWithTooltip data={item.data.fixed_cost} />
         </div>
       ),
-      title: (
-        <p className='w-full text-right'>
-          {t("common:labels.fee")}
-        </p>
-      ),
+      title: <p className='w-full text-right'>{t("common:labels.fee")}</p>,
       visible: columnsVisibility.fee,
       widthPx: 50,
     },
@@ -163,9 +151,7 @@ export const PoolRegistrationsPage = () => {
         return `${item.block.epoch_no}/${item.block.no}`;
       },
       title: (
-        <p className='w-full text-right'>
-          {t("common:labels.epochBlock")}
-        </p>
+        <p className='w-full text-right'>{t("common:labels.epochBlock")}</p>
       ),
       visible: columnsVisibility.epoch_block,
       widthPx: 40,
@@ -199,6 +185,7 @@ export const PoolRegistrationsPage = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={poolRegistrationsTableOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),
@@ -225,6 +212,10 @@ export const PoolRegistrationsPage = () => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </section>
     </PageBase>

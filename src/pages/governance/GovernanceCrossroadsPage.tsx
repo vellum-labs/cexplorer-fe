@@ -1,5 +1,12 @@
 import { PageBase } from "@/components/global/pages/PageBase";
-import { User, Send, FileText, Building, Gauge, ScrollText } from "lucide-react";
+import {
+  User,
+  Send,
+  FileText,
+  Building,
+  Gauge,
+  ScrollText,
+} from "lucide-react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 
@@ -19,8 +26,14 @@ const governanceSectionsConfig: GovernanceSection[] = [
     labelKey: "governanceCrossroads.sections.dreps.label",
     descriptionKey: "governanceCrossroads.sections.dreps.description",
     sections: [
-      { labelKey: "governanceCrossroads.sections.dreps.viewAll", href: "/drep" },
-      { labelKey: "governanceCrossroads.sections.dreps.analytics", href: "/drep?tab=analytics" },
+      {
+        labelKey: "governanceCrossroads.sections.dreps.viewAll",
+        href: "/drep",
+      },
+      {
+        labelKey: "governanceCrossroads.sections.dreps.analytics",
+        href: "/drep?tab=analytics",
+      },
     ],
     icon: <User className='text-primary' />,
   },
@@ -69,9 +82,18 @@ const governanceSectionsConfig: GovernanceSection[] = [
     labelKey: "governanceCrossroads.sections.certificates.label",
     descriptionKey: "governanceCrossroads.sections.certificates.description",
     sections: [
-      { labelKey: "governanceCrossroads.sections.certificates.registrations", href: "/drep/registrations" },
-      { labelKey: "governanceCrossroads.sections.certificates.deregistrations", href: "/drep/deregistrations" },
-      { labelKey: "governanceCrossroads.sections.certificates.updates", href: "/drep/updates" },
+      {
+        labelKey: "governanceCrossroads.sections.certificates.registrations",
+        href: "/drep/registrations",
+      },
+      {
+        labelKey: "governanceCrossroads.sections.certificates.deregistrations",
+        href: "/drep/deregistrations",
+      },
+      {
+        labelKey: "governanceCrossroads.sections.certificates.updates",
+        href: "/drep/updates",
+      },
     ],
     icon: <FileText className='text-primary' />,
   },
@@ -88,7 +110,7 @@ export const GovernanceCrossroadsPage = () => {
     >
       <section className='mt-2 w-full max-w-desktop px-mobile pb-3 md:px-desktop'>
         <div className='grid grid-cols-1 gap-3 md:grid-cols-2'>
-          {governanceSectionsConfig.map((section) => (
+          {governanceSectionsConfig.map(section => (
             <div
               key={section.key}
               className='flex flex-col rounded-l border border-border px-3 py-2 font-medium'
@@ -112,8 +134,7 @@ export const GovernanceCrossroadsPage = () => {
                       key={subIndex}
                       href={subsection.href as any}
                       variant={
-                        section.key === "dreps" &&
-                        subIndex === 0
+                        section.key === "dreps" && subIndex === 0
                           ? "primary"
                           : "tertiary"
                       }

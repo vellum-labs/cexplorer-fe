@@ -137,7 +137,11 @@ export const AssetExchangesLiquidity: FC<AssetExchangesLiquidityProps> = ({
           </div>
         );
       },
-      title: <p className='w-full text-right'>{t("asset.tokenPooled", { ticker })}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("asset.tokenPooled", { ticker })}
+        </p>
+      ),
       visible: true,
       widthPx: 120,
     },
@@ -203,6 +207,10 @@ export const AssetExchangesLiquidity: FC<AssetExchangesLiquidityProps> = ({
         minContentWidth={500}
         items={items}
         columns={columns}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </div>
   );

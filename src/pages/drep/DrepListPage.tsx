@@ -220,9 +220,7 @@ export const DrepListPage = () => {
       title={t("dreps.title")}
       breadcrumbItems={[
         {
-          label: (
-            <span className='inline pt-1/2'>{t("governance.title")}</span>
-          ),
+          label: <span className='inline pt-1/2'>{t("governance.title")}</span>,
           link: "/gov",
         },
         { label: t("dreps.breadcrumb") },

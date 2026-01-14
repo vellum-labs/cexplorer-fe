@@ -20,14 +20,14 @@ export const AnalyticsPage = () => {
   const { t } = useAppTranslation();
 
   const optionLabelMap: Record<string, string> = {
-    "Blocks": t("analyticsPage.options.blocks"),
+    Blocks: t("analyticsPage.options.blocks"),
     "Block versions": t("analyticsPage.options.blockVersions"),
     "Energy constumption": t("analyticsPage.options.energyConsumption"),
-    "Health": t("analyticsPage.options.health"),
-    "Storage": t("analyticsPage.options.storage"),
-    "Transactions": t("analyticsPage.options.transactions"),
-    "Hardfork": t("analyticsPage.options.hardfork"),
-    "Pots": t("analyticsPage.options.pots"),
+    Health: t("analyticsPage.options.health"),
+    Storage: t("analyticsPage.options.storage"),
+    Transactions: t("analyticsPage.options.transactions"),
+    Hardfork: t("analyticsPage.options.hardfork"),
+    Pots: t("analyticsPage.options.pots"),
     "Treasury projection": t("analyticsPage.options.treasuryProjection"),
     "Wallet activity": t("analyticsPage.options.walletActivity"),
     "Top addresses": t("analyticsPage.options.topAddresses"),
@@ -36,26 +36,37 @@ export const AnalyticsPage = () => {
     "Genesis addresses": t("analyticsPage.options.genesisAddresses"),
     "Pool issues": t("analyticsPage.options.poolIssues"),
     "Average pools": t("analyticsPage.options.averagePools"),
-    "Ranklist": t("analyticsPage.options.ranklist"),
-    "Interactions": t("analyticsPage.options.interactions"),
-    "TVL": t("analyticsPage.options.tvl"),
+    Ranklist: t("analyticsPage.options.ranklist"),
+    Interactions: t("analyticsPage.options.interactions"),
+    TVL: t("analyticsPage.options.tvl"),
   };
 
-  const translateOptions = (opts: typeof nestedNavigationOptions.analyticsOptions.network.options) =>
-    opts.map(opt => ({ ...opt, label: optionLabelMap[opt.label] || opt.label }));
+  const translateOptions = (
+    opts: typeof nestedNavigationOptions.analyticsOptions.network.options,
+  ) =>
+    opts.map(opt => ({
+      ...opt,
+      label: optionLabelMap[opt.label] || opt.label,
+    }));
 
   const options = {
     pools: {
       label: t("analyticsPage.categories.pools"),
-      options: translateOptions(nestedNavigationOptions.analyticsOptions.pools.options),
+      options: translateOptions(
+        nestedNavigationOptions.analyticsOptions.pools.options,
+      ),
     },
     dapps: {
       label: t("analyticsPage.categories.dapps"),
-      options: translateOptions(nestedNavigationOptions.analyticsOptions.dapps.options),
+      options: translateOptions(
+        nestedNavigationOptions.analyticsOptions.dapps.options,
+      ),
     },
     accounts: {
       label: t("analyticsPage.categories.accounts"),
-      options: translateOptions(nestedNavigationOptions.analyticsOptions.accounts.options),
+      options: translateOptions(
+        nestedNavigationOptions.analyticsOptions.accounts.options,
+      ),
     },
     network: {
       label: t("analyticsPage.categories.network"),

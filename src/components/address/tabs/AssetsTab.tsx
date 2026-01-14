@@ -204,8 +204,12 @@ export const AssetsTab: FC<AssetsTabProps> = ({
               )}
               <span className='text-text-xs text-grayTextPrimary'>
                 {activeAsset === "nfts"
-                  ? t("address.displayingNfts", { count: filteredAssets.length })
-                  : t("address.displayingTokens", { count: filteredAssets.length })}
+                  ? t("address.displayingNfts", {
+                      count: filteredAssets.length,
+                    })
+                  : t("address.displayingTokens", {
+                      count: filteredAssets.length,
+                    })}
               </span>
             </div>
             <div className='flex flex-grow items-center gap-1 sm:flex-grow-0'>
@@ -220,6 +224,7 @@ export const AssetsTab: FC<AssetsTabProps> = ({
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("table.rows")}
                 columnsOptions={
                   options.map(item => {
                     return {

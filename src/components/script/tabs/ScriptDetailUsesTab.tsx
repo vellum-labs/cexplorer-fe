@@ -200,6 +200,7 @@ export const ScriptDetailUsesTab = () => {
           <TableSettingsDropdown
             rows={rows}
             setRows={setRows}
+            rowsLabel={t("table.rows")}
             columnsOptions={scriptDetailUsesTableOptions.map(item => {
               return {
                 label: t(`common:tableSettings.${item.key}`),
@@ -228,6 +229,10 @@ export const ScriptDetailUsesTab = () => {
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </div>
   );

@@ -71,13 +71,19 @@ export const DrepAnalyticsTab: FC<DrepAnalyticsTabProps> = ({ query }) => {
   const governancePieData = [
     { value: abstain, name: t("dreps.analytics.pie.abstainDrep") },
     { value: noConfidence, name: t("dreps.analytics.pie.noConfidenceDrep") },
-    { value: delegatedToDreps, name: t("dreps.analytics.pie.delegatedToDreps") },
+    {
+      value: delegatedToDreps,
+      name: t("dreps.analytics.pie.delegatedToDreps"),
+    },
   ];
 
   const activeVotingPieData = [
     { value: abstain, name: t("dreps.analytics.pie.abstainNotActive") },
     { value: noConfidence, name: t("dreps.analytics.pie.noConfidence") },
-    { value: delegatedToDreps, name: t("dreps.analytics.pie.delegatedToDreps") },
+    {
+      value: delegatedToDreps,
+      name: t("dreps.analytics.pie.delegatedToDreps"),
+    },
   ];
 
   const governanceOption = {

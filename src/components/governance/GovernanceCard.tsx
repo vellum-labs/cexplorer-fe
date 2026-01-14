@@ -76,10 +76,18 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
                   voteLabel: t("sdk:votingBreakdownTooltip.voteLabel"),
                   votersLabel: t("sdk:votingBreakdownTooltip.votersLabel"),
                   voterLabel: t("sdk:votingBreakdownTooltip.voterLabel"),
-                  delegatorsLabel: t("sdk:votingBreakdownTooltip.delegatorsLabel"),
-                  noConfidenceLabel: t("sdk:votingBreakdownTooltip.noConfidenceLabel"),
-                  autoAbstainStakeLabel: t("sdk:votingBreakdownTooltip.autoAbstainStakeLabel"),
-                  manualAbstainStakeLabel: t("sdk:votingBreakdownTooltip.manualAbstainStakeLabel"),
+                  delegatorsLabel: t(
+                    "sdk:votingBreakdownTooltip.delegatorsLabel",
+                  ),
+                  noConfidenceLabel: t(
+                    "sdk:votingBreakdownTooltip.noConfidenceLabel",
+                  ),
+                  autoAbstainStakeLabel: t(
+                    "sdk:votingBreakdownTooltip.autoAbstainStakeLabel",
+                  ),
+                  manualAbstainStakeLabel: t(
+                    "sdk:votingBreakdownTooltip.manualAbstainStakeLabel",
+                  ),
                 }}
               />
             </div>
@@ -115,10 +123,18 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
                     voteLabel: t("sdk:votingBreakdownTooltip.voteLabel"),
                     votersLabel: t("sdk:votingBreakdownTooltip.votersLabel"),
                     voterLabel: t("sdk:votingBreakdownTooltip.voterLabel"),
-                    delegatorsLabel: t("sdk:votingBreakdownTooltip.delegatorsLabel"),
-                    noConfidenceLabel: t("sdk:votingBreakdownTooltip.noConfidenceLabel"),
-                    autoAbstainStakeLabel: t("sdk:votingBreakdownTooltip.autoAbstainStakeLabel"),
-                    manualAbstainStakeLabel: t("sdk:votingBreakdownTooltip.manualAbstainStakeLabel"),
+                    delegatorsLabel: t(
+                      "sdk:votingBreakdownTooltip.delegatorsLabel",
+                    ),
+                    noConfidenceLabel: t(
+                      "sdk:votingBreakdownTooltip.noConfidenceLabel",
+                    ),
+                    autoAbstainStakeLabel: t(
+                      "sdk:votingBreakdownTooltip.autoAbstainStakeLabel",
+                    ),
+                    manualAbstainStakeLabel: t(
+                      "sdk:votingBreakdownTooltip.manualAbstainStakeLabel",
+                    ),
                   }}
                 />
               </div>
@@ -140,10 +156,18 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
                     voteLabel: t("sdk:votingBreakdownTooltip.voteLabel"),
                     votersLabel: t("sdk:votingBreakdownTooltip.votersLabel"),
                     voterLabel: t("sdk:votingBreakdownTooltip.voterLabel"),
-                    delegatorsLabel: t("sdk:votingBreakdownTooltip.delegatorsLabel"),
-                    noConfidenceLabel: t("sdk:votingBreakdownTooltip.noConfidenceLabel"),
-                    autoAbstainStakeLabel: t("sdk:votingBreakdownTooltip.autoAbstainStakeLabel"),
-                    manualAbstainStakeLabel: t("sdk:votingBreakdownTooltip.manualAbstainStakeLabel"),
+                    delegatorsLabel: t(
+                      "sdk:votingBreakdownTooltip.delegatorsLabel",
+                    ),
+                    noConfidenceLabel: t(
+                      "sdk:votingBreakdownTooltip.noConfidenceLabel",
+                    ),
+                    autoAbstainStakeLabel: t(
+                      "sdk:votingBreakdownTooltip.autoAbstainStakeLabel",
+                    ),
+                    manualAbstainStakeLabel: t(
+                      "sdk:votingBreakdownTooltip.manualAbstainStakeLabel",
+                    ),
                   }}
                 />
               </div>
@@ -165,10 +189,18 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
                     voteLabel: t("sdk:votingBreakdownTooltip.voteLabel"),
                     votersLabel: t("sdk:votingBreakdownTooltip.votersLabel"),
                     voterLabel: t("sdk:votingBreakdownTooltip.voterLabel"),
-                    delegatorsLabel: t("sdk:votingBreakdownTooltip.delegatorsLabel"),
-                    noConfidenceLabel: t("sdk:votingBreakdownTooltip.noConfidenceLabel"),
-                    autoAbstainStakeLabel: t("sdk:votingBreakdownTooltip.autoAbstainStakeLabel"),
-                    manualAbstainStakeLabel: t("sdk:votingBreakdownTooltip.manualAbstainStakeLabel"),
+                    delegatorsLabel: t(
+                      "sdk:votingBreakdownTooltip.delegatorsLabel",
+                    ),
+                    noConfidenceLabel: t(
+                      "sdk:votingBreakdownTooltip.noConfidenceLabel",
+                    ),
+                    autoAbstainStakeLabel: t(
+                      "sdk:votingBreakdownTooltip.autoAbstainStakeLabel",
+                    ),
+                    manualAbstainStakeLabel: t(
+                      "sdk:votingBreakdownTooltip.manualAbstainStakeLabel",
+                    ),
                   }}
                 />
               </div>

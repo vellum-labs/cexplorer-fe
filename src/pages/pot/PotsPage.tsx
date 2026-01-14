@@ -204,6 +204,7 @@ export const PotsPage = () => {
                   <TableSettingsDropdown
                     rows={rows}
                     setRows={setRows}
+                    rowsLabel={t("table.rows")}
                     columnsOptions={adaPotsTableOptions.map(item => {
                       return {
                         label: t(`tableSettings.${item.key}`),
@@ -234,6 +235,7 @@ export const PotsPage = () => {
                 <TableSettingsDropdown
                   rows={rows}
                   setRows={setRows}
+                  rowsLabel={t("table.rows")}
                   columnsOptions={adaPotsTableOptions.map(item => {
                     return {
                       label: t(`tableSettings.${item.key}`),
@@ -267,6 +269,10 @@ export const PotsPage = () => {
               );
             })}
             onOrderChange={setColumsOrder}
+            renderDisplayText={(count, total) =>
+              t("table.displaying", { count, total })
+            }
+            noItemsLabel={t("table.noItems")}
           />
         </section>
       </main>
@@ -335,7 +341,14 @@ const AdaPotsChart = ({ data }: { data: AdaPot[] | undefined }) => {
           color: textColor,
         },
         type: "scroll",
-        data: [chartLabels.treasury, chartLabels.reserves, chartLabels.rewards, chartLabels.utxo, chartLabels.deposits, chartLabels.fees],
+        data: [
+          chartLabels.treasury,
+          chartLabels.reserves,
+          chartLabels.rewards,
+          chartLabels.utxo,
+          chartLabels.deposits,
+          chartLabels.fees,
+        ],
         textStyle: {
           color: textColor,
         },

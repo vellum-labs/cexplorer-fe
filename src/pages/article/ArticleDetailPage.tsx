@@ -147,7 +147,9 @@ export const ArticleDetailPage = () => {
                   {renderArticleAuthor(data?.user_owner)}
                 </div>
                 <div className='flex flex-col text-text-sm'>
-                  <span className='text-grayTextPrimary'>{t("articlePage.published")}</span>
+                  <span className='text-grayTextPrimary'>
+                    {t("articlePage.published")}
+                  </span>
                   <span>
                     {data?.pub_date ? formatDate(data?.pub_date) : "-"}
                   </span>
@@ -176,7 +178,9 @@ export const ArticleDetailPage = () => {
                 <h3>{t("articlePage.author")}</h3>
                 <h2>{renderArticleAuthor(data?.user_owner)}</h2>
                 <div className='flex w-full items-center justify-between gap-1.5 text-text-sm text-grayTextSecondary'>
-                  <span className='inline-block text-nowrap'>{t("articlePage.stakePool")}</span>
+                  <span className='inline-block text-nowrap'>
+                    {t("articlePage.stakePool")}
+                  </span>
                   {data?.user_owner?.pool?.meta?.ticker ? (
                     <Link
                       to='/pool/$id'
@@ -198,7 +202,9 @@ export const ArticleDetailPage = () => {
                   )}
                 </div>
                 <div className='flex w-full items-center justify-between gap-1.5 text-text-sm text-grayTextSecondary [&>div]:w-[60%]'>
-                  <span className='inline-block text-nowrap'>{t("articlePage.drep")}</span>
+                  <span className='inline-block text-nowrap'>
+                    {t("articlePage.drep")}
+                  </span>
                   {data?.user_owner?.drep?.meta?.given_name ? (
                     <Link
                       to='/drep/$hash'
@@ -221,7 +227,9 @@ export const ArticleDetailPage = () => {
                 </div>
                 {data?.user_owner?.profile?.social && (
                   <div className='flex w-full items-center justify-between gap-1.5 text-text-sm text-grayTextSecondary'>
-                    <span className='inline-block text-nowrap'>{t("articlePage.socials")}</span>
+                    <span className='inline-block text-nowrap'>
+                      {t("articlePage.socials")}
+                    </span>
                     <div className='flex items-center gap-2'>
                       {!isEmptySocial(data.user_owner.profile.social.xcom) && (
                         <a
@@ -271,9 +279,13 @@ export const ArticleDetailPage = () => {
                     <Button
                       size='sm'
                       variant='primary'
-                      label={data?.user_owner?.pool?.meta?.ticker
-                        ? t("articlePage.delegateTo", { name: `[${data?.user_owner?.pool?.meta?.ticker}]` })
-                        : t("articlePage.delegateToPool")}
+                      label={
+                        data?.user_owner?.pool?.meta?.ticker
+                          ? t("articlePage.delegateTo", {
+                              name: `[${data?.user_owner?.pool?.meta?.ticker}]`,
+                            })
+                          : t("articlePage.delegateToPool")
+                      }
                       onClick={() => {
                         if (data?.user_owner?.pool?.id) {
                           handleDelegation(

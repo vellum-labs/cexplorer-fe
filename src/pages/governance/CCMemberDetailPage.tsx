@@ -1,11 +1,10 @@
 import { PageBase } from "@/components/global/pages/PageBase";
 import { getRouteApi } from "@tanstack/react-router";
-import { useFetchCCMemberDetail, useFetchCCMemberVote } from "@/services/governance";
 import {
-  HeaderBannerSubtitle,
-  Image,
-  Tabs,
-} from "@vellumlabs/cexplorer-sdk";
+  useFetchCCMemberDetail,
+  useFetchCCMemberVote,
+} from "@/services/governance";
+import { HeaderBannerSubtitle, Image, Tabs } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { CCMemberDetailOverview } from "@/components/gov/cc/CCMemberDetailOverview";
@@ -27,7 +26,13 @@ export const CCMemberDetailPage = () => {
     : data?.data;
 
   const hotKey = memberData?.ident?.hot;
-  const votesQuery = useFetchCCMemberVote(1000, 0, undefined, hotKey, undefined);
+  const votesQuery = useFetchCCMemberVote(
+    1000,
+    0,
+    undefined,
+    hotKey,
+    undefined,
+  );
 
   const tabItems = [
     {
@@ -108,12 +113,16 @@ export const CCMemberDetailPage = () => {
       }
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>{t("gov.cc.governance")}</span>,
+          label: (
+            <span className='inline pt-1/2'>{t("gov.cc.governance")}</span>
+          ),
           link: "/gov",
         },
         {
           label: (
-            <span className='inline pt-1/2'>{t("gov.cc.constitutionalCommittee")}</span>
+            <span className='inline pt-1/2'>
+              {t("gov.cc.constitutionalCommittee")}
+            </span>
           ),
           link: "/gov/cc",
         },

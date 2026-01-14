@@ -110,7 +110,8 @@ export const PowerThresholdsDRepDelegationDonutGraph: FC<
       </div>
       <div className='mt-13 text-center text-text-sm text-grayTextPrimary'>
         <p>
-          {t("governance.delegation.drepCount")} {currentDRepEpoch?.stat?.drep_distr?.count_uniq ?? "–"}
+          {t("governance.delegation.drepCount")}{" "}
+          {currentDRepEpoch?.stat?.drep_distr?.count_uniq ?? "–"}
         </p>
       </div>
     </div>

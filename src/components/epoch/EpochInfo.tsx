@@ -45,7 +45,9 @@ export const EpochInfo: FC<EpochInfoProps> = ({ number, data }) => {
         <div className='absolute left-2'>
           <PulseDot />
         </div>
-        <span className='text-text-xs font-medium'>{t("epochs.info.currentEpoch")}</span>
+        <span className='text-text-xs font-medium'>
+          {t("epochs.info.currentEpoch")}
+        </span>
       </div>
       <span className='text-display-md font-semibold'>{number}</span>
       <div className='flex flex-col'>
@@ -78,7 +80,9 @@ export const EpochInfo: FC<EpochInfoProps> = ({ number, data }) => {
         <div className='flex items-center justify-between text-[#98A2B3]'>
           <span className='text-text-xs'>{t("epochs.info.start")}</span>
           <span className='text-text-xs'>
-            {formatRemainingTime(timeLeft) ? t("epochs.info.left") : t("epochs.info.arrived")}
+            {formatRemainingTime(timeLeft)
+              ? t("epochs.info.left")
+              : t("epochs.info.arrived")}
           </span>
         </div>
       </div>

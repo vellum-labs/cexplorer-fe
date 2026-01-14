@@ -395,14 +395,18 @@ const HardforkPage: FC = () => {
         data: [
           {
             value: poolsByDayMax?.count ?? 0,
-            name: t("hardfork.charts.version", { version: poolsByDayMax?.version }),
+            name: t("hardfork.charts.version", {
+              version: poolsByDayMax?.version,
+            }),
             itemStyle: {
               color: "#067647",
             },
           },
           {
             value: poolsByDayMin?.count ?? 0,
-            name: t("hardfork.charts.version", { version: poolsByDayMin?.version }),
+            name: t("hardfork.charts.version", {
+              version: poolsByDayMin?.version,
+            }),
             itemStyle: {
               color: "#B42318",
             },
@@ -450,14 +454,18 @@ const HardforkPage: FC = () => {
         data: [
           {
             value: poolsByFiveDayMax?.count ?? 0,
-            name: t("hardfork.charts.version", { version: poolsByFiveDayMax?.version }),
+            name: t("hardfork.charts.version", {
+              version: poolsByFiveDayMax?.version,
+            }),
             itemStyle: {
               color: "#067647",
             },
           },
           {
             value: poolsByFiveDayMin?.count ?? 0,
-            name: t("hardfork.charts.version", { version: poolsByFiveDayMin?.version }),
+            name: t("hardfork.charts.version", {
+              version: poolsByFiveDayMin?.version,
+            }),
             itemStyle: {
               color: "#B42318",
             },
@@ -476,7 +484,9 @@ const HardforkPage: FC = () => {
           <ReactEcharts option={status} />
         </div>
       ),
-      extraTitle: <p className='lg:w-full'>{t("hardfork.charts.exchangeReadiness")}</p>,
+      extraTitle: (
+        <p className='lg:w-full'>{t("hardfork.charts.exchangeReadiness")}</p>
+      ),
       visible: true,
     },
     {
@@ -487,7 +497,9 @@ const HardforkPage: FC = () => {
           <ReactEcharts option={statusByLiquidity} />
         </div>
       ),
-      extraTitle: <p className='lg:w-full'>{t("hardfork.charts.exchangeReadiness")}</p>,
+      extraTitle: (
+        <p className='lg:w-full'>{t("hardfork.charts.exchangeReadiness")}</p>
+      ),
       visible: true,
     },
   ];
@@ -501,7 +513,9 @@ const HardforkPage: FC = () => {
           <ReactEcharts option={countByDayOption} />
         </div>
       ),
-      extraTitle: <p className='lg:w-full'>{t("hardfork.charts.blockProduction")}</p>,
+      extraTitle: (
+        <p className='lg:w-full'>{t("hardfork.charts.blockProduction")}</p>
+      ),
       visible: true,
     },
     {
@@ -512,7 +526,9 @@ const HardforkPage: FC = () => {
           <ReactEcharts option={countBy5DayOption} />
         </div>
       ),
-      extraTitle: <p className='lg:w-full'>{t("hardfork.charts.blockProduction")}</p>,
+      extraTitle: (
+        <p className='lg:w-full'>{t("hardfork.charts.blockProduction")}</p>
+      ),
       visible: true,
     },
   ];
@@ -545,7 +561,9 @@ const HardforkPage: FC = () => {
                 <Tabs items={exhcangeTabItems} tabParam='exchange' toRight />
               ) : (
                 <div className='my-3 flex w-full max-w-desktop flex-col px-mobile md:px-desktop'>
-                  <p className='mb-3 h-[37.6px] w-full'>{t("hardfork.charts.exchangeReadiness")}</p>
+                  <p className='mb-3 h-[37.6px] w-full'>
+                    {t("hardfork.charts.exchangeReadiness")}
+                  </p>
                   <div className='h-full w-full'>
                     <ReactEcharts option={status} />
                   </div>
@@ -672,6 +690,10 @@ const HardforkPage: FC = () => {
               );
             })}
             onOrderChange={setColumsOrder}
+            renderDisplayText={(count, total) =>
+              t("table.displaying", { count, total })
+            }
+            noItemsLabel={t("table.noItems")}
           />
         )}
       </section>

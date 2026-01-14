@@ -115,7 +115,10 @@ const EpochDetailPage: FC = () => {
         after: no,
       }}
       title={t("epochs.detail")}
-      breadcrumbItems={[{ label: t("epochs.title"), link: "/epoch" }, { label: no }]}
+      breadcrumbItems={[
+        { label: t("epochs.title"), link: "/epoch" },
+        { label: no },
+      ]}
       homepageAd
     >
       {futureStartTime && futureEndTime ? (

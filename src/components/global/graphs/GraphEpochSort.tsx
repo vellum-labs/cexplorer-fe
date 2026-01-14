@@ -41,8 +41,10 @@ export const GraphEpochSort = ({
 
   const getLabel = (daysInEpoch: number, epoch: number) => {
     const days = daysInEpoch * epoch;
-    const daysLabel = days > 1 ? t("global.graphSort.days") : t("global.graphSort.day");
-    const epochsLabel = epoch > 1 ? t("global.graphSort.epochs") : t("global.graphSort.epoch");
+    const daysLabel =
+      days > 1 ? t("global.graphSort.days") : t("global.graphSort.day");
+    const epochsLabel =
+      epoch > 1 ? t("global.graphSort.epochs") : t("global.graphSort.epoch");
     return `${days} ${daysLabel} (${epoch} ${epochsLabel})`;
   };
 

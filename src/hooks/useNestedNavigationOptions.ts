@@ -218,7 +218,7 @@ export const useNestedNavigationOptions = () => {
         },
       },
     }),
-    [t]
+    [t],
   );
 
   return { nestedNavigationOptions };

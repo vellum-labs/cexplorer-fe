@@ -286,7 +286,10 @@ export const ProfilePro = () => {
               hide={isLaterThanDay(item.modified_power_date).isLaterThanDay}
               content={
                 <div className='w-[200px]'>
-                  {t("profile.pro.modifyTooltip", { time: isLaterThanDay(item.modified_power_date).remainingTime })}
+                  {t("profile.pro.modifyTooltip", {
+                    time: isLaterThanDay(item.modified_power_date)
+                      .remainingTime,
+                  })}
                 </div>
               }
             >
@@ -492,11 +495,13 @@ export const ProfilePro = () => {
                     }
                     className='gold-shimmer flex items-center gap-1/2 bg-purpleText bg-clip-text font-medium text-transparent underline hover:text-transparent'
                   >
-                    {t("profile.nftsHeld")}: <span className=''>{totalCount}</span>
+                    {t("profile.nftsHeld")}:{" "}
+                    <span className=''>{totalCount}</span>
                   </Link>
                 )}
                 <span className='flex items-center gap-1/2 text-grayTextPrimary'>
-                  {t("profile.apiKeyLimit")}: <span className='text-text'>1</span>
+                  {t("profile.apiKeyLimit")}:{" "}
+                  <span className='text-text'>1</span>
                 </span>
               </section>
             )}
@@ -522,6 +527,10 @@ export const ProfilePro = () => {
                 );
               })}
               onOrderChange={setColumsOrder}
+              renderDisplayText={(count, total) =>
+                t("table.displaying", { count, total })
+              }
+              noItemsLabel={t("table.noItems")}
             />
           </>
         ) : (

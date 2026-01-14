@@ -105,13 +105,7 @@ export const VotingTable: FC<VotingTableProps> = () => {
         return (
           <div className='flex w-full items-center gap-1/2'>
             <ActivityBadge percentage={percent} />
-            <Tooltip
-              content={
-                <span>
-                  {t("gov.voting.activityTooltip")}
-                </span>
-              }
-            >
+            <Tooltip content={<span>{t("gov.voting.activityTooltip")}</span>}>
               <CircleHelp size={11} />
             </Tooltip>
           </div>
@@ -268,7 +262,9 @@ export const VotingTable: FC<VotingTableProps> = () => {
           )}
         </div>
       </div>
-      {!query.isLoading && !items?.length && <NoResultsFound label={t("sdk:noResultsFound")} />}
+      {!query.isLoading && !items?.length && (
+        <NoResultsFound label={t("sdk:noResultsFound")} />
+      )}
       {totalItems > rows && (query as UseInfiniteQueryResult).fetchNextPage && (
         <Pagination
           currentPage={page ?? 1}

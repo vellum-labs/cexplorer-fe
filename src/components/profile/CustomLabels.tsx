@@ -206,7 +206,10 @@ export const CustomLabels = () => {
                 <TableHead>{t("profile.labels.address")}</TableHead>
                 <TableHead>{t("profile.labels.label")}</TableHead>
                 <TableHead className='text-right text-text-xs leading-[13px]'>
-                  {t("profile.labels.labelsCreated", { count: labels.length, max: proNfts === 0 ? 10 : proNfts * 100 })}
+                  {t("profile.labels.labelsCreated", {
+                    count: labels.length,
+                    max: proNfts === 0 ? 10 : proNfts * 100,
+                  })}
                 </TableHead>
               </tr>
             </TableHeader>
@@ -269,7 +272,10 @@ export const CustomLabels = () => {
             <ChevronLeft size={15} />
           </button>
           <span>
-            {t("profile.labels.pageOf", { current: currentPage, total: totalPages })}
+            {t("profile.labels.pageOf", {
+              current: currentPage,
+              total: totalPages,
+            })}
           </span>
           <button
             className='rounded-m border border-border px-1 py-1/2 disabled:cursor-not-allowed disabled:opacity-60'

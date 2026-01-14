@@ -105,6 +105,10 @@ export const WealthComposition = () => {
           query={query}
           items={animalData}
           columns={columns}
+          renderDisplayText={(count, total) =>
+            t("table.displaying", { count, total })
+          }
+          noItemsLabel={t("table.noItems")}
         />
       ),
       visible: true,

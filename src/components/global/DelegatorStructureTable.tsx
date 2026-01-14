@@ -69,7 +69,11 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
       render: item => {
         return <p className='text-right'>{item.data.count}</p>;
       },
-      title: <p className='w-full text-right'>{t("global.delegatorStructure.count")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("global.delegatorStructure.count")}
+        </p>
+      ),
       visible: columnsVisibility.amount,
       widthPx: columnType === "pool" ? 100 : 50,
     },
@@ -90,10 +94,15 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
               if (param.data.name === "Usage") {
                 const animalName =
                   item.title[0].toUpperCase() + item.title.slice(1);
-                return t("global.delegatorStructure.countTooltip", { name: animalName, value: usage.toFixed(2) });
+                return t("global.delegatorStructure.countTooltip", {
+                  name: animalName,
+                  value: usage.toFixed(2),
+                });
               }
 
-              return t("global.delegatorStructure.othersCountTooltip", { value: (100 - usage).toFixed(2) });
+              return t("global.delegatorStructure.othersCountTooltip", {
+                value: (100 - usage).toFixed(2),
+              });
             },
           },
           series: [
@@ -137,7 +146,11 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
           </div>
         );
       },
-      title: <p className='w-full text-right'>{t("global.delegatorStructure.countPercent")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("global.delegatorStructure.countPercent")}
+        </p>
+      ),
       visible: columnsVisibility.amount_pie,
       widthPx: columnType === "pool" ? 100 : 120,
     },
@@ -150,7 +163,11 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
           </p>
         );
       },
-      title: <p className='w-full text-right'>{t("global.delegatorStructure.stake")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("global.delegatorStructure.stake")}
+        </p>
+      ),
       visible: columnsVisibility.holdings,
       widthPx: columnType === "pool" ? 100 : 50,
     },
@@ -171,10 +188,15 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
               if (param.data.name === "Usage") {
                 const animalName =
                   item.title[0].toUpperCase() + item.title.slice(1);
-                return t("global.delegatorStructure.stakeTooltip", { name: animalName, value: usage.toFixed(2) });
+                return t("global.delegatorStructure.stakeTooltip", {
+                  name: animalName,
+                  value: usage.toFixed(2),
+                });
               }
 
-              return t("global.delegatorStructure.othersStakeTooltip", { value: (100 - usage).toFixed(2) });
+              return t("global.delegatorStructure.othersStakeTooltip", {
+                value: (100 - usage).toFixed(2),
+              });
             },
           },
           series: [
@@ -218,7 +240,11 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
           </div>
         );
       },
-      title: <p className='w-full text-right'>{t("global.delegatorStructure.stakePercent")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("global.delegatorStructure.stakePercent")}
+        </p>
+      ),
       visible: columnsVisibility.holdings_pie,
       widthPx: columnType === "pool" ? 100 : 120,
     },
@@ -243,6 +269,10 @@ export const DelegatorStructureTable: FC<DelegatorStructureTableProps> = ({
       onOrderChange={columns =>
         setColumsOrder(columns as DelegatorStructureColumnKey[])
       }
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

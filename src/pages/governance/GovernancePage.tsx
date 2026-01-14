@@ -44,20 +44,26 @@ export const GovernancePage: FC = () => {
       footer: (
         <div className='flex flex-wrap'>
           <div className='flex w-fit items-center gap-1/2 pr-3'>
-            <span className='text-text-sm text-grayTextPrimary'>{t("governance.status.active")}</span>
+            <span className='text-text-sm text-grayTextPrimary'>
+              {t("governance.status.active")}
+            </span>
             <span className='text-text-sm text-[#10B981]'>
               {drepStat?.gov_action[0]?.active || 0}
             </span>
           </div>
           <div className='flex w-fit items-center gap-1/2 pr-3'>
-            <span className='text-text-sm text-grayTextPrimary'>{t("governance.status.ratified")}</span>
+            <span className='text-text-sm text-grayTextPrimary'>
+              {t("governance.status.ratified")}
+            </span>
             <span className='text-text-sm text-[#00A9E3]'>
               {drepStat?.gov_action[0]?.ratified || 0}
             </span>
           </div>
           {!!drepStat?.gov_action[0]?.enacted && (
             <div className='flex w-fit items-center gap-1/2 pr-3'>
-              <span className='text-text-sm text-grayTextPrimary'>{t("governance.status.enacted")}</span>
+              <span className='text-text-sm text-grayTextPrimary'>
+                {t("governance.status.enacted")}
+              </span>
               <span className='text-text-sm text-[#876ee1]'>
                 {drepStat?.gov_action[0]?.enacted}
               </span>
@@ -160,7 +166,11 @@ export const GovernancePage: FC = () => {
       title={t("pages:governance.title")}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>{t("governance.breadcrumbs.governance")}</span>,
+          label: (
+            <span className='inline pt-1/2'>
+              {t("governance.breadcrumbs.governance")}
+            </span>
+          ),
           link: "/gov",
         },
         { label: t("governance.breadcrumbs.governanceActions") },

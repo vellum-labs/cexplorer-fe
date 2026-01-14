@@ -35,7 +35,11 @@ export const GroupDetailCharts = ({ items }: GroupDetailChartsProps) => {
   );
 
   const charts = [
-    { dataKey: "stake", title: t("groups.poolStake"), needsAdaFormatting: true },
+    {
+      dataKey: "stake",
+      title: t("groups.poolStake"),
+      needsAdaFormatting: true,
+    },
     { dataKey: "pledge", title: t("groups.pledge"), needsAdaFormatting: true },
   ];
 

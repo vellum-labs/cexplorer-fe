@@ -206,13 +206,18 @@ const BlockDetailPage: FC = () => {
           </span>
           <Copy copyText={String(data?.slot_no ?? 0)} />
           <span className='pr-1/2 text-grayTextPrimary'>
-            ({t("blocks.overview.epochSlot")} {formatNumber(data?.epoch_slot_no ?? 0)})
+            ({t("blocks.overview.epochSlot")}{" "}
+            {formatNumber(data?.epoch_slot_no ?? 0)})
           </span>
         </div>
       ),
     },
     {
-      label: <span className='inline-block break-words'>{t("blocks.overview.confirmations")}</span>,
+      label: (
+        <span className='inline-block break-words'>
+          {t("blocks.overview.confirmations")}
+        </span>
+      ),
       value: (
         <div className='flex items-center gap-[2.5px] text-text-sm'>
           {confirmations[1] < 3 && (
@@ -242,7 +247,11 @@ const BlockDetailPage: FC = () => {
 
   const overviewTransactionsListItems: OverviewList = [
     {
-      label: <span className='text-nowrap'>{t("blocks.transactions.totalTransactions")}</span>,
+      label: (
+        <span className='text-nowrap'>
+          {t("blocks.transactions.totalTransactions")}
+        </span>
+      ),
       value: (
         <span className='text-text-sm font-medium text-text'>
           {data?.tx_count ? data.tx_count : 0}

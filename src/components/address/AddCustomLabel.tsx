@@ -22,9 +22,7 @@ export const AddCustomLabel = ({ address }: { address: string }) => {
     ((proNfts === 0 && labels.length >= 10) ||
       (proNfts > 0 && labels.length > proNfts * 100));
   const tooltipText =
-    proNfts === 0
-      ? t("address.labelLimitFree")
-      : t("address.labelLimitPro");
+    proNfts === 0 ? t("address.labelLimitFree") : t("address.labelLimitPro");
 
   return (
     <Tooltip

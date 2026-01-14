@@ -42,14 +42,17 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
   const { data: basicData } = useFetchMiscBasic(true);
 
   // Mapping from internal keys to translated labels
-  const seriesLabels = useMemo(() => ({
-    Delegators: t("pools.detailPage.performanceGraph.delegators"),
-    "Luck (%)": t("pools.detailPage.performanceGraph.luck"),
-    Blocks: t("pools.detailPage.performanceGraph.blocks"),
-    "Epoch Stake": t("pools.detailPage.performanceGraph.epochStake"),
-    "ROA (%)": t("pools.detailPage.performanceGraph.roa"),
-    Pledged: t("pools.detailPage.performanceGraph.pledged"),
-  }), [t]);
+  const seriesLabels = useMemo(
+    () => ({
+      Delegators: t("pools.detailPage.performanceGraph.delegators"),
+      "Luck (%)": t("pools.detailPage.performanceGraph.luck"),
+      Blocks: t("pools.detailPage.performanceGraph.blocks"),
+      "Epoch Stake": t("pools.detailPage.performanceGraph.epochStake"),
+      "ROA (%)": t("pools.detailPage.performanceGraph.roa"),
+      Pledged: t("pools.detailPage.performanceGraph.pledged"),
+    }),
+    [t],
+  );
   const miscConst = useMiscConst(basicData?.data.version.const);
   const { textColor, bgColor, splitLineColor, inactivePageIconColor } =
     useGraphColors();
@@ -78,7 +81,7 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
           "ROA (%)",
           "Pledged",
         ],
-        formatter: (name) => seriesLabels[name] || name,
+        formatter: name => seriesLabels[name] || name,
         textStyle: {
           color: textColor,
         },
@@ -131,7 +134,8 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
       ${params
         .map(item => {
           const formattedValue = valueFormatter(item.seriesName, item.data);
-          const translatedName = seriesLabels[item.seriesName] || item.seriesName;
+          const translatedName =
+            seriesLabels[item.seriesName] || item.seriesName;
           return `<p style="margin: 2px 0;">${marker(item)} ${translatedName}: ${formattedValue}</p>`;
         })
         .join("")}

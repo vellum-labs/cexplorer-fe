@@ -27,7 +27,7 @@ export const DRepThresholdChart: FC<DRepThresholdChartProps> = ({
   const { formatLovelace } = useADADisplay();
   const { textColor, bgColor } = useGraphColors();
 
-  const threshold = params ? epochParam?.[params] ?? 0 : 0;
+  const threshold = params ? (epochParam?.[params] ?? 0) : 0;
 
   const votingStake = activeVotingStake;
   const requiredStake =
@@ -153,7 +153,9 @@ export const DRepThresholdChart: FC<DRepThresholdChartProps> = ({
   return (
     <div className='flex flex-col items-center justify-center'>
       <div className='flex items-center gap-1'>
-        <p className='mb-1 font-medium'>{t("governance.thresholds.drepTitle")}</p>
+        <p className='mb-1 font-medium'>
+          {t("governance.thresholds.drepTitle")}
+        </p>
         <Tooltip
           content={
             <p className='max-w-[200px]'>

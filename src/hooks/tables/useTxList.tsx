@@ -151,7 +151,9 @@ export const useTxList = ({
         formatNumber(item?.block?.epoch_no ?? 0) +
         " / " +
         formatNumber(item?.block?.no ?? 0),
-      title: <p className='w-full text-right'>{t("common:labels.epochBlock")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.epochBlock")}</p>
+      ),
       visible: columnsVisibility.block,
       widthPx: 65,
     },
@@ -162,7 +164,9 @@ export const useTxList = ({
           <AdaWithTooltip data={item?.out_sum ?? 0} />
         </span>
       ),
-      title: <p className='w-full text-right'>{t("common:labels.totalOutput")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.totalOutput")}</p>
+      ),
       visible: columnsVisibility.total_output,
       widthPx: 75,
     },
@@ -173,7 +177,11 @@ export const useTxList = ({
           <AdaWithTooltip data={item?.treasury_donation ?? 0} />
         </span>
       ),
-      title: <p className='w-full text-right'>{t("transactions.table.treasuryDonation")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("transactions.table.treasuryDonation")}
+        </p>
+      ),
       visible: isDonationPage || columnsVisibility.donation,
       widthPx: 75,
     },
@@ -224,7 +232,11 @@ export const useTxList = ({
       jsonFormat: item => {
         return item?.script_size;
       },
-      title: <p className='w-full text-right'>{t("transactions.table.scriptSize")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("transactions.table.scriptSize")}
+        </p>
+      ),
       visible: columnsVisibility.script_size,
       widthPx: 35,
     },

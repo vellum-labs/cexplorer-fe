@@ -159,7 +159,12 @@ export const AssetTimelockTab: FC<{ json: PolicyJson | undefined }> = ({
               </>
             )}
           </div>
-          <JsonDisplay data={script} isError={false} isLoading={false} noDataLabel={t("sdk:jsonDisplay.noDataLabel")} />
+          <JsonDisplay
+            data={script}
+            isError={false}
+            isLoading={false}
+            noDataLabel={t("sdk:jsonDisplay.noDataLabel")}
+          />
         </section>
       );
     } else {

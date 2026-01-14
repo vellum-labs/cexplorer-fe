@@ -129,6 +129,10 @@ export const CCMemberHotKeysTab: FC<CCMemberHotKeysTabProps> = ({
       query={mockQuery as any}
       items={sortedRegistrations}
       columns={columns}
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

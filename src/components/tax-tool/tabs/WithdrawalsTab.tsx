@@ -48,13 +48,16 @@ export const WithdrawalsTab: FC<WithdrawalsTabProps> = ({ stakeKey }) => {
     return null;
   }
 
-  const isLoading = query.isLoading || (query.isFetching && !withdrawals.length);
+  const isLoading =
+    query.isLoading || (query.isFetching && !withdrawals.length);
 
   return (
     <div className='flex w-full flex-col gap-3 pt-3'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-2'>
-          <span className='text-text-sm font-medium'>{t("taxTool.secondaryCurrency")}</span>
+          <span className='text-text-sm font-medium'>
+            {t("taxTool.secondaryCurrency")}
+          </span>
           <Select
             value={secondaryCurrency}
             onValueChange={value => setSecondaryCurrency(value as Currencies)}
@@ -93,7 +96,7 @@ export const WithdrawalsTab: FC<WithdrawalsTabProps> = ({ stakeKey }) => {
           onPageChange={setPage}
           totalItems={query.data?.count || 0}
           itemsPerPage={limit}
-          onItemsPerPageChange={(rows) => {
+          onItemsPerPageChange={rows => {
             setStoredRows(rows);
             setPage(1);
           }}

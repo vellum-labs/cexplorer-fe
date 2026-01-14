@@ -294,7 +294,9 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
           </p>
         );
       },
-      title: <p className='w-full text-right'>{t("common:labels.epochStake")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.epochStake")}</p>
+      ),
       visible: columnsVisibility.active_stake,
       widthPx: 50,
     },
@@ -307,7 +309,9 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
 
         return <p className='text-right'>{formatNumber(item.delegators)}</p>;
       },
-      title: <p className='w-full text-right'>{t("common:labels.delegators")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.delegators")}</p>
+      ),
       visible: columnsVisibility.delegators,
       widthPx: 50,
     },
@@ -351,7 +355,11 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
           </p>
         );
       },
-      title: <p className='w-full text-right'>{t("pools.detailPage.performanceTable.pledged")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("pools.detailPage.performanceTable.pledged")}
+        </p>
+      ),
       visible: columnsVisibility.pledged,
       widthPx: 50,
     },
@@ -407,6 +415,7 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
         <TableSettingsDropdown
           rows={rows}
           setRows={setRows}
+          rowsLabel={t("common:table.rows")}
           columnsOptions={poolPerfomanceTableOptions.map(item => {
             return {
               label: t(`common:tableSettings.${item.key}`),
@@ -432,6 +441,10 @@ export const PoolPerfomanceTable: FC<PoolPerfomanceTableProps> = ({
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("common:table.displaying", { count, total })
+        }
+        noItemsLabel={t("common:table.noItems")}
       />
     </>
   );

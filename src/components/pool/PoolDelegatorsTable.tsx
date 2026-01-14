@@ -80,7 +80,11 @@ const PoolDelegatorsTable = ({
           <EpochCell no={item?.live_pool?.delegation?.tx?.active_epoch_no} />
         </div>
       ),
-      title: <p className='w-full text-right'>{t("pools.detailPage.delegatorsTable.activeEpoch")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("pools.detailPage.delegatorsTable.activeEpoch")}
+        </p>
+      ),
       visible: columnsVisibility.active_in,
       widthPx: 45,
     },
@@ -209,7 +213,9 @@ const PoolDelegatorsTable = ({
           />
         );
       },
-      title: <p className='w-full text-right'>{t("common:labels.registered")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.registered")}</p>
+      ),
       visible: columnsVisibility.registered,
       widthPx: 40,
     },
@@ -288,6 +294,10 @@ const PoolDelegatorsTable = ({
         );
       })}
       onOrderChange={setColumsOrder}
+      renderDisplayText={(count, total) =>
+        t("common:table.displaying", { count, total })
+      }
+      noItemsLabel={t("common:table.noItems")}
     />
   );
 };

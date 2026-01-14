@@ -29,12 +29,16 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
   const { t } = useAppTranslation("common");
   const data = query.data?.data;
   const [linkModal, setLinkModal] = useState<boolean>(false);
-  const [selectedRoaType, setSelectedRoaType] = useState<'upper' | 'actual' | 'lower'>('actual');
+  const [selectedRoaType, setSelectedRoaType] = useState<
+    "upper" | "actual" | "lower"
+  >("actual");
 
   if (query.isLoading) {
     return (
       <>
-        <h3 className='text-text-lg font-semibold'>{t("stakingCalculator.poolInfo")}</h3>
+        <h3 className='text-text-lg font-semibold'>
+          {t("stakingCalculator.poolInfo")}
+        </h3>
         <div className='grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-6'>
           <div className='flex flex-col gap-3'>
             {[1, 2, 3, 4, 5, 6, 7].map(i => (
@@ -57,7 +61,10 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
 
   const leftColumnData = [
     { label: t("stakingCalculator.labels.name"), value: data.pool_name.name },
-    { label: t("stakingCalculator.labels.ticker"), value: data.pool_name.ticker },
+    {
+      label: t("stakingCalculator.labels.ticker"),
+      value: data.pool_name.ticker,
+    },
     {
       label: t("stakingCalculator.labels.poolId"),
       value: (
@@ -158,7 +165,9 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
 
   return (
     <>
-      <h3 className='text-text-lg font-semibold'>{t("stakingCalculator.poolInfo")}</h3>
+      <h3 className='text-text-lg font-semibold'>
+        {t("stakingCalculator.poolInfo")}
+      </h3>
 
       <div className='grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-6'>
         <div className='flex flex-col gap-3'>
@@ -190,23 +199,27 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
         </div>
       </div>
 
-      <h3 className='mt-4 text-text-lg font-semibold'>{t("stakingCalculator.expectedReturns")}</h3>
+      <h3 className='mt-4 text-text-lg font-semibold'>
+        {t("stakingCalculator.expectedReturns")}
+      </h3>
       <div className='grid grid-cols-1 gap-3 sm:grid-cols-3'>
         <Tooltip content={t("stakingCalculator.tooltips.upper")}>
           <div>
             <button
               onClick={() => {
-                setSelectedRoaType('upper');
+                setSelectedRoaType("upper");
                 onRoaChange?.(upperRoa);
               }}
               className={`flex w-full flex-col items-center gap-1 rounded-xl border p-2 transition-colors ${
-                selectedRoaType === 'upper'
-                  ? 'border-primary bg-cardBg'
-                  : 'border-border bg-cardBg hover:border-primary/50'
+                selectedRoaType === "upper"
+                  ? "border-primary bg-cardBg"
+                  : "hover:border-primary/50 border-border bg-cardBg"
               }`}
             >
               <p className='text-text-2xl font-bold'>{upperRoa.toFixed(2)}%</p>
-              <p className='text-center text-text-sm text-grayTextPrimary'>{t("stakingCalculator.roaTypes.upper")}</p>
+              <p className='text-center text-text-sm text-grayTextPrimary'>
+                {t("stakingCalculator.roaTypes.upper")}
+              </p>
             </button>
           </div>
         </Tooltip>
@@ -214,13 +227,13 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
           <div>
             <button
               onClick={() => {
-                setSelectedRoaType('actual');
+                setSelectedRoaType("actual");
                 onRoaChange?.(recentRoa);
               }}
               className={`flex w-full flex-col items-center gap-1 rounded-xl border p-2 transition-colors ${
-                selectedRoaType === 'actual'
-                  ? 'border-primary bg-cardBg'
-                  : 'border-border bg-cardBg hover:border-primary/50'
+                selectedRoaType === "actual"
+                  ? "border-primary bg-cardBg"
+                  : "hover:border-primary/50 border-border bg-cardBg"
               }`}
             >
               <p className='text-text-2xl font-bold'>{recentRoa.toFixed(2)}%</p>
@@ -234,17 +247,19 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
           <div>
             <button
               onClick={() => {
-                setSelectedRoaType('lower');
+                setSelectedRoaType("lower");
                 onRoaChange?.(lowerRoa);
               }}
               className={`flex w-full flex-col items-center gap-1 rounded-xl border p-2 transition-colors ${
-                selectedRoaType === 'lower'
-                  ? 'border-primary bg-cardBg'
-                  : 'border-border bg-cardBg hover:border-primary/50'
+                selectedRoaType === "lower"
+                  ? "border-primary bg-cardBg"
+                  : "hover:border-primary/50 border-border bg-cardBg"
               }`}
             >
               <p className='text-text-2xl font-bold'>{lowerRoa.toFixed(2)}%</p>
-              <p className='text-center text-text-sm text-grayTextPrimary'>{t("stakingCalculator.roaTypes.lower")}</p>
+              <p className='text-center text-text-sm text-grayTextPrimary'>
+                {t("stakingCalculator.roaTypes.lower")}
+              </p>
             </button>
           </div>
         </Tooltip>

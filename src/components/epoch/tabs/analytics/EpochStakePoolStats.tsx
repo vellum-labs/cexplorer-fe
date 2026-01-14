@@ -62,7 +62,9 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
           title: (
             <p className='text-text-sm'>
               {stats?.epoch_no > (miscConst?.epoch.no ?? 0) - 2 ? (
-                <Badge color='yellow'>{t("epochs.stakePoolStats.pending")}</Badge>
+                <Badge color='yellow'>
+                  {t("epochs.stakePoolStats.pending")}
+                </Badge>
               ) : (
                 <>{((stats?.pool_stat?.pct_leader ?? 0) / 100).toFixed(2)}%</>
               )}
@@ -85,7 +87,9 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
           title: (
             <p className='text-text-sm'>
               {stats?.epoch_no > (miscConst?.epoch.no ?? 0) - 2 ? (
-                <Badge color='yellow'>{t("epochs.stakePoolStats.pending")}</Badge>
+                <Badge color='yellow'>
+                  {t("epochs.stakePoolStats.pending")}
+                </Badge>
               ) : (
                 <>{((stats?.pool_stat?.pct_member ?? 0) / 100).toFixed(2)}%</>
               )}

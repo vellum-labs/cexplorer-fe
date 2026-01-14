@@ -194,7 +194,9 @@ export const WatchlistStar = ({
         <Modal onClose={() => setShowOptionsModal(false)}>
           <div className='text-center'>
             <h3 className='mb-2 text-text-lg font-semibold'>
-              {isStakeKeyInWatchlist ? t("global.watchlist.manageWatchlist") : t("global.watchlist.addToWatchlist")}
+              {isStakeKeyInWatchlist
+                ? t("global.watchlist.manageWatchlist")
+                : t("global.watchlist.addToWatchlist")}
             </h3>
             <p className='mb-3 text-text-sm text-grayTextPrimary'>
               {isStakeKeyInWatchlist
@@ -207,7 +209,11 @@ export const WatchlistStar = ({
                   isStakeKeyInWatchlist ? handleAddAddress : handleAddStakeKey
                 }
                 variant='primary'
-                label={isStakeKeyInWatchlist ? t("global.watchlist.addAddress") : t("global.watchlist.addStakeKey")}
+                label={
+                  isStakeKeyInWatchlist
+                    ? t("global.watchlist.addAddress")
+                    : t("global.watchlist.addStakeKey")
+                }
                 size='lg'
                 className='w-full'
               />
@@ -219,7 +225,9 @@ export const WatchlistStar = ({
                 }
                 variant='secondary'
                 label={
-                  isStakeKeyInWatchlist ? t("global.watchlist.removeStakeKey") : t("global.watchlist.addAddress")
+                  isStakeKeyInWatchlist
+                    ? t("global.watchlist.removeStakeKey")
+                    : t("global.watchlist.addAddress")
                 }
                 size='md'
                 className='w-full'

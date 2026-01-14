@@ -156,6 +156,8 @@ export const AccounntTopAddressesTab: FC = () => {
             +filterDraft["addresses_pool_only"],
           ),
         onReset: () => changeFilterByKey("addresses_pool_only"),
+        resetLabel: t("actions.reset"),
+        filterLabel: t("actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             <label className='flex items-center gap-1'>
@@ -172,7 +174,9 @@ export const AccounntTopAddressesTab: FC = () => {
                   )
                 }
               />
-              <span className='text-text-sm'>{t("analytics.delegatedToPool")}</span>
+              <span className='text-text-sm'>
+                {t("analytics.delegatedToPool")}
+              </span>
             </label>
             <label className='flex items-center gap-1'>
               <input
@@ -240,6 +244,8 @@ export const AccounntTopAddressesTab: FC = () => {
             +filterDraft["addresses_drep_only"],
           ),
         onReset: () => changeFilterByKey("addresses_drep_only"),
+        resetLabel: t("actions.reset"),
+        filterLabel: t("actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             <label className='flex items-center gap-1'>
@@ -256,7 +262,9 @@ export const AccounntTopAddressesTab: FC = () => {
                   )
                 }
               />
-              <span className='text-text-sm'>{t("analytics.delegatedToDrep")}</span>
+              <span className='text-text-sm'>
+                {t("analytics.delegatedToDrep")}
+              </span>
             </label>
             <label className='flex items-center gap-1'>
               <input
@@ -272,7 +280,9 @@ export const AccounntTopAddressesTab: FC = () => {
                   )
                 }
               />
-              <span className='text-text-sm'>{t("analytics.notDelegatedToDrep")}</span>
+              <span className='text-text-sm'>
+                {t("analytics.notDelegatedToDrep")}
+              </span>
             </label>
           </div>
         ),
@@ -322,7 +332,9 @@ export const AccounntTopAddressesTab: FC = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : totalItems > 0 ? (
             <h3 className='basis-[230px] text-wrap'>
-              {t("analytics.totalAddresses", { count: formatNumber(totalItems) })}
+              {t("analytics.totalAddresses", {
+                count: formatNumber(totalItems),
+              })}
             </h3>
           ) : (
             ""
@@ -337,6 +349,7 @@ export const AccounntTopAddressesTab: FC = () => {
           <TableSettingsDropdown
             rows={rows}
             setRows={setRows}
+            rowsLabel={t("table.rows")}
             columnsOptions={accountAnalyticsTopAddressesTableOptions.map(
               item => {
                 return {
@@ -407,10 +420,12 @@ export const AccounntTopAddressesTab: FC = () => {
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
-      <h3 className='mt-2 text-center'>
-        {t("analytics.accountsExcluded")}
-      </h3>
+      <h3 className='mt-2 text-center'>{t("analytics.accountsExcluded")}</h3>
     </div>
   );
 };

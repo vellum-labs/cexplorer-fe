@@ -186,7 +186,10 @@ const PoolDetailPage = () => {
     >
       {isRetiring && (
         <div className='mx-mobile mb-3 flex max-w-desktop items-start gap-2 rounded-m border border-border p-2 lg:mx-desktop'>
-          <CircleAlert className='mt-0.5 flex-shrink-0 text-red-500' size={18} />
+          <CircleAlert
+            className='mt-0.5 flex-shrink-0 text-red-500'
+            size={18}
+          />
           <span className='font-medium text-red-500'>
             {isAlreadyRetired
               ? t("pools.detailPage.retired", { epoch: retiringEpoch })

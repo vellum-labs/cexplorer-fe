@@ -158,12 +158,15 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
   return (
     <>
       <div className='flex w-full items-center justify-between'>
-        <h1 className='text-text-lg font-semibold'>{t("blocks.transactions")}</h1>
+        <h1 className='text-text-lg font-semibold'>
+          {t("blocks.transactions")}
+        </h1>
         <div className='flex gap-1'>
           <ExportButton columns={columns} items={txs} />
           <TableSettingsDropdown
             rows={rows}
             setRows={setRows}
+            rowsLabel={t("table.rows")}
             columnsOptions={blocksDetailTableOptions.map(item => {
               return {
                 label: t(`common:tableSettings.${item.key}`),
@@ -187,6 +190,10 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
             columnsOrder.indexOf(b.key as keyof BlockDetailColumns),
         )}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
       {totalPages > 1 && (
         <Pagination

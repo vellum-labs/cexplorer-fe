@@ -182,7 +182,8 @@ export const GroupsListPage = () => {
             )}
             <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
               <h3 className='pb-1.5 md:pb-0'>
-                {t("common:phrases.totalOf")} {formatNumber(filteredItems.length)} {t("groups.totalOfSuffix")}
+                {t("common:phrases.totalOf")}{" "}
+                {formatNumber(filteredItems.length)} {t("groups.totalOfSuffix")}
               </h3>
               <TableSearchInput
                 placeholder={t("groups.searchPlaceholder")}
@@ -202,9 +203,13 @@ export const GroupsListPage = () => {
                         key={key}
                         className='flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
                       >
-                        <span>{key === "has_drep" && t("groups.alsoDrep")}:</span>
                         <span>
-                          {key === "has_drep" && +value === 1 && t("groups.yes")}
+                          {key === "has_drep" && t("groups.alsoDrep")}:
+                        </span>
+                        <span>
+                          {key === "has_drep" &&
+                            +value === 1 &&
+                            t("groups.yes")}
                           {key === "has_drep" && +value === 2 && t("groups.no")}
                         </span>
                         <X

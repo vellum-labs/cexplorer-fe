@@ -108,7 +108,9 @@ const DelegatorsTabItem = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : delegatorTableTotalItems > 0 ? (
             <h3 className='basis-[220px]'>
-              {t("pools.detailPage.delegatorsTabs.totalNewcomers", { count: String(formatNumber(delegatorTableTotalItems)) })}
+              {t("pools.detailPage.delegatorsTabs.totalNewcomers", {
+                count: String(formatNumber(delegatorTableTotalItems)),
+              })}
             </h3>
           ) : (
             <></>
@@ -117,6 +119,7 @@ const DelegatorsTabItem = () => {
             <TableSettingsDropdown
               rows={delegatorRows}
               setRows={setDelegatorRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={poolDelegatorsTableOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),
@@ -154,7 +157,9 @@ const DelegatorsTabItem = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : migrationsTotalItems > 0 ? (
             <h3 className='basis-[220px]'>
-              {t("pools.detailPage.delegatorsTabs.totalMigrations", { count: String(formatNumber(migrationsTotalItems)) })}
+              {t("pools.detailPage.delegatorsTabs.totalMigrations", {
+                count: String(formatNumber(migrationsTotalItems)),
+              })}
             </h3>
           ) : (
             <></>
@@ -163,6 +168,7 @@ const DelegatorsTabItem = () => {
             <TableSettingsDropdown
               rows={migrationsRows}
               setRows={setMigrationsRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={poolDelegatorsTableOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),

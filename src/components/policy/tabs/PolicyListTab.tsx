@@ -22,7 +22,9 @@ export const PolicyListTab: FC = () => {
   if (!token) {
     return (
       <div className='flex h-64 items-center justify-center'>
-        <div className='text-grayTextPrimary'>{t("policy.pleaseConnectWallet")}</div>
+        <div className='text-grayTextPrimary'>
+          {t("policy.pleaseConnectWallet")}
+        </div>
       </div>
     );
   }
@@ -95,7 +97,9 @@ export const PolicyListTab: FC = () => {
   if (policyListQuery?.isLoading) {
     return (
       <div className='flex h-64 items-center justify-center'>
-        <div className='text-grayTextPrimary'>{t("policy.loadingPolicies")}</div>
+        <div className='text-grayTextPrimary'>
+          {t("policy.loadingPolicies")}
+        </div>
       </div>
     );
   }
@@ -120,6 +124,10 @@ export const PolicyListTab: FC = () => {
         minContentWidth={820}
         items={data}
         columns={columns}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </div>
   );

@@ -42,7 +42,9 @@ export const PowerThresholdsPage: FC = () => {
           title={t("governance.powerThresholds.title")}
           breadcrumbItems={[
             {
-              label: <span className='inline pt-1/2'>{t("gov.governance")}</span>,
+              label: (
+                <span className='inline pt-1/2'>{t("gov.governance")}</span>
+              ),
               link: "/gov",
             },
             { label: t("governance.powerThresholds.breadcrumb") },
@@ -55,7 +57,9 @@ export const PowerThresholdsPage: FC = () => {
               <div className='rounded-l'>
                 <AnalyticsGraph
                   title={t("governance.powerThresholds.delegationDistribution")}
-                  description={t("governance.powerThresholds.delegationDistributionDesc")}
+                  description={t(
+                    "governance.powerThresholds.delegationDistributionDesc",
+                  )}
                 >
                   <AnalyticsGraph
                     title={t("governance.powerThresholds.spoAttack")}
@@ -72,7 +76,9 @@ export const PowerThresholdsPage: FC = () => {
                   </AnalyticsGraph>
 
                   <AnalyticsGraph
-                    title={t("governance.powerThresholds.percentDelegatedToSPOs")}
+                    title={t(
+                      "governance.powerThresholds.percentDelegatedToSPOs",
+                    )}
                     exportButton
                     className='border-none px-0'
                   >
@@ -109,7 +115,9 @@ export const PowerThresholdsPage: FC = () => {
                   </AnalyticsGraph>
 
                   <AnalyticsGraph
-                    title={t("governance.powerThresholds.percentDelegatedToDReps")}
+                    title={t(
+                      "governance.powerThresholds.percentDelegatedToDReps",
+                    )}
                     exportButton
                     className='border-none px-0'
                   >

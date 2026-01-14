@@ -116,7 +116,9 @@ export const ContractTransactionsPage = () => {
           {formatNumber(item.data.unit_steps)}
         </div>
       ),
-      title: <p className='w-full text-right'>{t("common:labels.unitSteps")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.unitSteps")}</p>
+      ),
       visible: columnsVisibility.unit_steps,
       widthPx: 40,
     },
@@ -149,7 +151,9 @@ export const ContractTransactionsPage = () => {
 
         return `${item.block.epoch_no}/${item.block.no}`;
       },
-      title: <p className='w-full text-right'>{t("common:labels.epochBlock")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.epochBlock")}</p>
+      ),
       visible: columnsVisibility.epoch_block,
       widthPx: 40,
     },
@@ -173,7 +177,8 @@ export const ContractTransactionsPage = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[250px]'>
-              {t("common:phrases.totalOf")} {formatNumber(totalItems ?? 0)} {t("contractTransactions.totalOfSuffix")}
+              {t("common:phrases.totalOf")} {formatNumber(totalItems ?? 0)}{" "}
+              {t("contractTransactions.totalOfSuffix")}
             </h3>
           )}
           <div className='flex items-center gap-1'>
@@ -181,6 +186,7 @@ export const ContractTransactionsPage = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={contractInteractionsTableOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),
@@ -207,6 +213,10 @@ export const ContractTransactionsPage = () => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </section>
     </PageBase>

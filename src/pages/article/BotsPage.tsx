@@ -82,7 +82,9 @@ export const BotsPage = () => {
                         <PulseDot color='bg-yellowText' />
                       </div>
                     )}
-                    <span className='text-text-xs font-medium'>{t(`botsPage.tags.${tagKey}`)}</span>
+                    <span className='text-text-xs font-medium'>
+                      {t(`botsPage.tags.${tagKey}`)}
+                    </span>
                   </div>
                 ))}
               </div>

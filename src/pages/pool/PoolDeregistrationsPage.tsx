@@ -142,7 +142,9 @@ export const PoolDeregistrationsPage = () => {
 
         return `${item.block.epoch_no}/${item.block.no}`;
       },
-      title: <p className='w-full text-right'>{t("common:labels.epochBlock")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.epochBlock")}</p>
+      ),
       visible: columnsVisibility.epoch_block,
       widthPx: 40,
     },
@@ -166,7 +168,8 @@ export const PoolDeregistrationsPage = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[230px]'>
-              {t("common:phrases.totalOf")} {formatNumber(totalItems ?? 0)} {t("pools.deregistrations.totalOfSuffix")}
+              {t("common:phrases.totalOf")} {formatNumber(totalItems ?? 0)}{" "}
+              {t("pools.deregistrations.totalOfSuffix")}
             </h3>
           )}
           <div className='flex items-center gap-1'>
@@ -174,6 +177,7 @@ export const PoolDeregistrationsPage = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={poolDeregistrationsTableOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),
@@ -200,6 +204,10 @@ export const PoolDeregistrationsPage = () => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </section>
     </PageBase>

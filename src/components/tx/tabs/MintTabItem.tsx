@@ -111,7 +111,9 @@ const MintTabItem = () => {
   ];
 
   if (!query.data?.data.mints && !query.isLoading) {
-    return <div className='text-center text-text-sm'>{t("tx.noMintsFound")}</div>;
+    return (
+      <div className='text-center text-text-sm'>{t("tx.noMintsFound")}</div>
+    );
   }
 
   return (
@@ -125,6 +127,10 @@ const MintTabItem = () => {
         itemsPerPage={20}
         minContentWidth={700}
         disableDrag
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </div>
   );

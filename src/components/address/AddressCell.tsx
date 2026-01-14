@@ -86,7 +86,9 @@ const AddressCell = ({
             <Tooltip
               content={
                 <div className='flex w-[166px] flex-col items-center text-text-sm'>
-                  <p className='font-medium'>{t("address.smartContractAddress")}</p>
+                  <p className='font-medium'>
+                    {t("address.smartContractAddress")}
+                  </p>
                 </div>
               }
             >

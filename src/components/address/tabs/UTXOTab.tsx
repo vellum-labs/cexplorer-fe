@@ -201,6 +201,7 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("table.rows")}
                 columnsOptions={addressDetailUTXOOptions.map(item => {
                   return {
                     label: t(`common:tableSettings.${item.key}`),
@@ -231,6 +232,7 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("table.rows")}
               columnsOptions={addressDetailUTXOOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),
@@ -261,6 +263,10 @@ export const UTXOTab: FC<UTXOTabProps> = ({ address }) => {
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </section>
   );

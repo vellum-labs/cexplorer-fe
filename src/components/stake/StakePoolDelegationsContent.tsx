@@ -102,7 +102,11 @@ export const StakePoolDelegationsContent: FC<
             {item?.active_epoch_no}
           </div>
         ),
-        title: <p className='w-full text-right'>{t("stake.detailPage.poolDelegationsTable.activeEpoch")}</p>,
+        title: (
+          <p className='w-full text-right'>
+            {t("stake.detailPage.poolDelegationsTable.activeEpoch")}
+          </p>
+        ),
         visible: columnsVisibility.active_in,
         widthPx: 50,
       },
@@ -206,7 +210,9 @@ export const StakePoolDelegationsContent: FC<
             "yyy-MM-dd HH:mm:ss",
           );
         },
-        title: <p className='w-full text-right'>{t("common:labels.registered")}</p>,
+        title: (
+          <p className='w-full text-right'>{t("common:labels.registered")}</p>
+        ),
         visible: columnsVisibility.registered,
         widthPx: 80,
       },
@@ -246,12 +252,15 @@ export const StakePoolDelegationsContent: FC<
     <section className='flex flex-col gap-4'>
       <div className='flex flex-col'>
         <div className='flex items-center justify-between gap-1'>
-          <h3 className='my-2'>{t("stake.detailPage.poolDelegationsTable.delegationHistory")}</h3>
+          <h3 className='my-2'>
+            {t("stake.detailPage.poolDelegationsTable.delegationHistory")}
+          </h3>
           <div className='flex items-center gap-1'>
             <ExportButton columns={delegationColumns} items={items} />
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={accountDelegationsTableOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),
@@ -279,6 +288,10 @@ export const StakePoolDelegationsContent: FC<
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </div>
       <MultiDelegationsTable address={address} miscConst={miscConst} />

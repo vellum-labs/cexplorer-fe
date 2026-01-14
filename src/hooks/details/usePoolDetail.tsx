@@ -52,14 +52,15 @@ export const usePoolDetail = ({
 
   const [linkModal, setLinkModal] = useState<boolean>(false);
 
-  const proratedLuck = data?.epochs[0].data.block && estimatedBlocks > 0
-    ? (() => {
-        const percent =
-          ((data?.blocks?.epoch || 0) / estimatedBlocks / epochElapsed) * 100;
+  const proratedLuck =
+    data?.epochs[0].data.block && estimatedBlocks > 0
+      ? (() => {
+          const percent =
+            ((data?.blocks?.epoch || 0) / estimatedBlocks / epochElapsed) * 100;
 
-        return Number.isNaN(percent) ? "-" : percent.toFixed(2) + "%";
-      })()
-    : "-";
+          return Number.isNaN(percent) ? "-" : percent.toFixed(2) + "%";
+        })()
+      : "-";
 
   const lifetimeRoaDiff = poolRewardsRoaDiff(
     data?.stats?.lifetime?.roa ?? 0,
@@ -87,7 +88,10 @@ export const usePoolDetail = ({
 
   const aboutList: OverviewList = [
     { label: t("pools.detailPage.about.name"), value: data?.pool_name.name },
-    { label: t("pools.detailPage.about.ticker"), value: data?.pool_name.ticker },
+    {
+      label: t("pools.detailPage.about.ticker"),
+      value: data?.pool_name.ticker,
+    },
     {
       label: t("pools.detailPage.about.poolId"),
       value: (
@@ -107,7 +111,9 @@ export const usePoolDetail = ({
         <DelegatorsLabel
           minDelegationAda={minDelegationAda}
           label={t("sdk:delegatorsLabel.label")}
-          tooltipText={t("sdk:delegatorsLabel.tooltipText", { minDelegationAda })}
+          tooltipText={t("sdk:delegatorsLabel.tooltipText", {
+            minDelegationAda,
+          })}
         />
       ),
       value: formatNumber(data?.delegators),
@@ -183,7 +189,10 @@ export const usePoolDetail = ({
       label: t("pools.detailPage.stakeAndPledge.activePledge"),
       value: <AdaWithTooltip data={data?.pledged ?? 0} />,
     },
-    { label: t("pools.detailPage.stakeAndPledge.pledgeLeverage"), value: pledgeLeverage },
+    {
+      label: t("pools.detailPage.stakeAndPledge.pledgeLeverage"),
+      value: pledgeLeverage,
+    },
     {
       label: t("pools.detailPage.stakeAndPledge.marginFee"),
       value: ((data?.pool_update?.active?.margin ?? 0) * 100).toFixed(2) + "%",

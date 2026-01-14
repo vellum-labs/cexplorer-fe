@@ -51,7 +51,9 @@ export const AddressDetailPage: FC = () => {
   const liveStake = addressData?.stake?.balance?.live ?? 0;
   const addressBalance = addressData?.balance ?? 0;
   const addressIcon =
-    addressIcons[getAnimalNameByAmount(liveStake > 0 ? liveStake : addressBalance)];
+    addressIcons[
+      getAnimalNameByAmount(liveStake > 0 ? liveStake : addressBalance)
+    ];
 
   if (!isValidAddress(address)) {
     setNotFound(true);
@@ -159,7 +161,11 @@ export const AddressDetailPage: FC = () => {
           ident: address,
         },
       ]}
-      title={<div className='flex items-center gap-1/2'>{t("pages:addressDetail.title")}</div>}
+      title={
+        <div className='flex items-center gap-1/2'>
+          {t("pages:addressDetail.title")}
+        </div>
+      }
       icon={<img src={addressIcon} alt='address level' className='h-6 w-6' />}
       subTitle={
         <HeaderBannerSubtitle

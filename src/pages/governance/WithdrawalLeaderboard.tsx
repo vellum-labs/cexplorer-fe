@@ -73,6 +73,7 @@ export const WithdrawalLeaderboard: FC = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("table.rows")}
               columnsOptions={[]}
             />
           </div>

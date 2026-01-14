@@ -70,7 +70,11 @@ export const ScriptDetailStatsTab = ({
         color: theme === "dark" ? "white" : "#101828",
       },
       type: "scroll",
-      data: [legendLabels.interactions, legendLabels.output, legendLabels.averageOutput],
+      data: [
+        legendLabels.interactions,
+        legendLabels.output,
+        legendLabels.averageOutput,
+      ],
       textStyle: { color: textColor },
       selected: Object.fromEntries(Object.entries(graphsVisibility)),
     },

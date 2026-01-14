@@ -25,7 +25,9 @@ export const StakeListTab: FC = () => {
   if (!token) {
     return (
       <div className='flex h-64 items-center justify-center'>
-        <div className='text-grayTextPrimary'>{t("stake.list.connectWallet")}</div>
+        <div className='text-grayTextPrimary'>
+          {t("stake.list.connectWallet")}
+        </div>
       </div>
     );
   }
@@ -42,11 +44,7 @@ export const StakeListTab: FC = () => {
           <div className='flex flex-col gap-1/2'>
             <AddressCell address={item.view} />
             {item.adahandle && (
-              <AdaHandleBadge
-                hex={item.adahandle}
-                link
-                policyId={policyId}
-              />
+              <AdaHandleBadge hex={item.adahandle} link policyId={policyId} />
             )}
           </div>
         );
@@ -96,7 +94,11 @@ export const StakeListTab: FC = () => {
 
         const assets = item.asset ?? [];
         if (assets.length === 0) {
-          return <span className='text-grayTextPrimary'>{t("stake.list.table.noAssets")}</span>;
+          return (
+            <span className='text-grayTextPrimary'>
+              {t("stake.list.table.noAssets")}
+            </span>
+          );
         }
 
         const transformedAssets = assets.map(asset => ({
@@ -148,6 +150,10 @@ export const StakeListTab: FC = () => {
         minContentWidth={650}
         items={data}
         columns={columns}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </div>
   );

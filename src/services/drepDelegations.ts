@@ -21,10 +21,7 @@ export const fetchDrepDelegations = async ({
   return handleFetch<DrepDelegationResponse>(url, offset, options);
 };
 
-export const useFetchDrepDelegations = (
-  limit: number,
-  page: number,
-) =>
+export const useFetchDrepDelegations = (limit: number, page: number) =>
   useInfiniteQuery({
     queryKey: ["drep-delegations", limit, page],
     queryFn: async ({ pageParam = page }) =>

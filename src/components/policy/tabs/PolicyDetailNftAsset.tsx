@@ -167,6 +167,7 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("table.rows")}
                 columnsOptions={
                   view !== "grid"
                     ? assetListTableOptionsWithoutType
@@ -217,6 +218,10 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("table.displaying", { count, total })
+          }
+          noItemsLabel={t("table.noItems")}
         />
       )}
     </>

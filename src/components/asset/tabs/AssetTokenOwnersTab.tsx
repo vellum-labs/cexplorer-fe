@@ -86,7 +86,9 @@ export const AssetTokenOwnersTab: FC<AssetTokenOwnersTabProps> = ({
             : item.quantity;
 
         return (
-          <p className='text-right'>{formatNumberWithSuffix(adjustedQuantity)}</p>
+          <p className='text-right'>
+            {formatNumberWithSuffix(adjustedQuantity)}
+          </p>
         );
       },
       title: <p className='w-full text-right'>{t("asset.quantity")}</p>,
@@ -140,6 +142,10 @@ export const AssetTokenOwnersTab: FC<AssetTokenOwnersTabProps> = ({
         );
       })}
       onOrderChange={setColumsOrder}
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

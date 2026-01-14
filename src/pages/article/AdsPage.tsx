@@ -21,25 +21,53 @@ import { useAppTranslation } from "@/hooks/useAppTranslation";
 const reachStatsConfig = [
   { icon: Zap, value: "TBD", labelKey: "adsPage.stats.monthlyPageViews" },
   { icon: Signature, value: "TBD", labelKey: "adsPage.stats.uniqueUsers" },
-  { icon: CloudDownload, value: "TBD", labelKey: "adsPage.stats.adImpressions" },
+  {
+    icon: CloudDownload,
+    value: "TBD",
+    labelKey: "adsPage.stats.adImpressions",
+  },
   { icon: Sparkles, value: "TBD", labelKey: "adsPage.stats.averageCtr" },
 ];
 
 const proFeaturesConfig = [
-  { titleKey: "adsPage.pro.features.exposure.title", descriptionKey: "adsPage.pro.features.exposure.description" },
-  { titleKey: "adsPage.pro.features.continuous.title", descriptionKey: "adsPage.pro.features.continuous.description" },
-  { titleKey: "adsPage.pro.features.targeted.title", descriptionKey: "adsPage.pro.features.targeted.description" },
+  {
+    titleKey: "adsPage.pro.features.exposure.title",
+    descriptionKey: "adsPage.pro.features.exposure.description",
+  },
+  {
+    titleKey: "adsPage.pro.features.continuous.title",
+    descriptionKey: "adsPage.pro.features.continuous.description",
+  },
+  {
+    titleKey: "adsPage.pro.features.targeted.title",
+    descriptionKey: "adsPage.pro.features.targeted.description",
+  },
 ];
 
 const boostFeaturesConfig = [
-  { titleKey: "adsPage.boosts.features.instant.title", descriptionKey: "adsPage.boosts.features.instant.description" },
-  { titleKey: "adsPage.boosts.features.anyone.title", descriptionKey: "adsPage.boosts.features.anyone.description" },
-  { titleKey: "adsPage.boosts.features.strategic.title", descriptionKey: "adsPage.boosts.features.strategic.description" },
+  {
+    titleKey: "adsPage.boosts.features.instant.title",
+    descriptionKey: "adsPage.boosts.features.instant.description",
+  },
+  {
+    titleKey: "adsPage.boosts.features.anyone.title",
+    descriptionKey: "adsPage.boosts.features.anyone.description",
+  },
+  {
+    titleKey: "adsPage.boosts.features.strategic.title",
+    descriptionKey: "adsPage.boosts.features.strategic.description",
+  },
 ];
 
 const bannerFeaturesConfig = [
-  { titleKey: "adsPage.banners.features.visibility.title", descriptionKey: "adsPage.banners.features.visibility.description" },
-  { titleKey: "adsPage.banners.features.reach.title", descriptionKey: "adsPage.banners.features.reach.description" },
+  {
+    titleKey: "adsPage.banners.features.visibility.title",
+    descriptionKey: "adsPage.banners.features.visibility.description",
+  },
+  {
+    titleKey: "adsPage.banners.features.reach.title",
+    descriptionKey: "adsPage.banners.features.reach.description",
+  },
 ];
 
 export const AdsPage = () => {
@@ -62,7 +90,9 @@ export const AdsPage = () => {
             className='flex flex-1 flex-col'
             style={{ minWidth: "280px", maxWidth: "500px" }}
           >
-            <h2 className='text-xl mb-4 font-bold'>{t("adsPage.reach.title")}</h2>
+            <h2 className='text-xl mb-4 font-bold'>
+              {t("adsPage.reach.title")}
+            </h2>
             <p className='text-sm text-textPrimary mb-4 leading-relaxed'>
               {t("adsPage.reach.description1")}
             </p>
@@ -94,7 +124,9 @@ export const AdsPage = () => {
                     <div className='text-xl font-bold text-darkBlue'>
                       {stat.value}
                     </div>
-                    <div className='text-sm text-textPrimary'>{t(stat.labelKey)}</div>
+                    <div className='text-sm text-textPrimary'>
+                      {t(stat.labelKey)}
+                    </div>
                   </div>
                 </div>
               );
@@ -170,7 +202,8 @@ export const AdsPage = () => {
                     className='mt-0.5 flex-shrink-0 text-darkBlue'
                   />
                   <span className='text-sm'>
-                    <strong>{t(feature.titleKey)}</strong> - {t(feature.descriptionKey)}
+                    <strong>{t(feature.titleKey)}</strong> -{" "}
+                    {t(feature.descriptionKey)}
                   </span>
                 </li>
               ))}
@@ -181,14 +214,22 @@ export const AdsPage = () => {
                 target='_blank'
                 rel='noreferrer noopener'
               >
-                <Button size='md' variant='tertiary' label={t("adsPage.pro.documentation")} />
+                <Button
+                  size='md'
+                  variant='tertiary'
+                  label={t("adsPage.pro.documentation")}
+                />
               </a>
               <a
                 href='https://beta.cexplorer.io/pro'
                 target='_blank'
                 rel='noreferrer noopener'
               >
-                <Button size='md' variant='purple' label={t("adsPage.pro.getCexplorerPro")} />
+                <Button
+                  size='md'
+                  variant='purple'
+                  label={t("adsPage.pro.getCexplorerPro")}
+                />
               </a>
             </div>
           </div>
@@ -264,7 +305,8 @@ export const AdsPage = () => {
                     className='text-red mt-0.5 flex-shrink-0'
                   />
                   <span className='text-sm'>
-                    <strong>{t(feature.titleKey)}</strong> – {t(feature.descriptionKey)}
+                    <strong>{t(feature.titleKey)}</strong> –{" "}
+                    {t(feature.descriptionKey)}
                   </span>
                 </li>
               ))}
@@ -298,7 +340,8 @@ export const AdsPage = () => {
                     className='mt-0.5 flex-shrink-0 text-darkBlue'
                   />
                   <span className='text-sm'>
-                    <strong>{t(feature.titleKey)}</strong> – {t(feature.descriptionKey)}
+                    <strong>{t(feature.titleKey)}</strong> –{" "}
+                    {t(feature.descriptionKey)}
                   </span>
                 </li>
               ))}
@@ -321,7 +364,11 @@ export const AdsPage = () => {
                 target='_blank'
                 rel='noreferrer noopener'
               >
-                <Button size='md' variant='tertiary' label={t("adsPage.banners.documentation")} />
+                <Button
+                  size='md'
+                  variant='tertiary'
+                  label={t("adsPage.banners.documentation")}
+                />
               </a>
               <a href='mailto:hello@vellumlabs.cz'>
                 <Button

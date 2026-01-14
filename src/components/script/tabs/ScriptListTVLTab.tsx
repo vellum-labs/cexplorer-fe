@@ -110,7 +110,10 @@ export const ScriptListTVLTab: FC = () => {
                 <CircleDollarSign className='text-primary' size={15} />
               </div>
               <span className='text-text-sm text-grayTextPrimary'>
-                <span className='text-text-md font-semibold'>{t("script.tvl.title")}</span> {t("script.tvl.subtitle")}
+                <span className='text-text-md font-semibold'>
+                  {t("script.tvl.title")}
+                </span>{" "}
+                {t("script.tvl.subtitle")}
               </span>
             </div>
             <div className='flex w-full items-center gap-2'>

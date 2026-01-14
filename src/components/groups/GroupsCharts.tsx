@@ -8,9 +8,7 @@ interface GroupsChartsProps {
   filteredItems: GroupsListData[];
 }
 
-export const GroupsCharts = ({
-  filteredItems,
-}: GroupsChartsProps) => {
+export const GroupsCharts = ({ filteredItems }: GroupsChartsProps) => {
   const { t } = useAppTranslation("pages");
 
   const tooltipTranslations = useMemo(
@@ -26,8 +24,16 @@ export const GroupsCharts = ({
   const charts = useMemo(
     () => [
       { dataKey: "pools_count", title: t("groups.charts.poolsCount") },
-      { dataKey: "pool_stake", title: t("groups.charts.poolStake"), needsAdaFormatting: true },
-      { dataKey: "pledge", title: t("groups.charts.pledge"), needsAdaFormatting: true },
+      {
+        dataKey: "pool_stake",
+        title: t("groups.charts.poolStake"),
+        needsAdaFormatting: true,
+      },
+      {
+        dataKey: "pledge",
+        title: t("groups.charts.pledge"),
+        needsAdaFormatting: true,
+      },
       {
         dataKey: "pledge_per_pool",
         title: t("groups.charts.pledgePerPool"),
@@ -48,10 +54,8 @@ export const GroupsCharts = ({
       });
 
       const sortedItems = [...items].sort((a, b) => {
-        const pledge = (item: GroupsListData) =>
-          item.data?.pool?.pledged ?? 0;
-        const poolCount = (item: GroupsListData) =>
-          item.data?.pool?.count ?? 1;
+        const pledge = (item: GroupsListData) => item.data?.pool?.pledged ?? 0;
+        const poolCount = (item: GroupsListData) => item.data?.pool?.count ?? 1;
         const pledgePerPool = (item: GroupsListData) =>
           poolCount(item) > 0 ? pledge(item) / poolCount(item) : 0;
 

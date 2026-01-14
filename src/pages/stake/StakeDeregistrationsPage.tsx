@@ -94,11 +94,7 @@ export const StakeDeregistrationsPage = () => {
           <AdaWithTooltip data={item.tx.deposit} />
         </div>
       ),
-      title: (
-        <p className='w-full text-right'>
-          {t("common:labels.deposit")}
-        </p>
-      ),
+      title: <p className='w-full text-right'>{t("common:labels.deposit")}</p>,
       visible: columnsVisibility.deposit,
       widthPx: 40,
     },
@@ -132,9 +128,7 @@ export const StakeDeregistrationsPage = () => {
         return `${item.block.epoch_no}/${item.block.no}`;
       },
       title: (
-        <p className='w-full text-right'>
-          {t("common:labels.epochBlock")}
-        </p>
+        <p className='w-full text-right'>{t("common:labels.epochBlock")}</p>
       ),
       visible: columnsVisibility.epoch_block,
       widthPx: 40,
@@ -159,8 +153,7 @@ export const StakeDeregistrationsPage = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[250px]'>
-              {t("common:phrases.totalOf")}{" "}
-              {formatNumber(totalItems ?? 0)}{" "}
+              {t("common:phrases.totalOf")} {formatNumber(totalItems ?? 0)}{" "}
               {t("stake.deregistrations.totalOfSuffix")}
             </h3>
           )}
@@ -169,6 +162,7 @@ export const StakeDeregistrationsPage = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={stakeRegistrationsTableOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),
@@ -195,6 +189,10 @@ export const StakeDeregistrationsPage = () => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </section>
     </PageBase>

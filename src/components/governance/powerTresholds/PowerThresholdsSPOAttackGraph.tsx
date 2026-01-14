@@ -91,7 +91,9 @@ export const PowerThresholdsSPOAttackGraph: FC<
     <div className='relative flex w-full max-w-full items-center gap-1'>
       <div className='relative top-[-8px] mt-1.5 flex flex-col items-center'>
         <h4 className='text-text-xl font-semibold'>{spoCount}</h4>
-        <span className='text-text-xs text-grayTextPrimary'>{t("governance.delegation.spos")}</span>
+        <span className='text-text-xs text-grayTextPrimary'>
+          {t("governance.delegation.spos")}
+        </span>
       </div>
       <div className='relative w-full'>
         <div className='absolute left-0 h-[40px] w-[51%] bg-[#F63D68]'></div>

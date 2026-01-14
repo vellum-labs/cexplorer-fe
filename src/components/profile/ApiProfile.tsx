@@ -165,7 +165,9 @@ export const ApiProfile = () => {
                   {userData.length > 1 && <h1>#{index + 1}</h1>}
                   <div className='flex w-full flex-col gap-4 border-b border-border pb-2 md:flex-row'>
                     <div className='flex flex-col gap-1 md:w-[300px]'>
-                      <span className='font-medium'>{t("profile.api.plan")}</span>
+                      <span className='font-medium'>
+                        {t("profile.api.plan")}
+                      </span>
                       <p className='text-text-sm font-regular text-grayTextPrimary'>
                         {t("profile.api.planDetails")}
                       </p>
@@ -193,15 +195,21 @@ export const ApiProfile = () => {
                           {t("profile.api.limits")}
                         </span>{" "}
                         <span className='flex items-center gap-1/2'>
-                          {t("profile.api.boosted", { count: apiKey.numerator })}{" "}
+                          {t("profile.api.boosted", {
+                            count: apiKey.numerator,
+                          })}{" "}
                           <Tooltip
                             content={
                               <div className='flex w-[220px] flex-col gap-1'>
                                 <p>
-                                  {t("profile.api.nftsHeldTooltip", { count: nfts })}
+                                  {t("profile.api.nftsHeldTooltip", {
+                                    count: nfts,
+                                  })}
                                 </p>
                                 <p>
-                                  {t("profile.api.limitsBoostTooltip", { count: nfts })}
+                                  {t("profile.api.limitsBoostTooltip", {
+                                    count: nfts,
+                                  })}
                                 </p>
                               </div>
                             }
@@ -222,7 +230,9 @@ export const ApiProfile = () => {
                   </div>
                   <div className='flex w-full flex-col gap-4 border-b border-border pb-2 md:flex-row'>
                     <div className='flex flex-col gap-1 md:w-[300px]'>
-                      <span className='font-medium'>{t("profile.api.limits")}</span>
+                      <span className='font-medium'>
+                        {t("profile.api.limits")}
+                      </span>
                       <p className='text-text-sm font-regular text-grayTextPrimary'>
                         {t("profile.api.limitsDescription")}
                       </p>
@@ -258,7 +268,9 @@ export const ApiProfile = () => {
                   </div>
                   <div className='flex w-full flex-col gap-4 border-b border-border pb-2 text-text-sm md:flex-row'>
                     <div className='flex flex-col gap-1 md:w-[300px]'>
-                      <span className='font-medium'>{t("profile.api.apiKeys")}</span>
+                      <span className='font-medium'>
+                        {t("profile.api.apiKeys")}
+                      </span>
                       <p className='text-text-sm font-regular text-grayTextPrimary'>
                         {t("profile.api.apiKeysDescription")}
                       </p>
@@ -292,7 +304,9 @@ export const ApiProfile = () => {
                   </div>
                   <div className='flex w-full flex-col gap-4 pb-2 text-text-sm lg:flex-row'>
                     <div className='flex flex-col gap-1 lg:w-[300px]'>
-                      <span className='font-medium'>{t("profile.api.apiUsage")}</span>
+                      <span className='font-medium'>
+                        {t("profile.api.apiUsage")}
+                      </span>
                       <p className='text-text-sm font-regular text-grayTextPrimary'>
                         {t("profile.api.apiUsageDescription")}
                       </p>
@@ -311,7 +325,13 @@ export const ApiProfile = () => {
   );
 };
 
-const ActivityGraph = ({ data, t }: { data: UserApiObject["stat"]; t: (key: string) => string }) => {
+const ActivityGraph = ({
+  data,
+  t,
+}: {
+  data: UserApiObject["stat"];
+  t: (key: string) => string;
+}) => {
   const { splitLineColor, textColor, bgColor, inactivePageIconColor } =
     useGraphColors();
 

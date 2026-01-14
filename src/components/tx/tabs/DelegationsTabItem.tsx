@@ -101,7 +101,11 @@ const DelegationsTabItem = () => {
   ];
 
   if (!delegations && !query.isLoading) {
-    return <p className='w-full text-center text-text-sm'>{t("tx.noDelegationsFound")}</p>;
+    return (
+      <p className='w-full text-center text-text-sm'>
+        {t("tx.noDelegationsFound")}
+      </p>
+    );
   }
 
   if (query.isLoading) {
@@ -119,6 +123,10 @@ const DelegationsTabItem = () => {
         itemsPerPage={20}
         minContentWidth={700}
         disableDrag
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </div>
   );

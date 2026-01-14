@@ -330,18 +330,11 @@ const NodeContent = ({
       <div className='mt-1 flex w-full max-w-[690px] flex-wrap gap-1'>
         <>
           {!Array.isArray(data.asset) && (
-            <TxAssetLink
-              type={type}
-              asset={data.asset}
-            />
+            <TxAssetLink type={type} asset={data.asset} />
           )}
           {Array.isArray(data.asset) &&
             data.asset?.map((asset, i) => (
-              <TxAssetLink
-                type={type}
-                asset={asset}
-                key={asset.name + i}
-              />
+              <TxAssetLink type={type} asset={asset} key={asset.name + i} />
             ))}
         </>
       </div>

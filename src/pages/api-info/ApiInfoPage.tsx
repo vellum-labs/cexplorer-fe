@@ -54,9 +54,15 @@ export const ApiInfoPage = () => {
       cta: t("apiPage.tiers.starter.cta"),
       features: [
         t("apiPage.tiers.starter.features.ideal"),
-        t("apiPage.tiers.starter.features.requestsPerMinute", { count: apiData?.starter.rq_min }),
-        t("apiPage.tiers.starter.features.requestsPerDay", { count: apiData?.starter.rq_day }),
-        t("apiPage.tiers.starter.features.tokensPerDay", { count: apiData?.starter.tok_day }),
+        t("apiPage.tiers.starter.features.requestsPerMinute", {
+          count: apiData?.starter.rq_min,
+        }),
+        t("apiPage.tiers.starter.features.requestsPerDay", {
+          count: apiData?.starter.rq_day,
+        }),
+        t("apiPage.tiers.starter.features.tokensPerDay", {
+          count: apiData?.starter.tok_day,
+        }),
       ],
       disabled: false,
       link: "/profile?tab=api",
@@ -69,9 +75,15 @@ export const ApiInfoPage = () => {
       features: [
         t("apiPage.tiers.basic.features.ideal"),
         t("apiPage.tiers.basic.features.stackingNote"),
-        t("apiPage.tiers.basic.features.requestsPerMinute", { count: apiData?.basic.rq_min }),
-        t("apiPage.tiers.basic.features.requestsPerDayNft", { count: apiData?.basic.rq_day }),
-        t("apiPage.tiers.basic.features.tokensPerDayNft", { count: apiData?.basic.tok_day }),
+        t("apiPage.tiers.basic.features.requestsPerMinute", {
+          count: apiData?.basic.rq_min,
+        }),
+        t("apiPage.tiers.basic.features.requestsPerDayNft", {
+          count: apiData?.basic.rq_day,
+        }),
+        t("apiPage.tiers.basic.features.tokensPerDayNft", {
+          count: apiData?.basic.tok_day,
+        }),
       ],
       disabled: true,
       link: undefined,
@@ -84,9 +96,15 @@ export const ApiInfoPage = () => {
       features: [
         t("apiPage.tiers.pro.features.ideal"),
         t("apiPage.tiers.pro.features.flexibleLimits"),
-        t("apiPage.tiers.pro.features.requestsPerMinute", { count: apiData?.pro.rq_min }),
-        t("apiPage.tiers.pro.features.requestsPerDay", { count: apiData?.pro.rq_day }),
-        t("apiPage.tiers.pro.features.tokensPerDay", { count: apiData?.pro.tok_day }),
+        t("apiPage.tiers.pro.features.requestsPerMinute", {
+          count: apiData?.pro.rq_min,
+        }),
+        t("apiPage.tiers.pro.features.requestsPerDay", {
+          count: apiData?.pro.rq_day,
+        }),
+        t("apiPage.tiers.pro.features.tokensPerDay", {
+          count: apiData?.pro.tok_day,
+        }),
         t("apiPage.tiers.pro.features.prioritySupport"),
       ],
       disabled: false,
@@ -141,7 +159,10 @@ export const ApiInfoPage = () => {
       metadataOverride={{ title: t("apiPage.metaTitle") }}
       title={t("apiPage.title")}
       subTitle={t("apiPage.subtitle")}
-      breadcrumbItems={[{ label: t("apiPage.breadcrumb.developers"), link: "/dev" }, { label: t("apiPage.breadcrumb.apiPlans") }]}
+      breadcrumbItems={[
+        { label: t("apiPage.breadcrumb.developers"), link: "/dev" },
+        { label: t("apiPage.breadcrumb.apiPlans") },
+      ]}
       adsCarousel={false}
       customPage={true}
     >
@@ -184,12 +205,8 @@ export const ApiInfoPage = () => {
             />
           </a>
         </section>
-        <h2 className='-mb-4 mt-4 md:text-[30px]'>
-          {t("apiPage.faq.title")}
-        </h2>
-        <p className='text-grayTextPrimary'>
-          {t("apiPage.faq.description")}
-        </p>
+        <h2 className='-mb-4 mt-4 md:text-[30px]'>{t("apiPage.faq.title")}</h2>
+        <p className='text-grayTextPrimary'>{t("apiPage.faq.description")}</p>
         <Accordion
           type='single'
           collapsible
@@ -261,7 +278,7 @@ const PriceCard = ({
   link,
   comingSoonText = "(Coming soon...)",
 }: PriceCardProps) => {
-  const isExternalLink = link?.startsWith('http');
+  const isExternalLink = link?.startsWith("http");
 
   return (
     <div className='relative mt-1 flex min-h-[420px] basis-[350px] flex-col items-center rounded-l bg-darker p-2 shadow-md'>

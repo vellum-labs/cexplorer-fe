@@ -60,7 +60,8 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
       render: item => {
         const registrations = toArray(item?.registration);
         const hasRegistration = registrations.length > 0;
-        const hasDeregistration = item?.de_registration !== null && item?.de_registration !== undefined;
+        const hasDeregistration =
+          item?.de_registration !== null && item?.de_registration !== undefined;
 
         if (hasDeregistration) {
           return (
@@ -182,6 +183,10 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
       query={mockQuery as any}
       items={sortedHistory}
       columns={columns}
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

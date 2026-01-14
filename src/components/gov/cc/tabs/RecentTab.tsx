@@ -25,7 +25,7 @@ import { isVoteLate } from "@/utils/governance/isVoteLate";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const RecentTab: FC = () => {
-  const { t } = useAppTranslation();
+  const { t } = useAppTranslation(["pages", "common"]);
   const { page = 1 } = useSearch({ from: "/gov/cc/" });
 
   const {
@@ -161,6 +161,8 @@ export const RecentTab: FC = () => {
         onShow: e => toggleFilter(e, "vote"),
         onFilter: () => changeFilterByKey("vote", filterDraft["vote"]),
         onReset: () => changeFilterByKey("vote"),
+        resetLabel: t("common:actions.reset"),
+        filterLabel: t("common:actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             {["Yes", "No", "Abstain"].map(val => (
@@ -175,7 +177,9 @@ export const RecentTab: FC = () => {
                     changeDraftFilter("vote", e.currentTarget.value)
                   }
                 />
-                <span className='text-text-sm'>{val}</span>
+                <span className='text-text-sm'>
+                  {t(`common:gov.cc.${val.toLowerCase()}`)}
+                </span>
               </label>
             ))}
           </div>
@@ -226,6 +230,7 @@ export const RecentTab: FC = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={columns.map(col => ({
                 label: col.title,
                 isVisible: columnsVisibility[col.key],
@@ -268,6 +273,7 @@ export const RecentTab: FC = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={columns.map(col => ({
                 label: col.title,
                 isVisible: columnsVisibility[col.key],
@@ -325,6 +331,10 @@ export const RecentTab: FC = () => {
             columnsOrder.indexOf(b.key as keyof typeof columnsVisibility),
         )}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("common:table.displaying", { count, total })
+        }
+        noItemsLabel={t("common:table.noItems")}
       />
     </section>
   );

@@ -138,9 +138,7 @@ const ConnectWalletModal: React.FC<Props> = ({ onClose }) => {
               </p>
             )}
             {installedWallets.length === 0 && (
-              <p>
-                {t("wallet.noWalletsInstalled")}
-              </p>
+              <p>{t("wallet.noWalletsInstalled")}</p>
             )}
           </div>
           {installedWallets.length > 0 &&

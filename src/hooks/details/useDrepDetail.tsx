@@ -83,8 +83,14 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
             "-"
           ),
         },
-        { label: t("dreps.detailPage.about.stakeKey"), value: t("dreps.detailPage.about.naSystemDrep") },
-        { label: t("dreps.detailPage.about.registered"), value: t("dreps.detailPage.about.systemDefault") },
+        {
+          label: t("dreps.detailPage.about.stakeKey"),
+          value: t("dreps.detailPage.about.naSystemDrep"),
+        },
+        {
+          label: t("dreps.detailPage.about.registered"),
+          value: t("dreps.detailPage.about.systemDefault"),
+        },
         { label: t("dreps.detailPage.about.lastUpdated"), value: "-" },
       ]
     : [
@@ -158,7 +164,9 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
           value: (
             <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
               <PulseDot color={"#00A9E3"} />
-              <span className='text-text-xs font-medium'>{t("dreps.detailPage.about.systemDefault")}</span>
+              <span className='text-text-xs font-medium'>
+                {t("dreps.detailPage.about.systemDefault")}
+              </span>
             </div>
           ),
         },
@@ -179,7 +187,9 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
             <DelegatorsLabel
               minDelegationAda={minDelegationAda}
               label={t("sdk:delegatorsLabel.label")}
-              tooltipText={t("sdk:delegatorsLabel.tooltipText", { minDelegationAda })}
+              tooltipText={t("sdk:delegatorsLabel.tooltipText", {
+                minDelegationAda,
+              })}
             />
           ),
           value: currentDelegators
@@ -198,7 +208,9 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
               <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
                 <PulseDot color={!data.is_active ? "bg-redText" : undefined} />
                 <span className='text-text-xs font-medium'>
-                  {data.is_active ? t("dreps.detailPage.voting.active") : t("dreps.detailPage.voting.inactive")}
+                  {data.is_active
+                    ? t("dreps.detailPage.voting.active")
+                    : t("dreps.detailPage.voting.inactive")}
                 </span>
               </div>
             ),
@@ -207,7 +219,9 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
           label: t("dreps.detailPage.voting.drepMetadata"),
           value:
             data?.data === null ? (
-              <span className='font-medium text-redText'>{t("dreps.detailPage.voting.notProvided")}</span>
+              <span className='font-medium text-redText'>
+                {t("dreps.detailPage.voting.notProvided")}
+              </span>
             ) : (
               <Link
                 to='/drep/$hash'
@@ -240,7 +254,9 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
             <DelegatorsLabel
               minDelegationAda={minDelegationAda}
               label={t("sdk:delegatorsLabel.label")}
-              tooltipText={t("sdk:delegatorsLabel.tooltipText", { minDelegationAda })}
+              tooltipText={t("sdk:delegatorsLabel.tooltipText", {
+                minDelegationAda,
+              })}
             />
           ),
           value: currentDelegators
@@ -301,7 +317,9 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
             <DelegatorsLabel
               minDelegationAda={minDelegationAda}
               label={t("sdk:delegatorsLabel.label")}
-              tooltipText={t("sdk:delegatorsLabel.tooltipText", { minDelegationAda })}
+              tooltipText={t("sdk:delegatorsLabel.tooltipText", {
+                minDelegationAda,
+              })}
             />
           ),
           value: currentDelegators
@@ -355,7 +373,11 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                         <span className='text-text-sm text-grayTextSecondary'>
                           {t("dreps.detailPage.governance.recentActivity")}
                         </span>
-                        <Tooltip content={t("dreps.detailPage.governance.recentActivityTooltip")}>
+                        <Tooltip
+                          content={t(
+                            "dreps.detailPage.governance.recentActivityTooltip",
+                          )}
+                        >
                           <CircleHelp
                             size={12}
                             className='text-grayTextPrimary'
@@ -363,7 +385,8 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                         </Tooltip>
                       </div>
                       <span className='text-text-sm text-grayTextPrimary'>
-                        {t("dreps.detailPage.governance.voted")} {recentPercent.toFixed(2)}%
+                        {t("dreps.detailPage.governance.voted")}{" "}
+                        {recentPercent.toFixed(2)}%
                       </span>
                     </div>
                     <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#E4E7EC]'>
@@ -380,7 +403,11 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                         <span className='text-text-sm text-grayTextSecondary'>
                           {t("dreps.detailPage.governance.lifetimeActivity")}
                         </span>
-                        <Tooltip content={t("dreps.detailPage.governance.lifetimeActivityTooltip")}>
+                        <Tooltip
+                          content={t(
+                            "dreps.detailPage.governance.lifetimeActivityTooltip",
+                          )}
+                        >
                           <CircleHelp
                             size={12}
                             className='text-grayTextPrimary'
@@ -388,7 +415,8 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                         </Tooltip>
                       </div>
                       <span className='text-text-sm text-grayTextPrimary'>
-                        {t("dreps.detailPage.governance.voted")} {lifetimePercent.toFixed(2)}%
+                        {t("dreps.detailPage.governance.voted")}{" "}
+                        {lifetimePercent.toFixed(2)}%
                       </span>
                     </div>
                     <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#E4E7EC]'>

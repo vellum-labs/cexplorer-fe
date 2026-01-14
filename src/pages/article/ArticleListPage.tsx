@@ -88,7 +88,12 @@ export const ArticleListPage = () => {
               placeholder={t("articlePage.emailPlaceholder")}
               className='sm:w-[335px]'
             />
-            <Button size='md' label={t("articlePage.getStarted")} variant='primary' disabled />
+            <Button
+              size='md'
+              label={t("articlePage.getStarted")}
+              variant='primary'
+              disabled
+            />
           </div>
           <span className='text-[14px] text-grayTextSecondary'>
             {t("articlePage.privacyNote")}

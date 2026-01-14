@@ -254,7 +254,9 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
               </span>
             )}
             {stats?.total_count && (
-              <span className='text-[10px]'>| {t("policy.txs")}: {stats?.total_count}</span>
+              <span className='text-[10px]'>
+                | {t("policy.txs")}: {stats?.total_count}
+              </span>
             )}
           </div>
         </div>

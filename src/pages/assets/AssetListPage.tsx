@@ -131,6 +131,7 @@ export const AssetListPage: FC<AssetListPageProps> = ({
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("common:table.rows")}
                 columnsOptions={tableOptions
                   .filter(item => columnsVisibility[item.key])
                   .map(item => {
@@ -167,6 +168,7 @@ export const AssetListPage: FC<AssetListPageProps> = ({
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("common:table.rows")}
                 columnsOptions={assetListTableOptions.map(item => {
                   return {
                     label: t(`common:tableSettings.${item.key}`),
@@ -199,6 +201,10 @@ export const AssetListPage: FC<AssetListPageProps> = ({
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </section>
     </PageBase>

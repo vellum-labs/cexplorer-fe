@@ -124,7 +124,9 @@ export const UplcPage: FC = () => {
         cborLength: encoding.cborBytes.length,
         languagePrediction,
       });
-      setLastAction(buildLastActionMessage(t("uplcPage.messages.parsedAsText")));
+      setLastAction(
+        buildLastActionMessage(t("uplcPage.messages.parsedAsText")),
+      );
       return;
     } catch (err) {
       textError = err instanceof Error ? err.message : String(err);
@@ -207,7 +209,9 @@ export const UplcPage: FC = () => {
 
           <div className='flex w-full flex-col gap-1'>
             <div className='flex items-center gap-2'>
-              <span className='text-text-sm font-medium'>{t("uplcPage.input")}</span>
+              <span className='text-text-sm font-medium'>
+                {t("uplcPage.input")}
+              </span>
               <span className='text-text-xs text-grayTextPrimary'>*</span>
               {hasContent && (
                 <span className='rounded-s bg-cardBg px-2 py-0.5 text-text-xs font-medium text-primary shadow-sm'>
@@ -225,7 +229,7 @@ export const UplcPage: FC = () => {
               placeholder={placeholder}
               onChange={evt => setInput(evt.target.value)}
               spellCheck={false}
-              className='h-[300px] w-full resize-none rounded-m border border-border bg-cardBg p-[10px] font-mono text-text-xs shadow-md outline-none'
+              className='font-mono h-[300px] w-full resize-none rounded-m border border-border bg-cardBg p-[10px] text-text-xs shadow-md outline-none'
             />
           </div>
 
@@ -257,117 +261,122 @@ export const UplcPage: FC = () => {
             </div>
           )}
 
-        {result && (
-          <>
-            <div className='mt-4 flex w-full flex-col gap-2'>
-              <span className='text-text-sm font-medium'>{t("uplcPage.output.title")}</span>
-              <div className='flex flex-wrap items-center gap-2 rounded-m border border-border bg-cardBg p-3'>
-                <div className='flex items-center gap-1.5'>
-                  <span className='text-text-xs text-grayTextPrimary'>
-                    {t("uplcPage.output.version")}
-                  </span>
-                  <span className='text-text-sm font-medium'>
-                    {result.version}
-                  </span>
-                </div>
-                <div className='h-4 w-px bg-border' />
-                <div className='flex items-center gap-1.5'>
-                  <span className='text-text-xs text-grayTextPrimary'>
-                    {t("uplcPage.output.flatBytes")}
-                  </span>
-                  <span className='text-text-sm font-medium'>
-                    {result.flatLength.toLocaleString()}
-                  </span>
-                </div>
-                <div className='h-4 w-px bg-border' />
-                <div className='flex items-center gap-1.5'>
-                  <span className='text-text-xs text-grayTextPrimary'>
-                    {t("uplcPage.output.cborBytes")}
-                  </span>
-                  <span className='text-text-sm font-medium'>
-                    {result.cborLength.toLocaleString()}
-                  </span>
-                </div>
-                {languageBadgeLabel && languageEvidence && (
-                  <>
-                    <div className='h-4 w-px bg-border' />
-                    <div className='group relative'>
-                      <span
-                        className='cursor-help rounded-s bg-primary/10 px-2 py-0.5 text-text-xs font-medium text-primary shadow-sm'
-                        tabIndex={0}
-                        aria-describedby={languageTooltipId}
-                      >
-                        {t("uplcPage.output.likely", { language: languageBadgeLabel })} ⓘ
-                      </span>
-                      <div
-                        className='absolute left-0 top-full z-10 mt-1 hidden max-w-[320px] rounded-m border border-border bg-cardBg p-2 text-text-xs shadow-lg group-hover:block group-focus:block'
-                        role='tooltip'
-                        id={languageTooltipId}
-                      >
-                        <p className='break-words'>{languageEvidence}</p>
+          {result && (
+            <>
+              <div className='mt-4 flex w-full flex-col gap-2'>
+                <span className='text-text-sm font-medium'>
+                  {t("uplcPage.output.title")}
+                </span>
+                <div className='flex flex-wrap items-center gap-2 rounded-m border border-border bg-cardBg p-3'>
+                  <div className='flex items-center gap-1.5'>
+                    <span className='text-text-xs text-grayTextPrimary'>
+                      {t("uplcPage.output.version")}
+                    </span>
+                    <span className='text-text-sm font-medium'>
+                      {result.version}
+                    </span>
+                  </div>
+                  <div className='h-4 w-px bg-border' />
+                  <div className='flex items-center gap-1.5'>
+                    <span className='text-text-xs text-grayTextPrimary'>
+                      {t("uplcPage.output.flatBytes")}
+                    </span>
+                    <span className='text-text-sm font-medium'>
+                      {result.flatLength.toLocaleString()}
+                    </span>
+                  </div>
+                  <div className='h-4 w-px bg-border' />
+                  <div className='flex items-center gap-1.5'>
+                    <span className='text-text-xs text-grayTextPrimary'>
+                      {t("uplcPage.output.cborBytes")}
+                    </span>
+                    <span className='text-text-sm font-medium'>
+                      {result.cborLength.toLocaleString()}
+                    </span>
+                  </div>
+                  {languageBadgeLabel && languageEvidence && (
+                    <>
+                      <div className='h-4 w-px bg-border' />
+                      <div className='group relative'>
+                        <span
+                          className='bg-primary/10 cursor-help rounded-s px-2 py-0.5 text-text-xs font-medium text-primary shadow-sm'
+                          tabIndex={0}
+                          aria-describedby={languageTooltipId}
+                        >
+                          {t("uplcPage.output.likely", {
+                            language: languageBadgeLabel,
+                          })}{" "}
+                          ⓘ
+                        </span>
+                        <div
+                          className='absolute left-0 top-full z-10 mt-1 hidden max-w-[320px] rounded-m border border-border bg-cardBg p-2 text-text-xs shadow-lg group-hover:block group-focus:block'
+                          role='tooltip'
+                          id={languageTooltipId}
+                        >
+                          <p className='break-words'>{languageEvidence}</p>
+                        </div>
                       </div>
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
-
-            <div className='flex w-full flex-col gap-4'>
-              <div className='flex flex-col gap-1'>
-                <div className='flex items-center justify-between'>
-                  <span className='text-text-sm font-medium'>
-                    {t("uplcPage.encodings.flatHex")}
-                  </span>
-                  <Copy copyText={result.flatHex} />
+                    </>
+                  )}
                 </div>
-                <textarea
-                  value={result.flatHex}
-                  readOnly
-                  spellCheck={false}
-                  className='h-[120px] w-full resize-none rounded-m border border-border bg-cardBg p-[10px] font-mono text-text-xs shadow-md outline-none'
-                />
               </div>
 
-              <div className='flex flex-col gap-1'>
-                <div className='flex items-center justify-between'>
-                  <span className='text-text-sm font-medium'>
-                    {t("uplcPage.encodings.cborHex")}
-                  </span>
-                  <Copy copyText={result.cborHex} />
+              <div className='flex w-full flex-col gap-4'>
+                <div className='flex flex-col gap-1'>
+                  <div className='flex items-center justify-between'>
+                    <span className='text-text-sm font-medium'>
+                      {t("uplcPage.encodings.flatHex")}
+                    </span>
+                    <Copy copyText={result.flatHex} />
+                  </div>
+                  <textarea
+                    value={result.flatHex}
+                    readOnly
+                    spellCheck={false}
+                    className='font-mono h-[120px] w-full resize-none rounded-m border border-border bg-cardBg p-[10px] text-text-xs shadow-md outline-none'
+                  />
                 </div>
-                <textarea
-                  value={result.cborHex}
-                  readOnly
-                  spellCheck={false}
-                  className='h-[120px] w-full resize-none rounded-m border border-border bg-cardBg p-[10px] font-mono text-text-xs shadow-md outline-none'
-                />
-              </div>
 
-              <div className='flex flex-col gap-1'>
-                <div className='flex items-center justify-between'>
-                  <span className='text-text-sm font-medium'>{t("uplcPage.encodings.uplc")}</span>
-                  <div className='flex items-center gap-2'>
-                    <div className='flex items-center gap-2 text-text-sm'>
-                      <span>{t("uplcPage.encodings.prettyPrint")}</span>
-                      <Switch
-                        active={prettyMode}
-                        onChange={checked => setPrettyMode(checked)}
+                <div className='flex flex-col gap-1'>
+                  <div className='flex items-center justify-between'>
+                    <span className='text-text-sm font-medium'>
+                      {t("uplcPage.encodings.cborHex")}
+                    </span>
+                    <Copy copyText={result.cborHex} />
+                  </div>
+                  <textarea
+                    value={result.cborHex}
+                    readOnly
+                    spellCheck={false}
+                    className='font-mono h-[120px] w-full resize-none rounded-m border border-border bg-cardBg p-[10px] text-text-xs shadow-md outline-none'
+                  />
+                </div>
+
+                <div className='flex flex-col gap-1'>
+                  <div className='flex items-center justify-between'>
+                    <span className='text-text-sm font-medium'>
+                      {t("uplcPage.encodings.uplc")}
+                    </span>
+                    <div className='flex items-center gap-2'>
+                      <div className='flex items-center gap-2 text-text-sm'>
+                        <span>{t("uplcPage.encodings.prettyPrint")}</span>
+                        <Switch
+                          active={prettyMode}
+                          onChange={checked => setPrettyMode(checked)}
+                        />
+                      </div>
+                      <Copy
+                        copyText={prettyMode ? result.pretty : result.compact}
                       />
                     </div>
-                    <Copy
-                      copyText={
-                        prettyMode ? result.pretty : result.compact
-                      }
-                    />
                   </div>
+                  <pre className='font-mono h-[300px] w-full overflow-auto rounded-m border border-border bg-cardBg p-[10px] text-text-xs shadow-md'>
+                    {prettyMode ? result.pretty : result.compact}
+                  </pre>
                 </div>
-                <pre className='h-[300px] w-full overflow-auto rounded-m border border-border bg-cardBg p-[10px] font-mono text-text-xs shadow-md'>
-                  {prettyMode ? result.pretty : result.compact}
-                </pre>
               </div>
-            </div>
-          </>
-        )}
+            </>
+          )}
         </div>
       </section>
     </PageBase>

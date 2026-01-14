@@ -102,7 +102,11 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
           <AdaWithTooltip data={item.account.owner[0].active_stake} />
         </p>
       ),
-      title: <p className='w-full text-right'>{t("pools.detailPage.aboutTab.activeStake")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("pools.detailPage.aboutTab.activeStake")}
+        </p>
+      ),
       visible: true,
       widthPx: 20,
     },
@@ -113,7 +117,11 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
           <AdaWithTooltip data={item.account.owner[0].live_stake} />
         </p>
       ),
-      title: <p className='w-full text-right'>{t("pools.detailPage.aboutTab.liveStake")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("pools.detailPage.aboutTab.liveStake")}
+        </p>
+      ),
       visible: true,
       widthPx: 20,
     },
@@ -147,13 +155,17 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
           </div>
         );
       },
-      title: <p className='w-full text-right'>{t("pools.detailPage.aboutTab.relativePledge")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("pools.detailPage.aboutTab.relativePledge")}
+        </p>
+      ),
       visible: true,
       widthPx: 30,
     },
     {
       key: "pledge_staked",
-      render: (item) => {
+      render: item => {
         const ownerLiveStake = item?.account?.owner[0].live_stake ?? 0;
         const pledgeStakedRatio = (ownerLiveStake / liveStake) * 100;
 
@@ -189,7 +201,11 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
           "-"
         );
       },
-      title: <p className='w-full text-right'>{t("pools.detailPage.aboutTab.pledgeStaked")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("pools.detailPage.aboutTab.pledgeStaked")}
+        </p>
+      ),
       visible: true,
       widthPx: 30,
     },
@@ -224,7 +240,11 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
           <AdaWithTooltip data={item.account.reward.active_stake} />
         </p>
       ),
-      title: <p className='w-full text-right'>{t("pools.detailPage.aboutTab.activeStake")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("pools.detailPage.aboutTab.activeStake")}
+        </p>
+      ),
       visible: true,
       widthPx: 20,
     },
@@ -235,7 +255,11 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
           <AdaWithTooltip data={item.account.reward.live_stake} />
         </p>
       ),
-      title: <p className='w-full text-right'>{t("pools.detailPage.aboutTab.liveStake")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("pools.detailPage.aboutTab.liveStake")}
+        </p>
+      ),
       visible: true,
       widthPx: 20,
     },
@@ -269,7 +293,11 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
     {
       key: "port",
       render: item => <p className='text-right'>{item.port}</p>,
-      title: <p className='w-full text-right'>{t("pools.detailPage.aboutTab.port")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("pools.detailPage.aboutTab.port")}
+        </p>
+      ),
       visible: true,
       widthPx: 150,
     },
@@ -312,7 +340,11 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
     {
       key: "active_in",
       render: item => <EpochCell no={item.active_epoch_no} />,
-      title: <p className='w-full text-right'>{t("pools.detailPage.aboutTab.activeIn")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("pools.detailPage.aboutTab.activeIn")}
+        </p>
+      ),
       visible: true,
       widthPx: 20,
     },
@@ -368,12 +400,17 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
         return (
           <div className='flex flex-col'>
             <span>
-              {t("pools.detailPage.aboutTab.pledge")}: <AdaWithTooltip data={item.pledge} />
+              {t("pools.detailPage.aboutTab.pledge")}:{" "}
+              <AdaWithTooltip data={item.pledge} />
             </span>
             <span>
-              {t("pools.detailPage.aboutTab.fixedCosts")}: <AdaWithTooltip data={item.fixed_cost} />
+              {t("pools.detailPage.aboutTab.fixedCosts")}:{" "}
+              <AdaWithTooltip data={item.fixed_cost} />
             </span>
-            <span>{t("pools.detailPage.aboutTab.margin")}: {(item.margin * 100).toFixed(2)}%</span>
+            <span>
+              {t("pools.detailPage.aboutTab.margin")}:{" "}
+              {(item.margin * 100).toFixed(2)}%
+            </span>
           </div>
         );
       },
@@ -392,7 +429,9 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
                 className='flex w-fit cursor-pointer items-center justify-end gap-1/2'
               >
                 <Download className='text-primary' size={11} />
-                <span className='text-primary'>{t("pools.detailPage.aboutTab.download")}</span>
+                <span className='text-primary'>
+                  {t("pools.detailPage.aboutTab.download")}
+                </span>
               </div>
             </Tooltip>
             <div className='flex items-center justify-end gap-1/2'>
@@ -406,7 +445,11 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
           </div>
         );
       },
-      title: <p className='w-full text-right'>{t("pools.detailPage.aboutTab.metadata")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("pools.detailPage.aboutTab.metadata")}
+        </p>
+      ),
       visible: true,
       widthPx: 50,
     },
@@ -442,7 +485,11 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
     {
       key: "epoch",
       render: item => <EpochCell no={item?.retiring_epoch} />,
-      title: <p className='w-full text-end'>{t("pools.detailPage.aboutTab.retiringEpoch")}</p>,
+      title: (
+        <p className='w-full text-end'>
+          {t("pools.detailPage.aboutTab.retiringEpoch")}
+        </p>
+      ),
       visible: true,
       widthPx: 180,
     },
@@ -475,6 +522,10 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
             query={updateQuery}
             items={ownerItems}
             columns={ownerColumns}
+            renderDisplayText={(count, total) =>
+              t("common:table.displaying", { count, total })
+            }
+            noItemsLabel={t("common:table.noItems")}
           />
         </div>
         <div className='flex flex-col gap-2'>
@@ -486,6 +537,10 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
             query={updateQuery}
             items={[updateItem]}
             columns={rewardsColumns}
+            renderDisplayText={(count, total) =>
+              t("common:table.displaying", { count, total })
+            }
+            noItemsLabel={t("common:table.noItems")}
           />
         </div>
         <div className='flex flex-col gap-2'>
@@ -497,6 +552,10 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
             query={aboutQuery}
             items={relayItems}
             columns={relayColumns}
+            renderDisplayText={(count, total) =>
+              t("common:table.displaying", { count, total })
+            }
+            noItemsLabel={t("common:table.noItems")}
           />
         </div>
         <div className='flex flex-col gap-2'>
@@ -509,6 +568,10 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
             query={updateQuery}
             items={updateItems}
             columns={certificatesColumns}
+            renderDisplayText={(count, total) =>
+              t("common:table.displaying", { count, total })
+            }
+            noItemsLabel={t("common:table.noItems")}
           />
         </div>
         <div className='flex flex-col gap-2'>
@@ -521,6 +584,10 @@ const AboutTabItem: FC<AboutTabItemProps> = ({
             query={retirmentQuery}
             items={retirmentItems}
             columns={retirmentColumns}
+            renderDisplayText={(count, total) =>
+              t("common:table.displaying", { count, total })
+            }
+            noItemsLabel={t("common:table.noItems")}
           />
         </div>
       </div>

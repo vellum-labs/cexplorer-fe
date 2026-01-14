@@ -10,13 +10,14 @@ export const PolicyCell = ({
   policyId: string;
   enableHover?: boolean;
 }) => {
-  const { handleMouseEnter, handleMouseLeave, handleCopyMouseEnter, isHighlighted } =
-    useHoverHighlight(policyId, enableHover);
+  const {
+    handleMouseEnter,
+    handleMouseLeave,
+    handleCopyMouseEnter,
+    isHighlighted,
+  } = useHoverHighlight(policyId, enableHover);
   return (
-    <div
-      onMouseLeave={handleMouseLeave}
-      className='flex items-center gap-1'
-    >
+    <div onMouseLeave={handleMouseLeave} className='flex items-center gap-1'>
       <Link
         to='/policy/$policyId'
         params={{ policyId: policyId }}

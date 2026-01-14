@@ -106,7 +106,11 @@ export const useCCMemberDetail = ({
           <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
             <PulseDot color={!isActive ? "bg-redText" : undefined} />
             <span className='text-text-xs font-medium'>
-              {isActive ? t("gov.cc.active") : isRetired ? t("gov.cc.retired") : t("gov.cc.inactive")}
+              {isActive
+                ? t("gov.cc.active")
+                : isRetired
+                  ? t("gov.cc.retired")
+                  : t("gov.cc.inactive")}
             </span>
           </div>
         ),
@@ -274,13 +278,20 @@ export const useCCMemberDetail = ({
 
                 const voteCount = voteCounts[vote] ?? 0;
 
+                const voteLabel =
+                  vote === "Yes"
+                    ? t("governance.common.yes")
+                    : vote === "Abstain"
+                      ? t("governance.common.abstain")
+                      : t("governance.common.no");
+
                 return (
                   <div
                     className='flex items-center justify-between gap-1'
                     key={vote}
                   >
                     <span className='min-w-24 text-text-sm text-grayTextPrimary'>
-                      {vote} ({voteCount})
+                      {voteLabel} ({voteCount})
                     </span>
                     <div className='relative h-2 w-2/3 overflow-hidden rounded-[4px] bg-[#E4E7EC]'>
                       <span

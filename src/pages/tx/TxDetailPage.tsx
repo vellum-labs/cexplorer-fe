@@ -230,7 +230,8 @@ const TxDetailPage = () => {
         {
           label: (
             <span className='inline pt-1/2'>
-              {t("blocks.title")} {data?.block?.no && `(${formatNumber(data?.block?.no)})`}
+              {t("blocks.title")}{" "}
+              {data?.block?.no && `(${formatNumber(data?.block?.no)})`}
             </span>
           ),
           ...(data?.block?.hash

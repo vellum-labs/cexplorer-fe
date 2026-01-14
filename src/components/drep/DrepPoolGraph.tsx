@@ -51,7 +51,9 @@ export const DrepPoolGraph: FC<DrepPoolGraphProps> = ({ epochs, query }) => {
   };
 
   const tooltipLabels = {
-    [KEYS.totalDelegatedStake]: t("dreps.graphs.drepPool.totalDelegatedStakeShort"),
+    [KEYS.totalDelegatedStake]: t(
+      "dreps.graphs.drepPool.totalDelegatedStakeShort",
+    ),
     [KEYS.drepDelegated]: t("dreps.graphs.drepPool.drepDelegated"),
     [KEYS.abstainDrep]: t("dreps.graphs.drepPool.abstainDrepShort"),
     [KEYS.noConfidenceDrep]: t("dreps.graphs.drepPool.noConfidenceDrepShort"),

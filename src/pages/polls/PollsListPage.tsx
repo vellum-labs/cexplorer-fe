@@ -215,6 +215,10 @@ export const PollsListPage = () => {
               return true;
             })}
             columns={columns}
+            renderDisplayText={(count, total) =>
+              t("table.displaying", { count, total })
+            }
+            noItemsLabel={t("table.noItems")}
           />
         </section>
       </PageBase>

@@ -50,7 +50,8 @@ export const MoreMobileItems = ({ onBack, setOpen, power }: Props) => {
           icon={<ChevronsUp color={colors.purpleText} />}
           title={
             <span className='text-text-lg font-semibold'>
-              {t("navbar.getCexplorer")} <span className='text-purpleText'>{t("navbar.pro")}</span>
+              {t("navbar.getCexplorer")}{" "}
+              <span className='text-purpleText'>{t("navbar.pro")}</span>
             </span>
           }
           className='max-h-[200px] bg-darker'

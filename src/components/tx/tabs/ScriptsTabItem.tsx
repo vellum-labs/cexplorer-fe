@@ -53,7 +53,8 @@ export const ScriptsTabItem = () => {
               )}
               {output.reference_script?.size && (
                 <span className='flex h-[25px] items-center rounded-max border border-border bg-secondaryBg px-1 text-text-xs font-medium'>
-                  {t("tx.size")} {(output.reference_script?.size / 1024).toFixed(2)}kB
+                  {t("tx.size")}{" "}
+                  {(output.reference_script?.size / 1024).toFixed(2)}kB
                 </span>
               )}
             </div>

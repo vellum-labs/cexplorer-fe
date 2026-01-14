@@ -50,7 +50,10 @@ export const DrepDetailStatsTab = memo(function DrepDetailStatsTabMemo({
 
         const nameFunc = {
           [powerLabel]: item => (item ? formatLovelace(item.data) : powerLabel),
-          [delegatorsLabel]: item => (item ? `${item.data} ${delegatorsLabel.toLowerCase()}` : delegatorsLabel),
+          [delegatorsLabel]: item =>
+            item
+              ? `${item.data} ${delegatorsLabel.toLowerCase()}`
+              : delegatorsLabel,
         };
 
         return (

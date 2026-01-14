@@ -103,9 +103,7 @@ export const AverageDrepGraph: FC = () => {
             item ? Math.round(item.data) : "N/A",
           [KEYS.avgStake]: (item: any) =>
             item ? formatLovelace(item.data) : "N/A",
-          [KEYS.votingPower]: (
-            item: any,
-          ) =>
+          [KEYS.votingPower]: (item: any) =>
             item && typeof item.data === "number"
               ? `${item.data.toFixed(2)}%`
               : "N/A",

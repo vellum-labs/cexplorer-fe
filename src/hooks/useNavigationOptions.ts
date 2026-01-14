@@ -113,10 +113,21 @@ export const useNavigationOptions = () => {
         },
       ],
       governance: [
-        { label: t("governance.dreps"), href: "/drep", params: { tab: "list" } },
-        { label: t("governance.cc"), href: "/gov/cc", params: { tab: "members" } },
+        {
+          label: t("governance.dreps"),
+          href: "/drep",
+          params: { tab: "list" },
+        },
+        {
+          label: t("governance.cc"),
+          href: "/gov/cc",
+          params: { tab: "members" },
+        },
         { label: t("governance.votes"), href: "/gov/vote" },
-        { label: t("governance.powerThresholds"), href: "/gov/power-thresholds" },
+        {
+          label: t("governance.powerThresholds"),
+          href: "/gov/power-thresholds",
+        },
         { label: t("governance.governanceActions"), href: "/gov/action" },
         {
           label: t("governance.drepDelegations"),
@@ -212,7 +223,7 @@ export const useNavigationOptions = () => {
         },
       ],
     }),
-    [t]
+    [t],
   );
 
   const labels = useMemo(
@@ -226,7 +237,7 @@ export const useNavigationOptions = () => {
       education: t("main.education"),
       more: t("main.more"),
     }),
-    [t]
+    [t],
   );
 
   return { navigationOptions, labels };

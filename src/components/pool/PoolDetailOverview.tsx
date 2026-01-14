@@ -54,12 +54,18 @@ const PoolDetailOverview = ({
           </>
         ) : (
           <>
-            <OverviewCard title={t("pools.detailPage.about.title")} overviewList={aboutList} />
+            <OverviewCard
+              title={t("pools.detailPage.about.title")}
+              overviewList={aboutList}
+            />
             <OverviewCard
               title={t("pools.detailPage.stakeAndPledge.title")}
               overviewList={stakeAndPledgeList}
             />
-            <OverviewCard title={t("pools.detailPage.performance.title")} overviewList={performanceList} />
+            <OverviewCard
+              title={t("pools.detailPage.performance.title")}
+              overviewList={performanceList}
+            />
           </>
         )}
       </div>

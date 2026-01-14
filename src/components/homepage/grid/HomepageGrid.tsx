@@ -45,10 +45,7 @@ export const HomepageGrid: FC = () => {
           detailAddr,
           w,
         }) => (
-          <div
-            key={i}
-            className='rounded-m border border-border bg-background'
-          >
+          <div key={i} className='rounded-m border border-border bg-background'>
             <HomepageGridItem
               title={title}
               type={type}

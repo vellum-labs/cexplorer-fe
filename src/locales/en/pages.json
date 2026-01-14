@@ -66,12 +66,14 @@
     "table": {
       "date": "Date",
       "height": "Height",
+      "epoch": "Epoch",
       "slot": "Slot",
       "txs": "TXs",
       "mintedBy": "Minted by",
       "hash": "Hash",
       "epochSlot": "Epoch slot",
       "vrfKey": "VRF key",
+      "protocol": "Protocol",
       "size": "Size",
       "certCount": "Cert Count",
       "protoVersion": "Proto Version",
@@ -964,9 +966,6 @@
   "polls": {
     "title": "Cexplorer governance actions"
   },
-  "poolDebug": {
-    "title": "SPO Debug"
-  },
   "poolAnalytics": {
     "title": "Pool analytics"
   },
@@ -1040,6 +1039,7 @@
     "unauthorized": "Unauthorized"
   },
   "poolDebug": {
+    "title": "SPO Debug",
     "cheatSheet": {
       "description": "Quick reference guide for stake pool operators. Copy-paste commands for building cardano-node, calculating KES periods, and generating operational certificates—the cheatsheet that SPOs actually use.",
       "buildAndUpdate": "Build and update Cardano Node",

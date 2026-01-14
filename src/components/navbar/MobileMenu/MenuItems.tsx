@@ -23,7 +23,11 @@ interface MenuItemsProps {
   autoOpenWallet?: boolean;
 }
 
-export const MenuItems: FC<MenuItemsProps> = ({ setOpen, setActiveMenu, autoOpenWallet = false }) => {
+export const MenuItems: FC<MenuItemsProps> = ({
+  setOpen,
+  setActiveMenu,
+  autoOpenWallet = false,
+}) => {
   const { t } = useAppTranslation("navigation");
   const price = useAdaPriceWithHistory();
 
@@ -126,7 +130,9 @@ export const MenuItems: FC<MenuItemsProps> = ({ setOpen, setActiveMenu, autoOpen
         onClick={() => setActiveMenu("settings")}
       />
       <div className='flex w-full flex-col md:hidden'>
-        {enabledWalletConnector && <WalletButton variant='long' autoOpen={autoOpenWallet} />}
+        {enabledWalletConnector && (
+          <WalletButton variant='long' autoOpen={autoOpenWallet} />
+        )}
       </div>
       <div className='w-full pt-1.5' onClick={() => setOpen(false)}>
         <AdaPriceIndicator price={price} />

@@ -107,7 +107,13 @@ export const useFetchArticleList = (
     staleTime: 1000 * 60 * 5,
   });
 
-export const fetchWikiDetail = async ({ lng, url }: { lng: Locales; url: string }) => {
+export const fetchWikiDetail = async ({
+  lng,
+  url,
+}: {
+  lng: Locales;
+  url: string;
+}) => {
   const apiUrl = "/article/detail";
 
   const options = {
@@ -121,7 +127,11 @@ export const fetchWikiDetail = async ({ lng, url }: { lng: Locales; url: string 
   return handleFetch<WikiDetailResponse>(apiUrl, undefined, options);
 };
 
-export const useFetchWikiDetail = (lng: Locales, url: string, enabled: boolean = true) =>
+export const useFetchWikiDetail = (
+  lng: Locales,
+  url: string,
+  enabled: boolean = true,
+) =>
   useQuery({
     queryKey: ["wikiDetail", lng, url],
     queryFn: async () => {

@@ -50,7 +50,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
   miscConst,
   outcomesOnly = false,
 }) => {
-  const { t } = useAppTranslation();
+  const { t } = useAppTranslation(["pages", "common"]);
   const { page, state } = useSearch({
     from: "/gov/action/",
   });
@@ -237,15 +237,35 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
         onShow: e => toggleFilter(e, "type"),
         onFilter: () => changeFilterByKey("type", filterDraft["type"]),
         onReset: () => changeFilterByKey("type"),
+        resetLabel: t("common:actions.reset"),
+        filterLabel: t("common:actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             {[
-              { value: "NewCommittee", label: t("governance.actions.newCommittee") },
-              { value: "NewConstitution", label: t("governance.actions.newConstitution") },
-              { value: "HardForkInitiation", label: t("governance.actions.hardforkInitiation") },
-              { value: "ParameterChange", label: t("governance.actions.parameterChange") },
-              { value: "TreasuryWithdrawals", label: t("governance.actions.treasuryWithdrawals") },
-              { value: "InfoAction", label: t("governance.actions.infoAction") },
+              {
+                value: "NewCommittee",
+                label: t("governance.actions.newCommittee"),
+              },
+              {
+                value: "NewConstitution",
+                label: t("governance.actions.newConstitution"),
+              },
+              {
+                value: "HardForkInitiation",
+                label: t("governance.actions.hardforkInitiation"),
+              },
+              {
+                value: "ParameterChange",
+                label: t("governance.actions.parameterChange"),
+              },
+              {
+                value: "TreasuryWithdrawals",
+                label: t("governance.actions.treasuryWithdrawals"),
+              },
+              {
+                value: "InfoAction",
+                label: t("governance.actions.infoAction"),
+              },
             ].map(({ value, label }) => (
               <label className='flex items-center gap-1' key={value}>
                 <input
@@ -329,7 +349,11 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
 
         return <p className='text-right'>{item?.expired_epoch - epoch}</p>;
       },
-      title: <p className='w-full text-right'>{t("governance.actions.durationEpochs")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("governance.actions.durationEpochs")}
+        </p>
+      ),
       visible: columnsVisibility.duration,
       widthPx: 50,
     },
@@ -376,7 +400,17 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
     {
       key: "status",
       render: item => (
-        <GovernanceStatusBadge item={item} currentEpoch={miscConst?.no ?? 0} />
+        <GovernanceStatusBadge
+          item={item}
+          currentEpoch={miscConst?.no ?? 0}
+          labels={{
+            Active: t("common:governance.status.active"),
+            Ratified: t("common:governance.status.ratified"),
+            Enacted: t("common:governance.status.enacted"),
+            Expired: t("common:governance.status.expired"),
+            Dropped: t("common:governance.status.dropped"),
+          }}
+        />
       ),
       title: t("governance.actions.status"),
       visible: columnsVisibility.status,
@@ -432,6 +466,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("common:table.rows")}
                 columnsOptions={governanceListTableOptions.map(item => {
                   return {
                     label: t(`common:tableSettings.${item.key}`),
@@ -469,6 +504,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={governanceListTableOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),
@@ -521,6 +557,10 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("common:table.displaying", { count, total })
+        }
+        noItemsLabel={t("common:table.noItems")}
       />
     </>
   );

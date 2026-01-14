@@ -217,7 +217,8 @@ export const MetadataListPage: FC = () => {
               <LoadingSkeleton height='27px' width={"220px"} />
             ) : totalItems > 0 ? (
               <h3 className='basis-[230px] text-nowrap'>
-                {t("common:phrases.totalOf")} {formatNumber(totalItems)} {t("metadata.totalOfSuffix")}
+                {t("common:phrases.totalOf")} {formatNumber(totalItems)}{" "}
+                {t("metadata.totalOfSuffix")}
               </h3>
             ) : (
               ""
@@ -228,6 +229,7 @@ export const MetadataListPage: FC = () => {
                 <TableSettingsDropdown
                   rows={rows}
                   setRows={setRows}
+                  rowsLabel={t("common:table.rows")}
                   columnsOptions={metadataTxListTableOptions.map(item => {
                     return {
                       label: t(`common:tableSettings.${item.key}`),
@@ -271,6 +273,7 @@ export const MetadataListPage: FC = () => {
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("common:table.rows")}
                 columnsOptions={metadataTxListTableOptions.map(item => {
                   return {
                     label: item.name,
@@ -301,6 +304,10 @@ export const MetadataListPage: FC = () => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </section>
     </PageBase>

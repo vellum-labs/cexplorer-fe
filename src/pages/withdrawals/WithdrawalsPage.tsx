@@ -171,6 +171,7 @@ export const WithdrawalsPage = () => {
           <TableSettingsDropdown
             rows={rows}
             setRows={setRows}
+            rowsLabel={t("common:table.rows")}
             columnsOptions={withdrawalsTableOptions.map(item => {
               return {
                 label: t(`common:tableSettings.${item.key}`),
@@ -197,6 +198,10 @@ export const WithdrawalsPage = () => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </div>
     </PageBase>

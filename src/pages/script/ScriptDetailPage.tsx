@@ -54,7 +54,11 @@ export const ScriptDetailPage = () => {
       title={t("pages:scriptDetail.title")}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>{t("pages:breadcrumbs.scriptList")}</span>,
+          label: (
+            <span className='inline pt-1/2'>
+              {t("pages:breadcrumbs.scriptList")}
+            </span>
+          ),
           link: "/script",
         },
         {

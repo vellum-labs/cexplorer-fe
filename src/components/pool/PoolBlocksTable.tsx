@@ -92,7 +92,11 @@ const PoolBlocksTable = ({ poolId }: Props) => {
     {
       key: "tx_count",
       render: item => <p className='text-right'>{item.tx_count}</p>,
-      title: <p className='w-full text-right'>{t("pools.detailPage.blocksTable.txs")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("pools.detailPage.blocksTable.txs")}
+        </p>
+      ),
       visible: columnsVisibility.tx_count,
       widthPx: 50,
     },
@@ -110,7 +114,9 @@ const PoolBlocksTable = ({ poolId }: Props) => {
 
         return item.hash;
       },
-      title: <p className='flex w-full justify-end'>{t("common:labels.hash")}</p>,
+      title: (
+        <p className='flex w-full justify-end'>{t("common:labels.hash")}</p>
+      ),
       visible: columnsVisibility.hash,
       widthPx: 90,
     },
@@ -161,7 +167,11 @@ const PoolBlocksTable = ({ poolId }: Props) => {
 
         return `${item.protocol.major}.${item.protocol.minor}`;
       },
-      title: <span className='flex w-full justify-end'>{t("common:labels.protocol")}</span>,
+      title: (
+        <span className='flex w-full justify-end'>
+          {t("common:labels.protocol")}
+        </span>
+      ),
       visible: columnsVisibility.protocol,
       widthPx: 50,
     },
@@ -170,7 +180,11 @@ const PoolBlocksTable = ({ poolId }: Props) => {
       render: item => (
         <p className='text-right'>{item.op_cert_counter ?? "-"}</p>
       ),
-      title: <p className='w-full text-right'>{t("pools.detailPage.blocksTable.certCount")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("pools.detailPage.blocksTable.certCount")}
+        </p>
+      ),
       visible: columnsVisibility.cert_counter,
       widthPx: 70,
     },
@@ -189,6 +203,7 @@ const PoolBlocksTable = ({ poolId }: Props) => {
         <TableSettingsDropdown
           rows={rows}
           setRows={setRows}
+          rowsLabel={t("common:table.rows")}
           columnsOptions={poolBlocksTableOptions.map(item => {
             return {
               label: t(`common:tableSettings.${item.key}`),
@@ -214,6 +229,10 @@ const PoolBlocksTable = ({ poolId }: Props) => {
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("common:table.displaying", { count, total })
+        }
+        noItemsLabel={t("common:table.noItems")}
       />
     </>
   );

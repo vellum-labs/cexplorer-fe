@@ -55,7 +55,9 @@ export const EpochParameters: FC<EpochParametersProps> = ({
     },
     {
       key: "value",
-      title: <p className='w-full text-right'>{t("epochs.parameters.value")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("epochs.parameters.value")}</p>
+      ),
       width: 85,
     },
   ];
@@ -515,7 +517,9 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         <h3 className='basis-[220px]'>{t("epochs.parameters.title")}</h3>
         <div className='flex h-[40px] w-fit shrink-0 items-center justify-center gap-1/2 rounded-s border border-border px-1.5'>
           <Download size={20} color={colors.text} />
-          <span className='text-text-sm font-medium'>{t("epochs.parameters.export")}</span>
+          <span className='text-text-sm font-medium'>
+            {t("epochs.parameters.export")}
+          </span>
         </div>
       </div>
       <div

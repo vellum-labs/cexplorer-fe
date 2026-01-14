@@ -111,7 +111,8 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
       label: t("epochs.summary.tps"),
       value: (
         <p className='text-text-sm font-medium'>
-          {usedTPS?.toFixed(2)} ({t("epochs.summary.used")}) / {capTps?.toFixed(2)} ({t("epochs.summary.cap")})
+          {usedTPS?.toFixed(2)} ({t("epochs.summary.used")}) /{" "}
+          {capTps?.toFixed(2)} ({t("epochs.summary.cap")})
         </p>
       ),
     },
@@ -126,7 +127,9 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
             <div className='absolute left-2'>
               <PulseDot />
             </div>
-            <span className='text-text-xs font-medium'>{t("epochs.summary.currentEpoch")}</span>
+            <span className='text-text-xs font-medium'>
+              {t("epochs.summary.currentEpoch")}
+            </span>
           </div>
         )
       }

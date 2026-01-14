@@ -110,7 +110,10 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
         <DateCell time={data?.[0]?.activity?.recent} />
       ),
     },
-    { label: t("address.privateName"), value: <AddCustomLabel address={address} /> },
+    {
+      label: t("address.privateName"),
+      value: <AddCustomLabel address={address} />,
+    },
   ];
 
   const delegationArr = [
@@ -159,7 +162,9 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
             >
               {data[0]?.vote?.drep?.data?.given_name &&
                 data[0]?.vote?.drep?.data?.given_name}
-              <span className='text-text-sm text-primary'>{t("address.alwaysAbstain")}</span>
+              <span className='text-text-sm text-primary'>
+                {t("address.alwaysAbstain")}
+              </span>
             </Link>
           ) : data[0]?.vote?.vote?.live_drep === "drep_always_no_confidence" ? (
             <Link
@@ -285,7 +290,10 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
   ];
 
   const detail = [
-    { label: t("labels.type"), value: <AddressTypeInitialsBadge address={address} /> },
+    {
+      label: t("labels.type"),
+      value: <AddressTypeInitialsBadge address={address} />,
+    },
     {
       label: t("labels.address"),
       value: (
@@ -298,10 +306,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
     {
       label: t("address.paymentCredential"),
       value: (
-        <p
-          className='flex items-center gap-[6px]'
-          title={paymentCredential}
-        >
+        <p className='flex items-center gap-[6px]' title={paymentCredential}>
           {parseShelleyAddress(address)?.paymentPart === "ScriptHash" ? (
             <Link
               to='/script/$hash'
@@ -313,10 +318,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
           ) : (
             <span>{formatString(paymentCredential, "long")}</span>
           )}
-          <Copy
-            copyText={paymentCredential}
-            className='translate-y-[2px]'
-          />
+          <Copy copyText={paymentCredential} className='translate-y-[2px]' />
         </p>
       ),
     },
@@ -359,7 +361,11 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
           className=''
         />
       )}
-      <OverviewCard title={t("address.detail")} overviewList={detail} className='' />
+      <OverviewCard
+        title={t("address.detail")}
+        overviewList={detail}
+        className=''
+      />
     </>
   );
 };

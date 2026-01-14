@@ -64,7 +64,8 @@ const BlocksListPage = () => {
           </p>
         ) : (
           <h3 className='pb-1.5'>
-            {t("common:phrases.totalOf")} {formatNumber(totalItems ?? 0)} {t("blocks.totalOfSuffix")}
+            {t("common:phrases.totalOf")} {formatNumber(totalItems ?? 0)}{" "}
+            {t("blocks.totalOfSuffix")}
           </h3>
         )}
         <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
@@ -81,6 +82,7 @@ const BlocksListPage = () => {
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("common:table.rows")}
                 columnsOptions={blocksListTableOptions.map(item => {
                   return {
                     label: t(`common:tableSettings.${item.key}`),
@@ -152,6 +154,7 @@ const BlocksListPage = () => {
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("common:table.rows")}
                 columnsOptions={blocksListTableOptions.map(item => {
                   return {
                     label: t(`common:tableSettings.${item.key}`),
@@ -215,6 +218,10 @@ const BlocksListPage = () => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </section>
     </PageBase>

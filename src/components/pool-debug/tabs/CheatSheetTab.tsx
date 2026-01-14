@@ -43,13 +43,17 @@ export const CheatSheetTab: FC = () => {
       </div>
 
       <div className='flex flex-col gap-2'>
-        <h3 className='text-text-lg font-semibold'>{t("poolDebug.cheatSheet.kesUpdate")}</h3>
+        <h3 className='text-text-lg font-semibold'>
+          {t("poolDebug.cheatSheet.kesUpdate")}
+        </h3>
         {isLoading ? (
           <LoadingSkeleton height='20px' width='70%' />
         ) : (
           <p className='text-text-sm text-grayTextPrimary'>
-            {t("poolDebug.cheatSheet.slotsPerKESPeriod")} {slotsPerKESPeriod.toLocaleString()} {t("poolDebug.cheatSheet.slot")}{" "}
-            {currentSlot.toLocaleString()} {">"} {t("poolDebug.cheatSheet.expr")} {currentSlot} /{" "}
+            {t("poolDebug.cheatSheet.slotsPerKESPeriod")}{" "}
+            {slotsPerKESPeriod.toLocaleString()}{" "}
+            {t("poolDebug.cheatSheet.slot")} {currentSlot.toLocaleString()}{" "}
+            {">"} {t("poolDebug.cheatSheet.expr")} {currentSlot} /{" "}
             {slotsPerKESPeriod}: {kesPeriod}
           </p>
         )}

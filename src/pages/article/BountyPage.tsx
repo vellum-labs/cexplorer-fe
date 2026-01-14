@@ -20,7 +20,9 @@ export const BountyPage = () => {
     >
       <section className='flex w-full max-w-desktop flex-col items-center px-mobile pb-3 md:px-desktop'>
         <div className='mb-6 w-full max-w-[800px] rounded-xl border border-border p-6'>
-          <h3 className='text-xl mt-0 font-semibold'>{t("bountyPage.guidelines.title")}</h3>
+          <h3 className='text-xl mt-0 font-semibold'>
+            {t("bountyPage.guidelines.title")}
+          </h3>
           <p className='text-sm mb-4 text-grayTextPrimary'>
             {t("bountyPage.guidelines.description")}
           </p>
@@ -100,7 +102,9 @@ export const BountyPage = () => {
               >
                 <MessageCircle size={20} color={colors.darkBlue} />
               </div>
-              <h3 className='text-lg m-0 font-semibold'>{t("bountyPage.support.title")}</h3>
+              <h3 className='text-lg m-0 font-semibold'>
+                {t("bountyPage.support.title")}
+              </h3>
             </div>
             <p className='text-sm mb-4 pl-11 text-grayTextPrimary'>
               {t("bountyPage.support.description")}
@@ -111,7 +115,11 @@ export const BountyPage = () => {
                 target='_blank'
                 rel='noreferrer noopener'
               >
-                <Button size='sm' variant='discord' label={t("bountyPage.support.button")} />
+                <Button
+                  size='sm'
+                  variant='discord'
+                  label={t("bountyPage.support.button")}
+                />
               </a>
             </div>
           </div>
@@ -127,7 +135,9 @@ export const BountyPage = () => {
               >
                 <Heart size={20} color={colors.darkBlue} />
               </div>
-              <h3 className='text-lg m-0 font-semibold'>{t("bountyPage.donate.title")}</h3>
+              <h3 className='text-lg m-0 font-semibold'>
+                {t("bountyPage.donate.title")}
+              </h3>
             </div>
             <p className='text-sm mb-4 pl-11 text-grayTextPrimary'>
               {t("bountyPage.donate.description")}

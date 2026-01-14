@@ -46,12 +46,19 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
   });
 
   // Mapping from internal keys to translated labels
-  const seriesLabels = useMemo(() => ({
-    "Delegators ROA (%)": t("pools.detailPage.rewardsGraph.delegatorsRoa"),
-    "Operators ROA (%)": t("pools.detailPage.rewardsGraph.operatorsRoa"),
-    "Delegators Rewards (₳)": t("pools.detailPage.rewardsGraph.delegatorsRewards"),
-    "Operator rewards (₳)": t("pools.detailPage.rewardsGraph.operatorRewards"),
-  }), [t]);
+  const seriesLabels = useMemo(
+    () => ({
+      "Delegators ROA (%)": t("pools.detailPage.rewardsGraph.delegatorsRoa"),
+      "Operators ROA (%)": t("pools.detailPage.rewardsGraph.operatorsRoa"),
+      "Delegators Rewards (₳)": t(
+        "pools.detailPage.rewardsGraph.delegatorsRewards",
+      ),
+      "Operator rewards (₳)": t(
+        "pools.detailPage.rewardsGraph.operatorRewards",
+      ),
+    }),
+    [t],
+  );
 
   const chartRef = useRef(null);
 
@@ -63,7 +70,7 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
         pageTextStyle: { color: textColor },
         type: "scroll",
         data: Object.keys(graphsVisibility),
-        formatter: (name) => seriesLabels[name] || name,
+        formatter: name => seriesLabels[name] || name,
         textStyle: { color: textColor },
         selected: graphsVisibility,
       },
@@ -79,7 +86,8 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
             return params
               .map(item => {
                 const isAda = item.seriesName.includes("₳");
-                const translatedName = seriesLabels[item.seriesName] || item.seriesName;
+                const translatedName =
+                  seriesLabels[item.seriesName] || item.seriesName;
                 const cleanName = translatedName
                   .replace("(₳)", "")
                   .replace("(%)", "")
@@ -105,7 +113,8 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
 
           const lines = params.map(item => {
             const isAda = item.seriesName.includes("₳");
-            const translatedName = seriesLabels[item.seriesName] || item.seriesName;
+            const translatedName =
+              seriesLabels[item.seriesName] || item.seriesName;
             const cleanName = translatedName
               .replace("(₳)", "")
               .replace("(%)", "")

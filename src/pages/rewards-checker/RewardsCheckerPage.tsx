@@ -51,7 +51,11 @@ export const RewardsCheckerPage = () => {
   return (
     <PageBase
       metadataTitle='rewardsChecker'
-      title={<div className='flex items-center gap-1/2'>{t("rewardsChecker.title")}</div>}
+      title={
+        <div className='flex items-center gap-1/2'>
+          {t("rewardsChecker.title")}
+        </div>
+      }
       breadcrumbItems={[{ label: t("rewardsChecker.title") }]}
     >
       <section className='flex w-full flex-col items-center'>
@@ -80,7 +84,8 @@ export const RewardsCheckerPage = () => {
               params={{ stakeAddr: submittedSearch }}
               className='flex items-center gap-1/2 text-text-sm font-medium text-primary'
             >
-              {t("rewardsChecker.addressDetail")} <ArrowRight color={colors.primary} size={15} />
+              {t("rewardsChecker.addressDetail")}{" "}
+              <ArrowRight color={colors.primary} size={15} />
             </Link>
           )}
         </div>

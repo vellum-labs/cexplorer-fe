@@ -76,7 +76,9 @@ export const VoteCell: FC<VoteCellProps> = ({
             : "cursor-not-allowed text-grayTextSecondary opacity-50"
         }`}
         title={
-          hasAnchorInfo ? t("governance.vote.viewAnchorInfo") : t("governance.vote.noAnchorInfo")
+          hasAnchorInfo
+            ? t("governance.vote.viewAnchorInfo")
+            : t("governance.vote.noAnchorInfo")
         }
       >
         <FileUser size={16} />
@@ -106,7 +108,9 @@ export const VoteCell: FC<VoteCellProps> = ({
           <Modal onClose={closeModal} maxWidth='800px'>
             <div className='p-4'>
               <div className='mb-4 flex items-center justify-between'>
-                <h3 className='text-lg font-semibold'>{t("governance.vote.metadata")}</h3>
+                <h3 className='text-lg font-semibold'>
+                  {t("governance.vote.metadata")}
+                </h3>
                 {txHash && (
                   <Link
                     to='/gov/vote/$hash'
@@ -114,7 +118,9 @@ export const VoteCell: FC<VoteCellProps> = ({
                     search={{ tab: proposalId }}
                     className='text-sm text-primary hover:opacity-80'
                   >
-                    <span className='mr-1'>{t("governance.vote.voteLabel")}</span>
+                    <span className='mr-1'>
+                      {t("governance.vote.voteLabel")}
+                    </span>
                     <span className='font-mono'>
                       {formatString(txHash, "long")}
                     </span>

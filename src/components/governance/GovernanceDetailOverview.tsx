@@ -168,8 +168,16 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
   ];
 
   const drepsPieChartData = [
-    { value: drepsYes, name: t("governance.common.yes"), itemStyle: { color: "#1296DB" } },
-    { value: drepsNo, name: t("governance.common.no"), itemStyle: { color: "#D66A10" } },
+    {
+      value: drepsYes,
+      name: t("governance.common.yes"),
+      itemStyle: { color: "#1296DB" },
+    },
+    {
+      value: drepsNo,
+      name: t("governance.common.no"),
+      itemStyle: { color: "#D66A10" },
+    },
     {
       value: drepsNoConfidence,
       name: t("governance.common.noConfidence"),
@@ -576,6 +584,13 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                             }
                           }
                           currentEpoch={miscConst?.no ?? 0}
+                          labels={{
+                            Active: t("governance.status.active"),
+                            Ratified: t("governance.status.ratified"),
+                            Enacted: t("governance.status.enacted"),
+                            Expired: t("governance.status.expired"),
+                            Dropped: t("governance.status.dropped"),
+                          }}
                         />
                       }
                       overviewList={action}
@@ -650,7 +665,16 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                           >
                             <div className='mt-1 flex w-full items-center justify-between border-t border-border pt-1'>
                               <div className='flex items-center gap-[2px]'>
-                                <Tooltip forceDirection='right' content={<span className='inline-block max-w-[200px]'>{t("governance.overview.thresholdTooltip")}</span>}>
+                                <Tooltip
+                                  forceDirection='right'
+                                  content={
+                                    <span className='inline-block max-w-[200px]'>
+                                      {t(
+                                        "governance.overview.thresholdTooltip",
+                                      )}
+                                    </span>
+                                  }
+                                >
                                   <CircleHelp
                                     size={11}
                                     className='cursor-help text-grayTextPrimary'

@@ -84,7 +84,9 @@ export const BrandAssetsPage = () => {
         </div>
 
         <div className='flex w-full max-w-[800px] flex-col items-center'>
-          <h2 className='text-2xl mb-2 font-semibold'>{t("brandPage.guidelines.title")}</h2>
+          <h2 className='text-2xl mb-2 font-semibold'>
+            {t("brandPage.guidelines.title")}
+          </h2>
           <p className='text-base text-muted-foreground mb-3'>
             {t("brandPage.guidelines.description")}
           </p>
@@ -102,7 +104,9 @@ export const BrandAssetsPage = () => {
               </Link>
               :
             </li>
-            <li className='pl-6'>"{t("brandPage.guidelines.items.dataProvidedBy")}"</li>
+            <li className='pl-6'>
+              "{t("brandPage.guidelines.items.dataProvidedBy")}"
+            </li>
             <li className='pl-6'>"{t("brandPage.guidelines.items.source")}"</li>
           </ul>
           <p className='text-sm text-muted-foreground mt-3'>
@@ -111,7 +115,9 @@ export const BrandAssetsPage = () => {
         </div>
 
         <div className='flex w-full max-w-desktop flex-col items-center'>
-          <h2 className='text-2xl mb-8 font-semibold'>{t("brandPage.logos.title")}</h2>
+          <h2 className='text-2xl mb-8 font-semibold'>
+            {t("brandPage.logos.title")}
+          </h2>
           <div className='grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
             {logosConfig.map(logo => (
               <div
@@ -145,7 +151,9 @@ export const BrandAssetsPage = () => {
         </div>
 
         <div className='flex w-full max-w-desktop flex-col items-center'>
-          <h2 className='text-2xl mb-8 font-semibold'>{t("brandPage.colors.title")}</h2>
+          <h2 className='text-2xl mb-8 font-semibold'>
+            {t("brandPage.colors.title")}
+          </h2>
           <div className='grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
             {colorsConfig.map((color, index) => (
               <div

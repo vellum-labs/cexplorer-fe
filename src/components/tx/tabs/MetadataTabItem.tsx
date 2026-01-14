@@ -29,7 +29,11 @@ const MetadataTabItem = () => {
     metadataArr.push({ [obj]: metadata[obj] });
   }
   if (!metadata && !query.isLoading) {
-    return <p className='w-full text-center text-text-sm'>{t("tx.noMetadataFound")}</p>;
+    return (
+      <p className='w-full text-center text-text-sm'>
+        {t("tx.noMetadataFound")}
+      </p>
+    );
   }
 
   if (query.isLoading) {

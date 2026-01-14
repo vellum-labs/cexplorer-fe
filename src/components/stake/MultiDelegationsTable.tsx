@@ -57,7 +57,11 @@ export const MultiDelegationsTable: FC<MultiDelegationsTableProps> = ({
             {item?.delegation.active.active_epoch_no ?? "-"}
           </div>
         ),
-        title: <p className='w-full text-right'>{t("stake.detailPage.multiDelegationsTable.activeEpoch")}</p>,
+        title: (
+          <p className='w-full text-right'>
+            {t("stake.detailPage.multiDelegationsTable.activeEpoch")}
+          </p>
+        ),
         visible: columnsVisibility.active_in,
         widthPx: 50,
       },
@@ -75,7 +79,9 @@ export const MultiDelegationsTable: FC<MultiDelegationsTableProps> = ({
                 )}
               />
             ) : (
-              <Badge color='yellow'>{t("stake.detailPage.multiDelegationsTable.notDelegated")}</Badge>
+              <Badge color='yellow'>
+                {t("stake.detailPage.multiDelegationsTable.notDelegated")}
+              </Badge>
             )}
           </div>
         ),
@@ -158,7 +164,9 @@ export const MultiDelegationsTable: FC<MultiDelegationsTableProps> = ({
 
   return (
     <div>
-      <h3 className='mb-2 flex items-center gap-1'>{t("stake.detailPage.multiDelegationsTable.title")}</h3>
+      <h3 className='mb-2 flex items-center gap-1'>
+        {t("stake.detailPage.multiDelegationsTable.title")}
+      </h3>
       <GlobalTable
         type='default'
         pagination
@@ -175,6 +183,10 @@ export const MultiDelegationsTable: FC<MultiDelegationsTableProps> = ({
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("common:table.displaying", { count, total })
+        }
+        noItemsLabel={t("common:table.noItems")}
       />
     </div>
   );

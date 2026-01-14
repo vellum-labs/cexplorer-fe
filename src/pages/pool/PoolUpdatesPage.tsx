@@ -173,7 +173,9 @@ export const PoolUpdatesPage: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>{t("common:labels.activeStake")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.activeStake")}</p>
+      ),
       visible: columnsVisibility.active_stake,
       widthPx: 45,
     },
@@ -345,7 +347,11 @@ export const PoolUpdatesPage: FC = () => {
 
         return item.pool_id;
       },
-      title: <p className='w-full text-nowrap text-right'>{t("common:labels.certificate")}</p>,
+      title: (
+        <p className='w-full text-nowrap text-right'>
+          {t("common:labels.certificate")}
+        </p>
+      ),
       visible: columnsVisibility.certificate,
       widthPx: 30,
     },
@@ -370,7 +376,8 @@ export const PoolUpdatesPage: FC = () => {
               <LoadingSkeleton height='27px' width={"220px"} />
             ) : totalItems > 0 ? (
               <h3 className='basis-[230px] text-nowrap'>
-                {t("common:phrases.totalOf")} {formatNumber(totalItems)} {t("pools.updates.totalOfSuffix")}
+                {t("common:phrases.totalOf")} {formatNumber(totalItems)}{" "}
+                {t("pools.updates.totalOfSuffix")}
               </h3>
             ) : (
               ""
@@ -381,6 +388,7 @@ export const PoolUpdatesPage: FC = () => {
                 <TableSettingsDropdown
                   rows={rows}
                   setRows={setRows}
+                  rowsLabel={t("common:table.rows")}
                   columnsOptions={poolUpdatesTableOptions.map(item => {
                     return {
                       label: t(`common:tableSettings.${item.key}`),
@@ -411,6 +419,7 @@ export const PoolUpdatesPage: FC = () => {
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("common:table.rows")}
                 columnsOptions={poolUpdatesTableOptions.map(item => {
                   return {
                     label: t(`common:tableSettings.${item.key}`),
@@ -441,6 +450,10 @@ export const PoolUpdatesPage: FC = () => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </section>
     </PageBase>

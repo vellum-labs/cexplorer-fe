@@ -14,7 +14,10 @@ import type {
 } from "@/types/treasuryTypes";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { findNearestTreasuryRate } from "@/utils/findNearestTreasuryRate";
-import { formatNumber, formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
+import {
+  formatNumber,
+  formatNumberWithSuffix,
+} from "@vellumlabs/cexplorer-sdk";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { format } from "date-fns";
 import ReactEcharts from "echarts-for-react";
@@ -35,7 +38,9 @@ export const TreasuryDonationEpochsTab = ({ query }: Props) => {
 
   const legendLabels = {
     totalDonationsAda: t("treasury.graph.totalDonationsAda"),
-    totalDonationsCurrency: t("treasury.graph.totalDonationsCurrency", { currency: currency.toUpperCase() }),
+    totalDonationsCurrency: t("treasury.graph.totalDonationsCurrency", {
+      currency: currency.toUpperCase(),
+    }),
   };
   const totalAdaDonations = epochs?.map(item => item.treasury_donation);
   const totalCurrencyDonations = epochs?.map(item => {
@@ -234,7 +239,11 @@ export const TreasuryDonationEpochsTab = ({ query }: Props) => {
     },
     {
       key: "ada_donation",
-      title: <p className='w-full text-right'>{t("treasury.table.totalDonationsAda")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("treasury.table.totalDonationsAda")}
+        </p>
+      ),
       render: item => (
         <p className='text-right'>
           <AdaWithTooltip data={item.treasury_donation} />
@@ -247,7 +256,9 @@ export const TreasuryDonationEpochsTab = ({ query }: Props) => {
       key: "secondary_currency_donation",
       title: (
         <p className='w-full text-right'>
-          {t("treasury.table.totalDonationsCurrency", { currency: currency.toUpperCase() })}
+          {t("treasury.table.totalDonationsCurrency", {
+            currency: currency.toUpperCase(),
+          })}
         </p>
       ),
       render: item => {
@@ -303,6 +314,10 @@ export const TreasuryDonationEpochsTab = ({ query }: Props) => {
         query={query}
         items={query.data?.epoch}
         columns={columns}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </>
   );

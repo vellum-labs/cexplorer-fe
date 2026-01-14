@@ -97,7 +97,9 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
       title={t("gov.cc.constitutionalCommittee")}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>{t("gov.cc.governance")}</span>,
+          label: (
+            <span className='inline pt-1/2'>{t("gov.cc.governance")}</span>
+          ),
           link: "/gov",
         },
         { label: t("gov.cc.constitutionalCommittee") },
@@ -126,9 +128,17 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
                   {activeMembers.length}/{currentMembers.length}
                   {activeMembers.length < currentMembers.length && (
                     <Tooltip
-                      content={currentMembers.length - activeMembers.length > 1
-                        ? t("gov.cc.membersRetiredPlural", { count: currentMembers.length - activeMembers.length })
-                        : t("gov.cc.membersRetired", { count: currentMembers.length - activeMembers.length })}
+                      content={
+                        currentMembers.length - activeMembers.length > 1
+                          ? t("gov.cc.membersRetiredPlural", {
+                              count:
+                                currentMembers.length - activeMembers.length,
+                            })
+                          : t("gov.cc.membersRetired", {
+                              count:
+                                currentMembers.length - activeMembers.length,
+                            })
+                      }
                     >
                       <AlertTriangle size={14} className='text-[#F79009]' />
                     </Tooltip>

@@ -158,11 +158,14 @@ export const RewardsTab: FC<RewardsTabProps> = ({
         <div className='flex items-center gap-1'>
           <div className='flex h-[40px] w-fit shrink-0 items-center justify-center gap-1/2 rounded-s border border-border px-1.5'>
             <Download size={20} color={colors.text} />
-            <span className='text-text-sm font-medium'>{t("actions.export")}</span>
+            <span className='text-text-sm font-medium'>
+              {t("actions.export")}
+            </span>
           </div>
           <TableSettingsDropdown
             rows={rows}
             setRows={setRows}
+            rowsLabel={t("table.rows")}
             columnsOptions={addressDetailRewardsTableOptions.map(item => {
               return {
                 label: t(`common:tableSettings.${item.key}`),
@@ -193,6 +196,10 @@ export const RewardsTab: FC<RewardsTabProps> = ({
         query={rewardsQuery}
         items={data}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </div>
   );

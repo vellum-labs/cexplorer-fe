@@ -109,7 +109,7 @@ export const usePoolList = ({
   overrideTableSearch,
   isHomepage,
 }: UsePoolListArgs): UsePoolList => {
-  const { t } = useAppTranslation("pages");
+  const { t } = useAppTranslation(["pages", "common"]);
   const [{ debouncedTableSearch, tableSearch }, setTableSearch] =
     useSearchTable();
 
@@ -367,7 +367,11 @@ export const usePoolList = ({
           miscConst,
         );
 
-        const epochs = item?.epochs ? Object.values(item.epochs).filter(epoch => epoch !== null && epoch !== undefined).slice(2) : [];
+        const epochs = item?.epochs
+          ? Object.values(item.epochs)
+              .filter(epoch => epoch !== null && epoch !== undefined)
+              .slice(2)
+          : [];
 
         const rewardsData = epochs.map(epoch => ({
           epoch: (epoch as any)?.no,
@@ -383,7 +387,10 @@ export const usePoolList = ({
         ]);
 
         const rewardsDataSourceNotEmpty =
-          rewardsDataSource.filter(item => item && item[1]).map(item => item[1]).filter(e => e).length > 0;
+          rewardsDataSource
+            .filter(item => item && item[1])
+            .map(item => item[1])
+            .filter(e => e).length > 0;
 
         return (
           <div className='w-full justify-end'>
@@ -400,24 +407,26 @@ export const usePoolList = ({
                   dataSource={rewardsDataSource}
                   ref={tableRef}
                   color={params =>
-                    rewardsData[params.dataIndex] ? getEpochColor(rewardsData[params.dataIndex].member_pct) : "#ccc"
+                    rewardsData[params.dataIndex]
+                      ? getEpochColor(rewardsData[params.dataIndex].member_pct)
+                      : "#ccc"
                   }
                   toolTipFormatter={params => {
                     const data = rewardsData[params.dataIndex];
 
-                    if (!data) return '';
+                    if (!data) return "";
 
                     return `
                           <div style="font-size: 12px; line-height: 15px">
-                            <span>Epoch: ${data.epoch ?? 'N/A'}</span>
+                            <span>Epoch: ${data.epoch ?? "N/A"}</span>
                             <br/>
-                            <span>Leader Ada: ${data.leader_lovelace ? lovelaceToAda(data.leader_lovelace) : 'N/A'}</span>
+                            <span>Leader Ada: ${data.leader_lovelace ? lovelaceToAda(data.leader_lovelace) : "N/A"}</span>
                             <br/>
-                            <span>Leader Pct: ${data.leader_pct ? data.leader_pct.toFixed(2) : 'N/A'}</span>
+                            <span>Leader Pct: ${data.leader_pct ? data.leader_pct.toFixed(2) : "N/A"}</span>
                             <br/>
-                            <span>Member Ada: ${data.member_lovelace ? lovelaceToAda(data.member_lovelace) : 'N/A'}</span>
+                            <span>Member Ada: ${data.member_lovelace ? lovelaceToAda(data.member_lovelace) : "N/A"}</span>
                             <br/>
-                            <span>Member Pct: ${data.member_pct ?? 'N/A'}%</span>
+                            <span>Member Pct: ${data.member_pct ?? "N/A"}%</span>
                           </div>`;
                   }}
                 />
@@ -493,7 +502,8 @@ export const usePoolList = ({
     {
       key: "drep",
       render: item => {
-        const drep = item?.drep && Array.isArray(item.drep) ? item.drep[0] : null;
+        const drep =
+          item?.drep && Array.isArray(item.drep) ? item.drep[0] : null;
 
         if (!drep || !drep.ident) {
           return <p className='text-right text-grayTextPrimary'>-</p>;
@@ -528,6 +538,8 @@ export const usePoolList = ({
         onShow: e => toggleFilter(e, "is_drep"),
         onFilter: () => changeFilterByKey("is_drep", filterDraft["is_drep"]),
         onReset: () => changeFilterByKey("is_drep"),
+        resetLabel: t("common:actions.reset"),
+        filterLabel: t("common:actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             <label className='flex items-center gap-1'>
@@ -541,7 +553,7 @@ export const usePoolList = ({
                   changeDraftFilter("is_drep", +e.currentTarget.value)
                 }
               />
-              <span className='text-text-sm'>Yes</span>
+              <span className='text-text-sm'>{t("common:labels.yes")}</span>
             </label>
             <label className='flex items-center gap-1'>
               <input
@@ -554,7 +566,7 @@ export const usePoolList = ({
                   changeDraftFilter("is_drep", +e.currentTarget.value)
                 }
               />
-              <span className='text-text-sm'>No</span>
+              <span className='text-text-sm'>{t("common:labels.no")}</span>
             </label>
           </div>
         ),
@@ -597,7 +609,11 @@ export const usePoolList = ({
           : 0;
         const formattedTotalBlocks = formatNumber(item?.blocks?.total);
 
-        const epochs = item?.epochs ? Object.values(item?.epochs).filter(epoch => epoch !== null && epoch !== undefined).slice(2) : [];
+        const epochs = item?.epochs
+          ? Object.values(item?.epochs)
+              .filter(epoch => epoch !== null && epoch !== undefined)
+              .slice(2)
+          : [];
         const epochData = epochs.map(epoch => ({
           epoch: (epoch as any)?.no,
           minted: (epoch as any)?.data?.block?.minted,
@@ -625,13 +641,13 @@ export const usePoolList = ({
                 toolTipFormatter={params => {
                   const data = epochData[params.dataIndex];
 
-                  if (!data) return '';
+                  if (!data) return "";
 
                   return `
                   <div style="font-size: 12px; line-height: 14px;">
-                    <span>Epoch: ${data.epoch ?? 'N/A'}</span>
+                    <span>Epoch: ${data.epoch ?? "N/A"}</span>
                     <br/>
-                    <span>Minted: ${data.minted ?? 'N/A'}</span>
+                    <span>Minted: ${data.minted ?? "N/A"}</span>
                     <br/>
                     <span>Estimated: ${(data.estimated ?? 0).toFixed(2)}</span>
                     <br/>
@@ -784,13 +800,17 @@ export const usePoolList = ({
                 setList("leverage");
               }}
             >
-              <span className='text-right'>{t("pools.table.pledgeLeverage")}</span>
+              <span className='text-right'>
+                {t("pools.table.pledgeLeverage")}
+              </span>
               <SortArrow direction={order === "leverage" ? sort : undefined} />
             </div>
           </div>
         ) : (
           <div className='flex w-full justify-end'>
-            <span className='text-right'>{t("pools.table.pledgeLeverage")}</span>
+            <span className='text-right'>
+              {t("pools.table.pledgeLeverage")}
+            </span>
           </div>
         ),
 
@@ -874,7 +894,9 @@ export const usePoolList = ({
             }}
           >
             <div className='flex w-fit cursor-pointer items-center gap-1/2'>
-              <span className='text-nowrap'>{t("pools.table.averageStake")}</span>
+              <span className='text-nowrap'>
+                {t("pools.table.averageStake")}
+              </span>
               <SortArrow
                 direction={order === "average_stake" ? sort : undefined}
               />
@@ -882,7 +904,9 @@ export const usePoolList = ({
           </div>
         ) : (
           <div className='flex w-full justify-end'>
-            <p className='w-full text-nowrap text-right'>{t("pools.table.averageStake")}</p>
+            <p className='w-full text-nowrap text-right'>
+              {t("pools.table.averageStake")}
+            </p>
           </div>
         ),
       visible: columnsVisibility.avg_stake,
@@ -917,8 +941,7 @@ export const usePoolList = ({
           return <p className='text-right'>-</p>;
         }
 
-        const topDelegator =
-          (item.top_delegator.stake / item.live_stake) * 100;
+        const topDelegator = (item.top_delegator.stake / item.live_stake) * 100;
 
         return (
           <div className={`flex w-full items-center justify-end`}>

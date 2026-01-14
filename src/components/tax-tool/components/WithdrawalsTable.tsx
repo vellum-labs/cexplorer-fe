@@ -144,9 +144,13 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
       transaction: t("taxTool.columns.transaction"),
       rewards_ada: t("taxTool.columns.rewardsWithdrawnAda"),
       rewards_usd: t("taxTool.columns.rewardsWithdrawnUsd"),
-      rewards_secondary: t("taxTool.columns.rewardsWithdrawnCurrency", { currency: secondaryCurrency.toUpperCase() }),
+      rewards_secondary: t("taxTool.columns.rewardsWithdrawnCurrency", {
+        currency: secondaryCurrency.toUpperCase(),
+      }),
       ada_usd_rate: t("taxTool.columns.adaUsdRate"),
-      ada_secondary_rate: t("taxTool.columns.adaCurrencyRate", { currency: secondaryCurrency.toUpperCase() }),
+      ada_secondary_rate: t("taxTool.columns.adaCurrencyRate", {
+        currency: secondaryCurrency.toUpperCase(),
+      }),
     }),
     [secondaryCurrency, t],
   );
@@ -389,11 +393,14 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
   return (
     <div className='flex flex-col gap-2'>
       <div className='flex items-center justify-between'>
-        <h3 className='text-text-md font-semibold'>{t("taxTool.withdrawals")}</h3>
+        <h3 className='text-text-md font-semibold'>
+          {t("taxTool.withdrawals")}
+        </h3>
         <div className='flex items-center gap-1'>
           <TableSettingsDropdown
             rows={itemsPerPage}
             setRows={handleRowsChange}
+            rowsLabel={t("table.rows")}
             columnsOptions={columnsOptions}
           />
           <ExportButton
@@ -415,6 +422,10 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
         items={data}
         columns={columns}
         disableDrag
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
       {totalItems > itemsPerPage && (
         <Pagination

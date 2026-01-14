@@ -199,7 +199,9 @@ export const ScriptListInteractionsTab: FC = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[230px]'>
-              {t("script.totalInteractions", { count: formatNumber(totalItems) })}
+              {t("script.totalInteractions", {
+                count: formatNumber(totalItems),
+              })}
             </h3>
           )}
         </div>
@@ -208,6 +210,7 @@ export const ScriptListInteractionsTab: FC = () => {
           <TableSettingsDropdown
             rows={rows}
             setRows={setRows}
+            rowsLabel={t("table.rows")}
             columnsOptions={scriptListInteractionTableOptions.map(item => {
               return {
                 label: t(`common:tableSettings.${item.key}`),
@@ -240,6 +243,10 @@ export const ScriptListInteractionsTab: FC = () => {
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </div>
   );

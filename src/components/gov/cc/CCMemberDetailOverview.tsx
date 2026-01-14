@@ -47,7 +47,11 @@ export const CCMemberDetailOverview: FC<CCMemberDetailOverviewProps> = ({
   return (
     <div className='flex flex-col gap-2 xl:flex-row'>
       <div className='flex-1'>
-        <OverviewCard title={t("gov.cc.about")} overviewList={about} className='h-full' />
+        <OverviewCard
+          title={t("gov.cc.about")}
+          overviewList={about}
+          className='h-full'
+        />
       </div>
       <div className='w-full xl:w-[450px]'>
         <OverviewCard

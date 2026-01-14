@@ -42,7 +42,9 @@ export const AdaPriceTable: FC = () => {
             <Cardano size={20} color={colors.text} />
           </div>
           <h3>Cardano</h3>
-          <span className='text-text-sm text-grayTextPrimary'>{t("adaPrice.adaPrice")}</span>
+          <span className='text-text-sm text-grayTextPrimary'>
+            {t("adaPrice.adaPrice")}
+          </span>
         </div>
         <div className='flex items-center gap-1'>
           <span className='text-display-xs font-semibold'>
@@ -115,7 +117,9 @@ export const AdaPriceTable: FC = () => {
             {t("adaPrice.fdv")}
           </span>
           <Tooltip
-            content={t("adaPrice.fdvTooltip", { maxSupply: formattedMaxSupply })}
+            content={t("adaPrice.fdvTooltip", {
+              maxSupply: formattedMaxSupply,
+            })}
           >
             <CircleHelp
               size={12}
@@ -158,7 +162,9 @@ export const AdaPriceTable: FC = () => {
             {t("adaPrice.totalSupply")}
           </span>
           <Tooltip
-            content={t("adaPrice.totalSupplyTooltip", { maxSupply: formattedMaxSupply })}
+            content={t("adaPrice.totalSupplyTooltip", {
+              maxSupply: formattedMaxSupply,
+            })}
           >
             <CircleHelp
               size={12}

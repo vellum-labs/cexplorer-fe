@@ -125,7 +125,9 @@ export const RetiredDelegationsPage = () => {
       },
       title: (
         <p className='w-full text-right'>
-          {tabParam === "active" ? t("delegations.retired.table.retiringInEpoch") : t("delegations.retired.table.retiredInEpoch")}
+          {tabParam === "active"
+            ? t("delegations.retired.table.retiringInEpoch")
+            : t("delegations.retired.table.retiredInEpoch")}
         </p>
       ),
       visible: columnsVisibility.epoch,
@@ -156,7 +158,9 @@ export const RetiredDelegationsPage = () => {
 
         return item.stat.accounts;
       },
-      title: <p className='w-full text-right'>{t("common:labels.delegators")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.delegators")}</p>
+      ),
       visible: columnsVisibility.delegators,
       widthPx: 50,
     },
@@ -172,7 +176,11 @@ export const RetiredDelegationsPage = () => {
 
         return item.stat.epochs;
       },
-      title: <p className='w-full text-right'>{t("delegations.retired.table.longevity")}</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("delegations.retired.table.longevity")}
+        </p>
+      ),
       visible: columnsVisibility.longevity,
       widthPx: 50,
     },
@@ -274,6 +282,7 @@ export const RetiredDelegationsPage = () => {
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("common:table.rows")}
                 columnsOptions={retiredDelegationsTableOptions.map(item => {
                   return {
                     label: t(`common:tableSettings.${item.key}`),
@@ -305,6 +314,10 @@ export const RetiredDelegationsPage = () => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </div>
     </PageBase>

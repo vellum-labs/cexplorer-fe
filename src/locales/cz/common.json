@@ -102,6 +102,7 @@
     "export": "$t(shared:actions.export)",
     "search": "$t(shared:actions.search)",
     "filter": "Filtrovat",
+    "reset": "Obnovit",
     "sort": "Seřadit",
     "sortBy": "Seřadit podle:",
     "refresh": "$t(shared:actions.refresh)",
@@ -112,6 +113,11 @@
     "back": "Zpět",
     "next": "Další",
     "previous": "Předchozí"
+  },
+  "table": {
+    "displaying": "Zobrazeno {{count}} z {{total}} položek",
+    "noItems": "Žádné položky k zobrazení",
+    "rows": "Řádky:"
   },
   "status": {
     "loading": "Načítání...",
@@ -390,6 +396,7 @@
     "owner_stake": "Stake vlastníka",
     "average_stake": "Průměrný stake",
     "spo": "$t(shared:labels.spo)",
+    "metadata": "Metadata",
     "policy_id": "ID policy",
     "price": "$t(shared:labels.price)",
     "pnl_24": "PnL 24h",
@@ -439,7 +446,10 @@
     "policy": "$t(shared:labels.policy)",
     "fingerprint": "$t(shared:labels.fingerprint)",
     "action": "Akce",
-    "slot_leader": "Leader slotu"
+    "slot_leader": "Leader slotu",
+    "asset_minted": "Vyražené aktivum",
+    "mint_quantity": "Množství ražby",
+    "unit_steps": "Jednotkové kroky"
   },
   "analytics": {
     "account": "$t(shared:labels.account)",
@@ -845,7 +855,26 @@
     "block": "$t(shared:labels.block)",
     "totalOutput": "Celkový výstup",
     "fee": "$t(shared:labels.fee)",
-    "size": "$t(shared:labels.size)"
+    "size": "$t(shared:labels.size)",
+    "table": {
+      "date": "$t(shared:labels.date)",
+      "height": "Výška",
+      "epoch": "$t(shared:labels.epoch)",
+      "slot": "$t(shared:labels.slot)",
+      "txs": "TXs",
+      "mintedBy": "Vytěžil",
+      "hash": "$t(shared:labels.hash)",
+      "epochSlot": "Slot epochy",
+      "vrfKey": "VRF klíč",
+      "protocol": "$t(shared:labels.protocol)",
+      "size": "$t(shared:labels.size)",
+      "certCount": "Počet certifikátů"
+    },
+    "filter": {
+      "byEpoch": "Filtrovat podle epochy...",
+      "byPoolId": "Filtrovat podle ID poolu...",
+      "customProtocol": "Vlastní protokol..."
+    }
   },
   "charts": {
     "others": "Ostatní",
@@ -857,7 +886,9 @@
     "poolStake": "Stake poolu",
     "pledge": "$t(shared:labels.pledge)",
     "votingPower": "$t(shared:votingPower)",
-    "delegators": "$t(shared:labels.delegators)"
+    "delegators": "$t(shared:labels.delegators)",
+    "yes": "$t(shared:status.yes)",
+    "no": "$t(shared:status.no)"
   },
   "defi": {
     "globalTradingActivity": "Globální obchodní aktivita",
@@ -1209,7 +1240,14 @@
       "castVote": "Odevzdaný hlas",
       "timestamp": "$t(shared:labels.timestamp)",
       "voteTx": "Tx hlasu",
-      "anchorUrl": "URL kotvy"
+      "anchorUrl": "URL kotvy",
+      "lateVoteWarning": "Pozdní hlas",
+      "metadata": "$t(shared:labels.metadata)",
+      "title": "Detail hlasu",
+      "voteTab": "Hlas {{number}}",
+      "noVotesTitle": "Žádné hlasy nenalezeny",
+      "noVotesDescription": "Tato transakce neobsahuje žádné hlasy governance.",
+      "hashLabel": "Hash:"
     },
     "card": {
       "voteYes": "Hlas: Ano",
@@ -1233,6 +1271,8 @@
       "active": "Aktivní",
       "ratified": "Ratifikované",
       "enacted": "Zavedené",
+      "expired": "Expirované",
+      "dropped": "Zamítnuté",
       "expiredDropped": "Expirované / Zamítnuté"
     },
     "constitution": {

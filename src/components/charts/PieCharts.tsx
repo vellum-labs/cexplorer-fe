@@ -189,7 +189,15 @@ export const PieCharts = <T,>({
         ],
       };
     });
-  }, [items, charts, getChartData, textColor, bgColor, minThreshold, tooltipTranslations]);
+  }, [
+    items,
+    charts,
+    getChartData,
+    textColor,
+    bgColor,
+    minThreshold,
+    tooltipTranslations,
+  ]);
 
   if (items.length === 0) {
     return null;

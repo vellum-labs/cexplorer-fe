@@ -149,7 +149,9 @@ export const PoolBirthdays: FC = () => {
 
         return `${formattedDate}, ${formattedTime}`;
       },
-      title: <p className='w-full text-right'>{t("common:labels.registered")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.registered")}</p>
+      ),
       visible: columnsVisibility.registered,
       widthPx: 60,
     },
@@ -162,7 +164,9 @@ export const PoolBirthdays: FC = () => {
 
         return <p className='text-right'>{formatNumber(item.delegators)}</p>;
       },
-      title: <p className='w-full text-right'>{t("common:labels.delegators")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.delegators")}</p>
+      ),
       visible: columnsVisibility.delegators,
       widthPx: 50,
     },
@@ -179,7 +183,9 @@ export const PoolBirthdays: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>{t("common:labels.activeStake")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.activeStake")}</p>
+      ),
       visible: columnsVisibility.active_stake,
       widthPx: 50,
     },
@@ -204,7 +210,10 @@ export const PoolBirthdays: FC = () => {
               <LoadingSkeleton height='27px' width={"220px"} />
             ) : totalItems > 0 ? (
               <h3 className='basis-[230px] text-nowrap'>
-                🎉 {t("pools.birthdays.happyBirthday", { count: formatNumber(totalItems) })}
+                🎉{" "}
+                {t("pools.birthdays.happyBirthday", {
+                  count: formatNumber(totalItems),
+                })}
               </h3>
             ) : (
               ""
@@ -215,6 +224,7 @@ export const PoolBirthdays: FC = () => {
                 <TableSettingsDropdown
                   rows={rows}
                   setRows={setRows}
+                  rowsLabel={t("common:table.rows")}
                   columnsOptions={poolBirthdaysTableOptions.map(item => {
                     return {
                       label: t(`common:tableSettings.${item.key}`),
@@ -235,6 +245,7 @@ export const PoolBirthdays: FC = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={poolBirthdaysTableOptions.map(item => {
                 return {
                   label: t(`common:tableSettings.${item.key}`),
@@ -260,6 +271,10 @@ export const PoolBirthdays: FC = () => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </section>
     </PageBase>

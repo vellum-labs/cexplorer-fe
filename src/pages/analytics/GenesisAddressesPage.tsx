@@ -82,7 +82,9 @@ export const GenesisAddressesPage: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>{t("genesis.table.initialValue")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("genesis.table.initialValue")}</p>
+      ),
       visible: columnsVisibility.value,
       widthPx: 80,
     },
@@ -99,7 +101,9 @@ export const GenesisAddressesPage: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>{t("genesis.table.currentBalance")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("genesis.table.currentBalance")}</p>
+      ),
       visible: columnsVisibility.balance,
       widthPx: 80,
     },
@@ -154,7 +158,9 @@ export const GenesisAddressesPage: FC = () => {
               <LoadingSkeleton height='27px' width='220px' />
             ) : totalItems > 0 ? (
               <h3 className='basis-[230px] text-nowrap'>
-                {t("genesis.totalAddresses", { count: formatNumber(totalItems) })}
+                {t("genesis.totalAddresses", {
+                  count: formatNumber(totalItems),
+                })}
               </h3>
             ) : (
               ""
@@ -168,12 +174,16 @@ export const GenesisAddressesPage: FC = () => {
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("table.rows")}
                 columnsOptions={genesisAddressesTableOptions.map(item => {
                   return {
                     label: t(`tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
-                      setColumnVisibility(item.key, !columnsVisibility[item.key]),
+                      setColumnVisibility(
+                        item.key,
+                        !columnsVisibility[item.key],
+                      ),
                   };
                 })}
               />
@@ -198,6 +208,10 @@ export const GenesisAddressesPage: FC = () => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("table.displaying", { count, total })
+          }
+          noItemsLabel={t("table.noItems")}
         />
       </section>
     </PageBase>

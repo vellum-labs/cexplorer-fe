@@ -328,7 +328,9 @@ export const SwapDetailTable: FC<SwapDetailTableProps> = ({
                     </Tooltip>
                   </div>
                   <ArrowRight size={14} />
-                  <span className='text-grayTextSecondary'>{t("dex.pending")}</span>
+                  <span className='text-grayTextSecondary'>
+                    {t("dex.pending")}
+                  </span>
                 </div>
                 <div>-</div>
                 <div className='flex items-center'>

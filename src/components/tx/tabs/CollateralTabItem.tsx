@@ -50,7 +50,11 @@ const CollateralTabItem = () => {
           <AdaWithTooltip data={item.value} />
         </span>
       ),
-      title: <span className='flex w-full justify-end'>{t("tx.columns.collateral")}</span>,
+      title: (
+        <span className='flex w-full justify-end'>
+          {t("tx.columns.collateral")}
+        </span>
+      ),
       visible: true,
       widthPx: 80,
     },
@@ -67,7 +71,11 @@ const CollateralTabItem = () => {
           ))}
         </span>
       ),
-      title: <span className='flex w-full justify-end'>{t("tx.columns.assets")}</span>,
+      title: (
+        <span className='flex w-full justify-end'>
+          {t("tx.columns.assets")}
+        </span>
+      ),
       visible: true,
       widthPx: 100,
     },
@@ -75,7 +83,9 @@ const CollateralTabItem = () => {
 
   if (!uniqueInputs && !query.isLoading) {
     return (
-      <p className='w-full text-center text-text-sm'>{t("tx.noCollateralFound")}</p>
+      <p className='w-full text-center text-text-sm'>
+        {t("tx.noCollateralFound")}
+      </p>
     );
   }
 
@@ -92,6 +102,10 @@ const CollateralTabItem = () => {
       totalItems={uniqueInputs?.length ?? 0}
       scrollable
       minContentWidth={800}
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

@@ -30,7 +30,10 @@ export const ShortcutsModal: FC<ShortcutsModalProps> = ({ onClose }) => {
         { label: t("global.shortcuts.pools"), keys: ["g", "+", "p"] },
         { label: t("global.shortcuts.dreps"), keys: ["g", "+", "d"] },
         { label: t("global.shortcuts.assets"), keys: ["g", "+", "a"] },
-        { label: t("global.shortcuts.governanceActions"), keys: ["g", "+", "o"] },
+        {
+          label: t("global.shortcuts.governanceActions"),
+          keys: ["g", "+", "o"],
+        },
       ],
     },
     {

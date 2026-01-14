@@ -60,17 +60,18 @@ const PoolRewardsTable = ({
     (detailQuery.data?.data?.active_stake ?? 1);
   const epochElapsed = useElapsedEpochNumber(miscConst);
 
-  const proratedLuck = detailQuery.data?.data?.epochs[0].data.block && estimatedBlocks > 0
-    ? (() => {
-        const percent =
-          ((detailQuery.data?.data?.blocks?.epoch || 0) /
-            estimatedBlocks /
-            epochElapsed) *
-          100;
+  const proratedLuck =
+    detailQuery.data?.data?.epochs[0].data.block && estimatedBlocks > 0
+      ? (() => {
+          const percent =
+            ((detailQuery.data?.data?.blocks?.epoch || 0) /
+              estimatedBlocks /
+              epochElapsed) *
+            100;
 
-        return Number.isNaN(percent) ? "-" : percent.toFixed(2) + "%";
-      })()
-    : "-";
+          return Number.isNaN(percent) ? "-" : percent.toFixed(2) + "%";
+        })()
+      : "-";
 
   const totalCount = poolRewardsQuery.data?.pages[0].data.count;
   const items = poolRewardsQuery.data?.pages.flatMap(page => page.data.data);
@@ -91,20 +92,32 @@ const PoolRewardsTable = ({
       render: item => (
         <>
           {currentEpoch === item.no ? (
-            <PendingTag text={t("pools.detailPage.rewardsTable.pendingTwoEpochs")} pendingLabel={t("common:labels.pending")} />
+            <PendingTag
+              text={t("pools.detailPage.rewardsTable.pendingTwoEpochs")}
+              pendingLabel={t("common:labels.pending")}
+            />
           ) : currentEpoch && currentEpoch - 1 === item.no ? (
-            <PendingTag text={t("pools.detailPage.rewardsTable.pendingNextEpoch")} pendingLabel={t("common:labels.pending")} />
+            <PendingTag
+              text={t("pools.detailPage.rewardsTable.pendingNextEpoch")}
+              pendingLabel={t("common:labels.pending")}
+            />
           ) : (
             <div className='flex flex-col items-end gap-1/2'>
               <p className='flex items-center gap-1/2'>
                 <AdaWithTooltip data={item.reward?.leader_lovelace ?? 0} />
-                <Tooltip content={t("pools.detailPage.rewardsTable.poolOperatorRewards")}>
+                <Tooltip
+                  content={t(
+                    "pools.detailPage.rewardsTable.poolOperatorRewards",
+                  )}
+                >
                   <Network size={16} className='cursor-help' />
                 </Tooltip>
               </p>
               <p className='flex items-center gap-1/2'>
                 <AdaWithTooltip data={item.reward?.member_lovelace ?? 0} />
-                <Tooltip content={t("pools.detailPage.rewardsTable.delegatorRewards")}>
+                <Tooltip
+                  content={t("pools.detailPage.rewardsTable.delegatorRewards")}
+                >
                   <Users size={16} className='cursor-help' />
                 </Tooltip>
               </p>
@@ -148,7 +161,9 @@ const PoolRewardsTable = ({
           </div>
         );
       },
-      title: <p className='w-full text-right'>{t("common:labels.activeStake")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.activeStake")}</p>
+      ),
       visible: columnsVisibility.active_stake,
       widthPx: 50,
     },
@@ -173,7 +188,9 @@ const PoolRewardsTable = ({
           </div>
         );
       },
-      title: <p className='w-full text-right'>{t("common:labels.epochStake")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.epochStake")}</p>
+      ),
       visible: columnsVisibility.epoch_stake,
       widthPx: 50,
     },
@@ -182,9 +199,15 @@ const PoolRewardsTable = ({
       render: item => (
         <div className='text-right'>
           {currentEpoch === item.no ? (
-            <PendingTag text={t("pools.detailPage.rewardsTable.pendingTwoEpochs")} pendingLabel={t("common:labels.pending")} />
+            <PendingTag
+              text={t("pools.detailPage.rewardsTable.pendingTwoEpochs")}
+              pendingLabel={t("common:labels.pending")}
+            />
           ) : currentEpoch && currentEpoch - 1 === item.no ? (
-            <PendingTag text={t("pools.detailPage.rewardsTable.pendingNextEpoch")} pendingLabel={t("common:labels.pending")} />
+            <PendingTag
+              text={t("pools.detailPage.rewardsTable.pendingNextEpoch")}
+              pendingLabel={t("common:labels.pending")}
+            />
           ) : item.reward?.member_pct ? (
             item.reward.member_pct.toFixed(2) + "%"
           ) : (
@@ -216,7 +239,9 @@ const PoolRewardsTable = ({
             <div className='flex items-center justify-end gap-1/2'>
               <Tooltip
                 content={
-                  <p className='w-36 text-center'>{t("pools.detailPage.rewardsTable.proratedLuckTooltip")}</p>
+                  <p className='w-36 text-center'>
+                    {t("pools.detailPage.rewardsTable.proratedLuckTooltip")}
+                  </p>
                 }
               >
                 <QuestionMarkCircledIcon />
@@ -253,7 +278,9 @@ const PoolRewardsTable = ({
     },
     {
       key: "delegators",
-      title: <p className='w-full text-right'>{t("common:labels.delegators")}</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.delegators")}</p>
+      ),
       render: item => (
         <div className='text-right'>
           {currentEpoch === item.no
@@ -279,6 +306,7 @@ const PoolRewardsTable = ({
         <TableSettingsDropdown
           rows={rows}
           setRows={setRows}
+          rowsLabel={t("common:table.rows")}
           columnsOptions={poolRewardsTableOptions.map(item => {
             return {
               label: t(`common:tableSettings.${item.key}`),
@@ -305,6 +333,10 @@ const PoolRewardsTable = ({
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("common:table.displaying", { count, total })
+        }
+        noItemsLabel={t("common:table.noItems")}
       />
     </>
   );
@@ -312,7 +344,13 @@ const PoolRewardsTable = ({
 
 export default PoolRewardsTable;
 
-const PendingTag = ({ text, pendingLabel }: { text: string; pendingLabel?: string }) => {
+const PendingTag = ({
+  text,
+  pendingLabel,
+}: {
+  text: string;
+  pendingLabel?: string;
+}) => {
   return (
     <Badge color='yellow' className='ml-auto'>
       <Tooltip

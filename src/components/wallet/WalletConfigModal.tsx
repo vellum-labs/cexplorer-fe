@@ -52,9 +52,7 @@ const WalletConfigModal = () => {
     },
     onError: error => {
       console.error("Login error:", error);
-      toast.error(
-        error instanceof Error ? error.message : "Failed to login",
-      );
+      toast.error(error instanceof Error ? error.message : "Failed to login");
     },
   });
 
@@ -137,7 +135,9 @@ const WalletConfigModal = () => {
       onClose={closeAndDisconnect}
       className='border border-border'
     >
-      <h2 className='mb-3 text-text-lg font-medium'>{t("wallet.authorizationToken")}</h2>
+      <h2 className='mb-3 text-text-lg font-medium'>
+        {t("wallet.authorizationToken")}
+      </h2>
 
       <div className='mb-2 rounded-m border border-border bg-cardBg p-1.5'>
         <p className='text-muted-foreground mb-1.5 text-text-sm'>
@@ -153,9 +153,7 @@ const WalletConfigModal = () => {
         <Tooltip
           forceDirection='left'
           content={
-            <p className='w-[150px]'>
-              {t("wallet.securityLevelTooltip")}
-            </p>
+            <p className='w-[150px]'>{t("wallet.securityLevelTooltip")}</p>
           }
         >
           <QuestionMarkCircledIcon className='text-muted-foreground h-3 w-3' />

@@ -58,7 +58,9 @@ export const AnalyticsMobileItems = ({ onBack, setOpen, power }: Props) => {
           title={
             <span className='text-text-lg font-semibold'>
               {t("navbar.poweredBy")}{" "}
-              <span className='text-primary'>{t("navbar.cardanoBlockchain")}</span>
+              <span className='text-primary'>
+                {t("navbar.cardanoBlockchain")}
+              </span>
             </span>
           }
           className='max-h-[200px] bg-darker'

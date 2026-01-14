@@ -67,6 +67,10 @@ export const NetworkBlockVersionsTable: FC<NetworkBlockVersionsTableProps> = ({
       items={tableVersions}
       columns={columns}
       minContentWidth={500}
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

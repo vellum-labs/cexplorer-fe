@@ -70,7 +70,12 @@ export const RewardsGraph = ({ data }: RewardsGraphProps) => {
 
   const option = {
     legend: {
-      data: [chartLabels.rewardsAda, chartLabels.rewardsUsd, chartLabels.roaPercent, chartLabels.activeStakeAda],
+      data: [
+        chartLabels.rewardsAda,
+        chartLabels.rewardsUsd,
+        chartLabels.roaPercent,
+        chartLabels.activeStakeAda,
+      ],
       textStyle: {
         color: textColor,
       },
