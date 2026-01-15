@@ -21,7 +21,7 @@ export const NetworkBlocksTab: FC = () => {
 
   const lastEpoch = (epochQuery.data?.data ?? []).filter(item => item?.stat)[0];
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const statCards = [
     {

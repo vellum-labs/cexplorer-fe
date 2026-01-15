@@ -21,7 +21,7 @@ export const DelegatedAdaToDRepsOverTimeGraph: FC<
   const { textColor, bgColor, splitLineColor, inactivePageIconColor } =
     useGraphColors();
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const mergedEpochs = milestone?.data?.map(drepEpoch => {
     const epoch = drepEpoch.epoch_no;

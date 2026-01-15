@@ -22,7 +22,7 @@ export const PowerThresholdsSPODelegationDonutGraph: FC<
 
   const { data: basicData, isLoading: basicDataLoading } =
     useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const currentEpoch = miscConst?.no;
 
   const currentPoolEpoch =

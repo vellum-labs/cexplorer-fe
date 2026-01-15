@@ -11,6 +11,7 @@ import { useAddressDetailRewardsTableStore } from "@/stores/tables/addressDetail
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
+import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { colors } from "@/constants/colors";
@@ -63,7 +64,11 @@ export const RewardsTab: FC<RewardsTabProps> = ({
   const columns = [
     {
       key: "epoch",
-      render: item => <p>{item?.earned_epoch ?? 0}</p>,
+      render: item => (
+        <div className='flex justify-start'>
+          <EpochCell no={item?.earned_epoch ?? 0} />
+        </div>
+      ),
       title: <p>Epoch</p>,
       visible: columnsVisibility.epoch,
       widthPx: 50,

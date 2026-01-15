@@ -90,8 +90,19 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
     },
     {
       key: "asset",
-      render: () => {
-        return <AssetCell name={assetname || ""} />;
+      render: item => {
+        const fullAssetName =
+          item?.asset?.policy && item?.asset?.name
+            ? item.asset.policy + item.asset.name
+            : assetname || "";
+        return (
+          <AssetCell
+            asset={{
+              name: fullAssetName,
+              quantity: item?.quantity || 0,
+            }}
+          />
+        );
       },
       title: "Asset",
       visible: columnsVisibility.asset,
@@ -125,16 +136,18 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
     {
       key: "tx",
       render: item => (
-        <Link
-          to='/tx/$hash'
-          params={{ hash: item?.tx?.hash }}
-          className='flex items-center gap-1 text-primary'
-        >
-          <span>{formatString(item?.tx?.hash, "long")}</span>
-          <Copy copyText={item?.tx?.hash} className='translate-y-[2px]' />
-        </Link>
+        <div className='flex justify-end'>
+          <Link
+            to='/tx/$hash'
+            params={{ hash: item?.tx?.hash }}
+            className='flex items-center gap-1 text-primary'
+          >
+            <span>{formatString(item?.tx?.hash, "long")}</span>
+            <Copy copyText={item?.tx?.hash} className='translate-y-[2px]' />
+          </Link>
+        </div>
       ),
-      title: "Tx",
+      title: <p className='w-full text-right'>Tx</p>,
       visible: columnsVisibility.tx,
       widthPx: 100,
     },

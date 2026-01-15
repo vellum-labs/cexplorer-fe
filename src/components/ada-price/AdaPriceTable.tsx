@@ -23,7 +23,7 @@ export const AdaPriceTable: FC = () => {
   const { currency } = useCurrencyStore();
 
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   if (price.percentChange === undefined) return <AdaPriceTableSkeleton />;
 

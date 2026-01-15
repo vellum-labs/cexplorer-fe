@@ -38,7 +38,7 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
     Pledged: true,
   });
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const { textColor, bgColor, splitLineColor, inactivePageIconColor } =
     useGraphColors();
   const { formatLovelace } = useADADisplay();
