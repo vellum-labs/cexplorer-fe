@@ -17,8 +17,8 @@ import { Fragment } from "react";
 import { useEffect, useRef } from "react";
 
 import { colors } from "@/constants/colors";
-import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { safeFormatNumber } from "@/utils/safeFormatNumber";
 
 interface EpochParametersProps {
   param: EpochParam | undefined;
@@ -75,7 +75,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='w-full text-right'>
-              {formatNumber(param?.min_fee_a)}
+              {safeFormatNumber(param?.min_fee_a)}
             </p>
           ),
         },
@@ -93,7 +93,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='w-full text-right'>
-              {formatNumber(param?.min_fee_b)}
+              {safeFormatNumber(param?.min_fee_b)}
             </p>
           ),
         },
@@ -110,7 +110,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         },
         {
           title: (
-            <p className='text-right'>{formatNumber(param?.max_block_size)}</p>
+            <p className='text-right'>{safeFormatNumber(param?.max_block_size)}</p>
           ),
         },
       ],
@@ -126,7 +126,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         },
         {
           title: (
-            <p className='text-right'>{formatNumber(param?.max_tx_size)}</p>
+            <p className='text-right'>{safeFormatNumber(param?.max_tx_size)}</p>
           ),
         },
       ],
@@ -142,7 +142,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         },
         {
           title: (
-            <p className='text-right'>{formatNumber(param?.max_bh_size)}</p>
+            <p className='text-right'>{safeFormatNumber(param?.max_bh_size)}</p>
           ),
         },
       ],
@@ -158,7 +158,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         },
         {
           title: (
-            <p className='text-right'>{formatNumber(param?.key_deposit)}</p>
+            <p className='text-right'>{safeFormatNumber(param?.key_deposit)}</p>
           ),
         },
       ],
@@ -174,7 +174,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         },
         {
           title: (
-            <p className='text-right'>{formatNumber(param?.pool_deposit)}</p>
+            <p className='text-right'>{safeFormatNumber(param?.pool_deposit)}</p>
           ),
         },
       ],
@@ -191,7 +191,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='w-full text-right'>
-              {formatNumber(param?.max_epoch)}
+              {safeFormatNumber(param?.max_epoch)}
             </p>
           ),
         },
@@ -209,7 +209,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='text-right'>
-              {formatNumber(param?.optimal_pool_count)}
+              {safeFormatNumber(param?.optimal_pool_count)}
             </p>
           ),
         },
@@ -227,7 +227,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='w-full text-right'>
-              {formatNumber(param?.influence)}
+              {safeFormatNumber(param?.influence)}
             </p>
           ),
         },
@@ -245,7 +245,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='text-right'>
-              {formatNumber(param?.monetary_expand_rate)}
+              {safeFormatNumber(param?.monetary_expand_rate)}
             </p>
           ),
         },
@@ -263,7 +263,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='text-right'>
-              {formatNumber(param?.treasury_growth_rate)}
+              {safeFormatNumber(param?.treasury_growth_rate)}
             </p>
           ),
         },
@@ -281,8 +281,8 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='text-right'>
-              {param!.decentralisation > 0
-                ? formatNumber(param?.decentralisation)
+              {param?.decentralisation && param.decentralisation > 0
+                ? safeFormatNumber(param?.decentralisation)
                 : param?.decentralisation}
             </p>
           ),
@@ -342,7 +342,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         },
         {
           title: (
-            <p className='text-right'>{formatNumber(param?.min_pool_cost)}</p>
+            <p className='text-right'>{safeFormatNumber(param?.min_pool_cost)}</p>
           ),
         },
       ],
@@ -385,7 +385,11 @@ export const EpochParameters: FC<EpochParametersProps> = ({
           title: "price_step",
         },
         {
-          title: <p className='w-full text-right'>{+param!.price_step}</p>,
+          title: (
+            <p className='w-full text-right'>
+              {param?.price_step ? +param.price_step : null}
+            </p>
+          ),
         },
       ],
     },
@@ -400,7 +404,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         },
         {
           title: (
-            <p className='text-right'>{formatNumber(param?.max_tx_ex_mem)}</p>
+            <p className='text-right'>{safeFormatNumber(param?.max_tx_ex_mem)}</p>
           ),
         },
       ],
@@ -416,7 +420,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         },
         {
           title: (
-            <p className='text-right'>{formatNumber(param?.max_tx_ex_steps)}</p>
+            <p className='text-right'>{safeFormatNumber(param?.max_tx_ex_steps)}</p>
           ),
         },
       ],
@@ -433,7 +437,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='text-right'>
-              {formatNumber(param?.max_block_ex_mem)}
+              {safeFormatNumber(param?.max_block_ex_mem)}
             </p>
           ),
         },
@@ -451,7 +455,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='text-right'>
-              {formatNumber(param?.max_block_ex_steps)}
+              {safeFormatNumber(param?.max_block_ex_steps)}
             </p>
           ),
         },
@@ -468,7 +472,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         },
         {
           title: (
-            <p className='text-right'>{formatNumber(param?.max_val_size)}</p>
+            <p className='text-right'>{safeFormatNumber(param?.max_val_size)}</p>
           ),
         },
       ],
@@ -485,7 +489,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='text-right'>
-              {formatNumber(param?.collateral_percent)}
+              {safeFormatNumber(param?.collateral_percent)}
             </p>
           ),
         },
@@ -503,7 +507,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='text-right'>
-              {formatNumber(param?.max_collateral_inputs)}
+              {safeFormatNumber(param?.max_collateral_inputs)}
             </p>
           ),
         },
