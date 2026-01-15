@@ -1,6 +1,7 @@
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import type { ReactEChartsProps } from "@/lib/ReactCharts";
@@ -28,6 +29,7 @@ interface WealthCompositionItem {
 }
 
 export const WealthComposition = () => {
+  const { t } = useAppTranslation("common");
   const { data: basicData } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(basicData?.data?.version?.const);
   const circulatingSupply = miscConst?.circulating_supply ?? 1;
@@ -46,7 +48,7 @@ export const WealthComposition = () => {
           </div>
         );
       },
-      title: "Wallet size",
+      title: t("analytics.walletSize"),
       visible: true,
       widthPx: 60,
     },
@@ -55,7 +57,7 @@ export const WealthComposition = () => {
       render: item => {
         return <p>{formatNumber(item.stats.count)}</p>;
       },
-      title: "Count",
+      title: t("analytics.count"),
       visible: true,
       widthPx: 50,
     },
@@ -64,7 +66,7 @@ export const WealthComposition = () => {
       render: item => {
         return <AdaWithTooltip data={item.stats.sum} />;
       },
-      title: "Sum",
+      title: t("analytics.sum"),
       visible: true,
       widthPx: 60,
     },
@@ -75,7 +77,7 @@ export const WealthComposition = () => {
           <p>{((item.stats.sum / circulatingSupply) * 100).toFixed(1)}%</p>
         );
       },
-      title: "Sum %",
+      title: t("analytics.sumPercent"),
       visible: true,
       widthPx: 60,
     },
@@ -84,7 +86,7 @@ export const WealthComposition = () => {
       render: item => {
         return <p>{getAnimalRangeByName(item.name)}</p>;
       },
-      title: "Range",
+      title: t("analytics.range"),
       visible: true,
       widthPx: 60,
     },
@@ -93,7 +95,7 @@ export const WealthComposition = () => {
   const tabs = [
     {
       key: "table",
-      label: "Table",
+      label: t("analytics.table"),
       content: (
         <GlobalTable
           type='default'
@@ -103,21 +105,25 @@ export const WealthComposition = () => {
           query={query}
           items={animalData}
           columns={columns}
+          renderDisplayText={(count, total) =>
+            t("table.displaying", { count, total })
+          }
+          noItemsLabel={t("table.noItems")}
         />
       ),
       visible: true,
     },
     {
       key: "charts",
-      label: "Charts",
+      label: t("analytics.charts"),
       content: (
         <div className='flex w-full flex-wrap'>
           <div className='h-full w-full basis-[550px] md:w-1/2'>
-            <h3>Total supply</h3>
+            <h3>{t("analytics.totalSupply")}</h3>
             <SumPieChart data={animalData} radius={radius} />
           </div>
           <div className='h-full w-full basis-[550px] md:w-1/2'>
-            <h3>Structure</h3>
+            <h3>{t("analytics.structure")}</h3>
             <CountPieChart data={animalData} radius={radius} />
           </div>
         </div>
@@ -158,7 +164,7 @@ export const WealthComposition = () => {
 
   return (
     <section>
-      <h3 className='mb-2'>Wealth Composition by ADA balance</h3>
+      <h3 className='mb-2'>{t("analytics.wealthComposition")}</h3>
       <Tabs tabParam='view' withPadding={false} items={tabs} />
     </section>
   );

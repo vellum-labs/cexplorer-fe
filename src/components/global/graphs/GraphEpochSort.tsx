@@ -6,6 +6,7 @@ import { Lock } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
 import { useEffect } from "react";
 import { epochLength } from "@/constants/confVariables";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props extends GraphSortData {
   sortBy?: "epochs" | "days";
@@ -19,6 +20,7 @@ export const GraphEpochSort = ({
   ignoreFiveDays,
   sortBy,
 }: Props) => {
+  const { t } = useAppTranslation();
   const userQuery = useFetchUserInfo();
   const nftCount = userQuery.data?.data?.membership.nfts;
   const allTime = query?.data?.data;
@@ -38,7 +40,12 @@ export const GraphEpochSort = ({
   const fiveHundredItems = (allTime ?? [])?.slice(0, fiveHundred);
 
   const getLabel = (daysInEpoch: number, epoch: number) => {
-    return `${daysInEpoch * epoch > 1 ? `${daysInEpoch * epoch} Days` : `${daysInEpoch * epoch} Day`} (${epoch} epoch${epoch > 1 ? "s" : ""})`;
+    const days = daysInEpoch * epoch;
+    const daysLabel =
+      days > 1 ? t("global.graphSort.days") : t("global.graphSort.day");
+    const epochsLabel =
+      epoch > 1 ? t("global.graphSort.epochs") : t("global.graphSort.epoch");
+    return `${days} ${daysLabel} (${epoch} ${epochsLabel})`;
   };
 
   const fiveDaysLabel = getLabel(daysInEpoch, 1);
@@ -51,10 +58,10 @@ export const GraphEpochSort = ({
     {
       key: GraphTimePeriod.AllTime,
       value: nftCount ? (
-        "All time"
+        t("global.graphSort.allTime")
       ) : (
         <span className='flex items-center gap-1/2'>
-          All time (PRO feature) <Lock size={13} />
+          {t("global.graphSort.allTimeProFeature")} <Lock size={13} />
         </span>
       ),
       disabled: !nftCount,

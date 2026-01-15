@@ -10,16 +10,17 @@ export const DrepHashCell = ({
   view: string;
   enableHover?: boolean;
 }) => {
-  const { handleMouseEnter, handleMouseLeave, handleCopyMouseEnter, isHighlighted } =
-    useHoverHighlight(view, enableHover);
+  const {
+    handleMouseEnter,
+    handleMouseLeave,
+    handleCopyMouseEnter,
+    isHighlighted,
+  } = useHoverHighlight(view, enableHover);
 
   if (!view) return "-";
 
   return (
-    <div
-      onMouseLeave={handleMouseLeave}
-      className='flex items-center gap-1'
-    >
+    <div onMouseLeave={handleMouseLeave} className='flex items-center gap-1'>
       <Link
         to='/drep/$hash'
         params={{ hash: view }}

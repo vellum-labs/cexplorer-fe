@@ -4,18 +4,21 @@ import { PoolIssuesAnalytics } from "@/components/analytics/pool/tabs/PoolIssues
 import { AveragePool } from "@/components/analytics/pool/tabs/AveragePool";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const PoolAnalytics: FC = () => {
+  const { t } = useAppTranslation();
+
   const tabs = [
     {
       key: "pool_issues",
-      label: "Pool issues",
+      label: t("tabs.analytics.poolIssues"),
       content: <PoolIssuesAnalytics />,
       visible: true,
     },
     {
       key: "average_pools",
-      label: "Average pools",
+      label: t("tabs.analytics.averagePools"),
       content: <AveragePool />,
       visible: true,
     },
@@ -23,10 +26,10 @@ export const PoolAnalytics: FC = () => {
 
   return (
     <PageBase
-      title='Cardano pool analytics'
+      title={t("pages:poolAnalytics.title")}
       breadcrumbItems={[
-        { label: "Analytics", link: "/analytics" },
-        { label: "Pool" },
+        { label: t("pages:breadcrumbs.analytics"), link: "/analytics" },
+        { label: t("pages:breadcrumbs.pool") },
       ]}
       metadataTitle='poolAnalytics'
     >

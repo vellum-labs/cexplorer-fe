@@ -9,8 +9,10 @@ import type { TxInfo } from "@/types/txTypes";
 import { getRouteApi } from "@tanstack/react-router";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "../HashCell";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const CollateralTabItem = () => {
+  const { t } = useAppTranslation("common");
   const route = getRouteApi("/tx/$hash");
   const { hash } = route.useParams();
   const query = useFetchTxDetail(hash);
@@ -30,14 +32,14 @@ const CollateralTabItem = () => {
           <AddressCell address={item.payment_addr_bech32} />
         </div>
       ),
-      title: "Address",
+      title: t("tx.columns.address"),
       visible: true,
       widthPx: 120,
     },
     {
       key: "tx_hash",
       render: item => <HashCell hash={item.tx_hash} />,
-      title: "Transaction",
+      title: t("tx.columns.transaction"),
       visible: true,
       widthPx: 80,
     },
@@ -48,7 +50,11 @@ const CollateralTabItem = () => {
           <AdaWithTooltip data={item.value} />
         </span>
       ),
-      title: <span className='flex w-full justify-end'>Collateral</span>,
+      title: (
+        <span className='flex w-full justify-end'>
+          {t("tx.columns.collateral")}
+        </span>
+      ),
       visible: true,
       widthPx: 80,
     },
@@ -65,7 +71,11 @@ const CollateralTabItem = () => {
           ))}
         </span>
       ),
-      title: <span className='flex w-full justify-end'>Assets</span>,
+      title: (
+        <span className='flex w-full justify-end'>
+          {t("tx.columns.assets")}
+        </span>
+      ),
       visible: true,
       widthPx: 100,
     },
@@ -73,7 +83,9 @@ const CollateralTabItem = () => {
 
   if (!uniqueInputs && !query.isLoading) {
     return (
-      <p className='w-full text-center text-text-sm'>No collateral found</p>
+      <p className='w-full text-center text-text-sm'>
+        {t("tx.noCollateralFound")}
+      </p>
     );
   }
 
@@ -90,6 +102,10 @@ const CollateralTabItem = () => {
       totalItems={uniqueInputs?.length ?? 0}
       scrollable
       minContentWidth={800}
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

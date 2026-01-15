@@ -11,6 +11,7 @@ import { NetworkBlockVersionsTable } from "../tables/NetworkBlockVersionsTable";
 
 import { Button } from "@vellumlabs/cexplorer-sdk";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useFetchBlocksList } from "@/services/blocks";
 import {
   useFetchAnalyticsRate,
@@ -18,6 +19,7 @@ import {
 } from "@/services/analytics";
 
 export const NetworkBlockVersionsTab: FC = () => {
+  const { t } = useAppTranslation("common");
   const epochQuery = useFetchEpochAnalytics();
   const rateQuery = useFetchAnalyticsRate();
 
@@ -49,16 +51,14 @@ export const NetworkBlockVersionsTab: FC = () => {
       <div className='flex w-full flex-col items-start gap-2 lg:flex-row lg:items-stretch'>
         <OverviewStatCard
           icon={<Router className='text-primary' />}
-          title='Latest node version'
+          title={t("analytics.latestNodeVersion")}
           value={
             <div className='flex flex-col gap-1'>
               <p className='text-display-xs font-semibold'>
                 {latestBlockVersion.toFixed(1)}
               </p>
               <p className='text-text-xs font-regular leading-4 text-grayTextPrimary'>
-                This page provides insights into Cardano's hard fork events by
-                analyzing the last block minted by each active staking pool with
-                a minimum of one block produced per epoch.
+                {t("analytics.latestNodeVersionDescription")}
               </p>
             </div>
           }
@@ -66,11 +66,13 @@ export const NetworkBlockVersionsTab: FC = () => {
             <div className='flex gap-1'>
               <div className='flex h-[40px] w-fit flex-grow cursor-pointer items-center justify-center gap-1/2 rounded-s border border-border px-1.5'>
                 <span className='sm:text-sm text-text-xs font-medium text-text'>
-                  Hardfork status
+                  {t("analytics.hardforkStatus")}
                 </span>
               </div>
               <Button
-                label={`Read more about ${latestBlockVersion.toFixed(1)}`}
+                label={t("analytics.readMore", {
+                  version: latestBlockVersion.toFixed(1),
+                })}
                 variant='primary'
                 size='sm'
               />
@@ -86,38 +88,38 @@ export const NetworkBlockVersionsTab: FC = () => {
       <div className='flex flex-wrap items-stretch gap-1.5 lg:flex-nowrap'>
         <AnalyticsGraph
           className='flex-grow'
-          description='Block Versions in last 100 Blocks'
+          description={t("analytics.blockVersions100Blocks")}
         >
           <NetworkBlockVersionsPieGraph query={blocksQuery} />
         </AnalyticsGraph>
         <AnalyticsGraph
           className='flex-grow'
-          description='Block Versions in one day'
+          description={t("analytics.blockVersionsOneDay")}
         >
           <NetworkBlockVersionsByDatePieGraph query={rateQuery} day={1} />
         </AnalyticsGraph>
         <AnalyticsGraph
           className='flex-grow'
-          description='Block Versions in last 7 days'
+          description={t("analytics.blockVersions7Days")}
         >
           <NetworkBlockVersionsByDatePieGraph query={rateQuery} day={7} />
         </AnalyticsGraph>
         <AnalyticsGraph
           className='flex-grow'
-          description='Block Versions in last 30 days'
+          description={t("analytics.blockVersions30Days")}
         >
           <NetworkBlockVersionsByDatePieGraph query={rateQuery} day={30} />
         </AnalyticsGraph>
       </div>
       <AnalyticsGraph
-        title='Pool supporting signal'
-        description='Shows stake pools ordered by stake, showing the node version they run'
+        title={t("analytics.poolSupportingSignal")}
+        description={t("analytics.poolSupportingSignalDescription")}
       >
         <NetworkBlockVersionsPoolGraph sortedVersions={sortedVersions} />
       </AnalyticsGraph>
       <AnalyticsGraph
-        title='Latest blocks'
-        description='Reflects the node version under which each recent block was minted'
+        title={t("analytics.latestBlocksVersions")}
+        description={t("analytics.latestBlocksVersionsDescription")}
       >
         <NetworkBlockVersionsLatestBlocksGraph
           query={blocksQuery}

@@ -6,6 +6,7 @@ import { useState, type FC } from "react";
 
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { TokenSelectCombobox } from "@/components/asset/TokenSelect";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { AddressTypeInitialsBadge } from "@vellumlabs/cexplorer-sdk";
@@ -32,6 +33,7 @@ export const AddressesTab: FC<AddressesTabProps> = ({
   watchlist_only,
   stakeKey,
 }) => {
+  const { t } = useAppTranslation("common");
   const isStake = view?.includes("stake");
   const { order, page } = useSearch({
     from: watchlist_only
@@ -61,11 +63,11 @@ export const AddressesTab: FC<AddressesTabProps> = ({
   const selectItems = [
     {
       key: "last",
-      value: "Last activity",
+      value: t("address.lastActivity"),
     },
     {
       key: "balance",
-      value: "Balance",
+      value: t("address.balance"),
     },
   ];
 
@@ -78,35 +80,35 @@ export const AddressesTab: FC<AddressesTabProps> = ({
           <AddressCell address={item?.address} stakeKey={stakeKey} />
         </div>
       ),
-      title: "Addresses",
+      title: t("address.addresses"),
       visible: true,
       widthPx: 170,
     },
     {
       key: "balance",
       render: item => <AdaWithTooltip data={item?.balance ?? 0} />,
-      title: "Balance",
+      title: t("address.balance"),
       visible: true,
       widthPx: 70,
     },
     {
       key: "activity",
       render: item => <ActivityVisual count={item.activity} />,
-      title: "Activity",
+      title: t("address.activity"),
       visible: true,
       widthPx: 50,
     },
     {
       key: "last_activity",
       render: item => <DateCell time={item.last} />,
-      title: "Last Activity",
+      title: t("address.lastActivity"),
       visible: true,
       widthPx: 80,
     },
     {
       key: "tokens",
       render: item => <TokenSelectCombobox items={item.asset} />,
-      title: "Tokens",
+      title: t("address.tokens"),
       visible: true,
       widthPx: 110,
     },
@@ -136,6 +138,10 @@ export const AddressesTab: FC<AddressesTabProps> = ({
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </div>
   );

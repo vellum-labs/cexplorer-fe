@@ -21,8 +21,10 @@ import { PageBase } from "@/components/global/pages/PageBase";
 import { addSeconds, format } from "date-fns";
 import { epochLength } from "@/constants/confVariables";
 import { Button } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const EpochDetailPage: FC = () => {
+  const { t } = useAppTranslation("pages");
   const route = getRouteApi("/epoch/$no");
   const { no } = route.useParams();
 
@@ -73,7 +75,7 @@ const EpochDetailPage: FC = () => {
   const epochTabItems = [
     {
       key: "analytics",
-      label: "Analytics",
+      label: t("epochs.tabs.analytics"),
       content: (
         <EpochDetailAnalytics
           stats={statsData as EpochStatsSummary}
@@ -86,13 +88,13 @@ const EpochDetailPage: FC = () => {
     },
     {
       key: "blocks",
-      label: "Blocks",
+      label: t("epochs.tabs.blocks"),
       content: <EpochBlocks no={+no} />,
       visible: true,
     },
     {
       key: "parameters",
-      label: "Parameters",
+      label: t("epochs.tabs.parameters"),
       content: (
         <EpochParameters
           param={paramData}
@@ -112,8 +114,11 @@ const EpochDetailPage: FC = () => {
         before: "%epoch%",
         after: no,
       }}
-      title='Epoch Detail'
-      breadcrumbItems={[{ label: "Epochs", link: "/epoch" }, { label: no }]}
+      title={t("epochs.detail")}
+      breadcrumbItems={[
+        { label: t("epochs.title"), link: "/epoch" },
+        { label: no },
+      ]}
       homepageAd
     >
       {futureStartTime && futureEndTime ? (

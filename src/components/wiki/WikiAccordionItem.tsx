@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   LoadingSkeleton,
+  useLocaleStore,
   SafetyLinkModal,
 } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
@@ -28,8 +29,9 @@ export const WikiAccordionItem: FC<WikiAccordionItemProps> = ({
   name,
   isOpen,
 }) => {
+  const { locale } = useLocaleStore();
+  const detailQuery = useFetchWikiDetail(locale, url, isOpen);
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
-  const detailQuery = useFetchWikiDetail("en", url, isOpen);
   const data = detailQuery.data;
   const isMarkdown = data?.render === "markdown";
 

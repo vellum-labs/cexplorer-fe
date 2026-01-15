@@ -5,8 +5,10 @@ import { useFetchTxDetail } from "@/services/tx";
 import { getRouteApi, Link } from "@tanstack/react-router";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const ScriptsTabItem = () => {
+  const { t } = useAppTranslation("common");
   const route = getRouteApi("/tx/$hash");
   const { hash } = route.useParams();
   const query = useFetchTxDetail(hash);
@@ -30,7 +32,7 @@ export const ScriptsTabItem = () => {
   return (
     <div className='flex flex-col gap-1.5'>
       <div className='flex w-fit gap-1 rounded-max border border-border bg-darker px-1.5 py-1/2 text-text-xs font-medium shadow-md'>
-        Total Script Size {totalSize}kB
+        {t("tx.totalScriptSize")} {totalSize}kB
       </div>
       {query.data?.data.all_outputs
         ?.filter(output => output.reference_script)
@@ -41,7 +43,7 @@ export const ScriptsTabItem = () => {
           >
             <div className='flex flex-wrap items-center gap-1'>
               <div className='w-fit rounded-s border border-border bg-background px-1 py-1/2 text-text-xs font-medium'>
-                Script #{index + 1}
+                {t("tx.scriptNumber", { number: index + 1 })}
               </div>
               {output.reference_script?.type && (
                 <span className='bg-blue-200/15 flex h-[25px] items-center rounded-max border border-border px-1 text-text-xs font-medium'>
@@ -51,14 +53,15 @@ export const ScriptsTabItem = () => {
               )}
               {output.reference_script?.size && (
                 <span className='flex h-[25px] items-center rounded-max border border-border bg-secondaryBg px-1 text-text-xs font-medium'>
-                  Size {(output.reference_script?.size / 1024).toFixed(2)}kB
+                  {t("tx.size")}{" "}
+                  {(output.reference_script?.size / 1024).toFixed(2)}kB
                 </span>
               )}
             </div>
 
             <div className='mt-2 flex flex-col gap-1 text-text-sm'>
               <span className=''>
-                Script Hash:{" "}
+                {t("tx.scriptHash")}:{" "}
                 <ScriptCell hash={output.reference_script?.hash || ""} />
               </span>
               {output.reference_script?.value && (
@@ -67,11 +70,12 @@ export const ScriptsTabItem = () => {
                   isLoading={query.isLoading}
                   data={output.reference_script.value}
                   search
+                  noDataLabel={t("sdk:jsonDisplay.noDataLabel")}
                 />
               )}
               {output?.datum_hash && (
                 <span className='mt-1'>
-                  Redeemer Data Hash:{" "}
+                  {t("tx.redeemerDataHash")}:{" "}
                   <span className='flex items-center gap-1'>
                     <Link
                       to='/datum'
@@ -88,7 +92,7 @@ export const ScriptsTabItem = () => {
               )}
               {output.reference_script?.bytes && (
                 <>
-                  <p className='mt-1'>Bytes:</p>
+                  <p className='mt-1'>{t("tx.bytes")}:</p>
                   <TextDisplay text={output.reference_script?.bytes} />
                 </>
               )}

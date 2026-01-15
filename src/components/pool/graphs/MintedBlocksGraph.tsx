@@ -4,6 +4,7 @@ import type { ReactEChartsProps } from "@/lib/ReactCharts";
 import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 import ReactEcharts from "echarts-for-react";
 import { memo, useMemo, useRef } from "react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   mintedBlocks: number[];
@@ -16,6 +17,7 @@ const MintedBlocksGraph = memo(function MintedBlocksGraph({
   txCount,
   dates,
 }: Props) {
+  const { t } = useAppTranslation("pages");
   const { bgColor, lineColor, splitLineColor, textColor } = useGraphColors();
 
   const chartRef = useRef(null);
@@ -43,7 +45,7 @@ const MintedBlocksGraph = memo(function MintedBlocksGraph({
       xAxis: {
         type: "category",
         data: dates,
-        name: "Day",
+        name: t("pools.detailPage.blocksGraph.day"),
         nameLocation: "middle",
         nameGap: 28,
         axisLabel: {
@@ -61,7 +63,7 @@ const MintedBlocksGraph = memo(function MintedBlocksGraph({
           type: "value",
           position: "left",
           show: true,
-          name: "Blocks",
+          name: t("pools.detailPage.blocksGraph.blocks"),
           nameRotate: 90,
           nameLocation: "middle",
           nameGap: 35,
@@ -87,7 +89,7 @@ const MintedBlocksGraph = memo(function MintedBlocksGraph({
           type: "value",
           position: "right",
           show: true,
-          name: "Avg TX Count",
+          name: t("pools.detailPage.blocksGraph.avgTxCount"),
           nameRotate: 90,
           nameLocation: "middle",
           nameGap: 35,
@@ -114,7 +116,7 @@ const MintedBlocksGraph = memo(function MintedBlocksGraph({
         {
           data: mintedBlocks,
           type: "bar",
-          name: "Blocks",
+          name: t("pools.detailPage.blocksGraph.blocks"),
           itemStyle: {
             opacity: 0.7,
             color: "#e3033a",
@@ -123,7 +125,7 @@ const MintedBlocksGraph = memo(function MintedBlocksGraph({
         {
           data: txCount,
           type: "line",
-          name: "Avg TX Count",
+          name: t("pools.detailPage.blocksGraph.avgTxCount"),
           lineStyle: {
             color: lineColor,
           },
@@ -147,6 +149,7 @@ const MintedBlocksGraph = memo(function MintedBlocksGraph({
       dates,
       mintedBlocks,
       txCount,
+      t,
     ],
   );
 

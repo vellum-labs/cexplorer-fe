@@ -3,6 +3,7 @@ import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useWalletStore } from "@/stores/walletStore";
 import type { WalletType } from "@/types/walletTypes";
 import { Button } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 type Props = {
   name: WalletType;
@@ -19,6 +20,7 @@ const WalletOption: React.FC<Props> = ({
   onInstall,
   supported = false,
 }) => {
+  const { t } = useAppTranslation("common");
   const { theme } = useThemeStore();
   const { walletType } = useWalletStore();
 
@@ -55,12 +57,12 @@ const WalletOption: React.FC<Props> = ({
       </span>
       {walletType === name && (
         <span className='flex items-center text-text-sm font-bold text-green-500'>
-          Connected
+          {t("wallet.connected")}
         </span>
       )}
       {!isInstalled && (
         <Button
-          label='Install'
+          label={t("wallet.install")}
           size='sm'
           variant='primary'
           onClick={onInstall}
@@ -68,7 +70,7 @@ const WalletOption: React.FC<Props> = ({
         />
       )}
       <div className='absolute bottom-[3px] right-4 text-[10px] text-red-500'>
-        {!supported && "Unsupported browser or device"}
+        {!supported && t("wallet.unsupportedBrowser")}
       </div>
     </button>
   );

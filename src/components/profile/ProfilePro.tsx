@@ -33,8 +33,10 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { ProBadge } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const ProfilePro = () => {
+  const { t } = useAppTranslation("common");
   const { address } = useWalletStore();
   const { tokens } = useAuthTokensStore();
   const { columnsVisibility, columnsOrder, setColumsOrder } =
@@ -119,17 +121,17 @@ export const ProfilePro = () => {
   const checkIdent = () => {
     let error = "";
     if (modalData.type === "pool" && !modalData.ident.startsWith("pool1")) {
-      error = "Invalid pool ID.";
+      error = t("profile.pro.invalidPoolId");
     } else if (
       modalData.type === "asset" &&
       !modalData.ident.startsWith("asset1")
     ) {
-      error = "Invalid asset fingerprint.";
+      error = t("profile.pro.invalidAssetFingerprint");
     } else if (
       modalData.type === "drep" &&
       !modalData.ident.startsWith("drep1")
     ) {
-      error = "Invalid dRep ID.";
+      error = t("profile.pro.invalidDrepId");
     }
     return error;
   };
@@ -169,11 +171,11 @@ export const ProfilePro = () => {
       }
 
       if (typeof res.data === "string" && res.data === "invalid_ident") {
-        setModalData({ ...modalData, error: "Invalid ident" });
+        setModalData({ ...modalData, error: t("profile.pro.invalidIdent") });
         throw new Error("Invalid ident");
       }
 
-      toast.success("NFT modified successfully", {
+      toast.success(t("profile.pro.nftModifiedSuccess"), {
         action: {
           label: <X size={15} className='stroke-text' />,
           onClick: () => undefined,
@@ -182,7 +184,7 @@ export const ProfilePro = () => {
       query.refetch();
       setOpenModifyModal(false);
     } catch (e) {
-      toast.error("Failed to modify NFT", {
+      toast.error(t("profile.pro.nftModifiedFailed"), {
         action: {
           label: <X size={15} className='stroke-text' />,
           onClick: () => undefined,
@@ -247,7 +249,7 @@ export const ProfilePro = () => {
     {
       key: "nft",
       render: item => <AssetCell isNft name={item.name} />,
-      title: "NFT",
+      title: t("profile.pro.nft"),
       visible: columnsVisibility.nft,
       widthPx: 125,
     },
@@ -262,7 +264,7 @@ export const ProfilePro = () => {
           )}
         </>
       ),
-      title: <p className=''>Type</p>,
+      title: <p className=''>{t("profile.pro.type")}</p>,
       visible: columnsVisibility.type,
       widthPx: 30,
     },
@@ -271,7 +273,7 @@ export const ProfilePro = () => {
       render: item => (
         <div title={item.ident}>{formatString(item.ident, "longer")}</div>
       ),
-      title: <p className=''>Delegated Superpowers</p>,
+      title: <p className=''>{t("profile.pro.delegatedSuperpowers")}</p>,
       visible: columnsVisibility.power,
       widthPx: 80,
     },
@@ -284,13 +286,15 @@ export const ProfilePro = () => {
               hide={isLaterThanDay(item.modified_power_date).isLaterThanDay}
               content={
                 <div className='w-[200px]'>
-                  You can only modify your NFT once in 24 hours. Unlocks{" "}
-                  {isLaterThanDay(item.modified_power_date).remainingTime}
+                  {t("profile.pro.modifyTooltip", {
+                    time: isLaterThanDay(item.modified_power_date)
+                      .remainingTime,
+                  })}
                 </div>
               }
             >
               <Button
-                label='Modify'
+                label={t("profile.pro.modify")}
                 variant='primary'
                 size='md'
                 onClick={() => handleOpenModify(item)}
@@ -302,7 +306,7 @@ export const ProfilePro = () => {
           </div>
         );
       },
-      title: <p className='w-full text-right'>Modify</p>,
+      title: <p className='w-full text-right'>{t("profile.pro.modify")}</p>,
       visible: columnsVisibility.modify,
       widthPx: 50,
     },
@@ -334,11 +338,11 @@ export const ProfilePro = () => {
         <div className='flex min-h-minHeight w-full flex-col'>
           <EmptyState
             icon={<Wallet size={24} />}
-            primaryText='Wallet not connected.'
-            secondaryText='Connect your wallet to access your Cexplorer PRO features and manage your NFTs.'
+            primaryText={t("profile.walletNotConnected")}
+            secondaryText={t("profile.pro.connectToAccess")}
             button={
               <Button
-                label='Connect wallet'
+                label={t("profile.connectWallet")}
                 variant='primary'
                 size='md'
                 onClick={() => setShowConnectModal(true)}
@@ -354,21 +358,21 @@ export const ProfilePro = () => {
       {showRemoveModal && (
         <Modal onClose={() => setShowRemoveModal(false)}>
           <p className='mt-4 text-text-sm'>
-            Do you wish to remove this item from your watchlist?
+            {t("profile.pro.removeFromWatchlist")}
           </p>
           <div className='mt-3 flex w-full justify-between'>
             <Button
               onClick={() => setShowRemoveModal(false)}
               className='mr-1'
               variant='secondary'
-              label='Cancel'
+              label={t("profile.cancel")}
               size='md'
             />
             <Button
               onClick={handleUnlike}
               className='mr-1'
               variant='primary'
-              label='Remove'
+              label={t("profile.pro.remove")}
               size='md'
             />
           </div>
@@ -392,7 +396,7 @@ export const ProfilePro = () => {
             });
           }}
         >
-          <p className='mb-3 pr-4'>Please fill in the fields:</p>
+          <p className='mb-3 pr-4'>{t("profile.pro.fillFields")}</p>
           <RadioGroup
             onValueChange={value => {
               setModalData({
@@ -405,26 +409,26 @@ export const ProfilePro = () => {
           >
             <div className='flex items-center space-x-2'>
               <RadioGroupItem value='drep' id='drep' />
-              <Label htmlFor='drep'>dRep</Label>
+              <Label htmlFor='drep'>{t("profile.pro.drep")}</Label>
             </div>
             <div className='flex items-center space-x-2'>
               <RadioGroupItem value='pool' id='pool' />
-              <Label htmlFor='pool'>Pool</Label>
+              <Label htmlFor='pool'>{t("profile.pro.pool")}</Label>
             </div>
             <div className='flex items-center space-x-2'>
               <RadioGroupItem value='asset' id='asset' />
-              <Label htmlFor='asset'>Asset</Label>
+              <Label htmlFor='asset'>{t("profile.pro.asset")}</Label>
             </div>
             <div className='flex items-center space-x-2'>
               <RadioGroupItem value='collection' id='collection' />
-              <Label htmlFor='collection'>Collection</Label>
+              <Label htmlFor='collection'>{t("profile.pro.collection")}</Label>
             </div>
           </RadioGroup>
           <TextInput
             placeholder={
               modalData.type !== "collection"
                 ? modalData.type + "1..."
-                : "Policy ID"
+                : t("profile.pro.policyId")
             }
             value={modalData.ident}
             onchange={value => setModalData({ ...modalData, ident: value })}
@@ -434,7 +438,7 @@ export const ProfilePro = () => {
           </p>
           <div className='mt-2 flex w-full items-center justify-center'>
             <Button
-              label='Modify'
+              label={t("profile.pro.modify")}
               variant='primary'
               size='md'
               onClick={handleModify}
@@ -446,18 +450,17 @@ export const ProfilePro = () => {
       <div className='flex min-h-minHeight w-full flex-col'>
         <div className='flex w-full flex-wrap justify-between gap-1'>
           <div className='flex flex-col'>
-            <h2>Promotion on Cexplorer</h2>
+            <h2>{t("profile.pro.promotion")}</h2>
             <p className='text-grayTextPrimary'>
-              Feature Stake Pools, DReps, policy IDs and assets across
-              Cexplorer.
+              {t("profile.pro.promotionDescription")}
             </p>
             <p className='mb-1 mt-1/2 text-grayTextPrimary'>
-              The displaying frequency is increased with each NFT delegated.
+              {t("profile.pro.displayFrequency")}
             </p>
           </div>
           <div className='flex h-[40px] gap-1'>
             <Button
-              label='Get Cexplorer PRO NFT'
+              label={t("profile.pro.getProNft")}
               size='md'
               variant='purple'
               href='/pro'
@@ -474,9 +477,9 @@ export const ProfilePro = () => {
               />
             ) : (
               <section className='mt-2 flex flex-wrap items-center gap-1.5 text-text-sm md:gap-5'>
-                <span className='mr-1'>Your account</span>
+                <span className='mr-1'>{t("profile.yourAccount")}</span>
                 <span className='flex items-center gap-1/2 text-grayTextPrimary'>
-                  Your plan:{" "}
+                  {t("profile.yourPlan")}:{" "}
                   {!totalCount ? (
                     <Badge color={!totalCount ? "gray" : "purple"}>Basic</Badge>
                   ) : (
@@ -492,16 +495,18 @@ export const ProfilePro = () => {
                     }
                     className='gold-shimmer flex items-center gap-1/2 bg-purpleText bg-clip-text font-medium text-transparent underline hover:text-transparent'
                   >
-                    NFTs held: <span className=''>{totalCount}</span>
+                    {t("profile.nftsHeld")}:{" "}
+                    <span className=''>{totalCount}</span>
                   </Link>
                 )}
                 <span className='flex items-center gap-1/2 text-grayTextPrimary'>
-                  API key limit: <span className='text-text'>1</span>
+                  {t("profile.apiKeyLimit")}:{" "}
+                  <span className='text-text'>1</span>
                 </span>
               </section>
             )}
             <TableSearchInput
-              placeholder='Search NFT'
+              placeholder={t("profile.pro.searchNft")}
               wrapperClassName='w-full mb-1 mt-1 max-w-desktop'
               showPrefixPopup={false}
               value={nftSearch}
@@ -522,17 +527,21 @@ export const ProfilePro = () => {
                 );
               })}
               onOrderChange={setColumsOrder}
+              renderDisplayText={(count, total) =>
+                t("table.displaying", { count, total })
+              }
+              noItemsLabel={t("table.noItems")}
             />
           </>
         ) : (
           <div className='mt-2'>
             <EmptyState
               icon={<Zap size={24} />}
-              primaryText="You don't own any Cexplorer PRO NFTs yet."
-              secondaryText='Get one to unlock PRO features like boosting, API, governance votes, and more.'
+              primaryText={t("profile.pro.noNftsOwned")}
+              secondaryText={t("profile.pro.getOneToUnlock")}
               button={
                 <Button
-                  label='Get Cexplorer PRO NFT'
+                  label={t("profile.pro.getProNft")}
                   variant='purple'
                   size='md'
                   href='/pro'

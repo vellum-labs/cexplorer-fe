@@ -7,6 +7,7 @@ import SortBy from "@/components/ui/sortBy";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useFetchAssetExchangesGraph } from "@/services/assets";
 import { Loading } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 import { format } from "date-fns";
 
@@ -20,6 +21,7 @@ type Periods = "1min" | "5min" | "15min" | "30min" | "1hour" | "4hour" | "1day";
 export const AssetExchangesCandlestickGraph: FC<
   AssetExchangesCandlestickGraphProps
 > = ({ assetname, className }) => {
+  const { t } = useAppTranslation("common");
   const LS_KEY = "asset_exchanges_candlestick_period";
 
   const [period, setPeriod] = useState<string | undefined>(() => {
@@ -94,13 +96,13 @@ export const AssetExchangesCandlestickGraph: FC<
   };
 
   const selectItems = [
-    { key: "1min", value: "1 min" },
-    { key: "5min", value: "5 min" },
-    { key: "15min", value: "15 min" },
-    { key: "30min", value: "30 min" },
-    { key: "1hour", value: "1 hour" },
-    { key: "4hour", value: "4 hours" },
-    { key: "1day", value: "1 day" },
+    { key: "1min", value: t("asset.oneMin") },
+    { key: "5min", value: t("asset.fiveMin") },
+    { key: "15min", value: t("asset.fifteenMin") },
+    { key: "30min", value: t("asset.thirtyMin") },
+    { key: "1hour", value: t("asset.oneHour") },
+    { key: "4hour", value: t("asset.fourHours") },
+    { key: "1day", value: t("asset.oneDay") },
   ];
 
   const option = {
@@ -120,11 +122,11 @@ export const AssetExchangesCandlestickGraph: FC<
     <div>
       <div style="margin-bottom: 6px;">${axisValue}</div>
       <hr style="margin: 4px 0;" />
-      <div>Open price: ${Number(data[1]).toFixed(6)} ₳</div>
-      <div>Close price: ${Number(data[2]).toFixed(6)} ₳</div>
-      <div>Lowest price: ${Number(data[3]).toFixed(6)} ₳</div>
-      <div>Highest price: ${Number(data[4]).toFixed(6)} ₳</div>
-      <div>Volume: ${volume.toLocaleString(undefined, {
+      <div>${t("asset.openPrice")}: ${Number(data[1]).toFixed(6)} ₳</div>
+      <div>${t("asset.closePrice")}: ${Number(data[2]).toFixed(6)} ₳</div>
+      <div>${t("asset.lowestPrice")}: ${Number(data[3]).toFixed(6)} ₳</div>
+      <div>${t("asset.highestPrice")}: ${Number(data[4]).toFixed(6)} ₳</div>
+      <div>${t("asset.volume")}: ${volume.toLocaleString(undefined, {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       })} ₳</div>
@@ -230,7 +232,9 @@ export const AssetExchangesCandlestickGraph: FC<
   };
 
   return (
-    <div className={`w-full rounded-m border border-border bg-cardBg p-5 ${className || ''}`}>
+    <div
+      className={`w-full rounded-m border border-border bg-cardBg p-5 ${className || ""}`}
+    >
       <div className={`flex flex-col justify-end pb-1.5 md:flex-row md:pb-0`}>
         <SortBy
           label={false}
@@ -246,7 +250,7 @@ export const AssetExchangesCandlestickGraph: FC<
           <Loading className='min-h-[300px]' />
         ) : candlestickData.length === 0 ? (
           <div className='flex h-full w-full items-center justify-center text-text-sm text-text'>
-            <span>No data available for selected period</span>
+            <span>{t("asset.noDataAvailable")}</span>
           </div>
         ) : (
           <div className='relative h-[300px] w-full'>

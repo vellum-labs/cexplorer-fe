@@ -16,6 +16,7 @@ import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import AddressCell from "@/components/address/AddressCell";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import ExportButton from "@/components/table/ExportButton";
 import { genesisAddressesTableOptions } from "@/constants/tables/genesisAddressesTableOptions";
 import { useFetchGenesisAddresses } from "@/services/analytics";
@@ -23,6 +24,7 @@ import { useGenesisAddressesTableStore } from "@/stores/tables/genesisAddressesT
 import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 
 export const GenesisAddressesPage: FC = () => {
+  const { t } = useAppTranslation("common");
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { page } = useSearch({ from: "/analytics/genesis" });
 
@@ -63,7 +65,7 @@ export const GenesisAddressesPage: FC = () => {
 
         return <AddressCell address={item.address} />;
       },
-      title: "Address",
+      title: t("genesis.table.address"),
       visible: columnsVisibility.address,
       widthPx: 150,
     },
@@ -80,7 +82,9 @@ export const GenesisAddressesPage: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>Initial Value</p>,
+      title: (
+        <p className='w-full text-right'>{t("genesis.table.initialValue")}</p>
+      ),
       visible: columnsVisibility.value,
       widthPx: 80,
     },
@@ -97,7 +101,9 @@ export const GenesisAddressesPage: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>Current Balance</p>,
+      title: (
+        <p className='w-full text-right'>{t("genesis.table.currentBalance")}</p>
+      ),
       visible: columnsVisibility.balance,
       widthPx: 80,
     },
@@ -110,7 +116,7 @@ export const GenesisAddressesPage: FC = () => {
 
         return <DateCell time={item.detail.first} />;
       },
-      title: <p>First activity</p>,
+      title: <p>{t("genesis.table.firstActivity")}</p>,
       visible: columnsVisibility.first_activity,
       widthPx: 60,
     },
@@ -123,7 +129,7 @@ export const GenesisAddressesPage: FC = () => {
 
         return <DateCell time={item.detail.last} />;
       },
-      title: <p>Last activity</p>,
+      title: <p>{t("genesis.table.lastActivity")}</p>,
       visible: columnsVisibility.last_activity,
       widthPx: 60,
     },
@@ -139,10 +145,10 @@ export const GenesisAddressesPage: FC = () => {
     <PageBase
       metadataTitle='genesisAddresses'
       breadcrumbItems={[
-        { label: "Analytics", link: "/analytics" },
-        { label: "Genesis Addresses" },
+        { label: t("genesis.breadcrumbs.analytics"), link: "/analytics" },
+        { label: t("genesis.breadcrumbs.genesisAddresses") },
       ]}
-      title='Genesis Addresses'
+      title={t("genesis.title")}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
@@ -152,7 +158,9 @@ export const GenesisAddressesPage: FC = () => {
               <LoadingSkeleton height='27px' width='220px' />
             ) : totalItems > 0 ? (
               <h3 className='basis-[230px] text-nowrap'>
-                Total of {formatNumber(totalItems)} genesis addresses
+                {t("genesis.totalAddresses", {
+                  count: formatNumber(totalItems),
+                })}
               </h3>
             ) : (
               ""
@@ -166,12 +174,16 @@ export const GenesisAddressesPage: FC = () => {
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("table.rows")}
                 columnsOptions={genesisAddressesTableOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: t(`tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
-                      setColumnVisibility(item.key, !columnsVisibility[item.key]),
+                      setColumnVisibility(
+                        item.key,
+                        !columnsVisibility[item.key],
+                      ),
                   };
                 })}
               />
@@ -196,6 +208,10 @@ export const GenesisAddressesPage: FC = () => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("table.displaying", { count, total })
+          }
+          noItemsLabel={t("table.noItems")}
         />
       </section>
     </PageBase>

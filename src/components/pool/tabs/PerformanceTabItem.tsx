@@ -3,8 +3,10 @@ import PoolPerformanceGraph from "../graphs/PoolPerformanceGraph";
 import { usePoolPerfomanceGraph } from "@/hooks/pool/usePoolPerfomanceGraph";
 import { memo } from "react";
 import { PoolPerfomanceTable } from "../PoolPerfomanceTable";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const PerformanceTabItem = memo(function PerfomanceTabItem() {
+  const { t } = useAppTranslation("pages");
   const route = getRouteApi("/pool/$id");
   const { id } = route.useParams();
 
@@ -16,7 +18,7 @@ const PerformanceTabItem = memo(function PerfomanceTabItem() {
   return (
     <div>
       <div className='relative w-full'>
-        <h2 className='mb-1'>Performance</h2>
+        <h2 className='mb-1'>{t("pools.detailPage.performance.title")}</h2>
         {hasData && (
           <PoolPerformanceGraph
             activeStake={activeStake}

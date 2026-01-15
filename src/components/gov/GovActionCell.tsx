@@ -37,11 +37,7 @@ export const GovActionCell: FC<GovActionCellProps> = ({ id, name, bech }) => {
             {formatString(displayText, "long")}
           </Link>
         </span>
-        <Copy
-          copyText={id}
-          size={name ? 10 : 13}
-          className='stroke-grayText'
-        />
+        <Copy copyText={id} size={name ? 10 : 13} className='stroke-grayText' />
       </div>
     </div>
   );

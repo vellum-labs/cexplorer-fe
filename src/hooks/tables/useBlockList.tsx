@@ -25,6 +25,7 @@ import type { FilterKey } from "./useDrepList";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "../useMiscConst";
 import { useNavigate } from "@tanstack/react-router";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface UseBlockList {
   totalItems: number;
@@ -62,6 +63,7 @@ export const useBlockList = ({
   order,
   restSearch,
 }: BlockListArgs): UseBlockList => {
+  const { t } = useAppTranslation(["pages", "common"]);
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { columnsVisibility, setColumnVisibility, rows } =
     useBlockListTableStore(storeKey)();
@@ -200,14 +202,14 @@ export const useBlockList = ({
 
         return item.time;
       },
-      title: "Date",
+      title: t("blocks.table.date"),
       visible: columnsVisibility.date,
       widthPx: 75,
     },
     {
       key: "block_no",
       render: item => <BlockCell hash={item.hash} no={item.block_no} />,
-      title: <p className='w-full text-right'>Height</p>,
+      title: <p className='w-full text-right'>{t("blocks.table.height")}</p>,
       visible: columnsVisibility.block_no,
       widthPx: 75,
     },
@@ -216,7 +218,7 @@ export const useBlockList = ({
       render: item => <EpochCell no={item.epoch_no} />,
       title: (
         <p ref={anchorRefs?.epoch_no} className='w-full text-right'>
-          Epoch
+          {t("blocks.table.epoch")}
         </p>
       ),
       filter: {
@@ -233,11 +235,13 @@ export const useBlockList = ({
         onShow: e => toggleFilter(e, "epoch_no"),
         onFilter: () => changeFilterByKey("epoch_no", +filterDraft.epoch_no),
         onReset: () => changeFilterByKey("epoch_no"),
+        resetLabel: t("common:actions.reset"),
+        filterLabel: t("common:actions.filter"),
         filterContent: (
           <div className='flex h-[60px] w-full items-center justify-center px-1'>
             <TextInput
               onchange={value => changeDraftFilter("epoch_no", value)}
-              placeholder='Filter by epoch...'
+              placeholder={t("common:blocks.filter.byEpoch")}
               value={filterDraft["epoch_no"] ?? ""}
               wrapperClassName='w-full'
             />
@@ -252,7 +256,7 @@ export const useBlockList = ({
       render: item => (
         <p className='text-right'>{formatNumber(item?.slot_no ?? 0)}</p>
       ),
-      title: <p className='w-full text-right'>Slot</p>,
+      title: <p className='w-full text-right'>{t("blocks.table.slot")}</p>,
       visible: columnsVisibility.slot_no,
       widthPx: 80,
     },
@@ -266,7 +270,7 @@ export const useBlockList = ({
 
         return item.tx_count;
       },
-      title: <p className='w-full text-right'>TXs</p>,
+      title: <p className='w-full text-right'>{t("blocks.table.txs")}</p>,
       visible: columnsVisibility.tx_count,
       widthPx: 50,
     },
@@ -298,7 +302,7 @@ export const useBlockList = ({
 
         return ticker && name ? `[${ticker}] ${name}` : id;
       },
-      title: <p ref={anchorRefs?.pool_id}>Minted by</p>,
+      title: <p ref={anchorRefs?.pool_id}>{t("blocks.table.mintedBy")}</p>,
       filter: {
         anchorRef: anchorRefs?.pool_id,
         activeFunnel: !!filter.pool_id,
@@ -310,11 +314,13 @@ export const useBlockList = ({
         onShow: e => toggleFilter(e, "pool_id"),
         onFilter: () => changeFilterByKey("pool_id", filterDraft.pool_id),
         onReset: () => changeFilterByKey("pool_id"),
+        resetLabel: t("common:actions.reset"),
+        filterLabel: t("common:actions.filter"),
         filterContent: (
           <div className='flex h-[60px] w-full items-center justify-center px-1'>
             <TextInput
               onchange={value => changeDraftFilter("pool_id", value)}
-              placeholder='Filter by pool id...'
+              placeholder={t("common:blocks.filter.byPoolId")}
               value={filterDraft["pool_id"] ?? ""}
               wrapperClassName='w-full'
             />
@@ -336,7 +342,7 @@ export const useBlockList = ({
 
         return item.hash;
       },
-      title: "Hash",
+      title: t("blocks.table.hash"),
       visible: columnsVisibility.hash,
       widthPx: 120,
     },
@@ -345,7 +351,7 @@ export const useBlockList = ({
       render: item => (
         <p className='text-right'>{formatNumber(item?.epoch_slot_no ?? 0)}</p>
       ),
-      title: <p className='w-full text-right'>Epoch slot</p>,
+      title: <p className='w-full text-right'>{t("blocks.table.epochSlot")}</p>,
       visible: columnsVisibility.epoch_slot_no,
       widthPx: 85,
     },
@@ -363,7 +369,7 @@ export const useBlockList = ({
 
         return item.vrf_key;
       },
-      title: "VRF key",
+      title: t("blocks.table.vrfKey"),
       visible: columnsVisibility.vrf_key,
       widthPx: 85,
     },
@@ -380,7 +386,7 @@ export const useBlockList = ({
       ),
       title: (
         <p ref={anchorRefs.proto} className='w-full text-right'>
-          Protocol
+          {t("blocks.table.protocol")}
         </p>
       ),
       filter: {
@@ -395,6 +401,8 @@ export const useBlockList = ({
         onShow: e => toggleFilter(e, "proto"),
         onFilter: () => changeFilterByKey("proto", filterDraft.proto),
         onReset: () => changeFilterByKey("proto"),
+        resetLabel: t("common:actions.reset"),
+        filterLabel: t("common:actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             {(protocolVersions || []).map(version => (
@@ -418,7 +426,7 @@ export const useBlockList = ({
             ))}
             <TextInput
               onchange={value => changeDraftFilter("proto", value)}
-              placeholder='Custom protocol...'
+              placeholder={t("common:blocks.filter.customProtocol")}
               value={
                 !protocolVersions.includes(String(filterDraft["proto"]))
                   ? filterDraft["proto"]
@@ -434,7 +442,7 @@ export const useBlockList = ({
     },
     {
       key: "size",
-      title: <p>Size</p>,
+      title: <p>{t("blocks.table.size")}</p>,
       render: item => (
         <div className='text-right'>
           {
@@ -466,7 +474,7 @@ export const useBlockList = ({
       render: item => (
         <p className='text-right'>{item.op_cert_counter ?? "-"}</p>
       ),
-      title: <p className='w-full text-right'>Cert Count</p>,
+      title: <p className='w-full text-right'>{t("blocks.table.certCount")}</p>,
       visible: columnsVisibility.cert_counter,
       widthPx: 70,
     },

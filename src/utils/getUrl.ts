@@ -2,7 +2,9 @@ import { apiUrl } from "@/constants/confVariables";
 import type { StringifiableRecord } from "query-string";
 import queryString from "query-string";
 
-const sanitizeParams = (params?: StringifiableRecord): StringifiableRecord | undefined => {
+const sanitizeParams = (
+  params?: StringifiableRecord,
+): StringifiableRecord | undefined => {
   if (!params) return params;
 
   const sanitized: StringifiableRecord = {};

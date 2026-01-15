@@ -1,9 +1,11 @@
 import { useFetchArticleDetail } from "@/services/article";
+import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 import parse from "html-react-parser";
 import { Helmet } from "react-helmet";
 
 export const NewsletterPage = () => {
-  const query = useFetchArticleDetail("en", "page", "newsletter");
+  const { locale } = useLocaleStore();
+  const query = useFetchArticleDetail(locale, "page", "newsletter");
   const data = query.data;
   const name = data?.name;
 

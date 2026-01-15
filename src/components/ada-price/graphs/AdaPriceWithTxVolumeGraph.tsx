@@ -7,6 +7,7 @@ import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import ReactEcharts from "echarts-for-react";
 import { AnalyticsGraph } from "@/components/analytics/AnalyticsGraph";
 import { useAdaPriceWithTxVolume } from "@/hooks/graphs/useAdaPriceWithTxVolume";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface AdaPriceWithTxVolumeGraphProps {
   graphRates: BasicRate[];
@@ -15,6 +16,7 @@ interface AdaPriceWithTxVolumeGraphProps {
 
 export const AdaPriceWithTxVolumeGraph: FC<AdaPriceWithTxVolumeGraphProps> =
   memo(function AdaPriceWithTxVolumeGraph({ graphRates, analyticsData }) {
+    const { t } = useAppTranslation("common");
     const {
       json,
       option,
@@ -35,7 +37,7 @@ export const AdaPriceWithTxVolumeGraph: FC<AdaPriceWithTxVolumeGraphProps> =
 
     return (
       <AnalyticsGraph
-        title='ADA/BTC Price vs Daily TX Output Volume'
+        title={t("adaPrice.adaBtcPriceVsTxVolume")}
         exportButton
         graphSortData={{
           query: fakeQuery as any,

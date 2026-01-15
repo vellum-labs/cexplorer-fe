@@ -23,6 +23,7 @@ import parse from "html-react-parser";
 import { Info } from "lucide-react";
 import { useEffect, useState } from "react";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const cropString = (str: string) => {
   if (str.length > 90) {
@@ -44,6 +45,7 @@ const renderStatusBadge = (status: "available" | "closed") => {
 };
 
 export const PollsListPage = () => {
+  const { t } = useAppTranslation();
   const [activeTab, setActiveTab] = useState<string>("all");
   const [totalItems, setTotalItems] = useState<number>(0);
   const [openFaq, setOpenFaq] = useState(false);
@@ -55,17 +57,17 @@ export const PollsListPage = () => {
   const tabs = [
     {
       key: "all",
-      label: "All",
+      label: t("tabs.polls.all"),
       visible: true,
     },
     {
       key: "live",
-      label: "Live",
+      label: t("tabs.polls.live"),
       visible: true,
     },
     {
       key: "closed",
-      label: "Closed",
+      label: t("tabs.polls.closed"),
       visible: true,
     },
   ];
@@ -181,8 +183,8 @@ export const PollsListPage = () => {
       <PageBase
         adsCarousel={false}
         metadataTitle='pollsPage'
-        title='Cexplorer governance actions'
-        breadcrumbItems={[{ label: "Voting" }]}
+        title={t("pages:polls.title")}
+        breadcrumbItems={[{ label: t("pages:breadcrumbs.voting") }]}
       >
         <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
           <Tabs
@@ -213,6 +215,10 @@ export const PollsListPage = () => {
               return true;
             })}
             columns={columns}
+            renderDisplayText={(count, total) =>
+              t("table.displaying", { count, total })
+            }
+            noItemsLabel={t("table.noItems")}
           />
         </section>
       </PageBase>

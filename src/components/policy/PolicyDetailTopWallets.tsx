@@ -1,5 +1,6 @@
 import type { FC } from "react";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchPolicyDetail, useFetchPolicyOwner } from "@/services/policy";
@@ -10,7 +11,10 @@ import { useEffect, useState } from "react";
 
 import { policyDetailOwnerOptions } from "@/constants/tables/policyDetailOwnerTableOptions";
 import type { PolicyDetailOwnerTableColumns } from "@/types/tableTypes";
-import { formatNumber, formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
+import {
+  formatNumber,
+  formatNumberWithSuffix,
+} from "@vellumlabs/cexplorer-sdk";
 import AddressCell from "../address/AddressCell";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "../table/ExportButton";
@@ -23,6 +27,7 @@ interface PolicyDetailTopWalletsProps {
 export const PolicyDetailTopWallets: FC<PolicyDetailTopWalletsProps> = ({
   policyId,
 }) => {
+  const { t } = useAppTranslation("common");
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { page } = useSearch({ from: "/policy/$policyId" });
   const policyDetailQuery = useFetchPolicyDetail(policyId);
@@ -66,7 +71,7 @@ export const PolicyDetailTopWallets: FC<PolicyDetailTopWalletsProps> = ({
 
         return <AddressCell address={item.address} />;
       },
-      title: "Address",
+      title: t("policy.address"),
       visible: columnsVisibility.address,
       widthPx: 60,
     },
@@ -83,13 +88,13 @@ export const PolicyDetailTopWallets: FC<PolicyDetailTopWalletsProps> = ({
           </p>
         );
       },
-      title: <p className='w-full text-right'>Quantity</p>,
+      title: <p className='w-full text-right'>{t("policy.quantity")}</p>,
       visible: columnsVisibility.quantity,
       widthPx: 15,
     },
     {
       key: "share",
-      title: <p className='w-full text-right'>Share</p>,
+      title: <p className='w-full text-right'>{t("policy.share")}</p>,
       render: item => (
         <p className='w-full text-right'>
           {((item.total_quantity / mintc) * 100).toFixed(2)}%
@@ -114,7 +119,7 @@ export const PolicyDetailTopWallets: FC<PolicyDetailTopWalletsProps> = ({
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : totalItems > 0 ? (
             <h3 className='basis-[230px] text-nowrap'>
-              Total of {formatNumber(totalItems)} owners
+              {t("policy.totalOwners", { count: formatNumber(totalItems) })}
             </h3>
           ) : (
             ""
@@ -130,9 +135,10 @@ export const PolicyDetailTopWallets: FC<PolicyDetailTopWalletsProps> = ({
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("table.rows")}
               columnsOptions={policyDetailOwnerOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -162,6 +168,10 @@ export const PolicyDetailTopWallets: FC<PolicyDetailTopWalletsProps> = ({
           }) as any
         }
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </>
   );

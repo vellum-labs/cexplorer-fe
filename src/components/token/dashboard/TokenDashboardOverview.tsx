@@ -2,10 +2,12 @@ import type { FC } from "react";
 
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface TokenDashboardOverviewProps {}
 
 export const TokenDashboardOverview: FC<TokenDashboardOverviewProps> = () => {
+  const { t } = useAppTranslation("common");
   const isLoading = false;
   const isError = false;
 
@@ -41,7 +43,7 @@ export const TokenDashboardOverview: FC<TokenDashboardOverviewProps> = () => {
             <>
               <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                 <OverviewCard
-                  title='DEX trading volume'
+                  title={t("tokenDashboard.dexTradingVolume")}
                   overviewList={dexTradingVolume}
                   className='h-full'
                 />
@@ -49,14 +51,14 @@ export const TokenDashboardOverview: FC<TokenDashboardOverviewProps> = () => {
 
               <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                 <OverviewCard
-                  title='DeFi trades'
+                  title={t("tokenDashboard.defiTrades")}
                   overviewList={defiTrades}
                   className='h-full'
                 />
               </div>
               <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                 <OverviewCard
-                  title='Unique traders'
+                  title={t("tokenDashboard.uniqueTraders")}
                   overviewList={uniqueTrades}
                   className='h-full'
                 />

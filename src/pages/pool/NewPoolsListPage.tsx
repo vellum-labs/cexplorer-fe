@@ -23,8 +23,10 @@ import { HashCell } from "@/components/tx/HashCell";
 import { newPoolsTableOptions } from "@/constants/tables/newPoolsTableOptions";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const NewPoolsListPage: FC = () => {
+  const { t } = useAppTranslation(["pages", "common"]);
   const { page } = useSearch({ from: "/new-pools/" });
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const {
@@ -61,7 +63,7 @@ export const NewPoolsListPage: FC = () => {
 
         return item?.pool_update?.active?.tx.time;
       },
-      title: <p>Date</p>,
+      title: <p>{t("common:labels.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 50,
     },
@@ -93,16 +95,20 @@ export const NewPoolsListPage: FC = () => {
 
         return format;
       },
-      title: "Pool",
+      title: t("common:labels.pool"),
       visible: columnsVisibility.pool,
       widthPx: 90,
     },
     {
       key: "epoch",
       render: item => (
-        <EpochCell no={item.active_epochs} substractFromCurrent currentEpoch={currentEpoch} />
+        <EpochCell
+          no={item.active_epochs}
+          substractFromCurrent
+          currentEpoch={currentEpoch}
+        />
       ),
-      title: <p className='w-full text-right'>Epoch</p>,
+      title: <p className='w-full text-right'>{t("common:labels.epoch")}</p>,
       visible: columnsVisibility.epoch,
       widthPx: 15,
     },
@@ -141,7 +147,7 @@ export const NewPoolsListPage: FC = () => {
 
         return format;
       },
-      title: <p className='w-full text-right'>Fees</p>,
+      title: <p className='w-full text-right'>{t("common:labels.fees")}</p>,
       visible: columnsVisibility.fees,
       widthPx: 50,
     },
@@ -163,7 +169,7 @@ export const NewPoolsListPage: FC = () => {
           </div>
         );
       },
-      title: <p className='w-full text-right'>Pledge</p>,
+      title: <p className='w-full text-right'>{t("common:labels.pledge")}</p>,
       visible: columnsVisibility.pledge,
       widthPx: 40,
     },
@@ -177,7 +183,7 @@ export const NewPoolsListPage: FC = () => {
 
         return item?.pool_update?.active?.tx.hash;
       },
-      title: <p>Tx Hash</p>,
+      title: <p>{t("common:labels.txHash")}</p>,
       visible: columnsVisibility.tx_hash,
       widthPx: 60,
     },
@@ -192,21 +198,22 @@ export const NewPoolsListPage: FC = () => {
   return (
     <PageBase
       metadataTitle='newPoolsList'
-      title='New Pools'
-      breadcrumbItems={[{ label: "New Pools" }]}
+      title={t("pools.newPools.title")}
+      breadcrumbItems={[{ label: t("pools.newPools.title") }]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
-          <h3>Welcome, new pool operators!</h3>
+          <h3>{t("pools.newPools.welcome")}</h3>
 
           <div className='mb-2 ml-auto flex w-fit justify-end gap-1'>
             <ExportButton columns={columns} items={items} />
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={newPoolsTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -231,6 +238,10 @@ export const NewPoolsListPage: FC = () => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </section>
     </PageBase>

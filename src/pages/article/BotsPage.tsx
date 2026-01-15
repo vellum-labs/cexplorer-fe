@@ -7,68 +7,84 @@ import { TelegramLogo } from "@vellumlabs/cexplorer-sdk";
 import { TwitterLogo } from "@vellumlabs/cexplorer-sdk";
 
 import { PulseDot } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
+
+type TagKey = "global" | "live" | "customizable" | "comingSoon";
+
+interface BotConfig {
+  key: string;
+  titleKey: string;
+  descriptionKey: string;
+  icon: string;
+  tagKeys: TagKey[];
+  link?: string;
+}
+
+const botsConfig: BotConfig[] = [
+  {
+    key: "x",
+    titleKey: "botsPage.bots.x.title",
+    descriptionKey: "botsPage.bots.x.description",
+    icon: TwitterLogo,
+    tagKeys: ["global", "live"],
+    link: undefined,
+  },
+  {
+    key: "tg",
+    titleKey: "botsPage.bots.telegram.title",
+    descriptionKey: "botsPage.bots.telegram.description",
+    icon: TelegramLogo,
+    tagKeys: ["customizable", "comingSoon"],
+    link: undefined,
+  },
+  {
+    key: "dc",
+    titleKey: "botsPage.bots.discord.title",
+    descriptionKey: "botsPage.bots.discord.description",
+    icon: DiscordLogo,
+    tagKeys: ["customizable", "comingSoon"],
+    link: undefined,
+  },
+];
 
 export const BotsPage = () => {
-  const bots = [
-    {
-      key: "x",
-      title: "X notification bot",
-      icon: TwitterLogo,
-      description: "Coming soon...",
-      tags: ["Global", "Live"],
-      link: undefined,
-    },
-    {
-      key: "tg",
-      title: "Telegram bot",
-      icon: TelegramLogo,
-      description: "Coming soon...",
-      tags: ["Customizable", "Coming soon"],
-      link: undefined,
-    },
-    {
-      key: "dc",
-      title: "Discord bot",
-      icon: DiscordLogo,
-      description: "Coming soon...",
-      tags: ["Customizable", "Coming soon"],
-      link: undefined,
-    },
-  ];
+  const { t } = useAppTranslation();
 
   return (
     <PageBase
-      metadataOverride={{ title: "Bots | Cexplorer.io" }}
-      title='Cexplorer.io Bots'
-      subTitle='Stay connected with automated notifications and updates'
-      breadcrumbItems={[{ label: "Bots" }]}
+      metadataOverride={{ title: t("botsPage.metaTitle") }}
+      title={t("botsPage.title")}
+      subTitle={t("botsPage.subtitle")}
+      breadcrumbItems={[{ label: t("botsPage.breadcrumb") }]}
       adsCarousel={false}
       customPage={true}
     >
       <section className='flex w-full max-w-desktop flex-col items-center gap-4 px-mobile pb-3 md:px-desktop'>
-        {bots.map(item => (
+        {botsConfig.map(item => (
           <div
             key={item.key}
             className='flex w-full max-w-[800px] flex-col justify-between gap-1 rounded-m border border-border px-mobile py-mobile sm:flex-row sm:items-center sm:gap-0 md:px-desktop'
           >
             <div className='flex max-w-[410px] flex-col gap-1.5'>
               <div className='flex w-full flex-wrap gap-1'>
-                {item.tags.map(tag => (
+                {item.tagKeys.map(tagKey => (
                   <div
-                    key={tag}
+                    key={tagKey}
                     className='flex items-center gap-[6px] rounded-s border border-border px-[6px] py-[2px]'
                   >
-                    {tag === "Live" && (
+                    {tagKey === "live" && (
                       <div className='relative'>
                         <PulseDot />
                       </div>
                     )}
-                    {tag === "Coming soon" && (
+                    {tagKey === "comingSoon" && (
                       <div className='relative'>
                         <PulseDot color='bg-yellowText' />
                       </div>
                     )}
-                    <span className='text-text-xs font-medium'>{tag}</span>
+                    <span className='text-text-xs font-medium'>
+                      {t(`botsPage.tags.${tagKey}`)}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -76,24 +92,24 @@ export const BotsPage = () => {
                 <div className='flex flex-col justify-between gap-1/2 self-start text-wrap'>
                   <div className='flex items-center gap-1'>
                     <img src={item.icon} alt='BotIcon' height={24} width={24} />
-                    <h3>{item.title}</h3>
+                    <h3>{t(item.titleKey)}</h3>
                   </div>
                   <span className='text-grayTextPrimary'>
-                    {item.description}
+                    {t(item.descriptionKey)}
                   </span>
                 </div>
               </div>
             </div>
             {item.link ? (
               <Button
-                label='Folow'
+                label={t("botsPage.buttons.follow")}
                 rightIcon={<ArrowRight size={18} />}
                 size='md'
                 variant='primary'
               />
             ) : (
               <Button
-                label='Coming Soon'
+                label={t("botsPage.buttons.comingSoon")}
                 rightIcon={<BellRing size={18} />}
                 size='md'
                 variant='tertiary'
@@ -103,18 +119,13 @@ export const BotsPage = () => {
         ))}
         <div className='flex max-w-[800px] flex-col gap-4 text-wrap pb-5'>
           <div className='w-full text-center'>
-            <h1>Bots and Automation</h1>
+            <h1>{t("botsPage.policy.title")}</h1>
           </div>
           <p className='text-start text-grayTextPrimary'>
-            At Cexplorer, we prioritize fair and responsible use of our
-            platform. As such, the use of automated bots or scripts to crawl,
-            scrape, or interact with our website and API is strictly prohibited.
-            Our API is intended for genuine user interaction, and any automated
-            access, including bot usage, is not allowed.
+            {t("botsPage.policy.paragraph1")}
           </p>
           <p className='text-start text-grayTextPrimary'>
-            For any questions or concerns regarding our policy, feel free to
-            contact us directly.
+            {t("botsPage.policy.paragraph2")}
           </p>
         </div>
       </section>

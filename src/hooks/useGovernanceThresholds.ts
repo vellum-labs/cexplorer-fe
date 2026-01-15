@@ -8,18 +8,17 @@ export const useGovernanceThresholds = () => {
   const miscConst = useMiscConst(basicData?.data?.version?.const);
   const query = useFetchThreshold();
 
-
   const drepList = query.data?.data?.drep_list?.data ?? [];
 
   const filteredDReps = drepList;
 
   const latestStat = query?.data?.data.gov_stat.stat?.[0];
-  
-  const totalDelegatedToAlwaysNoConfidence = latestStat?.drep_always_no_confidence?.power ?? 0;
+
+  const totalDelegatedToAlwaysNoConfidence =
+    latestStat?.drep_always_no_confidence?.power ?? 0;
   const humanDRepStake = latestStat?.other?.power ?? 0;
 
   const activeVotingStake = humanDRepStake + totalDelegatedToAlwaysNoConfidence;
-
 
   const govCommittee = query?.data?.data?.gov_committee_detail;
   const ccData = {
@@ -33,7 +32,11 @@ export const useGovernanceThresholds = () => {
   const poolList = query?.data?.data?.pool_list ?? ({} as ThresholdPoolList);
   const totalSpoStake = query?.data?.data?.epoch_stats?.stake?.epoch ?? 0;
 
-  const generateProps = (params: any, visibility: any, isSecuryTitle = false) => ({
+  const generateProps = (
+    params: any,
+    visibility: any,
+    isSecuryTitle = false,
+  ) => ({
     params,
     filteredDReps,
     activeVotingStake,

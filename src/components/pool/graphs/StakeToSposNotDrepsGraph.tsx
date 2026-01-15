@@ -9,12 +9,14 @@ import { useADADisplay } from "@/hooks/useADADisplay";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useFetchStakeDrepsNotSpo } from "@/services/pools";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 import { format } from "date-fns";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 
 export const StakeToSposNotDrepsGraph: FC = () => {
+  const { t } = useAppTranslation("pages");
   const query = useFetchStakeDrepsNotSpo();
   const data = query.data?.data ?? [];
 
@@ -31,10 +33,16 @@ export const StakeToSposNotDrepsGraph: FC = () => {
   const count = data.map(item => item.count);
   const delegators = data.map(item => item.delegator);
 
+  const stakeLabel = t("pools.analytics.legend.stake");
+  const countLabel = t("pools.analytics.legend.count");
+  const delegatorsLabel = t("pools.analytics.legend.delegators");
+  const dateLabel = t("pools.analytics.tooltip.date");
+  const epochLabel = t("pools.analytics.tooltip.epoch");
+
   const option = {
     legend: {
       type: "scroll",
-      data: ["Stake (₳)", "Count", "Delegators"],
+      data: [stakeLabel, countLabel, delegatorsLabel],
       textStyle: { color: textColor },
       pageIconColor: textColor,
       pageIconInactiveColor: inactivePageIconColor,
@@ -52,10 +60,10 @@ export const StakeToSposNotDrepsGraph: FC = () => {
           miscConst?.epoch.start_time ?? "",
         );
 
-        const header = `Date: ${format(startTime, "dd.MM.yy")} - ${format(
+        const header = `${dateLabel}: ${format(startTime, "dd.MM.yy")} - ${format(
           endTime,
           "dd.MM.yy",
-        )} (Epoch: ${params[0]?.axisValue})<hr style="margin: 4px 0;" />`;
+        )} (${epochLabel}: ${params[0]?.axisValue})<hr style="margin: 4px 0;" />`;
 
         const lines = params.map(item => {
           const isStake = item.seriesName.includes("Stake");
@@ -80,7 +88,7 @@ export const StakeToSposNotDrepsGraph: FC = () => {
     xAxis: {
       type: "category",
       data: epochs,
-      name: "Epoch",
+      name: epochLabel,
       nameLocation: "middle",
       nameGap: 28,
       boundaryGap: false,
@@ -107,7 +115,7 @@ export const StakeToSposNotDrepsGraph: FC = () => {
     series: [
       {
         type: "line",
-        name: "Stake (₳)",
+        name: stakeLabel,
         data: stake,
         yAxisIndex: 1,
         symbol: "none",
@@ -116,7 +124,7 @@ export const StakeToSposNotDrepsGraph: FC = () => {
       },
       {
         type: "line",
-        name: "Count",
+        name: countLabel,
         data: count,
         yAxisIndex: 0,
         symbol: "none",
@@ -125,7 +133,7 @@ export const StakeToSposNotDrepsGraph: FC = () => {
       },
       {
         type: "line",
-        name: "Delegators",
+        name: delegatorsLabel,
         data: delegators,
         yAxisIndex: 0,
         symbol: "none",
@@ -137,8 +145,8 @@ export const StakeToSposNotDrepsGraph: FC = () => {
 
   return (
     <AnalyticsGraph
-      title='Stake delegated to SPOs that are not DReps'
-      description='Epoch-level view of stake, SPO count, and delegator count delegated to SPOs who are not DReps'
+      title={t("pools.analytics.stakeToSposNotDreps.title")}
+      description={t("pools.analytics.stakeToSposNotDreps.description")}
       className='border-none'
     >
       <div className='relative w-full'>

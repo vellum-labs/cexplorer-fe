@@ -7,8 +7,10 @@ import { useFetchTxDetail } from "@/services/tx";
 import type { TableColumns } from "@/types/tableTypes";
 import type { Withdrawal } from "@/types/txTypes";
 import { getRouteApi } from "@tanstack/react-router";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const WithdrawalsTabItem = () => {
+  const { t } = useAppTranslation("common");
   const route = getRouteApi("/tx/$hash");
   const { hash } = route.useParams();
   const query = useFetchTxDetail(hash);
@@ -23,7 +25,7 @@ const WithdrawalsTabItem = () => {
           <AddressCell address={item.stake_addr} />
         </div>
       ),
-      title: "Address",
+      title: t("tx.columns.address"),
       visible: true,
       widthPx: 120,
     },
@@ -34,14 +36,22 @@ const WithdrawalsTabItem = () => {
           <AdaWithTooltip data={item.amount} />
         </span>
       ),
-      title: <span className='flex w-full justify-end'>Amount</span>,
+      title: (
+        <span className='flex w-full justify-end'>
+          {t("tx.columns.amount")}
+        </span>
+      ),
       visible: true,
       widthPx: 80,
     },
   ];
 
   if (!withdrawals && !query.isLoading) {
-    return <p className='w-full text-center text-text-sm'>No withdrawals</p>;
+    return (
+      <p className='w-full text-center text-text-sm'>
+        {t("tx.noWithdrawalsFound")}
+      </p>
+    );
   }
 
   if (query.isLoading) {
@@ -57,6 +67,10 @@ const WithdrawalsTabItem = () => {
       minContentWidth={500}
       totalItems={withdrawals?.length || 0}
       scrollable
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

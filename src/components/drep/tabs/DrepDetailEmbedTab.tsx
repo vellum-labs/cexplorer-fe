@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { EmbedButtonsSubtab } from "../subtabs/EmbedButtonsSubtab";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface DrepDetailEmbedTabProps {
   drepId: string;
@@ -11,10 +12,11 @@ export const DrepDetailEmbedTab: FC<DrepDetailEmbedTabProps> = ({
   drepId,
   drepName,
 }) => {
+  const { t } = useAppTranslation("pages");
   const embedTabs = [
     {
       key: "buttons",
-      label: "Buttons",
+      label: t("dreps.detailPage.embed.buttons"),
       content: <EmbedButtonsSubtab drepId={drepId} drepName={drepName} />,
       visible: true,
     },

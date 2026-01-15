@@ -8,6 +8,7 @@ import { useFetchStakeIsSpoDrep } from "@/services/drep";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
@@ -15,6 +16,7 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useADADisplay } from "@/hooks/useADADisplay";
 
 export const StakeIsSpoDrepGraph: FC = () => {
+  const { t } = useAppTranslation("pages");
   const query = useFetchStakeIsSpoDrep();
   const data = query.data?.data ?? [];
 
@@ -30,10 +32,16 @@ export const StakeIsSpoDrepGraph: FC = () => {
   const stake = data.map(item => item.stake);
   const delegators = data.map(item => item.delegator);
 
+  const stakeLabel = t("pools.analytics.legend.stake");
+  const spoDrepCountLabel = t("pools.analytics.legend.spoDrepCount");
+  const delegatorsLabel = t("pools.analytics.legend.delegators");
+  const dateLabel = t("pools.analytics.tooltip.date");
+  const epochLabel = t("pools.analytics.tooltip.epoch");
+
   const option = {
     legend: {
       type: "scroll",
-      data: ["SPO+DRep Count", "Stake (₳)", "Delegators"],
+      data: [spoDrepCountLabel, stakeLabel, delegatorsLabel],
       textStyle: { color: textColor },
       pageIconColor: textColor,
       pageIconInactiveColor: inactivePageIconColor,
@@ -52,17 +60,17 @@ export const StakeIsSpoDrepGraph: FC = () => {
         );
 
         const labelMap = {
-          "Stake (₳)": "Stake",
-          Delegators: "Delegators",
-          "SPO+DRep Count": "SPO+DRep Count",
+          [stakeLabel]: stakeLabel.replace(" (₳)", ""),
+          [delegatorsLabel]: delegatorsLabel,
+          [spoDrepCountLabel]: spoDrepCountLabel,
         };
 
         return (
-          `Date: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (Epoch: ${params[0]?.axisValue})<hr>` +
+          `${dateLabel}: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${epochLabel}: ${params[0]?.axisValue})<hr>` +
           params
             .map(item => {
               const value =
-                item.seriesName === "Stake (₳)"
+                item.seriesName === stakeLabel
                   ? formatLovelace(item.data)
                   : formatNumber(item.data);
               return `<p>${item.marker} ${labelMap[item.seriesName]}: ${value}</p>`;
@@ -80,7 +88,7 @@ export const StakeIsSpoDrepGraph: FC = () => {
     xAxis: {
       type: "category",
       data: epochs,
-      name: "Epoch",
+      name: epochLabel,
       nameLocation: "middle",
       nameGap: 28,
       boundaryGap: false,
@@ -109,7 +117,7 @@ export const StakeIsSpoDrepGraph: FC = () => {
     series: [
       {
         type: "line",
-        name: "SPO+DRep Count",
+        name: spoDrepCountLabel,
         data: count,
         yAxisIndex: 0,
         symbol: "none",
@@ -121,7 +129,7 @@ export const StakeIsSpoDrepGraph: FC = () => {
       },
       {
         type: "line",
-        name: "Stake (₳)",
+        name: stakeLabel,
         data: stake,
         yAxisIndex: 1,
         symbol: "none",
@@ -133,7 +141,7 @@ export const StakeIsSpoDrepGraph: FC = () => {
       },
       {
         type: "line",
-        name: "Delegators",
+        name: delegatorsLabel,
         data: delegators,
         yAxisIndex: 0,
         symbol: "none",
@@ -148,8 +156,8 @@ export const StakeIsSpoDrepGraph: FC = () => {
 
   return (
     <AnalyticsGraph
-      title='Stake delegated to entities that are both SPOs and DRep'
-      description='Stake, DRep count, and delegator count delegated to entities serving as both SPOs and DRep'
+      title={t("pools.analytics.stakeToSpoDreps.title")}
+      description={t("pools.analytics.stakeToSpoDreps.description")}
       className='border-none'
     >
       <div className='relative w-full'>

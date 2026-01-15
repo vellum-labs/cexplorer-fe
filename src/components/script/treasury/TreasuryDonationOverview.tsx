@@ -6,12 +6,14 @@ import { colors } from "@/constants/colors";
 import type { TreasuryDonationStatsResponse } from "@/types/treasuryTypes";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { HandCoins } from "lucide-react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   query: UseQueryResult<TreasuryDonationStatsResponse["data"]>;
 }
 
 export const TreasuryDonationOverview = ({ query }: Props) => {
+  const { t } = useAppTranslation("common");
   const data = query.data;
   const allTimeDonations = data?.epoch.reduce((acc, epoch) => {
     return acc + epoch.treasury_donation;
@@ -53,14 +55,14 @@ export const TreasuryDonationOverview = ({ query }: Props) => {
       ) : (
         <>
           <OverviewStatCard
-            title='All-time'
+            title={t("treasury.overview.allTime")}
             value={<AdaWithTooltip data={allTimeDonations ?? 0} />}
             className='max-h-[140px]'
             icon={<HandCoins color={colors.primary} />}
           />
           <OverviewStatCard
             icon={<HandCoins color={colors.primary} />}
-            title='Current Epoch'
+            title={t("treasury.overview.currentEpoch")}
             value={
               <div className='flex items-center gap-2'>
                 <span>
@@ -83,7 +85,7 @@ export const TreasuryDonationOverview = ({ query }: Props) => {
             className='max-h-[140px]'
           />
           <OverviewStatCard
-            title='Previous Epoch'
+            title={t("treasury.overview.previousEpoch")}
             icon={<HandCoins color={colors.primary} />}
             value={
               <div className='flex items-center gap-2'>

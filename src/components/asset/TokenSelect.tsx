@@ -14,6 +14,7 @@ import {
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import AssetCell from "./AssetCell";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const Row = memo(({ index, style, data }: any) => {
   const item = data[index];
@@ -47,6 +48,7 @@ const Row = memo(({ index, style, data }: any) => {
 
 export const TokenSelectCombobox = memo(
   ({ items, className }: { items: AddressAsset[]; className?: string }) => {
+    const { t } = useAppTranslation("common");
     const contentRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLDivElement>(null);
     const [open, setOpen] = useState(false);
@@ -153,7 +155,7 @@ export const TokenSelectCombobox = memo(
           onClick={() => setOpen(!open)}
           label={
             <div className='flex items-center gap-1'>
-              <span>Browse tokens</span>
+              <span>{t("asset.browseTokens")}</span>
               <span className='text-text-xs'>({items.length})</span>
               <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
             </div>
@@ -168,13 +170,13 @@ export const TokenSelectCombobox = memo(
               <TextInput
                 value={search}
                 onchange={value => setSearch(value)}
-                placeholder='Search token...'
+                placeholder={t("asset.searchToken")}
                 wrapperClassName='px-1 py-1'
               />
               <div className='overflow-hidden'>
                 {filteredItems.length === 0 ? (
                   <div className='text-sm py-6 text-center'>
-                    No token found.
+                    {t("asset.noTokenFound")}
                   </div>
                 ) : (
                   <List

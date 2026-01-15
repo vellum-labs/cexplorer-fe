@@ -7,6 +7,7 @@ import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
 import { formatCurrency } from "@vellumlabs/cexplorer-sdk";
 
 import Bitcoin from "@/resources/images/wallet/bitcoin.svg";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface HomepageCardanoPriceProps {
   miscConst: MiscConstResponseData | undefined;
@@ -15,6 +16,7 @@ interface HomepageCardanoPriceProps {
 export const HomepageCardanoPrice: FC<HomepageCardanoPriceProps> = ({
   miscConst,
 }) => {
+  const { t } = useAppTranslation("common");
   const price = useAdaPriceWithHistory() as any;
   const { currency } = useCurrencyStore();
 
@@ -47,7 +49,7 @@ export const HomepageCardanoPrice: FC<HomepageCardanoPriceProps> = ({
       <div className='flex flex-grow items-center pb-[11px]'>
         <div className='flex min-w-[160px] items-center gap-1/2'>
           <span className='text-grayText inline-block text-text-sm font-medium'>
-            Market cap
+            {t("homepage.marketCap")}
           </span>
         </div>
         <span className='text-grayText text-text-sm font-semibold'>
@@ -64,7 +66,7 @@ export const HomepageCardanoPrice: FC<HomepageCardanoPriceProps> = ({
       <div className='flex flex-grow items-center'>
         <div className='flex min-w-[160px] items-center gap-1/2'>
           <span className='text-grayText inline-block text-text-sm font-medium'>
-            ADA/BTC
+            {t("homepage.adaBtc")}
           </span>
         </div>
         <div className='flex items-center gap-1/2'>
@@ -73,7 +75,9 @@ export const HomepageCardanoPrice: FC<HomepageCardanoPriceProps> = ({
           </span>
           <div className='flex items-center gap-1/2'>
             <img src={Bitcoin} alt='btc' className='h-[14px] w-[14px]' />
-            <span className='text-grayText text-text-xs font-medium'>sats</span>
+            <span className='text-grayText text-text-xs font-medium'>
+              {t("homepage.sats")}
+            </span>
           </div>
         </div>
       </div>

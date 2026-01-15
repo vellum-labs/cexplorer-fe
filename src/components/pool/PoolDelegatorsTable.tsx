@@ -26,6 +26,7 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import { ArrowRight } from "lucide-react";
 
 import { getIconByAmount } from "@/utils/address/getIconByAmount";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   delegatorsQuery: UseInfiniteQueryResult<
@@ -44,6 +45,7 @@ const PoolDelegatorsTable = ({
   delegatorsQuery,
   totalItems,
 }: Props) => {
+  const { t } = useAppTranslation("pages");
   const navigate = useNavigate();
   const { page, sort, order } = useSearch({ from: "/pool/$id" });
   const { columnsVisibility, setColumsOrder, columnsOrder, rows } =
@@ -67,7 +69,7 @@ const PoolDelegatorsTable = ({
           />
         );
       },
-      title: <p>Date</p>,
+      title: <p>{t("common:labels.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 20,
     },
@@ -78,7 +80,11 @@ const PoolDelegatorsTable = ({
           <EpochCell no={item?.live_pool?.delegation?.tx?.active_epoch_no} />
         </div>
       ),
-      title: <p className='w-full text-right'>Active epoch</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("pools.detailPage.delegatorsTable.activeEpoch")}
+        </p>
+      ),
       visible: columnsVisibility.active_in,
       widthPx: 45,
     },
@@ -113,7 +119,7 @@ const PoolDelegatorsTable = ({
           </div>
         );
       },
-      title: "Address",
+      title: t("common:labels.address"),
       visible: columnsVisibility.address,
       widthPx: 90,
     },
@@ -138,7 +144,7 @@ const PoolDelegatorsTable = ({
               });
             }}
           >
-            <span>Amount</span>
+            <span>{t("common:labels.amount")}</span>
             <SortArrow direction={order === "live_stake" ? sort : undefined} />
           </div>
         </div>
@@ -182,7 +188,7 @@ const PoolDelegatorsTable = ({
               });
             }}
           >
-            <span>Loyalty</span>
+            <span>{t("common:labels.loyalty")}</span>
             <SortArrow direction={order === "slot_update" ? sort : undefined} />
           </div>
         </div>
@@ -207,7 +213,9 @@ const PoolDelegatorsTable = ({
           />
         );
       },
-      title: <p className='w-full text-right'>Registered</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.registered")}</p>
+      ),
       visible: columnsVisibility.registered,
       widthPx: 40,
     },
@@ -257,7 +265,7 @@ const PoolDelegatorsTable = ({
           </div>
         );
       },
-      title: <p>Pool Delegation</p>,
+      title: <p>{t("pools.detailPage.delegatorsTable.poolDelegation")}</p>,
       visible: columnsVisibility.pool_delegation,
       widthPx: 180,
     },
@@ -286,6 +294,10 @@ const PoolDelegatorsTable = ({
         );
       })}
       onOrderChange={setColumsOrder}
+      renderDisplayText={(count, total) =>
+        t("common:table.displaying", { count, total })
+      }
+      noItemsLabel={t("common:table.noItems")}
     />
   );
 };

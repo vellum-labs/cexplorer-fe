@@ -1,10 +1,11 @@
-import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { LoadingSkeleton, useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import { useFetchWikiDetail, useFetchWikiList } from "@/services/article";
 import { getRouteApi, Link } from "@tanstack/react-router";
 import parse from "html-react-parser";
 import { Helmet } from "react-helmet";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -12,12 +13,14 @@ import rehypeRaw from "rehype-raw";
 import { markdownComponents } from "@/constants/markdows";
 
 export const WikiDetailPage = () => {
+  const { t } = useAppTranslation();
+  const { locale } = useLocaleStore();
   const route = getRouteApi("/wiki/$url");
   const { url } = route.useParams();
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
-  const detailQuery = useFetchWikiDetail("en", url);
-  const listQuery = useFetchWikiList("en", 0, 100);
+  const detailQuery = useFetchWikiDetail(locale, url);
+  const listQuery = useFetchWikiList(locale, 0, 100);
   const data = detailQuery.data;
   const isMarkdown = data?.render === "markdown";
   const allOtherWikis =
@@ -25,16 +28,14 @@ export const WikiDetailPage = () => {
       .flatMap(page => page.data.data)
       .filter(wiki => wiki.url !== url) || [];
 
-  const otherWikis = allOtherWikis
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 5);
+  const otherWikis = allOtherWikis.sort(() => Math.random() - 0.5).slice(0, 5);
 
   if (detailQuery.isLoading) {
     return (
       <PageBase
-        metadataOverride={{ title: "Wiki | Cexplorer.io" }}
-        title='Wiki'
-        breadcrumbItems={[{ label: "Wiki" }]}
+        metadataOverride={{ title: t("wikiPage.metaTitle") }}
+        title={t("wikiPage.breadcrumb")}
+        breadcrumbItems={[{ label: t("wikiPage.breadcrumb") }]}
         adsCarousel={false}
         customPage={true}
       >
@@ -58,16 +59,16 @@ export const WikiDetailPage = () => {
       <Helmet>
         <title>
           {data?.name
-            ? `${parse(data.name)} | Wiki | Cexplorer.io`
-            : "Wiki | Cexplorer.io"}
+            ? `${parse(data.name)} | ${t("wikiPage.breadcrumb")} | Cexplorer.io`
+            : t("wikiPage.metaTitle")}
         </title>
       </Helmet>
       <PageBase
-        metadataOverride={{ title: "Wiki | Cexplorer.io" }}
-        title='Wiki'
+        metadataOverride={{ title: t("wikiPage.metaTitle") }}
+        title={t("wikiPage.breadcrumb")}
         subTitle={data?.name ? String(parse(data.name)) : undefined}
         breadcrumbItems={[
-          { label: "Wiki", link: "/wiki" },
+          { label: t("wikiPage.breadcrumb"), link: "/wiki" },
           { label: data?.name ? String(parse(data.name)) : "" },
         ]}
         adsCarousel={false}
@@ -96,7 +97,9 @@ export const WikiDetailPage = () => {
           {otherWikis.length > 0 && (
             <aside className='hidden w-[300px] lg:block'>
               <div className='rounded-xl border border-border bg-cardBg p-2'>
-                <h3 className='mb-3 font-semibold'>Other topics</h3>
+                <h3 className='mb-3 font-semibold'>
+                  {t("wikiPage.otherTopics")}
+                </h3>
                 <div className='flex flex-col gap-2'>
                   {otherWikis.map(wiki => (
                     <Link

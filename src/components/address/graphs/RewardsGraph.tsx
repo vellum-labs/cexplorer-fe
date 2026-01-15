@@ -3,6 +3,7 @@ import { useGraphColors } from "@/hooks/useGraphColors";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useMiscRate } from "@/hooks/useMiscRate";
 import { useADADisplay } from "@/hooks/useADADisplay";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useFetchMiscBasic } from "@/services/misc";
 import type { RewardItem } from "@/types/accountTypes";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
@@ -16,17 +17,29 @@ interface RewardsGraphProps {
 }
 
 export const RewardsGraph = ({ data }: RewardsGraphProps) => {
+  const { t } = useAppTranslation("common");
   const { splitLineColor, textColor, bgColor } = useGraphColors();
   const { data: miscBasic } = useFetchMiscBasic(true);
   const rates = useMiscRate(miscBasic?.data.version.rate);
   const miscConst = useMiscConst(miscBasic?.data.version.const);
   const { formatLovelace } = useADADisplay();
 
+  const chartLabels = {
+    rewardsAda: t("rewards.rewardsAda"),
+    rewardsUsd: t("rewards.rewardsUsd"),
+    roaPercent: t("rewards.roaPercent"),
+    activeStakeAda: t("rewards.activeStakeAda"),
+    xAxisLabel: t("rewards.xAxisLabel"),
+    tooltipRewards: t("rewards.tooltipRewards"),
+    tooltipRoa: t("rewards.tooltipRoa"),
+    tooltipStake: t("rewards.tooltipStake"),
+  };
+
   const [graphsVisibility, setGraphsVisibility] = useState({
-    "Rewards (₳)": true,
-    "Rewards ($)": true,
-    "ROA (%)": true,
-    "Active Stake (₳)": true,
+    [chartLabels.rewardsAda]: true,
+    [chartLabels.rewardsUsd]: true,
+    [chartLabels.roaPercent]: true,
+    [chartLabels.activeStakeAda]: true,
   });
   const amount = data?.map(item => item.amount / 1_000_000).reverse() || [];
   const stake = data?.map(item => item.account.epoch_stake).reverse() || [];
@@ -57,7 +70,12 @@ export const RewardsGraph = ({ data }: RewardsGraphProps) => {
 
   const option = {
     legend: {
-      data: ["Rewards (₳)", "Rewards ($)", "ROA (%)", "Active Stake (₳)"],
+      data: [
+        chartLabels.rewardsAda,
+        chartLabels.rewardsUsd,
+        chartLabels.roaPercent,
+        chartLabels.activeStakeAda,
+      ],
       textStyle: {
         color: textColor,
       },
@@ -84,25 +102,25 @@ export const RewardsGraph = ({ data }: RewardsGraphProps) => {
         );
 
         return (
-          `Date: ${format(startTime, "dd.MM.yy")} – ${format(endTime, "dd.MM.yy")} (Epoch: ${epoch})<hr>` +
+          `${t("rewards.tooltipDate")}: ${format(startTime, "dd.MM.yy")} – ${format(endTime, "dd.MM.yy")} (${t("rewards.tooltipEpoch")}: ${epoch})<hr>` +
           `<div>` +
           params
             .map(item => {
               let formattedValue;
               if (item.data == null || isNaN(Number(item.data))) {
                 formattedValue = "—";
-              } else if (item.seriesName.includes("Rewards (₳)")) {
+              } else if (item.seriesName === chartLabels.rewardsAda) {
                 formattedValue = formatLovelace(Number(item.data) * 1e6);
-                return `<p style="margin:2px 0;">${marker(item)} Rewards: ${formattedValue}</p>`;
-              } else if (item.seriesName.includes("Rewards ($)")) {
+                return `<p style="margin:2px 0;">${marker(item)} ${chartLabels.tooltipRewards}: ${formattedValue}</p>`;
+              } else if (item.seriesName === chartLabels.rewardsUsd) {
                 formattedValue = Number(item.data).toFixed(2);
-                return `<p style="margin:2px 0;">${marker(item)} Rewards: $ ${formattedValue}</p>`;
-              } else if (item.seriesName.includes("ROA (%)")) {
+                return `<p style="margin:2px 0;">${marker(item)} ${chartLabels.tooltipRewards}: $ ${formattedValue}</p>`;
+              } else if (item.seriesName === chartLabels.roaPercent) {
                 formattedValue = Number(item.data).toFixed(2);
-                return `<p style="margin:2px 0;">${marker(item)} ROA: ${formattedValue}%</p>`;
-              } else if (item.seriesName.includes("Active Stake (₳)")) {
+                return `<p style="margin:2px 0;">${marker(item)} ${chartLabels.tooltipRoa}: ${formattedValue}%</p>`;
+              } else if (item.seriesName === chartLabels.activeStakeAda) {
                 formattedValue = formatLovelace(Number(item.data));
-                return `<p style="margin:2px 0;">${marker(item)} Stake: ${formattedValue}</p>`;
+                return `<p style="margin:2px 0;">${marker(item)} ${chartLabels.tooltipStake}: ${formattedValue}</p>`;
               } else {
                 formattedValue = item.data;
                 return `<p style="margin:2px 0;">${marker(item)} ${item.seriesName}: ${formattedValue}</p>`;
@@ -121,7 +139,7 @@ export const RewardsGraph = ({ data }: RewardsGraphProps) => {
     xAxis: {
       type: "category",
       data: epochs,
-      name: "Epoch",
+      name: chartLabels.xAxisLabel,
       nameLocation: "middle",
       nameGap: 28,
       axisLabel: {
@@ -210,7 +228,7 @@ export const RewardsGraph = ({ data }: RewardsGraphProps) => {
       {
         data: amount,
         type: "bar",
-        name: "Rewards (₳)",
+        name: chartLabels.rewardsAda,
         yAxisIndex: 0,
         itemStyle: {
           color: "#e3033a",
@@ -218,7 +236,7 @@ export const RewardsGraph = ({ data }: RewardsGraphProps) => {
       },
       {
         data: usdAmount,
-        name: "Rewards ($)",
+        name: chartLabels.rewardsUsd,
         type: "line",
         yAxisIndex: 1,
         itemStyle: {
@@ -229,7 +247,7 @@ export const RewardsGraph = ({ data }: RewardsGraphProps) => {
       {
         data: roa,
         type: "line",
-        name: "ROA (%)",
+        name: chartLabels.roaPercent,
         yAxisIndex: 2,
         areaStyle: {
           color: "#21fc1e",
@@ -243,7 +261,7 @@ export const RewardsGraph = ({ data }: RewardsGraphProps) => {
       {
         data: stake,
         type: "line",
-        name: "Active Stake (₳)",
+        name: chartLabels.activeStakeAda,
         yAxisIndex: 3,
         itemStyle: {
           color: "#3b82f6",
@@ -272,7 +290,7 @@ export const RewardsGraph = ({ data }: RewardsGraphProps) => {
 
   return (
     <div className='flex flex-col'>
-      <h2 className='mb-1'>Rewards</h2>
+      <h2 className='mb-1'>{t("rewards.title")}</h2>
       <ReactEcharts
         onEvents={{
           legendselectchanged: params => {

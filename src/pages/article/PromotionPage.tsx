@@ -1,6 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
-import { Button, TextInput, AdCard, formatString } from "@vellumlabs/cexplorer-sdk";
+import {
+  Button,
+  TextInput,
+  AdCard,
+  formatString,
+} from "@vellumlabs/cexplorer-sdk";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { CircleAlert, Search, AlertTriangle, Loader2 } from "lucide-react";

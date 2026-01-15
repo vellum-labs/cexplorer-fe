@@ -4,6 +4,7 @@ import AssetLink from "../asset/AssetLink";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { AddressWithTxBadges } from "./AddressWithTxBadges";
 import { filterUtxoBySearch } from "@/utils/tx/filterUtxoBySearch";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   title: string;
@@ -20,6 +21,7 @@ const TxContentTable = ({
   isOutput,
   searchQuery = "",
 }: Props) => {
+  const { t } = useAppTranslation("common");
   const [inputs, setInputs] = useState(data?.all_inputs);
   const [outputs, setOutputs] = useState(data?.all_outputs);
 
@@ -66,7 +68,7 @@ const TxContentTable = ({
       <div className='flex w-full justify-between rounded-tl-l rounded-tr-l border-b border-border bg-darker px-2 py-1 text-text-sm font-medium text-grayTextPrimary'>
         <span>{title}</span>
         <span className='text-right text-text-sm font-regular text-grayTextPrimary'>
-          Total: <AdaWithTooltip data={totalAda ?? 0} />
+          {t("tx.total")}: <AdaWithTooltip data={totalAda ?? 0} />
         </span>
       </div>
 

@@ -13,8 +13,10 @@ import { useMiscRate } from "@/hooks/useMiscRate";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useFetchAnalyticsRate } from "@/services/analytics";
 import { useFetchTVL } from "@/services/global";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const AdaPrice: FC = () => {
+  const { t } = useAppTranslation("common");
   const { data: miscBasic } = useFetchMiscBasic();
   const rates = useMiscRate(miscBasic?.data.version.rate);
   const { data: analyticsRateData } = useFetchAnalyticsRate();
@@ -26,8 +28,12 @@ export const AdaPrice: FC = () => {
   return (
     <PageBase
       metadataTitle='adaPrice'
-      breadcrumbItems={[{ label: "Ada price" }]}
-      title={<div className='flex items-center gap-1/2'>ADA Price</div>}
+      breadcrumbItems={[{ label: t("adaPrice.adaPrice") }]}
+      title={
+        <div className='flex items-center gap-1/2'>
+          {t("adaPrice.adaPrice")}
+        </div>
+      }
     >
       <div className='flex w-full flex-col pt-4'>
         {graphRates.length ? (

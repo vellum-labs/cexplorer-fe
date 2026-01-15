@@ -8,6 +8,7 @@ import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface DelegatedAdaToDRepsOverTimeGraphProps {
   milestone: ThresholdsMilestone;
@@ -18,6 +19,7 @@ interface DelegatedAdaToDRepsOverTimeGraphProps {
 export const DelegatedAdaToDRepsOverTimeGraph: FC<
   DelegatedAdaToDRepsOverTimeGraphProps
 > = ({ milestone, isLoading, currentSupplyEpoch }) => {
+  const { t } = useAppTranslation();
   const { textColor, bgColor, splitLineColor, inactivePageIconColor } =
     useGraphColors();
   const { data: basicData } = useFetchMiscBasic(true);
@@ -63,9 +65,9 @@ export const DelegatedAdaToDRepsOverTimeGraph: FC<
           miscConst?.epoch.start_time ?? "",
         );
 
-        const header = `Date: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (Epoch: ${item.name})`;
+        const header = `${t("governance.delegation.date")} ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${t("governance.delegation.epoch")} ${item.name})`;
         const percentLine = `<p>${item.marker} ${item.seriesName}: ${item.value.toFixed(2)}%</p>`;
-        const drepLine = `<p style="padding-left: 18px;">Unique DReps: ${epoch?.countDReps ?? "–"}</p>`;
+        const drepLine = `<p style="padding-left: 18px;">${t("governance.delegation.uniqueDReps")} ${epoch?.countDReps ?? "–"}</p>`;
 
         return `${header}<hr style="margin: 4px 0;" />${percentLine}${drepLine}`;
       },
@@ -80,7 +82,7 @@ export const DelegatedAdaToDRepsOverTimeGraph: FC<
     xAxis: {
       type: "category",
       data: mergedEpochs.map(e => e.epoch),
-      name: "Epoch",
+      name: t("governance.delegation.epochAxisName"),
       nameLocation: "middle",
       nameGap: 28,
       axisLabel: { color: textColor },

@@ -14,12 +14,14 @@ import { AverageDrepGraph } from "../AverageDrepGraph";
 import { DrepNotSpoGraph } from "../DrepNotSpoGraph";
 import { StakeIsSpoDrepGraph } from "../StakeIsSpoDrepGraph";
 import { DelegationChangesGraph } from "../DelegationChangesGraph";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface DrepAnalyticsTabProps {
   query: ReturnType<typeof useFetchDrepAnalytics>;
 }
 
 export const DrepAnalyticsTab: FC<DrepAnalyticsTabProps> = ({ query }) => {
+  const { t } = useAppTranslation("pages");
   const epochs = query?.data?.drep_distr
     ?.filter(item => item.epoch_no)
     ?.map(item => item.epoch_no);
@@ -35,22 +37,22 @@ export const DrepAnalyticsTab: FC<DrepAnalyticsTabProps> = ({ query }) => {
   const items = [
     {
       key: "power",
-      label: "Voting Power",
+      label: t("dreps.analytics.tabs.votingPower"),
       visible: true,
     },
     {
       key: "delegator",
-      label: "Delegators",
+      label: t("dreps.analytics.tabs.delegators"),
       visible: true,
     },
     {
       key: "own",
-      label: "Owner Stake",
+      label: t("dreps.analytics.tabs.ownerStake"),
       visible: true,
     },
     {
       key: "average_stake",
-      label: "Average Stake",
+      label: t("dreps.analytics.tabs.averageStake"),
       visible: true,
     },
   ];
@@ -67,15 +69,21 @@ export const DrepAnalyticsTab: FC<DrepAnalyticsTabProps> = ({ query }) => {
   };
 
   const governancePieData = [
-    { value: abstain, name: "Abstain DRep" },
-    { value: noConfidence, name: "No Confidence DRep" },
-    { value: delegatedToDreps, name: "Delegated to DReps" },
+    { value: abstain, name: t("dreps.analytics.pie.abstainDrep") },
+    { value: noConfidence, name: t("dreps.analytics.pie.noConfidenceDrep") },
+    {
+      value: delegatedToDreps,
+      name: t("dreps.analytics.pie.delegatedToDreps"),
+    },
   ];
 
   const activeVotingPieData = [
-    { value: abstain, name: "Abstain (not active)" },
-    { value: noConfidence, name: "No Confidence" },
-    { value: delegatedToDreps, name: "Delegated to DReps" },
+    { value: abstain, name: t("dreps.analytics.pie.abstainNotActive") },
+    { value: noConfidence, name: t("dreps.analytics.pie.noConfidence") },
+    {
+      value: delegatedToDreps,
+      name: t("dreps.analytics.pie.delegatedToDreps"),
+    },
   ];
 
   const governanceOption = {
@@ -139,19 +147,21 @@ export const DrepAnalyticsTab: FC<DrepAnalyticsTabProps> = ({ query }) => {
   return (
     <section className='flex flex-col gap-1'>
       <div className='relative w-full rounded-m border border-border p-3'>
-        <h2 className='mb-1'>Pool Graph</h2>
+        <h2 className='mb-1'>{t("dreps.analytics.poolGraph")}</h2>
         <DrepPoolGraph epochs={epochs || []} query={query} />
       </div>
       <AverageDrepGraph />
       <div className='relative w-full rounded-m border border-border p-3'>
-        <h1 className='mb-1 pl-3'>Stake Composition by Role</h1>
+        <h1 className='mb-1 pl-3'>
+          {t("dreps.analytics.stakeCompositionByRole")}
+        </h1>
         <div className='flex flex-col gap-2'>
           <DrepNotSpoGraph />
           <StakeIsSpoDrepGraph />
         </div>
       </div>
       <div className='relative w-full rounded-m border border-border p-3'>
-        <h1 className='mb-1 pl-3'>Delegation Changes</h1>
+        <h1 className='mb-1 pl-3'>{t("dreps.analytics.delegationChanges")}</h1>
         <div className='flex flex-col gap-2'>
           <DelegationChangesGraph />
         </div>
@@ -159,17 +169,17 @@ export const DrepAnalyticsTab: FC<DrepAnalyticsTabProps> = ({ query }) => {
 
       <div className='flex flex-wrap gap-1 lg:flex-nowrap'>
         <div className='relative w-full rounded-m border border-border p-3'>
-          <h2 className='mb-1'>ADA in Governance</h2>
+          <h2 className='mb-1'>{t("dreps.analytics.adaInGovernance")}</h2>
           <DrepAnalytcsPieGraph option={governanceOption} />
         </div>
         <div className='relative w-full rounded-m border border-border p-3'>
-          <h2 className='mb-1'>Active Voting Stake</h2>
+          <h2 className='mb-1'>{t("dreps.analytics.activeVotingStake")}</h2>
           <DrepAnalytcsPieGraph option={activeVotingOption} />
         </div>
       </div>
       <div className='relative w-full rounded-m border border-border p-3'>
         <div className='flex flex-wrap items-center justify-between gap-1 lg:flex-nowrap'>
-          <h2 className='mb-2t text-nowrap'>Drep Size</h2>
+          <h2 className='mb-2t text-nowrap'>{t("dreps.analytics.drepSize")}</h2>
           <Tabs
             items={items}
             tabParam='graph'

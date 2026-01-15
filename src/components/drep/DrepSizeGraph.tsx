@@ -12,12 +12,15 @@ import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { useNavigate } from "@tanstack/react-router";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useADADisplay } from "@/hooks/useADADisplay";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface DrepSizeGraphProps {
   type: DrepListOrder;
 }
 
 export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
+  const { t } = useAppTranslation("pages");
+
   const [size, setSize] = useState<boolean>(false);
   const { width } = useWindowDimensions();
   const navigate = useNavigate();
@@ -145,7 +148,21 @@ export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
         const drepName = item?.data?.given_name;
         const fullDisplayName =
           drepName || formatString(item?.hash?.view || null, "long");
-        return `<b>${fullDisplayName}</b> <br/> ${type === "power" ? `Voting Power: ${formatLovelace(params.data.value)}` : type === "delegator" ? `Delegators: ${params.data.value}` : type === "own" ? `Owner Stake: ${formatLovelace(params.data.value)}` : type === "average_stake" ? `Average Stake: ${formatLovelace(params.data.value)}` : `Value: ${formatLovelace(params.data.value)}`}`;
+
+        let valueLabel = "";
+        if (type === "power") {
+          valueLabel = `${t("dreps.graphs.drepSize.votingPower")}: ${formatLovelace(params.data.value)}`;
+        } else if (type === "delegator") {
+          valueLabel = `${t("dreps.graphs.drepSize.delegators")}: ${params.data.value}`;
+        } else if (type === "own") {
+          valueLabel = `${t("dreps.graphs.drepSize.ownerStake")}: ${formatLovelace(params.data.value)}`;
+        } else if (type === "average_stake") {
+          valueLabel = `${t("dreps.graphs.drepSize.averageStake")}: ${formatLovelace(params.data.value)}`;
+        } else {
+          valueLabel = `${t("dreps.graphs.drepSize.value")}: ${formatLovelace(params.data.value)}`;
+        }
+
+        return `<b>${fullDisplayName}</b> <br/> ${valueLabel}`;
       },
     },
     series: [

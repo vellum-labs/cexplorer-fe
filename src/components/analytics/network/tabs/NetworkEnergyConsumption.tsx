@@ -3,11 +3,13 @@ import type { FC } from "react";
 import { AnalyticsGraph } from "../../AnalyticsGraph";
 import { NetworkEnergyGraph } from "../graphs/NetworkEnergyGraph";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useFetchAnalyticsRate } from "@/services/analytics";
 
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 export const NetworkEnergyConsumption: FC = () => {
+  const { t } = useAppTranslation("common");
   const rateQuery = useFetchAnalyticsRate();
 
   const data = rateQuery.data?.data;
@@ -35,37 +37,37 @@ export const NetworkEnergyConsumption: FC = () => {
   const compareColumns = [
     {
       key: "consumption_per_device",
-      title: "Consumption per device",
+      title: t("analytics.consumptionPerDevice"),
       value: `${consumptionPerDevice}W`,
     },
     {
       key: "consumption_per_device",
-      title: "Unique relays",
+      title: t("analytics.uniqueRelays"),
       value: availableValue(countPoolRelayUniq),
     },
     {
       key: "pools",
-      title: "Pools",
+      title: t("analytics.pools"),
       value: availableValue(countPool),
     },
     {
       key: "est_bit_cons",
-      title: "Estimated Bitcoin consumption (y)",
+      title: t("analytics.estimatedBitcoinConsumption"),
       value: `${formatNumber(estimatedBitcoinConsumptionY)} GWh`,
     },
     {
       key: "est_un_dev",
-      title: "Estimated unique devices *",
+      title: t("analytics.estimatedUniqueDevices"),
       value: availableValue(estimatedUniqueDevices),
     },
     {
       key: "est_year_cons",
-      title: "Estimated yearly consumption",
+      title: t("analytics.estimatedYearlyConsumption"),
       value: `${formatNumber(Math.round(estimatedYearlyConsumption))} GWh`,
     },
     {
       key: "card_vs_bit_eff",
-      title: "Cardano versus Bitcoin efficiency",
+      title: t("analytics.cardanoVsBitcoinEfficiency"),
       value: `${formatNumber(Math.round(cardanoVsBitcoinEfficiency))}x`,
     },
   ];
@@ -73,8 +75,8 @@ export const NetworkEnergyConsumption: FC = () => {
   return (
     <section className='flex w-full max-w-desktop flex-col gap-1.5 lg:flex-row'>
       <AnalyticsGraph
-        title='Cardano PoS vs. Bitcoin PoW'
-        description="Overview: This comparison examines the energy efficiency advantages of Cardano's proof-of-stake consensus over Bitcoin's proof-of-work model."
+        title={t("analytics.cardanoVsBitcoin")}
+        description={t("analytics.cardanoVsBitcoinDescription")}
         className='lg:max-w-[500px]'
       >
         <div
@@ -122,8 +124,8 @@ export const NetworkEnergyConsumption: FC = () => {
         </div>
       </AnalyticsGraph>
       <AnalyticsGraph
-        title='Cardano energy consumption'
-        description='Overview: This graph monitors total amount of operated stake pool and their energy consumption.'
+        title={t("analytics.cardanoEnergyConsumption")}
+        description={t("analytics.cardanoEnergyConsumptionDescription")}
         exportButton
       >
         <NetworkEnergyGraph rateQuery={rateQuery} />

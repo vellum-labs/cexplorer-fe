@@ -19,6 +19,7 @@ import { formatDistanceToNow, format } from "date-fns";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { alphabetWithNumbers } from "@/constants/alphabet";
 import { Link } from "@tanstack/react-router";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const getFirstRegistration = (
   reg: CommitteeMemberRegistration | CommitteeMemberRegistration[] | null,
@@ -42,6 +43,7 @@ export const useCCMemberDetail = ({
   memberData,
   votesData,
 }: UseCCMemberDetailArgs): UseCCMemberDetail => {
+  const { t } = useAppTranslation();
   const { data: basicData } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(basicData?.data?.version?.const);
   const currentEpochNo = miscConst?.epoch?.no ?? 0;
@@ -80,7 +82,7 @@ export const useCCMemberDetail = ({
 
   const about: OverviewList = [
     {
-      label: "Name",
+      label: t("gov.cc.name"),
       value: (
         <div className='flex items-center gap-2'>
           <Image
@@ -96,7 +98,7 @@ export const useCCMemberDetail = ({
       ),
     },
     {
-      label: "Status",
+      label: t("gov.cc.status"),
       value:
         typeof isActive === "undefined" ? (
           "-"
@@ -104,13 +106,17 @@ export const useCCMemberDetail = ({
           <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
             <PulseDot color={!isActive ? "bg-redText" : undefined} />
             <span className='text-text-xs font-medium'>
-              {isActive ? "Active" : isRetired ? "Retired" : "Inactive"}
+              {isActive
+                ? t("gov.cc.active")
+                : isRetired
+                  ? t("gov.cc.retired")
+                  : t("gov.cc.inactive")}
             </span>
           </div>
         ),
     },
     {
-      label: "Term duration",
+      label: t("gov.cc.termDuration"),
       value:
         startEpoch > 0 && expirationEpoch > 0 ? (
           <div className='flex items-center gap-1'>
@@ -135,7 +141,7 @@ export const useCCMemberDetail = ({
         ),
     },
     {
-      label: "Cold key",
+      label: t("gov.cc.coldKey"),
       value: memberData?.ident?.cold ? (
         <div className='flex items-center gap-1/2'>
           <span>{formatString(memberData.ident.cold, "long")}</span>
@@ -149,7 +155,7 @@ export const useCCMemberDetail = ({
       ),
     },
     {
-      label: "Hot key",
+      label: t("gov.cc.hotKey"),
       value: memberData?.ident?.hot ? (
         <div className='flex items-center gap-1/2'>
           <span>{formatString(memberData.ident.hot, "long")}</span>
@@ -160,11 +166,11 @@ export const useCCMemberDetail = ({
       ),
     },
     {
-      label: "Expiring",
+      label: t("gov.cc.expiring"),
       value:
         expirationDate && memberData?.expiration_epoch ? (
           <span>
-            In {formatDistanceToNow(expirationDate)} (
+            {t("gov.cc.in")} {formatDistanceToNow(expirationDate)} (
             {format(expirationDate, "dd/MM/yyyy, HH:mm")})
           </span>
         ) : (
@@ -210,7 +216,7 @@ export const useCCMemberDetail = ({
             {lastVote && (
               <div className='flex w-full items-center justify-between'>
                 <span className='text-text-sm text-grayTextSecondary'>
-                  Last vote
+                  {t("gov.cc.lastVote")}
                 </span>
                 <TimeDateIndicator time={lastVote} />
               </div>
@@ -220,14 +226,14 @@ export const useCCMemberDetail = ({
                 <div className='flex w-full items-center justify-between'>
                   <div className='flex items-center gap-1/2'>
                     <span className='text-text-sm text-grayTextSecondary'>
-                      Recent Activity
+                      {t("gov.cc.recentActivity")}
                     </span>
-                    <Tooltip content="CC member's voting activity over the past 6 months">
+                    <Tooltip content={t("gov.cc.recentActivityTooltip")}>
                       <CircleHelp size={12} className='text-grayTextPrimary' />
                     </Tooltip>
                   </div>
                   <span className='text-text-sm text-grayTextPrimary'>
-                    Voted: {recentPercent.toFixed(2)}%
+                    {t("gov.cc.voted")}: {recentPercent.toFixed(2)}%
                   </span>
                 </div>
                 <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#E4E7EC]'>
@@ -242,14 +248,14 @@ export const useCCMemberDetail = ({
                 <div className='flex w-full items-center justify-between'>
                   <div className='flex items-center gap-1/2'>
                     <span className='text-text-sm text-grayTextSecondary'>
-                      Lifetime Activity
+                      {t("gov.cc.lifetimeActivity")}
                     </span>
-                    <Tooltip content="Voting activity over CC member's lifetime">
+                    <Tooltip content={t("gov.cc.lifetimeActivityTooltip")}>
                       <CircleHelp size={12} className='text-grayTextPrimary' />
                     </Tooltip>
                   </div>
                   <span className='text-text-sm text-grayTextPrimary'>
-                    Voted: {lifetimePercent.toFixed(2)}%
+                    {t("gov.cc.voted")}: {lifetimePercent.toFixed(2)}%
                   </span>
                 </div>
                 <div className='relative h-2 w-full overflow-hidden rounded-[4px] bg-[#E4E7EC]'>
@@ -272,13 +278,20 @@ export const useCCMemberDetail = ({
 
                 const voteCount = voteCounts[vote] ?? 0;
 
+                const voteLabel =
+                  vote === "Yes"
+                    ? t("governance.common.yes")
+                    : vote === "Abstain"
+                      ? t("governance.common.abstain")
+                      : t("governance.common.no");
+
                 return (
                   <div
                     className='flex items-center justify-between gap-1'
                     key={vote}
                   >
                     <span className='min-w-24 text-text-sm text-grayTextPrimary'>
-                      {vote} ({voteCount})
+                      {voteLabel} ({voteCount})
                     </span>
                     <div className='relative h-2 w-2/3 overflow-hidden rounded-[4px] bg-[#E4E7EC]'>
                       <span

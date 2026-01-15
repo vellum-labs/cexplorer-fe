@@ -17,8 +17,10 @@ import ReactEcharts from "echarts-for-react";
 import { cn } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const EpochListPage: FC = () => {
+  const { t } = useAppTranslation("pages");
   const { data, isLoading, isError } = useFetchEpochList();
 
   const filteredDataItems = (data?.data || []).filter(e => e);
@@ -33,19 +35,19 @@ const EpochListPage: FC = () => {
 
   const epochStats = [
     {
-      title: "Blocks",
+      title: t("epochs.stats.blocks"),
       value: constData?.epoch?.blk_count ?? 0,
     },
     {
-      title: "TXs",
+      title: t("epochs.stats.txs"),
       value: constData?.epoch?.tx_count ?? 0,
     },
     {
-      title: "Stake",
+      title: t("epochs.stats.stake"),
       value: <AdaWithTooltip data={constData?.epoch_stat?.stake?.epoch ?? 0} />,
     },
     {
-      title: "Usage",
+      title: t("epochs.stats.usage"),
       value: (() => {
         const blockUsage = isNaN(
           (constDataBlockSize / (constDataBlockCount * constDataMaxBlockSize)) *
@@ -87,12 +89,12 @@ const EpochListPage: FC = () => {
               data: [
                 {
                   value: usagePercentage,
-                  name: "Used",
+                  name: t("epochs.stats.used"),
                   itemStyle: { color: "#47CD89" },
                 },
                 {
                   value: (100 - blockUsage).toFixed(2),
-                  name: "Unused",
+                  name: t("epochs.stats.unused"),
                   itemStyle: { color: "#FEC84B" },
                 },
               ],
@@ -115,7 +117,7 @@ const EpochListPage: FC = () => {
   const epochTabItems = [
     {
       key: "epochs",
-      label: "Epochs",
+      label: t("epochs.tabs.epochs"),
       content: (
         <EpochsTabItem
           epoch_number={data?.count ?? 0}
@@ -126,7 +128,7 @@ const EpochListPage: FC = () => {
     },
     {
       key: "analytics",
-      label: "Analytics",
+      label: t("epochs.tabs.analytics"),
       content: <EpochAnalyticsTabItem />,
       visible: true,
     },
@@ -135,8 +137,8 @@ const EpochListPage: FC = () => {
   return (
     <PageBase
       metadataTitle='epochsList'
-      title='Epochs'
-      breadcrumbItems={[{ label: "Epochs" }]}
+      title={t("epochs.title")}
+      breadcrumbItems={[{ label: t("epochs.title") }]}
     >
       <section className='flex min-h-[410px] w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='flex h-full w-full flex-wrap items-center gap-3'>

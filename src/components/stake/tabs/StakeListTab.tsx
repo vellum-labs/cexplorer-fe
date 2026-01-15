@@ -11,8 +11,10 @@ import { useFetchAccountList } from "@/services/user";
 import type { StakeKeyData } from "@/types/userTypes";
 import { configJSON } from "@/constants/conf";
 import AddressCell from "@/components/address/AddressCell";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const StakeListTab: FC = () => {
+  const { t } = useAppTranslation("common");
   const token = useAuthToken();
   const accountListQuery = useFetchAccountList(token);
 
@@ -23,7 +25,9 @@ export const StakeListTab: FC = () => {
   if (!token) {
     return (
       <div className='flex h-64 items-center justify-center'>
-        <div className='text-grayTextPrimary'>Please connect your wallet</div>
+        <div className='text-grayTextPrimary'>
+          {t("stake.list.connectWallet")}
+        </div>
       </div>
     );
   }
@@ -40,16 +44,12 @@ export const StakeListTab: FC = () => {
           <div className='flex flex-col gap-1/2'>
             <AddressCell address={item.view} />
             {item.adahandle && (
-              <AdaHandleBadge
-                hex={item.adahandle}
-                link
-                policyId={policyId}
-              />
+              <AdaHandleBadge hex={item.adahandle} link policyId={policyId} />
             )}
           </div>
         );
       },
-      title: "Stake Address",
+      title: t("stake.list.table.stakeAddress"),
       visible: true,
       widthPx: 200,
     },
@@ -59,7 +59,7 @@ export const StakeListTab: FC = () => {
         if (!item) return <span className='text-grayTextPrimary'>-</span>;
         return <AdaWithTooltip data={item.stake?.live?.amount ?? 0} />;
       },
-      title: "Live Stake",
+      title: t("stake.list.table.liveStake"),
       visible: true,
       widthPx: 120,
     },
@@ -69,7 +69,7 @@ export const StakeListTab: FC = () => {
         if (!item) return <span className='text-grayTextPrimary'>-</span>;
         return <AdaWithTooltip data={item.stake?.active?.amount ?? 0} />;
       },
-      title: "Active Stake",
+      title: t("stake.list.table.activeStake"),
       visible: true,
       widthPx: 120,
     },
@@ -83,7 +83,7 @@ export const StakeListTab: FC = () => {
           </span>
         );
       },
-      title: "Accounts",
+      title: t("stake.list.table.accounts"),
       visible: true,
       widthPx: 80,
     },
@@ -94,7 +94,11 @@ export const StakeListTab: FC = () => {
 
         const assets = item.asset ?? [];
         if (assets.length === 0) {
-          return <span className='text-grayTextPrimary'>No assets</span>;
+          return (
+            <span className='text-grayTextPrimary'>
+              {t("stake.list.table.noAssets")}
+            </span>
+          );
         }
 
         const transformedAssets = assets.map(asset => ({
@@ -107,12 +111,12 @@ export const StakeListTab: FC = () => {
         } catch (error) {
           return (
             <span className='text-text-sm font-medium'>
-              {assets.length} asset{assets.length !== 1 ? "s" : ""}
+              {t("stake.list.table.assetsCount", { count: assets.length })}
             </span>
           );
         }
       },
-      title: "Assets",
+      title: t("stake.list.table.assets"),
       visible: true,
       widthPx: 110,
     },
@@ -121,7 +125,7 @@ export const StakeListTab: FC = () => {
   if (accountListQuery?.isLoading) {
     return (
       <div className='flex h-64 items-center justify-center'>
-        <div className='text-grayTextPrimary'>Loading stake keys...</div>
+        <div className='text-grayTextPrimary'>{t("stake.list.loading")}</div>
       </div>
     );
   }
@@ -129,7 +133,7 @@ export const StakeListTab: FC = () => {
   if (accountListQuery?.isError) {
     return (
       <div className='flex h-64 items-center justify-center'>
-        <div className='text-red-500'>Error loading stake keys</div>
+        <div className='text-red-500'>{t("stake.list.error")}</div>
       </div>
     );
   }
@@ -146,6 +150,10 @@ export const StakeListTab: FC = () => {
         minContentWidth={650}
         items={data}
         columns={columns}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </div>
   );

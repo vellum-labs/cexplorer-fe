@@ -7,6 +7,7 @@ import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { AddressAssetTable } from "../AddressAssetTable";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useAddressDetailAssetTableStore } from "@/stores/tables/addressDetailAssetTableStore";
 
 import { addressDetailAssetTableOptions } from "@/constants/tables/addressDetailAssetTableOptions";
@@ -39,6 +40,7 @@ export const AssetsTab: FC<AssetsTabProps> = ({
   stakeKey,
   isStake,
 }) => {
+  const { t } = useAppTranslation("common");
   const tokenMarket = configJSON.market[0].token[0].active;
   const nftMarket = configJSON.market[0].nft[0].active;
   const basicOptionsKeys = ["token", "holdings", "supply"];
@@ -128,17 +130,17 @@ export const AssetsTab: FC<AssetsTabProps> = ({
   const assetTabItems = [
     {
       key: "all",
-      label: "All",
+      label: t("address.all"),
       visible: true,
     },
     {
       key: "tokens",
-      label: "Tokens",
+      label: t("address.tokens"),
       visible: true,
     },
     {
       key: "nfts",
-      label: "NFTs",
+      label: t("address.nfts"),
       visible: true,
     },
   ];
@@ -146,12 +148,12 @@ export const AssetsTab: FC<AssetsTabProps> = ({
   const detailsTabItem = [
     {
       key: "address",
-      label: "Address",
+      label: t("labels.address"),
       visible: true,
     },
     {
       key: "stake",
-      label: "Stake",
+      label: t("labels.stake"),
       visible: true,
     },
   ];
@@ -196,18 +198,23 @@ export const AssetsTab: FC<AssetsTabProps> = ({
                     active={!lowBalances}
                   />
                   <span className='text-text-sm font-medium text-grayTextPrimary'>
-                    Hide Low Balances
+                    {t("address.hideLowBalances")}
                   </span>
                 </div>
               )}
               <span className='text-text-xs text-grayTextPrimary'>
-                Displaying {filteredAssets.length}{" "}
-                {activeAsset === "nfts" ? "NFTs" : "tokens"}
+                {activeAsset === "nfts"
+                  ? t("address.displayingNfts", {
+                      count: filteredAssets.length,
+                    })
+                  : t("address.displayingTokens", {
+                      count: filteredAssets.length,
+                    })}
               </span>
             </div>
             <div className='flex flex-grow items-center gap-1 sm:flex-grow-0'>
               <TableSearchInput
-                placeholder='Search your results...'
+                placeholder={t("phrases.searchResults")}
                 value={tableSearch}
                 onchange={setTableSearch}
                 wrapperClassName='md:w-[320px] w-full'
@@ -217,10 +224,11 @@ export const AssetsTab: FC<AssetsTabProps> = ({
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("table.rows")}
                 columnsOptions={
                   options.map(item => {
                     return {
-                      label: item.name,
+                      label: t(`common:tableSettings.${item.key}`),
                       isVisible: columnsVisibility[item.key],
                       onClick: () =>
                         setColumnVisibility(

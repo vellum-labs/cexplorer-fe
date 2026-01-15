@@ -18,6 +18,7 @@ import { Cbor } from "@harmoniclabs/cbor";
 
 import { PageBase } from "@/components/global/pages/PageBase";
 import { convertCborToJson } from "@/utils/datum/convertCborToJson";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const parseSimpleCborInt = (hex: string): { int: string } | null => {
   if (!hex || typeof hex !== "string" || hex.length < 2) return null;
@@ -69,6 +70,7 @@ const decodeDatum = (input: any): any => {
 };
 
 export const DatumPage: FC = () => {
+  const { t } = useAppTranslation("common");
   const { datum, hash } = useSearch({ from: "/datum/" });
   const [inputHash, setHash] = useState(hash ?? "");
   const [inputDatum, setInputDatum] = useState<string>();
@@ -169,7 +171,7 @@ export const DatumPage: FC = () => {
           {formatString(item.id, "long")}
         </Link>
       ),
-      title: "Transaction Hash",
+      title: t("datum.transactionHash"),
       visible: true,
       widthPx: 60,
     },
@@ -190,7 +192,7 @@ export const DatumPage: FC = () => {
           {formatString(item.id, "long")}
         </Link>
       ),
-      title: "Datum Hash",
+      title: t("datum.datumHash"),
       visible: true,
       widthPx: 60,
     },
@@ -200,27 +202,27 @@ export const DatumPage: FC = () => {
     <PageBase
       adsCarousel={false}
       metadataTitle='datumInspector'
-      title='Datum Inspector'
+      title={t("datum.title")}
       breadcrumbItems={[
-        { label: "Developers", link: "/dev" },
-        { label: "Datum" },
+        { label: t("datum.breadcrumbs.developers"), link: "/dev" },
+        { label: t("datum.breadcrumbs.datum") },
       ]}
       subTitle={
         inputHash ? (
           <HeaderBannerSubtitle
             hashString={formatString(inputHash, "long")}
             hash={inputHash}
-            title='Hash'
+            title={t("datum.hash")}
           />
         ) : undefined
       }
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile py-1 md:px-desktop'>
         <div className='mb-2 flex w-full flex-col justify-between gap-1'>
-          <h2>Datum convertor</h2>
+          <h2>{t("datum.convertor")}</h2>
           <div className='flex w-full flex-wrap gap-2 lg:flex-nowrap'>
             <div className='flex h-[360px] w-1/2 flex-grow flex-col gap-1'>
-              <h3>Input</h3>
+              <h3>{t("datum.input")}</h3>
               <textarea
                 className='h-full w-full resize-none rounded-m border border-border bg-cardBg p-[10px] text-text-md text-text-xs shadow-md outline-none'
                 spellCheck={false}
@@ -229,12 +231,13 @@ export const DatumPage: FC = () => {
               ></textarea>
             </div>
             <div className='flex h-[360px] w-1/2 flex-grow flex-col gap-1'>
-              <h3>Output</h3>
+              <h3>{t("datum.output")}</h3>
               <JsonDisplay
                 data={parsedDatum}
                 isLoading={false}
                 isError={false}
                 search
+                noDataLabel={t("sdk:jsonDisplay.noDataLabel")}
               />
             </div>
           </div>
@@ -244,7 +247,7 @@ export const DatumPage: FC = () => {
             !Array.isArray(data?.data) && (
               <div className='flex w-full flex-wrap gap-2 lg:flex-nowrap'>
                 <div className='flex w-[360px] flex-grow flex-col gap-1'>
-                  <h3>Transaction with this datum</h3>
+                  <h3>{t("datum.transactionWithDatum")}</h3>
                   <GlobalTable
                     type='default'
                     columns={txColumns}
@@ -252,10 +255,14 @@ export const DatumPage: FC = () => {
                     pagination={false}
                     items={data?.data.tx}
                     query={datumQuery}
+                    renderDisplayText={(count, total) =>
+                      t("table.displaying", { count, total })
+                    }
+                    noItemsLabel={t("table.noItems")}
                   />
                 </div>
                 <div className='flex w-[360px] flex-grow flex-col gap-1'>
-                  <h3>Other datums from the same transactions</h3>
+                  <h3>{t("datum.otherDatums")}</h3>
                   <GlobalTable
                     type='default'
                     columns={sameTxColumns}
@@ -263,6 +270,10 @@ export const DatumPage: FC = () => {
                     pagination={false}
                     items={data?.data.datums_in_same_tx}
                     query={datumQuery}
+                    renderDisplayText={(count, total) =>
+                      t("table.displaying", { count, total })
+                    }
+                    noItemsLabel={t("table.noItems")}
                   />
                 </div>
               </div>

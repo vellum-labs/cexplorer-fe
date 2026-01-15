@@ -21,8 +21,10 @@ import { VoteListPage } from "../governance/VoteListPage";
 import { CircleAlert } from "lucide-react";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import { useDelegateAction } from "@/hooks/useDelegateAction";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const PoolDetailPage = () => {
+  const { t } = useAppTranslation("pages");
   const route = getRouteApi("/pool/$id");
   const { id } = route.useParams();
 
@@ -65,13 +67,13 @@ const PoolDetailPage = () => {
   const poolDetailTabItems = [
     {
       key: "performance",
-      label: "Performance",
+      label: t("pools.detailPage.tabs.performance"),
       content: <PerformanceTabItem />,
       visible: true,
     },
     {
       key: "blocks",
-      label: "Blocks",
+      label: t("pools.detailPage.tabs.blocks"),
       content: (
         <BlocksTabItem
           blocksInEpoch={data?.blocks?.epoch ?? 0}
@@ -82,19 +84,19 @@ const PoolDetailPage = () => {
     },
     {
       key: "rewards",
-      label: "Rewards",
+      label: t("pools.detailPage.tabs.rewards"),
       content: <RewardsTabItem query={query} />,
       visible: true,
     },
     {
       key: "delegators",
-      label: "Delegators",
+      label: t("pools.detailPage.tabs.delegators"),
       content: <DelegatorsTabItem />,
       visible: true,
     },
     {
       key: "about",
-      label: "About",
+      label: t("pools.detailPage.tabs.about"),
       content: data ? (
         <AboutTabItem
           id={id}
@@ -106,19 +108,19 @@ const PoolDetailPage = () => {
     },
     {
       key: "awards",
-      label: "Awards",
+      label: t("pools.detailPage.tabs.awards"),
       content: <AwardsTabItem id={id} />,
       visible: true,
     },
     {
       key: "gov",
-      label: "Governance",
+      label: t("pools.detailPage.tabs.governance"),
       content: <VoteListPage poolId={id} />,
       visible: true,
     },
     {
       key: "embed",
-      label: "Embed",
+      label: t("pools.detailPage.tabs.embed"),
       content: (
         <EmbedTabItem poolId={id} poolTicker={data?.pool_name?.ticker} />
       ),
@@ -147,13 +149,13 @@ const PoolDetailPage = () => {
           <span className='flex-1 break-all'>
             {data?.pool_name.ticker
               ? `[${data?.pool_name.ticker}] ${data.pool_name.name}`
-              : "Pool detail"}
+              : t("pools.detailPage.poolDetail")}
           </span>
         </span>
       }
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>Pools</span>,
+          label: <span className='inline pt-1/2'>{t("pools.breadcrumb")}</span>,
           link: "/pool",
         },
         {
@@ -175,7 +177,7 @@ const PoolDetailPage = () => {
           <HeaderBannerSubtitle
             hashString={formatString(id ?? "", "long")}
             hash={id}
-            title='Pool ID'
+            title={t("pools.detailPage.poolId")}
             className='!mt-0'
           />
         </div>
@@ -184,11 +186,14 @@ const PoolDetailPage = () => {
     >
       {isRetiring && (
         <div className='mx-mobile mb-3 flex max-w-desktop items-start gap-2 rounded-m border border-border p-2 lg:mx-desktop'>
-          <CircleAlert className='mt-0.5 flex-shrink-0 text-red-500' size={18} />
+          <CircleAlert
+            className='mt-0.5 flex-shrink-0 text-red-500'
+            size={18}
+          />
           <span className='font-medium text-red-500'>
             {isAlreadyRetired
-              ? `This pool is retired since epoch ${retiringEpoch}`
-              : `This pool will be retired from epoch ${retiringEpoch}`}
+              ? t("pools.detailPage.retired", { epoch: retiringEpoch })
+              : t("pools.detailPage.retiring", { epoch: retiringEpoch })}
           </span>
         </div>
       )}

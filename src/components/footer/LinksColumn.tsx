@@ -9,7 +9,7 @@ type Props = {
 const LinksColumn = ({ header, links }: Props) => {
   return (
     <div className='flex flex-col gap-1'>
-      <p className='text-grayTextPrimary text-[12px]'>{header}</p>
+      <p className='text-[12px] text-grayTextPrimary'>{header}</p>
       {links.map((link, index) => (
         <Link
           to={link.href}

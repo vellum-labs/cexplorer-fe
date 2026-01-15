@@ -1,5 +1,9 @@
 import type { TxAsset } from "@/types/assetsTypes";
-import { encodeAssetName, formatString, getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
+import {
+  encodeAssetName,
+  formatString,
+  getAssetFingerprint,
+} from "@vellumlabs/cexplorer-sdk";
 
 interface AssetProps {
   name?: string;
@@ -12,7 +16,12 @@ const isSafeToDisplay = (name: string): boolean => {
   return /^[\x20-\x7E]+$/.test(name);
 };
 
-export const renderAssetName = ({ asset, name, type, fingerprint: passedFingerprint }: AssetProps) => {
+export const renderAssetName = ({
+  asset,
+  name,
+  type,
+  fingerprint: passedFingerprint,
+}: AssetProps) => {
   const assetName = asset?.name || name || "";
 
   const FORMAT_LIMIT = 20;
@@ -29,7 +38,8 @@ export const renderAssetName = ({ asset, name, type, fingerprint: passedFingerpr
       : formatedName;
   }
 
-  const getFingerprint = () => passedFingerprint || getAssetFingerprint(assetName);
+  const getFingerprint = () =>
+    passedFingerprint || getAssetFingerprint(assetName);
 
   if (assetName.length <= 56) {
     return formatString(getFingerprint(), "short");
@@ -41,7 +51,10 @@ export const renderAssetName = ({ asset, name, type, fingerprint: passedFingerpr
     return formatString(getFingerprint(), "short");
   }
 
-  const nameWithoutAdaHandlePrefix = nameOnly.replace(/^(000de140|0014df10|000643b0|000010)/, "");
+  const nameWithoutAdaHandlePrefix = nameOnly.replace(
+    /^(000de140|0014df10|000643b0|000010)/,
+    "",
+  );
   const encodedName = encodeAssetName(nameWithoutAdaHandlePrefix || nameOnly);
 
   if (encodedName && encodedName.trim().length > 0) {

@@ -29,8 +29,10 @@ import { useFetchMiscBasic, useFetchMiscSearch } from "@/services/misc";
 
 import { useShortcuts } from "@/hooks/shortcuts/useShortcuts";
 import { ShortcutsModal } from "@/components/global/ShortcutsModal";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const RootComponent = () => {
+  const { t } = useAppTranslation("common");
   useGenerateSW();
 
   const { openHelp, setOpenHelp } = useShortcuts();
@@ -194,6 +196,9 @@ const RootComponent = () => {
           <SafetyLinkModal
             url={clickedUrl}
             onClose={() => setClickedUrl(null)}
+            warningText={t("sdk:safetyLink.warningText")}
+            goBackLabel={t("sdk:safetyLink.goBackLabel")}
+            visitLabel={t("sdk:safetyLink.visitLabel")}
           />
         )}
         {/* <TanStackRouterDevtools /> */}
@@ -205,12 +210,6 @@ const RootComponent = () => {
 };
 
 export const Route = createRootRoute({
-  component: () => {
-    return (
-      <GlobalSearchProvider useFetchMiscSearch={useFetchMiscSearch} locale='en'>
-        <RootComponent />
-      </GlobalSearchProvider>
-    );
-  },
+  component: RootComponent,
   notFoundComponent: NotFoundPage,
 });

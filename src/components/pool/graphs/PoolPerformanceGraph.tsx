@@ -9,6 +9,7 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { format } from "date-fns";
 import ReactEcharts from "echarts-for-react";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   epochs: number[];
@@ -29,6 +30,7 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
   pledged,
   roa,
 }: Props) {
+  const { t } = useAppTranslation("pages");
   const [graphsVisibility, setGraphsVisibility] = useState({
     Delegators: true,
     "Luck (%)": true,
@@ -38,6 +40,18 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
     Pledged: true,
   });
   const { data: basicData } = useFetchMiscBasic(true);
+
+  const seriesLabels = useMemo(
+    () => ({
+      Delegators: t("pools.detailPage.performanceGraph.delegators"),
+      "Luck (%)": t("pools.detailPage.performanceGraph.luck"),
+      Blocks: t("pools.detailPage.performanceGraph.blocks"),
+      "Epoch Stake": t("pools.detailPage.performanceGraph.epochStake"),
+      "ROA (%)": t("pools.detailPage.performanceGraph.roa"),
+      Pledged: t("pools.detailPage.performanceGraph.pledged"),
+    }),
+    [t],
+  );
   const miscConst = useMiscConst(basicData?.data?.version?.const);
   const { textColor, bgColor, splitLineColor, inactivePageIconColor } =
     useGraphColors();
@@ -66,6 +80,7 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
           "ROA (%)",
           "Pledged",
         ],
+        formatter: name => seriesLabels[name] || name,
         textStyle: {
           color: textColor,
         },
@@ -113,12 +128,14 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
           };
 
           return (
-            `Date: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (Epoch: ${params[0].axisValue})<hr>` +
+            `${t("pools.detailPage.performanceGraph.date")}: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${t("pools.detailPage.performanceGraph.epoch")}: ${params[0].axisValue})<hr>` +
             `<div>
       ${params
         .map(item => {
           const formattedValue = valueFormatter(item.seriesName, item.data);
-          return `<p style="margin: 2px 0;">${marker(item)} ${item.seriesName}: ${formattedValue}</p>`;
+          const translatedName =
+            seriesLabels[item.seriesName] || item.seriesName;
+          return `<p style="margin: 2px 0;">${marker(item)} ${translatedName}: ${formattedValue}</p>`;
         })
         .join("")}
     </div>`
@@ -135,7 +152,7 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
         type: "category",
         data: epochs,
         inverse: true,
-        name: "Epoch",
+        name: t("pools.detailPage.performanceGraph.epoch"),
         nameLocation: "middle",
         nameGap: 28,
         axisLabel: {
@@ -152,7 +169,7 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
           type: "value",
           position: "left",
           show: true,
-          name: "Amount",
+          name: t("pools.detailPage.performanceGraph.amount"),
           nameRotate: 90,
           nameLocation: "middle",
           nameGap: 5,
@@ -369,6 +386,8 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
     roa,
     pledged,
     epochs,
+    t,
+    seriesLabels,
   ]);
 
   const onEvents = useMemo(

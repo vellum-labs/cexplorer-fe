@@ -4,6 +4,7 @@ import ReactEcharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useADADisplay } from "@/hooks/useADADisplay";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface GovernanceDetailOverviewInfoGraphProps {
   data: any;
@@ -12,6 +13,7 @@ interface GovernanceDetailOverviewInfoGraphProps {
 export const GovernanceDetailOverviewInfoGraph: FC<
   GovernanceDetailOverviewInfoGraphProps
 > = ({ data }) => {
+  const { t } = useAppTranslation();
   const hasNonZeroValue = data.some((item: any) => item.value > 0);
 
   const filteredData = hasNonZeroValue
@@ -49,7 +51,7 @@ export const GovernanceDetailOverviewInfoGraph: FC<
         const value = params.value ?? 0;
         const name = params.name ?? "Unknown";
         const percent = params.percent ?? 0;
-        return `${name}<br/>Stake: ${formatLovelace(value)}<br/>(${percent}%)`;
+        return `${name}<br/>${t("governance.common.stake")} ${formatLovelace(value)}<br/>(${percent}%)`;
       },
     },
     legend: {

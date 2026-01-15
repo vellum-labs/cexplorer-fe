@@ -26,8 +26,10 @@ import {
 } from "@vellumlabs/cexplorer-sdk";
 import { getPercentageColor } from "@/utils/getPercentageColor";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const ScriptListInteractionsTab: FC = () => {
+  const { t } = useAppTranslation("common");
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { page } = useSearch({ from: "/script/" });
 
@@ -63,7 +65,7 @@ export const ScriptListInteractionsTab: FC = () => {
 
         return item.tx.time;
       },
-      title: "Date",
+      title: t("script.table.date"),
       visible: columnsVisibility.date,
       widthPx: 30,
     },
@@ -77,7 +79,7 @@ export const ScriptListInteractionsTab: FC = () => {
 
         return item.tx.hash;
       },
-      title: "Hash",
+      title: t("script.table.hash"),
       visible: columnsVisibility.dapp,
       widthPx: 50,
     },
@@ -88,7 +90,7 @@ export const ScriptListInteractionsTab: FC = () => {
           <AdaWithTooltip data={item.tx.out_sum} />
         </p>
       ),
-      title: "Output",
+      title: t("script.table.output"),
       visible: columnsVisibility.output,
       widthPx: 20,
     },
@@ -99,7 +101,7 @@ export const ScriptListInteractionsTab: FC = () => {
           <AdaWithTooltip data={item.fee} />
         </p>
       ),
-      title: "Fee",
+      title: t("script.table.fee"),
       visible: columnsVisibility.fee,
       widthPx: 20,
     },
@@ -129,7 +131,7 @@ export const ScriptListInteractionsTab: FC = () => {
           "%"
         );
       },
-      title: <p className='w-full text-right'>Memory</p>,
+      title: <p className='w-full text-right'>{t("script.table.memory")}</p>,
       visible: columnsVisibility.memory_used,
       widthPx: 20,
     },
@@ -161,7 +163,7 @@ export const ScriptListInteractionsTab: FC = () => {
           "%"
         );
       },
-      title: <p className='w-full text-right'>CPU steps</p>,
+      title: <p className='w-full text-right'>{t("script.table.cpuSteps")}</p>,
       visible: columnsVisibility.cpu_steps,
       widthPx: 20,
     },
@@ -177,7 +179,7 @@ export const ScriptListInteractionsTab: FC = () => {
 
         return item.purpose.slice(0, 1).toUpperCase() + item.purpose.slice(1);
       },
-      title: <p className='w-full text-right'>Purpose</p>,
+      title: <p className='w-full text-right'>{t("script.table.purpose")}</p>,
       visible: columnsVisibility.purpose,
       widthPx: 40,
     },
@@ -197,7 +199,9 @@ export const ScriptListInteractionsTab: FC = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[230px]'>
-              Total of {formatNumber(totalItems)} interactions
+              {t("script.totalInteractions", {
+                count: formatNumber(totalItems),
+              })}
             </h3>
           )}
         </div>
@@ -206,9 +210,10 @@ export const ScriptListInteractionsTab: FC = () => {
           <TableSettingsDropdown
             rows={rows}
             setRows={setRows}
+            rowsLabel={t("table.rows")}
             columnsOptions={scriptListInteractionTableOptions.map(item => {
               return {
-                label: item.name,
+                label: t(`common:tableSettings.${item.key}`),
                 isVisible: columnsVisibility[item.key],
                 onClick: () =>
                   setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -238,6 +243,10 @@ export const ScriptListInteractionsTab: FC = () => {
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </div>
   );

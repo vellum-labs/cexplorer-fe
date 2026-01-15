@@ -160,6 +160,10 @@ export const ArticlesAdminPage = () => {
                 columns={columns}
                 items={data}
                 query={query}
+                renderDisplayText={(count, total) =>
+                  t("common:table.displaying", { count, total })
+                }
+                noItemsLabel={t("common:table.noItems")}
               />
               <Button
                 label='Create'

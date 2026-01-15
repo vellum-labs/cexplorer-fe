@@ -23,8 +23,10 @@ import {
 } from "@vellumlabs/cexplorer-sdk";
 import Autoplay from "embla-carousel-autoplay";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const DrepListPage = () => {
+  const { t } = useAppTranslation("pages");
   const drepStatQuery = useFetchDrepStat();
   const drepAnalyticsQuery = useFetchDrepAnalytics();
   const stakeDrepRetiredQuery = useFetchStakeDrepRetired();
@@ -36,19 +38,19 @@ export const DrepListPage = () => {
   const tabs = [
     {
       key: "list",
-      label: "List",
+      label: t("dreps.tabs.list"),
       content: <DrepListTab />,
       visible: true,
     },
     {
       key: "delegations",
-      label: "Delegations",
+      label: t("dreps.tabs.delegations"),
       content: <DrepDelegationsTab />,
       visible: true,
     },
     {
       key: "analytics",
-      label: "Analytics",
+      label: t("dreps.tabs.analytics"),
       content: <DrepAnalyticsTab query={drepAnalyticsQuery} />,
       visible: true,
     },
@@ -58,7 +60,7 @@ export const DrepListPage = () => {
     {
       key: "registered_dreps",
       icon: <Asterisk className='text-primary' />,
-      label: "Registered DReps",
+      label: t("dreps.stats.registeredDreps"),
       content: (
         <p className='text-display-xs font-semibold'>
           {drepStat?.drep?.count?.total ? drepStat?.drep?.count?.total : "-"}
@@ -68,7 +70,9 @@ export const DrepListPage = () => {
         <div className='flex flex-wrap'>
           {drepStat?.drep?.count?.active && (
             <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
-              <span className='text-text-sm text-grayTextPrimary'>Active</span>
+              <span className='text-text-sm text-grayTextPrimary'>
+                {t("dreps.stats.active")}
+              </span>
               <span className='text-text-sm text-[#16B364]'>
                 {drepStat?.drep?.count?.active}
               </span>
@@ -77,7 +81,7 @@ export const DrepListPage = () => {
           {drepStat?.drep?.count?.inactive && (
             <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
               <span className='text-text-sm text-grayTextPrimary'>
-                Inactive
+                {t("dreps.stats.inactive")}
               </span>
               <span className='text-text-sm text-[#EAAA08]'>
                 {drepStat?.drep?.count?.inactive}
@@ -86,7 +90,9 @@ export const DrepListPage = () => {
           )}
           {drepStat?.drep?.count?.retired && (
             <div className='flex w-fit items-center gap-1/2 pr-[26px]'>
-              <span className='text-text-sm text-grayTextPrimary'>Retired</span>
+              <span className='text-text-sm text-grayTextPrimary'>
+                {t("dreps.stats.retired")}
+              </span>
               <span className='text-text-sm text-[#F04438]'>
                 {drepStat?.drep?.count?.retired}
               </span>
@@ -98,12 +104,11 @@ export const DrepListPage = () => {
     {
       key: "voting_stake",
       icon: <Zap className='text-primary' />,
-      label: "Active voting stake",
+      label: t("dreps.stats.activeVotingStake"),
       content: drepStat?.stake?.total ? (
         <AdaWithTooltip
           data={
-            drepStat.stake.total -
-            (drepStat.stake.drep_always_abstain ?? 0)
+            drepStat.stake.total - (drepStat.stake.drep_always_abstain ?? 0)
           }
           triggerClassName='text-display-xs font-semibold text-text'
         />
@@ -114,7 +119,9 @@ export const DrepListPage = () => {
         <div className='flex flex-wrap'>
           {drepStat?.stake?.drep_always_abstain && (
             <div className='flex w-fit items-center gap-1/2 pr-4'>
-              <span className='text-text-sm text-grayTextPrimary'>Abstain</span>
+              <span className='text-text-sm text-grayTextPrimary'>
+                {t("dreps.stats.abstain")}
+              </span>
               <span className='text-text-sm text-grayTextPrimary'>
                 <AdaWithTooltip data={drepStat?.stake?.drep_always_abstain} />
               </span>
@@ -123,7 +130,7 @@ export const DrepListPage = () => {
           {drepStat?.stake?.drep_always_no_confidence && (
             <div className='flex w-fit items-center gap-1/2 pr-4'>
               <span className='text-text-sm text-grayTextPrimary'>
-                No confidence
+                {t("dreps.stats.noConfidence")}
               </span>
               <span className='text-text-sm text-grayTextPrimary'>
                 <AdaWithTooltip
@@ -138,7 +145,7 @@ export const DrepListPage = () => {
     {
       key: "delegators",
       icon: <Users className='text-primary' />,
-      label: "Delegators",
+      label: t("dreps.stats.delegators"),
       content: (
         <p className='text-display-xs font-semibold'>
           {drepAnalytics?.delegator?.total?.count
@@ -150,7 +157,9 @@ export const DrepListPage = () => {
         <div className='flex flex-wrap'>
           {drepAnalytics?.delegator?.drep_always_abstain?.count && (
             <div className='flex w-fit items-center gap-1/2 pr-4'>
-              <span className='text-text-sm text-grayTextPrimary'>Abstain</span>
+              <span className='text-text-sm text-grayTextPrimary'>
+                {t("dreps.stats.abstain")}
+              </span>
               <span className='text-text-sm text-grayTextPrimary'>
                 {formatNumber(
                   drepAnalytics?.delegator?.drep_always_abstain?.count,
@@ -161,7 +170,7 @@ export const DrepListPage = () => {
           {drepAnalytics?.delegator?.drep_always_no_confidence?.count && (
             <div className='flex w-fit items-center gap-1/2 pr-4'>
               <span className='text-text-sm text-grayTextPrimary'>
-                No confidence
+                {t("dreps.stats.noConfidence")}
               </span>
               <span className='text-text-sm text-grayTextPrimary'>
                 {drepAnalytics?.delegator?.drep_always_no_confidence?.count}
@@ -174,7 +183,7 @@ export const DrepListPage = () => {
     {
       key: "retired_dreps",
       icon: <UserX className='text-primary' />,
-      label: "Stake to retired DReps",
+      label: t("dreps.stats.stakeToRetiredDreps"),
       content: stakeDrepRetired?.delegator?.stake ? (
         <AdaWithTooltip
           data={stakeDrepRetired.delegator.stake / 1e6}
@@ -187,7 +196,7 @@ export const DrepListPage = () => {
         <div className='flex flex-wrap gap-2'>
           <div className='flex items-center gap-1/2'>
             <span className='text-text-sm text-grayTextPrimary'>
-              Delegations
+              {t("dreps.stats.delegations")}
             </span>
             <span className='text-text-sm font-medium text-grayTextPrimary'>
               {stakeDrepRetired?.delegator?.count ?? "-"}
@@ -195,7 +204,7 @@ export const DrepListPage = () => {
           </div>
           <div className='flex items-center gap-1/2'>
             <span className='text-text-sm text-grayTextPrimary'>
-              Retired DReps
+              {t("dreps.stats.retiredDreps")}
             </span>
             <span className='text-text-sm font-medium text-grayTextPrimary'>
               {stakeDrepRetired?.drep?.count ?? "-"}
@@ -208,13 +217,13 @@ export const DrepListPage = () => {
 
   return (
     <PageBase
-      title='Delegated Representatives'
+      title={t("dreps.title")}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>Governance</span>,
+          label: <span className='inline pt-1/2'>{t("governance.title")}</span>,
           link: "/gov",
         },
-        { label: "Delegated representatives" },
+        { label: t("dreps.breadcrumb") },
       ]}
       metadataTitle='drepList'
       adsCarousel={false}

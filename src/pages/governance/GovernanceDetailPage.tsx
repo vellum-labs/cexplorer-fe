@@ -6,6 +6,7 @@ import { GovernanceDetailOverview } from "@/components/governance/GovernanceDeta
 import { GovernanceDetailAboutTab } from "@/components/governance/tabs/GovernanceDetailAboutTab";
 import { GovernanceDetailNotVotedTab } from "@/components/governance/tabs/GovernanceDetailNotVotedTab";
 import { GovernanceDetailStatusHistoryTab } from "@/components/governance/tabs/GovernanceDetailStatusHistoryTab";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 import { useParams } from "@tanstack/react-router";
 import { useFetchGovernanceActionDetail } from "@/services/governance";
@@ -15,6 +16,7 @@ import { PageBase } from "@/components/global/pages/PageBase";
 import { JsonDisplay } from "@vellumlabs/cexplorer-sdk";
 
 export const GovernanceDetailPage: FC = () => {
+  const { t } = useAppTranslation();
   const { id } = useParams({
     from: "/gov/action/$id",
   });
@@ -27,13 +29,13 @@ export const GovernanceDetailPage: FC = () => {
   const tabs = [
     {
       key: "voted",
-      label: "Voted",
+      label: t("governance.tabs.voted"),
       content: <GovernanceDetailAboutTab id={decodedId} key={1} />,
       visible: true,
     },
     {
       key: "not_voted",
-      label: "Not voted",
+      label: t("governance.tabs.notVoted"),
       content: (
         <GovernanceDetailNotVotedTab
           id={decodedId}
@@ -45,25 +47,26 @@ export const GovernanceDetailPage: FC = () => {
     },
     {
       key: "status_history",
-      label: "Status history",
+      label: t("governance.tabs.statusHistory"),
       content: <GovernanceDetailStatusHistoryTab query={detailQuery} key={3} />,
       visible: true,
     },
     {
       key: "description",
-      label: "Description",
+      label: t("governance.tabs.description"),
       content: (
         <JsonDisplay
           data={detailQuery?.data?.data?.description?.contents}
           isError={false}
           isLoading={false}
+          noDataLabel={t("sdk:jsonDisplay.noDataLabel")}
         />
       ),
       visible: !!detailQuery?.data?.data?.description?.contents,
     },
     {
       key: "metadata",
-      label: "Metadata",
+      label: t("governance.tabs.metadata"),
       content: <GovernanceDetailMetadataTab query={detailQuery} />,
       visible: !!detailQuery?.data?.data?.anchor?.offchain?.name,
     },
@@ -78,11 +81,19 @@ export const GovernanceDetailPage: FC = () => {
       }}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>Governance</span>,
+          label: (
+            <span className='inline pt-1/2'>
+              {t("governance.breadcrumbs.governance")}
+            </span>
+          ),
           link: "/gov",
         },
         {
-          label: <span className='inline pt-1/2'>Governance actions</span>,
+          label: (
+            <span className='inline pt-1/2'>
+              {t("governance.breadcrumbs.governanceActions")}
+            </span>
+          ),
           link: "/gov/action",
         },
         {
@@ -94,13 +105,13 @@ export const GovernanceDetailPage: FC = () => {
       ]}
       title={
         <div className='flex items-center gap-1/2'>
-          Governance action detail
+          {t("governance.detail.title")}
         </div>
       }
       subTitle={
         <div className='flex flex-col'>
           <HeaderBannerSubtitle
-            title='Governance Action ID'
+            title={t("governance.detail.governanceActionId")}
             hashString={formatString(data?.ident?.bech ?? "", "long")}
             hash={data?.ident?.bech}
             className='!mb-0'
@@ -108,7 +119,7 @@ export const GovernanceDetailPage: FC = () => {
           <HeaderBannerSubtitle
             hashString={formatString(data?.ident?.id ?? "", "long")}
             hash={data?.ident?.id}
-            title='Legacy Governance Action ID'
+            title={t("governance.detail.legacyGovernanceActionId")}
             className='!mt-0'
           />
         </div>

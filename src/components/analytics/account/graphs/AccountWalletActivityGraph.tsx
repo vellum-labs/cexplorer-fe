@@ -7,6 +7,7 @@ import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import ReactEcharts from "echarts-for-react";
 
 import { useEffect, useState } from "react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useGraphColors } from "@/hooks/useGraphColors";
 
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
@@ -22,6 +23,7 @@ interface AccountWalletActivityGraphProps {
 export const AccountWalletActivityGraph: FC<
   AccountWalletActivityGraphProps
 > = ({ data, miscConst, setJson }) => {
+  const { t } = useAppTranslation("common");
   const [graphsVisibility, setGraphsVisibility] = useState({
     "Unique payment address": true,
     "Unique stake address": true,
@@ -93,7 +95,7 @@ export const AccountWalletActivityGraph: FC<
         };
 
         return (
-          `Date: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (Epoch: ${params[0].axisValue})<hr>` +
+          `${t("labels.date")}: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${t("labels.epoch")}: ${params[0].axisValue})<hr>` +
           `<div>
         ${params
           .map(
@@ -115,7 +117,7 @@ export const AccountWalletActivityGraph: FC<
     xAxis: {
       type: "category",
       data: epochs,
-      name: "Epoch",
+      name: t("labels.epoch"),
       nameLocation: "middle",
       nameGap: 28,
       boundaryGap: false,

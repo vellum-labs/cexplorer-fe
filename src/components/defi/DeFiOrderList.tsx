@@ -16,6 +16,7 @@ import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { TimeDateIndicator } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 import { defiOrderListTableOptions } from "@/constants/tables/defiOrderListTableOptions";
 import {
@@ -74,6 +75,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
   titleClassname,
   disabledKeys,
 }) => {
+  const { t } = useAppTranslation("common");
   const { locale } = useLocaleStore();
 
   const {
@@ -155,7 +157,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           <DateCell time={item?.submission_time} />
         </Tooltip>
       ),
-      title: "Date",
+      title: t("labels.date"),
       visible: columnsVisibility.date,
       widthPx: 60,
     },
@@ -175,7 +177,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           <Copy copyText={item?.tx_hash} />
         </div>
       ),
-      title: "Transaction",
+      title: t("defi.transaction"),
       visible: columnsVisibility.tx,
       widthPx: 70,
     },
@@ -192,11 +194,11 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           <div
             className={`flex w-[50px] items-center justify-center rounded-s px-[6px] py-[2px] text-text-sm font-medium text-white ${isBuying ? "bg-greenText" : "bg-redText"}`}
           >
-            {isBuying ? "Buy" : "Sell"}
+            {isBuying ? t("defi.buy") : t("defi.sell")}
           </div>
         );
       },
-      title: <p ref={anchorRefs?.type}>Type</p>,
+      title: <p ref={anchorRefs?.type}>{t("defi.type")}</p>,
       filter: {
         anchorRef: anchorRefs?.type,
         activeFunnel: !!filter.type,
@@ -224,6 +226,8 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           changeFilterByKey("type", JSON.stringify(filterDraft["type"]));
         },
         onReset: () => changeFilterByKey("type"),
+        resetLabel: t("actions.reset"),
+        filterLabel: t("actions.filter"),
         filterContent: (
           <div className='flex w-full flex-col justify-center gap-1 p-1'>
             <div className='flex items-center gap-1.5'>
@@ -241,7 +245,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                     }))
                   }
                 />
-                <span className='text-text-sm'>Buy</span>
+                <span className='text-text-sm'>{t("defi.buy")}</span>
               </label>
               <label className='flex items-center gap-1'>
                 <input
@@ -257,7 +261,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                     }))
                   }
                 />
-                <span className='text-text-sm'>Sell</span>
+                <span className='text-text-sm'>{t("defi.sell")}</span>
               </label>
             </div>
             <TextInput
@@ -270,9 +274,9 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
               placeholder={
                 filterDraft["type"]?.type
                   ? filterDraft["type"].type === "sell"
-                    ? "Search by token in"
-                    : "Search by token out"
-                  : "Choose filter type"
+                    ? t("defi.searchByTokenIn")
+                    : t("defi.searchByTokenOut")
+                  : t("defi.chooseFilterType")
               }
               value={filterDraft["type"]?.value ?? ""}
               wrapperClassName='w-full'
@@ -302,7 +306,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           />
         );
       },
-      title: "Pair",
+      title: t("defi.pair"),
       visible: columnsVisibility.pair,
       widthPx: 80,
     },
@@ -349,7 +353,9 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           </div>
         );
       },
-      title: <p className='w-full text-nowrap text-right'>Token amount</p>,
+      title: (
+        <p className='w-full text-nowrap text-right'>{t("defi.tokenAmount")}</p>
+      ),
       visible: columnsVisibility.token_amount,
       widthPx: 83,
     },
@@ -420,7 +426,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           >
             {currency === "ada" ? "ADA" : "USD"}
           </span>{" "}
-          amount
+          {t("defi.amount")}
         </p>
       ),
       visible: columnsVisibility.ada_amount,
@@ -504,7 +510,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           >
             {currency === "ada" ? "ADA" : "USD"}
           </span>{" "}
-          price
+          {t("defi.price")}
         </p>
       ),
       visible: columnsVisibility.ada_price,
@@ -547,7 +553,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           </div>
         );
       },
-      title: <p ref={anchorRefs?.status}>Status</p>,
+      title: <p ref={anchorRefs?.status}>{t("defi.status")}</p>,
       filter: {
         anchorRef: anchorRefs?.status,
         width: "170px",
@@ -559,6 +565,8 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         onShow: e => toggleFilter(e, "status"),
         onFilter: () => changeFilterByKey("status", filterDraft["status"]),
         onReset: () => changeFilterByKey("status"),
+        resetLabel: t("actions.reset"),
+        filterLabel: t("actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             <label className='flex items-center gap-1'>
@@ -572,7 +580,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                   changeDraftFilter("status", e.currentTarget.value)
                 }
               />
-              <span className='text-text-sm'>Complete</span>
+              <span className='text-text-sm'>{t("defi.complete")}</span>
             </label>
             <label className='flex items-center gap-1'>
               <input
@@ -585,7 +593,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
                   changeDraftFilter("status", e.currentTarget.value)
                 }
               />
-              <span className='text-text-sm'>Cancelled</span>
+              <span className='text-text-sm'>{t("defi.cancelled")}</span>
             </label>
           </div>
         ),
@@ -638,7 +646,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           </div>
         );
       },
-      title: <p ref={anchorRefs?.maker}>Maker</p>,
+      title: <p ref={anchorRefs?.maker}>{t("defi.maker")}</p>,
       filter:
         stakeAddress || address
           ? undefined
@@ -656,11 +664,13 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
               onFilter: () =>
                 changeFilterByKey("maker", filterDraft["makerSearch"]),
               onReset: () => changeFilterByKey("maker"),
+              resetLabel: t("actions.reset"),
+              filterLabel: t("actions.filter"),
               filterContent: (
                 <div className='flex h-[60px] w-full items-center justify-center px-1'>
                   <TextInput
                     onchange={value => changeDraftFilter("makerSearch", value)}
-                    placeholder='Filter by address or stake...'
+                    placeholder={t("defi.filterByAddress")}
                     value={filterDraft["makerSearch"] ?? ""}
                     wrapperClassName='w-full'
                     disabled={!!stakeAddress || !!address}
@@ -728,7 +738,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           </div>
         );
       },
-      title: <p ref={anchorRefs?.dex}>Platform</p>,
+      title: <p ref={anchorRefs?.dex}>{t("defi.platform")}</p>,
       filter: {
         anchorRef: anchorRefs?.dex,
         width: "170px",
@@ -740,6 +750,8 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         onShow: e => toggleFilter(e, "dex"),
         onFilter: () => changeFilterByKey("dex", filterDraft["dex"]),
         onReset: () => changeFilterByKey("dex"),
+        resetLabel: t("actions.reset"),
+        filterLabel: t("actions.filter"),
         filterContent: (
           <div className='flex max-h-[200px] flex-col gap-1 overflow-y-auto px-2 py-1'>
             {Object.entries(dexConfig)
@@ -773,7 +785,7 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
         <div className='flex items-center gap-1'>
           {pulseDot && <PulseDot />}
           <h2 className={titleClassname ? titleClassname : ""}>
-            Global trading activity
+            {t("defi.globalTradingActivity")}
           </h2>
         </div>
         <div className='flex items-center gap-1'>
@@ -781,9 +793,10 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           <TableSettingsDropdown
             rows={rows}
             setRows={setRows}
+            rowsLabel={t("table.rows")}
             columnsOptions={defiOrderListTableOptions.map(item => {
               return {
-                label: item.name,
+                label: t(`common:tableSettings.${item.key}`),
                 isVisible: columnsVisibility[item.key],
                 onClick: () =>
                   setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -845,6 +858,10 @@ export const DeFiOrderList: FC<DeFiOrderListProps> = ({
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </div>
   );

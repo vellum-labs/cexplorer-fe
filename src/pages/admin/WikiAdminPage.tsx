@@ -138,8 +138,7 @@ export const WikiAdminPage = () => {
                   Admin
                 </Link>
               </BreadcrumbItem>
-              /
-              <BreadcrumbItem className='text-text'>Admin Wiki</BreadcrumbItem>
+              /<BreadcrumbItem className='text-text'>Admin Wiki</BreadcrumbItem>
             </BreadcrumbList>
           </BreadcrumbRaw>
           {query.isLoading ? (
@@ -159,6 +158,10 @@ export const WikiAdminPage = () => {
                 columns={columns}
                 items={data}
                 query={query}
+                renderDisplayText={(count, total) =>
+                  t("common:table.displaying", { count, total })
+                }
+                noItemsLabel={t("common:table.noItems")}
               />
               <Button
                 label='Create'

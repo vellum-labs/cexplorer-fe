@@ -6,6 +6,7 @@ import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useFetchAccountRewards } from "@/services/account";
 import { useAddressDetailRewardsTableStore } from "@/stores/tables/addressDetailRewardsTableStore";
 
@@ -30,6 +31,7 @@ export const RewardsTab: FC<RewardsTabProps> = ({
   stakeAddress,
   parentPage,
 }) => {
+  const { t } = useAppTranslation("common");
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { page } = useSearch({
     from:
@@ -69,7 +71,7 @@ export const RewardsTab: FC<RewardsTabProps> = ({
           <EpochCell no={item?.earned_epoch ?? 0} />
         </div>
       ),
-      title: <p>Epoch</p>,
+      title: <p>{t("labels.epoch")}</p>,
       visible: columnsVisibility.epoch,
       widthPx: 50,
     },
@@ -78,7 +80,7 @@ export const RewardsTab: FC<RewardsTabProps> = ({
       render: item => (
         <DateCell time={item?.spendable_epoch?.start_time ?? ""} />
       ),
-      title: "Date",
+      title: t("labels.date"),
       visible: columnsVisibility.date,
       widthPx: 50,
     },
@@ -90,7 +92,7 @@ export const RewardsTab: FC<RewardsTabProps> = ({
           poolImageUrl={generateImageUrl(item.pool.id, "ico", "pool")}
         />
       ),
-      title: "Stake Pool",
+      title: t("labels.stakePool"),
       visible: columnsVisibility.stake_pool,
       widthPx: 50,
     },
@@ -101,7 +103,7 @@ export const RewardsTab: FC<RewardsTabProps> = ({
           <AdaWithTooltip data={item?.account?.epoch_stake ?? 0} />
         </span>
       ),
-      title: <p className='w-full text-right'>Active Stake</p>,
+      title: <p className='w-full text-right'>{t("labels.activeStake")}</p>,
       visible: columnsVisibility.active_stake,
       widthPx: 50,
     },
@@ -112,7 +114,7 @@ export const RewardsTab: FC<RewardsTabProps> = ({
           <AdaWithTooltip data={item?.amount ?? 0} />
         </span>
       ),
-      title: <p className='w-full text-right'>Reward</p>,
+      title: <p className='w-full text-right'>{t("labels.rewards")}</p>,
       visible: columnsVisibility.reward,
       widthPx: 50,
     },
@@ -129,7 +131,7 @@ export const RewardsTab: FC<RewardsTabProps> = ({
           %
         </p>
       ),
-      title: <p className='w-full text-right'>Roa</p>,
+      title: <p className='w-full text-right'>{t("labels.roa")}</p>,
       visible: columnsVisibility.roa,
       widthPx: 50,
     },
@@ -155,20 +157,23 @@ export const RewardsTab: FC<RewardsTabProps> = ({
           <LoadingSkeleton height='27px' width={"220px"} />
         ) : (
           <h3 className='basis-[230px] text-nowrap'>
-            Total of {totalItems} rewards
+            {t("address.totalRewards", { count: totalItems })}
           </h3>
         )}
         <div className='flex items-center gap-1'>
           <div className='flex h-[40px] w-fit shrink-0 items-center justify-center gap-1/2 rounded-s border border-border px-1.5'>
             <Download size={20} color={colors.text} />
-            <span className='text-text-sm font-medium'>Export</span>
+            <span className='text-text-sm font-medium'>
+              {t("actions.export")}
+            </span>
           </div>
           <TableSettingsDropdown
             rows={rows}
             setRows={setRows}
+            rowsLabel={t("table.rows")}
             columnsOptions={addressDetailRewardsTableOptions.map(item => {
               return {
-                label: item.name,
+                label: t(`common:tableSettings.${item.key}`),
                 isVisible: columnsVisibility[item.key],
                 onClick: () =>
                   setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -196,6 +201,10 @@ export const RewardsTab: FC<RewardsTabProps> = ({
         query={rewardsQuery}
         items={data}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </div>
   );

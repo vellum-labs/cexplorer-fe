@@ -25,6 +25,7 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import { isVoteLate } from "@/utils/governance/isVoteLate";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { EpochCell } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface VoteDetailCardProps {
   vote: GovernanceVote;
@@ -37,6 +38,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
   vote,
   isLoading,
 }) => {
+  const { t } = useAppTranslation();
   const { data: basicData } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(basicData?.data?.version?.const);
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
@@ -50,7 +52,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
   const detailItems = [
     {
       key: "action_type",
-      title: "Action type",
+      title: t("governance.voteDetail.actionType"),
       value: vote?.proposal?.type ? (
         <ActionTypesComponent title={vote?.proposal?.type as ActionTypes} />
       ) : (
@@ -59,7 +61,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
     },
     {
       key: "gov_title",
-      title: "Governance action Title",
+      title: t("governance.voteDetail.governanceActionTitle"),
       value: vote?.proposal?.anchor?.offchain?.name ? (
         <Link
           to={"/gov/action/$id"}
@@ -76,7 +78,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
     },
     {
       key: "gov_id",
-      title: "Governance action ID",
+      title: t("governance.voteDetail.governanceActionId"),
       value: (
         <div className='flex items-center gap-1 break-all'>
           <span className='text-text-sm' title={vote?.proposal?.ident?.bech}>
@@ -88,7 +90,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
     },
     {
       key: "status",
-      title: "Status",
+      title: t("governance.voteDetail.status"),
       value: (
         <GovernanceStatusBadge
           item={{
@@ -98,6 +100,13 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
             ratified_epoch: vote?.proposal?.ratified_epoch ?? null,
           }}
           currentEpoch={currentEpoch ?? 0}
+          labels={{
+            Active: t("governance.status.active"),
+            Ratified: t("governance.status.ratified"),
+            Enacted: t("governance.status.enacted"),
+            Expired: t("governance.status.expired"),
+            Dropped: t("governance.status.dropped"),
+          }}
         />
       ),
     },
@@ -106,10 +115,10 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       ? [
           {
             key: "enacted_epoch",
-            title: "Enacted epoch",
+            title: t("governance.voteDetail.enactedEpoch"),
             value: (
               <div className='flex items-center gap-1 text-text-sm'>
-                <span>Epoch</span>
+                <span>{t("governance.voteDetail.epochLabel")}</span>
                 <EpochCell no={vote?.proposal?.enacted_epoch} />
               </div>
             ),
@@ -120,10 +129,10 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       ? [
           {
             key: "ratified_epoch",
-            title: "Ratified epoch",
+            title: t("governance.voteDetail.ratifiedEpoch"),
             value: (
               <div className='flex items-center gap-1 text-text-sm'>
-                <span>Epoch</span>
+                <span>{t("governance.voteDetail.epochLabel")}</span>
                 <EpochCell no={vote?.proposal?.ratified_epoch} />
               </div>
             ),
@@ -134,10 +143,10 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       ? [
           {
             key: "expired_epoch",
-            title: "Expired epoch",
+            title: t("governance.voteDetail.expiredEpoch"),
             value: (
               <div className='flex items-center gap-1 text-text-sm'>
-                <span>Epoch</span>
+                <span>{t("governance.voteDetail.epochLabel")}</span>
                 <EpochCell no={vote?.proposal?.expired_epoch} />
               </div>
             ),
@@ -146,7 +155,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       : []),
     {
       key: "voting_start",
-      title: "Voting start",
+      title: t("governance.voteDetail.votingStart"),
       value: (
         <div className='flex flex-wrap items-center gap-x-1'>
           <TimeDateIndicator time={vote?.proposal?.tx?.time} />
@@ -155,10 +164,10 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
     },
     {
       key: "voting_end",
-      title: "Voting deadline",
+      title: t("governance.voteDetail.votingDeadline"),
       value: vote?.proposal?.expiration ? (
         <div className='flex items-center gap-1 text-text-sm'>
-          <span>Epoch</span>
+          <span>{t("governance.voteDetail.epochLabel")}</span>
           <EpochCell no={vote?.proposal?.expiration} />
         </div>
       ) : (
@@ -168,12 +177,12 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
     },
     {
       key: "role",
-      title: "Role",
+      title: t("governance.voteDetail.role"),
       value: (() => {
         const role = vote?.voter_role;
         const displayRole =
           role === GovernanceRole.ConstitutionalCommittee
-            ? "Constitutional Committee"
+            ? t("governance.voteDetail.constitutionalCommittee")
             : role;
 
         return (
@@ -196,7 +205,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       ? [
           {
             key: "voter_name",
-            title: "Voter name",
+            title: t("governance.voteDetail.voterName"),
             value: (
               <div className='flex items-center gap-1'>
                 {vote?.info?.id && (
@@ -246,7 +255,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       : []),
     {
       key: "voter_id",
-      title: "Voter ID",
+      title: t("governance.voteDetail.voterId"),
       value: (
         <div className='flex items-center gap-1 break-all'>
           {!voterDisplayName && vote?.voter_role && vote?.info?.id ? (
@@ -278,7 +287,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
     },
     {
       key: "power",
-      title: "Vote power",
+      title: t("governance.voteDetail.votePower"),
       value: (
         <AdaWithTooltip
           data={vote?.info?.power?.stake}
@@ -288,7 +297,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
     },
     {
       key: "cast_vote",
-      title: <p>Cast vote</p>,
+      title: <p>{t("governance.voteDetail.castVote")}</p>,
       value: (() => {
         if (!vote?.vote) {
           return "-";
@@ -319,7 +328,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
                 <span
                   className={`text-text-xs font-medium ${warningStyles.text}`}
                 >
-                  This vote was submitted after voting closed
+                  {t("governance.voteDetail.lateVoteWarning")}
                 </span>
               </div>
             )}
@@ -329,12 +338,12 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
     },
     {
       key: "timestamp",
-      title: "Timestamp",
+      title: t("governance.voteDetail.timestamp"),
       value: <TimeDateIndicator time={vote?.tx?.time} />,
     },
     {
       key: "vote_tx",
-      title: "Vote tx",
+      title: t("governance.voteDetail.voteTx"),
       value: (
         <div className='flex items-center gap-1 break-all'>
           <Link
@@ -353,7 +362,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       ? [
           {
             key: "anchor_url",
-            title: "Anchor URL",
+            title: t("governance.voteDetail.anchorUrl"),
             value: (() => {
               const transformedUrl = transformAnchorUrl(vote.anchor.url);
               if (!transformedUrl) return "-";
@@ -378,7 +387,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
       : []),
     {
       key: "metadata",
-      title: "Metadata",
+      title: t("governance.voteDetail.metadata"),
       value: vote?.anchor?.offchain?.comment ? (
         <div className='bg-muted rounded-s border border-border p-1.5 text-text-sm leading-relaxed'>
           <pre className='max-w-full overflow-x-auto whitespace-pre-wrap break-all'>
@@ -395,7 +404,9 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
   return (
     <>
       <div className='w-full rounded-xl border border-border px-3 py-2'>
-        <h2 className='text-base font-semibold'>Overview</h2>
+        <h2 className='text-base font-semibold'>
+          {t("governance.voteDetail.overview")}
+        </h2>
         <div className='flex flex-col gap-2 pt-2'>
           {detailItems.map(({ key, title, value, divider, fullWidth }) => (
             <div key={key} className='flex flex-col'>
@@ -427,7 +438,13 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
         </div>
       </div>
       {clickedUrl && (
-        <SafetyLinkModal url={clickedUrl} onClose={() => setClickedUrl(null)} />
+        <SafetyLinkModal
+          url={clickedUrl}
+          onClose={() => setClickedUrl(null)}
+          warningText={t("sdk:safetyLink.warningText")}
+          goBackLabel={t("sdk:safetyLink.goBackLabel")}
+          visitLabel={t("sdk:safetyLink.visitLabel")}
+        />
       )}
     </>
   );

@@ -5,6 +5,7 @@ import { AssetExchangesCandlestickGraph } from "../subtabs/AssetExchangesGraph";
 import { AssetExchangesLiquidity } from "../subtabs/AssetExchangesLiquidity";
 
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface AssetExchangesTabProps {
   assetname: string;
@@ -15,16 +16,18 @@ export const AssetExchangesTab: FC<AssetExchangesTabProps> = ({
   assetname,
   query,
 }) => {
+  const { t } = useAppTranslation("common");
+
   const subTabs = [
     {
       key: "graph",
-      label: "Graph",
+      label: t("asset.graphTab"),
       content: <AssetExchangesCandlestickGraph assetname={assetname} />,
       visible: true,
     },
     {
       key: "liquidity",
-      label: "Liquidity",
+      label: t("asset.liquidityTab"),
       content: <AssetExchangesLiquidity query={query} />,
       visible: true,
     },

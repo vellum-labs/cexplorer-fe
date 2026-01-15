@@ -9,6 +9,7 @@ import { useGraphColors } from "../useGraphColors";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface UseTxInEpoch {
   json: any;
@@ -21,6 +22,7 @@ interface UseTxInEpoch {
 export const useTxInEpoch = (
   miscConst: MiscConstResponseData | undefined,
 ): UseTxInEpoch => {
+  const { t } = useAppTranslation("pages");
   const [json, setJson] = useState<any>();
   const [data, setData] = useState<EpochAnalyticsResponseData[]>();
   const [selectedItem, setSelectedItem] = useState<GraphTimePeriod>(
@@ -86,21 +88,21 @@ export const useTxInEpoch = (
       });
 
       const keyLabelMap: Record<string, string> = {
-        script: "Smart contract transactions",
-        datum: "Datum",
-        delegation: "Delegation",
-        delegation_vote: "Delegation vote",
-        drep_registration: "DRep registration",
-        gov_action_proposal: "Government action proposal",
-        ma_tx_mint: "Multi-Asset minting",
-        ma_tx_out: "Multi-Asset transfers",
-        pool_update: "Pool update",
-        redeemer_data: "Redeemer data",
-        stake_registration: "Stake registration",
-        stake_deregistration: "Stake deregistration",
-        tx_metadata: "Transaction metadata",
-        withdrawal: "Withdrawal",
-        Other: "Other",
+        script: t("analytics.graph.smartContractTransactions"),
+        datum: t("analytics.graph.datum"),
+        delegation: t("analytics.graph.delegation"),
+        delegation_vote: t("analytics.graph.delegationVote"),
+        drep_registration: t("analytics.graph.drepRegistration"),
+        gov_action_proposal: t("analytics.graph.govActionProposal"),
+        ma_tx_mint: t("analytics.graph.maTokenMinting"),
+        ma_tx_out: t("analytics.graph.maTokenTransfers"),
+        pool_update: t("analytics.graph.poolUpdate"),
+        redeemer_data: t("analytics.graph.redeemerData"),
+        stake_registration: t("analytics.graph.stakeRegistration"),
+        stake_deregistration: t("analytics.graph.stakeDeregistration"),
+        tx_metadata: t("analytics.graph.txMetadata"),
+        withdrawal: t("analytics.graph.withdrawal"),
+        Other: t("analytics.graph.other"),
       };
 
       const totalPerKey = Object.entries(stackedTotals).reduce(
@@ -123,8 +125,10 @@ export const useTxInEpoch = (
         data: stackedTotals[key],
       }));
 
+      const transactionsLabel = t("analytics.graph.transactions");
+
       const lineSeries = {
-        name: "Transactions",
+        name: transactionsLabel,
         type: "line",
         data: lineTotals,
         yAxisIndex: 1,
@@ -136,8 +140,8 @@ export const useTxInEpoch = (
 
       const tableData = allEpochs.map((epoch, index) => {
         const row: Record<string, any> = {
-          Epoch: epoch,
-          Transactions: lineTotals[index],
+          [t("epochs.graph.epoch")]: epoch,
+          [transactionsLabel]: lineTotals[index],
         };
         sortedStackKeys.forEach(key => {
           row[keyLabelMap[key] ?? key] = stackedTotals[key][index];
@@ -150,12 +154,12 @@ export const useTxInEpoch = (
         stackedSeries,
         lineSeries,
         sortedLegend: [
-          "Transactions",
+          transactionsLabel,
           ...sortedStackKeys.map(key => keyLabelMap[key] ?? key),
         ],
         tableData,
       };
-    }, [data]);
+    }, [data, t]);
 
   const option: ReactEChartsProps["option"] = {
     tooltip: {
@@ -172,12 +176,14 @@ export const useTxInEpoch = (
           miscConst?.epoch.start_time ?? "",
         );
 
+        const transactionsLabel = t("analytics.graph.transactions");
+
         return (
-          `Date: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (Epoch: ${epoch})<hr>` +
+          `${t("epochs.graph.date")}: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${t("epochs.graph.epoch")}: ${epoch})<hr>` +
           `<div>${params
             .map(item => {
               const value =
-                item.seriesName === "Transactions"
+                item.seriesName === transactionsLabel
                   ? formatNumber(item.value)
                   : `${Number(item.value).toFixed(2)}%`;
               return `<p>${item.marker} ${item.seriesName}: ${value}</p>`;

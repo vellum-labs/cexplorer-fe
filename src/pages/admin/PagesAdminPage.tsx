@@ -92,6 +92,10 @@ export const PagesAdminPage = () => {
             columns={columns}
             items={data}
             query={query}
+            renderDisplayText={(count, total) =>
+              t("common:table.displaying", { count, total })
+            }
+            noItemsLabel={t("common:table.noItems")}
           />
         )}
       </div>

@@ -23,6 +23,10 @@ import type {
 } from "@/types/userTypes";
 import { useQuery } from "@tanstack/react-query";
 
+const toApiLang = (locale: Locales): string => {
+  return locale;
+};
+
 export const fetchMiscApi = async () => {
   const url = "/misc/api";
 
@@ -148,8 +152,9 @@ const fetchMiscSearch = (
       query,
       category,
       ...(category &&
-        localeCategories.includes(category) && {
-          lng: locale,
+        localeCategories.includes(category) &&
+        locale && {
+          lng: toApiLang(locale),
         }),
     },
   };

@@ -6,6 +6,7 @@ import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import ReactEcharts from "echarts-for-react";
 import { AnalyticsGraph } from "@/components/analytics/AnalyticsGraph";
 import { useAdaPrice } from "@/hooks/graphs/useAdaPrice";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface AdaPriceGraphProps {
   graphRates: BasicRate[];
@@ -13,6 +14,7 @@ interface AdaPriceGraphProps {
 
 export const AdaPriceGraph: FC<AdaPriceGraphProps> = memo(
   function AdaPriceGraph({ graphRates }) {
+    const { t } = useAppTranslation("common");
     const {
       json,
       option,
@@ -34,7 +36,7 @@ export const AdaPriceGraph: FC<AdaPriceGraphProps> = memo(
 
     return (
       <AnalyticsGraph
-        title='ADA/BTC Price'
+        title={t("adaPrice.adaBtcPrice")}
         exportButton
         graphSortData={{
           query: fakeQuery as any,

@@ -66,8 +66,10 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { format } from "date-fns";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const PoolAwardsPage: FC = () => {
+  const { t } = useAppTranslation("common");
   const { page } = useSearch({ from: "/pool-awards/" });
 
   const poolAwardsQuery = useFetchGlobalPoolAwards(20, (page ?? 1) * 20 - 20);
@@ -262,6 +264,7 @@ export const PoolAwardsPage: FC = () => {
                   search: { page: (page ?? 1) - 1 } as any,
                 })
               }
+              ariaLabel={t("sdk:pagination.previousPage")}
             />
           </PaginationItem>
           <PaginationItem>
@@ -274,7 +277,7 @@ export const PoolAwardsPage: FC = () => {
           </PaginationItem>
           {(page ?? 1) > 2 && (
             <PaginationItem>
-              <PaginationEllipsis />
+              <PaginationEllipsis srLabel={t("sdk:pagination.morePages")} />
             </PaginationItem>
           )}
           {(page ?? 1) > 1 && (page ?? 1) < totalPages && (
@@ -294,7 +297,7 @@ export const PoolAwardsPage: FC = () => {
           )}
           {(page ?? 1) < totalPages - 1 && (
             <PaginationItem>
-              <PaginationEllipsis />
+              <PaginationEllipsis srLabel={t("sdk:pagination.morePages")} />
             </PaginationItem>
           )}
           {totalPages > 1 && (
@@ -321,6 +324,7 @@ export const PoolAwardsPage: FC = () => {
                   } as any,
                 })
               }
+              ariaLabel={t("sdk:pagination.nextPage")}
             />
           </PaginationItem>
         </PaginationContent>

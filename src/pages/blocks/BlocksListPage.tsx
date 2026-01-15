@@ -15,8 +15,10 @@ import { PageBase } from "@/components/global/pages/PageBase";
 import { X } from "lucide-react";
 import type { FilterKey } from "@/hooks/tables/useDrepList";
 import SortBy from "@/components/ui/sortBy";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const BlocksListPage = () => {
+  const { t } = useAppTranslation(["pages", "common"]);
   const { page, order, ...rest } = useSearch({ from: "/block/" });
 
   const {
@@ -52,8 +54,8 @@ const BlocksListPage = () => {
   return (
     <PageBase
       metadataTitle='blockList'
-      title='Blocks'
-      breadcrumbItems={[{ label: "Blocks" }]}
+      title={t("blocks.title")}
+      breadcrumbItems={[{ label: t("blocks.title") }]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         {!totalItems ? (
@@ -62,7 +64,8 @@ const BlocksListPage = () => {
           </p>
         ) : (
           <h3 className='pb-1.5'>
-            Total of {formatNumber(totalItems ?? 0)} blocks
+            {t("common:phrases.totalOf")} {formatNumber(totalItems ?? 0)}{" "}
+            {t("blocks.totalOfSuffix")}
           </h3>
         )}
         <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
@@ -79,9 +82,10 @@ const BlocksListPage = () => {
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("common:table.rows")}
                 columnsOptions={blocksListTableOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(
@@ -96,7 +100,7 @@ const BlocksListPage = () => {
 
           <div className='flex gap-1'>
             <TableSearchInput
-              placeholder='Search your results...'
+              placeholder={t("blocks.searchPlaceholder")}
               value={tableSearch}
               onchange={value => {
                 if (
@@ -115,29 +119,29 @@ const BlocksListPage = () => {
               prefixes={[
                 {
                   key: "pool_id",
-                  name: "Pool ID",
+                  name: t("blocks.search.poolId"),
                   show:
                     tableSearch.startsWith("pool1") ||
                     "pool1".startsWith(tableSearch),
                 },
                 {
                   key: "epoch_no",
-                  name: "Epoch",
+                  name: t("blocks.search.epoch"),
                   show: isTextNumeric(tableSearch),
                 },
                 {
                   key: "hash",
-                  name: "Hash",
+                  name: t("blocks.search.hash"),
                   show: tableSearch.length < 1 || isHex(tableSearch),
                 },
                 {
                   key: "slot_no",
-                  name: "Slot",
+                  name: t("blocks.search.slot"),
                   show: isTextNumeric(tableSearch),
                 },
                 {
                   key: "block_no",
-                  name: "Height",
+                  name: t("blocks.search.height"),
                   show: isTextNumeric(tableSearch),
                 },
               ]}
@@ -150,9 +154,10 @@ const BlocksListPage = () => {
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("common:table.rows")}
                 columnsOptions={blocksListTableOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(
@@ -213,6 +218,10 @@ const BlocksListPage = () => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </section>
     </PageBase>

@@ -15,8 +15,10 @@ import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { getRouteApi } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { AssetListPage } from "../assets/AssetListPage";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const PolicyDetailPage: FC = () => {
+  const { t } = useAppTranslation();
   const route = getRouteApi("/policy/$policyId");
   const { policyId } = route.useParams();
 
@@ -32,7 +34,7 @@ export const PolicyDetailPage: FC = () => {
   const tabs = [
     {
       key: "assets",
-      label: "Assets",
+      label: t("tabs.policy.assets"),
       content:
         type === "token" ? (
           <AssetListPage policyId={policyId} showHeader={false} />
@@ -43,25 +45,25 @@ export const PolicyDetailPage: FC = () => {
     },
     {
       key: "market_activity",
-      label: "Market Activity",
+      label: t("tabs.policy.marketActivity"),
       content: <>TBD</>,
       visible: false,
     },
     {
       key: "owners",
-      label: "Owners",
+      label: t("tabs.policy.owners"),
       content: <PolicyOwnersTab policyId={policyId} />,
       visible: true,
     },
     {
       key: "mint",
-      label: "Mint",
+      label: t("tabs.policy.mint"),
       content: <AssetMintTab policyId={policyId} />,
       visible: true,
     },
     {
       key: "timelock",
-      label: "Timelock",
+      label: t("tabs.policy.timelock"),
       content: <AssetTimelockTab json={policyScript?.json} />,
       visible: timelock,
     },
@@ -69,7 +71,7 @@ export const PolicyDetailPage: FC = () => {
       ? [
           {
             key: "analytics",
-            label: "Analytics",
+            label: t("tabs.policy.analytics"),
             content: <PolicyAnalyticsTab policyId={policyId} />,
             visible: true,
           },
@@ -77,7 +79,7 @@ export const PolicyDetailPage: FC = () => {
       : []),
     {
       key: "tx",
-      label: "Transactions",
+      label: t("tabs.policy.transactions"),
       content: <TxListPage policyId={policyId} />,
       visible: true,
     },
@@ -92,12 +94,12 @@ export const PolicyDetailPage: FC = () => {
       }}
       title={
         <div className='flex items-center gap-1/2'>
-          {collectionName ? collectionName : "Policy ID detail"}
+          {collectionName ? collectionName : t("pages:policyDetail.title")}
         </div>
       }
       breadcrumbItems={[
         {
-          label: "Assets",
+          label: t("pages:breadcrumbs.assets"),
           link: "/asset",
         },
         {
@@ -107,7 +109,7 @@ export const PolicyDetailPage: FC = () => {
       ]}
       subTitle={
         <HeaderBannerSubtitle
-          title='Policy ID'
+          title={t("labels.policyId")}
           hash={policyId}
           hashString={formatString(policyId, "long")}
         />
