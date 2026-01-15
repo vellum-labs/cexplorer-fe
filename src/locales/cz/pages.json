@@ -528,7 +528,8 @@
       "table": {
         "index": "#",
         "retiredInEpoch": "Zrušeno v epoše",
-        "retiringInEpoch": "Zruší se v epoše"
+        "retiringInEpoch": "Zruší se v epoše",
+        "longevity": "Délka života"
       }
     },
     "table": {

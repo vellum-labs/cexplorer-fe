@@ -47,11 +47,11 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
 
   const getStatusLabel = (status: GovStatus): string => {
     const statusLabels: Record<GovStatus, string> = {
-      ACTIVE: t("governance.actions.statusActive"),
-      ENACTED: t("governance.actions.statusEnacted"),
-      RATIFIED: t("governance.actions.statusRatified"),
-      DROPPED: t("governance.actions.statusDropped"),
-      EXPIRED: t("governance.actions.statusExpired"),
+      ACTIVE: t("common:governance.actions.statusActive"),
+      ENACTED: t("common:governance.actions.statusEnacted"),
+      RATIFIED: t("common:governance.actions.statusRatified"),
+      DROPPED: t("common:governance.actions.statusDropped"),
+      EXPIRED: t("common:governance.actions.statusExpired"),
     };
     return statusLabels[status];
   };
@@ -182,9 +182,9 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
           return `
             <div style="padding: 8px; border: 1px solid ${borderColor}; border-radius: 4px; background: ${bgColor};">
               <div style="font-weight: bold; margin-bottom: 4px;">${itemData.name}</div>
-              <div>${t("governance.timeline.type")} ${itemData.typeLabel}</div>
-              <div>${t("governance.timeline.status")} ${getStatusLabel(itemData.status as GovStatus)}</div>
-              <div>${t("governance.timeline.votingPeriod", { start: itemData.startEpoch, end: itemData.endEpoch })}</div>
+              <div>${t("common:governance.timeline.type")} ${itemData.typeLabel}</div>
+              <div>${t("common:governance.timeline.status")} ${getStatusLabel(itemData.status as GovStatus)}</div>
+              <div>${t("common:governance.timeline.votingPeriod", { start: itemData.startEpoch, end: itemData.endEpoch })}</div>
             </div>
           `;
         },
@@ -243,7 +243,7 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
                 xAxis: currentEpoch - chartData.minEpoch,
                 label: {
                   show: true,
-                  formatter: t("governance.timeline.currentEpoch", {
+                  formatter: t("common:governance.timeline.currentEpoch", {
                     epoch: currentEpoch,
                   }),
                   position: "start",
@@ -295,7 +295,7 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
     return (
       <div className='flex h-[400px] items-center justify-center rounded-m border border-border'>
         <p className='text-grayTextPrimary'>
-          {t("governance.actions.noActionsFound")}
+          {t("common:governance.actions.noActionsFound")}
         </p>
       </div>
     );
@@ -303,7 +303,7 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
 
   return (
     <div className='relative w-full rounded-m border border-border p-3'>
-      <h2 className='mb-2'>{t("governance.timeline.title")}</h2>
+      <h2 className='mb-2'>{t("common:governance.timeline.title")}</h2>
       <div className='thin-scrollbar overflow-x-auto xl:overflow-visible'>
         <div className='relative min-w-[1400px] xl:min-w-0'>
           <GraphWatermark />

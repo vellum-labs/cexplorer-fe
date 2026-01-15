@@ -41,7 +41,7 @@ export const EpochInfo: FC<EpochInfoProps> = ({ number, data }) => {
 
   return (
     <div className='min-h-1/2 flex w-full flex-col gap-2 rounded-m border border-border px-3 py-1.5'>
-      <div className='relative flex h-[24px] w-[115px] items-center justify-end rounded-m border border-border px-[10px]'>
+      <div className='relative flex h-[24px] w-fit items-center justify-end rounded-m border border-border pl-3 pr-2.5'>
         <div className='absolute left-2'>
           <PulseDot />
         </div>

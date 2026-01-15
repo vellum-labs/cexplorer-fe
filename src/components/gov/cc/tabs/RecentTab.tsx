@@ -84,7 +84,7 @@ export const RecentTab: FC = () => {
     },
     {
       key: "proposal",
-      title: t("gov.cc.governanceAction"),
+      title: t("common:gov.cc.governanceAction"),
       widthPx: 150,
       visible: columnsVisibility.proposal,
       render: item => {
@@ -98,7 +98,7 @@ export const RecentTab: FC = () => {
     },
     {
       key: "governance_action_name",
-      title: t("gov.cc.name"),
+      title: t("common:gov.cc.name"),
       widthPx: 220,
       visible: columnsVisibility.governance_action_name ?? true,
       render: item => {
@@ -113,7 +113,7 @@ export const RecentTab: FC = () => {
     },
     {
       key: "cc_member",
-      title: t("gov.cc.ccMember"),
+      title: t("common:gov.cc.ccMember"),
       widthPx: 220,
       visible: columnsVisibility.cc_member,
       render: item => {
@@ -137,7 +137,7 @@ export const RecentTab: FC = () => {
     },
     {
       key: "vote",
-      title: <p ref={anchorRefs?.vote}>{t("gov.cc.vote")}</p>,
+      title: <p ref={anchorRefs?.vote}>{t("common:gov.cc.vote")}</p>,
       widthPx: 130,
       visible: columnsVisibility.vote,
       render: item => {
@@ -188,7 +188,7 @@ export const RecentTab: FC = () => {
     },
     {
       key: "tx",
-      title: t("gov.cc.txHash"),
+      title: t("common:gov.cc.txHash"),
       widthPx: 200,
       visible: columnsVisibility.tx,
       render: item => {
@@ -207,7 +207,7 @@ export const RecentTab: FC = () => {
     },
     {
       key: "time",
-      title: t("gov.cc.time"),
+      title: t("common:gov.cc.time"),
       widthPx: 180,
       visible: columnsVisibility.time,
       render: item => <TimeDateIndicator time={item.tx?.time} />,
@@ -222,7 +222,7 @@ export const RecentTab: FC = () => {
             <LoadingSkeleton height='27px' width='220px' />
           ) : (
             <h3 className='basis-[230px]'>
-              {t("gov.cc.totalVotes", { count: formatNumber(totalItems) })}
+              {t("common:gov.cc.totalVotes", { count: formatNumber(totalItems) })}
             </h3>
           )}
           <div className='flex items-center gap-1 md:hidden'>
@@ -248,7 +248,7 @@ export const RecentTab: FC = () => {
 
         <div className='flex gap-1'>
           <TableSearchInput
-            placeholder={t("gov.cc.searchResults")}
+            placeholder={t("common:gov.cc.searchResults")}
             value={tableSearch}
             onchange={setTableSearch}
             wrapperClassName='md:w-[320px] w-full'
@@ -256,12 +256,12 @@ export const RecentTab: FC = () => {
             prefixes={[
               {
                 key: "committee_voter",
-                name: t("gov.cc.ccMember"),
+                name: t("common:gov.cc.ccMember"),
                 show: tableSearch.length < 1 || isHex(tableSearch),
               },
               {
                 key: "tx_hash",
-                name: t("gov.cc.txHash"),
+                name: t("common:gov.cc.txHash"),
                 show: tableSearch.length < 1 || isHex(tableSearch),
               },
             ]}

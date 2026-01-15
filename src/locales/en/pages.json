@@ -528,7 +528,8 @@
       "table": {
         "index": "#",
         "retiredInEpoch": "Retired in Epoch",
-        "retiringInEpoch": "Retiring in Epoch"
+        "retiringInEpoch": "Retiring in Epoch",
+        "longevity": "Longevity"
       }
     },
     "table": {

@@ -74,7 +74,7 @@ export const GovernanceDetailSposSubtab: FC<
           />
         );
       },
-      title: t("governance.voting.voter"),
+      title: t("common:governance.voting.voter"),
       visible: columnsVisibility.voter,
       widthPx: 120,
     },
@@ -105,7 +105,7 @@ export const GovernanceDetailSposSubtab: FC<
             return;
           }}
         >
-          <span>{t("governance.voting.stake")}</span>
+          <span>{t("common:governance.voting.stake")}</span>
           <SortArrow direction={order === "stake" ? sort : undefined} />
         </div>
       ),
@@ -140,7 +140,7 @@ export const GovernanceDetailSposSubtab: FC<
             return;
           }}
         >
-          <span>{t("governance.voting.delegators")}</span>
+          <span>{t("common:governance.voting.delegators")}</span>
           <SortArrow
             direction={order === "represented_by" ? sort : undefined}
           />
@@ -162,7 +162,7 @@ export const GovernanceDetailSposSubtab: FC<
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : totalItems !== undefined ? (
             <h3 className='basis-[230px] text-nowrap'>
-              {t("governance.voting.totalSPOs", {
+              {t("common:governance.voting.totalSPOs", {
                 count: formatNumber(totalItems),
               })}
             </h3>

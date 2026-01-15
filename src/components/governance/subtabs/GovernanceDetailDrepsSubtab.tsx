@@ -63,7 +63,7 @@ export const GovernanceDetailDrepsSubtab: FC<
         if (!item?.info?.id) return "-";
         return <GovVoterCell role='DRep' info={item.info} />;
       },
-      title: t("governance.voting.voter"),
+      title: t("common:governance.voting.voter"),
       visible: columnsVisibility.voter,
       widthPx: 120,
     },
@@ -94,7 +94,7 @@ export const GovernanceDetailDrepsSubtab: FC<
             return;
           }}
         >
-          <span>{t("governance.voting.stake")}</span>
+          <span>{t("common:governance.voting.stake")}</span>
           <SortArrow direction={order === "stake" ? sort : undefined} />
         </div>
       ),
@@ -129,7 +129,7 @@ export const GovernanceDetailDrepsSubtab: FC<
             return;
           }}
         >
-          <span>{t("governance.voting.delegators")}</span>
+          <span>{t("common:governance.voting.delegators")}</span>
           <SortArrow
             direction={order === "represented_by" ? sort : undefined}
           />
@@ -151,7 +151,7 @@ export const GovernanceDetailDrepsSubtab: FC<
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : totalItems !== undefined ? (
             <h3 className='basis-[230px] text-nowrap'>
-              {t("governance.voting.totalDReps", {
+              {t("common:governance.voting.totalDReps", {
                 count: formatNumber(totalItems),
               })}
             </h3>

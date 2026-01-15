@@ -58,13 +58,13 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
   const navigate = useNavigate();
 
   const typeLabels: Record<string, string> = {
-    NewCommittee: t("governance.actions.newCommittee"),
-    NewConstitution: t("governance.actions.newConstitution"),
-    HardForkInitiation: t("governance.actions.hardforkInitiation"),
-    ParameterChange: t("governance.actions.parameterChange"),
-    TreasuryWithdrawals: t("governance.actions.treasuryWithdrawals"),
-    InfoAction: t("governance.actions.infoAction"),
-    NoConfidence: t("governance.actions.noConfidenceMotion"),
+    NewCommittee: t("common:governance.actions.newCommittee"),
+    NewConstitution: t("common:governance.actions.newConstitution"),
+    HardForkInitiation: t("common:governance.actions.hardforkInitiation"),
+    ParameterChange: t("common:governance.actions.parameterChange"),
+    TreasuryWithdrawals: t("common:governance.actions.treasuryWithdrawals"),
+    InfoAction: t("common:governance.actions.infoAction"),
+    NoConfidence: t("common:governance.actions.noConfidenceMotion"),
   };
 
   const {
@@ -117,37 +117,37 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
     ? [
         {
           key: "Approved",
-          value: t("governance.actions.statusApproved"),
+          value: t("common:governance.actions.statusApproved"),
         },
         {
           key: "Enacted",
-          value: t("governance.actions.statusEnacted"),
+          value: t("common:governance.actions.statusEnacted"),
         },
         {
           key: "Ratified",
-          value: t("governance.actions.statusRatified"),
+          value: t("common:governance.actions.statusRatified"),
         },
       ]
     : [
         {
           key: "All",
-          value: t("governance.actions.statusAll"),
+          value: t("common:governance.actions.statusAll"),
         },
         {
           key: "Active",
-          value: t("governance.actions.statusActive"),
+          value: t("common:governance.actions.statusActive"),
         },
         {
           key: "Enacted",
-          value: t("governance.actions.statusEnacted"),
+          value: t("common:governance.actions.statusEnacted"),
         },
         {
           key: "Ratified",
-          value: t("governance.actions.statusRatified"),
+          value: t("common:governance.actions.statusRatified"),
         },
         {
           key: "Expired",
-          value: t("governance.actions.statusExpiredDropped"),
+          value: t("common:governance.actions.statusExpiredDropped"),
         },
       ];
 
@@ -195,7 +195,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
             {epoch && (
               <div className='flex items-center gap-1/2'>
                 <span className='text-text-xs text-grayTextPrimary'>
-                  {t("governance.actions.epochDash")}{" "}
+                  {t("common:governance.actions.epochDash")}{" "}
                 </span>
                 <div className='text-text-xs'>
                   <EpochCell no={epoch} justify='start' />
@@ -212,7 +212,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
 
         return item.tx.time;
       },
-      title: t("governance.actions.start"),
+      title: t("common:governance.actions.start"),
       visible: columnsVisibility.start,
       widthPx: 60,
     },
@@ -225,7 +225,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
 
         return <ActionTypes title={item?.type as ActionTypes} />;
       },
-      title: <p ref={anchorRefs?.type}>{t("governance.actions.type")}</p>,
+      title: <p ref={anchorRefs?.type}>{t("common:governance.actions.type")}</p>,
       filter: {
         anchorRef: anchorRefs?.type,
         width: "200px",
@@ -244,27 +244,27 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
             {[
               {
                 value: "NewCommittee",
-                label: t("governance.actions.newCommittee"),
+                label: t("common:governance.actions.newCommittee"),
               },
               {
                 value: "NewConstitution",
-                label: t("governance.actions.newConstitution"),
+                label: t("common:governance.actions.newConstitution"),
               },
               {
                 value: "HardForkInitiation",
-                label: t("governance.actions.hardforkInitiation"),
+                label: t("common:governance.actions.hardforkInitiation"),
               },
               {
                 value: "ParameterChange",
-                label: t("governance.actions.parameterChange"),
+                label: t("common:governance.actions.parameterChange"),
               },
               {
                 value: "TreasuryWithdrawals",
-                label: t("governance.actions.treasuryWithdrawals"),
+                label: t("common:governance.actions.treasuryWithdrawals"),
               },
               {
                 value: "InfoAction",
-                label: t("governance.actions.infoAction"),
+                label: t("common:governance.actions.infoAction"),
               },
             ].map(({ value, label }) => (
               <label className='flex items-center gap-1' key={value}>
@@ -330,7 +330,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
 
         return item?.ident?.bech;
       },
-      title: t("governance.actions.name"),
+      title: t("common:governance.actions.name"),
       visible: columnsVisibility.gov_action_name,
       widthPx: 220,
     },
@@ -351,7 +351,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
       },
       title: (
         <p className='w-full text-right'>
-          {t("governance.actions.durationEpochs")}
+          {t("common:governance.actions.durationEpochs")}
         </p>
       ),
       visible: columnsVisibility.duration,
@@ -376,7 +376,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
             {item?.expired_epoch && (
               <div className='flex items-center gap-1/2'>
                 <span className='text-text-xs text-grayTextPrimary'>
-                  {t("governance.actions.epochDash")}{" "}
+                  {t("common:governance.actions.epochDash")}{" "}
                 </span>
                 <div className='text-text-xs'>
                   <EpochCell no={item?.expired_epoch} justify='start' />
@@ -393,7 +393,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
 
         return item.expired_epoch;
       },
-      title: t("governance.actions.expiryEpoch"),
+      title: t("common:governance.actions.expiryEpoch"),
       visible: columnsVisibility.end,
       widthPx: 60,
     },
@@ -412,7 +412,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
           }}
         />
       ),
-      title: t("governance.actions.status"),
+      title: t("common:governance.actions.status"),
       visible: columnsVisibility.status,
       widthPx: 55,
     },
@@ -421,7 +421,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
       render: item => {
         return <GovernanceVotingProgress governanceAction={item as any} />;
       },
-      title: t("governance.actions.progress"),
+      title: t("common:governance.actions.progress"),
       visible: columnsVisibility.progress,
       widthPx: 75,
     },
@@ -444,7 +444,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
           </Link>
         );
       },
-      title: <p className='w-full text-right'>{t("governance.actions.tx")}</p>,
+      title: <p className='w-full text-right'>{t("common:governance.actions.tx")}</p>,
       visible: columnsVisibility.tx,
       widthPx: 40,
     },
@@ -459,7 +459,7 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
               selectItems={selectItems}
               selectedItem={selectedItem}
               setSelectedItem={setSelectedItem as any}
-              labelName={t("governance.actions.statusLabel")}
+              labelName={t("common:governance.actions.statusLabel")}
             />
             <div className='flex items-center gap-1 md:hidden'>
               <ExportButton columns={columns} items={items} />
@@ -488,11 +488,11 @@ export const GovernanceActionsTab: FC<GovernanceActionsTabProps> = ({
           selectedItem={selectedItem}
           setSelectedItem={setSelectedItem as any}
           className='hidden w-fit md:flex'
-          labelName={t("governance.actions.statusLabel")}
+          labelName={t("common:governance.actions.statusLabel")}
         />
         <div className='flex gap-1'>
           <TableSearchInput
-            placeholder={t("governance.voting.searchPlaceholder")}
+            placeholder={t("common:governance.voting.searchPlaceholder")}
             value={tableSearch}
             onchange={setTableSearch}
             wrapperClassName='md:w-[320px] w-full '

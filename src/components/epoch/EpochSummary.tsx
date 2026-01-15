@@ -123,7 +123,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
       title={t("epochs.summary.title")}
       subTitle={
         stats.epoch_no === currentEpoch && (
-          <div className='relative flex h-[24px] w-[115px] items-center justify-end rounded-m border border-border px-[10px]'>
+          <div className='relative flex h-[24px] w-fit items-center justify-end rounded-m border border-border pl-3 pr-2.5'>
             <div className='absolute left-2'>
               <PulseDot />
             </div>

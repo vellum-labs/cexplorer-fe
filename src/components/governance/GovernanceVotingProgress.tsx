@@ -114,7 +114,7 @@ export const GovernanceVotingProgress: FC<GovernanceVotingProgressProps> = ({
   if (progressBars.length === 0) {
     return (
       <div className='flex h-full items-center justify-center text-text-xs text-grayTextSecondary'>
-        {t("governance.voting.noVotingData")}
+        {t("common:governance.voting.noVotingData")}
       </div>
     );
   }
