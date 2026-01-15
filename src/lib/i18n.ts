@@ -36,15 +36,13 @@ const resources = {
 
 const getInitialLanguage = (): string => {
   if (typeof window !== "undefined") {
-    try {
-      const stored = localStorage.getItem("locale-store");
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (parsed.state?.locale) {
-          return parsed.state.locale;
-        }
+    const stored = localStorage.getItem("locale-store");
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      if (parsed.state?.locale) {
+        return parsed.state.locale;
       }
-    } catch {}
+    }
   }
   return "en";
 };
