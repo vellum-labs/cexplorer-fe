@@ -76,7 +76,7 @@ export const StakingCalculatorPage: FC = () => {
 
   const miscBasicQuery = useFetchMiscBasic();
   const { data: basicData } = miscBasicQuery;
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const poolData = poolQuery.data?.data;
 

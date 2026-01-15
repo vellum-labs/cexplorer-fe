@@ -113,7 +113,7 @@ export const PoolRegistrationsPage = () => {
       key: "fee",
       render: item => (
         <div className='flex justify-end gap-1/2'>
-          <span>{item.data.margin * 100}%</span> +{" "}
+          <span>{Number((item.data.margin * 100).toFixed(2))}%</span> +{" "}
           <AdaWithTooltip data={item.data.fixed_cost} />
         </div>
       ),

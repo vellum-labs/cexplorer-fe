@@ -38,7 +38,7 @@ const PoolBlocksTable = ({ poolId }: Props) => {
   const [totalItems, setTotalItems] = useState(0);
 
   const { data: basicData } = useFetchMiscBasic();
-  const miscData = useMiscConst(basicData?.data.version.const);
+  const miscData = useMiscConst(basicData?.data?.version?.const);
 
   const poolBlocksQuery = useFetchBlocksList(
     rows,
@@ -64,7 +64,7 @@ const PoolBlocksTable = ({ poolId }: Props) => {
       },
       title: t("common:labels.date"),
       visible: columnsVisibility.date,
-      widthPx: 95,
+      widthPx: 65,
     },
     {
       key: "block_no",

@@ -49,7 +49,7 @@ export const ConstituionalCommitteeDetailPage: FC = () => {
   const miscBasicQuery = useFetchMiscBasic();
 
   const { data: basicData } = miscBasicQuery;
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const currentEpoch = miscConst?.epoch?.no ?? 0;
 
   const committeeDetailResponse: CommitteeDetailResponse | undefined =

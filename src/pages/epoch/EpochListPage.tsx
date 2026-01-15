@@ -26,7 +26,7 @@ const EpochListPage: FC = () => {
   const filteredDataItems = (data?.data || []).filter(e => e);
 
   const { data: basicData } = useFetchMiscBasic();
-  const constData = useMiscConst(basicData?.data.version.const);
+  const constData = useMiscConst(basicData?.data?.version?.const);
   const rates = useMiscRate(basicData?.data.version.rate);
 
   const constDataBlockSize = constData?.epoch_stat?.epoch?.block_size ?? 0;

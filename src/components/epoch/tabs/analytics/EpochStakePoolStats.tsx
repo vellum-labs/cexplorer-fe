@@ -25,7 +25,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
 }) => {
   const { t } = useAppTranslation("pages");
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const statsRows = [
     {

@@ -23,7 +23,7 @@ export const NetworkHealthTab: FC = () => {
     genesisParams[0].shelley[0].activeSlotsCoeff *
     genesisParams[0].shelley[0].epochLength;
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const previousEpoch = (epochQuery?.data?.data ?? [])[1];
 

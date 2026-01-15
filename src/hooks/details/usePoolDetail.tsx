@@ -46,7 +46,7 @@ export const usePoolDetail = ({
   const { t } = useAppTranslation("pages");
   const data = query.data?.data;
   const { data: basicData } = useFetchMiscBasic();
-  const miscConstFallback = useMiscConst(basicData?.data.version.const);
+  const miscConstFallback = useMiscConst(basicData?.data?.version?.const);
   const miscConst = miscConstProp ?? miscConstFallback;
   const epochElapsed = useElapsedEpochNumber(miscConst);
 

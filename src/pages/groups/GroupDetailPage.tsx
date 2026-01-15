@@ -73,7 +73,7 @@ export const GroupDetailPage = () => {
     columnsOrder: drepColumnsOrder,
   } = useDrepListTableStore()();
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const query = useFetchGroupDetail(url);
   const data = query.data?.data.data[0];
   const name = data?.name;

@@ -97,7 +97,7 @@ export const useBlockList = ({
   const [totalItems, setTotalItems] = useState(0);
 
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const miscConstDaily = miscConst?.epoch_stat?.daily;
 
   const getSelectedItem = (newOrder?: typeof order) => {

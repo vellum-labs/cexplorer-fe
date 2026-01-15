@@ -20,7 +20,7 @@ export const AccountWalletActivityTab: FC<AccountWalletActivityTabProps> = ({
 }) => {
   const { t } = useAppTranslation("common");
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const [data, setData] = useState<EpochAnalyticsResponseData[]>();
   const [selectedItem, setSelectedItem] = useState<GraphTimePeriod>(
     GraphTimePeriod.ThirtyDays,

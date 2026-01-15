@@ -198,7 +198,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
   );
 
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const { startTime } = calculateEpochTimeByNumber(
     query?.data?.data?.expiration ?? 0,

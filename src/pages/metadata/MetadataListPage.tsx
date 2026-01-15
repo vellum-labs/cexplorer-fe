@@ -76,7 +76,7 @@ export const MetadataListPage: FC = () => {
   const items = metadataQuery.data?.pages.flatMap(page => page.data.data);
 
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const columns: TableColumns<MetadataTxListItem> = [
     {

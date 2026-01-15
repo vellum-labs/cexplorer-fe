@@ -6,6 +6,7 @@ import { useMiscConst } from "@/hooks/useMiscConst";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 import ReactEcharts from "echarts-for-react";
+import type { ECharts } from "echarts";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { format } from "date-fns";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
@@ -59,7 +60,7 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
     [t],
   );
 
-  const chartRef = useRef(null);
+  const chartRef = useRef<ECharts | null>(null);
 
   const option = useMemo(
     () => ({

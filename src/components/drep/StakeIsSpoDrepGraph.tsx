@@ -21,7 +21,7 @@ export const StakeIsSpoDrepGraph: FC = () => {
   const data = query.data?.data ?? [];
 
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const { splitLineColor, textColor, bgColor, inactivePageIconColor } =
     useGraphColors();

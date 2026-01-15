@@ -25,7 +25,7 @@ export const GovernancePage: FC = () => {
 
   const { data: basicData } = miscBasicQuery;
 
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const { data: drepStat } = drepStatQuery;
 

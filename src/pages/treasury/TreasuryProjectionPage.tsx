@@ -29,7 +29,7 @@ const DEFAULT_ANNUAL_WITHDRAWAL = 320_000_000;
 export const TreasuryProjectionPage = () => {
   const { t } = useAppTranslation();
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const currentEpoch = miscConst?.epoch?.no ?? 0;
 
   const { data: epochParam, isLoading: isLoadingEpoch } =

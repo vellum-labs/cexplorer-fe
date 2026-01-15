@@ -40,7 +40,7 @@ export const VoteDetailCard: FC<VoteDetailCardProps> = ({
 }) => {
   const { t } = useAppTranslation();
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
   const { theme } = useThemeStore();
 

@@ -17,7 +17,7 @@ import { useAppTranslation } from "@/hooks/useAppTranslation";
 export const HomepageOverview: FC = () => {
   const { t } = useAppTranslation("common");
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const statCards = [
     {

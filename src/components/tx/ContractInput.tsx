@@ -41,7 +41,7 @@ export const ContractInput: FC<ContractInputProps> = ({
   const [prettyMode, setPrettyMode] = useState(false);
 
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const handleConvertUplc = () => {
     try {

@@ -27,7 +27,7 @@ export const ScriptDetailStatsTab = ({
   const { formatLovelace } = useADADisplay();
   const { bgColor, lineColor, splitLineColor, textColor } = useGraphColors();
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const legendLabels = {
     interactions: t("script.stats.graph.interactions"),

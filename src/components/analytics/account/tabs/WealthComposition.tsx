@@ -31,7 +31,7 @@ interface WealthCompositionItem {
 export const WealthComposition = () => {
   const { t } = useAppTranslation("common");
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const circulatingSupply = miscConst?.circulating_supply ?? 1;
   const query = useFetchWealthComposition();
   const { width } = useWindowDimensions();

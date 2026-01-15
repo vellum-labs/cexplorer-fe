@@ -64,7 +64,7 @@ export const useTxList = ({
     useTxListTableStore(storeKey)();
 
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const [totalItems, setTotalItems] = useState(0);
 

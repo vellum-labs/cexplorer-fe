@@ -26,7 +26,7 @@ export const GroupsListPage = () => {
   >(undefined);
   const query = useFetchGroupsList();
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const {
     anchorRefs,

@@ -291,7 +291,7 @@ const AdaPotsChart = ({ data }: { data: AdaPot[] | undefined }) => {
   const fees = data?.map(item => item.fees);
 
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const chartLabels = {
     treasury: t("pots.chart.treasury"),

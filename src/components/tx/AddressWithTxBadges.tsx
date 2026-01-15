@@ -35,7 +35,7 @@ export const AddressWithTxBadges = ({
   const { hoveredHash, setHoveredHash } = useHashHoverStore();
 
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const isAddressHovered =
     hoveredHash === utxo.payment_addr_bech32 && !!utxo.payment_addr_bech32;
