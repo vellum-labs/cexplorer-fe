@@ -141,7 +141,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
               <SelectValue
                 placeholder={
                   <div className='flex w-full items-center justify-between gap-1/2 uppercase'>
-                    <span>{locales[locale].value}</span>
+                    <span>{locales[locale].displayValue}</span>
                     <img
                       width={15}
                       height={15}
@@ -156,7 +156,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
               {Object.entries(locales).map(([key, value]) => (
                 <SelectItem key={key} value={key}>
                   <div className='flex w-full items-center justify-between gap-1/2 uppercase'>
-                    <span>{value.value}</span>
+                    <span>{value.displayValue}</span>
                     <img width={15} height={15} alt='flag' src={value.image} />
                   </div>
                 </SelectItem>

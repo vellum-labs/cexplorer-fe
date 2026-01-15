@@ -24,7 +24,6 @@ import type {
 import { useQuery } from "@tanstack/react-query";
 
 const toApiLang = (locale: Locales): string => {
-  if (locale === "cz") return "cs";
   return locale;
 };
 

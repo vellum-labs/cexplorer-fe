@@ -9,7 +9,6 @@ import type { Locales } from "@/types/storeTypes";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
 const toApiLang = (locale: Locales): string => {
-  if (locale === "cz") return "cs";
   return locale;
 };
 

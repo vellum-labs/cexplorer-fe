@@ -8,12 +8,12 @@ import enErrors from "@/locales/en/errors.json";
 import enSdk from "@/locales/en/sdk.json";
 import enShared from "@/locales/en/shared.json";
 
-import czCommon from "@/locales/cz/common.json";
-import czNavigation from "@/locales/cz/navigation.json";
-import czPages from "@/locales/cz/pages.json";
-import czErrors from "@/locales/cz/errors.json";
-import czSdk from "@/locales/cz/sdk.json";
-import czShared from "@/locales/cz/shared.json";
+import csCommon from "@/locales/cs/common.json";
+import csNavigation from "@/locales/cs/navigation.json";
+import csPages from "@/locales/cs/pages.json";
+import csErrors from "@/locales/cs/errors.json";
+import csSdk from "@/locales/cs/sdk.json";
+import csShared from "@/locales/cs/shared.json";
 
 const resources = {
   en: {
@@ -24,13 +24,13 @@ const resources = {
     sdk: enSdk,
     shared: enShared,
   },
-  cz: {
-    common: czCommon,
-    navigation: czNavigation,
-    pages: czPages,
-    errors: czErrors,
-    sdk: czSdk,
-    shared: czShared,
+  cs: {
+    common: csCommon,
+    navigation: csNavigation,
+    pages: csPages,
+    errors: csErrors,
+    sdk: csSdk,
+    shared: csShared,
   },
 };
 

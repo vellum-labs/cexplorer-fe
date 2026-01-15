@@ -1,14 +1,16 @@
 import EnFlag from "../resources/images/flags/en.png";
-import CsFlag from "../resources/images/flags/cz.png";
+import CsFlag from "../resources/images/flags/cs.png";
 
 export const locales = {
   en: {
     value: "en",
+    displayValue: "EN",
     label: "English",
     image: EnFlag,
   },
-  cz: {
-    value: "cz",
+  cs: {
+    value: "cs",
+    displayValue: "CZ",
     label: "Čeština",
     image: CsFlag,
   },
