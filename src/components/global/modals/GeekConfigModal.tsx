@@ -66,7 +66,7 @@ export const GeekConfigModal = () => {
         <div className='flex flex-col gap-4'>
           <div className='flex items-start justify-between gap-4'>
             <div className='flex-1'>
-              <p className='font-semibold text-primary'>
+              <p className='font-semibold'>
                 {t("global.geekConfig.displayHandles")}
               </p>
               <p className='text-text-sm text-grayTextPrimary'>
@@ -81,7 +81,7 @@ export const GeekConfigModal = () => {
 
           <div className='flex items-start justify-between gap-4'>
             <div className='flex-1'>
-              <p className='font-semibold text-primary'>
+              <p className='font-semibold'>
                 {t("global.geekConfig.displayAdaTooltips")}
               </p>
               <p className='text-text-sm text-grayTextPrimary'>
@@ -98,7 +98,7 @@ export const GeekConfigModal = () => {
 
           <div className='flex items-start justify-between gap-4'>
             <div className='flex-1'>
-              <p className='font-semibold text-primary'>
+              <p className='font-semibold'>
                 {t("global.geekConfig.sortUtxos")}
               </p>
               <p className='text-text-sm text-grayTextPrimary'>
