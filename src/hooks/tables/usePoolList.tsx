@@ -756,7 +756,7 @@ export const usePoolList = ({
           </div>
         ),
       visible: columnsVisibility.pledge,
-      widthPx: 55,
+      widthPx: 70,
     },
     {
       key: "pledge_leverage",
