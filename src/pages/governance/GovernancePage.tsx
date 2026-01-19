@@ -15,6 +15,7 @@ import { useMiscConst } from "@/hooks/useMiscConst";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { GovernanceActionsTab } from "@/components/governance/tabs/GovernanceActionsTab";
 import { GovernanceTimelineTab } from "@/components/governance/tabs/GovernanceTimelineTab";
+import { TreasuryWithdrawalsTab } from "@/components/governance/tabs/TreasuryWithdrawalsTab";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 
@@ -150,6 +151,12 @@ export const GovernancePage: FC = () => {
           outcomesOnly
         />
       ),
+      visible: true,
+    },
+    {
+      key: "treasury_withdrawals",
+      label: t("tabs.governance.treasuryWithdrawals"),
+      content: <TreasuryWithdrawalsTab miscConst={miscConst} />,
       visible: true,
     },
     {

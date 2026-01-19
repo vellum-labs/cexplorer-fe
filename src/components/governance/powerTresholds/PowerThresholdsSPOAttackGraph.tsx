@@ -3,6 +3,7 @@ import ReactECharts from "echarts-for-react";
 import type { ThresholdPoolList } from "@/types/governanceTypes";
 import { useNavigate } from "@tanstack/react-router";
 import { useADADisplay } from "@/hooks/useADADisplay";
+import { useGraphColors } from "@/hooks/useGraphColors";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface PowerThresholdsSPOAttackGraphProps {
@@ -14,6 +15,7 @@ export const PowerThresholdsSPOAttackGraph: FC<
   PowerThresholdsSPOAttackGraphProps
 > = ({ liveStake, poolList }) => {
   const { t } = useAppTranslation();
+  const { textColor, bgColor } = useGraphColors();
   const sortedPools = [...poolList.data].sort(
     (a, b) => b.live_stake - a.live_stake,
   );
@@ -47,6 +49,10 @@ export const PowerThresholdsSPOAttackGraph: FC<
   const option = {
     tooltip: {
       trigger: "item",
+      backgroundColor: bgColor,
+      textStyle: {
+        color: textColor,
+      },
       formatter: (params: any) => {
         const percentOfTarget = (
           (params.data.value / targetStake) *

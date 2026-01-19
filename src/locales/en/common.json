@@ -1290,6 +1290,20 @@
       "dropped": "Dropped",
       "expiredDropped": "Expired / Dropped"
     },
+    "treasury": {
+      "nclUtilization": "NCL Utilization",
+      "nclTooltip": "Net Change Limit - the maximum amount of ADA that can be withdrawn from the treasury in this period",
+      "approvedFor": "Approved for",
+      "approvedForEpochs": "Approved for epochs",
+      "totalWithdrawals": "Total {{count}} withdrawals approved",
+      "amount": "Amount",
+      "exceededLimit": "Withdrawals exceed the NCL limit",
+      "remainingBudget": "Remaining budget",
+      "ofNCL": "of NCL",
+      "utilized": "utilized",
+      "hideNCL": "Hide NCL Progress",
+      "showNCL": "Show NCL Progress"
+    },
     "constitution": {
       "title": "Constitution",
       "breadcrumb": "Constitution",
@@ -1484,6 +1498,7 @@
     "governance": {
       "governanceActions": "Governance actions",
       "outcomes": "Outcomes",
+      "treasuryWithdrawals": "Treasury Withdrawals",
       "timeline": "Timeline"
     },
     "address": {
