@@ -67,7 +67,7 @@ export const fetchAddressList = async ({
     },
   };
 
-  return handleFetch<AddressListResponse>(url, undefined, options);
+  return handleFetch<AddressListResponse>(url, offset, options);
 };
 
 export const useFetchAddressList = (
