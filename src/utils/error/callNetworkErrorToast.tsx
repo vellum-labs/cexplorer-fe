@@ -37,7 +37,7 @@ export const callNetworkErrorToast = ({ status, apiUrl, body }: Props) => {
     </div>,
     {
       duration: 10000,
-      id: "fetch-error",
+      id: `fetch-error-${Date.now()}`,
       //   closeButton: true,
     },
   );
