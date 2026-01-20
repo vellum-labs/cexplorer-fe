@@ -210,7 +210,7 @@ export const AdsPage = () => {
             </ul>
             <div className='flex flex-wrap items-center justify-center gap-2'>
               <a
-                href='https://beta.cexplorer.io/api'
+                href='https://cexplorer.io/api'
                 target='_blank'
                 rel='noreferrer noopener'
               >
@@ -221,7 +221,7 @@ export const AdsPage = () => {
                 />
               </a>
               <a
-                href='https://beta.cexplorer.io/pro'
+                href='https://cexplorer.io/pro'
                 target='_blank'
                 rel='noreferrer noopener'
               >
@@ -360,7 +360,7 @@ export const AdsPage = () => {
             </p>
             <div className='flex flex-wrap items-center justify-center gap-2'>
               <a
-                href='https://beta.cexplorer.io/api'
+                href='https://cexplorer.io/api'
                 target='_blank'
                 rel='noreferrer noopener'
               >

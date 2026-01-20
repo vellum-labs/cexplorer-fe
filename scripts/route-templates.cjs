@@ -1,9 +1,9 @@
-const BASE_URL = "https://beta.cexplorer.io";
+const BASE_URL = "https://cexplorer.io";
 
 const defaultTemplate = {
   og_type: "website",
   og_image: "./resources/preview.png",
-  og_site_name: "beta.cexplorer.io",
+  og_site_name: "cexplorer.io",
   og_locale: "en_US",
   twitter_card: "summary_large_image",
   twitter_image: "./resources/preview.png",

@@ -13,7 +13,7 @@ info:
 
     To access the Cexplorer API, you'll need to generate an API key:
 
-    1. Navigate to [https://beta.cexplorer.io/profile?tab=api](https://beta.cexplorer.io/profile?tab=api)
+    1. Navigate to [https://cexplorer.io/profile?tab=api](https://cexplorer.io/profile?tab=api)
     2. Connect your wallet
     3. Click on "New Project" to generate your API key
 
@@ -21,7 +21,7 @@ info:
 
     ### API Tiers
 
-    We offer multiple API tiers starting with a free tier. View all available tiers and their limits at [https://beta.cexplorer.io/api](https://beta.cexplorer.io/api).
+    We offer multiple API tiers starting with a free tier. View all available tiers and their limits at [https://cexplorer.io/api](https://cexplorer.io/api).
 
     For higher limits or custom plans, please reach out to us:
     - Email: [hello@cexplorer.io](mailto:hello@cexplorer.io)
@@ -138,14 +138,16 @@ paths:
       security:
         - ApiKeyAuth: []
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TipResponse'
+                $ref: "#/components/schemas/TipResponse"
               example:
-                license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+                license:
+                  "data/api usage outside of cexplorer.io front-end is not
+                  allowed with currently used / without api-key."
                 code: 200
                 data:
                   date: "2025-12-14 18:53:10.03856+00"
@@ -168,7 +170,8 @@ paths:
                           meta:
                             ticker: "ST3AK"
                             name: "Steak.and.ADA"
-                            description: "Easy ADA staking. Sit back, relax, and delegate."
+                            description:
+                              "Easy ADA staking. Sit back, relax, and delegate."
                             extended:
                               github_handle: "steakandbake"
                               twitter_handle: "steakandbaker"
@@ -183,10 +186,10 @@ paths:
                 tokens: 2
                 ex: 0.1461
                 debug: false
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '500':
-          $ref: '#/components/responses/InternalError'
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /block/list:
     get:
@@ -247,7 +250,7 @@ paths:
           required: false
           schema:
             type: string
-            pattern: '^pool1[a-z0-9]{52}$'
+            pattern: "^pool1[a-z0-9]{52}$"
           example: "pool1enul577he3e0s500lv8z98m6k936uecz2rpckxxmmk8c7k0n2rd"
 
         - name: epoch_no
@@ -265,7 +268,7 @@ paths:
           required: false
           schema:
             type: string
-            pattern: '^[a-f0-9]{64}$'
+            pattern: "^[a-f0-9]{64}$"
           example: "0f56150bc965c1710262aaa21f1b4b609599e58e0dbcf016a675adbe6becfe99"
 
         - name: slot_no
@@ -311,14 +314,16 @@ paths:
           example: "10.0"
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BlockListResponse'
+                $ref: "#/components/schemas/BlockListResponse"
               example:
-                license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+                license:
+                  "data/api usage outside of cexplorer.io front-end is not
+                  allowed with currently used / without api-key."
                 code: 200
                 data:
                   data:
@@ -339,7 +344,8 @@ paths:
                         meta:
                           ticker: "PXLZ"
                           name: "PXLZ Staking Pool"
-                          description: "Home of the DEADPXLZ NFT collectibles project!"
+                          description:
+                            "Home of the DEADPXLZ NFT collectibles project!"
                           extended:
                             github_handle: "DEADPXLZ"
                             twitter_handle: "pxlzNFT"
@@ -367,7 +373,11 @@ paths:
                         meta:
                           ticker: "SECUR"
                           name: "ONE SecureStaking.io"
-                          description: "We always have a 0% pool on offer. Check other SECUR pools if needed on our website or find us on Telegram. A team of cybersecurity specialists operate high security community pools in the cloud."
+                          description:
+                            "We always have a 0% pool on offer. Check other
+                            SECUR pools if needed on our website or find us on
+                            Telegram. A team of cybersecurity specialists
+                            operate high security community pools in the cloud."
                           extended:
                             twitter_handle: "securestaking"
                             telegram_handle: "joinchat/U0huH9TJn1PG705Y"
@@ -395,7 +405,10 @@ paths:
                         meta:
                           ticker: "COSMC"
                           name: "Cosmic Asset Stake Pool"
-                          description: "We are early adopters of blockchain technology based out of the Pacific NorthWest and are excited to push the Cardano Community to new heights!"
+                          description:
+                            "We are early adopters of blockchain technology
+                            based out of the Pacific NorthWest and are excited
+                            to push the Cardano Community to new heights!"
                           extended: null
                           homepage: "https://www.cosmicassetpool.net/"
                       epoch_param:
@@ -408,12 +421,12 @@ paths:
                 tokens: 2
                 ex: 0.0328
                 debug: false
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '500':
-          $ref: '#/components/responses/InternalError'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /block/detail:
     get:
@@ -444,7 +457,7 @@ paths:
           required: false
           schema:
             type: string
-            pattern: '^[a-f0-9]{64}$'
+            pattern: "^[a-f0-9]{64}$"
           example: "61b42421fd6d12c72591c1215e002d8fc40fb839a5cdc97d5e88849ee978d64c"
 
         - name: block_no
@@ -466,14 +479,16 @@ paths:
           example: 174172090
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BlockDetailResponse'
+                $ref: "#/components/schemas/BlockDetailResponse"
               example:
-                license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+                license:
+                  "data/api usage outside of cexplorer.io front-end is not
+                  allowed with currently used / without api-key."
                 code: 200
                 data:
                   block_no: 12776757
@@ -493,7 +508,8 @@ paths:
                     meta:
                       ticker: "ST3AK"
                       name: "Steak.and.ADA"
-                      description: "Easy ADA staking. Sit back, relax, and delegate."
+                      description:
+                        "Easy ADA staking. Sit back, relax, and delegate."
                       extended:
                         github_handle: "steakandbake"
                         twitter_handle: "steakandbaker"
@@ -584,14 +600,14 @@ paths:
                 tokens: 2
                 ex: 0.0308
                 debug: false
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalError'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /epoch/param:
     get:
@@ -625,14 +641,16 @@ paths:
           example: 599
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EpochParamResponse'
+                $ref: "#/components/schemas/EpochParamResponse"
               example:
-                license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+                license:
+                  "data/api usage outside of cexplorer.io front-end is not
+                  allowed with currently used / without api-key."
                 code: 200
                 data:
                   nonce: "c10efc5c682acedfd75d9f8194bcc3894f246654ede732e2278881c91f64d623"
@@ -688,14 +706,14 @@ paths:
                 tokens: 1
                 ex: 0.0124
                 debug: false
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalError'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /epoch/stats:
     get:
@@ -732,14 +750,16 @@ paths:
           example: 599
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EpochStatsResponse'
+                $ref: "#/components/schemas/EpochStatsResponse"
               example:
-                license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+                license:
+                  "data/api usage outside of cexplorer.io front-end is not
+                  allowed with currently used / without api-key."
                 code: 200
                 data:
                   pots:
@@ -854,14 +874,14 @@ paths:
                 tokens: 2
                 ex: 0.0255
                 debug: false
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalError'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /epoch/list:
     get:
@@ -907,14 +927,16 @@ paths:
           example: 0
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EpochListResponse'
+                $ref: "#/components/schemas/EpochListResponse"
               example:
-                license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+                license:
+                  "data/api usage outside of cexplorer.io front-end is not
+                  allowed with currently used / without api-key."
                 code: 200
                 data:
                   data:
@@ -993,12 +1015,12 @@ paths:
                 tokens: 14
                 ex: 0.0322
                 debug: false
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '500':
-          $ref: '#/components/responses/InternalError'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /tx/list:
     get:
@@ -1053,16 +1075,20 @@ paths:
 
         - name: block_hash
           in: query
-          description: Filter by block hash (cannot be combined with other filter parameters)
+          description:
+            Filter by block hash (cannot be combined with other filter
+            parameters)
           required: false
           schema:
             type: string
-            pattern: '^[a-f0-9]{64}$'
+            pattern: "^[a-f0-9]{64}$"
           example: "7edd872f295dd6c109074e0e1d7ae27f9d8ea914dda7dbfb64d2153481e3eebb"
 
         - name: address
           in: query
-          description: Filter by payment address (Bech32) - cannot be combined with other filter parameters
+          description:
+            Filter by payment address (Bech32) - cannot be combined with other
+            filter parameters
           required: false
           schema:
             type: string
@@ -1070,7 +1096,9 @@ paths:
 
         - name: stake
           in: query
-          description: Filter by stake address (Bech32) - cannot be combined with other filter parameters
+          description:
+            Filter by stake address (Bech32) - cannot be combined with other
+            filter parameters
           required: false
           schema:
             type: string
@@ -1078,16 +1106,20 @@ paths:
 
         - name: hash
           in: query
-          description: Specific transaction hash - cannot be combined with other filter parameters
+          description:
+            Specific transaction hash - cannot be combined with other filter
+            parameters
           required: false
           schema:
             type: string
-            pattern: '^[a-f0-9]{64}$'
+            pattern: "^[a-f0-9]{64}$"
           example: "f5ba751eb5e63ea64c34eac595e05d07265446b615d59be4cf89795ad277f1f2"
 
         - name: asset
           in: query
-          description: Filter by asset ID (Bech32) - cannot be combined with other filter parameters
+          description:
+            Filter by asset ID (Bech32) - cannot be combined with other filter
+            parameters
           required: false
           schema:
             type: string
@@ -1095,16 +1127,20 @@ paths:
 
         - name: policy
           in: query
-          description: Filter by policy ID (hex) - cannot be combined with other filter parameters
+          description:
+            Filter by policy ID (hex) - cannot be combined with other filter
+            parameters
           required: false
           schema:
             type: string
-            pattern: '^[a-f0-9]{56}$'
+            pattern: "^[a-f0-9]{56}$"
           example: "0691b2fecca1ac4f53cb6dfb00b7013e561d1f34403b957cbb5af1fa"
 
         - name: script
           in: query
-          description: Filter by script hash - cannot be combined with other filter parameters
+          description:
+            Filter by script hash - cannot be combined with other filter
+            parameters
           required: false
           schema:
             type: string
@@ -1112,7 +1148,9 @@ paths:
 
         - name: has_donation
           in: query
-          description: Filter transactions with treasury donations (set to 1) - cannot be combined with other filter parameters
+          description:
+            Filter transactions with treasury donations (set to 1) - cannot be
+            combined with other filter parameters
           required: false
           schema:
             type: integer
@@ -1120,14 +1158,16 @@ paths:
           example: 1
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TransactionListResponse'
+                $ref: "#/components/schemas/TransactionListResponse"
               example:
-                license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+                license:
+                  "data/api usage outside of cexplorer.io front-end is not
+                  allowed with currently used / without api-key."
                 code: 200
                 data:
                   data:
@@ -1183,12 +1223,12 @@ paths:
                 tokens: 2
                 ex: 0.0229
                 debug: false
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '500':
-          $ref: '#/components/responses/InternalError'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /tx/detail:
     get:
@@ -1221,24 +1261,24 @@ paths:
           required: true
           schema:
             type: string
-            pattern: '^[a-f0-9]{64}$'
+            pattern: "^[a-f0-9]{64}$"
           example: "f5ba751eb5e63ea64c34eac595e05d07265446b615d59be4cf89795ad277f1f2"
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TransactionDetailResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/TransactionDetailResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /tx/filter:
     get:
@@ -1312,18 +1352,18 @@ paths:
           example: 0
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TransactionFilterResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/TransactionFilterResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /pool/list:
     get:
@@ -1362,7 +1402,9 @@ paths:
       parameters:
         - name: limit
           in: query
-          description: Maximum number of pools to return (must be multiples of 10 - 10, 20, 30, etc.)
+          description:
+            Maximum number of pools to return (must be multiples of 10 - 10, 20,
+            30, etc.)
           required: false
           schema:
             type: integer
@@ -1458,14 +1500,16 @@ paths:
             default: desc
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PoolListResponse'
+                $ref: "#/components/schemas/PoolListResponse"
               example:
-                license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+                license:
+                  "data/api usage outside of cexplorer.io front-end is not
+                  allowed with currently used / without api-key."
                 code: 200
                 data:
                   data:
@@ -1474,7 +1518,9 @@ paths:
                       pool_name:
                         ticker: "ADALO"
                         name: "ADALovelacePool"
-                        description: "Your First Choice For Staking | drep1jkdeccjwuun37e64l7zpjwe67xmsxmgpzkuhqtt0qjcrudkvfx2"
+                        description:
+                          "Your First Choice For Staking |
+                          drep1jkdeccjwuun37e64l7zpjwe67xmsxmgpzkuhqtt0qjcrudkvfx2"
                         extended:
                           twitter_handle: "PoolLovelace"
                           telegram_handle: "ADALovelacePool"
@@ -1709,12 +1755,12 @@ paths:
                 tokens: 3
                 ex: 0.1387
                 debug: false
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '500':
-          $ref: '#/components/responses/InternalError'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /pool/detail:
     get:
@@ -1740,11 +1786,12 @@ paths:
       parameters:
         - name: pool_id
           in: query
-          description: Pool ID (Bech32 format) - cannot be combined with hash_raw
+          description:
+            Pool ID (Bech32 format) - cannot be combined with hash_raw
           required: false
           schema:
             type: string
-            pattern: '^pool1[a-z0-9]{52}$'
+            pattern: "^pool1[a-z0-9]{52}$"
           example: "pool1cduc7ut6grhqyavrmm3gzcdf4qfdsjk7vdwcxy9c0r5fyaxh2sq"
 
         - name: hash_raw
@@ -1753,18 +1800,20 @@ paths:
           required: false
           schema:
             type: string
-            pattern: '^[a-f0-9]{56}$'
+            pattern: "^[a-f0-9]{56}$"
           example: "c3798f717a40ee027583dee28161a9a812d84ade635d8310b878e892"
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PoolDetailResponse'
+                $ref: "#/components/schemas/PoolDetailResponse"
               example:
-                license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+                license:
+                  "data/api usage outside of cexplorer.io front-end is not
+                  allowed with currently used / without api-key."
                 code: 200
                 data:
                   pool_id: "pool1cduc7ut6grhqyavrmm3gkcdf4qfdsjk7vdwcxy9c0r5fyaxh2sq"
@@ -1772,7 +1821,10 @@ paths:
                   pool_name:
                     ticker: "POOLS"
                     name: "cexplorer.io"
-                    description: "cexplorer.io is a independent tool for your better staking /decision-making. Still online, updated and ready to help. If you want to support us, stake with us :)"
+                    description:
+                      "cexplorer.io is a independent tool for your better
+                      staking /decision-making. Still online, updated and ready
+                      to help. If you want to support us, stake with us :)"
                     extended:
                       twitter_handle: "cexplorer_io"
                     homepage: "https://cexplorer.io"
@@ -1877,14 +1929,14 @@ paths:
                 tokens: 4
                 ex: 0.0333
                 debug: false
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalError'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /pool/delegator:
     get:
@@ -1932,12 +1984,13 @@ paths:
           required: true
           schema:
             type: string
-            pattern: '^pool1[a-z0-9]{52}$'
+            pattern: "^pool1[a-z0-9]{52}$"
           example: "pool1cduc7ut6grhqyavrmm3gzcdf4qfdsjk7vdwcxy9c0r5fyaxh2sq"
 
         - name: limit
           in: query
-          description: Maximum number of delegators to return (must be multiples of 10)
+          description:
+            Maximum number of delegators to return (must be multiples of 10)
           required: false
           schema:
             type: integer
@@ -1976,14 +2029,16 @@ paths:
           example: "desc"
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PoolDelegatorResponse'
+                $ref: "#/components/schemas/PoolDelegatorResponse"
               example:
-                license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+                license:
+                  "data/api usage outside of cexplorer.io front-end is not
+                  allowed with currently used / without api-key."
                 code: 200
                 data:
                   data:
@@ -1997,7 +2052,11 @@ paths:
                         meta:
                           ticker: "POOLS"
                           name: "cexplorer.io"
-                          description: "cexplorer.io is a independent tool for your better staking /decision-making. Still online, updated and ready to help. If you want to support us, stake with us :)"
+                          description:
+                            "cexplorer.io is a independent tool for your better
+                            staking /decision-making. Still online, updated and
+                            ready to help. If you want to support us, stake with
+                            us :)"
                           extended:
                             twitter_handle: "cexplorer_io"
                           homepage: "https://cexplorer.io"
@@ -2012,7 +2071,13 @@ paths:
                         meta:
                           ticker: "NINJZ"
                           name: "Danketsu"
-                          description: "A multimedia brand providing value to its community through manga-comics, music, video game, and eventually anime. We believe in the Cardano community and love the opportunity to help decentralize. Some $NINJAZ token will also be available to delegators."
+                          description:
+                            "A multimedia brand providing value to its community
+                            through manga-comics, music, video game, and
+                            eventually anime. We believe in the Cardano
+                            community and love the opportunity to help
+                            decentralize. Some $NINJAZ token will also be
+                            available to delegators."
                           extended: null
                           homepage: "https://danketsu.io/"
                         delegation:
@@ -2026,7 +2091,11 @@ paths:
                         meta:
                           ticker: "POOLS"
                           name: "cexplorer.io"
-                          description: "cexplorer.io is a independent tool for your better staking /decision-making. Still online, updated and ready to help. If you want to support us, stake with us :)"
+                          description:
+                            "cexplorer.io is a independent tool for your better
+                            staking /decision-making. Still online, updated and
+                            ready to help. If you want to support us, stake with
+                            us :)"
                           extended:
                             twitter_handle: "cexplorer_io"
                           homepage: "https://cexplorer.io"
@@ -2040,14 +2109,14 @@ paths:
                 tokens: 2
                 ex: 0.0761
                 debug: false
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalError'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /address/list:
     get:
@@ -2080,20 +2149,22 @@ paths:
       parameters:
         - name: view
           in: query
-          description: Stake address (Bech32 format) - cannot be combined with payment_cred
+          description:
+            Stake address (Bech32 format) - cannot be combined with payment_cred
           required: false
           schema:
             type: string
-            pattern: '^stake1[a-z0-9]+$'
+            pattern: "^stake1[a-z0-9]+$"
           example: "stake1uy3qmyamepqzgv8jgzrxak0dzg7fnkvkd98vhlfrs5tys3c3th5cn"
 
         - name: payment_cred
           in: query
-          description: Payment credential (hex format) - cannot be combined with view
+          description:
+            Payment credential (hex format) - cannot be combined with view
           required: false
           schema:
             type: string
-            pattern: '^[a-f0-9]{56}$'
+            pattern: "^[a-f0-9]{56}$"
           example: "d86cef65b72c43d8a04606de74444444709e3b746912c47448f392fb"
 
         - name: order
@@ -2127,14 +2198,16 @@ paths:
           example: 0
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AddressListResponse'
+                $ref: "#/components/schemas/AddressListResponse"
               example:
-                license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+                license:
+                  "data/api usage outside of cexplorer.io front-end is not
+                  allowed with currently used / without api-key."
                 code: 200
                 data:
                   data:
@@ -2159,18 +2232,20 @@ paths:
                 tokens: 4
                 ex: 0.0731
                 debug: false
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '422':
-          description: Unprocessable Entity - Missing required parameter (view or payment_cred)
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "422":
+          description:
+            Unprocessable Entity - Missing required parameter (view or
+            payment_cred)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/Error"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /address/detail:
     get:
@@ -2202,7 +2277,7 @@ paths:
           required: false
           schema:
             type: string
-            pattern: '^addr1[a-z0-9]+$'
+            pattern: "^addr1[a-z0-9]+$"
           example: "addr1qynkc6nur366sy6l26pwrcl6pahkg2pht0pvkdmgxg3f8cnzrzvejwsnm7729ee2y89pyvcp3szdx3tk9qsfkykunrtqkzprnv"
 
         - name: raw
@@ -2211,18 +2286,20 @@ paths:
           required: false
           schema:
             type: string
-            pattern: '^[a-f0-9]+$'
+            pattern: "^[a-f0-9]+$"
           example: "ae447b4025b19d38b643df25c719c26dc2b77a8e4199bbe3d35fc3ed0621e5bb147d0cb7cb2b3ec2770bc15e1d606f2ecf047a9b2e49f494"
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AddressDetailResponse'
+                $ref: "#/components/schemas/AddressDetailResponse"
               example:
-                license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+                license:
+                  "data/api usage outside of cexplorer.io front-end is not
+                  allowed with currently used / without api-key."
                 code: 200
                 data:
                   data:
@@ -2239,7 +2316,10 @@ paths:
                           meta:
                             ticker: "Malu"
                             name: "Maluiin"
-                            description: "A committed stake pool with a plan to bring connectivity and education to remote regions of West Papua"
+                            description:
+                              "A committed stake pool with a plan to bring
+                              connectivity and education to remote regions of
+                              West Papua"
                             extended:
                               github_handle: "Maluiin"
                               twitch_handle: ""
@@ -2260,7 +2340,10 @@ paths:
                           meta:
                             ticker: "Malu"
                             name: "Maluiin"
-                            description: "A committed stake pool with a plan to bring connectivity and education to remote regions of West Papua"
+                            description:
+                              "A committed stake pool with a plan to bring
+                              connectivity and education to remote regions of
+                              West Papua"
                             extended:
                               github_handle: "Maluiin"
                               twitch_handle: ""
@@ -2294,9 +2377,44 @@ paths:
                             url: "https://314pool.com/drep-2025-01-30.jsonld"
                             image_url: "https://www.314pool.com/me.jpg"
                             given_name: "π Lanningham"
-                            objectives: "As a Cardano representative, I will vote on governance proposals in accordance with my values, outlined below (listed from most general principle to least).\n\n1. Integrity\n2. Freedom\n3. Social Good\n4. Technical Soundness\n5. Economic Soundness\n6. Effective Discourse\n7. Transparency\n8. Flexibility\n\nNote that the current accepted governance metadata specification allows only limited space, so you can find a longer explanation of what these values mean to me on [my personal blog](https://www.314pool.com/post/drep)"
-                            motivations: "My motivation to become a DRep is rooted deeply in my objectives and value system seen above. Additionally, I have an active interest in seeing the Cardano ecosystem evolve to it's best form under the guidance of a multi-faceted ecosystem of experts and enthusiasts, and after 4 years deeply embeddded in the ecosystem, I feel it is my obligation to contribute to that.\n\nAs for why I am registering now, rather than earlier, it took several months to distill my beliefs down into a form I was proud to stand behind, and the Plomin hard fork seemed a fitting milestone to commit those beliefs to a tangible form."
-                            qualifications: "I believe I am qualified to represent the subset of Cardano community members who share my values because of my long history of involvement in the community, my technical expertise, my rich history of contributions across multiple projects and open source tools, my effective communication skills, and my passion for the work that I do. As before, you can find a longer and more detailed outline of why these things qualify me as a DRep [at my personal blog](https://www.314pool.com/post/drep)"
+                            objectives:
+                              "As a Cardano representative, I will vote on
+                              governance proposals in accordance with my values,
+                              outlined below (listed from most general principle
+                              to least).\n\n1. Integrity\n2. Freedom\n3. Social
+                              Good\n4. Technical Soundness\n5. Economic
+                              Soundness\n6. Effective Discourse\n7.
+                              Transparency\n8. Flexibility\n\nNote that the
+                              current accepted governance metadata specification
+                              allows only limited space, so you can find a
+                              longer explanation of what these values mean to me
+                              on [my personal
+                              blog](https://www.314pool.com/post/drep)"
+                            motivations:
+                              "My motivation to become a DRep is rooted deeply
+                              in my objectives and value system seen above.
+                              Additionally, I have an active interest in seeing
+                              the Cardano ecosystem evolve to it's best form
+                              under the guidance of a multi-faceted ecosystem of
+                              experts and enthusiasts, and after 4 years deeply
+                              embeddded in the ecosystem, I feel it is my
+                              obligation to contribute to that.\n\nAs for why I
+                              am registering now, rather than earlier, it took
+                              several months to distill my beliefs down into a
+                              form I was proud to stand behind, and the Plomin
+                              hard fork seemed a fitting milestone to commit
+                              those beliefs to a tangible form."
+                            qualifications:
+                              "I believe I am qualified to represent the subset
+                              of Cardano community members who share my values
+                              because of my long history of involvement in the
+                              community, my technical expertise, my rich history
+                              of contributions across multiple projects and open
+                              source tools, my effective communication skills,
+                              and my passion for the work that I do. As before,
+                              you can find a longer and more detailed outline of
+                              why these things qualify me as a DRep [at my
+                              personal blog](https://www.314pool.com/post/drep)"
                             payment_address: "addr1qyyrwcs73wk9cp9e7lxpn86d2n4wxgyduxqxmmj6psmjejkqlavsfewjnswctmce8t97p3ht0nwmeuaq62je86tfx8zq6lh9kr"
                           hash:
                             raw: "a1f697359efb00243c83699d786ec0a55fa9ed8ea919221138ebbeee"
@@ -2319,20 +2437,21 @@ paths:
                 tokens: 10
                 ex: 0.1241
                 debug: false
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          description: Unprocessable Entity - Missing required parameter (view or raw)
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          description:
+            Unprocessable Entity - Missing required parameter (view or raw)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/Error"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /address/utxo:
     get:
@@ -2362,7 +2481,7 @@ paths:
           required: false
           schema:
             type: string
-            pattern: '^addr1[a-z0-9]+$'
+            pattern: "^addr1[a-z0-9]+$"
           example: "addr1q8vxemm9kuky8k9qgcrduazyg3z8p83mw35393r5free97ezpkfmhjzqysc0ysyxdmv76y3un8vev62we07j8pgkfprsafc972"
 
         - name: raw
@@ -2371,18 +2490,20 @@ paths:
           required: false
           schema:
             type: string
-            pattern: '^[a-f0-9]+$'
+            pattern: "^[a-f0-9]+$"
           example: "ae447b4025b19d38b643df25c719c26dc2b77a8e4199bbe3d35fc3ed0621e5bb147d0cb7cb2b3ec2770bc15e1d606f2ecf047a9b2e49f494"
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AddressUtxoResponse'
+                $ref: "#/components/schemas/AddressUtxoResponse"
               example:
-                license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+                license:
+                  "data/api usage outside of cexplorer.io front-end is not
+                  allowed with currently used / without api-key."
                 code: 200
                 data:
                   data:
@@ -2418,20 +2539,21 @@ paths:
                 tokens: 8
                 ex: 0.0674
                 debug: false
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          description: Unprocessable Entity - Missing required parameter (view or raw)
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          description:
+            Unprocessable Entity - Missing required parameter (view or raw)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/Error"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /account/detail:
     get:
@@ -2462,18 +2584,20 @@ paths:
           required: true
           schema:
             type: string
-            pattern: '^stake1[a-z0-9]+$'
+            pattern: "^stake1[a-z0-9]+$"
           example: "stake1uy3qmyamepqzgv8jgzrxak0dzg7fnkvkd98vhlfrs5tys3c3th5cn"
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccountDetailResponse'
+                $ref: "#/components/schemas/AccountDetailResponse"
               example:
-                license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+                license:
+                  "data/api usage outside of cexplorer.io front-end is not
+                  allowed with currently used / without api-key."
                 code: 200
                 data:
                   user:
@@ -2534,7 +2658,9 @@ paths:
                           extended:
                             twitter_handle: "BullishDumpling"
                           homepage: "https://nihaocardano.com/staking/"
-                          description: "饺子的池，愿景：连接Cardano中文和国际社区，为中文社区带来优质信息。全球多个节点。Mission: drive adoption for the Chinese-speaking community."
+                          description:
+                            "饺子的池，愿景：连接Cardano中文和国际社区，为中文社区带来优质信息。全球多个节点。Mission:
+                            drive adoption for the Chinese-speaking community."
                         delegation:
                           tx:
                             slot: 144681054
@@ -2552,7 +2678,9 @@ paths:
                           extended:
                             twitter_handle: "BullishDumpling"
                           homepage: "https://nihaocardano.com/staking/"
-                          description: "饺子的池，愿景：连接Cardano中文和国际社区，为中文社区带来优质信息。全球多个节点。Mission: drive adoption for the Chinese-speaking community."
+                          description:
+                            "饺子的池，愿景：连接Cardano中文和国际社区，为中文社区带来优质信息。全球多个节点。Mission:
+                            drive adoption for the Chinese-speaking community."
                         delegation:
                           tx:
                             slot: 144681054
@@ -2576,14 +2704,14 @@ paths:
                 tokens: 10
                 ex: 0.0134
                 debug: false
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalError'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /account/reward:
     get:
@@ -2617,7 +2745,7 @@ paths:
           required: true
           schema:
             type: string
-            pattern: '^stake1[a-z0-9]+$'
+            pattern: "^stake1[a-z0-9]+$"
           example: "stake1uy3qmyamepqzgv8jgzrxak0dzg7fnkvkd98vhlfrs5tys3c3th5cn"
 
         - name: rest
@@ -2649,14 +2777,16 @@ paths:
           example: 0
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccountRewardResponse'
+                $ref: "#/components/schemas/AccountRewardResponse"
               example:
-                license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+                license:
+                  "data/api usage outside of cexplorer.io front-end is not
+                  allowed with currently used / without api-key."
                 code: 200
                 data:
                   data:
@@ -2668,7 +2798,9 @@ paths:
                           extended:
                             twitter_handle: "BullishDumpling"
                           homepage: "https://nihaocardano.com/staking/"
-                          description: "饺子的池，愿景：连接Cardano中文和国际社区，为中文社区带来优质信息。全球多个节点。Mission: drive adoption for the Chinese-speaking community."
+                          description:
+                            "饺子的池，愿景：连接Cardano中文和国际社区，为中文社区带来优质信息。全球多个节点。Mission:
+                            drive adoption for the Chinese-speaking community."
                       type: "member"
                       amount: 229784
                       account:
@@ -2737,14 +2869,14 @@ paths:
                 tokens: 2
                 ex: 0.0126
                 debug: false
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalError'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /account/delegation:
     get:
@@ -2774,20 +2906,22 @@ paths:
       parameters:
         - name: view
           in: query
-          description: Stake address (Bech32 format) - cannot be combined with hash_raw
+          description:
+            Stake address (Bech32 format) - cannot be combined with hash_raw
           required: false
           schema:
             type: string
-            pattern: '^stake1[a-z0-9]+$'
+            pattern: "^stake1[a-z0-9]+$"
           example: "stake1uyecgt74f2tef8j39n2qkxslm4jvppsqrwqauwyps5c7d7sae4zrz"
 
         - name: hash_raw
           in: query
-          description: Stake key hash (hex format) - cannot be combined with view
+          description:
+            Stake key hash (hex format) - cannot be combined with view
           required: false
           schema:
             type: string
-            pattern: '^[a-f0-9]+$'
+            pattern: "^[a-f0-9]+$"
           example: "e1220d93bbc8402430f240866ed9ed123c99d996694ecbfd2385164847"
 
         - name: limit
@@ -2810,14 +2944,16 @@ paths:
           example: 0
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccountDelegationResponse'
+                $ref: "#/components/schemas/AccountDelegationResponse"
               example:
-                license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+                license:
+                  "data/api usage outside of cexplorer.io front-end is not
+                  allowed with currently used / without api-key."
                 code: 200
                 data:
                   data:
@@ -2833,7 +2969,9 @@ paths:
                             extended:
                               twitter_handle: "BullishDumpling"
                             homepage: "https://nihaocardano.com/staking/"
-                            description: "饺子的池，愿景：连接Cardano中文和国际社区，为中文社区带来优质信息。全球多个节点。Mission: drive adoption for the Chinese-speaking community."
+                            description:
+                              "饺子的池，愿景：连接Cardano中文和国际社区，为中文社区带来优质信息。全球多个节点。Mission:
+                              drive adoption for the Chinese-speaking community."
                         previous:
                           id: "pool1lxqewhueg4hzyad766zhdwsjet5348ww8mzejf6fprxaw8wfq5s"
                           meta:
@@ -2843,7 +2981,9 @@ paths:
                               twitter_handle: "youradamoon"
                               telegram_handle: "Your_ADA_Moon"
                             homepage: "https://youradamoonpool.us"
-                            description: "A safe, secure, highly-available stake pool.  Your ADA will Moon here!"
+                            description:
+                              "A safe, secure, highly-available stake
+                              pool.  Your ADA will Moon here!"
                       view: "stake1uyecgt74f2tef8j39n2qkxslm4jvppsqrwqauwyps5c7d7sae4zrz"
                       live_stake: 42529758609
                       active_stake: 42516928040
@@ -2861,7 +3001,9 @@ paths:
                               twitter_handle: "youradamoon"
                               telegram_handle: "Your_ADA_Moon"
                             homepage: "https://youradamoonpool.us"
-                            description: "A safe, secure, highly-available stake pool.  Your ADA will Moon here!"
+                            description:
+                              "A safe, secure, highly-available stake
+                              pool.  Your ADA will Moon here!"
                         previous:
                           id: null
                           meta: null
@@ -2873,20 +3015,21 @@ paths:
                 tokens: 3
                 ex: 0.012
                 debug: false
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          description: Unprocessable Entity - Missing required parameter (view or hash_raw)
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          description:
+            Unprocessable Entity - Missing required parameter (view or hash_raw)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/Error"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /account/delegation_vote:
     get:
@@ -2916,20 +3059,22 @@ paths:
       parameters:
         - name: view
           in: query
-          description: Stake address (Bech32 format) - cannot be combined with hash_raw
+          description:
+            Stake address (Bech32 format) - cannot be combined with hash_raw
           required: false
           schema:
             type: string
-            pattern: '^stake1[a-z0-9]+$'
+            pattern: "^stake1[a-z0-9]+$"
           example: "stake1uyecgt74f2tef8j39n2qkxslm4jvppsqrwqauwyps5c7d7sae4zrz"
 
         - name: hash_raw
           in: query
-          description: Stake key hash (hex format) - cannot be combined with view
+          description:
+            Stake key hash (hex format) - cannot be combined with view
           required: false
           schema:
             type: string
-            pattern: '^[a-f0-9]+$'
+            pattern: "^[a-f0-9]+$"
           example: "e1220d93bbc8402430f240866ed9ed123c99d996694ecbfd2385164847"
 
         - name: limit
@@ -2952,14 +3097,16 @@ paths:
           example: 0
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccountDelegationVoteResponse'
+                $ref: "#/components/schemas/AccountDelegationVoteResponse"
               example:
-                license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+                license:
+                  "data/api usage outside of cexplorer.io front-end is not
+                  allowed with currently used / without api-key."
                 code: 200
                 data:
                   data:
@@ -2971,9 +3118,14 @@ paths:
                             url: "https://raw.githubusercontent.com/bullishdumpling/drepnew/refs/heads/main/Dumpling%F0%9F%A5%9F.jsonld"
                             image_url: null
                             given_name: "Dumpling��"
-                            objectives: "1. Spread the word about Cardano governance outside of Cardano. \n2. Represent the Chinese-speaking community. "
+                            objectives:
+                              "1. Spread the word about Cardano governance
+                              outside of Cardano. \n2. Represent the
+                              Chinese-speaking community. "
                             motivations: null
-                            qualifications: "In Cardano and making educational content since 2021"
+                            qualifications:
+                              "In Cardano and making educational content since
+                              2021"
                             payment_address: "addr1qxtfphxvylsk0f4feqyglsg3qdwmzmahkk6cxmkhxnvlnsgdeu9nwp85ekdl85gnmyd2gzyvswa5wgfmu4tenfxzc3zqr7rupq"
                         previous:
                           id: ""
@@ -2987,20 +3139,21 @@ paths:
                 tokens: 2
                 ex: 0.0295
                 debug: false
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          description: Unprocessable Entity - Missing required parameter (view or hash_raw)
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          description:
+            Unprocessable Entity - Missing required parameter (view or hash_raw)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/Error"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /policy/list:
     get:
@@ -3037,7 +3190,7 @@ paths:
           required: false
           schema:
             type: string
-            pattern: '^[a-f0-9]{56}$'
+            pattern: "^[a-f0-9]{56}$"
           example: "0691b2fecca1ac4f53cb6dfb00b7013e561d1f34403b957cbb5af1fa"
 
         - name: name
@@ -3087,14 +3240,16 @@ paths:
           example: 0
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PolicyListResponse'
+                $ref: "#/components/schemas/PolicyListResponse"
               example:
-                license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+                license:
+                  "data/api usage outside of cexplorer.io front-end is not
+                  allowed with currently used / without api-key."
                 code: 200
                 data:
                   data:
@@ -3121,14 +3276,14 @@ paths:
                 tokens: 3
                 ex: 0.1694
                 debug: false
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalError'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /policy/detail:
     get:
@@ -3154,11 +3309,12 @@ paths:
       parameters:
         - name: id
           in: query
-          description: Policy ID (hex format) - cannot be combined with collection
+          description:
+            Policy ID (hex format) - cannot be combined with collection
           required: false
           schema:
             type: string
-            pattern: '^[a-f0-9]{56}$'
+            pattern: "^[a-f0-9]{56}$"
           example: "f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a"
 
         - name: collection
@@ -3170,14 +3326,16 @@ paths:
           example: "adahandle"
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PolicyDetailResponse'
+                $ref: "#/components/schemas/PolicyDetailResponse"
               example:
-                license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+                license:
+                  "data/api usage outside of cexplorer.io front-end is not
+                  allowed with currently used / without api-key."
                 code: 200
                 data:
                   id: "f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a"
@@ -3205,20 +3363,21 @@ paths:
                 tokens: 4
                 ex: 0.0125
                 debug: false
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          description: Unprocessable Entity - Missing required parameter (id or collection)
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          description:
+            Unprocessable Entity - Missing required parameter (id or collection)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/Error"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /policy/mint:
     get:
@@ -3236,7 +3395,7 @@ paths:
           required: true
           schema:
             type: string
-            pattern: '^[a-f0-9]{56}$'
+            pattern: "^[a-f0-9]{56}$"
           example: "f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a"
         - name: offset
           in: query
@@ -3258,24 +3417,24 @@ paths:
             default: 20
           example: 20
       responses:
-        '200':
+        "200":
           description: Successful response with mint transactions
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PolicyMintResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
+                $ref: "#/components/schemas/PolicyMintResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
           description: Unprocessable Entity - Missing required parameter (id)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/Error"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /policy/owner:
     get:
@@ -3293,7 +3452,7 @@ paths:
           required: true
           schema:
             type: string
-            pattern: '^[a-f0-9]{56}$'
+            pattern: "^[a-f0-9]{56}$"
           example: "f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a"
         - name: offset
           in: query
@@ -3325,24 +3484,24 @@ paths:
               - stake
           example: "payment"
       responses:
-        '200':
+        "200":
           description: Successful response with policy owners
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PolicyOwnerResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
+                $ref: "#/components/schemas/PolicyOwnerResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
           description: Unprocessable Entity - Missing required parameter (id)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/Error"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /asset/list:
     get:
@@ -3391,7 +3550,7 @@ paths:
           required: false
           schema:
             type: string
-            pattern: '^[a-f0-9]{56}$'
+            pattern: "^[a-f0-9]{56}$"
           example: "0691b2fecca1ac4f53cb6dfb00b7013e561d1f34403b957cbb5af1fa"
 
         - name: type
@@ -3449,18 +3608,18 @@ paths:
           example: 0
 
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AssetListResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/AssetListResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /asset/detail:
     get:
@@ -3485,7 +3644,9 @@ paths:
       parameters:
         - name: fingerprint
           in: query
-          description: Asset fingerprint (CIP-14 format) - cannot be combined with assetname
+          description:
+            Asset fingerprint (CIP-14 format) - cannot be combined with
+            assetname
           required: false
           schema:
             type: string
@@ -3493,31 +3654,34 @@ paths:
 
         - name: assetname
           in: query
-          description: Full asset name (hex encoded) - cannot be combined with fingerprint
+          description:
+            Full asset name (hex encoded) - cannot be combined with fingerprint
           required: false
           schema:
             type: string
           example: "0691b2fecca1ac4f53cb6dfb00b7013e561d1f34403b957cbb5af1fa4e49474854"
 
       responses:
-        '200':
+        "200":
           description: Successful response with asset details
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AssetDetailResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          description: Unprocessable Entity - Missing required parameter (fingerprint or assetname)
+                $ref: "#/components/schemas/AssetDetailResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          description:
+            Unprocessable Entity - Missing required parameter (fingerprint or
+            assetname)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/Error"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /asset/stat:
     get:
@@ -3540,7 +3704,9 @@ paths:
       parameters:
         - name: fingerprint
           in: query
-          description: Asset fingerprint (CIP-14 format) - cannot be combined with assetname
+          description:
+            Asset fingerprint (CIP-14 format) - cannot be combined with
+            assetname
           required: false
           schema:
             type: string
@@ -3548,31 +3714,34 @@ paths:
 
         - name: assetname
           in: query
-          description: Full asset name (hex encoded) - cannot be combined with fingerprint
+          description:
+            Full asset name (hex encoded) - cannot be combined with fingerprint
           required: false
           schema:
             type: string
           example: "0691b2fecca1ac4f53cb6dfb00b7013e561d1f34403b957cbb5af1fa4e49474854"
 
       responses:
-        '200':
+        "200":
           description: Successful response with asset statistics
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AssetStatResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          description: Unprocessable Entity - Missing required parameter (fingerprint or assetname)
+                $ref: "#/components/schemas/AssetStatResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          description:
+            Unprocessable Entity - Missing required parameter (fingerprint or
+            assetname)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/Error"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /asset/mint:
     get:
@@ -3614,24 +3783,25 @@ paths:
           example: 20
 
       responses:
-        '200':
+        "200":
           description: Successful response with mint transactions
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AssetMintResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          description: Unprocessable Entity - Missing required parameter (assetname)
+                $ref: "#/components/schemas/AssetMintResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          description:
+            Unprocessable Entity - Missing required parameter (assetname)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/Error"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /asset/owner:
     get:
@@ -3673,24 +3843,25 @@ paths:
           example: 20
 
       responses:
-        '200':
+        "200":
           description: Successful response with asset owners
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AssetOwnerResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          description: Unprocessable Entity - Missing required parameter (assetname)
+                $ref: "#/components/schemas/AssetOwnerResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          description:
+            Unprocessable Entity - Missing required parameter (assetname)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/Error"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /asset/metadata:
     get:
@@ -3732,24 +3903,25 @@ paths:
           example: 20
 
       responses:
-        '200':
+        "200":
           description: Successful response with asset metadata
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AssetMetadataResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          description: Unprocessable Entity - Missing required parameter (assetname)
+                $ref: "#/components/schemas/AssetMetadataResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          description:
+            Unprocessable Entity - Missing required parameter (assetname)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/Error"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /gov/stat:
     get:
@@ -3769,18 +3941,18 @@ paths:
       security:
         - ApiKeyAuth: []
       responses:
-        '200':
+        "200":
           description: Successful response with governance statistics
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GovernanceStatResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/GovernanceStatResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /gov/drep_list:
     get:
@@ -3890,18 +4062,18 @@ paths:
           example: 0
 
       responses:
-        '200':
+        "200":
           description: Successful response with DRep list
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DRepListResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/DRepListResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /gov/drep_detail:
     get:
@@ -3928,7 +4100,9 @@ paths:
       parameters:
         - name: view
           in: query
-          description: DRep ID (drep1..., drep_always_no_confidence, or drep_always_abstain) - cannot be combined with hash
+          description:
+            DRep ID (drep1..., drep_always_no_confidence, or
+            drep_always_abstain) - cannot be combined with hash
           required: false
           schema:
             type: string
@@ -3942,24 +4116,25 @@ paths:
             type: string
 
       responses:
-        '200':
+        "200":
           description: Successful response with DRep details
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DRepDetailResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          description: Unprocessable Entity - Missing required parameter (view or hash)
+                $ref: "#/components/schemas/DRepDetailResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          description:
+            Unprocessable Entity - Missing required parameter (view or hash)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/Error"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /gov/gov_action_proposal_list:
     get:
@@ -4019,7 +4194,8 @@ paths:
 
         - name: search
           in: query
-          description: Search by governance action ID, keyword, or submit tx hash
+          description:
+            Search by governance action ID, keyword, or submit tx hash
           required: false
           schema:
             type: string
@@ -4046,18 +4222,18 @@ paths:
           example: 0
 
       responses:
-        '200':
+        "200":
           description: Successful response with governance action proposals
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GovernanceActionListResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/GovernanceActionListResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /gov/gov_action_proposal_detail:
     get:
@@ -4080,18 +4256,18 @@ paths:
           description: Legacy governance action ID (CIP 105 format)
           example: "a633504ddc47a852c4ae033c750597d011a3daf00a0f6bbd48de4c52ef1022dc#0"
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GovernanceActionDetailResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/GovernanceActionDetailResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
   /gov/vote:
     get:
@@ -4184,18 +4360,18 @@ paths:
             minimum: 0
           description: Number of votes to skip
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GovernanceVoteListResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalError'
+                $ref: "#/components/schemas/GovernanceVoteListResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
 
 components:
   schemas:
@@ -4212,7 +4388,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -4236,7 +4414,7 @@ components:
                 data:
                   type: array
                   items:
-                    $ref: '#/components/schemas/BlockInfo'
+                    $ref: "#/components/schemas/BlockInfo"
                 count:
                   type: integer
                   description: Total block count in the blockchain
@@ -4282,7 +4460,7 @@ components:
               type: array
               description: Array of block objects
               items:
-                $ref: '#/components/schemas/BlockInfo'
+                $ref: "#/components/schemas/BlockInfo"
             count:
               type: integer
               description: Total block count in the blockchain
@@ -4320,7 +4498,7 @@ components:
           example: 200
         data:
           allOf:
-            - $ref: '#/components/schemas/BlockInfo'
+            - $ref: "#/components/schemas/BlockInfo"
             - type: object
               properties:
                 rewards:
@@ -4331,7 +4509,7 @@ components:
                   type: array
                   description: All transactions included in the block
                   items:
-                    $ref: '#/components/schemas/Transaction'
+                    $ref: "#/components/schemas/Transaction"
         tokens:
           type: integer
           description: API tokens consumed
@@ -4407,9 +4585,9 @@ components:
           description: Number of transactions in the block
           example: 16
         pool:
-          $ref: '#/components/schemas/PoolInfo'
+          $ref: "#/components/schemas/PoolInfo"
         epoch_param:
-          $ref: '#/components/schemas/EpochParam'
+          $ref: "#/components/schemas/EpochParam"
 
     PoolInfo:
       type: object
@@ -4821,7 +4999,7 @@ components:
           description: HTTP status code
           example: 200
         data:
-          $ref: '#/components/schemas/EpochParam'
+          $ref: "#/components/schemas/EpochParam"
         tokens:
           type: integer
           description: API tokens consumed
@@ -4938,7 +5116,7 @@ components:
               type: array
               description: Array of epoch objects
               items:
-                $ref: '#/components/schemas/EpochInfo'
+                $ref: "#/components/schemas/EpochInfo"
             count:
               type: integer
               description: Total epoch count
@@ -5031,7 +5209,7 @@ components:
           type: array
           description: Epoch protocol parameters
           items:
-            $ref: '#/components/schemas/EpochParam'
+            $ref: "#/components/schemas/EpochParam"
         out_sum:
           type: integer
           description: Total output sum in Lovelaces
@@ -5066,7 +5244,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -5081,7 +5261,7 @@ components:
               type: array
               description: Array of transaction objects
               items:
-                $ref: '#/components/schemas/Transaction'
+                $ref: "#/components/schemas/Transaction"
             count:
               type: integer
               description: Total number of transactions matching the filter
@@ -5113,7 +5293,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -5296,7 +5478,8 @@ components:
                       properties:
                         name:
                           type: string
-                          description: Asset name (policy ID + asset name in hex)
+                          description:
+                            Asset name (policy ID + asset name in hex)
                         quantity:
                           type: integer
                           description: Asset quantity
@@ -5381,7 +5564,8 @@ components:
                       properties:
                         name:
                           type: string
-                          description: Asset name (policy ID + asset name in hex)
+                          description:
+                            Asset name (policy ID + asset name in hex)
                         quantity:
                           type: integer
                           description: Asset quantity
@@ -5502,7 +5686,7 @@ components:
                   nullable: true
                   description: Voting procedures for governance actions
             epoch_param:
-              $ref: '#/components/schemas/EpochParam'
+              $ref: "#/components/schemas/EpochParam"
         tokens:
           type: integer
           description: API tokens consumed
@@ -5530,7 +5714,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -5543,13 +5729,16 @@ components:
           properties:
             data:
               type: array
-              description: Array of filtered results (structure varies by transaction type)
+              description:
+                Array of filtered results (structure varies by transaction type)
               items:
                 type: object
                 properties:
                   data:
                     type: object
-                    description: Type-specific data (e.g., script execution details for contract_transactions)
+                    description:
+                      Type-specific data (e.g., script execution details for
+                      contract_transactions)
                     properties:
                       script_hash:
                         type: string
@@ -5636,7 +5825,8 @@ components:
                         example: 174236189
                       valid_contract:
                         type: integer
-                        description: Valid contract flag (1 for valid, 0 for invalid)
+                        description:
+                          Valid contract flag (1 for valid, 0 for invalid)
                         example: 1
                       script_size:
                         type: integer
@@ -5677,7 +5867,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -5771,7 +5963,8 @@ components:
                         description: Total blocks produced
                   epochs:
                     type: object
-                    description: Historical epoch performance data (indexed by offset)
+                    description:
+                      Historical epoch performance data (indexed by offset)
                     additionalProperties:
                       type: object
                       properties:
@@ -5964,7 +6157,8 @@ components:
                           index:
                             type: integer
                             nullable: true
-                            description: Certificate index (null if not retiring)
+                            description:
+                              Certificate index (null if not retiring)
                           tx_id:
                             type: integer
                             nullable: true
@@ -5972,7 +6166,8 @@ components:
                           retiring_epoch:
                             type: integer
                             nullable: true
-                            description: Epoch when pool will retire (null if not retiring)
+                            description:
+                              Epoch when pool will retire (null if not retiring)
                       active:
                         type: object
                         description: Active retirement status
@@ -5980,7 +6175,8 @@ components:
                           index:
                             type: integer
                             nullable: true
-                            description: Certificate index (null if not retiring)
+                            description:
+                              Certificate index (null if not retiring)
                           tx_id:
                             type: integer
                             nullable: true
@@ -5988,7 +6184,8 @@ components:
                           retiring_epoch:
                             type: integer
                             nullable: true
-                            description: Epoch when pool will retire (null if not retiring)
+                            description:
+                              Epoch when pool will retire (null if not retiring)
             count:
               type: integer
               description: Total number of pools
@@ -6020,7 +6217,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -6160,7 +6359,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -6226,7 +6427,8 @@ components:
                           extended:
                             type: object
                             nullable: true
-                            description: Extended metadata (social handles, etc.)
+                            description:
+                              Extended metadata (social handles, etc.)
                             properties:
                               twitter_handle:
                                 type: string
@@ -6248,7 +6450,8 @@ components:
                                 example: "555faab5d20c4557a4277ab6e7b302b3d4cb9738ebb042b53f87fb198f8199d6"
                               active_epoch_no:
                                 type: integer
-                                description: Epoch when delegation becomes active
+                                description:
+                                  Epoch when delegation becomes active
                                 example: 590
                           pool:
                             type: string
@@ -6285,7 +6488,8 @@ components:
                           extended:
                             type: object
                             nullable: true
-                            description: Extended metadata (social handles, etc.)
+                            description:
+                              Extended metadata (social handles, etc.)
                       delegation:
                         type: object
                         description: Delegation transaction details
@@ -6303,7 +6507,8 @@ components:
                                 example: "b3e7baa1e9914da00677d83a3b622a8f28e501f0b485702a61d2b7fb37e1c896"
                               active_epoch_no:
                                 type: integer
-                                description: Epoch when delegation becomes active
+                                description:
+                                  Epoch when delegation becomes active
                                 example: 583
                           pool:
                             type: string
@@ -6339,7 +6544,8 @@ components:
                           extended:
                             type: object
                             nullable: true
-                            description: Extended metadata (social handles, etc.)
+                            description:
+                              Extended metadata (social handles, etc.)
                             properties:
                               twitter_handle:
                                 type: string
@@ -6361,7 +6567,8 @@ components:
                                 example: "9b296966d176660a7c6811ffd43091b18ba4511019983720fa874a66e9e94d20"
                               active_epoch_no:
                                 type: integer
-                                description: Epoch when delegation becomes active
+                                description:
+                                  Epoch when delegation becomes active
                                 example: 527
                           pool:
                             type: string
@@ -6398,7 +6605,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -6461,7 +6670,8 @@ components:
                       properties:
                         name:
                           type: string
-                          description: Asset name (policy ID + asset name in hex)
+                          description:
+                            Asset name (policy ID + asset name in hex)
                           example: "29d222ce763455e3d7a09a665ce554f00ac89d2e99a1a83d267170c64d494e"
                         quantity:
                           type: integer
@@ -6479,7 +6689,8 @@ components:
                         registry:
                           type: object
                           nullable: true
-                          description: Token registry metadata (null if not registered)
+                          description:
+                            Token registry metadata (null if not registered)
                           required:
                             - name
                             - ticker
@@ -6537,7 +6748,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -6639,7 +6852,10 @@ components:
                               description:
                                 type: string
                                 description: Pool description
-                                example: "A committed stake pool with a plan to bring connectivity and education to remote regions of West Papua"
+                                example:
+                                  "A committed stake pool with a plan to bring
+                                  connectivity and education to remote regions
+                                  of West Papua"
                               extended:
                                 type: object
                                 description: Extended social media handles
@@ -6685,7 +6901,8 @@ components:
                                 properties:
                                   slot:
                                     type: integer
-                                    description: Slot number of delegation transaction
+                                    description:
+                                      Slot number of delegation transaction
                                     example: 171468680
                                   tx_hash:
                                     type: string
@@ -6693,7 +6910,8 @@ components:
                                     example: "d58ea84ddd3a11142617e4bfea662cac90727e83b83edcb6038b008a2517f326"
                                   active_epoch_no:
                                     type: integer
-                                    description: Epoch when delegation becomes active
+                                    description:
+                                      Epoch when delegation becomes active
                                     example: 596
                               pool:
                                 type: string
@@ -6732,7 +6950,10 @@ components:
                               description:
                                 type: string
                                 description: Pool description
-                                example: "A committed stake pool with a plan to bring connectivity and education to remote regions of West Papua"
+                                example:
+                                  "A committed stake pool with a plan to bring
+                                  connectivity and education to remote regions
+                                  of West Papua"
                               extended:
                                 type: object
                                 description: Extended social media handles
@@ -6778,7 +6999,8 @@ components:
                                 properties:
                                   slot:
                                     type: integer
-                                    description: Slot number of delegation transaction
+                                    description:
+                                      Slot number of delegation transaction
                                     example: 136749602
                                   tx_hash:
                                     type: string
@@ -6786,7 +7008,8 @@ components:
                                     example: "b5788fdbfc6ccd76a2cc0df8fb0ef642648cb26894303a327d084b4c0f6c220a"
                                   active_epoch_no:
                                     type: integer
-                                    description: Epoch when delegation becomes active
+                                    description:
+                                      Epoch when delegation becomes active
                                     example: 516
                               pool:
                                 type: string
@@ -6866,7 +7089,8 @@ components:
                             example: true
                           amount:
                             type: integer
-                            description: Total amount delegated to DRep in Lovelaces
+                            description:
+                              Total amount delegated to DRep in Lovelaces
                             example: 13508317100302
                           data:
                             type: object
@@ -6895,15 +7119,23 @@ components:
                               objectives:
                                 type: string
                                 description: DRep objectives and values
-                                example: "As a Cardano representative, I will vote on governance proposals in accordance with my values..."
+                                example:
+                                  "As a Cardano representative, I will vote on
+                                  governance proposals in accordance with my
+                                  values..."
                               motivations:
                                 type: string
-                                description: DRep motivations for becoming a representative
-                                example: "My motivation to become a DRep is rooted deeply in my objectives and value system..."
+                                description:
+                                  DRep motivations for becoming a representative
+                                example:
+                                  "My motivation to become a DRep is rooted
+                                  deeply in my objectives and value system..."
                               qualifications:
                                 type: string
                                 description: DRep qualifications
-                                example: "I believe I am qualified to represent the subset of Cardano community members..."
+                                example:
+                                  "I believe I am qualified to represent the
+                                  subset of Cardano community members..."
                               payment_address:
                                 type: string
                                 description: DRep payment address
@@ -6935,7 +7167,8 @@ components:
                                 example: false
                           since:
                             type: string
-                            description: Date when DRep was registered (ISO 8601)
+                            description:
+                              Date when DRep was registered (ISO 8601)
                             example: "2025-01-29T22:57:35"
                   asset:
                     type: array
@@ -7023,7 +7256,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -7076,7 +7311,8 @@ components:
                           example: 1
                         block_height:
                           type: integer
-                          description: Block number where transaction was included
+                          description:
+                            Block number where transaction was included
                           example: 12783430
                         block_time:
                           type: integer
@@ -7089,7 +7325,8 @@ components:
                         datum_hash:
                           type: string
                           nullable: true
-                          description: Datum hash for smart contract interactions
+                          description:
+                            Datum hash for smart contract interactions
                           example: null
                         asset_list:
                           type: array
@@ -7102,7 +7339,8 @@ components:
                             properties:
                               name:
                                 type: string
-                                description: Asset name (policy ID + asset name in hex)
+                                description:
+                                  Asset name (policy ID + asset name in hex)
                                 example: "279c909f348e533da5808898f87f9a14bb2c3dfbbacccd631d927a3f534e454b"
                               quantity:
                                 type: integer
@@ -7139,7 +7377,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -7364,7 +7604,8 @@ components:
                       example: 144681054
                     slot_deregistered:
                       type: integer
-                      description: Slot when deregistered (0 if still registered)
+                      description:
+                        Slot when deregistered (0 if still registered)
                       example: 0
                     slot_first_registered:
                       type: integer
@@ -7422,7 +7663,10 @@ components:
                             description:
                               type: string
                               description: Pool description
-                              example: "饺子的池，愿景：连接Cardano中文和国际社区，为中文社区带来优质信息。全球多个节点。Mission: drive adoption for the Chinese-speaking community."
+                              example:
+                                "饺子的池，愿景：连接Cardano中文和国际社区，为中文社区带来优质信息。全球多个节点。Mission:
+                                drive adoption for the Chinese-speaking
+                                community."
                         delegation:
                           type: object
                           description: Delegation transaction
@@ -7447,7 +7691,8 @@ components:
                                   example: "a1b7b0bcaa7a0bf96be9786869537295130845b3bb469de95f46e64fb095f078"
                                 active_epoch_no:
                                   type: integer
-                                  description: Epoch when delegation becomes active
+                                  description:
+                                    Epoch when delegation becomes active
                                   example: 534
                             pool:
                               type: string
@@ -7471,7 +7716,8 @@ components:
                   properties:
                     deleg:
                       type: object
-                      description: Delegation details (same structure as live.deleg)
+                      description:
+                        Delegation details (same structure as live.deleg)
                       required:
                         - id
                         - meta
@@ -7500,7 +7746,10 @@ components:
                               example: "https://nihaocardano.com/staking/"
                             description:
                               type: string
-                              example: "饺子的池，愿景：连接Cardano中文和国际社区，为中文社区带来优质信息。全球多个节点。Mission: drive adoption for the Chinese-speaking community."
+                              example:
+                                "饺子的池，愿景：连接Cardano中文和国际社区，为中文社区带来优质信息。全球多个节点。Mission:
+                                drive adoption for the Chinese-speaking
+                                community."
                         delegation:
                           type: object
                           properties:
@@ -7614,7 +7863,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -7681,7 +7932,9 @@ components:
                           description:
                             type: string
                             description: Pool description
-                            example: "饺子的池，愿景：连接Cardano中文和国际社区，为中文社区带来优质信息。全球多个节点。Mission: drive adoption for the Chinese-speaking community."
+                            example:
+                              "饺子的池，愿景：连接Cardano中文和国际社区，为中文社区带来优质信息。全球多个节点。Mission:
+                              drive adoption for the Chinese-speaking community."
                   type:
                     type: string
                     description: Reward type
@@ -7718,7 +7971,8 @@ components:
                     example: 602
                   spendable_epoch:
                     type: object
-                    description: Epoch when reward becomes spendable with exchange rates
+                    description:
+                      Epoch when reward becomes spendable with exchange rates
                     required:
                       - no
                       - rate
@@ -7823,7 +8077,9 @@ components:
                               example: "2025-12-29"
                             fiat:
                               type: object
-                              description: Fiat currency exchange rates (currency code -> [rate, divisor])
+                              description:
+                                Fiat currency exchange rates (currency code ->
+                                [rate, divisor])
                               additionalProperties:
                                 type: array
                                 items:
@@ -7874,7 +8130,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -7966,7 +8224,10 @@ components:
                               description:
                                 type: string
                                 description: Pool description
-                                example: "饺子的池，愿景：连接Cardano中文和国际社区，为中文社区带来优质信息。全球多个节点。Mission: drive adoption for the Chinese-speaking community."
+                                example:
+                                  "饺子的池，愿景：连接Cardano中文和国际社区，为中文社区带来优质信息。全球多个节点。Mission:
+                                  drive adoption for the Chinese-speaking
+                                  community."
                       previous:
                         type: object
                         nullable: true
@@ -8005,7 +8266,9 @@ components:
                                 example: "https://youradamoonpool.us"
                               description:
                                 type: string
-                                example: "A safe, secure, highly-available stake pool.  Your ADA will Moon here!"
+                                example:
+                                  "A safe, secure, highly-available stake
+                                  pool.  Your ADA will Moon here!"
                   view:
                     type: string
                     description: Stake address (Bech32 format)
@@ -8017,7 +8280,8 @@ components:
                   active_stake:
                     type: integer
                     nullable: true
-                    description: Active stake in Lovelaces (null if not yet active)
+                    description:
+                      Active stake in Lovelaces (null if not yet active)
                     example: 42516928040
                   active_epoch_no:
                     type: integer
@@ -8054,7 +8318,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -8127,7 +8393,10 @@ components:
                               objectives:
                                 type: string
                                 description: DRep objectives
-                                example: "1. Spread the word about Cardano governance outside of Cardano. \n2. Represent the Chinese-speaking community. "
+                                example:
+                                  "1. Spread the word about Cardano governance
+                                  outside of Cardano. \n2. Represent the
+                                  Chinese-speaking community. "
                               motivations:
                                 type: string
                                 nullable: true
@@ -8136,7 +8405,9 @@ components:
                               qualifications:
                                 type: string
                                 description: DRep qualifications
-                                example: "In Cardano and making educational content since 2021"
+                                example:
+                                  "In Cardano and making educational content
+                                  since 2021"
                               payment_address:
                                 type: string
                                 description: DRep payment address
@@ -8150,12 +8421,14 @@ components:
                         properties:
                           id:
                             type: string
-                            description: DRep ID (empty string if no previous delegation)
+                            description:
+                              DRep ID (empty string if no previous delegation)
                             example: ""
                           meta:
                             type: object
                             nullable: true
-                            description: DRep metadata (null if no previous delegation)
+                            description:
+                              DRep metadata (null if no previous delegation)
                             example: null
                   active_stake:
                     type: integer
@@ -8211,7 +8484,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -8285,11 +8560,13 @@ components:
                             example: 127308
                           total_stake:
                             type: integer
-                            description: Number of stake addresses holding assets
+                            description:
+                              Number of stake addresses holding assets
                             example: 8092
                           total_address:
                             type: integer
-                            description: Total number of addresses holding assets
+                            description:
+                              Total number of addresses holding assets
                             example: 16261
                           total_with_data:
                             type: integer
@@ -8361,7 +8638,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -8507,7 +8786,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -8604,7 +8885,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -8626,7 +8909,9 @@ components:
                 properties:
                   address:
                     type: string
-                    description: Owner address (payment or stake address depending on filter)
+                    description:
+                      Owner address (payment or stake address depending on
+                      filter)
                     example: "addr1wxktka03n943759y4pcexpmftdhzsrrv8kcd2qs8cwgtdhgg6j4ux"
                   total_quantity:
                     type: integer
@@ -8663,7 +8948,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -8685,7 +8972,8 @@ components:
                 properties:
                   name:
                     type: string
-                    description: Asset name (hex encoded, may include policy ID prefix)
+                    description:
+                      Asset name (hex encoded, may include policy ID prefix)
                     example: "0691b2fecca1ac4f53cb6dfb00b7013e561d1f34403b957cbb5af1fa4e49474854"
                   registry:
                     type: object
@@ -8711,7 +8999,10 @@ components:
                       description:
                         type: string
                         description: Asset description
-                        example: "NIGHT is Midnight's utility token whose main function is to generate DUST, the resource used to execute transactions on the Midnight network."
+                        example:
+                          "NIGHT is Midnight's utility token whose main function
+                          is to generate DUST, the resource used to execute
+                          transactions on the Midnight network."
                       url:
                         type: string
                         description: Project URL
@@ -8756,7 +9047,9 @@ components:
                               type: object
                           onchain:
                             nullable: true
-                            description: On-chain statistics (can be null, array with holder data, or object with totals)
+                            description:
+                              On-chain statistics (can be null, array with
+                              holder data, or object with totals)
                             oneOf:
                               - type: array
                                 items:
@@ -8935,7 +9228,8 @@ components:
                                   example: 0.2693658197753868
                           rows:
                             type: object
-                            description: Number of rows available for each period
+                            description:
+                              Number of rows available for each period
                             properties:
                               "1m":
                                 type: integer
@@ -8986,7 +9280,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -9035,7 +9331,13 @@ components:
                 description:
                   type: string
                   description: Asset description
-                  example: "NIGHT is Midnight's utility token whose main function is to generate DUST, the resource used to execute transactions on the Midnight network. It is intended that NIGHT will also be used for block production rewards, ecosystem growth incentives, and on-chain governance in relation to the Midnight n"
+                  example:
+                    "NIGHT is Midnight's utility token whose main function is to
+                    generate DUST, the resource used to execute transactions on
+                    the Midnight network. It is intended that NIGHT will also be
+                    used for block production rewards, ecosystem growth
+                    incentives, and on-chain governance in relation to the
+                    Midnight n"
                 url:
                   type: string
                   description: Project URL
@@ -9348,7 +9650,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -9436,7 +9740,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -9533,7 +9839,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -9608,7 +9916,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -9662,7 +9972,9 @@ components:
                     example: 721
                   json:
                     type: object
-                    description: Metadata JSON content (structure varies by standard - CIP-25, CIP-68, etc.)
+                    description:
+                      Metadata JSON content (structure varies by standard -
+                      CIP-25, CIP-68, etc.)
                     additionalProperties: true
                     example:
                       version: 1
@@ -9718,7 +10030,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -9909,7 +10223,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -10138,7 +10454,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -10418,7 +10736,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -10496,19 +10816,27 @@ components:
                           name:
                             type: string
                             description: Proposal name
-                            example: "Loan ₳5,000,000 to Expand Cardano's Global Listings"
+                            example:
+                              "Loan ₳5,000,000 to Expand Cardano's Global
+                              Listings"
                           abstract:
                             type: string
-                            description: Proposal abstract (shortened for display)
-                            example: "This proposal seeks a 5,000,000 ada budget loan..."
+                            description:
+                              Proposal abstract (shortened for display)
+                            example:
+                              "This proposal seeks a 5,000,000 ada budget
+                              loan..."
                           rationale:
                             type: string
-                            description: Proposal rationale (shortened for display)
+                            description:
+                              Proposal rationale (shortened for display)
                             example: "Executive summary of the proposal..."
                           motivation:
                             type: string
-                            description: Proposal motivation (shortened for display)
-                            example: "Background and reasons for the proposal..."
+                            description:
+                              Proposal motivation (shortened for display)
+                            example:
+                              "Background and reasons for the proposal..."
                       data_hash:
                         type: string
                         description: Metadata hash
@@ -10754,7 +11082,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -10900,19 +11230,33 @@ components:
                     name:
                       type: string
                       description: Proposal name
-                      example: "DeltaDeFi: Hydra Trading Infrastructure Budget (₳1,500,000)"
+                      example:
+                        "DeltaDeFi: Hydra Trading Infrastructure Budget
+                        (₳1,500,000)"
                     abstract:
                       type: string
                       description: Proposal abstract (shortened for display)
-                      example: "This Budget Info Action asks DReps and the Cardano community to signal support for a ₳1,500,000, 6-month budget to harden and scale DeltaDeFi, a Hydra-based, low-latency order-book exchange..."
+                      example:
+                        "This Budget Info Action asks DReps and the Cardano
+                        community to signal support for a ₳1,500,000, 6-month
+                        budget to harden and scale DeltaDeFi, a Hydra-based,
+                        low-latency order-book exchange..."
                     rationale:
                       type: string
                       description: Proposal rationale (shortened for display)
-                      example: "Over the 6-month budget period, the work is grouped into three tracks: hardening the Hydra spot DEX, scaling infrastructure and integrations, and Vision 2030 KPI measurement..."
+                      example:
+                        "Over the 6-month budget period, the work is grouped
+                        into three tracks: hardening the Hydra spot DEX, scaling
+                        infrastructure and integrations, and Vision 2030 KPI
+                        measurement..."
                     motivation:
                       type: string
                       description: Proposal motivation (shortened for display)
-                      example: "Cardano currently lacks a low-latency order-book venue that can support API-driven trading, arbitrage and market-making at scale with tight spreads and low slippage..."
+                      example:
+                        "Cardano currently lacks a low-latency order-book venue
+                        that can support API-driven trading, arbitrage and
+                        market-making at scale with tight spreads and low
+                        slippage..."
                 data_hash:
                   type: string
                   description: Metadata hash
@@ -11073,11 +11417,13 @@ components:
                     example: 0.75
                   dvt_committee_no_confidence:
                     type: number
-                    description: DRep voting threshold for committee no confidence
+                    description:
+                      DRep voting threshold for committee no confidence
                     example: 0.6
                   pvt_committee_no_confidence:
                     type: number
-                    description: Pool voting threshold for committee no confidence
+                    description:
+                      Pool voting threshold for committee no confidence
                     example: 0.51
             dropped_epoch:
               type: integer
@@ -11162,7 +11508,9 @@ components:
         license:
           type: string
           description: API usage license notice
-          example: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+          example:
+            "data/api usage outside of cexplorer.io front-end is not allowed
+            with currently used / without api-key."
         code:
           type: integer
           description: HTTP status code
@@ -11238,19 +11586,35 @@ components:
                               name:
                                 type: string
                                 description: Proposal name
-                                example: "DeltaDeFi: Hydra Trading Infrastructure Budget (₳1,500,000)"
+                                example:
+                                  "DeltaDeFi: Hydra Trading Infrastructure
+                                  Budget (₳1,500,000)"
                               abstract:
                                 type: string
-                                description: Proposal abstract (shortened for display)
-                                example: "This Budget Info Action asks DReps and the Cardano community to signal support for a ₳1,500,000, 6-month budget to harden and scale DeltaDeFi..."
+                                description:
+                                  Proposal abstract (shortened for display)
+                                example:
+                                  "This Budget Info Action asks DReps and the
+                                  Cardano community to signal support for a
+                                  ₳1,500,000, 6-month budget to harden and scale
+                                  DeltaDeFi..."
                               rationale:
                                 type: string
-                                description: Proposal rationale (shortened for display)
-                                example: "Over the 6-month budget period, the work is grouped into three tracks: hardening the Hydra spot DEX, scaling infrastructure..."
+                                description:
+                                  Proposal rationale (shortened for display)
+                                example:
+                                  "Over the 6-month budget period, the work is
+                                  grouped into three tracks: hardening the Hydra
+                                  spot DEX, scaling infrastructure..."
                               motivation:
                                 type: string
-                                description: Proposal motivation (shortened for display)
-                                example: "Cardano currently lacks a low-latency order-book venue that can support API-driven trading, arbitrage and market-making at scale..."
+                                description:
+                                  Proposal motivation (shortened for display)
+                                example:
+                                  "Cardano currently lacks a low-latency
+                                  order-book venue that can support API-driven
+                                  trading, arbitrage and market-making at
+                                  scale..."
                           data_hash:
                             type: string
                             description: Metadata hash
@@ -11424,9 +11788,11 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
           example:
-            license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+            license:
+              "data/api usage outside of cexplorer.io front-end is not allowed
+              with currently used / without api-key."
             code: 400
             error: "Bad request"
             message: "Invalid parameter format"
@@ -11439,9 +11805,11 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
           example:
-            license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+            license:
+              "data/api usage outside of cexplorer.io front-end is not allowed
+              with currently used / without api-key."
             code: 401
             error: "Unauthorized"
             message: "API key is missing or invalid"
@@ -11454,9 +11822,11 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
           example:
-            license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+            license:
+              "data/api usage outside of cexplorer.io front-end is not allowed
+              with currently used / without api-key."
             code: 404
             error: "Not found"
             message: "Block not found"
@@ -11469,9 +11839,11 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
           example:
-            license: "data/api usage outside of cexplorer.io front-end is not allowed with currently used / without api-key."
+            license:
+              "data/api usage outside of cexplorer.io front-end is not allowed
+              with currently used / without api-key."
             code: 500
             error: "Internal server error"
             message: "An unexpected error occurred"

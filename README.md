@@ -4,13 +4,14 @@
 [![Deploy preprod > prod-server](https://github.com/vellum-labs/cexplorer-fe/actions/workflows/preprod_to_prod.yml/badge.svg?event=workflow_dispatch)](https://github.com/vellum-labs/cexplorer-fe/actions/workflows/preprod_to_prod.yml)
 [![Deploy preview > prod-server](https://github.com/vellum-labs/cexplorer-fe/actions/workflows/preview_to_prod.yml/badge.svg)](https://github.com/vellum-labs/cexplorer-fe/actions/workflows/preview_to_prod.yml)
 
-Frontend codebase for [cexplorer.io](https://cexplorer.io) — a fast, modern explorer for Cardano stake pools and network data.
+Frontend codebase for [cexplorer.io](https://cexplorer.io) — a fast, modern
+explorer for Cardano stake pools and network data.
 
 ---
 
 ## 🌐 Live Site
 
-🔗 [https://beta.cexplorer.io](https://beta.cexplorer.io)
+🔗 [https://cexplorer.io](https://cexplorer.io)
 
 ---
 
@@ -32,3 +33,4 @@ git clone https://github.com/vellum-labs/cexplorer-fe.git
 cd cexplorer-fe
 npm install  # or yarn
 
+```
