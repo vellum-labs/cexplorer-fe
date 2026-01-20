@@ -111,8 +111,8 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
             {icon && <img src={icon} alt='Icon' />}
             <Link
               className='text-primary'
-              to='/address/$address'
-              params={{ address: item.view || "" }}
+              to='/stake/$stakeAddr'
+              params={{ stakeAddr: item.view || "" }}
             >
               {formatString(item.view, "long")}
             </Link>
