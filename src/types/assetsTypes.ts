@@ -69,7 +69,7 @@ export interface AssetPolicy {
 
 interface AssetStatAsset extends AssetPolicy {
   param: [];
-  onchain: unknown;
+  onchain: Record<string, unknown>;
   stats:
     | {
         count: number;

@@ -1,4 +1,8 @@
 export const getHandleStandard = (hex: string): string => {
+  if (!hex || hex.length < 8) {
+    return "CIP-25";
+  }
+
   const prefix = hex.slice(0, 8);
 
   switch (prefix) {

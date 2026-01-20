@@ -61,6 +61,10 @@ export const HandleValidatorTab: FC<HandleValidatorTabProps> = ({
                   )}
                   alt={handleData.name}
                   className='rounded-sm h-8 w-8 object-cover'
+                  onError={e => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = "none";
+                  }}
                 />
               )}
               <div className='flex items-center gap-1'>
@@ -109,14 +113,20 @@ export const HandleValidatorTab: FC<HandleValidatorTabProps> = ({
           label: "UTXO",
           value: (
             <div className='flex items-center gap-1'>
-              <Link
-                to='/tx/$hash'
-                params={{ hash: handleData.utxo?.split("#")[0] ?? "" }}
-                className='text-primary'
-              >
-                {formatString(handleData.utxo ?? "", "long")}
-              </Link>
-              <Copy copyText={handleData.utxo ?? ""} size={14} />
+              {handleData.utxo ? (
+                <>
+                  <Link
+                    to='/tx/$hash'
+                    params={{ hash: handleData.utxo.split("#")[0] }}
+                    className='text-primary'
+                  >
+                    {formatString(handleData.utxo, "long")}
+                  </Link>
+                  <Copy copyText={handleData.utxo} size={14} />
+                </>
+              ) : (
+                <span>-</span>
+              )}
             </div>
           ),
         },

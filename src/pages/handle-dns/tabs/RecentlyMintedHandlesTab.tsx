@@ -108,7 +108,7 @@ export const RecentlyMintedHandlesTab: FC = () => {
           ultra_rare: "yellow",
         };
         const color = rarityColors[item.rarity] ?? "gray";
-        const displayRarity = item.rarity?.replace("_", " ") ?? "unknown";
+        const displayRarity = item.rarity?.replace(/_/g, " ") ?? "unknown";
         return (
           <Badge color={color} className='min-w-[80px] justify-center capitalize'>
             {displayRarity}
