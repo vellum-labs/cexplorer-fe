@@ -84,7 +84,7 @@ export const fetchGovernenceVote = async (
       search,
     },
   };
-  return handleFetch<any>(url, undefined, options);
+  return handleFetch<any>(url, safeOffset, options);
 };
 
 export const useFetchGovernanceVote = (
@@ -234,7 +234,7 @@ export const fetchCCVotes = async (
     },
   };
 
-  return handleFetch<any>(url, undefined, options);
+  return handleFetch<any>(url, offset, options);
 };
 
 export const useFetchCCVotes = (
@@ -342,7 +342,7 @@ export const fetchNewVotes = async (
       committee_voter,
     },
   };
-  return handleFetch<any>(url, undefined, options);
+  return handleFetch<any>(url, offset, options);
 };
 
 export const useFetchNewVotes = (
@@ -418,7 +418,7 @@ export const fetchDrepListVote = async (
       gov_action,
     },
   };
-  return handleFetch<any>(url, undefined, options);
+  return handleFetch<any>(url, offset, options);
 };
 
 export const useFetchDrepListVote = (
