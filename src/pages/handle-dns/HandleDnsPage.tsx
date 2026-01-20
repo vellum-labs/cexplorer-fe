@@ -6,20 +6,22 @@ import { PageBase } from "@/components/global/pages/PageBase";
 import { RecentlyMintedHandlesTab } from "./tabs/RecentlyMintedHandlesTab";
 import { HandleValidatorTab } from "./tabs/HandleValidatorTab";
 import { useSearch } from "@tanstack/react-router";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const HandleDnsPage: FC = () => {
+  const { t } = useAppTranslation();
   const { tab, handle } = useSearch({ from: "/handle-dns/" });
 
   const tabs = [
     {
       key: "recently-minted",
-      label: "Recently minted",
+      label: t("common:handleDns.tabs.recentlyMinted"),
       content: <RecentlyMintedHandlesTab />,
       visible: true,
     },
     {
       key: "validator",
-      label: "Handle validator",
+      label: t("common:handleDns.tabs.validator"),
       content: <HandleValidatorTab initialHandle={handle} />,
       visible: true,
     },
@@ -31,7 +33,7 @@ export const HandleDnsPage: FC = () => {
       title={
         <span className='flex items-center'>
           <img src={DollarIcon} alt='$' className='h-6 w-6' />
-          handle DNS
+          {t("common:handleDns.title")}
         </span>
       }
       breadcrumbItems={[
@@ -39,7 +41,7 @@ export const HandleDnsPage: FC = () => {
           label: (
             <span className='flex items-center'>
               <img src={DollarIcon} alt='$' className='h-4 w-4' />
-              handle DNS
+              {t("common:handleDns.breadcrumb")}
             </span>
           ),
         },

@@ -13,6 +13,7 @@ import { useFetchAdaHandleList, useFetchAssetMetadata } from "@/services/assets"
 import { CheckCircle, XCircle } from "lucide-react";
 import { adaHandlePolicy } from "@/constants/confVariables";
 import { getHandleStandard } from "@/utils/getHandleStandard";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const HANDLE_VALIDATOR_SEARCH_KEY = "handle_validator_search";
 
@@ -23,6 +24,7 @@ interface HandleValidatorTabProps {
 export const HandleValidatorTab: FC<HandleValidatorTabProps> = ({
   initialHandle,
 }) => {
+  const { t } = useAppTranslation();
   const [search, setSearch] = useState<string>(
     initialHandle ?? localStorage.getItem(HANDLE_VALIDATOR_SEARCH_KEY) ?? "",
   );
@@ -50,7 +52,7 @@ export const HandleValidatorTab: FC<HandleValidatorTabProps> = ({
   const rows = handleExists
     ? [
         {
-          label: "Handle",
+          label: t("common:handleDns.validator.labels.handle"),
           value: (
             <div className='flex items-center gap-2'>
               {handleData.image && (
@@ -76,11 +78,11 @@ export const HandleValidatorTab: FC<HandleValidatorTabProps> = ({
           ),
         },
         {
-          label: "Rarity",
+          label: t("common:handleDns.validator.labels.rarity"),
           value: <Badge color='gray'>{handleData.rarity}</Badge>,
         },
         {
-          label: "Linked to",
+          label: t("common:handleDns.validator.labels.linkedTo"),
           value: (
             <div className='flex items-center gap-1'>
               <Link
@@ -95,7 +97,7 @@ export const HandleValidatorTab: FC<HandleValidatorTabProps> = ({
           ),
         },
         {
-          label: "Stake key",
+          label: t("common:handleDns.validator.labels.stakeKey"),
           value: (
             <div className='flex items-center gap-1'>
               <Link
@@ -110,7 +112,7 @@ export const HandleValidatorTab: FC<HandleValidatorTabProps> = ({
           ),
         },
         {
-          label: "UTXO",
+          label: t("common:handleDns.validator.labels.utxo"),
           value: (
             <div className='flex items-center gap-1'>
               {handleData.utxo ? (
@@ -133,12 +135,12 @@ export const HandleValidatorTab: FC<HandleValidatorTabProps> = ({
         ...(metadata
           ? [
               {
-                label: "Last change",
+                label: t("common:handleDns.validator.labels.lastChange"),
                 value: (
                   <div className='flex flex-col gap-1'>
-                    <span>Date: {metadata.tx?.time ?? "-"}</span>
+                    <span>{t("common:handleDns.validator.labels.date")} {metadata.tx?.time ?? "-"}</span>
                     <div className='flex items-center gap-1'>
-                      <span>Transaction:</span>
+                      <span>{t("common:handleDns.validator.labels.transaction")}</span>
                       <Link
                         to='/tx/$hash'
                         params={{ hash: metadata.tx?.hash ?? "" }}
@@ -152,7 +154,7 @@ export const HandleValidatorTab: FC<HandleValidatorTabProps> = ({
                 ),
               },
               {
-                label: "Metadata standard",
+                label: t("common:handleDns.validator.labels.metadataStandard"),
                 value: (
                   <Badge color='gray'>
                     {getHandleStandard(handleData.hex)}
@@ -160,7 +162,7 @@ export const HandleValidatorTab: FC<HandleValidatorTabProps> = ({
                 ),
               },
               {
-                label: "Metadata",
+                label: t("common:handleDns.validator.labels.metadata"),
                 value: (
                   <pre className='rounded-sm max-h-[300px] overflow-auto bg-darker p-2 text-text-xs'>
                     {JSON.stringify(metadata.json, null, 2)}
@@ -177,7 +179,7 @@ export const HandleValidatorTab: FC<HandleValidatorTabProps> = ({
       <TableSearchInput
         value={search}
         onchange={val => setSearch(val)}
-        placeholder='Search by $handle or asset ID...'
+        placeholder={t("common:handleDns.validator.searchPlaceholder")}
         showSearchIcon
         wrapperClassName='w-full'
         showPrefixPopup={false}
@@ -199,12 +201,12 @@ export const HandleValidatorTab: FC<HandleValidatorTabProps> = ({
             {handleExists ? (
               <>
                 <CheckCircle size={20} className='text-greenText' />
-                <span className='text-greenText'>Handle is valid.</span>
+                <span className='text-greenText'>{t("common:handleDns.validator.handleValid")}</span>
               </>
             ) : (
               <>
                 <XCircle size={20} className='text-redText' />
-                <span className='text-redText'>Not a valid handle.</span>
+                <span className='text-redText'>{t("common:handleDns.validator.handleInvalid")}</span>
               </>
             )}
           </div>
@@ -226,7 +228,7 @@ export const HandleValidatorTab: FC<HandleValidatorTabProps> = ({
                   key={row.label}
                   className={`flex gap-3 px-3 py-2 text-text-sm ${
                     index % 2 === 0 ? "bg-cardBg" : ""
-                  } ${row.label === "Metadata" || row.label === "Last change" ? "items-start" : "items-center"}`}
+                  } ${row.label === t("common:handleDns.validator.labels.metadata") || row.label === t("common:handleDns.validator.labels.lastChange") ? "items-start" : "items-center"}`}
                 >
                   <span className='min-w-[120px] text-grayTextPrimary'>
                     {row.label}
@@ -237,7 +239,7 @@ export const HandleValidatorTab: FC<HandleValidatorTabProps> = ({
             </div>
           ) : (
             <div className='flex w-full items-center justify-center p-6 text-grayTextPrimary'>
-              Handle "${debouncedSearch}" not found
+              {t("common:handleDns.validator.handleNotFound", { handle: debouncedSearch })}
             </div>
           )}
         </div>
@@ -245,7 +247,7 @@ export const HandleValidatorTab: FC<HandleValidatorTabProps> = ({
 
       {!hasSearched && (
         <div className='flex w-full items-center justify-center rounded-m border border-border p-6 text-grayTextPrimary'>
-          Enter a handle name to check if it exists
+          {t("common:handleDns.validator.enterHandle")}
         </div>
       )}
     </div>

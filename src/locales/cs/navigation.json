@@ -94,7 +94,8 @@
     "taxTool": "Daňový nástroj",
     "rewardsCalculator": "Kalkulačka odměn",
     "poolDebug": "Debug poolu",
-    "uplcViewer": "UPLC prohlížeč"
+    "uplcViewer": "UPLC prohlížeč",
+    "handleDns": "handle DNS"
   },
   "services": {
     "label": "Služby",

@@ -94,7 +94,8 @@
     "taxTool": "Tax tool",
     "rewardsCalculator": "Rewards calculator",
     "poolDebug": "Pool debug",
-    "uplcViewer": "UPLC viewer"
+    "uplcViewer": "UPLC viewer",
+    "handleDns": "handle DNS"
   },
   "services": {
     "label": "Services",

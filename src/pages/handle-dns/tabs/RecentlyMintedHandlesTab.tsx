@@ -16,8 +16,10 @@ import { useHandlesListTableStore } from "@/stores/tables/handlesListTableStore"
 import { handlesListTableOptions } from "@/constants/tables/handlesListTableOptions";
 import type { AdaHandleListItem } from "@/types/assetsTypes";
 import { getHandleStandard } from "@/utils/getHandleStandard";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const RecentlyMintedHandlesTab: FC = () => {
+  const { t } = useAppTranslation();
   const { page, search: urlSearch } = useSearch({ from: "/handle-dns/" });
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState(urlSearch ?? "");
@@ -62,7 +64,7 @@ export const RecentlyMintedHandlesTab: FC = () => {
       render: (item: AdaHandleListItem) => {
         return item.last_mint ? <DateCell time={item.last_mint} /> : "-";
       },
-      title: "Asset minted",
+      title: t("common:handleDns.recentlyMinted.columns.minted"),
       visible: columnsVisibility.minted,
       widthPx: 150,
     },
@@ -76,7 +78,7 @@ export const RecentlyMintedHandlesTab: FC = () => {
           </Badge>
         );
       },
-      title: "Standard",
+      title: t("common:handleDns.recentlyMinted.columns.standard"),
       visible: columnsVisibility.standard,
       widthPx: 130,
     },
@@ -94,7 +96,7 @@ export const RecentlyMintedHandlesTab: FC = () => {
           </Link>
         );
       },
-      title: "Asset",
+      title: t("common:handleDns.recentlyMinted.columns.asset"),
       visible: columnsVisibility.handle,
       widthPx: 200,
     },
@@ -115,7 +117,7 @@ export const RecentlyMintedHandlesTab: FC = () => {
           </Badge>
         );
       },
-      title: "Rarity",
+      title: t("common:handleDns.recentlyMinted.columns.rarity"),
       visible: columnsVisibility.rarity,
       widthPx: 120,
     },
@@ -133,7 +135,7 @@ export const RecentlyMintedHandlesTab: FC = () => {
           </Link>
         );
       },
-      title: "Holder",
+      title: t("common:handleDns.recentlyMinted.columns.holder"),
       visible: columnsVisibility.holder,
       widthPx: 140,
     },
@@ -147,14 +149,14 @@ export const RecentlyMintedHandlesTab: FC = () => {
             <LoadingSkeleton height='27px' width='220px' />
           ) : totalItems > 0 ? (
             <h3 className='text-text-lg font-medium'>
-              Total of {totalItems.toLocaleString()} handles
+              {t("common:handleDns.recentlyMinted.totalHandles", { count: totalItems.toLocaleString() })}
             </h3>
           ) : null}
           <div className='flex items-center gap-1'>
             <TableSearchInput
               value={searchValue}
               onchange={handleSearchChange}
-              placeholder='Search for a handle...'
+              placeholder={t("common:handleDns.recentlyMinted.searchPlaceholder")}
               showSearchIcon
               wrapperClassName='hidden w-[320px] md:flex'
               showPrefixPopup={false}
@@ -174,7 +176,7 @@ export const RecentlyMintedHandlesTab: FC = () => {
         <TableSearchInput
           value={searchValue}
           onchange={handleSearchChange}
-          placeholder='Search for a handle...'
+          placeholder={t("common:handleDns.recentlyMinted.searchPlaceholder")}
           showSearchIcon
           wrapperClassName='flex w-full md:hidden'
           showPrefixPopup={false}

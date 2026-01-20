@@ -1309,6 +1309,44 @@
       }
     }
   },
+  "handleDns": {
+    "title": "$handle DNS",
+    "breadcrumb": "$handle DNS",
+    "tabs": {
+      "recentlyMinted": "Nedávno vytvořené",
+      "validator": "Validátor handle"
+    },
+    "validator": {
+      "searchPlaceholder": "Hledat podle $handle nebo ID assetu...",
+      "handleValid": "Handle je platný.",
+      "handleInvalid": "Neplatný handle.",
+      "handleNotFound": "Handle \"{{handle}}\" nebyl nalezen",
+      "enterHandle": "Zadejte název handle pro kontrolu existence",
+      "labels": {
+        "handle": "Handle",
+        "rarity": "Vzácnost",
+        "linkedTo": "Propojeno s",
+        "stakeKey": "Stake klíč",
+        "utxo": "UTXO",
+        "lastChange": "Poslední změna",
+        "date": "Datum:",
+        "transaction": "Transakce:",
+        "metadataStandard": "Standard metadat",
+        "metadata": "Metadata"
+      }
+    },
+    "recentlyMinted": {
+      "totalHandles": "Celkem {{count}} handles",
+      "searchPlaceholder": "Hledat handle...",
+      "columns": {
+        "minted": "Vytvořeno",
+        "standard": "Standard",
+        "asset": "Asset",
+        "rarity": "Vzácnost",
+        "holder": "Držitel"
+      }
+    }
+  },
   "token": {
     "dashboard": {
       "title": "Přehled tokenů",
