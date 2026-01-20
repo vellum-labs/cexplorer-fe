@@ -5,6 +5,7 @@ import { useGraphColors } from "@/hooks/useGraphColors";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { CircleHelp } from "lucide-react";
 import { generateImageUrl } from "@/utils/generateImageUrl";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface DRepThresholdChartProps {
   chartProps: {
@@ -19,13 +20,14 @@ interface DRepThresholdChartProps {
 export const DRepThresholdChart: FC<DRepThresholdChartProps> = ({
   chartProps,
 }) => {
+  const { t } = useAppTranslation();
   const { epochParam, visibility, activeVotingStake, filteredDReps, params } =
     chartProps;
 
   const { formatLovelace } = useADADisplay();
   const { textColor, bgColor } = useGraphColors();
 
-  const threshold = params ? epochParam[params] : 0;
+  const threshold = params ? (epochParam?.[params] ?? 0) : 0;
 
   const votingStake = activeVotingStake;
   const requiredStake =
@@ -66,7 +68,7 @@ export const DRepThresholdChart: FC<DRepThresholdChartProps> = ({
         })),
         {
           value: votingStake - accumulated,
-          name: "Other DReps",
+          name: t("governance.thresholds.otherDReps"),
           itemStyle: {
             color: "#22c55e",
             borderColor: "#ffffff",
@@ -78,7 +80,7 @@ export const DRepThresholdChart: FC<DRepThresholdChartProps> = ({
     : [
         {
           value: 1,
-          name: "Not applicable",
+          name: t("governance.common.notApplicable"),
           itemStyle: { color: "#E4E7EC" },
         },
       ];
@@ -93,12 +95,12 @@ export const DRepThresholdChart: FC<DRepThresholdChartProps> = ({
       },
       formatter: (params: any) => {
         if (!visibility) {
-          return "DReps do not vote on this action";
+          return t("governance.thresholds.drepNotVoting");
         }
 
         if (params.data.isOther) {
           const stakeFormatted = formatLovelace(params.data.value);
-          return `Other DReps<br/>Stake: ${stakeFormatted}<br/>Not needed for threshold`;
+          return `${t("governance.thresholds.otherDReps")}<br/>${t("governance.common.stake")} ${stakeFormatted}<br/>${t("governance.common.notNeededForThreshold")}`;
         }
 
         if (params.data.drepData) {
@@ -116,14 +118,14 @@ export const DRepThresholdChart: FC<DRepThresholdChartProps> = ({
                 <img src="${imageUrl}" alt="DRep" style="width: 16px; height: 16px; border-radius: 50%; object-fit: cover;" onerror="this.style.display='none'"/>
                 ${params.data.name}
               </div>
-              <div>Voting Power: ${stakeFormatted}</div>
-              <div>Delegators: ${drep.distr?.count ?? "N/A"}</div>
+              <div>${t("governance.common.votingPower")} ${stakeFormatted}</div>
+              <div>${t("governance.common.delegators")} ${drep.distr?.count ?? "N/A"}</div>
             </div>
           `;
         }
 
         const stakeFormatted = formatLovelace(params.data.value);
-        return `${params.data.name}<br/>Stake: ${stakeFormatted}`;
+        return `${params.data.name}<br/>${t("governance.common.stake")} ${stakeFormatted}`;
       },
     },
     series: [
@@ -151,12 +153,13 @@ export const DRepThresholdChart: FC<DRepThresholdChartProps> = ({
   return (
     <div className='flex flex-col items-center justify-center'>
       <div className='flex items-center gap-1'>
-        <p className='mb-1 font-medium'>DReps</p>
+        <p className='mb-1 font-medium'>
+          {t("governance.thresholds.drepTitle")}
+        </p>
         <Tooltip
           content={
             <p className='max-w-[200px]'>
-              Theoretical minimum number of DReps with enough voting power to
-              pass this proposal
+              {t("governance.thresholds.drepTooltip")}
             </p>
           }
         >
@@ -173,11 +176,11 @@ export const DRepThresholdChart: FC<DRepThresholdChartProps> = ({
         />
       </div>
       <p className='text-text-sm text-text'>
-        Threshold:{" "}
+        {t("governance.common.threshold")}{" "}
         {visibility
           ? `${((threshold || 0) * 100).toFixed(0)}%`
-          : "Not applicable"}{" "}
-        (All DReps)
+          : t("governance.common.notApplicable")}{" "}
+        {t("governance.thresholds.allDReps")}
       </p>
     </div>
   );

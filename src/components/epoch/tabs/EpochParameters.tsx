@@ -17,7 +17,8 @@ import { Fragment } from "react";
 import { useEffect, useRef } from "react";
 
 import { colors } from "@/constants/colors";
-import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { safeFormatNumber } from "@/utils/safeFormatNumber";
 
 interface EpochParametersProps {
   param: EpochParam | undefined;
@@ -30,6 +31,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
   isError,
   isLoading,
 }) => {
+  const { t } = useAppTranslation("pages");
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -43,17 +45,19 @@ export const EpochParameters: FC<EpochParametersProps> = ({
   const tableHeader = [
     {
       key: "explanation",
-      title: "Explanation",
+      title: t("epochs.parameters.explanation"),
       width: 100,
     },
     {
       key: "parameter",
-      title: "Parameter",
+      title: t("epochs.parameters.parameter"),
       width: 85,
     },
     {
       key: "value",
-      title: <p className='w-full text-right'>Value</p>,
+      title: (
+        <p className='w-full text-right'>{t("epochs.parameters.value")}</p>
+      ),
       width: 85,
     },
   ];
@@ -63,7 +67,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "min_fee_a",
       columns: [
         {
-          title: "The 'a' parameter to calculate the minimum transaction fee.",
+          title: t("epochs.parameters.minFeeA"),
         },
         {
           title: "min_fee_a",
@@ -71,7 +75,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='w-full text-right'>
-              {formatNumber(param?.min_fee_a)}
+              {safeFormatNumber(param?.min_fee_a)}
             </p>
           ),
         },
@@ -81,7 +85,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "min_fee_b",
       columns: [
         {
-          title: "The 'b' parameter to calculate the minimum transaction fee.",
+          title: t("epochs.parameters.minFeeB"),
         },
         {
           title: "min_fee_b",
@@ -89,7 +93,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='w-full text-right'>
-              {formatNumber(param?.min_fee_b)}
+              {safeFormatNumber(param?.min_fee_b)}
             </p>
           ),
         },
@@ -99,14 +103,14 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "max_block_size",
       columns: [
         {
-          title: "The maximum block size (in bytes).",
+          title: t("epochs.parameters.maxBlockSize"),
         },
         {
           title: "max_block_size",
         },
         {
           title: (
-            <p className='text-right'>{formatNumber(param?.max_block_size)}</p>
+            <p className='text-right'>{safeFormatNumber(param?.max_block_size)}</p>
           ),
         },
       ],
@@ -115,14 +119,14 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "max_tx_size",
       columns: [
         {
-          title: "The maximum transaction size (in bytes).",
+          title: t("epochs.parameters.maxTxSize"),
         },
         {
           title: "max_tx_size",
         },
         {
           title: (
-            <p className='text-right'>{formatNumber(param?.max_tx_size)}</p>
+            <p className='text-right'>{safeFormatNumber(param?.max_tx_size)}</p>
           ),
         },
       ],
@@ -131,14 +135,14 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "max_bh_size",
       columns: [
         {
-          title: "The maximum block header size (in bytes).",
+          title: t("epochs.parameters.maxBhSize"),
         },
         {
           title: "max_bh_size",
         },
         {
           title: (
-            <p className='text-right'>{formatNumber(param?.max_bh_size)}</p>
+            <p className='text-right'>{safeFormatNumber(param?.max_bh_size)}</p>
           ),
         },
       ],
@@ -147,15 +151,14 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "key_deposit",
       columns: [
         {
-          title:
-            "The amount (in Lovelace) require for a deposit to register a StakeAddress.",
+          title: t("epochs.parameters.keyDeposit"),
         },
         {
           title: "key_deposit",
         },
         {
           title: (
-            <p className='text-right'>{formatNumber(param?.key_deposit)}</p>
+            <p className='text-right'>{safeFormatNumber(param?.key_deposit)}</p>
           ),
         },
       ],
@@ -164,15 +167,14 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "pool_deposit",
       columns: [
         {
-          title:
-            "The amount (in Lovelace) require for a deposit to register a stake pool.",
+          title: t("epochs.parameters.poolDeposit"),
         },
         {
           title: "pool_deposit",
         },
         {
           title: (
-            <p className='text-right'>{formatNumber(param?.pool_deposit)}</p>
+            <p className='text-right'>{safeFormatNumber(param?.pool_deposit)}</p>
           ),
         },
       ],
@@ -181,8 +183,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "max_epoch",
       columns: [
         {
-          title:
-            "The maximum number of epochs in the future that a pool retirement is allowed to be scheduled for.",
+          title: t("epochs.parameters.maxEpoch"),
         },
         {
           title: "max_epoch",
@@ -190,7 +191,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='w-full text-right'>
-              {formatNumber(param?.max_epoch)}
+              {safeFormatNumber(param?.max_epoch)}
             </p>
           ),
         },
@@ -200,7 +201,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "optimal_pool_count",
       columns: [
         {
-          title: "The optimal number of stake pools.",
+          title: t("epochs.parameters.optimalPoolCount"),
         },
         {
           title: "optimal_pool_count",
@@ -208,7 +209,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='text-right'>
-              {formatNumber(param?.optimal_pool_count)}
+              {safeFormatNumber(param?.optimal_pool_count)}
             </p>
           ),
         },
@@ -218,8 +219,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "influence",
       columns: [
         {
-          title:
-            "The influence of the pledge on a stake pool's probability on minting a block.",
+          title: t("epochs.parameters.influence"),
         },
         {
           title: "influence",
@@ -227,7 +227,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='w-full text-right'>
-              {formatNumber(param?.influence)}
+              {safeFormatNumber(param?.influence)}
             </p>
           ),
         },
@@ -237,7 +237,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "monetary_expand_rate",
       columns: [
         {
-          title: "The monetary expansion rate.",
+          title: t("epochs.parameters.monetaryExpandRate"),
         },
         {
           title: "monetary_expand_rate",
@@ -245,7 +245,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='text-right'>
-              {formatNumber(param?.monetary_expand_rate)}
+              {safeFormatNumber(param?.monetary_expand_rate)}
             </p>
           ),
         },
@@ -255,7 +255,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "treasury_growth_rate",
       columns: [
         {
-          title: "The treasury growth rate.",
+          title: t("epochs.parameters.treasuryGrowthRate"),
         },
         {
           title: "treasury_growth_rate",
@@ -263,7 +263,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='text-right'>
-              {formatNumber(param?.treasury_growth_rate)}
+              {safeFormatNumber(param?.treasury_growth_rate)}
             </p>
           ),
         },
@@ -273,8 +273,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "decentralisation",
       columns: [
         {
-          title:
-            "The decentralisation parameter (1 fully centralised, 0 fully decentralised).",
+          title: t("epochs.parameters.decentralisation"),
         },
         {
           title: "decentralisation",
@@ -282,8 +281,8 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='text-right'>
-              {param!.decentralisation > 0
-                ? formatNumber(param?.decentralisation)
+              {param?.decentralisation && param.decentralisation > 0
+                ? safeFormatNumber(param?.decentralisation)
                 : param?.decentralisation}
             </p>
           ),
@@ -294,7 +293,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "protocol_major",
       columns: [
         {
-          title: "The protocol major number.",
+          title: t("epochs.parameters.protocolMajor"),
         },
         {
           title: "protocol_major",
@@ -308,7 +307,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "protocol_minor",
       columns: [
         {
-          title: "The protocol minor number.",
+          title: t("epochs.parameters.protocolMinor"),
         },
         {
           title: "protocol_minor",
@@ -322,7 +321,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "min_utxo_value",
       columns: [
         {
-          title: "The minimum value of a UTxO entry.",
+          title: t("epochs.parameters.minUtxoValue"),
         },
         {
           title: "min_utxo_value",
@@ -336,14 +335,14 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "min_pool_cost",
       columns: [
         {
-          title: "The minimum pool cost.",
+          title: t("epochs.parameters.minPoolCost"),
         },
         {
           title: "min_pool_cost",
         },
         {
           title: (
-            <p className='text-right'>{formatNumber(param?.min_pool_cost)}</p>
+            <p className='text-right'>{safeFormatNumber(param?.min_pool_cost)}</p>
           ),
         },
       ],
@@ -352,7 +351,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "nonce",
       columns: [
         {
-          title: "The nonce value for this epoch.",
+          title: t("epochs.parameters.nonce"),
         },
         {
           title: "nonce",
@@ -366,7 +365,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "price_mem",
       columns: [
         {
-          title: "The per word cost of script memory usage.",
+          title: t("epochs.parameters.priceMem"),
         },
         {
           title: "price_mem",
@@ -380,13 +379,17 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "price_step",
       columns: [
         {
-          title: "The cost of script execution step usage.",
+          title: t("epochs.parameters.priceStep"),
         },
         {
           title: "price_step",
         },
         {
-          title: <p className='w-full text-right'>{+param!.price_step}</p>,
+          title: (
+            <p className='w-full text-right'>
+              {param?.price_step ? +param.price_step : null}
+            </p>
+          ),
         },
       ],
     },
@@ -394,15 +397,14 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "max_tx_ex_mem",
       columns: [
         {
-          title:
-            "The maximum number of execution memory allowed to be used in a single transaction.",
+          title: t("epochs.parameters.maxTxExMem"),
         },
         {
           title: "max_tx_ex_mem",
         },
         {
           title: (
-            <p className='text-right'>{formatNumber(param?.max_tx_ex_mem)}</p>
+            <p className='text-right'>{safeFormatNumber(param?.max_tx_ex_mem)}</p>
           ),
         },
       ],
@@ -411,15 +413,14 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "max_tx_ex_steps",
       columns: [
         {
-          title:
-            "The maximum number of execution steps allowed to be used in a single transaction.",
+          title: t("epochs.parameters.maxTxExSteps"),
         },
         {
           title: "max_tx_ex_steps",
         },
         {
           title: (
-            <p className='text-right'>{formatNumber(param?.max_tx_ex_steps)}</p>
+            <p className='text-right'>{safeFormatNumber(param?.max_tx_ex_steps)}</p>
           ),
         },
       ],
@@ -428,8 +429,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "max_block_ex_mem",
       columns: [
         {
-          title:
-            "The maximum number of execution memory allowed to be used in a single block.",
+          title: t("epochs.parameters.maxBlockExMem"),
         },
         {
           title: "max_block_ex_mem",
@@ -437,7 +437,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='text-right'>
-              {formatNumber(param?.max_block_ex_mem)}
+              {safeFormatNumber(param?.max_block_ex_mem)}
             </p>
           ),
         },
@@ -447,8 +447,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "max_block_ex_steps",
       columns: [
         {
-          title:
-            "The maximum number of execution steps allowed to be used in a single block.",
+          title: t("epochs.parameters.maxBlockExSteps"),
         },
         {
           title: "max_block_ex_steps",
@@ -456,7 +455,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='text-right'>
-              {formatNumber(param?.max_block_ex_steps)}
+              {safeFormatNumber(param?.max_block_ex_steps)}
             </p>
           ),
         },
@@ -466,14 +465,14 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "max_val_size",
       columns: [
         {
-          title: "The maximum Val size.",
+          title: t("epochs.parameters.maxValSize"),
         },
         {
           title: "max_val_size",
         },
         {
           title: (
-            <p className='text-right'>{formatNumber(param?.max_val_size)}</p>
+            <p className='text-right'>{safeFormatNumber(param?.max_val_size)}</p>
           ),
         },
       ],
@@ -482,8 +481,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "collateral_percent",
       columns: [
         {
-          title:
-            "The percentage of the txfee which must be provided as collateral when including non-native scripts.",
+          title: t("epochs.parameters.collateralPercent"),
         },
         {
           title: "collateral_percent",
@@ -491,7 +489,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='text-right'>
-              {formatNumber(param?.collateral_percent)}
+              {safeFormatNumber(param?.collateral_percent)}
             </p>
           ),
         },
@@ -501,8 +499,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
       key: "max_collateral_inputs",
       columns: [
         {
-          title:
-            "The maximum number of collateral inputs allowed in a transaction.",
+          title: t("epochs.parameters.maxCollateralInputs"),
         },
         {
           title: "max_collateral_inputs",
@@ -510,7 +507,7 @@ export const EpochParameters: FC<EpochParametersProps> = ({
         {
           title: (
             <p className='text-right'>
-              {formatNumber(param?.max_collateral_inputs)}
+              {safeFormatNumber(param?.max_collateral_inputs)}
             </p>
           ),
         },
@@ -521,10 +518,12 @@ export const EpochParameters: FC<EpochParametersProps> = ({
   return (
     <>
       <div className='flex w-full items-center justify-between gap-1'>
-        <h3 className='basis-[220px]'>Epoch Parameters</h3>
+        <h3 className='basis-[220px]'>{t("epochs.parameters.title")}</h3>
         <div className='flex h-[40px] w-fit shrink-0 items-center justify-center gap-1/2 rounded-s border border-border px-1.5'>
           <Download size={20} color={colors.text} />
-          <span className='text-text-sm font-medium'>Export</span>
+          <span className='text-text-sm font-medium'>
+            {t("epochs.parameters.export")}
+          </span>
         </div>
       </div>
       <div

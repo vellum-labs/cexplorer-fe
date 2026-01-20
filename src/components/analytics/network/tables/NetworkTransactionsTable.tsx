@@ -4,6 +4,7 @@ import type { NetworkTPSTableColumns, TableColumns } from "@/types/tableTypes";
 
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useNetworkTPSTableStore } from "@/stores/tables/networkTPSTableStore";
 
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
@@ -22,6 +23,7 @@ export const NetworkTransactionsTable: FC<NetworkTransactionsTableProps> = ({
   query,
   items,
 }) => {
+  const { t } = useAppTranslation("common");
   const { columnsOrder, rows, columnsVisibility, setColumsOrder } =
     useNetworkTPSTableStore();
 
@@ -29,7 +31,7 @@ export const NetworkTransactionsTable: FC<NetworkTransactionsTableProps> = ({
     {
       key: "timeframe",
       render: item => <p>{item.timeframe}</p>,
-      title: <p>Timeframe</p>,
+      title: <p>{t("analytics.timeframe")}</p>,
       visible: columnsVisibility.timeframe,
       widthPx: 50,
     },
@@ -38,14 +40,14 @@ export const NetworkTransactionsTable: FC<NetworkTransactionsTableProps> = ({
       render: item => (
         <p className='text-right'>{formatNumber(item.transactions)}</p>
       ),
-      title: <p className='w-full text-right'>Transactions</p>,
+      title: <p className='w-full text-right'>{t("analytics.transactions")}</p>,
       visible: columnsVisibility.transactions,
       widthPx: 50,
     },
     {
       key: "tps",
       render: item => <p className='text-right'>{formatNumber(item.tps)}</p>,
-      title: <p className='w-full text-right'>TPS</p>,
+      title: <p className='w-full text-right'>{t("analytics.tps")}</p>,
       visible: columnsVisibility.tps,
       widthPx: 50,
     },
@@ -54,7 +56,7 @@ export const NetworkTransactionsTable: FC<NetworkTransactionsTableProps> = ({
       render: item => (
         <p className='text-right'>{formatNumber(item.max_tps)}</p>
       ),
-      title: <p className='w-full text-right'>Max TPS</p>,
+      title: <p className='w-full text-right'>{t("analytics.maxTps")}</p>,
       visible: columnsVisibility.max_tps,
       widthPx: 50,
     },
@@ -78,6 +80,10 @@ export const NetworkTransactionsTable: FC<NetworkTransactionsTableProps> = ({
       })}
       minContentWidth={500}
       onOrderChange={setColumsOrder}
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

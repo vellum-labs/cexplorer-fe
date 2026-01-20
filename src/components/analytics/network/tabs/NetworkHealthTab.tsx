@@ -8,12 +8,14 @@ import { NetworkHealthGraph } from "../graphs/NetworkHealthGraph";
 
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useFetchEpochAnalytics } from "@/services/analytics";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { configJSON } from "@/constants/conf";
 
 export const NetworkHealthTab: FC = () => {
+  const { t } = useAppTranslation("common");
   const epochQuery = useFetchEpochAnalytics();
 
   const { genesisParams } = configJSON;
@@ -21,7 +23,7 @@ export const NetworkHealthTab: FC = () => {
     genesisParams[0].shelley[0].activeSlotsCoeff *
     genesisParams[0].shelley[0].epochLength;
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const previousEpoch = (epochQuery?.data?.data ?? [])[1];
 
@@ -42,25 +44,25 @@ export const NetworkHealthTab: FC = () => {
     {
       key: "chain_density_day",
       icon: <Box className='text-primary' />,
-      label: "Chain density - previous epoch",
+      label: t("analytics.chainDensityPreviousEpoch"),
       content: `${(((previousEpoch?.stat?.count_block ?? 0) / expectedBlocks) * 100).toFixed(2)}%`,
       footer: previousEpoch?.stat?.count_block
-        ? `${formatNumber(previousEpoch?.stat?.count_block)} blocks`
+        ? `${formatNumber(previousEpoch?.stat?.count_block)} ${t("labels.blocks").toLowerCase()}`
         : "-",
     },
     {
       key: "chain_density_epoch",
       icon: <Box className='text-primary' />,
-      label: "Chain density - 10 epoch",
+      label: t("analytics.chainDensity10Epoch"),
       content: `${getChainDensity(previousTenEpoch).toFixed(2)}%`,
-      footer: `${formatNumber(getEpochBlkCount(previousTenEpoch))} blocks`,
+      footer: `${formatNumber(getEpochBlkCount(previousTenEpoch))} ${t("labels.blocks").toLowerCase()}`,
     },
     {
       key: "chain_density_month",
       icon: <Box className='text-primary' />,
-      label: "Chain density - 30 epoch",
+      label: t("analytics.chainDensity30Epoch"),
       content: `${getChainDensity(previousThirtyEpoch).toFixed(2)}%`,
-      footer: `${formatNumber(getEpochBlkCount(previousThirtyEpoch))} blocks`,
+      footer: `${formatNumber(getEpochBlkCount(previousThirtyEpoch))} ${t("labels.blocks").toLowerCase()}`,
     },
   ];
 

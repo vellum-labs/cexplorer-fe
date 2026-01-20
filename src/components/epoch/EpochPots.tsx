@@ -6,6 +6,7 @@ import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface EpochPotsProps {
   stats: EpochStatsSummary;
@@ -13,6 +14,7 @@ interface EpochPotsProps {
 }
 
 export const EpochPots: FC<EpochPotsProps> = ({ stats, constData }) => {
+  const { t } = useAppTranslation("pages");
   const treasury = stats?.pots?.treasury;
   const reserves = stats?.pots?.reserves;
   const rewards = stats?.pots?.rewards;
@@ -34,7 +36,7 @@ export const EpochPots: FC<EpochPotsProps> = ({ stats, constData }) => {
 
   const overviewList = [
     {
-      label: "Treasury",
+      label: t("epochs.pots.treasury"),
       value: (
         <p className='text-text-sm font-medium'>
           <AdaWithTooltip data={treasury ?? 0} />
@@ -42,7 +44,7 @@ export const EpochPots: FC<EpochPotsProps> = ({ stats, constData }) => {
       ),
     },
     {
-      label: "Reserves",
+      label: t("epochs.pots.reserves"),
       value: (
         <p className='text-text-sm font-medium'>
           <AdaWithTooltip data={reserves ?? 0} />
@@ -50,7 +52,7 @@ export const EpochPots: FC<EpochPotsProps> = ({ stats, constData }) => {
       ),
     },
     {
-      label: "Rewards",
+      label: t("epochs.pots.rewards"),
       value: (
         <p className='text-text-sm font-medium'>
           <AdaWithTooltip data={rewards} />
@@ -58,7 +60,7 @@ export const EpochPots: FC<EpochPotsProps> = ({ stats, constData }) => {
       ),
     },
     {
-      label: "Deposits",
+      label: t("epochs.pots.deposits"),
       value: (
         <p className='text-text-sm font-medium'>
           <AdaWithTooltip data={depositsStake} />
@@ -66,7 +68,7 @@ export const EpochPots: FC<EpochPotsProps> = ({ stats, constData }) => {
       ),
     },
     {
-      label: "Fees",
+      label: t("epochs.pots.fees"),
       value: (
         <p className='text-text-sm font-medium'>
           <AdaWithTooltip data={fees} />
@@ -75,8 +77,8 @@ export const EpochPots: FC<EpochPotsProps> = ({ stats, constData }) => {
     },
     {
       label: (
-        <Tooltip content='Portion of staking rewards coming from fees vs reserves'>
-          <span className='cursor-help'>Fees / Reserves</span>
+        <Tooltip content={t("epochs.pots.feesReservesTooltip")}>
+          <span className='cursor-help'>{t("epochs.pots.feesReserves")}</span>
         </Tooltip>
       ),
       value: (
@@ -89,7 +91,10 @@ export const EpochPots: FC<EpochPotsProps> = ({ stats, constData }) => {
 
   return (
     <div className='flex flex-grow basis-[410px] items-stretch md:flex-shrink-0'>
-      <OverviewCard title='Pots' overviewList={overviewList} />
+      <OverviewCard
+        title={t("epochs.pots.title")}
+        overviewList={overviewList}
+      />
     </div>
   );
 };

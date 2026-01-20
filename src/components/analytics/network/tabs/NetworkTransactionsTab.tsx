@@ -9,6 +9,7 @@ import { NetworkTxInEpochGraph } from "../graphs/NetworkTxInEpochGraph";
 import { NetworkTxInTimeGraph } from "../graphs/NetworkTxInTimeGraph";
 import { NetworkTransactionsTable } from "../tables/NetworkTransactionsTable";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import {
   useFetchAnalyticsRate,
   useFetchEpochAnalytics,
@@ -22,6 +23,7 @@ import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 
 export const NetworkTransactionTab: FC = () => {
+  const { t } = useAppTranslation("common");
   const epochQuery = useFetchEpochAnalytics();
   const rateQuery = useFetchAnalyticsRate();
 
@@ -29,7 +31,7 @@ export const NetworkTransactionTab: FC = () => {
 
   const epochs = (epochQuery.data?.data ?? []).filter(item => item?.stat);
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const allTimeDates = rateQuery.data?.data;
   const threeMonthDates = (allTimeDates ?? [])?.slice(0, 90);
@@ -52,23 +54,23 @@ export const NetworkTransactionTab: FC = () => {
     {
       key: "total_transactions",
       icon: <ArrowLeftRight className='text-primary' />,
-      label: "Transactions",
+      label: t("analytics.transactions"),
       content: formatNumber(totalTx),
-      footer: "All time",
+      footer: t("analytics.allTime"),
     },
     {
       key: "transactions_per_second",
       icon: <Zap className='text-primary' />,
-      label: "Transactions per second (TPS)",
+      label: t("analytics.transactionsPerSecond"),
       content: prevEpochTPS,
-      footer: "In previous epoch",
+      footer: t("analytics.inPreviousEpoch"),
     },
     {
       key: "avg_fee_per_transaction",
       icon: <Database className='text-primary' />,
-      label: "Average fee per transaction",
+      label: t("analytics.avgFeePerTransaction"),
       content: averageTxFee,
-      footer: "In previous epoch",
+      footer: t("analytics.inPreviousEpoch"),
     },
   ];
 
@@ -105,25 +107,25 @@ export const NetworkTransactionTab: FC = () => {
 
   const items = [
     {
-      timeframe: "All time",
+      timeframe: t("analytics.allTime"),
       transactions: getTx(allTimeDates),
       tps: getTps(allTimeDates),
       max_tps: getMaxTps(allTimeDates),
     },
     {
-      timeframe: "3 month",
+      timeframe: t("analytics.threeMonth"),
       transactions: getTx(threeMonthDates),
       tps: getTps(threeMonthDates),
       max_tps: getMaxTps(threeMonthDates),
     },
     {
-      timeframe: "30 days",
+      timeframe: t("analytics.thirtyDays"),
       transactions: getTx(thrityDaysDates),
       tps: getTps(thrityDaysDates),
       max_tps: getMaxTps(thrityDaysDates),
     },
     {
-      timeframe: "7 days",
+      timeframe: t("analytics.sevenDays"),
       transactions: getTx(sevenDaysDates),
       tps: getTps(sevenDaysDates),
       max_tps: getMaxTps(sevenDaysDates),
@@ -138,8 +140,8 @@ export const NetworkTransactionTab: FC = () => {
       />
       <NetworkTxInEpochGraph epochQuery={epochQuery} miscConst={miscConst} />
       <AnalyticsGraph
-        title='Transactions per second (TPS)'
-        description='Visual expression of all transactions on the Cardano network in time.'
+        title={t("analytics.transactionsPerSecond")}
+        description={t("analytics.tpsDescription")}
       >
         <div className='flex h-full w-full flex-wrap gap-1.5 xl:flex-nowrap'>
           <NetworkTransactionsTable query={epochQuery} items={items} />

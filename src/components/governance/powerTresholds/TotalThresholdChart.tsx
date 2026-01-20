@@ -3,6 +3,7 @@ import ReactECharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { CircleHelp } from "lucide-react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface TotalThresholdChartProps {
   chartProps: {
@@ -46,6 +47,7 @@ export const TotalThresholdChart: FC<TotalThresholdChartProps> = ({
     spoCount,
   } = chartProps;
 
+  const { t } = useAppTranslation();
   const { textColor, bgColor } = useGraphColors();
 
   const cc =
@@ -87,16 +89,16 @@ export const TotalThresholdChart: FC<TotalThresholdChartProps> = ({
         color: textColor,
       },
       formatter: (params: any) => {
-        if (params.name.includes("CC Members")) {
-          return "Minimum CC members needed to pass<br/>Count: " + cc;
+        if (params.name.includes("CC")) {
+          return `${t("governance.thresholds.minCCNeeded")}<br/>${t("governance.common.count")}: ${cc}`;
         }
-        if (params.name.includes("DReps")) {
-          return "Minimum DReps needed to pass<br/>Count: " + drep;
+        if (params.name.includes("DRep")) {
+          return `${t("governance.thresholds.minDRepsNeeded")}<br/>${t("governance.common.count")}: ${drep}`;
         }
-        if (params.name.includes("SPOs")) {
-          return "Minimum SPOs needed to pass<br/>Count: " + spo;
+        if (params.name.includes("SPO")) {
+          return `${t("governance.thresholds.minSPOsNeeded")}<br/>${t("governance.common.count")}: ${spo}`;
         }
-        return "Other";
+        return t("governance.thresholds.other");
       },
     },
     series: [
@@ -136,7 +138,7 @@ export const TotalThresholdChart: FC<TotalThresholdChartProps> = ({
                     visibility.cc && totalNeeded > 0
                       ? 50 * (cc / totalNeeded)
                       : 0,
-                  name: `CC Members (${cc})`,
+                  name: `${t("governance.thresholds.ccMembers")} (${cc})`,
                   itemStyle: {
                     color: "#f43f5e",
                     borderColor: "#ffffff",
@@ -152,7 +154,7 @@ export const TotalThresholdChart: FC<TotalThresholdChartProps> = ({
                     visibility.drep && totalNeeded > 0
                       ? 50 * (drep / totalNeeded)
                       : 0,
-                  name: `DReps (${drep})`,
+                  name: `${t("governance.thresholds.drepTitle")} (${drep})`,
                   itemStyle: {
                     color: "#f43f5e",
                     borderColor: "#ffffff",
@@ -168,7 +170,7 @@ export const TotalThresholdChart: FC<TotalThresholdChartProps> = ({
                     visibility.spo && totalNeeded > 0
                       ? 50 * (spo / totalNeeded)
                       : 0,
-                  name: `SPOs (${spo})`,
+                  name: `${t("governance.thresholds.spoTitle")} (${spo})`,
                   itemStyle: {
                     color:
                       isParameterGraph && isSecuryTitle ? "#F79009" : "#f43f5e",
@@ -180,7 +182,7 @@ export const TotalThresholdChart: FC<TotalThresholdChartProps> = ({
             : []),
           {
             value: 50,
-            name: "Can't pass",
+            name: t("governance.thresholds.cantPass"),
             itemStyle: {
               color: "#22c55e",
               borderColor: "#ffffff",
@@ -195,13 +197,15 @@ export const TotalThresholdChart: FC<TotalThresholdChartProps> = ({
   return (
     <div className='flex flex-col items-center justify-center'>
       <div className='flex items-center gap-1'>
-        <p className='mb-1 font-medium'>Total</p>
+        <p className='mb-1 font-medium'>
+          {t("governance.thresholds.totalTitle")}
+        </p>
         <Tooltip
           content={
             <p className='max-w-[200px]'>
               {isParameterGraph
-                ? "Theoretical minimum number of entities (CC, DReps, SPOs) needed to pass this governance action. If the parameter is a security parameter, SPO votes (orange) are also included."
-                : "Theoretical minimum number of entities (CC, DReps, SPOs) needed to pass this governance action."}
+                ? t("governance.thresholds.totalTooltipParameter")
+                : t("governance.thresholds.totalTooltip")}
             </p>
           }
         >

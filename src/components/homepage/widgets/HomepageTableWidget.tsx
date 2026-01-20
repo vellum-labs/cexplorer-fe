@@ -25,6 +25,7 @@ import { paginateArray } from "@vellumlabs/cexplorer-sdk";
 import { PaginationNext, PaginationPrevious } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Loading } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface HomepageTableWidgetProps {
   rowHeight?: number;
@@ -43,6 +44,7 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
   rowHeight,
   width,
 }) => {
+  const { t } = useAppTranslation("common");
   const [initLoading, setInitLoading] = useState<boolean>(true);
 
   const [page, setPage] = useState<number>(1);
@@ -223,16 +225,17 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
 
   return (
     <>
-      <div className='absolute right-28 top-2'>
+      <div className='absolute right-36 top-2'>
         <TableSettingsDropdown
           rows={0}
           setRows={() => {}}
+          rowsLabel={t("table.rows")}
           visibleRows={false}
           columnsOptions={
             columnsVisibility && setColumnVisibility && tableOptions
               ? tableOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item?.key],
                     onClick: () =>
                       setColumnVisibility(
@@ -250,23 +253,30 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
           currentPage={page}
           setCurrentPage={setPage}
           totalPages={totalPages}
+          labels={{
+            ellipsisSrLabel: t("sdk:pagination.morePages"),
+            nextAriaLabel: t("sdk:pagination.nextPage"),
+            previousAriaLabel: t("sdk:pagination.previousPage"),
+          }}
         />
       </div>
       {width > 1 && (
-        <div className='absolute right-40 top-[8px]'>
+        <div className='absolute right-48 top-[8px]'>
           <PaginationPrevious
             disabled={page === 1}
             onClick={() => setPage(prev => prev - 1)}
+            ariaLabel={t("sdk:pagination.previousPage")}
           />
           <PaginationNext
             disabled={page >= totalPages}
             onClick={() => setPage(prev => prev + 1)}
+            ariaLabel={t("sdk:pagination.nextPage")}
           />
         </div>
       )}
       {width > 1 && (
         <div
-          className='absolute right-[260px] top-[11px] flex h-[30px] items-center'
+          className='absolute right-[285px] top-[11px] flex h-[30px] items-center'
           ref={inputRef}
         >
           <Search
@@ -288,7 +298,7 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
         <Button
           variant='tertiary'
           size='md'
-          label='Remove filters'
+          label={t("homepage.removeFilters")}
           className='absolute left-28 top-[6px]'
           onClick={handleRemoveFilters}
         />

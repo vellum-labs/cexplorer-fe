@@ -12,6 +12,7 @@ import { memo } from "react";
 
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { useGraphColors } from "@/hooks/useGraphColors";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface NetworkBlockVersionsPoolGraphProps {
   sortedVersions: [string, number][] | [string, unknown][];
@@ -19,6 +20,7 @@ interface NetworkBlockVersionsPoolGraphProps {
 
 export const NetworkBlockVersionsPoolGraph: FC<NetworkBlockVersionsPoolGraphProps> =
   memo(function NetworkBlockVersionsPoolGraph({ sortedVersions }) {
+    const { t } = useAppTranslation("common");
     const { data } = useFetchPoolListDefault();
     const navigate = useNavigate();
 
@@ -67,9 +69,9 @@ export const NetworkBlockVersionsPoolGraph: FC<NetworkBlockVersionsPoolGraphProp
           const version = params.data.lastBlockVersion;
 
           return `
-            ${version ? `Last block version: ${version}<br>` : ""}
-            ${poolName ? `Pool Name: ${poolName}<br>` : ""}
-            Pool ID: ${formatString(params?.data?.id, "long")}
+            ${version ? `${t("analytics.lastBlockVersion")}: ${version}<br>` : ""}
+            ${poolName ? `${t("analytics.poolName")}: ${poolName}<br>` : ""}
+            ${t("analytics.poolId")}: ${formatString(params?.data?.id, "long")}
           `;
         },
       },

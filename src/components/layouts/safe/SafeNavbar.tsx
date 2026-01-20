@@ -51,7 +51,11 @@ export const SafeNavbar: FC = () => {
                 label='Tokens'
                 options={navigationOptions.tokens}
               />
-              <Dropdown id='nfts' label='NFTs' options={navigationOptions.nfts} />
+              <Dropdown
+                id='nfts'
+                label='NFTs'
+                options={navigationOptions.nfts}
+              />
               <Dropdown
                 id='education'
                 label='Education'

@@ -19,6 +19,7 @@ import { useMiscConst } from "../useMiscConst";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { isHex } from "@/utils/isHex";
 import { useSearchTable } from "./useSearchTable";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface UseTxList {
   specifiedParams: string | true | undefined;
@@ -57,12 +58,13 @@ export const useTxList = ({
   overrideRows,
   overrideTableSearch,
 }: UseTxListArgs): UseTxList => {
+  const { t } = useAppTranslation("pages");
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { rows, columnsVisibility, setColumnVisibility } =
     useTxListTableStore(storeKey)();
 
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const [totalItems, setTotalItems] = useState(0);
 
@@ -118,7 +120,7 @@ export const useTxList = ({
 
         return item?.block?.time;
       },
-      title: "Date",
+      title: t("common:labels.date"),
       visible: columnsVisibility.date,
       widthPx: 60,
     },
@@ -132,7 +134,7 @@ export const useTxList = ({
 
         return item?.hash;
       },
-      title: "Hash",
+      title: t("common:labels.hash"),
       visible: columnsVisibility.hash,
       widthPx: 80,
     },
@@ -149,7 +151,9 @@ export const useTxList = ({
         formatNumber(item?.block?.epoch_no ?? 0) +
         " / " +
         formatNumber(item?.block?.no ?? 0),
-      title: <p className='w-full text-right'>Epoch / Block</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.epochBlock")}</p>
+      ),
       visible: columnsVisibility.block,
       widthPx: 65,
     },
@@ -160,7 +164,9 @@ export const useTxList = ({
           <AdaWithTooltip data={item?.out_sum ?? 0} />
         </span>
       ),
-      title: <p className='w-full text-right'>Total Output</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.totalOutput")}</p>
+      ),
       visible: columnsVisibility.total_output,
       widthPx: 75,
     },
@@ -171,7 +177,11 @@ export const useTxList = ({
           <AdaWithTooltip data={item?.treasury_donation ?? 0} />
         </span>
       ),
-      title: <p className='w-full text-right'>Treasury Donation</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("transactions.table.treasuryDonation")}
+        </p>
+      ),
       visible: isDonationPage || columnsVisibility.donation,
       widthPx: 75,
     },
@@ -182,7 +192,7 @@ export const useTxList = ({
           <AdaWithTooltip data={item?.fee ?? 0} />
         </span>
       ),
-      title: <p className='w-full text-right'>Fee</p>,
+      title: <p className='w-full text-right'>{t("common:labels.fee")}</p>,
       visible: columnsVisibility.fee,
       widthPx: 75,
     },
@@ -208,7 +218,7 @@ export const useTxList = ({
           "%"
         );
       },
-      title: <p className='w-full text-right'>Size</p>,
+      title: <p className='w-full text-right'>{t("common:labels.size")}</p>,
       visible: columnsVisibility.size,
       widthPx: 55,
     },
@@ -222,7 +232,11 @@ export const useTxList = ({
       jsonFormat: item => {
         return item?.script_size;
       },
-      title: <p className='w-full text-right'>Script size</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("transactions.table.scriptSize")}
+        </p>
+      ),
       visible: columnsVisibility.script_size,
       widthPx: 35,
     },

@@ -12,8 +12,10 @@ import { GovernanceThresholdsSection } from "@/components/governance/powerTresho
 import { PowerThresholdsSPOAttackGraph } from "@/components/governance/powerTresholds/PowerThresholdsSPOAttackGraph";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { useGovernanceThresholds } from "@/hooks/useGovernanceThresholds";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const PowerThresholdsPage: FC = () => {
+  const { t } = useAppTranslation("common");
   const {
     miscConst,
     query,
@@ -37,13 +39,15 @@ export const PowerThresholdsPage: FC = () => {
       </Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center'>
         <HeaderBanner
-          title='Power Thresholds'
+          title={t("governance.powerThresholds.title")}
           breadcrumbItems={[
             {
-              label: <span className='inline pt-1/2'>Governance</span>,
+              label: (
+                <span className='inline pt-1/2'>{t("gov.governance")}</span>
+              ),
               link: "/gov",
             },
-            { label: "Power thresholds" },
+            { label: t("governance.powerThresholds.breadcrumb") },
           ]}
         />
 
@@ -52,11 +56,13 @@ export const PowerThresholdsPage: FC = () => {
             <>
               <div className='rounded-l'>
                 <AnalyticsGraph
-                  title='Delegation Distribution'
-                  description='Amount of ADA delegated to stake pools and dReps.'
+                  title={t("governance.powerThresholds.delegationDistribution")}
+                  description={t(
+                    "governance.powerThresholds.delegationDistributionDesc",
+                  )}
                 >
                   <AnalyticsGraph
-                    title='Number of SPOs Capable of Performing a 51% Attack'
+                    title={t("governance.powerThresholds.spoAttack")}
                     className='border-none px-0'
                   >
                     {query.isLoading ? (
@@ -70,7 +76,9 @@ export const PowerThresholdsPage: FC = () => {
                   </AnalyticsGraph>
 
                   <AnalyticsGraph
-                    title='Percent of Circulating ADA Delegated to SPOs'
+                    title={t(
+                      "governance.powerThresholds.percentDelegatedToSPOs",
+                    )}
                     exportButton
                     className='border-none px-0'
                   >
@@ -107,7 +115,9 @@ export const PowerThresholdsPage: FC = () => {
                   </AnalyticsGraph>
 
                   <AnalyticsGraph
-                    title='Percent of Circulating ADA Delegated to DReps'
+                    title={t(
+                      "governance.powerThresholds.percentDelegatedToDReps",
+                    )}
                     exportButton
                     className='border-none px-0'
                   >
@@ -150,11 +160,10 @@ export const PowerThresholdsPage: FC = () => {
               <div className='flex items-center justify-between p-3'>
                 <div>
                   <h2 className='text-text-xl font-bold'>
-                    Governance Thresholds
+                    {t("governance.powerThresholds.governanceThresholds")}
                   </h2>
                   <p className='text-text-sm text-grayTextPrimary'>
-                    Number of minimum votes needed for approving governance
-                    actions by type (includes all DReps).
+                    {t("governance.powerThresholds.governanceThresholdsDesc")}
                   </p>
                 </div>
               </div>
@@ -173,37 +182,35 @@ export const PowerThresholdsPage: FC = () => {
               ) : (
                 <>
                   <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
-                    Minimum Votes Needed to Pass a Vote of No Confidence
+                    {t("governance.powerThresholds.minVotesNoConfidence")}
                   </h3>
                   <GovernanceThresholdsSection
                     thresholdProps={voteOfMotionNoConfidenceProps}
                   />
 
                   <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
-                    Minimum Votes Needed to Elect a New Constitutional Committee
-                    (Normal State)
+                    {t("governance.powerThresholds.minVotesNewCCNormal")}
                   </h3>
                   <GovernanceThresholdsSection
                     thresholdProps={voteOfCommitteeNormalProps}
                   />
 
                   <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
-                    Minimum Votes Needed to Elect a New Constitutional Committee
-                    (No Confidence State)
+                    {t("governance.powerThresholds.minVotesNewCCNoConfidence")}
                   </h3>
                   <GovernanceThresholdsSection
                     thresholdProps={voteOfCommitteeNoConfidenceProps}
                   />
 
                   <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
-                    Minimum Votes Needed to Update the Cardano Constitution
+                    {t("governance.powerThresholds.minVotesUpdateConstitution")}
                   </h3>
                   <GovernanceThresholdsSection
                     thresholdProps={voteOfUpdateToConstitutionProps}
                   />
 
                   <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
-                    Minimum Votes Needed to Initiate a Hard Fork
+                    {t("governance.powerThresholds.minVotesHardFork")}
                   </h3>
                   <GovernanceThresholdsSection
                     thresholdProps={voteOfHardForkInitiationProps}
@@ -211,36 +218,35 @@ export const PowerThresholdsPage: FC = () => {
                   />
 
                   <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
-                    Minimum Votes Needed to Withdraw Funds from the Cardano
-                    Treasury
+                    {t("governance.powerThresholds.minVotesTreasuryWithdrawal")}
                   </h3>
                   <GovernanceThresholdsSection
                     thresholdProps={voteOfTreasuryWithdrawalProps}
                   />
 
                   <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
-                    Minimum Votes Needed to Change Economic Parameters
+                    {t("governance.powerThresholds.minVotesEconomicParams")}
                   </h3>
                   <GovernanceThresholdsSection
                     thresholdProps={voteOfPPEconomicGroupProps}
                   />
 
                   <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
-                    Minimum Votes Needed to Change Network Technical Parameters
+                    {t("governance.powerThresholds.minVotesTechnicalParams")}
                   </h3>
                   <GovernanceThresholdsSection
                     thresholdProps={voteOfPPTechnicalGroupProps}
                   />
 
                   <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
-                    Minimum Votes Needed to Change Network Parameters
+                    {t("governance.powerThresholds.minVotesNetworkParams")}
                   </h3>
                   <GovernanceThresholdsSection
                     thresholdProps={voteOfPPNetworkGroupProps}
                   />
 
                   <h3 className='mb-2 mt-3 p-3 text-text-md font-semibold'>
-                    Minimum Votes Needed to Change Governance Parameter
+                    {t("governance.powerThresholds.minVotesGovParams")}
                   </h3>
                   <GovernanceThresholdsSection
                     thresholdProps={voteOfPPGovGroupProps}

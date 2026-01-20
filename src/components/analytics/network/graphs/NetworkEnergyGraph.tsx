@@ -8,6 +8,7 @@ import ReactEcharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useEffect, useState } from "react";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface NetworkEnergyGraphProps {
   setJson?: Dispatch<SetStateAction<any>>;
@@ -18,6 +19,7 @@ export const NetworkEnergyGraph: FC<NetworkEnergyGraphProps> = ({
   setJson,
   rateQuery,
 }) => {
+  const { t } = useAppTranslation("common");
   const data = rateQuery.data?.data || [];
 
   const [graphsVisibility, setGraphsVisibility] = useState({
@@ -77,7 +79,7 @@ export const NetworkEnergyGraph: FC<NetworkEnergyGraphProps> = ({
     xAxis: {
       type: "category",
       data: dates,
-      name: "Epoch",
+      name: t("labels.epoch"),
       nameLocation: "middle",
       nameGap: 28,
       inverse: true,

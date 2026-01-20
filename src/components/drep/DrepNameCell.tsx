@@ -64,8 +64,10 @@ export const DrepNameCell: FC<DrepNameCellProps> = ({ item }) => {
         <div className='flex items-center gap-1/2'>
           <span
             className={`overflow-hidden text-ellipsis whitespace-nowrap ${
-              item?.data?.given_name ? "text-text-xs" : "text-text-sm"
-            } text-grayText`}
+              item?.data?.given_name
+                ? "text-text-xs text-grayText"
+                : "text-text-sm text-primary"
+            }`}
           >
             <Link
               to='/drep/$hash'
@@ -77,8 +79,8 @@ export const DrepNameCell: FC<DrepNameCellProps> = ({ item }) => {
           </span>
           <Copy
             copyText={item?.hash?.view}
-            size={item?.data ? 10 : 13}
-            className='stroke-grayText'
+            size={item?.data?.given_name ? 10 : 13}
+            className={item?.data?.given_name ? "stroke-grayText" : ""}
           />
         </div>
       </div>

@@ -21,8 +21,10 @@ import { hexToRgba } from "@/utils/hexToRgba";
 
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const HardforkPage: FC = () => {
+  const { t } = useAppTranslation();
   const [activeStatus, setActiveStatus] = useState<
     "all" | "completed" | "in_progress" | "not_started"
   >("all");
@@ -151,14 +153,14 @@ const HardforkPage: FC = () => {
           <span>{item.name}</span>
         </div>
       ),
-      title: "Exchanges",
+      title: t("hardfork.table.exchanges"),
       visible: true,
       widthPx: 95,
     },
     {
       key: "liquidity",
       render: item => <span>{item.liquidityPercentage}%</span>,
-      title: "Liquidity",
+      title: t("hardfork.table.liquidity"),
       visible: true,
       widthPx: 95,
     },
@@ -177,7 +179,7 @@ const HardforkPage: FC = () => {
                 borderColor: hexToRgba("#079455", 0.3),
               }}
             >
-              Completed
+              {t("hardfork.status.completed")}
             </span>
           )}
           {item.status === "notStarted" && (
@@ -191,7 +193,7 @@ const HardforkPage: FC = () => {
                 borderColor: hexToRgba("#f04438", 0.3),
               }}
             >
-              Not Started
+              {t("hardfork.status.notStarted")}
             </span>
           )}
           {item.status === "inProgress" && (
@@ -205,12 +207,12 @@ const HardforkPage: FC = () => {
                 borderColor: hexToRgba("#fdb022", 0.3),
               }}
             >
-              In Progress
+              {t("hardfork.status.inProgress")}
             </span>
           )}
         </>
       ),
-      title: "Status",
+      title: t("hardfork.table.status"),
       visible: true,
       widthPx: 95,
     },
@@ -219,7 +221,7 @@ const HardforkPage: FC = () => {
       render: item => (
         <span>{item?.updatedOn ? formatDate(item?.updatedOn) : ""}</span>
       ),
-      title: "Last Updated",
+      title: t("hardfork.table.lastUpdated"),
       visible: true,
       widthPx: 95,
     },
@@ -265,21 +267,21 @@ const HardforkPage: FC = () => {
         data: [
           {
             value: statusValues.ready,
-            name: "Completed",
+            name: t("hardfork.status.completed"),
             itemStyle: {
               color: "#067647",
             },
           },
           {
             value: statusValues.notStarted,
-            name: "Not Started",
+            name: t("hardfork.status.notStarted"),
             itemStyle: {
               color: "#B42318",
             },
           },
           {
             value: statusValues.inProgress,
-            name: "In Progress",
+            name: t("hardfork.status.inProgress"),
             itemStyle: {
               color: "#fedf89",
             },
@@ -331,21 +333,21 @@ const HardforkPage: FC = () => {
         data: [
           {
             value: liquidityByStatusValues.ready,
-            name: "Completed",
+            name: t("hardfork.status.completed"),
             itemStyle: {
               color: "#067647",
             },
           },
           {
             value: liquidityByStatusValues.notStarted,
-            name: "Not Started",
+            name: t("hardfork.status.notStarted"),
             itemStyle: {
               color: "#B42318",
             },
           },
           {
             value: liquidityByStatusValues.inProgress,
-            name: "In Progress",
+            name: t("hardfork.status.inProgress"),
             itemStyle: {
               color: "#fedf89",
             },
@@ -393,14 +395,18 @@ const HardforkPage: FC = () => {
         data: [
           {
             value: poolsByDayMax?.count ?? 0,
-            name: `Version ${poolsByDayMax?.version}`,
+            name: t("hardfork.charts.version", {
+              version: poolsByDayMax?.version,
+            }),
             itemStyle: {
               color: "#067647",
             },
           },
           {
             value: poolsByDayMin?.count ?? 0,
-            name: `Version ${poolsByDayMin?.version}`,
+            name: t("hardfork.charts.version", {
+              version: poolsByDayMin?.version,
+            }),
             itemStyle: {
               color: "#B42318",
             },
@@ -448,14 +454,18 @@ const HardforkPage: FC = () => {
         data: [
           {
             value: poolsByFiveDayMax?.count ?? 0,
-            name: `Version ${poolsByFiveDayMax?.version}`,
+            name: t("hardfork.charts.version", {
+              version: poolsByFiveDayMax?.version,
+            }),
             itemStyle: {
               color: "#067647",
             },
           },
           {
             value: poolsByFiveDayMin?.count ?? 0,
-            name: `Version ${poolsByFiveDayMin?.version}`,
+            name: t("hardfork.charts.version", {
+              version: poolsByFiveDayMin?.version,
+            }),
             itemStyle: {
               color: "#B42318",
             },
@@ -468,24 +478,28 @@ const HardforkPage: FC = () => {
   const exhcangeTabItems = [
     {
       key: "count",
-      label: "Count",
+      label: t("hardfork.tabs.count"),
       content: (
         <div className='h-full w-full'>
           <ReactEcharts option={status} />
         </div>
       ),
-      extraTitle: <p className='lg:w-full'>Exchange readiness</p>,
+      extraTitle: (
+        <p className='lg:w-full'>{t("hardfork.charts.exchangeReadiness")}</p>
+      ),
       visible: true,
     },
     {
       key: "liquidity",
-      label: "Liquidity",
+      label: t("hardfork.tabs.liquidity"),
       content: (
         <div className='h-full w-full'>
           <ReactEcharts option={statusByLiquidity} />
         </div>
       ),
-      extraTitle: <p className='lg:w-full'>Exchange readiness</p>,
+      extraTitle: (
+        <p className='lg:w-full'>{t("hardfork.charts.exchangeReadiness")}</p>
+      ),
       visible: true,
     },
   ];
@@ -493,24 +507,28 @@ const HardforkPage: FC = () => {
   const blockTabItems = [
     {
       key: "1_day",
-      label: "1 day",
+      label: t("hardfork.tabs.oneDay"),
       content: (
         <div className='h-full w-full'>
           <ReactEcharts option={countByDayOption} />
         </div>
       ),
-      extraTitle: <p className='lg:w-full'>Block production</p>,
+      extraTitle: (
+        <p className='lg:w-full'>{t("hardfork.charts.blockProduction")}</p>
+      ),
       visible: true,
     },
     {
       key: "5_days",
-      label: "5 days",
+      label: t("hardfork.tabs.fiveDays"),
       content: (
         <div className='h-full w-full'>
           <ReactEcharts option={countBy5DayOption} />
         </div>
       ),
-      extraTitle: <p className='lg:w-full'>Block production</p>,
+      extraTitle: (
+        <p className='lg:w-full'>{t("hardfork.charts.blockProduction")}</p>
+      ),
       visible: true,
     },
   ];
@@ -518,14 +536,14 @@ const HardforkPage: FC = () => {
   return (
     <PageBase
       metadataTitle='hardfork'
-      title='Chang Hardfork'
-      breadcrumbItems={[{ label: "Hardfork" }]}
+      title={t("hardfork.title")}
+      breadcrumbItems={[{ label: t("hardfork.breadcrumb") }]}
       adsCarousel={false}
       subTitle={
         <div className='flex w-full flex-col gap-1/2 text-grayTextPrimary'>
           <p>{data?.info?.description}</p>
           <div className='flex w-full items-center gap-1/2 text-text-sm'>
-            <p>Release date:</p>
+            <p>{t("hardfork.releaseDate")}</p>
             <span className='text-nowrap leading-none text-grayTextPrimary'>
               {formatDate(
                 data?.info?.releaseDate ? data?.info?.releaseDate : undefined,
@@ -543,7 +561,9 @@ const HardforkPage: FC = () => {
                 <Tabs items={exhcangeTabItems} tabParam='exchange' toRight />
               ) : (
                 <div className='my-3 flex w-full max-w-desktop flex-col px-mobile md:px-desktop'>
-                  <p className='mb-3 h-[37.6px] w-full'>Exchange readiness</p>
+                  <p className='mb-3 h-[37.6px] w-full'>
+                    {t("hardfork.charts.exchangeReadiness")}
+                  </p>
                   <div className='h-full w-full'>
                     <ReactEcharts option={status} />
                   </div>
@@ -560,7 +580,7 @@ const HardforkPage: FC = () => {
         <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
           <div className='flex flex-wrap gap-1/2 md:flex-nowrap'>
             <HardforkPageTotalCountItem
-              title='All'
+              title={t("hardfork.filters.all")}
               count={
                 (data?.info?.ready ?? 0) +
                 (data?.info?.inProgress ?? 0) +
@@ -578,7 +598,7 @@ const HardforkPage: FC = () => {
               }
             />
             <HardforkPageTotalCountItem
-              title='Completed'
+              title={t("hardfork.filters.completed")}
               count={data?.info?.ready ?? 0}
               className={cn(
                 "bg-completed",
@@ -597,7 +617,7 @@ const HardforkPage: FC = () => {
               }
             />
             <HardforkPageTotalCountItem
-              title='In Progress'
+              title={t("hardfork.filters.inProgress")}
               count={data?.info?.inProgress ?? 0}
               className={cn(
                 "bg-inProgress",
@@ -616,7 +636,7 @@ const HardforkPage: FC = () => {
               }
             />
             <HardforkPageTotalCountItem
-              title='Not Started'
+              title={t("hardfork.filters.notStarted")}
               count={data?.info?.notStarted ?? 0}
               className={cn(
                 "bg-notStarted",
@@ -637,7 +657,7 @@ const HardforkPage: FC = () => {
           </div>
           {data?.detail?.exchanges && (
             <TableSearchInput
-              placeholder='Search by exchange'
+              placeholder={t("hardfork.searchPlaceholder")}
               value={tableSearch}
               onchange={setTableSearch}
               wrapperClassName='md:w-[320px] w-full'
@@ -670,6 +690,10 @@ const HardforkPage: FC = () => {
               );
             })}
             onOrderChange={setColumsOrder}
+            renderDisplayText={(count, total) =>
+              t("table.displaying", { count, total })
+            }
+            noItemsLabel={t("table.noItems")}
           />
         )}
       </section>

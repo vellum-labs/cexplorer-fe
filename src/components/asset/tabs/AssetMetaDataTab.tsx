@@ -7,6 +7,7 @@ import { JsonDisplay } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { SensitiveContentWarning } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface AssetMetaDataTabProps {
   name: string | undefined;
@@ -17,6 +18,7 @@ export const AssetMetaDataTab: FC<AssetMetaDataTabProps> = ({
   name,
   policy,
 }) => {
+  const { t } = useAppTranslation("common");
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [showContent, setShowContent] = useState(() => {
     return localStorage.getItem("showSensitiveContent") === "true";
@@ -50,8 +52,10 @@ export const AssetMetaDataTab: FC<AssetMetaDataTabProps> = ({
       <SensitiveContentWarning
         onDisplay={() => setShowContent(true)}
         localStorageKey='showSensitiveContent'
-        title='User-generated content'
-        description='Following content is user-generated and unmoderated by the Cexplorer team.'
+        title={t("asset.userGeneratedContent")}
+        description={t("asset.userGeneratedContentDescription")}
+        rememberLabel={t("sdk:sensitiveContent.rememberLabel")}
+        displayLabel={t("sdk:sensitiveContent.displayLabel")}
       />
     );
   }
@@ -76,6 +80,7 @@ export const AssetMetaDataTab: FC<AssetMetaDataTabProps> = ({
           isLoading={isLoading || isFetching}
           isError={isError || items.length === 0}
           search
+          noDataLabel={t("sdk:jsonDisplay.noDataLabel")}
         />
       </>
     </div>

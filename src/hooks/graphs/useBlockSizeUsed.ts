@@ -10,6 +10,7 @@ import type { MiscConstResponseData } from "@/types/miscTypes";
 import { format } from "date-fns";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useGraphColors } from "@/hooks/useGraphColors";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface UseBlockSizeUsed {
   json: any;
@@ -22,6 +23,7 @@ interface UseBlockSizeUsed {
 export const useBlockSizeUsed = (
   miscConst: MiscConstResponseData | undefined,
 ): UseBlockSizeUsed => {
+  const { t } = useAppTranslation("pages");
   const [json, setJson] = useState<any>();
   const [data, setData] = useState<EpochAnalyticsResponseData[]>();
 
@@ -30,6 +32,8 @@ export const useBlockSizeUsed = (
   );
 
   const { splitLineColor, textColor, bgColor } = useGraphColors();
+
+  const blockSizeLabel = t("analytics.graph.blockSize");
 
   const epochs = (data || []).map(item => item.no).reverse();
 
@@ -77,7 +81,7 @@ export const useBlockSizeUsed = (
     },
     series: [
       {
-        name: "Block Size",
+        name: blockSizeLabel,
         data: blocks,
         type: "bar",
         itemStyle: {
@@ -104,18 +108,16 @@ export const useBlockSizeUsed = (
           miscConst?.epoch.start_time ?? "",
         );
 
-        const nameFunc = {
-          "Block Size": item =>
-            item ? `${formatNumber(item.data.toFixed(2))} Kb` : "Block Size",
-        };
+        const formatValue = item =>
+          item ? `${formatNumber(item.data.toFixed(2))} Kb` : blockSizeLabel;
 
         return (
-          `Date: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (Epoch: ${params[0].axisValue})<hr>` +
+          `${t("epochs.graph.date")}: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${t("epochs.graph.epoch")}: ${params[0].axisValue})<hr>` +
           `<div>
             ${params
               .map(
                 item =>
-                  `<p>${marker(item)} ${item.seriesName}: ${nameFunc[item.seriesName]?.(item)}</p>`,
+                  `<p>${marker(item)} ${item.seriesName}: ${formatValue(item)}</p>`,
               )
               .join("")}
           </div>`

@@ -9,12 +9,14 @@ import { useEffect, useRef, useState } from "react";
 import { format } from "date-fns";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { useMiscConst } from "@/hooks/useMiscConst";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   fingerprint: string;
 }
 
 export const AssetStatsTab = ({ fingerprint }: Props) => {
+  const { t } = useAppTranslation("common");
   const query = useFetchAssetStats(undefined, fingerprint);
   const data = query.data?.data?.data;
   const epochs = data?.map(item => item.epoch) || [];
@@ -59,14 +61,14 @@ export const AssetStatsTab = ({ fingerprint }: Props) => {
     chartRef.current = chart;
   };
 
-  const [graphsVisibility, setGraphsVisibility] = useState({
-    "ADA Output": true,
-    "Asset Volume": true,
-    "Interacting Payment Credentials": false,
-    "Interacting Accounts": true,
-    "Interacting Addresses": false,
-    "Smart Transactions": true,
-  });
+  const [graphsVisibility, setGraphsVisibility] = useState(() => ({
+    [t("asset.adaOutput")]: true,
+    [t("asset.assetVolume")]: true,
+    [t("asset.interactingPaymentCredentials")]: false,
+    [t("asset.interactingAccounts")]: true,
+    [t("asset.interactingAddresses")]: false,
+    [t("asset.smartTransactions")]: true,
+  }));
 
   const option: ReactEChartsProps["option"] = {
     legend: {
@@ -94,15 +96,15 @@ export const AssetStatsTab = ({ fingerprint }: Props) => {
         );
 
         return (
-          `Date: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (Epoch: ${epoch})<hr/>` +
+          `${t("labels.date")}: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${t("labels.epoch")}: ${epoch})<hr/>` +
           params
             .map(item => {
               const value = Number(item.data);
               let formatted = "—";
               if (!isNaN(value)) {
                 if (
-                  item.seriesName === "ADA Output" ||
-                  item.seriesName === "Asset Volume"
+                  item.seriesName === t("asset.adaOutput") ||
+                  item.seriesName === t("asset.assetVolume")
                 ) {
                   formatted = formatLovelace(value);
                 } else {
@@ -143,7 +145,7 @@ export const AssetStatsTab = ({ fingerprint }: Props) => {
       {
         type: "line",
         data: ada_volume,
-        name: "ADA Output",
+        name: t("asset.adaOutput"),
         yAxisIndex: 0,
         itemStyle: { opacity: 0.9, color: purpleColor },
         showSymbol: false,
@@ -151,7 +153,7 @@ export const AssetStatsTab = ({ fingerprint }: Props) => {
       {
         type: "line",
         data: asset_volume,
-        name: "Asset Volume",
+        name: t("asset.assetVolume"),
         yAxisIndex: 1,
         itemStyle: { opacity: 0.7, color: "#ffc115" },
         showSymbol: false,
@@ -159,7 +161,7 @@ export const AssetStatsTab = ({ fingerprint }: Props) => {
       {
         type: "line",
         data: payment_cred,
-        name: "Interacting Payment Credentials",
+        name: t("asset.interactingPaymentCredentials"),
         yAxisIndex: 2,
         itemStyle: { opacity: 0.7, color: lineColor },
         showSymbol: false,
@@ -167,7 +169,7 @@ export const AssetStatsTab = ({ fingerprint }: Props) => {
       {
         type: "line",
         data: stake,
-        name: "Interacting Accounts",
+        name: t("asset.interactingAccounts"),
         yAxisIndex: 3,
         itemStyle: { color: "#21fc1e" },
         showSymbol: false,
@@ -175,7 +177,7 @@ export const AssetStatsTab = ({ fingerprint }: Props) => {
       {
         type: "line",
         data: address,
-        name: "Interacting Addresses",
+        name: t("asset.interactingAddresses"),
         yAxisIndex: 4,
         itemStyle: { opacity: 0.7, color: textColor },
         showSymbol: false,
@@ -183,7 +185,7 @@ export const AssetStatsTab = ({ fingerprint }: Props) => {
       {
         type: "bar",
         data: with_data,
-        name: "Smart Transactions",
+        name: t("asset.smartTransactions"),
         yAxisIndex: 5,
         itemStyle: { opacity: 0.6, color: "#e3033a" },
       },

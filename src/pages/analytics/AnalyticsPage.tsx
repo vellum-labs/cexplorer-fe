@@ -7,6 +7,7 @@ import accounts from "@/resources/images/analytics/accounts.svg";
 import network from "@/resources/images/analytics/network.svg";
 
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const images = {
   pools,
@@ -16,26 +17,71 @@ const images = {
 };
 
 export const AnalyticsPage = () => {
+  const { t } = useAppTranslation();
+
+  const optionLabelMap: Record<string, string> = {
+    Blocks: t("analyticsPage.options.blocks"),
+    "Block versions": t("analyticsPage.options.blockVersions"),
+    "Energy constumption": t("analyticsPage.options.energyConsumption"),
+    Health: t("analyticsPage.options.health"),
+    Storage: t("analyticsPage.options.storage"),
+    Transactions: t("analyticsPage.options.transactions"),
+    Hardfork: t("analyticsPage.options.hardfork"),
+    Pots: t("analyticsPage.options.pots"),
+    "Treasury projection": t("analyticsPage.options.treasuryProjection"),
+    "Wallet activity": t("analyticsPage.options.walletActivity"),
+    "Top addresses": t("analyticsPage.options.topAddresses"),
+    "Top staking accounts": t("analyticsPage.options.topStakingAccounts"),
+    "Wealth composition": t("analyticsPage.options.wealthComposition"),
+    "Genesis addresses": t("analyticsPage.options.genesisAddresses"),
+    "Pool issues": t("analyticsPage.options.poolIssues"),
+    "Average pools": t("analyticsPage.options.averagePools"),
+    Ranklist: t("analyticsPage.options.ranklist"),
+    Interactions: t("analyticsPage.options.interactions"),
+    TVL: t("analyticsPage.options.tvl"),
+  };
+
+  const translateOptions = (
+    opts: typeof nestedNavigationOptions.analyticsOptions.network.options,
+  ) =>
+    opts.map(opt => ({
+      ...opt,
+      label: optionLabelMap[opt.label] || opt.label,
+    }));
+
   const options = {
-    ...nestedNavigationOptions.analyticsOptions,
+    pools: {
+      label: t("analyticsPage.categories.pools"),
+      options: translateOptions(
+        nestedNavigationOptions.analyticsOptions.pools.options,
+      ),
+    },
+    dapps: {
+      label: t("analyticsPage.categories.dapps"),
+      options: translateOptions(
+        nestedNavigationOptions.analyticsOptions.dapps.options,
+      ),
+    },
+    accounts: {
+      label: t("analyticsPage.categories.accounts"),
+      options: translateOptions(
+        nestedNavigationOptions.analyticsOptions.accounts.options,
+      ),
+    },
     network: {
-      label: "Network",
-      options: [
+      label: t("analyticsPage.categories.network"),
+      options: translateOptions([
         ...nestedNavigationOptions.analyticsOptions.network.options,
         ...nestedNavigationOptions.analyticsOptions.others.options,
-      ],
-    },
-    others: {
-      label: "",
-      options: [],
+      ]),
     },
   };
 
   return (
     <PageBase
       metadataTitle='analytics'
-      title='Analytics'
-      breadcrumbItems={[{ label: "Analytics" }]}
+      title={t("analyticsPage.title")}
+      breadcrumbItems={[{ label: t("analyticsPage.breadcrumb") }]}
     >
       <section className='mt-2 grid w-full max-w-desktop grid-cols-1 gap-3 px-mobile pb-3 md:grid-cols-2 md:px-desktop'>
         {Object.keys(options)

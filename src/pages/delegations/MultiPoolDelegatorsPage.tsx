@@ -13,8 +13,10 @@ import { StakeCell } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const MultiPoolDelegatorsPage = () => {
+  const { t } = useAppTranslation(["pages", "common"]);
   const { page } = useSearch({ from: "/multi-pool-delegations/" });
 
   const {
@@ -41,7 +43,7 @@ export const MultiPoolDelegatorsPage = () => {
   const columns = [
     {
       key: "payment_cred",
-      title: "Payment credential",
+      title: t("delegations.table.paymentCredential"),
       visible: columnsVisibility.payment_cred,
       widthPx: 200,
       render: (row: any) => (
@@ -57,17 +59,23 @@ export const MultiPoolDelegatorsPage = () => {
     },
     {
       key: "stake",
-      title: "Stake",
+      title: t("common:labels.stake"),
       visible: columnsVisibility.stake,
       widthPx: 160,
       render: (row: any) => (
-        <StakeCell stake={row.stake.balance ?? 0} maxStake={maxStake} />
+        <StakeCell
+          stake={row.stake.balance ?? 0}
+          maxStake={maxStake}
+          unknownLabel={t("sdk:stakeCell.unknownLabel")}
+        />
       ),
       jsonFormat: (row: any) => lovelaceToAda(row.stake.balance ?? 0),
     },
     {
       key: "delegated_to",
-      title: <p className='w-full text-right'>Stake keys</p>,
+      title: (
+        <p className='w-full text-right'>{t("delegations.table.stakeKeys")}</p>
+      ),
       visible: columnsVisibility.delegated_to,
       widthPx: 200,
       render: (row: any) => (
@@ -93,8 +101,8 @@ export const MultiPoolDelegatorsPage = () => {
   return (
     <PageBase
       metadataTitle='multiPoolDelegators'
-      title='Multi-pool Delegators'
-      breadcrumbItems={[{ label: "Multi-pool Delegators" }]}
+      title={t("delegations.multiPool.title")}
+      breadcrumbItems={[{ label: t("delegations.multiPool.title") }]}
     >
       <section className='w-full max-w-desktop px-mobile pb-3 md:px-desktop'>
         <div className='mb-2 flex flex-wrap items-center justify-between gap-2 md:flex-nowrap md:items-center'>
@@ -102,7 +110,8 @@ export const MultiPoolDelegatorsPage = () => {
             <LoadingSkeleton height='27px' width={"290px"} />
           ) : (
             <h3 className='basis-[230px] text-nowrap'>
-              Total of {formatNumber(total)} multi-pool delegators.
+              {t("common:phrases.totalOf")} {formatNumber(total)}{" "}
+              {t("delegations.multiPool.totalOfSuffix")}
             </h3>
           )}
           <div className='flex items-center gap-1'>
@@ -110,8 +119,9 @@ export const MultiPoolDelegatorsPage = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={multiPoolDelegatorsTableOptions.map(col => ({
-                label: col.name,
+                label: t(`common:tableSettings.${col.key}`),
                 isVisible: columnsVisibility[col.key],
                 onClick: () =>
                   setColumnVisibility(col.key, !columnsVisibility[col.key]),
@@ -133,6 +143,10 @@ export const MultiPoolDelegatorsPage = () => {
           )}
           onOrderChange={setColumsOrder}
           scrollable
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </section>
     </PageBase>

@@ -5,19 +5,21 @@ import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import ReactEcharts from "echarts-for-react";
 import { AnalyticsGraph } from "../../AnalyticsGraph";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useBlockSizeUsed } from "@/hooks/graphs/useBlockSizeUsed";
 
 export const NetworkBlockSizeGraph: FC<NetworkBlockGraphProps> = ({
   epochQuery,
   miscConst,
 }) => {
+  const { t } = useAppTranslation("common");
   const { json, option, selectedItem, setData, setSelectedItem } =
     useBlockSizeUsed(miscConst);
 
   return (
     <AnalyticsGraph
-      title='Block size used'
-      description='This graph tracks the average block size on Cardano over time, highlighting how the network is currently utilizing the 88KB maximum block size capacity.'
+      title={t("analytics.blockSizeUsed")}
+      description={t("analytics.blockSizeUsedDescription")}
       exportButton
       graphSortData={{
         query: epochQuery,

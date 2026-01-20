@@ -1,3 +1,7 @@
+---
+applyTo: pull_requests
+---
+
 When reviewing code, focus on:
 
 - you are building best cardano explorer on the world - cexplorer.io - so we need quality and awesome solutions.

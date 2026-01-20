@@ -198,7 +198,7 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ["@meshsdk/core"],
+    include: ["@meshsdk/core", "lodash", "lodash/isEqual"],
     exclude: [
       "@anastasia-labs/cardano-multiplatform-lib-browser",
       "@anastasia-labs/cardano-multiplatform-lib-nodejs",

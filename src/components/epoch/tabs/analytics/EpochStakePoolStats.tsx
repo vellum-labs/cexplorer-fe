@@ -10,6 +10,7 @@ import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface EpochStakePoolStatsProps {
   isLoading: boolean;
@@ -22,8 +23,9 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
   isLoading,
   stats,
 }) => {
+  const { t } = useAppTranslation("pages");
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const statsRows = [
     {
@@ -32,7 +34,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
         {
           title: (
             <p className='text-text-sm font-medium text-grayTextPrimary'>
-              Pools
+              {t("epochs.stakePoolStats.pools")}
             </p>
           ),
         },
@@ -52,7 +54,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
         {
           title: (
             <p className='text-text-sm font-medium text-grayTextPrimary'>
-              APY % Leader
+              {t("epochs.stakePoolStats.apyLeader")}
             </p>
           ),
         },
@@ -60,7 +62,9 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
           title: (
             <p className='text-text-sm'>
               {stats?.epoch_no > (miscConst?.epoch.no ?? 0) - 2 ? (
-                <Badge color='yellow'>Pending</Badge>
+                <Badge color='yellow'>
+                  {t("epochs.stakePoolStats.pending")}
+                </Badge>
               ) : (
                 <>{((stats?.pool_stat?.pct_leader ?? 0) / 100).toFixed(2)}%</>
               )}
@@ -75,7 +79,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
         {
           title: (
             <p className='text-text-sm font-medium text-grayTextPrimary'>
-              APY % Member
+              {t("epochs.stakePoolStats.apyMember")}
             </p>
           ),
         },
@@ -83,7 +87,9 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
           title: (
             <p className='text-text-sm'>
               {stats?.epoch_no > (miscConst?.epoch.no ?? 0) - 2 ? (
-                <Badge color='yellow'>Pending</Badge>
+                <Badge color='yellow'>
+                  {t("epochs.stakePoolStats.pending")}
+                </Badge>
               ) : (
                 <>{((stats?.pool_stat?.pct_member ?? 0) / 100).toFixed(2)}%</>
               )}
@@ -98,7 +104,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
         {
           title: (
             <p className='text-text-sm font-medium text-grayTextPrimary'>
-              Average Stake
+              {t("epochs.stakePoolStats.averageStake")}
             </p>
           ),
         },
@@ -123,7 +129,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
         {
           title: (
             <p className='text-text-sm font-medium text-grayTextPrimary'>
-              Delegator Count
+              {t("epochs.stakePoolStats.delegatorCount")}
             </p>
           ),
         },
@@ -144,14 +150,12 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
           title: (
             <div className='flex items-center gap-1/2'>
               <span className='text-text-sm font-medium text-grayTextPrimary'>
-                Delegator Count Weighted
+                {t("epochs.stakePoolStats.delegatorCountWeighted")}
               </span>
               <Tooltip
                 content={
                   <p className='w-[200px]'>
-                    Delegator Count Weighted (DCW) is a metric in staking pool
-                    statistics that calculates the weighted average number of
-                    delegators contributing to a pool.
+                    {t("epochs.stakePoolStats.dcwTooltip")}
                   </p>
                 }
               >
@@ -176,14 +180,12 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
           title: (
             <div className='flex items-center gap-1/2'>
               <span className='text-text-sm font-medium text-grayTextPrimary'>
-                Delegator Average
+                {t("epochs.stakePoolStats.delegatorAverage")}
               </span>
               <Tooltip
                 content={
                   <p className='w-[200px]'>
-                    Delegator Average (DA) is a metric in staking pool
-                    statistics that represents the simple average amount of
-                    stake delegated by each delegator.
+                    {t("epochs.stakePoolStats.daTooltip")}
                   </p>
                 }
               >
@@ -208,14 +210,12 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
           title: (
             <div className='flex items-center gap-1/2'>
               <span className='text-text-sm font-medium text-grayTextPrimary'>
-                Delegator Average Weighted
+                {t("epochs.stakePoolStats.delegatorAverageWeighted")}
               </span>
               <Tooltip
                 content={
                   <p className='w-[200px]'>
-                    Delegator Average Weighted (DAW) in Stake Pool Stats
-                    measures the average stake amount delegated by all
-                    delegators, weighted by the size of each delegation.
+                    {t("epochs.stakePoolStats.dawTooltip")}
                   </p>
                 }
               >
@@ -237,7 +237,7 @@ export const EpochStakePoolStats: FC<EpochStakePoolStatsProps> = ({
 
   return (
     <div className='flex h-[520px] w-1/2 flex-grow basis-[600px] flex-col gap-2 rounded-m border border-border p-3 md:flex-shrink-0'>
-      <h3>Stake Pool Stats</h3>
+      <h3>{t("epochs.stakePoolStats.title")}</h3>
 
       <div className='flex w-full flex-col overflow-hidden rounded-xl border border-border'>
         {statsRows.map(({ key, columns }, index) => (

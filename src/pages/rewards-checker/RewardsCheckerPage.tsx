@@ -9,14 +9,16 @@ import { ArrowRight, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const RewardsCheckerPage = () => {
+  const { t } = useAppTranslation("pages");
   const [search, setSearch] = useState("");
   const [submittedSearch, setSubmittedSearch] = useState("");
 
   const handleSubmit = async () => {
     if (!isValidAddress(search)) {
-      toast.error("Invalid address");
+      toast.error(t("rewardsChecker.invalidAddress"));
       return;
     }
 
@@ -33,7 +35,7 @@ export const RewardsCheckerPage = () => {
       );
       setSubmittedSearch(Address.from(search).rewardAddress);
     } else {
-      toast.error("This address has no stake key");
+      toast.error(t("rewardsChecker.noStakeKey"));
     }
   };
 
@@ -49,8 +51,12 @@ export const RewardsCheckerPage = () => {
   return (
     <PageBase
       metadataTitle='rewardsChecker'
-      title={<div className='flex items-center gap-1/2'>Rewards checker</div>}
-      breadcrumbItems={[{ label: "Rewards checker" }]}
+      title={
+        <div className='flex items-center gap-1/2'>
+          {t("rewardsChecker.title")}
+        </div>
+      }
+      breadcrumbItems={[{ label: t("rewardsChecker.title") }]}
     >
       <section className='flex w-full flex-col items-center'>
         <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 px-mobile pb-3 pt-1.5 md:px-desktop xl:flex-nowrap xl:justify-start'></div>
@@ -61,7 +67,7 @@ export const RewardsCheckerPage = () => {
             <TextInput
               value={search}
               onchange={value => setSearch(value)}
-              placeholder='Search stake address...'
+              placeholder={t("rewardsChecker.searchPlaceholder")}
               wrapperClassName='w-full'
             />
             <Button
@@ -78,7 +84,8 @@ export const RewardsCheckerPage = () => {
               params={{ stakeAddr: submittedSearch }}
               className='flex items-center gap-1/2 text-text-sm font-medium text-primary'
             >
-              Address detail <ArrowRight color={colors.primary} size={15} />
+              {t("rewardsChecker.addressDetail")}{" "}
+              <ArrowRight color={colors.primary} size={15} />
             </Link>
           )}
         </div>

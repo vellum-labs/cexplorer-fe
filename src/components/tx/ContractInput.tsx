@@ -14,6 +14,7 @@ import { ChevronDown, ChevronRight } from "lucide-react";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { parseCborHex } from "@/utils/uplc/uplc";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface ContractInputProps {
   input: TxInput;
@@ -30,6 +31,7 @@ export const ContractInput: FC<ContractInputProps> = ({
   isError,
   isLoading,
 }) => {
+  const { t } = useAppTranslation("common");
   const [open, setOpen] = useState<boolean>(inputIndex === 0);
   const [uplcData, setUplcData] = useState<{
     compact: string;
@@ -39,7 +41,7 @@ export const ContractInput: FC<ContractInputProps> = ({
   const [prettyMode, setPrettyMode] = useState(false);
 
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const handleConvertUplc = () => {
     try {
@@ -75,27 +77,31 @@ export const ContractInput: FC<ContractInputProps> = ({
         )}
         {contract.label && <LabelBadge variant='lg' label={contract?.label} />}
         <div className='w-fit rounded-m border border-border bg-background px-1 py-1/2 text-text-xs font-medium'>
-          Input #{inputIndex + 1}
+          {t("tx.inputNumber", { number: inputIndex + 1 })}
         </div>
         <PurposeBadge purpose={input.redeemer.purpose} />
         <span className='bg-blue-200/15 flex h-[25px] items-center rounded-max border border-border px-1 text-text-xs font-medium'>
           {contract.type.slice(0, 1).toUpperCase() + contract.type.slice(1)}
         </span>
         <span className='flex h-[25px] items-center rounded-max border border-border bg-secondaryBg px-1 text-text-xs font-medium'>
-          Size {(contract.size / 1024).toFixed(2)}kB
+          {t("tx.size")} {(contract.size / 1024).toFixed(2)}kB
         </span>
         <span className='flex h-[25px] items-center rounded-max border border-border bg-secondaryBg px-1 text-text-xs font-medium'>
-          Fee <AdaWithTooltip data={input.redeemer.fee} />
+          {t("tx.labels.fee")} <AdaWithTooltip data={input.redeemer.fee} />
         </span>
       </div>
 
       <div
         className={`gap-1text-text-sm mt-4 flex-col ${open ? "flex" : "hidden"}`}
       >
-        <span>Mem: {formatNumber(input?.redeemer?.unit.mem)}</span>
-        <span>Steps: {formatNumber(input?.redeemer?.unit.steps)}</span>
+        <span>
+          {t("tx.mem")}: {formatNumber(input?.redeemer?.unit.mem)}
+        </span>
+        <span>
+          {t("tx.steps")}: {formatNumber(input?.redeemer?.unit.steps)}
+        </span>
         <span className='mt-1'>
-          Redeemer Data Hash:{" "}
+          {t("tx.redeemerDataHash")}:{" "}
           <span className='flex items-center gap-1'>
             <Link
               to='/datum'
@@ -114,10 +120,11 @@ export const ContractInput: FC<ContractInputProps> = ({
           isLoading={isLoading}
           data={input.redeemer.datum.value}
           search
+          noDataLabel={t("sdk:jsonDisplay.noDataLabel")}
         />
         <span>
           <span className='mt-1 flex items-center gap-1/2'>
-            Script hash:{" "}
+            {t("tx.scriptHash")}:{" "}
             <ConstLabelBadge
               type='sc'
               name={contract?.script_hash}
@@ -136,14 +143,14 @@ export const ContractInput: FC<ContractInputProps> = ({
           </span>
         </span>
         <div className='mt-2'>
-          <span className='text-text-sm font-medium'>Bytes:</span>
+          <span className='text-text-sm font-medium'>{t("tx.bytes")}:</span>
         </div>
         <TextDisplay text={contract?.bytecode} />
 
         {!uplcData && (
           <div className='mt-3'>
             <Button
-              label='Convert UPLC'
+              label={t("tx.convertUplc")}
               variant='primary'
               size='sm'
               onClick={handleConvertUplc}
@@ -160,16 +167,16 @@ export const ContractInput: FC<ContractInputProps> = ({
         {uplcData && (
           <div className='mt-4 flex flex-col gap-2'>
             <div className='flex items-center gap-2'>
-              <span className='text-text-sm font-medium'>UPLC</span>
+              <span className='text-text-sm font-medium'>{t("tx.uplc")}</span>
               <div className='flex items-center gap-2 text-text-sm'>
-                <span>Pretty-print</span>
+                <span>{t("tx.prettyPrint")}</span>
                 <Switch
                   active={prettyMode}
                   onChange={checked => setPrettyMode(checked)}
                 />
               </div>
             </div>
-            <pre className='h-[300px] w-full overflow-auto rounded-m border border-border bg-cardBg p-[10px] font-mono text-text-xs shadow-md'>
+            <pre className='font-mono h-[300px] w-full overflow-auto rounded-m border border-border bg-cardBg p-[10px] text-text-xs shadow-md'>
               {prettyMode ? uplcData.pretty : uplcData.compact}
             </pre>
           </div>
@@ -177,7 +184,7 @@ export const ContractInput: FC<ContractInputProps> = ({
 
         {(contract.output || []).map(output => (
           <span className='mt-1'>
-            Datum hash:{" "}
+            {t("tx.datumHash")}:{" "}
             <span className='flex items-center gap-1'>
               <Link
                 to='/datum'
@@ -195,6 +202,7 @@ export const ContractInput: FC<ContractInputProps> = ({
               isLoading={isLoading}
               search
               data={output?.value}
+              noDataLabel={t("sdk:jsonDisplay.noDataLabel")}
             />
           </span>
         ))}

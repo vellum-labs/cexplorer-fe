@@ -21,8 +21,10 @@ import ConnectWalletModal from "../wallet/ConnectWalletModal";
 import { useWalletStore } from "@/stores/walletStore";
 import { GlobalSearch } from "@vellumlabs/cexplorer-sdk";
 import { useNavigate } from "@tanstack/react-router";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const MobileBottomNav: FC = () => {
+  const { t } = useAppTranslation("navigation");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [activeMenu, setActiveMenu] = useState<MobileMenuScreen>(null);
   const [showWalletModal, setShowWalletModal] = useState(false);
@@ -115,9 +117,11 @@ export const MobileBottomNav: FC = () => {
             </button>
           </SheetTrigger>
           <SheetContent className='hide-scrollbar overflow-y-auto'>
-            <SheetTitle className='sr-only'>Navigation Menu</SheetTitle>
+            <SheetTitle className='sr-only'>
+              {t("navbar.navigationMenu")}
+            </SheetTitle>
             <SheetDescription className='sr-only'>
-              Access navigation options, settings, and account features
+              {t("navbar.navigationMenuDescription")}
             </SheetDescription>
             {activeMenu === "settings" ? (
               <SettingsMobileItems onBack={() => setActiveMenu(null)} />
@@ -163,7 +167,32 @@ export const MobileBottomNav: FC = () => {
             className='w-full max-w-2xl px-4'
             onClick={e => e.stopPropagation()}
           >
-            <GlobalSearch />
+            <GlobalSearch
+              isHomepage
+              recentLabels={{
+                recentlySearchedLabel: t("sdk:globalSearch.recentlySearched"),
+                noRecentSearchesLabel: t("sdk:globalSearch.noRecentSearches"),
+              }}
+              categoryLabels={{
+                all: t("sdk:globalSearch.categories.all"),
+                tx: t("sdk:globalSearch.categories.tx"),
+                block: t("sdk:globalSearch.categories.block"),
+                pool: t("sdk:globalSearch.categories.pool"),
+                asset: t("sdk:globalSearch.categories.asset"),
+                policy: t("sdk:globalSearch.categories.policy"),
+                address: t("sdk:globalSearch.categories.address"),
+                stake: t("sdk:globalSearch.categories.stake"),
+                adahandle: t("sdk:globalSearch.categories.adahandle"),
+                user: t("sdk:globalSearch.categories.user"),
+                article: t("sdk:globalSearch.categories.article"),
+                page: t("sdk:globalSearch.categories.page"),
+                gov: t("sdk:globalSearch.categories.gov"),
+                drep: t("sdk:globalSearch.categories.drep"),
+              }}
+              homepagePlaceholder={t("sdk:globalSearch.homepagePlaceholder")}
+              placeholder={t("sdk:globalSearch.placeholder")}
+              notFoundLabel={t("sdk:globalSearch.notFoundLabel")}
+            />
           </div>
         </div>
       )}

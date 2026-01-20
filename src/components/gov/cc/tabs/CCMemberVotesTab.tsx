@@ -16,6 +16,7 @@ import type { Vote } from "@/constants/votes";
 import { VoteCell } from "@/components/governance/vote/VoteCell";
 import { ExternalLink } from "lucide-react";
 import { isVoteLate } from "@/utils/governance/isVoteLate";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface CCMemberVoteItem {
   tx?: {
@@ -49,6 +50,7 @@ interface CCMemberVoteItem {
 }
 
 export const CCMemberVotesTab: FC<{ hotKey?: string }> = ({ hotKey }) => {
+  const { t } = useAppTranslation();
   const { infiniteScrolling } = useInfiniteScrollingStore();
 
   const { page } = useSearch({ from: "/gov/cc/$coldKey" });
@@ -81,7 +83,7 @@ export const CCMemberVotesTab: FC<{ hotKey?: string }> = ({ hotKey }) => {
 
         return <DateCell time={item.tx.time} />;
       },
-      title: <p>Date</p>,
+      title: <p>{t("gov.cc.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 50,
     },
@@ -96,7 +98,7 @@ export const CCMemberVotesTab: FC<{ hotKey?: string }> = ({ hotKey }) => {
           <>{<ActionTypes title={item?.proposal?.type as ActionTypes} />}</>
         );
       },
-      title: <p>Type</p>,
+      title: <p>{t("gov.cc.type")}</p>,
       visible: columnsVisibility.type,
       widthPx: 60,
     },
@@ -111,13 +113,13 @@ export const CCMemberVotesTab: FC<{ hotKey?: string }> = ({ hotKey }) => {
 
         return <GovActionCell id={id} name={name} />;
       },
-      title: <p>Governance action</p>,
+      title: <p>{t("gov.cc.governanceAction")}</p>,
       visible: columnsVisibility.governance_action_name,
       widthPx: 200,
     },
     {
       key: "vote",
-      title: <p>Vote</p>,
+      title: <p>{t("gov.cc.vote")}</p>,
       render: item => {
         if (!item?.vote) {
           return "-";
@@ -152,7 +154,7 @@ export const CCMemberVotesTab: FC<{ hotKey?: string }> = ({ hotKey }) => {
         }
         return <p className='text-right'>-</p>;
       },
-      title: <p className='w-full text-right'>Tx</p>,
+      title: <p className='w-full text-right'>{t("gov.cc.tx")}</p>,
       visible: columnsVisibility.tx,
       widthPx: 60,
     },
@@ -181,6 +183,10 @@ export const CCMemberVotesTab: FC<{ hotKey?: string }> = ({ hotKey }) => {
         );
       })}
       onOrderChange={setColumsOrder}
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

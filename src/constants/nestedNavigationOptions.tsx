@@ -69,7 +69,7 @@ export const nestedNavigationOptions: {
         },
         {
           label: "Promotion",
-          href: "/ads/promotion",
+          href: "/promotion",
         },
         {
           label: "API plans",

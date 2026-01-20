@@ -6,6 +6,7 @@ import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { UserSocials } from "./UserSocials";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   isLoading: boolean;
@@ -14,6 +15,7 @@ interface Props {
 }
 
 export const UserBadge = ({ isLoading, user, address }: Props) => {
+  const { t } = useAppTranslation("common");
   const { address: myAddress } = useWalletStore();
   return (
     <>
@@ -31,7 +33,8 @@ export const UserBadge = ({ isLoading, user, address }: Props) => {
                     </Link>
                   )}
                   <span className='text-text-xs text-grayTextPrimary'>
-                    User profile ({user?.profile ? "Public" : "Hidden"})
+                    {t("user.userProfile")} (
+                    {user?.profile ? t("user.public") : t("user.hidden")})
                   </span>
                   <div className='flex gap-1'>
                     <img

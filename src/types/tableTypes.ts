@@ -21,6 +21,8 @@ interface TableColumn<T> {
     onShow?: MouseEventHandler<SVGSVGElement>;
     onReset?: () => void;
     onFilter?: () => void;
+    resetLabel?: string;
+    filterLabel?: string;
   };
 }
 

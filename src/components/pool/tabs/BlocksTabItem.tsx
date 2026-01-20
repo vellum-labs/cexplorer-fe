@@ -6,6 +6,7 @@ import ExpectedBlocksGraph from "../graphs/ExpectedBlocksGraph";
 
 import { usePoolBlocksGraphs } from "@/hooks/pool/usePoolBlocksGraphs";
 import { getRouteApi } from "@tanstack/react-router";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface BlocksTabItemProps {
   blocksInEpoch: number;
@@ -16,6 +17,7 @@ const BlocksTabItem: FC<BlocksTabItemProps> = ({
   blocksInEpoch,
   estimatedBlocks,
 }) => {
+  const { t } = useAppTranslation("pages");
   const route = getRouteApi("/pool/$id");
   const { id } = route.useParams();
 
@@ -24,7 +26,7 @@ const BlocksTabItem: FC<BlocksTabItemProps> = ({
 
   return (
     <div>
-      <h2 className='mb-1'>Blocks</h2>
+      <h2 className='mb-1'>{t("pools.detailPage.tabs.blocks")}</h2>
       <MintedBlocksGraph
         mintedBlocks={mintedBlocks}
         dates={dates}

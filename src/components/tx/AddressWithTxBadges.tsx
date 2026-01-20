@@ -16,6 +16,7 @@ import type { UtxoSearchMatchType } from "@/utils/tx/filterUtxoBySearch";
 import { useHashHoverStore } from "@/stores/hashHoverStore";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   utxo: TxInfo;
@@ -30,10 +31,11 @@ export const AddressWithTxBadges = ({
   enableHover = false,
   matchTypes = [],
 }: Props) => {
+  const { t } = useAppTranslation("common");
   const { hoveredHash, setHoveredHash } = useHashHoverStore();
 
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const isAddressHovered =
     hoveredHash === utxo.payment_addr_bech32 && !!utxo.payment_addr_bech32;
@@ -72,7 +74,7 @@ export const AddressWithTxBadges = ({
       <Tooltip
         content={
           <div className='flex w-[200px] flex-col items-center text-text-sm'>
-            <p className='font-medium'>UTXO</p>
+            <p className='font-medium'>{t("tx.utxo")}</p>
             <div className='mt-1/2 flex items-end justify-end break-all text-center text-text-sm'>
               <Link
                 to='/tx/$hash'
@@ -96,7 +98,9 @@ export const AddressWithTxBadges = ({
         <Tooltip
           content={
             <div className='flex w-[200px] flex-col items-center'>
-              <p className='w-full text-center font-medium'>Datum hash</p>
+              <p className='w-full text-center font-medium'>
+                {t("tx.datumHash")}
+              </p>
               <div className='mt-1/2 flex items-end justify-end break-all text-center text-text-sm'>
                 <Link
                   to='/datum'
@@ -117,7 +121,9 @@ export const AddressWithTxBadges = ({
         <Tooltip
           content={
             <div className='flex w-[200px] flex-col items-center'>
-              <p className='w-full text-center font-medium'>Script Hash</p>
+              <p className='w-full text-center font-medium'>
+                {t("tx.scriptHash")}
+              </p>
               <div className='mt-1/2 flex items-end justify-end break-all text-center text-text-sm'>
                 <Link
                   to='/script/$hash'
@@ -139,7 +145,7 @@ export const AddressWithTxBadges = ({
           content={
             <div className='flex w-[200px] flex-col items-center'>
               <p className='w-full text-center font-medium'>
-                Consumed by transaction
+                {t("tx.consumedByTransaction")}
               </p>
               <div className='mt-1/2 flex items-end justify-end break-all text-center text-text-sm'>
                 <Link
@@ -168,7 +174,7 @@ export const AddressWithTxBadges = ({
         <Tooltip
           content={
             <div className='flex w-[200px] flex-col items-center text-text-sm'>
-              <p className='font-medium'>Payment Credential</p>
+              <p className='font-medium'>{t("tx.paymentCredential")}</p>
               <div className='mt-1/2 flex items-end justify-end break-all text-center text-text-sm'>
                 <span className='break-all text-primary'>
                   {utxo.payment_addr_cred}

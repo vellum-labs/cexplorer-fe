@@ -8,6 +8,7 @@ import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import { formatBytes } from "@/utils/format/formatBytes";
 import { lovelaceToAdaWithRates } from "@/utils/lovelaceToAdaWithRates";
 import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface EpochLostAndCostProps {
   params: EpochParam;
@@ -19,6 +20,7 @@ export const EpochLostAndCost: FC<EpochLostAndCostProps> = ({
   params,
   stats,
 }) => {
+  const { t } = useAppTranslation("pages");
   const pricePer = parseFloat(params.price_mem) * 1024 * 1024;
   const avgTXSize =
     stats?.epoch?.out_sum / stats?.epoch?.tx_count / 1024 / 1024;
@@ -37,11 +39,11 @@ export const EpochLostAndCost: FC<EpochLostAndCostProps> = ({
 
   const overviewList = [
     {
-      label: "Size of all blocks in epoch",
+      label: t("epochs.loadAndCost.sizeOfAllBlocks"),
       value: <p className='text-text-sm font-medium'>{sizeOfAllBlocksMB} MB</p>,
     },
     {
-      label: "Price per MB",
+      label: t("epochs.loadAndCost.pricePerMB"),
       value: (
         <TotalSumWithRates
           sum={pricePerSum}
@@ -51,19 +53,19 @@ export const EpochLostAndCost: FC<EpochLostAndCostProps> = ({
       ),
     },
     {
-      label: "Average TX size",
+      label: t("epochs.loadAndCost.averageTxSize"),
       value: (
         <p className='text-text-sm font-medium'>{formatBytes(avgTXSize)}</p>
       ),
     },
     {
-      label: "Average Block Size",
+      label: t("epochs.loadAndCost.averageBlockSize"),
       value: (
         <p className='text-text-sm font-medium'>{formatBytes(avgBlockSize)}</p>
       ),
     },
     {
-      label: "Max Block Size",
+      label: t("epochs.loadAndCost.maxBlockSize"),
       value: (
         <p className='text-text-sm font-medium'>
           {formatBytes(params.max_block_size)}
@@ -97,7 +99,7 @@ export const EpochLostAndCost: FC<EpochLostAndCostProps> = ({
 
   return (
     <OverviewCard
-      title='Load and Cost'
+      title={t("epochs.loadAndCost.title")}
       overviewList={overviewList}
       labelClassname='md:text-nowrap h-full'
     />

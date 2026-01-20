@@ -11,6 +11,7 @@ import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { useMemo } from "react";
 import { Calendar, ExternalLink, UserMinus, UserPlus } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const toArray = (
   reg: CommitteeMemberRegistration | CommitteeMemberRegistration[] | null,
@@ -29,6 +30,7 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
   memberHistory,
   isLoading,
 }) => {
+  const { t } = useAppTranslation();
   const sortedHistory = useMemo(() => {
     if (!memberHistory || !Array.isArray(memberHistory)) return [];
     return [...memberHistory].sort(
@@ -49,7 +51,7 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
         );
         return <DateCell time={sortedRegistrations[0].time} />;
       },
-      title: <p>Date</p>,
+      title: <p>{t("gov.cc.date")}</p>,
       visible: true,
       widthPx: 80,
     },
@@ -58,14 +60,15 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
       render: item => {
         const registrations = toArray(item?.registration);
         const hasRegistration = registrations.length > 0;
-        const hasDeregistration = item?.de_registration !== null && item?.de_registration !== undefined;
+        const hasDeregistration =
+          item?.de_registration !== null && item?.de_registration !== undefined;
 
         if (hasDeregistration) {
           return (
             <div className='relative flex h-[24px] w-fit items-center justify-end gap-1/2 rounded-m border border-border px-[10px] text-text-xs'>
               <UserMinus size={12} className='text-[#f04438]' />
               <span className='text-nowrap text-text-xs font-medium'>
-                Resignation
+                {t("gov.cc.resignation")}
               </span>
             </div>
           );
@@ -76,7 +79,7 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
             <div className='relative flex h-[24px] w-fit items-center justify-end gap-1/2 rounded-m border border-border px-[10px] text-text-xs'>
               <UserPlus size={12} className='text-[#47CD89]' />
               <span className='text-nowrap text-text-xs font-medium'>
-                Registration
+                {t("gov.cc.registration")}
               </span>
             </div>
           );
@@ -86,12 +89,12 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
           <div className='relative flex h-[24px] w-fit items-center justify-end gap-1/2 rounded-m border border-border px-[10px] text-text-xs'>
             <Calendar size={12} className='text-[#FEC84B]' />
             <span className='text-nowrap text-text-xs font-medium'>
-              Term expiration
+              {t("gov.cc.termExpiration")}
             </span>
           </div>
         );
       },
-      title: "Type",
+      title: t("gov.cc.type"),
       visible: true,
       widthPx: 110,
     },
@@ -115,7 +118,7 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
           </div>
         );
       },
-      title: <p>Effective</p>,
+      title: <p>{t("gov.cc.effective")}</p>,
       visible: true,
       widthPx: 110,
     },
@@ -130,7 +133,7 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
           </div>
         );
       },
-      title: <p>Expiration</p>,
+      title: <p>{t("gov.cc.expiration")}</p>,
       visible: true,
       widthPx: 110,
     },
@@ -154,7 +157,7 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
         }
         return <p className='text-right'>-</p>;
       },
-      title: <p className='w-full text-right'>Tx</p>,
+      title: <p className='w-full text-right'>{t("gov.cc.tx")}</p>,
       visible: true,
       widthPx: 50,
     },
@@ -180,6 +183,10 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
       query={mockQuery as any}
       items={sortedHistory}
       columns={columns}
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

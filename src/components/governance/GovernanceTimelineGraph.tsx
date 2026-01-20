@@ -14,6 +14,7 @@ import {
   govStatusBgColors,
   govTypeLabels,
 } from "@/constants/governance";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface GovernanceTimelineGraphProps {
   items: GovernanceActionList[];
@@ -38,10 +39,22 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
   currentEpoch,
   epochStartTime,
 }) => {
+  const { t } = useAppTranslation();
   const navigate = useNavigate();
   const { textColor, bgColor, splitLineColor, lineColor } = useGraphColors();
 
   const epochStartTimestamp = new Date(epochStartTime).getTime() / 1000;
+
+  const getStatusLabel = (status: GovStatus): string => {
+    const statusLabels: Record<GovStatus, string> = {
+      ACTIVE: t("common:governance.actions.statusActive"),
+      ENACTED: t("common:governance.actions.statusEnacted"),
+      RATIFIED: t("common:governance.actions.statusRatified"),
+      DROPPED: t("common:governance.actions.statusDropped"),
+      EXPIRED: t("common:governance.actions.statusExpired"),
+    };
+    return statusLabels[status];
+  };
 
   const chartData = useMemo(() => {
     if (!items.length)
@@ -92,6 +105,7 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
       const statusFontSize = isLongLabel ? 9 : 9;
       const statusPadding = isLongLabel ? [1, 3, 1, 3] : [2, 5, 2, 5];
       const namePadding = isLongLabel ? [0, 4, 0, 4] : [0, 6, 0, 6];
+      const statusLabel = getStatusLabel(item.status);
 
       return {
         value: item.endEpoch - item.startEpoch,
@@ -104,7 +118,7 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
         label: {
           show: true,
           position: "insideLeft" as const,
-          formatter: `{status|${item.status}} {name|${item.typeLabel}}`,
+          formatter: `{status|${statusLabel}} {name|${item.typeLabel}}`,
           rich: {
             status: {
               backgroundColor: govStatusColors[item.status],
@@ -168,9 +182,9 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
           return `
             <div style="padding: 8px; border: 1px solid ${borderColor}; border-radius: 4px; background: ${bgColor};">
               <div style="font-weight: bold; margin-bottom: 4px;">${itemData.name}</div>
-              <div>Type: ${itemData.typeLabel}</div>
-              <div>Status: ${itemData.status}</div>
-              <div>Voting period: Epoch ${itemData.startEpoch} to ${itemData.endEpoch}</div>
+              <div>${t("common:governance.timeline.type")} ${itemData.typeLabel}</div>
+              <div>${t("common:governance.timeline.status")} ${getStatusLabel(itemData.status as GovStatus)}</div>
+              <div>${t("common:governance.timeline.votingPeriod", { start: itemData.startEpoch, end: itemData.endEpoch })}</div>
             </div>
           `;
         },
@@ -229,7 +243,9 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
                 xAxis: currentEpoch - chartData.minEpoch,
                 label: {
                   show: true,
-                  formatter: `Current Epoch: ${currentEpoch}`,
+                  formatter: t("common:governance.timeline.currentEpoch", {
+                    epoch: currentEpoch,
+                  }),
                   position: "start",
                   color: lineColor,
                   fontSize: 11,
@@ -278,14 +294,16 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
   if (!items.length) {
     return (
       <div className='flex h-[400px] items-center justify-center rounded-m border border-border'>
-        <p className='text-grayTextPrimary'>No governance actions found</p>
+        <p className='text-grayTextPrimary'>
+          {t("common:governance.actions.noActionsFound")}
+        </p>
       </div>
     );
   }
 
   return (
     <div className='relative w-full rounded-m border border-border p-3'>
-      <h2 className='mb-2'>Governance Actions Timeline</h2>
+      <h2 className='mb-2'>{t("common:governance.timeline.title")}</h2>
       <div className='thin-scrollbar overflow-x-auto xl:overflow-visible'>
         <div className='relative min-w-[1400px] xl:min-w-0'>
           <GraphWatermark />
@@ -299,22 +317,22 @@ export const GovernanceTimelineGraph: FC<GovernanceTimelineGraphProps> = ({
         </div>
       </div>
       <div className='mt-2 flex flex-wrap items-center justify-center gap-3'>
-        {(["ACTIVE", "ENACTED", "RATIFIED", "DROPPED", "EXPIRED"] as GovStatus[]).map(
-          status => (
-            <div key={status} className='flex items-center gap-1'>
-              <div
-                className='rounded-sm h-3 w-3 border'
-                style={{
-                  backgroundColor: govStatusBgColors[status],
-                  borderColor: govStatusColors[status],
-                }}
-              />
-              <span className='text-text-sm text-grayTextPrimary'>
-                {status}
-              </span>
-            </div>
-          ),
-        )}
+        {(
+          ["ACTIVE", "ENACTED", "RATIFIED", "DROPPED", "EXPIRED"] as GovStatus[]
+        ).map(status => (
+          <div key={status} className='flex items-center gap-1'>
+            <div
+              className='rounded-sm h-3 w-3 border'
+              style={{
+                backgroundColor: govStatusBgColors[status],
+                borderColor: govStatusColors[status],
+              }}
+            />
+            <span className='text-text-sm text-grayTextPrimary'>
+              {getStatusLabel(status)}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );

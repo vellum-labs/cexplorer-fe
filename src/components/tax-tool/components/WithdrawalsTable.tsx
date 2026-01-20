@@ -19,6 +19,7 @@ import { useCallback, useEffect, useMemo } from "react";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import { useTaxToolWithdrawalsTableStore } from "@/stores/tables/taxToolWithdrawalsTableStore";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface WithdrawalsTableProps {
   query: UseQueryResult<any, unknown>;
@@ -41,6 +42,7 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
   itemsPerPage,
   onItemsPerPageChange,
 }) => {
+  const { t } = useAppTranslation("common");
   const showSecondaryCurrency = secondaryCurrency !== "usd";
   const adaUsdPrice = useAdaPriceWithHistory("usd");
   const adaSecondaryPrice = useAdaPriceWithHistory(secondaryCurrency);
@@ -138,15 +140,19 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
 
   const columnLabels = useMemo(
     () => ({
-      timestamp: "Withdrawal timestamp",
-      transaction: "Transaction",
-      rewards_ada: "Rewards withdrawn ADA",
-      rewards_usd: "Rewards withdrawn USD",
-      rewards_secondary: `Rewards withdrawn ${secondaryCurrency.toUpperCase()}`,
-      ada_usd_rate: "ADA/USD",
-      ada_secondary_rate: `ADA/${secondaryCurrency.toUpperCase()}`,
+      timestamp: t("taxTool.columns.withdrawalTimestamp"),
+      transaction: t("taxTool.columns.transaction"),
+      rewards_ada: t("taxTool.columns.rewardsWithdrawnAda"),
+      rewards_usd: t("taxTool.columns.rewardsWithdrawnUsd"),
+      rewards_secondary: t("taxTool.columns.rewardsWithdrawnCurrency", {
+        currency: secondaryCurrency.toUpperCase(),
+      }),
+      ada_usd_rate: t("taxTool.columns.adaUsdRate"),
+      ada_secondary_rate: t("taxTool.columns.adaCurrencyRate", {
+        currency: secondaryCurrency.toUpperCase(),
+      }),
     }),
-    [secondaryCurrency],
+    [secondaryCurrency, t],
   );
 
   const columns = useMemo(
@@ -155,7 +161,7 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
         key: "timestamp",
         title: (
           <div className='flex w-full justify-start'>
-            <Tooltip content='Exchange rates from the withdrawal date.'>
+            <Tooltip content={t("taxTool.tooltips.exchangeRatesWithdrawal")}>
               <div
                 className='flex cursor-help items-center gap-1'
                 style={{ pointerEvents: "auto" }}
@@ -255,7 +261,7 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
         key: "ada_usd_rate",
         title: (
           <div className='flex w-full justify-end'>
-            <Tooltip content='Exchange rates from the withdrawal date.'>
+            <Tooltip content={t("taxTool.tooltips.exchangeRatesWithdrawal")}>
               <div
                 className='flex cursor-help items-center gap-1'
                 style={{ pointerEvents: "auto" }}
@@ -279,7 +285,7 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
         key: "ada_secondary_rate",
         title: (
           <div className='flex w-full justify-end'>
-            <Tooltip content='Exchange rates from the withdrawal date.'>
+            <Tooltip content={t("taxTool.tooltips.exchangeRatesWithdrawal")}>
               <div
                 className='flex cursor-help items-center gap-1'
                 style={{ pointerEvents: "auto" }}
@@ -387,11 +393,14 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
   return (
     <div className='flex flex-col gap-2'>
       <div className='flex items-center justify-between'>
-        <h3 className='text-text-md font-semibold'>Withdrawals</h3>
+        <h3 className='text-text-md font-semibold'>
+          {t("taxTool.withdrawals")}
+        </h3>
         <div className='flex items-center gap-1'>
           <TableSettingsDropdown
             rows={itemsPerPage}
             setRows={handleRowsChange}
+            rowsLabel={t("table.rows")}
             columnsOptions={columnsOptions}
           />
           <ExportButton
@@ -413,12 +422,21 @@ export const WithdrawalsTable: FC<WithdrawalsTableProps> = ({
         items={data}
         columns={columns}
         disableDrag
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
       {totalItems > itemsPerPage && (
         <Pagination
           currentPage={currentPage}
           setCurrentPage={onPageChange}
           totalPages={totalPages}
+          labels={{
+            ellipsisSrLabel: t("sdk:pagination.morePages"),
+            nextAriaLabel: t("sdk:pagination.nextPage"),
+            previousAriaLabel: t("sdk:pagination.previousPage"),
+          }}
         />
       )}
     </div>

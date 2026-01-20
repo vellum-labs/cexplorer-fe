@@ -15,16 +15,17 @@ export const HashCell = ({
   href?: FileRoutesByPath[keyof FileRoutesByPath]["path"];
   formatType?: "short" | "long" | "shorter" | "longer";
 }) => {
-  const { handleMouseEnter, handleMouseLeave, handleCopyMouseEnter, isHighlighted } =
-    useHoverHighlight(hash, enableHover);
+  const {
+    handleMouseEnter,
+    handleMouseLeave,
+    handleCopyMouseEnter,
+    isHighlighted,
+  } = useHoverHighlight(hash, enableHover);
 
   if (!hash) return "-";
 
   return (
-    <div
-      onMouseLeave={handleMouseLeave}
-      className='flex items-center gap-1'
-    >
+    <div onMouseLeave={handleMouseLeave} className='flex items-center gap-1'>
       <Link
         to={href || "/tx/$hash"}
         params={{ hash: hash }}

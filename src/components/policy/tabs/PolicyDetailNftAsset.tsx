@@ -22,6 +22,7 @@ import { assetListTableOptionsWithoutType } from "@/constants/tables/assetListTa
 import { useViewStore } from "@/stores/viewStore";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface PolicyDetailNftAssetProps {
   policyId: string;
@@ -30,6 +31,7 @@ interface PolicyDetailNftAssetProps {
 export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
   policyId,
 }) => {
+  const { t } = useAppTranslation("common");
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { page } = useSearch({
     from: "/policy/$policyId",
@@ -88,7 +90,7 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
           />
         );
       },
-      title: "Asset",
+      title: t("policy.asset"),
       visible: columnsVisibility.asset,
       widthPx: 110,
     },
@@ -104,14 +106,14 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
           enableHover
         />
       ),
-      title: "Policy ID",
+      title: t("policy.policyId"),
       visible: columnsVisibility.policy_id && !policyId,
       widthPx: 100,
     },
     {
       key: "asset_minted",
       render: item => <DateCell time={item?.stat?.asset?.last_mint ?? ""} />,
-      title: "Asset Minted",
+      title: t("policy.assetMinted"),
       visible: columnsVisibility.asset_minted,
       widthPx: 45,
     },
@@ -122,7 +124,7 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
           {formatNumber(item?.stat?.asset?.quantity) ?? "-"}
         </p>
       ),
-      title: <p className='w-full text-right'>Mint Quantity</p>,
+      title: <p className='w-full text-right'>{t("policy.mintQuantity")}</p>,
       visible: (columnsVisibility as AssetListTableColumns).mint_quantity,
       widthPx: 45,
     },
@@ -133,7 +135,7 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
           {formatNumber(item?.stat?.asset?.mintc) ?? "-"}
         </p>
       ),
-      title: <p className='w-full text-right'>Mint Count</p>,
+      title: <p className='w-full text-right'>{t("asset.mintCount")}</p>,
       visible: columnsVisibility.mint_count,
       widthPx: 50,
     },
@@ -154,7 +156,7 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
           </div>
           <div className='flex w-full gap-1 min-[500px]:w-fit'>
             <TableSearchInput
-              placeholder='Search by asset...'
+              placeholder={t("policy.searchByAsset")}
               value={tableSearch}
               onchange={setTableSearch}
               wrapperClassName='min-[500px]:w-[320px] w-full'
@@ -165,13 +167,14 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("table.rows")}
                 columnsOptions={
                   view !== "grid"
                     ? assetListTableOptionsWithoutType
                         .filter(item => columnsVisibility[item.key])
                         .map(item => {
                           return {
-                            label: item.name,
+                            label: t(`common:tableSettings.${item.key}`),
                             isVisible: columnsVisibility[item.key],
                             onClick: () =>
                               setColumnVisibility(
@@ -215,6 +218,10 @@ export const PolicyDetailNftAsset: FC<PolicyDetailNftAssetProps> = ({
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("table.displaying", { count, total })
+          }
+          noItemsLabel={t("table.noItems")}
         />
       )}
     </>

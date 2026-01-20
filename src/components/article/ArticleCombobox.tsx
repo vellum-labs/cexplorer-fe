@@ -59,7 +59,10 @@ export function ArticleCombobox({
           <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
         </div>
       </PopoverTrigger>
-      <PopoverContent className='w-[var(--radix-popover-trigger-width)] p-0' align='start'>
+      <PopoverContent
+        className='w-[var(--radix-popover-trigger-width)] p-0'
+        align='start'
+      >
         <Command>
           <CommandInput placeholder='Search categories...' />
           <CommandList>

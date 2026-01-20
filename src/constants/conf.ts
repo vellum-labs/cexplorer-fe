@@ -19,8 +19,8 @@ export const configJSON = (() => {
       return cfg_mainnet_prod;
     case "preview-stage":
       return cfg_preview_stage;
-     case "preview-prod":
-      return cfg_preview_prod; 
+    case "preview-prod":
+      return cfg_preview_prod;
     default:
       return cfg_preprod_stage;
   }

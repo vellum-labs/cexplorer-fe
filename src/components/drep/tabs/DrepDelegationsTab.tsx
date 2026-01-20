@@ -21,8 +21,10 @@ import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const DrepDelegationsTab = () => {
+  const { t } = useAppTranslation("pages");
   const { page } = useSearch({ from: "/drep/" });
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const {
@@ -84,7 +86,7 @@ export const DrepDelegationsTab = () => {
           "yyy-MM-dd HH:mm:ss",
         );
       },
-      title: <p>Date</p>,
+      title: <p>{t("common:labels.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 55,
     },
@@ -104,7 +106,7 @@ export const DrepDelegationsTab = () => {
 
         return item.view;
       },
-      title: "Address",
+      title: t("common:labels.address"),
       visible: columnsVisibility.address,
       widthPx: 90,
     },
@@ -117,7 +119,7 @@ export const DrepDelegationsTab = () => {
       ),
       title: (
         <div className='flex w-full justify-end'>
-          <span>Amount</span>
+          <span>{t("common:labels.amount")}</span>
         </div>
       ),
       visible: columnsVisibility.amount,
@@ -161,7 +163,7 @@ export const DrepDelegationsTab = () => {
           .filter(e => e)
           .join(" -> ");
       },
-      title: "Delegation",
+      title: t("common:labels.delegation"),
       visible: columnsVisibility.delegation,
       widthPx: 190,
     },
@@ -177,7 +179,7 @@ export const DrepDelegationsTab = () => {
 
         return item.tx.hash;
       },
-      title: "Tx",
+      title: t("common:labels.tx"),
       visible: columnsVisibility.tx,
       widthPx: 80,
     },
@@ -197,7 +199,8 @@ export const DrepDelegationsTab = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : totalItems !== undefined ? (
             <h3 className='basis-[230px] text-nowrap'>
-              Total of {formatNumber(totalItems)} delegations
+              {t("common:phrases.totalOf")} {formatNumber(totalItems)}{" "}
+              {t("dreps.delegations.totalOfSuffix")}
             </h3>
           ) : (
             ""
@@ -212,9 +215,10 @@ export const DrepDelegationsTab = () => {
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("common:table.rows")}
                 columnsOptions={drepDelegationsTableOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(
@@ -238,9 +242,10 @@ export const DrepDelegationsTab = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={drepDelegationsTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -267,6 +272,10 @@ export const DrepDelegationsTab = () => {
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("common:table.displaying", { count, total })
+        }
+        noItemsLabel={t("common:table.noItems")}
       />
     </>
   );

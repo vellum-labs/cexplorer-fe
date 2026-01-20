@@ -5,12 +5,14 @@ import { FileJson } from "lucide-react";
 import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { JsonDisplay } from "@vellumlabs/cexplorer-sdk";
 import { createPortal } from "react-dom";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface MetadataCellProps {
   metadata: any;
 }
 
 export const MetadataCell: FC<MetadataCellProps> = ({ metadata }) => {
+  const { t } = useAppTranslation("common");
   const [open, setOpen] = useState<boolean>(false);
 
   return (
@@ -38,6 +40,7 @@ export const MetadataCell: FC<MetadataCellProps> = ({ metadata }) => {
               isError={false}
               search
               onClose={() => setOpen(false)}
+              noDataLabel={t("sdk:jsonDisplay.noDataLabel")}
             />
           </Modal>,
           document.body,

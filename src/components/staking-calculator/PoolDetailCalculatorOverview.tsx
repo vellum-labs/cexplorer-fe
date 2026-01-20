@@ -13,6 +13,7 @@ import { format, parseISO } from "date-fns";
 import { formatWebsiteUrl } from "@/utils/format/formatWebsiteUrl";
 import type { useFetchPoolDetail } from "@/services/pools";
 import { PoolSaturation } from "@/components/pool/PoolSaturation";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   query: ReturnType<typeof useFetchPoolDetail>;
@@ -25,14 +26,19 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
   estimatedBlocks,
   onRoaChange,
 }) => {
+  const { t } = useAppTranslation("common");
   const data = query.data?.data;
   const [linkModal, setLinkModal] = useState<boolean>(false);
-  const [selectedRoaType, setSelectedRoaType] = useState<'upper' | 'actual' | 'lower'>('actual');
+  const [selectedRoaType, setSelectedRoaType] = useState<
+    "upper" | "actual" | "lower"
+  >("actual");
 
   if (query.isLoading) {
     return (
       <>
-        <h3 className='text-text-lg font-semibold'>Pool Info</h3>
+        <h3 className='text-text-lg font-semibold'>
+          {t("stakingCalculator.poolInfo")}
+        </h3>
         <div className='grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-6'>
           <div className='flex flex-col gap-3'>
             {[1, 2, 3, 4, 5, 6, 7].map(i => (
@@ -54,10 +60,13 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
   }
 
   const leftColumnData = [
-    { label: "Name", value: data.pool_name.name },
-    { label: "Ticker", value: data.pool_name.ticker },
+    { label: t("stakingCalculator.labels.name"), value: data.pool_name.name },
     {
-      label: "Pool ID",
+      label: t("stakingCalculator.labels.ticker"),
+      value: data.pool_name.ticker,
+    },
+    {
+      label: t("stakingCalculator.labels.poolId"),
       value: (
         <span className='flex items-center gap-1'>
           {formatString(data.pool_id || "", "long")}
@@ -66,21 +75,21 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
       ),
     },
     {
-      label: "Created",
+      label: t("stakingCalculator.labels.created"),
       value: data.registered && format(parseISO(data.registered), "d.M.yyyy"),
     },
     {
-      label: "Delegators",
+      label: t("stakingCalculator.labels.delegators"),
       value: formatNumber(data.delegators),
     },
     {
-      label: "Recent ROA",
+      label: t("stakingCalculator.labels.recentRoa"),
       value: data.stats?.recent?.roa
         ? `${data.stats.recent.roa.toFixed(2)}%`
         : "-",
     },
     {
-      label: "Website",
+      label: t("stakingCalculator.labels.website"),
       value: data.pool_name.homepage ? (
         <>
           <a
@@ -98,6 +107,9 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
             <SafetyLinkModal
               url={data.pool_name.homepage ?? ""}
               onClose={() => setLinkModal(false)}
+              warningText={t("sdk:safetyLink.warningText")}
+              goBackLabel={t("sdk:safetyLink.goBackLabel")}
+              visitLabel={t("sdk:safetyLink.visitLabel")}
             />
           )}
         </>
@@ -109,11 +121,11 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
 
   const rightColumnData = [
     {
-      label: "Estimated Blocks",
+      label: t("stakingCalculator.labels.estimatedBlocks"),
       value: formatNumber(Math.round(estimatedBlocks)),
     },
     {
-      label: "Live Stake",
+      label: t("stakingCalculator.labels.liveStake"),
       value: (
         <div className='flex min-w-0 flex-col items-end gap-1'>
           <AdaWithTooltip data={data.live_stake || 0} />
@@ -124,25 +136,25 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
       ),
     },
     {
-      label: "Active Stake",
+      label: t("stakingCalculator.labels.activeStake"),
       value: <AdaWithTooltip data={data.active_stake || 0} />,
     },
     {
-      label: "Active Pledge",
+      label: t("stakingCalculator.labels.activePledge"),
       value: <AdaWithTooltip data={data.pledged ?? 0} />,
     },
     {
-      label: "Lifetime ROA",
+      label: t("stakingCalculator.labels.lifetimeRoa"),
       value: data.stats?.lifetime?.roa
         ? `${data.stats.lifetime.roa.toFixed(2)}%`
         : "-",
     },
     {
-      label: "Margin Fee",
+      label: t("stakingCalculator.labels.marginFee"),
       value: ((data.pool_update.active.margin ?? 0) * 100).toFixed(2) + "%",
     },
     {
-      label: "Fixed Fee",
+      label: t("stakingCalculator.labels.fixedFee"),
       value: <AdaWithTooltip data={data.pool_update.active.fixed_cost ?? 0} />,
     },
   ];
@@ -153,7 +165,9 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
 
   return (
     <>
-      <h3 className='text-text-lg font-semibold'>Pool Info</h3>
+      <h3 className='text-text-lg font-semibold'>
+        {t("stakingCalculator.poolInfo")}
+      </h3>
 
       <div className='grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-6'>
         <div className='flex flex-col gap-3'>
@@ -185,61 +199,67 @@ export const PoolDetailCalculatorOverview: FC<Props> = ({
         </div>
       </div>
 
-      <h3 className='mt-4 text-text-lg font-semibold'>Expected returns</h3>
+      <h3 className='mt-4 text-text-lg font-semibold'>
+        {t("stakingCalculator.expectedReturns")}
+      </h3>
       <div className='grid grid-cols-1 gap-3 sm:grid-cols-3'>
-        <Tooltip content="Optimistic rate estimate (+10% above actual)">
+        <Tooltip content={t("stakingCalculator.tooltips.upper")}>
           <div>
             <button
               onClick={() => {
-                setSelectedRoaType('upper');
+                setSelectedRoaType("upper");
                 onRoaChange?.(upperRoa);
               }}
               className={`flex w-full flex-col items-center gap-1 rounded-xl border p-2 transition-colors ${
-                selectedRoaType === 'upper'
-                  ? 'border-primary bg-cardBg'
-                  : 'border-border bg-cardBg hover:border-primary/50'
+                selectedRoaType === "upper"
+                  ? "border-primary bg-cardBg"
+                  : "hover:border-primary/50 border-border bg-cardBg"
               }`}
             >
               <p className='text-text-2xl font-bold'>{upperRoa.toFixed(2)}%</p>
-              <p className='text-center text-text-sm text-grayTextPrimary'>Upper</p>
-            </button>
-          </div>
-        </Tooltip>
-        <Tooltip content="Current pool performance based on recent data">
-          <div>
-            <button
-              onClick={() => {
-                setSelectedRoaType('actual');
-                onRoaChange?.(recentRoa);
-              }}
-              className={`flex w-full flex-col items-center gap-1 rounded-xl border p-2 transition-colors ${
-                selectedRoaType === 'actual'
-                  ? 'border-primary bg-cardBg'
-                  : 'border-border bg-cardBg hover:border-primary/50'
-              }`}
-            >
-              <p className='text-text-2xl font-bold'>{recentRoa.toFixed(2)}%</p>
               <p className='text-center text-text-sm text-grayTextPrimary'>
-                Actual
+                {t("stakingCalculator.roaTypes.upper")}
               </p>
             </button>
           </div>
         </Tooltip>
-        <Tooltip content="Pessimistic rate estimate (-10% below actual)">
+        <Tooltip content={t("stakingCalculator.tooltips.actual")}>
           <div>
             <button
               onClick={() => {
-                setSelectedRoaType('lower');
+                setSelectedRoaType("actual");
+                onRoaChange?.(recentRoa);
+              }}
+              className={`flex w-full flex-col items-center gap-1 rounded-xl border p-2 transition-colors ${
+                selectedRoaType === "actual"
+                  ? "border-primary bg-cardBg"
+                  : "hover:border-primary/50 border-border bg-cardBg"
+              }`}
+            >
+              <p className='text-text-2xl font-bold'>{recentRoa.toFixed(2)}%</p>
+              <p className='text-center text-text-sm text-grayTextPrimary'>
+                {t("stakingCalculator.roaTypes.actual")}
+              </p>
+            </button>
+          </div>
+        </Tooltip>
+        <Tooltip content={t("stakingCalculator.tooltips.lower")}>
+          <div>
+            <button
+              onClick={() => {
+                setSelectedRoaType("lower");
                 onRoaChange?.(lowerRoa);
               }}
               className={`flex w-full flex-col items-center gap-1 rounded-xl border p-2 transition-colors ${
-                selectedRoaType === 'lower'
-                  ? 'border-primary bg-cardBg'
-                  : 'border-border bg-cardBg hover:border-primary/50'
+                selectedRoaType === "lower"
+                  ? "border-primary bg-cardBg"
+                  : "hover:border-primary/50 border-border bg-cardBg"
               }`}
             >
               <p className='text-text-2xl font-bold'>{lowerRoa.toFixed(2)}%</p>
-              <p className='text-center text-text-sm text-grayTextPrimary'>Lower</p>
+              <p className='text-center text-text-sm text-grayTextPrimary'>
+                {t("stakingCalculator.roaTypes.lower")}
+              </p>
             </button>
           </div>
         </Tooltip>

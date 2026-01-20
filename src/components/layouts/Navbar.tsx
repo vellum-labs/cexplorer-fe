@@ -2,8 +2,8 @@ import type { FC } from "react";
 
 import { colors } from "@/constants/colors";
 import { enabledWalletConnector } from "@/constants/confVariables";
-import { navigationOptions } from "@/constants/navigationOptions";
-import { nestedNavigationOptions } from "@/constants/nestedNavigationOptions";
+import { useNavigationOptions } from "@/hooks/useNavigationOptions";
+import { useNestedNavigationOptions } from "@/hooks/useNestedNavigationOptions";
 import { Cardano } from "@vellumlabs/cexplorer-sdk";
 import { ArrowRight, ChevronsUp } from "lucide-react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
@@ -19,6 +19,7 @@ import WalletButton from "../wallet/WalletButton";
 import { LayoutNotification } from "@/utils/LayoutNotification";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 import { configJSON } from "@/constants/conf";
 
@@ -27,8 +28,11 @@ interface NavbarProps {
 }
 
 const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
+  const { t } = useAppTranslation("navigation");
   const { theme } = useThemeStore();
   const price = useAdaPriceWithHistory();
+  const { navigationOptions, labels } = useNavigationOptions();
+  const { nestedNavigationOptions } = useNestedNavigationOptions();
 
   return (
     <>
@@ -47,49 +51,49 @@ const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
             <div className='hidden items-center gap-2 xl:flex xl:h-[75px]'>
               <Dropdown
                 id='blockchain'
-                label='Blockchain'
+                label={labels.blockchain}
                 options={navigationOptions.blockchain}
                 withBorder
                 wrapperClassname='z-[50]'
               />
               <Dropdown
                 id='staking'
-                label='Staking'
+                label={labels.staking}
                 options={navigationOptions.staking}
                 withBorder
                 wrapperClassname='z-[50]'
               />
               <Dropdown
                 id='governance'
-                label='Governance'
+                label={labels.governance}
                 options={navigationOptions.governance}
                 withBorder
                 wrapperClassname='z-[50]'
               />
               <Dropdown
                 id='tokens'
-                label='Tokens'
+                label={labels.tokens}
                 options={navigationOptions.tokens}
                 withBorder
                 wrapperClassname='z-[50]'
               />
               <Dropdown
                 id='nfts'
-                label='NFTs'
+                label={labels.nfts}
                 options={navigationOptions.nfts}
                 withBorder
                 wrapperClassname='z-[50]'
               />
               <Dropdown
                 id='education'
-                label='Education'
+                label={labels.education}
                 options={navigationOptions.education}
                 withBorder
                 wrapperClassname='z-[50]'
               />
               <ScreenDropdown
                 id='analytics'
-                label='Analytics'
+                label={labels.analytics}
                 options={nestedNavigationOptions.analyticsOptions}
                 randomTopAd={randomTopAd}
                 card={
@@ -97,19 +101,18 @@ const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
                     icon={<Cardano size={24} color={colors.primary} />}
                     title={
                       <span className='text-text-lg font-semibold'>
-                        Powered by{" "}
-                        <span className='text-primary'>Cardano Blockchain</span>
+                        {t("navbar.poweredBy")}{" "}
+                        <span className='text-primary'>
+                          {t("navbar.cardanoBlockchain")}
+                        </span>
                       </span>
                     }
                     className='bg-darker'
                   >
-                    <p className='font-regular'>
-                      Access Our API for Comprehensive Blockchain Data and Build
-                      Your Next-Level dApp!
-                    </p>
+                    <p className='font-regular'>{t("navbar.apiDescription")}</p>
                     <Button
                       className='mt-auto'
-                      label='Start building'
+                      label={t("navbar.startBuilding")}
                       rightIcon={<ArrowRight />}
                       variant='primary'
                       size='lg'
@@ -119,7 +122,7 @@ const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
               />
               <ScreenDropdown
                 id='more'
-                label='More'
+                label={labels.more}
                 options={nestedNavigationOptions.moreOptions}
                 randomTopAd={randomTopAd}
                 card={
@@ -127,20 +130,19 @@ const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
                     icon={<ChevronsUp color={colors.purpleText} />}
                     title={
                       <span className='text-text-lg font-semibold'>
-                        Get Cexplorer.io{" "}
-                        <span className='text-purpleText'>PRO</span>
+                        {t("navbar.getCexplorer")}{" "}
+                        <span className='text-purpleText'>
+                          {t("navbar.pro")}
+                        </span>
                       </span>
                     }
                     className='bg-darker'
                   >
-                    <p className='font-regular'>
-                      Access Our API for Comprehensive Blockchain Data and Build
-                      Your Next-Level dApp!
-                    </p>
+                    <p className='font-regular'>{t("navbar.apiDescription")}</p>
                     <Button
                       href='/pro'
                       className='mt-auto'
-                      label='Get PRO'
+                      label={t("navbar.getPro")}
                       rightIcon={<ArrowRight />}
                       variant='purple'
                       size='lg'

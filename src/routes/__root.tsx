@@ -4,9 +4,8 @@ import {
   Outlet,
   useLocation,
   useRouter,
-  useRouterState,
 } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Button, SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import Footer from "../components/layouts/Footer";
@@ -24,16 +23,16 @@ import {
 } from "@vellumlabs/cexplorer-sdk";
 import { useGenerateSW } from "@/hooks/useGenerateSW";
 import { useState } from "react";
-import { setGlobalAbortSignal } from "@/lib/handleFetch";
-import { abortControllers } from "@/lib/handleAbortController";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { useFetchMiscBasic, useFetchMiscSearch } from "@/services/misc";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { useShortcuts } from "@/hooks/shortcuts/useShortcuts";
 import { ShortcutsModal } from "@/components/global/ShortcutsModal";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const RootComponent = () => {
+  const { t } = useAppTranslation("common");
   useGenerateSW();
 
   const { openHelp, setOpenHelp } = useShortcuts();
@@ -46,8 +45,6 @@ const RootComponent = () => {
 
   const { notFound, setNotFound } = useNotFound();
   const location = useLocation();
-
-  const { location: locationState } = useRouterState();
 
   const { theme } = useThemeStore();
   const { locale } = useLocaleStore();
@@ -74,11 +71,6 @@ const RootComponent = () => {
   const randomTopAd = topAds
     ? topAds[Math.floor(Math.random() * topAds.length)]
     : undefined;
-
-  const prevLocationRef = useRef<{
-    pathname: string;
-    searchStr: string;
-  } | null>(null);
 
   useEffect(() => {
     setResetKey(k => k + 1);
@@ -118,34 +110,6 @@ const RootComponent = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
-
-  useEffect(() => {
-    const currentSearchParams = new URLSearchParams(locationState.searchStr);
-    const prevSearchParams = new URLSearchParams(
-      prevLocationRef.current?.searchStr || "",
-    );
-
-    const currentTab = currentSearchParams.get("tab");
-    const currentSubTab = currentSearchParams.get("subTab");
-    const prevTab = prevSearchParams.get("tab");
-    const prevSubTab = prevSearchParams.get("subTab");
-
-    const shouldAbort =
-      locationState.pathname !== prevLocationRef.current?.pathname ||
-      currentTab !== prevTab ||
-      currentSubTab !== prevSubTab;
-
-    if (shouldAbort) {
-      abortControllers.abortAll();
-      const controller = abortControllers.create("GLOBAL");
-      setGlobalAbortSignal(controller.signal);
-    }
-
-    prevLocationRef.current = {
-      pathname: locationState.pathname,
-      searchStr: locationState.searchStr,
-    };
-  }, [locationState.pathname, locationState.searchStr]);
 
   useEffect(() => {
     const updateModal = localStorage.getItem("should_update");
@@ -232,6 +196,9 @@ const RootComponent = () => {
           <SafetyLinkModal
             url={clickedUrl}
             onClose={() => setClickedUrl(null)}
+            warningText={t("sdk:safetyLink.warningText")}
+            goBackLabel={t("sdk:safetyLink.goBackLabel")}
+            visitLabel={t("sdk:safetyLink.visitLabel")}
           />
         )}
         {/* <TanStackRouterDevtools /> */}
@@ -243,12 +210,6 @@ const RootComponent = () => {
 };
 
 export const Route = createRootRoute({
-  component: () => {
-    return (
-      <GlobalSearchProvider useFetchMiscSearch={useFetchMiscSearch} locale='en'>
-        <RootComponent />
-      </GlobalSearchProvider>
-    );
-  },
+  component: RootComponent,
   notFoundComponent: NotFoundPage,
 });

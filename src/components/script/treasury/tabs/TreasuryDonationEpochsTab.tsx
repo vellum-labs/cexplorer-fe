@@ -14,22 +14,34 @@ import type {
 } from "@/types/treasuryTypes";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { findNearestTreasuryRate } from "@/utils/findNearestTreasuryRate";
-import { formatNumber, formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
+import {
+  formatNumber,
+  formatNumberWithSuffix,
+} from "@vellumlabs/cexplorer-sdk";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { format } from "date-fns";
 import ReactEcharts from "echarts-for-react";
 import { useRef } from "react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   query: UseQueryResult<TreasuryDonationStatsResponse["data"]>;
 }
 
 export const TreasuryDonationEpochsTab = ({ query }: Props) => {
+  const { t } = useAppTranslation("common");
   const { data: basicData } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(basicData?.data.version.const);
   const { formatLovelace } = useADADisplay();
   const { currency } = useCurrencyStore();
   const epochs = query.data?.epoch;
+
+  const legendLabels = {
+    totalDonationsAda: t("treasury.graph.totalDonationsAda"),
+    totalDonationsCurrency: t("treasury.graph.totalDonationsCurrency", {
+      currency: currency.toUpperCase(),
+    }),
+  };
   const totalAdaDonations = epochs?.map(item => item.treasury_donation);
   const totalCurrencyDonations = epochs?.map(item => {
     const nearestAdaRate = findNearestTreasuryRate(epochs, item.epoch_no)[0];
@@ -66,8 +78,8 @@ export const TreasuryDonationEpochsTab = ({ query }: Props) => {
       },
       type: "scroll",
       data: [
-        "Total Donations (₳)",
-        `Total Donations (${currency.toUpperCase()})`,
+        legendLabels.totalDonationsAda,
+        legendLabels.totalDonationsCurrency,
       ],
       textStyle: {
         color: textColor,
@@ -87,10 +99,10 @@ export const TreasuryDonationEpochsTab = ({ query }: Props) => {
           miscConst?.epoch.start_time ?? "",
         );
 
-        const header = `Date: ${format(startTime, "dd.MM.yy")} - ${format(
+        const header = `${t("treasury.graph.date")}: ${format(startTime, "dd.MM.yy")} - ${format(
           endTime,
           "dd.MM.yy",
-        )} (Epoch: ${params[0]?.axisValue})<hr style="margin: 4px 0;" />`;
+        )} (${t("treasury.graph.epoch")}: ${params[0]?.axisValue})<hr style="margin: 4px 0;" />`;
 
         const rows = params.map(item => {
           const isAda = item.seriesName.includes("₳");
@@ -120,7 +132,7 @@ export const TreasuryDonationEpochsTab = ({ query }: Props) => {
       type: "category",
       data: epochs?.map(item => item.epoch_no),
       inverse: true,
-      name: "Epoch",
+      name: t("treasury.graph.epoch"),
       nameLocation: "middle",
       nameGap: 28,
       axisLabel: {
@@ -137,7 +149,7 @@ export const TreasuryDonationEpochsTab = ({ query }: Props) => {
         type: "value",
         position: "left",
         show: true,
-        name: "Total Donations (₳)",
+        name: legendLabels.totalDonationsAda,
         nameRotate: 90,
         nameLocation: "middle",
         nameGap: 45,
@@ -164,7 +176,7 @@ export const TreasuryDonationEpochsTab = ({ query }: Props) => {
         position: "right",
         id: "1",
         show: true,
-        name: `Total Donations (${currency.toUpperCase()})`,
+        name: legendLabels.totalDonationsCurrency,
         nameRotate: 90,
         nameLocation: "middle",
         nameGap: 45,
@@ -190,7 +202,7 @@ export const TreasuryDonationEpochsTab = ({ query }: Props) => {
       {
         type: "bar",
         data: totalAdaDonations,
-        name: "Total Donations (₳)",
+        name: legendLabels.totalDonationsAda,
         yAxisIndex: 0,
         itemStyle: {
           opacity: 0.7,
@@ -200,7 +212,7 @@ export const TreasuryDonationEpochsTab = ({ query }: Props) => {
       {
         type: "line",
         data: totalCurrencyDonations,
-        name: `Total Donations (${currency.toUpperCase()})`,
+        name: legendLabels.totalDonationsCurrency,
         yAxisIndex: 1,
         itemStyle: {
           color: lineColor,
@@ -220,14 +232,18 @@ export const TreasuryDonationEpochsTab = ({ query }: Props) => {
   const columns: TableColumns<TreasuryDonationStatsEpoch> = [
     {
       key: "epoch_no",
-      title: "Epoch",
+      title: t("treasury.table.epoch"),
       render: item => <p>{item.epoch_no}</p>,
       visible: true,
       widthPx: 25,
     },
     {
       key: "ada_donation",
-      title: <p className='w-full text-right'>Total Donations (ADA)</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("treasury.table.totalDonationsAda")}
+        </p>
+      ),
       render: item => (
         <p className='text-right'>
           <AdaWithTooltip data={item.treasury_donation} />
@@ -240,7 +256,9 @@ export const TreasuryDonationEpochsTab = ({ query }: Props) => {
       key: "secondary_currency_donation",
       title: (
         <p className='w-full text-right'>
-          Total Donations ({currency.toUpperCase()})
+          {t("treasury.table.totalDonationsCurrency", {
+            currency: currency.toUpperCase(),
+          })}
         </p>
       ),
       render: item => {
@@ -296,6 +314,10 @@ export const TreasuryDonationEpochsTab = ({ query }: Props) => {
         query={query}
         items={query.data?.epoch}
         columns={columns}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </>
   );

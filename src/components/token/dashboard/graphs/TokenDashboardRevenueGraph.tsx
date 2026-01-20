@@ -8,6 +8,7 @@ import ReactEcharts from "echarts-for-react";
 import { useMemo } from "react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface TokenDashboardRevenueGraphProps {
   data: DeFiTokenStatData[] | undefined;
@@ -16,6 +17,7 @@ interface TokenDashboardRevenueGraphProps {
 export const TokenDashboardRevenueGraph: FC<
   TokenDashboardRevenueGraphProps
 > = ({ data }) => {
+  const { t } = useAppTranslation("common");
   const { textColor, bgColor } = useGraphColors();
 
   const { xAxisData, seriesData } = useMemo(() => {
@@ -97,8 +99,8 @@ export const TokenDashboardRevenueGraph: FC<
           0,
         );
 
-        let result = `<b>Trading volume</b><br/>${date}<br/><br/>`;
-        result += `<b>Total: ${total.toLocaleString()}</b><br/><br/>`;
+        let result = `<b>${t("tokenDashboard.graph.tradingVolume")}</b><br/>${date}<br/><br/>`;
+        result += `<b>${t("tokenDashboard.graph.total")}: ${total.toLocaleString()}</b><br/><br/>`;
 
         const sortedParams = [...params].sort(
           (a: any, b: any) => b.value - a.value,

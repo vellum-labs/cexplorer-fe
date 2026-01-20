@@ -4,8 +4,10 @@ import { slotsPerKESPeriod } from "@/constants/confVariables";
 import { Copy, LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Info } from "lucide-react";
 import { useFetchBlockTip } from "@/services/blocks";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const CheatSheetTab: FC = () => {
+  const { t } = useAppTranslation("pages");
   const { data: tipData, isLoading } = useFetchBlockTip();
   const currentSlot = tipData?.slot_no ?? 0;
   const kesPeriod = Math.floor(currentSlot / slotsPerKESPeriod);
@@ -23,16 +25,14 @@ export const CheatSheetTab: FC = () => {
         <div className='flex items-start gap-2'>
           <Info className='mt-0.5 h-5 w-5 flex-shrink-0 text-grayTextPrimary' />
           <p className='text-text-sm text-grayTextPrimary'>
-            Quick reference guide for stake pool operators. Copy-paste commands
-            for building cardano-node, calculating KES periods, and generating
-            operational certificates—the cheatsheet that SPOs actually use.
+            {t("poolDebug.cheatSheet.description")}
           </p>
         </div>
       </div>
 
       <div className='flex flex-col gap-2'>
         <h3 className='text-text-lg font-semibold'>
-          Build and update Cardano Node
+          {t("poolDebug.cheatSheet.buildAndUpdate")}
         </h3>
         <div className='relative rounded-xl border border-border bg-cardBg p-3'>
           <Copy copyText={BUILD_NODE_CODE} className='absolute right-3 top-3' />
@@ -43,13 +43,17 @@ export const CheatSheetTab: FC = () => {
       </div>
 
       <div className='flex flex-col gap-2'>
-        <h3 className='text-text-lg font-semibold'>KES update</h3>
+        <h3 className='text-text-lg font-semibold'>
+          {t("poolDebug.cheatSheet.kesUpdate")}
+        </h3>
         {isLoading ? (
           <LoadingSkeleton height='20px' width='70%' />
         ) : (
           <p className='text-text-sm text-grayTextPrimary'>
-            slotsPerKESPeriod: {slotsPerKESPeriod.toLocaleString()} slot:{" "}
-            {currentSlot.toLocaleString()} {">"} expr {currentSlot} /{" "}
+            {t("poolDebug.cheatSheet.slotsPerKESPeriod")}{" "}
+            {slotsPerKESPeriod.toLocaleString()}{" "}
+            {t("poolDebug.cheatSheet.slot")} {currentSlot.toLocaleString()}{" "}
+            {">"} {t("poolDebug.cheatSheet.expr")} {currentSlot} /{" "}
             {slotsPerKESPeriod}: {kesPeriod}
           </p>
         )}

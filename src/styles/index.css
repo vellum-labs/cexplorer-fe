@@ -6,19 +6,20 @@
   --hoverHighlight: rgba(250, 197, 21, 0.3) !important;
 }
 
-body, html {
+body,
+html {
   width: 100vw;
   overflow-x: hidden;
 }
 
-  .hide-scrollbar {
-    -ms-overflow-style: none; 
-    scrollbar-width: none;
-  }
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 
 .wrapper {
   display: flex;
@@ -738,7 +739,8 @@ p {
   background: var(--primary);
   border: 1px solid var(--primary);
   cursor: pointer;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
   margin-top: -8px;
 }
@@ -757,7 +759,8 @@ p {
   background: var(--primary);
   border: 1px solid var(--primary);
   cursor: pointer;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
   border: none;
 }

@@ -4,6 +4,7 @@ import type { PoolData, PoolListSearchParams } from "@/types/poolTypes";
 import type { Dispatch, RefObject, SetStateAction } from "react";
 
 import { Check, Filter, X } from "lucide-react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 import { SortArrow } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
@@ -108,6 +109,7 @@ export const usePoolList = ({
   overrideTableSearch,
   isHomepage,
 }: UsePoolListArgs): UsePoolList => {
+  const { t } = useAppTranslation(["pages", "common"]);
   const [{ debouncedTableSearch, tableSearch }, setTableSearch] =
     useSearchTable();
 
@@ -168,7 +170,7 @@ export const usePoolList = ({
     filter.is_drep && +filter.is_drep === 2 ? 1 : undefined,
   );
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const totalPools = poolsListQuery.data?.pages[0].data.count;
   const items = poolsListQuery.data?.pages.flatMap(page => page.data.data);
@@ -199,15 +201,15 @@ export const usePoolList = ({
   const selectItems = [
     {
       key: "Native Rankings",
-      value: "Native Rankings",
+      value: t("pools.sortOptions.nativeRankings"),
     },
     {
       key: "Pledge Leverage",
-      value: "Pledge Leverage",
+      value: t("pools.sortOptions.pledgeLeverage"),
     },
     {
       key: "Top Margins with Delegators",
-      value: "Top Margins with Delegators",
+      value: t("pools.sortOptions.topMargins"),
     },
   ];
 
@@ -271,7 +273,7 @@ export const usePoolList = ({
           cropPoolHash={cropPoolHash}
         />
       ),
-      title: "Pool",
+      title: t("pools.table.pool"),
       visible: columnsVisibility.pool,
       widthPx: 150,
     },
@@ -338,7 +340,7 @@ export const usePoolList = ({
                 setList("live_stake");
               }}
             >
-              <span>Stake</span>
+              <span>{t("pools.table.stake")}</span>
               <SortArrow
                 direction={order === "live_stake" ? sort : undefined}
               />
@@ -346,7 +348,7 @@ export const usePoolList = ({
           </div>
         ) : (
           <div className='flex w-full justify-end'>
-            <span>Stake</span>
+            <span>{t("pools.table.stake")}</span>
           </div>
         ),
       visible: columnsVisibility.stake,
@@ -365,7 +367,11 @@ export const usePoolList = ({
           miscConst,
         );
 
-        const epochs = item?.epochs ? Object.values(item.epochs).filter(epoch => epoch !== null && epoch !== undefined).slice(2) : [];
+        const epochs = item?.epochs
+          ? Object.values(item.epochs)
+              .filter(epoch => epoch !== null && epoch !== undefined)
+              .slice(2)
+          : [];
 
         const rewardsData = epochs.map(epoch => ({
           epoch: (epoch as any)?.no,
@@ -381,7 +387,10 @@ export const usePoolList = ({
         ]);
 
         const rewardsDataSourceNotEmpty =
-          rewardsDataSource.filter(item => item && item[1]).map(item => item[1]).filter(e => e).length > 0;
+          rewardsDataSource
+            .filter(item => item && item[1])
+            .map(item => item[1])
+            .filter(e => e).length > 0;
 
         return (
           <div className='w-full justify-end'>
@@ -398,24 +407,26 @@ export const usePoolList = ({
                   dataSource={rewardsDataSource}
                   ref={tableRef}
                   color={params =>
-                    rewardsData[params.dataIndex] ? getEpochColor(rewardsData[params.dataIndex].member_pct) : "#ccc"
+                    rewardsData[params.dataIndex]
+                      ? getEpochColor(rewardsData[params.dataIndex].member_pct)
+                      : "#ccc"
                   }
                   toolTipFormatter={params => {
                     const data = rewardsData[params.dataIndex];
 
-                    if (!data) return '';
+                    if (!data) return "";
 
                     return `
                           <div style="font-size: 12px; line-height: 15px">
-                            <span>Epoch: ${data.epoch ?? 'N/A'}</span>
+                            <span>Epoch: ${data.epoch ?? "N/A"}</span>
                             <br/>
-                            <span>Leader Ada: ${data.leader_lovelace ? lovelaceToAda(data.leader_lovelace) : 'N/A'}</span>
+                            <span>Leader Ada: ${data.leader_lovelace ? lovelaceToAda(data.leader_lovelace) : "N/A"}</span>
                             <br/>
-                            <span>Leader Pct: ${data.leader_pct ? data.leader_pct.toFixed(2) : 'N/A'}</span>
+                            <span>Leader Pct: ${data.leader_pct ? data.leader_pct.toFixed(2) : "N/A"}</span>
                             <br/>
-                            <span>Member Ada: ${data.member_lovelace ? lovelaceToAda(data.member_lovelace) : 'N/A'}</span>
+                            <span>Member Ada: ${data.member_lovelace ? lovelaceToAda(data.member_lovelace) : "N/A"}</span>
                             <br/>
-                            <span>Member Pct: ${data.member_pct ?? 'N/A'}%</span>
+                            <span>Member Pct: ${data.member_pct ?? "N/A"}%</span>
                           </div>`;
                   }}
                 />
@@ -455,14 +466,14 @@ export const usePoolList = ({
                 setList("roa_lifetime");
               }}
             >
-              <span>Rewards</span>
+              <span>{t("pools.table.rewards")}</span>
               <SortArrow
                 direction={order === "roa_lifetime" ? sort : undefined}
               />
             </div>
           ) : (
             <div className='flex w-full justify-end'>
-              <span>Rewards</span>
+              <span>{t("pools.table.rewards")}</span>
             </div>
           )}
         </div>
@@ -482,7 +493,7 @@ export const usePoolList = ({
       ),
       title: (
         <div className='flex w-full justify-end'>
-          <p className='text-right'>Luck</p>
+          <p className='text-right'>{t("pools.table.luck")}</p>
         </div>
       ),
       visible: columnsVisibility.luck,
@@ -491,7 +502,8 @@ export const usePoolList = ({
     {
       key: "drep",
       render: item => {
-        const drep = item?.drep && Array.isArray(item.drep) ? item.drep[0] : null;
+        const drep =
+          item?.drep && Array.isArray(item.drep) ? item.drep[0] : null;
 
         if (!drep || !drep.ident) {
           return <p className='text-right text-grayTextPrimary'>-</p>;
@@ -512,7 +524,7 @@ export const usePoolList = ({
       title: (
         <div className='flex w-full justify-end'>
           <p className='text-right' ref={anchorRefs.is_drep}>
-            DRep
+            {t("pools.table.drep")}
           </p>
         </div>
       ),
@@ -526,6 +538,8 @@ export const usePoolList = ({
         onShow: e => toggleFilter(e, "is_drep"),
         onFilter: () => changeFilterByKey("is_drep", filterDraft["is_drep"]),
         onReset: () => changeFilterByKey("is_drep"),
+        resetLabel: t("common:actions.reset"),
+        filterLabel: t("common:actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             <label className='flex items-center gap-1'>
@@ -539,7 +553,7 @@ export const usePoolList = ({
                   changeDraftFilter("is_drep", +e.currentTarget.value)
                 }
               />
-              <span className='text-text-sm'>Yes</span>
+              <span className='text-text-sm'>{t("common:labels.yes")}</span>
             </label>
             <label className='flex items-center gap-1'>
               <input
@@ -552,7 +566,7 @@ export const usePoolList = ({
                   changeDraftFilter("is_drep", +e.currentTarget.value)
                 }
               />
-              <span className='text-text-sm'>No</span>
+              <span className='text-text-sm'>{t("common:labels.no")}</span>
             </label>
           </div>
         ),
@@ -580,7 +594,7 @@ export const usePoolList = ({
       ),
       title: (
         <div className='flex w-full justify-end'>
-          <p className='text-right'>Fees</p>
+          <p className='text-right'>{t("pools.table.fees")}</p>
         </div>
       ),
       visible: columnsVisibility.fees,
@@ -595,7 +609,11 @@ export const usePoolList = ({
           : 0;
         const formattedTotalBlocks = formatNumber(item?.blocks?.total);
 
-        const epochs = item?.epochs ? Object.values(item?.epochs).filter(epoch => epoch !== null && epoch !== undefined).slice(2) : [];
+        const epochs = item?.epochs
+          ? Object.values(item?.epochs)
+              .filter(epoch => epoch !== null && epoch !== undefined)
+              .slice(2)
+          : [];
         const epochData = epochs.map(epoch => ({
           epoch: (epoch as any)?.no,
           minted: (epoch as any)?.data?.block?.minted,
@@ -623,13 +641,13 @@ export const usePoolList = ({
                 toolTipFormatter={params => {
                   const data = epochData[params.dataIndex];
 
-                  if (!data) return '';
+                  if (!data) return "";
 
                   return `
                   <div style="font-size: 12px; line-height: 14px;">
-                    <span>Epoch: ${data.epoch ?? 'N/A'}</span>
+                    <span>Epoch: ${data.epoch ?? "N/A"}</span>
                     <br/>
-                    <span>Minted: ${data.minted ?? 'N/A'}</span>
+                    <span>Minted: ${data.minted ?? "N/A"}</span>
                     <br/>
                     <span>Estimated: ${(data.estimated ?? 0).toFixed(2)}</span>
                     <br/>
@@ -667,13 +685,13 @@ export const usePoolList = ({
                 setList("blocks_total");
               }}
             >
-              <span>Blocks</span>
+              <span>{t("pools.table.blocks")}</span>
               <SortArrow
                 direction={order === "blocks_total" ? sort : undefined}
               />
             </div>
           ) : (
-            <span className='w-full text-right'>Blocks</span>
+            <span className='w-full text-right'>{t("pools.table.blocks")}</span>
           )}
         </div>
       ),
@@ -728,17 +746,17 @@ export const usePoolList = ({
             }}
           >
             <div className='flex w-fit cursor-pointer items-center gap-1/2'>
-              <span>Pledge</span>
+              <span>{t("pools.table.pledge")}</span>
               <SortArrow direction={order === "pledge" ? sort : undefined} />
             </div>
           </div>
         ) : (
           <div className='flex w-full justify-end'>
-            <span>Pledge</span>
+            <span>{t("pools.table.pledge")}</span>
           </div>
         ),
       visible: columnsVisibility.pledge,
-      widthPx: 55,
+      widthPx: 70,
     },
     {
       key: "pledge_leverage",
@@ -782,13 +800,17 @@ export const usePoolList = ({
                 setList("leverage");
               }}
             >
-              <span className='text-right'>Pledge Leverage</span>
+              <span className='text-right'>
+                {t("pools.table.pledgeLeverage")}
+              </span>
               <SortArrow direction={order === "leverage" ? sort : undefined} />
             </div>
           </div>
         ) : (
           <div className='flex w-full justify-end'>
-            <span className='text-right'>Pledge Leverage</span>
+            <span className='text-right'>
+              {t("pools.table.pledgeLeverage")}
+            </span>
           </div>
         ),
 
@@ -823,7 +845,7 @@ export const usePoolList = ({
             }}
           >
             <div className='flex w-fit cursor-pointer items-center gap-1/2'>
-              <span>Delegators</span>
+              <span>{t("pools.table.delegators")}</span>
               <SortArrow
                 direction={order === "delegators" ? sort : undefined}
               />
@@ -831,7 +853,7 @@ export const usePoolList = ({
           </div>
         ) : (
           <div className='flex w-full justify-end'>
-            <p className='text-right'>Delegators</p>
+            <p className='text-right'>{t("pools.table.delegators")}</p>
           </div>
         ),
       visible: columnsVisibility.delegators,
@@ -872,7 +894,9 @@ export const usePoolList = ({
             }}
           >
             <div className='flex w-fit cursor-pointer items-center gap-1/2'>
-              <span className='text-nowrap'>Average stake</span>
+              <span className='text-nowrap'>
+                {t("pools.table.averageStake")}
+              </span>
               <SortArrow
                 direction={order === "average_stake" ? sort : undefined}
               />
@@ -880,7 +904,9 @@ export const usePoolList = ({
           </div>
         ) : (
           <div className='flex w-full justify-end'>
-            <p className='w-full text-nowrap text-right'>Average stake</p>
+            <p className='w-full text-nowrap text-right'>
+              {t("pools.table.averageStake")}
+            </p>
           </div>
         ),
       visible: columnsVisibility.avg_stake,
@@ -897,7 +923,7 @@ export const usePoolList = ({
       },
       title: (
         <div className='flex w-full items-center justify-end gap-1/2 text-nowrap'>
-          <p className='text-right'>Selected vote</p>
+          <p className='text-right'>{t("pools.table.selectedVote")}</p>
           <X
             size={15}
             className='translate-y-[1px] cursor-pointer'
@@ -915,8 +941,7 @@ export const usePoolList = ({
           return <p className='text-right'>-</p>;
         }
 
-        const topDelegator =
-          (item.top_delegator.stake / item.live_stake) * 100;
+        const topDelegator = (item.top_delegator.stake / item.live_stake) * 100;
 
         return (
           <div className={`flex w-full items-center justify-end`}>
@@ -972,14 +997,14 @@ export const usePoolList = ({
                 setList("top_delegator");
               }}
             >
-              <span>Top delegator</span>
+              <span>{t("pools.table.topDelegator")}</span>
               <SortArrow
                 direction={order === "top_delegator" ? sort : undefined}
               />
             </div>
           ) : (
             <div className='flex w-full justify-end'>
-              <span>Top delegator</span>
+              <span>{t("pools.table.topDelegator")}</span>
             </div>
           )}
         </div>

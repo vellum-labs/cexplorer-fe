@@ -5,7 +5,6 @@ import {
   NetworkFirst,
   CacheFirst,
   StaleWhileRevalidate,
-  NetworkOnly,
 } from "workbox-strategies";
 import { ExpirationPlugin } from "workbox-expiration";
 
@@ -53,7 +52,6 @@ if (!("caches" in self)) {
       "google-fonts-stylesheets",
       "google-fonts-webfonts",
       "preloader",
-      "api-cache",
     ];
 
     event.waitUntil(
@@ -159,27 +157,6 @@ if (!("caches" in self)) {
       cacheName: "preloader",
     }),
     new ErrorReportPlugin(),
-  );
-
-  registerRoute(
-    /^https:\/\/api-(preprod|mainnet|preview)(-stage)?\.cexplorer\.io\/.*(\/list|\/filter)/,
-    new NetworkOnly({
-      networkTimeoutSeconds: 20,
-    }),
-  );
-
-  registerRoute(
-    /^https:\/\/api-(preprod|mainnet|preview)(-stage)?\.cexplorer\.io\/.*$/,
-    new NetworkFirst({
-      cacheName: "api-cache",
-      networkTimeoutSeconds: 10,
-      plugins: [
-        new ExpirationPlugin({
-          maxEntries: 50,
-          maxAgeSeconds: 60,
-        }),
-      ],
-    }),
   );
 
   const handler = createHandlerBoundToURL("/index.html");

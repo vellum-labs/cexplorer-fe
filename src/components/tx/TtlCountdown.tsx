@@ -1,6 +1,7 @@
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
 import { formatSecondsToTime } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useState } from "react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export interface Props {
   seconds: number | undefined;
@@ -13,6 +14,7 @@ const TtlCountdown = ({
   slot_no,
   blockTime,
 }: Props) => {
+  const { t } = useAppTranslation("common");
   const [seconds, setSeconds] = useState(initialSeconds);
   const now = new Date();
 
@@ -41,8 +43,8 @@ const TtlCountdown = ({
   return (
     <>
       {slot_no > seconds
-        ? `Locked ${formatSecondsToTime(slot_no - seconds)} ago`
-        : `Locking in ${formatSecondsToTime(seconds - slot_no)}`}
+        ? t("tx.lockedAgo", { time: formatSecondsToTime(slot_no - seconds) })
+        : t("tx.lockingIn", { time: formatSecondsToTime(seconds - slot_no) })}
     </>
   );
 };

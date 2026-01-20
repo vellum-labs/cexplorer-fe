@@ -22,6 +22,7 @@ import {
   formatString,
 } from "@vellumlabs/cexplorer-sdk";
 import AssetCell from "../AssetCell";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface AssetMintTabProps {
   name?: number;
@@ -34,6 +35,7 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
   policy,
   policyId,
 }) => {
+  const { t } = useAppTranslation("common");
   const assetname = policy && name ? policy + name : undefined;
   const { page } = useSearch({
     from: policyId ? "/policy/$policyId" : "/asset/$fingerprint",
@@ -79,35 +81,46 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
       key: "type",
       render: item => {
         if (item?.quantity > 1) {
-          return <Badge color='blue'>Token</Badge>;
+          return <Badge color='blue'>{t("labels.token")}</Badge>;
         }
 
-        return <Badge color='yellow'>NFT</Badge>;
+        return <Badge color='yellow'>{t("labels.nft")}</Badge>;
       },
-      title: "Type",
+      title: t("asset.type"),
       visible: columnsVisibility.type,
       widthPx: 50,
     },
     {
       key: "asset",
-      render: () => {
-        return <AssetCell name={assetname || ""} />;
+      render: item => {
+        const fullAssetName =
+          item?.asset?.policy && item?.asset?.name
+            ? item.asset.policy + item.asset.name
+            : assetname || "";
+        return (
+          <AssetCell
+            asset={{
+              name: fullAssetName,
+              quantity: item?.quantity || 0,
+            }}
+          />
+        );
       },
-      title: "Asset",
+      title: t("asset.asset"),
       visible: columnsVisibility.asset,
       widthPx: 130,
     },
     {
       key: "policy_id",
       render: item => <PolicyCell policyId={item?.asset?.policy} />,
-      title: "Policy ID",
+      title: t("asset.policyId"),
       visible: columnsVisibility.policy_id,
       widthPx: 100,
     },
     {
       key: "asset_minted",
       render: item => <DateCell time={item?.tx?.time ?? ""} />,
-      title: "Asset Minted",
+      title: t("asset.assetMinted"),
       visible: columnsVisibility.asset_minted,
       widthPx: 60,
     },
@@ -118,23 +131,25 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
           {item?.quantity ? formatNumberWithSuffix(item.quantity) : "-"}
         </p>
       ),
-      title: <p className='w-full text-right'>Mint Quantity</p>,
+      title: <p className='w-full text-right'>{t("asset.mintQuantity")}</p>,
       visible: columnsVisibility.mint_quantity,
       widthPx: 100,
     },
     {
       key: "tx",
       render: item => (
-        <Link
-          to='/tx/$hash'
-          params={{ hash: item?.tx?.hash }}
-          className='flex items-center gap-1 text-primary'
-        >
-          <span>{formatString(item?.tx?.hash, "long")}</span>
-          <Copy copyText={item?.tx?.hash} className='translate-y-[2px]' />
-        </Link>
+        <div className='flex justify-end'>
+          <Link
+            to='/tx/$hash'
+            params={{ hash: item?.tx?.hash }}
+            className='flex items-center gap-1 text-primary'
+          >
+            <span>{formatString(item?.tx?.hash, "long")}</span>
+            <Copy copyText={item?.tx?.hash} className='translate-y-[2px]' />
+          </Link>
+        </div>
       ),
-      title: "Tx",
+      title: <p className='w-full text-right'>{t("labels.tx")}</p>,
       visible: columnsVisibility.tx,
       widthPx: 100,
     },
@@ -147,9 +162,10 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
         <TableSettingsDropdown
           rows={rows}
           setRows={setRows}
+          rowsLabel={t("table.rows")}
           columnsOptions={assetDetailMintTableOptions.map(item => {
             return {
-              label: item.name,
+              label: t(`common:tableSettings.${item.key}`),
               isVisible: columnsVisibility[item.key],
               onClick: () =>
                 setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -172,6 +188,10 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </>
   );

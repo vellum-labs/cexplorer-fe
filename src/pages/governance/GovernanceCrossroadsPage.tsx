@@ -1,89 +1,118 @@
 import { PageBase } from "@/components/global/pages/PageBase";
-import { User, Send, FileText, Building, Gauge, ScrollText } from "lucide-react";
+import {
+  User,
+  Send,
+  FileText,
+  Building,
+  Gauge,
+  ScrollText,
+} from "lucide-react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface GovernanceSection {
-  label: string;
-  description: string;
+  key: string;
+  labelKey: string;
+  descriptionKey: string;
   href?: string;
-  buttonText?: string;
-  sections?: Array<{ label: string; href: string }>;
+  buttonTextKey?: string;
+  sections?: Array<{ labelKey: string; href: string }>;
   icon: React.ReactNode;
 }
 
-const governanceSections: GovernanceSection[] = [
+const governanceSectionsConfig: GovernanceSection[] = [
   {
-    label: "Delegated Representatives (DReps)",
-    description:
-      "Explore all Cardano DReps, their voting history, and participation stats.",
+    key: "dreps",
+    labelKey: "governanceCrossroads.sections.dreps.label",
+    descriptionKey: "governanceCrossroads.sections.dreps.description",
     sections: [
-      { label: "View all DReps", href: "/drep" },
-      { label: "Analytics", href: "/drep?tab=analytics" },
+      {
+        labelKey: "governanceCrossroads.sections.dreps.viewAll",
+        href: "/drep",
+      },
+      {
+        labelKey: "governanceCrossroads.sections.dreps.analytics",
+        href: "/drep?tab=analytics",
+      },
     ],
     icon: <User className='text-primary' />,
   },
   {
-    label: "Governance Votes",
-    description:
-      "Browse all votes from DReps, SPOs, and the Constitutional Committee.",
+    key: "votes",
+    labelKey: "governanceCrossroads.sections.votes.label",
+    descriptionKey: "governanceCrossroads.sections.votes.description",
     href: "/gov/vote",
-    buttonText: "View votes",
+    buttonTextKey: "governanceCrossroads.sections.votes.button",
     icon: <Send className='text-primary' />,
   },
   {
-    label: "Governance Actions",
-    description: "View every governance action, its details, and the outcomes.",
+    key: "actions",
+    labelKey: "governanceCrossroads.sections.actions.label",
+    descriptionKey: "governanceCrossroads.sections.actions.description",
     href: "/gov/action",
-    buttonText: "View governance actions",
+    buttonTextKey: "governanceCrossroads.sections.actions.button",
     icon: <FileText className='text-primary' />,
   },
   {
-    label: "Constitutional Committee (CC)",
-    description:
-      "See who's on the committee, their role, and how they've voted.",
+    key: "cc",
+    labelKey: "governanceCrossroads.sections.cc.label",
+    descriptionKey: "governanceCrossroads.sections.cc.description",
     href: "/gov/cc",
-    buttonText: "View Constitutional Committee",
+    buttonTextKey: "governanceCrossroads.sections.cc.button",
     icon: <Building className='text-primary' />,
   },
   {
-    label: "Power Thresholds",
-    description: "See Cardano power distribution and governance.",
+    key: "powerThresholds",
+    labelKey: "governanceCrossroads.sections.powerThresholds.label",
+    descriptionKey: "governanceCrossroads.sections.powerThresholds.description",
     href: "/gov/power-thresholds",
-    buttonText: "View Power Thresholds",
+    buttonTextKey: "governanceCrossroads.sections.powerThresholds.button",
     icon: <Gauge className='text-primary' />,
   },
   {
-    label: "Constitution",
-    description: "View the current and past Cardano constitutions and their governance history.",
+    key: "constitution",
+    labelKey: "governanceCrossroads.sections.constitution.label",
+    descriptionKey: "governanceCrossroads.sections.constitution.description",
     href: "/gov/constitution",
-    buttonText: "View Constitution",
+    buttonTextKey: "governanceCrossroads.sections.constitution.button",
     icon: <ScrollText className='text-primary' />,
   },
   {
-    label: "Certificates",
-    description:
-      "All transactions with DRep registrations, updates, and deregistrations.",
+    key: "certificates",
+    labelKey: "governanceCrossroads.sections.certificates.label",
+    descriptionKey: "governanceCrossroads.sections.certificates.description",
     sections: [
-      { label: "DRep registrations", href: "/drep/registrations" },
-      { label: "DRep deregistrations", href: "/drep/deregistrations" },
-      { label: "DRep updates", href: "/drep/updates" },
+      {
+        labelKey: "governanceCrossroads.sections.certificates.registrations",
+        href: "/drep/registrations",
+      },
+      {
+        labelKey: "governanceCrossroads.sections.certificates.deregistrations",
+        href: "/drep/deregistrations",
+      },
+      {
+        labelKey: "governanceCrossroads.sections.certificates.updates",
+        href: "/drep/updates",
+      },
     ],
     icon: <FileText className='text-primary' />,
   },
 ];
 
 export const GovernanceCrossroadsPage = () => {
+  const { t } = useAppTranslation();
+
   return (
     <PageBase
       metadataTitle='governance'
-      title='Governance'
-      breadcrumbItems={[{ label: "Governance" }]}
+      title={t("governanceCrossroads.title")}
+      breadcrumbItems={[{ label: t("governanceCrossroads.breadcrumb") }]}
     >
       <section className='mt-2 w-full max-w-desktop px-mobile pb-3 md:px-desktop'>
         <div className='grid grid-cols-1 gap-3 md:grid-cols-2'>
-          {governanceSections.map((section, index) => (
+          {governanceSectionsConfig.map(section => (
             <div
-              key={index}
+              key={section.key}
               className='flex flex-col rounded-l border border-border px-3 py-2 font-medium'
             >
               <div className='w-fit rounded-m border border-border p-1/2'>
@@ -91,11 +120,11 @@ export const GovernanceCrossroadsPage = () => {
               </div>
 
               <h2 className='mt-2 border-b border-border pb-1 text-text-lg text-text'>
-                {section.label}
+                {t(section.labelKey)}
               </h2>
 
               <p className='mt-2 text-text-sm text-grayTextPrimary'>
-                {section.description}
+                {t(section.descriptionKey)}
               </p>
 
               {section.sections ? (
@@ -105,13 +134,12 @@ export const GovernanceCrossroadsPage = () => {
                       key={subIndex}
                       href={subsection.href as any}
                       variant={
-                        section.label === "Delegated Representatives (DReps)" &&
-                        subIndex === 0
+                        section.key === "dreps" && subIndex === 0
                           ? "primary"
                           : "tertiary"
                       }
                       size='sm'
-                      label={subsection.label}
+                      label={t(subsection.labelKey)}
                     />
                   ))}
                 </div>
@@ -121,7 +149,7 @@ export const GovernanceCrossroadsPage = () => {
                     href={section.href! as any}
                     variant='primary'
                     size='sm'
-                    label={section.buttonText}
+                    label={t(section.buttonTextKey!)}
                   />
                 </div>
               )}

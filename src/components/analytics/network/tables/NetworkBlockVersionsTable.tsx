@@ -4,6 +4,7 @@ import type { FC } from "react";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface NetworkBlockVersionsTableProps {
   epochQuery: ReturnType<typeof useFetchEpochAnalytics>;
@@ -14,6 +15,7 @@ export const NetworkBlockVersionsTable: FC<NetworkBlockVersionsTableProps> = ({
   epochQuery,
   sortedVersions,
 }) => {
+  const { t } = useAppTranslation("common");
   const totalCount = sortedVersions.reduce((a, b) => a + (b[1] as number), 0);
 
   const tableVersions = [
@@ -22,7 +24,7 @@ export const NetworkBlockVersionsTable: FC<NetworkBlockVersionsTableProps> = ({
         <div className='flex items-center gap-1'>
           <span>{sortedVersions.length ? sortedVersions[0][0] : "-"}</span>
           <p className='rounded-s bg-[#079455] px-[6px] py-[2px] text-text-xs font-medium text-white'>
-            Latest
+            {t("analytics.latest")}
           </p>
         </div>
       ),
@@ -41,14 +43,14 @@ export const NetworkBlockVersionsTable: FC<NetworkBlockVersionsTableProps> = ({
     {
       key: "node_versions",
       render: item => item.version,
-      title: <p>Node version</p>,
+      title: <p>{t("analytics.nodeVersion")}</p>,
       visible: true,
       widthPx: 50,
     },
     {
       key: "by_count",
       render: item => <p>{formatNumber(item.count)}</p>,
-      title: <p>By Count</p>,
+      title: <p>{t("analytics.byCount")}</p>,
       visible: true,
       widthPx: 50,
     },
@@ -65,6 +67,10 @@ export const NetworkBlockVersionsTable: FC<NetworkBlockVersionsTableProps> = ({
       items={tableVersions}
       columns={columns}
       minContentWidth={500}
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

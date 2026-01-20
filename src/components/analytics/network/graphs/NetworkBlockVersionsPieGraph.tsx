@@ -7,6 +7,7 @@ import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import { getColorForVersion } from "@/utils/getColorByVersion";
 
 import { useGraphColors } from "@/hooks/useGraphColors";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface NetworkBlockVersionsPieGraphProps {
   query: ReturnType<typeof useFetchBlocksList>;
@@ -15,6 +16,7 @@ interface NetworkBlockVersionsPieGraphProps {
 export const NetworkBlockVersionsPieGraph: FC<
   NetworkBlockVersionsPieGraphProps
 > = ({ query }) => {
+  const { t } = useAppTranslation("common");
   const { data } = query;
   const blockData = data?.pages.flatMap(x => x.data.data);
   const { textColor, bgColor } = useGraphColors();
@@ -60,7 +62,7 @@ export const NetworkBlockVersionsPieGraph: FC<
     },
     series: [
       {
-        name: "Block Versions",
+        name: t("analytics.blockVersionsTab"),
         type: "pie",
         radius: ["40%", "60%"],
         avoidLabelOverlap: false,

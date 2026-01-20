@@ -7,8 +7,10 @@ import { HomepageModalWidget } from "./widgets/HomepageModalWidget";
 
 import { useHomepageStore } from "@/stores/homepageStore";
 import { useState } from "react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const HomepageModal: FC = () => {
+  const { t } = useAppTranslation("common");
   const [activeCategory, setActiveCategory] = useState<number>(0);
   const [activeWidget, setActiveWidget] = useState<number>();
 
@@ -23,7 +25,7 @@ export const HomepageModal: FC = () => {
       hideClose
     >
       <div className='flex h-[30px] w-full items-center justify-between pb-3'>
-        <h2>Add homepage widgets</h2>
+        <h2>{t("homepage.addHomepageWidgets")}</h2>
         <X
           size={20}
           className='text-grayText cursor-pointer'
@@ -42,7 +44,7 @@ export const HomepageModal: FC = () => {
               }}
             >
               <span className='text-text-sm font-semibold text-inherit'>
-                {item.title}
+                {t(`homepage.widgets.categories.${item.title}`, item.title)}
               </span>
             </div>
           ))}
@@ -65,14 +67,14 @@ export const HomepageModal: FC = () => {
         <Button
           size='md'
           variant='tertiary'
-          label='Cancel'
+          label={t("actions.cancel")}
           onClick={() => setAddWidget(false)}
         />
         <Button
           size='md'
           variant='primary'
           leftIcon={<Plus size={18} />}
-          label='Add widget'
+          label={t("homepage.addWidget")}
           onClick={() => {
             if (typeof activeWidget !== "undefined") {
               handleAddWidget(

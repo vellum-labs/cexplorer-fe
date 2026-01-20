@@ -16,111 +16,94 @@ import adsFeatured from "@/resources/images/features/feature_cards.svg";
 import adsBoost from "@/resources/images/ads_boost.svg";
 import adsJam from "@/resources/images/ads_jam.svg";
 import { Banner } from "@/components/global/Banner";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
-const reachStats = [
-  {
-    icon: Zap,
-    value: "TBD",
-    label: "Monthly page views",
-  },
-  {
-    icon: Signature,
-    value: "TBD",
-    label: "Unique users",
-  },
+const reachStatsConfig = [
+  { icon: Zap, value: "TBD", labelKey: "adsPage.stats.monthlyPageViews" },
+  { icon: Signature, value: "TBD", labelKey: "adsPage.stats.uniqueUsers" },
   {
     icon: CloudDownload,
     value: "TBD",
-    label: "Ad impressions",
+    labelKey: "adsPage.stats.adImpressions",
+  },
+  { icon: Sparkles, value: "TBD", labelKey: "adsPage.stats.averageCtr" },
+];
+
+const proFeaturesConfig = [
+  {
+    titleKey: "adsPage.pro.features.exposure.title",
+    descriptionKey: "adsPage.pro.features.exposure.description",
   },
   {
-    icon: Sparkles,
-    value: "TBD",
-    label: "Average CTR",
+    titleKey: "adsPage.pro.features.continuous.title",
+    descriptionKey: "adsPage.pro.features.continuous.description",
+  },
+  {
+    titleKey: "adsPage.pro.features.targeted.title",
+    descriptionKey: "adsPage.pro.features.targeted.description",
   },
 ];
 
-const proFeatures = [
+const boostFeaturesConfig = [
   {
-    title: "More NFTs, More Exposure",
-    description:
-      "The more NFTs promoting a dRep, stake pool, assets, or policy, the more frequently it appears across Cexplorer.io",
+    titleKey: "adsPage.boosts.features.instant.title",
+    descriptionKey: "adsPage.boosts.features.instant.description",
   },
   {
-    title: "Continuous Promotion",
-    description:
-      "Keep your promotion active with the ability to update anytime.",
+    titleKey: "adsPage.boosts.features.anyone.title",
+    descriptionKey: "adsPage.boosts.features.anyone.description",
   },
   {
-    title: "Targeted Exposure",
-    description:
-      "Promote directly to our engaged user base, with visibility on relevant Cexplorer pages based on the type of promotion, ensuring maximum reach.",
+    titleKey: "adsPage.boosts.features.strategic.title",
+    descriptionKey: "adsPage.boosts.features.strategic.description",
   },
 ];
 
-const boostFeatures = [
+const bannerFeaturesConfig = [
   {
-    title: "Instant Visibility",
-    description: "projects gets featured prominently for a set duration.",
+    titleKey: "adsPage.banners.features.visibility.title",
+    descriptionKey: "adsPage.banners.features.visibility.description",
   },
   {
-    title: "Anyone Can Boost",
-    description:
-      "Boosts are open to all; you don't need to own the project to promote it. Boost multiple times for extended visibility.",
-  },
-  {
-    title: "Strategic Placement",
-    description:
-      "Boosted items appear highlighted and in lists and across Cexplorer, maximizing exposure.",
-  },
-];
-
-const bannerFeatures = [
-  {
-    title: "High Visibility",
-    description:
-      "Ads appear on key sections of Cexplorer, ensuring maximum exposure.",
-  },
-  {
-    title: "Expanded Reach",
-    description:
-      "Your ad will not only be visible on Cexplorer.io but also on all preview/preprod instances managed by Cexplorer.",
+    titleKey: "adsPage.banners.features.reach.title",
+    descriptionKey: "adsPage.banners.features.reach.description",
   },
 ];
 
 export const AdsPage = () => {
+  const { t } = useAppTranslation();
+
   return (
     <PageBase
-      metadataOverride={{ title: "Promotion & Advertising | Cexplorer.io" }}
-      title='Advertise with us'
-      subTitle='Promote your project on Cexplorer'
-      breadcrumbItems={[{ label: "Advertise with us" }]}
+      metadataOverride={{ title: t("adsPage.metaTitle") }}
+      title={t("adsPage.title")}
+      subTitle={t("adsPage.subtitle")}
+      breadcrumbItems={[{ label: t("adsPage.breadcrumb") }]}
       adsCarousel={false}
       customPage={true}
     >
       <section className='flex w-full max-w-desktop flex-col items-center gap-16 px-mobile py-2 pb-3 md:px-desktop'>
-        <Banner description='Ads will be available at a later date.' />
+        <Banner description={t("adsPage.banner")} />
 
         <div className='flex w-full flex-col gap-10 md:flex-row md:items-start md:justify-between'>
           <div
             className='flex flex-1 flex-col'
             style={{ minWidth: "280px", maxWidth: "500px" }}
           >
-            <h2 className='text-xl mb-4 font-bold'>Reach your audience!</h2>
+            <h2 className='text-xl mb-4 font-bold'>
+              {t("adsPage.reach.title")}
+            </h2>
             <p className='text-sm text-textPrimary mb-4 leading-relaxed'>
-              Cexplorer.io is the top Cardano blockchain explorer and analytics
-              platform, offering insights into blockchain, staking, governance,
-              and more.
+              {t("adsPage.reach.description1")}
             </p>
             <p className='text-sm text-textPrimary mb-6 leading-relaxed'>
-              Advertise with us, to reach an audience of Cardano enthusiasts and
-              developers, gaining exposure within the growing Cardano community.
+              {t("adsPage.reach.description2")}
             </p>
-            <Link to='/ads/promotion'>
+            <Link to='/promotion'>
               <Button
                 size='lg'
                 variant='primary'
-                label='Promote'
+                label={t("adsPage.reach.button")}
                 rightIcon={<ArrowRight size={20} />}
               />
             </Link>
@@ -130,7 +113,7 @@ export const AdsPage = () => {
             className='grid flex-1 grid-cols-2 gap-8'
             style={{ minWidth: "280px" }}
           >
-            {reachStats.map((stat, index) => {
+            {reachStatsConfig.map((stat, index) => {
               const Icon = stat.icon;
               return (
                 <div key={index} className='flex items-center gap-3'>
@@ -141,7 +124,9 @@ export const AdsPage = () => {
                     <div className='text-xl font-bold text-darkBlue'>
                       {stat.value}
                     </div>
-                    <div className='text-sm text-textPrimary'>{stat.label}</div>
+                    <div className='text-sm text-textPrimary'>
+                      {t(stat.labelKey)}
+                    </div>
                   </div>
                 </div>
               );
@@ -195,7 +180,7 @@ export const AdsPage = () => {
               </svg>
             </div>
             <h2 className='text-2xl mb-3 font-bold'>
-              Promote with Cexplorer{" "}
+              {t("adsPage.pro.title")}{" "}
               <span
                 style={{
                   background: "linear-gradient(to right, #0094D4, #8E2DE2)",
@@ -207,19 +192,18 @@ export const AdsPage = () => {
               </span>
             </h2>
             <p className='text-sm text-textPrimary mb-6 leading-relaxed'>
-              By holding the Cexplorer PRO NFT, you can promote assets, policy
-              IDs, stake pools, or dReps while enjoying perks and exclusive
-              features.
+              {t("adsPage.pro.description")}
             </p>
             <ul className='mb-6 flex flex-col gap-4'>
-              {proFeatures.map((feature, index) => (
+              {proFeaturesConfig.map((feature, index) => (
                 <li key={index} className='flex items-start gap-3'>
                   <CircleCheck
                     size={20}
                     className='mt-0.5 flex-shrink-0 text-darkBlue'
                   />
                   <span className='text-sm'>
-                    <strong>{feature.title}</strong> - {feature.description}
+                    <strong>{t(feature.titleKey)}</strong> -{" "}
+                    {t(feature.descriptionKey)}
                   </span>
                 </li>
               ))}
@@ -230,14 +214,22 @@ export const AdsPage = () => {
                 target='_blank'
                 rel='noreferrer noopener'
               >
-                <Button size='md' variant='tertiary' label='Documentation' />
+                <Button
+                  size='md'
+                  variant='tertiary'
+                  label={t("adsPage.pro.documentation")}
+                />
               </a>
               <a
                 href='https://beta.cexplorer.io/pro'
                 target='_blank'
                 rel='noreferrer noopener'
               >
-                <Button size='md' variant='purple' label='Get Cexplorer PRO' />
+                <Button
+                  size='md'
+                  variant='purple'
+                  label={t("adsPage.pro.getCexplorerPro")}
+                />
               </a>
             </div>
           </div>
@@ -300,22 +292,21 @@ export const AdsPage = () => {
               <span className='text-xl' style={{ color: "#F97316" }}>
                 ⚡
               </span>
-              Boosts – Get Noticed Instantly
+              {t("adsPage.boosts.title")}
             </h2>
             <p className='text-sm mb-6 leading-relaxed text-grayTextPrimary'>
-              Boosts provide a temporary yet impactful highlight for stake
-              pools, dReps, tokens, or NFT collections, making them stand out
-              across Cexplorer's UI.
+              {t("adsPage.boosts.description")}
             </p>
             <ul className='mb-6 flex flex-col gap-4'>
-              {boostFeatures.map((feature, index) => (
+              {boostFeaturesConfig.map((feature, index) => (
                 <li key={index} className='flex items-start gap-3'>
                   <CircleCheck
                     size={18}
                     className='text-red mt-0.5 flex-shrink-0'
                   />
                   <span className='text-sm'>
-                    <strong>{feature.title}</strong> – {feature.description}
+                    <strong>{t(feature.titleKey)}</strong> –{" "}
+                    {t(feature.descriptionKey)}
                   </span>
                 </li>
               ))}
@@ -323,7 +314,7 @@ export const AdsPage = () => {
             <Button
               size='md'
               variant='tertiary'
-              label='Coming soon'
+              label={t("adsPage.boosts.comingSoon")}
               rightIcon={<Bell size={16} />}
               disabled
             />
@@ -336,27 +327,27 @@ export const AdsPage = () => {
               <Code2 size={24} className='text-darkBlue' />
             </div>
             <h2 className='text-2xl mb-3 flex items-center gap-2 font-bold'>
-              Banner Advertising on Cexplorer
+              {t("adsPage.banners.title")}
             </h2>
             <p className='text-sm mb-5 leading-relaxed text-grayTextPrimary'>
-              Banner advertisements offer a way to reach our engaged and promote
-              your project or upcoming launch.
+              {t("adsPage.banners.description")}
             </p>
             <ul className='mb-5 flex flex-col gap-4'>
-              {bannerFeatures.map((feature, index) => (
+              {bannerFeaturesConfig.map((feature, index) => (
                 <li key={index} className='flex items-start gap-3'>
                   <CircleCheck
                     size={18}
                     className='mt-0.5 flex-shrink-0 text-darkBlue'
                   />
                   <span className='text-sm'>
-                    <strong>{feature.title}</strong> – {feature.description}
+                    <strong>{t(feature.titleKey)}</strong> –{" "}
+                    {t(feature.descriptionKey)}
                   </span>
                 </li>
               ))}
             </ul>
             <p className='text-sm mb-5'>
-              We work with{" "}
+              {t("adsPage.banners.coinzillaText")}{" "}
               <a
                 href='https://coinzilla.com'
                 target='_blank'
@@ -365,8 +356,7 @@ export const AdsPage = () => {
               >
                 Coinzilla
               </a>
-              , a trusted advertising network that manually reviews campaigns to
-              maintain quality and relevance.
+              {t("adsPage.banners.coinzillaDescription")}
             </p>
             <div className='flex flex-wrap items-center justify-center gap-2'>
               <a
@@ -374,13 +364,17 @@ export const AdsPage = () => {
                 target='_blank'
                 rel='noreferrer noopener'
               >
-                <Button size='md' variant='tertiary' label='Documentation' />
+                <Button
+                  size='md'
+                  variant='tertiary'
+                  label={t("adsPage.banners.documentation")}
+                />
               </a>
               <a href='mailto:hello@vellumlabs.cz'>
                 <Button
                   size='md'
                   variant='primary'
-                  label='E-mail'
+                  label={t("adsPage.banners.email")}
                   leftIcon={<Mail size={16} />}
                 />
               </a>

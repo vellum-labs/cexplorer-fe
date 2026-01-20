@@ -13,6 +13,7 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 
 import { alphabetWithNumbers } from "@/constants/alphabet";
 import { Pagination } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface PolicyAssetGridProps {
   query: ReturnType<typeof useFetchAssetList>;
@@ -27,6 +28,7 @@ export const PolicyAssetGrid: FC<PolicyAssetGridProps> = ({
   infiniteScrolling,
   itemsPerPage,
 }) => {
+  const { t } = useAppTranslation("common");
   const items = query.data?.pages.flatMap(item => item.data?.data);
   const totalItems = query.data?.pages[0].data.count as number;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -90,11 +92,21 @@ export const PolicyAssetGrid: FC<PolicyAssetGridProps> = ({
       {!infiniteScrolling &&
         totalItems > itemsPerPage &&
         (query as UseInfiniteQueryResult).fetchNextPage && (
-          <Pagination currentPage={currentPage} totalPages={totalPages} />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            labels={{
+              ellipsisSrLabel: t("sdk:pagination.morePages"),
+              nextAriaLabel: t("sdk:pagination.nextPage"),
+              previousAriaLabel: t("sdk:pagination.previousPage"),
+            }}
+          />
         )}
       {((!query.isLoading && query.isError) ||
         (!query.isLoading && !(items ?? []).length)) && (
-        <div className='flex w-full justify-center'>Result not found.</div>
+        <div className='flex w-full justify-center'>
+          {t("policy.resultNotFound")}
+        </div>
       )}
     </>
   );

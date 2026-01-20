@@ -27,6 +27,7 @@ import { ChevronRight } from "lucide-react";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface AddressDetailOverviewProps {
   data: AddressDetailData[];
@@ -37,6 +38,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
   data,
   address,
 }) => {
+  const { t } = useAppTranslation("common");
   const { theme } = useThemeStore();
   const addressData = Address.from(address);
   const paymentCredential = addressData.payment;
@@ -54,7 +56,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
   const overviewList = [
     data[0]?.adahandle
       ? {
-          label: "Handle",
+          label: t("address.handle"),
           value: (
             <AdaHandleBadge
               hex={data[0].adahandle.hex}
@@ -65,7 +67,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
         }
       : undefined,
     {
-      label: "Address",
+      label: t("labels.address"),
       value: (
         <p className='flex items-center gap-[6px]' title={address}>
           <span>{formatString(address, "long")}</span>
@@ -74,12 +76,12 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
       ),
     },
     nftMarket && tokenMarket
-      ? { label: "Assets Balance", value: "TBD" }
+      ? { label: t("address.assetsBalance"), value: "TBD" }
       : undefined,
     {
-      label: "ADA Balance",
+      label: t("address.adaBalance"),
       value: isRecync ? (
-        <p>Calculating</p>
+        <p>{t("address.calculating")}</p>
       ) : (
         <TotalSumWithRates
           sum={lovelaceToAdaWithRates(data?.[0]?.balance, curr)}
@@ -90,40 +92,43 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
     },
     data?.[0]?.stake?.balance?.live
       ? {
-          label: "Live Stake",
+          label: t("labels.liveStake"),
           value: <AdaWithTooltip data={data?.[0]?.stake.balance.live} />,
         }
       : undefined,
     data?.[0]?.stake?.balance?.active
       ? {
-          label: "Active Stake",
+          label: t("labels.activeStake"),
           value: <AdaWithTooltip data={data?.[0]?.stake.balance.active} />,
         }
       : undefined,
     {
-      label: "Last Activity",
+      label: t("address.lastActivity"),
       value: isRecync ? (
-        <p>Currently unavailable</p>
+        <p>{t("address.currentlyUnavailable")}</p>
       ) : (
         <DateCell time={data?.[0]?.activity?.recent} />
       ),
     },
-    { label: "Private name", value: <AddCustomLabel address={address} /> },
+    {
+      label: t("address.privateName"),
+      value: <AddCustomLabel address={address} />,
+    },
   ];
 
   const delegationArr = [
     {
-      label: "Status",
+      label: t("labels.status"),
       value: (
         <span
           className={` ${isStaking ? "text-greenText" : "text-redText"} font-bold`}
         >
-          {isStaking ? "Active" : "Inactive"}
+          {isStaking ? t("labels.active") : t("labels.inactive")}
         </span>
       ),
     },
     {
-      label: "Stake pool",
+      label: t("labels.stakePool"),
       value: (
         <div className='w-full max-w-[220px] sm:max-w-[250px]'>
           {isStaking ? (
@@ -140,13 +145,13 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
               )}
             />
           ) : (
-            "Not delegated"
+            t("address.notDelegated")
           )}
         </div>
       ),
     },
     {
-      label: "DRep delegation",
+      label: t("address.drepDelegation"),
       value: (
         <div className='flex flex-col'>
           {data[0]?.vote?.vote?.live_drep === "drep_always_abstain" ? (
@@ -157,7 +162,9 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
             >
               {data[0]?.vote?.drep?.data?.given_name &&
                 data[0]?.vote?.drep?.data?.given_name}
-              <span className='text-text-sm text-primary'>Always abstain</span>
+              <span className='text-text-sm text-primary'>
+                {t("address.alwaysAbstain")}
+              </span>
             </Link>
           ) : data[0]?.vote?.vote?.live_drep === "drep_always_no_confidence" ? (
             <Link
@@ -168,28 +175,28 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
               {data[0]?.vote?.drep?.data?.given_name &&
                 data[0]?.vote?.drep?.data?.given_name}
               <span className='text-text-sm text-primary'>
-                Always no confidence
+                {t("address.alwaysNoConfidence")}
               </span>
             </Link>
           ) : (
             <AttributeDropdown
               items={[
                 {
-                  label: "Status",
+                  label: t("labels.status"),
                   value: data[0]?.vote?.drep?.is_active ? (
-                    <span className='text-greenText'>Active</span>
+                    <span className='text-greenText'>{t("labels.active")}</span>
                   ) : (
-                    <span className='text-redText'>Inactive</span>
+                    <span className='text-redText'>{t("labels.inactive")}</span>
                   ),
                 },
                 {
-                  label: "Amount",
+                  label: t("labels.amount"),
                   value: data[0]?.vote?.drep?.amount
                     ? formatNumber(data[0]?.vote?.drep?.amount)
                     : "-",
                 },
                 {
-                  label: "Since",
+                  label: t("address.since"),
                   value: (
                     <DateCell
                       time={data[0]?.vote?.drep?.since}
@@ -198,7 +205,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
                   ),
                 },
                 {
-                  label: "ID",
+                  label: t("address.id"),
                   value: (
                     <div className='flex items-center gap-1'>
                       <span className={"text-text-xs"}>
@@ -249,11 +256,11 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
       visible: !!data[0]?.vote,
     },
     stakeKey && {
-      label: "Controlled Stake",
+      label: t("address.controlledStake"),
       value: <AdaWithTooltip data={data[0]?.stake?.balance.live ?? 0} />,
     },
     stakeKey && {
-      label: "Rewards Available",
+      label: t("address.rewardsAvailable"),
       value: (
         <AdaWithTooltip
           data={
@@ -264,15 +271,15 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
       ),
     },
     stakeKey && {
-      label: "Rewards Withdrawn",
+      label: t("address.rewardsWithdrawn"),
       value: <AdaWithTooltip data={data[0]?.stake?.reward.withdrawn ?? 0} />,
     },
     {
-      label: "Stake Key",
+      label: t("labels.stakeKey"),
       value: <AddressCell address={stakeAddr} className='text-[16px]' />,
     },
     {
-      label: "Raw address",
+      label: t("address.rawAddress"),
       value: (
         <p className='flex items-center gap-[6px]' title={rawAddress}>
           <span>{formatString(rawAddress, "long")}</span>
@@ -283,9 +290,12 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
   ];
 
   const detail = [
-    { label: "Type", value: <AddressTypeInitialsBadge address={address} /> },
     {
-      label: "Address",
+      label: t("labels.type"),
+      value: <AddressTypeInitialsBadge address={address} />,
+    },
+    {
+      label: t("labels.address"),
       value: (
         <p className='flex items-center gap-[6px]' title={address}>
           <span>{formatString(address, "long")}</span>
@@ -294,12 +304,9 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
       ),
     },
     {
-      label: "Payment Credential",
+      label: t("address.paymentCredential"),
       value: (
-        <p
-          className='flex items-center gap-[6px]'
-          title={paymentCredential}
-        >
+        <p className='flex items-center gap-[6px]' title={paymentCredential}>
           {parseShelleyAddress(address)?.paymentPart === "ScriptHash" ? (
             <Link
               to='/script/$hash'
@@ -311,15 +318,12 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
           ) : (
             <span>{formatString(paymentCredential, "long")}</span>
           )}
-          <Copy
-            copyText={paymentCredential}
-            className='translate-y-[2px]'
-          />
+          <Copy copyText={paymentCredential} className='translate-y-[2px]' />
         </p>
       ),
     },
     {
-      label: "Staking Credential",
+      label: t("address.stakingCredential"),
       value: (
         <p className='flex items-center gap-[6px]' title={stakeKey}>
           <span>{stakeKey ? formatString(stakeKey, "long") : "-"}</span>
@@ -328,11 +332,11 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
       ),
     },
     {
-      label: "Last Activity",
+      label: t("address.lastActivity"),
       value: <TimeDateIndicator time={data[0]?.activity?.recent ?? ""} />,
     },
     {
-      label: "First Discovery",
+      label: t("address.firstDiscovery"),
       value: <TimeDateIndicator time={data[0]?.activity?.first ?? ""} />,
     },
   ];
@@ -340,7 +344,7 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
   return (
     <>
       <OverviewCard
-        title='Overview'
+        title={t("address.overview")}
         overviewList={overviewList}
         endContent={
           data?.[0]?.asset &&
@@ -352,12 +356,16 @@ export const AddressDetailOverview: FC<AddressDetailOverviewProps> = ({
       />
       {stakeKey && (
         <OverviewCard
-          title='Delegation'
+          title={t("address.delegation")}
           overviewList={delegationArr as any}
           className=''
         />
       )}
-      <OverviewCard title='Detail' overviewList={detail} className='' />
+      <OverviewCard
+        title={t("address.detail")}
+        overviewList={detail}
+        className=''
+      />
     </>
   );
 };

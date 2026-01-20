@@ -12,8 +12,10 @@ import { VoteDetailCard } from "@/components/governance/vote/VoteDetailCard";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { EmptyState } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const GovernanceVoteDetailPage: FC = () => {
+  const { t } = useAppTranslation();
   const route = getRouteApi("/gov/vote/$hash");
   const { hash } = route.useParams();
 
@@ -32,7 +34,7 @@ export const GovernanceVoteDetailPage: FC = () => {
       key: hasDuplicates
         ? `${vote?.proposal?.ident?.id}-${index}`
         : vote?.proposal?.ident?.id,
-      label: `Vote ${index + 1}`,
+      label: t("governance.voteDetail.voteTab", { number: index + 1 }),
       content: (
         <VoteDetailCard
           vote={vote}
@@ -43,7 +45,7 @@ export const GovernanceVoteDetailPage: FC = () => {
       ),
       visible: true,
     }));
-  }, [votes, isLoading]);
+  }, [votes, isLoading, t]);
 
   const firstVote = votes[0];
   const governanceActionId = firstVote?.proposal?.ident?.id;
@@ -57,11 +59,19 @@ export const GovernanceVoteDetailPage: FC = () => {
       }}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>Governance</span>,
+          label: (
+            <span className='inline pt-1/2'>
+              {t("governance.breadcrumbs.governance")}
+            </span>
+          ),
           link: "/gov",
         },
         {
-          label: <span className='inline pt-1/2'>Governance actions</span>,
+          label: (
+            <span className='inline pt-1/2'>
+              {t("governance.breadcrumbs.governanceActions")}
+            </span>
+          ),
           link: "/gov/action",
         },
         ...(governanceActionId
@@ -81,11 +91,12 @@ export const GovernanceVoteDetailPage: FC = () => {
           ident: hash,
         },
       ]}
-      title='Vote detail'
+      title={t("governance.voteDetail.title")}
       subTitle={
         <HeaderBannerSubtitle
           hashString={formatString(hash ?? "", "long")}
           hash={hash}
+          title={t("governance.voteDetail.hashLabel")}
         />
       }
       homepageAd
@@ -120,8 +131,8 @@ export const GovernanceVoteDetailPage: FC = () => {
         ) : (
           <EmptyState
             icon={<Vote size={24} />}
-            primaryText='No votes found'
-            secondaryText="This transaction doesn't contain any governance votes."
+            primaryText={t("governance.voteDetail.noVotesTitle")}
+            secondaryText={t("governance.voteDetail.noVotesDescription")}
           />
         )}
       </div>

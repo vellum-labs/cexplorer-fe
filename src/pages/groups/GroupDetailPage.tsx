@@ -45,8 +45,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import metadata from "../../../conf/metadata/en-metadata.json";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const GroupDetailPage = () => {
+  const { t } = useAppTranslation();
   const [isAnyDrepItem, setIsAnyDrepItem] = useState(false);
   const [filter, setFilter] = useState<"pool" | "drep">("pool");
 
@@ -71,7 +73,7 @@ export const GroupDetailPage = () => {
     columnsOrder: drepColumnsOrder,
   } = useDrepListTableStore()();
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const query = useFetchGroupDetail(url);
   const data = query.data?.data.data[0];
   const name = data?.name;
@@ -84,12 +86,12 @@ export const GroupDetailPage = () => {
   const tabItems = [
     {
       key: "pool",
-      label: "Stake pools",
+      label: t("tabs.groups.stakePools"),
       visible: true,
     },
     {
       key: "drep",
-      label: "DReps",
+      label: t("tabs.groups.dreps"),
       visible: true,
     },
   ];
@@ -105,7 +107,7 @@ export const GroupDetailPage = () => {
     },
     {
       key: "pool",
-      title: "Pool",
+      title: t("common:labels.pool"),
       render: item => {
         return (
           <PoolCell
@@ -163,7 +165,7 @@ export const GroupDetailPage = () => {
       },
       title: (
         <div className='flex w-full justify-end'>
-          <span>Stake</span>
+          <span>{t("common:labels.stake")}</span>
         </div>
       ),
       visible: poolColumnsVisibility.stake,
@@ -204,7 +206,7 @@ export const GroupDetailPage = () => {
           </div>
         );
       },
-      title: <span className='flex justify-end'>Rewards</span>,
+      title: <span className='flex justify-end'>{t("common:labels.rewards")}</span>,
       visible: poolColumnsVisibility.rewards,
       widthPx: 30,
     },
@@ -220,7 +222,7 @@ export const GroupDetailPage = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>Luck</p>,
+      title: <p className='w-full text-right'>{t("common:labels.luck")}</p>,
       visible: poolColumnsVisibility.luck,
       widthPx: 30,
     },
@@ -243,7 +245,7 @@ export const GroupDetailPage = () => {
           </div>
         );
       },
-      title: <p className='w-full text-right'>Fees</p>,
+      title: <p className='w-full text-right'>{t("common:labels.fees")}</p>,
       visible: poolColumnsVisibility.fees,
       widthPx: 30,
     },
@@ -303,7 +305,7 @@ export const GroupDetailPage = () => {
           </div>
         );
       },
-      title: <span className='flex justify-end'>Blocks</span>,
+      title: <span className='flex justify-end'>{t("common:labels.blocks")}</span>,
       visible: poolColumnsVisibility.blocks,
       widthPx: 40,
     },
@@ -361,7 +363,7 @@ export const GroupDetailPage = () => {
       },
       title: (
         <div className='flex w-full justify-end'>
-          <span>Pledge</span>
+          <span>{t("common:labels.pledge")}</span>
         </div>
       ),
       visible: poolColumnsVisibility.pledge,
@@ -392,12 +394,12 @@ export const GroupDetailPage = () => {
           <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
             <PulseDot color={!isActive ? "bg-yellowText" : undefined} />
             <span className='text-text-xs font-medium'>
-              {isActive ? "Active" : "Inactive"}
+              {isActive ? t("common:labels.active") : t("common:labels.inactive")}
             </span>
           </div>
         );
       },
-      title: <p>Status</p>,
+      title: <p>{t("common:labels.status")}</p>,
       visible: drepColumnsVisibility.status,
       widthPx: 50,
     },
@@ -414,7 +416,7 @@ export const GroupDetailPage = () => {
 
         return <DrepNameCell item={item.info[0] as any} />;
       },
-      title: <p>DRep name</p>,
+      title: <p>{t("common:labels.drep")}</p>,
       visible: drepColumnsVisibility.drep_name,
       widthPx: 50,
     },
@@ -435,7 +437,7 @@ export const GroupDetailPage = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>Voting Power</p>,
+      title: <p className='w-full text-right'>{t("common:labels.votingPower")}</p>,
       visible: drepColumnsVisibility.voting_power,
       widthPx: 50,
     },
@@ -454,7 +456,7 @@ export const GroupDetailPage = () => {
           <p className='text-right'>{formatNumber(item.info[0].distr.count)}</p>
         );
       },
-      title: <p className='w-full text-right'>Delegators</p>,
+      title: <p className='w-full text-right'>{t("common:labels.delegators")}</p>,
       visible: drepColumnsVisibility.delegators,
       widthPx: 40,
     },
@@ -479,7 +481,7 @@ export const GroupDetailPage = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>Voting Activity</p>,
+      title: <p className='w-full text-right'>{t("common:table.voting_activity")}</p>,
       visible: drepColumnsVisibility.voting_activity,
       widthPx: 40,
     },
@@ -507,7 +509,7 @@ export const GroupDetailPage = () => {
 
         return item.info[0].since;
       },
-      title: <p>Registered</p>,
+      title: <p>{t("common:labels.registered")}</p>,
       visible: drepColumnsVisibility.registered,
       widthPx: 50,
     },
@@ -535,7 +537,7 @@ export const GroupDetailPage = () => {
 
         return JSON.stringify(item.info[0].data);
       },
-      title: <p className='w-full text-right'>DRep metadata</p>,
+      title: <p className='w-full text-right'>{t("common:labels.metadata")}</p>,
       visible: drepColumnsVisibility.metadata,
       widthPx: 80,
     },
@@ -600,13 +602,13 @@ export const GroupDetailPage = () => {
             <BreadcrumbList className='flex items-center'>
               <BreadcrumbItem>
                 <Link className='underline underline-offset-2' to='/'>
-                  Home
+                  {t("pages:breadcrumbs.home")}
                 </Link>
               </BreadcrumbItem>
               /
               <BreadcrumbItem>
                 <Link className='underline underline-offset-2' to={"/groups"}>
-                  Groups
+                  {t("pages:breadcrumbs.groups")}
                 </Link>
               </BreadcrumbItem>
               / <BreadcrumbItem className='text-text'>{name}</BreadcrumbItem>
@@ -625,7 +627,7 @@ export const GroupDetailPage = () => {
                 />
               )}
               <TableSearchInput
-                placeholder='Search your results...'
+                placeholder={t("placeholders.searchResults")}
                 value={tableSearch}
                 onchange={setTableSearch}
                 wrapperClassName='md:w-[320px] w-full'
@@ -661,6 +663,10 @@ export const GroupDetailPage = () => {
             onOrderChange={
               filter === "pool" ? poolSetColumsOrder : drepSetColumsOrder
             }
+            renderDisplayText={(count, total) =>
+              t("table.displaying", { count, total })
+            }
+            noItemsLabel={t("table.noItems")}
           />
         </div>
       </main>

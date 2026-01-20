@@ -10,6 +10,7 @@ import { routeTree } from "./routeTree.gen.ts";
 import "./styles/index.css";
 import "@vellumlabs/cexplorer-sdk/style.css";
 import "@dexhunterio/swaps/lib/assets/style.css";
+import "./lib/i18n";
 
 export const router = createRouter({ routeTree });
 

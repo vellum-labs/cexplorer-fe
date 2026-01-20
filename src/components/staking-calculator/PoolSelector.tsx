@@ -6,6 +6,7 @@ import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { useClickOutsideGroup } from "@/hooks/useClickOutsideGroup";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Pool {
   pool_id: string;
@@ -24,6 +25,7 @@ export const PoolSelector: FC<PoolSelectorProps> = ({
   selectedPool,
   onSelectPool,
 }) => {
+  const { t } = useAppTranslation("common");
   const [localFocused, setLocalFocused] = useState<boolean>(false);
   const searchRef = useRef<HTMLDivElement>(null);
   const { theme } = useThemeStore();
@@ -72,7 +74,7 @@ export const PoolSelector: FC<PoolSelectorProps> = ({
             onClick={handleClear}
             className='text-text-sm text-grayTextPrimary hover:text-text'
           >
-            Clear
+            {t("stakingCalculator.poolSelector.clear")}
           </button>
         </div>
       ) : (
@@ -80,7 +82,7 @@ export const PoolSelector: FC<PoolSelectorProps> = ({
           <TextInput
             value={search}
             onchange={handleSearchChange}
-            placeholder='Search for a pool by name or ticker...'
+            placeholder={t("stakingCalculator.poolSelector.placeholder")}
             onFocus={() => setLocalFocused(true)}
             autoCapitalize='off'
           />
@@ -97,7 +99,7 @@ export const PoolSelector: FC<PoolSelectorProps> = ({
             </div>
           ) : poolResults.length === 0 ? (
             <div className='p-3 text-center text-text-sm text-grayTextPrimary'>
-              No pools found
+              {t("stakingCalculator.poolSelector.noPoolsFound")}
             </div>
           ) : (
             <div className='thin-scrollbar max-h-[300px] overflow-auto'>

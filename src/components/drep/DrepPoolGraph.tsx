@@ -14,6 +14,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface DrepPoolGraphProps {
   epochs: number[];
@@ -21,15 +22,41 @@ interface DrepPoolGraphProps {
 }
 
 export const DrepPoolGraph: FC<DrepPoolGraphProps> = ({ epochs, query }) => {
+  const { t } = useAppTranslation("pages");
+
   const { data: basicData } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(basicData?.data.version.const);
   const { formatLovelace } = useADADisplay();
+
+  const KEYS = {
+    totalDelegatedStake: "totalDelegatedStake",
+    drepDelegated: "drepDelegated",
+    abstainDrep: "abstainDrep",
+    noConfidenceDrep: "noConfidenceDrep",
+  };
+
   const [graphsVisibility, setGraphsVisibility] = useState({
-    "Total Delegated Stake (₳)": true,
-    "Drep Delegated": true,
-    "Abstain Drep (₳)": true,
-    "No Confidence Drep (₳)": true,
+    [KEYS.totalDelegatedStake]: true,
+    [KEYS.drepDelegated]: true,
+    [KEYS.abstainDrep]: true,
+    [KEYS.noConfidenceDrep]: true,
   });
+
+  const legendLabels = {
+    [KEYS.totalDelegatedStake]: t("dreps.graphs.drepPool.totalDelegatedStake"),
+    [KEYS.drepDelegated]: t("dreps.graphs.drepPool.drepDelegated"),
+    [KEYS.abstainDrep]: t("dreps.graphs.drepPool.abstainDrep"),
+    [KEYS.noConfidenceDrep]: t("dreps.graphs.drepPool.noConfidenceDrep"),
+  };
+
+  const tooltipLabels = {
+    [KEYS.totalDelegatedStake]: t(
+      "dreps.graphs.drepPool.totalDelegatedStakeShort",
+    ),
+    [KEYS.drepDelegated]: t("dreps.graphs.drepPool.drepDelegated"),
+    [KEYS.abstainDrep]: t("dreps.graphs.drepPool.abstainDrepShort"),
+    [KEYS.noConfidenceDrep]: t("dreps.graphs.drepPool.noConfidenceDrepShort"),
+  };
 
   const { splitLineColor, textColor, bgColor, inactivePageIconColor } =
     useGraphColors();
@@ -57,11 +84,12 @@ export const DrepPoolGraph: FC<DrepPoolGraphProps> = ({ epochs, query }) => {
     legend: {
       type: "scroll",
       data: [
-        "Total Delegated Stake (₳)",
-        "Drep Delegated",
-        "Abstain Drep (₳)",
-        "No Confidence Drep (₳)",
+        { name: KEYS.totalDelegatedStake, icon: "circle" },
+        { name: KEYS.drepDelegated, icon: "circle" },
+        { name: KEYS.abstainDrep, icon: "circle" },
+        { name: KEYS.noConfidenceDrep, icon: "circle" },
       ],
+      formatter: (name: string) => legendLabels[name] || name,
       selected: graphsVisibility,
       textStyle: { color: textColor },
       pageIconColor: textColor,
@@ -81,26 +109,15 @@ export const DrepPoolGraph: FC<DrepPoolGraphProps> = ({ epochs, query }) => {
         );
 
         return (
-          `Date: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (Epoch: ${params[0]?.axisValue})<hr>` +
+          `${t("dreps.graphs.date")} ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${t("dreps.graphs.epoch")} ${params[0]?.axisValue})<hr>` +
           params
             .map(item => {
-              let label = item.seriesName;
-              let value;
+              const value =
+                item.seriesName === KEYS.drepDelegated
+                  ? formatNumber(item.data)
+                  : formatLovelace(item.data);
 
-              if (label === "Total Delegated Stake (₳)") {
-                label = "Total Delegated Stake";
-                value = formatLovelace(item.data);
-              } else if (label === "Abstain Drep (₳)") {
-                label = "Abstain Drep";
-                value = formatLovelace(item.data);
-              } else if (label === "No Confidence Drep (₳)") {
-                label = "No Confidence Drep";
-                value = formatLovelace(item.data);
-              } else {
-                value = formatNumber(item.data);
-              }
-
-              return `<p>${item.marker} ${label}: ${value}</p>`;
+              return `<p>${item.marker} ${tooltipLabels[item.seriesName]}: ${value}</p>`;
             })
             .join("")
         );
@@ -116,7 +133,7 @@ export const DrepPoolGraph: FC<DrepPoolGraphProps> = ({ epochs, query }) => {
       type: "category",
       data: epochs,
       inverse: true,
-      name: "Epoch",
+      name: t("common:labels.epoch"),
       nameLocation: "middle",
       nameGap: 28,
       boundaryGap: false,
@@ -158,7 +175,7 @@ export const DrepPoolGraph: FC<DrepPoolGraphProps> = ({ epochs, query }) => {
     series: [
       {
         type: "line",
-        name: "Total Delegated Stake (₳)",
+        name: KEYS.totalDelegatedStake,
         data: totalDelegatedStake,
         yAxisIndex: 0,
         itemStyle: { color: "#35c2f5" },
@@ -167,7 +184,7 @@ export const DrepPoolGraph: FC<DrepPoolGraphProps> = ({ epochs, query }) => {
       },
       {
         type: "line",
-        name: "Drep Delegated",
+        name: KEYS.drepDelegated,
         data: totalDrepCount,
         yAxisIndex: 2,
         itemStyle: { color: textColor },
@@ -176,7 +193,7 @@ export const DrepPoolGraph: FC<DrepPoolGraphProps> = ({ epochs, query }) => {
       },
       {
         type: "line",
-        name: "Abstain Drep (₳)",
+        name: KEYS.abstainDrep,
         data: alwaysAbstainDrep,
         yAxisIndex: 1,
         areaStyle: { opacity: 0.12 },
@@ -186,7 +203,7 @@ export const DrepPoolGraph: FC<DrepPoolGraphProps> = ({ epochs, query }) => {
       },
       {
         type: "line",
-        name: "No Confidence Drep (₳)",
+        name: KEYS.noConfidenceDrep,
         data: noConfidanceDrep,
         yAxisIndex: 1,
         areaStyle: { opacity: 0.12 },
