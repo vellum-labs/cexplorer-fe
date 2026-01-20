@@ -54,12 +54,6 @@ export const criticalProtocolParameters = [
   "minFeeRefScriptCoinsPerByte",
   "utxoCostPerByte",
   "govDeposit",
-  "stakeAddressDeposit",
-  "stakePoolDeposit",
-  "minPoolCost",
-  "dRepDeposit",
-  "committeeMinSize",
-  "committeeMaxTermLength",
 ] as const;
 
 export type GovStatus =
