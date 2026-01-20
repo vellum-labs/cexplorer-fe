@@ -29,15 +29,27 @@ import { useMiscConst } from "@/hooks/useMiscConst";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { useNavigate, useSearch } from "@tanstack/react-router";
+import {
+  PaginationComponent,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@vellumlabs/cexplorer-sdk";
 
 export const PotsPage = () => {
   const { t } = useAppTranslation("common");
+  const { page } = useSearch({ from: "/pot/" });
+  const navigate = useNavigate();
   const [
     { debouncedTableSearch: debouncedSearch, tableSearch },
     setTableSearch,
   ] = useSearchTable();
 
-  const [items, setItems] = useState<AdaPot[] | undefined>([]);
+  const [graphItems, setGraphItems] = useState<AdaPot[] | undefined>([]);
   const {
     columnsOrder,
     setColumsOrder,
@@ -48,8 +60,16 @@ export const PotsPage = () => {
     epochsToShow,
     setEpochsToShow,
   } = useAdaPotsTableStore();
+
   const query = useFetchAdaPots();
+  const allData = query.data?.data.data ?? [];
   const count = query.data?.data.count ?? 0;
+
+  const currentPage = page ?? 1;
+  const totalPages = Math.ceil(count / rows);
+  const startIndex = (currentPage - 1) * rows;
+  const endIndex = startIndex + rows;
+  const tableItems = allData.slice(startIndex, endIndex);
 
   const miscBasicQuery = useFetchMiscBasic();
 
@@ -155,11 +175,11 @@ export const PotsPage = () => {
   useEffect(() => {
     if (!epochsToShow) return;
     if (epochsToShow === "all") {
-      setItems(query.data?.data.data);
+      setGraphItems(allData);
       return;
     }
-    setItems(query.data?.data.data.slice(0, Number(epochsToShow)));
-  }, [epochsToShow, query.data]);
+    setGraphItems(allData.slice(0, Number(epochsToShow)));
+  }, [epochsToShow, allData]);
 
   return (
     <>
@@ -186,7 +206,7 @@ export const PotsPage = () => {
               label={false}
             />
           </div>
-          <AdaPotsChart data={items} />
+          <AdaPotsChart data={graphItems} />
           <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
             <div className='flex w-full flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
               {query.isLoading || query.isFetching ? (
@@ -253,15 +273,13 @@ export const PotsPage = () => {
           </div>
           <GlobalTable
             type='default'
-            pagination={true}
+            itemsPerPage={rows}
             totalItems={count}
             scrollable
             query={query}
-            items={
-              items?.filter(item =>
-                String(item.epoch_no).includes(debouncedSearch),
-              ) ?? []
-            }
+            items={tableItems.filter(item =>
+              String(item.epoch_no).includes(debouncedSearch),
+            )}
             columns={columns.sort((a, b) => {
               return (
                 columnsOrder.indexOf(a.key as keyof AdaPotsTableColumns) -
@@ -269,11 +287,94 @@ export const PotsPage = () => {
               );
             })}
             onOrderChange={setColumsOrder}
-            renderDisplayText={(count, total) =>
-              t("table.displaying", { count, total })
+            renderDisplayText={(displayCount, total) =>
+              t("table.displaying", {
+                count: Math.min(currentPage * rows, count),
+                total,
+              })
             }
             noItemsLabel={t("table.noItems")}
           />
+          {totalPages > 1 && (
+            <PaginationComponent className='my-2'>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    disabled={currentPage === 1}
+                    onClick={() =>
+                      navigate({
+                        search: { page: currentPage - 1 } as any,
+                      })
+                    }
+                    ariaLabel={t("sdk:pagination.previousPage")}
+                  />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink
+                    isActive={currentPage === 1}
+                    onClick={() => navigate({ search: { page: 1 } } as any)}
+                  >
+                    1
+                  </PaginationLink>
+                </PaginationItem>
+                {currentPage > 2 && (
+                  <PaginationItem>
+                    <PaginationEllipsis
+                      srLabel={t("sdk:pagination.morePages")}
+                    />
+                  </PaginationItem>
+                )}
+                {currentPage > 1 && currentPage < totalPages && (
+                  <PaginationItem>
+                    <PaginationLink
+                      isActive
+                      onClick={() =>
+                        navigate({
+                          search: { page: currentPage } as any,
+                        })
+                      }
+                    >
+                      {currentPage}
+                    </PaginationLink>
+                  </PaginationItem>
+                )}
+                {currentPage < totalPages - 1 && (
+                  <PaginationItem>
+                    <PaginationEllipsis
+                      srLabel={t("sdk:pagination.morePages")}
+                    />
+                  </PaginationItem>
+                )}
+                {totalPages > 1 && (
+                  <PaginationItem>
+                    <PaginationLink
+                      isActive={currentPage === totalPages}
+                      onClick={() =>
+                        navigate({
+                          search: { page: totalPages } as any,
+                        })
+                      }
+                    >
+                      {totalPages}
+                    </PaginationLink>
+                  </PaginationItem>
+                )}
+                <PaginationItem>
+                  <PaginationNext
+                    disabled={currentPage >= totalPages}
+                    onClick={() =>
+                      navigate({
+                        search: {
+                          page: currentPage + 1,
+                        } as any,
+                      })
+                    }
+                    ariaLabel={t("sdk:pagination.nextPage")}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </PaginationComponent>
+          )}
         </section>
       </main>
     </>
