@@ -15,7 +15,6 @@ import { useMiscConst } from "@/hooks/useMiscConst";
 import {
   useFetchEpochDetailParam,
   useFetchEpochDetailStats,
-  useFetchEpochList,
 } from "@/services/epoch";
 import { useFetchMiscBasic } from "@/services/misc";
 import { PageBase } from "@/components/global/pages/PageBase";
@@ -43,17 +42,9 @@ const EpochDetailPage: FC = () => {
     isError: isStatsDataError,
   } = useFetchEpochDetailStats(+no);
 
-  const epochListQuery = useFetchEpochList();
-
   const { data: basicData, isLoading: isFetchMiscBasicLoading } =
     useFetchMiscBasic();
   const constData = useMiscConst(basicData?.data?.version?.const);
-
-  const epochListData = epochListQuery.data?.data;
-  const epochFromList = epochListData?.find(
-    e => e.no === +no || e.params?.[0]?.epoch_no === +no,
-  );
-  const correctBlockCount = epochFromList?.blk_count;
 
   const requestedEpoch = +no;
   const currentEpoch = constData?.epoch?.no ?? 0;
@@ -194,7 +185,6 @@ const EpochDetailPage: FC = () => {
                     <EpochSummary
                       stats={statsData}
                       currentEpoch={constData?.no as number}
-                      blockCount={correctBlockCount}
                     />
                     <EpochLostAndCost
                       params={paramData}
