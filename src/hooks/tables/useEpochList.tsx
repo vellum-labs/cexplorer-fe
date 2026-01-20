@@ -204,10 +204,10 @@ export const useEpochList = ({
       key: "block",
       render: item => (
         <p
-          title={item?.stats?.epoch?.block_count ?? item?.blk_count}
+          title={item?.blk_count ?? item?.stats?.epoch?.block_count}
           className='text-right'
         >
-          {formatNumber(item?.stats?.epoch?.block_count ?? item?.blk_count)}
+          {formatNumber(item?.blk_count ?? item?.stats?.epoch?.block_count)}
         </p>
       ),
       title: <p className='w-full text-right'>{t("common:labels.blocks")}</p>,
@@ -335,7 +335,7 @@ export const useEpochList = ({
       render: item => {
         const blockSize = item?.stats?.epoch?.block_size ?? 0;
         const blockCount =
-          item?.stats?.epoch?.block_count ?? item.blk_count ?? 0;
+          item?.blk_count ?? item?.stats?.epoch?.block_count ?? 0;
         const maxBlockSize = item.params?.[0]?.max_block_size ?? 0;
         const blockUsage = isNaN(
           (blockSize / (blockCount * maxBlockSize)) * 100,
@@ -401,7 +401,7 @@ export const useEpochList = ({
       jsonFormat: item => {
         const blockSize = item?.stats?.epoch?.block_size ?? 0;
         const blockCount =
-          item?.stats?.epoch?.block_count ?? item.blk_count ?? 0;
+          item?.blk_count ?? item?.stats?.epoch?.block_count ?? 0;
         const maxBlockSize = item.params?.[0]?.max_block_size ?? 0;
         const blockUsage = isNaN(
           (blockSize / (blockCount * maxBlockSize)) * 100,

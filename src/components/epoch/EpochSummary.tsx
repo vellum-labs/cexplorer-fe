@@ -14,11 +14,13 @@ import { useAppTranslation } from "@/hooks/useAppTranslation";
 interface EpochSummaryProps {
   stats: any;
   currentEpoch: number;
+  blockCount?: number;
 }
 
 export const EpochSummary: FC<EpochSummaryProps> = ({
   stats,
   currentEpoch,
+  blockCount,
 }) => {
   const { t } = useAppTranslation("pages");
   const startDate = new Date(toUtcDate(stats.epoch?.start_time)).getTime();
@@ -87,7 +89,7 @@ export const EpochSummary: FC<EpochSummaryProps> = ({
       label: t("epochs.summary.blocks"),
       value: (
         <p className='text-text-sm font-medium'>
-          {formatNumber(stats?.epoch?.block_count)}
+          {formatNumber(blockCount ?? stats?.epoch?.block_count)}
         </p>
       ),
     },
