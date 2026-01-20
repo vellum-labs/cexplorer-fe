@@ -2142,6 +2142,14 @@
       "value": "Hodnota",
       "index": "Index"
     },
+    "overview": {
+      "flow": "Flow",
+      "classic": "Klasický",
+      "from": "Z",
+      "to": "Do",
+      "value": "Hodnota",
+      "noData": "Žádná data k dispozici"
+    },
     "unlockInteractivity": "Odemknout interaktivitu",
     "lockInteractivity": "Zamknout interaktivitu",
     "searchInputsOutputs": "Hledat ve vstupech/výstupech...",

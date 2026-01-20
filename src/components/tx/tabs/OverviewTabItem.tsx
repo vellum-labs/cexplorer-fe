@@ -1,5 +1,5 @@
 import TxAssetLink from "@/components/asset/AssetLink";
-import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { AdaWithTooltip, Tabs } from "@vellumlabs/cexplorer-sdk";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import SortBy from "@/components/ui/sortBy";
 import { colors } from "@/constants/colors";
@@ -17,6 +17,7 @@ import type { FC } from "react";
 import { useEffect, useRef, useState } from "react";
 import { AddressWithTxBadges } from "../AddressWithTxBadges";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { TxSankeyDiagram } from "../TxSankeyDiagram";
 
 const getSelectItems = (t: (key: string) => string) => [
   {
@@ -34,6 +35,46 @@ interface OverviewTabItemProps {
 }
 
 const OverviewTabItem: FC<OverviewTabItemProps> = ({ query }) => {
+  const { t } = useAppTranslation("common");
+  const data = query.data?.data;
+
+  const tabs = [
+    {
+      key: "classic",
+      label: t("tx.overview.classic"),
+      content: <ClassicFlowView query={query} />,
+      visible: true,
+    },
+    {
+      key: "flow",
+      label: t("tx.overview.flow"),
+      content: (
+        <TxSankeyDiagram
+          inputs={data?.all_inputs ?? []}
+          outputs={data?.all_outputs ?? []}
+        />
+      ),
+      visible: true,
+    },
+  ];
+
+  return (
+    <Tabs
+      tabParam="subTab"
+      withPadding={false}
+      withMargin={false}
+      items={tabs}
+    />
+  );
+};
+
+export default OverviewTabItem;
+
+interface ClassicFlowViewProps {
+  query: ReturnType<typeof useFetchTxDetail>;
+}
+
+const ClassicFlowView: FC<ClassicFlowViewProps> = ({ query }) => {
   const { t } = useAppTranslation("common");
   const [uniqueInputs, setUniqueInputs] = useState<TxInfo[]>([]);
   const [uniqueOutputs, setUniqueOutputs] = useState<TxInfo[]>([]);
@@ -290,8 +331,6 @@ const OverviewTabItem: FC<OverviewTabItemProps> = ({ query }) => {
     </>
   );
 };
-
-export default OverviewTabItem;
 
 const ViewportSetter = ({ nodes }: { nodes: Node[] }) => {
   const { fitView, getViewport, setViewport } = useReactFlow();
