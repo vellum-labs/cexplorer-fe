@@ -1309,6 +1309,44 @@
       }
     }
   },
+  "handleDns": {
+    "title": "$handle DNS",
+    "breadcrumb": "$handle DNS",
+    "tabs": {
+      "recentlyMinted": "Recently minted",
+      "validator": "Handle validator"
+    },
+    "validator": {
+      "searchPlaceholder": "Search by $handle or asset ID...",
+      "handleValid": "Handle is valid.",
+      "handleInvalid": "Not a valid handle.",
+      "handleNotFound": "Handle \"{{handle}}\" not found",
+      "enterHandle": "Enter a handle name to check if it exists",
+      "labels": {
+        "handle": "Handle",
+        "rarity": "Rarity",
+        "linkedTo": "Linked to",
+        "stakeKey": "Stake key",
+        "utxo": "UTXO",
+        "lastChange": "Last change",
+        "date": "Date:",
+        "transaction": "Transaction:",
+        "metadataStandard": "Metadata standard",
+        "metadata": "Metadata"
+      }
+    },
+    "recentlyMinted": {
+      "totalHandles": "Total of {{count}} handles",
+      "searchPlaceholder": "Search for a handle...",
+      "columns": {
+        "minted": "Asset minted",
+        "standard": "Standard",
+        "asset": "Asset",
+        "rarity": "Rarity",
+        "holder": "Holder"
+      }
+    }
+  },
   "token": {
     "dashboard": {
       "title": "Token dashboard",

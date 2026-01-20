@@ -26,6 +26,9 @@
   "datumInspector": {
     "title": "Datum Inspector | Cexplorer.io"
   },
+  "handleDns": {
+    "title": "$handle DNS | Cexplorer.io"
+  },
   "status": {
     "title": "Status | Cexplorer.io"
   },

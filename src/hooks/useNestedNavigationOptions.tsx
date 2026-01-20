@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useAppTranslation } from "./useAppTranslation";
+import { DollarIcon } from "@vellumlabs/cexplorer-sdk";
 
 export const useNestedNavigationOptions = () => {
   const { t } = useAppTranslation("navigation");
@@ -38,9 +39,23 @@ export const useNestedNavigationOptions = () => {
               label: t("tools.poolDebug"),
               href: "/pool-debug",
             },
+          ],
+        },
+        others: {
+          label: "",
+          options: [
             {
               label: t("tools.uplcViewer"),
               href: "/uplc",
+            },
+            {
+              label: (
+                <span className='flex items-center'>
+                  <img src={DollarIcon} alt='$' className='-ml-[3px] h-4 w-4' />
+                  {t("tools.handleDns")}
+                </span>
+              ),
+              href: "/handle-dns",
             },
           ],
         },

@@ -69,6 +69,7 @@ export interface AssetPolicy {
 
 interface AssetStatAsset extends AssetPolicy {
   param: [];
+  onchain: Record<string, unknown>;
   stats:
     | {
         count: number;
@@ -225,3 +226,33 @@ export type AssetMintResponse = ResponseCore<AssetMintData>;
 export type AssetStatsResponse = ResponseCore<{
   data: AssetStatsData[];
 }>;
+
+export interface AdaHandleHolder {
+  type: string;
+  holder: string;
+  address: string;
+  key: string;
+}
+
+export interface AdaHandle {
+  hex: string;
+  name: string;
+  image: string;
+  holder: AdaHandleHolder;
+  rarity: string;
+  utxo: string;
+  updated_slot: number;
+}
+
+export interface AdaHandleListItem extends AdaHandle {
+  last_mint: string;
+  last_mint_tx: string;
+}
+
+interface AdaHandleListData {
+  count: number;
+  data: AdaHandleListItem[];
+}
+
+export type AdaHandleResponse = ResponseCore<AdaHandle>;
+export type AdaHandleListResponse = ResponseCore<AdaHandleListData>;
