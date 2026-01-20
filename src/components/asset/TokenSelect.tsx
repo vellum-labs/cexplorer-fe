@@ -56,17 +56,20 @@ export const TokenSelectCombobox = memo(
     const debouncedSearch = useDebounce(search);
 
     const filteredItems = useMemo(() => {
+      if (!debouncedSearch) return items;
+
+      const searchLower = debouncedSearch.toLowerCase();
       return items
-        .filter(
-          item =>
-            item.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-            getAssetFingerprint(item.name).includes(
-              debouncedSearch.toLowerCase(),
-            ) ||
-            encodeAssetName(item.name)
-              .toLowerCase()
-              .includes(debouncedSearch.toLowerCase()),
-        )
+        .filter(item => {
+          if (item.name.toLowerCase().includes(searchLower)) {
+            return true;
+          }
+          const encoded = encodeAssetName(item.name);
+          if (encoded.toLowerCase().includes(searchLower)) {
+            return true;
+          }
+          return getAssetFingerprint(item.name).includes(searchLower);
+        })
         .sort((a, b) => {
           const calculateValue = (item: AddressAsset) => {
             const decimals = item?.registry?.decimals ?? 0;

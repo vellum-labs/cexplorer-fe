@@ -1,5 +1,5 @@
 import type { AddressAsset } from "@/types/addressTypes";
-import { useEffect, type FC, type ReactNode } from "react";
+import { useEffect, useMemo, type FC, type ReactNode } from "react";
 
 import { Switch } from "@vellumlabs/cexplorer-sdk";
 import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
@@ -15,7 +15,6 @@ import type { useFetchAddressDetail } from "@/services/address";
 import type { useFetchStakeDetail } from "@/services/stake";
 import type { AddressDetailAssetTableOptions } from "@/types/tableTypes";
 import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
-import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { configJSON } from "@/constants/conf";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { useSearch } from "@tanstack/react-router";
@@ -79,37 +78,48 @@ export const AssetsTab: FC<AssetsTabProps> = ({
     );
   }
 
-  const filteredAssets = assets
-    .filter(item => {
+  const filteredAssets = useMemo(() => {
+    const typeFiltered = assets.filter(item => {
       if (activeAsset === "tokens") {
         return item.quantity > 1;
       }
-
-      if (activeAsset !== "nfts") {
-        return item;
+      if (activeAsset === "nfts") {
+        return item.quantity === 1;
       }
+      return true;
+    });
 
-      return item.quantity === 1;
-    })
-    .filter(item => {
-      if (debouncedSearch) {
-        const searchLower = debouncedSearch.toLowerCase();
-        return (
-          item.name.toLowerCase().includes(searchLower) ||
-          getAssetFingerprint(item.name.toLowerCase()).includes(searchLower) ||
-          (item.registry?.name &&
-            typeof item.registry.name === "string" &&
-            item.registry.name.toLowerCase().includes(searchLower)) ||
-          (item.registry?.ticker &&
-            typeof item.registry.ticker === "string" &&
-            item.registry.ticker.toLowerCase().includes(searchLower)) ||
-          renderAssetName({ asset: item }).toLowerCase().includes(searchLower)
-        );
-      }
+    const searchFiltered = debouncedSearch
+      ? (() => {
+          const searchLower = debouncedSearch.toLowerCase();
+          return typeFiltered.filter(item => {
+            if (
+              item.registry?.ticker &&
+              typeof item.registry.ticker === "string" &&
+              item.registry.ticker.toLowerCase().includes(searchLower)
+            ) {
+              return true;
+            }
+            if (
+              item.registry?.name &&
+              typeof item.registry.name === "string" &&
+              item.registry.name.toLowerCase().includes(searchLower)
+            ) {
+              return true;
+            }
+            if (item.name.toLowerCase().includes(searchLower)) {
+              return true;
+            }
+            const fingerprint = getAssetFingerprint(item.name);
+            if (fingerprint.toLowerCase().includes(searchLower)) {
+              return true;
+            }
+            return false;
+          });
+        })()
+      : typeFiltered;
 
-      return item;
-    })
-    .sort((a, b) => {
+    return searchFiltered.sort((a, b) => {
       const calculateValue = (item: AddressAsset) => {
         const decimals = item?.registry?.decimals ?? 0;
         const quantity = item?.quantity ?? 0;
@@ -121,11 +131,9 @@ export const AssetsTab: FC<AssetsTabProps> = ({
         return adjustedQuantity * price;
       };
 
-      const valueA = calculateValue(a);
-      const valueB = calculateValue(b);
-
-      return valueB - valueA;
+      return calculateValue(b) - calculateValue(a);
     });
+  }, [assets, activeAsset, debouncedSearch]);
 
   const assetTabItems = [
     {
