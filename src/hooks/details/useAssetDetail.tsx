@@ -56,7 +56,10 @@ export const useAssetDetail = ({
   const dailyVolume = (
     detailData?.dex?.stat as Record<string, { volume?: number }> | undefined
   )?.["1d"]?.volume;
-  const adaVolume = dailyVolume ? lovelaceToAda(dailyVolume) : "-";
+  const adaVolume =
+    dailyVolume !== undefined && dailyVolume !== null
+      ? lovelaceToAda(dailyVolume)
+      : "-";
 
   const overview: OverviewList = [
     {
@@ -140,7 +143,7 @@ export const useAssetDetail = ({
       const stat = (
         detailData?.dex?.stat as Record<string, { change?: number }> | undefined
       )?.[key];
-      if (!stat?.change) return null;
+      if (!stat || stat.change === null || stat.change === undefined) return null;
       return ((stat.change - 1) * 100).toFixed(2);
     };
 
@@ -150,7 +153,7 @@ export const useAssetDetail = ({
         <div className='flex w-full'>
           {priceChangeData.map((item, i, arr) => {
             const percent = getPriceChangePercent(item.key);
-            const isPositive = percent !== null && parseFloat(percent) >= 0;
+            const isPositive = percent !== null && parseFloat(percent) > 0;
             const isNegative = percent !== null && parseFloat(percent) < 0;
 
             return (
