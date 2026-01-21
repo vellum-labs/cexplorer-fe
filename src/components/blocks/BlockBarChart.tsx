@@ -35,7 +35,6 @@ export const BlockBarChart: FC<BlockBarChartProps> = ({ txs, className }) => {
     { key: "size", value: t("blocks.size") },
   ];
 
-  // Create clean data with only primitive values to avoid ECharts clone issues
   const chartData = useMemo(() => {
     const sorted = [...txs].sort((a, b) => {
       if (metric === "out_sum") return a.out_sum - b.out_sum;
@@ -169,7 +168,9 @@ export const BlockBarChart: FC<BlockBarChartProps> = ({ txs, className }) => {
       <div
         className={`relative flex h-[400px] items-center justify-center ${className ?? ""}`}
       >
-        <span className="text-grayTextSecondary">{t("tx.overview.noData")}</span>
+        <span className='text-grayTextSecondary'>
+          {t("tx.overview.noData")}
+        </span>
       </div>
     );
   }
@@ -180,10 +181,10 @@ export const BlockBarChart: FC<BlockBarChartProps> = ({ txs, className }) => {
         selectItems={selectItems}
         setSelectedItem={setMetric as any}
         selectedItem={metric}
-        className="mb-2 ml-auto w-fit"
+        className='mb-2 ml-auto w-fit'
       />
-      <div className="relative h-[400px] w-full rounded-l border border-border md:h-[600px]">
-        <GraphWatermark className="opacity-10" />
+      <div className='relative h-[400px] w-full rounded-l border border-border md:h-[600px]'>
+        <GraphWatermark className='opacity-10' />
         <ReactEcharts
           ref={chartRef}
           option={option}
