@@ -101,7 +101,7 @@ export const BlockBarChart: FC<BlockBarChartProps> = ({ txs, className }) => {
         },
       },
       grid: {
-        left: 120,
+        left: 150,
         right: 40,
         top: 20,
         bottom: 40,
@@ -128,8 +128,8 @@ export const BlockBarChart: FC<BlockBarChartProps> = ({ txs, className }) => {
         data: chartData.map(tx => truncateHash(tx.hash)),
         triggerEvent: true,
         axisLabel: {
-          color: "#3B82F6",
-          fontSize: 11,
+          color: textColor,
+          fontSize: 14,
         },
         axisLine: {
           lineStyle: {
