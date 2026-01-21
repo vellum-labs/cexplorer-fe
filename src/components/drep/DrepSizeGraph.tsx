@@ -12,53 +12,15 @@ import { useNavigate } from "@tanstack/react-router";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useADADisplay } from "@/hooks/useADADisplay";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
-
-const formatHashLong = (hash: string | null): string => {
-  if (!hash) return "";
-  return `${hash.slice(0, 8)}...${hash.slice(-8)}`;
-};
+import {
+  DREP_GRAPH_COLORS,
+  DREP_GRAPH_LABEL_COLORS,
+  formatHashLong,
+} from "@/constants/drepGraphColors";
 
 interface DrepSizeGraphProps {
   type: DrepListOrder;
 }
-
-const colors: string[] = [
-  "#FEF08A",
-  "#86EFAC",
-  "#DBEAFE",
-  "#F3E8FF",
-  "#FED7D7",
-  "#FFF2CC",
-  "#E0F2FE",
-  "#A7F3D0",
-  "#F1C0E8",
-  "#C7D2FE",
-  "#FDE68A",
-  "#D1FAE5",
-  "#FEE2E2",
-  "#E0E7FF",
-  "#FECACA",
-  "#BAE6FD",
-];
-
-const labelColors: string[] = [
-  "#854D0E",
-  "#166534",
-  "#1E40AF",
-  "#7C3AED",
-  "#DC2626",
-  "#EA580C",
-  "#0891B2",
-  "#059669",
-  "#BE185D",
-  "#4338CA",
-  "#D97706",
-  "#047857",
-  "#BE123C",
-  "#5B21B6",
-  "#B91C1C",
-  "#0369A1",
-];
 
 export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
   const { t } = useAppTranslation("pages");
@@ -85,16 +47,17 @@ export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
 
   const chartData = useMemo(() => {
     const values = (items ?? []).map(item => {
-      if (type === "power") {
-        return item.amount || 0;
-      } else if (type === "delegator") {
-        return item.distr?.count || 0;
-      } else if (type === "own") {
-        return item.owner?.balance || 0;
-      } else {
-        return item.amount && item.distr?.count
-          ? item.amount / item.distr.count
-          : 0;
+      switch (type) {
+        case "power":
+          return item.amount || 0;
+        case "delegator":
+          return item.distr?.count || 0;
+        case "own":
+          return item.owner?.balance || 0;
+        default:
+          return item.amount && item.distr?.count
+            ? item.amount / item.distr.count
+            : 0;
       }
     });
 
@@ -119,8 +82,8 @@ export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
         adjustedSize = minBubbleSize + ratio * (maxBubbleSize - minBubbleSize);
       }
 
-      const baseColor = colors[index % colors.length];
-      const labelColor = labelColors[index % labelColors.length];
+      const baseColor = DREP_GRAPH_COLORS[index % DREP_GRAPH_COLORS.length];
+      const labelColor = DREP_GRAPH_LABEL_COLORS[index % DREP_GRAPH_LABEL_COLORS.length];
 
       return {
         id: index,
@@ -163,16 +126,21 @@ export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
             drepName || formatHashLong(item?.hash?.view || null);
 
           let valueLabel = "";
-          if (type === "power") {
-            valueLabel = `${t("dreps.graphs.drepSize.votingPower")}: ${formatLovelace(params.data.value)}`;
-          } else if (type === "delegator") {
-            valueLabel = `${t("dreps.graphs.drepSize.delegators")}: ${params.data.value}`;
-          } else if (type === "own") {
-            valueLabel = `${t("dreps.graphs.drepSize.ownerStake")}: ${formatLovelace(params.data.value)}`;
-          } else if (type === "average_stake") {
-            valueLabel = `${t("dreps.graphs.drepSize.averageStake")}: ${formatLovelace(params.data.value)}`;
-          } else {
-            valueLabel = `${t("dreps.graphs.drepSize.value")}: ${formatLovelace(params.data.value)}`;
+          switch (type) {
+            case "power":
+              valueLabel = `${t("dreps.graphs.drepSize.votingPower")}: ${formatLovelace(params.data.value)}`;
+              break;
+            case "delegator":
+              valueLabel = `${t("dreps.graphs.drepSize.delegators")}: ${params.data.value}`;
+              break;
+            case "own":
+              valueLabel = `${t("dreps.graphs.drepSize.ownerStake")}: ${formatLovelace(params.data.value)}`;
+              break;
+            case "average_stake":
+              valueLabel = `${t("dreps.graphs.drepSize.averageStake")}: ${formatLovelace(params.data.value)}`;
+              break;
+            default:
+              valueLabel = `${t("dreps.graphs.drepSize.value")}: ${formatLovelace(params.data.value)}`;
           }
 
           return `<b>${fullDisplayName}</b> <br/> ${valueLabel}`;
