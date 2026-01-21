@@ -118,20 +118,21 @@ export const TxSankeyDiagram: FC<TxSankeyDiagramProps> = ({
       name: id,
     }));
 
-    // Calculate min link value as percentage of max to ensure visibility
     const linkValues = Array.from(linkMap.values());
     const maxLinkValue = linkValues.length > 0 ? Math.max(...linkValues) : 0;
-    const minLinkValue = maxLinkValue * 0.02; // 2% of max value as minimum
+    const minLinkValue = maxLinkValue * 0.02;
 
-    const sankeyLinks = Array.from(linkMap.entries()).map(([key, actualValue]) => {
-      const [source, target] = key.split("->") as [string, string];
-      return {
-        source,
-        target,
-        value: Math.max(actualValue, minLinkValue),
-        actualValue, // Keep original value for tooltip
-      };
-    });
+    const sankeyLinks = Array.from(linkMap.entries()).map(
+      ([key, actualValue]) => {
+        const [source, target] = key.split("->") as [string, string];
+        return {
+          source,
+          target,
+          value: Math.max(actualValue, minLinkValue),
+          actualValue,
+        };
+      },
+    );
 
     return { nodes: sankeyNodes, links: sankeyLinks };
   }, [inputs, outputs]);
