@@ -118,9 +118,19 @@ export const TxSankeyDiagram: FC<TxSankeyDiagramProps> = ({
       name: id,
     }));
 
-    const sankeyLinks = Array.from(linkMap.entries()).map(([key, value]) => {
+    // Calculate min link value as percentage of max to ensure visibility
+    const linkValues = Array.from(linkMap.values());
+    const maxLinkValue = linkValues.length > 0 ? Math.max(...linkValues) : 0;
+    const minLinkValue = maxLinkValue * 0.02; // 2% of max value as minimum
+
+    const sankeyLinks = Array.from(linkMap.entries()).map(([key, actualValue]) => {
       const [source, target] = key.split("->") as [string, string];
-      return { source, target, value };
+      return {
+        source,
+        target,
+        value: Math.max(actualValue, minLinkValue),
+        actualValue, // Keep original value for tooltip
+      };
     });
 
     return { nodes: sankeyNodes, links: sankeyLinks };
@@ -139,11 +149,11 @@ export const TxSankeyDiagram: FC<TxSankeyDiagramProps> = ({
         },
         confine: true,
         formatter: (params: any) => {
-          const inputColor = "#10B981";
-          const outputColor = "#3B82F6";
+          const inputColor = "#EF4444";
+          const outputColor = "#10B981";
 
           if (params.dataType === "edge") {
-            const { source, target, value } = params.data;
+            const { source, target, actualValue } = params.data;
             const sourceAddr = source.replace(/^(in|out)-/, "");
             const targetAddr = target.replace(/^(in|out)-/, "");
             return [
@@ -153,7 +163,7 @@ export const TxSankeyDiagram: FC<TxSankeyDiagramProps> = ({
               `<div style="margin-bottom: 4px;">${t("tx.overview.from")}: ${truncateAddress(sourceAddr)}</div>`,
               `<div style="margin-bottom: 4px;">${t("tx.overview.to")}: ${truncateAddress(targetAddr)}</div>`,
               `<div style="display:flex; justify-content:space-between; gap:12px;">` +
-                `<span>${t("tx.overview.value")}:</span><span style="font-weight:600;">${formatLovelace(value)}</span>` +
+                `<span>${t("tx.overview.value")}:</span><span style="font-weight:600;">${formatLovelace(actualValue)}</span>` +
                 `</div>`,
               `</div>`,
               `</div>`,
@@ -187,7 +197,7 @@ export const TxSankeyDiagram: FC<TxSankeyDiagramProps> = ({
           data: nodes.map(node => ({
             ...node,
             itemStyle: {
-              color: node.name.startsWith("in-") ? "#10B981" : "#3B82F6",
+              color: node.name.startsWith("in-") ? "#EF4444" : "#10B981",
               borderColor: splitLineColor,
               borderWidth: 0.5,
             },
@@ -196,6 +206,7 @@ export const TxSankeyDiagram: FC<TxSankeyDiagramProps> = ({
           nodeAlign: "justify",
           nodeWidth: 15,
           nodeGap: 12,
+          nodeMinHeight: 5,
           draggable: false,
           emphasis: {
             focus: "adjacency",
@@ -206,8 +217,8 @@ export const TxSankeyDiagram: FC<TxSankeyDiagramProps> = ({
             opacity: 0.4,
           },
           label: {
-            color: "#3B82F6",
-            fontSize: 11,
+            color: textColor,
+            fontSize: 14,
             formatter: (params: any) => {
               const name = params.name || "";
               const address = name.replace(/^(in|out)-/, "");
