@@ -38,9 +38,9 @@ export const BlockBarChart: FC<BlockBarChartProps> = ({ txs, className }) => {
   // Create clean data with only primitive values to avoid ECharts clone issues
   const chartData = useMemo(() => {
     const sorted = [...txs].sort((a, b) => {
-      if (metric === "out_sum") return b.out_sum - a.out_sum;
-      if (metric === "fee") return b.fee - a.fee;
-      return b.size - a.size;
+      if (metric === "out_sum") return a.out_sum - b.out_sum;
+      if (metric === "fee") return a.fee - b.fee;
+      return a.size - b.size;
     });
 
     return sorted.map(tx => ({
