@@ -9,7 +9,7 @@ import {
   HardDrive,
 } from "lucide-react";
 
-import { BlockDetailTable } from "@/components/blocks/BlockDetail/BlockDetailTable";
+import { BlockDetailTabs } from "@/components/blocks/BlockDetail/BlockDetailTabs";
 import { LoadingSkeleton, useThemeStore } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchBlockDetail } from "@/services/blocks";
@@ -413,7 +413,7 @@ const BlockDetailPage: FC = () => {
       </section>
       <section className='flex w-full justify-center'>
         <div className='flex w-full max-w-desktop flex-col flex-wrap justify-center gap-3 px-mobile pb-3 md:px-desktop xl:flex-nowrap xl:justify-start'>
-          <BlockDetailTable txs={data?.txs} blockDetail={blockDetail} />
+          <BlockDetailTabs blockDetail={blockDetail} />
         </div>
       </section>
     </PageBase>
