@@ -7,7 +7,7 @@ import { useGraphColors } from "@/hooks/useGraphColors";
 import { Tooltip, useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { CircleHelp } from "lucide-react";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
-import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
+import { formatAbbreviatedADA, formatFullADA } from "@/utils/formatADA";
 import { useMemo } from "react";
 import ReactECharts from "echarts-for-react";
 import { useNavigate } from "@tanstack/react-router";
@@ -154,16 +154,6 @@ export const NCLProgressBar: FC<NCLProgressBarProps> = ({
         params: { id: encodeURIComponent(actionId) },
       });
     }
-  };
-
-  const formatAbbreviatedADA = (lovelace: number) => {
-    const ada = lovelace / 1e6;
-    return `₳${formatNumberWithSuffix(ada)}`;
-  };
-
-  const formatFullADA = (lovelace: number) => {
-    const ada = lovelace / 1e6;
-    return `₳${ada.toLocaleString()}`;
   };
 
   return (

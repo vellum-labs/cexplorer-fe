@@ -1301,8 +1301,8 @@
       "remainingBudget": "Zbývající rozpočet",
       "ofNCL": "z NCL",
       "utilized": "využito",
-      "hideNCL": "Skrýt NCL progress",
-      "showNCL": "Zobrazit NCL progress"
+      "hideNCL": "Skrýt průběh NCL",
+      "showNCL": "Zobrazit průběh NCL"
     },
     "constitution": {
       "title": "Ústava",

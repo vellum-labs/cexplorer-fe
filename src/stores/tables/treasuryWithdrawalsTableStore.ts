@@ -11,7 +11,7 @@ export const useTreasuryWithdrawalsTableStore = handlePersistStore<
     setColumnVisibility: (columnKey: string, isVisible: boolean) => void;
     setIsResponsive: (isResponsive: boolean) => void;
     setRows: (rows: number) => void;
-    setColumsOrder: (
+    setColumnsOrder: (
       columnsOrder: (keyof TreasuryWithdrawalsTableColumns)[],
     ) => void;
   }
@@ -53,7 +53,7 @@ export const useTreasuryWithdrawalsTableStore = handlePersistStore<
       set(state => {
         state.rows = rows;
       }),
-    setColumsOrder: columnsOrder =>
+    setColumnsOrder: columnsOrder =>
       set(state => {
         state.columnsOrder = columnsOrder;
       }),

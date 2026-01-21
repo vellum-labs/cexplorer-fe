@@ -1,5 +1,8 @@
 import type { GovernanceActionList } from "@/types/governanceTypes";
-import type { TreasuryWithdrawalsTableColumns, TableColumns } from "@/types/tableTypes";
+import type {
+  TreasuryWithdrawalsTableColumns,
+  TableColumns,
+} from "@/types/tableTypes";
 import type { FC } from "react";
 import type { MiscConstResponseData } from "@/types/miscTypes";
 
@@ -14,12 +17,12 @@ import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import SortBy from "@/components/ui/sortBy";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
-import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
+import { formatAbbreviatedADA, formatFullADA } from "@/utils/formatADA";
 
 import { ExternalLink, ChevronDown, ChevronUp } from "lucide-react";
 
 import { useTreasuryWithdrawalsTableStore } from "@/stores/tables/treasuryWithdrawalsTableStore";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { useFetchGovernanceAction } from "@/services/governance";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 
@@ -65,16 +68,6 @@ const getWithdrawalAmount = (item: GovernanceActionList): number => {
   return total;
 };
 
-const formatAbbreviatedADA = (lovelace: number) => {
-  const ada = lovelace / 1e6;
-  return `₳${formatNumberWithSuffix(ada)}`;
-};
-
-const formatFullADA = (lovelace: number) => {
-  const ada = lovelace / 1e6;
-  return `₳${ada.toLocaleString()}`;
-};
-
 export const TreasuryWithdrawalsTab: FC<TreasuryWithdrawalsTabProps> = ({
   miscConst,
 }) => {
@@ -88,7 +81,7 @@ export const TreasuryWithdrawalsTab: FC<TreasuryWithdrawalsTabProps> = ({
     columnsVisibility,
     rows,
     setColumnVisibility,
-    setColumsOrder,
+    setColumnsOrder,
     setRows,
   } = useTreasuryWithdrawalsTableStore();
 
@@ -98,15 +91,17 @@ export const TreasuryWithdrawalsTab: FC<TreasuryWithdrawalsTabProps> = ({
         tableSearch.toLowerCase().slice(tableSearch.indexOf(":") + 1),
     });
 
-  const [selectedStatus, setSelectedStatus] = useState<StatusFilter>("Approved");
+  const [selectedStatus, setSelectedStatus] =
+    useState<StatusFilter>("Approved");
   const [showNCLProgress, setShowNCLProgress] = useState(true);
   const [selectedNCLPeriodId, setSelectedNCLPeriodId] = useState<string>(
     NCL_PERIODS[0]?.id || "",
   );
 
-  // Get the selected NCL period
   const selectedNCLPeriod = useMemo(() => {
-    return NCL_PERIODS.find(p => p.id === selectedNCLPeriodId) || NCL_PERIODS[0];
+    return (
+      NCL_PERIODS.find(p => p.id === selectedNCLPeriodId) || NCL_PERIODS[0]
+    );
   }, [selectedNCLPeriodId]);
 
   const graphQuery = useFetchGovernanceAction(
@@ -128,33 +123,52 @@ export const TreasuryWithdrawalsTab: FC<TreasuryWithdrawalsTabProps> = ({
   const graphItems = graphQuery.data?.pages.flatMap(page => page.data.data);
   const tableItems = govActionQuery.data?.pages.flatMap(page => page.data.data);
 
+  const getItemEpoch = useCallback(
+    (item: GovernanceActionList): number | null => {
+      // For enacted items, use enacted_epoch
+      if (item?.enacted_epoch !== undefined && item?.enacted_epoch !== null) {
+        return item.enacted_epoch;
+      }
+      // For non-enacted items (Approved/Ratified), calculate epoch from tx time
+      if (item?.tx?.time && miscConst?.epoch) {
+        return getEpochByTime(
+          new Date(item.tx.time).getTime(),
+          new Date(miscConst.epoch.start_time ?? "").getTime() / 1000,
+          miscConst.epoch.no ?? 0,
+        );
+      }
+      return null;
+    },
+    [miscConst],
+  );
+
   const filteredGraphItems = useMemo(() => {
     if (!graphItems || !selectedNCLPeriod) return graphItems;
 
     return graphItems.filter(item => {
-      const enactedEpoch = item?.enacted_epoch;
-      if (enactedEpoch === undefined || enactedEpoch === null) return false;
+      const epoch = getItemEpoch(item);
+      if (epoch === null) return false;
 
       return (
-        enactedEpoch >= selectedNCLPeriod.startEpoch &&
-        enactedEpoch <= selectedNCLPeriod.endEpoch
+        epoch >= selectedNCLPeriod.startEpoch &&
+        epoch <= selectedNCLPeriod.endEpoch
       );
     });
-  }, [graphItems, selectedNCLPeriod]);
+  }, [graphItems, selectedNCLPeriod, getItemEpoch]);
 
   const filteredTableItems = useMemo(() => {
     if (!tableItems || !selectedNCLPeriod) return tableItems;
 
     return tableItems.filter(item => {
-      const enactedEpoch = item?.enacted_epoch;
-      if (enactedEpoch === undefined || enactedEpoch === null) return false;
+      const epoch = getItemEpoch(item);
+      if (epoch === null) return false;
 
       return (
-        enactedEpoch >= selectedNCLPeriod.startEpoch &&
-        enactedEpoch <= selectedNCLPeriod.endEpoch
+        epoch >= selectedNCLPeriod.startEpoch &&
+        epoch <= selectedNCLPeriod.endEpoch
       );
     });
-  }, [tableItems, selectedNCLPeriod]);
+  }, [tableItems, selectedNCLPeriod, getItemEpoch]);
 
   const statusSelectItems = [
     {
@@ -282,7 +296,9 @@ export const TreasuryWithdrawalsTab: FC<TreasuryWithdrawalsTabProps> = ({
 
         return (
           <Tooltip content={formatFullADA(amount)}>
-            <p className='text-right font-medium'>{formatAbbreviatedADA(amount)}</p>
+            <p className='text-right font-medium'>
+              {formatAbbreviatedADA(amount)}
+            </p>
           </Tooltip>
         );
       },
@@ -291,7 +307,9 @@ export const TreasuryWithdrawalsTab: FC<TreasuryWithdrawalsTabProps> = ({
         return amount > 0 ? formatFullADA(amount) : "-";
       },
       title: (
-        <p className='w-full text-right'>{t("common:governance.treasury.amount")}</p>
+        <p className='w-full text-right'>
+          {t("common:governance.treasury.amount")}
+        </p>
       ),
       visible: columnsVisibility.amount,
       widthPx: 80,
@@ -356,9 +374,13 @@ export const TreasuryWithdrawalsTab: FC<TreasuryWithdrawalsTabProps> = ({
       <div className='mb-4'>
         <button
           onClick={() => setShowNCLProgress(!showNCLProgress)}
-          className='mb-2 flex items-center gap-1 text-sm text-primary'
+          className='text-sm mb-2 flex items-center gap-1 text-primary'
         >
-          {showNCLProgress ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+          {showNCLProgress ? (
+            <ChevronUp size={16} />
+          ) : (
+            <ChevronDown size={16} />
+          )}
           {showNCLProgress
             ? t("common:governance.treasury.hideNCL")
             : t("common:governance.treasury.showNCL")}
@@ -410,7 +432,10 @@ export const TreasuryWithdrawalsTab: FC<TreasuryWithdrawalsTabProps> = ({
                     label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
-                      setColumnVisibility(item.key, !columnsVisibility[item.key]),
+                      setColumnVisibility(
+                        item.key,
+                        !columnsVisibility[item.key],
+                      ),
                   };
                 })}
               />
@@ -453,7 +478,7 @@ export const TreasuryWithdrawalsTab: FC<TreasuryWithdrawalsTabProps> = ({
         </div>
       </div>
 
-      <div className='mb-2 text-sm text-grayTextPrimary'>
+      <div className='text-sm mb-2 text-grayTextPrimary'>
         {t("common:governance.treasury.totalWithdrawals", {
           count: filteredGraphItems?.length || 0,
         })}
@@ -471,11 +496,13 @@ export const TreasuryWithdrawalsTab: FC<TreasuryWithdrawalsTabProps> = ({
         items={filteredTableItems}
         columns={columns.sort((a, b) => {
           return (
-            columnsOrder.indexOf(a.key as keyof TreasuryWithdrawalsTableColumns) -
+            columnsOrder.indexOf(
+              a.key as keyof TreasuryWithdrawalsTableColumns,
+            ) -
             columnsOrder.indexOf(b.key as keyof TreasuryWithdrawalsTableColumns)
           );
         })}
-        onOrderChange={setColumsOrder}
+        onOrderChange={setColumnsOrder}
         renderDisplayText={(count, total) =>
           t("common:table.displaying", { count, total })
         }
