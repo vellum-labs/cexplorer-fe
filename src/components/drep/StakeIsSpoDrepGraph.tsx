@@ -100,10 +100,10 @@ export const StakeIsSpoDrepGraph: FC = () => {
       {
         type: "value",
         position: "left",
-        axisLabel: { show: false, color: textColor },
+        axisLabel: { show: false },
         axisTick: { show: false },
         splitLine: { lineStyle: { color: splitLineColor } },
-        axisLine: { lineStyle: { color: textColor } },
+        axisLine: { show: false },
       },
       {
         type: "value",
@@ -111,7 +111,15 @@ export const StakeIsSpoDrepGraph: FC = () => {
         axisLabel: { show: false },
         axisTick: { show: false },
         splitLine: { show: false },
-        axisLine: { lineStyle: { color: textColor } },
+        axisLine: { show: false },
+      },
+      {
+        type: "value",
+        position: "right",
+        axisLabel: { show: false },
+        axisTick: { show: false },
+        splitLine: { show: false },
+        axisLine: { show: false },
       },
     ],
     series: [
@@ -143,7 +151,7 @@ export const StakeIsSpoDrepGraph: FC = () => {
         type: "line",
         name: delegatorsLabel,
         data: delegators,
-        yAxisIndex: 0,
+        yAxisIndex: 2,
         symbol: "none",
         lineStyle: { color: "#2ecc71" },
         itemStyle: {

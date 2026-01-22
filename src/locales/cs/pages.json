@@ -630,7 +630,7 @@
       "totalOfSuffix": "delegací"
     },
     "analytics": {
-      "poolGraph": "Graf poolů",
+      "poolGraph": "DRep delegace",
       "stakeCompositionByRole": "Složení stake podle role",
       "delegationChanges": "Změny delegací",
       "adaInGovernance": "ADA ve správě",
