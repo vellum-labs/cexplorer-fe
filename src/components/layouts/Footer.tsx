@@ -5,6 +5,7 @@ import { DiscordLogo } from "@vellumlabs/cexplorer-sdk";
 import { GithubLogo } from "@vellumlabs/cexplorer-sdk";
 import { TelegramLogo } from "@vellumlabs/cexplorer-sdk";
 import { TwitterLogo } from "@vellumlabs/cexplorer-sdk";
+import BlueskyLogo from "../../resources/images/social/BlueskyLogo.svg";
 import { CoinPaprikaPartner } from "../../resources/images/partners/CoinPaprikaPartner";
 import { NufiPartner } from "../../resources/images/partners/NufiPartner";
 import YoroiPartner from "../../resources/images/partners/YoroiPartner.svg";
@@ -52,6 +53,12 @@ const Footer = () => {
                   target='_blank'
                 >
                   <img src={GithubLogo} alt='Github' width={30} />
+                </a>
+                <a
+                  href='https://bsky.app/profile/cexplorerio.bsky.social'
+                  target='_blank'
+                >
+                  <img src={BlueskyLogo} alt='Bluesky' width={30} className='text-grayTextPrimary' />
                 </a>
               </div>
             </div>
