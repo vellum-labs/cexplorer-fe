@@ -28,7 +28,12 @@ const PoolDetailPage = () => {
   const route = getRouteApi("/pool/$id");
   const { id } = route.useParams();
 
-  const { showWalletModal, setShowWalletModal } = useDelegateAction({
+  const {
+    showWalletModal,
+    setShowWalletModal,
+    showDelegationModal,
+    setShowDelegationModal,
+  } = useDelegateAction({
     type: "pool",
     ident: id,
   });
@@ -202,6 +207,8 @@ const PoolDetailPage = () => {
         estimatedBlocks={estimatedBlocks}
         miscConst={miscConst}
         isPoolRetiredOrRetiring={isPoolRetiredOrRetiring}
+        externalDelegationModalOpen={showDelegationModal}
+        onExternalDelegationModalClose={() => setShowDelegationModal(false)}
       />
       <Tabs items={poolDetailTabItems} />
       {showWalletModal && (

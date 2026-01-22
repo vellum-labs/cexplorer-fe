@@ -26,7 +26,12 @@ export const DrepDetailPage: FC = () => {
   const route = getRouteApi("/drep/$hash");
   const { hash } = route.useParams();
 
-  const { showWalletModal, setShowWalletModal } = useDelegateAction({
+  const {
+    showWalletModal,
+    setShowWalletModal,
+    showDelegationModal,
+    setShowDelegationModal,
+  } = useDelegateAction({
     type: "drep",
     ident: hash,
   });
@@ -157,6 +162,8 @@ export const DrepDetailPage: FC = () => {
           ident={drepHash ?? ""}
           isLoading={drepDetailQuery.isLoading}
           drepDetailQuery={drepDetailQuery}
+          externalDelegationModalOpen={showDelegationModal}
+          onExternalDelegationModalClose={() => setShowDelegationModal(false)}
         />
       </div>
       <DrepDetailOverview query={drepDetailQuery} />

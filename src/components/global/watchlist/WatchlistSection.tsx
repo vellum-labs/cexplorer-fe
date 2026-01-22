@@ -9,7 +9,11 @@ import type { useFetchDrepDetail } from "@/services/drep";
 import { useWalletStore } from "@/stores/walletStore";
 import { handleDelegation } from "@/utils/wallet/handleDelegation";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
-import { useState } from "react";
+import {
+  DelegationConfirmModal,
+  type DelegationInfo,
+} from "@/components/wallet/DelegationConfirmModal";
+import { useState, useEffect } from "react";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const WatchlistSection = ({
@@ -24,6 +28,8 @@ export const WatchlistSection = ({
   hasDex = false,
   assetName,
   isPoolRetiredOrRetiring = false,
+  externalDelegationModalOpen = false,
+  onExternalDelegationModalClose,
 }: {
   ident: string | undefined;
   isLoading: boolean;
@@ -36,25 +42,90 @@ export const WatchlistSection = ({
   hasDex?: boolean;
   assetName?: string;
   isPoolRetiredOrRetiring?: boolean;
+  externalDelegationModalOpen?: boolean;
+  onExternalDelegationModalClose?: () => void;
 }) => {
   const { wallet, address, walletType } = useWalletStore();
   const [showWalletModal, setShowWalletModal] = useState<boolean>(false);
+  const [showDelegationModal, setShowDelegationModal] =
+    useState<boolean>(false);
+  const [delegationLoading, setDelegationLoading] = useState<boolean>(false);
+  const [walletBalance, setWalletBalance] = useState<number>(0);
   const { t } = useAppTranslation();
 
+  useEffect(() => {
+    if (externalDelegationModalOpen) {
+      setShowDelegationModal(true);
+    }
+  }, [externalDelegationModalOpen]);
+
   const drepName = drepDetailQuery?.data?.data?.given_name;
+  const poolData = poolDetailQuery?.data?.data;
   const isPool = !!poolDetailQuery;
   const isDrep = !!drepDetailQuery;
+
+  useEffect(() => {
+    const getBalance = async () => {
+      if (!wallet || !address) return;
+      try {
+        const utxos = await wallet.getUtxos();
+        const totalLovelace = utxos.reduce((sum, utxo) => {
+          const lovelaceAsset = utxo.output.amount.find(
+            a => a.unit === "lovelace",
+          );
+          return sum + BigInt(lovelaceAsset?.quantity || "0");
+        }, 0n);
+        setWalletBalance(Number(totalLovelace));
+      } catch {
+        setWalletBalance(0);
+      }
+    };
+    if (address && wallet) {
+      getBalance();
+    }
+  }, [address, wallet]);
 
   const handleDelegateClick = () => {
     if (!address && !walletType) {
       setShowWalletModal(true);
       return;
     }
+    setShowDelegationModal(true);
+  };
 
-    handleDelegation(
-      { type: isPool ? "pool" : "drep", ident: ident ?? "" },
-      wallet,
-    );
+  const handleDelegationConfirm = async (donationAmount: number) => {
+    setDelegationLoading(true);
+    try {
+      await handleDelegation(
+        {
+          type: isPool ? "pool" : "drep",
+          ident: ident ?? "",
+          donationAmount,
+        },
+        wallet,
+      );
+    } finally {
+      setDelegationLoading(false);
+      setShowDelegationModal(false);
+    }
+  };
+
+  const getDelegationInfo = (): DelegationInfo => {
+    if (isPool) {
+      return {
+        type: "pool",
+        ident: ident ?? "",
+        name: poolData?.pool_name?.name,
+        ticker: poolData?.pool_name?.ticker,
+        amount: walletBalance,
+      };
+    }
+    return {
+      type: "drep",
+      ident: ident ?? "",
+      name: drepName,
+      amount: walletBalance,
+    };
   };
 
   const getDelegateLabel = () => {
@@ -155,6 +226,17 @@ export const WatchlistSection = ({
       )}
       {showWalletModal && (
         <ConnectWalletModal onClose={() => setShowWalletModal(false)} />
+      )}
+      {showDelegationModal && (
+        <DelegationConfirmModal
+          info={getDelegationInfo()}
+          onConfirm={handleDelegationConfirm}
+          onCancel={() => {
+            setShowDelegationModal(false);
+            onExternalDelegationModalClose?.();
+          }}
+          isLoading={delegationLoading}
+        />
       )}
     </div>
   );
