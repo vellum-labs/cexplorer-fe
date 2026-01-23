@@ -79,12 +79,15 @@
     "unknownLabel": "Neznámý"
   },
   "votingBreakdownTooltip": {
-    "voteLabel": "Hlas:",
-    "votersLabel": "Voliči:",
-    "voterLabel": "volič",
-    "delegatorsLabel": "Delegátoři:",
-    "noConfidenceLabel": "Delegátoři bez důvěry:",
-    "autoAbstainStakeLabel": "Auto abstain stake:",
-    "manualAbstainStakeLabel": "Manuální abstain stake:"
+    "voteLabel": "Hlas",
+    "votersLabel": "Voliči",
+    "voterLabel": "Volič",
+    "delegatorsLabel": "Delegátoři",
+    "noConfidenceLabel": "Delegátoři bez důvěry",
+    "autoAbstainStakeLabel": "Auto abstain stake",
+    "manualAbstainStakeLabel": "Manuální abstain stake",
+    "stakePoolSingular": "Stake pool",
+    "stakePoolPlural": "Stake pooly",
+    "delegatorSingular": "Delegátor"
   }
 }
