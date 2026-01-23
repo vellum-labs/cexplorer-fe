@@ -198,16 +198,20 @@ export const useFetchWealthComposition = () =>
     queryFn: () => fetchWealthComposition(),
   });
 
-export const fetchAdaPots = async () => {
+export const fetchAdaPots = async (limit?: number, offset?: number) => {
   const url = "/analytics/ada_pot";
+  const options =
+    limit !== undefined || offset !== undefined
+      ? { params: { limit, offset } }
+      : undefined;
 
-  return handleFetch<AnalyticsAdaPotsResponse>(url);
+  return handleFetch<AnalyticsAdaPotsResponse>(url, undefined, options);
 };
 
-export const useFetchAdaPots = () =>
+export const useFetchAdaPots = (limit?: number, offset?: number) =>
   useQuery({
-    queryKey: ["ada-pots"],
-    queryFn: () => fetchAdaPots(),
+    queryKey: ["ada-pots", limit, offset],
+    queryFn: () => fetchAdaPots(limit, offset),
   });
 
 const fetchGroupList = async () => {
