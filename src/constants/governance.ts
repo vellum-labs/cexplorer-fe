@@ -43,6 +43,19 @@ export const ccVotingActions = [
   "InfoAction",
 ] as const;
 
+export const criticalProtocolParameters = [
+  "maxBlockBodySize",
+  "maxTxSize",
+  "maxBlockHeaderSize",
+  "maxValueSize",
+  "maxBlockExecutionUnits",
+  "txFeePerByte",
+  "txFeeFixed",
+  "minFeeRefScriptCoinsPerByte",
+  "utxoCostPerByte",
+  "govDeposit",
+] as const;
+
 export type GovStatus =
   | "ACTIVE"
   | "ENACTED"

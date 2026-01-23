@@ -30,7 +30,7 @@ export const GovernanceDetailNotVotedTab: FC<
       key: "spos",
       label: t("governance.thresholds.spoTitle"),
       content: <GovernanceDetailSposSubtab id={id} />,
-      visible: shouldSPOVote(governanceActionType, votingProcedure),
+      visible: shouldSPOVote(governanceActionType, votingProcedure, governanceAction?.description),
     },
   ];
 
