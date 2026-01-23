@@ -185,6 +185,22 @@
     "disconnectWallet": "Disconnect wallet",
     "install": "Install",
     "unsupportedBrowser": "Unsupported browser or device",
+    "delegation": {
+      "title": "Delegation",
+      "summary": "Summary of your delegation transaction:",
+      "amount": "Amount",
+      "type": "Type",
+      "name": "Name",
+      "id": "ID",
+      "addDonation": "Add donation",
+      "donationDescription": "You can add a donation directly to your transaction to support development of Cexplorer.",
+      "signTransaction": "Sign transaction",
+      "noThanks": "No, thanks",
+      "coffee": "Coffee",
+      "lunch": "Lunch",
+      "teamDinner": "Team dinner",
+      "teambuilding": "Teambuilding"
+    },
     "comparison": {
       "title": "Compare Cardano Wallets",
       "pageTitle": "Compare Cardano Wallets | Cexplorer.io",

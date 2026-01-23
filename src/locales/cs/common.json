@@ -185,6 +185,22 @@
     "disconnectWallet": "Odpojit peněženku",
     "install": "Instalovat",
     "unsupportedBrowser": "Nepodporovaný prohlížeč nebo zařízení",
+    "delegation": {
+      "title": "Delegace",
+      "summary": "Souhrn vaší delegační transakce:",
+      "amount": "Částka",
+      "type": "Typ",
+      "name": "Název",
+      "id": "ID",
+      "addDonation": "Přidat příspěvek",
+      "donationDescription": "Můžete přidat příspěvek přímo do vaší transakce a podpořit tak vývoj Cexploreru.",
+      "signTransaction": "Podepsat transakci",
+      "noThanks": "Ne, děkuji",
+      "coffee": "Káva",
+      "lunch": "Oběd",
+      "teamDinner": "Týmová večeře",
+      "teambuilding": "Teambuilding"
+    },
     "comparison": {
       "title": "Porovnání Cardano peněženek",
       "pageTitle": "Porovnání Cardano peněženek | Cexplorer.io",
