@@ -870,3 +870,13 @@ export interface MultiPoolDelegatorsOptions {
   isResponsive: boolean;
   rows: number;
 }
+
+export interface TreasuryWithdrawalsTableColumns {
+  start: boolean;
+  type: boolean;
+  gov_action_name: boolean;
+  amount: boolean;
+  status: boolean;
+  progress: boolean;
+  tx: boolean;
+}

@@ -1291,6 +1291,20 @@
       "dropped": "Zamítnuté",
       "expiredDropped": "Expirované / Zamítnuté"
     },
+    "treasury": {
+      "nclUtilization": "Využití NCL",
+      "nclTooltip": "Net Change Limit - maximální částka ADA, kterou lze vybrat z pokladny v tomto období",
+      "approvedFor": "Schváleno pro",
+      "approvedForEpochs": "Schváleno pro epochy",
+      "totalWithdrawals": "Celkem {{count}} schválených výběrů",
+      "amount": "Částka",
+      "exceededLimit": "Výběry překračují limit NCL",
+      "remainingBudget": "Zbývající rozpočet",
+      "ofNCL": "z NCL",
+      "utilized": "využito",
+      "hideNCL": "Skrýt průběh NCL",
+      "showNCL": "Zobrazit průběh NCL"
+    },
     "constitution": {
       "title": "Ústava",
       "breadcrumb": "Ústava",
@@ -1523,6 +1537,7 @@
     "governance": {
       "governanceActions": "Akce správy",
       "outcomes": "Výsledky",
+      "treasuryWithdrawals": "Výběry z pokladny",
       "timeline": "Časová osa"
     },
     "address": {
