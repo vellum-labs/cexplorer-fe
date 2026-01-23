@@ -56,8 +56,9 @@ export const WatchlistSection = ({
   useEffect(() => {
     if (externalDelegationModalOpen) {
       setShowDelegationModal(true);
+      onExternalDelegationModalClose?.();
     }
-  }, [externalDelegationModalOpen]);
+  }, [externalDelegationModalOpen, onExternalDelegationModalClose]);
 
   const drepName = drepDetailQuery?.data?.data?.given_name;
   const poolData = poolDetailQuery?.data?.data;
@@ -75,7 +76,11 @@ export const WatchlistSection = ({
           );
           return sum + BigInt(lovelaceAsset?.quantity || "0");
         }, 0n);
-        setWalletBalance(Number(totalLovelace));
+        if (totalLovelace > BigInt(Number.MAX_SAFE_INTEGER)) {
+          setWalletBalance(Number.MAX_SAFE_INTEGER);
+        } else {
+          setWalletBalance(Number(totalLovelace));
+        }
       } catch {
         setWalletBalance(0);
       }
@@ -86,7 +91,7 @@ export const WatchlistSection = ({
   }, [address, wallet]);
 
   const handleDelegateClick = () => {
-    if (!address && !walletType) {
+    if (!wallet || !address || !walletType) {
       setShowWalletModal(true);
       return;
     }

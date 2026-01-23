@@ -33,10 +33,7 @@ const PoolDetailPage = () => {
     setShowWalletModal,
     showDelegationModal,
     setShowDelegationModal,
-  } = useDelegateAction({
-    type: "pool",
-    ident: id,
-  });
+  } = useDelegateAction();
 
   const query = useFetchPoolDetail(
     id.startsWith("pool1") ? id : undefined,

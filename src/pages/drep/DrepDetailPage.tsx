@@ -31,10 +31,7 @@ export const DrepDetailPage: FC = () => {
     setShowWalletModal,
     showDelegationModal,
     setShowDelegationModal,
-  } = useDelegateAction({
-    type: "drep",
-    ident: hash,
-  });
+  } = useDelegateAction();
 
   const drepDetailQuery = useFetchDrepDetail(hash);
 

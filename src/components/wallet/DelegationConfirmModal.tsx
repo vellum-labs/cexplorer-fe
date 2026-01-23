@@ -8,8 +8,8 @@ import {
   formatNumberWithSuffix,
   cn,
 } from "@vellumlabs/cexplorer-sdk";
-import { Coffee, UtensilsCrossed, Users, PartyPopper } from "lucide-react";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { DONATION_OPTIONS } from "@/constants/wallet";
 
 export interface DelegationInfo {
   type: "pool" | "drep";
@@ -25,14 +25,6 @@ interface DelegationConfirmModalProps {
   onCancel: () => void;
   isLoading?: boolean;
 }
-
-const DONATION_OPTIONS = [
-  { value: 0, labelKey: "noThanks", icon: null },
-  { value: 10, labelKey: "coffee", icon: Coffee },
-  { value: 50, labelKey: "lunch", icon: UtensilsCrossed },
-  { value: 100, labelKey: "teamDinner", icon: Users },
-  { value: 1000, labelKey: "teambuilding", icon: PartyPopper },
-] as const;
 
 export const DelegationConfirmModal: FC<DelegationConfirmModalProps> = ({
   info,

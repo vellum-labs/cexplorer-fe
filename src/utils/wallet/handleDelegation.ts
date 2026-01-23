@@ -3,37 +3,7 @@ import { BlockfrostProvider, MeshTxBuilder } from "@meshsdk/core";
 import { callDelegationToast } from "../error/callDelegationToast";
 import { sendDelegationInfo } from "@/services/tool";
 import { donationAddress } from "@/constants/confVariables";
-
-const validateDonationNetwork = async (
-  wallet: BrowserWallet,
-): Promise<{ valid: boolean; message?: string }> => {
-  try {
-    const networkId = await wallet.getNetworkId();
-    const isMainnetWallet = networkId === 1;
-    const isMainnetAddress = donationAddress.startsWith("addr1q");
-    const isTestnetAddress = donationAddress.startsWith("addr_test");
-
-    if (!isMainnetWallet && isMainnetAddress) {
-      return {
-        valid: false,
-        message:
-          "Network mismatch: Wallet is on Testnet but donation address is for Mainnet.",
-      };
-    }
-
-    if (isMainnetWallet && (isTestnetAddress || !isMainnetAddress)) {
-      return {
-        valid: false,
-        message:
-          "Network mismatch: Wallet is on Mainnet but donation address is for Testnet.",
-      };
-    }
-  } catch (error) {
-    console.error("Network check error:", error);
-  }
-
-  return { valid: true };
-};
+import { validateDonationNetwork } from "./validateDonationNetwork";
 
 interface DelegationParams {
   type: "pool" | "drep";
@@ -135,15 +105,6 @@ export const handleDelegation = async (
         .complete();
     };
 
-    const isStakeAlreadyRegisteredError = (error: any): boolean => {
-      const errorStr = JSON.stringify(error);
-      return (
-        errorStr.includes("StakeKeyRegisteredDELEG") ||
-        errorStr.includes("already registered") ||
-        errorStr.includes("KeyDeposit")
-      );
-    };
-
     const isStakeNotRegisteredError = (error: any): boolean => {
       const errorStr = JSON.stringify(error);
       return (
@@ -156,15 +117,8 @@ export const handleDelegation = async (
     const submitWithRetry = async (
       includeRegistration: boolean,
     ): Promise<string> => {
-      console.log("Building transaction...", {
-        includeRegistration,
-        donationAmount: params.donationAmount,
-        donationAddress,
-      });
       const unsignedTx = await buildTransaction(includeRegistration);
-      console.log("Transaction built, signing...");
       const signedTx = await wallet.signTx(unsignedTx);
-      console.log("Transaction signed, submitting...");
       return wallet.submitTx(signedTx);
     };
 
@@ -173,22 +127,7 @@ export const handleDelegation = async (
       hash = await submitWithRetry(false);
     } catch (e: any) {
       if (isStakeNotRegisteredError(e)) {
-        console.log("Stake not registered, retrying with registration");
-        try {
-          hash = await submitWithRetry(true);
-        } catch (retryError: any) {
-          if (isStakeAlreadyRegisteredError(retryError)) {
-            console.log(
-              "Conflicting state: chain says both registered and not registered",
-            );
-          }
-          throw retryError;
-        }
-      } else if (isStakeAlreadyRegisteredError(e)) {
-        console.log(
-          "Stake already registered, but we didn't include registration cert",
-        );
-        throw e;
+        hash = await submitWithRetry(true);
       } else {
         throw e;
       }
@@ -206,17 +145,6 @@ export const handleDelegation = async (
     callDelegationToast({ success: true });
     return hash;
   } catch (e: any) {
-    console.error(
-      `${params.type === "pool" ? "Pool" : "DRep"} delegation error:`,
-      e,
-    );
-    console.error("Error details:", {
-      message: e?.message,
-      cause: e?.cause,
-      stack: e?.stack,
-      fullError: JSON.stringify(e, null, 2),
-    });
-
     const errorString = JSON.stringify(e);
     const errorMessage = e?.message || "";
     const errorInfo = e?.cause?.failure?.cause?.info || "";

@@ -2,13 +2,7 @@ import { useState, useEffect } from "react";
 import { useWalletStore } from "@/stores/walletStore";
 import { useAuthTokensStore } from "@/stores/authTokensStore";
 
-interface UseDelegateActionProps {
-  type: "pool" | "drep";
-  ident: string;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const useDelegateAction = (_props: UseDelegateActionProps) => {
+export const useDelegateAction = () => {
   const { address, walletType } = useWalletStore();
   const { tokens } = useAuthTokensStore();
   const [showWalletModal, setShowWalletModal] = useState(false);
