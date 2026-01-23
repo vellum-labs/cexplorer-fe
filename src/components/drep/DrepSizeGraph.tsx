@@ -68,7 +68,9 @@ export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
     const maxBubbleSize = 240;
 
     const data = (items ?? []).map((item, index) => {
-      const drepName = item.data?.given_name;
+      const drepName = typeof item.data?.given_name === 'string' && item.data.given_name.trim()
+        ? item.data.given_name
+        : null;
       const fullName = drepName || formatHashLong(item.hash?.view || null);
       const label =
         fullName && fullName.length > 12
@@ -121,7 +123,9 @@ export const DrepSizeGraph: FC<DrepSizeGraphProps> = ({ type }) => {
         formatter: params => {
           const itemIndex = params.dataIndex;
           const item = items?.[itemIndex];
-          const drepName = item?.data?.given_name;
+          const drepName = typeof item?.data?.given_name === 'string' && item.data.given_name.trim()
+            ? item.data.given_name
+            : null;
           const fullDisplayName =
             drepName || formatHashLong(item?.hash?.view || null);
 

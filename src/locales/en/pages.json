@@ -630,7 +630,7 @@
       "totalOfSuffix": "delegations"
     },
     "analytics": {
-      "poolGraph": "Pool Graph",
+      "poolGraph": "DRep Delegations",
       "stakeCompositionByRole": "Stake Composition by Role",
       "delegationChanges": "Delegation Changes",
       "adaInGovernance": "ADA in Governance",
