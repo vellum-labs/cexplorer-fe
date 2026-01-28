@@ -42,12 +42,12 @@ export const NetworkTransactionTab: FC = () => {
     .map(item => item.stat?.count_tx ?? 0)
     .reduce((a, b) => a + b, 0);
 
-  const prevEpochTPS = epochs[0]?.stat?.count_tx
-    ? (epochs[0].stat?.count_tx / epochLength).toFixed(2)
+  const prevEpochTPS = epochs[1]?.stat?.count_tx
+    ? (epochs[1].stat?.count_tx / epochLength).toFixed(2)
     : "-";
 
-  const averageTxFee = epochs[0]?.stat?.avg_tx_fee
-    ? lovelaceToAda(+epochs[0]?.stat?.avg_tx_fee)
+  const averageTxFee = epochs[1]?.stat?.avg_tx_fee
+    ? lovelaceToAda(+epochs[1]?.stat?.avg_tx_fee)
     : "-";
 
   const statCards = [
