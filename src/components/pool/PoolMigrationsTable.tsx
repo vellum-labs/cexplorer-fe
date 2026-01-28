@@ -202,24 +202,25 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
       key: "registered",
       render: item => {
         return (
-          <DateCell
-            className='text-right'
-            time={format(
-              slotToDate(
-                item.slot_update,
-                miscConst?.epoch_stat.pots.slot_no ?? 0,
-                miscConst?.epoch_stat.epoch.start_time ?? "",
-              ),
-              "yyy-MM-dd HH:mm:ss",
-            )}
-          />
+          <div className='flex justify-end'>
+            <DateCell
+              time={format(
+                slotToDate(
+                  item.slot_update,
+                  miscConst?.epoch_stat.pots.slot_no ?? 0,
+                  miscConst?.epoch_stat.epoch.start_time ?? "",
+                ),
+                "yyy-MM-dd HH:mm:ss",
+              )}
+            />
+          </div>
         );
       },
       title: (
         <p className='w-full text-right'>{t("pool.migrations.registered")}</p>
       ),
       visible: columnsVisibility.registered,
-      widthPx: 40,
+      widthPx: 50,
     },
     {
       key: "pool_delegation",
