@@ -14,7 +14,10 @@ import { addressDetailAssetTableOptions } from "@/constants/tables/addressDetail
 import type { useFetchAddressDetail } from "@/services/address";
 import type { useFetchStakeDetail } from "@/services/stake";
 import type { AddressDetailAssetTableOptions } from "@/types/tableTypes";
-import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
+import {
+  getAssetFingerprint,
+  encodeAssetName,
+} from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { useSearch } from "@tanstack/react-router";
@@ -80,41 +83,34 @@ export const AssetsTab: FC<AssetsTabProps> = ({
 
   const filteredAssets = useMemo(() => {
     const typeFiltered = assets.filter(item => {
-      if (activeAsset === "tokens") {
-        return item.quantity > 1;
+      switch (activeAsset) {
+        case "tokens":
+          return item.quantity > 1;
+        case "nfts":
+          return item.quantity === 1;
+        default:
+          return true;
       }
-      if (activeAsset === "nfts") {
-        return item.quantity === 1;
-      }
-      return true;
     });
 
     const searchFiltered = debouncedSearch
       ? (() => {
           const searchLower = debouncedSearch.toLowerCase();
           return typeFiltered.filter(item => {
-            if (
-              item.registry?.ticker &&
-              typeof item.registry.ticker === "string" &&
-              item.registry.ticker.toLowerCase().includes(searchLower)
-            ) {
-              return true;
-            }
-            if (
-              item.registry?.name &&
-              typeof item.registry.name === "string" &&
-              item.registry.name.toLowerCase().includes(searchLower)
-            ) {
-              return true;
-            }
-            if (item.name.toLowerCase().includes(searchLower)) {
-              return true;
-            }
+            const ticker = item.registry?.ticker;
+            const registryName = item.registry?.name;
             const fingerprint = getAssetFingerprint(item.name);
-            if (fingerprint.toLowerCase().includes(searchLower)) {
-              return true;
-            }
-            return false;
+            const encodedName = encodeAssetName(item.name);
+
+            return (
+              (typeof ticker === "string" &&
+                ticker.toLowerCase().includes(searchLower)) ||
+              (typeof registryName === "string" &&
+                registryName.toLowerCase().includes(searchLower)) ||
+              item.name.toLowerCase().includes(searchLower) ||
+              fingerprint.toLowerCase().includes(searchLower) ||
+              encodedName.toLowerCase().includes(searchLower)
+            );
           });
         })()
       : typeFiltered;
