@@ -71,7 +71,7 @@ const PoolDelegatorsTable = ({
       },
       title: <p>{t("common:labels.date")}</p>,
       visible: columnsVisibility.date,
-      widthPx: 20,
+      widthPx: 50,
     },
     {
       key: "active_in",
@@ -86,7 +86,7 @@ const PoolDelegatorsTable = ({
         </p>
       ),
       visible: columnsVisibility.active_in,
-      widthPx: 45,
+      widthPx: 30,
     },
     {
       key: "address",
@@ -121,7 +121,7 @@ const PoolDelegatorsTable = ({
       },
       title: t("common:labels.address"),
       visible: columnsVisibility.address,
-      widthPx: 90,
+      widthPx: 70,
     },
     {
       key: "amount",
@@ -268,7 +268,7 @@ const PoolDelegatorsTable = ({
       },
       title: <p>{t("pools.detailPage.delegatorsTable.poolDelegation")}</p>,
       visible: columnsVisibility.pool_delegation,
-      widthPx: 180,
+      widthPx: 160,
     },
   ];
 
