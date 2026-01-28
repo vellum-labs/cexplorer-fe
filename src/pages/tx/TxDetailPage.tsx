@@ -8,7 +8,7 @@ import DelegationsTabItem from "@/components/tx/tabs/DelegationsTabItem";
 import { GovernanceTabItem } from "@/components/tx/tabs/GovernanceTabItem";
 import MetadataTabItem from "@/components/tx/tabs/MetadataTabItem";
 import MintTabItem from "@/components/tx/tabs/MintTabItem";
-import OverviewTabItem from "@/components/tx/tabs/OverviewTabItem";
+import { OverviewTabItem } from "@/components/tx/tabs/OverviewTabItem";
 import ReferenceInputsTabItem from "@/components/tx/tabs/ReferenceInputsTabItem";
 import { ScriptsTabItem } from "@/components/tx/tabs/ScriptsTabItem";
 import WithdrawalsTabItem from "@/components/tx/tabs/WithdrawalsTabItem";

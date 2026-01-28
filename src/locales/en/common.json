@@ -2158,6 +2158,14 @@
       "value": "Value",
       "index": "Index"
     },
+    "overview": {
+      "flow": "Flow",
+      "classic": "Classic",
+      "from": "From",
+      "to": "To",
+      "value": "Value",
+      "noData": "No data available"
+    },
     "unlockInteractivity": "Unlock interactivity",
     "lockInteractivity": "Lock interactivity",
     "searchInputsOutputs": "Search in inputs/outputs...",
