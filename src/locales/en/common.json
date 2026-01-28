@@ -871,6 +871,7 @@
     "totalOutput": "Total Output",
     "fee": "$t(shared:labels.fee)",
     "size": "$t(shared:labels.size)",
+    "visualization": "Visualization",
     "table": {
       "date": "$t(shared:labels.date)",
       "height": "Height",

@@ -157,7 +157,7 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
 
   return (
     <>
-      <div className='flex w-full items-center justify-between'>
+      <div className='mb-2 flex w-full items-center justify-between'>
         <h1 className='text-text-lg font-semibold'>
           {t("blocks.transactions")}
         </h1>
