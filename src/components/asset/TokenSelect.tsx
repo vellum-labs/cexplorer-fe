@@ -56,34 +56,35 @@ export const TokenSelectCombobox = memo(
     const debouncedSearch = useDebounce(search);
 
     const filteredItems = useMemo(() => {
+      const calculateValue = (item: AddressAsset) => {
+        const decimals = item?.registry?.decimals ?? 0;
+        const quantity = item?.quantity ?? 0;
+        const price = item?.market?.price ?? 0;
+
+        if (!price) return 0;
+
+        const adjustedQuantity = quantity / Math.pow(10, decimals);
+        return adjustedQuantity * price;
+      };
+
+      const sortByValue = (a: AddressAsset, b: AddressAsset) =>
+        calculateValue(b) - calculateValue(a);
+
+      if (!debouncedSearch) return [...items].sort(sortByValue);
+
+      const searchLower = debouncedSearch.toLowerCase();
       return items
-        .filter(
-          item =>
-            item.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-            getAssetFingerprint(item.name).includes(
-              debouncedSearch.toLowerCase(),
-            ) ||
-            encodeAssetName(item.name)
-              .toLowerCase()
-              .includes(debouncedSearch.toLowerCase()),
-        )
-        .sort((a, b) => {
-          const calculateValue = (item: AddressAsset) => {
-            const decimals = item?.registry?.decimals ?? 0;
-            const quantity = item?.quantity ?? 0;
-            const price = item?.market?.price ?? 0;
-
-            if (!price) return 0;
-
-            const adjustedQuantity = quantity / Math.pow(10, decimals);
-            return adjustedQuantity * price;
-          };
-
-          const valueA = calculateValue(a);
-          const valueB = calculateValue(b);
-
-          return valueB - valueA;
-        });
+        .filter(item => {
+          if (item.name.toLowerCase().includes(searchLower)) {
+            return true;
+          }
+          const encoded = encodeAssetName(item.name);
+          if (encoded.toLowerCase().includes(searchLower)) {
+            return true;
+          }
+          return getAssetFingerprint(item.name).includes(searchLower);
+        })
+        .sort(sortByValue);
     }, [debouncedSearch, items]);
 
     const filteredItemsLength = filteredItems.length;
