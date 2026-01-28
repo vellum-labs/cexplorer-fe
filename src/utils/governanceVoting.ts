@@ -19,7 +19,11 @@ export const hasCriticalParameters = (description?: {
 
   const parameterChanges = description.contents[1];
 
-  if (typeof parameterChanges === "object" && parameterChanges !== null) {
+  if (
+    typeof parameterChanges === "object" &&
+    parameterChanges !== null &&
+    !Array.isArray(parameterChanges)
+  ) {
     const changedParams = Object.keys(parameterChanges);
     return changedParams.some(param =>
       criticalProtocolParameters.includes(param as any),
@@ -31,7 +35,6 @@ export const hasCriticalParameters = (description?: {
 
 export const shouldSPOVote = (
   type: string,
-  votingProcedure?: any[],
   description?: { tag?: string; contents?: any[] },
 ): boolean => {
   if (spoVotingActions.includes(type as any)) {
