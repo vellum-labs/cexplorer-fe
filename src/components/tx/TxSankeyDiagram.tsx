@@ -8,17 +8,13 @@ import { useGraphColors } from "@/hooks/useGraphColors";
 import { useNavigate } from "@tanstack/react-router";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useADADisplay } from "@/hooks/useADADisplay";
+import { truncateAddress } from "@/utils/address/truncateAddress";
 
 interface TxSankeyDiagramProps {
   inputs: TxInfo[];
   outputs: TxInfo[];
   className?: string;
 }
-
-const truncateAddress = (address: string): string => {
-  if (address.length <= 20) return address;
-  return `${address.slice(0, 10)}...${address.slice(-8)}`;
-};
 
 export const TxSankeyDiagram: FC<TxSankeyDiagramProps> = ({
   inputs,
