@@ -34,11 +34,8 @@ export const GroupHistoryGraph: FC<GroupHistoryGraphProps> = ({ items }) => {
     useGraphColors();
   const { formatLovelace } = useADADisplay();
 
-  // Aggregate hist data from all pool items by epoch
   const aggregatedData = useMemo(() => {
     const epochMap = new Map<number, { stake: number; delegators: number }>();
-
-    // Filter only pool items and aggregate their hist data
     const poolItems = items?.filter(item => item.type === "pool") ?? [];
 
     poolItems.forEach(item => {
@@ -46,8 +43,6 @@ export const GroupHistoryGraph: FC<GroupHistoryGraphProps> = ({ items }) => {
       if (!hist) return;
 
       hist.forEach((histItem, index) => {
-        // Calculate epoch number based on current epoch and index
-        // hist[0] is the oldest, hist[99] is the most recent
         const currentEpoch = miscConst?.epoch?.no ?? 0;
         const epochNo = currentEpoch - (hist.length - 1 - index);
 
@@ -59,7 +54,6 @@ export const GroupHistoryGraph: FC<GroupHistoryGraphProps> = ({ items }) => {
       });
     });
 
-    // Convert to sorted array
     return Array.from(epochMap.entries())
       .sort((a, b) => a[0] - b[0])
       .map(([epoch, data]) => ({
