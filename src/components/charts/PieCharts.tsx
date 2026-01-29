@@ -114,7 +114,7 @@ export const PieCharts = <T,>({
             const dataItem = mainItems.find(item => item.name === params.name);
 
             if (dataItem?.isOthers && dataItem.groupedItems) {
-              const percentage = ((params.value / total) * 100).toFixed(1);
+              const percentage = total > 0 ? ((params.value / total) * 100).toFixed(1) : "0.0";
               let tooltipContent = `<strong>${tooltipTranslations.others} (${dataItem.groupedItems.length} ${tooltipTranslations.items})</strong><br/>`;
               tooltipContent += `${params.marker}${tooltipTranslations.total}: ${chart.needsAdaFormatting ? formatNumber(Math.round(params.value / 1000000)) + " ₳" : formatNumber(params.value)} (${percentage}%)<br/><br/>`;
 
@@ -125,7 +125,7 @@ export const PieCharts = <T,>({
               );
 
               itemsToShow.forEach(item => {
-                const itemPercentage = ((item.value / total) * 100).toFixed(2);
+                const itemPercentage = total > 0 ? ((item.value / total) * 100).toFixed(2) : "0.00";
                 const formattedValue = chart.needsAdaFormatting
                   ? formatNumber(Math.round(item.value / 1000000)) + " ₳"
                   : formatNumber(item.value);
@@ -139,7 +139,7 @@ export const PieCharts = <T,>({
               return tooltipContent;
             }
 
-            const percentage = ((params.value / total) * 100).toFixed(1);
+            const percentage = total > 0 ? ((params.value / total) * 100).toFixed(1) : "0.0";
             if (chart.needsAdaFormatting) {
               const adaValue = formatNumber(Math.round(params.value / 1000000));
               return `${params.name}<br/>${params.marker}${adaValue} ₳ (${percentage}%)`;

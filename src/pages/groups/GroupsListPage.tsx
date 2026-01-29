@@ -20,10 +20,10 @@ export const GroupsListPage = () => {
   const [{ debouncedTableSearch, tableSearch }, setTableSearch] =
     useSearchTable();
 
-  const [sortColumn, setSortColumn] = useState<string | undefined>(undefined);
+  const [sortColumn, setSortColumn] = useState<string | undefined>("pool_stake");
   const [sortDirection, setSortDirection] = useState<
     "asc" | "desc" | undefined
-  >(undefined);
+  >("desc");
   const query = useFetchGroupsList();
   const { data: basicData } = useFetchMiscBasic();
   const miscConst = useMiscConst(basicData?.data?.version?.const);

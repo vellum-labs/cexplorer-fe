@@ -11,6 +11,7 @@ import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import { GroupDetailCharts } from "@/components/groups/GroupDetailCharts";
+import { GroupHistoryGraph } from "@/components/groups/GroupHistoryGraph";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { GroupDetailDRepCharts } from "@/components/groups/GroupDetailDRepCharts";
 import {
@@ -644,7 +645,10 @@ export const GroupDetailPage = () => {
           ) : (
             <>
               {filter === "pool" && (
-                <GroupDetailCharts items={filteredItems ?? []} />
+                <>
+                  <GroupDetailCharts items={filteredItems ?? []} />
+                  <GroupHistoryGraph items={filteredItems ?? []} />
+                </>
               )}
               {filter === "drep" && (
                 <GroupDetailDRepCharts items={filteredItems ?? []} />
