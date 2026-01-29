@@ -26,23 +26,23 @@ export const NetworkStorageTab: FC = () => {
 
   const milestoneData = milestoneQuery.data?.data ?? [];
   const sortedMilestoneData = [...milestoneData].sort(
-    (a, b) => ((b as any)?.epoch_no ?? b?.no) - ((a as any)?.epoch_no ?? a?.no),
+    (a, b) => b.epoch_no - a.epoch_no,
   );
 
   const currStorIncrease =
     ((sortedMilestoneData[0]?.stat?.count_block ?? 0) *
-      ((sortedMilestoneData[0]?.stat?.avg_block_size ?? 0) as number)) /
+      +(sortedMilestoneData[0]?.stat?.avg_block_size ?? 0)) /
     bytesPerMb;
 
   const prevStorIncrease =
     ((sortedMilestoneData[1]?.stat?.count_block ?? 0) *
-      ((sortedMilestoneData[1]?.stat?.avg_block_size ?? 0) as number)) /
+      +(sortedMilestoneData[1]?.stat?.avg_block_size ?? 0)) /
     bytesPerMb;
 
   const totalNetworkStorage =
     milestoneData.reduce((a, b) => {
-      const countBlk = (b?.stat?.count_block ?? 0) as number;
-      const avgBlkSize = (b?.stat?.avg_block_size ?? 0) as number;
+      const countBlk = b?.stat?.count_block ?? 0;
+      const avgBlkSize = +(b?.stat?.avg_block_size ?? 0);
 
       return a + countBlk * avgBlkSize;
     }, 0) / bytesPerMb;

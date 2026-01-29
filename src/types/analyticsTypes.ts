@@ -106,6 +106,27 @@ export interface EpochAnalyticsResponseData {
   } | null;
 }
 
+export interface MilestoneAnalyticsResponseData {
+  epoch_no: number;
+  stat: {
+    avg_block_size: string;
+    avg_tx_fee: string;
+    block_version: BlockVersion[];
+    count_block: number;
+    count_pool: number;
+    count_pool_relay_uniq: number;
+    count_tx: number;
+    count_tx_out: number;
+    count_tx_out_address: number;
+    count_tx_out_address_not_yesterday: number;
+    count_tx_out_stake: number;
+    count_tx_out_stake_not_yesterday: number;
+    max_block_tx_count: number;
+    sum_fee: number;
+    tx_composition: TxComposition;
+  } | null;
+}
+
 export interface AnalyticsRateResponseData {
   date: string;
   stat: {
@@ -201,6 +222,11 @@ export interface AnalyticsTopAddresses {
 export type EpochAnalyticsResponse = ResponseCore<{
   count: string;
   data: EpochAnalyticsResponseData[];
+}>;
+
+export type MilestoneAnalyticsResponse = ResponseCore<{
+  count: string;
+  data: MilestoneAnalyticsResponseData[];
 }>;
 
 export type AnalyticsRateResponse = ResponseCore<{
