@@ -58,6 +58,12 @@ interface PoolBlockVersion {
   version: number;
 }
 
+interface PoolDistr {
+  sum: number;
+  count_addr_uniq: number;
+  count_pool_uniq: number;
+}
+
 interface TxComposition {
   datum: number;
   delegation: number;
@@ -124,6 +130,10 @@ export interface MilestoneAnalyticsResponseData {
     max_block_tx_count: number;
     sum_fee: number;
     tx_composition: TxComposition;
+    pool_distr?: PoolDistr;
+    block_producers?: number;
+    circulating_supply?: number;
+    pool_block_version?: PoolBlockVersion[];
   } | null;
 }
 

@@ -70,6 +70,23 @@ export const useFetchMilestoneAnalytics = () =>
     },
   });
 
+export const fetchPoolMilestoneAnalytics = async () => {
+  const url =
+    "/analytics/milestone?display=pool_distr,block_producers,circulating_supply,pool_block_version";
+
+  return handleFetch<MilestoneAnalyticsResponse>(url);
+};
+
+export const useFetchPoolMilestoneAnalytics = () =>
+  useQuery({
+    queryKey: ["analytics-pool-milestone"],
+    queryFn: async () => {
+      const { data } = await fetchPoolMilestoneAnalytics();
+
+      return data;
+    },
+  });
+
 export const fetchAnalyticsRate = async () => {
   const url =
     "/analytics/rate?display=sum_fee,count_tx,avg_tx_fee,block_version,tx_composition,max_block_tx_count,count_tx_out,count_block,avg_block_size,max_block_size,count_tx_out_address,count_tx_out_stake,count_tx_out_address_not_yesterday,count_tx_out_stake_not_yesterday,count_pool_relay_uniq,count_pool";
