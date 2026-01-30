@@ -7,7 +7,10 @@ import { NetworkStorageGraph } from "../graphs/NetworkStorageGraph";
 
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useMiscConst } from "@/hooks/useMiscConst";
-import { useFetchEpochAnalytics } from "@/services/analytics";
+import {
+  useFetchEpochAnalytics,
+  useFetchMilestoneAnalytics,
+} from "@/services/analytics";
 import { useFetchMiscBasic } from "@/services/misc";
 
 import { bytesPerMb } from "@/constants/memorySizes";
@@ -16,23 +19,28 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 export const NetworkStorageTab: FC = () => {
   const { t } = useAppTranslation("common");
   const epochQuery = useFetchEpochAnalytics();
+  const milestoneQuery = useFetchMilestoneAnalytics();
 
-  const data = epochQuery.data?.data.slice(0, epochQuery.data?.data.length - 4);
   const { data: basicData } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(basicData?.data?.version?.const);
 
+  const milestoneData = milestoneQuery.data?.data ?? [];
+  const sortedMilestoneData = [...milestoneData].sort(
+    (a, b) => ((b as any)?.epoch_no ?? b?.no) - ((a as any)?.epoch_no ?? a?.no),
+  );
+
   const currStorIncrease =
-    (((data ?? [])[0]?.stat?.count_block ?? 0) *
-      (((data ?? [])[0]?.stat?.avg_block_size ?? 0) as number)) /
+    ((sortedMilestoneData[0]?.stat?.count_block ?? 0) *
+      ((sortedMilestoneData[0]?.stat?.avg_block_size ?? 0) as number)) /
     bytesPerMb;
 
   const prevStorIncrease =
-    (((data ?? [])[1]?.stat?.count_block ?? 0) *
-      (((data ?? [])[1]?.stat?.avg_block_size ?? 0) as number)) /
+    ((sortedMilestoneData[1]?.stat?.count_block ?? 0) *
+      ((sortedMilestoneData[1]?.stat?.avg_block_size ?? 0) as number)) /
     bytesPerMb;
 
   const totalNetworkStorage =
-    (data ?? []).reduce((a, b) => {
+    milestoneData.reduce((a, b) => {
       const countBlk = (b?.stat?.count_block ?? 0) as number;
       const avgBlkSize = (b?.stat?.avg_block_size ?? 0) as number;
 
@@ -78,7 +86,7 @@ export const NetworkStorageTab: FC = () => {
   return (
     <section className='flex w-full max-w-desktop flex-col gap-1.5'>
       <AnalyticsStatList
-        isLoading={epochQuery.isLoading}
+        isLoading={epochQuery.isLoading || milestoneQuery.isLoading}
         statCards={statCards}
       />
 
