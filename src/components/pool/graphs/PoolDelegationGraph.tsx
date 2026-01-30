@@ -8,16 +8,16 @@ import { useGraphColors } from "@/hooks/useGraphColors";
 import { useADADisplay } from "@/hooks/useADADisplay";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
-import { useFetchStakeDrepsNotSpo } from "@/services/pools";
+import { useFetchPoolMilestoneAnalytics } from "@/services/analytics";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 import { format } from "date-fns";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 
-export const StakeToSposNotDrepsGraph: FC = () => {
+export const PoolDelegationGraph: FC = () => {
   const { t } = useAppTranslation("pages");
-  const query = useFetchStakeDrepsNotSpo();
+  const query = useFetchPoolMilestoneAnalytics();
   const data = query.data?.data ?? [];
 
   const miscConst = useMiscConst(
@@ -29,20 +29,26 @@ export const StakeToSposNotDrepsGraph: FC = () => {
   const { formatLovelace } = useADADisplay();
 
   const epochs = data.map(item => item.epoch_no);
-  const stake = data.map(item => item.stake);
-  const count = data.map(item => item.count);
-  const delegators = data.map(item => item.delegator);
+  const adaDelegated = data.map(item => item.stat?.pool_distr?.sum ?? 0);
+  const circulatingPercent = data.map(item => {
+    const sum = item.stat?.pool_distr?.sum ?? 0;
+    const circulating = item.stat?.circulating_supply ?? 1;
+    return (sum / circulating) * 100;
+  });
+  const delegatedWallets = data.map(
+    item => item.stat?.pool_distr?.count_addr_uniq ?? 0,
+  );
 
-  const stakeLabel = t("pools.analytics.legend.stake");
-  const countLabel = t("pools.analytics.legend.count");
-  const delegatorsLabel = t("pools.analytics.legend.delegators");
+  const adaDelegatedLabel = t("pools.analytics.legend.adaDelegated");
+  const circulatingPercentLabel = t("pools.analytics.legend.circulatingPercent");
+  const delegatedWalletsLabel = t("pools.analytics.legend.delegatedWallets");
   const dateLabel = t("pools.analytics.tooltip.date");
   const epochLabel = t("pools.analytics.tooltip.epoch");
 
   const option = {
     legend: {
       type: "scroll",
-      data: [stakeLabel, countLabel, delegatorsLabel],
+      data: [adaDelegatedLabel, circulatingPercentLabel, delegatedWalletsLabel],
       textStyle: { color: textColor },
       pageIconColor: textColor,
       pageIconInactiveColor: inactivePageIconColor,
@@ -50,13 +56,9 @@ export const StakeToSposNotDrepsGraph: FC = () => {
     },
     tooltip: {
       trigger: "axis",
-      confine: true,
       backgroundColor: bgColor,
       textStyle: { color: textColor },
-      axisPointer: {
-        type: "line",
-        lineStyle: { color: "#35c2f5" },
-      },
+      confine: true,
       formatter: function (params) {
         const { startTime, endTime } = calculateEpochTimeByNumber(
           +params[0]?.axisValue,
@@ -64,20 +66,20 @@ export const StakeToSposNotDrepsGraph: FC = () => {
           miscConst?.epoch.start_time ?? "",
         );
 
-        const header = `${dateLabel}: ${format(startTime, "dd.MM.yy")} - ${format(
-          endTime,
-          "dd.MM.yy",
-        )} (${epochLabel}: ${params[0]?.axisValue})<hr style="margin: 4px 0;" />`;
+        const header = `${dateLabel}: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${epochLabel}: ${params[0]?.axisValue})<hr style="margin: 4px 0;" />`;
 
         const lines = params.map(item => {
-          const isStake = item.seriesName.includes("Stake");
-          const cleanName = item.seriesName.replace(" (₳)", "");
-
-          const value = isStake
-            ? formatLovelace(item.data)
-            : formatNumber(item.data);
-
-          return `<p>${item.marker} ${cleanName}: ${value}</p>`;
+          const isAda = item.seriesName.includes("ADA");
+          const isPercent = item.seriesName.includes("%");
+          let value: string;
+          if (isAda) {
+            value = formatLovelace(item.data);
+          } else if (isPercent) {
+            value = `${item.data.toFixed(2)}%`;
+          } else {
+            value = formatNumber(item.data);
+          }
+          return `<p>${item.marker} ${item.seriesName}: ${value}</p>`;
         });
 
         return header + lines.join("");
@@ -126,28 +128,26 @@ export const StakeToSposNotDrepsGraph: FC = () => {
     ],
     series: [
       {
-        type: "line",
-        name: stakeLabel,
-        data: stake,
-        yAxisIndex: 1,
-        symbol: "none",
-        showSymbol: false,
+        type: "bar",
+        name: adaDelegatedLabel,
+        data: adaDelegated,
+        yAxisIndex: 0,
         color: "#f39c12",
       },
       {
         type: "line",
-        name: countLabel,
-        data: count,
-        yAxisIndex: 2,
+        name: circulatingPercentLabel,
+        data: circulatingPercent,
+        yAxisIndex: 1,
         symbol: "none",
         showSymbol: false,
         color: "#35c2f5",
       },
       {
         type: "line",
-        name: delegatorsLabel,
-        data: delegators,
-        yAxisIndex: 0,
+        name: delegatedWalletsLabel,
+        data: delegatedWallets,
+        yAxisIndex: 2,
         symbol: "none",
         showSymbol: false,
         color: "#2ecc71",
@@ -157,8 +157,8 @@ export const StakeToSposNotDrepsGraph: FC = () => {
 
   return (
     <AnalyticsGraph
-      title={t("pools.analytics.stakeToSposNotDreps.title")}
-      description={t("pools.analytics.stakeToSposNotDreps.description")}
+      title={t("pools.analytics.delegation.title")}
+      description={t("pools.analytics.delegation.description")}
       className='border-none'
     >
       <div className='relative w-full'>

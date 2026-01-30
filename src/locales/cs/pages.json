@@ -304,6 +304,7 @@
     "analytics": {
       "newStakers": "Noví stakeři",
       "stakeComposition": "Složení stake",
+      "basicStats": "Základní statistiky",
       "firstTimeRegistrations": {
         "title": "První registrace stake",
         "description": "Počet nových stakingových peněženek a celkový stake registrovaný v každé epoše."
@@ -316,11 +317,31 @@
         "title": "Stake delegovaný na entity, které jsou SPO i DRep",
         "description": "Stake, počet DRep a počet delegátorů delegovaných na entity, které jsou SPO i DRep"
       },
+      "delegation": {
+        "title": "ADA delegované na stake pooly",
+        "description": "Celkové delegované ADA, procento z oběžné zásoby a počet delegátorů za epochu."
+      },
+      "poolCount": {
+        "title": "Počet stake poolů",
+        "description": "Počet registrovaných a bloky produkujících stake poolů za epochu."
+      },
+      "averageStakes": {
+        "title": "Průměrné stake",
+        "description": "Průměrný stake na pool, na producenta bloků a na delegátora."
+      },
       "legend": {
         "stake": "Stake (₳)",
         "count": "Počet",
         "delegators": "Delegátoři",
-        "spoDrepCount": "Počet SPO+DRep"
+        "spoDrepCount": "Počet SPO+DRep",
+        "adaDelegated": "Delegované ADA",
+        "circulatingPercent": "% z oběžné zásoby",
+        "delegatedWallets": "Delegované peněženky",
+        "registeredPools": "Registrované pooly",
+        "blockProducingPools": "Bloky produkující pooly",
+        "avgPoolStake": "Prům. stake poolu",
+        "avgBlockProducerStake": "Prům. stake producenta bloků",
+        "avgDelegation": "Prům. delegace"
       },
       "tooltip": {
         "date": "Datum",
