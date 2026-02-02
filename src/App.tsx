@@ -33,7 +33,7 @@ function App() {
   const userQuery = useFetchUserInfo();
   const token = useAuthToken();
   const { data: apiLabelsData } = useUserLabels(token || "");
-  const { mergeApiLabels } = useAddressLabelStore();
+  const { mergeApiLabels, getLabelsForWallet, setLabels } = useAddressLabelStore();
   const userAddress = userQuery?.data?.data?.address;
 
   useEffect(() => {
@@ -98,8 +98,10 @@ function App() {
         .filter(l => l.ident && l.label);
 
       mergeApiLabels(apiLabels, userAddress || null);
+      const mergedLabels = getLabelsForWallet(userAddress || null);
+      setLabels(mergedLabels);
     }
-  }, [token, apiLabelsData, userAddress, mergeApiLabels]);
+  }, [token, apiLabelsData, userAddress, mergeApiLabels, getLabelsForWallet, setLabels]);
 
   return (
     <>
