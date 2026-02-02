@@ -1,20 +1,20 @@
 {
   "header": {
     "featuredLabel": "Doporučené:",
-    "adLabel": "Reklama"
+    "adLabel": "Ad"
   },
   "globalSearch": {
     "recentlySearched": "Nedávno hledané",
     "noRecentSearches": "Nemáte žádná nedávná hledání",
     "homepagePlaceholder": "Hledat podle Adresy / Tx hash / Block hash / $Handle / Pool name...",
-    "placeholder": "Hledat bloky, transakce, ID aktiv...",
+    "placeholder": "Hledat bloky, transakce, tokeny...",
     "notFoundLabel": "Nenalezeno",
     "categories": {
       "all": "Vše",
       "tx": "Tx",
       "block": "Blok",
       "pool": "Pool",
-      "asset": "Aktivum",
+      "asset": "Token",
       "policy": "Policy",
       "address": "Adresa",
       "stake": "Stake",
@@ -22,7 +22,7 @@
       "user": "Uživatel",
       "article": "Článek",
       "page": "Stránka",
-      "gov": "Správa",
+      "gov": "Governance",
       "drep": "DRep"
     }
   },
@@ -40,7 +40,7 @@
     "csvLabel": "CSV",
     "csvDescription": "Skvělé pro snadné zobrazení v tabulkových nástrojích.",
     "jsonLabel": "JSON",
-    "jsonDescription": "Nejlepší pro strukturovaná data a integraci aplikací.",
+    "jsonDescription": "Nejlepší pro strukturovaná data.",
     "cancelLabel": "Zrušit",
     "exportLabel": "Exportovat"
   },
@@ -54,15 +54,15 @@
     "visitLabel": "Navštívit"
   },
   "displayVote": {
-    "placeholder": "Hledat ID akce správy...",
-    "emptyStateMessage": "Vypadá to, že vám chybí ID akce správy. Zadejte ho pro nalezení výsledků!",
+    "placeholder": "Hledat dle ID governance akce...",
+    "emptyStateMessage": "Zdá se, že chybí ID governance akce. Zadejte ho pro nalezení výsledků!",
     "noResultsMessage": "Žádné výsledky. Zkontrolujte vstup a zkuste to znovu.",
     "typeLabel": "Typ",
     "titleLabel": "Název",
     "idLabel": "ID",
     "identLabel": "Ident",
     "cancelLabel": "Zrušit",
-    "addActionLabel": "Přidat akci správy"
+    "addActionLabel": "Přidat governance akci"
   },
   "featureModal": {
     "title": "Funkce Cexplorer PRO",
