@@ -206,7 +206,7 @@ export const AssetDetailPage: FC = () => {
               width={35}
             />
             <div className='pointer-events-none absolute left-0 top-full z-50 mt-2 hidden opacity-0 transition-opacity duration-200 group-hover:block group-hover:opacity-100'>
-              <div className='flex h-[300px] w-[300px] items-center justify-center overflow-hidden rounded-m bg-cardBg shadow-2xl ring-1 ring-border'>
+              <div className='h-[300px] w-[300px] overflow-hidden rounded-m bg-cardBg shadow-2xl ring-1 ring-border'>
                 <img
                   src={generateImageUrl(
                     assetSupply && assetSupply === 1
@@ -217,7 +217,7 @@ export const AssetDetailPage: FC = () => {
                     assetSupply && assetSupply === 1 ? "nft" : "token",
                   )}
                   alt='Asset preview'
-                  className='h-auto max-h-[300px] w-auto max-w-[300px] object-contain'
+                  className='h-full w-full object-cover'
                 />
               </div>
             </div>
