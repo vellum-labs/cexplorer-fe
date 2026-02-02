@@ -10,7 +10,11 @@ import WalletConfigModal from "./components/wallet/WalletConfigModal";
 import { enabledWalletConnector, network } from "./constants/confVariables";
 import { useConnectWallet } from "./hooks/useConnectWallet";
 import { useAuthToken } from "./hooks/useAuthToken";
-import { useFetchUserInfo, useUserLabels } from "./services/user";
+import {
+  useFetchUserInfo,
+  useUserLabels,
+  updateUserLabels,
+} from "./services/user";
 import { useAddressLabelStore } from "./stores/addressLabelStore";
 import { useCustomLabelModalState } from "./stores/states/customLabelModalState";
 import { useWalletConfigModalState } from "./stores/states/walletConfigModalState";
@@ -33,7 +37,8 @@ function App() {
   const userQuery = useFetchUserInfo();
   const token = useAuthToken();
   const { data: apiLabelsData } = useUserLabels(token || "");
-  const { mergeApiLabels, getLabelsForWallet, setLabels } = useAddressLabelStore();
+  const { mergeApiLabels, getLabelsForWallet, setLabels } =
+    useAddressLabelStore();
   const userAddress = userQuery?.data?.data?.address;
 
   useEffect(() => {
@@ -100,8 +105,22 @@ function App() {
       mergeApiLabels(apiLabels, userAddress || null);
       const mergedLabels = getLabelsForWallet(userAddress || null);
       setLabels(mergedLabels);
+
+      if (mergedLabels.length > 0) {
+        updateUserLabels(
+          token,
+          mergedLabels.map(l => ({ ident: l.ident, label: l.label })),
+        ).catch(err => console.error("Failed to sync labels to API:", err));
+      }
     }
-  }, [token, apiLabelsData, userAddress, mergeApiLabels, getLabelsForWallet, setLabels]);
+  }, [
+    token,
+    apiLabelsData,
+    userAddress,
+    mergeApiLabels,
+    getLabelsForWallet,
+    setLabels,
+  ]);
 
   return (
     <>
