@@ -756,7 +756,7 @@
     "title": "Pots",
     "breadcrumb": "Pots",
     "graphEpochs": "Graph epochs:",
-    "totalEpochs": "Total of {{count}} epochs",
+    "totalEpochs": "Total of {{total}} epochs",
     "searchPlaceholder": "Search your results...",
     "sortOptions": {
       "all": "All",
