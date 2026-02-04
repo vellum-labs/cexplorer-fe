@@ -140,7 +140,8 @@ export const handleDelegation = async (
           : delegationId
         : `drep_${delegationId}`;
 
-    sendDelegationInfo(hash, trackingId);
+    const donationLovelace = params.donationAmount ? params.donationAmount * 1_000_000 : 0;
+    sendDelegationInfo(hash, trackingId, "delegation", donationLovelace);
 
     callDelegationToast({ success: true });
     return hash;

@@ -100,7 +100,7 @@ export const executeTreasuryDonation = async ({
       const signedTx = await wallet.signTx(unsignedTx);
       const txHash = await wallet.submitTx(signedTx);
 
-      sendDelegationInfo(txHash, "lovelace_cexplorer", "donate");
+      sendDelegationInfo(txHash, "lovelace_cexplorer", "donate", (toCexp + toTreasury).toString());
       return txHash;
     }
   }
@@ -126,7 +126,7 @@ export const executeTreasuryDonation = async ({
     .filter(Boolean)
     .join(",");
 
-  sendDelegationInfo(txHash, campaigns, "donate");
+  sendDelegationInfo(txHash, campaigns, "donate", toCexp.toString());
 
   return txHash;
 };
