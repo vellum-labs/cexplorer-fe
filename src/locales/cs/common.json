@@ -74,7 +74,7 @@
     "key": "$t(shared:labels.key)",
     "purpose": "$t(shared:labels.purpose)",
     "scriptHash": "Hash skriptu",
-    "unitSteps": "Jednotkové kroky"
+    "unitSteps": "Unit steps"
   },
   "phrases": {
     "totalOf": "Celkem",
@@ -299,7 +299,7 @@
     "index": "Index",
     "minUtxoAda": "Min UTXO ADA",
     "noDatum": "Bez datumu",
-    "asset": "Aktivum",
+    "asset": "Token",
     "pnl24h": "PnL (24h)",
     "pnl7d": "PnL (7d)",
     "percentPortfolio": "% portfolio"
@@ -373,7 +373,7 @@
     "epoch_no": "$t(shared:labels.epoch)",
     "slot_no": "$t(shared:labels.slot)",
     "tx_count": "Transakce",
-    "minted_by": "Raženo",
+    "minted_by": "Vytvořeno",
     "epoch_slot_no": "Slot epochy",
     "vrf_key": "VRF klíč",
     "protocol": "$t(shared:labels.protocol)",
@@ -431,7 +431,7 @@
     "memory": "$t(shared:labels.memory)",
     "steps": "$t(shared:labels.steps)",
     "memory_used": "Použitá paměť",
-    "cpu_steps": "CPU kroky",
+    "cpu_steps": "CPU steps",
     "purpose": "$t(shared:labels.purpose)",
     "investor_amount": "Částka investora",
     "voter": "$t(shared:labels.voter)",
@@ -449,9 +449,9 @@
     "fingerprint": "$t(shared:labels.fingerprint)",
     "action": "Akce",
     "slot_leader": "Leader slotu",
-    "asset_minted": "Vyražené aktivum",
+    "asset_minted": "Vytvoření tokenu",
     "mint_quantity": "Množství ražby",
-    "unit_steps": "Jednotkové kroky",
+    "unit_steps": "Unite steps",
     "token": "Token",
     "change_24h": "Změna 24h",
     "volume": "Objem",
@@ -661,21 +661,21 @@
     "searchPlaceholder": "Hledat burzu"
   },
   "treasuryProjection": {
-    "title": "Projekce pokladny",
-    "breadcrumb": "Projekce pokladny",
-    "cardTitle": "Projekce pokladny a rezerv",
-    "cardDescription": "Upravte parametry pro projekci zůstatku pokladny a rezerv na příštích {{years}} let.",
+    "title": "Projekce treasury",
+    "breadcrumb": "Projekce treasury",
+    "cardTitle": "Projekce treasury a rezerv",
+    "cardDescription": "Upravte parametry pro projekci zůstatku treasury a rezerv na příštích {{years}} let.",
     "reset": "Resetovat",
     "resetTitle": "Obnovit výchozí hodnoty",
     "avgFeesPerEpoch": "Průměrné poplatky za epochu",
     "current": "Aktuální:",
-    "annualWithdrawal": "Roční výběr z pokladny",
+    "annualWithdrawal": "Roční výběr z treasury",
     "yearProjection": "{{years}}letá projekce",
-    "treasuryIncome": "Příjem pokladny: {{tau}}% z (emise rezerv + poplatky) • Emise rezerv: {{rho}}% za epochu",
+    "treasuryIncome": "Příjem do treasury: {{tau}}% z (emise rezerv + poplatky) • Emise rezerv: {{rho}}% za epochu",
     "loadingChart": "Načítání dat grafu...",
     "noData": "Žádná data k dispozici",
     "chart": {
-      "treasury": "Pokladna",
+      "treasury": "Treasury",
       "reserves": "Rezervy",
       "epoch": "Epocha"
     }
@@ -738,25 +738,25 @@
     }
   },
   "datum": {
-    "title": "Inspektor Datum",
+    "title": "Inspektor Datumů",
     "breadcrumbs": {
       "developers": "Vývojáři",
       "datum": "Datum"
     },
     "hash": "Hash",
-    "convertor": "Konvertor Datum",
+    "convertor": "Konvertor Datumů",
     "input": "Vstup",
     "output": "Výstup",
     "transactionHash": "Hash transakce",
-    "datumHash": "Hash Datum",
-    "transactionWithDatum": "Transakce s tímto datum",
+    "datumHash": "Hash Datumů",
+    "transactionWithDatum": "Transakce obsahující tento datum",
     "otherDatums": "Další datumy ze stejných transakcí"
   },
   "pots": {
-    "title": "Pokladny",
-    "breadcrumb": "Pokladny",
+    "title": "Pots",
+    "breadcrumb": "Pots",
     "graphEpochs": "Epochy v grafu:",
-    "totalEpochs": "Celkem {{count}} epoch",
+    "totalEpochs": "Celkem {{total}} epoch",
     "searchPlaceholder": "Hledat ve výsledcích...",
     "sortOptions": {
       "all": "Vše",
@@ -788,7 +788,7 @@
   },
   "asset": {
     "overview": "$t(shared:labels.overview)",
-    "assetBurned": "Toto aktivum bylo spáleno",
+    "assetBurned": "Tento token byl spálen",
     "blockchain": "$t(shared:labels.blockchain)",
     "tokenRegistry": "Registr tokenů",
     "browseTokens": "Procházet tokeny",
@@ -797,13 +797,13 @@
     "userGeneratedContent": "Obsah generovaný uživateli",
     "userGeneratedContentDescription": "Následující obsah je generován uživateli a není moderován týmem Cexplorer.",
     "type": "$t(shared:labels.type)",
-    "asset": "Aktivum",
-    "policyId": "ID politiky",
-    "assetMinted": "Aktivum vyraženo",
-    "mintQuantity": "Množství ražby",
-    "mintingPolicy": "Politika ražby",
-    "policyIsOpen": "Politika je otevřená",
-    "policyIsLocked": "Politika je uzamčena",
+    "asset": "Token",
+    "policyId": "Policy ID",
+    "assetMinted": "Vytvoření tokenu",
+    "mintQuantity": "Vytvořené množství",
+    "mintingPolicy": "Pravdidla vytváření",
+    "policyIsOpen": "Pravidla jsou otevřená",
+    "policyIsLocked": "Pravidla jsou uzamčena",
     "rule": "Pravidlo",
     "subRule": "Podpravidlo",
     "allRulesMustBeMet": "Všechna pravidla musí být splněna:",
@@ -839,25 +839,26 @@
     "oneDay": "1 den",
     "adaLiquidity": "Likvidita ADA",
     "adaOutput": "ADA výstup",
-    "assetVolume": "Objem aktiva",
+    "assetVolume": "Objem tokenu",
     "interactingPaymentCredentials": "Interagující platební credentials",
     "interactingAccounts": "Interagující účty",
     "interactingAddresses": "Interagující adresy",
     "smartTransactions": "Smart transakce",
     "name": "Název",
     "encodedName": "Kódovaný název",
-    "assetName": "Název aktiva",
+    "assetName": "Název tokenu",
     "uniqueWallets": "Unikátní peněženky",
-    "assetId": "ID aktiva",
-    "firstMint": "První ražba",
-    "lastMint": "Poslední ražba",
-    "minted": "Vyraženo",
+    "dailyVolume": "Denní objem",
+    "assetId": "ID tokenu",
+    "firstMint": "První vytvoření",
+    "lastMint": "Poslední vytvoření",
+    "minted": "Vytvořeno",
     "mintCount": "Počet ražeb",
     "ticker": "$t(shared:labels.ticker)",
     "description": "$t(shared:labels.description)",
     "statsTab": "$t(shared:labels.stats)",
     "transactionsTab": "Transakce",
-    "mintsTab": "Ražby",
+    "mintsTab": "Vytvoření",
     "timelockTab": "$t(shared:labels.timelock)",
     "metadataTab": "Metadata",
     "ownersTab": "Vlastníci",
@@ -980,7 +981,7 @@
       "membersRetiredPlural": "{{count}} členů odstoupilo",
       "members": "Členové",
       "governanceVote": "Hlasování governance",
-      "constitutionalCommittee": "Ústavní výbor",
+      "constitutionalCommittee": "Ústavní výbor (CC)",
       "votes": "Hlasy",
       "allVotes": "Všechny hlasy",
       "hotKeys": "Horké klíče",
@@ -990,7 +991,7 @@
       "drep": "$t(shared:labels.drep)",
       "votingPower": "$t(shared:votingPower)",
       "activity": "$t(shared:labels.activity)",
-      "activityTooltip": "Hlasovací aktivita v návrzích na výběr z pokladny"
+      "activityTooltip": "Hlasovací aktivita v návrzích na výběr z treasury"
     },
     "voteList": {
       "governance": "$t(shared:labels.governance)",
@@ -1004,7 +1005,7 @@
       "block": "$t(shared:labels.block)",
       "tx": "$t(shared:labels.tx)",
       "invalidMetadata": "Neplatná metadata",
-      "constitutionalCommittee": "Ústavní výbor",
+      "constitutionalCommittee": "Ústavní výbor (CC)",
       "yes": "$t(shared:status.yes)",
       "no": "$t(shared:status.no)",
       "abstain": "Zdržel se"
@@ -1036,7 +1037,7 @@
       "count": "$t(shared:labels.count)"
     },
     "thresholds": {
-      "ccTitle": "Ústavní výbor",
+      "ccTitle": "Ústavní výbor (CC)",
       "ccTooltip": "Minimální počet členů CC potřebný ke schválení tohoto návrhu.",
       "ccNotVoting": "Členové CC na tuto akci nehlasují",
       "drepTitle": "DRepové",
@@ -1049,7 +1050,7 @@
       "spoTooltip": "Teoretický počet SPO s dostatečným stake ke schválení tohoto návrhu.",
       "spoNotVoting": "SPO na tuto akci nehlasují",
       "otherSPOs": "Ostatní SPO",
-      "liveStake": "Živý stake:",
+      "liveStake": "Aktuální stake:",
       "totalTitle": "Celkem",
       "totalTooltipParameter": "Teoretický minimální počet entit (CC, DRepové, SPO) potřebný ke schválení této akce governance. Pokud je parametr bezpečnostní, jsou zahrnuty i hlasy SPO (oranžově).",
       "totalTooltip": "Teoretický minimální počet entit (CC, DRepové, SPO) potřebný ke schválení této akce governance.",
@@ -1061,25 +1062,25 @@
       "other": "Ostatní"
     },
     "powerThresholds": {
-      "title": "Prahy moci",
-      "breadcrumb": "Prahy moci",
+      "title": "Distribuce moci",
+      "breadcrumb": "Distribuce moci",
       "delegationDistribution": "Distribuce delegací",
       "delegationDistributionDesc": "Množství ADA delegované na stake pooly a DRepy.",
       "spoAttack": "Počet SPO schopných provést 51% útok",
       "percentDelegatedToSPOs": "Procento oběžného ADA delegovaného na SPO",
       "percentDelegatedToDReps": "Procento oběžného ADA delegovaného na DRepy",
-      "governanceThresholds": "Prahy správy",
-      "governanceThresholdsDesc": "Počet minimálních hlasů potřebných ke schválení akcí správy podle typu (zahrnuje všechny DRepy).",
+      "governanceThresholds": "Distribuce moci v governance",
+      "governanceThresholdsDesc": "Počet minimálních hlasů potřebných ke schválení akcí governance podle typu (zahrnuje všechny DRepy).",
       "minVotesNoConfidence": "Minimální počet hlasů pro hlasování o nedůvěře",
       "minVotesNewCCNormal": "Minimální počet hlasů pro volbu nového ústavního výboru (normální stav)",
       "minVotesNewCCNoConfidence": "Minimální počet hlasů pro volbu nového ústavního výboru (stav nedůvěry)",
       "minVotesUpdateConstitution": "Minimální počet hlasů pro aktualizaci ústavy Cardano",
       "minVotesHardFork": "Minimální počet hlasů pro zahájení hard forku",
-      "minVotesTreasuryWithdrawal": "Minimální počet hlasů pro výběr prostředků z pokladny Cardano",
+      "minVotesTreasuryWithdrawal": "Minimální počet hlasů pro výběr prostředků z Cardano treasury",
       "minVotesEconomicParams": "Minimální počet hlasů pro změnu ekonomických parametrů",
       "minVotesTechnicalParams": "Minimální počet hlasů pro změnu technických parametrů sítě",
       "minVotesNetworkParams": "Minimální počet hlasů pro změnu parametrů sítě",
-      "minVotesGovParams": "Minimální počet hlasů pro změnu parametrů správy"
+      "minVotesGovParams": "Minimální počet hlasů pro změnu parametrů governance"
     },
     "delegation": {
       "drepDelegation": "Delegace DRep",
@@ -1102,7 +1103,7 @@
       "spos": "SPO"
     },
     "overview": {
-      "governanceAction": "Akce governance",
+      "governanceAction": "Governance akce",
       "blockchainRecords": "Záznamy blockchainu",
       "title": "$t(shared:labels.title)",
       "actionType": "Typ akce",
@@ -1113,7 +1114,7 @@
       "stakeAddress": "Stake adresa",
       "deposit": "Depozit",
       "anchor": "Kotva",
-      "constitutionalCommittee": "Ústavní výbor",
+      "constitutionalCommittee": "Ústavní výbor (CC)",
       "thresholdTooltip": "Minimální procento členů Ústavního výboru potřebné ke schválení této akce governance",
       "drepsNotVoting": "DRepové na tuto akci governance nehlasují",
       "sposNotVoting": "SPO na tuto akci governance nehlasují",
@@ -1144,10 +1145,10 @@
       "statusChange": "Změna stavu",
       "description": "$t(shared:labels.description)",
       "tx": "Tx",
-      "submitted": "Akce governance odeslána do blockchainu.",
-      "active": "Období hlasování začalo. Orgány governance nyní mohou hlasovat.",
-      "ratified": "Návrh prošel kontrolou hlasů na hranici epochy. Bude uveden v platnost v další epoše.",
-      "enacted": "Změny návrhu aplikovány on-chain na hranici epochy.",
+      "submitted": "Governance akce byla odeslána na blockchain.",
+      "active": "Období hlasování začalo. Governance účastníci nyní mohou hlasovat.",
+      "ratified": "Návrh prošel kontrolou hlasů na přechodu epochy. Bude uveden v platnost v další epoše.",
+      "enacted": "Změny návrhu aplikovány on-chain na přechodu epochy.",
       "expired": "Období hlasování skončilo bez dosažení požadovaného prahu.",
       "dropped": "Návrh stažen před kontrolou hlasů."
     },
@@ -1186,7 +1187,7 @@
       "newConstitution": "Nová ústava",
       "hardforkInitiation": "Iniciace hardforku",
       "parameterChange": "Změna parametru",
-      "treasuryWithdrawals": "Výběry z pokladny",
+      "treasuryWithdrawals": "Výběry z treasury",
       "infoAction": "Informační akce",
       "noConfidenceMotion": "Návrh na nedůvěru",
       "statusAll": "Vše",
@@ -1226,13 +1227,13 @@
       "searchPlaceholder": "Hledat ve výsledcích..."
     },
     "vote": {
-      "viewAnchorInfo": "Zobrazit informace o kotvě",
-      "noAnchorInfo": "Žádné informace o kotvě",
+      "viewAnchorInfo": "Zobrazit odůvodnění hlasování.",
+      "noAnchorInfo": "Žádné odůvodnění hlasování",
       "openVoteDetail": "Otevřít detail hlasu",
       "metadata": "$t(shared:labels.metadata)",
       "voteLabel": "Hlas:",
       "showSummary": "Zobrazit souhrn",
-      "showFullMetadata": "Zobrazit plná metadata",
+      "showFullMetadata": "Zobrazit metadata",
       "lateVoteWarning": "Tento hlas byl odeslán po uzavření hlasování"
     },
     "voteDetail": {
@@ -1246,9 +1247,9 @@
       "expiredEpoch": "Epocha expirace",
       "epochLabel": "$t(shared:labels.epoch)",
       "votingStart": "Začátek hlasování",
-      "votingDeadline": "Termín hlasování",
+      "votingDeadline": "Deadline hlasování",
       "role": "Role",
-      "constitutionalCommittee": "Ústavní výbor",
+      "constitutionalCommittee": "Ústavní výbor (CC)",
       "voterName": "Jméno voliče",
       "voterId": "ID voliče",
       "votePower": "Síla hlasu",
@@ -1261,7 +1262,7 @@
       "title": "Detail hlasu",
       "voteTab": "Hlas {{number}}",
       "noVotesTitle": "Žádné hlasy nenalezeny",
-      "noVotesDescription": "Tato transakce neobsahuje žádné hlasy governance.",
+      "noVotesDescription": "Tato transakce neobsahuje žádné governance hlasování.",
       "hashLabel": "Hash:"
     },
     "card": {
@@ -1290,6 +1291,20 @@
       "dropped": "Zamítnuté",
       "expiredDropped": "Expirované / Zamítnuté"
     },
+    "treasury": {
+      "nclUtilization": "Využití NCL",
+      "nclTooltip": "Net Change Limit - maximální částka ADA, kterou lze vybrat z treasury v tomto období",
+      "approvedFor": "Schváleno pro",
+      "approvedForEpochs": "Schváleno pro epochy",
+      "totalWithdrawals": "Celkem {{count}} schválených výběrů",
+      "amount": "Částka",
+      "exceededLimit": "Výběry překračují limit NCL",
+      "remainingBudget": "Zbývající rozpočet",
+      "ofNCL": "z NCL",
+      "utilized": "využito",
+      "hideNCL": "Skrýt průběh NCL",
+      "showNCL": "Zobrazit průběh NCL"
+    },
     "constitution": {
       "title": "Ústava",
       "breadcrumb": "Ústava",
@@ -1317,7 +1332,7 @@
       "validator": "Validátor handle"
     },
     "validator": {
-      "searchPlaceholder": "Hledat podle $handle nebo ID assetu...",
+      "searchPlaceholder": "Hledat podle $handle nebo ID tokenu...",
       "handleValid": "Handle je platný.",
       "handleInvalid": "Neplatný handle.",
       "handleNotFound": "Handle \"{{handle}}\" nebyl nalezen",
@@ -1420,12 +1435,12 @@
       "sortByAnimalSize": "Seřadit podle velikosti zvířete"
     },
     "geekConfig": {
-      "preferences": "Předvolby",
-      "preferencesDescription": "Vyberte předvolby pro nejlepší zážitek na Cexplorer.",
+      "preferences": "Preference",
+      "preferencesDescription": "Vyberte preference pro nejlepší zážitek na Cexploreru.",
       "displayHandles": "Zobrazit $Handles",
-      "displayHandlesDescription": "Zobrazit čitelné $Handles místo plných adres peněženek, kde jsou k dispozici.",
-      "displayAdaTooltips": "Zobrazit ADA v nástrojích",
-      "displayAdaTooltipsDescription": "Zobrazit částky v nástrojových tipech v ADA místo lovelace",
+      "displayHandlesDescription": "Zobrazit $Handles místo adres peněženek, kde jsou k dispozici.",
+      "displayAdaTooltips": "Zobrazit ADA v tooltipech",
+      "displayAdaTooltipsDescription": "Zobrazit částky v tooltipech v ADA místo lovelace",
       "adaLovelaceNote": "(1 ADA = 1 000 000 lovelace).",
       "sortUtxos": "Řadit UTxO",
       "sortUtxosDescription": "Řadit UTxO zobrazené v detailech transakce podle indexu nebo hodnoty.",
@@ -1451,8 +1466,8 @@
       "epochs": "$t(shared:labels.epochs)",
       "pools": "$t(shared:labels.pools)",
       "dreps": "DRepy",
-      "assets": "Aktiva",
-      "governanceActions": "Akce správy",
+      "assets": "Tokeny",
+      "governanceActions": "Governance akce",
       "openCloseHelp": "Otevřít/Zavřít nápovědu zkratek",
       "focusSearch": "Zaměřit vyhledávání",
       "refresh": "$t(shared:actions.refresh)",
@@ -1520,12 +1535,13 @@
       "averagePools": "Průměrné pooly"
     },
     "governance": {
-      "governanceActions": "Akce správy",
+      "governanceActions": "Governance akce",
       "outcomes": "Výsledky",
+      "treasuryWithdrawals": "Výběry z treasury",
       "timeline": "Časová osa"
     },
     "address": {
-      "assets": "Aktiva",
+      "assets": "Tokeny",
       "transactions": "Transakce",
       "utxos": "UTXO",
       "trading": "$t(shared:labels.trading)",
@@ -1533,7 +1549,7 @@
       "rewards": "Odměny"
     },
     "policy": {
-      "assets": "Aktiva",
+      "assets": "Tokeny",
       "marketActivity": "Tržní aktivita",
       "owners": "$t(shared:labels.owners)",
       "mint": "Ražba",
@@ -1557,10 +1573,10 @@
     "priceGraph": "Graf ceny",
     "epoch": "$t(shared:labels.epoch)",
     "epochList": "Seznam epoch",
-    "liveStake": "Živý stake",
+    "liveStake": "Aktuální stake",
     "stakingAnalytics": "Analytika stakingu",
-    "cardanoNativeAssets": "Nativní aktiva Cardano",
-    "assets": "Aktiva",
+    "cardanoNativeAssets": "Nativní Cardano tokeny",
+    "assets": "Tokeny",
     "addWidget": "Přidat widget",
     "automaticallyAlign": "Automaticky zarovnat",
     "resetToDefault": "Obnovit výchozí",
@@ -1575,9 +1591,9 @@
     "usage1h": "1h využití:",
     "usage24h": "24h využití:",
     "usage7d": "7d využití:",
-    "circulatingSupply": "Obíhající zásoba",
+    "circulatingSupply": "Mince v oběhu",
     "activeStake": "Aktivní stake",
-    "detailBlock": "Blok detailů:",
+    "detailBlock": "Detail bloku:",
     "removeFilters": "Odstranit filtry",
     "detailInformation": "Detailní informace",
     "typeHashIdAddress": "Zadejte hash,id,adresu...",
@@ -1594,7 +1610,7 @@
         "Latest blocks": "Nejnovější bloky",
         "Drep detail": "Detail DRepu",
         "Asset list": "Seznam aktiv",
-        "Asset detail": "Detail aktiva",
+        "Asset detail": "Detail tokenu",
         "Epoch list": "Seznam epoch",
         "Epochs": "Epochy",
         "Pool detail": "Detail poolu"
@@ -1604,14 +1620,14 @@
         "All dreps": "Všechny DRepy",
         "All pools": "Všechny pooly",
         "All TXs": "Všechny TX",
-        "All assets": "Všechna aktiva",
+        "All assets": "Všechny tokeny",
         "All epochs": "Všechny epochy"
       },
       "categories": {
         "Transactions": "Transakce",
         "Blocks": "Bloky",
         "Drep": "DRep",
-        "Asset": "Aktivum",
+        "Asset": "Token",
         "Epoch": "Epocha",
         "Pool": "Pool"
       }
@@ -1644,14 +1660,14 @@
     "partiallyCompleted": "Částečně dokončeno",
     "pending": "$t(shared:status.pending)",
     "directSwap": "Přímý swap",
-    "aggregatorSwap": "Agregátorový swap"
+    "aggregatorSwap": "Agregovaný swap"
   },
   "policy": {
     "resultNotFound": "Výsledek nenalezen.",
-    "searchByAsset": "Hledat podle aktiva...",
+    "searchByAsset": "Hledat podle tokenu...",
     "pleaseConnectWallet": "Prosím připojte svou peněženku",
-    "loadingPolicies": "Načítání politik...",
-    "errorLoadingPolicies": "Chyba při načítání politik",
+    "loadingPolicies": "Načítání pravidel...",
+    "errorLoadingPolicies": "Chyba při načítání pravidel",
     "totalOwners": "Celkem {{count}} vlastníků",
     "overview": "$t(shared:labels.overview)",
     "blockchain": "$t(shared:labels.blockchain)",
@@ -1662,8 +1678,8 @@
     "supply": "$t(shared:labels.supply)",
     "owners": "$t(shared:labels.owners)",
     "volume": "$t(shared:labels.volume)",
-    "policyId": "ID politiky",
-    "policyLock": "Zámek politiky",
+    "policyId": "Policy ID",
+    "policyLock": "Zamčení policy ID",
     "firstMint": "První mint",
     "lastMint": "Poslední mint",
     "lastEpochActivity": "Poslední aktivita v epoše",
@@ -1682,7 +1698,7 @@
     "share": "$t(shared:labels.share)",
     "address": "$t(shared:labels.address)",
     "asset": "$t(shared:labels.asset)",
-    "assetMinted": "Aktivum mintováno",
+    "assetMinted": "Vytvoření tokenu",
     "mintQuantity": "Množství mintu",
     "graph": {
       "totalCount": "Celkový počet",
@@ -1713,7 +1729,7 @@
       "documentation": "Dokumentace",
       "newProject": "Nový projekt",
       "noProjects": "Zatím nemáte žádné projekty.",
-      "startNewProject": "Začněte nový projekt pro vygenerování API klíčů, sledování využití a dat.",
+      "startNewProject": "Začněte nový projekt pro vygenerování API klíče, sledování využití a dat.",
       "plan": "Plán",
       "planDetails": "Podrobnosti o vašem API plánu",
       "projectName": "Název projektu",
@@ -1744,7 +1760,7 @@
       "unlockLabels": "Odemkněte až 5000 štítků s",
       "addLabel": "Přidat štítek",
       "freeLimitTooltip": "S bezplatnou verzí Cexplorer můžete přidat pouze 10 štítků",
-      "proLimitTooltip": "S PRO verzí Cexplorer můžete přidat pouze 100 štítků za NFT",
+      "proLimitTooltip": "S PRO verzí Cexplorer můžete přidat 100 štítků za každé NFT",
       "address": "Adresa",
       "label": "Štítek",
       "labelsCreated": "{{count}}/{{max}} štítků vytvořeno",
@@ -1755,11 +1771,11 @@
     "pro": {
       "connectToAccess": "Připojte peněženku pro přístup k funkcím Cexplorer PRO a správě NFT.",
       "promotion": "Propagace na Cexplorer",
-      "promotionDescription": "Prezentujte Stake Pooly, DRepy, policy ID a aktiva napříč Cexplorer.",
+      "promotionDescription": "Prezentujte Stake Pooly, DRepy, policy ID a tokeny  Cexplorer.",
       "displayFrequency": "Frekvence zobrazení se zvyšuje s každým delegovaným NFT.",
       "getProNft": "Získat Cexplorer PRO NFT",
       "noNftsOwned": "Zatím nevlastníte žádné Cexplorer PRO NFT.",
-      "getOneToUnlock": "Získejte jedno pro odemknutí PRO funkcí jako boosting, API, hlasování o správě a další.",
+      "getOneToUnlock": "Získejte NFT pro odemknutí PRO funkcí jako boosting, API, hlasování o Cexploreru a další.",
       "removeFromWatchlist": "Přejete si odstranit tuto položku ze sledovaných?",
       "remove": "$t(shared:actions.remove)",
       "fillFields": "Prosím vyplňte pole:",
@@ -1775,8 +1791,8 @@
       "modifyTooltip": "NFT můžete upravit pouze jednou za 24 hodin. Odemkne se {{time}}",
       "searchNft": "Hledat NFT",
       "invalidPoolId": "Neplatné pool ID.",
-      "invalidAssetFingerprint": "Neplatný fingerprint aktiva.",
-      "invalidDrepId": "Neplatné dRep ID.",
+      "invalidAssetFingerprint": "Neplatný fingerprint tokenu.",
+      "invalidDrepId": "Neplatné DRep ID.",
       "invalidIdent": "Neplatný identifikátor",
       "nftModifiedSuccess": "NFT bylo úspěšně upraveno",
       "nftModifiedFailed": "Úprava NFT selhala"
@@ -1784,11 +1800,11 @@
     "settings": {
       "title": "Nastavení profilu",
       "description": "Zde aktualizujte svůj profilový obrázek a další údaje.",
-      "connectToAccess": "Připojte peněženku pro přístup a správu nastavení profilu.",
+      "connectToAccess": "Připojte peněženku pro přístup a nastavení profilu.",
       "publicProfile": "Veřejný profil",
       "publicProfileDescription": "Pokud je zapnuto, uživatelé uvidí informace o vašem profilu na detailu adresy peněženky.",
       "username": "Uživatelské jméno",
-      "usernameDescription": "Toto se zobrazí na adrese vaší peněženky pouze pokud je profil veřejný.",
+      "usernameDescription": "Zobrazí se na adrese vaší peněženky pouze pokud je profil veřejný.",
       "noUsername": "Nemáte uživatelské jméno",
       "profilePicture": "Profilový obrázek",
       "profilePictureDescription": "Aktualizujte svůj profilový obrázek pro snadnější rozpoznání.",
@@ -1879,7 +1895,7 @@
       "output": "$t(shared:labels.output)",
       "fee": "$t(shared:labels.fee)",
       "memory": "$t(shared:labels.memory)",
-      "cpuSteps": "CPU kroky",
+      "cpuSteps": "CPU steps",
       "purpose": "$t(shared:labels.purpose)",
       "category": "$t(shared:labels.category)",
       "users": "$t(shared:labels.users)",
@@ -1920,9 +1936,9 @@
         "liveStake": "Aktuální stake",
         "activeStake": "Aktivní stake",
         "accounts": "Účty",
-        "assets": "Aktiva",
-        "noAssets": "Žádná aktiva",
-        "assetsCount": "{{count}} aktiv"
+        "assets": "Tokeny",
+        "noAssets": "Žádné tokeny",
+        "assetsCount": "{{count}} tokenů"
       }
     }
   },
@@ -1976,7 +1992,7 @@
       "liveStake": "Aktuální stake",
       "activeStake": "Aktivní stake",
       "activePledge": "Aktivní pledge",
-      "lifetimeRoa": "Celoživotní ROA",
+      "lifetimeRoa": "Celkové ROA",
       "marginFee": "Marže",
       "fixedFee": "Fixní poplatek"
     },
@@ -2094,7 +2110,7 @@
     "uniqueTraders": "Unikátní obchodníci",
     "lowLiquidity": "Nízká likvidita (< 1000 ADA)",
     "volumeLabel": "Objem:",
-    "searchPlaceholder": "Hledat podle názvu aktiva...",
+    "searchPlaceholder": "Hledat podle názvu tokenu...",
     "timeframes": {
       "24hours": "24 hodin",
       "1week": "1 týden",
@@ -2130,7 +2146,7 @@
       "ttl": "TTL",
       "deposit": "Depozit",
       "confirmations": "Potvrzení",
-      "treasuryDonation": "Dar do pokladny",
+      "treasuryDonation": "Dar do treasury",
       "keyMessage": "Klíčová zpráva"
     },
     "transactionOverview": "Přehled transakce",
@@ -2190,7 +2206,7 @@
       "votingPower": "$t(shared:votingPower)",
       "date": "$t(shared:labels.date)",
       "asset": "$t(shared:labels.asset)",
-      "policyId": "ID politiky",
+      "policyId": "Policy ID",
       "txHash": "Hash transakce",
       "quantity": "$t(shared:labels.quantity)",
       "amount": "$t(shared:labels.amount)",
@@ -2258,7 +2274,7 @@
       },
       "cexplorerInstances": {
         "label": "Instance Cexplorer",
-        "description": "Přístup k blockchain exploreru pro Cardano mainnet i testnet prostředí."
+        "description": "Blockchain explorer pro Cardano mainnet i testnet prostředí."
       },
       "github": {
         "label": "Github",
@@ -2279,14 +2295,14 @@
     "title": "O nás",
     "breadcrumb": "O nás",
     "metaTitle": "O nás | Cexplorer.io",
-    "description": "Cexplorer.io, nezávislý a nejkomplexnější Cardano blockchain explorer, poskytuje uživatelům a vývojářům komplexní nástroje pro prohlížení blockchainu, staking a analýzu. Slouží jako klíčový zdroj pro Cardano ekosystém od Incentivized Testnet.",
+    "description": "Cexplorer.io, nezávislý a nejkomplexnější Cardano blockchain explorer, poskytuje uživatelům a vývojářům komplexní nástroje pro prohlížení blockchainu, staking a analýzu. Slouží jako klíčový zdroj pro Cardano ekosystém od ITN.",
     "sectionTitle": "Cexplorer",
     "sectionSubtitle": "Podporujeme Cardano ekosystém nástroji a daty.",
     "learnMore": "Zjistit více",
     "services": {
       "explore": {
         "title": "Prozkoumejte vše na Cardano",
-        "description": "Cexplorer vám umožňuje prohlížet vše, co se děje na Cardano blockchainu. Od bloků a transakcí po epochy, aktiva a smart kontrakty - veškerá aktivita sítě je transparentní a snadno prozkoumatelná."
+        "description": "Cexplorer vám umožňuje prohlížet vše, co se děje na Cardano blockchainu. Od bloků a transakcí po epochy, tokeny a smart kontrakty - veškerá aktivita sítě je transparentní a snadno prozkoumatelná."
       },
       "analytics": {
         "title": "Bohaté analytiky a přehledy",
@@ -2306,7 +2322,7 @@
       },
       "community": {
         "title": "Postaveno pro komunitu",
-        "description": "Sloužíme jako klíčový zdroj pro Cardano ekosystém od Incentivized Testnet. Budujeme a udržujeme Cexplorer a aktivně podporujeme decentralizaci jako DRep a SPO."
+        "description": "Sloužíme jako klíčový zdroj pro Cardano ekosystém od ITN. Budujeme a udržujeme Cexplorer a aktivně podporujeme decentralizaci jako DRep a SPO."
       }
     }
   },
@@ -2327,11 +2343,11 @@
       "storage": "Úložiště",
       "transactions": "Transakce",
       "hardfork": "Hardfork",
-      "pots": "Pokladny",
-      "treasuryProjection": "Projekce pokladny",
+      "pots": "Pots",
+      "treasuryProjection": "Projekce treasury",
       "walletActivity": "Aktivita peněženek",
-      "topAddresses": "Nejlepší adresy",
-      "topStakingAccounts": "Nejlepší staking účty",
+      "topAddresses": "Největší adresy",
+      "topStakingAccounts": "Největší staking účty",
       "wealthComposition": "Složení bohatství",
       "genesisAddresses": "Genesis adresy",
       "poolIssues": "Problémy poolů",
@@ -2342,8 +2358,8 @@
     }
   },
   "governanceCrossroads": {
-    "title": "Správa",
-    "breadcrumb": "Správa",
+    "title": "Governance",
+    "breadcrumb": "Governance",
     "sections": {
       "dreps": {
         "label": "Delegovaní zástupci (DReps)",
@@ -2352,28 +2368,28 @@
         "analytics": "Analytiky"
       },
       "votes": {
-        "label": "Hlasy správy",
+        "label": "Hlasování v governance",
         "description": "Procházejte všechny hlasy od DRepů, SPO a Ústavního výboru.",
         "button": "Zobrazit hlasy"
       },
       "actions": {
-        "label": "Akce správy",
-        "description": "Zobrazit všechny akce správy, jejich detaily a výsledky.",
-        "button": "Zobrazit akce správy"
+        "label": "Governance akce",
+        "description": "Zobrazit všechny governance akce, jejich detaily a výsledky.",
+        "button": "Zobrazit governance akce"
       },
       "cc": {
         "label": "Ústavní výbor (CC)",
         "description": "Zjistěte, kdo je ve výboru, jejich role a jak hlasovali.",
-        "button": "Zobrazit Ústavní výbor"
+        "button": "Zobrazit Ústavní výbor (CC)"
       },
       "powerThresholds": {
         "label": "Prahy hlasování",
-        "description": "Podívejte se na rozložení hlasovací síly a správy Cardano.",
+        "description": "Podívejte se na rozložení hlasovací síly v Cardanu.",
         "button": "Zobrazit prahy hlasování"
       },
       "constitution": {
         "label": "Ústava",
-        "description": "Zobrazit současnou a minulé ústavy Cardano a jejich historii správy.",
+        "description": "Zobrazit současnou a minulé ústavy Cardana.",
         "button": "Zobrazit Ústavu"
       },
       "certificates": {
@@ -2400,7 +2416,7 @@
         "noCombine": "Nekombinujte logo Cexplorer s jinými obrázky nebo logy bez předchozího souhlasu.",
         "noEndorsement": "Nepoužívejte název nebo logo Cexplorer způsobem, který naznačuje podporu, příslušnost nebo partnerství bez povolení.",
         "noUnlawful": "Nepoužívejte značku Cexplorer ve spojení s jakýmikoli nezákonnými aktivitami, propagačními akcemi nebo produkty.",
-        "dataReference": "Pokud používáte data z Cexploreru, nezapomeňte je jasně uvést s přímým odkazem na",
+        "dataReference": "Pokud používáte data z Cexploreru, nezapomeňte je jasně uvést s přímým odkazem",
         "dataProvidedBy": "Data poskytuje Cexplorer",
         "source": "Zdroj: Cexplorer"
       },
@@ -2433,7 +2449,7 @@
     },
     "twitter": {
       "title": "X (dříve Twitter)",
-      "description": "Zůstaňte v kontaktu s nejnovějšími aktualizacemi kolem Cexploreru a Cardano.",
+      "description": "Zůstaňte v kontaktu s nejnovějšími aktualizacemi kolem Cexploreru a Cardana.",
       "button": "Připojit se"
     },
     "discord": {
@@ -2458,7 +2474,7 @@
     "donate": {
       "title": "Darovat",
       "description": "Podpořte naši misi a udržujte Cexplorer v chodu",
-      "button": "Stránka darování"
+      "button": "Podpořit Cexplorer"
     }
   },
   "adsPage": {
@@ -2481,11 +2497,11 @@
     },
     "pro": {
       "title": "Propagujte s Cexplorer",
-      "description": "Držením Cexplorer PRO NFT můžete propagovat aktiva, policy ID, stake pooly nebo DRepy a zároveň využívat výhody a exkluzivní funkce.",
+      "description": "Držením Cexplorer PRO NFT můžete propagovat tokeny, policy ID, stake pooly nebo DRepy a zároveň využívat výhody a exkluzivní funkce.",
       "features": {
         "exposure": {
           "title": "Více NFT, více viditelnosti",
-          "description": "Čím více NFT propaguje DRepa, stake pool, aktiva nebo policy, tím častěji se objevuje na Cexplorer.io"
+          "description": "Čím více NFT propaguje DRepa, stake pool, tokeny nebo policy, tím častěji se objevuje na Cexplorer.io"
         },
         "continuous": {
           "title": "Kontinuální propagace",
@@ -2520,7 +2536,7 @@
     },
     "banners": {
       "title": "Bannerová reklama na Cexploreru",
-      "description": "Bannerové reklamy nabízejí způsob, jak oslovit naše angažované publikum a propagovat váš projekt nebo nadcházející launch.",
+      "description": "Bannerové reklamy nabízejí způsob, jak oslovit naše publikum a propagovat váš projekt nebo nadcházející launch.",
       "features": {
         "visibility": {
           "title": "Vysoká viditelnost",
@@ -2566,7 +2582,7 @@
         "cta": "Začít",
         "features": {
           "ideal": "Ideální pro malé až střední projekty",
-          "stackingNote": "Vlastnictví více NFT kumuluje limity API požadavků",
+          "stackingNote": "Vlastnictví více NFT kumuluje API limity",
           "requestsPerMinute": "{{count}} požadavků za minutu",
           "requestsPerDayNft": "{{count}} požadavků za den pro každé NFT",
           "tokensPerDayNft": "{{count}} tokenů za den pro každé NFT"
@@ -2636,7 +2652,7 @@
           "answerIntro": "Ano! Kromě výhod úrovně Basic API,",
           "answerLink": "Cexplorer PRO NFT",
           "answerIntro2": "držitelé získají přístup k:",
-          "perk1": "Hlasování v governance",
+          "perk1": "Hlasování v Cexplorer governance",
           "perk2": "PRO funkce jako export dat ve formátech CSV nebo JSON",
           "perk3": "Vlastní označení peněženek (až 5 000 peněženek)",
           "perk4": "PRO odznak na jejich profilu"
@@ -2704,7 +2720,7 @@
       },
       "q2": {
         "title": "Jak dlouho Cexplorer.io existuje?",
-        "answer": "Existujeme od Incentivized Testnet, což z Cexploreru dělá jeden z nejstarších a nejdůvěryhodnějších průzkumníků blockchainu Cardano. Po mnoho let podporujeme komunitu Cardano nezbytnými nástroji a přehledy pro uživatele i vývojáře."
+        "answer": "Existujeme od ITN, což z Cexploreru dělá jeden z nejstarších a nejdůvěryhodnějších průzkumníků blockchainu Cardano. Po mnoho let podporujeme komunitu Cardano nezbytnými nástroji a přehledy pro uživatele i vývojáře."
       },
       "q3": {
         "title": "Je Cexplorer zdarma?",
@@ -2733,41 +2749,41 @@
     }
   },
   "donatePage": {
-    "metaTitle": "Darovat | Cexplorer.io",
+    "metaTitle": "Přispět | Cexplorer.io",
     "title": "Podpořte budoucnost Cexploreru",
     "subtitle": "Vaše podpora nám pomáhá provozovat, udržovat a vylepšovat vše na Cexplorer.io",
-    "breadcrumb": "Darovat",
+    "breadcrumb": "Přispět",
     "infoCards": {
       "itn": {
         "heading": "Zde pro Cardano od ITN",
-        "description": "Jsme nejstarší a nejvíce vybavený Cardano explorer od Incentivized Testnet, poskytující nezbytné nástroje pro navigaci v blockchainu."
+        "description": "Jsme nejstarší a nejpokročilejší Cardano explorer od ITN, poskytující nezbytné nástroje pro navigaci v blockchainu."
       },
       "community": {
         "heading": "Od komunity pro komunitu",
-        "description": "Vytvořeno nadšenci Cardano, náš nezávislý nástroj podporuje všechny uživatele se stakingem, rozhodováním a vzděláváním. Naším cílem je maximalizovat váš profit a chránit vás před špatnými praktikami."
+        "description": "Vytvořeno nadšenci Cardana, náš nezávislý nástroj podporuje všechny uživatele se stakingem, rozhodováním a vzděláváním. Naším cílem je maximalizovat váš profit a chránit vás před špatnými praktikami."
       },
       "builders": {
         "heading": "Využíváno staviteli Cardano",
-        "description": "Mnoho vývojářů spoléhá na naše nástroje při vývoji na Cardano. Vaše podpora nám pomáhá udržovat a vylepšovat tyto zdroje, což prospívá celé vývojářské komunitě."
+        "description": "Mnoho vývojářů spoléhá na naše nástroje při vývoji na Cardanu. Vaše podpora nám pomáhá udržovat a vylepšovat tyto zdroje, což prospívá celé vývojářské komunitě."
       }
     },
     "buttons": {
       "stakeWithCexplorer": "Stakovat s Cexplorerem",
-      "sendDonation": "Poslat dar",
-      "donate": "Darovat",
+      "sendDonation": "Poslat příspěvek",
+      "donate": "Přispět",
       "delegateToPools": "Delegovat na [POOLS]"
     },
     "donateSection": {
-      "title": "Darovat",
+      "title": "Podpořit",
       "thankYou": "Děkujeme za podporu vývoje nezávislého Cardano exploreru! ❤️",
       "sendDonationHere": "Pošlete svůj dar sem",
-      "otherMethods": "Další způsoby darování",
+      "otherMethods": "Další způsoby příspěvku",
       "useDappConnector": "Nebo použijte náš dApp konektor"
     },
     "donationCards": {
       "coffee": {
         "title": "Káva pro vývojáře",
-        "description": "Pohání mysli za kódem."
+        "description": "Pohání mysl při programování."
       },
       "commit": {
         "title": "Code Commit",
@@ -2782,7 +2798,7 @@
         "description": "Nástroje pro výkonné integrace."
       },
       "custom": {
-        "title": "dApp vaším způsobem",
+        "title": "Vlastní",
         "description": "Umožňuje vývojářům svobodu inovovat.",
         "placeholder": "Zvolte částku"
       }
@@ -2825,13 +2841,13 @@
     },
     "support": {
       "title": "Podpora",
-      "description": "Připojte se k našemu Discordu a kontaktujte náš tým podpory.",
+      "description": "Připojte se k našemu Discordu a kontaktujte náši podporu.",
       "button": "Připojit se na Discord"
     },
     "donate": {
       "title": "Přispět",
       "description": "Podpořte naši misi a pomozte udržet Cexplorer v chodu",
-      "button": "Stránka s příspěvky"
+      "button": "Přispět"
     }
   },
   "wikiPage": {

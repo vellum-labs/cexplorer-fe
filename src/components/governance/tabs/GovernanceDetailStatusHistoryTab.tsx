@@ -9,6 +9,9 @@ import {
 } from "@vellumlabs/cexplorer-sdk";
 import { ExternalLink } from "lucide-react";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { useFetchMiscBasic } from "@/services/misc";
+import { useMiscConst } from "@/hooks/useMiscConst";
+import { getEpochTimestamp } from "@/utils/calculateEpochTimeByNumber";
 
 interface GovernanceDetailStatusHistoryTabProps {
   query: any;
@@ -33,6 +36,9 @@ export const GovernanceDetailStatusHistoryTab: FC<
 > = ({ query }) => {
   const { t } = useAppTranslation();
   const data = query?.data?.data;
+
+  const { data: basicData } = useFetchMiscBasic(true);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const getDescription = (status: string) => {
     switch (status) {
@@ -78,8 +84,13 @@ export const GovernanceDetailStatusHistoryTab: FC<
 
     epochStatuses.forEach(({ epoch, status }) => {
       if (epoch !== null) {
+        const calculatedTimestamp = getEpochTimestamp(
+          epoch,
+          miscConst?.epoch?.no,
+          miscConst?.epoch?.start_time,
+        );
         history.push({
-          timestamp: data.tx.time,
+          timestamp: calculatedTimestamp ?? data.tx.time,
           epoch,
           status,
           description: getDescription(status),
@@ -88,12 +99,20 @@ export const GovernanceDetailStatusHistoryTab: FC<
     });
 
     return history.reverse();
-  }, [data]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, miscConst]);
 
   const columns = [
     {
       key: "timestamp",
       render: (item: StatusHistoryRow) => {
+        if (!item.timestamp) {
+          return <span className='text-grayTextPrimary'>-</span>;
+        }
+        const date = new Date(item.timestamp);
+        if (isNaN(date.getTime())) {
+          return <span className='text-grayTextPrimary'>-</span>;
+        }
         return <DateCell time={item.timestamp} />;
       },
       title: t("governance.statusHistory.timestamp"),

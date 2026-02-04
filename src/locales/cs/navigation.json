@@ -2,7 +2,7 @@
   "main": {
     "blockchain": "Blockchain",
     "staking": "Staking",
-    "governance": "Správa",
+    "governance": "Governance",
     "tokens": "Tokeny",
     "nfts": "NFTs",
     "analytics": "Analytika",
@@ -16,15 +16,15 @@
     "transactions": "Transakce",
     "blocks": "Bloky",
     "epochs": "Epochy",
-    "assets": "Aktiva",
+    "assets": "Tokeny",
     "contractTransactions": "Kontraktové transakce",
     "transactionsMetadata": "Metadata transakcí",
-    "treasuryDonations": "Dary do pokladny"
+    "treasuryDonations": "Příspěvky do treasruy"
   },
   "staking": {
     "stakePools": "Stake pooly",
     "newPools": "Nové pooly",
-    "liveDelegations": "Živé delegace",
+    "liveDelegations": "Pool delegace",
     "rewardsWithdrawals": "Výběry odměn",
     "poolBirthdays": "Narozeniny poolů",
     "poolUpdates": "Aktualizace poolů",
@@ -43,7 +43,7 @@
     "cc": "CC",
     "votes": "Hlasy",
     "powerThresholds": "Prahy hlasování",
-    "governanceActions": "Akce správy",
+    "governanceActions": "Governance akce",
     "drepDelegations": "DRep delegace",
     "constitution": "Ústava",
     "certificates": "Certifikáty",
@@ -71,8 +71,8 @@
     "health": "Zdraví",
     "storage": "Úložiště",
     "transactions": "Transakce",
-    "pots": "Pokladny",
-    "treasuryProjection": "Projekce pokladny",
+    "pots": "Pots",
+    "treasuryProjection": "Projekce treasury",
     "accounts": "Účty",
     "walletActivity": "Aktivita peněženek",
     "topAddresses": "Top adresy",
@@ -111,7 +111,7 @@
     "environments": "Prostředí",
     "developers": "Vývojáři",
     "devlog": "Devlog",
-    "donation": "Příspěvek",
+    "donation": "Přispět",
     "faq": "FAQ"
   },
   "education": {
@@ -151,7 +151,7 @@
   "navbar": {
     "poweredBy": "Poháněno",
     "cardanoBlockchain": "Cardano Blockchain",
-    "apiDescription": "Získejte přístup k našemu API pro komplexní blockchainová data a vytvořte svou dApp nové generace!",
+    "apiDescription": "Získejte přístup k našemu API pro komplexní blockchainová data a získejte data pro svou dApp!",
     "startBuilding": "Začít tvořit",
     "getCexplorer": "Získat Cexplorer.io",
     "pro": "PRO",
@@ -159,7 +159,7 @@
     "navigationMenu": "Navigační menu",
     "navigationMenuDescription": "Přístup k možnostem navigace, nastavení a funkcím účtu",
     "stakingCertificates": "Stakingové certifikáty",
-    "governanceCertificates": "Certifikáty správy",
+    "governanceCertificates": "Governance certifikáty",
     "settings": "Nastavení"
   },
   "settings": {

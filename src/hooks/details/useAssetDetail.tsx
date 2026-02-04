@@ -53,9 +53,12 @@ export const useAssetDetail = ({
       ? detailData.stat.asset.stats[0]?.holders
       : "-";
 
+  const dailyVolume = (
+    detailData?.dex?.stat as Record<string, { volume?: number }> | undefined
+  )?.["1d"]?.volume;
   const adaVolume =
-    isStatsAvailable && detailData?.stat?.asset?.stats
-      ? lovelaceToAda(detailData.stat.asset.stats[0]?.ada_volume)
+    dailyVolume !== undefined && dailyVolume !== null
+      ? lovelaceToAda(dailyVolume)
       : "-";
 
   const overview: OverviewList = [
@@ -117,33 +120,66 @@ export const useAssetDetail = ({
   ];
 
   if ((type === "nft" && nftMarket) || (type === "token" && tokenMarket)) {
-    overview.splice(2, 0, {
-      label: t("asset.price"),
-      value: <PriceAdaSmallAmount price={detailData?.dex?.price} />,
-    });
-    overview.splice(3, 0, {
+    overview.push({
       label: t("asset.uniqueWallets"),
       value: uniqueWallets,
     });
-    overview.splice(5, 0, {
-      label: t("asset.volume"),
+    overview.push({
+      label: t("asset.dailyVolume"),
       value: adaVolume,
     });
+    overview.push({
+      label: t("asset.price"),
+      value: <PriceAdaSmallAmount price={detailData?.dex?.price} />,
+    });
+    const priceChangeData = [
+      { label: "1d", key: "1d" },
+      { label: "7d", key: "1w" },
+      { label: "1M", key: "1m" },
+      { label: "3M", key: "3m" },
+    ];
+
+    const getPriceChangePercent = (key: string) => {
+      const stat = (
+        detailData?.dex?.stat as Record<string, { change?: number }> | undefined
+      )?.[key];
+      if (!stat || stat.change === null || stat.change === undefined) return null;
+      return ((stat.change - 1) * 100).toFixed(2);
+    };
+
     overview.push({
       label: undefined,
       value: (
         <div className='flex w-full'>
-          {["1d", "7d", "1M", "3M"].map((item, i, arr) => (
-            <div
-              className={`h-[48px] w-[57px] border border-border ${i === 0 ? "rounded-s-m" : ""} ${i === arr.length - 1 ? "rounded-e-m" : ""} flex flex-col justify-center`}
-              key={item + "_" + i}
-            >
-              <p className='text-center text-text-xs text-grayTextPrimary'>
-                {item}
-              </p>
-              <p className='text-center text-text-sm font-semibold'>TBD</p>
-            </div>
-          ))}
+          {priceChangeData.map((item, i, arr) => {
+            const percent = getPriceChangePercent(item.key);
+            const isPositive = percent !== null && parseFloat(percent) > 0;
+            const isNegative = percent !== null && parseFloat(percent) < 0;
+
+            return (
+              <div
+                className={`h-[48px] w-[70px] border border-border ${i === 0 ? "rounded-s-m" : ""} ${i === arr.length - 1 ? "rounded-e-m" : ""} flex flex-col justify-center`}
+                key={item.label + "_" + i}
+              >
+                <p className='text-center text-text-xs text-grayTextPrimary'>
+                  {item.label}
+                </p>
+                <p
+                  className={`text-center text-text-sm font-semibold ${
+                    isPositive
+                      ? "text-greenText"
+                      : isNegative
+                        ? "text-redText"
+                        : ""
+                  }`}
+                >
+                  {percent !== null
+                    ? `${isPositive ? "+" : ""}${percent}%`
+                    : "-"}
+                </p>
+              </div>
+            );
+          })}
         </div>
       ),
     });

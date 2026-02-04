@@ -59,8 +59,8 @@ export const PoolSelector: FC<PoolSelectorProps> = ({
   return (
     <div className='relative w-full' ref={searchRef}>
       {selectedPool ? (
-        <div className='flex min-h-[48px] items-center justify-between rounded-s border border-border bg-background px-3'>
-          <div className='flex items-center gap-2'>
+        <div className='flex min-h-[48px] items-center justify-between gap-2 rounded-s border border-border bg-background px-3'>
+          <div className='flex min-w-0 items-center gap-2'>
             <Image
               src={generateImageUrl(selectedPool.pool_id || "", "ico", "pool")}
               type='pool'
@@ -68,7 +68,7 @@ export const PoolSelector: FC<PoolSelectorProps> = ({
               width={35}
               className='flex-shrink-0 rounded-max'
             />
-            <span className='text-text-sm'>{selectedPool.pool_name.name}</span>
+            <span className='truncate text-text-sm'>{selectedPool.pool_name.name}</span>
           </div>
           <button
             onClick={handleClear}

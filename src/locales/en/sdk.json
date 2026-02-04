@@ -79,12 +79,15 @@
     "unknownLabel": "Unknown"
   },
   "votingBreakdownTooltip": {
-    "voteLabel": "Vote:",
-    "votersLabel": "Voters:",
-    "voterLabel": "voter",
-    "delegatorsLabel": "Delegators:",
-    "noConfidenceLabel": "No confidence delegators:",
-    "autoAbstainStakeLabel": "Auto abstain stake:",
-    "manualAbstainStakeLabel": "Manual abstain stake:"
+    "voteLabel": "Vote",
+    "votersLabel": "Voters",
+    "voterLabel": "Voter",
+    "delegatorsLabel": "Delegators",
+    "noConfidenceLabel": "No confidence delegators",
+    "autoAbstainStakeLabel": "Auto abstain stake",
+    "manualAbstainStakeLabel": "Manual abstain stake",
+    "stakePoolSingular": "Stake pool",
+    "stakePoolPlural": "Stake pools",
+    "delegatorSingular": "Delegator"
   }
 }
