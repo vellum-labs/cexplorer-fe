@@ -123,7 +123,6 @@ export const GroupHistoryGraph: FC<GroupHistoryGraphProps> = ({ items }) => {
       nameLocation: "middle",
       nameGap: 28,
       boundaryGap: false,
-      inverse: true,
       axisLabel: { color: textColor },
       axisLine: { lineStyle: { color: textColor } },
     },
