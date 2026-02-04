@@ -13,6 +13,7 @@ import { useAppTranslation } from "@/hooks/useAppTranslation";
 import {
   useFetchAnalyticsRate,
   useFetchEpochAnalytics,
+  useFetchMilestoneAnalytics,
 } from "@/services/analytics";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
@@ -26,28 +27,33 @@ export const NetworkTransactionTab: FC = () => {
   const { t } = useAppTranslation("common");
   const epochQuery = useFetchEpochAnalytics();
   const rateQuery = useFetchAnalyticsRate();
+  const milestoneQuery = useFetchMilestoneAnalytics();
 
   const { epochLength } = configJSON.genesisParams[0].shelley[0];
 
-  const epochs = (epochQuery.data?.data ?? []).filter(item => item?.stat);
   const { data: basicData } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(basicData?.data?.version?.const);
+
+  const milestoneData = milestoneQuery.data?.data ?? [];
+  const sortedMilestoneData = [...milestoneData].sort(
+    (a, b) => b.epoch_no - a.epoch_no,
+  );
 
   const allTimeDates = rateQuery.data?.data;
   const threeMonthDates = (allTimeDates ?? [])?.slice(0, 90);
   const thrityDaysDates = (allTimeDates ?? [])?.slice(0, 30);
   const sevenDaysDates = (allTimeDates ?? [])?.slice(0, 7);
 
-  const totalTx = epochs
+  const totalTx = milestoneData
     .map(item => item.stat?.count_tx ?? 0)
     .reduce((a, b) => a + b, 0);
 
-  const prevEpochTPS = epochs[0]?.stat?.count_tx
-    ? (epochs[0].stat?.count_tx / epochLength).toFixed(2)
+  const prevEpochTPS = sortedMilestoneData[0]?.stat?.count_tx_out
+    ? (sortedMilestoneData[0].stat?.count_tx_out / epochLength).toFixed(2)
     : "-";
 
-  const averageTxFee = epochs[0]?.stat?.avg_tx_fee
-    ? lovelaceToAda(+epochs[0]?.stat?.avg_tx_fee)
+  const averageTxFee = sortedMilestoneData[0]?.stat?.avg_tx_fee
+    ? lovelaceToAda(+sortedMilestoneData[0]?.stat?.avg_tx_fee)
     : "-";
 
   const statCards = [
@@ -135,7 +141,7 @@ export const NetworkTransactionTab: FC = () => {
   return (
     <section className='flex w-full max-w-desktop flex-col gap-1.5'>
       <AnalyticsStatList
-        isLoading={epochQuery.isLoading}
+        isLoading={epochQuery.isLoading || milestoneQuery.isLoading}
         statCards={statCards}
       />
       <NetworkTxInEpochGraph epochQuery={epochQuery} miscConst={miscConst} />

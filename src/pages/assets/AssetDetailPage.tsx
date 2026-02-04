@@ -206,18 +206,20 @@ export const AssetDetailPage: FC = () => {
               width={35}
             />
             <div className='pointer-events-none absolute left-0 top-full z-50 mt-2 hidden opacity-0 transition-opacity duration-200 group-hover:block group-hover:opacity-100'>
-              <img
-                src={generateImageUrl(
-                  assetSupply && assetSupply === 1
-                    ? fingerprint
-                    : (assetDetailQuery.data?.data?.policy || "") +
-                        assetDetailQuery.data?.data?.name,
-                  "lg",
-                  assetSupply && assetSupply === 1 ? "nft" : "token",
-                )}
-                alt='Asset preview'
-                className='h-auto w-[300px] max-w-[300px] rounded-m shadow-2xl ring-1 ring-border'
-              />
+              <div className='h-[300px] w-[300px] overflow-hidden rounded-m bg-cardBg shadow-2xl ring-1 ring-border'>
+                <img
+                  src={generateImageUrl(
+                    assetSupply && assetSupply === 1
+                      ? fingerprint
+                      : (assetDetailQuery.data?.data?.policy || "") +
+                          assetDetailQuery.data?.data?.name,
+                    "lg",
+                    assetSupply && assetSupply === 1 ? "nft" : "token",
+                  )}
+                  alt='Asset preview'
+                  className='h-full w-full object-cover'
+                />
+              </div>
             </div>
           </div>
           <span className='flex-1 break-all'>

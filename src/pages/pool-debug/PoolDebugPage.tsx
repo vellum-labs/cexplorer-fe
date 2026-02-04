@@ -89,7 +89,7 @@ export const PoolDebugPage: FC = () => {
       breadcrumbItems={[{ label: t("pages:breadcrumbs.poolDebug") }]}
       adsCarousel={false}
     >
-      <div className='flex w-full max-w-desktop flex-col gap-3 p-mobile lg:p-desktop'>
+      <div className='flex w-full max-w-desktop flex-col gap-3'>
         <Tabs items={tabItems} />
       </div>
     </PageBase>

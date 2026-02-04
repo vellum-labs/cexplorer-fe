@@ -19,12 +19,12 @@
       "withdrawals": "Výběry",
       "referenceInputs": "Referenční vstupy",
       "delegations": "Delegace",
-      "governance": "Správa",
+      "governance": "Governance",
       "trading": "Obchodování",
       "message": "Zpráva"
     },
     "table": {
-      "treasuryDonation": "Dar do pokladny",
+      "treasuryDonation": "Dar do treasury",
       "scriptSize": "Velikost skriptu"
     }
   },
@@ -304,6 +304,7 @@
     "analytics": {
       "newStakers": "Noví stakeři",
       "stakeComposition": "Složení stake",
+      "basicStats": "Základní statistiky",
       "firstTimeRegistrations": {
         "title": "První registrace stake",
         "description": "Počet nových stakingových peněženek a celkový stake registrovaný v každé epoše."
@@ -316,11 +317,31 @@
         "title": "Stake delegovaný na entity, které jsou SPO i DRep",
         "description": "Stake, počet DRep a počet delegátorů delegovaných na entity, které jsou SPO i DRep"
       },
+      "delegation": {
+        "title": "ADA delegované na stake pooly",
+        "description": "Celkové delegované ADA, procento z oběžné zásoby a počet delegátorů za epochu."
+      },
+      "poolCount": {
+        "title": "Počet stake poolů",
+        "description": "Počet registrovaných a bloky produkujících stake poolů za epochu."
+      },
+      "averageStakes": {
+        "title": "Průměrné stake",
+        "description": "Průměrný stake na pool, na producenta bloků a na delegátora."
+      },
       "legend": {
         "stake": "Stake (₳)",
         "count": "Počet",
         "delegators": "Delegátoři",
-        "spoDrepCount": "Počet SPO+DRep"
+        "spoDrepCount": "Počet SPO+DRep",
+        "adaDelegated": "Delegované ADA",
+        "circulatingPercent": "% z oběžné zásoby",
+        "delegatedWallets": "Delegované peněženky",
+        "registeredPools": "Registrované pooly",
+        "blockProducingPools": "Bloky produkující pooly",
+        "avgPoolStake": "Prům. stake poolu",
+        "avgBlockProducerStake": "Prům. stake producenta bloků",
+        "avgDelegation": "Prům. delegace"
       },
       "tooltip": {
         "date": "Datum",
@@ -340,7 +361,7 @@
         "delegators": "Delegátoři",
         "about": "O poolu",
         "awards": "Ocenění",
-        "governance": "Správa",
+        "governance": "Governance",
         "embed": "Vložit"
       },
       "about": {
@@ -355,23 +376,23 @@
       "stakeAndPledge": {
         "title": "Stake a Pledge",
         "saturation": "Saturace",
-        "liveStake": "Živý stake",
+        "liveStake": "Aktuální stake",
         "activeStake": "Aktivní stake",
         "declaredPledge": "Deklarovaný pledge",
         "activePledge": "Aktivní pledge",
         "pledgeLeverage": "Páka pledge",
-        "marginFee": "Marže",
+        "marginFee": "Procentuální poplatek",
         "fixedFee": "Fixní poplatek"
       },
       "performance": {
         "title": "Výkon",
         "recentRoa": "Nedávné ROA",
-        "lifetimeRoa": "Celoživotní ROA",
+        "lifetimeRoa": "Celkové ROA",
         "blocksInEpoch": "Bloky v epoše",
         "estimatedBlocks": "Odhadované bloky",
         "proratedLuck": "Poměrné štěstí",
         "blocksLifetime": "Bloky celkem",
-        "lifetimeLuck": "Celoživotní štěstí"
+        "lifetimeLuck": "Celkové štěstí"
       },
       "delegatorsTabs": {
         "newcomers": "Nováčci",
@@ -389,7 +410,7 @@
         "retirement": "Zrušení",
         "address": "Adresa",
         "activeStake": "Aktivní stake",
-        "liveStake": "Živý stake",
+        "liveStake": "Aktuální stake",
         "relativePledge": "Relativní pledge",
         "pledgeStaked": "Pledge / Stake",
         "port": "Port",
@@ -523,7 +544,7 @@
       },
       "sortOptions": {
         "date": "Datum",
-        "liveStake": "Živý stake"
+        "liveStake": "Aktuální stake"
       },
       "table": {
         "index": "#",
@@ -579,6 +600,16 @@
       "items": "položek",
       "total": "Celkem",
       "andMore": "a dalších {{count}}"
+    },
+    "analytics": {
+      "history": {
+        "title": "Historie skupiny",
+        "description": "Celkový stake a počet delegátorů napříč všemi pooly ve skupině v čase."
+      },
+      "legend": {
+        "totalStake": "Celkový stake",
+        "totalDelegators": "Celkem delegátorů"
+      }
     }
   },
   "dreps": {
@@ -616,7 +647,7 @@
     "table": {
       "ranking": "#",
       "drepName": "Jméno DRep",
-      "lifetimeActivity": "Celoživotní aktivita",
+      "lifetimeActivity": "Celková aktivita",
       "lifetimeActivityTooltip": "Hlasovací aktivita za celou dobu DRep",
       "recentActivity": "Nedávná aktivita",
       "recentActivityTooltip": "Hlasovací aktivita DRep za posledních 6 měsíců",
@@ -630,10 +661,10 @@
       "totalOfSuffix": "delegací"
     },
     "analytics": {
-      "poolGraph": "Graf poolů",
+      "poolGraph": "DRep delegace",
       "stakeCompositionByRole": "Složení stake podle role",
       "delegationChanges": "Změny delegací",
-      "adaInGovernance": "ADA ve správě",
+      "adaInGovernance": "ADA v governance",
       "activeVotingStake": "Aktivní hlasovací stake",
       "drepSize": "Velikost DRep",
       "tabs": {
@@ -655,7 +686,7 @@
       "promote": "Propagovat",
       "delegateTo": "Delegovat na {{name}}",
       "tabs": {
-        "governanceActions": "Akce správy",
+        "governanceActions": "Governance akce",
         "delegators": "Delegátoři",
         "stats": "Statistiky",
         "embed": "Vložit",
@@ -688,11 +719,11 @@
         "provided": "Zadáno"
       },
       "governance": {
-        "title": "Správa",
+        "title": "Governance",
         "lastVote": "Poslední hlas",
         "recentActivity": "Nedávná aktivita",
         "recentActivityTooltip": "Hlasovací aktivita DRep za posledních 6 měsíců",
-        "lifetimeActivity": "Celoživotní aktivita",
+        "lifetimeActivity": "Celková aktivita",
         "lifetimeActivityTooltip": "Hlasovací aktivita za celou dobu DRep",
         "voted": "Hlasováno:",
         "yes": "Ano",
@@ -700,13 +731,13 @@
         "no": "Ne",
         "behavior": "Chování",
         "delegatedStake": "Delegovaný stake",
-        "abstainBehavior": "Automaticky se zdrží všech hlasování správy.",
+        "abstainBehavior": "Automaticky se zdrží všech hlasování v governance.",
         "noConfidenceBehavior": "Automaticky hlasuje 'Nedůvěra' v závislosti na typu akce."
       },
       "governanceActionsTable": {
         "date": "Datum",
         "type": "Typ",
-        "governanceAction": "Akce správy",
+        "governanceAction": "Governance akce",
         "vote": "Hlas",
         "votingPower": "Hlasovací síla",
         "tx": "Tx"
@@ -797,14 +828,14 @@
     }
   },
   "assets": {
-    "title": "Aktiva",
-    "detail": "Detail aktiva",
+    "title": "Tokeny",
+    "detail": "Detail tokenu",
     "tokens": "Tokeny",
     "nfts": "NFTs",
-    "all": "Všechna aktiva",
+    "all": "Všechny tokeny",
     "recentTokens": "Nedávné tokeny",
     "recentNfts": "Nedávné NFTs",
-    "searchPlaceholder": "Hledat podle aktiva...",
+    "searchPlaceholder": "Hledat podle tokenu...",
     "tabs": {
       "all": "Vše",
       "tokens": "Tokeny",
@@ -825,16 +856,16 @@
     }
   },
   "treasuryDonations": {
-    "title": "Dary do pokladny",
+    "title": "Dary do treasury",
     "tabs": {
       "recentDonations": "Nedávné dary",
       "epochByEpoch": "Podle epochy"
     },
     "info": {
-      "title": "Co je pokladna Cardana?",
-      "description": "Pokladna Cardana je decentralizovaný mechanismus financování, který podporuje vývoj a růst ekosystému Cardano. Dary pomáhají financovat návrhy, o kterých hlasuje komunita prostřednictvím systému správy Cardana.",
-      "donateButton": "Přispět do pokladny",
-      "donateTooltip": "Poznámka: MeshJS zatím nepodporuje dary do pokladny. Nyní můžete přispět pouze na Cexplorer."
+      "title": "Co je Cardano treasury?",
+      "description": "Cardano treasury podporuje vývoj a růst ekosystému Cardano. Dary pomáhají financovat návrhy, o kterých hlasuje komunita prostřednictvím governance systému Cardana.",
+      "donateButton": "Přispět do treasury",
+      "donateTooltip": "Poznámka: MeshJS zatím nepodporuje přískěvky do treasury. Nyní můžete přispět pouze na Cexplorer."
     },
     "success": {
       "title": "Transakce úspěšná, děkujeme za váš dar!",
@@ -842,8 +873,8 @@
     }
   },
   "governance": {
-    "title": "Správa",
-    "actions": "Akce správy",
+    "title": "Governance",
+    "actions": "Governance akce",
     "votes": "Hlasy",
     "constitution": "Ústava"
   },
@@ -859,7 +890,7 @@
       "breadcrumb": "Adresa",
       "stakeAddress": "Stake adresa",
       "tabs": {
-        "assets": "Aktiva",
+        "assets": "Tokeny",
         "transactions": "Transakce",
         "withdrawals": "Výběry",
         "addresses": "Adresy",
@@ -923,7 +954,7 @@
         "date": "Datum",
         "drep": "DRep",
         "activeStake": "Aktivní stake",
-        "liveStake": "Živý stake",
+        "liveStake": "Aktuální stake",
         "loyalty": "Věrnost",
         "tx": "Tx"
       },
@@ -965,7 +996,7 @@
     "title": "Daňový nástroj"
   },
   "polls": {
-    "title": "Akce správy Cexplorer"
+    "title": "Cexplorer governance akce"
   },
   "poolAnalytics": {
     "title": "Analytika poolů"
@@ -996,7 +1027,7 @@
       "delegation": "Delegace",
       "delegationVote": "Hlasování delegace",
       "drepRegistration": "Registrace DRep",
-      "govActionProposal": "Návrh správní akce",
+      "govActionProposal": "Návrh governance akce",
       "maTokenMinting": "Ražba Multi-Asset",
       "maTokenTransfers": "Převody Multi-Asset",
       "poolUpdate": "Aktualizace poolu",
@@ -1028,7 +1059,7 @@
     "poolDebug": "SPO Debug",
     "stake": "Stake",
     "address": "Adresa",
-    "assets": "Aktiva",
+    "assets": "Tokeny",
     "settings": "Nastavení",
     "analytics": "Analytika",
     "account": "Účet",

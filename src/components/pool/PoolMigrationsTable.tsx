@@ -80,7 +80,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
       },
       title: <p>{t("pool.migrations.date")}</p>,
       visible: columnsVisibility.date,
-      widthPx: 20,
+      widthPx: 50,
     },
     {
       key: "active_in",
@@ -93,7 +93,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
         <p className='w-full text-right'>{t("pool.migrations.activeEpoch")}</p>
       ),
       visible: columnsVisibility.active_in,
-      widthPx: 45,
+      widthPx: 30,
     },
     {
       key: "address",
@@ -122,7 +122,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
       },
       title: t("pool.migrations.address"),
       visible: columnsVisibility.address,
-      widthPx: 100,
+      widthPx: 70,
     },
     {
       key: "amount",
@@ -202,24 +202,25 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
       key: "registered",
       render: item => {
         return (
-          <DateCell
-            className='text-right'
-            time={format(
-              slotToDate(
-                item.slot_update,
-                miscConst?.epoch_stat.pots.slot_no ?? 0,
-                miscConst?.epoch_stat.epoch.start_time ?? "",
-              ),
-              "yyy-MM-dd HH:mm:ss",
-            )}
-          />
+          <div className='flex justify-end'>
+            <DateCell
+              time={format(
+                slotToDate(
+                  item.slot_update,
+                  miscConst?.epoch_stat.pots.slot_no ?? 0,
+                  miscConst?.epoch_stat.epoch.start_time ?? "",
+                ),
+                "yyy-MM-dd HH:mm:ss",
+              )}
+            />
+          </div>
         );
       },
       title: (
         <p className='w-full text-right'>{t("pool.migrations.registered")}</p>
       ),
       visible: columnsVisibility.registered,
-      widthPx: 40,
+      widthPx: 50,
     },
     {
       key: "pool_delegation",
@@ -269,7 +270,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
       },
       title: <p>{t("pool.migrations.poolDelegation")}</p>,
       visible: columnsVisibility.pool_delegation,
-      widthPx: 190,
+      widthPx: 160,
     },
   ];
 

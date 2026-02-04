@@ -32,16 +32,6 @@
           "recommended": false
         }
       ],
-      "flint": [
-        {
-          "pos": 3,
-          "features": ["web3", "sign"],
-          "name": "Flint",
-          "url": "https://flint-wallet.com/",
-          "visible": false,
-          "recommended": false
-        }
-      ],
       "nufi": [
         {
           "pos": 4,
@@ -121,7 +111,7 @@
   "lng": ["en", "cs"],
   "currency": ["usd", "eur"],
   "ipfs":"https://ipfs.blockfrost.dev/ipfs/",
-  "donationAddress": "addr1q884cpmm2et7jhdc28ty70gxwwhdszu2c402986nr2jl2zg7cczh3v50t8keh8767eg5hesgkzm7569qtuaky8nh2n7qh4k6y8",
+  "donationAddress": "addr_test1qrzw5lqz3ve5v044ne3pkw7tc2hrxwhj9u9ge34yjw2frkcpp5e7sueuknckyay367z4mr4p9xv2rrnzfgge9p3uqews3t2ttx",
   "supportedPools": [
   ],
   "featured": [

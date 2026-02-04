@@ -304,6 +304,7 @@
     "analytics": {
       "newStakers": "New Stakers",
       "stakeComposition": "Stake Composition",
+      "basicStats": "Basic Statistics",
       "firstTimeRegistrations": {
         "title": "First-time Stake Registrations",
         "description": "Number of new staking wallets and total stake registered in each epoch."
@@ -316,11 +317,31 @@
         "title": "Stake delegated to entities that are both SPOs and DRep",
         "description": "Stake, DRep count, and delegator count delegated to entities serving as both SPOs and DRep"
       },
+      "delegation": {
+        "title": "ADA Delegated to Stake Pools",
+        "description": "Total ADA delegated, percentage of circulating supply, and delegator count per epoch."
+      },
+      "poolCount": {
+        "title": "Stake Pool Count",
+        "description": "Number of registered and block-producing stake pools per epoch."
+      },
+      "averageStakes": {
+        "title": "Average Stakes",
+        "description": "Average stake per pool, per block producer, and per delegator."
+      },
       "legend": {
         "stake": "Stake (₳)",
         "count": "Count",
         "delegators": "Delegators",
-        "spoDrepCount": "SPO+DRep Count"
+        "spoDrepCount": "SPO+DRep Count",
+        "adaDelegated": "ADA Delegated",
+        "circulatingPercent": "% of Circulating Supply",
+        "delegatedWallets": "Delegated Wallets",
+        "registeredPools": "Registered Pools",
+        "blockProducingPools": "Block Producing Pools",
+        "avgPoolStake": "Avg Pool Stake",
+        "avgBlockProducerStake": "Avg Block Producer Stake",
+        "avgDelegation": "Avg Delegation"
       },
       "tooltip": {
         "date": "Date",
@@ -579,6 +600,16 @@
       "items": "items",
       "total": "Total",
       "andMore": "and {{count}} more"
+    },
+    "analytics": {
+      "history": {
+        "title": "Group History",
+        "description": "Total stake and delegator count across all pools in the group over time."
+      },
+      "legend": {
+        "totalStake": "Total Stake",
+        "totalDelegators": "Total Delegators"
+      }
     }
   },
   "dreps": {
@@ -630,7 +661,7 @@
       "totalOfSuffix": "delegations"
     },
     "analytics": {
-      "poolGraph": "Pool Graph",
+      "poolGraph": "DRep Delegations",
       "stakeCompositionByRole": "Stake Composition by Role",
       "delegationChanges": "Delegation Changes",
       "adaInGovernance": "ADA in Governance",
