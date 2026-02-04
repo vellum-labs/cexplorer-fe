@@ -44,7 +44,7 @@ export const GroupHistoryGraph: FC<GroupHistoryGraphProps> = ({ items }) => {
 
       hist.forEach((histItem, index) => {
         const currentEpoch = miscConst?.epoch?.no ?? 0;
-        const epochNo = currentEpoch - (hist.length - 1 - index);
+        const epochNo = currentEpoch - index;
 
         const existing = epochMap.get(epochNo) ?? { stake: 0, delegators: 0 };
         epochMap.set(epochNo, {
@@ -123,7 +123,6 @@ export const GroupHistoryGraph: FC<GroupHistoryGraphProps> = ({ items }) => {
       nameLocation: "middle",
       nameGap: 28,
       boundaryGap: false,
-      inverse: true,
       axisLabel: { color: textColor },
       axisLine: { lineStyle: { color: textColor } },
     },
