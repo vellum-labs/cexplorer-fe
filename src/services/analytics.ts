@@ -52,6 +52,23 @@ export const useFetchEpochAnalytics = () =>
     },
   });
 
+export const fetchMilestoneAnalytics = async () => {
+  const url =
+    "/analytics/milestone?display=sum_fee,count_tx,avg_tx_fee,block_version,tx_composition,max_block_tx_count,count_tx_out,count_block,avg_block_size,max_block_size,count_tx_out_address,count_tx_out_stake,count_tx_out_address_not_yesterday,count_tx_out_stake_not_yesterday,count_pool_relay_uniq,count_pool";
+
+  return handleFetch<EpochAnalyticsResponse>(url);
+};
+
+export const useFetchMilestoneAnalytics = () =>
+  useQuery({
+    queryKey: ["analytics-milestone"],
+    queryFn: async () => {
+      const { data } = await fetchMilestoneAnalytics();
+
+      return data;
+    },
+  });
+
 export const fetchAnalyticsRate = async () => {
   const url =
     "/analytics/rate?display=sum_fee,count_tx,avg_tx_fee,block_version,tx_composition,max_block_tx_count,count_tx_out,count_block,avg_block_size,max_block_size,count_tx_out_address,count_tx_out_stake,count_tx_out_address_not_yesterday,count_tx_out_stake_not_yesterday,count_pool_relay_uniq,count_pool";
