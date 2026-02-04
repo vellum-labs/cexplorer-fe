@@ -31,15 +31,12 @@ export const NetworkTransactionTab: FC = () => {
 
   const { epochLength } = configJSON.genesisParams[0].shelley[0];
 
-  const epochs = (epochQuery.data?.data ?? []).filter(item => item?.stat);
   const { data: basicData } = useFetchMiscBasic(true);
   const miscConst = useMiscConst(basicData?.data?.version?.const);
 
-  // Use milestone data for accurate full-epoch TPS calculation
   const milestoneData = milestoneQuery.data?.data ?? [];
   const sortedMilestoneData = [...milestoneData].sort(
-    (a, b) =>
-      ((b as any)?.epoch_no ?? b?.no) - ((a as any)?.epoch_no ?? a?.no),
+    (a, b) => b.epoch_no - a.epoch_no,
   );
 
   const allTimeDates = rateQuery.data?.data;
@@ -51,8 +48,6 @@ export const NetworkTransactionTab: FC = () => {
     .map(item => item.stat?.count_tx ?? 0)
     .reduce((a, b) => a + b, 0);
 
-  // Use milestone data for previous epoch (index 0 is the last complete epoch)
-  // Use count_tx_out for consistency with the graph calculation
   const prevEpochTPS = sortedMilestoneData[0]?.stat?.count_tx_out
     ? (sortedMilestoneData[0].stat?.count_tx_out / epochLength).toFixed(2)
     : "-";

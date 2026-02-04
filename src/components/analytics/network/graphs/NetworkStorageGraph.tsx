@@ -47,27 +47,25 @@ export const NetworkStorageGraph: FC<NetworkStorageGraphProps> = ({
   const storageTotalMap = new Map<number, number>();
 
   milestoneData.forEach(item => {
-    const epochNo = (item as any)?.epoch_no ?? item?.no;
-    const countBlk = (item?.stat?.count_block ?? 0) as number;
-    const avgBlkSize = (item?.stat?.avg_block_size ?? 0) as number;
+    const countBlk = item?.stat?.count_block ?? 0;
+    const avgBlkSize = +(item?.stat?.avg_block_size ?? 0);
     const currentTotal = countBlk * avgBlkSize;
 
-    storageIncreaseMap.set(epochNo, currentTotal / bytesPerMb);
+    storageIncreaseMap.set(item.epoch_no, currentTotal / bytesPerMb);
   });
 
   const sortedMilestoneData = [...milestoneData].sort(
-    (a, b) => ((a as any)?.epoch_no ?? a?.no) - ((b as any)?.epoch_no ?? b?.no),
+    (a, b) => a.epoch_no - b.epoch_no,
   );
 
   let accumulatedTotal = 0;
   sortedMilestoneData.forEach(item => {
-    const epochNo = (item as any)?.epoch_no ?? item?.no;
-    const countBlk = (item?.stat?.count_block ?? 0) as number;
-    const avgBlkSize = (item?.stat?.avg_block_size ?? 0) as number;
+    const countBlk = item?.stat?.count_block ?? 0;
+    const avgBlkSize = +(item?.stat?.avg_block_size ?? 0);
     const currentTotal = countBlk * avgBlkSize;
 
     accumulatedTotal += currentTotal;
-    storageTotalMap.set(epochNo, accumulatedTotal / bytesPerMb);
+    storageTotalMap.set(item.epoch_no, accumulatedTotal / bytesPerMb);
   });
 
   const epochs = (data ?? [])
