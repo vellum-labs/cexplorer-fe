@@ -10,20 +10,20 @@
     "placeholder": "Search blocks, transactions, asset IDs...",
     "notFoundLabel": "Not Found",
     "categories": {
-      "all": "All",
-      "tx": "Tx",
+      "all": "$t(shared:all)",
+      "tx": "$t(shared:tx)",
       "block": "Block",
-      "pool": "Pool",
-      "asset": "Asset",
-      "policy": "Policy",
-      "address": "Address",
-      "stake": "Stake",
+      "pool": "$t(shared:pool)",
+      "asset": "$t(shared:asset)",
+      "policy": "$t(shared:title12)",
+      "address": "$t(shared:address)",
+      "stake": "$t(shared:stake)",
       "adahandle": "ADA Handle",
       "user": "User",
       "article": "Article",
       "page": "Page",
       "gov": "Gov",
-      "drep": "DRep"
+      "drep": "$t(shared:drep)"
     }
   },
   "pagination": {
@@ -41,7 +41,7 @@
     "csvDescription": "Great for easy viewing in spreadsheet tools.",
     "jsonLabel": "JSON",
     "jsonDescription": "Best for structured data and app integration.",
-    "cancelLabel": "Cancel",
+    "cancelLabel": "$t(shared:cancelLabel)",
     "exportLabel": "Export"
   },
   "sensitiveContent": {
@@ -57,37 +57,37 @@
     "placeholder": "Search governance action ID...",
     "emptyStateMessage": "Looks like you're missing a Gov Action ID. Enter one to find results!",
     "noResultsMessage": "No results. Check your input and try again.",
-    "typeLabel": "Type",
+    "typeLabel": "$t(shared:type)",
     "titleLabel": "Title",
-    "idLabel": "ID",
+    "idLabel": "$t(shared:id)",
     "identLabel": "Ident",
-    "cancelLabel": "Cancel",
+    "cancelLabel": "$t(shared:cancelLabel)",
     "addActionLabel": "Add governance action"
   },
   "featureModal": {
     "title": "Cexplorer PRO feature",
     "subTitle": "To access premium features, you need to own a Cexplorer NFT...",
-    "cancelLabel": "Cancel",
-    "connectWalletLabel": "Connect wallet",
+    "cancelLabel": "$t(shared:cancelLabel)",
+    "connectWalletLabel": "$t(shared:connect)",
     "getProLabel": "Get a PRO"
   },
   "delegatorsLabel": {
-    "label": "Delegators",
+    "label": "$t(shared:delegators)",
     "tooltipText": "Excluding delegators with stake less than {{minDelegationAda}} ADA"
   },
   "stakeCell": {
-    "unknownLabel": "Unknown"
+    "unknownLabel": "$t(shared:unknown)"
   },
   "votingBreakdownTooltip": {
     "voteLabel": "Vote",
     "votersLabel": "Voters",
     "voterLabel": "Voter",
-    "delegatorsLabel": "Delegators",
+    "delegatorsLabel": "$t(shared:delegators)",
     "noConfidenceLabel": "No confidence delegators",
     "autoAbstainStakeLabel": "Auto abstain stake",
     "manualAbstainStakeLabel": "Manual abstain stake",
     "stakePoolSingular": "Stake pool",
-    "stakePoolPlural": "Stake pools",
+    "stakePoolPlural": "$t(shared:stakePools)",
     "delegatorSingular": "Delegator"
   }
 }

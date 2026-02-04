@@ -10,20 +10,20 @@
     "placeholder": "Hledat bloky, transakce, tokeny...",
     "notFoundLabel": "Nenalezeno",
     "categories": {
-      "all": "Vše",
-      "tx": "Tx",
+      "all": "$t(shared:all)",
+      "tx": "$t(shared:tx)",
       "block": "Blok",
-      "pool": "Pool",
-      "asset": "Token",
-      "policy": "Policy",
-      "address": "Adresa",
-      "stake": "Stake",
+      "pool": "$t(shared:pool)",
+      "asset": "$t(shared:asset)",
+      "policy": "$t(shared:title12)",
+      "address": "$t(shared:address)",
+      "stake": "$t(shared:stake)",
       "adahandle": "ADA Handle",
       "user": "Uživatel",
       "article": "Článek",
       "page": "Stránka",
       "gov": "Governance",
-      "drep": "DRep"
+      "drep": "$t(shared:drep)"
     }
   },
   "pagination": {
@@ -41,7 +41,7 @@
     "csvDescription": "Skvělé pro snadné zobrazení v tabulkových nástrojích.",
     "jsonLabel": "JSON",
     "jsonDescription": "Nejlepší pro strukturovaná data.",
-    "cancelLabel": "Zrušit",
+    "cancelLabel": "$t(shared:cancelLabel)",
     "exportLabel": "Exportovat"
   },
   "sensitiveContent": {
@@ -57,37 +57,37 @@
     "placeholder": "Hledat dle ID governance akce...",
     "emptyStateMessage": "Zdá se, že chybí ID governance akce. Zadejte ho pro nalezení výsledků!",
     "noResultsMessage": "Žádné výsledky. Zkontrolujte vstup a zkuste to znovu.",
-    "typeLabel": "Typ",
+    "typeLabel": "$t(shared:type)",
     "titleLabel": "Název",
-    "idLabel": "ID",
+    "idLabel": "$t(shared:id)",
     "identLabel": "Ident",
-    "cancelLabel": "Zrušit",
+    "cancelLabel": "$t(shared:cancelLabel)",
     "addActionLabel": "Přidat governance akci"
   },
   "featureModal": {
     "title": "Funkce Cexplorer PRO",
     "subTitle": "Pro přístup k prémiovým funkcím potřebujete vlastnit Cexplorer NFT...",
-    "cancelLabel": "Zrušit",
-    "connectWalletLabel": "Připojit peněženku",
+    "cancelLabel": "$t(shared:cancelLabel)",
+    "connectWalletLabel": "$t(shared:connect)",
     "getProLabel": "Získat PRO"
   },
   "delegatorsLabel": {
-    "label": "Delegátoři",
+    "label": "$t(shared:delegators)",
     "tooltipText": "Nezahrnuje delegátory se stakem menším než {{minDelegationAda}} ADA"
   },
   "stakeCell": {
-    "unknownLabel": "Neznámý"
+    "unknownLabel": "$t(shared:unknown)"
   },
   "votingBreakdownTooltip": {
     "voteLabel": "Hlas",
     "votersLabel": "Voliči",
     "voterLabel": "Volič",
-    "delegatorsLabel": "Delegátoři",
+    "delegatorsLabel": "$t(shared:delegators)",
     "noConfidenceLabel": "Delegátoři bez důvěry",
     "autoAbstainStakeLabel": "Auto abstain stake",
     "manualAbstainStakeLabel": "Manuální abstain stake",
     "stakePoolSingular": "Stake pool",
-    "stakePoolPlural": "Stake pooly",
+    "stakePoolPlural": "$t(shared:stakePools)",
     "delegatorSingular": "Delegátor"
   }
 }

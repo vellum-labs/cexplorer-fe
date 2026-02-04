@@ -57,7 +57,7 @@ export const NetworkAnalytics: FC = () => {
     <PageBase
       metadataTitle='networkAnalytics'
       breadcrumbItems={[
-        { label: t("navigation.analytics"), link: "/analytics" },
+        { label: t("analyticsPage.breadcrumb"), link: "/analytics" },
         { label: t("analytics.network") },
       ]}
       title={t("analytics.cardanoNetworkAnalytics")}

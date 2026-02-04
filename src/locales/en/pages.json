@@ -1,44 +1,44 @@
 {
   "home": {
-    "title": "Home",
+    "title": "$t(shared:home)",
     "welcome": "Welcome to Cexplorer"
   },
   "transactions": {
-    "title": "Transactions",
+    "title": "$t(shared:transactions)",
     "detail": "Transaction detail",
     "totalOfSuffix": "transactions",
-    "searchPlaceholder": "Search by tx hash...",
+    "searchPlaceholder": "$t(shared:searchPlaceholder1)",
     "tabs": {
       "content": "Content",
       "overview": "Overview",
       "scripts": "Scripts",
       "contracts": "Contracts",
       "collateral": "Collateral",
-      "metadata": "Metadata",
+      "metadata": "$t(shared:metadata)",
       "mints": "Mints",
-      "withdrawals": "Withdrawals",
+      "withdrawals": "$t(shared:withdrawals)",
       "referenceInputs": "Reference inputs",
-      "delegations": "Delegations",
-      "governance": "Governance",
+      "delegations": "$t(shared:delegations)",
+      "governance": "$t(shared:title)",
       "trading": "Trading",
       "message": "Message"
     },
     "table": {
-      "treasuryDonation": "Treasury Donation",
+      "treasuryDonation": "$t(shared:treasuryDonation)",
       "scriptSize": "Script size"
     }
   },
   "blocks": {
-    "title": "Blocks",
+    "title": "$t(shared:blocks)",
     "detail": "Block Detail",
     "totalOfSuffix": "blocks",
-    "searchPlaceholder": "Search your results...",
+    "searchPlaceholder": "$t(shared:searchPlaceholder)",
     "overview": {
       "title": "Block Overview",
-      "date": "Date",
-      "height": "Height",
-      "epoch": "Epoch",
-      "slot": "Slot",
+      "date": "$t(shared:date)",
+      "height": "$t(shared:height)",
+      "epoch": "$t(shared:epoch)",
+      "slot": "$t(shared:slot)",
       "epochSlot": "epoch slot",
       "confirmations": "Confirmations",
       "viewPreviousBlock": "View previous block",
@@ -49,7 +49,7 @@
     "transactions": {
       "title": "Transactions and Fees",
       "totalTransactions": "Total Transactions",
-      "totalOutput": "Total Output",
+      "totalOutput": "$t(shared:totalOutput)",
       "totalFees": "Total Fees",
       "totalRewards": "Total Rewards"
     },
@@ -57,75 +57,75 @@
       "title": "Block size"
     },
     "search": {
-      "poolId": "Pool ID",
-      "epoch": "Epoch",
-      "hash": "Hash",
-      "slot": "Slot",
-      "height": "Height"
+      "poolId": "$t(shared:poolId)",
+      "epoch": "$t(shared:epoch)",
+      "hash": "$t(shared:hash)",
+      "slot": "$t(shared:slot)",
+      "height": "$t(shared:height)"
     },
     "table": {
-      "date": "Date",
-      "height": "Height",
-      "epoch": "Epoch",
-      "slot": "Slot",
-      "txs": "TXs",
-      "mintedBy": "Minted by",
-      "hash": "Hash",
-      "epochSlot": "Epoch slot",
-      "vrfKey": "VRF key",
+      "date": "$t(shared:date)",
+      "height": "$t(shared:height)",
+      "epoch": "$t(shared:epoch)",
+      "slot": "$t(shared:slot)",
+      "txs": "$t(shared:txs)",
+      "mintedBy": "$t(shared:mintedBy)",
+      "hash": "$t(shared:hash)",
+      "epochSlot": "$t(shared:epochSlot)",
+      "vrfKey": "$t(shared:vrfKey)",
       "protocol": "Protocol",
-      "size": "Size",
+      "size": "$t(shared:size)",
       "certCount": "Cert Count",
       "protoVersion": "Proto Version",
       "protoVersionTooltip": "Protocol version"
     }
   },
   "epochs": {
-    "title": "Epochs",
+    "title": "$t(shared:epochs)",
     "detail": "Epoch detail",
     "totalOfSuffix": "epochs",
     "current": "Current epoch",
-    "searchPlaceholder": "Search your results...",
+    "searchPlaceholder": "$t(shared:searchPlaceholder)",
     "tabs": {
-      "epochs": "Epochs",
-      "analytics": "Analytics",
+      "epochs": "$t(shared:epochs)",
+      "analytics": "$t(shared:analytics)",
       "parameters": "Parameters",
-      "blocks": "Blocks"
+      "blocks": "$t(shared:blocks)"
     },
     "info": {
-      "currentEpoch": "Current Epoch",
-      "start": "Start",
+      "currentEpoch": "$t(shared:currentEpoch)",
+      "start": "$t(shared:start)",
       "left": "Left",
       "arrived": "Arrived"
     },
     "stats": {
       "title": "Epoch Stats",
-      "blocks": "Blocks",
-      "txs": "TXs",
-      "stake": "Stake",
+      "blocks": "$t(shared:blocks)",
+      "txs": "$t(shared:txs)",
+      "stake": "$t(shared:stake)",
       "usage": "Usage",
       "used": "Used",
       "unused": "Unused"
     },
     "graph": {
-      "blocks": "Blocks",
+      "blocks": "$t(shared:blocks)",
       "outputs": "Outputs (₳)",
-      "stake": "Stake (₳)",
-      "transactions": "Transactions",
+      "stake": "$t(shared:stake1)",
+      "transactions": "$t(shared:transactions)",
       "stakingRewards": "Staking Rewards (₳)",
       "apy": "APY (%)",
       "adaPrice": "ADA Price ($)",
       "yearlyPer1000": "Yearly per 1000 ADA ($)",
-      "epoch": "Epoch",
-      "amount": "Amount",
-      "date": "Date",
+      "epoch": "$t(shared:epoch)",
+      "amount": "$t(shared:amount)",
+      "date": "$t(shared:date)",
       "tbd": "TBD"
     },
     "analyticsTab": {
       "blockUsage": "Block Usage",
       "stakedAda": "Staked ADA",
       "stakedWallets": "Staked Wallets",
-      "rewards": "Rewards",
+      "rewards": "$t(shared:rewards)",
       "activeWallets": "Active Wallets",
       "newWallets": "New Wallets",
       "byEpoch": "By epoch",
@@ -133,12 +133,12 @@
     },
     "blocksTable": {
       "totalOfBlocks": "Total of {{count}} blocks",
-      "date": "Date",
-      "height": "Height",
-      "slot": "Slot",
-      "txs": "TXs",
-      "mintedBy": "Minted by",
-      "size": "Size"
+      "date": "$t(shared:date)",
+      "height": "$t(shared:height)",
+      "slot": "$t(shared:slot)",
+      "txs": "$t(shared:txs)",
+      "mintedBy": "$t(shared:mintedBy)",
+      "size": "$t(shared:size)"
     },
     "detailAnalytics": {
       "blocksInEpoch": "Blocks in Epoch",
@@ -148,8 +148,8 @@
       "byDay": "by day",
       "rewardsStructure": "Rewards Structure",
       "earnedByFeesReserves": "Earned by fees / Reserves",
-      "fees": "Fees",
-      "reserves": "Reserves"
+      "fees": "$t(shared:fees)",
+      "reserves": "$t(shared:reserves)"
     },
     "stakedAda": {
       "title": "Staked ADA",
@@ -162,12 +162,12 @@
       "pools": "Pools",
       "apyLeader": "APY % Leader",
       "apyMember": "APY % Member",
-      "averageStake": "Average Stake",
+      "averageStake": "$t(shared:averageStake1)",
       "delegatorCount": "Delegator Count",
       "delegatorCountWeighted": "Delegator Count Weighted",
       "delegatorAverage": "Delegator Average",
       "delegatorAverageWeighted": "Delegator Average Weighted",
-      "pending": "Pending",
+      "pending": "$t(shared:pending)",
       "dcwTooltip": "Delegator Count Weighted (DCW) is a metric in staking pool statistics that calculates the weighted average number of delegators contributing to a pool.",
       "daTooltip": "Delegator Average (DA) is a metric in staking pool statistics that represents the simple average amount of stake delegated by each delegator.",
       "dawTooltip": "Delegator Average Weighted (DAW) in Stake Pool Stats measures the average stake amount delegated by all delegators, weighted by the size of each delegation."
@@ -177,7 +177,7 @@
       "export": "Export",
       "explanation": "Explanation",
       "parameter": "Parameter",
-      "value": "Value",
+      "value": "$t(shared:value)",
       "minFeeA": "The 'a' parameter to calculate the minimum transaction fee.",
       "minFeeB": "The 'b' parameter to calculate the minimum transaction fee.",
       "maxBlockSize": "The maximum block size (in bytes).",
@@ -207,22 +207,22 @@
       "maxCollateralInputs": "The maximum number of collateral inputs allowed in a transaction."
     },
     "pots": {
-      "title": "Pots",
-      "treasury": "Treasury",
-      "reserves": "Reserves",
-      "rewards": "Rewards",
-      "deposits": "Deposits",
-      "fees": "Fees",
+      "title": "$t(shared:title1)",
+      "treasury": "$t(shared:treasury)",
+      "reserves": "$t(shared:reserves)",
+      "rewards": "$t(shared:rewards)",
+      "deposits": "$t(shared:deposits)",
+      "fees": "$t(shared:fees)",
       "feesReserves": "Fees / Reserves",
       "feesReservesTooltip": "Portion of staking rewards coming from fees vs reserves"
     },
     "summary": {
       "title": "Summary",
-      "currentEpoch": "Current Epoch",
+      "currentEpoch": "$t(shared:currentEpoch)",
       "beginning": "Beginning",
       "end": "End",
-      "blocks": "Blocks",
-      "transactions": "Transactions",
+      "blocks": "$t(shared:blocks)",
+      "transactions": "$t(shared:transactions)",
       "feesGenerated": "Fees Generated",
       "tps": "TPS:",
       "used": "used",
@@ -238,29 +238,29 @@
     }
   },
   "pools": {
-    "title": "Stake pools",
-    "detail": "Pool detail",
+    "title": "$t(shared:stakePools)",
+    "detail": "$t(shared:Pooldetail)",
     "breadcrumb": "Pools",
     "list": "Pool list",
     "cardanoStakePools": "Cardano Stake Pools",
     "totalOfSuffix": "stake pools",
-    "searchPlaceholder": "Search your results...",
+    "searchPlaceholder": "$t(shared:searchPlaceholder)",
     "displayVote": "Display vote",
     "sortBy": "Sort By",
     "filter": {
       "selectedVotes": "Selected votes",
       "isDrep": "Is DRep",
-      "yes": "Yes",
-      "no": "No"
+      "yes": "$t(shared:yes)",
+      "no": "$t(shared:no)"
     },
     "sortOptions": {
       "nativeRankings": "Native Rankings",
-      "pledgeLeverage": "Pledge Leverage",
+      "pledgeLeverage": "$t(shared:pledgeLeverage)",
       "topMargins": "Top Margins with Delegators"
     },
     "tabs": {
-      "list": "List",
-      "analytics": "Analytics"
+      "list": "$t(shared:list)",
+      "analytics": "$t(shared:analytics)"
     },
     "newPools": {
       "title": "New Pools",
@@ -273,7 +273,7 @@
     "updates": {
       "title": "Pool Updates",
       "totalOfSuffix": "pools",
-      "searchPlaceholder": "Search your results..."
+      "searchPlaceholder": "$t(shared:searchPlaceholder)"
     },
     "deregistrations": {
       "title": "Pool deregistrations",
@@ -284,22 +284,22 @@
       "totalOfSuffix": "registrations"
     },
     "table": {
-      "transactionHash": "Transaction Hash",
+      "transactionHash": "$t(shared:transactionHash)",
       "longetivity": "Longetivity",
-      "pool": "Pool",
-      "stake": "Stake",
-      "rewards": "Rewards",
-      "luck": "Luck",
-      "drep": "DRep",
-      "fees": "Fees",
-      "blocks": "Blocks",
-      "pledge": "Pledge",
-      "pledgeLeverage": "Pledge Leverage",
-      "delegators": "Delegators",
-      "averageStake": "Average stake",
+      "pool": "$t(shared:pool)",
+      "stake": "$t(shared:stake)",
+      "rewards": "$t(shared:rewards)",
+      "luck": "$t(shared:luck)",
+      "drep": "$t(shared:drep)",
+      "fees": "$t(shared:fees)",
+      "blocks": "$t(shared:blocks)",
+      "pledge": "$t(shared:pledge)",
+      "pledgeLeverage": "$t(shared:pledgeLeverage)",
+      "delegators": "$t(shared:delegators)",
+      "averageStake": "$t(shared:averageStake)",
       "selectedVote": "Selected vote",
-      "topDelegator": "Top delegator",
-      "epoch": "Epoch"
+      "topDelegator": "$t(shared:topDelegator)",
+      "epoch": "$t(shared:epoch)"
     },
     "analytics": {
       "newStakers": "New Stakers",
@@ -317,49 +317,49 @@
         "description": "Stake, DRep count, and delegator count delegated to entities serving as both SPOs and DRep"
       },
       "legend": {
-        "stake": "Stake (₳)",
-        "count": "Count",
-        "delegators": "Delegators",
+        "stake": "$t(shared:stake1)",
+        "count": "$t(shared:count)",
+        "delegators": "$t(shared:delegators)",
         "spoDrepCount": "SPO+DRep Count"
       },
       "tooltip": {
-        "date": "Date",
-        "epoch": "Epoch"
+        "date": "$t(shared:date)",
+        "epoch": "$t(shared:epoch)"
       }
     },
     "detailPage": {
-      "poolId": "Pool ID",
-      "poolDetail": "Pool detail",
+      "poolId": "$t(shared:poolId)",
+      "poolDetail": "$t(shared:Pooldetail)",
       "retired": "This pool is retired since epoch {{epoch}}",
       "retiring": "This pool will be retired from epoch {{epoch}}",
       "delegateTo": "Delegate to [{{ticker}}]",
       "tabs": {
         "performance": "Performance",
-        "blocks": "Blocks",
-        "rewards": "Rewards",
-        "delegators": "Delegators",
-        "about": "About",
+        "blocks": "$t(shared:blocks)",
+        "rewards": "$t(shared:rewards)",
+        "delegators": "$t(shared:delegators)",
+        "about": "$t(shared:about)",
         "awards": "Awards",
-        "governance": "Governance",
+        "governance": "$t(shared:title)",
         "embed": "Embed"
       },
       "about": {
-        "title": "About",
-        "name": "Name",
+        "title": "$t(shared:about)",
+        "name": "$t(shared:name)",
         "ticker": "Ticker",
-        "poolId": "Pool ID",
+        "poolId": "$t(shared:poolId)",
         "created": "Created",
-        "delegators": "Delegators",
+        "delegators": "$t(shared:delegators)",
         "website": "Website"
       },
       "stakeAndPledge": {
         "title": "Stake and Pledge",
         "saturation": "Saturation",
-        "liveStake": "Live Stake",
-        "activeStake": "Active Stake",
+        "liveStake": "$t(shared:liveStake1)",
+        "activeStake": "$t(shared:activeStake1)",
         "declaredPledge": "Declared Pledge",
         "activePledge": "Active Pledge",
-        "pledgeLeverage": "Pledge Leverage",
+        "pledgeLeverage": "$t(shared:pledgeLeverage)",
         "marginFee": "Margin Fee",
         "fixedFee": "Fixed Fee"
       },
@@ -376,43 +376,43 @@
       "delegatorsTabs": {
         "newcomers": "Newcomers",
         "migrations": "Migrations",
-        "structure": "Structure",
+        "structure": "$t(shared:structure)",
         "totalNewcomers": "Total of {{count}} newcomers",
         "totalMigrations": "Total of {{count}} migrations"
       },
       "aboutTab": {
         "aboutPool": "About Pool",
         "ownersPledge": "Owners (Pledge)",
-        "rewards": "Rewards",
+        "rewards": "$t(shared:rewards)",
         "relays": "Relays",
         "poolCertificates": "Pool Certificates",
         "retirement": "Retirement",
-        "address": "Address",
-        "activeStake": "Active Stake",
-        "liveStake": "Live Stake",
+        "address": "$t(shared:address)",
+        "activeStake": "$t(shared:activeStake1)",
+        "liveStake": "$t(shared:liveStake1)",
         "relativePledge": "Relative Pledge",
         "pledgeStaked": "Pledge / Staked",
         "port": "Port",
-        "date": "Date",
-        "tx": "Tx",
+        "date": "$t(shared:date)",
+        "tx": "$t(shared:tx)",
         "activeIn": "Active in",
         "rewardsAddress": "Rewards Address",
         "ownerAddress": "Owner Address",
         "params": "Params",
-        "pledge": "Pledge",
+        "pledge": "$t(shared:pledge)",
         "fixedCosts": "Fixed Costs",
         "margin": "Margin",
-        "metadata": "Metadata",
+        "metadata": "$t(shared:metadata)",
         "download": "Download",
         "transactionId": "Transaction ID",
         "retiringEpoch": "Retiring epoch"
       },
       "awards": {
-        "hash": "Hash",
-        "height": "Height",
-        "epoch": "Epoch",
-        "stake": "Stake",
-        "delegators": "Delegators"
+        "hash": "$t(shared:hash)",
+        "height": "$t(shared:height)",
+        "epoch": "$t(shared:epoch)",
+        "stake": "$t(shared:stake)",
+        "delegators": "$t(shared:delegators)"
       },
       "embed": {
         "buttons": "Buttons",
@@ -424,29 +424,29 @@
         "byStake": "Delegators structure by stake"
       },
       "delegatorsTable": {
-        "date": "Date",
-        "activeEpoch": "Active epoch",
-        "activeIn": "Active In",
-        "address": "Address",
-        "poolDelegation": "Pool Delegation",
-        "amount": "Amount",
-        "loyalty": "Loyalty",
-        "registered": "Registered"
+        "date": "$t(shared:date)",
+        "activeEpoch": "$t(shared:activeEpoch)",
+        "activeIn": "$t(shared:activeIn)",
+        "address": "$t(shared:address)",
+        "poolDelegation": "$t(shared:poolDelegation)",
+        "amount": "$t(shared:amount)",
+        "loyalty": "$t(shared:loyalty)",
+        "registered": "$t(shared:registered)"
       },
       "performanceGraph": {
-        "delegators": "Delegators",
+        "delegators": "$t(shared:delegators)",
         "luck": "Luck (%)",
-        "blocks": "Blocks",
-        "epochStake": "Epoch Stake",
+        "blocks": "$t(shared:blocks)",
+        "epochStake": "$t(shared:epochStake)",
         "roa": "ROA (%)",
-        "pledged": "Pledged",
-        "amount": "Amount",
-        "epoch": "Epoch",
-        "date": "Date"
+        "pledged": "$t(shared:pledged)",
+        "amount": "$t(shared:amount)",
+        "epoch": "$t(shared:epoch)",
+        "date": "$t(shared:date)"
       },
       "blocksGraph": {
         "day": "Day",
-        "blocks": "Blocks",
+        "blocks": "$t(shared:blocks)",
         "avgTxCount": "Avg TX Count"
       },
       "rewardsGraph": {
@@ -455,45 +455,45 @@
         "delegatorsRewards": "Delegators Rewards (₳)",
         "operatorRewards": "Operator rewards (₳)",
         "rewards": "Rewards (₳)",
-        "epoch": "Epoch",
-        "date": "Date"
+        "epoch": "$t(shared:epoch)",
+        "date": "$t(shared:date)"
       },
       "performanceTable": {
-        "epoch": "Epoch",
-        "startTime": "Start Time",
-        "endTime": "End Time",
-        "blocks": "Blocks",
-        "epochStake": "Epoch Stake",
-        "delegators": "Delegators",
-        "luck": "Luck",
-        "pledged": "Pledged",
-        "roa": "ROA",
+        "epoch": "$t(shared:epoch)",
+        "startTime": "$t(shared:startTime)",
+        "endTime": "$t(shared:endTime)",
+        "blocks": "$t(shared:blocks)",
+        "epochStake": "$t(shared:epochStake)",
+        "delegators": "$t(shared:delegators)",
+        "luck": "$t(shared:luck)",
+        "pledged": "$t(shared:pledged)",
+        "roa": "$t(shared:roa)",
         "roaTooltip": "ROA: Return on ADA — annualized return percentage for delegators",
         "current": "Current",
-        "pending": "Pending"
+        "pending": "$t(shared:pending)"
       },
       "blocksTable": {
-        "date": "Date",
-        "height": "Height",
-        "epoch": "Epoch",
-        "slot": "Slot",
-        "txs": "TXs",
-        "hash": "Hash",
-        "size": "Size",
+        "date": "$t(shared:date)",
+        "height": "$t(shared:height)",
+        "epoch": "$t(shared:epoch)",
+        "slot": "$t(shared:slot)",
+        "txs": "$t(shared:txs)",
+        "hash": "$t(shared:hash)",
+        "size": "$t(shared:size)",
         "protocol": "Protocol",
         "certCount": "Cert Count"
       },
       "rewardsTable": {
-        "epoch": "Epoch",
-        "rewards": "Rewards",
-        "activeStake": "Active Stake",
-        "epochStake": "Epoch Stake",
-        "roa": "ROA",
+        "epoch": "$t(shared:epoch)",
+        "rewards": "$t(shared:rewards)",
+        "activeStake": "$t(shared:activeStake1)",
+        "epochStake": "$t(shared:epochStake)",
+        "roa": "$t(shared:roa)",
         "roaTooltip": "ROA: Return on ADA — annualized return percentage for delegators",
-        "luck": "Luck",
-        "blocks": "Blocks",
-        "delegators": "Delegators",
-        "pending": "Pending",
+        "luck": "$t(shared:luck)",
+        "blocks": "$t(shared:blocks)",
+        "delegators": "$t(shared:delegators)",
+        "pending": "$t(shared:pending)",
         "pendingTwoEpochs": "The data will be available two epochs later",
         "pendingNextEpoch": "The data will be available next epoch.",
         "proratedLuckTooltip": "This is prorated luck.",
@@ -522,8 +522,8 @@
         "toBeRetired": "To Be Retired"
       },
       "sortOptions": {
-        "date": "Date",
-        "liveStake": "Live Stake"
+        "date": "$t(shared:date)",
+        "liveStake": "$t(shared:liveStake1)"
       },
       "table": {
         "index": "#",
@@ -533,37 +533,37 @@
       }
     },
     "table": {
-      "paymentCredential": "Payment credential",
+      "paymentCredential": "$t(shared:paymentCredential)",
       "stakeKeys": "Stake keys"
     }
   },
   "withdrawals": {
-    "title": "Withdrawals",
+    "title": "$t(shared:withdrawals)",
     "table": {
       "amountControlled": "Amount Controlled",
       "amountWithdrawn": "Amount Withdrawn"
     }
   },
   "rewardsChecker": {
-    "title": "Rewards checker",
+    "title": "$t(shared:rewardsChecker)",
     "searchPlaceholder": "Search stake address...",
-    "addressDetail": "Address detail",
+    "addressDetail": "$t(shared:addressDetail)",
     "invalidAddress": "Invalid address",
     "noStakeKey": "This address has no stake key"
   },
   "groups": {
     "title": "Cardano Groups (Donuts)",
-    "breadcrumb": "Groups",
+    "breadcrumb": "$t(shared:groups)",
     "totalOfSuffix": "groups",
-    "searchPlaceholder": "Search your results...",
+    "searchPlaceholder": "$t(shared:searchPlaceholder)",
     "info": "This dashboard is managed by Cardano community. Everyone can add or modify existing groups via",
     "alsoDrep": "Also DRep",
-    "yes": "Yes",
-    "no": "No",
+    "yes": "$t(shared:yes)",
+    "no": "$t(shared:no)",
     "charts": {
       "poolsCount": "Pools Count",
       "poolStake": "Pool Stake",
-      "pledge": "Pledge",
+      "pledge": "$t(shared:pledge)",
       "pledgePerPool": "μ Pledge per Pool"
     },
     "table": {
@@ -590,41 +590,41 @@
     "searchPlaceholder": "Search by Drep ID...",
     "displayVote": "Display vote",
     "tabs": {
-      "list": "List",
-      "delegations": "Delegations",
-      "analytics": "Analytics"
+      "list": "$t(shared:list)",
+      "delegations": "$t(shared:delegations)",
+      "analytics": "$t(shared:analytics)"
     },
     "stats": {
       "registeredDreps": "Registered DReps",
       "activeVotingStake": "Active voting stake",
-      "delegators": "Delegators",
+      "delegators": "$t(shared:delegators)",
       "stakeToRetiredDreps": "Stake to retired DReps",
-      "active": "Active",
-      "inactive": "Inactive",
+      "active": "$t(shared:active)",
+      "inactive": "$t(shared:inactive)",
       "retired": "Retired",
-      "abstain": "Abstain",
-      "noConfidence": "No confidence",
-      "delegations": "Delegations",
+      "abstain": "$t(shared:abstain)",
+      "noConfidence": "$t(shared:noConfidence)",
+      "delegations": "$t(shared:delegations)",
       "retiredDreps": "Retired DReps"
     },
     "filter": {
       "selectedVotes": "Selected votes",
       "alsoSpo": "Also SPO",
-      "yes": "Yes",
-      "no": "No"
+      "yes": "$t(shared:yes)",
+      "no": "$t(shared:no)"
     },
     "table": {
       "ranking": "#",
       "drepName": "DRep name",
-      "lifetimeActivity": "Lifetime Activity",
+      "lifetimeActivity": "$t(shared:lifetimeActivity)",
       "lifetimeActivityTooltip": "Voting activity over DRep's lifetime",
-      "recentActivity": "Recent Activity",
+      "recentActivity": "$t(shared:recentActivity)",
       "recentActivityTooltip": "DRep's voting activity over the past 6 months",
       "ownerStake": "Owner stake",
-      "averageStake": "Average stake",
+      "averageStake": "$t(shared:averageStake)",
       "drepMetadata": "DRep metadata",
       "selectedVote": "Selected vote",
-      "topDelegator": "Top delegator"
+      "topDelegator": "$t(shared:topDelegator)"
     },
     "delegations": {
       "totalOfSuffix": "delegations"
@@ -638,9 +638,9 @@
       "drepSize": "Drep Size",
       "tabs": {
         "votingPower": "Voting Power",
-        "delegators": "Delegators",
+        "delegators": "$t(shared:delegators)",
         "ownerStake": "Owner Stake",
-        "averageStake": "Average Stake"
+        "averageStake": "$t(shared:averageStake1)"
       },
       "pie": {
         "abstainDrep": "Abstain DRep",
@@ -652,85 +652,85 @@
     },
     "detailPage": {
       "drepId": "Drep ID",
-      "promote": "Promote",
-      "delegateTo": "Delegate to {{name}}",
+      "promote": "$t(shared:promote)",
+      "delegateTo": "$t(shared:delegateTo)",
       "tabs": {
-        "governanceActions": "Governance actions",
-        "delegators": "Delegators",
+        "governanceActions": "$t(shared:governanceActions)",
+        "delegators": "$t(shared:delegators)",
         "stats": "Stats",
         "embed": "Embed",
-        "about": "About"
+        "about": "$t(shared:about)"
       },
       "about": {
-        "title": "About",
-        "name": "Name",
+        "title": "$t(shared:about)",
+        "name": "$t(shared:name)",
         "drepId": "DRep ID",
         "drepIdLegacy": "DRep ID (Legacy)",
-        "stakeKey": "Stake key",
-        "registered": "Registered",
+        "stakeKey": "$t(shared:stakeKey)",
+        "registered": "$t(shared:registered)",
         "lastUpdated": "Last updated",
         "alwaysAbstain": "Always Abstain",
         "alwaysNoConfidence": "Always No Confidence",
         "naSystemDrep": "N/A (system DRep)",
         "systemDefault": "System Default",
-        "unknown": "Unknown"
+        "unknown": "$t(shared:unknown)"
       },
       "voting": {
         "title": "Voting",
-        "status": "Status",
+        "status": "$t(shared:status1)",
         "drepMetadata": "DRep metadata",
         "votingPower": "Voting power",
         "ownVotingPower": "Own voting power",
         "rewardsAddress": "Rewards address",
-        "active": "Active",
-        "inactive": "Inactive",
+        "active": "$t(shared:active)",
+        "inactive": "$t(shared:inactive)",
         "notProvided": "Not provided",
         "provided": "Provided"
       },
       "governance": {
-        "title": "Governance",
+        "title": "$t(shared:title)",
         "lastVote": "Last vote",
-        "recentActivity": "Recent Activity",
+        "recentActivity": "$t(shared:recentActivity)",
         "recentActivityTooltip": "DRep's voting activity over the past 6 months",
-        "lifetimeActivity": "Lifetime Activity",
+        "lifetimeActivity": "$t(shared:lifetimeActivity)",
         "lifetimeActivityTooltip": "Voting activity over DRep's lifetime",
         "voted": "Voted:",
-        "yes": "Yes",
-        "abstain": "Abstain",
-        "no": "No",
+        "yes": "$t(shared:yes)",
+        "abstain": "$t(shared:abstain)",
+        "no": "$t(shared:no)",
         "behavior": "Behavior",
         "delegatedStake": "Delegated Stake",
         "abstainBehavior": "Automatically abstains from all governance votes.",
         "noConfidenceBehavior": "Automatically votes 'No Confidence' depending on the action type."
       },
       "governanceActionsTable": {
-        "date": "Date",
-        "type": "Type",
-        "governanceAction": "Governance action",
+        "date": "$t(shared:date)",
+        "type": "$t(shared:type)",
+        "governanceAction": "$t(shared:governanceAction)",
         "vote": "Vote",
         "votingPower": "Voting Power",
-        "tx": "Tx"
+        "tx": "$t(shared:tx)"
       },
       "delegatorsTabs": {
         "allDelegators": "All Delegators",
         "newDelegators": "New Delegators",
         "migrations": "Migrations",
-        "structure": "Structure"
+        "structure": "$t(shared:structure)"
       },
       "delegatorsTable": {
         "delegated": "Delegated",
-        "activeIn": "Active In",
-        "stake": "Stake",
-        "amount": "Amount",
+        "activeIn": "$t(shared:activeIn)",
+        "stake": "$t(shared:stake)",
+        "amount": "$t(shared:amount)",
         "drepDelegation": "DRep Delegation",
-        "loyalty": "Loyalty",
-        "tx": "Tx"
+        "loyalty": "$t(shared:loyalty)",
+        "tx": "$t(shared:tx)"
       },
       "statsGraph": {
         "power": "Power",
-        "delegators": "Delegators",
-        "epoch": "Epoch",
-        "date": "Date"
+        "delegators": "$t(shared:delegators)",
+        "epoch": "$t(shared:epoch)",
+        "date": "$t(shared:date)"
       },
       "embed": {
         "buttons": "Buttons",
@@ -751,7 +751,7 @@
       }
     },
     "graphs": {
-      "date": "Date:",
+      "date": "$t(shared:date1)",
       "epoch": "Epoch:",
       "averageDreps": {
         "title": "Average DReps",
@@ -772,9 +772,9 @@
         "title": "DReps that are not SPOs",
         "description": "Epoch-level view of stake, DRep count, and delegator count delegated to DReps who are not SPOs",
         "drepCount": "DRep Count",
-        "stake": "Stake (₳)",
-        "stakeShort": "Stake",
-        "delegators": "Delegators",
+        "stake": "$t(shared:stake1)",
+        "stakeShort": "$t(shared:stake)",
+        "delegators": "$t(shared:delegators)",
         "showFiltered": "Show Filtered",
         "filterTooltip": "Excludes 'Abstain' and 'No Confidence' DReps from Count and Stake."
       },
@@ -797,18 +797,18 @@
     }
   },
   "assets": {
-    "title": "Assets",
+    "title": "$t(shared:assets)",
     "detail": "Asset detail",
-    "tokens": "Tokens",
-    "nfts": "NFTs",
+    "tokens": "$t(shared:tokens)",
+    "nfts": "$t(shared:nfts)",
     "all": "All Assets",
     "recentTokens": "Recent Tokens",
     "recentNfts": "Recent NFTs",
     "searchPlaceholder": "Search by asset...",
     "tabs": {
-      "all": "All",
-      "tokens": "Tokens",
-      "nfts": "NFTs"
+      "all": "$t(shared:all)",
+      "tokens": "$t(shared:tokens)",
+      "nfts": "$t(shared:nfts)"
     }
   },
   "contractTransactions": {
@@ -818,9 +818,9 @@
   "metadata": {
     "title": "Metadata Transactions List",
     "totalOfSuffix": "transactions",
-    "searchPlaceholder": "Search your results...",
+    "searchPlaceholder": "$t(shared:searchPlaceholder)",
     "search": {
-      "hash": "Hash",
+      "hash": "$t(shared:hash)",
       "key": "Key"
     }
   },
@@ -842,100 +842,100 @@
     }
   },
   "governance": {
-    "title": "Governance",
-    "actions": "Governance actions",
-    "votes": "Votes",
-    "constitution": "Constitution"
+    "title": "$t(shared:title)",
+    "actions": "$t(shared:governanceActions)",
+    "votes": "$t(shared:votes)",
+    "constitution": "$t(shared:constitution)"
   },
   "address": {
-    "title": "Address",
-    "detail": "Address detail"
+    "title": "$t(shared:address)",
+    "detail": "$t(shared:addressDetail)"
   },
   "stake": {
-    "title": "Stake address",
+    "title": "$t(shared:stakeAddress)",
     "detail": "Stake detail",
     "detailPage": {
       "title": "Stake Detail",
-      "breadcrumb": "Address",
-      "stakeAddress": "Stake address",
+      "breadcrumb": "$t(shared:address)",
+      "stakeAddress": "$t(shared:stakeAddress)",
       "tabs": {
-        "assets": "Assets",
-        "transactions": "Transactions",
-        "withdrawals": "Withdrawals",
+        "assets": "$t(shared:assets)",
+        "transactions": "$t(shared:transactions)",
+        "withdrawals": "$t(shared:withdrawals)",
         "addresses": "Addresses",
-        "delegations": "Delegations",
-        "rewards": "Rewards",
+        "delegations": "$t(shared:delegations)",
+        "rewards": "$t(shared:rewards)",
         "trading": "Trading"
       },
       "overview": {
         "title": "Overview",
-        "handle": "Handle",
+        "handle": "$t(shared:handle)",
         "totalBalance": "Total balance",
         "assetsBalance": "Assets balance",
         "adaBalance": "ADA balance",
         "privateName": "Private name"
       },
       "staking": {
-        "title": "Staking",
-        "status": "Status",
-        "active": "Active",
-        "inactive": "Inactive",
+        "title": "$t(shared:pools)",
+        "status": "$t(shared:status1)",
+        "active": "$t(shared:active)",
+        "inactive": "$t(shared:inactive)",
         "deregistered": "Deregistered",
         "stakePool": "Stake pool",
         "rewardsAvailable": "Rewards available",
-        "drepDelegation": "DRep delegation",
+        "drepDelegation": "$t(shared:drepDelegation)",
         "alwaysAbstain": "Always abstain",
         "alwaysNoConfidence": "Always no confidence",
-        "amount": "Amount",
+        "amount": "$t(shared:amount)",
         "since": "Since",
-        "id": "ID",
+        "id": "$t(shared:id)",
         "rewardsWithdrawn": "Rewards withdrawn",
-        "stakeKey": "Stake key",
-        "rawAddress": "Raw address"
+        "stakeKey": "$t(shared:stakeKey)",
+        "rawAddress": "$t(shared:rawAddress)"
       },
       "delegationsTab": {
         "stakePools": "Stake Pools",
-        "dreps": "DReps"
+        "dreps": "$t(shared:dreps)"
       },
       "withdrawalsTable": {
         "withdrawals": "withdrawals",
-        "searchPlaceholder": "Search by tx hash...",
-        "date": "Date",
-        "hash": "Hash",
+        "searchPlaceholder": "$t(shared:searchPlaceholder1)",
+        "date": "$t(shared:date)",
+        "hash": "$t(shared:hash)",
         "epochBlock": "Epoch / Block",
-        "totalOutput": "Total Output",
+        "totalOutput": "$t(shared:totalOutput)",
         "fee": "Fee",
-        "amount": "Amount",
-        "size": "Size"
+        "amount": "$t(shared:amount)",
+        "size": "$t(shared:size)"
       },
       "poolDelegationsTable": {
         "delegationHistory": "Delegation history",
-        "date": "Date",
-        "activeEpoch": "Active epoch",
-        "stakePool": "Stake Pool",
-        "activeStake": "Active Stake",
-        "loyalty": "Loyalty",
-        "registered": "Registered",
-        "tx": "Tx"
+        "date": "$t(shared:date)",
+        "activeEpoch": "$t(shared:activeEpoch)",
+        "stakePool": "$t(shared:stakePool)",
+        "activeStake": "$t(shared:activeStake1)",
+        "loyalty": "$t(shared:loyalty)",
+        "registered": "$t(shared:registered)",
+        "tx": "$t(shared:tx)"
       },
       "drepDelegationsTable": {
         "delegationHistory": "DRep Delegation history",
-        "date": "Date",
-        "drep": "DRep",
-        "activeStake": "Active Stake",
-        "liveStake": "Live Stake",
-        "loyalty": "Loyalty",
-        "tx": "Tx"
+        "date": "$t(shared:date)",
+        "drep": "$t(shared:drep)",
+        "activeStake": "$t(shared:activeStake1)",
+        "liveStake": "$t(shared:liveStake1)",
+        "loyalty": "$t(shared:loyalty)",
+        "tx": "$t(shared:tx)"
       },
       "multiDelegationsTable": {
         "title": "Multi delegations",
-        "address": "Address",
-        "activeEpoch": "Active epoch",
-        "stakePool": "Stake Pool",
+        "address": "$t(shared:address)",
+        "activeEpoch": "$t(shared:activeEpoch)",
+        "stakePool": "$t(shared:stakePool)",
         "notDelegated": "Not delegated",
-        "activeStake": "Active Stake",
-        "loyalty": "Loyalty",
-        "registered": "Registered"
+        "activeStake": "$t(shared:activeStake1)",
+        "loyalty": "$t(shared:loyalty)",
+        "registered": "$t(shared:registered)"
       }
     },
     "registrations": {
@@ -948,7 +948,7 @@
     }
   },
   "policy": {
-    "title": "Policy",
+    "title": "$t(shared:title12)",
     "detail": "Policy detail"
   },
   "script": {
@@ -962,7 +962,7 @@
     "title": "Script detail"
   },
   "taxTool": {
-    "title": "Tax tool"
+    "title": "$t(shared:taxTool)"
   },
   "polls": {
     "title": "Cexplorer governance actions"
@@ -974,20 +974,20 @@
     "title": "Account analytics"
   },
   "addressDetail": {
-    "title": "Address"
+    "title": "$t(shared:address)"
   },
   "policyDetail": {
-    "title": "Policy"
+    "title": "$t(shared:title12)"
   },
   "analytics": {
-    "title": "Analytics",
+    "title": "$t(shared:analytics)",
     "network": "Network analytics",
     "genesis": "Genesis addresses",
     "graph": {
-      "blocks": "Blocks",
+      "blocks": "$t(shared:blocks)",
       "blockSize": "Block Size",
       "movingAverage": "Moving Average (5 epochs)",
-      "transactions": "Transactions",
+      "transactions": "$t(shared:transactions)",
       "version": "Version",
       "blockNo": "Block No",
       "dates": "Dates",
@@ -1005,12 +1005,12 @@
       "stakeDeregistration": "Stake deregistration",
       "txMetadata": "Transaction metadata",
       "withdrawal": "Withdrawal",
-      "other": "Other"
+      "other": "$t(shared:other)"
     }
   },
   "profile": {
     "title": "Profile",
-    "settings": "Settings",
+    "settings": "$t(shared:settings)",
     "watchlist": "Watchlist",
     "labels": "Labels"
   },
@@ -1020,19 +1020,19 @@
     "wiki": "Admin wiki"
   },
   "breadcrumbs": {
-    "home": "Home",
-    "groups": "Groups",
+    "home": "$t(shared:home)",
+    "groups": "$t(shared:groups)",
     "scriptList": "Script List",
-    "taxTool": "Tax tool",
+    "taxTool": "$t(shared:taxTool)",
     "voting": "Voting",
     "poolDebug": "SPO Debug",
-    "stake": "Stake",
-    "address": "Address",
-    "assets": "Assets",
-    "settings": "Settings",
-    "analytics": "Analytics",
+    "stake": "$t(shared:stake)",
+    "address": "$t(shared:address)",
+    "assets": "$t(shared:assets)",
+    "settings": "$t(shared:settings)",
+    "analytics": "$t(shared:analytics)",
     "account": "Account",
-    "pool": "Pool"
+    "pool": "$t(shared:pool)"
   },
   "errors": {
     "notFound": "Page not found",
@@ -1051,8 +1051,8 @@
     },
     "debugger": {
       "description": "Enter your pool ID to check your stake pool configuration. After submitting, you'll see a detailed list of any issues that need attention, or confirmation that everything appears to be set up correctly.",
-      "date": "Date",
-      "type": "Type",
+      "date": "$t(shared:date)",
+      "type": "$t(shared:type)",
       "errorDescription": "Description",
       "errors": "{{count}} Errors",
       "poolDetail": "Pool detail →"

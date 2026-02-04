@@ -10,10 +10,10 @@
     "stake": "$t(shared:labels.stake)",
     "activeStake": "$t(shared:activeStake)",
     "liveStake": "$t(shared:liveStake)",
-    "epochStake": "Epoch Stake",
+    "epochStake": "$t(shared:epochStake)",
     "delegators": "$t(shared:labels.delegators)",
     "delegation": "$t(shared:labels.delegation)",
-    "delegations": "Delegations",
+    "delegations": "$t(shared:delegations)",
     "transactions": "$t(shared:labels.transactions)",
     "tx": "$t(shared:labels.tx)",
     "txHash": "TX hash",
@@ -31,28 +31,28 @@
     "status": "$t(shared:labels.status)",
     "registered": "$t(shared:labels.registered)",
     "loyalty": "$t(shared:labels.loyalty)",
-    "epochBlock": "Epoch/Block",
-    "activeEpoch": "Active epoch",
-    "stakeKey": "Stake key",
-    "stakePool": "Stake Pool",
-    "poolId": "Pool ID",
+    "epochBlock": "$t(shared:epochBlock)",
+    "activeEpoch": "$t(shared:activeEpoch)",
+    "stakeKey": "$t(shared:stakeKey)",
+    "stakePool": "$t(shared:stakePool)",
+    "poolId": "$t(shared:poolId)",
     "metadata": "$t(shared:labels.metadata)",
     "governance": "$t(shared:labels.governance)",
     "analytics": "$t(shared:labels.analytics)",
     "about": "$t(shared:labels.about)",
     "withdrawals": "$t(shared:labels.withdrawals)",
-    "totalOutput": "Total Output",
+    "totalOutput": "$t(shared:totalOutput)",
     "votingPower": "$t(shared:votingPower)",
     "yes": "$t(shared:status.yes)",
     "no": "$t(shared:status.no)",
     "time": "$t(shared:labels.time)",
     "output": "$t(shared:labels.output)",
     "pending": "$t(shared:status.pending)",
-    "roa": "ROA",
+    "roa": "$t(shared:roa)",
     "luck": "$t(shared:labels.luck)",
     "protocol": "$t(shared:labels.protocol)",
-    "startTime": "Start Time",
-    "endTime": "End Time",
+    "startTime": "$t(shared:startTime)",
+    "endTime": "$t(shared:endTime)",
     "active": "$t(shared:status.active)",
     "inactive": "$t(shared:status.inactive)",
     "retired": "$t(shared:labels.retired)",
@@ -70,7 +70,7 @@
     "fingerprint": "$t(shared:labels.fingerprint)",
     "policy": "$t(shared:labels.policy)",
     "token": "$t(shared:labels.token)",
-    "nft": "NFT",
+    "nft": "$t(shared:nft)",
     "key": "$t(shared:labels.key)",
     "purpose": "$t(shared:labels.purpose)",
     "scriptHash": "Script hash",
@@ -78,7 +78,7 @@
   },
   "phrases": {
     "totalOf": "Total of",
-    "searchResults": "Search your results..."
+    "searchResults": "$t(shared:searchPlaceholder)"
   },
   "settings": {
     "theme": "Theme",
@@ -143,7 +143,7 @@
     "years": "years"
   },
   "wallet": {
-    "connect": "Connect wallet",
+    "connect": "$t(shared:connect)",
     "disconnect": "Disconnect",
     "connected": "Connected",
     "notConnected": "Not connected",
@@ -170,7 +170,7 @@
     "confirm": "Confirm",
     "anonymousUser": "Anonymous User",
     "adaHandle": "ADA Handle",
-    "adaBalance": "ADA Balance",
+    "adaBalance": "$t(shared:adaBalance)",
     "pool": "$t(shared:labels.pool)",
     "browsePools": "Browse pools",
     "drep": "$t(shared:labels.drep)",
@@ -213,7 +213,7 @@
         "multipleAccounts": "Multiple accounts",
         "customNode": "Custom node",
         "addressBook": "Address book",
-        "other": "Other",
+        "other": "$t(shared:other)",
         "nftMarketplace": "NFT marketplace",
         "swapsInWallets": "Swaps in wallets",
         "fiatOnramp": "Fiat onramp"
@@ -254,23 +254,23 @@
     "overview": "$t(shared:labels.overview)",
     "delegation": "Delegation",
     "detail": "Detail",
-    "handle": "Handle",
+    "handle": "$t(shared:handle)",
     "assetsBalance": "Assets Balance",
-    "adaBalance": "ADA Balance",
+    "adaBalance": "$t(shared:adaBalance)",
     "calculating": "Calculating",
     "lastActivity": "Last Activity",
     "currentlyUnavailable": "Currently unavailable",
     "privateName": "Private name",
     "notDelegated": "Not delegated",
-    "drepDelegation": "DRep delegation",
+    "drepDelegation": "$t(shared:drepDelegation)",
     "alwaysAbstain": "Always abstain",
     "alwaysNoConfidence": "Always no confidence",
     "since": "Since",
-    "id": "ID",
+    "id": "$t(shared:id)",
     "controlledStake": "Controlled Stake",
     "rewardsAvailable": "Rewards Available",
     "rewardsWithdrawn": "Rewards Withdrawn",
-    "rawAddress": "Raw address",
+    "rawAddress": "$t(shared:rawAddress)",
     "paymentCredential": "Payment Credential",
     "stakingCredential": "Staking Credential",
     "firstDiscovery": "First Discovery",
@@ -279,56 +279,56 @@
     "addCustomName": "Add custom name",
     "labelLimitFree": "You can only add 10 labels with the free version of Cexplorer",
     "labelLimitPro": "You can only add 100 labels per NFT with the PRO version of Cexplorer",
-    "policyId": "Policy ID",
+    "policyId": "$t(shared:policyId)",
     "holdings": "$t(shared:labels.holdings)",
     "percentSupply": "% Supply",
-    "value": "Value",
+    "value": "$t(shared:value)",
     "lowLiquidity": "Low liquidity (< 1000 ADA)",
     "addresses": "$t(shared:labels.addresses)",
     "balance": "Balance",
     "activity": "$t(shared:labels.activity)",
     "tokens": "$t(shared:labels.tokens)",
     "all": "$t(shared:labels.all)",
-    "nfts": "NFTs",
+    "nfts": "$t(shared:nfts)",
     "hideLowBalances": "Hide Low Balances",
     "displayingTokens": "Displaying {{count}} tokens",
     "displayingNfts": "Displaying {{count}} NFTs",
     "totalRewards": "Total of {{count}} rewards",
     "totalUtxos": "Total of {{count}} UTXOs",
-    "searchByTxHash": "Search by tx hash...",
-    "index": "Index",
+    "searchByTxHash": "$t(shared:searchPlaceholder1)",
+    "index": "$t(shared:index)",
     "minUtxoAda": "Min UTXO ADA",
     "noDatum": "NoDatum",
-    "asset": "Asset",
+    "asset": "$t(shared:asset)",
     "pnl24h": "PnL (24h)",
     "pnl7d": "PnL (7d)",
     "percentPortfolio": "% Portfolio"
   },
   "rewards": {
-    "title": "Rewards",
+    "title": "$t(shared:rewards)",
     "rewardsAda": "Rewards (₳)",
     "rewardsUsd": "Rewards ($)",
     "roaPercent": "ROA (%)",
     "activeStakeAda": "Active Stake (₳)",
     "tooltipDate": "$t(shared:labels.date)",
     "tooltipEpoch": "$t(shared:labels.epoch)",
-    "xAxisLabel": "Epoch",
-    "tooltipRewards": "Rewards",
-    "tooltipRoa": "ROA",
-    "tooltipStake": "Stake"
+    "xAxisLabel": "$t(shared:epoch)",
+    "tooltipRewards": "$t(shared:rewards)",
+    "tooltipRoa": "$t(shared:roa)",
+    "tooltipStake": "$t(shared:stake)"
   },
   "tableSettings": {
     "rows": "Rows",
     "date": "$t(shared:labels.date)",
     "epoch": "$t(shared:labels.epoch)",
     "pool": "$t(shared:labels.pool)",
-    "stake_pool": "Stake Pool",
+    "stake_pool": "$t(shared:stakePool)",
     "reward": "Reward",
-    "roa": "ROA",
+    "roa": "$t(shared:roa)",
     "active_stake": "Active stake",
     "fees": "$t(shared:labels.fees)",
     "pledge": "$t(shared:labels.pledge)",
-    "tx_hash": "Transaction Hash",
+    "tx_hash": "$t(shared:transactionHash)",
     "certificate": "$t(shared:labels.certificate)",
     "block": "$t(shared:labels.block)",
     "blocks": "$t(shared:labels.blocks)",
@@ -337,9 +337,9 @@
     "rewards": "$t(shared:labels.rewards)",
     "luck": "$t(shared:labels.luck)",
     "drep": "$t(shared:labels.drep)",
-    "pledge_leverage": "Pledge Leverage",
-    "avg_stake": "Average stake",
-    "top_delegator": "Top delegator",
+    "pledge_leverage": "$t(shared:pledgeLeverage)",
+    "avg_stake": "$t(shared:averageStake)",
+    "top_delegator": "$t(shared:topDelegator)",
     "ranking": "Ranking",
     "address": "$t(shared:labels.address)",
     "amount": "$t(shared:labels.amount)",
@@ -354,32 +354,32 @@
     "longevity": "$t(shared:labels.longevity)",
     "birthday": "$t(shared:labels.birthday)",
     "registered": "$t(shared:labels.registered)",
-    "payment_cred": "Payment credential",
+    "payment_cred": "$t(shared:paymentCredential)",
     "delegated_to": "Delegated to",
     "live_stake": "$t(shared:liveStake)",
     "delegation": "$t(shared:labels.delegation)",
     "tx": "$t(shared:labels.tx)",
     "amount_controlled": "Amount Controlled",
     "amount_withdrawn": "Amount Withdrawn",
-    "epoch_block": "Epoch/Block",
-    "start_time": "Start Time",
-    "end_time": "End Time",
-    "start": "Start",
+    "epoch_block": "$t(shared:epochBlock)",
+    "start_time": "$t(shared:startTime)",
+    "end_time": "$t(shared:endTime)",
+    "start": "$t(shared:start)",
     "end": "Expiry Epoch",
-    "txs": "TXs",
+    "txs": "$t(shared:txs)",
     "output": "$t(shared:labels.output)",
     "usage": "Usage",
-    "block_no": "Height",
+    "block_no": "$t(shared:height)",
     "epoch_no": "$t(shared:labels.epoch)",
     "slot_no": "$t(shared:labels.slot)",
-    "tx_count": "TXs",
-    "minted_by": "Minted by",
-    "epoch_slot_no": "Epoch slot",
-    "vrf_key": "VRF key",
+    "tx_count": "$t(shared:txs)",
+    "minted_by": "$t(shared:mintedBy)",
+    "epoch_slot_no": "$t(shared:epochSlot)",
+    "vrf_key": "$t(shared:vrfKey)",
     "protocol": "$t(shared:labels.protocol)",
     "cert_counter": "Cert counter",
-    "total_output": "Total Output",
-    "donation": "Treasury Donation",
+    "total_output": "$t(shared:totalOutput)",
+    "donation": "$t(shared:treasuryDonation)",
     "script_size": "Script Size",
     "order": "Order",
     "type": "$t(shared:labels.type)",
@@ -394,12 +394,12 @@
     "drep_name": "DRep Name",
     "voting_power": "$t(shared:votingPower)",
     "voting_activity": "Voting Activity",
-    "recent_activity": "Recent Activity",
+    "recent_activity": "$t(shared:recentActivity)",
     "owner_stake": "Owner Stake",
-    "average_stake": "Average Stake",
+    "average_stake": "$t(shared:averageStake1)",
     "spo": "$t(shared:labels.spo)",
-    "metadata": "Metadata",
-    "policy_id": "Policy ID",
+    "metadata": "$t(shared:metadata)",
+    "policy_id": "$t(shared:policyId)",
     "price": "$t(shared:labels.price)",
     "pnl_24": "PnL 24h",
     "pnl_7": "PnL 7d",
@@ -409,12 +409,12 @@
     "value": "$t(shared:labels.value)",
     "date_start": "Date Start",
     "date_end": "Date End",
-    "pledged": "Pledged",
-    "active_in": "Active In",
-    "pool_delegation": "Pool Delegation",
+    "pledged": "$t(shared:pledged)",
+    "active_in": "$t(shared:activeIn)",
+    "pool_delegation": "$t(shared:poolDelegation)",
     "index": "$t(shared:labels.index)",
-    "total_ouput": "Total Output",
-    "utxo": "UTXO",
+    "total_ouput": "$t(shared:totalOutput)",
+    "utxo": "$t(shared:utxo)",
     "dapp": "DApp",
     "category": "$t(shared:labels.category)",
     "users": "$t(shared:labels.users)",
@@ -422,10 +422,10 @@
     "activity_change": "Activity Change",
     "epoch_volume": "Epoch Volume",
     "treasury": "$t(shared:labels.treasury)",
-    "reserves": "Reserves",
+    "reserves": "$t(shared:reserves)",
     "deposits": "$t(shared:labels.deposits)",
     "star": "Star",
-    "nft": "NFT",
+    "nft": "$t(shared:nft)",
     "power": "Power",
     "modify": "$t(shared:actions.modify)",
     "memory": "$t(shared:labels.memory)",
@@ -449,13 +449,13 @@
     "fingerprint": "$t(shared:labels.fingerprint)",
     "action": "Action",
     "slot_leader": "Slot Leader",
-    "asset_minted": "Asset Minted",
-    "mint_quantity": "Mint Quantity",
+    "asset_minted": "$t(shared:assetMinted)",
+    "mint_quantity": "$t(shared:mintQuantity)",
     "unit_steps": "Unit Steps",
     "token": "Token",
     "change_24h": "Change 24h",
-    "volume": "Volume",
-    "liquidity": "Liquidity",
+    "volume": "$t(shared:volume)",
+    "liquidity": "$t(shared:liquidity)",
     "age": "Age",
     "last_week": "Last Week",
     "buy": "Buy",
@@ -468,9 +468,9 @@
   },
   "analytics": {
     "account": "$t(shared:labels.account)",
-    "adaBalance": "ADA Balance",
+    "adaBalance": "$t(shared:adaBalance)",
     "poolDelegation": "Pool delegation",
-    "drepDelegation": "DRep delegation",
+    "drepDelegation": "$t(shared:drepDelegation)",
     "delegatedToPool": "Delegated to a stake pool",
     "notDelegatedToPool": "Not delegated to a stake pool",
     "delegatedToDrep": "Delegated to a DRep",
@@ -497,14 +497,14 @@
     "table": "Table",
     "charts": "Charts",
     "totalSupply": "Total supply",
-    "structure": "Structure",
-    "blocks": "Blocks",
+    "structure": "$t(shared:structure)",
+    "blocks": "$t(shared:blocks)",
     "allTime": "All time",
     "averageBlockSize": "Average block size",
     "inPreviousEpoch": "In previous epoch",
     "maximumBlockCapacity": "Maximum block capacity",
     "inEpoch": "In epoch",
-    "transactions": "Transactions",
+    "transactions": "$t(shared:transactions)",
     "transactionsPerSecond": "Transactions per second (TPS)",
     "avgFeePerTransaction": "Average fee per transaction",
     "tpsDescription": "Visual expression of all transactions on the Cardano network in time.",
@@ -535,7 +535,7 @@
     "blockVersionsDescription": "Distribution of block versions across the network.",
     "version": "Version",
     "percentage": "Percentage",
-    "latestBlocks": "Latest blocks",
+    "latestBlocks": "$t(shared:latestBlocks)",
     "byDate": "By date",
     "byPool": "By pool",
     "poolIssues": "Pool Issues",
@@ -543,15 +543,15 @@
     "missedBlocksDescription": "Blocks that were expected but not produced by stake pools.",
     "averagePool": "Average Pool",
     "averagePoolDescription": "Statistics about the average stake pool on Cardano.",
-    "avgStake": "Average stake",
+    "avgStake": "$t(shared:averageStake)",
     "avgDelegators": "Average delegators",
     "avgRewards": "Average rewards",
     "avgBlocks": "Average blocks",
-    "hardfork": "Hardfork",
+    "hardfork": "$t(shared:hardfork)",
     "upgraded": "Upgraded",
     "notUpgraded": "Not upgraded",
     "upgradeProgress": "Upgrade Progress",
-    "blockProduction": "Block production",
+    "blockProduction": "$t(shared:blockProduction)",
     "blockProductionDescription": "Visual expression of block production on Cardano",
     "totalTransactions": "Total of {{count}} transactions",
     "txCount": "TX count",
@@ -589,11 +589,11 @@
     "blockVersions30Days": "Block Versions in last 30 days",
     "poolSupportingSignal": "Pool supporting signal",
     "poolSupportingSignalDescription": "Shows stake pools ordered by stake, showing the node version they run",
-    "latestBlocksVersions": "Latest blocks",
+    "latestBlocksVersions": "$t(shared:latestBlocks)",
     "latestBlocksVersionsDescription": "Reflects the node version under which each recent block was minted",
-    "averagePools": "Average pools",
+    "averagePools": "$t(shared:averagePools)",
     "missedBlocksTab": "Missed Blocks",
-    "recent": "Recent",
+    "recent": "$t(shared:recent)",
     "epochs": "{{count}} epochs",
     "longterm": "Longterm",
     "monitoredEpochs": "Monitored epochs",
@@ -608,13 +608,13 @@
     "csvDescription": "Great for easy viewing in spreadsheet tools.",
     "pngFormat": "PNG",
     "pngDescription": "Ideal for sharing high-quality images with lossless compression.",
-    "transactionsTab": "Transactions",
-    "blocksTab": "Blocks",
-    "healthTab": "Health",
-    "energyConsumptionTab": "Energy consumption",
-    "blockVersionsTab": "Block versions",
-    "storageTab": "Storage",
-    "network": "Network",
+    "transactionsTab": "$t(shared:transactions)",
+    "blocksTab": "$t(shared:blocks)",
+    "healthTab": "$t(shared:health)",
+    "energyConsumptionTab": "$t(shared:energyConsumption)",
+    "blockVersionsTab": "$t(shared:blockVersions)",
+    "storageTab": "$t(shared:storage)",
+    "network": "$t(shared:network)",
     "cardanoNetworkAnalytics": "Cardano network analytics",
     "nodeVersion": "Node version",
     "byCount": "By Count",
@@ -624,16 +624,16 @@
     "networkStorageInTime": "Network storage in time",
     "lastBlockVersion": "Last block version",
     "poolName": "Pool Name",
-    "poolId": "Pool ID"
+    "poolId": "$t(shared:poolId)"
   },
   "hardfork": {
     "title": "Chang Hardfork",
-    "breadcrumb": "Hardfork",
+    "breadcrumb": "$t(shared:hardfork)",
     "releaseDate": "Release date:",
     "table": {
       "exchanges": "Exchanges",
-      "liquidity": "Liquidity",
-      "status": "Status",
+      "liquidity": "$t(shared:liquidity)",
+      "status": "$t(shared:status1)",
       "lastUpdated": "Last Updated"
     },
     "status": {
@@ -642,20 +642,20 @@
       "inProgress": "In Progress"
     },
     "filters": {
-      "all": "All",
+      "all": "$t(shared:all)",
       "completed": "Completed",
       "inProgress": "In Progress",
       "notStarted": "Not Started"
     },
     "tabs": {
-      "count": "Count",
-      "liquidity": "Liquidity",
+      "count": "$t(shared:count)",
+      "liquidity": "$t(shared:liquidity)",
       "oneDay": "1 day",
       "fiveDays": "5 days"
     },
     "charts": {
       "exchangeReadiness": "Exchange readiness",
-      "blockProduction": "Block production",
+      "blockProduction": "$t(shared:blockProduction)",
       "version": "Version {{version}}"
     },
     "searchPlaceholder": "Search by exchange"
@@ -675,20 +675,20 @@
     "loadingChart": "Loading chart data...",
     "noData": "No data available",
     "chart": {
-      "treasury": "Treasury",
-      "reserves": "Reserves",
-      "epoch": "Epoch"
+      "treasury": "$t(shared:treasury)",
+      "reserves": "$t(shared:reserves)",
+      "epoch": "$t(shared:epoch)"
     }
   },
   "genesis": {
-    "title": "Genesis Addresses",
+    "title": "$t(shared:genesisAddresses)",
     "breadcrumbs": {
-      "analytics": "Analytics",
-      "genesisAddresses": "Genesis Addresses"
+      "analytics": "$t(shared:analytics)",
+      "genesisAddresses": "$t(shared:genesisAddresses)"
     },
     "totalAddresses": "Total of {{count}} genesis addresses",
     "table": {
-      "address": "Address",
+      "address": "$t(shared:address)",
       "initialValue": "Initial Value",
       "currentBalance": "Current Balance",
       "firstActivity": "First activity",
@@ -696,29 +696,29 @@
     }
   },
   "addressInspector": {
-    "title": "Address inspector",
+    "title": "$t(shared:addressInspector)",
     "breadcrumbs": {
-      "developers": "Developers",
-      "addressInspector": "Address inspector"
+      "developers": "$t(shared:developers)",
+      "addressInspector": "$t(shared:addressInspector)"
     },
     "placeholder": "Address...",
     "stakeDetail": "Stake detail",
-    "addressDetail": "Address detail",
+    "addressDetail": "$t(shared:addressDetail)",
     "notFound": "Not found",
     "rows": {
-      "address": "Address",
+      "address": "$t(shared:address)",
       "addressType": "Address type",
       "addressDetails": "Address details",
-      "stakeKey": "Stake key",
-      "network": "Network",
+      "stakeKey": "$t(shared:stakeKey)",
+      "network": "$t(shared:network)",
       "magic": "Magic",
       "header": "Header",
-      "rawAddress": "Raw address",
-      "paymentCredential": "Payment credential",
+      "rawAddress": "$t(shared:rawAddress)",
+      "paymentCredential": "$t(shared:paymentCredential)",
       "stakingCredential": "Staking credential"
     },
     "addressTypes": {
-      "unknown": "Unknown",
+      "unknown": "$t(shared:unknown)",
       "paymentKey": "Payment address (key)",
       "paymentScript": "Payment address (script)",
       "paymentStakeKey": "Payment address with stake key",
@@ -734,56 +734,56 @@
     "network": {
       "mainnet": "Mainnet",
       "testnet": "Testnet",
-      "unknown": "Unknown"
+      "unknown": "$t(shared:unknown)"
     }
   },
   "datum": {
     "title": "Datum Inspector",
     "breadcrumbs": {
-      "developers": "Developers",
+      "developers": "$t(shared:developers)",
       "datum": "Datum"
     },
-    "hash": "Hash",
+    "hash": "$t(shared:hash)",
     "convertor": "Datum convertor",
-    "input": "Input",
+    "input": "$t(shared:input)",
     "output": "Output",
-    "transactionHash": "Transaction Hash",
+    "transactionHash": "$t(shared:transactionHash)",
     "datumHash": "Datum Hash",
     "transactionWithDatum": "Transaction with this datum",
     "otherDatums": "Other datums from the same transactions"
   },
   "pots": {
-    "title": "Pots",
-    "breadcrumb": "Pots",
+    "title": "$t(shared:title1)",
+    "breadcrumb": "$t(shared:title1)",
     "graphEpochs": "Graph epochs:",
     "totalEpochs": "Total of {{count}} epochs",
-    "searchPlaceholder": "Search your results...",
+    "searchPlaceholder": "$t(shared:searchPlaceholder)",
     "sortOptions": {
-      "all": "All",
+      "all": "$t(shared:all)",
       "last10": "Last 10",
       "last25": "Last 25",
       "last50": "Last 50",
       "last100": "Last 100"
     },
     "table": {
-      "epoch": "Epoch",
-      "treasury": "Treasury",
-      "reserves": "Reserves",
-      "rewards": "Rewards",
-      "utxo": "UTXO",
-      "deposits": "Deposits",
-      "fees": "Fees"
+      "epoch": "$t(shared:epoch)",
+      "treasury": "$t(shared:treasury)",
+      "reserves": "$t(shared:reserves)",
+      "rewards": "$t(shared:rewards)",
+      "utxo": "$t(shared:utxo)",
+      "deposits": "$t(shared:deposits)",
+      "fees": "$t(shared:fees)"
     },
     "chart": {
-      "epoch": "Epoch",
-      "amount": "Amount",
-      "date": "Date",
-      "treasury": "Treasury",
-      "reserves": "Reserves",
-      "rewards": "Rewards",
-      "utxo": "UTXO",
-      "deposits": "Deposits",
-      "fees": "Fees"
+      "epoch": "$t(shared:epoch)",
+      "amount": "$t(shared:amount)",
+      "date": "$t(shared:date)",
+      "treasury": "$t(shared:treasury)",
+      "reserves": "$t(shared:reserves)",
+      "rewards": "$t(shared:rewards)",
+      "utxo": "$t(shared:utxo)",
+      "deposits": "$t(shared:deposits)",
+      "fees": "$t(shared:fees)"
     }
   },
   "asset": {
@@ -797,10 +797,10 @@
     "userGeneratedContent": "User-generated content",
     "userGeneratedContentDescription": "Following content is user-generated and unmoderated by the Cexplorer team.",
     "type": "$t(shared:labels.type)",
-    "asset": "Asset",
-    "policyId": "Policy ID",
-    "assetMinted": "Asset Minted",
-    "mintQuantity": "Mint Quantity",
+    "asset": "$t(shared:asset)",
+    "policyId": "$t(shared:policyId)",
+    "assetMinted": "$t(shared:assetMinted)",
+    "mintQuantity": "$t(shared:mintQuantity)",
     "mintingPolicy": "Minting policy",
     "policyIsOpen": "Policy is open",
     "policyIsLocked": "Policy is locked",
@@ -816,9 +816,9 @@
     "owner": "Owner",
     "quantity": "Quantity",
     "share": "$t(shared:labels.share)",
-    "value": "Value",
+    "value": "$t(shared:value)",
     "graphTab": "Graph",
-    "liquidityTab": "Liquidity",
+    "liquidityTab": "$t(shared:liquidity)",
     "dex": "DEX",
     "price": "$t(shared:labels.price)",
     "adaPooled": "ADA Pooled",
@@ -828,7 +828,7 @@
     "closePrice": "Close price",
     "lowestPrice": "Lowest price",
     "highestPrice": "Highest price",
-    "volume": "Volume",
+    "volume": "$t(shared:volume)",
     "noDataAvailable": "No data available for selected period",
     "oneMin": "1 min",
     "fiveMin": "5 min",
@@ -844,7 +844,7 @@
     "interactingAccounts": "Interacting Accounts",
     "interactingAddresses": "Interacting Addresses",
     "smartTransactions": "Smart Transactions",
-    "name": "Name",
+    "name": "$t(shared:name)",
     "encodedName": "Encoded Name",
     "assetName": "Asset name",
     "uniqueWallets": "Unique wallets",
@@ -857,31 +857,31 @@
     "ticker": "$t(shared:labels.ticker)",
     "description": "$t(shared:labels.description)",
     "statsTab": "$t(shared:labels.stats)",
-    "transactionsTab": "Transactions",
+    "transactionsTab": "$t(shared:transactions)",
     "mintsTab": "Mints",
     "timelockTab": "$t(shared:labels.timelock)",
-    "metadataTab": "Metadata",
+    "metadataTab": "$t(shared:metadata)",
     "ownersTab": "Owners",
     "tradingTab": "$t(shared:labels.trading)",
     "priceTab": "$t(shared:labels.price)"
   },
   "blocks": {
     "transactions": "$t(shared:labels.transactions)",
-    "transactionHash": "Transaction Hash",
+    "transactionHash": "$t(shared:transactionHash)",
     "block": "$t(shared:labels.block)",
-    "totalOutput": "Total Output",
+    "totalOutput": "$t(shared:totalOutput)",
     "fee": "$t(shared:labels.fee)",
     "size": "$t(shared:labels.size)",
     "table": {
       "date": "$t(shared:labels.date)",
-      "height": "Height",
+      "height": "$t(shared:height)",
       "epoch": "$t(shared:labels.epoch)",
       "slot": "$t(shared:labels.slot)",
-      "txs": "TXs",
-      "mintedBy": "Minted by",
+      "txs": "$t(shared:txs)",
+      "mintedBy": "$t(shared:mintedBy)",
       "hash": "$t(shared:labels.hash)",
-      "epochSlot": "Epoch slot",
-      "vrfKey": "VRF key",
+      "epochSlot": "$t(shared:epochSlot)",
+      "vrfKey": "$t(shared:vrfKey)",
       "protocol": "$t(shared:labels.protocol)",
       "size": "$t(shared:labels.size)",
       "certCount": "Cert counter"
@@ -932,10 +932,10 @@
   },
   "gov": {
     "governance": "$t(shared:labels.governance)",
-    "votes": "Votes",
+    "votes": "$t(shared:votes)",
     "allVotes": "All Votes",
-    "totalVotes": "Total of {{count}} votes",
-    "searchResults": "Search your results...",
+    "totalVotes": "$t(shared:totalVotes)",
+    "searchResults": "$t(shared:searchPlaceholder)",
     "cc": {
       "about": "$t(shared:labels.about)",
       "governance": "$t(shared:labels.governance)",
@@ -950,14 +950,14 @@
       "expiring": "Expiring",
       "in": "In",
       "lastVote": "Last vote",
-      "recentActivity": "Recent Activity",
+      "recentActivity": "$t(shared:recentActivity)",
       "recentActivityTooltip": "CC member's voting activity over the past 6 months",
-      "lifetimeActivity": "Lifetime Activity",
+      "lifetimeActivity": "$t(shared:lifetimeActivity)",
       "lifetimeActivityTooltip": "Voting activity over CC member's lifetime",
       "voted": "$t(shared:labels.voted)",
       "date": "$t(shared:labels.date)",
       "hotKeyAuthorization": "Hot key authorization",
-      "tx": "Tx",
+      "tx": "$t(shared:tx)",
       "ccMember": "CC member",
       "registration": "Registration",
       "expirationEpoch": "Expiration Epoch",
@@ -966,23 +966,23 @@
       "termExpiration": "Term expiration",
       "effective": "Effective",
       "expiration": "Expiration",
-      "governanceAction": "Governance action",
+      "governanceAction": "$t(shared:governanceAction)",
       "vote": "$t(shared:labels.vote)",
-      "totalVotes": "Total of {{count}} votes",
-      "searchResults": "Search your results...",
+      "totalVotes": "$t(shared:totalVotes)",
+      "searchResults": "$t(shared:searchPlaceholder)",
       "txHash": "Tx Hash",
       "time": "$t(shared:labels.time)",
       "activeMembers": "Active Members",
       "votingThreshold": "Voting threshold",
-      "constitution": "Constitution",
+      "constitution": "$t(shared:constitution)",
       "constitutionFullText": "Constitution Full Text",
       "fulltextOfConstitution": "Fulltext of the Cardano Constitution",
       "membersRetired": "{{count}} member retired",
       "membersRetiredPlural": "{{count}} members retired",
       "members": "Members",
       "governanceVote": "Governance vote",
-      "constitutionalCommittee": "Constitutional Committee",
-      "votes": "Votes",
+      "constitutionalCommittee": "$t(shared:constitutionalCommittee)",
+      "votes": "$t(shared:votes)",
       "allVotes": "All Votes",
       "hotKeys": "Hot keys",
       "statusHistory": "Status history"
@@ -998,31 +998,31 @@
       "date": "$t(shared:labels.date)",
       "name": "$t(shared:labels.name)",
       "voter": "$t(shared:labels.voter)",
-      "voterRole": "Voter role",
+      "voterRole": "$t(shared:voterRole)",
       "votingPower": "$t(shared:votingPower)",
       "vote": "$t(shared:labels.vote)",
       "epoch": "$t(shared:labels.epoch)",
       "block": "$t(shared:labels.block)",
       "tx": "$t(shared:labels.tx)",
       "invalidMetadata": "Invalid metadata",
-      "constitutionalCommittee": "Constitutional Committee",
+      "constitutionalCommittee": "$t(shared:constitutionalCommittee)",
       "yes": "$t(shared:status.yes)",
       "no": "$t(shared:status.no)",
-      "abstain": "Abstain"
+      "abstain": "$t(shared:abstain)"
     }
   },
   "governance": {
     "common": {
       "yes": "$t(shared:status.yes)",
       "no": "$t(shared:status.no)",
-      "noConfidence": "No confidence",
-      "notVoted": "Not voted",
-      "abstain": "Abstain",
+      "noConfidence": "$t(shared:noConfidence)",
+      "notVoted": "$t(shared:notVoted)",
+      "abstain": "$t(shared:abstain)",
       "approved": "$t(shared:labels.approved)",
       "notApproved": "Not approved",
       "threshold": "Threshold:",
       "notApplicable": "Not applicable",
-      "totalStake": "Total stake",
+      "totalStake": "$t(shared:totalStake)",
       "abstainStake": "Abstain stake",
       "votingStake": "Voting stake",
       "drepVotes": "DRep votes:",
@@ -1037,15 +1037,15 @@
       "count": "$t(shared:labels.count)"
     },
     "thresholds": {
-      "ccTitle": "Constitutional Committee",
+      "ccTitle": "$t(shared:constitutionalCommittee)",
       "ccTooltip": "Minimum number of CC members required to approve this proposal.",
       "ccNotVoting": "CC Members do not vote on this action",
-      "drepTitle": "DReps",
+      "drepTitle": "$t(shared:dreps)",
       "drepTooltip": "Theoretical minimum number of DReps with enough voting power to pass this proposal",
       "drepNotVoting": "DReps do not vote on this action",
       "otherDReps": "Other DReps",
       "allDReps": "(All DReps)",
-      "spoTitle": "SPOs",
+      "spoTitle": "$t(shared:spos)",
       "spoTooltipSecurity": "Theoretical minimum number of SPOs with enough stake to pass this proposal. SPOs only vote if the parameter is a security parameter.",
       "spoTooltip": "Theoretical number of SPOs with enough stake to pass this proposal.",
       "spoNotVoting": "SPOs do not vote on this action",
@@ -1059,10 +1059,10 @@
       "minDRepsNeeded": "Minimum DReps needed to pass",
       "minSPOsNeeded": "Minimum SPOs needed to pass",
       "cantPass": "Can't pass",
-      "other": "Other"
+      "other": "$t(shared:other)"
     },
     "powerThresholds": {
-      "title": "Power Thresholds",
+      "title": "$t(shared:title4)",
       "breadcrumb": "Power thresholds",
       "delegationDistribution": "Delegation Distribution",
       "delegationDistributionDesc": "Amount of ADA delegated to stake pools and dReps.",
@@ -1095,24 +1095,24 @@
       "delegatedToSPOs": "Delegated to SPOs",
       "delegatedToDReps": "Delegated to DReps",
       "uniqueDReps": "Unique DReps:",
-      "date": "Date:",
+      "date": "$t(shared:date1)",
       "epoch": "Epoch:",
       "epochAxisName": "$t(shared:labels.epoch)",
       "pool": "Pool:",
       "percentOfTotalStake": "Percentage of total stake:",
-      "spos": "SPOs"
+      "spos": "$t(shared:spos)"
     },
     "overview": {
-      "governanceAction": "Governance action",
+      "governanceAction": "$t(shared:governanceAction)",
       "blockchainRecords": "Blockchain records",
       "title": "$t(shared:labels.title)",
-      "actionType": "Action type",
+      "actionType": "$t(shared:actionType)",
       "actionId": "Action ID",
       "actionStartDate": "Action start date",
-      "votingDeadline": "Voting deadline",
+      "votingDeadline": "$t(shared:votingDeadline)",
       "submitTransaction": "Submit transaction",
-      "stakeAddress": "Stake address",
-      "deposit": "Deposit",
+      "stakeAddress": "$t(shared:stakeAddress)",
+      "deposit": "$t(shared:deposit)",
       "anchor": "Anchor",
       "constitutionalCommittee": "Constitutional committee",
       "thresholdTooltip": "Minimum percentage of Constitutional Committee members required to approve this governance action",
@@ -1122,7 +1122,7 @@
       "totalStakeTooltipSPO": "All ADA delegated to SPOs",
       "abstainStakeTooltip": "ADA that abstains from voting",
       "votingStakeTooltip": "ADA participating in voting",
-      "totalStake": "Total stake",
+      "totalStake": "$t(shared:totalStake)",
       "abstainStake": "Abstain stake",
       "votingStake": "Voting stake",
       "approved": "$t(shared:labels.approved)",
@@ -1130,11 +1130,11 @@
       "drepVotes": "DRep votes:",
       "alwaysAbstain": "Always abstain:",
       "spoVotes": "SPO votes:",
-      "dreps": "DReps",
-      "spos": "SPOs"
+      "dreps": "$t(shared:dreps)",
+      "spos": "$t(shared:spos)"
     },
     "metadata": {
-      "actionType": "Action type",
+      "actionType": "$t(shared:actionType)",
       "title": "$t(shared:labels.title)",
       "abstracts": "Abstracts",
       "rationale": "Rationale"
@@ -1144,7 +1144,7 @@
       "epoch": "$t(shared:labels.epoch)",
       "statusChange": "Status change",
       "description": "$t(shared:labels.description)",
-      "tx": "Tx",
+      "tx": "$t(shared:tx)",
       "submitted": "Governance action submitted to the blockchain.",
       "active": "Voting period has started. Governance bodies can now vote.",
       "ratified": "Proposal passed the vote check at the epoch boundary. It will be enacted in the next epoch.",
@@ -1154,14 +1154,14 @@
     },
     "tabs": {
       "voted": "$t(shared:labels.voted)",
-      "notVoted": "Not voted",
+      "notVoted": "$t(shared:notVoted)",
       "statusHistory": "Status history",
       "description": "$t(shared:labels.description)",
       "metadata": "$t(shared:labels.metadata)"
     },
     "breadcrumbs": {
       "governance": "$t(shared:labels.governance)",
-      "governanceActions": "Governance actions"
+      "governanceActions": "$t(shared:governanceActions)"
     },
     "detail": {
       "title": "Governance action detail",
@@ -1170,13 +1170,13 @@
     },
     "actions": {
       "type": "$t(shared:labels.type)",
-      "governanceAction": "Governance action",
-      "votingDeadline": "Voting deadline",
+      "governanceAction": "$t(shared:governanceAction)",
+      "votingDeadline": "$t(shared:votingDeadline)",
       "progress": "$t(shared:labels.progress)",
       "totalDReps": "Total of {{count}} DReps",
       "totalSPOs": "Total of {{count}} SPOs",
       "voter": "$t(shared:labels.voter)",
-      "start": "Start",
+      "start": "$t(shared:start)",
       "name": "$t(shared:labels.name)",
       "durationEpochs": "Duration (epochs)",
       "expiryEpoch": "Expiry epoch",
@@ -1190,8 +1190,8 @@
       "treasuryWithdrawals": "Treasury Withdrawals",
       "infoAction": "Info action",
       "noConfidenceMotion": "No confidence motion",
-      "statusAll": "All",
-      "statusActive": "Active",
+      "statusAll": "$t(shared:all)",
+      "statusActive": "$t(shared:active)",
       "statusEnacted": "Enacted",
       "statusRatified": "Ratified",
       "statusExpiredDropped": "Expired / Dropped",
@@ -1213,18 +1213,18 @@
     "voting": {
       "noVotingData": "No voting data",
       "voter": "$t(shared:labels.voter)",
-      "voterRole": "Voter role",
+      "voterRole": "$t(shared:voterRole)",
       "votingPower": "$t(shared:votingPower)",
       "stake": "$t(shared:labels.stake)",
       "delegators": "$t(shared:labels.delegators)",
       "totalDReps": "Total of {{count}} DReps",
       "totalSPOs": "Total of {{count}} SPOs",
-      "totalVotes": "Total of {{count}} votes",
+      "totalVotes": "$t(shared:totalVotes)",
       "vote": "$t(shared:labels.vote)",
       "votes": "votes",
       "epoch": "$t(shared:labels.epoch)",
       "block": "$t(shared:labels.block)",
-      "searchPlaceholder": "Search your results..."
+      "searchPlaceholder": "$t(shared:searchPlaceholder)"
     },
     "vote": {
       "viewAnchorInfo": "View anchor information",
@@ -1238,7 +1238,7 @@
     },
     "voteDetail": {
       "overview": "$t(shared:labels.overview)",
-      "actionType": "Action type",
+      "actionType": "$t(shared:actionType)",
       "governanceActionTitle": "Governance action Title",
       "governanceActionId": "Governance action ID",
       "status": "$t(shared:labels.status)",
@@ -1247,9 +1247,9 @@
       "expiredEpoch": "Expired epoch",
       "epochLabel": "$t(shared:labels.epoch)",
       "votingStart": "Voting start",
-      "votingDeadline": "Voting deadline",
+      "votingDeadline": "$t(shared:votingDeadline)",
       "role": "Role",
-      "constitutionalCommittee": "Constitutional Committee",
+      "constitutionalCommittee": "$t(shared:constitutionalCommittee)",
       "voterName": "Voter name",
       "voterId": "Voter ID",
       "votePower": "Vote power",
@@ -1269,22 +1269,22 @@
       "voteYes": "Vote: Yes",
       "voteNo": "Vote: No",
       "voteNoConfidence": "Vote: No confidence",
-      "notVotedLabel": "Not voted",
+      "notVotedLabel": "$t(shared:notVoted)",
       "voters": "Voters:",
-      "noConfidenceLabel": "No confidence",
+      "noConfidenceLabel": "$t(shared:noConfidence)",
       "autoAbstainStake": "Auto abstain stake:",
       "manualAbstainStake": "Manual abstain stake:",
       "noConfidenceDelegators": "No confidence delegators:"
     },
     "page": {
-      "governanceActionsLabel": "Governance actions",
+      "governanceActionsLabel": "$t(shared:governanceActions)",
       "governancePartiesLabel": "Governance parties",
-      "dreps": "DReps",
-      "spos": "SPOs",
+      "dreps": "$t(shared:dreps)",
+      "spos": "$t(shared:spos)",
       "cc": "CC"
     },
     "status": {
-      "active": "Active",
+      "active": "$t(shared:active)",
       "ratified": "Ratified",
       "enacted": "Enacted",
       "expired": "Expired",
@@ -1297,7 +1297,7 @@
       "approvedFor": "Approved for",
       "approvedForEpochs": "Approved for epochs",
       "totalWithdrawals": "Total {{count}} withdrawals approved",
-      "amount": "Amount",
+      "amount": "$t(shared:amount)",
       "exceededLimit": "Withdrawals exceed the NCL limit",
       "remainingBudget": "Remaining budget",
       "ofNCL": "of NCL",
@@ -1306,8 +1306,8 @@
       "showNCL": "Show NCL Progress"
     },
     "constitution": {
-      "title": "Constitution",
-      "breadcrumb": "Constitution",
+      "title": "$t(shared:constitution)",
+      "breadcrumb": "$t(shared:constitution)",
       "statusCurrent": "Current constitution",
       "statusDraft": "Draft",
       "statusPast": "Past constitution",
@@ -1316,8 +1316,8 @@
       "fullTextModal": "Constitution Full Text",
       "columns": {
         "rowNumber": "#",
-        "status": "Status",
-        "governanceAction": "Governance action",
+        "status": "$t(shared:status1)",
+        "governanceAction": "$t(shared:governanceAction)",
         "content": "Content",
         "ratifiedEpoch": "Ratified epoch",
         "enactedEpoch": "Enacted epoch"
@@ -1338,16 +1338,16 @@
       "handleNotFound": "Handle \"{{handle}}\" not found",
       "enterHandle": "Enter a handle name to check if it exists",
       "labels": {
-        "handle": "Handle",
+        "handle": "$t(shared:handle)",
         "rarity": "Rarity",
         "linkedTo": "Linked to",
-        "stakeKey": "Stake key",
-        "utxo": "UTXO",
+        "stakeKey": "$t(shared:stakeKey)",
+        "utxo": "$t(shared:utxo)",
         "lastChange": "Last change",
-        "date": "Date:",
+        "date": "$t(shared:date1)",
         "transaction": "Transaction:",
         "metadataStandard": "Metadata standard",
-        "metadata": "Metadata"
+        "metadata": "$t(shared:metadata)"
       }
     },
     "recentlyMinted": {
@@ -1356,7 +1356,7 @@
       "columns": {
         "minted": "Asset minted",
         "standard": "Standard",
-        "asset": "Asset",
+        "asset": "$t(shared:asset)",
         "rarity": "Rarity",
         "holder": "Holder"
       }
@@ -1370,15 +1370,15 @@
         "dashboard": "Dashboard"
       },
       "tabs": {
-        "tokens": "Tokens",
+        "tokens": "$t(shared:tokens)",
         "globalActivity": "Global activity",
         "exchange": "Exchange"
       }
     }
   },
   "swap": {
-    "title": "Swap",
-    "breadcrumb": "Swap",
+    "title": "$t(shared:title5)",
+    "breadcrumb": "$t(shared:title5)",
     "selectTokenToViewChart": "Select a token in the swap widget to view chart"
   },
   "drep": {
@@ -1386,27 +1386,27 @@
       "delegatedRepresentatives": "Delegated representatives"
     },
     "registrations": {
-      "title": "DRep registrations",
+      "title": "$t(shared:title6)",
       "breadcrumb": "Registrations",
       "total": "Total of {{count}} registrations"
     },
     "deregistrations": {
-      "title": "DRep deregistrations",
+      "title": "$t(shared:title7)",
       "breadcrumb": "Deregistrations",
       "total": "Total of {{count}} deregistrations"
     },
     "updates": {
-      "title": "DRep updates",
+      "title": "$t(shared:title8)",
       "breadcrumb": "Updates",
       "total": "Total of {{count}} updates"
     },
     "columns": {
-      "date": "Date",
-      "drep": "DRep",
-      "type": "Type",
-      "deposit": "Deposit",
+      "date": "$t(shared:date)",
+      "drep": "$t(shared:drep)",
+      "type": "$t(shared:type)",
+      "deposit": "$t(shared:deposit)",
       "txHash": "TX hash",
-      "epochBlock": "Epoch/Block"
+      "epochBlock": "$t(shared:epochBlock)"
     }
   },
   "global": {
@@ -1418,15 +1418,15 @@
     "customLabel": {
       "editLabel": "Edit label:",
       "createNewLabel": "Create new label:",
-      "address": "Address",
+      "address": "$t(shared:address)",
       "labelName": "Label name",
       "invalidAddress": "Please enter a valid address"
     },
     "delegatorStructure": {
       "walletSize": "Wallet Size",
-      "count": "Count",
+      "count": "$t(shared:count)",
       "countPercent": "Count %",
-      "stake": "Stake",
+      "stake": "$t(shared:stake)",
       "stakePercent": "Stake %",
       "countTooltip": "{{name}} count: {{value}}%",
       "othersCountTooltip": "Others count: {{value}}%",
@@ -1444,8 +1444,8 @@
       "adaLovelaceNote": "(1 ADA = 1,000,000 lovelace).",
       "sortUtxos": "Sort UTxOs",
       "sortUtxosDescription": "Sort UTxOs shown in transaction details by their index or value.",
-      "index": "Index",
-      "value": "Value"
+      "index": "$t(shared:index)",
+      "value": "$t(shared:value)"
     },
     "graphSort": {
       "allTime": "All time",
@@ -1461,13 +1461,13 @@
       "navigation": "Navigation",
       "basics": "Basics",
       "homepage": "Homepage",
-      "transactions": "Transactions",
-      "blocks": "Blocks",
+      "transactions": "$t(shared:transactions)",
+      "blocks": "$t(shared:blocks)",
       "epochs": "$t(shared:labels.epochs)",
       "pools": "$t(shared:labels.pools)",
-      "dreps": "DReps",
-      "assets": "Assets",
-      "governanceActions": "Governance actions",
+      "dreps": "$t(shared:dreps)",
+      "assets": "$t(shared:assets)",
+      "governanceActions": "$t(shared:governanceActions)",
       "openCloseHelp": "Open/Close shortcut help",
       "focusSearch": "Focus search",
       "refresh": "$t(shared:actions.refresh)",
@@ -1492,30 +1492,30 @@
       "delegate": "Delegate",
       "delegateTo": "Delegate to [{{ticker}}]",
       "delegateToThisDrep": "Delegate to this DRep",
-      "delegateToDrep": "Delegate to {{name}}",
+      "delegateToDrep": "$t(shared:delegateTo)",
       "marketplace": "Marketplace",
       "buy": "$t(shared:labels.buy)",
-      "promote": "Promote"
+      "promote": "$t(shared:promote)"
     }
   },
   "tabs": {
     "taxTool": {
-      "rewards": "Rewards",
+      "rewards": "$t(shared:rewards)",
       "withdrawals": "$t(shared:labels.withdrawals)"
     },
     "script": {
-      "ranklist": "Ranklist",
+      "ranklist": "$t(shared:ranklist)",
       "interactions": "$t(shared:labels.interactions)",
-      "tvl": "TVL"
+      "tvl": "$t(shared:tvl)"
     },
     "scriptDetail": {
       "stats": "$t(shared:labels.stats)",
       "uses": "Uses",
-      "transactions": "Transactions"
+      "transactions": "$t(shared:transactions)"
     },
     "groups": {
-      "stakePools": "Stake pools",
-      "dreps": "DReps"
+      "stakePools": "$t(shared:stakePools)",
+      "dreps": "$t(shared:dreps)"
     },
     "polls": {
       "all": "$t(shared:labels.all)",
@@ -1527,46 +1527,46 @@
       "cheatSheet": "Cheat sheet"
     },
     "analytics": {
-      "walletActivity": "Wallet activity",
-      "topStakingAccounts": "Top staking accounts",
-      "topAddresses": "Top addresses",
-      "wealthComposition": "Wealth composition",
-      "poolIssues": "Pool issues",
-      "averagePools": "Average pools"
+      "walletActivity": "$t(shared:walletActivity)",
+      "topStakingAccounts": "$t(shared:topStakingAccounts)",
+      "topAddresses": "$t(shared:topAddresses)",
+      "wealthComposition": "$t(shared:wealthComposition)",
+      "poolIssues": "$t(shared:poolIssues)",
+      "averagePools": "$t(shared:averagePools)"
     },
     "governance": {
-      "governanceActions": "Governance actions",
+      "governanceActions": "$t(shared:governanceActions)",
       "outcomes": "Outcomes",
       "treasuryWithdrawals": "Treasury Withdrawals",
       "timeline": "Timeline"
     },
     "address": {
-      "assets": "Assets",
-      "transactions": "Transactions",
+      "assets": "$t(shared:assets)",
+      "transactions": "$t(shared:transactions)",
       "utxos": "UTXOs",
       "trading": "$t(shared:labels.trading)",
       "addresses": "$t(shared:labels.addresses)",
-      "rewards": "Rewards"
+      "rewards": "$t(shared:rewards)"
     },
     "policy": {
-      "assets": "Assets",
+      "assets": "$t(shared:assets)",
       "marketActivity": "Market Activity",
       "owners": "$t(shared:labels.owners)",
       "mint": "Mint",
       "timelock": "$t(shared:labels.timelock)",
       "analytics": "$t(shared:labels.analytics)",
-      "transactions": "Transactions"
+      "transactions": "$t(shared:transactions)"
     },
     "profile": {
       "profileSettings": "Profile settings",
       "customLabels": "Custom labels",
       "api": "API",
-      "pro": "PRO"
+      "pro": "$t(shared:pro)"
     }
   },
   "placeholders": {
-    "stakeKey": "Stake key",
-    "searchResults": "Search your results..."
+    "stakeKey": "$t(shared:stakeKey)",
+    "searchResults": "$t(shared:searchPlaceholder)"
   },
   "homepage": {
     "cardanoPrice": "Cardano price",
@@ -1576,7 +1576,9 @@
     "liveStake": "Live stake",
     "stakingAnalytics": "Staking analytics",
     "cardanoNativeAssets": "Cardano native assets",
-    "assets": "Assets",
+    "assets": "$t(shared:assets)",
+    "customize": "Customize",
+    "exploreCardano": "Explore Cardano blockchain",
     "addWidget": "Add widget",
     "automaticallyAlign": "Automatically align",
     "resetToDefault": "Reset to default",
@@ -1605,15 +1607,15 @@
         "Pool list": "Pool list",
         "Tx list": "Tx list",
         "Transactions in epoch": "Transactions in epoch",
-        "Block production": "Block production",
+        "Block production": "$t(shared:blockProduction)",
         "Block size used": "Block size used",
-        "Latest blocks": "Latest blocks",
+        "Latest blocks": "$t(shared:latestBlocks)",
         "Drep detail": "DRep detail",
         "Asset list": "Asset list",
         "Asset detail": "Asset detail",
         "Epoch list": "Epoch list",
-        "Epochs": "Epochs",
-        "Pool detail": "Pool detail"
+        "Epochs": "$t(shared:epochs)",
+        "Pool detail": "$t(shared:Pooldetail)"
       },
       "linkTitles": {
         "All blocks": "All blocks",
@@ -1624,12 +1626,12 @@
         "All epochs": "All epochs"
       },
       "categories": {
-        "Transactions": "Transactions",
-        "Blocks": "Blocks",
-        "Drep": "DRep",
-        "Asset": "Asset",
-        "Epoch": "Epoch",
-        "Pool": "Pool"
+        "Transactions": "$t(shared:transactions)",
+        "Blocks": "$t(shared:blocks)",
+        "Drep": "$t(shared:drep)",
+        "Asset": "$t(shared:asset)",
+        "Epoch": "$t(shared:epoch)",
+        "Pool": "$t(shared:pool)"
       }
     }
   },
@@ -1641,7 +1643,7 @@
     "confirmation": "Confirmation",
     "pair": "$t(shared:labels.pair)",
     "multiplePairsDetected": "Multiple pairs detected - see individual trades below",
-    "input": "Input",
+    "input": "$t(shared:input)",
     "output": "$t(shared:labels.output)",
     "status": "$t(shared:labels.status)",
     "lastUpdate": "Last Update",
@@ -1678,7 +1680,7 @@
     "supply": "$t(shared:labels.supply)",
     "owners": "$t(shared:labels.owners)",
     "volume": "$t(shared:labels.volume)",
-    "policyId": "Policy ID",
+    "policyId": "$t(shared:policyId)",
     "policyLock": "Policy lock",
     "firstMint": "First mint",
     "lastMint": "Last mint",
@@ -1698,11 +1700,11 @@
     "share": "$t(shared:labels.share)",
     "address": "$t(shared:labels.address)",
     "asset": "$t(shared:labels.asset)",
-    "assetMinted": "Asset Minted",
-    "mintQuantity": "Mint Quantity",
+    "assetMinted": "$t(shared:assetMinted)",
+    "mintQuantity": "$t(shared:mintQuantity)",
     "graph": {
       "totalCount": "Total count",
-      "totalStake": "Total stake",
+      "totalStake": "$t(shared:totalStake)",
       "totalAddress": "Total address",
       "totalWithData": "Total with data",
       "totalAdaVolume": "Total ada volume",
@@ -1715,7 +1717,7 @@
   },
   "profile": {
     "walletNotConnected": "Wallet not connected.",
-    "connectWallet": "Connect wallet",
+    "connectWallet": "$t(shared:connect)",
     "yourAccount": "Your account",
     "yourPlan": "Your plan",
     "nftsHeld": "NFTs held",
@@ -1726,7 +1728,7 @@
       "dashboard": "API dashboard",
       "manageAndMonitor": "Manage and monitor your Cexplorer API keys usage.",
       "connectToAccess": "Connect your wallet to access API dashboard and manage your API keys.",
-      "documentation": "Documentation",
+      "documentation": "$t(shared:documentation)",
       "newProject": "New project",
       "noProjects": "You don't have any projects yet.",
       "startNewProject": "Start a new project to generate a new API keys, monitor your usage, and track your data.",
@@ -1761,7 +1763,7 @@
       "addLabel": "Add label",
       "freeLimitTooltip": "You can only add 10 labels with the free version of Cexplorer",
       "proLimitTooltip": "You can only add 100 labels per NFT with the PRO version of Cexplorer",
-      "address": "Address",
+      "address": "$t(shared:address)",
       "label": "Label",
       "labelsCreated": "{{count}}/{{max}} labels created",
       "first": "First",
@@ -1783,8 +1785,8 @@
       "pool": "$t(shared:labels.pool)",
       "asset": "$t(shared:labels.asset)",
       "collection": "$t(shared:labels.collection)",
-      "policyId": "Policy ID",
-      "nft": "NFT",
+      "policyId": "$t(shared:policyId)",
+      "nft": "$t(shared:nft)",
       "type": "$t(shared:labels.type)",
       "delegatedSuperpowers": "Delegated Superpowers",
       "modify": "$t(shared:actions.modify)",
@@ -1850,12 +1852,12 @@
     },
     "migrations": {
       "date": "$t(shared:labels.date)",
-      "activeEpoch": "Active epoch",
+      "activeEpoch": "$t(shared:activeEpoch)",
       "address": "$t(shared:labels.address)",
       "amount": "$t(shared:labels.amount)",
       "loyalty": "$t(shared:labels.loyalty)",
       "registered": "$t(shared:labels.registered)",
-      "poolDelegation": "Pool Delegation"
+      "poolDelegation": "$t(shared:poolDelegation)"
     }
   },
   "script": {
@@ -1865,7 +1867,7 @@
       "category": "Category",
       "type": "$t(shared:labels.type)",
       "purpose": "$t(shared:labels.purpose)",
-      "size": "Size",
+      "size": "$t(shared:size)",
       "originTransaction": "Origin transaction",
       "bytes": "$t(shared:labels.bytes)",
       "show": "Show",
@@ -1910,12 +1912,12 @@
     "ranklist": {
       "sortBy": {
         "redeemerCount": "Redeemer Count",
-        "tx": "Tx",
+        "tx": "$t(shared:tx)",
         "outsum": "Outsum"
       }
     },
     "tvl": {
-      "title": "TVL",
+      "title": "$t(shared:tvl)",
       "subtitle": "(total value locked)",
       "description": "In the context of decentralized finance (DeFi), it represents the total amount of cryptocurrency assets that are currently staked or deposited in a particular protocol or smart contract.",
       "defilamaLink": "Detailed Cardano TVL on DefiLlama",
@@ -1933,10 +1935,10 @@
       "error": "Error loading stake keys",
       "table": {
         "stakeAddress": "Stake Address",
-        "liveStake": "Live Stake",
-        "activeStake": "Active Stake",
-        "accounts": "Accounts",
-        "assets": "Assets",
+        "liveStake": "$t(shared:liveStake1)",
+        "activeStake": "$t(shared:activeStake1)",
+        "accounts": "$t(shared:accounts)",
+        "assets": "$t(shared:assets)",
         "noAssets": "No assets",
         "assetsCount": "{{count}} assets"
       }
@@ -1945,7 +1947,7 @@
   "treasury": {
     "overview": {
       "allTime": "All-time",
-      "currentEpoch": "Current Epoch",
+      "currentEpoch": "$t(shared:currentEpoch)",
       "previousEpoch": "Previous Epoch"
     },
     "graph": {
@@ -1974,23 +1976,23 @@
       "cexplorer": "Cexplorer:",
       "meshJsNote": "Note: MeshJS does not support treasury donations yet. You can donate only to Cexplorer for now.",
       "submitting": "Submitting...",
-      "donate": "Donate"
+      "donate": "$t(shared:donate)"
     }
   },
   "stakingCalculator": {
     "poolInfo": "Pool Info",
     "expectedReturns": "Expected Returns",
     "labels": {
-      "name": "Name",
+      "name": "$t(shared:name)",
       "ticker": "$t(shared:labels.ticker)",
-      "poolId": "Pool ID",
+      "poolId": "$t(shared:poolId)",
       "created": "Created",
-      "delegators": "Delegators",
+      "delegators": "$t(shared:delegators)",
       "recentRoa": "Recent ROA",
       "website": "Website",
       "estimatedBlocks": "Estimated Blocks",
-      "liveStake": "Live Stake",
-      "activeStake": "Active Stake",
+      "liveStake": "$t(shared:liveStake1)",
+      "activeStake": "$t(shared:activeStake1)",
       "activePledge": "Active Pledge",
       "lifetimeRoa": "Lifetime ROA",
       "marginFee": "Margin Fee",
@@ -2045,7 +2047,7 @@
       "period": "Period",
       "epochs": "$t(shared:labels.epochs)",
       "epoch": "$t(shared:labels.epoch)",
-      "endTime": "End Time",
+      "endTime": "$t(shared:endTime)",
       "type": "$t(shared:labels.type)",
       "rewardsAda": "Rewards ADA",
       "rewardsUsd": "Rewards USD",
@@ -2065,15 +2067,15 @@
     }
   },
   "uplcPage": {
-    "title": "UPLC Viewer",
+    "title": "$t(shared:title2)",
     "breadcrumbs": {
-      "developers": "Developers",
-      "uplcViewer": "UPLC Viewer"
+      "developers": "$t(shared:developers)",
+      "uplcViewer": "$t(shared:title2)"
     },
     "description1": "Universal tool for inspecting and formatting Untyped Plutus Core (UPLC): native, flat encoded or CBOR-wrapped. Implemented from the opensource code built by",
     "description2": "team.",
     "repositoryLabel": "Repository on GitHub:",
-    "input": "Input",
+    "input": "$t(shared:input)",
     "detectedKind": {
       "text": "UPLC text",
       "flat": "Flat",
@@ -2122,7 +2124,7 @@
       "token": "$t(shared:labels.token)",
       "price": "$t(shared:labels.price)",
       "change": "Change",
-      "volume": "Volume",
+      "volume": "$t(shared:volume)",
       "liquidity": "$t(shared:labels.liquidity)",
       "age": "Age",
       "last7Days": "Last 7 days",
@@ -2139,24 +2141,24 @@
       "hash": "$t(shared:labels.hash)",
       "date": "$t(shared:labels.date)",
       "height": "$t(shared:labels.height)",
-      "totalOutput": "Total Output",
+      "totalOutput": "$t(shared:totalOutput)",
       "fee": "$t(shared:labels.fee)",
       "epoch": "$t(shared:labels.epoch)",
       "slot": "$t(shared:labels.slot)",
       "ttl": "TTL",
-      "deposit": "Deposit",
+      "deposit": "$t(shared:deposit)",
       "confirmations": "Confirmations",
-      "treasuryDonation": "Treasury Donation",
+      "treasuryDonation": "$t(shared:treasuryDonation)",
       "keyMessage": "Key message"
     },
     "transactionOverview": "Transaction Overview",
     "transactionSize": "Transaction Size",
-    "epochSlot": "Epoch slot",
+    "epochSlot": "$t(shared:epochSlot)",
     "lockedAgo": "Locked {{time}} ago",
     "lockingIn": "Locking in {{time}}",
     "sortBy": {
-      "value": "Value",
-      "index": "Index"
+      "value": "$t(shared:value)",
+      "index": "$t(shared:index)"
     },
     "unlockInteractivity": "Unlock interactivity",
     "lockInteractivity": "Lock interactivity",
@@ -2164,13 +2166,13 @@
     "inputs": "Inputs",
     "outputs": "$t(shared:labels.outputs)",
     "total": "$t(shared:labels.total)",
-    "utxo": "UTXO",
+    "utxo": "$t(shared:utxo)",
     "datumHash": "Datum hash",
     "scriptHash": "Script Hash",
     "consumedByTransaction": "Consumed by transaction",
     "paymentCredential": "Payment Credential",
     "inputNumber": "Input #{{number}}",
-    "size": "Size",
+    "size": "$t(shared:size)",
     "mem": "Mem",
     "steps": "$t(shared:labels.steps)",
     "redeemerDataHash": "Redeemer Data Hash",
@@ -2198,15 +2200,15 @@
       "delegation": "$t(shared:labels.delegation)",
       "liveStake": "$t(shared:liveStake)",
       "activeStake": "$t(shared:activeStake)",
-      "voterRole": "Voter role",
+      "voterRole": "$t(shared:voterRole)",
       "voter": "$t(shared:labels.voter)",
       "type": "$t(shared:labels.type)",
-      "governanceAction": "Governance action",
+      "governanceAction": "$t(shared:governanceAction)",
       "vote": "$t(shared:labels.vote)",
       "votingPower": "$t(shared:votingPower)",
       "date": "$t(shared:labels.date)",
       "asset": "$t(shared:labels.asset)",
-      "policyId": "Policy ID",
+      "policyId": "$t(shared:policyId)",
       "txHash": "Tx Hash",
       "quantity": "$t(shared:labels.quantity)",
       "amount": "$t(shared:labels.amount)",
@@ -2226,8 +2228,8 @@
     "hidden": "Hidden"
   },
   "epochCalendar": {
-    "title": "Epoch calendar",
-    "breadcrumb": "Epoch calendar",
+    "title": "$t(shared:title9)",
+    "breadcrumb": "$t(shared:title9)",
     "showUpcoming": "Show upcoming:",
     "sort": {
       "newest": "Newest",
@@ -2235,7 +2237,7 @@
     },
     "card": {
       "epoch": "Epoch {{no}}",
-      "start": "Start",
+      "start": "$t(shared:start)",
       "end": "End",
       "epochDetail": "Epoch detail",
       "upcoming": "Upcoming"
@@ -2243,22 +2245,22 @@
   },
   "devTooling": {
     "title": "Developer Tools",
-    "breadcrumb": "Developers",
+    "breadcrumb": "$t(shared:developers)",
     "sections": {
       "addressInspector": {
-        "label": "Address inspector",
+        "label": "$t(shared:addressInspector)",
         "description": "Decode and analyze any Cardano address.",
-        "button": "Address inspector"
+        "button": "$t(shared:addressInspector)"
       },
       "datumInspector": {
-        "label": "Datum inspector",
+        "label": "$t(shared:label)",
         "description": "Parse on-chain datum values stored in scripts.",
-        "button": "Datum inspector"
+        "button": "$t(shared:label)"
       },
       "cexplorerApi": {
         "label": "Cexplorer API",
         "description": "Access real-time Cardano on-chain data and integrate directly into your apps.",
-        "documentation": "Documentation",
+        "documentation": "$t(shared:documentation)",
         "getApiKey": "Get API key",
         "apiPage": "API Page"
       },
@@ -2268,9 +2270,9 @@
         "button": "SDK"
       },
       "uplcViewer": {
-        "label": "UPLC Viewer",
+        "label": "$t(shared:title2)",
         "description": "Inspect and explore UPLC scripts in a readable, structured format.",
-        "button": "UPLC Viewer"
+        "button": "$t(shared:title2)"
       },
       "cexplorerInstances": {
         "label": "Cexplorer instances",
@@ -2279,12 +2281,12 @@
       "github": {
         "label": "Github",
         "description": "Explore the source, contribute, and track updates.",
-        "reportBug": "Report a bug",
-        "suggestFeature": "Suggest a feature",
+        "reportBug": "$t(shared:reportBug)",
+        "suggestFeature": "$t(shared:suggestFeature)",
         "button": "Github"
       },
       "getInTouch": {
-        "label": "Get in touch",
+        "label": "$t(shared:label1)",
         "description": "Reach out to our team for questions, partnerships, feedback, or developer support.",
         "email": "Email",
         "joinDiscord": "Join Discord"
@@ -2292,11 +2294,11 @@
     }
   },
   "aboutPage": {
-    "title": "About us",
-    "breadcrumb": "About us",
+    "title": "$t(shared:title10)",
+    "breadcrumb": "$t(shared:title10)",
     "metaTitle": "About us | Cexplorer.io",
     "description": "Cexplorer.io, the independent and most feature-rich Cardano blockchain explorer, empowers users and developers with comprehensive tools for browsing the blockchain, staking and analysis, serving as an essential resource for the Cardano ecosystem since the Incentivized Testnet.",
-    "sectionTitle": "Cexplorer",
+    "sectionTitle": "$t(shared:sectionTitle)",
     "sectionSubtitle": "Supporting the Cardano ecosystem with tools and data.",
     "learnMore": "Learn more",
     "services": {
@@ -2327,45 +2329,45 @@
     }
   },
   "analyticsPage": {
-    "title": "Analytics",
-    "breadcrumb": "Analytics",
+    "title": "$t(shared:analytics)",
+    "breadcrumb": "$t(shared:analytics)",
     "categories": {
-      "network": "Network",
-      "accounts": "Accounts",
-      "pools": "Staking",
+      "network": "$t(shared:network)",
+      "accounts": "$t(shared:accounts)",
+      "pools": "$t(shared:pools)",
       "dapps": "dApps"
     },
     "options": {
-      "blocks": "Blocks",
-      "blockVersions": "Block versions",
-      "energyConsumption": "Energy consumption",
-      "health": "Health",
-      "storage": "Storage",
-      "transactions": "Transactions",
-      "hardfork": "Hardfork",
-      "pots": "Pots",
+      "blocks": "$t(shared:blocks)",
+      "blockVersions": "$t(shared:blockVersions)",
+      "energyConsumption": "$t(shared:energyConsumption)",
+      "health": "$t(shared:health)",
+      "storage": "$t(shared:storage)",
+      "transactions": "$t(shared:transactions)",
+      "hardfork": "$t(shared:hardfork)",
+      "pots": "$t(shared:title1)",
       "treasuryProjection": "Treasury projection",
-      "walletActivity": "Wallet activity",
-      "topAddresses": "Top addresses",
-      "topStakingAccounts": "Top staking accounts",
-      "wealthComposition": "Wealth composition",
+      "walletActivity": "$t(shared:walletActivity)",
+      "topAddresses": "$t(shared:topAddresses)",
+      "topStakingAccounts": "$t(shared:topStakingAccounts)",
+      "wealthComposition": "$t(shared:wealthComposition)",
       "genesisAddresses": "Genesis addresses",
-      "poolIssues": "Pool issues",
-      "averagePools": "Average pools",
-      "ranklist": "Ranklist",
+      "poolIssues": "$t(shared:poolIssues)",
+      "averagePools": "$t(shared:averagePools)",
+      "ranklist": "$t(shared:ranklist)",
       "interactions": "Interactions",
-      "tvl": "TVL"
+      "tvl": "$t(shared:tvl)"
     }
   },
   "governanceCrossroads": {
-    "title": "Governance",
-    "breadcrumb": "Governance",
+    "title": "$t(shared:title)",
+    "breadcrumb": "$t(shared:title)",
     "sections": {
       "dreps": {
         "label": "Delegated Representatives (DReps)",
         "description": "Explore all Cardano DReps, their voting history, and participation stats.",
         "viewAll": "View all DReps",
-        "analytics": "Analytics"
+        "analytics": "$t(shared:analytics)"
       },
       "votes": {
         "label": "Governance Votes",
@@ -2383,27 +2385,27 @@
         "button": "View Constitutional Committee"
       },
       "powerThresholds": {
-        "label": "Power Thresholds",
+        "label": "$t(shared:title4)",
         "description": "See Cardano power distribution and governance.",
         "button": "View Power Thresholds"
       },
       "constitution": {
-        "label": "Constitution",
+        "label": "$t(shared:constitution)",
         "description": "View the current and past Cardano constitutions and their governance history.",
         "button": "View Constitution"
       },
       "certificates": {
-        "label": "Certificates",
+        "label": "$t(shared:certificates)",
         "description": "All transactions with DRep registrations, updates, and deregistrations.",
-        "registrations": "DRep registrations",
-        "deregistrations": "DRep deregistrations",
-        "updates": "DRep updates"
+        "registrations": "$t(shared:title6)",
+        "deregistrations": "$t(shared:title7)",
+        "updates": "$t(shared:title8)"
       }
     }
   },
   "brandPage": {
-    "title": "Brand assets",
-    "breadcrumb": "Brand assets",
+    "title": "$t(shared:title11)",
+    "breadcrumb": "$t(shared:title11)",
     "metaTitle": "Brand assets | Cexplorer.io",
     "description": "For using Cexplorer.io branding in press on graphics materials.",
     "guidelines": {
@@ -2438,29 +2440,29 @@
     }
   },
   "contactPage": {
-    "title": "Contact us",
+    "title": "$t(shared:title3)",
     "metaTitle": "Contact us | Cexplorer.io",
-    "subtitle": "Get in touch",
-    "breadcrumb": "Contact us",
+    "subtitle": "$t(shared:label1)",
+    "breadcrumb": "$t(shared:title3)",
     "supportWork": {
       "title": "Support Our Work",
       "description": "Consider donating or staking with our stake pool to support ongoing development and maintenance.",
-      "button": "Donate"
+      "button": "$t(shared:donate)"
     },
     "twitter": {
       "title": "X (former Twitter)",
       "description": "Stay in touch with latest updates around Cexplorer and Cardano.",
-      "button": "Join"
+      "button": "$t(shared:button)"
     },
     "discord": {
       "title": "Discord",
       "description": "Join the conversation, or raise a support ticket - we're here for you.",
-      "button": "Join"
+      "button": "$t(shared:button)"
     },
     "telegram": {
       "title": "Telegram",
       "description": "Join the Cexplorer community on our Telegram.",
-      "button": "Join"
+      "button": "$t(shared:button)"
     },
     "email": {
       "title": "E-mail",
@@ -2472,7 +2474,7 @@
       "button": "Request a feature"
     },
     "donate": {
-      "title": "Donate",
+      "title": "$t(shared:donate)",
       "description": "Support our mission and keep the Cexplorer rolling",
       "button": "Donate page"
     }
@@ -2493,7 +2495,7 @@
       "title": "Reach your audience!",
       "description1": "Cexplorer.io is the top Cardano blockchain explorer and analytics platform, offering insights into blockchain, staking, governance, and more.",
       "description2": "Advertise with us, to reach an audience of Cardano enthusiasts and developers, gaining exposure within the growing Cardano community.",
-      "button": "Promote"
+      "button": "$t(shared:promote)"
     },
     "pro": {
       "title": "Promote with Cexplorer",
@@ -2512,7 +2514,7 @@
           "description": "Promote directly to our engaged user base, with visibility on relevant Cexplorer pages based on the type of promotion, ensuring maximum reach."
         }
       },
-      "documentation": "Documentation",
+      "documentation": "$t(shared:documentation)",
       "getCexplorerPro": "Get Cexplorer PRO"
     },
     "boosts": {
@@ -2549,7 +2551,7 @@
       },
       "coinzillaText": "We work with",
       "coinzillaDescription": ", a trusted advertising network that manually reviews campaigns to maintain quality and relevance.",
-      "documentation": "Documentation",
+      "documentation": "$t(shared:documentation)",
       "email": "E-mail"
     }
   },
@@ -2558,7 +2560,7 @@
     "title": "API Plans",
     "subtitle": "Effortless access to blockchain data. Choose the perfect plan for your needs.",
     "breadcrumb": {
-      "developers": "Developers",
+      "developers": "$t(shared:developers)",
       "apiPlans": "API Plans"
     },
     "banner": "Only the Starter API is available right now. Additional tiers are coming later.",
@@ -2567,7 +2569,7 @@
         "tier": "Free plan",
         "title": "Starter",
         "subtitle": "Available to all Cexplorer users.",
-        "cta": "Get started",
+        "cta": "$t(shared:cta)",
         "features": {
           "ideal": "Ideal for developers and private projects",
           "requestsPerMinute": "{{count}} requests per minute",
@@ -2579,7 +2581,7 @@
         "tier": "NFT tier",
         "title": "Basic",
         "subtitle": "Comes with owning Cexplorer PRO NFT.",
-        "cta": "Get started",
+        "cta": "$t(shared:cta)",
         "features": {
           "ideal": "Ideal for small to medium sized projects",
           "stackingNote": "Owning multiple NFTs stacks the API requests limits",
@@ -2590,9 +2592,9 @@
       },
       "pro": {
         "tier": "Individual",
-        "title": "PRO",
+        "title": "$t(shared:pro)",
         "subtitle": "Tailored individually based on your needs.",
-        "cta": "Contact us",
+        "cta": "$t(shared:title3)",
         "features": {
           "ideal": "Ideal for large sized projects",
           "flexibleLimits": "Limits are always flexible & set based on the project needs",
@@ -2620,7 +2622,7 @@
         "q2": {
           "question": "2. What are the benefits of the Basic plan?",
           "answerPart1": "The Basic plan comes with owning a",
-          "answerLink": "Cexplorer PRO NFT",
+          "answerLink": "$t(shared:answerLink)",
           "answerPart2": ". With each NFTs your limits are boosted. The more NFTs you own, the higher your API limits."
         },
         "q3": {
@@ -2630,7 +2632,7 @@
         "q4": {
           "question": "4. Can I combine multiple Basic-tier NFTs for increased limits?",
           "answerPart1": "Yes! If you own multiple",
-          "answerLink": "Cexplorer PRO NFT",
+          "answerLink": "$t(shared:answerLink)",
           "answerPart2": ", their API request limits stack, giving you higher overall limits."
         },
         "q5": {
@@ -2640,7 +2642,7 @@
         "q6": {
           "question": "6. How can I switch to a higher-tier plan?",
           "answerPart1": "To upgrade to the Basic tier, purchase a",
-          "answerLink": "Cexplorer PRO NFT",
+          "answerLink": "$t(shared:answerLink)",
           "answerPart2": ". For the PRO plan, contact our support team to discuss your specific requirements."
         },
         "q7": {
@@ -2650,7 +2652,7 @@
         "q8": {
           "question": "8. Are there any additional perks for owning a Cexplorer PRO NFT?",
           "answerIntro": "Yes! Alongside the Basic API tier benefits,",
-          "answerLink": "Cexplorer PRO NFT",
+          "answerLink": "$t(shared:answerLink)",
           "answerIntro2": "holders gain access to:",
           "perk1": "Governance votes",
           "perk2": "PRO features like exporting data in CSV or JSON formats",
@@ -2670,26 +2672,26 @@
     "stillHaveQuestions": {
       "title": "Still have questions?",
       "description": "Can't find the answer you're looking for? Get in touch with our friendly team.",
-      "button": "Get in touch"
+      "button": "$t(shared:label1)"
     }
   },
   "botsPage": {
     "metaTitle": "Bots | Cexplorer.io",
     "title": "Cexplorer.io Bots",
     "subtitle": "Stay connected with automated notifications and updates",
-    "breadcrumb": "Bots",
+    "breadcrumb": "$t(shared:bots)",
     "bots": {
       "x": {
         "title": "X notification bot",
-        "description": "Coming soon..."
+        "description": "$t(shared:description)"
       },
       "telegram": {
         "title": "Telegram bot",
-        "description": "Coming soon..."
+        "description": "$t(shared:description)"
       },
       "discord": {
         "title": "Discord bot",
-        "description": "Coming soon..."
+        "description": "$t(shared:description)"
       }
     },
     "tags": {
@@ -2712,7 +2714,7 @@
     "metaTitle": "FAQ | Cexplorer.io",
     "title": "Frequently asked questions",
     "subtitle": "Everything you need to know about the product and billing.",
-    "breadcrumb": "FAQ",
+    "breadcrumb": "$t(shared:faq)",
     "questions": {
       "q1": {
         "title": "What is Cexplorer?",
@@ -2752,7 +2754,7 @@
     "metaTitle": "Donate | Cexplorer.io",
     "title": "Fuel the Future of Cexplorer",
     "subtitle": "Your support helps us operate, maintain and improve everything on Cexplorer.io",
-    "breadcrumb": "Donate",
+    "breadcrumb": "$t(shared:donate)",
     "infoCards": {
       "itn": {
         "heading": "Here for Cardano since ITN",
@@ -2770,11 +2772,11 @@
     "buttons": {
       "stakeWithCexplorer": "Stake with Cexplorer",
       "sendDonation": "Send a donation",
-      "donate": "Donate",
+      "donate": "$t(shared:donate)",
       "delegateToPools": "Delegate to [POOLS]"
     },
     "donateSection": {
-      "title": "Donate",
+      "title": "$t(shared:donate)",
       "thankYou": "Thank you for supporting the development of independent Cardano explorer! ❤️",
       "sendDonationHere": "Send your donation here",
       "otherMethods": "Other donation methods",
@@ -2832,12 +2834,12 @@
     "reportBug": {
       "title": "Report a bug on GitHub",
       "description": "Spotted something off? Help us squash bugs and improve Cexplorer.",
-      "button": "Report a bug"
+      "button": "$t(shared:reportBug)"
     },
     "suggestFeature": {
       "title": "Suggest a new feature",
       "description": "Think we should add something? Suggest a feature you'd love to see.",
-      "button": "Suggest a feature"
+      "button": "$t(shared:suggestFeature)"
     },
     "support": {
       "title": "Support",
@@ -2845,7 +2847,7 @@
       "button": "Join Discord"
     },
     "donate": {
-      "title": "Donate",
+      "title": "$t(shared:donate)",
       "description": "Support our mission and keep the Cexplorer rolling",
       "button": "Donate page"
     }
@@ -2869,17 +2871,17 @@
     "breadcrumb": "Articles",
     "breadcrumbDetail": "Article detail",
     "emailPlaceholder": "Enter your email",
-    "getStarted": "Get started",
+    "getStarted": "$t(shared:cta)",
     "privacyNote": "We care about your data in our privacy policy.",
     "category": "Category:",
     "searchPlaceholder": "Search...",
-    "home": "Home",
+    "home": "$t(shared:home)",
     "published": "Published",
     "author": "Author",
     "stakePool": "Stake pool:",
     "drep": "Drep:",
     "socials": "Socials:",
-    "delegateTo": "Delegate to {{name}}",
+    "delegateTo": "$t(shared:delegateTo)",
     "delegateToPool": "Delegate to Pool",
     "delegateToDrep": "Delegate to DRep",
     "keywords": "Keywords",
