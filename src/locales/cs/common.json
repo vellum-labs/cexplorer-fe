@@ -756,7 +756,7 @@
     "title": "Pots",
     "breadcrumb": "Pots",
     "graphEpochs": "Epochy v grafu:",
-    "totalEpochs": "Celkem {{count}} epoch",
+    "totalEpochs": "Celkem {{total}} epoch",
     "searchPlaceholder": "Hledat ve výsledcích...",
     "sortOptions": {
       "all": "Vše",
