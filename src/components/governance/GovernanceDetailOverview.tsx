@@ -812,7 +812,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
 
                   {shouldSPOVote(
                     query.data?.data?.type ?? "",
-                    votingProcedure,
+                    query.data?.data?.description,
                   ) ? (
                     <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                       <OverviewCard
@@ -846,8 +846,8 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         threshold={
                           shouldSPOVote(
                             query.data?.data?.type ?? "",
-                            votingProcedure,
-                          ) && spoThreshold < 1
+                            query.data?.data?.description,
+                          )
                             ? spoThreshold
                             : undefined
                         }
