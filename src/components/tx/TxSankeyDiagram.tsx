@@ -187,18 +187,22 @@ export const TxSankeyDiagram: FC<TxSankeyDiagramProps> = ({
       series: [
         {
           type: "sankey",
-          left: 120,
-          right: 120,
+          left: 20,
+          right: 20,
           top: 20,
           bottom: 20,
-          data: nodes.map(node => ({
-            ...node,
-            itemStyle: {
-              color: node.name.startsWith("in-") ? "#EF4444" : "#10B981",
-              borderColor: splitLineColor,
-              borderWidth: 0.5,
-            },
-          })),
+          data: nodes.map(node => {
+            const isOutput = node.name.startsWith("out-");
+            return {
+              ...node,
+              itemStyle: {
+                color: node.name.startsWith("in-") ? "#EF4444" : "#10B981",
+                borderColor: splitLineColor,
+                borderWidth: 0.5,
+              },
+              label: isOutput ? { position: "left" } : undefined,
+            };
+          }),
           links: links,
           nodeAlign: "justify",
           nodeWidth: 15,
@@ -215,7 +219,7 @@ export const TxSankeyDiagram: FC<TxSankeyDiagramProps> = ({
           },
           label: {
             color: textColor,
-            fontSize: 14,
+            fontSize: 12,
             formatter: (params: any) => {
               const name = params.name || "";
               const address = name.replace(/^(in|out)-/, "");
@@ -245,7 +249,7 @@ export const TxSankeyDiagram: FC<TxSankeyDiagramProps> = ({
 
   return (
     <div
-      className={`relative mt-2 h-[400px] w-full rounded-l border border-border md:h-[600px] ${className ?? ""}`}
+      className={`relative mt-2 h-[400px] w-full overflow-hidden rounded-l border border-border md:h-[600px] ${className ?? ""}`}
     >
       <GraphWatermark className='opacity-10' />
       <ReactEcharts
