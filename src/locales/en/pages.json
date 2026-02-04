@@ -600,6 +600,16 @@
       "items": "items",
       "total": "Total",
       "andMore": "and {{count}} more"
+    },
+    "analytics": {
+      "history": {
+        "title": "Group History",
+        "description": "Total stake and delegator count across all pools in the group over time."
+      },
+      "legend": {
+        "totalStake": "Total Stake",
+        "totalDelegators": "Total Delegators"
+      }
     }
   },
   "dreps": {
