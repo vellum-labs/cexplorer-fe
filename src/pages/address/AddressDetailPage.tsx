@@ -202,6 +202,7 @@ export const AddressDetailPage: FC = () => {
             isLoading={addressQuery.isLoading}
             enableWatchlistModal={!!stakeKey}
             stakeKey={rewardsAddress}
+            showPromote={false}
           />
         </div>
         <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 px-mobile pb-3 pt-1.5 md:px-desktop xl:flex-nowrap xl:justify-start'>
