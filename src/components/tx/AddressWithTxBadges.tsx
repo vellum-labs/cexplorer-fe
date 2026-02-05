@@ -176,7 +176,7 @@ export const AddressWithTxBadges = ({
             <div className='flex w-[200px] flex-col items-center text-text-sm'>
               <p className='font-medium'>{t("tx.paymentCredential")}</p>
               <div className='mt-1/2 flex items-end justify-end break-all text-center text-text-sm'>
-                <span className='break-all text-primary'>
+                <span className='break-all text-grayTextPrimary'>
                   {utxo.payment_addr_cred}
                 </span>
                 <Copy copyText={utxo.payment_addr_cred} />
