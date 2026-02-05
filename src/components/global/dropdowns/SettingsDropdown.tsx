@@ -141,12 +141,12 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
               <SelectValue
                 placeholder={
                   <div className='flex w-full items-center justify-between gap-1/2 uppercase'>
-                    <span>{locales[locale].displayValue}</span>
+                    <span>{locales[locale]?.displayValue ?? locale?.toUpperCase()}</span>
                     <img
                       width={15}
                       height={15}
                       alt='flag'
-                      src={locales[locale].image}
+                      src={locales[locale]?.image}
                     />
                   </div>
                 }
