@@ -129,7 +129,7 @@ export const filteredSupportedWallets: WalletType[] = Object.entries(
   })
   .filter(
     (wallet): wallet is WalletType =>
-      wallet !== undefined && wallet !== "nufiSSO",
+      wallet !== undefined && wallet !== "nufiSSO" && wallet !== "nufiSnap",
   )
   .sort((a, b) => supportedWallets[a][0].pos - supportedWallets[b][0].pos);
 
