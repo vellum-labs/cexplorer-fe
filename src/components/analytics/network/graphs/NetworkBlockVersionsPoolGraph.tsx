@@ -10,7 +10,6 @@ import { useNavigate } from "@tanstack/react-router";
 
 import { memo } from "react";
 
-import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 
@@ -71,7 +70,7 @@ export const NetworkBlockVersionsPoolGraph: FC<NetworkBlockVersionsPoolGraphProp
           return `
             ${version ? `${t("analytics.lastBlockVersion")}: ${version}<br>` : ""}
             ${poolName ? `${t("analytics.poolName")}: ${poolName}<br>` : ""}
-            ${t("analytics.poolId")}: ${formatString(params?.data?.id, "long")}
+            ${t("analytics.poolId")}: ${params?.data?.id?.length > 20 ? `${params.data.id.slice(0, 8)}...${params.data.id.slice(-8)}` : (params?.data?.id ?? "")}
           `;
         },
       },
