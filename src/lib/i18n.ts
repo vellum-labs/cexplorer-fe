@@ -49,6 +49,7 @@ const getInitialLanguage = (): string => {
 
 i18n.use(initReactI18next).init({
   resources,
+  parseMissingKeyHandler: key => `MISSING: [${key}]`,
   lng: getInitialLanguage(),
   fallbackLng: "en",
   defaultNS: "common",
