@@ -66,15 +66,26 @@ export const useAddressLabelStore = handlePersistStore<
 
     mergeApiLabels: (apiLabels, wallet) =>
       set(state => {
-        const currentLabels = wallet
+        const walletLabels = wallet
           ? state.HistoryLabels.wallets.find(w => w.wallet === wallet)
               ?.labels || []
-          : state.HistoryLabels.empty;
+          : [];
 
-        const mergedLabels = [...currentLabels];
+        const emptyLabels = state.HistoryLabels.empty;
+
+        const mergedLabels = wallet ? [...walletLabels] : [...emptyLabels];
+
+        if (wallet) {
+          emptyLabels.forEach(label => {
+            const exists = mergedLabels.some(l => l.ident === label.ident);
+            if (!exists) {
+              mergedLabels.push(label);
+            }
+          });
+        }
 
         apiLabels.forEach(apiLabel => {
-          const exists = currentLabels.some(l => l.ident === apiLabel.ident);
+          const exists = mergedLabels.some(l => l.ident === apiLabel.ident);
           if (!exists) {
             mergedLabels.push(apiLabel);
           }
@@ -83,6 +94,8 @@ export const useAddressLabelStore = handlePersistStore<
         if (!wallet) {
           state.HistoryLabels.empty = mergedLabels;
         } else {
+          state.HistoryLabels.empty = [];
+
           const existingIndex = state.HistoryLabels.wallets.findIndex(
             w => w.wallet === wallet,
           );

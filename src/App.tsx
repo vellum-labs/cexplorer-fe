@@ -9,7 +9,13 @@ import { GeekConfigModal } from "./components/global/modals/GeekConfigModal";
 import WalletConfigModal from "./components/wallet/WalletConfigModal";
 import { enabledWalletConnector, network } from "./constants/confVariables";
 import { useConnectWallet } from "./hooks/useConnectWallet";
-import { useFetchUserInfo } from "./services/user";
+import { useAuthToken } from "./hooks/useAuthToken";
+import {
+  useFetchUserInfo,
+  useUserLabels,
+  updateUserLabels,
+} from "./services/user";
+import { useAddressLabelStore } from "./stores/addressLabelStore";
 import { useCustomLabelModalState } from "./stores/states/customLabelModalState";
 import { useWalletConfigModalState } from "./stores/states/walletConfigModalState";
 import { useGeekConfigModalState } from "./stores/states/geekConfigModalState";
@@ -18,6 +24,7 @@ import { useUqStore } from "./stores/uqStore";
 import { useWalletStore } from "./stores/walletStore";
 import { generateUniqueId } from "./utils/generateUniqueId";
 import { GoogleAnalytics } from "./components/global/GoogleAnalytics";
+import type { AddressLabel } from "./types/commonTypes";
 
 function App() {
   const { theme } = useThemeStore();
@@ -28,6 +35,11 @@ function App() {
   const { isOpen: isConfigOpen } = useWalletConfigModalState();
   const { isOpen: isGeekConfigOpen } = useGeekConfigModalState();
   const userQuery = useFetchUserInfo();
+  const token = useAuthToken();
+  const { data: apiLabelsData } = useUserLabels(token || "");
+  const { mergeApiLabels, getLabelsForWallet, setLabels } =
+    useAddressLabelStore();
+  const userAddress = userQuery?.data?.data?.address;
 
   useEffect(() => {
     if (userQuery.data?.code === "403") {
@@ -80,6 +92,35 @@ function App() {
       setUq(generateUniqueId());
     }
   }, [uq]);
+
+  useEffect(() => {
+    if (token && apiLabelsData?.data?.labels) {
+      const apiLabels: AddressLabel[] = apiLabelsData.data.labels
+        .map(l => ({
+          ident: l.ident || l.address || "",
+          label: l.label || "",
+        }))
+        .filter(l => l.ident && l.label);
+
+      mergeApiLabels(apiLabels, userAddress || null);
+      const mergedLabels = getLabelsForWallet(userAddress || null);
+      setLabels(mergedLabels);
+
+      if (mergedLabels.length > 0) {
+        updateUserLabels(
+          token,
+          mergedLabels.map(l => ({ ident: l.ident, label: l.label })),
+        ).catch(err => console.error("Failed to sync labels to API:", err));
+      }
+    }
+  }, [
+    token,
+    apiLabelsData,
+    userAddress,
+    mergeApiLabels,
+    getLabelsForWallet,
+    setLabels,
+  ]);
 
   return (
     <>
