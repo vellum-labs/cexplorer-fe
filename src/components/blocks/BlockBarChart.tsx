@@ -103,12 +103,13 @@ export const BlockBarChart: FC<BlockBarChartProps> = ({ txs, className }) => {
         left: 150,
         right: 40,
         top: 20,
-        bottom: 40,
+        bottom: 80,
       },
       xAxis: {
         type: "value",
         axisLabel: {
           color: textColor,
+          rotate: 45,
           formatter: (value: number) => {
             if (metric === "size") {
               return `${(value / 1024).toFixed(2)} kB`;

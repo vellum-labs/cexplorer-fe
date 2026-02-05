@@ -386,7 +386,8 @@ const BlockDetailPage: FC = () => {
                 <OverviewCard
                   title={t("blocks.transactions.title")}
                   overviewList={overviewTransactionsListItems}
-                  className='h-auto'
+                  className='h-auto [&_span.text-grayTextPrimary]:whitespace-nowrap'
+                  columnGap='16px'
                 />
               </div>
               <div className='flex w-[400px] flex-grow flex-col gap-3 xl:justify-between xl:gap-0'>
