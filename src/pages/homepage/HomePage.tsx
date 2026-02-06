@@ -9,14 +9,16 @@ import { HomepageModal } from "@/components/homepage/HomepageModal";
 
 import { useHomepageStore } from "@/stores/homepageStore";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const Homepage: FC = () => {
   const { handleCustomize, addWidget, customize } = useHomepageStore();
+  const { t } = useAppTranslation("common");
 
   return (
     <>
       <PageBase
-        title='Explore Cardano blockchain'
+        title={t("homepage.exploreCardano")}
         metadataTitle='homepage'
         isHomepage
         homepageAd
@@ -31,7 +33,7 @@ export const Homepage: FC = () => {
                 variant='tertiary'
                 leftIcon={<Wand size={16} />}
                 onClick={handleCustomize}
-                label='Customize'
+                label={t("homepage.customize")}
               />
             </div>
             {customize && <HomepageCustomize />}
