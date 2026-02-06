@@ -269,6 +269,7 @@ export const SummaryTable: FC<SummaryTableProps> = ({
             setRows={handleRowsChange}
             rowsLabel={t("table.rows")}
             columnsOptions={columnsOptions}
+            rowOptions={[5, 10, 20, 30, 50]}
           />
           <ExportButton
             columns={columns
