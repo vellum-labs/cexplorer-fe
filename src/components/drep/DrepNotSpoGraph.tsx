@@ -74,11 +74,7 @@ export const DrepNotSpoGraph: FC = () => {
   const option = {
     legend: {
       type: "scroll",
-      data: [
-        { name: KEYS.drepCount, icon: "circle" },
-        { name: KEYS.stake, icon: "circle" },
-        { name: KEYS.delegators, icon: "circle" },
-      ],
+      data: [KEYS.drepCount, KEYS.stake, KEYS.delegators],
       formatter: (name: string) => legendLabels[name] || name,
       textStyle: { color: textColor },
       pageIconColor: textColor,
@@ -133,15 +129,22 @@ export const DrepNotSpoGraph: FC = () => {
       {
         type: "value",
         position: "left",
-        axisLine: { lineStyle: { color: textColor } },
-        axisLabel: false,
+        axisLine: { show: false },
+        axisLabel: { show: false },
         splitLine: { lineStyle: { color: splitLineColor } },
       },
       {
         type: "value",
         position: "right",
-        axisLine: { lineStyle: { color: textColor } },
-        axisLabel: false,
+        axisLine: { show: false },
+        axisLabel: { show: false },
+        splitLine: { show: false },
+      },
+      {
+        type: "value",
+        position: "right",
+        axisLine: { show: false },
+        axisLabel: { show: false },
         splitLine: { show: false },
       },
     ],
@@ -170,7 +173,7 @@ export const DrepNotSpoGraph: FC = () => {
         type: "line",
         name: KEYS.delegators,
         data: delegators,
-        yAxisIndex: 0,
+        yAxisIndex: 2,
         symbol: "none",
         showSymbol: false,
         lineStyle: { color: "#2ecc71" },

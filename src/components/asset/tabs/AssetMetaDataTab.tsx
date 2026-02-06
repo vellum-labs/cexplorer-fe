@@ -68,7 +68,7 @@ export const AssetMetaDataTab: FC<AssetMetaDataTabProps> = ({
             <Dropdown
               id='1'
               width='200px'
-              label={`Tx: ${formatString((items || [])[currentIndex]?.tx?.hash, "long")}`}
+              label={<>Tx: {formatString((items || [])[currentIndex]?.tx?.hash, "long")}</>}
               options={tabOptions}
               triggerClassName='text-primary font-medium px-1.5 py-1'
               closeOnSelect

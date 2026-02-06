@@ -1,44 +1,44 @@
 {
   "home": {
-    "title": "Domů",
+    "title": "$t(shared:home)",
     "welcome": "Vítejte na Cexplorer"
   },
   "transactions": {
-    "title": "Transakce",
+    "title": "$t(shared:transactions)",
     "detail": "Detail transakce",
     "totalOfSuffix": "transakcí",
-    "searchPlaceholder": "Hledat podle hash transakce...",
+    "searchPlaceholder": "$t(shared:searchPlaceholder1)",
     "tabs": {
       "content": "Obsah",
       "overview": "Přehled",
       "scripts": "Skripty",
       "contracts": "Kontrakty",
       "collateral": "Kolaterál",
-      "metadata": "Metadata",
+      "metadata": "$t(shared:metadata)",
       "mints": "Mints",
-      "withdrawals": "Výběry",
+      "withdrawals": "$t(shared:withdrawals)",
       "referenceInputs": "Referenční vstupy",
-      "delegations": "Delegace",
-      "governance": "Správa",
+      "delegations": "$t(shared:delegations)",
+      "governance": "$t(shared:title)",
       "trading": "Obchodování",
       "message": "Zpráva"
     },
     "table": {
-      "treasuryDonation": "Dar do pokladny",
+      "treasuryDonation": "$t(shared:treasuryDonation)",
       "scriptSize": "Velikost skriptu"
     }
   },
   "blocks": {
-    "title": "Bloky",
+    "title": "$t(shared:blocks)",
     "detail": "Detail bloku",
     "totalOfSuffix": "bloků",
-    "searchPlaceholder": "Hledat ve výsledcích...",
+    "searchPlaceholder": "$t(shared:searchPlaceholder)",
     "overview": {
       "title": "Přehled bloku",
-      "date": "Datum",
-      "height": "Výška",
-      "epoch": "Epocha",
-      "slot": "Slot",
+      "date": "$t(shared:date)",
+      "height": "$t(shared:height)",
+      "epoch": "$t(shared:epoch)",
+      "slot": "$t(shared:slot)",
       "epochSlot": "slot epochy",
       "confirmations": "Potvrzení",
       "viewPreviousBlock": "Zobrazit předchozí blok",
@@ -49,7 +49,7 @@
     "transactions": {
       "title": "Transakce a poplatky",
       "totalTransactions": "Celkem transakcí",
-      "totalOutput": "Celkový výstup",
+      "totalOutput": "$t(shared:totalOutput)",
       "totalFees": "Celkové poplatky",
       "totalRewards": "Celkové odměny"
     },
@@ -57,75 +57,75 @@
       "title": "Velikost bloku"
     },
     "search": {
-      "poolId": "Pool ID",
-      "epoch": "Epocha",
-      "hash": "Hash",
-      "slot": "Slot",
-      "height": "Výška"
+      "poolId": "$t(shared:poolId)",
+      "epoch": "$t(shared:epoch)",
+      "hash": "$t(shared:hash)",
+      "slot": "$t(shared:slot)",
+      "height": "$t(shared:height)"
     },
     "table": {
-      "date": "Datum",
-      "height": "Výška",
-      "epoch": "Epocha",
-      "slot": "Slot",
-      "txs": "TX",
-      "mintedBy": "Vytěžil",
-      "hash": "Hash",
-      "epochSlot": "Slot epochy",
-      "vrfKey": "VRF klíč",
+      "date": "$t(shared:date)",
+      "height": "$t(shared:height)",
+      "epoch": "$t(shared:epoch)",
+      "slot": "$t(shared:slot)",
+      "txs": "$t(shared:txs)",
+      "mintedBy": "$t(shared:mintedBy)",
+      "hash": "$t(shared:hash)",
+      "epochSlot": "$t(shared:epochSlot)",
+      "vrfKey": "$t(shared:vrfKey)",
       "protocol": "Protokol",
-      "size": "Velikost",
+      "size": "$t(shared:size)",
       "certCount": "Počet certifikátů",
       "protoVersion": "Verze protokolu",
       "protoVersionTooltip": "Verze protokolu"
     }
   },
   "epochs": {
-    "title": "Epochy",
+    "title": "$t(shared:epochs)",
     "detail": "Detail epochy",
     "totalOfSuffix": "epoch",
     "current": "Aktuální epocha",
-    "searchPlaceholder": "Hledat ve výsledcích...",
+    "searchPlaceholder": "$t(shared:searchPlaceholder)",
     "tabs": {
-      "epochs": "Epochy",
-      "analytics": "Analytika",
+      "epochs": "$t(shared:epochs)",
+      "analytics": "$t(shared:analytics)",
       "parameters": "Parametry",
-      "blocks": "Bloky"
+      "blocks": "$t(shared:blocks)"
     },
     "info": {
-      "currentEpoch": "Aktuální epocha",
-      "start": "Začátek",
+      "currentEpoch": "$t(shared:currentEpoch)",
+      "start": "$t(shared:start)",
       "left": "Zbývá",
       "arrived": "Dokončeno"
     },
     "stats": {
       "title": "Statistiky epochy",
-      "blocks": "Bloky",
-      "txs": "TX",
-      "stake": "Stake",
+      "blocks": "$t(shared:blocks)",
+      "txs": "$t(shared:txs)",
+      "stake": "$t(shared:stake)",
       "usage": "Využití",
       "used": "Využito",
       "unused": "Nevyužito"
     },
     "graph": {
-      "blocks": "Bloky",
+      "blocks": "$t(shared:blocks)",
       "outputs": "Výstupy (₳)",
-      "stake": "Stake (₳)",
-      "transactions": "Transakce",
+      "stake": "$t(shared:stake1)",
+      "transactions": "$t(shared:transactions)",
       "stakingRewards": "Odměny za staking (₳)",
       "apy": "APY (%)",
       "adaPrice": "Cena ADA ($)",
       "yearlyPer1000": "Roční výnos za 1000 ADA ($)",
-      "epoch": "Epocha",
-      "amount": "Množství",
-      "date": "Datum",
+      "epoch": "$t(shared:epoch)",
+      "amount": "$t(shared:amount)",
+      "date": "$t(shared:date)",
       "tbd": "Brzy"
     },
     "analyticsTab": {
       "blockUsage": "Využití bloků",
       "stakedAda": "Stakovaná ADA",
       "stakedWallets": "Stakované peněženky",
-      "rewards": "Odměny",
+      "rewards": "$t(shared:rewards)",
       "activeWallets": "Aktivní peněženky",
       "newWallets": "Nové peněženky",
       "byEpoch": "Podle epochy",
@@ -133,12 +133,12 @@
     },
     "blocksTable": {
       "totalOfBlocks": "Celkem {{count}} bloků",
-      "date": "Datum",
-      "height": "Výška",
-      "slot": "Slot",
-      "txs": "TX",
-      "mintedBy": "Vytěženo",
-      "size": "Velikost"
+      "date": "$t(shared:date)",
+      "height": "$t(shared:height)",
+      "slot": "$t(shared:slot)",
+      "txs": "$t(shared:txs)",
+      "mintedBy": "$t(shared:mintedBy)",
+      "size": "$t(shared:size)"
     },
     "detailAnalytics": {
       "blocksInEpoch": "Bloky v epoše",
@@ -148,8 +148,8 @@
       "byDay": "podle dne",
       "rewardsStructure": "Struktura odměn",
       "earnedByFeesReserves": "Z poplatků / rezerv",
-      "fees": "Poplatky",
-      "reserves": "Rezervy"
+      "fees": "$t(shared:fees)",
+      "reserves": "$t(shared:reserves)"
     },
     "stakedAda": {
       "title": "Stakovaná ADA",
@@ -162,12 +162,12 @@
       "pools": "Pooly",
       "apyLeader": "APY % Vedoucí",
       "apyMember": "APY % Člen",
-      "averageStake": "Průměrný stake",
+      "averageStake": "$t(shared:averageStake1)",
       "delegatorCount": "Počet delegátorů",
       "delegatorCountWeighted": "Vážený počet delegátorů",
       "delegatorAverage": "Průměr delegátorů",
       "delegatorAverageWeighted": "Vážený průměr delegátorů",
-      "pending": "Čeká se",
+      "pending": "$t(shared:pending)",
       "dcwTooltip": "Vážený počet delegátorů (DCW) je metrika ve statistikách stake poolů, která vypočítává vážený průměrný počet delegátorů přispívajících do poolu.",
       "daTooltip": "Průměr delegátorů (DA) je metrika ve statistikách stake poolů, která představuje jednoduchý průměr částky stake delegované každým delegátorem.",
       "dawTooltip": "Vážený průměr delegátorů (DAW) ve statistikách stake poolů měří průměrnou částku stake delegovanou všemi delegátory, váženou velikostí každé delegace."
@@ -177,7 +177,7 @@
       "export": "Export",
       "explanation": "Vysvětlení",
       "parameter": "Parametr",
-      "value": "Hodnota",
+      "value": "$t(shared:value)",
       "minFeeA": "Parametr 'a' pro výpočet minimálního transakčního poplatku.",
       "minFeeB": "Parametr 'b' pro výpočet minimálního transakčního poplatku.",
       "maxBlockSize": "Maximální velikost bloku (v bajtech).",
@@ -207,22 +207,22 @@
       "maxCollateralInputs": "Maximální počet kolaterálních vstupů povolených v transakci."
     },
     "pots": {
-      "title": "Zásoby",
-      "treasury": "Pokladnice",
-      "reserves": "Rezervy",
-      "rewards": "Odměny",
-      "deposits": "Vklady",
-      "fees": "Poplatky",
+      "title": "$t(shared:title1)",
+      "treasury": "$t(shared:treasury)",
+      "reserves": "$t(shared:reserves)",
+      "rewards": "$t(shared:rewards)",
+      "deposits": "$t(shared:deposits)",
+      "fees": "$t(shared:fees)",
       "feesReserves": "Poplatky / Rezervy",
       "feesReservesTooltip": "Podíl odměn za staking pocházející z poplatků vs rezerv"
     },
     "summary": {
       "title": "Souhrn",
-      "currentEpoch": "Aktuální epocha",
+      "currentEpoch": "$t(shared:currentEpoch)",
       "beginning": "Začátek",
       "end": "Konec",
-      "blocks": "Bloky",
-      "transactions": "Transakce",
+      "blocks": "$t(shared:blocks)",
+      "transactions": "$t(shared:transactions)",
       "feesGenerated": "Vygenerované poplatky",
       "tps": "TPS:",
       "used": "využito",
@@ -238,29 +238,29 @@
     }
   },
   "pools": {
-    "title": "Stake pooly",
-    "detail": "Detail poolu",
+    "title": "$t(shared:stakePools)",
+    "detail": "$t(shared:Pooldetail)",
     "breadcrumb": "Pooly",
     "list": "Seznam poolů",
     "cardanoStakePools": "Cardano Stake Pooly",
     "totalOfSuffix": "stake poolů",
-    "searchPlaceholder": "Hledat ve výsledcích...",
+    "searchPlaceholder": "$t(shared:searchPlaceholder)",
     "displayVote": "Zobrazit hlas",
     "sortBy": "Seřadit podle",
     "filter": {
       "selectedVotes": "Vybrané hlasy",
       "isDrep": "Je DRep",
-      "yes": "Ano",
-      "no": "Ne"
+      "yes": "$t(shared:yes)",
+      "no": "$t(shared:no)"
     },
     "sortOptions": {
       "nativeRankings": "Nativní pořadí",
-      "pledgeLeverage": "Páka pledgu",
+      "pledgeLeverage": "$t(shared:pledgeLeverage)",
       "topMargins": "Nejvyšší marže s delegátory"
     },
     "tabs": {
-      "list": "Seznam",
-      "analytics": "Analytika"
+      "list": "$t(shared:list)",
+      "analytics": "$t(shared:analytics)"
     },
     "newPools": {
       "title": "Nové pooly",
@@ -273,7 +273,7 @@
     "updates": {
       "title": "Aktualizace poolů",
       "totalOfSuffix": "poolů",
-      "searchPlaceholder": "Hledat ve výsledcích..."
+      "searchPlaceholder": "$t(shared:searchPlaceholder)"
     },
     "deregistrations": {
       "title": "Zrušení registrace poolů",
@@ -284,26 +284,27 @@
       "totalOfSuffix": "registrací"
     },
     "table": {
-      "transactionHash": "Hash transakce",
+      "transactionHash": "$t(shared:transactionHash)",
       "longetivity": "Délka života",
-      "pool": "Pool",
-      "stake": "Stake",
-      "rewards": "Odměny",
-      "luck": "Štěstí",
-      "drep": "DRep",
-      "fees": "Poplatky",
-      "blocks": "Bloky",
-      "pledge": "Pledge",
-      "pledgeLeverage": "Páka pledgu",
-      "delegators": "Delegátoři",
-      "averageStake": "Průměrný stake",
+      "pool": "$t(shared:pool)",
+      "stake": "$t(shared:stake)",
+      "rewards": "$t(shared:rewards)",
+      "luck": "$t(shared:luck)",
+      "drep": "$t(shared:drep)",
+      "fees": "$t(shared:fees)",
+      "blocks": "$t(shared:blocks)",
+      "pledge": "$t(shared:pledge)",
+      "pledgeLeverage": "$t(shared:pledgeLeverage)",
+      "delegators": "$t(shared:delegators)",
+      "averageStake": "$t(shared:averageStake)",
       "selectedVote": "Vybraný hlas",
-      "topDelegator": "Top delegátor",
-      "epoch": "Epocha"
+      "topDelegator": "$t(shared:topDelegator)",
+      "epoch": "$t(shared:epoch)"
     },
     "analytics": {
       "newStakers": "Noví stakeři",
       "stakeComposition": "Složení stake",
+      "basicStats": "Základní statistiky",
       "firstTimeRegistrations": {
         "title": "První registrace stake",
         "description": "Počet nových stakingových peněženek a celkový stake registrovaný v každé epoše."
@@ -316,103 +317,123 @@
         "title": "Stake delegovaný na entity, které jsou SPO i DRep",
         "description": "Stake, počet DRep a počet delegátorů delegovaných na entity, které jsou SPO i DRep"
       },
+      "delegation": {
+        "title": "ADA delegované na stake pooly",
+        "description": "Celkové delegované ADA, procento z oběžné zásoby a počet delegátorů za epochu."
+      },
+      "poolCount": {
+        "title": "Počet stake poolů",
+        "description": "Počet registrovaných a bloky produkujících stake poolů za epochu."
+      },
+      "averageStakes": {
+        "title": "Průměrné stake",
+        "description": "Průměrný stake na pool, na producenta bloků a na delegátora."
+      },
       "legend": {
-        "stake": "Stake (₳)",
-        "count": "Počet",
-        "delegators": "Delegátoři",
-        "spoDrepCount": "Počet SPO+DRep"
+        "stake": "$t(shared:stake1)",
+        "count": "$t(shared:count)",
+        "delegators": "$t(shared:delegators)",
+        "spoDrepCount": "Počet SPO+DRep",
+        "adaDelegated": "Delegované ADA",
+        "circulatingPercent": "% z oběžné zásoby",
+        "delegatedWallets": "Delegované peněženky",
+        "registeredPools": "Registrované pooly",
+        "blockProducingPools": "Bloky produkující pooly",
+        "avgPoolStake": "Prům. stake poolu",
+        "avgBlockProducerStake": "Prům. stake producenta bloků",
+        "avgDelegation": "Prům. delegace"
       },
       "tooltip": {
-        "date": "Datum",
-        "epoch": "Epocha"
+        "date": "$t(shared:date)",
+        "epoch": "$t(shared:epoch)"
       }
     },
     "detailPage": {
-      "poolId": "Pool ID",
-      "poolDetail": "Detail poolu",
+      "poolId": "$t(shared:poolId)",
+      "poolDetail": "$t(shared:Pooldetail)",
       "retired": "Tento pool je zrušen od epochy {{epoch}}",
       "retiring": "Tento pool bude zrušen od epochy {{epoch}}",
       "delegateTo": "Delegovat na [{{ticker}}]",
       "tabs": {
         "performance": "Výkon",
-        "blocks": "Bloky",
-        "rewards": "Odměny",
-        "delegators": "Delegátoři",
-        "about": "O poolu",
+        "blocks": "$t(shared:blocks)",
+        "rewards": "$t(shared:rewards)",
+        "delegators": "$t(shared:delegators)",
+        "about": "$t(shared:about)",
         "awards": "Ocenění",
-        "governance": "Správa",
+        "governance": "$t(shared:title)",
         "embed": "Vložit"
       },
       "about": {
-        "title": "O poolu",
-        "name": "Název",
+        "title": "$t(shared:about)",
+        "name": "$t(shared:name)",
         "ticker": "Ticker",
-        "poolId": "Pool ID",
+        "poolId": "$t(shared:poolId)",
         "created": "Vytvořen",
-        "delegators": "Delegátoři",
+        "delegators": "$t(shared:delegators)",
         "website": "Web"
       },
       "stakeAndPledge": {
         "title": "Stake a Pledge",
         "saturation": "Saturace",
-        "liveStake": "Živý stake",
-        "activeStake": "Aktivní stake",
+        "liveStake": "$t(shared:liveStake1)",
+        "activeStake": "$t(shared:activeStake1)",
         "declaredPledge": "Deklarovaný pledge",
         "activePledge": "Aktivní pledge",
-        "pledgeLeverage": "Páka pledge",
-        "marginFee": "Marže",
+        "pledgeLeverage": "$t(shared:pledgeLeverage)",
+        "marginFee": "Procentuální poplatek",
         "fixedFee": "Fixní poplatek"
       },
       "performance": {
         "title": "Výkon",
         "recentRoa": "Nedávné ROA",
-        "lifetimeRoa": "Celoživotní ROA",
+        "lifetimeRoa": "Celkové ROA",
         "blocksInEpoch": "Bloky v epoše",
         "estimatedBlocks": "Odhadované bloky",
         "proratedLuck": "Poměrné štěstí",
         "blocksLifetime": "Bloky celkem",
-        "lifetimeLuck": "Celoživotní štěstí"
+        "lifetimeLuck": "Celkové štěstí"
       },
       "delegatorsTabs": {
         "newcomers": "Nováčci",
         "migrations": "Migrace",
-        "structure": "Struktura",
+        "structure": "$t(shared:structure)",
         "totalNewcomers": "Celkem {{count}} nováčků",
         "totalMigrations": "Celkem {{count}} migrací"
       },
       "aboutTab": {
         "aboutPool": "O poolu",
         "ownersPledge": "Vlastníci (Pledge)",
-        "rewards": "Odměny",
+        "rewards": "$t(shared:rewards)",
         "relays": "Relaye",
         "poolCertificates": "Certifikáty poolu",
         "retirement": "Zrušení",
-        "address": "Adresa",
-        "activeStake": "Aktivní stake",
-        "liveStake": "Živý stake",
+        "address": "$t(shared:address)",
+        "activeStake": "$t(shared:activeStake1)",
+        "liveStake": "$t(shared:liveStake1)",
         "relativePledge": "Relativní pledge",
         "pledgeStaked": "Pledge / Stake",
         "port": "Port",
-        "date": "Datum",
-        "tx": "Tx",
+        "date": "$t(shared:date)",
+        "tx": "$t(shared:tx)",
         "activeIn": "Aktivní v",
         "rewardsAddress": "Adresa odměn",
         "ownerAddress": "Adresa vlastníka",
         "params": "Parametry",
-        "pledge": "Pledge",
+        "pledge": "$t(shared:pledge)",
         "fixedCosts": "Fixní náklady",
         "margin": "Marže",
-        "metadata": "Metadata",
+        "metadata": "$t(shared:metadata)",
         "download": "Stáhnout",
         "transactionId": "ID transakce",
         "retiringEpoch": "Epocha zrušení"
       },
       "awards": {
-        "hash": "Hash",
-        "height": "Výška",
-        "epoch": "Epocha",
-        "stake": "Stake",
-        "delegators": "Delegátoři"
+        "hash": "$t(shared:hash)",
+        "height": "$t(shared:height)",
+        "epoch": "$t(shared:epoch)",
+        "stake": "$t(shared:stake)",
+        "delegators": "$t(shared:delegators)"
       },
       "embed": {
         "buttons": "Tlačítka",
@@ -424,29 +445,29 @@
         "byStake": "Struktura delegátorů podle stake"
       },
       "delegatorsTable": {
-        "date": "Datum",
-        "activeEpoch": "Aktivní epocha",
-        "activeIn": "Aktivní od",
-        "address": "Adresa",
-        "poolDelegation": "Delegace poolu",
-        "amount": "Množství",
-        "loyalty": "Loajalita",
-        "registered": "Registrováno"
+        "date": "$t(shared:date)",
+        "activeEpoch": "$t(shared:activeEpoch)",
+        "activeIn": "$t(shared:activeIn)",
+        "address": "$t(shared:address)",
+        "poolDelegation": "$t(shared:poolDelegation)",
+        "amount": "$t(shared:amount)",
+        "loyalty": "$t(shared:loyalty)",
+        "registered": "$t(shared:registered)"
       },
       "performanceGraph": {
-        "delegators": "Delegátoři",
+        "delegators": "$t(shared:delegators)",
         "luck": "Štěstí (%)",
-        "blocks": "Bloky",
-        "epochStake": "Stake epochy",
+        "blocks": "$t(shared:blocks)",
+        "epochStake": "$t(shared:epochStake)",
         "roa": "ROA (%)",
-        "pledged": "Pledge",
-        "amount": "Množství",
-        "epoch": "Epocha",
-        "date": "Datum"
+        "pledged": "$t(shared:pledged)",
+        "amount": "$t(shared:amount)",
+        "epoch": "$t(shared:epoch)",
+        "date": "$t(shared:date)"
       },
       "blocksGraph": {
         "day": "Den",
-        "blocks": "Bloky",
+        "blocks": "$t(shared:blocks)",
         "avgTxCount": "Prům. počet TX"
       },
       "rewardsGraph": {
@@ -455,45 +476,45 @@
         "delegatorsRewards": "Odměny delegátorů (₳)",
         "operatorRewards": "Odměny operátora (₳)",
         "rewards": "Odměny (₳)",
-        "epoch": "Epocha",
-        "date": "Datum"
+        "epoch": "$t(shared:epoch)",
+        "date": "$t(shared:date)"
       },
       "performanceTable": {
-        "epoch": "Epocha",
-        "startTime": "Začátek",
-        "endTime": "Konec",
-        "blocks": "Bloky",
-        "epochStake": "Stake epochy",
-        "delegators": "Delegátoři",
-        "luck": "Štěstí",
-        "pledged": "Pledge",
-        "roa": "ROA",
+        "epoch": "$t(shared:epoch)",
+        "startTime": "$t(shared:startTime)",
+        "endTime": "$t(shared:endTime)",
+        "blocks": "$t(shared:blocks)",
+        "epochStake": "$t(shared:epochStake)",
+        "delegators": "$t(shared:delegators)",
+        "luck": "$t(shared:luck)",
+        "pledged": "$t(shared:pledged)",
+        "roa": "$t(shared:roa)",
         "roaTooltip": "ROA: Návratnost ADA — roční procentuální výnos pro delegátory",
         "current": "Aktuální",
-        "pending": "Čeká"
+        "pending": "$t(shared:pending)"
       },
       "blocksTable": {
-        "date": "Datum",
-        "height": "Výška",
-        "epoch": "Epocha",
-        "slot": "Slot",
-        "txs": "TXs",
-        "hash": "Hash",
-        "size": "Velikost",
+        "date": "$t(shared:date)",
+        "height": "$t(shared:height)",
+        "epoch": "$t(shared:epoch)",
+        "slot": "$t(shared:slot)",
+        "txs": "$t(shared:txs)",
+        "hash": "$t(shared:hash)",
+        "size": "$t(shared:size)",
         "protocol": "Protokol",
         "certCount": "Počet cert."
       },
       "rewardsTable": {
-        "epoch": "Epocha",
-        "rewards": "Odměny",
-        "activeStake": "Aktivní stake",
-        "epochStake": "Stake epochy",
-        "roa": "ROA",
+        "epoch": "$t(shared:epoch)",
+        "rewards": "$t(shared:rewards)",
+        "activeStake": "$t(shared:activeStake1)",
+        "epochStake": "$t(shared:epochStake)",
+        "roa": "$t(shared:roa)",
         "roaTooltip": "ROA: Návratnost ADA — roční procentuální výnos pro delegátory",
-        "luck": "Štěstí",
-        "blocks": "Bloky",
-        "delegators": "Delegátoři",
-        "pending": "Čeká",
+        "luck": "$t(shared:luck)",
+        "blocks": "$t(shared:blocks)",
+        "delegators": "$t(shared:delegators)",
+        "pending": "$t(shared:pending)",
         "pendingTwoEpochs": "Data budou k dispozici za dvě epochy",
         "pendingNextEpoch": "Data budou k dispozici příští epochu.",
         "proratedLuckTooltip": "Toto je poměrné štěstí.",
@@ -522,8 +543,8 @@
         "toBeRetired": "Bude zrušeno"
       },
       "sortOptions": {
-        "date": "Datum",
-        "liveStake": "Živý stake"
+        "date": "$t(shared:date)",
+        "liveStake": "$t(shared:liveStake1)"
       },
       "table": {
         "index": "#",
@@ -533,37 +554,37 @@
       }
     },
     "table": {
-      "paymentCredential": "Platební credential",
+      "paymentCredential": "$t(shared:paymentCredential)",
       "stakeKeys": "Stake klíče"
     }
   },
   "withdrawals": {
-    "title": "Výběry odměn",
+    "title": "$t(shared:withdrawals)",
     "table": {
       "amountControlled": "Kontrolované množství",
       "amountWithdrawn": "Vybrané množství"
     }
   },
   "rewardsChecker": {
-    "title": "Kontrola odměn",
+    "title": "$t(shared:rewardsChecker)",
     "searchPlaceholder": "Hledat stake adresu...",
-    "addressDetail": "Detail adresy",
+    "addressDetail": "$t(shared:addressDetail)",
     "invalidAddress": "Neplatná adresa",
     "noStakeKey": "Tato adresa nemá stake klíč"
   },
   "groups": {
     "title": "Cardano Skupiny (Donuts)",
-    "breadcrumb": "Skupiny",
+    "breadcrumb": "$t(shared:groups)",
     "totalOfSuffix": "skupin",
-    "searchPlaceholder": "Hledat ve výsledcích...",
+    "searchPlaceholder": "$t(shared:searchPlaceholder)",
     "info": "Tento dashboard je spravován komunitou Cardano. Každý může přidat nebo upravit existující skupiny přes",
     "alsoDrep": "Také DRep",
-    "yes": "Ano",
-    "no": "Ne",
+    "yes": "$t(shared:yes)",
+    "no": "$t(shared:no)",
     "charts": {
       "poolsCount": "Počet poolů",
       "poolStake": "Stake poolu",
-      "pledge": "Pledge",
+      "pledge": "$t(shared:pledge)",
       "pledgePerPool": "μ Pledge na pool"
     },
     "table": {
@@ -579,6 +600,16 @@
       "items": "položek",
       "total": "Celkem",
       "andMore": "a dalších {{count}}"
+    },
+    "analytics": {
+      "history": {
+        "title": "Historie skupiny",
+        "description": "Celkový stake a počet delegátorů napříč všemi pooly ve skupině v čase."
+      },
+      "legend": {
+        "totalStake": "Celkový stake",
+        "totalDelegators": "Celkem delegátorů"
+      }
     }
   },
   "dreps": {
@@ -590,57 +621,57 @@
     "searchPlaceholder": "Hledat podle Drep ID...",
     "displayVote": "Zobrazit hlas",
     "tabs": {
-      "list": "Seznam",
-      "delegations": "Delegace",
-      "analytics": "Analytika"
+      "list": "$t(shared:list)",
+      "delegations": "$t(shared:delegations)",
+      "analytics": "$t(shared:analytics)"
     },
     "stats": {
       "registeredDreps": "Registrovaní DRepové",
       "activeVotingStake": "Aktivní hlasovací stake",
-      "delegators": "Delegátoři",
+      "delegators": "$t(shared:delegators)",
       "stakeToRetiredDreps": "Stake zrušeným DRepům",
-      "active": "Aktivní",
-      "inactive": "Neaktivní",
+      "active": "$t(shared:active)",
+      "inactive": "$t(shared:inactive)",
       "retired": "Zrušený",
-      "abstain": "Zdržení",
-      "noConfidence": "Nedůvěra",
-      "delegations": "Delegace",
+      "abstain": "$t(shared:abstain)",
+      "noConfidence": "$t(shared:noConfidence)",
+      "delegations": "$t(shared:delegations)",
       "retiredDreps": "Zrušení DRepové"
     },
     "filter": {
       "selectedVotes": "Vybrané hlasy",
       "alsoSpo": "Také SPO",
-      "yes": "Ano",
-      "no": "Ne"
+      "yes": "$t(shared:yes)",
+      "no": "$t(shared:no)"
     },
     "table": {
       "ranking": "#",
       "drepName": "Jméno DRep",
-      "lifetimeActivity": "Celoživotní aktivita",
+      "lifetimeActivity": "$t(shared:lifetimeActivity)",
       "lifetimeActivityTooltip": "Hlasovací aktivita za celou dobu DRep",
-      "recentActivity": "Nedávná aktivita",
+      "recentActivity": "$t(shared:recentActivity)",
       "recentActivityTooltip": "Hlasovací aktivita DRep za posledních 6 měsíců",
       "ownerStake": "Stake vlastníka",
-      "averageStake": "Průměrný stake",
+      "averageStake": "$t(shared:averageStake)",
       "drepMetadata": "Metadata DRep",
       "selectedVote": "Vybraný hlas",
-      "topDelegator": "Hlavní delegátor"
+      "topDelegator": "$t(shared:topDelegator)"
     },
     "delegations": {
       "totalOfSuffix": "delegací"
     },
     "analytics": {
-      "poolGraph": "Graf poolů",
+      "poolGraph": "DRep delegace",
       "stakeCompositionByRole": "Složení stake podle role",
       "delegationChanges": "Změny delegací",
-      "adaInGovernance": "ADA ve správě",
+      "adaInGovernance": "ADA v governance",
       "activeVotingStake": "Aktivní hlasovací stake",
       "drepSize": "Velikost DRep",
       "tabs": {
         "votingPower": "Hlasovací síla",
-        "delegators": "Delegátoři",
+        "delegators": "$t(shared:delegators)",
         "ownerStake": "Stake vlastníka",
-        "averageStake": "Průměrný stake"
+        "averageStake": "$t(shared:averageStake1)"
       },
       "pie": {
         "abstainDrep": "DRep zdržení",
@@ -652,85 +683,85 @@
     },
     "detailPage": {
       "drepId": "DRep ID",
-      "promote": "Propagovat",
-      "delegateTo": "Delegovat na {{name}}",
+      "promote": "$t(shared:promote)",
+      "delegateTo": "$t(shared:delegateTo)",
       "tabs": {
-        "governanceActions": "Akce správy",
-        "delegators": "Delegátoři",
+        "governanceActions": "$t(shared:governanceActions)",
+        "delegators": "$t(shared:delegators)",
         "stats": "Statistiky",
         "embed": "Vložit",
-        "about": "O DRep"
+        "about": "$t(shared:about)"
       },
       "about": {
-        "title": "O DRep",
-        "name": "Jméno",
+        "title": "$t(shared:about)",
+        "name": "$t(shared:name)",
         "drepId": "DRep ID",
         "drepIdLegacy": "DRep ID (starší)",
-        "stakeKey": "Stake klíč",
-        "registered": "Registrován",
+        "stakeKey": "$t(shared:stakeKey)",
+        "registered": "$t(shared:registered)",
         "lastUpdated": "Poslední aktualizace",
         "alwaysAbstain": "Vždy zdržení",
         "alwaysNoConfidence": "Vždy nedůvěra",
         "naSystemDrep": "N/A (systémový DRep)",
         "systemDefault": "Systémový výchozí",
-        "unknown": "Neznámý"
+        "unknown": "$t(shared:unknown)"
       },
       "voting": {
         "title": "Hlasování",
-        "status": "Stav",
+        "status": "$t(shared:status1)",
         "drepMetadata": "Metadata DRep",
         "votingPower": "Hlasovací síla",
         "ownVotingPower": "Vlastní hlasovací síla",
         "rewardsAddress": "Adresa odměn",
-        "active": "Aktivní",
-        "inactive": "Neaktivní",
+        "active": "$t(shared:active)",
+        "inactive": "$t(shared:inactive)",
         "notProvided": "Nezadáno",
         "provided": "Zadáno"
       },
       "governance": {
-        "title": "Správa",
+        "title": "$t(shared:title)",
         "lastVote": "Poslední hlas",
-        "recentActivity": "Nedávná aktivita",
+        "recentActivity": "$t(shared:recentActivity)",
         "recentActivityTooltip": "Hlasovací aktivita DRep za posledních 6 měsíců",
-        "lifetimeActivity": "Celoživotní aktivita",
+        "lifetimeActivity": "$t(shared:lifetimeActivity)",
         "lifetimeActivityTooltip": "Hlasovací aktivita za celou dobu DRep",
         "voted": "Hlasováno:",
-        "yes": "Ano",
-        "abstain": "Zdržení",
-        "no": "Ne",
+        "yes": "$t(shared:yes)",
+        "abstain": "$t(shared:abstain)",
+        "no": "$t(shared:no)",
         "behavior": "Chování",
         "delegatedStake": "Delegovaný stake",
-        "abstainBehavior": "Automaticky se zdrží všech hlasování správy.",
+        "abstainBehavior": "Automaticky se zdrží všech hlasování v governance.",
         "noConfidenceBehavior": "Automaticky hlasuje 'Nedůvěra' v závislosti na typu akce."
       },
       "governanceActionsTable": {
-        "date": "Datum",
-        "type": "Typ",
-        "governanceAction": "Akce správy",
+        "date": "$t(shared:date)",
+        "type": "$t(shared:type)",
+        "governanceAction": "$t(shared:governanceAction)",
         "vote": "Hlas",
         "votingPower": "Hlasovací síla",
-        "tx": "Tx"
+        "tx": "$t(shared:tx)"
       },
       "delegatorsTabs": {
         "allDelegators": "Všichni delegátoři",
         "newDelegators": "Noví delegátoři",
         "migrations": "Migrace",
-        "structure": "Struktura"
+        "structure": "$t(shared:structure)"
       },
       "delegatorsTable": {
         "delegated": "Delegováno",
-        "activeIn": "Aktivní v",
-        "stake": "Stake",
-        "amount": "Množství",
+        "activeIn": "$t(shared:activeIn)",
+        "stake": "$t(shared:stake)",
+        "amount": "$t(shared:amount)",
         "drepDelegation": "DRep delegace",
-        "loyalty": "Loajalita",
-        "tx": "Tx"
+        "loyalty": "$t(shared:loyalty)",
+        "tx": "$t(shared:tx)"
       },
       "statsGraph": {
         "power": "Síla",
-        "delegators": "Delegátoři",
-        "epoch": "Epocha",
-        "date": "Datum"
+        "delegators": "$t(shared:delegators)",
+        "epoch": "$t(shared:epoch)",
+        "date": "$t(shared:date)"
       },
       "embed": {
         "buttons": "Tlačítka",
@@ -751,7 +782,7 @@
       }
     },
     "graphs": {
-      "date": "Datum:",
+      "date": "$t(shared:date1)",
       "epoch": "Epocha:",
       "averageDreps": {
         "title": "Průměrní DRepové",
@@ -772,9 +803,9 @@
         "title": "DRepové, kteří nejsou SPO",
         "description": "Pohled na stake, počet DRepů a delegátorů delegovaných k DRepům, kteří nejsou SPO, po epochách",
         "drepCount": "Počet DRepů",
-        "stake": "Stake (₳)",
-        "stakeShort": "Stake",
-        "delegators": "Delegátoři",
+        "stake": "$t(shared:stake1)",
+        "stakeShort": "$t(shared:stake)",
+        "delegators": "$t(shared:delegators)",
         "showFiltered": "Zobrazit filtrované",
         "filterTooltip": "Vylučuje DRepy 'Zdržet se' a 'Nedůvěra' z počtu a stake."
       },
@@ -797,18 +828,18 @@
     }
   },
   "assets": {
-    "title": "Aktiva",
-    "detail": "Detail aktiva",
-    "tokens": "Tokeny",
-    "nfts": "NFTs",
-    "all": "Všechna aktiva",
+    "title": "$t(shared:assets)",
+    "detail": "Detail tokenu",
+    "tokens": "$t(shared:tokens)",
+    "nfts": "$t(shared:nfts)",
+    "all": "Všechny tokeny",
     "recentTokens": "Nedávné tokeny",
     "recentNfts": "Nedávné NFTs",
-    "searchPlaceholder": "Hledat podle aktiva...",
+    "searchPlaceholder": "Hledat podle tokenu...",
     "tabs": {
-      "all": "Vše",
-      "tokens": "Tokeny",
-      "nfts": "NFTs"
+      "all": "$t(shared:all)",
+      "tokens": "$t(shared:tokens)",
+      "nfts": "$t(shared:nfts)"
     }
   },
   "contractTransactions": {
@@ -818,23 +849,23 @@
   "metadata": {
     "title": "Seznam metadat transakcí",
     "totalOfSuffix": "transakcí",
-    "searchPlaceholder": "Hledat ve výsledcích...",
+    "searchPlaceholder": "$t(shared:searchPlaceholder)",
     "search": {
-      "hash": "Hash",
+      "hash": "$t(shared:hash)",
       "key": "Klíč"
     }
   },
   "treasuryDonations": {
-    "title": "Dary do pokladny",
+    "title": "Dary do treasury",
     "tabs": {
       "recentDonations": "Nedávné dary",
       "epochByEpoch": "Podle epochy"
     },
     "info": {
-      "title": "Co je pokladna Cardana?",
-      "description": "Pokladna Cardana je decentralizovaný mechanismus financování, který podporuje vývoj a růst ekosystému Cardano. Dary pomáhají financovat návrhy, o kterých hlasuje komunita prostřednictvím systému správy Cardana.",
-      "donateButton": "Přispět do pokladny",
-      "donateTooltip": "Poznámka: MeshJS zatím nepodporuje dary do pokladny. Nyní můžete přispět pouze na Cexplorer."
+      "title": "Co je Cardano treasury?",
+      "description": "Cardano treasury podporuje vývoj a růst ekosystému Cardano. Dary pomáhají financovat návrhy, o kterých hlasuje komunita prostřednictvím governance systému Cardana.",
+      "donateButton": "Přispět do treasury",
+      "donateTooltip": "Poznámka: MeshJS zatím nepodporuje přískěvky do treasury. Nyní můžete přispět pouze na Cexplorer."
     },
     "success": {
       "title": "Transakce úspěšná, děkujeme za váš dar!",
@@ -842,100 +873,100 @@
     }
   },
   "governance": {
-    "title": "Správa",
-    "actions": "Akce správy",
-    "votes": "Hlasy",
-    "constitution": "Ústava"
+    "title": "$t(shared:title)",
+    "actions": "$t(shared:governanceActions)",
+    "votes": "$t(shared:votes)",
+    "constitution": "$t(shared:constitution)"
   },
   "address": {
-    "title": "Adresa",
-    "detail": "Detail adresy"
+    "title": "$t(shared:address)",
+    "detail": "$t(shared:addressDetail)"
   },
   "stake": {
-    "title": "Stake adresa",
+    "title": "$t(shared:stakeAddress)",
     "detail": "Detail stake",
     "detailPage": {
       "title": "Detail stake",
-      "breadcrumb": "Adresa",
-      "stakeAddress": "Stake adresa",
+      "breadcrumb": "$t(shared:address)",
+      "stakeAddress": "$t(shared:stakeAddress)",
       "tabs": {
-        "assets": "Aktiva",
-        "transactions": "Transakce",
-        "withdrawals": "Výběry",
+        "assets": "$t(shared:assets)",
+        "transactions": "$t(shared:transactions)",
+        "withdrawals": "$t(shared:withdrawals)",
         "addresses": "Adresy",
-        "delegations": "Delegace",
-        "rewards": "Odměny",
+        "delegations": "$t(shared:delegations)",
+        "rewards": "$t(shared:rewards)",
         "trading": "Obchodování"
       },
       "overview": {
         "title": "Přehled",
-        "handle": "Handle",
+        "handle": "$t(shared:handle)",
         "totalBalance": "Celkový zůstatek",
         "assetsBalance": "Zůstatek aktiv",
         "adaBalance": "ADA zůstatek",
         "privateName": "Soukromý název"
       },
       "staking": {
-        "title": "Staking",
-        "status": "Stav",
-        "active": "Aktivní",
-        "inactive": "Neaktivní",
+        "title": "$t(shared:pools)",
+        "status": "$t(shared:status1)",
+        "active": "$t(shared:active)",
+        "inactive": "$t(shared:inactive)",
         "deregistered": "Odregistrováno",
         "stakePool": "Stake pool",
         "rewardsAvailable": "Dostupné odměny",
-        "drepDelegation": "DRep delegace",
+        "drepDelegation": "$t(shared:drepDelegation)",
         "alwaysAbstain": "Vždy zdržet se",
         "alwaysNoConfidence": "Vždy bez důvěry",
-        "amount": "Částka",
+        "amount": "$t(shared:amount)",
         "since": "Od",
-        "id": "ID",
+        "id": "$t(shared:id)",
         "rewardsWithdrawn": "Vybrané odměny",
-        "stakeKey": "Stake klíč",
-        "rawAddress": "Raw adresa"
+        "stakeKey": "$t(shared:stakeKey)",
+        "rawAddress": "$t(shared:rawAddress)"
       },
       "delegationsTab": {
         "stakePools": "Stake pooly",
-        "dreps": "DRepy"
+        "dreps": "$t(shared:dreps)"
       },
       "withdrawalsTable": {
         "withdrawals": "výběrů",
-        "searchPlaceholder": "Hledat podle tx hash...",
-        "date": "Datum",
-        "hash": "Hash",
+        "searchPlaceholder": "$t(shared:searchPlaceholder1)",
+        "date": "$t(shared:date)",
+        "hash": "$t(shared:hash)",
         "epochBlock": "Epocha / Blok",
-        "totalOutput": "Celkový výstup",
+        "totalOutput": "$t(shared:totalOutput)",
         "fee": "Poplatek",
-        "amount": "Částka",
-        "size": "Velikost"
+        "amount": "$t(shared:amount)",
+        "size": "$t(shared:size)"
       },
       "poolDelegationsTable": {
         "delegationHistory": "Historie delegací",
-        "date": "Datum",
-        "activeEpoch": "Aktivní epocha",
-        "stakePool": "Stake Pool",
-        "activeStake": "Aktivní stake",
-        "loyalty": "Věrnost",
-        "registered": "Registrováno",
-        "tx": "Tx"
+        "date": "$t(shared:date)",
+        "activeEpoch": "$t(shared:activeEpoch)",
+        "stakePool": "$t(shared:stakePool)",
+        "activeStake": "$t(shared:activeStake1)",
+        "loyalty": "$t(shared:loyalty)",
+        "registered": "$t(shared:registered)",
+        "tx": "$t(shared:tx)"
       },
       "drepDelegationsTable": {
         "delegationHistory": "Historie DRep delegací",
-        "date": "Datum",
-        "drep": "DRep",
-        "activeStake": "Aktivní stake",
-        "liveStake": "Živý stake",
-        "loyalty": "Věrnost",
-        "tx": "Tx"
+        "date": "$t(shared:date)",
+        "drep": "$t(shared:drep)",
+        "activeStake": "$t(shared:activeStake1)",
+        "liveStake": "$t(shared:liveStake1)",
+        "loyalty": "$t(shared:loyalty)",
+        "tx": "$t(shared:tx)"
       },
       "multiDelegationsTable": {
         "title": "Multi delegace",
-        "address": "Adresa",
-        "activeEpoch": "Aktivní epocha",
-        "stakePool": "Stake Pool",
+        "address": "$t(shared:address)",
+        "activeEpoch": "$t(shared:activeEpoch)",
+        "stakePool": "$t(shared:stakePool)",
         "notDelegated": "Nedelegováno",
-        "activeStake": "Aktivní stake",
-        "loyalty": "Věrnost",
-        "registered": "Registrováno"
+        "activeStake": "$t(shared:activeStake1)",
+        "loyalty": "$t(shared:loyalty)",
+        "registered": "$t(shared:registered)"
       }
     },
     "registrations": {
@@ -948,7 +979,7 @@
     }
   },
   "policy": {
-    "title": "Policy",
+    "title": "$t(shared:title12)",
     "detail": "Detail policy"
   },
   "script": {
@@ -962,10 +993,10 @@
     "title": "Detail skriptu"
   },
   "taxTool": {
-    "title": "Daňový nástroj"
+    "title": "$t(shared:taxTool)"
   },
   "polls": {
-    "title": "Akce správy Cexplorer"
+    "title": "Cexplorer governance akce"
   },
   "poolAnalytics": {
     "title": "Analytika poolů"
@@ -974,20 +1005,20 @@
     "title": "Analytika účtů"
   },
   "addressDetail": {
-    "title": "Adresa"
+    "title": "$t(shared:address)"
   },
   "policyDetail": {
-    "title": "Policy"
+    "title": "$t(shared:title12)"
   },
   "analytics": {
-    "title": "Analytika",
+    "title": "$t(shared:analytics)",
     "network": "Síťová analytika",
     "genesis": "Genesis adresy",
     "graph": {
-      "blocks": "Bloky",
+      "blocks": "$t(shared:blocks)",
       "blockSize": "Velikost bloku",
       "movingAverage": "Klouzavý průměr (5 epoch)",
-      "transactions": "Transakce",
+      "transactions": "$t(shared:transactions)",
       "version": "Verze",
       "blockNo": "Číslo bloku",
       "dates": "Data",
@@ -996,7 +1027,7 @@
       "delegation": "Delegace",
       "delegationVote": "Hlasování delegace",
       "drepRegistration": "Registrace DRep",
-      "govActionProposal": "Návrh správní akce",
+      "govActionProposal": "Návrh governance akce",
       "maTokenMinting": "Ražba Multi-Asset",
       "maTokenTransfers": "Převody Multi-Asset",
       "poolUpdate": "Aktualizace poolu",
@@ -1005,12 +1036,12 @@
       "stakeDeregistration": "Zrušení registrace stake",
       "txMetadata": "Metadata transakce",
       "withdrawal": "Výběr",
-      "other": "Ostatní"
+      "other": "$t(shared:other)"
     }
   },
   "profile": {
     "title": "Profil",
-    "settings": "Nastavení",
+    "settings": "$t(shared:settings)",
     "watchlist": "Sledované",
     "labels": "Štítky"
   },
@@ -1020,19 +1051,19 @@
     "wiki": "Admin wiki"
   },
   "breadcrumbs": {
-    "home": "Domů",
-    "groups": "Skupiny",
+    "home": "$t(shared:home)",
+    "groups": "$t(shared:groups)",
     "scriptList": "Seznam skriptů",
-    "taxTool": "Daňový nástroj",
+    "taxTool": "$t(shared:taxTool)",
     "voting": "Hlasování",
     "poolDebug": "SPO Debug",
-    "stake": "Stake",
-    "address": "Adresa",
-    "assets": "Aktiva",
-    "settings": "Nastavení",
-    "analytics": "Analytika",
+    "stake": "$t(shared:stake)",
+    "address": "$t(shared:address)",
+    "assets": "$t(shared:assets)",
+    "settings": "$t(shared:settings)",
+    "analytics": "$t(shared:analytics)",
     "account": "Účet",
-    "pool": "Pool"
+    "pool": "$t(shared:pool)"
   },
   "errors": {
     "notFound": "Stránka nenalezena",
@@ -1051,8 +1082,8 @@
     },
     "debugger": {
       "description": "Zadejte ID vašeho poolu pro kontrolu konfigurace stake poolu. Po odeslání uvidíte podrobný seznam případných problémů, které vyžadují pozornost, nebo potvrzení, že vše je správně nastaveno.",
-      "date": "Datum",
-      "type": "Typ",
+      "date": "$t(shared:date)",
+      "type": "$t(shared:type)",
       "errorDescription": "Popis",
       "errors": "{{count}} Chyb",
       "poolDetail": "Detail poolu →"

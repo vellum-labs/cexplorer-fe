@@ -71,7 +71,7 @@ const PoolDelegatorsTable = ({
       },
       title: <p>{t("common:labels.date")}</p>,
       visible: columnsVisibility.date,
-      widthPx: 20,
+      widthPx: 50,
     },
     {
       key: "active_in",
@@ -86,7 +86,7 @@ const PoolDelegatorsTable = ({
         </p>
       ),
       visible: columnsVisibility.active_in,
-      widthPx: 45,
+      widthPx: 30,
     },
     {
       key: "address",
@@ -121,7 +121,7 @@ const PoolDelegatorsTable = ({
       },
       title: t("common:labels.address"),
       visible: columnsVisibility.address,
-      widthPx: 90,
+      widthPx: 70,
     },
     {
       key: "amount",
@@ -194,30 +194,31 @@ const PoolDelegatorsTable = ({
         </div>
       ),
       visible: columnsVisibility.loyalty,
-      widthPx: 20,
+      widthPx: 30,
     },
     {
       key: "registered",
       render: item => {
         return (
-          <DateCell
-            className='text-right'
-            time={format(
-              slotToDate(
-                item.slot_update,
-                miscConst?.epoch_stat.pots.slot_no ?? 0,
-                miscConst?.epoch_stat.epoch.start_time ?? "",
-              ),
-              "yyy-MM-dd HH:mm:ss",
-            )}
-          />
+          <div className='flex justify-end'>
+            <DateCell
+              time={format(
+                slotToDate(
+                  item.slot_update,
+                  miscConst?.epoch_stat.pots.slot_no ?? 0,
+                  miscConst?.epoch_stat.epoch.start_time ?? "",
+                ),
+                "yyy-MM-dd HH:mm:ss",
+              )}
+            />
+          </div>
         );
       },
       title: (
         <p className='w-full text-right'>{t("common:labels.registered")}</p>
       ),
       visible: columnsVisibility.registered,
-      widthPx: 40,
+      widthPx: 50,
     },
     {
       key: "pool_delegation",
@@ -267,7 +268,7 @@ const PoolDelegatorsTable = ({
       },
       title: <p>{t("pools.detailPage.delegatorsTable.poolDelegation")}</p>,
       visible: columnsVisibility.pool_delegation,
-      widthPx: 180,
+      widthPx: 160,
     },
   ];
 

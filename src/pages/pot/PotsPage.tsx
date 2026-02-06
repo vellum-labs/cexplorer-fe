@@ -37,7 +37,7 @@ export const PotsPage = () => {
     setTableSearch,
   ] = useSearchTable();
 
-  const [items, setItems] = useState<AdaPot[] | undefined>([]);
+  const [graphItems, setGraphItems] = useState<AdaPot[] | undefined>([]);
   const {
     columnsOrder,
     setColumsOrder,
@@ -48,7 +48,9 @@ export const PotsPage = () => {
     epochsToShow,
     setEpochsToShow,
   } = useAdaPotsTableStore();
+
   const query = useFetchAdaPots();
+  const allData = query.data?.data.data ?? [];
   const count = query.data?.data.count ?? 0;
 
   const miscBasicQuery = useFetchMiscBasic();
@@ -155,11 +157,11 @@ export const PotsPage = () => {
   useEffect(() => {
     if (!epochsToShow) return;
     if (epochsToShow === "all") {
-      setItems(query.data?.data.data);
+      setGraphItems(allData);
       return;
     }
-    setItems(query.data?.data.data.slice(0, Number(epochsToShow)));
-  }, [epochsToShow, query.data]);
+    setGraphItems(allData.slice(0, Number(epochsToShow)));
+  }, [epochsToShow, allData]);
 
   return (
     <>
@@ -186,14 +188,14 @@ export const PotsPage = () => {
               label={false}
             />
           </div>
-          <AdaPotsChart data={items} />
+          <AdaPotsChart data={graphItems} />
           <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
             <div className='flex w-full flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
               {query.isLoading || query.isFetching ? (
                 <LoadingSkeleton height='27px' width={"220px"} />
               ) : count > 0 ? (
                 <h3 className='basis-[230px] text-nowrap'>
-                  {t("pots.totalEpochs", { count: formatNumber(count) })}
+                  {t("pots.totalEpochs", { total: formatNumber(count) })}
                 </h3>
               ) : (
                 ""
@@ -253,15 +255,14 @@ export const PotsPage = () => {
           </div>
           <GlobalTable
             type='default'
-            pagination={true}
+            itemsPerPage={rows}
             totalItems={count}
             scrollable
+            pagination
             query={query}
-            items={
-              items?.filter(item =>
-                String(item.epoch_no).includes(debouncedSearch),
-              ) ?? []
-            }
+            items={allData.filter(item =>
+              String(item.epoch_no).includes(debouncedSearch),
+            )}
             columns={columns.sort((a, b) => {
               return (
                 columnsOrder.indexOf(a.key as keyof AdaPotsTableColumns) -
@@ -269,8 +270,11 @@ export const PotsPage = () => {
               );
             })}
             onOrderChange={setColumsOrder}
-            renderDisplayText={(count, total) =>
-              t("table.displaying", { count, total })
+            renderDisplayText={(displayCount, total) =>
+              t("table.displaying", {
+                count: displayCount,
+                total,
+              })
             }
             noItemsLabel={t("table.noItems")}
           />

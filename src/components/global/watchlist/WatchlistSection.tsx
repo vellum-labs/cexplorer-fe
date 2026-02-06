@@ -30,6 +30,7 @@ export const WatchlistSection = ({
   isPoolRetiredOrRetiring = false,
   externalDelegationModalOpen = false,
   onExternalDelegationModalClose,
+  showPromote = true,
 }: {
   ident: string | undefined;
   isLoading: boolean;
@@ -44,6 +45,7 @@ export const WatchlistSection = ({
   isPoolRetiredOrRetiring?: boolean;
   externalDelegationModalOpen?: boolean;
   onExternalDelegationModalClose?: () => void;
+  showPromote?: boolean;
 }) => {
   const { wallet, address, walletType } = useWalletStore();
   const [showWalletModal, setShowWalletModal] = useState<boolean>(false);
@@ -213,12 +215,13 @@ export const WatchlistSection = ({
           stakeKey={stakeKey}
         />
       )}
-      {!isPoolRetiredOrRetiring && (
+      {showPromote && !isPoolRetiredOrRetiring && (
         <Button
           label={t("global.watchlist.promote")}
           variant='tertiary'
           size='md'
           href='/pro'
+          className='h-10'
         />
       )}
       {(isPool || isDrep) && !isPoolRetiredOrRetiring && (

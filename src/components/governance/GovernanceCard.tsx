@@ -15,6 +15,7 @@ interface GovernanceCardProps {
   notVoted: number;
   pieChartData: any;
   voterType?: "drep" | "spo";
+  threshold?: number;
   breakdown: {
     yes: { voters: number };
     no: { voters: number };
@@ -38,6 +39,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
   pieChartData,
   breakdown,
   voterType = "drep",
+  threshold,
 }) => {
   const { t } = useAppTranslation();
   const { theme } = useThemeStore();
@@ -46,6 +48,18 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
   const voted = totalVotes > 0 ? (yes / totalVotes) * 100 : 0;
   const notVotedPercent =
     totalVotes > 0 ? ((no + noConfidence + notVoted) / totalVotes) * 100 : 0;
+
+  const tooltipLabels = {
+    voterSingular: t("sdk:votingBreakdownTooltip.voterLabel"),
+    voterPlural: t("sdk:votingBreakdownTooltip.votersLabel"),
+    representedBy: "",
+    stakePoolSingular: t("sdk:votingBreakdownTooltip.stakePoolSingular"),
+    stakePoolPlural: t("sdk:votingBreakdownTooltip.stakePoolPlural"),
+    delegatorSingular: t("sdk:votingBreakdownTooltip.delegatorSingular"),
+    delegatorPlural: t("sdk:votingBreakdownTooltip.delegatorsLabel"),
+    autoStake: t("sdk:votingBreakdownTooltip.autoAbstainStakeLabel"),
+    manualStake: t("sdk:votingBreakdownTooltip.manualAbstainStakeLabel"),
+  };
 
   return (
     <div className='flex h-full w-full items-center'>
@@ -72,23 +86,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
                 type='Yes'
                 voters={breakdown.yes.voters}
                 voterType={voterType}
-                labels={{
-                  voteLabel: t("sdk:votingBreakdownTooltip.voteLabel"),
-                  votersLabel: t("sdk:votingBreakdownTooltip.votersLabel"),
-                  voterLabel: t("sdk:votingBreakdownTooltip.voterLabel"),
-                  delegatorsLabel: t(
-                    "sdk:votingBreakdownTooltip.delegatorsLabel",
-                  ),
-                  noConfidenceLabel: t(
-                    "sdk:votingBreakdownTooltip.noConfidenceLabel",
-                  ),
-                  autoAbstainStakeLabel: t(
-                    "sdk:votingBreakdownTooltip.autoAbstainStakeLabel",
-                  ),
-                  manualAbstainStakeLabel: t(
-                    "sdk:votingBreakdownTooltip.manualAbstainStakeLabel",
-                  ),
-                }}
+                labels={tooltipLabels}
               />
             </div>
           </div>
@@ -119,23 +117,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
                   type='No'
                   voters={breakdown.no.voters}
                   voterType={voterType}
-                  labels={{
-                    voteLabel: t("sdk:votingBreakdownTooltip.voteLabel"),
-                    votersLabel: t("sdk:votingBreakdownTooltip.votersLabel"),
-                    voterLabel: t("sdk:votingBreakdownTooltip.voterLabel"),
-                    delegatorsLabel: t(
-                      "sdk:votingBreakdownTooltip.delegatorsLabel",
-                    ),
-                    noConfidenceLabel: t(
-                      "sdk:votingBreakdownTooltip.noConfidenceLabel",
-                    ),
-                    autoAbstainStakeLabel: t(
-                      "sdk:votingBreakdownTooltip.autoAbstainStakeLabel",
-                    ),
-                    manualAbstainStakeLabel: t(
-                      "sdk:votingBreakdownTooltip.manualAbstainStakeLabel",
-                    ),
-                  }}
+                  labels={tooltipLabels}
                 />
               </div>
             </div>
@@ -152,23 +134,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
                   type='No confidence'
                   delegators={breakdown.noConfidence.delegators}
                   voterType={voterType}
-                  labels={{
-                    voteLabel: t("sdk:votingBreakdownTooltip.voteLabel"),
-                    votersLabel: t("sdk:votingBreakdownTooltip.votersLabel"),
-                    voterLabel: t("sdk:votingBreakdownTooltip.voterLabel"),
-                    delegatorsLabel: t(
-                      "sdk:votingBreakdownTooltip.delegatorsLabel",
-                    ),
-                    noConfidenceLabel: t(
-                      "sdk:votingBreakdownTooltip.noConfidenceLabel",
-                    ),
-                    autoAbstainStakeLabel: t(
-                      "sdk:votingBreakdownTooltip.autoAbstainStakeLabel",
-                    ),
-                    manualAbstainStakeLabel: t(
-                      "sdk:votingBreakdownTooltip.manualAbstainStakeLabel",
-                    ),
-                  }}
+                  labels={tooltipLabels}
                 />
               </div>
             </div>
@@ -185,23 +151,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
                   type='Not voted'
                   voters={breakdown.notVoted.voters}
                   voterType={voterType}
-                  labels={{
-                    voteLabel: t("sdk:votingBreakdownTooltip.voteLabel"),
-                    votersLabel: t("sdk:votingBreakdownTooltip.votersLabel"),
-                    voterLabel: t("sdk:votingBreakdownTooltip.voterLabel"),
-                    delegatorsLabel: t(
-                      "sdk:votingBreakdownTooltip.delegatorsLabel",
-                    ),
-                    noConfidenceLabel: t(
-                      "sdk:votingBreakdownTooltip.noConfidenceLabel",
-                    ),
-                    autoAbstainStakeLabel: t(
-                      "sdk:votingBreakdownTooltip.autoAbstainStakeLabel",
-                    ),
-                    manualAbstainStakeLabel: t(
-                      "sdk:votingBreakdownTooltip.manualAbstainStakeLabel",
-                    ),
-                  }}
+                  labels={tooltipLabels}
                 />
               </div>
             </div>
@@ -209,7 +159,7 @@ export const GovernanceCard: FC<GovernanceCardProps> = ({
         </div>
       </div>
       <div className='flex w-full justify-center pt-6'>
-        <GovernanceDetailOverviewInfoGraph data={pieChartData} />
+        <GovernanceDetailOverviewInfoGraph data={pieChartData} threshold={threshold} />
       </div>
     </div>
   );

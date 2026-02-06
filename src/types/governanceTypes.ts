@@ -811,6 +811,28 @@ export interface ThresholdGovCommitteeDetail {
   };
 }
 
+export interface ThresholdParams {
+  drep_activity: number;
+  dvt_p_p_gov_group: number;
+  committee_min_size: number;
+  gov_action_lifetime: number;
+  dvt_committee_normal: number;
+  pvt_committee_normal: number;
+  pvtpp_security_group: number;
+  dvt_p_p_network_group: number;
+  dvt_p_p_economic_group: number;
+  dvt_p_p_technical_group: number;
+  dvt_treasury_withdrawal: number;
+  dvt_hard_fork_initiation: number;
+  dvt_motion_no_confidence: number;
+  pvt_hard_fork_initiation: number;
+  pvt_motion_no_confidence: number;
+  committee_max_term_length: number;
+  dvt_update_to_constitution: number;
+  dvt_committee_no_confidence: number;
+  pvt_committee_no_confidence: number;
+}
+
 export interface Threshold {
   x: string;
   gov_stat: ThresholdGovStat;
@@ -819,6 +841,7 @@ export interface Threshold {
   epoch_stats: ThresholdEpochStats;
   analytics_milestone: ThresholdsMilestone;
   gov_committee_detail: ThresholdGovCommitteeDetail;
+  params?: ThresholdParams;
 }
 
 export type ThresholdResponse = ResponseCore<Threshold>;

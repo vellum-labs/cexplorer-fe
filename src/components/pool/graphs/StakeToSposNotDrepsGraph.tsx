@@ -53,6 +53,10 @@ export const StakeToSposNotDrepsGraph: FC = () => {
       confine: true,
       backgroundColor: bgColor,
       textStyle: { color: textColor },
+      axisPointer: {
+        type: "line",
+        lineStyle: { color: "#35c2f5" },
+      },
       formatter: function (params) {
         const { startTime, endTime } = calculateEpochTimeByNumber(
           +params[0]?.axisValue,
@@ -111,6 +115,14 @@ export const StakeToSposNotDrepsGraph: FC = () => {
         axisLabel: false,
         splitLine: { show: false },
       },
+      {
+        type: "value",
+        position: "right",
+        offset: 30,
+        axisLine: { lineStyle: { color: textColor } },
+        axisLabel: false,
+        splitLine: { show: false },
+      },
     ],
     series: [
       {
@@ -120,16 +132,16 @@ export const StakeToSposNotDrepsGraph: FC = () => {
         yAxisIndex: 1,
         symbol: "none",
         showSymbol: false,
-        lineStyle: { color: "#f39c12" },
+        color: "#f39c12",
       },
       {
         type: "line",
         name: countLabel,
         data: count,
-        yAxisIndex: 0,
+        yAxisIndex: 2,
         symbol: "none",
         showSymbol: false,
-        lineStyle: { color: "#35c2f5" },
+        color: "#35c2f5",
       },
       {
         type: "line",
@@ -138,7 +150,7 @@ export const StakeToSposNotDrepsGraph: FC = () => {
         yAxisIndex: 0,
         symbol: "none",
         showSymbol: false,
-        lineStyle: { color: "#2ecc71" },
+        color: "#2ecc71",
       },
     ],
   };

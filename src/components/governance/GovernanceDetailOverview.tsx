@@ -754,7 +754,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         showTitleDivider
                         showContentDivider
                         threshold={
-                          shouldDRepVote(query.data?.data?.type ?? "")
+                          shouldDRepVote(query.data?.data?.type ?? "") && drepThreshold < 1
                             ? drepThreshold
                             : undefined
                         }
@@ -767,6 +767,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                             notVoted={drepsNotVotedStake}
                             pieChartData={drepsPieChartData}
                             voterType='drep'
+                            threshold={drepThreshold < 1 ? drepThreshold : undefined}
                             breakdown={{
                               yes: { voters: drepsYesCount ?? 0 },
                               no: { voters: drepsNoCount ?? 0 },
@@ -811,7 +812,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
 
                   {shouldSPOVote(
                     query.data?.data?.type ?? "",
-                    votingProcedure,
+                    query.data?.data?.description,
                   ) ? (
                     <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                       <OverviewCard
@@ -845,7 +846,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                         threshold={
                           shouldSPOVote(
                             query.data?.data?.type ?? "",
-                            votingProcedure,
+                            query.data?.data?.description,
                           )
                             ? spoThreshold
                             : undefined
@@ -861,6 +862,7 @@ export const GovernanceDetailOverview: FC<GovernanceDetailOverviewProps> = ({
                             notVoted={sposNotVoted}
                             pieChartData={sposPieChartData}
                             voterType='spo'
+                            threshold={spoThreshold < 1 ? spoThreshold : undefined}
                             breakdown={{
                               yes: { voters: sposYesCount },
                               no: { voters: sposNoCount },
