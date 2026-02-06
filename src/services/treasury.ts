@@ -6,6 +6,7 @@ import { BlockfrostProvider, MeshTxBuilder } from "@meshsdk/core";
 import { donationAddress } from "@/constants/confVariables";
 import { sendDelegationInfo } from "@/services/tool";
 import { toast } from "sonner";
+import { validateDonationNetwork as validateNetwork } from "@/utils/wallet/validateDonationNetwork";
 
 export const fetchTreasuryDonationStats = async () => {
   const url = "/analytics/treasury";
@@ -34,30 +35,13 @@ interface DonationParams {
 export const validateDonationNetwork = async (
   wallet: BrowserWallet,
 ): Promise<boolean> => {
-  try {
-    const networkId = await wallet.getNetworkId();
-    const isMainnetWallet = networkId === 1;
-    const isMainnetAddress = donationAddress.startsWith("addr1q");
-    const isTestnetAddress = donationAddress.startsWith("addr_test");
+  const result = await validateNetwork(wallet);
 
-    if (!isMainnetWallet && isMainnetAddress) {
-      toast.error(
-        "Network mismatch: Wallet is on Testnet but donation address is for Mainnet. Please use the Mainnet site.",
-      );
-      return false;
-    }
-
-    if (isMainnetWallet && (isTestnetAddress || !isMainnetAddress)) {
-      toast.error(
-        "Network mismatch: Wallet is on Mainnet but donation address is for Testnet. Please use the Testnet site.",
-      );
-      return false;
-    }
-  } catch (error) {
-    console.error("Network check error:", error);
+  if (!result.valid && result.message) {
+    toast.error(result.message);
   }
 
-  return true;
+  return result.valid;
 };
 
 export const executeTreasuryDonation = async ({
@@ -116,7 +100,7 @@ export const executeTreasuryDonation = async ({
       const signedTx = await wallet.signTx(unsignedTx);
       const txHash = await wallet.submitTx(signedTx);
 
-      sendDelegationInfo(txHash, "lovelace_cexplorer", "donate");
+      sendDelegationInfo(txHash, "lovelace_cexplorer", "donate", (toCexp + toTreasury).toString());
       return txHash;
     }
   }
@@ -142,14 +126,12 @@ export const executeTreasuryDonation = async ({
     .filter(Boolean)
     .join(",");
 
-  sendDelegationInfo(txHash, campaigns, "donate");
+  sendDelegationInfo(txHash, campaigns, "donate", toCexp.toString());
 
   return txHash;
 };
 
 export const handleDonationError = (error: any): void => {
-  console.error("Treasury donation error:", error);
-
   const errorString = JSON.stringify(error);
   const errorMessage = error?.message || "";
 

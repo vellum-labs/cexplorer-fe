@@ -2,11 +2,14 @@ import type { BrowserWallet } from "@meshsdk/core";
 import { BlockfrostProvider, MeshTxBuilder } from "@meshsdk/core";
 import { callDelegationToast } from "../error/callDelegationToast";
 import { sendDelegationInfo } from "@/services/tool";
+import { donationAddress } from "@/constants/confVariables";
+import { validateDonationNetwork } from "./validateDonationNetwork";
 
 interface DelegationParams {
   type: "pool" | "drep";
   ident: string;
   donation?: boolean;
+  donationAmount?: number;
 }
 
 export const handleDelegation = async (
@@ -45,6 +48,14 @@ export const handleDelegation = async (
   }
 
   try {
+    if (params.donationAmount && params.donationAmount > 0) {
+      const networkCheck = await validateDonationNetwork(wallet);
+      if (!networkCheck.valid) {
+        callDelegationToast({ errorMessage: networkCheck.message });
+        return;
+      }
+    }
+
     const apiKey = import.meta.env.VITE_APP_BLOCKFROST_KEY;
 
     const provider = new BlockfrostProvider(apiKey);
@@ -81,19 +92,17 @@ export const handleDelegation = async (
         }
       }
 
+      if (params.donationAmount && params.donationAmount > 0) {
+        const donationLovelace = params.donationAmount * 1_000_000;
+        innerTxBuilder.txOut(donationAddress, [
+          { unit: "lovelace", quantity: donationLovelace.toString() },
+        ]);
+      }
+
       return innerTxBuilder
         .selectUtxosFrom(utxos)
         .changeAddress(changeAddress)
         .complete();
-    };
-
-    const isStakeAlreadyRegisteredError = (error: any): boolean => {
-      const errorStr = JSON.stringify(error);
-      return (
-        errorStr.includes("StakeKeyRegisteredDELEG") ||
-        errorStr.includes("already registered") ||
-        errorStr.includes("KeyDeposit")
-      );
     };
 
     const isStakeNotRegisteredError = (error: any): boolean => {
@@ -118,22 +127,7 @@ export const handleDelegation = async (
       hash = await submitWithRetry(false);
     } catch (e: any) {
       if (isStakeNotRegisteredError(e)) {
-        console.log("Stake not registered, retrying with registration");
-        try {
-          hash = await submitWithRetry(true);
-        } catch (retryError: any) {
-          if (isStakeAlreadyRegisteredError(retryError)) {
-            console.log(
-              "Conflicting state: chain says both registered and not registered",
-            );
-          }
-          throw retryError;
-        }
-      } else if (isStakeAlreadyRegisteredError(e)) {
-        console.log(
-          "Stake already registered, but we didn't include registration cert",
-        );
-        throw e;
+        hash = await submitWithRetry(true);
       } else {
         throw e;
       }
@@ -146,16 +140,12 @@ export const handleDelegation = async (
           : delegationId
         : `drep_${delegationId}`;
 
-    sendDelegationInfo(hash, trackingId);
+    const donationLovelace = params.donationAmount ? params.donationAmount * 1_000_000 : 0;
+    sendDelegationInfo(hash, trackingId, "delegation", donationLovelace);
 
     callDelegationToast({ success: true });
     return hash;
   } catch (e: any) {
-    console.error(
-      `${params.type === "pool" ? "Pool" : "DRep"} delegation error:`,
-      e,
-    );
-
     const errorString = JSON.stringify(e);
     const errorMessage = e?.message || "";
     const errorInfo = e?.cause?.failure?.cause?.info || "";

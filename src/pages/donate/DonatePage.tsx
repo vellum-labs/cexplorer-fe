@@ -118,7 +118,7 @@ export const DonatePage = () => {
 
       const signedTx = await wallet.signTx(unsignedTx);
       const txHash = await wallet.submitTx(signedTx);
-      sendDelegationInfo(txHash, "donation_page", "donate");
+      sendDelegationInfo(txHash, "donation_page", "donate", amountToSend);
       setHash(txHash);
       setShowSuccessModal(true);
     } catch (error: any) {

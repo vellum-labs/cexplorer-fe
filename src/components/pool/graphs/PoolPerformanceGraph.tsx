@@ -144,7 +144,7 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
       },
       grid: {
         top: 40,
-        right: 5,
+        right: 20,
         bottom: 40,
         left: 18,
       },
