@@ -76,13 +76,19 @@ export const AddressWithTxBadges = ({
           <div className='flex w-[200px] flex-col items-center text-text-sm'>
             <p className='font-medium'>{t("tx.utxo")}</p>
             <div className='mt-1/2 flex items-end justify-end break-all text-center text-text-sm'>
-              <Link
-                to='/tx/$hash'
-                params={{ hash: utxo.tx_hash }}
-                className='text-primary'
-              >
-                {`${utxo.tx_hash}#${utxo.tx_index}`}
-              </Link>{" "}
+              {isOutput ? (
+                <span className='text-grayTextPrimary'>
+                  {`${utxo.tx_hash}#${utxo.tx_index}`}
+                </span>
+              ) : (
+                <Link
+                  to='/tx/$hash'
+                  params={{ hash: utxo.tx_hash }}
+                  className='text-primary'
+                >
+                  {`${utxo.tx_hash}#${utxo.tx_index}`}
+                </Link>
+              )}{" "}
               <Copy copyText={`${utxo.tx_hash}#${utxo.tx_index}`} />
             </div>
           </div>
