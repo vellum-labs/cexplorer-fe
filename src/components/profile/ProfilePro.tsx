@@ -29,7 +29,7 @@ import { formatString, formatTimeIn } from "@vellumlabs/cexplorer-sdk";
 import type { FileRoutesByPath } from "@tanstack/react-router";
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { Star, X, Zap, Wallet } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { ProBadge } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
@@ -70,9 +70,18 @@ export const ProfilePro = () => {
     setNftSearch,
   ] = useSearchTable();
 
-  const items = query.data?.data.data
-    .flatMap(item => item)
-    .filter(item => checkNftName(item.name));
+  const items = useMemo(() => {
+    const allItems = query.data?.data.data?.flatMap(item => item) ?? [];
+    if (!debouncedSearch) return allItems;
+
+    const searchLower = debouncedSearch.toLowerCase();
+    return allItems.filter(item => {
+      if (item.name.toLowerCase().includes(searchLower)) {
+        return true;
+      }
+      return getAssetFingerprint(item.name).toLowerCase().includes(searchLower);
+    });
+  }, [query.data?.data.data, debouncedSearch]);
 
   const typeColor = {
     pool: "blue",
@@ -108,15 +117,6 @@ export const ProfilePro = () => {
       remainingTime: formatTimeIn(convertUtcToLocal(compareDate.toString())),
     };
   };
-
-  function checkNftName(name: string) {
-    return (
-      name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-      getAssetFingerprint(name)
-        .toLowerCase()
-        .includes(debouncedSearch.toLowerCase())
-    );
-  }
 
   const checkIdent = () => {
     let error = "";
