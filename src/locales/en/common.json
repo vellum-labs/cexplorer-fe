@@ -872,6 +872,7 @@
     "totalOutput": "$t(shared:totalOutput)",
     "fee": "$t(shared:labels.fee)",
     "size": "$t(shared:labels.size)",
+    "visualization": "Visualization",
     "table": {
       "date": "$t(shared:labels.date)",
       "height": "$t(shared:height)",
@@ -2159,6 +2160,14 @@
     "sortBy": {
       "value": "$t(shared:value)",
       "index": "$t(shared:index)"
+    },
+    "overview": {
+      "flow": "Flow",
+      "classic": "Classic",
+      "from": "From",
+      "to": "To",
+      "value": "Value",
+      "noData": "No data available"
     },
     "unlockInteractivity": "Unlock interactivity",
     "lockInteractivity": "Lock interactivity",

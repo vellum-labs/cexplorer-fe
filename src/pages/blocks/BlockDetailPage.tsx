@@ -9,7 +9,7 @@ import {
   HardDrive,
 } from "lucide-react";
 
-import { BlockDetailTable } from "@/components/blocks/BlockDetail/BlockDetailTable";
+import { BlockDetailTabs } from "@/components/blocks/BlockDetail/BlockDetailTabs";
 import { LoadingSkeleton, useThemeStore } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchBlockDetail } from "@/services/blocks";
@@ -386,7 +386,8 @@ const BlockDetailPage: FC = () => {
                 <OverviewCard
                   title={t("blocks.transactions.title")}
                   overviewList={overviewTransactionsListItems}
-                  className='h-auto'
+                  className='h-auto [&_span.text-grayTextPrimary]:whitespace-nowrap'
+                  columnGap='16px'
                 />
               </div>
               <div className='flex w-[400px] flex-grow flex-col gap-3 xl:justify-between xl:gap-0'>
@@ -413,7 +414,7 @@ const BlockDetailPage: FC = () => {
       </section>
       <section className='flex w-full justify-center'>
         <div className='flex w-full max-w-desktop flex-col flex-wrap justify-center gap-3 px-mobile pb-3 md:px-desktop xl:flex-nowrap xl:justify-start'>
-          <BlockDetailTable txs={data?.txs} blockDetail={blockDetail} />
+          <BlockDetailTabs blockDetail={blockDetail} />
         </div>
       </section>
     </PageBase>

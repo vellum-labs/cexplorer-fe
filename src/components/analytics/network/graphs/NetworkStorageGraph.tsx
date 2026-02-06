@@ -10,12 +10,12 @@ import { AnalyticsGraph } from "../../AnalyticsGraph";
 
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useEffect, useState } from "react";
+import { useFetchMilestoneAnalytics } from "@/services/analytics";
 
 import { bytesPerMb } from "@/constants/memorySizes";
 import { GraphTimePeriod } from "@/types/graphTypes";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
-import { configJSON } from "@/constants/conf";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 interface NetworkStorageGraphProps {
   epochQuery: ReturnType<typeof useFetchEpochAnalytics>;
@@ -27,9 +27,9 @@ export const NetworkStorageGraph: FC<NetworkStorageGraphProps> = ({
   miscConst,
 }) => {
   const { t } = useAppTranslation("common");
-  const { genesisParams } = configJSON;
-  const { shelley } = genesisParams[0];
-  const { shelleyStartEpoch } = shelley[0];
+
+  const milestoneQuery = useFetchMilestoneAnalytics();
+  const milestoneData = milestoneQuery.data?.data ?? [];
 
   const [json, setJson] = useState<any>();
 
@@ -38,40 +38,39 @@ export const NetworkStorageGraph: FC<NetworkStorageGraphProps> = ({
     GraphTimePeriod.ThirtyDays,
   );
 
-  const allTime = epochQuery.data?.data.slice(
-    0,
-    epochQuery.data?.data.length - shelleyStartEpoch,
-  );
-
   const [graphsVisibility, setGraphsVisibility] = useState({
     "Storage Increase (MB)": true,
     "Storage Total (MB)": true,
   });
 
-  const epochs = (data ?? []).map(item => item?.no);
-
   const storageIncreaseMap = new Map<number, number>();
   const storageTotalMap = new Map<number, number>();
 
-  (allTime ?? []).forEach(item => {
-    const countBlk = (item?.stat?.count_block ?? 0) as number;
-    const avgBlkSize = (item?.stat?.avg_block_size ?? 0) as number;
+  milestoneData.forEach(item => {
+    const countBlk = item?.stat?.count_block ?? 0;
+    const avgBlkSize = +(item?.stat?.avg_block_size ?? 0);
     const currentTotal = countBlk * avgBlkSize;
 
-    storageIncreaseMap.set(item?.no, currentTotal / bytesPerMb);
+    storageIncreaseMap.set(item.epoch_no, currentTotal / bytesPerMb);
   });
 
-  const sortedAllTime = [...(allTime ?? [])].sort((a, b) => a.no - b.no);
+  const sortedMilestoneData = [...milestoneData].sort(
+    (a, b) => a.epoch_no - b.epoch_no,
+  );
 
   let accumulatedTotal = 0;
-  sortedAllTime.forEach(item => {
-    const countBlk = (item?.stat?.count_block ?? 0) as number;
-    const avgBlkSize = (item?.stat?.avg_block_size ?? 0) as number;
+  sortedMilestoneData.forEach(item => {
+    const countBlk = item?.stat?.count_block ?? 0;
+    const avgBlkSize = +(item?.stat?.avg_block_size ?? 0);
     const currentTotal = countBlk * avgBlkSize;
 
     accumulatedTotal += currentTotal;
-    storageTotalMap.set(item?.no, accumulatedTotal / bytesPerMb);
+    storageTotalMap.set(item.epoch_no, accumulatedTotal / bytesPerMb);
   });
+
+  const epochs = (data ?? [])
+    .map(item => item?.no)
+    .filter(epochNo => storageIncreaseMap.has(epochNo));
 
   const storageIncreaseData = epochs.map(epochNo =>
     (storageIncreaseMap.get(epochNo) ?? 0).toFixed(2),

@@ -302,8 +302,9 @@ const TxDetailOverview = ({ query }: Props) => {
           <OverviewCard
             title={t("tx.transactionOverview")}
             overviewList={overviewListItems}
-            className='max-h-[450px] pt-2'
-            columnGap='clamp(48px, 8vw, 150px)'
+            className='!basis-auto pt-2 [&>div.flex.h-full]:!h-auto'
+            hFit
+            columnGap='clamp(16px, 5vw, 150px)'
           />
           <section className='flex w-full flex-col gap-5 lg:h-[400px] lg:w-[400px]'>
             <MintedByCard
