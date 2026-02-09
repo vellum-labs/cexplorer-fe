@@ -3,6 +3,7 @@ import { BlockfrostProvider, MeshTxBuilder } from "@meshsdk/core";
 import { callPaymentToast } from "../error/callPaymentToast";
 import { donationAddress } from "@/constants/confVariables";
 import { validateDonationNetwork } from "./validateDonationNetwork";
+import { sendPaymentInfo } from "@/services/tool";
 
 interface PaymentParams {
   toAddress: string;
@@ -78,6 +79,8 @@ export const handlePayment = async (
 
     const signedTx = await wallet.signTx(unsignedTx);
     const hash = await wallet.submitTx(signedTx);
+
+    await sendPaymentInfo(hash, toAddress, amount, donationAmount);
 
     callPaymentToast({ success: true });
     return hash;

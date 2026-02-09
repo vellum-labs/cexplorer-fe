@@ -265,11 +265,11 @@ export const WatchlistSection = ({
         <PaymentModal
           address={paymentAddress}
           onClose={() => setShowPaymentModal(false)}
-          onSign={async (amount, donationAmount) => {
+          onSign={async (amount, donationAmount, selectedAddress) => {
             setShowPaymentModal(false);
             await handlePayment(
               {
-                toAddress: paymentAddress,
+                toAddress: selectedAddress || paymentAddress,
                 amount,
                 donationAmount,
               },

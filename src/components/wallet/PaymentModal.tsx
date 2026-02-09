@@ -1,14 +1,32 @@
 import type { FC } from "react";
-import { useState, useMemo } from "react";
-import { Modal, Button, TextInput, cn } from "@vellumlabs/cexplorer-sdk";
+import { useState, useMemo, useEffect } from "react";
+import {
+  Modal,
+  Button,
+  TextInput,
+  cn,
+  useThemeStore,
+} from "@vellumlabs/cexplorer-sdk";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { DONATION_OPTIONS } from "@/constants/wallet";
-import { Link } from "lucide-react";
+import { Link, ChevronDown } from "lucide-react";
+import { toast } from "sonner";
+import { fetchAddressList } from "@/services/address";
+import { formatAbbreviatedADA } from "@/utils/formatADA";
+
+interface AddressOption {
+  address: string;
+  balance: number;
+}
 
 interface PaymentModalProps {
   address: string;
   onClose: () => void;
-  onSign: (amount: number, donationAmount: number) => void;
+  onSign: (
+    amount: number,
+    donationAmount: number,
+    selectedAddress?: string,
+  ) => void;
 }
 
 export const PaymentModal: FC<PaymentModalProps> = ({
@@ -17,21 +35,65 @@ export const PaymentModal: FC<PaymentModalProps> = ({
   onSign,
 }) => {
   const { t } = useAppTranslation("common");
+  const { theme } = useThemeStore();
   const [amount, setAmount] = useState<string>("");
   const [selectedDonation, setSelectedDonation] = useState<number | null>(null);
 
+  const isStakeAddress = address.startsWith("stake");
+  const [addresses, setAddresses] = useState<AddressOption[]>([]);
+  const [selectedPaymentAddress, setSelectedPaymentAddress] = useState<
+    string | null
+  >(null);
+  const [isLoadingAddresses, setIsLoadingAddresses] = useState<boolean>(false);
+  const [showAddressDropdown, setShowAddressDropdown] =
+    useState<boolean>(false);
+
+  useEffect(() => {
+    if (isStakeAddress) {
+      setIsLoadingAddresses(true);
+      fetchAddressList({
+        view: address,
+        order: "balance",
+        limit: 50,
+        offset: 0,
+      })
+        .then(response => {
+          const addressList = response.data?.data || [];
+          const options: AddressOption[] = addressList
+            .map((item: any) => ({
+              address: item.address,
+              balance: item.balance || 0,
+            }))
+            .sort(
+              (a: AddressOption, b: AddressOption) => b.balance - a.balance,
+            );
+          setAddresses(options);
+          if (options.length > 0) {
+            setSelectedPaymentAddress(options[0].address);
+          }
+        })
+        .catch(() => {})
+        .finally(() => {
+          setIsLoadingAddresses(false);
+        });
+    }
+  }, [address, isStakeAddress]);
+
+  const effectiveAddress = isStakeAddress ? selectedPaymentAddress : address;
+
   const formattedAddress = useMemo(() => {
-    if (address.length <= 5) return address;
-    const prefix = address.slice(0, 15);
-    const suffix = address.slice(-15);
-    const lastFive = address.slice(-5);
+    const addr = effectiveAddress || address;
+    if (addr.length <= 5) return addr;
+    const prefix = addr.slice(0, 15);
+    const suffix = addr.slice(-15);
+    const lastFive = addr.slice(-5);
     return (
       <>
         {prefix}...{suffix.slice(0, -5)}
         <span className='text-primary'>{lastFive}</span>
       </>
     );
-  }, [address]);
+  }, [effectiveAddress, address]);
 
   const handleAmountChange = (value: string) => {
     if (value === "") {
@@ -43,23 +105,29 @@ export const PaymentModal: FC<PaymentModalProps> = ({
   };
 
   const handleSign = () => {
+    if (!effectiveAddress) return;
     const numAmount = Number(amount) || 0;
-    onSign(numAmount, selectedDonation ?? 0);
+    onSign(numAmount, selectedDonation ?? 0, effectiveAddress);
   };
 
   const handleGenerateLink = () => {
+    if (!effectiveAddress) return;
     const numAmount = Number(amount) || 0;
     const donationAmount = selectedDonation ?? 0;
     const params = new URLSearchParams({
-      to: address,
+      to: effectiveAddress,
       amount: String(numAmount),
       donation: String(donationAmount),
     });
-    const link = `${window.location.origin}/tx/submit?${params.toString()}`;
+    const link = `${window.location.origin}/pay?${params.toString()}`;
     navigator.clipboard.writeText(link);
+    toast.success(t("wallet.payment.linkCopied", "Link copied to clipboard"));
   };
 
   const isValidAmount = amount && Number(amount) > 0;
+  const isDonationSelected = selectedDonation !== null;
+  const hasValidAddress = isStakeAddress ? !!selectedPaymentAddress : true;
+  const isFormValid = isValidAmount && isDonationSelected && hasValidAddress;
 
   return (
     <Modal maxWidth='min(480px, 95vw)' maxHeight='90vh' onClose={onClose}>
@@ -73,12 +141,96 @@ export const PaymentModal: FC<PaymentModalProps> = ({
 
         <div className='flex flex-col gap-1'>
           <label className='text-text-sm font-medium'>
-            {t("wallet.payment.address")}{" "}
+            {isStakeAddress
+              ? t("wallet.payment.selectAddress", "Select address")
+              : t("wallet.payment.address")}{" "}
             <span className='text-primary'>*</span>
           </label>
-          <div className='flex h-10 w-full items-center rounded-m border border-border bg-cardBg px-3 text-text-sm'>
-            <span className='truncate font-medium'>{formattedAddress}</span>
-          </div>
+          {isStakeAddress ? (
+            <div className='relative'>
+              {isLoadingAddresses ? (
+                <div className='flex h-10 w-full items-center justify-center rounded-m border border-border bg-cardBg'>
+                  <div
+                    className={`loader h-5 w-5 border-2 ${theme === "light" ? "border-[#F2F4F7] border-t-darkBlue" : "border-[#475467] border-t-[#5EDFFA]"}`}
+                  />
+                </div>
+              ) : addresses.length === 0 ? (
+                <div className='flex h-10 w-full items-center rounded-m border border-border bg-cardBg px-3 text-text-sm text-grayTextPrimary'>
+                  {t("wallet.payment.noAddressesFound", "No addresses found")}
+                </div>
+              ) : (
+                <>
+                  <button
+                    onClick={() => setShowAddressDropdown(!showAddressDropdown)}
+                    className='flex h-10 w-full cursor-pointer items-center justify-between rounded-m border border-border bg-cardBg px-3 text-left text-text-sm hover:opacity-80'
+                  >
+                    <div className='flex min-w-0 font-medium'>
+                      <span className='truncate'>
+                        {effectiveAddress?.slice(0, -5)}
+                      </span>
+                      <span className='shrink-0 text-primary'>
+                        {effectiveAddress?.slice(-5)}
+                      </span>
+                    </div>
+                    <ChevronDown
+                      size={16}
+                      className={cn(
+                        "ml-2 shrink-0 transition-transform",
+                        showAddressDropdown && "rotate-180",
+                      )}
+                    />
+                  </button>
+                  {showAddressDropdown && (
+                    <div className='absolute z-50 mt-1 flex w-full flex-col rounded-m border border-border bg-background shadow-lg'>
+                      <div className='thin-scrollbar max-h-[200px] overflow-auto'>
+                        {addresses.map((item, index) => (
+                          <button
+                            key={index}
+                            onClick={() => {
+                              setSelectedPaymentAddress(item.address);
+                              setShowAddressDropdown(false);
+                            }}
+                            className={cn(
+                              "flex w-full items-center justify-between border-b border-border px-3 py-2 text-left last:border-b-0 hover:bg-darker",
+                              selectedPaymentAddress === item.address &&
+                                "bg-primary/5",
+                            )}
+                          >
+                            <div className='flex min-w-0 text-text-sm'>
+                              <span className='truncate'>
+                                {item.address.slice(0, -5)}
+                              </span>
+                              <span className='shrink-0 text-primary'>
+                                {item.address.slice(-5)}
+                              </span>
+                            </div>
+                            <span className='ml-2 shrink-0 text-text-xs text-grayTextPrimary'>
+                              {formatAbbreviatedADA(item.balance)}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+          ) : (
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText(address);
+                toast.success(
+                  t(
+                    "wallet.payment.addressCopied",
+                    "Address copied to clipboard",
+                  ),
+                );
+              }}
+              className='flex h-10 w-full cursor-pointer items-center rounded-m border border-border bg-cardBg px-3 text-left text-text-sm hover:opacity-80'
+            >
+              <span className='truncate font-medium'>{formattedAddress}</span>
+            </button>
+          )}
         </div>
 
         <div className='flex flex-col gap-1'>
@@ -149,14 +301,14 @@ export const PaymentModal: FC<PaymentModalProps> = ({
             size='md'
             leftIcon={<Link size={16} />}
             onClick={handleGenerateLink}
-            disabled={!isValidAmount}
+            disabled={!isFormValid}
           />
           <Button
             label={t("wallet.payment.signTransaction")}
             variant='primary'
             size='md'
             onClick={handleSign}
-            disabled={!isValidAmount}
+            disabled={!isFormValid}
           />
         </div>
       </div>
