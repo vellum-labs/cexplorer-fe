@@ -8,8 +8,10 @@ import { getRouteApi } from "@tanstack/react-router";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useState } from "react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const MetadataTabItem = () => {
+  const { t } = useAppTranslation("common");
   const route = getRouteApi("/tx/$hash");
   const { hash } = route.useParams();
   const query = useFetchTxDetail(hash);
@@ -17,7 +19,7 @@ const MetadataTabItem = () => {
   const metadataArr: TxMetadata[] = [];
 
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const [showContent, setShowContent] = useState(() => {
     return localStorage.getItem("showSensitiveContent") === "true";
@@ -27,7 +29,11 @@ const MetadataTabItem = () => {
     metadataArr.push({ [obj]: metadata[obj] });
   }
   if (!metadata && !query.isLoading) {
-    return <p className='w-full text-center text-text-sm'>No metadata found</p>;
+    return (
+      <p className='w-full text-center text-text-sm'>
+        {t("tx.noMetadataFound")}
+      </p>
+    );
   }
 
   if (query.isLoading) {
@@ -43,8 +49,10 @@ const MetadataTabItem = () => {
       <SensitiveContentWarning
         onDisplay={() => setShowContent(true)}
         localStorageKey='showSensitiveContent'
-        title='User-generated content'
-        description='Following content is user-generated and unmoderated by the Cexplorer team.'
+        title={t("tx.userGeneratedContent")}
+        description={t("tx.userGeneratedContentDescription")}
+        rememberLabel={t("sdk:sensitiveContent.rememberLabel")}
+        displayLabel={t("sdk:sensitiveContent.displayLabel")}
       />
     );
   }
@@ -72,6 +80,7 @@ const MetadataTabItem = () => {
             isLoading={query.isLoading}
             isError={query.isError}
             search
+            noDataLabel={t("sdk:jsonDisplay.noDataLabel")}
           />
         </section>
       ))}

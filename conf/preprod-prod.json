@@ -121,7 +121,7 @@
   "lng": ["en", "cs"],
   "currency": ["usd", "eur"],
   "ipfs":"https://ipfs.blockfrost.dev/ipfs/",
-  "donationAddress": "addr1q884cpmm2et7jhdc28ty70gxwwhdszu2c402986nr2jl2zg7cczh3v50t8keh8767eg5hesgkzm7569qtuaky8nh2n7qh4k6y8",
+  "donationAddress": "addr_test1qrzw5lqz3ve5v044ne3pkw7tc2hrxwhj9u9ge34yjw2frkcpp5e7sueuknckyay367z4mr4p9xv2rrnzfgge9p3uqews3t2ttx",
   "supportedPools": [
     "pool1e0arfuamnymdkmjztvkryasxv9d8u8key27ajgc4mquz2nr8mk9",
     "pool107k26e3wrqxwghju2py40ngngx2qcu48ppeg7lk0cm35jl2aenx",

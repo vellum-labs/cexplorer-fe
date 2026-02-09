@@ -15,8 +15,10 @@ import { Link } from "@tanstack/react-router";
 import { Calendar, CheckCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const EpochCalendarPage = () => {
+  const { t } = useAppTranslation("common");
   const { calendar, setCalendar } = useEpochCalendarStore();
   const [items, setItems] = useState<EpochListData[]>([]);
   const { data, isLoading } = useFetchEpochList();
@@ -25,11 +27,11 @@ export const EpochCalendarPage = () => {
   const sortItems = [
     {
       key: "desc",
-      value: "Newest",
+      value: t("epochCalendar.sort.newest"),
     },
     {
       key: "asc",
-      value: "Oldest",
+      value: t("epochCalendar.sort.oldest"),
     },
   ];
 
@@ -95,13 +97,13 @@ export const EpochCalendarPage = () => {
 
   return (
     <PageBase
-      title='Epoch calendar'
-      breadcrumbItems={[{ label: "Epoch calendar" }]}
+      title={t("epochCalendar.title")}
+      breadcrumbItems={[{ label: t("epochCalendar.breadcrumb") }]}
       metadataTitle='epochCalendar'
     >
       <div className='flex w-full max-w-desktop flex-wrap items-center justify-between gap-2 px-mobile md:px-desktop'>
         <div className='flex items-center gap-1 text-text-sm text-grayTextPrimary'>
-          Show upcoming:{" "}
+          {t("epochCalendar.showUpcoming")}{" "}
           <SortBy
             selectItems={upcomingEpochsItems}
             selectedItem={calendar.upcomingEpochs}
@@ -142,6 +144,7 @@ export const EpochCalendarPage = () => {
 };
 
 const EpochCard = ({ epoch }: { epoch: EpochListData }) => {
+  const { t } = useAppTranslation("common");
   const { data: miscBasic } = useFetchMiscBasic();
   const currentEpoch = Number(miscBasic?.data.block.epoch_no);
   const bgColor =
@@ -167,16 +170,16 @@ const EpochCard = ({ epoch }: { epoch: EpochListData }) => {
             }}
           />
         )}
-        <h3 className=''>Epoch {epoch.no}</h3>
+        <h3 className=''>{t("epochCalendar.card.epoch", { no: epoch.no })}</h3>
       </div>
       <span className='flex justify-between text-text-xs text-grayTextSecondary'>
-        <p className='w-10'>Start</p>
+        <p className='w-10'>{t("epochCalendar.card.start")}</p>
         <span className='ml-1 text-grayTextPrimary'>
           {formatDate(epoch.start_time)}
         </span>
       </span>
       <span className='flex justify-between text-text-xs text-grayTextSecondary'>
-        <p className='w-10'>End</p>
+        <p className='w-10'>{t("epochCalendar.card.end")}</p>
         <span className='ml-1 text-grayTextPrimary'>
           {formatDate(epoch.end_time)}
         </span>
@@ -188,11 +191,11 @@ const EpochCard = ({ epoch }: { epoch: EpochListData }) => {
             to='/epoch/$no'
             params={{ no: String(epoch.no) }}
           >
-            Epoch detail
+            {t("epochCalendar.card.epochDetail")}
           </Link>
         ) : (
           <span className='text-text-sm font-medium text-grayTextPrimary'>
-            Upcoming
+            {t("epochCalendar.card.upcoming")}
           </span>
         )}
       </div>

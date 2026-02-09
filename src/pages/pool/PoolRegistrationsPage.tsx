@@ -21,8 +21,10 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const PoolRegistrationsPage = () => {
+  const { t } = useAppTranslation(["pages", "common"]);
   const [totalItems, setTotalItems] = useState(0);
   const { page } = useSearch({ from: "/pool/registrations" });
   const {
@@ -38,6 +40,16 @@ export const PoolRegistrationsPage = () => {
   const count = query.data?.pages[0].data.count;
   const items = query.data?.pages.flatMap(page => page.data.data);
 
+  const tableColumnTranslations: Record<string, string> = {
+    date: t("common:labels.date"),
+    view: t("common:labels.pool"),
+    deposit: t("common:labels.deposit"),
+    pledge: t("common:labels.pledge"),
+    fee: t("common:labels.fee"),
+    hash: t("common:labels.txHash"),
+    epoch_block: t("common:labels.epochBlock"),
+  };
+
   const columns: TableColumns<PoolRegistrationsData> = [
     {
       key: "date",
@@ -49,7 +61,7 @@ export const PoolRegistrationsPage = () => {
 
         return item.block.time;
       },
-      title: "Date",
+      title: t("common:labels.date"),
       visible: columnsVisibility.date,
       widthPx: 30,
     },
@@ -71,7 +83,7 @@ export const PoolRegistrationsPage = () => {
 
         return item?.data?.view;
       },
-      title: <p>Pool</p>,
+      title: <p>{t("common:labels.pool")}</p>,
       visible: columnsVisibility.view,
       widthPx: 50,
     },
@@ -82,7 +94,7 @@ export const PoolRegistrationsPage = () => {
           <AdaWithTooltip data={item.tx.deposit} />
         </div>
       ),
-      title: <p className='w-full text-right'>Deposit</p>,
+      title: <p className='w-full text-right'>{t("common:labels.deposit")}</p>,
       visible: columnsVisibility.deposit,
       widthPx: 40,
     },
@@ -93,7 +105,7 @@ export const PoolRegistrationsPage = () => {
           <AdaWithTooltip data={item.data.pledge} />
         </div>
       ),
-      title: <p className='w-full text-right'>Pledge</p>,
+      title: <p className='w-full text-right'>{t("common:labels.pledge")}</p>,
       visible: columnsVisibility.pledge,
       widthPx: 40,
     },
@@ -101,11 +113,11 @@ export const PoolRegistrationsPage = () => {
       key: "fee",
       render: item => (
         <div className='flex justify-end gap-1/2'>
-          <span>{item.data.margin * 100}%</span> +{" "}
+          <span>{Number((item.data.margin * 100).toFixed(2))}%</span> +{" "}
           <AdaWithTooltip data={item.data.fixed_cost} />
         </div>
       ),
-      title: <p className='w-full text-right'>Fee</p>,
+      title: <p className='w-full text-right'>{t("common:labels.fee")}</p>,
       visible: columnsVisibility.fee,
       widthPx: 50,
     },
@@ -119,7 +131,7 @@ export const PoolRegistrationsPage = () => {
 
         return item.tx.hash;
       },
-      title: "TX hash",
+      title: t("common:labels.txHash"),
       visible: columnsVisibility.hash,
       widthPx: 40,
     },
@@ -138,7 +150,9 @@ export const PoolRegistrationsPage = () => {
 
         return `${item.block.epoch_no}/${item.block.no}`;
       },
-      title: <p className='w-full text-right'>Epoch/Block</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.epochBlock")}</p>
+      ),
       visible: columnsVisibility.epoch_block,
       widthPx: 40,
     },
@@ -153,8 +167,8 @@ export const PoolRegistrationsPage = () => {
   return (
     <PageBase
       metadataTitle='poolRegistrations'
-      title='Pool registrations'
-      breadcrumbItems={[{ label: "Pool registrations" }]}
+      title={t("pools.registrations.title")}
+      breadcrumbItems={[{ label: t("pools.registrations.title") }]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='mb-2 flex w-full items-center justify-between gap-1'>
@@ -162,7 +176,8 @@ export const PoolRegistrationsPage = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[230px]'>
-              Total of {formatNumber(totalItems ?? 0)} registrations
+              {t("common:phrases.totalOf")} {formatNumber(totalItems ?? 0)}{" "}
+              {t("pools.registrations.totalOfSuffix")}
             </h3>
           )}
           <div className='flex items-center gap-1'>
@@ -170,9 +185,10 @@ export const PoolRegistrationsPage = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={poolRegistrationsTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -196,6 +212,10 @@ export const PoolRegistrationsPage = () => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </section>
     </PageBase>

@@ -9,9 +9,11 @@ import { NetworkTxInEpochGraph } from "../graphs/NetworkTxInEpochGraph";
 import { NetworkTxInTimeGraph } from "../graphs/NetworkTxInTimeGraph";
 import { NetworkTransactionsTable } from "../tables/NetworkTransactionsTable";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import {
   useFetchAnalyticsRate,
   useFetchEpochAnalytics,
+  useFetchMilestoneAnalytics,
 } from "@/services/analytics";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
@@ -22,53 +24,59 @@ import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 
 export const NetworkTransactionTab: FC = () => {
+  const { t } = useAppTranslation("common");
   const epochQuery = useFetchEpochAnalytics();
   const rateQuery = useFetchAnalyticsRate();
+  const milestoneQuery = useFetchMilestoneAnalytics();
 
   const { epochLength } = configJSON.genesisParams[0].shelley[0];
 
-  const epochs = (epochQuery.data?.data ?? []).filter(item => item?.stat);
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
+
+  const milestoneData = milestoneQuery.data?.data ?? [];
+  const sortedMilestoneData = [...milestoneData].sort(
+    (a, b) => b.epoch_no - a.epoch_no,
+  );
 
   const allTimeDates = rateQuery.data?.data;
   const threeMonthDates = (allTimeDates ?? [])?.slice(0, 90);
   const thrityDaysDates = (allTimeDates ?? [])?.slice(0, 30);
   const sevenDaysDates = (allTimeDates ?? [])?.slice(0, 7);
 
-  const totalTx = epochs
+  const totalTx = milestoneData
     .map(item => item.stat?.count_tx ?? 0)
     .reduce((a, b) => a + b, 0);
 
-  const prevEpochTPS = epochs[0]?.stat?.count_tx
-    ? (epochs[0].stat?.count_tx / epochLength).toFixed(2)
+  const prevEpochTPS = sortedMilestoneData[0]?.stat?.count_tx_out
+    ? (sortedMilestoneData[0].stat?.count_tx_out / epochLength).toFixed(2)
     : "-";
 
-  const averageTxFee = epochs[0]?.stat?.avg_tx_fee
-    ? lovelaceToAda(+epochs[0]?.stat?.avg_tx_fee)
+  const averageTxFee = sortedMilestoneData[0]?.stat?.avg_tx_fee
+    ? lovelaceToAda(+sortedMilestoneData[0]?.stat?.avg_tx_fee)
     : "-";
 
   const statCards = [
     {
       key: "total_transactions",
       icon: <ArrowLeftRight className='text-primary' />,
-      label: "Transactions",
+      label: t("analytics.transactions"),
       content: formatNumber(totalTx),
-      footer: "All time",
+      footer: t("analytics.allTime"),
     },
     {
       key: "transactions_per_second",
       icon: <Zap className='text-primary' />,
-      label: "Transactions per second (TPS)",
+      label: t("analytics.transactionsPerSecond"),
       content: prevEpochTPS,
-      footer: "In previous epoch",
+      footer: t("analytics.inPreviousEpoch"),
     },
     {
       key: "avg_fee_per_transaction",
       icon: <Database className='text-primary' />,
-      label: "Average fee per transaction",
+      label: t("analytics.avgFeePerTransaction"),
       content: averageTxFee,
-      footer: "In previous epoch",
+      footer: t("analytics.inPreviousEpoch"),
     },
   ];
 
@@ -105,25 +113,25 @@ export const NetworkTransactionTab: FC = () => {
 
   const items = [
     {
-      timeframe: "All time",
+      timeframe: t("analytics.allTime"),
       transactions: getTx(allTimeDates),
       tps: getTps(allTimeDates),
       max_tps: getMaxTps(allTimeDates),
     },
     {
-      timeframe: "3 month",
+      timeframe: t("analytics.threeMonth"),
       transactions: getTx(threeMonthDates),
       tps: getTps(threeMonthDates),
       max_tps: getMaxTps(threeMonthDates),
     },
     {
-      timeframe: "30 days",
+      timeframe: t("analytics.thirtyDays"),
       transactions: getTx(thrityDaysDates),
       tps: getTps(thrityDaysDates),
       max_tps: getMaxTps(thrityDaysDates),
     },
     {
-      timeframe: "7 days",
+      timeframe: t("analytics.sevenDays"),
       transactions: getTx(sevenDaysDates),
       tps: getTps(sevenDaysDates),
       max_tps: getMaxTps(sevenDaysDates),
@@ -133,13 +141,13 @@ export const NetworkTransactionTab: FC = () => {
   return (
     <section className='flex w-full max-w-desktop flex-col gap-1.5'>
       <AnalyticsStatList
-        isLoading={epochQuery.isLoading}
+        isLoading={epochQuery.isLoading || milestoneQuery.isLoading}
         statCards={statCards}
       />
       <NetworkTxInEpochGraph epochQuery={epochQuery} miscConst={miscConst} />
       <AnalyticsGraph
-        title='Transactions per second (TPS)'
-        description='Visual expression of all transactions on the Cardano network in time.'
+        title={t("analytics.transactionsPerSecond")}
+        description={t("analytics.tpsDescription")}
       >
         <div className='flex h-full w-full flex-wrap gap-1.5 xl:flex-nowrap'>
           <NetworkTransactionsTable query={epochQuery} items={items} />

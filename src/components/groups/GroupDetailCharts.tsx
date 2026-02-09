@@ -2,12 +2,14 @@ import type { GroupDetailData } from "@/types/analyticsTypes";
 import { useMemo } from "react";
 import { PieCharts } from "@/components/charts/PieCharts";
 import { PIE_CHART_COLORS } from "@/constants/charts";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface GroupDetailChartsProps {
   items: GroupDetailData["items"];
 }
 
 export const GroupDetailCharts = ({ items }: GroupDetailChartsProps) => {
+  const { t } = useAppTranslation("common");
   const poolItems = useMemo(() => {
     return items?.filter(item => item.type === "pool") ?? [];
   }, [items]);
@@ -33,11 +35,27 @@ export const GroupDetailCharts = ({ items }: GroupDetailChartsProps) => {
   );
 
   const charts = [
-    { dataKey: "stake", title: "Pool Stake", needsAdaFormatting: true },
-    { dataKey: "pledge", title: "Pledge", needsAdaFormatting: true },
+    {
+      dataKey: "stake",
+      title: t("groups.poolStake"),
+      needsAdaFormatting: true,
+    },
+    { dataKey: "pledge", title: t("groups.pledge"), needsAdaFormatting: true },
   ];
 
+  const tooltipTranslations = {
+    others: t("charts.others"),
+    items: t("charts.items"),
+    total: t("charts.total"),
+    andMore: (count: number) => t("charts.andMore", { count }),
+  };
+
   return (
-    <PieCharts items={poolItems} charts={charts} getChartData={getChartData} />
+    <PieCharts
+      items={poolItems}
+      charts={charts}
+      getChartData={getChartData}
+      tooltipTranslations={tooltipTranslations}
+    />
   );
 };

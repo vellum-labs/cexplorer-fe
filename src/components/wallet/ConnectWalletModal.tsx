@@ -13,12 +13,14 @@ import { browserName, isMobile, isSafari, isTablet } from "react-device-detect";
 import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { SpinningLoader } from "@vellumlabs/cexplorer-sdk";
 import WalletOption from "./WalletOption";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 type Props = {
   onClose: () => void;
 };
 
 const ConnectWalletModal: React.FC<Props> = ({ onClose }) => {
+  const { t } = useAppTranslation("common");
   const { connect } = useConnectWallet();
   const { walletType } = useWalletStore();
   const [walletLoading, setWalletLoading] = useState(false);
@@ -128,19 +130,15 @@ const ConnectWalletModal: React.FC<Props> = ({ onClose }) => {
     <Modal minWidth='95%' maxWidth='500px' maxHeight='95%' onClose={onClose}>
       <div className='flex w-full flex-col flex-wrap items-center justify-center p-0 md:flex-row [&>div]:md:flex [&>div]:md:flex-1 [&>div]:md:flex-col [&>div]:md:self-center'>
         <div className='w-full'>
-          <h2>CONNECT WALLET </h2>
+          <h2>{t("wallet.connectWallet")} </h2>
           <div className='mb-2 mt-2 flex h-full w-full flex-col items-center justify-around'>
             {isSafari && !isMobile && !isTablet && (
               <p className='font-regular text-red-500'>
-                We&apos;re sorry, but there are no supported wallets for Safari.
-                Please use a different browser.
+                {t("wallet.noSupportedWalletsSafari")}
               </p>
             )}
             {installedWallets.length === 0 && (
-              <p>
-                It looks like you have no wallet extensions installed. Please
-                install one of the following wallets to continue.
-              </p>
+              <p>{t("wallet.noWalletsInstalled")}</p>
             )}
           </div>
           {installedWallets.length > 0 &&
@@ -190,7 +188,7 @@ const ConnectWalletModal: React.FC<Props> = ({ onClose }) => {
             <SsoButton
               key='sso_logged'
               state='logged_in'
-              label={ssoUserInfo?.email || "Connected"}
+              label={ssoUserInfo?.email || t("wallet.connected")}
               userInfo={{
                 provider: ssoUserInfo?.typeOfLogin,
               }}
@@ -203,7 +201,7 @@ const ConnectWalletModal: React.FC<Props> = ({ onClose }) => {
             <SsoButton
               key='sso'
               state='logged_out'
-              label='Login'
+              label={t("wallet.login")}
               onLogin={async () => {
                 nufiCoreSdk.init(
                   network === "mainnet"

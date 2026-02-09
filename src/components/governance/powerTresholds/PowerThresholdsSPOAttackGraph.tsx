@@ -3,6 +3,8 @@ import ReactECharts from "echarts-for-react";
 import type { ThresholdPoolList } from "@/types/governanceTypes";
 import { useNavigate } from "@tanstack/react-router";
 import { useADADisplay } from "@/hooks/useADADisplay";
+import { useGraphColors } from "@/hooks/useGraphColors";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface PowerThresholdsSPOAttackGraphProps {
   poolList: ThresholdPoolList;
@@ -12,6 +14,8 @@ interface PowerThresholdsSPOAttackGraphProps {
 export const PowerThresholdsSPOAttackGraph: FC<
   PowerThresholdsSPOAttackGraphProps
 > = ({ liveStake, poolList }) => {
+  const { t } = useAppTranslation();
+  const { textColor, bgColor } = useGraphColors();
   const sortedPools = [...poolList.data].sort(
     (a, b) => b.live_stake - a.live_stake,
   );
@@ -45,6 +49,10 @@ export const PowerThresholdsSPOAttackGraph: FC<
   const option = {
     tooltip: {
       trigger: "item",
+      backgroundColor: bgColor,
+      textStyle: {
+        color: textColor,
+      },
       formatter: (params: any) => {
         const percentOfTarget = (
           (params.data.value / targetStake) *
@@ -52,9 +60,9 @@ export const PowerThresholdsSPOAttackGraph: FC<
         ).toFixed(2);
         const ada = params.data.rawAda.toFixed(2);
         return `
-    <strong>Pool:</strong> ${params.name}<br/>
-    <strong>Stake:</strong> ${formatLovelace(ada)}<br/>
-    <strong>Percentage of total stake:</strong> ${percentOfTarget}%
+    <strong>${t("governance.delegation.pool")}</strong> ${params.name}<br/>
+    <strong>${t("governance.common.stake")}</strong> ${formatLovelace(ada)}<br/>
+    <strong>${t("governance.delegation.percentOfTotalStake")}</strong> ${percentOfTarget}%
   `;
       },
     },
@@ -89,7 +97,9 @@ export const PowerThresholdsSPOAttackGraph: FC<
     <div className='relative flex w-full max-w-full items-center gap-1'>
       <div className='relative top-[-8px] mt-1.5 flex flex-col items-center'>
         <h4 className='text-text-xl font-semibold'>{spoCount}</h4>
-        <span className='text-text-xs text-grayTextPrimary'>SPOs</span>
+        <span className='text-text-xs text-grayTextPrimary'>
+          {t("governance.delegation.spos")}
+        </span>
       </div>
       <div className='relative w-full'>
         <div className='absolute left-0 h-[40px] w-[51%] bg-[#F63D68]'></div>

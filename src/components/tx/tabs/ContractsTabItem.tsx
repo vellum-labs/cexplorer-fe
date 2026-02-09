@@ -2,8 +2,10 @@ import { useFetchTxDetail } from "@/services/tx";
 import { getRouteApi } from "@tanstack/react-router";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { ContractInput } from "../ContractInput";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const ContractsTabItem = () => {
+  const { t } = useAppTranslation("common");
   const route = getRouteApi("/tx/$hash");
   const { hash } = route.useParams();
   const query = useFetchTxDetail(hash);
@@ -14,7 +16,9 @@ export const ContractsTabItem = () => {
 
   if (!query.data?.data.plutus_contracts && !query.isLoading) {
     return (
-      <p className='w-full text-center text-text-sm'>No contracts found</p>
+      <p className='w-full text-center text-text-sm'>
+        {t("tx.noContractsFound")}
+      </p>
     );
   }
 
@@ -30,7 +34,7 @@ export const ContractsTabItem = () => {
   return (
     <div className='flex flex-col gap-1.5'>
       <div className='flex w-fit gap-1 rounded-max border border-border bg-darker px-1.5 py-1/2 text-text-xs font-medium shadow-md'>
-        Total Script Size {totalSize}kB
+        {t("tx.totalScriptSize")} {totalSize}kB
       </div>
       {query.data?.data.plutus_contracts?.map((contract, index) => (
         <section
@@ -38,7 +42,7 @@ export const ContractsTabItem = () => {
           className='flex flex-col rounded-l border border-b border-border bg-darker px-2 py-1.5 shadow-md'
         >
           <div className='w-fit rounded-m border border-border bg-background px-1 py-1/2 text-text-xs font-medium'>
-            Script #{index + 1}
+            {t("tx.scriptNumber", { number: index + 1 })}
           </div>
           {(contract.input || []).map((input, inputIndex) => (
             <ContractInput

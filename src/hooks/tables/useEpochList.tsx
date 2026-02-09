@@ -31,6 +31,7 @@ import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { useGraphColors } from "../useGraphColors";
 import { useSearchTable } from "./useSearchTable";
 import { configJSON } from "@/constants/conf";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface UseEpochList {
   columns: any[];
@@ -55,6 +56,7 @@ export const useEpochList = ({
   storeKey,
   withoutRerender = false,
 }: UseEpochListArgs): UseEpochList => {
+  const { t } = useAppTranslation("pages");
   const { currency } = useCurrencyStore();
 
   const curr = useGetMarketCurrency();
@@ -123,7 +125,7 @@ export const useEpochList = ({
 
         return item.start_time;
       },
-      title: "Start Time",
+      title: t("common:labels.startTime"),
       visible: columnsVisibility.start_time,
       widthPx: 90,
     },
@@ -177,7 +179,7 @@ export const useEpochList = ({
 
         return item.end_time;
       },
-      title: "End Time",
+      title: t("common:labels.endTime"),
       visible: columnsVisibility.end_time,
       widthPx: 90,
     },
@@ -194,7 +196,7 @@ export const useEpochList = ({
           />
         );
       },
-      title: <p>Epoch</p>,
+      title: <p>{t("common:labels.epoch")}</p>,
       visible: columnsVisibility.epoch,
       widthPx: 50,
     },
@@ -202,13 +204,13 @@ export const useEpochList = ({
       key: "block",
       render: item => (
         <p
-          title={item?.stats?.epoch?.block_count ?? item?.blk_count}
+          title={item?.blk_count ?? item?.stats?.epoch?.block_count}
           className='text-right'
         >
-          {formatNumber(item?.stats?.epoch?.block_count ?? item?.blk_count)}
+          {formatNumber(item?.blk_count ?? item?.stats?.epoch?.block_count)}
         </p>
       ),
-      title: <p className='w-full text-right'>Blocks</p>,
+      title: <p className='w-full text-right'>{t("common:labels.blocks")}</p>,
       visible: columnsVisibility.blocks,
       widthPx: 50,
     },
@@ -219,7 +221,9 @@ export const useEpochList = ({
           {formatNumber(item?.tx_count)}
         </p>
       ),
-      title: <p className='w-full text-right'>TXs</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.transactions")}</p>
+      ),
       visible: columnsVisibility.txs,
       widthPx: 50,
     },
@@ -230,7 +234,7 @@ export const useEpochList = ({
           <AdaWithTooltip data={item?.out_sum} />
         </p>
       ),
-      title: <p className='w-full text-right'>Output</p>,
+      title: <p className='w-full text-right'>{t("common:labels.output")}</p>,
       visible: columnsVisibility.output,
       widthPx: 55,
     },
@@ -262,7 +266,7 @@ export const useEpochList = ({
 
         return `${fees}, ${feesperTx} per TX`;
       },
-      title: "Fees",
+      title: t("common:labels.fees"),
       visible: columnsVisibility.fees,
       widthPx: 50,
     },
@@ -279,7 +283,7 @@ export const useEpochList = ({
           return (
             <div className='flex justify-end'>
               <Badge color='yellow' className='ml-auto'>
-                Pending
+                {t("common:labels.pending")}
               </Badge>
             </div>
           );
@@ -305,7 +309,7 @@ export const useEpochList = ({
           </div>
         );
       },
-      title: <p className='w-full text-right'>Rewards</p>,
+      title: <p className='w-full text-right'>{t("common:labels.rewards")}</p>,
       visible: columnsVisibility.rewards,
       widthPx: 50,
     },
@@ -322,7 +326,7 @@ export const useEpochList = ({
           </p>
         );
       },
-      title: <p className='w-full text-right'>Stake</p>,
+      title: <p className='w-full text-right'>{t("common:labels.stake")}</p>,
       visible: columnsVisibility.stake,
       widthPx: 50,
     },
@@ -331,7 +335,7 @@ export const useEpochList = ({
       render: item => {
         const blockSize = item?.stats?.epoch?.block_size ?? 0;
         const blockCount =
-          item?.stats?.epoch?.block_count ?? item.blk_count ?? 0;
+          item?.blk_count ?? item?.stats?.epoch?.block_count ?? 0;
         const maxBlockSize = item.params?.[0]?.max_block_size ?? 0;
         const blockUsage = isNaN(
           (blockSize / (blockCount * maxBlockSize)) * 100,
@@ -375,12 +379,12 @@ export const useEpochList = ({
               data: [
                 {
                   value: usagePercentage,
-                  name: "Used",
+                  name: t("epochs.stats.used"),
                   itemStyle: { color: "#47CD89" },
                 },
                 {
                   value: (100 - blockUsage).toFixed(2),
-                  name: "Unused",
+                  name: t("epochs.stats.unused"),
                   itemStyle: { color: "#FEC84B" },
                 },
               ],
@@ -397,7 +401,7 @@ export const useEpochList = ({
       jsonFormat: item => {
         const blockSize = item?.stats?.epoch?.block_size ?? 0;
         const blockCount =
-          item?.stats?.epoch?.block_count ?? item.blk_count ?? 0;
+          item?.blk_count ?? item?.stats?.epoch?.block_count ?? 0;
         const maxBlockSize = item.params?.[0]?.max_block_size ?? 0;
         const blockUsage = isNaN(
           (blockSize / (blockCount * maxBlockSize)) * 100,
@@ -409,7 +413,7 @@ export const useEpochList = ({
 
         return `${usagePercentage}%`;
       },
-      title: <p className='text-center'>Usage</p>,
+      title: <p className='text-center'>{t("epochs.stats.usage")}</p>,
       visible: columnsVisibility.usage,
       widthPx: 50,
     },

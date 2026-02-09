@@ -5,34 +5,44 @@ import { ArrowDown, ArrowUp, HardDrive, SquarePlus } from "lucide-react";
 import { AnalyticsStatList } from "../../AnalyticsStatList";
 import { NetworkStorageGraph } from "../graphs/NetworkStorageGraph";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useMiscConst } from "@/hooks/useMiscConst";
-import { useFetchEpochAnalytics } from "@/services/analytics";
+import {
+  useFetchEpochAnalytics,
+  useFetchMilestoneAnalytics,
+} from "@/services/analytics";
 import { useFetchMiscBasic } from "@/services/misc";
 
 import { bytesPerMb } from "@/constants/memorySizes";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 export const NetworkStorageTab: FC = () => {
+  const { t } = useAppTranslation("common");
   const epochQuery = useFetchEpochAnalytics();
+  const milestoneQuery = useFetchMilestoneAnalytics();
 
-  const data = epochQuery.data?.data.slice(0, epochQuery.data?.data.length - 4);
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
+
+  const milestoneData = milestoneQuery.data?.data ?? [];
+  const sortedMilestoneData = [...milestoneData].sort(
+    (a, b) => b.epoch_no - a.epoch_no,
+  );
 
   const currStorIncrease =
-    (((data ?? [])[0]?.stat?.count_block ?? 0) *
-      (((data ?? [])[0]?.stat?.avg_block_size ?? 0) as number)) /
+    ((sortedMilestoneData[0]?.stat?.count_block ?? 0) *
+      +(sortedMilestoneData[0]?.stat?.avg_block_size ?? 0)) /
     bytesPerMb;
 
   const prevStorIncrease =
-    (((data ?? [])[1]?.stat?.count_block ?? 0) *
-      (((data ?? [])[1]?.stat?.avg_block_size ?? 0) as number)) /
+    ((sortedMilestoneData[1]?.stat?.count_block ?? 0) *
+      +(sortedMilestoneData[1]?.stat?.avg_block_size ?? 0)) /
     bytesPerMb;
 
   const totalNetworkStorage =
-    (data ?? []).reduce((a, b) => {
-      const countBlk = (b?.stat?.count_block ?? 0) as number;
-      const avgBlkSize = (b?.stat?.avg_block_size ?? 0) as number;
+    milestoneData.reduce((a, b) => {
+      const countBlk = b?.stat?.count_block ?? 0;
+      const avgBlkSize = +(b?.stat?.avg_block_size ?? 0);
 
       return a + countBlk * avgBlkSize;
     }, 0) / bytesPerMb;
@@ -41,7 +51,7 @@ export const NetworkStorageTab: FC = () => {
     {
       key: "current_str_incr",
       icon: <SquarePlus className='text-primary' />,
-      label: "Storage increase in current epoch",
+      label: t("analytics.storageIncreaseCurrentEpoch"),
       content: `${formatNumber(currStorIncrease.toFixed(2))} Mb`,
       footer: (() => {
         const percentageChange =
@@ -59,7 +69,7 @@ export const NetworkStorageTab: FC = () => {
               )}
               <span>{Math.abs(percentageChange).toFixed(2)}%</span>
             </span>
-            <span>vs last epoch</span>
+            <span>{t("analytics.vsLastEpoch")}</span>
           </span>
         );
       })(),
@@ -67,16 +77,16 @@ export const NetworkStorageTab: FC = () => {
     {
       key: "total_network_storage",
       icon: <HardDrive className='text-primary' />,
-      label: "Total network storage",
+      label: t("analytics.totalNetworkStorage"),
       content: `${formatNumber(totalNetworkStorage.toFixed(2))} Mb`,
-      footer: "Total storage needed for all records of Cardano network",
+      footer: t("analytics.totalNetworkStorageDescription"),
     },
   ];
 
   return (
     <section className='flex w-full max-w-desktop flex-col gap-1.5'>
       <AnalyticsStatList
-        isLoading={epochQuery.isLoading}
+        isLoading={epochQuery.isLoading || milestoneQuery.isLoading}
         statCards={statCards}
       />
 

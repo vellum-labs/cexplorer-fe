@@ -23,6 +23,7 @@ import { GithubLogo } from "@vellumlabs/cexplorer-sdk";
 import { TelegramLogo } from "@vellumlabs/cexplorer-sdk";
 import { TwitterLogo } from "@vellumlabs/cexplorer-sdk";
 import { ProBadge } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface WalletDropdownProps {
   isOpen: boolean;
@@ -45,6 +46,7 @@ const WalletDropdown = ({
   isLoading,
   userData,
 }: WalletDropdownProps) => {
+  const { t } = useAppTranslation("common");
   const { disconnect } = useConnectWallet();
 
   const {
@@ -99,7 +101,7 @@ const WalletDropdown = ({
             </div>
             <div className='flex max-w-[120px] flex-col'>
               <span className='truncate text-text-sm font-medium leading-5 text-text'>
-                {profileName || "Anonymous User"}
+                {profileName || t("wallet.anonymousUser")}
               </span>
               <div className='flex items-center gap-1'>
                 <Link
@@ -124,13 +126,16 @@ const WalletDropdown = ({
           {adaHandle && (
             <div className='flex items-center justify-between'>
               <span className='text-text-xs font-medium text-text'>
-                ADA Handle
+                {t("wallet.adaHandle")}
               </span>
               <Badge color='gray' rounded>
                 <img src={DollarIcon} alt='dollar' />
                 <span>
                   {encodeAssetName(
-                    adaHandle.replace(/^(000de140|0014df10|000643b0|000010)/, ""),
+                    adaHandle.replace(
+                      /^(000de140|0014df10|000643b0|000010)/,
+                      "",
+                    ),
                   )}
                 </span>
               </Badge>
@@ -139,7 +144,7 @@ const WalletDropdown = ({
 
           <div className='flex items-center justify-between'>
             <span className='text-text-xs font-medium text-text'>
-              ADA Balance
+              {t("wallet.adaBalance")}
             </span>
             <span className='text-text-sm font-medium text-text'>
               {lovelaceToAda(balance)}
@@ -147,7 +152,9 @@ const WalletDropdown = ({
           </div>
 
           <div className='flex items-center justify-between'>
-            <span className='text-text-xs font-medium text-text'>Pool</span>
+            <span className='text-text-xs font-medium text-text'>
+              {t("wallet.pool")}
+            </span>
             <div className='flex items-center gap-1/2'>
               {livePool && livePool.id ? (
                 <Link
@@ -171,24 +178,26 @@ const WalletDropdown = ({
                   to='/pool'
                   className='cursor-pointer text-text-sm font-medium text-secondaryText hover:text-primary'
                 >
-                  Browse pools
+                  {t("wallet.browsePools")}
                 </Link>
               )}
             </div>
           </div>
 
           <div className='flex items-center justify-between'>
-            <span className='text-text-xs font-medium text-text'>DRep</span>
+            <span className='text-text-xs font-medium text-text'>
+              {t("wallet.drep")}
+            </span>
             <div className='flex items-center gap-1/2'>
               {drep && drep.id ? (
                 <>
                   {drep.id === "drep_always_abstain" ? (
                     <span className='text-text-sm font-medium text-text'>
-                      Always Abstain
+                      {t("wallet.alwaysAbstain")}
                     </span>
                   ) : drep.id === "drep_always_no_confidence" ? (
                     <span className='text-text-sm font-medium text-text'>
-                      No Confidence
+                      {t("wallet.noConfidence")}
                     </span>
                   ) : (
                     <Link
@@ -214,7 +223,7 @@ const WalletDropdown = ({
                   to='/drep'
                   className='cursor-pointer text-text-sm font-medium text-secondaryText hover:text-primary'
                 >
-                  Browse DReps
+                  {t("wallet.browseDreps")}
                 </Link>
               )}
             </div>
@@ -234,7 +243,7 @@ const WalletDropdown = ({
         >
           <div className='flex items-center gap-1.5'>
             <Star size={16} className='text-gray-500' />
-            Watchlist
+            {t("wallet.watchlist")}
           </div>
         </Link>
 
@@ -251,7 +260,7 @@ const WalletDropdown = ({
           <div className='flex items-center justify-between gap-1.5'>
             <div className='flex items-center gap-1.5'>
               <GalleryHorizontalEnd size={16} className='text-gray-500' />
-              Cexplorer NFTs
+              {t("wallet.cexplorerNfts")}
             </div>
             <span className='text-text-sm'>{nftCount}</span>
           </div>
@@ -268,7 +277,7 @@ const WalletDropdown = ({
         >
           <div className='flex items-center gap-1.5'>
             <User size={16} className='text-gray-500' />
-            Profile
+            {t("wallet.profile")}
           </div>
         </Link>
 
@@ -284,7 +293,7 @@ const WalletDropdown = ({
           >
             <div className='flex items-center gap-1.5'>
               <Shield size={16} className='text-gray-500' />
-              Admin
+              {t("wallet.admin")}
             </div>
           </Link>
         )}
@@ -302,7 +311,7 @@ const WalletDropdown = ({
         >
           <div className='flex items-center gap-1.5'>
             <Wallet size={16} className='text-gray-500' />
-            Switch wallet
+            {t("wallet.switchWallet")}
           </div>
         </button>
 
@@ -317,7 +326,7 @@ const WalletDropdown = ({
         >
           <div className='flex items-center gap-1.5'>
             <Unlink size={16} className='text-red-500' />
-            Disconnect wallet
+            {t("wallet.disconnectWallet")}
           </div>
         </button>
       </div>

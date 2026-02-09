@@ -26,6 +26,7 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import { ArrowRight } from "lucide-react";
 
 import { getIconByAmount } from "@/utils/address/getIconByAmount";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   delegatorsQuery: UseInfiniteQueryResult<
@@ -44,6 +45,7 @@ const PoolDelegatorsTable = ({
   delegatorsQuery,
   totalItems,
 }: Props) => {
+  const { t } = useAppTranslation("pages");
   const navigate = useNavigate();
   const { page, sort, order } = useSearch({ from: "/pool/$id" });
   const { columnsVisibility, setColumsOrder, columnsOrder, rows } =
@@ -67,9 +69,9 @@ const PoolDelegatorsTable = ({
           />
         );
       },
-      title: <p>Date</p>,
+      title: <p>{t("common:labels.date")}</p>,
       visible: columnsVisibility.date,
-      widthPx: 20,
+      widthPx: 50,
     },
     {
       key: "active_in",
@@ -78,9 +80,13 @@ const PoolDelegatorsTable = ({
           <EpochCell no={item?.live_pool?.delegation?.tx?.active_epoch_no} />
         </div>
       ),
-      title: <p className='w-full text-right'>Active epoch</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("pools.detailPage.delegatorsTable.activeEpoch")}
+        </p>
+      ),
       visible: columnsVisibility.active_in,
-      widthPx: 45,
+      widthPx: 30,
     },
     {
       key: "address",
@@ -113,9 +119,9 @@ const PoolDelegatorsTable = ({
           </div>
         );
       },
-      title: "Address",
+      title: t("common:labels.address"),
       visible: columnsVisibility.address,
-      widthPx: 90,
+      widthPx: 70,
     },
     {
       key: "amount",
@@ -138,7 +144,7 @@ const PoolDelegatorsTable = ({
               });
             }}
           >
-            <span>Amount</span>
+            <span>{t("common:labels.amount")}</span>
             <SortArrow direction={order === "live_stake" ? sort : undefined} />
           </div>
         </div>
@@ -182,34 +188,37 @@ const PoolDelegatorsTable = ({
               });
             }}
           >
-            <span>Loyalty</span>
+            <span>{t("common:labels.loyalty")}</span>
             <SortArrow direction={order === "slot_update" ? sort : undefined} />
           </div>
         </div>
       ),
       visible: columnsVisibility.loyalty,
-      widthPx: 20,
+      widthPx: 30,
     },
     {
       key: "registered",
       render: item => {
         return (
-          <DateCell
-            className='text-right'
-            time={format(
-              slotToDate(
-                item.slot_update,
-                miscConst?.epoch_stat.pots.slot_no ?? 0,
-                miscConst?.epoch_stat.epoch.start_time ?? "",
-              ),
-              "yyy-MM-dd HH:mm:ss",
-            )}
-          />
+          <div className='flex justify-end'>
+            <DateCell
+              time={format(
+                slotToDate(
+                  item.slot_update,
+                  miscConst?.epoch_stat.pots.slot_no ?? 0,
+                  miscConst?.epoch_stat.epoch.start_time ?? "",
+                ),
+                "yyy-MM-dd HH:mm:ss",
+              )}
+            />
+          </div>
         );
       },
-      title: <p className='w-full text-right'>Registered</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.registered")}</p>
+      ),
       visible: columnsVisibility.registered,
-      widthPx: 40,
+      widthPx: 50,
     },
     {
       key: "pool_delegation",
@@ -257,9 +266,9 @@ const PoolDelegatorsTable = ({
           </div>
         );
       },
-      title: <p>Pool Delegation</p>,
+      title: <p>{t("pools.detailPage.delegatorsTable.poolDelegation")}</p>,
       visible: columnsVisibility.pool_delegation,
-      widthPx: 180,
+      widthPx: 160,
     },
   ];
 
@@ -286,6 +295,10 @@ const PoolDelegatorsTable = ({
         );
       })}
       onOrderChange={setColumsOrder}
+      renderDisplayText={(count, total) =>
+        t("common:table.displaying", { count, total })
+      }
+      noItemsLabel={t("common:table.noItems")}
     />
   );
 };

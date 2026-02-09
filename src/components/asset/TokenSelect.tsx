@@ -14,6 +14,7 @@ import {
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import AssetCell from "./AssetCell";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const Row = memo(({ index, style, data }: any) => {
   const item = data[index];
@@ -47,6 +48,7 @@ const Row = memo(({ index, style, data }: any) => {
 
 export const TokenSelectCombobox = memo(
   ({ items, className }: { items: AddressAsset[]; className?: string }) => {
+    const { t } = useAppTranslation("common");
     const contentRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLDivElement>(null);
     const [open, setOpen] = useState(false);
@@ -54,34 +56,35 @@ export const TokenSelectCombobox = memo(
     const debouncedSearch = useDebounce(search);
 
     const filteredItems = useMemo(() => {
+      const calculateValue = (item: AddressAsset) => {
+        const decimals = item?.registry?.decimals ?? 0;
+        const quantity = item?.quantity ?? 0;
+        const price = item?.market?.price ?? 0;
+
+        if (!price) return 0;
+
+        const adjustedQuantity = quantity / Math.pow(10, decimals);
+        return adjustedQuantity * price;
+      };
+
+      const sortByValue = (a: AddressAsset, b: AddressAsset) =>
+        calculateValue(b) - calculateValue(a);
+
+      if (!debouncedSearch) return [...items].sort(sortByValue);
+
+      const searchLower = debouncedSearch.toLowerCase();
       return items
-        .filter(
-          item =>
-            item.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-            getAssetFingerprint(item.name).includes(
-              debouncedSearch.toLowerCase(),
-            ) ||
-            encodeAssetName(item.name)
-              .toLowerCase()
-              .includes(debouncedSearch.toLowerCase()),
-        )
-        .sort((a, b) => {
-          const calculateValue = (item: AddressAsset) => {
-            const decimals = item?.registry?.decimals ?? 0;
-            const quantity = item?.quantity ?? 0;
-            const price = item?.market?.price ?? 0;
-
-            if (!price) return 0;
-
-            const adjustedQuantity = quantity / Math.pow(10, decimals);
-            return adjustedQuantity * price;
-          };
-
-          const valueA = calculateValue(a);
-          const valueB = calculateValue(b);
-
-          return valueB - valueA;
-        });
+        .filter(item => {
+          if (item.name.toLowerCase().includes(searchLower)) {
+            return true;
+          }
+          const encoded = encodeAssetName(item.name);
+          if (encoded.toLowerCase().includes(searchLower)) {
+            return true;
+          }
+          return getAssetFingerprint(item.name).includes(searchLower);
+        })
+        .sort(sortByValue);
     }, [debouncedSearch, items]);
 
     const filteredItemsLength = filteredItems.length;
@@ -153,7 +156,7 @@ export const TokenSelectCombobox = memo(
           onClick={() => setOpen(!open)}
           label={
             <div className='flex items-center gap-1'>
-              <span>Browse tokens</span>
+              <span>{t("asset.browseTokens")}</span>
               <span className='text-text-xs'>({items.length})</span>
               <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
             </div>
@@ -168,13 +171,13 @@ export const TokenSelectCombobox = memo(
               <TextInput
                 value={search}
                 onchange={value => setSearch(value)}
-                placeholder='Search token...'
+                placeholder={t("asset.searchToken")}
                 wrapperClassName='px-1 py-1'
               />
               <div className='overflow-hidden'>
                 {filteredItems.length === 0 ? (
                   <div className='text-sm py-6 text-center'>
-                    No token found.
+                    {t("asset.noTokenFound")}
                   </div>
                 ) : (
                   <List

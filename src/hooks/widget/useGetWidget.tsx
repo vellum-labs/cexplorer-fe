@@ -306,7 +306,7 @@ const TxListWidget = (
 const TxInEpochGraphWidget = (): useGetGraphWidget => {
   const epochQuery = useFetchEpochAnalytics();
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const { json, option, selectedItem, setData, setSelectedItem } =
     useTxInEpoch(miscConst);
 
@@ -375,7 +375,7 @@ const BlockListWidget = (
 const BlockProductionGraphWidget = (): useGetGraphWidget => {
   const epochQuery = useFetchEpochAnalytics();
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const { json, option, selectedItem, setData, setSelectedItem } =
     useBlockProduction(miscConst);
 
@@ -395,7 +395,7 @@ const BlockProductionGraphWidget = (): useGetGraphWidget => {
 const BlockSizeUsedGraphWidget = (): useGetGraphWidget => {
   const epochQuery = useFetchEpochAnalytics();
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const { json, option, selectedItem, setData, setSelectedItem } =
     useBlockSizeUsed(miscConst);
 
@@ -754,7 +754,7 @@ const PoolDetailWidget = (detailAddr: string): useDetailWidget => {
   );
 
   const { data: basicData } = useFetchMiscBasic();
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const data = query.data?.data;
 

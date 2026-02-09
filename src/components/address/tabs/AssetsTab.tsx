@@ -1,23 +1,25 @@
 import type { AddressAsset } from "@/types/addressTypes";
-import { useEffect, type FC, type ReactNode } from "react";
+import { useEffect, useState, useRef, type FC, type ReactNode } from "react";
 
 import { Switch } from "@vellumlabs/cexplorer-sdk";
 import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
+import { SpinningLoader } from "@vellumlabs/cexplorer-sdk";
 import { AddressAssetTable } from "../AddressAssetTable";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useAddressDetailAssetTableStore } from "@/stores/tables/addressDetailAssetTableStore";
 
 import { addressDetailAssetTableOptions } from "@/constants/tables/addressDetailAssetTableOptions";
 import type { useFetchAddressDetail } from "@/services/address";
 import type { useFetchStakeDetail } from "@/services/stake";
 import type { AddressDetailAssetTableOptions } from "@/types/tableTypes";
-import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
-import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { configJSON } from "@/constants/conf";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { useSearch } from "@tanstack/react-router";
+import AssetFilterWorker from "@/workers/assetFilterWorker?worker";
+import { AssetFilterMessageTypes } from "@/constants/worker";
 
 interface AssetsTabProps {
   assets: AddressAsset[];
@@ -39,6 +41,7 @@ export const AssetsTab: FC<AssetsTabProps> = ({
   stakeKey,
   isStake,
 }) => {
+  const { t } = useAppTranslation("common");
   const tokenMarket = configJSON.market[0].token[0].active;
   const nftMarket = configJSON.market[0].nft[0].active;
   const basicOptionsKeys = ["token", "holdings", "supply"];
@@ -52,6 +55,10 @@ export const AssetsTab: FC<AssetsTabProps> = ({
     { debouncedTableSearch: debouncedSearch, tableSearch },
     setTableSearch,
   ] = useSearchTable();
+
+  const [filteredAssets, setFilteredAssets] = useState<AddressAsset[]>([]);
+  const [isFiltering, setIsFiltering] = useState(false);
+  const workerRef = useRef<Worker | null>(null);
 
   const {
     rows,
@@ -77,68 +84,54 @@ export const AssetsTab: FC<AssetsTabProps> = ({
     );
   }
 
-  const filteredAssets = assets
-    .filter(item => {
-      if (activeAsset === "tokens") {
-        return item.quantity > 1;
-      }
+  useEffect(() => {
+    if (!workerRef.current) {
+      workerRef.current = new AssetFilterWorker();
 
-      if (activeAsset !== "nfts") {
-        return item;
-      }
-
-      return item.quantity === 1;
-    })
-    .filter(item => {
-      if (debouncedSearch) {
-        const searchLower = debouncedSearch.toLowerCase();
-        return (
-          item.name.toLowerCase().includes(searchLower) ||
-          getAssetFingerprint(item.name.toLowerCase()).includes(searchLower) ||
-          (item.registry?.name &&
-            typeof item.registry.name === "string" &&
-            item.registry.name.toLowerCase().includes(searchLower)) ||
-          (item.registry?.ticker &&
-            typeof item.registry.ticker === "string" &&
-            item.registry.ticker.toLowerCase().includes(searchLower)) ||
-          renderAssetName({ asset: item }).toLowerCase().includes(searchLower)
-        );
-      }
-
-      return item;
-    })
-    .sort((a, b) => {
-      const calculateValue = (item: AddressAsset) => {
-        const decimals = item?.registry?.decimals ?? 0;
-        const quantity = item?.quantity ?? 0;
-        const price = item?.market?.price ?? 0;
-
-        if (!price) return 0;
-
-        const adjustedQuantity = quantity / Math.pow(10, decimals);
-        return adjustedQuantity * price;
+      workerRef.current.onmessage = (event: MessageEvent) => {
+        if (event.data.type === AssetFilterMessageTypes.FILTER_RESULT) {
+          setFilteredAssets(event.data.result);
+          setIsFiltering(false);
+        }
       };
+    }
 
-      const valueA = calculateValue(a);
-      const valueB = calculateValue(b);
-
-      return valueB - valueA;
+    setIsFiltering(true);
+    workerRef.current.postMessage({
+      type: AssetFilterMessageTypes.FILTER_ASSETS,
+      data: {
+        assets,
+        activeAsset,
+        search: debouncedSearch,
+      },
     });
+
+    return () => {};
+  }, [assets, activeAsset, debouncedSearch]);
+
+  useEffect(() => {
+    return () => {
+      if (workerRef.current) {
+        workerRef.current.terminate();
+        workerRef.current = null;
+      }
+    };
+  }, []);
 
   const assetTabItems = [
     {
       key: "all",
-      label: "All",
+      label: t("address.all"),
       visible: true,
     },
     {
       key: "tokens",
-      label: "Tokens",
+      label: t("address.tokens"),
       visible: true,
     },
     {
       key: "nfts",
-      label: "NFTs",
+      label: t("address.nfts"),
       visible: true,
     },
   ];
@@ -146,12 +139,12 @@ export const AssetsTab: FC<AssetsTabProps> = ({
   const detailsTabItem = [
     {
       key: "address",
-      label: "Address",
+      label: t("labels.address"),
       visible: true,
     },
     {
       key: "stake",
-      label: "Stake",
+      label: t("labels.stake"),
       visible: true,
     },
   ];
@@ -196,18 +189,24 @@ export const AssetsTab: FC<AssetsTabProps> = ({
                     active={!lowBalances}
                   />
                   <span className='text-text-sm font-medium text-grayTextPrimary'>
-                    Hide Low Balances
+                    {t("address.hideLowBalances")}
                   </span>
                 </div>
               )}
-              <span className='text-text-xs text-grayTextPrimary'>
-                Displaying {filteredAssets.length}{" "}
-                {activeAsset === "nfts" ? "NFTs" : "tokens"}
+              <span className='flex items-center gap-1 text-text-xs text-grayTextPrimary'>
+                {activeAsset === "nfts"
+                  ? t("address.displayingNfts", {
+                      count: filteredAssets.length,
+                    })
+                  : t("address.displayingTokens", {
+                      count: filteredAssets.length,
+                    })}
+                {isFiltering && <SpinningLoader size={4} />}
               </span>
             </div>
             <div className='flex flex-grow items-center gap-1 sm:flex-grow-0'>
               <TableSearchInput
-                placeholder='Search your results...'
+                placeholder={t("phrases.searchResults")}
                 value={tableSearch}
                 onchange={setTableSearch}
                 wrapperClassName='md:w-[320px] w-full'
@@ -217,10 +216,11 @@ export const AssetsTab: FC<AssetsTabProps> = ({
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("table.rows")}
                 columnsOptions={
                   options.map(item => {
                     return {
-                      label: item.name,
+                      label: t(`common:tableSettings.${item.key}`),
                       isVisible: columnsVisibility[item.key],
                       onClick: () =>
                         setColumnVisibility(

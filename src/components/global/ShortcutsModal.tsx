@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import { Modal } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface ShortcutItem {
   label: string;
@@ -16,28 +17,33 @@ interface ShortcutsModalProps {
 }
 
 export const ShortcutsModal: FC<ShortcutsModalProps> = ({ onClose }) => {
+  const { t } = useAppTranslation();
+
   const shortcutGroups: ShortcutGroup[] = [
     {
-      title: "Navigation",
+      title: t("global.shortcuts.navigation"),
       shortcuts: [
-        { label: "Homepage", keys: ["g", "+", "h"] },
-        { label: "Transactions", keys: ["g", "+", "t"] },
-        { label: "Blocks", keys: ["g", "+", "b"] },
-        { label: "Epochs", keys: ["g", "+", "e"] },
-        { label: "Pools", keys: ["g", "+", "p"] },
-        { label: "DReps", keys: ["g", "+", "d"] },
-        { label: "Assets", keys: ["g", "+", "a"] },
-        { label: "Governance actions", keys: ["g", "+", "o"] },
+        { label: t("global.shortcuts.homepage"), keys: ["g", "+", "h"] },
+        { label: t("global.shortcuts.transactions"), keys: ["g", "+", "t"] },
+        { label: t("global.shortcuts.blocks"), keys: ["g", "+", "b"] },
+        { label: t("global.shortcuts.epochs"), keys: ["g", "+", "e"] },
+        { label: t("global.shortcuts.pools"), keys: ["g", "+", "p"] },
+        { label: t("global.shortcuts.dreps"), keys: ["g", "+", "d"] },
+        { label: t("global.shortcuts.assets"), keys: ["g", "+", "a"] },
+        {
+          label: t("global.shortcuts.governanceActions"),
+          keys: ["g", "+", "o"],
+        },
       ],
     },
     {
-      title: "Basics",
+      title: t("global.shortcuts.basics"),
       shortcuts: [
-        { label: "Open/Close shortcut help", keys: ["?"] },
-        { label: "Focus search", keys: ["/"] },
-        { label: "Refresh", keys: ["r"] },
-        { label: "Next page", keys: ["j"] },
-        { label: "Previous page", keys: ["k"] },
+        { label: t("global.shortcuts.openCloseHelp"), keys: ["?"] },
+        { label: t("global.shortcuts.focusSearch"), keys: ["/"] },
+        { label: t("global.shortcuts.refresh"), keys: ["r"] },
+        { label: t("global.shortcuts.nextPage"), keys: ["j"] },
+        { label: t("global.shortcuts.previousPage"), keys: ["k"] },
       ],
     },
   ];
@@ -65,10 +71,10 @@ export const ShortcutsModal: FC<ShortcutsModalProps> = ({ onClose }) => {
       <div className='flex w-full flex-col gap-4 p-3 md:p-0'>
         <div className='flex flex-col gap-1'>
           <h2 className='text-text-xl font-semibold text-text'>
-            Keyboard shortcuts
+            {t("global.shortcuts.title")}
           </h2>
           <p className='text-text-sm text-grayTextPrimary'>
-            Navigate Cexplorer like a PRO with shortcuts.
+            {t("global.shortcuts.description")}
           </p>
         </div>
 

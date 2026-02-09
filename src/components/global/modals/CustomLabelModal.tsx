@@ -8,6 +8,7 @@ import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { useAuthToken } from "@/hooks/useAuthToken";
 import { useFetchUserInfo, updateUserLabels } from "@/services/user";
 import type { AddressLabel } from "@/types/commonTypes";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const CustomLabelModal = () => {
   const [address, setAddress] = useState("");
@@ -20,6 +21,7 @@ export const CustomLabelModal = () => {
   const { data: userData } = useFetchUserInfo();
   const userAddress = userData?.data.address;
   const labelChannel = new BroadcastChannel("label_channel");
+  const { t } = useAppTranslation();
 
   const onClose = () => {
     setIsOpen(false);
@@ -100,10 +102,12 @@ export const CustomLabelModal = () => {
   return (
     <Modal minHeight='260px' minWidth='400px' maxWidth='95%' onClose={onClose}>
       <p className='mb-1 pr-4 font-medium'>
-        {isEdit() ? "Edit label:" : "Create new label:"}
+        {isEdit()
+          ? t("global.customLabel.editLabel")
+          : t("global.customLabel.createNewLabel")}
       </p>
       <TextInput
-        placeholder='Address'
+        placeholder={t("global.customLabel.address")}
         onchange={value => setAddress(value)}
         value={address}
         wrapperClassName='mb-1/4'
@@ -111,10 +115,10 @@ export const CustomLabelModal = () => {
         inputClassName={isAddressValid ? "" : "border-redText"}
       />
       <p className='mb-0.5 h-3 text-text-xs text-redText'>
-        {isAddressValid ? "" : "Please enter a valid address"}
+        {isAddressValid ? "" : t("global.customLabel.invalidAddress")}
       </p>
       <TextInput
-        placeholder='Label name'
+        placeholder={t("global.customLabel.labelName")}
         onchange={value => setName(value)}
         value={name}
         wrapperClassName='mb-1.5'
@@ -124,18 +128,23 @@ export const CustomLabelModal = () => {
           onClick={onClose}
           variant='secondary'
           size='md'
-          label='Cancel'
+          label={t("actions.cancel")}
         />
         {isEdit() && (
           <Button
             onClick={handleDelete}
             variant='red'
             size='md'
-            label='Delete'
+            label={t("actions.delete")}
             className='ml-auto'
           />
         )}
-        <Button onClick={handleSave} variant='primary' size='md' label='Save' />
+        <Button
+          onClick={handleSave}
+          variant='primary'
+          size='md'
+          label={t("actions.save")}
+        />
       </div>
     </Modal>
   );

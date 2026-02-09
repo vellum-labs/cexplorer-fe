@@ -1,4 +1,6 @@
 import type {
+  AdaHandleResponse,
+  AdaHandleListResponse,
   AssetDetailResponse,
   AssetListResponse,
   AssetMetadataResponse,
@@ -18,7 +20,7 @@ interface AssetListProps {
   order?: "collection_quantity" | "native" | "mint";
   policy?: string;
   name?: string;
-  filter?: "nft" | "token";
+  filter?: "nft" | "token" | "assets";
   watchlist?: "1" | undefined;
   token?: string;
 }
@@ -242,7 +244,9 @@ export const useFetchAssetMint = (
     initialPageParam: offset,
     getNextPageParam: (lastPage, allPages) => {
       const totalItems = lastPage?.data?.count ?? 0;
-      const loadedItems = allPages.flatMap(page => page?.data?.data ?? []).length;
+      const loadedItems = allPages.flatMap(
+        page => page?.data?.data ?? [],
+      ).length;
       return loadedItems < totalItems ? loadedItems : undefined;
     },
     enabled: !!assetname || !!policyId,
@@ -329,4 +333,65 @@ export const useFetchAssetExchangesGraph = (
 
       return response.json();
     },
+  });
+
+export const fetchAdaHandle = async (hex: string) => {
+  const url = `/asset/adahandle`;
+  const options = {
+    params: {
+      hex,
+    },
+  };
+
+  return handleFetch<AdaHandleResponse>(url, undefined, options);
+};
+
+export const useFetchAdaHandle = (hex: string | undefined) =>
+  useQuery({
+    queryKey: ["ada-handle", hex],
+    queryFn: async () => {
+      try {
+        return await fetchAdaHandle(hex!);
+      } catch {
+        return { code: 404, data: null } as AdaHandleResponse;
+      }
+    },
+    enabled: !!hex,
+    retry: false,
+  });
+
+export const fetchAdaHandleList = async (
+  limit: number,
+  offset: number,
+  name?: string,
+) => {
+  const url = `/asset/adahandle`;
+  const options = {
+    params: {
+      limit,
+      offset,
+      name,
+    },
+  };
+
+  return handleFetch<AdaHandleListResponse>(url, offset, options);
+};
+
+export const useFetchAdaHandleList = (
+  limit: number,
+  offset: number,
+  name?: string,
+) =>
+  useInfiniteQuery({
+    queryKey: ["ada-handle-list", limit, offset, name],
+    queryFn: ({ pageParam = offset }) =>
+      fetchAdaHandleList(limit, pageParam, name),
+    initialPageParam: offset,
+    getNextPageParam: lastPage => {
+      const nextOffset = (lastPage.prevOffset as number) + limit;
+      if (nextOffset >= lastPage.data.count) return undefined;
+      return nextOffset;
+    },
+    refetchOnWindowFocus: false,
+    refetchInterval: 20000,
   });

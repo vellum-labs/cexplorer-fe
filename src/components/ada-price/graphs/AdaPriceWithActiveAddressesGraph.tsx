@@ -7,6 +7,7 @@ import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import ReactEcharts from "echarts-for-react";
 import { AnalyticsGraph } from "@/components/analytics/AnalyticsGraph";
 import { useAdaPriceWithActiveAddresses } from "@/hooks/graphs/useAdaPriceWithActiveAddresses";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface AdaPriceWithActiveAddressesGraphProps {
   graphRates: BasicRate[];
@@ -18,6 +19,7 @@ export const AdaPriceWithActiveAddressesGraph: FC<AdaPriceWithActiveAddressesGra
     graphRates,
     analyticsData,
   }) {
+    const { t } = useAppTranslation("common");
     const {
       json,
       option,
@@ -38,7 +40,7 @@ export const AdaPriceWithActiveAddressesGraph: FC<AdaPriceWithActiveAddressesGra
 
     return (
       <AnalyticsGraph
-        title='ADA/BTC Price vs Daily Active Addresses'
+        title={t("adaPrice.adaBtcPriceVsActiveAddresses")}
         exportButton
         graphSortData={{
           query: fakeQuery as any,

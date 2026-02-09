@@ -10,13 +10,14 @@ export const ScriptCell = ({
   hash: string;
   enableHover?: boolean;
 }) => {
-  const { handleMouseEnter, handleMouseLeave, handleCopyMouseEnter, isHighlighted } =
-    useHoverHighlight(hash, enableHover);
+  const {
+    handleMouseEnter,
+    handleMouseLeave,
+    handleCopyMouseEnter,
+    isHighlighted,
+  } = useHoverHighlight(hash, enableHover);
   return (
-    <div
-      onMouseLeave={handleMouseLeave}
-      className='flex items-center gap-1'
-    >
+    <div onMouseLeave={handleMouseLeave} className='flex items-center gap-1'>
       <Link
         to='/script/$hash'
         params={{ hash: hash }}

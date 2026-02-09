@@ -9,6 +9,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { activeSlotsCoeff, epochLength } from "@/constants/confVariables";
 import { generateImageUrl } from "@/utils/generateImageUrl";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Pool {
   pool_id: string;
@@ -22,6 +23,7 @@ const STORAGE_KEY_AMOUNT = "stakingCalculator_adaAmount";
 const STORAGE_KEY_POOL = "stakingCalculator_selectedPool";
 
 export const StakingCalculatorPage: FC = () => {
+  const { t } = useAppTranslation();
   const [adaAmount, setAdaAmount] = useState<string>(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem(STORAGE_KEY_AMOUNT) || "10000";
@@ -74,7 +76,7 @@ export const StakingCalculatorPage: FC = () => {
 
   const miscBasicQuery = useFetchMiscBasic();
   const { data: basicData } = miscBasicQuery;
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const poolData = poolQuery.data?.data;
 
@@ -88,9 +90,9 @@ export const StakingCalculatorPage: FC = () => {
   return (
     <PageBase
       metadataTitle='stakingCalculator'
-      title='Rewards Calculator'
-      subTitle='Calculate your potential rewards'
-      breadcrumbItems={[{ label: "Rewards Calculator" }]}
+      title={t("stakingCalculator.page.title")}
+      subTitle={t("stakingCalculator.page.subtitle")}
+      breadcrumbItems={[{ label: t("stakingCalculator.page.breadcrumb") }]}
       adsCarousel={false}
     >
       <section className='flex w-full justify-center'>
@@ -100,13 +102,13 @@ export const StakingCalculatorPage: FC = () => {
           <div className='flex flex-1 flex-col gap-4 rounded-xl border border-border bg-cardBg p-2'>
             <div className='flex flex-col gap-2'>
               <h3 className='text-text-lg font-semibold'>
-                Amount of ADA to stake
+                {t("stakingCalculator.page.amountTitle")}
               </h3>
               <div className='relative'>
                 <Input
                   value={adaAmount}
                   onchange={handleAmountChange}
-                  placeholder='Enter amount'
+                  placeholder={t("stakingCalculator.page.enterAmount")}
                   className='pr-20'
                 />
                 <div className='absolute right-3 top-1/2 -translate-y-1/2'>
@@ -127,7 +129,7 @@ export const StakingCalculatorPage: FC = () => {
                       : "0 ADA"}
                 </p>
                 <p className='text-center text-text-sm text-grayTextPrimary'>
-                  Staking Reward per year in ADA
+                  {t("stakingCalculator.page.rewardPerYear")}
                 </p>
               </div>
               <div className='flex flex-col items-center gap-1 rounded-xl border border-border bg-cardBg p-2'>
@@ -137,23 +139,20 @@ export const StakingCalculatorPage: FC = () => {
                     : "2.71%"}
                 </p>
                 <p className='text-center text-text-sm text-grayTextPrimary'>
-                  Annualized staking reward
+                  {t("stakingCalculator.page.annualizedReward")}
                 </p>
               </div>
             </div>
 
             <div className='flex flex-col gap-2'>
               <h3 className='text-text-lg font-semibold'>
-                Select a stake pool
+                {t("stakingCalculator.page.selectPool")}
               </h3>
               <p className='text-text-sm text-grayTextPrimary'>
-                You can leave the stake pool field empty to calculate estimated
-                rewards based on general network averages.
+                {t("stakingCalculator.page.selectPoolDescription1")}
               </p>
               <p className='text-text-sm text-grayTextPrimary'>
-                If you select a specific pool, the calculator will use that
-                pool's individual parameters to provide a more accurate
-                estimate.
+                {t("stakingCalculator.page.selectPoolDescription2")}
               </p>
               <PoolSelector
                 selectedPool={selectedPool}
@@ -175,25 +174,14 @@ export const StakingCalculatorPage: FC = () => {
               ref={infoCardRef}
               className={`flex flex-col gap-3 rounded-xl border border-border bg-cardBg p-2 ${!selectedPool ? "md:h-full" : ""}`}
             >
-              <h3 className='text-text-lg font-semibold'>Information</h3>
+              <h3 className='text-text-lg font-semibold'>
+                {t("stakingCalculator.page.information")}
+              </h3>
               <div className='-mt-1 flex flex-col gap-3 text-text-sm text-grayTextPrimary'>
-                <p>
-                  Enter any amount of ADA to see a detailed simulation of your
-                  potential staking rewards.
-                </p>
-                <p>
-                  You can also select a specific stake pool to see how your
-                  stake would perform in that pool.
-                </p>
-                <p>
-                  The calculator uses live network data, current blockchain
-                  parameters, and the latest epoch statistics to estimate your
-                  rewards.
-                </p>
-                <p>
-                  Keep in mind that actual rewards may vary from epoch to epoch
-                  and change over time.
-                </p>
+                <p>{t("stakingCalculator.page.infoText1")}</p>
+                <p>{t("stakingCalculator.page.infoText2")}</p>
+                <p>{t("stakingCalculator.page.infoText3")}</p>
+                <p>{t("stakingCalculator.page.infoText4")}</p>
               </div>
             </div>
 

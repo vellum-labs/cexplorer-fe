@@ -17,12 +17,14 @@ import { AttributeDropdown } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic } from "@/services/misc";
 import { generateImageUrl } from "@/utils/generateImageUrl";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   query: UseQueryResult<ScriptDetailResponse>;
 }
 
 export const ScriptDetailOverview = ({ query }: Props) => {
+  const { t } = useAppTranslation("common");
   const data = query.data?.data;
 
   const miscBasicQuery = useFetchMiscBasic();
@@ -31,7 +33,7 @@ export const ScriptDetailOverview = ({ query }: Props) => {
     ? [
         data.label
           ? {
-              label: "dApp",
+              label: t("script.overview.dapp"),
               value: (
                 <LabelBadge
                   className='text-[14px] font-regular'
@@ -44,7 +46,7 @@ export const ScriptDetailOverview = ({ query }: Props) => {
           : null,
         data.label?.category?.length > 0
           ? {
-              label: "Category",
+              label: t("script.overview.category"),
               value: (
                 <div className='flex'>
                   {data.label.category.map((category, index) => (
@@ -65,7 +67,7 @@ export const ScriptDetailOverview = ({ query }: Props) => {
             }
           : null,
         {
-          label: "Type",
+          label: t("script.overview.type"),
           value: (
             <Badge color='yellow' rounded>
               {data?.type?.slice(0, 1).toUpperCase() + data?.type?.slice(1)}
@@ -74,20 +76,20 @@ export const ScriptDetailOverview = ({ query }: Props) => {
         },
         data.purpose?.length
           ? {
-              label: "Purpose",
+              label: t("script.overview.purpose"),
               value: <PurposeBadge purpose={data?.purpose[0]?.purpose} />,
             }
           : undefined,
         {
-          label: "Size",
+          label: t("script.overview.size"),
           value: (data?.serialised_size / 1000).toFixed(2) + "kB",
         },
         {
-          label: "Origin transaction",
+          label: t("script.overview.originTransaction"),
           value: <HashCell hash={data?.tx.hash || ""} />,
         },
         {
-          label: "Bytes",
+          label: t("script.overview.bytes"),
           value: (
             <AttributeDropdown
               items={[
@@ -108,7 +110,7 @@ export const ScriptDetailOverview = ({ query }: Props) => {
             >
               <div className='flex w-fit items-center gap-1'>
                 <Button
-                  label='Show'
+                  label={t("script.overview.show")}
                   variant='tertiary'
                   size='sm'
                   className='h-6'
@@ -141,19 +143,19 @@ export const ScriptDetailOverview = ({ query }: Props) => {
         <>
           <OverviewCard
             className='max-h-[400px] min-h-[290px] basis-[500px]'
-            title='Script Overview'
+            title={t("script.overview.title")}
             overviewList={overviewList}
           />
           <section className='flex w-full flex-col gap-3 lg:w-[400px]'>
             <OverviewStatCard
               icon={<LineChart color={colors.primary} />}
-              title='Volume total'
+              title={t("script.overview.volumeTotal")}
               value={
                 data?.stat_total?.volume
                   ? formatNumber(data?.stat_total?.volume)
                   : "-"
               }
-              subTitle={`Active epochs: ${
+              subTitle={`${t("script.overview.activeEpochs")}: ${
                 data?.stat_total?.epochs
                   ? formatNumber(data?.stat_total?.epochs)
                   : "-"
@@ -161,14 +163,14 @@ export const ScriptDetailOverview = ({ query }: Props) => {
               className='max-h-[110px]'
             />
             <OverviewStatCard
-              title='Interactions total'
+              title={t("script.overview.interactionsTotal")}
               icon={<FileBarChart color={colors.primary} />}
               value={
                 data?.stat_total?.interactions
                   ? formatNumber(data?.stat_total?.interactions)
                   : "-"
               }
-              subTitle={`Active epochs: ${
+              subTitle={`${t("script.overview.activeEpochs")}: ${
                 data?.stat_total?.epochs
                   ? formatNumber(data?.stat_total?.epochs)
                   : "-"

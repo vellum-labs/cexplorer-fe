@@ -8,10 +8,10 @@ import {
 import { currencies } from "@vellumlabs/cexplorer-sdk";
 import { locales } from "@/constants/locales";
 import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
-import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import type { NavigationOptions } from "@/types/navigationTypes";
 import type { Locales } from "@/types/storeTypes";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import {
   Check,
   ChevronDown,
@@ -34,7 +34,7 @@ interface SettingsDropdownProps {
 
 const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
   const { theme, toggleTheme } = useThemeStore();
-  const { locale, setLocale } = useLocaleStore();
+  const { t, locale, changeLanguage } = useAppTranslation();
   const { currency, setCurrency } = useCurrencyStore();
   const {
     infiniteScrolling,
@@ -118,7 +118,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
     {
       label: (
         <button className='flex w-full justify-between'>
-          <span>Theme</span>
+          <span>{t("settings.theme")}</span>
           {themeIcon}
         </button>
       ),
@@ -130,23 +130,23 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
           onMouseDown={e => e.stopPropagation()}
           className='flex items-center justify-between gap-1.5'
         >
-          <span>Language</span>
+          <span>{t("settings.language")}</span>
           <Select
             defaultValue={locale}
             onValueChange={(value: Locales) => {
-              setLocale(value);
+              changeLanguage(value);
             }}
           >
             <SelectTrigger className='w-[95px]'>
               <SelectValue
                 placeholder={
                   <div className='flex w-full items-center justify-between gap-1/2 uppercase'>
-                    <span>{locales[locale].value}</span>
+                    <span>{locales[locale]?.displayValue ?? locale?.toUpperCase()}</span>
                     <img
                       width={15}
                       height={15}
                       alt='flag'
-                      src={locales[locale].image}
+                      src={locales[locale]?.image}
                     />
                   </div>
                 }
@@ -156,7 +156,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
               {Object.entries(locales).map(([key, value]) => (
                 <SelectItem key={key} value={key}>
                   <div className='flex w-full items-center justify-between gap-1/2 uppercase'>
-                    <span>{value.value}</span>
+                    <span>{value.displayValue}</span>
                     <img width={15} height={15} alt='flag' src={value.image} />
                   </div>
                 </SelectItem>
@@ -173,7 +173,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
           onMouseDown={e => e.stopPropagation()}
           className='flex items-center justify-between gap-1.5'
         >
-          <span>Currency</span>
+          <span>{t("settings.currency")}</span>
           <Select
             onValueChange={value => {
               if (value) {
@@ -195,7 +195,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
                 <TextInput
                   value={currencySearch}
                   onchange={value => setCurrencySearch(value)}
-                  placeholder='Search'
+                  placeholder={t("actions.search")}
                   className='rounded-none border-none outline-none'
                   inputClassName='border-none outline-none'
                 />
@@ -252,7 +252,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
     {
       label: (
         <button className='flex w-full items-center justify-between'>
-          <span>Infinite scrolling</span>
+          <span>{t("settings.infiniteScrolling")}</span>
           <span>{infiniteScrolling && <Check size={20} />}</span>
         </button>
       ),
@@ -263,7 +263,7 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
     {
       label: (
         <button className='flex w-full items-center justify-between'>
-          <span>Geek configuration</span>
+          <span>{t("settings.geekConfiguration")}</span>
           <SlidersHorizontal size={18} />
         </button>
       ),

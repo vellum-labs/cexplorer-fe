@@ -1,4 +1,5 @@
 import { colors } from "@/constants/colors";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useFetchUserInfo } from "@/services/user";
 import { useAddressLabelStore } from "@/stores/addressLabelStore";
 import { useHoverHighlightState } from "@/stores/states/hoverHighlightState";
@@ -33,6 +34,7 @@ const AddressCell = ({
   forceHighlight = false,
   highlightStakeKey = false,
 }: Props) => {
+  const { t } = useAppTranslation("common");
   const isStake = address.includes("stake");
   const { hoverValue, setHoverValue } = useHoverHighlightState();
   const { labels } = useAddressLabelStore();
@@ -84,7 +86,9 @@ const AddressCell = ({
             <Tooltip
               content={
                 <div className='flex w-[166px] flex-col items-center text-text-sm'>
-                  <p className='font-medium'>Smart Contract Address</p>
+                  <p className='font-medium'>
+                    {t("address.smartContractAddress")}
+                  </p>
                 </div>
               }
             >
@@ -120,7 +124,7 @@ const AddressCell = ({
           <Tooltip
             content={
               <div className='flex w-[200px] flex-col items-center text-text-sm'>
-                <p className='font-medium'>Stake key</p>
+                <p className='font-medium'>{t("labels.stakeKey")}</p>
                 <div className='mt-1/2 flex items-end justify-end break-all text-center text-text-sm'>
                   <Link
                     to='/stake/$stakeAddr'
@@ -149,8 +153,7 @@ const AddressCell = ({
             <Tooltip
               content={
                 <p className='w-[200px] text-center'>
-                  This address belongs to a different stake key than you're
-                  currently viewing.
+                  {t("address.differentStakeKey")}
                 </p>
               }
             >

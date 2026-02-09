@@ -20,6 +20,7 @@ import type { UseQueryResult } from "@tanstack/react-query";
 import { Pagination } from "@vellumlabs/cexplorer-sdk";
 import { useState, useMemo } from "react";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface BlockDetailTableProps {
   txs: BlockDetailResponseDataTxsItem[] | undefined;
@@ -30,6 +31,7 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
   txs,
   blockDetail,
 }) => {
+  const { t } = useAppTranslation("common");
   const {
     columnsVisibility,
     columnsOrder,
@@ -69,7 +71,7 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
 
         return item.block.time;
       },
-      title: <p>Date</p>,
+      title: <p>{t("labels.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 80,
     },
@@ -98,7 +100,7 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
 
         return item.hash;
       },
-      title: <p>Transaction Hash</p>,
+      title: <p>{t("blocks.transactionHash")}</p>,
       visible: columnsVisibility.hash,
       widthPx: 50,
     },
@@ -116,7 +118,7 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
         }
         return item.block.no;
       },
-      title: <p className='w-full text-right'>Block</p>,
+      title: <p className='w-full text-right'>{t("blocks.block")}</p>,
       visible: columnsVisibility.block,
       widthPx: 50,
     },
@@ -127,7 +129,7 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
           <AdaWithTooltip data={item.out_sum} />
         </p>
       ),
-      title: <p className='w-full text-right'>Total Output</p>,
+      title: <p className='w-full text-right'>{t("blocks.totalOutput")}</p>,
       visible: columnsVisibility.total_ouput,
       widthPx: 50,
     },
@@ -138,7 +140,7 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
           <AdaWithTooltip data={item.fee} />
         </p>
       ),
-      title: <p className='w-full text-right'>Fee</p>,
+      title: <p className='w-full text-right'>{t("blocks.fee")}</p>,
       visible: columnsVisibility.fee,
       widthPx: 50,
     },
@@ -147,7 +149,7 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
       render: item => (
         <p className='text-right'>{(item.size / 1024).toFixed(2)}kB</p>
       ),
-      title: <p className='w-full text-right'>Size</p>,
+      title: <p className='w-full text-right'>{t("blocks.size")}</p>,
       visible: columnsVisibility.size,
       widthPx: 30,
     },
@@ -155,16 +157,19 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
 
   return (
     <>
-      <div className='flex w-full items-center justify-between'>
-        <h1 className='text-text-lg font-semibold'>Transactions</h1>
+      <div className='mb-2 flex w-full items-center justify-between'>
+        <h1 className='text-text-lg font-semibold'>
+          {t("blocks.transactions")}
+        </h1>
         <div className='flex gap-1'>
           <ExportButton columns={columns} items={txs} />
           <TableSettingsDropdown
             rows={rows}
             setRows={setRows}
+            rowsLabel={t("table.rows")}
             columnsOptions={blocksDetailTableOptions.map(item => {
               return {
-                label: item.name,
+                label: t(`common:tableSettings.${item.key}`),
                 isVisible: columnsVisibility[item.key],
                 onClick: () =>
                   setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -185,12 +190,21 @@ export const BlockDetailTable: FC<BlockDetailTableProps> = ({
             columnsOrder.indexOf(b.key as keyof BlockDetailColumns),
         )}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
       {totalPages > 1 && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
           setCurrentPage={setCurrentPage}
+          labels={{
+            ellipsisSrLabel: t("sdk:pagination.morePages"),
+            nextAriaLabel: t("sdk:pagination.nextPage"),
+            previousAriaLabel: t("sdk:pagination.previousPage"),
+          }}
         />
       )}
     </>

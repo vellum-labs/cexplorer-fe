@@ -8,6 +8,7 @@ import ReactEcharts from "echarts-for-react";
 import { useADADisplay } from "@/hooks/useADADisplay";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { dexConfig } from "@/constants/dexConfig";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
@@ -24,6 +25,7 @@ interface AssetExchangesLiquidityProps {
 export const AssetExchangesLiquidity: FC<AssetExchangesLiquidityProps> = ({
   query,
 }) => {
+  const { t } = useAppTranslation("common");
   const { formatADA } = useADADisplay();
   const { textColor, bgColor } = useGraphColors();
 
@@ -53,7 +55,7 @@ export const AssetExchangesLiquidity: FC<AssetExchangesLiquidityProps> = ({
             )}
             <span>{dex?.label || item.dex_name}</span>
             {displayFee && Number(displayFee) > 0 && (
-              <Tooltip content={`Pool fee: ${displayFee}%`}>
+              <Tooltip content={`${t("asset.poolFee")}: ${displayFee}%`}>
                 <Badge small color='gray' className='min-w-[40px] text-center'>
                   {displayFee}%
                 </Badge>
@@ -62,7 +64,7 @@ export const AssetExchangesLiquidity: FC<AssetExchangesLiquidityProps> = ({
           </div>
         );
       },
-      title: <p className='w-full text-left'>DEX</p>,
+      title: <p className='w-full text-left'>{t("asset.dex")}</p>,
       visible: true,
       widthPx: 160,
     },
@@ -79,7 +81,7 @@ export const AssetExchangesLiquidity: FC<AssetExchangesLiquidityProps> = ({
           </div>
         );
       },
-      title: <p className='w-full text-right'>Price</p>,
+      title: <p className='w-full text-right'>{t("asset.price")}</p>,
       visible: true,
       widthPx: 120,
     },
@@ -107,7 +109,7 @@ export const AssetExchangesLiquidity: FC<AssetExchangesLiquidityProps> = ({
           </div>
         );
       },
-      title: <p className='w-full text-right'>ADA Pooled</p>,
+      title: <p className='w-full text-right'>{t("asset.adaPooled")}</p>,
       visible: true,
       widthPx: 120,
     },
@@ -135,7 +137,11 @@ export const AssetExchangesLiquidity: FC<AssetExchangesLiquidityProps> = ({
           </div>
         );
       },
-      title: <p className='w-full text-right'>{ticker} Pooled</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("asset.tokenPooled", { ticker })}
+        </p>
+      ),
       visible: true,
       widthPx: 120,
     },
@@ -162,7 +168,7 @@ export const AssetExchangesLiquidity: FC<AssetExchangesLiquidityProps> = ({
     },
     series: [
       {
-        name: "ADA Liquidity",
+        name: t("asset.adaLiquidity"),
         type: "pie",
         radius: "60%",
         data: chartData,
@@ -201,6 +207,10 @@ export const AssetExchangesLiquidity: FC<AssetExchangesLiquidityProps> = ({
         minContentWidth={500}
         items={items}
         columns={columns}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </div>
   );

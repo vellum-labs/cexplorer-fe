@@ -1,6 +1,9 @@
 import { useHoverHighlightState } from "@/stores/states/hoverHighlightState";
 
-export const useHoverHighlight = (value: string, enableHover: boolean = false) => {
+export const useHoverHighlight = (
+  value: string,
+  enableHover: boolean = false,
+) => {
   const { hoverValue, setHoverValue } = useHoverHighlightState();
 
   const handleMouseEnter = () => {

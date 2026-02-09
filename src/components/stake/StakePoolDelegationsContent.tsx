@@ -18,6 +18,7 @@ import { Link, useSearch } from "@tanstack/react-router";
 import { format } from "date-fns";
 import { useEffect, useState, useMemo, type FC } from "react";
 import { ExternalLink } from "lucide-react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface StakePoolDelegationsContentProps {
   address: string;
@@ -27,6 +28,7 @@ interface StakePoolDelegationsContentProps {
 export const StakePoolDelegationsContent: FC<
   StakePoolDelegationsContentProps
 > = ({ address, miscConst }) => {
+  const { t } = useAppTranslation("pages");
   const [totalItems, setTotalItems] = useState(0);
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { page } = useSearch({ from: "/stake/$stakeAddr" });
@@ -89,7 +91,7 @@ export const StakePoolDelegationsContent: FC<
             "yyy-MM-dd HH:mm:ss",
           );
         },
-        title: <p>Date</p>,
+        title: <p>{t("common:labels.date")}</p>,
         visible: columnsVisibility.date,
         widthPx: 80,
       },
@@ -100,7 +102,11 @@ export const StakePoolDelegationsContent: FC<
             {item?.active_epoch_no}
           </div>
         ),
-        title: <p className='w-full text-right'>Active epoch</p>,
+        title: (
+          <p className='w-full text-right'>
+            {t("stake.detailPage.poolDelegationsTable.activeEpoch")}
+          </p>
+        ),
         visible: columnsVisibility.active_in,
         widthPx: 50,
       },
@@ -125,7 +131,7 @@ export const StakePoolDelegationsContent: FC<
 
           return ticker && name ? `[${ticker}] ${name}` : id;
         },
-        title: "Stake Pool",
+        title: t("stake.detailPage.poolDelegationsTable.stakePool"),
         visible: columnsVisibility.address,
         widthPx: 110,
       },
@@ -138,7 +144,7 @@ export const StakePoolDelegationsContent: FC<
         ),
         title: (
           <div className='flex w-full justify-end'>
-            <span>Active Stake</span>
+            <span>{t("common:labels.activeStake")}</span>
           </div>
         ),
         visible: columnsVisibility.amount,
@@ -157,7 +163,7 @@ export const StakePoolDelegationsContent: FC<
         title: (
           <div className='flex w-full justify-end'>
             <div className='flex w-fit cursor-pointer items-center gap-1/2 text-right'>
-              <span>Loyalty</span>
+              <span>{t("common:labels.loyalty")}</span>
             </div>
           </div>
         ),
@@ -204,7 +210,9 @@ export const StakePoolDelegationsContent: FC<
             "yyy-MM-dd HH:mm:ss",
           );
         },
-        title: <p className='w-full text-right'>Registered</p>,
+        title: (
+          <p className='w-full text-right'>{t("common:labels.registered")}</p>
+        ),
         visible: columnsVisibility.registered,
         widthPx: 80,
       },
@@ -224,7 +232,7 @@ export const StakePoolDelegationsContent: FC<
         jsonFormat: item => item.tx.hash,
         title: (
           <div className='flex w-full justify-end'>
-            <span>Tx</span>
+            <span>{t("common:labels.tx")}</span>
           </div>
         ),
         visible: columnsVisibility.tx,
@@ -244,15 +252,18 @@ export const StakePoolDelegationsContent: FC<
     <section className='flex flex-col gap-4'>
       <div className='flex flex-col'>
         <div className='flex items-center justify-between gap-1'>
-          <h3 className='my-2'>Delegation history</h3>
+          <h3 className='my-2'>
+            {t("stake.detailPage.poolDelegationsTable.delegationHistory")}
+          </h3>
           <div className='flex items-center gap-1'>
             <ExportButton columns={delegationColumns} items={items} />
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={accountDelegationsTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -277,6 +288,10 @@ export const StakePoolDelegationsContent: FC<
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </div>
       <MultiDelegationsTable address={address} miscConst={miscConst} />

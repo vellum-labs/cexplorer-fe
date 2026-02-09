@@ -1,0 +1,93 @@
+{
+  "header": {
+    "featuredLabel": "Featured:",
+    "adLabel": "Ad"
+  },
+  "globalSearch": {
+    "recentlySearched": "Recently searched",
+    "noRecentSearches": "You don't have recent searches",
+    "homepagePlaceholder": "Search by Address / Tx hash / Block hash / $Handle / Pool name...",
+    "placeholder": "Search blocks, transactions, asset IDs...",
+    "notFoundLabel": "Not Found",
+    "categories": {
+      "all": "$t(shared:all)",
+      "tx": "$t(shared:tx)",
+      "block": "Block",
+      "pool": "$t(shared:pool)",
+      "asset": "$t(shared:asset)",
+      "policy": "$t(shared:title12)",
+      "address": "$t(shared:address)",
+      "stake": "$t(shared:stake)",
+      "adahandle": "ADA Handle",
+      "user": "User",
+      "article": "Article",
+      "page": "Page",
+      "gov": "Gov",
+      "drep": "$t(shared:drep)"
+    }
+  },
+  "pagination": {
+    "morePages": "More pages",
+    "nextPage": "Go to next page",
+    "previousPage": "Go to previous page"
+  },
+  "noResultsFound": "No results found",
+  "jsonDisplay": {
+    "noDataLabel": "No data found"
+  },
+  "exportTable": {
+    "title": "Export table",
+    "csvLabel": "CSV",
+    "csvDescription": "Great for easy viewing in spreadsheet tools.",
+    "jsonLabel": "JSON",
+    "jsonDescription": "Best for structured data and app integration.",
+    "cancelLabel": "$t(shared:cancelLabel)",
+    "exportLabel": "Export"
+  },
+  "sensitiveContent": {
+    "rememberLabel": "Remember this setting",
+    "displayLabel": "Display"
+  },
+  "safetyLink": {
+    "warningText": "You are switching to an external, unmoderated url: ",
+    "goBackLabel": "Go back",
+    "visitLabel": "Visit"
+  },
+  "displayVote": {
+    "placeholder": "Search governance action ID...",
+    "emptyStateMessage": "Looks like you're missing a Gov Action ID. Enter one to find results!",
+    "noResultsMessage": "No results. Check your input and try again.",
+    "typeLabel": "$t(shared:type)",
+    "titleLabel": "Title",
+    "idLabel": "$t(shared:id)",
+    "identLabel": "Ident",
+    "cancelLabel": "$t(shared:cancelLabel)",
+    "addActionLabel": "Add governance action"
+  },
+  "featureModal": {
+    "title": "Cexplorer PRO feature",
+    "subTitle": "To access premium features, you need to own a Cexplorer NFT...",
+    "cancelLabel": "$t(shared:cancelLabel)",
+    "connectWalletLabel": "$t(shared:connect)",
+    "getProLabel": "Get a PRO"
+  },
+  "delegatorsLabel": {
+    "label": "$t(shared:delegators)",
+    "tooltipText": "Excluding delegators with stake less than {{minDelegationAda}} ADA"
+  },
+  "stakeCell": {
+    "unknownLabel": "$t(shared:unknown)"
+  },
+  "votingBreakdownTooltip": {
+    "voteLabel": "Vote",
+    "votersLabel": "Voters",
+    "voterLabel": "Voter",
+    "delegatorsLabel": "$t(shared:delegators)",
+    "noConfidenceLabel": "No confidence delegators",
+    "autoAbstainStakeLabel": "Auto abstain stake",
+    "manualAbstainStakeLabel": "Manual abstain stake",
+    "stakePoolSingular": "Stake pool",
+    "stakePoolPlural": "$t(shared:stakePools)",
+    "delegatorSingular": "Delegator"
+  }
+}

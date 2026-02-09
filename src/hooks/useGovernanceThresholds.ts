@@ -5,25 +5,27 @@ import type { ThresholdPoolList } from "@/types/governanceTypes";
 
 export const useGovernanceThresholds = () => {
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
   const query = useFetchThreshold();
-
+  const epochParam = query.data?.data?.params;
 
   const drepList = query.data?.data?.drep_list?.data ?? [];
 
   const filteredDReps = drepList;
 
   const latestStat = query?.data?.data.gov_stat.stat?.[0];
-  
-  const totalDelegatedToAlwaysNoConfidence = latestStat?.drep_always_no_confidence?.power ?? 0;
+
+  const totalDelegatedToAlwaysNoConfidence =
+    latestStat?.drep_always_no_confidence?.power ?? 0;
   const humanDRepStake = latestStat?.other?.power ?? 0;
 
   const activeVotingStake = humanDRepStake + totalDelegatedToAlwaysNoConfidence;
 
-
   const govCommittee = query?.data?.data?.gov_committee_detail;
+  const activeCCMembers =
+    govCommittee?.member?.filter(m => !m.de_registration) ?? [];
   const ccData = {
-    count: govCommittee?.member?.length ?? 0,
+    count: activeCCMembers.length,
     quorum_numerator: govCommittee?.committee?.quorum_numerator ?? 0,
     quorum_denominator: govCommittee?.committee?.quorum_denominator ?? 1,
   };
@@ -33,13 +35,17 @@ export const useGovernanceThresholds = () => {
   const poolList = query?.data?.data?.pool_list ?? ({} as ThresholdPoolList);
   const totalSpoStake = query?.data?.data?.epoch_stats?.stake?.epoch ?? 0;
 
-  const generateProps = (params: any, visibility: any, isSecuryTitle = false) => ({
+  const generateProps = (
+    params: any,
+    visibility: any,
+    isSecuryTitle = false,
+  ) => ({
     params,
     filteredDReps,
     activeVotingStake,
     visibility,
     isSecuryTitle,
-    epochParam: miscConst?.epoch_param,
+    epochParam,
     poolsCount,
     drepsCount,
     poolList,

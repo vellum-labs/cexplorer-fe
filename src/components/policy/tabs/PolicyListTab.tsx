@@ -10,8 +10,10 @@ import { useFetchPolicyList } from "@/services/user";
 import type { PolicyData } from "@/types/userTypes";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const PolicyListTab: FC = () => {
+  const { t } = useAppTranslation("common");
   const token = useAuthToken();
   const policyListQuery = useFetchPolicyList(token);
 
@@ -20,7 +22,9 @@ export const PolicyListTab: FC = () => {
   if (!token) {
     return (
       <div className='flex h-64 items-center justify-center'>
-        <div className='text-grayTextPrimary'>Please connect your wallet</div>
+        <div className='text-grayTextPrimary'>
+          {t("policy.pleaseConnectWallet")}
+        </div>
       </div>
     );
   }
@@ -41,7 +45,7 @@ export const PolicyListTab: FC = () => {
           <Copy copyText={item.id} />
         </div>
       ),
-      title: "Collection",
+      title: t("policy.collection"),
       visible: true,
       widthPx: 200,
     },
@@ -52,7 +56,7 @@ export const PolicyListTab: FC = () => {
           {formatNumber(item.policy.quantity)}
         </span>
       ),
-      title: "Quantity",
+      title: t("policy.quantity"),
       visible: true,
       widthPx: 100,
     },
@@ -63,28 +67,28 @@ export const PolicyListTab: FC = () => {
           {formatNumber(item.collection.stats.owners)}
         </span>
       ),
-      title: "Owners",
+      title: t("policy.owners"),
       visible: true,
       widthPx: 100,
     },
     {
       key: "floor",
       render: item => <AdaWithTooltip data={item.collection.stats.floor} />,
-      title: "Floor Price",
+      title: t("policy.floorPrice"),
       visible: true,
       widthPx: 120,
     },
     {
       key: "volume",
       render: item => <AdaWithTooltip data={item.collection.stats.volume} />,
-      title: "Volume",
+      title: t("policy.volume"),
       visible: true,
       widthPx: 120,
     },
     {
       key: "last_mint",
       render: item => <DateCell time={item.policy.last_mint} />,
-      title: "Last Mint",
+      title: t("policy.lastMint"),
       visible: true,
       widthPx: 120,
     },
@@ -93,7 +97,9 @@ export const PolicyListTab: FC = () => {
   if (policyListQuery?.isLoading) {
     return (
       <div className='flex h-64 items-center justify-center'>
-        <div className='text-grayTextPrimary'>Loading policies...</div>
+        <div className='text-grayTextPrimary'>
+          {t("policy.loadingPolicies")}
+        </div>
       </div>
     );
   }
@@ -101,7 +107,7 @@ export const PolicyListTab: FC = () => {
   if (policyListQuery?.isError) {
     return (
       <div className='flex h-64 items-center justify-center'>
-        <div className='text-red-500'>Error loading policies</div>
+        <div className='text-red-500'>{t("policy.errorLoadingPolicies")}</div>
       </div>
     );
   }
@@ -118,6 +124,10 @@ export const PolicyListTab: FC = () => {
         minContentWidth={820}
         items={data}
         columns={columns}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </div>
   );

@@ -8,7 +8,7 @@ import DelegationsTabItem from "@/components/tx/tabs/DelegationsTabItem";
 import { GovernanceTabItem } from "@/components/tx/tabs/GovernanceTabItem";
 import MetadataTabItem from "@/components/tx/tabs/MetadataTabItem";
 import MintTabItem from "@/components/tx/tabs/MintTabItem";
-import OverviewTabItem from "@/components/tx/tabs/OverviewTabItem";
+import { OverviewTabItem } from "@/components/tx/tabs/OverviewTabItem";
 import ReferenceInputsTabItem from "@/components/tx/tabs/ReferenceInputsTabItem";
 import { ScriptsTabItem } from "@/components/tx/tabs/ScriptsTabItem";
 import WithdrawalsTabItem from "@/components/tx/tabs/WithdrawalsTabItem";
@@ -21,10 +21,12 @@ import { Fragment, useEffect, useState } from "react";
 import { getAddonsForMetadata } from "@/utils/addons/getAddonsForMetadata";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { LabelBadge } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const TxDetailPage = () => {
   const route = getRouteApi("/tx/$hash");
   const { hash } = route.useParams();
+  const { t } = useAppTranslation("pages");
 
   const { page } = useSearch({
     from: "/tx/$hash",
@@ -48,19 +50,19 @@ const TxDetailPage = () => {
   const txTabItems = [
     {
       key: "content",
-      label: "Content",
+      label: t("transactions.tabs.content"),
       content: <ContentTabItem />,
       visible: true,
     },
     {
       key: "overview",
-      label: "Overview",
+      label: t("transactions.tabs.overview"),
       content: <OverviewTabItem query={query} />,
       visible: true,
     },
     {
       key: "scripts",
-      label: "Scripts",
+      label: t("transactions.tabs.scripts"),
       content: <ScriptsTabItem />,
       visible: !!data?.all_outputs?.some(output => output.reference_script),
     },
@@ -68,13 +70,13 @@ const TxDetailPage = () => {
       key: "contracts",
       label: (
         <span className='flex items-center gap-1'>
-          Contracts{" "}
+          {t("transactions.tabs.contracts")}{" "}
           <Badge small color='gray'>
             {data?.plutus_contracts?.length}
           </Badge>
         </span>
       ),
-      title: "Contracts",
+      title: t("transactions.tabs.contracts"),
       content: <ContractsTabItem />,
       visible: !!data?.plutus_contracts?.length,
     },
@@ -82,19 +84,19 @@ const TxDetailPage = () => {
       key: "collateral",
       label: (
         <span className='flex items-center gap-1'>
-          Collateral
+          {t("transactions.tabs.collateral")}
           <Badge small color='gray'>
             {data?.collateral_inputs?.length}
           </Badge>
         </span>
       ),
-      title: "Collateral",
+      title: t("transactions.tabs.collateral"),
       content: <CollateralTabItem />,
       visible: !!data?.collateral_inputs?.length,
     },
     {
       key: "metadata",
-      label: "Metadata",
+      label: t("transactions.tabs.metadata"),
       content: <MetadataTabItem />,
       visible: !!data?.metadata?.length,
     },
@@ -102,13 +104,13 @@ const TxDetailPage = () => {
       key: "mint",
       label: (
         <span className='flex items-center gap-1'>
-          Mints
+          {t("transactions.tabs.mints")}
           <Badge small color='gray'>
             {data?.mints?.length}
           </Badge>
         </span>
       ),
-      title: "Mints",
+      title: t("transactions.tabs.mints"),
       content: <MintTabItem />,
       visible: !!data?.mints?.length,
     },
@@ -116,13 +118,13 @@ const TxDetailPage = () => {
       key: "withdrawals",
       label: (
         <span className='flex items-center gap-1'>
-          Withdrawals
+          {t("transactions.tabs.withdrawals")}
           <Badge small color='gray'>
             {data?.all_withdrawals?.length}
           </Badge>
         </span>
       ),
-      title: "Withdrawals",
+      title: t("transactions.tabs.withdrawals"),
       content: <WithdrawalsTabItem />,
       visible: !!data?.all_withdrawals?.length,
     },
@@ -130,13 +132,13 @@ const TxDetailPage = () => {
       key: "inputs",
       label: (
         <span className='flex items-center gap-1'>
-          Reference inputs
+          {t("transactions.tabs.referenceInputs")}
           <Badge small color='gray'>
             {data?.reference_inputs?.length}
           </Badge>
         </span>
       ),
-      title: "Reference inputs",
+      title: t("transactions.tabs.referenceInputs"),
       content: <ReferenceInputsTabItem />,
       visible: !!data?.reference_inputs?.length,
     },
@@ -144,13 +146,13 @@ const TxDetailPage = () => {
       key: "delegations",
       label: (
         <span className='flex items-center gap-1'>
-          Delegations
+          {t("transactions.tabs.delegations")}
           <Badge small color='gray'>
             {data?.delegation?.length}
           </Badge>
         </span>
       ),
-      title: "Delegations",
+      title: t("transactions.tabs.delegations"),
       content: <DelegationsTabItem />,
       visible: !!data?.delegation?.length,
     },
@@ -158,19 +160,19 @@ const TxDetailPage = () => {
       key: "governance",
       label: (
         <span className='flex items-center gap-1'>
-          Governance
+          {t("transactions.tabs.governance")}
           <Badge small color='gray'>
             {data?.governance?.voting_procedure?.length}
           </Badge>
         </span>
       ),
-      title: "Governance",
+      title: t("transactions.tabs.governance"),
       content: <GovernanceTabItem />,
       visible: !!data?.governance?.voting_procedure?.length,
     },
     {
       key: "trading",
-      label: "Trading",
+      label: t("transactions.tabs.trading"),
       content: () => (
         <DeFiOrderList
           storeKey='tx_detail_page_defi_order'
@@ -184,7 +186,7 @@ const TxDetailPage = () => {
     },
     {
       key: "view",
-      label: "Message",
+      label: t("transactions.tabs.message"),
       content:
         addonComponents.length > 0 &&
         addonComponents.map(item => item.component),
@@ -211,7 +213,7 @@ const TxDetailPage = () => {
         {
           label: (
             <span className='inline pt-1/2'>
-              Epoch{" "}
+              {t("epochs.title")}{" "}
               {data?.epoch_param?.epoch_no &&
                 `(${data?.epoch_param?.epoch_no})`}
             </span>
@@ -228,7 +230,8 @@ const TxDetailPage = () => {
         {
           label: (
             <span className='inline pt-1/2'>
-              Block {data?.block?.no && `(${formatNumber(data?.block?.no)})`}
+              {t("blocks.title")}{" "}
+              {data?.block?.no && `(${formatNumber(data?.block?.no)})`}
             </span>
           ),
           ...(data?.block?.hash
@@ -245,7 +248,7 @@ const TxDetailPage = () => {
           ident: hash,
         },
       ]}
-      title='Transaction detail'
+      title={t("transactions.detail")}
       subTitle={
         <HeaderBannerSubtitle
           hashString={formatString(hash ?? "", "long")}

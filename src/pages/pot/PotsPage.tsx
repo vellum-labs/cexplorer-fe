@@ -28,14 +28,16 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { generateImageUrl } from "@/utils/generateImageUrl";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const PotsPage = () => {
+  const { t } = useAppTranslation("common");
   const [
     { debouncedTableSearch: debouncedSearch, tableSearch },
     setTableSearch,
   ] = useSearchTable();
 
-  const [items, setItems] = useState<AdaPot[] | undefined>([]);
+  const [graphItems, setGraphItems] = useState<AdaPot[] | undefined>([]);
   const {
     columnsOrder,
     setColumsOrder,
@@ -46,7 +48,9 @@ export const PotsPage = () => {
     epochsToShow,
     setEpochsToShow,
   } = useAdaPotsTableStore();
+
   const query = useFetchAdaPots();
+  const allData = query.data?.data.data ?? [];
   const count = query.data?.data.count ?? 0;
 
   const miscBasicQuery = useFetchMiscBasic();
@@ -54,37 +58,37 @@ export const PotsPage = () => {
   const sortOptions = [
     {
       key: "all",
-      value: "All",
+      value: t("pots.sortOptions.all"),
     },
     {
       key: "10",
-      value: "Last 10",
+      value: t("pots.sortOptions.last10"),
     },
     {
       key: "25",
-      value: "Last 25",
+      value: t("pots.sortOptions.last25"),
     },
     {
       key: "50",
-      value: "Last 50",
+      value: t("pots.sortOptions.last50"),
     },
     {
       key: "100",
-      value: "Last 100",
+      value: t("pots.sortOptions.last100"),
     },
   ];
 
   const columns: TableColumns<AdaPot> = [
     {
       key: "epoch",
-      title: <p className='w-full text-right'>Epoch</p>,
+      title: <p className='w-full text-right'>{t("pots.table.epoch")}</p>,
       render: item => <EpochCell no={item.epoch_no} />,
       visible: columnsVisibility.epoch,
       widthPx: 30,
     },
     {
       key: "treasury",
-      title: <p className='w-full text-right'>Treasury</p>,
+      title: <p className='w-full text-right'>{t("pots.table.treasury")}</p>,
       render: item => (
         <span className='flex items-center justify-end'>
           <AdaWithTooltip data={item.treasury} />
@@ -95,7 +99,7 @@ export const PotsPage = () => {
     },
     {
       key: "reserves",
-      title: <p className='w-full text-right'>Reserves</p>,
+      title: <p className='w-full text-right'>{t("pots.table.reserves")}</p>,
       render: item => (
         <span className='flex items-center justify-end'>
           <AdaWithTooltip data={item.reserves} />
@@ -106,7 +110,7 @@ export const PotsPage = () => {
     },
     {
       key: "rewards",
-      title: <p className='w-full text-right'>Rewards</p>,
+      title: <p className='w-full text-right'>{t("pots.table.rewards")}</p>,
       render: item => (
         <span className='flex items-center justify-end'>
           <AdaWithTooltip data={item.rewards} />
@@ -117,7 +121,7 @@ export const PotsPage = () => {
     },
     {
       key: "utxo",
-      title: <p className='w-full text-right'>UTXO</p>,
+      title: <p className='w-full text-right'>{t("pots.table.utxo")}</p>,
       render: item => (
         <span className='flex items-center justify-end'>
           <AdaWithTooltip data={item.utxo} />
@@ -128,7 +132,7 @@ export const PotsPage = () => {
     },
     {
       key: "deposits",
-      title: <p className='w-full text-right'>Deposits</p>,
+      title: <p className='w-full text-right'>{t("pots.table.deposits")}</p>,
       render: item => (
         <span className='flex items-center justify-end'>
           <AdaWithTooltip data={item.deposits_stake} />
@@ -139,7 +143,7 @@ export const PotsPage = () => {
     },
     {
       key: "fees",
-      title: <p className='w-full text-right'>Fees</p>,
+      title: <p className='w-full text-right'>{t("pots.table.fees")}</p>,
       render: item => (
         <span className='flex items-center justify-end'>
           <AdaWithTooltip data={item.fees} />
@@ -153,19 +157,19 @@ export const PotsPage = () => {
   useEffect(() => {
     if (!epochsToShow) return;
     if (epochsToShow === "all") {
-      setItems(query.data?.data.data);
+      setGraphItems(allData);
       return;
     }
-    setItems(query.data?.data.data.slice(0, Number(epochsToShow)));
-  }, [epochsToShow, query.data]);
+    setGraphItems(allData.slice(0, Number(epochsToShow)));
+  }, [epochsToShow, allData]);
 
   return (
     <>
       <Helmet>{<title>{metadata.adaPots.title}</title>}</Helmet>
       <main className='flex min-h-minHeight w-full flex-col items-center'>
         <HeaderBanner
-          title='Pots'
-          breadcrumbItems={[{ label: "Pots" }]}
+          title={t("pots.title")}
+          breadcrumbItems={[{ label: t("pots.breadcrumb") }]}
           subTitle
         />
         <AdsCarousel
@@ -175,7 +179,7 @@ export const PotsPage = () => {
         <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
           <div className='mb-1 ml-auto flex items-center'>
             <span className='mr-1 text-text-sm text-grayTextPrimary'>
-              Graph epochs:{" "}
+              {t("pots.graphEpochs")}{" "}
             </span>
             <SortBy
               selectedItem={epochsToShow}
@@ -184,14 +188,14 @@ export const PotsPage = () => {
               label={false}
             />
           </div>
-          <AdaPotsChart data={items} />
+          <AdaPotsChart data={graphItems} />
           <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
             <div className='flex w-full flex-wrap items-center justify-between gap-1 sm:flex-nowrap'>
               {query.isLoading || query.isFetching ? (
                 <LoadingSkeleton height='27px' width={"220px"} />
               ) : count > 0 ? (
                 <h3 className='basis-[230px] text-nowrap'>
-                  Total of {formatNumber(count)} epochs
+                  {t("pots.totalEpochs", { total: formatNumber(count) })}
                 </h3>
               ) : (
                 ""
@@ -202,9 +206,10 @@ export const PotsPage = () => {
                   <TableSettingsDropdown
                     rows={rows}
                     setRows={setRows}
+                    rowsLabel={t("table.rows")}
                     columnsOptions={adaPotsTableOptions.map(item => {
                       return {
-                        label: item.name,
+                        label: t(`tableSettings.${item.key}`),
                         isVisible: columnsVisibility[item.key],
                         onClick: () =>
                           setColumnVisibility(
@@ -220,7 +225,7 @@ export const PotsPage = () => {
 
             <div className='flex gap-1'>
               <TableSearchInput
-                placeholder='Search  your results...'
+                placeholder={t("pots.searchPlaceholder")}
                 value={tableSearch}
                 onchange={setTableSearch}
                 wrapperClassName='md:w-[320px] w-full '
@@ -232,9 +237,10 @@ export const PotsPage = () => {
                 <TableSettingsDropdown
                   rows={rows}
                   setRows={setRows}
+                  rowsLabel={t("table.rows")}
                   columnsOptions={adaPotsTableOptions.map(item => {
                     return {
-                      label: item.name,
+                      label: t(`tableSettings.${item.key}`),
                       isVisible: columnsVisibility[item.key],
                       onClick: () =>
                         setColumnVisibility(
@@ -249,15 +255,14 @@ export const PotsPage = () => {
           </div>
           <GlobalTable
             type='default'
-            pagination={true}
+            itemsPerPage={rows}
             totalItems={count}
             scrollable
+            pagination
             query={query}
-            items={
-              items?.filter(item =>
-                String(item.epoch_no).includes(debouncedSearch),
-              ) ?? []
-            }
+            items={allData.filter(item =>
+              String(item.epoch_no).includes(debouncedSearch),
+            )}
             columns={columns.sort((a, b) => {
               return (
                 columnsOrder.indexOf(a.key as keyof AdaPotsTableColumns) -
@@ -265,6 +270,13 @@ export const PotsPage = () => {
               );
             })}
             onOrderChange={setColumsOrder}
+            renderDisplayText={(displayCount, total) =>
+              t("table.displaying", {
+                count: displayCount,
+                total,
+              })
+            }
+            noItemsLabel={t("table.noItems")}
           />
         </section>
       </main>
@@ -273,6 +285,7 @@ export const PotsPage = () => {
 };
 
 const AdaPotsChart = ({ data }: { data: AdaPot[] | undefined }) => {
+  const { t } = useAppTranslation("common");
   const epochs = data?.map(item => item.epoch_no);
   const treasury = data?.map(item => item.treasury);
   const reserves = data?.map(item => item.reserves);
@@ -282,15 +295,24 @@ const AdaPotsChart = ({ data }: { data: AdaPot[] | undefined }) => {
   const fees = data?.map(item => item.fees);
 
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
+
+  const chartLabels = {
+    treasury: t("pots.chart.treasury"),
+    reserves: t("pots.chart.reserves"),
+    rewards: t("pots.chart.rewards"),
+    utxo: t("pots.chart.utxo"),
+    deposits: t("pots.chart.deposits"),
+    fees: t("pots.chart.fees"),
+  };
 
   const [graphsVisibility, setGraphsVisibility] = useState({
-    Treasury: true,
-    Reserves: true,
-    Rewards: true,
-    UTXO: true,
-    Deposits: true,
-    Fees: true,
+    [chartLabels.treasury]: true,
+    [chartLabels.reserves]: true,
+    [chartLabels.rewards]: true,
+    [chartLabels.utxo]: true,
+    [chartLabels.deposits]: true,
+    [chartLabels.fees]: true,
   });
   const { textColor, bgColor, splitLineColor, inactivePageIconColor } =
     useGraphColors();
@@ -323,7 +345,14 @@ const AdaPotsChart = ({ data }: { data: AdaPot[] | undefined }) => {
           color: textColor,
         },
         type: "scroll",
-        data: ["Treasury", "Reserves", "Rewards", "UTXO", "Deposits", "Fees"],
+        data: [
+          chartLabels.treasury,
+          chartLabels.reserves,
+          chartLabels.rewards,
+          chartLabels.utxo,
+          chartLabels.deposits,
+          chartLabels.fees,
+        ],
         textStyle: {
           color: textColor,
         },
@@ -347,10 +376,10 @@ const AdaPotsChart = ({ data }: { data: AdaPot[] | undefined }) => {
             miscConst?.epoch.start_time ?? "",
           );
 
-          const header = `Date: ${format(startTime, "dd.MM.yy")} - ${format(
+          const header = `${t("pots.chart.date")}: ${format(startTime, "dd.MM.yy")} - ${format(
             endTime,
             "dd.MM.yy",
-          )} (Epoch: ${epoch})<hr style="margin: 4px 0;" />`;
+          )} (${t("pots.chart.epoch")}: ${epoch})<hr style="margin: 4px 0;" />`;
 
           const body = params
             .map(item => {
@@ -373,7 +402,7 @@ const AdaPotsChart = ({ data }: { data: AdaPot[] | undefined }) => {
         type: "category",
         data: epochs,
         inverse: true,
-        name: "Epoch",
+        name: t("pots.chart.epoch"),
         nameLocation: "middle",
         nameGap: 28,
         axisLabel: {
@@ -390,7 +419,7 @@ const AdaPotsChart = ({ data }: { data: AdaPot[] | undefined }) => {
           type: "value",
           position: "left",
           show: true,
-          name: "Amount",
+          name: t("pots.chart.amount"),
           nameRotate: 90,
           nameLocation: "middle",
           nameGap: 5,
@@ -532,7 +561,7 @@ const AdaPotsChart = ({ data }: { data: AdaPot[] | undefined }) => {
         {
           type: "line",
           data: treasury,
-          name: "Treasury",
+          name: chartLabels.treasury,
           yAxisIndex: 0,
           itemStyle: {
             color: "#35c2f5",
@@ -543,7 +572,7 @@ const AdaPotsChart = ({ data }: { data: AdaPot[] | undefined }) => {
         {
           type: "bar",
           data: reserves,
-          name: "Reserves",
+          name: chartLabels.reserves,
           yAxisIndex: 1,
           itemStyle: {
             color: "rgba(145, 145, 145, 0.5)",
@@ -555,7 +584,7 @@ const AdaPotsChart = ({ data }: { data: AdaPot[] | undefined }) => {
         {
           type: "line",
           data: rewards,
-          name: "Rewards",
+          name: chartLabels.rewards,
           yAxisIndex: 2,
           itemStyle: {
             color: textColor,
@@ -569,7 +598,7 @@ const AdaPotsChart = ({ data }: { data: AdaPot[] | undefined }) => {
             opacity: 0.12,
           },
           data: utxo,
-          name: "UTXO",
+          name: chartLabels.utxo,
           yAxisIndex: 3,
           itemStyle: {
             color: "#21fc1e",
@@ -580,7 +609,7 @@ const AdaPotsChart = ({ data }: { data: AdaPot[] | undefined }) => {
         {
           type: "line",
           data: deposits,
-          name: "Deposits",
+          name: chartLabels.deposits,
           yAxisIndex: 4,
           areaStyle: {
             opacity: 0.12,
@@ -600,7 +629,7 @@ const AdaPotsChart = ({ data }: { data: AdaPot[] | undefined }) => {
         {
           type: "line",
           data: fees,
-          name: "Fees",
+          name: chartLabels.fees,
           yAxisIndex: 5,
           areaStyle: {
             opacity: 0.12,
@@ -626,6 +655,9 @@ const AdaPotsChart = ({ data }: { data: AdaPot[] | undefined }) => {
     rewards,
     treasury,
     utxo,
+    chartLabels,
+    t,
+    miscConst,
   ]);
 
   useEffect(() => {

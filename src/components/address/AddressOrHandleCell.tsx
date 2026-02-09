@@ -34,7 +34,9 @@ export const AddressOrHandleCell = ({
             <span className='hidden md:inline'>
               {formatString(address, "longer")}
             </span>
-            <span className='md:hidden'>{formatString(address, "shorter")}</span>
+            <span className='md:hidden'>
+              {formatString(address, "shorter")}
+            </span>
           </>
         )}
       </Link>

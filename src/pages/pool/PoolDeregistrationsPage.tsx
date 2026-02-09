@@ -22,8 +22,10 @@ import { useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { formatRemainingTime } from "@/utils/format/formatRemainingTime";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const PoolDeregistrationsPage = () => {
+  const { t } = useAppTranslation(["pages", "common"]);
   const [totalItems, setTotalItems] = useState(0);
   const { page } = useSearch({ from: "/pool/deregistrations" });
   const {
@@ -50,7 +52,7 @@ export const PoolDeregistrationsPage = () => {
 
         return item.block.time;
       },
-      title: "Date",
+      title: t("common:labels.date"),
       visible: columnsVisibility.date,
       widthPx: 30,
     },
@@ -63,7 +65,7 @@ export const PoolDeregistrationsPage = () => {
 
         return <div>{formatRemainingTime(timeDifference / 1000)}</div>;
       },
-      title: "Longetivity",
+      title: t("common:labels.longevity"),
       visible: columnsVisibility.longetivity,
       widthPx: 40,
     },
@@ -85,7 +87,7 @@ export const PoolDeregistrationsPage = () => {
 
         return item?.data?.view;
       },
-      title: <p>Pool</p>,
+      title: <p>{t("common:labels.pool")}</p>,
       visible: columnsVisibility.view,
       widthPx: 50,
     },
@@ -96,7 +98,7 @@ export const PoolDeregistrationsPage = () => {
           <AdaWithTooltip data={item.tx.deposit} />
         </div>
       ),
-      title: <p className='w-full text-right'>Deposit</p>,
+      title: <p className='w-full text-right'>{t("common:labels.deposit")}</p>,
       visible: columnsVisibility.deposit,
       widthPx: 40,
     },
@@ -107,7 +109,7 @@ export const PoolDeregistrationsPage = () => {
           <AdaWithTooltip data={item.tx.fee} />
         </div>
       ),
-      title: <p className='w-full text-right'>Fee</p>,
+      title: <p className='w-full text-right'>{t("common:labels.fee")}</p>,
       visible: columnsVisibility.fee,
       widthPx: 50,
     },
@@ -121,7 +123,7 @@ export const PoolDeregistrationsPage = () => {
 
         return item.tx.hash;
       },
-      title: "TX hash",
+      title: t("common:labels.txHash"),
       visible: columnsVisibility.hash,
       widthPx: 40,
     },
@@ -140,7 +142,9 @@ export const PoolDeregistrationsPage = () => {
 
         return `${item.block.epoch_no}/${item.block.no}`;
       },
-      title: <p className='w-full text-right'>Epoch/Block</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.epochBlock")}</p>
+      ),
       visible: columnsVisibility.epoch_block,
       widthPx: 40,
     },
@@ -155,8 +159,8 @@ export const PoolDeregistrationsPage = () => {
   return (
     <PageBase
       metadataTitle='poolDeregistrations'
-      title='Pool deregistrations'
-      breadcrumbItems={[{ label: "Pool deregistrations" }]}
+      title={t("pools.deregistrations.title")}
+      breadcrumbItems={[{ label: t("pools.deregistrations.title") }]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='mb-2 flex w-full items-center justify-between gap-1'>
@@ -164,7 +168,8 @@ export const PoolDeregistrationsPage = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[230px]'>
-              Total of {formatNumber(totalItems ?? 0)} deregistrations
+              {t("common:phrases.totalOf")} {formatNumber(totalItems ?? 0)}{" "}
+              {t("pools.deregistrations.totalOfSuffix")}
             </h3>
           )}
           <div className='flex items-center gap-1'>
@@ -172,9 +177,10 @@ export const PoolDeregistrationsPage = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={poolDeregistrationsTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -198,6 +204,10 @@ export const PoolDeregistrationsPage = () => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </section>
     </PageBase>

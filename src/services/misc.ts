@@ -9,8 +9,11 @@ import type {
   MiscConstResponse,
   MiscHealthResponse,
   MiscNewResponse,
+  MiscPaymentResponse,
   MiscRateResponse,
   MiscSearchResponse,
+  PaymentAction,
+  PromotionType,
 } from "@/types/miscTypes";
 import type { Locales } from "@/types/storeTypes";
 import type {
@@ -19,6 +22,10 @@ import type {
   PollListResponse,
 } from "@/types/userTypes";
 import { useQuery } from "@tanstack/react-query";
+
+const toApiLang = (locale: Locales): string => {
+  return locale;
+};
 
 export const fetchMiscApi = async () => {
   const url = "/misc/api";
@@ -145,8 +152,9 @@ const fetchMiscSearch = (
       query,
       category,
       ...(category &&
-        localeCategories.includes(category) && {
-          lng: locale,
+        localeCategories.includes(category) &&
+        locale && {
+          lng: toApiLang(locale),
         }),
     },
   };
@@ -209,3 +217,20 @@ export const useFetchMiscValidate = (
     queryFn: async () => await miscValidate(type, ident),
     enabled: !!ident,
   });
+
+export const miscPayment = async (
+  action: PaymentAction,
+  type: PromotionType,
+  ident: string,
+) => {
+  const url = "/misc/payment";
+  const options = {
+    params: {
+      action,
+      type,
+      ident,
+    },
+  };
+
+  return handleFetch<MiscPaymentResponse>(url, undefined, options, true);
+};

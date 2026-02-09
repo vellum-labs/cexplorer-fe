@@ -375,7 +375,12 @@ export const useCreateAdminArticle = ({
   onError?: (error: Error) => void;
 }) => {
   return useMutation({
-    mutationFn: (body: { name: string; lng: string; type: string; render: string }) =>
+    mutationFn: (body: {
+      name: string;
+      lng: string;
+      type: string;
+      render: string;
+    }) =>
       fetchAdminArticle({
         token,
         type: "create",

@@ -10,6 +10,7 @@ import { format } from "date-fns";
 import ReactEcharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import type { MiscConstResponseData } from "@/types/miscTypes";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface EpochBars {
   stats: EpochStatsSummary;
@@ -24,6 +25,7 @@ export const EpochBars: FC<EpochBars> = ({
   isLoading,
   constData,
 }) => {
+  const { t } = useAppTranslation("pages");
   const { formatLovelace } = useADADisplay();
   const { bgColor, textColor } = useGraphColors();
 
@@ -47,7 +49,7 @@ export const EpochBars: FC<EpochBars> = ({
   const items = [
     {
       key: "blocks_in_epoch",
-      title: "Blocks in Epoch",
+      title: t("epochs.detailAnalytics.blocksInEpoch"),
       width: "600px",
       data: (stats?.daily || [])
         .map(item => item?.stat?.count_block ?? 0)
@@ -55,7 +57,7 @@ export const EpochBars: FC<EpochBars> = ({
     },
     {
       key: "txs_epoch",
-      title: "Transactions in Epoch",
+      title: t("epochs.detailAnalytics.transactionsInEpoch"),
       width: "600px",
       data: (stats?.daily || [])
         .map(item => item?.stat?.count_tx ?? 0)
@@ -63,7 +65,7 @@ export const EpochBars: FC<EpochBars> = ({
     },
     {
       key: "blk_size_used",
-      title: "Block Size Used",
+      title: t("epochs.detailAnalytics.blockSizeUsed"),
       width: "600px",
       data: (stats?.daily || [])
         .map(item => item?.stat?.avg_block_size ?? 0)
@@ -71,7 +73,7 @@ export const EpochBars: FC<EpochBars> = ({
     },
     {
       key: "new_wallets",
-      title: "New Wallets",
+      title: t("epochs.analyticsTab.newWallets"),
       width: "600px",
       data: (stats?.daily || [])
         .map(item => item?.stat?.count_tx_out_stake ?? 0)
@@ -79,7 +81,7 @@ export const EpochBars: FC<EpochBars> = ({
     },
     {
       key: "active_wallets",
-      title: "Active Wallets",
+      title: t("epochs.analyticsTab.activeWallets"),
       width: "100%",
       data: (stats?.daily || [])
         .map(item => item?.stat?.count_tx_out_address_not_yesterday ?? 0)
@@ -87,7 +89,7 @@ export const EpochBars: FC<EpochBars> = ({
     },
     {
       key: "fees_earned",
-      title: "Fees Earned",
+      title: t("epochs.detailAnalytics.feesEarned"),
       width: "600px",
       data: (stats?.daily || [])
         .map(item => item?.stat?.sum_fee ?? 0)
@@ -129,12 +131,12 @@ export const EpochBars: FC<EpochBars> = ({
         data: [
           {
             value: feesPercentage.toFixed(2),
-            name: "Fees",
+            name: t("epochs.detailAnalytics.fees"),
             itemStyle: { color: "#47CD89" },
           },
           {
             value: reservesPercentage.toFixed(2),
-            name: "Reserves",
+            name: t("epochs.detailAnalytics.reserves"),
             itemStyle: { color: "#FEC84B" },
           },
         ],
@@ -220,7 +222,7 @@ export const EpochBars: FC<EpochBars> = ({
             <div className='flex flex-col'>
               <h3>{title}</h3>
               <span className='text-text-md font-semibold text-grayTextPrimary'>
-                by day
+                {t("epochs.detailAnalytics.byDay")}
               </span>
             </div>
             {isLoading || isError ? (
@@ -240,9 +242,9 @@ export const EpochBars: FC<EpochBars> = ({
       })}
       <div className='flex h-[520px] w-full max-w-[650px] flex-grow flex-col gap-1 rounded-l border border-border p-3'>
         <div className='flex flex-col'>
-          <h3>Rewards Structure</h3>
+          <h3>{t("epochs.detailAnalytics.rewardsStructure")}</h3>
           <span className='text-text-md font-semibold text-grayTextPrimary'>
-            Earned by fees / Reserves
+            {t("epochs.detailAnalytics.earnedByFeesReserves")}
           </span>
         </div>
         <div className='relative w-full'>

@@ -4,8 +4,10 @@ import { Button as GlobalButton } from "@vellumlabs/cexplorer-sdk";
 import { Plus, RefreshCcw, Wand } from "lucide-react";
 
 import { useHomepageStore } from "@/stores/homepageStore";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const HomepageCustomize: FC = () => {
+  const { t } = useAppTranslation("common");
   const { handleCancel, handleSave, handleReset, setAddWidget } =
     useHomepageStore();
 
@@ -18,13 +20,13 @@ export const HomepageCustomize: FC = () => {
         >
           <Plus size={16} className='text-primary' />
           <span className='text-text-sm font-semibold text-primary'>
-            Add widget
+            {t("homepage.addWidget")}
           </span>
         </div>
         <div className='flex cursor-pointer items-center gap-1/2'>
           <Wand size={16} className='text-primary' />
           <span className='text-text-sm font-semibold text-primary'>
-            Automatically align
+            {t("homepage.automaticallyAlign")}
           </span>
         </div>
         <div
@@ -33,7 +35,7 @@ export const HomepageCustomize: FC = () => {
         >
           <RefreshCcw size={16} className='text-primary' />
           <span className='text-text-sm font-semibold text-primary'>
-            Reset to default
+            {t("homepage.resetToDefault")}
           </span>
         </div>
       </div>
@@ -41,14 +43,14 @@ export const HomepageCustomize: FC = () => {
         <GlobalButton
           size='md'
           variant='tertiary'
-          label='Cancel'
+          label={t("actions.cancel")}
           onClick={handleCancel}
         />
         <GlobalButton
           size='md'
           className='!py-[6.4px]'
           variant='primary'
-          label='Save settings'
+          label={t("homepage.saveSettings")}
           onClick={handleSave}
         />
       </div>

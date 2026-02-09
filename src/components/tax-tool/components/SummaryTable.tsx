@@ -14,6 +14,7 @@ import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import { useTaxToolSummaryTableStore } from "@/stores/tables/taxToolSummaryTableStore";
 import type { UseQueryResult } from "@tanstack/react-query";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface SummaryData {
   period: string;
@@ -36,6 +37,7 @@ export const SummaryTable: FC<SummaryTableProps> = ({
   query,
   isOldestMonthIncomplete = false,
 }) => {
+  const { t } = useAppTranslation("common");
   const showSecondaryCurrency = secondaryCurrency !== "usd";
   const {
     columnsVisibility,
@@ -74,13 +76,15 @@ export const SummaryTable: FC<SummaryTableProps> = ({
 
   const columnLabels = useMemo(
     () => ({
-      period: "Period",
-      epochs: "Epochs",
-      rewards_ada: "Rewards ADA",
-      rewards_usd: "Rewards USD",
-      rewards_secondary: `Rewards ${secondaryCurrency.toUpperCase()}`,
+      period: t("taxTool.columns.period"),
+      epochs: t("taxTool.columns.epochs"),
+      rewards_ada: t("taxTool.columns.rewardsAda"),
+      rewards_usd: t("taxTool.columns.rewardsUsd"),
+      rewards_secondary: t("taxTool.columns.rewardsCurrency", {
+        currency: secondaryCurrency.toUpperCase(),
+      }),
     }),
-    [secondaryCurrency],
+    [secondaryCurrency, t],
   );
 
   const columns = useMemo(
@@ -98,8 +102,8 @@ export const SummaryTable: FC<SummaryTableProps> = ({
             <div className='flex items-center gap-1'>
               <span className='font-medium'>{formatPeriod(item.period)}</span>
               {showIncompleteBadge && (
-                <Tooltip content='This month may be incomplete due to data limit'>
-                  <Badge color='yellow'>Incomplete</Badge>
+                <Tooltip content={t("taxTool.tooltips.incompleteMonth")}>
+                  <Badge color='yellow'>{t("taxTool.incomplete")}</Badge>
                 </Tooltip>
               )}
             </div>
@@ -117,12 +121,12 @@ export const SummaryTable: FC<SummaryTableProps> = ({
         key: "rewards_ada",
         title: (
           <div className='flex w-full justify-end'>
-            <Tooltip content='Exchange rates from the epoch end date.'>
+            <Tooltip content={t("taxTool.tooltips.exchangeRatesEpoch")}>
               <div
                 className='flex cursor-help items-center gap-1'
                 style={{ pointerEvents: "auto" }}
               >
-                Rewards ADA
+                {t("taxTool.columns.rewardsAda")}
                 <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
               </div>
             </Tooltip>
@@ -149,12 +153,12 @@ export const SummaryTable: FC<SummaryTableProps> = ({
         key: "rewards_usd",
         title: (
           <div className='flex w-full justify-end'>
-            <Tooltip content='Exchange rates from the epoch end date.'>
+            <Tooltip content={t("taxTool.tooltips.exchangeRatesEpoch")}>
               <div
                 className='flex cursor-help items-center gap-1'
                 style={{ pointerEvents: "auto" }}
               >
-                Rewards USD
+                {t("taxTool.columns.rewardsUsd")}
                 <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
               </div>
             </Tooltip>
@@ -175,12 +179,14 @@ export const SummaryTable: FC<SummaryTableProps> = ({
         key: "rewards_secondary",
         title: (
           <div className='flex w-full justify-end'>
-            <Tooltip content='Exchange rates from the epoch end date.'>
+            <Tooltip content={t("taxTool.tooltips.exchangeRatesEpoch")}>
               <div
                 className='flex cursor-help items-center gap-1'
                 style={{ pointerEvents: "auto" }}
               >
-                Rewards {secondaryCurrency.toUpperCase()}
+                {t("taxTool.columns.rewardsCurrency", {
+                  currency: secondaryCurrency.toUpperCase(),
+                })}
                 <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
               </div>
             </Tooltip>
@@ -256,11 +262,12 @@ export const SummaryTable: FC<SummaryTableProps> = ({
   return (
     <div className='flex flex-col gap-2'>
       <div className='flex items-center justify-between'>
-        <h3 className='text-text-md font-semibold'>Summary</h3>
+        <h3 className='text-text-md font-semibold'>{t("taxTool.summary")}</h3>
         <div className='flex items-center gap-1'>
           <TableSettingsDropdown
             rows={itemsPerPage}
             setRows={handleRowsChange}
+            rowsLabel={t("table.rows")}
             columnsOptions={columnsOptions}
             rowOptions={[5, 10, 20, 30, 50]}
           />
@@ -280,12 +287,21 @@ export const SummaryTable: FC<SummaryTableProps> = ({
         items={paginatedData}
         columns={columns}
         disableDrag
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
       {totalItems > itemsPerPage && (
         <Pagination
           currentPage={page}
           setCurrentPage={setPage}
           totalPages={totalPages}
+          labels={{
+            ellipsisSrLabel: t("sdk:pagination.morePages"),
+            nextAriaLabel: t("sdk:pagination.nextPage"),
+            previousAriaLabel: t("sdk:pagination.previousPage"),
+          }}
         />
       )}
     </div>

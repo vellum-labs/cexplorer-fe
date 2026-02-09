@@ -6,6 +6,7 @@ import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import ReactEcharts from "echarts-for-react";
 import { AnalyticsGraph } from "@/components/analytics/AnalyticsGraph";
 import { useAdaPriceWithTVL } from "@/hooks/graphs/useAdaPriceWithTVL";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface TVLData {
   date: number;
@@ -19,6 +20,7 @@ interface AdaPriceWithTVLGraphProps {
 
 export const AdaPriceWithTVLGraph: FC<AdaPriceWithTVLGraphProps> = memo(
   function AdaPriceWithTVLGraph({ graphRates, tvlData }) {
+    const { t } = useAppTranslation("common");
     const {
       json,
       option,
@@ -39,7 +41,7 @@ export const AdaPriceWithTVLGraph: FC<AdaPriceWithTVLGraphProps> = memo(
 
     return (
       <AnalyticsGraph
-        title='ADA/BTC Price vs Total Value Locked (TVL)'
+        title={t("adaPrice.adaBtcPriceVsTvl")}
         exportButton
         graphSortData={{
           query: fakeQuery as any,

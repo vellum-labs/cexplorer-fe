@@ -15,15 +15,18 @@ import { useMiscConst } from "@/hooks/useMiscConst";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { GovernanceActionsTab } from "@/components/governance/tabs/GovernanceActionsTab";
 import { GovernanceTimelineTab } from "@/components/governance/tabs/GovernanceTimelineTab";
+import { TreasuryWithdrawalsTab } from "@/components/governance/tabs/TreasuryWithdrawalsTab";
 import { generateImageUrl } from "@/utils/generateImageUrl";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const GovernancePage: FC = () => {
+  const { t } = useAppTranslation();
   const drepStatQuery = useFetchDrepStat();
   const miscBasicQuery = useFetchMiscBasic(true);
 
   const { data: basicData } = miscBasicQuery;
 
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const { data: drepStat } = drepStatQuery;
 
@@ -31,7 +34,7 @@ export const GovernancePage: FC = () => {
     {
       key: "active_gov_actions",
       icon: <Asterisk className='text-primary' />,
-      label: "Governance actions",
+      label: t("governance.page.governanceActionsLabel"),
       content: (
         <p className='text-display-xs font-semibold'>
           {drepStat?.gov_action[0]?.total
@@ -42,20 +45,26 @@ export const GovernancePage: FC = () => {
       footer: (
         <div className='flex flex-wrap'>
           <div className='flex w-fit items-center gap-1/2 pr-3'>
-            <span className='text-text-sm text-grayTextPrimary'>Active</span>
+            <span className='text-text-sm text-grayTextPrimary'>
+              {t("governance.status.active")}
+            </span>
             <span className='text-text-sm text-[#10B981]'>
               {drepStat?.gov_action[0]?.active || 0}
             </span>
           </div>
           <div className='flex w-fit items-center gap-1/2 pr-3'>
-            <span className='text-text-sm text-grayTextPrimary'>Ratified</span>
+            <span className='text-text-sm text-grayTextPrimary'>
+              {t("governance.status.ratified")}
+            </span>
             <span className='text-text-sm text-[#00A9E3]'>
               {drepStat?.gov_action[0]?.ratified || 0}
             </span>
           </div>
           {!!drepStat?.gov_action[0]?.enacted && (
             <div className='flex w-fit items-center gap-1/2 pr-3'>
-              <span className='text-text-sm text-grayTextPrimary'>Enacted</span>
+              <span className='text-text-sm text-grayTextPrimary'>
+                {t("governance.status.enacted")}
+              </span>
               <span className='text-text-sm text-[#876ee1]'>
                 {drepStat?.gov_action[0]?.enacted}
               </span>
@@ -64,7 +73,7 @@ export const GovernancePage: FC = () => {
           {!!drepStat?.gov_action[0]?.expires && (
             <div className='flex w-fit items-center gap-1/2 pr-2'>
               <span className='text-text-sm text-grayTextPrimary'>
-                Expired / Dropped
+                {t("governance.status.expiredDropped")}
               </span>
               <span className='text-text-sm text-[#F79009]'>
                 {drepStat?.gov_action[0]?.expires}
@@ -77,25 +86,25 @@ export const GovernancePage: FC = () => {
     {
       key: "gov_parties",
       icon: <Asterisk className='text-primary' />,
-      label: "Governance parties",
+      label: t("governance.page.governancePartiesLabel"),
       content: (
         <div className='flex items-center justify-between gap-1'>
           <Link to='/drep'>
             <div className='flex items-center gap-1'>
               <User className='text-primary' />
-              <span className='text-primary'>DReps</span>
+              <span className='text-primary'>{t("governance.page.dreps")}</span>
             </div>
           </Link>
           <Link to='/pool'>
             <div className='flex items-center gap-1'>
               <Route className='text-primary' />
-              <span className='text-primary'>SPOs</span>
+              <span className='text-primary'>{t("governance.page.spos")}</span>
             </div>
           </Link>
           <Link to='/gov/cc'>
             <div className='flex items-center gap-1'>
               <Landmark className='text-primary' />
-              <span className='text-primary'>CC</span>
+              <span className='text-primary'>{t("governance.page.cc")}</span>
             </div>
           </Link>
         </div>
@@ -126,7 +135,7 @@ export const GovernancePage: FC = () => {
   const tabs = [
     {
       key: "governance_actions",
-      label: "Governance actions",
+      label: t("tabs.governance.governanceActions"),
       content: (
         <GovernanceActionsTab key='governance_actions' miscConst={miscConst} />
       ),
@@ -134,7 +143,7 @@ export const GovernancePage: FC = () => {
     },
     {
       key: "outcomes",
-      label: "Outcomes",
+      label: t("tabs.governance.outcomes"),
       content: (
         <GovernanceActionsTab
           key='outcomes'
@@ -145,8 +154,14 @@ export const GovernancePage: FC = () => {
       visible: true,
     },
     {
+      key: "treasury_withdrawals",
+      label: t("tabs.governance.treasuryWithdrawals"),
+      content: <TreasuryWithdrawalsTab miscConst={miscConst} />,
+      visible: true,
+    },
+    {
       key: "timeline",
-      label: "Timeline",
+      label: t("tabs.governance.timeline"),
       content: <GovernanceTimelineTab miscConst={miscConst} />,
       visible: true,
     },
@@ -155,13 +170,17 @@ export const GovernancePage: FC = () => {
   return (
     <PageBase
       metadataTitle='governance'
-      title='Governance Actions'
+      title={t("pages:governance.title")}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>Governance</span>,
+          label: (
+            <span className='inline pt-1/2'>
+              {t("governance.breadcrumbs.governance")}
+            </span>
+          ),
           link: "/gov",
         },
-        { label: "Governance actions" },
+        { label: t("governance.breadcrumbs.governanceActions") },
       ]}
       adsCarousel={false}
     >

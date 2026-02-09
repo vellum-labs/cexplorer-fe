@@ -7,6 +7,7 @@ import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import ReactEcharts from "echarts-for-react";
 import { AnalyticsGraph } from "@/components/analytics/AnalyticsGraph";
 import { useAdaPriceWithTxCount } from "@/hooks/graphs/useAdaPriceWithTxCount";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface AdaPriceWithTxCountGraphProps {
   graphRates: BasicRate[];
@@ -15,6 +16,7 @@ interface AdaPriceWithTxCountGraphProps {
 
 export const AdaPriceWithTxCountGraph: FC<AdaPriceWithTxCountGraphProps> = memo(
   function AdaPriceWithTxCountGraph({ graphRates, analyticsData }) {
+    const { t } = useAppTranslation("common");
     const {
       json,
       option,
@@ -35,7 +37,7 @@ export const AdaPriceWithTxCountGraph: FC<AdaPriceWithTxCountGraphProps> = memo(
 
     return (
       <AnalyticsGraph
-        title='ADA/BTC Price vs Transaction Count'
+        title={t("adaPrice.adaBtcPriceVsTxCount")}
         exportButton
         graphSortData={{
           query: fakeQuery as any,

@@ -1,0 +1,93 @@
+{
+  "header": {
+    "featuredLabel": "Doporučené:",
+    "adLabel": "Ad"
+  },
+  "globalSearch": {
+    "recentlySearched": "Nedávno hledané",
+    "noRecentSearches": "Nemáte žádná nedávná hledání",
+    "homepagePlaceholder": "Hledat podle Adresy / Tx hash / Block hash / $Handle / Pool name...",
+    "placeholder": "Hledat bloky, transakce, tokeny...",
+    "notFoundLabel": "Nenalezeno",
+    "categories": {
+      "all": "$t(shared:all)",
+      "tx": "$t(shared:tx)",
+      "block": "Blok",
+      "pool": "$t(shared:pool)",
+      "asset": "$t(shared:asset)",
+      "policy": "$t(shared:title12)",
+      "address": "$t(shared:address)",
+      "stake": "$t(shared:stake)",
+      "adahandle": "ADA Handle",
+      "user": "Uživatel",
+      "article": "Článek",
+      "page": "Stránka",
+      "gov": "Governance",
+      "drep": "$t(shared:drep)"
+    }
+  },
+  "pagination": {
+    "morePages": "Více stránek",
+    "nextPage": "Přejít na další stránku",
+    "previousPage": "Přejít na předchozí stránku"
+  },
+  "noResultsFound": "Žádné výsledky",
+  "jsonDisplay": {
+    "noDataLabel": "Žádná data nenalezena"
+  },
+  "exportTable": {
+    "title": "Exportovat tabulku",
+    "csvLabel": "CSV",
+    "csvDescription": "Skvělé pro snadné zobrazení v tabulkových nástrojích.",
+    "jsonLabel": "JSON",
+    "jsonDescription": "Nejlepší pro strukturovaná data.",
+    "cancelLabel": "$t(shared:cancelLabel)",
+    "exportLabel": "Exportovat"
+  },
+  "sensitiveContent": {
+    "rememberLabel": "Zapamatovat toto nastavení",
+    "displayLabel": "Zobrazit"
+  },
+  "safetyLink": {
+    "warningText": "Přecházíte na externí, nemoderovanou URL: ",
+    "goBackLabel": "Zpět",
+    "visitLabel": "Navštívit"
+  },
+  "displayVote": {
+    "placeholder": "Hledat dle ID governance akce...",
+    "emptyStateMessage": "Zdá se, že chybí ID governance akce. Zadejte ho pro nalezení výsledků!",
+    "noResultsMessage": "Žádné výsledky. Zkontrolujte vstup a zkuste to znovu.",
+    "typeLabel": "$t(shared:type)",
+    "titleLabel": "Název",
+    "idLabel": "$t(shared:id)",
+    "identLabel": "Ident",
+    "cancelLabel": "$t(shared:cancelLabel)",
+    "addActionLabel": "Přidat governance akci"
+  },
+  "featureModal": {
+    "title": "Funkce Cexplorer PRO",
+    "subTitle": "Pro přístup k prémiovým funkcím potřebujete vlastnit Cexplorer NFT...",
+    "cancelLabel": "$t(shared:cancelLabel)",
+    "connectWalletLabel": "$t(shared:connect)",
+    "getProLabel": "Získat PRO"
+  },
+  "delegatorsLabel": {
+    "label": "$t(shared:delegators)",
+    "tooltipText": "Nezahrnuje delegátory se stakem menším než {{minDelegationAda}} ADA"
+  },
+  "stakeCell": {
+    "unknownLabel": "$t(shared:unknown)"
+  },
+  "votingBreakdownTooltip": {
+    "voteLabel": "Hlas",
+    "votersLabel": "Voliči",
+    "voterLabel": "Volič",
+    "delegatorsLabel": "$t(shared:delegators)",
+    "noConfidenceLabel": "Delegátoři bez důvěry",
+    "autoAbstainStakeLabel": "Auto abstain stake",
+    "manualAbstainStakeLabel": "Manuální abstain stake",
+    "stakePoolSingular": "Stake pool",
+    "stakePoolPlural": "$t(shared:stakePools)",
+    "delegatorSingular": "Delegátor"
+  }
+}

@@ -22,6 +22,7 @@ import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { WatchlistSection } from "../global/watchlist/WatchlistSection";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface PolicyDetailOverviewProps {
   type: "nft" | "token";
@@ -36,6 +37,7 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
   timelock,
   json,
 }) => {
+  const { t } = useAppTranslation("common");
   const route = getRouteApi("/policy/$policyId");
   const { policyId } = route.useParams();
 
@@ -53,7 +55,7 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
     script: PolicyJson | undefined,
     indentLevel: number = 0,
   ): [boolean, string] => {
-    if (!script || !script.type) return [false, "Unknown script type"];
+    if (!script || !script.type) return [false, t("asset.unknownScriptType")];
 
     const evaluate = (
       script: PolicyJson,
@@ -61,23 +63,24 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
       indentLevel: number = 0,
     ): [boolean, string] => {
       const indent = "   ".repeat(indentLevel);
+      const ruleLabel = indentLevel <= 1 ? t("asset.rule") : t("asset.subRule");
       switch (script.type) {
         case "sig": {
           return [
             false,
-            `${indent} ${indentLevel <= 1 ? "Rule" : "Sub-rule"} #${ruleNumber}: Signed by key ${script.keyHash}`,
+            `${indent} ${ruleLabel} #${ruleNumber}: ${t("asset.signedByKey")} ${script.keyHash}`,
           ];
         }
         case "before": {
           return [
             script.slot < currentSlot,
-            `${indent} ${indentLevel <= 1 ? "Rule" : "Sub-rule"} #${ruleNumber}: Before slot ${formatNumber(script.slot)} (current slot: ${formatNumber(currentSlot)})`,
+            `${indent} ${ruleLabel} #${ruleNumber}: ${t("asset.beforeSlot", { slot: formatNumber(script.slot), currentSlot: formatNumber(currentSlot) })}`,
           ];
         }
         case "after": {
           return [
             script.slot > currentSlot,
-            `${indent} ${indentLevel <= 1 ? "Rule" : "Sub-rule"} #${ruleNumber}: After slot ${formatNumber(script.slot)} (current slot: ${formatNumber(currentSlot)})`,
+            `${indent} ${ruleLabel} #${ruleNumber}: ${t("asset.afterSlot", { slot: formatNumber(script.slot), currentSlot: formatNumber(currentSlot) })}`,
           ];
         }
         case "all": {
@@ -90,7 +93,7 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
             .join("\n");
           return [
             someLocked,
-            `${indent}All rules must be met:\n${allConditions}`,
+            `${indent}${t("asset.allRulesMustBeMet")}\n${allConditions}`,
           ];
         }
         case "any": {
@@ -103,7 +106,7 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
             .join("\n");
           return [
             anyLocked,
-            `${indent}At least one rule must be met:\n${anyConditions}`,
+            `${indent}${t("asset.atLeastOneRuleMustBeMet")}\n${anyConditions}`,
           ];
         }
         case "atLeast": {
@@ -118,11 +121,11 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
             .join("\n");
           return [
             atLeastLocked,
-            `${indent}At least ${script.required} rules must be met:\n${atLeastConditions}`,
+            `${indent}${t("asset.atLeastNRulesMustBeMet", { count: script.required })}\n${atLeastConditions}`,
           ];
         }
         default:
-          return [false, "Unknown script type"];
+          return [false, t("asset.unknownScriptType")];
       }
     };
 
@@ -133,12 +136,12 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
 
   const overview = [
     {
-      label: "Name",
+      label: t("policy.name"),
       value: query.data?.data?.collection?.name ?? "-",
       visible: !!isRegistered,
     },
     {
-      label: "Floor Price",
+      label: t("policy.floorPrice"),
       value: query.data?.data?.collection?.stats?.floor ? (
         <AdaWithTooltip data={query.data?.data?.collection?.stats?.floor} />
       ) : (
@@ -147,28 +150,28 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
       visible: type === "nft" && marketEnable,
     },
     {
-      label: "Price",
-      value: "TBD",
+      label: t("policy.price"),
+      value: t("policy.tbd"),
       visible: type === "token" && marketEnable,
     },
     {
-      label: "Royalties",
+      label: t("policy.royalties"),
       value: query.data?.data?.collection?.stats?.royalties?.rate
         ? `${query.data?.data?.collection?.stats?.royalties?.rate * 100}%`
         : "-",
       visible: type === "nft",
     },
     {
-      label: "Supply",
+      label: t("policy.supply"),
       value: formatNumber(query.data?.data?.policy?.quantity),
     },
     {
-      label: "Owners",
+      label: t("policy.owners"),
       value: formatNumber(query.data?.data?.collection?.stats?.owners),
       visible: !!isRegistered,
     },
     {
-      label: "Volume",
+      label: t("policy.volume"),
       value: query.data?.data?.collection?.stats?.volume ? (
         <AdaWithTooltip data={query.data?.data?.collection?.stats?.volume} />
       ) : (
@@ -180,13 +183,13 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
 
   const blockchain = [
     {
-      label: "Policy ID",
+      label: t("policy.policyId"),
       value: query.data?.data?.id
         ? formatString(query.data?.data?.id, "long")
         : "-",
     },
     {
-      label: "Policy lock",
+      label: t("policy.policyLock"),
       value: (
         <Tooltip
           hide={!timelock}
@@ -210,16 +213,16 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
               }
               className='text-primary'
             >
-              {isLocked ? "Locked" : "Open"}
+              {isLocked ? t("policy.locked") : t("policy.open")}
             </Link>
           ) : (
-            "None"
+            t("policy.none")
           )}
         </Tooltip>
       ),
     },
     {
-      label: "First mint",
+      label: t("policy.firstMint"),
       value: query.data?.data?.policy?.last_mint ? (
         <TimeDateIndicator time={query.data?.data?.policy?.first_mint} />
       ) : (
@@ -227,7 +230,7 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
       ),
     },
     {
-      label: "Last mint",
+      label: t("policy.lastMint"),
       value: query.data?.data?.policy?.last_mint ? (
         <TimeDateIndicator time={query.data?.data?.policy?.last_mint} />
       ) : (
@@ -235,35 +238,37 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
       ),
     },
     {
-      label: "Last epoch activity",
+      label: t("policy.lastEpochActivity"),
       value: stats ? (
         <div className='flex flex-col'>
-          <Badge color='blue'>Recently</Badge>
+          <Badge color='blue'>{t("policy.recently")}</Badge>
           <div className='flex flex-wrap items-center gap-1/2'>
             {stats?.total_address && (
               <span className='text-[10px]'>
-                Active addresess: {stats?.total_address}
+                {t("policy.activeAddresses")}: {stats?.total_address}
               </span>
             )}
             {stats?.total_asset_volume && (
               <span className='text-[10px]'>
-                | Asset volume: {stats?.total_asset_volume}
+                | {t("policy.assetVolume")}: {stats?.total_asset_volume}
               </span>
             )}
             {stats?.total_count && (
-              <span className='text-[10px]'>| Txs: {stats?.total_count}</span>
+              <span className='text-[10px]'>
+                | {t("policy.txs")}: {stats?.total_count}
+              </span>
             )}
           </div>
         </div>
       ) : (
-        <Badge color='yellow'>In past time</Badge>
+        <Badge color='yellow'>{t("policy.inPastTime")}</Badge>
       ),
       visible:
         !!query.data?.data?.policy?.quantity &&
         query.data?.data?.policy?.quantity > 100,
     },
     {
-      label: "Mint count",
+      label: t("policy.mintCount"),
       value: query.data?.data?.policy?.mintc
         ? formatNumber(query.data?.data?.policy?.mintc)
         : "-",
@@ -306,7 +311,7 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
               <>
                 <div className='flex-grow basis-[390px] md:flex-shrink-0'>
                   <OverviewCard
-                    title='Overview'
+                    title={t("policy.overview")}
                     overviewList={overview}
                     startContent={
                       // TODO: Make this visible
@@ -341,7 +346,7 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
                 </div>
                 <div className='flex-grow basis-[350px] md:flex-shrink-0'>
                   <OverviewCard
-                    title='Blockchain'
+                    title={t("policy.blockchain")}
                     overviewList={blockchain}
                     labelClassname='text-nowrap min-w-[130px]'
                     className='h-full'

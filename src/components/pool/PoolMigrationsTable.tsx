@@ -29,6 +29,7 @@ import type { FC } from "react";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 
 import { getIconByAmount } from "@/utils/address/getIconByAmount";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface PoolMigrationsTableProps {
   miscConst: MiscConstResponse["data"] | undefined;
@@ -47,6 +48,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
   delegatorsQuery,
   totalItems,
 }) => {
+  const { t } = useAppTranslation("common");
   const navigate = useNavigate();
   const { page, sort, order } = useSearch({ from: "/pool/$id" });
 
@@ -76,9 +78,9 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
           />
         );
       },
-      title: <p>Date</p>,
+      title: <p>{t("pool.migrations.date")}</p>,
       visible: columnsVisibility.date,
-      widthPx: 20,
+      widthPx: 50,
     },
     {
       key: "active_in",
@@ -87,9 +89,11 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
           <EpochCell no={item?.active_pool?.delegation?.tx?.active_epoch_no} />
         </div>
       ),
-      title: <p className='w-full text-right'>Active epoch</p>,
+      title: (
+        <p className='w-full text-right'>{t("pool.migrations.activeEpoch")}</p>
+      ),
       visible: columnsVisibility.active_in,
-      widthPx: 45,
+      widthPx: 30,
     },
     {
       key: "address",
@@ -107,8 +111,8 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
             {icon && <img src={icon} alt='Icon' />}
             <Link
               className='text-primary'
-              to='/address/$address'
-              params={{ address: item.view || "" }}
+              to='/stake/$stakeAddr'
+              params={{ stakeAddr: item.view || "" }}
             >
               {formatString(item.view, "long")}
             </Link>
@@ -116,9 +120,9 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
           </div>
         );
       },
-      title: "Address",
+      title: t("pool.migrations.address"),
       visible: columnsVisibility.address,
-      widthPx: 100,
+      widthPx: 70,
     },
     {
       key: "amount",
@@ -142,7 +146,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
               });
             }}
           >
-            <span>Amount</span>
+            <span>{t("pool.migrations.amount")}</span>
             <SortArrow direction={order === "live_stake" ? sort : undefined} />
           </div>
         </div>
@@ -186,7 +190,7 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
               });
             }}
           >
-            <span>Loyalty</span>
+            <span>{t("pool.migrations.loyalty")}</span>
             <SortArrow direction={order === "slot_update" ? sort : undefined} />
           </div>
         </div>
@@ -198,22 +202,25 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
       key: "registered",
       render: item => {
         return (
-          <DateCell
-            className='text-right'
-            time={format(
-              slotToDate(
-                item.slot_update,
-                miscConst?.epoch_stat.pots.slot_no ?? 0,
-                miscConst?.epoch_stat.epoch.start_time ?? "",
-              ),
-              "yyy-MM-dd HH:mm:ss",
-            )}
-          />
+          <div className='flex justify-end'>
+            <DateCell
+              time={format(
+                slotToDate(
+                  item.slot_update,
+                  miscConst?.epoch_stat.pots.slot_no ?? 0,
+                  miscConst?.epoch_stat.epoch.start_time ?? "",
+                ),
+                "yyy-MM-dd HH:mm:ss",
+              )}
+            />
+          </div>
         );
       },
-      title: <p className='w-full text-right'>Registered</p>,
+      title: (
+        <p className='w-full text-right'>{t("pool.migrations.registered")}</p>
+      ),
       visible: columnsVisibility.registered,
-      widthPx: 40,
+      widthPx: 50,
     },
     {
       key: "pool_delegation",
@@ -261,9 +268,9 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
           </div>
         );
       },
-      title: <p>Pool Delegation</p>,
+      title: <p>{t("pool.migrations.poolDelegation")}</p>,
       visible: columnsVisibility.pool_delegation,
-      widthPx: 190,
+      widthPx: 160,
     },
   ];
 
@@ -286,6 +293,10 @@ export const PoolMigrationsTable: FC<PoolMigrationsTableProps> = ({
         );
       })}
       onOrderChange={setColumsOrder}
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

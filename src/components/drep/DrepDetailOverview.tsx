@@ -5,12 +5,14 @@ import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 
 import { useDrepDetail } from "@/hooks/details/useDrepDetail";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface DrepDetailOverviewProps {
   query: ReturnType<typeof useFetchDrepDetail>;
 }
 
 export const DrepDetailOverview: FC<DrepDetailOverviewProps> = ({ query }) => {
+  const { t } = useAppTranslation("pages");
   const { about, governance, voting } = useDrepDetail({ query });
 
   return (
@@ -40,7 +42,7 @@ export const DrepDetailOverview: FC<DrepDetailOverviewProps> = ({ query }) => {
               <>
                 <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                   <OverviewCard
-                    title='About'
+                    title={t("dreps.detailPage.about.title")}
                     overviewList={about}
                     className='h-full'
                   />
@@ -48,7 +50,7 @@ export const DrepDetailOverview: FC<DrepDetailOverviewProps> = ({ query }) => {
 
                 <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                   <OverviewCard
-                    title='Voting'
+                    title={t("dreps.detailPage.voting.title")}
                     overviewList={voting}
                     className='h-full'
                   />
@@ -56,7 +58,7 @@ export const DrepDetailOverview: FC<DrepDetailOverviewProps> = ({ query }) => {
 
                 <div className='flex-grow basis-[410px] md:flex-shrink-0'>
                   <OverviewCard
-                    title='Governance'
+                    title={t("dreps.detailPage.governance.title")}
                     overviewList={governance}
                     className='h-full'
                   />

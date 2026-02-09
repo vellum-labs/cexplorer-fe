@@ -6,6 +6,7 @@ import ReactEcharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 
 import type { MiscConstResponseData } from "@/types/miscTypes";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface EpochStakedAdaProps {
   stats: EpochStatsSummary;
@@ -20,6 +21,8 @@ export const EpochStakedAda: FC<EpochStakedAdaProps> = ({
   isLoading,
   constData,
 }) => {
+  const { t } = useAppTranslation("pages");
+
   const stakedAda =
     (stats?.stake?.epoch / (constData?.circulating_supply ?? 1)) * 100;
 
@@ -52,12 +55,12 @@ export const EpochStakedAda: FC<EpochStakedAdaProps> = ({
         data: [
           {
             value: (stakedAda > 100 ? 100 : stakedAda).toFixed(2),
-            name: "Staked",
+            name: t("epochs.stakedAda.staked"),
             itemStyle: { color: "#47CD89" },
           },
           {
             value: (100 - stakedAda).toFixed(2),
-            name: "Unstaked",
+            name: t("epochs.stakedAda.unstaked"),
             itemStyle: { color: "#FEC84B" },
           },
         ],
@@ -68,9 +71,9 @@ export const EpochStakedAda: FC<EpochStakedAdaProps> = ({
   return (
     <div className='flex h-[520px] w-1/2 flex-grow basis-[600px] flex-col gap-2 rounded-l border border-border p-3 md:flex-shrink-0'>
       <div className='flex flex-col'>
-        <h3>Staked ADA</h3>
+        <h3>{t("epochs.stakedAda.title")}</h3>
         <span className='text-text-md font-semibold text-grayTextPrimary'>
-          Staked / Unstaked supply
+          {t("epochs.stakedAda.subtitle")}
         </span>
       </div>
       {!stats || isError || isLoading ? (

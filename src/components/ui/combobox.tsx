@@ -16,8 +16,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export function Combobox({ items }) {
+  const { t } = useAppTranslation("common");
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 
@@ -32,15 +34,15 @@ export function Combobox({ items }) {
         >
           {value
             ? items.find(framework => framework.value === value)?.label
-            : "Select framework..."}
+            : t("ui.combobox.selectItem")}
           <ChevronsUpDown className='ml-1 h-4 w-4 shrink-0 opacity-50' />
         </Button>
       </PopoverTrigger>
       <PopoverContent className='w-[200px] p-0'>
         <Command>
-          <CommandInput placeholder='Search framework...' />
+          <CommandInput placeholder={t("ui.combobox.searchPlaceholder")} />
           <CommandList>
-            <CommandEmpty>No framework found.</CommandEmpty>
+            <CommandEmpty>{t("ui.combobox.noResults")}</CommandEmpty>
             <CommandGroup>
               {items.map(framework => (
                 <CommandItem

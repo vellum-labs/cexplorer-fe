@@ -24,8 +24,10 @@ import { scriptListRanklistOptions } from "@/constants/tables/scriptListRanklist
 import { formatNumber, formatString } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const ScriptListRanklistTab: FC = () => {
+  const { t } = useAppTranslation("common");
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { page, order } = useSearch({ from: "/script/" });
 
@@ -47,15 +49,15 @@ export const ScriptListRanklistTab: FC = () => {
   const selectItems = [
     {
       key: "redeemer.count",
-      value: "Reedemer Count",
+      value: t("script.ranklist.sortBy.redeemerCount"),
     },
     {
       key: "tx",
-      value: "Tx",
+      value: t("script.ranklist.sortBy.tx"),
     },
     {
       key: "tx_payment_cred.out.sum",
-      value: "Outsum",
+      value: t("script.ranklist.sortBy.outsum"),
     },
   ];
 
@@ -114,7 +116,7 @@ export const ScriptListRanklistTab: FC = () => {
           </div>
         );
       },
-      title: "Hash",
+      title: t("script.table.hash"),
       jsonFormat: item => {
         if (!item?.hash) {
           return "-";
@@ -138,7 +140,7 @@ export const ScriptListRanklistTab: FC = () => {
           </Badge>
         );
       },
-      title: <p className='text-center'>Category</p>,
+      title: <p className='text-center'>{t("script.table.category")}</p>,
       visible: columnsVisibility.category,
       widthPx: 50,
     },
@@ -155,7 +157,7 @@ export const ScriptListRanklistTab: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>Users</p>,
+      title: <p className='w-full text-right'>{t("script.table.users")}</p>,
       visible: columnsVisibility.users,
       widthPx: 50,
     },
@@ -172,7 +174,11 @@ export const ScriptListRanklistTab: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>Interactions this epoch</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("script.table.interactionsThisEpoch")}
+        </p>
+      ),
       visible: columnsVisibility.int_this_epoch,
       widthPx: 80,
     },
@@ -194,7 +200,9 @@ export const ScriptListRanklistTab: FC = () => {
 
         return <p className='text-right'>{percent}%</p>;
       },
-      title: <p className='w-full text-right'>Activity Change</p>,
+      title: (
+        <p className='w-full text-right'>{t("script.table.activityChange")}</p>
+      ),
       visible: columnsVisibility.activity_change,
       widthPx: 80,
     },
@@ -211,7 +219,9 @@ export const ScriptListRanklistTab: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>Epoch Volume</p>,
+      title: (
+        <p className='w-full text-right'>{t("script.table.epochVolume")}</p>
+      ),
       visible: columnsVisibility.epoch_volume,
       widthPx: 80,
     },
@@ -230,7 +240,7 @@ export const ScriptListRanklistTab: FC = () => {
           <LoadingSkeleton height='27px' width={"220px"} />
         ) : totalItems > 0 ? (
           <h3 className='basis-[230px] text-nowrap'>
-            Total of {formatNumber(totalItems)} scripts
+            {t("script.totalScripts", { count: formatNumber(totalItems) })}
           </h3>
         ) : (
           ""
@@ -253,9 +263,10 @@ export const ScriptListRanklistTab: FC = () => {
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("table.rows")}
                 columnsOptions={scriptListRanklistOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(
@@ -271,7 +282,7 @@ export const ScriptListRanklistTab: FC = () => {
 
         <div className='flex gap-1'>
           <TableSearchInput
-            placeholder='Search by script hash...'
+            placeholder={t("script.searchByHash")}
             value={tableSearch}
             onchange={setTableSearch}
             wrapperClassName='md:w-[320px] w-full '
@@ -287,9 +298,10 @@ export const ScriptListRanklistTab: FC = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("table.rows")}
               columnsOptions={scriptListRanklistOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -317,6 +329,10 @@ export const ScriptListRanklistTab: FC = () => {
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </>
   );

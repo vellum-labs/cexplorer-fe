@@ -2,6 +2,7 @@ import { navigationOptions } from "@/constants/navigationOptions";
 import { Link } from "@tanstack/react-router";
 import { ChevronLeft } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   onBack?: () => void;
@@ -9,6 +10,8 @@ interface Props {
 }
 
 export const StakingMobileItems = ({ onBack, setOpen }: Props) => {
+  const { t } = useAppTranslation("navigation");
+
   return (
     <>
       <button
@@ -16,7 +19,7 @@ export const StakingMobileItems = ({ onBack, setOpen }: Props) => {
         className='mb-1 flex h-[34px] -translate-x-1 items-center gap-1 font-medium'
       >
         <ChevronLeft size={20} className='font-regular' />
-        <span>Staking certificates</span>
+        <span>{t("navbar.stakingCertificates")}</span>
       </button>
       <div className='flex flex-col'>
         {navigationOptions.staking

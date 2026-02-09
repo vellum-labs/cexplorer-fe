@@ -11,6 +11,7 @@ import { useSearch } from "@tanstack/react-router";
 import { configJSON } from "@/constants/conf";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { AddressOrHandleCell } from "@/components/address/AddressOrHandleCell";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface AssetTokenOwnersTabProps {
   name: number;
@@ -27,6 +28,7 @@ export const AssetTokenOwnersTab: FC<AssetTokenOwnersTabProps> = ({
   price,
   decimals = 1,
 }) => {
+  const { t } = useAppTranslation("common");
   const [totalItems, setTotalItems] = useState<number>(0);
   const { page } = useSearch({ from: "/asset/$fingerprint" });
   const assetName = policy + name;
@@ -52,7 +54,7 @@ export const AssetTokenOwnersTab: FC<AssetTokenOwnersTabProps> = ({
     {
       key: "type",
       render: item => <AddressTypeInitialsBadge address={item?.address} />,
-      title: "Type",
+      title: t("asset.type"),
       visible: true,
       widthPx: 30,
     },
@@ -67,7 +69,7 @@ export const AssetTokenOwnersTab: FC<AssetTokenOwnersTabProps> = ({
         ) : (
           "-"
         ),
-      title: "Owner",
+      title: t("asset.owner"),
       visible: true,
       widthPx: 75,
     },
@@ -84,16 +86,18 @@ export const AssetTokenOwnersTab: FC<AssetTokenOwnersTabProps> = ({
             : item.quantity;
 
         return (
-          <p className='text-right'>{formatNumberWithSuffix(adjustedQuantity)}</p>
+          <p className='text-right'>
+            {formatNumberWithSuffix(adjustedQuantity)}
+          </p>
         );
       },
-      title: <p className='w-full text-right'>Quantity</p>,
+      title: <p className='w-full text-right'>{t("asset.quantity")}</p>,
       visible: true,
       widthPx: 65,
     },
     {
       key: "share",
-      title: <p className='w-full text-right'>Share</p>,
+      title: <p className='w-full text-right'>{t("asset.share")}</p>,
       render: item => (
         <p className='w-full text-right'>
           {((item.quantity / (supply ?? 1)) * 100).toFixed(2)}%
@@ -104,7 +108,7 @@ export const AssetTokenOwnersTab: FC<AssetTokenOwnersTabProps> = ({
     },
     {
       key: "value",
-      title: <p className='w-full text-right'>Value</p>,
+      title: <p className='w-full text-right'>{t("asset.value")}</p>,
       render: item => (
         <p className='w-full text-right'>
           {price ? lovelaceToAda(price * item?.quantity) : "-"}
@@ -138,6 +142,10 @@ export const AssetTokenOwnersTab: FC<AssetTokenOwnersTabProps> = ({
         );
       })}
       onOrderChange={setColumsOrder}
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

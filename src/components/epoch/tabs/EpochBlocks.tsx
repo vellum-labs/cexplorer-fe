@@ -22,12 +22,15 @@ import { useEffect, useState } from "react";
 import { useFetchBlocksList } from "@/services/blocks";
 import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface EpochBlocksProps {
   no: number;
 }
 
 export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
+  const { t } = useAppTranslation(["pages", "common"]);
+
   const {
     columnsOrder,
     columnsVisibility,
@@ -78,14 +81,16 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
 
         return item.time;
       },
-      title: "Date",
+      title: t("epochs.blocksTable.date"),
       visible: columnsVisibility.date,
       widthPx: 95,
     },
     {
       key: "block_no",
       render: item => <BlockCell hash={item.hash} no={item?.block_no ?? 0} />,
-      title: <p className='w-full text-right'>Height</p>,
+      title: (
+        <p className='w-full text-right'>{t("epochs.blocksTable.height")}</p>
+      ),
       visible: columnsVisibility.block_no,
       widthPx: 75,
     },
@@ -94,7 +99,9 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
       render: item => (
         <p className='text-right'>{formatNumber(item?.slot_no ?? 0)}</p>
       ),
-      title: <p className='w-full text-right'>Slot</p>,
+      title: (
+        <p className='w-full text-right'>{t("epochs.blocksTable.slot")}</p>
+      ),
       visible: columnsVisibility.slot_no,
       widthPx: 80,
     },
@@ -108,7 +115,7 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
 
         return item.tx_count;
       },
-      title: <p className='w-full text-right'>TXs</p>,
+      title: <p className='w-full text-right'>{t("epochs.blocksTable.txs")}</p>,
       visible: columnsVisibility.tx_count,
       widthPx: 50,
     },
@@ -131,14 +138,14 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
 
         return ticker && name ? `[${ticker}] ${name}` : id;
       },
-      title: "Minted by",
+      title: t("epochs.blocksTable.mintedBy"),
       visible: columnsVisibility.minted_by,
       widthPx: 160,
       className: "pl-2",
     },
     {
       key: "size",
-      title: "Size",
+      title: t("epochs.blocksTable.size"),
       render: item => (
         <div className='text-right'>
           {
@@ -181,7 +188,9 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : (
             <h3 className='basis-[230px]'>
-              Total of {formatNumber(totalItems)} blocks
+              {t("epochs.blocksTable.totalOfBlocks", {
+                count: formatNumber(totalItems),
+              })}
             </h3>
           )}
           <div className='flex items-center gap-1 md:hidden'>
@@ -189,9 +198,10 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={epochBlockTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -203,7 +213,7 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
 
         <div className='flex gap-1'>
           <TableSearchInput
-            placeholder='Search your results...'
+            placeholder={t("epochs.searchPlaceholder")}
             value={tableSearch}
             onchange={setTableSearch}
             wrapperClassName='md:w-[320px] w-full'
@@ -211,12 +221,12 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
             prefixes={[
               {
                 key: "slot_no",
-                name: "Slot",
+                name: t("epochs.blocksTable.slot"),
                 show: isTextNumeric(tableSearch),
               },
               {
                 key: "block_no",
-                name: "Height",
+                name: t("epochs.blocksTable.height"),
                 show: isTextNumeric(tableSearch),
               },
             ]}
@@ -228,9 +238,10 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={epochBlockTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -255,6 +266,10 @@ export const EpochBlocks: FC<EpochBlocksProps> = ({ no }) => {
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("common:table.displaying", { count, total })
+        }
+        noItemsLabel={t("common:table.noItems")}
       />
     </>
   );

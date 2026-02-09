@@ -17,6 +17,7 @@ import {
 import { useAssetList } from "@/hooks/tables/useAssetList";
 import type { AssetListType } from "@/types/assetsTypes";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface AssetListPageProps {
   type?: AssetListType;
@@ -31,6 +32,7 @@ export const AssetListPage: FC<AssetListPageProps> = ({
   watchlist,
   showHeader = true,
 }) => {
+  const { t } = useAppTranslation(["pages", "common"]);
   const {
     columnsOrder,
     columnsVisibility,
@@ -71,17 +73,17 @@ export const AssetListPage: FC<AssetListPageProps> = ({
   const tabs = [
     {
       key: "all",
-      label: "All",
+      label: t("assets.tabs.all"),
       visible: true,
     },
     {
       key: "token",
-      label: "Tokens",
+      label: t("assets.tabs.tokens"),
       visible: true,
     },
     {
       key: "nft",
-      label: "NFTs",
+      label: t("assets.tabs.nfts"),
       visible: true,
     },
   ];
@@ -89,36 +91,23 @@ export const AssetListPage: FC<AssetListPageProps> = ({
   const tableOptions =
     type !== "all" ? assetListTableOptionsWithoutType : assetListTableOptions;
 
+  const getPageTitle = () => {
+    if (type === "all") return t("assets.all");
+    if (type === "nft") return t("assets.nfts");
+    if (type === "token") return t("assets.tokens");
+    if (type === "recent-tokens") return t("assets.recentTokens");
+    return t("assets.recentNfts");
+  };
+
   return (
     <PageBase
-      title={
-        showHeader
-          ? type === "all"
-            ? "All Assets"
-            : type === "nft"
-              ? "NFTs"
-              : type === "token"
-                ? "Tokens"
-                : type === "recent-tokens"
-                  ? "Recent Tokens"
-                  : "Recent NFTs"
-          : undefined
-      }
+      title={showHeader ? getPageTitle() : undefined}
       showHeader={showHeader}
       breadcrumbItems={
         showHeader
           ? [
               {
-                label:
-                  type === "all"
-                    ? "All Assets"
-                    : type === "nft"
-                      ? "NFTs"
-                      : type === "token"
-                        ? "Tokens"
-                        : type === "recent-tokens"
-                          ? "Recent Tokens"
-                          : "Recent NFTs",
+                label: getPageTitle(),
               },
             ]
           : undefined
@@ -142,11 +131,12 @@ export const AssetListPage: FC<AssetListPageProps> = ({
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("common:table.rows")}
                 columnsOptions={tableOptions
                   .filter(item => columnsVisibility[item.key])
                   .map(item => {
                     return {
-                      label: item.name,
+                      label: t(`common:tableSettings.${item.key}`),
                       isVisible: columnsVisibility[item.key],
                       onClick: () =>
                         setColumnVisibility(
@@ -167,7 +157,7 @@ export const AssetListPage: FC<AssetListPageProps> = ({
               />
             )}
             <TableSearchInput
-              placeholder='Search by asset...'
+              placeholder={t("assets.searchPlaceholder")}
               value={tableSearch}
               onchange={setTableSearch}
               wrapperClassName='md:w-[320px] w-full'
@@ -178,9 +168,10 @@ export const AssetListPage: FC<AssetListPageProps> = ({
               <TableSettingsDropdown
                 rows={rows}
                 setRows={setRows}
+                rowsLabel={t("common:table.rows")}
                 columnsOptions={assetListTableOptions.map(item => {
                   return {
-                    label: item.name,
+                    label: t(`common:tableSettings.${item.key}`),
                     isVisible: columnsVisibility[item.key],
                     onClick: () =>
                       setColumnVisibility(
@@ -210,6 +201,10 @@ export const AssetListPage: FC<AssetListPageProps> = ({
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </section>
     </PageBase>

@@ -70,20 +70,21 @@ export const fetchGovernenceVote = async (
 ) => {
   const url = voter_role && vote_not ? "/gov/vote_not" : "/gov/vote";
   const isNotVotedEndpoint = url === "/gov/vote_not";
-  
+  const safeOffset = Number.isNaN(offset) ? 0 : offset;
+
   const options = {
     params: {
       limit,
-      offset,
+      offset: safeOffset,
       gov_action_proposal: id,
       voter_role,
       order: isNotVotedEndpoint ? (order ?? "stake") : order,
       sort: isNotVotedEndpoint ? (sort ?? "desc") : sort,
       vote,
-      search, 
+      search,
     },
   };
-  return handleFetch<any>(url, undefined, options);
+  return handleFetch<any>(url, safeOffset, options);
 };
 
 export const useFetchGovernanceVote = (
@@ -113,7 +114,7 @@ export const useFetchGovernanceVote = (
     queryFn: ({ pageParam = page }) =>
       fetchGovernenceVote(
         limit,
-        pageParam,
+        Number.isNaN(pageParam) ? 0 : pageParam,
         id,
         voter_role,
         order,
@@ -122,7 +123,7 @@ export const useFetchGovernanceVote = (
         vote_not,
         search,
       ),
-    initialPageParam: page,
+    initialPageParam: Number.isNaN(page) ? 0 : page,
     getNextPageParam: lastPage => {
       const nextOffset = (lastPage.prevOffset as number) + limit;
       return nextOffset >= lastPage.data.count ? undefined : nextOffset;
@@ -233,7 +234,7 @@ export const fetchCCVotes = async (
     },
   };
 
-  return handleFetch<any>(url, undefined, options);
+  return handleFetch<any>(url, offset, options);
 };
 
 export const useFetchCCVotes = (
@@ -341,7 +342,7 @@ export const fetchNewVotes = async (
       committee_voter,
     },
   };
-  return handleFetch<any>(url, undefined, options);
+  return handleFetch<any>(url, offset, options);
 };
 
 export const useFetchNewVotes = (
@@ -417,7 +418,7 @@ export const fetchDrepListVote = async (
       gov_action,
     },
   };
-  return handleFetch<any>(url, undefined, options);
+  return handleFetch<any>(url, offset, options);
 };
 
 export const useFetchDrepListVote = (

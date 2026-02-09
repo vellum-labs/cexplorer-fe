@@ -25,6 +25,7 @@ import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
 import { useTaxToolEpochRewardsTableStore } from "@/stores/tables/taxToolEpochRewardsTableStore";
 import { Badge } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface EpochRewardsTableProps {
   query: UseQueryResult<any, unknown>;
@@ -47,6 +48,7 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
   itemsPerPage,
   onItemsPerPageChange,
 }) => {
+  const { t } = useAppTranslation("common");
   const showSecondaryCurrency = secondaryCurrency !== "usd";
 
   const {
@@ -149,16 +151,20 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
 
   const columnLabels = useMemo(
     () => ({
-      epoch: "Epoch",
-      end_time: "End Time",
-      type: "Type",
-      rewards_ada: "Rewards ADA",
-      rewards_usd: "Rewards USD",
-      rewards_secondary: `Rewards ${secondaryCurrency.toUpperCase()}`,
-      ada_usd_rate: "ADA/USD",
-      ada_secondary_rate: `ADA/${secondaryCurrency.toUpperCase()}`,
+      epoch: t("taxTool.columns.epoch"),
+      end_time: t("taxTool.columns.endTime"),
+      type: t("taxTool.columns.type"),
+      rewards_ada: t("taxTool.columns.rewardsAda"),
+      rewards_usd: t("taxTool.columns.rewardsUsd"),
+      rewards_secondary: t("taxTool.columns.rewardsCurrency", {
+        currency: secondaryCurrency.toUpperCase(),
+      }),
+      ada_usd_rate: t("taxTool.columns.adaUsdRate"),
+      ada_secondary_rate: t("taxTool.columns.adaCurrencyRate", {
+        currency: secondaryCurrency.toUpperCase(),
+      }),
     }),
-    [secondaryCurrency],
+    [secondaryCurrency, t],
   );
 
   const columns = useMemo(
@@ -174,12 +180,12 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
         key: "end_time",
         title: (
           <div className='flex w-full justify-start'>
-            <Tooltip content='Exchange rates from the epoch end date.'>
+            <Tooltip content={t("taxTool.tooltips.exchangeRatesEpoch")}>
               <div
                 className='flex cursor-help items-center gap-1'
                 style={{ pointerEvents: "auto" }}
               >
-                End Time
+                {t("taxTool.columns.endTime")}
                 <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
               </div>
             </Tooltip>
@@ -201,7 +207,9 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
         widthPx: 100,
         render: item => (
           <Badge color='light'>
-            <span className='capitalize'>{item.type || "Member"}</span>
+            <span className='capitalize'>
+              {item.type || t("taxTool.member")}
+            </span>
           </Badge>
         ),
       },
@@ -209,7 +217,7 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
         key: "rewards_ada",
         title: (
           <div className='flex w-full items-center justify-end gap-1 text-right'>
-            Rewards ADA
+            {t("taxTool.columns.rewardsAda")}
           </div>
         ),
         visible: columnsVisibility.rewards_ada,
@@ -223,7 +231,7 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
         key: "rewards_usd",
         title: (
           <div className='flex w-full items-center justify-end gap-1 text-right'>
-            Rewards USD
+            {t("taxTool.columns.rewardsUsd")}
           </div>
         ),
         visible: columnsVisibility.rewards_usd,
@@ -245,7 +253,9 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
         key: "rewards_secondary",
         title: (
           <div className='flex w-full items-center justify-end gap-1 text-right'>
-            Rewards {secondaryCurrency.toUpperCase()}
+            {t("taxTool.columns.rewardsCurrency", {
+              currency: secondaryCurrency.toUpperCase(),
+            })}
           </div>
         ),
         visible: columnsVisibility.rewards_secondary && showSecondaryCurrency,
@@ -270,12 +280,12 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
         key: "ada_usd_rate",
         title: (
           <div className='flex w-full justify-end'>
-            <Tooltip content='Exchange rates from the epoch end date.'>
+            <Tooltip content={t("taxTool.tooltips.exchangeRatesEpoch")}>
               <div
                 className='flex cursor-help items-center gap-1'
                 style={{ pointerEvents: "auto" }}
               >
-                ADA/USD
+                {t("taxTool.columns.adaUsdRate")}
                 <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
               </div>
             </Tooltip>
@@ -294,12 +304,14 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
         key: "ada_secondary_rate",
         title: (
           <div className='flex w-full justify-end'>
-            <Tooltip content='Exchange rates from the epoch end date.'>
+            <Tooltip content={t("taxTool.tooltips.exchangeRatesEpoch")}>
               <div
                 className='flex cursor-help items-center gap-1'
                 style={{ pointerEvents: "auto" }}
               >
-                ADA/{secondaryCurrency.toUpperCase()}
+                {t("taxTool.columns.adaCurrencyRate", {
+                  currency: secondaryCurrency.toUpperCase(),
+                })}
                 <QuestionMarkCircledIcon className='h-4 w-4 text-grayTextPrimary' />
               </div>
             </Tooltip>
@@ -400,11 +412,14 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
   return (
     <div className='flex flex-col gap-2'>
       <div className='flex items-center justify-between'>
-        <h3 className='text-text-md font-semibold'>Epoch by epoch</h3>
+        <h3 className='text-text-md font-semibold'>
+          {t("taxTool.epochByEpoch")}
+        </h3>
         <div className='flex items-center gap-1'>
           <TableSettingsDropdown
             rows={itemsPerPage}
             setRows={handleRowsChange}
+            rowsLabel={t("table.rows")}
             columnsOptions={columnsOptions}
           />
           <ExportButton
@@ -426,12 +441,21 @@ export const EpochRewardsTable: FC<EpochRewardsTableProps> = ({
         items={data}
         columns={columns}
         disableDrag
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
       {totalItems > itemsPerPage && (
         <Pagination
           currentPage={currentPage}
           setCurrentPage={onPageChange}
           totalPages={totalPages}
+          labels={{
+            ellipsisSrLabel: t("sdk:pagination.morePages"),
+            nextAriaLabel: t("sdk:pagination.nextPage"),
+            previousAriaLabel: t("sdk:pagination.previousPage"),
+          }}
         />
       )}
     </div>

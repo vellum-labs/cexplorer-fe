@@ -12,13 +12,15 @@ import {
 import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 
 import { locales } from "@/constants/locales";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const SettingsMobileItemLanguage: FC = () => {
+  const { t } = useAppTranslation("navigation");
   const { locale, setLocale } = useLocaleStore();
 
   return (
     <>
-      <span>Language</span>
+      <span>{t("settings.language")}</span>
       <Select
         defaultValue={locale}
         onValueChange={(value: Locales) => {

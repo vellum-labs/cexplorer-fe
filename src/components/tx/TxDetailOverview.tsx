@@ -1,6 +1,7 @@
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
 import { useFetchMiscBasic } from "@/services/misc";
 import type { TxDetailResponse } from "@/types/txTypes";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import {
   formatDate,
   formatNumber,
@@ -43,6 +44,7 @@ interface Props {
 }
 
 const TxDetailOverview = ({ query }: Props) => {
+  const { t } = useAppTranslation("common");
   const data = query.data?.data;
 
   const miscBasicQuery = useFetchMiscBasic();
@@ -88,7 +90,7 @@ const TxDetailOverview = ({ query }: Props) => {
 
   const overviewListItems: OverviewList = [
     {
-      label: "Hash",
+      label: t("tx.labels.hash"),
       value: (
         <div className='flex items-center gap-1/2'>
           <span title={data?.hash} className='text-text-sm'>
@@ -99,7 +101,7 @@ const TxDetailOverview = ({ query }: Props) => {
       ),
     },
     {
-      label: "Date",
+      label: t("tx.labels.date"),
       value: (
         <div className='flex flex-wrap items-center gap-1/2 text-text-sm'>
           <span className='font-medium leading-none'>
@@ -113,7 +115,7 @@ const TxDetailOverview = ({ query }: Props) => {
       ),
     },
     {
-      label: "Height",
+      label: t("tx.labels.height"),
       value: (
         <div className='text-text-sm'>
           <BlockCell
@@ -125,7 +127,7 @@ const TxDetailOverview = ({ query }: Props) => {
       ),
     },
     {
-      label: "Total Output",
+      label: t("tx.labels.totalOutput"),
       value: (
         <TotalSumWithRates
           sum={outsum}
@@ -135,7 +137,7 @@ const TxDetailOverview = ({ query }: Props) => {
       ),
     },
     {
-      label: "Fee",
+      label: t("tx.labels.fee"),
       value: (
         <TotalSumWithRates
           sum={feesum}
@@ -145,7 +147,7 @@ const TxDetailOverview = ({ query }: Props) => {
       ),
     },
     {
-      label: "Epoch",
+      label: t("tx.labels.epoch"),
       value: (
         <div className='text-text-sm'>
           <EpochCell no={data?.epoch_param?.epoch_no} justify='start' />
@@ -154,14 +156,14 @@ const TxDetailOverview = ({ query }: Props) => {
     },
     data?.invalid_before && data?.invalid_hereafter
       ? {
-          label: "Slot",
+          label: t("tx.labels.slot"),
           value: (
             <div className='flex flex-wrap items-center gap-1/2 text-text-sm leading-none'>
               <span className='font-medium text-grayTextPrimary'>
                 {data?.invalid_before ? formatNumber(data?.block.slot_no) : "-"}
               </span>
               <span className='pr-1/2 text-grayTextPrimary'>
-                (epoch slot{" "}
+                ({t("tx.epochSlot")}{" "}
                 {getEpochSlot(data.block.slot_no, data.epoch_param.epoch_no)})
               </span>
             </div>
@@ -170,7 +172,7 @@ const TxDetailOverview = ({ query }: Props) => {
       : undefined,
     data?.invalid_hereafter
       ? {
-          label: "TTL",
+          label: t("tx.labels.ttl"),
           value: (
             <div className='flex items-center gap-1/2 text-text-sm'>
               <Lock
@@ -193,7 +195,7 @@ const TxDetailOverview = ({ query }: Props) => {
       : undefined,
     data?.deposit
       ? {
-          label: "Deposit",
+          label: t("tx.labels.deposit"),
           value: (
             <div className='flex items-center gap-1/2 text-text-sm'>
               <span className='font-medium'>
@@ -204,7 +206,7 @@ const TxDetailOverview = ({ query }: Props) => {
         }
       : undefined,
     {
-      label: "Confirmations",
+      label: t("tx.labels.confirmations"),
       value: (
         <div className='flex items-center gap-[2.5px] text-text-sm'>
           {confirmations[1] < 3 && (
@@ -232,13 +234,13 @@ const TxDetailOverview = ({ query }: Props) => {
     },
     data?.treasury_donation && data.treasury_donation > 0
       ? {
-          label: "Treasury donation",
+          label: t("tx.labels.treasuryDonation"),
           value: <AdaWithTooltip data={data.treasury_donation} />,
         }
       : undefined,
     addonComponents.length
       ? {
-          label: "Key message",
+          label: t("tx.labels.keyMessage"),
           value: (
             <div
               onClick={() => {
@@ -298,10 +300,11 @@ const TxDetailOverview = ({ query }: Props) => {
       ) : (
         <>
           <OverviewCard
-            title='Transaction Overview'
+            title={t("tx.transactionOverview")}
             overviewList={overviewListItems}
-            className='max-h-[450px] pt-2'
-            columnGap='clamp(48px, 8vw, 150px)'
+            className='!basis-auto pt-2 [&>div.flex.h-full]:!h-auto'
+            hFit
+            columnGap='clamp(16px, 5vw, 150px)'
           />
           <section className='flex w-full flex-col gap-5 lg:h-[400px] lg:w-[400px]'>
             <MintedByCard
@@ -313,7 +316,7 @@ const TxDetailOverview = ({ query }: Props) => {
             <SizeCard
               size={data?.size}
               maxSize={data?.epoch_param?.max_tx_size}
-              title='Transaction size'
+              title={t("tx.transactionSize")}
               icon={<GitFork size={20} className='text-primary' />}
               isTx={true}
               max_tx_ex_mem={data?.epoch_param?.max_tx_ex_mem}

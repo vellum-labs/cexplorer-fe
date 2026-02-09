@@ -14,6 +14,7 @@ import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useFetchAnalyticsTopAddresses } from "@/services/analytics";
 import { useAccountTopAddressesTableStore } from "@/stores/tables/accountAnalyticsTopAddressesTableStore";
 import { Link, useSearch } from "@tanstack/react-router";
@@ -26,6 +27,7 @@ import { X } from "lucide-react";
 import { useFilterTable } from "@/hooks/tables/useFilterTable";
 
 export const AccounntTopAddressesTab: FC = () => {
+  const { t } = useAppTranslation("common");
   const { page, addresses_drep_only, addresses_pool_only } = useSearch({
     from: "/analytics/account",
   });
@@ -94,7 +96,7 @@ export const AccounntTopAddressesTab: FC = () => {
           </Link>
         );
       },
-      title: "Account",
+      title: t("analytics.account"),
       visible: columnsVisibility.account,
       widthPx: 40,
     },
@@ -111,7 +113,7 @@ export const AccounntTopAddressesTab: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>ADA Balance</p>,
+      title: <p className='w-full text-right'>{t("analytics.adaBalance")}</p>,
       visible: columnsVisibility.ada_balance,
       widthPx: 40,
     },
@@ -137,7 +139,7 @@ export const AccounntTopAddressesTab: FC = () => {
           className='flex items-center gap-1'
           ref={anchorRefs?.addresses_pool_only}
         >
-          Pool delegation
+          {t("analytics.poolDelegation")}
         </p>
       ),
       filter: {
@@ -154,6 +156,8 @@ export const AccounntTopAddressesTab: FC = () => {
             +filterDraft["addresses_pool_only"],
           ),
         onReset: () => changeFilterByKey("addresses_pool_only"),
+        resetLabel: t("actions.reset"),
+        filterLabel: t("actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             <label className='flex items-center gap-1'>
@@ -170,7 +174,9 @@ export const AccounntTopAddressesTab: FC = () => {
                   )
                 }
               />
-              <span className='text-text-sm'>Delegated to a stake pool</span>
+              <span className='text-text-sm'>
+                {t("analytics.delegatedToPool")}
+              </span>
             </label>
             <label className='flex items-center gap-1'>
               <input
@@ -187,7 +193,7 @@ export const AccounntTopAddressesTab: FC = () => {
                 }
               />
               <span className='text-text-sm'>
-                Not delegated to a stake pool
+                {t("analytics.notDelegatedToPool")}
               </span>
             </label>
           </div>
@@ -221,7 +227,7 @@ export const AccounntTopAddressesTab: FC = () => {
           className='flex items-center gap-1'
           ref={anchorRefs?.addresses_drep_only}
         >
-          DRep delegation
+          {t("analytics.drepDelegation")}
         </div>
       ),
       filter: {
@@ -238,6 +244,8 @@ export const AccounntTopAddressesTab: FC = () => {
             +filterDraft["addresses_drep_only"],
           ),
         onReset: () => changeFilterByKey("addresses_drep_only"),
+        resetLabel: t("actions.reset"),
+        filterLabel: t("actions.filter"),
         filterContent: (
           <div className='flex flex-col gap-1 px-2 py-1'>
             <label className='flex items-center gap-1'>
@@ -254,7 +262,9 @@ export const AccounntTopAddressesTab: FC = () => {
                   )
                 }
               />
-              <span className='text-text-sm'>Delegated to a DRep</span>
+              <span className='text-text-sm'>
+                {t("analytics.delegatedToDrep")}
+              </span>
             </label>
             <label className='flex items-center gap-1'>
               <input
@@ -270,7 +280,9 @@ export const AccounntTopAddressesTab: FC = () => {
                   )
                 }
               />
-              <span className='text-text-sm'>Not delegated to a DRep</span>
+              <span className='text-text-sm'>
+                {t("analytics.notDelegatedToDrep")}
+              </span>
             </label>
           </div>
         ),
@@ -287,7 +299,7 @@ export const AccounntTopAddressesTab: FC = () => {
 
         return <DateCell time={item.first} />;
       },
-      title: <p>First activity</p>,
+      title: <p>{t("analytics.firstActivity")}</p>,
       visible: columnsVisibility.first_activity,
       widthPx: 40,
     },
@@ -300,7 +312,7 @@ export const AccounntTopAddressesTab: FC = () => {
 
         return <DateCell time={item.last} />;
       },
-      title: <p>Last activity</p>,
+      title: <p>{t("analytics.lastActivity")}</p>,
       visible: columnsVisibility.last_activity,
       widthPx: 40,
     },
@@ -320,7 +332,9 @@ export const AccounntTopAddressesTab: FC = () => {
             <LoadingSkeleton height='27px' width={"220px"} />
           ) : totalItems > 0 ? (
             <h3 className='basis-[230px] text-wrap'>
-              Total of {formatNumber(totalItems)} addresses
+              {t("analytics.totalAddresses", {
+                count: formatNumber(totalItems),
+              })}
             </h3>
           ) : (
             ""
@@ -335,10 +349,11 @@ export const AccounntTopAddressesTab: FC = () => {
           <TableSettingsDropdown
             rows={rows}
             setRows={setRows}
+            rowsLabel={t("table.rows")}
             columnsOptions={accountAnalyticsTopAddressesTableOptions.map(
               item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -358,22 +373,22 @@ export const AccounntTopAddressesTab: FC = () => {
                   className='mb-1 flex w-fit items-center gap-1/2 rounded-m border border-border bg-darker px-1 py-1/4 text-text-xs text-grayTextPrimary'
                 >
                   {key === "addresses_pool_only" && (
-                    <span>Pool delegation:</span>
+                    <span>{t("analytics.poolDelegation")}:</span>
                   )}
                   <span>
                     {key === "addresses_pool_only" &&
                       (+value === 1
-                        ? "Delegated to a stake pool"
-                        : "Not delegated to a stake pool")}
+                        ? t("analytics.delegatedToPool")
+                        : t("analytics.notDelegatedToPool"))}
                   </span>
                   {key === "addresses_drep_only" && (
-                    <span>DRep delegation:</span>
+                    <span>{t("analytics.drepDelegation")}:</span>
                   )}
                   <span>
                     {key === "addresses_drep_only" &&
                       (+value === 1
-                        ? "Delegated to a DRep"
-                        : "Not delegated to a DRep")}
+                        ? t("analytics.delegatedToDrep")
+                        : t("analytics.notDelegatedToDrep"))}
                   </span>
                   <X
                     size={13}
@@ -405,10 +420,12 @@ export const AccounntTopAddressesTab: FC = () => {
           );
         })}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
-      <h3 className='mt-2 text-center'>
-        Accounts with less than 100,000 ADA were excluded from this list.
-      </h3>
+      <h3 className='mt-2 text-center'>{t("analytics.accountsExcluded")}</h3>
     </div>
   );
 };

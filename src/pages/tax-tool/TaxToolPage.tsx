@@ -10,8 +10,10 @@ import { CircleAlert } from "lucide-react";
 import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import { isValidAddress } from "@/utils/address/isValidAddress";
 import { toast } from "sonner";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const TaxToolPage: FC = () => {
+  const { t } = useAppTranslation();
   const { stake } = useSearch({
     from: "/tax-tool/",
   });
@@ -34,7 +36,7 @@ export const TaxToolPage: FC = () => {
 
   useEffect(() => {
     if (debouncedSearch && !isValidAddress(debouncedSearch)) {
-      toast.error("Invalid stake address");
+      toast.error(t("taxTool.invalidStakeAddress"));
       setIsValid(false);
     } else if (debouncedSearch) {
       setIsValid(true);
@@ -62,27 +64,27 @@ export const TaxToolPage: FC = () => {
     () => [
       {
         key: "rewards",
-        label: "Rewards",
-        title: "Rewards",
+        label: t("tabs.taxTool.rewards"),
+        title: t("tabs.taxTool.rewards"),
         content: <RewardsTab stakeKey={debouncedSearch} />,
         visible: true,
       },
       {
         key: "withdrawals",
-        label: "Withdrawals",
-        title: "Withdrawals",
+        label: t("tabs.taxTool.withdrawals"),
+        title: t("tabs.taxTool.withdrawals"),
         content: <WithdrawalsTab stakeKey={debouncedSearch} />,
         visible: true,
       },
     ],
-    [debouncedSearch],
+    [debouncedSearch, t],
   );
 
   return (
     <PageBase
       metadataTitle='taxTool'
-      title='Tax tool'
-      breadcrumbItems={[{ label: "Tax tool" }]}
+      title={t("pages:taxTool.title")}
+      breadcrumbItems={[{ label: t("pages:breadcrumbs.taxTool") }]}
       adsCarousel={false}
     >
       <section className='flex w-full justify-center'>
@@ -91,11 +93,10 @@ export const TaxToolPage: FC = () => {
             <CircleAlert className='mt-0.5 text-primary' size={18} />
             <div className='flex flex-col gap-1 text-text-sm'>
               <p className='font-medium text-text'>
-                Please note that the data is for informational purposes only, we
-                do not guarantee its correctness or accuracy.
+                {t("taxTool.disclaimer.title")}
               </p>
               <p className='text-grayTextPrimary'>
-                Always consult your taxes with professional tax advisor.
+                {t("taxTool.disclaimer.subtitle")}
               </p>
             </div>
           </div>
@@ -104,7 +105,7 @@ export const TaxToolPage: FC = () => {
             <TableSearchInput
               value={search}
               onchange={val => setSearch(val)}
-              placeholder='Stake key'
+              placeholder={t("placeholders.stakeKey")}
               showSearchIcon
               wrapperClassName='w-full'
               showPrefixPopup={false}

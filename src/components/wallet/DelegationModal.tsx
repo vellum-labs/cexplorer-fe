@@ -6,6 +6,7 @@ import { handleDelegation } from "@/utils/wallet/handleDelegation";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { Modal } from "@vellumlabs/cexplorer-sdk";
 import { SpinningLoader } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
   onClose: () => void;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 const DelegationModal = ({ onClose, poolQuery }: Props) => {
+  const { t } = useAppTranslation("common");
   const { wallet } = useWalletStore();
 
   const poolId = poolQuery?.data?.data?.pool_id ?? "";
@@ -50,7 +52,7 @@ const DelegationModal = ({ onClose, poolQuery }: Props) => {
     <Modal minHeight='400px' minWidth='400px' maxWidth='95%' onClose={onClose}>
       {livePool === poolData?.pool_id ? (
         <div className='flex h-full w-full items-center justify-center text-center'>
-          You are already delegating to this pool.
+          {t("wallet.alreadyDelegating")}
         </div>
       ) : (
         <div className='flex h-full w-full flex-col items-center justify-around'>
@@ -65,7 +67,7 @@ const DelegationModal = ({ onClose, poolQuery }: Props) => {
 
           <Button
             className='mt-5'
-            label='Delegate'
+            label={t("wallet.delegate")}
             size='lg'
             variant='primary'
             onClick={() =>

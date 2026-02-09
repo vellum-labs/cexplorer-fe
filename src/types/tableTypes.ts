@@ -21,6 +21,8 @@ interface TableColumn<T> {
     onShow?: MouseEventHandler<SVGSVGElement>;
     onReset?: () => void;
     onFilter?: () => void;
+    resetLabel?: string;
+    filterLabel?: string;
   };
 }
 
@@ -867,4 +869,14 @@ export interface MultiPoolDelegatorsOptions {
   columnsOrder: (keyof MultiPoolDelegatorsColumns)[];
   isResponsive: boolean;
   rows: number;
+}
+
+export interface TreasuryWithdrawalsTableColumns {
+  start: boolean;
+  type: boolean;
+  gov_action_name: boolean;
+  amount: boolean;
+  status: boolean;
+  progress: boolean;
+  tx: boolean;
 }

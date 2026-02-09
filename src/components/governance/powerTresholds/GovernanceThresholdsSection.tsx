@@ -58,7 +58,7 @@ export const GovernanceThresholdsSection: FC<
 
   let drepCount = 0;
   if (visibility.drep && params.drep && epochParam?.[params.drep]) {
-    const threshold = epochParam[params.drep];
+    const threshold = epochParam?.[params.drep] ?? 0;
     const votingStake = activeVotingStake || 0;
     const requiredStake = votingStake > 0 ? votingStake * threshold : 0;
 
@@ -82,7 +82,7 @@ export const GovernanceThresholdsSection: FC<
     params.spo &&
     epochParam?.[params.spo]
   ) {
-    const threshold = epochParam[params.spo];
+    const threshold = epochParam?.[params.spo] ?? 0;
     const pools = thresholdProps.poolList.data ?? [];
     const totalStake = thresholdProps.totalSpoStake || 0;
     const requiredStake = totalStake > 0 ? totalStake * threshold : 0;

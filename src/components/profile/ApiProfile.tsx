@@ -31,8 +31,10 @@ import { EmptyState } from "@vellumlabs/cexplorer-sdk";
 import { ProBadge } from "@vellumlabs/cexplorer-sdk";
 import ConnectWalletModal from "../wallet/ConnectWalletModal";
 import { useAuthToken } from "@/hooks/useAuthToken";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const ApiProfile = () => {
+  const { t } = useAppTranslation("common");
   const [showKey, setShowKey] = useState(false);
   const [showConnectModal, setShowConnectModal] = useState(false);
   const token = useAuthToken();
@@ -54,7 +56,7 @@ export const ApiProfile = () => {
     mutateAsync({ state: "disable", key: key }).then(() => {
       mutateAsync({ state: "enable", key: key }).then(() => {
         userQuery.refetch();
-        toast.success("API key regenerated successfully.");
+        toast.success(t("profile.api.keyRegenerated"));
       });
     });
   };
@@ -71,11 +73,11 @@ export const ApiProfile = () => {
         <div className='flex w-full max-w-desktop flex-col'>
           <EmptyState
             icon={<Wallet size={24} />}
-            primaryText='Wallet not connected.'
-            secondaryText='Connect your wallet to access API dashboard and manage your API keys.'
+            primaryText={t("profile.walletNotConnected")}
+            secondaryText={t("profile.api.connectToAccess")}
             button={
               <Button
-                label='Connect wallet'
+                label={t("profile.connectWallet")}
                 variant='primary'
                 size='md'
                 onClick={() => setShowConnectModal(true)}
@@ -91,20 +93,25 @@ export const ApiProfile = () => {
     <div className='flex max-w-desktop flex-col'>
       <section className='flex flex-col gap-2 md:flex-row md:items-center md:justify-between'>
         <div className='flex flex-col'>
-          <h2>API dashboard</h2>
+          <h2>{t("profile.api.dashboard")}</h2>
           <p className='text-grayTextPrimary'>
-            Manage and monitor you Cexplorer API keys usage.
+            {t("profile.api.manageAndMonitor")}
           </p>
         </div>
         <div className='flex gap-1 md:justify-end'>
+          <a
+            href='https://cexplorer.apidocumentation.com/cexplorer-api'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <Button
+              label={t("profile.api.documentation")}
+              variant='tertiary'
+              size='md'
+            />
+          </a>
           <Button
-            label='Documentation'
-            variant='tertiary'
-            size='md'
-            href='/api'
-          />
-          <Button
-            label='New project'
+            label={t("profile.api.newProject")}
             leftIcon={<Plus size={15} />}
             variant='primary'
             size='md'
@@ -114,7 +121,7 @@ export const ApiProfile = () => {
         </div>
       </section>
       <section className='mt-2 flex flex-wrap items-center gap-1.5 border-b border-border pb-2 text-text-sm md:gap-5'>
-        <span className='mr-1'>Your account</span>
+        <span className='mr-1'>{t("profile.yourAccount")}</span>
         <span className='flex items-center gap-1/2 text-grayTextPrimary'>
           {/* Your plan: <Badge color='gray'>{!nfts ? "Basic" : "PRO"}</Badge> */}
         </span>
@@ -127,11 +134,11 @@ export const ApiProfile = () => {
             }
             className='gold-shimmer flex items-center gap-1/2 bg-purpleText bg-clip-text font-medium text-transparent underline hover:text-transparent'
           >
-            NFTs held: <span className=''>{nfts}</span>
+            {t("profile.nftsHeld")}: <span className=''>{nfts}</span>
           </Link>
         )}
         <span className='flex items-center gap-1/2 text-grayTextPrimary'>
-          API key limit: <span className='text-text'>1</span>
+          {t("profile.apiKeyLimit")}: <span className='text-text'>1</span>
         </span>
       </section>
       {userQuery.isLoading ? (
@@ -146,10 +153,9 @@ export const ApiProfile = () => {
                 size={40}
                 className='rounded-s border border-border p-1'
               />
-              <h2>You don't have any projects yet.</h2>
+              <h2>{t("profile.api.noProjects")}</h2>
               <p className='max-w-[350px] text-center text-text-sm text-grayTextPrimary'>
-                Start a new project to generate a new API keys, monitor your
-                usage, and track your data.
+                {t("profile.api.startNewProject")}
               </p>
             </div>
           ) : (
@@ -159,21 +165,23 @@ export const ApiProfile = () => {
                   {userData.length > 1 && <h1>#{index + 1}</h1>}
                   <div className='flex w-full flex-col gap-4 border-b border-border pb-2 md:flex-row'>
                     <div className='flex flex-col gap-1 md:w-[300px]'>
-                      <span className='font-medium'>Plan</span>
+                      <span className='font-medium'>
+                        {t("profile.api.plan")}
+                      </span>
                       <p className='text-text-sm font-regular text-grayTextPrimary'>
-                        Details about your API plan
+                        {t("profile.api.planDetails")}
                       </p>
                     </div>
                     <div className='flex w-full flex-col gap-1.5'>
                       <span className='flex'>
                         <span className='min-w-[150px] font-regular text-grayTextPrimary'>
-                          Project name
+                          {t("profile.api.projectName")}
                         </span>{" "}
                         <span>{apiKey.name}</span>
                       </span>
                       <span className='flex'>
                         <span className='min-w-[150px] font-regular text-grayTextPrimary'>
-                          My API plan
+                          {t("profile.api.myApiPlan")}
                         </span>{" "}
                         <span>
                           <Badge color='gray'>
@@ -184,19 +192,24 @@ export const ApiProfile = () => {
                       </span>
                       <span className='flex'>
                         <span className='min-w-[150px] font-regular text-grayTextPrimary'>
-                          Limits
+                          {t("profile.api.limits")}
                         </span>{" "}
                         <span className='flex items-center gap-1/2'>
-                          {apiKey.numerator}x boosted{" "}
+                          {t("profile.api.boosted", {
+                            count: apiKey.numerator,
+                          })}{" "}
                           <Tooltip
                             content={
                               <div className='flex w-[220px] flex-col gap-1'>
                                 <p>
-                                  This address holds {nfts} Cexplorer PRO NFTs.
+                                  {t("profile.api.nftsHeldTooltip", {
+                                    count: nfts,
+                                  })}
                                 </p>
                                 <p>
-                                  Your limits are {nfts}x the base limits in
-                                  Basic API program.
+                                  {t("profile.api.limitsBoostTooltip", {
+                                    count: nfts,
+                                  })}
                                 </p>
                               </div>
                             }
@@ -207,7 +220,7 @@ export const ApiProfile = () => {
                       </span>
                       <span className='flex'>
                         <span className='min-w-[150px] font-regular text-grayTextPrimary'>
-                          License
+                          {t("profile.api.license")}
                         </span>{" "}
                         <span>
                           {userPlans && userPlans[apiKey.type]?.license}
@@ -217,18 +230,18 @@ export const ApiProfile = () => {
                   </div>
                   <div className='flex w-full flex-col gap-4 border-b border-border pb-2 md:flex-row'>
                     <div className='flex flex-col gap-1 md:w-[300px]'>
-                      <span className='font-medium'>Limits</span>
+                      <span className='font-medium'>
+                        {t("profile.api.limits")}
+                      </span>
                       <p className='text-text-sm font-regular text-grayTextPrimary'>
-                        API limits based on your plan. You can increase the
-                        limits by upgrading your / by holding more Cexplorer PRO
-                        NFTs.
+                        {t("profile.api.limitsDescription")}
                       </p>
                       {apiKey.type === "starter" && (
                         <Link
                           to='/api'
                           className='mt-1/2 flex items-center gap-1/2 font-medium text-primary'
                         >
-                          Upgrade plan <Wand size={17} />
+                          {t("profile.api.upgradePlan")} <Wand size={17} />
                         </Link>
                       )}
                     </div>
@@ -236,16 +249,16 @@ export const ApiProfile = () => {
                       <ProgressBar
                         value={apiKey.rqs_day}
                         max={(userTierPlan?.rq_day ?? 0) * apiKey.numerator}
-                        title='Requests per day'
+                        title={t("profile.api.requestsPerDay")}
                       />
                       <ProgressBar
                         value={apiKey.tok_day}
                         max={(userTierPlan?.tok_day ?? 0) * apiKey.numerator}
-                        title='Tokens'
+                        title={t("profile.api.tokens")}
                       />
                       <div className='flex flex-col'>
                         <span className='font-medium'>
-                          Max requests per minute
+                          {t("profile.api.maxRequestsPerMinute")}
                         </span>
                         <span className='font-regular text-grayTextPrimary'>
                           {userTierPlan?.rq_min}
@@ -255,10 +268,11 @@ export const ApiProfile = () => {
                   </div>
                   <div className='flex w-full flex-col gap-4 border-b border-border pb-2 text-text-sm md:flex-row'>
                     <div className='flex flex-col gap-1 md:w-[300px]'>
-                      <span className='font-medium'>API keys</span>
+                      <span className='font-medium'>
+                        {t("profile.api.apiKeys")}
+                      </span>
                       <p className='text-text-sm font-regular text-grayTextPrimary'>
-                        Your project’s API key. You can regenerate the key at
-                        any time (disables the original key).
+                        {t("profile.api.apiKeysDescription")}
                       </p>
                     </div>
                     <div className='flex w-full flex-col gap-1'>
@@ -279,7 +293,7 @@ export const ApiProfile = () => {
                       <div className='flex items-center gap-1'>
                         <Copy copyText={apiKey.key} />
                         <Button
-                          label='Regenerate key'
+                          label={t("profile.api.regenerateKey")}
                           size='md'
                           variant='tertiary'
                           leftIcon={<RotateCcw size={15} />}
@@ -290,13 +304,15 @@ export const ApiProfile = () => {
                   </div>
                   <div className='flex w-full flex-col gap-4 pb-2 text-text-sm lg:flex-row'>
                     <div className='flex flex-col gap-1 lg:w-[300px]'>
-                      <span className='font-medium'>API usage</span>
+                      <span className='font-medium'>
+                        {t("profile.api.apiUsage")}
+                      </span>
                       <p className='text-text-sm font-regular text-grayTextPrimary'>
-                        Overview of the requests amount in time.
+                        {t("profile.api.apiUsageDescription")}
                       </p>
                     </div>
                     <div className='flex w-full flex-col justify-center gap-1 lg:w-[calc(100%-300px)]'>
-                      <ActivityGraph data={apiKey.stat} />
+                      <ActivityGraph data={apiKey.stat} t={t} />
                     </div>
                   </div>
                 </div>
@@ -309,9 +325,18 @@ export const ApiProfile = () => {
   );
 };
 
-const ActivityGraph = ({ data }: { data: UserApiObject["stat"] }) => {
+const ActivityGraph = ({
+  data,
+  t,
+}: {
+  data: UserApiObject["stat"];
+  t: (key: string) => string;
+}) => {
   const { splitLineColor, textColor, bgColor, inactivePageIconColor } =
     useGraphColors();
+
+  const tokensLabel = t("profile.api.tokens");
+  const requestsPerDayLabel = t("profile.api.requestsPerDay");
 
   const option: ReactEChartsProps["option"] = {
     legend: {
@@ -321,7 +346,7 @@ const ActivityGraph = ({ data }: { data: UserApiObject["stat"] }) => {
         color: textColor,
       },
       type: "scroll",
-      data: ["Tokens", "Requests per day"],
+      data: [tokensLabel, requestsPerDayLabel],
       textStyle: {
         color: textColor,
       },
@@ -344,7 +369,7 @@ const ActivityGraph = ({ data }: { data: UserApiObject["stat"] }) => {
     xAxis: {
       type: "category",
       data: data?.map(({ date }) => formatDate(date, true)),
-      name: "Date",
+      name: t("profile.api.date"),
       nameLocation: "middle",
       nameGap: 28,
       boundaryGap: false,
@@ -403,7 +428,7 @@ const ActivityGraph = ({ data }: { data: UserApiObject["stat"] }) => {
       {
         type: "line",
         data: data?.map(({ tok }) => tok),
-        name: "Tokens",
+        name: tokensLabel,
         yAxisIndex: 0,
         lineStyle: {
           color: textColor,
@@ -417,7 +442,7 @@ const ActivityGraph = ({ data }: { data: UserApiObject["stat"] }) => {
       {
         type: "line",
         data: data?.map(({ rqs }) => rqs),
-        name: "Requests per day",
+        name: requestsPerDayLabel,
         yAxisIndex: 1,
         lineStyle: {
           color: "#0094D4",
@@ -434,7 +459,7 @@ const ActivityGraph = ({ data }: { data: UserApiObject["stat"] }) => {
   if (!data)
     return (
       <div className='flex w-full items-center lg:justify-center'>
-        No registered usage yet
+        {t("profile.api.noRegisteredUsage")}
       </div>
     );
 

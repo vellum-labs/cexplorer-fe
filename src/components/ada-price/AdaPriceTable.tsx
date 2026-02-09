@@ -17,19 +17,22 @@ import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { AdaPriceTableSkeleton } from "./AdaPriceTableSkeleton";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const AdaPriceTable: FC = () => {
+  const { t } = useAppTranslation("common");
   const price = useAdaPriceWithHistory();
   const { currency } = useCurrencyStore();
 
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   if (price.percentChange === undefined) return <AdaPriceTableSkeleton />;
 
   const { genesisParams } = configJSON;
 
   const totalSupply = genesisParams[0].shelley[0].maxLovelaceSupply;
+  const formattedMaxSupply = lovelaceToAda(totalSupply);
 
   return (
     <div className='flex w-full flex-col rounded-m border border-border bg-cardBg pb-2 pt-2 lg:min-w-[390px] lg:max-w-[400px] lg:pb-0'>
@@ -39,7 +42,9 @@ export const AdaPriceTable: FC = () => {
             <Cardano size={20} color={colors.text} />
           </div>
           <h3>Cardano</h3>
-          <span className='text-text-sm text-grayTextPrimary'>ADA Price</span>
+          <span className='text-text-sm text-grayTextPrimary'>
+            {t("adaPrice.adaPrice")}
+          </span>
         </div>
         <div className='flex items-center gap-1'>
           <span className='text-display-xs font-semibold'>
@@ -48,7 +53,22 @@ export const AdaPriceTable: FC = () => {
             })}
           </span>
           <span
-            className={`ml-0.5 flex items-center rounded-max border px-1/2 py-1/4 text-[11px] font-medium ${price.percentChange < 1 && price.percentChange > -1 ? "border-yellow-500/40 bg-yellow-500/5 text-yellowText" : price.percentChange > 0 ? "border-green-500/40 bg-green-500/5 text-greenText" : "border-red-500/40 bg-red-500/5 text-redText"}`}
+            className={`ml-0.5 flex items-center rounded-max border px-1/2 py-1/4 text-[11px] font-medium ${price.percentChange < 1 && price.percentChange > -1 ? "text-yellowText" : price.percentChange > 0 ? "text-greenText" : "text-redText"}`}
+            style={{
+              border: `1px solid ${
+                price.percentChange < 1 && price.percentChange > -1
+                  ? "rgba(234, 179, 8, 0.4)"
+                  : price.percentChange > 0
+                    ? "rgba(34, 197, 94, 0.4)"
+                    : "rgba(239, 68, 68, 0.4)"
+              }`,
+              backgroundColor:
+                price.percentChange < 1 && price.percentChange > -1
+                  ? "rgba(234, 179, 8, 0.05)"
+                  : price.percentChange > 0
+                    ? "rgba(34, 197, 94, 0.05)"
+                    : "rgba(239, 68, 68, 0.05)",
+            }}
           >
             {price.percentChange > 0 && "+"}
             {price.percentChange?.toFixed(1)}%
@@ -61,7 +81,7 @@ export const AdaPriceTable: FC = () => {
           <div className='flex items-center gap-1/2'>
             <img src={Bitcoin} alt='btc' className='h-[14px] w-[14px]' />
             <span className='text-text-xs font-medium text-grayTextPrimary'>
-              sats
+              {t("adaPrice.sats")}
             </span>
           </div>
         </div>
@@ -70,9 +90,9 @@ export const AdaPriceTable: FC = () => {
       <div className='flex h-[50px] flex-grow items-center border-b border-border px-3'>
         <div className='flex min-w-[160px] items-center gap-1/2'>
           <span className='inline-block text-text-sm font-medium text-grayTextPrimary'>
-            Market cap
+            {t("adaPrice.marketCap")}
           </span>
-          <Tooltip content='ADA price × circulating supply'>
+          <Tooltip content={t("adaPrice.marketCapTooltip")}>
             <CircleHelp
               size={12}
               className='translate-y-[1px] cursor-pointer text-grayTextPrimary'
@@ -94,10 +114,12 @@ export const AdaPriceTable: FC = () => {
       <div className='flex h-[50px] flex-grow items-center border-b border-border bg-darker px-3'>
         <div className='flex min-w-[160px] items-center gap-1/2'>
           <span className='inline-block text-text-sm font-medium text-grayTextPrimary'>
-            FDV
+            {t("adaPrice.fdv")}
           </span>
           <Tooltip
-            content={`Fully Diluted Valuation = ADA price × max supply (${lovelaceToAda(totalSupply)})`}
+            content={t("adaPrice.fdvTooltip", {
+              maxSupply: formattedMaxSupply,
+            })}
           >
             <CircleHelp
               size={12}
@@ -118,9 +140,9 @@ export const AdaPriceTable: FC = () => {
       <div className='flex h-[50px] flex-grow items-center border-b border-border px-3'>
         <div className='flex min-w-[160px] items-center gap-1/2'>
           <span className='inline-block text-text-sm font-medium text-grayTextPrimary'>
-            Circulating supply
+            {t("adaPrice.circulatingSupply")}
           </span>
-          <Tooltip content='ADA currently in circulation (not locked or unminted)'>
+          <Tooltip content={t("adaPrice.circulatingSupplyTooltip")}>
             <CircleHelp
               size={12}
               className='translate-y-[1px] cursor-pointer text-grayTextPrimary'
@@ -137,10 +159,12 @@ export const AdaPriceTable: FC = () => {
       <div className='flex h-[50px] flex-grow items-center border-b border-border bg-darker px-3'>
         <div className='flex min-w-[160px] items-center gap-1/2'>
           <span className='inline-block text-text-sm font-medium text-grayTextPrimary'>
-            Total supply
+            {t("adaPrice.totalSupply")}
           </span>
           <Tooltip
-            content={`The maximum number of ADA that will ever exist (${lovelaceToAda(totalSupply)})`}
+            content={t("adaPrice.totalSupplyTooltip", {
+              maxSupply: formattedMaxSupply,
+            })}
           >
             <CircleHelp
               size={12}
@@ -156,9 +180,9 @@ export const AdaPriceTable: FC = () => {
       <div className='flex h-[50px] flex-grow items-center border-b px-3 lg:border-none'>
         <div className='flex min-w-[160px] items-center gap-1/2'>
           <span className='inline-block text-text-sm font-medium text-grayTextPrimary'>
-            ADA staked
+            {t("adaPrice.adaStaked")}
           </span>
-          <Tooltip content='ADA delegated to stake pools (out of circulating supply)'>
+          <Tooltip content={t("adaPrice.adaStakedTooltip")}>
             <CircleHelp
               size={12}
               className='translate-y-[1px] cursor-pointer text-grayTextPrimary'

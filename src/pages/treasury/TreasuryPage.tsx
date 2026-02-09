@@ -116,6 +116,12 @@ export const TreasuryPage = () => {
           items={walletData}
           columns={columns}
           query={walletQueries[0]}
+          scrollable
+          minContentWidth={700}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </div>
     </PageBase>

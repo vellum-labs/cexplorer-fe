@@ -13,6 +13,7 @@ import {
   type AnalyticsTopStakingAccountsResponse,
   type EpochAnalyticsResponse,
   type HardforkResponse,
+  type MilestoneAnalyticsResponse,
 } from "@/types/analyticsTypes";
 
 import { handleFetch } from "@/lib/handleFetch";
@@ -47,6 +48,40 @@ export const useFetchEpochAnalytics = () =>
     queryKey: ["analytics-epoch"],
     queryFn: async () => {
       const { data } = await fetchEpochAnalytics();
+
+      return data;
+    },
+  });
+
+export const fetchMilestoneAnalytics = async () => {
+  const url =
+    "/analytics/milestone?display=sum_fee,count_tx,avg_tx_fee,block_version,tx_composition,max_block_tx_count,count_tx_out,count_block,avg_block_size,max_block_size,count_tx_out_address,count_tx_out_stake,count_tx_out_address_not_yesterday,count_tx_out_stake_not_yesterday,count_pool_relay_uniq,count_pool";
+
+  return handleFetch<MilestoneAnalyticsResponse>(url);
+};
+
+export const useFetchMilestoneAnalytics = () =>
+  useQuery({
+    queryKey: ["analytics-milestone"],
+    queryFn: async () => {
+      const { data } = await fetchMilestoneAnalytics();
+
+      return data;
+    },
+  });
+
+export const fetchPoolMilestoneAnalytics = async () => {
+  const url =
+    "/analytics/milestone?display=pool_distr,block_producers,circulating_supply,pool_block_version";
+
+  return handleFetch<MilestoneAnalyticsResponse>(url);
+};
+
+export const useFetchPoolMilestoneAnalytics = () =>
+  useQuery({
+    queryKey: ["analytics-pool-milestone"],
+    queryFn: async () => {
+      const { data } = await fetchPoolMilestoneAnalytics();
 
       return data;
     },
@@ -198,16 +233,20 @@ export const useFetchWealthComposition = () =>
     queryFn: () => fetchWealthComposition(),
   });
 
-export const fetchAdaPots = async () => {
+export const fetchAdaPots = async (limit?: number, offset?: number) => {
   const url = "/analytics/ada_pot";
+  const options =
+    limit !== undefined || offset !== undefined
+      ? { params: { limit, offset } }
+      : undefined;
 
-  return handleFetch<AnalyticsAdaPotsResponse>(url);
+  return handleFetch<AnalyticsAdaPotsResponse>(url, undefined, options);
 };
 
-export const useFetchAdaPots = () =>
+export const useFetchAdaPots = (limit?: number, offset?: number) =>
   useQuery({
-    queryKey: ["ada-pots"],
-    queryFn: () => fetchAdaPots(),
+    queryKey: ["ada-pots", limit, offset],
+    queryFn: () => fetchAdaPots(limit, offset),
   });
 
 const fetchGroupList = async () => {

@@ -26,6 +26,9 @@
   "datumInspector": {
     "title": "Datum Inspector | Cexplorer.io"
   },
+  "handleDns": {
+    "title": "$handle DNS | Cexplorer.io"
+  },
   "status": {
     "title": "Status | Cexplorer.io"
   },
@@ -238,5 +241,8 @@
   },
   "walletComparison": {
     "title": "Compare Cardano Wallets | Cexplorer.io"
+  },
+  "adsPromotion": {
+    "title": "Promotion | Cexplorer.io"
   }
 }

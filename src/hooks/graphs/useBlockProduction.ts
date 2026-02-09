@@ -11,6 +11,7 @@ import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import type { MiscConstResponseData } from "@/types/miscTypes";
 import { format } from "date-fns";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface UseBlockProduction {
   json: any;
@@ -23,6 +24,7 @@ interface UseBlockProduction {
 export const useBlockProduction = (
   miscConst: MiscConstResponseData | undefined,
 ): UseBlockProduction => {
+  const { t } = useAppTranslation("pages");
   const [json, setJson] = useState<any>();
   const [data, setData] = useState<EpochAnalyticsResponseData[]>();
 
@@ -30,6 +32,11 @@ export const useBlockProduction = (
     GraphTimePeriod.ThirtyDays,
   );
   const { splitLineColor, textColor, bgColor } = useGraphColors();
+
+  const graphLabels = {
+    blocks: t("analytics.graph.blocks"),
+    movingAverage: t("analytics.graph.movingAverage"),
+  };
 
   const epochs = (data || []).map(item => item.no).reverse();
 
@@ -72,7 +79,7 @@ export const useBlockProduction = (
 
     series: [
       {
-        name: "Blocks",
+        name: graphLabels.blocks,
         data: blocks,
         type: "bar",
         itemStyle: {
@@ -80,7 +87,7 @@ export const useBlockProduction = (
         },
       },
       {
-        name: "Moving Average (5 epochs)",
+        name: graphLabels.movingAverage,
         data: movingAverageBlocks,
         type: "line",
         smooth: true,
@@ -110,18 +117,21 @@ export const useBlockProduction = (
         );
 
         const nameFunc = {
-          Blocks: item => (item ? `${formatNumber(item.value)}` : "Blocks"),
-          "Moving Average (5 epochs)": item =>
-            item ? `${formatNumber(item.value.toFixed(2))}` : "Moving Avg",
+          [graphLabels.blocks]: item =>
+            item ? `${formatNumber(item.value)}` : graphLabels.blocks,
+          [graphLabels.movingAverage]: item =>
+            item
+              ? `${formatNumber(item.value.toFixed(2))}`
+              : graphLabels.movingAverage,
         };
 
         return (
-          `Date: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (Epoch: ${params[0].axisValue})<hr>` +
+          `${t("epochs.graph.date")}: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${t("epochs.graph.epoch")}: ${params[0].axisValue})<hr>` +
           `<div>
         ${params
           .map(
             item =>
-              `<p>${marker(item)} ${item.seriesName || "Blocks"}: ${nameFunc[item.seriesName || "Blocks"](item)}</p>`,
+              `<p>${marker(item)} ${item.seriesName || graphLabels.blocks}: ${nameFunc[item.seriesName || graphLabels.blocks]?.(item) ?? formatNumber(item.value)}</p>`,
           )
           .join("")}
       </div>`

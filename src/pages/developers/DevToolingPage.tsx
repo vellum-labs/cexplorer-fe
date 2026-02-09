@@ -14,15 +14,18 @@ import {
 } from "lucide-react";
 import { DiscordLogo, GithubLogo } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const DevToolingPage = () => {
+  const { t } = useAppTranslation("common");
+
   const devToolingSections = [
     {
-      label: "Address inspector",
-      description: "Decode and analyze any Cardano address.",
+      label: t("devTooling.sections.addressInspector.label"),
+      description: t("devTooling.sections.addressInspector.description"),
       buttons: [
         {
-          label: "Address inspector",
+          label: t("devTooling.sections.addressInspector.button"),
           href: "/address/inspector",
           variant: "primary" as const,
           icon: <ArrowRight size={16} />,
@@ -31,11 +34,11 @@ export const DevToolingPage = () => {
       icon: <Search className='text-primary' />,
     },
     {
-      label: "Datum inspector",
-      description: "Parse on-chain datum values stored in scripts.",
+      label: t("devTooling.sections.datumInspector.label"),
+      description: t("devTooling.sections.datumInspector.description"),
       buttons: [
         {
-          label: "Datum inspector",
+          label: t("devTooling.sections.datumInspector.button"),
           href: "/datum",
           variant: "primary" as const,
           icon: <ArrowRight size={16} />,
@@ -44,23 +47,22 @@ export const DevToolingPage = () => {
       icon: <Code className='text-primary' />,
     },
     {
-      label: "Cexplorer API",
-      description:
-        "Access real-time Cardano on-chain data and integrate directly into your apps.",
+      label: t("devTooling.sections.cexplorerApi.label"),
+      description: t("devTooling.sections.cexplorerApi.description"),
       buttons: [
         {
-          label: "Documentation",
+          label: t("devTooling.sections.cexplorerApi.documentation"),
           href: "https://docs.cexplorer.io",
           variant: "tertiary" as const,
           external: true,
         },
         {
-          label: "Get API key",
+          label: t("devTooling.sections.cexplorerApi.getApiKey"),
           href: "/api",
           variant: "tertiary" as const,
         },
         {
-          label: "API Page",
+          label: t("devTooling.sections.cexplorerApi.apiPage"),
           href: "/api",
           variant: "primary" as const,
           icon: <ArrowRight size={16} />,
@@ -69,11 +71,11 @@ export const DevToolingPage = () => {
       icon: <LinkIcon className='text-primary' />,
     },
     {
-      label: "Cexplorer SDK",
-      description: "An official set of tooling for Cexplorer front-end.",
+      label: t("devTooling.sections.cexplorerSdk.label"),
+      description: t("devTooling.sections.cexplorerSdk.description"),
       buttons: [
         {
-          label: "SDK",
+          label: t("devTooling.sections.cexplorerSdk.button"),
           href: "https://github.com/vellum-labs/cexplorer-sdk",
           variant: "primary" as const,
           icon: <ArrowRight size={16} />,
@@ -83,12 +85,11 @@ export const DevToolingPage = () => {
       icon: <Wrench className='text-primary' />,
     },
     {
-      label: "UPLC Viewer",
-      description:
-        "Inspect and explore UPLC scripts in a readable, structured format.",
+      label: t("devTooling.sections.uplcViewer.label"),
+      description: t("devTooling.sections.uplcViewer.description"),
       buttons: [
         {
-          label: "UPLC Viewer",
+          label: t("devTooling.sections.uplcViewer.button"),
           href: "/uplc",
           variant: "primary" as const,
           icon: <ArrowRight size={16} />,
@@ -97,9 +98,8 @@ export const DevToolingPage = () => {
       icon: <Binary className='text-primary' />,
     },
     {
-      label: "Cexplorer instances",
-      description:
-        "Access blockchain explorer for both Cardano mainnet and testnet environments.",
+      label: t("devTooling.sections.cexplorerInstances.label"),
+      description: t("devTooling.sections.cexplorerInstances.description"),
       buttons: networks.map(network => ({
         label: network.label.split(" ")[0],
         href: network.url,
@@ -110,23 +110,23 @@ export const DevToolingPage = () => {
       icon: <ArrowLeftRight className='text-primary' />,
     },
     {
-      label: "Github",
-      description: "Explore the source, contribute, and track updates.",
+      label: t("devTooling.sections.github.label"),
+      description: t("devTooling.sections.github.description"),
       buttons: [
         {
-          label: "Report a bug",
+          label: t("devTooling.sections.github.reportBug"),
           href: "https://github.com/vellum-labs/cexplorer-fe/issues/new?template=bug_report.md",
           variant: "tertiary" as const,
           external: true,
         },
         {
-          label: "Suggest a feature",
+          label: t("devTooling.sections.github.suggestFeature"),
           href: "https://github.com/vellum-labs/cexplorer-fe/issues/new?template=feature_request.md",
           variant: "tertiary" as const,
           external: true,
         },
         {
-          label: "Github",
+          label: t("devTooling.sections.github.button"),
           href: "https://github.com/vellum-labs/cexplorer-fe",
           variant: "tertiary" as const,
           external: true,
@@ -143,19 +143,18 @@ export const DevToolingPage = () => {
       ),
     },
     {
-      label: "Get in touch",
-      description:
-        "Reach out to our team for questions, partnerships, feedback, or developer support.",
+      label: t("devTooling.sections.getInTouch.label"),
+      description: t("devTooling.sections.getInTouch.description"),
       buttons: [
         {
-          label: "Email",
+          label: t("devTooling.sections.getInTouch.email"),
           href: "mailto:support@cexplorer.io",
           variant: "tertiary" as const,
           icon: <Mail size={16} />,
           external: true,
         },
         {
-          label: "Join Discord",
+          label: t("devTooling.sections.getInTouch.joinDiscord"),
           href: "https://discord.gg/PGCmmQC3dj",
           variant: "discord" as const,
           icon: (
@@ -177,8 +176,8 @@ export const DevToolingPage = () => {
   return (
     <PageBase
       metadataTitle='devTooling'
-      title='Developer Tools'
-      breadcrumbItems={[{ label: "Developers" }]}
+      title={t("devTooling.title")}
+      breadcrumbItems={[{ label: t("devTooling.breadcrumb") }]}
     >
       <section className='mt-2 w-full max-w-desktop px-mobile pb-3 md:px-desktop'>
         <div className='grid grid-cols-1 gap-3 md:grid-cols-2'>

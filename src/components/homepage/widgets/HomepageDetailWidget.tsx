@@ -7,6 +7,7 @@ import SortBy from "@/components/ui/sortBy";
 
 import { useEffect, useState } from "react";
 import { useGetDetailWidget } from "@/hooks/widget/useGetWidget";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface HomepageDetailWidgetProps {
   type: WidgetTypes;
@@ -19,6 +20,7 @@ export const HomepageDetailWidget: FC<HomepageDetailWidgetProps> = ({
   detailAddr,
   type,
 }) => {
+  const { t } = useAppTranslation("common");
   const { isLoading, list, title } = useGetDetailWidget(
     type,
     dataType,
@@ -94,7 +96,7 @@ export const HomepageDetailWidget: FC<HomepageDetailWidgetProps> = ({
         {title && title}
         <div className='flex flex-wrap items-center gap-x-1'>
           <span className='text-text-xs text-grayTextPrimary'>
-            Detail block:{" "}
+            {t("homepage.detailBlock")}{" "}
           </span>
           <SortBy
             selectItems={selectItems as any}

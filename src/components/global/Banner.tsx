@@ -1,6 +1,7 @@
 import type { FC, ReactNode } from "react";
 
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface BannerProps {
   description: ReactNode;
@@ -8,6 +9,7 @@ interface BannerProps {
 
 export const Banner: FC<BannerProps> = ({ description }) => {
   const { theme } = useThemeStore();
+  const { t } = useAppTranslation();
 
   const lightTheme = theme === "light";
 
@@ -17,16 +19,16 @@ export const Banner: FC<BannerProps> = ({ description }) => {
     >
       <span>{description}</span>
       <span>
-        Follow our{" "}
+        {t("global.banner.followOur")}{" "}
         <a
           href='https://twitter.com/cexplorer_io'
           target='_blank'
           rel='noreferrer noopener'
           className='font-medium text-brand-500 hover:underline'
         >
-          X profile
+          {t("global.banner.xProfile")}
         </a>{" "}
-        for updates.
+        {t("global.banner.forUpdates")}
       </span>
     </div>
   );

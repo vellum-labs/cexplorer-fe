@@ -25,6 +25,7 @@ import { calculateLoyaltyDays, slotToDate } from "@/utils/slotToDate";
 import { format } from "date-fns";
 import { ArrowRight } from "lucide-react";
 import { DrepNameCell } from "../DrepNameCell";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface DelegatorSubtabProps {
   type: "all" | "new" | "migrations";
@@ -32,6 +33,7 @@ interface DelegatorSubtabProps {
 }
 
 export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
+  const { t } = useAppTranslation("pages");
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { page } = useSearch({ from: "/drep/$hash" });
 
@@ -98,7 +100,7 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
           />
         );
       },
-      title: <p>Delegated</p>,
+      title: <p>{t("dreps.detailPage.delegatorsTable.delegated")}</p>,
       visible: columnsVisibility.date,
       widthPx: 30,
     },
@@ -111,7 +113,11 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
 
         return <p className='text-right'>{item?.live_drep?.tx?.epoch_no}</p>;
       },
-      title: <p className='w-full text-right'>Active In</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("dreps.detailPage.delegatorsTable.activeIn")}
+        </p>
+      ),
       visible: columnsVisibility.active_in,
       widthPx: 30,
     },
@@ -137,7 +143,7 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
           </div>
         );
       },
-      title: <p>Stake</p>,
+      title: <p>{t("common:labels.stake")}</p>,
       visible: columnsVisibility.stake,
       widthPx: 70,
     },
@@ -154,7 +160,7 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>Amount</p>,
+      title: <p className='w-full text-right'>{t("common:labels.amount")}</p>,
       visible: columnsVisibility.amount,
       widthPx: 30,
     },
@@ -202,7 +208,7 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
           </div>
         );
       },
-      title: <p>DRep Delegation</p>,
+      title: <p>{t("dreps.detailPage.delegatorsTable.drepDelegation")}</p>,
       visible: columnsVisibility.drep_delegation,
       widthPx: 140,
     },
@@ -230,7 +236,7 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
           </div>
         );
       },
-      title: <p className='w-full text-right'>Loyalty</p>,
+      title: <p className='w-full text-right'>{t("common:labels.loyalty")}</p>,
       visible: columnsVisibility.loyalty,
       widthPx: 20,
     },
@@ -243,7 +249,7 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
 
         return <HashCell hash={item?.live_drep?.tx?.tx_hash} />;
       },
-      title: <p>Tx</p>,
+      title: <p>{t("common:labels.tx")}</p>,
       visible: columnsVisibility.tx,
       widthPx: 60,
     },
@@ -272,6 +278,10 @@ export const DelegatorSubtab: FC<DelegatorSubtabProps> = ({ type, view }) => {
         );
       })}
       onOrderChange={setColumsOrder}
+      renderDisplayText={(count, total) =>
+        t("common:table.displaying", { count, total })
+      }
+      noItemsLabel={t("common:table.noItems")}
     />
   );
 };

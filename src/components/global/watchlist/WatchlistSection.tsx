@@ -10,6 +10,7 @@ import { useWalletStore } from "@/stores/walletStore";
 import { handleDelegation } from "@/utils/wallet/handleDelegation";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import { useState } from "react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const WatchlistSection = ({
   ident,
@@ -23,6 +24,7 @@ export const WatchlistSection = ({
   hasDex = false,
   assetName,
   isPoolRetiredOrRetiring = false,
+  showPromote = true,
 }: {
   ident: string | undefined;
   isLoading: boolean;
@@ -35,9 +37,11 @@ export const WatchlistSection = ({
   hasDex?: boolean;
   assetName?: string;
   isPoolRetiredOrRetiring?: boolean;
+  showPromote?: boolean;
 }) => {
   const { wallet, address, walletType } = useWalletStore();
   const [showWalletModal, setShowWalletModal] = useState<boolean>(false);
+  const { t } = useAppTranslation();
 
   const drepName = drepDetailQuery?.data?.data?.given_name;
   const isPool = !!poolDetailQuery;
@@ -57,16 +61,18 @@ export const WatchlistSection = ({
 
   const getDelegateLabel = () => {
     if (isPool) {
-      return !ticker ? "Delegate" : `Delegate to [${ticker}]`;
+      return !ticker
+        ? t("global.watchlist.delegate")
+        : t("global.watchlist.delegateTo", { ticker });
     }
 
     if (!isDrep) return "";
 
     if (!drepName || drepName.length > 20) {
-      return "Delegate to this DRep";
+      return t("global.watchlist.delegateToThisDrep");
     }
 
-    return `Delegate to ${drepName}`;
+    return t("global.watchlist.delegateToDrep", { name: drepName });
   };
 
   if (isLoading)
@@ -112,7 +118,7 @@ export const WatchlistSection = ({
           size='sm'
           leftIcon={<ShoppingBasket size={18} />}
           variant='primary'
-          label='Marketplace'
+          label={t("global.watchlist.marketplace")}
           className='h-[32px]'
         />
       )}
@@ -122,7 +128,7 @@ export const WatchlistSection = ({
           size='md'
           leftIcon={<ShoppingBasket size={18} />}
           variant='primary'
-          label='Buy'
+          label={t("global.watchlist.buy")}
         />
       )}
       {!isPoolRetiredOrRetiring && <ShareButton />}
@@ -133,8 +139,14 @@ export const WatchlistSection = ({
           stakeKey={stakeKey}
         />
       )}
-      {!isPoolRetiredOrRetiring && (
-        <Button label='Promote' variant='tertiary' size='md' href='/pro' />
+      {showPromote && !isPoolRetiredOrRetiring && (
+        <Button
+          label={t("global.watchlist.promote")}
+          variant='tertiary'
+          size='md'
+          href='/pro'
+          className='h-10'
+        />
       )}
       {(isPool || isDrep) && !isPoolRetiredOrRetiring && (
         <Button

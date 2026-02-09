@@ -2,6 +2,7 @@ import { DrepDetailOverview } from "@/components/drep/DrepDetailOverview";
 import { DrepDetailAboutTab } from "@/components/drep/tabs/DrepDetailAboutTab";
 import { DrepDetailDelegatorsTab } from "@/components/drep/tabs/DrepDetailDelegatorsTab";
 import { DrepDetailGovernanceActionsTab } from "@/components/drep/tabs/DrepDetailGovernanceActionsTab";
+import { DrepDetailEmbedTab } from "@/components/drep/tabs/DrepDetailEmbedTab";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
@@ -15,33 +16,51 @@ import { getRouteApi } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { DrepDetailStatsTab } from "@/components/drep/tabs/DrepDetailStatsTab";
 import { generateImageUrl } from "@/utils/generateImageUrl";
+import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
+import { useDelegateAction } from "@/hooks/useDelegateAction";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const DrepDetailPage: FC = () => {
+  const { t } = useAppTranslation("pages");
   const [title, setTitle] = useState<string>("");
   const route = getRouteApi("/drep/$hash");
   const { hash } = route.useParams();
 
+  const { showWalletModal, setShowWalletModal } = useDelegateAction({
+    type: "drep",
+    ident: hash,
+  });
+
   const drepDetailQuery = useFetchDrepDetail(hash);
 
   const drepHash = drepDetailQuery?.data?.hash?.view;
+  const drepName = drepDetailQuery?.data?.data?.given_name;
 
   const tabs = [
     {
       key: "governance_actions",
-      label: "Governance actions",
+      label: t("dreps.detailPage.tabs.governanceActions"),
       content: <DrepDetailGovernanceActionsTab />,
       visible: true,
     },
     {
       key: "delegators",
-      label: "Delegators",
+      label: t("dreps.detailPage.tabs.delegators"),
       content: <DrepDetailDelegatorsTab view={drepHash ?? ""} />,
       visible: true,
     },
     {
       key: "stats",
-      label: "Stats",
+      label: t("dreps.detailPage.tabs.stats"),
       content: <DrepDetailStatsTab data={drepDetailQuery.data?.distr ?? []} />,
+      visible: true,
+    },
+    {
+      key: "embed",
+      label: t("dreps.detailPage.tabs.embed"),
+      content: (
+        <DrepDetailEmbedTab drepId={hash} drepName={drepName ?? undefined} />
+      ),
       visible: true,
     },
   ];
@@ -57,7 +76,7 @@ export const DrepDetailPage: FC = () => {
   ) {
     tabs.push({
       key: "about",
-      label: "About",
+      label: t("dreps.detailPage.tabs.about"),
       content: (
         <DrepDetailAboutTab
           data={{
@@ -94,13 +113,11 @@ export const DrepDetailPage: FC = () => {
       }}
       breadcrumbItems={[
         {
-          label: <span className='inline pt-1/2'>Governance</span>,
+          label: <span className='inline pt-1/2'>{t("governance.title")}</span>,
           link: "/gov",
         },
         {
-          label: (
-            <span className='inline pt-1/2'>Delegated representatives</span>
-          ),
+          label: <span className='inline pt-1/2'>{t("dreps.breadcrumb")}</span>,
           link: "/drep",
         },
         {
@@ -128,7 +145,7 @@ export const DrepDetailPage: FC = () => {
       }
       subTitle={
         <HeaderBannerSubtitle
-          title='Drep ID'
+          title={t("dreps.detailPage.drepId")}
           hashString={formatString(drepHash ?? "", "long")}
           hash={drepHash ?? ""}
         />
@@ -144,6 +161,9 @@ export const DrepDetailPage: FC = () => {
       </div>
       <DrepDetailOverview query={drepDetailQuery} />
       <Tabs items={tabs} />
+      {showWalletModal && (
+        <ConnectWalletModal onClose={() => setShowWalletModal(false)} />
+      )}
     </PageBase>
   );
 };

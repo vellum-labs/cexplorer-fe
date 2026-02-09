@@ -10,6 +10,7 @@ import { PoolCell } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { CircleAlert } from "lucide-react";
 
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchAnalyticsPoolBlock } from "@/services/analytics";
 import { useFetchMiscBasic } from "@/services/misc";
@@ -22,8 +23,9 @@ import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 import { poolIssuesMissedBlocksTableOptions } from "@/constants/tables/poolIssuesMissedBlocksTableOptions";
 
 export const PoolIssuesMissedBlocks: FC = () => {
+  const { t } = useAppTranslation("common");
   const { data: basicData } = useFetchMiscBasic(true);
-  const miscConst = useMiscConst(basicData?.data.version.const);
+  const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const [totalItems, setTotalItems] = useState<number>(0);
   const [active, setActive] = useState<string>("recent");
@@ -57,27 +59,27 @@ export const PoolIssuesMissedBlocks: FC = () => {
   const epochButtons = [
     {
       key: "recent",
-      title: "Recent",
+      title: t("analytics.recent"),
       epochOffset: 1,
     },
     {
       key: "2_epochs",
-      title: "2 epochs",
+      title: t("analytics.epochs", { count: 2 }),
       epochOffset: 2,
     },
     {
       key: "3_epochs",
-      title: "3 epochs",
+      title: t("analytics.epochs", { count: 3 }),
       epochOffset: 3,
     },
     {
       key: "4_epochs",
-      title: "4 epochs",
+      title: t("analytics.epochs", { count: 4 }),
       epochOffset: 4,
     },
     {
       key: "longterm",
-      title: "Longterm",
+      title: t("analytics.longterm"),
       epochOffset: 10,
     },
   ];
@@ -112,7 +114,7 @@ export const PoolIssuesMissedBlocks: FC = () => {
           poolImageUrl={generateImageUrl(item.pool_id, "ico", "pool")}
         />
       ),
-      title: "Pool",
+      title: t("labels.pool"),
       visible: columnsVisibility.pool,
       widthPx: 150,
     },
@@ -129,7 +131,7 @@ export const PoolIssuesMissedBlocks: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>Luck</p>,
+      title: <p className='w-full text-right'>{t("labels.luck")}</p>,
       visible: columnsVisibility.luck,
       widthPx: 50,
     },
@@ -147,7 +149,9 @@ export const PoolIssuesMissedBlocks: FC = () => {
         );
       },
       title: (
-        <p className='flex w-full justify-end text-right'>Minted blocks</p>
+        <p className='flex w-full justify-end text-right'>
+          {t("analytics.mintedBlocks")}
+        </p>
       ),
       visible: columnsVisibility.minted_blocks,
       widthPx: 150,
@@ -166,7 +170,9 @@ export const PoolIssuesMissedBlocks: FC = () => {
         );
       },
       title: (
-        <p className='flex w-full justify-end text-right'>Estimated blocks</p>
+        <p className='flex w-full justify-end text-right'>
+          {t("analytics.estimatedBlocks")}
+        </p>
       ),
       visible: columnsVisibility.estimated_blocks,
       widthPx: 150,
@@ -189,7 +195,7 @@ export const PoolIssuesMissedBlocks: FC = () => {
     <section className='flex min-h-minHeight w-full flex-col items-center'>
       <OverviewStatCard
         title=''
-        description="This estimate is based on pool performance data. Pools don't always achieve their expected block allocation per epoch. Smaller pools may vary between 50% and 200% of expected performance. The feature is being optimized to account for these fluctuations."
+        description={t("analytics.poolIssuesEstimateDescription")}
         icon={<CircleAlert className='text-primary' />}
         value
         className='mb-1.5 h-[100px] max-h-[100px] !flex-row items-center !gap-1'
@@ -222,14 +228,16 @@ export const PoolIssuesMissedBlocks: FC = () => {
         </div>
         <div className='flex flex-wrap items-center gap-2'>
           <div className='flex gap-1/2 text-text-xs'>
-            <span className='text-grayTextPrimary'>Monitored epochs</span>
+            <span className='text-grayTextPrimary'>
+              {t("analytics.monitoredEpochs")}
+            </span>
             <span>
               {miscConst?.epoch?.no ? miscConst?.epoch?.no - epochCount : 0}
             </span>
           </div>
           <div className='flex gap-1/2 text-text-xs'>
             <span className='text-grayTextPrimary'>
-              Minimum estimated blocks
+              {t("analytics.minimumEstimatedBlocks")}
             </span>
             <span>
               {Math.min(
@@ -238,7 +246,9 @@ export const PoolIssuesMissedBlocks: FC = () => {
             </span>
           </div>
           <div className='flex gap-1/2 text-text-xs'>
-            <span className='text-grayTextPrimary'>Allowed deviation</span>
+            <span className='text-grayTextPrimary'>
+              {t("analytics.allowedDeviation")}
+            </span>
             <span>
               {mintedBlocks && estimatedBlocks
                 ? calculateTotalDeviation(
@@ -260,7 +270,9 @@ export const PoolIssuesMissedBlocks: FC = () => {
             <></>
           ) : (
             <h3 className='whitespace-nowrap'>
-              Total of {formatNumber(totalItems)} pool issues
+              {t("analytics.totalPoolIssues", {
+                count: formatNumber(totalItems),
+              })}
             </h3>
           )}
 
@@ -268,9 +280,10 @@ export const PoolIssuesMissedBlocks: FC = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("table.rows")}
               columnsOptions={poolIssuesMissedBlocksTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -297,6 +310,10 @@ export const PoolIssuesMissedBlocks: FC = () => {
         })}
         minContentWidth={700}
         onOrderChange={setColumsOrder}
+        renderDisplayText={(count, total) =>
+          t("table.displaying", { count, total })
+        }
+        noItemsLabel={t("table.noItems")}
       />
     </section>
   );

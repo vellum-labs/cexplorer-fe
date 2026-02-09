@@ -79,6 +79,15 @@ const routes = [
     api: false,
   },
   {
+    path: "/promotion",
+    title: "Promotion | Cexplorer.io",
+    description:
+      "Promote your Cardano project with Cexplorer.io. Boost visibility for your stake pool, token, dRep, or NFT collection through targeted promotion packages and advertising options.",
+    keywords:
+      "Cardano promotion, Cexplorer promotion, blockchain advertising, stake pool promotion, token promotion, dRep promotion, NFT promotion",
+    api: false,
+  },
+  {
     path: "/analytics",
     title: "Analytics | Cexplorer.io",
     description:
@@ -280,6 +289,15 @@ const routes = [
       "Decode and view datum data from Cardano smart contracts with our powerful datum viewer. Analyze transaction metadata, Plutus script data structures, CBOR-encoded information, and contract state data in human-readable format.",
     keywords:
       "datum viewer, Plutus datum, smart contract data, transaction metadata, CBOR decoder, Cexplorer, datum decode, contract data",
+    api: false,
+  },
+  {
+    path: "/handle-dns",
+    title: "$handle DNS | Cexplorer.io",
+    description:
+      "Explore and validate ADA Handles on Cardano. View recently minted handles, check handle availability, and resolve handles to their associated addresses and metadata using the Cardano Domain Name Service standard.",
+    keywords:
+      "$handle, ADA Handle, Cardano DNS, handle resolver, handle validator, domain name service, Cexplorer, handle lookup",
     api: false,
   },
   {

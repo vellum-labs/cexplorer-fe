@@ -21,8 +21,10 @@ import { HashCell } from "@/components/tx/HashCell";
 import type { Vote } from "@/constants/votes";
 import { VoteCell } from "@/components/governance/vote/VoteCell";
 import { isVoteLate } from "@/utils/governance/isVoteLate";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const DrepDetailGovernanceActionsTab: FC = () => {
+  const { t } = useAppTranslation("pages");
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const route = getRouteApi("/drep/$hash");
   const { hash } = route.useParams();
@@ -54,9 +56,9 @@ export const DrepDetailGovernanceActionsTab: FC = () => {
           return "-";
         }
 
-        return <DateCell time={item.tx.time} />;
+        return <DateCell time={item.tx.time} withoutConvert />;
       },
-      title: <p>Date</p>,
+      title: <p>{t("common:labels.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 50,
     },
@@ -71,7 +73,7 @@ export const DrepDetailGovernanceActionsTab: FC = () => {
           <>{<ActionTypes title={item?.proposal?.type as ActionTypes} />}</>
         );
       },
-      title: <p>Type</p>,
+      title: <p>{t("common:labels.type")}</p>,
       visible: columnsVisibility.type,
       widthPx: 60,
     },
@@ -86,13 +88,15 @@ export const DrepDetailGovernanceActionsTab: FC = () => {
 
         return <GovActionCell id={id} name={name} />;
       },
-      title: <p>Governance action</p>,
+      title: (
+        <p>{t("dreps.detailPage.governanceActionsTable.governanceAction")}</p>
+      ),
       visible: columnsVisibility.governance_action_name,
       widthPx: 200,
     },
     {
       key: "vote",
-      title: <p>Vote</p>,
+      title: <p>{t("dreps.detailPage.governanceActionsTable.vote")}</p>,
       render: item => {
         if (!item?.vote) {
           return "-";
@@ -121,7 +125,11 @@ export const DrepDetailGovernanceActionsTab: FC = () => {
           )}
         </p>
       ),
-      title: <p className='w-full text-right'>Voting Power</p>,
+      title: (
+        <p className='w-full text-right'>
+          {t("dreps.detailPage.governanceActionsTable.votingPower")}
+        </p>
+      ),
       visible: columnsVisibility.voting_power,
       widthPx: 40,
     },
@@ -134,7 +142,7 @@ export const DrepDetailGovernanceActionsTab: FC = () => {
 
         return <HashCell hash={item?.tx?.hash} />;
       },
-      title: <p>Tx</p>,
+      title: <p>{t("common:labels.tx")}</p>,
       visible: columnsVisibility.tx,
       widthPx: 60,
     },
@@ -163,6 +171,10 @@ export const DrepDetailGovernanceActionsTab: FC = () => {
         );
       })}
       onOrderChange={setColumsOrder}
+      renderDisplayText={(count, total) =>
+        t("common:table.displaying", { count, total })
+      }
+      noItemsLabel={t("common:table.noItems")}
     />
   );
 };

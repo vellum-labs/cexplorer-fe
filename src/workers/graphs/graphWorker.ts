@@ -52,17 +52,20 @@ self.addEventListener("message", event => {
       const detailData = data.data.detailData;
       const epochElapsed = data.data.epochElapsed;
 
-      const proratedLuck = detailData?.epochs[0].data.block && epochElapsed > 0
-        ? (() => {
-            const percent =
-              ((detailData?.blocks?.epoch ?? 0) /
-                detailData?.epochs[0]?.data?.block?.estimated /
-                epochElapsed) *
-              100;
+      const proratedLuck =
+        detailData?.epochs[0].data.block && epochElapsed > 0
+          ? (() => {
+              const percent =
+                ((detailData?.blocks?.epoch ?? 0) /
+                  detailData?.epochs[0]?.data?.block?.estimated /
+                  epochElapsed) *
+                100;
 
-            return Number.isNaN(percent) || !Number.isFinite(percent) ? 0 : percent;
-          })()
-        : 0;
+              return Number.isNaN(percent) || !Number.isFinite(percent)
+                ? 0
+                : percent;
+            })()
+          : 0;
 
       const detailDataEpochs = [
         {

@@ -9,6 +9,7 @@ import { Info } from "lucide-react";
 
 import { useState, useEffect } from "react";
 import { configJSON } from "@/constants/conf";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface HomepageCardanoEpochProps {
   miscConst: MiscConstResponseData | undefined;
@@ -17,6 +18,7 @@ interface HomepageCardanoEpochProps {
 export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
   miscConst,
 }) => {
+  const { t } = useAppTranslation("common");
   const pools = miscConst?.epoch_stat?.stake?.pools?.registered;
   const slot = miscConst?.epoch_stat?.pots?.slot_no;
   const { data: basicData } = useFetchMiscBasic();
@@ -97,7 +99,7 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
       <div className='flex flex-grow items-center pb-[11px]'>
         <div className='flex min-w-[160px] items-center gap-1/2'>
           <span className='text-grayText inline-block text-text-sm font-medium'>
-            Slots
+            {t("homepage.slots")}
           </span>
         </div>
         <span className='text-grayText flex items-center gap-1 text-text-sm'>
@@ -108,7 +110,7 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
       <div className='flex flex-grow items-center pb-[11px]'>
         <div className='flex min-w-[160px] items-center gap-1/2'>
           <span className='text-grayText inline-block text-text-sm font-medium'>
-            Pools
+            {t("homepage.pools")}
           </span>
         </div>
         <span className='text-grayText text-text-sm font-semibold'>
@@ -118,24 +120,24 @@ export const HomepageCardanoEpoch: FC<HomepageCardanoEpochProps> = ({
       <div className='flex flex-grow items-center pb-[11px]'>
         <div className='flex min-w-[160px] items-center gap-1/2'>
           <span className='text-grayText inline-block text-text-sm font-medium'>
-            Daily usage
+            {t("homepage.dailyUsage")}
           </span>
         </div>
         <Tooltip
           content={
             <div className='space-y-1'>
               <div className='flex justify-between gap-2'>
-                <span>1h usage:</span>
+                <span>{t("homepage.usage1h")}</span>
                 <span className='font-semibold'>
                   {(load1h * 100).toFixed(2)}%
                 </span>
               </div>
               <div className='flex justify-between gap-2'>
-                <span>24h usage:</span>
+                <span>{t("homepage.usage24h")}</span>
                 <span className='font-semibold'>{blockUsage.toFixed(2)}%</span>
               </div>
               <div className='flex justify-between gap-2'>
-                <span>7d usage:</span>
+                <span>{t("homepage.usage7d")}</span>
                 <span className='font-semibold'>
                   {(load7d * 100).toFixed(2)}%
                 </span>

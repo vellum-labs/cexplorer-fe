@@ -20,8 +20,10 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { formatOrdinalSuffix } from "@/utils/format/formatOrdinalSuffix";
 import { format, parse, parseISO } from "date-fns";
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const PoolBirthdays: FC = () => {
+  const { t } = useAppTranslation(["pages", "common"]);
   const [totalItems, setTotalItems] = useState<number>(0);
 
   const {
@@ -55,7 +57,7 @@ export const PoolBirthdays: FC = () => {
 
         return item.anniversary;
       },
-      title: <p>Date</p>,
+      title: <p>{t("common:labels.date")}</p>,
       visible: columnsVisibility.date,
       widthPx: 50,
     },
@@ -80,7 +82,7 @@ export const PoolBirthdays: FC = () => {
           />
         );
       },
-      title: "Pool",
+      title: t("common:labels.pool"),
       visible: columnsVisibility.pool,
       widthPx: 150,
     },
@@ -110,7 +112,7 @@ export const PoolBirthdays: FC = () => {
           </div>
         );
       },
-      title: <p className='w-full text-right'>Birthday</p>,
+      title: <p className='w-full text-right'>{t("common:labels.birthday")}</p>,
       visible: columnsVisibility.birthday,
       widthPx: 50,
     },
@@ -147,7 +149,9 @@ export const PoolBirthdays: FC = () => {
 
         return `${formattedDate}, ${formattedTime}`;
       },
-      title: <p className='w-full text-right'>Registered</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.registered")}</p>
+      ),
       visible: columnsVisibility.registered,
       widthPx: 60,
     },
@@ -160,7 +164,9 @@ export const PoolBirthdays: FC = () => {
 
         return <p className='text-right'>{formatNumber(item.delegators)}</p>;
       },
-      title: <p className='w-full text-right'>Delegators</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.delegators")}</p>
+      ),
       visible: columnsVisibility.delegators,
       widthPx: 50,
     },
@@ -177,7 +183,9 @@ export const PoolBirthdays: FC = () => {
           </p>
         );
       },
-      title: <p className='w-full text-right'>Active Stake</p>,
+      title: (
+        <p className='w-full text-right'>{t("common:labels.activeStake")}</p>
+      ),
       visible: columnsVisibility.active_stake,
       widthPx: 50,
     },
@@ -192,8 +200,8 @@ export const PoolBirthdays: FC = () => {
   return (
     <PageBase
       metadataTitle='poolBirthdayList'
-      title='Pool Birthdays'
-      breadcrumbItems={[{ label: "Pool Birthdays" }]}
+      title={t("pools.birthdays.title")}
+      breadcrumbItems={[{ label: t("pools.birthdays.title") }]}
     >
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         <div className='mb-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
@@ -202,7 +210,10 @@ export const PoolBirthdays: FC = () => {
               <LoadingSkeleton height='27px' width={"220px"} />
             ) : totalItems > 0 ? (
               <h3 className='basis-[230px] text-nowrap'>
-                🎉 Happy Birthday, {formatNumber(totalItems)} pools!
+                🎉{" "}
+                {t("pools.birthdays.happyBirthday", {
+                  count: formatNumber(totalItems),
+                })}
               </h3>
             ) : (
               ""
@@ -213,9 +224,10 @@ export const PoolBirthdays: FC = () => {
                 <TableSettingsDropdown
                   rows={rows}
                   setRows={setRows}
+                  rowsLabel={t("common:table.rows")}
                   columnsOptions={poolBirthdaysTableOptions.map(item => {
                     return {
-                      label: item.name,
+                      label: t(`common:tableSettings.${item.key}`),
                       isVisible: columnsVisibility[item.key],
                       onClick: () =>
                         setColumnVisibility(
@@ -233,9 +245,10 @@ export const PoolBirthdays: FC = () => {
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={poolBirthdaysTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -258,6 +271,10 @@ export const PoolBirthdays: FC = () => {
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </section>
     </PageBase>

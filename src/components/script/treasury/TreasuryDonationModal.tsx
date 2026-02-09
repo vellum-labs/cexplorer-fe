@@ -8,6 +8,7 @@ import { RangeSlider } from "@vellumlabs/cexplorer-sdk";
 import { Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { Wallet } from "lucide-react";
 import { handleDonation } from "@/utils/treasury/handleDonation";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface TreasuryDonationModalProps {
   onClose: () => void;
@@ -20,6 +21,7 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
   onSuccess,
   wallet,
 }) => {
+  const { t } = useAppTranslation("common");
   const [amount, setAmount] = useState<string>("");
   const [cexplorerPercentage, setCexplorerPercentage] = useState<number>(10);
   const [comment, setComment] = useState<string>("");
@@ -58,42 +60,46 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
   return (
     <Modal minWidth='450px' maxWidth='95%' maxHeight='90vh' onClose={onClose}>
       <div className='flex w-full flex-col gap-4 p-2'>
-        <h2>Donate to Cardano Treasury</h2>
+        <h2>{t("treasury.modal.title")}</h2>
         <p className='text-text-sm text-grayTextPrimary'>
-          Support the Cardano ecosystem by donating to the treasury. You can
-          also choose to support Cexplorer development.
+          {t("treasury.modal.description")}
         </p>
 
         <div className='flex flex-col gap-1'>
           <label className='text-text-sm font-medium'>
-            Amount (ADA) <span className='text-redText'>*</span>
+            {t("treasury.modal.amountLabel")}{" "}
+            <span className='text-redText'>*</span>
           </label>
           <TextInput
             inputClassName='h-10'
             wrapperClassName='w-full'
             value={amount}
             onchange={handleAmountChange}
-            placeholder='Enter amount in ADA'
+            placeholder={t("treasury.modal.amountPlaceholder")}
           />
         </div>
 
         <div className='flex flex-col gap-1'>
-          <label className='text-text-sm font-medium'>Comment (optional)</label>
+          <label className='text-text-sm font-medium'>
+            {t("treasury.modal.commentLabel")}
+          </label>
           <textarea
             className='h-20 w-full rounded-m border border-border bg-background px-2 py-1.5 text-text-sm outline-none focus:border-primary'
             value={comment}
             onChange={e => setComment(e.target.value)}
-            placeholder='Add an optional message to your donation'
+            placeholder={t("treasury.modal.commentPlaceholder")}
             maxLength={500}
           />
           <p className='text-text-xs text-grayTextPrimary'>
-            {comment.length}/500 characters
+            {t("treasury.modal.charactersCount", { count: comment.length })}
           </p>
         </div>
 
         <div className='flex flex-col gap-2'>
           <label className='text-text-sm font-medium'>
-            Cexplorer Support: {cexplorerPercentage}%
+            {t("treasury.modal.cexplorerSupport", {
+              percentage: cexplorerPercentage,
+            })}
           </label>
           <RangeSlider
             min={0}
@@ -103,23 +109,24 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
             onChange={setCexplorerPercentage}
           />
           <p className='text-text-xs text-grayTextPrimary'>
-            Adjust the slider to split your donation between the Cardano
-            Treasury and Cexplorer development.
+            {t("treasury.modal.sliderDescription")}
           </p>
         </div>
 
         {isValidAmount && (
           <div className='rounded-m border border-border bg-cardBg p-1.5'>
-            <p className='mb-1 text-text-sm font-medium'>Donation Split:</p>
+            <p className='mb-1 text-text-sm font-medium'>
+              {t("treasury.modal.donationSplit")}
+            </p>
             <div className='flex flex-col gap-1/2 text-text-sm text-grayTextPrimary'>
               <div className='flex justify-between'>
-                <span>Treasury:</span>
+                <span>{t("treasury.modal.treasury")}</span>
                 <span className='font-medium text-text'>
                   {treasuryAda.toFixed(2)} ADA
                 </span>
               </div>
               <div className='flex justify-between'>
-                <span>Cexplorer:</span>
+                <span>{t("treasury.modal.cexplorer")}</span>
                 <span className='font-medium text-text'>
                   {cexplorerAda.toFixed(2)} ADA
                 </span>
@@ -130,7 +137,7 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
 
         <div className='flex w-full justify-end gap-2'>
           <Button
-            label='Cancel'
+            label={t("actions.cancel")}
             size='lg'
             variant='secondary'
             onClick={onClose}
@@ -140,14 +147,17 @@ export const TreasuryDonationModal: FC<TreasuryDonationModalProps> = ({
             <Tooltip
               content={
                 <div className='max-w-[150px]'>
-                  Note: MeshJS does not support treasury donations yet. You can
-                  donate only to Cexplorer for now.
+                  {t("treasury.modal.meshJsNote")}
                 </div>
               }
               forceDirection='top'
             >
               <Button
-                label={isSubmitting ? "Submitting..." : "Donate"}
+                label={
+                  isSubmitting
+                    ? t("treasury.modal.submitting")
+                    : t("treasury.modal.donate")
+                }
                 size='lg'
                 variant='primary'
                 leftIcon={<Wallet />}

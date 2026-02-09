@@ -10,6 +10,7 @@ import { Image } from "@vellumlabs/cexplorer-sdk";
 import { useEffect, useState, type FC } from "react";
 import metadata from "../../../conf/metadata/en-metadata.json";
 import { TxListPage } from "../tx/TxListPage";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 import { useFetchAssetDetail } from "@/services/assets";
 
@@ -30,6 +31,7 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import { alphabetWithNumbers } from "@/constants/alphabet";
 
 export const AssetDetailPage: FC = () => {
+  const { t } = useAppTranslation("common");
   const [title, setTitle] = useState<string>("");
   const route = getRouteApi("/asset/$fingerprint");
   const { fingerprint } = route.useParams();
@@ -54,7 +56,7 @@ export const AssetDetailPage: FC = () => {
   const tabs = [
     {
       key: "Stats",
-      label: "Stats",
+      label: t("asset.statsTab"),
       content: <AssetStatsTab fingerprint={fingerprint} />,
       visible:
         assetDetailQuery.isLoading ||
@@ -64,13 +66,13 @@ export const AssetDetailPage: FC = () => {
     },
     {
       key: "transactions",
-      label: "Transactions",
+      label: t("asset.transactionsTab"),
       content: <TxListPage asset={fingerprint} />,
       visible: true,
     },
     {
       key: "mints",
-      label: "Mints",
+      label: t("asset.mintsTab"),
       content: (
         <AssetMintTab
           name={(assetDetailQuery.data?.data?.name ?? 0) as number}
@@ -81,7 +83,7 @@ export const AssetDetailPage: FC = () => {
     },
     {
       key: "timelock",
-      label: "Timelock",
+      label: t("asset.timelockTab"),
       content: (
         <>
           <AssetTimelockTab json={assetScript?.json} />
@@ -91,7 +93,7 @@ export const AssetDetailPage: FC = () => {
     },
     {
       key: "metadata",
-      label: "Metadata",
+      label: t("asset.metadataTab"),
       content: (
         <AssetMetaDataTab
           name={assetDetailQuery.data?.data?.name}
@@ -102,7 +104,7 @@ export const AssetDetailPage: FC = () => {
     },
     {
       key: "owners",
-      label: "Owners",
+      label: t("asset.ownersTab"),
       content: assetSupply ? (
         assetSupply > 1 ? (
           <AssetTokenOwnersTab
@@ -124,7 +126,7 @@ export const AssetDetailPage: FC = () => {
     },
     {
       key: "trading",
-      label: "Trading",
+      label: t("asset.tradingTab"),
       content: () => (
         <DeFiOrderList
           storeKey='asset_detail_defi'
@@ -137,7 +139,7 @@ export const AssetDetailPage: FC = () => {
     },
     {
       key: "exchanges",
-      label: "Price",
+      label: t("asset.priceTab"),
       content: (
         <AssetExchangesTab assetname={assetName} query={assetDetailQuery} />
       ),
@@ -204,18 +206,20 @@ export const AssetDetailPage: FC = () => {
               width={35}
             />
             <div className='pointer-events-none absolute left-0 top-full z-50 mt-2 hidden opacity-0 transition-opacity duration-200 group-hover:block group-hover:opacity-100'>
-              <img
-                src={generateImageUrl(
-                  assetSupply && assetSupply === 1
-                    ? fingerprint
-                    : (assetDetailQuery.data?.data?.policy || "") +
-                        assetDetailQuery.data?.data?.name,
-                  "lg",
-                  assetSupply && assetSupply === 1 ? "nft" : "token",
-                )}
-                alt='Asset preview'
-                className='h-auto w-[300px] max-w-[300px] rounded-m shadow-2xl ring-1 ring-border'
-              />
+              <div className='h-[300px] w-[300px] overflow-hidden rounded-m bg-cardBg shadow-2xl ring-1 ring-border'>
+                <img
+                  src={generateImageUrl(
+                    assetSupply && assetSupply === 1
+                      ? fingerprint
+                      : (assetDetailQuery.data?.data?.policy || "") +
+                          assetDetailQuery.data?.data?.name,
+                    "lg",
+                    assetSupply && assetSupply === 1 ? "nft" : "token",
+                  )}
+                  alt='Asset preview'
+                  className='h-full w-full object-cover'
+                />
+              </div>
             </div>
           </div>
           <span className='flex-1 break-all'>

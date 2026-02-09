@@ -16,6 +16,7 @@ import { DrepNameCell } from "@/components/drep/DrepNameCell";
 import { useDrepDelegationsTableStore } from "@/stores/tables/drepDelegationsTableStore";
 import { ExternalLink } from "lucide-react";
 import { accountDrepDelegationsTableOptions } from "@/constants/tables/accountDrepDelegationsTableOptions";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface DRepDelegationsContentProps {
   address: string;
@@ -26,6 +27,7 @@ export const DRepDelegationsContent: FC<DRepDelegationsContentProps> = ({
   address,
   miscConst,
 }) => {
+  const { t } = useAppTranslation("pages");
   const [totalItems, setTotalItems] = useState(0);
   const {
     columnsVisibility,
@@ -95,7 +97,7 @@ export const DRepDelegationsContent: FC<DRepDelegationsContentProps> = ({
             "yyy-MM-dd HH:mm:ss",
           );
         },
-        title: <p>Date</p>,
+        title: <p>{t("common:labels.date")}</p>,
         visible: columnsVisibility.date,
         widthPx: 80,
       },
@@ -130,7 +132,7 @@ export const DRepDelegationsContent: FC<DRepDelegationsContentProps> = ({
 
           return name || id;
         },
-        title: "DRep",
+        title: t("stake.detailPage.drepDelegationsTable.drep"),
         visible: columnsVisibility.drep,
         widthPx: 110,
       },
@@ -143,7 +145,7 @@ export const DRepDelegationsContent: FC<DRepDelegationsContentProps> = ({
         ),
         title: (
           <div className='flex w-full justify-end'>
-            <span>Active Stake</span>
+            <span>{t("common:labels.activeStake")}</span>
           </div>
         ),
         visible: columnsVisibility.active_stake,
@@ -158,7 +160,7 @@ export const DRepDelegationsContent: FC<DRepDelegationsContentProps> = ({
         ),
         title: (
           <div className='flex w-full justify-end'>
-            <span>Live Stake</span>
+            <span>{t("common:labels.liveStake")}</span>
           </div>
         ),
         visible: columnsVisibility.live_stake,
@@ -177,7 +179,7 @@ export const DRepDelegationsContent: FC<DRepDelegationsContentProps> = ({
         title: (
           <div className='flex w-full justify-end'>
             <div className='flex w-fit cursor-pointer items-center gap-1/2 text-right'>
-              <span>Loyalty</span>
+              <span>{t("common:labels.loyalty")}</span>
             </div>
           </div>
         ),
@@ -200,7 +202,7 @@ export const DRepDelegationsContent: FC<DRepDelegationsContentProps> = ({
         jsonFormat: item => item.tx.hash,
         title: (
           <div className='flex w-full justify-end'>
-            <span>Tx</span>
+            <span>{t("common:labels.tx")}</span>
           </div>
         ),
         visible: columnsVisibility.tx,
@@ -214,15 +216,18 @@ export const DRepDelegationsContent: FC<DRepDelegationsContentProps> = ({
     <section className='flex flex-col gap-4'>
       <div className='flex flex-col'>
         <div className='flex items-center justify-between gap-1'>
-          <h3 className='my-2'>DRep Delegation history</h3>
+          <h3 className='my-2'>
+            {t("stake.detailPage.drepDelegationsTable.delegationHistory")}
+          </h3>
           <div className='flex items-center gap-1'>
             <ExportButton columns={drepDelegationColumns} items={items} />
             <TableSettingsDropdown
               rows={rows}
               setRows={setRows}
+              rowsLabel={t("common:table.rows")}
               columnsOptions={accountDrepDelegationsTableOptions.map(item => {
                 return {
-                  label: item.name,
+                  label: t(`common:tableSettings.${item.key}`),
                   isVisible: columnsVisibility[item.key],
                   onClick: () =>
                     setColumnVisibility(item.key, !columnsVisibility[item.key]),
@@ -247,6 +252,10 @@ export const DRepDelegationsContent: FC<DRepDelegationsContentProps> = ({
             );
           })}
           onOrderChange={setColumsOrder}
+          renderDisplayText={(count, total) =>
+            t("common:table.displaying", { count, total })
+          }
+          noItemsLabel={t("common:table.noItems")}
         />
       </div>
     </section>

@@ -13,8 +13,10 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 
 import { AnalyticsGraph } from "../analytics/AnalyticsGraph";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const DelegationChangesGraph: FC = () => {
+  const { t } = useAppTranslation("pages");
   const query = useFetchDelegEpochChanges();
   const data = query.data?.data ?? [];
 
@@ -30,10 +32,29 @@ export const DelegationChangesGraph: FC = () => {
   const stake = data.map(d => d.stat.stake);
   const count = data.map(d => d.stat.count);
 
+  const KEYS = {
+    delegatorCount: "delegatorCount",
+    stakeMoved: "stakeMoved",
+  };
+
+  const legendLabels = {
+    [KEYS.delegatorCount]: t("dreps.graphs.delegationChanges.delegatorCount"),
+    [KEYS.stakeMoved]: t("dreps.graphs.delegationChanges.stakeMoved"),
+  };
+
+  const tooltipLabels = {
+    [KEYS.delegatorCount]: t("dreps.graphs.delegationChanges.delegatorCount"),
+    [KEYS.stakeMoved]: t("dreps.graphs.delegationChanges.stakeMovedShort"),
+  };
+
   const option = {
     legend: {
       type: "scroll",
-      data: ["Delegator Count", "Stake Moved (₳)"],
+      data: [
+        { name: KEYS.delegatorCount, icon: "circle" },
+        { name: KEYS.stakeMoved, icon: "circle" },
+      ],
+      formatter: (name: string) => legendLabels[name] || name,
       textStyle: { color: textColor },
       pageIconColor: textColor,
       pageIconInactiveColor: inactivePageIconColor,
@@ -52,20 +73,15 @@ export const DelegationChangesGraph: FC = () => {
         );
 
         return (
-          `Date: ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (Epoch: ${params[0]?.axisValue})<hr>` +
+          `${t("dreps.graphs.date")} ${format(startTime, "dd.MM.yy")} - ${format(endTime, "dd.MM.yy")} (${t("dreps.graphs.epoch")} ${params[0]?.axisValue})<hr>` +
           params
             .map(item => {
-              const name =
-                item.seriesName === "Stake Moved (₳)"
-                  ? "Stake Moved"
-                  : item.seriesName;
-
               const value =
-                item.seriesName === "Stake Moved (₳)"
+                item.seriesName === KEYS.stakeMoved
                   ? formatLovelace(item.data)
                   : formatNumber(item.data);
 
-              return `<p>${item.marker} ${name}: ${value}</p>`;
+              return `<p>${item.marker} ${tooltipLabels[item.seriesName]}: ${value}</p>`;
             })
             .join("")
         );
@@ -111,7 +127,7 @@ export const DelegationChangesGraph: FC = () => {
     series: [
       {
         type: "line",
-        name: "Delegator Count",
+        name: KEYS.delegatorCount,
         data: count,
         yAxisIndex: 0,
         symbol: "none",
@@ -120,7 +136,7 @@ export const DelegationChangesGraph: FC = () => {
       },
       {
         type: "bar",
-        name: "Stake Moved (₳)",
+        name: KEYS.stakeMoved,
         data: stake,
         yAxisIndex: 1,
         barWidth: "60%",
@@ -131,8 +147,8 @@ export const DelegationChangesGraph: FC = () => {
 
   return (
     <AnalyticsGraph
-      title='Delegators & Stake Changing both Voting and Minting Delegation'
-      description='Epoch-by-epoch changes in delegators and stake switching voting or minting delegation'
+      title={t("dreps.graphs.delegationChanges.title")}
+      description={t("dreps.graphs.delegationChanges.description")}
       className='border-none'
     >
       <div className='relative w-full'>

@@ -9,7 +9,7 @@ import {
   HardDrive,
 } from "lucide-react";
 
-import { BlockDetailTable } from "@/components/blocks/BlockDetail/BlockDetailTable";
+import { BlockDetailTabs } from "@/components/blocks/BlockDetail/BlockDetailTabs";
 import { LoadingSkeleton, useThemeStore } from "@vellumlabs/cexplorer-sdk";
 
 import { useFetchBlockDetail } from "@/services/blocks";
@@ -38,6 +38,7 @@ import { PageBase } from "@/components/global/pages/PageBase";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 enum NavigationDirections {
   LEFT = "left",
@@ -47,6 +48,7 @@ enum NavigationDirections {
 const BlockDetailPage: FC = () => {
   const route = getRouteApi("/block/$hash");
   const { hash } = route.useParams();
+  const { t } = useAppTranslation("pages");
   const blockDetail = useFetchBlockDetail(hash ?? "");
 
   const { theme } = useThemeStore();
@@ -107,11 +109,11 @@ const BlockDetailPage: FC = () => {
 
   const overviewListItems: OverviewList = [
     {
-      label: "Date",
+      label: t("blocks.overview.date"),
       value: <TimeDateIndicator time={data?.time} />,
     },
     {
-      label: "Height",
+      label: t("blocks.overview.height"),
       value: (
         <div className='flex items-center gap-1'>
           <span className='text-text-sm font-medium text-text'>
@@ -124,8 +126,8 @@ const BlockDetailPage: FC = () => {
                 content={
                   <p className='text-nowrap'>
                     {disablePreviousBlock
-                      ? "Can't move to previous block"
-                      : "View previous block"}
+                      ? t("blocks.overview.cantMovePrevious")
+                      : t("blocks.overview.viewPreviousBlock")}
                   </p>
                 }
               >
@@ -155,8 +157,8 @@ const BlockDetailPage: FC = () => {
                 content={
                   <p className='text-nowrap'>
                     {disableNextBlock
-                      ? "Can't move to next block"
-                      : "View next block"}
+                      ? t("blocks.overview.cantMoveNext")
+                      : t("blocks.overview.viewNextBlock")}
                   </p>
                 }
               >
@@ -188,7 +190,7 @@ const BlockDetailPage: FC = () => {
       ),
     },
     {
-      label: "Epoch",
+      label: t("blocks.overview.epoch"),
       value: (
         <div className='text-text-sm'>
           <EpochCell no={data?.epoch_no} justify='start' />
@@ -196,7 +198,7 @@ const BlockDetailPage: FC = () => {
       ),
     },
     {
-      label: "Slot",
+      label: t("blocks.overview.slot"),
       value: (
         <div className='flex flex-wrap items-center gap-1/2 text-text-sm leading-none'>
           <span className='font-medium text-text'>
@@ -204,13 +206,18 @@ const BlockDetailPage: FC = () => {
           </span>
           <Copy copyText={String(data?.slot_no ?? 0)} />
           <span className='pr-1/2 text-grayTextPrimary'>
-            (epoch slot {formatNumber(data?.epoch_slot_no ?? 0)})
+            ({t("blocks.overview.epochSlot")}{" "}
+            {formatNumber(data?.epoch_slot_no ?? 0)})
           </span>
         </div>
       ),
     },
     {
-      label: <span className='inline-block break-words'>Confirmations</span>,
+      label: (
+        <span className='inline-block break-words'>
+          {t("blocks.overview.confirmations")}
+        </span>
+      ),
       value: (
         <div className='flex items-center gap-[2.5px] text-text-sm'>
           {confirmations[1] < 3 && (
@@ -240,7 +247,11 @@ const BlockDetailPage: FC = () => {
 
   const overviewTransactionsListItems: OverviewList = [
     {
-      label: <span className='text-nowrap'>Total Transactions</span>,
+      label: (
+        <span className='text-nowrap'>
+          {t("blocks.transactions.totalTransactions")}
+        </span>
+      ),
       value: (
         <span className='text-text-sm font-medium text-text'>
           {data?.tx_count ? data.tx_count : 0}
@@ -248,7 +259,7 @@ const BlockDetailPage: FC = () => {
       ),
     },
     {
-      label: "Total Output",
+      label: t("blocks.transactions.totalOutput"),
       value: (
         <TotalSumWithRates
           sum={outsum}
@@ -260,7 +271,7 @@ const BlockDetailPage: FC = () => {
       ),
     },
     {
-      label: "Total Fees",
+      label: t("blocks.transactions.totalFees"),
       value: (
         <TotalSumWithRates
           sum={feesum}
@@ -270,7 +281,7 @@ const BlockDetailPage: FC = () => {
       ),
     },
     {
-      label: "Total Rewards",
+      label: t("blocks.transactions.totalRewards"),
       value: (
         <TotalSumWithRates
           sum={rewards}
@@ -307,7 +318,7 @@ const BlockDetailPage: FC = () => {
         {
           label: (
             <span className='inline pt-1/2'>
-              Epoch{" "}
+              {t("epochs.title")}{" "}
               {data?.epoch_param?.epoch_no &&
                 `(${data?.epoch_param?.epoch_no})`}
             </span>
@@ -326,7 +337,7 @@ const BlockDetailPage: FC = () => {
           ident: hash,
         },
       ]}
-      title='Block Detail'
+      title={t("blocks.detail")}
       subTitle={
         <HeaderBannerSubtitle
           hashString={formatString(hash ?? "", "long")}
@@ -368,14 +379,15 @@ const BlockDetailPage: FC = () => {
             <>
               <div className='flex grow basis-[980px] flex-wrap gap-3'>
                 <OverviewCard
-                  title='Block Overview'
+                  title={t("blocks.overview.title")}
                   overviewList={overviewListItems}
                   className='h-auto min-h-[227px]'
                 />
                 <OverviewCard
-                  title='Transactions and Fees'
+                  title={t("blocks.transactions.title")}
                   overviewList={overviewTransactionsListItems}
-                  className='h-auto'
+                  className='h-auto [&_span.text-grayTextPrimary]:whitespace-nowrap'
+                  columnGap='16px'
                 />
               </div>
               <div className='flex w-[400px] flex-grow flex-col gap-3 xl:justify-between xl:gap-0'>
@@ -392,7 +404,7 @@ const BlockDetailPage: FC = () => {
                 <SizeCard
                   size={data.size}
                   maxSize={data.epoch_param?.max_block_size}
-                  title='Block size'
+                  title={t("blocks.size.title")}
                   icon={<HardDrive size={20} className='text-primary' />}
                 />
               </div>
@@ -402,7 +414,7 @@ const BlockDetailPage: FC = () => {
       </section>
       <section className='flex w-full justify-center'>
         <div className='flex w-full max-w-desktop flex-col flex-wrap justify-center gap-3 px-mobile pb-3 md:px-desktop xl:flex-nowrap xl:justify-start'>
-          <BlockDetailTable txs={data?.txs} blockDetail={blockDetail} />
+          <BlockDetailTabs blockDetail={blockDetail} />
         </div>
       </section>
     </PageBase>

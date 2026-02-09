@@ -9,42 +9,45 @@ import { NetworkTransactionTab } from "@/components/analytics/network/tabs/Netwo
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
 
 import { PageBase } from "@/components/global/pages/PageBase";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const NetworkAnalytics: FC = () => {
+  const { t } = useAppTranslation("common");
+
   const tabs = [
     {
       key: "transactions",
-      label: "Transactions",
+      label: t("analytics.transactionsTab"),
       content: <NetworkTransactionTab />,
       visible: true,
     },
     {
       key: "blocks",
-      label: "Blocks",
+      label: t("analytics.blocksTab"),
       content: <NetworkBlocksTab />,
       visible: true,
     },
     {
       key: "health",
-      label: "Health",
+      label: t("analytics.healthTab"),
       content: <NetworkHealthTab />,
       visible: true,
     },
     {
       key: "energy_consumption",
-      label: "Energy consumption",
+      label: t("analytics.energyConsumptionTab"),
       content: <NetworkEnergyConsumption />,
       visible: true,
     },
     {
       key: "block_versions",
-      label: "Block versions",
+      label: t("analytics.blockVersionsTab"),
       content: <NetworkBlockVersionsTab />,
       visible: true,
     },
     {
       key: "storage",
-      label: "Storage",
+      label: t("analytics.storageTab"),
       content: <NetworkStorageTab />,
       visible: true,
     },
@@ -54,10 +57,10 @@ export const NetworkAnalytics: FC = () => {
     <PageBase
       metadataTitle='networkAnalytics'
       breadcrumbItems={[
-        { label: "Analytics", link: "/analytics" },
-        { label: "Network" },
+        { label: t("analyticsPage.breadcrumb"), link: "/analytics" },
+        { label: t("analytics.network") },
       ]}
-      title='Cardano network analytics'
+      title={t("analytics.cardanoNetworkAnalytics")}
     >
       <Tabs
         items={tabs}

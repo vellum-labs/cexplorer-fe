@@ -13,8 +13,10 @@ import { useADADisplay } from "@/hooks/useADADisplay";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { formatNumber, lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { ArrowRight, CircleDollarSign } from "lucide-react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const ScriptListTVLTab: FC = () => {
+  const { t } = useAppTranslation("common");
   const { data: miscBasic } = useFetchMiscBasic();
   const usdRate = miscBasic?.data.rate.ada[0].close ?? 0;
   const { data, isLoading } = useFetchTVL();
@@ -59,9 +61,9 @@ export const ScriptListTVLTab: FC = () => {
           const item = graphData[dataIndex];
           return (
             `<div style="font-weight: 400">` +
-            `Date: ${item.date}<br/>` +
-            `USD: $${formatNumber(item.valueUSD)}<br/>` +
-            `ADA Equivalent: ${item.valueADA ? formatLovelace(item.valueADA * 1e6) : "-"}` +
+            `${t("script.tvl.graph.date")}: ${item.date}<br/>` +
+            `${t("script.tvl.graph.usd")}: $${formatNumber(item.valueUSD)}<br/>` +
+            `${t("script.tvl.graph.adaEquivalent")}: ${item.valueADA ? formatLovelace(item.valueADA * 1e6) : "-"}` +
             `</div>`
           );
         },
@@ -108,8 +110,10 @@ export const ScriptListTVLTab: FC = () => {
                 <CircleDollarSign className='text-primary' size={15} />
               </div>
               <span className='text-text-sm text-grayTextPrimary'>
-                <span className='text-text-md font-semibold'>TVL</span> (total
-                value locked)
+                <span className='text-text-md font-semibold'>
+                  {t("script.tvl.title")}
+                </span>{" "}
+                {t("script.tvl.subtitle")}
               </span>
             </div>
             <div className='flex w-full items-center gap-2'>
@@ -121,9 +125,7 @@ export const ScriptListTVLTab: FC = () => {
               </span>
             </div>
             <p className='text-text-xs text-grayTextPrimary'>
-              In the context of decentralized finance (DeFi), it represents the
-              total amount of cryptocurrency assets that are currently staked or
-              deposited in a particular protocol or smart contract.
+              {t("script.tvl.description")}
             </p>
             <div className='flex h-full items-end justify-end'>
               <a
@@ -133,7 +135,7 @@ export const ScriptListTVLTab: FC = () => {
                 rel='noopener noreferrer'
               >
                 <span className='text-text-xs font-semibold text-primary'>
-                  Detailed Cardano TVL on DefiLama
+                  {t("script.tvl.defilamaLink")}
                 </span>
                 <ArrowRight size={13} className='font-semibold text-primary' />
               </a>

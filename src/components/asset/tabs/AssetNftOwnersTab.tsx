@@ -13,6 +13,7 @@ import { AddressTypeInitialsBadge } from "@vellumlabs/cexplorer-sdk";
 import { useSearch } from "@tanstack/react-router";
 import { configJSON } from "@/constants/conf";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface AssetNftOwnersTabProps {
   name: number;
@@ -25,6 +26,7 @@ export const AssetNftOwnersTab: FC<AssetNftOwnersTabProps> = ({
   policy,
   price,
 }) => {
+  const { t } = useAppTranslation("common");
   const [totalItems, setTotalItems] = useState<number>(0);
   const { page } = useSearch({ from: "/asset/$fingerprint" });
   const assetName = policy + name;
@@ -65,20 +67,20 @@ export const AssetNftOwnersTab: FC<AssetNftOwnersTabProps> = ({
         ) : (
           "-"
         ),
-      title: "Owner",
+      title: t("asset.owner"),
       visible: true,
       widthPx: 65,
     },
     {
       key: "date",
       render: item => <DateCell time={item?.block?.time ?? ""} />,
-      title: "Date",
+      title: t("labels.date"),
       visible: true,
       widthPx: 50,
     },
     {
       key: "value",
-      title: <p className='w-full text-right'>Value</p>,
+      title: <p className='w-full text-right'>{t("asset.value")}</p>,
       render: item => (
         <p className='w-full text-right'>
           {price ? lovelaceToAda(price * item?.quantity) : "-"}
@@ -112,6 +114,10 @@ export const AssetNftOwnersTab: FC<AssetNftOwnersTabProps> = ({
         );
       })}
       onOrderChange={setColumsOrder}
+      renderDisplayText={(count, total) =>
+        t("table.displaying", { count, total })
+      }
+      noItemsLabel={t("table.noItems")}
     />
   );
 };

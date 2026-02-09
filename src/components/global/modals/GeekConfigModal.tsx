@@ -15,6 +15,7 @@ import {
   useGeekConfigStore,
   type UTxOSortOption,
 } from "@/stores/geekConfigStore";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 export const GeekConfigModal = () => {
   const { isOpen, setIsOpen } = useGeekConfigModalState();
@@ -26,10 +27,13 @@ export const GeekConfigModal = () => {
     setDisplayADAInTooltips,
     setSortUTxOs,
   } = useGeekConfigStore();
+  const { t } = useAppTranslation();
 
-  const [localDisplayHandles, setLocalDisplayHandles] = useState(displayHandles);
+  const [localDisplayHandles, setLocalDisplayHandles] =
+    useState(displayHandles);
   const [localDisplayADA, setLocalDisplayADA] = useState(displayADAInTooltips);
-  const [localSortUTxOs, setLocalSortUTxOs] = useState<UTxOSortOption>(sortUTxOs);
+  const [localSortUTxOs, setLocalSortUTxOs] =
+    useState<UTxOSortOption>(sortUTxOs);
 
   const onClose = () => {
     setLocalDisplayHandles(displayHandles);
@@ -48,22 +52,25 @@ export const GeekConfigModal = () => {
   if (!isOpen) return null;
 
   return createPortal(
-    <Modal minWidth="400px" maxWidth="600px" onClose={onClose}>
-      <div className="flex flex-col gap-4 p-2">
+    <Modal minWidth='400px' maxWidth='600px' onClose={onClose}>
+      <div className='flex flex-col gap-4 p-2'>
         <div>
-          <h2 className="text-text-xl font-semibold">Preferences</h2>
-          <p className="text-text-sm text-grayTextPrimary">
-            Select preferences for your best experience on Cexplorer.
+          <h2 className='text-text-xl font-semibold'>
+            {t("global.geekConfig.preferences")}
+          </h2>
+          <p className='text-text-sm text-grayTextPrimary'>
+            {t("global.geekConfig.preferencesDescription")}
           </p>
         </div>
 
-        <div className="flex flex-col gap-4">
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex-1">
-              <p className="font-semibold text-primary">Display $Handles</p>
-              <p className="text-text-sm text-grayTextPrimary">
-                Show readable $Handles instead of full wallet addresses where
-                available.
+        <div className='flex flex-col gap-4'>
+          <div className='flex items-start justify-between gap-4'>
+            <div className='flex-1'>
+              <p className='font-semibold'>
+                {t("global.geekConfig.displayHandles")}
+              </p>
+              <p className='text-text-sm text-grayTextPrimary'>
+                {t("global.geekConfig.displayHandlesDescription")}
               </p>
             </div>
             <Switch
@@ -72,15 +79,15 @@ export const GeekConfigModal = () => {
             />
           </div>
 
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex-1">
-              <p className="font-semibold text-primary">
-                Display ADA in tooltips
+          <div className='flex items-start justify-between gap-4'>
+            <div className='flex-1'>
+              <p className='font-semibold'>
+                {t("global.geekConfig.displayAdaTooltips")}
               </p>
-              <p className="text-text-sm text-grayTextPrimary">
-                Show tooltip amounts in ADA rather than lovelace
+              <p className='text-text-sm text-grayTextPrimary'>
+                {t("global.geekConfig.displayAdaTooltipsDescription")}
                 <br />
-                (1 ADA = 1,000,000 lovelace).
+                {t("global.geekConfig.adaLovelaceNote")}
               </p>
             </div>
             <Switch
@@ -89,40 +96,48 @@ export const GeekConfigModal = () => {
             />
           </div>
 
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex-1">
-              <p className="font-semibold text-primary">Sort UTxOs</p>
-              <p className="text-text-sm text-grayTextPrimary">
-                Sort UTxOs shown in transaction details by their index or value.
+          <div className='flex items-start justify-between gap-4'>
+            <div className='flex-1'>
+              <p className='font-semibold'>
+                {t("global.geekConfig.sortUtxos")}
+              </p>
+              <p className='text-text-sm text-grayTextPrimary'>
+                {t("global.geekConfig.sortUtxosDescription")}
               </p>
             </div>
             <Select
               value={localSortUTxOs}
-              onValueChange={(value: UTxOSortOption) => setLocalSortUTxOs(value)}
+              onValueChange={(value: UTxOSortOption) =>
+                setLocalSortUTxOs(value)
+              }
             >
-              <SelectTrigger className="w-[100px]">
-                <SelectValue placeholder="Index" />
+              <SelectTrigger className='w-[100px]'>
+                <SelectValue placeholder={t("global.geekConfig.index")} />
               </SelectTrigger>
-              <SelectContent className="z-[100]">
-                <SelectItem value="index">Index</SelectItem>
-                <SelectItem value="value">Value</SelectItem>
+              <SelectContent className='z-[100]'>
+                <SelectItem value='index'>
+                  {t("global.geekConfig.index")}
+                </SelectItem>
+                <SelectItem value='value'>
+                  {t("global.geekConfig.value")}
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
         </div>
 
-        <div className="flex justify-end gap-2 pt-2">
+        <div className='flex justify-end gap-2 pt-2'>
           <Button
             onClick={onClose}
-            variant="secondary"
-            size="md"
-            label="Cancel"
+            variant='secondary'
+            size='md'
+            label={t("actions.cancel")}
           />
           <Button
             onClick={handleSave}
-            variant="primary"
-            size="md"
-            label="Save"
+            variant='primary'
+            size='md'
+            label={t("actions.save")}
           />
         </div>
       </div>

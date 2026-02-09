@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscValidate } from "@/services/misc";
 import { useHomepageStore } from "@/stores/homepageStore";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 interface HomepageModalWidgetProps {
   widget: {
     type: WidgetTypes;
@@ -34,6 +35,7 @@ export const HomepageModalWidget: FC<HomepageModalWidgetProps> = ({
   onClick,
   onReset,
 }) => {
+  const { t } = useAppTranslation("common");
   const { setWidgetCategories } = useHomepageStore();
 
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
@@ -142,7 +144,9 @@ export const HomepageModalWidget: FC<HomepageModalWidgetProps> = ({
           }}
         >
           <div className='flex flex-col items-start gap-1.5 p-1.5'>
-            <h3 className='text-text-lg font-bold'>Detail information</h3>
+            <h3 className='text-text-lg font-bold'>
+              {t("homepage.detailInformation")}
+            </h3>
             <div
               className='w-fit'
               onClick={e => {
@@ -150,7 +154,7 @@ export const HomepageModalWidget: FC<HomepageModalWidgetProps> = ({
               }}
             >
               <TableSearchInput
-                placeholder='Type hash,id,address...'
+                placeholder={t("homepage.typeHashIdAddress")}
                 value={tableSearch}
                 inputClassName='bg-background'
                 onchange={setTableSearch}
@@ -159,7 +163,9 @@ export const HomepageModalWidget: FC<HomepageModalWidgetProps> = ({
                 showPrefixPopup={false}
               />
             </div>
-            {debouncedTableSearch && !validIdent && <span>Unknown ident!</span>}
+            {debouncedTableSearch && !validIdent && (
+              <span>{t("homepage.unknownIdent")}</span>
+            )}
           </div>
         </div>
       </div>
