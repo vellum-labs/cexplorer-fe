@@ -28,10 +28,12 @@ const PoolDetailPage = () => {
   const route = getRouteApi("/pool/$id");
   const { id } = route.useParams();
 
-  const { showWalletModal, setShowWalletModal } = useDelegateAction({
-    type: "pool",
-    ident: id,
-  });
+  const {
+    showWalletModal,
+    setShowWalletModal,
+    showDelegationModal,
+    setShowDelegationModal,
+  } = useDelegateAction();
 
   const query = useFetchPoolDetail(
     id.startsWith("pool1") ? id : undefined,
@@ -202,6 +204,8 @@ const PoolDetailPage = () => {
         estimatedBlocks={estimatedBlocks}
         miscConst={miscConst}
         isPoolRetiredOrRetiring={isPoolRetiredOrRetiring}
+        externalDelegationModalOpen={showDelegationModal}
+        onExternalDelegationModalClose={() => setShowDelegationModal(false)}
       />
       <Tabs items={poolDetailTabItems} />
       {showWalletModal && (

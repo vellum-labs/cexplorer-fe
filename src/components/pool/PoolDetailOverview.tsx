@@ -12,6 +12,8 @@ interface Props {
   estimatedBlocks: number;
   miscConst: MiscConstResponseData | undefined;
   isPoolRetiredOrRetiring?: boolean;
+  externalDelegationModalOpen?: boolean;
+  onExternalDelegationModalClose?: () => void;
 }
 
 const PoolDetailOverview = ({
@@ -19,6 +21,8 @@ const PoolDetailOverview = ({
   estimatedBlocks,
   miscConst,
   isPoolRetiredOrRetiring = false,
+  externalDelegationModalOpen,
+  onExternalDelegationModalClose,
 }: Props) => {
   const { t } = useAppTranslation("pages");
   const { data, aboutList, performanceList, stakeAndPledgeList } =
@@ -32,6 +36,8 @@ const PoolDetailOverview = ({
         isLoading={query.isLoading}
         poolDetailQuery={query}
         isPoolRetiredOrRetiring={isPoolRetiredOrRetiring}
+        externalDelegationModalOpen={externalDelegationModalOpen}
+        onExternalDelegationModalClose={onExternalDelegationModalClose}
       />
       <div className='flex w-full flex-wrap items-stretch gap-3'>
         {query.isLoading ? (
