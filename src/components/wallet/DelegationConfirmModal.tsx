@@ -59,7 +59,7 @@ export const DelegationConfirmModal: FC<DelegationConfirmModalProps> = ({
 
   return (
     <Modal maxWidth='min(560px, 90vw)' onClose={onCancel}>
-      <div className='flex max-h-[80vh] flex-col overflow-y-auto p-4'>
+      <div className='mt-4 flex max-h-[80vh] flex-col overflow-y-auto'>
         <h2 className='text-text-lg font-semibold'>
           {t("wallet.delegation.title", "Delegation")}
         </h2>
