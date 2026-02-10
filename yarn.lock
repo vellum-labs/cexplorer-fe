@@ -3787,10 +3787,10 @@
   dependencies:
     "@bufbuild/protobuf" "^1.10.0"
 
-"@vellumlabs/cexplorer-sdk@^1.1.11":
-  version "1.1.11"
-  resolved "https://registry.yarnpkg.com/@vellumlabs/cexplorer-sdk/-/cexplorer-sdk-1.1.11.tgz#b013d1dbdf46589630b7c3334ac7fbd7c7e6b06d"
-  integrity sha512-hPHwqRBGbBf46N5YSpjT4C2HEeUHJkmtpNChZ1bp2ffOmgpWwuljQlvw2tJ8HcvzO4fiHKypiEVX9zR2o7TkCw==
+"@vellumlabs/cexplorer-sdk@^1.1.18":
+  version "1.1.18"
+  resolved "https://registry.yarnpkg.com/@vellumlabs/cexplorer-sdk/-/cexplorer-sdk-1.1.18.tgz#15ce8ac2e62d9a3ede069c9027697a3c9b645a1a"
+  integrity sha512-Ej4P66BRgW068S3fG50ak4IgnaZi4BVYkkaBGZNedYu4jaJPgzBo4SSDdCUPx54JBAMyU9/Y1PeIsey6Onb26A==
   dependencies:
     class-variance-authority "^0.7.1"
 
@@ -4840,7 +4840,7 @@ chalk@5.2.0:
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-5.2.0.tgz#249623b7d66869c673699fb66d65723e54dfcfb3"
   integrity sha512-ree3Gqw/nazQAPuJJEy+avdl7QfZMcUvmHIKgEZkGL+xOBzRvup5Hxo6LHuMceSxOabuJLJm5Yp/92R9eMmMvA==
 
-chalk@^4.0.0:
+chalk@^4.0.0, chalk@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
   integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
@@ -6324,6 +6324,15 @@ fs-constants@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs-constants/-/fs-constants-1.0.0.tgz#6be0de9be998ce16af8afc24497b9ee9b7ccd9ad"
   integrity sha512-y6OAwoSIf7FyjMIv94u+b5rdheZEjzR63GTyZJm5qh4Bi+2YgwLCcI/fPFZkL5PSixOt6ZNKm+w+Hfp/Bciwow==
+
+fs-extra@^10.0.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.1.0.tgz#02873cfbc4084dde127eaa5f9905eef2325d1abf"
+  integrity sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==
+  dependencies:
+    graceful-fs "^4.2.0"
+    jsonfile "^6.0.1"
+    universalify "^2.0.0"
 
 fs-extra@^11.1.0:
   version "11.3.2"
@@ -11846,6 +11855,15 @@ vfile@^6.0.0:
   dependencies:
     "@types/unist" "^3.0.0"
     vfile-message "^4.0.0"
+
+vite-plugin-compression@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/vite-plugin-compression/-/vite-plugin-compression-0.5.1.tgz#a75b0d8f48357ebb377b65016da9f20885ef39b6"
+  integrity sha512-5QJKBDc+gNYVqL/skgFAP81Yuzo9R+EAf19d+EtsMF/i8kFUpNi3J/H01QD3Oo8zBQn+NzoCIFkpPLynoOzaJg==
+  dependencies:
+    chalk "^4.1.2"
+    debug "^4.3.3"
+    fs-extra "^10.0.0"
 
 vite-plugin-node-polyfills@^0.24.0:
   version "0.24.0"
