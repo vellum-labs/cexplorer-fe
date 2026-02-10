@@ -7,6 +7,7 @@ import topLevelAwait from "vite-plugin-top-level-await";
 import wasm from "vite-plugin-wasm";
 import { VitePWA } from "vite-plugin-pwa";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
+import compression from "vite-plugin-compression";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -106,6 +107,7 @@ export default defineConfig({
         maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
       },
     }),
+    compression({ algorithm: "gzip", threshold: 1024 }),
     {
       name: "force-exit",
       writeBundle() {
