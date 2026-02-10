@@ -4,6 +4,7 @@
   "public": false,
   "nft": "75dcafb17dc8c6e77636f022b932618b5ed2a6cda9a1fe4ddd414737",
   "network": "preprod",
+  "embed": true,
   "api": [
     {
       "endpoint": "https://api-preprod-stage.cexplorer.io/v1",
@@ -110,14 +111,14 @@
   ],
   "lng": ["en", "cs"],
   "currency": ["usd", "eur"],
-  "ipfs":"https://ipfs.blockfrost.dev/ipfs/",
+  "ipfs": "https://ipfs.blockfrost.dev/ipfs/",
   "donationAddress": "addr_test1qrzw5lqz3ve5v044ne3pkw7tc2hrxwhj9u9ge34yjw2frkcpp5e7sueuknckyay367z4mr4p9xv2rrnzfgge9p3uqews3t2ttx",
   "supportedPools": [
     "pool1e0arfuamnymdkmjztvkryasxv9d8u8key27ajgc4mquz2nr8mk9",
     "pool107k26e3wrqxwghju2py40ngngx2qcu48ppeg7lk0cm35jl2aenx",
     "pool13la5erny3srx9u4fz9tujtl2490350f89r4w4qjhk0vdjmuv78v"
   ],
-  "supportedDrep":"drep1yfdlaustgvf3ch9gwzzxk4s77neettw3yqv7n3ay0a6k63qw9dmhd",
+  "supportedDrep": "drep1yfdlaustgvf3ch9gwzzxk4s77neettw3yqv7n3ay0a6k63qw9dmhd",
   "featured": [
     {
       "modules": ["pool", "asset", "policy", "drep", "collection"]
@@ -125,13 +126,15 @@
   ],
   "integration": [
     {
-      "dexhunter": [{
-        "active":true,
-        "stable":false,
-        "api":"api-us.dexhunterv3.app",
-        "key":"cexplorer61646472317138383463706d6d326574376a686463323874793730677877776864737a7532633430323938366e72326a6c327a673763637a683376353074386b656838373637656735686573676b7a6d37353639717475616b79386e68326e377168346b367938da39a3ee5e6b4b0d3255bfef95601890afd80709",
-        "name":"cexplorer"        
-      }],
+      "dexhunter": [
+        {
+          "active": true,
+          "stable": false,
+          "api": "api-us.dexhunterv3.app",
+          "key": "cexplorer61646472317138383463706d6d326574376a686463323874793730677877776864737a7532633430323938366e72326a6c327a673763637a683376353074386b656838373637656735686573676b7a6d37353639717475616b79386e68326e377168346b367938da39a3ee5e6b4b0d3255bfef95601890afd80709",
+          "name": "cexplorer"
+        }
+      ],
       "adahandle": [
         {
           "active": true,
@@ -145,9 +148,11 @@
       "user": ["web3_login", "web3_signActions", "web3_cexGov", "pseudoLogin"]
     }
   ],
-  "services": [{
-    "googleTag":"G-5H13N9YB6Z"
-  }],
+  "services": [
+    {
+      "googleTag": "G-5H13N9YB6Z"
+    }
+  ],
   "genesisParams": [
     {
       "byron": [
