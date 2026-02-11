@@ -276,7 +276,7 @@ export const PayPage = () => {
               {t("wallet.payment.donationDescription")}
             </p>
 
-            <div className='mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2'>
+            <div className='mt-4 flex flex-col gap-2'>
               {DONATION_OPTIONS.map(option => {
                 const Icon = option.icon;
                 const isSelected = selectedDonation === option.value;
@@ -293,7 +293,6 @@ export const PayPage = () => {
                       isSelected
                         ? "bg-primary/5 border-primary"
                         : "hover:border-primary/50 border-border",
-                      option.value === 0 && "sm:col-span-2",
                     )}
                   >
                     <input
@@ -320,23 +319,21 @@ export const PayPage = () => {
             </div>
           </div>
 
-          <div className='mt-6 flex flex-col gap-2 sm:flex-row'>
+          <div className='mt-6 flex flex-col items-center gap-2 min-[400px]:flex-row min-[400px]:justify-between'>
             <Button
               label={t("wallet.payment.generateLink")}
               variant='secondary'
-              size='lg'
+              size='md'
               leftIcon={<LinkIcon size={16} />}
               onClick={handleGenerateLink}
               disabled={!isFormValid}
-              className='flex-1'
             />
             <Button
               label={t("wallet.payment.signTransaction")}
               variant='primary'
-              size='lg'
+              size='md'
               onClick={handleSign}
               disabled={!isFormValid}
-              className='flex-1'
             />
           </div>
         </div>

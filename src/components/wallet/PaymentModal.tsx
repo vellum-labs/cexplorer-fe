@@ -252,7 +252,7 @@ export const PaymentModal: FC<PaymentModalProps> = ({
             {t("wallet.payment.donationDescription")}
           </p>
 
-          <div className='mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2'>
+          <div className='mt-4 flex flex-col gap-2'>
             {DONATION_OPTIONS.map(option => {
               const Icon = option.icon;
               const isSelected = selectedDonation === option.value;
@@ -269,7 +269,6 @@ export const PaymentModal: FC<PaymentModalProps> = ({
                     isSelected
                       ? "bg-primary/5 border-primary"
                       : "hover:border-primary/50 border-border",
-                    option.value === 0 && "sm:col-span-2",
                   )}
                 >
                   <input
