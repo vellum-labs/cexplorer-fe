@@ -19,6 +19,7 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import { useDelegateAction } from "@/hooks/useDelegateAction";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { hasEmbed } from "@/constants/confVariables";
 
 export const DrepDetailPage: FC = () => {
   const { t } = useAppTranslation("pages");
@@ -26,10 +27,12 @@ export const DrepDetailPage: FC = () => {
   const route = getRouteApi("/drep/$hash");
   const { hash } = route.useParams();
 
-  const { showWalletModal, setShowWalletModal } = useDelegateAction({
-    type: "drep",
-    ident: hash,
-  });
+  const {
+    showWalletModal,
+    setShowWalletModal,
+    showDelegationModal,
+    setShowDelegationModal,
+  } = useDelegateAction();
 
   const drepDetailQuery = useFetchDrepDetail(hash);
 
@@ -61,7 +64,7 @@ export const DrepDetailPage: FC = () => {
       content: (
         <DrepDetailEmbedTab drepId={hash} drepName={drepName ?? undefined} />
       ),
-      visible: true,
+      visible: hasEmbed,
     },
   ];
 
@@ -157,6 +160,8 @@ export const DrepDetailPage: FC = () => {
           ident={drepHash ?? ""}
           isLoading={drepDetailQuery.isLoading}
           drepDetailQuery={drepDetailQuery}
+          externalDelegationModalOpen={showDelegationModal}
+          onExternalDelegationModalClose={() => setShowDelegationModal(false)}
         />
       </div>
       <DrepDetailOverview query={drepDetailQuery} />

@@ -1,5 +1,6 @@
 import type { WalletInfo, WalletType } from "@/types/walletTypes";
 import { isAndroid, isFirefox, isIOS, isMobile } from "react-device-detect";
+import { Coffee, UtensilsCrossed, Users, PartyPopper } from "lucide-react";
 import EternlLogo from "../resources/images/wallet/eternl-small.png";
 import FlintLogo from "../resources/images/wallet/flint.png";
 import LaceLogo from "../resources/images/wallet/lacelogo.svg";
@@ -7,6 +8,14 @@ import MetamaskLogo from "../resources/images/wallet/metamask.svg";
 import NufiLogo from "../resources/images/wallet/nufi-small.svg";
 import YoroiLogo from "../resources/images/wallet/yoroi.svg";
 import { supportedWallets } from "./confVariables";
+
+export const DONATION_OPTIONS = [
+  { value: 0, labelKey: "noThanks", icon: null },
+  { value: 10, labelKey: "coffee", icon: Coffee },
+  { value: 50, labelKey: "lunch", icon: UtensilsCrossed },
+  { value: 100, labelKey: "teamDinner", icon: Users },
+  { value: 1000, labelKey: "teambuilding", icon: PartyPopper },
+] as const;
 
 const walletInfos: Record<WalletType | WalletType, WalletInfo> = {
   lace: {

@@ -9,7 +9,11 @@ import BlocksTabItem from "@/components/pool/tabs/BlocksTabItem";
 import DelegatorsTabItem from "@/components/pool/tabs/DelegatorsTabItem";
 import PerformanceTabItem from "@/components/pool/tabs/PerformanceTabItem";
 import RewardsTabItem from "@/components/pool/tabs/RewardsTabItem";
-import { activeSlotsCoeff, epochLength } from "@/constants/confVariables";
+import {
+  activeSlotsCoeff,
+  epochLength,
+  hasEmbed,
+} from "@/constants/confVariables";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useFetchPoolDetail } from "@/services/pools";
@@ -28,10 +32,12 @@ const PoolDetailPage = () => {
   const route = getRouteApi("/pool/$id");
   const { id } = route.useParams();
 
-  const { showWalletModal, setShowWalletModal } = useDelegateAction({
-    type: "pool",
-    ident: id,
-  });
+  const {
+    showWalletModal,
+    setShowWalletModal,
+    showDelegationModal,
+    setShowDelegationModal,
+  } = useDelegateAction();
 
   const query = useFetchPoolDetail(
     id.startsWith("pool1") ? id : undefined,
@@ -124,7 +130,7 @@ const PoolDetailPage = () => {
       content: (
         <EmbedTabItem poolId={id} poolTicker={data?.pool_name?.ticker} />
       ),
-      visible: true,
+      visible: hasEmbed,
     },
   ];
 
@@ -202,6 +208,8 @@ const PoolDetailPage = () => {
         estimatedBlocks={estimatedBlocks}
         miscConst={miscConst}
         isPoolRetiredOrRetiring={isPoolRetiredOrRetiring}
+        externalDelegationModalOpen={showDelegationModal}
+        onExternalDelegationModalClose={() => setShowDelegationModal(false)}
       />
       <Tabs items={poolDetailTabItems} />
       {showWalletModal && (

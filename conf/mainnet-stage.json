@@ -4,6 +4,7 @@
   "public": true,
   "nft": false,
   "network": "mainnet",
+  "embed": true,
   "api": [
     {
       "endpoint": "https://api-mainnet-stage.cexplorer.io/v1",
@@ -111,7 +112,7 @@
   "lng": ["en"],
   "currency": ["usd", "eur"],
   "donationAddress": "addr1q9sz5kw40pmnkcmmfvssm5fy2vzkk7l0wu5szv25nnffkqnkc35qyrgnqu8tl96u5eejytgvtsqatr2ms6hrxhdzq4pslvp2rm",
-  "ipfs":"https://ipfs.blockfrost.dev/ipfs/",
+  "ipfs": "https://ipfs.blockfrost.dev/ipfs/",
   "supportedPools": [
     "pool1cduc7ut6grhqyavrmm3gzcdf4qfdsjk7vdwcxy9c0r5fyaxh2sq"
   ],
@@ -122,17 +123,22 @@
   ],
   "integration": [
     {
-      "dexhunter": [{
-        "active":true,
-        "stable":false,
-        "api":"api-us.dexhunterv3.app",
-        "key":"cexplorernextgen61646472317139737a356b773430706d6e6b636d6d667673736d35667932767a6b6b376c30777535737a7632356e6e66666b716e6b633335717972676e717538746c3936753565656a79746776747371617472326d733668727868647a713470736c767032726dda39a3ee5e6b4b0d3255bfef95601890afd80709",
-        "name":"cexplorernextgen"        
-      }],
+      "dexhunter": [
+        {
+          "active": true,
+          "stable": false,
+          "api": "api-us.dexhunterv3.app",
+          "key": "cexplorernextgen61646472317139737a356b773430706d6e6b636d6d667673736d35667932767a6b6b376c30777535737a7632356e6e66666b716e6b633335717972676e717538746c3936753565656a79746776747371617472326d733668727868647a713470736c767032726dda39a3ee5e6b4b0d3255bfef95601890afd80709",
+          "name": "cexplorernextgen"
+        }
+      ],
       "adahandle": [
         {
           "active": true,
-          "policy": "f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a"
+          "policy": [
+            "f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a",
+            "6c32db33a422e0bc2cb535bb850b5a6e9a9572222056d6ddc9cbc26e"
+          ]
         }
       ]
     }
@@ -142,9 +148,11 @@
       "user": ["web3_login", "web3_signActions", "web3_cexGov", "pseudoLogin"]
     }
   ],
-  "services": [{
-    "googleTag":"G-SRRKGJWCCH"
-  }],
+  "services": [
+    {
+      "googleTag": "G-SRRKGJWCCH"
+    }
+  ],
   "genesisParams": [
     {
       "byron": [
