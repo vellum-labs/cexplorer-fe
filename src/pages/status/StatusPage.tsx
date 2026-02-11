@@ -1,7 +1,6 @@
 import type { FC } from "react";
 
 import { PulsedBadge } from "@/components/ui/pulsedBadge";
-import { Helmet } from "react-helmet";
 
 import { useFetchMiscBasic, useFetchMiscHealth } from "@/services/misc";
 import { useEffect, useState } from "react";
@@ -10,8 +9,7 @@ import { checkInternetSpeed } from "@/utils/checkInternetSpeed";
 import { convertUtcToLocal } from "@/utils/convertUtcToLocal";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Check, CircleAlert, ExternalLink, X } from "lucide-react";
-
-import metadata from "../../../conf/metadata/en-metadata.json";
+import { PageBase } from "@/components/global/pages/PageBase";
 
 export const StatusPage: FC = () => {
   const [internetSpeed, setInternetSpeed] = useState<number>();
@@ -108,12 +106,13 @@ export const StatusPage: FC = () => {
   ];
 
   return (
-    <>
-      <Helmet>
-        <title>{metadata.status.title}</title>
-      </Helmet>
-      <div className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
-        <div className='flex w-full max-w-desktop flex-col items-center'>
+    <PageBase
+      metadataTitle='status'
+      title='Status'
+      breadcrumbItems={[{ label: 'Status' }]}
+      adsCarousel={false}
+    >
+      <div className='flex w-full max-w-desktop flex-col items-center px-mobile pb-3 md:px-desktop'>
           <h1>Status</h1>
           <p className='mt-1.5 font-regular text-grayTextPrimary'>
             Check and share your current status for quick troubleshooting.
@@ -244,7 +243,6 @@ export const StatusPage: FC = () => {
             </div>
           </div>
         </div>
-      </div>
-    </>
+    </PageBase>
   );
 };

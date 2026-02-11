@@ -1,8 +1,6 @@
 import type { CompareWallet } from "@/types/walletTypes";
 import type { FC } from "react";
 
-import { HeaderBanner } from "@/components/global/HeaderBanner";
-import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
 import { WalletRow } from "@/components/wallet/WalletRow";
 import Android from "@/resources/images/platforms/android.svg";
 import AndroidDark from "@/resources/images/platforms/android_dark.svg";
@@ -19,7 +17,6 @@ import Ledger from "@/resources/images/wallet/ledger.svg";
 import TrezorDark from "@/resources/images/wallet/trezor-dark.svg";
 import Trezor from "@/resources/images/wallet/trezor.svg";
 import { CircleCheck, CircleHelp, Minus } from "lucide-react";
-import { Helmet } from "react-helmet";
 
 import walletComparisonData from "@/../conf/wallet-comparison-data.json";
 import { useCompareWalletsStore } from "@/stores/tables/compareWalletsStore";
@@ -30,16 +27,13 @@ import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 
 import { Select, SelectTrigger } from "@vellumlabs/cexplorer-sdk";
 import { configJSON } from "@/constants/conf";
-import { useFetchMiscBasic } from "@/services/misc";
-import { generateImageUrl } from "@/utils/generateImageUrl";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { PageBase } from "@/components/global/pages/PageBase";
 
 export const WalletPage: FC = () => {
   const { t } = useAppTranslation();
   const { theme } = useThemeStore();
   const walletData = walletComparisonData as CompareWallet[];
-
-  const miscBasicQuery = useFetchMiscBasic();
 
   const [compareWalletOptions, setCompareWalletOptions] = useState<
     {
@@ -721,21 +715,13 @@ export const WalletPage: FC = () => {
   ];
 
   return (
-    <>
-      <Helmet>
-        <title>{t("wallet.comparison.pageTitle")}</title>
-      </Helmet>
-      <main className='flex min-h-minHeight w-full flex-col items-center'>
-        <HeaderBanner
-          title={t("wallet.comparison.title")}
-          breadcrumbItems={[{ label: t("wallet.comparison.breadcrumb") }]}
-          subTitle={t("wallet.comparison.subtitle")}
-        />
-        <AdsCarousel
-          generateImageUrl={generateImageUrl}
-          miscBasicQuery={miscBasicQuery}
-        />
-        <section className='flex w-full justify-center'>
+    <PageBase
+      metadataTitle='wallet'
+      title={t("wallet.comparison.title")}
+      breadcrumbItems={[{ label: t("wallet.comparison.breadcrumb") }]}
+      subTitle={t("wallet.comparison.subtitle")}
+    >
+      <section className='flex w-full justify-center'>
           <div className='flex w-full max-w-desktop flex-col items-end gap-3 p-mobile md:p-desktop'>
             <div className='flex w-fit'>
               <div className='flex flex-col items-start gap-1/2'>
@@ -808,7 +794,6 @@ export const WalletPage: FC = () => {
             </div>
           </div>
         </section>
-      </main>
-    </>
+    </PageBase>
   );
 };

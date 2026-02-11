@@ -43,10 +43,9 @@ import { poolRewardsRoaDiff } from "@/utils/poolRewardsRoaDiff";
 import { getRouteApi, Link } from "@tanstack/react-router";
 import { Check, Filter, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Helmet } from "react-helmet";
-import metadata from "../../../conf/metadata/en-metadata.json";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { PageBase } from "@/components/global/pages/PageBase";
 
 export const GroupDetailPage = () => {
   const { t } = useAppTranslation();
@@ -589,34 +588,20 @@ export const GroupDetailPage = () => {
   }, [debouncedTableSearch, items, filter]);
 
   return (
-    <>
-      <Helmet>
-        {
-          <title>
-            {metadata.groupDetail.title.replace("%group%", name ?? "")}
-          </title>
-        }
-      </Helmet>
-      <main className='flex min-h-minHeight flex-col items-center gap-1 p-mobile md:p-desktop'>
-        <div className='flex w-full max-w-desktop flex-col justify-center'>
-          <BreadcrumbRaw className='mb-2 w-full'>
-            <BreadcrumbList className='flex items-center'>
-              <BreadcrumbItem>
-                <Link className='underline underline-offset-2' to='/'>
-                  {t("pages:breadcrumbs.home")}
-                </Link>
-              </BreadcrumbItem>
-              /
-              <BreadcrumbItem>
-                <Link className='underline underline-offset-2' to={"/groups"}>
-                  {t("pages:breadcrumbs.groups")}
-                </Link>
-              </BreadcrumbItem>
-              / <BreadcrumbItem className='text-text'>{name}</BreadcrumbItem>
-            </BreadcrumbList>
-          </BreadcrumbRaw>
-          <h1 className='text-left'>{name}</h1>
-          <p className='mt-1'>{description}</p>
+    <PageBase
+      metadataOverride={{
+        title: `${name ?? "Group"} Pool Group | Cexplorer.io`,
+      }}
+      title={name ?? ""}
+      breadcrumbItems={[
+        { label: t("pages:breadcrumbs.groups"), link: "/groups" },
+        { label: name ?? "" },
+      ]}
+      adsCarousel={false}
+      bookmarkButton={false}
+    >
+      <div className='flex w-full max-w-desktop flex-col justify-center px-mobile pb-3 md:px-desktop'>
+          <p className='mb-2'>{description}</p>
           <div className='my-2 flex w-full flex-col justify-between gap-1 md:flex-row md:items-center'>
             <div className='flex w-full flex-wrap items-center justify-end gap-1 md:flex-nowrap'>
               {isAnyDrepItem && (
@@ -673,7 +658,6 @@ export const GroupDetailPage = () => {
             noItemsLabel={t("table.noItems")}
           />
         </div>
-      </main>
-    </>
+    </PageBase>
   );
 };

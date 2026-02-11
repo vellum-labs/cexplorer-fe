@@ -36,6 +36,7 @@ export const Route = createFileRoute("/pool/")({
           .optional()
           .catch("ranking"),
         is_drep: z.number().optional().catch(1),
+        tab: z.string().optional(),
       })
       .parse(input),
 });

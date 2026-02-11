@@ -2911,5 +2911,63 @@
     "delegateToDrep": "Delegate to DRep",
     "keywords": "Keywords",
     "copyLink": "Copy link"
+  },
+  "bookmark": {
+    "addModal": {
+      "title": "Add bookmark",
+      "description": "Save this page to your bookmarks for quick access.",
+      "nameLabel": "Personal name",
+      "namePlaceholder": "Enter a name for this bookmark",
+      "cancelLabel": "Cancel",
+      "saveLabel": "Save bookmark"
+    },
+    "editModal": {
+      "title": "Edit bookmark",
+      "description": "Change the name of your bookmark.",
+      "currentNameLabel": "Current name",
+      "newNameLabel": "New name",
+      "newNamePlaceholder": "Enter a new name",
+      "cancelLabel": "Cancel",
+      "saveLabel": "Save changes"
+    },
+    "removeModal": {
+      "title": "Remove bookmark",
+      "description": "Remove this page from your bookmarks.",
+      "nameLabel": "Personal name",
+      "cancelLabel": "Cancel",
+      "removeLabel": "Remove bookmark"
+    }
+  },
+  "bookmarksPage": {
+    "title": "Bookmarks",
+    "breadcrumb": "Bookmarks",
+    "edit": "Edit",
+    "remove": "Remove",
+    "emptyPrimary": "No bookmarks yet",
+    "emptySecondary": "Save your favorite pages by clicking the bookmark icon in the header.",
+    "bookmarkSingular": "bookmark",
+    "bookmarkPlural": "bookmarks",
+    "searchPlaceholder": "Search for bookmark...",
+    "columns": {
+      "type": "Type",
+      "my_name": "Personal name",
+      "url": "Link",
+      "actions": ""
+    },
+    "types": {
+      "address": "Address detail",
+      "pool": "Pool detail",
+      "transaction": "Transaction",
+      "block": "Block",
+      "asset": "Asset",
+      "stake": "Stake",
+      "drep": "DRep",
+      "policy": "Policy",
+      "article": "Blog post",
+      "wiki": "Wiki",
+      "epoch": "Epoch",
+      "script": "Script",
+      "page": "Page"
+    }
   }
 }
