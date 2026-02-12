@@ -2,12 +2,19 @@ import type { FC, ReactNode } from "react";
 
 import { Helmet } from "react-helmet";
 import { HeaderBanner } from "../HeaderBanner";
-import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
+import {
+  AdsCarousel,
+  AddBookmarkModal,
+  EditBookmarkModal,
+  RemoveBookmarkModal,
+} from "@vellumlabs/cexplorer-sdk";
 
 import metadata from "../../../../conf/metadata/en-metadata.json";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { useFetchMiscBasic } from "@/services/misc";
 import { HomepageAds } from "@/components/homepage/HomepageAds";
+import { useBookmark } from "@/hooks/useBookmark";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface PageBaseInitProps {
   children: ReactNode;
@@ -31,6 +38,7 @@ interface PageBaseInitProps {
   homepageAd?: ReactNode;
   customPage?: boolean;
   withoutSearch?: boolean;
+  bookmarkButton?: boolean;
 }
 
 interface PageWithSimpleMetadata extends PageBaseInitProps {
@@ -66,8 +74,20 @@ export const PageBase: FC<PageBaseProps> = ({
   homepageAd,
   customPage,
   withoutSearch = false,
+  bookmarkButton = true,
 }) => {
+  const { t } = useAppTranslation();
   const miscBasicQuery = useFetchMiscBasic();
+  const {
+    isBookmarked,
+    currentBookmark,
+    modalType,
+    handleBookmarkClick,
+    handleAddBookmark,
+    handleEditBookmark,
+    handleRemoveBookmark,
+    closeModal,
+  } = useBookmark();
 
   const miscBasicAds =
     !miscBasicQuery.isLoading &&
@@ -119,6 +139,9 @@ export const PageBase: FC<PageBaseProps> = ({
             ) : undefined
           }
           customPage={customPage}
+          bookmarkButton={bookmarkButton}
+          onBookmarkClick={handleBookmarkClick}
+          isBookmarked={isBookmarked}
         />
       )}
       {adsCarousel && (
@@ -128,6 +151,44 @@ export const PageBase: FC<PageBaseProps> = ({
         />
       )}
       {children}
+      {modalType === "add" && (
+        <AddBookmarkModal
+          onClose={closeModal}
+          onSave={handleAddBookmark}
+          title={t("bookmark.addModal.title")}
+          description={t("bookmark.addModal.description")}
+          nameLabel={t("bookmark.addModal.nameLabel")}
+          namePlaceholder={t("bookmark.addModal.namePlaceholder")}
+          cancelLabel={t("bookmark.addModal.cancelLabel")}
+          saveLabel={t("bookmark.addModal.saveLabel")}
+        />
+      )}
+      {modalType === "edit" && currentBookmark && (
+        <EditBookmarkModal
+          onClose={closeModal}
+          onSave={handleEditBookmark}
+          currentName={currentBookmark.my_name}
+          title={t("bookmark.editModal.title")}
+          description={t("bookmark.editModal.description")}
+          currentNameLabel={t("bookmark.editModal.currentNameLabel")}
+          newNameLabel={t("bookmark.editModal.newNameLabel")}
+          newNamePlaceholder={t("bookmark.editModal.newNamePlaceholder")}
+          cancelLabel={t("bookmark.editModal.cancelLabel")}
+          saveLabel={t("bookmark.editModal.saveLabel")}
+        />
+      )}
+      {modalType === "remove" && currentBookmark && (
+        <RemoveBookmarkModal
+          onClose={closeModal}
+          onRemove={handleRemoveBookmark}
+          bookmarkName={currentBookmark.my_name}
+          title={t("bookmark.removeModal.title")}
+          description={t("bookmark.removeModal.description")}
+          nameLabel={t("bookmark.removeModal.nameLabel")}
+          cancelLabel={t("bookmark.removeModal.cancelLabel")}
+          removeLabel={t("bookmark.removeModal.removeLabel")}
+        />
+      )}
     </main>
   );
 };
