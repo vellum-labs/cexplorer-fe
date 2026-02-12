@@ -118,8 +118,8 @@ export const mobileTablePages: MobileTablePage[] = [
 
   
   {
-    name: "Epoch Detail Blocks - epoch 200",
-    url: "/epoch/200",
+    name: "Epoch Detail Blocks - epoch 612",
+    url: "/epoch/612",
     clickTab: "blocks",
   },
 

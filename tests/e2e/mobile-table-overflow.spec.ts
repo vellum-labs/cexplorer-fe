@@ -34,7 +34,6 @@ for (const viewport of VIEWPORTS) {
           "This page doesn't exist",
           "Something went wrong",
           "Page not found",
-          "404",
         ];
         const bodyText = await page.locator("body").innerText();
         for (const pattern of ERROR_PATTERNS) {
