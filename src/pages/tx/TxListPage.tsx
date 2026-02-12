@@ -12,6 +12,7 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useSearch } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { TxExpandedContent } from "@/components/tx/TxExpandedContent";
 
 interface TxListPageProps {
   address?: string;
@@ -170,6 +171,7 @@ export const TxListPage: FC<TxListPageProps> = ({
               columnsOrder.indexOf(b.key as keyof TxListTableColumns)
             );
           })}
+          extraContent={item => <TxExpandedContent hash={item.hash} />}
           onOrderChange={setColumsOrder}
           renderDisplayText={(count, total) =>
             t("common:table.displaying", { count, total })

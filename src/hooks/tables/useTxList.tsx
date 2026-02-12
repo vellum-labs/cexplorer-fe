@@ -8,6 +8,7 @@ import { SizeCell } from "@vellumlabs/cexplorer-sdk";
 import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { HashCell } from "@/components/tx/HashCell";
 import { BlockCell } from "@vellumlabs/cexplorer-sdk";
+import { ToggleButton } from "@/components/global/ToggleButton";
 
 import { useFetchMiscBasic } from "@/services/misc";
 import { useFetchTxList } from "@/services/tx";
@@ -15,11 +16,11 @@ import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useTxListTableStore } from "@/stores/tables/txListTableStore";
 import { useEffect, useState } from "react";
 import { useMiscConst } from "../useMiscConst";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { useSearchTable } from "./useSearchTable";
 
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { isHex } from "@/utils/isHex";
-import { useSearchTable } from "./useSearchTable";
-import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface UseTxList {
   specifiedParams: string | true | undefined;
@@ -136,7 +137,7 @@ export const useTxList = ({
       },
       title: t("common:labels.hash"),
       visible: columnsVisibility.hash,
-      widthPx: 80,
+      widthPx: 120,
     },
     {
       key: "block",
@@ -183,7 +184,7 @@ export const useTxList = ({
         </p>
       ),
       visible: isDonationPage || columnsVisibility.donation,
-      widthPx: 75,
+      widthPx: 80,
     },
     {
       key: "fee",
@@ -220,7 +221,7 @@ export const useTxList = ({
       },
       title: <p className='w-full text-right'>{t("common:labels.size")}</p>,
       visible: columnsVisibility.size,
-      widthPx: 55,
+      widthPx: 70,
     },
     {
       key: "script_size",
@@ -238,7 +239,19 @@ export const useTxList = ({
         </p>
       ),
       visible: columnsVisibility.script_size,
-      widthPx: 35,
+      widthPx: 50,
+    },
+    {
+      key: "toggle",
+      render: (_item: TxBasicInfo, toggle?: () => void) => (
+        <div className='flex w-full justify-end'>
+          <ToggleButton toggle={toggle} />
+        </div>
+      ),
+      title: "",
+      visible: true,
+      widthPx: 10,
+      toggleCell: true,
     },
   ];
 

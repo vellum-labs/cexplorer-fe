@@ -524,6 +524,7 @@ export interface AddressDetailRewardsTableOptions
 }
 
 export interface TxListTableColumns {
+  toggle: boolean;
   date: boolean;
   hash: boolean;
   block: boolean;

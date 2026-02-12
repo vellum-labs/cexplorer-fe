@@ -18,6 +18,7 @@ export const useTxListTableStore = (storeKey?: string) =>
     storeKey ?? "tx_list_table_store",
     {
       columnsVisibility: {
+        toggle: true,
         date: true,
         hash: true,
         block: true,
@@ -38,6 +39,7 @@ export const useTxListTableStore = (storeKey?: string) =>
         "fee",
         "size",
         "script_size",
+        "toggle",
       ],
     },
     set => ({
