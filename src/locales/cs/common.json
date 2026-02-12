@@ -215,7 +215,10 @@
       "coffee": "$t(shared:donationOptions.coffee)",
       "lunch": "$t(shared:donationOptions.lunch)",
       "teamDinner": "$t(shared:donationOptions.teamDinner)",
-      "teambuilding": "$t(shared:donationOptions.teambuilding)"
+      "teambuilding": "$t(shared:donationOptions.teambuilding)",
+      "message": "Zpráva",
+      "messagePlaceholder": "Volitelná zpráva k transakci",
+      "messageHint": "Volitelná zpráva uložená na blockchainu (CIP-20)"
     },
     "delegation": {
       "title": "Delegace",

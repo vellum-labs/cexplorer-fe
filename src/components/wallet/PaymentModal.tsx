@@ -26,6 +26,7 @@ interface PaymentModalProps {
     amount: number,
     donationAmount: number,
     selectedAddress?: string,
+    message?: string,
   ) => void;
 }
 
@@ -37,6 +38,7 @@ export const PaymentModal: FC<PaymentModalProps> = ({
   const { t } = useAppTranslation("common");
   const { theme } = useThemeStore();
   const [amount, setAmount] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
   const [selectedDonation, setSelectedDonation] = useState<number | null>(null);
 
   const isStakeAddress = address.startsWith("stake");
@@ -107,7 +109,7 @@ export const PaymentModal: FC<PaymentModalProps> = ({
   const handleSign = () => {
     if (!effectiveAddress) return;
     const numAmount = Number(amount) || 0;
-    onSign(numAmount, selectedDonation ?? 0, effectiveAddress);
+    onSign(numAmount, selectedDonation ?? 0, effectiveAddress, message || undefined);
   };
 
   const handleGenerateLink = () => {
@@ -119,6 +121,9 @@ export const PaymentModal: FC<PaymentModalProps> = ({
       amount: String(numAmount),
       donation: String(donationAmount),
     });
+    if (message) {
+      params.set("message", message);
+    }
     const link = `${window.location.origin}/pay?${params.toString()}`;
     navigator.clipboard.writeText(link);
     toast.success(t("wallet.payment.linkCopied", "Link copied to clipboard"));
@@ -246,6 +251,29 @@ export const PaymentModal: FC<PaymentModalProps> = ({
           />
         </div>
 
+        <div className='flex flex-col gap-1'>
+          <label className='text-text-sm font-medium'>
+            {t("wallet.payment.message", "Message")}
+          </label>
+          <TextInput
+            inputClassName='h-10'
+            wrapperClassName='w-full'
+            value={message}
+            onchange={setMessage}
+            placeholder={t(
+              "wallet.payment.messagePlaceholder",
+              "Optional transaction message",
+            )}
+            maxLength={256}
+          />
+          <span className='text-text-xs text-grayTextSecondary'>
+            {t(
+              "wallet.payment.messageHint",
+              "Optional message stored on-chain (CIP-20)",
+            )}
+          </span>
+        </div>
+
         <div className='mt-2'>
           <h3 className='font-medium'>{t("wallet.payment.addDonation")}</h3>
           <p className='mt-1 text-text-sm text-grayTextPrimary'>
@@ -293,7 +321,7 @@ export const PaymentModal: FC<PaymentModalProps> = ({
           </div>
         </div>
 
-        <div className='mt-4 flex items-center justify-between'>
+        <div className='mt-4 flex flex-col items-center gap-2 min-[400px]:flex-row min-[400px]:justify-between'>
           <Button
             label={t("wallet.payment.generateLink")}
             variant='secondary'

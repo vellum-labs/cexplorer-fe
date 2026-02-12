@@ -9,6 +9,7 @@ interface PaymentParams {
   toAddress: string;
   amount: number;
   donationAmount?: number;
+  message?: string;
 }
 
 export const handlePayment = async (
@@ -22,7 +23,7 @@ export const handlePayment = async (
     return;
   }
 
-  const { toAddress, amount, donationAmount = 0 } = params;
+  const { toAddress, amount, donationAmount = 0, message } = params;
 
   if (!toAddress) {
     callPaymentToast({ errorMessage: "Missing recipient address." });
@@ -70,6 +71,15 @@ export const handlePayment = async (
       txBuilder.txOut(donationAddress, [
         { unit: "lovelace", quantity: donationLovelace.toString() },
       ]);
+    }
+
+    if (message && message.trim()) {
+      const msgChunks: string[] = [];
+      const trimmedMessage = message.trim();
+      for (let i = 0; i < trimmedMessage.length; i += 64) {
+        msgChunks.push(trimmedMessage.slice(i, i + 64));
+      }
+      txBuilder.metadataValue(674, { msg: msgChunks });
     }
 
     const unsignedTx = await txBuilder

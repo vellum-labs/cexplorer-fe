@@ -38,6 +38,7 @@ export const PayPage = () => {
   const [selectedHandle, setSelectedHandle] = useState<HandleData | null>(null);
   const [selectedAddress, setSelectedAddress] = useState<string | null>(null);
   const [amount, setAmount] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
   const [selectedDonation, setSelectedDonation] = useState<number | null>(null);
   const [showWalletModal, setShowWalletModal] = useState<boolean>(false);
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
@@ -46,7 +47,7 @@ export const PayPage = () => {
     if (isInitialized) return;
 
     const hasUrlParams =
-      searchParams.to || searchParams.amount || searchParams.donation;
+      searchParams.to || searchParams.amount || searchParams.donation || searchParams.message;
 
     if (hasUrlParams) {
       if (searchParams.to) {
@@ -68,6 +69,9 @@ export const PayPage = () => {
           setSelectedDonation(donationValue);
         }
       }
+      if (searchParams.message) {
+        setMessage(searchParams.message);
+      }
     } else {
       const saved = localStorage.getItem(PAY_STORAGE_KEY);
       if (saved) {
@@ -88,6 +92,9 @@ export const PayPage = () => {
         if (data.donation !== null && data.donation !== undefined) {
           setSelectedDonation(data.donation);
         }
+        if (data.message) {
+          setMessage(data.message);
+        }
       }
     }
     setIsInitialized(true);
@@ -104,6 +111,7 @@ export const PayPage = () => {
         amount: amount || undefined,
         donation:
           selectedDonation !== null ? String(selectedDonation) : undefined,
+        message: message || undefined,
       },
       replace: true,
     });
@@ -113,6 +121,7 @@ export const PayPage = () => {
       handle: selectedHandle?.name || null,
       amount: amount,
       donation: selectedDonation,
+      message: message || null,
     };
     localStorage.setItem(PAY_STORAGE_KEY, JSON.stringify(storageData));
   }, [
@@ -120,6 +129,7 @@ export const PayPage = () => {
     selectedHandle,
     amount,
     selectedDonation,
+    message,
     isInitialized,
     navigate,
   ]);
@@ -187,6 +197,7 @@ export const PayPage = () => {
         toAddress: selectedAddress,
         amount: numAmount,
         donationAmount: selectedDonation ?? 0,
+        message: message || undefined,
       },
       wallet,
     );
@@ -263,6 +274,29 @@ export const PayPage = () => {
               onchange={handleAmountChange}
               placeholder='0'
             />
+          </div>
+
+          <div className='mt-4 flex flex-col gap-1'>
+            <label className='text-text-sm font-medium'>
+              {t("wallet.payment.message", "Message")}
+            </label>
+            <TextInput
+              inputClassName='h-10'
+              wrapperClassName='w-full'
+              value={message}
+              onchange={setMessage}
+              placeholder={t(
+                "wallet.payment.messagePlaceholder",
+                "Optional transaction message",
+              )}
+              maxLength={256}
+            />
+            <span className='text-text-xs text-grayTextSecondary'>
+              {t(
+                "wallet.payment.messageHint",
+                "Optional message stored on-chain (CIP-20)",
+              )}
+            </span>
           </div>
 
           <div className='mt-6'>
