@@ -9,6 +9,11 @@
     {
       "endpoint": "https://api-mainnet-stage.cexplorer.io/v1",
       "authType": "none"
+    },
+    {
+      "name": "intersectMbo",
+      "endpoint": "https://administration.info.intersectmbo.org/api/v1",
+      "authType": "none"
     }
   ],
   "supportedWallets": [

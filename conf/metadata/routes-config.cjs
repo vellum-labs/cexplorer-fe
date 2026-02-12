@@ -869,6 +869,24 @@ const routes = [
     api: false,
   },
   {
+    path: "/treasury/contracts",
+    title: "Treasury Contracts | Cexplorer.io",
+    description:
+      "Explore Intersect Treasury vendor contracts on Cardano. View budget allocations, milestone progress, vendor payments, and track how treasury funds are being distributed to approved projects and contractors.",
+    keywords:
+      "treasury contracts, vendor contracts, Intersect treasury, Cardano treasury, budget allocation, milestone payments, vendor payments, Cexplorer, project funding",
+    api: false,
+  },
+  {
+    path: "/treasury/contracts/:id",
+    title: "Contract %id% | Cexplorer.io",
+    description:
+      "Detailed information about treasury contract %id%. View project milestones, payment history, vendor details, contract status, budget allocation, and track progress of this Intersect Treasury funded project.",
+    keywords:
+      "treasury contract, %id%, vendor contract, project milestones, contract details, Intersect treasury, Cexplorer, project funding, milestone payments",
+    api: false,
+  },
+  {
     path: "/tx",
     title: "Transactions | Cexplorer.io",
     description:

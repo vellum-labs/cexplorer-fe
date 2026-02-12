@@ -855,6 +855,115 @@
       "key": "Key"
     }
   },
+  "treasury": {
+    "title": "Treasury",
+    "contracts": {
+      "title": "Treasury Contracts",
+      "breadcrumb": "Contracts",
+      "vendorContracts": "vendor contracts",
+      "searchPlaceholder": "Search by project",
+      "notAvailable": "Treasury contracts are only available on mainnet.",
+      "columns": {
+        "project": "Project",
+        "vendor": "Vendor",
+        "budget": "Budget",
+        "milestones": "Milestones",
+        "stage": "Stage",
+        "status": "Stage"
+      },
+      "status": {
+        "completed": "Completed",
+        "active": "Active",
+        "inProgress": "In Progress",
+        "paused": "Paused",
+        "cancelled": "Cancelled",
+        "pendingApproval": "Pending Approval"
+      },
+      "milestones": {
+        "allCompleted": "All completed",
+        "allClaimed": "All claimed",
+        "claimable": "Claimable",
+        "pending": "Pending",
+        "none": "None"
+      },
+      "overview": {
+        "budget": {
+          "title": "Budget",
+          "description": "The Intersect Treasury Contracts budget. These funds are used to pay the vendors as they reach project milestones.",
+          "currency": "Currency",
+          "budgetLabel": "Budget",
+          "totalSpent": "Total Spent",
+          "remainingBudget": "Remaining Budget"
+        },
+        "statistics": {
+          "title": "Statistics",
+          "totalDistributed": "Total distributed",
+          "completedProjects": "Completed projects",
+          "completedMilestones": "Completed milestones",
+          "lastUpdate": "Last update"
+        }
+      }
+    },
+    "contractDetail": {
+      "title": "Contract Detail",
+      "breadcrumb": "Detail",
+      "details": {
+        "title": "Details",
+        "projectId": "Project ID",
+        "vendor": "Vendor",
+        "contractAddress": "Contract Address",
+        "fundingTx": "Funding Transaction",
+        "fundDate": "Fund Date",
+        "initialAmount": "Initial Amount",
+        "status": "Status"
+      },
+      "description": {
+        "title": "Contract Description",
+        "noDescription": "No description available.",
+        "contractUrl": "Contract URL"
+      },
+      "milestones": {
+        "title": "Milestone Overview",
+        "noMilestones": "No milestones found.",
+        "amount": "Amount",
+        "status": "Status",
+        "completedAt": "Completed At",
+        "withdrawnAt": "Withdrawn At",
+        "description": "Description",
+        "statusLabels": {
+          "pending": "Pending",
+          "completed": "Completed",
+          "withdrawn": "Withdrawn"
+        }
+      },
+      "payments": {
+        "title": "Milestone Payments",
+        "noPayments": "No payments found.",
+        "columns": {
+          "milestone": "Milestone",
+          "event": "Event",
+          "amount": "Amount",
+          "transaction": "Transaction",
+          "date": "Date"
+        },
+        "eventTypes": {
+          "initialize": "Initialize",
+          "withdraw": "Withdraw",
+          "resume": "Resume",
+          "disburse": "Disburse",
+          "publish": "Publish",
+          "complete": "Complete",
+          "pause": "Pause",
+          "fund": "Fund"
+        },
+        "expandedDetails": {
+          "description": "Description",
+          "evidenceSubmission": "Evidence Submission",
+          "open": "Open"
+        }
+      }
+    }
+  },
   "treasuryDonations": {
     "title": "Treasury Donations",
     "tabs": {

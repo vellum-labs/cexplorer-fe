@@ -855,6 +855,115 @@
       "key": "Klíč"
     }
   },
+  "treasury": {
+    "title": "Treasury",
+    "contracts": {
+      "title": "Treasury kontrakty",
+      "breadcrumb": "Kontrakty",
+      "vendorContracts": "kontraktů",
+      "searchPlaceholder": "Hledat podle projektu",
+      "notAvailable": "Treasury kontrakty jsou dostupné pouze na mainnetu.",
+      "columns": {
+        "project": "Projekt",
+        "vendor": "Dodavatel",
+        "budget": "Rozpočet",
+        "milestones": "Milníky",
+        "stage": "Stav",
+        "status": "Stav"
+      },
+      "status": {
+        "completed": "Dokončeno",
+        "active": "Aktivní",
+        "inProgress": "Probíhá",
+        "paused": "Pozastaveno",
+        "cancelled": "Zrušeno",
+        "pendingApproval": "Čeká na schválení"
+      },
+      "milestones": {
+        "allCompleted": "Vše dokončeno",
+        "allClaimed": "Vše vyplaceno",
+        "claimable": "K vyplacení",
+        "pending": "Čekající",
+        "none": "Žádné"
+      },
+      "overview": {
+        "budget": {
+          "title": "Rozpočet",
+          "description": "Rozpočet Intersect Treasury kontraktů. Tyto prostředky jsou použity k platbám dodavatelům při dosažení milníků projektu.",
+          "currency": "Měna",
+          "budgetLabel": "Rozpočet",
+          "totalSpent": "Celkem vyplaceno",
+          "remainingBudget": "Zbývající rozpočet"
+        },
+        "statistics": {
+          "title": "Statistiky",
+          "totalDistributed": "Celkem rozděleno",
+          "completedProjects": "Dokončené projekty",
+          "completedMilestones": "Dokončené milníky",
+          "lastUpdate": "Poslední aktualizace"
+        }
+      }
+    },
+    "contractDetail": {
+      "title": "Detail kontraktu",
+      "breadcrumb": "Detail",
+      "details": {
+        "title": "Detaily",
+        "projectId": "ID projektu",
+        "vendor": "Dodavatel",
+        "contractAddress": "Adresa kontraktu",
+        "fundingTx": "Transakce financování",
+        "fundDate": "Datum financování",
+        "initialAmount": "Počáteční částka",
+        "status": "Stav"
+      },
+      "description": {
+        "title": "Popis kontraktu",
+        "noDescription": "Žádný popis není k dispozici.",
+        "contractUrl": "URL kontraktu"
+      },
+      "milestones": {
+        "title": "Přehled milníků",
+        "noMilestones": "Žádné milníky nenalezeny.",
+        "amount": "Částka",
+        "status": "Stav",
+        "completedAt": "Dokončeno",
+        "withdrawnAt": "Vyplaceno",
+        "description": "Popis",
+        "statusLabels": {
+          "pending": "Čekající",
+          "completed": "Dokončeno",
+          "withdrawn": "Vyplaceno"
+        }
+      },
+      "payments": {
+        "title": "Platby za milníky",
+        "noPayments": "Žádné platby nenalezeny.",
+        "columns": {
+          "milestone": "Milník",
+          "event": "Událost",
+          "amount": "Částka",
+          "transaction": "Transakce",
+          "date": "Datum"
+        },
+        "eventTypes": {
+          "initialize": "Inicializace",
+          "withdraw": "Výběr",
+          "resume": "Obnovení",
+          "disburse": "Výplata",
+          "publish": "Publikování",
+          "complete": "Dokončení",
+          "pause": "Pozastavení",
+          "fund": "Financování"
+        },
+        "expandedDetails": {
+          "description": "Popis",
+          "evidenceSubmission": "Předložení důkazů",
+          "open": "Otevřít"
+        }
+      }
+    }
+  },
   "treasuryDonations": {
     "title": "Dary do treasury",
     "tabs": {
