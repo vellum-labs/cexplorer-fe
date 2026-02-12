@@ -1,7 +1,7 @@
 import type { FC } from "react";
 
 import { Button as GlobalButton } from "@vellumlabs/cexplorer-sdk";
-import { Plus, RefreshCcw, Wand } from "lucide-react";
+import { Plus, RefreshCcw } from "lucide-react";
 
 import { useHomepageStore } from "@/stores/homepageStore";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
@@ -21,12 +21,6 @@ export const HomepageCustomize: FC = () => {
           <Plus size={16} className='text-primary' />
           <span className='text-text-sm font-semibold text-primary'>
             {t("homepage.addWidget")}
-          </span>
-        </div>
-        <div className='flex cursor-pointer items-center gap-1/2'>
-          <Wand size={16} className='text-primary' />
-          <span className='text-text-sm font-semibold text-primary'>
-            {t("homepage.automaticallyAlign")}
           </span>
         </div>
         <div
