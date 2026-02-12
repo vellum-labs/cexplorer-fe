@@ -1,4 +1,4 @@
-import test, { expect } from "@playwright/test";
+import test, { expect, type Page } from "@playwright/test";
 
 export function buildUrl(
   path: string,
@@ -61,7 +61,7 @@ export async function checkPage(
 }
 
 export async function checkTableColumn(
-  page,
+  page: Page,
   headerText: string,
   expectedAlign: "left" | "right" | "center" = "left",
   allowedMargin: number,
@@ -179,7 +179,7 @@ export async function checkTableColumn(
   }
 }
 
-export async function checkTableHeadersNoOverlap(page) {
+export async function checkTableHeadersNoOverlap(page: Page) {
   const headers = await page.$$("thead th");
   const table = await page.$("table");
   if (!table) throw new Error("Table not found");
@@ -268,7 +268,7 @@ export async function checkTableHeadersNoOverlap(page) {
 }
 
 export async function checkTableCellChildrenNotOverflow(
-  page,
+  page: Page,
   rowIndex = 0,
   columnIndex = 0,
 ) {
@@ -293,9 +293,9 @@ export async function checkTableCellChildrenNotOverflow(
   });
 
   const textRects = await cell.evaluate(el => {
-    function getTextRects(node) {
+    function getTextRects(node: ChildNode) {
       const rects: any = [];
-      if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim() !== "") {
+      if (node.nodeType === Node.TEXT_NODE && node.nodeValue?.trim()) {
         const range = document.createRange();
         range.selectNodeContents(node);
         const clientRects = Array.from(range.getClientRects());
@@ -346,6 +346,175 @@ export async function checkTableCellChildrenNotOverflow(
     expect(
       bottomOverflow,
       `Text "${rect.text.trim()}" overflows bottom in cell [row ${rowIndex + 1}, col ${columnIndex + 1}]`,
+    ).toBeFalsy();
+  }
+}
+
+export async function checkTableCellElementsNotOverflow(
+  page: Page,
+  rowIndex = 0,
+  columnIndex = 0,
+) {
+  const cell = await page.$(
+    `tbody tr:nth-child(${rowIndex + 1}) td:nth-child(${columnIndex + 1})`,
+  );
+  if (!cell)
+    throw new Error(
+      `Cell not found at row ${rowIndex + 1}, column ${columnIndex + 1}`,
+    );
+
+  const results = await cell.evaluate((el: HTMLElement) => {
+    const cellRect = el.getBoundingClientRect();
+    const issues: {
+      tag: string;
+      label: string;
+      left: boolean;
+      right: boolean;
+      top: boolean;
+      bottom: boolean;
+    }[] = [];
+    const EPSILON = 0.5;
+
+    const children = el.querySelectorAll("button, a, svg, img, [data-testid]");
+    for (const child of Array.from(children) as Element[]) {
+      const r = child.getBoundingClientRect();
+      // Skip invisible elements (hidden, zero-size)
+      if (r.width === 0 || r.height === 0) continue;
+
+      const tag = child.tagName;
+      const label =
+        child.getAttribute("aria-label") ||
+        child.getAttribute("data-testid") ||
+        child.textContent?.trim().slice(0, 20) ||
+        tag;
+
+      const leftOverflow = r.left < cellRect.left - EPSILON;
+      const rightOverflow = r.right > cellRect.right + EPSILON;
+      const topOverflow = r.top < cellRect.top - EPSILON;
+      const bottomOverflow = r.bottom > cellRect.bottom + EPSILON;
+
+      if (leftOverflow || rightOverflow || topOverflow || bottomOverflow) {
+        issues.push({
+          tag,
+          label,
+          left: leftOverflow,
+          right: rightOverflow,
+          top: topOverflow,
+          bottom: bottomOverflow,
+        });
+      }
+    }
+    return issues;
+  });
+
+  for (const issue of results) {
+    const loc = `[row ${rowIndex + 1}, col ${columnIndex + 1}]`;
+    if (issue.left)
+      console.warn(
+        `❌ Element <${issue.tag}> "${issue.label}" overflows left ${loc}`,
+      );
+    if (issue.right)
+      console.warn(
+        `❌ Element <${issue.tag}> "${issue.label}" overflows right ${loc}`,
+      );
+    if (issue.top)
+      console.warn(
+        `❌ Element <${issue.tag}> "${issue.label}" overflows top ${loc}`,
+      );
+    if (issue.bottom)
+      console.warn(
+        `❌ Element <${issue.tag}> "${issue.label}" overflows bottom ${loc}`,
+      );
+
+    expect(
+      issue.left,
+      `Element <${issue.tag}> "${issue.label}" overflows left ${loc}`,
+    ).toBeFalsy();
+    expect(
+      issue.right,
+      `Element <${issue.tag}> "${issue.label}" overflows right ${loc}`,
+    ).toBeFalsy();
+    expect(
+      issue.top,
+      `Element <${issue.tag}> "${issue.label}" overflows top ${loc}`,
+    ).toBeFalsy();
+    expect(
+      issue.bottom,
+      `Element <${issue.tag}> "${issue.label}" overflows bottom ${loc}`,
+    ).toBeFalsy();
+  }
+}
+
+export async function checkTableVisibleCellsNotClippedByViewport(page: Page) {
+  const results = await page.evaluate(() => {
+    const vw = window.innerWidth;
+    const issues: {
+      row: number;
+      col: number;
+      text: string;
+      cellRight: number;
+      viewportWidth: number;
+    }[] = [];
+    const EPSILON = 1;
+
+    const rows = document.querySelectorAll("tbody tr");
+    // Check first 3 rows only for performance
+    const maxRows = Math.min(rows.length, 3);
+
+    for (let r = 0; r < maxRows; r++) {
+      const cells = rows[r].querySelectorAll("td");
+      for (let c = 0; c < cells.length; c++) {
+        const cell = cells[c];
+        const cellRect = cell.getBoundingClientRect();
+
+        // Only check cells that are partially visible (left edge is in viewport)
+        if (cellRect.left >= vw || cellRect.right <= 0) continue;
+
+        // Cell starts in viewport but extends beyond right edge
+        if (cellRect.left < vw && cellRect.right > vw + EPSILON) {
+          // Check if the table has a scrollable container
+          let parent = cell.parentElement as HTMLElement | null;
+          let hasScroll = false;
+          while (parent) {
+            const style = window.getComputedStyle(parent);
+            if (
+              style.overflowX === "auto" ||
+              style.overflowX === "scroll"
+            ) {
+              hasScroll = true;
+              break;
+            }
+            parent = parent.parentElement;
+          }
+
+          // If no scrollable container, the content is truly clipped
+          if (!hasScroll) {
+            const text =
+              cell.textContent?.trim().slice(0, 30) || `col ${c + 1}`;
+            issues.push({
+              row: r + 1,
+              col: c + 1,
+              text,
+              cellRight: Math.round(cellRect.right),
+              viewportWidth: vw,
+            });
+          }
+        }
+      }
+    }
+    return issues;
+  });
+
+  for (const issue of results) {
+    console.warn(
+      `❌ Cell [row ${issue.row}, col ${issue.col}] "${issue.text}" ` +
+        `is clipped by viewport (cellRight=${issue.cellRight}px > viewport=${issue.viewportWidth}px) ` +
+        `and has no scrollable container`,
+    );
+    expect(
+      true,
+      `Cell [row ${issue.row}, col ${issue.col}] "${issue.text}" ` +
+        `extends beyond viewport (${issue.cellRight}px > ${issue.viewportWidth}px) without scroll container`,
     ).toBeFalsy();
   }
 }

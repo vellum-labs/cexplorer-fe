@@ -144,15 +144,15 @@ export const blockListPagesForCheck = [
   40000, 10, 5, 4, 3, 2, 1,
 ];
 export const addressesForCheck = [
-  "addr_test1vzpwq95z3xyum8vqndgdd9mdnmafh3djcxnc6jemlgdmswcve6tkw",
-  "addr_test1vz09v9yfxguvlp0zsnrpa3tdtm7el8xufp3m5lsm7qxzclgmzkket",
-  "addr_test1vz7xs7ceu4xx9n5xn57lfe86vrwddqpp77vjwq5ptlkh49cqy3wur",
-  "addr_test1wz4h6068hs93n8j5ar88fgzz6sfnw8krng09xx0mmf36m8c7j9yap",
-  "addr_test1qrc2ym7pwzkc9dj284paahsgu782dcsz3dgszpvdqf36szjvpmpraw365fayhrtpzpl4nulq6f9hhdkh4cdyh0tgnjxsaxg4ak",
-  "addr_test1wp338kzp70sajpk44pldjyz8896g5yl9pnfrhugr6jyremsz6nwpp",
+  "addr1qxxj0zec9lth7hje8prg39r3x746g690qzuvxkgrk67q9w6m5stzjm2k2ypez2q0sxw48w4ummrexp4gd7p46v37q87s0rvfsp",
+  "addr1qx2x4luvdwdsrlgzrdfmspuhxplvga7uxp2wz9nyut4czccjhtj0n2gl2vx2agq7q9qk4z4r6jr632u6waqyrvgxqzwsvw3fna",
+  "addr1qyglvelh7cqju3y45judzxgfzrkjwvlpjh3flhz0lqfr4afdqlsn98zd05qrlgqyd3zhleg7p88zd523qj5533uu3d0qk0hpqv",
+  "addr1qx4l2ya4p9ndhvsm0kkwyshn40jmyqrahcnwaafjm05jtgkmh7xmstlzjwxnprtd2w8yknht5u6sv5gmgj6c9xn06rmsxr3u3c",
+  "addr1q9ft0p0huc7mz08040y7cw9zfd79gd5tcnuk95qey735j9f9k47suqdav47m0lw7k4fghh0c3uwe63zunykll5und70qg9szha",
+  "addr1qyyegwcju83f773mxunjq4wh6hrxk289sjgmv3nsrau74madphptys5te8x0se97gmxxfx28jfg8r7e0rxlsw6qvh7ts76wlyh",
 ];
 
-export const assetsForCheck = ["asset1pgvs20f7qyhp5gd4p8c4ctl9q9jj5h6fdhvc55"];
+export const assetsForCheck = ["asset108xu02ckwrfc8qs9d97mgyh4kn8gdu9w8f5sxk"];
 
 export const analyticsAccountTabs = [
   "wallet_activity",
@@ -187,7 +187,7 @@ export const articleIds = [
 ];
 
 export const blockDetailHashes = [
-  "f3df8dc7e33d9f0caabb473759067d6548ddd6066340ec389cddc2344e406e21",
+  "adb5f8168f006ac4d5e113ce9d846e814d211a1dd42a4595d531c175a3122827",
 ];
 
 export const contractInteractionsPages = [
@@ -217,13 +217,13 @@ export const dexSwapHashes = [
 ];
 
 export const drepHashes = [
-  "drep1t0l0yz6rzvw9e2rss344v8h57w26m5fqr85u0frlw4k5gashtw9",
-  "drep1yle2vhc5g0de4rr2k739f8taxj5e66cq5ypv78w8xh7sgv0x0lu",
-  "drep1wcl0w4np7rxceraptxne67dlaru6w6rchk407uq9nrhquq6gltn",
-  "drep1r9p7c7lcexft8r6lyypxxfytx6sm82k9rv3n7wksutshq6grz8v",
-  "drep1df2uxemkj2j7gtwmj84455jv523kne57e8956v9sywu9jaq57f4",
-  "drep1symc604gnd50plqfj393lyljl6u9zvv0r9he3wjq98v2sz3vtkp",
-  "drep1hq6ucgx2w3m5tw63s6zrvzggffammekajdgyh3clncufsdgqyvu",
+  "drep1qe2l8gw8v7ydswfp9twytxcc3wzwdq8npt55f3vnlgv2u8sx3nt",
+  "drep1jnmmkfwpta0yuwjchw0gu6csh75vy62088egy9n67d0zc7sn83m",
+  "drep1m8mnpykcjfyax5mcs42whu3dt347u8aq43x45ucs6dv3ztw0lez",
+  "drep15mr008j83j7n0aet3rfpw92trx24gc7hjmjdrk50fh9xslp09mx",
+  "drep13d6sxkyz6st9h65qqrzd8ukpywhr8swe9f6357qntgjqye0gttd",
+  "drep16tsw66jtrver8ur3y3zzq2fl0m4swl4lwk88fvu8d4z4ydukrj0",
+  "drep1g2d3y3skgr806wj2ryhhc5ca3akx6vmppde87jq7kgknjmv589e",
 ];
 
 export const drepDeregistrationsPages = getArrayWithLength(30);
@@ -235,12 +235,12 @@ export const drepUpdatesPages = getArrayWithLength(12);
 export const govActionListPages = getArrayWithLength(1);
 
 export const govActionIds = [
-  "40c2a42fe324759a640dcfddbc69ef2e3b7fe5a998af8d6660359772bf44c9dc#0",
-  "0f20e19828fe09f2a40b14fbce148f274afae8f1f84707d8c4e828b808ffadc4#0",
-  "191398f38ef05515ddca265020d607fbb85c5651813f2429b38160fd491d9f8f#0",
-  "584a873b84d689bb577bd9b9edc11b19b25ca820dddad82003e56dd776bbcc74#0",
-  "be1640dd2b3485e94703be5683c804d5051d96c12e1eaacc17c30e74de580ce5#0",
-  "f7185203dbeb64e09644eafbc304beb1e183d065d32565584f835958585759a9#0",
+  "dfdac5921ab657241fce58583d61bef59a369e01d2ba78191d6df6632a07fdfd#0",
+  "73a4eb2148781c37ef37c90a33a1d3d00511a8eefe9cdfaa1ea593b090f23f96#0",
+  "4b10e5793208cb8f228756e02113227c91602248eac4d992681a0ee760b6c4e2#0",
+  "c21b00f90f18fce4003edf42b0b0d455126e01c946e80cc5341a9f9750caf795#0",
+  "8845bfc37bb2f69e8f200fe28148b3dea3c4399b0c49ee0ed2bb4e349cab9eb7#0",
+  "dc4c679c8cf1cec49817d4d2c1c96cd802ec8a047a11dc0b0bb125b5af0a76cd#0",
 ];
 
 export const groupsNames = [
@@ -262,19 +262,19 @@ export const newPoolPages = getArrayWithLength(20);
 export const poolListPages = getArrayWithLength(40);
 
 export const poolsForCheck = [
-  "pool13m26ky08vz205232k20u8ft5nrg8u68klhn0xfsk9m4gsqsc44v",
-  "pool1e0arfuamnymdkmjztvkryasxv9d8u8key27ajgc4mquz2nr8mk9",
-  "pool1upqfyzqpk6wkpsvw90qqrpr9tjyemh484wk4em69anwpu586ehq",
-  "pool107k26e3wrqxwghju2py40ngngx2qcu48ppeg7lk0cm35jl2aenx",
-  "pool1cmkjkxmk8hsf4dwxy6cng06arcvyk5du06jk6nxu2fj7kckv070",
-  "pool12qj4pk9sr6mxxwnfj9hvujf0r2d8c4t8tkwcafnrjdpxqep69ck",
-  "pool19d8wgkqn7pc33y0uy2t5vx0922nvzv0a5999ejj0fjdyxjxdfve",
+  "pool1qqqyv9pn9typyqwcxqk5ewpxy5p27g5j2ms58hpp2c2kuzs5z77",
+  "pool1lhz4gsk5ezdl5s4mv2kxgrkhzzhad6me2v0xmwuyt845vensdlc",
+  "pool1pshqcksxywy68lt04lw6uf35f4yssekh5dx2mxqmyrukke2z5y3",
+  "pool1ewrm7y47s9hv6hxku9n5gfnsuspymp0qqpwgvgm9rvm37cek2h6",
+  "pool15zrkyr0f80hxlt4scv72tej8l8zwrcphmrega9wutqchjekceal",
+  "pool1ukeqarukv9gxwy9pt8jkr4qvad2yf87758g3xzemmvmtk8lrynp",
+  "pool166dkk9kx5y6ug9tnvh0dnvxhwt2yca3g5pd5jaqa8t39cgyqqlr",
 ];
 
 export const policyIds = [
-  "2f8a9c89cfedfe0a8b399ba73d272689ca204306b6884c34fb16e4a1",
-  "8c319e69795f02d45ac1ba7d7c4b9198f881621ee78449dacd4d4feb",
-  "f421a52241861a6e7db670944432a49687cd73a36c73c59fb0bafee5",
+  "f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a",
+  "a5bb0e5bb275a573d744a021f9b3bff73595468e002755b447e01559",
+  "6acb7c816f839148e2140427b181662380e3074616cbcfb0e644df9a",
 ];
 
 export const pollsTabs = ["all", "live", "closed"];
@@ -303,18 +303,18 @@ export const scriptPages = getArrayWithLength(30);
 export const retiredDelegationsTabs = ["live", "active"];
 
 export const scriptHashes = [
-  "575cd86d5c4fa7720d420ea27ddbaa194815362974bcde5ec5cb59e6",
-  "a1e301ba23ea1d4c990484b3a03cb2dd531d41ab3254ed146716a55a",
-  "6398de8bd177d8f84c8f87d2f0d19c16b7a638fc01db3ba257cf7219",
-  "eb0c967cbd3c39bb91a3f6227beb12e77cd8215ec2db09dc0f6552cc",
+  "c3e28c36c3447315ba5a56f33da6a6ddc1770a876a8d9f0cb3a97c4c",
+  "ea07b733d932129c378af627436e7cbc2ef0bf96e0036bb51b3bde6b",
+  "0237cc313756ebb5bcfc2728f7bdc6a8047b471220a305aa373b278a",
+  "1eae96baf29e27682ea3f815aba361a0c6059d45e4bfbe95bbd2f44a",
 ];
 
 export const stakeHashes = [
-  "stake_test1uzrvw62pn24xw0yk8ksyuj6m4ezg6jgw9n4vjqktstjd5aspv59nv",
-  "stake_test17zv7yxr3hyxksh9jd3qhz9562nj76nex7wwlc9smxhaczyszgtxrj",
-  "stake_test1upgxfdn3vdx3fjud2sl8rhvwksm6glhmg7cty2yzsekyyrgm428xq",
-  "stake_test17rhka4r6dyt68ja7k3jkr6y98k5kjdphjntxz2ze3g627tqtlqdeh",
-  "stake_test17psajmusqzl46vja59e93msxj0se63quanhxfqjj38hxklglcp8y8",
+  "stake1u9d6g93fd4t9zqu39q8cr82nh27da3unq65xlq6axglqrlgw7tf77",
+  "stake1uyft4e8e4y04xr9w5q0qzst2323afpag4wd8wszpkyrqp8g4s4uh0",
+  "stake1uyks0cfjn3xh6qpl5qzxc3tlu50qnn3x69gsf22gc7wgkhs0hfn5q",
+  "stake1u8dmlrdc9l3f8rfs34k48rjtfm46wdgx2yd5fdvznfhapact9zemk",
+  "stake1uyjm2lgwqx7k2ldhlh0t255tmhug78vag3wfjt0l6wfkl8s4kxfmr",
 ];
 
 export const stakeDeregistrationsPages = getArrayWithLength(50);
@@ -328,7 +328,7 @@ export const tokenDashboardTabs = ["tokens", "global_activity", "exchange"];
 export const treasuryDonationTabs = ["dontations", "stats"];
 
 export const txHashes = [
-  "5e99af8217844c637ebc2ecbcfff01d6912167ac4ef3d12f50e2d8ba2b38b63f",
-  "c153f89c9ba9a9621e3642b669e6691d74ac1d04d7b3a5caac2009632dac7965",
-  "d7f29b2ecabfcbe8ac826b158fe077bc7ac2adbcf155b431757c39a145bde9a8",
+  "6b21e798732e71476ffe04740eed4008333f606c6662a3dce8deaa8d489c322a",
+  "58ebfba6a70236c6f9069e41307044e7b6774ad8467bcb15c9e1fd0bcd0a36b3",
+  "3efd4f2d728f3a5fe3124045e4b67beaa4785fff2f617b4494b53eca1ca193e5",
 ];
