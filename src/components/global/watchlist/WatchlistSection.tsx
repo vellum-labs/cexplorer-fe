@@ -1,5 +1,5 @@
 import { jamUrl } from "@/constants/confVariables";
-import { ShoppingBasket } from "lucide-react";
+import { ShoppingBasket, BanknoteArrowUp } from "lucide-react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { ShareButton } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
@@ -8,7 +8,9 @@ import type { useFetchPoolDetail } from "@/services/pools";
 import type { useFetchDrepDetail } from "@/services/drep";
 import { useWalletStore } from "@/stores/walletStore";
 import { handleDelegation } from "@/utils/wallet/handleDelegation";
+import { handlePayment } from "@/utils/wallet/handlePayment";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
+import { PaymentModal } from "@/components/wallet/PaymentModal";
 import {
   DelegationConfirmModal,
   type DelegationInfo,
@@ -31,6 +33,8 @@ export const WatchlistSection = ({
   externalDelegationModalOpen = false,
   onExternalDelegationModalClose,
   showPromote = true,
+  showPayment = false,
+  paymentAddress,
 }: {
   ident: string | undefined;
   isLoading: boolean;
@@ -46,9 +50,12 @@ export const WatchlistSection = ({
   externalDelegationModalOpen?: boolean;
   onExternalDelegationModalClose?: () => void;
   showPromote?: boolean;
+  showPayment?: boolean;
+  paymentAddress?: string;
 }) => {
   const { wallet, address, walletType } = useWalletStore();
   const [showWalletModal, setShowWalletModal] = useState<boolean>(false);
+  const [showPaymentModal, setShowPaymentModal] = useState<boolean>(false);
   const [showDelegationModal, setShowDelegationModal] =
     useState<boolean>(false);
   const [delegationLoading, setDelegationLoading] = useState<boolean>(false);
@@ -135,6 +142,15 @@ export const WatchlistSection = ({
     };
   };
 
+  const handlePaymentClick = () => {
+    if (!address && !walletType) {
+      setShowWalletModal(true);
+      return;
+    }
+
+    setShowPaymentModal(true);
+  };
+
   const getDelegateLabel = () => {
     if (isPool) {
       return !ticker
@@ -207,6 +223,16 @@ export const WatchlistSection = ({
           label={t("global.watchlist.buy")}
         />
       )}
+      {showPayment && paymentAddress && (
+        <Button
+          label={t("global.watchlist.payment")}
+          variant='tertiary'
+          size='md'
+          leftIcon={<BanknoteArrowUp size={16} />}
+          className='h-10'
+          onClick={handlePaymentClick}
+        />
+      )}
       {!isPoolRetiredOrRetiring && <ShareButton />}
       {!isPoolRetiredOrRetiring && (
         <WatchlistStar
@@ -220,7 +246,7 @@ export const WatchlistSection = ({
           label={t("global.watchlist.promote")}
           variant='tertiary'
           size='md'
-          href='/pro'
+          href={'/pro' as any}
           className='h-10'
         />
       )}
@@ -234,6 +260,24 @@ export const WatchlistSection = ({
       )}
       {showWalletModal && (
         <ConnectWalletModal onClose={() => setShowWalletModal(false)} />
+      )}
+      {showPaymentModal && paymentAddress && (
+        <PaymentModal
+          address={paymentAddress}
+          onClose={() => setShowPaymentModal(false)}
+          onSign={async (amount, donationAmount, selectedAddress, message) => {
+            setShowPaymentModal(false);
+            await handlePayment(
+              {
+                toAddress: selectedAddress || paymentAddress,
+                amount,
+                donationAmount,
+                message,
+              },
+              wallet,
+            );
+          }}
+        />
       )}
       {showDelegationModal && (
         <DelegationConfirmModal
