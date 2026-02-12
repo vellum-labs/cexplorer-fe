@@ -25,6 +25,8 @@ export const donationAddress = configJSON.donationAddress;
 export const adaHandlePolicy = configJSON.integration[0].adahandle[0].policy;
 const protocol = `${configJSON.proto}://`;
 
+export const hasEmbed = configJSON.embed;
+
 export const cexAssetUrl = "https://ix.cexplorer.io/";
 export const cexNftImageUrl = "https://im.cexplorer.io/";
 export const jamUrl = "https://jamonbread.io/";

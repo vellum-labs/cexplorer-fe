@@ -19,6 +19,7 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import { useDelegateAction } from "@/hooks/useDelegateAction";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { hasEmbed } from "@/constants/confVariables";
 
 export const DrepDetailPage: FC = () => {
   const { t } = useAppTranslation("pages");
@@ -63,7 +64,7 @@ export const DrepDetailPage: FC = () => {
       content: (
         <DrepDetailEmbedTab drepId={hash} drepName={drepName ?? undefined} />
       ),
-      visible: true,
+      visible: hasEmbed,
     },
   ];
 

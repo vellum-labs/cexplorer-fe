@@ -6,7 +6,7 @@ import { useWalletStore } from "@/stores/walletStore";
 import { useWatchlistStore } from "@/stores/watchlistStore";
 import type { WalletState, WalletType } from "@/types/walletTypes";
 import { BrowserWallet } from "@meshsdk/core";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { toast } from "sonner";
 import { useAuthToken } from "./useAuthToken";
 
@@ -19,7 +19,7 @@ const defaultState: WalletState = {
 };
 
 export const useConnectWallet = () => {
-  const { setWalletState } = useWalletStore();
+  const { setWalletState, walletType, wallet } = useWalletStore();
   const { tokens } = useAuthTokensStore();
   const { setIsOpen } = useWalletConfigModalState();
   const token = useAuthToken();
@@ -31,6 +31,25 @@ export const useConnectWallet = () => {
     if (watchlistData && watchlistData !== watchlist)
       setWatchlist(watchlistData);
   }, [watchlistData]);
+
+  const isReconnecting = useRef(false);
+  useEffect(() => {
+    const reconnectWallet = async () => {
+      if (walletType && !wallet && !isReconnecting.current) {
+        isReconnecting.current = true;
+        try {
+          const reconnectedWallet = await BrowserWallet.enable(walletType);
+          setWalletState({ wallet: reconnectedWallet });
+        } catch (error) {
+          console.error("Failed to reconnect wallet:", walletType, error);
+          setWalletState(defaultState);
+        } finally {
+          isReconnecting.current = false;
+        }
+      }
+    };
+    reconnectWallet();
+  }, [walletType, wallet, setWalletState]);
 
   const _connect = async (walletType: WalletType) => {
     const wallet = await BrowserWallet.enable(walletType);

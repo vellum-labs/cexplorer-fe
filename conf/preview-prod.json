@@ -4,6 +4,7 @@
   "public": false,
   "nft": false,
   "network": "preview",
+  "embed": true,
   "api": [
     {
       "endpoint": "https://api-preview-stage.cexplorer.io/v1",
@@ -120,10 +121,9 @@
   ],
   "lng": ["en", "cs"],
   "currency": ["usd", "eur"],
-  "ipfs":"https://ipfs.blockfrost.dev/ipfs/",
+  "ipfs": "https://ipfs.blockfrost.dev/ipfs/",
   "donationAddress": "addr_test1qrzw5lqz3ve5v044ne3pkw7tc2hrxwhj9u9ge34yjw2frkcpp5e7sueuknckyay367z4mr4p9xv2rrnzfgge9p3uqews3t2ttx",
-  "supportedPools": [
-  ],
+  "supportedPools": [],
   "featured": [
     {
       "modules": ["pool", "asset", "policy", "drep", "collection"]
@@ -131,13 +131,15 @@
   ],
   "integration": [
     {
-      "dexhunter": [{
-        "active":false,
-        "stable":false,
-        "api":"",
-        "key":"",
-        "name":""        
-      }],
+      "dexhunter": [
+        {
+          "active": false,
+          "stable": false,
+          "api": "",
+          "key": "",
+          "name": ""
+        }
+      ],
       "adahandle": [
         {
           "active": true,
@@ -151,9 +153,11 @@
       "user": ["web3_login", "web3_signActions", "web3_cexGov", "pseudoLogin"]
     }
   ],
-  "services": [{
-    "googleTag":"G-SYT4R4308G"
-  }],
+  "services": [
+    {
+      "googleTag": "G-SYT4R4308G"
+    }
+  ],
   "genesisParams": [
     {
       "byron": [

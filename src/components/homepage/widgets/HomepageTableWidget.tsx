@@ -107,7 +107,7 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
         ? memoizedOverrideWidth[col.key]
         : 20,
     }));
-  }, [rawColumns?.length, memoizedOverrideWidth]);
+  }, [rawColumns?.length, memoizedOverrideWidth, memoizedColumnsVisibility]);
 
   const [columns, setColumns] = useState(initialColumns);
 
@@ -225,7 +225,49 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
 
   return (
     <>
-      <div className='absolute right-36 top-2'>
+      <div className='absolute right-[110px] top-[8px] z-10 flex items-center gap-1'>
+        {hasFilter && (
+          <Button
+            variant='tertiary'
+            size='md'
+            label={t("homepage.removeFilters")}
+            onClick={handleRemoveFilters}
+          />
+        )}
+        {width > 1 && (
+          <div
+            className='relative flex h-[30px] items-center'
+            ref={inputRef}
+          >
+            <Search
+              size={15}
+              className={`absolute ${inputOpen ? "left-2" : "-left-4"} cursor-pointer rounded-lg`}
+              onClick={() => setInputOpen(true)}
+              color={inputOpen ? "black" : undefined}
+            />
+            <input
+              type='text'
+              className={`${inputOpen ? "min-h-[25.6px] w-[200px] border border-border pl-3" : "w-0"} transition-width overflow-hidden rounded-m text-text-xs text-black duration-300 ease-in-out focus-within:outline-none hover:outline-none`}
+              placeholder={placeholder}
+              value={tableSearch}
+              onChange={e => setTableSearch(e.currentTarget.value)}
+            />
+          </div>
+        )}
+        {width > 1 && (
+          <div className='flex items-center'>
+            <PaginationPrevious
+              disabled={page === 1}
+              onClick={() => setPage(prev => prev - 1)}
+              ariaLabel={t("sdk:pagination.previousPage")}
+            />
+            <PaginationNext
+              disabled={page >= totalPages}
+              onClick={() => setPage(prev => prev + 1)}
+              ariaLabel={t("sdk:pagination.nextPage")}
+            />
+          </div>
+        )}
         <TableSettingsDropdown
           rows={0}
           setRows={() => {}}
@@ -260,49 +302,6 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
           }}
         />
       </div>
-      {width > 1 && (
-        <div className='absolute right-48 top-[8px]'>
-          <PaginationPrevious
-            disabled={page === 1}
-            onClick={() => setPage(prev => prev - 1)}
-            ariaLabel={t("sdk:pagination.previousPage")}
-          />
-          <PaginationNext
-            disabled={page >= totalPages}
-            onClick={() => setPage(prev => prev + 1)}
-            ariaLabel={t("sdk:pagination.nextPage")}
-          />
-        </div>
-      )}
-      {width > 1 && (
-        <div
-          className='absolute right-[285px] top-[11px] flex h-[30px] items-center'
-          ref={inputRef}
-        >
-          <Search
-            size={15}
-            className={`absolute ${inputOpen ? "left-2" : "-left-4"} rounded-lg cursor-pointer`}
-            onClick={() => setInputOpen(true)}
-            color={inputOpen ? "black" : undefined}
-          />
-          <input
-            type='text'
-            className={`${inputOpen ? "min-h-[25.6px] w-[200px] border border-border pl-3" : "w-0"} transition-width overflow-hidden rounded-m text-text-xs text-black duration-300 ease-in-out focus-within:outline-none hover:outline-none`}
-            placeholder={placeholder}
-            value={tableSearch}
-            onChange={e => setTableSearch(e.currentTarget.value)}
-          />
-        </div>
-      )}
-      {hasFilter && (
-        <Button
-          variant='tertiary'
-          size='md'
-          label={t("homepage.removeFilters")}
-          className='absolute left-28 top-[6px]'
-          onClick={handleRemoveFilters}
-        />
-      )}
       <div
         className={`thin-scrollbar relative w-full max-w-desktop overflow-x-hidden [&>div]:w-full`}
         style={{
