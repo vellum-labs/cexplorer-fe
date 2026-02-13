@@ -21,6 +21,7 @@ import { useSearchTable } from "./useSearchTable";
 
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { isHex } from "@/utils/isHex";
+import { useTxExpandStore } from "@/stores/tx/txExpandStore";
 
 interface UseTxList {
   specifiedParams: string | true | undefined;
@@ -63,6 +64,8 @@ export const useTxList = ({
   const { infiniteScrolling } = useInfiniteScrollingStore();
   const { rows, columnsVisibility, setColumnVisibility } =
     useTxListTableStore(storeKey)();
+
+  const { expandRows } = useTxExpandStore();
 
   const { data: basicData } = useFetchMiscBasic();
   const miscConst = useMiscConst(basicData?.data?.version?.const);
@@ -243,9 +246,12 @@ export const useTxList = ({
     },
     {
       key: "toggle",
-      render: (_item: TxBasicInfo, toggle?: () => void) => (
+      render: (item, toggle) => (
         <div className='flex w-full justify-end'>
-          <ToggleButton toggle={toggle} />
+          <ToggleButton
+            isOpen={expandRows.includes(item.hash)}
+            toggle={toggle}
+          />
         </div>
       ),
       title: "",
