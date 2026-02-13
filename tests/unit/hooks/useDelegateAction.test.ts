@@ -105,9 +105,14 @@ describe("useDelegateAction", () => {
     expect(result.current.showDelegationModal).toBe(true);
   });
 
-  // ===== BUG SCENARIO: address+walletType present but wallet is null =====
+  // ===== BUG: wallet=null should NOT open delegation modal =====
+  // Trello: "Delegation failed — Wallet not connected" when wallet IS connected
+  // Root cause: useDelegateAction checks address && walletType && hasAuthToken
+  // but NOT wallet. After page reload, wallet is null until BrowserWallet.enable()
+  // completes. This test asserts the CORRECT behavior.
+  // Remove .fails after fixing useDelegateAction.ts:37 to include `&& wallet`
 
-  it("BUG: opens delegation modal via URL when address+walletType exist but wallet is null", () => {
+  it.fails("should NOT open delegation modal when wallet instance is null (URL action)", () => {
     setUrlAction("delegate");
 
     // Bug state: localStorage restored address+walletType, but wallet hasn't reconnected yet
@@ -125,11 +130,36 @@ describe("useDelegateAction", () => {
       vi.advanceTimersByTime(200);
     });
 
-    // Current (buggy) behavior: delegation modal opens because the hook only checks
-    // address && walletType, not wallet.
-    // The delegation modal opens, but handleDelegation will fail with "Wallet not connected".
-    expect(result.current.showDelegationModal).toBe(true);
-    // After the fix, this should be: expect(result.current.showDelegationModal).toBe(false);
+    // EXPECTED (correct) behavior: do NOT open delegation modal without wallet instance
+    expect(result.current.showDelegationModal).toBe(false);
+    expect(result.current.showWalletModal).toBe(true);
+  });
+
+  it.fails("should NOT resolve pending delegation without wallet instance", () => {
+    setUrlAction("delegate");
+
+    // Start disconnected
+    const { result, rerender } = renderHook(() => useDelegateAction());
+
+    act(() => {
+      vi.advanceTimersByTime(200);
+    });
+
+    expect(result.current.showWalletModal).toBe(true);
+
+    // Simulate: address+walletType+token restored from localStorage, but wallet still null
+    Object.assign(mockWalletStoreState, {
+      ...persistedWalletState,
+      wallet: null,
+    });
+    mockAuthTokensState.tokens = {
+      [persistedWalletState.address]: { token: "auth-token-123" },
+    };
+
+    rerender();
+
+    // EXPECTED: delegation modal should NOT open without a live wallet instance
+    expect(result.current.showDelegationModal).toBe(false);
   });
 
   // ===== Pending delegation resolves =====
