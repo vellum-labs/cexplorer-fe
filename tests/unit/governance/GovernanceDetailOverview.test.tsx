@@ -2,12 +2,12 @@ import { vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 
 // --- Activate common mocks ---
-import "../../mocks";
+import "../mocks";
 
 import {
   governanceActionDetailFixture,
   governanceActionDetailResponseFixture,
-} from "../../fixtures/governanceActionDetail";
+} from "../fixtures/governanceActionDetail";
 
 // --- Mock internal components ---
 vi.mock("@/components/governance/GovernanceCard", () => ({

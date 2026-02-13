@@ -10,8 +10,8 @@ const { mockHandleDelegation } = vi.hoisted(() => ({
 
 // --- Store mocks ---
 
-import { mockWalletStoreState } from "../../../mocks/walletStore";
-import "../../../mocks/useAppTranslation";
+import { mockWalletStoreState } from "../mocks/walletStore";
+import "../mocks/useAppTranslation";
 
 // --- Module mocks ---
 
@@ -96,8 +96,8 @@ vi.mock("lucide-react", () => ({
 // --- Import under test ---
 
 import { WatchlistSection } from "@/components/global/watchlist/WatchlistSection";
-import { createMockBrowserWallet, persistedWalletState } from "../../../fixtures/wallet";
-import { createMockQueryResult } from "../../../mocks/services";
+import { createMockBrowserWallet, persistedWalletState } from "../fixtures/wallet";
+import { createMockQueryResult } from "../mocks/services";
 
 describe("WatchlistSection", () => {
   const defaultPoolQuery = {

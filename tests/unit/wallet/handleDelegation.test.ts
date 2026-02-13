@@ -1,5 +1,5 @@
 import { vi, describe, it, expect, beforeEach } from "vitest";
-import { createMockBrowserWallet } from "../../fixtures/wallet";
+import { createMockBrowserWallet } from "../fixtures/wallet";
 
 // --- Mocks ---
 

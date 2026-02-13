@@ -2,9 +2,9 @@ import { vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 
 // Import individual mocks (NOT barrel) so we can provide custom SDK mock
-import "../../mocks/useAppTranslation";
-import "../../mocks/router";
-import "../../mocks/services";
+import "../mocks/useAppTranslation";
+import "../mocks/router";
+import "../mocks/services";
 
 // --- Custom SDK mock: Tabs exposes items visibility, HeaderBannerSubtitle exposes title ---
 vi.mock("@vellumlabs/cexplorer-sdk", () => ({
@@ -96,13 +96,13 @@ vi.mock("@/components/global/pages/PageBase", () => ({
 import {
   mockUseFetchGovernanceActionDetail,
   createMockQueryResult,
-} from "../../mocks/services";
+} from "../mocks/services";
 import {
   governanceActionDetailResponseFixture,
   governanceActionDetailFixture,
   minimalGovernanceActionFixture,
-} from "../../fixtures/governanceActionDetail";
-import { defaultRouterParams } from "../../mocks/router";
+} from "../fixtures/governanceActionDetail";
+import { defaultRouterParams } from "../mocks/router";
 
 // Import the component under test AFTER all mocks are set up
 import { GovernanceDetailPage } from "@/pages/governance/GovernanceDetailPage";
