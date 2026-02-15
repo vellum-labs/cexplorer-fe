@@ -22,7 +22,10 @@ export const enabledWalletConnector = configJSON.enabledFeatures.some(
 export const proPolicy = configJSON.nft;
 export const supportedPools = configJSON.supportedPools;
 export const donationAddress = configJSON.donationAddress;
-export const adaHandlePolicy = configJSON.integration[0].adahandle[0].policy;
+const rawPolicy = configJSON.integration[0].adahandle[0].policy;
+export const adaHandlePolicy = Array.isArray(rawPolicy)
+  ? rawPolicy[0]
+  : rawPolicy;
 const protocol = `${configJSON.proto}://`;
 
 export const hasEmbed = configJSON.embed;
