@@ -180,7 +180,7 @@ export const EmbedEntity: FC<EmbedEntityProps> = ({
   }, [format]);
 
   return (
-    <div className='flex flex-col gap-4 py-2 md:flex-row md:gap-6'>
+    <div className='flex flex-col gap-4 py-2 md:gap-6 xl:flex-row'>
       <div className='flex w-full flex-col gap-3'>
         <span className='text-text-sm font-medium'>{t("embed.code")}</span>
         <pre className='overflow-x-auto whitespace-pre-wrap break-all rounded-m border border-border bg-darker p-3 text-text-sm text-grayTextPrimary'>
@@ -255,7 +255,9 @@ export const EmbedEntity: FC<EmbedEntityProps> = ({
         <span className='pl-1 text-text-sm font-medium'>
           {t("embed.preview")}
         </span>
-        <iframe src={embedUrl} width={iframeWidth} height={iframeHeight} />
+        <div className='overflow-x-auto'>
+          <iframe src={embedUrl} width={iframeWidth} height={iframeHeight} />
+        </div>
       </div>
     </div>
   );
