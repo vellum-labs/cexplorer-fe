@@ -42,8 +42,11 @@ export const VoteCell: FC<VoteCellProps> = ({
     fetchContent,
     close: closeModal,
   } = useFetchUrlContent();
-  const { content: fullMetadata, fetchContent: fetchFullMetadata } =
-    useFetchUrlContent();
+  const {
+    content: fullMetadata,
+    fetchContent: fetchFullMetadata,
+    isError: isFullMetadataError,
+  } = useFetchUrlContent();
   const [showFullMetadata, setShowFullMetadata] = useState(false);
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
@@ -161,7 +164,7 @@ export const VoteCell: FC<VoteCellProps> = ({
                       </div>
                     )}
                   </div>
-                  {fullMetadata && (
+                  {fullMetadata && !isFullMetadataError && (
                     <div className='mt-3'>
                       <Button
                         size='sm'
