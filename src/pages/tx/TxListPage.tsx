@@ -12,6 +12,8 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useSearch } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { TxExpandedContent } from "@/components/tx/TxExpandedContent";
+import { useTxExpandStore } from "@/stores/tx/txExpandStore";
 
 interface TxListPageProps {
   address?: string;
@@ -76,6 +78,8 @@ export const TxListPage: FC<TxListPageProps> = ({
     setRows,
     setColumsOrder,
   } = useTxListTableStore()();
+
+  const { expandRows, setExpandRows } = useTxExpandStore();
 
   return (
     <PageBase
@@ -175,6 +179,12 @@ export const TxListPage: FC<TxListPageProps> = ({
             t("common:table.displaying", { count, total })
           }
           noItemsLabel={t("common:table.noItems")}
+          expand={{
+            expandedRows: expandRows,
+            setExpandedRows: setExpandRows,
+            toggleKey: item => item.hash,
+            extraContent: item => <TxExpandedContent hash={item.hash} />,
+          }}
         />
       </section>
     </PageBase>
