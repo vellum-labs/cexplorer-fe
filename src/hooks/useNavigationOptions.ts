@@ -40,6 +40,10 @@ export const useNavigationOptions = () => {
           href: "/treasury/donation",
           params: { tab: "donations" },
         },
+        {
+          label: t("blockchain.treasuryContracts"),
+          href: "/treasury/contracts",
+        },
       ],
       staking: [
         {

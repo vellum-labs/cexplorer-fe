@@ -19,7 +19,8 @@
     "assets": "$t(shared:assets)",
     "contractTransactions": "Contract transactions",
     "transactionsMetadata": "Transactions metadata",
-    "treasuryDonations": "Treasury donations"
+    "treasuryDonations": "Treasury donations",
+    "treasuryContracts": "Treasury contracts"
   },
   "staking": {
     "stakePools": "$t(shared:stakePools)",

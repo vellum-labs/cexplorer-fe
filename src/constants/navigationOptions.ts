@@ -40,6 +40,10 @@ export const navigationOptions: {
       href: "/treasury/donation",
       params: { tab: "donations" },
     },
+    {
+      label: "Treasury contracts",
+      href: "/treasury/contracts",
+    },
   ],
   staking: [
     {
