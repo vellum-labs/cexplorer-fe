@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import {
   useFetchVendorContractEventsInfinite,
   type VendorContractEvent,
@@ -151,6 +151,8 @@ export const MilestonePaymentsTable: FC<MilestonePaymentsTableProps> = ({
     columnsOrder,
     setColumnsOrder,
   } = useMilestonePaymentsTableStore()();
+
+  const [expandedRows, setExpandedRows] = useState<string[]>([]);
 
   const query = useFetchVendorContractEventsInfinite({
     projectId,
@@ -353,7 +355,12 @@ export const MilestonePaymentsTable: FC<MilestonePaymentsTableProps> = ({
         onOrderChange={setColumnsOrder}
         renderDisplayText={labels.displayingText}
         noItemsLabel={labels.noPayments}
-        extraContent={renderExtraContent}
+        expand={{
+          extraContent: renderExtraContent,
+          toggleKey: (item: VendorContractEvent) => item.tx_hash,
+          expandedRows,
+          setExpandedRows,
+        }}
       />
     </div>
   );
