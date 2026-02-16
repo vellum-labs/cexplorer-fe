@@ -30,8 +30,8 @@ export const GovActionCell: FC<GovActionCellProps> = ({ id, name, bech }) => {
       <div className='flex items-center gap-1/2'>
         <span
           className={`overflow-hidden text-ellipsis whitespace-nowrap ${
-            name ? "text-text-xs" : "text-text-sm"
-          } text-grayText`}
+            name ? "text-text-xs text-grayText" : "text-text-sm text-primary"
+          }`}
         >
           <Link {...to} className='!text-inherit hover:!text-inherit'>
             {formatString(displayText, "long")}
