@@ -1,5 +1,5 @@
 import { vi, describe, it, expect, beforeEach } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, act, waitFor } from "@testing-library/react";
 import type { ReactNode } from "react";
 
 // --- Hoisted mocks ---
@@ -126,27 +126,26 @@ describe("WatchlistSection", () => {
 
   // ===== BUG SCENARIO =====
 
-  it("shows ConnectWalletModal when address+walletType exist but wallet is null", () => {
-    // Bug state: localStorage restored address+walletType, wallet not yet reconnected
+  it("shows ConnectWalletModal when address+walletType exist but wallet is null", async () => {
     Object.assign(mockWalletStoreState, {
       ...persistedWalletState,
       wallet: null,
     });
 
-    render(
-      <WatchlistSection
-        ident="pool1abc123"
-        isLoading={false}
-        poolDetailQuery={defaultPoolQuery}
-      />,
-    );
+    await act(async () => {
+      render(
+        <WatchlistSection
+          ident="pool1abc123"
+          isLoading={false}
+          poolDetailQuery={defaultPoolQuery}
+        />,
+      );
+    });
 
-    const delegateBtn = screen.getByTestId(
-      "Button-global.watchlist.delegate",
-    );
-    fireEvent.click(delegateBtn);
+    await act(async () => {
+      fireEvent.click(screen.getByTestId("Button-global.watchlist.delegate"));
+    });
 
-    // Should show connect modal, NOT delegation modal
     expect(screen.getByTestId("ConnectWalletModal")).toBeInTheDocument();
     expect(
       screen.queryByTestId("DelegationConfirmModal"),
@@ -155,24 +154,25 @@ describe("WatchlistSection", () => {
 
   // ===== Fully connected =====
 
-  it("shows DelegationConfirmModal when wallet is fully connected", () => {
+  it("shows DelegationConfirmModal when wallet is fully connected", async () => {
     Object.assign(mockWalletStoreState, {
       ...persistedWalletState,
       wallet: createMockBrowserWallet(),
     });
 
-    render(
-      <WatchlistSection
-        ident="pool1abc123"
-        isLoading={false}
-        poolDetailQuery={defaultPoolQuery}
-      />,
-    );
+    await act(async () => {
+      render(
+        <WatchlistSection
+          ident="pool1abc123"
+          isLoading={false}
+          poolDetailQuery={defaultPoolQuery}
+        />,
+      );
+    });
 
-    const delegateBtn = screen.getByTestId(
-      "Button-global.watchlist.delegate",
-    );
-    fireEvent.click(delegateBtn);
+    await act(async () => {
+      fireEvent.click(screen.getByTestId("Button-global.watchlist.delegate"));
+    });
 
     expect(
       screen.getByTestId("DelegationConfirmModal"),
@@ -191,48 +191,54 @@ describe("WatchlistSection", () => {
       wallet,
     });
 
-    render(
-      <WatchlistSection
-        ident="pool1abc123"
-        isLoading={false}
-        poolDetailQuery={defaultPoolQuery}
-      />,
-    );
+    await act(async () => {
+      render(
+        <WatchlistSection
+          ident="pool1abc123"
+          isLoading={false}
+          poolDetailQuery={defaultPoolQuery}
+        />,
+      );
+    });
 
-    // Open delegation modal
-    fireEvent.click(
-      screen.getByTestId("Button-global.watchlist.delegate"),
-    );
+    await act(async () => {
+      fireEvent.click(screen.getByTestId("Button-global.watchlist.delegate"));
+    });
 
-    // Confirm delegation
-    fireEvent.click(screen.getByTestId("confirm-delegation"));
+    await act(async () => {
+      fireEvent.click(screen.getByTestId("confirm-delegation"));
+    });
 
-    expect(mockHandleDelegation).toHaveBeenCalledWith(
-      {
-        type: "pool",
-        ident: "pool1abc123",
-        donationAmount: 0,
-      },
-      wallet,
-    );
+    await waitFor(() => {
+      expect(mockHandleDelegation).toHaveBeenCalledWith(
+        {
+          type: "pool",
+          ident: "pool1abc123",
+          donationAmount: 0,
+        },
+        wallet,
+      );
+    });
   });
 
   // ===== Pool retired hides delegate button =====
 
-  it("does not show delegate button when pool is retired", () => {
+  it("does not show delegate button when pool is retired", async () => {
     Object.assign(mockWalletStoreState, {
       ...persistedWalletState,
       wallet: createMockBrowserWallet(),
     });
 
-    render(
-      <WatchlistSection
-        ident="pool1abc123"
-        isLoading={false}
-        poolDetailQuery={defaultPoolQuery}
-        isPoolRetiredOrRetiring={true}
-      />,
-    );
+    await act(async () => {
+      render(
+        <WatchlistSection
+          ident="pool1abc123"
+          isLoading={false}
+          poolDetailQuery={defaultPoolQuery}
+          isPoolRetiredOrRetiring={true}
+        />,
+      );
+    });
 
     expect(
       screen.queryByTestId("Button-global.watchlist.delegate"),
@@ -256,19 +262,20 @@ describe("WatchlistSection", () => {
 
   // ===== Not connected at all =====
 
-  it("shows ConnectWalletModal when completely disconnected", () => {
-    render(
-      <WatchlistSection
-        ident="pool1abc123"
-        isLoading={false}
-        poolDetailQuery={defaultPoolQuery}
-      />,
-    );
+  it("shows ConnectWalletModal when completely disconnected", async () => {
+    await act(async () => {
+      render(
+        <WatchlistSection
+          ident="pool1abc123"
+          isLoading={false}
+          poolDetailQuery={defaultPoolQuery}
+        />,
+      );
+    });
 
-    const delegateBtn = screen.getByTestId(
-      "Button-global.watchlist.delegate",
-    );
-    fireEvent.click(delegateBtn);
+    await act(async () => {
+      fireEvent.click(screen.getByTestId("Button-global.watchlist.delegate"));
+    });
 
     expect(screen.getByTestId("ConnectWalletModal")).toBeInTheDocument();
   });

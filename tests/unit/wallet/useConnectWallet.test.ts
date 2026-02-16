@@ -113,6 +113,9 @@ describe("useConnectWallet", () => {
       wallet: null,
     });
 
+    // Suppress expected console.error from the catch block
+    const spy = vi.spyOn(console, "error").mockImplementation(() => {});
+
     renderHook(() => useConnectWallet());
 
     await waitFor(() => {
@@ -125,6 +128,8 @@ describe("useConnectWallet", () => {
         wallet: null,
       });
     });
+
+    spy.mockRestore();
   });
 
   it("does NOT attempt reconnection when wallet is already present", () => {
