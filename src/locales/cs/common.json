@@ -879,7 +879,21 @@
     "metadataTab": "$t(shared:metadata)",
     "ownersTab": "Vlastníci",
     "tradingTab": "$t(shared:labels.trading)",
-    "priceTab": "$t(shared:labels.price)"
+    "priceTab": "$t(shared:labels.price)",
+    "embedTab": "Vložit"
+  },
+  "embed": {
+    "code": "Kód",
+    "preview": "Náhled",
+    "lightMode": "Světlý režim",
+    "darkMode": "Tmavý režim",
+    "mode": "Režim",
+    "network": "Síť",
+    "format": "Formát",
+    "config": "Konfigurace",
+    "copyCode": "Kopírovat kód",
+    "successCopied": "Úspěšně zkopírováno",
+    "copyFailed": "Kopírování selhalo"
   },
   "blocks": {
     "transactions": "$t(shared:labels.transactions)",

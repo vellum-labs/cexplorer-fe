@@ -18,7 +18,11 @@ import { AssetStatsTab } from "@/components/asset/tabs/AssetStatsTab";
 import { AssetTimelockTab } from "@/components/asset/tabs/AssetTimelockTab";
 import { AdaHandleBadge } from "@vellumlabs/cexplorer-sdk";
 import { ProBadge } from "@vellumlabs/cexplorer-sdk";
-import { adaHandlePolicy, proPolicy } from "@/constants/confVariables";
+import {
+  adaHandlePolicy,
+  hasEmbed,
+  proPolicy,
+} from "@/constants/confVariables";
 import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import type { FileRoutesByPath } from "@tanstack/react-router";
@@ -29,6 +33,7 @@ import { PageBase } from "@/components/global/pages/PageBase";
 import { configJSON } from "@/constants/conf";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { alphabetWithNumbers } from "@/constants/alphabet";
+import { EmbedTab } from "@/components/global/embed/EmbedTab";
 
 export const AssetDetailPage: FC = () => {
   const { t } = useAppTranslation("common");
@@ -145,6 +150,14 @@ export const AssetDetailPage: FC = () => {
       ),
       visible: !!assetDetailQuery?.data?.data?.dex,
     },
+    {
+      key: "embed",
+      label: t("asset.embedTab"),
+      content: (
+        <EmbedTab entityType='tokens' entityId={fingerprint} displayName={""} />
+      ),
+      visible: hasEmbed,
+    },
   ];
 
   useEffect(() => {
@@ -248,7 +261,7 @@ export const AssetDetailPage: FC = () => {
       badge={
         <div className='flex items-center gap-1'>
           {assetDetailQuery.data?.data?.policy === adaHandlePolicy && (
-            <AdaHandleBadge variant='long' policyId={policyId} />
+            <AdaHandleBadge variant='long' policyId={policyId as string} />
           )}
           {assetDetailQuery.data?.data?.policy === proPolicy && <ProBadge />}
         </div>

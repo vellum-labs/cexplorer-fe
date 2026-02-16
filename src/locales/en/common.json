@@ -879,7 +879,21 @@
     "metadataTab": "$t(shared:metadata)",
     "ownersTab": "Owners",
     "tradingTab": "$t(shared:labels.trading)",
-    "priceTab": "$t(shared:labels.price)"
+    "priceTab": "$t(shared:labels.price)",
+    "embedTab": "Embed"
+  },
+  "embed": {
+    "code": "Code",
+    "preview": "Preview",
+    "lightMode": "Light mode",
+    "darkMode": "Dark mode",
+    "mode": "Mode",
+    "network": "Network",
+    "format": "Format",
+    "config": "Config",
+    "copyCode": "Copy code",
+    "successCopied": "Successfully copied",
+    "copyFailed": "Copying failed"
   },
   "blocks": {
     "transactions": "$t(shared:labels.transactions)",

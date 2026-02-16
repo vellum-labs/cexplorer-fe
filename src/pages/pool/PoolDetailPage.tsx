@@ -4,7 +4,7 @@ import { Image } from "@vellumlabs/cexplorer-sdk";
 import PoolDetailOverview from "@/components/pool/PoolDetailOverview";
 import AboutTabItem from "@/components/pool/tabs/AboutTabItem";
 import { AwardsTabItem } from "@/components/pool/tabs/AwardsTabItem";
-import { EmbedTabItem } from "@/components/pool/tabs/EmbedTabItem";
+import { EmbedTab } from "@/components/global/embed/EmbedTab";
 import BlocksTabItem from "@/components/pool/tabs/BlocksTabItem";
 import DelegatorsTabItem from "@/components/pool/tabs/DelegatorsTabItem";
 import PerformanceTabItem from "@/components/pool/tabs/PerformanceTabItem";
@@ -128,7 +128,11 @@ const PoolDetailPage = () => {
       key: "embed",
       label: t("pools.detailPage.tabs.embed"),
       content: (
-        <EmbedTabItem poolId={id} poolTicker={data?.pool_name?.ticker} />
+        <EmbedTab
+          entityType='pools'
+          entityId={id}
+          displayName={data?.pool_name?.ticker || "POOL"}
+        />
       ),
       visible: hasEmbed,
     },
