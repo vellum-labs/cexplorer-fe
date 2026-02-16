@@ -36,6 +36,7 @@
     "stakeKey": "$t(shared:stakeKey)",
     "stakePool": "$t(shared:stakePool)",
     "poolId": "$t(shared:poolId)",
+    "policyId": "$t(shared:policyId)",
     "metadata": "$t(shared:labels.metadata)",
     "governance": "$t(shared:labels.governance)",
     "analytics": "$t(shared:labels.analytics)",
