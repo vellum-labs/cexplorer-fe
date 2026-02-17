@@ -32,7 +32,7 @@ export default defineConfig({
 
         output.manualChunks = (id: any, meta: any) => {
           if (id && id.includes("node_modules/lucide-react/")) {
-            return "vendor";
+            return "icons";
           }
 
           if (original && typeof original === "object") {
@@ -146,9 +146,12 @@ export default defineConfig({
             "@dexhunterio/swaps",
             "cmdk",
             "sonner",
-            "echarts-for-react",
             "html-react-parser",
             "qrcode.react",
+            "i18next",
+            "react-i18next",
+            "react-hotkeys-hook",
+            "shadcn-ui",
           ],
           ui: [
             "@xyflow/react",
@@ -174,13 +177,15 @@ export default defineConfig({
             "@harmoniclabs/uint8array-utils",
             "@harmoniclabs/plutus-data",
           ],
-          charts: ["echarts", "echarts-stat"],
+          charts: ["echarts", "echarts-stat", "echarts-for-react"],
           utils: [
             "html-to-image",
             "flatted",
+            "format",
             "zod",
             "react-markdown",
             "remark-gfm",
+            "rehype-raw",
             "react-syntax-highlighter",
             "query-string",
             "date-fns",
