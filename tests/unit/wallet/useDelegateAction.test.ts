@@ -112,7 +112,7 @@ describe("useDelegateAction", () => {
   // completes. This test asserts the CORRECT behavior.
   // Remove .fails after fixing useDelegateAction.ts:37 to include `&& wallet`
 
-  it.fails("should NOT open delegation modal when wallet instance is null (URL action)", () => {
+  it("should NOT open delegation modal when wallet instance is null (URL action)", () => {
     setUrlAction("delegate");
 
     // Bug state: localStorage restored address+walletType, but wallet hasn't reconnected yet
@@ -135,7 +135,7 @@ describe("useDelegateAction", () => {
     expect(result.current.showWalletModal).toBe(true);
   });
 
-  it.fails("should NOT resolve pending delegation without wallet instance", () => {
+  it("should NOT resolve pending delegation without wallet instance", () => {
     setUrlAction("delegate");
 
     // Start disconnected
