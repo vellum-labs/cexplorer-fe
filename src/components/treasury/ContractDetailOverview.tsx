@@ -74,13 +74,16 @@ export const ContractDetailOverview: FC<ContractDetailOverviewProps> = ({
   const getVendorDisplay = () => {
     if (contract.vendor_address?.startsWith("addr")) {
       return (
-        <Link
-          to='/address/$address'
-          params={{ address: contract.vendor_address }}
-          className='text-primary'
-        >
-          {formatString(contract.vendor_address, "long")}
-        </Link>
+        <div className='flex items-center gap-1/2'>
+          <Link
+            to='/address/$address'
+            params={{ address: contract.vendor_address }}
+            className='text-primary'
+          >
+            {formatString(contract.vendor_address, "long")}
+          </Link>
+          <Copy copyText={contract.vendor_address} />
+        </div>
       );
     }
     if (contract.vendor_address) {

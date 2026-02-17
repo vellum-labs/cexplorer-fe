@@ -32,15 +32,12 @@ const treasuryContractsTableOptions: { key: keyof TreasuryContractsColumns }[] =
   ];
 
 const getVendorDisplay = (contract: VendorContract) => {
-  // Priority 1: If vendor_address is an actual address, show formatted with link
   if (contract.vendor_address?.startsWith("addr")) {
     return { type: "address" as const, value: contract.vendor_address };
   }
-  // Priority 2: If vendor_address is not an address (like "IOG"), show as text
   if (contract.vendor_address) {
     return { type: "text" as const, value: contract.vendor_address };
   }
-  // Priority 3: If vendor_name exists, show it as text
   if (contract.vendor_name) {
     return { type: "text" as const, value: contract.vendor_name };
   }
@@ -108,7 +105,6 @@ export const TreasuryContractsPage = () => {
               </Link>
             );
           }
-          // Only show tooltip for long text (more than 15 chars)
           const isLongText = vendor.value.length > 15;
           const content = (
             <span className='block max-w-[100px] overflow-hidden text-ellipsis whitespace-nowrap text-text'>
@@ -134,47 +130,51 @@ export const TreasuryContractsPage = () => {
       },
       {
         key: "milestones",
-        title: t("treasury.contracts.columns.milestones", "Milestones"),
+        title: <span className='flex w-full justify-center'>{t("treasury.contracts.columns.milestones", "Milestones")}</span>,
         visible: columnsVisibility.milestones,
-        widthPx: 110,
+        widthPx: 125,
         render: (item: VendorContract) => (
-          <ContractMilestonesBadge
-            total={item.milestones_summary.total}
-            completed={item.milestones_summary.completed}
-            pending={item.milestones_summary.pending}
-            labels={{
-              allClaimed: t(
-                "treasury.contracts.milestones.allClaimed",
-                "All claimed",
-              ),
-              claimable: t(
-                "treasury.contracts.milestones.claimable",
-                "Claimable",
-              ),
-              none: t("treasury.contracts.milestones.none", "None"),
-            }}
-          />
+          <div className='flex w-full justify-center'>
+            <ContractMilestonesBadge
+              total={item.milestones_summary.total}
+              completed={item.milestones_summary.completed}
+              pending={item.milestones_summary.pending}
+              labels={{
+                allClaimed: t(
+                  "treasury.contracts.milestones.allClaimed",
+                  "All claimed",
+                ),
+                claimable: t(
+                  "treasury.contracts.milestones.claimable",
+                  "Claimable",
+                ),
+                none: t("treasury.contracts.milestones.none", "None"),
+              }}
+            />
+          </div>
         ),
       },
       {
         key: "status",
-        title: t("treasury.contracts.columns.stage", "Stage"),
+        title: <span className='flex w-full justify-center'>{t("treasury.contracts.columns.stage", "Stage")}</span>,
         visible: columnsVisibility.status,
-        widthPx: 110,
+        widthPx: 125,
         render: (item: VendorContract) => (
-          <ContractStatusBadge
-            status={item.status}
-            labels={{
-              completed: t("treasury.contracts.status.completed", "Completed"),
-              active: t("treasury.contracts.status.inProgress", "In Progress"),
-              paused: t("treasury.contracts.status.paused", "Paused"),
-              cancelled: t("treasury.contracts.status.cancelled", "Cancelled"),
-              pending_approval: t(
-                "treasury.contracts.status.pendingApproval",
-                "Pending Approval",
-              ),
-            }}
-          />
+          <div className='flex w-full justify-center'>
+            <ContractStatusBadge
+              status={item.status}
+              labels={{
+                completed: t("treasury.contracts.status.completed", "Completed"),
+                active: t("treasury.contracts.status.inProgress", "In Progress"),
+                paused: t("treasury.contracts.status.paused", "Paused"),
+                cancelled: t("treasury.contracts.status.cancelled", "Cancelled"),
+                pending_approval: t(
+                  "treasury.contracts.status.pendingApproval",
+                  "Pending Approval",
+                ),
+              }}
+            />
+          </div>
         ),
       },
     ],
@@ -193,7 +193,7 @@ export const TreasuryContractsPage = () => {
       ]}
       adsCarousel={false}
     >
-      <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
+      <section className='flex w-full min-w-0 max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         {!intersectMboApiUrl ? (
           <div className='rounded-l border border-border bg-cardBg p-4 text-center'>
             <p className='text-grayTextPrimary'>
@@ -207,113 +207,127 @@ export const TreasuryContractsPage = () => {
           <>
             <TreasuryOverviewCards
               labels={{
-            budget: {
-              title: t("treasury.contracts.overview.budget.title", "Budget"),
-              description: t(
-                "treasury.contracts.overview.budget.description",
-                "The Intersect Treasury Contracts budget. These funds are used to pay the vendors as they reach project milestones.",
-              ),
-              currency: t(
-                "treasury.contracts.overview.budget.currency",
-                "Currency",
-              ),
-              budgetLabel: t(
-                "treasury.contracts.overview.budget.budgetLabel",
-                "Budget",
-              ),
-              totalSpent: t(
-                "treasury.contracts.overview.budget.totalSpent",
-                "Total Spent",
-              ),
-              remainingBudget: t(
-                "treasury.contracts.overview.budget.remainingBudget",
-                "Remaining Budget",
-              ),
-            },
-            statistics: {
-              title: t(
-                "treasury.contracts.overview.statistics.title",
-                "Statistics",
-              ),
-              totalDistributed: t(
-                "treasury.contracts.overview.statistics.totalDistributed",
-                "Total distributed",
-              ),
-              completedProjects: t(
-                "treasury.contracts.overview.statistics.completedProjects",
-                "Completed projects",
-              ),
-              completedMilestones: t(
-                "treasury.contracts.overview.statistics.completedMilestones",
-                "Completed milestones",
-              ),
-              lastUpdate: t(
-                "treasury.contracts.overview.statistics.lastUpdate",
-                "Last update",
-              ),
-            },
-          }}
-        />
-
-        <div className='mb-1 flex w-full flex-col justify-between gap-1 min-[870px]:flex-row min-[870px]:items-center'>
-          <div className='flex items-center gap-1'>
-            {query.isLoading || query.isFetching ? (
-              <LoadingSkeleton height='27px' width='220px' />
-            ) : (
-              <h3 className='text-nowrap'>
-                {formatNumber(totalCount)}{" "}
-                {t("treasury.contracts.vendorContracts", "vendor contracts")}
-              </h3>
-            )}
-          </div>
-
-          <div className='flex gap-1'>
-            <TableSearchInput
-              placeholder={t(
-                "treasury.contracts.searchPlaceholder",
-                "Search by project",
-              )}
-              value={search}
-              onchange={setSearch}
-              wrapperClassName='min-[870px]:w-[320px] w-full'
-              showSearchIcon
-              showPrefixPopup={false}
+                budget: {
+                  title: t(
+                    "treasury.contracts.overview.budget.title",
+                    "Budget",
+                  ),
+                  description: t(
+                    "treasury.contracts.overview.budget.description",
+                    "The Intersect Treasury Contracts budget. These funds are used to pay the vendors as they reach project milestones.",
+                  ),
+                  currency: t(
+                    "treasury.contracts.overview.budget.currency",
+                    "Currency",
+                  ),
+                  budgetLabel: t(
+                    "treasury.contracts.overview.budget.budgetLabel",
+                    "Budget",
+                  ),
+                  totalSpent: t(
+                    "treasury.contracts.overview.budget.totalSpent",
+                    "Total Spent",
+                  ),
+                  remainingBudget: t(
+                    "treasury.contracts.overview.budget.remainingBudget",
+                    "Remaining Budget",
+                  ),
+                },
+                statistics: {
+                  title: t(
+                    "treasury.contracts.overview.statistics.title",
+                    "Statistics",
+                  ),
+                  totalDistributed: t(
+                    "treasury.contracts.overview.statistics.totalDistributed",
+                    "Total distributed",
+                  ),
+                  completedProjects: t(
+                    "treasury.contracts.overview.statistics.completedProjects",
+                    "Completed projects",
+                  ),
+                  completedMilestones: t(
+                    "treasury.contracts.overview.statistics.completedMilestones",
+                    "Completed milestones",
+                  ),
+                  lastUpdate: t(
+                    "treasury.contracts.overview.statistics.lastUpdate",
+                    "Last update",
+                  ),
+                },
+              }}
             />
-            <TableSettingsDropdown
-              rows={rows}
-              setRows={setRows}
-              rowsLabel={t("common:table.rows", "Rows")}
-              columnsOptions={treasuryContractsTableOptions.map(item => ({
-                label: t(`treasury.contracts.columns.${item.key}`, item.key),
-                isVisible: columnsVisibility[item.key],
-                onClick: () =>
-                  setColumnVisibility(item.key, !columnsVisibility[item.key]),
-              }))}
-            />
-          </div>
-        </div>
 
-        <GlobalTable
-          type='infinite'
-          currentPage={page}
-          totalItems={totalCount}
-          itemsPerPage={rows}
-          scrollable
-          query={query}
-          minContentWidth={800}
-          items={contracts}
-          columns={columns.sort((a, b) => {
-            return (
-              columnsOrder.indexOf(a.key as keyof TreasuryContractsColumns) -
-              columnsOrder.indexOf(b.key as keyof TreasuryContractsColumns)
-            );
-          })}
-          onOrderChange={setColumnsOrder}
-          renderDisplayText={(count, total) =>
-            t("common:table.displaying", { count, total })
-          }
-          noItemsLabel={t("common:table.noItems", "No items found")}
-        />
+            <div className='mb-1 flex w-full flex-col justify-between gap-1 min-[870px]:flex-row min-[870px]:items-center'>
+              <div className='flex items-center gap-1'>
+                {query.isLoading || query.isFetching ? (
+                  <LoadingSkeleton height='27px' width='220px' />
+                ) : (
+                  <h3 className='text-nowrap'>
+                    {formatNumber(totalCount)}{" "}
+                    {t(
+                      "treasury.contracts.vendorContracts",
+                      "vendor contracts",
+                    )}
+                  </h3>
+                )}
+              </div>
+
+              <div className='flex gap-1'>
+                <TableSearchInput
+                  placeholder={t(
+                    "treasury.contracts.searchPlaceholder",
+                    "Search by project",
+                  )}
+                  value={search}
+                  onchange={setSearch}
+                  wrapperClassName='min-[870px]:w-[320px] w-full'
+                  showSearchIcon
+                  showPrefixPopup={false}
+                />
+                <TableSettingsDropdown
+                  rows={rows}
+                  setRows={setRows}
+                  rowsLabel={t("common:table.rows", "Rows")}
+                  columnsOptions={treasuryContractsTableOptions.map(item => ({
+                    label: t(
+                      `treasury.contracts.columns.${item.key}`,
+                      item.key,
+                    ),
+                    isVisible: columnsVisibility[item.key],
+                    onClick: () =>
+                      setColumnVisibility(
+                        item.key,
+                        !columnsVisibility[item.key],
+                      ),
+                  }))}
+                />
+              </div>
+            </div>
+
+            <GlobalTable
+              type='infinite'
+              currentPage={page}
+              totalItems={totalCount}
+              itemsPerPage={rows}
+              scrollable
+              query={query}
+              minContentWidth={880}
+              items={contracts}
+              columns={columns.sort((a, b) => {
+                return (
+                  columnsOrder.indexOf(
+                    a.key as keyof TreasuryContractsColumns,
+                  ) -
+                  columnsOrder.indexOf(b.key as keyof TreasuryContractsColumns)
+                );
+              })}
+              onOrderChange={setColumnsOrder}
+              renderDisplayText={(count, total) =>
+                t("common:table.displaying", { count, total })
+              }
+              noItemsLabel={t("common:table.noItems", "No items found")}
+            />
           </>
         )}
       </section>
