@@ -3,7 +3,7 @@ import { useWalletStore } from "@/stores/walletStore";
 
 describe("walletStore", () => {
   beforeEach(() => {
-    // Reset store to default state
+    
     useWalletStore.setState({
       address: undefined,
       stakeKey: undefined,
@@ -53,13 +53,13 @@ describe("walletStore", () => {
       wallet: mockWallet,
     });
 
-    // Read from localStorage
+   
     const stored = localStorage.getItem("wallet-store");
     expect(stored).toBeTruthy();
 
-    // wallet should NOT appear in persisted data
+    
     expect(stored).not.toContain('"fake"');
-    // address and walletType should be persisted
+  
     expect(stored).toContain("addr1test...");
     expect(stored).toContain("lace");
   });

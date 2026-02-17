@@ -1,7 +1,7 @@
 import { vi, describe, it, expect, beforeEach } from "vitest";
 import { createMockBrowserWallet } from "../fixtures/wallet";
 
-// --- Mocks ---
+
 
 const mockCallDelegationToast = vi.fn();
 vi.mock("@/utils/error/callDelegationToast", () => ({
@@ -47,11 +47,11 @@ vi.mock("@meshsdk/core", () => ({
   },
 }));
 
-// --- Import under test ---
+
 
 import { handleDelegation } from "@/utils/wallet/handleDelegation";
 
-// --- Tests ---
+
 
 describe("handleDelegation", () => {
   beforeEach(() => {
@@ -59,7 +59,7 @@ describe("handleDelegation", () => {
     mockComplete.mockResolvedValue("unsigned-tx-hex");
   });
 
-  // ===== BUG SCENARIO: wallet is null =====
+ 
 
   it("shows 'Wallet not connected' error when wallet is null (pool)", async () => {
     await handleDelegation(
@@ -85,7 +85,7 @@ describe("handleDelegation", () => {
     });
   });
 
-  // ===== Validation errors =====
+
 
   it("shows 'Missing poolId' error when ident is empty", async () => {
     const wallet = createMockBrowserWallet();
@@ -136,7 +136,7 @@ describe("handleDelegation", () => {
     });
   });
 
-  // ===== Successful delegation =====
+  
 
   it("delegates to a pool successfully", async () => {
     const wallet = createMockBrowserWallet();
@@ -203,13 +203,12 @@ describe("handleDelegation", () => {
     expect(mockCallDelegationToast).toHaveBeenCalledWith({ success: true });
   });
 
-  // ===== Stake key not registered retry =====
+ 
 
   it("retries with registration when stake key is not registered", async () => {
     const wallet = createMockBrowserWallet();
 
-    // First submitTx fails with StakeKeyNotRegisteredDELEG (as plain object so JSON.stringify works)
-    wallet.submitTx
+     wallet.submitTx
       .mockRejectedValueOnce({ message: "StakeKeyNotRegisteredDELEG" })
       .mockResolvedValueOnce("tx-hash-retry");
 
@@ -218,14 +217,14 @@ describe("handleDelegation", () => {
       wallet as any,
     );
 
-    // Should have been called twice (first attempt + retry)
+  
     expect(wallet.signTx).toHaveBeenCalledTimes(2);
     expect(mockTxBuilder.registerStakeCertificate).toHaveBeenCalled();
     expect(mockCallDelegationToast).toHaveBeenCalledWith({ success: true });
     expect(result).toBe("tx-hash-retry");
   });
 
-  // ===== User cancellation =====
+
 
   it("shows cancellation toast when user declines signing", async () => {
     const wallet = createMockBrowserWallet({
@@ -259,7 +258,7 @@ describe("handleDelegation", () => {
     });
   });
 
-  // ===== Hardware wallet errors =====
+
 
   it("shows hardware wallet error for ledger issues", async () => {
     const wallet = createMockBrowserWallet({
@@ -277,7 +276,7 @@ describe("handleDelegation", () => {
     });
   });
 
-  // ===== Donation network validation =====
+  
 
   it("shows error when donation network validation fails", async () => {
     mockValidateDonationNetwork.mockResolvedValueOnce({
@@ -298,7 +297,7 @@ describe("handleDelegation", () => {
     });
   });
 
-  // ===== Delegation with donation =====
+
 
   it("includes donation output in transaction", async () => {
     const wallet = createMockBrowserWallet();
@@ -315,7 +314,6 @@ describe("handleDelegation", () => {
     expect(mockCallDelegationToast).toHaveBeenCalledWith({ success: true });
   });
 
-  // ===== Generic failure =====
 
   it("shows generic pool delegation failure message", async () => {
     const wallet = createMockBrowserWallet({

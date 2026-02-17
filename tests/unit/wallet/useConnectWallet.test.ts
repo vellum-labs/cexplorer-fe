@@ -5,7 +5,7 @@ import {
   createMockBrowserWallet,
 } from "../fixtures/wallet";
 
-// --- Hoisted mocks (declared before vi.mock factories run) ---
+
 
 const {
   mockSetIsOpen,
@@ -19,12 +19,12 @@ const {
   mockBrowserWalletEnable: vi.fn(),
 }));
 
-// --- Store mocks (imported for their side-effects of calling vi.mock) ---
+
 
 import { mockWalletStoreState } from "../mocks/walletStore";
 import { mockAuthTokensState } from "../mocks/authTokensStore";
 
-// --- Additional mocks ---
+
 
 vi.mock("@/stores/states/walletConfigModalState", () => ({
   useWalletConfigModalState: vi.fn(() => ({
@@ -62,7 +62,7 @@ vi.mock("@meshsdk/core", () => ({
   },
 }));
 
-// --- Import under test ---
+
 
 import { useConnectWallet } from "@/hooks/useConnectWallet";
 
@@ -70,7 +70,7 @@ describe("useConnectWallet", () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    // Reset wallet store to disconnected state
+    
     Object.assign(mockWalletStoreState, {
       address: undefined,
       stakeKey: undefined,
@@ -84,7 +84,7 @@ describe("useConnectWallet", () => {
     localStorage.clear();
   });
 
-  // ===== Reconnection logic =====
+ 
 
   it("reconnects wallet when walletType is stored but wallet is null", async () => {
     const mockWallet = createMockBrowserWallet();
@@ -113,7 +113,7 @@ describe("useConnectWallet", () => {
       wallet: null,
     });
 
-    // Suppress expected console.error from the catch block
+    
     const spy = vi.spyOn(console, "error").mockImplementation(() => {});
 
     renderHook(() => useConnectWallet());
@@ -149,7 +149,7 @@ describe("useConnectWallet", () => {
     expect(mockBrowserWalletEnable).not.toHaveBeenCalled();
   });
 
-  // ===== Connect function =====
+  
 
   it("connects wallet and sets full state", async () => {
     const mockWallet = createMockBrowserWallet();
@@ -228,7 +228,7 @@ describe("useConnectWallet", () => {
     expect(mockSetIsOpen).not.toHaveBeenCalled();
   });
 
-  // ===== Disconnect function =====
+  
 
   it("disconnect clears state and removes localStorage", () => {
     localStorage.setItem("wallet-store", "some-data");
@@ -254,7 +254,7 @@ describe("useConnectWallet", () => {
     expect(localStorage.getItem("wallet-store")).toBeNull();
   });
 
-  // ===== Error when no address found =====
+ 
 
   it("shows error when wallet has no addresses", async () => {
     const mockWallet = createMockBrowserWallet({

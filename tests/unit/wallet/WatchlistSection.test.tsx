@@ -2,18 +2,18 @@ import { vi, describe, it, expect, beforeEach } from "vitest";
 import { render, screen, fireEvent, act, waitFor } from "@testing-library/react";
 import type { ReactNode } from "react";
 
-// --- Hoisted mocks ---
+
 
 const { mockHandleDelegation } = vi.hoisted(() => ({
   mockHandleDelegation: vi.fn(),
 }));
 
-// --- Store mocks ---
+
 
 import { mockWalletStoreState } from "../mocks/walletStore";
 import "../mocks/useAppTranslation";
 
-// --- Module mocks ---
+
 
 vi.mock("@/utils/wallet/handleDelegation", () => ({
   handleDelegation: (...args: any[]) => mockHandleDelegation(...args),
@@ -23,7 +23,7 @@ vi.mock("@/constants/confVariables", () => ({
   jamUrl: "https://jam.example.com/",
 }));
 
-// Stub child components
+
 vi.mock("@/components/wallet/ConnectWalletModal", () => ({
   default: ({ onClose }: { onClose: () => void }) => (
     <div data-testid="ConnectWalletModal">
@@ -62,7 +62,7 @@ vi.mock("@/components/global/watchlist/WatchlistStar", () => ({
   WatchlistStar: () => <div data-testid="WatchlistStar" />,
 }));
 
-// SDK stubs
+
 vi.mock("@vellumlabs/cexplorer-sdk", () => {
   const stub = (name: string) => {
     const Comp = ({ children, ...props }: { children?: ReactNode; [k: string]: any }) => {
@@ -93,7 +93,7 @@ vi.mock("lucide-react", () => ({
   ShoppingBasket: () => <span data-testid="ShoppingBasket" />,
 }));
 
-// --- Import under test ---
+
 
 import { WatchlistSection } from "@/components/global/watchlist/WatchlistSection";
 import { createMockBrowserWallet, persistedWalletState } from "../fixtures/wallet";
@@ -113,7 +113,7 @@ describe("WatchlistSection", () => {
     vi.clearAllMocks();
     mockHandleDelegation.mockResolvedValue("tx-hash");
 
-    // Reset wallet store
+    
     Object.assign(mockWalletStoreState, {
       address: undefined,
       stakeKey: undefined,
@@ -124,7 +124,7 @@ describe("WatchlistSection", () => {
     });
   });
 
-  // ===== BUG SCENARIO =====
+ 
 
   it("shows ConnectWalletModal when address+walletType exist but wallet is null", async () => {
     Object.assign(mockWalletStoreState, {
@@ -152,7 +152,7 @@ describe("WatchlistSection", () => {
     ).not.toBeInTheDocument();
   });
 
-  // ===== Fully connected =====
+  
 
   it("shows DelegationConfirmModal when wallet is fully connected", async () => {
     Object.assign(mockWalletStoreState, {
@@ -182,7 +182,7 @@ describe("WatchlistSection", () => {
     ).not.toBeInTheDocument();
   });
 
-  // ===== Delegation confirm calls handleDelegation =====
+ 
 
   it("calls handleDelegation with wallet instance on confirm", async () => {
     const wallet = createMockBrowserWallet();
@@ -221,7 +221,7 @@ describe("WatchlistSection", () => {
     });
   });
 
-  // ===== Pool retired hides delegate button =====
+  
 
   it("does not show delegate button when pool is retired", async () => {
     Object.assign(mockWalletStoreState, {
@@ -245,7 +245,7 @@ describe("WatchlistSection", () => {
     ).not.toBeInTheDocument();
   });
 
-  // ===== Loading state =====
+
 
   it("renders skeletons when loading", () => {
     render(
@@ -260,7 +260,7 @@ describe("WatchlistSection", () => {
     expect(skeletons.length).toBeGreaterThanOrEqual(2);
   });
 
-  // ===== Not connected at all =====
+
 
   it("shows ConnectWalletModal when completely disconnected", async () => {
     await act(async () => {
