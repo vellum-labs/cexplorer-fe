@@ -10,7 +10,6 @@ import { useNavigate } from "@tanstack/react-router";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useTxVisualizerStore } from "@/canvas/store/txVisualizerStore";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
-import { formatAda } from "@/utils/treasury/sankeyDiagram";
 
 interface TxItem {
   hash: string;
@@ -61,6 +60,13 @@ interface TickerProps {
 const PADDING = 8;
 const GAP = 5;
 const MAX_TX_SIZE = 16384;
+
+function formatAda(lovelace: number): string {
+  const ada = lovelace / 1_000_000;
+  if (ada >= 1_000_000) return (ada / 1_000_000).toFixed(1) + "M \u20B3";
+  if (ada >= 1_000) return Math.round(ada).toLocaleString() + " \u20B3";
+  return ada.toFixed(ada < 1 ? 2 : 0) + " \u20B3";
+}
 
 function calcBlockSize(count: number, canvasW: number, canvasH: number) {
   const cols = Math.ceil(Math.sqrt(count * (canvasW / canvasH)));
