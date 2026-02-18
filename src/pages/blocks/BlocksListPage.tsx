@@ -16,7 +16,7 @@ import { X } from "lucide-react";
 import type { FilterKey } from "@/hooks/tables/useDrepList";
 import SortBy from "@/components/ui/sortBy";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
-import { BlockVisualizer } from "@/components/blocks/BlockVisualizer";
+import { BlockVisualizer } from "@/canvas/BlockVisualizer";
 
 const BlocksListPage = () => {
   const { t } = useAppTranslation(["pages", "common"]);

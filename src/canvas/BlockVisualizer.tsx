@@ -8,7 +8,8 @@ import { useRef, useMemo, memo, useCallback, useState, useEffect } from "react";
 import { useTick } from "@pixi/react";
 import { useNavigate } from "@tanstack/react-router";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { useBlockVisualizerStore } from "@/stores/blockVisualizerStore";
+import { useBlockVisualizerStore } from "@/canvas/store/blockVisualizerStore";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface BlockItem {
   block_no: number;
@@ -30,6 +31,15 @@ interface BlockEntry {
   targetY: number;
 }
 
+interface AnimState {
+  posX: number;
+  posY: number;
+  velY: number;
+  settled: boolean;
+  targetX: number;
+  targetY: number;
+}
+
 interface FallingBlockProps {
   blockNo: number;
   txCount: number;
@@ -38,10 +48,14 @@ interface FallingBlockProps {
   hash: string;
   blockSize: number;
   maxTxRows: number;
-  targetX: number;
-  targetY: number;
   isDark: boolean;
   onNavigate: (hash: string) => void;
+  onRef: (blockNo: number, node: any) => void;
+}
+
+interface TickerProps {
+  animStates: React.MutableRefObject<Map<number, AnimState>>;
+  containerRefs: React.MutableRefObject<Map<number, any>>;
 }
 
 const PADDING = 8;
@@ -77,24 +91,66 @@ function getTargetPos(
   };
 }
 
-const FallingBlock: FC<FallingBlockProps> = ({
+const Ticker: FC<TickerProps> = memo(({ animStates, containerRefs }) => {
+  useTick(delta => {
+    const dt = Math.min(delta, 2);
+    for (const [key, state] of animStates.current) {
+      if (state.settled) continue;
+      const container = containerRefs.current.get(key);
+      if (!container) continue;
+
+      state.posX += (state.targetX - state.posX) * 0.12;
+
+      if (state.posY < state.targetY - 0.5) {
+        state.velY += 0.7 * dt;
+        state.posY += state.velY;
+        if (state.posY >= state.targetY) {
+          state.velY = -Math.abs(state.velY) * 0.25;
+          state.posY = state.targetY;
+        }
+      } else if (state.posY > state.targetY + 0.5) {
+        state.posY += (state.targetY - state.posY) * 0.12;
+        state.velY = 0;
+      } else {
+        if (Math.abs(state.velY) > 0.3) {
+          state.posY += state.velY;
+          state.velY *= 0.6;
+          if (state.posY > state.targetY) {
+            state.posY = state.targetY;
+            state.velY = -Math.abs(state.velY) * 0.25;
+          }
+        } else {
+          state.posY = state.targetY;
+          state.velY = 0;
+        }
+      }
+
+      container.x = state.posX;
+      container.y = state.posY;
+
+      if (state.velY === 0 && Math.abs(state.posX - state.targetX) < 0.5) {
+        state.settled = true;
+      }
+    }
+  });
+  return null;
+});
+
+const FallingBlock: FC<FallingBlockProps> = memo(({
   blockNo,
   txCount,
   size,
   maxBlockSize,
   hash,
   blockSize,
-  targetX,
-  targetY,
   maxTxRows,
   isDark,
   onNavigate,
+  onRef,
 }) => {
   const containerRef = useRef<any>(null);
   const maskRef = useRef<any>(null);
-  const posRef = useRef({ x: targetX, y: -blockSize - Math.random() * 300 });
-  const velYRef = useRef(0);
-  const settledRef = useRef(false);
+  const cacheTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => {
     if (containerRef.current && maskRef.current) {
@@ -103,8 +159,23 @@ const FallingBlock: FC<FallingBlockProps> = ({
   }, [blockSize]);
 
   useEffect(() => {
-    settledRef.current = false;
-  }, [targetX, targetY]);
+    if (containerRef.current) containerRef.current.cacheAsBitmap = false;
+    clearTimeout(cacheTimerRef.current);
+    cacheTimerRef.current = setTimeout(() => {
+      if (containerRef.current && !containerRef.current.destroyed) {
+        containerRef.current.cacheAsBitmap = true;
+      }
+    }, 100);
+    return () => clearTimeout(cacheTimerRef.current);
+  }, [blockSize, isDark, maxTxRows]);
+
+  const handleContainerRef = useCallback(
+    (node: any) => {
+      containerRef.current = node;
+      onRef(blockNo, node);
+    },
+    [onRef, blockNo],
+  );
 
   const fontSize = Math.max(10, Math.round(blockSize * 0.095));
   const subFontSize = Math.max(8, Math.round(blockSize * 0.075));
@@ -145,52 +216,10 @@ const FallingBlock: FC<FallingBlockProps> = ({
   const txRadius = Math.max(4, Math.round(blockSize * 0.055));
   const txSpacing = txRadius * 2.5;
   const txCols = Math.max(1, Math.floor((blockSize - 16) / txSpacing));
-
   const sizeKb = (size / 1024).toFixed(1);
   const fillPct = maxBlockSize > 0 ? Math.min(1, size / maxBlockSize) : 0;
 
-  useTick(delta => {
-    if (!containerRef.current || settledRef.current) return;
-    const dt = Math.min(delta, 2);
-    const pos = posRef.current;
-
-    pos.x += (targetX - pos.x) * 0.12;
-
-    if (pos.y < targetY - 0.5) {
-      velYRef.current += 0.7 * dt;
-      pos.y += velYRef.current;
-      if (pos.y >= targetY) {
-        velYRef.current = -Math.abs(velYRef.current) * 0.25;
-        pos.y = targetY;
-      }
-    } else if (pos.y > targetY + 0.5) {
-      pos.y += (targetY - pos.y) * 0.12;
-      velYRef.current = 0;
-    } else {
-      if (Math.abs(velYRef.current) > 0.3) {
-        pos.y += velYRef.current;
-        velYRef.current *= 0.6;
-        if (pos.y > targetY) {
-          pos.y = targetY;
-          velYRef.current = -Math.abs(velYRef.current) * 0.25;
-        }
-      } else {
-        pos.y = targetY;
-        velYRef.current = 0;
-      }
-    }
-
-    containerRef.current.x = pos.x;
-    containerRef.current.y = pos.y;
-
-    if (velYRef.current === 0 && Math.abs(pos.x - targetX) < 0.5) {
-      settledRef.current = true;
-    }
-  });
-
-  const onClick = useCallback(() => {
-    onNavigate(hash);
-  }, [onNavigate, hash]);
+  const onClick = useCallback(() => onNavigate(hash), [onNavigate, hash]);
 
   const padding = 10;
   const lineH = fontSize + 4;
@@ -210,7 +239,7 @@ const FallingBlock: FC<FallingBlockProps> = ({
 
   return (
     <Container
-      ref={containerRef}
+      ref={handleContainerRef}
       interactive
       cursor='pointer'
       hitArea={new Rectangle(0, 0, blockSize, blockSize)}
@@ -303,7 +332,7 @@ const FallingBlock: FC<FallingBlockProps> = ({
         })()}
     </Container>
   );
-};
+});
 
 export const BlockVisualizer: FC<BlockVisualizerProps> = memo(
   ({ isLoading, items }) => {
@@ -312,6 +341,7 @@ export const BlockVisualizer: FC<BlockVisualizerProps> = memo(
       (hash: string) => navigate({ to: "/block/$hash", params: { hash } }),
       [navigate],
     );
+    const { t } = useAppTranslation("canvas");
     const { theme } = useThemeStore();
     const isDark = theme === "dark";
     const { isVisible, setIsVisible } = useBlockVisualizerStore();
@@ -322,8 +352,11 @@ export const BlockVisualizer: FC<BlockVisualizerProps> = memo(
     );
     const [maxTxRows, setMaxTxRows] = useState(4);
     const [canvasWidth, setCanvasWidth] = useState(1400);
-    const canvasHeight = canvasWidth < 768 ? 300 : 250;
+    const canvasHeight = canvasWidth < 768 ? 260 : 210;
     const containerRef = useRef<HTMLDivElement>(null);
+
+    const animStates = useRef<Map<number, AnimState>>(new Map());
+    const pixiContainerRefs = useRef<Map<number, any>>(new Map());
 
     useEffect(() => {
       const el = containerRef.current;
@@ -346,23 +379,56 @@ export const BlockVisualizer: FC<BlockVisualizerProps> = memo(
       setBlockSize(newSize);
       setMaxTxRows(count >= 50 ? 2 : count < 30 ? 4 : 3);
 
-      const { cols, cellW, cellH } = calcGridLayout(
-        count,
-        newSize,
-        canvasWidth,
-      );
+      const { cols, cellW, cellH } = calcGridLayout(count, newSize, canvasWidth);
 
       const entries: BlockEntry[] = sorted.map((item, i) => {
         const { x, y } = getTargetPos(i, cols, cellW, cellH, canvasHeight);
+        const key = item.block_no;
+        if (!animStates.current.has(key)) {
+          animStates.current.set(key, {
+            posX: x,
+            posY: -newSize - Math.random() * 300,
+            velY: 0,
+            settled: false,
+            targetX: x,
+            targetY: y,
+          });
+        } else {
+          const state = animStates.current.get(key)!;
+          if (state.targetX !== x || state.targetY !== y) {
+            state.targetX = x;
+            state.targetY = y;
+            state.settled = false;
+          }
+        }
         return { item, targetX: x, targetY: y };
       });
+
+      const newKeys = new Set(sorted.map(i => i.block_no));
+      for (const key of animStates.current.keys()) {
+        if (!newKeys.has(key)) animStates.current.delete(key);
+      }
 
       setBlockEntries(entries);
     }, [items, canvasWidth, canvasHeight]);
 
+    const onBlockRef = useCallback((blockNo: number, node: any) => {
+      if (node) {
+        pixiContainerRefs.current.set(blockNo, node);
+        const state = animStates.current.get(blockNo);
+        if (state) {
+          node.x = state.posX;
+          node.y = state.posY;
+        }
+      } else {
+        pixiContainerRefs.current.delete(blockNo);
+      }
+    }, []);
+
     return (
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 pt-2 md:px-desktop'>
-        <div className='flex items-center justify-end pb-1'>
+        <div className='flex items-center justify-between pb-1'>
+          <h2>{t("blockVisualizer.title")}</h2>
           <button
             onClick={() => setIsVisible(!isVisible)}
             className='hover:text-textPrimary flex items-center gap-1/2 text-text-xs text-grayTextPrimary transition-colors'
@@ -389,7 +455,11 @@ export const BlockVisualizer: FC<BlockVisualizerProps> = memo(
                   autoDensity: true,
                 }}
               >
-                {blockEntries.map(({ item, targetX, targetY }) => (
+                <Ticker
+                  animStates={animStates}
+                  containerRefs={pixiContainerRefs}
+                />
+                {blockEntries.map(({ item }) => (
                   <FallingBlock
                     key={item.block_no}
                     blockNo={item.block_no}
@@ -399,10 +469,9 @@ export const BlockVisualizer: FC<BlockVisualizerProps> = memo(
                     hash={item.hash}
                     blockSize={blockSize}
                     maxTxRows={maxTxRows}
-                    targetX={targetX}
-                    targetY={targetY}
                     isDark={isDark}
                     onNavigate={handleNavigate}
+                    onRef={onBlockRef}
                   />
                 ))}
               </Stage>

@@ -14,7 +14,7 @@ import { PageBase } from "@/components/global/pages/PageBase";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { TxExpandedContent } from "@/components/tx/TxExpandedContent";
 import { useTxExpandStore } from "@/stores/tx/txExpandStore";
-import { TxVisualizer } from "@/components/tx/TxVisualizer";
+import { TxVisualizer } from "@/canvas/TxVisualizer";
 
 interface TxListPageProps {
   address?: string;
