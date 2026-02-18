@@ -14,6 +14,7 @@ import { PageBase } from "@/components/global/pages/PageBase";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { TxExpandedContent } from "@/components/tx/TxExpandedContent";
 import { useTxExpandStore } from "@/stores/tx/txExpandStore";
+import { TxVisualizer } from "@/components/tx/TxVisualizer";
 
 interface TxListPageProps {
   address?: string;
@@ -90,6 +91,9 @@ export const TxListPage: FC<TxListPageProps> = ({
       title={t("transactions.title")}
       breadcrumbItems={[{ label: t("transactions.title") }]}
     >
+      {!specifiedParams && (
+        <TxVisualizer isLoading={txListQuery.isLoading} items={items} />
+      )}
       <section
         className={`flex w-full max-w-desktop flex-col ${specifiedParams ? "" : "px-mobile pb-3 md:px-desktop"}`}
       >

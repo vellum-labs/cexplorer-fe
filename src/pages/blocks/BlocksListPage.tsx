@@ -16,6 +16,7 @@ import { X } from "lucide-react";
 import type { FilterKey } from "@/hooks/tables/useDrepList";
 import SortBy from "@/components/ui/sortBy";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { BlockVisualizer } from "@/components/blocks/BlockVisualizer";
 
 const BlocksListPage = () => {
   const { t } = useAppTranslation(["pages", "common"]);
@@ -57,6 +58,7 @@ const BlocksListPage = () => {
       title={t("blocks.title")}
       breadcrumbItems={[{ label: t("blocks.title") }]}
     >
+      <BlockVisualizer isLoading={blockListQuery.isLoading} items={items} />
       <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         {!totalItems ? (
           <p className='pb-1.5'>
@@ -211,12 +213,14 @@ const BlocksListPage = () => {
           query={blockListQuery}
           rowHeight={65}
           items={items}
-          columns={columns.sort((a, b) => {
-            return (
-              columnsOrder.indexOf(a.key as keyof BlockListColumns) -
-              columnsOrder.indexOf(b.key as keyof BlockListColumns)
-            );
-          })}
+          columns={
+            columns.sort((a, b) => {
+              return (
+                columnsOrder.indexOf(a.key as keyof BlockListColumns) -
+                columnsOrder.indexOf(b.key as keyof BlockListColumns)
+              );
+            }) as any
+          }
           onOrderChange={setColumsOrder}
           renderDisplayText={(count, total) =>
             t("common:table.displaying", { count, total })
