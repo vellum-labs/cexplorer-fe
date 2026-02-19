@@ -55,8 +55,12 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      if (walletType && enabledWalletConnector && window?.cardano) {
-        await connect(walletType);
+      if (walletType && enabledWalletConnector && window?.cardano?.[walletType]) {
+        try {
+          await connect(walletType);
+        } catch (error) {
+          console.error("Failed to connect wallet on init:", walletType, error);
+        }
       }
     })();
   }, [walletType]);

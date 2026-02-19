@@ -35,15 +35,13 @@ export const useConnectWallet = () => {
   const isReconnecting = useRef(false);
   useEffect(() => {
     const reconnectWallet = async () => {
-      if (walletType && !wallet && !isReconnecting.current) {
+      if (walletType && !wallet && !isReconnecting.current && window?.cardano?.[walletType]) {
         isReconnecting.current = true;
         try {
           const reconnectedWallet = await BrowserWallet.enable(walletType);
           setWalletState({ wallet: reconnectedWallet });
         } catch (error) {
           console.error("Failed to reconnect wallet:", walletType, error);
-          localStorage.removeItem("wallet-store");
-          setWalletState(defaultState);
         } finally {
           isReconnecting.current = false;
         }
