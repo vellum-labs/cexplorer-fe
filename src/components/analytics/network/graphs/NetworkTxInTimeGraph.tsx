@@ -7,7 +7,7 @@ import ReactEcharts from "echarts-for-react";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 
 import { useGraphColors } from "@/hooks/useGraphColors";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 
 interface NetworkTxInTimeGraphProps {
@@ -21,9 +21,15 @@ interface NetworkTxInTimeGraphProps {
 
 export const NetworkTxInTimeGraph: FC<NetworkTxInTimeGraphProps> = memo(
   function NetworkTxInTimeGraph({ items }) {
-    const [graphsVisibility, setGraphsVisibility] = useState(
-      items.map(item => item.timeframe),
-    );
+    const [graphsVisibility, setGraphsVisibility] = useState(() => {
+      try {
+        const stored = localStorage.getItem("network_tx_in_time_graph_store");
+        if (stored) return JSON.parse(stored);
+      } catch (e) {
+        console.log(e);
+      }
+      return items.map(item => item.timeframe);
+    });
 
     const { splitLineColor, textColor } = useGraphColors();
     const { theme } = useThemeStore();
@@ -121,23 +127,6 @@ export const NetworkTxInTimeGraph: FC<NetworkTxInTimeGraphProps> = memo(
         },
       ],
     };
-
-    useEffect(() => {
-      if (window && "localStorage" in window) {
-        const graphStore = JSON.parse(
-          localStorage.getItem("network_tx_in_time_graph_store") as string,
-        );
-
-        if (graphStore) {
-          setGraphsVisibility(graphStore);
-        } else {
-          localStorage.setItem(
-            "network_tx_in_time_graph_store",
-            JSON.stringify(graphsVisibility),
-          );
-        }
-      }
-    }, []);
 
     return (
       <div className='relative w-full'>

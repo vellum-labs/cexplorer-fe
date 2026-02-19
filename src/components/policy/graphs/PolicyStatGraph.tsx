@@ -37,15 +37,23 @@ export const PolicyStatGraph: FC<PolicyStatGraphProps> = memo(
       assets: t("policy.graph.assets"),
     };
 
-    const [graphsVisibility, setGraphsVisibility] = useState({
-      [legendLabels.totalCount]: true,
-      [legendLabels.totalStake]: true,
-      [legendLabels.totalAddress]: true,
-      [legendLabels.totalWithData]: true,
-      [legendLabels.totalAdaVolume]: true,
-      [legendLabels.totalAssetVolume]: true,
-      [legendLabels.totalPaymentCredits]: true,
-      [legendLabels.assets]: true,
+    const [graphsVisibility] = useState(() => {
+      try {
+        const stored = localStorage.getItem("policy_stat_graph_store");
+        if (stored) return JSON.parse(stored);
+      } catch (e) {
+        console.log(e);
+      }
+      return {
+        [legendLabels.totalCount]: true,
+        [legendLabels.totalStake]: true,
+        [legendLabels.totalAddress]: true,
+        [legendLabels.totalWithData]: true,
+        [legendLabels.totalAdaVolume]: true,
+        [legendLabels.totalAssetVolume]: true,
+        [legendLabels.totalPaymentCredits]: true,
+        [legendLabels.assets]: true,
+      };
     });
 
     const { textColor, bgColor } = useGraphColors();
@@ -261,39 +269,20 @@ export const PolicyStatGraph: FC<PolicyStatGraphProps> = memo(
     useEffect(() => {
       if (setJson) {
         setJson(
-          (epochs ?? []).map((epoch, index) => {
-            return {
-              [legendLabels.epoch]: epoch,
-              [legendLabels.totalCount]: totalCount[index],
-              [legendLabels.totalStake]: totalStake[index],
-              [legendLabels.totalAddress]: totalAddress[index],
-              [legendLabels.totalWithData]: totalWithData[index],
-              [legendLabels.totalAdaVolume]: totalAdaVolume[index],
-              [legendLabels.totalAssetVolume]: totalAssetVolume[index],
-              [legendLabels.totalPaymentCredits]: totalPaymentCredits[index],
-              [legendLabels.assets]: assets[index],
-            };
-          }),
+          (query?.data?.data?.data ?? []).map(item => ({
+            [legendLabels.epoch]: item?.epoch,
+            [legendLabels.totalCount]: item?.stat?.total_count,
+            [legendLabels.totalStake]: item?.stat?.total_stake,
+            [legendLabels.totalAddress]: item?.stat?.total_address,
+            [legendLabels.totalWithData]: item?.stat?.total_with_data,
+            [legendLabels.totalAdaVolume]: item?.stat?.total_ada_volume,
+            [legendLabels.totalAssetVolume]: item?.stat?.total_asset_volume,
+            [legendLabels.totalPaymentCredits]: item?.stat?.total_payment_cred,
+            [legendLabels.assets]: item?.stat?.assets ?? 0,
+          })),
         );
       }
-    }, [setJson]);
-
-    useEffect(() => {
-      if (window && "localStorage" in window) {
-        const graphStore = JSON.parse(
-          localStorage.getItem("policy_stat_graph_store") as string,
-        );
-
-        if (graphStore) {
-          setGraphsVisibility(graphStore);
-        } else {
-          localStorage.setItem(
-            "policy_stat_graph_store",
-            JSON.stringify(graphsVisibility),
-          );
-        }
-      }
-    }, []);
+    }, [query.data, setJson]);
 
     return (
       <div className='relative w-full'>

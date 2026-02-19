@@ -22,8 +22,16 @@ export const NetworkEnergyGraph: FC<NetworkEnergyGraphProps> = ({
   const { t } = useAppTranslation("common");
   const data = rateQuery.data?.data || [];
 
-  const [graphsVisibility, setGraphsVisibility] = useState({
-    "Energy Consumption (GWh)": true,
+  const [graphsVisibility] = useState(() => {
+    try {
+      const stored = localStorage.getItem(
+        "network_energy_consumption_graph_store",
+      );
+      if (stored) return JSON.parse(stored);
+    } catch (e) {
+      console.log(e);
+    }
+    return { "Energy Consumption (GWh)": true };
   });
 
   const consumptionPerDevice = 45;
@@ -128,36 +136,21 @@ export const NetworkEnergyGraph: FC<NetworkEnergyGraphProps> = ({
   };
 
   useEffect(() => {
-    if (window && "localStorage" in window) {
-      const graphStore = JSON.parse(
-        localStorage.getItem(
-          "network_energy_consumption_graph_store",
-        ) as string,
-      );
-
-      if (graphStore) {
-        setGraphsVisibility(graphStore);
-      } else {
-        localStorage.setItem(
-          "network_energy_consumption_graph_store",
-          JSON.stringify(graphsVisibility),
-        );
-      }
-    }
-  }, []);
-
-  useEffect(() => {
     if (setJson) {
       setJson(
-        dates.map((epoch, index) => {
+        (rateQuery.data?.data ?? []).map(item => {
+          const countPoolRelayUniq = item?.stat?.count_pool_relay_uniq ?? 0;
+          const estimatedUniqueDevices = countPoolRelayUniq * 1.5;
           return {
-            Epoch: epoch,
-            "Energy Consumption (GWh)": energyConsumptionRates[index],
+            Epoch: item?.date ?? "Unknown Date",
+            "Energy Consumption (GWh)":
+              (consumptionPerDevice * 365 * 24 * estimatedUniqueDevices) /
+              conversionFactor,
           };
         }),
       );
     }
-  }, [setJson]);
+  }, [rateQuery.data, setJson]);
 
   if (rateQuery.isLoading) {
     return <LoadingSkeleton height='490px' width='100%' rounded='lg' />;
