@@ -7,6 +7,7 @@ import {
   TableSettingsDropdown,
   LoadingSkeleton,
   formatNumber,
+  formatNumberWithSuffix,
   formatString,
   Tooltip,
 } from "@vellumlabs/cexplorer-sdk";
@@ -123,9 +124,11 @@ export const TreasuryContractsPage = () => {
         visible: columnsVisibility.budget,
         widthPx: 90,
         render: (item: VendorContract) => (
-          <span className='font-medium'>
-            ₳{formatNumber(item.initial_amount_ada)}
-          </span>
+          <Tooltip content={`₳${formatNumber(item.initial_amount_ada)}`}>
+            <span className='font-medium'>
+              ₳{formatNumberWithSuffix(item.initial_amount_ada)}
+            </span>
+          </Tooltip>
         ),
       },
       {

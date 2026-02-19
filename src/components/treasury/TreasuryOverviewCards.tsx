@@ -1,6 +1,11 @@
 import type { FC } from "react";
 import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
-import { formatNumber, LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import {
+  formatNumber,
+  formatNumberWithSuffix,
+  LoadingSkeleton,
+  Tooltip,
+} from "@vellumlabs/cexplorer-sdk";
 import {
   useFetchTreasury,
   useFetchStatistics,
@@ -101,9 +106,11 @@ export const TreasuryOverviewCards: FC<TreasuryOverviewCardsProps> = ({
             <span className='text-text-xs text-grayTextSecondary'>
               {labels.budget.budgetLabel}
             </span>
-            <span className='text-text-sm font-medium'>
-              ₳{formatNumber(Math.round(currentBalance))}
-            </span>
+            <Tooltip content={`₳${formatNumber(Math.round(currentBalance))}`}>
+              <span className='text-text-sm font-medium'>
+                ₳{formatNumberWithSuffix(Math.round(currentBalance))}
+              </span>
+            </Tooltip>
           </div>
 
           <div className='flex flex-col'>
@@ -111,9 +118,11 @@ export const TreasuryOverviewCards: FC<TreasuryOverviewCardsProps> = ({
               {labels.budget.totalSpent}
             </span>
             <div className='flex items-center gap-1'>
-              <span className='text-text-sm font-medium'>
-                ₳{formatNumber(Math.round(totalDisbursed))}
-              </span>
+              <Tooltip content={`₳${formatNumber(Math.round(totalDisbursed))}`}>
+                <span className='text-text-sm font-medium'>
+                  ₳{formatNumberWithSuffix(Math.round(totalDisbursed))}
+                </span>
+              </Tooltip>
               <span className='text-text-xs text-grayTextSecondary'>
                 {spentPercentage}%
               </span>
@@ -130,9 +139,11 @@ export const TreasuryOverviewCards: FC<TreasuryOverviewCardsProps> = ({
             <span className='text-text-xs text-grayTextSecondary'>
               {labels.budget.remainingBudget}
             </span>
-            <span className='text-text-sm font-medium'>
-              ₳{formatNumber(Math.round(totalAllocated - totalDisbursed))}
-            </span>
+            <Tooltip content={`₳${formatNumber(Math.round(totalAllocated - totalDisbursed))}`}>
+              <span className='text-text-sm font-medium'>
+                ₳{formatNumberWithSuffix(Math.round(totalAllocated - totalDisbursed))}
+              </span>
+            </Tooltip>
           </div>
         </div>
       </div>
@@ -146,10 +157,12 @@ export const TreasuryOverviewCards: FC<TreasuryOverviewCardsProps> = ({
           {
             label: labels.statistics.totalDistributed,
             value: (
-              <span className='font-medium'>
-                ₳{formatNumber(Math.round(totalDisbursed))}/
-                {formatNumber(Math.round(totalAllocated))} ADA
-              </span>
+              <Tooltip content={`₳${formatNumber(Math.round(totalDisbursed))}/${formatNumber(Math.round(totalAllocated))} ADA`}>
+                <span className='font-medium'>
+                  ₳{formatNumberWithSuffix(Math.round(totalDisbursed))}/
+                  {formatNumberWithSuffix(Math.round(totalAllocated))} ADA
+                </span>
+              </Tooltip>
             ),
           },
           {
