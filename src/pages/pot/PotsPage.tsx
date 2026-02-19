@@ -306,13 +306,21 @@ const AdaPotsChart = ({ data }: { data: AdaPot[] | undefined }) => {
     fees: t("pots.chart.fees"),
   };
 
-  const [graphsVisibility, setGraphsVisibility] = useState({
-    [chartLabels.treasury]: true,
-    [chartLabels.reserves]: true,
-    [chartLabels.rewards]: true,
-    [chartLabels.utxo]: true,
-    [chartLabels.deposits]: true,
-    [chartLabels.fees]: true,
+  const [graphsVisibility, setGraphsVisibility] = useState(() => {
+    try {
+      const stored = localStorage.getItem("ada_pots_graph_store");
+      if (stored) return JSON.parse(stored);
+    } catch (e) {
+      console.log(e);
+    }
+    return {
+      [chartLabels.treasury]: true,
+      [chartLabels.reserves]: true,
+      [chartLabels.rewards]: true,
+      [chartLabels.utxo]: true,
+      [chartLabels.deposits]: true,
+      [chartLabels.fees]: true,
+    };
   });
   const { textColor, bgColor, splitLineColor, inactivePageIconColor } =
     useGraphColors();
@@ -660,22 +668,6 @@ const AdaPotsChart = ({ data }: { data: AdaPot[] | undefined }) => {
     miscConst,
   ]);
 
-  useEffect(() => {
-    if (window && "localStorage" in window) {
-      const graphStore = JSON.parse(
-        localStorage.getItem("ada_pots_graph_store") as string,
-      );
-
-      if (graphStore) {
-        setGraphsVisibility(graphStore);
-      } else {
-        localStorage.setItem(
-          "pool_performance_graph_store",
-          JSON.stringify(graphsVisibility),
-        );
-      }
-    }
-  }, []);
 
   return (
     <div className='relative w-full'>
