@@ -12,6 +12,9 @@ import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { useSearch } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { TxExpandedContent } from "@/components/tx/TxExpandedContent";
+import { useTxExpandStore } from "@/stores/tx/txExpandStore";
+import { TxVisualizer } from "@/canvas/TxVisualizer";
 
 interface TxListPageProps {
   address?: string;
@@ -77,6 +80,8 @@ export const TxListPage: FC<TxListPageProps> = ({
     setColumsOrder,
   } = useTxListTableStore()();
 
+  const { expandRows, setExpandRows } = useTxExpandStore();
+
   return (
     <PageBase
       showMetadata={!specifiedParams}
@@ -86,6 +91,9 @@ export const TxListPage: FC<TxListPageProps> = ({
       title={t("transactions.title")}
       breadcrumbItems={[{ label: t("transactions.title") }]}
     >
+      {!specifiedParams && (
+        <TxVisualizer isLoading={txListQuery.isLoading} items={items} />
+      )}
       <section
         className={`flex w-full max-w-desktop flex-col ${specifiedParams ? "" : "px-mobile pb-3 md:px-desktop"}`}
       >
@@ -175,6 +183,12 @@ export const TxListPage: FC<TxListPageProps> = ({
             t("common:table.displaying", { count, total })
           }
           noItemsLabel={t("common:table.noItems")}
+          expand={{
+            expandedRows: expandRows,
+            setExpandedRows: setExpandRows,
+            toggleKey: item => item.hash,
+            extraContent: item => <TxExpandedContent hash={item.hash} />,
+          }}
         />
       </section>
     </PageBase>

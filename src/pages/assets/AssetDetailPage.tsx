@@ -18,7 +18,7 @@ import { AssetStatsTab } from "@/components/asset/tabs/AssetStatsTab";
 import { AssetTimelockTab } from "@/components/asset/tabs/AssetTimelockTab";
 import { AdaHandleBadge } from "@vellumlabs/cexplorer-sdk";
 import { ProBadge } from "@vellumlabs/cexplorer-sdk";
-import { adaHandlePolicies, proPolicy } from "@/constants/confVariables";
+import { adaHandlePolicies, hasEmbed, proPolicy } from "@/constants/confVariables";
 import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import type { FileRoutesByPath } from "@tanstack/react-router";
@@ -28,6 +28,7 @@ import { AssetExchangesTab } from "@/components/asset/tabs/AssetExchangesTab";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { alphabetWithNumbers } from "@/constants/alphabet";
+import { EmbedTab } from "@/components/global/embed/EmbedTab";
 
 export const AssetDetailPage: FC = () => {
   const { t } = useAppTranslation("common");
@@ -141,6 +142,14 @@ export const AssetDetailPage: FC = () => {
         <AssetExchangesTab assetname={assetName} query={assetDetailQuery} />
       ),
       visible: !!assetDetailQuery?.data?.data?.dex,
+    },
+    {
+      key: "embed",
+      label: t("asset.embedTab"),
+      content: (
+        <EmbedTab entityType='tokens' entityId={fingerprint} displayName={""} />
+      ),
+      visible: hasEmbed,
     },
   ];
 

@@ -2,7 +2,7 @@ import { DrepDetailOverview } from "@/components/drep/DrepDetailOverview";
 import { DrepDetailAboutTab } from "@/components/drep/tabs/DrepDetailAboutTab";
 import { DrepDetailDelegatorsTab } from "@/components/drep/tabs/DrepDetailDelegatorsTab";
 import { DrepDetailGovernanceActionsTab } from "@/components/drep/tabs/DrepDetailGovernanceActionsTab";
-import { DrepDetailEmbedTab } from "@/components/drep/tabs/DrepDetailEmbedTab";
+import { EmbedTab } from "@/components/global/embed/EmbedTab";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
@@ -62,7 +62,11 @@ export const DrepDetailPage: FC = () => {
       key: "embed",
       label: t("dreps.detailPage.tabs.embed"),
       content: (
-        <DrepDetailEmbedTab drepId={hash} drepName={drepName ?? undefined} />
+        <EmbedTab
+          entityType='dreps'
+          entityId={hash}
+          displayName={drepName ?? "DRep"}
+        />
       ),
       visible: hasEmbed,
     },

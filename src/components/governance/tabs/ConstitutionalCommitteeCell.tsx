@@ -91,7 +91,7 @@ export const ConstitutionalCommitteeNameCell: FC<
             params={{ coldKey: item?.hash?.view }}
             className={
               item?.data?.given_name
-                ? "text-text-xs hover:text-grayTextPrimary"
+                ? "text-text-xs text-grayText"
                 : "text-text-sm text-primary"
             }
             disabled={!!item?.data?.given_name}

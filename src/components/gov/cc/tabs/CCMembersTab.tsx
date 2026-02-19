@@ -117,7 +117,7 @@ export const CCMembersTab: FC = () => {
                     to={toPath}
                     className={
                       name && name !== "Unknown"
-                        ? "text-text-xs hover:text-grayTextPrimary"
+                        ? "text-text-xs text-grayText"
                         : "text-text-sm text-primary"
                     }
                     disabled={!!(name && name !== "Unknown")}

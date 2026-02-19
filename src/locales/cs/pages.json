@@ -437,6 +437,9 @@
       },
       "embed": {
         "buttons": "Tlačítka",
+        "banners": "Bannery",
+        "simpleLinks": "Jednoduché odkazy",
+        "graphs": "Grafy",
         "spoDelegationButton": "Tlačítko delegace SPO",
         "preview": "Náhled"
       },
@@ -765,6 +768,9 @@
       },
       "embed": {
         "buttons": "Tlačítka",
+        "banners": "Bannery",
+        "simpleLinks": "Jednoduché odkazy",
+        "graphs": "Grafy",
         "drepDelegationButton": "Tlačítko delegace DRep",
         "preview": "Náhled"
       },
@@ -840,6 +846,15 @@
       "all": "$t(shared:all)",
       "tokens": "$t(shared:tokens)",
       "nfts": "$t(shared:nfts)"
+    }
+  },
+  "tokens": {
+    "detailPage": {
+      "embed": {
+        "banners": "Bannery",
+        "simpleLinks": "Jednoduché odkazy",
+        "graphs": "Grafy"
+      }
     }
   },
   "contractTransactions": {
