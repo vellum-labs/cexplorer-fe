@@ -42,6 +42,7 @@ export const useConnectWallet = () => {
           setWalletState({ wallet: reconnectedWallet });
         } catch (error) {
           console.error("Failed to reconnect wallet:", walletType, error);
+          localStorage.removeItem("wallet-store");
           setWalletState(defaultState);
         } finally {
           isReconnecting.current = false;
