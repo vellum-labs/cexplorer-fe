@@ -1169,7 +1169,9 @@
       "actionType": "$t(shared:actionType)",
       "title": "$t(shared:labels.title)",
       "abstracts": "Abstracts",
-      "rationale": "Rationale"
+      "rationale": "Rationale",
+      "references": "References",
+      "referenceWithoutLabel": "Reference without label:"
     },
     "statusHistory": {
       "timestamp": "$t(shared:labels.timestamp)",
