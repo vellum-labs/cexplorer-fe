@@ -72,7 +72,7 @@ export const EmbedEntity: FC<EmbedEntityProps> = ({
 
   const iframeHeight = embedType === EMBED_TYPES.GRAPH ? 700 : 400;
 
-  const embedCode = `<iframe src="${embedUrl}" width="${iframeWidth}" height="${iframeHeight}" />`;
+  const embedCode = `<iframe frameBorder={0} src="${embedUrl}" width="${iframeWidth}" height="${iframeHeight}" />`;
 
   const mode = [
     {
@@ -252,7 +252,12 @@ export const EmbedEntity: FC<EmbedEntityProps> = ({
           {t("embed.preview")}
         </span>
         <div className='overflow-x-auto'>
-          <iframe src={embedUrl} width={iframeWidth} height={iframeHeight} />
+          <iframe
+            frameBorder={0}
+            src={embedUrl}
+            width={iframeWidth}
+            height={iframeHeight}
+          />
         </div>
       </div>
     </div>
