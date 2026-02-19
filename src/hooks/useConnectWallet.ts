@@ -74,7 +74,7 @@ export const useConnectWallet = () => {
     const rewardAddress = rewardAddresses?.[0];
     const stakeKey = rewardAddress ? rewardAddress.slice(-56) : "";
 
-    if (address.startsWith("addr_test1") && network !== "preprod") {
+    if (address.startsWith("addr_test1") && network !== "preprod" && network !== "preview") {
       toast("Please use a mainnet wallet to connect to the mainnet Cexplorer", {
         id: "mainnet-wallet",
       });
