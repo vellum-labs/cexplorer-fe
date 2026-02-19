@@ -50,7 +50,9 @@
     "certificates": "$t(shared:certificates)",
     "drepRegistrations": "$t(shared:title6)",
     "drepDeregistrations": "$t(shared:title7)",
-    "drepUpdates": "$t(shared:title8)"
+    "drepUpdates": "$t(shared:title8)",
+    "treasury": "Treasury",
+    "treasuryProjection": "Treasury projection"
   },
   "tokens": {
     "list": "$t(shared:list)",

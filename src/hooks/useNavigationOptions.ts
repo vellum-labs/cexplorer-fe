@@ -35,15 +35,6 @@ export const useNavigationOptions = () => {
           label: t("blockchain.transactionsMetadata"),
           href: "/metadata",
         },
-        {
-          label: t("blockchain.treasuryDonations"),
-          href: "/treasury/donation",
-          params: { tab: "donations" },
-        },
-        {
-          label: t("blockchain.treasuryContracts"),
-          href: "/treasury/contracts",
-        },
       ],
       staking: [
         {
@@ -157,6 +148,25 @@ export const useNavigationOptions = () => {
             {
               label: t("governance.drepUpdates"),
               href: "/drep/updates",
+            },
+          ],
+          divider: true,
+        },
+        {
+          label: t("governance.treasury"),
+          nestedOptions: [
+            {
+              label: t("blockchain.treasuryDonations"),
+              href: "/treasury/donation",
+              params: { tab: "donations" },
+            },
+            {
+              label: t("blockchain.treasuryContracts"),
+              href: "/treasury/contracts",
+            },
+            {
+              label: t("governance.treasuryProjection"),
+              href: "/treasury/projection",
             },
           ],
         },
