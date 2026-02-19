@@ -23,9 +23,10 @@ export const proPolicy = configJSON.nft;
 export const supportedPools = configJSON.supportedPools;
 export const donationAddress = configJSON.donationAddress;
 const rawPolicy = configJSON.integration[0].adahandle[0].policy;
-export const adaHandlePolicy = Array.isArray(rawPolicy)
-  ? rawPolicy[0]
-  : rawPolicy;
+export const adaHandlePolicies: string[] = Array.isArray(rawPolicy)
+  ? rawPolicy
+  : [rawPolicy];
+export const adaHandlePolicy = adaHandlePolicies[0];
 const protocol = `${configJSON.proto}://`;
 
 export const hasEmbed = configJSON.embed;
