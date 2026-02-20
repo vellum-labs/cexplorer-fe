@@ -75,6 +75,7 @@
     "immer": "^10.1.1",
     "init": "^0.1.2",
     "install": "^0.13.0",
+    "lightweight-charts": "^5.1.0",
     "lucide-react": "^0.487.0",
     "matter-js": "^0.20.0",
     "pixi.js": "7",

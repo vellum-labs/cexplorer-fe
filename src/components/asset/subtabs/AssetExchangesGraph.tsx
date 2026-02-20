@@ -1,15 +1,19 @@
 import type { FC } from "react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import ReactEcharts from "echarts-for-react";
+import {
+  createChart,
+  CandlestickSeries,
+  HistogramSeries,
+  type IChartApi,
+  type UTCTimestamp,
+} from "lightweight-charts";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import SortBy from "@/components/ui/sortBy";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useFetchAssetExchangesGraph } from "@/services/assets";
 import { Loading } from "@vellumlabs/cexplorer-sdk";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
-
-import { format } from "date-fns";
 
 interface AssetExchangesCandlestickGraphProps {
   assetname: string;
@@ -28,14 +32,12 @@ export const AssetExchangesCandlestickGraph: FC<
     return localStorage.getItem(LS_KEY) || "4hour";
   });
 
-  const { textColor, splitLineColor, bgColor } = useGraphColors();
+  const { textColor, splitLineColor } = useGraphColors();
 
   const { data: rawData, isLoading } = useFetchAssetExchangesGraph(
     assetname,
     period as Periods,
   );
-
-  const volumeData = rawData?.data?.map(item => Number(item.volume)) ?? [];
 
   useEffect(() => {
     if (period) {
@@ -43,57 +45,118 @@ export const AssetExchangesCandlestickGraph: FC<
     }
   }, [period]);
 
-  const candlestickData =
-    rawData?.data?.map(item => [
-      Number(item.open),
-      Number(item.close),
-      Number(item.low),
-      Number(item.high),
-    ]) ?? [];
+  const chartContainerRef = useRef<HTMLDivElement>(null);
+  const chartRef = useRef<IChartApi | null>(null);
 
-  const candlestickTimestamps =
-    rawData?.data?.map(item =>
-      format(new Date(item.unix * 1000), "dd.MM.yyyy HH:mm"),
-    ) ?? [];
+  const hasData = (rawData?.data?.length ?? 0) > 0;
 
-  const formatAxisTimestamp = (timestamp: string, period: string) => {
-    const date = new Date(
-      timestamp.split(" ")[0].split(".").reverse().join("-") +
-        "T" +
-        timestamp.split(" ")[1],
-    );
-
-    switch (period) {
-      case "1min":
-      case "5min":
-      case "15min":
-      case "30min":
-        return format(date, "HH:mm");
-      case "1hour":
-      case "4hour":
-        return format(date, "dd.MM HH:mm");
-      case "1day":
-        return format(date, "dd.MM");
-      default:
-        return format(date, "dd.MM");
-    }
-  };
-
-  const axisTimestamps = candlestickTimestamps.map(ts =>
-    formatAxisTimestamp(ts, period || "4hour"),
+  const candlestickData = useMemo(
+    () =>
+      rawData?.data?.map(item => ({
+        time: item.unix as UTCTimestamp,
+        open: Number(item.open),
+        high: Number(item.high),
+        low: Number(item.low),
+        close: Number(item.close),
+      })) ?? [],
+    [rawData?.data],
   );
 
-  const getAxisLabelInterval = (dataLength: number, period: string) => {
-    if (dataLength <= 10) return 0;
-    if (dataLength <= 24) return 1;
-    if (dataLength <= 48) return 3;
-    if (period === "1min" || period === "5min")
-      return Math.floor(dataLength / 6);
-    if (period === "15min" || period === "30min")
-      return Math.floor(dataLength / 8);
-    if (period === "1hour") return Math.floor(dataLength / 6);
-    return Math.floor(dataLength / 10);
-  };
+  const volumeData = useMemo(
+    () =>
+      rawData?.data?.map(item => ({
+        time: item.unix as UTCTimestamp,
+        value: Number(item.volume),
+        color:
+          Number(item.close) >= Number(item.open)
+            ? "rgba(14, 203, 129, 0.5)"
+            : "rgba(246, 70, 93, 0.5)",
+      })) ?? [],
+    [rawData?.data],
+  );
+
+  const buildChart = useCallback(() => {
+    if (!chartContainerRef.current || !hasData) return;
+
+    if (chartRef.current) {
+      chartRef.current.remove();
+      chartRef.current = null;
+    }
+
+    const chart = createChart(chartContainerRef.current, {
+      layout: {
+        background: { color: "transparent" },
+        textColor,
+      },
+      grid: {
+        vertLines: { color: splitLineColor },
+        horzLines: { color: splitLineColor },
+      },
+      timeScale: {
+        timeVisible: true,
+        secondsVisible: false,
+        borderColor: splitLineColor,
+      },
+      rightPriceScale: {
+        borderColor: splitLineColor,
+      },
+      crosshair: {
+        mode: 0,
+      },
+    });
+
+    chartRef.current = chart;
+
+    const candleSeries = chart.addSeries(CandlestickSeries, {
+      upColor: "#0ecb81",
+      downColor: "#f6465d",
+      borderUpColor: "#0ecb81",
+      borderDownColor: "#f6465d",
+      wickUpColor: "#0ecb81",
+      wickDownColor: "#f6465d",
+    });
+
+    candleSeries.setData(candlestickData);
+
+    const volumeSeries = chart.addSeries(HistogramSeries, {
+      priceFormat: { type: "volume" },
+      priceScaleId: "volume",
+    });
+
+    chart.priceScale("volume").applyOptions({
+      scaleMargins: { top: 0.8, bottom: 0 },
+    });
+
+    volumeSeries.setData(volumeData);
+
+    chart.timeScale().fitContent();
+  }, [hasData, candlestickData, volumeData, textColor, splitLineColor]);
+
+  useEffect(() => {
+    buildChart();
+
+    return () => {
+      if (chartRef.current) {
+        chartRef.current.remove();
+        chartRef.current = null;
+      }
+    };
+  }, [buildChart]);
+
+  useEffect(() => {
+    const container = chartContainerRef.current;
+    if (!container || !chartRef.current) return;
+
+    const observer = new ResizeObserver(entries => {
+      for (const entry of entries) {
+        const { width, height } = entry.contentRect;
+        chartRef.current?.applyOptions({ width, height });
+      }
+    });
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [hasData, buildChart]);
 
   const selectItems = [
     { key: "1min", value: t("asset.oneMin") },
@@ -105,137 +168,11 @@ export const AssetExchangesCandlestickGraph: FC<
     { key: "1day", value: t("asset.oneDay") },
   ];
 
-  const option = {
-    tooltip: {
-      trigger: "axis",
-      confine: true,
-      axisPointer: { type: "cross" },
-      backgroundColor: bgColor,
-      textStyle: { color: textColor },
-
-      formatter: params => {
-        const [dataPoint] = params;
-        const { axisValue, data, dataIndex } = dataPoint;
-        const volume = volumeData?.[dataIndex] ?? 0;
-
-        return `
-    <div>
-      <div style="margin-bottom: 6px;">${axisValue}</div>
-      <hr style="margin: 4px 0;" />
-      <div>${t("asset.openPrice")}: ${Number(data[1]).toFixed(6)} ₳</div>
-      <div>${t("asset.closePrice")}: ${Number(data[2]).toFixed(6)} ₳</div>
-      <div>${t("asset.lowestPrice")}: ${Number(data[3]).toFixed(6)} ₳</div>
-      <div>${t("asset.highestPrice")}: ${Number(data[4]).toFixed(6)} ₳</div>
-      <div>${t("asset.volume")}: ${volume.toLocaleString(undefined, {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      })} ₳</div>
-    </div>
-  `;
-      },
-    },
-    grid: [
-      {
-        top: 40,
-        left: 60,
-        right: 20,
-        height: "50%",
-      },
-      {
-        left: 60,
-        right: 20,
-        bottom: 60,
-        height: "20%",
-      },
-    ],
-    xAxis: [
-      {
-        type: "category",
-        data: axisTimestamps,
-        boundaryGap: true,
-        axisLabel: { show: false },
-        axisPointer: {
-          type: "line",
-          lineStyle: { width: 0 },
-          label: { show: false },
-        },
-      },
-      {
-        type: "category",
-        data: axisTimestamps,
-        gridIndex: 1,
-        splitLine: { show: false },
-        axisLabel: {
-          show: true,
-          color: textColor,
-          rotate: period === "1min" || period === "5min" ? 45 : 0,
-          interval: getAxisLabelInterval(
-            axisTimestamps.length,
-            period || "4hour",
-          ),
-          fontSize: 11,
-          margin: 15,
-        },
-        axisTick: { show: true, lineStyle: { color: textColor } },
-        axisLine: { lineStyle: { color: textColor } },
-        axisPointer: { show: false },
-      },
-    ],
-    yAxis: [
-      {
-        scale: true,
-        axisLine: { lineStyle: { color: textColor } },
-        splitLine: { lineStyle: { color: splitLineColor } },
-        axisLabel: { color: textColor },
-        axisPointer: {
-          label: {
-            backgroundColor: bgColor,
-            color: textColor,
-          },
-        },
-      },
-      {
-        gridIndex: 1,
-        splitLine: { show: false },
-        axisLabel: { show: false },
-        axisLine: { show: false },
-        axisTick: { show: false },
-        axisPointer: { show: false },
-      },
-    ],
-    series: [
-      {
-        name: "Price",
-        type: "candlestick",
-        data: candlestickData,
-        xAxisIndex: 0,
-        yAxisIndex: 0,
-        itemStyle: {
-          color: "#0ecb81",
-          color0: "#f6465d",
-          borderColor: "#0ecb81",
-          borderColor0: "#f6465d",
-        },
-      },
-      {
-        name: "Volume",
-        type: "bar",
-        data: volumeData,
-        xAxisIndex: 1,
-        yAxisIndex: 1,
-        itemStyle: {
-          color: "#8884d8",
-        },
-        tooltip: { show: false },
-      },
-    ],
-  };
-
   return (
     <div
       className={`w-full rounded-m border border-border bg-cardBg p-5 ${className || ""}`}
     >
-      <div className={`flex flex-col justify-end pb-1.5 md:flex-row md:pb-0`}>
+      <div className={`flex flex-col justify-end pb-3 md:flex-row md:pb-3`}>
         <SortBy
           label={false}
           width='160px'
@@ -248,19 +185,14 @@ export const AssetExchangesCandlestickGraph: FC<
       <div className='h-[300px]'>
         {isLoading ? (
           <Loading className='min-h-[300px]' />
-        ) : candlestickData.length === 0 ? (
+        ) : !hasData ? (
           <div className='flex h-full w-full items-center justify-center text-text-sm text-text'>
             <span>{t("asset.noDataAvailable")}</span>
           </div>
         ) : (
           <div className='relative h-[300px] w-full'>
             <GraphWatermark />
-            <ReactEcharts
-              option={option}
-              notMerge
-              lazyUpdate
-              className='h-full w-full'
-            />
+            <div ref={chartContainerRef} className='h-full w-full' />
           </div>
         )}
       </div>
