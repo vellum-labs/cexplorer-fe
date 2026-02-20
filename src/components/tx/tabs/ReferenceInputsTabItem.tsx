@@ -1,4 +1,5 @@
 import AddressCell from "@/components/address/AddressCell";
+import { AssetsBrowseDropdown } from "@/components/tx/AssetsBrowseDropdown";
 import { AddressTypeInitialsBadge } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
@@ -57,6 +58,23 @@ const ReferenceInputsTabItem = () => {
       ),
       visible: true,
       widthPx: 80,
+    },
+    {
+      key: "asset",
+      render: item => (
+        <span className='flex justify-end'>
+          {item.asset && item.asset.length > 0 ? (
+            <AssetsBrowseDropdown assets={item.asset} type='input' />
+          ) : null}
+        </span>
+      ),
+      title: (
+        <span className='flex w-full justify-end'>
+          {t("tx.columns.assets")}
+        </span>
+      ),
+      visible: true,
+      widthPx: 100,
     },
   ];
 
