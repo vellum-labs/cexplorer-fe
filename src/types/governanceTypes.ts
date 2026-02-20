@@ -42,6 +42,7 @@ interface GovernanceActionAnchor {
     motivation: string;
     rationale: string;
   } | null;
+  reference?: { label?: string; uri?: string }[];
 }
 
 export interface GovernanceActionList {
