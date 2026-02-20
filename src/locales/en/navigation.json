@@ -19,7 +19,8 @@
     "assets": "$t(shared:assets)",
     "contractTransactions": "Contract transactions",
     "transactionsMetadata": "Transactions metadata",
-    "treasuryDonations": "Treasury donations"
+    "treasuryDonations": "Treasury donations",
+    "treasuryContracts": "Treasury contracts"
   },
   "staking": {
     "stakePools": "$t(shared:stakePools)",
@@ -49,7 +50,9 @@
     "certificates": "$t(shared:certificates)",
     "drepRegistrations": "$t(shared:title6)",
     "drepDeregistrations": "$t(shared:title7)",
-    "drepUpdates": "$t(shared:title8)"
+    "drepUpdates": "$t(shared:title8)",
+    "treasury": "Treasury",
+    "treasuryProjection": "Treasury projection"
   },
   "tokens": {
     "list": "$t(shared:list)",
