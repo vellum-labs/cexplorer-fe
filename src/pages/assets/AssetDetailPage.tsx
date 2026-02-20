@@ -18,11 +18,7 @@ import { AssetStatsTab } from "@/components/asset/tabs/AssetStatsTab";
 import { AssetTimelockTab } from "@/components/asset/tabs/AssetTimelockTab";
 import { AdaHandleBadge } from "@vellumlabs/cexplorer-sdk";
 import { ProBadge } from "@vellumlabs/cexplorer-sdk";
-import {
-  adaHandlePolicy,
-  hasEmbed,
-  proPolicy,
-} from "@/constants/confVariables";
+import { adaHandlePolicies, hasEmbed, proPolicy } from "@/constants/confVariables";
 import { encodeAssetName } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import type { FileRoutesByPath } from "@tanstack/react-router";
@@ -30,7 +26,6 @@ import { getRouteApi, useSearch } from "@tanstack/react-router";
 import { DeFiOrderList } from "@/components/defi/DeFiOrderList";
 import { AssetExchangesTab } from "@/components/asset/tabs/AssetExchangesTab";
 import { PageBase } from "@/components/global/pages/PageBase";
-import { configJSON } from "@/constants/conf";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { alphabetWithNumbers } from "@/constants/alphabet";
 import { EmbedTab } from "@/components/global/embed/EmbedTab";
@@ -51,8 +46,6 @@ export const AssetDetailPage: FC = () => {
   const assetScript = assetDetailQuery.data?.data?.stat?.policy?.script;
   const timelock = !!assetScript && assetScript.type === "timelock";
   const assetStats = assetDetailQuery.data?.data?.stat?.asset?.stats;
-
-  const policyId = configJSON.integration[0].adahandle[0].policy;
 
   const assetName =
     (assetDetailQuery?.data?.data?.policy || "") +
@@ -260,8 +253,8 @@ export const AssetDetailPage: FC = () => {
       }
       badge={
         <div className='flex items-center gap-1'>
-          {assetDetailQuery.data?.data?.policy === adaHandlePolicy && (
-            <AdaHandleBadge variant='long' policyId={policyId as string} />
+          {adaHandlePolicies.includes(assetDetailQuery.data?.data?.policy ?? "") && (
+            <AdaHandleBadge variant='long' policyId={assetDetailQuery.data?.data?.policy} />
           )}
           {assetDetailQuery.data?.data?.policy === proPolicy && <ProBadge />}
         </div>
