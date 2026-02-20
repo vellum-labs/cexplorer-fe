@@ -3,11 +3,17 @@ import {
   createRootRoute,
   Outlet,
   useLocation,
+  useNavigate,
   useRouter,
 } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { Button, SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
+import {
+  Button,
+  SafetyLinkModal,
+  BookmarksSideButton,
+} from "@vellumlabs/cexplorer-sdk";
+import { useBookmarkStore } from "@/stores/bookmarkStore";
 import Footer from "../components/layouts/Footer";
 
 import { SwReadyModal } from "@/components/global/modals/SwReadyModal";
@@ -42,6 +48,8 @@ const RootComponent = () => {
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
   const router = useRouter();
+  const navigate = useNavigate();
+  const { bookmarks } = useBookmarkStore();
 
   const { notFound, setNotFound } = useNotFound();
   const location = useLocation();
@@ -204,6 +212,13 @@ const RootComponent = () => {
         {/* <TanStackRouterDevtools /> */}
         {/* <ReactQueryDevtools /> */}
         {openHelp && <ShortcutsModal onClose={() => setOpenHelp(false)} />}
+        {bookmarks.length > 0 && (
+          <BookmarksSideButton
+            onClick={() => navigate({ to: "/bookmarks" })}
+            top='70vh'
+            borderColor='var(--border)'
+          />
+        )}
       </>
     </GlobalSearchProvider>
   );
