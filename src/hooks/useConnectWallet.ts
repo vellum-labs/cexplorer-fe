@@ -33,22 +33,52 @@ export const useConnectWallet = () => {
   }, [watchlistData]);
 
   const isReconnecting = useRef(false);
+  const hasLoggedError = useRef(false);
+
   useEffect(() => {
-    const reconnectWallet = async () => {
-      if (walletType && !wallet && !isReconnecting.current) {
-        isReconnecting.current = true;
-        try {
-          const reconnectedWallet = await BrowserWallet.enable(walletType);
-          setWalletState({ wallet: reconnectedWallet });
-        } catch (error) {
+    if (!walletType || wallet) {
+      hasLoggedError.current = false;
+      return;
+    }
+
+    const attemptReconnect = async () => {
+      if (isReconnecting.current) return;
+      isReconnecting.current = true;
+      try {
+        const reconnectedWallet = await BrowserWallet.enable(walletType);
+        setWalletState({ wallet: reconnectedWallet });
+      } catch (error) {
+        if (!hasLoggedError.current) {
           console.error("Failed to reconnect wallet:", walletType, error);
-          setWalletState(defaultState);
-        } finally {
-          isReconnecting.current = false;
+          hasLoggedError.current = true;
         }
+
+      } finally {
+        isReconnecting.current = false;
       }
     };
-    reconnectWallet();
+
+    attemptReconnect();
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        hasLoggedError.current = false;
+        attemptReconnect();
+      }
+    };
+
+    const handleFocus = () => attemptReconnect();
+
+    const interval = setInterval(attemptReconnect, 10_000);
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("focus", handleFocus);
+
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("focus", handleFocus);
+    };
   }, [walletType, wallet, setWalletState]);
 
   const _connect = async (walletType: WalletType) => {
