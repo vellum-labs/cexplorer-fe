@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 
 // Activate all common mocks
-import "../../mocks";
+import "../mocks";
 
 // Mock child components not covered by SDK mock
 vi.mock("@/components/table/ExportButton", () => ({
@@ -45,7 +45,7 @@ import { GovernanceDetailAboutTab } from "@/components/governance/tabs/Governanc
 import {
   mockUseFetchGovernanceVote,
   createMockInfiniteQueryResult,
-} from "../../mocks/services";
+} from "../mocks/services";
 
 // ── Vote fixtures ──────────────────────────────────────────
 const makeVote = (overrides: Record<string, any> = {}) => ({

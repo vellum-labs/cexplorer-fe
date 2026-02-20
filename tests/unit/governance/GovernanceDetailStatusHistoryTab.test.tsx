@@ -2,9 +2,9 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 
 // Import individual mocks (NOT barrel) to avoid global SDK mock overriding our custom one
-import "../../mocks/useAppTranslation";
-import "../../mocks/router";
-import "../../mocks/services";
+import "../mocks/useAppTranslation";
+import "../mocks/router";
+import "../mocks/services";
 
 vi.mock("lucide-react", () => ({
   ExternalLink: () => <span data-testid="ExternalLink" />,
@@ -40,12 +40,12 @@ vi.mock("@vellumlabs/cexplorer-sdk", () => ({
 }));
 
 import { GovernanceDetailStatusHistoryTab } from "@/components/governance/tabs/GovernanceDetailStatusHistoryTab";
-import { createMockQueryResult } from "../../mocks/services";
+import { createMockQueryResult } from "../mocks/services";
 import {
   governanceActionDetailFixture,
   enactedGovernanceActionFixture,
   expiredGovernanceActionFixture,
-} from "../../fixtures/governanceActionDetail";
+} from "../fixtures/governanceActionDetail";
 
 // Helper to build a query prop
 const makeQuery = (data: any, overrides: Record<string, any> = {}) => ({

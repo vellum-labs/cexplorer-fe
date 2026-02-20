@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 
 // Activate all common mocks
-import "../../mocks";
+import "../mocks";
 
 // Mock child subtab components
 vi.mock("@/components/governance/subtabs/GovernanceDetailDrepsSubtab", () => ({
@@ -26,7 +26,7 @@ vi.mock("@/utils/governanceVoting", () => ({
 
 import { GovernanceDetailNotVotedTab } from "@/components/governance/tabs/GovernanceDetailNotVotedTab";
 import { shouldSPOVote } from "@/utils/governanceVoting";
-import { governanceActionDetailFixture } from "../../fixtures/governanceActionDetail";
+import { governanceActionDetailFixture } from "../fixtures/governanceActionDetail";
 
 describe("GovernanceDetailNotVotedTab", () => {
   beforeEach(() => {
