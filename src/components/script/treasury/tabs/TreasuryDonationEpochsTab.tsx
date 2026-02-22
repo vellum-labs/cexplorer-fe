@@ -7,11 +7,7 @@ import { useMiscConst } from "@/hooks/useMiscConst";
 import type { ReactEChartsProps } from "@/lib/ReactCharts";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useCurrencyStore } from "@vellumlabs/cexplorer-sdk";
-import type { TableColumns } from "@/types/tableTypes";
-import type {
-  TreasuryDonationStatsEpoch,
-  TreasuryDonationStatsResponse,
-} from "@/types/treasuryTypes";
+import type { TreasuryDonationStatsResponse } from "@/types/treasuryTypes";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { findNearestTreasuryRate } from "@/utils/findNearestTreasuryRate";
 import {
@@ -229,7 +225,7 @@ export const TreasuryDonationEpochsTab = ({ query }: Props) => {
     ],
   };
 
-  const columns: TableColumns<TreasuryDonationStatsEpoch> = [
+  const columns = [
     {
       key: "epoch_no",
       title: t("treasury.table.epoch"),
@@ -310,7 +306,9 @@ export const TreasuryDonationEpochsTab = ({ query }: Props) => {
       </div>
       <GlobalTable
         type='default'
-        scrollable
+        itemsPerPage={20}
+        totalItems={query.data?.epoch.length}
+        pagination
         query={query}
         items={query.data?.epoch}
         columns={columns}
