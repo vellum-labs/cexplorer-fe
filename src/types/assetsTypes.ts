@@ -195,6 +195,14 @@ export interface AssetMint {
   asset: {
     name: string;
     policy: string;
+    registry: {
+      url: string;
+      name: string;
+      ticker: string;
+      decimals: number;
+      has_logo: boolean;
+      description: string;
+    };
   };
   quantity: number;
   tx: AssetTx;
