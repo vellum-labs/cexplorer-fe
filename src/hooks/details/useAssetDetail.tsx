@@ -83,7 +83,7 @@ export const useAssetDetail = ({
       label: t("asset.encodedName"),
       value: detailData?.name ? (
         <div className='flex items-center gap-1'>
-          {detailData?.name?.length <= 8
+          {detailData?.name?.length <= 16
             ? detailData?.name
             : formatString(String(detailData?.name), "long")}
           <Copy copyText={detailData?.name} />
@@ -143,7 +143,8 @@ export const useAssetDetail = ({
       const stat = (
         detailData?.dex?.stat as Record<string, { change?: number }> | undefined
       )?.[key];
-      if (!stat || stat.change === null || stat.change === undefined) return null;
+      if (!stat || stat.change === null || stat.change === undefined)
+        return null;
       return ((stat.change - 1) * 100).toFixed(2);
     };
 
