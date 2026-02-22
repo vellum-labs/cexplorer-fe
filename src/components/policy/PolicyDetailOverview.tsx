@@ -163,10 +163,6 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
       visible: type === "nft",
     },
     {
-      label: t("policy.supply"),
-      value: formatNumber(query.data?.data?.policy?.quantity),
-    },
-    {
       label: t("policy.owners"),
       value: formatNumber(query.data?.data?.collection?.stats?.owners),
       visible: !!isRegistered,
