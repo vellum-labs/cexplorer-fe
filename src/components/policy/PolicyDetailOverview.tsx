@@ -47,6 +47,7 @@ export const PolicyDetailOverview: FC<PolicyDetailOverviewProps> = ({
     type === "nft" ? market[0].nft[0].active : market[0].token[0].active;
 
   const isRegistered = query.data?.data?.collection?.name;
+
   const { data } = useFetchMiscBasic();
   const currentSlot = data?.data.block.slot_no ?? 0;
   const stats = query.data?.data?.policy?.stats;
