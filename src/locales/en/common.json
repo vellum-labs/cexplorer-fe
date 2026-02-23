@@ -481,7 +481,18 @@
     "ada_amount": "ADA Amount",
     "ada_price": "ADA Price",
     "maker": "Maker",
-    "platform": "Platform"
+    "platform": "Platform",
+    "script_name": "Name",
+    "script_id": "Script ID",
+    "script_description": "Description",
+    "product_name": "Name",
+    "product_website": "Website",
+    "product_app": "App",
+    "product_docs": "Documentation",
+    "product_github": "Github",
+    "onchain_type": "Type",
+    "onchain_name": "Name",
+    "onchain_description": "Description"
   },
   "analytics": {
     "account": "$t(shared:labels.account)",
@@ -2926,5 +2937,75 @@
     "delegateToDrep": "Delegate to DRep",
     "keywords": "Keywords",
     "copyLink": "Copy link"
+  },
+  "projects": {
+    "page": {
+      "title": "Cardano Projects",
+      "breadcrumb": "Cardano Projects",
+      "addProject": "Add project",
+      "allCategories": "All categories",
+      "searchPlaceholder": "Search for project...",
+      "searchCategories": "Search categories...",
+      "noCategoryFound": "No category found."
+    },
+    "card": {
+      "lastActivity": "Last activity",
+      "totalCommits": "Total commits",
+      "repositories": "Repositories"
+    },
+    "activity": {
+      "title": "Development activity",
+      "totalCommits": "Total commits for selected period",
+      "activeRepositories": "Active repositories",
+      "organization": "Organization",
+      "organizations": "Organizations",
+      "commits": "Commits"
+    },
+    "detail": {
+      "details": "Details",
+      "description": "Description",
+      "projectName": "Project name",
+      "category": "Category",
+      "status": "Status",
+      "launched": "Launched",
+      "lastActivity": "Last activity",
+      "totalCommits": "Total commits",
+      "repositories": "Repositories",
+      "links": "Links",
+      "noDescription": "No description available.",
+      "tabs": {
+        "developmentActivity": "Development Activity",
+        "scripts": "Scripts",
+        "products": "Products",
+        "onChainAssociations": "On-Chain Associations"
+      },
+      "scripts": {
+        "name": "Name",
+        "scriptId": "Script ID",
+        "description": "Description",
+        "noScripts": "No scripts found."
+      },
+      "products": {
+        "noProducts": "No products found.",
+        "website": "Website",
+        "app": "App",
+        "docs": "Docs",
+        "github": "GitHub"
+      },
+      "onChain": {
+        "assets": "Assets",
+        "policies": "Policies",
+        "drep": "DRep",
+        "pools": "Stake Pools",
+        "noAssets": "No assets found.",
+        "noPolicies": "No policies found.",
+        "noDrep": "No DRep associated.",
+        "noPools": "No stake pools associated.",
+        "assetName": "Asset name",
+        "assetId": "Asset ID",
+        "policyName": "Policy name",
+        "policyId": "Policy ID"
+      }
+    }
   }
 }

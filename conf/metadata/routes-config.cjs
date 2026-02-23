@@ -905,6 +905,24 @@ const routes = [
     api: false,
   },
   {
+    path: "/projects",
+    title: "Projects | Cexplorer.io",
+    description:
+      "Explore Cardano ecosystem projects on Cexplorer.io. Browse projects built on the Cardano blockchain, view project details, and discover new initiatives in the ecosystem.",
+    keywords:
+      "Cardano projects, blockchain projects, Cardano ecosystem, project list, Cexplorer, Cardano development, ecosystem projects",
+    api: false,
+  },
+  {
+    path: "/projects/:id",
+    title: "Project %id% | Cexplorer.io",
+    description:
+      "Detailed information about project %id% on Cardano. View project overview, team information, and related blockchain activity.",
+    keywords:
+      "Cardano project, %id%, project details, blockchain project, Cexplorer, project overview",
+    api: false,
+  },
+  {
     path: "/withdrawals",
     title: "Staking Withdrawals | Cexplorer.io",
     description:
