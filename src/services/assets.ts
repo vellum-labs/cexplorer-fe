@@ -366,15 +366,30 @@ export const fetchAdaHandleList = async (
   name?: string,
 ) => {
   const url = `/asset/adahandle`;
+  const hasSearch = !!name;
   const options = {
     params: {
       limit,
       offset,
       name,
     },
+    ...(hasSearch && { retryCount: 0 }),
   };
-
-  return handleFetch<AdaHandleListResponse>(url, offset, options);
+  try {
+    return await handleFetch<AdaHandleListResponse>(url, offset, options, hasSearch, hasSearch);
+  } catch {
+    if (hasSearch) {
+      return {
+        code: 404,
+        data: { data: [], count: 0 },
+        tokens: 0,
+        ex: 0,
+        debug: false,
+        prevOffset: offset,
+      } as AdaHandleListResponse & { prevOffset: number | undefined };
+    }
+    throw new Error("The network response failed.");
+  }
 };
 
 export const useFetchAdaHandleList = (
@@ -389,9 +404,25 @@ export const useFetchAdaHandleList = (
     initialPageParam: offset,
     getNextPageParam: lastPage => {
       const nextOffset = (lastPage.prevOffset as number) + limit;
-      if (nextOffset >= lastPage.data.count) return undefined;
+      const count = lastPage.data?.count ?? 0;
+      if (nextOffset >= count) return undefined;
       return nextOffset;
     },
     refetchOnWindowFocus: false,
     refetchInterval: 20000,
+  });
+
+export const fetchAdaHandleValidate = async (name: string) => {
+  const url = `/asset/adahandle`;
+  const options = { params: { limit: 1, offset: 0, name } };
+  return handleFetch<AdaHandleListResponse>(url, 0, options, true, true);
+};
+
+export const useFetchAdaHandleValidate = (name?: string) =>
+  useQuery({
+    queryKey: ["ada-handle-validate", name],
+    queryFn: () => fetchAdaHandleValidate(name!),
+    enabled: !!name,
+    retry: false,
+    refetchOnWindowFocus: false,
   });
