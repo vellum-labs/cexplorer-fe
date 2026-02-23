@@ -8,21 +8,27 @@ import {
   articleIds,
   assetListPagesForCheck,
   assetsForCheck,
-  blockDetailHashes,
   blockListPagesForCheck,
   contractInteractionsPages,
   dexSwapHashes,
   drepDeregistrationsPages,
+  drepHashes,
   drepListPagesForCheck,
   drepRegistrationPages,
   drepUpdatesPages,
   epochDetailsForCheck,
   govActionIds,
   govActionListPages,
+  govCcPagesForCheck,
+  govVotePagesForCheck,
   groupsNames,
+  handleDnsTabs,
+  poolDebugTabs,
+  taxToolTabs,
   inlineDatums,
   liveDelegationsPages,
   metadataPages,
+  multiPoolDelegationsPages,
   newPoolPages,
   policyIds,
   poolListPages,
@@ -44,6 +50,7 @@ import {
   tokenDashboardTabs,
   treasuryDonationTabs,
   txHashes,
+  wikiPagesForCheck,
   withdrawalsPages,
   // assetListColumnOrdersToTest,
   // drepListColumnOrdersToTest,
@@ -52,6 +59,7 @@ import {
 import {
   buildUrl,
   checkPage,
+  getFirstDetailHref,
   // checkTableColumn,
   // checkTableHeadersNoOverlap,
   // checkTableCellChildrenNotOverflow,
@@ -109,7 +117,7 @@ test.describe.parallel("Analytics/account", () => {
 test.describe.parallel("Analytics/network", () => {
   for (const tab of analyticsNetworkTabs) {
     test(`Analytics network - ${tab} tab`, async ({ browser }) => {
-      const url = buildUrl("/analytics/account", 0, { tab }, false);
+      const url = buildUrl("/analytics/network", 0, { tab }, false);
       await checkPage(browser, url);
     });
   }
@@ -338,13 +346,9 @@ test.describe.parallel("Asset detail/owners tab", () => {
   }
 });
 
-test.describe.parallel("Block detail", () => {
-  for (const hash of blockDetailHashes) {
-    test(`Block - ${hash} hash`, async ({ browser }) => {
-      const url = buildUrl("/block/" + hash, 0, undefined, false);
-      await checkPage(browser, url);
-    });
-  }
+test(`Block detail - first from list`, async ({ browser }) => {
+  const href = await getFirstDetailHref(browser, "/block/");
+  await checkPage(browser, href);
 });
 
 test.describe.parallel("Block list", () => {
@@ -358,6 +362,11 @@ test.describe.parallel("Block list", () => {
 
 test(`Bots`, async ({ browser }) => {
   const url = buildUrl("/bots/", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
+test(`Bounty`, async ({ browser }) => {
+  const url = buildUrl("/bounty/", 0, undefined, false);
   await checkPage(browser, url);
 });
 
@@ -394,6 +403,11 @@ test.describe.parallel("Datum", () => {
   }
 });
 
+test(`Dev`, async ({ browser }) => {
+  const url = buildUrl("/dev/", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
 test(`Devlog`, async ({ browser }) => {
   const url = buildUrl("/devlog/", 0, undefined, false);
   await checkPage(browser, url);
@@ -414,7 +428,7 @@ test(`Donate`, async ({ browser }) => {
 });
 
 test.describe.parallel("Drep detail", () => {
-  for (const hash of dexSwapHashes) {
+  for (const hash of drepHashes) {
     test(`Drep detail - ${hash} hash`, async ({ browser }) => {
       const url = buildUrl("/drep/" + hash, 0, undefined, false);
       await checkPage(browser, url);
@@ -527,6 +541,11 @@ test(`Education`, async ({ browser }) => {
   await checkPage(browser, url);
 });
 
+test(`Envs`, async ({ browser }) => {
+  const url = buildUrl("/envs/", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
 test(`Epoch calendar`, async ({ browser }) => {
   const url = buildUrl("/epoch/calendar/", 0, undefined, false);
   await checkPage(browser, url);
@@ -571,6 +590,11 @@ test(`Epoch List - Just render (for while)`, async ({ browser }) => {
 
 test(`Faq`, async ({ browser }) => {
   const url = buildUrl("/faq/", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
+test(`Gov`, async ({ browser }) => {
+  const url = buildUrl("/gov/", 0, undefined, false);
   await checkPage(browser, url);
 });
 
@@ -847,6 +871,15 @@ test.describe.parallel("Pool updates", () => {
   }
 });
 
+test.describe.parallel("Pool debug", () => {
+  for (const tab of poolDebugTabs) {
+    test(`Pool debug - ${tab} tab`, async ({ browser }) => {
+      const url = buildUrl("/pool-debug/", 0, { tab }, false);
+      await checkPage(browser, url);
+    });
+  }
+});
+
 test(`Pots`, async ({ browser }) => {
   const url = buildUrl("/pot/", 0, undefined, false);
   await checkPage(browser, url);
@@ -995,6 +1028,11 @@ test.describe.parallel("Token dashboard", () => {
   }
 });
 
+test(`Treasury`, async ({ browser }) => {
+  const url = buildUrl("/treasury/", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
 test.describe.parallel("Treasury donation", () => {
   for (const tab of treasuryDonationTabs) {
     test(`Treasury donation - ${tab}`, async ({ browser }) => {
@@ -1066,4 +1104,153 @@ test.describe.parallel("Tx list", () => {
       await checkPage(browser, url);
     });
   }
+});
+
+test(`Address inspector`, async ({ browser }) => {
+  const url = buildUrl("/address/inspector", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
+test(`Analytics genesis`, async ({ browser }) => {
+  const url = buildUrl("/analytics/genesis", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
+test(`Asset recent tokens`, async ({ browser }) => {
+  const url = buildUrl("/asset/recent-tokens", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
+test(`Asset recent NFTs`, async ({ browser }) => {
+  const url = buildUrl("/asset/recent-nfts", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
+test(`Gov constitution`, async ({ browser }) => {
+  const url = buildUrl("/gov/constitution/", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
+test(`Gov power thresholds`, async ({ browser }) => {
+  const url = buildUrl("/gov/power-thresholds/", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
+test(`Gov drep vote`, async ({ browser }) => {
+  const url = buildUrl("/gov/drep-vote", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
+test.describe.parallel("Gov vote list", () => {
+  for (const page of govVotePagesForCheck) {
+    test(`Gov vote - ${page} page`, async ({ browser }) => {
+      const url = buildUrl("/gov/vote/", page, undefined);
+      await checkPage(browser, url);
+    });
+  }
+});
+
+test(`Gov vote detail - first from list`, async ({ browser }) => {
+  const href = await getFirstDetailHref(browser, "/gov/vote/");
+  await checkPage(browser, href);
+});
+
+test.describe.parallel("Gov CC list", () => {
+  for (const page of govCcPagesForCheck) {
+    test(`Gov CC - ${page} page`, async ({ browser }) => {
+      const url = buildUrl("/gov/cc/", page, undefined);
+      await checkPage(browser, url);
+    });
+  }
+});
+
+test(`Gov CC detail - first from list`, async ({ browser }) => {
+  const href = await getFirstDetailHref(browser, "/gov/cc/");
+  await checkPage(browser, href);
+});
+
+test.describe.parallel("Handle DNS", () => {
+  for (const tab of handleDnsTabs) {
+    test(`Handle DNS - ${tab} tab`, async ({ browser }) => {
+      const url = buildUrl("/handle-dns/", 0, { tab }, false);
+      await checkPage(browser, url);
+    });
+  }
+});
+
+test(`Multi pool delegations`, async ({ browser }) => {
+  const url = buildUrl("/multi-pool-delegations/", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
+test.describe.parallel("Multi pool delegations pages", () => {
+  for (const page of multiPoolDelegationsPages) {
+    test(`Multi pool delegations - ${page} page`, async ({ browser }) => {
+      const url = buildUrl("/multi-pool-delegations/", page, undefined);
+      await checkPage(browser, url);
+    });
+  }
+});
+
+test(`Pay`, async ({ browser }) => {
+  const url = buildUrl("/pay/", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
+test(`Profile`, async ({ browser }) => {
+  const url = buildUrl("/profile/", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
+test(`Promotion`, async ({ browser }) => {
+  const url = buildUrl("/promotion/", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
+test(`Rewards calculator`, async ({ browser }) => {
+  const url = buildUrl("/rewards-calculator/", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
+test(`Search`, async ({ browser }) => {
+  const url = buildUrl("/search/", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
+test(`Swap`, async ({ browser }) => {
+  const url = buildUrl("/swap/", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
+test.describe.parallel("Tax tool", () => {
+  for (const tab of taxToolTabs) {
+    test(`Tax tool - ${tab} tab`, async ({ browser }) => {
+      const url = buildUrl("/tax-tool/", 0, { tab }, false);
+      await checkPage(browser, url);
+    });
+  }
+});
+
+test(`Treasury projection`, async ({ browser }) => {
+  const url = buildUrl("/treasury/projection", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
+test(`UPLC`, async ({ browser }) => {
+  const url = buildUrl("/uplc/", 0, undefined, false);
+  await checkPage(browser, url);
+});
+
+test.describe.parallel("Wiki list", () => {
+  for (const page of wikiPagesForCheck) {
+    test(`Wiki - ${page} page`, async ({ browser }) => {
+      const url = buildUrl("/wiki/", page, undefined);
+      await checkPage(browser, url);
+    });
+  }
+});
+
+test(`Wiki detail - first from list`, async ({ browser }) => {
+  const href = await getFirstDetailHref(browser, "/wiki/");
+  await checkPage(browser, href);
 });

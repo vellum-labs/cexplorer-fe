@@ -18,6 +18,25 @@ export function buildUrl(
   return params.toString() ? `${path}?${params.toString()}` : `${path}`;
 }
 
+export async function getFirstDetailHref(
+  browser: any,
+  listUrl: string,
+  linkSelector: string = "tbody a[href]",
+): Promise<string> {
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  await page.goto(listUrl);
+  await waitForRender(page);
+  const href = await page.locator(linkSelector).first().getAttribute("href");
+  await page.close();
+  await context.close();
+  if (!href)
+    throw new Error(
+      `No link found at "${listUrl}" with selector "${linkSelector}"`,
+    );
+  return href;
+}
+
 export async function waitForRender(page: any) {
   const preloader = page.locator("#preloader");
   if (await preloader.count()) {

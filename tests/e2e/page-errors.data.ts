@@ -232,7 +232,7 @@ export const drepRegistrationPages = getArrayWithLength(30);
 
 export const drepUpdatesPages = getArrayWithLength(12);
 
-export const govActionListPages = getArrayWithLength(1);
+export const govActionListPages = getArrayWithLength(10);
 
 export const govActionIds = [
   "dfdac5921ab657241fce58583d61bef59a369e01d2ba78191d6df6632a07fdfd#0",
@@ -332,3 +332,17 @@ export const txHashes = [
   "58ebfba6a70236c6f9069e41307044e7b6774ad8467bcb15c9e1fd0bcd0a36b3",
   "3efd4f2d728f3a5fe3124045e4b67beaa4785fff2f617b4494b53eca1ca193e5",
 ];
+
+export const handleDnsTabs = ["recently-minted", "validator"];
+
+export const poolDebugTabs = ["debugger", "cheatsheet"];
+
+export const taxToolTabs = ["rewards", "withdrawals"];
+
+export const wikiPagesForCheck = getArrayWithLength(5);
+
+export const govVotePagesForCheck = getArrayWithLength(5);
+
+export const govCcPagesForCheck = getArrayWithLength(5);
+
+export const multiPoolDelegationsPages = getArrayWithLength(10);
