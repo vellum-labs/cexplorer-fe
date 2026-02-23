@@ -842,6 +842,15 @@ const routes = [
     api: false,
   },
   {
+    path: "/eco-impact",
+    title: "Eco-impact Calculator | Cexplorer.io",
+    description:
+      "Calculate the environmental impact of your Cardano staking. Compare Cardano's energy efficiency vs Bitcoin, see CO₂ savings, energy saved, and trees equivalent based on your staked ADA.",
+    keywords:
+      "cardano, eco impact, energy efficiency, CO2 savings, green blockchain, proof of stake, carbon footprint, sustainability, cexplorer",
+    api: false,
+  },
+  {
     path: "/token/dashboard",
     title: "Token Dashboard | Cexplorer.io",
     description:
