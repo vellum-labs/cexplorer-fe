@@ -80,11 +80,12 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
     {
       key: "type",
       render: item => {
-        if (item?.quantity > 1) {
-          return <Badge color='blue'>{t("labels.token")}</Badge>;
+        const qty = item?.quantity ?? 0;
+        if (qty === 1 || qty === -1) {
+          return <Badge color='yellow'>{t("labels.nft")}</Badge>;
         }
 
-        return <Badge color='yellow'>{t("labels.nft")}</Badge>;
+        return <Badge color='blue'>{t("labels.token")}</Badge>;
       },
       title: t("asset.type"),
       visible: columnsVisibility.type,
