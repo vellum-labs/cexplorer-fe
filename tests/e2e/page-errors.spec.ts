@@ -52,18 +52,12 @@ import {
   txHashes,
   wikiPagesForCheck,
   withdrawalsPages,
-  // assetListColumnOrdersToTest,
-  // drepListColumnOrdersToTest,
 } from "./page-errors.data";
 
 import {
   buildUrl,
   checkPage,
   getFirstDetailHref,
-  // checkTableColumn,
-  // checkTableHeadersNoOverlap,
-  // checkTableCellChildrenNotOverflow,
-  // waitForRender,
 } from "./page-errors.helpers";
 
 test(`About us`, async ({ browser }) => {
@@ -173,107 +167,11 @@ test.describe.parallel("Address detail/utxos tab", () => {
   }
 });
 
-// test.describe.parallel("Asset list", () => {
-//   for (const assetPage of assetListPagesForCheck) {
-//     for (const [index, columnOrder] of assetListColumnOrdersToTest.entries()) {
-//       test(`Asset – ${assetPage} page | columns order #${index + 1}`, async ({
-//         browser,
-//       }) => {
-//         const url = buildUrl("/asset/", assetPage, undefined);
-
-//         const result = await checkPage(browser, url, false);
-//         const page = result?.page;
-//         const context = result?.context;
-
-//         await page.evaluate(
-//           ([order]) => {
-//             localStorage.setItem(
-//               "asset_list_table_store",
-//               JSON.stringify({
-//                 state: {
-//                   columnsOrder: order,
-//                 },
-//                 version: 0,
-//               }),
-//             );
-//           },
-//           [columnOrder],
-//         );
-
-//         await page.reload();
-//         await waitForRender(page);
-
-//         await checkTableHeadersNoOverlap(page);
-
-//         const colCount = await page.$$eval(
-//           "tbody tr:first-child td",
-//           tds => tds.length,
-//         );
-//         for (let c = 0; c < colCount; c++) {
-//           await checkTableCellChildrenNotOverflow(page, 0, c);
-//         }
-
-//         await checkTableColumn(page, "Supply", "right", 0.16);
-//         await checkTableColumn(page, "Asset Minted", "left", 0.16);
-//         await checkTableColumn(page, "Policy ID", "left", 0.16);
-//         await checkTableColumn(page, "Asset", "left", 0.16);
-//         await checkTableColumn(page, "Type", "left", 0.16);
-//         await checkTableColumn(page, "#", "left", 0.16);
-
-//         await page.close();
-//         await context.close();
-//       });
-//     }
-//   }
-// });
-
 test.describe.parallel("Asset list", () => {
   for (const assetPage of assetListPagesForCheck) {
-    // for (const [index, columnOrder] of assetListColumnOrdersToTest.entries()) {
     test(`Asset – ${assetPage} page`, async ({ browser }) => {
       const url = buildUrl("/asset/", assetPage, undefined);
-
-      const result = await checkPage(browser, url, false);
-      const page = result?.page;
-      const context = result?.context;
-
-      // await page.evaluate(
-      //   ([order]) => {
-      //     localStorage.setItem(
-      //       "asset_list_table_store",
-      //       JSON.stringify({
-      //         state: {
-      //           columnsOrder: order,
-      //         },
-      //         version: 0,
-      //       }),
-      //     );
-      //   },
-      //   [columnOrder],
-      // );
-
-      // await page.reload();
-      // await waitForRender(page);
-
-      // await checkTableHeadersNoOverlap(page);
-
-      // const colCount = await page.$$eval(
-      //   "tbody tr:first-child td",
-      //   tds => tds.length,
-      // );
-      // for (let c = 0; c < colCount; c++) {
-      //   await checkTableCellChildrenNotOverflow(page, 0, c);
-      // }
-
-      // await checkTableColumn(page, "Supply", "right", 0.16);
-      // await checkTableColumn(page, "Asset Minted", "left", 0.16);
-      // await checkTableColumn(page, "Policy ID", "left", 0.16);
-      // await checkTableColumn(page, "Asset", "left", 0.16);
-      // await checkTableColumn(page, "Type", "left", 0.16);
-      // await checkTableColumn(page, "#", "left", 0.16);
-
-      await page.close();
-      await context.close();
+      await checkPage(browser, url);
     });
   }
 });
@@ -436,75 +334,11 @@ test.describe.parallel("Drep detail", () => {
   }
 });
 
-// test.describe.parallel("Drep list", () => {
-//   for (const drepPage of drepListPagesForCheck) {
-//     for (const [index, columnOrder] of drepListColumnOrdersToTest.entries()) {
-//       test(`Drep - ${drepPage} page | columns order #${index + 1}`, async ({
-//         browser,
-//       }) => {
-//         const url = buildUrl("/drep/", drepPage, undefined);
-//         const result = await checkPage(browser, url, false);
-
-//         const page = result?.page;
-//         const context = result?.context;
-
-//         await page.evaluate(
-//           ([order]) => {
-//             localStorage.setItem(
-//               "drep_list_table_store",
-//               JSON.stringify({
-//                 state: {
-//                   columnsOrder: order,
-//                 },
-//                 version: 0,
-//               }),
-//             );
-//           },
-//           [columnOrder],
-//         );
-
-//         await page.reload();
-//         await waitForRender(page);
-
-//         await checkTableHeadersNoOverlap(page);
-
-//         const colCount = await page.$$eval(
-//           "tbody tr:first-child td",
-//           tds => tds.length,
-//         );
-//         for (let c = 0; c < colCount; c++) {
-//           await checkTableCellChildrenNotOverflow(page, 0, c);
-//         }
-
-//         await checkTableColumn(page, "Status", "right", 0.08);
-//         await checkTableColumn(page, "DRep name", "left", 0.08);
-//         await checkTableColumn(page, "Voting power", "right", 0.08);
-//         await checkTableColumn(page, "Voting activity", "right", 0.08);
-//         await checkTableColumn(page, "Owner stake", "right", 0.08);
-//         await checkTableColumn(page, "Average stake", "right", 0.08);
-//         await checkTableColumn(page, "Registered", "left", 0.08);
-//         await checkTableColumn(page, "Delegators", "right", 0.08);
-//         await checkTableColumn(page, "Top delegator", "right", 0.08);
-//         await checkTableColumn(page, "DRep metadata", "right", 0.08);
-
-//         await page.close();
-//         await context.close();
-//       });
-//     }
-//   }
-// });
-
 test.describe.parallel("Drep list", () => {
   for (const drepPage of drepListPagesForCheck) {
     test(`Drep - ${drepPage} page`, async ({ browser }) => {
       const url = buildUrl("/drep/", drepPage, undefined);
-      const result = await checkPage(browser, url, false);
-
-      const page = result?.page;
-      const context = result?.context;
-
-      await page.close();
-      await context.close();
+      await checkPage(browser, url);
     });
   }
 });
