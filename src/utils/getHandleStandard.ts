@@ -1,3 +1,8 @@
+export const nameToHex = (name: string): string =>
+  Array.from(new TextEncoder().encode(name))
+    .map(b => b.toString(16).padStart(2, "0"))
+    .join("");
+
 export const getHandleStandard = (hex: string): string => {
   if (!hex || hex.length < 8) {
     return "CIP-25";

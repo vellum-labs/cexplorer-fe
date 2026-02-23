@@ -11,6 +11,7 @@ import type {
 
 import { handleFetch } from "@/lib/handleFetch";
 import { useWatchlistStore } from "@/stores/watchlistStore";
+import { nameToHex } from "@/utils/getHandleStandard";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
 interface AssetListProps {
@@ -414,8 +415,8 @@ export const useFetchAdaHandleList = (
 
 export const fetchAdaHandleValidate = async (name: string) => {
   const url = `/asset/adahandle`;
-  const options = { params: { limit: 1, offset: 0, name } };
-  return handleFetch<AdaHandleListResponse>(url, 0, options, true, true);
+  const options = { params: { hex: nameToHex(name) }, retryCount: 0 };
+  return handleFetch<AdaHandleListResponse>(url, undefined, options, true, true);
 };
 
 export const useFetchAdaHandleValidate = (name?: string) =>

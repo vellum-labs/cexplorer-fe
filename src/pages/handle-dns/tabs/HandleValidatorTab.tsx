@@ -37,7 +37,7 @@ export const HandleValidatorTab: FC<HandleValidatorTabProps> = ({
   const handleQuery = useFetchAdaHandleValidate(debouncedSearch || undefined);
   const handleData = handleQuery.isError
     ? undefined
-    : handleQuery.data?.data?.data?.[0];
+    : handleQuery.data?.data?.data?.[0] ?? undefined;
 
   const assetName = handleData
     ? `${adaHandlePolicy}${handleData.hex}`
@@ -47,9 +47,7 @@ export const HandleValidatorTab: FC<HandleValidatorTabProps> = ({
 
   const isSearching = handleQuery.isLoading || handleQuery.isFetching;
   const hasSearched = !!debouncedSearch;
-  const isError = handleQuery.isError;
-  const handleExists =
-    !!handleData && !isError && handleData.name === debouncedSearch;
+  const handleExists = !!handleData && handleData.name === debouncedSearch;
 
   const rows = handleExists
     ? [
