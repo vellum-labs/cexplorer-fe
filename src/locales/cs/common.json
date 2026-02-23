@@ -1169,7 +1169,9 @@
       "actionType": "$t(shared:actionType)",
       "title": "$t(shared:labels.title)",
       "abstracts": "Abstrakt",
-      "rationale": "Zdůvodnění"
+      "rationale": "Zdůvodnění",
+      "references": "Reference",
+      "referenceWithoutLabel": "Reference bez popisku:"
     },
     "statusHistory": {
       "timestamp": "$t(shared:labels.timestamp)",

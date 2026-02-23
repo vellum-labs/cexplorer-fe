@@ -21,6 +21,7 @@ export const GovernanceDetailMetadataTab: FC<
 > = ({ query }) => {
   const { t } = useAppTranslation();
   const anchor = query?.data?.data?.anchor;
+  const references = anchor?.reference;
 
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
@@ -92,6 +93,70 @@ export const GovernanceDetailMetadataTab: FC<
       titleStart: true,
       darker: true,
     },
+    ...(references && references.length > 0
+      ? [
+          {
+            title: t("governance.metadata.references"),
+            value: (
+              <div className='overflow-wrap-anywhere max-w-full break-words p-1 font-regular text-grayTextPrimary'>
+                <ol className='list-decimal list-inside'>
+                  {references.map((ref, i) => {
+                    const rawUri = ref.uri || "";
+                    const normalizedUri =
+                      rawUri && !/^https?:\/\//i.test(rawUri)
+                        ? `https://${rawUri}`
+                        : rawUri;
+                    let isValidUrl = false;
+                    try {
+                      if (normalizedUri) new URL(normalizedUri);
+                      isValidUrl = !!normalizedUri;
+                    } catch {
+                      isValidUrl = false;
+                    }
+                    const hasLabel = !!ref.label;
+                    const displayUri = rawUri || normalizedUri;
+
+                    return (
+                      <li key={`ref-${i}`} className='py-0.5'>
+                        {hasLabel ? (
+                          isValidUrl ? (
+                            <button
+                              type='button'
+                              className='cursor-pointer text-left text-primary'
+                              onClick={() => setClickedUrl(normalizedUri)}
+                            >
+                              {ref.label}
+                            </button>
+                          ) : (
+                            <span>{ref.label}</span>
+                          )
+                        ) : (
+                          <>
+                            <span>{t("governance.metadata.referenceWithoutLabel")} </span>
+                            {isValidUrl ? (
+                              <button
+                                type='button'
+                                className='cursor-pointer text-left text-primary'
+                                onClick={() => setClickedUrl(normalizedUri)}
+                              >
+                                {displayUri}
+                              </button>
+                            ) : (
+                              <span>{displayUri}</span>
+                            )}
+                          </>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ol>
+              </div>
+            ),
+            titleStart: true,
+            darker: false,
+          },
+        ]
+      : []),
   ];
 
   return (
