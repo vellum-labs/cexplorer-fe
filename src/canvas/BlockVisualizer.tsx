@@ -45,11 +45,9 @@ interface FallingBlockProps {
   txCount: number;
   size: number;
   maxBlockSize: number;
-  hash: string;
   blockSize: number;
   maxTxRows: number;
   isDark: boolean;
-  onNavigate: (hash: string) => void;
   onRef: (blockNo: number, node: any) => void;
 }
 
@@ -81,13 +79,12 @@ function getTargetPos(
   cols: number,
   cellW: number,
   cellH: number,
-  canvasH: number,
 ) {
   const col = index % cols;
   const row = Math.floor(index / cols);
   return {
     x: cellW * col + GAP / 2,
-    y: canvasH - (row + 1) * cellH + GAP / 2,
+    y: row * cellH + GAP / 2,
   };
 }
 
@@ -141,33 +138,19 @@ const FallingBlock: FC<FallingBlockProps> = memo(({
   txCount,
   size,
   maxBlockSize,
-  hash,
   blockSize,
   maxTxRows,
   isDark,
-  onNavigate,
   onRef,
 }) => {
   const containerRef = useRef<any>(null);
   const maskRef = useRef<any>(null);
-  const cacheTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => {
     if (containerRef.current && maskRef.current) {
       containerRef.current.mask = maskRef.current;
     }
   }, [blockSize]);
-
-  useEffect(() => {
-    if (containerRef.current) containerRef.current.cacheAsBitmap = false;
-    clearTimeout(cacheTimerRef.current);
-    cacheTimerRef.current = setTimeout(() => {
-      if (containerRef.current && !containerRef.current.destroyed) {
-        containerRef.current.cacheAsBitmap = true;
-      }
-    }, 100);
-    return () => clearTimeout(cacheTimerRef.current);
-  }, [blockSize, isDark, maxTxRows]);
 
   const handleContainerRef = useCallback(
     (node: any) => {
@@ -219,8 +202,6 @@ const FallingBlock: FC<FallingBlockProps> = memo(({
   const sizeKb = (size / 1024).toFixed(1);
   const fillPct = maxBlockSize > 0 ? Math.min(1, size / maxBlockSize) : 0;
 
-  const onClick = useCallback(() => onNavigate(hash), [onNavigate, hash]);
-
   const padding = 10;
   const lineH = fontSize + 4;
   const subLineH = subFontSize + 4;
@@ -243,7 +224,6 @@ const FallingBlock: FC<FallingBlockProps> = memo(({
       interactive
       cursor='pointer'
       hitArea={new Rectangle(0, 0, blockSize, blockSize)}
-      pointertap={onClick}
     >
       <Graphics
         ref={maskRef}
@@ -371,7 +351,7 @@ export const BlockVisualizer: FC<BlockVisualizerProps> = memo(
     }, []);
 
     useEffect(() => {
-      const sorted = [...(items ?? [])].sort((a, b) => a.block_no - b.block_no);
+      const sorted = [...(items ?? [])].sort((a, b) => b.block_no - a.block_no);
       const count = sorted.length;
       if (count === 0) return;
 
@@ -382,7 +362,7 @@ export const BlockVisualizer: FC<BlockVisualizerProps> = memo(
       const { cols, cellW, cellH } = calcGridLayout(count, newSize, canvasWidth);
 
       const entries: BlockEntry[] = sorted.map((item, i) => {
-        const { x, y } = getTargetPos(i, cols, cellW, cellH, canvasHeight);
+        const { x, y } = getTargetPos(i, cols, cellW, cellH);
         const key = item.block_no;
         if (!animStates.current.has(key)) {
           animStates.current.set(key, {
@@ -440,41 +420,75 @@ export const BlockVisualizer: FC<BlockVisualizerProps> = memo(
           <div
             ref={containerRef}
             className='w-full rounded-m'
-            style={{ height: canvasHeight }}
+            style={{ height: canvasHeight, position: 'relative' }}
           >
             {isLoading ? (
               <Loading />
             ) : (
-              <Stage
-                width={canvasWidth}
-                height={canvasHeight}
-                options={{
-                  backgroundAlpha: 0,
-                  antialias: true,
-                  resolution: window.devicePixelRatio,
-                  autoDensity: true,
-                }}
-              >
-                <Ticker
-                  animStates={animStates}
-                  containerRefs={pixiContainerRefs}
-                />
-                {blockEntries.map(({ item }) => (
-                  <FallingBlock
-                    key={item.block_no}
-                    blockNo={item.block_no}
-                    txCount={item.tx_count}
-                    size={item.size}
-                    maxBlockSize={item.epoch_param?.max_block_size ?? 0}
-                    hash={item.hash}
-                    blockSize={blockSize}
-                    maxTxRows={maxTxRows}
-                    isDark={isDark}
-                    onNavigate={handleNavigate}
-                    onRef={onBlockRef}
+              <>
+                <Stage
+                  width={canvasWidth}
+                  height={canvasHeight}
+                  options={{
+                    backgroundAlpha: 0,
+                    antialias: true,
+                    resolution: window.devicePixelRatio,
+                    autoDensity: true,
+                  }}
+                >
+                  <Ticker
+                    animStates={animStates}
+                    containerRefs={pixiContainerRefs}
                   />
-                ))}
-              </Stage>
+                  {blockEntries.map(({ item }) => (
+                    <FallingBlock
+                      key={item.block_no}
+                      blockNo={item.block_no}
+                      txCount={item.tx_count}
+                      size={item.size}
+                      maxBlockSize={item.epoch_param?.max_block_size ?? 0}
+                      blockSize={blockSize}
+                      maxTxRows={maxTxRows}
+                      isDark={isDark}
+                      onRef={onBlockRef}
+                    />
+                  ))}
+                </Stage>
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: canvasWidth,
+                    height: canvasHeight,
+                    pointerEvents: 'none',
+                  }}
+                >
+                  {blockEntries.map(({ item, targetX, targetY }) => (
+                    <a
+                      key={item.block_no}
+                      href={`/block/${item.hash}`}
+                      style={{
+                        position: 'absolute',
+                        left: targetX,
+                        top: targetY,
+                        width: blockSize,
+                        height: blockSize,
+                        borderRadius: 12,
+                        pointerEvents: 'auto',
+                        display: 'block',
+                        cursor: 'pointer',
+                      }}
+                      onClick={e => {
+                        if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
+                          e.preventDefault();
+                          handleNavigate(item.hash);
+                        }
+                      }}
+                    />
+                  ))}
+                </div>
+              </>
             )}
           </div>
         )}
