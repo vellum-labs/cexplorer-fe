@@ -63,8 +63,8 @@ export const VoteCell: FC<VoteCellProps> = ({
     setShowFullMetadata(false);
 
     if (anchorInfo.url) {
-      await fetchContent(anchorInfo.url);
-      await fetchFullMetadata(anchorInfo.url);
+      await fetchContent(anchorInfo.url, anchorInfo.data_hash);
+      await fetchFullMetadata(anchorInfo.url, anchorInfo.data_hash);
     }
   };
 
