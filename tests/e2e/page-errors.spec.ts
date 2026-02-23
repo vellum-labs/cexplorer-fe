@@ -1085,6 +1085,10 @@ test.describe.parallel("Wiki list", () => {
 });
 
 test(`Wiki detail - first from list`, async ({ browser }) => {
-  const href = await getFirstDetailHref(browser, "/wiki/");
+  const href = await getFirstDetailHref(
+    browser,
+    "/wiki/",
+    'a[href^="/wiki/"]:not([href="/wiki/"])',
+  );
   await checkPage(browser, href);
 });

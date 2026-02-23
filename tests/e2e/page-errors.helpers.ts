@@ -27,7 +27,11 @@ export async function getFirstDetailHref(
   const page = await context.newPage();
   await page.goto(listUrl);
   await waitForRender(page);
-  const href = await page.locator(linkSelector).first().getAttribute("href");
+  const href = await page
+    .locator(linkSelector)
+    .first()
+    .getAttribute("href", { timeout: 10000 })
+    .catch(() => null);
   await page.close();
   await context.close();
   if (!href)
@@ -62,11 +66,16 @@ export async function checkPage(
     await expect(page.locator("text=Something went wrong")).toHaveCount(0);
     await expect(page.locator("body")).toBeVisible();
 
-    const forbiddenPatterns = ["NaN", "undefined", "Infinity"];
     const bodyText = await page.locator("body").innerText();
+    const forbiddenPatterns: [string, RegExp][] = [
+      ["NaN", /\bNaN\b/],
+      ["undefined", /\bundefined\b/],
+      // Exclude proper nouns like "Infinity Rising 1" (pool names)
+      ["Infinity", /\bInfinity\b(?!\s+[A-Z])/],
+    ];
 
-    for (const pattern of forbiddenPatterns) {
-      expect(bodyText.includes(pattern)).toBeFalsy();
+    for (const [name, pattern] of forbiddenPatterns) {
+      expect(pattern.test(bodyText), `Page body contains "${name}"`).toBeFalsy();
     }
   });
 
