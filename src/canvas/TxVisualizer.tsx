@@ -48,7 +48,6 @@ interface FallingTxProps {
   scriptSize: number;
   blockSize: number;
   isDark: boolean;
-  onNavigate: (hash: string) => void;
   onRef: (hash: string, node: any) => void;
 }
 
@@ -88,13 +87,12 @@ function getTargetPos(
   cols: number,
   cellW: number,
   cellH: number,
-  canvasH: number,
 ) {
   const col = index % cols;
   const row = Math.floor(index / cols);
   return {
     x: cellW * col + GAP / 2,
-    y: canvasH - (row + 1) * cellH + GAP / 2,
+    y: row * cellH + GAP / 2,
   };
 }
 
@@ -151,29 +149,16 @@ const FallingTx: FC<FallingTxProps> = memo(
     scriptSize,
     blockSize,
     isDark,
-    onNavigate,
     onRef,
   }) => {
     const containerRef = useRef<any>(null);
     const maskRef = useRef<any>(null);
-    const cacheTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
     useEffect(() => {
       if (containerRef.current && maskRef.current) {
         containerRef.current.mask = maskRef.current;
       }
     }, [blockSize]);
-
-    useEffect(() => {
-      if (containerRef.current) containerRef.current.cacheAsBitmap = false;
-      clearTimeout(cacheTimerRef.current);
-      cacheTimerRef.current = setTimeout(() => {
-        if (containerRef.current && !containerRef.current.destroyed) {
-          containerRef.current.cacheAsBitmap = true;
-        }
-      }, 100);
-      return () => clearTimeout(cacheTimerRef.current);
-    }, [blockSize, isDark]);
 
     const handleContainerRef = useCallback(
       (node: any) => {
@@ -244,15 +229,12 @@ const FallingTx: FC<FallingTxProps> = memo(
     const badgeCapacity = badgeCols * badgeRows;
     const visibleBadges = indicators.slice(0, badgeCapacity);
 
-    const onClick = useCallback(() => onNavigate(hash), [onNavigate, hash]);
-
     return (
       <Container
         ref={handleContainerRef}
         interactive
         cursor='pointer'
         hitArea={new Rectangle(0, 0, blockSize, blockSize)}
-        pointertap={onClick}
       >
         <Graphics
           ref={maskRef}
@@ -364,7 +346,7 @@ export const TxVisualizer: FC<TxVisualizerProps> = memo(
       const sorted = [...(items ?? [])].sort((a, b) => {
         const tA = a.block?.time ? new Date(a.block.time).getTime() : 0;
         const tB = b.block?.time ? new Date(b.block.time).getTime() : 0;
-        return tA - tB;
+        return tB - tA;
       });
       const count = sorted.length;
       if (count === 0) return;
@@ -379,7 +361,7 @@ export const TxVisualizer: FC<TxVisualizerProps> = memo(
       );
 
       const entries: TxEntry[] = sorted.map((item, i) => {
-        const { x, y } = getTargetPos(i, cols, cellW, cellH, canvasHeight);
+        const { x, y } = getTargetPos(i, cols, cellW, cellH);
         const key = item.hash;
         if (!animStates.current.has(key)) {
           animStates.current.set(key, {
@@ -437,39 +419,74 @@ export const TxVisualizer: FC<TxVisualizerProps> = memo(
           <div
             ref={containerRef}
             className='w-full rounded-m'
-            style={{ height: canvasHeight }}
+            style={{ height: canvasHeight, position: 'relative' }}
           >
             {isLoading ? (
               <Loading />
             ) : (
-              <Stage
-                width={canvasWidth}
-                height={canvasHeight}
-                options={{
-                  backgroundAlpha: 0,
-                  antialias: true,
-                  resolution: window.devicePixelRatio,
-                  autoDensity: true,
-                }}
-              >
-                <Ticker
-                  animStates={animStates}
-                  containerRefs={pixiContainerRefs}
-                />
-                {txEntries.map(({ item }) => (
-                  <FallingTx
-                    key={item.hash}
-                    hash={item.hash}
-                    outSum={item.out_sum}
-                    size={item.size}
-                    scriptSize={item.script_size}
-                    blockSize={blockSize}
-                    isDark={isDark}
-                    onNavigate={handleNavigate}
-                    onRef={onTxRef}
+              <>
+                <Stage
+                  width={canvasWidth}
+                  height={canvasHeight}
+                  options={{
+                    backgroundAlpha: 0,
+                    antialias: true,
+                    resolution: window.devicePixelRatio,
+                    autoDensity: true,
+                  }}
+                >
+                  <Ticker
+                    animStates={animStates}
+                    containerRefs={pixiContainerRefs}
                   />
-                ))}
-              </Stage>
+                  {txEntries.map(({ item }) => (
+                    <FallingTx
+                      key={item.hash}
+                      hash={item.hash}
+                      outSum={item.out_sum}
+                      size={item.size}
+                      scriptSize={item.script_size}
+                      blockSize={blockSize}
+                      isDark={isDark}
+                      onRef={onTxRef}
+                    />
+                  ))}
+                </Stage>
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: canvasWidth,
+                    height: canvasHeight,
+                    pointerEvents: 'none',
+                  }}
+                >
+                  {txEntries.map(({ item, targetX, targetY }) => (
+                    <a
+                      key={item.hash}
+                      href={`/tx/${item.hash}`}
+                      style={{
+                        position: 'absolute',
+                        left: targetX,
+                        top: targetY,
+                        width: blockSize,
+                        height: blockSize,
+                        borderRadius: 12,
+                        pointerEvents: 'auto',
+                        display: 'block',
+                        cursor: 'pointer',
+                      }}
+                      onClick={e => {
+                        if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
+                          e.preventDefault();
+                          handleNavigate(item.hash);
+                        }
+                      }}
+                    />
+                  ))}
+                </div>
+              </>
             )}
           </div>
         )}
