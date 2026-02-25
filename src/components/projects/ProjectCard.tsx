@@ -11,6 +11,7 @@ import {
   TelegramLogo,
   Badge,
   formatNumber,
+  Image,
 } from "@vellumlabs/cexplorer-sdk";
 import { LinkIcon } from "lucide-react";
 
@@ -46,19 +47,20 @@ export const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
   return (
     <div
       onClick={() =>
-        navigate({ to: "/projects/$id", params: { id: project.project_id } })
+        navigate({ to: "/project/$id", params: { id: project.project_id } })
       }
       className='flex cursor-pointer flex-col gap-2 rounded-m border border-border bg-cardBg p-2 transition-all duration-200 hover:border-primary'
     >
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-1'>
-          {project.icon && (
-            <img
-              src={project.icon}
-              alt={project.name}
-              className='h-8 w-8 rounded-full object-cover'
-            />
-          )}
+          <Image
+            src={project.icon}
+            alt={project.name}
+            fallbackletters={project.name}
+            width={32}
+            height={32}
+            className='rounded-max'
+          />
           <span className='text-text-md font-semibold'>{project.name}</span>
         </div>
         <div className='flex items-center gap-1'>

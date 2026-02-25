@@ -2,7 +2,7 @@ import { ProjectDetailPage } from "@/pages/projects/ProjectDetailPage";
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 
-export const Route = createFileRoute("/projects/$id")({
+export const Route = createFileRoute("/project/$id")({
   component: ProjectDetailPage,
   validateSearch: (input: Record<string, unknown>) =>
     z

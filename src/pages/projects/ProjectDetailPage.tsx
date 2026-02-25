@@ -32,7 +32,7 @@ import { isValidLink, capitalize, createMockQuery, computeInsightStats } from "@
 
 export const ProjectDetailPage: FC = () => {
   const { t } = useAppTranslation();
-  const { id } = useParams({ from: "/projects/$id" });
+  const { id } = useParams({ from: "/project/$id" });
   const detailQuery = useFetchProjectDetail(id);
 
   const project = detailQuery.data?.data as ProjectDetail | undefined;
@@ -92,7 +92,7 @@ export const ProjectDetailPage: FC = () => {
       breadcrumbItems={[
         {
           label: (
-            <Link to='/projects'>{t("projects.page.breadcrumb")}</Link>
+            <Link to='/project'>{t("projects.page.breadcrumb")}</Link>
           ),
         },
         { label: project?.name ?? formatString(id, "long") },
