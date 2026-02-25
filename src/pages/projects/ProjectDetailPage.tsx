@@ -15,6 +15,7 @@ import {
   Copy,
   formatString,
   formatNumber,
+  Image,
 } from "@vellumlabs/cexplorer-sdk";
 import { LinkIcon } from "lucide-react";
 
@@ -150,13 +151,14 @@ const DetailsCard: FC<{
 
       <DetailRow label={t("projects.detail.projectName")}>
         <div className='flex items-center gap-1'>
-          {project.icon && (
-            <img
-              src={project.icon}
-              alt={project.name}
-              className='h-5 w-5 rounded-full object-cover'
-            />
-          )}
+          <Image
+            src={project.icon}
+            alt={project.name}
+            fallbackletters={project.name}
+            width={28}
+            height={28}
+            className='rounded-max'
+          />
           <span className='font-semibold'>{project.name}</span>
         </div>
       </DetailRow>
