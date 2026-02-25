@@ -83,10 +83,10 @@ export const EnergyComparison: FC = () => {
 
   return (
     <div className='flex flex-col gap-2'>
-      <h3 className='text-text-sm font-medium text-text'>
+      <h3 className='text-text-lg font-semibold text-text'>
         {t("ecoImpact.results.comparisonTitle")}
       </h3>
-      <p className='text-text-xs text-grayTextPrimary'>
+      <p className='text-text-sm text-grayTextPrimary'>
         {t("ecoImpact.results.comparisonDescription")}
       </p>
       <div className='grid grid-cols-1 gap-4 md:grid-cols-[1fr_auto_1fr]'>
@@ -104,7 +104,7 @@ export const EnergyComparison: FC = () => {
               className='h-8 w-8 rounded-max'
             />
             <span
-              className='text-text-sm font-semibold'
+              className='text-text-md font-semibold'
               style={{ color: isDark ? "#4ade80" : "#166534" }}
             >
               {t("ecoImpact.results.cardano")}
@@ -116,7 +116,7 @@ export const EnergyComparison: FC = () => {
               className='flex items-center justify-between'
             >
               <span
-                className='text-text-xs'
+                className='text-text-sm'
                 style={{ color: isDark ? "#86efac" : "#15803d" }}
               >
                 {row.label}
@@ -144,7 +144,7 @@ export const EnergyComparison: FC = () => {
           <div className='flex items-center gap-2'>
             <img src={BitcoinIcon} alt='Bitcoin' className='h-8 w-8' />
             <span
-              className='text-text-sm font-semibold'
+              className='text-text-md font-semibold'
               style={{ color: isDark ? "#fbbf24" : "#92400e" }}
             >
               {t("ecoImpact.results.bitcoin")}
@@ -156,7 +156,7 @@ export const EnergyComparison: FC = () => {
               className='flex items-center justify-between'
             >
               <span
-                className='text-text-xs'
+                className='text-text-sm'
                 style={{ color: isDark ? "#fcd34d" : "#b45309" }}
               >
                 {row.label}

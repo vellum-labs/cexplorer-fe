@@ -66,6 +66,7 @@ export const EcoImpactPage: FC = () => {
 
   const debouncedStakeAddress = useDebounce(stakeAddress);
   const [stakedAda, setStakedAda] = useState<number | null>(null);
+  const [noData, setNoData] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
 
@@ -94,6 +95,7 @@ export const EcoImpactPage: FC = () => {
     if (mode !== "delegator") return;
     if (!debouncedStakeAddress || !isValidAddress(debouncedStakeAddress)) {
       setStakedAda(null);
+      setNoData(false);
       return;
     }
 
@@ -102,15 +104,23 @@ export const EcoImpactPage: FC = () => {
     abortRef.current = controller;
 
     setIsLoading(true);
+    setNoData(false);
     fetchStakeDetail({ view: debouncedStakeAddress })
       .then(res => {
         if (controller.signal.aborted) return;
         const amount = res?.data?.stake?.active?.amount;
-        setStakedAda(amount ? Number(amount) : null);
+        if (amount) {
+          setStakedAda(Number(amount));
+          setNoData(false);
+        } else {
+          setStakedAda(null);
+          setNoData(true);
+        }
       })
       .catch(() => {
         if (controller.signal.aborted) return;
         setStakedAda(null);
+        setNoData(true);
       })
       .finally(() => {
         if (controller.signal.aborted) return;
@@ -124,6 +134,7 @@ export const EcoImpactPage: FC = () => {
     if (mode !== "spo") return;
     if (!selectedPool) {
       setStakedAda(null);
+      setNoData(false);
       return;
     }
 
@@ -132,6 +143,7 @@ export const EcoImpactPage: FC = () => {
     abortRef.current = controller;
 
     setIsLoading(true);
+    setNoData(false);
     fetchPoolDetail({
       pool_id: selectedPool.pool_id,
       hash_raw: undefined,
@@ -139,11 +151,18 @@ export const EcoImpactPage: FC = () => {
       .then(res => {
         if (controller.signal.aborted) return;
         const activeStake = res.data?.active_stake;
-        setStakedAda(activeStake ? Number(activeStake) : null);
+        if (activeStake) {
+          setStakedAda(Number(activeStake));
+          setNoData(false);
+        } else {
+          setStakedAda(null);
+          setNoData(true);
+        }
       })
       .catch(() => {
         if (controller.signal.aborted) return;
         setStakedAda(null);
+        setNoData(true);
       })
       .finally(() => {
         if (controller.signal.aborted) return;
@@ -156,6 +175,7 @@ export const EcoImpactPage: FC = () => {
   const handleModeSwitch = (newMode: Mode) => {
     setMode(newMode);
     setStakedAda(null);
+    setNoData(false);
   };
 
   const isDebouncing =
@@ -196,7 +216,10 @@ export const EcoImpactPage: FC = () => {
             {mode === "delegator" ? (
               <TableSearchInput
                 value={stakeAddress}
-                onchange={val => setStakeAddress(val)}
+                onchange={val => {
+                  setStakeAddress(val);
+                  if (!val) localStorage.removeItem(LS_STAKE_KEY);
+                }}
                 placeholder={t("ecoImpact.enterStakeAddress")}
                 showSearchIcon
                 wrapperClassName='w-full'
@@ -205,7 +228,10 @@ export const EcoImpactPage: FC = () => {
             ) : (
               <PoolSelector
                 selectedPool={selectedPool}
-                onSelectPool={setSelectedPool}
+                onSelectPool={pool => {
+                  setSelectedPool(pool);
+                  if (!pool) localStorage.removeItem(LS_POOL_KEY);
+                }}
               />
             )}
           </div>
@@ -218,6 +244,10 @@ export const EcoImpactPage: FC = () => {
                 <LoadingSkeleton height='148px' width='100%' />
               </div>
               <LoadingSkeleton height='208px' width='100%' />
+            </div>
+          ) : noData ? (
+            <div className='rounded-m border border-border bg-background p-4 text-center text-text-sm text-grayTextPrimary'>
+              {t("ecoImpact.noData")}
             </div>
           ) : (
             stakedAda !== null &&
