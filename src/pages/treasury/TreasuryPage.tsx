@@ -1,6 +1,7 @@
 import { PageBase } from "@/components/global/pages/PageBase";
 import { TREASURY_WALLETS } from "@/constants/treasury";
 import { useGetMarketCurrency } from "@/hooks/useGetMarketCurrency";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useFetchMultipleAddressDetails } from "@/services/address";
 import {
   Copy,
@@ -19,6 +20,7 @@ interface WalletRowData {
 }
 
 export const TreasuryPage = () => {
+  const { t } = useAppTranslation("common");
   const currencyMarket = useGetMarketCurrency();
   const adaUsdRate = currencyMarket?.adaUsdClose ?? 0;
 
