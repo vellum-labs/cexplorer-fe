@@ -42,14 +42,10 @@ export async function getFirstDetailHref(
 }
 
 export async function waitForRender(page: any) {
-  const preloader = page.locator("#preloader");
-  if (await preloader.count()) {
-    await expect(preloader).toHaveCount(0, { timeout: 50000 });
-  }
-  const skeletons = page.locator('[data-testid="skeleton"], .skeleton');
-  if (await skeletons.count()) {
-    await expect(skeletons).toHaveCount(0, { timeout: 50000 });
-  }
+  await expect(page.locator("#preloader")).toHaveCount(0, { timeout: 50000 });
+  await expect(
+    page.locator('[data-testid="skeleton"], .skeleton'),
+  ).toHaveCount(0, { timeout: 50000 });
 }
 
 export async function checkPage(

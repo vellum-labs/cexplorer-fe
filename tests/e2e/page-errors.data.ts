@@ -285,7 +285,7 @@ export const withdrawalsPages = [1, 13, 25, 38, 50];
 
 export const tokenDashboardTabs = ["tokens", "global_activity", "exchange"];
 
-export const treasuryDonationTabs = ["dontations", "stats"];
+export const treasuryDonationTabs = ["donations", "stats"];
 
 export const txHashes = [
   "6b21e798732e71476ffe04740eed4008333f606c6662a3dce8deaa8d489c322a",
