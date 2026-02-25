@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { formatNumber, useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { Sprout } from "lucide-react";
-import { MILESTONES } from "@/constants/ecoImpact";
+import { getNextMilestone, calcProgress } from "@/utils/ecoImpact/milestones";
 
 interface TreesProgressBarProps {
   trees: number;
@@ -14,21 +14,8 @@ export const TreesProgressBar: FC<TreesProgressBarProps> = ({ trees }) => {
   const { theme } = useThemeStore();
   const isDark = theme === "dark";
 
-  const currentMilestoneIndex = MILESTONES.findIndex(m => m > trees);
-  const nextMilestone =
-    currentMilestoneIndex === -1
-      ? MILESTONES[MILESTONES.length - 1]
-      : MILESTONES[currentMilestoneIndex];
-  const prevMilestone =
-    currentMilestoneIndex <= 0 ? 0 : MILESTONES[currentMilestoneIndex - 1];
-
-  const progress =
-    nextMilestone === prevMilestone
-      ? 99
-      : Math.min(
-          ((trees - prevMilestone) / (nextMilestone - prevMilestone)) * 100,
-          99,
-        );
+  const nextMilestone = getNextMilestone(trees);
+  const progress = calcProgress(trees);
 
   return (
     <div

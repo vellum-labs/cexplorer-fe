@@ -8,33 +8,15 @@ import { useMiscConst } from "@/hooks/useMiscConst";
 import { formatNumber, LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { TreesProgressBar } from "./TreesProgressBar";
 import {
-  CONSUMPTION_PER_DEVICE,
-  BITCOIN_ANNUAL_ENERGY_GWH,
-  CO2_PER_KWH,
-  CO2_PER_TREE_YEAR,
-  CONVERSION_FACTOR,
-} from "@/constants/ecoImpact";
-
-const formatEnergy = (
-  kWh: number,
-): { value: string; unit: string } => {
-  if (kWh >= 1_000_000) {
-    return { value: formatNumber(Math.round(kWh / 1_000_000 * 100) / 100), unit: "GWh/year" };
-  }
-  if (kWh >= 1_000) {
-    return { value: formatNumber(Math.round(kWh / 1_000 * 100) / 100), unit: "MWh/year" };
-  }
-  return { value: formatNumber(Math.round(kWh * 100) / 100), unit: "kWh/year" };
-};
-
-const formatCO2 = (
-  kg: number,
-): { value: string; unit: string } => {
-  if (kg >= 1_000) {
-    return { value: formatNumber(Math.round(kg / 1_000 * 100) / 100), unit: "t/year" };
-  }
-  return { value: formatNumber(Math.round(kg * 100) / 100), unit: "kg/year" };
-};
+  calcCardanoAnnualEnergyGWh,
+  calcStakePercent,
+  calcUserCardanoEnergyKWh,
+  calcEnergyEfficiency,
+  calcEnergySaved,
+  calcCO2Saved,
+  calcTrees,
+} from "@/utils/ecoImpact/calculations";
+import { formatEnergy, formatCO2 } from "@/utils/ecoImpact/formatting";
 
 interface EcoImpactResultsProps {
   stakedAda: number;
@@ -62,24 +44,16 @@ export const EcoImpactResults: FC<EcoImpactResultsProps> = ({ stakedAda }) => {
       return null;
     }
 
-    const estimatedUniqueDevices = countPoolRelayUniq * 1.5;
-    const cardanoAnnualEnergyGWh =
-      (CONSUMPTION_PER_DEVICE * 365 * 24 * estimatedUniqueDevices) /
-      CONVERSION_FACTOR;
-
+    const cardanoAnnualEnergyGWh = calcCardanoAnnualEnergyGWh(countPoolRelayUniq);
     const cardanoAnnualEnergyKWh = cardanoAnnualEnergyGWh * 1_000_000;
 
-    const stakePercent = stakedAda / totalNetworkActiveStake;
-    const userCardanoEnergyKWh = stakePercent * cardanoAnnualEnergyKWh;
+    const stakePercent = calcStakePercent(stakedAda, totalNetworkActiveStake);
+    const userCardanoEnergyKWh = calcUserCardanoEnergyKWh(stakePercent, cardanoAnnualEnergyGWh);
 
-    const energyEfficiency = BITCOIN_ANNUAL_ENERGY_GWH / cardanoAnnualEnergyGWh;
-
-    const equivalentBitcoinEnergy = userCardanoEnergyKWh * energyEfficiency;
-    const energySaved = equivalentBitcoinEnergy - userCardanoEnergyKWh;
-
-    const co2Saved = energySaved * CO2_PER_KWH;
-
-    const trees = co2Saved / CO2_PER_TREE_YEAR;
+    const energyEfficiency = calcEnergyEfficiency(cardanoAnnualEnergyGWh);
+    const energySaved = calcEnergySaved(userCardanoEnergyKWh, energyEfficiency);
+    const co2Saved = calcCO2Saved(energySaved);
+    const trees = calcTrees(co2Saved);
 
     return {
       energyEfficiency,
@@ -126,7 +100,7 @@ export const EcoImpactResults: FC<EcoImpactResultsProps> = ({ stakedAda }) => {
             {t("ecoImpact.results.energySaved")}
           </span>
           <span className='text-text-xl font-bold text-text'>
-            {formatEnergy(calculations.energySaved).value}
+            {formatNumber(formatEnergy(calculations.energySaved).value)}
           </span>
           <span className='text-text-xs text-grayTextPrimary'>
             {formatEnergy(calculations.energySaved).unit}
@@ -138,7 +112,7 @@ export const EcoImpactResults: FC<EcoImpactResultsProps> = ({ stakedAda }) => {
             {t("ecoImpact.results.co2Saved")}
           </span>
           <span className='text-text-xl font-bold text-text'>
-            {formatCO2(calculations.co2Saved).value}
+            {formatNumber(formatCO2(calculations.co2Saved).value)}
           </span>
           <span className='text-text-xs text-grayTextPrimary'>
             {formatCO2(calculations.co2Saved).unit}
