@@ -1,8 +1,6 @@
 import { test, expect, Page } from "@playwright/test";
 
-
 const MISSING_TRANSLATION_PATTERN = "MISSING:";
-
 
 const TRANSLATION_KEY_PATTERNS = [
   /\bnavigation\.\w+/g,
@@ -22,6 +20,7 @@ const pages = [
   "/ads/",
   "/api/",
   "/analytics/",
+  "/analytics/genesis",
   "/article/",
   "/bots/",
   "/brand-assets/",
@@ -35,6 +34,7 @@ const pages = [
   "/groups/",
   "/hardfork/",
   "/newsletter/",
+  "/pay/",
   "/pool-awards/",
   "/pool-birthdays/",
   "/pool-updates/",
@@ -123,8 +123,6 @@ const pages = [
   "/withdrawals/",
   "/contract/interactions/",
 ];
-
-
 
 const API_BASE = "https://api-mainnet-stage.cexplorer.io/v1";
 
@@ -333,8 +331,6 @@ async function waitForPageRender(page: Page) {
   }
 }
 
-
-
 test.describe("Czech translation coverage", () => {
   for (const pageUrl of pages) {
     test(`CS: ${pageUrl}`, async ({ page }) => {
@@ -342,8 +338,6 @@ test.describe("Czech translation coverage", () => {
     });
   }
 });
-
-
 
 test.describe("Czech translation coverage — detail pages (API)", () => {
   for (const dp of detailPages) {
@@ -354,8 +348,6 @@ test.describe("Czech translation coverage — detail pages (API)", () => {
     });
   }
 });
-
-
 
 test.describe("Czech translation coverage — detail pages (UI)", () => {
   for (const dp of uiDetailPages) {
