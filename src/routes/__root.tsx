@@ -13,6 +13,7 @@ import Footer from "../components/layouts/Footer";
 import { SwReadyModal } from "@/components/global/modals/SwReadyModal";
 
 import { VersionWatcher } from "@/components/global/VersionWatcher";
+import { CookieBanner } from "@/components/global/CookieBanner";
 import Navbar from "@/components/layouts/Navbar";
 import { ErrorBoundary } from "@/pages/error/ErrorBoundary";
 
@@ -190,6 +191,7 @@ const RootComponent = () => {
           )}
         </ErrorBoundary>
         <Footer />
+        <CookieBanner />
         {updateModal && <SwReadyModal />}
         <VersionWatcher />
         {clickedUrl && (

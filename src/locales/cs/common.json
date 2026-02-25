@@ -2928,5 +2928,9 @@
     "delegateToDrep": "Delegovat na DRep",
     "keywords": "Klíčová slova",
     "copyLink": "Kopírovat odkaz"
+  },
+  "cookie": {
+    "message": "Používáme cookies ke zlepšení vašeho zážitku. Pokračováním v používání tohoto webu souhlasíte s našimi",
+    "accept": "Přijmout"
   }
 }
