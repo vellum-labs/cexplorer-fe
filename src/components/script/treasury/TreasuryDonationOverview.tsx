@@ -15,29 +15,36 @@ interface Props {
 export const TreasuryDonationOverview = ({ query }: Props) => {
   const { t } = useAppTranslation("common");
   const data = query.data;
-  const allTimeDonations = data?.epoch.reduce((acc, epoch) => {
-    return acc + epoch.treasury_donation;
-  }, 0);
+  const currentEpochNo = data?.epoch[0]?.epoch_no ?? 0;
+  const findEpoch = (epochNo: number) =>
+    data?.epoch.find(e => e.epoch_no === epochNo);
+  const allTimeDonations = data?.stat?.total ?? 0;
   const currentEpochDonations =
-    data?.epoch[data.epoch.length - 1].treasury_donation ?? 0;
+    findEpoch(currentEpochNo)?.treasury_donation ?? 0;
   const previousEpochDonations =
-    data?.epoch[data.epoch.length - 2].treasury_donation ?? 0;
+    findEpoch(currentEpochNo - 1)?.treasury_donation ?? 0;
   const morePreviousEpochDonations =
-    data?.epoch[data.epoch.length - 3].treasury_donation ?? 0;
-  const currentEpochChangePercentage = Number(
-    (
-      ((currentEpochDonations - previousEpochDonations) /
-        (previousEpochDonations || 1)) *
-      100
-    ).toFixed(1),
-  );
-  const previousEpochChangePercentage = Number(
-    (
-      ((previousEpochDonations - morePreviousEpochDonations) /
-        (morePreviousEpochDonations || 1)) *
-      100
-    ).toFixed(1),
-  );
+    findEpoch(currentEpochNo - 2)?.treasury_donation ?? 0;
+  const currentEpochChangePercentage =
+    previousEpochDonations > 0
+      ? Number(
+          (
+            ((currentEpochDonations - previousEpochDonations) /
+              previousEpochDonations) *
+            100
+          ).toFixed(1),
+        )
+      : 0;
+  const previousEpochChangePercentage =
+    morePreviousEpochDonations > 0
+      ? Number(
+          (
+            ((previousEpochDonations - morePreviousEpochDonations) /
+              morePreviousEpochDonations) *
+            100
+          ).toFixed(1),
+        )
+      : 0;
 
   return (
     <div className='flex w-full max-w-desktop flex-col gap-3 p-mobile pb-0 lg:flex-row lg:p-desktop lg:pb-0'>
@@ -68,15 +75,7 @@ export const TreasuryDonationOverview = ({ query }: Props) => {
                 <span>
                   <AdaWithTooltip data={currentEpochDonations ?? 0} />
                 </span>
-                <span
-                  className={`${
-                    currentEpochChangePercentage === 0
-                      ? "text-text"
-                      : currentEpochChangePercentage > 0
-                        ? "text-greenText"
-                        : "text-redText"
-                  }} gap-1/2text-text-sm flex items-center`}
-                >
+                <span className='flex items-center gap-1/2 text-text-md text-text'>
                   <TrendingArrow percentage={currentEpochChangePercentage} />
                   {currentEpochChangePercentage}%
                 </span>
@@ -92,15 +91,7 @@ export const TreasuryDonationOverview = ({ query }: Props) => {
                 <span>
                   <AdaWithTooltip data={previousEpochDonations ?? 0} />
                 </span>
-                <span
-                  className={`${
-                    previousEpochChangePercentage === 0
-                      ? "text-text"
-                      : previousEpochChangePercentage > 0
-                        ? "text-greenText"
-                        : "text-redText"
-                  }} gap-1/2text-text-sm flex items-center`}
-                >
+                <span className='flex items-center gap-1/2 text-text-md text-text'>
                   <TrendingArrow percentage={previousEpochChangePercentage} />
                   {previousEpochChangePercentage}%
                 </span>
