@@ -45,7 +45,6 @@ export const EcoImpactResults: FC<EcoImpactResultsProps> = ({ stakedAda }) => {
     }
 
     const cardanoAnnualEnergyGWh = calcCardanoAnnualEnergyGWh(countPoolRelayUniq);
-    const cardanoAnnualEnergyKWh = cardanoAnnualEnergyGWh * 1_000_000;
 
     const stakePercent = calcStakePercent(stakedAda, totalNetworkActiveStake);
     const userCardanoEnergyKWh = calcUserCardanoEnergyKWh(stakePercent, cardanoAnnualEnergyGWh);
