@@ -69,11 +69,15 @@ function formatAda(lovelace: number): string {
 }
 
 function calcBlockSize(count: number, canvasW: number, canvasH: number) {
-  const cols = Math.ceil(Math.sqrt(count * (canvasW / canvasH)));
-  const rows = Math.ceil(count / cols);
-  const maxByWidth = (canvasW - PADDING) / cols - PADDING;
-  const maxByHeight = (canvasH - PADDING) / rows - PADDING;
-  return Math.floor(Math.min(maxByWidth, maxByHeight, 100));
+  let best = 10;
+  for (let rows = 1; rows <= Math.min(count, 10); rows++) {
+    const maxSByHeight = Math.floor(canvasH / rows) - GAP;
+    const minCols = Math.ceil(count / rows);
+    const maxSByCols = Math.floor(canvasW / minCols) - GAP;
+    const s = Math.min(maxSByHeight, maxSByCols, 100);
+    if (s >= 10) best = Math.max(best, s);
+  }
+  return best;
 }
 
 function calcGridLayout(_count: number, blockSize: number, canvasW: number) {
@@ -341,12 +345,11 @@ export const TxVisualizer: FC<TxVisualizerProps> = memo(
       calcBlockSize(20, 1400, 250),
     );
     const [canvasWidth, setCanvasWidth] = useState(1400);
+    const [canvasHeight, setCanvasHeight] = useState(210);
     const containerRef = useRef<HTMLDivElement>(null);
 
     const animStates = useRef<Map<string, AnimState>>(new Map());
     const pixiContainerRefs = useRef<Map<string, any>>(new Map());
-
-    const canvasHeight = canvasWidth < 768 ? 260 : 210;
 
     useEffect(() => {
       const el = containerRef.current;
@@ -369,7 +372,8 @@ export const TxVisualizer: FC<TxVisualizerProps> = memo(
       const count = sorted.length;
       if (count === 0) return;
 
-      const newSize = calcBlockSize(count, canvasWidth, canvasHeight);
+      const maxH = canvasWidth < 768 ? 260 : 210;
+      const newSize = calcBlockSize(count, canvasWidth, maxH);
       setBlockSize(newSize);
 
       const { cols, cellW, cellH } = calcGridLayout(
@@ -377,9 +381,12 @@ export const TxVisualizer: FC<TxVisualizerProps> = memo(
         newSize,
         canvasWidth,
       );
+      const actualRows = Math.ceil(count / cols);
+      const newCanvasHeight = actualRows * cellH;
+      setCanvasHeight(newCanvasHeight);
 
       const entries: TxEntry[] = sorted.map((item, i) => {
-        const { x, y } = getTargetPos(i, cols, cellW, cellH, canvasHeight);
+        const { x, y } = getTargetPos(i, cols, cellW, cellH, newCanvasHeight);
         const key = item.hash;
         if (!animStates.current.has(key)) {
           animStates.current.set(key, {
@@ -407,7 +414,7 @@ export const TxVisualizer: FC<TxVisualizerProps> = memo(
       }
 
       setTxEntries(entries);
-    }, [items, canvasWidth, canvasHeight]);
+    }, [items, canvasWidth]);
 
     const onTxRef = useCallback((hash: string, node: any) => {
       if (node) {
