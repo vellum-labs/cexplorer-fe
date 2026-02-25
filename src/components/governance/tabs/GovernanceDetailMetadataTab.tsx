@@ -120,13 +120,18 @@ export const GovernanceDetailMetadataTab: FC<
                       <li key={`ref-${i}`} className='py-0.5'>
                         {hasLabel ? (
                           isValidUrl ? (
-                            <button
-                              type='button'
-                              className='cursor-pointer text-left text-primary'
-                              onClick={() => setClickedUrl(normalizedUri)}
+                            <a
+                              href={normalizedUri}
+                              target='_blank'
+                              rel='noopener noreferrer'
+                              className='text-primary'
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setClickedUrl(normalizedUri);
+                              }}
                             >
                               {ref.label}
-                            </button>
+                            </a>
                           ) : (
                             <span>{ref.label}</span>
                           )
@@ -134,13 +139,18 @@ export const GovernanceDetailMetadataTab: FC<
                           <>
                             <span>{t("governance.metadata.referenceWithoutLabel")} </span>
                             {isValidUrl ? (
-                              <button
-                                type='button'
-                                className='cursor-pointer text-left text-primary'
-                                onClick={() => setClickedUrl(normalizedUri)}
+                              <a
+                                href={normalizedUri}
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                className='text-primary'
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setClickedUrl(normalizedUri);
+                                }}
                               >
                                 {displayUri}
-                              </button>
+                              </a>
                             ) : (
                               <span>{displayUri}</span>
                             )}
