@@ -6,7 +6,7 @@ import { useWalletStore } from "@/stores/walletStore";
 import { useWatchlistStore } from "@/stores/watchlistStore";
 import type { WalletState, WalletType } from "@/types/walletTypes";
 import { BrowserWallet } from "@meshsdk/core";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { toast } from "sonner";
 import { useAuthToken } from "./useAuthToken";
 
@@ -19,7 +19,7 @@ const defaultState: WalletState = {
 };
 
 export const useConnectWallet = () => {
-  const { setWalletState, walletType, wallet } = useWalletStore();
+  const { setWalletState } = useWalletStore();
   const { tokens } = useAuthTokensStore();
   const { setIsOpen } = useWalletConfigModalState();
   const token = useAuthToken();
@@ -31,55 +31,6 @@ export const useConnectWallet = () => {
     if (watchlistData && watchlistData !== watchlist)
       setWatchlist(watchlistData);
   }, [watchlistData]);
-
-  const isReconnecting = useRef(false);
-  const hasLoggedError = useRef(false);
-
-  useEffect(() => {
-    if (!walletType || wallet) {
-      hasLoggedError.current = false;
-      return;
-    }
-
-    const attemptReconnect = async () => {
-      if (isReconnecting.current) return;
-      isReconnecting.current = true;
-      try {
-        const reconnectedWallet = await BrowserWallet.enable(walletType);
-        setWalletState({ wallet: reconnectedWallet });
-      } catch (error) {
-        if (!hasLoggedError.current) {
-          console.error("Failed to reconnect wallet:", walletType, error);
-          hasLoggedError.current = true;
-        }
-
-      } finally {
-        isReconnecting.current = false;
-      }
-    };
-
-    attemptReconnect();
-
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible") {
-        hasLoggedError.current = false;
-        attemptReconnect();
-      }
-    };
-
-    const handleFocus = () => attemptReconnect();
-
-    const interval = setInterval(attemptReconnect, 10_000);
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("focus", handleFocus);
-
-    return () => {
-      clearInterval(interval);
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.removeEventListener("focus", handleFocus);
-    };
-  }, [walletType, wallet, setWalletState]);
 
   const _connect = async (walletType: WalletType) => {
     const wallet = await BrowserWallet.enable(walletType);
@@ -104,7 +55,11 @@ export const useConnectWallet = () => {
     const rewardAddress = rewardAddresses?.[0];
     const stakeKey = rewardAddress ? rewardAddress.slice(-56) : "";
 
-    if (address.startsWith("addr_test1") && network !== "preprod" && network !== "preview") {
+    if (
+      address.startsWith("addr_test1") &&
+      network !== "preprod" &&
+      network !== "preview"
+    ) {
       toast("Please use a mainnet wallet to connect to the mainnet Cexplorer", {
         id: "mainnet-wallet",
       });
