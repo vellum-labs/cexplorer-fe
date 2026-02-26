@@ -24,7 +24,6 @@ export const AdaPriceWithActiveAddressesGraph: FC<AdaPriceWithActiveAddressesGra
       json,
       option,
       selectedItem,
-      setData,
       setSelectedItem,
       allMergedData,
     } = useAdaPriceWithActiveAddresses(graphRates, analyticsData);
@@ -44,7 +43,7 @@ export const AdaPriceWithActiveAddressesGraph: FC<AdaPriceWithActiveAddressesGra
         exportButton
         graphSortData={{
           query: fakeQuery as any,
-          setData,
+          setData: () => {},
           setSelectedItem,
           selectedItem,
         }}

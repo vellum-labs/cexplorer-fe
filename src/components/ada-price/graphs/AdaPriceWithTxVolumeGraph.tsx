@@ -21,7 +21,6 @@ export const AdaPriceWithTxVolumeGraph: FC<AdaPriceWithTxVolumeGraphProps> =
       json,
       option,
       selectedItem,
-      setData,
       setSelectedItem,
       allMergedData,
     } = useAdaPriceWithTxVolume(graphRates, analyticsData);
@@ -41,7 +40,7 @@ export const AdaPriceWithTxVolumeGraph: FC<AdaPriceWithTxVolumeGraphProps> =
         exportButton
         graphSortData={{
           query: fakeQuery as any,
-          setData,
+          setData: () => {},
           setSelectedItem,
           selectedItem,
         }}
