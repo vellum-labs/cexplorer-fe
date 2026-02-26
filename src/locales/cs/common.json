@@ -481,7 +481,18 @@
     "ada_amount": "Množství ADA",
     "ada_price": "Cena ADA",
     "maker": "Tvůrce",
-    "platform": "Platforma"
+    "platform": "Platforma",
+    "script_name": "Název",
+    "script_id": "ID skriptu",
+    "script_description": "Popis",
+    "product_name": "Název",
+    "product_website": "Web",
+    "product_app": "Aplikace",
+    "product_docs": "Dokumentace",
+    "product_github": "Github",
+    "onchain_type": "Typ",
+    "onchain_name": "Název",
+    "onchain_description": "Popis"
   },
   "analytics": {
     "account": "$t(shared:labels.account)",
@@ -2928,5 +2939,75 @@
     "delegateToDrep": "Delegovat na DRep",
     "keywords": "Klíčová slova",
     "copyLink": "Kopírovat odkaz"
+  },
+  "projects": {
+    "page": {
+      "title": "Cardano projekty",
+      "breadcrumb": "Cardano projekty",
+      "addProject": "Přidat projekt",
+      "allCategories": "Všechny kategorie",
+      "searchPlaceholder": "Hledat projekt...",
+      "searchCategories": "Hledat kategorie...",
+      "noCategoryFound": "Kategorie nenalezena."
+    },
+    "card": {
+      "lastActivity": "Poslední aktivita",
+      "totalCommits": "Celkový počet commitů",
+      "repositories": "Repozitáře"
+    },
+    "activity": {
+      "title": "Vývojová aktivita",
+      "totalCommits": "Celkový počet commitů za vybrané období",
+      "activeRepositories": "Aktivní repozitáře",
+      "organization": "Organizace",
+      "organizations": "Organizace (vše)",
+      "commits": "Commity"
+    },
+    "detail": {
+      "details": "Detaily",
+      "description": "Popis",
+      "projectName": "Název projektu",
+      "category": "Kategorie",
+      "status": "Stav",
+      "launched": "Spuštěno",
+      "lastActivity": "Poslední aktivita",
+      "totalCommits": "Celkový počet commitů",
+      "repositories": "Repozitáře",
+      "links": "Odkazy",
+      "noDescription": "Popis není k dispozici.",
+      "tabs": {
+        "developmentActivity": "Vývojová aktivita",
+        "scripts": "Skripty",
+        "products": "Produkty",
+        "onChainAssociations": "On-Chain asociace"
+      },
+      "scripts": {
+        "name": "Název",
+        "scriptId": "ID skriptu",
+        "description": "Popis",
+        "noScripts": "Žádné skripty nenalezeny."
+      },
+      "products": {
+        "noProducts": "Žádné produkty nenalezeny.",
+        "website": "Web",
+        "app": "Aplikace",
+        "docs": "Dokumentace",
+        "github": "GitHub"
+      },
+      "onChain": {
+        "assets": "Aktiva",
+        "policies": "Politiky",
+        "drep": "DRep",
+        "pools": "Stake pooly",
+        "noAssets": "Žádná aktiva nenalezena.",
+        "noPolicies": "Žádné politiky nenalezeny.",
+        "noDrep": "Žádný DRep není přiřazen.",
+        "noPools": "Žádné stake pooly nejsou přiřazeny.",
+        "assetName": "Název aktiva",
+        "assetId": "ID aktiva",
+        "policyName": "Název politiky",
+        "policyId": "ID politiky"
+      }
+    }
   }
 }
