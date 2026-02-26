@@ -1,12 +1,15 @@
 import { useState, useCallback } from "react";
 
+import { fetchMiscAnchor } from "@/services/misc";
+import { transformAnchorUrl } from "@/utils/format/transformAnchorUrl";
+
 interface UseFetchUrlContentReturn {
   content: string;
   isLoading: boolean;
   isOpen: boolean;
   isError: boolean;
   errorUrl: string | null;
-  fetchContent: (url: string) => Promise<void>;
+  fetchContent: (url: string, dataHash?: string | null) => Promise<void>;
   close: () => void;
 }
 
@@ -32,62 +35,82 @@ export const useFetchUrlContent = (): UseFetchUrlContentReturn => {
   const [isError, setIsError] = useState(false);
   const [errorUrl, setErrorUrl] = useState<string | null>(null);
 
-  const fetchContent = useCallback(async (url: string) => {
-    setIsLoading(true);
-    setIsOpen(true);
-    setIsError(false);
-    setErrorUrl(null);
+  const fetchContent = useCallback(
+    async (url: string, dataHash?: string | null) => {
+      setIsLoading(true);
+      setIsOpen(true);
+      setIsError(false);
+      setErrorUrl(null);
 
-    const tryFetch = async (fetchUrl: string): Promise<string> => {
-      const response = await fetch(fetchUrl);
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      }
-      return response.text();
-    };
-
-    try {
-      let data: string;
-
-      if (isIpfsUrl(url)) {
-        let lastError: Error | null = null;
-        for (let i = 0; i < IPFS_GATEWAYS.length; i++) {
-          try {
-            const fetchUrl = convertIpfsUrl(url, i);
-            data = await tryFetch(fetchUrl);
-            break;
-          } catch (error) {
-            lastError =
-              error instanceof Error ? error : new Error("Unknown error");
-            if (i === IPFS_GATEWAYS.length - 1) {
-              throw lastError;
-            }
-          }
+      const tryFetch = async (fetchUrl: string): Promise<string> => {
+        const response = await fetch(fetchUrl);
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
-        data = data!;
-      } else {
-        data = await tryFetch(url);
-      }
+        return response.text();
+      };
 
       try {
-        const jsonData = JSON.parse(data);
-        setContent(JSON.stringify(jsonData, null, 2));
-      } catch {
-        setContent(data);
+        let data: string;
+
+        if (dataHash) {
+          const result = await fetchMiscAnchor(dataHash);
+
+          if (result.data) {
+            data =
+              typeof result.data === "string"
+                ? result.data
+                : JSON.stringify(result.data);
+          } else {
+            const fallbackUrl = transformAnchorUrl(url) ?? url;
+            setContent(
+              `Failed to fetch content from URL:\n\n${fallbackUrl}\n\nThe metadata could not be retrieved from the server.`,
+            );
+            setIsError(true);
+            setErrorUrl(fallbackUrl);
+            return;
+          }
+        } else if (isIpfsUrl(url)) {
+          let lastError: Error | null = null;
+          for (let i = 0; i < IPFS_GATEWAYS.length; i++) {
+            try {
+              const fetchUrl = convertIpfsUrl(url, i);
+              data = await tryFetch(fetchUrl);
+              break;
+            } catch (error) {
+              lastError =
+                error instanceof Error ? error : new Error("Unknown error");
+              if (i === IPFS_GATEWAYS.length - 1) {
+                throw lastError;
+              }
+            }
+          }
+          data = data!;
+        } else {
+          data = await tryFetch(url);
+        }
+
+        try {
+          const jsonData = JSON.parse(data);
+          setContent(JSON.stringify(jsonData, null, 2));
+        } catch {
+          setContent(data);
+        }
+      } catch (error) {
+        const errorMessage =
+          error instanceof Error ? error.message : "Unknown error";
+        const displayUrl = isIpfsUrl(url) ? convertIpfsUrl(url, 0) : url;
+        setContent(
+          `Failed to fetch content from URL:\n\n${displayUrl}\n\nError: ${errorMessage}`,
+        );
+        setIsError(true);
+        setErrorUrl(displayUrl);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : "Unknown error";
-      const displayUrl = isIpfsUrl(url) ? convertIpfsUrl(url, 0) : url;
-      setContent(
-        `Failed to fetch content from URL:\n\n${displayUrl}\n\nError: ${errorMessage}`,
-      );
-      setIsError(true);
-      setErrorUrl(displayUrl);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+    },
+    [],
+  );
 
   const close = useCallback(() => {
     setIsOpen(false);
