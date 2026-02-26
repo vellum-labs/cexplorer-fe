@@ -1000,7 +1000,7 @@
       "expiration": "Expiration",
       "governanceAction": "$t(shared:governanceAction)",
       "vote": "$t(shared:labels.vote)",
-      "totalVotes": "$t(shared:totalVotes)",
+      "totalVotes": "Total votes",
       "searchResults": "$t(shared:searchPlaceholder)",
       "txHash": "Tx Hash",
       "time": "$t(shared:labels.time)",
