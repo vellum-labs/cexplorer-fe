@@ -1010,6 +1010,9 @@
   "taxTool": {
     "title": "$t(shared:taxTool)"
   },
+  "ecoImpact": {
+    "title": "Eko-kalkulačka"
+  },
   "polls": {
     "title": "Cexplorer governance akce"
   },
@@ -1070,6 +1073,7 @@
     "groups": "$t(shared:groups)",
     "scriptList": "Seznam skriptů",
     "taxTool": "$t(shared:taxTool)",
+    "ecoImpact": "Eko-kalkulačka",
     "voting": "Hlasování",
     "poolDebug": "SPO Debug",
     "stake": "$t(shared:stake)",

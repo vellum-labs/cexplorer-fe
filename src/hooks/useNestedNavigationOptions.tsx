@@ -57,6 +57,10 @@ export const useNestedNavigationOptions = () => {
               ),
               href: "/handle-dns",
             },
+            {
+              label: t("tools.ecoImpact"),
+              href: "/eco-impact",
+            },
           ],
         },
         services: {

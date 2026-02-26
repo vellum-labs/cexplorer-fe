@@ -2065,6 +2065,41 @@
       "infoText4": "Keep in mind that actual rewards may vary from epoch to epoch and change over time."
     }
   },
+  "ecoImpact": {
+    "title": "Eco-impact Calculator",
+    "subtitle": "See how your Cardano staking compares to Bitcoin in terms of energy and CO₂",
+    "delegator": "Delegator",
+    "spo": "SPO",
+    "calculateAs": "Calculate as",
+    "calculate": "Calculate",
+    "enterStakeAddress": "Enter stake address",
+    "selectPool": "Select a stake pool",
+    "invalidStakeAddress": "Invalid stake address",
+    "noData": "No active stake data available for this address.",
+    "results": {
+      "energyEfficiency": "Energy efficiency",
+      "energyEfficiencyUnit": "times more efficient",
+      "energySaved": "Energy saved",
+      "energySavedUnit": "kWh/year",
+      "co2Saved": "CO₂ saved",
+      "co2SavedUnit": "kg/year",
+      "treesEquivalent": "Trees equivalent",
+      "treesDescription": "Your staking CO₂ savings equal the annual absorption of",
+      "trees": "trees",
+      "nextMilestone": "Next milestone",
+      "comparisonTitle": "Cardano vs Bitcoin: Energy Consumption",
+      "comparisonDescription": "Energy comparison between Cardano's PoS and Bitcoin's PoW.",
+      "metric": "Metric",
+      "cardano": "Cardano (PoS)",
+      "bitcoin": "Bitcoin (PoW)",
+      "annualEnergy": "Annual energy (GWh)",
+      "energyPerTx": "Energy per TX (kWh)",
+      "co2PerTx": "CO₂ per TX (kg)",
+      "consensusMechanism": "Consensus mechanism",
+      "proofOfStake": "Proof of Stake",
+      "proofOfWork": "Proof of Work"
+    }
+  },
   "taxTool": {
     "disclaimer": {
       "title": "Please note that the data is for informational purposes only, we do not guarantee its correctness or accuracy.",

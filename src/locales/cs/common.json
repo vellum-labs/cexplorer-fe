@@ -2065,6 +2065,41 @@
       "infoText4": "Mějte na paměti, že skutečné odměny se mohou lišit epochu od epochy a měnit se v čase."
     }
   },
+  "ecoImpact": {
+    "title": "Eko-kalkulačka",
+    "subtitle": "Podívejte se, jak vaše stakování Cardana srovnáváte s Bitcoinem z hlediska energie a CO₂",
+    "delegator": "Delegátor",
+    "spo": "SPO",
+    "calculateAs": "Vypočítat jako",
+    "calculate": "Vypočítat",
+    "enterStakeAddress": "Zadejte stake adresu",
+    "selectPool": "Vyberte stake pool",
+    "invalidStakeAddress": "Neplatná stake adresa",
+    "noData": "Pro tuto adresu nejsou k dispozici žádná data o aktivním staku.",
+    "results": {
+      "energyEfficiency": "Energetická účinnost",
+      "energyEfficiencyUnit": "krát účinnější",
+      "energySaved": "Ušetřená energie",
+      "energySavedUnit": "kWh/rok",
+      "co2Saved": "Ušetřené CO₂",
+      "co2SavedUnit": "kg/rok",
+      "treesEquivalent": "Ekvivalent stromů",
+      "treesDescription": "Vaše úspory CO₂ ze stakování odpovídají roční absorpci",
+      "trees": "stromů",
+      "nextMilestone": "Další milník",
+      "comparisonTitle": "Cardano vs Bitcoin: Spotřeba energie",
+      "comparisonDescription": "Srovnání energie mezi Cardano PoS a Bitcoin PoW.",
+      "metric": "Metrika",
+      "cardano": "Cardano (PoS)",
+      "bitcoin": "Bitcoin (PoW)",
+      "annualEnergy": "Roční energie (GWh)",
+      "energyPerTx": "Energie na TX (kWh)",
+      "co2PerTx": "CO₂ na TX (kg)",
+      "consensusMechanism": "Mechanismus konsenzu",
+      "proofOfStake": "Proof of Stake",
+      "proofOfWork": "Proof of Work"
+    }
+  },
   "taxTool": {
     "disclaimer": {
       "title": "Upozorňujeme, že data jsou pouze informativní, neručíme za jejich správnost ani přesnost.",
