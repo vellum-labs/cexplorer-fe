@@ -19,10 +19,10 @@ export const AddressInspectorRow: FC<AddressInspectorRowProps> = ({
 }) => {
   return (
     <div
-      className={`flex w-full ${titleStart ? "items-start" : "items-center"} ${darker ? "bg-darker" : ""} flex-col sm:flex-row`}
+      className={`flex w-full flex-row ${titleStart ? "items-start" : "items-center"} ${darker ? "bg-darker" : ""}`}
     >
       <div
-        className={`flex w-full items-center sm:w-[200px] sm:max-w-[200px] sm:flex-grow ${darker ? "bg-darker" : ""}`}
+        className={`flex w-[200px] max-w-[200px] flex-grow items-center ${darker ? "bg-darker" : ""}`}
         style={{
           minHeight: "64px",
         }}
@@ -37,7 +37,7 @@ export const AddressInspectorRow: FC<AddressInspectorRowProps> = ({
         </div>
       </div>
       <div
-        className={`flex w-full items-center text-text-sm font-medium sm:min-w-[140px] sm:flex-1 ${darker ? "bg-darker" : ""} overflow-hidden`}
+        className={`flex w-full min-w-[140px] flex-1 items-center text-text-sm font-medium ${darker ? "bg-darker" : ""} overflow-hidden`}
         style={{
           minHeight: "64px",
         }}

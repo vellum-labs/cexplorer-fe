@@ -57,6 +57,10 @@ export const useNestedNavigationOptions = () => {
               ),
               href: "/handle-dns",
             },
+            {
+              label: t("tools.scriptVerification"),
+              href: "/script/verification",
+            },
           ],
         },
         services: {
