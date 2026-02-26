@@ -4,6 +4,7 @@ import { handleFetch } from "@/lib/handleFetch";
 import { useRateStore } from "@/stores/rateStore";
 import { useVersionStore } from "@/stores/versionsStore";
 import type {
+  MiscAnchorResponse,
   MiscApiResponse,
   MiscBasicResponse,
   MiscConstResponse,
@@ -217,6 +218,15 @@ export const useFetchMiscValidate = (
     queryFn: async () => await miscValidate(type, ident),
     enabled: !!ident,
   });
+
+export const fetchMiscAnchor = async (dataHash: string) => {
+  const url = "/misc/get_anchor";
+  const options = {
+    params: { data_hash: dataHash },
+  };
+
+  return handleFetch<MiscAnchorResponse>(url, undefined, options, true);
+};
 
 export const miscPayment = async (
   action: PaymentAction,
