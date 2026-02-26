@@ -1,7 +1,5 @@
 import { EpochCell } from "@vellumlabs/cexplorer-sdk";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
-import { HeaderBanner } from "@/components/global/HeaderBanner";
-import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
@@ -19,16 +17,14 @@ import type { AdaPotsTableColumns, TableColumns } from "@/types/tableTypes";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import ReactEcharts from "echarts-for-react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Helmet } from "react-helmet";
-import metadata from "../../../conf/metadata/en-metadata.json";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { format } from "date-fns";
 import { lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
-import { generateImageUrl } from "@/utils/generateImageUrl";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { PageBase } from "@/components/global/pages/PageBase";
 
 export const PotsPage = () => {
   const { t } = useAppTranslation("common");
@@ -164,19 +160,12 @@ export const PotsPage = () => {
   }, [epochsToShow, allData]);
 
   return (
-    <>
-      <Helmet>{<title>{metadata.adaPots.title}</title>}</Helmet>
-      <main className='flex min-h-minHeight w-full flex-col items-center'>
-        <HeaderBanner
-          title={t("pots.title")}
-          breadcrumbItems={[{ label: t("pots.breadcrumb") }]}
-          subTitle
-        />
-        <AdsCarousel
-          generateImageUrl={generateImageUrl}
-          miscBasicQuery={miscBasicQuery}
-        />
-        <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
+    <PageBase
+      metadataTitle='adaPots'
+      title={t("pots.title")}
+      breadcrumbItems={[{ label: t("pots.breadcrumb") }]}
+    >
+      <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
           <div className='mb-1 ml-auto flex items-center'>
             <span className='mr-1 text-text-sm text-grayTextPrimary'>
               {t("pots.graphEpochs")}{" "}
@@ -195,7 +184,7 @@ export const PotsPage = () => {
                 <LoadingSkeleton height='27px' width={"220px"} />
               ) : count > 0 ? (
                 <h3 className='basis-[230px] text-nowrap'>
-                  {t("pots.totalEpochs", { total: formatNumber(count) })}
+                  {t("pots.totalEpochs", { count: formatNumber(count) })}
                 </h3>
               ) : (
                 ""
@@ -279,8 +268,7 @@ export const PotsPage = () => {
             noItemsLabel={t("table.noItems")}
           />
         </section>
-      </main>
-    </>
+    </PageBase>
   );
 };
 

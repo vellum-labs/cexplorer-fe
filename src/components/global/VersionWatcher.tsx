@@ -16,6 +16,7 @@ export const VersionWatcher: FC = () => {
     "address_label_store",
     "watchlist_store",
     "navbar-line-1",
+    "bookmark_store",
   ];
 
   useEffect(() => {

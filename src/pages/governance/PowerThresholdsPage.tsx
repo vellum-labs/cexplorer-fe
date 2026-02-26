@@ -1,8 +1,5 @@
-import { HeaderBanner } from "@/components/global/HeaderBanner";
 import type { FC } from "react";
-import metadata from "../../../conf/metadata/en-metadata.json";
 
-import { Helmet } from "react-helmet";
 import { AnalyticsGraph } from "@/components/analytics/AnalyticsGraph";
 import { PowerThresholdsSPODelegationDonutGraph } from "@/components/governance/powerTresholds/PowerThresholdsSPODelegationDonutGraph";
 import { DelegatedAdaOverTimeGraph } from "@/components/governance/powerTresholds/SPODelegationByEpochGraph";
@@ -13,6 +10,7 @@ import { PowerThresholdsSPOAttackGraph } from "@/components/governance/powerTres
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { useGovernanceThresholds } from "@/hooks/useGovernanceThresholds";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { PageBase } from "@/components/global/pages/PageBase";
 
 export const PowerThresholdsPage: FC = () => {
   const { t } = useAppTranslation("common");
@@ -33,25 +31,21 @@ export const PowerThresholdsPage: FC = () => {
   } = useGovernanceThresholds();
 
   return (
-    <>
-      <Helmet>
-        <title>{metadata.powerThresholds.title}</title>
-      </Helmet>
-      <main className='flex min-h-minHeight w-full flex-col items-center'>
-        <HeaderBanner
-          title={t("governance.powerThresholds.title")}
-          breadcrumbItems={[
-            {
-              label: (
-                <span className='inline pt-1/2'>{t("gov.governance")}</span>
-              ),
-              link: "/gov",
-            },
-            { label: t("governance.powerThresholds.breadcrumb") },
-          ]}
-        />
-
-        <section className='flex min-h-minHeight w-full max-w-desktop flex-col gap-1 p-desktop'>
+    <PageBase
+      metadataTitle='powerThresholds'
+      title={t("governance.powerThresholds.title")}
+      breadcrumbItems={[
+        {
+          label: (
+            <span className='inline pt-1/2'>{t("gov.governance")}</span>
+          ),
+          link: "/gov",
+        },
+        { label: t("governance.powerThresholds.breadcrumb") },
+      ]}
+      adsCarousel={false}
+    >
+      <section className='flex min-h-minHeight w-full max-w-desktop flex-col gap-1 px-mobile pb-3 md:px-desktop'>
           <>
             <>
               <div className='rounded-l'>
@@ -256,7 +250,6 @@ export const PowerThresholdsPage: FC = () => {
             </div>
           </>
         </section>
-      </main>
-    </>
+    </PageBase>
   );
 };

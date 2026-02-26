@@ -247,6 +247,15 @@ const routes = [
     api: false,
   },
   {
+    path: "/bookmarks",
+    title: "Bookmarks | Cexplorer.io",
+    description:
+      "Manage your saved bookmarks on Cexplorer.io. Quickly access your favorite addresses, stake pools, transactions, assets, and other Cardano blockchain pages with personalized names for easy reference and navigation.",
+    keywords:
+      "bookmarks, saved pages, favorites, Cexplorer bookmarks, saved addresses, saved pools, quick access, personalized bookmarks",
+    api: false,
+  },
+  {
     path: "/brand-assets",
     title: "Brand Assets | Cexplorer.io",
     description:

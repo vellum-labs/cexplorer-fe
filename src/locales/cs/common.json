@@ -2928,5 +2928,63 @@
     "delegateToDrep": "Delegovat na DRep",
     "keywords": "Klíčová slova",
     "copyLink": "Kopírovat odkaz"
+  },
+  "bookmark": {
+    "addModal": {
+      "title": "Přidat záložku",
+      "description": "Uložte tuto stránku do záložek pro rychlý přístup.",
+      "nameLabel": "Osobní název",
+      "namePlaceholder": "Zadejte název pro tuto záložku",
+      "cancelLabel": "Zrušit",
+      "saveLabel": "Uložit záložku"
+    },
+    "editModal": {
+      "title": "Upravit záložku",
+      "description": "Změňte název vaší záložky.",
+      "currentNameLabel": "Aktuální název",
+      "newNameLabel": "Nový název",
+      "newNamePlaceholder": "Zadejte nový název",
+      "cancelLabel": "Zrušit",
+      "saveLabel": "Uložit změny"
+    },
+    "removeModal": {
+      "title": "Odstranit záložku",
+      "description": "Odstraňte tuto stránku ze svých záložek.",
+      "nameLabel": "Osobní název",
+      "cancelLabel": "Zrušit",
+      "removeLabel": "Odstranit záložku"
+    }
+  },
+  "bookmarksPage": {
+    "title": "Záložky",
+    "breadcrumb": "Záložky",
+    "edit": "Upravit",
+    "remove": "Odstranit",
+    "emptyPrimary": "Zatím žádné záložky",
+    "emptySecondary": "Uložte si oblíbené stránky kliknutím na ikonu záložky v záhlaví.",
+    "bookmarkSingular": "záložka",
+    "bookmarkPlural": "záložek",
+    "searchPlaceholder": "Hledat záložku...",
+    "columns": {
+      "type": "Typ",
+      "my_name": "Vlastní název",
+      "url": "Odkaz",
+      "actions": ""
+    },
+    "types": {
+      "address": "Detail adresy",
+      "pool": "Detail poolu",
+      "transaction": "Transakce",
+      "block": "Blok",
+      "asset": "Asset",
+      "stake": "Stake",
+      "drep": "DRep",
+      "policy": "Politika",
+      "article": "Článek",
+      "wiki": "Wiki",
+      "epoch": "Epocha",
+      "script": "Skript",
+      "page": "Stránka"
+    }
   }
 }

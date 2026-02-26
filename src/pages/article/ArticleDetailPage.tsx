@@ -13,9 +13,8 @@ import { getRouteApi, Link } from "@tanstack/react-router";
 import parse from "html-react-parser";
 import { Check, Copy } from "lucide-react";
 import { useState } from "react";
-import { Helmet } from "react-helmet";
-import metadata from "../../../conf/metadata/en-metadata.json";
 import { RandomDelegationModal } from "@/components/wallet/RandomDelegationModal";
+import { PageBase } from "@/components/global/pages/PageBase";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Twitter } from "@/resources/images/icons/Twitter";
 import { Facebook } from "@/resources/images/icons/Facebook";
@@ -52,8 +51,15 @@ export const ArticleDetailPage = () => {
 
   if (detailQuery.isLoading) {
     return (
-      <main className='mx-auto flex min-h-minHeight w-full max-w-desktop flex-col items-center'>
-        <section className='flex h-auto w-full justify-center p-3'>
+      <PageBase
+        metadataOverride={{ title: t("articlePage.breadcrumb") }}
+        title={t("articlePage.breadcrumb")}
+        breadcrumbItems={[{ label: t("articlePage.breadcrumb") }]}
+        adsCarousel={false}
+        bookmarkButton={false}
+        customPage
+      >
+        <section className='mx-auto flex h-auto w-full max-w-desktop justify-center p-3'>
           <div className='flex w-full flex-col gap-1.5 md:flex-row'>
             <div className='flex w-full max-w-desktop flex-col justify-center gap-1.5'>
               <div className='flex w-[calc(100%-72px)] flex-col justify-between gap-1.5'>
@@ -87,54 +93,34 @@ export const ArticleDetailPage = () => {
             </div>
           </div>
         </section>
-      </main>
+      </PageBase>
     );
   }
 
   return (
     <>
-      <Helmet>
-        {
-          <title>
-            {metadata.articleDetail.title.replace(
-              "%article%",
-              String(parse(data?.name ?? "")) || "Article",
-            )}
-          </title>
-        }
-      </Helmet>
-      <main className='mx-auto flex min-h-minHeight w-full max-w-desktop flex-col items-center'>
+      <PageBase
+        metadataOverride={{
+          title: `${String(parse(data?.name ?? "")) || "Article"} | Cexplorer.io`,
+        }}
+        title={t("articlePage.breadcrumb")}
+        breadcrumbItems={[
+          { label: t("articlePage.breadcrumb"), link: "/article" },
+          { label: t("articlePage.breadcrumbDetail") },
+        ]}
+        adsCarousel={false}
+        bookmarkButton={false}
+        customPage
+      >
         {openDelegationModal && (
           <RandomDelegationModal
             onClose={() => setOpenDelegationModal(false)}
           />
         )}
-        <section className='flex h-auto w-full justify-center p-3'>
+        <section className='mx-auto flex h-auto w-full max-w-desktop justify-center p-3'>
           <div className='flex w-full flex-col gap-1.5 md:flex-row'>
             <div className='flex w-full max-w-desktop flex-col justify-center gap-1.5'>
               <div className='flex w-[calc(100%-72px)] flex-col justify-between gap-1.5'>
-                <BreadcrumbRaw className='mb-2 w-full'>
-                  <BreadcrumbList className='flex items-center'>
-                    <BreadcrumbItem>
-                      <Link className='underline underline-offset-2' to='/'>
-                        {t("articlePage.home")}
-                      </Link>
-                    </BreadcrumbItem>
-                    /
-                    <BreadcrumbItem>
-                      <Link
-                        className='underline underline-offset-2'
-                        to={"/article"}
-                      >
-                        {t("articlePage.breadcrumb")}
-                      </Link>
-                    </BreadcrumbItem>
-                    /
-                    <BreadcrumbItem className='text-text'>
-                      {t("articlePage.breadcrumbDetail")}
-                    </BreadcrumbItem>
-                  </BreadcrumbList>
-                </BreadcrumbRaw>
                 {data && (
                   <div className='mb-auto'>
                     <h2>{parse(data?.name || "")}</h2>
@@ -334,7 +320,7 @@ export const ArticleDetailPage = () => {
             </div>
           </div>
         </section>
-      </main>
+      </PageBase>
       {clickedUrl && (
         <SafetyLinkModal
           url={clickedUrl}
