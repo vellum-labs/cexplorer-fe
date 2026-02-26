@@ -35,11 +35,6 @@ export const navigationOptions: {
       label: "Transactions metadata",
       href: "/metadata",
     },
-    {
-      label: "Treasury donations",
-      href: "/treasury/donation",
-      params: { tab: "donations" },
-    },
   ],
   staking: [
     {
@@ -143,6 +138,25 @@ export const navigationOptions: {
         {
           label: "DRep updates",
           href: "/drep/updates",
+        },
+      ],
+      divider: true,
+    },
+    {
+      label: "Treasury",
+      nestedOptions: [
+        {
+          label: "Treasury donations",
+          href: "/treasury/donation",
+          params: { tab: "donations" },
+        },
+        {
+          label: "Treasury contracts",
+          href: "/treasury/contracts",
+        },
+        {
+          label: "Treasury projection",
+          href: "/treasury/projection",
         },
       ],
     },

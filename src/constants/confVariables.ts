@@ -1,6 +1,10 @@
 import { configJSON } from "./conf";
 
 export const apiUrl = configJSON.api[0].endpoint;
+export const intersectMboApiUrl =
+  (configJSON.api as { name?: string; endpoint: string }[]).find(
+    api => api.name === "intersectMbo",
+  )?.endpoint || null;
 export const network = configJSON.network;
 export const activeSlotsCoeff =
   configJSON.genesisParams[0].shelley[0].activeSlotsCoeff;
