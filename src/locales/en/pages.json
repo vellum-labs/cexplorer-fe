@@ -1103,5 +1103,65 @@
       "errors": "{{count}} Errors",
       "poolDetail": "Pool detail →"
     }
+  },
+  "portfolio": {
+    "title": "Portfolio Tracker",
+    "breadcrumb": "Portfolio",
+    "comingSoon": "Portfolio Tracker is coming soon.",
+    "composition": {
+      "title": "Composition",
+      "allAddresses": "Displaying all addresses",
+      "category": "Category",
+      "breakdown": "Breakdown",
+      "total": "Total",
+      "tokens": "Tokens",
+      "nfts": "NFTs",
+      "tokensLabel": "tokens",
+      "nftsLabel": "NFTs",
+      "count": "Count",
+      "share": "Share",
+      "poolDelegation": "Pool delegation",
+      "drepDelegation": "DRep delegation",
+      "notDelegated": "Not delegated",
+      "delegate": "Delegate"
+    },
+    "wallets": {
+      "title": "Wallets",
+      "subtitle": "Tracked wallets",
+      "added": "added",
+      "clickToDisplay": "Click on a specific wallet to display composition",
+      "addWallet": "Add wallet",
+      "editWallets": "Edit wallets",
+      "editHint": "Rename or delete wallets",
+      "done": "Done"
+    },
+    "addWallet": {
+      "title": "Add Wallet",
+      "subtitle": "Enter a stake address (stake1...) or payment address (addr1...)",
+      "namePlaceholder": "Wallet name",
+      "addressPlaceholder": "stake1... or addr1...",
+      "nameRequired": "Wallet name is required",
+      "addressRequired": "Address is required",
+      "maxWallets": "Maximum of 10 wallets reached",
+      "noStakeKey": "This address has no stake key",
+      "invalidAddress": "Invalid address format",
+      "duplicateAddress": "This wallet is already added",
+      "fetchError": "Failed to resolve address",
+      "resolvedTo": "Resolved to stake address:",
+      "adding": "Adding...",
+      "add": "Add"
+    },
+    "editWallets": {
+      "title": "Edit Wallets",
+      "noWallets": "No wallets added yet"
+    },
+    "tabs": {
+      "holdings": "Holdings",
+      "trades": "Trades"
+    },
+    "empty": {
+      "title": "Add your first wallet",
+      "subtitle": "Track up to 10 wallets and see your portfolio composition"
+    }
   }
 }

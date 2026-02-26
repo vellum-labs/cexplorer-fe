@@ -2928,5 +2928,10 @@
     "delegateToDrep": "Delegovat na DRep",
     "keywords": "Klíčová slova",
     "copyLink": "Kopírovat odkaz"
+  },
+  "portfolio": {
+    "title": "Portfolio Tracker",
+    "breadcrumb": "Portfolio",
+    "comingSoon": "Portfolio Tracker bude brzy k dispozici."
   }
 }

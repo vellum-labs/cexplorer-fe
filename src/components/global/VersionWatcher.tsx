@@ -15,6 +15,7 @@ export const VersionWatcher: FC = () => {
     "versions_store",
     "address_label_store",
     "watchlist_store",
+    "portfolio_store",
     "navbar-line-1",
   ];
 
