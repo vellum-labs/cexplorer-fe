@@ -21,6 +21,7 @@ import { Twitter } from "@/resources/images/icons/Twitter";
 import { Facebook } from "@/resources/images/icons/Facebook";
 import { Instagram, LinkIcon } from "lucide-react";
 import { isEmptySocial } from "@/utils/user/isEmptySocial";
+import { resolveSocialUrl } from "@/utils/user/resolveSocialUrl";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -245,7 +246,7 @@ export const ArticleDetailPage = () => {
                           data.user_owner.profile.social.xcom,
                         ) && (
                           <a
-                            href={data.user_owner.profile.social.xcom}
+                            href={resolveSocialUrl(data.user_owner.profile.social.xcom, "xcom")}
                             target='_blank'
                             rel='nofollow noopener'
                           >
@@ -256,7 +257,7 @@ export const ArticleDetailPage = () => {
                           data.user_owner.profile.social.facebook,
                         ) && (
                           <a
-                            href={data.user_owner.profile.social.facebook}
+                            href={resolveSocialUrl(data.user_owner.profile.social.facebook, "facebook")}
                             target='_blank'
                             rel='nofollow noopener'
                           >
@@ -267,7 +268,7 @@ export const ArticleDetailPage = () => {
                           data.user_owner.profile.social.instagram,
                         ) && (
                           <a
-                            href={data.user_owner.profile.social.instagram}
+                            href={resolveSocialUrl(data.user_owner.profile.social.instagram, "instagram")}
                             target='_blank'
                             rel='nofollow noopener'
                           >
@@ -276,7 +277,7 @@ export const ArticleDetailPage = () => {
                         )}
                         {!isEmptySocial(data.user_owner.profile.social.web) && (
                           <a
-                            href={data.user_owner.profile.social.web}
+                            href={resolveSocialUrl(data.user_owner.profile.social.web, "web")}
                             target='_blank'
                             rel='nofollow noopener'
                           >
