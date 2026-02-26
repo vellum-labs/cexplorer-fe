@@ -73,11 +73,11 @@ export const ScriptVerifyBadge: FC<ScriptVerifyBadgeProps> = ({
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
-        <button className='flex h-[25px] cursor-pointer items-center gap-1 rounded-max border border-border px-1 text-text-xs font-medium'>
+        <button className='flex min-h-[25px] cursor-pointer flex-wrap items-center gap-1 rounded-max border border-border px-1 py-0.5 text-text-xs font-medium'>
           <PulseDot color='bg-greenText' animate={false} />
           <span className='text-greenText'>{t("tx.sourceVerified")}</span>
-          {" "}- {compilerLabel}
-          <ChevronDown size={12} />
+          <span className='whitespace-nowrap'>- {compilerLabel}</span>
+          <ChevronDown size={12} className='shrink-0' />
         </button>
       </Popover.Trigger>
       <Popover.Portal>

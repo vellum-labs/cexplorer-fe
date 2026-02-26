@@ -132,7 +132,7 @@ export const ContractInput: FC<ContractInputProps> = ({
               miscConst={miscConst}
             />
           </span>
-          <span className='flex items-center gap-1'>
+          <span className='flex flex-wrap items-center gap-1'>
             <Link
               to='/script/$hash'
               params={{ hash: contract?.script_hash }}
