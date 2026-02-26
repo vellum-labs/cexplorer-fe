@@ -25,6 +25,7 @@ import { useGenerateSW } from "@/hooks/useGenerateSW";
 import { useState } from "react";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { useFetchMiscBasic, useFetchMiscSearch } from "@/services/misc";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { useShortcuts } from "@/hooks/shortcuts/useShortcuts";
@@ -145,6 +146,9 @@ const RootComponent = () => {
     <GlobalSearchProvider
       useFetchMiscSearch={useFetchMiscSearch}
       locale={locale}
+      generateImageUrl={(id, size, type) =>
+        generateImageUrl(id, size as any, type as any)
+      }
     >
       <>
         <Helmet>
