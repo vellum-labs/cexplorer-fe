@@ -129,8 +129,8 @@ const Ticker: FC<TickerProps> = memo(({ animStates, containerRefs }) => {
         }
       }
 
-      container.x = state.posX;
-      container.y = state.posY;
+      container.x = Math.round(state.posX);
+      container.y = Math.round(state.posY);
 
       if (state.velY === 0 && Math.abs(state.posX - state.targetX) < 0.5) {
         state.settled = true;
@@ -425,8 +425,8 @@ export const BlockVisualizer: FC<BlockVisualizerProps> = memo(
         pixiContainerRefs.current.set(blockNo, node);
         const state = animStates.current.get(blockNo);
         if (state) {
-          node.x = state.posX;
-          node.y = state.posY;
+          node.x = Math.round(state.posX);
+          node.y = Math.round(state.posY);
         }
       } else {
         pixiContainerRefs.current.delete(blockNo);
