@@ -36,16 +36,11 @@ export async function fetchUplcScript(
   const url = `${base}/api/v1/scripts/by-hash/${scriptHash}`;
 
   const res = await fetch(url);
-  console.log("[UPLC] GET", url, "→", res.status);
   if (res.status === 404) {
-    console.log("[UPLC] Script not found");
     return null;
   }
   if (!res.ok) {
-    console.log("[UPLC] Unexpected status", res.status);
     return null;
   }
-  const data = await res.json();
-  console.log("[UPLC] Response:", data);
-  return data;
+  return res.json();
 }
