@@ -58,6 +58,10 @@ export const nestedNavigationOptions: {
           ),
           href: "/handle-dns",
         },
+        {
+          label: "Eco-impact",
+          href: "/eco-impact",
+        },
       ],
     },
     services: {

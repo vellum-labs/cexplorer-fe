@@ -94,6 +94,7 @@
     "taxTool": "$t(shared:taxTool)",
     "rewardsCalculator": "Kalkulačka odměn",
     "poolDebug": "Debug poolu",
+    "ecoImpact": "Eco-impact",
     "uplcViewer": "UPLC prohlížeč",
     "handleDns": "handle DNS"
   },

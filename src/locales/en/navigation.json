@@ -94,6 +94,7 @@
     "taxTool": "$t(shared:taxTool)",
     "rewardsCalculator": "Rewards calculator",
     "poolDebug": "Pool debug",
+    "ecoImpact": "Eco-impact",
     "uplcViewer": "UPLC viewer",
     "handleDns": "handle DNS"
   },
