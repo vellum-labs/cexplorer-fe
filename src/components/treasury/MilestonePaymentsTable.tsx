@@ -13,20 +13,11 @@ import {
   TableSettingsDropdown,
 } from "@vellumlabs/cexplorer-sdk";
 import { Link, useSearch } from "@tanstack/react-router";
-import {
-  ArrowDownCircle,
-  PlayCircle,
-  PauseCircle,
-  CheckCircle2,
-  Wallet,
-  Send,
-  Upload,
-  Zap,
-  ChevronDown,
-  FileText,
-} from "lucide-react";
+import { ChevronDown, FileText } from "lucide-react";
 import { useMilestonePaymentsTableStore } from "@/stores/tables/milestonePaymentsTableStore";
 import type { MilestonePaymentsColumns } from "@/types/tableTypes";
+import { eventConfig } from "@/constants/treasuryStyles";
+import { milestonePaymentsTableOptions } from "@/constants/tables/milestonePaymentsTableOptions";
 
 interface MilestonePaymentsTableProps {
   projectId: string;
@@ -59,81 +50,6 @@ interface MilestonePaymentsTableProps {
     displayingText: (count: number, total: number) => string;
   };
 }
-
-const milestonePaymentsTableOptions: { key: keyof MilestonePaymentsColumns }[] = [
-  { key: "milestone" },
-  { key: "amount" },
-  { key: "transaction" },
-  { key: "date" },
-  { key: "event" },
-];
-
-const eventConfig = {
-  initialize: {
-    icon: Zap,
-    iconColor: "text-[#7C3AED]",
-    bgLight: "bg-[#F5F3FF]",
-    bgDark: "bg-[#2D1F5E]",
-    borderLight: "border-[#DDD6FE]",
-    borderDark: "border-[#5B21B6]",
-  },
-  withdraw: {
-    icon: ArrowDownCircle,
-    iconColor: "text-[#1296DB]",
-    bgLight: "bg-[#EBF5FF]",
-    bgDark: "bg-[#0A2540]",
-    borderLight: "border-[#B2DDFF]",
-    borderDark: "border-[#1F4C73]",
-  },
-  resume: {
-    icon: PlayCircle,
-    iconColor: "text-[#17B26A]",
-    bgLight: "bg-[#ECFDF3]",
-    bgDark: "bg-[#0D3321]",
-    borderLight: "border-[#ABEFC6]",
-    borderDark: "border-[#1F5C3D]",
-  },
-  disburse: {
-    icon: Send,
-    iconColor: "text-[#1296DB]",
-    bgLight: "bg-[#EBF5FF]",
-    bgDark: "bg-[#0A2540]",
-    borderLight: "border-[#B2DDFF]",
-    borderDark: "border-[#1F4C73]",
-  },
-  publish: {
-    icon: Upload,
-    iconColor: "text-[#6366F1]",
-    bgLight: "bg-[#EEF2FF]",
-    bgDark: "bg-[#1E1B4B]",
-    borderLight: "border-[#C7D2FE]",
-    borderDark: "border-[#4338CA]",
-  },
-  complete: {
-    icon: CheckCircle2,
-    iconColor: "text-[#17B26A]",
-    bgLight: "bg-[#ECFDF3]",
-    bgDark: "bg-[#0D3321]",
-    borderLight: "border-[#ABEFC6]",
-    borderDark: "border-[#1F5C3D]",
-  },
-  pause: {
-    icon: PauseCircle,
-    iconColor: "text-[#F79009]",
-    bgLight: "bg-[#FFFAEB]",
-    bgDark: "bg-[#3D2E00]",
-    borderLight: "border-[#FEDF89]",
-    borderDark: "border-[#6B5300]",
-  },
-  fund: {
-    icon: Wallet,
-    iconColor: "text-[#17B26A]",
-    bgLight: "bg-[#ECFDF3]",
-    bgDark: "bg-[#0D3321]",
-    borderLight: "border-[#ABEFC6]",
-    borderDark: "border-[#1F5C3D]",
-  },
-};
 
 export const MilestonePaymentsTable: FC<MilestonePaymentsTableProps> = ({
   projectId,

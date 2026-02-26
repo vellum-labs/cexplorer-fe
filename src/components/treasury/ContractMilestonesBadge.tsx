@@ -1,5 +1,9 @@
 import type { FC } from "react";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
+import {
+  milestoneBaseStyles,
+  getMilestoneStatus,
+} from "@/constants/treasuryStyles";
 
 export type MilestoneStatus = "all_claimed" | "claimable" | "none";
 
@@ -14,62 +18,6 @@ export interface ContractMilestonesBadgeProps {
   };
 }
 
-const getMilestoneStatus = (
-  total: number,
-  completed: number,
-  pending: number,
-): { status: MilestoneStatus; count?: number } => {
-  if (total === 0) {
-    return { status: "none" };
-  }
-  if (completed === total) {
-    return { status: "all_claimed" };
-  }
-  if (pending > 0) {
-    return { status: "claimable", count: pending };
-  }
-  return { status: "none" };
-};
-
-const baseStyles = {
-  all_claimed: {
-    dark: {
-      border: "border-[#17B26A]",
-      bg: "bg-[#1C3B2D]",
-      text: "text-white",
-    },
-    light: {
-      border: "border-[#ABEFC6]",
-      bg: "bg-[#ECFDF3]",
-      text: "text-[#17B26A]",
-    },
-  },
-  claimable: {
-    dark: {
-      border: "border-[#0094D4]",
-      bg: "bg-[#1C384B]",
-      text: "text-white",
-    },
-    light: {
-      border: "border-[#B9E6FE]",
-      bg: "bg-[#EFF8FF]",
-      text: "text-[#0094D4]",
-    },
-  },
-  none: {
-    dark: {
-      border: "border-[#475467]",
-      bg: "bg-[#1D2939]",
-      text: "text-white",
-    },
-    light: {
-      border: "border-[#E4E7EC]",
-      bg: "bg-[#F9FAFB]",
-      text: "text-[#344054]",
-    },
-  },
-} as const;
-
 export const ContractMilestonesBadge: FC<ContractMilestonesBadgeProps> = ({
   total,
   completed,
@@ -78,7 +26,7 @@ export const ContractMilestonesBadge: FC<ContractMilestonesBadgeProps> = ({
 }) => {
   const { theme } = useThemeStore();
   const { status, count } = getMilestoneStatus(total, completed, pending);
-  const styles = baseStyles[status][theme];
+  const styles = milestoneBaseStyles[status][theme];
 
   const getLabel = () => {
     switch (status) {

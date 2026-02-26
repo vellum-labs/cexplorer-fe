@@ -3,9 +3,9 @@ import type { Milestone } from "@/services/vendorContracts";
 import {
   LoadingSkeleton,
   useThemeStore,
+  formatDate,
 } from "@vellumlabs/cexplorer-sdk";
-import { CheckCircle2, Clock } from "lucide-react";
-import { format } from "date-fns";
+import { milestoneStatusConfig } from "@/constants/treasuryStyles";
 
 interface MilestoneOverviewProps {
   milestones: Milestone[];
@@ -25,50 +25,6 @@ interface MilestoneOverviewProps {
     };
   };
 }
-
-const statusConfig = {
-  pending: {
-    icon: Clock,
-    iconColor: "text-[#F79009]",
-    bgLight: "bg-[#FFFAEB]",
-    bgDark: "bg-[#3D2E00]",
-    borderLight: "border-[#FEDF89]",
-    borderDark: "border-[#6B5300]",
-    textLight: "text-[#B54708]",
-    textDark: "text-[#FEC84B]",
-  },
-  completed: {
-    icon: CheckCircle2,
-    iconColor: "text-[#17B26A]",
-    bgLight: "bg-[#ECFDF3]",
-    bgDark: "bg-[#0D3321]",
-    borderLight: "border-[#ABEFC6]",
-    borderDark: "border-[#1F5C3D]",
-    textLight: "text-[#067647]",
-    textDark: "text-[#75E0A7]",
-  },
-  withdrawn: {
-    icon: CheckCircle2,
-    iconColor: "text-[#1296DB]",
-    bgLight: "bg-[#EBF5FF]",
-    bgDark: "bg-[#0A2540]",
-    borderLight: "border-[#B2DDFF]",
-    borderDark: "border-[#1F4C73]",
-    textLight: "text-[#0E6AAD]",
-    textDark: "text-[#84CAFF]",
-  },
-};
-
-const formatDate = (dateStr: string | null): string | null => {
-  if (!dateStr) return null;
-  try {
-    const date = new Date(dateStr);
-    if (isNaN(date.getTime())) return null;
-    return format(date, "MMMM do, yyyy");
-  } catch {
-    return null;
-  }
-};
 
 export const MilestoneOverview: FC<MilestoneOverviewProps> = ({
   milestones,
@@ -103,7 +59,7 @@ export const MilestoneOverview: FC<MilestoneOverviewProps> = ({
   }
 
   const getStatusBadge = (status: Milestone["status"]) => {
-    const cfg = statusConfig[status] || statusConfig.pending;
+    const cfg = milestoneStatusConfig[status] || milestoneStatusConfig.pending;
     const StatusIcon = cfg.icon;
 
     return (
@@ -124,7 +80,9 @@ export const MilestoneOverview: FC<MilestoneOverviewProps> = ({
 
       <div className='mt-2 flex gap-0 overflow-x-auto pb-2'>
         {milestones.map((milestone, index) => {
-          const completionDate = formatDate(milestone.completion);
+          const completionDate = milestone.completion
+            ? formatDate(new Date(milestone.completion).getTime())
+            : null;
           const isLast = index === milestones.length - 1;
 
           return (
@@ -156,7 +114,7 @@ export const MilestoneOverview: FC<MilestoneOverviewProps> = ({
 
                   {milestone.status === "completed" && milestone.disbursement && (
                     <span className='inline-flex w-fit items-center rounded-m border border-border px-2 py-0.5 text-text-xs text-grayTextPrimary'>
-                      Payment Withdrawn
+                      {labels.statusLabels.withdrawn}
                     </span>
                   )}
                 </div>

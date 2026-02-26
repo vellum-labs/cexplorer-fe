@@ -19,7 +19,7 @@
     "assets": "$t(shared:assets)",
     "contractTransactions": "Kontraktové transakce",
     "transactionsMetadata": "Metadata transakcí",
-    "treasuryDonations": "Příspěvky do treasruy",
+    "treasuryDonations": "Příspěvky do treasury",
     "treasuryContracts": "Treasury kontrakty"
   },
   "staking": {

@@ -22,28 +22,8 @@ import { intersectMboApiUrl } from "@/constants/confVariables";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useTreasuryContractsTableStore } from "@/stores/tables/treasuryContractsTableStore";
 import type { TreasuryContractsColumns } from "@/types/tableTypes";
-
-const treasuryContractsTableOptions: { key: keyof TreasuryContractsColumns }[] =
-  [
-    { key: "project" },
-    { key: "vendor" },
-    { key: "budget" },
-    { key: "milestones" },
-    { key: "status" },
-  ];
-
-const getVendorDisplay = (contract: VendorContract) => {
-  if (contract.vendor_address?.startsWith("addr")) {
-    return { type: "address" as const, value: contract.vendor_address };
-  }
-  if (contract.vendor_address) {
-    return { type: "text" as const, value: contract.vendor_address };
-  }
-  if (contract.vendor_name) {
-    return { type: "text" as const, value: contract.vendor_name };
-  }
-  return { type: "text" as const, value: "-" };
-};
+import { treasuryContractsTableOptions } from "@/constants/tables/treasuryContractsTableOptions";
+import { getVendorDisplay } from "@/utils/treasury/getVendorDisplay";
 
 export const TreasuryContractsPage = () => {
   const { t } = useAppTranslation(["pages", "common"]);

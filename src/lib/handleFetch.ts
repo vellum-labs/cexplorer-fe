@@ -1,4 +1,5 @@
 import type { StringifiableRecord } from "query-string";
+import queryString from "query-string";
 
 import { useAuthTokensStore } from "@/stores/authTokensStore";
 import { useNotFound } from "@/stores/useNotFound";
@@ -10,6 +11,7 @@ interface FetchOptions extends RequestInit {
   params?: StringifiableRecord;
   timeout?: number;
   retryCount?: number;
+  baseUrl?: string;
 
   headers?: HeadersInit;
   body?: BodyInit;
@@ -60,9 +62,15 @@ export const handleFetch = async <T>(
   options?: FetchOptions,
   hideToast: boolean = false,
 ): Promise<T & { prevOffset: number | undefined }> => {
-  const fullUrl = getUrl(url, options?.params);
+  const isExternal = !!options?.baseUrl;
+  const fullUrl = isExternal
+    ? queryString.stringifyUrl({
+        url: `${options.baseUrl}${url}`,
+        query: options?.params,
+      })
+    : getUrl(url, options?.params);
   const timeout = options?.timeout ?? 20000;
-  const retryCount = options?.retryCount ?? 2;
+  const retryCount = options?.retryCount ?? (isExternal ? 0 : 2);
   const headers = options?.headers;
   const body = options?.body;
   const method = options?.method ?? "GET";
@@ -78,8 +86,12 @@ export const handleFetch = async <T>(
         signal,
       });
 
-      if (response.status === 404) {
+      if (!isExternal && response.status === 404) {
         useNotFound.getState().setNotFound(true);
+      }
+
+      if (isExternal && !response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
 
       const responseHeaders: Record<string, string> = {};
@@ -89,21 +101,23 @@ export const handleFetch = async <T>(
 
       const data: T & { code?: string; msg?: string } = await response.json();
 
-      const isInvalidToken =
-        (data.code === "403" && data.msg === "Invalid user-token") ||
-        (response.status === 403 && data.msg === "Invalid user-token");
+      if (!isExternal) {
+        const isInvalidToken =
+          (data.code === "403" && data.msg === "Invalid user-token") ||
+          (response.status === 403 && data.msg === "Invalid user-token");
 
-      if (isInvalidToken) {
-        handleInvalidToken();
-      }
+        if (isInvalidToken) {
+          handleInvalidToken();
+        }
 
-      if (response.status !== 200 && !hideToast && !isInvalidToken) {
-        callNetworkErrorToast({
-          status: response.status,
-          apiUrl: response.url,
-          body: response.body,
-        });
-        throw new Error("The network response failed.");
+        if (response.status !== 200 && !hideToast && !isInvalidToken) {
+          callNetworkErrorToast({
+            status: response.status,
+            apiUrl: response.url,
+            body: response.body,
+          });
+          throw new Error("The network response failed.");
+        }
       }
 
       return { ...data, prevOffset: prevOffset, responseHeaders };

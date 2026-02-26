@@ -61,6 +61,50 @@ export const TreasuryOverviewCards: FC<TreasuryOverviewCardsProps> = ({
 
   const isLoading = treasuryQuery.isLoading || statisticsQuery.isLoading;
 
+  const statisticsOverviewList = [
+    {
+      label: labels.statistics.totalDistributed,
+      value: (
+        <Tooltip content={`₳${formatNumber(Math.round(totalDisbursed))}/${formatNumber(Math.round(totalAllocated))} ADA`}>
+          <span className='font-medium'>
+            ₳{formatNumberWithSuffix(Math.round(totalDisbursed))}/
+            {formatNumberWithSuffix(Math.round(totalAllocated))} ADA
+          </span>
+        </Tooltip>
+      ),
+    },
+    {
+      label: labels.statistics.completedProjects,
+      value: (
+        <span className='font-medium'>
+          {projects?.completed_count || 0}/{projects?.total_count || 0}
+        </span>
+      ),
+    },
+    {
+      label: labels.statistics.completedMilestones,
+      value: (
+        <span className='font-medium'>
+          {milestones?.completed_count || 0}/
+          {milestones?.total_count || 0}
+        </span>
+      ),
+    },
+    {
+      label: labels.statistics.lastUpdate,
+      value: (
+        <span className='font-medium'>
+          {lastUpdated}
+          {lastUpdatedDate && (
+            <span className='ml-1 text-grayTextSecondary'>
+              ({lastUpdatedDate})
+            </span>
+          )}
+        </span>
+      ),
+    },
+  ];
+
   if (isLoading) {
     return (
       <div className='mb-2 flex w-full flex-wrap gap-2'>
@@ -153,49 +197,7 @@ export const TreasuryOverviewCards: FC<TreasuryOverviewCardsProps> = ({
         className='min-h-[180px]'
         hFit
         columnGap='24px'
-        overviewList={[
-          {
-            label: labels.statistics.totalDistributed,
-            value: (
-              <Tooltip content={`₳${formatNumber(Math.round(totalDisbursed))}/${formatNumber(Math.round(totalAllocated))} ADA`}>
-                <span className='font-medium'>
-                  ₳{formatNumberWithSuffix(Math.round(totalDisbursed))}/
-                  {formatNumberWithSuffix(Math.round(totalAllocated))} ADA
-                </span>
-              </Tooltip>
-            ),
-          },
-          {
-            label: labels.statistics.completedProjects,
-            value: (
-              <span className='font-medium'>
-                {projects?.completed_count || 0}/{projects?.total_count || 0}
-              </span>
-            ),
-          },
-          {
-            label: labels.statistics.completedMilestones,
-            value: (
-              <span className='font-medium'>
-                {milestones?.completed_count || 0}/
-                {milestones?.total_count || 0}
-              </span>
-            ),
-          },
-          {
-            label: labels.statistics.lastUpdate,
-            value: (
-              <span className='font-medium'>
-                {lastUpdated}
-                {lastUpdatedDate && (
-                  <span className='ml-1 text-grayTextSecondary'>
-                    ({lastUpdatedDate})
-                  </span>
-                )}
-              </span>
-            ),
-          },
-        ]}
+        overviewList={statisticsOverviewList}
       />
     </div>
   );

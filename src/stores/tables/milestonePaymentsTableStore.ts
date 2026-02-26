@@ -25,7 +25,7 @@ export const useMilestonePaymentsTableStore = () =>
       },
       isResponsive: true,
       rows: 10,
-      columnsOrder: ["milestone", "amount", "transaction", "date", "event"],
+      columnsOrder: ["milestone", "event", "amount", "transaction", "date"],
     },
     set => ({
       setColumnVisibility: (columnKey, isVisible) =>
