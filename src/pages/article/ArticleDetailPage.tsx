@@ -162,7 +162,7 @@ export const ArticleDetailPage = () => {
                   height={380}
                 />
               </div>
-              <article className='[&>*]:text-base my-3 w-full text-left text-text-md lg:my-0 lg:w-[calc(100%-72px)] [&>p]:my-4'>
+              <article className='[&>*]:text-base my-3 w-full text-left text-text-md lg:my-0 lg:w-[calc(100%-72px)] [&>h2]:my-2'>
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   rehypePlugins={[rehypeRaw]}
