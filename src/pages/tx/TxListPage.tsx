@@ -82,8 +82,6 @@ export const TxListPage: FC<TxListPageProps> = ({
 
   const { expandRows, setExpandRows } = useTxExpandStore();
 
-  console.log(columnsVisibility);
-
   return (
     <PageBase
       showMetadata={!specifiedParams}
