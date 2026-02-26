@@ -102,8 +102,8 @@ export default defineConfig({
         display: "standalone",
       },
       injectManifest: {
-        globPatterns: ["**/*.{js,css,html,svg,png,jpg,jpeg,woff2,ttf,wasm}"],
-        globIgnores: ["**/sw.js", "**/404.html"],
+        globPatterns: ["**/*.{js,css,svg,png,jpg,jpeg,woff2,ttf,wasm}"],
+        globIgnores: ["**/sw.js", "**/index.html", "**/404.html"],
         maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
       },
     }),
