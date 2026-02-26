@@ -225,7 +225,7 @@ export const HomepageTableWidget: FC<HomepageTableWidgetProps> = ({
 
   return (
     <>
-      <div className='absolute right-[110px] top-[8px] z-10 flex items-center gap-1'>
+      <div className='absolute right-[140px] top-[8px] z-10 flex items-center gap-1'>
         {hasFilter && (
           <Button
             variant='tertiary'

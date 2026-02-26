@@ -162,7 +162,7 @@ export const ArticleDetailPage = () => {
                   height={380}
                 />
               </div>
-              <article className='[&>*]:text-base my-3 w-full text-left text-text-md lg:my-0 lg:w-[calc(100%-72px)] [&>p]:my-4'>
+              <article className='[&>*]:text-base my-3 w-full text-left text-text-md lg:my-0 lg:w-[calc(100%-72px)] [&>h2]:my-2'>
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   rehypePlugins={[rehypeRaw]}
@@ -177,103 +177,115 @@ export const ArticleDetailPage = () => {
               <div className='flex w-full flex-col gap-1.5 rounded-m border border-border bg-cardBg p-2'>
                 <h3>{t("articlePage.author")}</h3>
                 <h2>{renderArticleAuthor(data?.user_owner)}</h2>
-                <div className='flex w-full items-center justify-between gap-1.5 text-text-sm text-grayTextSecondary'>
-                  <span className='inline-block text-nowrap'>
-                    {t("articlePage.stakePool")}
-                  </span>
-                  {data?.user_owner?.pool?.meta?.ticker ? (
-                    <Link
-                      to='/pool/$id'
-                      params={{ id: data.user_owner.pool.id }}
-                      className='w-[60%] overflow-hidden text-ellipsis whitespace-nowrap text-right text-text-sm text-primary'
-                    >
-                      [{data.user_owner.pool.meta.ticker}]
-                    </Link>
-                  ) : data?.user_owner?.pool?.id ? (
-                    <Link
-                      to='/pool/$id'
-                      params={{ id: data.user_owner.pool.id }}
-                      className='w-[60%] overflow-hidden text-ellipsis whitespace-nowrap text-right text-text-sm text-primary'
-                    >
-                      {formatString(data.user_owner.pool.id, "long")}
-                    </Link>
-                  ) : (
-                    <span className='w-[60%] text-right text-text-sm'>-</span>
-                  )}
-                </div>
-                <div className='flex w-full items-center justify-between gap-1.5 text-text-sm text-grayTextSecondary [&>div]:w-[60%]'>
-                  <span className='inline-block text-nowrap'>
-                    {t("articlePage.drep")}
-                  </span>
-                  {data?.user_owner?.drep?.meta?.given_name ? (
-                    <Link
-                      to='/drep/$hash'
-                      params={{ hash: data.user_owner.drep.id }}
-                      className='w-[60%] overflow-hidden text-ellipsis whitespace-nowrap text-right text-text-sm text-primary'
-                    >
-                      {data.user_owner.drep.meta.given_name}
-                    </Link>
-                  ) : data?.user_owner?.drep?.id ? (
-                    <Link
-                      to='/drep/$hash'
-                      params={{ hash: data.user_owner.drep.id }}
-                      className='w-[60%] overflow-hidden text-ellipsis whitespace-nowrap text-right text-text-sm text-primary'
-                    >
-                      {formatString(data.user_owner.drep.id, "long")}
-                    </Link>
-                  ) : (
-                    <span className='w-[60%] text-right text-text-sm'>-</span>
-                  )}
-                </div>
-                {data?.user_owner?.profile?.social && (
+                {(data?.user_owner?.pool?.meta?.ticker ||
+                  data?.user_owner?.pool?.id) && (
                   <div className='flex w-full items-center justify-between gap-1.5 text-text-sm text-grayTextSecondary'>
                     <span className='inline-block text-nowrap'>
-                      {t("articlePage.socials")}
+                      {t("articlePage.stakePool")}
                     </span>
-                    <div className='flex items-center gap-2'>
-                      {!isEmptySocial(data.user_owner.profile.social.xcom) && (
-                        <a
-                          href={data.user_owner.profile.social.xcom}
-                          target='_blank'
-                          rel='nofollow noopener'
-                        >
-                          <Twitter size={20} color='#98A2B3' />
-                        </a>
-                      )}
-                      {!isEmptySocial(
-                        data.user_owner.profile.social.facebook,
-                      ) && (
-                        <a
-                          href={data.user_owner.profile.social.facebook}
-                          target='_blank'
-                          rel='nofollow noopener'
-                        >
-                          <Facebook size={20} color='#98A2B3' />
-                        </a>
-                      )}
-                      {!isEmptySocial(
-                        data.user_owner.profile.social.instagram,
-                      ) && (
-                        <a
-                          href={data.user_owner.profile.social.instagram}
-                          target='_blank'
-                          rel='nofollow noopener'
-                        >
-                          <Instagram size={20} color='#98A2B3' />
-                        </a>
-                      )}
-                      {!isEmptySocial(data.user_owner.profile.social.web) && (
-                        <a
-                          href={data.user_owner.profile.social.web}
-                          target='_blank'
-                          rel='nofollow noopener'
-                        >
-                          <LinkIcon size={20} color='#98A2B3' />
-                        </a>
-                      )}
-                    </div>
+                    {data?.user_owner?.pool?.meta?.ticker ? (
+                      <Link
+                        to='/pool/$id'
+                        params={{ id: data.user_owner.pool.id }}
+                        className='w-[60%] overflow-hidden text-ellipsis whitespace-nowrap text-right text-text-sm text-primary'
+                      >
+                        [{data.user_owner.pool.meta.ticker}]
+                      </Link>
+                    ) : data?.user_owner?.pool?.id ? (
+                      <Link
+                        to='/pool/$id'
+                        params={{ id: data.user_owner.pool.id }}
+                        className='w-[60%] overflow-hidden text-ellipsis whitespace-nowrap text-right text-text-sm text-primary'
+                      >
+                        {formatString(data.user_owner.pool.id, "long")}
+                      </Link>
+                    ) : (
+                      <span className='w-[60%] text-right text-text-sm'>-</span>
+                    )}
                   </div>
                 )}
+                {(data?.user_owner?.drep?.meta?.given_name ||
+                  data?.user_owner?.drep?.id) && (
+                  <div className='flex w-full items-center justify-between gap-1.5 text-text-sm text-grayTextSecondary [&>div]:w-[60%]'>
+                    <span className='inline-block text-nowrap'>
+                      {t("articlePage.drep")}
+                    </span>
+                    {data?.user_owner?.drep?.meta?.given_name ? (
+                      <Link
+                        to='/drep/$hash'
+                        params={{ hash: data.user_owner.drep.id }}
+                        className='w-[60%] overflow-hidden text-ellipsis whitespace-nowrap text-right text-text-sm text-primary'
+                      >
+                        {data.user_owner.drep.meta.given_name}
+                      </Link>
+                    ) : data?.user_owner?.drep?.id ? (
+                      <Link
+                        to='/drep/$hash'
+                        params={{ hash: data.user_owner.drep.id }}
+                        className='w-[60%] overflow-hidden text-ellipsis whitespace-nowrap text-right text-text-sm text-primary'
+                      >
+                        {formatString(data.user_owner.drep.id, "long")}
+                      </Link>
+                    ) : (
+                      <span className='w-[60%] text-right text-text-sm'>-</span>
+                    )}
+                  </div>
+                )}
+                {data?.user_owner?.profile?.social &&
+                  (!isEmptySocial(data.user_owner.profile.social.xcom) ||
+                    !isEmptySocial(data.user_owner.profile.social.facebook) ||
+                    !isEmptySocial(data.user_owner.profile.social.instagram) ||
+                    !isEmptySocial(data.user_owner.profile.social.web)) && (
+                    <div className='flex w-full items-center justify-between gap-1.5 text-text-sm text-grayTextSecondary'>
+                      <span className='inline-block text-nowrap'>
+                        {t("articlePage.socials")}
+                      </span>
+                      <div className='flex items-center gap-2'>
+                        {!isEmptySocial(
+                          data.user_owner.profile.social.xcom,
+                        ) && (
+                          <a
+                            href={data.user_owner.profile.social.xcom}
+                            target='_blank'
+                            rel='nofollow noopener'
+                          >
+                            <Twitter size={20} color='#98A2B3' />
+                          </a>
+                        )}
+                        {!isEmptySocial(
+                          data.user_owner.profile.social.facebook,
+                        ) && (
+                          <a
+                            href={data.user_owner.profile.social.facebook}
+                            target='_blank'
+                            rel='nofollow noopener'
+                          >
+                            <Facebook size={20} color='#98A2B3' />
+                          </a>
+                        )}
+                        {!isEmptySocial(
+                          data.user_owner.profile.social.instagram,
+                        ) && (
+                          <a
+                            href={data.user_owner.profile.social.instagram}
+                            target='_blank'
+                            rel='nofollow noopener'
+                          >
+                            <Instagram size={20} color='#98A2B3' />
+                          </a>
+                        )}
+                        {!isEmptySocial(data.user_owner.profile.social.web) && (
+                          <a
+                            href={data.user_owner.profile.social.web}
+                            target='_blank'
+                            rel='nofollow noopener'
+                          >
+                            <LinkIcon size={20} color='#98A2B3' />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 <div className='flex flex-wrap items-center gap-1'>
                   {data?.user_owner?.pool?.id && (
                     <Button

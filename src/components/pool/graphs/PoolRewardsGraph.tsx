@@ -7,7 +7,7 @@ import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 import ReactEcharts from "echarts-for-react";
 import type { ECharts } from "echarts";
-import { memo, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useMemo, useRef, useState } from "react";
 import { format } from "date-fns";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 
@@ -39,11 +39,19 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
   const miscConst = useMiscConst(basicData?.data.version.const);
   const { formatLovelace } = useADADisplay();
 
-  const [graphsVisibility, setGraphsVisibility] = useState({
-    "Delegators ROA (%)": true,
-    "Operators ROA (%)": true,
-    "Delegators Rewards (₳)": true,
-    "Operator rewards (₳)": true,
+  const [graphsVisibility, setGraphsVisibility] = useState(() => {
+    try {
+      const stored = localStorage.getItem("pool_rewards_graph_store");
+      if (stored) return JSON.parse(stored);
+    } catch (e) {
+      console.log(e);
+    }
+    return {
+      "Delegators ROA (%)": true,
+      "Operators ROA (%)": true,
+      "Delegators Rewards (₳)": true,
+      "Operator rewards (₳)": true,
+    };
   });
 
   const seriesLabels = useMemo(
@@ -240,20 +248,6 @@ const PoolRewardsGraph = memo(function PoolRewardsGraphMemo({
       seriesLabels,
     ],
   );
-
-  useEffect(() => {
-    if (window && "localStorage" in window) {
-      const graphStore = JSON.parse(
-        localStorage.getItem("pool_rewards_graph_store") as string,
-      );
-      if (graphStore) setGraphsVisibility(graphStore);
-      else
-        localStorage.setItem(
-          "pool_rewards_graph_store",
-          JSON.stringify(graphsVisibility),
-        );
-    }
-  }, []);
 
   return (
     <div className='relative w-full'>

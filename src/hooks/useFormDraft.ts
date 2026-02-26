@@ -48,7 +48,7 @@ export function useFormDraft<T extends object>(
   }, [serverData, storageKey, setFormState]);
 
   useEffect(() => {
-    if (!isInitialized.current) return;
+    if (!isInitialized.current || !serverDataLoaded.current) return;
 
     const timeout = setTimeout(() => {
       try {

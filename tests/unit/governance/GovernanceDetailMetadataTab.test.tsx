@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 
 // Activate all common mocks
-import "../../mocks";
+import "../mocks";
 
 // Mock child components
 vi.mock("@/components/address/AddressInspectorRow", () => ({
@@ -27,11 +27,11 @@ vi.mock("@/constants/markdows", () => ({
 }));
 
 import { GovernanceDetailMetadataTab } from "@/components/governance/tabs/GovernanceDetailMetadataTab";
-import { createMockQueryResult } from "../../mocks/services";
+import { createMockQueryResult } from "../mocks/services";
 import {
   governanceActionDetailFixture,
   minimalGovernanceActionFixture,
-} from "../../fixtures/governanceActionDetail";
+} from "../fixtures/governanceActionDetail";
 
 // Helpers
 const makeQuery = (data: any) =>

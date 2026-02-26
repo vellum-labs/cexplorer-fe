@@ -3,11 +3,18 @@ import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { TextInput } from "@vellumlabs/cexplorer-sdk";
 import { SpinningLoader } from "@vellumlabs/cexplorer-sdk";
+import { Modal } from "@vellumlabs/cexplorer-sdk";
+import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import {
   BreadcrumbRaw,
   BreadcrumbItem,
   BreadcrumbList,
 } from "@vellumlabs/cexplorer-sdk";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
+import parse from "html-react-parser";
+import { markdownComponents } from "@/constants/markdows";
 import { useFetchAdminArticle, useUpdateAdminArticle } from "@/services/user";
 import { useAuthTokensStore } from "@/stores/authTokensStore";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
@@ -71,6 +78,8 @@ export const AdminContentDetail = ({
   });
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [showPreview, setShowPreview] = useState(false);
+  const [clickedUrl, setClickedUrl] = useState<string | null>(null);
   const data = query?.data?.data as AdminArticleDetailResponse["data"];
 
   const needCheck = data?.need_check === 1 ? true : false;
@@ -318,13 +327,54 @@ export const AdminContentDetail = ({
               {formState.content}
             </SyntaxHighlighter>
           </div>
-          <Button
-            label='Save'
-            size='lg'
-            variant='primary'
-            onClick={handleUpdate}
-            className='fixed bottom-4 right-10'
-          />
+          <div className='fixed bottom-4 right-10 flex gap-2'>
+            <Button
+              label='Preview'
+              size='lg'
+              variant='secondary'
+              onClick={() => setShowPreview(true)}
+            />
+            <Button
+              label='Save'
+              size='lg'
+              variant='primary'
+              onClick={handleUpdate}
+            />
+          </div>
+
+          {showPreview && (
+            <Modal
+              maxWidth='900px'
+              maxHeight='95%'
+              onClose={() => setShowPreview(false)}
+            >
+              <article className='rounded-xl border border-border bg-cardBg p-2'>
+                <h2 className='text-2xl mb-4 font-bold'>
+                  {parse(formState.name || "")}
+                </h2>
+                <div className='prose prose-sm max-w-none text-grayTextPrimary [&>p]:my-3'>
+                  {formState.render === "markdown" ? (
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      rehypePlugins={[rehypeRaw]}
+                      components={markdownComponents(setClickedUrl)}
+                    >
+                      {formState.content || ""}
+                    </ReactMarkdown>
+                  ) : (
+                    parse(formState.content || "")
+                  )}
+                </div>
+              </article>
+            </Modal>
+          )}
+
+          {clickedUrl && (
+            <SafetyLinkModal
+              url={clickedUrl}
+              onClose={() => setClickedUrl(null)}
+            />
+          )}
         </>
       )}
     </main>

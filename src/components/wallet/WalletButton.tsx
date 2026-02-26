@@ -1,5 +1,4 @@
 import { walletInfos } from "@/constants/wallet";
-import { useConnectWallet } from "@/hooks/useConnectWallet";
 import { useFetchUserInfo } from "@/services/user";
 import { useWalletStore } from "@/stores/walletStore";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
@@ -22,19 +21,7 @@ const WalletButton = ({ variant = "short", autoOpen = false }: Props) => {
   const [showDropdown, setShowDropdown] = useState(autoOpen);
 
   const timeoutRef = useRef<NodeJS.Timeout>();
-
-  const handleOpen = () => {
-    clearTimeout(timeoutRef.current);
-    setShowDropdown(true);
-  };
-
-  const handleClose = () => {
-    timeoutRef.current = setTimeout(() => {
-      setShowDropdown(false);
-    }, 250);
-  };
-  const { address, walletType, wallet, setWalletState } = useWalletStore();
-  const { disconnect } = useConnectWallet();
+  const { address, walletType, wallet } = useWalletStore();
   const [balance, setBalance] = useState(0);
   const userQuery = useFetchUserInfo();
 
@@ -60,50 +47,16 @@ const WalletButton = ({ variant = "short", autoOpen = false }: Props) => {
 
   const handleCloseDropdown = useCallback(() => setShowDropdown(false), []);
   const handleSwitchWallet = useCallback(() => setShowWalletModal(true), []);
+  const handleOpen = () => {
+    clearTimeout(timeoutRef.current);
+    setShowDropdown(true);
+  };
 
-  const walletChannelRef = useRef<BroadcastChannel>();
-
-  if (!walletChannelRef.current) {
-    walletChannelRef.current = new BroadcastChannel("wallet_channel");
-  }
-
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      const { type, payload } = event.data;
-      switch (type) {
-        case "WALLET_CONNECTED":
-          setWalletState({
-            address: payload.address,
-            walletType: payload.walletType,
-          });
-          break;
-        case "WALLET_DISCONNECTED":
-          disconnect();
-          break;
-        default:
-          break;
-      }
-    };
-    const controller = new AbortController();
-    const signal = controller.signal;
-
-    walletChannelRef.current?.addEventListener("message", handleMessage, {
-      signal,
-    });
-
-    return () => {
-      controller.abort();
-    };
-  }, [disconnect]);
-
-  useEffect(() => {
-    if (address && walletType) {
-      walletChannelRef.current?.postMessage({
-        type: "WALLET_CONNECTED",
-        payload: { address, walletType },
-      });
-    }
-  }, [address, walletType]);
+  const handleClose = () => {
+    timeoutRef.current = setTimeout(() => {
+      setShowDropdown(false);
+    }, 250);
+  };
 
   useEffect(() => {
     const getBalance = async () => {

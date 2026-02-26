@@ -1,11 +1,7 @@
 import { clientsClaim, cacheNames } from "workbox-core";
-import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
-import { registerRoute, NavigationRoute } from "workbox-routing";
-import {
-  NetworkFirst,
-  CacheFirst,
-  StaleWhileRevalidate,
-} from "workbox-strategies";
+import { precacheAndRoute } from "workbox-precaching";
+import { registerRoute } from "workbox-routing";
+import { CacheFirst, StaleWhileRevalidate } from "workbox-strategies";
 import { ExpirationPlugin } from "workbox-expiration";
 
 self.skipWaiting();
@@ -45,7 +41,6 @@ if (!("caches" in self)) {
   self.addEventListener("activate", event => {
     const currentCaches = [
       PRECACHE_CACHE_NAME,
-      "html-cache",
       "wasm-files",
       "images",
       "static-resources",
@@ -75,20 +70,6 @@ if (!("caches" in self)) {
       })(),
     );
   });
-
-  registerRoute(
-    /index\.html/,
-    new NetworkFirst({
-      cacheName: "html-cache",
-      networkTimeoutSeconds: 5,
-      plugins: [
-        new ExpirationPlugin({
-          maxEntries: 1,
-        }),
-        new ErrorReportPlugin(),
-      ],
-    }),
-  );
 
   registerRoute(
     /\.wasm$/,
@@ -158,10 +139,4 @@ if (!("caches" in self)) {
     }),
     new ErrorReportPlugin(),
   );
-
-  const handler = createHandlerBoundToURL("/index.html");
-  const navigationRoute = new NavigationRoute(handler, {
-    denylist: [/^\/api\//],
-  });
-  registerRoute(navigationRoute);
 }

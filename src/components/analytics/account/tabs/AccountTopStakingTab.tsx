@@ -5,7 +5,7 @@ import type {
 } from "@/types/tableTypes";
 import type { FC } from "react";
 
-import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { AdaWithTooltip, Copy } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import ExportButton from "@/components/table/ExportButton";
@@ -89,15 +89,18 @@ export const AccountTopStakingTab: FC = () => {
         }
 
         return (
-          <Link
-            to='/stake/$stakeAddr'
-            params={{
-              stakeAddr: item.view,
-            }}
-            className='text-primary'
-          >
-            {formatString(item.view, "long")}
-          </Link>
+          <div className='flex items-center gap-1'>
+            <Link
+              to='/stake/$stakeAddr'
+              params={{
+                stakeAddr: item.view,
+              }}
+              className='text-primary'
+            >
+              {formatString(item.view, "long")}
+            </Link>
+            <Copy copyText={item.view} />
+          </div>
         );
       },
       title: t("analytics.account"),

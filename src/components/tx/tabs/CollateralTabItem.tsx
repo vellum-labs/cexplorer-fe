@@ -1,5 +1,5 @@
 import AddressCell from "@/components/address/AddressCell";
-import AssetLink from "@/components/asset/AssetLink";
+import { AssetsBrowseDropdown } from "@/components/tx/AssetsBrowseDropdown";
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { AddressTypeInitialsBadge } from "@vellumlabs/cexplorer-sdk";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
@@ -61,14 +61,10 @@ const CollateralTabItem = () => {
     {
       key: "asset",
       render: item => (
-        <span className='flex justify-end gap-1/2 text-right'>
-          {item.asset?.map(asset => (
-            <AssetLink
-              type={"input"}
-              asset={asset}
-              className='min-w-[110px] max-w-[110px]'
-            />
-          ))}
+        <span className='flex justify-end'>
+          {item.asset && item.asset.length > 0 ? (
+            <AssetsBrowseDropdown assets={item.asset} type='input' />
+          ) : null}
         </span>
       ),
       title: (

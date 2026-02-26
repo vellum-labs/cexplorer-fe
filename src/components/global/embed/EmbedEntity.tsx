@@ -4,7 +4,7 @@ import type {
   EMBED_CONFIG_SIMPLE_LINK,
 } from "@/constants/embed";
 import { EMBED_TYPES } from "@/constants/embed";
-import { EMBED_CONFIG_BANNERS } from "@/constants/embed";
+import type { EMBED_CONFIG_BANNERS } from "@/constants/embed";
 
 import {
   EMBED_CONFIG_EXTRA_FORMAT,
@@ -69,14 +69,10 @@ export const EmbedEntity: FC<EmbedEntityProps> = ({
   const embedUrl = `https://embed.cexplorer.io/?type=${embedType}&data=${entityType.slice(0, entityType.length - 1)}:${entityId}&config=${theme},${network},${format}${DIVIDER}${config.join(",")}`;
 
   const iframeWidth = embedType === EMBED_TYPES.GRAPH ? 800 : 550;
-  const iframeHeight =
-    embedType === EMBED_TYPES.GRAPH
-      ? 700
-      : config.includes(EMBED_CONFIG_BANNERS.COMPACT)
-        ? 400
-        : 330;
 
-  const embedCode = `<iframe src='${embedUrl}' width={${iframeWidth}} height={${iframeHeight}} />`;
+  const iframeHeight = embedType === EMBED_TYPES.GRAPH ? 700 : 400;
+
+  const embedCode = `<iframe frameBorder={0} src="${embedUrl}" width="${iframeWidth}" height="${iframeHeight}" />`;
 
   const mode = [
     {
@@ -256,7 +252,12 @@ export const EmbedEntity: FC<EmbedEntityProps> = ({
           {t("embed.preview")}
         </span>
         <div className='overflow-x-auto'>
-          <iframe src={embedUrl} width={iframeWidth} height={iframeHeight} />
+          <iframe
+            frameBorder={0}
+            src={embedUrl}
+            width={iframeWidth}
+            height={iframeHeight}
+          />
         </div>
       </div>
     </div>

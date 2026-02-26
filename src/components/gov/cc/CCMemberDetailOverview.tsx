@@ -11,17 +11,17 @@ interface CCMemberDetailOverviewProps {
   memberData: CommitteeMember | undefined;
   isLoading: boolean;
   isError: boolean;
-  votesData: any;
+  lastVoteTime?: string;
 }
 
 export const CCMemberDetailOverview: FC<CCMemberDetailOverviewProps> = ({
   memberData,
   isLoading,
   isError,
-  votesData,
+  lastVoteTime,
 }) => {
   const { t } = useAppTranslation();
-  const { about, governance } = useCCMemberDetail({ memberData, votesData });
+  const { about, governance } = useCCMemberDetail({ memberData, lastVoteTime });
 
   if (isLoading) {
     return (

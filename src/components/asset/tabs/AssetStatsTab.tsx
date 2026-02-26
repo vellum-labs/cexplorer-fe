@@ -5,7 +5,7 @@ import type { ReactEChartsProps } from "@/lib/ReactCharts";
 import { useFetchAssetStats } from "@/services/assets";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import ReactEcharts from "echarts-for-react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { format } from "date-fns";
 import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { useMiscConst } from "@/hooks/useMiscConst";
@@ -61,14 +61,22 @@ export const AssetStatsTab = ({ fingerprint }: Props) => {
     chartRef.current = chart;
   };
 
-  const [graphsVisibility, setGraphsVisibility] = useState(() => ({
-    [t("asset.adaOutput")]: true,
-    [t("asset.assetVolume")]: true,
-    [t("asset.interactingPaymentCredentials")]: false,
-    [t("asset.interactingAccounts")]: true,
-    [t("asset.interactingAddresses")]: false,
-    [t("asset.smartTransactions")]: true,
-  }));
+  const [graphsVisibility, setGraphsVisibility] = useState(() => {
+    try {
+      const stored = localStorage.getItem("asset_stats_graph_store");
+      if (stored) return JSON.parse(stored);
+    } catch (e) {
+      console.log(e);
+    }
+    return {
+      [t("asset.adaOutput")]: true,
+      [t("asset.assetVolume")]: true,
+      [t("asset.interactingPaymentCredentials")]: false,
+      [t("asset.interactingAccounts")]: true,
+      [t("asset.interactingAddresses")]: false,
+      [t("asset.smartTransactions")]: true,
+    };
+  });
 
   const option: ReactEChartsProps["option"] = {
     legend: {
@@ -191,22 +199,6 @@ export const AssetStatsTab = ({ fingerprint }: Props) => {
       },
     ],
   };
-
-  useEffect(() => {
-    if (typeof window !== "undefined" && "localStorage" in window) {
-      const graphStore = JSON.parse(
-        localStorage.getItem("asset_stats_graph_store") as string,
-      );
-      if (graphStore) {
-        setGraphsVisibility(graphStore);
-      } else {
-        localStorage.setItem(
-          "asset_stats_graph_store",
-          JSON.stringify(graphsVisibility),
-        );
-      }
-    }
-  }, []);
 
   return (
     <div className='relative w-full'>

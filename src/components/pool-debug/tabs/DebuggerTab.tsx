@@ -65,7 +65,7 @@ export const DebuggerTab: FC<DebuggerTabProps> = ({
       render: (item: PoolDebugError) => {
         const urlMatch = item.description.match(/(https?:\/\/[^\s]+)/);
         if (urlMatch) {
-          const url = urlMatch[1];
+          const url = urlMatch[1].replace(/[.,;:!?"')\]]+$/, "");
           const parts = item.description.split(url);
           return (
             <span className='text-grayTextPrimary'>

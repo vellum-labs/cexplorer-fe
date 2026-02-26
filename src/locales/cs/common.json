@@ -1000,7 +1000,7 @@
       "expiration": "Expirace",
       "governanceAction": "$t(shared:governanceAction)",
       "vote": "$t(shared:labels.vote)",
-      "totalVotes": "$t(shared:totalVotes)",
+      "totalVotes": "Celkem hlasů",
       "searchResults": "$t(shared:searchPlaceholder)",
       "txHash": "Tx Hash",
       "time": "$t(shared:labels.time)",
@@ -1169,7 +1169,9 @@
       "actionType": "$t(shared:actionType)",
       "title": "$t(shared:labels.title)",
       "abstracts": "Abstrakt",
-      "rationale": "Zdůvodnění"
+      "rationale": "Zdůvodnění",
+      "references": "Reference",
+      "referenceWithoutLabel": "Reference bez popisku:"
     },
     "statusHistory": {
       "timestamp": "$t(shared:labels.timestamp)",

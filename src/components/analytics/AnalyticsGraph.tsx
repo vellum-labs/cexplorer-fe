@@ -67,7 +67,10 @@ export const AnalyticsGraph: FC<Props> = ({
   const [showFeatureModal, setShowFeatureModal] = useState<boolean>(false);
   const [showConnectWallet, setShowConnectWallet] = useState<boolean>(false);
   const [showExportGraph, setShowExportGraph] = useState<boolean>(false);
-  const [json, setJson] = useState<any>();
+  const jsonRef = useRef<any>(null);
+  const setJson = useCallback((data: any) => {
+    jsonRef.current = data;
+  }, []);
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -147,7 +150,7 @@ export const AnalyticsGraph: FC<Props> = ({
         <ExportGraphModal
           onClose={() => setShowExportGraph(false)}
           onPNG={exportGraphToPng}
-          onCSV={() => exportGraphToCsv(csvJson ?? json)}
+          onCSV={() => exportGraphToCsv(csvJson ?? jsonRef.current)}
         />
       )}
       <div
