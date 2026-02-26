@@ -62,8 +62,10 @@ export const useTxList = ({
 }: UseTxListArgs): UseTxList => {
   const { t } = useAppTranslation("pages");
   const { infiniteScrolling } = useInfiniteScrollingStore();
-  const { rows, columnsVisibility, setColumnVisibility } =
-    useTxListTableStore(storeKey)();
+  const { rows, columnsVisibility, setColumnVisibility } = useTxListTableStore(
+    storeKey,
+    address,
+  )();
 
   const { expandRows } = useTxExpandStore();
 
