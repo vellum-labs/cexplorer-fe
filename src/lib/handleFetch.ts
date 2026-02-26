@@ -59,6 +59,7 @@ export const handleFetch = async <T>(
   prevOffset?: number,
   options?: FetchOptions,
   hideToast: boolean = false,
+  hideNotFound: boolean = false,
 ): Promise<T & { prevOffset: number | undefined }> => {
   const fullUrl = getUrl(url, options?.params);
   const timeout = options?.timeout ?? 20000;
@@ -78,7 +79,7 @@ export const handleFetch = async <T>(
         signal,
       });
 
-      if (response.status === 404) {
+      if (response.status === 404 && !hideNotFound) {
         useNotFound.getState().setNotFound(true);
       }
 

@@ -53,10 +53,10 @@ export const RecentlyMintedHandlesTab: FC = () => {
     query.data?.pages?.flatMap(page => page?.data?.data ?? []) ?? [];
   const totalFromQuery = query.data?.pages?.[0]?.data?.count ?? 0;
   const totalRef = useRef(0);
-  if (totalFromQuery > 0) {
+  if (!debouncedSearch && totalFromQuery > 0) {
     totalRef.current = totalFromQuery;
   }
-  const totalItems = totalRef.current;
+  const totalItems = debouncedSearch ? totalFromQuery : totalRef.current;
 
   const columns = [
     {
@@ -88,7 +88,12 @@ export const RecentlyMintedHandlesTab: FC = () => {
         return (
           <Link
             to='/handle-dns'
-            search={{ page: 1, search: undefined, tab: "validator", handle: `$${item.name}` }}
+            search={{
+              page: 1,
+              search: undefined,
+              tab: "validator",
+              handle: `$${item.name}`,
+            }}
             className='flex items-center gap-1/2 text-text hover:text-primary'
           >
             <img src={DollarIcon} alt='$' className='h-[14px] w-[14px]' />
@@ -103,7 +108,10 @@ export const RecentlyMintedHandlesTab: FC = () => {
     {
       key: "rarity",
       render: (item: AdaHandleListItem) => {
-        const rarityColors: Record<string, "gray" | "blue" | "purple" | "yellow"> = {
+        const rarityColors: Record<
+          string,
+          "gray" | "blue" | "purple" | "yellow"
+        > = {
           basic: "gray",
           common: "blue",
           rare: "purple",
@@ -112,7 +120,10 @@ export const RecentlyMintedHandlesTab: FC = () => {
         const color = rarityColors[item.rarity] ?? "gray";
         const displayRarity = item.rarity?.replace(/_/g, " ") ?? "unknown";
         return (
-          <Badge color={color} className='min-w-[80px] justify-center capitalize'>
+          <Badge
+            color={color}
+            className='min-w-[80px] justify-center capitalize'
+          >
             {displayRarity}
           </Badge>
         );
@@ -149,14 +160,20 @@ export const RecentlyMintedHandlesTab: FC = () => {
             <LoadingSkeleton height='27px' width='220px' />
           ) : totalItems > 0 ? (
             <h3 className='text-text-lg font-medium'>
-              {t("common:handleDns.recentlyMinted.totalHandles", { count: totalItems.toLocaleString() })}
+              {t("common:handleDns.recentlyMinted.totalHandles", {
+                count: totalItems.toLocaleString(),
+              })}
             </h3>
-          ) : null}
+          ) : (
+            <div />
+          )}
           <div className='flex items-center gap-1'>
             <TableSearchInput
               value={searchValue}
               onchange={handleSearchChange}
-              placeholder={t("common:handleDns.recentlyMinted.searchPlaceholder")}
+              placeholder={t(
+                "common:handleDns.recentlyMinted.searchPlaceholder",
+              )}
               showSearchIcon
               wrapperClassName='hidden w-[320px] md:flex'
               showPrefixPopup={false}
