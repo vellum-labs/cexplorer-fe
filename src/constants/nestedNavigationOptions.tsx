@@ -58,6 +58,10 @@ export const nestedNavigationOptions: {
           ),
           href: "/handle-dns",
         },
+        {
+          label: "Script verification",
+          href: "/script/verification",
+        },
       ],
     },
     services: {
