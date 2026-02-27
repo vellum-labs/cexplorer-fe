@@ -78,7 +78,7 @@ export const TxListPage: FC<TxListPageProps> = ({
     setColumnVisibility,
     setRows,
     setColumsOrder,
-  } = useTxListTableStore()();
+  } = useTxListTableStore(undefined, address)();
 
   const { expandRows, setExpandRows } = useTxExpandStore();
 
