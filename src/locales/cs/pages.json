@@ -1103,5 +1103,65 @@
       "errors": "{{count}} Chyb",
       "poolDetail": "Detail poolu →"
     }
+  },
+  "portfolio": {
+    "title": "Portfolio Tracker",
+    "breadcrumb": "Portfolio",
+    "comingSoon": "Portfolio Tracker bude brzy k dispozici.",
+    "composition": {
+      "title": "Složení",
+      "allAddresses": "Zobrazeny všechny adresy",
+      "category": "Kategorie",
+      "breakdown": "Rozdělení",
+      "total": "Celkem",
+      "tokens": "Tokeny",
+      "nfts": "NFT",
+      "tokensLabel": "tokenů",
+      "nftsLabel": "NFT",
+      "count": "Počet",
+      "share": "Podíl",
+      "poolDelegation": "Delegace na pool",
+      "drepDelegation": "Delegace na DRep",
+      "notDelegated": "Nedelegováno",
+      "delegate": "Delegovat"
+    },
+    "wallets": {
+      "title": "Peněženky",
+      "subtitle": "Sledované peněženky",
+      "added": "přidáno",
+      "clickToDisplay": "Klikněte na peněženku pro zobrazení složení",
+      "addWallet": "Přidat peněženku",
+      "editWallets": "Upravit peněženky",
+      "editHint": "Přejmenujte nebo smažte peněženky",
+      "done": "Hotovo"
+    },
+    "addWallet": {
+      "title": "Přidat peněženku",
+      "subtitle": "Zadejte stake adresu (stake1...) nebo platební adresu (addr1...)",
+      "namePlaceholder": "Název peněženky",
+      "addressPlaceholder": "stake1... nebo addr1...",
+      "nameRequired": "Název peněženky je povinný",
+      "addressRequired": "Adresa je povinná",
+      "maxWallets": "Dosažen limit 10 peněženek",
+      "noStakeKey": "Tato adresa nemá stake klíč",
+      "invalidAddress": "Neplatný formát adresy",
+      "duplicateAddress": "Tato peněženka je již přidána",
+      "fetchError": "Nepodařilo se přeložit adresu",
+      "resolvedTo": "Převedeno na stake adresu:",
+      "adding": "Přidávání...",
+      "add": "Přidat"
+    },
+    "editWallets": {
+      "title": "Upravit peněženky",
+      "noWallets": "Zatím nejsou přidány žádné peněženky"
+    },
+    "tabs": {
+      "holdings": "Držení",
+      "trades": "Obchody"
+    },
+    "empty": {
+      "title": "Přidejte svou první peněženku",
+      "subtitle": "Sledujte až 10 peněženek a podívejte se na složení portfolia"
+    }
   }
 }

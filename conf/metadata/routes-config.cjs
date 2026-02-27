@@ -913,6 +913,15 @@ const routes = [
       "staking withdrawals, reward claims, reward withdrawals, Cardano withdrawals, claimed rewards, Cexplorer, reward claims, withdrawal history",
     api: false,
   },
+  {
+    path: "/portfolio",
+    title: "Portfolio Tracker | Cexplorer.io",
+    description:
+      "Track your Cardano portfolio across multiple wallets. Monitor ADA balance, tokens, and NFT holdings in one place. Add up to 10 wallet addresses and view asset breakdowns, delegation status, and portfolio performance.",
+    keywords:
+      "portfolio tracker, Cardano portfolio, wallet tracker, ADA balance, token holdings, NFT portfolio, multi-wallet, Cexplorer, asset tracking",
+    api: false,
+  },
 ];
 
 module.exports = {
