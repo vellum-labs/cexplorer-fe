@@ -2928,5 +2928,9 @@
     "delegateToDrep": "Delegate to DRep",
     "keywords": "Keywords",
     "copyLink": "Copy link"
+  },
+  "cookie": {
+    "message": "We use cookies to improve your experience. By continuing to use this site, you agree to our",
+    "accept": "Accept"
   }
 }
