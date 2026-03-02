@@ -39,13 +39,9 @@ export const VoteCell: FC<VoteCellProps> = ({
     content: modalContent,
     isLoading,
     isOpen: isModalOpen,
+    isError: isContentError,
     fetchContent,
     close: closeModal,
-  } = useFetchUrlContent();
-  const {
-    content: fullMetadata,
-    fetchContent: fetchFullMetadata,
-    isError: isFullMetadataError,
   } = useFetchUrlContent();
   const [showFullMetadata, setShowFullMetadata] = useState(false);
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
@@ -64,9 +60,13 @@ export const VoteCell: FC<VoteCellProps> = ({
 
     if (anchorInfo.url) {
       await fetchContent(anchorInfo.url, anchorInfo.data_hash);
-      await fetchFullMetadata(anchorInfo.url, anchorInfo.data_hash);
     }
   };
+
+  let parsedFullMetadata: unknown = null;
+  if (modalContent && !isContentError) {
+    parsedFullMetadata = JSON.parse(modalContent);
+  }
 
   return (
     <div className='flex items-center gap-1'>
@@ -140,9 +140,9 @@ export const VoteCell: FC<VoteCellProps> = ({
               ) : (
                 <>
                   <div className='rounded-lg text-sm max-h-[500px] overflow-auto'>
-                    {showFullMetadata && fullMetadata ? (
+                    {showFullMetadata && parsedFullMetadata ? (
                       <JsonDisplay
-                        data={JSON.parse(fullMetadata)}
+                        data={parsedFullMetadata}
                         isLoading={false}
                         isError={false}
                         noDataLabel={t("sdk:jsonDisplay.noDataLabel")}
@@ -164,7 +164,7 @@ export const VoteCell: FC<VoteCellProps> = ({
                       </div>
                     )}
                   </div>
-                  {fullMetadata && !isFullMetadataError && (
+                  {parsedFullMetadata && (
                     <div className='mt-3'>
                       <Button
                         size='sm'
