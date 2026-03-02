@@ -15,6 +15,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { parseCborHex } from "@/utils/uplc/uplc";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { ScriptVerifyBadge } from "./ScriptVerifyBadge";
 
 interface ContractInputProps {
   input: TxInput;
@@ -131,7 +132,7 @@ export const ContractInput: FC<ContractInputProps> = ({
               miscConst={miscConst}
             />
           </span>
-          <span className='flex items-center gap-1'>
+          <span className='flex flex-wrap items-center gap-1'>
             <Link
               to='/script/$hash'
               params={{ hash: contract?.script_hash }}
@@ -140,6 +141,7 @@ export const ContractInput: FC<ContractInputProps> = ({
               {contract?.script_hash}
             </Link>
             <Copy copyText={contract?.script_hash} />
+            <ScriptVerifyBadge scriptHash={contract?.script_hash} />
           </span>
         </span>
         <div className='mt-2'>

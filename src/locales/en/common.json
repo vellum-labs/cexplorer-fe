@@ -2222,6 +2222,17 @@
     "convertUplc": "Convert UPLC",
     "uplc": "UPLC",
     "prettyPrint": "Pretty-print",
+    "verifySource": "Verify Source",
+    "sourceVerified": "Source Verified",
+    "sourceUnknown": "Source Unknown",
+    "compiler": "Compiler",
+    "plutusVersion": "Plutus Version",
+    "module": "Module",
+    "purposes": "Purposes",
+    "parametrization": "Parametrization",
+    "commit": "Commit",
+    "repository": "Repository",
+    "dataFrom": "Data from",
     "noCollateralFound": "No collateral found",
     "noContractsFound": "No contracts found",
     "totalScriptSize": "Total Script Size",
@@ -2285,6 +2296,34 @@
       "upcoming": "Upcoming"
     }
   },
+  "scriptVerification": {
+    "title": "Script Verification",
+    "breadcrumbs": {
+      "developers": "Developers",
+      "scriptVerification": "Script Verification"
+    },
+    "placeholder": "Enter script hash...",
+    "scriptDetail": "Script detail",
+    "dataFrom": "Data from",
+    "rows": {
+      "status": "Status",
+      "plutusVersion": "Plutus version",
+      "compiler": "Compiler",
+      "sourceUrl": "Source URL",
+      "commitHash": "Commit hash",
+      "scriptName": "Script name",
+      "moduleName": "Module name",
+      "validatorName": "Validator name",
+      "purposes": "Purposes",
+      "rawHash": "Raw hash",
+      "finalHash": "Final hash",
+      "parametrizationStatus": "Parametrization status",
+      "rawResponse": "Raw response"
+    },
+    "sourceVerified": "Source Verified",
+    "sourceUnknown": "Source Unknown",
+    "completed": "Completed"
+  },
   "devTooling": {
     "title": "Developer Tools",
     "breadcrumb": "$t(shared:developers)",
@@ -2315,6 +2354,11 @@
         "label": "$t(shared:title2)",
         "description": "Inspect and explore UPLC scripts in a readable, structured format.",
         "button": "$t(shared:title2)"
+      },
+      "scriptVerification": {
+        "label": "Script Verification",
+        "description": "Verify the source code of on-chain Plutus scripts using UPLC.link.",
+        "button": "Script Verification"
       },
       "cexplorerInstances": {
         "label": "Cexplorer instances",
