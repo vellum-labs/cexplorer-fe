@@ -15,6 +15,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { parseCborHex } from "@/utils/uplc/uplc";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { ScriptVerifyBadge } from "./ScriptVerifyBadge";
 
 interface ContractInputProps {
   input: TxInput;
@@ -81,7 +82,7 @@ export const ContractInput: FC<ContractInputProps> = ({
         </div>
         <PurposeBadge purpose={input.redeemer.purpose} />
         <span className='bg-blue-200/15 flex h-[25px] items-center rounded-max border border-border px-1 text-text-xs font-medium'>
-          {contract.type.slice(0, 1).toUpperCase() + contract.type.slice(1)}
+          {contract.type ? contract.type.slice(0, 1).toUpperCase() + contract.type.slice(1) : "-"}
         </span>
         <span className='flex h-[25px] items-center rounded-max border border-border bg-secondaryBg px-1 text-text-xs font-medium'>
           {t("tx.size")} {(contract.size / 1024).toFixed(2)}kB
@@ -131,7 +132,7 @@ export const ContractInput: FC<ContractInputProps> = ({
               miscConst={miscConst}
             />
           </span>
-          <span className='flex items-center gap-1'>
+          <span className='flex flex-wrap items-center gap-1'>
             <Link
               to='/script/$hash'
               params={{ hash: contract?.script_hash }}
@@ -140,6 +141,7 @@ export const ContractInput: FC<ContractInputProps> = ({
               {contract?.script_hash}
             </Link>
             <Copy copyText={contract?.script_hash} />
+            <ScriptVerifyBadge scriptHash={contract?.script_hash} />
           </span>
         </span>
         <div className='mt-2'>

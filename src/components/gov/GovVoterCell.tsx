@@ -83,8 +83,8 @@ export const GovVoterCell: FC<GovVoterCellProps> = ({ role, info }) => {
         <div className='flex items-center gap-1/2'>
           <span
             className={`overflow-hidden text-ellipsis whitespace-nowrap ${
-              displayName ? "text-text-xs" : "text-text-sm"
-            } text-grayText`}
+              displayName ? "text-text-xs text-grayText" : "text-text-sm text-primary"
+            }`}
           >
             {toPath ? (
               <Link to={toPath} className='!text-inherit hover:!text-inherit'>

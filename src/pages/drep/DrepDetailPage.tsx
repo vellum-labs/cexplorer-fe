@@ -2,7 +2,7 @@ import { DrepDetailOverview } from "@/components/drep/DrepDetailOverview";
 import { DrepDetailAboutTab } from "@/components/drep/tabs/DrepDetailAboutTab";
 import { DrepDetailDelegatorsTab } from "@/components/drep/tabs/DrepDetailDelegatorsTab";
 import { DrepDetailGovernanceActionsTab } from "@/components/drep/tabs/DrepDetailGovernanceActionsTab";
-import { DrepDetailEmbedTab } from "@/components/drep/tabs/DrepDetailEmbedTab";
+import { EmbedTab } from "@/components/global/embed/EmbedTab";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import { HeaderBannerSubtitle } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
@@ -19,6 +19,7 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import { useDelegateAction } from "@/hooks/useDelegateAction";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { hasEmbed } from "@/constants/confVariables";
 
 export const DrepDetailPage: FC = () => {
   const { t } = useAppTranslation("pages");
@@ -61,9 +62,13 @@ export const DrepDetailPage: FC = () => {
       key: "embed",
       label: t("dreps.detailPage.tabs.embed"),
       content: (
-        <DrepDetailEmbedTab drepId={hash} drepName={drepName ?? undefined} />
+        <EmbedTab
+          entityType='dreps'
+          entityId={hash}
+          displayName={drepName ?? "DRep"}
+        />
       ),
-      visible: true,
+      visible: hasEmbed,
     },
   ];
 

@@ -95,7 +95,8 @@
     "rewardsCalculator": "Rewards calculator",
     "poolDebug": "Pool debug",
     "uplcViewer": "UPLC viewer",
-    "handleDns": "handle DNS"
+    "handleDns": "handle DNS",
+    "scriptVerification": "Script verification"
   },
   "services": {
     "label": "Services",

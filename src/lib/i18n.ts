@@ -7,6 +7,7 @@ import enPages from "@/locales/en/pages.json";
 import enErrors from "@/locales/en/errors.json";
 import enSdk from "@/locales/en/sdk.json";
 import enShared from "@/locales/en/shared.json";
+import enCanvas from "@/locales/en/canvas.json";
 
 import csCommon from "@/locales/cs/common.json";
 import csNavigation from "@/locales/cs/navigation.json";
@@ -14,6 +15,7 @@ import csPages from "@/locales/cs/pages.json";
 import csErrors from "@/locales/cs/errors.json";
 import csSdk from "@/locales/cs/sdk.json";
 import csShared from "@/locales/cs/shared.json";
+import csCanvas from "@/locales/cs/canvas.json";
 
 const resources = {
   en: {
@@ -23,6 +25,7 @@ const resources = {
     errors: enErrors,
     sdk: enSdk,
     shared: enShared,
+    canvas: enCanvas,
   },
   cs: {
     common: csCommon,
@@ -31,6 +34,7 @@ const resources = {
     errors: csErrors,
     sdk: csSdk,
     shared: csShared,
+    canvas: csCanvas,
   },
 };
 
@@ -53,7 +57,7 @@ i18n.use(initReactI18next).init({
   lng: getInitialLanguage(),
   fallbackLng: "en",
   defaultNS: "common",
-  ns: ["common", "navigation", "pages", "errors", "sdk", "shared"],
+  ns: ["common", "navigation", "pages", "errors", "sdk", "shared", "canvas"],
   interpolation: {
     escapeValue: false,
   },

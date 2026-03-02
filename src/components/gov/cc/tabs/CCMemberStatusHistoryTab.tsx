@@ -21,6 +21,12 @@ const toArray = (
   return [reg];
 };
 
+interface StatusHistoryRow {
+  type: "registration" | "de_registration";
+  record: CommitteeMemberRegistration;
+  expiration_epoch: number | null;
+}
+
 interface CCMemberStatusHistoryTabProps {
   memberHistory: CommitteeMember[] | undefined;
   isLoading: boolean;
@@ -31,25 +37,43 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
   isLoading,
 }) => {
   const { t } = useAppTranslation();
-  const sortedHistory = useMemo(() => {
+
+  const rows = useMemo(() => {
     if (!memberHistory || !Array.isArray(memberHistory)) return [];
-    return [...memberHistory].sort(
-      (a, b) => (b.expiration_epoch ?? 0) - (a.expiration_epoch ?? 0),
+
+    const result: StatusHistoryRow[] = [];
+
+    for (const member of memberHistory) {
+      const registrations = toArray(member.registration);
+      for (const reg of registrations) {
+        result.push({
+          type: "registration",
+          record: reg,
+          expiration_epoch: member.expiration_epoch,
+        });
+      }
+
+      const deRegistrations = toArray(member.de_registration);
+      for (const deReg of deRegistrations) {
+        result.push({
+          type: "de_registration",
+          record: deReg,
+          expiration_epoch: member.expiration_epoch,
+        });
+      }
+    }
+
+    return result.sort(
+      (a, b) =>
+        new Date(b.record.time).getTime() - new Date(a.record.time).getTime(),
     );
   }, [memberHistory]);
 
-  const columns: TableColumns<CommitteeMember> = [
+  const columns: TableColumns<StatusHistoryRow> = [
     {
       key: "date",
       render: item => {
-        const registrations = toArray(item?.registration);
-        if (registrations.length === 0) {
-          return "-";
-        }
-        const sortedRegistrations = [...registrations].sort(
-          (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime(),
-        );
-        return <DateCell time={sortedRegistrations[0].time} />;
+        return <DateCell time={item.record.time} />;
       },
       title: <p>{t("gov.cc.date")}</p>,
       visible: true,
@@ -58,12 +82,7 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
     {
       key: "type",
       render: item => {
-        const registrations = toArray(item?.registration);
-        const hasRegistration = registrations.length > 0;
-        const hasDeregistration =
-          item?.de_registration !== null && item?.de_registration !== undefined;
-
-        if (hasDeregistration) {
+        if (item.type === "de_registration") {
           return (
             <div className='relative flex h-[24px] w-fit items-center justify-end gap-1/2 rounded-m border border-border px-[10px] text-text-xs'>
               <UserMinus size={12} className='text-[#f04438]' />
@@ -74,22 +93,11 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
           );
         }
 
-        if (hasRegistration) {
-          return (
-            <div className='relative flex h-[24px] w-fit items-center justify-end gap-1/2 rounded-m border border-border px-[10px] text-text-xs'>
-              <UserPlus size={12} className='text-[#47CD89]' />
-              <span className='text-nowrap text-text-xs font-medium'>
-                {t("gov.cc.registration")}
-              </span>
-            </div>
-          );
-        }
-
         return (
           <div className='relative flex h-[24px] w-fit items-center justify-end gap-1/2 rounded-m border border-border px-[10px] text-text-xs'>
-            <Calendar size={12} className='text-[#FEC84B]' />
+            <UserPlus size={12} className='text-[#47CD89]' />
             <span className='text-nowrap text-text-xs font-medium'>
-              {t("gov.cc.termExpiration")}
+              {t("gov.cc.registration")}
             </span>
           </div>
         );
@@ -101,15 +109,7 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
     {
       key: "effective",
       render: item => {
-        const registrations = toArray(item?.registration);
-        if (registrations.length === 0) {
-          return "-";
-        }
-        const sortedRegistrations = [...registrations].sort(
-          (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime(),
-        );
-        const effectiveEpoch = sortedRegistrations[0].index;
-
+        const effectiveEpoch = item.record.epoch_no;
         if (!effectiveEpoch) return "-";
 
         return (
@@ -125,7 +125,7 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
     {
       key: "expiration",
       render: item => {
-        if (!item?.expiration_epoch) return "-";
+        if (!item.expiration_epoch) return "-";
 
         return (
           <div className='flex justify-start'>
@@ -140,22 +140,15 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
     {
       key: "tx",
       render: item => {
-        const registrations = toArray(item?.registration);
-        if (registrations.length > 0) {
-          const sortedRegistrations = [...registrations].sort(
-            (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime(),
-          );
-          return (
-            <Link
-              to='/tx/$hash'
-              params={{ hash: sortedRegistrations[0].hash }}
-              className='flex items-center justify-end text-primary'
-            >
-              <ExternalLink size={18} />
-            </Link>
-          );
-        }
-        return <p className='text-right'>-</p>;
+        return (
+          <Link
+            to='/tx/$hash'
+            params={{ hash: item.record.hash }}
+            className='flex items-center justify-end text-primary'
+          >
+            <ExternalLink size={18} />
+          </Link>
+        );
       },
       title: <p className='w-full text-right'>{t("gov.cc.tx")}</p>,
       visible: true,
@@ -165,13 +158,13 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
 
   const mockQuery = useMemo(
     () => ({
-      data: sortedHistory,
+      data: rows,
       isLoading,
       isError: false,
       error: null,
       refetch: () => Promise.resolve({} as any),
     }),
-    [sortedHistory, isLoading],
+    [rows, isLoading],
   );
 
   return (
@@ -181,7 +174,7 @@ export const CCMemberStatusHistoryTab: FC<CCMemberStatusHistoryTabProps> = ({
       rowHeight={60}
       scrollable
       query={mockQuery as any}
-      items={sortedHistory}
+      items={rows}
       columns={columns}
       renderDisplayText={(count, total) =>
         t("table.displaying", { count, total })

@@ -41,9 +41,17 @@ export const NetworkHealthGraph: FC<NetworkHealthGraphProps> = ({
     GraphTimePeriod.ThirtyDays,
   );
 
-  const [graphsVisibility, setGraphsVisibility] = useState({
-    "Real Chain Density": true,
-    "Optimal Chain Density": true,
+  const [graphsVisibility, setGraphsVisibility] = useState(() => {
+    try {
+      const stored = localStorage.getItem("network_chain_density_graph_store");
+      if (stored) return JSON.parse(stored);
+    } catch (e) {
+      console.log(e);
+    }
+    return {
+      "Real Chain Density": true,
+      "Optimal Chain Density": true,
+    };
   });
 
   const epochs = (data ?? []).map(item => item?.no);
@@ -184,23 +192,6 @@ export const NetworkHealthGraph: FC<NetworkHealthGraphProps> = ({
       },
     ],
   };
-
-  useEffect(() => {
-    if (window && "localStorage" in window) {
-      const graphStore = JSON.parse(
-        localStorage.getItem("network_chain_density_graph_store") as string,
-      );
-
-      if (graphStore) {
-        setGraphsVisibility(graphStore);
-      } else {
-        localStorage.setItem(
-          "network_chain_density_graph_store",
-          JSON.stringify(graphsVisibility),
-        );
-      }
-    }
-  }, []);
 
   useEffect(() => {
     if (setJson) {

@@ -252,7 +252,7 @@ export interface DrepDetail {
   } | null;
   cert: DrepCert;
   hash: DrepHash;
-  distr: DrepDistr;
+  distr: DrepDistrDetail[];
   action: DrepAction[];
   stat: DrepStat;
   since: string;

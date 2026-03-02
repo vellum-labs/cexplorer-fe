@@ -7,6 +7,7 @@ import topLevelAwait from "vite-plugin-top-level-await";
 import wasm from "vite-plugin-wasm";
 import { VitePWA } from "vite-plugin-pwa";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
+import compression from "vite-plugin-compression";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -31,7 +32,7 @@ export default defineConfig({
 
         output.manualChunks = (id: any, meta: any) => {
           if (id && id.includes("node_modules/lucide-react/")) {
-            return "vendor";
+            return "icons";
           }
 
           if (original && typeof original === "object") {
@@ -101,11 +102,17 @@ export default defineConfig({
         display: "standalone",
       },
       injectManifest: {
-        globPatterns: ["**/*.{js,css,html,svg,png,jpg,jpeg,woff2,ttf,wasm}"],
-        globIgnores: ["**/sw.js", "**/404.html"],
+        globPatterns: ["**/*.{js,css,svg,png,jpg,jpeg,woff2,ttf,wasm}"],
+        globIgnores: [
+          "**/sw.js",
+          "**/force-clear.js",
+          "**/index.html",
+          "**/404.html",
+        ],
         maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
       },
     }),
+    compression({ algorithm: "gzip", threshold: 1024 }),
     {
       name: "force-exit",
       writeBundle() {
@@ -125,6 +132,10 @@ export default defineConfig({
           vendor: [
             "react",
             "react-dom",
+            "react-markdown",
+            "remark-gfm",
+            "rehype-raw",
+            "react-syntax-highlighter",
             "@tanstack/react-query",
             "@tanstack/react-router",
             "@radix-ui/react-accordion",
@@ -144,9 +155,11 @@ export default defineConfig({
             "@dexhunterio/swaps",
             "cmdk",
             "sonner",
-            "echarts-for-react",
             "html-react-parser",
             "qrcode.react",
+            "i18next",
+            "react-i18next",
+            "react-hotkeys-hook",
           ],
           ui: [
             "@xyflow/react",
@@ -156,7 +169,6 @@ export default defineConfig({
           ],
           cardano: [
             "@emurgo/cip14-js",
-            "@meshsdk/core",
             "bech32",
             "blake2b",
             "blakejs",
@@ -172,25 +184,23 @@ export default defineConfig({
             "@harmoniclabs/uint8array-utils",
             "@harmoniclabs/plutus-data",
           ],
-          charts: ["echarts", "echarts-stat"],
+          charts: ["echarts", "echarts-stat", "echarts-for-react"],
           utils: [
             "html-to-image",
             "flatted",
+            "format",
             "zod",
-            "react-markdown",
-            "remark-gfm",
-            "react-syntax-highlighter",
             "query-string",
             "date-fns",
             "@date-fns/tz",
+            "class-variance-authority",
+            "clsx",
+            "tailwind-merge",
             "react-grid-layout",
             "react-window",
             "react-resizable",
             "react-device-detect",
             "react-day-picker",
-            "class-variance-authority",
-            "clsx",
-            "tailwind-merge",
             "react-helmet",
           ],
         },

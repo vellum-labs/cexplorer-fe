@@ -62,6 +62,7 @@ const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
                 options={navigationOptions.staking}
                 withBorder
                 wrapperClassname='z-[50]'
+                disableScroll
               />
               <Dropdown
                 id='governance'
@@ -69,6 +70,7 @@ const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
                 options={navigationOptions.governance}
                 withBorder
                 wrapperClassname='z-[50]'
+                disableScroll
               />
               <Dropdown
                 id='tokens'

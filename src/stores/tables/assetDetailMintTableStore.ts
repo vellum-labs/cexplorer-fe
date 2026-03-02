@@ -15,7 +15,7 @@ export const useAssetDetailMintTableStore = handlePersistStore<
     columnsVisibility: {
       order: true,
       type: true,
-      asset: false,
+      asset: true,
       policy_id: false,
       asset_minted: true,
       mint_quantity: true,

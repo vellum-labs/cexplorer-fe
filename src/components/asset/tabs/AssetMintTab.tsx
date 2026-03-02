@@ -5,7 +5,7 @@ import type { FC } from "react";
 import { Link, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
-import { Copy } from "@vellumlabs/cexplorer-sdk";
+import { Copy, formatNumber, Tooltip } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
 import { GlobalTable } from "@vellumlabs/cexplorer-sdk";
 
@@ -80,11 +80,12 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
     {
       key: "type",
       render: item => {
-        if (item?.quantity > 1) {
-          return <Badge color='blue'>{t("labels.token")}</Badge>;
+        const qty = item?.quantity ?? 0;
+        if (qty === 1 || qty === -1) {
+          return <Badge color='yellow'>{t("labels.nft")}</Badge>;
         }
 
-        return <Badge color='yellow'>{t("labels.nft")}</Badge>;
+        return <Badge color='blue'>{t("labels.token")}</Badge>;
       },
       title: t("asset.type"),
       visible: columnsVisibility.type,
@@ -126,11 +127,23 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
     },
     {
       key: "mint_quantity",
-      render: item => (
-        <p className='text-right'>
-          {item?.quantity ? formatNumberWithSuffix(item.quantity) : "-"}
-        </p>
-      ),
+      render: item => {
+        const decimals = item?.asset.registry?.decimals ?? 0;
+        const value = item?.quantity ?? 0;
+        const adjusted = value / Math.pow(10, decimals);
+        const formattedFull = formatNumber(adjusted.toFixed(2));
+        const formattedShort = formatNumberWithSuffix(
+          parseFloat(adjusted.toFixed(2)),
+        );
+
+        return (
+          <div className='flex w-full justify-end'>
+            <Tooltip content={formattedFull}>
+              <span className='text-text-sm'>{formattedShort}</span>
+            </Tooltip>
+          </div>
+        );
+      },
       title: <p className='w-full text-right'>{t("asset.mintQuantity")}</p>,
       visible: columnsVisibility.mint_quantity,
       widthPx: 100,
@@ -181,12 +194,14 @@ export const AssetMintTab: FC<AssetMintTabProps> = ({
         scrollable
         query={mintQuery}
         items={items}
-        columns={columns.sort((a, b) => {
-          return (
-            columnsOrder.indexOf(a.key as keyof AssetMintColumns) -
-            columnsOrder.indexOf(b.key as keyof AssetMintColumns)
-          );
-        })}
+        columns={
+          columns.sort((a, b) => {
+            return (
+              columnsOrder.indexOf(a.key as keyof AssetMintColumns) -
+              columnsOrder.indexOf(b.key as keyof AssetMintColumns)
+            );
+          }) as any
+        }
         onOrderChange={setColumsOrder}
         renderDisplayText={(count, total) =>
           t("table.displaying", { count, total })

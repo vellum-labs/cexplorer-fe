@@ -10,7 +10,8 @@ type Namespace =
   | "pages"
   | "errors"
   | "sdk"
-  | "shared";
+  | "shared"
+  | "canvas";
 
 export const useAppTranslation = (
   namespace: Namespace | Namespace[] = "common",

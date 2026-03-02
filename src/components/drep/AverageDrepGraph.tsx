@@ -5,7 +5,7 @@ import { AnalyticsGraph } from "../analytics/AnalyticsGraph";
 import ReactEcharts from "echarts-for-react";
 import GraphWatermark from "@/components/global/graphs/GraphWatermark";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFetchCombinedAverageDrep } from "@/services/drep";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useADADisplay } from "@/hooks/useADADisplay";
@@ -25,10 +25,18 @@ export const AverageDrepGraph: FC = () => {
     votingPower: "votingPower",
   };
 
-  const [graphsVisibility, setGraphsVisibility] = useState({
-    [KEYS.avgDelegators]: true,
-    [KEYS.avgStake]: true,
-    [KEYS.votingPower]: true,
+  const [graphsVisibility, setGraphsVisibility] = useState(() => {
+    try {
+      const stored = localStorage.getItem("average_drep_graph_store");
+      if (stored) return JSON.parse(stored);
+    } catch (e) {
+      console.log(e);
+    }
+    return {
+      [KEYS.avgDelegators]: true,
+      [KEYS.avgStake]: true,
+      [KEYS.votingPower]: true,
+    };
   });
 
   const query = useFetchCombinedAverageDrep();
@@ -205,20 +213,6 @@ export const AverageDrepGraph: FC = () => {
       },
     ],
   };
-
-  useEffect(() => {
-    if (typeof window !== "undefined" && "localStorage" in window) {
-      const stored = localStorage.getItem("average_drep_graph_store");
-      if (stored) {
-        setGraphsVisibility(JSON.parse(stored));
-      } else {
-        localStorage.setItem(
-          "average_drep_graph_store",
-          JSON.stringify(graphsVisibility),
-        );
-      }
-    }
-  }, []);
 
   return (
     <AnalyticsGraph title={t("dreps.graphs.averageDreps.title")}>

@@ -8,7 +8,7 @@ import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { format } from "date-fns";
 import ReactEcharts from "echarts-for-react";
-import { memo, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useMemo, useRef, useState } from "react";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Props {
@@ -31,13 +31,21 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
   roa,
 }: Props) {
   const { t } = useAppTranslation("pages");
-  const [graphsVisibility, setGraphsVisibility] = useState({
-    Delegators: true,
-    "Luck (%)": true,
-    Blocks: true,
-    "Epoch Stake": true,
-    "ROA (%)": true,
-    Pledged: true,
+  const [graphsVisibility, setGraphsVisibility] = useState(() => {
+    try {
+      const stored = localStorage.getItem("pool_performance_graph_store");
+      if (stored) return JSON.parse(stored);
+    } catch (e) {
+      console.log(e);
+    }
+    return {
+      Delegators: true,
+      "Luck (%)": true,
+      Blocks: true,
+      "Epoch Stake": true,
+      "ROA (%)": true,
+      Pledged: true,
+    };
   });
   const { data: basicData } = useFetchMiscBasic(true);
 
@@ -405,23 +413,6 @@ const PoolPerformanceGraph = memo(function PoolPerformanceGraphMemo({
     }),
     [],
   );
-
-  useEffect(() => {
-    if (window && "localStorage" in window) {
-      const graphStore = JSON.parse(
-        localStorage.getItem("pool_performance_graph_store") as string,
-      );
-
-      if (graphStore) {
-        setGraphsVisibility(graphStore);
-      } else {
-        localStorage.setItem(
-          "pool_performance_graph_store",
-          JSON.stringify(graphsVisibility),
-        );
-      }
-    }
-  }, []);
 
   return (
     <div className='relative w-full'>

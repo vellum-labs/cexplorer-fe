@@ -13,7 +13,7 @@ import type { ScriptStatItem } from "@/types/scriptTypes";
 import { formatNumber, lovelaceToAda } from "@vellumlabs/cexplorer-sdk";
 import ReactEcharts from "echarts-for-react";
 import { BarChart, FileBarChart, Users } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { format } from "date-fns";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 
@@ -52,10 +52,18 @@ export const ScriptDetailStatsTab = ({
 
   const chartRef = useRef(null);
 
-  const [graphsVisibility, setGraphsVisibility] = useState({
-    [legendLabels.interactions]: true,
-    [legendLabels.output]: true,
-    [legendLabels.averageOutput]: true,
+  const [graphsVisibility, setGraphsVisibility] = useState(() => {
+    try {
+      const stored = localStorage.getItem("script_detail_stats_graph_store");
+      if (stored) return JSON.parse(stored);
+    } catch (e) {
+      console.log(e);
+    }
+    return {
+      [legendLabels.interactions]: true,
+      [legendLabels.output]: true,
+      [legendLabels.averageOutput]: true,
+    };
   });
 
   const onChartReadyCallback = chart => {
@@ -202,22 +210,6 @@ export const ScriptDetailStatsTab = ({
       },
     ],
   };
-
-  useEffect(() => {
-    if (window && "localStorage" in window) {
-      const graphStore = JSON.parse(
-        localStorage.getItem("script_detail_stats_graph_store") as string,
-      );
-      if (graphStore) {
-        setGraphsVisibility(graphStore);
-      } else {
-        localStorage.setItem(
-          "script_detail_stats_graph_store",
-          JSON.stringify(graphsVisibility),
-        );
-      }
-    }
-  }, []);
 
   return (
     <div>

@@ -24,11 +24,22 @@ export const AccountWalletActivityGraph: FC<
   AccountWalletActivityGraphProps
 > = ({ data, miscConst, setJson }) => {
   const { t } = useAppTranslation("common");
-  const [graphsVisibility, setGraphsVisibility] = useState({
-    "Unique payment address": true,
-    "Unique stake address": true,
-    "New payment address": false,
-    "New stake address": false,
+  const [graphsVisibility, setGraphsVisibility] = useState(() => {
+    try {
+      const stored = localStorage.getItem(
+        "account_wallet_activity_graph_store",
+      );
+      if (stored) return JSON.parse(stored);
+    } catch (e) {
+      console.log(e);
+    }
+
+    return {
+      "Unique payment address": true,
+      "Unique stake address": true,
+      "New payment address": false,
+      "New stake address": false,
+    };
   });
 
   const epochs = (data ?? []).map(item => item?.no);
@@ -204,37 +215,18 @@ export const AccountWalletActivityGraph: FC<
   };
 
   useEffect(() => {
-    if (window && "localStorage" in window) {
-      const graphStore = JSON.parse(
-        localStorage.getItem("account_wallet_activity_graph_store") as string,
-      );
-
-      if (graphStore) {
-        setGraphsVisibility(graphStore);
-      } else {
-        localStorage.setItem(
-          "account_wallet_activity_graph_store",
-          JSON.stringify(graphsVisibility),
-        );
-      }
-    }
-  }, []);
-
-  useEffect(() => {
     if (setJson) {
       setJson(
-        epochs.map((epoch, index) => {
-          return {
-            Epoch: epoch,
-            "Unique payment address": countTxOutAddress[index],
-            "Unique stake address": countTxOutStake[index],
-            "New payment address": countTxOutAddressNot[index],
-            "New stake address": countTxOutStakeNot[index],
-          };
-        }),
+        (data ?? []).map(item => ({
+          Epoch: item?.no,
+          "Unique payment address": item.stat?.count_tx_out_address,
+          "Unique stake address": item.stat?.count_tx_out_stake,
+          "New payment address": item.stat?.count_tx_out_address_not_yesterday,
+          "New stake address": item.stat?.count_tx_out_stake_not_yesterday,
+        })),
       );
     }
-  }, [setJson]);
+  }, [data, setJson]);
 
   return (
     <div className='relative w-full'>
@@ -244,6 +236,8 @@ export const AccountWalletActivityGraph: FC<
         onEvents={{
           legendselectchanged: params => {
             const { selected } = params;
+
+            setGraphsVisibility(selected);
 
             localStorage.setItem(
               "account_wallet_activity_graph_store",

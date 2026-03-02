@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { CustomLabelModal } from "./components/global/modals/CustomLabelModal";
 import { GeekConfigModal } from "./components/global/modals/GeekConfigModal";
 import WalletConfigModal from "./components/wallet/WalletConfigModal";
-import { enabledWalletConnector, network } from "./constants/confVariables";
+import { network } from "./constants/confVariables";
 import { useConnectWallet } from "./hooks/useConnectWallet";
 import { useAuthToken } from "./hooks/useAuthToken";
 import {
@@ -29,7 +29,7 @@ import type { AddressLabel } from "./types/commonTypes";
 function App() {
   const { theme } = useThemeStore();
   const { walletType } = useWalletStore();
-  const { connect, disconnect } = useConnectWallet();
+  const { disconnect } = useConnectWallet();
   const { setUq, uq } = useUqStore();
   const { isOpen } = useCustomLabelModalState();
   const { isOpen: isConfigOpen } = useWalletConfigModalState();
@@ -52,14 +52,6 @@ function App() {
       document.documentElement.setAttribute("data-theme", theme);
     }
   }, [theme]);
-
-  useEffect(() => {
-    (async () => {
-      if (walletType && enabledWalletConnector && window?.cardano) {
-        await connect(walletType);
-      }
-    })();
-  }, [walletType]);
 
   useEffect(() => {
     if (walletType === "nufiSSO") {

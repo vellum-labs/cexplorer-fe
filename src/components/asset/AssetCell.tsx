@@ -11,7 +11,7 @@ import { AdaHandleBadge } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 
-import { configJSON } from "@/constants/conf";
+import { adaHandlePolicies } from "@/constants/confVariables";
 
 interface AssetProps {
   asset: TxAsset;
@@ -37,14 +37,16 @@ const AssetCell = memo((props: AssetProps) => {
 
   const assetName = asset?.name || name || "";
 
-  const adaHandlePolicy = configJSON.integration[0].adahandle[0].policy;
+  const matchedPolicy = adaHandlePolicies.find(p => assetName.includes(p));
+  const isAdaHandle = !!matchedPolicy;
 
-  const adaHandleName = assetName
-    .replace(adaHandlePolicy, "")
-    .replace(/^(000de140|0014df10|000643b0|000010)/, "");
+  const adaHandleName = matchedPolicy
+    ? assetName
+        .replace(matchedPolicy, "")
+        .replace(/^(000de140|0014df10|000643b0|000010)/, "")
+    : assetName;
 
   const fingerprint = getAssetFingerprint(assetName);
-  const isAdaHandle = assetName.includes(adaHandlePolicy);
   const encodedNameArr = encodeAssetName(assetName).split("");
 
   const withCopy = "withCopy" in props ? props.withCopy : false;
@@ -89,7 +91,7 @@ const AssetCell = memo((props: AssetProps) => {
               <AdaHandleBadge
                 variant='icon'
                 className='h-2 w-2'
-                policyId={adaHandlePolicy}
+                policyId={matchedPolicy}
               />
             )}
             <span

@@ -11,6 +11,7 @@ import {
   ArrowLeftRight,
   Wrench,
   Binary,
+  ShieldCheck,
 } from "lucide-react";
 import { DiscordLogo, GithubLogo } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
@@ -96,6 +97,19 @@ export const DevToolingPage = () => {
         },
       ],
       icon: <Binary className='text-primary' />,
+    },
+    {
+      label: t("devTooling.sections.scriptVerification.label"),
+      description: t("devTooling.sections.scriptVerification.description"),
+      buttons: [
+        {
+          label: t("devTooling.sections.scriptVerification.button"),
+          href: "/script/verification",
+          variant: "primary" as const,
+          icon: <ArrowRight size={16} />,
+        },
+      ],
+      icon: <ShieldCheck className='text-primary' />,
     },
     {
       label: t("devTooling.sections.cexplorerInstances.label"),

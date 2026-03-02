@@ -437,6 +437,9 @@
       },
       "embed": {
         "buttons": "Buttons",
+        "banners": "Banners",
+        "simpleLinks": "Simple links",
+        "graphs": "Graphs",
         "spoDelegationButton": "SPO delegation button",
         "preview": "Preview"
       },
@@ -765,6 +768,9 @@
       },
       "embed": {
         "buttons": "Buttons",
+        "banners": "Banners",
+        "simpleLinks": "Simple links",
+        "graphs": "Graphs",
         "drepDelegationButton": "DRep delegation button",
         "preview": "Preview"
       },
@@ -840,6 +846,15 @@
       "all": "$t(shared:all)",
       "tokens": "$t(shared:tokens)",
       "nfts": "$t(shared:nfts)"
+    }
+  },
+  "tokens": {
+    "detailPage": {
+      "embed": {
+        "banners": "Banners",
+        "simpleLinks": "Simple links",
+        "graphs": "Graphs"
+      }
     }
   },
   "contractTransactions": {

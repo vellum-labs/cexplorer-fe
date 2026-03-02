@@ -10,7 +10,7 @@ import { calculateEpochTimeByNumber } from "@/utils/calculateEpochTimeByNumber";
 import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 import { format } from "date-fns";
 import ReactEcharts from "echarts-for-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface RewardsGraphProps {
   data: RewardItem[] | undefined;
@@ -35,11 +35,19 @@ export const RewardsGraph = ({ data }: RewardsGraphProps) => {
     tooltipStake: t("rewards.tooltipStake"),
   };
 
-  const [graphsVisibility, setGraphsVisibility] = useState({
-    [chartLabels.rewardsAda]: true,
-    [chartLabels.rewardsUsd]: true,
-    [chartLabels.roaPercent]: true,
-    [chartLabels.activeStakeAda]: true,
+  const [graphsVisibility, setGraphsVisibility] = useState(() => {
+    try {
+      const stored = localStorage.getItem("account_rewards_graph_store");
+      if (stored) return JSON.parse(stored);
+    } catch (e) {
+      console.log(e);
+    }
+    return {
+      [chartLabels.rewardsAda]: true,
+      [chartLabels.rewardsUsd]: true,
+      [chartLabels.roaPercent]: true,
+      [chartLabels.activeStakeAda]: true,
+    };
   });
   const amount = data?.map(item => item.amount / 1_000_000).reverse() || [];
   const stake = data?.map(item => item.account.epoch_stake).reverse() || [];
@@ -270,23 +278,6 @@ export const RewardsGraph = ({ data }: RewardsGraphProps) => {
       },
     ],
   };
-
-  useEffect(() => {
-    if (window && "localStorage" in window) {
-      const graphStore = JSON.parse(
-        localStorage.getItem("account_rewards_graph_store") as string,
-      );
-
-      if (graphStore) {
-        setGraphsVisibility(graphStore);
-      } else {
-        localStorage.setItem(
-          "account_rewards_graph_store",
-          JSON.stringify(graphsVisibility),
-        );
-      }
-    }
-  }, []);
 
   return (
     <div className='flex flex-col'>

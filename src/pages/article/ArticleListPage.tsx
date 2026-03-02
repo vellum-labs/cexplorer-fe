@@ -117,9 +117,13 @@ export const ArticleListPage = () => {
                   />
                 </div>
                 <div className='flex max-w-[400px] flex-1 flex-col gap-2'>
-                  <Badge rounded color='blue' className='mt-2'>
-                    Partnerships
-                  </Badge>
+                  <div className='mt-2 flex flex-wrap gap-1'>
+                    {firstArticle.category.map(cat => (
+                      <Badge key={cat} rounded color='blue'>
+                        {cat}
+                      </Badge>
+                    ))}
+                  </div>
                   <h2 className='text-display-sm'>
                     {firstArticle
                       ? firstArticle?.name.length > 66

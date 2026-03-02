@@ -27,9 +27,17 @@ export const AveragePool: FC = () => {
 
   const [data, setData] = useState<AveragePoolData[]>();
   const [json, setJson] = useState<any>();
-  const [graphsVisibility, setGraphsVisibility] = useState({
-    "Average delegators per pool": true,
-    "Average stake per pool": true,
+  const [graphsVisibility, setGraphsVisibility] = useState(() => {
+    try {
+      const stored = localStorage.getItem("average_pool_graph_store");
+      if (stored) return JSON.parse(stored);
+    } catch (e) {
+      console.log(e);
+    }
+    return {
+      "Average delegators per pool": true,
+      "Average stake per pool": true,
+    };
   });
 
   const query = useFetchAveragePool();
@@ -202,23 +210,6 @@ export const AveragePool: FC = () => {
       },
     ],
   };
-
-  useEffect(() => {
-    if (window && "localStorage" in window) {
-      const graphStore = JSON.parse(
-        localStorage.getItem("average_pool_graph_store") as string,
-      );
-
-      if (graphStore) {
-        setGraphsVisibility(graphStore);
-      } else {
-        localStorage.setItem(
-          "average_pool_graph_store",
-          JSON.stringify(graphsVisibility),
-        );
-      }
-    }
-  }, []);
 
   useEffect(() => {
     if (setJson) {

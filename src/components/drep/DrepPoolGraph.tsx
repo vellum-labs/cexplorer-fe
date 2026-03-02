@@ -5,7 +5,7 @@ import type { FC } from "react";
 import ReactEcharts from "echarts-for-react";
 import GraphWatermark from "../global/graphs/GraphWatermark";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useADADisplay } from "@/hooks/useADADisplay";
@@ -35,11 +35,19 @@ export const DrepPoolGraph: FC<DrepPoolGraphProps> = ({ epochs, query }) => {
     noConfidenceDrep: "noConfidenceDrep",
   };
 
-  const [graphsVisibility, setGraphsVisibility] = useState({
-    [KEYS.totalDelegatedStake]: true,
-    [KEYS.drepDelegated]: true,
-    [KEYS.abstainDrep]: true,
-    [KEYS.noConfidenceDrep]: true,
+  const [graphsVisibility, setGraphsVisibility] = useState(() => {
+    try {
+      const stored = localStorage.getItem("drep_pool_graph_store");
+      if (stored) return JSON.parse(stored);
+    } catch (e) {
+      console.log(e);
+    }
+    return {
+      [KEYS.totalDelegatedStake]: true,
+      [KEYS.drepDelegated]: true,
+      [KEYS.abstainDrep]: true,
+      [KEYS.noConfidenceDrep]: true,
+    };
   });
 
   const legendLabels = {
@@ -213,20 +221,6 @@ export const DrepPoolGraph: FC<DrepPoolGraphProps> = ({ epochs, query }) => {
       },
     ],
   };
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("drep_pool_graph_store");
-      if (stored) {
-        setGraphsVisibility(JSON.parse(stored));
-      } else {
-        localStorage.setItem(
-          "drep_pool_graph_store",
-          JSON.stringify(graphsVisibility),
-        );
-      }
-    }
-  }, []);
 
   return (
     <div className='relative w-full'>
