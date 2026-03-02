@@ -10,8 +10,6 @@ import { Helmet } from "react-helmet";
 import { Button, SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import Footer from "../components/layouts/Footer";
 
-import { SwReadyModal } from "@/components/global/modals/SwReadyModal";
-
 import { VersionWatcher } from "@/components/global/VersionWatcher";
 import { CookieBanner } from "@/components/global/CookieBanner";
 import Navbar from "@/components/layouts/Navbar";
@@ -37,8 +35,6 @@ const RootComponent = () => {
   useGenerateSW();
 
   const { openHelp, setOpenHelp } = useShortcuts();
-
-  const [updateModal, setUpdateModal] = useState<boolean>(false);
 
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
@@ -113,14 +109,6 @@ const RootComponent = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    const updateModal = localStorage.getItem("should_update");
-
-    if (updateModal && updateModal === "true") {
-      setUpdateModal(true);
-    }
-  }, []);
-
-  useEffect(() => {
     let activeTransition: ViewTransition | null = null;
 
     const unsubscribe = router.subscribe("onBeforeNavigate", () => {
@@ -144,7 +132,7 @@ const RootComponent = () => {
 
   return (
     <GlobalSearchProvider
-      useFetchMiscSearch={useFetchMiscSearch}
+      useFetchMiscSearch={useFetchMiscSearch as any}
       locale={locale}
     >
       <>
@@ -192,7 +180,6 @@ const RootComponent = () => {
         </ErrorBoundary>
         <Footer />
         <CookieBanner />
-        {updateModal && <SwReadyModal />}
         <VersionWatcher />
         {clickedUrl && (
           <SafetyLinkModal
