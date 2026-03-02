@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { Wallet, Pencil, Plus, Trash2, X, Check, Copy } from "lucide-react";
 import { usePortfolioStore } from "@/stores/portfolioStore";
 import { usePortfolioData } from "@/hooks/usePortfolioData";
@@ -71,7 +72,7 @@ export const PortfolioWalletList: FC<PortfolioWalletListProps> = ({
   };
 
   return (
-    <div className='flex h-full flex-col rounded-l border border-border bg-cardBg p-4'>
+    <div className='flex min-h-[658px] max-h-[658px] flex-col rounded-l border border-border bg-cardBg p-4'>
       <div className='mb-1'>
         <div className='flex items-center gap-1.5'>
           <h2 className='text-text-lg font-semibold'>
@@ -145,10 +146,28 @@ export const PortfolioWalletList: FC<PortfolioWalletListProps> = ({
                       <p className='truncate text-text-sm font-medium'>
                         {wallet.name}
                       </p>
-                      <p className='flex items-center gap-1 truncate text-text-xs text-primary'>
-                        {formatString(wallet.stakeAddress, "long")}
+                      <p className='flex items-center gap-1 truncate text-text-xs'>
+                        {(wallet.type ?? "stake") === "address" ? (
+                          <Link
+                            to='/address/$address'
+                            params={{ address: wallet.originalAddress }}
+                            onClick={e => e.stopPropagation()}
+                            className='truncate text-primary hover:underline'
+                          >
+                            {formatString(wallet.originalAddress, "long")}
+                          </Link>
+                        ) : (
+                          <Link
+                            to='/stake/$stakeAddr'
+                            params={{ stakeAddr: wallet.stakeAddress }}
+                            onClick={e => e.stopPropagation()}
+                            className='truncate text-primary hover:underline'
+                          >
+                            {formatString(wallet.stakeAddress, "long")}
+                          </Link>
+                        )}
                         <button
-                          onClick={e => handleCopy(e, wallet.id, wallet.stakeAddress)}
+                          onClick={e => handleCopy(e, wallet.id, (wallet.type ?? "stake") === "address" ? wallet.originalAddress : wallet.stakeAddress)}
                           className='shrink-0 text-grayTextPrimary hover:text-primary'
                           title={t("common:actions.copy")}
                         >

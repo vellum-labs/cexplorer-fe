@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { useQueries } from "@tanstack/react-query";
 import { usePortfolioStore } from "@/stores/portfolioStore";
 import { fetchStakeDetail } from "@/services/stake";
+import { fetchAddressDetail } from "@/services/address";
 import type { AddressAsset } from "@/types/addressTypes";
 
 const calculateAssetValueInAda = (asset: AddressAsset): number => {
@@ -45,19 +46,44 @@ export const usePortfolioData = () => {
   const { wallets, selectedWalletId } = usePortfolioStore();
 
   const queries = useQueries({
-    queries: wallets.map(wallet => ({
-      queryKey: ["portfolio-stake-detail", wallet.stakeAddress],
-      queryFn: () => fetchStakeDetail({ view: wallet.stakeAddress }),
-      enabled: !!wallet.stakeAddress,
-      staleTime: 60_000,
-    })),
+    queries: wallets.map(wallet => {
+      const isAddressType = (wallet.type ?? "stake") === "address";
+      const view = isAddressType ? wallet.originalAddress : wallet.stakeAddress;
+      return {
+        queryKey: [isAddressType ? "portfolio-address-detail" : "portfolio-stake-detail", view],
+        queryFn: () => isAddressType ? fetchAddressDetail({ view }) : fetchStakeDetail({ view }),
+        enabled: !!view,
+        staleTime: 60_000,
+      };
+    }),
   });
 
   const walletDataList: WalletData[] = wallets.map((wallet, i) => {
     const query = queries[i];
-    const stakeData = query?.data?.data;
+    const rawData = query?.data?.data;
+    const isAddressType = (wallet.type ?? "stake") === "address";
 
-    const assets = stakeData?.asset ?? [];
+    let assets: AddressAsset[] = [];
+    let adaBalance = 0;
+    let poolDelegation: string | null = null;
+    let drepDelegation: string | null = null;
+
+    if (isAddressType) {
+      const addrData = rawData?.data?.[0];
+      assets = addrData?.asset ?? [];
+      adaBalance = Number(addrData?.balance ?? 0);
+      poolDelegation = addrData?.stake?.live_pool?.id ?? null;
+      drepDelegation = addrData?.vote?.vote?.live_drep ?? null;
+    } else {
+      const stakeData = rawData;
+      assets = stakeData?.asset ?? [];
+      adaBalance = Number(
+        stakeData?.stake?.live?.amount ?? stakeData?.stake?.active?.amount ?? 0,
+      );
+      poolDelegation = stakeData?.stake?.live?.deleg?.id ?? null;
+      drepDelegation = stakeData?.vote?.vote?.live_drep ?? null;
+    }
+
     const tokens = assets.filter(a => a.quantity > 1);
     const nfts = assets.filter(a => a.quantity === 1);
 
@@ -70,10 +96,6 @@ export const usePortfolioData = () => {
       0,
     );
 
-    const balanceFromStake =
-      stakeData?.stake?.live?.amount ?? stakeData?.stake?.active?.amount ?? 0;
-    const adaBalance = Number(balanceFromStake) || 0;
-
     return {
       walletId: wallet.id,
       adaBalance,
@@ -82,8 +104,8 @@ export const usePortfolioData = () => {
       tokenValueAda,
       nftValueAda,
       totalValueAda: adaBalance / 1e6 + tokenValueAda + nftValueAda,
-      poolDelegation: stakeData?.stake?.live?.deleg?.id ?? null,
-      drepDelegation: stakeData?.vote?.vote?.live_drep ?? null,
+      poolDelegation,
+      drepDelegation,
       isLoading: query?.isLoading ?? true,
       isError: query?.isError ?? false,
     };
@@ -114,16 +136,27 @@ export const usePortfolioData = () => {
     const assetMap = new Map<string, BreakdownItem>();
     let totalAdaBalance = 0;
 
-    relevantWalletIds.forEach((walletId, walletIndex) => {
-      const query = queries[wallets.findIndex(w => w.id === walletId)];
-      const stakeData = query?.data?.data;
-      if (!stakeData) return;
+    relevantWalletIds.forEach((walletId) => {
+      const walletIndex = wallets.findIndex(w => w.id === walletId);
+      const wallet = wallets[walletIndex];
+      const query = queries[walletIndex];
+      const rawData = query?.data?.data;
+      if (!rawData) return;
 
-      const balance =
-        Number(stakeData.stake?.live?.amount ?? stakeData.stake?.active?.amount ?? 0) / 1e6;
+      let assets: AddressAsset[] = [];
+      let balance = 0;
+
+      if ((wallet?.type ?? "stake") === "address") {
+        const addrData = rawData?.data?.[0];
+        assets = addrData?.asset ?? [];
+        balance = Number(addrData?.balance ?? 0) / 1e6;
+      } else {
+        assets = rawData?.asset ?? [];
+        balance = Number(rawData?.stake?.live?.amount ?? rawData?.stake?.active?.amount ?? 0) / 1e6;
+      }
+
       totalAdaBalance += balance;
 
-      const assets = stakeData.asset ?? [];
       for (const asset of assets) {
         const value = calculateAssetValueInAda(asset);
         if (value <= 0) continue;
@@ -174,11 +207,16 @@ export const usePortfolioData = () => {
     const assetMap = new Map<string, AddressAsset>();
 
     relevantWalletIds.forEach(walletId => {
-      const query = queries[wallets.findIndex(w => w.id === walletId)];
-      const stakeData = query?.data?.data;
-      if (!stakeData) return;
+      const walletIndex = wallets.findIndex(w => w.id === walletId);
+      const wallet = wallets[walletIndex];
+      const query = queries[walletIndex];
+      const rawData = query?.data?.data;
+      if (!rawData) return;
 
-      const assets = stakeData.asset ?? [];
+      const assets: AddressAsset[] = (wallet?.type ?? "stake") === "address"
+        ? (rawData?.data?.[0]?.asset ?? [])
+        : (rawData?.asset ?? []);
+
       for (const asset of assets) {
         const existing = assetMap.get(asset.name);
         if (existing) {
@@ -195,9 +233,9 @@ export const usePortfolioData = () => {
   const stakeAddresses = useMemo(() => {
     if (selectedWalletId) {
       const wallet = wallets.find(w => w.id === selectedWalletId);
-      return wallet ? [wallet.stakeAddress] : [];
+      return (wallet?.type ?? "stake") === "stake" ? [wallet.stakeAddress] : [];
     }
-    return wallets.map(w => w.stakeAddress);
+    return wallets.filter(w => (w.type ?? "stake") === "stake").map(w => w.stakeAddress);
   }, [wallets, selectedWalletId]);
 
   return {

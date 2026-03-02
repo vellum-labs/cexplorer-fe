@@ -44,7 +44,10 @@ export const AddWalletModal: FC<AddWalletModalProps> = ({ onClose }) => {
 
     const trimmed = address.trim();
 
-    if (!trimmed.startsWith("stake") && !trimmed.startsWith("addr")) {
+    const isStake = trimmed.startsWith("stake");
+    const isPayment = trimmed.startsWith("addr") || trimmed.startsWith("Ddz") || trimmed.startsWith("Ae2");
+
+    if (!isStake && !isPayment) {
       setError(t("portfolio.addWallet.invalidAddress"));
       return;
     }
@@ -53,23 +56,24 @@ export const AddWalletModal: FC<AddWalletModalProps> = ({ onClose }) => {
 
     try {
       let stakeAddress = trimmed;
+      let walletType: "stake" | "address" = "stake";
 
-      if (trimmed.startsWith("addr")) {
+      if (isPayment) {
         const { data } = await fetchAddressDetail({ view: trimmed });
         const stakeView = data?.data?.[0]?.stake?.view;
 
-        if (!stakeView) {
-          setError(t("portfolio.addWallet.noStakeKey"));
-          setIsSubmitting(false);
-          return;
+        if (stakeView) {
+          stakeAddress = stakeView;
+          walletType = "stake";
+          setResolvedStake(stakeAddress);
+        } else {
+          stakeAddress = trimmed;
+          walletType = "address";
         }
-
-        stakeAddress = stakeView;
-        setResolvedStake(stakeAddress);
       }
 
       const isDuplicate = wallets.some(
-        w => w.stakeAddress === stakeAddress,
+        w => w.stakeAddress === stakeAddress || w.originalAddress === trimmed,
       );
       if (isDuplicate) {
         setError(t("portfolio.addWallet.duplicateAddress"));
@@ -81,6 +85,7 @@ export const AddWalletModal: FC<AddWalletModalProps> = ({ onClose }) => {
         name: name.trim(),
         stakeAddress,
         originalAddress: trimmed,
+        type: walletType,
       });
 
       onClose();

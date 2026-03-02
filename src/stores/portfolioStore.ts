@@ -5,6 +5,7 @@ export interface PortfolioWallet {
   name: string;
   stakeAddress: string;
   originalAddress: string;
+  type: "stake" | "address";
 }
 
 interface PortfolioState {

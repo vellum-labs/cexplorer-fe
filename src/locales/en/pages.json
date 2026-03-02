@@ -1123,7 +1123,8 @@
       "poolDelegation": "Pool delegation",
       "drepDelegation": "DRep delegation",
       "notDelegated": "Not delegated",
-      "delegate": "Delegate"
+      "delegate": "Delegate",
+      "redelegate": "Redelegate"
     },
     "wallets": {
       "title": "Wallets",

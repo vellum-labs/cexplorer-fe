@@ -39,12 +39,10 @@ export const PortfolioPage = () => {
         title: t("portfolio.title", "Portfolio Tracker"),
       }}
       title={t("portfolio.title", "Portfolio Tracker")}
-      breadcrumbItems={[
-        { label: t("portfolio.breadcrumb", "Portfolio") },
-      ]}
+      breadcrumbItems={[{ label: t("portfolio.breadcrumb", "Portfolio") }]}
       adsCarousel={false}
     >
-      <section className='flex w-full min-w-0 max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
+      <section className='flex w-full min-w-0 max-w-desktop flex-col pb-3'>
         {hasWallets ? (
           <>
             <div className='grid grid-cols-1 gap-3 lg:grid-cols-5'>
@@ -58,7 +56,7 @@ export const PortfolioPage = () => {
               </div>
             </div>
             <div className='mt-3'>
-              <Tabs items={tabs} apiLoading={isLoading} />
+              <Tabs items={tabs} apiLoading={isLoading} withPadding={false} />
             </div>
           </>
         ) : (

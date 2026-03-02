@@ -1,9 +1,8 @@
 import { useState, useMemo, type FC } from "react";
-import { Switch, Tabs, TableSearchInput, SpinningLoader } from "@vellumlabs/cexplorer-sdk";
+import { Switch, Tabs, TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { AddressAssetTable } from "@/components/address/AddressAssetTable";
 import { usePortfolioData } from "@/hooks/usePortfolioData";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
-import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { configJSON } from "@/constants/conf";
 
 export const PortfolioHoldingsTab: FC = () => {
@@ -14,9 +13,9 @@ export const PortfolioHoldingsTab: FC = () => {
 
   const [activeAsset, setActiveAsset] = useState<string>("all");
   const [lowBalances, setLowBalances] = useState(false);
+  const [tableSearch, setTableSearch] = useState("");
 
-  const [{ debouncedTableSearch: debouncedSearch, tableSearch }, setTableSearch] =
-    useSearchTable();
+  const debouncedSearch = tableSearch;
 
   const filteredAssets = useMemo(() => {
     let result = combinedAssets;
@@ -57,34 +56,46 @@ export const PortfolioHoldingsTab: FC = () => {
   } as any;
 
   return (
-    <div>
-      <Tabs
-        withPadding={false}
-        withMargin={false}
-        items={assetTabItems}
-        activeTabValue={activeAsset}
-        onClick={(key: string) => setActiveAsset(key)}
-      />
-      <div className='flex flex-wrap items-center justify-between gap-2 py-2'>
-        <div className='flex items-center gap-3'>
-          {(tokenMarket || nftMarket) && (
-            <Switch
-              enabled={lowBalances}
-              onChange={() => setLowBalances(!lowBalances)}
-              label={t("address.hideLowBalances")}
-            />
-          )}
-          <span className='flex items-center gap-1 text-text-xs text-grayTextPrimary'>
-            {activeAsset === "nfts"
-              ? t("address.displayingNfts", { count: filteredAssets.length })
-              : t("address.displayingTokens", { count: filteredAssets.length })}
-          </span>
-        </div>
-        <TableSearchInput
-          tableSearch={tableSearch}
-          setTableSearch={setTableSearch}
-          placeholder={t("phrases.searchResults")}
+    <div className='flex w-full flex-col gap-1.5'>
+      <div className='flex flex-col gap-2'>
+        <Tabs
+          withPadding={false}
+          withMargin={false}
+          tabParam='asset'
+          items={assetTabItems}
+          activeTabValue={activeAsset}
+          onClick={(key: string) => setActiveAsset(key)}
         />
+        <div className='flex w-full flex-wrap justify-between gap-1.5 md:flex-nowrap'>
+          <div className='flex flex-col gap-1'>
+            {activeAsset !== "nfts" && (tokenMarket || nftMarket) && (
+              <div className='flex gap-1'>
+                <Switch
+                  onClick={() => setLowBalances(lowBalances)}
+                  active={!lowBalances}
+                />
+                <span className='text-text-sm font-medium text-grayTextPrimary'>
+                  {t("address.hideLowBalances")}
+                </span>
+              </div>
+            )}
+            <span className='text-text-xs text-grayTextPrimary'>
+              {activeAsset === "nfts"
+                ? t("address.displayingNfts", { count: filteredAssets.length })
+                : t("address.displayingTokens", { count: filteredAssets.length })}
+            </span>
+          </div>
+          <div className='flex flex-grow items-center gap-1 sm:flex-grow-0'>
+            <TableSearchInput
+              placeholder={t("phrases.searchResults")}
+              value={tableSearch}
+              onchange={setTableSearch}
+              wrapperClassName='md:w-[320px] w-full'
+              showSearchIcon
+              showPrefixPopup={false}
+            />
+          </div>
+        </div>
       </div>
       <AddressAssetTable
         assets={filteredAssets}

@@ -1123,7 +1123,8 @@
       "poolDelegation": "Delegace na pool",
       "drepDelegation": "Delegace na DRep",
       "notDelegated": "Nedelegováno",
-      "delegate": "Delegovat"
+      "delegate": "Delegovat",
+      "redelegate": "Předelegovat"
     },
     "wallets": {
       "title": "Peněženky",

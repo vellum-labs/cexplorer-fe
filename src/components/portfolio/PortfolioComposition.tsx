@@ -1,14 +1,26 @@
 import type { FC } from "react";
-import { useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ArrowRight, Copy, Check } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import ReactECharts from "echarts-for-react";
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { usePortfolioStore } from "@/stores/portfolioStore";
 import { usePortfolioData } from "@/hooks/usePortfolioData";
+import { useWalletStore } from "@/stores/walletStore";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useNavigate } from "@tanstack/react-router";
+import { handleDelegation } from "@/utils/wallet/handleDelegation";
+import { useConnectWallet } from "@/hooks/useConnectWallet";
+import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import {
+  DelegationConfirmModal,
+  type DelegationInfo,
+} from "@/components/wallet/DelegationConfirmModal";
+import { generateImageUrl } from "@/utils/generateImageUrl";
+import {
+  Image,
   LoadingSkeleton,
+  Tabs,
   formatNumberWithSuffix,
   formatString,
   getAssetFingerprint,
@@ -48,9 +60,15 @@ export const PortfolioComposition: FC = () => {
   const navigate = useNavigate();
   const { textColor, bgColor } = useGraphColors();
   const { wallets, selectedWalletId } = usePortfolioStore();
+  const { wallet, address, walletType } = useWalletStore();
   const { walletDataList, selectedWalletData, totals, breakdownItems, isLoading } =
     usePortfolioData();
   const [activeTab, setActiveTab] = useState<TabType>("category");
+  const [showWalletModal, setShowWalletModal] = useState(false);
+  const [showDelegationModal, setShowDelegationModal] = useState(false);
+  const [copiedDeleg, setCopiedDeleg] = useState<string | null>(null);
+  const [delegationInfo, setDelegationInfo] = useState<DelegationInfo | null>(null);
+  const [delegationLoading, setDelegationLoading] = useState(false);
 
   const selectedWallet = selectedWalletId
     ? wallets.find(w => w.id === selectedWalletId)
@@ -159,12 +177,22 @@ export const PortfolioComposition: FC = () => {
         formatter: ({ name, value, percent }: any) =>
           `<b>${name}</b><br/>₳ ${formatNumberWithSuffix(value)}<br/>${percent.toFixed(1)}%`,
       },
-      legend: { show: false },
+      legend: {
+        orient: "vertical" as const,
+        left: 0,
+        top: "center",
+        itemWidth: 10,
+        itemHeight: 10,
+        itemGap: 12,
+        textStyle: { color: textColor, fontSize: 13 },
+        data: breakdownItems.slice(0, 5).map(item => item.name),
+        formatter: (name: string) => name.length > 12 ? name.slice(0, 12) + "…" : name,
+      },
       series: [
         {
           type: "pie",
           radius: ["55%", "80%"],
-          center: ["50%", "50%"],
+          center: ["65%", "50%"],
           avoidLabelOverlap: false,
           label: { show: false },
           labelLine: { show: false },
@@ -184,6 +212,55 @@ export const PortfolioComposition: FC = () => {
     }
   };
 
+  const { connect } = useConnectWallet();
+
+  useEffect(() => {
+    if (wallet && address && walletType && delegationInfo && !showDelegationModal) {
+      setShowWalletModal(false);
+      setShowDelegationModal(true);
+    }
+  }, [wallet, address, walletType]);
+
+  const handleDelegateClick = async (type: "pool" | "drep", ident: string) => {
+    setDelegationInfo({ type, ident });
+
+    if (!walletType) {
+      setShowWalletModal(true);
+      return;
+    }
+
+    if (!wallet) {
+      try {
+        await connect(walletType);
+      } catch {
+        setShowWalletModal(true);
+        return;
+      }
+      return;
+    }
+
+    setShowDelegationModal(true);
+  };
+
+  const handleDelegationConfirm = async (donationAmount: number) => {
+    if (!delegationInfo) return;
+    setDelegationLoading(true);
+    try {
+      await handleDelegation(
+        {
+          type: delegationInfo.type,
+          ident: delegationInfo.ident,
+          donationAmount,
+        },
+        wallet,
+      );
+    } finally {
+      setDelegationLoading(false);
+      setShowDelegationModal(false);
+      setDelegationInfo(null);
+    }
+  };
+
   const delegationData = selectedWalletData ?? (walletDataList.length === 1 ? walletDataList[0] : null);
 
   if (isLoading) {
@@ -196,7 +273,6 @@ export const PortfolioComposition: FC = () => {
 
   return (
     <div className='rounded-l border border-border bg-cardBg p-4'>
-      {/* Header */}
       <div className='mb-3 flex items-start justify-between'>
         <div>
           <h2 className='text-text-lg font-semibold'>
@@ -204,36 +280,23 @@ export const PortfolioComposition: FC = () => {
           </h2>
           <p className='text-text-sm text-grayTextPrimary'>{subtitle}</p>
         </div>
-        <div className='flex rounded-m border border-border'>
-          <button
-            className={`px-3 py-1.5 text-text-sm font-medium ${
-              activeTab === "category"
-                ? "bg-cardBg text-foreground"
-                : "text-grayTextPrimary"
-            } rounded-l-m`}
-            onClick={() => setActiveTab("category")}
-          >
-            {t("portfolio.composition.category")}
-          </button>
-          <button
-            className={`px-3 py-1.5 text-text-sm font-medium ${
-              activeTab === "breakdown"
-                ? "bg-cardBg text-foreground"
-                : "text-grayTextPrimary"
-            } rounded-r-m`}
-            onClick={() => setActiveTab("breakdown")}
-          >
-            {t("portfolio.composition.breakdown")}
-          </button>
-        </div>
+        <Tabs
+          withPadding={false}
+          withMargin={false}
+          tabParam='composition'
+          items={[
+            { key: "category", label: t("portfolio.composition.category"), visible: true },
+            { key: "breakdown", label: t("portfolio.composition.breakdown"), visible: true },
+          ]}
+          activeTabValue={activeTab}
+          onClick={(key: string) => setActiveTab(key as TabType)}
+          toRight
+        />
       </div>
 
-      {/* Main content: stat boxes left, donut right */}
       {activeTab === "category" ? (
         <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-          {/* Left: stat boxes */}
           <div className='flex flex-col gap-2'>
-            {/* Total */}
             <div className='flex items-center justify-between rounded-m border border-border p-3'>
               <div>
                 <p className='text-text-sm font-semibold'>
@@ -247,7 +310,6 @@ export const PortfolioComposition: FC = () => {
                 ₳{formatNumberWithSuffix(displayTotals.totalValueAda)}
               </p>
             </div>
-            {/* ADA */}
             <div className='flex items-center justify-between rounded-m border border-border p-3'>
               <div>
                 <p className='text-text-sm font-semibold'>ADA</p>
@@ -259,7 +321,6 @@ export const PortfolioComposition: FC = () => {
                 ₳{formatNumberWithSuffix(adaInAda)}
               </p>
             </div>
-            {/* Tokens */}
             <div className='flex items-center justify-between rounded-m border border-border p-3'>
               <div>
                 <p className='text-text-sm font-semibold'>
@@ -274,7 +335,6 @@ export const PortfolioComposition: FC = () => {
                 ₳{formatNumberWithSuffix(displayTotals.tokenValueAda)}
               </p>
             </div>
-            {/* NFTs */}
             <div className='flex items-center justify-between rounded-m border border-border p-3'>
               <div>
                 <p className='text-text-sm font-semibold'>
@@ -291,7 +351,6 @@ export const PortfolioComposition: FC = () => {
             </div>
           </div>
 
-          {/* Right: donut chart */}
           <div className='flex items-center justify-center'>
             <div className='h-[280px] w-full'>
               <ReactECharts
@@ -305,7 +364,6 @@ export const PortfolioComposition: FC = () => {
         </div>
       ) : (
         <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-          {/* Left: same stat boxes */}
           <div className='flex flex-col gap-2'>
             <div className='flex items-center justify-between rounded-m border border-border p-3'>
               <div>
@@ -361,7 +419,6 @@ export const PortfolioComposition: FC = () => {
             </div>
           </div>
 
-          {/* Right: breakdown donut chart */}
           <div className='flex items-center justify-center'>
             <div className='h-[280px] w-full'>
               <ReactECharts
@@ -376,54 +433,140 @@ export const PortfolioComposition: FC = () => {
         </div>
       )}
 
-      {/* Delegation cards */}
       {delegationData && (
         <div className='mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2'>
           <div className='flex items-center justify-between rounded-m border border-border p-3'>
-            <div>
-              <p className='text-text-sm font-semibold'>
-                {t("portfolio.composition.poolDelegation")}
-              </p>
-              <p
-                className={`truncate text-text-xs ${
-                  delegationData.poolDelegation
-                    ? "text-grayTextPrimary"
-                    : "text-redText"
-                }`}
-              >
-                {delegationData.poolDelegation
-                  ? formatString(delegationData.poolDelegation, "long")
-                  : t("portfolio.composition.notDelegated")}
-              </p>
+            <div className='flex min-w-0 flex-1 items-center gap-2'>
+              {delegationData.poolDelegation && (
+                <Image
+                  src={generateImageUrl(delegationData.poolDelegation, "ico", "pool")}
+                  type='pool'
+                  height={32}
+                  width={32}
+                  className='shrink-0 rounded-max'
+                />
+              )}
+              <div className='min-w-0'>
+                <p className='text-text-sm font-semibold'>
+                  {t("portfolio.composition.poolDelegation")}
+                </p>
+                {delegationData.poolDelegation ? (
+                  <p className='flex items-center gap-1 text-text-xs'>
+                    <Link
+                      to='/pool/$id'
+                      params={{ id: delegationData.poolDelegation }}
+                      className='truncate text-primary'
+                    >
+                      {formatString(delegationData.poolDelegation, "long")}
+                    </Link>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(delegationData.poolDelegation!);
+                      setCopiedDeleg("pool");
+                      setTimeout(() => setCopiedDeleg(null), 1500);
+                    }}
+                    className='shrink-0 text-grayTextPrimary hover:text-primary'
+                  >
+                    {copiedDeleg === "pool" ? (
+                      <Check size={12} className='text-green-500' />
+                    ) : (
+                      <Copy size={12} />
+                    )}
+                  </button>
+                </p>
+              ) : (
+                <p className='text-text-xs text-redText'>
+                  {t("portfolio.composition.notDelegated")}
+                </p>
+              )}
+              </div>
             </div>
-            <span className='flex items-center gap-0.5 text-text-sm text-primary'>
-              {t("portfolio.composition.delegate")}
+            <button
+              onClick={() =>
+                handleDelegateClick("pool", delegationData.poolDelegation ?? "")
+              }
+              className='flex shrink-0 items-center gap-0.5 text-text-sm text-primary'
+            >
+              {delegationData.poolDelegation
+                ? t("portfolio.composition.redelegate")
+                : t("portfolio.composition.delegate")}
               <ArrowRight size={14} />
-            </span>
+            </button>
           </div>
           <div className='flex items-center justify-between rounded-m border border-border p-3'>
-            <div>
+            <div className='flex min-w-0 flex-1 items-center gap-2'>
+              {delegationData.drepDelegation && (
+                <Image
+                  src={generateImageUrl(delegationData.drepDelegation, "ico", "drep")}
+                  type='user'
+                  height={32}
+                  width={32}
+                  className='shrink-0 rounded-max'
+                />
+              )}
+              <div className='min-w-0'>
               <p className='text-text-sm font-semibold'>
                 {t("portfolio.composition.drepDelegation")}
               </p>
-              <p
-                className={`truncate text-text-xs ${
-                  delegationData.drepDelegation
-                    ? "text-grayTextPrimary"
-                    : "text-redText"
-                }`}
-              >
-                {delegationData.drepDelegation
-                  ? formatString(delegationData.drepDelegation, "long")
-                  : t("portfolio.composition.notDelegated")}
-              </p>
+              {delegationData.drepDelegation ? (
+                <p className='flex items-center gap-1 text-text-xs'>
+                  <Link
+                    to='/drep/$hash'
+                    params={{ hash: delegationData.drepDelegation }}
+                    className='truncate text-primary'
+                  >
+                    {formatString(delegationData.drepDelegation, "long")}
+                  </Link>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(delegationData.drepDelegation!);
+                      setCopiedDeleg("drep");
+                      setTimeout(() => setCopiedDeleg(null), 1500);
+                    }}
+                    className='shrink-0 text-grayTextPrimary hover:text-primary'
+                  >
+                    {copiedDeleg === "drep" ? (
+                      <Check size={12} className='text-green-500' />
+                    ) : (
+                      <Copy size={12} />
+                    )}
+                  </button>
+                </p>
+              ) : (
+                <p className='text-text-xs text-redText'>
+                  {t("portfolio.composition.notDelegated")}
+                </p>
+              )}
+              </div>
             </div>
-            <span className='flex items-center gap-0.5 text-text-sm text-primary'>
-              {t("portfolio.composition.delegate")}
+            <button
+              onClick={() =>
+                handleDelegateClick("drep", delegationData.drepDelegation ?? "")
+              }
+              className='flex shrink-0 items-center gap-0.5 text-text-sm text-primary'
+            >
+              {delegationData.drepDelegation
+                ? t("portfolio.composition.redelegate")
+                : t("portfolio.composition.delegate")}
               <ArrowRight size={14} />
-            </span>
+            </button>
           </div>
         </div>
+      )}
+
+      {showWalletModal && (
+        <ConnectWalletModal onClose={() => setShowWalletModal(false)} />
+      )}
+      {showDelegationModal && delegationInfo && (
+        <DelegationConfirmModal
+          info={delegationInfo}
+          onConfirm={handleDelegationConfirm}
+          onCancel={() => {
+            setShowDelegationModal(false);
+            setDelegationInfo(null);
+          }}
+          isLoading={delegationLoading}
+        />
       )}
     </div>
   );
