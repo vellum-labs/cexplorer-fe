@@ -348,9 +348,15 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                   100
                 : 0;
 
-            const recentPercent = data?.votestat?.rate?.recent
-              ? data.votestat.rate.recent * 100
-              : 0;
+            const recentStat = data?.votestat?.stat?.recent;
+            const recentGovActions =
+              recentStat && recentStat.gov_actions < recentStat.gov_votes
+                ? recentStat.gov_votes
+                : recentStat?.gov_actions ?? 0;
+            const recentPercent =
+              recentGovActions > 0
+                ? ((recentStat?.gov_votes ?? 0) / recentGovActions) * 100
+                : 0;
 
             const lifetimePercent = data?.votestat?.rate?.total
               ? data.votestat.rate.total * 100
@@ -367,6 +373,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                   </div>
                 )}
                 <div className='flex flex-col gap-2'>
+                  {recentPercent > 0 && (
                   <div className='flex flex-col items-center gap-1'>
                     <div className='flex w-full items-center justify-between'>
                       <div className='flex items-center gap-1/2'>
@@ -396,6 +403,7 @@ export const useDrepDetail = ({ query }: UseDrepDetailArgs): UseDrepDetail => {
                       />
                     </div>
                   </div>
+                  )}
 
                   <div className='flex flex-col items-center gap-1'>
                     <div className='flex w-full items-center justify-between'>
