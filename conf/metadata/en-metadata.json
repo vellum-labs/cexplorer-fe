@@ -247,5 +247,8 @@
   },
   "stablecoinDashboard": {
     "title": "Stablecoin Dashboard | Cexplorer.io"
+  },
+  "bookmarks": {
+    "title": "Bookmarks | Cexplorer.io"
   }
 }

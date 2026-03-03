@@ -24,6 +24,7 @@ import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import { DelegatorsLabel } from "@vellumlabs/cexplorer-sdk";
 import { buildSocialIcons } from "@/utils/buildSocialIcons";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { PulsedBadge } from "@/components/ui/pulsedBadge";
 
 interface UsePoolDetailArgs {
   query: UseQueryResult<PoolDetailResponse, unknown>;
@@ -117,6 +118,31 @@ export const usePoolDetail = ({
         />
       ),
       value: formatNumber(data?.delegators),
+    },
+    {
+      label: t("pools.detailPage.about.governance"),
+      value: (() => {
+        const rewardDrep = data?.pool_update?.live?.reward_drep;
+        if (rewardDrep === "drep_always_abstain") {
+          return (
+            <PulsedBadge
+              title={t("common:address.alwaysAbstain")}
+              badgeColor='bg-redText'
+              withoutPulse
+            />
+          );
+        }
+        if (rewardDrep === "drep_always_no_confidence") {
+          return (
+            <PulsedBadge
+              title={t("common:address.alwaysNoConfidence")}
+              badgeColor='bg-redText'
+              withoutPulse
+            />
+          );
+        }
+        return <PulsedBadge title={t("dreps.detailPage.voting.title")} />;
+      })(),
     },
     {
       label: t("pools.detailPage.about.website"),

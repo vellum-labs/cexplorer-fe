@@ -72,8 +72,7 @@ export const EmbedEntity: FC<EmbedEntityProps> = ({
 
   const iframeHeight = embedType === EMBED_TYPES.GRAPH ? 700 : 400;
 
-  const embedCode = `<iframe frameBorder=
-  "0" src="${embedUrl}" width="${iframeWidth}" height="${iframeHeight}" />`;
+  const embedCode = `<iframe frameBorder="0" src="${embedUrl}" width="${iframeWidth}" height="${iframeHeight}" />`;
 
   const mode = [
     {
@@ -142,7 +141,7 @@ export const EmbedEntity: FC<EmbedEntityProps> = ({
 
   const handleCopy = () => {
     try {
-      navigator.clipboard.writeText(embedUrl || "");
+      navigator.clipboard.writeText(embedCode || "");
       setCopied(true);
 
       toast(t("embed.successCopied"), {

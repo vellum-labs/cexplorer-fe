@@ -21,6 +21,7 @@ export interface PoolListSearchParams extends PaginatedSearchParams {
     | "top_delegator"
     | "leverage";
   sort: "asc" | "desc";
+  tab?: string;
 }
 
 interface PoolEpochBlock {
@@ -61,6 +62,7 @@ interface PoolUpdateRetireItem {
   meta_id: string | null;
   pledge: number;
   reward_addr_id: number;
+  reward_drep: string | null;
   tx_id: number;
   tx: {
     id: number;

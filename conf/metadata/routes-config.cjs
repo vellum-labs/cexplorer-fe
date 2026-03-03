@@ -247,6 +247,15 @@ const routes = [
     api: false,
   },
   {
+    path: "/bookmarks",
+    title: "Bookmarks | Cexplorer.io",
+    description:
+      "Manage your saved bookmarks on Cexplorer.io. Quickly access your favorite addresses, stake pools, transactions, assets, and other Cardano blockchain pages with personalized names for easy reference and navigation.",
+    keywords:
+      "bookmarks, saved pages, favorites, Cexplorer bookmarks, saved addresses, saved pools, quick access, personalized bookmarks",
+    api: false,
+  },
+  {
     path: "/brand-assets",
     title: "Brand Assets | Cexplorer.io",
     description:
@@ -875,6 +884,24 @@ const routes = [
       "Project Cardano treasury and reserves balance over the next 20 years. Simulate treasury growth based on transaction fees, governance withdrawals, and monetary policy parameters. Visualize long-term sustainability of Cardano's funding model.",
     keywords:
       "treasury projection, Cardano treasury, reserves projection, treasury calculator, monetary policy, treasury simulation, Cexplorer, ADA reserves forecast, treasury sustainability",
+    api: false,
+  },
+  {
+    path: "/treasury/contracts",
+    title: "Treasury Contracts | Cexplorer.io",
+    description:
+      "Explore Intersect Treasury vendor contracts on Cardano. View budget allocations, milestone progress, vendor payments, and track how treasury funds are being distributed to approved projects and contractors.",
+    keywords:
+      "treasury contracts, vendor contracts, Intersect treasury, Cardano treasury, budget allocation, milestone payments, vendor payments, Cexplorer, project funding",
+    api: false,
+  },
+  {
+    path: "/treasury/contracts/:id",
+    title: "Contract %id% | Cexplorer.io",
+    description:
+      "Detailed information about treasury contract %id%. View project milestones, payment history, vendor details, contract status, budget allocation, and track progress of this Intersect Treasury funded project.",
+    keywords:
+      "treasury contract, %id%, vendor contract, project milestones, contract details, Intersect treasury, Cexplorer, project funding, milestone payments",
     api: false,
   },
   {
