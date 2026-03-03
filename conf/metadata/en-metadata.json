@@ -244,5 +244,11 @@
   },
   "adsPromotion": {
     "title": "Promotion | Cexplorer.io"
+  },
+  "projectsList": {
+    "title": "Projects | Cexplorer.io"
+  },
+  "projectDetail": {
+    "title": "Project %id% | Cexplorer.io"
   }
 }

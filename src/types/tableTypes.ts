@@ -882,6 +882,43 @@ export interface TreasuryWithdrawalsTableColumns {
   tx: boolean;
 }
 
+export interface ProjectScriptsTableColumns {
+  script_name: boolean;
+  description: boolean;
+  script_id: boolean;
+}
+
+export type ProjectScriptsTableOptions = {
+  columnsVisibility: ProjectScriptsTableColumns;
+  rows: number;
+  columnsOrder: (keyof ProjectScriptsTableColumns)[];
+};
+
+export interface ProjectProductsTableColumns {
+  product_name: boolean;
+  website: boolean;
+  app: boolean;
+  docs: boolean;
+  github: boolean;
+}
+
+export type ProjectProductsTableOptions = {
+  columnsVisibility: ProjectProductsTableColumns;
+  rows: number;
+  columnsOrder: (keyof ProjectProductsTableColumns)[];
+};
+
+export interface ProjectOnChainTableColumns {
+  type: boolean;
+  name: boolean;
+  description: boolean;
+}
+
+export type ProjectOnChainTableOptions = {
+  columnsVisibility: ProjectOnChainTableColumns;
+  rows: number;
+  columnsOrder: (keyof ProjectOnChainTableColumns)[];
+};
 export interface TreasuryContractsColumns {
   project: boolean;
   vendor: boolean;
