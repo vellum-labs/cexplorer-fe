@@ -9,7 +9,7 @@ import { DollarIcon } from "@vellumlabs/cexplorer-sdk";
 import { useDebounce } from "@vellumlabs/cexplorer-sdk";
 import { formatString } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
-import { useFetchAdaHandleList, useFetchAssetMetadata } from "@/services/assets";
+import { useFetchAdaHandleValidate, useFetchAssetMetadata } from "@/services/assets";
 import { CheckCircle, XCircle } from "lucide-react";
 import { adaHandlePolicy } from "@/constants/confVariables";
 import { getHandleStandard } from "@/utils/getHandleStandard";
@@ -34,8 +34,10 @@ export const HandleValidatorTab: FC<HandleValidatorTabProps> = ({
     localStorage.setItem(HANDLE_VALIDATOR_SEARCH_KEY, search);
   }, [search]);
 
-  const handleQuery = useFetchAdaHandleList(1, 0, debouncedSearch || undefined);
-  const handleData = handleQuery.data?.pages?.[0]?.data?.data?.[0];
+  const handleQuery = useFetchAdaHandleValidate(debouncedSearch || undefined);
+  const handleData = handleQuery.isError
+    ? undefined
+    : handleQuery.data?.data?.data?.[0] ?? undefined;
 
   const assetName = handleData
     ? `${adaHandlePolicy}${handleData.hex}`
@@ -45,9 +47,7 @@ export const HandleValidatorTab: FC<HandleValidatorTabProps> = ({
 
   const isSearching = handleQuery.isLoading || handleQuery.isFetching;
   const hasSearched = !!debouncedSearch;
-  const isError = handleQuery.isError;
-  const handleExists =
-    !!handleData && !isError && handleData.name === debouncedSearch;
+  const handleExists = !!handleData && handleData.name === debouncedSearch;
 
   const rows = handleExists
     ? [

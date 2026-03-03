@@ -1,7 +1,7 @@
 import { useFetchArticleDetail } from "@/services/article";
 import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 import parse from "html-react-parser";
-import { Helmet } from "react-helmet";
+import { PageBase } from "@/components/global/pages/PageBase";
 
 export const EducationPage = () => {
   const { locale } = useLocaleStore();
@@ -10,11 +10,16 @@ export const EducationPage = () => {
   const name = data?.name;
 
   return (
-    <>
-      <Helmet>{name && <title>{name}</title>}</Helmet>
-      <main className='flex min-h-minHeight w-full flex-col items-center p-mobile md:p-desktop'>
+    <PageBase
+      metadataOverride={{ title: name || "Education | Cexplorer.io" }}
+      title={name || "Education"}
+      breadcrumbItems={[{ label: "Education" }]}
+      adsCarousel={false}
+      bookmarkButton={false}
+    >
+      <div className='flex w-full max-w-desktop flex-col items-center px-mobile pb-3 md:px-desktop'>
         {parse(data?.data.map(item => item).join("") || "")}
-      </main>
-    </>
+      </div>
+    </PageBase>
   );
 };

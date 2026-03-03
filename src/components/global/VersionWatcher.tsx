@@ -17,6 +17,7 @@ export const VersionWatcher: FC = () => {
     "watchlist_store",
     "portfolio_store",
     "navbar-line-1",
+    "bookmark_store",
     "cookie_consent",
   ];
 

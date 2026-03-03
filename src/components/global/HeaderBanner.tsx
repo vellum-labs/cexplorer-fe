@@ -20,6 +20,9 @@ export interface HeaderBannerProps {
   homepageAd?: ReactNode;
   customPage?: boolean;
   withoutSearch?: boolean;
+  bookmarkButton?: boolean;
+  onBookmarkClick?: () => void;
+  isBookmarked?: boolean;
 }
 
 export const HeaderBanner = ({
@@ -34,6 +37,9 @@ export const HeaderBanner = ({
   homepageAd,
   customPage,
   withoutSearch,
+  bookmarkButton = true,
+  onBookmarkClick,
+  isBookmarked,
 }: HeaderBannerProps) => {
   const { t } = useAppTranslation("common");
   const { locale } = useLocaleStore();
@@ -55,6 +61,9 @@ export const HeaderBanner = ({
       customPage={customPage}
       icon={icon}
       withoutSearch={withoutSearch}
+      bookmarkButton={bookmarkButton}
+      onBookmarkClick={onBookmarkClick}
+      isBookmarked={isBookmarked}
       generateImageUrl={generateImageUrl}
       featuredLabel={t("sdk:header.featuredLabel")}
       adLabel={t("sdk:header.adLabel")}
