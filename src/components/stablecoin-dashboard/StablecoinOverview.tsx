@@ -4,7 +4,6 @@ import type { FC } from "react";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import {
-  formatNumber,
   formatNumberWithSuffix,
   Image,
   OverviewStatCard,
@@ -22,8 +21,6 @@ export const StablecoinOverview: FC<StablecoinOverviewProps> = ({
 }) => {
   const { t } = useAppTranslation();
 
-  // Card 1: Net Flow
-  // mint.inflow / mint.outflow are raw token amounts (or null)
   const mintedUsd = data.reduce((sum, sc) => {
     const decimals = sc.registry?.decimals ?? 0;
     return sum + (sc.mint?.inflow ?? 0) / 10 ** decimals;
@@ -34,14 +31,12 @@ export const StablecoinOverview: FC<StablecoinOverviewProps> = ({
   }, 0);
   const netFlowUsd = mintedUsd - burnedUsd;
 
-  // Card 2: Market Cap
   const marketCapUsd = data.reduce((sum, sc) => {
     const decimals = sc.registry?.decimals ?? 0;
     return sum + sc.quantity / 10 ** decimals;
   }, 0);
   const marketCapAda = ex > 0 ? marketCapUsd / ex : 0;
 
-  // Card 3: Dominance
   const stablecoinShares = data
     .map(sc => {
       const decimals = sc.registry?.decimals ?? 0;
@@ -123,13 +118,11 @@ export const StablecoinOverview: FC<StablecoinOverviewProps> = ({
               type='asset'
               height={28}
               width={28}
-              className='aspect-square h-[28px] w-[28px] shrink-0 rounded-lg'
+              className='rounded-lg aspect-square h-[28px] w-[28px] shrink-0'
               src={generateImageUrl(dominant.fingerprint, "sm", "nft")}
               fallbackletters={dominant.ticker.slice(0, 2)}
             />
-            <p className='text-display-xs font-semibold'>
-              {dominant.ticker}
-            </p>
+            <p className='text-display-xs font-semibold'>{dominant.ticker}</p>
           </div>
         </div>
       ) : (
@@ -146,7 +139,7 @@ export const StablecoinOverview: FC<StablecoinOverviewProps> = ({
                 type='asset'
                 height={16}
                 width={16}
-                className='aspect-square h-[16px] w-[16px] shrink-0 rounded-sm'
+                className='rounded-sm aspect-square h-[16px] w-[16px] shrink-0'
                 src={generateImageUrl(sc.fingerprint, "sm", "nft")}
                 fallbackletters={sc.ticker.slice(0, 2)}
               />

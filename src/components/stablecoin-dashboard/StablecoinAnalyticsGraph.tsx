@@ -4,7 +4,10 @@ import type { FC } from "react";
 
 import { useGraphColors } from "@/hooks/useGraphColors";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
-import { formatNumber, formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
+import {
+  formatNumber,
+  formatNumberWithSuffix,
+} from "@vellumlabs/cexplorer-sdk";
 import ReactEcharts from "echarts-for-react";
 import { useRef, useState } from "react";
 import GraphWatermark from "../global/graphs/GraphWatermark";
@@ -25,15 +28,11 @@ export const StablecoinAnalyticsGraph: FC<StablecoinAnalyticsGraphProps> = ({
   const { t } = useAppTranslation();
   const { splitLineColor, textColor, bgColor, inactivePageIconColor } =
     useGraphColors();
-  const chartRef = useRef(null);
+  const chartRef = useRef<any>(null);
 
   const [graphsVisibility, setGraphsVisibility] = useState(() => {
-    try {
-      const stored = localStorage.getItem("stablecoin_graph_store");
-      if (stored) return JSON.parse(stored);
-    } catch (_e) {
-      /* ignore */
-    }
+    const stored = localStorage.getItem("stablecoin_graph_store");
+    if (stored) return JSON.parse(stored);
     return {
       [KEYS.activity]: true,
       [KEYS.assetVolume]: true,
@@ -47,7 +46,6 @@ export const StablecoinAnalyticsGraph: FC<StablecoinAnalyticsGraphProps> = ({
     [KEYS.holders]: t("stablecoinDashboard.holders"),
   };
 
-  // Collect all unique epochs across all stablecoins, sorted chronologically
   const epochSet = new Set<number>();
   for (const sc of data) {
     for (const s of sc.stat) {
@@ -56,7 +54,6 @@ export const StablecoinAnalyticsGraph: FC<StablecoinAnalyticsGraphProps> = ({
   }
   const epochs = [...epochSet].sort((a, b) => a - b);
 
-  // Build cumulative data per epoch (sum across all stablecoins)
   const activityData: number[] = [];
   const assetVolumeData: number[] = [];
   const holdersData: number[] = [];
@@ -81,7 +78,6 @@ export const StablecoinAnalyticsGraph: FC<StablecoinAnalyticsGraphProps> = ({
     holdersData.push(totalHolders);
   }
 
-  // Build per-stablecoin breakdown for tooltip
   const buildTooltipBreakdown = (epochIdx: number): string => {
     const epoch = epochs[epochIdx];
     return data
@@ -123,12 +119,10 @@ export const StablecoinAnalyticsGraph: FC<StablecoinAnalyticsGraphProps> = ({
 
         let html = `<div style="font-weight:600;">Epoch ${epochNo}</div><hr style="margin:4px 0;">`;
         html += params
-          .map(
-            (item: any) => {
-              const prefix = item.seriesName === KEYS.assetVolume ? "$" : "";
-              return `<p>${item.marker} ${legendLabels[item.seriesName]}: ${prefix}${formatNumberWithSuffix(item.data)}</p>`;
-            },
-          )
+          .map((item: any) => {
+            const prefix = item.seriesName === KEYS.assetVolume ? "$" : "";
+            return `<p>${item.marker} ${legendLabels[item.seriesName]}: ${prefix}${formatNumberWithSuffix(item.data)}</p>`;
+          })
           .join("");
 
         html += `<hr style="margin:4px 0;"><div style="font-size:11px;font-weight:600;margin-bottom:2px;">Breakdown:</div>`;

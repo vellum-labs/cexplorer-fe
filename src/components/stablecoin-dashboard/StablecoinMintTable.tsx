@@ -53,7 +53,6 @@ export const StablecoinMintTable: FC<StablecoinMintTableProps> = ({
     setRows,
   } = useAssetDetailMintTableStore();
 
-  // Fetch asset detail to get policy+name for the selected stablecoin
   const assetDetailQuery = useFetchAssetDetail(selectedFingerprint, {
     enabled: !!selectedFingerprint,
   });
@@ -61,7 +60,6 @@ export const StablecoinMintTable: FC<StablecoinMintTableProps> = ({
   const name = assetDetailQuery.data?.data?.name ?? "";
   const assetname = policy && name ? policy + name : undefined;
 
-  // Fetch mints — same pattern as AssetMintTab
   const mintQuery = useFetchAssetMint(
     rows,
     (page ?? 1) * rows - rows,
