@@ -21,7 +21,6 @@ export const AdaPriceWithTxCountGraph: FC<AdaPriceWithTxCountGraphProps> = memo(
       json,
       option,
       selectedItem,
-      setData,
       setSelectedItem,
       allMergedData,
     } = useAdaPriceWithTxCount(graphRates, analyticsData);
@@ -41,7 +40,7 @@ export const AdaPriceWithTxCountGraph: FC<AdaPriceWithTxCountGraphProps> = memo(
         exportButton
         graphSortData={{
           query: fakeQuery as any,
-          setData,
+          setData: () => {},
           setSelectedItem,
           selectedItem,
         }}

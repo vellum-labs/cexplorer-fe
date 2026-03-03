@@ -70,7 +70,7 @@ export const useFetchPolicyOwner = (page: number, limit: number, id: string) =>
     initialPageParam: page,
     getNextPageParam: lastPage => {
       const nextOffset = (lastPage.prevOffset as number) + limit;
-      if (nextOffset >= lastPage.data[0]?.count) return undefined;
+      if (nextOffset >= lastPage.data.count) return undefined;
       return nextOffset;
     },
     staleTime: 300000,

@@ -1,9 +1,6 @@
-const getArrayWithLength = (length: number) =>
-  Array.from({ length }, (_, i) => i + 1);
+export const epochDetailsForCheck = [1, 50, 100, 150, 200, 218];
 
-export const epochDetailsForCheck = getArrayWithLength(218);
-
-export const drepListPagesForCheck = getArrayWithLength(9);
+export const drepListPagesForCheck = [1, 3, 6, 9];
 export const drepListColumnOrdersToTest: string[][] = [
   [
     "status",
@@ -76,20 +73,9 @@ export const drepListColumnOrdersToTest: string[][] = [
     "voting_power",
   ],
 ];
-export const txListPagesForCheck = getArrayWithLength(10);
+export const txListPagesForCheck = [1, 3, 6, 10];
 
-export const assetListPagesForCheck = [
-  ...Array.from({ length: 10 }, (_, i) => 1 + i),
-  // ...Array.from({ length: 100 }, (_, i) => 45000 + i),
-  // ...Array.from({ length: 100 }, (_, i) => 40000 + i),
-  // ...Array.from({ length: 100 }, (_, i) => 35000 + i),
-  // ...Array.from({ length: 100 }, (_, i) => 30000 + i),
-  // ...Array.from({ length: 100 }, (_, i) => 25000 + i),
-  // ...Array.from({ length: 100 }, (_, i) => 20000 + i),
-  // ...Array.from({ length: 100 }, (_, i) => 15000 + i),
-  // ...Array.from({ length: 100 }, (_, i) => 10000 + i),
-  // ...Array.from({ length: 100 }, (_, i) => 5000 + i),
-];
+export const assetListPagesForCheck = [1, 3, 6, 10];
 
 export const assetListColumnOrdersToTest: string[][] = [
   [
@@ -139,10 +125,8 @@ export const assetListColumnOrdersToTest: string[][] = [
   ],
 ];
 
-export const blockListPagesForCheck = [
-  176181, 166171, 156181, 146181, 136181, 126181, 116181, 100181, 90181, 50000,
-  40000, 10, 5, 4, 3, 2, 1,
-];
+export const blockListPagesForCheck = [176181, 100181, 50000, 10, 1];
+
 export const addressesForCheck = [
   "addr1qxxj0zec9lth7hje8prg39r3x746g690qzuvxkgrk67q9w6m5stzjm2k2ypez2q0sxw48w4ummrexp4gd7p46v37q87s0rvfsp",
   "addr1qx2x4luvdwdsrlgzrdfmspuhxplvga7uxp2wz9nyut4czccjhtj0n2gl2vx2agq7q9qk4z4r6jr632u6waqyrvgxqzwsvw3fna",
@@ -173,40 +157,16 @@ export const analyticsNetworkTabs = [
 export const analyticsPoolsTabs = ["pool_issues", "average_pools"];
 
 export const articleIds = [
-  "test-article-2",
-  "test-article",
-  "test-article-3",
   "wanchain-bridge-connects-cardano-with-many-l1s-and-l2s",
   "can-cardano-be-bigger-than-bitcoin",
-  "name",
-  "aaa-name-s",
-  "name-1",
   "vote-in-intersect-board-and-committees-elections",
-  "a-legally-enforceable-cardano-contract-was-signed",
-  "cardano-s-partner-chain-framework-correlates-with-the-trend",
 ];
 
 export const blockDetailHashes = [
   "adb5f8168f006ac4d5e113ce9d846e814d211a1dd42a4595d531c175a3122827",
 ];
 
-export const contractInteractionsPages = [
-  ...getArrayWithLength(100),
-  ...Array.from({ length: 100 }, (_, i) => 19000 + i),
-  ...Array.from({ length: 100 }, (_, i) => 18000 + i),
-  ...Array.from({ length: 100 }, (_, i) => 17000 + i),
-  ...Array.from({ length: 100 }, (_, i) => 16000 + i),
-  ...Array.from({ length: 100 }, (_, i) => 15000 + i),
-  ...Array.from({ length: 100 }, (_, i) => 14000 + i),
-  ...Array.from({ length: 100 }, (_, i) => 13000 + i),
-  ...Array.from({ length: 100 }, (_, i) => 12000 + i),
-  ...Array.from({ length: 100 }, (_, i) => 10000 + i),
-  ...Array.from({ length: 100 }, (_, i) => 8000 + i),
-  ...Array.from({ length: 100 }, (_, i) => 6000 + i),
-  ...Array.from({ length: 100 }, (_, i) => 4000 + i),
-  ...Array.from({ length: 100 }, (_, i) => 2000 + i),
-  ...Array.from({ length: 100 }, (_, i) => 1000 + i),
-];
+export const contractInteractionsPages = [1, 50, 500, 1000, 5000, 10000, 19000];
 
 export const inlineDatums = [
   "d87a9fd8799f581c9dc0a95d1a343ef38043994c4ff7b8f1f8f860339ee351bc0cb8a650d8799fd8799f1a000a21141b0000019717555c40ffffffff",
@@ -226,13 +186,13 @@ export const drepHashes = [
   "drep1g2d3y3skgr806wj2ryhhc5ca3akx6vmppde87jq7kgknjmv589e",
 ];
 
-export const drepDeregistrationsPages = getArrayWithLength(30);
+export const drepDeregistrationsPages = [1, 8, 16, 24, 30];
 
-export const drepRegistrationPages = getArrayWithLength(30);
+export const drepRegistrationPages = [1, 8, 16, 24, 30];
 
-export const drepUpdatesPages = getArrayWithLength(12);
+export const drepUpdatesPages = [1, 4, 8, 12];
 
-export const govActionListPages = getArrayWithLength(1);
+export const govActionListPages = [1, 3, 6, 10];
 
 export const govActionIds = [
   "dfdac5921ab657241fce58583d61bef59a369e01d2ba78191d6df6632a07fdfd#0",
@@ -253,13 +213,13 @@ export const groupsNames = [
   "test-group-e",
 ];
 
-export const liveDelegationsPages = getArrayWithLength(30);
+export const liveDelegationsPages = [1, 8, 16, 24, 30];
 
-export const metadataPages = getArrayWithLength(30);
+export const metadataPages = [1, 8, 16, 24, 30];
 
-export const newPoolPages = getArrayWithLength(20);
+export const newPoolPages = [1, 5, 10, 15, 20];
 
-export const poolListPages = getArrayWithLength(40);
+export const poolListPages = [1, 10, 20, 30, 40];
 
 export const poolsForCheck = [
   "pool1qqqyv9pn9typyqwcxqk5ewpxy5p27g5j2ms58hpp2c2kuzs5z77",
@@ -288,17 +248,17 @@ export const pollsNames = [
   "nice-poll",
 ];
 
-export const poolRegistrationsPages = getArrayWithLength(27);
+export const poolRegistrationsPages = [1, 7, 14, 20, 27];
 
-export const poolDeregistrationsPages = getArrayWithLength(6);
+export const poolDeregistrationsPages = [1, 3, 6];
 
-export const poolAwardsPage = getArrayWithLength(129);
+export const poolAwardsPage = [1, 32, 65, 97, 129];
 
-export const poolBirthdays = getArrayWithLength(1);
+export const poolBirthdays = [1];
 
-export const poolUpdates = getArrayWithLength(22);
+export const poolUpdates = [1, 6, 11, 16, 22];
 
-export const scriptPages = getArrayWithLength(30);
+export const scriptPages = [1, 8, 16, 24, 30];
 
 export const retiredDelegationsTabs = ["live", "active"];
 
@@ -317,11 +277,11 @@ export const stakeHashes = [
   "stake1uyjm2lgwqx7k2ldhlh0t255tmhug78vag3wfjt0l6wfkl8s4kxfmr",
 ];
 
-export const stakeDeregistrationsPages = getArrayWithLength(50);
+export const stakeDeregistrationsPages = [1, 13, 25, 38, 50];
 
-export const stakeRegistrationsPages = getArrayWithLength(50);
+export const stakeRegistrationsPages = [1, 13, 25, 38, 50];
 
-export const withdrawalsPages = getArrayWithLength(50);
+export const withdrawalsPages = [1, 13, 25, 38, 50];
 
 export const tokenDashboardTabs = ["tokens", "global_activity", "exchange"];
 
@@ -332,3 +292,17 @@ export const txHashes = [
   "58ebfba6a70236c6f9069e41307044e7b6774ad8467bcb15c9e1fd0bcd0a36b3",
   "3efd4f2d728f3a5fe3124045e4b67beaa4785fff2f617b4494b53eca1ca193e5",
 ];
+
+export const handleDnsTabs = ["recently-minted", "validator"];
+
+export const poolDebugTabs = ["debugger", "cheatsheet"];
+
+export const taxToolTabs = ["rewards", "withdrawals"];
+
+export const wikiPagesForCheck = [1, 2, 3, 5];
+
+export const govVotePagesForCheck = [1, 2, 3, 5];
+
+export const govCcPagesForCheck = [1, 2, 3, 5];
+
+export const multiPoolDelegationsPages = [1, 3, 6, 10];

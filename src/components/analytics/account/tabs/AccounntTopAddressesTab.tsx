@@ -5,7 +5,7 @@ import type {
 } from "@/types/tableTypes";
 import type { FC } from "react";
 
-import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
+import { AdaWithTooltip, Copy } from "@vellumlabs/cexplorer-sdk";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { DateCell } from "@vellumlabs/cexplorer-sdk";
@@ -85,15 +85,18 @@ export const AccounntTopAddressesTab: FC = () => {
         }
 
         return (
-          <Link
-            to='/address/$address'
-            params={{
-              address: item.address,
-            }}
-            className='text-primary'
-          >
-            {formatString(item.address, "long")}
-          </Link>
+          <div className='flex items-center gap-1'>
+            <Link
+              to='/address/$address'
+              params={{
+                address: item.address,
+              }}
+              className='text-primary'
+            >
+              {formatString(item.address, "long")}
+            </Link>
+            <Copy copyText={item.address} />
+          </div>
         );
       },
       title: t("analytics.account"),

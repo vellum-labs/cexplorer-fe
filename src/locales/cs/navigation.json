@@ -95,7 +95,8 @@
     "rewardsCalculator": "Kalkulačka odměn",
     "poolDebug": "Debug poolu",
     "uplcViewer": "UPLC prohlížeč",
-    "handleDns": "handle DNS"
+    "handleDns": "handle DNS",
+    "scriptVerification": "Verifikace skriptu"
   },
   "services": {
     "label": "Služby",

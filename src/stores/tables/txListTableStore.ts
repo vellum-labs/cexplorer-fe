@@ -5,7 +5,7 @@ import type {
 
 import { handlePersistStore } from "@vellumlabs/cexplorer-sdk";
 
-export const useTxListTableStore = (storeKey?: string) =>
+export const useTxListTableStore = (storeKey?: string, address?: string) =>
   handlePersistStore<
     TxListTableOptions,
     {
@@ -26,7 +26,7 @@ export const useTxListTableStore = (storeKey?: string) =>
         donation: false,
         fee: true,
         size: true,
-        script_size: true,
+        script_size: !address,
       },
       isResponsive: true,
       rows: 20,

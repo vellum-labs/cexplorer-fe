@@ -35,16 +35,6 @@ export const ConfigAdminPage: FC = () => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </BreadcrumbRaw>
-      <div className='flex flex-col gap-1'>
-        <p>Config options:</p>
-        <ul className='list-inside list-disc pl-1'>
-          <li>
-            <Link to='/admin/config/sw' className='text-primary'>
-              Sw text
-            </Link>
-          </li>
-        </ul>
-      </div>
     </div>
   );
 };

@@ -323,8 +323,18 @@ export interface CommitteeMemberRegistration {
   hash: string;
   time: string;
   index: number;
+  epoch_no?: number;
   invalid_hereafter: null | number;
   treasury_donation: number;
+}
+
+export interface CCMemberVoteStat {
+  count: number;
+  vote: string;
+}
+
+export interface CCMemberStat {
+  votes: CCMemberVoteStat[];
 }
 
 export interface CommitteeMember {
@@ -340,6 +350,7 @@ export interface CommitteeMember {
     | CommitteeMemberRegistration[]
     | null;
   expiration_epoch: number | null;
+  stat?: CCMemberStat;
 }
 
 export interface CommitteeInfo {
@@ -354,7 +365,7 @@ export type CommitteeDetailResponse = ResponseCore<{
   committee: CommitteeInfo;
 }>;
 
-export type CCMemberDetailResponse = ResponseCore<CommitteeMember[]>;
+export type CCMemberDetailResponse = ResponseCore<CommitteeMember>;
 
 export interface ConstitutionAnchor {
   url: string;
