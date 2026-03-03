@@ -244,5 +244,8 @@
   },
   "adsPromotion": {
     "title": "Promotion | Cexplorer.io"
+  },
+  "stablecoinDashboard": {
+    "title": "Stablecoin Dashboard | Cexplorer.io"
   }
 }

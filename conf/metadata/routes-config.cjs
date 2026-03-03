@@ -806,6 +806,15 @@ const routes = [
     api: false,
   },
   {
+    path: "/stablecoin-dashboard",
+    title: "Stablecoin Dashboard | Cexplorer.io",
+    description:
+      "Explore stablecoin analytics and metrics on the Cardano blockchain. Track stablecoin supply, volume, and usage across the Cardano ecosystem with comprehensive dashboard data and visualizations.",
+    keywords:
+      "stablecoin dashboard, Cardano stablecoins, stablecoin analytics, DJED, iUSD, USDA, stablecoin metrics, Cexplorer, stablecoin supply",
+    api: false,
+  },
+  {
     path: "/swap",
     title: "Token Swap | Cexplorer.io",
     description:
