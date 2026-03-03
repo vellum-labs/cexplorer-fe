@@ -3,7 +3,6 @@ import { SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import { useFetchWikiDetail, useFetchWikiList } from "@/services/article";
 import { getRouteApi, Link } from "@tanstack/react-router";
 import parse from "html-react-parser";
-import { Helmet } from "react-helmet";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useState } from "react";
@@ -56,15 +55,12 @@ export const WikiDetailPage = () => {
 
   return (
     <>
-      <Helmet>
-        <title>
-          {data?.name
-            ? `${parse(data.name)} | ${t("wikiPage.breadcrumb")} | Cexplorer.io`
-            : t("wikiPage.metaTitle")}
-        </title>
-      </Helmet>
       <PageBase
-        metadataOverride={{ title: t("wikiPage.metaTitle") }}
+        metadataOverride={{
+          title: data?.name
+            ? `${parse(data.name)} | ${t("wikiPage.breadcrumb")} | Cexplorer.io`
+            : t("wikiPage.metaTitle"),
+        }}
         title={t("wikiPage.breadcrumb")}
         subTitle={data?.name ? String(parse(data.name)) : undefined}
         breadcrumbItems={[
