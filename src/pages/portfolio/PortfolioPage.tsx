@@ -42,7 +42,7 @@ export const PortfolioPage = () => {
       breadcrumbItems={[{ label: t("portfolio.breadcrumb", "Portfolio") }]}
       adsCarousel={false}
     >
-      <section className='flex w-full min-w-0 max-w-desktop flex-col pb-3'>
+      <section className='flex w-full min-w-0 max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         {hasWallets ? (
           <>
             <div className='grid grid-cols-1 gap-3 lg:grid-cols-5'>

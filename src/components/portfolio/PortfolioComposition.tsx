@@ -273,13 +273,16 @@ export const PortfolioComposition: FC = () => {
 
   return (
     <div className='rounded-l border border-border bg-cardBg p-4'>
-      <div className='mb-3 flex items-start justify-between'>
-        <div>
-          <h2 className='text-text-lg font-semibold'>
+      <div className='mb-3 flex items-start justify-between gap-2'>
+        <div className='min-w-0 shrink'>
+          <h2 className='truncate text-text-lg font-semibold'>
             {t("portfolio.composition.title")}
           </h2>
-          <p className='text-text-sm text-grayTextPrimary'>{subtitle}</p>
+          <p className='truncate text-text-sm text-grayTextPrimary'>
+            {formatString(subtitle, "long")}
+          </p>
         </div>
+        <div className='shrink-0'>
         <Tabs
           withPadding={false}
           withMargin={false}
@@ -292,6 +295,7 @@ export const PortfolioComposition: FC = () => {
           onClick={(key: string) => setActiveTab(key as TabType)}
           toRight
         />
+        </div>
       </div>
 
       {activeTab === "category" ? (
@@ -352,7 +356,7 @@ export const PortfolioComposition: FC = () => {
           </div>
 
           <div className='flex items-center justify-center'>
-            <div className='h-[280px] w-full'>
+            <div className='h-[200px] w-full md:h-[280px]'>
               <ReactECharts
                 option={getCategoryOption()}
                 notMerge
@@ -420,7 +424,7 @@ export const PortfolioComposition: FC = () => {
           </div>
 
           <div className='flex items-center justify-center'>
-            <div className='h-[280px] w-full'>
+            <div className='h-[200px] w-full md:h-[280px]'>
               <ReactECharts
                 option={getBreakdownOption()}
                 notMerge
