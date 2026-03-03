@@ -21,6 +21,7 @@ export interface PoolListSearchParams extends PaginatedSearchParams {
     | "top_delegator"
     | "leverage";
   sort: "asc" | "desc";
+  tab?: string;
 }
 
 interface PoolEpochBlock {
