@@ -25,7 +25,6 @@ export const AdaPriceWithTVLGraph: FC<AdaPriceWithTVLGraphProps> = memo(
       json,
       option,
       selectedItem,
-      setData,
       setSelectedItem,
       allMergedData,
     } = useAdaPriceWithTVL(graphRates, tvlData);
@@ -45,7 +44,7 @@ export const AdaPriceWithTVLGraph: FC<AdaPriceWithTVLGraphProps> = memo(
         exportButton
         graphSortData={{
           query: fakeQuery as any,
-          setData,
+          setData: () => {},
           setSelectedItem,
           selectedItem,
         }}

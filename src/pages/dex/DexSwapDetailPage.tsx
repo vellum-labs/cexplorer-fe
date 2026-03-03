@@ -27,7 +27,7 @@ export const DexSwapDetailPage: FC = () => {
   );
   const { data: miscBasic } = useFetchMiscBasic();
 
-  const swapDetail = swapData?.pages.flatMap(page => page.data?.data);
+  const swapDetail = swapData?.pages.flatMap(page => page.data?.data ?? []);
 
   const aggregatedData = useMemo(() => {
     if (!swapDetail || swapDetail.length === 0) return undefined;

@@ -92,11 +92,13 @@ export const NetworkTransactionTab: FC = () => {
   const getTx = (arr: AnalyticsRateResponseData[] | undefined) =>
     (arr ?? [])
       .filter(e => e?.stat)
-      .map(item => item?.stat?.count_tx_out)
-      .reduce((a, b) => (a as number) + (b as number), 0);
+      .map(item => item?.stat?.count_tx_out ?? 0)
+      .reduce((a, b) => a + b, 0);
 
   const getTps = (arr: AnalyticsRateResponseData[] | undefined) => {
     const seconds = (arr ?? []).map(() => 86400).reduce((a, b) => a + b, 0);
+
+    if (seconds === 0) return "0.00";
 
     const txs = getTx(arr) as number;
 
@@ -106,6 +108,9 @@ export const NetworkTransactionTab: FC = () => {
   const getMaxTps = (arr: AnalyticsRateResponseData[] | undefined) => {
     const maxTpsArr = getMaxTpsByEpochs(arr);
     const maxTpsLength = maxTpsArr.length;
+
+    if (maxTpsLength === 0) return "0.00";
+
     const reducedMaxTps = maxTpsArr.reduce((a, b) => a + b, 0);
 
     return (reducedMaxTps / maxTpsLength).toFixed(2);

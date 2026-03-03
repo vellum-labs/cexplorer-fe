@@ -10,9 +10,8 @@ import { Helmet } from "react-helmet";
 import { Button, SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import Footer from "../components/layouts/Footer";
 
-import { SwReadyModal } from "@/components/global/modals/SwReadyModal";
-
 import { VersionWatcher } from "@/components/global/VersionWatcher";
+import { CookieBanner } from "@/components/global/CookieBanner";
 import Navbar from "@/components/layouts/Navbar";
 import { ErrorBoundary } from "@/pages/error/ErrorBoundary";
 
@@ -25,6 +24,7 @@ import { useGenerateSW } from "@/hooks/useGenerateSW";
 import { useState } from "react";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { useFetchMiscBasic, useFetchMiscSearch } from "@/services/misc";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { useShortcuts } from "@/hooks/shortcuts/useShortcuts";
@@ -36,8 +36,6 @@ const RootComponent = () => {
   useGenerateSW();
 
   const { openHelp, setOpenHelp } = useShortcuts();
-
-  const [updateModal, setUpdateModal] = useState<boolean>(false);
 
   const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
@@ -112,14 +110,6 @@ const RootComponent = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    const updateModal = localStorage.getItem("should_update");
-
-    if (updateModal && updateModal === "true") {
-      setUpdateModal(true);
-    }
-  }, []);
-
-  useEffect(() => {
     let activeTransition: ViewTransition | null = null;
 
     const unsubscribe = router.subscribe("onBeforeNavigate", () => {
@@ -143,8 +133,11 @@ const RootComponent = () => {
 
   return (
     <GlobalSearchProvider
-      useFetchMiscSearch={useFetchMiscSearch}
+      useFetchMiscSearch={useFetchMiscSearch as any}
       locale={locale}
+      generateImageUrl={(id, size, type) =>
+        generateImageUrl(id, size as any, type as any)
+      }
     >
       <>
         <Helmet>
@@ -190,7 +183,7 @@ const RootComponent = () => {
           )}
         </ErrorBoundary>
         <Footer />
-        {updateModal && <SwReadyModal />}
+        <CookieBanner />
         <VersionWatcher />
         {clickedUrl && (
           <SafetyLinkModal

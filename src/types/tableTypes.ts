@@ -919,3 +919,36 @@ export type ProjectOnChainTableOptions = {
   rows: number;
   columnsOrder: (keyof ProjectOnChainTableColumns)[];
 };
+export interface TreasuryContractsColumns {
+  project: boolean;
+  vendor: boolean;
+  budget: boolean;
+  milestones: boolean;
+  status: boolean;
+}
+
+export interface TreasuryContractsTableOptions
+  extends Pick<
+    TableOptionsCore<TreasuryContractsColumns>,
+    "isResponsive" | "rows"
+  > {
+  columnsVisibility: TreasuryContractsColumns;
+  columnsOrder: (keyof TreasuryContractsColumns)[];
+}
+
+export interface MilestonePaymentsColumns {
+  milestone: boolean;
+  event: boolean;
+  amount: boolean;
+  transaction: boolean;
+  date: boolean;
+}
+
+export interface MilestonePaymentsTableOptions
+  extends Pick<
+    TableOptionsCore<MilestonePaymentsColumns>,
+    "isResponsive" | "rows"
+  > {
+  columnsVisibility: MilestonePaymentsColumns;
+  columnsOrder: (keyof MilestonePaymentsColumns)[];
+}

@@ -51,10 +51,12 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <Toaster
         toastOptions={{
           classNames: {
-            toast: "bg-background text-text border relative border-border",
-            content: "relative",
+            toast: "bg-background text-text border border-border",
           },
         }}
+        expand
+        richColors
+        visibleToasts={1}
       />
       <App />
     </QueryClientProvider>

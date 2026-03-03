@@ -259,6 +259,8 @@ export type MiscPaymentResponse = ResponseCore<MiscPaymentData>;
 export type PromotionType = "pool" | "drep" | "asset" | "policy";
 export type PaymentAction = "payment_one_time" | "payment_recurring";
 
+export type MiscAnchorResponse = ResponseCore<string | false>;
+
 export type MiscApiResponse = ResponseCore<{
   plans: MiscApiData;
   stripe?: MiscApiStripe;
