@@ -9,10 +9,12 @@ import { FileText, Users } from "lucide-react";
 import { VotingTable } from "@/components/gov/drepVote/VotingTable";
 import { TableSettingsDropdown } from "@vellumlabs/cexplorer-sdk";
 import { useVotingTableStore } from "@/stores/tables/votingTableTableStore";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 type SelectItemsType = "Voting power (ASC)" | "Voting power (DESC)";
 
 export const WithdrawalLeaderboard: FC = () => {
+  const { t } = useAppTranslation("common");
   const [selectedItem, setSelectedItem] = useState<string | undefined>(
     "Voting power (ASC)",
   );

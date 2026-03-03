@@ -19,20 +19,18 @@ export const CCMemberDetailPage = () => {
   const { coldKey } = route.useParams();
   const { data } = useFetchCCMemberDetail(coldKey);
 
-  const memberData = Array.isArray(data?.data)
-    ? data.data.sort(
-        (a, b) => (b.expiration_epoch ?? 0) - (a.expiration_epoch ?? 0),
-      )[0]
-    : data?.data;
+  const memberData = data?.data;
 
   const hotKey = memberData?.ident?.hot;
   const votesQuery = useFetchCCMemberVote(
-    1000,
+    1,
     0,
     undefined,
     hotKey,
     undefined,
   );
+
+  const lastVoteTime = votesQuery.data?.pages?.[0]?.data?.data?.[0]?.tx?.time;
 
   const tabItems = [
     {
@@ -51,13 +49,7 @@ export const CCMemberDetailPage = () => {
       content: (
         <div className='w-full max-w-desktop'>
           <CCMemberHotKeysTab
-            memberHistory={
-              Array.isArray(data?.data)
-                ? data.data
-                : data?.data
-                  ? [data.data]
-                  : undefined
-            }
+            memberHistory={memberData ? [memberData] : undefined}
             isLoading={!data}
           />
         </div>
@@ -70,13 +62,7 @@ export const CCMemberDetailPage = () => {
       content: (
         <div className='w-full max-w-desktop'>
           <CCMemberStatusHistoryTab
-            memberHistory={
-              Array.isArray(data?.data)
-                ? data.data
-                : data?.data
-                  ? [data.data]
-                  : undefined
-            }
+            memberHistory={memberData ? [memberData] : undefined}
             isLoading={!data}
           />
         </div>
@@ -148,7 +134,7 @@ export const CCMemberDetailPage = () => {
               memberData={memberData}
               isLoading={!data}
               isError={false}
-              votesData={votesQuery.data}
+              lastVoteTime={lastVoteTime}
             />
           </div>
         </div>

@@ -29,7 +29,6 @@ for (const viewport of VIEWPORTS) {
         await page.goto(tablePage.url);
         await waitForRender(page);
 
-        // Fail if page shows an error state
         const ERROR_PATTERNS = [
           "This page doesn't exist",
           "Something went wrong",
@@ -47,8 +46,6 @@ for (const viewport of VIEWPORTS) {
           const tabButton = page.locator(
             `[data-key="${tablePage.clickTab}"], [data-tab="${tablePage.clickTab}"]`,
           );
-
-          
           const tabLocator = (await tabButton.count())
             ? tabButton.first()
             : page.locator(`role=tab`).filter({ hasText: new RegExp(tablePage.clickTab.replace(/_/g, " "), "i") });
@@ -59,10 +56,8 @@ for (const viewport of VIEWPORTS) {
           }
         }
 
-       
         const table = page.locator("table");
         if ((await table.count()) === 0) {
-          
           await page.close();
           await context.close();
           return;
@@ -70,10 +65,8 @@ for (const viewport of VIEWPORTS) {
 
         await expect(table.first()).toBeVisible({ timeout: 15000 });
 
-        
         await checkTableHeadersNoOverlap(page);
 
-  
         const columnCount = await page.locator("thead th").count();
         const tbodyRows = page.locator("tbody tr");
         const rowCount = Math.min(
@@ -88,7 +81,6 @@ for (const viewport of VIEWPORTS) {
           }
         }
 
-        // Check that visible cells aren't clipped by viewport without scroll container
         await checkTableVisibleCellsNotClippedByViewport(page);
 
         await page.close();

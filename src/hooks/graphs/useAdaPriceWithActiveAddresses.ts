@@ -4,9 +4,10 @@ import type { Dispatch, SetStateAction } from "react";
 import type { ReactEChartsProps } from "@/lib/ReactCharts";
 
 import { GraphTimePeriod } from "@/types/graphTypes";
-import { useEffect, useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { useGraphColors } from "../useGraphColors";
 import { formatNumber, useThemeStore } from "@vellumlabs/cexplorer-sdk";
+import { EPOCH_LENGTH_DAYS } from "@/constants/confVariables";
 
 interface MergedDataItem {
   date: string;
@@ -19,7 +20,6 @@ interface UseAdaPriceWithActiveAddresses {
   json: any;
   option: ReactEChartsProps["option"];
   selectedItem: GraphTimePeriod;
-  setData: Dispatch<SetStateAction<MergedDataItem[] | undefined>>;
   setSelectedItem: Dispatch<SetStateAction<GraphTimePeriod>>;
   allMergedData: MergedDataItem[];
 }
@@ -28,8 +28,6 @@ export const useAdaPriceWithActiveAddresses = (
   graphRates: BasicRate[],
   analyticsData: AnalyticsRateResponseData[],
 ): UseAdaPriceWithActiveAddresses => {
-  const [json, setJson] = useState<any>();
-  const [data, setData] = useState<MergedDataItem[]>();
   const [selectedItem, setSelectedItem] = useState<GraphTimePeriod>(
     GraphTimePeriod.ThirtyDays,
   );
@@ -55,7 +53,23 @@ export const useAdaPriceWithActiveAddresses = (
       }));
   }, [graphRates, analyticsData]);
 
-  const displayData = data ?? allMergedData;
+  const displayData = useMemo(() => {
+    switch (selectedItem) {
+      case GraphTimePeriod.AllTime:
+        return allMergedData;
+      case GraphTimePeriod.FiveDays:
+        return allMergedData.slice(0, Math.ceil(EPOCH_LENGTH_DAYS));
+      case GraphTimePeriod.TenDays:
+        return allMergedData.slice(0, Math.ceil(2 * EPOCH_LENGTH_DAYS));
+      case GraphTimePeriod.HundredDays:
+        return allMergedData.slice(0, Math.ceil(20 * EPOCH_LENGTH_DAYS));
+      case GraphTimePeriod.FiveHundredDays:
+        return allMergedData.slice(0, Math.ceil(100 * EPOCH_LENGTH_DAYS));
+      case GraphTimePeriod.ThirtyDays:
+      default:
+        return allMergedData.slice(0, Math.ceil(6 * EPOCH_LENGTH_DAYS));
+    }
+  }, [allMergedData, selectedItem]);
 
   const dates = displayData.map(d => d.date);
   const adaPrices = displayData.map(d => d.adausd);
@@ -167,21 +181,21 @@ export const useAdaPriceWithActiveAddresses = (
     ],
   };
 
-  useEffect(() => {
-    const tableData = displayData.map(item => ({
-      Date: item.date,
-      "ADA/USD": item.adausd?.toFixed(2),
-      "BTC/USD": item.btcusd?.toFixed(2),
-      "Active Addresses": item.activeAddresses,
-    }));
-    setJson(tableData);
-  }, [displayData]);
+  const json = useMemo(
+    () =>
+      displayData.map(item => ({
+        Date: item.date,
+        "ADA/USD": item.adausd?.toFixed(2),
+        "BTC/USD": item.btcusd?.toFixed(2),
+        "Active Addresses": item.activeAddresses,
+      })),
+    [displayData],
+  );
 
   return {
     json,
     option,
     selectedItem,
-    setData,
     setSelectedItem,
     allMergedData,
   };

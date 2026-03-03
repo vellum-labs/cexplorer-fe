@@ -160,7 +160,7 @@ export const DelegationConfirmModal: FC<DelegationConfirmModalProps> = ({
 
         <div className='mt-6 flex items-center gap-3'>
           <Button
-            label={t("common.cancel", "Cancel")}
+            label={t("actions.cancel", "Cancel")}
             variant='secondary'
             size='md'
             onClick={onCancel}

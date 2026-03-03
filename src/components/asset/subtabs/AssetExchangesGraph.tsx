@@ -48,31 +48,44 @@ export const AssetExchangesCandlestickGraph: FC<
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
 
-  const hasData = (rawData?.data?.length ?? 0) > 0;
+  const validData = useMemo(
+    () =>
+      rawData?.data?.filter(
+        item =>
+          item.unix != null &&
+          item.open != null &&
+          item.high != null &&
+          item.low != null &&
+          item.close != null,
+      ) ?? [],
+    [rawData?.data],
+  );
+
+  const hasData = validData.length > 0;
 
   const candlestickData = useMemo(
     () =>
-      rawData?.data?.map(item => ({
+      validData.map(item => ({
         time: item.unix as UTCTimestamp,
         open: Number(item.open),
         high: Number(item.high),
         low: Number(item.low),
         close: Number(item.close),
-      })) ?? [],
-    [rawData?.data],
+      })),
+    [validData],
   );
 
   const volumeData = useMemo(
     () =>
-      rawData?.data?.map(item => ({
+      validData.map(item => ({
         time: item.unix as UTCTimestamp,
-        value: Number(item.volume),
+        value: Number(item.volume) || 0,
         color:
           Number(item.close) >= Number(item.open)
             ? "rgba(14, 203, 129, 0.5)"
             : "rgba(246, 70, 93, 0.5)",
-      })) ?? [],
-    [rawData?.data],
+      })),
+    [validData],
   );
 
   const buildChart = useCallback(() => {
@@ -83,53 +96,60 @@ export const AssetExchangesCandlestickGraph: FC<
       chartRef.current = null;
     }
 
-    const chart = createChart(chartContainerRef.current, {
-      layout: {
-        background: { color: "transparent" },
-        textColor,
-      },
-      grid: {
-        vertLines: { color: splitLineColor },
-        horzLines: { color: splitLineColor },
-      },
-      timeScale: {
-        timeVisible: true,
-        secondsVisible: false,
-        borderColor: splitLineColor,
-      },
-      rightPriceScale: {
-        borderColor: splitLineColor,
-      },
-      crosshair: {
-        mode: 0,
-      },
-    });
+    try {
+      const chart = createChart(chartContainerRef.current, {
+        layout: {
+          background: { color: "transparent" },
+          textColor,
+        },
+        grid: {
+          vertLines: { color: splitLineColor },
+          horzLines: { color: splitLineColor },
+        },
+        timeScale: {
+          timeVisible: true,
+          secondsVisible: false,
+          borderColor: splitLineColor,
+        },
+        rightPriceScale: {
+          borderColor: splitLineColor,
+        },
+        crosshair: {
+          mode: 0,
+        },
+      });
 
-    chartRef.current = chart;
+      chartRef.current = chart;
 
-    const candleSeries = chart.addSeries(CandlestickSeries, {
-      upColor: "#0ecb81",
-      downColor: "#f6465d",
-      borderUpColor: "#0ecb81",
-      borderDownColor: "#f6465d",
-      wickUpColor: "#0ecb81",
-      wickDownColor: "#f6465d",
-    });
+      const candleSeries = chart.addSeries(CandlestickSeries, {
+        upColor: "#0ecb81",
+        downColor: "#f6465d",
+        borderUpColor: "#0ecb81",
+        borderDownColor: "#f6465d",
+        wickUpColor: "#0ecb81",
+        wickDownColor: "#f6465d",
+      });
 
-    candleSeries.setData(candlestickData);
+      candleSeries.setData(candlestickData);
 
-    const volumeSeries = chart.addSeries(HistogramSeries, {
-      priceFormat: { type: "volume" },
-      priceScaleId: "volume",
-    });
+      const hasVolume = volumeData.some(v => v.value > 0);
+      if (hasVolume) {
+        const volumeSeries = chart.addSeries(HistogramSeries, {
+          priceFormat: { type: "volume" },
+          priceScaleId: "volume",
+        });
 
-    chart.priceScale("volume").applyOptions({
-      scaleMargins: { top: 0.8, bottom: 0 },
-    });
+        chart.priceScale("volume").applyOptions({
+          scaleMargins: { top: 0.8, bottom: 0 },
+        });
 
-    volumeSeries.setData(volumeData);
+        volumeSeries.setData(volumeData);
+      }
 
-    chart.timeScale().fitContent();
+      chart.timeScale().fitContent();
+    } catch {
+      chartRef.current = null;
+    }
   }, [hasData, candlestickData, volumeData, textColor, splitLineColor]);
 
   useEffect(() => {

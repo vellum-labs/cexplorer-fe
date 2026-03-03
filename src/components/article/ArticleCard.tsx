@@ -20,7 +20,7 @@ export const ArticleCard = ({ article, className }: Props) => {
     >
       <article
         key={article.url}
-        className={`flex h-[450px] flex-col gap-1 ${className}`}
+        className={`flex h-[450px] flex-col gap-1 overflow-hidden ${className}`}
       >
         <Image
           src={article.image}
