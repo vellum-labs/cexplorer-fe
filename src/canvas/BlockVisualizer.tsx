@@ -356,7 +356,7 @@ export const BlockVisualizer: FC<BlockVisualizerProps> = memo(
     }, []);
 
     useEffect(() => {
-      const sorted = [...(items ?? [])].sort((a, b) => b.block_no - a.block_no);
+      const sorted = [...(items ?? [])].sort((a, b) => a.block_no - b.block_no);
       const count = sorted.length;
       if (count === 0) return;
 
