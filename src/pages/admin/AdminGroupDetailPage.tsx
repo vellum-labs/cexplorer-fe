@@ -324,9 +324,9 @@ export const AdminGroupDetailPage = () => {
                 items={items}
                 query={query}
                 renderDisplayText={(count, total) =>
-                  t("common:table.displaying", { count, total })
+                  `Displaying ${count} out of ${total} items`
                 }
-                noItemsLabel={t("common:table.noItems")}
+                noItemsLabel='No items found'
               />
               <Button
                 label='Add'

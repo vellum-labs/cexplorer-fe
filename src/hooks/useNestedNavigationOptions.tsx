@@ -61,6 +61,10 @@ export const useNestedNavigationOptions = () => {
               label: t("tools.ecoImpact"),
               href: "/eco-impact",
             },
+            {
+              label: t("tools.scriptVerification"),
+              href: "/script/verification",
+            },
           ],
         },
         services: {

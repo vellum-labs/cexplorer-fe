@@ -105,24 +105,26 @@ export const GeekConfigModal = () => {
                 {t("global.geekConfig.sortUtxosDescription")}
               </p>
             </div>
-            <Select
-              value={localSortUTxOs}
-              onValueChange={(value: UTxOSortOption) =>
-                setLocalSortUTxOs(value)
-              }
-            >
-              <SelectTrigger className='w-[100px]'>
-                <SelectValue placeholder={t("global.geekConfig.index")} />
-              </SelectTrigger>
-              <SelectContent className='z-[100]'>
-                <SelectItem value='index'>
-                  {t("global.geekConfig.index")}
-                </SelectItem>
-                <SelectItem value='value'>
-                  {t("global.geekConfig.value")}
-                </SelectItem>
-              </SelectContent>
-            </Select>
+            <div className='w-[100px] shrink-0'>
+              <Select
+                value={localSortUTxOs}
+                onValueChange={(value: UTxOSortOption) =>
+                  setLocalSortUTxOs(value)
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder={t("global.geekConfig.index")} />
+                </SelectTrigger>
+                <SelectContent className='z-[100]'>
+                  <SelectItem value='index'>
+                    {t("global.geekConfig.index")}
+                  </SelectItem>
+                  <SelectItem value='value'>
+                    {t("global.geekConfig.value")}
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
 

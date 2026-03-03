@@ -67,7 +67,7 @@ jobs:
       - name: Install dependencies and build
         env:
           VITE_APP_VERSION: ${{ github.run_number }}
-          VITE_APP_CONFIG: mainnet-stage
+          VITE_APP_CONFIG: mainnet-prod
           VITE_APP_BLOCKFROST_KEY: ${{ secrets.BLOCKFROST_API_MAINNET }}
         run: |
           echo "Installing dependencies..."

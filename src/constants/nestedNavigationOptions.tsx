@@ -62,6 +62,10 @@ export const nestedNavigationOptions: {
           label: "Eco-impact",
           href: "/eco-impact",
         },
+        {
+          label: "Script verification",
+          href: "/script/verification",
+        },
       ],
     },
     services: {

@@ -1,5 +1,5 @@
 import type { TxAsset } from "@/types/assetsTypes";
-import { getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
+import { AdaWithTooltip, getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
 import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
@@ -39,7 +39,11 @@ const AssetLink = ({ asset, type, className }: Props) => {
         {renderAssetName({ asset, fingerprint, type: "long" })}
       </span>
       <span className='ml-auto min-w-fit pl-1'>
-        {`${type === "input" ? "-" : ""}${formatNumberWithSuffix(asset.quantity / divideNumber, true)}`}
+        {`${type === "input" ? "-" : ""}`}
+        <AdaWithTooltip
+          data={asset.quantity / divideNumber}
+          triggerClassName='!text-primary'
+        />
       </span>
     </Link>
   );

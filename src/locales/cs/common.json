@@ -1000,7 +1000,7 @@
       "expiration": "Expirace",
       "governanceAction": "$t(shared:governanceAction)",
       "vote": "$t(shared:labels.vote)",
-      "totalVotes": "$t(shared:totalVotes)",
+      "totalVotes": "Celkem hlasů",
       "searchResults": "$t(shared:searchPlaceholder)",
       "txHash": "Tx Hash",
       "time": "$t(shared:labels.time)",
@@ -2257,6 +2257,17 @@
     "convertUplc": "Převést UPLC",
     "uplc": "UPLC",
     "prettyPrint": "Formátovaný výstup",
+    "verifySource": "Ověřit zdroj",
+    "sourceVerified": "Zdroj ověřen",
+    "sourceUnknown": "Zdroj neznámý",
+    "compiler": "Kompilátor",
+    "plutusVersion": "Verze Plutus",
+    "module": "Modul",
+    "purposes": "Účely",
+    "parametrization": "Parametrizace",
+    "commit": "Commit",
+    "repository": "Repozitář",
+    "dataFrom": "Data z",
     "noCollateralFound": "Žádný kolaterál nenalezen",
     "noContractsFound": "Žádné kontrakty nenalezeny",
     "totalScriptSize": "Celková velikost skriptu",
@@ -2320,6 +2331,34 @@
       "upcoming": "Nadcházející"
     }
   },
+  "scriptVerification": {
+    "title": "Verifikace skriptu",
+    "breadcrumbs": {
+      "developers": "Vývojáři",
+      "scriptVerification": "Verifikace skriptu"
+    },
+    "placeholder": "Zadejte hash skriptu...",
+    "scriptDetail": "Detail skriptu",
+    "dataFrom": "Data z",
+    "rows": {
+      "status": "Stav",
+      "plutusVersion": "Verze Plutus",
+      "compiler": "Kompilátor",
+      "sourceUrl": "URL zdroje",
+      "commitHash": "Hash commitu",
+      "scriptName": "Název skriptu",
+      "moduleName": "Název modulu",
+      "validatorName": "Název validátoru",
+      "purposes": "Účely",
+      "rawHash": "Surový hash",
+      "finalHash": "Finální hash",
+      "parametrizationStatus": "Stav parametrizace",
+      "rawResponse": "Surová odpověď"
+    },
+    "sourceVerified": "Zdroj ověřen",
+    "sourceUnknown": "Zdroj neznámý",
+    "completed": "Dokončeno"
+  },
   "devTooling": {
     "title": "Vývojářské nástroje",
     "breadcrumb": "$t(shared:developers)",
@@ -2350,6 +2389,11 @@
         "label": "$t(shared:title2)",
         "description": "Prohlížejte a prozkoumávejte UPLC skripty v čitelném, strukturovaném formátu.",
         "button": "$t(shared:title2)"
+      },
+      "scriptVerification": {
+        "label": "Verifikace skriptu",
+        "description": "Ověřte zdrojový kód on-chain Plutus skriptů pomocí UPLC.link.",
+        "button": "Verifikace skriptu"
       },
       "cexplorerInstances": {
         "label": "Instance Cexplorer",
@@ -2963,5 +3007,9 @@
     "delegateToDrep": "Delegovat na DRep",
     "keywords": "Klíčová slova",
     "copyLink": "Kopírovat odkaz"
+  },
+  "cookie": {
+    "message": "Používáme cookies ke zlepšení vašeho zážitku. Pokračováním v používání tohoto webu souhlasíte s našimi",
+    "accept": "Přijmout"
   }
 }

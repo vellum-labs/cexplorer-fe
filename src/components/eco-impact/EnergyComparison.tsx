@@ -71,12 +71,12 @@ export const EnergyComparison: FC = () => {
     },
     {
       label: t("ecoImpact.results.energyPerTx"),
-      cardano: `${formatNumber(Math.round(metrics.cardanoEnergyPerTx * 10000) / 10000)} kWh`,
+      cardano: `${(Math.round(metrics.cardanoEnergyPerTx * 10000) / 10000).toFixed(4)} kWh`,
       bitcoin: `${formatNumber(Math.round(metrics.bitcoinEnergyPerTx * 100) / 100)} kWh`,
     },
     {
       label: t("ecoImpact.results.co2PerTx"),
-      cardano: `${formatNumber(Math.round(metrics.cardanoCO2PerTx * 10000) / 10000)} kg`,
+      cardano: `${(Math.round(metrics.cardanoCO2PerTx * 10000) / 10000).toFixed(4)} kg`,
       bitcoin: `${formatNumber(Math.round(metrics.bitcoinCO2PerTx * 100) / 100)} kg`,
     },
   ];
