@@ -122,7 +122,10 @@ const PoolDetailPage = () => {
       key: "gov",
       label: t("pools.detailPage.tabs.governance"),
       content: <VoteListPage poolId={id} />,
-      visible: true,
+      visible: !(
+        data?.pool_update?.live?.reward_drep === "drep_always_abstain" ||
+        data?.pool_update?.live?.reward_drep === "drep_always_no_confidence"
+      ),
     },
     {
       key: "embed",

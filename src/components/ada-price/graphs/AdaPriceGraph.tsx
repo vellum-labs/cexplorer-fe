@@ -19,7 +19,6 @@ export const AdaPriceGraph: FC<AdaPriceGraphProps> = memo(
       json,
       option,
       selectedItem,
-      setData,
       setSelectedItem,
       onLegendSelectChanged,
       allData,
@@ -40,7 +39,7 @@ export const AdaPriceGraph: FC<AdaPriceGraphProps> = memo(
         exportButton
         graphSortData={{
           query: fakeQuery as any,
-          setData,
+          setData: () => {},
           setSelectedItem,
           selectedItem,
         }}
