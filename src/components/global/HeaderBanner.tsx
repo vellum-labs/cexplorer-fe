@@ -6,6 +6,7 @@ import { BreadcrumbSeparator, Header } from "@vellumlabs/cexplorer-sdk";
 import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic, useFetchMiscSearch } from "@/services/misc";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { generateImageUrl } from "@/utils/generateImageUrl";
 
 export interface HeaderBannerProps {
   breadcrumbItems?: HeaderProps["breadcrumbItems"];
@@ -63,6 +64,7 @@ export const HeaderBanner = ({
       bookmarkButton={bookmarkButton}
       onBookmarkClick={onBookmarkClick}
       isBookmarked={isBookmarked}
+      generateImageUrl={generateImageUrl}
       featuredLabel={t("sdk:header.featuredLabel")}
       adLabel={t("sdk:header.adLabel")}
       globalSearchLabels={{
