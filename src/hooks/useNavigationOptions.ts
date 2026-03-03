@@ -187,6 +187,10 @@ export const useNavigationOptions = () => {
           params: { tab: "tokens" },
         },
         {
+          label: t("tokens.stablecoins"),
+          href: "/stablecoin-dashboard",
+        },
+        {
           label: t("tokens.swap"),
           href: "/swap",
         },

@@ -58,6 +58,7 @@
     "list": "$t(shared:list)",
     "recent": "$t(shared:recent)",
     "dashboard": "Přehled",
+    "stablecoins": "Stablecoiny",
     "swap": "$t(shared:title5)"
   },
   "nfts": {
