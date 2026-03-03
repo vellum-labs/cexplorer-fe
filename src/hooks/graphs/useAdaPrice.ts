@@ -1,9 +1,8 @@
 import type { BasicRate } from "@/types/miscTypes";
-import type { Dispatch, SetStateAction } from "react";
 import type { ReactEChartsProps } from "@/lib/ReactCharts";
 
 import { GraphTimePeriod } from "@/types/graphTypes";
-import { useEffect, useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { useGraphColors } from "../useGraphColors";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { EPOCH_LENGTH_DAYS } from "@/constants/confVariables";
@@ -12,8 +11,7 @@ interface UseAdaPrice {
   json: any;
   option: ReactEChartsProps["option"];
   selectedItem: GraphTimePeriod;
-  setData: Dispatch<SetStateAction<BasicRate[] | undefined>>;
-  setSelectedItem: Dispatch<SetStateAction<GraphTimePeriod>>;
+  setSelectedItem: React.Dispatch<React.SetStateAction<GraphTimePeriod>>;
   graphsVisibility: Record<string, boolean>;
   onLegendSelectChanged: (params: {
     selected: Record<string, boolean>;
@@ -24,14 +22,6 @@ interface UseAdaPrice {
 const thirtyDaysCount = Math.ceil(6 * EPOCH_LENGTH_DAYS);
 
 export const useAdaPrice = (graphRates: BasicRate[]): UseAdaPrice => {
-  const [json, setJson] = useState<any>();
-
-  const [data, setData] = useState<BasicRate[] | undefined>(() => {
-    if (graphRates.length > 0) {
-      return graphRates.slice(0, thirtyDaysCount);
-    }
-    return undefined;
-  });
   const [selectedItem, setSelectedItem] = useState<GraphTimePeriod>(
     GraphTimePeriod.ThirtyDays,
   );
@@ -63,7 +53,23 @@ export const useAdaPrice = (graphRates: BasicRate[]): UseAdaPrice => {
   const { splitLineColor, textColor, bgColor } = useGraphColors();
   const { theme } = useThemeStore();
 
-  const displayData = data ?? graphRates;
+  const displayData = useMemo(() => {
+    switch (selectedItem) {
+      case GraphTimePeriod.AllTime:
+        return graphRates;
+      case GraphTimePeriod.FiveDays:
+        return graphRates.slice(0, Math.ceil(EPOCH_LENGTH_DAYS));
+      case GraphTimePeriod.TenDays:
+        return graphRates.slice(0, Math.ceil(2 * EPOCH_LENGTH_DAYS));
+      case GraphTimePeriod.HundredDays:
+        return graphRates.slice(0, Math.ceil(20 * EPOCH_LENGTH_DAYS));
+      case GraphTimePeriod.FiveHundredDays:
+        return graphRates.slice(0, Math.ceil(100 * EPOCH_LENGTH_DAYS));
+      case GraphTimePeriod.ThirtyDays:
+      default:
+        return graphRates.slice(0, thirtyDaysCount);
+    }
+  }, [graphRates, selectedItem]);
 
   const dates = displayData.map(d => d.date);
   const adaPrices = displayData.map(d => d.adausd);
@@ -221,23 +227,23 @@ export const useAdaPrice = (graphRates: BasicRate[]): UseAdaPrice => {
     ],
   );
 
-  useEffect(() => {
-    const tableData = displayData.map(item => ({
-      Date: item.date,
-      "ADA/USD": item.adausd?.toFixed(2),
-      "BTC/USD": item.btcusd?.toFixed(2),
-      "ADA/BTC": ((item.adausd as number) / (item.btcusd as number))?.toFixed(
-        9,
-      ),
-    }));
-    setJson(tableData);
-  }, [displayData]);
+  const json = useMemo(
+    () =>
+      displayData.map(item => ({
+        Date: item.date,
+        "ADA/USD": item.adausd?.toFixed(2),
+        "BTC/USD": item.btcusd?.toFixed(2),
+        "ADA/BTC": ((item.adausd as number) / (item.btcusd as number))?.toFixed(
+          9,
+        ),
+      })),
+    [displayData],
+  );
 
   return {
     json,
     option,
     selectedItem,
-    setData,
     setSelectedItem,
     graphsVisibility,
     onLegendSelectChanged,

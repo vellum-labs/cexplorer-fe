@@ -6,6 +6,7 @@ import { GithubLogo } from "@vellumlabs/cexplorer-sdk";
 import { TelegramLogo } from "@vellumlabs/cexplorer-sdk";
 import { TwitterLogo } from "@vellumlabs/cexplorer-sdk";
 import BlueskyLogo from "../../resources/images/social/BlueskyLogo.svg";
+import CoinMarketCapLogo from "../../resources/images/social/CoinMarketCapLogo.svg";
 import { CoinPaprikaPartner } from "../../resources/images/partners/CoinPaprikaPartner";
 import { NufiPartner } from "../../resources/images/partners/NufiPartner";
 import YoroiPartner from "../../resources/images/partners/YoroiPartner.svg";
@@ -59,6 +60,12 @@ const Footer = () => {
                   target='_blank'
                 >
                   <img src={BlueskyLogo} alt='Bluesky' width={30} className='text-grayTextPrimary' />
+                </a>
+                <a
+                  href='https://coinmarketcap.com/community/profile/Cexplorer/'
+                  target='_blank'
+                >
+                  <img src={CoinMarketCapLogo} alt='CoinMarketCap' width={30} />
                 </a>
               </div>
             </div>

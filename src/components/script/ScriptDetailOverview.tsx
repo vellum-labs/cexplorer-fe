@@ -18,6 +18,7 @@ import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic } from "@/services/misc";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { ScriptVerifyBadge } from "../tx/ScriptVerifyBadge";
 
 interface Props {
   query: UseQueryResult<ScriptDetailResponse>;
@@ -87,6 +88,10 @@ export const ScriptDetailOverview = ({ query }: Props) => {
         {
           label: t("script.overview.originTransaction"),
           value: <HashCell hash={data?.tx.hash || ""} />,
+        },
+        {
+          label: t("tx.verifySource"),
+          value: <ScriptVerifyBadge scriptHash={data.hash} />,
         },
         {
           label: t("script.overview.bytes"),

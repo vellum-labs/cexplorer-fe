@@ -61,6 +61,7 @@ interface PoolUpdateRetireItem {
   meta_id: string | null;
   pledge: number;
   reward_addr_id: number;
+  reward_drep: string | null;
   tx_id: number;
   tx: {
     id: number;
