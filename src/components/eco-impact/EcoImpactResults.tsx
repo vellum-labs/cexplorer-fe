@@ -7,6 +7,7 @@ import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { formatNumber, LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { TreesProgressBar } from "./TreesProgressBar";
+import { formatEnergy, formatCO2 } from "@/utils/formatEcoImpact";
 import {
   CONSUMPTION_PER_DEVICE,
   BITCOIN_ANNUAL_ENERGY_GWH,
@@ -14,27 +15,6 @@ import {
   CO2_PER_TREE_YEAR,
   CONVERSION_FACTOR,
 } from "@/constants/ecoImpact";
-
-const formatEnergy = (
-  kWh: number,
-): { value: string; unit: string } => {
-  if (kWh >= 1_000_000) {
-    return { value: formatNumber(Math.round(kWh / 1_000_000 * 100) / 100), unit: "GWh/year" };
-  }
-  if (kWh >= 1_000) {
-    return { value: formatNumber(Math.round(kWh / 1_000 * 100) / 100), unit: "MWh/year" };
-  }
-  return { value: formatNumber(Math.round(kWh * 100) / 100), unit: "kWh/year" };
-};
-
-const formatCO2 = (
-  kg: number,
-): { value: string; unit: string } => {
-  if (kg >= 1_000) {
-    return { value: formatNumber(Math.round(kg / 1_000 * 100) / 100), unit: "t/year" };
-  }
-  return { value: formatNumber(Math.round(kg * 100) / 100), unit: "kg/year" };
-};
 
 interface EcoImpactResultsProps {
   stakedAda: number;
