@@ -1,14 +1,26 @@
+const isPrintable = (text: string): boolean => {
+  for (let i = 0; i < text.length; i++) {
+    const code = text.charCodeAt(i);
+    if (
+      (code >= 0 && code <= 8) ||
+      code === 11 ||
+      code === 12 ||
+      (code >= 14 && code <= 31) ||
+      code === 127
+    ) {
+      return false;
+    }
+  }
+  return true;
+};
+
 const hexToUtf8 = (hex: string): string => {
   try {
     const bytes = new Uint8Array(
       hex.match(/.{1,2}/g)!.map(b => parseInt(b, 16)),
     );
     const text = new TextDecoder("utf-8", { fatal: true }).decode(bytes);
-    // Check for non-printable characters (allow common whitespace)
-    if (/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/.test(text)) {
-      return hex;
-    }
-    return text;
+    return isPrintable(text) ? text : hex;
   } catch {
     return hex;
   }
@@ -55,7 +67,6 @@ export const convertCborToParsed = (value: any): any => {
     return value.map(convertCborToParsed);
   }
 
-  // Generic object — recurse over keys
   const result: Record<string, any> = {};
   for (const key of Object.keys(value)) {
     result[key] = convertCborToParsed(value[key]);
