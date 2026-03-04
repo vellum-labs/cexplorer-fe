@@ -75,7 +75,6 @@ export const StablecoinMintTable: FC<StablecoinMintTableProps> = ({
     }
   }, [totalMints, totalItems]);
 
-
   const columns: TableColumns<AssetMint> = [
     {
       key: "order",
@@ -153,7 +152,7 @@ export const StablecoinMintTable: FC<StablecoinMintTableProps> = ({
       },
       title: <p className='w-full text-right'>{t("asset.mintQuantity")}</p>,
       visible: columnsVisibility.mint_quantity,
-      widthPx: 100,
+      widthPx: 80,
     },
     {
       key: "tx",
@@ -171,7 +170,7 @@ export const StablecoinMintTable: FC<StablecoinMintTableProps> = ({
       ),
       title: <p className='w-full text-right'>{t("labels.tx")}</p>,
       visible: columnsVisibility.tx,
-      widthPx: 100,
+      widthPx: 110,
     },
   ];
 
@@ -182,36 +181,36 @@ export const StablecoinMintTable: FC<StablecoinMintTableProps> = ({
           {t("stablecoinDashboard.mintEvents")}
         </h2>
         <div className='order-last flex w-full gap-2 overflow-x-auto md:order-none md:w-auto md:flex-1'>
-        {stablecoins.map(sc => {
-          const isSelected = sc.fingerprint === selectedFingerprint;
-          return (
-            <button
-              key={sc.fingerprint}
-              type='button'
-              onClick={() => {
-                setSelectedFingerprint(sc.fingerprint);
-                navigate({ search: { page: 1 } });
-              }}
-              className={`flex shrink-0 items-center gap-1.5 rounded-m border px-3 py-1.5 text-text-sm transition-colors ${
-                isSelected
-                  ? "border-primary bg-primary/10 text-primary"
-                  : "border-border bg-cardBg text-grayTextPrimary hover:border-primary/50"
-              }`}
-            >
-              <Image
-                type='asset'
-                height={20}
-                width={20}
-                className='aspect-square h-[20px] w-[20px] shrink-0 rounded-sm'
-                src={generateImageUrl(sc.fingerprint, "sm", "nft")}
-                fallbackletters={(sc.registry?.ticker ?? "??").slice(0, 2)}
-              />
-              <span className='font-medium'>
-                {sc.registry?.ticker ?? sc.fingerprint.slice(0, 10)}
-              </span>
-            </button>
-          );
-        })}
+          {stablecoins.map(sc => {
+            const isSelected = sc.fingerprint === selectedFingerprint;
+            return (
+              <button
+                key={sc.fingerprint}
+                type='button'
+                onClick={() => {
+                  setSelectedFingerprint(sc.fingerprint);
+                  navigate({ search: { page: 1 } });
+                }}
+                className={`flex shrink-0 items-center gap-1.5 rounded-m border px-3 py-1.5 text-text-sm transition-colors ${
+                  isSelected
+                    ? "bg-primary/10 border-primary text-primary"
+                    : "hover:border-primary/50 border-border bg-cardBg text-grayTextPrimary"
+                }`}
+              >
+                <Image
+                  type='asset'
+                  height={20}
+                  width={20}
+                  className='rounded-sm aspect-square h-[20px] w-[20px] shrink-0'
+                  src={generateImageUrl(sc.fingerprint, "sm", "nft")}
+                  fallbackletters={(sc.registry?.ticker ?? "??").slice(0, 2)}
+                />
+                <span className='font-medium'>
+                  {sc.registry?.ticker ?? sc.fingerprint.slice(0, 10)}
+                </span>
+              </button>
+            );
+          })}
         </div>
         <div className='ml-auto flex shrink-0 items-center gap-1'>
           <ExportButton columns={columns} items={items} />
@@ -240,6 +239,7 @@ export const StablecoinMintTable: FC<StablecoinMintTableProps> = ({
           scrollable
           query={mintQuery}
           items={items}
+          minContentWidth={900}
           columns={
             columns.sort((a, b) => {
               return (
