@@ -767,7 +767,9 @@
     "transactionHash": "$t(shared:transactionHash)",
     "datumHash": "Hash Datumů",
     "transactionWithDatum": "Transakce obsahující tento datum",
-    "otherDatums": "Další datumy ze stejných transakcí"
+    "otherDatums": "Další datumy ze stejných transakcí",
+    "parsedDatum": "Parsovaný Datum",
+    "decodedDatum": "Dekódovaný Datum"
   },
   "pots": {
     "title": "$t(shared:title1)",

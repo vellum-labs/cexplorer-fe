@@ -767,7 +767,9 @@
     "transactionHash": "$t(shared:transactionHash)",
     "datumHash": "Datum Hash",
     "transactionWithDatum": "Transaction with this datum",
-    "otherDatums": "Other datums from the same transactions"
+    "otherDatums": "Other datums from the same transactions",
+    "parsedDatum": "Parsed Datum",
+    "decodedDatum": "Decoded Datum"
   },
   "pots": {
     "title": "$t(shared:title1)",
