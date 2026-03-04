@@ -177,6 +177,10 @@ export const navigationOptions: {
       params: { tab: "tokens" },
     },
     {
+      label: "Stablecoins",
+      href: "/stablecoin-dashboard",
+    },
+    {
       label: "Swap",
       href: "/swap",
     },

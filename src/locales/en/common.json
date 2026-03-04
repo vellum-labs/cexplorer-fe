@@ -1415,6 +1415,24 @@
     "breadcrumb": "$t(shared:title5)",
     "selectTokenToViewChart": "Select a token in the swap widget to view chart"
   },
+  "stablecoinDashboard": {
+    "title": "Stablecoin Dashboard",
+    "breadcrumb": "Stablecoin Dashboard",
+    "netFlow": "Net Flow (Epoch)",
+    "minted": "Minted",
+    "burned": "Burned",
+    "marketCap": "Market Cap",
+    "adaMarketCap": "ADA equivalent",
+    "dominance": "Dominance",
+    "analytics": "Analytics",
+    "activity": "Activity",
+    "assetVolume": "Asset Volume",
+    "holders": "Holders",
+    "mintEvents": "Mint Events",
+    "stablecoin": "Stablecoin",
+    "inflow": "Inflow",
+    "outflow": "Outflow"
+  },
   "drep": {
     "breadcrumbs": {
       "delegatedRepresentatives": "Delegated representatives"

@@ -1415,6 +1415,24 @@
     "breadcrumb": "$t(shared:title5)",
     "selectTokenToViewChart": "Vyberte token ve widgetu směny pro zobrazení grafu"
   },
+  "stablecoinDashboard": {
+    "title": "Stablecoin Dashboard",
+    "breadcrumb": "Stablecoin Dashboard",
+    "netFlow": "Čistý tok (epocha)",
+    "minted": "Vytvořeno",
+    "burned": "Spáleno",
+    "marketCap": "Tržní kapitalizace",
+    "adaMarketCap": "ADA ekvivalent",
+    "dominance": "Dominance",
+    "analytics": "Analytika",
+    "activity": "Aktivita",
+    "assetVolume": "Objem aktiv",
+    "holders": "Držitelé",
+    "mintEvents": "Události ražby",
+    "stablecoin": "Stablecoin",
+    "inflow": "Příliv",
+    "outflow": "Odliv"
+  },
   "drep": {
     "breadcrumbs": {
       "delegatedRepresentatives": "Delegovaní zástupci"
