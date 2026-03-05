@@ -59,7 +59,7 @@ export const TourWelcomeModal: FC<TourWelcomeModalProps> = ({
             size='md'
             variant='primary'
             label={isLast ? t("homepage.tour.finish") : t("homepage.tour.next")}
-            onClick={isLast ? onClose : onNext}
+            onClick={onNext}
           />
         </div>
       </div>

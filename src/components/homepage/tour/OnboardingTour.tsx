@@ -1,7 +1,7 @@
-import { type FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { type FC, useCallback, useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 
-import { getTourSteps } from "./TourStepDefinitions";
+import { getTourSteps } from "@/constants/tourStepDefinitions";
 import { TourSpotlight } from "./TourSpotlight";
 import { TourTooltip } from "./TourTooltip";
 import { TourWelcomeModal } from "./TourWelcomeModal";
@@ -17,7 +17,6 @@ export const OnboardingTour: FC = () => {
   const [targetRect, setTargetRect] = useState<DOMRect | null>(null);
   const [isActive, setIsActive] = useState(false);
   const [showSkipConfirm, setShowSkipConfirm] = useState(false);
-  const observerRef = useRef<ResizeObserver | null>(null);
 
   useEffect(() => {
     const completed = localStorage.getItem(STORAGE_KEY);
@@ -41,11 +40,6 @@ export const OnboardingTour: FC = () => {
   const closeTour = useCallback(() => {
     setIsActive(false);
     localStorage.setItem(STORAGE_KEY, "true");
-
-    if (observerRef.current) {
-      observerRef.current.disconnect();
-      observerRef.current = null;
-    }
   }, []);
 
   const findTargetElement = useCallback((target: string | null): Element | null => {
@@ -71,24 +65,6 @@ export const OnboardingTour: FC = () => {
       setTargetRect(null);
     }
   }, [findTargetElement]);
-
-  const observeTarget = useCallback(
-    (target: string | null) => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
-
-      if (!target) return;
-
-      const el = findTargetElement(target);
-      if (!el) return;
-
-      const ro = new ResizeObserver(() => updateRect(target));
-      ro.observe(el);
-      observerRef.current = ro;
-    },
-    [findTargetElement, updateRect],
-  );
 
   const navigateToStep = useCallback(
     (stepNumber: number) => {
@@ -122,12 +98,11 @@ export const OnboardingTour: FC = () => {
 
         setTimeout(() => {
           updateRect(step.target);
-          observeTarget(step.target);
           setCurrentStep(stepNumber);
         }, 350);
       });
     },
-    [closeTour, currentStep, findTargetElement, observeTarget, steps, totalSteps, updateRect],
+    [closeTour, currentStep, findTargetElement, steps, totalSteps, updateRect],
   );
 
   useEffect(() => {
@@ -146,14 +121,6 @@ export const OnboardingTour: FC = () => {
       window.removeEventListener("resize", handleUpdate);
     };
   }, [isActive, currentStep, steps, updateRect]);
-
-  useEffect(() => {
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
-    };
-  }, []);
 
   if (!isActive) return null;
 

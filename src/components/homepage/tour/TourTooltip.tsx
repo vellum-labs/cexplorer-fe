@@ -3,7 +3,7 @@ import { type FC, useLayoutEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 
-import type { TooltipPosition } from "./TourStepDefinitions";
+import type { TooltipPosition } from "@/constants/tourStepDefinitions";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface TourTooltipProps {
