@@ -2,6 +2,7 @@ import type { StablecoinData } from "@/types/stablecoinTypes";
 import type { FC } from "react";
 
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { useFetchMiscBasic } from "@/services/misc";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import {
   formatNumberWithSuffix,
@@ -12,14 +13,16 @@ import { ArrowLeftRight, Crown, Landmark } from "lucide-react";
 
 interface StablecoinOverviewProps {
   data: StablecoinData[];
-  ex: number;
 }
 
-export const StablecoinOverview: FC<StablecoinOverviewProps> = ({
-  data,
-  ex,
-}) => {
+export const StablecoinOverview: FC<StablecoinOverviewProps> = ({ data }) => {
   const { t } = useAppTranslation();
+  const { data: miscBasic } = useFetchMiscBasic();
+  const adaUsdPrice =
+    miscBasic?.data?.rate?.ada?.find(
+      (entry: { close?: number }) =>
+        entry?.close !== undefined && typeof entry.close === "number",
+    )?.close ?? 0;
 
   const mintedUsd = data.reduce((sum, sc) => {
     const decimals = sc.registry?.decimals ?? 0;
@@ -35,7 +38,7 @@ export const StablecoinOverview: FC<StablecoinOverviewProps> = ({
     const decimals = sc.registry?.decimals ?? 0;
     return sum + sc.quantity / 10 ** decimals;
   }, 0);
-  const marketCapAda = ex > 0 ? marketCapUsd / ex : 0;
+  const marketCapAda = adaUsdPrice > 0 ? marketCapUsd / adaUsdPrice : 0;
 
   const stablecoinShares = data
     .map(sc => {

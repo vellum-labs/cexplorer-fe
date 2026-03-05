@@ -12,7 +12,6 @@ export const StablecoinDashboardPage: FC = () => {
   const { t } = useAppTranslation();
   const query = useFetchStablecoins();
   const data = query.data?.data ?? [];
-  const ex = query.data?.ex ?? 0;
 
   return (
     <PageBase
@@ -47,7 +46,7 @@ export const StablecoinDashboardPage: FC = () => {
           </section>
         ) : (
           <>
-            <StablecoinOverview data={data} ex={ex} />
+            <StablecoinOverview data={data} />
             <StablecoinAnalyticsGraph data={data} />
             <StablecoinMintTable stablecoins={data} />
           </>
