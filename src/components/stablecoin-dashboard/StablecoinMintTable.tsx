@@ -39,8 +39,14 @@ export const StablecoinMintTable: FC<StablecoinMintTableProps> = ({
   const { page } = useSearch({ from: "/stablecoin-dashboard/" });
   const navigate = useNavigate();
 
+  const sortedStablecoins = [...stablecoins].sort((a, b) => {
+    const supplyA = a.quantity / 10 ** (a.registry?.decimals ?? 0);
+    const supplyB = b.quantity / 10 ** (b.registry?.decimals ?? 0);
+    return supplyB - supplyA;
+  });
+
   const [selectedFingerprint, setSelectedFingerprint] = useState(
-    stablecoins[0]?.fingerprint ?? "",
+    sortedStablecoins[0]?.fingerprint ?? "",
   );
   const [totalItems, setTotalItems] = useState(0);
 
@@ -181,7 +187,7 @@ export const StablecoinMintTable: FC<StablecoinMintTableProps> = ({
           {t("stablecoinDashboard.mintEvents")}
         </h2>
         <div className='order-last flex w-full gap-2 overflow-x-auto md:order-none md:w-auto md:flex-1'>
-          {stablecoins.map(sc => {
+          {sortedStablecoins.map(sc => {
             const isSelected = sc.fingerprint === selectedFingerprint;
             return (
               <button
