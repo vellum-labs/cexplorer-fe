@@ -481,7 +481,8 @@
     "ada_amount": "Množství ADA",
     "ada_price": "Cena ADA",
     "maker": "Tvůrce",
-    "platform": "Platforma"
+    "platform": "Platforma",
+    "share": "$t(shared:labels.share)"
   },
   "analytics": {
     "account": "$t(shared:labels.account)",
