@@ -1,4 +1,4 @@
-import { type FC, useCallback, useEffect, useMemo, useState } from "react";
+import { type FC, useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { getTourSteps } from "@/constants/tourStepDefinitions";
@@ -10,7 +10,7 @@ import { TourSkipConfirmModal } from "./TourSkipConfirmModal";
 const STORAGE_KEY = "onboarding_tour_completed";
 
 export const OnboardingTour: FC = () => {
-  const steps = useMemo(() => getTourSteps(), []);
+  const [steps, setSteps] = useState(() => getTourSteps());
   const totalSteps = steps.length;
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -25,6 +25,7 @@ export const OnboardingTour: FC = () => {
     }
 
     const handleRestart = () => {
+      setSteps(getTourSteps());
       setCurrentStep(1);
       setTargetRect(null);
       setShowSkipConfirm(false);

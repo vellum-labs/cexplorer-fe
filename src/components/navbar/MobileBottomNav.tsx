@@ -127,7 +127,7 @@ export const MobileBottomNav: FC = () => {
               {t("navbar.navigationMenuDescription")}
             </SheetDescription>
             {activeMenu === "settings" ? (
-              <SettingsMobileItems onBack={() => setActiveMenu(null)} />
+              <SettingsMobileItems onBack={() => setActiveMenu(null)} setOpen={setIsOpen} />
             ) : activeMenu === "analytics" ? (
               <AnalyticsMobileItems
                 onBack={() => setActiveMenu(null)}
