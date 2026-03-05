@@ -87,6 +87,7 @@
     "currency": "Měna",
     "infiniteScrolling": "Nekonečné posouvání",
     "geekConfiguration": "Pokročilá konfigurace",
+    "tour": "Průvodce",
     "search": "Hledat"
   },
   "actions": {
@@ -1685,6 +1686,74 @@
         "Asset": "$t(shared:asset)",
         "Epoch": "$t(shared:epoch)",
         "Pool": "$t(shared:pool)"
+      }
+    },
+    "tour": {
+      "next": "Další",
+      "back": "Zpět",
+      "skip": "Přeskočit",
+      "finish": "Dokončit",
+      "welcome": {
+        "title": "Vítejte na Cexploreru",
+        "description": "Vítejte v nejkompletnějším exploreru pro blockchain Cardano. Tento rychlý průvodce vás provede nejpoužívanějšími funkcemi."
+      },
+      "searchBar": {
+        "title": "Hledejte cokoliv",
+        "description": "Vyhledejte libovolnou adresu, transakci, stake pool, token, blok nebo i stránky a další, vše na jednom místě."
+      },
+      "customize": {
+        "title": "Přizpůsobte si to",
+        "description": "Upravte si domovskou stránku tak, aby zobrazovala widgety a metriky, které potřebujete nejvíce. K dispozici je jich několik."
+      },
+      "settings": {
+        "title": "Umístění nastavení",
+        "description": "Upravte celostránkové předvolby jako barevný motiv, jazyk, měnu, chování scrollování, řazení UTXO a zobrazování hodnot v lovelaces nebo ADA a další."
+      },
+      "wallet": {
+        "title": "Připojte peněženku",
+        "description": "Připojení peněženky odemkne plný zážitek z Cexploreru. Nastavte si profil, spravujte watchlisty, přidávejte štítky k adresám, delegujte na SPO a DRepy a vygenerujte API klíč."
+      },
+      "blockchain": {
+        "title": "Prozkoumejte řetězec",
+        "description": "Vše o transakcích, blocích a epochách, co vám umožní snadno sledovat dění on-chain v reálném čase."
+      },
+      "staking": {
+        "title": "Staking",
+        "description": "Prozkoumejte všechny aktivní stake pooly, porovnejte je podle výkonu a poplatků a procházejte skupiny poolů."
+      },
+      "governance": {
+        "title": "Governance",
+        "description": "Buďte v obraze ohledně správy Cardano. Prozkoumejte DRepy, governance akce nebo sledujte všechna on-chain hlasování."
+      },
+      "tokens": {
+        "title": "Tokeny a DEX aktivita",
+        "description": "Token Dashboard je snadný způsob, jak sledovat obchodní aktivitu Cardano tokenů. Zobrazuje žebříček s metrikami jako cena, objem a změny, a také záložku pro všechny DEX obchody v reálném čase."
+      },
+      "education": {
+        "title": "Naučte se Cardano",
+        "description": "Najděte kurátorské články a FAQ, které vám pomohou pochopit, co vidíte on-chain."
+      },
+      "analytics": {
+        "title": "Hloubková analytika",
+        "description": "Zdraví sítě, spotřeba energie, projekce pokladny, žebříčky dAppů, TVL a mnoho dalšího. Snadno přehlédnutelné, ale stojí za prozkoumání."
+      },
+      "more": {
+        "title": "Pokročilé nástroje",
+        "description": "Prozkoumejte adresy a datumy, vypočítejte odměny, zkontrolujte daňovou historii, debugujte pooly a používejte epochový kalendář."
+      },
+      "mobileMenu": {
+        "title": "Navigační menu",
+        "description": "Klepnutím sem získáte přístup ke všem sekcím: Blockchain, Staking, Governance, Tokeny, Analytika, Vzdělávání a další."
+      },
+      "skipConfirm": {
+        "title": "Přeskočit průvodce?",
+        "description": "Můžete ho kdykoliv spustit znovu z nabídky Nastavení.",
+        "confirm": "Přeskočit",
+        "resume": "Pokračovat"
+      },
+      "finished": {
+        "title": "Vše je připraveno",
+        "description": "Cexplorer je váš průvodce blockchainem Cardano. Nyní víte, kde vše najdete – jděte a prozkoumejte."
       }
     }
   },

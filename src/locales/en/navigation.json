@@ -165,7 +165,8 @@
     "navigationMenuDescription": "Access navigation options, settings, and account features",
     "stakingCertificates": "Staking certificates",
     "governanceCertificates": "Governance certificates",
-    "settings": "$t(shared:settings)"
+    "settings": "$t(shared:settings)",
+    "guidedTour": "Guided tour"
   },
   "settings": {
     "theme": "Theme",

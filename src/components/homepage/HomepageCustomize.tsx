@@ -15,6 +15,7 @@ export const HomepageCustomize: FC = () => {
     <div className='flex w-full flex-wrap items-center justify-between gap-1.5 rounded-m border border-border px-2 py-1.5 md:flex-nowrap md:gap-0'>
       <div className='flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-1.5 md:w-auto md:justify-start'>
         <div
+          data-tour-step='add-widget'
           className='flex cursor-pointer items-center gap-1/2'
           onClick={() => setAddWidget(true)}
         >
@@ -24,6 +25,7 @@ export const HomepageCustomize: FC = () => {
           </span>
         </div>
         <div
+          data-tour-step='reset-to-default'
           className='flex cursor-pointer items-center gap-1/2'
           onClick={handleReset}
         >
