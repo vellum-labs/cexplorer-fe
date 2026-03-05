@@ -481,7 +481,8 @@
     "ada_amount": "ADA Amount",
     "ada_price": "ADA Price",
     "maker": "Maker",
-    "platform": "Platform"
+    "platform": "Platform",
+    "share": "$t(shared:labels.share)"
   },
   "analytics": {
     "account": "$t(shared:labels.account)",
