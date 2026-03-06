@@ -158,7 +158,13 @@ export const StakeDetailPage: FC = () => {
           isLoading={stakeQuery.isLoading}
           user={user}
         />
-        <WatchlistSection ident={address} isLoading={stakeQuery.isLoading} showPromote={false} />
+        <WatchlistSection
+          ident={address}
+          isLoading={stakeQuery.isLoading}
+          showPromote={false}
+          showPayment
+          paymentAddress={address}
+        />
       </div>
       <section className='flex w-full justify-center'>
         <div className='flex w-full max-w-desktop flex-grow flex-wrap gap-3 px-mobile md:px-desktop xl:flex-nowrap xl:justify-start'>
