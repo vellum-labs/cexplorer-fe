@@ -2,13 +2,14 @@ import { AddressInspectorRow } from "@/components/address/AddressInspectorRow";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 import {
-  fetchUplcScript,
+  useFetchUplcScript,
   type UplcScriptResponse,
 } from "@/services/uplc";
+import { useFetchMiscSearch } from "@/services/misc";
 import { Badge, Copy, JsonDisplay, TableSearchInput, useDebounce } from "@vellumlabs/cexplorer-sdk";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import { useEffect, useState, type FC } from "react";
+import { useEffect, type FC, useState } from "react";
 
 type State =
   | { kind: "idle" }
@@ -28,14 +29,25 @@ export const ScriptVerificationPage: FC = () => {
 
   const initial = hash || localStorage.getItem(LS_KEY) || "";
   const [search, setSearch] = useState<string>(initial);
-  const [state, setState] = useState<State>({ kind: "idle" });
-
   const debouncedSearch = useDebounce(search);
+  const currentHash = debouncedSearch?.trim() || "";
+
+  const uplcQuery = useFetchUplcScript(currentHash || undefined);
+  const scriptSearchQuery = useFetchMiscSearch(currentHash || undefined, "script");
+  const scriptSearchData = scriptSearchQuery.data?.data;
+  const scriptExists = Array.isArray(scriptSearchData) ? scriptSearchData.length > 0 : !!scriptSearchData;
+
+  const state: State = !currentHash
+    ? { kind: "idle" }
+    : uplcQuery.isLoading
+      ? { kind: "loading" }
+      : uplcQuery.data?.status === "VERIFIED"
+        ? { kind: "verified", data: uplcQuery.data }
+        : { kind: "unknown" };
 
   useEffect(() => {
     const trimmed = debouncedSearch?.trim();
     if (!trimmed) {
-      setState({ kind: "idle" });
       localStorage.removeItem(LS_KEY);
       navigate({
         to: "/script/verification",
@@ -51,25 +63,8 @@ export const ScriptVerificationPage: FC = () => {
       search: { hash: trimmed },
       replace: true,
     });
-
-    let cancelled = false;
-    setState({ kind: "loading" });
-
-    fetchUplcScript(trimmed).then(data => {
-      if (cancelled) return;
-      if (data && data.status === "VERIFIED") {
-        setState({ kind: "verified", data });
-      } else {
-        setState({ kind: "unknown" });
-      }
-    }).catch(() => {
-      if (!cancelled) setState({ kind: "unknown" });
-    });
-
-    return () => { cancelled = true; };
   }, [debouncedSearch]);
 
-  const currentHash = debouncedSearch?.trim() || "";
   const script =
     state.kind === "verified" ? state.data.scripts?.[0] : undefined;
   const data = state.kind === "verified" ? state.data : undefined;
@@ -283,16 +278,20 @@ export const ScriptVerificationPage: FC = () => {
 
           {hasSearched && currentHash && (
             <div className='flex w-full items-center justify-between'>
-              <Link
-                to='/script/$hash'
-                params={{ hash: currentHash }}
-                className='flex items-center gap-1/2'
-              >
-                <span className='text-text-sm font-semibold text-primary'>
-                  {t("scriptVerification.scriptDetail")}
-                </span>
-                <ArrowRight className='text-primary' size={15} />
-              </Link>
+              {scriptExists ? (
+                <Link
+                  to='/script/$hash'
+                  params={{ hash: currentHash }}
+                  className='flex items-center gap-1/2'
+                >
+                  <span className='text-text-sm font-semibold text-primary'>
+                    {t("scriptVerification.scriptDetail")}
+                  </span>
+                  <ArrowRight className='text-primary' size={15} />
+                </Link>
+              ) : (
+                <div />
+              )}
               <span className='text-text-xs text-grayTextPrimary'>
                 {t("scriptVerification.dataFrom")}{" "}
                 <a
