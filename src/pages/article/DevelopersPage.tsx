@@ -29,7 +29,9 @@ export const DevelopersPage = () => {
       key: "mainnet",
       label: "Mainnet",
       content: (
-        <p className='text-xs text-grayText mb-4'>Domain: cexplorer.io</p>
+        <p className='text-text-xs text-grayTextPrimary'>
+          Domain: cexplorer.io
+        </p>
       ),
       visible: true,
     },
@@ -37,7 +39,7 @@ export const DevelopersPage = () => {
       key: "preprod",
       label: "Preprod",
       content: (
-        <p className='text-xs text-grayText mb-4'>
+        <p className='text-text-xs text-grayTextPrimary'>
           Domain: preprod.cexplorer.io
         </p>
       ),
@@ -47,7 +49,7 @@ export const DevelopersPage = () => {
       key: "preview",
       label: "Preview",
       content: (
-        <p className='text-xs text-grayText mb-4'>
+        <p className='text-text-xs text-grayTextPrimary'>
           Domain: preview.cexplorer.io
         </p>
       ),
@@ -113,11 +115,9 @@ export const DevelopersPage = () => {
         </div>
 
         <div className='flex w-full max-w-[800px] flex-col overflow-hidden rounded-xl border border-border'>
-          <div className='flex items-start justify-between gap-4 p-6 pb-0'>
-            <h3 className='text-xl pt-2 font-semibold'>Permalinks</h3>
-            <div className='flex-shrink-0'>
-              <Tabs items={networkTabs} wrapperClassname='my-0' />
-            </div>
+          <div className='flex flex-wrap items-center justify-center gap-2 p-6 pb-0 sm:justify-between'>
+            <h3 className='text-xl pt-1 font-semibold'>Permalinks</h3>
+            <Tabs items={networkTabs} wrapperClassname='my-0 w-auto' />
           </div>
           <div className='px-6'>
             <div className='overflow-x-auto'>
