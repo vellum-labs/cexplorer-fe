@@ -972,8 +972,8 @@
           "fund": "Financování"
         },
         "expandedDetails": {
-          "description": "Popis",
-          "evidenceSubmission": "Předložení důkazů",
+          "description": "Kritéria milníku",
+          "evidenceSubmission": "Předložené důkazy",
           "open": "Otevřít"
         }
       }

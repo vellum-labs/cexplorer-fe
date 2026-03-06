@@ -973,8 +973,8 @@
           "fund": "Fund"
         },
         "expandedDetails": {
-          "description": "Description",
-          "evidenceSubmission": "Evidence Submission",
+          "description": "Milestone Criteria",
+          "evidenceSubmission": "Evidence Submissions",
           "open": "Open"
         }
       }

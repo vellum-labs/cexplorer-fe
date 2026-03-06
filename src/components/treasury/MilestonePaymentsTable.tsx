@@ -86,7 +86,7 @@ export const MilestonePaymentsTable: FC<MilestonePaymentsTableProps> = ({
 
     return (
       <div
-        className={`flex w-fit items-center gap-1/2 rounded-m border px-2 py-1 ${
+        className={`flex w-fit items-center gap-1/2 rounded-m border px-1 py-0.5 ${
           isDark ? config.bgDark : config.bgLight
         } ${isDark ? config.borderDark : config.borderLight}`}
       >
