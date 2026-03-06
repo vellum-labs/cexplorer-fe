@@ -129,6 +129,7 @@ const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
                         rightIcon={<ArrowRight />}
                         variant='primary'
                         size='lg'
+                        href='/api'
                       />
                     </InfoCard>
                   }
