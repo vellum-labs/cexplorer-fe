@@ -87,6 +87,7 @@
     "currency": "Currency",
     "infiniteScrolling": "Infinite scrolling",
     "geekConfiguration": "Geek configuration",
+    "tour": "Guided tour",
     "search": "Search"
   },
   "actions": {
@@ -481,7 +482,8 @@
     "ada_amount": "ADA Amount",
     "ada_price": "ADA Price",
     "maker": "Maker",
-    "platform": "Platform"
+    "platform": "Platform",
+    "share": "$t(shared:labels.share)"
   },
   "analytics": {
     "account": "$t(shared:labels.account)",
@@ -767,7 +769,9 @@
     "transactionHash": "$t(shared:transactionHash)",
     "datumHash": "Datum Hash",
     "transactionWithDatum": "Transaction with this datum",
-    "otherDatums": "Other datums from the same transactions"
+    "otherDatums": "Other datums from the same transactions",
+    "parsedDatum": "Parsed Datum",
+    "decodedDatum": "Decoded Datum"
   },
   "pots": {
     "title": "$t(shared:title1)",
@@ -1415,6 +1419,24 @@
     "breadcrumb": "$t(shared:title5)",
     "selectTokenToViewChart": "Select a token in the swap widget to view chart"
   },
+  "stablecoinDashboard": {
+    "title": "Stablecoin Dashboard",
+    "breadcrumb": "Stablecoin Dashboard",
+    "netFlow": "Net Flow (Epoch)",
+    "minted": "Minted",
+    "burned": "Burned",
+    "marketCap": "Market Cap",
+    "adaMarketCap": "ADA equivalent",
+    "dominance": "Dominance",
+    "analytics": "Analytics",
+    "activity": "Activity",
+    "assetVolume": "Asset Volume",
+    "holders": "Holders",
+    "mintEvents": "Mint Events",
+    "stablecoin": "Stablecoin",
+    "inflow": "Inflow",
+    "outflow": "Outflow"
+  },
   "drep": {
     "breadcrumbs": {
       "delegatedRepresentatives": "Delegated representatives"
@@ -1666,6 +1688,74 @@
         "Asset": "$t(shared:asset)",
         "Epoch": "$t(shared:epoch)",
         "Pool": "$t(shared:pool)"
+      }
+    },
+    "tour": {
+      "next": "Next",
+      "back": "Back",
+      "skip": "Skip",
+      "finish": "Finish",
+      "welcome": {
+        "title": "Welcome to Cexplorer",
+        "description": "Welcome to the most complete explorer for the Cardano blockchain. This quick guide will navigate you through the most used features."
+      },
+      "searchBar": {
+        "title": "Search Anything",
+        "description": "Search for any address, transaction, stake pool, asset, block, or even pages and more, all in one place."
+      },
+      "customize": {
+        "title": "Make It Yours",
+        "description": "Tailor your homepage to show the widgets and metrics that you need the most. There are several available to be added."
+      },
+      "settings": {
+        "title": "Settings Location",
+        "description": "Adjust sitewide preferences like color theme, language, currency, scrolling behavior, UTXO ordering, and whether to display values in lovelaces or ADA and more."
+      },
+      "wallet": {
+        "title": "Connect Your Wallet",
+        "description": "Connecting your wallet unlocks your full Cexplorer experience. Set up a profile, manage watchlists, add labels to addresses, delegate to SPOs and DReps, and generate your API key."
+      },
+      "blockchain": {
+        "title": "Explore the Chain",
+        "description": "Everything related to transactions, blocks, and epochs, allowing you to easily track what's happening on-chain in real time."
+      },
+      "staking": {
+        "title": "Staking",
+        "description": "Explore all active stake pools, compare them by performance and fees, and browse pool groups for easier analysis."
+      },
+      "governance": {
+        "title": "Governance",
+        "description": "Stay on top of Cardano governance. Look into DReps, governance actions, or track all on-chain votes."
+      },
+      "tokens": {
+        "title": "Tokens & DEX Activity",
+        "description": "The Token Dashboard is an easy way to watch Cardano token trading activity. It shows a ranklist with metrics like price, volume, and changes, as well as a dedicated tab for all DEX trades in real time."
+      },
+      "education": {
+        "title": "Learn Cardano",
+        "description": "Find curated articles and a FAQ to help you understand what you're seeing on-chain."
+      },
+      "analytics": {
+        "title": "Deep Analytics",
+        "description": "Network health, energy consumption, treasury projections, dApp rankings, TVL and much more. Easy to miss, worth exploring."
+      },
+      "more": {
+        "title": "Power Tools",
+        "description": "Inspect addresses and datums, calculate rewards, check tax history, debug pools, and use the epoch calendar."
+      },
+      "mobileMenu": {
+        "title": "Navigation Menu",
+        "description": "Tap here to access all sections: Blockchain, Staking, Governance, Tokens, Analytics, Education, and more."
+      },
+      "skipConfirm": {
+        "title": "Skip the tour?",
+        "description": "You can restart it anytime from the Settings menu.",
+        "confirm": "Skip tour",
+        "resume": "Continue"
+      },
+      "finished": {
+        "title": "You're All Set",
+        "description": "Cexplorer is your guide to the Cardano blockchain. You now know where everything lives, go ahead and explore."
       }
     }
   },

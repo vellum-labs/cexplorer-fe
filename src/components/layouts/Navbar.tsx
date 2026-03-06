@@ -49,36 +49,44 @@ const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
               </div>
             </div>
             <div className='hidden items-center gap-2 xl:flex xl:h-[75px]'>
-              <Dropdown
-                id='blockchain'
-                label={labels.blockchain}
-                options={navigationOptions.blockchain}
-                withBorder
-                wrapperClassname='z-[50]'
-              />
-              <Dropdown
-                id='staking'
-                label={labels.staking}
-                options={navigationOptions.staking}
-                withBorder
-                wrapperClassname='z-[50]'
-                disableScroll
-              />
-              <Dropdown
-                id='governance'
-                label={labels.governance}
-                options={navigationOptions.governance}
-                withBorder
-                wrapperClassname='z-[50]'
-                disableScroll
-              />
-              <Dropdown
-                id='tokens'
-                label={labels.tokens}
-                options={navigationOptions.tokens}
-                withBorder
-                wrapperClassname='z-[50]'
-              />
+              <div data-tour-step='nav-blockchain'>
+                <Dropdown
+                  id='blockchain'
+                  label={labels.blockchain}
+                  options={navigationOptions.blockchain}
+                  withBorder
+                  wrapperClassname='z-[50]'
+                />
+              </div>
+              <div data-tour-step='nav-staking'>
+                <Dropdown
+                  id='staking'
+                  label={labels.staking}
+                  options={navigationOptions.staking}
+                  withBorder
+                  wrapperClassname='z-[50]'
+                  disableScroll
+                />
+              </div>
+              <div data-tour-step='nav-governance'>
+                <Dropdown
+                  id='governance'
+                  label={labels.governance}
+                  options={navigationOptions.governance}
+                  withBorder
+                  wrapperClassname='z-[50]'
+                  disableScroll
+                />
+              </div>
+              <div data-tour-step='nav-tokens'>
+                <Dropdown
+                  id='tokens'
+                  label={labels.tokens}
+                  options={navigationOptions.tokens}
+                  withBorder
+                  wrapperClassname='z-[50]'
+                />
+              </div>
               <Dropdown
                 id='nfts'
                 label={labels.nfts}
@@ -86,76 +94,88 @@ const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
                 withBorder
                 wrapperClassname='z-[50]'
               />
-              <Dropdown
-                id='education'
-                label={labels.education}
-                options={navigationOptions.education}
-                withBorder
-                wrapperClassname='z-[50]'
-              />
-              <ScreenDropdown
-                id='analytics'
-                label={labels.analytics}
-                options={nestedNavigationOptions.analyticsOptions}
-                randomTopAd={randomTopAd}
-                card={
-                  <InfoCard
-                    icon={<Cardano size={24} color={colors.primary} />}
-                    title={
-                      <span className='text-text-lg font-semibold'>
-                        {t("navbar.poweredBy")}{" "}
-                        <span className='text-primary'>
-                          {t("navbar.cardanoBlockchain")}
+              <div data-tour-step='nav-education'>
+                <Dropdown
+                  id='education'
+                  label={labels.education}
+                  options={navigationOptions.education}
+                  withBorder
+                  wrapperClassname='z-[50]'
+                />
+              </div>
+              <div data-tour-step='nav-analytics'>
+                <ScreenDropdown
+                  id='analytics'
+                  label={labels.analytics}
+                  options={nestedNavigationOptions.analyticsOptions}
+                  randomTopAd={randomTopAd}
+                  card={
+                    <InfoCard
+                      icon={<Cardano size={24} color={colors.primary} />}
+                      title={
+                        <span className='text-text-lg font-semibold'>
+                          {t("navbar.poweredBy")}{" "}
+                          <span className='text-primary'>
+                            {t("navbar.cardanoBlockchain")}
+                          </span>
                         </span>
-                      </span>
-                    }
-                    className='bg-darker'
-                  >
-                    <p className='font-regular'>{t("navbar.apiDescription")}</p>
-                    <Button
-                      className='mt-auto'
-                      label={t("navbar.startBuilding")}
-                      rightIcon={<ArrowRight />}
-                      variant='primary'
-                      size='lg'
-                    />
-                  </InfoCard>
-                }
-              />
-              <ScreenDropdown
-                id='more'
-                label={labels.more}
-                options={nestedNavigationOptions.moreOptions}
-                randomTopAd={randomTopAd}
-                card={
-                  <InfoCard
-                    icon={<ChevronsUp color={colors.purpleText} />}
-                    title={
-                      <span className='text-text-lg font-semibold'>
-                        {t("navbar.getCexplorer")}{" "}
-                        <span className='text-purpleText'>
-                          {t("navbar.pro")}
+                      }
+                      className='bg-darker'
+                    >
+                      <p className='font-regular'>{t("navbar.apiDescription")}</p>
+                      <Button
+                        className='mt-auto'
+                        label={t("navbar.startBuilding")}
+                        rightIcon={<ArrowRight />}
+                        variant='primary'
+                        size='lg'
+                      />
+                    </InfoCard>
+                  }
+                />
+              </div>
+              <div data-tour-step='nav-more'>
+                <ScreenDropdown
+                  id='more'
+                  label={labels.more}
+                  options={nestedNavigationOptions.moreOptions}
+                  randomTopAd={randomTopAd}
+                  card={
+                    <InfoCard
+                      icon={<ChevronsUp color={colors.purpleText} />}
+                      title={
+                        <span className='text-text-lg font-semibold'>
+                          {t("navbar.getCexplorer")}{" "}
+                          <span className='text-purpleText'>
+                            {t("navbar.pro")}
+                          </span>
                         </span>
-                      </span>
-                    }
-                    className='bg-darker'
-                  >
-                    <p className='font-regular'>{t("navbar.apiDescription")}</p>
-                    <Button
-                      href='/pro'
-                      className='mt-auto'
-                      label={t("navbar.getPro")}
-                      rightIcon={<ArrowRight />}
-                      variant='purple'
-                      size='lg'
-                    />
-                  </InfoCard>
-                }
-              />
+                      }
+                      className='bg-darker'
+                    >
+                      <p className='font-regular'>{t("navbar.apiDescription")}</p>
+                      <Button
+                        href='/pro'
+                        className='mt-auto'
+                        label={t("navbar.getPro")}
+                        rightIcon={<ArrowRight />}
+                        variant='purple'
+                        size='lg'
+                      />
+                    </InfoCard>
+                  }
+                />
+              </div>
             </div>
             <div className='hidden items-center gap-3 md:flex'>
-              {enabledWalletConnector && <WalletButton />}
-              <SettingsDropdown withBorder />
+              {enabledWalletConnector && (
+                <div data-tour-step='nav-wallet'>
+                  <WalletButton />
+                </div>
+              )}
+              <div data-tour-step='nav-settings'>
+                <SettingsDropdown withBorder />
+              </div>
             </div>
           </div>
           <div className='hidden md:block xl:hidden'>

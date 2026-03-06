@@ -18,6 +18,7 @@ export const VersionWatcher: FC = () => {
     "navbar-line-1",
     "bookmark_store",
     "cookie_consent",
+    "onboarding_tour_completed",
   ];
 
   useEffect(() => {

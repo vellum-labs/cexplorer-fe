@@ -1,8 +1,8 @@
-import type { FC, ReactNode } from "react";
+import type { Dispatch, FC, ReactNode, SetStateAction } from "react";
 
 import { Fragment } from "react";
 
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, CircleHelp } from "lucide-react";
 
 import { useInfiniteScrollingStore } from "@vellumlabs/cexplorer-sdk";
 import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
@@ -14,10 +14,12 @@ import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface SettingsMobileItemsProps {
   onBack?: () => void;
+  setOpen?: Dispatch<SetStateAction<boolean>>;
 }
 
 export const SettingsMobileItems: FC<SettingsMobileItemsProps> = ({
   onBack,
+  setOpen,
 }) => {
   const { t } = useAppTranslation("navigation");
   const { toggleTheme } = useThemeStore();
@@ -42,6 +44,21 @@ export const SettingsMobileItems: FC<SettingsMobileItemsProps> = ({
     {
       component: <SettingsMobileItemScrolling />,
       onClick: toggleInfiniteScrolling,
+    },
+    {
+      component: (
+        <div className='flex items-center gap-2'>
+          <CircleHelp size={20} />
+          <span>{t("navbar.guidedTour")}</span>
+        </div>
+      ),
+      onClick: () => {
+        setOpen?.(false);
+        setTimeout(() => {
+          localStorage.removeItem("onboarding_tour_completed");
+          window.dispatchEvent(new CustomEvent("restart-onboarding-tour"));
+        }, 400);
+      },
     },
   ];
 

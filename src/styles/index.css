@@ -12,6 +12,10 @@ html {
   overflow-x: hidden;
 }
 
+body {
+  position: relative;
+}
+
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;

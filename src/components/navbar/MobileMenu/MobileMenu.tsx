@@ -27,12 +27,12 @@ const MobileMenu: FC = () => {
         setActiveMenu(null);
       }}
     >
-      <SheetTrigger>
+      <SheetTrigger data-tour-step='tablet-menu'>
         <Menu size={25} />
       </SheetTrigger>
       <SheetContent className='hide-scrollbar overflow-y-auto'>
         {activeMenu === "settings" ? (
-          <SettingsMobileItems onBack={() => setActiveMenu(null)} />
+          <SettingsMobileItems onBack={() => setActiveMenu(null)} setOpen={setIsOpen} />
         ) : activeMenu === "analytics" ? (
           <AnalyticsMobileItems
             onBack={() => setActiveMenu(null)}
