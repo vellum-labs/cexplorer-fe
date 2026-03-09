@@ -483,7 +483,9 @@
     "ada_price": "ADA Price",
     "maker": "Maker",
     "platform": "Platform",
-    "share": "$t(shared:labels.share)"
+    "share": "$t(shared:labels.share)",
+    "epoch_stake": "$t(shared:epochStake)",
+    "loyalty": "$t(shared:loyalty)"
   },
   "analytics": {
     "account": "$t(shared:labels.account)",
