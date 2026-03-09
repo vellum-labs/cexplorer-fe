@@ -973,9 +973,19 @@
         },
         "expandedDetails": {
           "description": "Kritéria milníku",
+          "milestoneCriteria": "Kritéria milníku",
           "evidenceSubmission": "Předložené důkazy",
-          "open": "Otevřít"
+          "open": "Otevřít",
+          "noCriteria": "Kritéria přijetí nebyla specifikována.",
+          "noEvidence": "Žádné důkazy nebyly předloženy."
         }
+      },
+      "schedule": {
+        "title": "Platební harmonogram",
+        "evidence": "Důkazy",
+        "totalBudget": "Celkový rozpočet",
+        "evidenceSubmitted": "Odevzdáno",
+        "evidenceNotSubmitted": "Neodevzdáno"
       }
     }
   },

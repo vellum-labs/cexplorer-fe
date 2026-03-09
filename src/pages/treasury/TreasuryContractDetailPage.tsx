@@ -5,24 +5,28 @@ import { useParams } from "@tanstack/react-router";
 import {
   useFetchVendorContractDetail,
   useFetchVendorContractMilestones,
+  useFetchVendorContractEvents,
 } from "@/services/vendorContracts";
 import { formatString, LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { ContractDetailOverview } from "@/components/treasury/ContractDetailOverview";
 import { MilestoneOverview } from "@/components/treasury/MilestoneOverview";
-import { MilestonePaymentsTable } from "@/components/treasury/MilestonePaymentsTable";
+import { PaymentScheduleTable } from "@/components/treasury/PaymentScheduleTable";
+// import { MilestonePaymentsTable } from "@/components/treasury/MilestonePaymentsTable";
 import { intersectMboApiUrl } from "@/constants/confVariables";
 
 export const TreasuryContractDetailPage: FC = () => {
-  const { t } = useAppTranslation(["pages", "common"]);
+  const { t } = useAppTranslation(["pages", "common", "sdk"]);
   const { id } = useParams({
     from: "/treasury/contracts/$id",
   });
 
   const detailQuery = useFetchVendorContractDetail(id);
   const milestonesQuery = useFetchVendorContractMilestones(id);
+  const eventsQuery = useFetchVendorContractEvents({ projectId: id, limit: 100 });
 
   const contract = detailQuery.data?.data;
   const milestones = milestonesQuery.data?.data || [];
+  const events = eventsQuery.data?.data || [];
 
   if (!intersectMboApiUrl) {
     return (
@@ -55,7 +59,7 @@ export const TreasuryContractDetailPage: FC = () => {
     );
   }
 
-  const isLoading = detailQuery.isLoading || milestonesQuery.isLoading;
+  const isLoading = detailQuery.isLoading || milestonesQuery.isLoading || eventsQuery.isLoading;
 
   return (
     <PageBase
@@ -191,12 +195,118 @@ export const TreasuryContractDetailPage: FC = () => {
           }}
         />
 
-        <MilestonePaymentsTable
+        <PaymentScheduleTable
+          milestones={milestones}
+          events={events}
+          initialAmountAda={contract?.initial_amount_ada}
+          query={milestonesQuery}
+          labels={{
+            title: t(
+              "treasury.contractDetail.schedule.title",
+              "Payment Schedule",
+            ),
+            columns: {
+              milestone: t(
+                "treasury.contractDetail.payments.columns.milestone",
+                "Milestone",
+              ),
+              status: t(
+                "treasury.contractDetail.milestones.status",
+                "Status",
+              ),
+              evidence: t(
+                "treasury.contractDetail.schedule.evidence",
+                "Evidence",
+              ),
+              amount: t(
+                "treasury.contractDetail.payments.columns.amount",
+                "Amount",
+              ),
+              transaction: t(
+                "treasury.contractDetail.payments.columns.transaction",
+                "Transaction",
+              ),
+            },
+            noMilestones: t(
+              "treasury.contractDetail.milestones.noMilestones",
+              "No milestones found.",
+            ),
+            totalBudget: t(
+              "treasury.contractDetail.schedule.totalBudget",
+              "Total Budget",
+            ),
+            evidenceStatus: {
+              submitted: t(
+                "treasury.contractDetail.schedule.evidenceSubmitted",
+                "Submitted",
+              ),
+              notSubmitted: t(
+                "treasury.contractDetail.schedule.evidenceNotSubmitted",
+                "Not submitted",
+              ),
+            },
+            statusLabels: {
+              pending: t(
+                "treasury.contractDetail.milestones.statusLabels.pending",
+                "Pending",
+              ),
+              completed: t(
+                "treasury.contractDetail.milestones.statusLabels.completed",
+                "Completed",
+              ),
+              withdrawn: t(
+                "treasury.contractDetail.milestones.statusLabels.withdrawn",
+                "Withdrawn",
+              ),
+            },
+            eventLabels: {
+              complete: t(
+                "treasury.contractDetail.payments.eventTypes.complete",
+                "Complete",
+              ),
+              withdraw: t(
+                "treasury.contractDetail.payments.eventTypes.withdraw",
+                "Withdraw",
+              ),
+            },
+            expandedDetails: {
+              acceptanceCriteria: t(
+                "treasury.contractDetail.payments.expandedDetails.milestoneCriteria",
+                "Acceptance Criteria",
+              ),
+              evidenceSubmissions: t(
+                "treasury.contractDetail.payments.expandedDetails.evidenceSubmission",
+                "Evidence Submissions",
+              ),
+              open: t(
+                "treasury.contractDetail.payments.expandedDetails.open",
+                "Open",
+              ),
+              noCriteria: t(
+                "treasury.contractDetail.payments.expandedDetails.noCriteria",
+                "No acceptance criteria specified.",
+              ),
+              noEvidence: t(
+                "treasury.contractDetail.payments.expandedDetails.noEvidence",
+                "No evidence submitted.",
+              ),
+            },
+            safetyLink: {
+              warningText: t("sdk:safetyLink.warningText"),
+              goBackLabel: t("sdk:safetyLink.goBackLabel"),
+              visitLabel: t("sdk:safetyLink.visitLabel"),
+            },
+          }}
+        />
+
+        {/* <MilestonePaymentsTable
           projectId={id}
+          milestones={milestones}
+          initialAmountAda={contract?.initial_amount_ada}
           labels={{
             title: t(
               "treasury.contractDetail.payments.title",
-              "Milestone Payments",
+              "Transaction History",
             ),
             columns: {
               milestone: t(
@@ -260,23 +370,36 @@ export const TreasuryContractDetailPage: FC = () => {
               ),
             },
             expandedDetails: {
-              description: t(
-                "treasury.contractDetail.payments.expandedDetails.description",
-                "Description",
+              milestoneCriteria: t(
+                "treasury.contractDetail.payments.expandedDetails.milestoneCriteria",
+                "Milestone Criteria",
               ),
               evidenceSubmission: t(
                 "treasury.contractDetail.payments.expandedDetails.evidenceSubmission",
-                "Evidence Submission",
+                "Evidence Submissions",
               ),
               open: t(
                 "treasury.contractDetail.payments.expandedDetails.open",
                 "Open",
               ),
+              noCriteria: t(
+                "treasury.contractDetail.payments.expandedDetails.noCriteria",
+                "No acceptance criteria specified.",
+              ),
+              noEvidence: t(
+                "treasury.contractDetail.payments.expandedDetails.noEvidence",
+                "No evidence submitted.",
+              ),
+            },
+            safetyLink: {
+              warningText: t("sdk:safetyLink.warningText"),
+              goBackLabel: t("sdk:safetyLink.goBackLabel"),
+              visitLabel: t("sdk:safetyLink.visitLabel"),
             },
             displayingText: (count, total) =>
               t("common:table.displaying", { count, total }),
           }}
-        />
+        /> */}
       </section>
     </PageBase>
   );

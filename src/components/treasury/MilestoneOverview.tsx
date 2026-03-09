@@ -81,7 +81,7 @@ export const MilestoneOverview: FC<MilestoneOverviewProps> = ({
       <div className='mt-2 flex gap-0 overflow-x-auto pb-2'>
         {milestones.map((milestone, index) => {
           const completionDate = milestone.completion
-            ? formatDate(new Date(milestone.completion).getTime())
+            ? formatDate(milestone.completion.time * 1000)
             : null;
           const isLast = index === milestones.length - 1;
 
@@ -90,7 +90,7 @@ export const MilestoneOverview: FC<MilestoneOverviewProps> = ({
               <div className='flex min-w-[160px] flex-col'>
                 <div className='flex items-center'>
                   <div className='rounded-m border border-primary bg-cardBg px-3 py-1 text-text-sm font-medium'>
-                    MS-{milestone.milestone_order}
+                    {milestone.milestone_id}
                   </div>
                   {!isLast && (
                     <div
