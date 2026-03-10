@@ -45,8 +45,8 @@ export const PortfolioPage = () => {
       <section className='flex w-full min-w-0 max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
         {hasWallets ? (
           <>
-            <div className='grid grid-cols-1 gap-3 lg:grid-cols-5'>
-              <div className='lg:col-span-3'>
+            <div className='grid grid-cols-1 gap-3 lg:grid-cols-7'>
+              <div className='lg:col-span-5'>
                 <PortfolioComposition />
               </div>
               <div className='lg:col-span-2'>
