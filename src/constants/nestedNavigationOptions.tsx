@@ -66,6 +66,10 @@ export const nestedNavigationOptions: {
           label: "Script verification",
           href: "/script/verification",
         },
+        {
+          label: "Portfolio tracker",
+          href: "/portfolio",
+        },
       ],
     },
     services: {

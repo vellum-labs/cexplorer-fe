@@ -3100,6 +3100,11 @@
     "keywords": "Keywords",
     "copyLink": "Copy link"
   },
+  "portfolio": {
+    "title": "Portfolio Tracker",
+    "breadcrumb": "Portfolio",
+    "comingSoon": "Portfolio Tracker is coming soon."
+  },
   "bookmark": {
     "addModal": {
       "title": "Add bookmark",
