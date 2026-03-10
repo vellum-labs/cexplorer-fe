@@ -87,6 +87,7 @@
     "currency": "Měna",
     "infiniteScrolling": "Nekonečné posouvání",
     "geekConfiguration": "Pokročilá konfigurace",
+    "tour": "Průvodce",
     "search": "Hledat"
   },
   "actions": {
@@ -492,7 +493,10 @@
     "product_github": "Github",
     "onchain_type": "Typ",
     "onchain_name": "Název",
-    "onchain_description": "Popis"
+    "onchain_description": "Popis",
+    "share": "$t(shared:labels.share)",
+    "epoch_stake": "$t(shared:epochStake)",
+    "loyalty": "$t(shared:loyalty)"
   },
   "analytics": {
     "account": "$t(shared:labels.account)",
@@ -778,7 +782,9 @@
     "transactionHash": "$t(shared:transactionHash)",
     "datumHash": "Hash Datumů",
     "transactionWithDatum": "Transakce obsahující tento datum",
-    "otherDatums": "Další datumy ze stejných transakcí"
+    "otherDatums": "Další datumy ze stejných transakcí",
+    "parsedDatum": "Parsovaný Datum",
+    "decodedDatum": "Dekódovaný Datum"
   },
   "pots": {
     "title": "$t(shared:title1)",
@@ -1426,6 +1432,24 @@
     "breadcrumb": "$t(shared:title5)",
     "selectTokenToViewChart": "Vyberte token ve widgetu směny pro zobrazení grafu"
   },
+  "stablecoinDashboard": {
+    "title": "Stablecoin Dashboard",
+    "breadcrumb": "Stablecoin Dashboard",
+    "netFlow": "Čistý tok (epocha)",
+    "minted": "Vytvořeno",
+    "burned": "Spáleno",
+    "marketCap": "Tržní kapitalizace",
+    "adaMarketCap": "ADA ekvivalent",
+    "dominance": "Dominance",
+    "analytics": "Analytika",
+    "activity": "Aktivita",
+    "assetVolume": "Objem aktiv",
+    "holders": "Držitelé",
+    "mintEvents": "Události ražby",
+    "stablecoin": "Stablecoin",
+    "inflow": "Příliv",
+    "outflow": "Odliv"
+  },
   "drep": {
     "breadcrumbs": {
       "delegatedRepresentatives": "Delegovaní zástupci"
@@ -1677,6 +1701,74 @@
         "Asset": "$t(shared:asset)",
         "Epoch": "$t(shared:epoch)",
         "Pool": "$t(shared:pool)"
+      }
+    },
+    "tour": {
+      "next": "Další",
+      "back": "Zpět",
+      "skip": "Přeskočit",
+      "finish": "Dokončit",
+      "welcome": {
+        "title": "Vítejte na Cexploreru",
+        "description": "Vítejte v nejkompletnějším exploreru pro blockchain Cardano. Tento rychlý průvodce vás provede nejpoužívanějšími funkcemi."
+      },
+      "searchBar": {
+        "title": "Hledejte cokoliv",
+        "description": "Vyhledejte libovolnou adresu, transakci, stake pool, token, blok nebo i stránky a další, vše na jednom místě."
+      },
+      "customize": {
+        "title": "Přizpůsobte si to",
+        "description": "Upravte si domovskou stránku tak, aby zobrazovala widgety a metriky, které potřebujete nejvíce. K dispozici je jich několik."
+      },
+      "settings": {
+        "title": "Umístění nastavení",
+        "description": "Upravte celostránkové předvolby jako barevný motiv, jazyk, měnu, chování scrollování, řazení UTXO a zobrazování hodnot v lovelaces nebo ADA a další."
+      },
+      "wallet": {
+        "title": "Připojte peněženku",
+        "description": "Připojení peněženky odemkne plný zážitek z Cexploreru. Nastavte si profil, spravujte watchlisty, přidávejte štítky k adresám, delegujte na SPO a DRepy a vygenerujte API klíč."
+      },
+      "blockchain": {
+        "title": "Prozkoumejte řetězec",
+        "description": "Vše o transakcích, blocích a epochách, co vám umožní snadno sledovat dění on-chain v reálném čase."
+      },
+      "staking": {
+        "title": "Staking",
+        "description": "Prozkoumejte všechny aktivní stake pooly, porovnejte je podle výkonu a poplatků a procházejte skupiny poolů."
+      },
+      "governance": {
+        "title": "Governance",
+        "description": "Buďte v obraze ohledně správy Cardano. Prozkoumejte DRepy, governance akce nebo sledujte všechna on-chain hlasování."
+      },
+      "tokens": {
+        "title": "Tokeny a DEX aktivita",
+        "description": "Token Dashboard je snadný způsob, jak sledovat obchodní aktivitu Cardano tokenů. Zobrazuje žebříček s metrikami jako cena, objem a změny, a také záložku pro všechny DEX obchody v reálném čase."
+      },
+      "education": {
+        "title": "Naučte se Cardano",
+        "description": "Najděte kurátorské články a FAQ, které vám pomohou pochopit, co vidíte on-chain."
+      },
+      "analytics": {
+        "title": "Hloubková analytika",
+        "description": "Zdraví sítě, spotřeba energie, projekce pokladny, žebříčky dAppů, TVL a mnoho dalšího. Snadno přehlédnutelné, ale stojí za prozkoumání."
+      },
+      "more": {
+        "title": "Pokročilé nástroje",
+        "description": "Prozkoumejte adresy a datumy, vypočítejte odměny, zkontrolujte daňovou historii, debugujte pooly a používejte epochový kalendář."
+      },
+      "mobileMenu": {
+        "title": "Navigační menu",
+        "description": "Klepnutím sem získáte přístup ke všem sekcím: Blockchain, Staking, Governance, Tokeny, Analytika, Vzdělávání a další."
+      },
+      "skipConfirm": {
+        "title": "Přeskočit průvodce?",
+        "description": "Můžete ho kdykoliv spustit znovu z nabídky Nastavení.",
+        "confirm": "Přeskočit",
+        "resume": "Pokračovat"
+      },
+      "finished": {
+        "title": "Vše je připraveno",
+        "description": "Cexplorer je váš průvodce blockchainem Cardano. Nyní víte, kde vše najdete – jděte a prozkoumejte."
       }
     }
   },
@@ -2074,6 +2166,41 @@
       "infoText2": "Můžete také vybrat konkrétní stake pool a zjistit, jak by váš stake v daném poolu fungoval.",
       "infoText3": "Kalkulačka používá živá data ze sítě, aktuální parametry blockchainu a nejnovější statistiky epoch pro odhad vašich odměn.",
       "infoText4": "Mějte na paměti, že skutečné odměny se mohou lišit epochu od epochy a měnit se v čase."
+    }
+  },
+  "ecoImpact": {
+    "title": "Eko-kalkulačka",
+    "subtitle": "Podívejte se, jak vaše stakování Cardana srovnáváte s Bitcoinem z hlediska energie a CO₂",
+    "delegator": "Delegátor",
+    "spo": "SPO",
+    "calculateAs": "Vypočítat jako",
+    "calculate": "Vypočítat",
+    "enterStakeAddress": "Zadejte stake adresu",
+    "selectPool": "Vyberte stake pool",
+    "invalidStakeAddress": "Neplatná stake adresa",
+    "noData": "Pro tuto adresu nejsou k dispozici žádná data o aktivním staku.",
+    "results": {
+      "energyEfficiency": "Energetická účinnost",
+      "energyEfficiencyUnit": "krát účinnější",
+      "energySaved": "Ušetřená energie",
+      "energySavedUnit": "kWh/rok",
+      "co2Saved": "Ušetřené CO₂",
+      "co2SavedUnit": "kg/rok",
+      "treesEquivalent": "Ekvivalent stromů",
+      "treesDescription": "Vaše úspory CO₂ ze stakování odpovídají roční absorpci",
+      "trees": "stromů",
+      "nextMilestone": "Další milník",
+      "comparisonTitle": "Cardano vs Bitcoin: Spotřeba energie",
+      "comparisonDescription": "Srovnání energie mezi Cardano PoS a Bitcoin PoW.",
+      "metric": "Metrika",
+      "cardano": "Cardano (PoS)",
+      "bitcoin": "Bitcoin (PoW)",
+      "annualEnergy": "Roční energie (GWh)",
+      "energyPerTx": "Energie na TX (kWh)",
+      "co2PerTx": "CO₂ na TX (kg)",
+      "consensusMechanism": "Mechanismus konsenzu",
+      "proofOfStake": "Proof of Stake",
+      "proofOfWork": "Proof of Work"
     }
   },
   "taxTool": {
@@ -3052,6 +3179,64 @@
         "policyName": "Název politiky",
         "policyId": "ID politiky"
       }
+    }
+  },
+  "bookmark": {
+    "addModal": {
+      "title": "Přidat záložku",
+      "description": "Uložte tuto stránku do záložek pro rychlý přístup.",
+      "nameLabel": "Osobní název",
+      "namePlaceholder": "Zadejte název pro tuto záložku",
+      "cancelLabel": "Zrušit",
+      "saveLabel": "Uložit záložku"
+    },
+    "editModal": {
+      "title": "Upravit záložku",
+      "description": "Změňte název vaší záložky.",
+      "currentNameLabel": "Aktuální název",
+      "newNameLabel": "Nový název",
+      "newNamePlaceholder": "Zadejte nový název",
+      "cancelLabel": "Zrušit",
+      "saveLabel": "Uložit změny"
+    },
+    "removeModal": {
+      "title": "Odstranit záložku",
+      "description": "Odstraňte tuto stránku ze svých záložek.",
+      "nameLabel": "Osobní název",
+      "cancelLabel": "Zrušit",
+      "removeLabel": "Odstranit záložku"
+    }
+  },
+  "bookmarksPage": {
+    "title": "Záložky",
+    "breadcrumb": "Záložky",
+    "edit": "Upravit",
+    "remove": "Odstranit",
+    "emptyPrimary": "Zatím žádné záložky",
+    "emptySecondary": "Uložte si oblíbené stránky kliknutím na ikonu záložky v záhlaví.",
+    "bookmarkSingular": "záložka",
+    "bookmarkPlural": "záložek",
+    "searchPlaceholder": "Hledat záložku...",
+    "columns": {
+      "type": "Typ",
+      "my_name": "Vlastní název",
+      "url": "Odkaz",
+      "actions": ""
+    },
+    "types": {
+      "address": "Detail adresy",
+      "pool": "Detail poolu",
+      "transaction": "Transakce",
+      "block": "Blok",
+      "asset": "Asset",
+      "stake": "Stake",
+      "drep": "DRep",
+      "policy": "Politika",
+      "article": "Článek",
+      "wiki": "Wiki",
+      "epoch": "Epocha",
+      "script": "Skript",
+      "page": "Stránka"
     }
   },
   "cookie": {

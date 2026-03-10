@@ -58,6 +58,10 @@ export const useNestedNavigationOptions = () => {
               href: "/handle-dns",
             },
             {
+              label: t("tools.ecoImpact"),
+              href: "/eco-impact",
+            },
+            {
               label: t("tools.scriptVerification"),
               href: "/script/verification",
             },

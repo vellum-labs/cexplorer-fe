@@ -2,18 +2,16 @@ import { TableSearchInput } from "@vellumlabs/cexplorer-sdk";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import { GroupsCharts } from "@/components/groups/GroupsCharts";
 import { GroupsTable } from "@/components/groups/GroupsTable";
-import { HeaderBanner } from "@/components/global/HeaderBanner";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { useFetchGroupsList } from "@/services/analytics";
 import { useFetchMiscBasic } from "@/services/misc";
 import { useMiscConst } from "@/hooks/useMiscConst";
 import { useMemo, useState } from "react";
-import { Helmet } from "react-helmet";
-import metadata from "../../../conf/metadata/en-metadata.json";
 import { useSearchTable } from "@/hooks/tables/useSearchTable";
 import { X } from "lucide-react";
 import { useFilterTable } from "@/hooks/tables/useFilterTable";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { PageBase } from "@/components/global/pages/PageBase";
 
 export const GroupsListPage = () => {
   const { t } = useAppTranslation("pages");
@@ -147,14 +145,13 @@ export const GroupsListPage = () => {
   };
 
   return (
-    <>
-      <Helmet>{<title>{metadata.groupsList.title}</title>}</Helmet>
-      <main className='flex min-h-minHeight w-full flex-col items-center'>
-        <HeaderBanner
-          title={t("groups.title")}
-          breadcrumbItems={[{ label: t("groups.breadcrumb") }]}
-        />
-        <div className='flex w-full max-w-desktop flex-col items-center justify-center gap-1 p-mobile md:p-desktop'>
+    <PageBase
+      metadataTitle='groupsList'
+      title={t("groups.title")}
+      breadcrumbItems={[{ label: t("groups.breadcrumb") }]}
+      adsCarousel={false}
+    >
+      <div className='flex w-full max-w-desktop flex-col items-center justify-center gap-1 px-mobile pb-3 md:px-desktop'>
           <div className='mb-2 w-full rounded-m border border-border bg-cardBg p-2'>
             <p className='text-text-sm text-grayTextPrimary'>
               {t("groups.info")}{" "}
@@ -241,7 +238,6 @@ export const GroupsListPage = () => {
             />
           </section>
         </div>
-      </main>
-    </>
+    </PageBase>
   );
 };
