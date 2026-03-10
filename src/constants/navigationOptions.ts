@@ -223,6 +223,10 @@ export const navigationOptions: {
       label: "Wallet comparison",
       href: "/wallet",
     },
+    {
+      label: "Cardano Projects",
+      href: "/project",
+    },
   ],
   settingsOptions: [
     {
