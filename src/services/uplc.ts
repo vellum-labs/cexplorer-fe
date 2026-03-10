@@ -1,4 +1,5 @@
 import { network } from "@/constants/confVariables";
+import { useQuery } from "@tanstack/react-query";
 
 export interface UplcScriptDetail {
   scriptName: string;
@@ -44,3 +45,10 @@ export async function fetchUplcScript(
   }
   return res.json();
 }
+
+export const useFetchUplcScript = (scriptHash: string | undefined) =>
+  useQuery({
+    queryKey: ["uplc-script", scriptHash],
+    queryFn: () => fetchUplcScript(scriptHash!),
+    enabled: !!scriptHash,
+  });
