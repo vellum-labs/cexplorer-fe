@@ -65,6 +65,7 @@ export const MobileBottomNav: FC = () => {
         }}
       >
         <button
+          data-tour-step='mobile-wallet'
           className='flex flex-col items-center gap-1'
           onClick={() => {
             if (address && walletType) {
@@ -80,6 +81,7 @@ export const MobileBottomNav: FC = () => {
         </button>
 
         <button
+          data-tour-step='mobile-settings'
           className='flex flex-col items-center gap-1'
           onClick={() => {
             setActiveMenu("settings");
@@ -97,6 +99,7 @@ export const MobileBottomNav: FC = () => {
         </div>
 
         <button
+          data-tour-step='mobile-search'
           className='flex flex-col items-center gap-1'
           onClick={() => setShowSearchModal(true)}
         >
@@ -112,7 +115,7 @@ export const MobileBottomNav: FC = () => {
           }}
         >
           <SheetTrigger asChild>
-            <button className='flex flex-col items-center gap-1'>
+            <button data-tour-step='mobile-menu' className='flex flex-col items-center gap-1'>
               <Menu size={24} className='text-grayTextPrimary' />
             </button>
           </SheetTrigger>
@@ -124,7 +127,7 @@ export const MobileBottomNav: FC = () => {
               {t("navbar.navigationMenuDescription")}
             </SheetDescription>
             {activeMenu === "settings" ? (
-              <SettingsMobileItems onBack={() => setActiveMenu(null)} />
+              <SettingsMobileItems onBack={() => setActiveMenu(null)} setOpen={setIsOpen} />
             ) : activeMenu === "analytics" ? (
               <AnalyticsMobileItems
                 onBack={() => setActiveMenu(null)}

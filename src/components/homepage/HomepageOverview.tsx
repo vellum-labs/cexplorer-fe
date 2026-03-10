@@ -116,18 +116,19 @@ export const HomepageOverview: FC = () => {
   return (
     <div className='flex flex-wrap items-stretch gap-2 xl:flex-nowrap'>
       {statCards.map(({ icon, key, label, content, footer }) => (
-        <OverviewStatCard
-          key={key}
-          icon={icon}
-          title={label}
-          value={content}
-          description={footer}
-          fullContentHeight
-          titleClassname='px-1.5 '
-          className={
-            "min-h-[225px] flex-grow basis-[330px] justify-between !px-0 pb-0 pt-1.5"
-          }
-        />
+        <div key={key} data-tour-step={`${key}-card`} className='flex min-h-[225px] flex-grow basis-[330px]'>
+          <OverviewStatCard
+            icon={icon}
+            title={label}
+            value={content}
+            description={footer}
+            fullContentHeight
+            titleClassname='px-1.5 '
+            className={
+              "min-h-[225px] w-full justify-between !px-0 pb-0 pt-1.5"
+            }
+          />
+        </div>
       ))}
     </div>
   );

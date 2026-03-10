@@ -58,6 +58,7 @@
     "list": "$t(shared:list)",
     "recent": "$t(shared:recent)",
     "dashboard": "Přehled",
+    "stablecoins": "Stablecoiny",
     "swap": "$t(shared:title5)"
   },
   "nfts": {
@@ -97,6 +98,7 @@
     "taxTool": "$t(shared:taxTool)",
     "rewardsCalculator": "Kalkulačka odměn",
     "poolDebug": "Debug poolu",
+    "ecoImpact": "Eco-impact",
     "uplcViewer": "UPLC prohlížeč",
     "handleDns": "handle DNS",
     "scriptVerification": "Verifikace skriptu"
@@ -164,7 +166,8 @@
     "navigationMenuDescription": "Přístup k možnostem navigace, nastavení a funkcím účtu",
     "stakingCertificates": "Stakingové certifikáty",
     "governanceCertificates": "Governance certifikáty",
-    "settings": "$t(shared:settings)"
+    "settings": "$t(shared:settings)",
+    "guidedTour": "Průvodce"
   },
   "settings": {
     "theme": "Motiv",

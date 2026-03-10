@@ -18,6 +18,7 @@ import { Cbor } from "@harmoniclabs/cbor";
 
 import { PageBase } from "@/components/global/pages/PageBase";
 import { convertCborToJson } from "@/utils/datum/convertCborToJson";
+import { convertCborToParsed } from "@/utils/datum/convertCborToParsed";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 const parseSimpleCborInt = (hex: string): { int: string } | null => {
@@ -78,6 +79,7 @@ export const DatumPage: FC = () => {
   const [parsedDatum, setParsedDatum] = useState<any>(
     datum ? decodeDatum(datum) : {},
   );
+  const [viewMode, setViewMode] = useState<"parsed" | "decoded">("parsed");
 
   const debouncedHash = useDebounce(inputHash.toLowerCase());
 
@@ -221,8 +223,10 @@ export const DatumPage: FC = () => {
         <div className='mb-2 flex w-full flex-col justify-between gap-1'>
           <h2>{t("datum.convertor")}</h2>
           <div className='flex w-full flex-wrap gap-2 lg:flex-nowrap'>
-            <div className='flex h-[360px] w-1/2 flex-grow flex-col gap-1'>
-              <h3>{t("datum.input")}</h3>
+            <div className='flex h-[360px] min-w-0 flex-1 basis-1/2 flex-col gap-1'>
+              <div className='flex h-[35px] items-center'>
+                <h3>{t("datum.input")}</h3>
+              </div>
               <textarea
                 className='h-full w-full resize-none rounded-m border border-border bg-cardBg p-[10px] text-text-md text-text-xs shadow-md outline-none'
                 spellCheck={false}
@@ -230,10 +234,36 @@ export const DatumPage: FC = () => {
                 defaultValue={datum ? datum : inputDatum}
               ></textarea>
             </div>
-            <div className='flex h-[360px] w-1/2 flex-grow flex-col gap-1'>
-              <h3>{t("datum.output")}</h3>
+            <div className='flex h-[360px] min-w-0 flex-1 basis-1/2 flex-col gap-1'>
+              <div className='flex items-center justify-between'>
+                <h3>{t("datum.output")}</h3>
+                <div className='flex h-[35px] w-fit items-center gap-1/4 rounded-m border border-borderFaded bg-darker text-text-sm font-semibold shadow-md'>
+                  <button
+                    type='button'
+                    onClick={() => setViewMode("parsed")}
+                    className={`flex h-[35px] items-center rounded-m border px-1.5 py-1 ${
+                      viewMode === "parsed"
+                        ? "z-20 border-border bg-background text-text"
+                        : "border-transparent text-grayTextPrimary duration-150 hover:text-text"
+                    }`}
+                  >
+                    {t("datum.parsedDatum")}
+                  </button>
+                  <button
+                    type='button'
+                    onClick={() => setViewMode("decoded")}
+                    className={`flex h-[35px] items-center rounded-m border px-1.5 py-1 ${
+                      viewMode === "decoded"
+                        ? "z-20 border-border bg-background text-text"
+                        : "border-transparent text-grayTextPrimary duration-150 hover:text-text"
+                    }`}
+                  >
+                    {t("datum.decodedDatum")}
+                  </button>
+                </div>
+              </div>
               <JsonDisplay
-                data={parsedDatum}
+                data={viewMode === "parsed" ? convertCborToParsed(parsedDatum) : parsedDatum}
                 isLoading={false}
                 isError={false}
                 search

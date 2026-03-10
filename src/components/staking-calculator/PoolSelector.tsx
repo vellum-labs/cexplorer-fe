@@ -6,6 +6,7 @@ import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import { useClickOutsideGroup } from "@/hooks/useClickOutsideGroup";
+import { Search } from "lucide-react";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 
 interface Pool {
@@ -78,14 +79,23 @@ export const PoolSelector: FC<PoolSelectorProps> = ({
           </button>
         </div>
       ) : (
-        <div className='relative'>
+        <div className='relative flex items-center'>
           <TextInput
             value={search}
             onchange={handleSearchChange}
             placeholder={t("stakingCalculator.poolSelector.placeholder")}
             onFocus={() => setLocalFocused(true)}
             autoCapitalize='off'
+            inputClassName='!bg-transparent'
+            wrapperClassName='w-full'
           />
+          {!search && (
+            <Search
+              size={20}
+              style={{ color: "var(--grayTextPrimary)" }}
+              className='pointer-events-none absolute right-2'
+            />
+          )}
         </div>
       )}
 

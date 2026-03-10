@@ -36,7 +36,6 @@ const DelegationModal = ({ onClose, poolQuery }: Props) => {
   if (poolQuery.isLoading || delegationQuery.isLoading) {
     return (
       <Modal
-        minHeight='400px'
         minWidth='400px'
         maxWidth='95%'
         onClose={onClose}
@@ -49,7 +48,7 @@ const DelegationModal = ({ onClose, poolQuery }: Props) => {
   }
 
   return (
-    <Modal minHeight='400px' minWidth='400px' maxWidth='95%' onClose={onClose}>
+    <Modal minWidth='400px' maxWidth='95%' onClose={onClose}>
       {livePool === poolData?.pool_id ? (
         <div className='flex h-full w-full items-center justify-center text-center'>
           {t("wallet.alreadyDelegating")}

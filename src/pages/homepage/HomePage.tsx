@@ -6,6 +6,7 @@ import { HomepageOverview } from "@/components/homepage/HomepageOverview";
 import { Button } from "@vellumlabs/cexplorer-sdk";
 import { HomepageCustomize } from "@/components/homepage/HomepageCustomize";
 import { HomepageModal } from "@/components/homepage/HomepageModal";
+import { OnboardingTour } from "@/components/homepage/tour/OnboardingTour";
 
 import { useHomepageStore } from "@/stores/homepageStore";
 import { PageBase } from "@/components/global/pages/PageBase";
@@ -28,20 +29,22 @@ export const Homepage: FC = () => {
         >
           <div className='mb-3 flex w-full max-w-desktop flex-col items-center gap-1.5 px-mobile md:px-desktop'>
             <div className='flex w-full justify-end gap-2'>
-              <Button
-                size='md'
-                variant='tertiary'
-                leftIcon={<Wand size={16} />}
-                onClick={handleCustomize}
-                label={t("homepage.customize")}
-              />
+              <div data-tour-step='customize-button'>
+                <Button
+                  size='md'
+                  variant='tertiary'
+                  leftIcon={<Wand size={16} />}
+                  onClick={handleCustomize}
+                  label={t("homepage.customize")}
+                />
+              </div>
             </div>
             {customize && <HomepageCustomize />}
             <div className='flex w-full flex-col gap-3'>
               <div className='w-full'>
                 <HomepageOverview />
               </div>
-              <div className='flex w-full items-center'>
+              <div className='flex w-full items-center' data-tour-step='homepage-grid'>
                 <HomepageGrid />
               </div>
             </div>
@@ -49,6 +52,7 @@ export const Homepage: FC = () => {
         </section>
       </PageBase>
       {addWidget && <HomepageModal />}
+      <OnboardingTour />
     </>
   );
 };

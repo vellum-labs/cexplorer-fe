@@ -48,8 +48,8 @@ export const AssetExchangesCandlestickGraph: FC<
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
 
-  const validData = useMemo(
-    () =>
+  const validData = useMemo(() => {
+    const filtered =
       rawData?.data?.filter(
         item =>
           item.unix != null &&
@@ -57,9 +57,15 @@ export const AssetExchangesCandlestickGraph: FC<
           item.high != null &&
           item.low != null &&
           item.close != null,
-      ) ?? [],
-    [rawData?.data],
-  );
+      ) ?? [];
+
+    const seen = new Set<number>();
+    return filtered.filter(item => {
+      if (seen.has(item.unix)) return false;
+      seen.add(item.unix);
+      return true;
+    });
+  }, [rawData?.data]);
 
   const hasData = validData.length > 0;
 
@@ -95,6 +101,8 @@ export const AssetExchangesCandlestickGraph: FC<
       chartRef.current.remove();
       chartRef.current = null;
     }
+
+    chartContainerRef.current.innerHTML = "";
 
     try {
       const chart = createChart(chartContainerRef.current, {

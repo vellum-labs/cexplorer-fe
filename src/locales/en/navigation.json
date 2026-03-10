@@ -58,6 +58,7 @@
     "list": "$t(shared:list)",
     "recent": "$t(shared:recent)",
     "dashboard": "Dashboard",
+    "stablecoins": "Stablecoins",
     "swap": "$t(shared:title5)"
   },
   "nfts": {
@@ -97,6 +98,7 @@
     "taxTool": "$t(shared:taxTool)",
     "rewardsCalculator": "Rewards calculator",
     "poolDebug": "Pool debug",
+    "ecoImpact": "Eco-impact",
     "uplcViewer": "UPLC viewer",
     "handleDns": "handle DNS",
     "scriptVerification": "Script verification"
@@ -164,7 +166,8 @@
     "navigationMenuDescription": "Access navigation options, settings, and account features",
     "stakingCertificates": "Staking certificates",
     "governanceCertificates": "Governance certificates",
-    "settings": "$t(shared:settings)"
+    "settings": "$t(shared:settings)",
+    "guidedTour": "Guided tour"
   },
   "settings": {
     "theme": "Theme",

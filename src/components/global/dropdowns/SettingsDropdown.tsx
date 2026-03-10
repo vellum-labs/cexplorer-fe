@@ -16,6 +16,7 @@ import {
   Check,
   ChevronDown,
   ChevronUp,
+  CircleHelp,
   Moon,
   Settings,
   Sun,
@@ -270,6 +271,18 @@ const SettingsDropdown = ({ withBorder = false }: SettingsDropdownProps) => {
       onClick: () => {
         setOpenId("geekConfigModal");
         setGeekConfigOpen(true);
+      },
+    },
+    {
+      label: (
+        <button className='flex w-full items-center justify-between'>
+          <span>{t("settings.tour")}</span>
+          <CircleHelp size={18} />
+        </button>
+      ),
+      onClick: () => {
+        localStorage.removeItem("onboarding_tour_completed");
+        window.dispatchEvent(new CustomEvent("restart-onboarding-tour"));
       },
     },
   ];

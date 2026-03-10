@@ -815,6 +815,15 @@ const routes = [
     api: false,
   },
   {
+    path: "/stablecoin-dashboard",
+    title: "Stablecoin Dashboard | Cexplorer.io",
+    description:
+      "Explore stablecoin analytics and metrics on the Cardano blockchain. Track stablecoin supply, volume, and usage across the Cardano ecosystem with comprehensive dashboard data and visualizations.",
+    keywords:
+      "stablecoin dashboard, Cardano stablecoins, stablecoin analytics, DJED, iUSD, USDA, stablecoin metrics, Cexplorer, stablecoin supply",
+    api: false,
+  },
+  {
     path: "/swap",
     title: "Token Swap | Cexplorer.io",
     description:
@@ -848,6 +857,15 @@ const routes = [
       "Calculate your potential Cardano rewards with our advanced rewards calculator. Estimate future ADA earnings based on stake amount, pool performance, and network parameters to make informed decisions.",
     keywords:
       "cardano, rewards calculator, ADA rewards calculator, rewards, ADA calculator, rewards estimator, cexplorer, cardano calculator",
+    api: false,
+  },
+  {
+    path: "/eco-impact",
+    title: "Eco-impact Calculator | Cexplorer.io",
+    description:
+      "Calculate the environmental impact of your Cardano staking. Compare Cardano's energy efficiency vs Bitcoin, see CO₂ savings, energy saved, and trees equivalent based on your staked ADA.",
+    keywords:
+      "cardano, eco impact, energy efficiency, CO2 savings, green blockchain, proof of stake, carbon footprint, sustainability, cexplorer",
     api: false,
   },
   {

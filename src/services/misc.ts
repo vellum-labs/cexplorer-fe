@@ -140,7 +140,7 @@ export const useFetchMiscSW = (state: "done" | "install") =>
     queryFn: () => fetchMiscSW(state),
   });
 
-const fetchMiscSearch = (
+export const fetchMiscSearch = (
   query: string | undefined,
   category?: string,
   locale?: Locales,
