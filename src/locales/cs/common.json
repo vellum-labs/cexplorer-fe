@@ -485,7 +485,11 @@
     "platform": "Platforma",
     "share": "$t(shared:labels.share)",
     "epoch_stake": "$t(shared:epochStake)",
-    "loyalty": "$t(shared:loyalty)"
+    "loyalty": "$t(shared:loyalty)",
+    "source": "Zdroj",
+    "stablecoin": "Stablecoin",
+    "dominance": "Dominance",
+    "last_mint": "Poslední ražba"
   },
   "analytics": {
     "account": "$t(shared:labels.account)",
@@ -1435,7 +1439,12 @@
     "assetVolume": "Objem aktiv",
     "holders": "Držitelé",
     "mintEvents": "Události ražby",
+    "mints": "Ražba",
+    "summary": "Přehled",
     "stablecoin": "Stablecoin",
+    "source": "Zdroj",
+    "supply": "Nabídka",
+    "lastMint": "Poslední ražba",
     "inflow": "Příliv",
     "outflow": "Odliv"
   },

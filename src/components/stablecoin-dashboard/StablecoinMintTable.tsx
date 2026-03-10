@@ -181,15 +181,12 @@ export const StablecoinMintTable: FC<StablecoinMintTableProps> = ({
   ];
 
   return (
-    <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
+    <div className='flex w-full flex-col'>
       <div className='mb-3 flex flex-wrap items-center gap-2 md:flex-nowrap md:gap-3'>
-        <h2 className='shrink-0 text-text-lg font-semibold text-text'>
-          {t("stablecoinDashboard.mintEvents")}
-        </h2>
         <div className='order-last flex w-full gap-2 overflow-x-auto md:order-none md:w-auto md:flex-1'>
           {sortedStablecoins.map(sc => {
             const isSelected = sc.fingerprint === selectedFingerprint;
-            return (
+            const btn = (
               <button
                 key={sc.fingerprint}
                 type='button'
@@ -216,6 +213,14 @@ export const StablecoinMintTable: FC<StablecoinMintTableProps> = ({
                 </span>
               </button>
             );
+            if (sc.source !== "native") {
+              return (
+                <Tooltip key={sc.fingerprint} content={`${t("stablecoinDashboard.source")}: ${sc.source.charAt(0).toUpperCase() + sc.source.slice(1)}`}>
+                  {btn}
+                </Tooltip>
+              );
+            }
+            return btn;
           })}
         </div>
         <div className='ml-auto flex shrink-0 items-center gap-1'>
@@ -261,6 +266,6 @@ export const StablecoinMintTable: FC<StablecoinMintTableProps> = ({
           noItemsLabel={t("table.noItems")}
         />
       )}
-    </section>
+    </div>
   );
 };

@@ -485,7 +485,11 @@
     "platform": "Platform",
     "share": "$t(shared:labels.share)",
     "epoch_stake": "$t(shared:epochStake)",
-    "loyalty": "$t(shared:loyalty)"
+    "loyalty": "$t(shared:loyalty)",
+    "source": "Source",
+    "stablecoin": "Stablecoin",
+    "dominance": "Dominance",
+    "last_mint": "Last Mint"
   },
   "analytics": {
     "account": "$t(shared:labels.account)",
@@ -1435,7 +1439,12 @@
     "assetVolume": "Asset Volume",
     "holders": "Holders",
     "mintEvents": "Mint Events",
+    "mints": "Mints",
+    "summary": "Summary",
     "stablecoin": "Stablecoin",
+    "source": "Source",
+    "supply": "Supply",
+    "lastMint": "Last mint",
     "inflow": "Inflow",
     "outflow": "Outflow"
   },

@@ -8,6 +8,7 @@ import {
   formatNumberWithSuffix,
   Image,
   OverviewStatCard,
+  Tooltip,
 } from "@vellumlabs/cexplorer-sdk";
 import { ArrowLeftRight, Crown, Landmark } from "lucide-react";
 
@@ -48,6 +49,7 @@ export const StablecoinOverview: FC<StablecoinOverviewProps> = ({ data }) => {
         ticker: sc.registry?.ticker ?? sc.fingerprint,
         fingerprint: sc.fingerprint,
         hasLogo: sc.registry?.has_logo,
+        source: sc.source,
         supply,
         share: marketCapUsd > 0 ? (supply / marketCapUsd) * 100 : 0,
       };
@@ -64,8 +66,7 @@ export const StablecoinOverview: FC<StablecoinOverviewProps> = ({ data }) => {
       label: t("stablecoinDashboard.netFlow"),
       content: (
         <p className='text-display-xs font-semibold'>
-          ${formatNumberWithSuffix(Math.abs(netFlowUsd))}
-          {netFlowUsd >= 0 ? "" : " "}
+          {netFlowUsd < 0 ? "-" : "+"}${formatNumberWithSuffix(Math.abs(netFlowUsd))}
         </p>
       ),
       footer: (
@@ -116,17 +117,33 @@ export const StablecoinOverview: FC<StablecoinOverviewProps> = ({ data }) => {
           <p className='text-display-xs font-semibold'>
             {dominant.share.toFixed(2)}%
           </p>
-          <div className='flex items-center gap-1'>
-            <Image
-              type='asset'
-              height={28}
-              width={28}
-              className='rounded-lg aspect-square h-[28px] w-[28px] shrink-0'
-              src={generateImageUrl(dominant.fingerprint, "sm", "nft")}
-              fallbackletters={dominant.ticker.slice(0, 2)}
-            />
-            <p className='text-display-xs font-semibold'>{dominant.ticker}</p>
-          </div>
+          {dominant.source !== "native" ? (
+            <Tooltip content={`${t("stablecoinDashboard.source")}: ${dominant.source.charAt(0).toUpperCase() + dominant.source.slice(1)}`}>
+              <div className='flex items-center gap-1'>
+                <Image
+                  type='asset'
+                  height={28}
+                  width={28}
+                  className='rounded-lg aspect-square h-[28px] w-[28px] shrink-0'
+                  src={generateImageUrl(dominant.fingerprint, "sm", "nft")}
+                  fallbackletters={dominant.ticker.slice(0, 2)}
+                />
+                <p className='text-display-xs font-semibold'>{dominant.ticker}</p>
+              </div>
+            </Tooltip>
+          ) : (
+            <div className='flex items-center gap-1'>
+              <Image
+                type='asset'
+                height={28}
+                width={28}
+                className='rounded-lg aspect-square h-[28px] w-[28px] shrink-0'
+                src={generateImageUrl(dominant.fingerprint, "sm", "nft")}
+                fallbackletters={dominant.ticker.slice(0, 2)}
+              />
+              <p className='text-display-xs font-semibold'>{dominant.ticker}</p>
+            </div>
+          )}
         </div>
       ) : (
         <p className='text-display-xs font-semibold'>-</p>
@@ -138,17 +155,37 @@ export const StablecoinOverview: FC<StablecoinOverviewProps> = ({ data }) => {
               key={sc.fingerprint}
               className='flex shrink-0 items-center gap-1'
             >
-              <Image
-                type='asset'
-                height={16}
-                width={16}
-                className='rounded-sm aspect-square h-[16px] w-[16px] shrink-0'
-                src={generateImageUrl(sc.fingerprint, "sm", "nft")}
-                fallbackletters={sc.ticker.slice(0, 2)}
-              />
-              <span className='text-text-xs text-grayTextPrimary'>
-                {sc.ticker} {sc.share.toFixed(2)}%
-              </span>
+              {sc.source !== "native" ? (
+                <Tooltip content={`${t("stablecoinDashboard.source")}: ${sc.source.charAt(0).toUpperCase() + sc.source.slice(1)}`}>
+                  <div className='flex items-center gap-1'>
+                    <Image
+                      type='asset'
+                      height={16}
+                      width={16}
+                      className='rounded-sm aspect-square h-[16px] w-[16px] shrink-0'
+                      src={generateImageUrl(sc.fingerprint, "sm", "nft")}
+                      fallbackletters={sc.ticker.slice(0, 2)}
+                    />
+                    <span className='text-text-xs text-grayTextPrimary'>
+                      {sc.ticker} {sc.share.toFixed(2)}%
+                    </span>
+                  </div>
+                </Tooltip>
+              ) : (
+                <>
+                  <Image
+                    type='asset'
+                    height={16}
+                    width={16}
+                    className='rounded-sm aspect-square h-[16px] w-[16px] shrink-0'
+                    src={generateImageUrl(sc.fingerprint, "sm", "nft")}
+                    fallbackletters={sc.ticker.slice(0, 2)}
+                  />
+                  <span className='text-text-xs text-grayTextPrimary'>
+                    {sc.ticker} {sc.share.toFixed(2)}%
+                  </span>
+                </>
+              )}
             </div>
           ))}
         </div>
