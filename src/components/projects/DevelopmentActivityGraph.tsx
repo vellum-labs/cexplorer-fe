@@ -281,7 +281,7 @@ const DropdownSelect: FC<DropdownSelectProps> = ({
         <ChevronsUpDown className='h-4 w-4 shrink-0 opacity-50' />
       </div>
       {open && (
-        <div className='absolute right-0 z-50 mt-1 min-w-[160px] overflow-hidden rounded-m border border-border bg-background shadow-md'>
+        <div className='absolute left-0 z-50 mt-1 min-w-[160px] overflow-hidden rounded-m border border-border bg-background shadow-md'>
           {options.map(opt => (
             <div
               key={String(opt.value)}
