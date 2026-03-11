@@ -762,18 +762,20 @@ export const usePoolList = ({
       key: "pledge_leverage",
       render: item => {
         const pledge = item?.pool_update?.live?.pledge ?? 0;
-        const pledge_leverage =
-          pledge > 0 ? Math.round(item.live_stake / pledge) : 0;
+        const zeroPledge = pledge === 0;
+        const pledge_leverage = zeroPledge
+          ? 0
+          : Math.round(item.live_stake / pledge);
 
         return (
           <div className='flex items-center justify-end gap-1/2'>
             <Filter
               size={11}
-              color={getPledgeColor(pledge_leverage)}
+              color={getPledgeColor(pledge_leverage, zeroPledge)}
               className={cn("translate-y-[2px]")}
             />
             <span className='text-right text-grayTextPrimary'>
-              x{pledge_leverage}
+              {zeroPledge ? "∞" : `x${pledge_leverage}`}
             </span>
           </div>
         );

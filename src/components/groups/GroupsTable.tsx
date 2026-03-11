@@ -174,9 +174,10 @@ export const GroupsTable = ({
       render: item => {
         const pledge = item.data?.pool?.pledged ?? 0;
         const stake = item.data?.pool?.stake ?? 0;
+        const zeroPledge = pledge === 0;
 
         let leverage = 0;
-        if (pledge > 0) {
+        if (!zeroPledge) {
           leverage = Math.round(stake / pledge);
         }
 
@@ -191,11 +192,11 @@ export const GroupsTable = ({
             <div className='flex items-center justify-end gap-1/2'>
               <Filter
                 size={11}
-                color={getPledgeColor(leverage)}
+                color={getPledgeColor(leverage, zeroPledge)}
                 className={cn("translate-y-[2px]")}
               />
               <span className='text-text-xs text-grayTextPrimary'>
-                {pledge > 0 ? `x${leverage}` : "∞"}
+                {zeroPledge ? "∞" : `x${leverage}`}
               </span>
             </div>
           </div>
