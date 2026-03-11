@@ -218,7 +218,17 @@
       "teambuilding": "$t(shared:donationOptions.teambuilding)",
       "message": "Zpráva",
       "messagePlaceholder": "Volitelná zpráva k transakci",
-      "messageHint": "Volitelná zpráva uložená na blockchainu (CIP-20)"
+      "messageHint": "Volitelná zpráva uložená na blockchainu (CIP-20)",
+      "predefinedBanner": "Navštěvujete předvyplněnou platbu.",
+      "edit": "Upravit",
+      "mobileWallet": "Mobilní peněženka",
+      "payWithCard": "Platba kartou",
+      "payWithWallet": "Platba peněženkou",
+      "generateLinkTitle": "Platební odkaz",
+      "generateLinkDescription": "Sdílejte tento odkaz nebo QR kód pro přijetí platby.",
+      "mobileWalletTitle": "QR platba přes mobilní peněženku",
+      "mobileWalletDescription": "Naskenujte tento QR kód mobilní peněženkou pro dokončení platby.",
+      "close": "Zavřít"
     },
     "delegation": {
       "title": "Delegace",

@@ -1,8 +1,15 @@
 import { useState, useEffect } from "react";
 import { useSearch, useNavigate } from "@tanstack/react-router";
 import { PageBase } from "@/components/global/pages/PageBase";
-import { Button, TextInput, cn } from "@vellumlabs/cexplorer-sdk";
-import { Info, Link as LinkIcon } from "lucide-react";
+import { Button, TextInput, cn, formatNumber } from "@vellumlabs/cexplorer-sdk";
+import {
+  Info,
+  Link as LinkIcon,
+  QrCode,
+  CreditCard,
+  Wallet,
+
+} from "lucide-react";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { DONATION_OPTIONS } from "@/constants/wallet";
 import { useWalletStore } from "@/stores/walletStore";
@@ -10,8 +17,15 @@ import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import { handlePayment } from "@/utils/wallet/handlePayment";
 import { HandleSelector } from "@/components/payment/HandleSelector";
 import { AddressSelector } from "@/components/payment/AddressSelector";
+import { GenerateLinkModal } from "@/components/payment/GenerateLinkModal";
+import { MobilePaymentModal } from "@/components/payment/MobilePaymentModal";
 import { fetchAddressDetail } from "@/services/address";
-import { toast } from "sonner";
+import {
+  decodePaymentData,
+  encodePaymentData,
+} from "@/utils/payment/paymentLink";
+import { openChangelly } from "@/utils/payment/changelly";
+import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 
 interface HandleData {
   name: string;
@@ -29,50 +43,50 @@ const hexToString = (hex: string): string => {
 
 const PAY_STORAGE_KEY = "pay_form_data";
 
+type PayMode = "creator" | "payer";
+
 export const PayPage = () => {
   const { t } = useAppTranslation("common");
   const { wallet, address: walletAddress, walletType } = useWalletStore();
   const navigate = useNavigate();
   const searchParams = useSearch({ from: "/pay/" });
+  const { todayValue: adaPrice } = useAdaPriceWithHistory("usd");
 
+  const [mode, setMode] = useState<PayMode>("creator");
   const [selectedHandle, setSelectedHandle] = useState<HandleData | null>(null);
   const [selectedAddress, setSelectedAddress] = useState<string | null>(null);
   const [amount, setAmount] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [selectedDonation, setSelectedDonation] = useState<number | null>(null);
-  const [showWalletModal, setShowWalletModal] = useState<boolean>(false);
-  const [isInitialized, setIsInitialized] = useState<boolean>(false);
+  const [showWalletModal, setShowWalletModal] = useState(false);
+  const [showGenerateLinkModal, setShowGenerateLinkModal] = useState(false);
+  const [showMobileModal, setShowMobileModal] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  const isReadOnly = mode === "payer";
 
   useEffect(() => {
     if (isInitialized) return;
 
-    const hasUrlParams =
-      searchParams.to || searchParams.amount || searchParams.donation || searchParams.message;
-
-    if (hasUrlParams) {
-      if (searchParams.to) {
-        setSelectedAddress(searchParams.to);
-        fetchHandleForAddress(searchParams.to);
-      }
-      if (searchParams.handle) {
-        setSelectedHandle({
-          name: searchParams.handle,
-          address: searchParams.to || "",
-        });
-      }
-      if (searchParams.amount) {
-        setAmount(searchParams.amount);
-      }
-      if (searchParams.donation) {
-        const donationValue = Number(searchParams.donation);
-        if (!isNaN(donationValue)) {
-          setSelectedDonation(donationValue);
+    if (searchParams.data) {
+      const decoded = decodePaymentData(searchParams.data);
+      if (decoded) {
+        setMode("payer");
+        if (decoded.address) setSelectedAddress(decoded.address);
+        if (decoded.amount) setAmount(decoded.amount);
+        if (decoded.message) setMessage(decoded.message);
+        if (decoded.handle) {
+          setSelectedHandle({
+            name: decoded.handle,
+            address: decoded.address || "",
+          });
+        }
+        if (decoded.donation !== undefined && decoded.donation !== null) {
+          setSelectedDonation(decoded.donation);
         }
       }
-      if (searchParams.message) {
-        setMessage(searchParams.message);
-      }
     } else {
+      setMode("creator");
       const saved = localStorage.getItem(PAY_STORAGE_KEY);
       if (saved) {
         const data = JSON.parse(saved);
@@ -86,40 +100,39 @@ export const PayPage = () => {
             address: data.address || "",
           });
         }
-        if (data.amount) {
-          setAmount(data.amount);
-        }
+        if (data.amount) setAmount(data.amount);
         if (data.donation !== null && data.donation !== undefined) {
           setSelectedDonation(data.donation);
         }
-        if (data.message) {
-          setMessage(data.message);
-        }
+        if (data.message) setMessage(data.message);
       }
     }
     setIsInitialized(true);
   }, [searchParams, isInitialized]);
 
   useEffect(() => {
-    if (!isInitialized) return;
+    if (!isInitialized || isReadOnly) return;
+
+    const encoded = selectedAddress
+      ? encodePaymentData({
+          address: selectedAddress,
+          amount: amount || undefined,
+          message: message || undefined,
+          handle: selectedHandle?.name,
+          donation: selectedDonation ?? undefined,
+        })
+      : undefined;
 
     navigate({
       to: "/pay",
-      search: {
-        to: selectedAddress || undefined,
-        handle: selectedHandle?.name || undefined,
-        amount: amount || undefined,
-        donation:
-          selectedDonation !== null ? String(selectedDonation) : undefined,
-        message: message || undefined,
-      },
+      search: { data: encoded },
       replace: true,
     });
 
     const storageData = {
       address: selectedAddress,
       handle: selectedHandle?.name || null,
-      amount: amount,
+      amount,
       donation: selectedDonation,
       message: message || null,
     };
@@ -131,6 +144,7 @@ export const PayPage = () => {
     selectedDonation,
     message,
     isInitialized,
+    isReadOnly,
     navigate,
   ]);
 
@@ -139,10 +153,7 @@ export const PayPage = () => {
     const addressData = response.data?.data?.[0];
     if (addressData?.adahandle?.hex) {
       const handleName = hexToString(addressData.adahandle.hex);
-      setSelectedHandle({
-        name: handleName,
-        address: address,
-      });
+      setSelectedHandle({ name: handleName, address });
     }
   };
 
@@ -173,14 +184,35 @@ export const PayPage = () => {
     setAmount(value);
   };
 
+  const handleEdit = () => {
+    setMode("creator");
+    navigate({
+      to: "/pay",
+      search: {
+        data: selectedAddress
+          ? encodePaymentData({
+              address: selectedAddress,
+              amount: amount || undefined,
+              message: message || undefined,
+              handle: selectedHandle?.name,
+              donation: selectedDonation ?? undefined,
+            })
+          : undefined,
+      },
+      replace: true,
+    });
+  };
+
   const isValidAmount = amount && Number(amount) > 0;
   const isDonationSelected = selectedDonation !== null;
   const isFormValid = isValidAmount && isDonationSelected && !!selectedAddress;
 
-  const handleGenerateLink = () => {
-    if (!selectedAddress) return;
-    navigator.clipboard.writeText(window.location.href);
-    toast.success(t("wallet.payment.linkCopied", "Link copied to clipboard"));
+  const paymentData = {
+    address: selectedAddress || "",
+    amount: amount || undefined,
+    message: message || undefined,
+    handle: selectedHandle?.name,
+    donation: selectedDonation ?? undefined,
   };
 
   const handleSign = async () => {
@@ -188,20 +220,27 @@ export const PayPage = () => {
       setShowWalletModal(true);
       return;
     }
-
     if (!selectedAddress) return;
-
-    const numAmount = Number(amount) || 0;
     await handlePayment(
       {
         toAddress: selectedAddress,
-        amount: numAmount,
+        amount: Number(amount) || 0,
         donationAmount: selectedDonation ?? 0,
         message: message || undefined,
       },
       wallet,
     );
   };
+
+  const handlePayWithCard = () => {
+    if (!selectedAddress) return;
+    openChangelly({ address: selectedAddress, amount: amount || undefined, adaPrice: adaPrice || undefined });
+  };
+
+  const usdEquivalent =
+    adaPrice && amount && Number(amount) > 0
+      ? `$${formatNumber((Number(amount) * adaPrice).toFixed(2))}`
+      : null;
 
   return (
     <PageBase
@@ -215,6 +254,18 @@ export const PayPage = () => {
     >
       {showWalletModal && (
         <ConnectWalletModal onClose={() => setShowWalletModal(false)} />
+      )}
+      {showGenerateLinkModal && (
+        <GenerateLinkModal
+          paymentData={paymentData}
+          onClose={() => setShowGenerateLinkModal(false)}
+        />
+      )}
+      {showMobileModal && (
+        <MobilePaymentModal
+          paymentData={paymentData}
+          onClose={() => setShowMobileModal(false)}
+        />
       )}
 
       <section className='flex w-full max-w-desktop flex-col gap-4 px-mobile pb-3 md:px-desktop'>
@@ -230,6 +281,28 @@ export const PayPage = () => {
           </p>
         </div>
 
+        {isReadOnly && (
+          <div className='flex items-center justify-between gap-3 rounded-l border border-[#F59E0B]/30 bg-[#F59E0B]/10 p-4'>
+            <div className='flex items-center gap-3'>
+              <div className='flex h-8 w-8 shrink-0 items-center justify-center rounded-max bg-[#F59E0B]/20'>
+                <Info size={18} className='text-[#F59E0B]' />
+              </div>
+              <p className='text-text-sm text-[#F59E0B]'>
+                {t(
+                  "wallet.payment.predefinedBanner",
+                  "You're visiting a predefined payment.",
+                )}
+              </p>
+            </div>
+            <button
+              onClick={handleEdit}
+              className='shrink-0 text-text-sm font-medium text-[#F59E0B] hover:underline'
+            >
+              {t("wallet.payment.edit", "Edit")}
+            </button>
+          </div>
+        )}
+
         <div className='rounded-l border border-border bg-cardBg p-4'>
           <h2 className='text-text-lg font-semibold'>
             {t("wallet.payment.detailsTitle", "Payment details")}
@@ -241,15 +314,17 @@ export const PayPage = () => {
             )}
           </p>
 
-          <div className='mt-4 flex flex-col gap-1'>
-            <label className='text-text-sm font-medium'>
-              {t("wallet.payment.handle", "Handle")}
-            </label>
-            <HandleSelector
-              selectedHandle={selectedHandle}
-              onSelectHandle={handleSelectHandle}
-            />
-          </div>
+          {!isReadOnly && (
+            <div className='mt-4 flex flex-col gap-1'>
+              <label className='text-text-sm font-medium'>
+                {t("wallet.payment.handle", "Handle")}
+              </label>
+              <HandleSelector
+                selectedHandle={selectedHandle}
+                onSelectHandle={handleSelectHandle}
+              />
+            </div>
+          )}
 
           <div className='mt-4 flex flex-col gap-1'>
             <label className='text-text-sm font-medium'>
@@ -259,6 +334,7 @@ export const PayPage = () => {
             <AddressSelector
               selectedAddress={selectedAddress}
               onSelectAddress={handleSelectAddress}
+              disabled={isReadOnly}
             />
           </div>
 
@@ -267,13 +343,21 @@ export const PayPage = () => {
               {t("wallet.payment.amount")}{" "}
               <span className='text-primary'>*</span>
             </label>
-            <TextInput
-              inputClassName='h-10'
-              wrapperClassName='w-full'
-              value={amount}
-              onchange={handleAmountChange}
-              placeholder='0'
-            />
+            <div className='relative'>
+              <TextInput
+                inputClassName='h-10'
+                wrapperClassName='w-full'
+                value={amount}
+                onchange={handleAmountChange}
+                placeholder='0'
+                disabled={isReadOnly}
+              />
+              {usdEquivalent && (
+                <span className='absolute right-8 top-1/2 -translate-y-1/2 text-text-sm text-grayTextPrimary'>
+                  {usdEquivalent}
+                </span>
+              )}
+            </div>
           </div>
 
           <div className='mt-4 flex flex-col gap-1'>
@@ -290,6 +374,7 @@ export const PayPage = () => {
                 "Optional transaction message",
               )}
               maxLength={256}
+              disabled={isReadOnly}
             />
             <span className='text-text-xs text-grayTextSecondary'>
               {t(
@@ -327,6 +412,7 @@ export const PayPage = () => {
                       isSelected
                         ? "bg-primary/5 border-primary"
                         : "hover:border-primary/50 border-border",
+                      isReadOnly && "pointer-events-none opacity-60",
                     )}
                   >
                     <input
@@ -336,6 +422,7 @@ export const PayPage = () => {
                       checked={isSelected}
                       onChange={() => setSelectedDonation(option.value)}
                       className='h-4 w-4 shrink-0 accent-primary'
+                      disabled={isReadOnly}
                     />
                     {Icon && (
                       <Icon size={18} className='shrink-0 text-primary' />
@@ -353,22 +440,72 @@ export const PayPage = () => {
             </div>
           </div>
 
-          <div className='mt-6 flex flex-col items-center gap-2 min-[400px]:flex-row min-[400px]:justify-between'>
-            <Button
-              label={t("wallet.payment.generateLink")}
-              variant='secondary'
-              size='md'
-              leftIcon={<LinkIcon size={16} />}
-              onClick={handleGenerateLink}
-              disabled={!isFormValid}
-            />
-            <Button
-              label={t("wallet.payment.signTransaction")}
-              variant='primary'
-              size='md'
-              onClick={handleSign}
-              disabled={!isFormValid}
-            />
+          <div className='mt-6 flex flex-col gap-2 [&>*]:w-full md:flex-row md:items-center md:justify-between md:[&>*]:w-auto'>
+            {isReadOnly ? (
+              <>
+                <Button
+                  label={t("wallet.payment.mobileWallet", "Mobile wallet")}
+                  variant='secondary'
+                  size='md'
+                  leftIcon={<QrCode size={16} />}
+                  onClick={() => setShowMobileModal(true)}
+                  disabled={!isFormValid}
+                  className='!w-full !max-w-full md:!w-auto md:!max-w-fit'
+                />
+                <div className='flex flex-col gap-2 md:flex-row md:items-center'>
+                  <Button
+                    label={t("wallet.payment.payWithCard", "Pay with Card")}
+                    variant='primary'
+                    size='md'
+                    leftIcon={<CreditCard size={16} />}
+                    onClick={handlePayWithCard}
+                    disabled={!selectedAddress}
+                    className='!w-full !max-w-full md:!w-auto md:!max-w-fit'
+                  />
+                  <Button
+                    label={t("wallet.payment.payWithWallet", "Pay with Wallet")}
+                    variant='primary'
+                    size='md'
+                    leftIcon={<Wallet size={16} />}
+                    onClick={handleSign}
+                    disabled={!isFormValid}
+                    className='!w-full !max-w-full md:!w-auto md:!max-w-fit'
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <Button
+                  label={t("wallet.payment.generateLink")}
+                  variant='secondary'
+                  size='md'
+                  leftIcon={<LinkIcon size={16} />}
+                  onClick={() => setShowGenerateLinkModal(true)}
+                  disabled={!isFormValid}
+                  className='!w-full !max-w-full md:!w-auto md:!max-w-fit'
+                />
+                <div className='flex flex-col gap-2 md:flex-row md:items-center'>
+                  <Button
+                    label={t("wallet.payment.payWithCard", "Pay with Card")}
+                    variant='primary'
+                    size='md'
+                    leftIcon={<CreditCard size={16} />}
+                    onClick={handlePayWithCard}
+                    disabled={!selectedAddress}
+                    className='!w-full !max-w-full md:!w-auto md:!max-w-fit'
+                  />
+                  <Button
+                    label={t("wallet.payment.payWithWallet", "Pay with Wallet")}
+                    variant='primary'
+                    size='md'
+                    leftIcon={<Wallet size={16} />}
+                    onClick={handleSign}
+                    disabled={!isFormValid}
+                    className='!w-full !max-w-full md:!w-auto md:!max-w-fit'
+                  />
+                </div>
+              </>
+            )}
           </div>
         </div>
       </section>

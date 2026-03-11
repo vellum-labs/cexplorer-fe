@@ -13,11 +13,13 @@ import { toast } from "sonner";
 interface AddressSelectorProps {
   selectedAddress: string | null;
   onSelectAddress: (address: string | null) => void;
+  disabled?: boolean;
 }
 
 export const AddressSelector: FC<AddressSelectorProps> = ({
   selectedAddress,
   onSelectAddress,
+  disabled = false,
 }) => {
   const { t } = useAppTranslation("common");
   const [search, setSearch] = useState<string>("");
@@ -92,12 +94,14 @@ export const AddressSelector: FC<AddressSelectorProps> = ({
                 {selectedAddress.slice(-5)}
               </span>
             </button>
-            <button
-              onClick={handleClear}
-              className='shrink-0 text-text-sm text-grayTextPrimary hover:text-text'
-            >
-              {t("wallet.payment.clear", "Clear")}
-            </button>
+            {!disabled && (
+              <button
+                onClick={handleClear}
+                className='shrink-0 text-text-sm text-grayTextPrimary hover:text-text'
+              >
+                {t("wallet.payment.clear", "Clear")}
+              </button>
+            )}
           </div>
           <Link
             to='/address/$address'

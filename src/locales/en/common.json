@@ -218,7 +218,17 @@
       "teambuilding": "$t(shared:donationOptions.teambuilding)",
       "message": "Message",
       "messagePlaceholder": "Optional transaction message",
-      "messageHint": "Optional message stored on-chain (CIP-20)"
+      "messageHint": "Optional message stored on-chain (CIP-20)",
+      "predefinedBanner": "You're visiting a predefined payment.",
+      "edit": "Edit",
+      "mobileWallet": "Mobile wallet",
+      "payWithCard": "Pay with Card",
+      "payWithWallet": "Pay with Wallet",
+      "generateLinkTitle": "Payment link",
+      "generateLinkDescription": "Share this link or QR code to receive a payment.",
+      "mobileWalletTitle": "QR code payment via mobile wallets",
+      "mobileWalletDescription": "Scan this QR code with your mobile wallet to complete the payment.",
+      "close": "Close"
     },
     "delegation": {
       "title": "Delegation",
