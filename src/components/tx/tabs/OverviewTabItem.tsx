@@ -1,9 +1,12 @@
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
+import { useSearch } from "@tanstack/react-router";
 import type { useFetchTxDetail } from "@/services/tx";
 import type { FC } from "react";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { TxSankeyDiagram } from "../TxSankeyDiagram";
 import { ClassicFlowView } from "./ClassicFlowView";
+
+const OVERVIEW_SUBTAB_KEY = "tx_overview_subtab";
 
 interface OverviewTabItemProps {
   query: ReturnType<typeof useFetchTxDetail>;
@@ -12,6 +15,14 @@ interface OverviewTabItemProps {
 export const OverviewTabItem: FC<OverviewTabItemProps> = ({ query }) => {
   const { t } = useAppTranslation("common");
   const data = query.data?.data;
+  const search = useSearch({ strict: false });
+  const hasSubTabInUrl = !!search.subTab;
+  const savedSubTab = localStorage.getItem(OVERVIEW_SUBTAB_KEY);
+  const defaultTab = !hasSubTabInUrl && savedSubTab ? savedSubTab : undefined;
+
+  const handleTabClick = (key: string) => {
+    localStorage.setItem(OVERVIEW_SUBTAB_KEY, key);
+  };
 
   const tabs = [
     {
@@ -39,6 +50,8 @@ export const OverviewTabItem: FC<OverviewTabItemProps> = ({ query }) => {
       withPadding={false}
       withMargin={false}
       items={tabs}
+      activeTabValue={defaultTab}
+      onClick={handleTabClick}
     />
   );
 };
