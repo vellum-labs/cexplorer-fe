@@ -1,8 +1,14 @@
 import type { RawInsights } from "@/types/projectTypes";
 import { normalizeInsights } from "@/types/projectTypes";
 
+export const isPlaceholder = (value: string | undefined | null): boolean =>
+  !value || value.toLowerCase().includes("string");
+
+export const sanitize = (value: string | undefined | null): string =>
+  isPlaceholder(value) ? "" : value!;
+
 export const isValidLink = (url: string | undefined): url is string =>
-  !!url && url !== "..." && !url.includes("...");
+  !!url && url !== "..." && !url.includes("...") && !isPlaceholder(url);
 
 export const capitalize = (str: string): string =>
   str.charAt(0).toUpperCase() + str.slice(1);
