@@ -1,9 +1,9 @@
 import { colors } from "@/constants/colors";
 
-export const getPledgeColor = (pledge: number) => {
-  if (pledge > 2000) {
+export const getPledgeColor = (leverage: number, zeroPledge = false) => {
+  if (zeroPledge || leverage > 2000) {
     return colors.redText;
-  } else if (pledge > 1000) {
+  } else if (leverage > 1000) {
     return colors.yellowText;
   } else {
     return colors.greenText;
