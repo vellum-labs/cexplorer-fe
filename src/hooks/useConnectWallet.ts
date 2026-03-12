@@ -19,7 +19,7 @@ const defaultState: WalletState = {
 };
 
 export const useConnectWallet = () => {
-  const { setWalletState } = useWalletStore();
+  const { setWalletState, walletType, wallet } = useWalletStore();
   const { tokens } = useAuthTokensStore();
   const { setIsOpen } = useWalletConfigModalState();
   const token = useAuthToken();
@@ -31,6 +31,22 @@ export const useConnectWallet = () => {
     if (watchlistData && watchlistData !== watchlist)
       setWatchlist(watchlistData);
   }, [watchlistData]);
+
+  useEffect(() => {
+    if (walletType && !wallet) {
+      BrowserWallet.enable(walletType)
+        .then(enabledWallet => {
+          setWalletState({ wallet: enabledWallet });
+          const address = useWalletStore.getState().address;
+          if (address && !tokens[address]) {
+            setIsOpen(true);
+          }
+        })
+        .catch(() => {
+          setWalletState(defaultState);
+        });
+    }
+  }, [walletType, wallet]);
 
   const _connect = async (walletType: WalletType) => {
     const wallet = await BrowserWallet.enable(walletType);
