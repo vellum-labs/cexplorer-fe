@@ -2704,22 +2704,53 @@
     }
   },
   "adsPage": {
-    "title": "Inzerujte u nás",
+    "title": "Inzerujte na Cexploreru",
     "metaTitle": "Propagace a reklama | Cexplorer.io",
-    "subtitle": "Propagujte svůj projekt na Cexploreru",
+    "subtitle": "API, podpora instancí a trvalá struktura odkazů",
     "breadcrumb": "Inzerujte u nás",
-    "banner": "Reklamy budou k dispozici později.",
-    "stats": {
-      "monthlyPageViews": "Měsíční zobrazení stránek",
-      "uniqueUsers": "Unikátní uživatelé",
-      "adImpressions": "Zobrazení reklam",
-      "averageCtr": "Průměrné CTR"
-    },
     "reach": {
-      "title": "Oslovte své publikum!",
+      "title": "Proč inzerovat u nás?",
       "description1": "Cexplorer.io je přední Cardano blockchain explorer a analytická platforma, která nabízí přehledy o blockchainu, stakingu, governance a dalších.",
-      "description2": "Inzerujte u nás a oslovte publikum nadšenců a vývojářů Cardano, získejte viditelnost v rostoucí komunitě Cardano.",
-      "button": "$t(shared:promote)"
+      "description2": "Inzerujte u nás a oslovte Cardano vývojáře, investory, operátory stake poolů a rostoucí komunitu Cardano.",
+      "description3": "Podrobné metriky návštěvnosti jsou k dispozici na vyžádání.",
+      "button": "Inzerovat",
+      "features": {
+        "audience": {
+          "title": "Cardano publikum",
+          "description": "Vývojáři, investoři, operátoři a denní uživatelé aktivně využívající blockchain."
+        },
+        "intent": {
+          "title": "Uživatelé s vysokým záměrem",
+          "description": "Lidé vyhledávající transakce, pooly a governance, nejen prohlížející."
+        },
+        "trusted": {
+          "title": "Důvěryhodná platforma",
+          "description": "Hlavní Cardano explorer, na který se komunita spoléhá každý den."
+        }
+      }
+    },
+    "display": {
+      "title": "Displayová reklama na Cexploreru",
+      "description": "Nabízíme bannery, celostránkové bannery, textové a tlačítkové reklamy pro oslovení uživatelů Cardano a propagaci vašeho projektu nebo nadcházejícího launche.",
+      "features": {
+        "visibility": {
+          "title": "Vysoká viditelnost",
+          "description": "Reklamy se zobrazují v klíčových sekcích Cexploreru, zajišťující maximální viditelnost."
+        },
+        "reach": {
+          "title": "Rozšířený dosah",
+          "description": "Vaše reklama bude viditelná na Cexplorer.io mainnetu a také v obou testnetových prostředích."
+        },
+        "placement": {
+          "title": "Nerušivé umístění",
+          "description": "Upřednostňujeme uživatelský komfort, reklamy zobrazujeme tak, aby nenarušovaly navigaci."
+        }
+      },
+      "coinzillaText": "Spolupracujeme s",
+      "coinzillaDescription": ", důvěryhodnou reklamní sítí. Rezervovat můžete také přímo pomocí formuláře níže.",
+      "examples": "Příklady",
+      "email": "E-mail",
+      "coinzilla": "Coinzilla"
     },
     "pro": {
       "title": "Propagujte s Cexplorer",
@@ -2759,24 +2790,6 @@
         }
       },
       "comingSoon": "Již brzy"
-    },
-    "banners": {
-      "title": "Bannerová reklama na Cexploreru",
-      "description": "Bannerové reklamy nabízejí způsob, jak oslovit naše publikum a propagovat váš projekt nebo nadcházející launch.",
-      "features": {
-        "visibility": {
-          "title": "Vysoká viditelnost",
-          "description": "Reklamy se zobrazují v klíčových sekcích Cexploreru, zajišťující maximální viditelnost."
-        },
-        "reach": {
-          "title": "Rozšířený dosah",
-          "description": "Vaše reklama bude viditelná nejen na Cexplorer.io, ale také na všech preview/preprod instancích spravovaných Cexplorerem."
-        }
-      },
-      "coinzillaText": "Spolupracujeme s",
-      "coinzillaDescription": ", důvěryhodnou reklamní sítí, která manuálně kontroluje kampaně pro udržení kvality a relevance.",
-      "documentation": "$t(shared:documentation)",
-      "email": "E-mail"
     }
   },
   "apiPage": {

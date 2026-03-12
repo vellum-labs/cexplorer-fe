@@ -2704,22 +2704,53 @@
     }
   },
   "adsPage": {
-    "title": "Advertise with us",
+    "title": "Advertise on Cexplorer",
     "metaTitle": "Promotion & Advertising | Cexplorer.io",
-    "subtitle": "Promote your project on Cexplorer",
+    "subtitle": "API, instances support and permalink structure",
     "breadcrumb": "Advertise with us",
-    "banner": "Ads will be available at a later date.",
-    "stats": {
-      "monthlyPageViews": "Monthly page views",
-      "uniqueUsers": "Unique users",
-      "adImpressions": "Ad impressions",
-      "averageCtr": "Average CTR"
-    },
     "reach": {
-      "title": "Reach your audience!",
+      "title": "Why advertise with us?",
       "description1": "Cexplorer.io is the top Cardano blockchain explorer and analytics platform, offering insights into blockchain, staking, governance, and more.",
-      "description2": "Advertise with us, to reach an audience of Cardano enthusiasts and developers, gaining exposure within the growing Cardano community.",
-      "button": "$t(shared:promote)"
+      "description2": "Advertise with us to reach Cardano developers, investors, stake pool operators, and the growing Cardano community.",
+      "description3": "Detailed traffic metrics available on request.",
+      "button": "Advertise",
+      "features": {
+        "audience": {
+          "title": "Cardano-native audience",
+          "description": "Developers, investors, operators, and daily users actively using the chain."
+        },
+        "intent": {
+          "title": "High intent users",
+          "description": "People looking up transactions, pools, and governance, not just browsing."
+        },
+        "trusted": {
+          "title": "Trusted platform",
+          "description": "The go-to Cardano explorer, relied on by the community every day."
+        }
+      }
+    },
+    "display": {
+      "title": "Display advertising on Cexplorer",
+      "description": "We offer banners, sitewide banner, text, and button ads to reach Cardano users and promote your project or upcoming launch.",
+      "features": {
+        "visibility": {
+          "title": "High Visibility",
+          "description": "Ads appear on key sections of Cexplorer, ensuring maximum exposure."
+        },
+        "reach": {
+          "title": "Expanded Reach",
+          "description": "Your ad will be visible on Cexplorer.io mainnet and also both testnet environments."
+        },
+        "placement": {
+          "title": "Non-Intrusive Placement",
+          "description": "We prioritize user experience, displaying ads in a way that doesn't disrupt navigation."
+        }
+      },
+      "coinzillaText": "We work with",
+      "coinzillaDescription": ", a trusted advertising network. You can also book directly using the form below.",
+      "examples": "Examples",
+      "email": "E-mail",
+      "coinzilla": "Coinzilla"
     },
     "pro": {
       "title": "Promote with Cexplorer",
@@ -2759,24 +2790,6 @@
         }
       },
       "comingSoon": "Coming soon"
-    },
-    "banners": {
-      "title": "Banner Advertising on Cexplorer",
-      "description": "Banner advertisements offer a way to reach our engaged and promote your project or upcoming launch.",
-      "features": {
-        "visibility": {
-          "title": "High Visibility",
-          "description": "Ads appear on key sections of Cexplorer, ensuring maximum exposure."
-        },
-        "reach": {
-          "title": "Expanded Reach",
-          "description": "Your ad will not only be visible on Cexplorer.io but also on all preview/preprod instances managed by Cexplorer."
-        }
-      },
-      "coinzillaText": "We work with",
-      "coinzillaDescription": ", a trusted advertising network that manually reviews campaigns to maintain quality and relevance.",
-      "documentation": "$t(shared:documentation)",
-      "email": "E-mail"
     }
   },
   "apiPage": {
