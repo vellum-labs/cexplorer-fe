@@ -90,7 +90,6 @@ export const AdsPage = () => {
       adsCarousel={false}
       customPage={true}
     >
-      {/* Hidden SVG gradient definitions for icons */}
       <svg width='0' height='0' className='absolute' aria-hidden='true'>
         <defs>
           <linearGradient
@@ -123,7 +122,6 @@ export const AdsPage = () => {
       `}</style>
 
       <section className='flex w-full max-w-desktop flex-col items-center gap-16 px-mobile pt-6 pb-3 md:px-desktop'>
-        {/* Hero: Why advertise with us? */}
         <div className='flex w-full flex-col gap-10 md:flex-row md:items-stretch md:justify-between'>
           <div className='flex flex-col md:w-[50%]'>
             <h2 className='mb-4 text-display-xs font-bold'>
@@ -170,7 +168,6 @@ export const AdsPage = () => {
 
         <hr className='w-full border-border' />
 
-        {/* Display Advertising */}
         <div className='flex w-full flex-col gap-10 md:flex-row md:items-start md:justify-between'>
           <div className='flex flex-1 flex-col' style={{ minWidth: "280px" }}>
             <div className='mb-3 flex h-12 w-12 items-center justify-center rounded-xl border border-border'>
@@ -287,7 +284,6 @@ export const AdsPage = () => {
           </div>
         </div>
 
-        {/* Promote with Cexplorer PRO — image LEFT, text RIGHT */}
         <div className='flex w-full flex-col gap-10 md:flex-row md:items-start md:justify-between'>
           <div
             className='flex flex-1 items-center justify-center'
@@ -407,7 +403,6 @@ export const AdsPage = () => {
           </div>
         </div>
 
-        {/* Boosts — text LEFT, image RIGHT */}
         <div className='flex w-full flex-col gap-10 md:flex-row md:items-start md:justify-between'>
           <div className='flex flex-1 flex-col' style={{ minWidth: "280px" }}>
             <div className='mb-3 flex h-12 w-12 items-center justify-center rounded-xl border border-border'>
