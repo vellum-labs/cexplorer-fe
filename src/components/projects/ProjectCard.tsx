@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { useMemo } from "react";
 import type { ProjectListItem } from "@/types/projectTypes";
-import { isValidLink, capitalize, computeInsightStats } from "@/utils/projectHelpers";
+import { isValidLink, isPlaceholder, capitalize, computeInsightStats } from "@/utils/projectHelpers";
 
 import { useNavigate } from "@tanstack/react-router";
 import {
@@ -128,7 +128,7 @@ export const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
       )}
 
       {project.description_short &&
-        project.description_short !== "string (max ~200 chars)" && (
+        !isPlaceholder(project.description_short) && (
           <p className='line-clamp-2 text-text-sm text-grayTextPrimary'>
             {project.description_short}
           </p>

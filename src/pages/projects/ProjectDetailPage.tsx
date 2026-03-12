@@ -29,7 +29,7 @@ import { useFetchProjectDetail } from "@/services/projects";
 import type { ProjectDetail, ProjectProduct, ProjectScript } from "@/types/projectTypes";
 import type { ProjectScriptsTableColumns, ProjectProductsTableColumns, ProjectOnChainTableColumns } from "@/types/tableTypes";
 import { normalizeInsights } from "@/types/projectTypes";
-import { isValidLink, capitalize, createMockQuery, computeInsightStats } from "@/utils/projectHelpers";
+import { isValidLink, isPlaceholder, sanitize, capitalize, createMockQuery, computeInsightStats } from "@/utils/projectHelpers";
 
 export const ProjectDetailPage: FC = () => {
   const { t } = useAppTranslation();
@@ -64,7 +64,7 @@ export const ProjectDetailPage: FC = () => {
         label: t("projects.detail.tabs.scripts"),
         content: <ScriptsTab project={project} />,
         visible:
-          (project.scripts ?? []).filter(s => s.script_id).length > 0,
+          (project.scripts ?? []).filter(s => s.script_id && !isPlaceholder(s.script_id)).length > 0,
       },
       {
         key: "products",
@@ -78,9 +78,9 @@ export const ProjectDetailPage: FC = () => {
         content: <OnChainTab project={project} />,
         visible:
           (project.pools?.length ?? 0) > 0 ||
-          !!project.drep?.drep_id ||
-          (project.policy ?? []).filter(p => p.policy_id).length > 0 ||
-          (project.assets ?? []).filter(a => a.asset_id).length > 0,
+          (!!project.drep?.drep_id && !isPlaceholder(project.drep.drep_id)) ||
+          (project.policy ?? []).filter(p => p.policy_id && !isPlaceholder(p.policy_id)).length > 0 ||
+          (project.assets ?? []).filter(a => a.asset_id && !isPlaceholder(a.asset_id)).length > 0,
       },
     ];
   }, [project, normalizedInsights, t]);
@@ -175,7 +175,7 @@ const DetailsCard: FC<{
         </DetailRow>
       )}
 
-      {project.status && (
+      {project.status && !isPlaceholder(project.status) && (
         <DetailRow label={t("projects.detail.status")}>
           <Badge color='green'>
             {capitalize(project.status)}
@@ -267,8 +267,8 @@ const DescriptionCard: FC<{ project: ProjectDetail }> = ({ project }) => {
         {t("projects.detail.description")}
       </h3>
       <p className='whitespace-pre-line text-text-sm text-grayTextPrimary'>
-        {project.description_long ||
-          project.description_short ||
+        {sanitize(project.description_long) ||
+          sanitize(project.description_short) ||
           t("projects.detail.noDescription")}
       </p>
     </div>
@@ -293,7 +293,7 @@ const ScriptsTab: FC<{ project: ProjectDetail }> = ({ project }) => {
   } = useProjectScriptsTableStore()();
 
   const scripts = useMemo(
-    () => (project.scripts ?? []).filter(s => s.script_id),
+    () => (project.scripts ?? []).filter(s => s.script_id && !isPlaceholder(s.script_id)),
     [project.scripts],
   );
 
@@ -307,7 +307,7 @@ const ScriptsTab: FC<{ project: ProjectDetail }> = ({ project }) => {
           widthPx: 150,
           render: (item: ProjectScript) => (
             <span className='font-semibold text-text'>
-              {item.script_name || "-"}
+              {sanitize(item.script_name) || "-"}
             </span>
           ),
         },
@@ -316,7 +316,7 @@ const ScriptsTab: FC<{ project: ProjectDetail }> = ({ project }) => {
           title: <p>{t("projects.detail.scripts.description")}</p>,
           visible: columnsVisibility.description,
           widthPx: 250,
-          render: (item: ProjectScript) => item.description || "-",
+          render: (item: ProjectScript) => sanitize(item.description) || "-",
         },
         {
           key: "script_id",
@@ -454,7 +454,7 @@ const ProductsTab: FC<{ project: ProjectDetail }> = ({ project }) => {
           widthPx: 180,
           render: (item: ProjectProduct) => (
             <span className='font-semibold text-text'>
-              {item.name || "-"}
+              {sanitize(item.name) || "-"}
             </span>
           ),
         },
@@ -597,11 +597,11 @@ const OnChainTab: FC<{ project: ProjectDetail }> = ({ project }) => {
       }
     }
 
-    if (project.drep?.drep_id) {
+    if (project.drep?.drep_id && !isPlaceholder(project.drep.drep_id)) {
       result.push({
         type: t("projects.detail.onChain.drep"),
         kind: "drep",
-        name: project.drep.name,
+        name: sanitize(project.drep.name),
         id: project.drep.drep_id,
         description: "",
       });
@@ -609,26 +609,26 @@ const OnChainTab: FC<{ project: ProjectDetail }> = ({ project }) => {
 
     if (project.policy?.length) {
       for (const pol of project.policy) {
-        if (!pol.policy_id) continue;
+        if (!pol.policy_id || isPlaceholder(pol.policy_id)) continue;
         result.push({
           type: t("projects.detail.onChain.policies"),
           kind: "policy",
-          name: pol.policy_name,
+          name: sanitize(pol.policy_name),
           id: pol.policy_id,
-          description: pol.description,
+          description: sanitize(pol.description),
         });
       }
     }
 
     if (project.assets?.length) {
       for (const asset of project.assets) {
-        if (!asset.asset_id) continue;
+        if (!asset.asset_id || isPlaceholder(asset.asset_id)) continue;
         result.push({
           type: t("projects.detail.onChain.assets"),
           kind: "asset",
-          name: asset.asset_name,
+          name: sanitize(asset.asset_name),
           id: asset.asset_id,
-          description: asset.description,
+          description: sanitize(asset.description),
         });
       }
     }
@@ -665,7 +665,7 @@ const OnChainTab: FC<{ project: ProjectDetail }> = ({ project }) => {
 
             return (
               <div className='flex flex-col'>
-                {item.name && (
+                {item.name && !isPlaceholder(item.name) && (
                   <Link to={linkTo} className='font-semibold text-primary'>
                     {item.name}
                   </Link>
@@ -687,7 +687,7 @@ const OnChainTab: FC<{ project: ProjectDetail }> = ({ project }) => {
           title: <p>{t("tableSettings.onchain_description")}</p>,
           visible: columnsVisibility.description,
           widthPx: 350,
-          render: (item: OnChainRow) => item.description || "-",
+          render: (item: OnChainRow) => sanitize(item.description) || "-",
         },
       ].sort(
         (a, b) =>
