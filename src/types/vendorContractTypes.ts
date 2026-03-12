@@ -211,6 +211,18 @@ export interface VendorContractDetailResponse {
 }
 
 // Milestones types
+export interface MilestoneEvidence {
+  anchorUrl: string[];
+  label: string;
+}
+
+export interface MilestoneCompletion {
+  tx_hash: string;
+  time: number;
+  description: string;
+  evidence: MilestoneEvidence[];
+}
+
 export interface Milestone {
   id: number;
   milestone_id: string;
@@ -221,7 +233,7 @@ export interface Milestone {
   amount_lovelace: number | null;
   amount_ada: number | null;
   status: "pending" | "completed" | "withdrawn";
-  completion: string | null; // ISO date string
+  completion: MilestoneCompletion | null;
   disbursement: string | null; // ISO date string
   project: {
     project_id: string;

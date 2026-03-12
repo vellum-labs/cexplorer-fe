@@ -65,7 +65,9 @@ export const TreasuryOverviewCards: FC<TreasuryOverviewCardsProps> = ({
     {
       label: labels.statistics.totalDistributed,
       value: (
-        <Tooltip content={`₳${formatNumber(Math.round(totalDisbursed))}/${formatNumber(Math.round(totalAllocated))} ADA`}>
+        <Tooltip
+          content={`₳${formatNumber(Math.round(totalDisbursed))}/${formatNumber(Math.round(totalAllocated))} ADA`}
+        >
           <span className='font-medium'>
             ₳{formatNumberWithSuffix(Math.round(totalDisbursed))}/
             {formatNumberWithSuffix(Math.round(totalAllocated))} ADA
@@ -85,8 +87,7 @@ export const TreasuryOverviewCards: FC<TreasuryOverviewCardsProps> = ({
       label: labels.statistics.completedMilestones,
       value: (
         <span className='font-medium'>
-          {milestones?.completed_count || 0}/
-          {milestones?.total_count || 0}
+          {milestones?.completed_count || 0}/{milestones?.total_count || 0}
         </span>
       ),
     },
@@ -138,29 +139,27 @@ export const TreasuryOverviewCards: FC<TreasuryOverviewCardsProps> = ({
           {labels.budget.description}
         </p>
 
-        <div className='mt-2 flex flex-wrap items-end gap-3'>
-          <div className='flex flex-col'>
-            <span className='text-text-xs text-grayTextSecondary'>
-              {labels.budget.currency}
-            </span>
-            <span className='text-text-sm font-medium'>ADA</span>
-          </div>
+        <div className='mt-5 grid grid-cols-2 gap-x-4 gap-y-2 sm:grid-cols-4'>
+          <span className='text-text-xs text-grayTextSecondary'>
+            {labels.budget.currency}
+          </span>
+          <span className='text-text-xs text-grayTextSecondary'>
+            {labels.budget.budgetLabel}
+          </span>
+          <span className='text-text-xs text-grayTextSecondary'>
+            {labels.budget.totalSpent}
+          </span>
+          <span className='text-text-xs text-grayTextSecondary'>
+            {labels.budget.remainingBudget}
+          </span>
 
-          <div className='flex flex-col'>
-            <span className='text-text-xs text-grayTextSecondary'>
-              {labels.budget.budgetLabel}
+          <span className='text-text-sm font-medium'>ADA</span>
+          <Tooltip content={`₳${formatNumber(Math.round(currentBalance))}`}>
+            <span className='text-text-sm font-medium'>
+              ₳{formatNumberWithSuffix(Math.round(currentBalance))}
             </span>
-            <Tooltip content={`₳${formatNumber(Math.round(currentBalance))}`}>
-              <span className='text-text-sm font-medium'>
-                ₳{formatNumberWithSuffix(Math.round(currentBalance))}
-              </span>
-            </Tooltip>
-          </div>
-
-          <div className='flex flex-col'>
-            <span className='text-text-xs text-grayTextSecondary'>
-              {labels.budget.totalSpent}
-            </span>
+          </Tooltip>
+          <div>
             <div className='flex items-center gap-1'>
               <Tooltip content={`₳${formatNumber(Math.round(totalDisbursed))}`}>
                 <span className='text-text-sm font-medium'>
@@ -171,24 +170,23 @@ export const TreasuryOverviewCards: FC<TreasuryOverviewCardsProps> = ({
                 {spentPercentage}%
               </span>
             </div>
-            <div className='mt-1/2 h-1 w-24 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700'>
+            <div className='rounded-full mt-1/2 h-1 w-full max-w-[160px] overflow-hidden bg-gray-200 dark:bg-gray-700'>
               <div
-                className='h-full rounded-full bg-primary'
+                className='rounded-full h-full bg-primary'
                 style={{ width: `${spentPercentage}%` }}
               />
             </div>
           </div>
-
-          <div className='flex flex-col'>
-            <span className='text-text-xs text-grayTextSecondary'>
-              {labels.budget.remainingBudget}
+          <Tooltip
+            content={`₳${formatNumber(Math.round(totalAllocated - totalDisbursed))}`}
+          >
+            <span className='text-text-sm font-medium'>
+              ₳
+              {formatNumberWithSuffix(
+                Math.round(totalAllocated - totalDisbursed),
+              )}
             </span>
-            <Tooltip content={`₳${formatNumber(Math.round(totalAllocated - totalDisbursed))}`}>
-              <span className='text-text-sm font-medium'>
-                ₳{formatNumberWithSuffix(Math.round(totalAllocated - totalDisbursed))}
-              </span>
-            </Tooltip>
-          </div>
+          </Tooltip>
         </div>
       </div>
 
