@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
+import { AdsCarousel, AdCard } from "@vellumlabs/cexplorer-sdk";
 import { OverviewStatCard } from "@vellumlabs/cexplorer-sdk";
 import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
 import { Tabs } from "@vellumlabs/cexplorer-sdk";
@@ -29,6 +29,13 @@ export const GovernancePage: FC = () => {
   const miscConst = useMiscConst(basicData?.data?.version?.const);
 
   const { data: drepStat } = drepStatQuery;
+
+  const boxBannerAds = basicData?.data?.ads?.filter(
+    ad => ad.type === "box_banner",
+  );
+  const randomBoxBanner = boxBannerAds?.length
+    ? boxBannerAds[Math.floor(Math.random() * boxBannerAds.length)]
+    : undefined;
 
   const statCards = [
     {
@@ -111,25 +118,29 @@ export const GovernancePage: FC = () => {
       ),
       footer: <></>,
     },
-    {
-      key: "featured",
-      icon: undefined,
-      label: (
-        <AdsCarousel
-          singleItem
-          className='!w-full !max-w-full flex-grow overflow-hidden'
-          adCardClassname='!border-none !py-0'
-          filterByType='drep'
-          maxWidth={false}
-          generateImageUrl={generateImageUrl}
-          miscBasicQuery={miscBasicQuery}
-        />
-      ),
-      content: <></>,
-      footer: <></>,
-      className: "!px-0 overflow-hidden",
-      fullContentHeight: true,
-    },
+    ...(!randomBoxBanner
+      ? [
+          {
+            key: "featured",
+            icon: undefined,
+            label: (
+              <AdsCarousel
+                singleItem
+                className='!w-full !max-w-full flex-grow overflow-hidden'
+                adCardClassname='!border-none !py-0'
+                filterByType='drep'
+                maxWidth={false}
+                generateImageUrl={generateImageUrl}
+                miscBasicQuery={miscBasicQuery}
+              />
+            ),
+            content: <></>,
+            footer: <></>,
+            className: "!px-0 overflow-hidden",
+            fullContentHeight: true,
+          },
+        ]
+      : []),
   ];
 
   const tabs = [
@@ -208,29 +219,42 @@ export const GovernancePage: FC = () => {
               />
             </>
           ) : (
-            statCards.map(
-              ({
-                icon,
-                key,
-                label,
-                content,
-                footer,
-                className,
-                fullContentHeight,
-              }) => {
-                return (
-                  <OverviewStatCard
-                    key={key}
-                    icon={icon}
-                    title={label}
-                    value={content}
-                    fullContentHeight={fullContentHeight}
-                    description={footer}
-                    className={`min-w-[300px] ${className ? className : ""}`}
+            <>
+              {statCards.map(
+                ({
+                  icon,
+                  key,
+                  label,
+                  content,
+                  footer,
+                  className,
+                  fullContentHeight,
+                }) => {
+                  return (
+                    <OverviewStatCard
+                      key={key}
+                      icon={icon}
+                      title={label}
+                      value={content}
+                      fullContentHeight={fullContentHeight}
+                      description={footer}
+                      className={`min-w-[300px] ${className ? className : ""}`}
+                    />
+                  );
+                },
+              )}
+              {randomBoxBanner && (
+                <div className='relative min-h-[100px] min-w-[300px] shrink grow basis-[280px] overflow-hidden rounded-l border border-border bg-cardBg shadow-md'>
+                  <AdCard
+                    data={randomBoxBanner.data as any}
+                    className='!border-none !shadow-none !rounded-none h-full'
                   />
-                );
-              },
-            )
+                  <div className='absolute right-2 top-1.5 flex h-[24px] w-[32px] items-center justify-center rounded-xs border border-border bg-background text-text-xs font-medium text-text'>
+                    <span>{t("sdk:header.adLabel")}</span>
+                  </div>
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>

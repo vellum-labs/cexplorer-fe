@@ -68,7 +68,7 @@ const RootComponent = () => {
       ? miscBasic?.data?.data?.ads
       : false;
 
-  const TOP_ADS_TYPE = "top_featured";
+  const TOP_ADS_TYPE = "sitewide_top";
 
   const topAds = miscBasicAds
     ? miscBasicAds.filter(item => item.type === TOP_ADS_TYPE)

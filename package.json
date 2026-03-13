@@ -155,7 +155,11 @@
     "lodash": "^4.17.21",
     "prismjs": "^1.30.0",
     "libsodium-wrappers-sumo": "0.7.15",
-    "libsodium-sumo": "0.7.15"
+    "libsodium-sumo": "0.7.15",
+    "@tanstack/react-router": "1.160.2",
+    "@tanstack/router-core": "1.160.0",
+    "@tanstack/react-store": "0.8.1",
+    "@tanstack/history": "1.154.14"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
