@@ -648,6 +648,20 @@ export interface AssetMintOptions
   columnsOrder: (keyof AssetMintColumns)[];
 }
 
+export interface StablecoinSummaryColumns {
+  source: boolean;
+  stablecoin: boolean;
+  supply: boolean;
+  dominance: boolean;
+  last_mint: boolean;
+}
+
+export interface StablecoinSummaryOptions
+  extends Pick<TableOptionsCore<StablecoinSummaryColumns>, "isResponsive" | "rows"> {
+  columnsVisibility: StablecoinSummaryColumns;
+  columnsOrder: (keyof StablecoinSummaryColumns)[];
+}
+
 export interface DeFiTokenTableColumns {
   order: boolean;
   token: boolean;
