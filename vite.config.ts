@@ -16,6 +16,21 @@ const __dirname = dirname(__filename);
 export default defineConfig({
   plugins: [
     {
+      name: "dedup-tanstack",
+      enforce: "pre",
+      resolveId(source, importer) {
+        if (
+          source.startsWith("@tanstack/") &&
+          importer &&
+          importer.includes("@vellumlabs/cexplorer-sdk")
+        ) {
+          return this.resolve(source, path.resolve(__dirname, "src/main.tsx"), {
+            skipSelf: true,
+          });
+        }
+      },
+    },
+    {
       name: "strip-data-modulepreload",
       apply: "build",
       transformIndexHtml(html: string) {

@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import { HeaderBanner } from "../HeaderBanner";
 import {
   AdsCarousel,
+  AdCard,
   AddBookmarkModal,
   EditBookmarkModal,
   RemoveBookmarkModal,
@@ -98,10 +99,13 @@ export const PageBase: FC<PageBaseProps> = ({
       ? miscBasicQuery?.data?.data?.ads
       : false;
 
-  const HOMEPAGE_ADS_TYPE = "header_featured";
+  const HOMEPAGE_ADS_TYPE = "box_banner";
 
-  const homepageAds = miscBasicAds
+  const homepageAdsArr = miscBasicAds
     ? miscBasicAds.filter(item => item.type === HOMEPAGE_ADS_TYPE)
+    : undefined;
+  const randomHomepageAd = homepageAdsArr?.length
+    ? homepageAdsArr[Math.floor(Math.random() * homepageAdsArr.length)]
     : undefined;
 
   const metadataTitleInit = metadataOverride
@@ -132,10 +136,8 @@ export const PageBase: FC<PageBaseProps> = ({
           isHomepage={isHomepage}
           withoutSearch={withoutSearch}
           homepageAd={
-            homepageAd && homepageAds ? (
-              <HomepageAds
-                miscBasicAds={homepageAds.sort(() => Math.random() - 0.5)}
-              />
+            homepageAd && randomHomepageAd ? (
+              <AdCard data={randomHomepageAd.data} className='!border-none !shadow-none !rounded-none h-full' />
             ) : undefined
           }
           customPage={customPage}
