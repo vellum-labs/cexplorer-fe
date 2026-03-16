@@ -16,6 +16,7 @@ import {
   DelegationConfirmModal,
   type DelegationInfo,
 } from "@/components/wallet/DelegationConfirmModal";
+import { PreDelegationModal } from "./PreDelegationModal";
 import { generateImageUrl } from "@/utils/generateImageUrl";
 import {
   Image,
@@ -65,6 +66,7 @@ export const PortfolioComposition: FC = () => {
     usePortfolioData();
   const [activeTab, setActiveTab] = useState<TabType>("category");
   const [showWalletModal, setShowWalletModal] = useState(false);
+  const [showPreDelegationModal, setShowPreDelegationModal] = useState(false);
   const [showDelegationModal, setShowDelegationModal] = useState(false);
   const [copiedDeleg, setCopiedDeleg] = useState<string | null>(null);
   const [delegationInfo, setDelegationInfo] = useState<DelegationInfo | null>(null);
@@ -215,9 +217,9 @@ export const PortfolioComposition: FC = () => {
   const { connect } = useConnectWallet();
 
   useEffect(() => {
-    if (wallet && address && walletType && delegationInfo && !showDelegationModal) {
+    if (wallet && address && walletType && delegationInfo && !showPreDelegationModal && !showDelegationModal) {
       setShowWalletModal(false);
-      setShowDelegationModal(true);
+      setShowPreDelegationModal(true);
     }
   }, [wallet, address, walletType]);
 
@@ -239,6 +241,13 @@ export const PortfolioComposition: FC = () => {
       return;
     }
 
+    setShowPreDelegationModal(true);
+  };
+
+  const handlePreDelegationContinue = (ident: string) => {
+    if (!delegationInfo) return;
+    setDelegationInfo({ ...delegationInfo, ident });
+    setShowPreDelegationModal(false);
     setShowDelegationModal(true);
   };
 
@@ -560,6 +569,19 @@ export const PortfolioComposition: FC = () => {
 
       {showWalletModal && (
         <ConnectWalletModal onClose={() => setShowWalletModal(false)} />
+      )}
+      {showPreDelegationModal && delegationInfo && (
+        <PreDelegationModal
+          portfolioStakeAddress={selectedWallet?.stakeAddress}
+          portfolioAddress={selectedWallet?.originalAddress}
+          delegationType={delegationInfo.type}
+          currentIdent={delegationInfo.ident}
+          onContinue={handlePreDelegationContinue}
+          onCancel={() => {
+            setShowPreDelegationModal(false);
+            setDelegationInfo(null);
+          }}
+        />
       )}
       {showDelegationModal && delegationInfo && (
         <DelegationConfirmModal

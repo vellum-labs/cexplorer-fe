@@ -1250,6 +1250,21 @@
       "delegate": "Delegate",
       "redelegate": "Redelegate"
     },
+    "preDelegation": {
+      "subtitle": "Choose a stake pool / DRep to delegate to.",
+      "connectedWallet": "Connected wallet",
+      "walletMismatch": "Connected wallet doesn't match the selected portfolio wallet ({{address}}). Please connect the correct wallet to delegate.",
+      "useAnyway": "Use connected wallet anyway.",
+      "selectPool": "Select a stake pool / DRep",
+      "selectPoolDescription": "You can add a donation directly to your transaction to support development of Cexplorer.",
+      "currentDelegation": "Currently delegated pool",
+      "currentDrep": "Current DRep",
+      "currentDrepDelegation": "Currently delegated DRep",
+      "continue": "Continue",
+      "selectDRep": "Select a DRep",
+      "searchDRep": "Search for a DRep...",
+      "noDRepsFound": "No DReps found"
+    },
     "wallets": {
       "title": "Wallets",
       "subtitle": "Tracked wallets",
