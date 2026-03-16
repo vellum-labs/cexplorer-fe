@@ -1,7 +1,12 @@
 import type { TxAsset } from "@/types/assetsTypes";
-import { AdaWithTooltip, getAssetFingerprint } from "@vellumlabs/cexplorer-sdk";
+import {
+  getAssetFingerprint,
+  formatNumberWithSuffix,
+  formatNumber,
+  Tooltip,
+  Copy,
+} from "@vellumlabs/cexplorer-sdk";
 import { renderAssetName } from "@/utils/asset/renderAssetName";
-import { formatNumberWithSuffix } from "@vellumlabs/cexplorer-sdk";
 import { Link } from "@tanstack/react-router";
 import { AdaHandleBadge } from "@vellumlabs/cexplorer-sdk";
 import { adaHandlePolicies } from "@/constants/confVariables";
@@ -39,11 +44,21 @@ const AssetLink = ({ asset, type, className }: Props) => {
         {renderAssetName({ asset, fingerprint, type: "long" })}
       </span>
       <span className='ml-auto min-w-fit pl-1'>
-        {`${type === "input" ? "-" : ""}`}
-        <AdaWithTooltip
-          data={asset.quantity / divideNumber}
-          triggerClassName='!text-primary'
-        />
+        <Tooltip
+          content={
+            <p className='flex items-center gap-1/2 text-text'>
+              <span className='text-text-sm'>
+                {formatNumber(asset.quantity / divideNumber)}
+              </span>
+              <Copy copyText={String(asset.quantity / divideNumber)} />
+            </p>
+          }
+        >
+          <span className='text-sm !text-primary'>
+            {type === "input" ? "-" : ""}
+            {formatNumberWithSuffix(asset.quantity / divideNumber)}
+          </span>
+        </Tooltip>
       </span>
     </Link>
   );
