@@ -43,10 +43,14 @@ export const HeaderBanner = ({
 }: HeaderBannerProps) => {
   const { t } = useAppTranslation("common");
   const { locale } = useLocaleStore();
-  const miscBasic = useFetchMiscBasic(true);
-  const textAd = miscBasic.data?.data?.ads?.find(
+  const miscBasicQuery = useFetchMiscBasic(true);
+  const miscBasic = miscBasicQuery;
+  const textAds = miscBasic.data?.data?.ads?.filter(
     ad => ad.type === "text_ad",
   );
+  const textAd = textAds?.length
+    ? textAds[Math.floor(Math.random() * textAds.length)]
+    : undefined;
 
   return (
     <Header
