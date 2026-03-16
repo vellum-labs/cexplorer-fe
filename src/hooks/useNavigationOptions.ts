@@ -233,6 +233,10 @@ export const useNavigationOptions = () => {
           label: t("education.walletComparison"),
           href: "/wallet",
         },
+        {
+          label: t("education.projects"),
+          href: "/project",
+        },
       ],
       settingsOptions: [
         {

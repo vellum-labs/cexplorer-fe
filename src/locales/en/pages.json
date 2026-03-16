@@ -973,10 +973,20 @@
           "fund": "Fund"
         },
         "expandedDetails": {
-          "description": "Description",
-          "evidenceSubmission": "Evidence Submission",
-          "open": "Open"
+          "description": "Milestone Criteria",
+          "milestoneCriteria": "Milestone Criteria",
+          "evidenceSubmission": "Evidence Submissions",
+          "open": "Open",
+          "noCriteria": "No acceptance criteria specified.",
+          "noEvidence": "No evidence submitted."
         }
+      },
+      "schedule": {
+        "title": "Payment Schedule",
+        "evidence": "Evidence",
+        "totalBudget": "Total Budget",
+        "evidenceSubmitted": "Submitted",
+        "evidenceNotSubmitted": "Not submitted"
       }
     }
   },

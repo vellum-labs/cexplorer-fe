@@ -483,9 +483,24 @@
     "ada_price": "Cena ADA",
     "maker": "Tvůrce",
     "platform": "Platforma",
+    "script_name": "Název",
+    "script_id": "ID skriptu",
+    "script_description": "Popis",
+    "product_name": "Název",
+    "product_website": "Web",
+    "product_app": "Aplikace",
+    "product_docs": "Dokumentace",
+    "product_github": "Github",
+    "onchain_type": "Typ",
+    "onchain_name": "Název",
+    "onchain_description": "Popis",
     "share": "$t(shared:labels.share)",
     "epoch_stake": "$t(shared:epochStake)",
-    "loyalty": "$t(shared:loyalty)"
+    "loyalty": "$t(shared:loyalty)",
+    "source": "Zdroj",
+    "stablecoin": "Stablecoin",
+    "dominance": "Dominance",
+    "last_mint": "Poslední ražba"
   },
   "analytics": {
     "account": "$t(shared:labels.account)",
@@ -1435,7 +1450,12 @@
     "assetVolume": "Objem aktiv",
     "holders": "Držitelé",
     "mintEvents": "Události ražby",
+    "mints": "Ražba",
+    "summary": "Přehled",
     "stablecoin": "Stablecoin",
+    "source": "Zdroj",
+    "supply": "Nabídka",
+    "lastMint": "Poslední ražba",
     "inflow": "Příliv",
     "outflow": "Odliv"
   },
@@ -2693,22 +2713,53 @@
     }
   },
   "adsPage": {
-    "title": "Inzerujte u nás",
+    "title": "Inzerujte na Cexploreru",
     "metaTitle": "Propagace a reklama | Cexplorer.io",
-    "subtitle": "Propagujte svůj projekt na Cexploreru",
+    "subtitle": "API, podpora instancí a trvalá struktura odkazů",
     "breadcrumb": "Inzerujte u nás",
-    "banner": "Reklamy budou k dispozici později.",
-    "stats": {
-      "monthlyPageViews": "Měsíční zobrazení stránek",
-      "uniqueUsers": "Unikátní uživatelé",
-      "adImpressions": "Zobrazení reklam",
-      "averageCtr": "Průměrné CTR"
-    },
     "reach": {
-      "title": "Oslovte své publikum!",
+      "title": "Proč inzerovat u nás?",
       "description1": "Cexplorer.io je přední Cardano blockchain explorer a analytická platforma, která nabízí přehledy o blockchainu, stakingu, governance a dalších.",
-      "description2": "Inzerujte u nás a oslovte publikum nadšenců a vývojářů Cardano, získejte viditelnost v rostoucí komunitě Cardano.",
-      "button": "$t(shared:promote)"
+      "description2": "Inzerujte u nás a oslovte Cardano vývojáře, investory, operátory stake poolů a rostoucí komunitu Cardano.",
+      "description3": "Podrobné metriky návštěvnosti jsou k dispozici na vyžádání.",
+      "button": "Inzerovat",
+      "features": {
+        "audience": {
+          "title": "Cardano publikum",
+          "description": "Vývojáři, investoři, operátoři a denní uživatelé aktivně využívající blockchain."
+        },
+        "intent": {
+          "title": "Uživatelé s vysokým záměrem",
+          "description": "Lidé vyhledávající transakce, pooly a governance, nejen prohlížející."
+        },
+        "trusted": {
+          "title": "Důvěryhodná platforma",
+          "description": "Hlavní Cardano explorer, na který se komunita spoléhá každý den."
+        }
+      }
+    },
+    "display": {
+      "title": "Displayová reklama na Cexploreru",
+      "description": "Nabízíme bannery, celostránkové bannery, textové a tlačítkové reklamy pro oslovení uživatelů Cardano a propagaci vašeho projektu nebo nadcházejícího launche.",
+      "features": {
+        "visibility": {
+          "title": "Vysoká viditelnost",
+          "description": "Reklamy se zobrazují v klíčových sekcích Cexploreru, zajišťující maximální viditelnost."
+        },
+        "reach": {
+          "title": "Rozšířený dosah",
+          "description": "Vaše reklama bude viditelná na Cexplorer.io mainnetu a také v obou testnetových prostředích."
+        },
+        "placement": {
+          "title": "Nerušivé umístění",
+          "description": "Upřednostňujeme uživatelský komfort, reklamy zobrazujeme tak, aby nenarušovaly navigaci."
+        }
+      },
+      "coinzillaText": "Spolupracujeme s",
+      "coinzillaDescription": ", důvěryhodnou reklamní sítí. Rezervovat můžete také přímo pomocí formuláře níže.",
+      "examples": "Příklady",
+      "email": "E-mail",
+      "coinzilla": "Coinzilla"
     },
     "pro": {
       "title": "Propagujte s Cexplorer",
@@ -2748,24 +2799,6 @@
         }
       },
       "comingSoon": "Již brzy"
-    },
-    "banners": {
-      "title": "Bannerová reklama na Cexploreru",
-      "description": "Bannerové reklamy nabízejí způsob, jak oslovit naše publikum a propagovat váš projekt nebo nadcházející launch.",
-      "features": {
-        "visibility": {
-          "title": "Vysoká viditelnost",
-          "description": "Reklamy se zobrazují v klíčových sekcích Cexploreru, zajišťující maximální viditelnost."
-        },
-        "reach": {
-          "title": "Rozšířený dosah",
-          "description": "Vaše reklama bude viditelná nejen na Cexplorer.io, ale také na všech preview/preprod instancích spravovaných Cexplorerem."
-        }
-      },
-      "coinzillaText": "Spolupracujeme s",
-      "coinzillaDescription": ", důvěryhodnou reklamní sítí, která manuálně kontroluje kampaně pro udržení kvality a relevance.",
-      "documentation": "$t(shared:documentation)",
-      "email": "E-mail"
     }
   },
   "apiPage": {
@@ -3104,6 +3137,76 @@
     "title": "Portfolio Tracker",
     "breadcrumb": "Portfolio",
     "comingSoon": "Portfolio Tracker bude brzy k dispozici."
+  },
+  "projects": {
+    "page": {
+      "title": "Cardano projekty",
+      "breadcrumb": "Cardano projekty",
+      "addProject": "Přidat projekt",
+      "allCategories": "Všechny kategorie",
+      "searchPlaceholder": "Hledat projekt...",
+      "searchCategories": "Hledat kategorie...",
+      "noCategoryFound": "Kategorie nenalezena."
+    },
+    "card": {
+      "lastActivity": "Poslední aktivita",
+      "totalCommits": "Celkový počet commitů",
+      "repositories": "Repozitáře"
+    },
+    "activity": {
+      "title": "Vývojová aktivita",
+      "totalCommits": "Celkový počet commitů za vybrané období",
+      "activeRepositories": "Aktivní repozitáře",
+      "organization": "Organizace",
+      "organizations": "Organizace (vše)",
+      "commits": "Commity"
+    },
+    "detail": {
+      "details": "Detaily",
+      "description": "Popis",
+      "projectName": "Název projektu",
+      "category": "Kategorie",
+      "status": "Stav",
+      "launched": "Spuštěno",
+      "lastActivity": "Poslední aktivita",
+      "totalCommits": "Celkový počet commitů",
+      "repositories": "Repozitáře",
+      "links": "Odkazy",
+      "noDescription": "Popis není k dispozici.",
+      "tabs": {
+        "developmentActivity": "Vývojová aktivita",
+        "scripts": "Skripty",
+        "products": "Produkty",
+        "onChainAssociations": "On-Chain asociace"
+      },
+      "scripts": {
+        "name": "Název",
+        "scriptId": "ID skriptu",
+        "description": "Popis",
+        "noScripts": "Žádné skripty nenalezeny."
+      },
+      "products": {
+        "noProducts": "Žádné produkty nenalezeny.",
+        "website": "Web",
+        "app": "Aplikace",
+        "docs": "Dokumentace",
+        "github": "GitHub"
+      },
+      "onChain": {
+        "assets": "Aktiva",
+        "policies": "Politiky",
+        "drep": "DRep",
+        "pools": "Stake pooly",
+        "noAssets": "Žádná aktiva nenalezena.",
+        "noPolicies": "Žádné politiky nenalezeny.",
+        "noDrep": "Žádný DRep není přiřazen.",
+        "noPools": "Žádné stake pooly nejsou přiřazeny.",
+        "assetName": "Název aktiva",
+        "assetId": "ID aktiva",
+        "policyName": "Název politiky",
+        "policyId": "ID politiky"
+      }
+    }
   },
   "bookmark": {
     "addModal": {

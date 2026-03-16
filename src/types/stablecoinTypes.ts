@@ -32,6 +32,7 @@ export interface StablecoinMintFlow {
 
 export interface StablecoinData {
   fingerprint: string;
+  source: string;
   quantity: number;
   last_mint: string;
   registry: StablecoinRegistry;

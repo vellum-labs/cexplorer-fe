@@ -3,17 +3,19 @@ import { useMemo, useState } from "react";
 import {
   useFetchVendorContractEventsInfinite,
   type VendorContractEvent,
+  type Milestone,
 } from "@/services/vendorContracts";
 import {
   GlobalTable,
-  formatNumber,
+  formatNumberWithSuffix,
   formatString,
   formatDate,
   useThemeStore,
   TableSettingsDropdown,
+  SafetyLinkModal,
 } from "@vellumlabs/cexplorer-sdk";
 import { Link, useSearch } from "@tanstack/react-router";
-import { ChevronDown, FileText } from "lucide-react";
+import { ChevronDown, FileText, ExternalLink } from "lucide-react";
 import { useMilestonePaymentsTableStore } from "@/stores/tables/milestonePaymentsTableStore";
 import type { MilestonePaymentsColumns } from "@/types/tableTypes";
 import { eventConfig } from "@/constants/treasuryStyles";
@@ -21,6 +23,8 @@ import { milestonePaymentsTableOptions } from "@/constants/tables/milestonePayme
 
 interface MilestonePaymentsTableProps {
   projectId: string;
+  milestones: Milestone[];
+  initialAmountAda?: number;
   labels: {
     title: string;
     columns: {
@@ -43,9 +47,16 @@ interface MilestonePaymentsTableProps {
       fund: string;
     };
     expandedDetails: {
-      description: string;
+      milestoneCriteria: string;
       evidenceSubmission: string;
       open: string;
+      noCriteria: string;
+      noEvidence: string;
+    };
+    safetyLink: {
+      warningText: string;
+      goBackLabel: string;
+      visitLabel: string;
     };
     displayingText: (count: number, total: number) => string;
   };
@@ -53,6 +64,8 @@ interface MilestonePaymentsTableProps {
 
 export const MilestonePaymentsTable: FC<MilestonePaymentsTableProps> = ({
   projectId,
+  milestones,
+  initialAmountAda,
   labels,
 }) => {
   const { theme } = useThemeStore();
@@ -69,6 +82,7 @@ export const MilestonePaymentsTable: FC<MilestonePaymentsTableProps> = ({
   } = useMilestonePaymentsTableStore()();
 
   const [expandedRows, setExpandedRows] = useState<string[]>([]);
+  const [clickedUrl, setClickedUrl] = useState<string | null>(null);
 
   const query = useFetchVendorContractEventsInfinite({
     projectId,
@@ -86,7 +100,7 @@ export const MilestonePaymentsTable: FC<MilestonePaymentsTableProps> = ({
 
     return (
       <div
-        className={`flex w-fit items-center gap-1/2 rounded-m border px-2 py-1 ${
+        className={`flex w-fit items-center gap-1/2 rounded-m border px-1 py-0.5 ${
           isDark ? config.bgDark : config.bgLight
         } ${isDark ? config.borderDark : config.borderLight}`}
       >
@@ -105,11 +119,17 @@ export const MilestonePaymentsTable: FC<MilestonePaymentsTableProps> = ({
         title: labels.columns.milestone,
         visible: columnsVisibility.milestone,
         widthPx: 100,
-        render: (item: VendorContractEvent) => (
-          <span className='font-medium'>
-            {item.milestone ? `MS-${item.milestone.milestone_order}` : "-"}
-          </span>
-        ),
+        render: (item: VendorContractEvent) => {
+          const ms = item.milestone ?? (() => {
+            const found = findMilestone(item);
+            return found ? { milestone_id: found.milestone_id } : null;
+          })();
+          return (
+            <span className='font-medium'>
+              {ms ? ms.milestone_id : "-"}
+            </span>
+          );
+        },
       },
       {
         key: "event",
@@ -123,11 +143,17 @@ export const MilestonePaymentsTable: FC<MilestonePaymentsTableProps> = ({
         title: labels.columns.amount,
         visible: columnsVisibility.amount,
         widthPx: 120,
-        render: (item: VendorContractEvent) => (
-          <span className='font-medium'>
-            {item.amount_ada !== null ? `₳${formatNumber(item.amount_ada)}` : "-"}
-          </span>
-        ),
+        render: (item: VendorContractEvent) => {
+          const amount = item.amount_ada
+            ?? findMilestone(item)?.amount_ada
+            ?? (item.event_type === "fund" ? initialAmountAda : null)
+            ?? null;
+          return (
+            <span className='font-medium'>
+              {amount != null ? `₳${formatNumberWithSuffix(amount)}` : "-"}
+            </span>
+          );
+        },
       },
       {
         key: "transaction",
@@ -171,24 +197,35 @@ export const MilestonePaymentsTable: FC<MilestonePaymentsTableProps> = ({
     [labels, theme, columnsVisibility],
   );
 
+  const findMilestone = (event: VendorContractEvent) => {
+    if (event.milestone) {
+      return milestones.find(
+        m => m.milestone_order === event.milestone!.milestone_order,
+      );
+    }
+    // For withdraw events, milestone info is only in metadata_raw
+    const metaMilestones = (event.metadata_raw as any)?.body?.milestones;
+    if (metaMilestones && typeof metaMilestones === "object" && !Array.isArray(metaMilestones)) {
+      const milestoneId = Object.keys(metaMilestones)[0];
+      if (milestoneId) {
+        return milestones.find(m => m.milestone_id === milestoneId);
+      }
+    }
+    return null;
+  };
+
   const renderExtraContent = (item: VendorContractEvent) => {
-    const formattedDate = item.block_time
-      ? new Date(item.block_time * 1000).toLocaleDateString("en-US", {
-          month: "short",
-          day: "numeric",
-          year: "numeric",
-          timeZone: "UTC",
-        }) + " (UTC)"
-      : null;
+    const milestone = findMilestone(item);
+    const evidence = milestone?.completion?.evidence || [];
 
     return (
       <div className='grid grid-cols-1 gap-2 bg-darker p-4 md:grid-cols-2'>
         <div className='rounded-l border border-border bg-cardBg p-3'>
           <h4 className='mb-1 text-text-sm font-semibold text-text'>
-            {labels.expandedDetails.description}
+            {labels.expandedDetails.milestoneCriteria}
           </h4>
           <p className='text-text-sm text-grayTextPrimary'>
-            {item.milestone?.label || "-"}
+            {milestone?.acceptance_criteria || labels.expandedDetails.noCriteria}
           </p>
         </div>
 
@@ -196,43 +233,108 @@ export const MilestonePaymentsTable: FC<MilestonePaymentsTableProps> = ({
           <h4 className='mb-1 text-text-sm font-semibold text-text'>
             {labels.expandedDetails.evidenceSubmission}
           </h4>
-          <div className='flex items-start gap-2'>
-            <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-m bg-border'>
-              <FileText size={20} className='text-grayTextPrimary' />
+          {evidence.length > 0 ? (
+            <div className='flex flex-col gap-2'>
+              {evidence.map((ev, idx) => (
+                <div key={idx} className='flex items-start gap-2'>
+                  <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-m bg-border'>
+                    <FileText size={20} className='text-grayTextPrimary' />
+                  </div>
+                  <div className='flex flex-1 flex-col gap-0.5'>
+                    <div className='flex items-center justify-between'>
+                      <span className='text-text-sm font-medium text-text'>
+                        {ev.label || item.project.project_name}
+                      </span>
+                      {ev.anchorUrl?.length > 0 && (
+                        <button
+                          onClick={() => setClickedUrl(ev.anchorUrl.join(''))}
+                          className='flex items-center gap-1 text-text-sm font-medium text-primary'
+                        >
+                          {labels.expandedDetails.open}
+                          <ExternalLink size={14} />
+                        </button>
+                      )}
+                    </div>
+                    <div className='flex items-center gap-2 text-text-xs text-grayTextSecondary'>
+                      {milestone?.completion?.time && (
+                        <span>
+                          {new Date(
+                            milestone.completion.time * 1000,
+                          ).toLocaleDateString("en-US", {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                            timeZone: "UTC",
+                          })}{" "}
+                          (UTC)
+                        </span>
+                      )}
+                      {milestone?.completion?.tx_hash && (
+                        <Link
+                          to='/tx/$hash'
+                          params={{ hash: milestone.completion.tx_hash }}
+                          className='text-primary'
+                        >
+                          {formatString(milestone.completion.tx_hash, "short")}
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className='flex flex-1 flex-col gap-0.5'>
-              <div className='flex items-center justify-between'>
-                <span className='text-text-sm font-medium text-text'>
-                  {item.milestone
-                    ? `Milestone ${item.milestone.milestone_order} - ${item.project.project_name}`
-                    : item.project.project_name}
-                </span>
-                <Link
-                  to='/tx/$hash'
-                  params={{ hash: item.tx_hash }}
-                  className='text-text-sm font-medium text-primary'
-                >
-                  {labels.expandedDetails.open}
-                </Link>
+          ) : (
+            <div className='flex items-start gap-2'>
+              <div className='flex h-10 w-10 shrink-0 items-center justify-center rounded-m bg-border'>
+                <FileText size={20} className='text-grayTextPrimary' />
               </div>
-              <div className='flex items-center gap-2 text-text-xs text-grayTextSecondary'>
-                {formattedDate && <span>{formattedDate}</span>}
-                <Link
-                  to='/tx/$hash'
-                  params={{ hash: item.tx_hash }}
-                  className='text-primary'
-                >
-                  {formatString(item.tx_hash, "short")}
-                </Link>
+              <div className='flex flex-1 flex-col gap-0.5'>
+                <div className='flex items-center justify-between'>
+                  <span className='text-text-sm font-medium text-text'>
+                    {item.milestone
+                      ? `${item.project.project_name}`
+                      : item.project.project_name}
+                  </span>
+                  <Link
+                    to='/tx/$hash'
+                    params={{ hash: item.tx_hash }}
+                    className='text-text-sm font-medium text-primary'
+                  >
+                    {labels.expandedDetails.open}
+                  </Link>
+                </div>
+                <div className='flex items-center gap-2 text-text-xs text-grayTextSecondary'>
+                  {item.block_time && (
+                    <span>
+                      {new Date(
+                        item.block_time * 1000,
+                      ).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                        timeZone: "UTC",
+                      })}{" "}
+                      (UTC)
+                    </span>
+                  )}
+                  <Link
+                    to='/tx/$hash'
+                    params={{ hash: item.tx_hash }}
+                    className='text-primary'
+                  >
+                    {formatString(item.tx_hash, "short")}
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     );
   };
 
   return (
+    <>
     <div className='rounded-l border border-border bg-cardBg p-2'>
       <div className='mb-2 flex w-full items-center'>
         <h2 className='text-text-md font-medium'>{labels.title}</h2>
@@ -279,5 +381,15 @@ export const MilestonePaymentsTable: FC<MilestonePaymentsTableProps> = ({
         }}
       />
     </div>
+    {clickedUrl && (
+      <SafetyLinkModal
+        url={clickedUrl}
+        onClose={() => setClickedUrl(null)}
+        warningText={labels.safetyLink.warningText}
+        goBackLabel={labels.safetyLink.goBackLabel}
+        visitLabel={labels.safetyLink.visitLabel}
+      />
+    )}
+    </>
   );
 };

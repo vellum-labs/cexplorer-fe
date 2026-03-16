@@ -20,6 +20,7 @@ export const VersionWatcher: FC = () => {
     "bookmark_store",
     "cookie_consent",
     "onboarding_tour_completed",
+    "tx_overview_subtab",
   ];
 
   useEffect(() => {

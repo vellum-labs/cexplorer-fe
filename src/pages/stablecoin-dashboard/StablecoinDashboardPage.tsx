@@ -1,17 +1,40 @@
 import type { FC } from "react";
 
+import { useMemo } from "react";
+
 import { StablecoinAnalyticsGraph } from "@/components/stablecoin-dashboard/StablecoinAnalyticsGraph";
 import { StablecoinMintTable } from "@/components/stablecoin-dashboard/StablecoinMintTable";
 import { StablecoinOverview } from "@/components/stablecoin-dashboard/StablecoinOverview";
+import { StablecoinSummaryTable } from "@/components/stablecoin-dashboard/StablecoinSummaryTable";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useFetchStablecoins } from "@/services/stablecoins";
-import { LoadingSkeleton } from "@vellumlabs/cexplorer-sdk";
+import { LoadingSkeleton, Tabs } from "@vellumlabs/cexplorer-sdk";
 
 export const StablecoinDashboardPage: FC = () => {
   const { t } = useAppTranslation();
   const query = useFetchStablecoins();
-  const data = query.data?.data ?? [];
+  const data = useMemo(() => query.data?.data ?? [], [query.data?.data]);
+
+  const tabItems = useMemo(
+    () => [
+      {
+        key: "mints",
+        title: t("stablecoinDashboard.mints"),
+        label: t("stablecoinDashboard.mints"),
+        content: <StablecoinMintTable stablecoins={data} />,
+        visible: true,
+      },
+      {
+        key: "summary",
+        title: t("stablecoinDashboard.summary"),
+        label: t("stablecoinDashboard.summary"),
+        content: <StablecoinSummaryTable stablecoins={data} />,
+        visible: true,
+      },
+    ],
+    [data, t],
+  );
 
   return (
     <PageBase
@@ -33,22 +56,16 @@ export const StablecoinDashboardPage: FC = () => {
                 />
               ))}
             </div>
-            <LoadingSkeleton
-              width='100%'
-              height='460px'
-              rounded='xl'
-            />
-            <LoadingSkeleton
-              width='100%'
-              height='300px'
-              rounded='xl'
-            />
+            <LoadingSkeleton width='100%' height='460px' rounded='xl' />
+            <LoadingSkeleton width='100%' height='300px' rounded='xl' />
           </section>
         ) : (
           <>
             <StablecoinOverview data={data} />
             <StablecoinAnalyticsGraph data={data} />
-            <StablecoinMintTable stablecoins={data} />
+            <section className='flex w-full max-w-desktop flex-col px-mobile pb-3 md:px-desktop'>
+              <Tabs items={tabItems} withPadding={false} withMargin={true} />
+            </section>
           </>
         )}
       </div>

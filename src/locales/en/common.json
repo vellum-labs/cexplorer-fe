@@ -483,9 +483,24 @@
     "ada_price": "ADA Price",
     "maker": "Maker",
     "platform": "Platform",
+    "script_name": "Name",
+    "script_id": "Script ID",
+    "script_description": "Description",
+    "product_name": "Name",
+    "product_website": "Website",
+    "product_app": "App",
+    "product_docs": "Documentation",
+    "product_github": "Github",
+    "onchain_type": "Type",
+    "onchain_name": "Name",
+    "onchain_description": "Description",
     "share": "$t(shared:labels.share)",
     "epoch_stake": "$t(shared:epochStake)",
-    "loyalty": "$t(shared:loyalty)"
+    "loyalty": "$t(shared:loyalty)",
+    "source": "Source",
+    "stablecoin": "Stablecoin",
+    "dominance": "Dominance",
+    "last_mint": "Last Mint"
   },
   "analytics": {
     "account": "$t(shared:labels.account)",
@@ -1435,7 +1450,12 @@
     "assetVolume": "Asset Volume",
     "holders": "Holders",
     "mintEvents": "Mint Events",
+    "mints": "Mints",
+    "summary": "Summary",
     "stablecoin": "Stablecoin",
+    "source": "Source",
+    "supply": "Supply",
+    "lastMint": "Last mint",
     "inflow": "Inflow",
     "outflow": "Outflow"
   },
@@ -2693,22 +2713,53 @@
     }
   },
   "adsPage": {
-    "title": "Advertise with us",
+    "title": "Advertise on Cexplorer",
     "metaTitle": "Promotion & Advertising | Cexplorer.io",
-    "subtitle": "Promote your project on Cexplorer",
+    "subtitle": "API, instances support and permalink structure",
     "breadcrumb": "Advertise with us",
-    "banner": "Ads will be available at a later date.",
-    "stats": {
-      "monthlyPageViews": "Monthly page views",
-      "uniqueUsers": "Unique users",
-      "adImpressions": "Ad impressions",
-      "averageCtr": "Average CTR"
-    },
     "reach": {
-      "title": "Reach your audience!",
+      "title": "Why advertise with us?",
       "description1": "Cexplorer.io is the top Cardano blockchain explorer and analytics platform, offering insights into blockchain, staking, governance, and more.",
-      "description2": "Advertise with us, to reach an audience of Cardano enthusiasts and developers, gaining exposure within the growing Cardano community.",
-      "button": "$t(shared:promote)"
+      "description2": "Advertise with us to reach Cardano developers, investors, stake pool operators, and the growing Cardano community.",
+      "description3": "Detailed traffic metrics available on request.",
+      "button": "Advertise",
+      "features": {
+        "audience": {
+          "title": "Cardano-native audience",
+          "description": "Developers, investors, operators, and daily users actively using the chain."
+        },
+        "intent": {
+          "title": "High intent users",
+          "description": "People looking up transactions, pools, and governance, not just browsing."
+        },
+        "trusted": {
+          "title": "Trusted platform",
+          "description": "The go-to Cardano explorer, relied on by the community every day."
+        }
+      }
+    },
+    "display": {
+      "title": "Display advertising on Cexplorer",
+      "description": "We offer banners, sitewide banner, text, and button ads to reach Cardano users and promote your project or upcoming launch.",
+      "features": {
+        "visibility": {
+          "title": "High Visibility",
+          "description": "Ads appear on key sections of Cexplorer, ensuring maximum exposure."
+        },
+        "reach": {
+          "title": "Expanded Reach",
+          "description": "Your ad will be visible on Cexplorer.io mainnet and also both testnet environments."
+        },
+        "placement": {
+          "title": "Non-Intrusive Placement",
+          "description": "We prioritize user experience, displaying ads in a way that doesn't disrupt navigation."
+        }
+      },
+      "coinzillaText": "We work with",
+      "coinzillaDescription": ", a trusted advertising network. You can also book directly using the form below.",
+      "examples": "Examples",
+      "email": "E-mail",
+      "coinzilla": "Coinzilla"
     },
     "pro": {
       "title": "Promote with Cexplorer",
@@ -2748,24 +2799,6 @@
         }
       },
       "comingSoon": "Coming soon"
-    },
-    "banners": {
-      "title": "Banner Advertising on Cexplorer",
-      "description": "Banner advertisements offer a way to reach our engaged and promote your project or upcoming launch.",
-      "features": {
-        "visibility": {
-          "title": "High Visibility",
-          "description": "Ads appear on key sections of Cexplorer, ensuring maximum exposure."
-        },
-        "reach": {
-          "title": "Expanded Reach",
-          "description": "Your ad will not only be visible on Cexplorer.io but also on all preview/preprod instances managed by Cexplorer."
-        }
-      },
-      "coinzillaText": "We work with",
-      "coinzillaDescription": ", a trusted advertising network that manually reviews campaigns to maintain quality and relevance.",
-      "documentation": "$t(shared:documentation)",
-      "email": "E-mail"
     }
   },
   "apiPage": {
@@ -3104,6 +3137,76 @@
     "title": "Portfolio Tracker",
     "breadcrumb": "Portfolio",
     "comingSoon": "Portfolio Tracker is coming soon."
+  },
+  "projects": {
+    "page": {
+      "title": "Cardano Projects",
+      "breadcrumb": "Cardano Projects",
+      "addProject": "Add project",
+      "allCategories": "All categories",
+      "searchPlaceholder": "Search for project...",
+      "searchCategories": "Search categories...",
+      "noCategoryFound": "No category found."
+    },
+    "card": {
+      "lastActivity": "Last activity",
+      "totalCommits": "Total commits",
+      "repositories": "Repositories"
+    },
+    "activity": {
+      "title": "Development activity",
+      "totalCommits": "Total commits for selected period",
+      "activeRepositories": "Active repositories",
+      "organization": "Organization",
+      "organizations": "Organizations",
+      "commits": "Commits"
+    },
+    "detail": {
+      "details": "Details",
+      "description": "Description",
+      "projectName": "Project name",
+      "category": "Category",
+      "status": "Status",
+      "launched": "Launched",
+      "lastActivity": "Last activity",
+      "totalCommits": "Total commits",
+      "repositories": "Repositories",
+      "links": "Links",
+      "noDescription": "No description available.",
+      "tabs": {
+        "developmentActivity": "Development Activity",
+        "scripts": "Scripts",
+        "products": "Products",
+        "onChainAssociations": "On-Chain Associations"
+      },
+      "scripts": {
+        "name": "Name",
+        "scriptId": "Script ID",
+        "description": "Description",
+        "noScripts": "No scripts found."
+      },
+      "products": {
+        "noProducts": "No products found.",
+        "website": "Website",
+        "app": "App",
+        "docs": "Docs",
+        "github": "GitHub"
+      },
+      "onChain": {
+        "assets": "Assets",
+        "policies": "Policies",
+        "drep": "DRep",
+        "pools": "Stake Pools",
+        "noAssets": "No assets found.",
+        "noPolicies": "No policies found.",
+        "noDrep": "No DRep associated.",
+        "noPools": "No stake pools associated.",
+        "assetName": "Asset name",
+        "assetId": "Asset ID",
+        "policyName": "Policy name",
+        "policyId": "Policy ID"
+      }
+    }
   },
   "bookmark": {
     "addModal": {

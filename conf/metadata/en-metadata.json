@@ -248,6 +248,12 @@
   "portfolio": {
     "title": "Portfolio Tracker | Cexplorer.io"
   },
+  "projectsList": {
+    "title": "Projects | Cexplorer.io"
+  },
+  "projectDetail": {
+    "title": "Project %id% | Cexplorer.io"
+  },
   "ecoImpact": {
     "title": "Eco-impact Calculator | Cexplorer.io"
   },
