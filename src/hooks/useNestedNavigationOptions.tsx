@@ -65,6 +65,10 @@ export const useNestedNavigationOptions = () => {
               label: t("tools.scriptVerification"),
               href: "/script/verification",
             },
+            {
+              label: t("tools.portfolioTracker"),
+              href: "/portfolio",
+            },
           ],
         },
         services: {

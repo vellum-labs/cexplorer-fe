@@ -1,0 +1,125 @@
+import type { FC } from "react";
+import { useState, useRef } from "react";
+import { useGlobalSearch } from "@vellumlabs/cexplorer-sdk";
+import { TextInput } from "@vellumlabs/cexplorer-sdk";
+import { useThemeStore } from "@vellumlabs/cexplorer-sdk";
+import { Image } from "@vellumlabs/cexplorer-sdk";
+import { generateImageUrl } from "@/utils/generateImageUrl";
+import { useClickOutsideGroup } from "@/hooks/useClickOutsideGroup";
+import { Search } from "lucide-react";
+import { useAppTranslation } from "@/hooks/useAppTranslation";
+
+export interface DRep {
+  drep_id: string;
+  name: string;
+}
+
+interface DRepSelectorProps {
+  selectedDRep: DRep | null;
+  onSelectDRep: (drep: DRep | null) => void;
+}
+
+export const DRepSelector: FC<DRepSelectorProps> = ({
+  selectedDRep,
+  onSelectDRep,
+}) => {
+  const { t } = useAppTranslation(["pages", "common"]);
+  const [localFocused, setLocalFocused] = useState<boolean>(false);
+  const searchRef = useRef<HTMLDivElement>(null);
+  const { theme } = useThemeStore();
+
+  const { search, handleSearchChange, data, isLoading } = useGlobalSearch();
+
+  const drepResults = data.filter(item => item.category === "drep");
+
+  useClickOutsideGroup([searchRef], () => {
+    setLocalFocused(false);
+    handleSearchChange("");
+  });
+
+  const handleSelect = (drep: any) => {
+    onSelectDRep({
+      drep_id: drep.url.split("/").pop() || "",
+      name: drep.title,
+    });
+    handleSearchChange("");
+    setLocalFocused(false);
+  };
+
+  const handleClear = () => {
+    onSelectDRep(null);
+    handleSearchChange("");
+  };
+
+  return (
+    <div className='relative w-full' ref={searchRef}>
+      {selectedDRep ? (
+        <div className='flex min-h-[48px] items-center justify-between gap-2 rounded-s border border-border bg-background px-3'>
+          <div className='flex min-w-0 items-center gap-2'>
+            <Image
+              src={generateImageUrl(selectedDRep.drep_id || "", "ico", "drep")}
+              type='user'
+              height={35}
+              width={35}
+              className='flex-shrink-0 rounded-max'
+            />
+            <span className='truncate text-text-sm'>{selectedDRep.name}</span>
+          </div>
+          <button
+            onClick={handleClear}
+            className='text-text-sm text-grayTextPrimary hover:text-text'
+          >
+            {t("common:stakingCalculator.poolSelector.clear")}
+          </button>
+        </div>
+      ) : (
+        <div className='relative flex items-center'>
+          <TextInput
+            value={search}
+            onchange={handleSearchChange}
+            placeholder={t("portfolio.preDelegation.searchDRep")}
+            onFocus={() => setLocalFocused(true)}
+            autoCapitalize='off'
+            inputClassName='!bg-transparent'
+            wrapperClassName='w-full'
+          />
+          {!search && (
+            <Search
+              size={20}
+              style={{ color: "var(--grayTextPrimary)" }}
+              className='pointer-events-none absolute right-2'
+            />
+          )}
+        </div>
+      )}
+
+      {localFocused && !selectedDRep && search.length > 0 && (
+        <div className='absolute z-50 mt-1 flex w-full flex-col rounded-m border border-border bg-background shadow-lg'>
+          {isLoading ? (
+            <div className='flex h-[100px] items-center justify-center'>
+              <div
+                className={`loader h-[30px] w-[30px] border-[3px] ${theme === "light" ? "border-[#F2F4F7] border-t-darkBlue" : "border-[#475467] border-t-[#5EDFFA]"}`}
+              ></div>
+            </div>
+          ) : drepResults.length === 0 ? (
+            <div className='p-3 text-center text-text-sm text-grayTextPrimary'>
+              {t("portfolio.preDelegation.noDRepsFound")}
+            </div>
+          ) : (
+            <div className='thin-scrollbar max-h-[300px] overflow-auto'>
+              {drepResults.map((drep, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleSelect(drep)}
+                  className='flex w-full flex-col items-start gap-0.5 border-b border-border px-3 py-2 text-left last:border-b-0 hover:bg-darker'
+                >
+                  <span className='text-text-sm font-medium'>{drep.title}</span>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
