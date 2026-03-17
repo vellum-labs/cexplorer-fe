@@ -44,7 +44,7 @@ export const HomepageAds: FC<HomepageAdsProps> = ({ miscBasicAds }) => {
               }}
             >
               {img ? (
-                <img src={img} alt={title} className='h-full w-full' />
+                <img src={img} alt={title} className='h-full w-full object-cover' />
               ) : (
                 <div className='flex flex-col items-center p-1'>
                   <h3>{title}</h3>

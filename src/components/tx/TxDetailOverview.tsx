@@ -25,7 +25,7 @@ import {
 import { AdaWithTooltip } from "@vellumlabs/cexplorer-sdk";
 import { Copy } from "@vellumlabs/cexplorer-sdk";
 import { TotalSumWithRates } from "@vellumlabs/cexplorer-sdk";
-import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
+import { AdsCarousel, AdCard } from "@vellumlabs/cexplorer-sdk";
 import { MintedByCard } from "@vellumlabs/cexplorer-sdk";
 import type { OverviewList } from "@vellumlabs/cexplorer-sdk";
 import { OverviewCard } from "@vellumlabs/cexplorer-sdk";
@@ -52,6 +52,13 @@ const TxDetailOverview = ({ query }: Props) => {
   const { data: miscBasic } = miscBasicQuery;
 
   const miscData = useMiscConst(miscBasic?.data.version.const);
+
+  const boxBannerAds = miscBasic?.data?.ads?.filter(
+    ad => ad.type === "box_banner",
+  );
+  const randomBoxBanner = boxBannerAds?.length
+    ? boxBannerAds[Math.floor(Math.random() * boxBannerAds.length)]
+    : undefined;
 
   const { currency } = useCurrencyStore();
 
@@ -324,6 +331,14 @@ const TxDetailOverview = ({ query }: Props) => {
               tx_ex_mem={tx_ex_mem}
               tx_ex_steps={tx_ex_steps}
             />
+            {randomBoxBanner && (
+              <div className='relative h-[120px] overflow-hidden rounded-l'>
+                <AdCard data={randomBoxBanner.data} className='!h-full !rounded-none' />
+                <div className='absolute right-2 top-1.5 flex h-[24px] w-[32px] items-center justify-center rounded-xs border border-border bg-background text-text-xs font-medium text-text'>
+                  <span>{t("sdk:header.adLabel")}</span>
+                </div>
+              </div>
+            )}
             <AdsCarousel
               generateImageUrl={generateImageUrl}
               miscBasicQuery={miscBasicQuery}
