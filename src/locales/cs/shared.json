@@ -297,5 +297,15 @@
   "pledge": "Pledge",
   "inactive": "Neaktivní",
   "title12": "Policy",
-  "cancelLabel": "Zrušit"
+  "cancelLabel": "Zrušit",
+  "donationOptions": {
+    "addDonation": "Přidat dar",
+    "donationDescription": "K vaší transakci můžete přidat dar na podporu vývoje Cexplorer.",
+    "signTransaction": "Podepsat transakci",
+    "noThanks": "Ne, děkuji",
+    "coffee": "Káva",
+    "lunch": "Oběd",
+    "teamDinner": "Týmová večeře",
+    "teambuilding": "Teambuilding"
+  }
 }
