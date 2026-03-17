@@ -8,7 +8,7 @@ import type { EMBED_CONFIG_BANNERS } from "@/constants/embed";
 
 import {
   EMBED_CONFIG_EXTRA_FORMAT,
-  EMBED_CONFIG_EXTRA_NETWORK,
+  type EMBED_CONFIG_EXTRA_NETWORK,
   EMBED_CONFIG_EXTRA_THEME,
 } from "@/constants/embed";
 
@@ -53,9 +53,7 @@ export const EmbedEntity: FC<EmbedEntityProps> = ({
   const [theme, setTheme] = useState<EMBED_CONFIG_EXTRA_THEME>(
     defaultTheme as EMBED_CONFIG_EXTRA_THEME,
   );
-  const [network, setNetwork] = useState<EMBED_CONFIG_EXTRA_NETWORK>(
-    configJSON.network as EMBED_CONFIG_EXTRA_NETWORK,
-  );
+  const network = configJSON.network as EMBED_CONFIG_EXTRA_NETWORK;
   const [format, setFormat] = useState<EMBED_CONFIG_EXTRA_FORMAT>(
     EMBED_CONFIG_EXTRA_FORMAT.JSX,
   );
@@ -82,21 +80,6 @@ export const EmbedEntity: FC<EmbedEntityProps> = ({
     {
       label: t("embed.darkMode"),
       onClick: () => setTheme(EMBED_CONFIG_EXTRA_THEME.DARK),
-    },
-  ];
-
-  const networks = [
-    {
-      label: "Preprod",
-      onClick: () => setNetwork(EMBED_CONFIG_EXTRA_NETWORK.PREPROD),
-    },
-    {
-      label: "Preview",
-      onClick: () => setNetwork(EMBED_CONFIG_EXTRA_NETWORK.PREVIEW),
-    },
-    {
-      label: "Mainnet",
-      onClick: () => setNetwork(EMBED_CONFIG_EXTRA_NETWORK.MAINNET),
     },
   ];
 
@@ -189,15 +172,6 @@ export const EmbedEntity: FC<EmbedEntityProps> = ({
               width='150px'
               label={t("embed.mode")}
               options={mode}
-              triggerClassName='font-medium px-1.5 py-1 border border-border rounded-s'
-              closeOnSelect
-              forceHorizontalPosition='right'
-            />
-            <Dropdown
-              id='network'
-              width='150px'
-              label={t("embed.network")}
-              options={networks}
               triggerClassName='font-medium px-1.5 py-1 border border-border rounded-s'
               closeOnSelect
               forceHorizontalPosition='right'
