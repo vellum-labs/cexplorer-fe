@@ -23,7 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-.env
 routeTree.gen.ts
 
 test-results
@@ -32,3 +31,4 @@ sonar-project.properties
 .scannerwork
 
 *.instructions.md
+config.bat
