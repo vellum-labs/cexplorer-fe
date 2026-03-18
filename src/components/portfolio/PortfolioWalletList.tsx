@@ -90,7 +90,7 @@ export const PortfolioWalletList: FC<PortfolioWalletListProps> = ({
       </div>
 
       <div className='flex-1 overflow-y-auto'>
-        <div className='flex flex-col divide-y divide-border'>
+        <div className='flex flex-col'>
           {wallets.map(wallet => {
             const data = walletDataList.find(w => w.walletId === wallet.id);
             const adaBalance = (data?.adaBalance ?? 0) / 1e6;
@@ -103,7 +103,7 @@ export const PortfolioWalletList: FC<PortfolioWalletListProps> = ({
                 onClick={() => handleSelectWallet(wallet.id)}
                 className={`flex items-center gap-3 py-3 text-left transition-colors ${
                   !isEditing ? "cursor-pointer" : ""
-                } ${isSelected && !isEditing ? "bg-primary/5" : !isEditing ? "hover:bg-primary/5" : ""}`}
+                } ${isSelected && !isEditing ? "rounded-m border border-primary bg-primary/5 px-2" : `border-b border-border last:border-b-0 ${!isEditing ? "hover:bg-primary/5" : ""}`}`}
               >
                 <div
                   className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-m ${
