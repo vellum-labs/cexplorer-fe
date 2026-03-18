@@ -230,7 +230,12 @@
       "generateLinkDescription": "Share this link or QR code to receive a payment.",
       "mobileWalletTitle": "QR code payment via mobile wallets",
       "mobileWalletDescription": "Scan this QR code with your mobile wallet to complete the payment.",
-      "close": "Close"
+      "close": "Close",
+      "successTitle": "Payment successfully sent.",
+      "recipient": "Recipient",
+      "transactionHash": "Transaction hash",
+      "sendAnother": "Send another payment",
+      "pendingConfirmation": "Pending..."
     },
     "delegation": {
       "title": "Delegation",

@@ -11,6 +11,8 @@ import { handleDelegation } from "@/utils/wallet/handleDelegation";
 import { handlePayment } from "@/utils/wallet/handlePayment";
 import ConnectWalletModal from "@/components/wallet/ConnectWalletModal";
 import { PaymentModal } from "@/components/wallet/PaymentModal";
+import { PaymentSuccessModal } from "@/components/payment/PaymentSuccessModal";
+import { useAdaPriceWithHistory } from "@/hooks/useAdaPriceWithHistory";
 import {
   DelegationConfirmModal,
   type DelegationInfo,
@@ -54,12 +56,19 @@ export const WatchlistSection = ({
   paymentAddress?: string;
 }) => {
   const { wallet, address, walletType } = useWalletStore();
+  const { todayValue: adaPrice } = useAdaPriceWithHistory("usd");
   const [showWalletModal, setShowWalletModal] = useState<boolean>(false);
   const [showPaymentModal, setShowPaymentModal] = useState<boolean>(false);
   const [showDelegationModal, setShowDelegationModal] =
     useState<boolean>(false);
   const [delegationLoading, setDelegationLoading] = useState<boolean>(false);
   const [walletBalance, setWalletBalance] = useState<number>(0);
+  const [paymentSuccessData, setPaymentSuccessData] = useState<{
+    address: string;
+    amount: number;
+    message?: string;
+    txHash: string;
+  } | null>(null);
   const { t } = useAppTranslation();
 
   useEffect(() => {
@@ -267,7 +276,7 @@ export const WatchlistSection = ({
           onClose={() => setShowPaymentModal(false)}
           onSign={async (amount, donationAmount, selectedAddress, message) => {
             setShowPaymentModal(false);
-            await handlePayment(
+            const txHash = await handlePayment(
               {
                 toAddress: selectedAddress || paymentAddress,
                 amount,
@@ -276,6 +285,28 @@ export const WatchlistSection = ({
               },
               wallet,
             );
+            if (txHash) {
+              setPaymentSuccessData({
+                address: selectedAddress || paymentAddress,
+                amount,
+                message,
+                txHash,
+              });
+            }
+          }}
+        />
+      )}
+      {paymentSuccessData && (
+        <PaymentSuccessModal
+          address={paymentSuccessData.address}
+          amount={paymentSuccessData.amount}
+          message={paymentSuccessData.message}
+          txHash={paymentSuccessData.txHash}
+          adaPrice={adaPrice}
+          onClose={() => setPaymentSuccessData(null)}
+          onSendAnother={() => {
+            setPaymentSuccessData(null);
+            setShowPaymentModal(true);
           }}
         />
       )}
