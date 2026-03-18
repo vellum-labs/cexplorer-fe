@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { Modal, Button, formatString } from "@vellumlabs/cexplorer-sdk";
+import { Modal, Button, formatString, DateCell, formatDate } from "@vellumlabs/cexplorer-sdk";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { Link } from "@tanstack/react-router";
 import {
@@ -10,9 +10,7 @@ import {
   CircleCheck,
 } from "lucide-react";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
-import { useQuery } from "@tanstack/react-query";
-import type { TxDetailResponse } from "@/types/txTypes";
-import { handleFetch } from "@/lib/handleFetch";
+import { useFetchTxDetailSilent } from "@/services/tx";
 import { useFetchMiscBasic } from "@/services/misc";
 import { getConfirmations } from "@/utils/getConfirmations";
 
@@ -37,26 +35,13 @@ export const PaymentSuccessModal: FC<PaymentSuccessModalProps> = ({
 }) => {
   const { t } = useAppTranslation("common");
 
-  const txDetail = useQuery({
-    queryKey: ["payment-tx-detail", txHash],
-    queryFn: () =>
-      handleFetch<TxDetailResponse>(
-        `/tx/detail?hash=${txHash}`,
-        undefined,
-        undefined,
-        true,
-        true,
-      ),
-    enabled: !!txHash,
-    retry: true,
-    retryDelay: 5000,
-    refetchInterval: 10000,
-    throwOnError: false,
-  });
+  const txDetail = useFetchTxDetailSilent(txHash);
 
   const miscBasic = useFetchMiscBasic(true);
 
-  const txBlockNo = txDetail.data?.data?.block?.no;
+  const txData = txDetail.data?.data;
+  const txBlockNo = txData?.block?.no;
+  const txBlockTime = txData?.block?.time;
   const miscBlockNo = miscBasic.data?.data?.block?.block_no;
   const hasTxData = !!txBlockNo;
   const confirmations = getConfirmations(miscBlockNo, txBlockNo);
@@ -122,6 +107,26 @@ export const PaymentSuccessModal: FC<PaymentSuccessModalProps> = ({
             >
               {formatString(txHash, "long")}
             </Link>
+          </div>
+
+          <div className='flex items-center justify-between gap-4 py-2'>
+            <span className='shrink-0 text-text-sm text-grayTextPrimary'>
+              {t("tx.labels.date")}
+            </span>
+            <div className='text-text-sm'>
+              {txBlockTime ? (
+                <span className='flex items-center gap-1'>
+                  <DateCell time={txBlockTime} />
+                  <span className='text-grayTextPrimary'>
+                    ({formatDate(txBlockTime)})
+                  </span>
+                </span>
+              ) : (
+                <span className='text-grayTextPrimary'>
+                  {t("wallet.payment.pendingConfirmation")}
+                </span>
+              )}
+            </div>
           </div>
 
           <div className='flex items-center justify-between gap-4 py-2'>

@@ -26,6 +26,24 @@ export const useFetchTxDetail = (hash: string) =>
     staleTime: Infinity,
   });
 
+export const useFetchTxDetailSilent = (hash: string) =>
+  useQuery({
+    queryKey: ["payment-tx-detail", hash],
+    queryFn: () =>
+      handleFetch<TxDetailResponse>(
+        `/tx/detail?hash=${hash}`,
+        undefined,
+        undefined,
+        true,
+        true,
+      ),
+    enabled: !!hash,
+    retry: true,
+    retryDelay: 5000,
+    refetchInterval: 10000,
+    throwOnError: false,
+  });
+
 export const fetchTxList = async ({
   hash,
   limit = 10,
