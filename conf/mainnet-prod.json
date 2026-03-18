@@ -4,7 +4,7 @@
   "public": true,
   "nft": false,
   "network": "mainnet",
-  "embed": false,
+  "embed": true,
   "api": [
     {
       "endpoint": "https://api-mainnet-stage.cexplorer.io/v1",
