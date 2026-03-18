@@ -115,9 +115,9 @@ export const PaymentSuccessModal: FC<PaymentSuccessModalProps> = ({
             </span>
             <div className='text-text-sm'>
               {txBlockTime ? (
-                <span className='flex items-center gap-1'>
+                <span className='flex flex-wrap items-center gap-1'>
                   <DateCell time={txBlockTime} />
-                  <span className='text-grayTextPrimary'>
+                  <span className='hidden text-grayTextPrimary sm:inline'>
                     ({formatDate(txBlockTime)})
                   </span>
                 </span>
