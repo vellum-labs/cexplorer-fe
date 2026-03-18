@@ -21,7 +21,6 @@ export const sendDelegationInfo = (
 export const sendPaymentInfo = async (
   hash: string,
   toAddress: string,
-  amount: number | string = 0,
   donation: number | string = 0,
 ) => {
   const options = {
@@ -31,10 +30,9 @@ export const sendPaymentInfo = async (
     },
   };
 
-  const amountLovelace = Number(amount) * 1_000_000;
   const donationLovelace = Number(donation) * 1_000_000;
 
-  const paymentUrl = `/tool/tx_sent?id=${hash}&type=payment&campaign=${toAddress}&donation=${amountLovelace}`;
+  const paymentUrl = `/tool/tx_sent?id=${hash}&type=payment&campaign=${toAddress}&donation=${donationLovelace}`;
   await handleFetch(paymentUrl, undefined, options, true);
 
   if (donationLovelace > 0) {
