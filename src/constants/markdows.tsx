@@ -18,22 +18,26 @@ export const markdownComponents = (
       url = `https://${url}`;
     }
 
+    const isInternal =
+      url.startsWith("#") ||
+      url.startsWith("mailto:") ||
+      url.includes("cexplorer.io");
+
     return (
-      <button
-        type='button'
-        className='overflow-wrap-anywhere text-sm cursor-pointer break-all border-none bg-transparent p-0 text-primary'
-        onMouseDown={e => {
-          e.preventDefault();
-          e.stopPropagation();
-          setClickedUrl(url);
-        }}
+      <a
+        href={url}
+        target='_blank'
+        rel='noopener noreferrer'
+        className='overflow-wrap-anywhere text-sm cursor-pointer break-all text-primary'
         onClick={e => {
-          e.preventDefault();
-          e.stopPropagation();
+          if (!isInternal) {
+            e.preventDefault();
+            setClickedUrl(url);
+          }
         }}
       >
         {children}
-      </button>
+      </a>
     );
   },
   pre: ({ children }) => (
