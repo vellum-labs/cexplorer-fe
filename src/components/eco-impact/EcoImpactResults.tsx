@@ -109,7 +109,7 @@ export const EcoImpactResults: FC<EcoImpactResultsProps> = ({ stakedAda }) => {
             {formatEnergy(calculations.energySaved).value}
           </span>
           <span className='text-text-xs text-grayTextPrimary'>
-            {formatEnergy(calculations.energySaved).unit}
+            {t("ecoImpact.results.energySavedUnit")}
           </span>
         </div>
 
@@ -121,7 +121,7 @@ export const EcoImpactResults: FC<EcoImpactResultsProps> = ({ stakedAda }) => {
             {formatCO2(calculations.co2Saved).value}
           </span>
           <span className='text-text-xs text-grayTextPrimary'>
-            {formatCO2(calculations.co2Saved).unit}
+            {t("ecoImpact.results.co2SavedUnit")}
           </span>
         </div>
       </div>
