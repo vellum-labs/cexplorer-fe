@@ -19,6 +19,7 @@ import { HandleSelector } from "@/components/payment/HandleSelector";
 import { AddressSelector } from "@/components/payment/AddressSelector";
 import { GenerateLinkModal } from "@/components/payment/GenerateLinkModal";
 import { MobilePaymentModal } from "@/components/payment/MobilePaymentModal";
+import { PaymentSuccessModal } from "@/components/payment/PaymentSuccessModal";
 import { fetchAddressDetail } from "@/services/address";
 import {
   decodePaymentData,
@@ -61,6 +62,12 @@ export const PayPage = () => {
   const [showWalletModal, setShowWalletModal] = useState(false);
   const [showGenerateLinkModal, setShowGenerateLinkModal] = useState(false);
   const [showMobileModal, setShowMobileModal] = useState(false);
+  const [successData, setSuccessData] = useState<{
+    address: string;
+    amount: number;
+    message?: string;
+    txHash: string;
+  } | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
 
   const isReadOnly = mode === "payer";
@@ -221,7 +228,7 @@ export const PayPage = () => {
       return;
     }
     if (!selectedAddress) return;
-    await handlePayment(
+    const txHash = await handlePayment(
       {
         toAddress: selectedAddress,
         amount: Number(amount) || 0,
@@ -230,6 +237,14 @@ export const PayPage = () => {
       },
       wallet,
     );
+    if (txHash) {
+      setSuccessData({
+        address: selectedAddress,
+        amount: Number(amount) || 0,
+        message: message || undefined,
+        txHash,
+      });
+    }
   };
 
   const handlePayWithCard = () => {
@@ -254,6 +269,22 @@ export const PayPage = () => {
     >
       {showWalletModal && (
         <ConnectWalletModal onClose={() => setShowWalletModal(false)} />
+      )}
+      {successData && (
+        <PaymentSuccessModal
+          address={successData.address}
+          amount={successData.amount}
+          message={successData.message}
+          txHash={successData.txHash}
+          adaPrice={adaPrice}
+          onClose={() => setSuccessData(null)}
+          onSendAnother={() => {
+            setSuccessData(null);
+            setAmount("");
+            setMessage("");
+            setSelectedDonation(null);
+          }}
+        />
       )}
       {showGenerateLinkModal && (
         <GenerateLinkModal
@@ -412,7 +443,6 @@ export const PayPage = () => {
                       isSelected
                         ? "bg-primary/5 border-primary"
                         : "hover:border-primary/50 border-border",
-                      isReadOnly && "pointer-events-none opacity-60",
                     )}
                   >
                     <input
@@ -422,7 +452,6 @@ export const PayPage = () => {
                       checked={isSelected}
                       onChange={() => setSelectedDonation(option.value)}
                       className='h-4 w-4 shrink-0 accent-primary'
-                      disabled={isReadOnly}
                     />
                     {Icon && (
                       <Icon size={18} className='shrink-0 text-primary' />

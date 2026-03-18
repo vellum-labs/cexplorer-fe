@@ -230,7 +230,12 @@
       "generateLinkDescription": "Sdílejte tento odkaz nebo QR kód pro přijetí platby.",
       "mobileWalletTitle": "QR platba přes mobilní peněženku",
       "mobileWalletDescription": "Naskenujte tento QR kód mobilní peněženkou pro dokončení platby.",
-      "close": "Zavřít"
+      "close": "Zavřít",
+      "successTitle": "Platba byla úspěšně odeslána.",
+      "recipient": "Příjemce",
+      "transactionHash": "Hash transakce",
+      "sendAnother": "Odeslat další platbu",
+      "pendingConfirmation": "Čeká se..."
     },
     "delegation": {
       "title": "Delegace",
