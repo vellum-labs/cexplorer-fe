@@ -2236,7 +2236,7 @@
     "noData": "Pro tuto adresu nejsou k dispozici žádná data o aktivním staku.",
     "results": {
       "energyEfficiency": "Energetická účinnost",
-      "energyEfficiencyUnit": "krát účinnější",
+      "energyEfficiencyUnit": "energeticky účinnější než Bitcoin",
       "energySaved": "Ušetřená energie",
       "energySavedUnit": "kWh/rok",
       "co2Saved": "Ušetřené CO₂",

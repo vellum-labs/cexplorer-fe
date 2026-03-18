@@ -2236,7 +2236,7 @@
     "noData": "No active stake data available for this address.",
     "results": {
       "energyEfficiency": "Energy efficiency",
-      "energyEfficiencyUnit": "times more efficient",
+      "energyEfficiencyUnit": "more energy efficient than Bitcoin",
       "energySaved": "Energy saved",
       "energySavedUnit": "kWh/year",
       "co2Saved": "CO₂ saved",
