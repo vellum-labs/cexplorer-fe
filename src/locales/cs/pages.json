@@ -1234,6 +1234,7 @@
     "composition": {
       "title": "Složení",
       "allAddresses": "Zobrazeny všechny adresy",
+      "displayingWallet": "Zobrazena peněženka {{name}}",
       "category": "Kategorie",
       "breakdown": "Rozdělení",
       "total": "Celkem",

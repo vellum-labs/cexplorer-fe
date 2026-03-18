@@ -77,7 +77,7 @@ export const PortfolioComposition: FC = () => {
     : null;
 
   const subtitle = selectedWallet
-    ? selectedWallet.name
+    ? t("portfolio.composition.displayingWallet", { name: selectedWallet.name })
     : t("portfolio.composition.allAddresses");
 
   const displayTotals = selectedWalletData
@@ -287,8 +287,8 @@ export const PortfolioComposition: FC = () => {
           <h2 className='truncate text-text-lg font-semibold'>
             {t("portfolio.composition.title")}
           </h2>
-          <p className='truncate text-text-sm text-grayTextPrimary'>
-            {formatString(subtitle, "long")}
+          <p className='text-text-sm text-grayTextPrimary'>
+            {subtitle}
           </p>
         </div>
         <div className='shrink-0'>

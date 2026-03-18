@@ -1235,6 +1235,7 @@
     "composition": {
       "title": "Composition",
       "allAddresses": "Displaying all addresses",
+      "displayingWallet": "Displaying wallet {{name}}",
       "category": "Category",
       "breakdown": "Breakdown",
       "total": "Total",
