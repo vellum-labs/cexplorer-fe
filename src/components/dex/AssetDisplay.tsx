@@ -13,18 +13,13 @@ interface AssetDisplayProps {
   } | null;
 }
 
-export const AssetDisplay: FC<AssetDisplayProps> = ({
-  tokenName,
-  fingerprint,
-  fontWeight = "semibold",
-  registry,
-}) => {
+export const AssetDisplay: FC<AssetDisplayProps> = ({ tokenName, fingerprint, fontWeight = "semibold", registry }) => {
   const renderedName = renderAssetName({ name: tokenName });
   const isAda =
     tokenName === "lovelaces" ||
     tokenName === "lovelace" ||
     tokenName?.toLowerCase().includes("lovelace") ||
-    renderedName?.toLowerCase().includes("lovelace");
+    (renderedName && typeof renderedName === "string" && renderedName?.toLowerCase().includes("lovelace"));
 
   const fontClass = fontWeight === "semibold" ? "font-semibold" : "font-normal";
 
@@ -34,7 +29,7 @@ export const AssetDisplay: FC<AssetDisplayProps> = ({
 
   return (
     <Link
-      to='/asset/$fingerprint'
+      to="/asset/$fingerprint"
       params={{
         fingerprint,
       }}
