@@ -3,7 +3,7 @@ import type { ScriptDetailResponse } from "@/types/scriptTypes";
 import { formatNumber } from "@vellumlabs/cexplorer-sdk";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { FileBarChart, LineChart } from "lucide-react";
-import { AdsCarousel } from "@vellumlabs/cexplorer-sdk";
+import { AdCard, AdsCarousel } from "@vellumlabs/cexplorer-sdk";
 import { Badge } from "@vellumlabs/cexplorer-sdk";
 import { LabelBadge } from "@vellumlabs/cexplorer-sdk";
 import { PurposeBadge } from "@vellumlabs/cexplorer-sdk";
@@ -29,6 +29,13 @@ export const ScriptDetailOverview = ({ query }: Props) => {
   const data = query.data?.data;
 
   const miscBasicQuery = useFetchMiscBasic();
+
+  const boxBannerAds = miscBasicQuery?.data?.data?.ads?.filter(
+    ad => ad.type === "box_banner",
+  );
+  const randomBoxBanner = boxBannerAds?.length
+    ? boxBannerAds[Math.floor(Math.random() * boxBannerAds.length)]
+    : undefined;
 
   const overviewList = data
     ? [
@@ -180,8 +187,16 @@ export const ScriptDetailOverview = ({ query }: Props) => {
                   ? formatNumber(data?.stat_total?.epochs)
                   : "-"
               }`}
-              className='max-h-[140px]'
+              className='max-h-[110px]'
             />
+            {randomBoxBanner && (
+              <div className='relative h-[120px] overflow-hidden rounded-l'>
+                <AdCard data={randomBoxBanner.data} className='!h-full !rounded-none' />
+                <div className='absolute right-2 top-1.5 flex h-[24px] w-[32px] items-center justify-center rounded-xs border border-border bg-background text-text-xs font-medium text-text'>
+                  <span>{t("sdk:header.adLabel")}</span>
+                </div>
+              </div>
+            )}
             <AdsCarousel
               miscBasicQuery={miscBasicQuery}
               generateImageUrl={generateImageUrl}
