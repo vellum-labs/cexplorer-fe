@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 import type { HeaderProps } from "@vellumlabs/cexplorer-sdk";
-import { BreadcrumbSeparator, Header, TextAd } from "@vellumlabs/cexplorer-sdk";
+import { BreadcrumbSeparator, Header } from "@vellumlabs/cexplorer-sdk";
 
 import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
 import { useFetchMiscBasic, useFetchMiscSearch } from "@/services/misc";
@@ -45,13 +45,6 @@ export const HeaderBanner = ({
   const { locale } = useLocaleStore();
   const miscBasicQuery = useFetchMiscBasic(true);
   const miscBasic = miscBasicQuery;
-  const textAds = miscBasic.data?.data?.ads?.filter(
-    ad => ad.type === "text_ad",
-  );
-  const textAd = textAds?.length
-    ? textAds[Math.floor(Math.random() * textAds.length)]
-    : undefined;
-
   return (
     <Header
       locale={locale}
@@ -99,9 +92,6 @@ export const HeaderBanner = ({
         homepagePlaceholder: t("sdk:globalSearch.homepagePlaceholder"),
         placeholder: t("sdk:globalSearch.placeholder"),
         notFoundLabel: t("sdk:globalSearch.notFoundLabel"),
-        adSlot: textAd && !customPage ? (
-          <TextAd ad={textAd} featuredLabel={t("sdk:header.featuredLabel")} />
-        ) : undefined,
       }}
     />
   );

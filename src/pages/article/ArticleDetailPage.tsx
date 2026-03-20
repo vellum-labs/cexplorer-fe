@@ -1,5 +1,5 @@
 import { ArticleCard } from "@/components/article/ArticleCard";
-import { Button, SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
+import { AdCard, Button, SafetyLinkModal } from "@vellumlabs/cexplorer-sdk";
 import { Image } from "@vellumlabs/cexplorer-sdk";
 import {
   BreadcrumbRaw,
@@ -29,6 +29,7 @@ import { handleDelegation } from "@/utils/wallet/handleDelegation";
 import { useWalletStore } from "@/stores/walletStore";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
 import { useLocaleStore } from "@vellumlabs/cexplorer-sdk";
+import { useFetchMiscBasic } from "@/services/misc";
 
 export const ArticleDetailPage = () => {
   const { t } = useAppTranslation("common");
@@ -49,6 +50,14 @@ export const ArticleDetailPage = () => {
       .filter(article => article.name !== data?.name)
       .slice(0, 3) || [];
   const [openDelegationModal, setOpenDelegationModal] = useState(false);
+
+  const miscBasicQuery = useFetchMiscBasic();
+  const boxBannerAds = miscBasicQuery?.data?.data?.ads?.filter(
+    ad => ad.type === "box_banner",
+  );
+  const randomBoxBanner = boxBannerAds?.length
+    ? boxBannerAds[Math.floor(Math.random() * boxBannerAds.length)]
+    : undefined;
 
   if (detailQuery.isLoading) {
     return (
@@ -324,6 +333,14 @@ export const ArticleDetailPage = () => {
                   {data?.keywords}
                 </p>
               </div>
+              {randomBoxBanner && (
+                <div className='relative h-[120px] overflow-hidden rounded-l'>
+                  <AdCard data={randomBoxBanner.data} className='!h-full !rounded-none' />
+                  <div className='absolute right-2 top-1.5 flex h-[24px] w-[32px] items-center justify-center rounded-xs border border-border bg-background text-text-xs font-medium text-text'>
+                    <span>{t("sdk:header.adLabel")}</span>
+                  </div>
+                </div>
+              )}
               {otherArticles.map(article => (
                 <ArticleCard
                   key={article.url + article.pub_date}
