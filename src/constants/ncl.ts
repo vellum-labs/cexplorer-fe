@@ -22,10 +22,18 @@ export const NCL_WITHDRAWAL_COLORS = [
 
 export const NCL_PERIODS: NCLPeriod[] = [
   {
+    id: "ncl-2026-2027",
+    name: "NCL 2026-2027",
+    startEpoch: 613,
+    endEpoch: 713,
+    limit: 350_000_000_000_000,
+    note: "Second NCL period approved by governance",
+  },
+  {
     id: "ncl-2024-2025",
     name: "NCL 2024-2025",
     startEpoch: 550,
-    endEpoch: 632,
+    endEpoch: 612,
     limit: 350_000_000_000_000,
     note: "First NCL period approved by governance",
   },
