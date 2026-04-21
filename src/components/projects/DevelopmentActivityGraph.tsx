@@ -18,7 +18,7 @@ const PERIOD_OPTIONS = [
   { value: 7, label: "7 days" },
   { value: 30, label: "30 days" },
   { value: 90, label: "90 days" },
-  { value: 365, label: "1 year" },
+  // { value: 365, label: "1 year" },
 ];
 
 export const DevelopmentActivityGraph: FC<DevelopmentActivityGraphProps> = ({
@@ -75,8 +75,9 @@ export const DevelopmentActivityGraph: FC<DevelopmentActivityGraphProps> = ({
       const sortedDates = Array.from(dateMap.keys()).sort();
       const commitValues = sortedDates.map(d => dateMap.get(d) ?? 0);
 
-      const sortedRepos = Array.from(repoTotals.entries())
-        .sort((a, b) => b[1] - a[1]);
+      const sortedRepos = Array.from(repoTotals.entries()).sort(
+        (a, b) => b[1] - a[1],
+      );
 
       const total = commitValues.reduce((sum, c) => sum + c, 0);
       const active = relevantInsights.filter(i =>
@@ -159,8 +160,7 @@ export const DevelopmentActivityGraph: FC<DevelopmentActivityGraphProps> = ({
     [dates, commitsByDate, bgColor, textColor, splitLineColor, lineColor, t],
   );
 
-  const hasData = repoNames.length > 0 && dates.length > 0;
-  if (insights.length === 0 || !hasData) return null;
+  if (insights.length === 0 || repoNames.length === 0) return null;
 
   return (
     <div className='rounded-m border border-border bg-cardBg p-2'>
@@ -178,9 +178,7 @@ export const DevelopmentActivityGraph: FC<DevelopmentActivityGraphProps> = ({
             </span>
             <span>
               {t("projects.activity.activeRepositories")}{" "}
-              <strong className='text-text'>
-                {formatNumber(activeRepos)}
-              </strong>
+              <strong className='text-text'>{formatNumber(activeRepos)}</strong>
             </span>
           </div>
         </div>
@@ -188,9 +186,7 @@ export const DevelopmentActivityGraph: FC<DevelopmentActivityGraphProps> = ({
           <DropdownSelect
             open={periodOpen}
             setOpen={setPeriodOpen}
-            label={
-              PERIOD_OPTIONS.find(o => o.value === period)?.label ?? ""
-            }
+            label={PERIOD_OPTIONS.find(o => o.value === period)?.label ?? ""}
             options={PERIOD_OPTIONS.map(o => ({
               label: o.label,
               value: o.value,
@@ -201,10 +197,14 @@ export const DevelopmentActivityGraph: FC<DevelopmentActivityGraphProps> = ({
           <DropdownSelect
             open={repoOpen}
             setOpen={setRepoOpen}
-            label={selectedRepo ?? (allReposLabel ?? t("projects.activity.organization"))}
+            label={
+              selectedRepo ??
+              allReposLabel ??
+              t("projects.activity.organization")
+            }
             options={[
               {
-                label: (allReposLabel ?? t("projects.activity.organization")),
+                label: allReposLabel ?? t("projects.activity.organization"),
                 value: null,
                 selected: selectedRepo === null,
               },
@@ -241,6 +241,7 @@ export const DevelopmentActivityGraph: FC<DevelopmentActivityGraphProps> = ({
         <div className='min-h-[250px] flex-1'>
           <ReactECharts
             option={chartOption}
+            notMerge
             style={{ width: "100%", height: "250px" }}
             opts={{ renderer: "canvas" }}
           />
