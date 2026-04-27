@@ -128,6 +128,7 @@ export const TreasuryDonationPage = () => {
                   variant='primary'
                   leftIcon={<Wallet />}
                   onClick={handleDonateClick}
+                  disabled
                 />
               </Tooltip>
             </div>

@@ -999,7 +999,7 @@
       "title": "Co je Cardano treasury?",
       "description": "Cardano treasury podporuje vývoj a růst ekosystému Cardano. Dary pomáhají financovat návrhy, o kterých hlasuje komunita prostřednictvím governance systému Cardana.",
       "donateButton": "Přispět do treasury",
-      "donateTooltip": "Poznámka: MeshJS zatím nepodporuje přískěvky do treasury. Nyní můžete přispět pouze na Cexplorer."
+      "donateTooltip": "Funkce přispívání do Cardano treasury je dočasně nedostupná."
     },
     "success": {
       "title": "Transakce úspěšná, děkujeme za váš dar!",
