@@ -1000,7 +1000,7 @@
       "title": "What is the Cardano Treasury?",
       "description": "The Cardano Treasury is a decentralized funding mechanism that supports the development and growth of the Cardano ecosystem. Donations help fund proposals voted on by the community through Cardano's governance system.",
       "donateButton": "Donate to Treasury",
-      "donateTooltip": "Note: MeshJS does not support treasury donations yet. You can donate only to Cexplorer for now."
+      "donateTooltip": "Donations to Cardano treasury are temporarily disabled."
     },
     "success": {
       "title": "Transaction successful, thank you for your donation!",
