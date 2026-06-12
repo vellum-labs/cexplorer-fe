@@ -36,6 +36,8 @@ import { generateImageUrl } from "@/utils/generateImageUrl";
 import { useShortcuts } from "@/hooks/shortcuts/useShortcuts";
 import { ShortcutsModal } from "@/components/global/ShortcutsModal";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { SevioAd } from "@/components/global/ads/SevioAd";
+import { adsEnabled, SEVIO_ZONES } from "@/constants/sevioAds";
 
 const RootComponent = () => {
   const { t } = useAppTranslation("common");
@@ -151,6 +153,18 @@ const RootComponent = () => {
         <Helmet>
           <title>Cexplorer.io</title>
         </Helmet>
+        {adsEnabled && (
+          <div
+            className='flex w-full justify-center bg-background'
+            style={{ maxHeight: 90 }}
+          >
+            <SevioAd
+              zone={SEVIO_ZONES.headerBanner}
+              adType='banner'
+              className='w-full'
+            />
+          </div>
+        )}
         {randomTopAd && (
           <div className='flex min-h-[75px] w-full items-center justify-center bg-background'>
             <div
