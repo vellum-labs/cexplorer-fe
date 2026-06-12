@@ -713,7 +713,7 @@
     "poolId": "$t(shared:poolId)"
   },
   "hardfork": {
-    "title": "Chang Hardfork",
+    "title": "{{name}} Hardfork",
     "breadcrumb": "$t(shared:hardfork)",
     "releaseDate": "Release date:",
     "table": {
