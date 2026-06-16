@@ -4,6 +4,7 @@
   "public": true,
   "nft": false,
   "network": "mainnet",
+  "ads": true,
   "embed": true,
   "api": [
     {

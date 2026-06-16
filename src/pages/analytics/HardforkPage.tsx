@@ -42,22 +42,6 @@ const HardforkPage: FC = () => {
     HardforkResponseDataDetailExchanges[]
   >(data?.detail?.exchanges ?? []);
 
-  const poolsByDayMax = hardforkPools?.stat["1d"].find(
-    item => String(item.version) === String(hardforkPools?.max),
-  );
-
-  const poolsByFiveDayMax = hardforkPools?.stat["5d"].find(
-    item => String(item.version) === String(hardforkPools?.max),
-  );
-
-  const poolsByDayMin = hardforkPools?.stat["1d"].find(
-    item => String(item.version) !== String(hardforkPools?.max),
-  );
-
-  const poolsByFiveDayMin = hardforkPools?.stat["5d"].find(
-    item => String(item.version) !== String(hardforkPools?.max),
-  );
-
   const liquidityByStatusValues = {
     notStarted: 0,
     inProgress: 0,
@@ -231,12 +215,12 @@ const HardforkPage: FC = () => {
     series: [
       {
         type: "pie",
-        radius: ["50%", "90%"],
+        radius: ["50%", "75%"],
         avoidLabelOverlap: false,
         label: {
           show: true,
           position:
-            countObjectNonEmptyValues(statusValues) > 1 ? "left" : "center",
+            countObjectNonEmptyValues(statusValues) > 1 ? "outside" : "center",
           color: theme === "light" ? "#475467" : "#9fa3a8",
           lineHeight: 16,
           fontWeight: 500,
@@ -255,14 +239,14 @@ const HardforkPage: FC = () => {
             ).toFixed(2);
             return `${label}\n${(+percentage > 99.5 ? 100 : percentage) + "%"}`;
           },
-          rich: {
-            start: {
-              align: "left",
-            },
-            end: {
-              align: "right",
-            },
-          },
+        },
+        labelLine: {
+          show: true,
+          length: 8,
+          length2: 8,
+        },
+        labelLayout: {
+          hideOverlap: true,
         },
         data: [
           {
@@ -295,13 +279,13 @@ const HardforkPage: FC = () => {
     series: [
       {
         type: "pie",
-        radius: ["50%", "90%"],
+        radius: ["50%", "75%"],
         avoidLabelOverlap: false,
         label: {
           show: true,
           position:
             countObjectNonEmptyValues(liquidityByStatusValues) > 1
-              ? "left"
+              ? "outside"
               : "center",
           color: theme === "light" ? "#475467" : "#9fa3a8",
           lineHeight: 16,
@@ -321,14 +305,14 @@ const HardforkPage: FC = () => {
             ).toFixed(2);
             return `${label}\n${(+percentage > 99.5 ? 100 : percentage) + "%"}`;
           },
-          rich: {
-            start: {
-              align: "left",
-            },
-            end: {
-              align: "right",
-            },
-          },
+        },
+        labelLine: {
+          show: true,
+          length: 8,
+          length2: 8,
+        },
+        labelLayout: {
+          hideOverlap: true,
         },
         data: [
           {
@@ -357,123 +341,82 @@ const HardforkPage: FC = () => {
     ],
   };
 
-  const countByDayOption: ReactEChartsProps["option"] = {
-    series: [
-      {
-        type: "pie",
-        radius: ["50%", "90%"],
-        avoidLabelOverlap: false,
-        label: {
-          show: true,
-          position: "left",
-          color: theme === "light" ? "#475467" : "#9fa3a8",
-          lineHeight: 16,
-          fontWeight: 500,
-          formatter: function (params) {
-            if (params.value === 0) {
-              return "";
-            }
-            const total =
-              (poolsByDayMin?.count ?? 0) + (poolsByDayMax?.count ?? 0);
+  const versionPalette = [
+    "#B42318",
+    "#3B82F6",
+    "#8B5CF6",
+    "#EC4899",
+    "#F59E0B",
+    "#14B8A6",
+  ];
 
-            const label = params.name.split("\n")[0].replace(/{\w+|}/g, "");
-            const percentage = (
-              ((params.value as number) / total) *
-              100
-            ).toFixed(2);
-            return `${label}\n${(+percentage > 99.5 ? 100 : percentage) + "%"}`;
-          },
-          rich: {
-            start: {
-              align: "left",
-            },
-            end: {
-              align: "right",
-            },
-          },
+  const buildVersionOption = (
+    stat: { count: number; version: number }[] | undefined,
+  ): ReactEChartsProps["option"] => {
+    const slices = [...(stat ?? [])]
+      .filter(item => item.count > 0)
+      .sort((a, b) => b.count - a.count);
+
+    let otherIdx = 0;
+
+    return {
+      tooltip: {
+        trigger: "item",
+        confine: true,
+        formatter: params => {
+          const p = params as unknown as {
+            name: string;
+            value: number;
+            percent: number;
+          };
+          return `${p.name}: ${p.value} (${p.percent}%)`;
         },
-        data: [
-          {
-            value: poolsByDayMax?.count ?? 0,
-            name: t("hardfork.charts.version", {
-              version: poolsByDayMax?.version,
-            }),
-            itemStyle: {
-              color: "#067647",
-            },
-          },
-          {
-            value: poolsByDayMin?.count ?? 0,
-            name: t("hardfork.charts.version", {
-              version: poolsByDayMin?.version,
-            }),
-            itemStyle: {
-              color: "#B42318",
-            },
-          },
-        ],
       },
-    ],
+      series: [
+        {
+          type: "pie",
+          radius: ["50%", "75%"],
+          avoidLabelOverlap: false,
+          label: {
+            show: true,
+            position: "outside",
+            color: theme === "light" ? "#475467" : "#9fa3a8",
+            lineHeight: 16,
+            fontWeight: 500,
+            formatter: function (params) {
+              const percent = params.percent ?? 0;
+              if (percent < 1) {
+                return "";
+              }
+              const label = params.name.split("\n")[0].replace(/{\w+|}/g, "");
+              return `${label}\n${percent}%`;
+            },
+          },
+          labelLine: {
+            show: true,
+            length: 8,
+            length2: 8,
+          },
+          labelLayout: {
+            hideOverlap: true,
+          },
+          data: slices.map(item => ({
+            value: item.count,
+            name: t("hardfork.charts.version", { version: item.version }),
+            itemStyle: {
+              color:
+                String(item.version) === String(hardforkPools?.max)
+                  ? "#067647"
+                  : versionPalette[otherIdx++ % versionPalette.length],
+            },
+          })),
+        },
+      ],
+    };
   };
 
-  const countBy5DayOption: ReactEChartsProps["option"] = {
-    series: [
-      {
-        type: "pie",
-        radius: ["50%", "90%"],
-        avoidLabelOverlap: false,
-        label: {
-          show: true,
-          position: "left",
-          color: theme === "light" ? "#475467" : "#9fa3a8",
-          lineHeight: 16,
-          fontWeight: 500,
-          formatter: function (params) {
-            if (params.value === 0) {
-              return "";
-            }
-            const total =
-              (poolsByFiveDayMin?.count ?? 0) + (poolsByFiveDayMax?.count ?? 0);
-
-            const label = params.name.split("\n")[0].replace(/{\w+|}/g, "");
-            const percentage = (
-              ((params.value as number) / total) *
-              100
-            ).toFixed(2);
-            return `${label}\n${(+percentage > 99.5 ? 100 : percentage) + "%"}`;
-          },
-          rich: {
-            start: {
-              align: "left",
-            },
-            end: {
-              align: "right",
-            },
-          },
-        },
-        data: [
-          {
-            value: poolsByFiveDayMax?.count ?? 0,
-            name: t("hardfork.charts.version", {
-              version: poolsByFiveDayMax?.version,
-            }),
-            itemStyle: {
-              color: "#067647",
-            },
-          },
-          {
-            value: poolsByFiveDayMin?.count ?? 0,
-            name: t("hardfork.charts.version", {
-              version: poolsByFiveDayMin?.version,
-            }),
-            itemStyle: {
-              color: "#B42318",
-            },
-          },
-        ],
-      },
-    ],
-  };
+  const countByDayOption = buildVersionOption(hardforkPools?.stat["1d"]);
+  const countBy5DayOption = buildVersionOption(hardforkPools?.stat["5d"]);
 
   const exhcangeTabItems = [
     {
@@ -536,7 +479,11 @@ const HardforkPage: FC = () => {
   return (
     <PageBase
       metadataTitle='hardfork'
-      title={t("hardfork.title")}
+      title={
+        data?.info?.name
+          ? t("hardfork.title", { name: data.info.name })
+          : t("hardfork.breadcrumb")
+      }
       breadcrumbItems={[{ label: t("hardfork.breadcrumb") }]}
       adsCarousel={false}
       subTitle={

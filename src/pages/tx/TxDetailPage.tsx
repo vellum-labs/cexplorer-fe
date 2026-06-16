@@ -22,6 +22,8 @@ import { getAddonsForMetadata } from "@/utils/addons/getAddonsForMetadata";
 import { PageBase } from "@/components/global/pages/PageBase";
 import { LabelBadge } from "@vellumlabs/cexplorer-sdk";
 import { useAppTranslation } from "@/hooks/useAppTranslation";
+import { SevioAd } from "@/components/global/ads/SevioAd";
+import { adsEnabled, SEVIO_ZONES } from "@/constants/sevioAds";
 
 const TxDetailPage = () => {
   const route = getRouteApi("/tx/$hash");
@@ -269,6 +271,20 @@ const TxDetailPage = () => {
           ))}
       </div>
       <TxDetailOverview query={query} />
+      {adsEnabled && (
+        <div className='flex w-full max-w-desktop flex-col gap-3 px-mobile py-2 lg:px-desktop'>
+          <SevioAd
+            zone={SEVIO_ZONES.txDetailBanner}
+            adType='banner'
+            className='w-full'
+          />
+          <SevioAd
+            zone={SEVIO_ZONES.textAd}
+            adType='native'
+            className='w-full'
+          />
+        </div>
+      )}
       {!query.isLoading && <Tabs items={txTabItems} mobileItemsCount={3} />}
     </PageBase>
   );
