@@ -15,6 +15,8 @@ export interface LayoutNotificationProps {
   textColor: string;
 }
 
+const isExternalLink = (href: string) => /^(https?:)?\/\//.test(href);
+
 export const LayoutNotification = ({
   storeKey,
   message,
@@ -56,16 +58,28 @@ export const LayoutNotification = ({
       <div className='relative flex w-full max-w-desktop items-center justify-center gap-1.5 px-desktop md:p-mobile'>
         <span className='ml-3 mr-3 text-center text-text-sm'>
           {message}
-          {link && (
-            <Link
-              to={link.href}
-              style={{ color: textColor }}
-              className='underline'
-              onClick={handleClose}
-            >
-              {link.text}
-            </Link>
-          )}
+          {link &&
+            (isExternalLink(link.href) ? (
+              <a
+                href={link.href}
+                target='_blank'
+                rel='noreferrer noopener'
+                style={{ color: textColor }}
+                className='underline'
+                onClick={handleClose}
+              >
+                {link.text}
+              </a>
+            ) : (
+              <Link
+                to={link.href}
+                style={{ color: textColor }}
+                className='underline'
+                onClick={handleClose}
+              >
+                {link.text}
+              </Link>
+            ))}
         </span>
         <button
           onClick={handleClose}
