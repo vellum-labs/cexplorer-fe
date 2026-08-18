@@ -184,16 +184,16 @@ const Navbar: FC<NavbarProps> = ({ randomTopAd }) => {
           </div>
         </nav>
         <LayoutNotification
-          storeKey='navbar-line-1'
-          message="👋 Welcome to Cexplorer 2.0! We're still in active development and putting the final touches on a few things. Since treasury withdrawal voting is underway, we wanted to give you an early look at what we're building right now. "
+          storeKey='navbar-line-2'
+          message='💙 If you like Cexplorer, consider supporting our development. Every contribution helps us stay independent and keep building. '
           link={{
-            text: "Treasury Withdrawal Leaderboard",
-            href: "/gov/drep-vote/",
+            text: "Support us",
+            href: "https://pay.cexplorer.io/pay/aa65245c35d8e0ea",
           }}
           backgroundColor={theme === "light" ? "#0094d4" : "#79defd"}
           textColor={theme === "light" ? "#ffffff" : "#101828"}
-          startTime={new Date("2025-06-23T00:00:00Z")}
-          endTime={new Date("2025-08-20T00:00:00Z")}
+          startTime={new Date("2026-08-17T00:00:00Z")}
+          endTime={new Date("2026-09-17T00:00:00Z")}
         />
       </header>
       <MobileBottomNav />
