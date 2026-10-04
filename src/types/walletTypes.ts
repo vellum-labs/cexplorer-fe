@@ -50,7 +50,8 @@ export type WalletType =
   | "eternl"
   | "nufi"
   | "nufiSnap"
-  | "nufiSSO";
+  | "nufiSSO"
+  | "1am";
 
 type CompareWalletBoolean = unknown[] | null | false | true | undefined;
 

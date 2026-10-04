@@ -98,6 +98,16 @@
           "visible": true,
           "recommended": false
         }
+      ],
+      "1am": [
+        {
+          "pos": 10,
+          "features": ["web3", "sign"],
+          "name": "1AM",
+          "url": "https://1am.xyz/",
+          "visible": false,
+          "recommended": false
+        }
       ]
     }
   ],
