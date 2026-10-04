@@ -7,6 +7,7 @@ import LaceLogo from "../resources/images/wallet/lacelogo.svg";
 import MetamaskLogo from "../resources/images/wallet/metamask.svg";
 import NufiLogo from "../resources/images/wallet/nufi-small.svg";
 import YoroiLogo from "../resources/images/wallet/yoroi.svg";
+import OneAmLogo from "../resources/images/wallet/1am.svg";
 import { supportedWallets } from "./confVariables";
 
 export const DONATION_OPTIONS = [
@@ -118,6 +119,18 @@ const walletInfos: Record<WalletType | WalletType, WalletInfo> = {
           : isAndroid
             ? "https://play.google.com/store/apps/details?id=io.metamask"
             : "https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn"
+    }`,
+  },  "1am": {
+    name: "1AM",
+    icon: OneAmLogo,
+    unsuportedBrowsers: ["firefox", "safari"],
+    hasMobileApp: true,
+    extensionUrl: `${
+      isAndroid
+        ? "https://play.google.com/store/apps/details?id=com.webisoft.oneam"
+        : isIOS
+          ? "https://apps.apple.com/app/id6761093596"
+          : "https://chromewebstore.google.com/detail/bphnkdkcnfhompoegfpgnkidcjfbojjp"
     }`,
   },
 };
